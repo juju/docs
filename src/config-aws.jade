@@ -1,0 +1,39 @@
+extends inc/layout
+
+block vars
+  - var title='Configuring Juju to work with AWS'
+  - var page='Configuring Juju to work with AWS'
+
+block content
+  article.
+   <section id="config_aws">
+   <h1>Configuring for Amazon AWS</h1>
+   <p>You should start by generating a generic configuration file for Juju, using the command:
+   <pre><code>juju generate-config -w</code></pre>
+   <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).     
+   <p>The generic configuration sections generated for AWS will look something like this:</p>
+   <pre><code>
+
+   &nbsp;&nbsp;## https://juju.ubuntu.com/get-started/amazon/
+   &nbsp;&nbsp;amazon:
+   &nbsp;&nbsp;&nbsp;&nbsp;type: ec2
+   &nbsp;&nbsp;&nbsp;&nbsp;admin-secret: 772b97c4c31c6b5883475e396d9a6d32
+   &nbsp;&nbsp;&nbsp;&nbsp;# globally unique S3 bucket name
+   &nbsp;&nbsp;&nbsp;&nbsp;control-bucket: juju-a29403f89d8223343d3cab01f1ca5a4d
+   &nbsp;&nbsp;&nbsp;&nbsp;# override if your machine is on a different series than what you're deploying
+   &nbsp;&nbsp;&nbsp;&nbsp;# default-series: precise
+   &nbsp;&nbsp;&nbsp;&nbsp;# region defaults to us-east-1, override if required
+   &nbsp;&nbsp;&nbsp;&nbsp;# region: us-east-1
+   &nbsp;&nbsp;&nbsp;&nbsp;# Usually set via the env variable AWS_ACCESS_KEY_ID, but can be specified here
+   &nbsp;&nbsp;&nbsp;&nbsp;# access-key: &LT;secret&GT;
+   &nbsp;&nbsp;&nbsp;&nbsp;# Can be set via the env variable AWS_SECRET_ACCESS_KEY, or specified here
+   &nbsp;&nbsp;&nbsp;&nbsp;# secret-key: &LT;secret&GT;
+   </code></pre>  
+   <p>This is a simple configuration intended to run on EC2 with S3 permanent storage. Values for the default setting can be changed simply by editing this file, uncommenting the relevant lines and adding your own settings. All you need to do to get this configuration to work is to either set the <span class="pre">AWS_ACCESS_KEY_ID</span> and <span class="pre">AWS_SECRET_ACCESS_KEY</span> via environment variables, or uncomment and add the values to the configuration file.</p>
+   <p>You can retrieve these values easily from your Amazon account at <a href="http://aws.amazon.com/account">http://aws.amazon.com/account</a> and following on the link for "Security Credentials"...</p>
+   <img src="./media/getting_started-aws_security.png" alt="Amazon accounts page showing Security Credentials link" >
+   <p>Under the Access Credentials heading, you will see a list of access keys. Clicking on the "Show" link will display the secret key, and you can simply copy and paste these into your environments.yaml configuration file.</p>
+    <img src="./media/getting_started-aws_keys.png" alt="Amazon Access Credentials page showing key values" >
+    <p>The <strong>region:</strong> value corresponds to the AWS regions. 
+    </section>
+

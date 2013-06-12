@@ -1,0 +1,16 @@
+extends inc/layout
+
+block vars
+  - var title='Relations'
+  - var page='charms-relations'
+
+block content
+  article.
+    <section id ="charms-relations">
+      <h1>Managing Relationships</h1>
+      <p>Few services you might want to run can do so completely independently - most of them rely on some other software components to be present and running too (e.g. a database). There would be little point in Juju making it supremely easy to deploy services if it didn't also make it easy to connect them up to services they need to get running! The Juju magic in this case involves the <strong>hooks</strong> built in to each charm which allow them to communicate. Unless you are writing charms, there is no need to go into detail on hooks, but these are the parts that make creating relationships between services so easy.</p>
+       <p>The charm for WordPress, for example, knows that it requires a database. It therefore has some code to deal with creating that connection and configuring the WordPress instance appropriately when it is told which database to connect to. Similarly, the MySQL charm knows that it is a database, and has code to create different types of database depending on what is required. The act of joining these services together causes this code to run, the WordPress charm saying what tables, users and data it requires, and the MySQL charm fulfilling that and acknowledging the task. As you will see though, adding a relationship is much easier than even this brief explanation.</p>
+      <h1>Creating Relations</h1>
+      
+      <h1>Removing Relations</h1>
+    </section>

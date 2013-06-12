@@ -1,0 +1,48 @@
+extends inc/layout
+
+block vars
+  - var title='Deploying charms'
+  - var page='charms-constraints'
+
+block content
+  article.
+      <section id="deploying">
+       <h1>Deploying Services</h1>
+       <p>The fundamental point of Juju is that you can use it to deploy serivces through the use of charms (the magic bits of code that make things just work). These charms can be fetched from the charm store, stored in a local repository, or if you are feeling clever, written by you. Just as there are different series of Ubuntu ('precise', 'raring', etc), so there needs to be different series of charms to take into account any subtle changes in the underlying OS. For the most part you can forget about this, as Juju will always try to apply the most relevant charm, so deploying can be straightforward and easy.</p>
+       <h1>Deploying from the Charm Store</h1>
+       <p>In most cases, you will want to deploy charms by fetching them directly from the charm store. This ensures that you get the relevant, up to date version of the charm and "everything just works". To deploy a charm like this you can just specify:</p>
+       <code><pre>juju deploy mysql</code></pre>
+       <p>Running this will do exactly what you expect - fetch the latest juju charm for the series you are running and then use the bootstrap environment to initiate a new instance and deploy MySQL</p>
+       <p>Juju usefully supports a system of namespaces that means you can actually deploy charms from a variety of sources. The default source is the charm store. The above command is the same as running:</p>
+       <pre><code>juju deploy cs:precise/mysql</code></pre>
+       <p>which follows the format:</p>
+       <pre><code>&LT;repository&GT;:&LT;series&GT;&LT;service&GT;</code></pre>
+       
+       <h1>Deploying from a local repository</h1>
+       <p>There are many cases when you may wish to deploy charms from a local filesytem source rather than the charm store:</p>
+       <ul>
+        <li>When testing charms you have written.</li>
+        <li>When you have modified store charms for some reason.</li>
+        <li>When you don't have direct internet access.</li>
+       </ul>
+       <p>... and probably a lot more times which you can imagine yourselves.</p>
+       <p>Juju can be pointed at a local directory to source charms from using the <span class="pre">--repository=&LT;path/to/files&GT;</span> switch like this:</p>
+     
+       <pre><code>juju deploy --repository=/usr/share/charms/ vsftpd</code></pre>
+       <p>You can also make use of standard filesystem shortcuts, so the following examples are also valid:</p>
+       <pre><code>juju deploy --repository=. haproxy</code></pre>
+       <pre><code>juju deploy --repository=~/charms/ wordpress</code></pre>  
+       <p class="note"><strong>Note:</strong> Specifying a local repository makes juju look there <strong>first</strong>, but if the relevant charm is not found in that repository, it will fall back to fetching it from the charm store. If you wish to check where a charm was installed from, it is listed in the <span class="pre">juju status</span> output.</p>
+       <h1>Changing the defaults</h1>
+       <p>As we have seen, we can specify repositories to install from on the commandline. In fact, this only introduces another potential source and changes the searching order. To permanently change the defaults (e.g. if you would prefer to always deploy from a local service first), you can enter a list of repositories in your <span class="pre">environments.yaml</span> file:</p>
+       <pre><code>...
+        repositories:
+
+         - http://charms.ubuntu.com/collection/ubuntu
+         - http://charms.ubuntu.com/collection/openstack
+         - http://charms.ubuntu.com/people/miked
+         - /var/lib/charms
+       </code></pre>
+       <h1>A note about caching...</h1>
+       <p>After juju resolves a charm and its dependencies, it bundles them and deploys them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache). This allows the same charm to be deployed to multiple machines repeatably and with minimal network transfers.</p>
+      </section>

@@ -1,0 +1,228 @@
+::selection {
+  background-color: #dd4814;
+  color: #fff; }
+::-webkit-selection {
+  background-color: #dd4814;
+  color: #fff; }
+::-moz-selection {
+  background-color: #dd4814;
+  color: #fff; }
+
+html, body {
+  -webkit-font-smoothing: antialiased;
+  /* prevent subpixel antialiasing, which thickens the text */
+  /* text-rendering: optimizeLegibility; */
+  /* turned off ligatures due to bug 5945455 */
+}
+
+body {
+  font-weight: 400;
+  letter-spacing:.1;
+}
+
+#page-container {
+  width: 940px;
+  margin: 20px 40px;
+}
+
+#page-header {
+  height: 80px;
+  margin-bottom: 20px;
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 100;
+  padding-left: 20px;
+}
+
+#page-header a {
+  display: block;
+  position: relative;
+  top: 20px;
+  text-decoration: none;
+  color: #555555 !important;
+}
+
+aside {
+  float: right;
+  display: block; 
+  background-color:#dddddd;
+  margin: 5 5 5 5px;
+  padding: 10 10 10 10px;
+}
+
+pre, table, form {
+    margin: 5 5 15px;
+}
+
+pre strong, pre b, a strong, a b, a code {
+    color: inherit;
+}
+
+pre, code {
+    font: 13px/1.5 monospace;
+    display: inline-block;
+    background-color: #fbf4f0;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    padding: 5px;
+    white-space: pre-line;
+}
+
+strong.code {
+    color: #1111ff;
+    }
+
+code {
+    font-weight:bold;
+    font: 13px/14px monospace;
+}
+
+pre code {
+  white-space: pre-line;
+}
+
+.doc-content {
+  border-left: 1px dotted #aea79f;
+  padding-left: 20px;
+}
+
+.doc-content, .doc-navigation {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-right: 10px;
+}
+
+
+.doc-navigation {
+  width: 190px !important;
+}
+
+.doc-navigation > nav h1 {
+  text-transform: uppercase;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 2px;
+  padding-left: 20px;
+  
+}
+
+.doc-navigation > nav h1:not(:first-child) {
+  margin-top: 20px;
+}
+
+.doc-navigation > nav h1::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 14px;
+  margin-left: -16px;
+  margin-top: 5px;
+  background: url(https://stripe.com/img/documentation/nav-icons.png);
+  background-size: 48px 14px;
+}
+
+.doc-navigation > nav li a {
+  padding-left: 20px;
+  display: block;
+  margin-bottom: 1px;
+  font-size: 13px;
+  font-weight:bold;
+  height: 21px;
+  line-height: 22px;
+}
+
+.doc-navigation a:hover {
+  text-decoration: underline;
+}
+
+.doc-navigation > nav li.sub > a {
+  padding-left: 30px;
+  font-weight:normal;
+}
+
+.doc-navigation > nav li.selected {
+  background-color: #dd4814;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.doc-navigation > nav li.selected a {
+  color: #fff;
+}
+
+div.note, 
+div.caution, 
+div.warning {
+  margin: 0 0 15px;
+}
+
+p.note, div.note, 
+p.caution, div.caution, 
+p.warning, div.warning {
+  padding: 0 0 0 10px;
+  border-left: 4px solid;
+}
+
+p.note, div.note {
+  border-color: #dd4814;
+}
+
+p.caution, div.caution {
+  border-color: #FF8800;
+}
+
+p.warning, div.warning {
+  border-color: #ff4443;
+}
+
+span.pre  {
+    color: #044;
+    background-color:#dddddb;
+    font: 13px/1.5 monospace;
+}
+div.note.design {
+  border-left: 4px solid #33B5E5;
+}
+
+div.note.develop {
+  border-left: 4px solid #F80;
+}
+
+div.note.distribute {
+  border-left: 4px solid #9C0;
+}
+
+.note p, .caution p, .warning p {
+  margin:0 0 5px;
+}
+
+.note p:last-child, .caution p:last-child, .warning p:last-child {
+  margin-bottom:0;
+}
+
+.doc-content img { 
+  padding:0px;
+  -moz-box-shadow: 0 0 6px #000000;
+  -webkit-box-shadow: 0 0 6px #000000;
+  box-shadow: 0 0 6px #000000; 
+}
+
+.doc-content ul, .doc-content ol {
+  margin-left: 20px;
+  margin-bottom: 12px;
+}
+
+.doc-content ul > li {
+  list-style: circle;
+}
+
+.doc-content ol > li {
+  list-style: decimal;
+}
+
+.doc-content h1:not(:first) {
+  margin-top: 40px;
+}

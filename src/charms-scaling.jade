@@ -1,0 +1,31 @@
+extends inc/layout
+
+block vars
+  - var title='scaling charms'
+  - var page='scaling charms'
+
+block content
+  article.
+    <section id="charms-scaling">
+      <h1>Scaling Charms</h1>
+      <p>One of the killer features of computing in the cloud is that it (should) seamlessly allow you to scale up or down your services to meet your needs and whims. Juju not only makes it simple to deploy services, but crucially makes it easy to manage them too. It won't anticipate you getting slashdotted or on the front page of hacker news (yet), but it does mean that when you do you can reliably scale your services to meet the demand.</p>
+      <h1> Adding Units </h1>
+      <p>Scaling up services is really as simple as asking for more instances. Consider the following setup for a mediawiki:</p>
+      <pre class="runnable"><code>
+       juju bootstrap
+       juju deploy mysql
+       juju deploy mediawiki
+       juju add-relation mysql mediawiki:db
+       juju expose mediawiki
+      </code></pre>
+      <p>When you notice the mediawiki instance is struggling under the load of people making edits, you can simply scale up the service using the command:</p>
+      <pre class="runnable"><code>
+       juju add-unit mediawiki
+      </code></pre>
+      <p>This will cause a new instance to be run and configured to work alongside the currently running one.</p>
+      <h1>Scaling Back</h1>
+      <p>Sometimes you also want to scale back some of your services, and this too is easy with Juju.</p>
+
+    </section>
+      
+       

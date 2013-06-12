@@ -1,0 +1,74 @@
+extends inc/layout
+
+block vars
+  - var title='Best Practice for Charm Authors'
+  - var page='charms-best-practice'
+
+block content
+  article.
+    <section id ="best_practice">
+    <h1>Best Practice for Charm Authors</h1>
+
+    <p>This document is to capture charm best practices from the community. We expect devops to be strongly opinionated, therefore some strong opinions don't make sense as policy, but do make sense to share with others to disseminate expertise.</p> 
+
+    <p>If you'd like to share some best practice and have it added to this page we recommend you <a href="https://lists.ubuntu.com/mailman/listinfo/juju">post to the mailing list</a> with some ideas on what you've like to see added. Ideally we'd like to document all sorts of great ideas on how people are using Juju.</p>
+
+    <h2>Juju Best Practices and Tips from Canonical's Infrastructure Team</h2>
+
+    <aside>Since Canonical IS uses Juju in production they have certain requirements from charms in order for them to run on a production OpenStack deployment. Though these are requirements for use inside of Canonical, charms are not required to meet these criteria to be in the charm store, they are included here to share with the devops community.</aside>
+
+    <p>Tips for production usage:</p>
+    <ul>
+      <li>Provide an overview of the service in the README and metadata. </li>
+      <li>Use packaged software (i.e. debian packages) where possible, and "backport" any packages needed outside of the archives from whatever PPA you have them in to the appropriate precise-cat suite
+      <li>Not duplicate any service components that there are pre-existing charms for</li>
+      <li>Follow the coding guidelines for charms (see below).</li>
+      <li>Assemble code for your application outside of the Charm.</li>
+      <li>Ship a script in <code>/srv/deploymgr/${service-name}-${instance-type}</code> that has commands for starting/stopping/checking/building code for the service <em>if you're not using upstart or an initscript doesn't provide this</em>.</li>
+      <li>Create a <code>/srv/${external-service-name}/${instance-type}/${service-name}</code> directory for the code itself, and <code>/srv/${external-service-name}/{${instance-type}-logs,scripts,etc,var}</code> as needed.</li>
+      <li>Ensure the owner of the code isn't the same user than runs the code</li>
+      <li>Create monitoring checks for your application.</li>
+      <li>Which checks are prompt-critical (in other words, constitutes a user-affecting outage that would warrant waking an "oncall" sysadmin over a weekend)?</li>
+      <li>Confirm the service doesn't require any developer shell access to the servers that it runs on.</li>
+      <li>Confirm what data/logs from the application needs to be made visible to developers, and in what format?</li>
+    </ul>
+ 
+    <h2>Charm Coding Guidelines</h2>
+
+    <p>If written in Bash:</p>
+    <ul>
+      <li> <code>{variable}-value</code> rather than <code>$variable-value</code>?</li>
+      <li> <code>$(COMMAND)</code> vs. <code>COMMAND</code>?</li>
+      <li>Use <code>install</code> rather than <code>mkdir; chown</code>
+    </ul>
+    <p>If written in Python:</p>
+    <ul>
+      <li>Has <code>pep8</code> been run against the relevant scripts?</li>
+      <li>Separation of code from content (i.e. all external files/templates are in the "files" or "templates" directory)?</li>
+      </li>As an example, this populates a template from any variables in the current environment: <code>cheetah fill --env -p templates/celerymon_conf.tmpl > /etc/init/celerymon.conf</code></li>
+    </ul>
+    <p>In this example, the template looks like this:
+    </pre>
+    start on started celeryd
+    stop on stopping celeryd
+
+    env CODEDIR=$CODE_LOCATION
+    env
+    PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
+
+    exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
+    PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
+    /srv/${BASEDIR}/var/celeryev.pid"
+    respawn
+    </pre>
+    <ul>
+      <li>Do all config options have appropriate descriptions?</li>
+      <li>Are all hooks idempotent?</li>
+      <li>No hard coded values for things that may need changing - exposed via config.yaml options</li>
+      <li>No hard coding of full paths for system tools/binaries - we should ensure $PATH is set appropriately.</li>
+      <li>Has <code>charm proof</code> been run against the charm?</li>
+      <li>Has testing of adding units and removing units been done?</li>
+      <li>Has testing of changing all config options and verifying they get changed in the application (and applied, i.e. service reloaded if appropriate) been done?</li>
+      <li>Any cron entries should be in <code>/etc/cron.d</code> rather than stored in user crontabs.</li>
+      <li>This allows for easier visibility of active cronjobs across the whole system, as well as making editing things much easier.</li>
+    </ul>

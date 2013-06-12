@@ -1,0 +1,39 @@
+extends inc/layout
+
+block vars
+  - var title='Exposing Charms'
+  - var page='charms-exposing'
+
+block content
+  article.
+    <section id ="exposing">
+      <h1>Exposing Services</h1>
+      <p>By design, Juju operates a very secure environment for deploying your services. Even if you have deployed services, they won't be publically available unless you explicitly make them so. To allow public access to services, the appropriate changes must be made to the cloud provider firewall settings. As the procedure or doing this varies depending on the provider, Juju helpfully abtracts this into a single command, <span class="pre">juju expose &LT;servicename&GT;</p>
+      <p>For example, you may have deployed a WordPress service using the relevant charm. Once deployed, the service still cannot be accessed by the public, so you would run:<p>
+      <pre><code>juju expose wordpress</code></pre>
+      <p>Juju will then take the steps necessary to adjust firewall rules and any other settings to expose the service via it's given address. This process may take anything from a few moments to several minutes. You can check on the current status of your services by running:</p>
+      <pre><code>juju status</code></pre>
+      <p>This will return a status report like this:</p>
+      <pre><code>...
+      &nbsp;services:
+      &nbsp;&nbsp;wordpress:
+      &nbsp;&nbsp;&nbsp;&nbsp;exposed: true
+      &nbsp;&nbsp;&nbsp;&nbsp;charm: local:precise/wordpress-42
+      &nbsp;&nbsp;&nbsp;&nbsp;relations: {db: mysql}
+      &nbsp;&nbsp;units:
+      &nbsp;&nbsp;&nbsp;&nbsp;wordpress/0:
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: 2
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open-ports: [80/tcp]
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relations:
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;db: {state: up}
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state: started
+      ...
+      </code></pre>
+      <p>As you can see here, the <strong>exposed:</strong> status is listed as true, and the service is running and available to users.</p>
+      <p class="note"><strong>Note:</strong> Exposing the service does not change any DNS or other settings which may be neccessary to get your service running as you expect.</p>
+      <h1>Unexposing a service</h1>
+      <p>To return the firewall settings and make a service non-public again, you simly need to run the <span class="pre">juju unexpose</span> command. For example:</p>
+      <pre><code>juju unexpose wordpress</code></pre>
+      
+      
+    </section>
