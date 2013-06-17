@@ -1,0 +1,39 @@
+extends inc/layout
+
+block vars
+  - var title='Authoring Charms'
+  - var page='implicit-relations'
+
+block content
+  article.
+      <section id ="implicit-relations">
+      <h1>Implicit relations</h1>
+      <p>Implicit relations allow for interested services to gather lifecycle-oriented events and data about other services without expecting or requiring any modifications on the part of the author of the other service's charm.</p>
+      <p>Implicit relationships are named in the reserved the juju-* namespace. Both the relation name and interface names provided by juju are prefixed with <cite>juju-</cite>. Charms attempting to provide new relationships in this namespace will trigger an error.</p>
+      <p>Juju currently provides one implicit relationship to all deployed services.</p>
+      <p><cite>juju-info</cite>, if specified would look like:</p>
+      <pre>provides:
+          juju-info:
+              interface: juju-info</pre>
+      
+      <p>The charm author should not declare the <cite>juju-info</cite> relation and is provided here only as an example. The <cite>juju-info</cite> relation is implicitly provided by all charms, and enables the requiring unit to obtain basic details about the related-to unit. The following settings will be implicitly provided by the remote unit in a relation through its <cite>juju-info</cite> relation</p>
+      <pre><span class="n">private</span><span class="o">-</span><span class="n">address</span> <span class="n">public</span><span class="o">-</span><span class="n">address</span>
+      </pre>
+      
+      
+      <h2>Relationship resolution</h2>
+      <p>If <strong>rsyslog</strong> is a <a class="reference external" href="authors-subordinate-services.html"><em>subordinate charm</em></a> and requires a valid <cite>scope: container</cite> relationship in order to deploy. It can take advantage of optional support from the principal charm but in the event that the principal charm doesn't provide this support it will still require a <cite>scope: container</cite> relationship. In this event the logging charm author can take advantage of the implicit relationship offered by all charms, <cite>juju-info</cite>.</p>
+      <pre>requires:
+        logging:
+            interface: logging-directory
+            scope: container
+        juju-info:
+            interface: juju-info
+            scope: container</pre>
+      
+      <p>The admin then issues the following</p>
+      <pre>juju add-relation wordpress rsyslog</pre>
+      
+      <p>If the wordpress charm author doesn't define the <cite>logging-directory</cite> interface juju will use the less-specific (in the sense that it likely provides less information) <cite>juju-info</cite> interface. juju always attempts to match user provided relations outside the <cite>juju-*</cite> namespace before looking for possible relationship matches in the <cite>juju-*</cite> namespace.</p>
+      
+      </section>

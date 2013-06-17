@@ -1,0 +1,210 @@
+extends inc/layout
+
+block vars
+  - var title='Authoring Charms'
+  - var page='charm-testing'
+
+block content
+  article.
+      <section id='authors-charm-testing'>
+      <h1>Charm Testing</h1>
+      <p>Juju has been designed from the start to foster a large collection of &quot;charms&quot;. Charms are expected to number in the thousands, and be self contained, with well defined interfaces for defining their relationships to one another.</p>
+      <p>Because this is a large complex system, not unlike a Linux software distribution, there is a need to test the charms and how they interact with one another. This specification  defines a plan for implementing a simple framework to help this happen.</p>
+      <p>Static tests have already been implemented in the <tt class="docutils literal"><span class="pre">charm</span> <span class="pre">proof</span></tt> command as part of <tt class="docutils literal"><span class="pre">charm-tools</span></tt>. Any static testing of charms is beyond the scope of this specification.</p>
+      
+
+      <h2>Phase 1 - Generic tests</h2>
+      <p>All charms share some of the same characteristics. They all have a yaml file called <tt class="docutils literal"><span class="pre">metadata.yaml</span></tt>, and when deployed, juju will always attempt to progress the state of the service from install to config to started. Because of this, all charms can be tested using the following algorithm:</p>
+      <pre>deploy charm
+      &nbsp;while state != started
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if timeout is reached, FAIL
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if state == install_error, config_error, or start_error, FAIL
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if state == started, PASS</pre>
+      
+      <p>Other generic tests may be identified, so a collection of generic tests should be the focus of an implementation.</p>
+      <p>Note that this requirement is already satisfied by Mark Mims' jenkins tester: <a class="reference external" href="http://charmtests.markmims.com/">http://charmtests.markmims.com/</a></p>
+      
+      <h2>Phase 2 - Charm Specific tests</h2>
+      <p>Charm authors will have the best insight into whether or not a charm is working properly.</p>
+      <p>A simple structure will be utilized to attach tests to charms. Under the charm root directory, a sub-directory named 'tests' will be scanned by a test runner for executable files matching the glob <tt class="docutils literal"><span class="pre">*.test</span></tt>. These will be run in lexical order by the test runner, with a predictible environment. The tests can make the following assumptions:</p>
+      <ul class="simple">
+      <li>A minimal install of the release of Ubuntu which the charm is targetted at will be available.</li>
+      <li>A version of juju is installed and available in the system path.</li>
+      <li>A juju environment with no services deployed inside it is already bootstrapped, and will be the default for command line usage.</li>
+      <li>The CWD is the <tt class="docutils literal"><span class="pre">tests</span></tt> directory off the charm root.</li>
+      <li>Full network access to deployed nodes will be allowed.</li>
+      <li>the bare name of any charm in arguments to juju will be resolved to a charm url and/or repository arguments of the test runner's choice. This means that if you need mysql, you do not do <tt class="docutils literal"><span class="pre">juju</span> <span class="pre">deploy</span> <span class="pre">cs:mysql</span></tt> or <tt class="docutils literal"><span class="pre">juju</span> <span class="pre">deploy</span> <span class="pre">--repository</span> <span class="pre">~/charms</span> <span class="pre">local:mysql</span></tt>, but just <tt class="docutils literal"><span class="pre">juju</span> <span class="pre">deploy</span> <span class="pre">mysql</span></tt>. A wrapper will resolve this to the latest version of the given charm from the list of official charms.</li>
+      </ul>
+      <p>The following restrictions may be enforced:</p>
+      <ul class="simple">
+      <li>Internet access will be restricted from the testing host.</li>
+      </ul>
+      <p>If present, tests/tests.yaml will be read to determine packages that need to be installed on the host running tests in order to facilitate the tests. The packages can <em>only</em> be installed from the official, default Ubuntu archive for the release which the charm is intended for, from any of the repositories enabled by default in said release. The format of tests.yaml is as such:</p>
+      <pre>packages: [ package1, package2, package3 ]</pre>
+      
+      <p>If a tool is needed to perform a test and is not available in the Ubuntu archive, it can also be included in the <tt class="docutils literal"><span class="pre">tests/</span></tt> directory, as long as the file which contains it does not end in <tt class="docutils literal"><span class="pre">.test</span></tt>. Note that build tools cannot be assumed to be available on the testing system.</p>
+      <div class="section" id="purpose-of-tests">
+      <h3>Purpose of tests</h3>
+      <p>The purpose of these tests is to assert that the charm works well on the intended platform and performs the expected configuration steps. Examples of things to test in each charm beyond install/start is:</p>
+      <ul class="simple">
+      <li>After install, expose, and adding of required relations, the service is listening on the intended ports and is functional.</li>
+      <li>Adding, removing, and re-adding a relation should work without error.</li>
+      <li>Setting config values should result in the config value reflected in the service's configuraion.</li>
+      <li>Adding multiple units to a web app charm and relating to a load balancer results in the same HTML on both units directly and the load balancer.</li>
+      </ul>
+      
+      <h3>Exit Codes</h3>
+      <p>Upon exit, the test's exit code will be evaluated to mean the following:</p>
+      <ul class="simple">
+      <li>0:   Test passed</li>
+      <li>1:   Failed test</li>
+      <li>100: Test is skipped because of incomplete environment</li>
+      </ul>
+      
+      <h3>Output</h3>
+      <p>There is a general convention which output should follow, though it will not be interpreted by machine. On stdout, a message indicating the reason for the exit code should be printed, with a prefix string corresponding to the exit codes defined above. The correlation is:</p>
+      <ul class="simple">
+      <li>PASS - 0</li>
+      <li>FAIL - 1</li>
+      <li>SKIP - 100</li>
+      </ul>
+      <p>Anything else intentional should be prefixed with the word 'INFO'. If the
+      contents of files are to be logged, the contents should be preceeded by
+      <tt class="docutils literal"><span class="pre">INFO:</span> <span class="pre">BEGIN</span> <span class="pre">filename</span></tt>, where filename is a logical name unique to
+      this run of the test, and then the file ended with <tt class="docutils literal"><span class="pre">INFO:</span> <span class="pre">END</span> <span class="pre">filename</span></tt>.</p>
+      
+      <h3>Example Tests<</h3>
+      
+      <h4>Deploy requirements and Poll</h4>
+      <p>The test below <a class="footnote-reference" href="#id2" id="id1">[*]</a> deploys mediawiki with mysql and memcached related to it,
+      and then tests to make sure it returns a page via http with &quot;&lt;title&gt;&quot;
+      somewhere in the content.:</p>
+      <pre>#!/bin/sh
+      
+      &nbsp;set -e
+      
+      &nbsp;teardown() {
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if [ -n "$datadir" ] ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if [ -f $datadir/passed ]; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rm -r $datadir
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo INFO: $datadir preserved
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if [ -f $datadir/wget.log ] ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo INFO: BEGIN wget.log
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat $datadir/wget.log
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo INFO: END wget.log
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fi
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fi
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fi
+      &nbsp;}
+      &nbsp;trap teardown EXIT
+      
+      
+      &nbsp;juju deploy mediawiki
+      &nbsp;juju deploy mysql
+      &nbsp;juju deploy memcached
+      &nbsp;juju add-relation mediawiki:db mysql:db
+      &nbsp;juju add-relation memcached mediawiki
+      &nbsp;juju expose mediawiki
+      
+      &nbsp;for try in `seq 1 600` ; do
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;host=`juju status | tests/get-unit-info mediawiki public-address`
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if [ -z "$host" ] ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sleep 1
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fi
+      &nbsp;done
+      
+      &nbsp;if [ -z "$host" ] ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo FAIL: status timed out
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit 1
+      &nbsp;fi
+      
+      &nbsp;datadir=`mktemp -d ${TMPDIR:-/tmp}/wget.test.XXXXXXX`
+      &nbsp;echo INFO: datadir=$datadir
+      
+      &nbsp;wget --tries=100 --timeout=6 http://$host/ -O - -a $datadir/wget.log | grep -q '&lt;title&gt;'
+      
+      &nbsp;if [ $try -eq 600 ] ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo FAIL: Timed out waiting.
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit 1
+      &nbsp;fi
+      
+      &nbsp;touch $datadir/passed
+      
+      &nbsp;trap - EXIT
+      &nbsp;teardown
+      
+      &nbsp;echo PASS
+      &nbsp;exit 0</pre>
+      
+      <h3>Test config settings</h4>
+      <p>The following example tests checks to see if the default_port change the admin asks for is actually respected post-deploy:</p>
+      <pre>#!/bin/sh
+      
+      &nbsp;if [ -z "`which nc`" ] ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "SKIP: cannot run tests without netcat"
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit 100
+      &nbsp;fi
+      
+      &nbsp;set -e
+      
+      &nbsp;juju deploy mongodb
+      &nbsp;juju expose mongodb
+      &nbsp;
+      &nbsp;for try in `seq 1 600` ; do
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;host=`juju status | tests/get-unit-info mongodb public-address`
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if [ -z "$host" ] ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sleep 1
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fi
+      &nbsp;done
+      &nbsp;
+      &nbsp;if [ -z "$host" ] ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo FAIL: status timed out
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit 1
+      &nbsp;fi
+      &nbsp;
+      &nbsp;assert_is_listening() {
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;local port=$1
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;listening=""
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for try in `seq 1 10` ; do
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ! nc $host $port &lt; /dev/null ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fi
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;listening="$port"
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;done
+      &nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if [ -z "$listening" ] ; then
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "FAIL: not listening on port $port after 10 retries"
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "PASS: listening on port $listening"
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fi
+      &nbsp;}
+      
+      &nbsp;assert_is_listening 27017
+      
+      &nbsp;juju set mongodb default_port=55555
+      
+      &nbsp;assert_is_listening 55555
+      &nbsp;echo PASS: config change tests passed.
+      &nbsp;exit 0</pre>
+      
+      <table class="docutils footnote" frame="void" id="id2" rules="none">
+      <colgroup><col class="label" /><col /></colgroup>
+      <tbody valign="top">
+      <tr><td class="label"><a class="fn-backref" href="#id1">[*]</a></td><td>get-unit-info
+      The example tests script uses a tool that is not widely available yet, <tt class="docutils literal"><span class="pre">get-unit-info</span></tt>. In the future enhancements should be made to juju core to allow such things to be made into plugins. Until then, it can be included in each test dir that uses it, or we can build a package of tools that are common to tests.</td></tr>
+      </tbody>
+      </table>
+      
+      <h2>Test Runner</h2>
+      <p>A test runner will periodically poll the collection of charms for changes since the last test run. If there have been changes, the entire set of changes will be tested as one delta. This delta will be recorded in the test results in such a way where a developer can repeat the exact set of changes for debugging purposes.</p>
+      <p>All of the charms will be scanned for tests in lexical order by series, charm name, branch name. Non official charms which have not been reviewed by charmers will not have their tests run until the test runner's restrictions have been vetted for security, since we will be running potentially malicious code. It is left to the implementor to determine what mix of juju, client platform, and environment settings are appropriate, as all of these are variables that will affect the running charms, and so may affect the outcome.</p>
+      <p>If tests exit with services still in the environment, the test runner may clean them up, whether by destroying the environment or destroying the services explicitly, and the machines may be terminated as well. Any artifacts needed from the test machines should be retrieved and displayed before the test exits.</p>
+      </section>

@@ -25,7 +25,10 @@ block content
       <p>This will cause a new instance to be run and configured to work alongside the currently running one.</p>
       <h1>Scaling Back</h1>
       <p>Sometimes you also want to scale back some of your services, and this too is easy with Juju.</p>
-
+      <pre class="runnable"><code>
+       juju remove-unit mediawiki/1
+      </code></pre>
+      <p>The <span class="pre">remove-unit</span> command can be run to remove running units safely. The running services should automatically adjust to the change. Should you wish to remove a service, please see the section on <a href="charms-destroy.html>destroying services</a>.
     </section>
       
        

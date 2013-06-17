@@ -70,22 +70,26 @@ html
                li(class="#{page=='' ? 'selected' : ''}").sub: a(href='charms-relations.html') Service Relationships
                li(class="#{page=='' ? 'selected' : ''}").sub: a(href='charms-exposing.html') Exposing Services
                li(class="#{page=='' ? 'selected' : ''}").sub: a(href='charms-scaling.html') Scaling Services
-               li(class="#{page=='' ? 'selected' : ''}").sub: a(href='charms-upgrade.html') Upgrades
                li(class="#{page=='' ? 'selected' : ''}").sub: a(href='charms-destroy.html') Destroying Services
-               li(class="#{page=='' ? 'selected' : ''}"): a(href='troubleshooting.html') Troubleshooting
-               li(class="#{page=='' ? 'selected' : ''}").sub: a(href='charms.html#scaling-remove') logging
+
 
             h1 Charm Authors
             ul
-              li.sub: a(href='authors-charm-policy.html') Charm store policy
-              li.sub: a(href='authors-charm-best-practice.html') Best practices
+
+            li(class="#{page=='charms' ? 'selected' : ''}"): a(href='authors-charm-writing.html') Writing a charm
+            li(class="#{page=='' ? 'selected' : ''}").sub: a(href='authors-subordinate-services.html') Subordinate services
+            li(class="#{page=='' ? 'selected' : ''}").sub: a(href='authors-implicit-relations.html') Implicit Relations
+            li(class="#{page=='' ? 'selected' : ''}").sub: a(href='authors-testing.html') Charm Testing
+            li(class="#{page=='' ? 'selected' : ''}").sub: a(href='authors-hooks.html') Hook debugging
+            li(class="#{page=='authors' ? 'selected' : ''}"): a(href='authors-charm-store.html') The Juju Charm Store
+            li(class="#{page=='' ? 'selected' : ''}").sub: a(href='authors-charm-policy.html') Charm store policy
+            li(class="#{page=='' ? 'selected' : ''}").sub: a(href='authors-charm-best-practice.html') Best practices
+            li(class="#{page=='' ? 'selected' : ''}").sub: a(href='authors-charm-quality.html') Charm Quality Rating
 
 
             h1 Reference
             ul
               li.sub: a(href='commands.html') Juju commands
-              li.sub: a(href='errors.html') Common error messages
-              li.sub: a(href='troubleshooting.html') Troubleshooting
               li.sub: a(href='glossary.html') Glossary
               li.sub: a(href='contributing.html') Contribute to the Docs!
 
