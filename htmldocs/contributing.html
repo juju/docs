@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Juju Documentation - Contributing!</title>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:400,400italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/resources.css" rel="stylesheet" type="text/css"/>
+    <link href="css/main.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://app.stacktack.com/jquery.stacktack.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+            $(document).stacktack();
+      });
+    </script><!--[if lt IE 9]>
+    <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body class="resources">
+    <header>
+      <div class="header-login">
+        <ul>
+          <li>&nbsp;</li>
+        </ul>
+      </div>
+      <div class="header-navigation">
+        <div>
+          <nav role="navigation">
+            <ul>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Home</a></li>
+              <li class="page_item current_page_item"><a href="https://juju.ubuntu.com/">Resources</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Community</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Charm Store</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Events</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Survey</a></li>
+              <li>
+                <form id="form-search" method="get" action="/">
+                  <fieldset>
+                    <input id="input-search" type="text" name="s" value="Search">
+                  </fieldset>
+                </form>
+              </li>
+            </ul>
+          </nav><a href="https://juju.ubuntu.com/" class="logo-ubuntu"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png"></a>
+        </div>
+      </div>
+      <div class="header-content">
+        <div class="clearfix"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:894px; display: block;" class="arrow-nav">
+          <div class="header-navigation-secondary"></div>
+          <div class="header-image"></div>
+          <h1>Resources</h1>
+          <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+        </div>
+      </div>
+    </header>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div class="grid-3 doc-navigation">
+          <nav role="navigation">
+            <h1>User Guide</h1>
+            <ul>
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="getting-started.html#intro">Introduction</a></li>
+              <li class=" sub"><a href="getting-started.html#install">Installation</a></li>
+              <li class=" sub"><a href="config-aws.html">AWS Configuration</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Cloud Configuration</a></li>
+              <li class=" sub"><a href="">OpenStack Configuration</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS Configuration</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms.html#intro">What are Charms?</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul></ul>
+            <li class=""><a href="authors-charm-writing.html">Writing a charm</a></li>
+            <li class=" sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+            <li class=" sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+            <li class=" sub"><a href="authors-testing.html">Charm Testing</a></li>
+            <li class=" sub"><a href="authors-hooks.html">Hook debugging</a></li>
+            <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+            <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+            <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+            <li class=" sub"><a href="authors-charm-quality.html">Charm Quality Rating</a></li>
+            <h1>Reference</h1>
+            <ul>
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="grid-9 doc-content">
+          <article>
+            <section id="contributing">
+              <h1>How you can contribute!</h1>
+              <p>It's a tough job writing documentation which covers every use case and scenario - mainly because Juju is so versatile it can be used in so many ways. That is why we hope to get plenty of feedback from users to help extend, ammend and improve the documentation. It is really easy and you don't have to be the world's best writer. Our grammar goblins will sort out any problems with the words, but your knowledge is very useful to us.
+              <h2>Why aren't you using Sphinx/Pandoc/Markdown...?</h2>
+              <p>because rather than force everyone to use one system of creating/editing docs, we wanted to be more inclusive and use a pretty easy to understand, well-recognised standard which doesn't restrict what we want to do. You CAN use any of these systems to contribute docs by the way, but just use the HTML output from them to add to the current docs</p>
+              <p> The navigation stuff is currently 
+              <h1>How to write docs!</h1>
+              <p>Contributing to the docs is really easy because it is all written in HTML5. In a very minimal way too - you will find most of the source documents are very straightforward and human-readable, if you just want to dip in and change a paragraph or add some extra infor. 
+              <p>Below is a list of the current style conventions in use in the docs.</p>
+              
+              
+              <p>Text is just written using standard &LT;p&GT; tags</p>
+              
+              <h2>Sections</h2>
+              <p> All the text is organised into sections. Each section has a heading, possibly subheadings and body text/other elements, so it looks something like this:
+              <pre>
+               &LT;section id="sectionname"&GT;
+               &LT;h1>Heading for section&LT;/h1&GT;
+               &LT;p> This is some stuff. &LT;/p&GT;
+               &LT;/section&GT;
+              </pre> 
+              <p>Each section <strong>MUST</strong> have an id. These are used as anchors, and it makes more sense to attach them to sections than individual headings. Even if you think your section will never be referenced (it will!), you should have an id="something")<p>
+              
+              <h2>Code</h2>
+              <p>Instructions are simply wrapped in &LT;pre&GT; &LT;/pre&GT; tags. There is no need to add any style.</p>
+              
+              <h2>Highlighted commands in running text</h2>
+              For running copy (i.e., when a command or similar appears in the middle of a paragraph) we use the following:
+              <pre>
+              &LT;span class="pre"&GT; juju deploy minecraft &LT;/span&GT;
+              </pre>
+              
+              
+              <h2>Notes</h2>
+              <p>Notes, other than asides, can be tagged as paragraphs, and begin with the word "Note:" like this:</p>
+              <pre>
+               &LT;p class="note"&GT;&LT;strong&GT;Note:&LT;/strong&GT;
+              </pre>
+              
+              <p>It is important to use the class="note" property for the paragraph to pick up the correct style.</p>
+              </section>
+              
+              
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer>
+      <div>
+        <nav role="navigation" class="clearfix">
+          <ul>
+            <li><a href="https://juju.ubuntu.com/get-started">Get started</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/resources">Resources</a></li>
+            <li><a href="https://juju.ubuntu.com/docs">Documentation</a></li>
+            <li><a href="https://juju.ubuntu.com/resources/videos">Videos</a></li>
+            <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI Demo</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/community">Community</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/juju-blog/">Blog</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Charm Meetings</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+            <li class="page_item"><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+            <li class="page_item"><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+            <li class="page_item"><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&amp;amp;pagesize=50">FAQ</a></li>
+          </ul>
+          <ul class="last">
+            <li><a href="https://launchpad.net/juju">Code</a></li>
+            <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+            <li><a href="https://launchpad.net/charms">Charms</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.14/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

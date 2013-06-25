@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Juju Documentation - Exposing Charms</title>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:400,400italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/resources.css" rel="stylesheet" type="text/css"/>
+    <link href="css/main.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://app.stacktack.com/jquery.stacktack.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+            $(document).stacktack();
+      });
+    </script><!--[if lt IE 9]>
+    <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body class="resources">
+    <header>
+      <div class="header-login">
+        <ul>
+          <li>&nbsp;</li>
+        </ul>
+      </div>
+      <div class="header-navigation">
+        <div>
+          <nav role="navigation">
+            <ul>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Home</a></li>
+              <li class="page_item current_page_item"><a href="https://juju.ubuntu.com/">Resources</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Community</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Charm Store</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Events</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Survey</a></li>
+              <li>
+                <form id="form-search" method="get" action="/">
+                  <fieldset>
+                    <input id="input-search" type="text" name="s" value="Search">
+                  </fieldset>
+                </form>
+              </li>
+            </ul>
+          </nav><a href="https://juju.ubuntu.com/" class="logo-ubuntu"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png"></a>
+        </div>
+      </div>
+      <div class="header-content">
+        <div class="clearfix"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:894px; display: block;" class="arrow-nav">
+          <div class="header-navigation-secondary"></div>
+          <div class="header-image"></div>
+          <h1>Resources</h1>
+          <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+        </div>
+      </div>
+    </header>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div class="grid-3 doc-navigation">
+          <nav role="navigation">
+            <h1>User Guide</h1>
+            <ul>
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="getting-started.html#intro">Introduction</a></li>
+              <li class=" sub"><a href="getting-started.html#install">Installation</a></li>
+              <li class=" sub"><a href="config-aws.html">AWS Configuration</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Cloud Configuration</a></li>
+              <li class=" sub"><a href="">OpenStack Configuration</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS Configuration</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms.html#intro">What are Charms?</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul></ul>
+            <li class=""><a href="authors-charm-writing.html">Writing a charm</a></li>
+            <li class=" sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+            <li class=" sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+            <li class=" sub"><a href="authors-testing.html">Charm Testing</a></li>
+            <li class=" sub"><a href="authors-hooks.html">Hook debugging</a></li>
+            <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+            <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+            <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+            <li class=" sub"><a href="authors-charm-quality.html">Charm Quality Rating</a></li>
+            <h1>Reference</h1>
+            <ul>
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="grid-9 doc-content">
+          <article>
+            <section id ="service_config">
+              <h1>Service Configuration</h1>
+              <p>When deploying a service, the charm you use will often support or even require specific configuration options to be set.</p>
+              <p>Juju provides tools to help manage these options and respond to changes over the lifetime of the service deployment. These options apply to the entire service, as opposed to only a specific unit or relation. The configuration can modified by an administrator at deployment time or after the services are operational.<p>
+              <h1>Discovering service configuration options</h1>
+              <p>You can discover what configuration options are available for a specific charm in various ways</p>
+              <ul>
+                <li>By running the <span class="pre">juju get &LT;service&GT;</span> command.</li>
+                <li>By viewing the charm in the <a href="http://jujucharms.com">charm store.</a></li>
+                <li>By examining the <strong>config.yaml</strong> file in the charm itself.</li>
+              </ul>
+              <p>The configurations setting names and the values they take will obviously vary between charms. The options and possible values are all well documented however, so you should consult one of the above sources to find out particular details.  
+              <h1>Configuring a service at deployment</h1>
+              <p>It is possible to set configuration values when deploying a service by providing a yaml-formatted file containing configuration values.</p>
+              <p>For example, upon investigation we discover that the Mediawiki charm allows us to set values for the name of the wiki and the 'skin' to use. We can put these inside a configuration file.</p>
+              <pre><code>
+              mediawiki:
+              &nbsp;&nbsp;name: Juju Wiki
+              &nbsp;&nbsp;skin: monobook
+              &nbsp;&nbsp;admins: admin:admin
+              </code></pre>
+              <p>We can then use this configuration when we deploy the service:</p>
+              <pre><code>
+              juju deploy --config myconfig.yaml mediawiki
+              </code></pre>   
+              
+              <p class="caution"><strong>Caution:</strong> If the yaml configuration file cannot be read or contains some syntax errors or invalid options, you will receive an error message to this effect. However, <strong>the service will still be deployed </strong>.
+              <h1>Configuring a service which is already deployed</h1>
+              <p>It is possible to set or change configuration of a service which is already deployed.  </p>
+              <p>Before you set any of these options, you may want to check what current options are already set, using the <span class="pre"> juju get &LT;service&GT; </span> command. For example:</p>
+              <pre><code>
+              juju get mediawiki
+              </code></pre>
+              <p>Should return something like this:</p>
+              <pre><code>
+              charm: mediawiki
+              service: mediawiki
+              settings:
+              &nbsp;&nbsp;admins:
+              &nbsp;&nbsp;&nbsp;&nbsp;default: true
+              &nbsp;&nbsp;&nbsp;&nbsp;description: Admin users to create, user:pass
+              &nbsp;&nbsp;&nbsp;&nbsp;type: string
+              &nbsp;&nbsp;&nbsp;&nbsp;value: null
+              &nbsp;&nbsp;debug:
+              &nbsp;&nbsp;&nbsp;&nbsp;default: true
+              &nbsp;&nbsp;&nbsp;&nbsp;description: turn on debugging features of mediawiki
+              &nbsp;&nbsp;&nbsp;&nbsp;type: boolean
+              &nbsp;&nbsp;&nbsp;&nbsp;value: false
+              &nbsp;&nbsp;logo:
+              &nbsp;&nbsp;&nbsp;&nbsp;default: true
+              &nbsp;&nbsp;&nbsp;&nbsp;description: URL to fetch logo from
+              &nbsp;&nbsp;&nbsp;&nbsp;type: string
+              &nbsp;&nbsp;&nbsp;&nbsp;value: null
+              &nbsp;&nbsp;name:
+              &nbsp;&nbsp;&nbsp;&nbsp;default: true
+              &nbsp;&nbsp;&nbsp;&nbsp;description: The name, or Title of the Wiki
+              &nbsp;&nbsp;&nbsp;&nbsp;type: string
+              &nbsp;&nbsp;&nbsp;&nbsp;value: Please set name of wiki
+              &nbsp;&nbsp;skin:
+              &nbsp;&nbsp;&nbsp;&nbsp;default: true
+              &nbsp;&nbsp;&nbsp;&nbsp;description: skin for the Wiki
+              &nbsp;&nbsp;&nbsp;&nbsp;type: string
+              &nbsp;&nbsp;&nbsp;&nbsp;value: vector
+              </code></pre>
+              <p>You can set the options using the  <span class="pre"> juju set &LT;service&GT; </span>, specifying multiple key:value pairs if necessary:</p>
+              <pre><code>
+              juju set mediawiki skin=monoblock name='Juju Wiki' 
+              </code></pre>
+            </section>
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer>
+      <div>
+        <nav role="navigation" class="clearfix">
+          <ul>
+            <li><a href="https://juju.ubuntu.com/get-started">Get started</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/resources">Resources</a></li>
+            <li><a href="https://juju.ubuntu.com/docs">Documentation</a></li>
+            <li><a href="https://juju.ubuntu.com/resources/videos">Videos</a></li>
+            <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI Demo</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/community">Community</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/juju-blog/">Blog</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Charm Meetings</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+            <li class="page_item"><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+            <li class="page_item"><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+            <li class="page_item"><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&amp;amp;pagesize=50">FAQ</a></li>
+          </ul>
+          <ul class="last">
+            <li><a href="https://launchpad.net/juju">Code</a></li>
+            <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+            <li><a href="https://launchpad.net/charms">Charms</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.14/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Juju Documentation - Exposing Charms</title>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:400,400italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/resources.css" rel="stylesheet" type="text/css"/>
+    <link href="css/main.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://app.stacktack.com/jquery.stacktack.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+            $(document).stacktack();
+      });
+    </script><!--[if lt IE 9]>
+    <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body class="resources">
+    <header>
+      <div class="header-login">
+        <ul>
+          <li>&nbsp;</li>
+        </ul>
+      </div>
+      <div class="header-navigation">
+        <div>
+          <nav role="navigation">
+            <ul>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Home</a></li>
+              <li class="page_item current_page_item"><a href="https://juju.ubuntu.com/">Resources</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Community</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Charm Store</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Events</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Survey</a></li>
+              <li>
+                <form id="form-search" method="get" action="/">
+                  <fieldset>
+                    <input id="input-search" type="text" name="s" value="Search">
+                  </fieldset>
+                </form>
+              </li>
+            </ul>
+          </nav><a href="https://juju.ubuntu.com/" class="logo-ubuntu"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png"></a>
+        </div>
+      </div>
+      <div class="header-content">
+        <div class="clearfix"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:894px; display: block;" class="arrow-nav">
+          <div class="header-navigation-secondary"></div>
+          <div class="header-image"></div>
+          <h1>Resources</h1>
+          <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+        </div>
+      </div>
+    </header>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div class="grid-3 doc-navigation">
+          <nav role="navigation">
+            <h1>User Guide</h1>
+            <ul>
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="getting-started.html#intro">Introduction</a></li>
+              <li class=" sub"><a href="getting-started.html#install">Installation</a></li>
+              <li class=" sub"><a href="config-aws.html">AWS Configuration</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Cloud Configuration</a></li>
+              <li class=" sub"><a href="">OpenStack Configuration</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS Configuration</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms.html#intro">What are Charms?</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul></ul>
+            <li class=""><a href="authors-charm-writing.html">Writing a charm</a></li>
+            <li class=" sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+            <li class=" sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+            <li class=" sub"><a href="authors-testing.html">Charm Testing</a></li>
+            <li class=" sub"><a href="authors-hooks.html">Hook debugging</a></li>
+            <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+            <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+            <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+            <li class=" sub"><a href="authors-charm-quality.html">Charm Quality Rating</a></li>
+            <h1>Reference</h1>
+            <ul>
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="grid-9 doc-content">
+          <article>
+            <section id ="exposing">
+              <h1>Exposing Services</h1>
+              <p>By design, Juju operates a very secure environment for deploying your services. Even if you have deployed services, they won't be publically available unless you explicitly make them so. To allow public access to services, the appropriate changes must be made to the cloud provider firewall settings. As the procedure or doing this varies depending on the provider, Juju helpfully abtracts this into a single command, <span class="pre">juju expose &LT;servicename&GT;</p>
+              <p>For example, you may have deployed a WordPress service using the relevant charm. Once deployed, the service still cannot be accessed by the public, so you would run:<p>
+              <pre><code>juju expose wordpress</code></pre>
+              <p>Juju will then take the steps necessary to adjust firewall rules and any other settings to expose the service via it's given address. This process may take anything from a few moments to several minutes. You can check on the current status of your services by running:</p>
+              <pre><code>juju status</code></pre>
+              <p>This will return a status report like this:</p>
+              <pre><code>...
+              &nbsp;services:
+              &nbsp;&nbsp;wordpress:
+              &nbsp;&nbsp;&nbsp;&nbsp;exposed: true
+              &nbsp;&nbsp;&nbsp;&nbsp;charm: local:precise/wordpress-42
+              &nbsp;&nbsp;&nbsp;&nbsp;relations: {db: mysql}
+              &nbsp;&nbsp;units:
+              &nbsp;&nbsp;&nbsp;&nbsp;wordpress/0:
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: 2
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open-ports: [80/tcp]
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relations:
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;db: {state: up}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state: started
+              ...
+              </code></pre>
+              <p>As you can see here, the <strong>exposed:</strong> status is listed as true, and the service is running and available to users.</p>
+              <p class="note"><strong>Note:</strong> Exposing the service does not change any DNS or other settings which may be neccessary to get your service running as you expect.</p>
+              <h1>Unexposing a service</h1>
+              <p>To return the firewall settings and make a service non-public again, you simly need to run the <span class="pre">juju unexpose</span> command. For example:</p>
+              <pre><code>juju unexpose wordpress</code></pre>
+              
+              
+            </section>
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer>
+      <div>
+        <nav role="navigation" class="clearfix">
+          <ul>
+            <li><a href="https://juju.ubuntu.com/get-started">Get started</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/resources">Resources</a></li>
+            <li><a href="https://juju.ubuntu.com/docs">Documentation</a></li>
+            <li><a href="https://juju.ubuntu.com/resources/videos">Videos</a></li>
+            <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI Demo</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/community">Community</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/juju-blog/">Blog</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Charm Meetings</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+            <li class="page_item"><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+            <li class="page_item"><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+            <li class="page_item"><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&amp;amp;pagesize=50">FAQ</a></li>
+          </ul>
+          <ul class="last">
+            <li><a href="https://launchpad.net/juju">Code</a></li>
+            <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+            <li><a href="https://launchpad.net/charms">Charms</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.14/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

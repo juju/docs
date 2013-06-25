@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Juju Documentation - Configuring Juju to work with AWS</title>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:400,400italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/resources.css" rel="stylesheet" type="text/css"/>
+    <link href="css/main.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://app.stacktack.com/jquery.stacktack.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+            $(document).stacktack();
+      });
+    </script><!--[if lt IE 9]>
+    <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body class="resources">
+    <header>
+      <div class="header-login">
+        <ul>
+          <li>&nbsp;</li>
+        </ul>
+      </div>
+      <div class="header-navigation">
+        <div>
+          <nav role="navigation">
+            <ul>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Home</a></li>
+              <li class="page_item current_page_item"><a href="https://juju.ubuntu.com/">Resources</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Community</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Charm Store</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Events</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Survey</a></li>
+              <li>
+                <form id="form-search" method="get" action="/">
+                  <fieldset>
+                    <input id="input-search" type="text" name="s" value="Search">
+                  </fieldset>
+                </form>
+              </li>
+            </ul>
+          </nav><a href="https://juju.ubuntu.com/" class="logo-ubuntu"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png"></a>
+        </div>
+      </div>
+      <div class="header-content">
+        <div class="clearfix"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:894px; display: block;" class="arrow-nav">
+          <div class="header-navigation-secondary"></div>
+          <div class="header-image"></div>
+          <h1>Resources</h1>
+          <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+        </div>
+      </div>
+    </header>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div class="grid-3 doc-navigation">
+          <nav role="navigation">
+            <h1>User Guide</h1>
+            <ul>
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="getting-started.html#intro">Introduction</a></li>
+              <li class=" sub"><a href="getting-started.html#install">Installation</a></li>
+              <li class=" sub"><a href="config-aws.html">AWS Configuration</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Cloud Configuration</a></li>
+              <li class=" sub"><a href="">OpenStack Configuration</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS Configuration</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms.html#intro">What are Charms?</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul></ul>
+            <li class=""><a href="authors-charm-writing.html">Writing a charm</a></li>
+            <li class=" sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+            <li class=" sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+            <li class=" sub"><a href="authors-testing.html">Charm Testing</a></li>
+            <li class=" sub"><a href="authors-hooks.html">Hook debugging</a></li>
+            <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+            <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+            <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+            <li class=" sub"><a href="authors-charm-quality.html">Charm Quality Rating</a></li>
+            <h1>Reference</h1>
+            <ul>
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="grid-9 doc-content">
+          <article>
+            <section id="config_aws">
+            <h1>Configuring for Amazon AWS</h1>
+            <p>You should start by generating a generic configuration file for Juju, using the command:
+            <pre><code>juju generate-config -w</code></pre>
+            <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).     
+            <p>The generic configuration sections generated for AWS will look something like this:</p>
+            <pre><code>
+            
+            &nbsp;&nbsp;## https://juju.ubuntu.com/get-started/amazon/
+            &nbsp;&nbsp;amazon:
+            &nbsp;&nbsp;&nbsp;&nbsp;type: ec2
+            &nbsp;&nbsp;&nbsp;&nbsp;admin-secret: 772b97c4c31c6b5883475e396d9a6d32
+            &nbsp;&nbsp;&nbsp;&nbsp;# globally unique S3 bucket name
+            &nbsp;&nbsp;&nbsp;&nbsp;control-bucket: juju-a29403f89d8223343d3cab01f1ca5a4d
+            &nbsp;&nbsp;&nbsp;&nbsp;# override if your machine is on a different series than what you're deploying
+            &nbsp;&nbsp;&nbsp;&nbsp;# default-series: precise
+            &nbsp;&nbsp;&nbsp;&nbsp;# region defaults to us-east-1, override if required
+            &nbsp;&nbsp;&nbsp;&nbsp;# region: us-east-1
+            &nbsp;&nbsp;&nbsp;&nbsp;# Usually set via the env variable AWS_ACCESS_KEY_ID, but can be specified here
+            &nbsp;&nbsp;&nbsp;&nbsp;# access-key: &LT;secret&GT;
+            &nbsp;&nbsp;&nbsp;&nbsp;# Can be set via the env variable AWS_SECRET_ACCESS_KEY, or specified here
+            &nbsp;&nbsp;&nbsp;&nbsp;# secret-key: &LT;secret&GT;
+            </code></pre>  
+            <p>This is a simple configuration intended to run on EC2 with S3 permanent storage. Values for the default setting can be changed simply by editing this file, uncommenting the relevant lines and adding your own settings. All you need to do to get this configuration to work is to either set the <span class="pre">AWS_ACCESS_KEY_ID</span> and <span class="pre">AWS_SECRET_ACCESS_KEY</span> via environment variables, or uncomment and add the values to the configuration file.</p>
+            <p>You can retrieve these values easily from your Amazon account at <a href="http://aws.amazon.com/account">http://aws.amazon.com/account</a> and following on the link for "Security Credentials"...</p>
+            <img src="./media/getting_started-aws_security.png" alt="Amazon accounts page showing Security Credentials link" >
+            <p>Under the Access Credentials heading, you will see a list of access keys. Clicking on the "Show" link will display the secret key, and you can simply copy and paste these into your environments.yaml configuration file.</p>
+             <img src="./media/getting_started-aws_keys.png" alt="Amazon Access Credentials page showing key values" >
+             <p>The <strong>region:</strong> value corresponds to the AWS regions. 
+             </section>
+             
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer>
+      <div>
+        <nav role="navigation" class="clearfix">
+          <ul>
+            <li><a href="https://juju.ubuntu.com/get-started">Get started</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/resources">Resources</a></li>
+            <li><a href="https://juju.ubuntu.com/docs">Documentation</a></li>
+            <li><a href="https://juju.ubuntu.com/resources/videos">Videos</a></li>
+            <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI Demo</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/community">Community</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/juju-blog/">Blog</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Charm Meetings</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+            <li class="page_item"><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+            <li class="page_item"><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+            <li class="page_item"><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&amp;amp;pagesize=50">FAQ</a></li>
+          </ul>
+          <ul class="last">
+            <li><a href="https://launchpad.net/juju">Code</a></li>
+            <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+            <li><a href="https://launchpad.net/charms">Charms</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.14/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

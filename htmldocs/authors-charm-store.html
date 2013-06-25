@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Juju Documentation - Authoring Charms</title>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:400,400italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/resources.css" rel="stylesheet" type="text/css"/>
+    <link href="css/main.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://app.stacktack.com/jquery.stacktack.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+            $(document).stacktack();
+      });
+    </script><!--[if lt IE 9]>
+    <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body class="resources">
+    <header>
+      <div class="header-login">
+        <ul>
+          <li>&nbsp;</li>
+        </ul>
+      </div>
+      <div class="header-navigation">
+        <div>
+          <nav role="navigation">
+            <ul>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Home</a></li>
+              <li class="page_item current_page_item"><a href="https://juju.ubuntu.com/">Resources</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Community</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Charm Store</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Events</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Survey</a></li>
+              <li>
+                <form id="form-search" method="get" action="/">
+                  <fieldset>
+                    <input id="input-search" type="text" name="s" value="Search">
+                  </fieldset>
+                </form>
+              </li>
+            </ul>
+          </nav><a href="https://juju.ubuntu.com/" class="logo-ubuntu"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png"></a>
+        </div>
+      </div>
+      <div class="header-content">
+        <div class="clearfix"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:894px; display: block;" class="arrow-nav">
+          <div class="header-navigation-secondary"></div>
+          <div class="header-image"></div>
+          <h1>Resources</h1>
+          <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+        </div>
+      </div>
+    </header>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div class="grid-3 doc-navigation">
+          <nav role="navigation">
+            <h1>User Guide</h1>
+            <ul>
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="getting-started.html#intro">Introduction</a></li>
+              <li class=" sub"><a href="getting-started.html#install">Installation</a></li>
+              <li class=" sub"><a href="config-aws.html">AWS Configuration</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Cloud Configuration</a></li>
+              <li class=" sub"><a href="">OpenStack Configuration</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS Configuration</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms.html#intro">What are Charms?</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul></ul>
+            <li class=""><a href="authors-charm-writing.html">Writing a charm</a></li>
+            <li class=" sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+            <li class=" sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+            <li class=" sub"><a href="authors-testing.html">Charm Testing</a></li>
+            <li class=" sub"><a href="authors-hooks.html">Hook debugging</a></li>
+            <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+            <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+            <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+            <li class=" sub"><a href="authors-charm-quality.html">Charm Quality Rating</a></li>
+            <h1>Reference</h1>
+            <ul>
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="grid-9 doc-content">
+          <article>
+            <section id ="upgrading">
+            <h1>The Juju Charm Store</h1>
+               <p>Juju includes a collection of what we call '''Charms''' that let you deploy whatever services you want in Juju. Since charms are open and worked on by the community, they represent a distilled set of best practices for deploying these services.</p>
+               <ul class="simple">
+               <li>The main distro page is here: <a class="reference external" href="https://launchpad.net/charms">https://launchpad.net/charms</a></li>
+               <li>There are useful tools for downloading, modifying, and contributing here: <a class="reference external" href="https://launchpad.net/charm-tools">https://launchpad.net/charm-tools</a></li>
+               <li>Here is the official tutorial for charm writing: <a class="reference external" href="https://juju.ubuntu.com/docs/write-charm.html">https://juju.ubuntu.com/docs/write-charm.html</a></li>
+               </ul>
+               <h2>Charm Store Process</h2>
+               <p>This process is designed to allow prospective developers to have their charms reviewed and updated in the <a class="reference external" href="http://jujucharms.com">Charm Store</a> in a timely manner that ensures peer reviews and quality.</p>
+               
+               
+               <h2>Submitting a new Charm</h2>
+               <ol class="arabic simple">
+               <li>Install juju and charm-tools.</li>
+               <li>Create a repository, something like <tt class="docutils literal"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">~/charms/precise</span></tt>, precise is the release code name for the <a class="reference external" href="http://releases.ubuntu.com">release of Ubuntu</a> you wish to target your charm at.</li>
+               <li>If you haven't created your charm yet, you can use <tt class="docutils literal"><span class="pre">charm</span> <span class="pre">create</span> <span class="pre">&lt;ubuntu-package-name&gt;</span></tt> which will fill in some basic metadata info for you. You can check to see if it already exists at <a class="reference external" href="http://jujucharms.com/">http://jujucharms.com/</a>. Also make sure to <a class="reference external" href="http://goo.gl/mvtPh">check the list of open charms</a> to see if anybody is already working on a charm for the service you want to work on. Bugs which have had no activity by the assignee for more than 30 days are fair game and should be unassigned.</li>
+               <li>Once your charm is working and tested with any compatible charms, make sure it passes <tt class="docutils literal"><span class="pre">charm</span> <span class="pre">proof</span> <span class="pre">path/to/your/charm</span></tt></li>
+               <li><tt class="docutils literal"><span class="pre">bzr</span> <span class="pre">init</span></tt> in your charm's root directory</li>
+               <li><tt class="docutils literal"><span class="pre">bzr</span> <span class="pre">add</span></tt> to add all files.</li>
+               <li><tt class="docutils literal"><span class="pre">bzr</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">'Initial</span> <span class="pre">charm'</span></tt></li>
+               <li><tt class="docutils literal"><span class="pre">bzr</span> <span class="pre">push</span> <span class="pre">lp:~your-launchpad-username/charms/precise/your-charms-name/trunk</span></tt></li>
+               <li>File a bug against charms at <a class="reference external" href="https://launchpad.net/charms/+filebug">https://launchpad.net/charms/+filebug</a> This is used to track the progress of your charm.</li>
+               <li>Subscribe the <tt class="docutils literal"><span class="pre">charmers</span></tt> team by clicking &quot;Subscribe someone else&quot; on the right side of the launchpad page. This is important as it gets your charm in the review queue!</li>
+               </ol>
+               <p>Your charm should then be looked at in a timely manner.</p>
+               
+               
+               <h2>Submitting a fix to an existing Charm</h2>
+               <ol class="arabic simple">
+               <li>Grab the charm you want to fix, we'll use Nagios as an example: <tt class="docutils literal"><span class="pre">bzr</span> <span class="pre">branch</span> <span class="pre">lp:charms/precise/nagios</span></tt></li>
+               <li>Modify it.</li>
+               <li>Commit your fixes <tt class="docutils literal"><span class="pre">bzr</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">'Your</span> <span class="pre">changelog</span> <span class="pre">entry'</span></tt></li>
+               <li><tt class="docutils literal"><span class="pre">bzr</span> <span class="pre">push</span> <span class="pre">lp:~your-launchpad-username/charms/precise/nagios/fixed-charms-name</span></tt></li>
+               <li>Submit a <a class="reference external" href="https://help.launchpad.net/BranchMergeProposals">merge proposal</a> by going to the charms code page:  <a class="reference external" href="https://code.launchpad.net/~charmers/charms/precise/nagios/trunk">https://code.launchpad.net/~charmers/charms/precise/nagios/trunk</a> and clicking &quot;Propose for merging&quot;</li>
+               <li>In the merge proposal form paste in the <tt class="docutils literal"><span class="pre">fixed-charms-name</span></tt> that you pushed to earlier.</li>
+               <li>For the reviewer field put the <tt class="docutils literal"><span class="pre">charmers</span></tt> team, this will get your code into the review queue!</li>
+               </ol>
+               
+               <h2>Getting Help</h2>
+               <p>Inspired by <a class="reference external" href="http://wiki.bazaar.canonical.com/PatchPilot">Bazaar's Patch Pilot programme</a> there will be patch pilots in <cite>#juju</cite> who can help you get your patch accepted. Check the topic to see who's on duty.  Still need help? Poke us on <a class="reference external" href="https://lists.ubuntu.com/mailman/listinfo/juju">the mailing list</a> ; if you're from an upstream project who wants more detailed help/tutoring, then contact <a class="reference external" href="http://launchpad.net/~jorge">Jorge Castro</a> and we'd be more than happy to get a charm expert to help you out or help you run a Charm School.</p>
+               <p>Some notes:</p>
+               <ul>
+               <li>Please respect that these people might have a few other charms in their queue already.</li>
+               <li>The package you have a question have about might not necessarily be part of the patch pilot's area of expertise. They will still try to help you get your fix in and probably get you in touch with the 'right' people.</li>
+               </ul>
+               
+               <h2>Reviewers</h2>
+               <ol class="arabic">
+               <li><p class="first">Modify the topic in #juju to put yourself down as the reviewer for your shift.</p>
+               </li>
+               <li><p class="first">Check out <a class="reference external" href="http://jujucharms.com/review-queue">the review queue</a> and be responsive on IRC for user questions.</p>
+               </li>
+               <li><p class="first">Review the items in the queue. If the queue is caught up and not on fire, consider the following tasks:</p>
+               <blockquote>
+               <ul class="simple">
+               <li>Answer questions on IRC, the mailing list, and the <a class="reference external" href="http://askubuntu.com/questions/tagged/juju?sort=unanswered&amp;pagesize=50">juju tag</a></li>
+               <li>Work on <a class="reference external" href="http://juju.ubuntu.com/docs|thedocumentation">the documentation</a></li>
+               <li>Work on simple <a class="reference external" href="http://jujucharms.com/tools/proof-errors">proof errors</a></li>
+               <li>Triage bugs in <tt class="docutils literal"><span class="pre">lp:charms</span></tt></li>
+               </ul>
+               </blockquote>
+               </li>
+               <li><p class="first">When your shift is over modify the topic in #juju to put <tt class="docutils literal"><span class="pre">~charmers</span></tt> as the reviewer. (When no one is specifically assigned to review we just default to ~charmers).</p>
+               </li>
+               <li><p class="first">(Optional) Send a mail to the juju list summarizing your shift, new charms you might have promulgated or updated, issues that might have been raised by the review, or anything else you feel you should share with the community.</p>
+               </li>
+               <li><p class="first">Here's the <a class="reference external" href="http://goo.gl/uK9HD">Calendar for reviewing</a> if you want to check what day you have.</p>
+               </li>
+               </ol>
+               
+               <h3>Review Tips and Criteria<a class="headerlink" href="#review-tips-and-criteria" title="Permalink to this headline">Â¶</a></h3>
+               <dl class="docutils">
+               <dt>Expectations:</dt>
+               <dd><ul class="first simple">
+               <li>The goal is to <em>welcome</em> the contributor and help them have a good experience getting fixes into Ubuntu; your first response should be to <em>thank them profusely</em>.  By making collaboration easier, we can hope to see more contributors and thus lighten the development workload on everyone. This is important for a number of reasons:</li>
+               </ul>
+               
+               <ul>
+               <li>We want to be a welcoming community.</li>
+               <li>With every word of thanks you encourage new contributors and give them more confidence, which is very important, as our part of the community is sometimes hard to understand or look into.</li>
+               <li>We want to make our whole development experience social. We not only want contributors, but team mates.</li>
+               <li>Tips:</li>
+               </ul>
+               
+               <ul>
+               <li>Start your review by saying &quot;Thanks&quot;, no matter what the outcome of the review is going to be.</li>
+               <li>If you recognise somebody you've worked with on IRC, thank them.</li>
+               <li>Consider blogging about a particularly nice contribution. This will not only make the contributor feel valued, but also inspire others with a good example of great work.</li>
+               <li>Encourage contributors to apply for ~charmers if you think they're ready.</li>
+               </ul>
+               
+               
+               <ul class="last simple">
+               <li>If the merge proposal or patch requires more work, encourage the contributor to join <cite>#juju</cite> and discuss the solution there.</li>
+               <li>Follow <a class="reference external" href="http://wiki.bazaar.canonical.com/PatchPilot">these instructions</a> as well as you can.</li>
+               </ul>
+               </dd>
+               <dt>Good tips:</dt>
+               <dd><ul class="first last simple">
+               <li>If this is your first time patch piloting, you may feel more comfortable being a co-pilot your first few runs.  Find a pilot in your timezone and reschedule your time to coincide with theirs.</li>
+               <li>''Optional:'' Send a brief mail after your stint, to say what you did and how it worked out. If you have feedback on the review system or the process, speak up.</li>
+               <li>You're not obliged to deal with all the open patches. We appreciate what you do do.</li>
+               <li>You can prioritize whichever you think best achieves the goal of helping people enjoy getting things done in Juju. That might be the newest ones, neglected patches, easy patches, or those from new contributors.  The <a class="reference external" href="http://jujucharms.com/review-queue">Review Queue</a> sorts by age.</li>
+               <li>If you are unfamiliar with the package, make sure you review everything you can, it's not necessarily your job to merge/promulgate it. If, after you did your review, you can get the contributor in touch with somebody who knows the codebase better, you already helped out a lot.</li>
+               </ul>
+               </dd>
+               </dl>
+               <p>Sponsorship is organized into</p>
+               
+               <ul>
+               <li><a class="reference external" href="https://launchpad.net/~charmers">https://launchpad.net/~charmers</a>:</li>
+               </ul>
+               
+               <p>If something needs review, subscribe ~charmers.</p>
+               <p>You can see the currently pending requests at:</p>
+               
+               <ul class="simple">
+               <li><a class="reference external" href="https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers">https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers</a></li>
+               <li><a class="reference external" href="https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&amp;field.component=3&amp;field.component=4">https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&amp;field.component=3&amp;field.component=4</a></li>
+               <li><a class="reference external" href="http://jujucharms.com/review-queue">http://jujucharms.com/review-queue</a></li>
+               </ul>
+               
+               
+               <h2>Charm Inclusion Policy for Reviewers</h2>
+               <p>Please see the official <a class="reference external" href="policy.html"><em>Charm Store Policy</em></a> document.</p>
+               
+               <h2>Join Us!</h2>
+               <p>We also need help reviewing and testing charms. The Charmers team is granted write access to the Charm Collection and charm-tools. If you'd like to join that group, here are some tips:</p>
+               
+               <ul>
+               <li>Join <a class="reference external" href="https://launchpad.net/~charm-contributors">charm-contributors</a> ! You will immediately be able to help out with bug prioritization.</li>
+               <li>Join the discussion on IRC (Freenode) in #juju and on <a class="reference external" href="https://lists.ubuntu.com/mailman/listinfo/juju">https://lists.ubuntu.com/mailman/listinfo/juju</a></li>
+               <li>Test charms and report your successes or file bugs.</li>
+               <li>Write charms - pick a web app or a backend technology and write a charm.</li>
+               <li>Review new charms <a class="reference external" href="https://bugs.launchpad.net/charms/+bugs?field.tag=new-charm">https://bugs.launchpad.net/charms/+bugs?field.tag=new-charm</a></li>
+               </ul>
+               
+               <p>Upon getting involved with these activities, we'll probably ask you if you'd like to join charmers. If not, go ahead and apply for membership to the team, and <em>send an email to the list letting us know about your reasons for wanting to be a member of charmers</em>.</p>
+               
+               
+                     </section>
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer>
+      <div>
+        <nav role="navigation" class="clearfix">
+          <ul>
+            <li><a href="https://juju.ubuntu.com/get-started">Get started</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/resources">Resources</a></li>
+            <li><a href="https://juju.ubuntu.com/docs">Documentation</a></li>
+            <li><a href="https://juju.ubuntu.com/resources/videos">Videos</a></li>
+            <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI Demo</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/community">Community</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/juju-blog/">Blog</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Charm Meetings</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+            <li class="page_item"><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+            <li class="page_item"><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+            <li class="page_item"><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&amp;amp;pagesize=50">FAQ</a></li>
+          </ul>
+          <ul class="last">
+            <li><a href="https://launchpad.net/juju">Code</a></li>
+            <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+            <li><a href="https://launchpad.net/charms">Charms</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.14/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

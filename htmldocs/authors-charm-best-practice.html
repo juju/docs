@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Juju Documentation - Best Practice for Charm Authors</title>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:400,400italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" rel="stylesheet" type="text/css"/>
+    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/resources.css" rel="stylesheet" type="text/css"/>
+    <link href="css/main.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://app.stacktack.com/jquery.stacktack.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+            $(document).stacktack();
+      });
+    </script><!--[if lt IE 9]>
+    <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body class="resources">
+    <header>
+      <div class="header-login">
+        <ul>
+          <li>&nbsp;</li>
+        </ul>
+      </div>
+      <div class="header-navigation">
+        <div>
+          <nav role="navigation">
+            <ul>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Home</a></li>
+              <li class="page_item current_page_item"><a href="https://juju.ubuntu.com/">Resources</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Community</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Charm Store</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Events</a></li>
+              <li class="page_item"><a href="https://juju.ubuntu.com/">Survey</a></li>
+              <li>
+                <form id="form-search" method="get" action="/">
+                  <fieldset>
+                    <input id="input-search" type="text" name="s" value="Search">
+                  </fieldset>
+                </form>
+              </li>
+            </ul>
+          </nav><a href="https://juju.ubuntu.com/" class="logo-ubuntu"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png"></a>
+        </div>
+      </div>
+      <div class="header-content">
+        <div class="clearfix"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:894px; display: block;" class="arrow-nav">
+          <div class="header-navigation-secondary"></div>
+          <div class="header-image"></div>
+          <h1>Resources</h1>
+          <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+        </div>
+      </div>
+    </header>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div class="grid-3 doc-navigation">
+          <nav role="navigation">
+            <h1>User Guide</h1>
+            <ul>
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="getting-started.html#intro">Introduction</a></li>
+              <li class=" sub"><a href="getting-started.html#install">Installation</a></li>
+              <li class=" sub"><a href="config-aws.html">AWS Configuration</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Cloud Configuration</a></li>
+              <li class=" sub"><a href="">OpenStack Configuration</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS Configuration</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms.html#intro">What are Charms?</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul></ul>
+            <li class=""><a href="authors-charm-writing.html">Writing a charm</a></li>
+            <li class=" sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+            <li class=" sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+            <li class=" sub"><a href="authors-testing.html">Charm Testing</a></li>
+            <li class=" sub"><a href="authors-hooks.html">Hook debugging</a></li>
+            <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+            <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+            <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+            <li class=" sub"><a href="authors-charm-quality.html">Charm Quality Rating</a></li>
+            <h1>Reference</h1>
+            <ul>
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="grid-9 doc-content">
+          <article>
+            <section id ="best_practice">
+            <h1>Best Practice for Charm Authors</h1>
+            
+            <p>This document is to capture charm best practices from the community. We expect devops to be strongly opinionated, therefore some strong opinions don't make sense as policy, but do make sense to share with others to disseminate expertise.</p> 
+            
+            <p>If you'd like to share some best practice and have it added to this page we recommend you <a href="https://lists.ubuntu.com/mailman/listinfo/juju">post to the mailing list</a> with some ideas on what you've like to see added. Ideally we'd like to document all sorts of great ideas on how people are using Juju.</p>
+            
+            <h2>Juju Best Practices and Tips from Canonical's Infrastructure Team</h2>
+            
+            <aside>Since Canonical IS uses Juju in production they have certain requirements from charms in order for them to run on a production OpenStack deployment. Though these are requirements for use inside of Canonical, charms are not required to meet these criteria to be in the charm store, they are included here to share with the devops community.</aside>
+            
+            <p>Tips for production usage:</p>
+            <ul>
+              <li>Provide an overview of the service in the README and metadata. </li>
+              <li>Use packaged software (i.e. debian packages) where possible, and "backport" any packages needed outside of the archives from whatever PPA you have them in to the appropriate precise-cat suite
+              <li>Not duplicate any service components that there are pre-existing charms for</li>
+              <li>Follow the coding guidelines for charms (see below).</li>
+              <li>Assemble code for your application outside of the Charm.</li>
+              <li>Ship a script in <code>/srv/deploymgr/${service-name}-${instance-type}</code> that has commands for starting/stopping/checking/building code for the service <em>if you're not using upstart or an initscript doesn't provide this</em>.</li>
+              <li>Create a <code>/srv/${external-service-name}/${instance-type}/${service-name}</code> directory for the code itself, and <code>/srv/${external-service-name}/{${instance-type}-logs,scripts,etc,var}</code> as needed.</li>
+              <li>Ensure the owner of the code isn't the same user than runs the code</li>
+              <li>Create monitoring checks for your application.</li>
+              <li>Which checks are prompt-critical (in other words, constitutes a user-affecting outage that would warrant waking an "oncall" sysadmin over a weekend)?</li>
+              <li>Confirm the service doesn't require any developer shell access to the servers that it runs on.</li>
+              <li>Confirm what data/logs from the application needs to be made visible to developers, and in what format?</li>
+            </ul>
+            
+            <h2>Charm Coding Guidelines</h2>
+            
+            <p>If written in Bash:</p>
+            <ul>
+              <li> <code>{variable}-value</code> rather than <code>$variable-value</code>?</li>
+              <li> <code>$(COMMAND)</code> vs. <code>COMMAND</code>?</li>
+              <li>Use <code>install</code> rather than <code>mkdir; chown</code>
+            </ul>
+            <p>If written in Python:</p>
+            <ul>
+              <li>Has <code>pep8</code> been run against the relevant scripts?</li>
+              <li>Separation of code from content (i.e. all external files/templates are in the "files" or "templates" directory)?</li>
+              </li>As an example, this populates a template from any variables in the current environment: <code>cheetah fill --env -p templates/celerymon_conf.tmpl > /etc/init/celerymon.conf</code></li>
+            </ul>
+            <p>In this example, the template looks like this:
+            </pre>
+            start on started celeryd
+            stop on stopping celeryd
+            
+            env CODEDIR=$CODE_LOCATION
+            env
+            PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
+            
+            exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
+            PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
+            /srv/${BASEDIR}/var/celeryev.pid"
+            respawn
+            </pre>
+            <ul>
+              <li>Do all config options have appropriate descriptions?</li>
+              <li>Are all hooks idempotent?</li>
+              <li>No hard coded values for things that may need changing - exposed via config.yaml options</li>
+              <li>No hard coding of full paths for system tools/binaries - we should ensure $PATH is set appropriately.</li>
+              <li>Has <code>charm proof</code> been run against the charm?</li>
+              <li>Has testing of adding units and removing units been done?</li>
+              <li>Has testing of changing all config options and verifying they get changed in the application (and applied, i.e. service reloaded if appropriate) been done?</li>
+              <li>Any cron entries should be in <code>/etc/cron.d</code> rather than stored in user crontabs.</li>
+              <li>This allows for easier visibility of active cronjobs across the whole system, as well as making editing things much easier.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer>
+      <div>
+        <nav role="navigation" class="clearfix">
+          <ul>
+            <li><a href="https://juju.ubuntu.com/get-started">Get started</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/resources">Resources</a></li>
+            <li><a href="https://juju.ubuntu.com/docs">Documentation</a></li>
+            <li><a href="https://juju.ubuntu.com/resources/videos">Videos</a></li>
+            <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI Demo</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://juju.ubuntu.com/community">Community</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/juju-blog/">Blog</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Charm Meetings</a></li>
+            <li class="page_item"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+            <li class="page_item"><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+            <li class="page_item"><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+            <li class="page_item"><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&amp;amp;pagesize=50">FAQ</a></li>
+          </ul>
+          <ul class="last">
+            <li><a href="https://launchpad.net/juju">Code</a></li>
+            <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+            <li><a href="https://launchpad.net/charms">Charms</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.14/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>
