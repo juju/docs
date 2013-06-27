@@ -142,7 +142,23 @@
               
               <p>It is important to use the class="note" property for the paragraph to pick up the correct style.</p>
               </section>
+
+              <h2>Submitting your work</h2>
+              <p>We love it when the community contributes to documentation, here's how to get the code, branch it, modify it, and submit it back. First off get the code:</p>
+              <pre>bzr branch lp:juju-core/docs</pre>
+              <p>Then go into the docs directory:</p>
+              <pre>cd docs/htmldocs</pre>
+              <p>In here you'll find the HTML files that you can edit in your text editor. After we make our changes we need to commit them and push them to your place on launchpad :</p>
               
+              <pre>
+              bzr ci -m'Whatever your changelog will be'
+              bzr push lp:~jorge/juju-core/foo</pre>
+
+              <p>Replace "~jorge" with your launchpad username and "foo" with a name that describes a fix, so something like <code>bzr push lp:~jorge/juju-core/fix-typos-in-introduction</code> or something. Now there's one step left, and that's to propose it for inclusion:</p>  
+
+              <pre>bzr lp-propose lp:juju-core/docs</pre>
+
+              <p>And that's it! Someone from the Juju team will review your work and merge it in! Please don't forget to review the page before submission.</p>
               
           </article>
         </div>
