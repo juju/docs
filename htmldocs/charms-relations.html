@@ -106,8 +106,74 @@
               <p>Few services you might want to run can do so completely independently - most of them rely on some other software components to be present and running too (e.g. a database). There would be little point in Juju making it supremely easy to deploy services if it didn't also make it easy to connect them up to services they need to get running! The Juju magic in this case involves the <strong>hooks</strong> built in to each charm which allow them to communicate. Unless you are writing charms, there is no need to go into detail on hooks, but these are the parts that make creating relationships between services so easy.</p>
                <p>The charm for WordPress, for example, knows that it requires a database. It therefore has some code to deal with creating that connection and configuring the WordPress instance appropriately when it is told which database to connect to. Similarly, the MySQL charm knows that it is a database, and has code to create different types of database depending on what is required. The act of joining these services together causes this code to run, the WordPress charm saying what tables, users and data it requires, and the MySQL charm fulfilling that and acknowledging the task. As you will see though, adding a relationship is much easier than even this brief explanation.</p>
               <h1>Creating Relations</h1>
-              
-              <h1>Removing Relations</h1>
+              <p>Creating relationships is usually very straightforward. Simply deploy the two services:</p>
+              <pre><code>juju deploy mediawiki
+              juju deploy mysql
+              </code></pre>
+              <p>Then you create the relationship by specifying these two services with the <strong>add-relation</strong> command:</p>
+              <code><pre>juju add-relation mysql wordpress</code></pre>
+              <p>These services will then communicate and establish an appropriate connection, in this case WordPress using the available MySQL service for its database requirement, and MySQL generating and providing the necessary tables required for WordPress.</p>
+              <p>In some cases, there may be ambiguity about how the services should connect. For example, in the case of specifying a database for the Mediawiki charm.</p>
+              <pre><code>juju add-relation mediawiki mysql -e hpc
+              error: ambiguous relation: "mediawiki mysql" could refer to "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
+              </code></pre>
+              <p> the soloution in these cases is to specify the nature of the relation using the hook identifier. In this case, we want MySQL to provide the backend database for mediawiki, so this is what we need to enter:</p>
+              <pre><code>juju add-relation mediawiki:db mysql</code></pre>
+              <p>we can check the output from 'juju status' to make sure the correct relationship has been established:</p>
+              <pre><code>juju status -e hpc
+machines:
+&nbsp;&nbsp;"0":
+&nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
+&nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
+&nbsp;&nbsp;&nbsp;&nbsp;dns-name: 15.185.88.51
+&nbsp;&nbsp;&nbsp;&nbsp;instance-id: "1736045"
+&nbsp;&nbsp;&nbsp;&nbsp;series: precise
+&nbsp;&nbsp;"1":
+&nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
+&nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
+&nbsp;&nbsp;&nbsp;&nbsp;dns-name: 15.185.89.204
+&nbsp;&nbsp;&nbsp;&nbsp;instance-id: "1736065"
+&nbsp;&nbsp;&nbsp;&nbsp;series: precise
+&nbsp;&nbsp;"3":
+&nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
+&nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
+&nbsp;&nbsp;&nbsp;&nbsp;dns-name: 15.185.89.236
+&nbsp;&nbsp;&nbsp;&nbsp;instance-id: "1736119"
+&nbsp;&nbsp;&nbsp;&nbsp;series: precise
+services:
+&nbsp;&nbsp;mediawiki:
+&nbsp;&nbsp;&nbsp;&nbsp;charm: cs:precise/mediawiki-8
+&nbsp;&nbsp;&nbsp;&nbsp;exposed: false
+&nbsp;&nbsp;&nbsp;&nbsp;relations:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;db:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- mysql
+&nbsp;&nbsp;&nbsp;&nbsp;units:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mediawiki/0:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-state: pending
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: "3"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public-address: 15.185.89.236
+&nbsp;&nbsp;mysql:
+&nbsp;&nbsp;&nbsp;&nbsp;charm: cs:precise/mysql-24
+&nbsp;&nbsp;&nbsp;&nbsp;exposed: false
+&nbsp;&nbsp;&nbsp;&nbsp;relations:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cluster:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- mysql
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;db:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- mediawiki
+&nbsp;&nbsp;&nbsp;&nbsp;units:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mysql/0:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: "1"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public-address: 15.185.89.204
+</code></pre>
+<h1>Removing Relations</h1>
+<p>There are times when a relationship just isn't working and it is time to move on. Fortunately, it is a simple single-line command to break off these relationships:</p>
+<pre><code>juju destroy-relation mediawiki mysql</code></pre>
+
+
+
             </section>
           </article>
         </div>
