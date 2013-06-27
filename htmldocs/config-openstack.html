@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Juju Documentation - Charms!</title>
+    <title>Juju Documentation - Configuring Juju to work with OpenStack</title>
     <link href="//fonts.googleapis.com/css?family=Ubuntu:400,400italic" rel="stylesheet" type="text/css"/>
     <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css"/>
     <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" rel="stylesheet" type="text/css"/>
@@ -70,7 +70,7 @@
               <li class=" sub"><a href="config-openstack.html">OpenStack Configuration</a></li>
               <li class=" sub"><a href="config-maas.html">MAAS Configuration</a></li>
               <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
-              <li class="selected"><a href="charms.html">Using Charms</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
               <li class=" sub"><a href="charms.html#intro">What are Charms?</a></li>
               <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
               <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
@@ -82,7 +82,7 @@
             </ul>
             <h1>Charm Authors</h1>
             <ul></ul>
-            <li class="selected"><a href="authors-charm-writing.html">Writing a charm</a></li>
+            <li class=""><a href="authors-charm-writing.html">Writing a charm</a></li>
             <li class=" sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
             <li class=" sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
             <li class=" sub"><a href="authors-testing.html">Charm Testing</a></li>
@@ -101,31 +101,31 @@
         </div>
         <div class="grid-9 doc-content">
           <article>
-            <section id="charms">
-              <h1>Introducing Charms</h1>
-              <aside>
-                <iframe class="youtube-player" type="text/html" width="400" height="300" src="http://www.youtube.com/embed/0AT6qKyam9I" frameborder="0">
-                </iframe>
-              </aside>
-              
-              <p>The magic behind Juju is a collection of software components called charms. These are the encapsulated knowledge of how to properly deploy and configure the services you will want to deploy on your cloud. The charms available online in the <a href="">Charm Store</a> represent the distilled DevOps knowledge of experts, and they are freely available for you to use (or you can write your own).</p>
-              <p>Charms make it quick and easy to reliably and repeatedly deploy services in your cloud. If you haven't already tried the <a href=""> Juju walkthrough,</a> you should give it a go and see how ridiculously easy it is to deploy services in minutes. </p>
-              <p>In many cases, you will simply deploy, configure and expose services in your cloud. The following sections explore in more detail the everyday Juju and Charm operations you are likely to perform </p>
-              <ul>
-              
-                <li><a href="charms-deploying.html">Deploying services</a></li>
-                
-                
-                <li><a href="charms-config.html">Configuring Services</a></li>
-                <li><a href="charms-relations.html">Managing Relationships</a></li>
-                <li><a href="charms-constraints.html">Using Constraints</a></li>
-                <li><a href="charms-scaling.html">Scaling</a></li>
-                <li><a href="charms-expose.html">Exposing services</a></li>
-                
-              </ul>
+            <section id="config_hpcloud">
+            <h1>Configuring for OpenStack</h1>
+            <p>You should start by generating a generic configuration file for Juju, using the command:
+            <pre><code>juju generate-config -w</code></pre>
+            <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).     
+            <p>The essential configuration sections for OpenStack look like this:</p>
+            <pre><code>
+            openstack:
+              type: openstack_s3
+              control-bucket: <user specific>
+              admin-secret: <user specific>
+              auth-url: https://yourkeystoneurl:443/v2.0/
+              default-series: precise
+              juju-origin: ppa
+              ssl-hostname-verification: True
+              default-image-id: bb636e4f-79d7-4d6b-b13b-c7d53419fd5a
+              default-instance-type: m1.small
+            </code></pre>
+
+            <p>Remember to substitute in the parts of the snippet that are important to you. If you are deploying on OpenStack the following documentation might also be useful:</p>
+
+            <p><a href="https://help.ubuntu.com/community/UbuntuCloudInfrastructure">Ubuntu Cloud Infrastructure</a></p>
+
+            
             </section>
-            
-            
           </article>
         </div>
       </div>
