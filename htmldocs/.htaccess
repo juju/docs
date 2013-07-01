@@ -25,4 +25,3 @@ RewriteRule ^hook-debugging.html$ authors-hooks.html [R=301,L]
 RewriteRule ^operating-systems.html$ getting-started.html#intro [R=301,NE,L]
 RewriteRule ^policy.html$ authors-charm-policy.html [R=301,L]
 RewriteRule ^(relation-reference\.html|relation-info\.html|relation-hook-commands\.html)$ charms-relations.html [R=301,L]
-

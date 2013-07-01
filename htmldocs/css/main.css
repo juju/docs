@@ -226,3 +226,58 @@ div.note.distribute {
 .doc-content h1:not(:first) {
   margin-top: 40px;
 }
+
+/**
+ * Section StackTack
+ */
+
+
+.stacktack > .stacktack-container{
+  box-shadow: 0 0 0;
+  border-radius: 0px;
+  border: 0;
+  font-size: 13px;
+  padding: 0;
+  margin: 0;
+  background: none;
+}
+
+.stacktack > .stacktack-container a, .stacktack > .stacktack-container a:hover, .stacktack > .stacktack-container a:link {
+  color: #DD4814;
+}
+
+.stacktack > .stacktack-container a:hover{
+  text-decoration: underline;
+}
+
+.stacktack > .stacktack-container code, .stacktack > .stacktack-container pre{
+  padding: 10px;
+  font-family: 'Ubuntu Mono', 'Consolas', 'Monaco', 'DejaVu Sans Mono', Courier, monospace;
+  background-color: #FDF6F2;
+  display: block;
+  margin-bottom: 10px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.stacktack-logo {
+  background: none !important;
+}
+
+.stacktack > .stacktack-container .stacktack-content {
+  padding-top: 0px;
+}
+
+.stacktack > .stacktack-container .stacktack-question {
+  border-top: 0px;
+}
+
+.stacktack > .stacktack-container code {
+  padding: 0px;
+  display: inline-block;
+}
+
+.stacktack > .stacktack-container img {
+  max-width: 940px;
+}
