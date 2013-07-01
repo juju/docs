@@ -1,0 +1,28 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteBase /docs/
+
+RewriteRule ^about.html$ getting-started.html#intro [R=301,NE,L]
+RewriteRule ^getting-started.html/introduction$ getting-started.html#intro [R=301,NE,L]
+RewriteRule ^getting-started.html/installation$ getting-started.html#install [R=301,NE,L]
+RewriteRule ^(getting-started\.html/configuring-your-environment-using-ec2|provider-configuration-ec2\.html)$ config-aws.html [R=301,L]
+RewriteRule ^(getting-started\.html/configuring-a-local-environment|provider-configuration-local\.html)$ http://askubuntu.com/a/65360/41 [R=301,L]
+RewriteRule ^provider-configuration-openstack.html$ config-openstack.html [R=301,L]
+RewriteRule ^user-tutorial.html$ getting-started.html#test [R=301,NE,L]
+RewriteRule ^write-charm.html$ authors-charm-writing.html [R=301,L]
+RewriteRule ^charm.html$ charms.html [R=301,L]
+RewriteRule ^service-config.html$ charms-config.html [R=301,L]
+RewriteRule ^charm-store.html$ authors-charm-store.html [R=301,L]
+RewriteRule ^charm-quality.html$ authors-charm-quality.html [R=301,L]
+RewriteRule ^charm-tests.html$ authors-testing.html [R=301,L]
+RewriteRule ^subordinate-services.html$ authors-subordinate-services.html [R=301,L]
+RewriteRule ^implicit-relations.html$ authors-implicit-relations.html [R=301,L]
+RewriteRule ^constraints.html$ charms-constraints.html [R=301,L]
+RewriteRule ^expose-services.html$ charms-exposing.html [R=301,L]
+RewriteRule ^subordinate-services.html$ authors-subordinate-services.html [R=301,L]
+RewriteRule ^hook-debugging.html$ authors-hooks.html [R=301,L]
+RewriteRule ^operating-systems.html$ getting-started.html#intro [R=301,NE,L]
+RewriteRule ^policy.html$ authors-charm-policy.html [R=301,L]
+RewriteRule ^(relation-reference\.html|relation-info\.html|relation-hook-commands\.html)$ charms-relations.html [R=301,L]
+
