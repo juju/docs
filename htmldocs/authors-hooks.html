@@ -100,7 +100,9 @@
             <section id ="hook-debugging">
             <h1>Hook debugging</h1>
             
-            <p>An important facility in any distributed system is the ability to introspect the running system, and to debug it. Within juju the actions performed by the system are executing charm defined hooks. The <tt class="docutils literal"><span class="pre">debug-log</span></tt> cli provides for inspecting the total state of the system via capturing the logs of all agents and output of all hooks run by the system.</p>
+
+            <p class="note"><strong>Note: </strong> Earlier versions of Juju prior to th 1.x.x series had a facility for debugging hooks. This is planned to be reimplemented shortly in the current development series, but is not currently operational, so the examples provided here are for information only.</p> 
+            <p>An important facility in any distributed system is the ability to introspect the running system, and to debug it. Within juju the actions performed by the system are executing charm defined hooks. The <span class="pre">debug-log</span> cli provides for inspecting the total state of the system via capturing the logs of all agents and output of all hooks run by the system.</p>
             <p>To facilitate better debugging of hooks, the <tt class="docutils literal"><span class="pre">debug-hooks</span></tt> cli provides for interactive shell usage as a substitute for running a hook. This allows a charm author or system adminstrator the ability to interact with the system in a live environment and either develop or debug a hook.</p>
             
             <h2>How it works</h2>
