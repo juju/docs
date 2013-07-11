@@ -209,7 +209,13 @@ div.note.distribute {
   -webkit-box-shadow: 0 0 6px #000000;
   box-shadow: 0 0 6px #000000; 
 }
-
+.doc-content img.noshadow { 
+  padding:0px;
+  margin: 10 10 10px;
+  -moz-box-shadow: 0 0 0px #000000;
+  -webkit-box-shadow: 0 0 0px #000000;
+  box-shadow: 0 0 0px #000000; 
+}
 .doc-content ul, .doc-content ol {
   margin-left: 20px;
   margin-bottom: 12px;
