@@ -125,17 +125,11 @@
                 
                 <h2>metadata.yaml</h2>
                 
-                <p>This file is an important component of a charm, check out the <a href="https://bazaar.launchpad.net/~charmers/charms/precise/mysql/trunk/view/head:/metadata.yaml">MySQL metadata.yaml</a> as an example.</p>
+                <p>This file is an important component of a charm, see <a href="authors-charm-anatomy.html">Anatomy of a Charm</a> for the structure.</p>
+                <p>Check out the <a href="https://bazaar.launchpad.net/~charmers/charms/precise/mysql/trunk/view/head:/metadata.yaml">MySQL metadata.yaml</a> as an example.</p>
+
+
                 
-                <ul>
-                <li><code>name</code> -	Name must succinctly communicate what sort of service the charm deploys.</li>
-                <li><code>description</code> - description should give a long form description of the service and the way that the charm configures it.</li>
-                <li><code>maintainers</code> - all charms must have a maintainer email address. This can be an email list, as long as it is an unmoderated list (subscription required is ok).</li>
-                <li><code>categories</code> - all charms should contain a category so it looks correctly in the web UI, any one of the following is acceptable: "databases", "file-servers", "applications", "cache-proxy", "app-servers" and "misc".</li>
-                <li><code>requires</code> - despite the name, any interface that the charm can connect to, even one that is not required, can be enumerated here. All requires relationships must function with the same behavior as any existing de-facto implementations of said interface.</li>
-                <li><code>provides</code> - All provides relationships listed must function with the same behavior as any existing de-facto implementations of said interface.</li>
-                <li><code>revision</code> - All changes must increment revision. Groups of changes made all at once can increment it only once, but there are no exceptions as to what types of changes can cause the revision to go up.</li>
-                </ul>
                 <h2>config.yaml</h2>
                 <p>Any de-facto config options must be kept at least until the next major charm series release. Removed config options should be deprecated first by noting that they are deprecated, and why, in their description. Instructions for converting values must be added to README as well.</p>
                 <h2>README.md</h2>
