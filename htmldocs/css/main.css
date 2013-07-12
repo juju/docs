@@ -51,32 +51,32 @@ aside {
 }
 
 pre, table, form {
-    margin: 5 5 15px;
+  margin: 5 5 15px;
 }
 
 pre strong, pre b, a strong, a b, a code {
-    color: inherit;
+  color: inherit;
 }
 
 pre, code {
-    font: 13px/1.5 monospace;
-    display: inline-block;
-    background-color: #fbf4f0;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    padding: 5px;
-    white-space: pre-line;
+  font: 13px/1.5 monospace;
+  display: inline-block;
+  background-color: #fbf4f0;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  padding: 5px;
+  white-space: pre-line;
 }
 
 strong.code {
-    color: #1111ff;
-    }
+  color: #1111ff;
+}
 
 code {
-    font-weight:bold;
-    font: 13px/14px monospace;
+  font-weight:bold;
+  font: 13px/14px monospace;
 }
 
 pre code {
@@ -179,9 +179,9 @@ p.warning, div.warning {
 }
 
 span.pre  {
-    color: #044;
-    background-color:#dddddb;
-    font: 13px/1.5 monospace;
+  color: #044;
+  background-color:#dddddb;
+  font: 13px/1.5 monospace;
 }
 div.note.design {
   border-left: 4px solid #33B5E5;
@@ -204,10 +204,9 @@ div.note.distribute {
 }
 
 .doc-content div.block{
-    clear: both;
-    display:block;
-    padding-top:10px;
-    
+  clear: both;
+  display:block;
+  padding-top:10px;
 }
 
 .doc-content img { 
@@ -257,26 +256,26 @@ div.note.distribute {
  */
 
 .doc-content div.step {
-    border-top: 1px dotted rgb(174, 166, 158);
-    padding-bottom: 30px;
-    padding-top: 18px;
-    margin-left: 80px;
-    margin-right: 5px;
+  border-top: 1px dotted rgb(174, 166, 158);
+  padding-bottom: 30px;
+  padding-top: 18px;
+  margin-left: 80px;
+  margin-right: 5px;
 }
 
 .number {
-    padding: 6px;
-    border: 3px solid #dd4814;
-    	-moz- border-radius: 40px;
-    	-webkit- border-radius: 40px;
-    border-radius: 40px;
-	box-shadow: 0 2px 1px #e0e0e0;
-    color: #dd4814;
-    display: block;
-    font-size: 36px;
-    text-align: center;
-    width: 50px;
-    float: left;
+  padding: 6px;
+  border: 3px solid #dd4814;
+  -moz- border-radius: 40px;
+  -webkit- border-radius: 40px;
+  border-radius: 40px;
+  box-shadow: 0 2px 1px #e0e0e0;
+  color: #dd4814;
+  display: block;
+  font-size: 36px;
+  text-align: center;
+  width: 50px;
+  float: left;
 }
 
 
@@ -334,4 +333,82 @@ div.note.distribute {
 
 .stacktack > .stacktack-container img {
   max-width: 940px;
+}
+
+.doc-content .code-example {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.doc-content .code-example nav {
+  margin-left: -1px;
+}
+
+.doc-content .code-example nav::after {
+  content: "";
+  display: table;
+  clear: left;
+}
+
+.doc-content .code-example nav a {
+  float: left;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 4px 4px 0 0;
+  margin-right: 4px;
+  padding: 2px 8px 4px;
+  color: white;
+  text-shadow: 0 0 2px rgba(51,51,51,0.7),0 1px 0 rgba(17,17,17,0.6);
+  background: transparent;
+  background: -webkit-linear-gradient(#fbc299, #f8a66f);
+  background: -moz-linear-gradient(#fbc299, #f8a66f);
+  background: -ms-linear-gradient(#fbc299, #f8a66f);
+  background: -o-linear-gradient(#fbc299, #f8a66f);
+  background: linear-gradient(#fbc299, #f8a66f);
+  border: 1px solid rgba(168,177,191,0.3);
+  border-bottom: 0 !important;
+  box-shadow: inset 0 1px 0 #fbc299,inset 0 -1px rgba(156,165,181,0.35);
+  text-decoration: none;
+}
+
+.doc-content .code-example nav a.selected {
+  background: #fff;
+  color: #000;
+  text-shadow: none;
+  box-shadow: none;
+  border-color: rgba(156,165,181,0.35);
+}
+
+.doc-content .code-example nav+.terminal-wrap::before {
+  top: 36px;
+}
+
+.doc-content .code-example .terminal-wrap {
+  #overflow-x: scroll;
+  padding: 15px 10px;
+  background: #fff;
+  background: #fff -webkit-linear-gradient(rgba(225,228,233,0), rgba(225,228,233,0.4));
+  background: #fff -moz-linear-gradient(rgba(225,228,233,0), rgba(225,228,233,0.4));
+  background: #fff -ms-linear-gradient(rgba(225,228,233,0), rgba(225,228,233,0.4));
+  background: #fff -o-linear-gradient(rgba(225,228,233,0), rgba(225,228,233,0.4));
+  background: #fff linear-gradient(rgba(225,228,233,0), rgba(225,228,233,0.4));
+  background-size: 100% 8px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  box-shadow: inset 0 -1px 0 #fff,0 0 1px 1px rgba(156,165,181,0.3),0 1px 1px rgba(156,165,181,0.5);
+  border-radius: 4px;
+}
+
+.doc-content .code-example [data-section] {
+  display: none;
+}
+
+.doc-content .code-example nav+.terminal-wrap {
+  border-top-left-radius: 0;
+}
+
+.doc-content #details article p, .doc-content #details article ul, .doc-content #details article ol {
+  margin-bottom: 20px;
+  font-size: 13px;
+  line-height: 19px;
 }

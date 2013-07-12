@@ -12,3 +12,27 @@ $(document).ready(function() {
     window.location.replace(window.location.pathname + '/' + window.location.hash)
   }
 });
+
+$(document).ready(function() {
+  $('.doc-content section.code-example').each(function() {
+    var parent = this;
+    $(parent).find('nav.control a').each(function() {
+      if($(this).hasClass('selected')) {
+        var section = $(this).data('action');
+        $(parent).find('div[data-section='+section+']').show();
+      }
+
+      $(this).click(function(e) {
+        e.preventDefault();
+        var section = $(this).data('action');
+        $(parent).find('div[data-section]').hide();
+        $(this).siblings('a').removeClass('selected');
+        $(this).addClass('selected');
+        $(parent).find('div[data-section='+section+']').show();
+        return false;
+      });
+    });
+  });
+});
+
+

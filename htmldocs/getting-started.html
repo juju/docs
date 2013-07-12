@@ -99,43 +99,44 @@
         <div class="grid-9 doc-content">
           <article>
             <section id="intro">
-            <h1>Introduction</h1>
-            
-            <p>This tutorial will show you how to get started with Juju, including installing, configuring and bootstrapping a new Juju environment.
-            Before you start you will need:</p>
-            <ul>
-            <li> An Ubuntu server or desktop to install the Juju software on.</li>
-            <li> An environment which can provide a new server with an Ubuntu cloud operating system image on-demand. This includes services such as Amazon EC2 , HP Cloud or RackSpace. For testing purposes, you can also configure a local environment.</li>
-            <li> It's also required that the environment provides a permanent storage facility such as Amazon S3. For the moment, though, the only environment supported is EC2, OpenStack, with LXC container support coming soon.</li>
-            <li> An SSH key-pair. If you have not already set one up, you can generate an appropriate keypair with:</li>
-            <pre>ssh-keygen -t rsa -b 2048</pre>
-            </ul>
+              <h1>Introduction</h1>
+                <p>This tutorial will show you how to get started with Juju, including installing, configuring and bootstrapping a new Juju environment.
+                Before you start you will need:</p>
+                <ul>
+                <li> An Ubuntu server or desktop to install the Juju software on.</li>
+                <li> An environment which can provide a new server with an Ubuntu cloud operating system image on-demand. This includes services such as Amazon EC2 , HP Cloud or RackSpace. For testing purposes, you can also configure a local environment.</li>
+                <li> It's also required that the environment provides a permanent storage facility such as Amazon S3. For the moment, though, the only environment supported is EC2, OpenStack, with LXC container support coming soon.</li>
+                <li> An SSH key-pair. If you have not already set one up, you can generate an appropriate keypair with:</li>
+                <pre>ssh-keygen -t rsa -b 2048</pre>
+              </ul>
             </section>
-            
             <section id="install">
-            <h1 >Installation</h1>
-            
-            <p>
-            To install Juju, you simply need to grab the latest juju-core package:</p>
-            
-            <pre>sudo apt-get update
-            sudo apt-get install juju-core</pre>
-            
-            <p>Juju is provided automatically as a backport in Ubuntu Server. Backports are usually enabled by default, but if you've turned them off <a href="http://askubuntu.com/a/285474/235">here's how you can enable them</a>. If apt complains that it cannot find the packages you might need to use the PPA:</p>
-            
-            <pre><code>sudo add-apt-repository ppa:juju/devel
-            sudo apt-get update && sudo apt-get install juju-core
-            </code></pre>
-            <p>Regular updates will be made to the backported packages, unless you want to follow along with Juju development we recommend users to not use the PPA.</p>
-            
-            <p>You can switch between the default (0.7) version and 1.10 versions by using the following:</p>
-            
-            <pre><code>sudo update-alternatives --set juju /usr/lib/juju-0.7/bin/juju</code></pre>
-            
-            <p>or to the new 1.10.0 release using:</p>
-            
-            <pre><code>sudo update-alternatives --set juju /usr/lib/juju-1.10.0/bin/juju</code></pre>
-            
+              <h1 >Installation</h1>
+              <section class="code-example code-overflow">
+                <nav class="control">
+                  <a href="." class="selected" data-action="ubuntu">Ubuntu</a>
+                  <a href="." class="" data-action="macosx">Mac OSX</a>
+                </nav>
+                <div class="terminal-wrap">
+                  <div data-section="ubuntu">
+                    <p>To install Juju, you simply need to grab the latest juju-core package:</p>
+                    <pre>sudo apt-get update
+                    sudo apt-get install juju-core</pre>
+                    <p>Juju is provided automatically as a backport in Ubuntu Server. Backports are usually enabled by default, but if you've turned them off <a href="http://askubuntu.com/a/285474/235">here's how you can enable them</a>. If apt complains that it cannot find the packages you might need to use the PPA:</p>
+                    <pre>sudo add-apt-repository ppa:juju/devel
+                    sudo apt-get update && sudo apt-get install juju-core</pre>
+                    <p>Regular updates will be made to the backported packages, unless you want to follow along with Juju development we recommend users to not use the PPA.</p>
+                    <p>You can switch between the default (0.7) version and 1.10 versions by using the following:</p>
+                    <pre>sudo update-alternatives --set juju /usr/lib/juju-0.7/bin/juju</pre>
+                    <p>or to the new 1.10.0 release using:</p>
+                    <pre>sudo update-alternatives --set juju /usr/lib/juju-1.10.0/bin/juju</pre>
+                  </div>
+                  <div data-section="macosx">
+                    <p>Instructions coming soon.<p>
+                  </div>
+                </div>
+              </section>
+            </section>
             <section id="config">
             <h1>Configuring</h1>
             
