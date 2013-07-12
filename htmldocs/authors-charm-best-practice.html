@@ -112,16 +112,14 @@
             <p>Tips for production usage:</p>
             <ul>
               <li>Provide an overview of the service in the README and metadata. </li>
-              <li>Use packaged software (i.e. debian packages) where possible, and "backport" any packages needed outside of the archives from whatever PPA you have them in to the appropriate precise-cat suite
+              <li>Use packaged software (i.e. debian packages) where possible, and "backport" any packages needed outside of the archives from whatever PPA you have them to an internal accessible repository.</li>
               <li>Not duplicate any service components that there are pre-existing charms for</li>
               <li>Follow the coding guidelines for charms (see below).</li>
-              <li>Assemble code for your application outside of the Charm.</li>
-              <li>Ship a script in <code>/srv/deploymgr/${service-name}-${instance-type}</code> that has commands for starting/stopping/checking/building code for the service <em>if you're not using upstart or an initscript doesn't provide this</em>.</li>
+              <li>Assemble code for your application outside of the Charm.</li>            
               <li>Create a <code>/srv/${external-service-name}/${instance-type}/${service-name}</code> directory for the code itself, and <code>/srv/${external-service-name}/{${instance-type}-logs,scripts,etc,var}</code> as needed.</li>
               <li>Ensure the owner of the code isn't the same user than runs the code</li>
               <li>Create monitoring checks for your application.</li>
-              <li>Which checks are prompt-critical (in other words, constitutes a user-affecting outage that would warrant waking an "oncall" sysadmin over a weekend)?</li>
-              <li>Confirm the service doesn't require any developer shell access to the servers that it runs on.</li>
+              <li>Which checks are prompt-critical (in other words, constitutes a user-affecting outage that would warrant waking an "oncall" sysadmin over a weekend)?</li>              
               <li>Confirm what data/logs from the application needs to be made visible to developers, and in what format?</li>
             </ul>
             
