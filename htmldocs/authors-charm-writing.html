@@ -116,35 +116,36 @@
             </code></pre>
             <p>Edit the metadata.yaml file to resemble:</p>
             <pre><code>
-            <p>name: drupal</p>
-            <p>summary: "Drupal CMS"</p>
-            <p>maintainer: "Drupal PowerUser &lt;drupaluser@somedomain.foo&gt;"</p>
-            <p>description: Installs the drupal CMS system, relates to the mysql charm provided in examples directory. Can be scaled to multiple web servers</p>
-            <p> requires:</p>
-            <p>   db</p>
-            <p> interface: </p>
-            <p>   mysql</p>
+            name: drupal
+            summary: "Drupal CMS"
+            maintainer: "Drupal PowerUser &lt;drupaluser@somedomain.foo&gt;"</p>
+            description: Installs the drupal CMS system, relates to the mysql charm provided in examples directory. Can be scaled to multiple web servers
+            &nbsp;requires:
+            &nbsp;&nbsp;&nbsp;db
+            &nbsp;interface: 
+            &nbsp;&nbsp;&nbsp;mysql
             </code></pre>
             
             <p>The metadata.yaml file provides metadata around the charm. The file declares a charm with the name drupal. Since this is the first time to edit this charm, its revision number is one. A short and long description of the charm are provided. The final field is <cite>requires</cite>, this mentions the interface type required by this charm. Since this drupal charm uses the services of a mysql database, we need to require it in the metadata. Since this charm does not provide a service to any other charm, there is no <cite>provides</cite> field. You might be wondering where did the interface name &quot;mysql&quot; come from, you can locate the interface information from the mysql charm's metadata.yaml.  Here it is for convenience:</p>
-            <pre><code>name: mysql
-            <p>summary: "MySQL relational database provider"
-            <p>maintainer: "Joe Charmer &lt;youremail@whatever.com&gt;"
-            <p>description: |
-            <p>    Installs and configures the MySQL package (mysqldb), then runs it.
-            <p>
-            <p>    Upon a consuming service establishing a relation, creates a new
-            <p>    database for that service, if the database does not yet
-            <p>    exist. Publishes the following relation settings for consuming
-            <p>    services:
-            <p>
-            <p>     database: database name
-            <p>      user: user name to access database
-            <p>      password: password to access the database
-            <p>      host: local hostname
-            <p>provides:
-            <p>  db:
-            <p>    interface: mysql</p>
+            <pre><code>
+            name: mysql
+            summary: "MySQL relational database provider"
+            maintainer: "Joe Charmer &lt;youremail@whatever.com&gt;"
+            description: |
+            &nbsp;&nbsp;&nbsp;&nbsp;Installs and configures the MySQL package (mysqldb), then runs it.
+             
+            &nbsp;&nbsp;&nbsp;Upon a consuming service establishing a relation, creates a new
+            &nbsp;&nbsp;&nbsp;database for that service, if the database does not yet
+            &nbsp;&nbsp;&nbsp;exist. Publishes the following relation settings for consuming
+            &nbsp;&nbsp;&nbsp;services:
+             
+            &nbsp;&nbsp;database: database name
+            &nbsp;&nbsp;&nbsp;&nbsp;user: user name to access database
+            &nbsp;&nbsp;&nbsp;&nbsp;password: password to access the database
+            &nbsp;&nbsp;&nbsp;&nbsp;host: local hostname
+            provides:
+            &nbsp;&nbsp;&nbsp;db:
+            &nbsp;&nbsp;&nbsp;&nbsp;interface: mysql</p>
             </code></pre>
             
             <p>That very last line mentions that the interface that mysql provides to us is &quot;mysql&quot;. Also the description mentions that four parameters are sent to the connecting charm (database, user, password, host) in order to enable it to connect to the database. We will make use of those variables once we start writing hooks. Such interface information is either provided in a bundled README file, or in the description. You can also read the charm code to discover such information as well.</p>
@@ -167,8 +168,10 @@
             
             <h2>Write hooks</h2>
             <p>Let's change into the hooks directory:</p>
-            <pre><code>$ cd drupal/hooks
-            vim install</code></pre>
+            <pre>
+            cd drupal/hooks
+            vim install
+            </pre>
             
             <p>Since you should have already installed drupal, you have an idea what it takes to get it installed. My install script looks like:</p>
             <pre><code>#!/bin/bash
@@ -183,16 +186,21 @@
             </code></pre>
             
             <p>I have introduced an artificial typo on the last line &quot;ww not www&quot;, this is to simulate any error which you are bound to face sooner or later. Let's create other hooks:</p>
-            <pre>$ vim start</pre>
+            <pre>
+            vim start
+            </pre>
             
             <p>The start hook is empty, however it needs to be a valid executable, thus we'll add the first bash shebang line, here it is:</p>
-            <pre><span class="c">#!/bin/bash</span>
+            <pre>
+            <span class="c">#!/bin/bash</span>
             </pre>
             
             <p>Here's the &quot;stop&quot; script:</p>
-            <pre>#!/bin/bash
+            <pre>
+            #!/bin/bash
             juju-log "Stopping apache"
-            /etc/init.d/apache2 stop</pre>
+            /etc/init.d/apache2 stop
+            </pre>
             
             <p>The final script, which does most of the work is &quot;db-relation-changed&quot;. This script gets the database connection information set by the mysql charm then sets up drupal for the first time, and opens port 80 for web access. Let's start with a simple version that only installs drupal on the first node. Here it is:</p>
             <pre>#!/bin/bash
@@ -211,21 +219,25 @@
             --site-name=juju --clean-url=0
             cd /var/www/juju &amp;&amp; chown www-data sites/default/settings.php
             open-port 80/tcp
-            </code></pre>
+            </code>
+            </pre>
             
             <p>The script is quite simple, it reads the four variables needed to connect to mysql, ensures they are not null, then passes them to the drupal installer. Make sure all the hook scripts have executable permissions, and change directory above the examples directory:</p>
-            <pre>$ chmod +x *
-            $ cd ../../../..</pre>
+            <pre>chmod +x *
+            $ cd ../../../..
+            </pre>
             
             <p>Checking on the drupal charm file-structure, this is what we have:</p>
-            <pre>$ find examples/precise/drupal
+            <pre>
+            find examples/precise/drupal
             examples/precise/drupal
             examples/precise/drupal/metadata.yaml
             examples/precise/drupal/hooks
             examples/precise/drupal/hooks/db-relation-changed
             examples/precise/drupal/hooks/stop
             examples/precise/drupal/hooks/install
-            examples/precise/drupal/hooks/start</pre>
+            examples/precise/drupal/hooks/start
+            </pre>
             
             <h2>Test run</h2>
             <p>Let us deploy the drupal charm. Remember that the install hook has a problem and will not exit cleanly. Deploying:</p>
@@ -234,16 +246,18 @@
             
             <p>Wait a minute for the environment to bootstrap. Keep issuing the status command till you know the environment is ready:</p>
             
-            <pre>juju status
-            <p>2011-06-07 14:04:06,816 INFO Connecting to environment.</p>
-            <p>machines:</p>
-            <p>  0:</p>
-            <p>    agent-state: running</p>
-            <p>    dns-name: ec2-50-16-107-102.compute-1.amazonaws.com
-            <p>    instance-id: i-130c9168
-            <p>    instance-state: running
-            <p>services:
-            <p>2011-06-07 14:04:11,125 INFO 'status' command finished successfully</pre>
+            <pre>
+            juju status
+            2011-06-07 14:04:06,816 INFO Connecting to environment.
+            machines:
+            &nbsp;0:
+            &nbsp;&nbsp;&nbsp;agent-state: running
+            &nbsp;&nbsp;&nbsp;dns-name: ec2-50-16-107-102.compute-1.amazonaws.com
+            &nbsp;&nbsp;&nbsp;instance-id: i-130c9168
+            &nbsp;&nbsp;&nbsp;instance-state: running
+            services:
+            2011-06-07 14:04:11,125 INFO 'status' command finished successfully
+            </pre>
             
             <p>It can be beneficial when debugging a new charm to always have the distributed debug-log running in a separate window:</p>
             <pre>juju debug-log</pre>
@@ -259,38 +273,38 @@
             <pre>juju status
             
             <p>machines:
-            <p>  0:
-            <p>    agent-state: running
-            <p>    dns-name: ec2-50-16-107-102.compute-1.amazonaws.com
-            <p>    instance-id: i-130c9168
-            <p>    instance-state: running</p>
-            <p>  1:
-            <p>    agent-state: running
-            <p>    dns-name: ec2-50-19-24-186.compute-1.amazonaws.com
-            <p>    instance-id: i-17079a6c
-            <p>    instance-state: running
-            <p>  2:
-            <p>    agent-state: running
-            <p>    dns-name: ec2-23-20-194-198.compute-1.amazonaws.com
-            <p>    instance-id: i-d7079aac
-            <p>    instance-state: running
-            <p>services:
-            <p>  mysql:
-            <p>    charm: cs:precise/mysql-3
-            <p>    relations: {}
-            <p>    units:
-            <p>      mysql/0:
-            <p>        agent-state: started
-            <p>        machine: 2
-            <p>        public-address: ec2-23-20-194-198.compute-1.amazonaws.com
-            <p>  drupal:
-            <p>    charm: local:precise/drupal-3
-            <p>    relations: {}
-            <p>    units:
-            <p>      drupal/0:
-            <p>        agent-state: install-error
-            <p>        machine: 1
-            <p>        public-address: ec2-50-19-24-186.compute-1.amazonaws.com</pre>
+            &nbsp;0:
+            &nbsp;&nbsp;&nbsp;agent-state: running
+            &nbsp;&nbsp;&nbsp;dns-name: ec2-50-16-107-102.compute-1.amazonaws.com
+            &nbsp;&nbsp;&nbsp;instance-id: i-130c9168
+            &nbsp;&nbsp;&nbsp;instance-state: running</p>
+            &nbsp;1:
+            &nbsp;&nbsp;&nbsp;agent-state: running
+            &nbsp;&nbsp;&nbsp;dns-name: ec2-50-19-24-186.compute-1.amazonaws.com
+            &nbsp;&nbsp;&nbsp;instance-id: i-17079a6c
+            &nbsp;&nbsp;&nbsp;instance-state: running
+            &nbsp;2:
+            &nbsp;&nbsp;&nbsp;agent-state: running
+            &nbsp;&nbsp;&nbsp;dns-name: ec2-23-20-194-198.compute-1.amazonaws.com
+            &nbsp;&nbsp;&nbsp;instance-id: i-d7079aac
+            &nbsp;&nbsp;&nbsp;instance-state: running
+            services:
+            &nbsp;mysql:
+            &nbsp;&nbsp;&nbsp;charm: cs:precise/mysql-3
+            &nbsp;&nbsp;&nbsp;relations: {}
+            &nbsp;&nbsp;&nbsp;units:
+            &nbsp;&nbsp;&nbsp;mysql/0:
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: 2
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public-address: ec2-23-20-194-198.compute-1.amazonaws.com
+            &nbsp;drupal:
+            &nbsp;&nbsp;&nbsp;charm: local:precise/drupal-3
+            &nbsp;&nbsp;&nbsp;relations: {}
+            &nbsp;&nbsp;&nbsp;units:
+            &nbsp;&nbsp;&nbsp;drupal/0:
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-state: install-error
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: 1
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public-address: ec2-50-19-24-186.compute-1.amazonaws.com</pre>
             
             <p>Note how mysql is listed as started, while drupal's state is install_error. This is because the install hook has an error, and did not exit cleanly (exit code 1).</p>
             <h2>Debugging hooks</h2>
@@ -305,7 +319,8 @@
             $ ./install
             # -- snip --
             + cd /var/ww
-            ./install: line 10: cd: /var/ww: No such file or directory</pre>
+            ./install: line 10: cd: /var/ww: No such file or directory
+            </pre>
             
             <p>Problem identified. Let's edit the script, changing ww into www. Rerunning it again should work successfully. This is why it is very good practice to write hook scripts in an idempotent manner such that rerunning them over and over always results in the same state. Do not forget to exit the install window by typing &quot;exit&quot;, this signals that the hook has finished executing successfully. If you have finished debugging, you may want to exit the debug-hooks session completely by typing &quot;exit&quot; into the very first window Window0</p>
             
@@ -324,78 +339,80 @@
             <pre>juju expose drupal</pre>
             
             <p>Let's see a status with the ports exposed:</p>
-            <pre>juju status
+            <pre>
+            juju status
             
-            <p>machines:
-            <p>  0:
-            <p>    agent-state: running
-            <p>    dns-name: ec2-50-16-107-102.compute-1.amazonaws.com
-            <p>    instance-id: i-130c9168
-            <p>    instance-state: running
-            <p>  1:
-            <p>   agent-state: running
-            <p>   dns-name: ec2-50-19-24-186.compute-1.amazonaws.com
-            <p>   instance-id: i-17079a6c
-            <p>   instance-state: running
-            <p> 2:
-            <p>   agent-state: running
-            <p>   dns-name: ec2-23-20-194-198.compute-1.amazonaws.com
-            <p>   instance-id: i-d7079aac
-            <p>   instance-state: running
-            <p> services:
-            <p> mysql:
-            <p>   charm: cs:precise/mysql-3
-            <p>   relations:
-            <p>     db:
-            <p>     - drupal
-            <p>   units:
-            <p>     mysql/0:
-            <p>       agent-state: started
-            <p>       machine: 2
-            <p>       public-address: ec2-23-20-194-198.compute-1.amazonaws.com
-            <p> drupal:
-            <p>   charm: cs:precise/drupal-3
-            <p>   exposed: true
-            <p>   relations:
-            <p>     db:
-            <p>     - mysql
-            <p>   units:
-            <p>     drupal/0:
-            <p>       agent-state: started
-            <p>       machine: 1
-            <p>       open-ports:
-            <p>       - 80/tcp
-            <p>       public-address: ec2-50-19-24-186.compute-1.amazonaws.com</pre>
+            machines:
+            &nbsp;0:
+            &nbsp;&nbsp;&nbsp;agent-state: running
+            &nbsp;&nbsp;&nbsp;dns-name: ec2-50-16-107-102.compute-1.amazonaws.com
+            &nbsp;&nbsp;&nbsp;instance-id: i-130c9168
+            &nbsp;&nbsp;&nbsp;instance-state: running
+            &nbsp;1:
+            &nbsp;&nbsp;&nbsp;agent-state: running
+            &nbsp;&nbsp;&nbsp;dns-name: ec2-50-19-24-186.compute-1.amazonaws.com
+            &nbsp;&nbsp;&nbsp;instance-id: i-17079a6c
+            &nbsp;&nbsp;&nbsp;instance-state: running
+            &nbsp;2:
+            &nbsp;&nbsp;&nbsp;agent-state: running
+            &nbsp;&nbsp;&nbsp;dns-name: ec2-23-20-194-198.compute-1.amazonaws.com
+            &nbsp;&nbsp;&nbsp;instance-id: i-d7079aac
+            &nbsp;&nbsp;&nbsp;instance-state: running
+            &nbsp;services:
+            &nbsp;mysql:
+            &nbsp;&nbsp;charm: cs:precise/mysql-3
+            &nbsp;&nbsp;relations:
+            &nbsp;&nbsp;&nbsp;db:
+            &nbsp;&nbsp;&nbsp;- drupal
+            &nbsp;&nbsp;&nbsp;units:
+            &nbsp;&nbsp;&nbsp;&nbsp;mysql/0:
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: 2
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public-address: ec2-23-20-194-198.compute-1.amazonaws.com
+            &nbsp;&nbsp;drupal:
+            &nbsp;&nbsp;&nbsp;charm: cs:precise/drupal-3
+            &nbsp;&nbsp;&nbsp;exposed: true
+            &nbsp;&nbsp;&nbsp;relations:
+            &nbsp;&nbsp;&nbsp;&nbsp;db:
+            &nbsp;&nbsp;&nbsp;&nbsp;- mysql
+            &nbsp;&nbsp;&nbsp;units:
+            &nbsp;&nbsp;&nbsp;&nbsp;drupal/0:
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: 1
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open-ports:
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 80/tcp
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public-address: ec2-50-19-24-186.compute-1.amazonaws.com</pre>
             
             <p>Congratulations, your charm should now be working successfully! The db-relation-changed hook previously shown is not suitable for scaling drupal to more than one node, since it always drops the database and recreates a new one. A more complete hook would need to first check whether or not the DB tables exist and act accordingly. Here is how such a hook might be written:</p>
             <pre>#!/bin/bash 
-            <p>set -eux # -x for verbose logging to juju debug-log
-            <p>hooksdir=$PWD
-            <p>user=`relation-get user`
-            <p>password=`relation-get password`
-            <p>host=`relation-get host`
-            <p>database=`relation-get database`
-            <p># All values are set together, so checking on a single value is enough
-            <p># If $user is not set, DB is still setting itself up, we exit awaiting next run
-            <p>[ -z "$user" ] &amp;&amp; exit 0
-            <p>
-            <p>if $(mysql -u $user --password=$password -h $host -e 'use drupal; show tables;' | grep -q users); then
-            <p>juju-log "Drupal already set-up. Adding DB info to configuration"
-            <p>cd /var/www/juju/sites/default
-            <p>cp default.settings.php settings.php
-            <p>sed -e "s/USER/$user/" \
-            <p>-e "s/PASSWORD/$password/" \
-            <p>-e "s/HOST/$host/" \
-            <p>-e "s/DATABASE/$database/" \
-            <p>$hooksdir/drupal-settings.template &gt;&gt; settings.php
-            <p>else
-            <p>juju-log "Setting up Drupal for the first time"
-            <p>cd /var/www/juju &amp;&amp; drush site-install -y standard \
-            <p>--db-url=mysql://$user:$password@$host/$database \
-            <p>--site-name=juju --clean-url=0
-            <p>fi
-            <p>cd /var/www/juju &amp;&amp; chown www-data sites/default/settings.php
-            <p>open-port 80/tcp</pre>
+            &nbsp;>set -eux # -x for verbose logging to juju debug-log
+            &nbsp;<p>hooksdir=$PWD
+            &nbsp;user=`relation-get user`
+            &nbsp;password=`relation-get password`
+            &nbsp;host=`relation-get host`
+            &nbsp;database=`relation-get database`
+            &nbsp;# All values are set together, so checking on a single value is enough
+            &nbsp;# If $user is not set, DB is still setting itself up, we exit awaiting next run
+            &nbsp;[ -z "$user" ] &amp;&amp; exit 0
+            &nbsp;
+            &nbsp;if $(mysql -u $user --password=$password -h $host -e 'use drupal; show tables;' | grep -q users); then
+            &nbsp;juju-log "Drupal already set-up. Adding DB info to configuration"
+            &nbsp;cd /var/www/juju/sites/default
+            &nbsp;cp default.settings.php settings.php
+            &nbsp;sed -e "s/USER/$user/" \
+            &nbsp;-e "s/PASSWORD/$password/" \
+            &nbsp;-e "s/HOST/$host/" \
+            &nbsp;-e "s/DATABASE/$database/" \
+            &nbsp;$hooksdir/drupal-settings.template &gt;&gt; settings.php
+            &nbsp;else
+            &nbsp;juju-log "Setting up Drupal for the first time"
+            &nbsp;cd /var/www/juju &amp;&amp; drush site-install -y standard \
+            &nbsp;&nbsp;--db-url=mysql://$user:$password@$host/$database \
+            &nbsp;&nbsp;--site-name=juju --clean-url=0
+            &nbsp;fi
+            &nbsp;cd /var/www/juju &amp;&amp; chown www-data sites/default/settings.php
+            &nbsp;open-port 80/tcp
+            </pre>
             
             
             <p class="first admonition-title">Note</p>
@@ -403,20 +420,21 @@
             
             <p><p>Here is the template file used:</p>
             <pre>$databases = array (
-            <p> 'default' =&gt;
-            <p> array (
-            <p>   'default' =&gt;
-            <p>   array (
-            <p>     'database' =&gt; 'DATABASE',
-            <p>     'username' =&gt; 'USER',
-            <p>     'password' =&gt; 'PASSWORD',
-            <p>     'host' =&gt; 'HOST',
-            <p>     'port' =&gt; '',
-            <p>     'driver' =&gt; 'mysql',
-            <p>     'prefix' =&gt; '',
-            <p>   ),
-            <p> ),
-            <p>);</pre>
+            &nbsp;'default' =&gt;
+            &nbsp;array (
+            &nbsp;&nbsp;&nbsp;&nbsp;'default' =&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;array (
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'database' =&gt; 'DATABASE',
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'username' =&gt; 'USER',
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'password' =&gt; 'PASSWORD',
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'host' =&gt; 'HOST',
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'port' =&gt; '',
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'driver' =&gt; 'mysql',
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'prefix' =&gt; '',
+            &nbsp;&nbsp;&nbsp;&nbsp;),
+            &nbsp;&nbsp;),
+            &nbsp;);
+            </pre>
           </article>
         </div>
       </div>
