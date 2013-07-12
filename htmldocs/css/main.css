@@ -203,11 +203,30 @@ div.note.distribute {
   margin-bottom:0;
 }
 
+.doc-content div.block{
+    clear: both;
+    display:block;
+    padding-top:10px;
+    
+}
+
 .doc-content img { 
   padding:0px;
   -moz-box-shadow: 0 0 6px #000000;
   -webkit-box-shadow: 0 0 6px #000000;
   box-shadow: 0 0 6px #000000; 
+}
+
+.doc-content img.right{
+  float: right;
+  display: block;
+  vertical-align:middle;
+}
+
+.doc-content img.left{
+  float: left;
+  display: block;
+  vertical-align:middle;
 }
 .doc-content img.noshadow { 
   padding:0px;
@@ -232,6 +251,35 @@ div.note.distribute {
 .doc-content h1:not(:first) {
   margin-top: 40px;
 }
+
+/**
+ * Walkthrough steps
+ */
+
+.doc-content div.step {
+    border-top: 1px dotted rgb(174, 166, 158);
+    padding-bottom: 30px;
+    padding-top: 18px;
+    margin-left: 80px;
+    margin-right: 5px;
+}
+
+.number {
+    padding: 6px;
+    border: 3px solid #dd4814;
+    	-moz- border-radius: 40px;
+    	-webkit- border-radius: 40px;
+    border-radius: 40px;
+	box-shadow: 0 2px 1px #e0e0e0;
+    color: #dd4814;
+    display: block;
+    font-size: 36px;
+    text-align: center;
+    width: 50px;
+    float: left;
+}
+
+
 
 /**
  * Section StackTack
