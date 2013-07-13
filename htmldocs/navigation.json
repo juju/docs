@@ -1,0 +1,56 @@
+{
+  "User Guide": {
+    "Getting Started": {
+      "link": "getting-started.html",
+      "children": {
+        "Introduction": "getting-started.html#intro",
+        "Installation": "getting-started.html#install",
+        "AWS Configuration": "config-aws.html",
+        "HP Cloud Configuration": "config-hpcloud.html",
+        "OpenStack Configuration": "config-openstack.html",
+        "MAAS Configuration": "config-maas.html",
+        "Testing your setup": "getting-started.html#test"
+      }
+    },
+    "Using Charms": {
+      "link": "charms.html",
+      "children": {
+        "What are Charms?": "charms.html#intro",
+        "Deploying Services": "charms-deploying.html",
+        "Using Constraints": "charms-constraints.html",
+        "Service Configuration": "charms-config.html",
+        "Service Relationships": "charms-relationships.html",
+        "Exposing Services": "charms-exposing.html",
+        "Scaling Services": "charms-scaling.html",
+        "Destroying Services": "charms-destroy.html"
+      }
+    }
+  },
+  "Charm Authors": {
+    "Anatomy of a Charm": "authors-charm-anatomy.html",
+    "Writing a Charm": {
+      "link": "authors-charm-writing.html",
+      "children": {
+        "Subordinate Services": "authors-subordinate-services.html",
+        "Implicit Relations": "authors-implicit-relations.html",
+        "Charm Testing": "authors-testing.html",
+        "Hook Debugging": "authors-hooks.html"
+      }
+    },
+    "The Juju Charm Store": {
+      "link": "authors-charm-store.html",
+      "children": {
+        "Charm Store Policy": "authors-charm-policy.html",
+        "Best Practices": "authors-charm-best-practices.html",
+        "Charm Quality Rating": "authors-charm-quality.html"
+      }
+    }
+  },
+  "References": {
+    "children": {
+      "Juju Commands": "commands.html",
+      "Glossary": "glossary.html",
+      "Contribute to the Docs!": "contributing.html"
+    }
+  }
+}
