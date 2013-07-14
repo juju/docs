@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Juju Documentation - Contributing!</title>
-    <link href="//fonts.googleapis.com/css?family=Ubuntu:400,400italic" rel="stylesheet" type="text/css"/>
-    <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css"/>
-    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" rel="stylesheet" type="text/css"/>
-    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" rel="stylesheet" type="text/css"/>
-    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" rel="stylesheet" type="text/css"/>
-    <link href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/resources.css" rel="stylesheet" type="text/css"/>
-    <link href="css/main.css" rel="stylesheet" type="text/css"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script src="http://app.stacktack.com/jquery.stacktack.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-            $(document).stacktack();
-      });
-    </script><!--[if lt IE 9]>
-    <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  </head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Juju Documentation - Anatomy of a Charm</title>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
+  <link href="css/main.css?1373740025" rel="stylesheet" type="text/css"/>
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<!-- DO NOT EDIT ABOVE THIS LINE -->
+
+<!-- DO NOT EDIT ABOVE THIS LINE -->
+
+
   <body class="resources">
-    <header>
-      <div class="header-login">
+    <header class="global clearfix" role="banner">
+  <div class="header-navigation">
+    <div>
+      <nav role="navigation">
         <ul>
-          <li>&nbsp;</li>
+          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
+          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
+          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
+          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
+          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
+          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
+          <li>
+            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
+              <fieldset>
+                <input id="input-search" type="text" name="s" value="Search" />
+              </fieldset>
+            </form>
+          </li>
         </ul>
-      </div>
-      <div class="header-navigation">
-        <div>
-          <nav role="navigation">
-            <ul>
-              <li class="page_item"><a href="https://juju.ubuntu.com/">Home</a></li>
-              <li class="page_item current_page_item"><a href="https://juju.ubuntu.com/">Resources</a></li>
-              <li class="page_item"><a href="https://juju.ubuntu.com/">Community</a></li>
-              <li class="page_item"><a href="https://juju.ubuntu.com/">Charm Store</a></li>
-              <li class="page_item"><a href="https://juju.ubuntu.com/">Events</a></li>
-              <li class="page_item"><a href="https://juju.ubuntu.com/">Survey</a></li>
-              <li>
-                <form id="form-search" method="get" action="/">
-                  <fieldset>
-                    <input id="input-search" type="text" name="s" value="Search">
-                  </fieldset>
-                </form>
-              </li>
-            </ul>
-          </nav><a href="https://juju.ubuntu.com/" class="logo-ubuntu"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png"></a>
-        </div>
-      </div>
-      <div class="header-content">
-        <div class="clearfix"><img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:894px; display: block;" class="arrow-nav">
-          <div class="header-navigation-secondary"></div>
-          <div class="header-image"></div>
-          <h1>Resources</h1>
-          <h2>A collection of some of the most important online references for Juju users and developers.</h2>
-        </div>
-      </div>
-    </header>
+      </nav>
+    </div>
+  </div>
+  <div class="header-content">
+    <div class="clearfix">
+      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:894px; display: block;" class="arrow-nav">
+      <div class="header-navigation-secondary"></div>
+      <div class="header-image"></div>
+      <h1>Resources</h1>
+      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+    </div>
+  </div>
+</header>
+
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
         <div class="grid-3 doc-navigation">
