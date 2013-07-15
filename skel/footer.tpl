@@ -1,4 +1,3 @@
-<!-- DO NOT EDIT BELOW THIS LINE -->
 <footer class="global clearfix" role="contentinfo">
   <div class="row">
     <div class="inner-wrapper">
