@@ -413,3 +413,19 @@ div.note.distribute {
   font-size: 13px;
   line-height: 19px;
 }
+
+.resources .header-content {
+  background: url("../img/background-header-home.png") 0 0 repeat #fff;
+}
+
+.resources .header-image {
+  background: url("../img/dotted-logo.png") no-repeat scroll 122px -24px transparent;
+  float: right;
+  height: 232px;
+  margin-bottom: -35px;
+  margin-right: -163px;
+  margin-top: -53px;
+  width: 571px;
+  position: relative;
+  z-index: 1;
+}
