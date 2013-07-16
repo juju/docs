@@ -1,6 +1,8 @@
 Options +FollowSymLinks
-RewriteEngine On
 
+DirectoryIndex getting-started.html
+
+RewriteEngine On
 RewriteBase /docs/
 
 RewriteRule ^about.html$ getting-started.html#intro [R=301,NE,L]
