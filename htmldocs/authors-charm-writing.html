@@ -109,18 +109,14 @@
 <p>Okay, so you have read up all the background info on what a charm is, how it works, and what parts of the charm do what, now it is time to dust off your favourite code editor (no arguments please) and get charming!</p>
 <p>For this example, we are imagining that we want to create a charm for <a href="http://vanillaforums.org/" >the Vanilla forum software</a></p>
 
-<span class="number" > 1 </span>
+<span class="number"> 1 </span>
           <div class="step" id="step01">
           <h2>Prepare yourself</h2>
           <p>As we are writing a charm, it makes sense to create it in a local charm repository (see how to deploy form a local repository #ref#) to make it easy to test in your Juju environment.</p>
           <p>Go to your home directory (or wherever is appropriate and make the appropriate file structure:</p>
-          <pre><code>cd ~
-          mkdir -p localcharms/precise/vanilla
-          </code></pre>
+          <pre class="prettyprint">cd ~<br>mkdir -p charms/precise/vanilla </pre>
           <p>While we are here, we might as well start as we mean to go on and create the revision file: </p>
-          <pre><code>cd localcharms/precise/vanilla/
-          echo '1' > revision</code>
-       
+          <pre class="prettyprint">cd charms/precise/vanilla/<br>echo '1' > revision</pre>
           </div>
 
 <span class="number" > 2 </span>
@@ -130,23 +126,26 @@
           <p>This step is especially important if you intend making your charm public, but it is very useful even if your charm will only ever be seen by you. The README is a good place to make nots about how the charm works, what information it expects to communicate and how.</p>
           <p>Although a plain text file is fine, you can also write your README file using Markdown (in which case use the .md suffix). The advantage of this, other than it looks quite neat, is that the Charm Store will render Mardown properly online, so your README will look and read better.</p>
           <p>Here is a quick example README file for our Vanilla charm:</p>
-          <pre><code>
-          # Overview
-          Vanilla is a powerful open source web-based forum. This charm will deploy
-          the forum software and connect it to a running MySQL database.
-          This charm will install the Vanilla files in /var/www/vanilla/
-          
-          # Installation
-          To deploy this charm you'll need at a minimum: a cloud environment, 
-          a working Juju installation and a successful bootstrap. 
-          Once bootstrapped, deploy the MySQL charm and then this Vanilla charm:
-          &nbsp;&nbsp;&nbsp;&nbsp;juju deploy mysql
-          &nbsp;&nbsp;&nbsp;&nbsp;juju deploy vanilla
-          Add a relation between the two of them:
-          &nbsp;&nbsp;&nbsp;&nbsp;juju add-relation mysql vanilla
-          And finally expose the Vanilla service:
-          &nbsp;&nbsp;&nbsp;&nbsp;juju expose vanilla
-          </code></pre>
+          <pre class="prettyprint">
+# Overview
+
+Vanilla is a powerful open source web-based forum. This charm will deploy the forum software and connect it to a running MySQL database. This charm will install the Vanilla files in /var/www/vanilla/
+
+# Installation
+
+To deploy this charm you will need at a minimum: a cloud environment, working Juju installation and a successful bootstrap. Once bootstrapped, deploy the MySQL charm and then this Vanilla charm:
+
+    juju deploy mysql
+    juju deploy vanilla
+
+Add a relation between the two of them:
+
+    juju add-relation mysql vanilla
+
+And finally expose the Vanilla service:
+
+    juju expose vanilla</pre>
+
           <p>Obviously, you can include any useful info you wish.</p>
           </div>
           
@@ -155,13 +154,15 @@
           <h2>Make some metadata.yaml</h2>
           <p>The <strong>metadata.yaml</strong> file is really important. This is the file that Juju reads to find out what a charm is, what it does and what it needs to do it.</p>
           <p>The yaml syntax is at once simple, but exact, so if you have any future problems with Juju not recognising your charm, this is the first port of call! the information is stored in simple <span class="pre">&LT;key&GT; : &LT;value&GT;</span> associations. The first four are pretty self explanitory:</p>
-          <pre><code>name: vanilla
-          summary: Vanilla is an open-source, pluggable, themable, multi-lingual forum.
-          maintainer: Marco
-          description: |
-          &nbsp;&nbsp;Vanilla is designed to deploy and grow small communities to scale. 
-          This charm deploys Vanilla Forums as outlined by the Vanilla Forums installation guide.
-          </pre></code>
+          <pre class="prettyprint lang-yaml">
+name: vanilla
+summary: Vanilla is an open-source, pluggable, multi-lingual forum.
+maintainer: Your Name &lt;your@email.tld&gt;
+description: |
+  Vanilla is designed to deploy and grow small communities to scale. 
+  This charm deploys Vanilla Forums as outlined by the Vanilla Forums
+  installation guide.
+</pre>
           <p>The summary should be a brief description of the service being deployed, whereas the description can go into more detail.</p>
           <p>The next value to define is the category. This is primarily for organising the charm in the charm store. the available categories are:</p>
           <ul>
@@ -173,32 +174,28 @@
           <li><strong>miscellaneous - </strong>anything which doesn't neatly fit anywhere above.</li>
           </ul>
           <p>Your charm can belong to more than one category, though in almost all cases it should be in just one. Because there could be more than one entry here, the yaml is formatted as a list:</p>
-          <pre><code>categories:
-          &nbsp;&nbsp;- applications
-          </code></pre>
+          <pre class="prettyprint lang-yaml">categories:<br>  - applications</pre>
           <p>Next we need to explain which services are actually provided by this service. This is done using an indent for each service provided, followed by a description of the interface. The interface name is important as it can be used elsewhere in the environment to relate back to this charm, e.g. when writing hooks.</p>
           <p>Our Vanilla charm is a web-based service which exposes a simple http interface:</p> 
-          <pre><code>provides:
-         &nbsp;&nbsp;website:
-         &nbsp;&nbsp;&nbsp;&nbsp;interface: http
-          </code></pre>
+          <pre class="prettyprint lang-yaml">provides:<br>  website:<br>    interface: http</pre>
           <p>The name given here is important as it will be used in hooks that we write later, and the interface name will be used by other charms which may want to relate to this one.</p>
           <p>Similarly we also need to provide a "requires" section. In this case we need a database. Checking out the metadata of the MySQL charm we can see that it provides this via the interface name "mysql", so we can use this name in our metadata.</p>
           <p>The final file should look like this:</p>
-          <pre><code>name: vanilla
-          summary: Vanilla is an open-source, pluggable, themeable, multi-lingual forum.
-          maintainer: Marco
-          description: |
-          &nbsp;&nbsp;Vanilla is designed to deploy and grow small communities to scale. 
-          This charm deploys Vanilla Forums as outlined by the Vanilla Forums installation guide.
-          categories:
-          &nbsp;&nbsp;- applications
-          provides:
-          &nbsp;&nbsp;website:
-          &nbsp;&nbsp;&nbsp;&nbsp;interface: http
-          requires:
-          &nbsp;&nbsp;database:
-          &nbsp;&nbsp;&nbsp;&nbsp;interface: mysql</code></pre>
+          <pre class="prettyprint lang-yaml">
+name: vanilla
+summary: Vanilla is an open-source, pluggable, themeable, multi-lingual forum.
+maintainer: Your Name &lt;your@email.tld&gt;
+description: |
+  Vanilla is designed to deploy and grow small communities to scale. 
+  This charm deploys Vanilla Forums as outlined by the Vanilla Forums installation guide.
+categories:
+  - applications
+provides:
+  website:
+    interface: http
+requires:
+  database:
+    interface: mysql</pre>
           <p>
           <p>For some charms you will want a "peers" section also. This follows the same format, and its used for optional connections, such as you might use for interconnecting services in a cluster
           </p>
@@ -218,73 +215,79 @@
           <li>website-relation-joined - this will run when/if a service connects to our charm.</li>
           </ul>
           <p>So first up we should create the hooks directory, and start creating our first hook:</p>
-          <pre><code>mkdir hooks
-          cd hooks
-          vi start</code></pre>
+          <pre class="prettyprint lang-bash">mkdir hooks<br>cd hooks<br>vi start</pre>
           <p>(Use your favourite editor, naturally - no flames please)</p>
           <p>We have started with the start hook, because it is pretty simple. Our charm will be served up by apache, so all we need to do to start the service is make sure apache is running:</p>
-          <pre><code>#!/bin/bash
-          set -e
-          service apache2 restart</code></pre>
+          <pre class="prettyprint lang-bash">#!/bin/bash<br>set -e<br>service apache2 restart</pre>
           <p>A bit of explanation for this one. As we are writing in bash, and we need the files to be executable, we start with a hash-bang line indicating this is a bash file.
           the <span class="pre">set -e</span> line means that if any subsequent command returns false (non-zero) the script will stop and raise an error - this is important so that Juju can work out if things are running properly.
           </p>
           <p>The final line starts the apache webservice, thus also starting our Vanilla service. Why do we call 'restart'? One of the important ideas behind hooks is that they should be 'idempotent'. That means that the opration should be capable of being run many times without changing the intended result (basically). in this case, we don't want an error if apache is actually already running, we just want it to run and reload any config changes.</p>
           <p>Once you have saved the file, it is important to make sure that you set it to be executable too!</p>
-          <pre><code>chmod +x start</code></pre>
+          <pre class="prettyprint lang-bash">chmod +x start</pre>
           <p>With the easy bit out of the way, how about the install hook? This needs to install any dependencies, fetch the actual software and do any other config and service jobs that need to happen. here is an example for our vanilla charm:</p>
                     
-    <pre class="prettyprint">
-    #!/bin/bash
-     
-    set -e # If any command fails, stop execution of the hook with that error
-     
-    apt-get install -y apache2 php5-cgi php5-mysql curl php5-gd wget libapache2-mod-php5
-     
-    vanilla_payload="https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz"
-     
-    # Grab Vanilla from upstream.
-    juju-log "Fetching $vanilla_payload"
-    wget "$vanilla_payload" -O /tmp/vanilla.tar.gz
-     
-    # IDEMPOTENCY is very important in all charm hooks, even the install hook.
-    if [ -f /var/www/vanilla/conf/config.php ]; then
-    cp /var/www/vanilla/conf/config.php /tmp/
-    rm -rf /var/www/vanilla
-    fi
-     
-    # Extract to a known location
-    juju-log "Extracting Vanilla"
-    tar -xvzf /tmp/vanilla.tar.gz -C /var/www/
-    mv /var/www/Garden-Vanilla* /var/www/vanilla
-     
-    if [ -f /tmp/config.php ]; then
-    mv /tmp/config.php /var/www/vanilla/conf/
-    fi
-     
-    chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
-     
-    juju-log "Creating apache2 configuration"
-    cat < /etc/apache2/sites-available/vanilla
-    ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/vanilla
+<pre class="prettyprint">
+#!/bin/bash
+
+set -e # If any command fails, stop execution of the hook with that error
+
+apt-get install -y apache2 php5-cgi php5-mysql curl php5-gd wget libapache2-mod-php5
+
+dl="https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz"
+
+# Grab Vanilla from upstream.
+juju-log "Fetching $dl"
+wget "$dl" -O /tmp/vanilla.tar.gz
+
+# IDEMPOTENCY is very important in all charm hooks, even the install hook.
+if [ -f /var/www/vanilla/conf/config.php ]; then
+  cp /var/www/vanilla/conf/config.php /tmp/
+  rm -rf /var/www/vanilla
+fi
+
+# Extract to a known location
+juju-log "Extracting Vanilla"
+tar -xvzf /tmp/vanilla.tar.gz -C /var/www/
+mv /var/www/Garden-Vanilla* /var/www/vanilla
+
+if [ -f /tmp/config.php ]; then
+  mv /tmp/config.php /var/www/vanilla/conf/
+fi
+
+chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
+
+juju-log "Creating apache2 configuration"
+cat &lt;&lt;EOF $gt; /etc/apache2/sites-available/vanilla
+&lt;VirtualHost *:80&gt;
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/vanilla
+  
+  &lt;Directory /var/www/vanilla&gt;
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Order allow,deny
     allow from all
-    ErrorLog \${APACHE_LOG_DIR}/vanilla.log
-    LogLevel warn
-    CustomLog \${APACHE_LOG_DIR}/access.log combined
-    EOF
-    a2dissite 000-default
-    a2ensite vanilla
-    service apache2 reload
-    juju-log "Files extracted, waiting for other events before we do anything else!"
-          </pre>
+  &lt;/Directory&gt;
+
+  ErrorLog \${APACHE_LOG_DIR}/vanilla.log
+  LogLevel warn
+
+  CustomLog \${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+EOF
+
+a2dissite 000-default
+a2ensite vanilla
+
+service apache2 reload
+
+juju-log "Files extracted, waiting for other events before we do anything else!"
+</pre>
           <p>We aren't going to go for a line-by-line explanation of that, but there are a few things worth noting</p>
           <p>Firstly, note the use of the -y option of the apt-get command. this assumes a 'yes' answer to any questions and removes any manual install options (e.g. services that run config dialogs when they install</p>
           <p>In our script, we are fetching the tarball of the Vanilla software. In these cases, it is obviously always better to point to a specific, permanent link to a version of the software. </p>         
-          <p>Also, you will notice that we have used the <strong>juju-log</strong>command. This basically spits messages out into the juju log, which is very useful for testing and debugging. We will cover that in more detail later in this walkthrough. </p>
+          <p>Also, you will notice that we have used the <span class="pre">juju-log</span> command. This basically spits messages out into the juju log, which is very useful for testing and debugging. We will cover that in more detail later in this walkthrough. </p>
           
           </div>          
           </article>
@@ -344,6 +347,7 @@
       <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
     </div>
   </div>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 </footer>
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
