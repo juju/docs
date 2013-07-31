@@ -127,11 +127,11 @@
               <pre><code>juju bootstrap --constraints "instance-type=m1.medium arch=i386"</code></pre>
               
               <p>Deploy MySQL on a machine with at least 32GiB of RAM, and at least 8 ECU of CPU power (architecture will be inherited from the environment, or default to amd64):</p>
-              <pre><code>juju deploy --constraints "cpu=8 mem=32G" mysql</code></pre>
+              <pre><code>juju deploy --constraints "cpu-cores=8 mem=32G" mysql</code></pre>
               
               
               <p>Launch all future &quot;mysql&quot; machines with at least 8GiB of RAM and 4 ECU:</p>
-              <pre><code>juju set-constraints --service mysql mem=8G cpu=4</code></pre>
+              <pre><code>juju set-constraints --service mysql mem=8G cpu-cores=4</code></pre>
               
               <p>Output current environment constraints:</p>
               <pre><code>juju get-constraints</code></pre>
@@ -143,7 +143,7 @@
               <p>The constraints available vary by provider, but should include:</p> 
               
               <ul>
-              <li><span class="pre">cpu</span>: The minimum processing power of the machine, measured in <a class="reference external" href="http://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud#Elastic_compute_units">ECU</a>,defaulting to 1; any real number &gt;= 0 is valid.</li> 
+              <li><span class="pre">cpu-cores</span>: The minimum processing power of the machine, measured in <a class="reference external" href="http://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud#Elastic_compute_units">ECU</a>,defaulting to 1; any real number &gt;= 0 is valid.</li> 
               <li><span class="pre">mem</span>: The minimum memory for the machine, defaulting to 512MB; any real number &gt;= 0, and optionally suffixed with M, G or T is valid.</li>
               <li><span class="pre">arch</span>: The machine's processor architecture, defaulting to &quot;amd64&quot;. Valid values are &quot;i386&quot;, &quot;amd64&quot;, and &quot;arm&quot;.</li>
               
@@ -167,7 +167,7 @@
               <ul>
               <li><p class="first">Set the environment constraints to require machines with an i386 architecture, leaving the other defaults untouched; this is precisely equivalent to:</p>
               
-              <pre><code>juju bootstrap --constraints "arch=i386 cpu= mem= "</code></pre>
+              <pre><code>juju bootstrap --constraints "arch=i386 cpu-cores= mem= "</code></pre>
               
               <p>...but rather more convenient to type.</p>
               </li>
