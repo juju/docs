@@ -50,4 +50,5 @@
       <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
     </div>
   </div>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 </footer>

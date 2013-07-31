@@ -116,7 +116,7 @@
              <p>which follows the format:</p>
              <pre><code>&LT;repository&GT;:&LT;series&GT;&LT;service&GT;</code></pre>
              
-             <h1>Deploying from a local repository</h1>
+             <h1 id="local">Deploying from a local repository</h1>
              <p>There are many cases when you may wish to deploy charms from a local filesytem source rather than the charm store:</p>
              <ul>
               <li>When testing charms you have written.</li>
@@ -126,7 +126,7 @@
              <p>... and probably a lot more times which you can imagine yourselves.</p>
              <p>Juju can be pointed at a local directory to source charms from using the <span class="pre">--repository=&LT;path/to/files&GT;</span> switch like this:</p>
              
-             <pre><code>juju deploy --repository=/usr/share/charms/ vsftpd</code></pre>
+             <pre><code>juju deploy --repository=/usr/share/charms/ local:precise/vsftpd</code></pre>
              <p>You can also make use of standard filesystem shortcuts, so the following examples are also valid:</p>
              <pre><code>juju deploy --repository=. haproxy</code></pre>
              <pre><code>juju deploy --repository=~/charms/ wordpress</code></pre>  
