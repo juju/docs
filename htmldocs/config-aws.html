@@ -106,6 +106,7 @@
           <article>
             <section id="config_aws">
             <h1>Configuring for Amazon AWS</h1>
+	    <p>This process requires you to have an Amazon Web Serices (AWS) account.  If you have not signed up for one yet, it can obtained at <a href="http://aws.amazon.com">http://aws.amazon.com</a>.</p>
             <p>You should start by generating a generic configuration file for Juju, using the command:
             <pre><code>juju generate-config -w</code></pre>
             <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).     
@@ -127,12 +128,14 @@
             &nbsp;&nbsp;&nbsp;&nbsp;# Can be set via the env variable AWS_SECRET_ACCESS_KEY, or specified here
             &nbsp;&nbsp;&nbsp;&nbsp;# secret-key: &LT;secret&GT;
             </code></pre>  
+
             <p>This is a simple configuration intended to run on EC2 with S3 permanent storage. Values for the default setting can be changed simply by editing this file, uncommenting the relevant lines and adding your own settings. All you need to do to get this configuration to work is to either set the <span class="pre">AWS_ACCESS_KEY_ID</span> and <span class="pre">AWS_SECRET_ACCESS_KEY</span> via environment variables, or uncomment and add the values to the configuration file.</p>
-            <p>You can retrieve these values easily from your Amazon account at <a href="http://aws.amazon.com/account">http://aws.amazon.com/account</a> and following on the link for "Security Credentials"...</p>
+            <p>You can retrieve these values easily from your AWS Management Console at <a href="http://console.aws.amazon.com">http://console.aws.amazon.com</a>.  Click on your name in the top-right and then the "Security Credentials" link from the drop down menu.</p>
             <img src="./media/getting_started-aws_security.png" alt="Amazon accounts page showing Security Credentials link" >
-            <p>Under the Access Credentials heading, you will see a list of access keys. Clicking on the "Show" link will display the secret key, and you can simply copy and paste these into your environments.yaml configuration file.</p>
+            <p>Under the "Access Keys" heading click the "Create New Root Key" button. You will be prompted to "Download Key File" which by default is named <span class="pre">rootkey.csv</span>.  Open this file to get the <strong>access-key</strong> and <strong>secret-key</strong> for the environments.yaml configuration file.</p>
              <img src="./media/getting_started-aws_keys.png" alt="Amazon Access Credentials page showing key values" >
-             <p>The <strong>region:</strong> value corresponds to the AWS regions. 
+
+             <p>The <strong>region:</strong> value corresponds to the AWS regions.</p>
              </section>
              
           </article>
