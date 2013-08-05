@@ -120,7 +120,7 @@
             <ul>
               <li>Provide an overview of the service in the README and metadata. </li>
               <li>Use packaged software (i.e. debian packages) where possible, and "backport" any packages needed outside of the archives from whatever PPA you have them to an internal accessible repository.</li>
-              <li>Not duplicate any service components for which there are pre-existing charms.</li>
+              <li>Do not duplicate any service components for which there are pre-existing charms.</li>
               <li>Follow the coding guidelines for charms (see below).</li>
               <li>Assemble code for your application outside of the Charm.</li>            
               <li>Create a <code>/srv/${external-service-name}/${instance-type}/${service-name}</code> directory for the code itself, and <code>/srv/${external-service-name}/{${instance-type}-logs,scripts,etc,var}</code> as needed.</li>
@@ -128,6 +128,7 @@
               <li>Create monitoring checks for your application.</li>
               <li>Which checks are prompt-critical (in other words, constitutes a user-affecting outage that would warrant waking an "oncall" sysadmin over a weekend)?</li>              
               <li>Confirm what data/logs from the application needs to be made visible to developers, and in what format?</li>
+              <li>Some organizations use proxies, do not assume that every port is available, consider using common ports like 80/443 to ensure your charm can run in as many environments as possible.</li>
             </ul>
             
             <h2>Charm Coding Guidelines</h2>
