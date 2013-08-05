@@ -128,7 +128,7 @@
               <li>Create monitoring checks for your application.</li>
               <li>Which checks are prompt-critical (in other words, constitutes a user-affecting outage that would warrant waking an "oncall" sysadmin over a weekend)?</li>              
               <li>Confirm what data/logs from the application needs to be made visible to developers, and in what format?</li>
-              <li>Some organizations use proxies, do not assume that every port is available, consider using common ports like 80/443 to ensure your charm can run in as many environments as possible.</li>
+              <li>Some organizations use proxies, do not assume that every port is available, consider using common ports like 80/443 to ensure your charm can run in as many environments as possible. For added flexibility we recommend exposing port configuration in the charm as a config option.</li>
             </ul>
             
             <h2>Charm Coding Guidelines</h2>
