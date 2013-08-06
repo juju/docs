@@ -111,7 +111,7 @@
                 Before you start you will need:</p>
                 <ul>
                 <li> An Ubuntu or OSX machine to install the client on.</li>
-                <li> An environment which can provide a new server with an Ubuntu cloud operating system image on-demand. This includes services such as Amazon EC2, HP Cloud, or an OpenStack installation.</li>
+                <li> An environment which can provide a new server with an Ubuntu cloud operating system image on-demand. This includes services such as Amazon EC2, HP Cloud, or an OpenStack installation, or your local machine</li>
                 <li> It's also required that the environment provides a permanent storage facility such as Amazon S3. For the moment, though, the only environment supported is EC2, OpenStack, with LXC container support coming soon.</li>
                 <li> An SSH key-pair. If you have not already set one up, you can generate an appropriate keypair with:</li>
                 <pre>ssh-keygen -t rsa -b 2048</pre>
@@ -129,7 +129,6 @@
                     <p>To install Juju, you simply need to grab the latest juju-core package from the PPA:</p>
                     <pre>sudo add-apt-repository ppa:juju/devel
                     sudo apt-get update && sudo apt-get install juju-core</pre>
-                    <p>If you are interested in using the older version of Juju with Local/LXC support see <a href="http://askubuntu.com/q/65359/235">this page</a>. Local support will be landing in Juju Core in early August 2013.</p>
                   </div>
                   <div data-section="macosx">
                     <p>You can grab the latest pre-relase OSX client from our <a href="https://github.com/juju/juju-core/releases">Github Page</a>. Uncompress the tarball, then you can run the <code>juju</code> command from the terminal. We're in the process of testing these builds to be production ready, so if you have a problem please <a href="https://bugs.launchpad.net/juju-core/+filebug">file a bug</a>.</p>
