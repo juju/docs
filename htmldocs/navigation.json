@@ -31,10 +31,12 @@
     "Writing a Charm": {
       "link": "authors-charm-writing.html",
       "children": {
+	"Charms in Action": "authors-charms-in-action.html",
         "Subordinate Services": "authors-subordinate-services.html",
         "Implicit Relations": "authors-implicit-relations.html",
         "Charm Testing": "authors-testing.html",
-        "Hook Debugging": "authors-hooks.html"
+        "Hook Debugging": "authors-hooks.html",
+        "Service Configuration" : "authors-service-config.html"
       }
     },
     "The Juju Charm Store": {
