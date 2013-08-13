@@ -135,7 +135,18 @@
                   </div>
                   <div data-section="macosx">
                     <p>You can grab the latest pre-relase OSX client from our <a href="https://github.com/juju/juju-core/releases">Github Page</a>. Uncompress the tarball, then you can run the <code>juju</code> command from the terminal. We're in the process of testing these builds to be production ready, so if you have a problem please <a href="https://bugs.launchpad.net/juju-core/+filebug">file a bug</a>.</p>
-                    <p>Volunteers are needed to help put these in Macports or Homebrew. If you can help us out please <a href="https://lists.ubuntu.com/mailman/listinfo/juju">get in touch with us</a>.
+                    <p>Volunteers are needed to help put these in Macports or Homebrew. If you can help us out please <a href="https://lists.ubuntu.com/mailman/listinfo/juju">get in touch with us</a>.</p>
+                    <p>If you have go installed you can install juju using go get. You can install go via homebrew you'll need bzr too:</p>
+                    <pre>brew install go bzr
+                    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+                    </pre>
+                    <p>Once you have go and bzr you can install juju:</p>
+                    <pre>mkdir $HOME/go
+                    export GOPATH=$HOME/go
+                    go get -v launchpad.net/juju-core/...
+                    export PATH=$PATH:$GOPATH/bin
+                    </pre>
+                    <p>be sure to add your go bin dir to your path permanently by adding it to your .bashrc</p>
                   </div>
                 </div>
               </section>
