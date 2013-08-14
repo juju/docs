@@ -64,49 +64,7 @@
 
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
-        <div class="grid-3 doc-navigation">
-          <nav role="navigation">
-            <h1>User Guide</h1>
-            <ul>
-              <li class=""><a href="getting-started.html">Getting Started</a></li>
-              <li class=" sub"><a href="getting-started.html#intro">Introduction</a></li>
-              <li class=" sub"><a href="getting-started.html#install">Installation</a></li>
-              <li class=" sub"><a href="config-aws.html">AWS Configuration</a></li>
-              <li class=" sub"><a href="config-hpcloud.html">HP Cloud Configuration</a></li>
-              <li class=" sub"><a href="config-openstack.html">OpenStack Configuration</a></li>
-              <li class=" sub"><a href="config-maas.html">MAAS Configuration</a></li>
-              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
-              <li class="selected"><a href="charms.html">Using Charms</a></li>
-              <li class=" sub"><a href="charms.html#intro">What are Charms?</a></li>
-              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
-              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
-              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
-              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
-              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
-              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
-              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
-            </ul>
-            <h1>Charm Authors</h1>
-            <ul></ul>
-            <li class=""><a href="authors-charm-anatomy.html">Anatomy of a charm</a></li>
-            <li class="selected"><a href="authors-charm-writing.html">Writing a charm</a></li>
-            <li class=" sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
-            <li class=" sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
-            <li class=" sub"><a href="authors-testing.html">Charm Testing</a></li>
-            <li class=" sub"><a href="authors-hooks.html">Hook debugging</a></li>
-            <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
-            <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
-            <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
-            <li class=" sub"><a href="authors-charm-quality.html">Charm Quality Rating</a></li>
-            <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
-            <h1>Reference</h1>
-            <ul>
-              <li class="sub"><a href="commands.html">Juju commands</a></li>
-              <li class="sub"><a href="glossary.html">Glossary</a></li>
-              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
-            </ul>
-          </nav>
-        </div>
+		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
           <article>
             <section id="charms">
@@ -197,5 +155,11 @@
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+    <script>
+        $("#navlinks").load("navigation.html");
+    </script>
+
   </body>
 </html>

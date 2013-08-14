@@ -10,15 +10,11 @@
   <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
   <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
   <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
-
   <!--[if lt IE 9]>
   <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
-
-
-
-
 
 
 <!-- DO NOT EDIT ABOVE THIS LINE -->
@@ -64,49 +60,7 @@
 
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
-        <div class="grid-3 doc-navigation">
-          <nav role="navigation">
-            <h1>User Guide</h1>
-            <ul>
-              <li class=""><a href="getting-started.html">Getting Started</a></li>
-              <li class=" sub"><a href="getting-started.html#intro">Introduction</a></li>
-              <li class=" sub"><a href="getting-started.html#install">Installation</a></li>
-              <li class=" sub"><a href="config-aws.html">AWS Configuration</a></li>
-              <li class=" sub"><a href="config-hpcloud.html">HP Cloud Configuration</a></li>
-              <li class=" sub"><a href="config-openstack.html">OpenStack Configuration</a></li>
-              <li class=" sub"><a href="config-maas.html">MAAS Configuration</a></li>
-              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
-              <li class=""><a href="charms.html">Using Charms</a></li>
-              <li class=" sub"><a href="charms.html#intro">What are Charms?</a></li>
-              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
-              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
-              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
-              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
-              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
-              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
-              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
-            </ul>
-            <h1>Charm Authors</h1>
-            <ul></ul>
-            <li class=""><a href="authors-charm-anatomy.html">Anatomy of a charm</a></li>
-            <li class=""><a href="authors-charm-writing.html">Writing a charm</a></li>
-            <li class=" sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
-            <li class=" sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
-            <li class=" sub"><a href="authors-testing.html">Charm Testing</a></li>
-            <li class=" sub"><a href="authors-hooks.html">Hook debugging</a></li>
-            <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
-            <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
-            <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
-            <li class=" sub"><a href="authors-charm-quality.html">Charm Quality Rating</a></li>
-            <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
-            <h1>Reference</h1>
-            <ul>
-              <li class="sub"><a href="commands.html">Juju commands</a></li>
-              <li class="sub"><a href="glossary.html">Glossary</a></li>
-              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
-            </ul>
-          </nav>
-        </div>
+      	<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
           <article>
             <section id="config_aws">
@@ -114,10 +68,10 @@
 	    <p>This process requires you to have an Amazon Web Services (AWS) account. If you have not signed up for one yet, it can obtained at <a href="http://aws.amazon.com">http://aws.amazon.com</a>.</p>
             <p>You should start by generating a generic configuration file for Juju, using the command:
             <pre><code>juju generate-config -w</code></pre>
-            <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).     
+            <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
             <p>The generic configuration sections generated for AWS will look something like this:</p>
             <pre><code>
-            
+
             &nbsp;&nbsp;## https://juju.ubuntu.com/get-started/amazon/
             &nbsp;&nbsp;amazon:
             &nbsp;&nbsp;&nbsp;&nbsp;type: ec2
@@ -132,7 +86,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;# access-key: &LT;secret&GT;
             &nbsp;&nbsp;&nbsp;&nbsp;# Can be set via the env variable AWS_SECRET_ACCESS_KEY, or specified here
             &nbsp;&nbsp;&nbsp;&nbsp;# secret-key: &LT;secret&GT;
-            </code></pre>  
+            </code></pre>
 
             <p>This is a simple configuration intended to run on EC2 with S3 permanent storage. Values for the default setting can be changed simply by editing this file, uncommenting the relevant lines and adding your own settings. All you need to do to get this configuration to work is to either set the <span class="pre">AWS_ACCESS_KEY_ID</span> and <span class="pre">AWS_SECRET_ACCESS_KEY</span> via environment variables, or uncomment and add the values to the configuration file.</p>
             <p>You can retrieve these values easily from your AWS Management Console at <a href="http://console.aws.amazon.com">http://console.aws.amazon.com</a>. Click on your name in the top-right and then the "Security Credentials" link from the drop down menu.</p>
@@ -142,7 +96,7 @@
 
              <p>The <strong>region:</strong> value corresponds to the AWS regions.</p>
              </section>
-             
+
           </article>
         </div>
       </div>
@@ -206,5 +160,13 @@
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+    <script>
+        $("#navlinks").load("navigation.html");
+    </script>
+
   </body>
 </html>
+
+

@@ -31,7 +31,7 @@
     "Writing a Charm": {
       "link": "authors-charm-writing.html",
       "children": {
-	"Charms in Action": "authors-charms-in-action.html",
+    	"Charms in Action": "authors-charms-in-action.html",
         "Subordinate Services": "authors-subordinate-services.html",
         "Implicit Relations": "authors-implicit-relations.html",
         "Charm Testing": "authors-testing.html",
