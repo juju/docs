@@ -36,7 +36,7 @@
         "Implicit Relations": "authors-implicit-relations.html",
         "Charm Testing": "authors-testing.html",
         "Hook Debugging": "authors-hooks.html",
-        "Service Configuration" : "authors-service-config.html"
+        
       }
     },
     "The Juju Charm Store": {
