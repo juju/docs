@@ -88,6 +88,8 @@
               <p>Deploy MySQL on a machine with at least 32GiB of RAM, and at least 8 ECU of CPU power (architecture will be inherited from the environment, or default to amd64):</p>
               <pre><code>juju deploy --constraints "cpu-cores=8 mem=32G" mysql</code></pre>
               
+              <p>Deploy to t1.micros on AWS:</p>
+              <pre><code>juju bootstrap --constraints "cpu-power=0"</code></pre>
               
               <p>Launch all future &quot;mysql&quot; machines with at least 8GiB of RAM and 4 ECU:</p>
               <pre><code>juju set-constraints --service mysql mem=8G cpu-cores=4</code></pre>
@@ -114,10 +116,10 @@
               <li><span class="pre">maas-name</span>: The MAAS name to which each unit must be deployed. This is philosophically problematic, on the basis that teaching users that it's OK to specify single machines will lead them to pain when they attempt to scale out large deployments; but it's justified on the basis that MAAS itself needs to act as a stepping stone between the &quot;metal&quot; and &quot;cloud&quot; mindsets. <span class="pre">maas-name</span> is unset by default, and should correspond to a name known by the MAAS provider.</li>
               </ul>
               
-              
+            
               
               <h1>Working with constraints</h1>
-              <p>Here follows a worked example of constraints usage. Assume an Amazon ec2 provider throughout.</p>
+              <p>Here are some examples of working with constraints.</p>
               <p>When bootstrapping an environment, you can set the constraints directly:</p>
               <pre><code>juju bootstrap --constraints arch=i386</code></pre>
               
@@ -144,17 +146,23 @@
               <pre><code>juju deploy minecraft --constraints instance-type=cc2.8xlarge</code></pre>
               
               <p>The above command will still inherit the environment constraints, and will lead to an undeployable service (because cc2.8xlarge cannot run on i386). Running juju debug-log will expose the problem; you can fix it as follows:</p>
+              
               <pre><code>
               juju remove-unit minecraft/0
               juju terminate-machine 1
               juju set-constraints --service minecraft arch=amd64 instance-type=cc2.8xlarge
               juju add-unit minecraft
               </code></pre>
+              
               <p>(You need to remove machine 1's assigned unit before you can terminate it; you need to explicitly terminate the machine to stop the provisioning agent from continuing to attempt to launch it; and you need to set the new service constraints before adding a new unit that will use those constraints.)</p>
+              
               <p>Work on the constraints feature is ongoing, and it will shortly become impossible to specify knowably inconsistent constraints; but it is in general impossible to detect undeployable constraints with absolute certainty (for example, you could deploy with <span class="pre">ec2-zone=a</span> and be running perfectly happily, but see us-east-1a suddenly go down just as you add a unit).</p>
+
               <h1>Distinctions Between Entities</h1>
               <p>As noted, it is impossible to directly set constraints on machines or service units; however, it is still possible to call <span class="pre">juju get-constraints</span> on those entities. In either case, the constraints are a snapshot of the applicable constraints at entity creation time; so the unit constraints are the combined environment/service constraints from the time at which the unit was created, and the machine constraints are a copy of the unit constraints at that same point in time.</p>
+              
               <p>Storing this data allows us to automatically reprovision unexpectedly dead machines (for example, if you terminate machine 7 via the AWS management console, the provisioning agent will spin up a new instance with the same constraints and redeploy the assigned units); and making the data available via the CLI gives you visibility into the state of your deployment, and allows you to answer questions like &quot;why is this unit running on that machine?&quot;.</p>
+              
               <h1>Legacy Deployments</h1>
               <p>Attempting to use constraints against a deployment that predates their inclusion in juju will not work, because the running legacy code (specifically, the provisioning agent) will not be able to interpret them. Therefore, attempts to specify constraints against legacy deployments will generate errors to inform users of their invalidity; at the agent level they are simply ignored.</p>
               <p>All commands valid before the client upgrade should continue to work as before, as will the EC2 <span class="pre">default-image-id</span> and <span class="pre">default-instance-type</span> environment settings.</p>
