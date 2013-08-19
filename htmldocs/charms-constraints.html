@@ -85,9 +85,6 @@
               
               <h1>Examples</h1>
               
-              <p>Launch a new deployment running on an m1.medium (running an i386 image), and defaulting to that for future services:</p>
-              <pre><code>juju bootstrap --constraints "instance-type=m1.medium arch=i386"</code></pre>
-              
               <p>Deploy MySQL on a machine with at least 32GiB of RAM, and at least 8 ECU of CPU power (architecture will be inherited from the environment, or default to amd64):</p>
               <pre><code>juju deploy --constraints "cpu-cores=8 mem=32G" mysql</code></pre>
               
