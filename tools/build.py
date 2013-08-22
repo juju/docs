@@ -13,7 +13,7 @@ import time
 
 def page_title(page, source=None, itr=None):
     if not source:
-        with open('htmldocs/navigation.json', 'r') as f:
+        with open('../htmldocs/navigation.json', 'r') as f:
             source = json.loads(f.read())
 
     if 'link' in source:
@@ -41,7 +41,7 @@ if __name__ == '__main__':
         sys.exit(1)
 
     templates = glob.glob('skel/*.tpl')
-    docs = glob.glob('htmldocs/*.html')
+    docs = glob.glob('../htmldocs/*.html')
     timestamp = int(time.time())
 
 
