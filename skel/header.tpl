@@ -24,7 +24,7 @@
   </div>
   <div class="header-content">
     <div class="clearfix">
-      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left: 737px; display: block;" class="arrow-nav">
+      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left: 455px; display: block;" class="arrow-nav">
       <div class="header-navigation-secondary"></div>
       <div class="header-image"></div>
       <h1>Resources</h1>

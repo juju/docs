@@ -100,7 +100,7 @@ pre code {
   width: 190px !important;
 }
 
-.doc-navigation > nav h1 {
+.doc-navigation  h1 {
   text-transform: uppercase;
   font-size: 20px;
   line-height: 1.2;
@@ -109,11 +109,11 @@ pre code {
   
 }
 
-.doc-navigation > nav h1:not(:first-child) {
+.doc-navigation > h1:not(:first-child) {
   margin-top: 20px;
 }
 
-.doc-navigation > nav h1::before {
+.doc-navigation > h1::before {
   content: "";
   position: absolute;
   width: 12px;
@@ -124,7 +124,7 @@ pre code {
   background-size: 48px 14px;
 }
 
-.doc-navigation > nav li a {
+.doc-navigation li a {
   padding-left: 20px;
   display: block;
   margin-bottom: 1px;
@@ -138,19 +138,19 @@ pre code {
   text-decoration: underline;
 }
 
-.doc-navigation > nav li.sub > a {
+.doc-navigation li.sub > a {
   padding-left: 30px;
   font-weight:normal;
 }
 
-.doc-navigation > nav li.selected {
+.doc-navigation li.selected {
   background-color: #dd4814;
   color: #fff;
   font-weight: 700;
   border-radius: 4px;
 }
 
-.doc-navigation > nav li.selected a {
+.doc-navigation li.selected a {
   color: #fff;
 }
 
