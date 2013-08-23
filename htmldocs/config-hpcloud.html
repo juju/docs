@@ -77,12 +77,12 @@
              &nbsp;&nbsp;&nbsp;&nbsp;region: <strong class="code">az-1.region-a.geo-1</strong>
              &nbsp;&nbsp;&nbsp;&nbsp;public-bucket-url: <strong class="code">https://region-a.geo-1.objects.hpcloudsvc.com/v1/60502529753910</strong>
             </code></pre>
-            <p> The items highlighted are values you will need to enter, and are explained below. You will find most of the relevant information on the <a href="https://account.hpcloud.com/account/api_keys"> HP Cloud API Keys page</a></p>
+            <p>The items highlighted are values you will need to enter, and are explained below. You will find most of the relevant information on the <a href="https://account.hpcloud.com/account/api_keys"> HP Cloud API Keys page</a></p>
             <ul>
-              <li><strong>tenant-name:</strong> For HPCloud, this is listed as the project name on the API keys page.</li>
+              <li><strong>tenant-name:</strong> For HPCloud, this is listed as the project name on the<a href="https://account.hpcloud.com/projects"> "Manage Projects" page</a>.</li>
             </ul>
             <img src="./media/getting_started-hpc-tenant.png" alt="image showing project name">
-            
+            <p>You will find the following information on the <a href="https://account.hpcloud.com/account/api_keys"> HP Cloud API Keys page for your account.</a></p>
             <ul>
             <li><strong>auth-url:</strong>This is the keystone url for authentication. It is given (on a region by region basis) under the heading "Service Endpoints - identity"
               </li>
@@ -93,7 +93,7 @@
             </ul>
             <img src="./media/getting_started-hpc-region.png" alt="image showing project name">
             <ul>
-              <li><strong>default-image-id:</strong> This is the number assigned to the images available to the HP Cloud. Current;y, these may vary from region to region. The best way to ensure that you have the correct image id is to go to the <a href="https://console.hpcloud.com/compute/az-1_region-a_geo-1/servers"> HP Cloud Console &GT; Servers </a> page and Click on the link to "Create a new server from an image". This will display a list of available images. In the "partner provided images" section you should find a relevant version of Ubuntu. The number in brackets after the image description is the id number you require. </li>
+              <li><strong>default-image-id:</strong> This is the number assigned to the images available to the HP Cloud. Currently, these may vary from region to region. The best way to ensure that you have the correct image id is to go to the <a href="https://console.hpcloud.com/compute/az-1_region-a_geo-1/servers"> HP Cloud Console &GT; Servers </a> page and Click on the link to "Create a new server from an image". This will display a list of available images. In the "partner provided images" section you should find a relevant version of Ubuntu. The number in brackets after the image description is the id number you require. </li>
             </ul>
             <img src="./media/getting_started-hpc-image.png" alt="determining the image id number">
             <ul>
