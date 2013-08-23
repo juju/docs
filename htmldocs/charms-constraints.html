@@ -90,6 +90,7 @@
               <pre><code>juju get-constraints 3 mysql wordpress/7</code></pre>
               
               <h1>Provider Constraints</h1>
+
               <p>The constraints available vary by provider, but should include:</p> 
               
               <ul>
@@ -104,7 +105,7 @@
               <ul>
               <li><span class="pre">maas-name</span>: The MAAS name to which each unit must be deployed. This is philosophically problematic, on the basis that teaching users that it's OK to specify single machines will lead them to pain when they attempt to scale out large deployments; but it's justified on the basis that MAAS itself needs to act as a stepping stone between the &quot;metal&quot; and &quot;cloud&quot; mindsets. <span class="pre">maas-name</span> is unset by default, and should correspond to a name known by the MAAS provider.</li>
               </ul>
-              
+              <p class="note"><strong> Note: </strong> The <span class="pre">instance-type</span> constraint is not currently supported by juju-core, but support will be added soon. Some of the following examples make use of this setting merely to illustrate a point. </p>
             
               
               <h1>Working with constraints</h1>
