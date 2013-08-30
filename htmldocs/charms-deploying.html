@@ -273,8 +273,9 @@ juju add-unit --to 1 rabbitmq-server
                         <p>I should now have a second machine running both the
                         openstack-dashboard service and a second unit of the
                         rabbitmq-server service:</p>
-<pre class="prettyprint">
-$ juju status
+                        <pre class="prettyprint">juju status</pre>
+                        <p>Which results in the following</p>
+                        <pre class="prettyprint">
 machines:
   "0":
     agent-state: started
@@ -527,6 +528,7 @@ juju add-unit rabbitmq-server
                 on this site</a></p>
             </div>
         </div>
+      <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     </footer><script src=
     "//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type=
     "text/javascript"></script> <script src=
