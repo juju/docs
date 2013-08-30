@@ -136,9 +136,7 @@
                         ensures that you get the relevant, up to date version
                         of the charm and "everything just works". To deploy a
                         charm like this you can just specify:</p>
-                        <pre>
-<code>juju deploy mysql</code>
-</pre>
+                        <pre class="prettyprint">juju deploy mysql</pre>
 
                         <p>Running this will do exactly what you expect - fetch
                         the latest juju charm for the series you are running
@@ -149,14 +147,10 @@
                         means you can actually deploy charms from a variety of
                         sources. The default source is the charm store. The
                         above command is the same as running:</p>
-                        <pre>
-<code>juju deploy cs:precise/mysql</code>
-</pre>
+                        <pre class="prettyprint">juju deploy cs:precise/mysql</pre>
 
                         <p>which follows the format:</p>
-                        <pre>
-<code>&LT;repository&GT;:&LT;series&GT;&LT;service&GT;</code>
-</pre>
+                        <pre class="prettyprint">&LT;repository&GT;:&LT;series&GT;&LT;service&GT;</pre>
 
                         <h1 id="local">Deploying from a local repository</h1>
 
@@ -178,20 +172,17 @@
                         imagine yourselves.</p>
 
                         <p>Juju can be pointed at a local directory to source
-                        charms from using the <span class=
-                        "pre">--repository=&LT;path/to/files&GT;</span>
+                        charms from using the <code>--repository=&LT;path/to/files&GT;</code>
                         switch like this:</p>
-<pre>
-<code>juju deploy --repository=/usr/share/charms/ local:precise/vsftpd</code>
-</pre>
+<pre class="prettyprint">juju deploy --repository=/usr/share/charms/ local:precise/vsftpd</pre>
 
                         <p>You can also make use of standard filesystem
                         shortcuts, so the following examples are also
                         valid:</p>
-<pre>
+
+                        <pre class="prettyprint">
 juju deploy --repository=. haproxy
-juju deploy --repository=~/charms/ wordpress</code>
-</pre>
+juju deploy --repository=~/charms/ wordpress</pre>
 
                         <p class="note"><strong>Note:</strong> Specifying a
                         local repository makes juju look there
@@ -199,7 +190,7 @@ juju deploy --repository=~/charms/ wordpress</code>
                         not found in that repository, it will fall back to
                         fetching it from the charm store. If you wish to check
                         where a charm was installed from, it is listed in the
-                        <span class="pre">juju status</span> output.</p>
+                        <code>juju status</code> output.</p>
 
                         <h1>Changing the defaults</h1>
 
@@ -209,18 +200,14 @@ juju deploy --repository=~/charms/ wordpress</code>
                         searching order. To permanently change the defaults
                         (e.g. if you would prefer to always deploy from a local
                         service first), you can enter a list of repositories in
-                        your <span class="pre">environments.yaml</span>
+                        your <code>environments.yaml</code>
                         file:</p>
-                        <pre>
-<code>...
-              repositories:
-              
-               - http://charms.ubuntu.com/collection/ubuntu
-               - http://charms.ubuntu.com/collection/openstack
-               - http://charms.ubuntu.com/people/miked
-               - /var/lib/charms
-             </code>
-</pre>
+                        <pre class="prettyprint lang-yaml">
+repositories:
+  - http://charms.ubuntu.com/collection/ubuntu
+  - http://charms.ubuntu.com/collection/openstack
+  - http://charms.ubuntu.com/people/miked
+  - /var/lib/charms</pre>
 
                         <h1>A note about caching...</h1>
 
@@ -242,10 +229,10 @@ juju deploy --repository=~/charms/ wordpress</code>
                         machine per unit we can consolidate services.</p>
 
                         <p>In this example we use the
-                        <span class="pre">--constraints</span> flag to fire up a bootstrap
+                        <code>--constraints</code> flag to fire up a bootstrap
                         node with 4G of RAM so we can deploy other services to
-                        it by using the <span class="pre">--to</span> command:</p>
-                        <pre>
+                        it by using the <code>--to</code> command:</p>
+                        <pre class="prettyprint">
 juju bootstrap --constraints="mem=4G"
 juju deploy --to 0 mysql
 juju deploy --to 0 rabbitmq-server
@@ -257,15 +244,15 @@ juju deploy --to 0 rabbitmq-server
                         <p>Note that you need to know the identifier of the
                         machine that you are going to “deploy --to” – in all
                         deployments, machine 0 is always the bootstrap node so
-                        the above example works nicely. Doing a <span class="pre">juju
-                        status</span> will show you a list of all the machines
+                        the above example works nicely. Doing a <code>juju
+                        status</code> will show you a list of all the machines
                         and their machine numbers for you to decide what to
                         deploy to.</p>
 
                         <p>The "add-unit" command also supports the --to
                         option, so its now possible to specifically target
                         machines when expanding service capacity:</p>
-                        <pre>
+                        <pre class="prettyprint">
 juju deploy --constraints="mem=4G" openstack-dashboard
 juju add-unit --to 1 rabbitmq-server
 </pre>
@@ -350,11 +337,11 @@ services:
                         service is in its own container, but this work is not
                         yet complete.</p>
 
-                        <p>While the "add-unit" command supports the --to
-                        option, you can elect not use --to when doing an
+                        <p>While the "add-unit" command supports the <code>--to</code>
+                        option, you can elect not use <code>--to</code> when doing an
                         "add-unit" to scale out the service on it's own
                         node.</p>
-                        <pre>
+                        <pre class="prettyprint">
 juju add-unit rabbitmq-server
 </pre>
 
