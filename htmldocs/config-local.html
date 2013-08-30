@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Juju Documentation - AWS Configuration</title>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
+  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+  <body class="resources">
+    <header class="global clearfix" role="banner">
+  <div class="header-navigation">
+    <div>
+      <nav role="navigation">
+        <ul>
+          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
+          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
+          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
+          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
+          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
+          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
+          <li>
+            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
+              <fieldset>
+                <input id="input-search" type="text" name="s" value="Search" />
+              </fieldset>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="header-content">
+    <div class="clearfix">
+      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
+      <div class="header-navigation-secondary"></div>
+      <div class="header-image"></div>
+      <h1>Resources</h1>
+      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+    </div>
+  </div>
+</header>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+      	<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+          <article>
+            <section id="config_local">
+            <h1>Configuring for Local Provider</h1>
+            <h2>Prerequisites</h2>
+            <p>The local provider enables you to run Juju on a single system like your local computer or a one server. This way you can simply evaluate the software or service configurations, develop own charms or run a single server system.</p> 
+            <p>To act this way Juju uses the <strong>lxc Linux Container</strong> which has to be installed on your computer with the command:</p>
+            <pre><code>
+            sudo apt-get install lxc
+            </code></pre>
+            <p>Additionally the local provider needs <strong>MongoDB</strong> installed on your system. This is done with the command:</p> 
+            <pre><code>
+            sudo apt-get install mongodb-server
+            </code></pre>
+            <p>In case of <strong>precise</strong> or <strong>quantal</strong> MongoDB has to be installed from a different repository. So in this case call</p>
+            <pre><code>
+            sudo apt-add-repository ppa:juju/stable
+            sudo apt-get update
+            </code></pre>
+            <p>before. In case you're not sure take a look into the file <code>/etc/lsb-release</code> and there at the variabe <code>DISTRIB_CODENAME</code>. If you're not running Ubuntu please consult your operating system distribution's documentation for instructions on installing the lxc userspace tools and the MongoDB server. Juju requires a MongoDB server built with SSL support.</p>
+            <p>The dependence on the lxc Linux Container shows that the local provider only runs on Linux systems. All steps above are also printed in case of any unsatisfied prerequisite.</p>
+
+            <h2>Configuration</h2>
+            <p>You should start by generating a generic configuration file for Juju, using the command:
+            <pre><code>
+            juju generate-config -w
+            </code></pre>
+            <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).</p>
+            <p>The generic configuration sections generated for the local provider will look something like this:</p>
+            <pre><code>
+            &nbsp;&nbsp;## https://juju.ubuntu.com/get-started/local/
+            &nbsp;&nbsp;local:
+            &nbsp;&nbsp;&nbsp;&nbsp;type: local
+            &nbsp;&nbsp;&nbsp;&nbsp;admin-secret: 772b9471131c6b5883475e3908156d32
+            &nbsp;&nbsp;&nbsp;&nbsp;# Override the directory that is used for the storage files and database.
+            &nbsp;&nbsp;&nbsp;&nbsp;# The default location is $JUJU_HOME.
+            &nbsp;&nbsp;&nbsp;&nbsp;# $JUJU_HOME defaults to ~/.juju
+            &nbsp;&nbsp;&nbsp;&nbsp;# root-dir: ~/.juju/local
+            &nbsp;&nbsp;&nbsp;&nbsp;# Override the storage port if you have multiple local providers, or if the
+            &nbsp;&nbsp;&nbsp;&nbsp;# default port is used by another program.
+            &nbsp;&nbsp;&nbsp;&nbsp;# storage-port: 8040
+            &nbsp;&nbsp;&nbsp;&nbsp;# Override the shared storage port if you have multiple local providers,
+            &nbsp;&nbsp;&nbsp;&nbsp;# or if the default port is used by another program.
+            &nbsp;&nbsp;&nbsp;&nbsp;# shared-storage-port: 8041
+            </code></pre>
+            <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <strong>$JUJU_HOME</strong>, which defaults to <strong>~/.juju/</strong>. By uncommenting and setting <strong>root-dir</strong> this location can be changed as well as the ports of the storage and the shared storage. This may be useful the case of multiple parallel running local providers or conflicts with other programs on your system.
+
+            <h2>Bootstrapping and Destroying</h2>
+            <p>The usage of lxc Linux Containers enforces that bootstrapping and destroying of an environment are done as <strong>root</strong>. All other operations can be executed as non-root.
+             </section>
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer class="global clearfix" role="contentinfo">
+  <div class="row">
+    <div class="inner-wrapper">
+      <nav role="navigation" class="clearfix">
+        <ul class="footer-a">
+          <li class="grid-3 first-col">
+            <h4><a href="/get-started">Get started</a></h4>
+            <ul>
+              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/resources">Resources</a></h4>
+            <ul>
+              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
+              <li><a href="/resources/videos/">Videos</a></li>
+              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/community">Community</a></h4>
+            <ul>
+              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
+              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
+              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
+            </ul>
+          </li>
+          <li class="grid-3 last-col">
+            <h4><a href="https://launchpad.net/juju">Code</a></h4>
+            <ul>
+              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+              <li><a href="https://launchpad.net/charms">Charms</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row no-border">
+    <div class="legal inner-wrapper">
+      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
+    </div>
+  </div>
+</footer>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  </body>
+</html>
