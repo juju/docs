@@ -155,7 +155,7 @@
 
                         <p>which follows the format:</p>
                         <pre>
-<code>&amp;LT;repository&amp;GT;:&amp;LT;series&amp;GT;&amp;LT;service&amp;GT;</code>
+<code>&LT;repository&GT;:&LT;series&GT;&LT;service&GT;</code>
 </pre>
 
                         <h1 id="local">Deploying from a local repository</h1>
@@ -179,20 +179,18 @@
 
                         <p>Juju can be pointed at a local directory to source
                         charms from using the <span class=
-                        "pre">--repository=&amp;LT;path/to/files&amp;GT;</span>
+                        "pre">--repository=&LT;path/to/files&GT;</span>
                         switch like this:</p>
-                        <pre>
+<pre>
 <code>juju deploy --repository=/usr/share/charms/ local:precise/vsftpd</code>
 </pre>
 
                         <p>You can also make use of standard filesystem
                         shortcuts, so the following examples are also
                         valid:</p>
-                        <pre>
-<code>juju deploy --repository=. haproxy</code>
-</pre>
-                        <pre>
-<code>juju deploy --repository=~/charms/ wordpress</code>
+<pre>
+juju deploy --repository=. haproxy
+juju deploy --repository=~/charms/ wordpress</code>
 </pre>
 
                         <p class="note"><strong>Note:</strong> Specifying a
@@ -275,7 +273,7 @@ juju add-unit --to 1 rabbitmq-server
                         <p>I should now have a second machine running both the
                         openstack-dashboard service and a second unit of the
                         rabbitmq-server service:</p>
-<code>
+<pre class="prettyprint">
 $ juju status
 machines:
   "0":
@@ -334,7 +332,7 @@ services:
         agent-version: 1.11.4
         machine: "1"
         public-address: 10.5.0.45
-</code>
+</pre>
 
                         <p>These two features make it much easier to deploy
                         complex services such as OpenStack which use a large
