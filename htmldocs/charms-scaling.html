@@ -60,6 +60,21 @@
               <h1>Scaling Charms</h1>
               <p>One of the killer features of computing in the cloud is that it (should) seamlessly allow you to scale up or down your services to meet your needs and whims. Juju not only makes it simple to deploy services, but crucially makes it easy to manage them too. It won't anticipate you getting slashdotted or on the front page of hacker news (yet), but it does mean that when you do you can reliably scale your services to meet the demand.</p>
               <h1> Adding Units </h1>
+              <p> The general usage to scale a service up is via the <code>add-unit</code> command:</p>
+              <pre class="runnable"><code>
+               juju add-unit [options] &ltservice-name&gt
+              </code></pre>
+              <p>The command options are:</p>
+              <pre class="runnable"><code>
+              #juju environment to operate in
+              -e, --environment &ltenvironment_name&gt
+
+              # number of service units to add
+              -n, --num-units [integer]
+
+              #the machine or container to deploy the unit in, bypasses constraints
+              --to &ltmachine&gt
+              </code></pre>
               <p>Scaling up services is really as simple as asking for more instances. Consider the following setup for a mediawiki:</p>
               <pre class="runnable"><code>
                juju bootstrap
@@ -72,15 +87,57 @@
               <pre class="runnable"><code>
                juju add-unit mediawiki
               </code></pre>
-              <p>This will cause a new instance to be run and configured to work alongside the currently running one.</p>
-              <p>If that isn't the sort of scale you had in mind, you can use a --count or -c switch to specify a number of instances to add:</p>
-              
+              <p>This will cause a new instance to be run and configured to work alongside the currently running one. Behind the scenes Juju is adding an instance to the Juju environment called a machine and provisioning the specified service onto that instance/machine.</p>
+              <p>Suppose your mysql service needs hyper-scale, you can use the <code>-n</code> or <code>--num-units</code> options to <code>add-unit</code> to specify the desired number of units you want to be added to the service. For example, to scale up your service by 100 units simply do:</p>
+              <pre class="runnable"><code>
+               juju add-unit -n 100 mysql
+              </code></pre>
+              <p>or you can use <code>--num-unit</code> which has the same result, but is more readable:</p>
+              <pre class="runnable"><code>
+               juju add-unit --num-unit 100 mysql 
+              </code></pre>
+              <p>If you would like to add a unit to a specific machine just append the <code>--to</code> <machine> option.</p>
+              <pre class="runnable"><code>
+               #add unit to machine 23
+               juju add-unit mysql --to 23
+
+               #add unit to lxc container 3 on host machine 24
+               juju add-unit mysql --to 24/lxc/3 
+
+               #add unit to a new lxc container on host machine 25
+               juju add-unit mysql --to lxc:25
+              </code></pre>
+              <p>The <code>add-unit</code> command deploys a machine matching the constraints of the initially deployed service. For example, if mysql was deployed with the defaults (ie no <code>--constraints</code> option) you would have mysql on an instance that matches the closest to 1Gig of memory and 1CPU. If you would like to add a unit with more resources to the mysql service you will first need to issue a <code>add-machine</code> with the desired constraint followed by a <code>add-unit</code>. For example, the following command adds a 16Gig unit to the mysql service (note in this example <code>juju status</code> returns machine 3 for the <code>add-machine</code> command):</p>
+              <pre class="runnable"><code>
+               juju add-machine --constraints="mem=16G"
+               juju add-unit mysql --to 3
+              </code></pre>
+
+              <p class="note">Keep in mind you can always use the <code>-e</code> or <code>--environment</code> options to specify which environment/cloud you would like the command ran against. In the following example the <code>-e hpcloud</code> adds 100 units to the mysql service in HP's cloud:</p>
+              <pre class="runnable"><code>
+               juju add-unit -n 100 mysql -e hpcloud
+              </code></pre>
+              <p><a href="charms-deploying.html#deploying-to-machines">More on deploying to specific machines.</a></p>
               <h1>Scaling Back</h1>
               <p>Sometimes you also want to scale back some of your services, and this too is easy with Juju.</p>
+              <p> The general usage to scale down a service is with the  <code>remove-unit</code> command:</p>
+              <pre class="runnable"><code>
+               juju remove-unit [options] &ltunit&gt [...]
+              </code></pre>
+              <p> For example, the following scales down the mediawiki service by one unit:</p>
               <pre class="runnable"><code>
                juju remove-unit mediawiki/1
               </code></pre>
-              <p>The <span class="pre">remove-unit</span> command can be run to remove running units safely. The running services should automatically adjust to the change. Should you wish to remove a service, please see the section on <a href="charms-destroy.html">destroying services</a>.
+              <p> If you have scaled-up the mediawiki service by more than one unit you can remove multiple units in the same command as long as you know the unit name (ie &ltservice&gt/#).</p>
+              <pre class="runnable"><code>
+               juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5
+              </code></pre>
+              <p>The <code>remove-unit</code> command can be run to remove running units safely. The running services should automatically adjust to the change.</p>
+              <p class="note">Note: After removing a service the machine will still be running. In order to completely remove the machine that once housed the service you need to issue a <code>destroy-machine</code>. For example, to remove machine 1 that the unit mediawiki/1 was housed on issue:
+              <pre class="runnable"><code>
+               juju destroy-machine 1               
+              </code></pre>
+              <p>For more information on removing services, please see the section on <a href="charms-destroy.html">destroying services</a>.</p>
             </section>
             
             
