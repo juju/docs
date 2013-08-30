@@ -433,3 +433,7 @@ div.note.distribute {
 pre.lang-yaml .typ, pre.lang-yaml .kwd {
   color: #fff;
 }
+
+pre.prettyprint, code.prettyprint {
+  background-color: #222 !important;
+}

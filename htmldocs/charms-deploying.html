@@ -242,14 +242,14 @@ juju deploy --to 0 rabbitmq-server
                         and rabbitmq-server "to" node 0.</p>
 
                         <p>Note that you need to know the identifier of the
-                        machine that you are going to “deploy --to” – in all
+                        machine that you are going to <code>deploy --to</code> – in all
                         deployments, machine 0 is always the bootstrap node so
-                        the above example works nicely. Doing a <code>juju
-                        status</code> will show you a list of all the machines
+                        the above example works nicely. Doing a <code>juju status</code>
+                        will show you a list of all the machines
                         and their machine numbers for you to decide what to
                         deploy to.</p>
 
-                        <p>The "add-unit" command also supports the --to
+                        <p>The <code>add-unit</code> command also supports the <code>--to</code>
                         option, so its now possible to specifically target
                         machines when expanding service capacity:</p>
                         <pre class="prettyprint">
