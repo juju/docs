@@ -275,7 +275,7 @@ juju add-unit --to 1 rabbitmq-server
                         <p>I should now have a second machine running both the
                         openstack-dashboard service and a second unit of the
                         rabbitmq-server service:</p>
-<code>
+<pre class="prettyprint">
 $ juju status
 machines:
   "0":
@@ -334,7 +334,7 @@ services:
         agent-version: 1.11.4
         machine: "1"
         public-address: 10.5.0.45
-</code>
+</pre>
 
                         <p>These two features make it much easier to deploy
                         complex services such as OpenStack which use a large

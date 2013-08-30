@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Juju Documentation - Charms in Action</title>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
+  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<!-- DO NOT EDIT ABOVE THIS LINE -->
+
+<!-- DO NOT EDIT ABOVE THIS LINE -->
+
+
+  <body class="resources">
+    <header class="global clearfix" role="banner">
+  <div class="header-navigation">
+    <div>
+      <nav role="navigation">
+        <ul>
+          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
+          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
+          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
+          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
+          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
+          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
+          <li>
+            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
+              <fieldset>
+                <input id="input-search" type="text" name="s" value="Search" />
+              </fieldset>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="header-content">
+    <div class="clearfix">
+      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
+      <div class="header-navigation-secondary"></div>
+      <div class="header-image"></div>
+      <h1>Resources</h1>
+      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+    </div>
+  </div>
+</header>
+
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+          <article>      
+            <section id="node">
+        <h1>
+          Using Juju to Deploy your Node.js Application
+        </h1>
+        <p>
+            One of Juju&acirc;&euro;&trade;s main use cases is to deploy your application directly out of version control and into a cloud. Since Juju supports local and remote clouds, this makes for a nice workflow that enables you to rev your app quickly on your local machine and then deploy out the cloud.
+        </p>
+        <p>
+            In this tutorial we will deploy a Node.js/MongoDB application directly from github. The application will be behind an HAProxy service so that we can horizontally scale when needed.
+        </p>
+        <p>
+            We will then set up a local-to-cloud workflow with our application so we can do continuous deployment. Since we deploy locally in the exact same way as we deploy to a cloud, this is a powerful method for developing your application in an environment that more closely resembles production.
+        </p>
+        <p>
+            Before moving on you should have gone through the <a href="https://juju.ubuntu.com/docs/getting-started.html">Getting Started</a> section and installed and configured Juju.
+        </p>
+        <h2 id="basic-usage-of-the-node.js-charm">
+            Basic Usage of the Node.js Charm
+        </h2>
+        <p>
+            First, create a <code>config.yaml</code> to add info about your app pointing to your github repo:
+        </p>
+        <pre>
+<code>sample-node:
+  repo: https://github.com/yourapplication</code>
+</pre>
+        <p>
+            If you have not already bootstrapped an environment, do so:
+        </p>
+        <pre>
+<code>juju bootstrap</code>
+</pre>
+        <p>
+            Then wait a few minutes while your cloud spins up. Then deploy some basic services:
+        </p>
+        <pre>
+<code>juju deploy node-app myapp
+juju deploy mongodb
+juju deploy haproxy</code>
+</pre>
+        <p>
+            relate them
+        </p>
+        <pre>
+<code>juju add-relation mongodb myapp
+juju add-relation myapp haproxy</code>
+</pre>
+        <p>
+            open it up to the outside world
+        </p>
+        <pre>
+<code>juju expose haproxy</code>
+</pre>
+        <p>
+            Find the haproxy instance&acirc;&euro;&trade;s public URL from
+        </p>
+        <pre>
+<code>juju status</code>
+</pre>
+        <p>
+            (or attach it to an elastic IP via the AWS console) and open it up in a browser.
+        </p>
+        <p>
+            scale up your app (to 10 nodes for example)
+        </p>
+        <pre>
+<code>juju add-unit -n 10 myapp</code>
+</pre>
+        <p>
+            and scale it back down
+        </p>
+        <pre>
+<code>juju remove-unit -n9 myapp</code>
+</pre>
+        <h2 id="local-to-cloud-workflow">
+            Local to Cloud Workflow
+        </h2>
+        <p>
+            The previous example deploys your application quickly to the cloud, in this example we will show how to hack and test on an application locally on your laptop and then push out to the public cloud.
+        </p>
+        <p>
+            We need to configure 2 environments, a local one and a public cloud one.
+        </p>
+        <ol style="list-style-type: decimal">
+            <li>Configure the <a href="https://juju.ubuntu.com/docs/config-local.html">local provider</a> on your machine.
+            </li>
+            <li>Configure a public or private cloud on your machine.
+            </li>
+        </ol>
+        <ul>
+            <li>
+                <a href="https://juju.ubuntu.com/docs/config-aws.html">AWS</a>
+            </li>
+            <li>
+                <a href="https://juju.ubuntu.com/docs/config-hpcloud.html">HP Cloud</a>
+            </li>
+            <li>
+                <a href="https://juju.ubuntu.com/docs/config-openstack.html">OpenStack</a>
+            </li>
+        </ul>
+        <p>
+            In this example the local environment is named <code>local</code> and we&acirc;&euro;&trade;ll deploy to an AWS environment called <code>amazon</code>. First let&acirc;&euro;&trade;s <code>switch</code> to the local environment and bootstrap.
+        </p>
+        <pre>
+<code>juju switch local
+juju bootstrap</code>
+</pre>
+        <p>
+            Create a <code>config.yaml</code> to add info about your app pointing to your github repo:
+        </p>
+        <pre>
+<code>sample-node:
+  app_url: https://github.com/yourapplication</code>
+</pre>
+        <p>
+            Then deploy some basic services:
+        </p>
+        <pre>
+<code>juju deploy --config ~/myapp.yaml node-app myapp 
+juju deploy mongodb</code>
+</pre>
+        <p>
+            relate them
+        </p>
+        <pre>
+<code>juju add-relation mongodb myapp</code>
+</pre>
+        <p>
+            Now open up your browser and go to <code>http://localhost</code> to get your application loaded in your browser.
+        </p>
+        <h3 id="continuous-deployment">
+            Continuous Deployment
+        </h3>
+        <p>
+            Continue to write your code, push to git as you land features and fixes. When you&acirc;&euro;&trade;re ready to test it you can tell Juju to check the git repository again:
+        </p>
+        <pre>
+<code>juju set myapp app_branch=https://github.com/yourapplication</code>
+</pre>
+        <p>
+            The charm will then fetch the latest code and you can refresh your browser at <code>http://localhost</code>.
+        </p>
+        <p>
+            Repeat pushing to git and using the juju set command to keep a live instance of your application running in your local environment.
+        </p>
+        <h3 id="push-to-your-publicprivate-cloud">
+            Push to your Public/Private Cloud
+        </h3>
+        <p>
+            After you&acirc;&euro;&trade;ve repeatedly upgraded your application locally it&acirc;&euro;&trade;s time to push it out to a place where your coworkers can see your app in all it&acirc;&euro;&trade;s glory, let&acirc;&euro;&trade;s push this to AWS. Same exact commands as before, just to a different environment:
+        </p>
+        <pre>
+<code>juju switch amazon
+juju bootstrap
+juju deploy --config ~/myapp.yaml node-app myapp 
+juju deploy mongodb
+juju add-relation mongodb myapp</code>
+</pre>
+        <p>
+            Since we&acirc;&euro;&trade;re on a public cloud and not on a local provider we need to explicitly expose the service and get its public IP:
+        </p>
+        <pre>
+<code>juju expose myapp
+juju status myapp</code>
+</pre>
+        <p>
+            And put the ec2 URL in your browser. If you want to enable some horizontal scalability to your application you can do so, even after you&acirc;&euro;&trade;ve deployed!
+        </p>
+        <pre>
+<code>juju deploy haproxy
+juju add-relation haproxy myapp
+juju expose haproxy
+juju unexpose myapp</code>
+</pre>
+        <p>
+            And then get the public IP from the haproxy instead (notice how we&acirc;&euro;&trade;ve unexposed your application so that only haproxy is serving the public internet):
+        </p>
+        <pre>
+<code>juju status haproxy</code>
+</pre>
+        <p>
+            Now you can <code>juju add-unit myapp</code> and <code>juju remove-unit myapp</code> based on load.
+        </p>
+        <h3 id="tearing-it-all-down">
+            Tearing it all down
+        </h3>
+        <p>
+            The local containers survive reboots and do not go away until you explicitly tear the environment down. Now that your coworkers have seen your great application let&acirc;&euro;&trade;s also stop spending money:
+        </p>
+        <pre>
+<code>juju destroy-environment -eamazon
+juju destroy-environment -local</code>
+</pre>
+        <h2 id="charm-details">
+            Charm Details
+        </h2>
+        <p>
+            This section is to explain how the charm works and is provided here as a reference.
+        </p>
+        <h3 id="what-the-formula-does">
+            What the formula does
+        </h3>
+        <p>
+            During the <code>install</code> hook,
+        </p>
+        <ul>
+            <li>installs <code>node</code>/<code>npm</code>
+            </li>
+            <li>clones your node app from the repo specified in <code>app_repo</code>
+            </li>
+            <li>runs <code>npm</code> if your app contains <code>package.json</code>
+            </li>
+            <li>configures networking if your app contains <code>config/config.js</code>
+            </li>
+            <li>waits to be joined to a <code>mongodb</code> service
+            </li>
+        </ul>
+        <p>
+            when related to a <code>mongodb</code> service, the formula
+        </p>
+        <ul>
+            <li>configures db access if your app contains <code>config/config.js</code>
+            </li>
+            <li>starts your node app as a service
+            </li>
+        </ul>
+        <h3 id="charm-configuration">
+            Charm configuration
+        </h3>
+        <p>
+            Configurable aspects of the charm are listed in <code>config.yaml</code> and can be set by either editing the default values directly in the yaml file or passing a <code>myapp.yaml</code> configuration file during deployment
+        </p>
+        <pre>
+<code>juju deploy --config ~/myapp.yaml node-app myapp</code>
+</pre>
+        <p>
+            Some of these parameters are used directly by the charm, and some are passed through to the node app using <code>config/config.js</code>.
+        </p>
+        <h3 id="application-configuration">
+            Application configuration
+        </h3>
+        <p>
+            The formula looks for <code>config/config.js</code> in your app which starts off looking something like this
+        </p>
+        <pre>
+<code>module.exports = config = {
+  "name" : "mynodeapp"
+  ,"listen_port" : 8000
+  ,"mongo_host" : "localhost"
+  ,"mongo_port" : 27017
+}</code>
+</pre>
+        <p>
+            and gets modified with contextually correct configuration information during either deployment (via the <code>install</code> hook) or relation to another service (<code>relation-changed</code> hook).
+        </p>
+        <p>
+            This config can be used from within your application using snippets like
+        </p>
+        <pre>
+<code>...
+var config = require('./config/config')
+...
+  new mongo.Server(config.mongo_host, config.mongo_port, {}),
+...
+server.listen(config.listen_port);
+...</code>
+</pre>
+        <p>
+            Alternatively you could use a &acirc;&euro;&oelig;Procfile&acirc;&euro; in root directory like this:
+        </p>
+        <pre>
+<code>web: node app.js</code>
+</pre>
+        <p>
+            and then get the environment variables from the running environment like this:
+        </p>
+        <pre>
+<code>app.set('port', process.env.PORT);</code>
+</pre>
+        <p>
+            The defined environment variables are:
+        </p>
+        <pre>
+<code>NAME
+PORT
+NODE_ENV
+MONGO_HOST
+MONGO_PORT
+MONGO_REPLSET</code>
+</pre>
+        <h3 id="network-access">
+            Network access
+        </h3>
+        <p>
+            This charm does not open any public ports itself. The intention is to relate it to a proxy service like <code>haproxy</code>, which will in turn open port 80 to the outside world. This allows for instant horizontal scalability.
+        </p>
+        <p>
+            If your node app is itself a proxy and you want it directly exposed, this can easily be done by adding
+        </p>
+        <pre>
+<code>open-port $app_port</code>
+</pre>
+        <p>
+            to the bottom of the <code>install</code> hook, and then once your stack is started, you expose
+        </p>
+        <pre>
+<code>juju expose myapp</code>
+</pre>
+        <p>
+            it to the outside world.
+        </p>
+        <p>
+            By default, juju services within the same environment can talk to each other on any port over internal network interfaces.
+        </p>
+        <h3 id="making-this-work-with-your-node.js-app">
+            Making this work with your node.js app
+        </h3>
+        <p>
+            This charm makes some strong assumptions about the structure of the node application (<code>config/config.js</code>) that might not apply to your app. Please treat this formula as a template that you can fork and modify to suit your needs.
+        </p>
+        <p>
+            The biggest difference between how the charm behaves for different kind of apps is application startup. A simple application will want to start upon install (startup code goes in the <code>install</code> hook), whereas some applications will not want to start up until a database has be associated (startup code goes in the <code>db-relation-joined</code> hooks).
+        </p>
+      </section>
+
+      </article>
+    </section>
+    <div class="shadow"></div>
+    <footer class="global clearfix" role="contentinfo">
+  <div class="row">
+    <div class="inner-wrapper">
+      <nav role="navigation" class="clearfix">
+        <ul class="footer-a">
+          <li class="grid-3 first-col">
+            <h4><a href="/get-started">Get started</a></h4>
+            <ul>
+              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/resources">Resources</a></h4>
+            <ul>
+              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
+              <li><a href="/resources/videos/">Videos</a></li>
+              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/community">Community</a></h4>
+            <ul>
+              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
+              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
+              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
+            </ul>
+          </li>
+          <li class="grid-3 last-col">
+            <h4><a href="https://launchpad.net/juju">Code</a></h4>
+            <ul>
+              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+              <li><a href="https://launchpad.net/charms">Charms</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row no-border">
+    <div class="legal inner-wrapper">
+      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
+    </div>
+  </div>
+</footer>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  </body>
+</html>
