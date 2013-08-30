@@ -433,6 +433,10 @@ div.note.distribute {
   z-index: 1;
 }
 
+.resources .header-content {
+  background: url("https://juju.ubuntu.com/wp-content/themes/juju-website/img/background-header-home.png") 0 0 repeat #fff;
+}
+
 pre.lang-yaml .typ, pre.lang-yaml .kwd {
   color: #fff;
 }
@@ -440,9 +444,24 @@ pre.lang-yaml .typ, pre.lang-yaml .kwd {
 pre.prettyprint, code.prettyprint {
   background-color: #222 !important;
 }
-.resources .header-content {
-  background: url("https://juju.ubuntu.com/wp-content/themes/juju-website/img/background-header-home.png") 0 0 repeat #fff;
+
+
+hr {
+  background: #fff;
+  height: 1px;
+  margin: 0;
+  box-shadow: none;
+  border-bottom: 1px dotted #aea79f;
 }
+
+#content h2 {
+  font-size: 20px;
+}
+
+#content h3 {
+  font-size: 18px;
+}
+
 
 dl {
   display: block;
