@@ -67,7 +67,7 @@
           Using Juju to Deploy your Node.js Application
         </h1>
         <p>
-            One of Juju&acirc;&euro;&trade;s main use cases is to deploy your application directly out of version control and into a cloud. Since Juju supports local and remote clouds, this makes for a nice workflow that enables you to rev your app quickly on your local machine and then deploy out the cloud.
+            One of Juju's main use cases is to deploy your application directly out of version control and into a cloud. Since Juju supports local and remote clouds, this makes for a nice workflow that enables you to rev your app quickly on your local machine and then deploy out the cloud.
         </p>
         <p>
             In this tutorial we will deploy a Node.js/MongoDB application directly from github. The application will be behind an HAProxy service so that we can horizontally scale when needed.
@@ -116,7 +116,7 @@ juju add-relation myapp haproxy</code>
 <code>juju expose haproxy</code>
 </pre>
         <p>
-            Find the haproxy instance&acirc;&euro;&trade;s public URL from
+            Find the haproxy instance's public URL from
         </p>
         <pre>
 <code>juju status</code>
@@ -163,7 +163,7 @@ juju add-relation myapp haproxy</code>
             </li>
         </ul>
         <p>
-            In this example the local environment is named <code>local</code> and we&acirc;&euro;&trade;ll deploy to an AWS environment called <code>amazon</code>. First let&acirc;&euro;&trade;s <code>switch</code> to the local environment and bootstrap.
+            In this example the local environment is named <code>local</code> and we'll deploy to an AWS environment called <code>amazon</code>. First let's <code>switch</code> to the local environment and bootstrap.
         </p>
         <pre>
 <code>juju switch local
@@ -196,7 +196,7 @@ juju deploy mongodb</code>
             Continuous Deployment
         </h3>
         <p>
-            Continue to write your code, push to git as you land features and fixes. When you&acirc;&euro;&trade;re ready to test it you can tell Juju to check the git repository again:
+            Continue to write your code, push to git as you land features and fixes. When you're ready to test it you can tell Juju to check the git repository again:
         </p>
         <pre>
 <code>juju set myapp app_branch=https://github.com/yourapplication</code>
@@ -211,7 +211,7 @@ juju deploy mongodb</code>
             Push to your Public/Private Cloud
         </h3>
         <p>
-            After you&acirc;&euro;&trade;ve repeatedly upgraded your application locally it&acirc;&euro;&trade;s time to push it out to a place where your coworkers can see your app in all it&acirc;&euro;&trade;s glory, let&acirc;&euro;&trade;s push this to AWS. Same exact commands as before, just to a different environment:
+            After you've repeatedly upgraded your application locally it's time to push it out to a place where your coworkers can see your app in all it's glory, let's push this to AWS. Same exact commands as before, just to a different environment:
         </p>
         <pre>
 <code>juju switch amazon
@@ -221,14 +221,14 @@ juju deploy mongodb
 juju add-relation mongodb myapp</code>
 </pre>
         <p>
-            Since we&acirc;&euro;&trade;re on a public cloud and not on a local provider we need to explicitly expose the service and get its public IP:
+            Since we're on a public cloud and not on a local provider we need to explicitly expose the service and get its public IP:
         </p>
         <pre>
 <code>juju expose myapp
 juju status myapp</code>
 </pre>
         <p>
-            And put the ec2 URL in your browser. If you want to enable some horizontal scalability to your application you can do so, even after you&acirc;&euro;&trade;ve deployed!
+            And put the ec2 URL in your browser. If you want to enable some horizontal scalability to your application you can do so, even after you've deployed!
         </p>
         <pre>
 <code>juju deploy haproxy
@@ -237,7 +237,7 @@ juju expose haproxy
 juju unexpose myapp</code>
 </pre>
         <p>
-            And then get the public IP from the haproxy instead (notice how we&acirc;&euro;&trade;ve unexposed your application so that only haproxy is serving the public internet):
+            And then get the public IP from the haproxy instead (notice how we've unexposed your application so that only haproxy is serving the public internet):
         </p>
         <pre>
 <code>juju status haproxy</code>
@@ -249,7 +249,7 @@ juju unexpose myapp</code>
             Tearing it all down
         </h3>
         <p>
-            The local containers survive reboots and do not go away until you explicitly tear the environment down. Now that your coworkers have seen your great application let&acirc;&euro;&trade;s also stop spending money:
+            The local containers survive reboots and do not go away until you explicitly tear the environment down. Now that your coworkers have seen your great application let's also stop spending money:
         </p>
         <pre>
 <code>juju destroy-environment -eamazon

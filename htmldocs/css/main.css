@@ -252,6 +252,9 @@ div.note.distribute {
   margin-top: 40px;
 }
 
+.doc-content h3{
+  font-size: 18px;
+}
 /**
  * Walkthrough steps
  */
