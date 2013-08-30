@@ -1,165 +1,539 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Juju Documentation - Deploying Services</title>
-  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
-  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
 
-  <!--[if lt IE 9]>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+    <title>Juju Documentation - Deploying Services</title>
+    <link href=
+    'https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono'
+    rel='stylesheet' type='text/css'>
+    <link href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css"
+    media="screen" rel="stylesheet" type="text/css">
+    <link href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css"
+    media="screen" rel="stylesheet" type="text/css">
+    <link href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css"
+    media="screen" rel="stylesheet" type="text/css">
+    <link href=
+    "//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" media=
+    "screen" rel="stylesheet" type="text/css">
+    <link href=
+    '//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2'
+    id='stacktack-css' media='all' rel='stylesheet' type='text/css'>
+    <link href="css/main.css?1375975745" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
   <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
-  <body class="resources">
-    <header class="global clearfix" role="banner">
-  <div class="header-navigation">
-    <div>
-      <nav role="navigation">
-        <ul>
-          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
-          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
-          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
-          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
-          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
-          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
-          <li>
-            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
-              <fieldset>
-                <input id="input-search" type="text" name="s" value="Search" />
-              </fieldset>
-            </form>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="header-content">
-    <div class="clearfix">
-      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
-      <div class="header-navigation-secondary"></div>
-      <div class="header-image"></div>
-      <h1>Resources</h1>
-      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
-    </div>
-  </div>
-</header>
 
-    <section id="content" class="container-12">
-      <div class="grid-12 doc-container">
-		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
-        <div class="grid-9 doc-content">
-          <article>
-            <section id="deploying">
-             <h1>Deploying Services</h1>
-             <p>The fundamental point of Juju is that you can use it to deploy serivces through the use of charms (the magic bits of code that make things just work). These charms can be fetched from the charm store, stored in a local repository, or if you are feeling clever, written by you. Just as there are different series of Ubuntu ('precise', 'raring', etc), so there needs to be different series of charms to take into account any subtle changes in the underlying OS. For the most part you can forget about this, as Juju will always try to apply the most relevant charm, so deploying can be straightforward and easy.</p>
-             <h1>Deploying from the Charm Store</h1>
-             <p>In most cases, you will want to deploy charms by fetching them directly from the charm store. This ensures that you get the relevant, up to date version of the charm and "everything just works". To deploy a charm like this you can just specify:</p>
-             <code><pre>juju deploy mysql</code></pre>
-             <p>Running this will do exactly what you expect - fetch the latest juju charm for the series you are running and then use the bootstrap environment to initiate a new instance and deploy MySQL</p>
-             <p>Juju usefully supports a system of namespaces that means you can actually deploy charms from a variety of sources. The default source is the charm store. The above command is the same as running:</p>
-             <pre><code>juju deploy cs:precise/mysql</code></pre>
-             <p>which follows the format:</p>
-             <pre><code>&LT;repository&GT;:&LT;series&GT;&LT;service&GT;</code></pre>
-             
-             <h1 id="local">Deploying from a local repository</h1>
-             <p>There are many cases when you may wish to deploy charms from a local filesytem source rather than the charm store:</p>
-             <ul>
-              <li>When testing charms you have written.</li>
-              <li>When you have modified store charms for some reason.</li>
-              <li>When you don't have direct internet access.</li>
-             </ul>
-             <p>... and probably a lot more times which you can imagine yourselves.</p>
-             <p>Juju can be pointed at a local directory to source charms from using the <span class="pre">--repository=&LT;path/to/files&GT;</span> switch like this:</p>
-             
-             <pre><code>juju deploy --repository=/usr/share/charms/ local:precise/vsftpd</code></pre>
-             <p>You can also make use of standard filesystem shortcuts, so the following examples are also valid:</p>
-             <pre><code>juju deploy --repository=. haproxy</code></pre>
-             <pre><code>juju deploy --repository=~/charms/ wordpress</code></pre>  
-             <p class="note"><strong>Note:</strong> Specifying a local repository makes juju look there <strong>first</strong>, but if the relevant charm is not found in that repository, it will fall back to fetching it from the charm store. If you wish to check where a charm was installed from, it is listed in the <span class="pre">juju status</span> output.</p>
-             <h1>Changing the defaults</h1>
-             <p>As we have seen, we can specify repositories to install from on the commandline. In fact, this only introduces another potential source and changes the searching order. To permanently change the defaults (e.g. if you would prefer to always deploy from a local service first), you can enter a list of repositories in your <span class="pre">environments.yaml</span> file:</p>
-             <pre><code>...
+<body class="resources">
+    <header class="global clearfix">
+        <div class="header-navigation">
+            <div>
+                <nav>
+                    <ul>
+                        <li class="page_item page-item-6">
+                            <a href="https://juju.ubuntu.com/">Home</a>
+                        </li>
+
+                        <li class="page_item page-item-7">
+                            <a href="https://juju.ubuntu.com/get-started/">Get
+                            started</a>
+                        </li>
+
+                        <li class="page_item page-item-9 current_page_item">
+                            <a href=
+                            "https://juju.ubuntu.com/resources/">Resources</a>
+                        </li>
+
+                        <li class="page_item page-item-13">
+                            <a href=
+                            "https://juju.ubuntu.com/community/">Community</a>
+                        </li>
+
+                        <li class="page_item page-item-3688">
+                            <a href=
+                            "https://juju.ubuntu.com/charm-store/">Charm
+                            Store</a>
+                        </li>
+
+                        <li class="page_item page-item-3691">
+                            <a href=
+                            "https://juju.ubuntu.com/events/">Events</a>
+                        </li>
+
+                        <li class="page_item page-item-4474">
+                            <a href=
+                            "https://juju.ubuntu.com/charm-championship/">Charm
+                            Championship</a>
+                        </li>
+
+                        <li class="page_item page-item-4249">
+                            <a href=
+                            "https://juju.ubuntu.com/survey/">Survey</a>
+                        </li>
+
+                        <li>
+                            <form action="https://juju.ubuntu.com/" id=
+                            "form-search" method="get" name="form-search">
+                                <fieldset>
+                                    <input id="input-search" name="s" type=
+                                    "text" value="Search">
+                                </fieldset>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header-content">
+            <div class="clearfix">
+                <img class="arrow-nav" height="5" src=
+                "https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png"
+                style="left:455px; display: block;" width="9">
+
+                <div class="header-navigation-secondary"></div>
+
+                <div class="header-image"></div>
+
+                <h1>Resources</h1>
+
+                <h2>A collection of some of the most important online
+                references for Juju users and developers.</h2>
+            </div>
+        </div>
+    </header>
+
+    <section class="container-12" id="content">
+        <div class="grid-12 doc-container">
+            <div class="grid-3 doc-navigation" id="navlinks">
+                LINKS
+            </div>
+
+            <div class="grid-9 doc-content">
+                <article>
+                    <section id="deploying">
+                        <h1>Deploying Services</h1>
+
+                        <p>The fundamental point of Juju is that you can use it
+                        to deploy serivces through the use of charms (the magic
+                        bits of code that make things just work). These charms
+                        can be fetched from the charm store, stored in a local
+                        repository, or if you are feeling clever, written by
+                        you. Just as there are different series of Ubuntu
+                        ('precise', 'raring', etc), so there needs to be
+                        different series of charms to take into account any
+                        subtle changes in the underlying OS. For the most part
+                        you can forget about this, as Juju will always try to
+                        apply the most relevant charm, so deploying can be
+                        straightforward and easy.</p>
+
+                        <h1>Deploying from the Charm Store</h1>
+
+                        <p>In most cases, you will want to deploy charms by
+                        fetching them directly from the charm store. This
+                        ensures that you get the relevant, up to date version
+                        of the charm and "everything just works". To deploy a
+                        charm like this you can just specify:</p>
+                        <pre>
+<code>juju deploy mysql</code>
+</pre>
+
+                        <p>Running this will do exactly what you expect - fetch
+                        the latest juju charm for the series you are running
+                        and then use the bootstrap environment to initiate a
+                        new instance and deploy MySQL</p>
+
+                        <p>Juju usefully supports a system of namespaces that
+                        means you can actually deploy charms from a variety of
+                        sources. The default source is the charm store. The
+                        above command is the same as running:</p>
+                        <pre>
+<code>juju deploy cs:precise/mysql</code>
+</pre>
+
+                        <p>which follows the format:</p>
+                        <pre>
+<code>&amp;LT;repository&amp;GT;:&amp;LT;series&amp;GT;&amp;LT;service&amp;GT;</code>
+</pre>
+
+                        <h1 id="local">Deploying from a local repository</h1>
+
+                        <p>There are many cases when you may wish to deploy
+                        charms from a local filesytem source rather than the
+                        charm store:</p>
+
+                        <ul>
+                            <li>When testing charms you have written.</li>
+
+                            <li>When you have modified store charms for some
+                            reason.</li>
+
+                            <li>When you don't have direct internet
+                            access.</li>
+                        </ul>
+
+                        <p>... and probably a lot more times which you can
+                        imagine yourselves.</p>
+
+                        <p>Juju can be pointed at a local directory to source
+                        charms from using the <span class=
+                        "pre">--repository=&amp;LT;path/to/files&amp;GT;</span>
+                        switch like this:</p>
+                        <pre>
+<code>juju deploy --repository=/usr/share/charms/ local:precise/vsftpd</code>
+</pre>
+
+                        <p>You can also make use of standard filesystem
+                        shortcuts, so the following examples are also
+                        valid:</p>
+                        <pre>
+<code>juju deploy --repository=. haproxy</code>
+</pre>
+                        <pre>
+<code>juju deploy --repository=~/charms/ wordpress</code>
+</pre>
+
+                        <p class="note"><strong>Note:</strong> Specifying a
+                        local repository makes juju look there
+                        <strong>first</strong>, but if the relevant charm is
+                        not found in that repository, it will fall back to
+                        fetching it from the charm store. If you wish to check
+                        where a charm was installed from, it is listed in the
+                        <span class="pre">juju status</span> output.</p>
+
+                        <h1>Changing the defaults</h1>
+
+                        <p>As we have seen, we can specify repositories to
+                        install from on the commandline. In fact, this only
+                        introduces another potential source and changes the
+                        searching order. To permanently change the defaults
+                        (e.g. if you would prefer to always deploy from a local
+                        service first), you can enter a list of repositories in
+                        your <span class="pre">environments.yaml</span>
+                        file:</p>
+                        <pre>
+<code>...
               repositories:
               
                - http://charms.ubuntu.com/collection/ubuntu
                - http://charms.ubuntu.com/collection/openstack
                - http://charms.ubuntu.com/people/miked
                - /var/lib/charms
-             </code></pre>
-             <h1>A note about caching...</h1>
-             <p>After juju resolves a charm and its dependencies, it bundles them and deploys them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache). This allows the same charm to be deployed to multiple machines repeatably and with minimal network transfers.</p>
-             
-            </section>
-          </article>
-        </div>
-      </div>
-    </section>
-    <div class="shadow"></div>
-    <footer class="global clearfix" role="contentinfo">
-  <div class="row">
-    <div class="inner-wrapper">
-      <nav role="navigation" class="clearfix">
-        <ul class="footer-a">
-          <li class="grid-3 first-col">
-            <h4><a href="/get-started">Get started</a></h4>
-            <ul>
-              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
-              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
-              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
-              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
-              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
-              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
-            </ul>
-          </li>
-          <li class="grid-3">
-            <h4><a href="/resources">Resources</a></h4>
-            <ul>
-              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
-              <li><a href="/resources/videos/">Videos</a></li>
-              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
-            </ul>
-          </li>
-          <li class="grid-3">
-            <h4><a href="/community">Community</a></h4>
-            <ul>
-              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
-              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
-              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
-              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
-              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
-              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
-            </ul>
-          </li>
-          <li class="grid-3 last-col">
-            <h4><a href="https://launchpad.net/juju">Code</a></h4>
-            <ul>
-              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
-              <li><a href="https://launchpad.net/charms">Charms</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="row no-border">
-    <div class="legal inner-wrapper">
-      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
-      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
-    </div>
-  </div>
-</footer>
+             </code>
+</pre>
 
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  </body>
+                        <h1>A note about caching...</h1>
+
+                        <p>After juju resolves a charm and its dependencies, it
+                        bundles them and deploys them to a machine provider
+                        charm cache/repository (e.g. ~/.juju/charmcache). This
+                        allows the same charm to be deployed to multiple
+                        machines repeatably and with minimal network
+                        transfers.</p>
+                    </section>
+
+                    <section id="deploying">
+                        <h1>Deploying to specific machines</h1>
+
+                        <p>Juju has native support for specifying which machine
+                        a charm should be deployed to. This is useful for a few
+                        reasons. The most obvious reason is to save money when
+                        deploying to a public cloud. Instead of having one
+                        machine per unit we can consolidate services.</p>
+
+                        <p>In this example we use the
+                        <span class="pre">--constraints</span> flag to fire up a bootstrap
+                        node with 4G of RAM so we can deploy other services to
+                        it by using the <span class="pre">--to</span> command:</p>
+                        <pre>
+juju bootstrap --constraints="mem=4G"
+juju deploy --to 0 mysql
+juju deploy --to 0 rabbitmq-server
+</pre>
+
+                        <p>As you can see from the example we've deployed mysql
+                        and rabbitmq-server "to" node 0.</p>
+
+                        <p>Note that you need to know the identifier of the
+                        machine that you are going to “deploy --to” – in all
+                        deployments, machine 0 is always the bootstrap node so
+                        the above example works nicely. Doing a <span class="pre">juju
+                        status</span> will show you a list of all the machines
+                        and their machine numbers for you to decide what to
+                        deploy to.</p>
+
+                        <p>The "add-unit" command also supports the --to
+                        option, so its now possible to specifically target
+                        machines when expanding service capacity:</p>
+                        <pre>
+juju deploy --constraints="mem=4G" openstack-dashboard
+juju add-unit --to 1 rabbitmq-server
+</pre>
+
+                        <p>I should now have a second machine running both the
+                        openstack-dashboard service and a second unit of the
+                        rabbitmq-server service:</p>
+<code>
+$ juju status
+machines:
+  "0":
+    agent-state: started
+    agent-version: 1.11.4
+    dns-name: 10.5.0.44
+    instance-id: 99a06a9b-a9f9-4c4a-bce3-3b87fbc869ee
+    series: precise
+    hardware: arch=amd64 cpu-cores=2 mem=4096M
+  "1":
+    agent-state: started
+    agent-version: 1.11.4
+    dns-name: 10.5.0.45
+    instance-id: d1c6788a-d120-44c3-8c55-03aece997fd7
+    series: precise
+    hardware: arch=amd64 cpu-cores=2 mem=4096M
+services:
+  mysql:
+    charm: cs:precise/mysql-26
+    exposed: false
+    relations:
+      cluster:
+      - mysql
+    units:
+      mysql/0:
+        agent-state: started
+        agent-version: 1.11.4
+        machine: "0"
+        public-address: 10.5.0.44
+  openstack-dashboard:
+    charm: cs:precise/openstack-dashboard-9
+    exposed: false
+    relations:
+      cluster:
+      - openstack-dashboard
+    units:
+      openstack-dashboard/0:
+        agent-state: started
+        agent-version: 1.11.4
+        machine: "1"
+        public-address: 10.5.0.45
+  rabbitmq-server:
+    charm: cs:precise/rabbitmq-server-12
+    exposed: false
+    relations:
+      cluster:
+      - rabbitmq-server
+    units:
+      rabbitmq-server/0:
+        agent-state: started
+        agent-version: 1.11.4
+        machine: "0"
+        public-address: 10.5.0.44
+      rabbitmq-server/1:
+        agent-state: started
+        agent-version: 1.11.4
+        machine: "1"
+        public-address: 10.5.0.45
+</code>
+
+                        <p>These two features make it much easier to deploy
+                        complex services such as OpenStack which use a large
+                        number of charms on a limited number of physical
+                        servers.</p>
+
+                        <h2>Considerations</h2>
+
+                        <p>Charms are running without any separation, so its
+                        entirely possible for Charms to stamp all over each
+                        others configuration files and try to bind to the same
+                        network ports. We are working to containerize
+                        everything so that this does not happen and every
+                        service is in its own container, but this work is not
+                        yet complete.</p>
+
+                        <p>While the "add-unit" command supports the --to
+                        option, you can elect not use --to when doing an
+                        "add-unit" to scale out the service on it's own
+                        node.</p>
+                        <pre>
+juju add-unit rabbitmq-server
+</pre>
+
+                        <p>This will allow you to save money when you need it
+                        by using --to, but also horizontally scale out on
+                        dedicated machines when you need to.</p>
+
+                        <h2>References and Examples</h2>
+
+                        <ul>
+                            <li>
+                                <a href=
+                                "http://www.jorgecastro.org/2013/07/31/deploying-wordpress-to-the-cloud-with-juju/">
+                                Scaling Down in the Cloud with Juju</a>
+                            </li>
+
+                            <li>
+                                <a href=
+                                "http://javacruft.wordpress.com/2013/07/25/juju-put-it-there-please/">
+                                Targetted Machine Deployment with Juju</a>
+                            </li>
+                        </ul>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <div class="shadow"></div>
+
+    <footer class="global clearfix">
+        <div class="row">
+            <div class="inner-wrapper">
+                <nav class="clearfix">
+                    <ul class="footer-a">
+                        <li class="grid-3 first-col">
+                            <h4><a href="/get-started">Get started</a></h4>
+
+                            <ul>
+                                <li class="page_item page-item-20">
+                                    <a href=
+                                    "https://juju.ubuntu.com/get-started/local/">
+                                    Local</a>
+                                </li>
+
+                                <li class="page_item page-item-22">
+                                    <a href=
+                                    "https://juju.ubuntu.com/get-started/amazon/">
+                                    Amazon Web Services</a>
+                                </li>
+
+                                <li class="page_item page-item-18">
+                                    <a href=
+                                    "https://juju.ubuntu.com/get-started/hp-cloud/">
+                                    HP Cloud</a>
+                                </li>
+
+                                <li class="page_item page-item-16">
+                                    <a href=
+                                    "https://juju.ubuntu.com/get-started/rackspace/">
+                                    Rackspace</a>
+                                </li>
+
+                                <li class="page_item page-item-3596">
+                                    <a href=
+                                    "https://juju.ubuntu.com/get-started/openstack/">
+                                    Openstack</a>
+                                </li>
+
+                                <li class="page_item page-item-3600">
+                                    <a href=
+                                    "https://juju.ubuntu.com/get-started/maas/">
+                                    MAAS</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="grid-3">
+                            <h4><a href="/resources">Resources</a></h4>
+
+                            <ul>
+                                <li>
+                                    <a href=
+                                    "http://juju.ubuntu.com/docs">Documentation</a>
+                                </li>
+
+                                <li>
+                                    <a href="/resources/videos/">Videos</a>
+                                </li>
+
+                                <li>
+                                    <a href=
+                                    "http://uistage.jujucharms.com:8080/">Juju
+                                    GUI demo site</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="grid-3">
+                            <h4><a href="/community">Community</a></h4>
+
+                            <ul>
+                                <li class="page_item page-item-28">
+                                    <a href=
+                                    "https://juju.ubuntu.com/community/juju-blog/">
+                                    Juju Blog</a>
+                                </li>
+
+                                <li class="page_item page-item-4262">
+                                    <a href=
+                                    "https://juju.ubuntu.com/community/weekly-charm-meeting/">
+                                    Weekly Charm Meeting</a>
+                                </li>
+
+                                <li class="page_item page-item-4036">
+                                    <a href=
+                                    "https://juju.ubuntu.com/community/charmers/">
+                                    Charmers</a>
+                                </li>
+
+                                <li>
+                                    <a href=
+                                    "https://lists.ubuntu.com/mailman/listinfo/juju">
+                                    Mailing List</a>
+                                </li>
+
+                                <li>
+                                    <a href=
+                                    "http://webchat.freenode.net/?channels=juju">
+                                    Chat</a>
+                                </li>
+
+                                <li>
+                                    <a href=
+                                    "http://askubuntu.com/questions/tagged/juju?sort=faq&amp;pagesize=50">
+                                    FAQ</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="grid-3 last-col">
+                            <h4><a href=
+                            "https://launchpad.net/juju">Code</a></h4>
+
+                            <ul>
+                                <li>
+                                    <a href=
+                                    "https://launchpad.net/juju-core">Juju
+                                    Core</a>
+                                </li>
+
+                                <li>
+                                    <a href=
+                                    "https://launchpad.net/charms">Charms</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row no-border">
+            <div class="legal inner-wrapper">
+                <p>© 2013 Canonical Ltd. Ubuntu and Canonical are registered
+                trademarks of Canonical Ltd.</p>
+
+                <p><a href=
+                "https://bugs.launchpad.net/juju-website/+filebug">Report a bug
+                on this site</a></p>
+            </div>
+        </div>
+    </footer><script src=
+    "//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type=
+    "text/javascript"></script> <script src=
+"//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js" type=
+"text/javascript"></script> <script src=
+"//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script> <script src="js/main.js" type="text/javascript"></script> <script src="http://code.jquery.com/jquery-1.9.1.js" type=
+"text/javascript"></script>
+</body>
 </html>
