@@ -51,6 +51,7 @@
   "References": {
     "children": {
       "Juju Commands": "commands.html",
+      "Juju constraints": "reference-constraints.html",
       "Glossary": "glossary.html",
       "Contribute to the Docs!": "contributing.html"
     }

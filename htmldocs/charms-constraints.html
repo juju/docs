@@ -91,20 +91,12 @@
               
               <h1>Provider Constraints</h1>
 
-              <p>The constraints available vary by provider, but should include:</p> 
+	      <p>See a <a href="reference-constraints.html">complete listing of constraints</a> for details on what each constraint means. Two of the most commonly used are:</p>
               
               <ul>
-              <li><span class="pre">cpu-cores</span>: The minimum processing power of the machine, measured in <a class="reference external" href="http://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud#Elastic_compute_units">ECU</a>,defaulting to 1; any real number &gt;= 0 is valid.</li> 
-              <li><span class="pre">mem</span>: The minimum memory for the machine, defaulting to 512MB; any real number &gt;= 0, and optionally suffixed with M, G or T is valid.</li>
-              <li><span class="pre">arch</span>: The machine's processor architecture, defaulting to &quot;amd64&quot;. Valid values are &quot;i386&quot;, &quot;amd64&quot;, and &quot;arm&quot;.</li>
-              
-              </ul>
-              
-              <p>The currently available MAAS constraint is:</p>
-              
-              <ul>
-              <li><span class="pre">maas-name</span>: The MAAS name to which each unit must be deployed. This is philosophically problematic, on the basis that teaching users that it's OK to specify single machines will lead them to pain when they attempt to scale out large deployments; but it's justified on the basis that MAAS itself needs to act as a stepping stone between the &quot;metal&quot; and &quot;cloud&quot; mindsets. <span class="pre">maas-name</span> is unset by default, and should correspond to a name known by the MAAS provider.</li>
-              </ul>
+              <li><span class="pre">cpu-cores</span>: The minimum processing power of the machine, roughly indicated by how many cores are available.</li>
+              <li><span class="pre">mem</span>: The minimum memory for the machine, defaulting to 512MB.</li>
+
               <p class="note"><strong> Note: </strong> The <span class="pre">instance-type</span> constraint is not currently supported by juju-core, but support will be added soon. Some of the following examples make use of this setting merely to illustrate a point. </p>
             
               
