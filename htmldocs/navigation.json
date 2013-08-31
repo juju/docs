@@ -22,7 +22,8 @@
         "Service Relationships": "charms-relationships.html",
         "Exposing Services": "charms-exposing.html",
         "Scaling Services": "charms-scaling.html",
-        "Destroying Services": "charms-destroy.html"
+        "Destroying Services": "charms-destroy.html",
+        "Groups of Services": "charms-service-groups.html"
       }
     }
   },
