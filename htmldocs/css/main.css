@@ -489,3 +489,8 @@ dt:after {
 dd {
   padding-left: 10px;
 }
+
+li img {
+  margin-top: 10px;
+  display:block;
+}
