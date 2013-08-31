@@ -86,33 +86,35 @@ juju expose mediawiki</pre>
               <p>or you can use <code>--num-unit</code> which has the same result, but is more readable:</p>
 <pre class="prettyprint">juju add-unit --num-unit 100 mysql</pre>
               <p>If you would like to add a unit to a specific machine just append the <code>--to</code> <machine> option.</p>
-<pre class="prettyprint">#add unit to machine 23
+              
+<pre class="prettyprint"># add unit to machine 23
 juju add-unit mysql --to 23
 
-#add unit to lxc container 3 on host machine 24
+# add unit to lxc container 3 on host machine 24
 juju add-unit mysql --to 24/lxc/3 
 
-#add unit to a new lxc container on host machine 25
+# add unit to a new lxc container on host machine 25
 juju add-unit mysql --to lxc:25</pre>
+
               <p>The <code>add-unit</code> command deploys a machine matching the constraints of the initially deployed service. For example, if mysql was deployed with the defaults (i.e. no <code>--constraints</code> option) you would have mysql on an instance that matches the closest to 1Gig of memory and 1CPU. If you would like to add a unit with more resources to the mysql service you will first need to issue a <code>add-machine</code> with the desired constraint followed by a <code>add-unit</code>. For example, the following command adds a 16Gig unit to the mysql service (note in this example <code>juju status</code> returns machine 3 for the <code>add-machine</code> command):</p>
 <pre class="prettyprint">juju add-machine --constraints="mem=16G"
 juju add-unit mysql --to 3
 </pre>
 
               <p class="note"><strong>Note:</strong> Keep in mind you can always use the <code>-e</code> or <code>--environment</code> options to specify which environment/cloud you would like the command ran against. In the following example the <code>-e hpcloud</code> adds 100 units to the mysql service in HP's cloud:</p>
-<pre class="prettyprint">juju add-unit -n 100 mysql -e hpcloud</pre>
+              <pre class="prettyprint">juju add-unit -n 100 mysql -e hpcloud</pre>
               <p><a href="charms-deploying.html#deploying-to-machines">More on deploying to specific machines.</a></p>
               <h1>Scaling Back</h1>
               <p>Sometimes you also want to scale back some of your services, and this too is easy with Juju.</p>
               <p>The general usage to scale down a service is with the <code>remove-unit</code> command:</p>
-<pre class="prettyprint">juju remove-unit [options] &ltunit&gt [...]</pre>
+              <pre class="prettyprint">juju remove-unit [options] &ltunit&gt [...]</pre>
               <p>For example, the following scales down the mediawiki service by one unit:</p>
-<pre class="prettyprint">juju remove-unit mediawiki/1</pre>
-              <p>If you have scaled-up the mediawiki service by more than one unit you can remove multiple units in the same command as long as you know the unit name (ie &lt;service&gt;/#).</p>
-<pre class="prettyprint">juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5</pre>
+              <pre class="prettyprint lang-yaml">juju remove-unit mediawiki/1</pre>
+              <p>If you have scaled-up the mediawiki service by more than one unit you can remove multiple units in the same command as long as you know the unit name (ie <code>&lt;service&gt;/#</code>).</p>
+              <pre class="prettyprint lang-yaml">juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5</pre>
               <p>The <code>remove-unit</code> command can be run to remove running units safely. The running services should automatically adjust to the change.</p>
-              <p class="note"><strong>Note:</strong> After removing a service the machine will still be running. In order to completely remove the machine that once housed the service you need to issue a <code>destroy-machine</code>. For example, to remove machine 1 that the unit mediawiki/1 was housed on use the command:
-<pre class="prettyprint">juju destroy-machine 1</pre>
+              <p class="note"><strong>Note:</strong> After removing a service the machine will still be running. In order to completely remove the machine that once housed the service you need to issue a <code>destroy-machine</code>. For example, to remove machine 1 that the unit <code>mediawiki/1</code> was housed on use the command:
+              <pre class="prettyprint lang-yaml">juju destroy-machine 1</pre>
               <p>For more information on removing services, please see the section on <a href="charms-destroy.html">destroying services</a>.</p>
             </section>
             
