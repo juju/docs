@@ -437,14 +437,14 @@ div.note.distribute {
   background: url("https://juju.ubuntu.com/wp-content/themes/juju-website/img/background-header-home.png") 0 0 repeat #fff;
 }
 
-pre.lang-yaml .typ, pre.lang-yaml .kwd {
+pre.lang-yaml .typ, pre.lang-yaml .kwd, pre.lang-yaml .lit {
   color: #fff;
 }
 
 pre.prettyprint, code.prettyprint {
   background-color: #222 !important;
+  color: #fff;
 }
-
 
 hr {
   background: #fff;
