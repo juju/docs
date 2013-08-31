@@ -446,6 +446,11 @@ pre.prettyprint, code.prettyprint {
   color: #fff;
 }
 
+pre.prettyprint.prettyprinted {
+  white-space: pre;
+  overflow-x: auto;
+}
+
 hr {
   background: #fff;
   height: 1px;
