@@ -9,6 +9,7 @@
         "HP Cloud Configuration": "config-hpcloud.html",
         "OpenStack Configuration": "config-openstack.html",
         "MAAS Configuration": "config-maas.html",
+        "Local Configuration": "config-local.html",
         "Testing your setup": "getting-started.html#test"
       }
     },
