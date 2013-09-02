@@ -59,8 +59,9 @@
             <section id="config_hpcloud">
             <h1>Configuring for OpenStack</h1>
             <p>You should start by generating a generic configuration file for Juju, using the command:</p>
-            <pre class="prettyprint">juju init</pre>
-            <p>This will generate a file, <code>environments.yaml</code>, which will live in your <code>~/.juju/</code> directory (and will create the directory if it doesn't already exist).</p>
+<pre class="prettyprint lang-bash">juju generate-config</pre>
+            <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
+            <p class ="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
             <p>The essential configuration sections for OpenStack look like this:</p>
             <pre class="prettyprint lang-yaml">
 openstack:
