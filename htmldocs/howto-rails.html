@@ -2,7 +2,7 @@
 <html>
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Juju Documentation - Node.js HowTo</title>
+  <title>Juju Documentation - Rails HowTo</title>
   <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
   <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
@@ -15,12 +15,6 @@
   <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
-
-<!-- DO NOT EDIT ABOVE THIS LINE -->
-
-<!-- DO NOT EDIT ABOVE THIS LINE -->
-
-
   <body class="resources">
     <header class="global clearfix" role="banner">
   <div class="header-navigation">
@@ -63,14 +57,14 @@
         <div class="grid-9 doc-content">
           <article>      
             <section id="node">
-        <h1>
-          Using Juju to Deploy your Node.js Application
+        <h1 id="using-juju-to-deploy-your-rails-application">
+            Using Juju to Deploy your Rails Application
         </h1>
         <p>
             One of Juju's main use cases is to deploy your application directly out of version control and into a cloud. Since Juju supports local and remote clouds, this makes for a nice workflow that enables you to rev your app quickly on your local machine and then deploy out the cloud.
         </p>
         <p>
-            In this tutorial we will deploy a Node.js/MongoDB application directly from github. The application will be behind an HAProxy service so that we can horizontally scale when needed.
+            In this HowTo we will deploy a Rails/PostgreSQL application directly from github. The application will be behind an HAProxy service so that we can horizontally scale when needed.
         </p>
         <p>
             We will then set up a local-to-cloud workflow with our application so we can do continuous deployment. Since we deploy locally in the exact same way as we deploy to a cloud, this is a powerful method for developing your application in an environment that more closely resembles production.
@@ -78,49 +72,62 @@
         <p>
             Before moving on you should have gone through the <a href="https://juju.ubuntu.com/docs/getting-started.html">Getting Started</a> section and installed and configured Juju.
         </p>
-        <h2 id="basic-usage-of-the-node.js-charm">
-            Basic Usage of the Node.js Charm
+        <h2 id="basic-usage-of-the-ruby-on-rails-charm">
+            Basic Usage of the Ruby on Rails Charm
         </h2>
         <p>
-            First, create a <code>config.yaml</code> to add info about your app pointing to your github repo:
-        </p>
-        <pre class="prettyprint lang-yaml">
-sample-node:
-  repo: https://github.com/yourapplication</pre>
-        <p>
-            If you have not already bootstrapped an environment, do so:
-        </p>
-        <pre class="prettyprint">juju bootstrap</pre>
-        <p>
-            Then wait a few minutes while your cloud spins up. Then deploy some basic services:
-        </p>
-        <pre class="prettyprint">juju deploy node-app myapp
-juju deploy mongodb
-juju deploy haproxy</pre>
-        <p>
-            relate them
-        </p>
-        <pre class="prettyprint">juju add-relation mongodb myapp
-juju add-relation myapp haproxy</pre>
-        <p>
-            open it up to the outside world
-        </p>
-        <pre class="prettyprint">juju expose haproxy</pre>
-        <p>
-            Find the haproxy instance's public URL from
-        </p>
-        <pre class="prettyprint">juju status</pre>
-        <p>
-            (or attach it to an elastic IP via the AWS console) and open it up in a browser.
+            Create a YAML config file with your application's name and it's git location
         </p>
         <p>
-            scale up your app (to 10 nodes for example)
+            <strong>sample-app.yml</strong>
         </p>
-        <pre class="prettyprint">juju add-unit -n 10 myapp</pre>
+<pre class="prettyprint lang-yaml">
+sample-app:
+  repo: https://github.com/pavelpachkovskij/sample-rails</code>
+</pre>
         <p>
-            and scale it back down
+            Deploy the application and a proxy:
         </p>
-        <pre class="prettyprint">juju remove-unit myapp/9 myapp/8 myapp/7 myapp/6 myapp/5 myapp/4 myapp/3 myapp/2 myapp/1</pre>
+<pre class="prettyprint lang-bash">
+juju deploy rails myapp --config sample-app.yml
+juju deploy haproxy
+juju add-relation haproxy myapp
+</pre>
+        <p>
+            Deploy and relate database
+        </p>
+<pre class="prettyprint lang-bash">
+juju deploy postgresql
+juju add-relation postgresql:db myapp
+</pre>
+        <p>
+            Now you can run migrations:
+        </p>
+<pre class="prettyprint lang-bash">
+juju ssh myapp/0 run rake db:migrate
+</pre>
+        <p>
+            Seed database
+        </p>
+<pre class="prettyprint lang-bash">juju ssh myapp/0 run rake db:seed
+</pre>
+        <p>
+            And finally expose the proxy:
+        </p>
+<pre class="prettyprint lang-bash">juju expose haproxy</pre>
+<p>
+            Find the instance's public URL from
+        </p>
+<pre class="prettyprint lang-bash">juju status haproxy</pre>
+        <p>
+            Scale horizontally by adding and removing units:
+        </p>
+<pre class="prettyprint lang-bash">juju add-unit myapp
+juju remove-unit myapp
+</pre>
+        <p>
+            Or go even larger with <code>juju add-unit -n10 myapp</code> for 10 nodes.
+        </p>
         <h2 id="local-to-cloud-workflow">
             Local to Cloud Workflow
         </h2>
@@ -131,43 +138,48 @@ juju add-relation myapp haproxy</pre>
             We need to configure 2 environments, a local one and a public cloud one.
         </p>
         <ol style="list-style-type: decimal">
-            <li>Configure the <a href="https://juju.ubuntu.com/docs/config-local.html">local provider</a> on your machine.
+            <li>Configure the <a href="./config-local.html">local provider</a> on your machine.
             </li>
             <li>Configure a public or private cloud on your machine.
             </li>
         </ol>
         <ul>
             <li>
-                <a href="https://juju.ubuntu.com/docs/config-aws.html">AWS</a>
+                <a href="./config-aws.html">AWS</a>
             </li>
             <li>
-                <a href="https://juju.ubuntu.com/docs/config-hpcloud.html">HP Cloud</a>
+                <a href="./config-hpcloud.html">HP Cloud</a>
             </li>
             <li>
-                <a href="https://juju.ubuntu.com/docs/config-openstack.html">OpenStack</a>
+                <a href="./config-openstack.html">OpenStack</a>
             </li>
         </ul>
         <p>
-            In this example the local environment is named <code>local</code> and we'll deploy to an AWS environment called <code>amazon</code>. First let's <code>switch</code> to the local environment and bootstrap.
+            In this example the local environment is named "local" and we'll deploy to an AWS environment called <code>amazon</code>. First let's <code>switch</code> to the local environment and bootstrap.
         </p>
-        <pre class="prettyprint">juju switch local
-juju bootstrap</pre>
+<pre class="prettyprint lang-bash">
+juju switch local
+juju bootstrap
+</pre>
         <p>
-            Create a <code>config.yaml</code> to add info about your app pointing to your github repo:
+            Create a YAML config file with your application's name and it's git location
         </p>
-        <pre class="prettyprint lang-yaml">
-sample-node:
-  app_url: https://github.com/yourapplication</pre>
         <p>
-            Then deploy some basic services:
+            <strong>sample-app.yml</strong>
         </p>
-        <pre class="prettyprint">
-juju deploy --config ~/myapp.yaml node-app myapp 
-juju deploy mongodb</pre>
+<pre class="prettyprint lang-yaml">sample-app:
+  repo: https://github.com/pavelpachkovskij/sample-rails
+</pre>
         <p>
-            relate them
+            Deploy the application and database:
         </p>
-        <pre class="prettyprint">juju add-relation mongodb myapp</pre>
+<pre class="prettyprint lang-bash">juju deploy rails myapp --config sample-app.yml
+juju deploy postgresql</pre>
+        <p>
+            and relate them
+        </p>
+<pre class="prettyprint lang-bash">juju add-relation myapp postgresql
+</pre>
         <p>
             Now open up your browser and go to <code>http://localhost</code> to get your application loaded in your browser.
         </p>
@@ -177,7 +189,8 @@ juju deploy mongodb</pre>
         <p>
             Continue to write your code, push to git as you land features and fixes. When you're ready to test it you can tell Juju to check the git repository again:
         </p>
-        <pre class="prettyprint">juju set myapp app_branch=https://github.com/yourapplication</pre>
+<pre class="prettyprint lang-bash">juju set myapp repo=https://github.com/yourapplication
+</pre>
         <p>
             The charm will then fetch the latest code and you can refresh your browser at <code>http://localhost</code>.
         </p>
@@ -190,29 +203,30 @@ juju deploy mongodb</pre>
         <p>
             After you've repeatedly upgraded your application locally it's time to push it out to a place where your coworkers can see your app in all it's glory, let's push this to AWS. Same exact commands as before, just to a different environment:
         </p>
-        <pre class="prettyprint">
-juju switch amazon
+<pre class="prettyprint lang-bash">juju switch amazon
 juju bootstrap
-juju deploy --config ~/myapp.yaml node-app myapp 
-juju deploy mongodb
-juju add-relation mongodb myapp</pre>
+juju deploy --config ~/myapp.yaml rails myapp 
+juju deploy postgresql
+juju add-relation postgresql myapp
+</pre>
         <p>
             Since we're on a public cloud and not on a local provider we need to explicitly expose the service and get its public IP:
         </p>
-        <pre class="prettyprint">juju expose myapp
-juju status myapp</pre>
+<pre class="prettyprint lang-bash">juju expose myapp
+juju status myapp
+</pre>
         <p>
             And put the ec2 URL in your browser. If you want to enable some horizontal scalability to your application you can do so, even after you've deployed!
         </p>
-        <pre class="prettyprint">
-juju deploy haproxy
+<pre class="prettyprint lang-bash">juju deploy haproxy
 juju add-relation haproxy myapp
 juju expose haproxy
-juju unexpose myapp</pre>
+juju unexpose myapp
+</pre>
         <p>
             And then get the public IP from the haproxy instead (notice how we've unexposed your application so that only haproxy is serving the public internet):
         </p>
-        <pre class="prettyprint">juju status haproxy</pre>
+<pre class="prettyprint lang-bash">juju status haproxy</pre>
         <p>
             Now you can <code>juju add-unit myapp</code> and <code>juju remove-unit myapp</code> based on load.
         </p>
@@ -222,126 +236,17 @@ juju unexpose myapp</pre>
         <p>
             The local containers survive reboots and do not go away until you explicitly tear the environment down. Now that your coworkers have seen your great application let's also stop spending money:
         </p>
-        <pre class="prettyprint">
-juju destroy-environment -e amazon
-juju destroy-environment -e local</pre>
+<pre class="prettyprint lang-bash">juju destroy-environment -e amazon
+juju destroy-environment -local
+</pre>
         <h2 id="charm-details">
             Charm Details
         </h2>
         <p>
-            This section is to explain how the charm works and is provided here as a reference.
+            This document just scratches the surface of what is possible with the Rails charm, for more deployment options, including support for more databases, integrated logging with Logstash/Kibana, and Nagios integration, make sure you check out the <a href="https://jujucharms.com/precise/rails-HEAD/">Charm README</a> for more information.
         </p>
-        <h3 id="what-the-formula-does">
-            What the formula does
-        </h3>
-        <p>
-            During the <code>install</code> hook,
-        </p>
-        <ul>
-            <li>installs <code>node</code>/<code>npm</code>
-            </li>
-            <li>clones your node app from the repo specified in <code>app_repo</code>
-            </li>
-            <li>runs <code>npm</code> if your app contains <code>package.json</code>
-            </li>
-            <li>configures networking if your app contains <code>config/config.js</code>
-            </li>
-            <li>waits to be joined to a <code>mongodb</code> service
-            </li>
-        </ul>
-        <p>
-            when related to a <code>mongodb</code> service, the formula
-        </p>
-        <ul>
-            <li>configures db access if your app contains <code>config/config.js</code>
-            </li>
-            <li>starts your node app as a service
-            </li>
-        </ul>
-        <h3 id="charm-configuration">
-            Charm configuration
-        </h3>
-        <p>
-            Configurable aspects of the charm are listed in <code>config.yaml</code> and can be set by either editing the default values directly in the yaml file or passing a <code>myapp.yaml</code> configuration file during deployment
-        </p>
-        <pre class="prettyprint">juju deploy --config ~/myapp.yaml node-app myapp</pre>
-        <p>
-            Some of these parameters are used directly by the charm, and some are passed through to the node app using <code>config/config.js</code>.
-        </p>
-        <h3 id="application-configuration">
-            Application configuration
-        </h3>
-        <p>
-            The formula looks for <code>config/config.js</code> in your app which starts off looking something like this
-        </p>
-        <pre class="prettyprint">
-module.exports = config = {
-  "name" : "mynodeapp"
-  ,"listen_port" : 8000
-  ,"mongo_host" : "localhost"
-  ,"mongo_port" : 27017
-}</pre>
-        <p>
-            and gets modified with contextually correct configuration information during either deployment (via the <code>install</code> hook) or relation to another service (<code>relation-changed</code> hook).
-        </p>
-        <p>
-            This config can be used from within your application using snippets like
-        </p>
-        <pre class="prettyprint lang-js">
-...
-var config = require('./config/config')
-...
-  new mongo.Server(config.mongo_host, config.mongo_port, {}),
-...
-server.listen(config.listen_port);
-...</pre>
-        <p>
-            Alternatively you could use a &acirc;&euro;&oelig;Procfile&acirc;&euro; in root directory like this:
-        </p>
-        <pre class="prettyprint lang-js">web: node app.js</pre>
-        <p>
-            and then get the environment variables from the running environment like this:
-        </p>
-        <pre class="prettyprint lang-js">app.set('port', process.env.PORT);</pre>
-        <p>
-            The defined environment variables are:
-        </p>
-        <pre class="prettyprint">
-NAME
-PORT
-NODE_ENV
-MONGO_HOST
-MONGO_PORT
-MONGO_REPLSET</pre>
-        <h3 id="network-access">
-            Network access
-        </h3>
-        <p>
-            This charm does not open any public ports itself. The intention is to relate it to a proxy service like <code>haproxy</code>, which will in turn open port 80 to the outside world. This allows for instant horizontal scalability.
-        </p>
-        <p>
-            If your node app is itself a proxy and you want it directly exposed, this can easily be done by adding
-        </p>
-        <pre class="prettyprint">open-port $app_port</pre>
-        <p>
-            to the bottom of the <code>install</code> hook, and then once your stack is started, you expose
-        </p>
-        <pre class="prettyprint">juju expose myapp</pre>
-        <p>
-            it to the outside world.
-        </p>
-        <p>
-            By default, juju services within the same environment can talk to each other on any port over internal network interfaces.
-        </p>
-        <h3 id="making-this-work-with-your-node.js-app">
-            Making this work with your node.js app
-        </h3>
-        <p>
-            This charm makes some strong assumptions about the structure of the node application (<code>config/config.js</code>) that might not apply to your app. Please treat this formula as a template that you can fork and modify to suit your needs.
-        </p>
-        <p>
-            The biggest difference between how the charm behaves for different kind of apps is application startup. A simple application will want to start upon install (startup code goes in the <code>install</code> hook), whereas some applications will not want to start up until a database has be associated (startup code goes in the <code>db-relation-joined</code> hooks).
-        </p>
+
+        
       </section>
 
       </article>
@@ -399,7 +304,6 @@ MONGO_REPLSET</pre>
       <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
     </div>
   </div>
-  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 </footer>
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
