@@ -98,7 +98,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;# or if the default port is used by another program.
             &nbsp;&nbsp;&nbsp;&nbsp;# shared-storage-port: 8041
             </code></pre>
-            <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <strong>$JUJU_HOME</strong>, which defaults to <strong>~/.juju/</strong>. By uncommenting and setting <strong>root-dir</strong> this location can be changed as well as the ports of the storage and the shared storage. This may be useful the case of multiple parallel running local providers or conflicts with other programs on your system.
+            <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <strong>$JUJU_HOME</strong>, which defaults to <strong>~/.juju/</strong>. By uncommenting and setting <strong>root-dir</strong> this location can be changed as well as the ports of the storage and the shared storage. This may be useful the case of multiple parallel running local providers or conflicts with other programs on your system. Also when using encrypted home directories you have to set <strong>$JUJU_HOME</strong> or <strong>root-dir</strong> to point to a location outside your home directory.
 
             <h2>Bootstrapping and Destroying</h2>
             <p>The usage of lxc Linux Containers enforces that bootstrapping and destroying of an environment are done as <strong>root</strong>. All other operations can be executed as non-root.
