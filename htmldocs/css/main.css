@@ -437,14 +437,19 @@ div.note.distribute {
   background: url("https://juju.ubuntu.com/wp-content/themes/juju-website/img/background-header-home.png") 0 0 repeat #fff;
 }
 
-pre.lang-yaml .typ, pre.lang-yaml .kwd {
+pre.lang-yaml .typ, pre.lang-yaml .kwd, pre.lang-yaml .lit {
   color: #fff;
 }
 
 pre.prettyprint, code.prettyprint {
   background-color: #222 !important;
+  color: #fff;
 }
 
+pre.prettyprint.prettyprinted {
+  white-space: pre;
+  overflow-x: auto;
+}
 
 hr {
   background: #fff;
@@ -483,4 +488,9 @@ dt:after {
 
 dd {
   padding-left: 10px;
+}
+
+li img {
+  margin-top: 10px;
+  display:block;
 }

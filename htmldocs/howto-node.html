@@ -84,58 +84,43 @@
         <p>
             First, create a <code>config.yaml</code> to add info about your app pointing to your github repo:
         </p>
-        <pre>
-<code>sample-node:
-  repo: https://github.com/yourapplication</code>
-</pre>
+        <pre class="prettyprint lang-yaml">
+sample-node:
+  repo: https://github.com/yourapplication</pre>
         <p>
             If you have not already bootstrapped an environment, do so:
         </p>
-        <pre>
-<code>juju bootstrap</code>
-</pre>
+        <pre class="prettyprint">juju bootstrap</pre>
         <p>
             Then wait a few minutes while your cloud spins up. Then deploy some basic services:
         </p>
-        <pre>
-<code>juju deploy node-app myapp
+        <pre class="prettyprint">juju deploy node-app myapp
 juju deploy mongodb
-juju deploy haproxy</code>
-</pre>
+juju deploy haproxy</pre>
         <p>
             relate them
         </p>
-        <pre>
-<code>juju add-relation mongodb myapp
-juju add-relation myapp haproxy</code>
-</pre>
+        <pre class="prettyprint">juju add-relation mongodb myapp
+juju add-relation myapp haproxy</pre>
         <p>
             open it up to the outside world
         </p>
-        <pre>
-<code>juju expose haproxy</code>
-</pre>
+        <pre class="prettyprint">juju expose haproxy</pre>
         <p>
             Find the haproxy instance's public URL from
         </p>
-        <pre>
-<code>juju status</code>
-</pre>
+        <pre class="prettyprint">juju status</pre>
         <p>
             (or attach it to an elastic IP via the AWS console) and open it up in a browser.
         </p>
         <p>
             scale up your app (to 10 nodes for example)
         </p>
-        <pre>
-<code>juju add-unit -n 10 myapp</code>
-</pre>
+        <pre class="prettyprint">juju add-unit -n 10 myapp</pre>
         <p>
             and scale it back down
         </p>
-        <pre>
-<code>juju remove-unit -n9 myapp</code>
-</pre>
+        <pre class="prettyprint">juju remove-unit myapp/9 myapp/8 myapp/7 myapp/6 myapp/5 myapp/4 myapp/3 myapp/2 myapp/1</pre>
         <h2 id="local-to-cloud-workflow">
             Local to Cloud Workflow
         </h2>
@@ -165,30 +150,24 @@ juju add-relation myapp haproxy</code>
         <p>
             In this example the local environment is named <code>local</code> and we'll deploy to an AWS environment called <code>amazon</code>. First let's <code>switch</code> to the local environment and bootstrap.
         </p>
-        <pre>
-<code>juju switch local
-juju bootstrap</code>
-</pre>
+        <pre class="prettyprint">juju switch local
+juju bootstrap</pre>
         <p>
             Create a <code>config.yaml</code> to add info about your app pointing to your github repo:
         </p>
-        <pre>
-<code>sample-node:
-  app_url: https://github.com/yourapplication</code>
-</pre>
+        <pre class="prettyprint lang-yaml">
+sample-node:
+  app_url: https://github.com/yourapplication</pre>
         <p>
             Then deploy some basic services:
         </p>
-        <pre>
-<code>juju deploy --config ~/myapp.yaml node-app myapp 
-juju deploy mongodb</code>
-</pre>
+        <pre class="prettyprint">
+juju deploy --config ~/myapp.yaml node-app myapp 
+juju deploy mongodb</pre>
         <p>
             relate them
         </p>
-        <pre>
-<code>juju add-relation mongodb myapp</code>
-</pre>
+        <pre class="prettyprint">juju add-relation mongodb myapp</pre>
         <p>
             Now open up your browser and go to <code>http://localhost</code> to get your application loaded in your browser.
         </p>
@@ -198,9 +177,7 @@ juju deploy mongodb</code>
         <p>
             Continue to write your code, push to git as you land features and fixes. When you're ready to test it you can tell Juju to check the git repository again:
         </p>
-        <pre>
-<code>juju set myapp app_branch=https://github.com/yourapplication</code>
-</pre>
+        <pre class="prettyprint">juju set myapp app_branch=https://github.com/yourapplication</pre>
         <p>
             The charm will then fetch the latest code and you can refresh your browser at <code>http://localhost</code>.
         </p>
@@ -213,35 +190,29 @@ juju deploy mongodb</code>
         <p>
             After you've repeatedly upgraded your application locally it's time to push it out to a place where your coworkers can see your app in all it's glory, let's push this to AWS. Same exact commands as before, just to a different environment:
         </p>
-        <pre>
-<code>juju switch amazon
+        <pre class="prettyprint">
+juju switch amazon
 juju bootstrap
 juju deploy --config ~/myapp.yaml node-app myapp 
 juju deploy mongodb
-juju add-relation mongodb myapp</code>
-</pre>
+juju add-relation mongodb myapp</pre>
         <p>
             Since we're on a public cloud and not on a local provider we need to explicitly expose the service and get its public IP:
         </p>
-        <pre>
-<code>juju expose myapp
-juju status myapp</code>
-</pre>
+        <pre class="prettyprint">juju expose myapp
+juju status myapp</pre>
         <p>
             And put the ec2 URL in your browser. If you want to enable some horizontal scalability to your application you can do so, even after you've deployed!
         </p>
-        <pre>
-<code>juju deploy haproxy
+        <pre class="prettyprint">
+juju deploy haproxy
 juju add-relation haproxy myapp
 juju expose haproxy
-juju unexpose myapp</code>
-</pre>
+juju unexpose myapp</pre>
         <p>
             And then get the public IP from the haproxy instead (notice how we've unexposed your application so that only haproxy is serving the public internet):
         </p>
-        <pre>
-<code>juju status haproxy</code>
-</pre>
+        <pre class="prettyprint">juju status haproxy</pre>
         <p>
             Now you can <code>juju add-unit myapp</code> and <code>juju remove-unit myapp</code> based on load.
         </p>
@@ -251,10 +222,9 @@ juju unexpose myapp</code>
         <p>
             The local containers survive reboots and do not go away until you explicitly tear the environment down. Now that your coworkers have seen your great application let's also stop spending money:
         </p>
-        <pre>
-<code>juju destroy-environment -eamazon
-juju destroy-environment -local</code>
-</pre>
+        <pre class="prettyprint">
+juju destroy-environment -e amazon
+juju destroy-environment -e local</pre>
         <h2 id="charm-details">
             Charm Details
         </h2>
@@ -294,9 +264,7 @@ juju destroy-environment -local</code>
         <p>
             Configurable aspects of the charm are listed in <code>config.yaml</code> and can be set by either editing the default values directly in the yaml file or passing a <code>myapp.yaml</code> configuration file during deployment
         </p>
-        <pre>
-<code>juju deploy --config ~/myapp.yaml node-app myapp</code>
-</pre>
+        <pre class="prettyprint">juju deploy --config ~/myapp.yaml node-app myapp</pre>
         <p>
             Some of these parameters are used directly by the charm, and some are passed through to the node app using <code>config/config.js</code>.
         </p>
@@ -306,52 +274,45 @@ juju destroy-environment -local</code>
         <p>
             The formula looks for <code>config/config.js</code> in your app which starts off looking something like this
         </p>
-        <pre>
-<code>module.exports = config = {
+        <pre class="prettyprint">
+module.exports = config = {
   "name" : "mynodeapp"
   ,"listen_port" : 8000
   ,"mongo_host" : "localhost"
   ,"mongo_port" : 27017
-}</code>
-</pre>
+}</pre>
         <p>
             and gets modified with contextually correct configuration information during either deployment (via the <code>install</code> hook) or relation to another service (<code>relation-changed</code> hook).
         </p>
         <p>
             This config can be used from within your application using snippets like
         </p>
-        <pre>
-<code>...
+        <pre class="prettyprint lang-js">
+...
 var config = require('./config/config')
 ...
   new mongo.Server(config.mongo_host, config.mongo_port, {}),
 ...
 server.listen(config.listen_port);
-...</code>
-</pre>
+...</pre>
         <p>
             Alternatively you could use a &acirc;&euro;&oelig;Procfile&acirc;&euro; in root directory like this:
         </p>
-        <pre>
-<code>web: node app.js</code>
-</pre>
+        <pre class="prettyprint lang-js">web: node app.js</pre>
         <p>
             and then get the environment variables from the running environment like this:
         </p>
-        <pre>
-<code>app.set('port', process.env.PORT);</code>
-</pre>
+        <pre class="prettyprint lang-js">app.set('port', process.env.PORT);</pre>
         <p>
             The defined environment variables are:
         </p>
-        <pre>
-<code>NAME
+        <pre class="prettyprint">
+NAME
 PORT
 NODE_ENV
 MONGO_HOST
 MONGO_PORT
-MONGO_REPLSET</code>
-</pre>
+MONGO_REPLSET</pre>
         <h3 id="network-access">
             Network access
         </h3>
@@ -361,15 +322,11 @@ MONGO_REPLSET</code>
         <p>
             If your node app is itself a proxy and you want it directly exposed, this can easily be done by adding
         </p>
-        <pre>
-<code>open-port $app_port</code>
-</pre>
+        <pre class="prettyprint">open-port $app_port</pre>
         <p>
             to the bottom of the <code>install</code> hook, and then once your stack is started, you expose
         </p>
-        <pre>
-<code>juju expose myapp</code>
-</pre>
+        <pre class="prettyprint">juju expose myapp</pre>
         <p>
             it to the outside world.
         </p>
@@ -442,6 +399,7 @@ MONGO_REPLSET</code>
       <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
     </div>
   </div>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 </footer>
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>

@@ -53,44 +53,36 @@
 
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
-		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
           <article>
-
-
-<!--Actual docs start here-->
-
+            <!--Actual docs start here-->
             <section id="service-groups">
               <h1>Groups of Services</h1>
               <p></p>
-
               <p>
               Juju deploys units of a service from a charm.
               The simplest way to do this is
               </p>
-                  
-<pre class="prettyprint">
-juju deploy mysql
-</pre>
+
+              <pre class="prettyprint">juju deploy mysql</pre>
 
               <p>
               which will take the latest version of the mysql charm straight from the store and create a single service unit.
               </p>
 
               <p>
-              By default, juju creates a unit of a service named after the charm; "mysql" in the above example.
+              By default, juju creates a unit of a service named after the charm; <code>mysql</code> in the above example.
               </p>
 
               <p>
               You can specify the name for the service when deploying
               </p>
 
-<pre class="prettyprint">
-juju deploy mysql wikidb
-</pre>
+              <pre class="prettyprint">juju deploy mysql wikidb</pre>
 
               <p>
-              which will create a unit of the "wikidb" service. It creates the unit exactly as before, except instead of 'mysql', the service is called'wikidb'.
+              which will create a unit of the <code>wikidb</code> service. It creates the unit exactly as before, except instead of <code>mysql</code>, the service is called <code>wikidb</code>.
               </p>
 
               <p>
@@ -152,9 +144,7 @@ juju deploy mysql slavedb -n2
               where the different services are related to each other
               </p>
 
-<pre class="prettyprint">
-juju add-relation masterdb:master slavedb:slave
-</pre>
+              <pre class="prettyprint">juju add-relation masterdb:master slavedb:slave</pre>
 
               <p>
               and to other services via
@@ -182,28 +172,17 @@ juju add-relation hadoop-master:namenode hadoop-slave-A:datanode
 juju add-relation hadoop-master:namenode hadoop-slave-B:datanode
 ...
 </pre>
-
               <p>
               These service groups can be managed independently by Juju for upgrades and configuration
               </p>
-
-<pre class="prettyprint">
-juju set hadoop-slave-B some_param=new_value
-</pre>
-
+              <pre class="prettyprint">juju set hadoop-slave-B some_param=new_value</pre>
               <p>
               This technique can potentially be a way for Juju to manage rolling upgrades for a service.
               Of course, this depends heavily on the services in question and how well they support
               version management, schema changes, etc.
               </p>
-
-
             </section>
-            
- <!--Actual docs end here-->    
-
-
-       
+            <!--Actual docs end here-->
           </article>
         </div>
       </div>
@@ -261,7 +240,7 @@ juju set hadoop-slave-B some_param=new_value
       <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
     </div>
   </div>
- <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 </footer>
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>

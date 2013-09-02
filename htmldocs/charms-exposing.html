@@ -53,41 +53,51 @@
 
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
-		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
           <article>
             <section id ="exposing">
               <h1>Exposing Services</h1>
-              <p>By design, Juju operates a very secure environment for deploying your services. Even if you have deployed services, they won't be publically available unless you explicitly make them so. To allow public access to services, the appropriate changes must be made to the cloud provider firewall settings. As the procedure or doing this varies depending on the provider, Juju helpfully abtracts this into a single command, <span class="pre">juju expose &LT;servicename&GT;</p>
+              <p>By design, Juju operates a very secure environment for deploying your services. Even if you have deployed services, they won't be publically available unless you explicitly make them so. To allow public access to services, the appropriate changes must be made to the cloud provider firewall settings. As the procedure or doing this varies depending on the provider, Juju helpfully abtracts this into a single command, <code>juju expose &LT;servicename&GT;</code></p>
               <p>For example, you may have deployed a WordPress service using the relevant charm. Once deployed, the service still cannot be accessed by the public, so you would run:<p>
-              <pre><code>juju expose wordpress</code></pre>
+              <pre class="prettyprint">juju expose wordpress</pre>
               <p>Juju will then take the steps necessary to adjust firewall rules and any other settings to expose the service via it's given address. This process may take anything from a few moments to several minutes. You can check on the current status of your services by running:</p>
-              <pre><code>juju status</code></pre>
+              <pre class="prettyprint">juju status</pre>
               <p>This will return a status report like this:</p>
-              <pre><code>...
-              &nbsp;services:
-              &nbsp;&nbsp;wordpress:
-              &nbsp;&nbsp;&nbsp;&nbsp;exposed: true
-              &nbsp;&nbsp;&nbsp;&nbsp;charm: local:precise/wordpress-42
-              &nbsp;&nbsp;&nbsp;&nbsp;relations: {db: mysql}
-              &nbsp;&nbsp;units:
-              &nbsp;&nbsp;&nbsp;&nbsp;wordpress/0:
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: 2
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open-ports: [80/tcp]
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relations:
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;db: {state: up}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state: started
-              ...
-              </code></pre>
-              <p>As you can see here, the <strong>exposed:</strong> status is listed as true, and the service is running and available to users.</p>
+<pre class="prettyprint lang-yaml">
+machines:
+  "0":
+    agent-state: started
+    agent-version: 1.12.0
+    dns-name: 15.185.88.51
+    instance-id: "1736045"
+    series: precise
+  "1":
+    agent-state: started
+    agent-version: 1.12.0
+    dns-name: 15.185.89.204
+    instance-id: "1736065"
+    series: precise
+services:
+  wordpress:
+    charm: cs:precise/wordpress-42
+    exposed: true
+    units:
+      wordpress/0:
+        agent-state: started
+        agent-version: 1.12.0
+        machine: "1"
+        open-ports:
+          - 80/tcp
+        public-address: 15.185.89.236</pre>
+              <p>As you can see here, the <code>exposed:</code> status is listed as true, and the service is running and available to users.</p>
               <p class="note"><strong>Note:</strong> Exposing the service does not change any DNS or other settings which may be neccessary to get your service running as you expect.</p>
+            </section>
+            <section id="unexposing">
               <h1>Unexposing a service</h1>
-              <p>To return the firewall settings and make a service non-public again, you simly need to run the <span class="pre">juju unexpose</span> command. For example:</p>
-              <pre><code>juju unexpose wordpress</code></pre>
-              
-              
-
-             </section>
+              <p>To return the firewall settings and make a service non-public again, you simly need to run the <code>unexpose</code> command. For example:</p>
+              <pre class="prettyprint">juju unexpose wordpress</pre>
+            </section>
           </article>
         </div>
       </div>
@@ -145,6 +155,7 @@
       <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
     </div>
   </div>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 </footer>
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>

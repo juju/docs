@@ -53,7 +53,7 @@
 
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
-		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+      <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
           <article>
             <section id="intro">
@@ -61,10 +61,9 @@
                 <p>This tutorial will show you how to get started with Juju, including installing, configuring and bootstrapping a new Juju environment.
                 Before you start you will need:</p>
                 <ul>
-                <li> An Ubuntu or OSX machine to install the client on.</li>
-                <li> An environment which can provide a new server with an Ubuntu cloud operating system image on-demand. This includes services such as Amazon EC2, HP Cloud, an OpenStack installation, or your local machine</li>
-                <li> An SSH key-pair. If you have not already set one up, you can generate an appropriate keypair with:</li>
-                <pre>ssh-keygen -t rsa -b 2048</pre>
+                <li>An Ubuntu or OSX machine to install the client on.</li>
+                <li>An environment which can provide a new server with an Ubuntu cloud operating system image on-demand. This includes services such as Amazon EC2, HP Cloud, an OpenStack installation, or your local machine</li>
+                <li>An SSH key-pair. If you have not already set one up, you can generate an appropriate keypair with: <code>ssh-keygen -t rsa -b 2048</code></li>
               </ul>
             </section>
             <section id="install">
@@ -77,12 +76,12 @@
                 <div class="terminal-wrap">
                   <div data-section="ubuntu">
                     <p>To install Juju, you simply need to grab the latest juju-core package from the PPA:</p>
-                    <pre>sudo add-apt-repository ppa:juju/stable
-                    sudo apt-get update && sudo apt-get install juju-core</pre>
+                    <pre class="prettyprint lang-bash">sudo add-apt-repository ppa:juju/stable
+sudo apt-get update && sudo apt-get install juju-core</pre>
                   </div>
                   <div data-section="macosx">
                     <p>Juju is in <a href="http://brew.sh/">Homebrew</a>, to install do:</p>
-                    <pre>brew install juju</pre>
+                    <pre class="prettyprint lang-bash">brew install juju</pre>
 
                     <p>You can grab the latest pre-relase OSX client from our <a href="https://github.com/juju/juju-core/releases">Github Page</a>. Uncompress the tarball, then you can run the <code>juju</code> command from the terminal. We're in the process of testing these builds to be production ready, so if you have a problem please <a href="https://bugs.launchpad.net/juju-core/+filebug">file a bug</a>.</p>
                     
@@ -106,9 +105,9 @@
             
             <p>Now the Juju software is installed, it needs to be configured to use your particular cloud provider. This is done by generating and editing a file, "environments.yaml", which will live in your ~/.juju/ directory. You can generate the environments file manually, but Juju also includes a boilerplate configuration option that will flesh out most of the file for you and minimise the amount of work (and potential errors).</p>
             <p>To generate an initial config file, you simply need to run:</p>
-            <pre><code>juju generate-config -w</code></pre>
+            <pre class="prettyprint lang-bash">juju init</pre>
             
-            <p>The -w switch causes the file to be written to your ~/.juju directory if an environments.yaml file does not already exist. It will also create the ~./juju directory if that does not exist.</p>
+            <p>This command will cause a file to be written to your ~/.juju directory if an environments.yaml file does not already exist. It will also create the ~./juju directory if that does not exist.</p>
             <p>This file will contain sample profiles for different types of cloud services, but you will need to edit the files to provide specific information for your cloud provider. Sections are created for Amazon (AWS) services, HPCloud and a generic OpenStack instance. For more specifics on what needs to be changed, see the relevant sections below.</p>
             <ul>
              <li><a href="config-aws.html">Configuring for Amazon AWS</a></li>
@@ -123,84 +122,81 @@
             <p>Once you have installed and configured Juju, it is probably a good idea to take it for a bit of a test drive and check that everything is working as expected. Because Juju makes it really easy to deploy services, this is actually quick and straightforward.</p>
             
             <aside>
-            <iframe class="youtube-player" type="text/html" width="400" height="300" src="//www.youtube.com/embed/0AT6qKyam9I" frameborder="0">
-            </iframe>
+              <iframe class="youtube-player" type="text/html" width="400" height="300" src="//www.youtube.com/embed/0AT6qKyam9I" frameborder="0"></iframe>
             </aside>
             
             <p> The first thing to do is set up a bootstrap environment. This is an instance in the cloud that Juju will use to deploy and control other services with. It will be created according to the configuration you have provided, and your SSH key will automatically be uploaded so that Juju can communicate securely with the bootstrap instance. </p>
             
-            <pre>juju bootstrap </pre>
+            <pre class="prettyprint">juju bootstrap</pre>
             
-            <p class="note"><strong>Note:</strong> If you have multiple environments configured, you can choose which one to address with a particular command by adding the -e switch followed by the environment name, E.g. "-e hpcloud".</p>
+            <p class="note"><strong>Note:</strong> If you have multiple environments configured, you can choose which one to address with a particular command by adding the <code>-e</code> switch followed by the environment name, E.g. <code>-e hpcloud</code>. Read more about <a href="config-environments.html">environment switching</a></p>
             
             <p>You may have to wait a few moments for this command to return, as it needs to perform various tasks and contact your cloud provider. </p>
             <p>Assuming it returns successfully (otherwise see <a href="#errors">common error messages and what to do about them</a>), we can now deploy some services and explore the basic operations of Juju.</p>
             <p>To start with, we will deploy Wordpress, by running this command:</p>
-            <pre>juju deploy wordpress</pre>
+            <pre class="prettyprint lang-bash">juju deploy wordpress</pre>
             <p>Now juju will fetch the Wordpress charm and use it, through the bootstrap instance to request and deploy whatever resources it needs to set up this service.</p>
             <p>Wordpress needs a database though, so we will also deploy one of those:</p>
-            <pre>juju deploy mysql</pre>
+            <pre class="prettyprint">juju deploy mysql</pre>
             <p>Once again, juju will do whatever is necessary to deploy this service for you, and it may take some time for the command to return.</p>
             <p class="note"><strong>Note:</strong> If you want to get more information on what is actually happening, or to help resolve problems, you can add the -v switch to the juju command to get verbose output.</p>
             <p>Although we have deployed Wordpress and a MySQL database, they are not linked together in any way yet. To do this we should run:</p> 
             
-            <pre>juju add-relation wordpress mysql</pre>
+            <pre class="prettyprint">juju add-relation wordpress mysql</pre>
             
             <p>This command uses information provided by the relevant charms to associate these services with each other in whatever way makes sense. There is much more to be said about linking services together which <a href="#add-relation">is covered in the juju command documentation</a>, but for the moment, we just need to know that it will link these services together.</p>
             <p>In order to make our Wordpress public, we now need to expose this service:<p>
-            <pre>juju expose wordpress</pre>
+            <pre class="prettyprint">juju expose wordpress</pre>
             <p>This service will now be configured to respond to web requests, so visitors can see it. But where exactly is it? If we run the juju status command, we will be able to see what services are running, and where they are located.<p>
-            <pre>juju status</pre>
+            <pre class="prettyprint">juju status</pre>
             <p>The output from this command should look something like this:</p>
-            <pre><code>
-            $juju status
-            machines:
-            &nbsp;&nbsp;"0":
-            &nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
-            &nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
-            &nbsp;&nbsp;&nbsp;&nbsp;dns-name: ec2-50-16-167-135.compute-1.amazonaws.com
-            &nbsp;&nbsp;&nbsp;&nbsp;instance-id: i-781bf614
-            &nbsp;&nbsp;&nbsp;&nbsp;series: precise
-            &nbsp;&nbsp;"1":
-            &nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
-            &nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
-            &nbsp;&nbsp;&nbsp;&nbsp;dns-name: ec2-23-22-225-54.compute-1.amazonaws.com
-            &nbsp;&nbsp;&nbsp;&nbsp;instance-id: i-9e8927f6
-            &nbsp;&nbsp;&nbsp;&nbsp;series: precise
-            &nbsp;&nbsp;"2":
-            &nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
-            &nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
-            &nbsp;&nbsp;&nbsp;&nbsp;dns-name: ec2-54-224-220-210.compute-1.amazonaws.com
-            &nbsp;&nbsp;&nbsp;&nbsp;instance-id: i-5c440436
-            &nbsp;&nbsp;&nbsp;&nbsp;series: precise
-            services:
-            &nbsp;&nbsp;mysql:
-            &nbsp;&nbsp;&nbsp;&nbsp;charm: cs:precise/mysql-18
-            &nbsp;&nbsp;&nbsp;&nbsp;exposed: false
-            &nbsp;&nbsp;&nbsp;&nbsp;relations:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;db:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- wordpress
-            &nbsp;&nbsp;&nbsp;&nbsp;units:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mysql/0:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: "1"
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public-address: ec2-23-22-225-54.compute-1.amazonaws.com
-            &nbsp;&nbsp;wordpress:
-            &nbsp;&nbsp;&nbsp;&nbsp;charm: cs:precise/wordpress-12
-            &nbsp;&nbsp;&nbsp;&nbsp;exposed: true
-           &nbsp;&nbsp;&nbsp;&nbsp;relations:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;db:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- mysql
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loadbalancer:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- wordpress
-            &nbsp;&nbsp;&nbsp;&nbsp;units:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wordpress/0:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-state: started
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent-version: 1.10.0
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine: "2"
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public-address: ec2-54-224-220-210.compute-1.amazonaws.com
-            </code></pre>
+            <pre class="prettyprint lang-yaml">
+machines:
+  "0":
+    agent-state: started
+    agent-version: 1.10.0
+    dns-name: ec2-50-16-167-135.compute-1.amazonaws.com
+    instance-id: i-781bf614
+    series: precise
+  "1":
+    agent-state: started
+    agent-version: 1.10.0
+    dns-name: ec2-23-22-225-54.compute-1.amazonaws.com
+    instance-id: i-9e8927f6
+    series: precise
+  "2":
+    agent-state: started
+    agent-version: 1.10.0
+    dns-name: ec2-54-224-220-210.compute-1.amazonaws.com
+    instance-id: i-5c440436
+    series: precise
+services:
+  mysql:
+    charm: cs:precise/mysql-18
+    exposed: false
+    relations:
+      db:
+      - wordpress
+    units:
+      mysql/0:
+        agent-state: started
+        agent-version: 1.10.0
+        machine: "1"
+        public-address: ec2-23-22-225-54.compute-1.amazonaws.com
+  wordpress:
+    charm: cs:precise/wordpress-12
+    exposed: true
+    relations:
+      db:
+      - mysql
+      loadbalancer:
+      - wordpress
+    units:
+      wordpress/0:
+        agent-state: started
+        agent-version: 1.10.0
+        machine: "2"
+        public-address: ec2-54-224-220-210.compute-1.amazonaws.com</pre>
             <p>There is quite a lot of information here. the first section, titled <strong>machines:</strong>, details all the instances which are currently running. For each you will see the version of Juju they are running, their hostname, instance id and the series or version of Ubuntu they are running.</p>
             <p>After that, the sections list the services which are currently deployed. The information here differs slightly according to the service and how it is configured. It will however, always list the charm that was used to deploy the service, whether it is exposed or not, its address and whatever relationships exist.</p>
             <p>From this status readout, we can see that wordpress is exposed and ready. If we simply copy the address into a web browser, we should be able to see it running</p>
@@ -208,7 +204,7 @@
             <p>Congratulations, you have just deployed a service with Juju!</p>
             <p>Now you are ready to deploy whatever service you really want from the 100s available at the <a href="http://jujucharms.com">Juju Charm Store.</a></p>
             <p>To remove all current deployments and clear up everything in your cloud, you can run the command:</p>
-            <pre><code>juju destroy-environment </code></pre>
+            <pre class="prettyprint">juju destroy-environment</pre>
             <p>This will remove everything, including the bootstrap node.</p>
             <p>To learn more about charms, including configuring options and managing running systems, you should continue to <a href="./charms.html">read the charm documentation.</a></p>
             </section>
@@ -269,6 +265,7 @@
       <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
     </div>
   </div>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 </footer>
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
