@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Juju Documentation - Scaling Services</title>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
+  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+  <body class="resources">
+    <header class="global clearfix" role="banner">
+  <div class="header-navigation">
+    <div>
+      <nav role="navigation">
+        <ul>
+          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
+          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
+          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
+          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
+          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
+          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
+          <li>
+            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
+              <fieldset>
+                <input id="input-search" type="text" name="s" value="Search" />
+              </fieldset>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="header-content">
+    <div class="clearfix">
+      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
+      <div class="header-navigation-secondary"></div>
+      <div class="header-image"></div>
+      <h1>Resources</h1>
+      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+    </div>
+  </div>
+</header>
+
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+          <article>
+
+
+<!--Actual docs start here-->
+
+            <section id="authors-interfaces">
+              <h1>Interfaces</h1>
+              <p></p>
+
+              <p>
+              One of the best aspects of juju is how dead-simple it is to write a charm.
+              You write a handful of hooks in your favorite language and then go to town.
+              However, there's a subtle hump in the charming learning curve... interfaces.
+              </p>
+
+              <p>
+              Interface names are what juju checks when trying to determine if two services can be related.
+              For example, wordpress's <code>metadata.yaml</code> contains:
+              </p>
+
+<pre class="prettyprint">
+requires:
+  database:
+    interface: mysql
+</pre>
+
+              <p>
+              which is a statement that wordpress has a relation that's locally named "database" which is an 
+              implementation of the "mysql" interface.
+              </p>
+
+              <p>
+              Mysql's <code>metadata.yaml</code> contains a not-too-surprising:
+
+<pre class="prettyprint">
+provides:
+  db:
+    interface: mysql
+</pre>
+
+              <p>
+              When services are related, Juju decides which hooks to call
+              within each charm based on this local relation name.  When
+              wordpress is related to mysql, the "database-relation-joined,
+              database-relation-changed, etc" hooks are called on the wordpress
+              end.  Corresponding hooks will be called on the mysql end
+              "db-relation-joined, db-relation-changed" (based on the mysql
+              relation names).
+              </p>
+              
+              <p>
+              Juju decides which services can be related based on the interface names only.
+              They have to match.
+              </p>
+
+              <p>
+              At the end of the day, what's a juju interface?  Simply a name.
+              </p>
+
+              <p>
+              Now, having gotten that out of the way, there is an _implicit_ notion of an interface
+              that charmers have to pay attention to in addition to just matching names.
+              </p>
+
+              <p>
+              In some sense, relations are two-way channels of communications between services.
+              They're not actually talking directly, the agents communicate via the state server, but
+              it helps to think of it as direct communication between the services.
+              Relation hooks can call tools such as <code>relation-get</code> and <code>relation-set</code>
+              to pass information back and forth between the service endpoints.
+              </p>
+
+              <p>
+              For example, wordpress and mysql might have a conversation like the following:
+              </p>
+
+<pre class="prettyprint">
+wordpress:
+  I'm here and my service name is "wordpress"
+
+mysql:
+  I'm here, let me create a db for you
+  your database/schema name is "wordpress"
+  your credentials are "admin/pass1234"
+  you access the db on "my.host.addr:port"
+
+wordpress:
+  cool, let me write the wordpress config files needed to access that database (and bounce the server to pick up those changes)
+  later
+
+mysql:
+  cool, later
+</pre>
+
+              <p>
+              We'll go over some more detailed versions of this, but this is
+              the high-level conversation that occurs between two services when
+              they are related in a relation implementing the
+              <code>mysql</code> interface.
+              </p>
+
+              <p>
+              At first glance, it would appear that the <em>interface</em> called <code>mysql</code>
+              might be defined simply by the set of variables that get passed along the channel.
+              Something like:
+              </p>
+
+<pre class="prettyprint">
+interface:
+  name: mysql
+  variables_set:
+    - service_name
+    - database_host
+    - database_port
+    - database_name
+    - database_user
+    - database_password
+</pre>
+
+              <p>
+                but really, that's not complete.  In fact, it's not even enough
+                information to implement hooks for a new service that needs to
+                talk to mysql.  The timing and sequencing are critical
+                components of this conversation!  They can't be left out.
+              </p>
+
+              <p>
+              So let's dig a little deeper into this interface.
+              Consider only the <code>relation-joined</code> and <code>relation-changed</code>
+              hooks for now.  The remaining <code>broken</code> and <code>departed</code> hooks are covered
+              elsewhere.
+              </p>
+
+              <p>
+              Actually, if we start from provisioning, the hooks that are called for wordpress are
+              </p>
+
+<pre class="prettyprint">
+# juju deploy wordpress
+
+install
+config-changed
+start
+
+# juju add-relation wordpress mysql
+
+database-relation-joined
+
+database-relation-changed
+</pre>
+
+
+              <p>
+              similarly, for mysql
+              </p>
+
+
+<pre class="prettyprint">
+# juju deploy mysql
+
+install
+config-changed
+start
+
+# juju add-relation wordpress mysql
+
+db-relation-joined
+
+db-relation-changed
+</pre>
+
+
+              <p>
+              and we can fill in a little of what the relation hooks are doing
+              </p>
+
+
+<pre class="prettyprint">
+# wordpress
+
+database-relation-joined
+  &lt;no-op&gt;
+
+database-relation-changed
+  relation-get database_name, creds, host/port
+  write config for wordpress
+  bounce wordpress
+</pre>
+
+<pre class="prettyprint">
+# mysql
+
+db-relation-joined
+  relation-get service-name
+  create db, creds
+  relation-set db, creds, host/port
+
+database-relation-changed
+  &lt;no-op&gt;
+</pre>
+
+              <p>
+              <em>This</em> conversation is the actual interface.
+              </p>
+
+
+            </section>
+            
+ <!--Actual docs end here-->    
+
+
+       
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer class="global clearfix" role="contentinfo">
+  <div class="row">
+    <div class="inner-wrapper">
+      <nav role="navigation" class="clearfix">
+        <ul class="footer-a">
+          <li class="grid-3 first-col">
+            <h4><a href="/get-started">Get started</a></h4>
+            <ul>
+              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/resources">Resources</a></h4>
+            <ul>
+              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
+              <li><a href="/resources/videos/">Videos</a></li>
+              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/community">Community</a></h4>
+            <ul>
+              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
+              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
+              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
+            </ul>
+          </li>
+          <li class="grid-3 last-col">
+            <h4><a href="https://launchpad.net/juju">Code</a></h4>
+            <ul>
+              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+              <li><a href="https://launchpad.net/charms">Charms</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row no-border">
+    <div class="legal inner-wrapper">
+      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
+    </div>
+  </div>
+</footer>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  </body>
+</html>
