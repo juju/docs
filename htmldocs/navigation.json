@@ -22,11 +22,20 @@
         "Service Configuration": "charms-config.html",
         "Service Relationships": "charms-relationships.html",
         "Exposing Services": "charms-exposing.html",
-        "Scaling Services": "charms-scaling.html",
-        "Destroying Services": "charms-destroy.html",
-        "Groups of Services": "charms-service-groups.html"
+        "Scaling Services": "charms-scaling.html",        
+        "Groups of Services": "charms-service-groups.html",
+        "Destroying Services": "charms-destroy.html"
+      }
+    },
+    "How to...": {
+      "link": "howto.html",
+      "children": {
+        "Deploy a Node.js app": "howto-node.html",
+        "Test and deploy on Rails": "howto-rails.html"
       }
     }
+
+
   },
   "Charm Authors": {
     "Anatomy of a Charm": "authors-charm-anatomy.html",
