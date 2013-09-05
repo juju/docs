@@ -1,6 +1,6 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Juju Documentation - Getting Started</title>
+		<title>Juju Documentation</title>
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
 		  
 		
