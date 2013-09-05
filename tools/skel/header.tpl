@@ -1,34 +1,26 @@
-<header class="global clearfix" role="banner">
-  <div class="header-navigation">
-    <div>
-      <nav role="navigation">
-        <ul>
-          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
-          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
-          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
-          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
-          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
-          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
-          <li>
-            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
-              <fieldset>
-                <input id="input-search" type="text" name="s" value="Search" />
-              </fieldset>
-            </form>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="header-content">
-    <div class="clearfix">
-      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left: 455px; display: block;" class="arrow-nav">
-      <div class="header-navigation-secondary"></div>
-      <div class="header-image"></div>
-      <h1>Resources</h1>
-      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
-    </div>
-  </div>
+<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="http://juju.canonicalwebteam.com/">
+					<img width="118" height="27" src="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="http://juju.canonicalwebteam.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="http://juju.canonicalwebteam.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="http://juju.canonicalwebteam.com/deployment/">Deployment</a></li>
+				<li class="page_item page-item-14"><a href="http://juju.canonicalwebteam.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="http://juju.canonicalwebteam.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="http://juju.canonicalwebteam.com/download/">Download</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="http://juju.canonicalwebteam.com/">
+				<label class="off-left" for="s">Search:</label>
+				<input class="form-text" type="text" value="" name="s" id="s" />
+				<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+			</form>		
+		</div>
+	</nav>	
 </header>
