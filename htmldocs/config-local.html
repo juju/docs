@@ -60,14 +60,11 @@
             <h1>Configuring for Local Provider</h1>
             <h2>Prerequisites</h2>
             <p>The local provider enables you to run Juju on a single system like your local computer or a single server. This way you can simply evaluate the software or service configurations, develop your own charms or run a single server system.</p> 
-            <p>To do this, Juju uses the <strong>LXC Linux Container</strong>, which can be installed on your computer with the command:</p>
+            <p>To do this, Juju uses the <strong>LXC Linux Container</strong> and MongoDB which can be installed on your computer with the following command:</p>
 <pre class="prettyprint lang-yaml">
-sudo apt-get install lxc
+sudo apt-get install juju-local
 </pre>
-            <p>Additionally the local provider needs <strong>MongoDB</strong> to be installed. This is done with the command:</p> 
-<pre class="prettyprint lang-yaml">
-            sudo apt-get install mongodb-server
-</pre>
+            
             <p>In case of <strong>precise</strong> or <strong>quantal</strong> versions of Ubuntu, MongoDB has to be installed from a different repository. So in this case call</p>
 <pre class="prettyprint lang-yaml">
             sudo apt-add-repository ppa:juju/stable
