@@ -71,7 +71,7 @@
               <h1>Discovering service configuration options</h1>
               <p>You can discover what configuration options are available for a specific charm in various ways</p>
               <ul>
-                <li>By running the <span class="pre">juju get &LT;service&GT;</span> command.</li>
+                <li>By running the <code>juju get &LT;service&GT;</code> command.</li>
                 <li>By viewing the charm in the <a href="http://jujucharms.com">charm store.</a></li>
                 <li>By examining the <strong>config.yaml</strong> file in the charm itself.</li>
               </ul>
@@ -79,59 +79,59 @@
               <h1>Configuring a service at deployment</h1>
               <p>It is possible to set configuration values when deploying a service by providing a yaml-formatted file containing configuration values.</p>
               <p>For example, upon investigation we discover that the Mediawiki charm allows us to set values for the name of the wiki and the 'skin' to use. We can put these inside a configuration file.</p>
-              <pre><code>
-              mediawiki:
-              &nbsp;&nbsp;name: Juju Wiki
-              &nbsp;&nbsp;skin: monobook
-              &nbsp;&nbsp;admins: admin:admin
-              </code></pre>
+<pre class="prettyprint">
+mediawiki:
+  name: Juju Wiki
+  skin: monobook
+  admins: admin:admin
+</pre>
               <p>We can then use this configuration when we deploy the service:</p>
-              <pre><code>
-              juju deploy --config myconfig.yaml mediawiki
-              </code></pre>   
+<pre class="prettyprint">
+juju deploy --config myconfig.yaml mediawiki
+</pre>   
               
               <p class="caution"><strong>Caution:</strong> If the yaml configuration file cannot be read or contains some syntax errors or invalid options, you will receive an error message to this effect. However, <strong>the service will still be deployed </strong>.
-              <h1>Configuring a service which is already deployed</h1>
-              <p>It is possible to set or change configuration of a service which is already deployed.  </p>
-              <p>Before you set any of these options, you may want to check what current options are already set, using the <span class="pre"> juju get &LT;service&GT; </span> command. For example:</p>
-              <pre><code>
-              juju get mediawiki
-              </code></pre>
+<h1>Configuring a service which is already deployed</h1>
+ <p>It is possible to set or change configuration of a service which is already deployed.  </p>
+ <p>Before you set any of these options, you may want to check what current options are already set, using the <code>juju get &LT;service&GT;</code> command. For example:</p>
+<pre class="prettyprint">
+juju get mediawiki
+</pre>
               <p>Should return something like this:</p>
-              <pre><code>
-              charm: mediawiki
-              service: mediawiki
-              settings:
-              &nbsp;&nbsp;admins:
-              &nbsp;&nbsp;&nbsp;&nbsp;default: true
-              &nbsp;&nbsp;&nbsp;&nbsp;description: Admin users to create, user:pass
-              &nbsp;&nbsp;&nbsp;&nbsp;type: string
-              &nbsp;&nbsp;&nbsp;&nbsp;value: null
-              &nbsp;&nbsp;debug:
-              &nbsp;&nbsp;&nbsp;&nbsp;default: true
-              &nbsp;&nbsp;&nbsp;&nbsp;description: turn on debugging features of mediawiki
-              &nbsp;&nbsp;&nbsp;&nbsp;type: boolean
-              &nbsp;&nbsp;&nbsp;&nbsp;value: false
-              &nbsp;&nbsp;logo:
-              &nbsp;&nbsp;&nbsp;&nbsp;default: true
-              &nbsp;&nbsp;&nbsp;&nbsp;description: URL to fetch logo from
-              &nbsp;&nbsp;&nbsp;&nbsp;type: string
-              &nbsp;&nbsp;&nbsp;&nbsp;value: null
-              &nbsp;&nbsp;name:
-              &nbsp;&nbsp;&nbsp;&nbsp;default: true
-              &nbsp;&nbsp;&nbsp;&nbsp;description: The name, or Title of the Wiki
-              &nbsp;&nbsp;&nbsp;&nbsp;type: string
-              &nbsp;&nbsp;&nbsp;&nbsp;value: Please set name of wiki
-              &nbsp;&nbsp;skin:
-              &nbsp;&nbsp;&nbsp;&nbsp;default: true
-              &nbsp;&nbsp;&nbsp;&nbsp;description: skin for the Wiki
-              &nbsp;&nbsp;&nbsp;&nbsp;type: string
-              &nbsp;&nbsp;&nbsp;&nbsp;value: vector
-              </code></pre>
-              <p>You can set the options using the  <span class="pre"> juju set &LT;service&GT; </span>, specifying multiple key:value pairs if necessary:</p>
-              <pre><code>
-              juju set mediawiki skin=monoblock name='Juju Wiki' 
-              </code></pre>
+<pre class="prettyprint">
+charm: mediawiki
+service: mediawiki
+settings:
+  admins:
+    default: true
+    description: Admin users to create, user:pass
+    type: string
+    value: null
+  debug:
+    default: true
+    description: turn on debugging features of mediawiki
+    type: boolean
+    value: false
+  logo:
+    default: true
+    description: URL to fetch logo from
+    type: string
+    value: null
+  name:
+    default: true
+    description: The name, or Title of the Wiki
+    type: string
+    value: Please set name of wiki
+  skin:
+    default: true
+    description: skin for the Wiki
+    type: string
+    value: vector
+</pre>
+              <p>You can set the options using the  <code>juju set &LT;service&GT;</code>, specifying multiple key:value pairs if necessary:</p>
+<pre class="prettyprint">
+juju set mediawiki skin=monoblock name='Juju Wiki' 
+</pre>
             </section>
 <!--Postamble-->
         </div>
