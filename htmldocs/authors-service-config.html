@@ -51,11 +51,18 @@
 		</nav>	
 	</header>
 <!--End-Header-->
-
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
         <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
+<!--End-Preamble-->
 <article>
 <h1>Service configuration</h1>
 <h2>Introduction</h2>
@@ -108,7 +115,13 @@ postgres:
 </blockquote>
 <p>Hooks normally attempt to provide a consistent view of the shared state of the system and the handling of config options within hooks (config-changed and the relation hooks) is no different. The first access to the configuration data of a service will retain a cached copy of the service options. Cached data will be used for the duration of the hook invocation.</p>
 </article>
-    <div class="shadow"></div>
+<!--Postamble-->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<!--End-Postamble-->
 <!--Footer-->
 	<footer class="global clearfix" role="contentinfo">
 		<nav role="navigation">

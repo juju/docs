@@ -51,11 +51,18 @@
 		</nav>	
 	</header>
 <!--End-Header-->
-
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
         <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
+<!--End-Preamble-->
           <article>
             <section id ="charms-constraints">
               <h1>Machine Constraints</h1>
@@ -144,10 +151,13 @@ juju add-unit minecraft
               <p>Attempting to use constraints against a deployment that predates their inclusion in juju will not work, because the running legacy code (specifically, the provisioning agent) will not be able to interpret them. Therefore, attempts to specify constraints against legacy deployments will generate errors to inform users of their invalidity; at the agent level they are simply ignored.</p>
               <p>All commands valid before the client upgrade should continue to work as before, as will the EC2 <code>default-image-id</code> and <code>default-instance-type</code> environment settings.</p>
           </article>
+<!--Postamble-->
         </div>
       </div>
     </section>
-    <div class="shadow"></div>
+  </div>
+</div>
+<!--End-Postamble-->
 <!--Footer-->
 	<footer class="global clearfix" role="contentinfo">
 		<nav role="navigation">

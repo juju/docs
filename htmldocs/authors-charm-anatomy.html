@@ -20,8 +20,7 @@
 		<![endif]-->
 	</head>
 <!--End-Head-->
-  <body class="resources">
-  	
+  <body class="resources">	
 <!--Header-->
 
 	<header class="banner global" role="banner">
@@ -51,12 +50,20 @@
 		</nav>	
 	</header>
 <!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
         <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
-          <article>
-            <section id="charm-anatomy">
+<!--End-Preamble-->
+<article>
+<section id="charm-anatomy">
 <h1>Anatomy of a charm</h1>
 <p>Charms define how services integrate and how their service units
 react to events in the distributed environment, as orchestrated by
@@ -426,10 +433,13 @@ peers:
 
 </section>
 </article>
+<!--Postamble-->
         </div>
       </div>
     </section>
-    <div class="shadow"></div>
+  </div>
+</div>
+<!--End-Postamble-->
 <!--Footer-->
 	<footer class="global clearfix" role="contentinfo">
 		<nav role="navigation">
@@ -485,7 +495,6 @@ peers:
 	</footer>
 
 <!--End-Footer-->
-
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
