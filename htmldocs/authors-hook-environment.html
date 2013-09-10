@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Juju Documentation - Hook Environment and Tools</title>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
+  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+  <body class="resources">
+    <header class="global clearfix" role="banner">
+  <div class="header-navigation">
+    <div>
+      <nav role="navigation">
+        <ul>
+          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
+          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
+          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
+          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
+          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
+          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
+          <li>
+            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
+              <fieldset>
+                <input id="input-search" type="text" name="s" value="Search" />
+              </fieldset>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="header-content">
+    <div class="clearfix">
+      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
+      <div class="header-navigation-secondary"></div>
+      <div class="header-image"></div>
+      <h1>Resources</h1>
+      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+    </div>
+  </div>
+</header>
+
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+          <article>
+
+
+<section id="hook-execution-environment">
+<h1>Hook execution environment</h1>
+
+<p>When a charm is deployed onto a unit, the raw charm is extracted into a
+directory; this directory is known as the charm directory. It's owned and
+operated by juju, and juju sometimes temporarily cedes control of it to
+user code, by running a hook inside it.</p>
+
+<p>When a hook's running, it should be considered to have sole access to the
+charm directory; at all other times, you should consider that juju may be
+making arbitrarily scary changes to the directory, and that it is not safe
+to read or write to anything in there at all.</p>
+
+<p>This is to say that the software you install must, once it's running, be
+entirely independent of the charm that created it. It's fine (and encouraged,
+with some caveats) to store <em>charm</em> state in the charm directory, but the
+state of your <em>software</em> must remain unperturbed by direct changes to the
+charm.</p>
+
+<p>So, every hook runs with easy access to the charm files. Every hook also runs
+as root, with a number of useful variables set, and has access to hook-specific
+tools that let you interrogate and affect the juju environment.</p>
+
+<p>No more than one hook will execute on a given system at a given time. A unit in
+a container is considered to be on a different system to any unit on the
+container's host machine.</p>
+</section>
+
+<section id="environment-variables">
+<h2>Environment variables</h2>
+
+<p>The following variables are always available.</p>
+<ul>
+    <li>The <code>$CHARM_DIR</code> variable is the path to the charm directory.</li>
+    <li>The <code>$PATH</code> variable is prefixed with the path to the hook tools
+    directory.</li>
+    <li>The <code>$JUJU_UNIT_NAME</code> variable holds the name of the unit.</li>
+    <li>The <code>$JUJU_API_ADDRESSES</code> variable holds a space-separated list of API
+    server addresses.</li>
+</ul>
+<p>In addition, every relation hook makes available relation-specific variables.</p>
+<ul>
+    <li>The <code>$JUJU_RELATION</code> variable holds the relation name. This
+    information is of limited value, because it's always the same as the part of
+    the hook name just before &quot;-relation-&quot;.</li>
+    <li>The <code>$JUJU_RELATION_ID</code> variable holds an opaque relation
+    identifier, used to distinguish between multiple relations with the same name.
+    It is vitally important, because it's the only reasonable way of telling the
+    difference between (say) a database service's many independent clients.</li>
+</ul>
+<p>...and, if that relation hook is not a -broken hook:</p>
+<ul>
+    <li>The <code>$JUJU_REMOTE_UNIT</code> variable holds the name of the unit which
+    is being reported to have -joined, -changed, or -departed.</li>
+</ul>
+<p>Juju does <em>not</em> pay any attention to the values of the above variables when
+running hook tools: they're a one-way communication channel from juju to
+the charm only. Finally, in all cases:</p>
+<ul>
+    <li>The <code>$JUJU_AGENT_SOCKET</code> and <code>$JUJU_CONTEXT_ID</code> variables
+    allow the hook tools to work: juju <em>does</em> pay attention to them, but you
+    should treat them as opaque and avoid messing with them.</li>
+</ul>
+<p>Finally, if you're <a href="./authors-hook-debug.html">debugging</a>, you'll also
+have access to:</p>
+<ul>
+    <li>The <code>$JUJU_HOOK_NAME</code> variable, which will be set to the current
+    hook name.</li>
+</ul>
+</section>
+
+<section id="hook-tools">
+<h2>Hook tools</h2>
+
+<p>All hook tools are available in all hooks. Many of the tools produce output,
+and those that do accept a <code>--format</code> flag whose value can be set to
+<code>json</code> or <code>yaml</code> as desired. If it's not specified, the format
+defaults to <code>smart</code>, which transforms the basic output as follows:</p>
+<ul>
+    <li>strings are left untouched</li>
+    <li>boolean values are converted to the strings <code>True</code> and
+    <code>False</code></li>
+    <li>ints and floats are converted directly to strings</li>
+    <li>lists of strings are converted to a single newline-separated string</li>
+    <li>all other types (in general, dictionaries) are formatted as YAML</li>
+</ul>
+<p>Tools which do not produce output also accept the <code>--format</code> flag,
+but ignore it, for compatibility reasons.</p>
+
+<p>The various &quot;relation-&quot; tools infer context from the hook where
+possible. If they're running in a relation hook, the current relation id is set
+as the default; and if they're running in a -joined, -changed, or -broken hook,
+the current remote unit is set as the default.</p>
+
+<p>Best use of relation hooks will be made by those who understand the
+<a href="./authors-relations-in-depth">relation model</a>.</p>
+</section>
+
+<section id="juju-log">
+<h3>juju-log</h3>
+
+<p><code>juju-log</code> writes its arguments directly to the unit's log file.
+All hook output is currently logged anyway, so it's theoretically redundant with
+<code>echo</code>, but this is an implementation detail and should not be depended
+upon. If it's important, please <code>juju-log</code> it.</p>
+
+<pre class="runnable"><code>
+$ juju-log some important text
+</code></pre>
+
+<p>It accepts a <code>--debug</code> flag which causes the message to be logged
+at <code>DEBUG</code> level; in all other cases it's logged at <code>INFO</code>
+level. The <code>-l</code>/<code>--level</code> argument is ignored, and is present
+only to prevent legacy charms from entirely failing to run; the inability to specify
+logging levels and targets in more detail is a known
+<a href="https://bugs.launchpad.net/juju-core/+bug/1223325">bug</a>.</p>
+</section>
+
+<section id="unit-get">
+<h3>unit-get</h3>
+
+<p><code>unit-get</code> returns information about the local unit. It accepts a
+single argument, which must be <code>private-address</code> or
+<code>public-address</code>. It is not affected by context.</p>
+
+<pre class="runnable"><code>
+$ unit-get private-address
+10.0.1.101
+</code></pre>
+
+<pre class="runnable"><code>
+$ unit-get public-address
+foo.example.com
+</code></pre>
+
+</section>
+
+<section id="config-get">
+<h3>config-get</h3>
+
+<p><code>config-get</code> returns information about the service configuration (as
+defined by the charm). If called without arguments, it returns a dictionary
+containing all config settings that are either explicitly set, or which
+have a non-nil default value. If the <code>--all</code> flag is passed, it returns
+a dictionary containing all definied config settings including nil values
+(for those without defaults). If called with a single argument, it returns
+the value of that config key. Missing config keys are reported as having a
+value of nil, and do not return an error.</p>
+
+<pre class="runnable"><code>
+# Get the interesting bits of the config.
+$ config-get
+key: some-value
+another-key: default-value
+</code></pre>
+
+<pre class="runnable"><code>
+# Get the whole config including nulls.
+$ config-get --all
+key: some-value
+another-key: default-value
+no-default: null
+</code></pre>
+
+<pre class="runnable"><code>
+# Get a single config setting.
+$ config-get another-key
+default-value
+</code></pre>
+
+<pre class="runnable"><code>
+# Get a config setting with no value.
+$ config-get no-default
+</code></pre>
+
+<pre class="runnable"><code>
+# Get a config setting that doesn't exist.
+$ config-get missing-key
+</code></pre>
+
+</section>
+
+<section id="open-port">
+<h3>open-port</h3>
+
+<p><code>open-port</code> marks a port on the local system as appropriate to
+open, if and when the service is exposed to the outside world. It accepts a single
+port with an optional protocol, which may be <code>udp</code> or <code>tcp</code>,
+where <code>tcp</code> is the default.</p>
+
+<pre class="runnable"><code>
+# Open 80/tcp if and when the service is exposed.
+$ open-port 80
+</code></pre>
+
+<pre class="runnable"><code>
+# Open 1234/udp if and when the service is exposed.
+$ open-port 1234/udp
+</code></pre>
+
+<p><code>open-port</code> will not have any effect if the service is not exposed,
+and may have a somewhat delayed effect even if it is. It accepts and ignores
+<code>--format</code>, because it doesn't produce any output.</p>
+
+</section>
+
+<section id="close-port">
+<h3>close-port</h3>
+
+<p><code>close-port</code> unmarks a local system port. If the service is not
+exposed, it has no effect; otherwise the port is marked for imminent closure. It
+accepts the same flags and arguments as <code>open-port</code>.</p>
+
+<pre class="runnable"><code>
+# Close 1234/udp if it was open.
+$ close-port 1234/udp
+</code></pre>
+
+<pre class="runnable"><code>
+# Close 80/tcp if it was open.
+$ close-port 80
+</code></pre>
+
+</section>
+
+<section id="relation-set">
+<h3>relation-set</h3>
+
+<p><code>relation-set</code> writes the local unit's settings for some relation. It
+accepts any number of <code>key=value</code> strings, and an optional <code>-r</code>
+argument, which defaults to the current relation id. If it's not running in a relation
+hook, <code>-r</code> needs to be specified. The <code>value</code> part of an argument
+is not inspected, and is stored directly as a string. Setting an empty string causes
+the setting to be removed.</p>
+
+<pre class="runnable"><code>
+# Set a pair of values for the local unit in the default relation.
+$ echo $JUJU_RELATION_ID
+server:3
+$ relation-set username=bob password=2db673e81ffa264c
+</code></pre>
+
+<pre class="runnable"><code>
+# Set a pair of values for the local unit in a specific relation.
+$ echo $JUJU_RELATION_ID
+
+$ relation-set -r server:3 username=jim password=12345
+</code></pre>
+
+<pre class="runnable"><code>
+# Clear a value for the local unit in the default relation.
+$ echo $JUJU_RELATION_ID
+server:3
+$ relation-set deprecated-or-unused=
+</code></pre>
+
+<p><code>relation-set</code> is the single tool at your disposal for communicating
+your own configuration to units of related services. At least by convention, the
+charm that <code>provides</code> an interface is likely to set values, and a charm
+that <code>requires</code> that interface will read them; but there's nothing
+forcing this. Whatever information you need to propagate for the remote charm to
+work must be propagated via relation-set, with the single exception of the
+<code>private-address</code> key, which is always set before the unit joins.</p>
+
+<p>You may wish to overwrite the <code>private-address</code> setting, for example
+if you're writing a charm that serves as a proxy for some external service; but
+you should in general avoid <em>removing</em> that key, because most charms expect
+that value to exist unconditionally.</p>
+
+<p>All values set are stored locally until the hook completes; at that point,
+if the hook exit code is 0, all changed values will be communicated to the
+rest of the system, causing -changed hooks to run in all related units.</p>
+
+<p>There is no way to write settings for any unit other than the local unit; but
+any hook on the local unit can write settings for any relation the local unit is
+participating in.</p>
+
+</section>
+
+<section id="relation-get">
+<h3>relation-get</h3>
+
+<p><code>relation-get</code> reads the settings of the local unit, or of any
+remote unit, in a given relation (set with <code>-r</code>, defaulting to the
+current relation, as in <code>relation-set</code>). The first argument specifies
+the settings key, and the second the remote unit, which may be omitted if a
+default is available (that is, when running a relation hook other than -broken).</p>
+
+<p>If the first argument is omitted, a dictionary of all current keys and values
+will be printed; all values are always plain strings without any interpretation.
+If you need to specify a remote unit but want to see all settings, use <code>-</code>
+for the first argument.</p>
+
+<pre class="runnable"><code>
+# Get all settings from the default remote unit in the default relation.
+$ echo $JUJU_RELATION_ID
+db:1
+$ echo $JUJU_REMOTE_UNIT
+mongodb/2
+$ relation-get
+username: jim
+password: "12345"
+</code></pre>
+
+<pre class="runnable"><code>
+# Get one setting from the default remote unit in the default relation.
+$ echo $JUJU_RELATION_ID
+db:1
+$ echo $JUJU_REMOTE_UNIT
+mongodb/2
+$ relation-get username
+jim
+</code></pre>
+
+<pre class="runnable"><code>
+# Get all settings from a particular remote unit in a particular relation.
+$ echo $JUJU_RELATION_ID
+
+$ relation-get -r database:7 - mongodb/5
+username: bob
+password: 2db673e81ffa264c
+</code></pre>
+
+<p>Note that <code>relation-get</code> produces results that are <em>consistent</em>
+but not necessarily <em>accurate</em>, in that you will always see settings that:</p>
+<ul>
+    <li>were accurate at some point in the reasonably recent past
+    <li>are always the same within a single hook run...
+    <li class=" sub"><em>except</em> when inspecting the unit's own relation settings,
+    in which case local changes from <code>relation-set</code> will be seen correctly.</li>
+</ul>
+<p>You should never depend upon the presence of any given key in <code>relation-get</code>
+output. Processing that depends on specific values (other than
+<code>private-addres</code>) should be restricted to -changed hooks for the relevant
+unit, and the absence of a remote unit's value should never be treated as an
+<a href="./authors-hook-errors.html">error</a> in the local unit.</p>
+
+<p>In practice, it is common and encouraged for -relation-changed hooks to exit
+early, without error, after inspecting <code>relation-get</code> output and
+determining it to be inadequate; and for <a href="./authors-hook-kinds.html">all
+other hooks</a> to be resilient in the face of missing keys, such that
+-relation-changed hooks will be sufficient to complete all configuration that
+depends on remote unit settings.</p>
+
+<p>Settings for remote units already known to have departed remain accessible
+for the lifetime of the relation.</p>
+
+<p><code>relation-get</code> currently has a
+<a href="https://bugs.launchpad.net/juju-core/+bug/1223339">bug</a> that allows units
+of the same service to see each other's settings outside of a peer relation. Depending
+on this behaviour is foolish in the extreme: if you need to share settings between
+units of the same service, always use a peer relation to do so, or you may be
+seriously inconvenienced when the hole is closed without notice.</p>
+
+</section>
+
+<section id="relation-list">
+<h3>relation-list</h3>
+
+<p><code>relation-list</code> accepts the <code>-r</code> flag as above, and
+outputs the names of every remote unit currently known to be in the relation.</p>
+
+<pre class="runnable"><code>
+# Show all remote units in the current relation.
+$ echo $JUJU_RELATION_ID
+db:1
+$ relation-list
+mongodb/0
+mongodb/2
+mongodb/3
+</code></pre>
+
+<pre class="runnable"><code>
+# Show all remote units in a specific relation.
+$ echo $JUJU_RELATION_ID
+
+$ relation-list -r website:2
+haproxy/0
+</code></pre>
+
+</section>
+
+<section id="relation-ids">
+<h3>relation-ids</h3>
+
+<p><code>relation-ids</code> accepts a single argument which, in a relation
+hook, defaults to the name of the current relation.</p>
+
+<pre class="runnable"><code>
+# Show all relations like the current one.
+$ echo $JUJU_RELATION
+server
+$ relation-ids
+server:1
+server:7
+server:9
+</code></pre>
+
+<pre class="runnable"><code>
+# Show all relations with the given name.
+$ echo $JUJU_RELATION_ID
+
+$ relation-ids reverseproxy
+reverseproxy:3
+</code></pre>
+
+<p>Note again that all commands that produce output accept <code>--format json</code>
+and <code>--format yaml</code>, and you may consider it smarter to use those for
+clarity's sake than to depend on the default <code>smart</code> format.
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer class="global clearfix" role="contentinfo">
+  <div class="row">
+    <div class="inner-wrapper">
+      <nav role="navigation" class="clearfix">
+        <ul class="footer-a">
+          <li class="grid-3 first-col">
+            <h4><a href="/get-started">Get started</a></h4>
+            <ul>
+              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/resources">Resources</a></h4>
+            <ul>
+              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
+              <li><a href="/resources/videos/">Videos</a></li>
+              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/community">Community</a></h4>
+            <ul>
+              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
+              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
+              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
+            </ul>
+          </li>
+          <li class="grid-3 last-col">
+            <h4><a href="https://launchpad.net/juju">Code</a></h4>
+            <ul>
+              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+              <li><a href="https://launchpad.net/charms">Charms</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row no-border">
+    <div class="legal inner-wrapper">
+      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
+    </div>
+  </div>
+</footer>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  </body>
+</html>
+
