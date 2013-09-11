@@ -1,0 +1,21 @@
+<!DOCTYPE html> 
+<html>
+<!--Head-->
+<!--End-Head-->
+  <body class="resources">	
+<!--Header-->
+<!--End-Header-->
+<!--Preamble-->
+<!--End-Preamble-->
+<article>
+    <section id='unique_section_name'>
+          <h1>My heading</h1>
+          <p>Some text I wrote.</p>
+</article>
+<!--Postamble-->
+<!--End-Postamble-->
+<!--Footer-->
+<!--End-Footer-->
+<!--Scripts-->
+<!--End-Scripts-->
+</body></html>

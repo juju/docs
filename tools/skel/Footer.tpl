@@ -1,3 +1,4 @@
+<!--Footer-->
 	<footer class="global clearfix" role="contentinfo">
 		<nav role="navigation">
 			<div class="footer-a">
@@ -26,13 +27,13 @@
 						<li>
 							<h2><a href="/community">Community</a></h2>
 							<ul>
-								<li><a href="/community/juju-blog/">Juju Blog</a></li>
+								<li><a href="/community/blog/">Juju Blog</a></li>
 								<li><a href="/events/">Events</a></li>
 								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
 								<li><a href="/community/charmers/">Charmers</a></li>
 								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-								<li><a href="/docs/">Help with documentation</a></li>
-								<li><a href="/labs/">Juju Labs</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
 							</ul>
 						</li>
 						<li>
@@ -50,3 +51,5 @@
 			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
 		</div>
 	</footer>
+
+<!--End-Footer-->
