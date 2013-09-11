@@ -27,7 +27,7 @@
     }
   },
   "Charm Authors": {
-    "Charm contents": {
+    "Charm Contents": {
       "link": "authors-charm-contents.html",
       "children": {
     	"metadata.yaml": "authors-charm-metadata.html",
