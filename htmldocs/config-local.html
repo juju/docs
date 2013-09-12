@@ -88,9 +88,9 @@ sudo apt-get update
             <h2>Configuration</h2>
             <p>You should start by generating a generic configuration file for Juju, using the command:
 <pre class="prettyprint lang-bash">
-juju init
+juju generate-config
 </pre>
-            <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
+            <p>This will generate a file, <strong>environments.yaml</strong> (if it doesn't already exist), which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
             <p class ="note"><strong>Note:</strong>If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
             <p>The generic configuration sections generated for the local provider will look something like this:</p>
 <pre class="prettyprint lang-yaml">
