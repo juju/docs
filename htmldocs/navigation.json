@@ -37,6 +37,9 @@
 
 
   },
+  "Additional Tools": {
+    "Charm-tools": "tools-charm-tools.html"
+  },
   "Charm Authors": {
     "Anatomy of a Charm": "authors-charm-anatomy.html",
     "Writing a Charm": {
