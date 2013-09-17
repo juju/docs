@@ -6,6 +6,7 @@
         "Introduction": "getting-started.html#intro",
         "Installation": "getting-started.html#install",
         "AWS Configuration": "config-aws.html",
+        "Azure Configuration": "config-azure.html",
         "HP Cloud Configuration": "config-hpcloud.html",
         "OpenStack Configuration": "config-openstack.html",
         "MAAS Configuration": "config-maas.html",
