@@ -61,13 +61,14 @@ pre strong, pre b, a strong, a b, a code {
 pre, code {
   font: 13px/1.5 monospace;
   display: inline-block;
-  background-color: #fbf4f0;
+  background-color: #AEA79F;
   margin-bottom: 10px;
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   padding: 5px;
   white-space: pre-line;
+  color: #fff;
 }
 
 strong.code {
@@ -442,7 +443,7 @@ pre.lang-yaml .typ, pre.lang-yaml .kwd, pre.lang-yaml .lit {
 }
 
 pre.prettyprint, code.prettyprint {
-  background-color: #222 !important;
+  background-color: #333 !important;
   color: #fff;
 }
 
@@ -456,6 +457,7 @@ hr {
   height: 1px;
   margin: 0;
   box-shadow: none;
+  border: 0;
   border-bottom: 1px dotted #aea79f;
 }
 

@@ -13,7 +13,7 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
 		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
-		<link href="https://juju.ubuntu.com/docs/css/main.css?1375975745" rel="stylesheet" type="text/css">
+		<link href="css/main.css?1375975745" rel="stylesheet" type="text/css">
 		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,7 +72,7 @@
               <section class="code-example code-overflow">
                 <nav class="control">
                   <a href="." class="selected" data-action="ubuntu">Ubuntu</a>
-<!--                  <a href="." class="" data-action="windows">Windows</a> -->
+                  <a href="." class="" data-action="windows">Windows</a>
                 </nav>
                 <div class="terminal-wrap">
                   <div data-section="ubuntu">
@@ -80,27 +80,11 @@
 <pre class="prettyprint lang-bash">sudo add-apt-repository ppa:juju/stable
 sudo apt-get update && sudo apt-get install charm-tools</pre>
                   </div>
-
-<!-- WINDOWS BIT 
                   <div data-section="windows">
-                    <p>Currently, version 1.0.0-RC1 is available</p>
-                    <pre>brew install juju</pre>
-
-                    <p>You can grab the latest pre-relase OSX client from our <a href="https://github.com/juju/juju-core/releases">Github Page</a>. Uncompress the tarball, then you can run the <code>juju</code> command from the terminal. We're in the process of testing these builds to be production ready, so if you have a problem please <a href="https://bugs.launchpad.net/juju-core/+filebug">file a bug</a>.</p>
-
-                    <p>If you have go installed you can install juju using go get. You can install go via homebrew you'll need bzr too:</p>
-                    <pre>brew install go bzr
-                    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-                    </pre>
-                    <p>Once you have go and bzr you can install juju:</p>
-                    <pre>mkdir $HOME/go
-                      export GOPATH=$HOME/go
-                    go get -v launchpad.net/juju-core/...
-                    export PATH=$PATH:$GOPATH/bin
-                    </pre>
-                    <p>be sure to add your go bin dir to your path permanently by adding it to your .bashrc</p>
+                    <p>Charm Tools is available for, and tested, on Microsoft Windows 7 and 8. While the installer may work on previous versions of Windows there is no guarentee.</p>
+                    <p>To install, first download the Charm Tools installer from <a href="https://github.com/juju/charm-tools/releases/download/1.0.0/charm-tools_1.0.0.exe">Github</a>. Once downloaded, execute the installer and follow the on-screen prompts. After installation you can access Charm Tools either via the <code>charm</code> command or <code>juju charm</code> plugin from either the command line or powershell.</p>
+                    <p>To uninstall, please remove Charm Tools from the Add/Remove Software section of the Windows Control Panel</p>
                   </div>
--->
                 </div>
               </section>
             </section>
