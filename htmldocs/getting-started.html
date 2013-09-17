@@ -71,10 +71,10 @@
                 <ul>
                 <li>An Ubuntu, OSX or Windows machine to install the client on.</li>
                 <li>An environment which can provide a new server with an Ubuntu cloud operating system image on-demand. This includes services such as Amazon EC2, HP Cloud, an OpenStack installation, or your local machine</li>
-                <li> An SSH key-pair. If you have not already set one up, you need to generate an appropriate keypair.</li>
-                 On Linux and Mac OSX:<br/>
-<pre class="prettyprint">ssh-keygen -t rsa -b 2048</pre> <br/> 
-<p>On Windows: See the <a href="getting-started-keygen-win.html">Windows instructions for SSH and PuTTY</a></p>
+                <li> An SSH key-pair. If you have not already set one up, you need to generate an appropriate keypair.
+                 On Linux and Mac OSX:
+<code>ssh-keygen -t rsa -b 2048</code>
+On Windows: See the <a href="getting-started-keygen-win.html">Windows instructions for SSH and PuTTY</a></li>
 </ul>
               </ul>
             </section>
@@ -99,15 +99,15 @@ sudo apt-get update && sudo apt-get install juju-core</pre>
                     <p>You can grab the latest pre-relase OSX client from our <a href="https://github.com/juju/juju-core/releases">Github Page</a>. Uncompress the tarball, then you can run the <code>juju</code> command from the terminal. We're in the process of testing these builds to be production ready, so if you have a problem please <a href="https://bugs.launchpad.net/juju-core/+filebug">file a bug</a>.</p>
                     
                     <p>If you have go installed you can install juju using go get. You can install go via homebrew you'll need bzr too:</p>
-                    <pre>brew install go bzr
-                    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-                    </pre>
+                    <pre class="prettyprint lang-yaml">
+brew install go bzr
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH</pre>
                     <p>Once you have go and bzr you can install juju:</p>
-                    <pre>mkdir $HOME/go
-                    export GOPATH=$HOME/go
-                    go get -v launchpad.net/juju-core/...
-                    export PATH=$PATH:$GOPATH/bin
-                    </pre>
+                    <pre class="prettyprint lang-bash">
+mkdir $HOME/go
+export GOPATH=$HOME/go
+go get -v launchpad.net/juju-core/...
+export PATH=$PATH:$GOPATH/bin</pre>
                     <p>be sure to add your go bin dir to your path permanently by adding it to your .bashrc</p>
                   </div>
                   <div data-section="windows">
@@ -119,7 +119,7 @@ sudo apt-get update && sudo apt-get install juju-core</pre>
             <section id="config">
             <h1>Configuring</h1>
             
-            <p>Now the Juju software is installed, it needs to be configured to use your particular cloud provider. This is done by generating and editing a file, "environments.yaml", which will live in your ~/.juju/ directory on Linux and OSX, %LOCALAPPDATA%/Juju on Windows. You can generate the environments file manually, but Juju also includes a boilerplate configuration option that will flesh out most of the file for you and minimise the amount of work (and potential errors).</p>
+            <p>Now the Juju software is installed, it needs to be configured to use your particular cloud provider. This is done by generating and editing a file, <code>environments.yaml</code>, which will live in your <code>~/.juju/</code> directory on Linux and OSX, <code>%LOCALAPPDATA%/Juju</code> on Windows. You can generate the environments file manually, but Juju also includes a boilerplate configuration option that will flesh out most of the file for you and minimise the amount of work (and potential errors).</p>
             <p>To generate an initial config file, you simply need to run:</p>
             <pre class="prettyprint lang-bash">juju generate-config</pre>
             
