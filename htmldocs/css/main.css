@@ -252,6 +252,9 @@ div.note.distribute {
   margin-top: 40px;
 }
 
+.doc-content h3{
+  font-size: 18px;
+}
 /**
  * Walkthrough steps
  */
@@ -428,4 +431,66 @@ div.note.distribute {
   width: 571px;
   position: relative;
   z-index: 1;
+}
+
+.resources .header-content {
+  background: url("https://juju.ubuntu.com/wp-content/themes/juju-website/img/background-header-home.png") 0 0 repeat #fff;
+}
+
+pre.lang-yaml .typ, pre.lang-yaml .kwd, pre.lang-yaml .lit {
+  color: #fff;
+}
+
+pre.prettyprint, code.prettyprint {
+  background-color: #222 !important;
+  color: #fff;
+}
+
+pre.prettyprint.prettyprinted {
+  white-space: pre;
+  overflow-x: auto;
+}
+
+hr {
+  background: #fff;
+  height: 1px;
+  margin: 0;
+  box-shadow: none;
+  border-bottom: 1px dotted #aea79f;
+}
+
+#content h2 {
+  font-size: 20px;
+}
+
+#content h3 {
+  font-size: 18px;
+}
+
+
+dl {
+  display: block;
+  list-style-type: disc;
+  padding-left: 10px;
+}
+
+dt {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  font: 16px/14px monospace;
+  border-radius: 4px;
+  white-space: pre-line;  
+}
+
+dt:after {
+  content: ':'
+}
+
+dd {
+  padding-left: 10px;
+}
+
+li img {
+  margin-top: 10px;
+  display:block;
 }

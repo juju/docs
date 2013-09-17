@@ -1,0 +1,332 @@
+<!DOCTYPE html> 
+<html>
+<!--Head-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Juju Documentation</title>
+		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+ 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+		<link href="https://juju.ubuntu.com/docs/css/main.css?1375975745" rel="stylesheet" type="text/css">
+		
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+<!--End-Head-->
+  <body class="resources">
+  	
+<!--Header-->
+
+	<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+					<label class="off-left" for="s">Search:</label>
+					<input class="form-text" type="text" value="" name="s" id="s" />
+					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+				</form>		
+			</div>
+		</nav>	
+	</header>
+<!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+<!--End-Preamble-->
+          <article>      
+            <section id="node">
+        <h1 id="using-juju-to-deploy-your-rails-application">
+            Using Juju to Deploy your Rails Application
+        </h1>
+        <p>
+            One of Juju's main use cases is to deploy your application directly out of version control and into a cloud. Since Juju supports local and remote clouds, this makes for a nice workflow that enables you to rev your app quickly on your local machine and then deploy out the cloud.
+        </p>
+        <p>
+            In this HowTo we will deploy a Rails/PostgreSQL application directly from github. The application will be behind an HAProxy service so that we can horizontally scale when needed.
+        </p>
+        <p>
+            We will then set up a local-to-cloud workflow with our application so we can do continuous deployment. Since we deploy locally in the exact same way as we deploy to a cloud, this is a powerful method for developing your application in an environment that more closely resembles production.
+        </p>
+        <p>
+            Before moving on you should have gone through the <a href="https://juju.ubuntu.com/docs/getting-started.html">Getting Started</a> section and installed and configured Juju.
+        </p>
+        <h2 id="basic-usage-of-the-ruby-on-rails-charm">
+            Basic Usage of the Ruby on Rails Charm
+        </h2>
+        <p>
+            Create a YAML config file with your application's name and it's git location
+        </p>
+        <p>
+            <strong>sample-app.yml</strong>
+        </p>
+<pre class="prettyprint lang-yaml">
+sample-app:
+  repo: https://github.com/pavelpachkovskij/sample-rails</code>
+</pre>
+        <p>
+            Deploy the application and a proxy:
+        </p>
+<pre class="prettyprint lang-bash">
+juju deploy rails myapp --config sample-app.yml
+juju deploy haproxy
+juju add-relation haproxy myapp
+</pre>
+        <p>
+            Deploy and relate database
+        </p>
+<pre class="prettyprint lang-bash">
+juju deploy postgresql
+juju add-relation postgresql:db myapp
+</pre>
+        <p>
+            Now you can run migrations:
+        </p>
+<pre class="prettyprint lang-bash">
+juju ssh myapp/0 run rake db:migrate
+</pre>
+        <p>
+            Seed database
+        </p>
+<pre class="prettyprint lang-bash">juju ssh myapp/0 run rake db:seed
+</pre>
+        <p>
+            And finally expose the proxy:
+        </p>
+<pre class="prettyprint lang-bash">juju expose haproxy</pre>
+<p>
+            Find the instance's public URL from
+        </p>
+<pre class="prettyprint lang-bash">juju status haproxy</pre>
+        <p>
+            Scale horizontally by adding and removing units:
+        </p>
+<pre class="prettyprint lang-bash">juju add-unit myapp
+juju remove-unit myapp
+</pre>
+        <p>
+            Or go even larger with <code>juju add-unit -n10 myapp</code> for 10 nodes.
+        </p>
+        <h2 id="local-to-cloud-workflow">
+            Local to Cloud Workflow
+        </h2>
+        <p>
+            The previous example deploys your application quickly to the cloud, in this example we will show how to hack and test on an application locally on your laptop and then push out to the public cloud.
+        </p>
+        <p>
+            We need to configure 2 environments, a local one and a public cloud one.
+        </p>
+        <ol style="list-style-type: decimal">
+            <li>Configure the <a href="./config-local.html">local provider</a> on your machine.
+            </li>
+            <li>Configure a public or private cloud on your machine.
+            </li>
+        </ol>
+        <ul>
+            <li>
+                <a href="./config-aws.html">AWS</a>
+            </li>
+            <li>
+                <a href="./config-hpcloud.html">HP Cloud</a>
+            </li>
+            <li>
+                <a href="./config-openstack.html">OpenStack</a>
+            </li>
+        </ul>
+        <p>
+            In this example the local environment is named "local" and we'll deploy to an AWS environment called <code>amazon</code>. First let's <code>switch</code> to the local environment and bootstrap.
+        </p>
+<pre class="prettyprint lang-bash">
+juju switch local
+juju bootstrap
+</pre>
+        <p>
+            Create a YAML config file with your application's name and it's git location
+        </p>
+        <p>
+            <strong>sample-app.yml</strong>
+        </p>
+<pre class="prettyprint lang-yaml">sample-app:
+  repo: https://github.com/pavelpachkovskij/sample-rails
+</pre>
+        <p>
+            Deploy the application and database:
+        </p>
+<pre class="prettyprint lang-bash">juju deploy rails myapp --config sample-app.yml
+juju deploy postgresql</pre>
+        <p>
+            and relate them
+        </p>
+<pre class="prettyprint lang-bash">juju add-relation myapp postgresql
+</pre>
+        <p>
+            Now open up your browser and go to <code>http://localhost</code> to get your application loaded in your browser.
+        </p>
+        <h3 id="continuous-deployment">
+            Continuous Deployment
+        </h3>
+        <p>
+            Continue to write your code, push to git as you land features and fixes. When you're ready to test it you can tell Juju to check the git repository again:
+        </p>
+<pre class="prettyprint lang-bash">juju set myapp repo=https://github.com/yourapplication
+</pre>
+        <p>
+            The charm will then fetch the latest code and you can refresh your browser at <code>http://localhost</code>.
+        </p>
+        <p>
+            Repeat pushing to git and using the juju set command to keep a live instance of your application running in your local environment.
+        </p>
+        <h3 id="push-to-your-publicprivate-cloud">
+            Push to your Public/Private Cloud
+        </h3>
+        <p>
+            After you've repeatedly upgraded your application locally it's time to push it out to a place where your coworkers can see your app in all it's glory, let's push this to AWS. Same exact commands as before, just to a different environment:
+        </p>
+<pre class="prettyprint lang-bash">juju switch amazon
+juju bootstrap
+juju deploy --config ~/myapp.yaml rails myapp 
+juju deploy postgresql
+juju add-relation postgresql myapp
+</pre>
+        <p>
+            Since we're on a public cloud and not on a local provider we need to explicitly expose the service and get its public IP:
+        </p>
+<pre class="prettyprint lang-bash">juju expose myapp
+juju status myapp
+</pre>
+        <p>
+            And put the ec2 URL in your browser. If you want to enable some horizontal scalability to your application you can do so, even after you've deployed!
+        </p>
+<pre class="prettyprint lang-bash">juju deploy haproxy
+juju add-relation haproxy myapp
+juju expose haproxy
+juju unexpose myapp
+</pre>
+        <p>
+            And then get the public IP from the haproxy instead (notice how we've unexposed your application so that only haproxy is serving the public internet):
+        </p>
+<pre class="prettyprint lang-bash">juju status haproxy</pre>
+        <p>
+            Now you can <code>juju add-unit myapp</code> and <code>juju remove-unit myapp</code> based on load.
+        </p>
+        <h3 id="tearing-it-all-down">
+            Tearing it all down
+        </h3>
+        <p>
+            The local containers survive reboots and do not go away until you explicitly tear the environment down. Now that your coworkers have seen your great application let's also stop spending money:
+        </p>
+<pre class="prettyprint lang-bash">juju destroy-environment -e amazon
+juju destroy-environment -local
+</pre>
+        <h2 id="charm-details">
+            Charm Details
+        </h2>
+        <p>
+            This document just scratches the surface of what is possible with the Rails charm, for more deployment options, including support for more databases, integrated logging with Logstash/Kibana, and Nagios integration, make sure you check out the <a href="https://jujucharms.com/precise/rails-HEAD/">Charm README</a> for more information.
+        </p>
+
+        
+      </section>
+<!--Postamble-->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<!--End-Postamble-->
+<!--Footer-->
+	<footer class="global clearfix" role="contentinfo">
+		<nav role="navigation">
+			<div class="footer-a">
+				<div class="clearfix">
+					<ul>
+						<li>
+							<h2><a href="/">Juju</a></h2>
+							<ul>
+								<li><a href="/charms">Charms</a></li>
+								<li><a href="/features">Features</a></li>
+								<li><a href="/deployment">Deployment</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/resources">Resources</a></h2>
+							<ul>
+								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/docs/">Documentation</a></li>
+								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+								<li><a href="/resources/videos/">Videos</a></li>
+								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/community">Community</a></h2>
+							<ul>
+								<li><a href="/community/blog/">Juju Blog</a></li>
+								<li><a href="/events/">Events</a></li>
+								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+								<li><a href="/community/charmers/">Charmers</a></li>
+								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+							<ul>
+								<li><a href="https://jujucharms.com/">Charm store</a></li>
+								<li><a href="/download/">Download Juju</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="legal clearfix">
+			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+		</div>
+	</footer>
+
+<!--End-Footer-->
+
+<!--Scripts-->
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="https://juju.ubuntu.com/docs/js/main.js"></script>    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+<!--End-Scripts-->
+</body></html>

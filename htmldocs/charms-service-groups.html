@@ -64,48 +64,133 @@
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
           <article>
-            <section id ="commands">
-              <h1>Juju Command reference</h1>
-              <p>You can get a list of the currently used commands by entering <code>juju help commands</code> from the commandline. The currently understood commands are listed here, with some examples.</p>
-              <ul>
-                <li><strong>add-relation</strong>         add a relation between two services</li>
-                <li><strong>add-unit</strong>             add a service unit</li>
-                <li><strong>bootstrap</strong>            start up an environment from scratch</li>
-                <li><strong>debug-log</strong>            display the consolidated log file</li>
-                <li><strong>deploy</strong>               deploy a new service</li>
-                <li><strong>destroy-environment</strong>  terminate all machines and other associated resources for an environment</li>
-                <li><strong>destroy-machine</strong>      destroy machines</li>
-                <li><strong>destroy-relation</strong>     destroy a relation between two services</li>
-                <li><strong>destroy-service</strong>      destroy a service</li>
-                <li><strong>destroy-unit</strong>         destroy service units</li>
-                <li><strong>expose</strong>               expose a service</li>
-                <li><strong>generate-config</strong>      alias for init</li>
-                <li><strong>get</strong>                  get service config options</li>
-                <li><strong>get-constraints</strong>      view constraints</li>
-                <li><strong>get-env</strong>              alias for get-environment</li>
-                <li><strong>get-environment</strong>      view environment values</li>
-                <li><strong>help</strong>                 show help on a command or other topic</li>
-                <li><strong>init</strong>                 generate boilerplate configuration for juju environments</li>
-                <li><strong>publish</strong>              publish charm to the store</li>
-                <li><strong>remove-relation</strong>      alias for destroy-relation</li>
-                <li><strong>remove-unit</strong>          alias for destroy-unit</li>
-                <li><strong>resolved</strong>             marks unit errors resolved</li>
-                <li><strong>scp</strong>                  launch a scp command to copy files to/from remote machine(s)</li>
-                <li><strong>set</strong>                  set service config options</li>
-                <li><strong>set-constraints</strong>      replace constraints</li>
-                <li><strong>set-env</strong>              alias for set-environment</li>
-                <li><strong>set-environment</strong>      replace environment values</li>
-                <li><strong>ssh</strong>                  launch an ssh shell on a given unit or machine</li>
-                <li><strong>stat</strong>                 alias for status</li>
-                <li><strong>status</strong>               output status information about an environment</li>
-                <li><strong>sync-tools</strong>           copy tools from the official bucket into a local environment</li>
-                <li><strong>terminate-machine</strong>    alias for destroy-machine</li>
-                <li><strong>unexpose</strong>             unexpose a service</li>
-                <li><strong>upgrade-charm</strong>        upgrade a service's charm</li>
-                <li><strong>upgrade-juju</strong>         upgrade the tools in a juju environment</li>
-                <li><strong>version</strong>              print the current version</li>
-              </ul>
+            <!--Actual docs start here-->
+            <section id="service-groups">
+              <h1>Groups of Services</h1>
+              <p></p>
+              <p>
+              Juju deploys units of a service from a charm.
+              The simplest way to do this is
+              </p>
+
+              <pre class="prettyprint">juju deploy mysql</pre>
+
+              <p>
+              which will take the latest version of the mysql charm straight from the store and create a single service unit.
+              </p>
+
+              <p>
+              By default, juju creates a unit of a service named after the charm; <code>mysql</code> in the above example.
+              </p>
+
+              <p>
+              You can specify the name for the service when deploying
+              </p>
+
+              <pre class="prettyprint">juju deploy mysql wikidb</pre>
+
+              <p>
+              which will create a unit of the <code>wikidb</code> service. It creates the unit exactly as before, except instead of <code>mysql</code>, the service is called <code>wikidb</code>.
+              </p>
+
+              <p>
+              Why specify names for services?  The simplest reason is organizational... it let's you stay organized as your infrastructure gets more complex:
+              </p>
+
+<pre class="prettyprint">
+juju deploy mysql website-db
+juju deploy mysql app-master-db
+juju deploy mysql app-slave-db -n2
+</pre>
+
+              <p>
+              But there're other reasons to do this - service groups.  Really service groups are nothing other than named services. They're called out as a separate feature because they're quite useful in a few different ways.
+              </p>
+
+              <h2>Roles</h2>
+
+              <p>
+              Some services acquire a role at runtime based on the relations that are joined.
+              </p>
+
+              <p>
+              A great example of this is the hadoop charm.  It can instantiate services
+              </p>
+
+<pre class="prettyprint">
+juju deploy hadoop namenode
+juju deploy hadoop datacluster -n40
+</pre>
+
+              <p>
+              which are identical at this point except for the service name that juju's using for the various units.
+              </p>
+
+              <p>
+              The services these acquire roles at relation-time via
+              </p>
+
+<pre class="prettyprint">
+juju add-relation namenode:namenode datacluster:datanode
+juju add-relation namenode:jobtracker datacluster:tasktracker
+</pre>
+
+              <p>
+              The relations determine the service role.
+              </p>
+
+              <p>
+              Another example of this is mysql replication.
+              </p>
+
+<pre class="prettyprint">
+juju deploy mysql masterdb
+juju deploy mysql slavedb -n2
+</pre>
+
+              <p>
+              where the different services are related to each other
+              </p>
+
+              <pre class="prettyprint">juju add-relation masterdb:master slavedb:slave</pre>
+
+              <p>
+              and to other services via
+              </p>
+
+<pre class="prettyprint">
+juju deploy mediawiki mywiki
+juju add-relation mywiki:db masterdb:db
+juju add-relation mywiki:slave slavedb:db
+</pre>
+
+              <h2>Upgrade Groups and/or Config Groups</h2>
+
+              <p>
+              There are also interesting use-cases for breaking large services down into separate groups of units.
+              Instead of a single 5000-node hadoop service named <em>hadoop-slave</em>, you might build that cluster
+              from multiple smaller service groups.
+              </p>
+
+<pre class="prettyprint">
+juju deploy hadoop hadoop-master
+juju deploy hadoop hadoop-slave-A -n2500
+juju deploy hadoop hadoop-slave-B -n2500
+juju add-relation hadoop-master:namenode hadoop-slave-A:datanode
+juju add-relation hadoop-master:namenode hadoop-slave-B:datanode
+...
+</pre>
+              <p>
+              These service groups can be managed independently by Juju for upgrades and configuration
+              </p>
+              <pre class="prettyprint">juju set hadoop-slave-B some_param=new_value</pre>
+              <p>
+              This technique can potentially be a way for Juju to manage rolling upgrades for a service.
+              Of course, this depends heavily on the services in question and how well they support
+              version management, schema changes, etc.
+              </p>
             </section>
+            <!--Actual docs end here-->
           </article>
 <!--Postamble-->
         </div>

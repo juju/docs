@@ -9,6 +9,7 @@
         "HP Cloud Configuration": "config-hpcloud.html",
         "OpenStack Configuration": "config-openstack.html",
         "MAAS Configuration": "config-maas.html",
+        "Local Configuration": "config-local.html",
         "Testing your setup": "getting-started.html#test"
       }
     },
@@ -21,10 +22,21 @@
         "Service Configuration": "charms-config.html",
         "Service Relationships": "charms-relationships.html",
         "Exposing Services": "charms-exposing.html",
-        "Scaling Services": "charms-scaling.html",
+        "Scaling Services": "charms-scaling.html",        
+        "Groups of Services": "charms-service-groups.html",
         "Destroying Services": "charms-destroy.html"
       }
+    },
+    "How to...": {
+      "link": "howto.html",
+      "children": {
+        "Deploy a Node.js app": "howto-node.html",
+        "Test and deploy on Rails": "howto-rails.html",
+        "Manage Juju with the GUI": "howto-gui-management.html"
+      }
     }
+
+
   },
   "Charm Authors": {
     "Anatomy of a Charm": "authors-charm-anatomy.html",
@@ -36,6 +48,7 @@
         "Implicit Relations": "authors-implicit-relations.html",
         "Charm Testing": "authors-testing.html",
         "Hook Debugging": "authors-hooks.html",
+        "Interfaces": "authors-interfaces.html"
         
       }
     },
@@ -51,6 +64,7 @@
   "References": {
     "children": {
       "Juju Commands": "commands.html",
+      "Juju constraints": "reference-constraints.html",
       "Glossary": "glossary.html",
       "Contribute to the Docs!": "contributing.html"
     }

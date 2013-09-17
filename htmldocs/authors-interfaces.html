@@ -64,48 +64,213 @@
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
           <article>
-            <section id ="commands">
-              <h1>Juju Command reference</h1>
-              <p>You can get a list of the currently used commands by entering <code>juju help commands</code> from the commandline. The currently understood commands are listed here, with some examples.</p>
-              <ul>
-                <li><strong>add-relation</strong>         add a relation between two services</li>
-                <li><strong>add-unit</strong>             add a service unit</li>
-                <li><strong>bootstrap</strong>            start up an environment from scratch</li>
-                <li><strong>debug-log</strong>            display the consolidated log file</li>
-                <li><strong>deploy</strong>               deploy a new service</li>
-                <li><strong>destroy-environment</strong>  terminate all machines and other associated resources for an environment</li>
-                <li><strong>destroy-machine</strong>      destroy machines</li>
-                <li><strong>destroy-relation</strong>     destroy a relation between two services</li>
-                <li><strong>destroy-service</strong>      destroy a service</li>
-                <li><strong>destroy-unit</strong>         destroy service units</li>
-                <li><strong>expose</strong>               expose a service</li>
-                <li><strong>generate-config</strong>      alias for init</li>
-                <li><strong>get</strong>                  get service config options</li>
-                <li><strong>get-constraints</strong>      view constraints</li>
-                <li><strong>get-env</strong>              alias for get-environment</li>
-                <li><strong>get-environment</strong>      view environment values</li>
-                <li><strong>help</strong>                 show help on a command or other topic</li>
-                <li><strong>init</strong>                 generate boilerplate configuration for juju environments</li>
-                <li><strong>publish</strong>              publish charm to the store</li>
-                <li><strong>remove-relation</strong>      alias for destroy-relation</li>
-                <li><strong>remove-unit</strong>          alias for destroy-unit</li>
-                <li><strong>resolved</strong>             marks unit errors resolved</li>
-                <li><strong>scp</strong>                  launch a scp command to copy files to/from remote machine(s)</li>
-                <li><strong>set</strong>                  set service config options</li>
-                <li><strong>set-constraints</strong>      replace constraints</li>
-                <li><strong>set-env</strong>              alias for set-environment</li>
-                <li><strong>set-environment</strong>      replace environment values</li>
-                <li><strong>ssh</strong>                  launch an ssh shell on a given unit or machine</li>
-                <li><strong>stat</strong>                 alias for status</li>
-                <li><strong>status</strong>               output status information about an environment</li>
-                <li><strong>sync-tools</strong>           copy tools from the official bucket into a local environment</li>
-                <li><strong>terminate-machine</strong>    alias for destroy-machine</li>
-                <li><strong>unexpose</strong>             unexpose a service</li>
-                <li><strong>upgrade-charm</strong>        upgrade a service's charm</li>
-                <li><strong>upgrade-juju</strong>         upgrade the tools in a juju environment</li>
-                <li><strong>version</strong>              print the current version</li>
-              </ul>
+            <section id="authors-interfaces">
+              <h1>Interfaces</h1>
+              <p></p>
+
+              <p>
+              One of the best aspects of juju is how dead-simple it is to write a charm.
+              You write a handful of hooks in your favorite language and then go to town.
+              However, there's a subtle hump in the charming learning curve... interfaces.
+              </p>
+
+              <p>
+              Interface names are what juju checks when trying to determine if two services can be related.
+              For example, wordpress's <code>metadata.yaml</code> contains:
+              </p>
+
+<pre class="prettyprint">
+requires:
+  database:
+    interface: mysql
+</pre>
+
+              <p>
+              which is a statement that wordpress has a relation that's locally named "database" which is an 
+              implementation of the "mysql" interface.
+              </p>
+
+              <p>
+              Mysql's <code>metadata.yaml</code> contains a not-too-surprising:
+
+<pre class="prettyprint">
+provides:
+  db:
+    interface: mysql
+</pre>
+
+              <p>
+              When services are related, Juju decides which hooks to call
+              within each charm based on this local relation name.  When
+              wordpress is related to mysql, the "database-relation-joined,
+              database-relation-changed, etc" hooks are called on the wordpress
+              end.  Corresponding hooks will be called on the mysql end
+              "db-relation-joined, db-relation-changed" (based on the mysql
+              relation names).
+              </p>
+              
+              <p>
+              Juju decides which services can be related based on the interface names only.
+              They have to match.
+              </p>
+
+              <p>
+              At the end of the day, what's a juju interface?  Simply a name.
+              </p>
+
+              <p>
+              Now, having gotten that out of the way, there is an _implicit_ notion of an interface
+              that charmers have to pay attention to in addition to just matching names.
+              </p>
+
+              <p>
+              In some sense, relations are two-way channels of communications between services.
+              They're not actually talking directly, the agents communicate via the state server, but
+              it helps to think of it as direct communication between the services.
+              Relation hooks can call tools such as <code>relation-get</code> and <code>relation-set</code>
+              to pass information back and forth between the service endpoints.
+              </p>
+
+              <p>
+              For example, wordpress and mysql might have a conversation like the following:
+              </p>
+
+<pre class="prettyprint">
+wordpress:
+  I'm here and my service name is "wordpress"
+
+mysql:
+  I'm here, let me create a db for you
+  your database/schema name is "wordpress"
+  your credentials are "admin/pass1234"
+  you access the db on "my.host.addr:port"
+
+wordpress:
+  cool, let me write the wordpress config files needed to access that database (and bounce the server to pick up those changes)
+  later
+
+mysql:
+  cool, later
+</pre>
+
+              <p>
+              We'll go over some more detailed versions of this, but this is
+              the high-level conversation that occurs between two services when
+              they are related in a relation implementing the
+              <code>mysql</code> interface.
+              </p>
+
+              <p>
+              At first glance, it would appear that the <em>interface</em> called <code>mysql</code>
+              might be defined simply by the set of variables that get passed along the channel.
+              Something like:
+              </p>
+
+<pre class="prettyprint">
+interface:
+  name: mysql
+  variables_set:
+    - service_name
+    - database_host
+    - database_port
+    - database_name
+    - database_user
+    - database_password
+</pre>
+
+              <p>
+                but really, that's not complete.  In fact, it's not even enough
+                information to implement hooks for a new service that needs to
+                talk to mysql.  The timing and sequencing are critical
+                components of this conversation!  They can't be left out.
+              </p>
+
+              <p>
+              So let's dig a little deeper into this interface.
+              Consider only the <code>relation-joined</code> and <code>relation-changed</code>
+              hooks for now.  The remaining <code>broken</code> and <code>departed</code> hooks are covered
+              elsewhere.
+              </p>
+
+              <p>
+              Actually, if we start from provisioning, the hooks that are called for wordpress are
+              </p>
+
+<pre class="prettyprint">
+# juju deploy wordpress
+
+install
+config-changed
+start
+
+# juju add-relation wordpress mysql
+
+database-relation-joined
+
+database-relation-changed
+</pre>
+
+
+              <p>
+              similarly, for mysql
+              </p>
+
+
+<pre class="prettyprint">
+# juju deploy mysql
+
+install
+config-changed
+start
+
+# juju add-relation wordpress mysql
+
+db-relation-joined
+
+db-relation-changed
+</pre>
+
+
+              <p>
+              and we can fill in a little of what the relation hooks are doing
+              </p>
+
+
+<pre class="prettyprint">
+# wordpress
+
+database-relation-joined
+  &lt;no-op&gt;
+
+database-relation-changed
+  relation-get database_name, creds, host/port
+  write config for wordpress
+  bounce wordpress
+</pre>
+
+<pre class="prettyprint">
+# mysql
+
+db-relation-joined
+  relation-get service-name
+  create db, creds
+  relation-set db, creds, host/port
+
+database-relation-changed
+  &lt;no-op&gt;
+</pre>
+
+              <p>
+              <em>This</em> conversation is the actual interface.
+              </p>
+
+
             </section>
+            
+ <!--Actual docs end here-->    
+
+
+       
           </article>
 <!--Postamble-->
         </div>

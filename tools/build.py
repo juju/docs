@@ -45,16 +45,16 @@ if __name__ == '__main__':
     timestamp = int(time.time())
 
 
+    import pdb; pdb.set_trace()
     for template in templates:
         with open(template, 'r') as f:
             tpl = os.path.splitext(os.path.basename(template))[0]
             tpl_file = f.read()
-            chop = re.compile('<%s>.*?</%s>' % (tpl, tpl), re.DOTALL)
+            chop = re.compile('<!--%s-->.*?<!--End-%s-->' % (tpl, tpl), re.DOTALL)
             for doc in docs:
                 with open(doc, 'r+') as d:
                     print "%s: %s" % (doc, tpl)
-                    opts = {'PAGE': page_title(os.path.basename(doc)),
-                            'TIMESTAMP': timestamp}
+                    opts = {'TIMESTAMP': timestamp}
                     new_html = chop.sub(fill_tpl(tpl_file, opts), d.read())
                     d.seek(0)
                     d.write(new_html)

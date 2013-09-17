@@ -1,73 +1,69 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Juju Documentation - Anatomy of a Charm</title>
-  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
-  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
+<!--Head-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Juju Documentation</title>
+		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+ 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+		<link href="https://juju.ubuntu.com/docs/css/main.css?1375975745" rel="stylesheet" type="text/css">
+		
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+<!--End-Head-->
+  <body class="resources">	
+<!--Header-->
 
-  <!--[if lt IE 9]>
-  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
-
-
-
-
-
-
-<!-- DO NOT EDIT ABOVE THIS LINE -->
-
-<!-- DO NOT EDIT ABOVE THIS LINE -->
-
-
-  <body class="resources">
-    <header class="global clearfix" role="banner">
-  <div class="header-navigation">
-    <div>
-      <nav role="navigation">
-        <ul>
-          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
-          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
-          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
-          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
-          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
-          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
-          <li>
-            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
-              <fieldset>
-                <input id="input-search" type="text" name="s" value="Search" />
-              </fieldset>
-            </form>
-          </li>
-        </ul>
-      </nav>
+	<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+					<label class="off-left" for="s">Search:</label>
+					<input class="form-text" type="text" value="" name="s" id="s" />
+					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+				</form>		
+			</div>
+		</nav>	
+	</header>
+<!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
     </div>
-  </div>
-  <div class="header-content">
-    <div class="clearfix">
-      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
-      <div class="header-navigation-secondary"></div>
-      <div class="header-image"></div>
-      <h1>Resources</h1>
-      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
-    </div>
-  </div>
-</header>
-
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
         <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
-          <article>
-            <section id="charm-anatomy">
+<!--End-Preamble-->
+<article>
+<section id="charm-anatomy">
 <h1>Anatomy of a charm</h1>
 <p>Charms define how services integrate and how their service units
 react to events in the distributed environment, as orchestrated by
@@ -437,68 +433,76 @@ peers:
 
 </section>
 </article>
+<!--Postamble-->
         </div>
       </div>
     </section>
-    <div class="shadow"></div>
-    <footer class="global clearfix" role="contentinfo">
-  <div class="row">
-    <div class="inner-wrapper">
-      <nav role="navigation" class="clearfix">
-        <ul class="footer-a">
-          <li class="grid-3 first-col">
-            <h4><a href="/get-started">Get started</a></h4>
-            <ul>
-              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
-              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
-              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
-              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
-              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
-              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
-            </ul>
-          </li>
-          <li class="grid-3">
-            <h4><a href="/resources">Resources</a></h4>
-            <ul>
-              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
-              <li><a href="/resources/videos/">Videos</a></li>
-              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
-            </ul>
-          </li>
-          <li class="grid-3">
-            <h4><a href="/community">Community</a></h4>
-            <ul>
-              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
-              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
-              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
-              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
-              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
-              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
-            </ul>
-          </li>
-          <li class="grid-3 last-col">
-            <h4><a href="https://launchpad.net/juju">Code</a></h4>
-            <ul>
-              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
-              <li><a href="https://launchpad.net/charms">Charms</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
   </div>
-  <div class="row no-border">
-    <div class="legal inner-wrapper">
-      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
-      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
-    </div>
-  </div>
-</footer>
+</div>
+<!--End-Postamble-->
+<!--Footer-->
+	<footer class="global clearfix" role="contentinfo">
+		<nav role="navigation">
+			<div class="footer-a">
+				<div class="clearfix">
+					<ul>
+						<li>
+							<h2><a href="/">Juju</a></h2>
+							<ul>
+								<li><a href="/charms">Charms</a></li>
+								<li><a href="/features">Features</a></li>
+								<li><a href="/deployment">Deployment</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/resources">Resources</a></h2>
+							<ul>
+								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/docs/">Documentation</a></li>
+								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+								<li><a href="/resources/videos/">Videos</a></li>
+								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/community">Community</a></h2>
+							<ul>
+								<li><a href="/community/blog/">Juju Blog</a></li>
+								<li><a href="/events/">Events</a></li>
+								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+								<li><a href="/community/charmers/">Charmers</a></li>
+								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+							<ul>
+								<li><a href="https://jujucharms.com/">Charm store</a></li>
+								<li><a href="/download/">Download Juju</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="legal clearfix">
+			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+		</div>
+	</footer>
 
+<!--End-Footer-->
+<!--Scripts-->
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  </body>
-</html>
+    <script type="text/javascript" src="https://juju.ubuntu.com/docs/js/main.js"></script>    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+<!--End-Scripts-->
+</body></html>

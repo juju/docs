@@ -1,15 +1,25 @@
+
 <!DOCTYPE html> 
 <html>
-<!--Head-->
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Juju Documentation</title>
 		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		  
+		
 		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+		  
+ <!--
+ 	Extra stylesheets
+ -->
  		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+<!--
+	Extra stylesheets end
+-->
+  
 		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
 		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
@@ -19,10 +29,11 @@
 		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
-<!--End-Head-->
   <body class="resources">
   	
-<!--Header-->
+<!--
+	Header Start
+-->
 
 	<header class="banner global" role="banner">
 		<nav role="navigation" class="nav-primary nav-right">
@@ -50,7 +61,6 @@
 			</div>
 		</nav>	
 	</header>
-<!--End-Header-->
 <!--Preamble-->
 <div class="wrapper">
   <div id="main-content" class="inner-wrapper" role="main">
@@ -64,48 +74,50 @@
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
           <article>
-            <section id ="commands">
-              <h1>Juju Command reference</h1>
-              <p>You can get a list of the currently used commands by entering <code>juju help commands</code> from the commandline. The currently understood commands are listed here, with some examples.</p>
-              <ul>
-                <li><strong>add-relation</strong>         add a relation between two services</li>
-                <li><strong>add-unit</strong>             add a service unit</li>
-                <li><strong>bootstrap</strong>            start up an environment from scratch</li>
-                <li><strong>debug-log</strong>            display the consolidated log file</li>
-                <li><strong>deploy</strong>               deploy a new service</li>
-                <li><strong>destroy-environment</strong>  terminate all machines and other associated resources for an environment</li>
-                <li><strong>destroy-machine</strong>      destroy machines</li>
-                <li><strong>destroy-relation</strong>     destroy a relation between two services</li>
-                <li><strong>destroy-service</strong>      destroy a service</li>
-                <li><strong>destroy-unit</strong>         destroy service units</li>
-                <li><strong>expose</strong>               expose a service</li>
-                <li><strong>generate-config</strong>      alias for init</li>
-                <li><strong>get</strong>                  get service config options</li>
-                <li><strong>get-constraints</strong>      view constraints</li>
-                <li><strong>get-env</strong>              alias for get-environment</li>
-                <li><strong>get-environment</strong>      view environment values</li>
-                <li><strong>help</strong>                 show help on a command or other topic</li>
-                <li><strong>init</strong>                 generate boilerplate configuration for juju environments</li>
-                <li><strong>publish</strong>              publish charm to the store</li>
-                <li><strong>remove-relation</strong>      alias for destroy-relation</li>
-                <li><strong>remove-unit</strong>          alias for destroy-unit</li>
-                <li><strong>resolved</strong>             marks unit errors resolved</li>
-                <li><strong>scp</strong>                  launch a scp command to copy files to/from remote machine(s)</li>
-                <li><strong>set</strong>                  set service config options</li>
-                <li><strong>set-constraints</strong>      replace constraints</li>
-                <li><strong>set-env</strong>              alias for set-environment</li>
-                <li><strong>set-environment</strong>      replace environment values</li>
-                <li><strong>ssh</strong>                  launch an ssh shell on a given unit or machine</li>
-                <li><strong>stat</strong>                 alias for status</li>
-                <li><strong>status</strong>               output status information about an environment</li>
-                <li><strong>sync-tools</strong>           copy tools from the official bucket into a local environment</li>
-                <li><strong>terminate-machine</strong>    alias for destroy-machine</li>
-                <li><strong>unexpose</strong>             unexpose a service</li>
-                <li><strong>upgrade-charm</strong>        upgrade a service's charm</li>
-                <li><strong>upgrade-juju</strong>         upgrade the tools in a juju environment</li>
-                <li><strong>version</strong>              print the current version</li>
-              </ul>
+            <section id="constraints">
+              <h1>Constraints</h1>
+
+              <p>Complete listing of constraints supported by juju and what they mean. See <a href="charms-constraints.html">using constraints</a> for how to specify these in a deployment.</p>
+
+              <h2>Generic constraints</h2>
+              <dl>
+                <dt>arch</dt>
+                <dd>Short name of architecture that a service must run on. Can be left blank to indicate any architecture is acceptable, or one of <code>amd64</code>, <code>arm</code>, or <code>i386</code>.</dd>
+                <dt>container</dt>
+                <dd>Name of container type that a service unit must run inside. Can be left blank to indicate no preference, or one of <code>none</code> for uncontainerised, <code>lxc</code>, or <code>kvm</code>.</dd>
+                <dt>cpu-cores</dt>
+                <dd>Minimum number of effective CPU cores that must be available to a service unit.</dd>
+                <dt>cpu-power</dt>
+                <dd>Minimum amount of abstract CPU power that must be available to a service unit, where 100 units is roughly equivalent to "a single 2007-era Xeon" as reflected by 1 Amazon ECU. <strong>Warning: Not all providers support this constraint, use <code>cpu-cores</code> for portability.</strong></dd>
+                <dt>mem</dt>
+                <dd>Minimum number of megabytes of RAM that must be available to a service unit. An optional suffix of M/G/T/P indicates the value is mega-/giga-/tera-/peta- bytes.</dd>
+                <dt>root-disk</dt>
+                <dd>Minimum amount of of disk space on the root drive on each service unit. Additional storage that may be attached separately does not count towards this value.</dd>
+              </dl>
+
+              <!--TODO(gz): When provider-specific constraints are implemented,
+                            document that here.
+              -->
+
+              <h2>Legacy constraints</h2>
+              <p>In pre-1.0 juju some additional or differently named constraints were also supported, these need to be migrated when upgrading.</p>
+              <dl>
+                <dt>cpu</dt>
+                <dd>Number of CPU cores for most providers, but equivalent to an Amazon ECU on AWS. Use <code>cpu-cores</code> instead.</dd>
+                <dt>instance-type</dt>
+                <dd>Cloud-specific instance-type name that a service used must be deployed on. Valid values vary by provider, and individual deployment in some cases. Use appropriate values for <code>cpu-count</code>, <code>mem</code>, and <code>root-disk</code> instead where possible for portability.</dd>
+                <dt>ec2-zone</dt>
+                <dd>EC2 availability zone that a service unit must be deployed into. No equivalent implemented as of juju 1.12, follow <a href="https://bugs.launchpad.net/juju-core/+bug/1183831">bug 1183831</a>.</dd>
+                <dt>maas-name</dt>
+                <dd>Specific MAAS machine name that a service unit must be deployed on. Use <code>maas-tags</code> instead by preference.</dd>
+                <dt>maas-tags</dt>
+                <dd>List of tags a MAAS machine must have for a service unit to be deployed on. No equivalent implemented as of juju 1.12, follow <a href="https://bugs.launchpad.net/juju-core/+bug/1170337">bug 1170337</a>.</dd>
+                <dt>os-scheduler-hints</dt>
+                <dd>Experimental constraint exposing Openstack-specific scheduler hints features. Do not use.</dd>
+              </dl>
+
             </section>
+
           </article>
 <!--Postamble-->
         </div>
@@ -169,7 +181,6 @@
 	</footer>
 
 <!--End-Footer-->
-
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -180,4 +191,5 @@
     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
 <!--End-Scripts-->
-</body></html>
+</body>
+</html>

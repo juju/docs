@@ -1,165 +1,180 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Juju Documentation - Destroying Services</title>
-  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
-  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
-
-  <!--[if lt IE 9]>
-  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
+<!--Head-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Juju Documentation</title>
+		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+ 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+		<link href="https://juju.ubuntu.com/docs/css/main.css?1375975745" rel="stylesheet" type="text/css">
+		
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+<!--End-Head-->
   <body class="resources">
-    <header class="global clearfix" role="banner">
-  <div class="header-navigation">
-    <div>
-      <nav role="navigation">
-        <ul>
-          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
-          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
-          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
-          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
-          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
-          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
-          <li>
-            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
-              <fieldset>
-                <input id="input-search" type="text" name="s" value="Search" />
-              </fieldset>
-            </form>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="header-content">
-    <div class="clearfix">
-      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
-      <div class="header-navigation-secondary"></div>
-      <div class="header-image"></div>
-      <h1>Resources</h1>
-      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
-    </div>
-  </div>
-</header>
+  	
+<!--Header-->
 
+	<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+					<label class="off-left" for="s">Search:</label>
+					<input class="form-text" type="text" value="" name="s" id="s" />
+					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+				</form>		
+			</div>
+		</nav>	
+	</header>
+<!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
-		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
+<!--End-Preamble-->
           <article>
-            <section id ="charms-destroy">
-            
+            <section id ="destroy-services">
               <h1>Destroy Stuff</h1>
-               <p>Juju isn't just about magically spinning up services as and when you need them, it is also about quickly, sanely and efficiently destroying everything when you no longer need it. This section deals with the sort of things you can ruthlessly destroy, and how to go about it.</p>
-               
+              <p>Juju isn't just about magically spinning up services as and when you need them, it is also about quickly, sanely and efficiently destroying everything when you no longer need it. This section deals with the sort of things you can ruthlessly destroy, and how to go about it.</p>
               <h1>Destroying/Removing Services</h1>
               <p>Once a service is no longer required it can be removed with a simple command.</p>
-              <pre><code>juju destroy-service &LT;service-name&GT;</code></pre>
-              <p>Before you take this step though, it is important to remove any relationships so that it can be removed cleanly, otherwise an error state may exist elsewhere.</p>
+              <pre class="prettyprint">juju destroy-service &LT;service-name&GT;</pre>
+              <p class="warning"><strong>Warning!:</strong> Destroying a service which has active relations with another running service will break that relation. This can cause errors in both services, as such review and potentially destroy any relationships first if.</p>
               <p>A service can take a while to "die", but if running a juju status reveals that the service is listed as dying, but also reports an error state, then the zombied service will still be hanging around. See <a href="troubleshooting.html#die">"Why won't it just die?" in the troubleshooting section.</a>
-              
-              <p class="warning"><strong>Warning!:</strong>Destroying a service which has active relations with another running service can cause errors in both services. You should destroy any relationships first if possible. </p>  
-              
-              <p class="note"><strong>Note:</strong> Destroying a service removes that service, but not any nodes which may have been created for it to run on.</p>
-              
-              <h1>Destroying/Removing Units</h1>
+              <p class="note"><strong>Note:</strong> Destroying a service removes that service, but not any nodes which may have been created for it to run on. This is juju's way of preserving data to the best it's ability. See <a href="#destroy-machines">Destroying Machines</a> for additional details.</p>
+            </section>
+            <section id="destroy-units">
+              <h1>Destroying Units</h1>
               <p>It is also possible to spin down individual units, or a sequence of units running a service:</p>
-              <pre><code>juju remove-unit mediawiki/1</code></pre>
-              <p>The 'remove-unit' command is an alias for 'destroy-unit', and can be used interchangeably, so the above is identical to:</p>
-              <pre><code>juju destroy-unit mediawiki/1</code></pre> 
+              <pre class="prettyprint lang-yaml">juju remove-unit mediawiki/1</pre>
+              <p>The <code>remove-unit</code> command is an alias for <code>destroy-unit</code>, and can be used interchangeably, so the above is identical to:</p>
+              <pre class="prettyprint lang-yaml">juju destroy-unit mediawiki/1</pre> 
               <p>If you wish to remove more than one unit, you may list them all following the command:</p>
-              <pre><code>juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2 ...</code></pre>
-              <p class="note"><strong>Note:</strong> As with destroying a service, removing units will NOT actually remove any instances which were created, it only removes the service unitsm.</p> 
-              
-              <h1>Destroying/Removing machines</h1>
+              <pre class="prettyprint lang-yaml">juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2 ...</pre>
+              <p class="note"><strong>Note:</strong> As with destroying a service, removing units will NOT actually remove any instances which were created, it only removes the service units. More details can be found in the <a href="charms-scaling.html">Scaling Services</a> section.</p>
+            </section>
+            <section id="destroy-machines">
+              <h1>Destroying machines</h1>
               <p>Instances or machines which have no currently assigned workload can be removed from your cloud using the following command:
-              <pre><code>juju destory-machine &LT;number&GT;</code></pre>
+              <pre class="prettyprint">juju destory-machine &LT;number&GT;</pre>
               <p>A machine which currently idle will be removed almost instantaneously from the cloud, along with anything else which may have been on the instance which juju was not aware of. To prevent accidents and awkward moments with running services, it is not possible to remove an instance which is currently allocated to a service. If you try to do so, you will get a polite error message in the form:</p>
-              <pre><code>error: no machines were destroyed: machine 3 has unit "mysql/0" assigned</code></pre>
-              
+              <pre class="prettyprint lang-yaml">error: no machines were destroyed: machine 3 has unit "mysql/0" assigned</pre>
+            </section>
+            <section id="destroy-enviornments">
               <h1>Destroying Environments</h1>
                <p>To completely remove and terminate all running services, the instances they were running on and the bootstrap node itself, simply run the command:</p>
-               <pre><code>juju destroy-environment </code></pre>
-               <p> This will completely remove all instances running under the current environment profile. You can of course specify a different environment profile using the -e switch:</p>
-               <pre><code>juju destroy-environment -e mycloud </code></pre>
+               <pre class="prettyprint">juju destroy-environment</pre>
+               <p> This will completely remove all instances running under the current environment profile. You can of course specify a different environment profile using the <code>-e</code> switch, or any one of <a href="config-environments.html">these other</a> methods:</p>
+               <pre class="prettyprint">juju destroy-environment -e mycloud</pre>
                <p>You should be pretty sure that this is what you want to do, as there is no undo command! Everything in the selected environment will be removed.</p>  
-               
-              <h1>Destroying Relations</h1>
-               <p>To remove relations between deployed services, you should see <a href="charms-relations.html#removing"> the docs section on charm relationships</a></p>.
             </section>
-            
+            <section id="destroy-relations">
+              <h1>Removing Relations</h1>
+               <p>To remove relations between deployed services, you should see <a href="charms-relations.html#removing"> the docs section on charm relationships</a>.</p>
+            </section>
           </article>
+<!--Postamble-->
         </div>
       </div>
     </section>
-    <div class="shadow"></div>
-    <footer class="global clearfix" role="contentinfo">
-  <div class="row">
-    <div class="inner-wrapper">
-      <nav role="navigation" class="clearfix">
-        <ul class="footer-a">
-          <li class="grid-3 first-col">
-            <h4><a href="/get-started">Get started</a></h4>
-            <ul>
-              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
-              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
-              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
-              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
-              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
-              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
-            </ul>
-          </li>
-          <li class="grid-3">
-            <h4><a href="/resources">Resources</a></h4>
-            <ul>
-              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
-              <li><a href="/resources/videos/">Videos</a></li>
-              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
-            </ul>
-          </li>
-          <li class="grid-3">
-            <h4><a href="/community">Community</a></h4>
-            <ul>
-              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
-              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
-              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
-              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
-              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
-              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
-            </ul>
-          </li>
-          <li class="grid-3 last-col">
-            <h4><a href="https://launchpad.net/juju">Code</a></h4>
-            <ul>
-              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
-              <li><a href="https://launchpad.net/charms">Charms</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
   </div>
-  <div class="row no-border">
-    <div class="legal inner-wrapper">
-      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
-      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
-    </div>
-  </div>
-</footer>
+</div>
+<!--End-Postamble-->
+<!--Footer-->
+	<footer class="global clearfix" role="contentinfo">
+		<nav role="navigation">
+			<div class="footer-a">
+				<div class="clearfix">
+					<ul>
+						<li>
+							<h2><a href="/">Juju</a></h2>
+							<ul>
+								<li><a href="/charms">Charms</a></li>
+								<li><a href="/features">Features</a></li>
+								<li><a href="/deployment">Deployment</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/resources">Resources</a></h2>
+							<ul>
+								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/docs/">Documentation</a></li>
+								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+								<li><a href="/resources/videos/">Videos</a></li>
+								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/community">Community</a></h2>
+							<ul>
+								<li><a href="/community/blog/">Juju Blog</a></li>
+								<li><a href="/events/">Events</a></li>
+								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+								<li><a href="/community/charmers/">Charmers</a></li>
+								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+							<ul>
+								<li><a href="https://jujucharms.com/">Charm store</a></li>
+								<li><a href="/download/">Download Juju</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="legal clearfix">
+			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+		</div>
+	</footer>
 
+<!--End-Footer-->
+
+<!--Scripts-->
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  </body>
-</html>
+    <script type="text/javascript" src="https://juju.ubuntu.com/docs/js/main.js"></script>    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+<!--End-Scripts-->
+</body></html>
