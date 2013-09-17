@@ -457,6 +457,7 @@ hr {
   height: 1px;
   margin: 0;
   box-shadow: none;
+  border: 0;
   border-bottom: 1px dotted #aea79f;
 }
 
