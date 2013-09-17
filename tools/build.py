@@ -45,7 +45,6 @@ if __name__ == '__main__':
     timestamp = int(time.time())
 
 
-    import pdb; pdb.set_trace()
     for template in templates:
         with open(template, 'r') as f:
             tpl = os.path.splitext(os.path.basename(template))[0]
