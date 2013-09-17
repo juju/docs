@@ -3,8 +3,6 @@
     "Getting Started": {
       "link": "getting-started.html",
       "children": {
-        "Introduction": "getting-started.html#intro",
-        "Installation": "getting-started.html#install",
         "AWS Configuration": "config-aws.html",
         "Azure Configuration": "config-azure.html",
         "HP Cloud Configuration": "config-hpcloud.html",
@@ -17,7 +15,6 @@
     "Using Charms": {
       "link": "charms.html",
       "children": {
-        "What are Charms?": "charms.html#intro",
         "Deploying Services": "charms-deploying.html",
         "Using Constraints": "charms-constraints.html",
         "Service Configuration": "charms-config.html",
