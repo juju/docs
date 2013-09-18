@@ -11,7 +11,7 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
 		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
-		<link href="https://juju.ubuntu.com/docs/css/main.css?1375975745" rel="stylesheet" type="text/css">
+		<link href="./css/main.css" rel="stylesheet" type="text/css">
 		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
