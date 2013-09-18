@@ -67,8 +67,6 @@
             <section id ="hook-debugging">
             <h1>Hook debugging</h1>
             
-
-            <p class="note"><strong>Note: </strong> Earlier versions of Juju prior to th 1.x.x series had a facility for debugging hooks. This is planned to be reimplemented shortly in the current development series, but is not currently operational, so the examples provided here are for information only.</p> 
             <p>An important facility in any distributed system is the ability to introspect the running system, and to debug it. Within juju the actions performed by the system are executing charm defined hooks. The <span class="pre">debug-log</span> cli provides for inspecting the total state of the system via capturing the logs of all agents and output of all hooks run by the system.</p>
             <p>To facilitate better debugging of hooks, the <tt class="docutils literal"><span class="pre">debug-hooks</span></tt> cli provides for interactive shell usage as a substitute for running a hook. This allows a charm author or system adminstrator the ability to interact with the system in a live environment and either develop or debug a hook.</p>
             
@@ -89,10 +87,6 @@
             <p>Internally the <tt class="docutils literal"><span class="pre">debug-hooks</span></tt> cli begins by verifying its arguments, namely the unit exists, and the named hook is valid for the charm. After that it modifies the zookeeper state of the unit node, setting a flag noting the hook to debug. It then establishes an ssh connection to the machine and executes the tmux command.</p>
             <p>The unit-agent will establish a watch on its own debug settings, on changes introspecting the debug flag, and pass any named hook values down to the hook executor, which will construct debug hook scripts on the fly for matching hooks. These debug hook scripts are responsible for connecting to tmux and monitoring the execution of the hook therein.</p>
             <p>Special care will be taken to ensure the viability of the tmux session and that debug mode is active before creating the interactive hook window in tmux.</p>
-            
-            
-            <h2>Screen vs. tmux</h2>
-            <p>Initially juju used GNU screen for the debugging sessions rather than tmux, but tmux turned out to make it easier to avoid race conditions when starting the same session concurrently, as done for the debugging system.  This was the main motivation that prompted the change to tmux.  They both worked very similarly otherwise.</p>
             </section>
           </article>
         </div>
