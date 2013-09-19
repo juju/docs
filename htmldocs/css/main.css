@@ -166,6 +166,11 @@ p.caution, div.caution,
 p.warning, div.warning {
   padding: 0 0 0 10px;
   border-left: 4px solid;
+  color:#000;
+  background: #fceae4;
+  border-radius: 6px;
+  -moz- border-radius: 6px;
+  -webkit- border-radius: 6px;
 }
 
 p.note, div.note {
@@ -216,6 +221,7 @@ div.note.distribute {
   -moz-box-shadow: 0 0 6px #000000;
   -webkit-box-shadow: 0 0 6px #000000;
   box-shadow: 0 0 6px #000000; 
+  margin-bottom: 10px;
 }
 
 .doc-content img.right{
