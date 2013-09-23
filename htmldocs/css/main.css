@@ -165,7 +165,7 @@ p.note, div.note,
 p.caution, div.caution, 
 p.warning, div.warning {
   padding: 0 0 0 10px;
-  border-left: 4px solid;
+  border-left: 6px solid;
   color:#000;
   background: #fceae4;
   border-radius: 6px;
@@ -177,6 +177,15 @@ p.note, div.note {
   border-color: #dd4814;
 }
 
+p.note strong{
+    font-weight: 700;
+}
+p.note code{
+    border: 4px;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 2px;
+}
 p.caution, div.caution {
   border-color: #FF8800;
 }
