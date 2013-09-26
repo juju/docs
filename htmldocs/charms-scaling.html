@@ -68,6 +68,7 @@
             <section id="charms-scaling">
               <h1>Scaling Charms</h1>
               <p>One of the killer features of computing in the cloud is that it (should) seamlessly allow you to scale up or down your services to meet your needs and whims. Juju not only makes it simple to deploy services, but crucially makes it easy to manage them too. It won't anticipate you getting slashdotted or on the front page of hacker news (yet), but it does mean that when you do you can reliably scale your services to meet the demand.</p>
+
               <h1> Adding Units </h1>
               <p> The general usage to scale a service up is via the <code>add-unit</code> command:</p>
 <pre class="prettyprint">juju add-unit [options] &lt;service-name&gt;</pre>
@@ -81,14 +82,40 @@
 #the machine or container to deploy the unit in, bypasses constraints
 --to &lt;machine&gt;
 </pre>
-              <p>Scaling up services is really as simple as asking for more instances. Consider the following setup for a mediawiki:</p>
-<pre class="prettyprint">juju bootstrap
-juju deploy mysql
+
+<h1>Scaling behind a Load Balancer</h1> 
+
+Usually you just can't add more units to a service and have that magically scale, you need to put web heads behind a load balancer. In this case you can just deploy a proxy in front of your units; let's deploy a load balanced mediawiki:
+
+<pre class="prettyprint">
+juju deploy haproxy
 juju deploy mediawiki
-juju add-relation mysql mediawiki:db
-juju expose mediawiki</pre>
-              <p>When you notice the mediawiki instance is struggling under the load of people making edits, you can simply scale up the service using the command:</p>
-<pre class="prettyprint">juju add-unit mediawiki</pre>
+juju deploy mysql
+juju add-relation mediawiki mysql
+juju add-relation mediawiki haproxy
+juju expose haproxy
+</pre>
+
+<p>Then you can <code>juju status haproxy</code> to get the public IP for the load balancer. This is the IP you want to point your DNS to.</p>
+
+Now that you are behind a load balancer and the traffic is hitting it, you can grow the mediawiki instances behind the proxy as you see fit, let's add 5 more:  
+
+<pre class="prettyprint">
+	juju add-unit -n5 mediawiki
+</pre>
+
+<p>You don't need to worry about manually adding your units to the load balancer, you've made the relationship at the <em>service level</em>, so the new units know exactly how to relate. Juju is also smart enough to ensure that the new units are installed and configured <em>before</em> adding them to the load balancer, ensuring minimal user disruption of the service.</p>
+
+<h1>Scaling Charms with built in Horizontal scaling</h1> 
+
+              <p>Some charms just have native scaling built in, for example the WordPress charm has built in load balancing.
+              	In this case Scaling up services is really as simple as asking for more instances. Note that this feature is charm specific, not all charms can scale this way. Consider the following setup for a WordPress:</p>
+<pre class="prettyprint">juju deploy mysql
+juju deploy wordpress
+juju add-relation mysql wordpress
+juju expose wordpress</pre>
+              <p>When you notice the WordPress instance is struggling under the load, you can simply scale up the service using the command:</p>
+<pre class="prettyprint">juju add-unit wordpress</pre>
               <p>This will cause a new instance to be run and configured to work alongside the currently running one. Behind the scenes Juju is adding an instance to the Juju environment called a machine and provisioning the specified service onto that instance/machine.</p>
               <p>Suppose your mysql service needs hyper-scale, you can use the <code>-n</code> or <code>--num-units</code> options to <code>add-unit</code> to specify the desired number of units you want to be added to the service. For example, to scale up your service by 100 units simply do:</p>
 <pre class="prettyprint">juju add-unit -n 100 mysql</pre>
