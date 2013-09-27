@@ -72,30 +72,43 @@
 
             <h2>Prerequisites</h2>
             <p>The local provider enables you to run Juju on a single system like your local computer or a single server. This way you can simply evaluate the software or service configurations, develop your own charms or run a single server system.</p> 
-            <p>To do this, Juju uses the <strong>LXC Linux Container</strong>, which can be installed on your computer with the command:</p>
-<pre class="prettyprint lang-bash">
-sudo apt-get install lxc
-</pre>
-            <p>Additionally the local provider needs <strong>MongoDB</strong> to be installed. This is done with the command:</p> 
-<pre class="prettyprint lang-bash">
-sudo apt-get install mongodb-server
-</pre>
-            <p>In case of <strong>precise</strong> or <strong>quantal</strong> versions of Ubuntu, MongoDB has to be installed from a different repository. So in this case call</p>
-<pre class="prettyprint lang-bash">
-sudo apt-add-repository ppa:juju/stable
-sudo apt-get update
-</pre>
-            <p>beforehand. In case you're not sure take a look into the file <code>/etc/lsb-release</code> which identifies the series with the variable <code>DISTRIB_CODENAME</code>. If you're not running Ubuntu please consult your operating system distribution's documentation for instructions on installing the LXC userspace tools and the MongoDB server. Juju requires a MongoDB server built with SSL support.</p>
-            <p>The dependence on the LXC Linux Container shows that the local provider only runs on Linux systems. All steps above are also printed in case of any unsatisfied prerequisite.</p>
+
+            <p>If you're not already using the stable release PPA you can make sure you've added it:</p> 
+
+			<pre class="prettyprint lang-bash">
+			sudo apt-add-repository ppa:juju/stable
+			sudo apt-get update
+			</pre>
+
+			<p>Then you can install the local provider, the commands depend on the Juju version you are using:</p>
+
+			<h3>For Ubuntu versions newer than 12.04:</h3>
+
+			<pre class="prettyprint lang-bash">
+			sudo apt-get install juju-local
+			</pre>
+
+			<h3>For 12.04 LTS users only:</h3>
+
+			<p>Due to needing newer versions of LXC the local provider does require a newer kernel than the released version of 12.04. Therefore we install Linux 3.8 from the <a href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">LTS Hardware Enablement Stack</a>:</p> 
+
+			<pre class="prettyprint lang-bash">
+			sudo apt-get install juju-local linux-generic-lts-raring
+			</pre>
+
+			<p>You will need to reboot into the new kernel in order to use Juju with the local provider.</p>
+
+			<p>If you're not running Ubuntu please consult your operating system distribution's documentation for instructions on installing the LXC userspace tools and the MongoDB server. Juju requires a MongoDB server built with SSL support.</p>
 
             <h2>Configuration</h2>
-            <p>You should start by generating a generic configuration file for Juju, using the command:
+            <p>You should start by generating a generic configuration file for Juju and then switching to the local provider by using the command:
 <pre class="prettyprint lang-bash">
-juju generate-config
+juju init
+juju switch local
 </pre>
             <p>This will generate a file, <strong>environments.yaml</strong> (if it doesn't already exist), which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
             <p class ="note"><strong>Note:</strong>If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
-            <p>The generic configuration sections generated for the local provider will look something like this:</p>
+            <p>The generic configuration sections generated for the local provider will look something like this, though Juju will generate this automatically you usually don't need to edit it:</p>
 <pre class="prettyprint lang-yaml">
 ## https://juju.ubuntu.com/get-started/local/
 local:
@@ -112,7 +125,9 @@ local:
     # or if the default port is used by another program.
     # shared-storage-port: 8041
 </pre>
-            <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <strong>$JUJU_HOME</strong>, which defaults to <strong>~/.juju/</strong>. By uncommenting and setting <strong>root-dir</strong> this location can be changed as well as the ports of the storage and the shared storage. This may be useful in the case of multiple parallel running local providers or conflicts with other programs on your system. Also when using encrypted home directories you have to set <strong>$JUJU_HOME</strong> or <strong>root-dir</strong> to point to a location outside your home directory.
+            <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <code>$JUJU_HOME</code>, which defaults to <code>~/.juju/</code>. By uncommenting and setting <code>root-dir</code> this location can be changed as well as the ports of the storage and the shared storage. This may be useful in the case of multiple parallel running local providers or conflicts with other programs on your system. 
+
+            <p class="note">If you are using encrypted home directories you have to set <code>$JUJU_HOME</code> or <code>root-dir</code> to point to a location <em>outside</em> your home directory.</p>
 
             <h2>Bootstrapping and Destroying</h2>
             <p>The usage of LXC Linux Containers enforces that bootstrapping and destroying of an environment are done as <strong>root</strong>. All other operations can be executed as non-root. E.g.</p>
