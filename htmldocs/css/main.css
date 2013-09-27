@@ -122,12 +122,12 @@ pre code {
 .doc-navigation > h1::before {
   content: "";
   position: absolute;
-  width: 18px;
-  height: 18px;
-  margin-left: -16px;
+  width: 16px;
+  height: 16px;
+  margin-left: -20px;
   margin-top: 5px;
   background: url(https://juju.ubuntu.com/docs/media/nav-icon.png);
-  background-size: 18px 18px;
+  background-size: 16px 16px;
 }
 
 .doc-navigation li a {
