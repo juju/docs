@@ -75,26 +75,26 @@
 
             <p>If you're not already using the stable release PPA you can make sure you've added it:</p> 
 
-			<pre class="prettyprint lang-bash">
-			sudo apt-add-repository ppa:juju/stable
-			sudo apt-get update
+<pre class="prettyprint lang-bash">
+sudo apt-add-repository ppa:juju/stable
+sudo apt-get update
 			</pre>
 
 			<p>Then you can install the local provider, the commands depend on the Juju version you are using:</p>
 
 			<h3>For Ubuntu versions newer than 12.04:</h3>
 
-			<pre class="prettyprint lang-bash">
-			sudo apt-get install juju-local
-			</pre>
+<pre class="prettyprint lang-bash">
+sudo apt-get install juju-local
+</pre>
 
 			<h3>For 12.04 LTS users only:</h3>
 
 			<p>Due to needing newer versions of LXC the local provider does require a newer kernel than the released version of 12.04. Therefore we install Linux 3.8 from the <a href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">LTS Hardware Enablement Stack</a>:</p> 
 
-			<pre class="prettyprint lang-bash">
-			sudo apt-get install juju-local linux-generic-lts-raring
-			</pre>
+<pre class="prettyprint lang-bash">
+sudo apt-get install juju-local linux-generic-lts-raring
+</pre>
 
 			<p>You will need to reboot into the new kernel in order to use Juju with the local provider.</p>
 
