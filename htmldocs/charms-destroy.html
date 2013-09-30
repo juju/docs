@@ -74,7 +74,7 @@
               <p>Once a service is no longer required it can be removed with a simple command.</p>
               <pre class="prettyprint">juju destroy-service &LT;service-name&GT;</pre>
               <p class="warning"><strong>Warning!:</strong> Destroying a service which has active relations with another running service will break that relation. This can cause errors in both services, as such review and potentially destroy any relationships first if.</p>
-              <p>A service can take a while to "die", but if running a juju status reveals that the service is listed as dying, but also reports an error state, then the zombied service will still be hanging around. See <a href="troubleshooting.html#die">"Why won't it just die?" in the troubleshooting section.</a>
+              <p>A service can take a while to "die", but if running a juju status reveals that the service is listed as dying, but also reports an error state, then the zombied service will still be hanging around.
               <p class="note"><strong>Note:</strong> Destroying a service removes that service, but not any nodes which may have been created for it to run on. This is juju's way of preserving data to the best it's ability. See <a href="#destroy-machines">Destroying Machines</a> for additional details.</p>
             </section>
             <section id="destroy-units">
