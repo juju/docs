@@ -98,47 +98,57 @@
             <p>When a charm author wishes to indicate their charm should operate as a subordinate service only a small change to the subordinate charm's metadata is required. Adding <cite>subordinate: true</cite> as a top-level attribute indicates the charm is intended only to deploy in an existing container. Subordinate charms should then declare a required interface with <cite>scope: container</cite> in the relation definition of the charms metadata. Subordinate services may still declare traditional relations to any service. The deployment is delayed until a container relation is added.</p>
             <p><cite>subordinate: false</cite> charms (the default) may still declare relations as <cite>scope: container</cite>. Principal charms providing or requiring <cite>scope: container</cite> relations will only be able to form relations with <cite>subordinate: true</cite> charms.</p>
             <p>The example below shows adding a container relation to a charm.</p>
-            <pre>requires:
-                logging-directory:
-                   interface: logging
-                   scope: container</pre>
+<pre class="prettyprint lang-yaml">requires:
+    logging-directory:
+       interface: logging
+       scope: container</pre>
                    
                    
             <h2>Status of subordinates</h2>
             <p>The status output contains details about subordinate units under the status of the principal service unit that it is sharing the container with. The subordinate unit's output matches the formatting of existing unit entries but omits <cite>machine</cite>, <cite>public-address</cite> and <cite>subordinates</cite> (which are all the same as the principal unit).</p>
             <p>The subordinate service is listed in the top level <cite>services</cite> dictionary in an abbreviated form. The <cite>subordinate-to: []</cite> list is
             added to the service which contains the names of all services this service is subordinate to.</p>
-            <pre>services:
-              rsyslog:
-                charm: local:series/rsyslog-1
-                subordinate-to: [wordpress]
-                relations:
-                 rsyslog-directory: wordpress
-              wordpress:
-                 machine: 0
-                 public-address: wordpress-0.example.com
-                 charm: local:series/wordpress-3
-                 relations: {rsyslog-directory: rsyslog}
-                 units:
-                   wordpress/0:
-                     relations:
-                       rsyslog: {state: up}
-                     state: started
-                     subordinates:
-                         rsyslog/0:
-                           relations:
-                             rsyslog-directory: {state: up}</pre>
-                             
+
+<pre class="prettyprint lang-yaml">
+services:
+  rsyslog:
+    charm: cs:precise/rsyslog-0
+    exposed: false
+    relations:
+      rsyslog-directory:
+      - wordpress
+    subordinate-to:
+    - wordpress
+  wordpress:
+    charm: cs:precise/wordpress-13
+    exposed: true
+    relations:
+      rsyslog-directory:
+      - rsyslog
+    units:
+      wordpress/0:
+        agent-state: started
+        agent-version: 1.14.1.1
+        machine: "3"
+        open-ports:
+        - 80/tcp
+        public-address: 10.0.3.11
+        subordinates:
+          rsyslog/0:
+            agent-state: started
+            agent-version: 1.14.1.1
+            public-address: 10.0.3.11</pre>
+
             <h2>Usage</h2>
             <p>Assume the following deployment:</p>
-            <pre>juju deploy mysql
-            juju deploy wordpress
-            juju add-relation mysql wordpress</pre>
+<pre class="prettyprint">juju deploy mysql
+juju deploy wordpress
+juju add-relation mysql wordpress</pre>
             
             <p>Now we'll create a subordinate rsyslog service:</p>
-            <pre>juju deploy rsyslog
-            juju add-relation rsyslog mysql
-            juju add-relation rsyslog wordpress</pre>
+<pre class="prettyprint">juju deploy rsyslog
+juju add-relation rsyslog mysql
+juju add-relation rsyslog wordpress</pre>
             
             <p>This will create a rsyslog service unit inside each of the containers holding the mysql and wordpress units. The rsyslog service has a standard client-server relation to both wordpress and mysql but these new relationships are implemented only between the principal unit and the subordinate unit . A subordinate unit may still have standard relations established with any unit in its environment as usual.</p>
             
