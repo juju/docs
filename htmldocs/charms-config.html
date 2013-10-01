@@ -131,9 +131,14 @@ settings:
     type: string
     value: vector
 </pre>
-              <p>You can set the options using the  <code>juju set &LT;service&GT;</code>, specifying multiple key:value pairs if necessary:</p>
+		<p>You can set the options using the <code>juju set &LT;service&GT;</code>, specifying multiple key=value pairs if necessary:</p>
 <pre class="prettyprint">
 juju set mediawiki skin=monoblock name='Juju Wiki' 
+</pre>
+		<p>Setting options back to their default value is done using the <code>unset</code> command followed
+		by the service and the respective options:</p>
+<pre class="prettyprint">
+juju unset mediawiki admins name 
 </pre>
             </section>
 <!--Postamble-->
