@@ -93,6 +93,8 @@
                 <dd>Minimum number of megabytes of RAM that must be available to a service unit. An optional suffix of M/G/T/P indicates the value is mega-/giga-/tera-/peta- bytes.</dd>
                 <dt>root-disk</dt>
                 <dd>Minimum amount of of disk space on the root drive on each service unit. Additional storage that may be attached separately does not count towards this value.</dd>
+                <dt>tags</dt>
+                <dd>Comma-delimited tags assigned to the machine.  Currently only supported by MaaS.</dd>
               </dl>
 
               <!--TODO(gz): When provider-specific constraints are implemented,
@@ -111,7 +113,7 @@
                 <dt>maas-name</dt>
                 <dd>Specific MAAS machine name that a service unit must be deployed on. Use <code>maas-tags</code> instead by preference.</dd>
                 <dt>maas-tags</dt>
-                <dd>List of tags a MAAS machine must have for a service unit to be deployed on. No equivalent implemented as of juju 1.12, follow <a href="https://bugs.launchpad.net/juju-core/+bug/1170337">bug 1170337</a>.</dd>
+                <dd>List of tags a MAAS machine must have for a service unit to be deployed on. See "tags" above.</dd>
                 <dt>os-scheduler-hints</dt>
                 <dd>Experimental constraint exposing Openstack-specific scheduler hints features. Do not use.</dd>
               </dl>

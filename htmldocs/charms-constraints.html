@@ -69,19 +69,18 @@
           <article>
             <section id ="charms-constraints">
               <h1>Machine Constraints</h1>
-              <p>Machine constraints allow you to pick the hardware to which your services will be deployed.</p>
-              <p>Constraints can be set for environments and services, with lookups for each key falling back from more specific to more general settings, and with default values set by juju when otherwise unspecified. Changes to constraints do not affect any unit that has already been assigned to a machine.</p>
-              <p>Constraints will be controlled with a new command, <code>juju set-constraints</code>, taking an optional <code>--service</code> arg, and any number of <code>key=value</code> pairs. When the service name is specified, the constraints are set on that service; otherwise they are set on the environment.</p>
-              <p>Valid choices for the <code>value</code> are generally dependent on the particular constraint, with two exceptions:</p>
+              <p>Machine constraints allow you to choose the hardware to which your services will be deployed.</p>
+              <p>Constraints can be set for environments and services, with service constraints overriding environment constraints, the default values set by juju when otherwise unspecified. Changes to constraints do not affect any unit that has already been assigned to a machine.</p>
+              <p>Constraint can be set by the <code>juju set-constraints</code> command, taking an optional <code>--service</code> arg, and any number of <code>key=value</code> pairs. When the service name is specified, the constraints are set on that service; otherwise they are set on the environment.</p>
+              <p>Valid choices for the <code>value</code> are generally dependent on the particular constraint, with one exception:</p>
               
               <ul>
-                <li>An empty value always means &quot;use the juju default setting&quot;. This allows you to ignore environment settings at the service level without having to explicitly remember and re-set the juju default values. Note that there is no way to change the juju default values.</li>
-                <li>A value of <code>any</code> explicitly unsets a constraint, and will cause it to be chosen completely arbitrarily.</li>
+                <li>An empty value always means &quot;not constrained&quot;. This allows you to ignore environment settings at the service level without having to explicitly remember and re-set the juju default values. Note that there is no way to change the juju default values, though environment settings will override them.</li>
               </ul>
               
-              <p>We also extend the syntax for <code>juju deploy</code>, and <code>juju bootstrap</code>, such that <code>--constraints</code> expects a single string of space-separated constraints, understood as above; deployment constraints will be set on the service before the first unit is deployed, and bootstrap constraints will be set on the environment and used to provision the initial master machine.</p>
-              <p>Please note that there are no changes to the <code>juju add-unit</code> command; juju is explicitly focused on <strong>service</strong> orchestration, and it is counterproductive to encourage users to consider individual units. This can be worked around by setting new service constraints before adding new units, but is not encouraged.</p>
-              <p>The new <code>juju get-constraints</code> command is used to see the currently applicable constraints. When called without arguments, it outputs the environment constraints as a single yaml-formatted dict; alternatively, it can be called with any number of arguments referencing any mix of services, service units, or machines, and will output a yaml-formatted dict of dicts with the outer dict keyed on the requested entities.</p>
+              <p>The commands <code>juju deploy</code>, <code>juju bootstrap</code>, and <code>juju add-machine</code> have a <code>--constraints</code> flag which expects a single string of space-separated constraints, understood as above.  Deployment constraints will be set on the service before the first unit is deployed, and bootstrap constraints will be set on the environment and used to provision the initial master machine.</p>
+              <p>Please note that there is no constraints flag for the <code>juju add-unit</code> command; juju is explicitly focused on <strong>service</strong> orchestration, and it is counterproductive to encourage users to consider individual units. This can be worked around by setting new service constraints before adding new units, but is not encouraged.</p>
+              <p>The <code>juju get-constraints</code> command is used to see the currently applicable constraints. When called without an argument, it outputs the environment constraints as key=value pairs.  Alternatively, you can request yaml or json with the <code>--format</code> flag.  By passing the name of a service as an argument, it will output the constraints on that particular service.</p>
               <h2>Examples</h2>
               <p>Deploy MySQL on a machine with at least 32GiB of RAM, and at least 8 ECU of CPU power (architecture will be inherited from the environment, or default to amd64):</p>
               <pre class="prettyprint">juju deploy --constraints "cpu-cores=8 mem=32G" mysql</pre>
@@ -95,8 +94,8 @@
               <p>Output current environment constraints:</p>
               <pre class="prettyprint">juju get-constraints</pre>
               
-              <p>Output constraints for machine 3, service &quot;mysql&quot;, and service unit &quot;wordpress/7&quot;:</p>
-              <pre class="prettyprint">juju get-constraints 3 mysql wordpress/7</pre>
+              <p>Output constraints for mysql</p>
+              <pre class="prettyprint">juju get-constraints mysql</pre>
             </section>
             <section id="provider-constraints">
               <h1>Provider Constraints</h1>
@@ -105,7 +104,6 @@
                 <li><code>cpu-cores</code>: The minimum processing power of the machine, roughly indicated by how many cores are available.</li>
                 <li><code>mem</code>: The minimum memory for the machine, defaulting to 512MB.</li>
               </ul>
-              <p class="note"><strong> Note: </strong> The <code>instance-type</code> constraint is not currently supported by juju-core, but support will be added soon. Some of the following examples make use of this setting merely to illustrate a point. </p>
             </section>
             <section id="examples-constraints">
               <h1>Working with constraints</h1>
@@ -129,31 +127,8 @@
               <p>...but other services can be started with their own constraints:</p>
               <pre class="prettyprint">juju deploy wordpress --constraints mem=1024</pre>
               
-              <p>Note that the <code>arch=i386</code> constraint is still inherited from the environment, and that this presents a potential problem:</p>
-              <pre class="prettyprint lang-yaml">juju deploy minecraft --constraints instance-type=cc2.8xlarge</pre>
-              
-              <p>The above command will still inherit the environment constraints, and will lead to an undeployable service (because cc2.8xlarge cannot run on i386). Running juju debug-log will expose the problem; you can fix it as follows:</p>
-              
-<pre class="prettyprint lang-yaml">
-juju remove-unit minecraft/0
-juju terminate-machine 1
-juju set-constraints --service minecraft arch=amd64 instance-type=cc2.8xlarge
-juju add-unit minecraft
-</pre>
-              
-              <p>(You need to remove machine 1's assigned unit before you can terminate it; you need to explicitly terminate the machine to stop the provisioning agent from continuing to attempt to launch it; and you need to set the new service constraints before adding a new unit that will use those constraints.)</p>
-              
-              <p>Work on the constraints feature is ongoing, and it will shortly become impossible to specify knowably inconsistent constraints; but it is in general impossible to detect undeployable constraints with absolute certainty (for example, you could deploy with <code>ec2-zone=a</code> and be running perfectly happily, but see us-east-1a suddenly go down just as you add a unit).</p>
-
-              <h1>Distinctions Between Entities</h1>
-              <p>As noted, it is impossible to directly set constraints on machines or service units; however, it is still possible to call <code>juju get-constraints</code> on those entities. In either case, the constraints are a snapshot of the applicable constraints at entity creation time; so the unit constraints are the combined environment/service constraints from the time at which the unit was created, and the machine constraints are a copy of the unit constraints at that same point in time.</p>
-              
-              <p>Storing this data allows us to automatically reprovision unexpectedly dead machines (for example, if you terminate machine 7 via the AWS management console, the provisioning agent will spin up a new instance with the same constraints and redeploy the assigned units); and making the data available via the CLI gives you visibility into the state of your deployment, and allows you to answer questions like &quot;why is this unit running on that machine?&quot;.</p>
-              
-              <h1>Legacy Deployments</h1>
-              <p>Attempting to use constraints against a deployment that predates their inclusion in juju will not work, because the running legacy code (specifically, the provisioning agent) will not be able to interpret them. Therefore, attempts to specify constraints against legacy deployments will generate errors to inform users of their invalidity; at the agent level they are simply ignored.</p>
-              <p>All commands valid before the client upgrade should continue to work as before, as will the EC2 <code>default-image-id</code> and <code>default-instance-type</code> environment settings.</p>
-          </article>
+              <p>Note that if you try to deploy a machine or service with a constraint that cannot be fulfilled by the environment, the deployment will fail.  Running juju status will show an error in the status for that machine.  You can fix the problem by removing the machine (and the service assigned to the machine, if any) and retrying the deployment with different constraints.</p>
+           </article>
 <!--Postamble-->
         </div>
       </div>
