@@ -219,7 +219,7 @@ fi
 chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
 
 juju-log "Creating apache2 configuration"
-cat &lt;&lt;EOF $gt; /etc/apache2/sites-available/vanilla
+cat &lt;&lt;EOF &gt; /etc/apache2/sites-available/vanilla
 &lt;VirtualHost *:80&gt;
   ServerAdmin webmaster@localhost
   DocumentRoot /var/www/vanilla
@@ -248,7 +248,7 @@ juju-log "Files extracted, waiting for other events before we do anything else!"
           <p>We aren't going to go for a line-by-line explanation of that, but there are a few things worth noting</p>
           <p>Firstly, note the use of the -y option of the apt-get command. this assumes a 'yes' answer to any questions and removes any manual install options (e.g. services that run config dialogs when they install</p>
           <p>In our script, we are fetching the tarball of the Vanilla software. In these cases, it is obviously always better to point to a specific, permanent link to a version of the software. </p>         
-          <p>Also, you will notice that we have used the <span class="pre">juju-log</span> command. This basically spits messages out into the juju log, which is very useful for testing and debugging. We will cover that in more detail later in this walkthrough. </p>
+          <p>Also, you will notice that we have used the <span class="pre">juju-log</span> command. This basically spits messages out into the Juju log, which is very useful for testing and debugging. We will cover that in more detail later in this walkthrough. </p>
           <p>The next step is to create the relationship hooks... </p>
           <p>We know from our metadata that we have a connection called 'database', so we can have hooks that relate to that. Note that we don't have to create hooks for all possible events if they are not required - if Juju doesn't find a hook file for a paticular action, it just assumes everything is okay and carries on. It is up to you to decide which events require a hook.</p>
           <p>Let's take a stab at the 'database-relation-changed' hook:</p>
@@ -268,8 +268,8 @@ fi
 
 vanilla_config="/var/www/vanilla/conf/config.php"
 
-cat <<EOF > $vanilla_config
-&LT;?php if (!defined('APPLICATION')) exit();
+cat &lt;&lt;EOF &gt; $vanilla_config
+&lt;?php if (!defined('APPLICATION')) exit();
 
 \$Configuration['Database']['Host'] = '$db_host';
 \$Configuration['Database']['Name'] = '$db_db';
@@ -301,7 +301,7 @@ relation-set hostname=`unit-get private-address` port=80
           <h2>Testing</h2>
           <p>Before we congratulate ourselves too much, we should check that the charm actually works. To help with this, we should open a new terminal window and run the following command:</p>
           <pre>juju debug-log</pre>
-          <p>This starts a process to tail the juju log file and show us just exactly what is happening. It won't do much to begin with, but you should see messages appearing when we start to deploy our charm.</p>
+          <p>This starts a process to tail the Juju log file and show us just exactly what is happening. It won't do much to begin with, but you should see messages appearing when we start to deploy our charm.</p>
           <p>Following our own recipe, in another terminal we should now do the following (assuming you already have a bootstrapped environment):</p>
           <pre>juju deploy mysql
 juju deploy --repository=/home/evilnick/localcharms/ local:precise/vanilla
