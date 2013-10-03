@@ -114,7 +114,7 @@ And finally expose the Vanilla service:
           <div class="step" id="step03">
           <h2>Make some metadata.yaml</h2>
           <p>The <strong>metadata.yaml</strong> file is really important. This is the file that Juju reads to find out what a charm is, what it does and what it needs to do it.</p>
-          <p>The yaml syntax is at once simple, but exact, so if you have any future problems with Juju not recognising your charm, this is the first port of call! the information is stored in simple <span class="pre">&LT;key&GT; : &LT;value&GT;</span> associations. The first four are pretty self explanitory:</p>
+          <p>The YAML syntax is at once simple, but exact, so if you have any future problems with Juju not recognising your charm, this is the first port of call! The information is stored in simple <span class="pre">&LT;key&GT; : &LT;value&GT;</span> associations. The first four are pretty self explanatory:</p>
           <pre class="prettyprint lang-yaml">
 name: vanilla
 summary: Vanilla is an open-source, pluggable, multi-lingual forum.
@@ -125,19 +125,19 @@ description: |
   installation guide.
 </pre>
           <p>The summary should be a brief description of the service being deployed, whereas the description can go into more detail.</p>
-          <p>The next value to define is the category. This is primarily for organising the charm in the charm store. the available categories are:</p>
+          <p>The next value to define is the category. This is primarily for organising the charm in the charm store. The available categories are:</p>
           <ul>
-          <li><strong>databases -</strong> MySQL, Postgres, couchDB, etc.</li>
-          <li><strong>file-servers - </strong>storage apps such as ceph</li>
-          <li><strong>applications -</strong>applications like mediawiki, wordpress</li>
-          <li><strong>cache-proxy - </strong>services such as haproxy and Varnish.</li>
+          <li><strong>databases -</strong> MySQL, PostgreSQL, CouchDB, etc.</li>
+          <li><strong>file-servers - </strong>storage apps such as Ceph</li>
+          <li><strong>applications -</strong>applications like MediaWiki, WordPress</li>
+          <li><strong>cache-proxy - </strong>services such as HAProxy and Varnish.</li>
           <li><strong>app-servers - </strong>infrastructure services like Apache and Tomcat</li>
           <li><strong>miscellaneous - </strong>anything which doesn't neatly fit anywhere above.</li>
           </ul>
-          <p>Your charm can belong to more than one category, though in almost all cases it should be in just one. Because there could be more than one entry here, the yaml is formatted as a list:</p>
+          <p>Your charm can belong to more than one category, though in almost all cases it should be in just one. Because there could be more than one entry here, the YAML is formatted as a list:</p>
           <pre class="prettyprint lang-yaml">categories:<br>  - applications</pre>
           <p>Next we need to explain which services are actually provided by this service. This is done using an indent for each service provided, followed by a description of the interface. The interface name is important as it can be used elsewhere in the environment to relate back to this charm, e.g. when writing hooks.</p>
-          <p>Our Vanilla charm is a web-based service which exposes a simple http interface:</p> 
+          <p>Our Vanilla charm is a web-based service which exposes a simple HTTP interface:</p> 
           <pre class="prettyprint lang-yaml">provides:<br>  website:<br>    interface: http</pre>
           <p>The name given here is important as it will be used in hooks that we write later, and the interface name will be used by other charms which may want to relate to this one.</p>
           <p>Similarly we also need to provide a "requires" section. In this case we need a database. Checking out the metadata of the MySQL charm we can see that it provides this via the interface name "mysql", so we can use this name in our metadata.</p>
@@ -178,15 +178,15 @@ requires:
           <p>So first up we should create the hooks directory, and start creating our first hook:</p>
           <pre>mkdir hooks<br>cd hooks<br>vi start</pre>
           <p>(Use your favourite editor, naturally - no flames please)</p>
-          <p>We have started with the start hook, because it is pretty simple. Our charm will be served up by apache, so all we need to do to start the service is make sure apache is running:</p>
+          <p>We have started with the start hook, because it is pretty simple. Our charm will be served up by Apache, so all we need to do to start the service is make sure Apache is running:</p>
           <pre class="prettyprint lang-bash">#!/bin/bash<br>set -e<br>service apache2 restart</pre>
           <p>A bit of explanation for this one. As we are writing in bash, and we need the files to be executable, we start with a hash-bang line indicating this is a bash file.
           the <span class="pre">set -e</span> line means that if any subsequent command returns false (non-zero) the script will stop and raise an error - this is important so that Juju can work out if things are running properly.
           </p>
-          <p>The final line starts the apache webservice, thus also starting our Vanilla service. Why do we call 'restart'? One of the important ideas behind hooks is that they should be 'idempotent'. That means that the opration should be capable of being run many times without changing the intended result (basically). in this case, we don't want an error if apache is actually already running, we just want it to run and reload any config changes.</p>
+          <p>The final line starts the Apache web server, thus also starting our Vanilla service. Why do we call 'restart'? One of the important ideas behind hooks is that they should be 'idempotent'. That means that the operation should be capable of being run many times without changing the intended result (basically). In this case, we don't want an error if Apache is actually already running, we just want it to run and reload any config changes.</p>
           <p>Once you have saved the file, it is important to make sure that you set it to be executable too!</p>
           <pre>chmod +x start</pre>
-          <p>With the easy bit out of the way, how about the install hook? This needs to install any dependencies, fetch the actual software and do any other config and service jobs that need to happen. here is an example for our vanilla charm:</p>
+          <p>With the easy bit out of the way, how about the install hook? This needs to install any dependencies, fetch the actual software and do any other config and service jobs that need to happen. Here is an example for our vanilla charm:</p>
                     
 <pre class="prettyprint">
 #!/bin/bash
@@ -219,7 +219,7 @@ fi
 chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
 
 juju-log "Creating apache2 configuration"
-cat &lt;&lt;EOF $gt; /etc/apache2/sites-available/vanilla
+cat &lt;&lt;EOF &gt; /etc/apache2/sites-available/vanilla
 &lt;VirtualHost *:80&gt;
   ServerAdmin webmaster@localhost
   DocumentRoot /var/www/vanilla
@@ -246,9 +246,9 @@ service apache2 reload
 juju-log "Files extracted, waiting for other events before we do anything else!"
 </pre>
           <p>We aren't going to go for a line-by-line explanation of that, but there are a few things worth noting</p>
-          <p>Firstly, note the use of the -y option of the apt-get command. this assumes a 'yes' answer to any questions and removes any manual install options (e.g. services that run config dialogs when they install</p>
+          <p>Firstly, note the use of the -y option of the apt-get command. this assumes a 'yes' answer to any questions and removes any manual install options (e.g. services that run config dialogs when they install).</p>
           <p>In our script, we are fetching the tarball of the Vanilla software. In these cases, it is obviously always better to point to a specific, permanent link to a version of the software. </p>         
-          <p>Also, you will notice that we have used the <span class="pre">juju-log</span> command. This basically spits messages out into the juju log, which is very useful for testing and debugging. We will cover that in more detail later in this walkthrough. </p>
+          <p>Also, you will notice that we have used the <span class="pre">juju-log</span> command. This basically spits messages out into the Juju log, which is very useful for testing and debugging. We will cover that in more detail later in this walkthrough. </p>
           <p>The next step is to create the relationship hooks... </p>
           <p>We know from our metadata that we have a connection called 'database', so we can have hooks that relate to that. Note that we don't have to create hooks for all possible events if they are not required - if Juju doesn't find a hook file for a paticular action, it just assumes everything is okay and carries on. It is up to you to decide which events require a hook.</p>
           <p>Let's take a stab at the 'database-relation-changed' hook:</p>
@@ -268,8 +268,8 @@ fi
 
 vanilla_config="/var/www/vanilla/conf/config.php"
 
-cat <<EOF > $vanilla_config
-&LT;?php if (!defined('APPLICATION')) exit();
+cat &lt;&lt;EOF &gt; $vanilla_config
+&lt;?php if (!defined('APPLICATION')) exit();
 
 \$Configuration['Database']['Host'] = '$db_host';
 \$Configuration['Database']['Name'] = '$db_db';
@@ -292,8 +292,8 @@ Usually there will be some indication of what these values are, but you can alwa
 
 relation-set hostname=`unit-get private-address` port=80
 </pre>
-<p>Here we can see the other end of the information sharing - in this case <span class="pre">relation-set</span> exposes the given values to the connecting charm. In this case one of the commands is backticked, as <span class="pre">unit-get</span> is another helper command, in this case one which returns the requested value form the machine the charm is running on, specifically here it's IP address.
- So, any connecting charm will be able to ask for the values 'hostname' and 'port'. Remember, once you have finished writing your hooks make sure you 'chmod +x' them.</p>
+<p>Here we can see the other end of the information sharing - in this case <span class="pre">relation-set</span> exposes the given values to the connecting charm. In this case one of the commands is backticked, as <span class="pre">unit-get</span> is another helper command, in this case one which returns the requested value form the machine the charm is running on, specifically here it's IP address.</p>
+<p>So, any connecting charm will be able to ask for the values 'hostname' and 'port'. Remember, once you have finished writing your hooks make sure you 'chmod +x' them.</p>
 <p>For our simplistic charm, that is all the hooks we need for the moment, so now we can test it out!</p>
 </div>
 <span class="number"> 5 </span>
@@ -301,7 +301,7 @@ relation-set hostname=`unit-get private-address` port=80
           <h2>Testing</h2>
           <p>Before we congratulate ourselves too much, we should check that the charm actually works. To help with this, we should open a new terminal window and run the following command:</p>
           <pre>juju debug-log</pre>
-          <p>This starts a process to tail the juju log file and show us just exactly what is happening. It won't do much to begin with, but you should see messages appearing when we start to deploy our charm.</p>
+          <p>This starts a process to tail the Juju log file and show us just exactly what is happening. It won't do much to begin with, but you should see messages appearing when we start to deploy our charm.</p>
           <p>Following our own recipe, in another terminal we should now do the following (assuming you already have a bootstrapped environment):</p>
           <pre>juju deploy mysql
 juju deploy --repository=/home/evilnick/localcharms/ local:precise/vanilla
