@@ -114,7 +114,7 @@ And finally expose the Vanilla service:
           <div class="step" id="step03">
           <h2>Make some metadata.yaml</h2>
           <p>The <strong>metadata.yaml</strong> file is really important. This is the file that Juju reads to find out what a charm is, what it does and what it needs to do it.</p>
-          <p>The yaml syntax is at once simple, but exact, so if you have any future problems with Juju not recognising your charm, this is the first port of call! the information is stored in simple <span class="pre">&LT;key&GT; : &LT;value&GT;</span> associations. The first four are pretty self explanitory:</p>
+          <p>The YAML syntax is at once simple, but exact, so if you have any future problems with Juju not recognising your charm, this is the first port of call! The information is stored in simple <span class="pre">&LT;key&GT; : &LT;value&GT;</span> associations. The first four are pretty self explanatory:</p>
           <pre class="prettyprint lang-yaml">
 name: vanilla
 summary: Vanilla is an open-source, pluggable, multi-lingual forum.
@@ -127,17 +127,17 @@ description: |
           <p>The summary should be a brief description of the service being deployed, whereas the description can go into more detail.</p>
           <p>The next value to define is the category. This is primarily for organising the charm in the charm store. the available categories are:</p>
           <ul>
-          <li><strong>databases -</strong> MySQL, Postgres, couchDB, etc.</li>
-          <li><strong>file-servers - </strong>storage apps such as ceph</li>
-          <li><strong>applications -</strong>applications like mediawiki, wordpress</li>
-          <li><strong>cache-proxy - </strong>services such as haproxy and Varnish.</li>
+          <li><strong>databases -</strong> MySQL, PostgreSQL, CouchDB, etc.</li>
+          <li><strong>file-servers - </strong>storage apps such as Ceph</li>
+          <li><strong>applications -</strong>applications like MediaWiki, WordPress</li>
+          <li><strong>cache-proxy - </strong>services such as HAProxy and Varnish.</li>
           <li><strong>app-servers - </strong>infrastructure services like Apache and Tomcat</li>
           <li><strong>miscellaneous - </strong>anything which doesn't neatly fit anywhere above.</li>
           </ul>
-          <p>Your charm can belong to more than one category, though in almost all cases it should be in just one. Because there could be more than one entry here, the yaml is formatted as a list:</p>
+          <p>Your charm can belong to more than one category, though in almost all cases it should be in just one. Because there could be more than one entry here, the YAML is formatted as a list:</p>
           <pre class="prettyprint lang-yaml">categories:<br>  - applications</pre>
           <p>Next we need to explain which services are actually provided by this service. This is done using an indent for each service provided, followed by a description of the interface. The interface name is important as it can be used elsewhere in the environment to relate back to this charm, e.g. when writing hooks.</p>
-          <p>Our Vanilla charm is a web-based service which exposes a simple http interface:</p> 
+          <p>Our Vanilla charm is a web-based service which exposes a simple HTTP interface:</p> 
           <pre class="prettyprint lang-yaml">provides:<br>  website:<br>    interface: http</pre>
           <p>The name given here is important as it will be used in hooks that we write later, and the interface name will be used by other charms which may want to relate to this one.</p>
           <p>Similarly we also need to provide a "requires" section. In this case we need a database. Checking out the metadata of the MySQL charm we can see that it provides this via the interface name "mysql", so we can use this name in our metadata.</p>
