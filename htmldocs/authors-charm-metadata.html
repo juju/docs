@@ -1,0 +1,374 @@
+<!DOCTYPE html> 
+<html>
+<!--Head-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Juju Documentation</title>
+		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+ 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+<!--End-Head-->
+
+  <body class="resources">	
+<!--Header-->
+
+	<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+					<label class="off-left" for="s">Search:</label>
+					<input class="form-text" type="text" value="" name="s" id="s" />
+					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+				</form>		
+			</div>
+		</nav>	
+	</header>
+<!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+<!--End-Preamble-->
+<article>
+
+<section id="charm-metadata">
+<h1>Charm metadata</h1>
+
+<p>The only file that must be present in a charm is <code>metadata.yaml</code>, in
+the root directory. A metadata file must be a valid yaml dictionary, containing at
+least the following fields:</p>
+<ul>
+    <li><code>name</code> is the charm name, which is used to form the charm URL.
+    It must contain only <code>a-z</code>, <code>0-9</code>, and <code>-</code>;
+    must start with <code>a-z</code>; must not end with a <code>-</code>; and may
+    only end with digits if the digits are <em>not</em> directly preceded by a
+    space. Stick with names like <code>foo</code> and <code>foo-bar-baz</code>
+    and you needn't pay further attention to the restrictions.</li>
+    <li><code>summary</code> is a one-line description of the charm.</li>
+    <li><code>description</code> is a long-form description of the charm and its
+    features. It will also appear in the juju GUI.</li>
+</ul>
+
+<p>Here's a valid metadata file:</p>
+<pre class="prettyprint lang-yaml">
+name: minecraft
+summary: Minecraft Server
+description: |
+  Will deploy OpenJDK 6 JRE and the latest Minecraft server
+</pre>
+
+<p>With only those fields, a metadata file is valid, but not very useful. Charms
+for use in the Charm Store should always set the following fields as well,
+for categorization and display in the GUI:</p>
+<ul>
+    <li><code>maintainer</code> is the name and email address for the main point
+    of contact for the development and maintenance of the charm. Or, at least, it
+    should be: in frequent practice, it's just a name. Please update your charms
+    as you get the opportunity.</li>
+    <li><code>categories</code> is a list containing one or more of the following:
+    <ul>
+        <li>applications</li>
+        <li>app-servers</li>
+        <li>cache-proxy</li>
+        <li>databases</li>
+        <li>file-servers</li>
+        <li>mis</li>
+    </ul>
+    <p>In almost all cases, only one category will be appropriate. The categories help keep the Charm Store organised.</p></li>
+</ul>
+
+<p>Finally, a metadata file defines the charm's relations, and whether it's
+designed for deployment as a <a href="./authors-subordinate-services.html">subordinate service</a>.</p>
+<ul>
+    <li><code>subordinate</code> should be set to true if the charm is a
+    subordinate. If omitted, the charm will be presumed not to be subordinate.</li>
+    <li><code>provides</code>, <code>requires</code>, and <code>peers</code> define
+    the various relations the charm will participate in.</li>
+    <li>if the charm is subordinate, it must contain at least one <code>requires</code>
+    relation with container scope.</li>
+</ul>
+
+<p>Other field names should be considered to be reserved; please don't use any
+not listed above to avoid issues with future versions of Juju.</p>
+</section>
+
+<section id="simple-relations">
+<h2>Simple relations</h2>
+
+<p>The <code>provides</code> and <code>requires</code> keys are used to define
+pairings of charms that are likely to be fruitful. Consider a simple mongodb
+charm's metadata:</p>
+
+<pre class="prettyprint lang-yaml">
+name: my-mongodb
+...
+provides:
+  server: mongodb
+</pre>
+
+<p>...and that of a simple node.js application charm:</p>
+
+<pre class="prettyprint lang-yaml">
+name: my-node-app
+...
+requires:
+  database: mongodb
+provides:
+  website: http
+</pre>
+
+<p>Put together, these files indicate that a relation can be made between services
+running the respective charms. The my-mongodb charm <code>provides</code> a relation named
+<code>server</code> with the <code>mongodb</code> interface, and the my-node-app charm
+<code>requires</code> a relation named <code>database</code> with the <code>mongodb</code>
+interface.</p>
+
+<p>The my-node-app charm also <code>provides</code> a relation named <code>website</code>
+with the <code>http</code> interface, but that's irrelevant to the mongodb charm. (But an
+haproxy charm might well define, say, <code>reverseproxy</code>, that <code>requires</code>
+the <code>http</code> interface provided by my-node-app.)</p>
+</section>
+
+<section id="relation-interfaces">
+<h2>Relation interfaces</h2>
+
+<p>An interface is a string that must only contain <code>a-z</code> and <code>-</code>,
+and neither start nor end with <code>-</code>. It's the single determiner of
+compatibility between charms; and it carries with it nothing more than a mutual
+promise that the provider and requirer somehow know the communication protocol
+implied by the name.</p>
+
+<p>So, the relation namespace is essentially unrestricted (with one enforced
+exception: you may not <em>provide</em> a relation named <code>juju</code>, or
+starting with <code>juju-</code>). This allows for rapid development in some
+situations; but, in the example above, there is a potential problem: we've picked
+<em>two</em> interface names that already have meanings in the charm ecosystem,
+and that means we have to be <a href="./authors-charm-interfaces.html">compatible</a>;
+but that's a concern for a bit later, when we're actually writing the relation hooks.</p>
+</section>
+
+<section id="peer-relations">
+<h2>Peer relations</h2>
+
+<p>Alongside <code>provides</code> and <code>requires</code>, charms can declare
+relations under <code>peers</code>.  Where <code>provides</code> relations integrate
+with <code>requires</code> ones, such that providers respond to requirers and vice
+versa, the <code>peers</code> relation causes each unit of a single service to
+respond to the other units in the same service. A peer relation is otherwise defined
+in exactly the same way as any other relation.</p>
+</section>
+
+<section id="relation-config">
+<h2>Configuring relations</h2>
+
+<p>There's an alternative syntax for specifying relations, which allows you to
+set additional fields by replacing the interface name with a dictionary. In this case, the <code>interface</code> key must be specified explicitly, and a number of other possibilities become available:</p>
+<ul>
+    <li><code>scope</code> defaults to <code>global</code>, but may be set to
+    <code>container</code>. The scope controls the set of remote units that are
+    reported to the unit as members of the relation: container-scoped relations
+    are restricted to reporting details of a single principal unit to a single
+    subordinate, and vice versa, while global relations consider all possible
+    remote units.<br />
+    <a href="authors-charm-subordinates.html">Subordinate</a> charms are only
+    valid if they have at least one <code>requires</code> relation with
+    <code>container</code> scope.</li>
+    <li><code>limit</code> is ignored by juju, but if present should be a positive
+    integer N indicating that the charm is not designed to use this interface in more
+    than N relations at once.<br />
+    For example, if you're writing a really simple exploratory charm for your
+    particular data store, you could just create a single shared store and
+    write the same access credentials for every relation. A limit of 1 is
+    thus useful in that it does <em>document</em> the restriction, even though
+    it's not automatically enforced today.</li>
+    <li><code>optional</code> is ignored by juju, but if present should only be
+    set to true, on <code>requires</code> relations, to indicate that the charm
+    can still function effectively without having those relations added.<br />
+    For example, the my-node-app charm might also define:<br />
+<pre class="prettyprint lang-yaml">
+requires:
+  database: mongodb
+  memcache:
+    interface: memcached
+    optional: true
+</code></pre><br />
+    ...to indicate that it can integrate with memcached if it's available, but
+    that it can't be expected to do anything useful without a mongodb service
+    available.</li>
+    <li><code>gets</code> and <code>sets</code> are ignored by juju at present,
+    but are valuable <a href="./authors-charm-interfaces.html">documentation</a>.</li>
+</ul>
+
+</section>
+
+<section id="examples">
+<h2>Sample metadata.yaml files</h2>
+<p> The MySQL charm metadata: </p>
+<pre class="prettyprint">
+    name: mysql
+    summary: MySQL is a fast, stable and true multi-user, multi-threaded SQL database
+    maintainer: Marco Ceppi
+    description: |
+    MySQL is a fast, stable and true multi-user, multi-threaded SQL database
+    server. SQL (Structured Query Language) is the most popular database query
+    language in the world. The main goals of MySQL are speed, robustness and
+    ease of use.
+    categories:
+    - databases
+  provides:
+    db:
+      interface: mysql
+    db-admin:
+      interface: mysql-root
+    shared-db:
+      interface: mysql-shared
+    master:
+      interface: mysql-oneway-replication
+    munin:
+      interface: munin-node
+    monitors:
+      interface: monitors
+    local-monitors:
+      interface: local-monitors
+    scope: container
+    
+peers:
+    cluster:
+      interface: mysql-ha
+    
+requires:
+    slave:
+      interface: mysql-oneway-replication
+    ceph:
+      interface: ceph-client
+    ha:
+      interface: hacluster
+      scope: container
+</pre>
+
+
+</section>
+
+
+</article>
+<!--Postamble-->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<!--End-Postamble-->
+<!--Footer-->
+	<footer class="global clearfix" role="contentinfo">
+		<nav role="navigation">
+			<div class="footer-a">
+				<div class="clearfix">
+					<ul>
+						<li>
+							<h2><a href="/">Juju</a></h2>
+							<ul>
+								<li><a href="/charms">Charms</a></li>
+								<li><a href="/features">Features</a></li>
+								<li><a href="/deployment">Deployment</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/resources">Resources</a></h2>
+							<ul>
+								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/docs/">Documentation</a></li>
+								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+								<li><a href="/resources/videos/">Videos</a></li>
+								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/community">Community</a></h2>
+							<ul>
+								<li><a href="/community/blog/">Juju Blog</a></li>
+								<li><a href="/events/">Events</a></li>
+								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+								<li><a href="/community/charmers/">Charmers</a></li>
+								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+							<ul>
+								<li><a href="https://jujucharms.com/">Charm store</a></li>
+								<li><a href="/download/">Download Juju</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="legal clearfix">
+			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+		</div>
+	</footer>
+
+<!--End-Footer-->
+<!--Scripts-->
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="https://juju.ubuntu.com/docs/js/main.js"></script>    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+    <!-- google analytics -->
+    <script>
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-1018242-41']);
+   _gaq.push(['_trackPageview']);
+  
+   (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+    </script>
+<!--End-Scripts-->
+
+</body></html>
+

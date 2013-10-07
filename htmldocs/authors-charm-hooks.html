@@ -1,0 +1,385 @@
+<!DOCTYPE html> 
+<html>
+<!--Head-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Juju Documentation</title>
+		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+ 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+<!--End-Head-->
+
+  <body class="resources">	
+<!--Header-->
+
+	<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+					<label class="off-left" for="s">Search:</label>
+					<input class="form-text" type="text" value="" name="s" id="s" />
+					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+				</form>		
+			</div>
+		</nav>	
+	</header>
+<!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+<!--End-Preamble-->
+<article>
+<section id="charm-hooks">
+<h1>Charm hooks</h1>
+
+<p>A service unit's direct action is entirely defined by its charm's hooks. Hooks
+are executable files in a charm's <code>hooks</code> directory; hooks with particular
+names (see below) will be invoked by the juju unit agent at particular times, and thereby cause
+changes to the world.</p>
+
+<p>Whenever a hook-worthy event takes place, the unit agent first checks whether
+that hook is being <a href="./authors-hook-debug.html">debugged</a>, and if so
+hands over control to the user. Otherwise, it tries to find a hook with precisely
+the right name. If the hook doesn't exist, the agent continues without complaint;
+if it does, it is invoked without arguments in a specific
+<a href="./authors-hook-environment.html">environment</a>, and its output is written
+to the unit agent's log. If it returns a non-zero exit code, the agent enters an
+<a href="./authors-hook-errors.html">error state</a> and awaits user intervention.</p>
+
+<p>The agent will also enter an error state if the unit agent process is aborted
+during hook execution.</p>
+
+<p>There are two types of hooks, described in more detail in the following sections.</p>
+
+<p class = "note"><strong>Note: </strong>None of the unit or relation hooks are required; if you don't implement a hook,
+it just doesn't get run. When a hook event occurs, Juju will look for the corresponding hook file to execute, but if it finds none, will continue running without generating an error.</p>
+</section>
+
+<section id="unit-hooks">
+<h2>Unit hooks</h2>
+
+<p>There are 5 &quot;unit hooks&quot; with predefined names that can be implemented
+by any charm:</p>
+<ul>
+    <li>install</li>
+    <li>config-changed</li>
+    <li>start</li>
+    <li>upgrade-charm</li>
+    <li>stop</li>
+</ul>
+
+<p>For every relation defined by a charm, an additional 4 &quot;relation hooks&quot;
+can be implemented, named after the charm relation:</p>
+<ul>
+  <li>&lt;name&gt;-relation-joined</li>
+  <li>&lt;name&gt;-relation-changed</li>
+  <li>&lt;name&gt;-relation-departed</li>
+  <li>&lt;name&gt;-relation-broken</li>
+</ul>
+
+<h3 id="hook-install">install</h3>
+
+<p><code>install</code> runs just once, before any other hook. It should be used to
+perform one-time setup operations only.</p>
+
+<h3 id="hook-config-changed">config-changed</h3>
+
+<p><code>config-changed</code> runs in several different situations.</p>
+<ul>
+    <li>immediately after "install"</li>
+    <li>immediately after "upgrade-charm"</li>
+    <li>at least once when the unit agent is restarted (but, if the unit is in
+    an <a href="./authors-hook-errors.html">error state</a>, it won't be run
+    until after the error state is cleared).</li>
+</ul>
+<p>It cannot assume that the software has already been started; it should not
+start stopped software, but should (if appropriate) restart running software
+to take configuration changes into account.</p>
+
+<h3 id="hook-start">start</h3>
+<p><code>start</code> runs immediately after the first <code>config-changed</code>
+hook. It should be used to ensure the charm's software is running. Note that the
+charm's software should be configured so as to persist through reboots without further
+intervention on juju's part.
+
+<h3 id="hook-upgrade-charm">upgrade-charm</h3>
+
+<p><code>upgrade-charm</code> runs immediately after any
+<a href="./authors-charm-upgrades.html">upgrade</a> operation that does <em>not</em>
+itself interrupt an existing <a href="./authors-hook-errors.html">error state.</a>. It
+should be used to reconcile local state written by some other version of the charm into
+whatever form it needs to take to be manipulated by the current version.</p>
+
+<p>While the forced upgrade functionality is intended as a developer tool, and is
+not generally suitable for end users, it's somewhat optimistic to depend on the
+functionality never being abused. In light of this, if you need to run an
+<code>upgrade-charm</code> hook before your other hooks will work correctly,
+it may be wise to preface all your other hooks with a quick call to your
+(idempotent)<code>upgrade-charm</code>.</p>
+
+<h3 id="hook-stop">stop</h3>
+
+<p><code>stop</code> runs immediately before the end of the unit's destruction
+sequence. It should be used to ensure that the charm's software is not running, and
+will not start again on reboot.</p>
+</section>
+
+<section id="relation-hooks">
+<h2>Relation hooks</h2>
+
+<p>Units will only participate in relations after they're been started, and before
+they've been stopped. Within that time window, the unit may participate in several
+different relations at a time, <em>including</em> multiple relations with the
+same name.</p>
+
+<p>To illustrate, consider a database service that will be used by multiple client
+services. Units of a single client service will surely want to connect to, and
+use, the same database; but if units of another client service were to use that
+same database, the consequences could be catastrophic for all concerned.</p>
+
+<p>If juju respected the <code>limit</code> field in relation
+<a href="./authors-charm-metadata.html">metadata</a>, it would be possible
+to work around this, but it's not a high-priority
+<a href="https://bugs.launchpad.net/bugs/1089297">bug</a>: most provider services
+<em>should</em> be able to handle multiple requirers anyway; and most requirers will
+only be connected to one provider anyway.</p>
+
+<p>When a unit running a given charm participates in a given relation, it runs at
+least three hooks for every remote unit it becomes aware of in that relation.</p>
+</section>
+
+<section id="hook-relation-joined">
+<h3>&lt;name&gt;-relation-joined</h3>
+
+<p><code>&lt;name&gt;-relation-joined</code> is run once only, when that remote
+unit is first observed by the unit. It should be used to <code>relation-set</code> any
+local unit settings that can be determined using no more than the name of the joining
+unit and the remote <code>private-address</code> setting, which is always available
+when the relation is created and is by convention not deleted.</p>
+
+<p>You should not depend upon any other relation settings in the -joined hook
+because they're not guaranteed to be present; if you need more information
+you should wait for a -changed hook that presents the right information.</p>
+</section>
+
+<section id="hook-relation-changed">
+<h3>&lt;name&gt;-relation-changed</h3>
+
+<p><code>&lt;name&gt;-relation-changed</code> is always run once, after -joined, and
+will subsequently be run whenever that remote unit changes its settings for the
+relation. It should be the <em>only</em> hook that <em>relies</em> upon remote relation
+settings from <code>relation-get</code>, and it should <em>not</em> error if the
+settings are incomplete: you can guarantee that when the remote unit changes its
+settings, the hook will be run again.</p>
+
+<p>The settings that you can get, and that you should set, are determined by
+the relation's <a href="./authors-charm-interfaces.html">interface</a>.</p>
+</section>
+
+<section id="hook-relation-departed">
+<h3>&lt;name&gt;-relation-departed</h3>
+
+<p><code>&lt;name&gt;-relation-departed</code> is run once only, when the remote unit
+is known to be leaving the relation; it will only run once at least one -changed has
+been run, and after -departed has run, no further -changeds will be run. This should
+be used to remove all references to the remote unit, because there's no guarantee that
+it's still part of the system; it's perfectly probable (although not guaranteed) that
+the system running that unit has already shut down.</p>
+
+<p>When a unit's own participation in a relation is known to be ending, the unit
+agent continues to uphold the ordering guarantees above; but within those
+constraints, it will run the fewest possible hooks to notify the charm of the
+departure of each individual remote unit.</p>
+
+<p>Once all necessary -departed hooks have been run for such a relation, the unit
+agent will run the final relation hook:</p>
+</section>
+
+<section id="hook-relation-broken">
+<h3>&lt;name&gt;-relation-broken</h3>
+
+<p><code>&lt;name&gt;-relation-broken</code> indicates that the current relation is
+no longer valid, and that the charm's software must be configured as though the
+relation had never existed. It will only be called after every necessary -departed
+hook has been run; if it's being executed, you can be sure that no remote units are
+currently known locally.</p>
+
+<p>It is important to note that the -broken hook might run even if no other units
+have ever joined the relation. This is not a bug: even if no remote units have ever
+joined, the fact of the unit's participation can be detected in other hooks via the
+<code>relation-ids</code> tool, and the -broken hook needs to execute to give the
+charm an opportunity to clean up any optimistically-generated configuration.</p>
+
+<p>And, again, it's important to internalise the fact that there may be multiple
+runtime relations in play with the same name, and that they're independent:
+one -broken hook does not mean that <em>every</em> such relation is broken.</p>
+</section>
+
+<section id="writing-hooks">
+<h2>Writing hooks</h2>
+
+<p>If you follow the <a href="./authors-charm-writing.html">tutorial</a>, you'll
+get a good sense of the basics. To fill out your knowledge, you'll want to study
+the hook <a href="./authors-hook-environment.html">environment and tools</a>, and
+to experiment with <a href="./authors-hook-debug.html">debug-hooks</a>.</p>
+
+<p>Independent of the nuts and bolts, though, good hooks display a number of
+useful high-level properties:</p>
+<ul>
+    <li>They are <em>idempotent</em>: that is to say that there should be no
+    observable difference between running a hook once, and running it N times
+    in a row. If this property does not hold, you are likely to be making your
+    own life unnecesarily difficult: apart from anything else, the average user's
+    most likely first response to a failed hook will be to try to run it again
+    (if they don't just skip it).</li>
+
+    <li>They are <em>easy to read</em> and understand. It's tempting to write a
+    single file that does everything, and which just calls different functions
+    internally depending on the value of <code>argv[0]</code>, and to symlink that
+    one file for every hook; but such structures quickly become unwieldy.<br />
+    The time taken to write a library, separate from the hooks, is very likely
+    to be well spent: it lets you write single hooks that are clear and focused,
+    and insulates the maintainer from irrelevant details.</li>
+
+    <li>Where possible, they reuse
+    <a href="https://launchpad.net/charm-tools">common code</a> already written to
+    ease or solve common use cases.</li>
+
+    <li>They do not return <a href="./authors-hook-errors.html">errors</a> unless
+    there is a good reason to believe that they cannot be resolved without user
+    intervention. Doing so is an admission of defeat: a user who sees your charm
+    returning an error state is unlikely to have the specific expertise necessary
+    to resolve it. If you have to return an error, please be sure to at least write
+    any context you can to the log before you do so.</li>
+
+    <li>They write only <em>very</em> sparingly to the
+    <a href="./authors-charm-contents.html">charm directory</a>.</li>
+</ul>
+
+<p>We recommend you also familiarize yourself with the
+<a href="./authors-charm-best-practice.html">best practices</a> and, if you
+plan to distribute your charm, the
+<a href="./authors-charm-policy.html">charm store policy</a>.</p>
+</section>
+          </article>
+<!--Postamble-->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<!--End-Postamble-->
+<!--Footer-->
+	<footer class="global clearfix" role="contentinfo">
+		<nav role="navigation">
+			<div class="footer-a">
+				<div class="clearfix">
+					<ul>
+						<li>
+							<h2><a href="/">Juju</a></h2>
+							<ul>
+								<li><a href="/charms">Charms</a></li>
+								<li><a href="/features">Features</a></li>
+								<li><a href="/deployment">Deployment</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/resources">Resources</a></h2>
+							<ul>
+								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/docs/">Documentation</a></li>
+								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+								<li><a href="/resources/videos/">Videos</a></li>
+								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/community">Community</a></h2>
+							<ul>
+								<li><a href="/community/blog/">Juju Blog</a></li>
+								<li><a href="/events/">Events</a></li>
+								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+								<li><a href="/community/charmers/">Charmers</a></li>
+								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+							<ul>
+								<li><a href="https://jujucharms.com/">Charm store</a></li>
+								<li><a href="/download/">Download Juju</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="legal clearfix">
+			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+		</div>
+	</footer>
+
+<!--End-Footer-->
+<!--Scripts-->
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="https://juju.ubuntu.com/docs/js/main.js"></script>    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+    <!-- google analytics -->
+    <script>
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-1018242-41']);
+   _gaq.push(['_trackPageview']);
+  
+   (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+    </script>
+<!--End-Scripts-->
+
+</body></html>

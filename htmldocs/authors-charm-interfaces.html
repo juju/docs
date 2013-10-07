@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Juju Documentation - Charm relation interfaces</title>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
+  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+  <body class="resources">
+    <header class="global clearfix" role="banner">
+  <div class="header-navigation">
+    <div>
+      <nav role="navigation">
+        <ul>
+          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
+          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
+          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
+          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
+          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
+          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
+          <li>
+            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
+              <fieldset>
+                <input id="input-search" type="text" name="s" value="Search" />
+              </fieldset>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="header-content">
+    <div class="clearfix">
+      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
+      <div class="header-navigation-secondary"></div>
+      <div class="header-image"></div>
+      <h1>Resources</h1>
+      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+    </div>
+  </div>
+</header>
+
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+          <article>
+
+<section id="relation-interfaces">
+<h1>Charm relation interfaces</h1>
+
+<p>As described <a href="./authors-charm-metadata.html">elsewhere</a>, picking an
+interface is a strong statement; whether you're providing or requiring a given
+interface, you need to be compatible with all providers and requirers of that
+interface.</p>
+
+<p>In short, this means that you need to set the same settings as do all the
+other charms with the same role for the interface; and you should only expect
+to be able to read those settings set by the other charms with the counterpart
+role.</p>
+</section>
+
+<section id="determining-interfaces">
+<h2>Determining charm relation interfaces</h2>
+
+<p>This is in some respects an uncomfortable situation to be in. If two charms
+declare compatibility, but fail when run together due to disagreement about
+the actual definition of that interface; it's not immediately clear which is
+at fault, because the &quot;standard&quot; is defined only by consensus among the
+existing charms that provide or require that interface.</p>
+
+<p>On the upside, this means that reading any charm that already implements the
+interface is <em>theoretically</em> good enough to figure it out; in practice, it's
+sometimes hard to understand the code in isolation. The incontrovertible way
+to determine the protocol defined by an interface is to deploy a pair of charms
+that already use that interface, and <a href="./authors-hook-debug.html">intercept</a>
+the communications between them.</p>
+
+<pre class="runnable"><code>
+$ juju deploy mongodb
+$ juju deploy node-app
+</code></pre>
+
+<p>In a separate window, once node-app/0 reports <code>started</code> status:</p>
+
+<pre class="runnable"><code>
+$ juju debug-hooks node-app/0 *
+</code></pre>
+
+<p>This opens a tmux session; when the unit wants to run a hook, it'll create a
+new window in which you can interactively inspect the environment. In a relation
+hook, you'll want to run the following commands:</p>
+
+<pre class="runnable"><code>
+# discover what's been set by the unit on the other end of the relation:
+$ relation-get $JUJU_REMOTE_UNIT
+address: example.com:37070
+username: bob
+password: seekrit
+
+# get the local unit's relation settings, for comparison afterwards:
+$ relation-get $JUJU_UNIT_NAME
+# (no results)
+
+# run the actual hook:
+$ ./hooks/$JUJU_HOOK_NAME
+
+# get the local settings again, to see if any changes were made by the hook:
+$ relation-get $JUJU_UNIT_NAME
+# (no results)
+</code></pre>
+
+<p>...and then close that tmux window and wait to see if another one opens for the
+next hook. Assuming you started debugging before creating the relation, you'll
+see exactly one -joined hook, and at least one -changed hook, and you're only
+done when new -changed hooks stop popping up.</p>
+
+<p>The relation-get <a href="./authors-hook-environment.html">tool</a> accepts a
+<code>--format</code> parameter that accepts <code>json</code> and <code>yaml</code>
+values, in case you want to consume them programmatically.</p>
+
+<p>In practice, what you'll most likely find is that one side sets a couple of keys,
+the other side gets them, and that's that... in no more than two changed hooks.
+Be aware, though, that it is possible in principle for an interface to imply
+a more demanding interface, involving multiple rounds of setting and getting.</p>
+</section>
+
+<section id="documenting-interfaces">
+<h2>Documenting charm relation interfaces</h2>
+
+<p>In light of the above, there is a clear need for some means of documenting the
+above. The optional <code>gets</code> and <code>sets</code> fields in a charm's
+relation <a href="./authors-charm-metadata.html">metadata</a> should be used for
+this purpose.</p>
+
+<p>Please be especially careful to note that this format is <em>not</em> checked
+by juju today. But it does encode the information that's most helpful to your fellow
+charmers, and by doing so in a consistent and machine-readable format we maximise
+our chances of one day making use of this information automatically.</p>
+
+<p>The simple form, which will be the most common form, looks like this:</p>
+
+<pre class="runnable"><code>
+name: python-django
+...
+provides:
+&nbsp;&nbsp;website:
+&nbsp;&nbsp;&nbsp;&nbsp;interface: http
+&nbsp;&nbsp;&nbsp;&nbsp;sets: [host, post]
+</code></pre>
+
+<p>...and this:</p>
+
+<pre class="runnable"><code>
+name: haproxy
+...
+requires:
+&nbsp;&nbsp;reverseproxy:
+&nbsp;&nbsp;&nbsp;&nbsp;interface: http
+&nbsp;&nbsp;&nbsp;&nbsp;gets: [host, port]
+</code></pre>
+
+<p>...indicating that a relation can surely be made between python-django and haproxy,
+because the <code>website</code> relation unconditionally sets the keys that the
+<code>reverseproxy</code> relation requires in order to function.</p>
+
+<p>The more complex form, which is only required for complex protocols, is defined
+as follows:</p>
+<ul>
+    <li><code>gets</code> holds a list of settings keys that must all be set by
+    each unit on the remote end of a relation in order for the local unit to
+    function.</li>
+    <li><code>sets</code> holds a list of settings that will be set by each unit
+    of the local charm. These settings can either be a plain string, indicating that
+    no remote settings need exist for this key to be written; or a single-element
+    map, with the setting to be written mapped to the remote settings that must
+    exist for this to be done.</li>
+</ul>
+<p>For example, consider charms <code>a</code> and <code>b</code>, which do the
+following handshake dance before they can complete their configuration:</p>
+<ul>
+    <li><code>b/0</code> starts running -joined, which takes a while.</li>
+    <li><code>a/0</code> runs -joined and -changed before <code>b/0</code> has
+    finished -joined. In the -changed hook, it fails to find the remote settings
+    it expected, and exits without error.</li>
+    <li><code>b/0</code> finishes -joined, setting <code>X</code> and <code>Y</code>,
+    thus triggering -changed on <code>a/0</code>.</li>
+    <li><code>a/0</code> sets <code>P</code> and <code>Q</code> in response, causing
+    a -changed on <code>b/0</code>.</li>
+    <li><code>b/0</code> completes local configuration using <code>P</code> and
+    <code>Q</code>, and sets <code>Z</code>, triggering a final -changed on
+    <code>a/0</code>.</li>
+    <li><code>a/0</code> completes local configuration using <code>X</code>,
+    <code>Y</code>, and <code>Z</code>, and sets nothing.</li>
+</ul>
+<p>For example, in the hypothetical complex protocol described in the previous
+section, the metadata for charm <code>a</code> above would contain:</p>
+
+<pre class="runnable"><code>
+requires:
+&nbsp;&nbsp;ab:
+&nbsp;&nbsp;&nbsp;&nbsp;interface: ab
+&nbsp;&nbsp;&nbsp;&nbsp;sets:
+&nbsp;&nbsp;&nbsp;&nbsp;- P: [X, Y]
+&nbsp;&nbsp;&nbsp;&nbsp;- Q: [X, Y]
+&nbsp;&nbsp;&nbsp;&nbsp;gets: [X, Y, Z]
+</code></pre>
+
+<p>...indicating that <code>P</code> and <code>Q</code> will only be written when
+<code>X</code> and <code>Y</code> have; and that configuration will not complete
+without <code>X</code>, <code>Y</code> and <code>Z</code>. Meanwhile charm
+<code>b</code> would contain:</p>
+
+<pre class="runnable"><code>
+provides:
+&nbsp;&nbsp;ab:
+&nbsp;&nbsp;&nbsp;&nbsp;interface: ab
+&nbsp;&nbsp;&nbsp;&nbsp;sets:
+&nbsp;&nbsp;&nbsp;&nbsp;- X
+&nbsp;&nbsp;&nbsp;&nbsp;- Y
+&nbsp;&nbsp;&nbsp;&nbsp;- Z: [P, Q]
+&nbsp;&nbsp;&nbsp;&nbsp;gets: [P, Q]
+</code></pre>
+
+<p>...indicating that it will always write <code>X</code> and <code>Y</code>, and
+that <code>Z</code> will be written when <code>P</code> and <code>Q</code> have; and
+that configuration will not be complete without <code>P</code> and <code>Q</code>.</p>
+
+<p>Peer relations are a different matter, in that peer relations are the mechanism
+by which service units share information internally. It's not unusual for peer
+service units to maintain convenient caches of distributed information in their
+own peer settings, and this inevitably involves generating settings keys at
+runtime.</p>
+</section>
+
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer class="global clearfix" role="contentinfo">
+  <div class="row">
+    <div class="inner-wrapper">
+      <nav role="navigation" class="clearfix">
+        <ul class="footer-a">
+          <li class="grid-3 first-col">
+            <h4><a href="/get-started">Get started</a></h4>
+            <ul>
+              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/resources">Resources</a></h4>
+            <ul>
+              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
+              <li><a href="/resources/videos/">Videos</a></li>
+              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/community">Community</a></h4>
+            <ul>
+              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
+              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
+              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
+            </ul>
+          </li>
+          <li class="grid-3 last-col">
+            <h4><a href="https://launchpad.net/juju">Code</a></h4>
+            <ul>
+              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+              <li><a href="https://launchpad.net/charms">Charms</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row no-border">
+    <div class="legal inner-wrapper">
+      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
+    </div>
+  </div>
+</footer>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  </body>
+</html>
+

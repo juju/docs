@@ -21,11 +21,7 @@
 	</head>
 <!--End-Head-->
 
-
-
-
-  <body class="resources">
-  	
+  <body class="resources">	
 <!--Header-->
 
 	<header class="banner global" role="banner">
@@ -67,215 +63,97 @@
         <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
-          <article>
-            <section id="authors-interfaces">
-              <h1>Interfaces</h1>
-              <p></p>
+<article>
 
-              <p>
-              One of the best aspects of juju is how dead-simple it is to write a charm.
-              You write a handful of hooks in your favorite language and then go to town.
-              However, there's a subtle hump in the charming learning curve... interfaces.
-              </p>
+<section id="charm-configuration">
+<h1>Charm configuration</h1>
 
-              <p>
-              Interface names are what juju checks when trying to determine if two services can be related.
-              For example, wordpress's <code>metadata.yaml</code> contains:
-              </p>
+<p>The optional <code>config.yaml</code> file defines how a service running the
+charm can be configured by its user.</p>
 
+<p>If it exists, it must contain a dictionary of <code>options</code>, in which
+each possible setting is named by the key and defined by the value. An option
+definition may contain any number of the following fields:</p>
+<ul>
+    <li><code>type</code> can be <code>string</code>, <code>int</code>, <code>float</code>,
+    or <code>boolean</code>. If not present, it defaults to <code>string</code>.</li>
+    <li><code>description</code> should contain an explanation of what the user might
+    achieve by altering the setting.</li>
+    <li><code>default</code> should, if present, contain a value of the appropriate
+    type. If not present it is treated as null (which is always a valid value in this
+    context); an option with no default will not normally be reported by the
+    config-get <a href="./authors-hook-environment.html">hook tool</a> unless it
+    has been explicitly set.</li>
+</ul>
+</section>
+
+<section id="picking-options">
+<h2>What to expose to users</h2>
+
+<p>The charm configuration is deliberately somewhat restrictive, in the hope of
+encouraging charmers to expose only features that are clear and comprehensible.
+The user doesn't want to configure the software - they want to configure the
+<em>service</em>, which exists at a higher level of abstraction. A charm with
+a single opinionated <code>tuning</code> option is, from this perspective,
+infinitely superior to one that exposes 6 arcane options that correspond
+directly to flags or config settings for the software.</p>
+
+<p>In short, the config is part of the user interface for the charm - it needs to be concise and
+as easy to understand and use as possible. If you're considering using base64
+encoding to slip structured data through the deliberately restrictive configuration
+language, you're probably "Doing It Wrong".</p>
+</section>
+
+<section id="default-options">
+<h2>Default configuration</h2>
+
+<p>Your charm should operate correctly with no explicit configuration settings.
+The first time someone uses your charm, they're likely to run <code>juju deploy yourcharm</code>
+and see what happens; if it doesn't work out of the box ont the first go, 
+many potential users won't give it a second try.</p>
+</section>
+
+
+<h2>Warning</h2>
+
+<p class="Warning"><strong>Warning: </strong> There's a <a href="https://bugs.launchpad.net/juju-core/+bug/1194945">bug</a>
+in the service configuration CLI at the moment; if a string-typed option has an
+explicit default that is <em>not</em> the empty string, it will become
+impossible to set the value to the empty string at runtime. If your option
+needs to accept an empty string value, it should make the empty string the
+explicit default value.</p>
+</section>
+
+<section id="examples">
+<h2>Sample config.yaml files</h2>
+
+<p> The MediaWiki has some simple but useful configuration options:</p>
 <pre class="prettyprint">
-requires:
-  database:
-    interface: mysql
+  options:
+    name:
+      default: Please set name of wiki
+      description: The name, or Title of the Wiki
+      type: string
+    skin:
+      default: vector
+      description: skin for the Wiki
+      type: string
+    logo:
+      description: URL to fetch logo from
+      type: string
+    admins:
+      description: Admin users to create, user:pass
+      type: string
+    debug:
+      default: false
+      type: boolean
+      description: turn on debugging features of mediawiki
 </pre>
 
-              <p>
-              which is a statement that wordpress has a relation that's locally named "database" which is an 
-              implementation of the "mysql" interface.
-              </p>
+</section>
 
-              <p>
-              Mysql's <code>metadata.yaml</code> contains a not-too-surprising:
-
-<pre class="prettyprint">
-provides:
-  db:
-    interface: mysql
-</pre>
-
-              <p>
-              When services are related, Juju decides which hooks to call
-              within each charm based on this local relation name.  When
-              wordpress is related to mysql, the "database-relation-joined,
-              database-relation-changed, etc" hooks are called on the wordpress
-              end.  Corresponding hooks will be called on the mysql end
-              "db-relation-joined, db-relation-changed" (based on the mysql
-              relation names).
-              </p>
-              
-              <p>
-              Juju decides which services can be related based on the interface names only.
-              They have to match.
-              </p>
-
-              <p>
-              At the end of the day, what's a juju interface?  Simply a name.
-              </p>
-
-              <p>
-              Now, having gotten that out of the way, there is an _implicit_ notion of an interface
-              that charmers have to pay attention to in addition to just matching names.
-              </p>
-
-              <p>
-              In some sense, relations are two-way channels of communications between services.
-              They're not actually talking directly, the agents communicate via the state server, but
-              it helps to think of it as direct communication between the services.
-              Relation hooks can call tools such as <code>relation-get</code> and <code>relation-set</code>
-              to pass information back and forth between the service endpoints.
-              </p>
-
-              <p>
-              For example, wordpress and mysql might have a conversation like the following:
-              </p>
-
-<pre class="prettyprint">
-wordpress:
-  I'm here and my service name is "wordpress"
-
-mysql:
-  I'm here, let me create a db for you
-  your database/schema name is "wordpress"
-  your credentials are "admin/pass1234"
-  you access the db on "my.host.addr:port"
-
-wordpress:
-  cool, let me write the wordpress config files needed to access that database (and bounce the server to pick up those changes)
-  later
-
-mysql:
-  cool, later
-</pre>
-
-              <p>
-              We'll go over some more detailed versions of this, but this is
-              the high-level conversation that occurs between two services when
-              they are related in a relation implementing the
-              <code>mysql</code> interface.
-              </p>
-
-              <p>
-              At first glance, it would appear that the <em>interface</em> called <code>mysql</code>
-              might be defined simply by the set of variables that get passed along the channel.
-              Something like:
-              </p>
-
-<pre class="prettyprint">
-interface:
-  name: mysql
-  variables_set:
-    - service_name
-    - database_host
-    - database_port
-    - database_name
-    - database_user
-    - database_password
-</pre>
-
-              <p>
-                but really, that's not complete.  In fact, it's not even enough
-                information to implement hooks for a new service that needs to
-                talk to mysql.  The timing and sequencing are critical
-                components of this conversation!  They can't be left out.
-              </p>
-
-              <p>
-              So let's dig a little deeper into this interface.
-              Consider only the <code>relation-joined</code> and <code>relation-changed</code>
-              hooks for now.  The remaining <code>broken</code> and <code>departed</code> hooks are covered
-              elsewhere.
-              </p>
-
-              <p>
-              Actually, if we start from provisioning, the hooks that are called for wordpress are
-              </p>
-
-<pre class="prettyprint">
-# juju deploy wordpress
-
-install
-config-changed
-start
-
-# juju add-relation wordpress mysql
-
-database-relation-joined
-
-database-relation-changed
-</pre>
-
-
-              <p>
-              similarly, for mysql
-              </p>
-
-
-<pre class="prettyprint">
-# juju deploy mysql
-
-install
-config-changed
-start
-
-# juju add-relation wordpress mysql
-
-db-relation-joined
-
-db-relation-changed
-</pre>
-
-
-              <p>
-              and we can fill in a little of what the relation hooks are doing
-              </p>
-
-
-<pre class="prettyprint">
-# wordpress
-
-database-relation-joined
-  &lt;no-op&gt;
-
-database-relation-changed
-  relation-get database_name, creds, host/port
-  write config for wordpress
-  bounce wordpress
-</pre>
-
-<pre class="prettyprint">
-# mysql
-
-db-relation-joined
-  relation-get service-name
-  create db, creds
-  relation-set db, creds, host/port
-
-database-relation-changed
-  &lt;no-op&gt;
-</pre>
-
-              <p>
-              <em>This</em> conversation is the actual interface.
-              </p>
-
-
-            </section>
-            
- <!--Actual docs end here-->    
-
-
-       
           </article>
+</article>
 <!--Postamble-->
         </div>
       </div>
@@ -338,7 +216,6 @@ database-relation-changed
 	</footer>
 
 <!--End-Footer-->
-
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -361,7 +238,5 @@ database-relation-changed
    })();
     </script>
 <!--End-Scripts-->
-
-
 
 </body></html>

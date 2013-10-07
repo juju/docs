@@ -40,17 +40,35 @@
     "Charm-tools": "tools-charm-tools.html"
   },
   "Charm Authors": {
-    "Anatomy of a Charm": "authors-charm-anatomy.html",
+    
+    "Getting started": {
+     "link": "authors-intro.html"
+    },
+    "Charm Contents": {
+      "link": "authors-charm-contents.html",
+      "children": {
+    	"metadata.yaml": "authors-charm-metadata.html",
+        "hooks": "authors-hook-kinds.html",
+        "config.yaml": "authors-charm-config.html"
+        
+      }
+    },
     "Writing a Charm": {
       "link": "authors-charm-writing.html",
       "children": {
-    	"Charms in Action": "authors-charms-in-action.html",
+    	"Hook Environment": "authors-hook-environment.html",
+        "Relation Interfaces": "authors-charm-interfaces.html",
+        "Relations in Depth": "authors-relations-in-depth.html",
+        "Charm Testing": "authors-testing.html",
+        "Hook Errors": "authors-hook-errors.html",
+        "Hook Debugging": "authors-hook-debug.html",
         "Subordinate Services": "authors-subordinate-services.html",
         "Implicit Relations": "authors-implicit-relations.html",
         "Charm Testing": "authors-testing.html",
         "Hook Debugging": "authors-hooks.html",
         "Interfaces": "authors-interfaces.html"
         
+
       }
     },
     "The Juju Charm Store": {
@@ -59,6 +77,7 @@
         "Charm Store Policy": "authors-charm-policy.html",
         "Best Practices": "authors-charm-best-practices.html",
         "Charm Quality Rating": "authors-charm-quality.html"
+        "Charm Icons": "authors-charm-icon.html"
       }
     }
   },

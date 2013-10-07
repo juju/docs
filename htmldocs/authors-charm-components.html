@@ -21,10 +21,7 @@
 	</head>
 <!--End-Head-->
 
-
-
-  <body class="resources">
-  	
+  <body class="resources">	
 <!--Header-->
 
 	<header class="banner global" role="banner">
@@ -66,35 +63,87 @@
         <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
-          <article>
-            <section id ="hook-debugging">
-            <h1>Hook debugging</h1>
-            
-            <p>An important facility in any distributed system is the ability to introspect the running system, and to debug it. Within juju the actions performed by the system are executing charm defined hooks. The <span class="pre">debug-log</span> cli provides for inspecting the total state of the system via capturing the logs of all agents and output of all hooks run by the system.</p>
-            <p>To facilitate better debugging of hooks, the <tt class="docutils literal"><span class="pre">debug-hooks</span></tt> cli provides for interactive shell usage as a substitute for running a hook. This allows a charm author or system adminstrator the ability to interact with the system in a live environment and either develop or debug a hook.</p>
-            
-            <h2>How it works</h2>
-            <p>When the juju user utilizes the hook debug command like so:</p>
-            <pre>juju debug-hooks unit_name [hook_name]</pre>
-            
-            <p>juju is instructed to replace the execution of the hook from the charm of the respective service unit, and instead to execute it in a shell associated to a tmux session. If no hook name is given, then all hooks will be debugged in this fashion. Multiple hook names can also be specified on the command line. Shell regular expressions can also be utilized to specify hook names.</p>
-            <p>The <tt class="docutils literal"><span class="pre">debug-hooks</span></tt> command line invocation will immediately connect to the remote machine of the remote unit and start a named shell connected to the same tmux session there.</p>
-            <p>The native capabilities of tmux can be exploited to construct a full debug/development environment on the remote machine.</p>
-            <p>When a debugged hook is executed a new named window will pop up in the tmux session with the hook shell started.  The new window's title will match the hook name, and the shell environment will have all the juju environment variables in place, and all of the hook cli API may be utilized (relation-get, relation-set, relation-list, etc.).</p>
-            <p>It's important to note that juju serializes hook execution, so while the shell is active, no other hooks will be executed on the unit.  Once the experimentation is done, the user must stop the hook by exiting the shell session.  At this point the system is then free to execute additional hooks.</p>
-            <p>It's important to note that any state changes performed while in the hook window via relation-set are buffered till the hook is done executing, in the same way performed for all the relation hooks when running outside of a debug session.</p>
-            <p>The debug-hooks can be used to debug the same hook being invoked multiple times as long as the user has not closed the debug screen session.</p>
-            <p>The user can exit debug mode by exiting the tmux session (e.g. exiting all shells). The unit will then resume its normal processing.</p>
-            
-            <h2>Internals</h2>
-            <p>Internally the <tt class="docutils literal"><span class="pre">debug-hooks</span></tt> cli begins by verifying its arguments, namely the unit exists, and the named hook is valid for the charm. After that it modifies the zookeeper state of the unit node, setting a flag noting the hook to debug. It then establishes an ssh connection to the machine and executes the tmux command.</p>
-            <p>The unit-agent will establish a watch on its own debug settings, on changes introspecting the debug flag, and pass any named hook values down to the hook executor, which will construct debug hook scripts on the fly for matching hooks. These debug hook scripts are responsible for connecting to tmux and monitoring the execution of the hook therein.</p>
-            <p>Special care will be taken to ensure the viability of the tmux session and that debug mode is active before creating the interactive hook window in tmux.</p>
-            </section>
+<article>
+<section id="charm-contents">
+<h1>What makes a Charm?</h1>
+<p>Each charm is a structured bundle of files. Conceptually, charms are composed of metadata, configuration data, and hooks with some extra support files.</p>
+</section>
+
+<section id="required-files">
+<h2>Required files</h2>
+<p>A charm requires only a single file in order to be considered valid by juju:
+<ul>
+<li><code>metadata.yaml</code> <a href="./authors-charm-metadata.html">describes the
+    charm</a> and the relations it can participate in.</li>
+</ul>
+<p>Of course, a charm which consists solely of metadata may be valid, but it can't actually do anything. For that, some additional files will be required.</p>
+</section>
+
+<section id="special-files">
+<h2>Special files</h2>
+<p>The following files will be treated specially, if present:</p>
+<ul>
+    <li><code>/hooks</code> must be a directory holding 
+    executables with specific names, that will be invoked by juju at the relevant times.
+    A charm needs to implement at least one hook in order to do anything at all. How to implement hooks is covered more thoroughly in the <a href="">Hooks section</a></li>
+    <li><code>config.yaml</code> defines service configuration options.<a href="./authors-charm-config.html">
+     The config.yaml file is descibed more fully here</a>.</li>
+    <li><code>icon.svg</code> is used to identify your charm in the GUI and in the charm store.<a href="authors-charm-icon.html">See the walkthrough for creating an icon.</a></li>
+    <li><code>README</code> is made available in the charm store. It should be
+    comprehensible to a reasonably ignorant user.</li>
+    <li><code>revision</code> is now deprecated.</li>
+    <li> files matching <code>.juju*</code> should <strong>not</strong> be used.</li>
+</ul>
+</section>
+
+<section id="other-files">
+<h2>Other files</h2>
+
+<p>Any other files you know you'll need can be placed in the charm for convenience.
+It is recommended to leave the hooks directory for the executable hooks alone - library
+code may be included elsewhere in the charm.</p>
+
+<p>When hooks are actually running, they can read and write to the charm directory
+freely, but should carefully observe the caveats in the next section...</p>
+</section>
+
+<section id="runtime-files">
+<h2>Charm files at runtime</h2>
+
+<p>The files you store with your charm should <em>not</em> be used directly by the
+software installed by your charm. If the files are really needed by the software
+at runtime, copy them on the system alongside the software and reference those
+instead.</p>
+
+<p>This is because the software does <em>not</em> have control over the charm directory;
+<em>juju</em> has control over the charm directory, which it temporarily cedes to the
+charm only when running a hook. Juju will occasionally do things to the contents
+of that directory that assume it is neither read nor written outside a hook, and
+the results of such interactions can only be undefined.</p>
+
+<p>The only files you should be writing into the charm directory should be written
+by hooks and accessed only by hooks. If everything in your charm directory
+went away, that should be considered a <em>management</em> failure only; the software
+installed should continue to run, using its last known good configuration, and
+should do this by virtue of never having had the opportunity to observe the
+change.</p>
+
+<p>Finally, any file written at runtime constrains all future implementations of
+the charm. When <a href="./authors-charm-upgrades.html">upgrading a charm</a>, any
+change that would cause runtime state to be overwritten will cause juju to abort
+the operation and hand over to the user for resolution. This is inconvenient for
+the users and undermines confidence in the charm.</p>
+
+<p class="note"> <strong>Note: </strong> You need to be especially aware of the following 
+when writing python code:
+Python packages run without bytecode suppression will write <code>.pyc</code> files into
+the package, and subsequent attempts to move or remove the package will fail:
+the .pyc files are treated as important hook-relevant runtime state information, to be
+recorded and tracked, and the loss of their directory will put the unit into
+an upgrade error state as referenced above.</p>
+</section>
+
           </article>
-        </div>
-      </div>
-    </section>
 <!--Postamble-->
         </div>
       </div>
@@ -157,7 +206,6 @@
 	</footer>
 
 <!--End-Footer-->
-
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -181,5 +229,5 @@
     </script>
 <!--End-Scripts-->
 
-
 </body></html>
+
