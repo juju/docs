@@ -56,19 +56,15 @@
     "Writing a Charm": {
       "link": "authors-charm-writing.html",
       "children": {
-    	"Hook Environment": "authors-hook-environment.html",
-        "Relation Interfaces": "authors-charm-interfaces.html",
-        "Relations in Depth": "authors-relations-in-depth.html",
-        "Charm Testing": "authors-testing.html",
+    	"How hooks are run": "authors-hook-environment.html",
+        "Relations lifecycle": "authors-charm-interfaces.html",
+        "Implementing interfaces": "authors-relations-in-depth.html",    
         "Hook Errors": "authors-hook-errors.html",
         "Hook Debugging": "authors-hook-debug.html",
         "Subordinate Services": "authors-subordinate-services.html",
         "Implicit Relations": "authors-implicit-relations.html",
-        "Charm Testing": "authors-testing.html",
-        "Hook Debugging": "authors-hooks.html",
-        "Interfaces": "authors-interfaces.html"
+        "Charm Testing": "authors-testing.html"
         
-
       }
     },
     "The Juju Charm Store": {

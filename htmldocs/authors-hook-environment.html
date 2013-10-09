@@ -1,63 +1,69 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Juju Documentation - Hook Environment and Tools</title>
-  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
-  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
+<!--Head-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Juju Documentation</title>
+		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+ 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+<!--End-Head-->
 
-  <!--[if lt IE 9]>
-  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
-  <body class="resources">
-    <header class="global clearfix" role="banner">
-  <div class="header-navigation">
-    <div>
-      <nav role="navigation">
-        <ul>
-          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
-          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
-          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
-          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
-          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
-          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
-          <li>
-            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
-              <fieldset>
-                <input id="input-search" type="text" name="s" value="Search" />
-              </fieldset>
-            </form>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="header-content">
-    <div class="clearfix">
-      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
-      <div class="header-navigation-secondary"></div>
-      <div class="header-image"></div>
-      <h1>Resources</h1>
-      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
-    </div>
-  </div>
-</header>
+  <body class="resources">	
+<!--Header-->
 
+	<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+					<label class="off-left" for="s">Search:</label>
+					<input class="form-text" type="text" value="" name="s" id="s" />
+					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+				</form>		
+			</div>
+		</nav>	
+	</header>
+<!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
     <section id="content" class="container-12">
       <div class="grid-12 doc-container">
-		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
-          <article>
-
-
+<!--End-Preamble-->
+<article>
 <section id="hook-execution-environment">
 <h1>Hook execution environment</h1>
 
@@ -164,9 +170,9 @@ All hook output is currently logged anyway, so it's theoretically redundant with
 <code>echo</code>, but this is an implementation detail and should not be depended
 upon. If it's important, please <code>juju-log</code> it.</p>
 
-<pre class="runnable"><code>
-$ juju-log some important text
-</code></pre>
+<pre class="prettyprint lang-bash">
+juju-log "some important text"
+</pre>
 
 <p>It accepts a <code>--debug</code> flag which causes the message to be logged
 at <code>DEBUG</code> level; in all other cases it's logged at <code>INFO</code>
@@ -183,15 +189,15 @@ logging levels and targets in more detail is a known
 single argument, which must be <code>private-address</code> or
 <code>public-address</code>. It is not affected by context.</p>
 
-<pre class="runnable"><code>
-$ unit-get private-address
+<pre class="prettyprint">
+unit-get private-address
 10.0.1.101
-</code></pre>
+</pre>
 
-<pre class="runnable"><code>
-$ unit-get public-address
+<pre class="prettyprint">
+unit-get public-address
 foo.example.com
-</code></pre>
+</pre>
 
 </section>
 
@@ -207,37 +213,38 @@ a dictionary containing all definied config settings including nil values
 the value of that config key. Missing config keys are reported as having a
 value of nil, and do not return an error.</p>
 
-<pre class="runnable"><code>
-# Get the interesting bits of the config.
-$ config-get
+<p>Get the interesting bits of the config:</p>
+<pre class="prettyprint">
+config-get
+
 key: some-value
 another-key: default-value
-</code></pre>
+</pre>
+<p>Get the whole config including nulls:</p>
+<pre class="prettyprint">
+config-get --all
 
-<pre class="runnable"><code>
-# Get the whole config including nulls.
-$ config-get --all
 key: some-value
 another-key: default-value
 no-default: null
-</code></pre>
+</pre>
+<p>Retrieve a specific value:</p>
+<pre class="prettyprint">
+config-get _key_
 
-<pre class="runnable"><code>
-# Get a single config setting.
-$ config-get another-key
 default-value
-</code></pre>
-
-<pre class="runnable"><code>
-# Get a config setting with no value.
-$ config-get no-default
-</code></pre>
-
-<pre class="runnable"><code>
-# Get a config setting that doesn't exist.
-$ config-get missing-key
-</code></pre>
-
+</pre>
+<p>Get a config setting with no value:</p>
+<pre class="prettyprint lang-bash">
+config-get no-default
+</pre>
+<p>Get a config setting that doesn't exist:</p>
+<pre class="prettyprint lang-bash">
+config-get missing-key
+</pre>
+<p class = "note"><strong>Note: </strong> The above two examples are not misprints
+ - asking for a value which doesn't exist or has not been set returns nothing and
+raises no errors.</p> 
 </section>
 
 <section id="open-port">
@@ -247,15 +254,14 @@ $ config-get missing-key
 open, if and when the service is exposed to the outside world. It accepts a single
 port with an optional protocol, which may be <code>udp</code> or <code>tcp</code>,
 where <code>tcp</code> is the default.</p>
-
-<pre class="runnable"><code>
-# Open 80/tcp if and when the service is exposed.
-$ open-port 80
-</code></pre>
-
-<pre class="runnable"><code>
-# Open 1234/udp if and when the service is exposed.
-$ open-port 1234/udp
+<p>Examples:</p>
+<p>Open 80/tcp if and when the service is exposed:</p>
+<pre class="prettyprint lang-bash">
+open-port 80
+</pre>
+<p>Open 1234/udp if and when the service is exposed:</p>
+<pre class="prettyprint lang-bash">
+open-port 1234/udp
 </code></pre>
 
 <p><code>open-port</code> will not have any effect if the service is not exposed,
@@ -266,21 +272,18 @@ and may have a somewhat delayed effect even if it is. It accepts and ignores
 
 <section id="close-port">
 <h3>close-port</h3>
-
 <p><code>close-port</code> unmarks a local system port. If the service is not
 exposed, it has no effect; otherwise the port is marked for imminent closure. It
 accepts the same flags and arguments as <code>open-port</code>.</p>
-
-<pre class="runnable"><code>
-# Close 1234/udp if it was open.
-$ close-port 1234/udp
-</code></pre>
-
-<pre class="runnable"><code>
-# Close 80/tcp if it was open.
-$ close-port 80
-</code></pre>
-
+<p>Examples:</p>
+<p>Close 1234/udp if it was open:</p>
+<pre class="prettyprint lang-bash">
+close-port 1234/udp
+</pre>
+<p>Close port 80 if it was open:</p>
+<pre class="prettyprint lang-bash">
+close-port 80
+</pre>
 </section>
 
 <section id="relation-set">
@@ -292,27 +295,26 @@ argument, which defaults to the current relation id. If it's not running in a re
 hook, <code>-r</code> needs to be specified. The <code>value</code> part of an argument
 is not inspected, and is stored directly as a string. Setting an empty string causes
 the setting to be removed.</p>
+<p>Examples:</p>
+<p>Set a pair of values for the local unit in the default relation:</p>
+<pre class="prettyprint lang-bash">
+echo $JUJU_RELATION_ID
 
-<pre class="runnable"><code>
-# Set a pair of values for the local unit in the default relation.
-$ echo $JUJU_RELATION_ID
+ server:3
+
+relation-set username=bob password=2db673e81ffa264c
+</pre>
+
+<p>Set a pair of values for the local unit in a specific relation:</p>
+<pre class="prettyprint lang-bash">
+relation-set -r server:3 username=jim password=12345
+</pre>
+<p>Clear a value for the local unit in the default relation:</p>
+<pre class="prettyprint lang-bash">
+echo $JUJU_RELATION_ID
 server:3
-$ relation-set username=bob password=2db673e81ffa264c
-</code></pre>
-
-<pre class="runnable"><code>
-# Set a pair of values for the local unit in a specific relation.
-$ echo $JUJU_RELATION_ID
-
-$ relation-set -r server:3 username=jim password=12345
-</code></pre>
-
-<pre class="runnable"><code>
-# Clear a value for the local unit in the default relation.
-$ echo $JUJU_RELATION_ID
-server:3
-$ relation-set deprecated-or-unused=
-</code></pre>
+relation-set deprecated-or-unused=
+</pre>
 
 <p><code>relation-set</code> is the single tool at your disposal for communicating
 your own configuration to units of related services. At least by convention, the
@@ -351,8 +353,8 @@ will be printed; all values are always plain strings without any interpretation.
 If you need to specify a remote unit but want to see all settings, use <code>-</code>
 for the first argument.</p>
 
-<pre class="runnable"><code>
-# Get all settings from the default remote unit in the default relation.
+<p>Get all settings from the default remote unit in the default relation:</p>
+<pre class="prettyprint lang-bash">
 $ echo $JUJU_RELATION_ID
 db:1
 $ echo $JUJU_REMOTE_UNIT
@@ -360,26 +362,27 @@ mongodb/2
 $ relation-get
 username: jim
 password: "12345"
-</code></pre>
-
-<pre class="runnable"><code>
-# Get one setting from the default remote unit in the default relation.
-$ echo $JUJU_RELATION_ID
+</pre>
+<p>Get one setting from the default remote unit in the default relation:</p>
+<pre class="prettyprint lang-bash">
+echo $JUJU_RELATION_ID
 db:1
-$ echo $JUJU_REMOTE_UNIT
+
+echo $JUJU_REMOTE_UNIT
 mongodb/2
-$ relation-get username
+
+relation-get username
 jim
-</code></pre>
+</pre>
+<p>Get all settings from a particular remote unit in a particular relation:</p>
+<pre class="prettyprint lang-bash">
+echo $JUJU_RELATION_ID
 
-<pre class="runnable"><code>
-# Get all settings from a particular remote unit in a particular relation.
-$ echo $JUJU_RELATION_ID
+relation-get -r database:7 - mongodb/5
 
-$ relation-get -r database:7 - mongodb/5
-username: bob
-password: 2db673e81ffa264c
-</code></pre>
+ username: bob
+ password: 2db673e81ffa264c
+</pre>
 
 <p>Note that <code>relation-get</code> produces results that are <em>consistent</em>
 but not necessarily <em>accurate</em>, in that you will always see settings that:</p>
@@ -419,24 +422,25 @@ seriously inconvenienced when the hole is closed without notice.</p>
 
 <p><code>relation-list</code> accepts the <code>-r</code> flag as above, and
 outputs the names of every remote unit currently known to be in the relation.</p>
-
-<pre class="runnable"><code>
-# Show all remote units in the current relation.
+<p>Examples:</p>
+<p>Show all remote units in the current relation</p>
+<pre class="prettyprint lang-bash">
 $ echo $JUJU_RELATION_ID
 db:1
+
 $ relation-list
 mongodb/0
 mongodb/2
 mongodb/3
-</code></pre>
+</pre>
 
-<pre class="runnable"><code>
-# Show all remote units in a specific relation.
-$ echo $JUJU_RELATION_ID
+<p>Show all remote units in a specific relation:</p>
+<pre class="prettyprint lang-bash">
+echo $JUJU_RELATION_ID
+relation-list -r website:2
 
-$ relation-list -r website:2
 haproxy/0
-</code></pre>
+</pre>
 
 </section>
 
@@ -445,95 +449,113 @@ haproxy/0
 
 <p><code>relation-ids</code> accepts a single argument which, in a relation
 hook, defaults to the name of the current relation.</p>
-
-<pre class="runnable"><code>
-# Show all relations like the current one.
+<p>Examples:</p>
+<p>Show all relations like the current one:</p>
+<pre class="prettyprint lang-bash">
 $ echo $JUJU_RELATION
 server
 $ relation-ids
 server:1
 server:7
 server:9
-</code></pre>
-
-<pre class="runnable"><code>
-# Show all relations with the given name.
+</pre>
+<p>Show all relations with the given name:</p>
+<pre class="prettyprint lang-bash">
 $ echo $JUJU_RELATION_ID
 
 $ relation-ids reverseproxy
 reverseproxy:3
-</code></pre>
+</pre>
 
 <p>Note again that all commands that produce output accept <code>--format json</code>
 and <code>--format yaml</code>, and you may consider it smarter to use those for
 clarity's sake than to depend on the default <code>smart</code> format.
 </section>
-
-
-          </article>
+</article>
+<!--Postamble-->
         </div>
       </div>
     </section>
-    <div class="shadow"></div>
-    <footer class="global clearfix" role="contentinfo">
-  <div class="row">
-    <div class="inner-wrapper">
-      <nav role="navigation" class="clearfix">
-        <ul class="footer-a">
-          <li class="grid-3 first-col">
-            <h4><a href="/get-started">Get started</a></h4>
-            <ul>
-              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
-              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
-              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
-              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
-              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
-              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
-            </ul>
-          </li>
-          <li class="grid-3">
-            <h4><a href="/resources">Resources</a></h4>
-            <ul>
-              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
-              <li><a href="/resources/videos/">Videos</a></li>
-              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
-            </ul>
-          </li>
-          <li class="grid-3">
-            <h4><a href="/community">Community</a></h4>
-            <ul>
-              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
-              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
-              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
-              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
-              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
-              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
-            </ul>
-          </li>
-          <li class="grid-3 last-col">
-            <h4><a href="https://launchpad.net/juju">Code</a></h4>
-            <ul>
-              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
-              <li><a href="https://launchpad.net/charms">Charms</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
   </div>
-  <div class="row no-border">
-    <div class="legal inner-wrapper">
-      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
-      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
-    </div>
-  </div>
-</footer>
+</div>
+<!--End-Postamble-->
+<!--Footer-->
+	<footer class="global clearfix" role="contentinfo">
+		<nav role="navigation">
+			<div class="footer-a">
+				<div class="clearfix">
+					<ul>
+						<li>
+							<h2><a href="/">Juju</a></h2>
+							<ul>
+								<li><a href="/charms">Charms</a></li>
+								<li><a href="/features">Features</a></li>
+								<li><a href="/deployment">Deployment</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/resources">Resources</a></h2>
+							<ul>
+								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/docs/">Documentation</a></li>
+								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+								<li><a href="/resources/videos/">Videos</a></li>
+								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/community">Community</a></h2>
+							<ul>
+								<li><a href="/community/blog/">Juju Blog</a></li>
+								<li><a href="/events/">Events</a></li>
+								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+								<li><a href="/community/charmers/">Charmers</a></li>
+								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+							<ul>
+								<li><a href="https://jujucharms.com/">Charm store</a></li>
+								<li><a href="/download/">Download Juju</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="legal clearfix">
+			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+		</div>
+	</footer>
 
+<!--End-Footer-->
+<!--Scripts-->
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  </body>
-</html>
+    <script type="text/javascript" src="https://juju.ubuntu.com/docs/js/main.js"></script>    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+    <!-- google analytics -->
+    <script>
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-1018242-41']);
+   _gaq.push(['_trackPageview']);
+  
+   (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+    </script>
+<!--End-Scripts-->
+
+</body></html>
 
