@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Juju Documentation - Charm Upgrades</title>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
+  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+  <body class="resources">
+    <header class="global clearfix" role="banner">
+  <div class="header-navigation">
+    <div>
+      <nav role="navigation">
+        <ul>
+          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
+          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
+          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
+          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
+          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
+          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
+          <li>
+            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
+              <fieldset>
+                <input id="input-search" type="text" name="s" value="Search" />
+              </fieldset>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="header-content">
+    <div class="clearfix">
+      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
+      <div class="header-navigation-secondary"></div>
+      <div class="header-image"></div>
+      <h1>Resources</h1>
+      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+    </div>
+  </div>
+</header>
+
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+          <article>
+
+
+<!--Actual docs start here-->
+
+<section id="charm-upgrades">
+<h1>Charm upgrades</h1>
+
+<p>A service's charm can be changed at runtime with the <code>upgrade-charm</code>
+command.  By default, it changes to the latest available version of the same charm; if
+<code>--revision</code> is specified, it changes to that revision of the same charm; and
+if <code>--switch</code> is specified it changes to any arbitrary charm, inferred from the
+argument in the same way as in <code>juju deploy</code>.</p>
+
+<p>For a charm to replace another, though, there is a minimum standard of
+compatibility, which applies regardless of the particular change. That is:</p>
+<ul>
+    <li>a subordinate charm must be replaced by a subordinate charm, and a
+    principal charm must be replaced by a principal charm.</li>
+    <li>every runtime relation used by the service must exist in both charms.</li>
+    <li class=" sub">charm relations that are defined, but not in use at runtime,
+    may be removed freely.</li>
+    <li class=" sub">in particular, it's not possible to remove a peer relation by
+    upgrading, because peer relations are always in use.</li>
+</ul>
+<p>No other factor is used in determining compatibility: configuration settings
+in particular are converted completely naively, such that any settings from
+the original charm that share a name and type are preserved; any incompatible
+settings are removed; and any new settings take defaults as though freshly
+deployed.</p>
+
+<p>When a service has been upgraded but a particular unit has not, the unit will
+continue to see the configuration settings from before conversion; these settings
+will not be affected by subsequent changes to the service's settings.</p>
+</section>
+
+<section id="forced-upgrades">
+<h2>Forced charm upgrades</h2>
+
+<p>Juju defines the upgrade-charm <a href="./authors-hook-kinds.html">hook</a> for
+resolving differences between versions of the same charm. No notice is given of
+charm upgrades; a charm upgrade may run at any time the unit is started, and the
+only opportunity for resolution that exists occurs *after* the change has taken
+place.</p>
+
+<p>This is quite a tight restriction, but nonetheless valuable, so long as you can
+guarantee it'll run. However, it's important to understand that the upgrade-charm
+accepts a <code>--force</code> flag: a forced charm upgrade will upgrade even units
+that are currently in an <a href="./authors-hook-errors.html">error</a> state, at
+the cost of skipping the <code>upgrade-charm</code> hook for those units.</p>
+
+<p>This is useful for charm authors who want to push a new version of a failed hook
+(they can <code>upgrade-charm --force</code> and then <code>resolved --retry</code>
+to run it immediately without otherwise disturbing the system); but it's potentially
+dangerous if abused. We recommend that use of the feature be restricted to charm
+authors while developing their own charms, and that it's not sensible to devote
+serious effort to recovering from inappropriately forced upgrades.</p>
+</section>
+
+<section id="upgrade-errors">
+<h2>Charm upgrade errors</h2>
+
+<p>These will only occur as a result of conflicts between the contents of the
+charm directory written at runtime, and should never be seen by a user; users
+certainly cannot be expected to understand the structure of your charm well
+enough to solve the conflicts sanely.</p>
+
+<p>When you're writing a new version of a charm, you should always test upgrading
+it from (at least) the previous version, to ensure these errors don't slip out
+into the wild.</p>
+
+<p>You can completely avoid these errors by <em>never</em> writing to the charm
+directory; and you can also avoid them by rigorously delineating the parts of
+your charm directory that you write to at runtime, and ensuring you never add a
+file to the raw charm that could conflict with the runtime state.</p>
+
+<p>If you're writing your hooks in python, you should be doubly aware of this: if
+you don't configure python to suppress bytecode caching, it will write <code>.pyc</code>
+files next to your python files at runtime, and effectively prevent you from
+rearranging those directories in future. This is not an unreasonable burden to
+bear, but it's important to know you're taking it on.</p>
+
+<p>If you encounter a charm upgrade error, you can run <code>git status</code> in
+the charm directory to see what the problem is, and use the knowledge thus gleaned to
+fix the charm and try to upgrade again.</p>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer class="global clearfix" role="contentinfo">
+  <div class="row">
+    <div class="inner-wrapper">
+      <nav role="navigation" class="clearfix">
+        <ul class="footer-a">
+          <li class="grid-3 first-col">
+            <h4><a href="/get-started">Get started</a></h4>
+            <ul>
+              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/resources">Resources</a></h4>
+            <ul>
+              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
+              <li><a href="/resources/videos/">Videos</a></li>
+              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/community">Community</a></h4>
+            <ul>
+              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
+              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
+              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
+            </ul>
+          </li>
+          <li class="grid-3 last-col">
+            <h4><a href="https://launchpad.net/juju">Code</a></h4>
+            <ul>
+              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+              <li><a href="https://launchpad.net/charms">Charms</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row no-border">
+    <div class="legal inner-wrapper">
+      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
+    </div>
+  </div>
+</footer>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  </body>
+</html>
+

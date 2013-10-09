@@ -22,11 +22,7 @@
 <!--End-Head-->
 
 
-
-
-
-  <body class="resources">
-  	
+  <body class="resources">	
 <!--Header-->
 
 	<header class="banner global" role="banner">
@@ -68,46 +64,86 @@
         <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
-          <article>
-            <section id ="destroy-services">
-              <h1>Destroy Stuff</h1>
-              <p>Juju isn't just about magically spinning up services as and when you need them, it is also about quickly, sanely and efficiently destroying everything when you no longer need it. This section deals with the sort of things you can ruthlessly destroy, and how to go about it.</p>
-              <h1>Destroying/Removing Services</h1>
-              <p>Once a service is no longer required it can be removed with a simple command.</p>
-              <pre class="prettyprint">juju destroy-service &LT;service-name&GT;</pre>
-              <p class="warning"><strong>Warning!:</strong> Destroying a service which has active relations with another running service will break that relation. This can cause errors in both services, as such review and potentially destroy any relationships first if.</p>
-              <p>A service can take a while to "die", but if running a juju status reveals that the service is listed as dying, but also reports an error state, then the zombied service will still be hanging around.</p>
-              <p class="note"><strong>Note:</strong> Destroying a service removes that service, but not any nodes which may have been created for it to run on. This is juju's way of preserving data to the best it's ability. See <a href="#destroy-machines">Destroying Machines</a> for additional details.</p>
-            </section>
-            <section id="destroy-units">
-              <h1>Destroying Units</h1>
-              <p>It is also possible to spin down individual units, or a sequence of units running a service:</p>
-              <pre class="prettyprint lang-yaml">juju remove-unit mediawiki/1</pre>
-              <p>The <code>remove-unit</code> command is an alias for <code>destroy-unit</code>, and can be used interchangeably, so the above is identical to:</p>
-              <pre class="prettyprint lang-yaml">juju destroy-unit mediawiki/1</pre> 
-              <p>If you wish to remove more than one unit, you may list them all following the command:</p>
-              <pre class="prettyprint lang-yaml">juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2 ...</pre>
-              <p class="note"><strong>Note:</strong> As with destroying a service, removing units will NOT actually remove any instances which were created, it only removes the service units. More details can be found in the <a href="charms-scaling.html">Scaling Services</a> section.</p>
-            </section>
-            <section id="destroy-machines">
-              <h1>Destroying machines</h1>
-              <p>Instances or machines which have no currently assigned workload can be removed from your cloud using the following command:
-              <pre class="prettyprint">juju destory-machine &LT;number&GT;</pre>
-              <p>A machine which currently idle will be removed almost instantaneously from the cloud, along with anything else which may have been on the instance which juju was not aware of. To prevent accidents and awkward moments with running services, it is not possible to remove an instance which is currently allocated to a service. If you try to do so, you will get a polite error message in the form:</p>
-              <pre class="prettyprint lang-yaml">error: no machines were destroyed: machine 3 has unit "mysql/0" assigned</pre>
-            </section>
-            <section id="destroy-enviornments">
-              <h1>Destroying Environments</h1>
-               <p>To completely remove and terminate all running services, the instances they were running on and the bootstrap node itself, simply run the command:</p>
-               <pre class="prettyprint">juju destroy-environment</pre>
-               <p> This will completely remove all instances running under the current environment profile. You can of course specify a different environment profile using the <code>-e</code> switch, or any one of <a href="config-environments.html">these other</a> methods:</p>
-               <pre class="prettyprint">juju destroy-environment -e mycloud</pre>
-               <p>You should be pretty sure that this is what you want to do, as there is no undo command! Everything in the selected environment will be removed.</p>  
-            </section>
-            <section id="destroy-relations">
-              <h1>Removing Relations</h1>
-               <p>To remove relations between deployed services, you should see <a href="charms-relations.html#removing"> the docs section on charm relationships</a>.</p>
-            </section>
+<article>
+<section id="charm-contents">
+<h1>What makes a Charm?</h1>
+<p>Each charm is a structured bundle of files. Conceptually, charms are composed of metadata, configuration data, and hooks with some extra support files.</p>
+</section>
+
+<section id="required-files">
+<h2>Required files</h2>
+<p>A charm requires only a single file in order to be considered valid by juju:
+<ul>
+<li><code>metadata.yaml</code> <a href="./authors-charm-metadata.html">describes the
+    charm</a> and the relations it can participate in.</li>
+</ul>
+<p>Of course, a charm which consists solely of metadata may be valid, but it can't actually do anything. For that, some additional files will be required.</p>
+</section>
+
+<section id="special-files">
+<h2>Special files</h2>
+<p>The following files will be treated specially, if present:</p>
+<ul>
+    <li><code>/hooks</code> must be a directory holding 
+    executables with specific names, that will be invoked by juju at the relevant times.
+    A charm needs to implement at least one hook in order to do anything at all. How to implement hooks is covered more thoroughly in the <a href="">Hooks section</a></li>
+    <li><code>config.yaml</code> defines service configuration options.<a href="./authors-charm-config.html">
+     The config.yaml file is descibed more fully here</a>.</li>
+    <li><code>icon.svg</code> is used to identify your charm in the GUI and in the charm store.<a href="authors-charm-icon.html">See the walkthrough for creating an icon.</a></li>
+    <li><code>README</code> is made available in the charm store. It should be
+    comprehensible to a reasonably ignorant user.</li>
+    <li><code>revision</code> is now deprecated.</li>
+    <li> files matching <code>.juju*</code> should <strong>not</strong> be used.</li>
+</ul>
+</section>
+
+<section id="other-files">
+<h2>Other files</h2>
+
+<p>Any other files you know you'll need can be placed in the charm for convenience.
+It is recommended to leave the hooks directory for the executable hooks alone - library
+code may be included elsewhere in the charm.</p>
+
+<p>When hooks are actually running, they can read and write to the charm directory
+freely, but should carefully observe the caveats in the next section...</p>
+</section>
+
+<section id="runtime-files">
+<h2>Charm files at runtime</h2>
+
+<p>The files you store with your charm should <em>not</em> be used directly by the
+software installed by your charm. If the files are really needed by the software
+at runtime, copy them on the system alongside the software and reference those
+instead.</p>
+
+<p>This is because the software does <em>not</em> have control over the charm directory;
+<em>juju</em> has control over the charm directory, which it temporarily cedes to the
+charm only when running a hook. Juju will occasionally do things to the contents
+of that directory that assume it is neither read nor written outside a hook, and
+the results of such interactions can only be undefined.</p>
+
+<p>The only files you should be writing into the charm directory should be written
+by hooks and accessed only by hooks. If everything in your charm directory
+went away, that should be considered a <em>management</em> failure only; the software
+installed should continue to run, using its last known good configuration, and
+should do this by virtue of never having had the opportunity to observe the
+change.</p>
+
+<p>Finally, any file written at runtime constrains all future implementations of
+the charm. When <a href="./authors-charm-upgrades.html">upgrading a charm</a>, any
+change that would cause runtime state to be overwritten will cause juju to abort
+the operation and hand over to the user for resolution. This is inconvenient for
+the users and undermines confidence in the charm.</p>
+
+<p class="note"> <strong>Note: </strong> You need to be especially aware of the following 
+when writing python code:
+Python packages run without bytecode suppression will write <code>.pyc</code> files into
+the package, and subsequent attempts to move or remove the package will fail:
+the .pyc files are treated as important hook-relevant runtime state information, to be
+recorded and tracked, and the loss of their directory will put the unit into
+an upgrade error state as referenced above.</p>
+</section>
+
           </article>
 <!--Postamble-->
         </div>
@@ -171,7 +207,6 @@
 	</footer>
 
 <!--End-Footer-->
-
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -196,6 +231,5 @@
 <!--End-Scripts-->
 
 
-
-
 </body></html>
+

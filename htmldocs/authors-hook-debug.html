@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Juju Documentation - Hook Debugging</title>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/base.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="//juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+  <link rel='stylesheet' id='stacktack-css'  href='//juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2' type='text/css' media='all' />
+  <link href="css/main.css?1375975745" rel="stylesheet" type="text/css"/>
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+  <body class="resources">
+    <header class="global clearfix" role="banner">
+  <div class="header-navigation">
+    <div>
+      <nav role="navigation">
+        <ul>
+          <li class="page_item page-item-6"><a href="https://juju.ubuntu.com/">Home</a></li>
+          <li class="page_item page-item-7"><a href="https://juju.ubuntu.com/get-started/">Get started</a></li>
+          <li class="page_item page-item-9 current_page_item"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-13"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-3688"><a href="https://juju.ubuntu.com/charm-store/">Charm Store</a></li>
+          <li class="page_item page-item-3691"><a href="https://juju.ubuntu.com/events/">Events</a></li>
+          <li class="page_item page-item-4474"><a href="https://juju.ubuntu.com/charm-championship/">Charm Championship</a></li>
+          <li class="page_item page-item-4249"><a href="https://juju.ubuntu.com/survey/">Survey</a></li>
+          <li>
+            <form id="form-search" method="get" action="https://juju.ubuntu.com/">
+              <fieldset>
+                <input id="input-search" type="text" name="s" value="Search" />
+              </fieldset>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="header-content">
+    <div class="clearfix">
+      <img src="https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png" width="9" height="5" style="left:455px; display: block;" class="arrow-nav">
+      <div class="header-navigation-secondary"></div>
+      <div class="header-image"></div>
+      <h1>Resources</h1>
+      <h2>A collection of some of the most important online references for Juju users and developers.</h2>
+    </div>
+  </div>
+</header>
+
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+		<div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+          <article>
+
+
+<section id="debugging-hooks">
+<h1>Debugging hooks</h1>
+
+<p>The <code>juju debug-hooks</code> command accepts a unit and an optional list
+of hooks to debug, which must each be named individually -- or all omitted, causing all
+hooks to be debugged.</p>
+
+<p>When you start a debug-hooks session, juju creates a tmux session on the
+machine running the requested unit; while that session persists, all hook
+executions will be replaced with new windows in that session, which run an
+<a href="./authors-hook-environment.html">environment</a> matching that of the
+appropriate hook (with one addition: <code>$JUJU_HOOK_NAME</code>) and which are
+marked as succeeded or failed depending on the exit code of the window.</p>
+
+<p>You can stop debugging by closing all windows in the tmux session.</p>
+</section>
+
+<section id="intercept-install">
+<h2>Debugging early hooks</h2>
+
+<p>The <code>install</code>, <code>config-changed</code>, and <code>start</code>
+hooks often execute quite soon after the unit comes up, making it difficult to start
+a debug-hooks session in time to intercept them. If you're having difficulties, you
+can temporarily return an error code from your <code>install</code> hook, and start
+your session only when the unit reports an <a href="./authors-hook-errors.html">error
+status</a>; then run <code>juju resolved --retry</code> for the affected unit, and go
+back to the debug-hooks session to interact.</p>
+</section>
+
+<section id="notes">
+<h2>Special considerations</h2>
+
+<p>While you're debugging hooks for one unit on a machine, you're blocking
+execution of all hooks on that machine. This is generally helpful, because
+you don't want to have to contend with concurrent changes to the machine's
+software, but you should be aware that multiple debug-hooks sessions for
+units assigned to the same machine will block one another, and that you
+can't control relative execution order directly (other than by erroring out
+of hooks you don't want to run yet, and retrying them later).</p>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </section>
+    <div class="shadow"></div>
+    <footer class="global clearfix" role="contentinfo">
+  <div class="row">
+    <div class="inner-wrapper">
+      <nav role="navigation" class="clearfix">
+        <ul class="footer-a">
+          <li class="grid-3 first-col">
+            <h4><a href="/get-started">Get started</a></h4>
+            <ul>
+              <li class="page_item page-item-20"><a href="https://juju.ubuntu.com/get-started/local/">Local</a></li>
+              <li class="page_item page-item-22"><a href="https://juju.ubuntu.com/get-started/amazon/">Amazon Web Services</a></li>
+              <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/get-started/hp-cloud/">HP Cloud</a></li>
+              <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/get-started/rackspace/">Rackspace</a></li>
+              <li class="page_item page-item-3596"><a href="https://juju.ubuntu.com/get-started/openstack/">Openstack</a></li>
+              <li class="page_item page-item-3600"><a href="https://juju.ubuntu.com/get-started/maas/">MAAS</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/resources">Resources</a></h4>
+            <ul>
+              <li><a href="http://juju.ubuntu.com/docs">Documentation</a></li>
+              <li><a href="/resources/videos/">Videos</a></li>
+              <li><a href="http://uistage.jujucharms.com:8080/">Juju GUI demo site</a></li>
+            </ul>
+          </li>
+          <li class="grid-3">
+            <h4><a href="/community">Community</a></h4>
+            <ul>
+              <li class="page_item page-item-28"><a href="https://juju.ubuntu.com/community/juju-blog/">Juju Blog</a></li>
+              <li class="page_item page-item-4262"><a href="https://juju.ubuntu.com/community/weekly-charm-meeting/">Weekly Charm Meeting</a></li>
+              <li class="page_item page-item-4036"><a href="https://juju.ubuntu.com/community/charmers/">Charmers</a></li>
+              <li><a href="https://lists.ubuntu.com/mailman/listinfo/juju">Mailing List</a></li>
+              <li><a href="http://webchat.freenode.net/?channels=juju">Chat</a></li>
+              <li><a href="http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50">FAQ</a></li>
+            </ul>
+          </li>
+          <li class="grid-3 last-col">
+            <h4><a href="https://launchpad.net/juju">Code</a></h4>
+            <ul>
+              <li><a href="https://launchpad.net/juju-core">Juju Core</a></li>
+              <li><a href="https://launchpad.net/charms">Charms</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row no-border">
+    <div class="legal inner-wrapper">
+      <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+      <p><a href="https://bugs.launchpad.net/juju-website/+filebug">Report a bug on this site</a></p>
+    </div>
+  </div>
+</footer>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  </body>
+</html>
+

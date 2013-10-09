@@ -22,9 +22,7 @@
 <!--End-Head-->
 
 
-
-  <body class="resources">
-  	
+  <body class="resources">	
 <!--Header-->
 
 	<header class="banner global" role="banner">
@@ -66,35 +64,97 @@
         <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
-          <article>
-            <section id ="hook-debugging">
-            <h1>Hook debugging</h1>
-            
-            <p>An important facility in any distributed system is the ability to introspect the running system, and to debug it. Within juju the actions performed by the system are executing charm defined hooks. The <span class="pre">debug-log</span> cli provides for inspecting the total state of the system via capturing the logs of all agents and output of all hooks run by the system.</p>
-            <p>To facilitate better debugging of hooks, the <tt class="docutils literal"><span class="pre">debug-hooks</span></tt> cli provides for interactive shell usage as a substitute for running a hook. This allows a charm author or system adminstrator the ability to interact with the system in a live environment and either develop or debug a hook.</p>
-            
-            <h2>How it works</h2>
-            <p>When the juju user utilizes the hook debug command like so:</p>
-            <pre>juju debug-hooks unit_name [hook_name]</pre>
-            
-            <p>juju is instructed to replace the execution of the hook from the charm of the respective service unit, and instead to execute it in a shell associated to a tmux session. If no hook name is given, then all hooks will be debugged in this fashion. Multiple hook names can also be specified on the command line. Shell regular expressions can also be utilized to specify hook names.</p>
-            <p>The <tt class="docutils literal"><span class="pre">debug-hooks</span></tt> command line invocation will immediately connect to the remote machine of the remote unit and start a named shell connected to the same tmux session there.</p>
-            <p>The native capabilities of tmux can be exploited to construct a full debug/development environment on the remote machine.</p>
-            <p>When a debugged hook is executed a new named window will pop up in the tmux session with the hook shell started.  The new window's title will match the hook name, and the shell environment will have all the juju environment variables in place, and all of the hook cli API may be utilized (relation-get, relation-set, relation-list, etc.).</p>
-            <p>It's important to note that juju serializes hook execution, so while the shell is active, no other hooks will be executed on the unit.  Once the experimentation is done, the user must stop the hook by exiting the shell session.  At this point the system is then free to execute additional hooks.</p>
-            <p>It's important to note that any state changes performed while in the hook window via relation-set are buffered till the hook is done executing, in the same way performed for all the relation hooks when running outside of a debug session.</p>
-            <p>The debug-hooks can be used to debug the same hook being invoked multiple times as long as the user has not closed the debug screen session.</p>
-            <p>The user can exit debug mode by exiting the tmux session (e.g. exiting all shells). The unit will then resume its normal processing.</p>
-            
-            <h2>Internals</h2>
-            <p>Internally the <tt class="docutils literal"><span class="pre">debug-hooks</span></tt> cli begins by verifying its arguments, namely the unit exists, and the named hook is valid for the charm. After that it modifies the zookeeper state of the unit node, setting a flag noting the hook to debug. It then establishes an ssh connection to the machine and executes the tmux command.</p>
-            <p>The unit-agent will establish a watch on its own debug settings, on changes introspecting the debug flag, and pass any named hook values down to the hook executor, which will construct debug hook scripts on the fly for matching hooks. These debug hook scripts are responsible for connecting to tmux and monitoring the execution of the hook therein.</p>
-            <p>Special care will be taken to ensure the viability of the tmux session and that debug mode is active before creating the interactive hook window in tmux.</p>
-            </section>
+<article>
+
+<section id="charm-configuration">
+<h1>Charm configuration</h1>
+
+<p>The optional <code>config.yaml</code> file defines how a service running the
+charm can be configured by its user.</p>
+
+<p>If it exists, it must contain a dictionary of <code>options</code>, in which
+each possible setting is named by the key and defined by the value. An option
+definition may contain any number of the following fields:</p>
+<ul>
+    <li><code>type</code> can be <code>string</code>, <code>int</code>, <code>float</code>,
+    or <code>boolean</code>. If not present, it defaults to <code>string</code>.</li>
+    <li><code>description</code> should contain an explanation of what the user might
+    achieve by altering the setting.</li>
+    <li><code>default</code> should, if present, contain a value of the appropriate
+    type. If not present it is treated as null (which is always a valid value in this
+    context); an option with no default will not normally be reported by the
+    config-get <a href="./authors-hook-environment.html">hook tool</a> unless it
+    has been explicitly set.</li>
+</ul>
+</section>
+
+<section id="picking-options">
+<h2>What to expose to users</h2>
+
+<p>The charm configuration is deliberately somewhat restrictive, in the hope of
+encouraging charmers to expose only features that are clear and comprehensible.
+The user doesn't want to configure the software - they want to configure the
+<em>service</em>, which exists at a higher level of abstraction. A charm with
+a single opinionated <code>tuning</code> option is, from this perspective,
+infinitely superior to one that exposes 6 arcane options that correspond
+directly to flags or config settings for the software.</p>
+
+<p>In short, the config is part of the user interface for the charm - it needs to be concise and
+as easy to understand and use as possible. If you're considering using base64
+encoding to slip structured data through the deliberately restrictive configuration
+language, you're probably "Doing It Wrong".</p>
+</section>
+
+<section id="default-options">
+<h2>Default configuration</h2>
+
+<p>Your charm should operate correctly with no explicit configuration settings.
+The first time someone uses your charm, they're likely to run <code>juju deploy yourcharm</code>
+and see what happens; if it doesn't work out of the box ont the first go, 
+many potential users won't give it a second try.</p>
+</section>
+
+
+<h2>Warning</h2>
+
+<p class="Warning"><strong>Warning: </strong> There's a <a href="https://bugs.launchpad.net/juju-core/+bug/1194945">bug</a>
+in the service configuration CLI at the moment; if a string-typed option has an
+explicit default that is <em>not</em> the empty string, it will become
+impossible to set the value to the empty string at runtime. If your option
+needs to accept an empty string value, it should make the empty string the
+explicit default value.</p>
+</section>
+
+<section id="examples">
+<h2>Sample config.yaml files</h2>
+
+<p> The MediaWiki has some simple but useful configuration options:</p>
+<pre class="prettyprint">
+  options:
+    name:
+      default: Please set name of wiki
+      description: The name, or Title of the Wiki
+      type: string
+    skin:
+      default: vector
+      description: skin for the Wiki
+      type: string
+    logo:
+      description: URL to fetch logo from
+      type: string
+    admins:
+      description: Admin users to create, user:pass
+      type: string
+    debug:
+      default: false
+      type: boolean
+      description: turn on debugging features of mediawiki
+</pre>
+
+</section>
+
           </article>
-        </div>
-      </div>
-    </section>
+</article>
 <!--Postamble-->
         </div>
       </div>
@@ -157,7 +217,6 @@
 	</footer>
 
 <!--End-Footer-->
-
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
