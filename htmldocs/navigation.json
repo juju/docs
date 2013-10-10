@@ -9,6 +9,7 @@
         "OpenStack Configuration": "config-openstack.html",
         "MAAS Configuration": "config-maas.html",
         "Local Configuration": "config-local.html",
+        "Manual Provisioning": "config-manual.html",
         "Testing your setup": "getting-started.html#test"
       }
     },
