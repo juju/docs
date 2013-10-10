@@ -101,9 +101,10 @@ sudo apt-get update && sudo apt-get install juju-core</pre>
                   <div data-section="macosx">
                     <p>Juju is in <a href="http://brew.sh/">Homebrew</a>, to install do:</p>
                     <pre class="prettyprint lang-bash">brew install juju</pre>
-
-                    <p>You can grab the latest pre-relase OSX client from our <a href="https://github.com/juju/juju-core/releases">Github Page</a>. Uncompress the tarball, then you can run the <code>juju</code> command from the terminal. We're in the process of testing these builds to be production ready, so if you have a problem please <a href="https://bugs.launchpad.net/juju-core/+filebug">file a bug</a>.</p>
-                    
+                    <!--
+                    <hr>
+                    <h2>Building from source</h2>
+                    <p class="note"><strong>Note:</strong> The following are for installing juju-core from source and are not required for normal users</p>
                     <p>If you have go installed you can install juju using go get. You can install go via homebrew you'll need bzr too:</p>
                     <pre class="prettyprint lang-yaml">
 brew install go bzr
@@ -115,6 +116,7 @@ export GOPATH=$HOME/go
 go get -v launchpad.net/juju-core/...
 export PATH=$PATH:$GOPATH/bin</pre>
                     <p>be sure to add your go bin dir to your path permanently by adding it to your .bashrc</p>
+                    -->
                   </div>
                   <div data-section="windows">
                     <p>Download and run the <a href="https://juju.ubuntu.com/install">Juju windows installer from here.</a></p>
