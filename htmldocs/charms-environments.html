@@ -78,7 +78,14 @@
             <li> The environment last specified with the <code>switch</code> command. </li>
             <li> The environment specified as the default in <code>environments.yaml</code>.</li>
           </ol>
-<p>Currently it is possible to determine which environment a command will act on by checking the <code>JUJU_ENV</code> variable, and if that is empty, the contents of the file <code>~/.juju/current-environment</code>:</p>
+<p>To determine which environment a command will act on, you can issue the <code>switch</code> command with no parameters:</p>
+<pre class="prettyprint lang-bash">
+juju switch
+
+Current environment: "amazon" (from JUJU_ENV)
+</pre>
+
+<p>It is also possible the environment a command will act on by checking the <code>JUJU_ENV</code> variable, and if that is empty, the contents of the file <code>~/.juju/current-environment</code>:</p>
 <pre class="prettyprint lang-bash">
 echo $JUJU_ENV
 
@@ -123,7 +130,7 @@ environments:
  
 
           <h2 id="environment-update">Updating environments</h2>
-          <p>Juju will attempt to maintain a high degree of legacy compatibility for the environments.yaml definitions, so you should be able to update to stable versions of the software without worring about reconfiguring your environments each time. However, new releases do sometimes add support for new cloud providers, add additional settings or change to adapt to configuration changes for the providers themselves. In these cases it can be useful to generate a new boilerplate <code>environmants.yaml</code> so you can easily manually edit your own configurations or cut and paste new environments into your existing configuration.<p>
+          <p>Juju will attempt to maintain a high degree of legacy compatibility for the environments.yaml definitions, so you should be able to update to stable versions of the software without worring about reconfiguring your environments each time. However, new releases do sometimes add support for new cloud providers, add additional settings or change to adapt to configuration changes for the providers themselves. In these cases it can be useful to generate a new boilerplate <code>environments.yaml</code> so you can easily manually edit your own configurations or cut and paste new environments into your existing configuration.<p>
           <p>To generate a new boilerplate <code>environments.yaml</code> file direct to the console you can use:</p>
 <pre class="prettyprint lang-bash">
 juju generate-config --show
