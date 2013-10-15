@@ -99,6 +99,7 @@
               
               <p>Output constraints for mysql</p>
               <pre class="prettyprint">juju get-constraints mysql</pre>
+            
             </section>
             <section id="provider-constraints">
               <h1>Provider Constraints</h1>
@@ -107,6 +108,8 @@
                 <li><code>cpu-cores</code>: The minimum processing power of the machine, roughly indicated by how many cores are available.</li>
                 <li><code>mem</code>: The minimum memory for the machine, defaulting to 512MB.</li>
               </ul>
+
+
             </section>
             <section id="examples-constraints">
               <h1>Working with constraints</h1>
@@ -131,6 +134,11 @@
               <pre class="prettyprint">juju deploy wordpress --constraints mem=1024</pre>
               
               <p>Note that if you try to deploy a machine or service with a constraint that cannot be fulfilled by the environment, the deployment will fail.  Running juju status will show an error in the status for that machine.  You can fix the problem by removing the machine (and the service assigned to the machine, if any) and retrying the deployment with different constraints.</p>
+              <h2 id="constraints-maas"> MAAS constraints</h2>
+              <p>If you are deploying to a MAAS provider, you may use the additional constraint <code>tags=</code>, followed by a comma-delimited list of tags. Only MASS nodes thus tagged will be considered appropriate for deploying the service.</p>
+              <p>E.g.</p>
+              <pre class="prettyprint">juju deploy mysql --constraints tags=foo,bar</pre>  
+              <p>...will deploy MySQL only to a node which has been tagged with both "foo" and "bar".
            </article>
 <!--Postamble-->
         </div>
