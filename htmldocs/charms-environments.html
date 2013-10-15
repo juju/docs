@@ -101,7 +101,7 @@ juju bootstrap                 # bootstraps the default environment
 juju switch amazon             # switches the environment to the cloud defined by 'amazon'
 juju deploy mysql -e mycloud   # deploys mysql charm on the cloud defined by 'mycloud'
 </pre>
-
+<p class="note"><strong>Note: </strong> Unlike many switches used with juju, <code>-e</code> must come at the end of the command in order to be parsed correctly.</p>
 
           <h2 id="environment-switch">Switching environments</h2>
           <p> When managing several cloud environments, it can be bothersome to issue a long list of commands and remember to prepend the <code>-e</code> switch to each one. For this reason, you can switch the current environment using the <code>switch</code> command:</p>
