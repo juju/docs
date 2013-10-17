@@ -74,7 +74,7 @@
               <h1>Service Configuration</h1>
               <p>When deploying a service, the charm you use will often support or even require specific configuration options to be set.</p>
               <p>Juju provides tools to help manage these options and respond to changes over the lifetime of the service deployment. These options apply to the entire service, as opposed to only a specific unit or relation. The configuration can modified by an administrator at deployment time or after the services are operational.<p>
-              <h1>Discovering service configuration options</h1>
+              <h2 id="discover">Discovering service configuration options</h2>
               <p>You can discover what configuration options are available for a specific charm in various ways</p>
               <ul>
                 <li>By running the <code>juju get &LT;service&GT;</code> command.</li>
@@ -82,29 +82,29 @@
                 <li>By examining the <strong>config.yaml</strong> file in the charm itself.</li>
               </ul>
               <p>The configurations setting names and the values they take will obviously vary between charms. The options and possible values are all well documented however, so you should consult one of the above sources to find out particular details.  
-              <h1>Configuring a service at deployment</h1>
+              <h2 id="config-deployment">Configuring a service at deployment</h2>
               <p>It is possible to set configuration values when deploying a service by providing a yaml-formatted file containing configuration values.</p>
               <p>For example, upon investigation we discover that the Mediawiki charm allows us to set values for the name of the wiki and the 'skin' to use. We can put these inside a configuration file.</p>
-<pre class="prettyprint">
+<pre class="prettyprint lang-yaml">
 mediawiki:
   name: Juju Wiki
   skin: monobook
   admins: admin:admin
 </pre>
               <p>We can then use this configuration when we deploy the service:</p>
-<pre class="prettyprint">
+<pre class="prettyprint lang-bash">
 juju deploy --config myconfig.yaml mediawiki
 </pre>   
               
               <p class="caution"><strong>Caution:</strong> If the yaml configuration file cannot be read or contains some syntax errors or invalid options, you will receive an error message to this effect. However, <strong>the service will still be deployed </strong>.
-<h1>Configuring a service which is already deployed</h1>
+ <h2 id="config-deployed">Configuring a service which is already deployed</h2>
  <p>It is possible to set or change configuration of a service which is already deployed.  </p>
  <p>Before you set any of these options, you may want to check what current options are already set, using the <code>juju get &LT;service&GT;</code> command. For example:</p>
 <pre class="prettyprint">
 juju get mediawiki
 </pre>
               <p>Should return something like this:</p>
-<pre class="prettyprint">
+<pre class="prettyprint lang-yaml">
 charm: mediawiki
 service: mediawiki
 settings:
