@@ -72,17 +72,17 @@
           <article>
             <section id ="upgrading">
             <h1>The Juju Charm Store</h1>
-               <p>Juju includes a collection of what we call '''Charms''' that let you deploy whatever services you want in Juju. Since charms are open and worked on by the community, they represent a distilled set of best practices for deploying these services.</p>
+               <p>Juju includes a collection of what we call <code>Charms</code> that let you deploy whatever services you want in Juju. Since charms are open and worked on by the community, they represent a distilled set of best practices for deploying these services.</p>
                <ul class="simple">
                <li>The main distro page is here: <a class="reference external" href="https://launchpad.net/charms">https://launchpad.net/charms</a></li>
                <li>There are useful tools for downloading, modifying, and contributing here: <a class="reference external" href="https://launchpad.net/charm-tools">https://launchpad.net/charm-tools</a></li>
                <li>Here is the official tutorial for charm writing: <a class="reference external" href="https://juju.ubuntu.com/docs/write-charm.html">https://juju.ubuntu.com/docs/write-charm.html</a></li>
                </ul>
-               <h2>Charm Store Process</h2>
+               <h2 id ="processes">Charm Store Process</h2>
                <p>This process is designed to allow prospective developers to have their charms reviewed and updated in the <a class="reference external" href="http://jujucharms.com">Charm Store</a> in a timely manner that ensures peer reviews and quality.</p>
                
                
-               <h2>Submitting a new Charm</h2>
+               <h2 id="submitting">Submitting a new Charm</h2>
                <ol class="arabic simple">
                <li>Install juju and charm-tools.</li>
                <li>Create a repository, something like <tt class="docutils literal"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">~/charms/precise</span></tt>, precise is the release code name for the <a class="reference external" href="http://releases.ubuntu.com">release of Ubuntu</a> you wish to target your charm at.</li>
@@ -98,7 +98,7 @@
                <p>Your charm should then be looked at in a timely manner.</p>
                
                
-               <h2>Submitting a fix to an existing Charm</h2>
+               <h2 id="submitting_fix">Submitting a fix to an existing Charm</h2>
                <ol>
                <li>Grab the charm you want to fix, we'll use Nagios as an example: <tt>bzr branch lp:charms/precise/nagios</tt></li>
                <li>Modify it to meet your needs.</li>
@@ -109,19 +109,19 @@
                <li>For the reviewer field put the <tt>charmers</tt> team, this will get your code into the review queue!</li>
                </ol>
                
-               <h2>Getting Help</h2>
+               <h2 id="getting_help" >Getting Help</h2>
                <p>Inspired by <a class="reference external" href="http://wiki.bazaar.canonical.com/PatchPilot">Bazaar's Patch Pilot programme</a> there will be patch pilots in <cite>#juju</cite> who can help you get your patch accepted. Check the topic to see who's on duty. Still need help? Poke us on <a class="reference external" href="https://lists.ubuntu.com/mailman/listinfo/juju">the mailing list</a> ; if you're from an upstream project who wants more detailed help/tutoring, then contact <a class="reference external" href="http://launchpad.net/~jorge">Jorge Castro</a> and we'd be more than happy to get a charm expert to help you out or help you run a Charm School.</p>
                <p>Some notes:</p>
                <ul>
                <li>Please respect that these people might have a few other charms in their queue already.</li>
-               <li>The package you have a question have about might not necessarily be part of the patch pilot's area of expertise. They will still try to help you get your fix in and probably get you in touch with the 'right' people.</li>
+               <li>The package you have a question about might not necessarily be part of the patch pilot's area of expertise. They will still try to help you get your fix in and probably get you in touch with the 'right' people.</li>
                </ul>
                
-               <h2>Reviewers</h2>
+               <h2 id="reviewers">Reviewers</h2>
                <ol class="arabic">
                <li><p class="first">Modify the topic in #juju to put yourself down as the reviewer for your shift.</p>
                </li>
-               <li><p class="first">Check out <a class="reference external" href="http://manage.jujucharms.com/review-queue">the review queue</a> and be responsive on IRC for user questions.</p>
+               <li><p class="first">Check out <a class="reference external" href="http://manage.jujucharms.com/tools/review-queue">the review queue</a> and be responsive on IRC for user questions.</p>
                </li>
                <li><p class="first">Review the items in the queue. If the queue is caught up and not on fire, consider the following tasks:</p>
                <blockquote>
@@ -141,7 +141,7 @@
                </li>
                </ol>
                
-               <h3>Review Tips and Criteria<a class="headerlink" href="#review-tips-and-criteria" title="Permalink to this headline">Â¶</a></h3>
+               <h3 id="review_tips">Review Tips and Criteria</h3>
                <dl class="docutils">
                <dt>Expectations:</dt>
                <dd><ul class="first simple">
@@ -173,7 +173,7 @@
                <li>If this is your first time patch piloting, you may feel more comfortable being a co-pilot your first few runs. Find a pilot in your timezone and reschedule your time to coincide with theirs.</li>
                <li>''Optional:'' Send a brief mail after your stint, to say what you did and how it worked out. If you have feedback on the review system or the process, speak up.</li>
                <li>You're not obliged to deal with all the open patches. We appreciate what you do do.</li>
-               <li>You can prioritize whichever you think best achieves the goal of helping people enjoy getting things done in Juju. That might be the newest ones, neglected patches, easy patches, or those from new contributors. The <a class="reference external" href="http://manage.jujucharms.com/review-queue">Review Queue</a> sorts by age.</li>
+               <li>You can prioritize whichever you think best achieves the goal of helping people enjoy getting things done in Juju. That might be the newest ones, neglected patches, easy patches, or those from new contributors. The <a class="reference external" href="http://manage.jujucharms.com/tools/review-queue">Review Queue</a> sorts by age.</li>
                <li>If you are unfamiliar with the package, make sure you review everything you can, it's not necessarily your job to merge/promulgate it. If, after you did your review, you can get the contributor in touch with somebody who knows the codebase better, you already helped out a lot.</li>
                </ul>
                </dd>
@@ -194,10 +194,10 @@
                </ul>
                
                
-               <h2>Charm Inclusion Policy for Reviewers</h2>
+               <h2 id="inclusion_policy">Charm Inclusion Policy for Reviewers</h2>
                <p>Please see the official <a class="reference external" href="policy.html"><em>Charm Store Policy</em></a> document.</p>
                
-               <h2>Join Us!</h2>
+               <h2 id="join">Join Us!</h2>
                <p>We also need help reviewing and testing charms. The Charmers team is granted write access to the Charm Collection and charm-tools. If you'd like to join that group, here are some tips:</p>
                
                <ul>
