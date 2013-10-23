@@ -106,7 +106,7 @@ sudo apt-get install juju-local linux-image-generic-lts-raring linux-headers-gen
             <h2>Configuration</h2>
             <p>You should start by generating a generic configuration file for Juju and then switching to the local provider by using the command:
 <pre class="prettyprint lang-bash">
-juju init
+juju generate-config
 juju switch local
 </pre>
             <p>This will generate a file, <strong>environments.yaml</strong> (if it doesn't already exist), which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
@@ -129,8 +129,8 @@ local:
     # shared-storage-port: 8041
 </pre>
             <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <code>$JUJU_HOME</code>, which defaults to <code>~/.juju/</code>. By uncommenting and setting <code>root-dir</code> this location can be changed as well as the ports of the storage and the shared storage. This may be useful in the case of multiple parallel running local providers or conflicts with other programs on your system. 
-
-            <p class="note">If you are using encrypted home directories you have to set <code>$JUJU_HOME</code> or <code>root-dir</code> to point to a location <em>outside</em> your home directory.</p>
+ 
+            <p class="note"><strong>Note: </strong>If you are using encrypted home directories you have to set <code>$JUJU_HOME</code> or <code>root-dir</code> to point to a location <strong>outside</strong> your home directory.</p>
 
             <h2>Bootstrapping and Destroying</h2>
             <p>The usage of LXC Linux Containers enforces that bootstrapping and destroying of an environment are done as <strong>root</strong>. All other operations can be executed as non-root. E.g.</p>
