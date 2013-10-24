@@ -72,6 +72,7 @@
     "The Juju Charm Store": {
       "link": "authors-charm-store.html",
       "children": {
+        "Submitting a Charm": "authors-charm-store.html#submitting",
         "Charm Store Policy": "authors-charm-policy.html",
         "Best Practices": "authors-charm-best-practices.html",
         "Charm Quality Rating": "authors-charm-quality.html"
