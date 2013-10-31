@@ -1,0 +1,213 @@
+<!DOCTYPE html> 
+<html>
+<!--Head-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Juju Documentation</title>
+		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+ 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+<!--End-Head-->
+
+
+
+
+
+
+  <body class="resources">
+  	
+<!--Header-->
+
+	<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+					<label class="off-left" for="s">Search:</label>
+					<input class="form-text" type="text" value="" name="s" id="s" />
+					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+				</form>		
+			</div>
+		</nav>	
+	</header>
+<!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+<!--End-Preamble-->
+		<article>
+    	<section id="troubleshooting_local">
+    	<h1>Troubleshooting the Local Provider</h1>
+    	<p>The local provider uses LXC containers under the hood to provide nodes for you to deploy on. Sometimes things go wrong and you need to debug what is happening on your machine. This page is a collection of best practices from the communtiy on diagnosing and solving Juju local provider issues.</p>
+    	</section>
+
+    	<section id="bootstrap_fails">
+    	<h2>Bootstrap fails</h2>
+
+		<p>Everytime bootstrap fails, you'll need to run <code>sudo juju destroy-environment</code> prior to continuing. First let's rerun a bootstrap in debug mode:</p>
+
+<pre class="prettyprint">
+sudo juju boostrap --show-log --debug
+</pre>
+
+		<p>This will print very verbose output. If you're receiving <code>connection failed, will retry: dial tcp 127.0.0.1:37017: connection refused</code> error at the end of the run, proceed with the troubleshooting guide. If not the error presented will inform you what went wrong.</p>
+
+		<p>In certain cases you might get this something similar to thiserror: <code>Get http://10.0.3.1:8040/provider-state: dial tcp 10.0.3.1:8040: connection refused</code>.
+
+		<p>This can be solved by removing miscellaneous .jenv files in <code>~/.juju/environments</a> and rerunning the bootstrap command.</p>
+		</section>
+
+		<section id="connection_failed">
+		<h2>Connection failed, will retry</h2>
+
+		<p>This occurs when the juju API server and Database server fail to start within the alloted timeout. This can occur for one of several reasons. After the bootstrap command fails run the following command:</p>
+
+<pre class="prettyprint">
+sudo initctl list | grep juju
+</pre>
+
+		<p>You should see two jobs listed. One that starts with <code>juju-db</code> the other <code>juju-agent</code>. If these are both in a start/running state then your machine took longer than juju expected to get these services started. If you're on an encrypted partition see TODO: INSTRUCTIONS ON THIS. If you're not TODO: <INSTRUCTIONS ON RAM DISK DOES NOT EXIST>.</p>
+
+		<p>If either of these have stopped, investigate the logs at <code>/var/log/upstart/juju-db*.log</code> or <code>/var/log/upstart/juju-agent*.log</code> If the juju-db service failed to start with messages of unsupported command-line options, check the version of mongodb installed:</p>
+
+<pre class="prettyprint">
+dpkg -l | grep mongodb-server
+</pre>
+
+		<p>If you have a version less than 1:2.2.4-0ubuntu1 make sure you have either the <a href="https://wiki.ubuntu.com/ServerTeam/CloudToolsArchive">Cloud Tools Archive</a> or ppa:juju/stable added to your system. <code>sudo apt-get update</code> then install juju-local package. Before retrying, make sure you run <code>sudo juju destroy-environment</code>
+		</section>
+
+	    <section id="no_machines_start">
+        <h2>No machines start</h2>
+
+		<p>If you get a successful bootstrap, but services you deploy never come up, there's a chance that you have an older version of the Ubuntu Cloud Image cached on you machine. To verify this, check the timestamp of the contents in <code>/var/cache/lxc/cloud-precise/</code>
+
+<pre class="prettyprint">
+ls -lh /var/cache/lxc/cloud-precise/
+</pre>
+
+		<p>If the contents of this directory are older than a few weeks, delete files present, destroy the environment with `sudo juju destroy-environment`, rebootstrap and attempt deployment again.</p>
+		</section>
+
+</article>
+
+<!--End-Postamble-->
+<!--Footer-->
+	<footer class="global clearfix" role="contentinfo">
+		<nav role="navigation">
+			<div class="footer-a">
+				<div class="clearfix">
+					<ul>
+						<li>
+							<h2><a href="/">Juju</a></h2>
+							<ul>
+								<li><a href="/charms">Charms</a></li>
+								<li><a href="/features">Features</a></li>
+								<li><a href="/deployment">Deployment</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/resources">Resources</a></h2>
+							<ul>
+								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/docs/">Documentation</a></li>
+								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+								<li><a href="/resources/videos/">Videos</a></li>
+								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/community">Community</a></h2>
+							<ul>
+								<li><a href="/community/blog/">Juju Blog</a></li>
+								<li><a href="/events/">Events</a></li>
+								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+								<li><a href="/community/charmers/">Charmers</a></li>
+								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+							<ul>
+								<li><a href="https://jujucharms.com/">Charm store</a></li>
+								<li><a href="/download/">Download Juju</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="legal clearfix">
+			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+		</div>
+	</footer>
+
+<!--End-Footer-->
+
+<!--Scripts-->
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/jquery.details.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+    <!-- google analytics -->
+    <script>
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-1018242-41']);
+   _gaq.push(['_trackPageview']);
+  
+   (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+    </script>
+<!--End-Scripts-->
+
+
+
+
+
+</body></html>
