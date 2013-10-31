@@ -85,6 +85,10 @@ sudo juju boostrap --show-log --debug
 </pre>
 
 		<p>This will print very verbose output. If you're receiving <code>connection failed, will retry: dial tcp 127.0.0.1:37017: connection refused</code> error at the end of the run, proceed with the troubleshooting guide. If not the error presented will inform you what went wrong.</p>
+
+		<p>In certain cases you might get this something similar to thiserror: <code>Get http://10.0.3.1:8040/provider-state: dial tcp 10.0.3.1:8040: connection refused</code>.
+
+		<p>This can be solved by removing miscellaneous .jenv files in <code>~/.juju/environments</a> and rerunning the bootstrap command.</p>
 		</section>
 
 		<section id="connection_failed">
