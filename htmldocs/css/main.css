@@ -279,6 +279,7 @@ div.note.distribute {
 
 .doc-content h3{
   font-size: 18px;
+  color: #dd4814;
 }
 /**
  * Walkthrough steps
@@ -486,7 +487,7 @@ hr {
 }
 
 #content h2 {
-  font-size: 20px;
+  font-size: 24px;
 }
 
 #content h3 {
