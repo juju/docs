@@ -107,7 +107,7 @@
                         <pre class="prettyprint">juju deploy cs:precise/mysql</pre>
 
                         <p>which follows the format:</p>
-                        <pre class="prettyprint">&LT;repository&GT;:&LT;series&GT;&LT;service&GT;</pre>
+                        <pre class="prettyprint">&LT;repository&GT;:&LT;series&GT;/&LT;service&GT;</pre>
 
                         <h1 id="local">Deploying from a local repository</h1>
 
@@ -148,7 +148,7 @@ juju deploy --repository ~/charms/ local:wordpress</pre>
                         fetching it from the charm store. If you wish to check
                         where a charm was installed from, it is listed in the
                         <code>juju status</code> output.</p>
-<!--- NOT IMPLEMENTED https://bugs.launchpad.net/pyjuju/+bug/906008
+
                         <h1>Changing the defaults</h1>
 
                         <p>As we have seen, we can specify repositories to
@@ -165,7 +165,7 @@ repositories:
   - http://charms.ubuntu.com/collection/openstack
   - http://charms.ubuntu.com/people/miked
   - /var/lib/charms</pre>
---->
+
                         <h1>A note about caching...</h1>
 
                         <p>After juju resolves a charm and its dependencies, it
@@ -177,7 +177,7 @@ repositories:
                     </section>
 
                     <section id="deploying-to-machines">
-                        <h1>Deploying to specific machines</h1>
+                        <h1>Deploying to specific machines and containers</h1>
 
                         <p>Juju has native support for specifying which machine
                         a charm should be deployed to. This is useful for a few
@@ -197,6 +197,14 @@ juju deploy --to 0 rabbitmq-server
 
                         <p>As you can see from the example we've deployed mysql
                         and rabbitmq-server "to" node 0.</p>
+
+                        <p>You can also deploy to containers:</p>
+                        <pre class="prettyprint">
+juju deploy mysql --to 24/lxc/3
+juju deploy mysql --to lxc:25
+</pre>
+
+                        <p>In the previous example we deployed MySQL to container #3 on machine #25. Similarly the 2nd example deploys MySQL to a new container on machine #25.</p>
 
                         <p>Note that you need to know the identifier of the
                         machine that you are going to <code>deploy --to</code> – in all
@@ -287,7 +295,7 @@ services:
                         <h2>Considerations</h2>
 
                         <p>Charms are running without any separation, so its
-                        entirely possible for Charms to stamp all over each
+                        entirely possible for Charms to stomp all over each
                         others configuration files and try to bind to the same
                         network ports. We are working to containerize
                         everything so that this does not happen and every
@@ -307,6 +315,7 @@ juju add-unit rabbitmq-server
                         dedicated machines when you need to.</p>
                     </section>
                     <section id="references">
+
                         <h2>References and Examples</h2>
 
                         <ul>
