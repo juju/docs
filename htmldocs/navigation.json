@@ -46,8 +46,8 @@
     "Getting started": {
      "link": "authors-intro.html"
     },
-    "Charm Contents": {
-      "link": "authors-charm-contents.html",
+    "Components of a charm": {
+      "link": "authors-charm-components.html",
       "children": {
     	"metadata.yaml": "authors-charm-metadata.html",
         "hooks": "authors-hook-kinds.html",
