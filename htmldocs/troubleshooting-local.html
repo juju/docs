@@ -80,7 +80,7 @@
 
 		<p>Everytime bootstrap fails, you'll need to run <code>sudo juju destroy-environment</code> prior to continuing. First let's rerun a bootstrap in debug mode:</p>
 
-<pre class="prettyprint">
+<pre class="prettyprint lang-bash">
 sudo juju boostrap --show-log --debug
 </pre>
 
@@ -116,7 +116,7 @@ dpkg -l | grep mongodb-server
 
 		<p>If you get a successful bootstrap, but services you deploy never come up, there's a chance that you have an older version of the Ubuntu Cloud Image cached on you machine. To verify this, check the timestamp of the contents in <code>/var/cache/lxc/cloud-precise/</code>
 
-<pre class="prettyprint">
+<pre class="prettyprint lang-bash">
 ls -lh /var/cache/lxc/cloud-precise/
 </pre>
 
@@ -124,7 +124,12 @@ ls -lh /var/cache/lxc/cloud-precise/
 		</section>
 
 </article>
-
+<!--Postamble-->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
 <!--End-Postamble-->
 <!--Footer-->
 	<footer class="global clearfix" role="contentinfo">
@@ -181,7 +186,6 @@ ls -lh /var/cache/lxc/cloud-precise/
 	</footer>
 
 <!--End-Footer-->
-
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -205,8 +209,6 @@ ls -lh /var/cache/lxc/cloud-precise/
    })();
     </script>
 <!--End-Scripts-->
-
-
 
 
 

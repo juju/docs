@@ -34,6 +34,9 @@
         "Test and deploy on Rails": "howto-rails.html",
         "Manage Juju with the GUI": "howto-gui-management.html"
       }
+    },
+    "Troubleshooting": {
+      "link": "troubleshooting-local.html"
     }
 
 
