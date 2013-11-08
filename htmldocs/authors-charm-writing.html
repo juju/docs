@@ -169,11 +169,11 @@ requires:
 <span class="number" > 4 </span>
           <div class="step" id="step04">
           <h2>Writing hooks</h2>
-          <p>As you will know from your thorough reading of the <a href="./authors-charm-contents.html">charm contents</a>, the hooks are the important scripts that actually do things. You can write hooks in whatever language you can reasonably expect to execute on an Ubuntu server.</p>
+          <p>As you will know from your thorough reading of the <a href="./authors-charm-components.html">charm components</a>, the hooks are the important scripts that actually do things. You can write hooks in whatever language you can reasonably expect to execute on an Ubuntu server.</p>
           <p>For our charm, the hooks we will need to create are:</p>
           <ul>
           <li>start - for when the service needs to be started.</li>
-          <li>stop - for stopping it again.</li></ul>
+          <li>stop - for stopping it again.</li>
           <li>install - for actually fetching and installing the Vanilla code.</li>
           <li>database-relation-changed - this will run when we connect (or re-connect, or disconnect) our service to the MySQL database. This hook will need to manage this connection.</li>
           <li>website-relation-joined - this will run when/if a service connects to our charm.</li>
@@ -287,7 +287,7 @@ open-port 80
 </pre>
 
 <p>You will notice that this script uses the backticked command <span class="pre">relation-get</span>. This is a Juju helper command that fetches the named values from the corresponding hook on the service we are connecting to.
-Usually there will be some indication of what these values are, but you can always inspect the corresponding hoks to find out. In this case we know that when connected, the MySQL charm will create a database and generate random values for things like a username and password.</p>
+Usually there will be some indication of what these values are, but you can always inspect the corresponding hooks to find out. In this case we know that when connected, the MySQL charm will create a database and generate random values for things like a username and password.</p>
 <p>These values will all be set at one time, so the next little bit of script just checks one value to see if it exists - if not the corresponding charm hasn't set the values yet.</p>
 <p>When it has the values we can use these to modify the config file for Vanilla in the relevant place, and finally open the port to make the service active.</p>
 <p>The final hook we need to write is for other services which may want to consume Vanilla, 'website-relation-joined'.</p>
@@ -307,7 +307,7 @@ relation-set hostname=`unit-get private-address` port=80
           <p>This starts a process to tail the Juju log file and show us just exactly what is happening. It won't do much to begin with, but you should see messages appearing when we start to deploy our charm.</p>
           <p>Following our own recipe, in another terminal we should now do the following (assuming you already have a bootstrapped environment):</p>
           <pre>juju deploy mysql
-juju deploy --repository=/home/evilnick/localcharms/ local:precise/vanilla
+juju deploy --repository=/home/$USER/charms/ local:precise/vanilla
 juju add-relation mysql vanilla
 juju expose vanilla
 </pre>
