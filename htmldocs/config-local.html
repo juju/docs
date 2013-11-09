@@ -70,28 +70,27 @@
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
           <article>
-            <section id="config_local">
-            <h1>Configuring for Local Provider</h1>
+            <section>
+            <h1 id="config-local">Configuring for Local Provider</h1>
 
-            <h2>Prerequisites</h2>
+            <h2 id="prereq">Prerequisites</h2>
             <p>The local provider enables you to run Juju on a single system like your local computer or a single server. This way you can simply evaluate the software or service configurations, develop your own charms or run a single server system.</p> 
 
             <p>If you're not already using the stable release PPA you can make sure you've added it:</p> 
 
 <pre class="prettyprint lang-bash">
 sudo apt-add-repository ppa:juju/stable
-sudo apt-get update
-			</pre>
+sudo apt-get update</pre>
 
 			<p>Then you can install the local provider, the commands depend on the Juju version you are using:</p>
 
-			<h3>For Ubuntu versions newer than 12.04:</h3>
+			<h3 id="gt-precise">For Ubuntu versions newer than 12.04:</h3>
 
 <pre class="prettyprint lang-bash">
 sudo apt-get install juju-local
 </pre>
 
-			<h3>For 12.04 LTS users only:</h3>
+			<h3 id="precise">For 12.04 LTS users only:</h3>
 
 			<p>Due to needing newer versions of LXC the local provider does require a newer kernel than the released version of 12.04. Therefore we install Linux 3.8 from the <a href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">LTS Hardware Enablement Stack</a>:</p> 
 
@@ -103,14 +102,14 @@ sudo apt-get install juju-local linux-image-generic-lts-raring linux-headers-gen
 
 			<p>If you're not running Ubuntu please consult your operating system distribution's documentation for instructions on installing the LXC userspace tools and the MongoDB server. Juju requires a MongoDB server built with SSL support.</p>
 
-            <h2>Configuration</h2>
+            <h2 id="configuration">Configuration</h2>
             <p>You should start by generating a generic configuration file for Juju and then switching to the local provider by using the command:
 <pre class="prettyprint lang-bash">
 juju generate-config
 juju switch local
 </pre>
-            <p>This will generate a file, <strong>environments.yaml</strong> (if it doesn't already exist), which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
-            <p class ="note"><strong>Note:</strong>If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
+            <p>This will generate a file, <code>environments.yaml</code> (if it doesn't already exist), which will live in your <code>~/.juju/</code> directory (and will create the directory if it doesn't already exist).
+            <p class ="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
             <p>The generic configuration sections generated for the local provider will look something like this, though Juju will generate this automatically you usually don't need to edit it:</p>
 <pre class="prettyprint lang-yaml">
 ## https://juju.ubuntu.com/get-started/local/
@@ -130,9 +129,9 @@ local:
 </pre>
             <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <code>$JUJU_HOME</code>, which defaults to <code>~/.juju/</code>. By uncommenting and setting <code>root-dir</code> this location can be changed as well as the ports of the storage and the shared storage. This may be useful in the case of multiple parallel running local providers or conflicts with other programs on your system. 
  
-            <p class="note"><strong>Note: </strong>If you are using encrypted home directories you have to set <code>$JUJU_HOME</code> or <code>root-dir</code> to point to a location <strong>outside</strong> your home directory.</p>
+            <p class="note" id="encrypted-home"><strong>Note: </strong>If you are using encrypted home directories you have to set <code>$JUJU_HOME</code> or <code>root-dir</code> to point to a location <strong>outside</strong> your home directory.</p>
 
-            <h2>Bootstrapping and Destroying</h2>
+            <h2 id="bootstrap-destroy">Bootstrapping and Destroying</h2>
             <p>The usage of LXC Linux Containers enforces that bootstrapping and destroying of an environment are done as <strong>root</strong>. All other operations can be executed as non-root. E.g.</p>
 <pre class="prettyprint lang-bash">
 sudo juju bootstrap
@@ -140,7 +139,14 @@ juju deploy mysql
 ...
 sudo juju destroy-environment
 </pre>
-            <p class ="note"><strong>Note:</strong>If you are running a firewall such as<strong>ufw</strong>, it may interfere with the correct operation of Juju using LXC containers and might need to be halted.</p>
+            <p class ="note"><strong>Note:</strong> If you are running a firewall such as <strong>ufw</strong>, it may interfere with the correct operation of Juju using LXC containers and might need to be halted.</p>
+            <h2 id="caveats">Caveats</h2>
+              <p>There are several special circumstances tied to the local provider, given it's development focused nature. These are outlined below.</p>
+              <h3 id="debug-log">juju debug-log</h3>
+              <p>There is currently a <a href="https://launchpad.net/bugs/1202682" target="_blank">bug</a> which prevents <code>juju debug-log</code> from working as expected. However, the logs for juju are still available for review outside of <code>juju debug-log</code>. First, find out what the name of your environment is by running <code>juju switch</code>. If you're using the default <code>environments.yaml</code> you'll find this be <code>local</code>. All log files for the local provider are stored in <code>~/.juju/&lt;environment&gt;/log</code>, as such you can duplicate the functionality of <code>juju debug-log</code> using the following (assuming your current environment is "local"):</p>
+              <pre class="prettyprint lang-bash">tail -f ~/.juju/local/log/unit-*.log</pre>
+              <h3 id="juju-ssh">juju ssh</h3>
+              <p>While <code>juju ssh</code> does work if you supply it a unit (eg: <code>mysql/0</code>) the command does not work with machine numbers at this time (<code>juju ssh 1</code>). To access a unit via ssh make sure to use it's corrosponding unit name not the machine number.</p>
              </section>
           </article>
 <!--Postamble-->
