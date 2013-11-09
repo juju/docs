@@ -26,6 +26,16 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+  var anchor_tpl = $('<a>').addClass('anchor');
+  $('h1, h2, h3, h4, h5').each(function() {
+    if($(this).attr('id')) {
+      var id = $(this).attr('id');
+      var link = anchor_tpl.clone();
+      link.attr('href', '#'+id);
+      console.log(link);
+      $(this).append(link);
+    }
+  });
   $('.doc-content section.code-example').each(function() {
     var parent = this;
     $(parent).find('nav.control a').each(function() {
