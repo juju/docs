@@ -147,6 +147,7 @@ pre code {
 .doc-navigation li.sub > a {
   padding-left: 30px;
   font-weight:normal;
+  color: #5E2750;
 }
 
 .doc-navigation li.selected {
@@ -279,7 +280,8 @@ div.note.distribute {
 
 .doc-content h3{
   font-size: 18px;
-  color: #dd4814;
+  color: #5E2750;
+  font-weight: 800;
 }
 /**
  * Walkthrough steps
@@ -494,7 +496,10 @@ hr {
   font-size: 18px;
 }
 
-
+#content h4 {
+  font-size: 14px;
+  font-weight: 800;
+}
 dl {
   display: block;
   list-style-type: disc;

@@ -142,42 +142,37 @@
                </ol>
                
                <h3 id="review_tips">Review Tips and Criteria</h3>
-               <dl class="docutils">
-               <dt>Expectations:</dt>
-               <dd><ul class="first simple">
-               <li>The goal is to <em>welcome</em> the contributor and help them have a good experience getting fixes into Ubuntu; your first response should be to <em>thank them profusely</em>. By making collaboration easier, we can hope to see more contributors and thus lighten the development workload on everyone. This is important for a number of reasons:</li>
-               </ul>
                
-               <ul>
-               <li>We want to be a welcoming community.</li>
-               <li>With every word of thanks you encourage new contributors and give them more confidence, which is very important, as our part of the community is sometimes hard to understand or look into.</li>
-               <li>We want to make our whole development experience social. We not only want contributors, but team mates.</li>
-               <li>Tips:</li>
-               </ul>
-               
+               <p>The goal is to <em>welcome</em> the contributor and help them have a good experience getting fixes into Ubuntu; 
+               your first response should be to <em>thank them profusely</em>. By making collaboration easier, we can hope to see
+                more contributors and thus lighten the development workload on everyone.
                <ul>
                <li>Start your review by saying &quot;Thanks&quot;, no matter what the outcome of the review is going to be.</li>
                <li>If you recognise somebody you've worked with on IRC, thank them.</li>
-               <li>Consider blogging about a particularly nice contribution. This will not only make the contributor feel valued, but also inspire others with a good example of great work.</li>
-               <li>Encourage contributors to apply for ~charmers if you think they're ready.</li>
-               </ul>
-               
-               
-               <ul class="last simple">
+               <li>Run juju charm proof first. If there are serious problems with the charm based on the output of proof feel 
+               free to just stop the review there and tell them. You shouldn't promulgate a charm that has anything that’s 
+               a “WARNING” or more severe.</li>
                <li>If the merge proposal or patch requires more work, encourage the contributor to join <cite>#juju</cite> and discuss the solution there.</li>
                <li>Follow <a class="reference external" href="http://wiki.bazaar.canonical.com/PatchPilot">these instructions</a> as well as you can.</li>
-               </ul>
-               </dd>
-               <dt>Good tips:</dt>
-               <dd><ul class="first last simple">
-               <li>If this is your first time patch piloting, you may feel more comfortable being a co-pilot your first few runs. Find a pilot in your timezone and reschedule your time to coincide with theirs.</li>
-               <li>''Optional:'' Send a brief mail after your stint, to say what you did and how it worked out. If you have feedback on the review system or the process, speak up.</li>
+               <li>If this is your first time patch piloting, you may feel more comfortable being a co-pilot your first few runs. Find a pilot in your 
+               timezone and reschedule your time to coincide with theirs.</li>
+               <li>Be super thorough, don’t be afraid to be firm with people. However, respect that charms are opinionated - 
+               just don’t be afraid to be opinionated yourself.</li>
+               <li>Please use the official <a class="reference external" href="policy.html"><em>Charm Store Policy</em></a> document.</li>
+               <li>Use your best judgement.</li>
+               <li>Send a brief mail after your stint, to say what you did and how it worked out. If you have feedback on the review 
+               system or the process, speak up.</li>
                <li>You're not obliged to deal with all the open patches. We appreciate what you do do.</li>
-               <li>You can prioritize whichever you think best achieves the goal of helping people enjoy getting things done in Juju. That might be the newest ones, neglected patches, easy patches, or those from new contributors. The <a class="reference external" href="http://manage.jujucharms.com/tools/review-queue">Review Queue</a> sorts by age.</li>
-               <li>If you are unfamiliar with the package, make sure you review everything you can, it's not necessarily your job to merge/promulgate it. If, after you did your review, you can get the contributor in touch with somebody who knows the codebase better, you already helped out a lot.</li>
+               <li>You can prioritize whichever you think best achieves the goal of helping people enjoy getting things done in Juju. 
+                That might be the newest ones, neglected patches, easy patches, or those from new contributors. 
+                The <a class="reference external" href="http://manage.jujucharms.com/tools/review-queue">Review Queue</a> sorts by age.</li>
+               <li>If you are unfamiliar with the package, make sure you review everything you can, it's not necessarily your job to 
+               merge/promulgate it. If, after you did your review, you can get the contributor in touch with somebody who knows the 
+               codebase better, you already helped out a lot.</li>
+               <li>Consider blogging about a particularly nice contribution. This will not only make the contributor feel valued, 
+               but also inspire others with a good example of great work.</li>
+               <li>Encourage contributors to apply for ~charmers if you think they're ready.</li>
                </ul>
-               </dd>
-               </dl>
                <p>Sponsorship is organized into</p>
                
                <ul>
@@ -192,10 +187,51 @@
                <li><a class="reference external" href="https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&amp;field.component=3&amp;field.component=4">https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&amp;field.component=3&amp;field.component=4</a></li>
                <li><a class="reference external" href="http://manage.jujucharms.com/review-queue">http://manage.jujucharms.com/review-queue</a></li>
                </ul>
+               <h3 id="update-store">Updating the store</h3>
+
+					<p>There are two methods of updating the store. One is promulgation of new charms, the other is 
+					updates to charms which already exist in the store:</p>
+					<h4 i="new-charms">New Charms</h4>
+               <p>So the charm has passed all criteria and is ready to land in the store. Before you can promulgate, 
+               you’ll need to run the following commands. (This is only needed if you don’t have charm-tools >= 1.1 
+               - This is being fixed in charm tools and will be landing soon).
+               <pre class="prettyprint lang-bash">
+bzr init lp:~charmers/charms/precise/<CHARM_NAME>/trunk
+bzr push lp:~charmers/charms/precise/<CHARM_NAME>/trunk
+               </pre>
+					<p>Without this, LP will automatically stack on top of the user’s branch which will make it really 
+					really hard to delete from the store in the future. Now you can promulgate:</p>
+<pre class="prettyprint lang-bash">
+juju charm promulgate </path/to/charm>
+</pre>
+
+					<h4 id="updating-charms">Updating existing charms in the store</h4>
+
+					<p>Make sure you thank them profusely for fixing something or adding something even if they’re a Canonical employee!</p>
+					<p>Grab the charm from the store either with charm-tools or just bzr branch it.</p>
+<pre class="prettyprint lang-bash">
+juju charm get <CHARM_NAME>
+</pre>
+					<p class="note"><strong>Note: </strong>Backwards compatibility is important! Any changes that would change the structure of the charm,
+					 data, configuration options, etc and doesn’t perform due diligence to make sure the charm does what it needs to, should be rejected.</p>
+					<p>Pay particular attention to interface providers that have extant clients/users.</p> 
+					<p>Eventually, magic should take over this process and it should be done via jenkins and QA. 
+					Until then deploy the charm from <code>local:</code>, change config values, make relations, do what the charm needs 
+					to get setup. bzr merge the change, check the changes and make sure there are no obvious glaring things 
+					that break backwards compatibility (or just break the charm). Then <code>juju upgrade</code> the charm. 
+					Make sure nothing breaks in the service.</p>
+					
+					<p>Other than that, just follow normal charm review process.</p>
+					
+					<p>When you’re ready just <code>bzr commit</code> the merge, then <code>bzr push :parent</code> to update the store.</p>
+					
+					<p>If you find anything that's lacking in the charm feel free to open bugs against that charm. 
+					This will help us curb the amount of charms to review during our audit.</p>
+               
+         
                
                
-               <h2 id="inclusion_policy">Charm Inclusion Policy for Reviewers</h2>
-               <p>Please see the official <a class="reference external" href="policy.html"><em>Charm Store Policy</em></a> document.</p>
+               
                
                <h2 id="join">Join Us!</h2>
                <p>We also need help reviewing and testing charms. The Charmers team is granted write access to the Charm Collection and charm-tools. If you'd like to join that group, here are some tips:</p>
