@@ -145,8 +145,8 @@ Be aware, though, that it is possible in principle for an interface to imply
 a more demanding interface, involving multiple rounds of setting and getting.</p>
 </section>
 
-<section id="documenting-interfaces">
-<h2>Documenting charm relation interfaces</h2>
+<section >
+<h2 id="documenting-interfaces">Documenting charm relation interfaces</h2>
 
 <p>In light of the above, there is a clear need for some means of documenting the
 above. The optional <code>gets</code> and <code>sets</code> fields in a charm's
@@ -251,6 +251,14 @@ by which service units share information internally. It's not unusual for peer
 service units to maintain convenient caches of distributed information in their
 own peer settings, and this inevitably involves generating settings keys at
 runtime.</p>
+
+<h2 id="interfaces-list">Interface reference implementations</h2>
+<p>Although we have described above that interfaces arrive by convention, there are several well-used 
+interfaces which have enough implementations to define a defacto standard.<p>
+<p>Below is a list of the interfaces for which we have compiled documentation and reference implementations.</p>
+<ul>
+  <li><a href="/interface-mysql.html"> mysql </a> - the database interface used by MySQL and client services.</li>
+</ul>
 </section>
 </article>
 <!--Postamble-->
