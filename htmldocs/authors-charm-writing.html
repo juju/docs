@@ -72,6 +72,8 @@
           <article>
 <h1>Your First charm starts here!</h1>
 <p>Okay, so you have read up all the background info on what a charm is, how it works, and what parts of the charm do what, now it is time to dust off your favourite code editor (no arguments please) and get charming!</p>
+<p>Although it is possible to create a charm without using anything other than a text editor, we are also going to make use of 
+the very excellent timesaving plugin for Juju, Charm Tools. <a href="/tools-charm-tools.html"> Find out how to get and install charm tools here</a>. Then hurry back.
 <p>For this example, we are imagining that we want to create a charm for <a href="http://vanillaforums.org/" >the Vanilla forum software</a></p>
 
 <span class="number"> 1 </span>
@@ -79,14 +81,28 @@
           <h2>Prepare yourself</h2>
           <p>As we are writing a charm, it makes sense to create it in a local charm repository (see how to deploy from a local repository <a href="./charms-deploying.html" target="#local">here</a>) to make it easy to test in your Juju environment.</p>
           <p>Go to your home directory (or wherever is appropriate and make the appropriate file structure:</p>
-          <pre>cd ~<br>mkdir -p charms/precise/vanilla </pre>
+          <pre class="prettyprint lang-bash">
+cd ~
+mkdir -p charms/precise/vanilla 
+cd charms/precise
+</pre>
+
           
           </div>
 
 <span class="number" > 2 </span>
           <div class="step" id="step02">
+          <h2>Create a barebones charm with Charm Tools</h2>
+          <p>Using the charm tools plugin, we can create the directory structure we need for our charm quickly and easily:</p>
+          <pre class="prettyprint lang-bash">juju charm create vanilla</pre>
+          <p>This not only creates the directory structure, it also prepopulates it with template files for you to edit. Your directory will now look like this</p>
+<img src="./media/author-charm-writing-01.png" width='600' alt="directory tree"> 
+
+          </div>
+<span class="number" > 3 </span>
+          <div class="step" id="step03">
           <h2>Create the README file</h2>
-          <p>Fire up your text editor and create a readme file.</p>
+          <p>Fire up your text editor and load/edit the readme file.</p>
           <p>This step is especially important if you intend making your charm public, but it is very useful even if your charm will only ever be seen by you. The README is a good place to make nots about how the charm works, what information it expects to communicate and how.</p>
           <p>Although a plain text file is fine, you can also write your README file using Markdown (in which case use the .md suffix). The advantage of this, other than it looks quite neat, is that the Charm Store will render Mardown properly online, so your README will look and read better.</p>
           <p>Here is a quick example README file for our Vanilla charm:</p>
@@ -113,8 +129,8 @@ And finally expose the Vanilla service:
           <p>Obviously, you can include any useful info you wish.</p>
           </div>
           
-<span class="number" > 3 </span>
-          <div class="step" id="step03">
+<span class="number" > 4 </span>
+          <div class="step" id="step04">
           <h2>Make some metadata.yaml</h2>
           <p>The <strong>metadata.yaml</strong> file is really important. This is the file that Juju reads to find out what a charm is, what it does and what it needs to do it.</p>
           <p>The YAML syntax is at once simple, but exact, so if you have any future problems with Juju not recognising your charm, this is the first port of call! The information is stored in simple <span class="pre">&LT;key&GT; : &LT;value&GT;</span> associations. The first four are pretty self explanatory:</p>
@@ -166,8 +182,8 @@ requires:
           
 
           </div>         
-<span class="number" > 4 </span>
-          <div class="step" id="step04">
+<span class="number" > 5 </span>
+          <div class="step" id="step05">
           <h2>Writing hooks</h2>
           <p>As you will know from your thorough reading of the <a href="./authors-charm-components.html">charm components</a>, the hooks are the important scripts that actually do things. You can write hooks in whatever language you can reasonably expect to execute on an Ubuntu server.</p>
           <p>For our charm, the hooks we will need to create are:</p>
@@ -299,8 +315,29 @@ relation-set hostname=`unit-get private-address` port=80
 <p>So, any connecting charm will be able to ask for the values 'hostname' and 'port'. Remember, once you have finished writing your hooks make sure you 'chmod +x' them.</p>
 <p>For our simplistic charm, that is all the hooks we need for the moment, so now we can test it out!</p>
 </div>
-<span class="number"> 5 </span>
-          <div class="step" id="step05">
+
+<span class="number"> 6 </span>
+          <div class="step" id="step06">
+          <h2>Run the charm proof tool</h2>
+          <p>Another part of the Charm Tools plugin is a useful lint-like tool which will check for 
+          errors in the files of your charm. Run it like this:</p>
+<pre class="prettyprint lang-bash">juju charm proof [CHARM_DIRECTORY]
+</pre>
+<p> The output classifies messages as:</p>
+<ul><li>I - for information</li>
+<li>W - A warning; something which should be looked at but won't necessarily stop the charm working.</li>
+<li>E - An error; these are blocker which must be fixed for the charm to be used.</li>
+<p>some example output might be:</p>
+<pre class="prettyprint lang-bash">
+E: no copyright file
+E: README.ex Includes boilerplate README.ex line 1
+I: relation peer-relation has no hooks
+</pre>
+<p>Which tells you that you forgot to add a <code>copyright</code> file, you have left some default text in the README, and one of your relations has no hooks. All useful stuff.</p>
+
+</div>
+<span class="number"> 7 </span>
+          <div class="step" id="step07">
           <h2>Testing</h2>
           <p>Before we congratulate ourselves too much, we should check that the charm actually works. To help with this, we should open a new terminal window and run the following command:</p>
           <pre>juju debug-log</pre>
@@ -320,8 +357,8 @@ juju expose vanilla
           
           </div>
 
-<span class="number"> 6 </span>
-          <div class="step" id="step06">
+<span class="number"> 8 </span>
+          <div class="step" id="step08">
           <h2>Tidying up</h2>
           <p>With the charm working properly, you may consider everything a job well done. If your charm is really great and you want to share it, particularly on the charm store, then there are a couple of things you ought to add.</p>
           <ol>
