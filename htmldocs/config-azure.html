@@ -129,6 +129,7 @@ chmod 600 azure.pem
              </ul>
             </ul>
             </p>
+            <p class="note"><strong>Note:</strong> You must create the storage account in the same region/location specified by the <code>location</code> key value. For example, if <code>location: West US</code> is set then <code>storage-account-name:</code> must also have a storage set up in <code>West US</code>. Failure to do so will result in a group affinity error.</p>
             <p>Ensure the environments.yaml is configured with the above values and save.</p>
              </section>
           </article>
