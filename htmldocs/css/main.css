@@ -535,7 +535,7 @@ li img {
   top: 1px;
   width: 16px;
   height: 15px;
-  background: url('/media/glyphicons_243_anchor.png') 50% 50% no-repeat;
+  background: url('../media/glyphicons_243_anchor.png') 50% 50% no-repeat;
   background-size: 12px 11px;
 }
 
