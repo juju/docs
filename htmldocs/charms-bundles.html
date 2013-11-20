@@ -1,13 +1,86 @@
+<!DOCTYPE html> 
+<html>
+<!--Head-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Juju Documentation</title>
+		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+ 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+<!--End-Head-->
+
+
+
+
+
+
+  <body class="resources">
+  	
+<!--Header-->
+
+	<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+					<label class="off-left" for="s">Search:</label>
+					<input class="form-text" type="text" value="" name="s" id="s" />
+					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+				</form>		
+			</div>
+		</nav>	
+	</header>
+<!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+<!--End-Preamble-->
+          <article>
+            <section id ="bundles">
 <h1 id="top">Creating and using Bundles</h1>
 
-<p>A bundle is a set of services with a specific configuration and their corresponding relations that can be deployed together via a single step.  The use of bundles allows for easy repeatability and for sharing of complex, multi-service deployments.</p>
+<p>A bundle is a set of services with a specific configuration and their corresponding relations that can be deployed together via a single step. Instead of deploying a single service, they can be used to deploy an entire workload, with working relations and configuration. The use of bundles allows for easy repeatability and for sharing of complex, multi-service deployments.</p>
 
-<p>Bundles are defined in text files, called “bundle files” or “deployer files”.  Each file may contain one or more bundle definitions.  For simplicity, the bundle files generated as described below will only have one bundle.</p>
+<p>Bundles are defined in text files, called “bundle files” or “deployer files”.  Each file may contain one or more bundle definitions.  For simplicity, the files generated as described below will only have one bundle.</p>
+
 <h2 id="creating">Creating a bundle</h2>
 <p>The standard way to create a bundle is via the Juju GUI.  When a set of services are deployed and configured the bundle definition can be saved via the export functionality which is invoked either by clicking on the export icon on the Juju GUI masthead or via the keyboard shortcut “shift-d”.  The result of exporting is a file called “export.yaml” that is saved in your “Downloads” directory as defined by your browser.</p>
 <p>As an example here is an environment with a MySQL service and a Wordpress service with a relation between the two.  The exported bundle file contains the following data:</p>
-<pre class="prettyprint lang-yaml">
-envExport: 
+<pre class="prettyprint lang-yaml">envExport: 
   services: 
     mysql: 
       charm: "cs:precise/mysql-27"
@@ -27,58 +100,145 @@ envExport:
 </pre>
 
 <h2 id="using">Using bundles</h2>
-A bundle file can be used in two distinct ways.  One is to use it locally deploying from your computer, which is useful to initially ensure it works and for tweaking.  After satisfied with the bundle, you can push it to Launchpad where it will be available to you and others via the Charm Store.
-Local import to Juju GUI
+<p>A bundle file can be used in two distinct ways.  One is to use it locally, deploying from your computer, which is useful to initially ensure it works and for experimenting.  After you are satisfied with the bundle, you can push it to Launchpad where it will be available to you and others via the Charm Store.
+<h3>Local import to Juju GUI</h3>
 
-The easiest way to import a bundle into the GUI is by dragging the bundle file from your desktop and dropping it on the GUI canvas.  If the file has multiple bundles in it you’ll be prompted to select the single bundle you wish to deploy.
+<p>The easiest way to import a bundle into the GUI is by dragging the bundle file from your desktop and dropping it on the GUI canvas.  If the file has multiple bundles in it you’ll be prompted to select the single bundle you wish to deploy.</p>
 
-A second way to import into the GUI is via the Import button on the GUI masthead. After clicking the button you’ll be prompted to select the bundle file.  Once a file is selected the process is the same as the drag-and-drop method.
-Local deploy via command-line
+<p>A second way to import into the GUI is via the <code>Import</code> button on the GUI masthead. After clicking the button you’ll be prompted to select the bundle file.  Once a file is selected the process is the same as the drag-and-drop method.</p>
+<h3>Local deploy via command-line</h3>
 
-A bundle file can be deployed via the command-line interface by using the juju-deployer tool.
-
-Installation
-To install into a virtual environment, do the following:
- $ virtualenv --system-site-packages deployer
- $ ./deployer/bin/easy_install juju-deployer
- $ ./deployer/bin/juju-deployer -h
-
-To deploy a bundle file do the following:
-
-$ ./deployer/bin/juju-deployer -e JUJU_ENV -c deployer_file bundle_name
-
-<p>where JUJU_ENV is a already booted Juju environment.</p>
+<p>A bundle file can be deployed via the command-line interface by using the <code>juju-deployer</code> tool.</p>
+<p>To install into a virtual environment, do the following:</p>
+<pre class="prettyprint lang-yaml">
+virtualenv --system-site-packages deployer
+./deployer/bin/easy_install juju-deployer
+./deployer/bin/juju-deployer -h
+</pre>
+<p>To deploy a bundle file you need just issue the command:</p>
+<pre class="prettyprint lang-yaml">./deployer/bin/juju-deployer -e &LT;environment&GT; -c deployer_file bundle_name</pre>
+<p>where <code>&LT;environment&GT;</code> is an already bootstrapped Juju environment.</p>
 
 <h2 id="sharing">Sharing your bundle with the community</h2>
 <p>Bundles are shared by putting a branch onto Launchpad with specific naming which will then be pulled into the Charm Store.  The branch must be constructed and named according to the following rules.</p>
 
 <p>The branch name must structured as:</p>
-<pre class="prettyprint lang-bash"> 
-lp:~<your launchpad id>/charms/bundles/<your bundle name>/bundle
+<pre class="prettyprint lang-bash">lp:~&LT;your launchpad id&GT;/charms/bundles/<&LT;your bundle name&GT;/bundle
 </pre>
 
-<p>A concrete example is:</p>
+<p>A concrete example would be:</p>
 <pre class="prettyprint lang-bash">
 lp:~bac/charms/bundles/wiki/bundle
 </pre>
 
-Inside the Bazaar branch, the following files are expected:
+<p>Inside the Bazaar branch, the following files are expected:</p>
 <ul>
 
 <li>bundles.yaml - the exported bundle file.</li>
 <li>README - user-readable description of the bundle.</li>
 </ul>
 
-Deploying a Bundle from the Charm Store with the GUI
+<h2 id="store-deploy">Deploying a Bundle from the Charm Store with the GUI</h2>
 
-To deploy a bundle from the Charm Store using the GUI, first find the bundle you wish to deploy via search or browsing the bundles to the left.  To view bundle details, click on the bundle in the left sidebar; a pane will slide out containing the bundle details.  You can then add the bundle to the canvas by clicking the button on the upper-right of the pane.
+<image class="noshadow right" src="./media/charms-bundle.png" width=400>
+<p>To deploy a bundle from the Charm Store using the GUI, first find the bundle you wish to deploy via search or browsing the bundles to the left.  To view bundle details, click on the bundle in the left sidebar; a pane will slide out containing the bundle details.  You can then add the bundle to the canvas by clicking the button on the upper-right of the pane.</p>
 
-Alternatively, you can add the bundle to the canvas without expanding the detail pane by dragging the bundle onto the environment.
+<p>Alternatively, you can add the bundle to the canvas without expanding the detail pane by dragging the bundle onto the environment.</p>
 
-After the service is on the canvas it is in a ghost state.  Now you can configure the service in the service inspector to the right of the screen and then click the "Deploy" button.
+<p>After the service is on the canvas it is in a ghost state.  Now you can configure the service in the service inspector to the right of the screen and then click the "Deploy" button.</p>
 
-Reference
+</section>
 
-Original working specification (not for public release)
+          </article>
+<!--Postamble-->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<!--End-Postamble-->
+<!--Footer-->
+	<footer class="global clearfix" role="contentinfo">
+		<nav role="navigation">
+			<div class="footer-a">
+				<div class="clearfix">
+					<ul>
+						<li>
+							<h2><a href="/">Juju</a></h2>
+							<ul>
+								<li><a href="/charms">Charms</a></li>
+								<li><a href="/features">Features</a></li>
+								<li><a href="/deployment">Deployment</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/resources">Resources</a></h2>
+							<ul>
+								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/docs/">Documentation</a></li>
+								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+								<li><a href="/resources/videos/">Videos</a></li>
+								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/community">Community</a></h2>
+							<ul>
+								<li><a href="/community/blog/">Juju Blog</a></li>
+								<li><a href="/events/">Events</a></li>
+								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+								<li><a href="/community/charmers/">Charmers</a></li>
+								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+							<ul>
+								<li><a href="https://jujucharms.com/">Charm store</a></li>
+								<li><a href="/download/">Download Juju</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="legal clearfix">
+			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+		</div>
+	</footer>
+
+<!--End-Footer-->
+
+<!--Scripts-->
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/jquery.details.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+    <!-- google analytics -->
+    <script>
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-1018242-41']);
+   _gaq.push(['_trackPageview']);
+  
+   (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+    </script>
+<!--End-Scripts-->
 
 
+
+
+
+</body></html>
