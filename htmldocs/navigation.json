@@ -25,7 +25,7 @@
         "Groups of Services": "charms-service-groups.html",
         "Destroying Services": "charms-destroy.html",
         "Managing environments": "charms-environments.html",
-        "Creating and using bundles": "charms-bundles.html"
+        "Using bundles": "charms-bundles.html"
       }
     },
     "How to...": {
