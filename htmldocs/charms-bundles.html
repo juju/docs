@@ -90,9 +90,9 @@
 
 <h3>Local deploy via command-line</h3>
 
-<p>A bundle file can be deployed via the command-line interface by using the <code>juju quickstart</code> tool.</p>
-<p>To install into a virtual environment, do the following:</p>
+<p>A bundle file can be deployed via the command-line interface by using the <code>juju quickstart</code> tool. You should always check the bundle to make sure it is correct, then deploy it:</p>
 <pre class="prettyprint lang-yaml">
+juju bundle proof bundles.yaml    # optional
 juju quickstart bundles.yaml
 </pre>
 
@@ -141,9 +141,10 @@ lp:~bac/charms/bundles/wiki/bundle
 └── README.md
 </pre>
 
-<p>After you have created the bundles.yaml and readme, you can push them to your namespace, the Juju Charm store will automatically find your bundle and index it in the store. Ensure you are using your launchpad name and a unique bundle name:</p>
+<p>After you have created the bundles.yaml and readme, you need to proof the bundle to make sure it is valid. You can push them to your namespace, the Juju Charm store will automatically find your bundle and index it in the store. Ensure you are using your launchpad name and a unique bundle name:</p>
 
 <pre class="prettyprint lang-bash">
+juju bundle proof bundles.yaml
 bzr push lp:~yourusername/charms/bundle/yourbundlename/bundle
 </pre>
 
