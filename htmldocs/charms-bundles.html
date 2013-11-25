@@ -77,8 +77,30 @@
 
 <p>Bundles are defined in text files, called “bundle files” or “deployer files”.  Each file may contain one or more bundle definitions.  For simplicity, the files generated as described below will only have one bundle.</p>
 
+<h2 id="using">Using bundles</h2>
+<p>A bundle file can be used in two distinct ways.  One is to use it locally, deploying from your computer, which is useful to initially ensure it works and for experimenting.  After you are satisfied with the bundle, you can push it to Launchpad where it will be available to you and others via the Charm Store.
+
+<h3>Local import to Juju GUI</h3>
+
+<p>The easiest way to import a bundle into the GUI is by dragging the bundle file from your desktop and dropping it on the GUI canvas.  If the file has multiple bundles in it you’ll be prompted to select the single bundle you wish to deploy.</p>
+
+<iframe class="youtube-player" type="text/html" width="640" height="360" src="//www.youtube.com/embed/oSPB_qjeEsg" frameborder="0"></iframe>
+
+<p>A second way to import into the GUI is via the <code>Import</code> button on the GUI masthead. After clicking the button you’ll be prompted to select the bundle file.  Once a file is selected the process is the same as the drag-and-drop method.</p>
+
+<h3>Local deploy via command-line</h3>
+
+<p>A bundle file can be deployed via the command-line interface by using the <code>juju quickstart</code> tool.</p>
+<p>To install into a virtual environment, do the following:</p>
+<pre class="prettyprint lang-yaml">
+juju quickstart bundles.yaml
+</pre>
+
 <h2 id="creating">Creating a bundle</h2>
 <p>The standard way to create a bundle is via the Juju GUI.  When a set of services are deployed and configured the bundle definition can be saved via the export functionality which is invoked either by clicking on the export icon on the Juju GUI masthead or via the keyboard shortcut “shift-d”.  The result of exporting is a file called “export.yaml” that is saved in your “Downloads” directory as defined by your browser.</p>
+
+<img src="media/charm_bundles_export-bundle.png" alt="Export button in the Juju GU">
+
 <p>As an example here is an environment with a MySQL service and a Wordpress service with a relation between the two.  The exported bundle file contains the following data:</p>
 <pre class="prettyprint lang-yaml">envExport: 
   services: 
@@ -99,26 +121,6 @@
       - "mysql:db"
 </pre>
 
-<h2 id="using">Using bundles</h2>
-<p>A bundle file can be used in two distinct ways.  One is to use it locally, deploying from your computer, which is useful to initially ensure it works and for experimenting.  After you are satisfied with the bundle, you can push it to Launchpad where it will be available to you and others via the Charm Store.
-<h3>Local import to Juju GUI</h3>
-
-<p>The easiest way to import a bundle into the GUI is by dragging the bundle file from your desktop and dropping it on the GUI canvas.  If the file has multiple bundles in it you’ll be prompted to select the single bundle you wish to deploy.</p>
-
-<p>A second way to import into the GUI is via the <code>Import</code> button on the GUI masthead. After clicking the button you’ll be prompted to select the bundle file.  Once a file is selected the process is the same as the drag-and-drop method.</p>
-<h3>Local deploy via command-line</h3>
-
-<p>A bundle file can be deployed via the command-line interface by using the <code>juju-deployer</code> tool.</p>
-<p>To install into a virtual environment, do the following:</p>
-<pre class="prettyprint lang-yaml">
-virtualenv --system-site-packages deployer
-./deployer/bin/easy_install juju-deployer
-./deployer/bin/juju-deployer -h
-</pre>
-<p>To deploy a bundle file you need just issue the command:</p>
-<pre class="prettyprint lang-yaml">./deployer/bin/juju-deployer -e &LT;environment&GT; -c deployer_file bundle_name</pre>
-<p>where <code>&LT;environment&GT;</code> is an already bootstrapped Juju environment.</p>
-
 <h2 id="sharing">Sharing your bundle with the community</h2>
 <p>Bundles are shared by putting a branch onto Launchpad with specific naming which will then be pulled into the Charm Store.  The branch must be constructed and named according to the following rules.</p>
 
@@ -132,11 +134,18 @@ lp:~bac/charms/bundles/wiki/bundle
 </pre>
 
 <p>Inside the Bazaar branch, the following files are expected:</p>
-<ul>
 
-<li>bundles.yaml - the exported bundle file.</li>
-<li>README - user-readable description of the bundle.</li>
-</ul>
+<pre class="prettyprint lang-bash">
+.
+├── bundles.yaml
+└── README.md
+</pre>
+
+<p>After you have created the bundles.yaml and readme, you can push them to your namespace, the Juju Charm store will automatically find your bundle and index it in the store. Ensure you are using your launchpad name and a unique bundle name:</p>
+
+<pre class="prettyprint lang-bash">
+bzr push lp:~yourusername/charms/bundle/yourbundlename/bundle
+</pre>
 
 <h2 id="store-deploy">Deploying a Bundle from the Charm Store with the GUI</h2>
 
