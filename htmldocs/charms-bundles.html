@@ -143,6 +143,8 @@ lp:~bac/charms/bundles/wiki/bundle
 
 <p>After you have created the bundles.yaml and readme, you need to proof the bundle to make sure it is valid. You can push them to your namespace, the Juju Charm store will automatically find your bundle and index it in the store. Ensure you are using your launchpad name and a unique bundle name:</p>
 
+<p class="note"><strong>Tip:</strong>You should review the configuration options for the charms you are planning to use in a bundle, some of them generate passwords for services or might need configuration as a separate step. This may or may not be desireable for users, so if there are any extra steps required document them in your README.md file.</strong></p>
+
 <pre class="prettyprint lang-bash">
 juju bundle proof bundles.yaml
 bzr push lp:~yourusername/charms/bundle/yourbundlename/bundle
