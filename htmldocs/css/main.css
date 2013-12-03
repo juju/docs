@@ -222,7 +222,7 @@ div.note.distribute {
 }
 
 .note p, .caution p, .warning p {
-  margin:0 0 5px;
+  margin:0px 16px 5px;
 }
 
 .note p:last-child, .caution p:last-child, .warning p:last-child {
@@ -388,7 +388,8 @@ div.note.distribute {
   font-weight: 700;
   border-radius: 4px 4px 0 0;
   margin-right: 4px;
-  padding: 2px 8px 4px;
+  margin-top: 0px;
+  padding: 4px 16px 4px;
   color: white;
   text-shadow: 0 0 2px rgba(51,51,51,0.7),0 1px 0 rgba(17,17,17,0.6);
   background: transparent;
@@ -409,10 +410,11 @@ div.note.distribute {
   text-shadow: none;
   box-shadow: none;
   border-color: rgba(156,165,181,0.35);
+
 }
 
 .doc-content .code-example nav+.terminal-wrap::before {
-  top: 36px;
+  top: 48px;
 }
 
 .doc-content .code-example .terminal-wrap {
@@ -437,6 +439,7 @@ div.note.distribute {
 
 .doc-content .code-example nav+.terminal-wrap {
   border-top-left-radius: 0;
+  margin-bottom: 18px;
 }
 
 .doc-content #details article p, .doc-content #details article ul, .doc-content #details article ol {
