@@ -71,143 +71,75 @@
 <!--End-Preamble-->
           <article>
             <section id ="authors-charm-quality">
-            <h1>Charm Quality Rating</h1>
-            <p>People demand quality out of their tools, and the Charm Store is no different. So what does a good charm look like? These are some guidelines on what we think an ideal charm provides users. So we rate charms by the following criteria, and give them a score, up to 39.</p>
-            <p class="note"><strong>Note: </strong>This is an ideal list of what we'd like charms to be. No charm today comes close to getting all of these points; it's a target we set for ourselves so we can determine how we can improve individual charms. It also gives contributors a general idea of where they can spend their time to fix something.</p>
+            <h1>Charm Features</h1>
+            <p>People demand quality out of their tools, and the Charm Store is no different. So what does a good charm look like? These are some guidelines on what we think an ideal charm provides users. So we rate charms by the following criteria. These features are shown to users in the charm store so that they can see what features a charm provides at a glance.</p>
+            <p class="note"><strong>Note: </strong>This is an ideal list of what we'd like charms to be. Most charms today do not offer every feature; it's a target we set for ourselves so we can determine how we can improve individual charms. It also gives contributors a general idea of where they can spend their time to fix something.</p>
             
-            <h2>Reliable</h2>
-            <p><strong>9</strong> Possible points</p>
-            
-            <ul class="simple">
-            <li>Deploy on every provider and pass provider tests<ul>
-            <li>+1 AWS</li>
-            <li>+1 HP Cloud</li>
-            <li>+1 OpenStack</li>
-            <li>+1 LXC</li>
-            <li>+1 MAAS</li>
-            <li>+1 Check for integrity from upstream source</li>
-            <li>+1 Fail gracefully if upstream source goes missing</li>
-            <li>+1 Contain a suite of tests with the charm that pass</li>
-            <li>+1 Passes tests from Jenkins on jujucharms.com</li>
-            </ul>
-            </li>
-            </ul>
-            
-            
-            <h2>Secure</h2>
-            <p><strong>4</strong> possible points</p>
-            
-            <ul class="simple">
-            <li>+1 Contain a well tested AppArmor profile</li>
-            <li>+1 Conform to security policies of the charm store<ul>
-            <li>Tight access control</li>
-            </ul>
-            </li>
-            <li>+1 Doesn't run as root</li>
-            <li>+1 Per instance or service access control</li>
-            </ul>
-            
-            <h2>Flexible</h2>
-            <p><strong>2</strong> possible points</p>
-            
-            <ul class="simple">
-            <li>+1 Contain opinionated tuning options<ul>
-            <li>Examples (depends on the service): &quot;safe&quot;, &quot;default&quot;, &quot;fast&quot;, &quot;real fast, not so safe&quot;</li>
-            <li>Don't expose every configuration, pick that reflect real world usage</li>
-            <li>Make it so I don't have to read the book.</li>
-            </ul>
-            </li>
-            <li>+1 Use existing interfaces with other charms<ul>
-            <li>Highly relatable.</li>
-            </ul>
-            </li>
-            </ul>
-            
-            <h2>Handle Data</h2>
-            <p><strong>3</strong> possible points</p>
-            
-            <ul>
-            <li>Integrate data storage best practices<ul>
-            <li>+1 Backups based on service usage</li>
-            </ul>
-            </li>
-            <li>Handle the service's user data<ul>
-            <li>+1 Version control</li>
-            <li>+1 Automated snapshots and backup</li>
-            </ul>
-            </li>
-            </ul>
-            
-            <h2>Scaleable</h2>
-            <p><strong>5</strong> possible points</p>
-            
-            <ul>
-            <li>+1 Responds to add-unit based on the service's needs<ul>
-            <li>Configuration should not require additional steps to scale horizontally</li>
-            </ul>
-            </li>
-            <li>+1 Be tested with a real workload, not just a synthetic benchmark</li>
-            <li>Encapsulate scalability best practices<ul>
-            <li>+1 From upstream and existing devops for that service</li>
-            <li>+1 Community peer reviewed</li>
-            <li>+1 Have a configure option for most performant configuration if not the default</li>
-            </ul>
-            </li>
-            </ul>
-            
-            <h2>Easy to Deploy</h2>
-            <p><strong>7</strong> possible points</p>
-            
-            <ul>
-            <li>Well documented README with examples of use<ul>
-            <li>+1 for a typical workload</li>
-            <li>+1 for workloads at scale</li>
-            <li>+1 Recommend best-practice relationships</li>
-            </ul>
-            </li>
-            <li>Allow installation of the service from ...<ul>
-            <li>+1 Pure upstream source</li>
-            <li>+1 Your local source</li>
-            <li>+1 PPA (if available)</li>
-            <li>+1 The Ubuntu repository</li>
-            </ul>
-            </li>
-            </ul>
-            
-            <h2>Responsive to DevOps Needs</h2>
-            <p><strong>4</strong> possible points</p>
-            
-            
-            <ul>
-            <li>+1 Allow for easy upgrade via juju upgrade-charm</li>
-            <li>+1 Allow upgrading the service itself.</li>
-            <li>Proper maintainership<ul>
-            <li>+1 Responsive to user bug reports and concerns</li>
-            <li>+1 Maintainable, easy to read and modify</li>
-            </ul>
-            </li>
-            </ul>
-            
-            
-            <h2>Upstream Friendly</h2>
-            <p><strong>4</strong> possible points</p>
-            
-            
-            <ul>
-            <li>Follow upstream best practices<ul>
-            <li>+1 Provide an option for a barebones &quot;pure upstream&quot; configuration</li>
-            </ul>
-            </li>
-            <li>Should go lock-step with deployment recommendations<ul>
-            <li>+1 Provide tip-of-trunk testing if feasible</li>
-            </ul>
-            </li>
-            <li>Be cognizant of their release schedule<ul>
-            <li>+1 Fresh charm on release day!</li>
-            <li>+1 Endeavour to be upstream's recommended way to deploy that service in the cloud (website mention or something)</li>
-            </ul>
-            </li>
-            </ul>
+<h2>Data Handling</h2>
+
+<ul>
+<li>Handles the service's user data - Gracefully handle the service's user data so that the user doesn't have to manage it seperately.</li>
+<li>Provides backup mechanism - Provide a backup mechanism to the service's user data, such as a relationship to a backup subordinate charm, snapshots to a bucket, or other means of getting the data off of the instance.</li>
+<li>Provides a restore mechanism - Provide a restore mechanism to the service's user data, such as a relationship to a backup subordinate charm, restoring from a bucket, or other means of getting data onto the instance.</li>
+<li>Provides encryption - Provides encryption of service user data.</li>
+</ul>
+
+<h2>Secure</h2>
+
+<ul>
+<li>Contains a well tested <a href="https://help.ubuntu.com/12.04/serverguide/apparmor.html">AppArmor profile</a> - These can be provided by the package itself.</li>
+<li>Doesn't run as root - the service should not run as root. Refer to the <a href="http://upstart.ubuntu.com/cookbook/#run-a-job-as-a-different-user">Upstart documentation</a> for tips on how to do this.</li>
+<li>Per instance or service access control - Accept relationships only from trusted instances and/or services.</li>
+<li>Defaults to secure communication - default to secure channels when communicating with other services and/or multiple units of the same service.</li>
+</ul>
+
+<h2>Reliable</h2>
+
+<ul>
+<li>Fails gracefully if upstream source goes missing - Sometimes URLs change or upstream services are not available.</li>
+<li>Contains a suite of integration tests with the charm that pass - We provide <a href="howto-amulet.html">Amulet</a> to help you do this.</li>
+<li>Configuration options have safe defaults</li>
+</ul>
+
+<h2>Scaleable</h2>
+
+<ul>
+<li>Responds to add-unit based on the service's needs - Users should be able to <tt>juju add-unit</tt> to your service and have it scale horizontally.</li>
+<li>Responds to remove-unit based on the service's needs - Users should be able to <tt>juju remove-unit</tt> to your service and have it scale down.</li>
+<li>Reuses existing charms for supporting services - If the service needs relationships to other services it should reuse existing charms from the charm store instead of bundling its own.</li>
+</ul>
+
+<h2>Upstream Friendly</h2>
+
+<ul>
+<li>Follow deployment recommendations from upstream best practices - Most services have a known-good recommendation from the project itself, these should be available for users</li>
+<li>Provide up to date versions of the upstream release - Provide a config option to allow the user to run newer versions of the service.</li>
+</ul>
+
+<h2>Flexible</h2>
+
+<ul>
+<li>Exposes version of service as a config option to allow easy upgrades - this allows users to maintain their deployments without having to redeploy.</li>
+<li>Adheres to the coding guidelines of the language your charm is written in</li>
+<li>Exposed configurations are subsets of opinionated deployments - Don't expose every service option as config. Make sets of decisions and expose those as one config option. For example "fast" vs. "default" vs. "slow-and-safer".</li>
+<li>Allow installation from the Ubuntu repository - this should be the default if the service is in Ubuntu.</li>
+<li>Allow installation from pure upstream source - Sometimes people prefer to deploy from pure upstream</li>
+<li>Allow installation from your local source - Sometimes people prefer to deploy from their vetted local source.</li>
+<li>Allow installation from PPA or other repository -  if available. Some upstreams run their own repositories that they gate and support, users should have an option of using these.</li>
+</ul>
+
+<h2>Easy to Deploy</h2>
+
+<p>These will move to policy soon, so consider this a temporary category.</p>
+
+<ul>
+<li>README with examples of use for a typical workload</li>
+<li>README with examples of use for workloads at scale</li>
+<li>README with examples of use recommend best-practice relationships</li>
+</ul>           
+
+
+
             
             </section>
           </article>
