@@ -72,15 +72,17 @@
           <article>
             <section id ="upgrading">
             <h1>The Juju Charm Store</h1>
-               <p>Juju includes a collection of what we call <code>Charms</code> that let you deploy whatever services you want in Juju. Since charms are open and worked on by the community, they represent a distilled set of best practices for deploying these services.</p>
+               <p>Juju includes a collection of what we call <code>Charms</code> that let you deploy whatever services you want in Juju. A collection of charms that are designed to work together is called a <code>Bundle</code>. Since charms and bundles are open and worked on by the community, they represent a distilled set of best practices for deploying these services. Both charms and bundles are included in what we collectively call The Charm Store.</p>
                <ul class="simple">
-               <li>The main distro page is here: <a class="reference external" href="https://launchpad.net/charms">https://launchpad.net/charms</a></li>
+               <li>The main project page is here: <a class="reference external" href="https://launchpad.net/charms">https://launchpad.net/charms</a></li>
                <li>There are useful tools for downloading, modifying, and contributing here: <a class="reference external" href="https://launchpad.net/charm-tools">https://launchpad.net/charm-tools</a></li>
-               <li>Here is the official tutorial for charm writing: <a class="reference external" href="https://juju.ubuntu.com/docs/write-charm.html">https://juju.ubuntu.com/docs/write-charm.html</a></li>
+               <li>Here is the official tutorial for charm authors: <a class="reference external" href="https://juju.ubuntu.com/docs/write-charm.html">https://juju.ubuntu.com/docs/write-charm.html</a></li>
+               <li>Here is the official tutorial for bundle authors: <a class="reference external" href="https://juju.ubuntu.com/docs/charms-bundles.html">https://juju.ubuntu.com/docs/charms-bundles.html</a></li>
                </ul>
+
+
                <h2 id ="processes">Charm Store Process</h2>
                <p>This process is designed to allow prospective developers to have their charms reviewed and updated in the <a class="reference external" href="http://jujucharms.com">Charm Store</a> in a timely manner that ensures peer reviews and quality.</p>
-               
                
                <h2 id="submitting">Submitting a new Charm</h2>
                <ol class="arabic simple">
@@ -108,6 +110,10 @@
                <li>In the merge proposal form select the charm's lp name: <tt>~lp:charms/nagios</tt></li>
                <li>For the reviewer field put the <tt>charmers</tt> team, this will get your code into the review queue!</li>
                </ol>
+
+               <h2 id="submitting_bundles">Submitting bundles to the Charm Store</h2>
+
+               <p>Refer to the <a href="charm-bundles.html">Bundles page</a> for instructions on how to create bundles of charms and submit them to the store.</p>
                
                <h2 id="getting_help" >Getting Help</h2>
                <p>Inspired by <a class="reference external" href="http://wiki.bazaar.canonical.com/PatchPilot">Bazaar's Patch Pilot programme</a> there will be patch pilots in <cite>#juju</cite> who can help you get your patch accepted. Check the topic to see who's on duty. Still need help? Poke us on <a class="reference external" href="https://lists.ubuntu.com/mailman/listinfo/juju">the mailing list</a> ; if you're from an upstream project who wants more detailed help/tutoring, then contact <a class="reference external" href="http://launchpad.net/~jorge">Jorge Castro</a> and we'd be more than happy to get a charm expert to help you out or help you run a Charm School.</p>
