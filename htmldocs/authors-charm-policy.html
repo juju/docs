@@ -71,26 +71,27 @@
           <article>
             <section id ="charm-policy">
             <h1>Charm Store Policy</h1>
-                <p>This document serves to record the policies around charms included in the charm store, and the management of said charm collection. Charms in the store are peer reviewed by the community and are considered ready for consumption. These charms are marked as reviewed in the GUI and must follow these quality guidelines in ordered to be considered for the Store. These charms must:</p>
+                <p>This document serves to record the policies around charms and bundles included in the charm store, and the management of said collection. Charms and bundles in the store are peer reviewed by the community and are considered ready for consumption. These charms are marked as reviewed in the GUI and must follow these quality guidelines in ordered to be considered for the Store. These charms and bundles must:</p>
                 <ul>
                 <li>Must follow the spirit of the <a href="http://www.ubuntu.com/about/about-ubuntu/our-philosophy">Ubuntu Philosophy</a>.</li>
                 <li>Must serve a useful purpose and have well defined behavior.</li>
-                <li>Must also be valid for the charm format defined in Juju's documentation.</li>
+                <li>Must also be valid for the charm and/or bundle format defined in Juju's documentation.</li>
                 <li>Must verify that any software installed or utilized is verified as coming from the intended source. Any software installed from the Ubuntu archive satisfies this due to the apt sources including cryptographic signing information.</li>
                 <li>Must be entirely self contained or depend only on reliable external services.</li>
                 <li>Must include a full description of what the software does in the metadata.</li>
                 <li>Must provide a means to protect users from known security vulnerabilities in a way consistent with best practices as defined by either Ubuntu policies or upstream documentation. Basically this means there must be instructions on how to apply updates if you use software not from Ubuntu.</li>
-                <li>Must pass "charm proof" with no errors (lines prefixed with E:), remember this step!</li>
-                <li>Must have a maintainer email address in metadata.yaml attached to a team or individual who are responsive to contact regarding the charm.</li>
+                <li>Must pass "charm proof" or "bundle proof" with no errors (lines prefixed with E:), remember this step!</li>
+                <li>Must have a maintainer email address in metadata.yaml attached to a team or individual who are responsive to contact.</li>
                 <li>Must include a license. Call the file 'copyright' and make sure all files' licenses are specified clearly.</li>
             <li>Must be under a <A href="http://opensource.org/osd">Free license</a>.
                 <li>Must have hooks that are <A href="http://en.wikipedia.org/wiki/Idempotence">idempotent</a>.</li>
                 <li>Must not run any network services using default passwords.</li>
                 <li>Must call Juju API tools (relation-*, unit-*, config-*, etc) without a hard coded path. Should default to use software that is included in the Ubuntu archive, however we encourage that charm authors have a config options for allowing users to deploy from newer upstream releases, or even right from VCS if it's useful to users.</li>
                 <li>Should not use anything infrastructure-provider specific (i.e. querying EC2 metadata service) symlinks must be self contained within a charm.</li>
-                <li>Should make use of AppArmor to increase security</li>
+                <li>Should make use of AppArmor to increase security.</li>
+                <li>Bundles must only use charms that are already in the store, the cannot reference charms in personal namespaces.</li>
                 </ul>
-                <p>The charm store referred to in this document is the collection of Juju charms hosted at <a href="https://launchpad.net/charms">https://launchpad.net/charms</a>.</p>
+                <p>The charm store referred to in this document is the collection of Juju charms and bundles hosted at <a href="https://launchpad.net/charms">https://launchpad.net/charms</a>.</p>
                 </section>
                 <section id ="charm-metadata">
                 <h1>Charm Metadata</h1>
@@ -107,6 +108,8 @@
                 <h2>README.md</h2>
                 <p>Charms that want to display instructions to users can do so in either plain text by including a file called README. If the author would like to use markdown, the file should be called README.md, and if the author would like to use restructured text, the file should be called README.rst. Only one of these files can be included in the charm. We recommend Markdown due to its popularity and tooling.<p>
                 <p>Remember that the README is used by the GUI and website as the default "front page" of the charm, so remember that it is user facing and should include easy to read instructions for deployment.</p>
+                <p>A bundle's README is use by the GUI and the website as the default "front page" of the bundle, so it should not only include information on how to use the bundle, but mention which charms the bundle contains and how the bundle is meant to be used.</p> 
+
                 <h2>Interfaces</h2>
                 <p>Charms should only implement a new interface when existing interfaces are insufficient to achieve the goal of the charm. Interfaces that have an official requires/provides in the charm store cannot be changed by adding required fields or removing existing fields. New optional fields can be added at any time.</p>
                 <p>The charm store series denotes the OS release that the charms which are contained within it are intended to run on.</p>
