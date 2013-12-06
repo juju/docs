@@ -304,6 +304,7 @@ open-port 80
 
 <p>You will notice that this script uses the backticked command <span class="pre">relation-get</span>. This is a Juju helper command that fetches the named values from the corresponding hook on the service we are connecting to.
 Usually there will be some indication of what these values are, but you can always inspect the corresponding hooks to find out. In this case we know that when connected, the MySQL charm will create a database and generate random values for things like a username and password.</p>
+<p>Interfaces in general are determined by the consensus of the charms which use them. There is a lot <a href="./authors-charm-interfaces.html">more information on decoding interfaces here</a>. Some of the major interfaces are being documented to make it easier to use them, and fortunately, mysql is one of them - <a href="./interface-mysql.html">You can find a description of the mysql interface here</a>.
 <p>These values will all be set at one time, so the next little bit of script just checks one value to see if it exists - if not the corresponding charm hasn't set the values yet.</p>
 <p>When it has the values we can use these to modify the config file for Vanilla in the relevant place, and finally open the port to make the service active.</p>
 <p>The final hook we need to write is for other services which may want to consume Vanilla, 'website-relation-joined'.</p>
