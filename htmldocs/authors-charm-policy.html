@@ -74,7 +74,7 @@
                 <p>This document serves to record the policies around charms and bundles included in the charm store, and the management of said collection. Charms and bundles in the store are peer reviewed by the community and are considered ready for consumption. These charms are marked as reviewed in the GUI and must follow these quality guidelines in ordered to be considered for the Store. These charms and bundles must:</p>
                 <ul>
                 <li>Must follow the spirit of the <a href="http://www.ubuntu.com/about/about-ubuntu/our-philosophy">Ubuntu Philosophy</a>.</li>
-                <li>Must serve a useful purpose and have well defined behavior.</li>
+                <li>Must serve a useful purpose and have well defined behaviour.</li>
                 <li>Must also be valid for the charm and/or bundle format defined in Juju's documentation.</li>
                 <li>Must verify that any software installed or utilized is verified as coming from the intended source. Any software installed from the Ubuntu archive satisfies this due to the apt sources including cryptographic signing information.</li>
                 <li>Must be entirely self contained or depend only on reliable external services.</li>
@@ -89,7 +89,7 @@
                 <li>Must call Juju API tools (relation-*, unit-*, config-*, etc) without a hard coded path. Should default to use software that is included in the Ubuntu archive, however we encourage that charm authors have a config options for allowing users to deploy from newer upstream releases, or even right from VCS if it's useful to users.</li>
                 <li>Should not use anything infrastructure-provider specific (i.e. querying EC2 metadata service) symlinks must be self contained within a charm.</li>
                 <li>Should make use of AppArmor to increase security.</li>
-                <li>Bundles must only use charms that are already in the store, the cannot reference charms in personal namespaces.</li>
+                <li>Bundles must only use charms which are already in the store, they cannot reference charms in personal namespaces.</li>
                 </ul>
                 <p>The charm store referred to in this document is the collection of Juju charms and bundles hosted at <a href="https://launchpad.net/charms">https://launchpad.net/charms</a>.</p>
                 </section>
@@ -107,8 +107,8 @@
                 <p>Any de-facto config options must be kept at least until the next major charm series release. Removed config options should be deprecated first by noting that they are deprecated, and why, in their description. Instructions for converting values must be added to README as well.</p>
                 <h2>README.md</h2>
                 <p>Charms that want to display instructions to users can do so in either plain text by including a file called README. If the author would like to use markdown, the file should be called README.md, and if the author would like to use restructured text, the file should be called README.rst. Only one of these files can be included in the charm. We recommend Markdown due to its popularity and tooling.<p>
-                <p>Remember that the README is used by the GUI and website as the default "front page" of the charm, so remember that it is user facing and should include easy to read instructions for deployment.</p>
-                <p>A bundle's README is use by the GUI and the website as the default "front page" of the bundle, so it should not only include information on how to use the bundle, but mention which charms the bundle contains and how the bundle is meant to be used.</p> 
+                <p>Remember that the README is used by the GUI and website as the default "front page" of the charm: it is user facing and should include easy to read instructions for deployment.</p>
+                <p>A bundle's README is use by the GUI and the website as the default "front page" of the bundle, so it should not only include information on how to use the bundle, but also mention which charms the bundle contains and how the bundle is meant to be used.</p> 
 
                 <h2>Interfaces</h2>
                 <p>Charms should only implement a new interface when existing interfaces are insufficient to achieve the goal of the charm. Interfaces that have an official requires/provides in the charm store cannot be changed by adding required fields or removing existing fields. New optional fields can be added at any time.</p>
