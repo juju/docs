@@ -3,12 +3,12 @@
     "Getting Started": {
       "link": "getting-started.html",
       "children": {
-        "AWS Configuration": "config-aws.html",
-        "Azure Configuration": "config-azure.html",
-        "HP Cloud Configuration": "config-hpcloud.html",
-        "OpenStack Configuration": "config-openstack.html",
-        "Bare metal Configuration": "config-maas.html",
-        "Local Configuration": "config-local.html",
+        "Amazon Web Services": "config-aws.html",
+        "Windows Azure": "config-azure.html",
+        "HP Public Cloud": "config-hpcloud.html",
+        "OpenStack": "config-openstack.html",
+        "MAAS (bare metal)": "config-maas.html",
+        "Local": "config-local.html",
         "Manual Provisioning": "config-manual.html",
         "Testing your setup": "getting-started.html#test"
       }
