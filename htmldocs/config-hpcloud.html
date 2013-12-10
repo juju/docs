@@ -71,12 +71,12 @@
 <!--End-Preamble-->
           <article>
             <section id="config_hpcloud">
-            <h1>Configuring for HPCloud</h1>
+            <h1>Configuring for HP Public Cloud</h1>
             <p>You should start by generating a generic configuration file for Juju, using the command:</pre>
 <pre class="prettyprint lang-bash">juju generate-config</pre>
             <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
             <p class ="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
-            <p>The essential configuration sections for HPCloud look like this:</p>
+            <p>The essential configuration sections for HP Public Cloud look like this:</p>
             <pre class="prettyprint lang-yaml">
   hpcloud:
     type: openstack
@@ -94,7 +94,7 @@
             <p>The items highlighted are values you will need to enter, and are explained below. You will find most of the relevant information on the <a href="https://account.hpcloud.com/account/api_keys"> HP Cloud API Keys page</a></p>
             <ul>
               <li>
-                <code>tenant-name:</code> For HPCloud, this is listed as the project name on the<a href="https://account.hpcloud.com/projects"> "Manage Projects" page</a>.
+                <code>tenant-name:</code> For HP Public Cloud, this is listed as the project name on the<a href="https://account.hpcloud.com/projects"> "Manage Projects" page</a>.
                 <img src="media/getting_started-hpc-tenant.png" alt="image showing project name">
               </li>
             </ul>

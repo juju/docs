@@ -71,8 +71,8 @@
 <!--End-Preamble-->
           <article>
             <section id="config_maas">
-            <h1>Configuring for MAAS</h1>
-            <p>Metal As A Service is software which allows you to deal with physical hardware just as easily as virtual nodes. For more information about MAAS, see <a href="http://maas.ubuntu.com"> maas.ubuntu.com </a> </p>
+            <h1>Configuring for MAAS (bare metal)</h1>
+            <p>Metal As A Service is software which allows you to deal with physical hardware just as easily as virtual nodes. MAAS lets you treat physical servers like virtual machines in the cloud. Rather than having to manage each server individually, MAAS turns your bare metal into an elastic cloud-like resource. Specifically, MAAS allows for services to be deployed to bare metal via Juju. For more information about MAAS, see <a href="http://maas.ubuntu.com"> maas.ubuntu.com </a> </p>
             <p>You should start by generating a generic configuration file for Juju, using the command:</p>
 <pre class="prettyprint lang-bash">juju generate-config</pre>
             <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
