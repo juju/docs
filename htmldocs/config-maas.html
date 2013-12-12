@@ -89,16 +89,20 @@
             
             <h1> Edit or create the configuration</h1>
             <p>Create or modify <code>~/.juju/environments.yaml</code> with the following content:
-            
+ Create or modify ~/.juju/environments.yaml with the following content:
+           
             <pre class="prettyprint lang-yaml">
   maas:
     type: maas
-    maas-server: 'http://xxyourMAASServernamexx:80/MAAS'
-    maas-oauth: '$MAAS_API_KEY'
-    admin-secret: 'nothing'
-    default-series: 'precise'</pre>
+    maas-server: 'http://&LT;my-maas-server&GT;:80/MAAS'
+    maas-oauth: '&LT;MAAS-API-KEY&GT;'
+   </pre>
 
-            <p>Substitute the API key from earlier into the <code>$MAAS_API_KEY</code> slot. You may need to modify the <code>maas-server</code> setting too; if you're running from the maas package it should be something like "http://hostname.xxxx.yyy/MAAS".</p>
+            <p>Substitute the API key from earlier into the <code>MAAS_API_KEY</code> slot. You may need to modify the <code>my-maas-server</code> setting too; if you're running from the maas package it should be something like "http://hostname.xxxx.yyy/MAAS".</p>
+            <p>An admin password will be generated when you try and bootstrap the Juju instance.</p>
+            <p>The default series for MAAS will automatically be set to 'precise'.</p>
+            <p> For further steps with Juju, you should check out the <a href="http://maas.ubuntu.com/docs/juju-quick-start.html">Juju instructions in the MAAS documentation</a></p>
+
             </section>
           </article>
 <!--Postamble-->
