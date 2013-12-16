@@ -33,7 +33,7 @@
 								<li><a href="/community/charmers/">Charmers</a></li>
 								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
 								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-website/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
 							</ul>
 						</li>
 						<li>
