@@ -13,7 +13,7 @@ RewriteRule ^(getting-started\.html/configuring-a-local-environment|provider-con
 RewriteRule ^provider-configuration-openstack.html$ config-openstack.html [R=301,L]
 RewriteRule ^user-tutorial.html$ getting-started.html#test [R=301,NE,L]
 RewriteRule ^write-charm.html$ authors-charm-writing.html [R=301,L]
-RewriteRule ^charm.html$ authors-charm-anatomy.html [R=301,L]
+RewriteRule ^charm.html$ authors-charm-components.html [R=301,L]
 RewriteRule ^service-config.html$ charms-config.html [R=301,L]
 RewriteRule ^charm-store.html$ authors-charm-store.html [R=301,L]
 RewriteRule ^charm-quality.html$ authors-charm-quality.html [R=301,L]
