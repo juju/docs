@@ -279,10 +279,22 @@ div.note.distribute {
 }
 
 .doc-content h3{
-  font-size: 18px;
+  font-size: 20px;
   color: #5E2750;
   font-weight: 800;
 }
+
+/**
+ * Foldout stuff
+ */
+
+.doc-content code.method {
+  font-size: 14px;
+  color: #5E2750;
+  font-weight: 800; 
+  background-color: #ffffff
+}
+
 /**
  * Walkthrough steps
  */
@@ -481,6 +493,7 @@ pre.prettyprint.prettyprinted {
   white-space: pre;
   overflow-x: auto;
 }
+
 
 hr {
   background: #fff;
