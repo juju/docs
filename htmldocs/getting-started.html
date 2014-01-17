@@ -160,7 +160,7 @@ export PATH=$PATH:$GOPATH/bin</pre>
             <p class="note"><strong>Note:</strong> If you have multiple environments configured, you can choose which one to address with a particular command by adding the <code>-e</code> switch followed by the environment name, E.g. <code>-e hpcloud</code>.</p>
             
             <p>You may have to wait a few moments for this command to return, as it needs to perform various tasks and contact your cloud provider. </p>
-            <p>Assuming it returns successfully (otherwise see <a href="#errors">common error messages and what to do about them</a>), we can now deploy some services and explore the basic operations of Juju.</p>
+            <p>Assuming it returns successfully, we can now deploy some services and explore the basic operations of Juju.</p>
             <p>To start with, we will deploy Wordpress, by running this command:</p>
             <pre class="prettyprint lang-bash">juju deploy wordpress</pre>
             <p>Now juju will fetch the Wordpress charm and use it, through the bootstrap instance to request and deploy whatever resources it needs to set up this service.</p>
