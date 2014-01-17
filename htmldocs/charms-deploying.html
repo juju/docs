@@ -150,23 +150,6 @@ juju deploy --repository ~/charms/ local:wordpress</pre>
                         where a charm was installed from, it is listed in the
                         <code>juju status</code> output.</p>
 
-                        <h1>Changing the defaults</h1>
-
-                        <p>As we have seen, we can specify repositories to
-                        install from on the commandline. In fact, this only
-                        introduces another potential source and changes the
-                        searching order. To permanently change the defaults
-                        (e.g. if you would prefer to always deploy from a local
-                        service first), you can enter a list of repositories in
-                        your <code>environments.yaml</code>
-                        file:</p>
-                        <pre class="prettyprint lang-yaml">
-repositories:
-  - http://charms.ubuntu.com/collection/ubuntu
-  - http://charms.ubuntu.com/collection/openstack
-  - http://charms.ubuntu.com/people/miked
-  - /var/lib/charms</pre>
-
                         <h1>A note about caching...</h1>
 
                         <p>After juju resolves a charm and its dependencies, it
