@@ -516,27 +516,14 @@ hr {
   font-size: 14px;
   font-weight: 800;
 }
-dl {
-  display: block;
-  list-style-type: disc;
-  padding-left: 10px;
-}
 
-dt {
-  display: list-item;
-  text-align: -webkit-match-parent;
-  font: 16px/14px monospace;
-  border-radius: 4px;
-  white-space: pre-line;  
-}
 
-dt:after {
-  content: ':'
-}
 
-dd {
-  padding-left: 10px;
-}
+ dl { border: 1px dotted #aaa; padding: 0.5em; background: #eeeeee; } 
+dt { float: left; clear: left; width: 100px; text-align: left; font-weight: bold; color: #000; } 
+dd { margin: 0 0 0 110px; padding: 0 0 0.5em 0; }
+dd:before { content: "- "; }
+
 
 li img {
   margin-top: 10px;
