@@ -73,7 +73,7 @@
 <h1 id="debugging">Debugging hooks</h1>
 <p>Not everything works first time, and sometimes even when it 
 does work, things don't happen quite as you expected. That's why 
-Juju includes a tool to help you debug charm hooks.</p>
+Juju includes two tools to help you debug charm hooks: The <a href="#debughookscommand"><code>juju debug-hooks</code> command</a> and the <a href="#debuglogcommand"><code>juju debug-log</code> command</a>.</p>
 
 <h2 id="debughookscommand"> The 'debug-hooks' command</h2>
 <p>The <code>juju debug-hooks</code> command accepts a unit and an 
@@ -118,6 +118,9 @@ relation hooks - these should only be run during their respective trapped events
 <pre class="prettyprint lang-bash">./hooks/db-relation-joined</pre>
 <p>Whilst you are debugging a hook, it is possible that other hooks will be queued to run.  Even hooks which are not in your list to debug will be suspended in the queue until you exit your current window. See the <a href="#special"> special considerations</a> below.</p>
 <p>The queue for pending hooks will restart once you exit the window with an <code>exit</code> command.</p>
+
+<p class="note"> <strong>Note: </strong> To allow Juju to continue processing events normally, you <strong>must</strong> exit the hook execution window with the <code>exit</code> command, otherwise all further events on that unit will be paused indefinitely.</p>
+
 <p>The queue can be halted by exiting with an <code>exit 1</code> command, which will flag the hook as failed. Juju will revert to its normal behaviour of suspending everything until this error status is resolved, which you can do by issuing the command (from your juju terminal window, not the debugging window) of <code>juju resolved &LT;unit&GT;</code>.</p>
 <p>You can finish your debugging session by closing all windows in the tmux session. Make sure to exit appropriately from all hook windows before terminating.</p>
 </section>
@@ -146,6 +149,53 @@ units assigned to the same machine will block one another, and that you
 can't control relative execution order directly (other than by erroring out
 of hooks you don't want to run yet, and retrying them later).</p>
 </section>
+
+<section id="debug-log">
+<h2 id="debuglogcommand"> The 'debug-log' command</h2>
+<p>Sometimes for working out where problems occur, it is simply enough 
+to be able to view the log files. As well
+ as the logs on individual units, Juju keeps a consolidated log file
+which can be viewed with the <code>juju debug-log</code> command.</p>
+<p>As this is a consolidated log you don't need to specify a unit.</p>
+<h4>Usage:</h4>
+<pre class="prettyprint lang-bash">
+juju debug-log [-n &LT;number&GT;] [-n +&LT;number&GT;] [-e &LT;environment&GT;]
+</pre>
+<p>Where the <code>-n</code> switch is given and followed by a number, the log 
+will be tailed from that many lines in the past (i.e., those number of existing 
+lines in the log will be included in the output, along with any subsequent 
+output).</p>
+<p>Where the <code>-n</code> switch is given and followed by a '+' and a 
+number, the log will be tailed starting from that specific line in the log file. </p>
+<p>This somewhat unusual syntax has been chosen so that the command behaves like 
+the standard Unix <code>tail</code> command. In fact, it is analagous to running 
+<code>tail -f [options] /var/log/juju/all-machines.log</code> on the bootstrap node.</p>
+<h4 id="log-examples">Examples:</h4>
+<p>To read the ten most recent log entries and follow any subsequent entries to the log:</p>
+<pre class="prettyprint lang-bash">
+juju debug-log
+</pre>
+<p>To read the thirty most recent log entries and follow any subsequent entries to the log:</p>
+<pre class="prettyprint lang-bash">
+juju debug-log -n 30
+</pre>
+<p>To read all the log entries and follow any subsequent entries to the log:</p>
+<pre class="prettyprint lang-bash">
+juju debug-log -n +1
+</pre>
+<p>To read the twenty most recent log entries on the 'local' environment:</p>
+<pre class="prettyprint lang-bash">
+juju debug-log -n 20 -e local
+</pre>
+<p>And of course it is possible to combine the command with other shell tools to make
+the output more useful, e.g. to filter the whole log for lines matching 'INFO':</p>
+<pre class="prettyprint lang-bash">
+juju debug-log -n +1  | grep 'INFO'
+</pre>
+<p class="note"> <strong>Note: </strong> As the command uses the follow behaviour of <code>tail</code>
+by default, you do not need to specify the <code>-f</code> switch. You will also need to end the 
+session with <code>Control-C</code></p>
+
 <section id="tmux">
 <h1 id="addendum">What on earth is tmux?</h1>
 <p> The Ubuntu images used by Juju also include a slightly customised version 
