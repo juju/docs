@@ -76,7 +76,7 @@
               <p>By design, Juju operates a very secure environment for deploying your services. Even if you have deployed services, they won't be publically available unless you explicitly make them so. To allow public access to services, the appropriate changes must be made to the cloud provider firewall settings. As the procedure or doing this varies depending on the provider, Juju helpfully abtracts this into a single command, <code>juju expose &LT;servicename&GT;</code></p>
               <p>For example, you may have deployed a WordPress service using the relevant charm. Once deployed, the service still cannot be accessed by the public, so you would run:<p>
               <pre class="prettyprint">juju expose wordpress</pre>
-              <p>Juju will then take the steps necessary to adjust firewall rules and any other settings to expose the service via it's given address. This process may take anything from a few moments to several minutes. You can check on the current status of your services by running:</p>
+              <p>Juju will then take the steps necessary to adjust firewall rules and any other settings to expose the service via its given address. This process may take anything from a few moments to several minutes. You can check on the current status of your services by running:</p>
               <pre class="prettyprint">juju status</pre>
               <p>This will return a status report like this:</p>
 <pre class="prettyprint lang-yaml">
@@ -110,7 +110,7 @@ services:
             </section>
             <section id="unexposing">
               <h1>Unexposing a service</h1>
-              <p>To return the firewall settings and make a service non-public again, you simly need to run the <code>unexpose</code> command. For example:</p>
+              <p>To return the firewall settings and make a service non-public again, you simply need to run the <code>unexpose</code> command. For example:</p>
               <pre class="prettyprint">juju unexpose wordpress</pre>
             </section>
           </article>
