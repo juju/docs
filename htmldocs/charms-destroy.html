@@ -79,7 +79,7 @@
               <pre class="prettyprint">juju destroy-service &LT;service-name&GT;</pre>
               <p class="warning note"><strong>Warning!:</strong> Destroying a service which has active relations with another running service will break that relation. This can cause errors in both services, as such review and potentially remove any relationships first.</p>
               <p>A service can take a while to "die", but if running a juju status reveals that the service is listed as dying, but also reports an error state, then the zombied service will still be hanging around. See <a href="#caveat-dying">caveats</a> for how to manage services in a dying state.</p>
-              <p class="note"><strong>Note:</strong> Destroying a service removes that service, but not any nodes which may have been created for it to run on. This is juju's way of preserving data to the best it's ability. See <a href="#destroy-machines">Destroying Machines</a> for additional details.</p>
+              <p class="note"><strong>Note:</strong> Destroying a service removes that service, but not any nodes which may have been created for it to run on. This is juju's way of preserving data to the best  of its ability. See <a href="#destroy-machines">Destroying Machines</a> for additional details.</p>
             </section>
             <section id="destroy-units">
               <h2 id="destroy-units">Destroying Units</h2>
@@ -96,7 +96,7 @@
               <h2 id="destroy-machines">Destroying machines</h2>
               <p>Instances or machines which have no currently assigned workload can be removed from your cloud using the following command:
               <pre class="prettyprint">juju destroy-machine &LT;number&GT;</pre>
-              <p>A machine which currently idle will be removed almost instantaneously from the cloud, along with anything else which may have been on the instance which juju was not aware of. To prevent accidents and awkward moments with running services, it is not possible to remove an instance which is currently allocated to a service. If you try to do so, you will get a polite error message in the form:</p>
+              <p>A machine which is currently idle will be removed almost instantaneously from the cloud, along with anything else which may have been on the instance which juju was not aware of. To prevent accidents and awkward moments with running services, it is not possible to remove an instance which is currently allocated to a service. If you try to do so, you will get a polite error message in the form:</p>
               <pre class="prettyprint lang-yaml">error: no machines were destroyed: machine 3 has unit "mysql/0" assigned</pre>
             </section>
             <section>
@@ -115,7 +115,7 @@
               <h2 id="caveats">Caveats</h2>
               <p>These are caveats which you may encounter while trying to remove items within Juju<p>
               <h3 id="caveat-dying">life: dying</h3>
-              <p>If you have a unit or serving in a dying state that has not gone away check to see if that unit, or any units within the service, are in an error state. Since Juju is an event driven orchestration client, the "removal" of a unit and service is also modeled as an event within Juju. As such, when a unit enters an error state all other events within that unit's lifecycle are queued. To clear this run <pre class="prettyprint lang-yaml">juju resolved &lt;unit&gt;</pre> to have the next even processed. You may need to run the <code>resolved</code> command run several times against a unit.</p>
+              <p>If you have a unit or serving in a dying state that has not gone away check to see if that unit, or any units within the service, are in an error state. Since Juju is an event driven orchestration client, the "removal" of a unit and service is also modeled as an event within Juju. As such, when a unit enters an error state all other events within that unit's lifecycle are queued. To clear this run <pre class="prettyprint lang-yaml">juju resolved &lt;unit&gt;</pre> to have the next event processed. You may need to run the <code>resolved</code> command run several times against a unit.</p>
               <p>If the unit isn't in an error state, there may be an error elsewhere in the environment. Since removing a unit or destroying a service also breaks the relation, if there's an error in the relation-removal event on one or more of the connected services that may also halt the event loop for that unit. Check to make sure no other units are in an error state and clear those using the <code>juju resolved</code> command.</p>
           </article>
 <!--Postamble-->
