@@ -91,7 +91,7 @@
             Basic Usage of the Ruby on Rails Charm
         </h2>
         <p>
-            Create a YAML config file with your application's name and it's git location
+            Create a YAML config file with your application's name and its git location
         </p>
         <p>
             <strong>sample-app.yml</strong>
@@ -109,7 +109,7 @@ juju deploy haproxy
 juju add-relation haproxy myapp
 </pre>
         <p>
-            Deploy and relate database
+            Deploy and relate database:
         </p>
 <pre class="prettyprint lang-bash">
 juju deploy postgresql
@@ -177,7 +177,7 @@ juju switch local
 juju bootstrap
 </pre>
         <p>
-            Create a YAML config file with your application's name and it's git location
+            Create a YAML config file with your application's name and its git location
         </p>
         <p>
             <strong>sample-app.yml</strong>
@@ -191,7 +191,7 @@ juju bootstrap
 <pre class="prettyprint lang-bash">juju deploy rails myapp --config sample-app.yml
 juju deploy postgresql</pre>
         <p>
-            and relate them
+            and relate them:
         </p>
 <pre class="prettyprint lang-bash">juju add-relation myapp postgresql
 </pre>
@@ -216,7 +216,7 @@ juju deploy postgresql</pre>
             Push to your Public/Private Cloud
         </h3>
         <p>
-            After you've repeatedly upgraded your application locally it's time to push it out to a place where your coworkers can see your app in all it's glory, let's push this to AWS. Same exact commands as before, just to a different environment:
+            After you've repeatedly upgraded your application locally it's time to push it out to a place where your coworkers can see your app in all its glory, let's push this to AWS. Same exact commands as before, just to a different environment:
         </p>
 <pre class="prettyprint lang-bash">juju switch amazon
 juju bootstrap
