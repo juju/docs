@@ -4,7 +4,8 @@ The documentation is written in HTML5.
 
 The latest version of these docs live at:
 
-- [https://github.com/juju/docs](https://juju.ubuntu.com/docs/contributing.html)
+- [github.com/juju/docs](https://juju.ubuntu.com/docs/contributing.html)
+- [juju.ubuntu.com/docs](http://juju.ubuntu.com/docs) - Rendered docs, generated twice a day.
 
 For advice on contributing to the docs (please!), see 
 the [contributing.html](https://juju.ubuntu.com/docs/contributing.html) page in this project.
