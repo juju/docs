@@ -17,7 +17,7 @@ adding the headers and footers when structural
 elements of the pages are altered. It is NOT
 necessary to run the build tool for deployment of the
 HTML, only if the headers and footers have been
-changed. The contributing.html section conatins more
+changed. The [contributing section](https://juju.ubuntu.com/docs/contributing.html) contains more
 information on this.
 
 
