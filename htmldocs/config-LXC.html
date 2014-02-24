@@ -147,7 +147,7 @@ sudo juju destroy-environment
               <p>There is currently a <a href="https://launchpad.net/bugs/1202682" target="_blank">bug</a> which prevents <code>juju debug-log</code> from working as expected. However, the logs for juju are still available for review outside of <code>juju debug-log</code>. First, find out what the name of your environment is by running <code>juju switch</code>. If you're using the default <code>environments.yaml</code> you'll find this be <code>local</code>. All log files for the local provider are stored in <code>~/.juju/&lt;environment&gt;/log</code>, as such you can duplicate the functionality of <code>juju debug-log</code> using the following (assuming your current environment is "local"):</p>
               <pre class="prettyprint lang-bash">tail -f ~/.juju/local/log/unit-*.log</pre>
               <h3 id="juju-ssh">juju ssh</h3>
-              <p>While <code>juju ssh</code> does work if you supply it a unit (eg: <code>mysql/0</code>) the command does not work with machine numbers at this time (<code>juju ssh 1</code>). To access a unit via ssh make sure to use it's corresponding unit name not the machine number.</p>
+              <p>While <code>juju ssh</code> does work if you supply it a unit (eg: <code>mysql/0</code>) the command does not work with machine numbers at this time (<code>juju ssh 1</code>). To access a unit via ssh make sure to use its corresponding unit name not the machine number.</p>
              </section>
           </article>
 <!--Postamble-->
