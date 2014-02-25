@@ -94,7 +94,7 @@
             Create a YAML config file with your application's name and its git location
         </p>
         <p>
-            <strong>sample-app.yml</strong>
+            <strong>sample-app.yaml</strong>
         </p>
 <pre class="prettyprint lang-yaml">
 sample-app:
@@ -104,7 +104,7 @@ sample-app:
             Deploy the application and a proxy:
         </p>
 <pre class="prettyprint lang-bash">
-juju deploy rails myapp --config sample-app.yml
+juju deploy rails myapp --config sample-app.yaml
 juju deploy haproxy
 juju add-relation haproxy myapp
 </pre>
@@ -180,7 +180,7 @@ juju bootstrap
             Create a YAML config file with your application's name and its git location
         </p>
         <p>
-            <strong>sample-app.yml</strong>
+            <strong>sample-app.yaml</strong>
         </p>
 <pre class="prettyprint lang-yaml">sample-app:
   repo: https://github.com/pavelpachkovskij/sample-rails
@@ -188,7 +188,7 @@ juju bootstrap
         <p>
             Deploy the application and database:
         </p>
-<pre class="prettyprint lang-bash">juju deploy rails myapp --config sample-app.yml
+<pre class="prettyprint lang-bash">juju deploy rails myapp --config sample-app.yaml
 juju deploy postgresql</pre>
         <p>
             and relate them:

@@ -93,7 +93,7 @@
               <p>As with destroying services, See <a href="#caveat-dying">caveats</a> for how to manage units in a dying state.</p>
             </section>
             <section>
-              <h2 id="destroy-machines">Destroying machines</h2>
+              <h2 id="destroy-machines">Destroying Machines</h2>
               <p>Instances or machines which have no currently assigned workload can be removed from your cloud using the following command:
               <pre class="prettyprint">juju destroy-machine &LT;number&GT;</pre>
               <p>A machine which is currently idle will be removed almost instantaneously from the cloud, along with anything else which may have been on the instance which juju was not aware of. To prevent accidents and awkward moments with running services, it is not possible to remove an instance which is currently allocated to a service. If you try to do so, you will get a polite error message in the form:</p>
