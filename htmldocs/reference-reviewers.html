@@ -71,83 +71,10 @@
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
           <article>
-            <section id ="upgrading">
-            <h1>The Juju Charm Store</h1>
-               <p>Juju includes a collection of what we call <code>Charms</code> that let you deploy whatever services you want in Juju. A collection of charms that are designed to work together is called a <code>Bundle</code>. Since charms and bundles are open and worked on by the community, they represent a distilled set of best practices for deploying these services. Both charms and bundles are included in what we collectively call The Charm Store.</p>
-               <ul class="simple">
-               <li>The main project page is here: <a class="reference external" href="https://launchpad.net/charms">https://launchpad.net/charms</a></li>
-               <li>There are useful tools for downloading, modifying, and contributing here: <a class="reference external" href="https://launchpad.net/charm-tools">https://launchpad.net/charm-tools</a></li>
-               <li>Here is the official tutorial for charm authors: <a class="reference external" href="https://juju.ubuntu.com/docs/write-charm.html">https://juju.ubuntu.com/docs/write-charm.html</a></li>
-               <li>Here is the official tutorial for bundle authors: <a class="reference external" href="https://juju.ubuntu.com/docs/charms-bundles.html">https://juju.ubuntu.com/docs/charms-bundles.html</a></li>
-               </ul>
+            <section id ="reviewers">
 
-
-               <h2 id ="processes">Charm Store Process</h2>
-               <p>This process is designed to allow prospective developers to have their charms reviewed and updated in the <a class="reference external" href="http://jujucharms.com">Charm Store</a> in a timely manner that ensures peer reviews and quality.</p>
-               
-               <h2 id="submitting">Submitting a new Charm</h2>
-               <ol class="arabic simple">
-               <li>Install juju and charm-tools.</li>
-               <li>Create a repository, something like <tt class="docutils literal">mkdir -p ~/charms/precise</tt>, precise is the release code name for the <a class="reference external" href="http://releases.ubuntu.com">release of Ubuntu</a> you wish to target your charm at.</li>
-               <li>If you haven't created your charm yet, you can use <tt>charm create ubuntu-package-name</tt> which will fill in some basic metadata info for you. You can check to see if it already exists at <a class="reference external" href="http://jujucharms.com/">http://jujucharms.com/</a>. Also make sure to <a class="reference external" href="http://goo.gl/mvtPh">check the list of open charms</a> to see if anybody is already working on a charm for the service you want to work on. Bugs which have had no activity by the assignee for more than 30 days are fair game and should be unassigned.</li>
-               <li>Once your charm is working and tested with any compatible charms, make sure it passes <tt>charm proof path/to/your/charm</span></tt></li>
-               <li><tt>bzr init</tt> in your charm's root directory</li>
-               <li><tt>bzr add</tt> to add all files.</li>
-               <li><tt>bzr ci -m'Initial charm'</tt></li>
-               <li><tt>bzr push lp:~your-launchpad-username/charms/precise/your-charms-name/trunk</tt></li>
-               <li>File a bug against charms at <a class="reference external" href="https://launchpad.net/charms/+filebug">https://launchpad.net/charms/+filebug</a> This is used to track the progress of your charm.</li>
-               <li>Subscribe the <tt>charmers</tt> team by clicking &quot;Subscribe someone else&quot; on the right side of the launchpad page. This is important as it gets your charm in the review queue!</li>
-               </ol>
-               <p>Your charm should then be looked at in a timely manner.</p>
-               
-               
-               <h2 id="submitting_fix">Submitting a fix to an existing Charm</h2>
-               <ol>
-               <li>Grab the charm you want to fix, we'll use Nagios as an example: <tt>bzr branch lp:charms/precise/nagios</tt></li>
-               <li>Modify it to meet your needs.</li>
-               <li>Commit your fixes <tt>bzr commit -m'Your changelog entry goes here'</tt></li>
-               <li><tt>bzr push lp:~your-launchpad-username/charms/precise/nagios/fixed-charms-name</tt></li>
-               <li>Submit a <a class="reference external" href="https://help.launchpad.net/BranchMergeProposals">merge proposal</a> by going to your branch's code page:  <tt>https://code.launchpad.net/~charmers/charms/precise/nagios/trunk</tt> and clicking &quot;Propose for merging&quot;</li>
-               <li>In the merge proposal form select the charm's lp name: <tt>~lp:charms/nagios</tt></li>
-               <li>For the reviewer field put the <tt>charmers</tt> team, this will get your code into the review queue!</li>
-               </ol>
-
-               <h2 id="submitting_bundles">Submitting bundles to the Charm Store</h2>
-
-               <p>Refer to the <a href="charms-bundles.html">Bundles page</a> for instructions on how to create bundles of charms and submit them to the store.</p>
-               
-               <h2 id="getting_help" >Getting Help</h2>
-               <p>Inspired by <a class="reference external" href="http://wiki.bazaar.canonical.com/PatchPilot">Bazaar's Patch Pilot programme</a> there will be patch pilots in <cite>#juju</cite> who can help you get your patch accepted. Check the topic to see who's on duty. Still need help? Poke us on <a class="reference external" href="https://lists.ubuntu.com/mailman/listinfo/juju">the mailing list</a> ; if you're from an upstream project who wants more detailed help/tutoring, then contact <a class="reference external" href="http://launchpad.net/~jorge">Jorge Castro</a> and we'd be more than happy to get a charm expert to help you out or help you run a Charm School.</p>
-               <p>Some notes:</p>
-               <ul>
-               <li>Please respect that these people might have a few other charms in their queue already.</li>
-               <li>The package you have a question about might not necessarily be part of the patch pilot's area of expertise. They will still try to help you get your fix in and probably get you in touch with the 'right' people.</li>
-               </ul>
-               
-               <h2 id="reviewers">Reviewers</h2>
-               <ol class="arabic">
-               <li><p class="first">Modify the topic in #juju to put yourself down as the reviewer for your shift.</p>
-               </li>
-               <li><p class="first">Check out <a class="reference external" href="http://manage.jujucharms.com/tools/review-queue">the review queue</a> and be responsive on IRC for user questions.</p>
-               </li>
-               <li><p class="first">Review the items in the queue. If the queue is caught up and not on fire, consider the following tasks:</p>
-               <blockquote>
-               <ul class="simple">
-               <li>Answer questions on IRC, the mailing list, and the <a class="reference external" href="http://askubuntu.com/questions/tagged/juju?sort=unanswered&amp;pagesize=50">juju tag</a></li>
-               <li>Work on <a class="reference external" href="https://juju.ubuntu.com/docs|thedocumentation">the documentation</a></li>
-               <li>Work on simple <a class="reference external" href="http://jujucharms.com/tools/proof-errors">proof errors</a></li>
-               <li>Triage bugs in <tt class="docutils literal"><span class="pre">lp:charms</span></tt></li>
-               </ul>
-               </blockquote>
-               </li>
-               <li><p class="first">When your shift is over modify the topic in #juju to put <tt class="docutils literal"><span class="pre">~charmers</span></tt> as the reviewer. (When no one is specifically assigned to review we just default to ~charmers).</p>
-               </li>
-               <li><p class="first">(Optional) Send a mail to the juju list summarizing your shift, new charms you might have promulgated or updated, issues that might have been raised by the review, or anything else you feel you should share with the community.</p>
-               </li>
-               <li><p class="first">Here's the <a class="reference external" href="http://goo.gl/uK9HD">Calendar for reviewing</a> if you want to check what day you have.</p>
-               </li>
-               </ol>
-               
+            <h1>Reviewing Charms and Bundles</h1>
+               <p>
                <h3 id="review_tips">Review Tips and Criteria</h3>
                
                <p>The goal is to <em>welcome</em> the contributor and help them have a good experience getting fixes into Ubuntu; 
