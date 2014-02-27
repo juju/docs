@@ -173,7 +173,7 @@ All hook output is currently logged anyway, so it's theoretically redundant with
 upon. If it's important, please <code>juju-log</code> it.</p>
 
 <pre class="prettyprint lang-bash">
-juju-log "some important text"
+$ juju-log "some important text"
 </pre>
 
 <p>It accepts a <code>--debug</code> flag which causes the message to be logged
@@ -191,13 +191,13 @@ logging levels and targets in more detail is a known
 single argument, which must be <code>private-address</code> or
 <code>public-address</code>. It is not affected by context.</p>
 
-<pre class="prettyprint">
-unit-get private-address
+<pre class="prettyprint lang-bash">
+$ unit-get private-address
 10.0.1.101
 </pre>
 
-<pre class="prettyprint">
-unit-get public-address
+<pre class="prettyprint lang-bash">
+$ unit-get public-address
 foo.example.com
 </pre>
 
@@ -216,33 +216,30 @@ the value of that config key. Missing config keys are reported as having a
 value of nil, and do not return an error.</p>
 
 <p>Get the interesting bits of the config:</p>
-<pre class="prettyprint">
-config-get
-
+<pre class="prettyprint lang-bash">
+$ config-get
 key: some-value
 another-key: default-value
 </pre>
 <p>Get the whole config including nulls:</p>
-<pre class="prettyprint">
-config-get --all
-
+<pre class="prettyprint lang-bash">
+$ config-get --all
 key: some-value
 another-key: default-value
 no-default: null
 </pre>
 <p>Retrieve a specific value:</p>
-<pre class="prettyprint">
-config-get _key_
-
-default-value
+<pre class="prettyprint lang-bash">
+$ config-get [key]
+some-value
 </pre>
 <p>Get a config setting with no value:</p>
 <pre class="prettyprint lang-bash">
-config-get no-default
+$ config-get [key-with-no-default]
 </pre>
 <p>Get a config setting that doesn't exist:</p>
 <pre class="prettyprint lang-bash">
-config-get missing-key
+$ config-get [missing-key]
 </pre>
 <p class = "note"><strong>Note: </strong> The above two examples are not misprints
  - asking for a value which doesn't exist or has not been set returns nothing and
@@ -259,11 +256,11 @@ where <code>tcp</code> is the default.</p>
 <p>Examples:</p>
 <p>Open 80/tcp if and when the service is exposed:</p>
 <pre class="prettyprint lang-bash">
-open-port 80
+$ open-port 80
 </pre>
 <p>Open 1234/udp if and when the service is exposed:</p>
 <pre class="prettyprint lang-bash">
-open-port 1234/udp
+$ open-port 1234/udp
 </code></pre>
 
 <p><code>open-port</code> will not have any effect if the service is not exposed,
@@ -280,11 +277,11 @@ accepts the same flags and arguments as <code>open-port</code>.</p>
 <p>Examples:</p>
 <p>Close 1234/udp if it was open:</p>
 <pre class="prettyprint lang-bash">
-close-port 1234/udp
+$ close-port 1234/udp
 </pre>
 <p>Close port 80 if it was open:</p>
 <pre class="prettyprint lang-bash">
-close-port 80
+$ close-port 80
 </pre>
 </section>
 
@@ -300,22 +297,22 @@ the setting to be removed.</p>
 <p>Examples:</p>
 <p>Set a pair of values for the local unit in the default relation:</p>
 <pre class="prettyprint lang-bash">
-echo $JUJU_RELATION_ID
+$ echo $JUJU_RELATION_ID
+server:3
 
- server:3
-
-relation-set username=bob password=2db673e81ffa264c
+$ relation-set username=bob password=2db673e81ffa264c
 </pre>
 
 <p>Set a pair of values for the local unit in a specific relation:</p>
 <pre class="prettyprint lang-bash">
-relation-set -r server:3 username=jim password=12345
+$ relation-set -r server:3 username=jim password=12345
 </pre>
 <p>Clear a value for the local unit in the default relation:</p>
 <pre class="prettyprint lang-bash">
-echo $JUJU_RELATION_ID
+$ echo $JUJU_RELATION_ID
 server:3
-relation-set deprecated-or-unused=
+
+$ relation-set deprecated-or-unused=
 </pre>
 
 <p><code>relation-set</code> is the single tool at your disposal for communicating
@@ -359,31 +356,32 @@ for the first argument.</p>
 <pre class="prettyprint lang-bash">
 $ echo $JUJU_RELATION_ID
 db:1
+
 $ echo $JUJU_REMOTE_UNIT
 mongodb/2
+
 $ relation-get
 username: jim
 password: "12345"
 </pre>
 <p>Get one setting from the default remote unit in the default relation:</p>
 <pre class="prettyprint lang-bash">
-echo $JUJU_RELATION_ID
+$ echo $JUJU_RELATION_ID
 db:1
 
-echo $JUJU_REMOTE_UNIT
+$ echo $JUJU_REMOTE_UNIT
 mongodb/2
 
-relation-get username
+$ relation-get username
 jim
 </pre>
 <p>Get all settings from a particular remote unit in a particular relation:</p>
 <pre class="prettyprint lang-bash">
-echo $JUJU_RELATION_ID
+$ echo $JUJU_RELATION_ID
 
-relation-get -r database:7 - mongodb/5
-
- username: bob
- password: 2db673e81ffa264c
+$ relation-get -r database:7 - mongodb/5
+username: bob
+password: 2db673e81ffa264c
 </pre>
 
 <p>Note that <code>relation-get</code> produces results that are <em>consistent</em>
@@ -438,9 +436,9 @@ mongodb/3
 
 <p>Show all remote units in a specific relation:</p>
 <pre class="prettyprint lang-bash">
-echo $JUJU_RELATION_ID
-relation-list -r website:2
+$ echo $JUJU_RELATION_ID
 
+$ relation-list -r website:2
 haproxy/0
 </pre>
 
@@ -456,6 +454,7 @@ hook, defaults to the name of the current relation.</p>
 <pre class="prettyprint lang-bash">
 $ echo $JUJU_RELATION
 server
+
 $ relation-ids
 server:1
 server:7
