@@ -88,7 +88,7 @@
                <h2 id="submitting">Submitting a new Charm</h2>
                <ol class="arabic simple">
                <li>Install juju and charm-tools.</li>
-               <li>Create a repository, something like <tt class="docutils literal"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">~/charms/precise</span></tt>, precise is the release code name for the <a class="reference external" href="http://releases.ubuntu.com">release of Ubuntu</a> you wish to target your charm at.</li>
+               <li>Create a repository, something like <tt class="docutils literal">mkdir -p ~/charms/precise</tt>, precise is the release code name for the <a class="reference external" href="http://releases.ubuntu.com">release of Ubuntu</a> you wish to target your charm at.</li>
                <li>If you haven't created your charm yet, you can use <tt>charm create ubuntu-package-name</tt> which will fill in some basic metadata info for you. You can check to see if it already exists at <a class="reference external" href="http://jujucharms.com/">http://jujucharms.com/</a>. Also make sure to <a class="reference external" href="http://goo.gl/mvtPh">check the list of open charms</a> to see if anybody is already working on a charm for the service you want to work on. Bugs which have had no activity by the assignee for more than 30 days are fair game and should be unassigned.</li>
                <li>Once your charm is working and tested with any compatible charms, make sure it passes <tt>charm proof path/to/your/charm</span></tt></li>
                <li><tt>bzr init</tt> in your charm's root directory</li>
