@@ -32,7 +32,7 @@ complete, create a local copy and work on a feature branch.
     git clone git@github.com:{yourusername}/juju-docs.git
     cd juju-docs
     
-Add a second remote to the upstream Juju repository your fork came from. This lets you use commands such as `git pull juju develop` to update a branch from the original trunk, as you'll see below.
+Add a second remote to the upstream Juju repository your fork came from. This lets you use commands such as `git pull juju juju-docs-upstream` to update a branch from the original trunk, as you'll see below.
 
     git remote add juju-docs-upstream git@github.com:juju/docs.git
 
