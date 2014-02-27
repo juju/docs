@@ -34,7 +34,7 @@ complete, create a local copy and work on a feature branch.
     
 Add a second remote to the upstream Juju repository your fork came from. This lets you use commands such as `git pull juju develop` to update a branch from the original trunk, as you'll see below.
 
-    git remote add juju git@github.com:juju/docs.git
+    git remote add juju-docs-upstream git@github.com:juju/docs.git
 
 Create a feature branch to work on:
 
@@ -119,4 +119,4 @@ documentation to make working with the Juju Docs easier.
     # Update your local develop branch with the latest from the juju remote.
     # Then make sure to push that back up to your fork on github to keep
     # everything in sync.
-  juju-sync = "!f() { git checkout develop && git pull juju develop && git push origin develop; }; f"
+  juju-sync = "!f() { git checkout develop && git pull juju juju-docs-upstream && git push origin juju-docs-upstream; }; f"
