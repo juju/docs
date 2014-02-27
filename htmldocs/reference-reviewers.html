@@ -121,7 +121,7 @@
                <li><a class="reference external" href="https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&amp;field.component=3&amp;field.component=4">https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&amp;field.component=3&amp;field.component=4</a></li>
                <li><a class="reference external" href="http://manage.jujucharms.com/tools/review-queue">http://manage.jujucharms.com/tools/review-queue</a></li>
                </ul>
-               <h3 id="update-store">Updating the store</h3>
+               <h3 id="update-store">Updating the store with new Charms</h3>
 
 					<p>There are two methods of updating the store. One is promulgation of new charms, the other is 
 					updates to charms which already exist in the store:</p>
@@ -137,7 +137,7 @@ bzr push lp:~charmers/charms/precise/&lt;CHARM_NAME&gt;/trunk
 					really hard to delete from the store in the future. Now you can promulgate:</p>
 <pre class="prettyprint lang-bash">
 juju charm promulgate </path/to/charm>
-</pre>
+</pre>           
 
 					<h4 id="updating-charms">Updating existing charms in the store</h4>
 
@@ -162,8 +162,13 @@ juju charm get <CHARM_NAME>
 					<p>If you find anything that's lacking in the charm feel free to open bugs against that charm. 
 					This will help us curb the amount of charms to review during our audit.</p>
                
-         
-               
+      <h3 id="bundles">Updating the store with Bundles</h3>   
+          <p>Bundles are simpler to push to the store:</p>
+          <pre class="prettyprint lang-bash">
+          bzr init lp:~charmers/charms/bundles/<BUNDLES_NAME>/bundle
+          bzr push lp:~charmers/charms/bundles/<BUNDLES_NAME>/bundle
+          </pre>
+          <p>There is no promulgation step for bundles. 
                
                
                
