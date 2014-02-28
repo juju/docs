@@ -73,71 +73,76 @@
 
             <h2>Introduction</h2>
             <p>
-            Juju provides a feature called "manual provisioning" that enables you to deploy Juju, and charms, to existing systems. We will describe in this section how to configure an environment using this feature.
-            </p>
-            <p class="note"><strong>Note:</strong> Manual provisioning is still in development, and should be considered experimental. There is at least <a href="https://bugs.launchpad.net/juju-core/+bug/1238934">one bug</a> that needs to be solved before we consider this feature ready for end users. </p>
+            Juju provides a feature called "manual provisioning" that enables you to deploy Juju, and charms, to existing systems. This is useful if you have groups of machines that you want to use for Juju but don't want to add the complexity of a new OpenStack or MAAS setup. It is also useful as a means of deploying workloads to VPS providers and other cheap hosting options. We will describe in this section how to configure an environment using this feature.</p>
 
             <h2>Prerequisites</h2>
-            <p>Manual provisioning enables you to run Juju on systems that have a supported operating system installed. You will need to ensure that you have both SSH access and sudo rights. It is not necessary to have a password-less login, however it will improve the experience by reducing the need for repeated logins.</p>
+            <p>Manual provisioning enables you to run Juju on systems that have a supported operating system installed. You will need to ensure that you have both SSH access and sudo rights. It is not necessary to <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys">have a password-less login</a>, however it will improve the experience by reducing the need for repeated logins.</p>
 
             <h2>Configuration</h2>
-            <p>You should start by generating a generic configuration file for Juju and then switching to the "null" provider by using the command:
+            <p>You should start by generating a generic configuration file for Juju and then switching to the Manual provider by using the command:
 <pre class="prettyprint lang-bash">
 juju generate-config
-juju switch null
+juju switch manual
 </pre>
             <p>This will generate a file, <strong>environments.yaml</strong> (if it doesn't already exist), which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
             <p class="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
-            <p>The generic configuration sections generated for the null provider will look something like this, though Juju will generate this automatically you usually don't need to edit it:</p>
+            <p>The generic configuration sections generated for the manual provider will look something like this, though Juju will generate this automatically you usually don't need to edit it:</p>
 <pre class="prettyprint lang-yaml">
 ## https://juju.ubuntu.com/docs/config-manual.html
-"null":
-    type: "null"
-    admin-secret: 772b9471131c6b5883475e3908156d32
-    storage-auth-key: 834ralkjszcq34ur2234hjklds
-    ## set bootstrap-host to the host where the bootstrap machine agent
-    ## should be provisioned.
-    bootstrap-host:
-    ## set the login user to bootstrap the machine as. If left blank,
-    ## juju will connect to the bootstrap machine as the current user.
-    # bootstrap-user:
-    ## set the IP address for the bootstrap machine to listen on for
-    ## storage requests. If left blank, storage will be served on all
-    ## network interfaces.
-    # storage-listen-ip:
-    # storage-port: 8040
-</pre>
-            <p class="note"><strong>Note:</strong> The quotes around "null" are required, as <code>null</code> is a reserved identifier in YAML.</p>
+    manual:
+        type: manual
+        # bootstrap-host holds the host name of the machine where the
+        # bootstrap machine agent will be started.
+        bootstrap-host: somehost.example.com
 
+        # bootstrap-user specifies the user to authenticate as when
+        # connecting to the bootstrap machine. If defaults to
+        # the current user.
+        # bootstrap-user: joebloggs
+
+        # storage-listen-ip specifies the IP address that the
+        # bootstrap machine's Juju storage server will listen
+        # on. By default, storage will be served on all
+        # network interfaces.
+        # storage-listen-ip:
+
+        # storage-port specifes the TCP port that the
+        # bootstrap machine's Juju storage server will listen
+        # on. It defaults to 8040
+        # storage-port: 8040
+</pre>
             <p>When bootstrapped, tools storage will be served from the <code>bootstrap-host</code> on the specified <code>storage-listen-ip</code> and <code>storage-port</code>.</p>
 
-            <p>The null provider does not perform automatic machine provisioning like other providers; instead, you must manually provision machines into the environment. Provisioning machines is described in the following sections.</p>
+            <p>The manual provider does not perform automatic machine provisioning like other providers; instead, you must manually provision machines into the environment. Provisioning machines is described in the following sections.</p>
 
             <h2>Bootstrapping</h2>
-            <p>To bootstrap a null environment, you must specify the <code>bootstrap-host</code> configuration, and optionally the <code>bootstrap-user</code> configuration. If <code>bootstrap-user</code> is not specified, then Juju will ssh to the bootstrap host as the current user. Once the configuration is specified, you bootstrap as usual:</p>
+            <p>To bootstrap a manual environment, you must specify the <code>bootstrap-host</code> configuration, and optionally the <code>bootstrap-user</code> configuration. If <code>bootstrap-user</code> is not specified, then Juju will ssh to the bootstrap host as the current user. Once the configuration is specified, you bootstrap as usual:</p>
 <pre class="prettyprint lang-bash">
 juju bootstrap
 </pre>
             <p>The <code>juju bootstrap</code> command will connect to <code>bootstrap-host</code> via SSH, and copy across and install the Juju agent.</p>
 
-            <p class="note"><strong>Note:</strong> Automated destruction of null environments is currently unimplemented. To remove Juju from the <code>bootstrap-host</code>, you will need to manually stop and remove the upstart jobs (<code>/etc/init/juju*</code>).</p>
+            <p class="note"><strong>Note:</strong> Automated destruction of manual environments is currently unimplemented. To remove Juju from the <code>bootstrap-host</code>, you will need to manually stop and remove the upstart jobs (<code>/etc/init/juju*</code>).</p>
 
             <h2>Adding machines</h2>
-            <p>To add another machine into a null environment, you must use a variant of the <code>juju add-machine</code> command, such as follows:</p>
+            <p>To add another machine into a manual environment, you must use a variant of the <code>juju add-machine</code> command, such as follows:</p>
+
 <pre class="prettyprint lang-bash">
 juju add-machine ssh:juju.ubuntu.com
 juju add-machine ssh:10.1.1.2
 juju add-machine ssh:otheruser@10.1.1.3
 </pre>
+
 <p>As with bootstrapping, <code>juju add-machine ssh:...</code> will connect to the machine via SSH to install the Juju agent. Machines added in this way may be removed in the usual manner, with <code>juju destroy-machine</code>.</p>
 
             <h2>Considerations and caveats</h2>
-            <p>As is implied by its name, the null provider does not attempt to control all aspects of the environment, and leaves much to the user. There are several additional things to consider:</p>
+            <p>As is implied by its name, the manual provider does not attempt to control all aspects of the environment, and leaves much to the user. There are several additional things to consider:</p>
             <ul>
                 <li>All machines added with <code>juju add-machine ssh:...</code> must be able to address and communicate directly with the <code>bootstrap-host</code>, and vice-versa.</li>
                 <li>Sudo access is required on all manually provisioned machines, to install the Juju upstart services.</li>
                 <li>Manually provisioned machines must be running a supported version of Ubuntu (12.04+).</li>
-                <li>It is not currently possible to manually provision machines into non-null provider environments.</li>
+                <li>It is not currently possible to manually provision machines into non-manual provider environments.</li>
+                <li>Since adding machines is a manual step, using the manual provider doesn't have the "instant elasticity" benefits of using a proper provider; if you're an IaaS provider and want to help us natively support you, <a href="https://juju.ubuntu.com/community/">please contact us</a>.</li> 
             </ul>
 
             </section>
