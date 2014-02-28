@@ -484,6 +484,22 @@ pre.lang-yaml .typ, pre.lang-yaml .kwd, pre.lang-yaml .lit {
   color: #fff;
 }
 
+pre.prettyprint.input:before {
+  display: block;
+  color: #DD4814;
+  font-weight: bolder;
+  font-size: 12pt;
+  content: "Input";
+}
+
+pre.prettyprint.output:before {
+  display: block;
+  color: #DD4814;
+  font-weight: bolder;
+  font-size: 12pt;
+  content: "Output";
+}
+
 pre.prettyprint, code.prettyprint {
   background-color: #333 !important;
   color: #fff;
