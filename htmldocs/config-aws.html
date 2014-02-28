@@ -74,7 +74,18 @@
             <section id="config_aws">
             <h1>Configuring for Amazon Web Services</h1>
 	    <p>This process requires you to have an Amazon Web Services (AWS) account. If you have not signed up for one yet, it can obtained at <a href="http://aws.amazon.com">http://aws.amazon.com</a>.</p>
-            <p>You should start by generating a generic configuration file for Juju, using the command:
+
+	    <h2 id="quick_config">Quick Configuration</h2>
+
+	    <p>The fastest way to configure AWS is to launch the quick start:</p>
+
+		<pre class="prettyprint lang-bash">juju quickstart -i</pre>
+
+		<p>Then navigate to the AWS section using the arrow keys, hit enter to enter the section. Navigate through the wizard and enter the proper keys and values. Then select the back button and hit <tt>Ctrl</tt>-<tt>X</tt> to exit the UI and continue on. There should be no need to manually configure after this step as quickstart will ensure you enter all the proper fields before letting you move on.</p>
+
+	    <h2 id="manual_config">Manual Configuration</h2>
+
+            <p>To manually set up AWS you should start by generating a generic configuration file for Juju, using the command:
 <pre class="prettyprint lang-bash">juju generate-config</pre>
             <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
             <p class ="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>

@@ -74,6 +74,17 @@
             <section id="config_azure">
             <h1>Configuring for Windows Azure</h1>
             <p>This process requires you to have an Windows Azure account. If you have not signed up for one yet, it can obtained at <a href="http://www.windowsazure.com/">http://www.windowsazure.com/</a>.</p>
+
+        	<h2 id="quick_config">Quick Configuration</h2>
+
+	    	<p>The fastest way to configure the Azure provider is to launch the quick start:</p>
+
+			<pre class="prettyprint lang-bash">juju quickstart -i</pre>
+
+			<p>Then navigate to the Azure section using the arrow keys, hit enter to enter the section. Navigate through the wizard and enter the proper keys and values. Then select the back button and hit <tt>Ctrl</tt>-<tt>X</tt> to exit the UI and continue on. There should be no need to manually configure after this step as quickstart will ensure you enter all the proper fields before letting you move on.</p>
+
+	    	<h2 id="manual_config">Manual Configuration</h2>
+
             <p>You should start by generating a generic configuration file for Juju, using the command:
             <pre class="prettyprint">juju generate-config</pre>
             <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).

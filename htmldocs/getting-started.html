@@ -21,12 +21,6 @@
 	</head>
 <!--End-Head-->
 
-
-
-
-
-
-
   <body class="resources">
   	
 <!--Header-->
@@ -76,7 +70,7 @@
                 <p>This tutorial will show you how to get started with Juju, including installing, configuring and bootstrapping a new Juju environment.
                 Before you start you will need:</p>
                 <ul>
-                <li>An Ubuntu, OSX or Windows machine to install the client on.</li>
+                <li>An Ubuntu, OSX or Windows machine to install the client or Vagrant box on.</li>
                 <li>An environment which can provide a new server with an Ubuntu cloud operating system image on-demand. This includes services such as Amazon EC2, HP Cloud, an OpenStack installation, or your local machine</li>
                 <li> An SSH key-pair. If you have not already set one up, you need to generate an appropriate keypair.
                  On Linux and Mac OSX:
@@ -97,7 +91,7 @@ On Windows: See the <a href="getting-started-keygen-win.html">Windows instructio
                   <div data-section="ubuntu">
                     <p>To install Juju, you simply need to grab the latest juju-core package from the PPA:</p>
                     <pre class="prettyprint lang-bash">sudo add-apt-repository ppa:juju/stable
-sudo apt-get update && sudo apt-get install juju-core</pre>
+sudo apt-get update && sudo apt-get install juju-core juju-quickstart</pre>
                   </div>
                   <div data-section="macosx">
                     <p>Juju is in <a href="http://brew.sh/">Homebrew</a>, to install do:</p>
@@ -128,12 +122,20 @@ export PATH=$PATH:$GOPATH/bin</pre>
             <section id="config">
             <h1>Configuring</h1>
             
-            <p>Now the Juju software is installed, it needs to be configured to use your particular cloud provider. This is done by generating and editing a file, <code>environments.yaml</code>, which will live in your <code>~/.juju/</code> directory on Linux and OSX, <code>%LOCALAPPDATA%/Juju</code> on Windows. You can generate the environments file manually, but Juju also includes a boilerplate configuration option that will flesh out most of the file for you and minimise the amount of work (and potential errors).</p>
+            <p>Now the Juju software is installed, it needs to be configured to use your particular cloud provider. This is done by generating and editing a file, <code>environments.yaml</code>, which will live in your <code>~/.juju/</code> directory on Linux and OSX, <code>%LOCALAPPDATA%/Juju</code> on Windows. You can generate the environments file manually, but Juju also includes a quick start that will flesh out most of the file for you and minimise the amount of work (and potential errors).</p>
+
             <p>To generate an initial config file, you simply need to run:</p>
-            <pre class="prettyprint lang-bash">juju generate-config</pre>
-            
-            <p>This command will cause a file to be written to your ~/.juju directory if an environments.yaml file does not already exist. It will also create the ~./juju directory if that does not exist.</p>
-            <p>This file will contain sample profiles for different types of cloud services, but you will need to edit the files to provide specific information for your cloud provider. Sections are created for Amazon (AWS) services, HPCloud and a generic OpenStack instance (and for the local provider if running on Linux). For more specifics on what needs to be changed, see the relevant sections below.</p>
+
+            <pre class="prettyprint lang-bash">juju quickstart -i</pre>
+
+            <aside>
+              <iframe class="youtube-player" type="text/html" width="400" height="300" src="http://youtu.be/LVknLr1spPo?t=17s" frameborder="0"></iframe>
+            </aside>
+
+                      
+            <p>This command provides you a text user interface for you to generate your configuration. You can also use the command <tt>juju init</tt> to write out a templated file by hand.</p>
+
+            <p>The quickstart UI has sections for each cloud provider that you can fill in with your credentials. For more specifics on what needs to be changed for each provider, see the relevant sections below:</p>
             <ul>
              <li><a href="config-aws.html">Configuring for Amazon AWS</a></li>
              <li><a href="config-azure.html">Configuring for Windows Azure</a></li>
@@ -142,6 +144,8 @@ export PATH=$PATH:$GOPATH/bin</pre>
              <li><a href="config-maas.html">Configuring for MAAS</a></li>
              <li><a href="config-local.html">Configuring for LXC local provider (Linux)</a></li>
             </ul>
+
+            <p>If you prefer to generate the <tt>~/.juju/environments.yaml</tt> file by hand, you can use the command <tt>juju generate-config</tt>. If at any time you need to modify or add other cloud providers, you can use <tt>juju quickstart -i</tt> to go back into the text user interface.</p>
             
             </section>
             <section id="test">
