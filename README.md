@@ -80,6 +80,19 @@ And start your second feature branch.
   
     git checkout -b {featureBranch2}
 
+## Keeping your fork in sync with Juju docs upstream
+
+You should now have both the upstream branch and your fork listed in git, `git remote -v` should return something like:
+
+    juju-docs-upstream	git@github.com:juju/docs.git (fetch)
+    juju-docs-upstream	git@github.com:juju/docs.git (push)
+    origin	git@github.com:castrojo/docs (fetch)
+    origin	git@github.com:castrojo/docs (push)
+
+To fetch and merge with the upstream branch:
+
+    git fetch juju-docs-upstream
+    git merge juju-docs-upstream/master
 
 # Helpful Git tools and aliases
 
