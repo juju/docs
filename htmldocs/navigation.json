@@ -9,8 +9,8 @@
         "OpenStack": "config-openstack.html",
         "MAAS (bare metal)": "config-maas.html",
         "Local": "config-local.html",
-        "Manual Provisioning": "config-manual.html",
         "Vagrant": "config-vagrant.html",
+        "Manual Provisioning": "config-manual.html",
         "Testing your setup": "getting-started.html#test"
       }
     },
