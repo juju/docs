@@ -127,33 +127,18 @@ sudo apt-get -y install virtualbox vagrant sshuttle</pre>
 precise-server-cloudimg-amd64-juju-vagrant-disk1.box</a></p>
 <p><a href="http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-juju-vagrant-disk1.box">
 precise-server-cloudimg-i386-juju-vagrant-disk1.box</a></p>
-<h3>12.10:</h3>
-<p><a href="http://cloud-images.ubuntu.com/vagrant/quantal/current/quantal-server-cloudimg-amd64-juju-vagrant-disk1.box">
-quantal-server-cloudimg-amd64-juju-vagrant-disk1.box</a></p>
-<p><a href="http://cloud-images.ubuntu.com/vagrant/quantal/current/quantal-server-cloudimg-i386-juju-vagrant-disk1.box">
-quantal-server-cloudimg-i386-juju-vagrant-disk1.box</a></p>
-<h3>13.04:</h3>
-<a href="http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-juju-vagrant-disk1.box">
-raring-server-cloudimg-amd64-juju-vagrant-disk1.box</a></p>
-<p><a href="http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-i386-juju-vagrant-disk1.box">
-raring-server-cloudimg-i386-juju-vagrant-disk1.box</a></p>
-<h3>13.10:</h3>
-<a href="http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-juju-vagrant-disk1.box">
-saucy-server-cloudimg-amd64-juju-vagrant-disk1.box</a></p>
-<p><a href="http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-i386-juju-vagrant-disk1.box">
-saucy-server-cloudimg-i386-juju-vagrant-disk1.box</a></p>
 <p>
-If you are unsure which one to fetch, use the 12.04 builds, as this is the long term support release of Ubuntu. Most modern machines are now 64bit (x86_64 AMD64).</p>
+If you are unsure which one to fetch, use the 12.04 builds, as this is the long term support release of Ubuntu. Most modern machines are now 64bit (x86_64 AMD64). If you need other versions of Ubuntu, check out the <a href="http://cloud-images.ubuntu.com/vagrant/">Cloud Images</a></p>
 
 <h2>Getting started!</h2>
 <p>Vagrant makes getting started really easy.</p>
           <span class="number" > 1 </span>
           <div class="step">
           <p>Choose a directory to work in. This directory will be shared with the guest, and contain the vagrant configuration for the machine. Run:</p>
-<pre class="prettyprint lang-bash">vagrant box add JujuQuickStart &LT;URL&GT;</pre>
+<pre class="prettyprint lang-bash">vagrant box add JujuBox &LT;URL&GT;</pre>
 The URL can be from the list above or a local file if you have already downloaded a suitable box. For example: 
-<pre class="prettyprint lang-bash">vagrant box add JujuQuickStart http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-juju-vagrant-disk1.box</pre>
-<p>This will download the box from the URL you chose above.The box will be given the name of "JujuQuickStart"</p>
+<pre class="prettyprint lang-bash">vagrant box add JujuBox http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box</pre>
+<p>This will download the box from the URL you chose above.The box will be given the name of "JujuBox"</p>
           </div>
 
 
@@ -161,7 +146,7 @@ The URL can be from the list above or a local file if you have already downloade
           <div class="step">
           <h2>Initialise and start</h2>
 <p>Initialize this environment by running:</p>
-<pre class="prettyprint lang-bash">vagrant init JujuQuickStart</pre>
+<pre class="prettyprint lang-bash">vagrant init JujuBox</pre>
 
 <p>Then start it with:</p> 
 <pre class="prettyprint lang-bash">vagrant up</pre>
