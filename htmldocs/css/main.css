@@ -488,7 +488,7 @@ pre.prettyprint.input:before {
   display: block;
   color: #DD4814;
   font-weight: bolder;
-  font-size: 12pt;
+  font-size: 10px;
   content: "Input";
 }
 
@@ -496,7 +496,7 @@ pre.prettyprint.output:before {
   display: block;
   color: #DD4814;
   font-weight: bolder;
-  font-size: 12pt;
+  font-size: 10px;
   content: "Output";
 }
 
