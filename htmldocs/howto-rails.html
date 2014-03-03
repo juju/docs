@@ -94,7 +94,7 @@
             Create a YAML config file with your application's name and its git location
         </p>
         <p>
-            <strong>sample-app.yaml</strong>
+            <code>sample-app.yaml</code>
         </p>
 <pre class="prettyprint lang-yaml">
 sample-app:
@@ -104,41 +104,47 @@ sample-app:
             Deploy the application and a proxy:
         </p>
 <pre class="prettyprint lang-bash">
-juju deploy rails myapp --config sample-app.yaml
-juju deploy haproxy
-juju add-relation haproxy myapp
+$ juju deploy --config sample-app.yaml rails myapp
+$ juju deploy haproxy
+$ juju add-relation haproxy myapp
 </pre>
         <p>
             Deploy and relate database:
         </p>
 <pre class="prettyprint lang-bash">
-juju deploy postgresql
-juju add-relation postgresql:db myapp
+$ juju deploy postgresql
+$ juju add-relation postgresql:db myapp
 </pre>
         <p>
             Now you can run migrations:
         </p>
 <pre class="prettyprint lang-bash">
-juju ssh myapp/0 run rake db:migrate
+$ juju ssh myapp/0 run rake db:migrate
 </pre>
         <p>
             Seed database
         </p>
-<pre class="prettyprint lang-bash">juju ssh myapp/0 run rake db:seed
+<pre class="prettyprint lang-bash">
+$ juju ssh myapp/0 run rake db:seed
 </pre>
         <p>
             And finally expose the proxy:
         </p>
-<pre class="prettyprint lang-bash">juju expose haproxy</pre>
+<pre class="prettyprint lang-bash">
+$ juju expose haproxy
+</pre>
 <p>
             Find the instance's public URL from
         </p>
-<pre class="prettyprint lang-bash">juju status haproxy</pre>
+<pre class="prettyprint lang-bash">
+$ juju status haproxy
+</pre>
         <p>
             Scale horizontally by adding and removing units:
         </p>
-<pre class="prettyprint lang-bash">juju add-unit myapp
-juju remove-unit myapp
+<pre class="prettyprint lang-bash">
+$ juju add-unit myapp
+$ juju remove-unit myapp
 </pre>
         <p>
             Or go even larger with <code>juju add-unit -n10 myapp</code> for 10 nodes.
@@ -173,27 +179,31 @@ juju remove-unit myapp
             In this example the local environment is named "local" and we'll deploy to an AWS environment called <code>amazon</code>. First let's <code>switch</code> to the local environment and bootstrap.
         </p>
 <pre class="prettyprint lang-bash">
-juju switch local
-juju bootstrap
+$ juju switch local
+$ juju bootstrap
 </pre>
         <p>
             Create a YAML config file with your application's name and its git location
         </p>
         <p>
-            <strong>sample-app.yaml</strong>
+            <code>sample-app.yaml</code>
         </p>
-<pre class="prettyprint lang-yaml">sample-app:
+<pre class="prettyprint lang-yaml">
+sample-app:
   repo: https://github.com/pavelpachkovskij/sample-rails
 </pre>
         <p>
             Deploy the application and database:
         </p>
-<pre class="prettyprint lang-bash">juju deploy rails myapp --config sample-app.yaml
-juju deploy postgresql</pre>
+<pre class="prettyprint lang-bash">
+$ juju deploy --config ~/sample-app.yaml rails myapp
+$ juju deploy postgresql
+</pre>
         <p>
             and relate them:
         </p>
-<pre class="prettyprint lang-bash">juju add-relation myapp postgresql
+<pre class="prettyprint lang-bash">
+$ juju add-relation myapp postgresql
 </pre>
         <p>
             Now open up your browser and go to <code>http://localhost</code> to get your application loaded in your browser.
@@ -204,7 +214,8 @@ juju deploy postgresql</pre>
         <p>
             Continue to write your code, push to git as you land features and fixes. When you're ready to test it you can tell Juju to check the git repository again:
         </p>
-<pre class="prettyprint lang-bash">juju set myapp repo=https://github.com/yourapplication
+<pre class="prettyprint lang-bash">
+$ juju set myapp repo=https://github.com/yourapplication
 </pre>
         <p>
             The charm will then fetch the latest code and you can refresh your browser at <code>http://localhost</code>.
@@ -218,30 +229,35 @@ juju deploy postgresql</pre>
         <p>
             After you've repeatedly upgraded your application locally it's time to push it out to a place where your coworkers can see your app in all its glory, let's push this to AWS. Same exact commands as before, just to a different environment:
         </p>
-<pre class="prettyprint lang-bash">juju switch amazon
-juju bootstrap
-juju deploy --config ~/myapp.yaml rails myapp 
-juju deploy postgresql
-juju add-relation postgresql myapp
+<pre class="prettyprint lang-bash">
+$ juju switch amazon
+$ juju bootstrap
+$ juju deploy --config ~/myapp.yaml rails myapp 
+$ juju deploy postgresql
+$ juju add-relation postgresql myapp
 </pre>
         <p>
             Since we're on a public cloud and not on a local provider we need to explicitly expose the service and get its public IP:
         </p>
-<pre class="prettyprint lang-bash">juju expose myapp
-juju status myapp
+<pre class="prettyprint lang-bash">
+$ juju expose myapp
+$ juju status myapp
 </pre>
         <p>
             And put the ec2 URL in your browser. If you want to enable some horizontal scalability to your application you can do so, even after you've deployed!
         </p>
-<pre class="prettyprint lang-bash">juju deploy haproxy
-juju add-relation haproxy myapp
-juju expose haproxy
-juju unexpose myapp
+<pre class="prettyprint lang-bash">
+$ juju deploy haproxy
+$ juju add-relation haproxy myapp
+$ juju expose haproxy
+$ juju unexpose myapp
 </pre>
         <p>
             And then get the public IP from the haproxy instead (notice how we've unexposed your application so that only haproxy is serving the public internet):
         </p>
-<pre class="prettyprint lang-bash">juju status haproxy</pre>
+<pre class="prettyprint lang-bash">
+$ juju status haproxy
+</pre>
         <p>
             Now you can <code>juju add-unit myapp</code> and <code>juju remove-unit myapp</code> based on load.
         </p>
@@ -251,8 +267,9 @@ juju unexpose myapp
         <p>
             The local containers survive reboots and do not go away until you explicitly tear the environment down. Now that your coworkers have seen your great application let's also stop spending money:
         </p>
-<pre class="prettyprint lang-bash">juju destroy-environment -e amazon
-juju destroy-environment -local
+<pre class="prettyprint lang-bash">
+$ juju destroy-environment -e amazon
+$ juju destroy-environment -e local
 </pre>
         <h2 id="charm-details">
             Charm Details

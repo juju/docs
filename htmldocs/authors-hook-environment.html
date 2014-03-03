@@ -67,7 +67,7 @@
 <!--End-Preamble-->
 <article>
 <section id="hook-execution-environment">
-<h1>Hook execution environment</h1>
+<h1>How hooks are run</h1>
 
 <p>When a charm is deployed onto a unit, the raw charm is extracted into a
 directory; this directory is known as the charm directory. It's owned and
@@ -172,7 +172,7 @@ All hook output is currently logged anyway, so it's theoretically redundant with
 <code>echo</code>, but this is an implementation detail and should not be depended
 upon. If it's important, please <code>juju-log</code> it.</p>
 
-<pre class="prettyprint lang-bash">
+<pre class="prettyprint input lang-bash">
 juju-log "some important text"
 </pre>
 
@@ -189,18 +189,19 @@ logging levels and targets in more detail is a known
 
 <p><code>unit-get</code> returns information about the local unit. It accepts a
 single argument, which must be <code>private-address</code> or
-<code>public-address</code>. It is not affected by context.</p>
-
-<pre class="prettyprint">
+<code>public-address</code>. It is not affected by context:</p>
+<pre class="prettyprint input lang-bash">
 unit-get private-address
+</pre>
+<pre class="prettyprint output lang-bash">
 10.0.1.101
 </pre>
-
-<pre class="prettyprint">
+<pre class="prettyprint input lang-bash">
 unit-get public-address
+</pre>
+<pre class="prettyprint output lang-bash">
 foo.example.com
 </pre>
-
 </section>
 
 <section id="config-get">
@@ -215,34 +216,37 @@ a dictionary containing all definied config settings including nil values
 the value of that config key. Missing config keys are reported as having a
 value of nil, and do not return an error.</p>
 
-<p>Get the interesting bits of the config:</p>
-<pre class="prettyprint">
+<p>Getting the interesting bits of the config is done with:</p>
+<pre class="prettyprint input lang-bash">
 config-get
-
+</pre>
+<pre class="prettyprint output lang-bash">
 key: some-value
 another-key: default-value
 </pre>
-<p>Get the whole config including nulls:</p>
-<pre class="prettyprint">
+<p>To get the whole config including the nulls:</p>
+<pre class="prettyprint input lang-bash">
 config-get --all
-
+</pre>
+<pre class="prettyprint output lang-bash">
 key: some-value
 another-key: default-value
 no-default: null
 </pre>
-<p>Retrieve a specific value:</p>
-<pre class="prettyprint">
-config-get _key_
+<p>To retrieve a specific value pass its key as argument:</p>
+<pre class="prettyprint input lang-bash">
+config-get [key]
+</pre>
+<pre class="prettyprint output lang-bash">
+some-value
+</pre>
 
-default-value
-</pre>
-<p>Get a config setting with no value:</p>
-<pre class="prettyprint lang-bash">
-config-get no-default
-</pre>
-<p>Get a config setting that doesn't exist:</p>
-<pre class="prettyprint lang-bash">
-config-get missing-key
+<p>The command can also be call if no value is set and no default
+is set of even if the setting doesn't exist. In both cases nothing
+will be returned.</p>
+<pre class="prettyprint input lang-bash">
+config-get [key-with-no-default]
+config-get [missing-key]
 </pre>
 <p class = "note"><strong>Note: </strong> The above two examples are not misprints
  - asking for a value which doesn't exist or has not been set returns nothing and
@@ -256,13 +260,14 @@ raises no errors.</p>
 open, if and when the service is exposed to the outside world. It accepts a single
 port with an optional protocol, which may be <code>udp</code> or <code>tcp</code>,
 where <code>tcp</code> is the default.</p>
+
 <p>Examples:</p>
 <p>Open 80/tcp if and when the service is exposed:</p>
-<pre class="prettyprint lang-bash">
+<pre class="prettyprint input lang-bash">
 open-port 80
 </pre>
 <p>Open 1234/udp if and when the service is exposed:</p>
-<pre class="prettyprint lang-bash">
+<pre class="prettyprint input lang-bash">
 open-port 1234/udp
 </code></pre>
 
@@ -279,11 +284,11 @@ exposed, it has no effect; otherwise the port is marked for imminent closure. It
 accepts the same flags and arguments as <code>open-port</code>.</p>
 <p>Examples:</p>
 <p>Close 1234/udp if it was open:</p>
-<pre class="prettyprint lang-bash">
+<pre class="prettyprint input lang-bash">
 close-port 1234/udp
 </pre>
 <p>Close port 80 if it was open:</p>
-<pre class="prettyprint lang-bash">
+<pre class="prettyprint input lang-bash">
 close-port 80
 </pre>
 </section>
@@ -297,24 +302,28 @@ argument, which defaults to the current relation id. If it's not running in a re
 hook, <code>-r</code> needs to be specified. The <code>value</code> part of an argument
 is not inspected, and is stored directly as a string. Setting an empty string causes
 the setting to be removed.</p>
+
 <p>Examples:</p>
-<p>Set a pair of values for the local unit in the default relation:</p>
-<pre class="prettyprint lang-bash">
+<p>Setting a pair of values for the local unit in the default relation which is 
+stored in the environment variable <code>JUJU_RELATION_ID</code>:</p>
+<pre class="prettyprint input lang-bash">
 echo $JUJU_RELATION_ID
-
- server:3
-
+</pre>
+<pre class="prettyprint output lang-bash">
+server:3
+</pre>
+<p>The setting is done with:</p>
+<pre class="prettyprint input lang-bash">
 relation-set username=bob password=2db673e81ffa264c
 </pre>
 
-<p>Set a pair of values for the local unit in a specific relation:</p>
-<pre class="prettyprint lang-bash">
+<p>To set the pair of values for the local unit in a specific relation specify
+the relation id:</p>
+<pre class="prettyprint input lang-bash">
 relation-set -r server:3 username=jim password=12345
 </pre>
-<p>Clear a value for the local unit in the default relation:</p>
-<pre class="prettyprint lang-bash">
-echo $JUJU_RELATION_ID
-server:3
+<p>To clear a value for the local unit in the default relation enter:</p>
+<pre class="prettyprint input lang-bash">
 relation-set deprecated-or-unused=
 </pre>
 
@@ -355,35 +364,38 @@ will be printed; all values are always plain strings without any interpretation.
 If you need to specify a remote unit but want to see all settings, use <code>-</code>
 for the first argument.</p>
 
-<p>Get all settings from the default remote unit in the default relation:</p>
-<pre class="prettyprint lang-bash">
-$ echo $JUJU_RELATION_ID
-db:1
-$ echo $JUJU_REMOTE_UNIT
+<p>The environment variable <code>JUJU_REMOTE_UNIT</code> stores the default
+remote unit:</p>
+<pre class="prettyprint input lang-bash">
+echo $JUJU_REMOTE_UNIT
+</pre>
+<pre class="prettyprint output lang-bash">
 mongodb/2
-$ relation-get
+</pre>
+<p>Getting the settings of the default unit in the default relation is done
+with:</p>
+<pre class="prettyprint input lang-bash">
+relation-get
+</pre>
+<pre class="prettyprint output lang-bash">
 username: jim
 password: "12345"
 </pre>
-<p>Get one setting from the default remote unit in the default relation:</p>
-<pre class="prettyprint lang-bash">
-echo $JUJU_RELATION_ID
-db:1
-
-echo $JUJU_REMOTE_UNIT
-mongodb/2
-
+<p>To get one setting from the default remote unit in the default relation enter:</p>
+<pre class="prettyprint input lang-bash">
 relation-get username
+</pre>
+<pre class="prettyprint output lang-bash">
 jim
 </pre>
-<p>Get all settings from a particular remote unit in a particular relation:</p>
-<pre class="prettyprint lang-bash">
-echo $JUJU_RELATION_ID
-
+<p>To get all settings from a particular remote unit in a particular relation you
+specify them together with the command. So</p>
+<pre class="prettyprint input lang-bash">
 relation-get -r database:7 - mongodb/5
-
- username: bob
- password: 2db673e81ffa264c
+</pre>
+<pre class="prettyprint output lang-bash">
+username: bob
+password: 2db673e81ffa264c
 </pre>
 
 <p>Note that <code>relation-get</code> produces results that are <em>consistent</em>
@@ -425,22 +437,21 @@ seriously inconvenienced when the hole is closed without notice.</p>
 <p><code>relation-list</code> accepts the <code>-r</code> flag as above, and
 outputs the names of every remote unit currently known to be in the relation.</p>
 <p>Examples:</p>
-<p>Show all remote units in the current relation</p>
-<pre class="prettyprint lang-bash">
-$ echo $JUJU_RELATION_ID
-db:1
-
-$ relation-list
+<p>To show all remote units in the current relation enter:</p>
+<pre class="prettyprint input lang-bash">
+relation-list
+</pre>
+<pre class="prettyprint output lang-bash">
 mongodb/0
 mongodb/2
 mongodb/3
 </pre>
 
-<p>Show all remote units in a specific relation:</p>
-<pre class="prettyprint lang-bash">
-echo $JUJU_RELATION_ID
+<p>All remote units in a specific relation can be shown with:</p>
+<pre class="prettyprint input lang-bash">
 relation-list -r website:2
-
+</pre>
+<pre class="prettyprint output lang-bash">
 haproxy/0
 </pre>
 
@@ -451,21 +462,24 @@ haproxy/0
 
 <p><code>relation-ids</code> accepts a single argument which, in a relation
 hook, defaults to the name of the current relation.</p>
+
 <p>Examples:</p>
-<p>Show all relations like the current one:</p>
-<pre class="prettyprint lang-bash">
-$ echo $JUJU_RELATION
-server
-$ relation-ids
+<p>The current relation is stored in the environment variable <code>JUJU_RELATION</code>.
+So all relations like the current one can be shown with:</p>
+<pre class="prettyprint input lang-bash">
+relation-ids
+</pre>
+<pre class="prettyprint output lang-bash">
 server:1
 server:7
 server:9
 </pre>
-<p>Show all relations with the given name:</p>
-<pre class="prettyprint lang-bash">
-$ echo $JUJU_RELATION_ID
 
-$ relation-ids reverseproxy
+<p>To show all relations with a given name pass it as argument:</p>
+<pre class="prettyprint input lang-bash">
+relation-ids reverseproxy
+</pre>
+<pre class="prettyprint output lang-bash">
 reverseproxy:3
 </pre>
 
