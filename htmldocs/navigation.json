@@ -91,6 +91,7 @@
       "Juju Commands": "commands.html",
       "Juju constraints": "reference-constraints.html",
       "Glossary": "glossary.html",
+      "Charm Store Review Criteria": "reference-reviewers.html",
       "Contribute to the Docs!": "contributing.html"
     }
   }
