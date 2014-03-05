@@ -26,10 +26,11 @@ information on this.
 Git allows you to work in a lot of different work flows. Here is one that
 works well for our environment, if you are not already familiar with git.
 
-To set up the environment, first fork the repository. Once the fork is
+To set up the environment, first fork the [juju/docs](https://github.com/juju/docs) github 
+repository when you are logged into the github.com website. Once the fork is
 complete, create a local copy and work on a feature branch.
 
-    git clone git@github.com:{yourusername}/juju-docs.git
+    git clone git@github.com:{yourusername}/docs.git juju-docs
     cd juju-docs
     
 Add a second remote to the upstream Juju repository your fork came from. This lets you use commands such as `git pull juju juju-docs-upstream` to update a branch from the original trunk, as you'll see below.
