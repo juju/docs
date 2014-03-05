@@ -92,8 +92,17 @@ You should now have both the upstream branch and your fork listed in git, `git r
 
 To fetch and merge with the upstream branch:
 
-    git fetch juju-docs-upstream
-    git merge juju-docs-upstream/master
+    git checkout master; git fetch juju-docs-upstream; git merge --ff-only juju-docs-upstream/master
+    git push origin master
+
+# Doc Build Workflow
+
+This code is pulled into this branch in launchpad:
+
+    https://code.launchpad.net/~charmers/juju-core/github-docs
+
+The cron job that builds the docs once a day pulls from Launchpad, NOT this repository; if you are trying to fix something
+quickly on the production site you need to click "Import Now" on that branch to grab the fresh code from here.
 
 # Helpful Git tools and aliases
 
