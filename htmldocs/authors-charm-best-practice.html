@@ -101,6 +101,7 @@
             
             <p>If written in Bash:</p>
             <ul>
+              <li> Use <code>set -e</code> for all hooks written in Bash.  This option tells bash to exit the script if a command returns a non true result.  This option prevents the script from continuing when the script is known to be in an error state.</li>
               <li> <code>{variable}-value</code> rather than <code>$variable-value</code>?</li>
               <li> <code>$(COMMAND)</code> vs. <code>COMMAND</code>?</li>
               <li>Use <code>install</code> rather than <code>mkdir; chown</code>
