@@ -22,7 +22,7 @@
         "Service Configuration": "charms-config.html",
         "Service Relationships": "charms-relationships.html",
         "Exposing Services": "charms-exposing.html",
-        "Scaling Services": "charms-scaling.html",        
+        "Scaling Services": "charms-scaling.html",
         "Groups of Services": "charms-service-groups.html",
         "Destroying Services": "charms-destroy.html",
         "Managing environments": "charms-environments.html",
@@ -34,7 +34,8 @@
       "children": {
         "Deploy a Node.js app": "howto-node.html",
         "Test and deploy on Rails": "howto-rails.html",
-        "Manage Juju with the GUI": "howto-gui-management.html"
+        "Manage Juju with the GUI": "howto-gui-management.html",
+        "Vagrant Workflow": "howto-vagrant-workflow.html"
       }
     },
     "Troubleshooting": {
@@ -48,7 +49,7 @@
     "Amulet": "tools-amulet.html"
   },
   "Charm Authors": {
-    
+
     "Getting started": {
      "link": "authors-intro.html"
     },
@@ -58,7 +59,7 @@
     	"metadata.yaml": "authors-charm-metadata.html",
         "hooks": "authors-hook-kinds.html",
         "config.yaml": "authors-charm-config.html"
-        
+
       }
     },
     "Writing a Charm": {
@@ -66,13 +67,13 @@
       "children": {
     	"How hooks are run": "authors-hook-environment.html",
         "Relations lifecycle": "authors-charm-interfaces.html",
-        "Implementing interfaces": "authors-relations-in-depth.html",    
+        "Implementing interfaces": "authors-relations-in-depth.html",
         "Hook Errors": "authors-hook-errors.html",
         "Hook Debugging": "authors-hook-debug.html",
         "Subordinate Services": "authors-subordinate-services.html",
         "Implicit Relations": "authors-implicit-relations.html",
         "Charm Testing": "authors-testing.html"
-        
+
       }
     },
     "The Juju Charm Store": {
