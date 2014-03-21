@@ -1,0 +1,66 @@
+# User Guide
+
+  - [Getting Started](getting-started.html)
+  - [Amazon Web Service](config-aws.html)
+  - [Windows Azure](config-azure.html)
+  - [HP Public Cloud](config-hpcloud.html)
+  - [OpenStack](config-openstack.html)
+  - [MAAS (bare metal)](config-maas.html)
+  - [Local](config-local.html)
+  - [Vagrant](config-vagrant.html)
+  - [Manual Provisioning](config-manual.html)
+  - [Testing your setup](getting-started.html#test)
+  - [Using Charms](charms.html)
+  - [Deploying Services](charms-deploying.html)
+  - [Using constraints](charms-constraints.html)
+  - [Service Configuration](charms-config.html)
+  - [Service Relationships](charms-relations.html)
+  - [Exposing Services](charms-exposing.html)
+  - [Scaling Services](charms-scaling.html)
+  - [Groups of Services](charms-service-groups.html)
+  - [Destroying Services](charms-destroy.html)
+  - [Managing environments](charms-environments.html)
+  - [Using bundles](charms-bundles.html)
+  - [How to...](howto.html)
+  - [Deploy a Node.js app](howto-node.html)
+  - [Test and deploy on Rails](howto-rails.html)
+  - [Manage Juju with the GUI](howto-gui-management.html)
+  - [Vagrant Workflow](howto-vagrant-workflow.html)
+  - [Troubleshooting](troubleshooting-local.html)
+
+# Charm Authors
+
+  - [Getting started](authors-intro.html)
+  - [Components of a charm](authors-charm-components.html)
+  - [metadata.yaml](authors-charm-metadata.html)
+  - [/hooks](authors-charm-hooks.html)
+  - [config.yaml](authors-charm-config.html)
+  - [Charm walkthrough](authors-charm-writing.html)
+  - [How hooks are run](authors-hook-environment.html)
+  - [Relations lifecycle](authors-relations-in-depth.html)
+  - [Implementing interfaces](authors-charm-interfaces.html)
+  - [Hook Errors](authors-hook-errors.html)
+  - [Hook Debugging](authors-hook-debug.html)
+  - [Subordinate services](authors-subordinate-services.html)
+  - [Implicit Relations](authors-implicit-relations.html)
+  - [Charm Testing](authors-testing.html)
+  - [The Juju Charm Store](authors-charm-store.html)
+  - [Submit a charm](authors-charm-store.html#submitting)
+  - [Charm store policy](authors-charm-policy.html)
+  - [Best practices](authors-charm-best-practice.html)
+  - [Charm Feature Rating](authors-charm-quality.html)
+  - [Charm Icons](authors-charm-icon.html)
+
+# Tools
+
+  - [Charm Tools](tools-charm-tools.html)
+  - [Amulet](tools-amulet.html)
+
+# Reference
+
+  - [Juju commands](commands.html)
+  - [Juju constraints](reference-constraints.html)
+  - [Glossary](glossary.html)
+  - [Charm Review Criteria](reference-reviewers.html)
+  - [Contribute to the Docs!](contributing.html)
+

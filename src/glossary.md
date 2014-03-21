@@ -1,0 +1,149 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
+# Glossary of terms
+
+__Bootstrap__ \- To boostrap an environment means initializing it so that
+Services may be deployed on it.
+
+__Endpoint__ \- The combination of a service name and a relation name.
+
+__Environment__ \- An Environment is a configured location where Services can be
+deployed onto. An Environment typically has a name, which can usually be omitted
+when there's a single Environment configured, or when a default is explicitly
+defined. Depending on the type of Environment, it may have to be bootstrapped
+before interactions with it may take place (e.g. EC2). The local environment
+configuration is defined in the ~/.juju/environments.yaml file.
+
+__Charm__ \- A Charm provides the definition of the service, including its
+metadata, dependencies to other services, packages necessary, as well as the
+logic for management of the application. It is the layer that integrates an
+external application component like Postgres or WordPress into juju. A juju
+Service may generally be seen as the composition of its juju Charm and the
+upstream application (traditionally made available through its package).
+
+__Charm URL__ \- A Charm URL is a resource locator for a charm, with the
+following format and restrictions:
+
+    
+    
+    &LT;schema&GT;:[~&LT;user&GT;/]&LT;collection&GT;/&LT;name&GT;[-&LT;revision&GT;]
+
+`schema` must be either "cs", for a charm from the Juju charm store, or "local",
+for a charm from a local repository.
+
+`user` is only valid in charm store URLs, and allows you to source charms from
+individual users (rather than from the main charm store); it must be a valid
+Launchpad user name.
+
+`collection` denotes a charm's purpose and status, and is derived from the
+Ubuntu series targeted by its contained charms: examples include "precise",
+"quantal", "oneiric-universe".
+
+`name` is just the name of the charm; it must start and end with lowercase
+(ascii) letters, and can otherwise contain any combination of lowercase letters,
+digits, and "-"s.
+
+`revision`, if specified, points to a specific revision of the charm pointed to
+by the rest of the URL. It must be a non-negative integer.
+
+__Repository __ \- A location where multiple charms are stored. Repositories may
+be as simple as a directory structure on a local disk, or as complex as a rich
+smart server supporting remote searching and so on.
+
+__Relation __ \- Relations are the way in which juju enables Services to
+communicate to each other, and the way in which the topology of Services is
+assembled. The Charm defines which Relations a given Service may establish, and
+what kind of interface these Relations require.
+
+In many cases, the establishment of a Relation will result into an actual TCP
+connection being created between the Service Units, but that's not necessarily
+the case. Relations may also be established to inform Services of configuration
+parameters, to request monitoring information, or any other details which the
+Charm author has chosen to make available.
+
+__Service__ \- juju operates in terms of services. A service is any application
+(or set of applications) that is integrated into the framework as an individual
+component which should generally be joined with other components to perform a
+more complex goal.
+
+As an example, WordPress could be deployed as a service and, to perform its
+tasks properly, might communicate with a database service and a load balancer
+service.
+
+__Service Unit__ \- A running instance of a given juju Service. Simple Services
+may be deployed with a single Service Unit, but it is possible for an individual
+Service to have multiple Service Units running in independent machines. All
+Service Units for a given Service will share the same Charm, the same relations,
+and the same user-provided configuration.
+
+For instance, one may deploy a single MongoDB Service, and specify that it
+should run 3 Units, so that the replica set is resilient to failures.
+Internally, even though the replica set shares the same user-provided
+configuration, each Unit may be performing different roles within the replica
+set, as defined by the Charm.
+
+__Service Configuration__ \- There are many different settings in a juju
+deployment, but the term Service Configuration refers to the settings which a
+user can define to customize the behavior of a Service.
+
+The behavior of a Service when its Service Configuration changes is entirely
+defined by its Charm.
+
+__Provisioning Agent__ \- Software responsible for automatically allocating and
+terminating machines in an Environment, as necessary for the requested
+configuration.
+
+__Machine Agent__ \- Software which runs inside each machine that is part of an
+Environment, and is able to handle the needs of deploying and managing Service
+Units in this machine.
+
+__Service Unit Agent__ \- Software which manages all the lifecycle of a single
+Service Unit.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms)
+    - [Features](/features)
+    - [Deployment](/deployment)
+  - ## [Resources](/resources)
+
+    - [Overview](/resources/juju-overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/the-juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://canonical.com).
+
