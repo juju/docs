@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<!--Head-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Juju Documentation</title>
+		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+ 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+		<link href="./css/main.css" rel="stylesheet" type="text/css">
+
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+<!--End-Head-->
+
+
+
+
+
+
+
+  <body class="resources">
+
+<!--Header-->
+
+	<header class="banner global" role="banner">
+		<nav role="navigation" class="nav-primary nav-right">
+			<div class="logo">
+				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+					<span>Juju</span>
+				</a>
+			</div>
+			<ul>
+				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+			</ul>
+			<div id="box-search">
+				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+					<label class="off-left" for="s">Search:</label>
+					<input class="form-text" type="text" value="" name="s" id="s" />
+					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+				</form>
+			</div>
+		</nav>
+	</header>
+<!--End-Header-->
+<!--Preamble-->
+<div class="wrapper">
+  <div id="main-content" class="inner-wrapper" role="main">
+    <div class="row no-border">
+     <div class="header-navigation-secondary"></div>
+     <h2 class="pagetitle">Juju documentation</h2>
+    </div>
+    <section id="content" class="container-12">
+      <div class="grid-12 doc-container">
+        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
+        <div class="grid-9 doc-content">
+<!--End-Preamble-->
+          <article>
+            <section id="ss">
+        <h1 id="howto-simplestreams">
+            Using Simplestreams</h1>
+
+
+<p>When Juju bootstraps a cloud, it needs two critical pieces of information:</p>
+<ol>
+<li>The uuid of the image to use when starting new compute instances.</li>
+<li>The URL from which to download the correct version of a tools tarball.</li>
+</ol>
+<p>This necessary information is stored in a json metadata format called "simplestreams". For supported public cloud services such as Amazon Web Services, HP Cloud, Azure, etc, no action is required by the end user. However, those setting up a private cloud, or who want to change how things work (eg use a different Ubuntu image), can create their own metadata, after understanding a bit about how it works.</p>
+<p>The simplestreams format is used to describe related items in a structural fashion.(<a href="https://launchpad.net/simplestreams">See the Launchpad project lp:simplestreams for more details on implementation</a>). Below we will discuss how Juju determines which metadata to use, and how to create your own images and tools and have Juju use them instead of the defaults.</p>
+
+<h2 id="workflow">Basic Workflow</h2>
+
+<p>Whether images or tools, Juju uses a search path to try and find suitable metadata.The path components (in order of lookup) are:</p>
+
+<ol>
+<li>User supplied location (specified by tools-metadata-url or image-metadata-url config settings).</li>
+<li>The environment's cloud storage.</li>
+<li>Provider specific locations (eg keystone endpoint if on Openstack).</li>
+<li>A web location with metadata for supported public clouds (https://streams.canonical.com).</li>
+</ol>
+
+<p>Metadata may be inline signed, or unsigned. We indicate a metadata file is signed by using the '.sjson' extension. Each location in the path is first searched for signed metadata, and if none is found, unsigned metadata is attempted before moving onto the next path location.</p>
+
+<p>Juju ships with public keys used to validate the integrity of image and tools metadata obtained
+from https://streams.canonical.com. So out of the box, Juju will "Just Work" with any supported
+public cloud, using signed metadata. Setting up metadata for a private (eg Openstack) cloud requires
+metadata to be generated using tools which ship with Juju.</p>
+
+<h2 id="image-metadata-contents">Image Metadata Contents</h1>
+<p>Image metadata uses a simplestreams content type of &quot;image-ids&quot;.
+The product id is formed as follows:
+<pre class="prettyprint">
+com.ubuntu.cloud:server:&lt;series_version&gt;:&lt;arch&gt;
+</pre>
+For Example:
+<pre class="prettyprint">
+com.ubuntu.cloud:server:14.04:amd64
+</pre>
+Non-released images (eg beta, daily etc) have product ids like:
+<pre class="prettyprint">
+com.ubuntu.cloud.daily:server:13.10:amd64
+</pre>
+<p>The metadata index and product files are required to be in the following directory tree (relative to the URL associated with each path component):</p>
+<pre class="prettyprint">
+&lt;path_url&gt;
+  |-streams
+      |-v1
+         |-index.(s)json
+         |-product-foo.(s)json
+         |-product-bar.(s)json
+</pre>
+<p>The index file must be called &quot;index.(s)json&quot; (sjson for signed). The various product files are named according to the Path values contained in the index file.</p>
+<h1 id="tools-metadata-contents">Tools Metadata Contents</h1>
+<p>Tools metadata uses a simplestreams content type of &quot;content-download&quot;.
+The product id is formed as follows:</p>
+<pre class="prettyprint">
+&quot;com.ubuntu.juju:&lt;series_version&gt;:&lt;arch&gt;&quot;
+</pre>
+<p>For example:</p>
+<pre class="prettyprint">
+&quot;com.ubuntu.juju:12.04:amd64&quot;
+</pre>
+<p>The metadata index and product files are required to be in the following directory tree (relative to the URL associated with each path component). In addition, tools tarballs which Juju needs to download are also expected.</p>
+<pre class="prettyprint">
+  |-streams
+  |   |-v1
+  |      |-index.(s)json
+  |      |-product-foo.(s)json
+  |      |-product-bar.(s)json
+  |
+  |-releases
+      |-tools-abc.tar.gz
+      |-tools-def.tar.gz
+      |-tools-xyz.tar.gz
+</pre>
+<p>The index file must be called &quot;index.(s)json&quot; (sjson for signed). The product file and
+tools tarball name(s) match whatever is in the index/product files.</p>
+
+<h2 id="configuration">Configuration</h1>
+<p>For supported public clouds, no extra configuration is required; things work out-of-the-box. However, for testing purposes, or for non-supported cloud deployments, Juju needs to know where to find the tools and which image to run. Even for supported public clouds where all required metadata is available, the user can put their own metadata in the search path to override what is provided by the cloud.</p>
+<h3 id="user-specified-urls">User specified URLs</h3>
+<p>These are initially specified in the environments.yaml file (and then subsequently copied to the jenv file when the environment is bootstrapped). For images, use &quot;image-metadata-url&quot;; for tools, use &quot;tools-metadata-url&quot;. The URLs can point to a world readable container/bucket in the cloud, an address served by a http server, or even a shared directory which is accessible by all node instances running in the cloud.</p>
+<p>Assume an Apache http server with base URL <code>https://juju-metadata</code>, providing access to information at <code>&lt;base&gt;/images</code> and <code>&lt;base&gt;/tools</code>. The Juju environment yaml file could have the following entries (one or both):</p>
+
+<pre class="prettyprint">
+tools-metadata-url: https://juju-metadata/tools
+image-metadata-url: https://juju-metadata/images
+</pre>
+<p>The required files in each location is as per the directory layout described earlier.
+For a shared directory, use a URL of the form &quot;file:///sharedpath&quot;.</p>
+<h3 id="cloud-storage">Cloud storage</h3>
+<p>If no matching metadata is found in the user specified URL, environment&#39;s cloud storage is searched. No user configuration is required here - all Juju environments are set up with cloud storage which is used to store state information, charms etc. Cloud storage setup is provider dependent; for Amazon and Openstack clouds, the storage is defined by the &quot;control-bucket&quot; value, for Azure, the &quot;storage-account-name&quot; value is relevant.</p><p>The (optional) directory structure inside the cloud storage is as follows:</p>
+<pre class="prettyprint">
+<cloud storage top level>
+  |-tools
+  |   |-streams
+  |       |-v1
+  |   |-releases
+  |
+  |-images
+      |-streams
+          |-v1
+
+</pre>
+
+<p>Of course, if only custom image metadata is required, the tools directory will not be required, and vice versa.</p>
+<p>Note that if juju bootstrap is run with the <code>--upload-tools</code> option, the tools and metadata are placed according to the above structure. That&#39;s why the tools are then available for Juju to use.</p>
+
+<h3 id="provider-specific-storage">Provider specific storage</h3>
+<p>Providers may allow additional locations to search for metadata and tools. For OpenStack, Keystone endpoints may be created by the cloud administrator. These are defined as follows:</p>
+<dl>
+<dt>juju-tools</dt><dd> the &LT;path_url&GT; value as described above in Tools Metadata Contents</dd>
+<dt>product-streams</dt><dd>the &LT;path_url&GT; value as described above in Image Metadata Contents</dd>
+</dl>
+<p>Other providers may similarly be able to specify locations, though the implementation will vary.</p>
+ 
+<h3 id="central-web-location-(https://streams.canonical.com)">Central web location (<a href="https://streams.canonical.com">https://streams.canonical.com</a>)</h3>
+<p>This is the default location used to search for image and tools metadata and is used if no matches are found earlier in any of the above locations. No user configuration is required.</p>
+
+<h1 id="deploying-private-clouds">Deploying Private Clouds</h1>
+<p>There are two main issues when deploying a private cloud:</p>
+<ol>
+  <li>Images ids will be specific to the cloud.</li>
+  <li>Often, outside internet access is blocked</li>
+</ol>
+<p>Issue 1 means that image id metadata needs to be generated and made available.</p>
+<p>Issue 2 means that tools need to be mirrored locally to make them accessible.</p>
+<p>Juju tools exist to help with generating and validating image and tools metadata.
+For tools, it is often easiest to just mirror <code>https://streams.canonical.com/tools</code>.
+However image metadata cannot be simply mirrored because the image ids are taken from the cloud 
+storage provider, so this needs to be generated and validated using
+the commands described below.</p>
+<p>The available Juju metadata tools can be seen by using the help command:</p>
+<pre class="prettyprint">
+juju help metadata
+</pre>
+<p>The overall workflow is:
+<ul><li>generate image metadata</li>
+<li>copy image metadata to somewhere in the metadata search path</li>
+<li>optionally, mirror tools to somewhere in the metadata search path</li>
+<li>optionally, configure tools-metadata-url and/or image-metadata-url</li></ul>
+
+<h3>Image metadata</h3>
+<p>Generate image metadata using
+<pre class="prettyprint">
+juju metadata generate-image -d &lt;metadata_dir&gt;
+</pre>
+<p>As a minimum, the above command needs to know the image id to use and a directory in which to write the files.</p>
+
+<p>Other required parameters like region, series, architecture etc are taken from the current Juju environment (or an environment specified with the -e option). These parameters can also be overridden on the command line.</p>
+<p>The image metadata command can be run multiple times with different regions, series, architecture, and it will keep adding to the metadata files. Once all required image ids have been added, the index and product json files can be uploaded to a location in the Juju metadata search path. As per the Configuration section,
+this may be somewhere specified by the <code>image-metadata-url</code> setting or the cloud&#39;s storage etc.</p>
+<p>Examples:</p>
+<p>1. image-metadata-url</p>
+<ul>
+<li>upload contents of <metadata_dir> to <code>http://somelocation</code></li>
+<li>set image-metadata-url to <code>http://somelocation/images</code></li>
+</ul>
+
+<p>2. Cloud storage</p>
+<ul><li>upload contents of <metadata_dir> directly to environment&#39;s cloud storage</li>
+<li>Use the validation command to ensure an image id can be discovered for a given scenario (region series, arch):
+<pre class="prettyprint">
+  juju metadata validate-images
+</pre></li></ul>
+If run without parameters, the validation command will take all required details from the current Juju environment (or as specified by -e) and print the image id it would use to spin up an instance.
+Alternatively, series, region, architecture etc can be specified on the command line to override values in the environment config.</p>
+</ul>
+<h3>Tools metadata</h3>
+<p>Generally, tools and related metadata is mirrored from <code>https://streams.canonical.com/tools</code>. However, it is possible to manually generate metadata for a custom built tools tarball. <p>
+<p>First, create a tarball of the relevant tools and place in a directory structured like this:<p>
+<pre class="prettyprint">
+&lt;tools_dir&gt;/tools/releases/
+</pre>
+<p>Now generate relevant metadta for the tools by running the command:</p>
+<pre class="prettyprint">
+juju generate-tools -d &lt;tools_dir&gt;
+</pre>
+
+<p>Finally, the contents of <tools_dir> can be uploaded to a location in the Juju metadata search path. As per the Configuration section, this may be somewhere specified by the tools-metadata-url setting or the cloud&#39;s storage path settings etc.</p>
+<p>Examples:
+<p>1. tools-metadata-url</p>
+<ul>
+<li>upload contents of <tools_dir> to <code>http://somelocation</code></li>
+<li>set tools-metadata-url to <code>http://somelocation/tools</code></li>
+</ul>
+<p>2. Cloud storage</p>
+<ul>
+<li>upload contents of <tools_dir> directly to environment&#39;s cloud storage</li>
+</ul>
+<p>As with image metadata, the validation command is used to ensure tools are available for Juju to use:
+<pre class="prettyprint">
+  juju metadata validate-tools
+</pre>
+<p>The same comments apply. Run the validation tool without parameters to use details from the Juju environment, or override values as required on the command line. See <code>juju help metadata validate-tools</code> for more details.</p>
+
+     </section>
+<!--Postamble-->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<!--End-Postamble-->
+<!--Footer-->
+	<footer class="global clearfix" role="contentinfo">
+		<nav role="navigation">
+			<div class="footer-a">
+				<div class="clearfix">
+					<ul>
+						<li>
+							<h2><a href="/">Juju</a></h2>
+							<ul>
+								<li><a href="/charms">Charms</a></li>
+								<li><a href="/features">Features</a></li>
+								<li><a href="/deployment">Deployment</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/resources">Resources</a></h2>
+							<ul>
+								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/docs/">Documentation</a></li>
+								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+								<li><a href="/resources/videos/">Videos</a></li>
+								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="/community">Community</a></h2>
+							<ul>
+								<li><a href="/community/blog/">Juju Blog</a></li>
+								<li><a href="/events/">Events</a></li>
+								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+								<li><a href="/community/charmers/">Charmers</a></li>
+								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+								<li><a href="/docs/contributing.html">Help with documentation</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+							<ul>
+								<li><a href="https://jujucharms.com/">Charm store</a></li>
+								<li><a href="/download/">Download Juju</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="legal clearfix">
+			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+		</div>
+	</footer>
+
+<!--End-Footer-->
+
+
+<!--Scripts-->
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/jquery.details.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+    <!-- google analytics -->
+    <script>
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-1018242-41']);
+   _gaq.push(['_trackPageview']);
+
+   (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+    </script>
+<!--End-Scripts-->
+
+
+
+
+
+
+</body></html>
