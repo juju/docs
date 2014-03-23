@@ -33,9 +33,9 @@ complete, create a local copy and work on a feature branch.
     git clone git@github.com:{yourusername}/docs.git juju-docs
     cd juju-docs
     
-Add a second remote to the upstream Juju repository your fork came from. This lets you use commands such as `git pull juju juju-docs-upstream` to update a branch from the original trunk, as you'll see below.
+Add a second remote to the upstream Juju repository your fork came from. This lets you use commands such as `git pull upstream master` to update a branch from the original trunk, as you'll see below.
 
-    git remote add juju-docs-upstream git@github.com:juju/docs.git
+    git remote add upstream https://github.com/juju/docs.git
 
 Create a feature branch to work on:
 
@@ -73,26 +73,26 @@ And to remove your local branch
 Before creating another feature branch, make sure you update your fork's code
 by pulling from the original Juju repository.
 
-Using the alias from the Helpful aliases section, update your fork with the latest code in the juju develop branch.
-
-    git juju-sync
+    git checkout master
+    git fetch upstream
+    git merge --ff-only juju-docs-upstream/master
 
 And start your second feature branch.
-  
+
     git checkout -b {featureBranch2}
 
 ## Keeping your fork in sync with Juju docs upstream
 
 You should now have both the upstream branch and your fork listed in git, `git remote -v` should return something like:
 
-    juju-docs-upstream	git@github.com:juju/docs.git (fetch)
-    juju-docs-upstream	git@github.com:juju/docs.git (push)
+    upstream	https://github.com/juju/docs.git (fetch)
+    upstream	https://github.com/juju/docs.git (push)
     origin	git@github.com:castrojo/docs (fetch)
     origin	git@github.com:castrojo/docs (push)
 
 To fetch and merge with the upstream branch:
 
-    git checkout master; git fetch juju-docs-upstream; git merge --ff-only juju-docs-upstream/master
+    git checkout master; git fetch upstream; git merge --ff-only juju-docs-upstream/master
     git push origin master
 
 # Doc Build Workflow
@@ -138,8 +138,3 @@ documentation to make working with the Juju Docs easier.
     # for the pull request.
     # git qa-pr juju 6 qa-sticky-headers
     qa-pr = "!sh -c 'git checkout develop; git pull $0 develop; git checkout -b $2; git fetch-pr $0 $1; git merge pr/$1'"
-
-    # Update your local develop branch with the latest from the juju remote.
-    # Then make sure to push that back up to your fork on github to keep
-    # everything in sync.
-  juju-sync = "!f() { git checkout develop && git pull juju juju-docs-upstream && git push origin juju-docs-upstream; }; f"
