@@ -63,4 +63,3 @@
   - [Glossary](glossary.html)
   - [Charm Review Criteria](reference-reviewers.html)
   - [Contribute to the Docs!](contributing.html)
-

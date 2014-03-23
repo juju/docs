@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Amulet, a testing harness
 
 Amulet is a set of tools designed to simplify the testing process for charm
@@ -34,28 +17,27 @@ for you to use.
 Amulet is available as both a package and via pip. For source packages, see [
 GitHub](https://github.com/marcoceppi/amulet/releases).
 
-[Ubuntu](.) [Mac OSX](.) [Windows](.) [Source](.)
+## Ubuntu
 
 Amulet is available in the Juju Stable PPA for Ubuntu
 
-    
-    
     sudo add-apt-repository ppa:juju/stable
     sudo apt-get update
     sudo apt-get install amulet
-    
+
+## Mac OSX
 
 Amulet is available via Pip:
 
-    
-    
     sudo pip install amulet
 
+## Windows
+
 Amulet is available via Pip:
 
-    
-    
     pip install amulet
+
+## Source
 
 Amulet is built with Python3, make sure it's installed prior to following these
 steps. While you can run Amulet from source, it's not recommended as it requires
@@ -64,14 +46,10 @@ does in the packaged version.
 
 To install Amulet from source, first get the source:
 
-    
-    
     git clone https://github.com/marcoceppi/amulet.git
 
 Move in to the `amulet` directory and run
 
-    
-    
     sudo python3 setup.py install
 
 You can also access the Python libraries; however, your `PYTHONPATH` will need
@@ -87,25 +65,18 @@ via a programmable API for other languages (for example, `bash`).
 
 Amulet is made available to Python via the `amulet` module which you can import:
 
-    
-    
     import amulet
 
 The amulet module seeds each module/command directly, so Deployment is made
 available in amulet/deployer.py and is accessible directly from amulet using:
 
-    
-    
     from amulet import Deployment
 
 Though `deployer` is also available in the event you wish to execute any of the
 helper functions:
 
-    
-    
     from amulet import deployer
     d = deployer.Deployment()
-    
 
 ### Programmable API
 
@@ -122,8 +93,6 @@ an amulet command available and each function is tied to a sub-command. To mimic
 the Python example you can create a a new Deployment by issuing the following
 command:
 
-    
-    
     amulet deployment
 
 Depending on the syntax and worflow for each function you can expect to provide
@@ -145,8 +114,6 @@ Deployment (amulet deployment, from amulet import Deployment) is an abstraction
 layer to the juju-deployer Juju plugin and a service lifecycle management tool.
 It's designed to allow an author to describe their deployment in simple terms:
 
-    
-    
     import amulet
     
     d = amulet.Deployment()
@@ -156,7 +123,6 @@ It's designed to allow an author to describe their deployment in simple terms:
     d.expose('mediawiki')
     d.configure('mediawiki', title="My Wiki", skin="Nostolgia")
     d.setup()
-    
 
 That information is then translated to a Juju Deployer deployment file then,
 finally, juju-deployer executes the described setup. Amulet strives to ensure it
@@ -171,8 +137,7 @@ Juju API or the juju commands.
 
 #### Class:
 
-`Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-
-deployer', sentry_template=None)`
+    Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-deployer', sentry_template=None)
 
 #### Methods:
 
@@ -184,14 +149,12 @@ Add a new service to the deployment schema.
   - `charm` If provided, will be the charm used. Otherwise service is used as the charm.
   - `units` Number of units to deploy.
     
-    
     import amulet
     
     d = amulet.Deployment()
     d.add('wordpress')
     d.add('second-wp', charm='wordpress')
     d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)
-    
 
 `Deployment.build_relations()`
 
@@ -208,14 +171,11 @@ Change configuration options for a service.
   - `service` The service to configure.
   - `options` Dict of configuration options.
     
-    
-        
     import amulet
     
     d = amulet.Deployment()
     d.add('postgresql')
     d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})
-    
 
 `Deployment.deployer_map(services, relations)`
 
@@ -229,8 +189,6 @@ Indicate if a service should be exposed after deployment.
 
   - `service` \- Name of service to expose
     
-    
-        
     import amulet
     
     d = amulet.Deployment()
@@ -252,8 +210,6 @@ Relate two services together.
 If more than two arguments are given, it's assumed they're to be added to the
 first argument as a relation.
 
-    
-    
     import amulet
     
     d = amulet.Deployment()
@@ -265,7 +221,6 @@ first argument as a relation.
     
     d.relate('postgresql:db-admin', 'discourse:db')
     d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
-    
 
 `Deployment.setup(timeout=600)`
 
@@ -273,7 +228,6 @@ This will create the deployer mapping, create any sentries that are required,
 and execute juju-deployer with the generated mapping.
 
   - `timeout` in seconds, how long to wait for setup
-    
     
     import amulet
     
@@ -287,8 +241,6 @@ and execute juju-deployer with the generated mapping.
     except amulet.helpers.TimeoutError:
         # Setup didn't complete before timeout
         pass
-    
-    
 
 ### amulet.sentry
 
@@ -304,8 +256,6 @@ Sentries can be accessed from within your deployment using the sentry object.
 Using the above example from ## Deployer, each service and unit can be accessed
 using the following:
 
-    
-    
     import amulet
     
     d = amulet.Deployment()
@@ -359,8 +309,6 @@ Return files and directories of directory
 
 Example of output
 
-    
-    
     {'files': []
      'directories': []}
 
@@ -372,8 +320,6 @@ Return stat of directory
 
 Example of output
 
-    
-    
     {'mtime': fs_stat.st_mtime,
      'size': fs_stat.st_size,
      'uid': fs_stat.st_uid,
@@ -397,8 +343,6 @@ Return stat of path
 
 Example of output
 
-    
-    
     {'mtime': fs_stat.st_mtime,
      'size': fs_stat.st_size,
      'uid': fs_stat.st_uid,
@@ -422,8 +366,6 @@ Execute specified command as root on remote machine
 
 Returns a tuple of output string and exit code
 
-    
-    
     >>> d.sentry.unit['ubuntu/0'].run('whoami')
     ('root', 0)
 
@@ -435,17 +377,12 @@ Here are a few examples of Amulet tests
 
 #### tests/00-setup
 
-    
-    
     #!/bin/bash
     
     sudo apt-get install amulet python-requests
-    
 
 #### tests/01-simple
 
-    
-    
     import os
     import amulet
     import requests
@@ -487,12 +424,9 @@ Here are a few examples of Amulet tests
     
     home_page = requests.get('http://%s/' % wp_unit.info['public-address'])
     home_page.raise_for_status() # Make sure it's not 5XX error
-    
 
 #### tests/lib/helper.py
 
-    
-    
     import requests
     
     def finish_setup(unit, user='admin', password=None):
@@ -507,37 +441,3 @@ Here are a few examples of Amulet tests
                           'admin_email': 'test@example.tld',
                           'admin_password2': password,
                           'Submit': 'Install WordPress'})
-    
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-

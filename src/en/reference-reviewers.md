@@ -1,23 +1,6 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Reviewing Charms and Bundles
 
-### Review Tips and Criteria
+## Review Tips and Criteria
 
 The goal is to *welcome* the contributor and help them have a good experience
 getting fixes into Ubuntu; your first response should be to *thank them
@@ -52,46 +35,37 @@ You can see the currently pending requests at:
   - [https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&field.component=3&field.component=4](https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&field.component=3&field.component=4)
   - <http://manage.jujucharms.com/tools/review-queue>
 
-### Updating the store with new Charms
+## Updating the store
 
 There are two methods of updating the store. One is promulgation of new charms,
 the other is updates to charms which already exist in the store:
 
-#### New Charms
+### New Charms
 
 So the charm has passed all criteria and is ready to land in the store. Before
 you can promulgate, you’ll need to run the following commands. (This is only
 needed if you don’t have charm-tools >= 1.1 \- This is being fixed in charm
 tools and will be landing soon).
 
-    
-    
     bzr init lp:~charmers/charms/precise/<CHARM_NAME>/trunk
     bzr push lp:~charmers/charms/precise/<CHARM_NAME>/trunk
-                   
 
 Without this, LP will automatically stack on top of the user’s branch which will
 make it really really hard to delete from the store in the future. Now you can
 promulgate:
 
-    
-    
     juju charm promulgate 
-    
 
-#### Updating existing charms in the store
+### Updating existing charms in the store
 
 Make sure you thank them profusely for fixing something or adding something even
 if they’re a Canonical employee!
 
 Grab the charm from the store either with charm-tools or just bzr branch it.
 
-    
-    
     juju charm get 
-    
 
-__Note: __Backwards compatibility is important! Any changes that would change
+!!__Note: __Backwards compatibility is important! Any changes that would change
 the structure of the charm, data, configuration options, etc and doesn’t perform
 due diligence to make sure the charm does what it needs to, should be rejected.
 
@@ -113,18 +87,16 @@ If you find anything that's lacking in the charm feel free to open bugs against
 that charm. This will help us curb the amount of charms to review during our
 audit.
 
-### Updating the store with Bundles
+## Updating the store with Bundles
 
 Bundles are simpler to push to the store:
 
-    
-    
     bzr init lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
     bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle 
 
 There is no promulgation step for bundles.
 
-## Join Us!
+# Join Us!
 
 We also need help reviewing and testing charms. The Charmers team is granted
 write access to the Charm Collection and charm-tools. If you'd like to join that
@@ -140,36 +112,3 @@ Upon getting involved with these activities, we'll probably ask you if you'd
 like to join charmers. If not, go ahead and apply for membership to the team,
 and *send an email to the list letting us know about your reasons for wanting to
 be a member of charmers*.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-
