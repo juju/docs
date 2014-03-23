@@ -1,4 +1,4 @@
-# Your First charm starts here!
+# Your first charm starts here!
 
 Okay, so you have read up all the background info on what a charm is, how it
 works, and what parts of the charm do what, now it is time to dust off your

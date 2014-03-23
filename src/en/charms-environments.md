@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Managing environments
 
 Juju can be used to manage multiple clouds on different environments. The
@@ -37,23 +20,14 @@ executed on is:
 To determine which environment a command will act on, you can issue the `switch`
 command with no parameters:
 
-    
-    
     juju switch
-    
-    Current environment: "amazon" (from JUJU_ENV)
-    
 
 It is also possible to determine the current environment by checking the
 `JUJU_ENV` variable, and if that is empty, the contents of the file `~/.juju
 /current-environment`:
 
-    
-    
     echo $JUJU_ENV
-    
     cat ~/.juju/current-environment 
-    
 
 ## Specifying an environment
 
@@ -63,14 +37,11 @@ the `-e` switch takes precedence over any other setting.
 
 For example:
 
-    
-    
     juju bootstrap                 # bootstraps the default environment
     juju switch amazon             # switches the environment to the cloud defined by 'amazon'
     juju deploy mysql -e mycloud   # deploys mysql charm on the cloud defined by 'mycloud'
-    
 
-__Note: __ Unlike many switches used with juju, `-e` must come at the end of the
+!!__Note: __ Unlike many switches used with juju, `-e` must come at the end of the
 command in order to be parsed correctly.
 
 ## Switching environments
@@ -79,18 +50,15 @@ When managing several cloud environments, it can be bothersome to issue a long
 list of commands and remember to prepend the `-e` switch to each one. For this
 reason, you can switch the current environment using the `switch` command:
 
-    
-    
     juju switch hpcloud
     juju bootstrap  
-    
 
 ... will bootstrap the environment defined by the 'hpcloud' label
 
 This command will return with an error message if `JUJU_ENV`is set (as this
 takes precedence).
 
-__Note: __The environment selected with `switch` is persistent. Even if you log
+!!__Note: __The environment selected with `switch` is persistent. Even if you log
 out, switch your computer off, travel into space or sail around the world, when
 you start using Juju again, it will still point at the last environment you
 specified with `switch`.
@@ -103,16 +71,12 @@ switch or alter the `JUJU_ENV` environment variable. The default environment is
 specified at the top of the `environments.yaml` file, before the environment
 specifications themselves, like this:
 
-    
-    
     ...
     default: amazon
-    
     environments:
       ## https://juju.ubuntu.com/docs/config-openstack.html
       openstack:
     ...
-    
 
 ## Updating environments
 
@@ -129,49 +93,10 @@ configuration.
 To generate a new boilerplate `environments.yaml` file direct to the console you
 can use:
 
-    
-    
-    juju generate-config --show
-    
+    juju init --show
 
 Or:
 
-    
-    
-    juju init --show
-    
+    juju generate-config --show
 
-as the `init`command is an alias for `generate-config`.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-
+as the `generate-config` command is an alias for `init`.

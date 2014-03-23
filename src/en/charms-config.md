@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Service Configuration
 
 When deploying a service, the charm you use will often support or even require
@@ -47,24 +30,18 @@ For example, upon investigation we discover that the Mediawiki charm allows us
 to set values for the name of the wiki and the 'skin' to use. We can put these
 inside a configuration file.
 
-    
-    
     mediawiki:
       name: Juju Wiki
       skin: monobook
       admins: admin:admin
-    
 
 We can then use this configuration when we deploy the service:
 
-    
-    
     juju deploy --config myconfig.yaml mediawiki
-    
 
-__Caution:__ If the yaml configuration file cannot be read or contains some
+!!__Caution:__ If the yaml configuration file cannot be read or contains some
 syntax errors or invalid options, you will receive an error message to this
-effect. However, __the service will still be deployed __.
+effect. However, __the service will still be deployed__.
 
 ## Configuring a service which is already deployed
 
@@ -74,15 +51,10 @@ deployed.
 Before you set any of these options, you may want to check what current options
 are already set, using the `juju get &LT;service&GT;` command. For example:
 
-    
-    
     juju get mediawiki
-    
 
 Should return something like this:
 
-    
-    
     charm: mediawiki
     service: mediawiki
     settings:
@@ -111,53 +83,13 @@ Should return something like this:
         description: skin for the Wiki
         type: string
         value: vector
-    
 
 You can set the options using the `juju set &LT;service&GT;`, specifying
 multiple key=value pairs if necessary:
 
-    
-    
     juju set mediawiki skin=monoblock name='Juju Wiki' 
-    
 
 Setting options back to their default value is done using the `unset` command
 followed by the service and the respective options:
 
-    
-    
     juju unset mediawiki admins name 
-    
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-

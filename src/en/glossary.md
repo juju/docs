@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Glossary of terms
 
 __Bootstrap__ \- To boostrap an environment means initializing it so that
@@ -39,8 +22,6 @@ upstream application (traditionally made available through its package).
 __Charm URL__ \- A Charm URL is a resource locator for a charm, with the
 following format and restrictions:
 
-    
-    
     &LT;schema&GT;:[~&LT;user&GT;/]&LT;collection&GT;/&LT;name&GT;[-&LT;revision&GT;]
 
 `schema` must be either "cs", for a charm from the Juju charm store, or "local",
@@ -114,36 +95,3 @@ Units in this machine.
 
 __Service Unit Agent__ \- Software which manages all the lifecycle of a single
 Service Unit.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-

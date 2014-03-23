@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Machine Constraints
 
 Machine constraints allow you to choose the hardware to which your services will
@@ -59,32 +42,22 @@ Deploy MySQL on a machine with at least 32GiB of RAM, and at least 8 ECU of CPU
 power (architecture will be inherited from the environment, or default to
 amd64):
 
-    
-    
     juju deploy --constraints "cpu-cores=8 mem=32G" mysql
 
 Deploy to t1.micros on AWS:
 
-    
-    
     juju bootstrap --constraints "cpu-power=0 cpu-power=0 mem=512M"
 
 Launch all future "mysql" machines with at least 8GiB of RAM and 4 ECU:
 
-    
-    
     juju set-constraints --service mysql mem=8G cpu-cores=4
 
 Output current environment constraints:
 
-    
-    
     juju get-constraints
 
 Output constraints for mysql
 
-    
-    
     juju get-constraints mysql
 
 # Provider Constraints
@@ -101,8 +74,6 @@ Here are some examples of working with constraints.
 
 When bootstrapping an environment, you can set the constraints directly:
 
-    
-    
     juju bootstrap --constraints arch=i386
 
 The above command did two things:
@@ -118,14 +89,10 @@ The above command did two things:
 Because the environment constraints were set, subsequent deployments will use
 the same values:
 
-    
-    
     juju deploy mysql
 
 ...but other services can be started with their own constraints:
 
-    
-    
     juju deploy wordpress --constraints mem=1024
 
 Note that if you try to deploy a machine or service with a constraint that
@@ -142,42 +109,7 @@ will be considered appropriate for deploying the service.
 
 E.g.
 
-    
-    
     juju deploy mysql --constraints tags=foo,bar
 
 ...will deploy MySQL only to a node which has been tagged with both "foo" and
 "bar".
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-

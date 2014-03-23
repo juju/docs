@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Configuring for Amazon Web Services
 
 This process requires you to have an Amazon Web Services (AWS) account. If you
@@ -23,23 +6,19 @@ have not signed up for one yet, it can obtained at <http://aws.amazon.com>.
 You should start by generating a generic configuration file for Juju, using the
 command:
 
-    
-    
     juju generate-config
 
 This will generate a file, __environments.yaml__, which will live in your
 __~/.juju/__ directory (and will create the directory if it doesn't already
 exist).
 
-__Note:__ If you have an existing configuration, you can use `juju generate-
+!!__Note:__ If you have an existing configuration, you can use `juju generate-
 config --show` to output the new config file, then copy and paste relevant areas
 in a text editor etc.
 
 The generic configuration sections generated for AWS will look something like
 this:
 
-    
-    
     ## https://juju.ubuntu.com/get-started/amazon/
     amazon:
       type: ec2
@@ -78,36 +57,3 @@ configuration file.
 aws_keys.png)
 
 The __region:__ value corresponds to the AWS regions.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-

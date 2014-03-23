@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Subordinate services
 
 Services are composed of one or more service units. A service unit runs the
@@ -41,15 +24,11 @@ taking advantage of the existing relationship machinery.
 
 ## Terms
 
-Principal service
+ - Principal service: A traditional service or charm in whose container subordinate services will execute.
 
-    A traditional service or charm in whose container subordinate services will execute.
-Subordinate service/charm
+ - Subordinate service/charm: A service designed for and deployed to the running container of another service unit.
 
-    A service designed for and deployed to the running container of another service unit.
-Container relation
-
-    A scope: container relationship. While modeled identically to traditional, scope: global, relationships, juju only implements the relationship between the units belonging to the same container.
+ - Container relation: A scope: container relationship. While modeled identically to traditional, scope: global, relationships, juju only implements the relationship between the units belonging to the same container.
 
 ## Relations
 
@@ -101,12 +80,10 @@ will only be able to form relations with subordinate: true charms.
 
 The example below shows adding a container relation to a charm.
 
-    
-    
     requires:
-        logging-directory:
-           interface: logging
-           scope: container
+      logging-directory:
+        interface: logging
+        scope: container
 
 ## Status of subordinates
 
@@ -120,8 +97,6 @@ The subordinate service is listed in the top level services dictionary in an
 abbreviated form. The subordinate-to: [] list is added to the service which
 contains the names of all services this service is subordinate to.
 
-    
-    
     services:
       rsyslog:
         charm: cs:precise/rsyslog-0
@@ -155,16 +130,12 @@ contains the names of all services this service is subordinate to.
 
 Assume the following deployment:
 
-    
-    
     juju deploy mysql
     juju deploy wordpress
     juju add-relation mysql wordpress
 
 Now we'll create a subordinate rsyslog service:
 
-    
-    
     juju deploy rsyslog
     juju add-relation rsyslog mysql
     juju add-relation rsyslog wordpress
@@ -182,36 +153,3 @@ The initial release of subordinates doesn't include support for removing
 subordinate units from their principal service apart from removing the principal
 service itself. This limitation stems from the current policy around service
 shutdown and the invocation of stop hooks.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-

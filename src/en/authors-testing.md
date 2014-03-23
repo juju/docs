@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Charm Testing
 
 Juju has been designed from the start to foster a large collection of "charms".
@@ -37,19 +20,17 @@ called `metadata.yaml`, and when deployed, juju will always attempt to progress
 the state of the service from install to config to started. Because of this, all
 charms can be tested using the following algorithm:
 
-    
-    
     deploy charm
-                 while state != started
-                      if timeout is reached, FAIL
-                      if state == install_error, config_error, or start_error, FAIL
-                      if state == started, PASS
+    while state != started
+    if timeout is reached, FAIL
+    if state == install_error, config_error, or start_error, FAIL
+    if state == started, PASS
 
 Other generic tests may be identified, so a collection of generic tests should
 be the focus of an implementation.
 
-Note that this requirement is already satisfied by Mark Mims' jenkins tester:
-<https://github.com/mmm/charmtester/>
+Note that this requirement is already satisfied by the
+[Jenkins Charmtester](https://launchpad.net/charmtester)
 
 ## Phase 2 - Charm Specific tests
 
@@ -79,8 +60,6 @@ packages can *only* be installed from the official, default Ubuntu archive for
 the release which the charm is intended for, from any of the repositories
 enabled by default in said release. The format of tests.yaml is as such:
 
-    
-    
     packages: [ package1, package2, package3 ]
 
 If a tool is needed to perform a test and is not available in the Ubuntu
@@ -131,75 +110,70 @@ The test below [*] deploys mediawiki with mysql and memcached related to it, and
 then tests to make sure it returns a page via http with "<title>" somewhere in
 the content.:
 
-    
-    
     #!/bin/sh
-                
-                 set -e
-                
-                 teardown() {
-                         if [ -n "$datadir" ] ; then
-                             if [ -f $datadir/passed ]; then
-                                 rm -r $datadir
-                             else
-                                 echo INFO: $datadir preserved
-                                 if [ -f $datadir/wget.log ] ; then
-                                     echo INFO: BEGIN wget.log
-                                     cat $datadir/wget.log
-                                     echo INFO: END wget.log
-                                 fi
-                             fi
-                         fi
-                 }
-                 trap teardown EXIT
-                
-                
-                 juju deploy mediawiki
-                 juju deploy mysql
-                 juju deploy memcached
-                 juju add-relation mediawiki:db mysql:db
-                 juju add-relation memcached mediawiki
-                 juju expose mediawiki
-                
-                 for try in `seq 1 600` ; do
-                         host=`juju status | tests/get-unit-info mediawiki public-address`
-                         if [ -z "$host" ] ; then
-                             sleep 1
-                         else
-                             break
-                         fi
-                 done
-                
-                 if [ -z "$host" ] ; then
-                         echo FAIL: status timed out
-                         exit 1
-                 fi
-                
-                 datadir=`mktemp -d ${TMPDIR:-/tmp}/wget.test.XXXXXXX`
-                 echo INFO: datadir=$datadir
-                
-                 wget --tries=100 --timeout=6 http://$host/ -O - -a $datadir/wget.log | grep -q '<title>'
-                
-                 if [ $try -eq 600 ] ; then
-                         echo FAIL: Timed out waiting.
-                         exit 1
-                 fi
-                
-                 touch $datadir/passed
-                
-                 trap - EXIT
-                 teardown
-                
-                 echo PASS
-                 exit 0
+
+    set -e
+
+    teardown() {
+        if [ -n "$datadir" ] ; then
+            if [ -f $datadir/passed ]; then
+                rm -r $datadir
+            else
+                echo INFO: $datadir preserved
+                if [ -f $datadir/wget.log ] ; then
+                    echo INFO: BEGIN wget.log
+                    cat $datadir/wget.log
+                    echo INFO: END wget.log
+                fi
+            fi
+        fi
+    }
+    trap teardown EXIT
+
+    juju deploy mediawiki
+    juju deploy mysql
+    juju deploy memcached
+    juju add-relation mediawiki:db mysql:db
+    juju add-relation memcached mediawiki
+    juju expose mediawiki
+
+    for try in `seq 1 600` ; do
+        host=`juju status | tests/get-unit-info mediawiki public-address`
+        if [ -z "$host" ] ; then
+            sleep 1
+        else
+            break
+        fi
+    done
+
+    if [ -z "$host" ] ; then
+        echo FAIL: status timed out
+        exit 1
+    fi
+
+    datadir=`mktemp -d ${TMPDIR:-/tmp}/wget.test.XXXXXXX`
+    echo INFO: datadir=$datadir
+
+    wget --tries=100 --timeout=6 http://$host/ -O - -a $datadir/wget.log | grep -q '<title>'
+
+    if [ $try -eq 600 ] ; then
+        echo FAIL: Timed out waiting.
+        exit 1
+    fi
+
+    touch $datadir/passed
+
+    trap - EXIT
+    teardown
+
+    echo PASS
+    exit 0
 
 ### Test config settings
 
 The following example tests checks to see if the default_port change the admin
 asks for is actually respected post-deploy:
 
-    
-    
     #!/bin/sh
                 
                  if [ -z "`which nc`" ] ; then
@@ -254,9 +228,7 @@ asks for is actually respected post-deploy:
                  echo PASS: config change tests passed.
                  exit 0
 
-[*]
-
-get-unit-info The example tests script uses a tool that is not widely available
+`get-unit-info` The example tests script uses a tool that is not widely available
 yet, `get-unit-info`. In the future enhancements should be made to juju core to
 allow such things to be made into plugins. Until then, it can be included in
 each test dir that uses it, or we can build a package of tools that are common
@@ -282,36 +254,3 @@ If tests exit with services still in the environment, the test runner may clean
 them up, whether by destroying the environment or destroying the services
 explicitly, and the machines may be terminated as well. Any artifacts needed
 from the test machines should be retrieved and displayed before the test exits.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-

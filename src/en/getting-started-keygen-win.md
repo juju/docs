@@ -1,26 +1,7 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Creating SSH Keypairs on Windows
 
 This walkthrough will show you how to create SSH keys for use with Juju on the
 Windows OS.
-
-1
 
 ## Create the .ssh folder
 
@@ -33,13 +14,9 @@ up in the search results. This will open up a Windows command prompt.
 
 Type the following in the command prompt:
 
-    
-    
     mkdir .ssh
 
 This will create a folder called .ssh in your home directory.
-
-2
 
 ## Download puttygen.exe
 
@@ -53,8 +30,6 @@ Once downloaded, run puttygen.exe, you should see a dialog that looks like this:
 
 ![](media/puttygen.png)
 
-3
-
 ## Generating your keys
 
 The defaults for the parameters at the bottom of the window are correct (SSH-2
@@ -64,8 +39,6 @@ window to generate your key.
 It is recommended that you specify a passphrase (password) for your key, so that
 if it is lost, it can't be used without the password. Choose a password you can
 remember, because it cannot be recovered if forgotten.
-
-4
 
 ## Save your keys
 
@@ -84,36 +57,3 @@ extension should be .pub, not .txt).
 
 That's it! You now have ssh keys that can be used with Juju and other
 applications that require ssh keys.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-

@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # What is the GUI?
 
 Juju has a graphical user interface (GUI) available to help with the tasks of
@@ -30,8 +13,6 @@ and deploy charms to your environment.
 
 Installing the GUI works the same as installing any other charm:
 
-    
-    
     juju deploy juju-gui
     juju expose juju-gui
 
@@ -43,16 +24,13 @@ In more recent versions of Juju, you can also deploy the GUI along-side another
 service on an existing machine. This might be the case if you wish to conserve
 resources. The following command will deploy juju-gui to an existing machine 1:
 
-    
-    
     juju deploy --to 1 juju-gui
     juju expose juju-gui
-    
 
 Check `juju help deploy` to find out more about this option, and whether or not
 it is available in your version.
 
-__Note:__ If you are deploying behind a firewall, make sure to check out the
+!!__Note:__ If you are deploying behind a firewall, make sure to check out the
 charm's [README](https://jujucharms.com/fullscreen/search/precise/juju-gui/#bws-
 readme) for more information on getting the GUI up and running and talking to
 your environment
@@ -71,7 +49,7 @@ with all of their meta-data, in a read-only mode, meaning that you will not be
 able to make changes to the environment through the GUI. This is good for a
 monitoring type scenario.
 
-__Note:__ read-only mode in the GUI simply prevents actions taken within the GUI
+!!__Note:__ read-only mode in the GUI simply prevents actions taken within the GUI
 from being sent to the Juju environment, and is *not* additional security
 against the Juju API.
 
@@ -139,36 +117,3 @@ them.
 
 For an example of this, check out this demonstration of building an OpenStack
 instance in Juju using the GUI:
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-

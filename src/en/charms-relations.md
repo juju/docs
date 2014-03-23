@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Managing Relationships
 
 Few services you might want to run can do so completely independently - most of
@@ -41,16 +24,12 @@ is much easier than even this brief explanation.
 Creating relationships is usually very straightforward. Simply deploy the two
 services:
 
-    
-    
     juju deploy wordpress
     juju deploy mysql
 
 Then you create the relationship by specifying these two services with the `add-
 relation` command:
 
-    
-    
     juju add-relation mysql wordpress
 
 These services will then communicate and establish an appropriate connection, in
@@ -61,24 +40,21 @@ for WordPress.
 In some cases, there may be ambiguity about how the services should connect. For
 example, in the case of specifying a database for the Mediawiki charm.
 
-    
-    
     juju add-relation mediawiki mysql
+
+Which results in the following:
+
     error: ambiguous relation: "mediawiki mysql" could refer to "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 
 the soloution in these cases is to specify the nature of the relation using the
 hook identifier. In this case, we want MySQL to provide the backend database for
 mediawiki, so this is what we need to enter:
 
-    
-    
     juju add-relation mediawiki:db mysql
 
 we can check the output from `juju status` to make sure the correct relationship
 has been established:
 
-    
-    
     machines:
       "0":
         agent-state: started
@@ -133,39 +109,4 @@ There are times when a relationship just isn't working and it is time to move
 on. Fortunately, it is a simple single-line command to break off these
 relationships:
 
-    
-    
     juju destroy-relation mediawiki mysql
-
-  - ## [Juju](/)
-
-    - [Charms](/charms)
-    - [Features](/features)
-    - [Deployment](/deployment)
-  - ## [Resources](/resources)
-
-    - [Overview](/resources/juju-overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/the-juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://canonical.com).
-
