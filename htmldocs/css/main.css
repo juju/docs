@@ -60,7 +60,6 @@ pre strong, pre b, a strong, a b, a code {
 
 pre, code {
   font: 13px/1.5 monospace;
-  
   display: inline-block;
   background-color: #eee;
   margin-bottom: 5px;
@@ -72,24 +71,30 @@ pre, code {
   color: #000;
 }
 
+pre {
+  width: 95%;
+  padding: 10px;
+  overflow-x: auto;
+}
+
 strong.code {
   color: #1111ff;
 }
 
 code {
-  font-weight: 400;
+  font-weight: 700;
   font: 13px/14px monospace;
   margin-bottom: 0px;
+  color: #444;
 }
 
 pre code {
   white-space: pre-line;
 }
 
-.doc-content code{
-    font-weight: 700;
-    color: #444;
+code {
 }
+
 .doc-content {
   border-left: 1px dotted #aea79f;
   padding-left: 20px;
@@ -500,16 +505,16 @@ pre.prettyprint.output:before {
   content: "Output";
 }
 
-pre.prettyprint, code.prettyprint {
-  background-color: #333 !important;
+pre, pre > code {
+  background-color: #1f1d22 !important;
   color: #fff;
+  font-weight: 400;
+  white-space: pre-wrap;
 }
 
 pre.prettyprint.prettyprinted {
   white-space: pre;
-  overflow-x: auto;
 }
-
 
 hr {
   background: #fff;
@@ -533,13 +538,10 @@ hr {
   font-weight: 800;
 }
 
-
-
- dl { border: 1px dotted #aaa; padding: 0.5em; background: #eeeeee; } 
+dl { border: 1px dotted #aaa; padding: 0.5em; background: #eeeeee; } 
 dt { float: left; clear: left; width: 100px; text-align: left; font-weight: bold; color: #000; } 
 dd { margin: 0 0 0 110px; padding: 0 0 0.5em 0; }
 dd:before { content: "- "; }
-
 
 li img {
   margin-top: 10px;
