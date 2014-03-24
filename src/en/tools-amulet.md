@@ -114,15 +114,17 @@ Deployment (amulet deployment, from amulet import Deployment) is an abstraction
 layer to the juju-deployer Juju plugin and a service lifecycle management tool.
 It's designed to allow an author to describe their deployment in simple terms:
 
-    import amulet
-    
-    d = amulet.Deployment()
-    d.add('mysql')
-    d.add('mediawiki')
-    d.relate('mysql:db', 'mediawiki:db')
-    d.expose('mediawiki')
-    d.configure('mediawiki', title="My Wiki", skin="Nostolgia")
-    d.setup()
+```python
+import amulet
+
+d = amulet.Deployment()
+d.add('mysql')
+d.add('mediawiki')
+d.relate('mysql:db', 'mediawiki:db')
+d.expose('mediawiki')
+d.configure('mediawiki', title="My Wiki", skin="Nostolgia")
+d.setup()
+```
 
 That information is then translated to a Juju Deployer deployment file then,
 finally, juju-deployer executes the described setup. Amulet strives to ensure it
