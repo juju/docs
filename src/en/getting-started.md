@@ -10,7 +10,7 @@ need:
 
 # Installation
 
-[Ubuntu](.) [Mac OSX](.) [Windows](.)
+## Ubuntu
 
 To install Juju, you simply need to grab the latest juju-core package from the
 PPA:
@@ -18,9 +18,13 @@ PPA:
     sudo add-apt-repository ppa:juju/stable
     sudo apt-get update && sudo apt-get install juju-core
 
+## Mac OSX
+
 Juju is in [Homebrew](http://brew.sh/), to install do:
 
     brew install juju
+
+## Windows
 
 Download and run the [Juju windows installer from
 here.](https://juju.ubuntu.com/install/)
@@ -123,52 +127,54 @@ able to see what services are running, and where they are located.
 
 The output from this command should look something like this:
 
-    machines:
-      "0":
+```yaml
+machines:
+  "0":
+    agent-state: started
+    agent-version: 1.10.0
+    dns-name: ec2-50-16-167-135.compute-1.amazonaws.com
+    instance-id: i-781bf614
+    series: precise
+  "1":
+    agent-state: started
+    agent-version: 1.10.0
+    dns-name: ec2-23-22-225-54.compute-1.amazonaws.com
+    instance-id: i-9e8927f6
+    series: precise
+  "2":
+    agent-state: started
+    agent-version: 1.10.0
+    dns-name: ec2-54-224-220-210.compute-1.amazonaws.com
+    instance-id: i-5c440436
+    series: precise
+services:
+  mysql:
+    charm: cs:precise/mysql-18
+    exposed: false
+    relations:
+      db:
+      - wordpress
+    units:
+      mysql/0:
         agent-state: started
         agent-version: 1.10.0
-        dns-name: ec2-50-16-167-135.compute-1.amazonaws.com
-        instance-id: i-781bf614
-        series: precise
-      "1":
+        machine: "1"
+        public-address: ec2-23-22-225-54.compute-1.amazonaws.com
+  wordpress:
+    charm: cs:precise/wordpress-12
+    exposed: true
+    relations:
+      db:
+      - mysql
+      loadbalancer:
+      - wordpress
+    units:
+      wordpress/0:
         agent-state: started
         agent-version: 1.10.0
-        dns-name: ec2-23-22-225-54.compute-1.amazonaws.com
-        instance-id: i-9e8927f6
-        series: precise
-      "2":
-        agent-state: started
-        agent-version: 1.10.0
-        dns-name: ec2-54-224-220-210.compute-1.amazonaws.com
-        instance-id: i-5c440436
-        series: precise
-    services:
-      mysql:
-        charm: cs:precise/mysql-18
-        exposed: false
-        relations:
-          db:
-          - wordpress
-        units:
-          mysql/0:
-            agent-state: started
-            agent-version: 1.10.0
-            machine: "1"
-            public-address: ec2-23-22-225-54.compute-1.amazonaws.com
-      wordpress:
-        charm: cs:precise/wordpress-12
-        exposed: true
-        relations:
-          db:
-          - mysql
-          loadbalancer:
-          - wordpress
-        units:
-          wordpress/0:
-            agent-state: started
-            agent-version: 1.10.0
-            machine: "2"
-            public-address: ec2-54-224-220-210.compute-1.amazonaws.com
+        machine: "2"
+        public-address: ec2-54-224-220-210.compute-1.amazonaws.com
+```
 
 There is quite a lot of information here. the first section, titled
 `machines:`, details all the instances which are currently running. For each
@@ -184,8 +190,7 @@ exist.
 From this status readout, we can see that wordpress is exposed and ready. If we
 simply copy the address into a web browser, we should be able to see it running
 
-![Image showing wordpress in a web browser](media/getting_started-
-wordpress.png)
+![Image showing wordpress in a web browser](media/getting_started-wordpress.png)
 
 Congratulations, you have just deployed a service with Juju!
 
