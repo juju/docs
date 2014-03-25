@@ -86,7 +86,7 @@
 
 <h2 id="workflow">Basic Workflow</h2>
 
-<p>Whether images or tools, Juju uses a search path to try and find suitable metadata.The path components (in order of lookup) are:</p>
+<p>Whether images or tools, Juju uses a search path to try and find suitable metadata. The path components (in order of lookup) are:</p>
 
 <ol>
 <li>User supplied location (specified by tools-metadata-url or image-metadata-url config settings).</li>
@@ -196,7 +196,7 @@ For a shared directory, use a URL of the form &quot;file:///sharedpath&quot;.</p
 <h1 id="deploying-private-clouds">Deploying Private Clouds</h1>
 <p>There are two main issues when deploying a private cloud:</p>
 <ol>
-  <li>Images ids will be specific to the cloud.</li>
+  <li>Image ids will be specific to the cloud.</li>
   <li>Often, outside internet access is blocked</li>
 </ol>
 <p>Issue 1 means that image id metadata needs to be generated and made available.</p>
@@ -211,10 +211,10 @@ the commands described below.</p>
 juju help metadata
 </pre>
 <p>The overall workflow is:
-<ul><li>generate image metadata</li>
-<li>copy image metadata to somewhere in the metadata search path</li>
-<li>optionally, mirror tools to somewhere in the metadata search path</li>
-<li>optionally, configure tools-metadata-url and/or image-metadata-url</li></ul>
+<ul><li>Generate image metadata</li>
+<li>Copy image metadata to somewhere in the metadata search path</li>
+<li>Optionally, mirror tools to somewhere in the metadata search path</li>
+<li>Optionally, configure tools-metadata-url and/or image-metadata-url</li></ul>
 
 <h3>Image metadata</h3>
 <p>Generate image metadata using
@@ -223,7 +223,7 @@ juju metadata generate-image -d &lt;metadata_dir&gt;
 </pre>
 <p>As a minimum, the above command needs to know the image id to use and a directory in which to write the files.</p>
 
-<p>Other required parameters like region, series, architecture etc are taken from the current Juju environment (or an environment specified with the -e option). These parameters can also be overridden on the command line.</p>
+<p>Other required parameters like region, series, architecture etc. are taken from the current Juju environment (or an environment specified with the -e option). These parameters can also be overridden on the command line.</p>
 <p>The image metadata command can be run multiple times with different regions, series, architecture, and it will keep adding to the metadata files. Once all required image ids have been added, the index and product json files can be uploaded to a location in the Juju metadata search path. As per the Configuration section,
 this may be somewhere specified by the <code>image-metadata-url</code> setting or the cloud&#39;s storage etc.</p>
 <p>Examples:</p>
@@ -234,21 +234,21 @@ this may be somewhere specified by the <code>image-metadata-url</code> setting o
 </ul>
 
 <p>2. Cloud storage</p>
-<ul><li>upload contents of <metadata_dir> directly to environment&#39;s cloud storage</li>
+<ul><li>Upload contents of <metadata_dir> directly to environment&#39;s cloud storage</li>
 <li>Use the validation command to ensure an image id can be discovered for a given scenario (region series, arch):
 <pre class="prettyprint">
   juju metadata validate-images
 </pre></li></ul>
-If run without parameters, the validation command will take all required details from the current Juju environment (or as specified by -e) and print the image id it would use to spin up an instance.
-Alternatively, series, region, architecture etc can be specified on the command line to override values in the environment config.</p>
+If run without parameters, the validation command will take all required details from the current Juju environment (or as specified by -e) and output the image id it would use to spin up an instance.
+Alternatively, series, region, architecture etc. can be specified on the command line to override the values in the environment config.</p>
 </ul>
 <h3>Tools metadata</h3>
-<p>Generally, tools and related metadata is mirrored from <code>https://streams.canonical.com/tools</code>. However, it is possible to manually generate metadata for a custom built tools tarball. <p>
+<p>Generally, tools and related metadata are mirrored from <code>https://streams.canonical.com/tools</code>. However, it is possible to manually generate metadata for a custom built tools tarball. <p>
 <p>First, create a tarball of the relevant tools and place in a directory structured like this:<p>
 <pre class="prettyprint">
 &lt;tools_dir&gt;/tools/releases/
 </pre>
-<p>Now generate relevant metadta for the tools by running the command:</p>
+<p>Now generate relevant metadata for the tools by running the command:</p>
 <pre class="prettyprint">
 juju generate-tools -d &lt;tools_dir&gt;
 </pre>
