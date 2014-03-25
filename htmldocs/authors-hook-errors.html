@@ -135,6 +135,18 @@ or by manually resolving the git conflicts in the charm directory and running
 <code>juju resolved</code> to cause the unit agent to continue.</p>
 </section>
 
+<section id="integrity-errors">
+<h2>Charm integrity errors</h2>
+
+<p>Some charms have symlinks of the hooks to one common file. These symlinks
+must be correct in order for the charm to execute properly. If you are developing
+a charm and manually copy it over to a system, you must ensure that the hook
+symlinks are preserved. <tt>scp</tt> will follow symlinks, not copy them 
+over, this can lead to a broken charm.</p>
+
+<p>We recommend using either <tt>rsync</tt> or generating a tarball of your charm
+if you're going to use <tt>scp</tt>.</p>
+</section>
 
           </article>
 <!--Postamble-->
