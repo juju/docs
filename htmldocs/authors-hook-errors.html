@@ -134,6 +134,17 @@ should never happen except during development.</p>
 or by manually resolving the git conflicts in the charm directory and running
 <code>juju resolved</code> to cause the unit agent to continue.</p>
 </section>
+<section>
+<h2 id="integrity-errors">Charm integrity errors</h2>
+
+<p>Some charms use symlinks to redirect hook execution to a common file. Naturally
+these symlinks must be preserved to allow proper operation of the charm. If you are 
+developing a charm and manually copy it over to a system, you should verify that the 
+hook symlinks are preserved as expected. For example, <code>scp</code> will follow 
+symlinks, not replicate them, which can lead to a broken charm.</p>
+<p>We recommend using either <code>rsync</code> or generating a tarball of your 
+charm first if you're going to use <code>scp</code>.</p>
+</section>
 
 
           </article>

@@ -167,7 +167,7 @@ export PATH=$PATH:$GOPATH/bin</pre>
             <p>Wordpress needs a database though, so we will also deploy one of those:</p>
             <pre class="prettyprint">juju deploy mysql</pre>
             <p>Once again, juju will do whatever is necessary to deploy this service for you, and it may take some time for the command to return.</p>
-            <p class="note"><strong>Note:</strong> If you want to get more information on what is actually happening, or to help resolve problems, you can add the -v switch to the juju command to get verbose output.</p>
+            <p class="note"><strong>Note:</strong> If you want to get more information on what is actually happening, or to help resolve problems, you can add the --show-log switch to the juju command to get verbose output.</p>
             <p>Although we have deployed Wordpress and a MySQL database, they are not linked together in any way yet. To do this we should run:</p> 
             
             <pre class="prettyprint">juju add-relation wordpress mysql</pre>

@@ -79,7 +79,7 @@
 <p>Bundles are defined in text files, called “bundle files” or “deployer files”.  Each file may contain one or more bundle definitions.  For simplicity, the files generated as described below will only have one bundle.</p>
 
 <h2 id="using">Using bundles</h2>
-<p>A bundle file can be used in two distinct ways.  One is to use it locally, deploying from your computer, which is useful to initially ensure it works and for experimenting.  After you are satisfied with the bundle, you can push it to Launchpad where it will be available to you and others via the Charm Store.
+<p>A bundle file can be used in two distinct ways.  One is to use it locally, deploying from your computer, which is useful to initially ensure it works and for experimenting.  After you are satisfied with the bundle, you can push it to Launchpad where it will be available to you and others via the Charm Store. If you're looking to find bundles you can just <a href="https://jujucharms.com/sidebar/search/?text=bundle">search the store</a>.</p>
 
 <h3>Local import to Juju GUI</h3>
 
@@ -122,10 +122,16 @@ juju quickstart bundles.yaml
       - "mysql:db"
 </pre>
 
-<h2 id="sharing">Sharing your bundle with the community</h2>
+<h2 id="naming">Naming your Bundle</h2>
+
+<p>By default the Juju GUI will name the bundle `envExport`. This is the first line in a bundle. The bundle must have 
+a unique name. We recommend descriptive names for your bundle but nothing too long. `wordpress-simple`, `hadoop-cluster`,
+and `mongodb-sharded` are some examples of bundle names. Avoid CamelCase and periods for bundle names.</p>
+
+<h2 id="sharing">Sharing your Bundle with the Community</h2>
 <p>Bundles are shared by putting a branch onto Launchpad with specific naming which will then be pulled into the Charm Store.  The branch must be constructed and named according to the following rules.</p>
 
-<p>The branch name must structured as:</p>
+<p>The branch name must be structured as:</p>
 <pre class="prettyprint lang-bash">lp:~&LT;your launchpad id&GT;/charms/bundles/&LT;your bundle name&GT;/bundle
 </pre>
 
@@ -148,8 +154,15 @@ lp:~bac/charms/bundles/wiki/bundle
 
 <pre class="prettyprint lang-bash">
 juju bundle proof bundles.yaml
-bzr push lp:~yourusername/charms/precise/bundle/yourbundlename/bundle
+bzr push lp:~yourusername/charms/bundles/yourbundlename/bundle
 </pre>
+
+<ul>
+<li>Next file a bug against charms at <a href="https://launchpad.net/charms/+filebug">https://launchpad.net/charms/+filebug</a>. This is used to track the progress of your charm.</li>
+<li>Subscribe the charmers team by clicking "Subscribe someone else" on the right side of the launchpad page. This is important as it gets your charm in the review queue!</li>
+<li>Now you just need to attach your branch to the bug report, go to <a href="https://code.launchpad.net/people/+me">your code page</a>, find your branch, and click on it. Then click on "Link a bug report", and put in the number of the bug you filed.</li> 
+
+<p>Someone will come along and review your bundle for inclusion. If you need to contact someone you there will be patch pilots in <cite>#juju</cite> who can help you get your bundle accepted. You can also contact us on <a class="reference external" href="https://lists.ubuntu.com/mailman/listinfo/juju">the Juju mailing list</a>.</p>
 
 <h2 id="store-deploy">Deploying a Bundle from the Charm Store with the GUI</h2>
 

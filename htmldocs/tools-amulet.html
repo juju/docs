@@ -197,6 +197,25 @@ d.add('second-wp', charm='wordpress')
 d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)
 </pre>
 </details>    
+<details id="Deployment.add_unit"><summary><code class="method">Deployment.add_unit(service, units=1)</code>
+
+<p>Add more units of an existing service after deployment.</p></summary>
+
+<ul><li><code>service</code> Name of the service to add, must already be added.</li>
+<li><code>units</code> Number of units to add, default is one.</li></ul>
+<pre class="prettyprint lang-python">import amulet
+
+d = amulet.Deployment()
+d.add('wordpress')
+try:
+    d.setup(timeout=900)
+except amulet.helpers.TimeoutError:
+    # Setup didn't complete before timeout
+    pass
+d.add_unit('wordpress')
+d.add_unit('wordpresss', units=2)
+</pre>
+</details>    
 <details id="Deployment.build_relations"><summary><code class="method">Deployment.build_relations()</code>
 
 <p>Private method invoked during deployer_map. Creates relation mapping.</p></summary></details>
