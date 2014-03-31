@@ -72,30 +72,29 @@
 <!--End-Preamble-->
           <article>
             <section>
-              <h1 id="destroying">Removal within Juju</h1>
-              <p>Juju isn't just about magically spinning up services as and when you need them, it is also about quickly, sanely and efficiently destroying everything when you no longer need it. This section deals with the sort of things you can ruthlessly destroy, and how to go about it.</p>
-              <h2 id="destroy-services">Destroying/Removing Services</h2>
+              <h1 id="removing">Removal within Juju</h1>
+              <p>Juju isn't just about magically spinning up services as and when you need them, it is also about quickly, sanely and efficiently removing something when you no longer need it. This section deals with the sort of things you can ruthlessly destroy, and how to go about it.</p>
+              <h2 id="remove-services">Removing Services</h2>
               <p>Once a service is no longer required it can be removed with a simple command.</p>
-              <pre class="prettyprint">juju destroy-service &LT;service-name&GT;</pre>
-              <p class="warning note"><strong>Warning!:</strong> Destroying a service which has active relations with another running service will break that relation. This can cause errors in both services, as such review and potentially remove any relationships first.</p>
+              <pre class="prettyprint">juju remove-service &LT;service-name&GT;</pre>
+              <p class="warning note"><strong>Warning!:</strong> Removing a service which has active relations with another running service will break that relation. This can cause errors in both services, as such review and potentially remove any relationships first.</p>
               <p>A service can take a while to "die", but if running a juju status reveals that the service is listed as dying, but also reports an error state, then the zombied service will still be hanging around. See <a href="#caveat-dying">caveats</a> for how to manage services in a dying state.</p>
               <p class="note"><strong>Note:</strong> Destroying a service removes that service, but not any nodes which may have been created for it to run on. This is juju's way of preserving data to the best  of its ability. See <a href="#destroy-machines">Destroying Machines</a> for additional details.</p>
             </section>
-            <section id="destroy-units">
-              <h2 id="destroy-units">Destroying Units</h2>
+            <section id="remove-unit">
+              <h2 id="remove-units">Removing Units</h2>
               <p>It is also possible to spin down individual units, or a sequence of units running within a service:</p>
               <pre class="prettyprint lang-yaml">juju remove-unit mediawiki/1</pre>
-              <p>The <code>remove-unit</code> command is an alias for <code>destroy-unit</code>, and can be used interchangeably, so the above is identical to:</p>
-              <pre class="prettyprint lang-yaml">juju destroy-unit mediawiki/1</pre> 
+      
               <p>If you wish to remove more than one unit, you may list them all following the command:</p>
               <pre class="prettyprint lang-yaml">juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2 ...</pre>
-              <p class="note"><strong>Note:</strong> As with destroying a service, removing units will NOT actually remove any instances which were created, it only removes the service units. More details can be found in the <a href="charms-scaling.html">Scaling Services</a> section.</p>
-              <p>As with destroying services, See <a href="#caveat-dying">caveats</a> for how to manage units in a dying state.</p>
+              <p class="note"><strong>Note:</strong> As with removing a service, removing units will NOT actually remove any instances which were created, it only removes the service units. More details can be found in the <a href="charms-scaling.html">Scaling Services</a> section.</p>
+              <p>As with removing services, See <a href="#caveat-dying">caveats</a> for how to manage units in a dying state.</p>
             </section>
             <section>
-              <h2 id="destroy-machines">Destroying Machines</h2>
+              <h2 id="remove-machines">Removing Machines</h2>
               <p>Instances or machines which have no currently assigned workload can be removed from your cloud using the following command:
-              <pre class="prettyprint">juju destroy-machine &LT;number&GT;</pre>
+              <pre class="prettyprint">juju remove-machine &LT;number&GT;</pre>
               <p>A machine which is currently idle will be removed almost instantaneously from the cloud, along with anything else which may have been on the instance which juju was not aware of. To prevent accidents and awkward moments with running services, it is not possible to remove an instance which is currently allocated to a service. If you try to do so, you will get a polite error message in the form:</p>
               <pre class="prettyprint lang-yaml">error: no machines were destroyed: machine 3 has unit "mysql/0" assigned</pre>
             </section>
@@ -105,10 +104,10 @@
                <pre class="prettyprint">juju destroy-environment</pre>
                <p> This will completely remove all instances running under the current environment profile. You can of course specify a different environment profile using the <code>-e</code> switch, or any one of <a href="config-environments.html">these other</a> methods:</p>
                <pre class="prettyprint">juju destroy-environment -e mycloud</pre>
-               <p>You should be pretty sure that this is what you want to do, as there is no undo command! Everything in the selected environment will be removed.</p>  
+               <p>You should be pretty sure that this is what you want to do, as there is no undo command! Everything in the selected environment will be removed. The command will require you to confirm that you wish to proceed.</p>  
             </section>
             <section>
-              <h2 id="destroy-relations">Removing Relations</h2>
+              <h2 id="remove-relations">Removing Relations</h2>
                <p>To remove relations between deployed services, you should see <a href="charms-relations.html#removing"> the docs section on charm relationships</a>.</p>
             </section>
             <section>
