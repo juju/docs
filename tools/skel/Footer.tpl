@@ -48,7 +48,7 @@
 			</div>
 		</nav>
 		<div class="legal clearfix">
-			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
 		</div>
 	</footer>
 
