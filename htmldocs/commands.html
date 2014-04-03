@@ -75,43 +75,56 @@
               <h1>Juju Command reference</h1>
               <p>You can get a list of the currently used commands by entering <code>juju help commands</code> from the commandline. The currently understood commands are listed here, with some examples.</p>
               <ul>
-                <li><strong>add-relation</strong>         add a relation between two services</li>
-                <li><strong>add-unit</strong>             add a service unit</li>
-                <li><strong>bootstrap</strong>            start up an environment from scratch</li>
-                <li><strong>debug-log</strong>            display the consolidated log file</li>
-                <li><strong>deploy</strong>               deploy a new service</li>
-                <li><strong>destroy-environment</strong>  terminate all machines and other associated resources for an environment</li>
-                <li><strong>destroy-machine</strong>      destroy machines</li>
-                <li><strong>destroy-relation</strong>     destroy a relation between two services</li>
-                <li><strong>destroy-service</strong>      destroy a service</li>
-                <li><strong>destroy-unit</strong>         destroy service units</li>
-                <li><strong>expose</strong>               expose a service</li>
-                <li><strong>generate-config</strong>      alias for init</li>
-                <li><strong>get</strong>                  get service config options</li>
-                <li><strong>get-constraints</strong>      view constraints</li>
-                <li><strong>get-env</strong>              alias for get-environment</li>
-                <li><strong>get-environment</strong>      view environment values</li>
-                <li><strong>help</strong>                 show help on a command or other topic</li>
-                <li><strong>init</strong>                 generate boilerplate configuration for juju environments</li>
-                <li><strong>publish</strong>              publish charm to the store</li>
-                <li><strong>remove-relation</strong>      alias for destroy-relation</li>
-                <li><strong>remove-unit</strong>          alias for destroy-unit</li>
-                <li><strong>resolved</strong>             marks unit errors resolved</li>
-                <li><strong>scp</strong>                  launch a scp command to copy files to/from remote machine(s)</li>
-                <li><strong>set</strong>                  set service config options</li>
-                <li><strong>set-constraints</strong>      replace constraints</li>
-                <li><strong>set-env</strong>              alias for set-environment</li>
-                <li><strong>set-environment</strong>      replace environment values</li>
-                <li><strong>ssh</strong>                  launch an ssh shell on a given unit or machine</li>
-                <li><strong>stat</strong>                 alias for status</li>
-                <li><strong>status</strong>               output status information about an environment</li>
-                <li><strong>sync-tools</strong>           copy tools from the official bucket into a local environment</li>
-                <li><strong>terminate-machine</strong>    alias for destroy-machine</li>
-                <li><strong>unexpose</strong>             unexpose a service</li>
-                <li><strong>unset</strong>                set service config options back to their default</li>
-                <li><strong>upgrade-charm</strong>        upgrade a service's charm</li>
-                <li><strong>upgrade-juju</strong>         upgrade the tools in a juju environment</li>
-                <li><strong>version</strong>              print the current version</li>
+                <li><strong>add-machine:</strong> start a new, empty machine and optionally a container, or add a container to a machine</li>
+                <li><strong>add-relation:</strong> add a relation between two services</li>
+                <li><strong>add-unit:</strong> add one or more units of an already-deployed service</li>
+                <li><strong>api-endpoints:</strong> print the API server addresses</li>
+                <li><strong>authorised-keys:</strong> manage authorised ssh keys</li>
+                <li><strong>bootstrap:</strong> start up an environment from scratch</li>
+                <li><strong>debug-hooks:</strong> launch a tmux session to debug a hook</li>
+                <li><strong>debug-log:</strong> display the consolidated log file</li>
+                <li><strong>deploy:</strong> deploy a new service</li>
+                <li><strong>destroy-environment:</strong> terminate all machines and other associated resources for an environment</li>
+                <li><strong>destroy-machine:</strong> destroy machines</li>
+                <li><strong>destroy-relation:</strong> destroy a relation between two services</li>
+                <li><strong>destroy-service:</strong> destroy a service</li>
+                <li><strong>destroy-unit:</strong> destroy service units</li>
+                <li><strong>env:</strong> alias for switch</li>
+                <li><strong>expose:</strong> expose a service</li>
+                <li><strong>generate-config:</strong> alias for init</li>
+                <li><strong>get:</strong> get service configuration options</li>
+                <li><strong>get-constraints:</strong> view constraints on the environment or a service</li>
+                <li><strong>get-env:</strong> alias for get-environment</li>
+                <li><strong>get-environment:</strong> view environment values</li>
+                <li><strong>help:</strong> show help on a command or other topic</li>
+                <li><strong>help-tool:</strong> show help on a juju charm tool</li>
+                <li><strong>init:</strong> generate boilerplate configuration for juju environments</li>
+                <li><strong>publish:</strong> publish charm to the store</li>
+                <li><strong>remove-machine:</strong> alias for destroy-machine</li>
+                <li><strong>remove-relation:</strong> alias for destroy-relation</li>
+                <li><strong>remove-service:</strong> alias for destroy-service</li>
+                <li><strong>remove-unit:</strong> alias for destroy-unit</li>
+                <li><strong>resolved:</strong> marks unit errors resolved</li>
+                <li><strong>retry-provisioning:</strong> retries provisioning for failed machines</li>
+                <li><strong>run:</strong> run the commands on the remote targets specified</li>
+                <li><strong>scp:</strong> launch a scp command to copy files to/from remote machine(s)</li>
+                <li><strong>set:</strong> set service config options</li>
+                <li><strong>set-constraints:</strong> set constraints on the environment or a service</li>
+                <li><strong>set-env:</strong> alias for set-environment</li>
+                <li><strong>set-environment:</strong> replace environment values</li>
+                <li><strong>ssh:</strong> launch an ssh shell on a given unit or machine</li>
+                <li><strong>stat:</strong> alias for status</li>
+                <li><strong>status:</strong> output status information about an environment</li>
+                <li><strong>switch:</strong> show or change the default juju environment name</li>
+                <li><strong>sync-tools:</strong> copy tools from the official tool store into a local environment</li>
+                <li><strong>terminate-machine:</strong> alias for destroy-machine</li>
+                <li><strong>unexpose:</strong> unexpose a service</li>
+                <li><strong>unset:</strong> set service config options back to their default</li>
+                <li><strong>unset-env:</strong> alias for unset-environment</li>
+                <li><strong>unset-environment:</strong> unset environment values</li>
+                <li><strong>upgrade-charm:</strong> upgrade a service's charm</li>
+                <li><strong>upgrade-juju:</strong> upgrade the tools in a juju environment</li>
+                <li><strong>version:</strong> print the current version</li>
               </ul>
             </section>
           </article>
