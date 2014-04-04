@@ -38,7 +38,8 @@
         "Manage Juju with the GUI": "howto-gui-management.html",
         "Set up a Private Cloud": "howto-privatecloud.html",
         "Configure Proxy Access": "howto-proxies.html",
-        "Vagrant Workflow": "howto-vagrant-workflow.html"
+        "Vagrant Workflow": "howto-vagrant-workflow.html",
+        "Manage Authorised Keys": "howto-authorised-keys",
       }
     },
     "Troubleshooting": {
@@ -59,7 +60,6 @@
         "metadata.yaml": "authors-charm-metadata.html",
         "hooks": "authors-hook-kinds.html",
         "config.yaml": "authors-charm-config.html"
-
       }
     },
     "Writing a Charm": {
