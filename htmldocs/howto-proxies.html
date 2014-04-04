@@ -72,8 +72,8 @@
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
           <article>
-            <section id="howto-proxies">
-              <h1>Configure Proxy Access</h1>
+            <sectionid="howto-proxies">
+              <h1 id="configure proxies">Configure Proxy Access</h1>
               <p>Juju supports proxies and has special support for proxying apt. Proxies can be configured for the providers in the environments.yaml file, or added to an existing environment using <code>juju set-env</code> The configuration options are:</p>
               <ul>
                 <li>http-proxy</li>
@@ -83,9 +83,9 @@
               </ul>
               <p>Each protocol-specific option accepts a URL. The <code>no-proxy</code> option is a list of host names and addresses that services can directly connect to. For example:</p>
               <pre class="prettyprint yaml">
-                http-proxy: http://proxy.example.com:9000
-                https-proxy: https://user@10.0.0.1
-                no-proxy: localhost,10.0.3.1
+http-proxy: http://proxy.example.com:9000
+https-proxy: https://user@10.0.0.1
+no-proxy: localhost,10.0.3.1
               </pre>
               <p>There are three additional proxy options specific to apt. Juju's default behaviour is to use the protocol-specific proxy options, but you can specify exceptions for cases where the network has a local apt mirror.</p>
               <ul>
@@ -95,7 +95,7 @@
               </ul>
               <p>For example, with a squid-deb-proxy running on a laptop, you can specify the apt-http-proxy to use it for the containers by specifying the host machine’s network-bridge:</p>
               <pre class="prettyprint yaml">
-                apt-http-proxy: http://10.0.3.1:8000
+apt-http-proxy: http://10.0.3.1:8000
               </pre>
               <p>The proxy options are exported in all hook execution contexts, and also available in the shell through <code>juju ssh</code> or <code>juju run</code>.</p>
             </section>
