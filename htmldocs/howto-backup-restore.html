@@ -77,16 +77,16 @@
               <p>Juju provides <code>backup</code> and <code>restore</code> commands to recover the juju state-server (bootstrap node) in case or failure. The juju backup command creates a archive of the state-server’s configuration, keys, and environment data. If the state-server or its host machine failes, a new state-server can be created from the backup file.</p>
               <p>The <code>backup</code> command creates an dated archive of the current environment's state-server. An archive like "juju-backup-20140403-1408.tgz" is created by this command.</p>
               <pre class="prettyprint lang-bash">
-              $ juju switch my-env
-              $ juju backup
+              juju switch my-env
+              juju backup
               </pre>
               <p class="note">Unline most juju commands, <code>backup</code> does not accept the -e option to specific the environment. You must <code>switch</code> to the environment or specify the envronment name in the <code>JUJU_ENV</code> shell env variable.</p>
               <pre class="prettyprint lang-bash">
-              $ JUJU_ENV=my-env juju backup
+              JUJU_ENV=my-env juju backup
               </pre>
               <p>The juju <code>restore</code> command creates a new juju state-server instance using the data from the backup file. It updates the existing instances in the environment to recognise the new state-server. The command ensures the environment's state-server is not running before it creates the replacement.</p>
               <pre class="prettyprint lang-bash">
-              $ juju restore -e my-env juju-backup-20140403-1408.tgz
+              juju restore -e my-env juju-backup-20140403-1408.tgz
               </pre>
               <p>As with the normal bootstrap command, you can pass --constraints to setup the new state-server.</p>
             </section>
