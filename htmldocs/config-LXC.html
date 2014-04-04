@@ -105,12 +105,12 @@ sudo apt-get install juju-local linux-image-generic-lts-raring linux-headers-gen
 			<p>If you're not running Ubuntu please consult your operating system distribution's documentation for instructions on installing the LXC userspace tools and the MongoDB server. Juju requires a MongoDB server built with SSL support.</p>
 
             <h2 id="configuration">Configuration</h2>
-            <p>You should start by generating a generic configuration file for Juju and then switching to the local provider by using the command:
+            <p>You should start by generating a generic configuration file for Juju and then switching to the local provider by using the command:</p>
 <pre class="prettyprint lang-bash">
 juju generate-config
 juju switch local
 </pre>
-            <p>This will generate a file, <code>environments.yaml</code> (if it doesn't already exist), which will live in your <code>~/.juju/</code> directory (and will create the directory if it doesn't already exist).
+            <p>This will generate a file, <code>environments.yaml</code> (if it doesn't already exist), which will live in your <code>~/.juju/</code> directory (and will create the directory if it doesn't already exist).</p>
             <p class ="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
             <p>The generic configuration sections generated for the local provider will look something like this, though Juju will generate this automatically you usually don't need to edit it:</p>
 <pre class="prettyprint lang-yaml">
@@ -129,19 +129,31 @@ local:
     # or if the default port is used by another program.
     # shared-storage-port: 8041
 </pre>
-            <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <code>$JUJU_HOME</code>, which defaults to <code>~/.juju/</code>. By uncommenting and setting <code>root-dir</code> this location can be changed as well as the ports of the storage and the shared storage. This may be useful in the case of multiple parallel running local providers or conflicts with other programs on your system. 
+            <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <code>$JUJU_HOME</code>, which defaults to <code>~/.juju/</code>. By uncommenting and setting <code>root-dir</code> this location can be changed as well as the ports of the storage and the shared storage. This may be useful in the case of multiple parallel running local providers or conflicts with other programs on your system.</p>
  
             <p class="note" id="encrypted-home"><strong>Note: </strong>If you are using encrypted home directories you have to set <code>$JUJU_HOME</code> or <code>root-dir</code> to point to a location <strong>outside</strong> your home directory.</p>
 
             <h2 id="bootstrap-destroy">Bootstrapping and Destroying</h2>
-            <p>The usage of LXC Linux Containers enforces that bootstrapping and destroying of an environment are done as <strong>root</strong>. All other operations can be executed as non-root. E.g.</p>
+            <p>The usage of LXC Linux Containers requires <strong>root</strong> privileges for some steps. Juju will prompt for your password if needed. Juju cannot be run under sudo because it needs to manage permission as the real user.</p>
+            <p clas ="note"><strong>Note:</strong> If you are running a firewall such as <strong>ufw</strong>, it may interfere with the correct operation of Juju using LXC containers and might need to be halted.</p>
+            <p class="note">If you have used the local provider in the past when it required <code>sudo</code>, you may need to manually clean up some files that are still owned by root. If your local environment is named "local" then there may be a local.jenv owned by root in the JUJU_HOME directory (~/.juju). After the local environment is destroyed, you can remove the file like this:</p>
 <pre class="prettyprint lang-bash">
-sudo juju bootstrap
-juju deploy mysql
-...
-sudo juju destroy-environment
+sudo rm ~/.juju/environments/local.jenv
 </pre>
-            <p class ="note"><strong>Note:</strong> If you are running a firewall such as <strong>ufw</strong>, it may interfere with the correct operation of Juju using LXC containers and might need to be halted.</p>
+            <h2>Fast LXC creation</h2>
+            <p>The local provider can use lxc-clone to create the containers used as machines. This feature is controlled by the <code>lxc-clone</code> option in environments.yaml. The default is "true" for Trusty and above, and "false" for earlier Ubuntu releases. You can try to use lxc-clone on earlier releases, but it is not a supported. It may well work. You can enable lxc-clone in environments.yaml thusly:</p>
+<pre class="prettyprint lang-yaml">
+local:
+    type: local
+    lxc-clone: true
+</pre>
+            <p>The local provider is btrfs-aware. If your LXC directory is on a btrfs filesystem, the clones use snapshots and are much faster to create and take up much less space. There is also support for using aufs as a backing-store for the LXC clones, but there are some situations where aufs doesn’t entirely behave as intuitively as one might expect, so this must be turned on explicitly in environments.yaml.</p>
+<pre class="prettyprint lang-yaml">
+local:
+    type: local
+    lxc-clone-aufs: true
+</pre>
+            <p class="note">When using clone, the first machine to be created will create a "template" machine that is used as the basis for the clones. This will be called "juju-&lt;series&gt;-template", so for a precise image, the name is "juju-precise-template". Do not modify or start this image  while a local provider environment is running because you cannot clone a running lxc machine.</p>
             <h2 id="caveats">Caveats</h2>
               <p>There are several special circumstances tied to the local provider, given it's development focused nature. These are outlined below.</p>
               <h3 id="debug-log">juju debug-log</h3>
