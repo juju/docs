@@ -80,15 +80,15 @@
     	<section id="bootstrap_fails">
     	<h2>Bootstrap fails</h2>
 
-		<p>Every time bootstrap fails, you'll need to run <code>sudo juju destroy-environment</code> prior to continuing. First let's rerun a bootstrap in debug mode:</p>
+		<p>Every time bootstrap fails, you'll need to run <code>juju destroy-environment</code> prior to continuing. First let's rerun a bootstrap in debug mode:</p>
 
 <pre class="prettyprint lang-bash">
-sudo juju boostrap --show-log --debug
+juju boostrap --show-log --debug
 </pre>
 
 		<p>This will print very verbose output. If you're receiving <code>connection failed, will retry: dial tcp 127.0.0.1:37017: connection refused</code> error at the end of the run, proceed with the troubleshooting guide. If not the error presented will inform you what went wrong.</p>
 
-		<p>In certain cases you might get this something similar to thiserror: <code>Get http://10.0.3.1:8040/provider-state: dial tcp 10.0.3.1:8040: connection refused</code>.
+		<p>In certain cases you might get this something similar to thiserror: <code>Get http://10.0.3.1:8040/provider-state: dial tcp 10.0.3.1:8040: connection refused</code>.</p>
 
 		<p>This can be solved by removing miscellaneous .jenv files in <code>~/.juju/environments</code> and rerunning the bootstrap command.</p>
 		</section>
@@ -98,31 +98,31 @@ sudo juju boostrap --show-log --debug
 
 		<p>This occurs when the juju API server and Database server fail to start within the alloted timeout. This can occur for one of several reasons. After the bootstrap command fails run the following command:</p>
 
-<pre class="prettyprint">
+<pre class="prettyprint lang-bash">
 sudo initctl list | grep juju
 </pre>
 
-		<p>You should see two jobs listed. One that starts with <code>juju-db</code> the other <code>juju-agent</code>. If these are both in a start/running state then your machine took longer than juju expected to get these services started. If you're on an encrypted partition see TODO: INSTRUCTIONS ON THIS. If you're not TODO: <INSTRUCTIONS ON RAM DISK DOES NOT EXIST>.</p>
+		<p>You should see two jobs listed. One that starts with <code>juju-db</code> the other <code>juju-agent</code>. If these are both in a start/running state then your machine took longer than juju expected to get these services started. If you're on an encrypted partition see TODO: INSTRUCTIONS ON THIS. If you're not TODO: INSTRUCTIONS ON RAM DISK DOES NOT EXIST.</p>
 
 		<p>If either of these have stopped, investigate the logs at <code>/var/log/upstart/juju-db*.log</code> or <code>/var/log/upstart/juju-agent*.log</code> If the juju-db service failed to start with messages of unsupported command-line options, check the version of mongodb installed:</p>
 
-<pre class="prettyprint">
+<pre class="prettyprint lang-bash">
 dpkg -l | grep mongodb-server
 </pre>
 
-		<p>If you have a version less than 1:2.2.4-0ubuntu1 make sure you have either the <a href="https://wiki.ubuntu.com/ServerTeam/CloudToolsArchive">Cloud Tools Archive</a> or ppa:juju/stable added to your system. <code>sudo apt-get update</code> then install juju-local package. Before retrying, make sure you run <code>sudo juju destroy-environment</code>
+		<p>If you have a version less than 1:2.2.4-0ubuntu1 make sure you have either the <a href="https://wiki.ubuntu.com/ServerTeam/CloudToolsArchive">Cloud Tools Archive</a> or ppa:juju/stable added to your system. <code>sudo apt-get update</code> then install juju-local package. Before retrying, make sure you run <code>juju destroy-environment</code></p>
 		</section>
 
 	    <section id="no_machines_start">
         <h2>No machines start</h2>
 
-		<p>If you get a successful bootstrap, but services you deploy never come up, there's a chance that you have an older version of the Ubuntu Cloud Image cached on your machine. To verify this, check the timestamp of the contents in <code>/var/cache/lxc/cloud-precise/</code>
+		<p>If you get a successful bootstrap, but services you deploy never come up, there's a chance that you have an older version of the Ubuntu Cloud Image cached on your machine. To verify this, check the timestamp of the contents in <code>/var/cache/lxc/cloud-precise/</code></p>
 
 <pre class="prettyprint lang-bash">
 ls -lh /var/cache/lxc/cloud-precise/
 </pre>
 
-		<p>If the contents of this directory are older than a few weeks, delete files present, destroy the environment with `sudo juju destroy-environment`, rebootstrap and attempt deployment again.</p>
+		<p>If the contents of this directory are older than a few weeks, delete files present, destroy the environment with <code>juju destroy-environment</code>, rebootstrap and attempt deployment again.</p>
 		</section>
 
 </article>
