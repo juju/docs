@@ -34,6 +34,7 @@
       "children": {
         "Deploy a Node.js app": "howto-node.html",
         "Test and deploy on Rails": "howto-rails.html",
+        "Backup and Restore": "howto-backup-restore.html",
         "Manage Juju with the GUI": "howto-gui-management.html",
         "Set up a Private Cloud": "howto-privatecloud.html",
         "Vagrant Workflow": "howto-vagrant-workflow.html"
