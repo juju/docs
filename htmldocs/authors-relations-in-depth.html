@@ -99,6 +99,7 @@
 	    <li>Run the relation-broken hook.</li>
 	    <li><code>depart</code> from its scope in the relation.</li>
 	    </ul>
+      <p>So what's the difference between relation-departed and relation-broken? Think of relation-departed as the "saying goodbye" event. Relation settings can still be read (with relation-get), but can no longer be set (with relation-set). When relation-broken fires, the relation no longer exists. This is a good spot to do any final cleanup, if necessary. Both relation-departed and relation-broken will always fire, regardless of how the relation is terminated.</p>
 	    <p>The unit's eventual departure from its scope will in turn be detected by units of the related service (if they have not already inferred its imminent departure by other means) and cause them to run relation-departed hooks. A unit's relation settings persist beyond its own departure from the relation; the final unit to depart a relation marked for termination is responsible for destroying the relation and all associated data.</p>
             </section>
 </article>
