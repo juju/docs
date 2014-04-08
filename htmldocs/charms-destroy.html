@@ -103,10 +103,9 @@
               <h2 id="destroy-environments">Destroying Environments</h2>
 
                <p>To completely remove and terminate all running services, the instances they were running on and the bootstrap node itself, you need to run the command:</p>
-               <pre class="prettyprint">juju destroy-environment -e &LT;environment&GT;</pre>
+               <pre class="prettyprint">juju destroy-environment &LT;environment&GT;</pre>
                <p> This will completely remove all instances running under the current environment profile. As there is no 'undo' capability, some further safety precautions have been added to this command.</p>
              <ul>
-                 <li>You <strong>must</strong> specify an environment profile using the <code>-e</code> switch.</li>
                  <li>You will be prompted to confirm the destruction of the environment</li>  
              </ul> 
 
