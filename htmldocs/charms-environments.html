@@ -96,7 +96,7 @@ cat ~/.juju/current-environment
 
 
           <h2 id="environment-e">Specifying an environment</h2>
-          <p> You can use the <code>-e</code> switch with a Juju command, followed by a valid environment label, to specify that the command should be run against that environment. Using the <code>-e</code> switch takes precedence over any other setting.<p>
+          <p> You can use the <code>-e</code> switch with a Juju command, followed by a valid environment label, to specify that the command should be run against that environment. Using the <code>-e</code> switch takes precedence over any other setting.</p>
           <p> For example:</p>
 <pre class="prettyprint lang-bash">
 juju bootstrap                 # bootstraps the default environment
@@ -130,9 +130,35 @@ environments:
 ...
 </pre>
  
+          <h2 id="bootstrapped-environment-update">Updating running environments</h2>
+          <p>Juju has a set of commands that permit you to view and change the configuration of a running environment. The commands can be used to make temporary changes, such as to logging, or permanent changes, such as to take advantage of new features after juju is upgraded.</p>
+          <p>The <code>get-environment</code> command will display all the environment's configured options. You can pass the name of an option to see just the one value. For example, to see the default series that charms are deployed with, type:</p>
+
+<pre class="prettyprint lang-bash">
+juju get-environment default-series
+</pre>
+
+          <p>The <code>set-environment</code> command will set a configuration option to the specified value. For example, you can set the default series that charms are deployed with to trusty like this:</p>
+
+<pre class="prettyprint lang-bash">
+juju set-environment default-series=trusty
+</pre>
+
+          <p>The <code>unset-environment</code> command will set a configuration option to the default value. It acts as a reset. Options without default value are removed. It is an error to unset a required option. For example, you can unset the default series that charms are deployed with (so that the juju store can choose the best series for a charm) like this:</p>
+
+<pre class="prettyprint lang-bash">
+juju unset-environment default-series
+</pre>
+
+          <h2 id="environment-upgrade">Upgrading environments</h2>
+          <p>The <code>upgrade-juju</code> command upgrades a running environment. It selects the most recent supported version of juju compatible with the command-line version. The juju machine and unit agents will be updated to the new version. The <code>--version</code> option can be used to select a specific version to upgrade to.</p>
+
+<pre class="prettyprint lang-bash">
+juju upgrade-juju
+</pre>
 
           <h2 id="environment-update">Updating environments</h2>
-          <p>Juju will attempt to maintain a high degree of legacy compatibility for the environments.yaml definitions, so you should be able to update to stable versions of the software without worring about reconfiguring your environments each time. However, new releases do sometimes add support for new cloud providers, add additional settings or change to adapt to configuration changes for the providers themselves. In these cases it can be useful to generate a new boilerplate <code>environments.yaml</code> so you can easily manually edit your own configurations or cut and paste new environments into your existing configuration.<p>
+          <p>Juju will attempt to maintain a high degree of legacy compatibility for the environments.yaml definitions, so you should be able to update to stable versions of the software without worrying about reconfiguring your environments each time. However, new releases do sometimes add support for new cloud providers, add additional settings or change to adapt to configuration changes for the providers themselves. In these cases it can be useful to generate a new boilerplate <code>environments.yaml</code> so you can easily manually edit your own configurations or cut and paste new environments into your existing configuration.</p>
           <p>To generate a new boilerplate <code>environments.yaml</code> file direct to the console you can use:</p>
 <pre class="prettyprint lang-bash">
 juju generate-config --show
