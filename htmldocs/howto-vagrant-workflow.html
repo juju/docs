@@ -282,7 +282,7 @@ vagrant up
 <pre class="prettyprint lang-bash">
 vagrant ssh
 juju deploy mongodb
-juju deploy --repository=/vagrant local:genghis
+juju deploy --repository=/vagrant local:precise/genghis
 </pre>
 
         <p>We are now free to watch progress through the GUI</p>
@@ -321,8 +321,9 @@ sshuttle -r vagrant@localhost:2222 10.0.3.0/24
         <li>Make edits on your HOST in your favorite editor</li>
         <li>run commands inside the JujuBox vagrant environment. <code>juju upgrade-charm genghis</code></li>
         <li>view results in our HOST browser of choice.</li>
-
+        </ul>
       </section>
+    </article>
 <!--Postamble-->
         </div>
       </div>

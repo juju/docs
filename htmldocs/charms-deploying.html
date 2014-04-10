@@ -109,7 +109,7 @@
                         <pre class="prettyprint">juju deploy cs:precise/mysql</pre>
 
                         <p>which follows the format:</p>
-                        <pre class="prettyprint">&LT;repository&GT;:&LT;series&GT;/&LT;service&GT;</pre>
+                        <pre class="prettyprint">&lt;repository&gt;:&lt;series&gt;/&lt;service&gt;</pre>
 
                         <h1 id="local">Deploying from a local repository</h1>
 
@@ -131,17 +131,47 @@
                         imagine yourselves.</p>
 
                         <p>Juju can be pointed at a local directory to source
-                        charms from using the <code>--repository=&LT;path/to/files&GT;</code>
+                        charms from using the <code>--repository=&lt;path/to/files&gt;</code>
                         switch like this:</p>
-<pre class="prettyprint">juju deploy --repository=/usr/share/charms/ local:precise/vsftpd</pre>
+
+<pre class="prettyprint lang-bash">
+juju deploy --repository=/usr/share/charms/ local:precise/vsftpd
+</pre>
+
+                        <p>The <code>--repository</code>: switch can be omitted
+                        when shell environment defines
+                        <code>JUJU_REPOSITORY</code> like so:</p>
+
+<pre class="prettyprint lang-bash">
+export JUJU_REPOSITORY=/usr/share/charms/
+juju deploy local:precise/vsftpd
+</pre>
 
                         <p>You can also make use of standard filesystem
-                        shortcuts, so the following examples are also
-                        valid:</p>
+                        shortcuts, if the environment specifies the
+                        <code>default-series</code>.The following examples
+                        will deploy the precise charms in the local repository
+                        when default-series is set to precise:</p>
 
-                        <pre class="prettyprint">
+<pre class="prettyprint lang-bash">
 juju deploy --repository=. local:haproxy
-juju deploy --repository ~/charms/ local:wordpress</pre>
+juju deploy --repository ~/charms/ local:wordpress
+</pre>
+
+                        <p>The default-series can
+                        be specified in environments.yaml thusly:</p>
+
+<pre class="prettyprint lang-yaml">
+default-series: precise
+</pre>
+
+                        <p>The default-series can also be added to any
+                        bootstrapped environment with the
+                        <code>set-env </code>:</p>
+
+<pre class="prettyprint lang-bash">
+juju set-env "default-series=precise"
+</pre>
 
                         <p class="note"><strong>Note:</strong> Specifying a
                         local repository makes juju look there
@@ -317,6 +347,7 @@ juju add-unit rabbitmq-server
                             </li>
                         </ul>
                     </section>
+                  </article>
 <!--Postamble-->
         </div>
       </div>
