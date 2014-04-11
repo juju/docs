@@ -81,20 +81,31 @@
             <p class ="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
 
             <p>The generic configuration sections generated for AWS will look something like this:</p>
-<pre class="prettyprint lang-yaml">## https://juju.ubuntu.com/get-started/amazon/
-amazon:
-&nbsp;&nbsp;type: ec2
-&nbsp;&nbsp;admin-secret: 772b97c4c31c6b5883475e396d9a6d32
-&nbsp;&nbsp;# globally unique S3 bucket name
-&nbsp;&nbsp;control-bucket: juju-a29403f89d8223343d3cab01f1ca5a4d
-&nbsp;&nbsp;# override if your machine is on a different series than what you're deploying
-&nbsp;&nbsp;# default-series: precise
-&nbsp;&nbsp;# region defaults to us-east-1, override if required
-&nbsp;&nbsp;# region: us-east-1
-&nbsp;&nbsp;# Usually set via the env variable AWS_ACCESS_KEY_ID, but can be specified here
-&nbsp;&nbsp;# access-key: &LT;secret&GT;
-&nbsp;&nbsp;# Can be set via the env variable AWS_SECRET_ACCESS_KEY, or specified here
-&nbsp;&nbsp;# secret-key: &LT;secret&GT;</pre>
+<pre class="prettyprint lang-yaml">
+# https://juju.ubuntu.com/docs/config-aws.html
+    amazon:
+        type: ec2
+    
+        # region specifies the EC2 region. It defaults to us-east-1.
+        #
+        # region: us-east-1
+    
+        # access-key holds the EC2 access key. It defaults to the
+        # environment variable AWS_ACCESS_KEY_ID.
+        #
+        # access-key: &lt;secret&gt;
+    
+        # secret-key holds the EC2 secret key. It defaults to the
+        # environment variable AWS_SECRET_ACCESS_KEY.
+        #
+        # secret-key: &lt;secret&gt;
+    
+        # image-stream chooses a simplestreams stream to select OS images
+        # from, for example daily or released images (or any other stream
+        # available on simplestreams).
+        #
+        # image-stream: "released"
+</pre>
 
             <p>This is a simple configuration intended to run on EC2 with S3 permanent storage. Values for the default setting can be changed simply by editing this file, uncommenting the relevant lines and adding your own settings. All you need to do to get this configuration to work is to either set the <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> via environment variables, or uncomment and add the values to the configuration file.</p>
             <p>You can retrieve these values easily from your AWS Management Console at <a href="http://console.aws.amazon.com">http://console.aws.amazon.com</a>. Click on your name in the top-right and then the "Security Credentials" link from the drop down menu.</p>
