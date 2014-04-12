@@ -20,14 +20,6 @@
 	</head>
 <!--End-Head-->
 
-
-
-
-
-
-
-
-
   <body class="resources">
   	
 <!--Header-->
@@ -98,7 +90,7 @@
                         <pre class="prettyprint">juju deploy mysql</pre>
 
                         <p>Running this will do exactly what you expect - fetch
-                        the latest juju charm for the series you are running
+                        the latest Juju charm for the series you are running
                         and then use the bootstrap environment to initiate a
                         new instance and deploy MySQL</p>
 
@@ -135,7 +127,7 @@
                         switch like this:</p>
 
 <pre class="prettyprint lang-bash">
-juju deploy --repository=/usr/share/charms/ local:precise/vsftpd
+juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
 </pre>
 
                         <p>The <code>--repository</code>: switch can be omitted
@@ -144,14 +136,14 @@ juju deploy --repository=/usr/share/charms/ local:precise/vsftpd
 
 <pre class="prettyprint lang-bash">
 export JUJU_REPOSITORY=/usr/share/charms/
-juju deploy local:precise/vsftpd
+juju deploy local:trusty/vsftpd
 </pre>
 
                         <p>You can also make use of standard filesystem
                         shortcuts, if the environment specifies the
                         <code>default-series</code>.The following examples
-                        will deploy the precise charms in the local repository
-                        when default-series is set to precise:</p>
+                        will deploy the trusty charms in the local repository
+                        when default-series is set to trusty:</p>
 
 <pre class="prettyprint lang-bash">
 juju deploy --repository=. local:haproxy
@@ -170,11 +162,11 @@ default-series: precise
                         <code>set-env </code>:</p>
 
 <pre class="prettyprint lang-bash">
-juju set-env "default-series=precise"
+juju set-env "default-series=trusty"
 </pre>
 
                         <p class="note"><strong>Note:</strong> Specifying a
-                        local repository makes juju look there
+                        local repository makes Juju look there
                         <strong>first</strong>, but if the relevant charm is
                         not found in that repository, it will fall back to
                         fetching it from the charm store. If you wish to check
@@ -183,7 +175,7 @@ juju set-env "default-series=precise"
 
                         <h1>A note about caching...</h1>
 
-                        <p>After juju resolves a charm and its dependencies, it
+                        <p>After Juju resolves a charm and its dependencies, it
                         bundles them and deploys them to a machine provider
                         charm cache/repository (e.g. ~/.juju/charmcache). This
                         allows the same charm to be deployed to multiple
@@ -412,9 +404,6 @@ juju add-unit rabbitmq-server
 
 <!--End-Footer-->
 
-
-
-
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -438,12 +427,5 @@ juju add-unit rabbitmq-server
    })();
     </script>
 <!--End-Scripts-->
-
-
-
-
-
-
-
 
 </body></html>
