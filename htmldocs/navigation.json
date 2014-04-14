@@ -91,6 +91,7 @@
     "children": {
       "Juju Commands": "commands.html",
       "Juju constraints": "reference-constraints.html",
+      "Release Notes": "reference-release-notes.html",
       "Glossary": "glossary.html",
       "Charm Review Criteria": "reference-reviewers.html",
       "Contribute to the Docs!": "contributing.html"
