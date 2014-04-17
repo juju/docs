@@ -69,6 +69,8 @@ be created according to the configuration you have provided, and your SSH key
 will automatically be uploaded so that Juju can communicate securely with the
 bootstrap instance.
 
+<iframe style="margin-left: 20%;" class="youtube-player" type="text/html" width="420" height="350" src="//www.youtube.com/embed/0AT6qKyam9I"></iframe>
+
     juju bootstrap
 
 **Note:** If you have multiple environments configured, you can choose which one to address with a particular command by adding the `-e` switch followed by the environment name, E.g. `-e hpcloud`.
@@ -180,8 +182,7 @@ exist.
 From this status readout, we can see that wordpress is exposed and ready. If we
 simply copy the address into a web browser, we should be able to see it running
 
-![Image showing wordpress in a web browser](./media/getting_started-
-wordpress.png)
+![WordPress in a web browser](./media/getting_started-wordpress.png)
 
 Congratulations, you have just deployed a service with Juju!
 
