@@ -21,14 +21,7 @@
 <!--End-Head-->
 
 
-
-
-
-
-
-
-
-  <body class="resources">
+<body class="resources">
   	
 <!--Header-->
 
@@ -73,20 +66,144 @@
 <!--End-Preamble-->
           <article>
             <section>
-            <h1 id="config-local">Using the Local Provider</h1>
-<p>The purpose of the "local provider" is to provide a testing ground or sandbox for users to experiment with Juju and speed up the process of writing charms. Although Juju is intended to work on bare metal (via <a href="http://maas.ubuntu.com">MAAS</a>) or through a variety of cloud providers or your own private cloud, it can also be configured to run solely on a local machine by means of containers or virtualisation.</p>
-<p>Juju can deploy to the Linux containers system, LXC (<a href="http://linuxcontainers.org/">see linuxcontainers.org</a>) and <a href="http://www.linux-kvm.org/">KVM</a>. However, this option isn't available to those running Juju on Mac and Windows systems. Therefore, further methods of containerisation and virtualisation are being added. These are collectively referred to as using "the local provider", even though the actual underlying technology may be very different. Whichever method you use, ultimately it should be largely transparent to the user.<p>
-<p>The following pages cover the different local providers available:</p>
-<ul>
-<li> <a href="./config-LXC.html">Installing and configuring Juju for LXC (Linux)</a></li>
-<li> <a href="./config-kvm.html">Installing and configuring Juju for KVM (Linux)</a></li>
-<li> <a href="./config-vagrant.html">Using Juju with Vagrant(Linux/Mac/Windows)</a><code>Beta!</code></li>
-<li> Running Juju with virtualised containers. <code>Coming Soon!</code></li>
-</ul>
+            <h1 id="config-local">Configuring for KVM</h1>
+
+            <h2 id="prereq">Prerequisites</h2>
+            <p>Juju can deploy to KVM in addition to LXC. This setup will show you how to deploy to both LXC and KVM within a single environment.</p>
+            <p>If you have an existing KVM environment that you want to connect Juju to, we recommend using the <a href="/docs/config-manual.html">manual provider</a>.</p>
+
+            <p>If you're not already using the stable release PPA you can make sure you've added it:</p> 
+
+<pre class="prettyprint lang-bash">
+sudo apt-add-repository ppa:juju/stable
+sudo apt-get update</pre>
+
+			<p>Then you can install the local provider, the commands depend on the Juju version you are using:</p>
+
+			<h3 id="gt-precise">For Ubuntu versions newer than 12.04:</h3>
+
+<pre class="prettyprint lang-bash">
+sudo apt-get install juju-local libvirt-bin
+</pre>
+
+			<h3 id="precise">For 12.04 LTS users only:</h3>
+
+			<p>Due to needing newer versions of LXC the local provider does require a newer kernel than the released version of 12.04. Therefore we install Linux 3.8 from the <a href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">LTS Hardware Enablement Stack</a>:</p> 
+
+<pre class="prettyprint lang-bash">
+sudo apt-get install juju-local linux-image-generic-lts-raring linux-headers-generic-lts-raring libvirt-bin
+</pre>
+
+			<p>You will need to reboot into the new kernel in order to use Juju with the local provider.</p>
+
+			<p>If you're not running Ubuntu please consult your operating system distribution's documentation for instructions on installing the LXC userspace tools and the MongoDB server. Juju requires a MongoDB server built with SSL support.</p>
+
+            <h2 id="configuration">Configuration</h2>
+            <p>You should start by generating a generic configuration file for Juju and then switching to the local provider by using the command:</p>
+<pre class="prettyprint lang-bash">
+juju generate-config
+juju switch local
+</pre>
+            <p>This will generate a file, <code>environments.yaml</code> (if it doesn't already exist), which will live in your <code>~/.juju/</code> directory (and will create the directory if it doesn't already exist).</p>
+            <p class ="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
+            <p>The generic configuration sections generated for the local provider will look something like this, though Juju will generate this automatically you usually don't need to edit it, however do ensure that
+            <tt>network-bridge</tt> is set, you'll need that for the KVMs to talk to each other. Check the <a href="http://wiki.libvirt.org/page/Networking#Bridged_networking_.28aka_.22shared_physical_device.22.29">KVM networking documentation</a> for more information.</p>
+<pre class="prettyprint lang-yaml">
+## https://juju.ubuntu.com/get-started/local/
+local:
+    type: local
+    admin-secret: 772b9471131c6b5883475e3908156d32
+    network-bridge: virbr0
+</pre>
+
+            <p>Running Juju with this configuration the storage files and the database will be located in the directory specified by the environment variable <code>$JUJU_HOME</code>, which defaults to <code>~/.juju/</code>. By uncommenting and setting <code>root-dir</code> this location can be changed as well as the ports of the storage and the shared storage. This may be useful in the case of multiple parallel running local providers or conflicts with other programs on your system.</p>
+ 
+            <p class="note" id="encrypted-home"><strong>Note: </strong>If you are using encrypted home directories you have to set <code>$JUJU_HOME</code> or <code>root-dir</code> to point to a location <strong>outside</strong> your home directory.</p>
+
+            <h2 id="bootstrap-destroy">Bootstrapping and Destroying</h2>
+            <p>The usage of LXC Linux Containers requires <strong>root</strong> privileges for some steps. Juju will prompt for your password if needed. Juju cannot be run under sudo because it needs to manage permission as the real user.</p>
+            <p clas ="note"><strong>Note:</strong> If you are running a firewall such as <strong>ufw</strong>, it may interfere with the correct operation of Juju using LXC containers and might need to be halted.</p>
+            <p class="note">If you have used the local provider in the past when it required <code>sudo</code>, you may need to manually clean up some files that are still owned by root. If your local environment is named "local" then there may be a local.jenv owned by root in the JUJU_HOME directory (~/.juju). After the local environment is destroyed, you can remove the file like this:</p>
+<pre class="prettyprint lang-bash">
+sudo rm ~/.juju/environments/local.jenv
+</pre>
+
+			<h2 id="deploy-kvm">Deploying to KVM</h2>
+			<p>After bootstrapping, you can deploy services to KVM:</p>
+<pre class="prettyprint lang-bash">
+juju bootstrap
+juju deploy mysql --to kvm:0
+juju deploy wordpress
+</pre>
+            What this does is deploy mysql onto a KVM instance within Machine 0 and deploys wordpress onto an LXC instance which is Machine 1 by default. The juju status output should look similar to this:
+<pre class="prettyprint lang-bash">
+environment: local
+machines:
+  "0":
+    agent-state: started
+    agent-version: 1.17.5.1
+    dns-name: localhost
+    instance-id: localhost
+    series: saucy
+    containers:
+      0/kvm/0:
+        agent-state: started
+        agent-version: 1.17.5.1
+        dns-name: 192.168.122.233
+        instance-id: juju-machine-0-kvm-0
+        series: precise
+        hardware: arch=amd64 cpu-cores=1 mem=512M root-disk=8192M
+  "1":
+    agent-state: started
+    agent-version: 1.17.5.1
+    dns-name: 192.168.122.204
+    instance-id: adam-local-machine-1
+    series: precise
+    hardware: arch=amd64
+services:
+  mysql:
+    charm: cs:precise/mysql-38
+    exposed: false
+    relations:
+      cluster:
+      - mysql
+      db:
+      - wordpress
+    units:
+      mysql/0:
+        agent-state: installed
+        agent-version: 1.17.5.1
+        machine: 0/kvm/0
+        public-address: 192.168.122.233
+  wordpress:
+    charm: cs:precise/wordpress-21
+    exposed: true
+    relations:
+      db:
+      - mysql
+      loadbalancer:
+      - wordpress
+    units:
+      wordpress/0:
+        agent-state: started
+        agent-version: 1.17.5.1
+        machine: "1"
+        open-ports:
+        - 80/tcp
+        public-address: 192.168.122.204
+</pre>
+
+<p>You can verify instances using <tt>virsh</tt> and <tt>lxc-ls --fancy</tt>. As another example
+you can continue to deploy to KVM on certain machines, in this case node 0:</p>
+
+<pre class="prettyprint lang-bash">
+juju deploy mongodb --to kvm:0
+juju deploy rails --to kvm:0
+juju deploy wikipedia --to kvm:0
+</pre>
+</section>
 
             
-
-             </section>
           </article>
 <!--Postamble-->
         </div>
