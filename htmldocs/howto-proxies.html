@@ -20,6 +20,14 @@
 	</head>
 <!--End-Head-->
 
+
+
+
+
+
+
+
+
   <body class="resources">
   	
 <!--Header-->
@@ -64,55 +72,32 @@
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
           <article>
-            <section>
-            <h1 id="implicit-relations">Implicit relations</h1>
-            <p>Implicit relations allow for interested services to gather lifecycle-oriented events and data about 
-            other services without expecting or requiring any modifications on the part of the author of the other 
-            service's charm.</p>
-            <p>Implicit relationships are named in the reserved juju-* namespace. Both the relation name and 
-            interface names provided by Juju are prefixed with <code>juju-</code>. Charms attempting to provide new 
-            relationships in this namespace will trigger an error.</p>
-            <p>Juju currently provides one implicit relationship to all deployed services:</p>
-            <p><code>juju-info</code>, if specified would look like:</p>
-            <pre class="prettyprint">provides:
-                juju-info:
-                    interface: juju-info</pre>
-                    
-            <p>The charm author should not declare the <code>juju-info</code> relation and is provided here only 
-            as an example. The <code>juju-info</code> relation is implicitly provided by all charms, and enables 
-            the requiring unit to obtain basic details about the related-to unit. The following settings will be 
-            implicitly provided by the remote unit in a relation through its <code>juju-info</code> relation</p>
-            
-            <pre class="prettyprint">
-            private-address
-            public-address
-            </pre>
-            
-            
-            <h2>Relationship resolution</h2>
-            <p><code>rsyslog</code> is a <a class="reference external" href="authors-subordinate-services.html">
-            <em>subordinate charm</em></a> and requires a valid <code>scope: container</code> relationship in 
-            order to deploy. It can take advantage of optional support from the principal charm but in the event 
-            that the principal charm doesn't provide this support it will still require a <code>scope: container</code>
-            relationship. In this event the logging charm author can take advantage of the implicit relationship 
-            offered by all charms, <code>juju-info</code>.</p>
-            <pre class="prettyprint">requires:
-              logging:
-                  interface: logging-directory
-                  scope: container
-              juju-info:
-                  interface: juju-info
-                  scope: container</pre>
-                  
-            <p>The admin then issues the following</p>
-            <pre class="prettyprint">juju add-relation wordpress rsyslog</pre>
-            
-            <p>If the wordpress charm author doesn't define the <code>logging-directory</code> interface, 
-            Juju will use the less-specific (in the sense that it likely provides less information) 
-            <code>juju-info</code> interface. Juju always attempts to match user provided relations outside 
-            the <code>juju-*</code> namespace before looking for possible relationship matches in the 
-            <code>juju-*</code> namespace.</p>
-            
+            <sectionid="howto-proxies">
+              <h1 id="configure proxies">Configure Proxy Access</h1>
+              <p>Juju supports proxies and has special support for proxying apt. Proxies can be configured for the providers in the environments.yaml file, or added to an existing environment using <code>juju set-env</code> The configuration options are:</p>
+              <ul>
+                <li>http-proxy</li>
+                <li>https-proxy</li>
+                <li>ftp-proxy</li>
+                <li>no-proxy</li>
+              </ul>
+              <p>Each protocol-specific option accepts a URL. The <code>no-proxy</code> option is a list of host names and addresses that services can directly connect to. For example:</p>
+              <pre class="prettyprint yaml">
+http-proxy: http://proxy.example.com:9000
+https-proxy: https://user@10.0.0.1
+no-proxy: localhost,10.0.3.1
+              </pre>
+              <p>There are three additional proxy options specific to apt. Juju's default behaviour is to use the protocol-specific proxy options, but you can specify exceptions for cases where the network has a local apt mirror.</p>
+              <ul>
+                <li>apt-http-proxy</li>
+                <li>apt-https-proxy</li>
+                <li>apt-ftp-proxy</li>
+              </ul>
+              <p>For example, with a squid-deb-proxy running on a laptop, you can specify the apt-http-proxy to use it for the containers by specifying the host machine’s network-bridge:</p>
+              <pre class="prettyprint yaml">
+apt-http-proxy: http://10.0.3.1:8000
+              </pre>
+              <p>The proxy options are exported in all hook execution contexts, and also available in the shell through <code>juju ssh</code> or <code>juju run</code>.</p>
             </section>
           </article>
 <!--Postamble-->
@@ -177,6 +162,10 @@
 	</footer>
 
 <!--End-Footer-->
+
+
+
+
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -200,4 +189,12 @@
    })();
     </script>
 <!--End-Scripts-->
+
+
+
+
+
+
+
+
 </body></html>

@@ -20,6 +20,14 @@
 	</head>
 <!--End-Head-->
 
+
+
+
+
+
+
+
+
   <body class="resources">
   	
 <!--Header-->
@@ -64,55 +72,23 @@
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
           <article>
-            <section>
-            <h1 id="implicit-relations">Implicit relations</h1>
-            <p>Implicit relations allow for interested services to gather lifecycle-oriented events and data about 
-            other services without expecting or requiring any modifications on the part of the author of the other 
-            service's charm.</p>
-            <p>Implicit relationships are named in the reserved juju-* namespace. Both the relation name and 
-            interface names provided by Juju are prefixed with <code>juju-</code>. Charms attempting to provide new 
-            relationships in this namespace will trigger an error.</p>
-            <p>Juju currently provides one implicit relationship to all deployed services:</p>
-            <p><code>juju-info</code>, if specified would look like:</p>
-            <pre class="prettyprint">provides:
-                juju-info:
-                    interface: juju-info</pre>
-                    
-            <p>The charm author should not declare the <code>juju-info</code> relation and is provided here only 
-            as an example. The <code>juju-info</code> relation is implicitly provided by all charms, and enables 
-            the requiring unit to obtain basic details about the related-to unit. The following settings will be 
-            implicitly provided by the remote unit in a relation through its <code>juju-info</code> relation</p>
-            
-            <pre class="prettyprint">
-            private-address
-            public-address
-            </pre>
-            
-            
-            <h2>Relationship resolution</h2>
-            <p><code>rsyslog</code> is a <a class="reference external" href="authors-subordinate-services.html">
-            <em>subordinate charm</em></a> and requires a valid <code>scope: container</code> relationship in 
-            order to deploy. It can take advantage of optional support from the principal charm but in the event 
-            that the principal charm doesn't provide this support it will still require a <code>scope: container</code>
-            relationship. In this event the logging charm author can take advantage of the implicit relationship 
-            offered by all charms, <code>juju-info</code>.</p>
-            <pre class="prettyprint">requires:
-              logging:
-                  interface: logging-directory
-                  scope: container
-              juju-info:
-                  interface: juju-info
-                  scope: container</pre>
-                  
-            <p>The admin then issues the following</p>
-            <pre class="prettyprint">juju add-relation wordpress rsyslog</pre>
-            
-            <p>If the wordpress charm author doesn't define the <code>logging-directory</code> interface, 
-            Juju will use the less-specific (in the sense that it likely provides less information) 
-            <code>juju-info</code> interface. Juju always attempts to match user provided relations outside 
-            the <code>juju-*</code> namespace before looking for possible relationship matches in the 
-            <code>juju-*</code> namespace.</p>
-            
+            <section id="howto">
+              <h1>Manage Access with Authorised Keys</h1>
+              <p>Juju's ssh key management allows people other than the person who bootstrapped an environment to ssh into Juju machines. The <code>authorised-keys</code> command accepts four subcommands:</p>
+              <ul>
+              <li>add &mdash; add ssh keys for a Juju user</li>
+              <li>delete &mdash; delete ssh keys for a Juju user</li>
+              <li>list &mdash; list ssh keys for a Juju user</li>
+              <li>import &mdash; import Launchpad or Github ssh keys</li>
+              </ul>
+              <p><code>import</code> can be used in clouds with open networks to pull ssh keys from Launchpad or Github. For example:</p>
+<pre class="prettyprint">
+juju authorised-keys import lp:wallyworld
+</pre>
+              <p><code>add</code> can be used to import the provided key, which is necessary for clouds that do not have internet access.</p>
+              <p>Use the key fingerprint or comment to specify which key to <code>delete</code>. You can find the fingerprint for a key using ssh-keygen.</p>
+              <p>Juju will prefix the comments all keys that it adds to a machine with "Juju:". These are the only keys it can <code>list</code> or <code>delete</code>. Juju cannot not manage existing keys on manually provisioned machines.</p>
+              <p>Keys are global and grant access to all machines. When a key is added, it is propagated to all machines in the environment. When a key is deleted, it is removed from all machines.</p>
             </section>
           </article>
 <!--Postamble-->
@@ -177,6 +153,10 @@
 	</footer>
 
 <!--End-Footer-->
+
+
+
+
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -200,4 +180,12 @@
    })();
     </script>
 <!--End-Scripts-->
+
+
+
+
+
+
+
+
 </body></html>

@@ -2,24 +2,25 @@
 <html>
 <!--Head-->
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Juju Documentation</title>
 		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
  		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
-		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
-		<link href="./css/main.css" rel="stylesheet" type="text/css">
-
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+		<link href="./css/main.css" rel="stylesheet" type="text/css" />
+		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
 <!--End-Head-->
+
+
 
 
 
@@ -53,9 +54,9 @@
 					<label class="off-left" for="s">Search:</label>
 					<input class="form-text" type="text" value="" name="s" id="s" />
 					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-				</form>
+				</form>		
 			</div>
-		</nav>
+		</nav>	
 	</header>
 <!--End-Header-->
 <!--Preamble-->
@@ -281,7 +282,7 @@ vagrant up
 <pre class="prettyprint lang-bash">
 vagrant ssh
 juju deploy mongodb
-juju deploy --repository=/vagrant local:genghis
+juju deploy --repository=/vagrant local:precise/genghis
 </pre>
 
         <p>We are now free to watch progress through the GUI</p>
@@ -320,8 +321,9 @@ sshuttle -r vagrant@localhost:2222 10.0.3.0/24
         <li>Make edits on your HOST in your favorite editor</li>
         <li>run commands inside the JujuBox vagrant environment. <code>juju upgrade-charm genghis</code></li>
         <li>view results in our HOST browser of choice.</li>
-
+        </ul>
       </section>
+    </article>
 <!--Postamble-->
         </div>
       </div>
@@ -338,17 +340,17 @@ sshuttle -r vagrant@localhost:2222 10.0.3.0/24
 						<li>
 							<h2><a href="/">Juju</a></h2>
 							<ul>
-								<li><a href="/charms">Charms</a></li>
-								<li><a href="/features">Features</a></li>
-								<li><a href="/deployment">Deployment</a></li>
+								<li><a href="/charms/">Charms</a></li>
+								<li><a href="/features/">Features</a></li>
+								<li><a href="/deployment/">Deployment</a></li>
 							</ul>
 						</li>
 						<li>
-							<h2><a href="/resources">Resources</a></h2>
+							<h2><a href="/resources/">Resources</a></h2>
 							<ul>
-								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/resources/overview/">Overview</a></li>
 								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
 								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
 								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
 								<li><a href="/resources/videos/">Videos</a></li>
@@ -364,7 +366,7 @@ sshuttle -r vagrant@localhost:2222 10.0.3.0/24
 								<li><a href="/community/charmers/">Charmers</a></li>
 								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
 								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
 							</ul>
 						</li>
 						<li>
@@ -379,18 +381,20 @@ sshuttle -r vagrant@localhost:2222 10.0.3.0/24
 			</div>
 		</nav>
 		<div class="legal clearfix">
-			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
 		</div>
 	</footer>
 
 <!--End-Footer-->
 
 
+
+
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
     <script type="text/javascript" src="./js/jquery.details.js"></script>
@@ -401,7 +405,7 @@ sshuttle -r vagrant@localhost:2222 10.0.3.0/24
    var _gaq = _gaq || [];
    _gaq.push(['_setAccount', 'UA-1018242-41']);
    _gaq.push(['_trackPageview']);
-
+  
    (function() {
    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -409,6 +413,8 @@ sshuttle -r vagrant@localhost:2222 10.0.3.0/24
    })();
     </script>
 <!--End-Scripts-->
+
+
 
 
 

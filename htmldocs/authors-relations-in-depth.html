@@ -2,24 +2,25 @@
 <html>
 <!--Head-->
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Juju Documentation</title>
 		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
  		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
-		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
-		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+		<link href="./css/main.css" rel="stylesheet" type="text/css" />
 		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
 <!--End-Head-->
+
+
 
 
 
@@ -98,6 +99,7 @@
 	    <li>Run the relation-broken hook.</li>
 	    <li><code>depart</code> from its scope in the relation.</li>
 	    </ul>
+      <p>So what's the difference between relation-departed and relation-broken? Think of relation-departed as the "saying goodbye" event. Relation settings can still be read (with relation-get), but can no longer be set (with relation-set). When relation-broken fires, the relation no longer exists. This is a good spot to do any final cleanup, if necessary. Both relation-departed and relation-broken will always fire, regardless of how the relation is terminated.</p>
 	    <p>The unit's eventual departure from its scope will in turn be detected by units of the related service (if they have not already inferred its imminent departure by other means) and cause them to run relation-departed hooks. A unit's relation settings persist beyond its own departure from the relation; the final unit to depart a relation marked for termination is responsible for destroying the relation and all associated data.</p>
             </section>
 </article>
@@ -117,17 +119,17 @@
 						<li>
 							<h2><a href="/">Juju</a></h2>
 							<ul>
-								<li><a href="/charms">Charms</a></li>
-								<li><a href="/features">Features</a></li>
-								<li><a href="/deployment">Deployment</a></li>
+								<li><a href="/charms/">Charms</a></li>
+								<li><a href="/features/">Features</a></li>
+								<li><a href="/deployment/">Deployment</a></li>
 							</ul>
 						</li>
 						<li>
-							<h2><a href="/resources">Resources</a></h2>
+							<h2><a href="/resources/">Resources</a></h2>
 							<ul>
-								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/resources/overview/">Overview</a></li>
 								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
 								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
 								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
 								<li><a href="/resources/videos/">Videos</a></li>
@@ -143,7 +145,7 @@
 								<li><a href="/community/charmers/">Charmers</a></li>
 								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
 								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
 							</ul>
 						</li>
 						<li>
@@ -158,11 +160,13 @@
 			</div>
 		</nav>
 		<div class="legal clearfix">
-			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
 		</div>
 	</footer>
 
 <!--End-Footer-->
+
+
 
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
@@ -187,6 +191,8 @@
    })();
     </script>
 <!--End-Scripts-->
+
+
 
 
 

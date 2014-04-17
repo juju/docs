@@ -2,24 +2,25 @@
 <html>
 <!--Head-->
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Juju Documentation</title>
 		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
  		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
-		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
-		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+		<link href="./css/main.css" rel="stylesheet" type="text/css" />
 		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
 <!--End-Head-->
+
+
 
 
 
@@ -95,7 +96,7 @@ cat ~/.juju/current-environment
 
 
           <h2 id="environment-e">Specifying an environment</h2>
-          <p> You can use the <code>-e</code> switch with a Juju command, followed by a valid environment label, to specify that the command should be run against that environment. Using the <code>-e</code> switch takes precedence over any other setting.<p>
+          <p> You can use the <code>-e</code> switch with a Juju command, followed by a valid environment label, to specify that the command should be run against that environment. Using the <code>-e</code> switch takes precedence over any other setting.</p>
           <p> For example:</p>
 <pre class="prettyprint lang-bash">
 juju bootstrap                 # bootstraps the default environment
@@ -129,9 +130,35 @@ environments:
 ...
 </pre>
  
+          <h2 id="bootstrapped-environment-update">Updating running environments</h2>
+          <p>Juju has a set of commands that permit you to view and change the configuration of a running environment. The commands can be used to make temporary changes, such as to logging, or permanent changes, such as to take advantage of new features after juju is upgraded.</p>
+          <p>The <code>get-environment</code> command will display all the environment's configured options. You can pass the name of an option to see just the one value. For example, to see the default series that charms are deployed with, type:</p>
+
+<pre class="prettyprint lang-bash">
+juju get-environment default-series
+</pre>
+
+          <p>The <code>set-environment</code> command will set a configuration option to the specified value. For example, you can set the default series that charms are deployed with to trusty like this:</p>
+
+<pre class="prettyprint lang-bash">
+juju set-environment default-series=trusty
+</pre>
+
+          <p>The <code>unset-environment</code> command will set a configuration option to the default value. It acts as a reset. Options without default value are removed. It is an error to unset a required option. For example, you can unset the default series that charms are deployed with (so that the juju store can choose the best series for a charm) like this:</p>
+
+<pre class="prettyprint lang-bash">
+juju unset-environment default-series
+</pre>
+
+          <h2 id="environment-upgrade">Upgrading environments</h2>
+          <p>The <code>upgrade-juju</code> command upgrades a running environment. It selects the most recent supported version of juju compatible with the command-line version. The juju machine and unit agents will be updated to the new version. The <code>--version</code> option can be used to select a specific version to upgrade to.</p>
+
+<pre class="prettyprint lang-bash">
+juju upgrade-juju
+</pre>
 
           <h2 id="environment-update">Updating environments</h2>
-          <p>Juju will attempt to maintain a high degree of legacy compatibility for the environments.yaml definitions, so you should be able to update to stable versions of the software without worring about reconfiguring your environments each time. However, new releases do sometimes add support for new cloud providers, add additional settings or change to adapt to configuration changes for the providers themselves. In these cases it can be useful to generate a new boilerplate <code>environments.yaml</code> so you can easily manually edit your own configurations or cut and paste new environments into your existing configuration.<p>
+          <p>Juju will attempt to maintain a high degree of legacy compatibility for the environments.yaml definitions, so you should be able to update to stable versions of the software without worrying about reconfiguring your environments each time. However, new releases do sometimes add support for new cloud providers, add additional settings or change to adapt to configuration changes for the providers themselves. In these cases it can be useful to generate a new boilerplate <code>environments.yaml</code> so you can easily manually edit your own configurations or cut and paste new environments into your existing configuration.</p>
           <p>To generate a new boilerplate <code>environments.yaml</code> file direct to the console you can use:</p>
 <pre class="prettyprint lang-bash">
 juju generate-config --show
@@ -159,17 +186,17 @@ juju init --show
 						<li>
 							<h2><a href="/">Juju</a></h2>
 							<ul>
-								<li><a href="/charms">Charms</a></li>
-								<li><a href="/features">Features</a></li>
-								<li><a href="/deployment">Deployment</a></li>
+								<li><a href="/charms/">Charms</a></li>
+								<li><a href="/features/">Features</a></li>
+								<li><a href="/deployment/">Deployment</a></li>
 							</ul>
 						</li>
 						<li>
-							<h2><a href="/resources">Resources</a></h2>
+							<h2><a href="/resources/">Resources</a></h2>
 							<ul>
-								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/resources/overview/">Overview</a></li>
 								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
 								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
 								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
 								<li><a href="/resources/videos/">Videos</a></li>
@@ -185,7 +212,7 @@ juju init --show
 								<li><a href="/community/charmers/">Charmers</a></li>
 								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
 								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
 							</ul>
 						</li>
 						<li>
@@ -200,11 +227,13 @@ juju init --show
 			</div>
 		</nav>
 		<div class="legal clearfix">
-			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
 		</div>
 	</footer>
 
 <!--End-Footer-->
+
+
 
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
@@ -229,6 +258,8 @@ juju init --show
    })();
     </script>
 <!--End-Scripts-->
+
+
 
 
 
