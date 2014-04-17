@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Managing environments
 
 Juju can be used to manage multiple clouds on different environments. The
@@ -29,10 +12,10 @@ all the different types of supported cloud providers.
 The order of precedence for determining the environment a command will be
 executed on is:
 
-  1. The environment specified by the use of the `-e` switch.
-  2. The environment set by the `JUJU_ENV` environment variable.
-  3. The environment last specified with the `switch` command. 
-  4. The environment specified as the default in `environments.yaml`.
+1. The environment specified by the use of the `-e` switch.
+1. The environment set by the `JUJU_ENV` environment variable.
+1. The environment last specified with the `switch` command. 
+1. The environment specified as the default in `environments.yaml`.
 
 To determine which environment a command will act on, you can issue the `switch`
 command with no parameters:
@@ -49,9 +32,7 @@ It is also possible to determine the current environment by checking the
 
 ## Specifying an environment
 
-You can use the `-e` switch with a Juju command, followed by a valid environment
-label, to specify that the command should be run against that environment. Using
-the `-e` switch takes precedence over any other setting.
+You can use the `-e` switch with a Juju command, followed by a valid environment label, to specify that the command should be run against that environment. Using the `-e` switch takes precedence over any other setting.
 
 For example:
 
@@ -75,14 +56,12 @@ reason, you can switch the current environment using the `switch` command:
 This command will return with an error message if `JUJU_ENV`is set (as this
 takes precedence).
 
-**Note: **The environment selected with `switch` is persistent. Even if you log out, switch your computer off, travel into space or sail around the world, when you start using Juju again, it will still point at the last environment you specified with `switch`.
+**Note:** The environment selected with `switch` is persistent. Even if you log out, switch your computer off, travel into space or sail around the world, when you start using Juju again, it will still point at the last environment you specified with `switch`.
 
 ## Default environment
 
 The default environment is the environment which will be used if you have not
-issued a `switch` command and do not specify an environment to use with the `-e`
-switch or alter the `JUJU_ENV` environment variable. The default environment is
-specified at the top of the `environments.yaml` file, before the environment
+issued a `switch` command and do not specify an environment to use with the `-e` switch or alter the `JUJU_ENV` environment variable. The default environment is specified at the top of the `environments.yaml` file, before the environment
 specifications themselves, like this:
 
     ...
@@ -106,16 +85,14 @@ example, to see the default series that charms are deployed with, type:
     juju get-environment default-series
 
 The `set-environment` command will set a configuration option to the specified
-value. For example, you can set the default series that charms are deployed with
-to trusty like this:
+value. For example, you can set the default series that charms are deployed with to trusty like this:
 
     juju set-environment default-series=trusty
 
 The `unset-environment` command will set a configuration option to the default
 value. It acts as a reset. Options without default value are removed. It is an
 error to unset a required option. For example, you can unset the default series
-that charms are deployed with (so that the juju store can choose the best series
-for a charm) like this:
+that charms are deployed with (so that the juju store can choose the best series for a charm) like this:
 
     juju unset-environment default-series
 
@@ -123,8 +100,7 @@ for a charm) like this:
 
 The `upgrade-juju` command upgrades a running environment. It selects the most
 recent supported version of juju compatible with the command-line version. The
-juju machine and unit agents will be updated to the new version. The `--version`
-option can be used to select a specific version to upgrade to.
+juju machine and unit agents will be updated to the new version. The `--version` option can be used to select a specific version to upgrade to.
 
     juju upgrade-juju
 
@@ -140,8 +116,7 @@ boilerplate `environments.yaml` so you can easily manually edit your own
 configurations or cut and paste new environments into your existing
 configuration.
 
-To generate a new boilerplate `environments.yaml` file direct to the console you
-can use:
+To generate a new boilerplate `environments.yaml` file direct to the console you can use:
 
     juju generate-config --show
 
@@ -150,36 +125,3 @@ Or:
     juju init --show
 
 as the `init`command is an alias for `generate-config`.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-

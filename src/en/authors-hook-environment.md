@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # How hooks are run
 
 When a charm is deployed onto a unit, the raw charm is extracted into a
@@ -71,8 +54,7 @@ access to:
 
 ## Hook tools
 
-All hook tools are available in all hooks. Many of the tools produce output, and
-those that do accept a `--format` flag whose value can be set to `json` or
+All hook tools are available in all hooks. Many of the tools produce output, and those that do accept a `--format` flag whose value can be set to `json` or
 `yaml` as desired. If it's not specified, the format defaults to `smart`, which
 transforms the basic output as follows:
 
@@ -95,9 +77,7 @@ model](./authors-relations-in-depth).
 
 ### juju-log
 
-`juju-log` writes its arguments directly to the unit's log file. All hook output
-is currently logged anyway, so it's theoretically redundant with `echo`, but
-this is an implementation detail and should not be depended upon. If it's
+`juju-log` writes its arguments directly to the unit's log file. All hook output is currently logged anyway, so it's theoretically redundant with `echo`, but this is an implementation detail and should not be depended upon. If it's
 important, please `juju-log` it.
 
     juju-log "some important text"
@@ -147,8 +127,7 @@ To retrieve a specific value pass its key as argument:
     config-get [key]
     some-value
 
-The command can also be call if no value is set and no default is set of even if
-the setting doesn't exist. In both cases nothing will be returned.
+The command can also be call if no value is set and no default is set of even if the setting doesn't exist. In both cases nothing will be returned.
 
     config-get [key-with-no-default]
     config-get [missing-key]
@@ -194,10 +173,7 @@ Close port 80 if it was open:
 ### relation-set
 
 `relation-set` writes the local unit's settings for some relation. It accepts
-any number of `key=value` strings, and an optional `-r` argument, which defaults
-to the current relation id. If it's not running in a relation hook, `-r` needs
-to be specified. The `value` part of an argument is not inspected, and is stored
-directly as a string. Setting an empty string causes the setting to be removed.
+any number of `key=value` strings, and an optional `-r` argument, which defaults to the current relation id. If it's not running in a relation hook, `-r` needs to be specified. The `value` part of an argument is not inspected, and is stored directly as a string. Setting an empty string causes the setting to be removed.
 
 Examples:
 
@@ -229,29 +205,24 @@ propagated via relation-set, with the single exception of the `private-address`
 key, which is always set before the unit joins.
 
 You may wish to overwrite the `private-address` setting, for example if you're
-writing a charm that serves as a proxy for some external service; but you should
-in general avoid _removing_ that key, because most charms expect that value to
-exist unconditionally.
+writing a charm that serves as a proxy for some external service; but you should in general avoid _removing_ that key, because most charms expect that value to exist unconditionally.
 
 All values set are stored locally until the hook completes; at that point, if
 the hook exit code is 0, all changed values will be communicated to the rest of
 the system, causing -changed hooks to run in all related units.
 
 There is no way to write settings for any unit other than the local unit; but
-any hook on the local unit can write settings for any relation the local unit is
-participating in.
+any hook on the local unit can write settings for any relation the local unit is participating in.
 
 ### relation-get
 
-`relation-get` reads the settings of the local unit, or of any remote unit, in a
-given relation (set with `-r`, defaulting to the current relation, as in
+`relation-get` reads the settings of the local unit, or of any remote unit, in a given relation (set with `-r`, defaulting to the current relation, as in
 `relation-set`). The first argument specifies the settings key, and the second
 the remote unit, which may be omitted if a default is available (that is, when
 running a relation hook other than -broken).
 
 If the first argument is omitted, a dictionary of all current keys and values
-will be printed; all values are always plain strings without any interpretation.
-If you need to specify a remote unit but want to see all settings, use `-` for
+will be printed; all values are always plain strings without any interpretation. If you need to specify a remote unit but want to see all settings, use `-` for
 the first argument.
 
 The environment variable `JUJU_REMOTE_UNIT` stores the default remote unit:
@@ -285,10 +256,7 @@ necessarily _accurate_, in that you will always see settings that:
   - _except_ when inspecting the unit's own relation settings, in which case local changes from `relation-set` will be seen correctly.
 
 You should never depend upon the presence of any given key in `relation-get`
-output. Processing that depends on specific values (other than `private-addres`)
-should be restricted to -changed hooks for the relevant unit, and the absence of
-a remote unit's value should never be treated as an [error](./authors-hook-
-errors.html) in the local unit.
+output. Processing that depends on specific values (other than `private-addres`) should be restricted to -changed hooks for the relevant unit, and the absence of a remote unit's value should never be treated as an [error](./authors-hook-errors.html) in the local unit.
 
 In practice, it is common and encouraged for -relation-changed hooks to exit
 early, without error, after inspecting `relation-get` output and determining it
@@ -303,8 +271,7 @@ the lifetime of the relation.
 core/+bug/1223339) that allows units of the same service to see each other's
 settings outside of a peer relation. Depending on this behaviour is foolish in
 the extreme: if you need to share settings between units of the same service,
-always use a peer relation to do so, or you may be seriously inconvenienced when
-the hole is closed without notice.
+always use a peer relation to do so, or you may be seriously inconvenienced when the hole is closed without notice.
 
 ### relation-list
 
@@ -346,38 +313,4 @@ To show all relations with a given name pass it as argument:
     reverseproxy:3
 
 Note again that all commands that produce output accept `--format json` and
-`--format yaml`, and you may consider it smarter to use those for clarity's sake
-than to depend on the default `smart` format.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
+`--format yaml`, and you may consider it smarter to use those for clarity's sake than to depend on the default `smart` format.

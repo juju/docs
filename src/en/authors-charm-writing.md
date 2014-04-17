@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Your First charm starts here!
 
 Okay, so you have read up all the background info on what a charm is, how it
@@ -29,8 +12,6 @@ plugin for Juju, Charm Tools. [ Find out how to get and install charm tools here
 For this example, we are imagining that we want to create a charm for [the
 Vanilla forum software](http://vanillaforums.org/)
 
-1
-
 ## Prepare yourself
 
 As we are writing a charm, it makes sense to create it in a local charm
@@ -44,8 +25,6 @@ file structure:
     mkdir -p charms/precise
     cd charms/precise
 
-2
-
 ## Create a barebones charm with Charm Tools
 
 Using the charm tools plugin, we can create the directory structure we need for
@@ -58,16 +37,11 @@ template files for you to edit. Your directory will now look like this
 
 ![directory tree](./media/author-charm-writing-01.png)
 
-3
-
 ## Create the README file
 
 Fire up your text editor and load/edit the readme file.
 
-This step is especially important if you intend making your charm public, but it
-is very useful even if your charm will only ever be seen by you. The README is a
-good place to make nots about how the charm works, what information it expects
-to communicate and how.
+This step is especially important if you intend making your charm public, but it is very useful even if your charm will only ever be seen by you. The README is a good place to make nots about how the charm works, what information it expects to communicate and how.
 
 Although a plain text file is fine, you can also write your README file using
 Markdown (in which case use the .md suffix). The advantage of this, other than
@@ -88,8 +62,6 @@ Here is a quick example README file for our Vanilla charm:
         juju expose vanilla
 
 Obviously, you can include any useful info you wish.
-
-4
 
 ## Make some metadata.yaml
 
@@ -170,8 +142,6 @@ The final file should look like this:
 For some charms you will want a "peers" section also. This follows the same
 format, and its used for optional connections, such as you might use for
 interconnecting services in a cluster
-
-5
 
 ## Writing hooks
 
@@ -276,8 +246,7 @@ Firstly, note the use of the -y option of the apt-get command. this assumes a
 services that run config dialogs when they install).
 
 In our script, we are fetching the tarball of the Vanilla software. In these
-cases, it is obviously always better to point to a specific, permanent link to a
-version of the software.
+cases, it is obviously always better to point to a specific, permanent link to a version of the software.
 
 Also, you will notice that we have used the juju-log command. This basically
 spits messages out into the Juju log, which is very useful for testing and
@@ -328,11 +297,9 @@ make it easier to use them, and fortunately, mysql is one of them - [You can
 find a description of the mysql interface here](./interface-mysql.html).
 
 These values will all be set at one time, so the next little bit of script just
-checks one value to see if it exists - if not the corresponding charm hasn't set
-the values yet.
+checks one value to see if it exists - if not the corresponding charm hasn't set the values yet.
 
-When it has the values we can use these to modify the config file for Vanilla in
-the relevant place, and finally open the port to make the service active.
+When it has the values we can use these to modify the config file for Vanilla in the relevant place, and finally open the port to make the service active.
 
 The final hook we need to write is for other services which may want to consume
 Vanilla, 'website-relation-joined'.
@@ -343,17 +310,13 @@ Vanilla, 'website-relation-joined'.
 Here we can see the other end of the information sharing - in this case
 relation-set exposes the given values to the connecting charm. In this case one
 of the commands is backticked, as unit-get is another helper command, in this
-case one which returns the requested value form the machine the charm is running
-on, specifically here it's IP address.
+case one which returns the requested value form the machine the charm is running on, specifically here it's IP address.
 
-So, any connecting charm will be able to ask for the values 'hostname' and
-'port'. Remember, once you have finished writing your hooks make sure you 'chmod
-+x' them.
+So, any connecting charm will be able to ask for the values `hostname` and
+`port`. Remember, once you have finished writing your hooks make sure you `chmod +x` them.
 
 For our simplistic charm, that is all the hooks we need for the moment, so now
 we can test it out!
-
-6
 
 ## Run the charm proof tool
 
@@ -364,9 +327,9 @@ check for errors in the files of your charm. Run it like this:
 
 The output classifies messages as:
 
-  - I - for information
-  - W - A warning; something which should be looked at but won't necessarily stop the charm working.
-  - E - An error; these are blocker which must be fixed for the charm to be used.
+ - I - for information
+ - W - A warning; something which should be looked at but won't necessarily stop the charm working.
+ - E - An error; these are blocker which must be fixed for the charm to be used.
 
 some example output might be:
 
@@ -378,8 +341,6 @@ Which tells you that you forgot to add a `copyright` file, you have left some
 default text in the README, and one of your relations has no hooks. All useful
 stuff.
 
-7
-
 ## Testing
 
 Before we congratulate ourselves too much, we should check that the charm
@@ -388,9 +349,7 @@ the following command:
 
     juju debug-log
 
-This starts a process to tail the Juju log file and show us just exactly what is
-happening. It won't do much to begin with, but you should see messages appearing
-when we start to deploy our charm.
+This starts a process to tail the Juju log file and show us just exactly what is happening. It won't do much to begin with, but you should see messages appearing when we start to deploy our charm.
 
 Following our own recipe, in another terminal we should now do the following
 (assuming you already have a bootstrapped environment):
@@ -401,59 +360,19 @@ Following our own recipe, in another terminal we should now do the following
     juju expose vanilla
 
 We used the local deploy options to deploy our charm - substitute the path for
-your own environment. Everything should now be working away, and your log window
-will look something like this:
+your own environment. Everything should now be working away, and your log window will look something like this:
 
 ![Step five - debug](./media/author-charm-writing-debug.png)
 
-If you wait for all the Juju operations to finish and run a juju status command,
-you will be able to retrieve the public address for the Vanilla forum we just
-deployed. Copy it into your browser and you should see the setup page
+If you wait for all the Juju operations to finish and run a juju status command, you will be able to retrieve the public address for the Vanilla forum we just deployed. Copy it into your browser and you should see the setup page
 (prepopulated with the database config) waiting for any changes.
 Congratulations!
 
 ![Step five - vanilla](./media/author-charm-writing-vanilla.png)
 
-8
-
 ## Tidying up
 
-With the charm working properly, you may consider everything a job well done. If
-your charm is really great and you want to share it, particularly on the charm
-store, then there are a couple of things you ought to add.
+With the charm working properly, you may consider everything a job well done. If your charm is really great and you want to share it, particularly on the charm store, then there are a couple of things you ought to add.
 
-    1. Create a file called 'copyright' and place whatever license information you require in there. 
-    2. Add a beautiful icon ([there is a guide to making one here](./authors-charm-icon.html)) so others can recognise it in the charm store!
-
-    - ## [Juju](/)
-
-      - [Charms](/charms/)
-      - [Features](/features/)
-      - [Deployment](/deployment/)
-    - ## [Resources](/resources/)
-
-      - [Overview](/resources/overview/)
-      - [Documentation](/docs/)
-      - [The Juju web UI](/resources/juju-gui/)
-      - [The charm store](/docs/authors-charm-store.html)
-      - [Tutorial](/docs/getting-started.html#test)
-      - [Videos](/resources/videos/)
-      - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-    - ## [Community](/community)
-
-      - [Juju Blog](/community/blog/)
-      - [Events](/events/)
-      - [Weekly charm meeting](/community/weekly-charm-meeting/)
-      - [Charmers](/community/charmers/)
-      - [Write a charm](/docs/authors-charm-writing.html)
-      - [Help with documentation](/docs/contributing.html)
-      - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-      - [Juju Labs](/communiy/labs/)
-    - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-      - [Charm store](https://jujucharms.com/)
-      - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
+1. Create a file called 'copyright' and place whatever license information you require in there. 
+1. Add a beautiful icon ([there is a guide to making one here](./authors-charm-icon.html)) so others can recognise it in the charm store!

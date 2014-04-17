@@ -1,24 +1,6 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Machine Constraints
 
-Machine constraints allow you to choose the hardware to which your services will
-be deployed.
+Machine constraints allow you to choose the hardware to which your services will be deployed.
 
 Constraints can be set for environments and services, with service constraints
 overriding environment constraints, the default values set by juju when
@@ -38,14 +20,12 @@ constraint, with one exception:
 The commands `juju deploy`, `juju bootstrap`, and `juju add-machine` have a
 `--constraints` flag which expects a single string of space-separated
 constraints, understood as above. Deployment constraints will be set on the
-service before the first unit is deployed, and bootstrap constraints will be set
-on the environment and used to provision the initial master machine.
+service before the first unit is deployed, and bootstrap constraints will be set on the environment and used to provision the initial master machine.
 
 Please note that there is no constraints flag for the `juju add-unit` command;
 juju is explicitly focused on **service** orchestration, and it is
 counterproductive to encourage users to consider individual units. This can be
-worked around by setting new service constraints before adding new units, but is
-not encouraged.
+worked around by setting new service constraints before adding new units, but is not encouraged.
 
 The `juju get-constraints` command is used to see the currently applicable
 constraints. When called without an argument, it outputs the environment
@@ -120,8 +100,7 @@ any) and retrying the deployment with different constraints.
 ##  MAAS constraints
 
 If you are deploying to a MAAS provider, you may use the additional constraint
-`tags=`, followed by a comma-delimited list of tags. Only MAAS nodes thus tagged
-will be considered appropriate for deploying the service.
+`tags=`, followed by a comma-delimited list of tags. Only MAAS nodes thus tagged will be considered appropriate for deploying the service.
 
 E.g.
 
@@ -129,36 +108,3 @@ E.g.
 
 ...will deploy MySQL only to a node which has been tagged with both "foo" and
 "bar".
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-

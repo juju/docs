@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Removal within Juju
 
 Juju isn't just about magically spinning up services as and when you need them,
@@ -26,7 +9,7 @@ destroy, and how to go about it.
 
 Once a service is no longer required it can be removed with a simple command.
 
-    juju remove-service &LT;service-name&GT;
+    juju remove-service <service-name>
 
 **Warning!:** Removing a service which has active relations with another running service will break that relation. This can cause errors in both services, as such review and potentially remove any relationships first.
 
@@ -58,7 +41,7 @@ As with removing services, See caveats for how to manage units in a dying state.
 Instances or machines which have no currently assigned workload can be removed
 from your cloud using the following command:
 
-    juju remove-machine &LT;number&GT;
+    juju remove-machine <number>
 
 A machine which is currently idle will be removed almost instantaneously from
 the cloud, along with anything else which may have been on the instance which
@@ -74,18 +57,17 @@ form:
 To completely remove and terminate all running services, the instances they were
 running on and the bootstrap node itself, you need to run the command:
 
-    juju destroy-environment &LT;environment&GT;
+    juju destroy-environment <environment>
 
 This will completely remove all instances running under the current environment
 profile. As there is no 'undo' capability, some further safety precautions have
 been added to this command.
 
-  - You will be prompted to confirm the destruction of the environment
+- You will be prompted to confirm the destruction of the environment
 
 ## Removing Relations
 
-To remove relations between deployed services, you should see [ the docs section
-on charm relationships](charms-relations.html#removing).
+To remove relations between deployed services, you should see [ the docs section on charm relationships](charms-relations.html#removing).
 
 ## Caveats
 
@@ -103,45 +85,9 @@ this run
 
     juju resolved <unit>
 
-to have the next event processed. You may need to run the `resolved` command run
-several times against a unit.
+to have the next event processed. You may need to run the `resolved` command run several times against a unit.
 
 If the unit isn't in an error state, there may be an error elsewhere in the
 environment. Since removing a unit or destroying a service also breaks the
 relation, if there's an error in the relation-removal event on one or more of
-the connected services that may also halt the event loop for that unit. Check to
-make sure no other units are in an error state and clear those using the `juju
-resolved` command.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
+the connected services that may also halt the event loop for that unit. Check to make sure no other units are in an error state and clear those using the `juju resolved` command.

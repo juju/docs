@@ -1,36 +1,16 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Service Configuration
 
 When deploying a service, the charm you use will often support or even require
 specific configuration options to be set.
 
-Juju provides tools to help manage these options and respond to changes over the
-lifetime of the service deployment. These options apply to the entire service,
-as opposed to only a specific unit or relation. The configuration can modified
-by an administrator at deployment time or after the services are operational.
+Juju provides tools to help manage these options and respond to changes over the lifetime of the service deployment. These options apply to the entire service, as opposed to only a specific unit or relation. The configuration can modified by an administrator at deployment time or after the services are operational.
 
 ## Discovering service configuration options
 
 You can discover what configuration options are available for a specific charm
 in various ways
 
-  - By running the `juju get &LT;service&GT;` command.
+  - By running the `juju get <service>` command.
   - By viewing the charm in the [charm store.](http://jujucharms.com)
   - By examining the **config.yaml** file in the charm itself.
 
@@ -40,8 +20,7 @@ so you should consult one of the above sources to find out particular details.
 
 ## Configuring a service at deployment
 
-It is possible to set configuration values when deploying a service by providing
-a yaml-formatted file containing configuration values.
+It is possible to set configuration values when deploying a service by providing a yaml-formatted file containing configuration values.
 
 For example, upon investigation we discover that the Mediawiki charm allows us
 to set values for the name of the wiki and the 'skin' to use. We can put these
@@ -64,7 +43,7 @@ It is possible to set or change configuration of a service which is already
 deployed.
 
 Before you set any of these options, you may want to check what current options
-are already set, using the `juju get &LT;service&GT;` command. For example:
+are already set, using the `juju get <service>` command. For example:
 
     juju get mediawiki
 
@@ -99,7 +78,7 @@ Should return something like this:
         type: string
         value: vector
 
-You can set the options using the `juju set &LT;service&GT;`, specifying
+You can set the options using the `juju set <service>`, specifying
 multiple key=value pairs if necessary:
 
     juju set mediawiki skin=monoblock name='Juju Wiki' 
@@ -108,36 +87,3 @@ Setting options back to their default value is done using the `unset` command
 followed by the service and the respective options:
 
     juju unset mediawiki admins name 
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-

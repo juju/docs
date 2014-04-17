@@ -1,13 +1,3 @@
-  - [Home](https://juju.ubuntu.com/)
-  - [Get started](https://juju.ubuntu.com/get-started/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Charm Store](https://juju.ubuntu.com/charm-store/)
-  - [Events](https://juju.ubuntu.com/events/)
-  - [Charm Championship](https://juju.ubuntu.com/charm-championship/)
-  - [Survey](https://juju.ubuntu.com/survey/)
-  - ![](https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png)
-
 # Resources
 
 ## A collection of some of the most important online references for Juju users
@@ -87,35 +77,3 @@ bear, but it's important to know you're taking it on.
 If you encounter a charm upgrade error, you can run `git status` in the charm
 directory to see what the problem is, and use the knowledge thus gleaned to fix
 the charm and try to upgrade again.
-
-  - #### [Get started](/get-started)
-
-    - [Local](https://juju.ubuntu.com/get-started/local/)
-    - [Amazon Web Services](https://juju.ubuntu.com/get-started/amazon/)
-    - [HP Cloud](https://juju.ubuntu.com/get-started/hp-cloud/)
-    - [Rackspace](https://juju.ubuntu.com/get-started/rackspace/)
-    - [Openstack](https://juju.ubuntu.com/get-started/openstack/)
-    - [MAAS](https://juju.ubuntu.com/get-started/maas/)
-  - #### [Resources](/resources)
-
-    - [Documentation](http://juju.ubuntu.com/docs)
-    - [Videos](/resources/videos/)
-    - [Juju GUI demo site](http://uistage.jujucharms.com:8080/)
-  - #### [Community](/community)
-
-    - [Juju Blog](https://juju.ubuntu.com/community/juju-blog/)
-    - [Weekly Charm Meeting](https://juju.ubuntu.com/community/weekly-charm-meeting/)
-    - [Charmers](https://juju.ubuntu.com/community/charmers/)
-    - [Mailing List](https://lists.ubuntu.com/mailman/listinfo/juju)
-    - [Chat](http://webchat.freenode.net/?channels=juju)
-    - [FAQ](http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50)
-  - #### [Code](https://launchpad.net/juju)
-
-    - [Juju Core](https://launchpad.net/juju-core)
-    - [Charms](https://launchpad.net/charms)
-
-(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-Canonical Ltd.
-
-[Report a bug on this site](https://bugs.launchpad.net/juju-website/+filebug)
-

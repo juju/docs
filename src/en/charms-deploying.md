@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Deploying Services
 
 The fundamental point of Juju is that you can use it to deploy services through
@@ -28,9 +11,7 @@ relevant charm, so deploying can be straightforward and easy.
 
 # Deploying from the Charm Store
 
-In most cases, you will want to deploy charms by fetching them directly from the
-charm store. This ensures that you get the relevant, up to date version of the
-charm and "everything just works". To deploy a charm like this you can just
+In most cases, you will want to deploy charms by fetching them directly from the charm store. This ensures that you get the relevant, up to date version of the charm and "everything just works". To deploy a charm like this you can just
 specify:
 
     juju deploy mysql
@@ -39,9 +20,7 @@ Running this will do exactly what you expect - fetch the latest Juju charm for
 the series you are running and then use the bootstrap environment to initiate a
 new instance and deploy MySQL
 
-Juju usefully supports a system of namespaces that means you can actually deploy
-charms from a variety of sources. The default source is the charm store. The
-above command is the same as running:
+Juju usefully supports a system of namespaces that means you can actually deploy charms from a variety of sources. The default source is the charm store. The above command is the same as running:
 
     juju deploy cs:precise/mysql
 
@@ -54,9 +33,9 @@ which follows the format:
 There are many cases when you may wish to deploy charms from a local filesytem
 source rather than the charm store:
 
-  - When testing charms you have written.
-  - When you have modified store charms for some reason.
-  - When you don't have direct internet access.
+- When testing charms you have written.
+- When you have modified store charms for some reason.
+- When you don't have direct internet access.
 
 ... and probably a lot more times which you can imagine yourselves.
 
@@ -103,8 +82,7 @@ to. This is useful for a few reasons. The most obvious reason is to save money
 when deploying to a public cloud. Instead of having one machine per unit we can
 consolidate services.
 
-In this example we use the `--constraints` flag to fire up a bootstrap node with
-4G of RAM so we can deploy other services to it by using the `--to` command:
+In this example we use the `--constraints` flag to fire up a bootstrap node with 4G of RAM so we can deploy other services to it by using the `--to` command:
 
     juju bootstrap --constraints="mem=4G"
     juju deploy --to 0 mysql
@@ -221,36 +199,3 @@ horizontally scale out on dedicated machines when you need to.
 
   - [ Scaling Down in the Cloud with Juju](http://www.jorgecastro.org/2013/07/31/deploying-wordpress-to-the-cloud-with-juju/)
   - [ Targeted Machine Deployment with Juju](http://javacruft.wordpress.com/2013/07/25/juju-put-it-there-please/)
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
