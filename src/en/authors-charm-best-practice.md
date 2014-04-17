@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Best Practice for Charm Authors
 
 This document is to capture charm best practices from the community. We expect
@@ -38,7 +55,7 @@ Tips for production usage:
 If written in Bash:
 
   - Use `set -e` for all hooks written in Bash. This option tells bash to exit the script if a command returns a non true result. This option prevents the script from continuing when the script is known to be in an error state.
-  - `${variable}-value` rather than `$variable-value`?
+  - `{variable}-value` rather than `$variable-value`?
   - `$(COMMAND)` vs. `COMMAND`?
   - Use `install` rather than `mkdir; chown`
 
@@ -52,16 +69,15 @@ environment: `cheetah fill --env -p templates/celerymon_conf.tmpl >
 
 In this example, the template looks like this:
 
-    start on started celeryd
-    stop on stopping celeryd
-
-    env CODEDIR=$CODE_LOCATION
-    env PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
-
-    exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
-    PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
-    /srv/${BASEDIR}/var/celeryev.pid"
-    respawn
+                start on started celeryd
+                stop on stopping celeryd
+                env CODEDIR=$CODE_LOCATION
+                env
+                PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
+                exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
+                PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
+                /srv/${BASEDIR}/var/celeryev.pid"
+                respawn
 
   - Do all config options have appropriate descriptions?
   - Are all hooks idempotent?
@@ -72,3 +88,36 @@ In this example, the template looks like this:
   - Has testing of changing all config options and verifying they get changed in the application (and applied, i.e. service reloaded if appropriate) been done?
   - Any cron entries should be in `/etc/cron.d` rather than stored in user crontabs.
   - This allows for easier visibility of active cronjobs across the whole system, as well as making editing things much easier.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

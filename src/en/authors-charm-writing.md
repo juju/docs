@@ -1,4 +1,21 @@
-# Your first charm starts here!
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
+# Your First charm starts here!
 
 Okay, so you have read up all the background info on what a charm is, how it
 works, and what parts of the charm do what, now it is time to dust off your
@@ -12,6 +29,8 @@ plugin for Juju, Charm Tools. [ Find out how to get and install charm tools here
 For this example, we are imagining that we want to create a charm for [the
 Vanilla forum software](http://vanillaforums.org/)
 
+1
+
 ## Prepare yourself
 
 As we are writing a charm, it makes sense to create it in a local charm
@@ -21,8 +40,11 @@ deploying.html)) to make it easy to test in your Juju environment.
 Go to your home directory (or wherever is appropriate and make the appropriate
 file structure:
 
-    mkdir -p ~/charms/precise
-    cd ~/charms/precise
+    cd ~
+    mkdir -p charms/precise
+    cd charms/precise
+
+2
 
 ## Create a barebones charm with Charm Tools
 
@@ -35,6 +57,8 @@ This not only creates the directory structure, it also prepopulates it with
 template files for you to edit. Your directory will now look like this
 
 ![directory tree](./media/author-charm-writing-01.png)
+
+3
 
 ## Create the README file
 
@@ -53,29 +77,23 @@ online, so your README will look and read better.
 Here is a quick example README file for our Vanilla charm:
 
     # Overview
-    
     Vanilla is a powerful open source web-based forum. This charm will deploy the forum software and connect it to a running MySQL database. This charm will install the Vanilla files in /var/www/vanilla/
-    
     # Installation
-    
     To deploy this charm you will need at a minimum: a cloud environment, working Juju installation and a successful bootstrap. Once bootstrapped, deploy the MySQL charm and then this Vanilla charm:
-    
         juju deploy mysql
         juju deploy vanilla
-    
     Add a relation between the two of them:
-    
         juju add-relation mysql vanilla
-    
     And finally expose the Vanilla service:
-    
         juju expose vanilla
 
 Obviously, you can include any useful info you wish.
 
+4
+
 ## Make some metadata.yaml
 
-The `metadata.yaml` file is really important. This is the file that Juju reads
+The **metadata.yaml** file is really important. This is the file that Juju reads
 to find out what a charm is, what it does and what it needs to do it.
 
 The YAML syntax is at once simple, but exact, so if you have any future problems
@@ -97,12 +115,12 @@ the description can go into more detail.
 The next value to define is the category. This is primarily for organising the
 charm in the charm store. The available categories are:
 
-  - `databases` - MySQL, PostgreSQL, CouchDB, etc.
-  - `file-servers` - storage apps such as Ceph
-  - `applications` - applications like MediaWiki, WordPress
-  - `cache-proxy` - services such as HAProxy and Varnish.
-  - `app-servers` - infrastructure services like Apache and Tomcat
-  - `miscellaneous` - anything which doesn't neatly fit anywhere above.
+  - **databases -** MySQL, PostgreSQL, CouchDB, etc.
+  - **file-servers - **storage apps such as Ceph
+  - **applications -**applications like MediaWiki, WordPress
+  - **cache-proxy - **services such as HAProxy and Varnish.
+  - **app-servers - **infrastructure services like Apache and Tomcat
+  - **miscellaneous - **anything which doesn't neatly fit anywhere above.
 
 Your charm can belong to more than one category, though in almost all cases it
 should be in just one. Because there could be more than one entry here, the YAML
@@ -153,6 +171,8 @@ For some charms you will want a "peers" section also. This follows the same
 format, and its used for optional connections, such as you might use for
 interconnecting services in a cluster
 
+5
+
 ## Writing hooks
 
 As you will know from your thorough reading of the [charm components](./authors-
@@ -162,16 +182,17 @@ execute on an Ubuntu server.
 
 For our charm, the hooks we will need to create are:
 
-  - `start` - for when the service needs to be started.
-  - `stop` - for stopping it again.
-  - `install` - for actually fetching and installing the Vanilla code.
-  - `database-relation-changed` - this will run when we connect (or re-connect, or disconnect) our service to the MySQL database. This hook will need to manage this connection.
-  - `website-relation-joined` - this will run when/if a service connects to our charm.
+  - start - for when the service needs to be started.
+  - stop - for stopping it again.
+  - install - for actually fetching and installing the Vanilla code.
+  - database-relation-changed - this will run when we connect (or re-connect, or disconnect) our service to the MySQL database. This hook will need to manage this connection.
+  - website-relation-joined - this will run when/if a service connects to our charm.
 
 So first up we should create the hooks directory, and start creating our first
 hook:
 
-    cd hooks
+    mkdir hooks  
+    cd hooks  
     vi start
 
 (Use your favourite editor, naturally - no flames please)
@@ -181,7 +202,7 @@ be served up by Apache, so all we need to do to start the service is make sure
 Apache is running:
 
     #!/bin/bash  
-    set -e
+    set -e  
     service apache2 restart
 
 A bit of explanation for this one. As we are writing in bash, and we need the
@@ -207,59 +228,44 @@ install any dependencies, fetch the actual software and do any other config and
 service jobs that need to happen. Here is an example for our vanilla charm:
 
     #!/bin/bash
-    
     set -e # If any command fails, stop execution of the hook with that error
-    
     apt-get install -y apache2 php5-cgi php5-mysql curl php5-gd wget libapache2-mod-php5
-    
     dl="https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz"
-    
     # Grab Vanilla from upstream.
     juju-log "Fetching $dl"
     wget "$dl" -O /tmp/vanilla.tar.gz
-    
     # IDEMPOTENCY is very important in all charm hooks, even the install hook.
     if [ -f /var/www/vanilla/conf/config.php ]; then
       cp /var/www/vanilla/conf/config.php /tmp/
       rm -rf /var/www/vanilla
     fi
-    
     # Extract to a known location
     juju-log "Extracting Vanilla"
     tar -xvzf /tmp/vanilla.tar.gz -C /var/www/
     mv /var/www/Garden-Vanilla* /var/www/vanilla
-    
     if [ -f /tmp/config.php ]; then
       mv /tmp/config.php /var/www/vanilla/conf/
     fi
-    
     chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
-    
     juju-log "Creating apache2 configuration"
     cat <<EOF > /etc/apache2/sites-available/vanilla
     <VirtualHost *:80>
       ServerAdmin webmaster@localhost
       DocumentRoot /var/www/vanilla
-      
       <Directory /var/www/vanilla>
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Order allow,deny
         allow from all
       </Directory>
-    
       ErrorLog \${APACHE_LOG_DIR}/vanilla.log
       LogLevel warn
-    
       CustomLog \${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
     EOF
-    
     a2dissite 000-default
     a2ensite vanilla
-    
     service apache2 reload
-    
     juju-log "Files extracted, waiting for other events before we do anything else!"
 
 We aren't going to go for a line-by-line explanation of that, but there are a
@@ -288,34 +294,26 @@ to you to decide which events require a hook.
 Let's take a stab at the 'database-relation-changed' hook:
 
     #!/bin/bash
-    
     set -e # If any command fails, stop execution of the hook with that error
-    
     db_user=`relation-get user`
     db_db=`relation-get database`
     db_pass=`relation-get password`
     db_host=`relation-get private-address`
-    
     if [ -z "$db_db" ]; then
       juju-log "No database information sent yet. Silently exiting"
       exit 0
     fi
-    
     vanilla_config="/var/www/vanilla/conf/config.php"
-    
     cat <<EOF > $vanilla_config
     <?php if (!defined('APPLICATION')) exit();
-    
     \$Configuration['Database']['Host'] = '$db_host';
     \$Configuration['Database']['Name'] = '$db_db';
     \$Configuration['Database']['User'] = '$db_user';
     \$Configuration['Database']['Password'] = '$db_pass';
     EOF
-    
     juju-log "Make the application port available, now that we know we have a site to expose"
-    
     open-port 80
-    
+
 You will notice that this script uses the backticked command relation-get. This
 is a Juju helper command that fetches the named values from the corresponding
 hook on the service we are connecting to. Usually there will be some indication
@@ -340,7 +338,6 @@ The final hook we need to write is for other services which may want to consume
 Vanilla, 'website-relation-joined'.
 
     #!/bin/sh
-    
     relation-set hostname=`unit-get private-address` port=80
 
 Here we can see the other end of the information sharing - in this case
@@ -356,30 +353,32 @@ So, any connecting charm will be able to ask for the values 'hostname' and
 For our simplistic charm, that is all the hooks we need for the moment, so now
 we can test it out!
 
+6
+
 ## Run the charm proof tool
 
 Another part of the Charm Tools plugin is a useful lint-like tool which will
 check for errors in the files of your charm. Run it like this:
 
-    cd ~/charms/precise/vanilla
-    juju charm proof
+    juju charm proof [CHARM_DIRECTORY]
 
 The output classifies messages as:
 
-  - `I` - for information; these are helpers to bring to light things you may have missed
-  - `W` - A warning; this doesn't block the charm from deploy but may cause issues with other tools.
-  - `E` - An error; these are blockers which must be fixed for the charm to be deployed.
+  - I - for information
+  - W - A warning; something which should be looked at but won't necessarily stop the charm working.
+  - E - An error; these are blocker which must be fixed for the charm to be used.
 
 some example output might be:
 
-    E: bad-relation is bad
-    W: no copyright file
-    W: README.ex Includes boilerplate README.ex line 1
+    E: no copyright file
+    E: README.ex Includes boilerplate README.ex line 1
     I: relation peer-relation has no hooks
 
 Which tells you that you forgot to add a `copyright` file, you have left some
 default text in the README, and one of your relations has no hooks. All useful
 stuff.
+
+7
 
 ## Testing
 
@@ -387,7 +386,7 @@ Before we congratulate ourselves too much, we should check that the charm
 actually works. To help with this, we should open a new terminal window and run
 the following command:
 
-        juju debug-log
+    juju debug-log
 
 This starts a process to tail the Juju log file and show us just exactly what is
 happening. It won't do much to begin with, but you should see messages appearing
@@ -415,6 +414,8 @@ Congratulations!
 
 ![Step five - vanilla](./media/author-charm-writing-vanilla.png)
 
+8
+
 ## Tidying up
 
 With the charm working properly, you may consider everything a job well done. If
@@ -423,3 +424,36 @@ store, then there are a couple of things you ought to add.
 
     1. Create a file called 'copyright' and place whatever license information you require in there. 
     2. Add a beautiful icon ([there is a guide to making one here](./authors-charm-icon.html)) so others can recognise it in the charm store!
+
+    - ## [Juju](/)
+
+      - [Charms](/charms/)
+      - [Features](/features/)
+      - [Deployment](/deployment/)
+    - ## [Resources](/resources/)
+
+      - [Overview](/resources/overview/)
+      - [Documentation](/docs/)
+      - [The Juju web UI](/resources/juju-gui/)
+      - [The charm store](/docs/authors-charm-store.html)
+      - [Tutorial](/docs/getting-started.html#test)
+      - [Videos](/resources/videos/)
+      - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+    - ## [Community](/community)
+
+      - [Juju Blog](/community/blog/)
+      - [Events](/events/)
+      - [Weekly charm meeting](/community/weekly-charm-meeting/)
+      - [Charmers](/community/charmers/)
+      - [Write a charm](/docs/authors-charm-writing.html)
+      - [Help with documentation](/docs/contributing.html)
+      - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+      - [Juju Labs](/communiy/labs/)
+    - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+      - [Charm store](https://jujucharms.com/)
+      - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

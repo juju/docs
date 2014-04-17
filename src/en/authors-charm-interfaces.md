@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Charm relation interfaces
 
 As described [elsewhere](./authors-charm-metadata.html), picking an interface is
@@ -8,9 +25,7 @@ In short, this means that you need to set the same settings as do all the other
 charms with the same role for the interface; and you should only expect to be
 able to read those settings set by the other charms with the counterpart role.
 
-!!__Note: __ Some popular interfaces are documented and we have reference
-implementations for them. If you are just starting out with interfaces, you  may
-find it easier to start with these.
+**Note: ** Some popular interfaces are documented and we have reference implementations for them. If you are just starting out with interfaces, you  may find it easier to start with these.
 
 ## Determining charm relation interfaces
 
@@ -21,7 +36,7 @@ fault, because the "standard" is defined only by consensus among the existing
 charms that provide or require that interface.
 
 On the upside, this means that reading any charm that already implements the
-interface is *theoretically* good enough to figure it out; in practice, it's
+interface is _theoretically_ good enough to figure it out; in practice, it's
 sometimes hard to understand the code in isolation. The incontrovertible way to
 determine the protocol defined by an interface is to deploy a pair of charms
 that already use that interface, and [intercept](./authors-hook-debug.html) the
@@ -38,14 +53,19 @@ This opens a tmux session; when the unit wants to run a hook, it'll create a new
 window in which you can interactively inspect the environment. In a relation
 hook, you'll want to run the following commands:
 
-    relation-get
-
-This should produce a `key: value` pairing of relation data for that event. The
-output will resemble something similar to this:
-    
+    # discover what's been set by the unit on the other end of the relation:
+    $ relation-get $JUJU_REMOTE_UNIT
     address: example.com:37070
     username: bob
     password: seekrit
+    # get the local unit's relation settings, for comparison afterwards:
+    $ relation-get $JUJU_UNIT_NAME
+    # (no results)
+    # run the actual hook:
+    $ ./hooks/$JUJU_HOOK_NAME
+    # get the local settings again, to see if any changes were made by the hook:
+    $ relation-get $JUJU_UNIT_NAME
+    # (no results)
 
 ...and then close that tmux window and wait to see if another one opens for the
 next hook. Assuming you started debugging before creating the relation, you'll
@@ -68,7 +88,7 @@ In light of the above, there is a clear need for some means of documenting the
 above. The optional `gets` and `sets` fields in a charm's relation [metadata
 ](./authors-charm-metadata.html) should be used for this purpose.
 
-Please be especially careful to note that this format is *not* checked by juju
+Please be especially careful to note that this format is _not_ checked by juju
 today. But it does encode the information that's most helpful to your fellow
 charmers, and by doing so in a consistent and machine-readable format we
 maximise our chances of one day making use of this information automatically.
@@ -83,16 +103,15 @@ The simple form, which will be the most common form, looks like this:
         sets: [host, port]
 
 ...and this:
-    
+
     name: haproxy
     ...
     requires:
       reverseproxy:
         interface: http
         gets: [host, port]
-    
 
-this indicates that a relation can surely be made between python-django and
+...indicating that a relation can surely be made between python-django and
 haproxy, because the `website` relation unconditionally sets the keys that the
 `reverseproxy` relation requires in order to function.
 
@@ -122,7 +141,6 @@ section, the metadata for charm `a` above would contain:
         - P: [X, Y]
         - Q: [X, Y]
         gets: [X, Y, Z]
-    
 
 ...indicating that `P` and `Q` will only be written when `X` and `Y` have; and
 that configuration will not complete without `X`, `Y` and `Z`. Meanwhile charm
@@ -156,4 +174,37 @@ defacto standard.
 Below is a list of the interfaces for which we have compiled documentation and
 reference implementations.
 
-  - [mysql](./interface-mysql.html) - the database interface used by MySQL and client services.
+  - [ mysql ](./interface-mysql.html) - the database interface used by MySQL and client services.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

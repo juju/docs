@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # What makes a Charm?
 
 Each charm is a structured bundle of files. Conceptually, charms are composed of
@@ -20,8 +37,8 @@ The following files will be treated specially, if present:
   - `config.yaml` defines service configuration options.[ The config.yaml file is descibed more fully here](./authors-charm-config.html).
   - `icon.svg` is used to identify your charm in the GUI and in the charm store.[See the walkthrough for creating an icon.](authors-charm-icon.html)
   - `README` is made available in the charm store. It should be comprehensible to a reasonably ignorant user.
-  - `revision` which tracks local revision of a charm when doing offline deployments.
-  - files matching `.juju*` should __not__ be used.
+  - `revision` is now deprecated.
+  - files matching `.juju*` should **not** be used.
 
 ## Other files
 
@@ -34,20 +51,20 @@ freely, but should carefully observe the caveats in the next section...
 
 ## Charm files at runtime
 
-The files you store with your charm should *not* be used directly by the
+The files you store with your charm should _not_ be used directly by the
 software installed by your charm. If the files are really needed by the software
 at runtime, copy them on the system alongside the software and reference those
 instead.
 
-This is because the software does *not* have control over the charm directory;
-*juju* has control over the charm directory, which it temporarily cedes to the
+This is because the software does _not_ have control over the charm directory;
+_juju_ has control over the charm directory, which it temporarily cedes to the
 charm only when running a hook. Juju will occasionally do things to the contents
 of that directory that assume it is neither read nor written outside a hook, and
 the results of such interactions can only be undefined.
 
 The only files you should be writing into the charm directory should be written
 by hooks and accessed only by hooks. If everything in your charm directory went
-away, that should be considered a *management* failure only; the software
+away, that should be considered a _management_ failure only; the software
 installed should continue to run, using its last known good configuration, and
 should do this by virtue of never having had the opportunity to observe the
 change.
@@ -58,9 +75,37 @@ that would cause runtime state to be overwritten will cause juju to abort the
 operation and hand over to the user for resolution. This is inconvenient for the
 users and undermines confidence in the charm.
 
-!!__Note: __ You need to be especially aware of the following when writing python
-code: Python packages run without bytecode suppression will write `.pyc` files
-into the package, and subsequent attempts to move or remove the package will
-fail: the .pyc files are treated as important hook-relevant runtime state
-information, to be recorded and tracked, and the loss of their directory will
-put the unit into an upgrade error state as referenced above.
+**Note: ** You need to be especially aware of the following when writing python code: Python packages run without bytecode suppression will write `.pyc` files into the package, and subsequent attempts to move or remove the package will fail: the .pyc files are treated as important hook-relevant runtime state information, to be recorded and tracked, and the loss of their directory will put the unit into an upgrade error state as referenced above.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

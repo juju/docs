@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Troubleshooting the Local Provider
 
 The local provider uses LXC containers under the hood to provide nodes for you
@@ -7,11 +24,10 @@ on diagnosing and solving Juju local provider issues.
 
 ## Bootstrap fails
 
-Every time bootstrap fails, you'll need to run `sudo juju destroy-environment`
-prior to continuing. First let's rerun a bootstrap in debug mode:
+Every time bootstrap fails, you'll need to run `juju destroy-environment -e
+local` prior to continuing. First let's rerun a bootstrap in debug mode:
 
-    sudo juju boostrap --show-log --debug
-    
+    juju boostrap --show-log --debug
 
 This will print very verbose output. If you're receiving `connection failed,
 will retry: dial tcp 127.0.0.1:37017: connection refused` error at the end of
@@ -36,7 +52,8 @@ bootstrap command fails run the following command:
 You should see two jobs listed. One that starts with `juju-db` the other `juju-
 agent`. If these are both in a start/running state then your machine took longer
 than juju expected to get these services started. If you're on an encrypted
-partition see TODO: INSTRUCTIONS ON THIS. If you're not TODO: .
+partition see TODO: INSTRUCTIONS ON THIS. If you're not TODO: INSTRUCTIONS ON
+RAM DISK DOES NOT EXIST.
 
 If either of these have stopped, investigate the logs at `/var/log/upstart/juju-
 db*.log` or `/var/log/upstart/juju-agent*.log` If the juju-db service failed to
@@ -48,8 +65,7 @@ mongodb installed:
 If you have a version less than 1:2.2.4-0ubuntu1 make sure you have either the
 [Cloud Tools Archive](https://wiki.ubuntu.com/ServerTeam/CloudToolsArchive) or
 ppa:juju/stable added to your system. `sudo apt-get update` then install juju-
-local package. Before retrying, make sure you run `sudo juju destroy-
-environment`
+local package. Before retrying, make sure you run `juju destroy-environment`
 
 ## No machines start
 
@@ -61,5 +77,38 @@ on your machine. To verify this, check the timestamp of the contents in
     ls -lh /var/cache/lxc/cloud-precise/
 
 If the contents of this directory are older than a few weeks, delete files
-present, destroy the environment with `sudo juju destroy-environment`,
-rebootstrap and attempt deployment again.
+present, destroy the environment with `juju destroy-environment`, rebootstrap
+and attempt deployment again.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

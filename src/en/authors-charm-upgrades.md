@@ -1,9 +1,26 @@
+  - [Home](https://juju.ubuntu.com/)
+  - [Get started](https://juju.ubuntu.com/get-started/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Charm Store](https://juju.ubuntu.com/charm-store/)
+  - [Events](https://juju.ubuntu.com/events/)
+  - [Charm Championship](https://juju.ubuntu.com/charm-championship/)
+  - [Survey](https://juju.ubuntu.com/survey/)
+  - ![](https://juju.ubuntu.com/wp-content/themes/juju-website/img/arrow-nav.png)
+
+# Resources
+
+## A collection of some of the most important online references for Juju users
+and developers.
+
+LINKS
+
 # Charm upgrades
 
 A service's charm can be changed at runtime with the `upgrade-charm` command. By
 default, it changes to the latest available version of the same charm; if
-`--revision` is specified, it changes to that revision of the same charm; and
-if `--switch` is specified it changes to any arbitrary charm, inferred from the
+`--revision` is specified, it changes to that revision of the same charm; and if
+`--switch` is specified it changes to any arbitrary charm, inferred from the
 argument in the same way as in `juju deploy`.
 
 For a charm to replace another, though, there is a minimum standard of
@@ -56,7 +73,7 @@ When you're writing a new version of a charm, you should always test upgrading
 it from (at least) the previous version, to ensure these errors don't slip out
 into the wild.
 
-You can completely avoid these errors by *never* writing to the charm directory;
+You can completely avoid these errors by _never_ writing to the charm directory;
 and you can also avoid them by rigorously delineating the parts of your charm
 directory that you write to at runtime, and ensuring you never add a file to the
 raw charm that could conflict with the runtime state.
@@ -66,3 +83,39 @@ you don't configure python to suppress bytecode caching, it will write `.pyc`
 files next to your python files at runtime, and effectively prevent you from
 rearranging those directories in future. This is not an unreasonable burden to
 bear, but it's important to know you're taking it on.
+
+If you encounter a charm upgrade error, you can run `git status` in the charm
+directory to see what the problem is, and use the knowledge thus gleaned to fix
+the charm and try to upgrade again.
+
+  - #### [Get started](/get-started)
+
+    - [Local](https://juju.ubuntu.com/get-started/local/)
+    - [Amazon Web Services](https://juju.ubuntu.com/get-started/amazon/)
+    - [HP Cloud](https://juju.ubuntu.com/get-started/hp-cloud/)
+    - [Rackspace](https://juju.ubuntu.com/get-started/rackspace/)
+    - [Openstack](https://juju.ubuntu.com/get-started/openstack/)
+    - [MAAS](https://juju.ubuntu.com/get-started/maas/)
+  - #### [Resources](/resources)
+
+    - [Documentation](http://juju.ubuntu.com/docs)
+    - [Videos](/resources/videos/)
+    - [Juju GUI demo site](http://uistage.jujucharms.com:8080/)
+  - #### [Community](/community)
+
+    - [Juju Blog](https://juju.ubuntu.com/community/juju-blog/)
+    - [Weekly Charm Meeting](https://juju.ubuntu.com/community/weekly-charm-meeting/)
+    - [Charmers](https://juju.ubuntu.com/community/charmers/)
+    - [Mailing List](https://lists.ubuntu.com/mailman/listinfo/juju)
+    - [Chat](http://webchat.freenode.net/?channels=juju)
+    - [FAQ](http://askubuntu.com/questions/tagged/juju?sort=faq&pagesize=50)
+  - #### [Code](https://launchpad.net/juju)
+
+    - [Juju Core](https://launchpad.net/juju-core)
+    - [Charms](https://launchpad.net/charms)
+
+(C) 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+Canonical Ltd.
+
+[Report a bug on this site](https://bugs.launchpad.net/juju-website/+filebug)
+

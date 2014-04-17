@@ -1,4 +1,21 @@
-# Vagrant Juju Workflow on OSX
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
+#  Vagrant Juju Workflow on OSX
 
 Developing charms on Ubuntu is an extremely straight forward process thanks to
 the addition of the local provider. LXC containers spin up quickly, integrate
@@ -10,7 +27,7 @@ limitation is that OS X does not support operating system-level virtualization,
 like containers in Linux. The next best thing is to use a virtualization wrapper
 solution like [Vagrant](config-vagrant.html)!
 
-## Getting Started
+##  Getting Started
 
 To start you will want to ensure you've got the following tools installed on
 your development machine:
@@ -26,7 +43,7 @@ Head over to the [Juju Vagrant](config-vagrant.html) provider documentation.
 We'll need to fetch the latest basebox for Vagrant. I recommend using the
 precise basebox.
 
-    vagrant box add jujubase http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box
+    vagrant box add JujuBox http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box
 
 This process takes a short while to complete, as its downloading a 200mb virtual
 machine image. Once its complete you can verify everything completed correctly
@@ -34,7 +51,7 @@ by listing out the boxes that vagrant is tracking.
 
     vagrant box list
 
-If you see `jujubase` listed, we're ready to proceed to the next step.
+If you see **JujuBox** listed, we're ready to proceed to the next step.
 
 ###  Preparing our local charm repository
 
@@ -64,7 +81,7 @@ These can be installed via homebrew.
 
 ##  Creating our first charm
 
-Lets charm up [GenghisApp](http://genghisapp.com/) \- a single file MongoDB
+Lets charm up [GenghisApp](http://genghisapp.com/) - a single file MongoDB
 adminsitration app.
 
     cd charms/precise
@@ -112,7 +129,6 @@ hooks.
 
     #!/bin/bash
     set -ex
-    
     apt-get install -y ruby1.9.3 rubygems
     update-alternatives --set ruby /usr/bin/ruby1.9.1
     update-alternatives --set gem /usr/bin/gem1.9.1
@@ -121,9 +137,7 @@ hooks.
 ####  Config-Changed Hook
 
     #!/bin/bash
-    
     set -ex
-    
     hooks/stop
     sleep 2
     hooks/start
@@ -131,23 +145,17 @@ hooks.
 ####  Start Hook
 
     #!/bin/bash
-    
     set -ex
-    
     PORT=`config-get port`
-    
     if [ ! -f /root/.vegas/genghisapp/genghisapp.pid ] ; then
         HOME=/root genghisapp -L -p $PORT
     fi
-    
     open-port $PORT
 
 ####  Stop Hook
 
     #!/bin/bash
-    
     set -ex
-    
     HOME=/root genghisapp -K
 
 ### Preparing Vagrant
@@ -163,13 +171,11 @@ its aware of all our charms; not just the current charm we are working on.
 
 You now have a Juju installation ready to be used for testing your charm on OSX,
 and an instance of Juju-Gui to interface with your services. Validate that the
-GUI is accessible from <http://localhost:6080>
+GUI is accessible from [http://localhost:6080](http://localhost:6080)
 
-!!__Note:__ The password is output in your console feedback from the juju
-bootstrap.
+**Note:** The password is output in your console feedback from the juju bootstrap.
 
-!!__Note:__ All your charms in $HOME/charms are available in the /vagrant
-directory of our JujuBox
+**Note:** All your charms in $HOME/charms are available in the /vagrant directory of our JujuBox 
 
 ### Deploying our charm in vagrant
 
@@ -177,7 +183,7 @@ You'll need to enter the juju environment we just bootstrapped in $HOME/charms
 
     vagrant ssh
     juju deploy mongodb
-    juju deploy --repository=/vagrant local:genghis
+    juju deploy --repository=/vagrant local:precise/genghis
 
 We are now free to watch progress through the GUI
 
@@ -193,12 +199,9 @@ Ensure that you have sshuttle installed
     brew install sshuttle
     sshuttle -r vagrant@localhost:2222 10.0.3.0/24
 
-!!__Note:__ You can skip the brew install line if you already have sshuttle
-installed
+**Note:** You can skip the brew install line if you already have sshuttle installed
 
-!!__Note:__ If your local network is using 10.0.3.x you will need to alter the
-Juju networking in the vagrant box, and substitute the network provided in the
-command above
+**Note:** If your local network is using 10.0.3.x you will need to alter the Juju networking in the vagrant box, and substitute the network provided in the command above
 
 When prompted for the password enter `vagrant` and you should see output similar
 to the following:
@@ -218,3 +221,36 @@ and update/test via normal means.
   - Make edits on your HOST in your favorite editor
   - run commands inside the JujuBox vagrant environment. `juju upgrade-charm genghis`
   - view results in our HOST browser of choice.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

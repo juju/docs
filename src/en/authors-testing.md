@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Charm Testing
 
 Juju has been designed from the start to foster a large collection of "charms".
@@ -21,16 +38,16 @@ the state of the service from install to config to started. Because of this, all
 charms can be tested using the following algorithm:
 
     deploy charm
-    while state != started
-    if timeout is reached, FAIL
-    if state == install_error, config_error, or start_error, FAIL
-    if state == started, PASS
+                &nbsp_place_holder;while state != started
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if timeout is reached, FAIL
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if state == install_error, config_error, or start_error, FAIL
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if state == started, PASS
 
 Other generic tests may be identified, so a collection of generic tests should
 be the focus of an implementation.
 
-Note that this requirement is already satisfied by the
-[Jenkins Charmtester](https://launchpad.net/charmtester)
+Note that this requirement is already satisfied by Mark Mims' jenkins tester:
+[https://github.com/mmm/charmtester/](https://github.com/mmm/charmtester/)
 
 ## Phase 2 - Charm Specific tests
 
@@ -48,7 +65,7 @@ following assumptions:
   - A juju environment with no services deployed inside it is already bootstrapped, and will be the default for command line usage.
   - The CWD is the `tests` directory off the charm root.
   - Full network access to deployed nodes will be allowed.
-  - the bare name of any charm in arguments to juju will be resolved to a charm url and/or repository arguments of the test runner's choice. This means that if you need mysql, you do not do `juju deploy cs:mysql` or `juju deploy \--repository ~/charms local:mysql`, but just `juju deploy mysql`. A wrapper will resolve this to the latest version of the given charm from the list of official charms.
+  - the bare name of any charm in arguments to juju will be resolved to a charm url and/or repository arguments of the test runner's choice. This means that if you need mysql, you do not do `juju deploy cs:mysql` or `juju deploy --repository ~/charms local:mysql`, but just `juju deploy mysql`. A wrapper will resolve this to the latest version of the given charm from the list of official charms.
 
 The following restrictions may be enforced:
 
@@ -56,7 +73,7 @@ The following restrictions may be enforced:
 
 If present, tests/tests.yaml will be read to determine packages that need to be
 installed on the host running tests in order to facilitate the tests. The
-packages can *only* be installed from the official, default Ubuntu archive for
+packages can _only_ be installed from the official, default Ubuntu archive for
 the release which the charm is intended for, from any of the repositories
 enabled by default in said release. The format of tests.yaml is as such:
 
@@ -111,63 +128,52 @@ then tests to make sure it returns a page via http with "<title>" somewhere in
 the content.:
 
     #!/bin/sh
-
-    set -e
-
-    teardown() {
-        if [ -n "$datadir" ] ; then
-            if [ -f $datadir/passed ]; then
-                rm -r $datadir
-            else
-                echo INFO: $datadir preserved
-                if [ -f $datadir/wget.log ] ; then
-                    echo INFO: BEGIN wget.log
-                    cat $datadir/wget.log
-                    echo INFO: END wget.log
-                fi
-            fi
-        fi
-    }
-    trap teardown EXIT
-
-    juju deploy mediawiki
-    juju deploy mysql
-    juju deploy memcached
-    juju add-relation mediawiki:db mysql:db
-    juju add-relation memcached mediawiki
-    juju expose mediawiki
-
-    for try in `seq 1 600` ; do
-        host=`juju status | tests/get-unit-info mediawiki public-address`
-        if [ -z "$host" ] ; then
-            sleep 1
-        else
-            break
-        fi
-    done
-
-    if [ -z "$host" ] ; then
-        echo FAIL: status timed out
-        exit 1
-    fi
-
-    datadir=`mktemp -d ${TMPDIR:-/tmp}/wget.test.XXXXXXX`
-    echo INFO: datadir=$datadir
-
-    wget --tries=100 --timeout=6 http://$host/ -O - -a $datadir/wget.log | grep -q '<title>'
-
-    if [ $try -eq 600 ] ; then
-        echo FAIL: Timed out waiting.
-        exit 1
-    fi
-
-    touch $datadir/passed
-
-    trap - EXIT
-    teardown
-
-    echo PASS
-    exit 0
+                &nbsp_place_holder;set -e
+                &nbsp_place_holder;teardown() {
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if [ -n "$datadir" ] ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if [ -f $datadir/passed ]; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;rm -r $datadir
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;else
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;echo INFO: $datadir preserved
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if [ -f $datadir/wget.log ] ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;echo INFO: BEGIN wget.log
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;cat $datadir/wget.log
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;echo INFO: END wget.log
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;fi
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;fi
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;fi
+                &nbsp_place_holder;}
+                &nbsp_place_holder;trap teardown EXIT
+                &nbsp_place_holder;juju deploy mediawiki
+                &nbsp_place_holder;juju deploy mysql
+                &nbsp_place_holder;juju deploy memcached
+                &nbsp_place_holder;juju add-relation mediawiki:db mysql:db
+                &nbsp_place_holder;juju add-relation memcached mediawiki
+                &nbsp_place_holder;juju expose mediawiki
+                &nbsp_place_holder;for try in `seq 1 600` ; do
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;host=`juju status | tests/get-unit-info mediawiki public-address`
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if [ -z "$host" ] ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;sleep 1
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;else
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;break
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;fi
+                &nbsp_place_holder;done
+                &nbsp_place_holder;if [ -z "$host" ] ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;echo FAIL: status timed out
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;exit 1
+                &nbsp_place_holder;fi
+                &nbsp_place_holder;datadir=`mktemp -d ${TMPDIR:-/tmp}/wget.test.XXXXXXX`
+                &nbsp_place_holder;echo INFO: datadir=$datadir
+                &nbsp_place_holder;wget --tries=100 --timeout=6 http://$host/ -O - -a $datadir/wget.log | grep -q '<title>'
+                &nbsp_place_holder;if [ $try -eq 600 ] ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;echo FAIL: Timed out waiting.
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;exit 1
+                &nbsp_place_holder;fi
+                &nbsp_place_holder;touch $datadir/passed
+                &nbsp_place_holder;trap - EXIT
+                &nbsp_place_holder;teardown
+                &nbsp_place_holder;echo PASS
+                &nbsp_place_holder;exit 0
 
 ### Test config settings
 
@@ -175,60 +181,56 @@ The following example tests checks to see if the default_port change the admin
 asks for is actually respected post-deploy:
 
     #!/bin/sh
-                
-                 if [ -z "`which nc`" ] ; then
-                         echo "SKIP: cannot run tests without netcat"
-                         exit 100
-                 fi
-                
-                 set -e
-                
-                 juju deploy mongodb
-                 juju expose mongodb
-                 
-                 for try in `seq 1 600` ; do
-                        host=`juju status | tests/get-unit-info mongodb public-address`
-                        if [ -z "$host" ] ; then
-                            sleep 1
-                        else
-                            break
-                        fi
-                 done
-                 
-                 if [ -z "$host" ] ; then
-                        echo FAIL: status timed out
-                        exit 1
-                 fi
-                 
-                 assert_is_listening() {
-                        local port=$1
-                        listening=""
-                        for try in `seq 1 10` ; do
-                            if ! nc $host $port < /dev/null ; then
-                                continue
-                            fi
-                            listening="$port"
-                            break
-                        done
-                 
-                        if [ -z "$listening" ] ; then
-                           echo "FAIL: not listening on port $port after 10 retries"
-                           return 1
-                        else
-                           echo "PASS: listening on port $listening"
-                           return 0
-                        fi
-                 }
-                
-                 assert_is_listening 27017
-                
-                 juju set mongodb default_port=55555
-                
-                 assert_is_listening 55555
-                 echo PASS: config change tests passed.
-                 exit 0
+                &nbsp_place_holder;if [ -z "`which nc`" ] ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;echo "SKIP: cannot run tests without netcat"
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;exit 100
+                &nbsp_place_holder;fi
+                &nbsp_place_holder;set -e
+                &nbsp_place_holder;juju deploy mongodb
+                &nbsp_place_holder;juju expose mongodb
+                &nbsp_place_holder;
+                &nbsp_place_holder;for try in `seq 1 600` ; do
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;host=`juju status | tests/get-unit-info mongodb public-address`
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if [ -z "$host" ] ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;sleep 1
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;else
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;break
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;fi
+                &nbsp_place_holder;done
+                &nbsp_place_holder;
+                &nbsp_place_holder;if [ -z "$host" ] ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;echo FAIL: status timed out
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;exit 1
+                &nbsp_place_holder;fi
+                &nbsp_place_holder;
+                &nbsp_place_holder;assert_is_listening() {
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;local port=$1
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;listening=""
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;for try in `seq 1 10` ; do
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if ! nc $host $port < /dev/null ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;continue
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;fi
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;listening="$port"
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;break
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;done
+                &nbsp_place_holder;
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;if [ -z "$listening" ] ; then
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;echo "FAIL: not listening on port $port after 10 retries"
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;return 1
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;else
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;echo "PASS: listening on port $listening"
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;return 0
+                &nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;&nbsp_place_holder;fi
+                &nbsp_place_holder;}
+                &nbsp_place_holder;assert_is_listening 27017
+                &nbsp_place_holder;juju set mongodb default_port=55555
+                &nbsp_place_holder;assert_is_listening 55555
+                &nbsp_place_holder;echo PASS: config change tests passed.
+                &nbsp_place_holder;exit 0
 
-`get-unit-info` The example tests script uses a tool that is not widely available
+[*]
+
+get-unit-info The example tests script uses a tool that is not widely available
 yet, `get-unit-info`. In the future enhancements should be made to juju core to
 allow such things to be made into plugins. Until then, it can be included in
 each test dir that uses it, or we can build a package of tools that are common
@@ -254,3 +256,36 @@ If tests exit with services still in the environment, the test runner may clean
 them up, whether by destroying the environment or destroying the services
 explicitly, and the machines may be terminated as well. Any artifacts needed
 from the test machines should be retrieved and displayed before the test exits.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

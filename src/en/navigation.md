@@ -24,8 +24,12 @@
   - [How to...](howto.html)
   - [Deploy a Node.js app](howto-node.html)
   - [Test and deploy on Rails](howto-rails.html)
+  - [Backup and Restore](howto-backup-restore.html)
   - [Manage Juju with the GUI](howto-gui-management.html)
+  - [Set up a Private Cloud](howto-privatecloud.html)
+  - [Configure Proxy Access](howto-proxies.html)
   - [Vagrant Workflow](howto-vagrant-workflow.html)
+  - [Manage Authorised Keys](howto-authorised-keys.html)
   - [Troubleshooting](troubleshooting-local.html)
 
 # Charm Authors
@@ -60,6 +64,8 @@
 
   - [Juju commands](commands.html)
   - [Juju constraints](reference-constraints.html)
+  - [Release notes](reference-release-notes.html)
   - [Glossary](glossary.html)
   - [Charm Review Criteria](reference-reviewers.html)
   - [Contribute to the Docs!](contributing.html)
+

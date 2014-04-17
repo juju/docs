@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # What is the GUI?
 
 Juju has a graphical user interface (GUI) available to help with the tasks of
@@ -30,10 +47,7 @@ resources. The following command will deploy juju-gui to an existing machine 1:
 Check `juju help deploy` to find out more about this option, and whether or not
 it is available in your version.
 
-!!__Note:__ If you are deploying behind a firewall, make sure to check out the
-charm's [README](https://jujucharms.com/fullscreen/search/precise/juju-gui/#bws-
-readme) for more information on getting the GUI up and running and talking to
-your environment
+**Note:** If you are deploying behind a firewall, make sure to check out the charm's [README](https://jujucharms.com/fullscreen/search/precise/juju-gui/#bws-readme) for more information on getting the GUI up and running and talking to your environment
 
 ## Configuration
 
@@ -49,9 +63,7 @@ with all of their meta-data, in a read-only mode, meaning that you will not be
 able to make changes to the environment through the GUI. This is good for a
 monitoring type scenario.
 
-!!__Note:__ read-only mode in the GUI simply prevents actions taken within the GUI
-from being sent to the Juju environment, and is *not* additional security
-against the Juju API.
+**Note:** read-only mode in the GUI simply prevents actions taken within the GUI from being sent to the Juju environment, and is _not_ additional security against the Juju API.
 
 # Using the GUI
 
@@ -117,3 +129,36 @@ them.
 
 For an example of this, check out this demonstration of building an OpenStack
 instance in Juju using the GUI:
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

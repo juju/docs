@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Charm Features
 
 People demand quality out of their tools, and the Charm Store is no different.
@@ -6,10 +23,7 @@ an ideal charm provides users. So we rate charms by the following criteria.
 These features are shown to users in the charm store so that they can see what
 features a charm provides at a glance.
 
-!!__Note: __This is an ideal list of what we'd like charms to be. Most charms
-today do not offer every feature; it's a target we set for ourselves so we can
-determine how we can improve individual charms. It also gives contributors a
-general idea of where they can spend their time to fix something.
+**Note: **This is an ideal list of what we'd like charms to be. Most charms today do not offer every feature; it's a target we set for ourselves so we can determine how we can improve individual charms. It also gives contributors a general idea of where they can spend their time to fix something.
 
 ## Data Handling
 
@@ -20,7 +34,7 @@ general idea of where they can spend their time to fix something.
 
 ## Secure
 
-  - Contains a well tested [AppArmor profile](https://help.ubuntu.com/12.04/serverguide/apparmor.html) \- These can be provided by the package itself.
+  - Contains a well tested [AppArmor profile](https://help.ubuntu.com/12.04/serverguide/apparmor.html) - These can be provided by the package itself.
   - Doesn't run as root - the service should not run as root. Refer to the [Upstart documentation](http://upstart.ubuntu.com/cookbook/#run-a-job-as-a-different-user) for tips on how to do this.
   - Per instance or service access control - Accept relationships only from trusted instances and/or services.
   - Defaults to secure communication - default to secure channels when communicating with other services and/or multiple units of the same service.
@@ -60,3 +74,36 @@ These will move to policy soon, so consider this a temporary category.
   - README with examples of use for a typical workload
   - README with examples of use for workloads at scale
   - README with examples of use recommend best-practice relationships
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

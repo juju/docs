@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Creating and using Bundles
 
 A bundle is a set of services with a specific configuration and their
@@ -36,7 +53,7 @@ A bundle file can be deployed via the command-line interface by using the `juju
 quickstart` tool. You should always check the bundle to make sure it is correct
 before deploying it:
 
-    juju bundle proof bundles.yaml # optional
+    juju bundle proof bundles.yaml    # optional
     juju quickstart bundles.yaml
 
 ## Creating a bundle
@@ -70,9 +87,16 @@ following data:
       relations: 
         - - "wordpress:db"
           - "mysql:db"
-    
 
-## Sharing your bundle with the community
+## Naming your Bundle
+
+By default the Juju GUI will name the bundle `envExport`. This is the first line
+in a bundle. The bundle must have a unique name. We recommend descriptive names
+for your bundle but nothing too long. `wordpress-simple`, `hadoop-cluster`, and
+`mongodb-sharded` are some examples of bundle names. Avoid CamelCase and periods
+for bundle names.
+
+## Sharing your Bundle with the Community
 
 Bundles are shared by putting a branch onto Launchpad with specific naming which
 will then be pulled into the Charm Store. The branch must be constructed and
@@ -97,18 +121,13 @@ to make sure it is valid. You can push them to your namespace, the Juju Charm
 store will automatically find your bundle and index it in the store. Ensure you
 are using your launchpad name and a unique bundle name:
 
-!!__Tip:__You should review the configuration options for the charms you are
-planning to use in a bundle, some of them generate passwords for services or
-might need configuration as a separate step. This may or may not be desireable
-for users, so if there are any extra steps required document them in your
-README.md file.
-
+**Tip:**You should review the configuration options for the charms you are planning to use in a bundle, some of them generate passwords for services or might need configuration as a separate step. This may or may not be desireable for users, so if there are any extra steps required document them in your README.md file.**
     juju bundle proof bundles.yaml
     bzr push lp:~yourusername/charms/bundles/yourbundlename/bundle
 
- - Next file a bug against charms at <https://launchpad.net/charms/+filebug>. This is used to track the progress of your charm.
- - Subscribe the charmers team by clicking "Subscribe someone else" on the right side of the launchpad page. This is important as it gets your charm in the review queue!
- - Now you just need to attach your branch to the bug report, go to [your code page](https://code.launchpad.net/people/+me), find your branch, and click on it. Then click on "Link a bug report", and put in the number of the bug you filed.
+  - Next file a bug against charms at [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug). This is used to track the progress of your charm.
+  - Subscribe the charmers team by clicking "Subscribe someone else" on the right side of the launchpad page. This is important as it gets your charm in the review queue!
+  - Now you just need to attach your branch to the bug report, go to [your code page](https://code.launchpad.net/people/+me), find your branch, and click on it. Then click on "Link a bug report", and put in the number of the bug you filed.
 
 Someone will come along and review your bundle for inclusion. If you need to
 contact someone you there will be patch pilots in #juju who can help you get
@@ -129,3 +148,36 @@ pane by dragging the bundle onto the environment.
 After the service is on the canvas it is in a ghost state. Now you can configure
 the service in the service inspector to the right of the screen and then click
 the "Deploy" button.
+
+    - ## [Juju](/)
+
+      - [Charms](/charms/)
+      - [Features](/features/)
+      - [Deployment](/deployment/)
+    - ## [Resources](/resources/)
+
+      - [Overview](/resources/overview/)
+      - [Documentation](/docs/)
+      - [The Juju web UI](/resources/juju-gui/)
+      - [The charm store](/docs/authors-charm-store.html)
+      - [Tutorial](/docs/getting-started.html#test)
+      - [Videos](/resources/videos/)
+      - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+    - ## [Community](/community)
+
+      - [Juju Blog](/community/blog/)
+      - [Events](/events/)
+      - [Weekly charm meeting](/community/weekly-charm-meeting/)
+      - [Charmers](/community/charmers/)
+      - [Write a charm](/docs/authors-charm-writing.html)
+      - [Help with documentation](/docs/contributing.html)
+      - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+      - [Juju Labs](/communiy/labs/)
+    - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+      - [Charm store](https://jujucharms.com/)
+      - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

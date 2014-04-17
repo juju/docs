@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Charm Store Policy
 
 This document serves to record the policies around charms and bundles included
@@ -20,13 +37,14 @@ and bundles must:
   - Must be under a [Free license](http://opensource.org/osd). 
   - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
   - Must not run any network services using default passwords.
-  - Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a hard coded path. Should default to use software that is included in the Ubuntu archive, however we encourage that charm authors have a config options for allowing users to deploy from newer upstream releases, or even right from VCS if it's useful to users.
+  - Must call Juju API tools (relation-*, unit-*, config-*, etc) without a hard coded path. Should default to use software that is included in the Ubuntu archive, however we encourage that charm authors have a config options for allowing users to deploy from newer upstream releases, or even right from VCS if it's useful to users.
   - Should not use anything infrastructure-provider specific (i.e. querying EC2 metadata service) symlinks must be self contained within a charm.
   - Should make use of [AppArmor](https://help.ubuntu.com/12.04/serverguide/apparmor.html) to increase security.
   - Bundles must only use charms which are already in the store, they cannot reference charms in personal namespaces.
 
 The charm store referred to in this document is the collection of Juju charms
-and bundles hosted at <https://launchpad.net/charms>.
+and bundles hosted at
+[https://launchpad.net/charms](https://launchpad.net/charms).
 
 # Charm Metadata
 
@@ -90,3 +108,36 @@ interfaces are never made 'de-facto' in an experimental series.
   - Frozen - The charmers team on launchpad has discretion when a series is frozen as to whether or not a change should be accepted.
   - EOL - No changes will be accepted except those which help users who need to migrate to a supported series.
   - Process - Charm store releases will be moved from Active to Frozen periodically to allow de-facto changes to settle and allow testing of infrastructure. New releases of target OS's will be reflected in the charm store as an experimental series. There can be multiple Active series at one time. Maintainers can choose whether or not to support their charm in all of the Active series, as long as the charm is maintained in at least one Active series.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

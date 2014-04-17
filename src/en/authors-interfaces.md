@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Interfaces
 
 One of the best aspects of juju is how dead-simple it is to write a charm. You
@@ -14,7 +31,7 @@ can be related. For example, wordpress's `metadata.yaml` contains:
 which is a statement that wordpress has a relation that's locally named
 "database" which is an implementation of the "mysql" interface.
 
-MySQL's `metadata.yaml` contains a not-too-surprising:
+Mysql's `metadata.yaml` contains a not-too-surprising:
 
     provides:
       db:
@@ -43,34 +60,31 @@ set` to pass information back and forth between the service endpoints.
 
 For example, wordpress and mysql might have a conversation like the following:
 
-> wordpress:
->   I'm here and my service name is "wordpress"
-
-> mysql:
->   I'm here, let me create a db for you
->   your database/schema name is "wordpress"
->   your credentials are "admin/pass1234"
->   you access the db on "my.host.addr:port"
-
-> wordpress:
->   let me write the wordpress config files
->   needed to access that database (and bounce
->   the server to pick up those changes) later
-
-> mysql:
->   cool story bro, later
+    wordpress:
+      I'm here and my service name is "wordpress"
+    mysql:
+      I'm here, let me create a db for you
+      your database/schema name is "wordpress"
+      your credentials are "admin/pass1234"
+      you access the db on "my.host.addr:port"
+    wordpress:
+      cool, let me write the wordpress config files needed to access that database (and bounce the server to pick up those changes)
+      later
+    mysql:
+      cool, later
 
 We'll go over some more detailed versions of this, but this is the high-level
 conversation that occurs between two services when they are related in a
 relation implementing the `mysql` interface.
 
-At first glance, it would appear that the *interface* called `mysql` might be
+At first glance, it would appear that the _interface_ called `mysql` might be
 defined simply by the set of variables that get passed along the channel.
 Something like:
 
     interface:
       name: mysql
       variables_set:
+        - service_name
         - database_host
         - database_port
         - database_name
@@ -87,57 +101,43 @@ joined` and `relation-changed` hooks for now. The remaining `broken` and
 
 Actually, if we start from provisioning, the hooks that are called for wordpress
 are
-    
+
     # juju deploy wordpress
-    
     install
     config-changed
     start
-    
     # juju add-relation wordpress mysql
-    
     database-relation-joined
     database-relation-changed
 
-Similarly, for mysql
+similarly, for mysql
 
     # juju deploy mysql
-    
     install
     config-changed
     start
-    
     # juju add-relation wordpress mysql
-    
     db-relation-joined
     db-relation-changed
-    
 
 and we can fill in a little of what the relation hooks are doing
 
     # wordpress
-    
     database-relation-joined
       <no-op>
-    
     database-relation-changed
       relation-get database_name, creds, host/port
       write config for wordpress
       bounce wordpress
-    
-    ---
-    
     # mysql
-    
     db-relation-joined
       relation-get service-name
       create db, creds
       relation-set db, creds, host/port
-    
     database-relation-changed
       <no-op>
 
-*This* conversation is the actual interface. 
+_This_ conversation is the actual interface.
 
 ## Interface Documentation
 
@@ -148,4 +148,37 @@ defacto standard.
 Below is a list of the interfaces for which we have compiled documentation and
 reference implementations.
 
-  - [mysql](/interface-mysql.html) - the database interface used by MySQL and client services.
+  - [ mysql ](/interface-mysql.html) - the database interface used by MySQL and client services.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

@@ -1,10 +1,27 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Reviewing Charms and Bundles
 
-## Review Tips and Criteria
+### Review Tips and Criteria
 
-The goal is to *welcome* the contributor and help them have a good experience
-getting fixes into Ubuntu; your first response should be to *thank them
-profusely*. By making collaboration easier, we can hope to see more contributors
+The goal is to _welcome_ the contributor and help them have a good experience
+getting fixes into Ubuntu; your first response should be to _thank them
+profusely_. By making collaboration easier, we can hope to see more contributors
 and thus lighten the development workload on everyone.
 
   - Start your review by saying "Thanks", no matter what the outcome of the review is going to be.
@@ -14,7 +31,7 @@ and thus lighten the development workload on everyone.
   - Follow [these instructions](http://wiki.bazaar.canonical.com/PatchPilot) as well as you can.
   - If this is your first time patch piloting, you may feel more comfortable being a co-pilot your first few runs. Find a pilot in your timezone and reschedule your time to coincide with theirs.
   - Be super thorough, don’t be afraid to be firm with people. However, respect that charms are opinionated - just don’t be afraid to be opinionated yourself.
-  - Please use the official *[Charm Store Policy*](policy.html) document.
+  - Please use the official [_Charm Store Policy_](policy.html) document.
   - Use your best judgement.
   - Send a brief mail after your stint, to say what you did and how it worked out. If you have feedback on the review system or the process, speak up.
   - You're not obliged to deal with all the open patches. We appreciate what you do do.
@@ -25,27 +42,27 @@ and thus lighten the development workload on everyone.
 
 Sponsorship is organized into
 
-  - <https://launchpad.net/~charmers>:
+  - [https://launchpad.net/~charmers](https://launchpad.net/~charmers):
 
 If something needs review, subscribe ~charmers.
 
 You can see the currently pending requests at:
 
-  - <https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers>
+  - [https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers](https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers)
   - [https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&field.component=3&field.component=4](https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&field.component=3&field.component=4)
-  - <http://manage.jujucharms.com/tools/review-queue>
+  - [http://manage.jujucharms.com/tools/review-queue](http://manage.jujucharms.com/tools/review-queue)
 
-## Updating the store
+### Updating the store with new Charms
 
 There are two methods of updating the store. One is promulgation of new charms,
 the other is updates to charms which already exist in the store:
 
-### New Charms
+#### New Charms
 
 So the charm has passed all criteria and is ready to land in the store. Before
 you can promulgate, you’ll need to run the following commands. (This is only
-needed if you don’t have charm-tools >= 1.1 \- This is being fixed in charm
-tools and will be landing soon).
+needed if you don’t have charm-tools >= 1.1 - This is being fixed in charm tools
+and will be landing soon).
 
     bzr init lp:~charmers/charms/precise/<CHARM_NAME>/trunk
     bzr push lp:~charmers/charms/precise/<CHARM_NAME>/trunk
@@ -56,7 +73,7 @@ promulgate:
 
     juju charm promulgate 
 
-### Updating existing charms in the store
+#### Updating existing charms in the store
 
 Make sure you thank them profusely for fixing something or adding something even
 if they’re a Canonical employee!
@@ -65,9 +82,7 @@ Grab the charm from the store either with charm-tools or just bzr branch it.
 
     juju charm get 
 
-!!__Note: __Backwards compatibility is important! Any changes that would change
-the structure of the charm, data, configuration options, etc and doesn’t perform
-due diligence to make sure the charm does what it needs to, should be rejected.
+**Note: **Backwards compatibility is important! Any changes that would change the structure of the charm, data, configuration options, etc and doesn’t perform due diligence to make sure the charm does what it needs to, should be rejected.
 
 Pay particular attention to interface providers that have extant clients/users.
 
@@ -87,7 +102,7 @@ If you find anything that's lacking in the charm feel free to open bugs against
 that charm. This will help us curb the amount of charms to review during our
 audit.
 
-## Updating the store with Bundles
+### Updating the store with Bundles
 
 Bundles are simpler to push to the store:
 
@@ -96,19 +111,52 @@ Bundles are simpler to push to the store:
 
 There is no promulgation step for bundles.
 
-# Join Us!
+## Join Us!
 
 We also need help reviewing and testing charms. The Charmers team is granted
 write access to the Charm Collection and charm-tools. If you'd like to join that
 group, here are some tips:
 
   - Join [charm-contributors](https://launchpad.net/~charm-contributors) ! You will immediately be able to help out with bug prioritization.
-  - Join the discussion on IRC (Freenode) in #juju and on <https://lists.ubuntu.com/mailman/listinfo/juju>
+  - Join the discussion on IRC (Freenode) in #juju and on [https://lists.ubuntu.com/mailman/listinfo/juju](https://lists.ubuntu.com/mailman/listinfo/juju)
   - Test charms and report your successes or file bugs.
   - Write charms - pick a web app or a backend technology and write a charm.
-  - Review new charms <https://bugs.launchpad.net/charms/+bugs?field.tag=new-charm>
+  - Review new charms [https://bugs.launchpad.net/charms/+bugs?field.tag=new-charm](https://bugs.launchpad.net/charms/+bugs?field.tag=new-charm)
 
 Upon getting involved with these activities, we'll probably ask you if you'd
 like to join charmers. If not, go ahead and apply for membership to the team,
-and *send an email to the list letting us know about your reasons for wanting to
-be a member of charmers*.
+and _send an email to the list letting us know about your reasons for wanting to
+be a member of charmers_.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

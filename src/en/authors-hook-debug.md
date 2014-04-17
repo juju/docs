@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Debugging hooks
 
 Not everything works first time, and sometimes even when it does work, things
@@ -18,8 +35,7 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 
     juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 
-!!__Note:__ It is possible and often desirable to run debug-hooks on more than one
-unit at a time. You should open a new terminal window for each.
+**Note:** It is possible and often desirable to run debug-hooks on more than one unit at a time. You should open a new terminal window for each.
 
 ## Running a debug session
 
@@ -29,7 +45,7 @@ session on the machine running the requested unit (if you are unfamiliar with
 
 The `tmux` session will start with window 0. This window does nothing other than
 keep the session alive (though it can be used, for example, to view the logs for
-that unit (in `/var/log/juju/`).
+that unit (in ` /var/log/juju/`).
 
 When the first hook event is queued for a hook that is in the list of those to
 be debugged:
@@ -39,10 +55,9 @@ be debugged:
   - the prompt will change to indicate the hook related to the window (e.g. `mysql/0:db-relation-joined %`
   - the shell will be running in the standard [hook environment](./authors-hook-environment.html).
   - additionally, `$JUJU_HOOK_NAME` is set appropriately.
-
 ![Image showing tmux debug hooks session](./media/authors-hook-debug-1.png)
 
-To proceed, you should *manually execute the hook*, or perform whatever other
+To proceed, you should **manually execute the hook**, or perform whatever other
 actions you want. At any time during a debug-hooks window 1 session you can run
 any of the standard hooks (install, start, stop, config-changed, upgrade-charm)
 however you can not run any of the relation hooks - these should only be run
@@ -60,9 +75,7 @@ queue until you exit your current window. See the  special considerations below.
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
 
-!!__Note: __ To allow Juju to continue processing events normally, you __must__
-exit the hook execution window with the `exit` command, otherwise all further
-events on that unit will be paused indefinitely.
+**Note: ** To allow Juju to continue processing events normally, you **must** exit the hook execution window with the `exit` command, otherwise all further events on that unit will be paused indefinitely.
 
 The queue can be halted by exiting with an `exit 1` command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending
@@ -143,9 +156,7 @@ make the output more useful, e.g. to filter the whole log for lines matching
 
     juju debug-log -n +1  | grep 'INFO'
 
-!!__Note: __ As the command uses the follow behaviour of `tail` by default, you do
-not need to specify the `-f` switch. You will also need to end the session with
-`Control-C`
+**Note: ** As the command uses the follow behaviour of `tail` by default, you do not need to specify the `-f` switch. You will also need to end the session with `Control-C`
 
 # What on earth is tmux?
 
@@ -161,9 +172,15 @@ useful status information at the bottom of the screen.
 
 Some useful definitions in the context of tmux:
 
- - Session: A running tmux environment, involving one or more windows/panes.
- - Window: A single screen, possibly containing many panes.
- - Pane: A rectangular section of the current window, where commands are entered.
+Session
+
+    A running tmux environment, involving one or more windows/panes.
+Window
+
+    A single screen, possibly containing many panes.
+Pane
+
+    A rectangular section of the current window, where commands are entered.
 
 A session may look something like this:
 
@@ -191,25 +208,84 @@ hand. Here are some of the ones you may find useful:
 
 #### Window-related:
 
- - Control-a 0 -  Switch to window 0 (similarly, any other numbered window).
- - Control-a c - Create a new window.
-Control-a n - Switch to the next window.
-Control-a p - Switch to the previous window.
-Control-a w - Choose a window from a list.
+Control-a 0
+
+    Switch to window 0 (similarly, any other numbered window).
+Control-a c
+
+    Create a new window.
+Control-a n
+
+    Switch to the next window.
+Control-a p
+
+    Switch to the previous window.
+Control-a w
+
+    Choose a window from a list.
 
 #### Pane-related:
 
-Control-a % - Split pane vertically.
-Control-a | - Split pane horizontally.
-Control-a o - Switch focus to next pane.
-Control-a ; - Switch focus to the previous pane.
-Control-a ! - Move current pane to a new window.
-Control-a x - Kill the current pane.
+Control-a %
+
+    Split pane vertically.
+Control-a |
+
+    Split pane horizontally.
+Control-a o
+
+    Switch focus to next pane.
+Control-a ;
+
+    Switch focus to the previous pane.
+Control-a !
+
+    Move current pane to a new window.
+Control-a x
+
+    Kill the current pane.
 
 #### Miscellaneous:
 
-Control-a ? - Show currently configured keys.
-Control-a : - Enter the command prompt (for tmux commands)
+Control-a ?
+
+    Show currently configured keys.
+Control-a :
+
+    Enter the command prompt (for tmux commands)
 
 You can get more info on tmux and its commands at the [ relevant Ubuntu manpage
 entry.](http://manpages.ubuntu.com/manpages/trusty/man1/tmux.1.html)
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

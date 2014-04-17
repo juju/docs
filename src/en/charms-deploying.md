@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Deploying Services
 
 The fundamental point of Juju is that you can use it to deploy services through
@@ -18,7 +35,7 @@ specify:
 
     juju deploy mysql
 
-Running this will do exactly what you expect - fetch the latest juju charm for
+Running this will do exactly what you expect - fetch the latest Juju charm for
 the series you are running and then use the bootstrap environment to initiate a
 new instance and deploy MySQL
 
@@ -30,7 +47,7 @@ above command is the same as running:
 
 which follows the format:
 
-    &LT;repository&GT;:&LT;series&GT;/&LT;service&GT;
+    <repository>:<series>/<service>
 
 # Deploying from a local repository
 
@@ -44,24 +61,37 @@ source rather than the charm store:
 ... and probably a lot more times which you can imagine yourselves.
 
 Juju can be pointed at a local directory to source charms from using the
-`\--repository=&LT;path/to/files&GT;` switch like this:
+`--repository=<path/to/files>` switch like this:
 
-    juju deploy --repository=/usr/share/charms/ local:precise/vsftpd
+    juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
 
-You can also make use of standard filesystem shortcuts, so the following
-examples are also valid:
+The `--repository`: switch can be omitted when shell environment defines
+`JUJU_REPOSITORY` like so:
+
+    export JUJU_REPOSITORY=/usr/share/charms/
+    juju deploy local:trusty/vsftpd
+
+You can also make use of standard filesystem shortcuts, if the environment
+specifies the `default-series`.The following examples will deploy the trusty
+charms in the local repository when default-series is set to trusty:
 
     juju deploy --repository=. local:haproxy
     juju deploy --repository ~/charms/ local:wordpress
 
-!!__Note:__ Specifying a local repository makes juju look there __first__, but if
-the relevant charm is not found in that repository, it will fall back to
-fetching it from the charm store. If you wish to check where a charm was
-installed from, it is listed in the `juju status` output.
+The default-series can be specified in environments.yaml thusly:
+
+    default-series: precise
+
+The default-series can also be added to any bootstrapped environment with the
+`set-env `:
+
+    juju set-env "default-series=trusty"
+
+**Note:** Specifying a local repository makes Juju look there **first**, but if the relevant charm is not found in that repository, it will fall back to fetching it from the charm store. If you wish to check where a charm was installed from, it is listed in the `juju status` output.
 
 # A note about caching...
 
-After juju resolves a charm and its dependencies, it bundles them and deploys
+After Juju resolves a charm and its dependencies, it bundles them and deploys
 them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache).
 This allows the same charm to be deployed to multiple machines repeatably and
 with minimal network transfers.
@@ -73,9 +103,8 @@ to. This is useful for a few reasons. The most obvious reason is to save money
 when deploying to a public cloud. Instead of having one machine per unit we can
 consolidate services.
 
-In this example we use the `\--constraints` flag to fire up a bootstrap node
-with 4G of RAM so we can deploy other services to it by using the `\--to`
-command:
+In this example we use the `--constraints` flag to fire up a bootstrap node with
+4G of RAM so we can deploy other services to it by using the `--to` command:
 
     juju bootstrap --constraints="mem=4G"
     juju deploy --to 0 mysql
@@ -97,7 +126,7 @@ Note that you need to know the identifier of the machine that you are going to
 the above example works nicely. Doing a `juju status` will show you a list of
 all the machines and their machine numbers for you to decide what to deploy to.
 
-The `add-unit` command also supports the `\--to` option, so it's now possible to
+The `add-unit` command also supports the `--to` option, so it's now possible to
 specifically target machines when expanding service capacity:
 
     juju deploy --constraints="mem=4G" openstack-dashboard
@@ -180,8 +209,8 @@ network ports. We are working to containerize everything so that this does not
 happen and every service is in its own container, but this work is not yet
 complete.
 
-While the "add-unit" command supports the `\--to` option, you can elect not use
-`\--to` when doing an "add-unit" to scale out the service on its own node.
+While the "add-unit" command supports the `--to` option, you can elect not use
+`--to` when doing an "add-unit" to scale out the service on its own node.
 
     juju add-unit rabbitmq-server
 
@@ -192,3 +221,36 @@ horizontally scale out on dedicated machines when you need to.
 
   - [ Scaling Down in the Cloud with Juju](http://www.jorgecastro.org/2013/07/31/deploying-wordpress-to-the-cloud-with-juju/)
   - [ Targeted Machine Deployment with Juju](http://javacruft.wordpress.com/2013/07/25/juju-put-it-there-please/)
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

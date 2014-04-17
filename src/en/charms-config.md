@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Service Configuration
 
 When deploying a service, the charm you use will often support or even require
@@ -15,7 +32,7 @@ in various ways
 
   - By running the `juju get &LT;service&GT;` command.
   - By viewing the charm in the [charm store.](http://jujucharms.com)
-  - By examining the __config.yaml__ file in the charm itself.
+  - By examining the **config.yaml** file in the charm itself.
 
 The configurations setting names and the values they take will obviously vary
 between charms. The options and possible values are all well documented however,
@@ -39,9 +56,7 @@ We can then use this configuration when we deploy the service:
 
     juju deploy --config myconfig.yaml mediawiki
 
-!!__Caution:__ If the yaml configuration file cannot be read or contains some
-syntax errors or invalid options, you will receive an error message to this
-effect. However, __the service will still be deployed__.
+**Caution:** If the yaml configuration file cannot be read or contains some syntax errors or invalid options, you will receive an error message to this effect. However, **the service will still be deployed **. 
 
 ## Configuring a service which is already deployed
 
@@ -93,3 +108,36 @@ Setting options back to their default value is done using the `unset` command
 followed by the service and the respective options:
 
     juju unset mediawiki admins name 
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

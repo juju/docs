@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Creating icons for charms
 
 In order to make your charm recogniseable in the Charm Store, it is best
@@ -43,28 +60,36 @@ Before you start you will need:
 
 Once you have those, fire up Inkscape and we can begin!
 
+1
+
 ## Open the template!
 
-From Inkscape load the __icon.svg__ file. Select the Layer called "BACKGROUND",
+From Inkscape load the **icon.svg** file. Select the Layer called "BACKGROUND",
 either from the drop down at the bottom, or from the layer dialog.
 
 ![Step one](./media/author-charm-icons-1.png)
 
+2
+
 ## Add colour
 
-Select __Object&GT;Fill and Stroke__ from the menu to adjust the colour. Apply a
+Select **Object&GT;Fill and Stroke** from the menu to adjust the colour. Apply a
 flat colour or a gradient, but make sure you edit the gradient file to make it
 lighter at the top and darker at the bottom.
 
 ![Step two](./media/author-charm-icons-2.png)
 
+3
+
 ## Show the guides
 
 Choose the "PICTOGRAM" layer, which is where your logo will live. To help you
-place it properly, choose __View&GT;Guides__ from the menu. A grid will appear
+place it properly, choose **View&GT;Guides** from the menu. A grid will appear
 showing the limits of the pictogram area.
 
 ![Step three](./media/author-charm-icons-3.png)
+
+4
 
 ## Draw something
 
@@ -77,14 +102,18 @@ and delete the bitmap.
 
 ![Step four](./media/author-charm-icons-4.png)
 
+5
+
 ## Add a shadow
 
 If you want to apply a drop shadow to your design to make it stand out from the
 background a bit more, there is a quick filter to help. Choose
-__Filter&GT;Filter Editor__ from the menu and select "Drop shadow" from the
+**Filter&GT;Filter Editor** from the menu and select "Drop shadow" from the
 list.
 
 ![Step five](./media/author-charm-icons-5.png)
+
+6
 
 ## Check it over
 
@@ -111,3 +140,36 @@ overflow onto the horizontal padding area to ensure its weight is consistent.
 
 Do not use glossy materials unless they are parts of a logo that you are not
 allowed to modify.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

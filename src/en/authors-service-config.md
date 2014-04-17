@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Service configuration
 
 ## Introduction
@@ -73,14 +90,14 @@ The following config.yaml would be included in the top level directory of a
 charm and includes a list of option definitions:
 
     options:
-      port:
-        default: 80
-        type: int
-        description: Port to listen on
-      admin-email:
-        # type: str is implied
-        default: null
-        description: Email address for the site administrator.
+        port:
+            default: 80
+            type: int
+            description: Port to listen on
+        admin-email:
+            # type: str is implied
+            default: null
+            description: Email address for the site administrator.
 
 To access these configuration options from a hook we provide the following:
 
@@ -88,8 +105,8 @@ To access these configuration options from a hook we provide the following:
 
 config-get returns all the configuration options for a service as JSON data when
 no option name is specified. If an option name is specified the value of that
-option is output according to the normal rules and obeying the `--output` and
-`--format` arguments. Hooks implicitly know the service they are executing for and
+option is output according to the normal rules and obeying the --output and
+--format arguments. Hooks implicitly know the service they are executing for and
 config-get always gets values from the service of the hook.
 
 Changes to options (see previous section) trigger the charm's config-changed
@@ -116,8 +133,16 @@ invoke the config-changed hook.
 
 ## Internals
 
-> __note__
+> **note**
+
+>
+
 > This section explains details useful to the implementation but not of
+
+>
+
+>
+
 > interest to the casual reader.
 
 Hooks normally attempt to provide a consistent view of the shared state of the
@@ -125,3 +150,36 @@ system and the handling of config options within hooks (config-changed and the
 relation hooks) is no different. The first access to the configuration data of a
 service will retain a cached copy of the service options. Cached data will be
 used for the duration of the hook invocation.
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+

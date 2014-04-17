@@ -1,3 +1,20 @@
+[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
+](https://juju.ubuntu.com/)
+
+  - Jump to content
+  - [Charms](https://juju.ubuntu.com/charms/)
+  - [Features](https://juju.ubuntu.com/features/)
+  - [Deploy](https://juju.ubuntu.com/deployment/)
+  - [Resources](https://juju.ubuntu.com/resources/)
+  - [Community](https://juju.ubuntu.com/community/)
+  - [Install Juju](https://juju.ubuntu.com/download/)
+
+Search: Search
+
+## Juju documentation
+
+LINKS
+
 # Amulet, a testing harness
 
 Amulet is a set of tools designed to simplify the testing process for charm
@@ -17,7 +34,7 @@ for you to use.
 Amulet is available as both a package and via pip. For source packages, see [
 GitHub](https://github.com/marcoceppi/amulet/releases).
 
-## Ubuntu
+[Ubuntu](.) [Mac OSX](.) [Windows](.) [Source](.)
 
 Amulet is available in the Juju Stable PPA for Ubuntu
 
@@ -25,19 +42,13 @@ Amulet is available in the Juju Stable PPA for Ubuntu
     sudo apt-get update
     sudo apt-get install amulet
 
-## Mac OSX
-
 Amulet is available via Pip:
 
     sudo pip install amulet
 
-## Windows
-
 Amulet is available via Pip:
 
     pip install amulet
-
-## Source
 
 Amulet is built with Python3, make sure it's installed prior to following these
 steps. While you can run Amulet from source, it's not recommended as it requires
@@ -114,17 +125,14 @@ Deployment (amulet deployment, from amulet import Deployment) is an abstraction
 layer to the juju-deployer Juju plugin and a service lifecycle management tool.
 It's designed to allow an author to describe their deployment in simple terms:
 
-```python
-import amulet
-
-d = amulet.Deployment()
-d.add('mysql')
-d.add('mediawiki')
-d.relate('mysql:db', 'mediawiki:db')
-d.expose('mediawiki')
-d.configure('mediawiki', title="My Wiki", skin="Nostolgia")
-d.setup()
-```
+    import amulet
+    d = amulet.Deployment()
+    d.add('mysql')
+    d.add('mediawiki')
+    d.relate('mysql:db', 'mediawiki:db')
+    d.expose('mediawiki')
+    d.configure('mediawiki', title="My Wiki", skin="Nostolgia")
+    d.setup()
 
 That information is then translated to a Juju Deployer deployment file then,
 finally, juju-deployer executes the described setup. Amulet strives to ensure it
@@ -139,7 +147,8 @@ Juju API or the juju commands.
 
 #### Class:
 
-    Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-deployer', sentry_template=None)
+`Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-
+deployer', sentry_template=None)`
 
 #### Methods:
 
@@ -150,13 +159,28 @@ Add a new service to the deployment schema.
   - `service` Name of the service to deploy.
   - `charm` If provided, will be the charm used. Otherwise service is used as the charm.
   - `units` Number of units to deploy.
-    
     import amulet
-    
     d = amulet.Deployment()
     d.add('wordpress')
     d.add('second-wp', charm='wordpress')
     d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)
+
+`Deployment.add_unit(service, units=1)`
+
+Add more units of an existing service after deployment.
+
+  - `service` Name of the service to add, must already be added.
+  - `units` Number of units to add, default is one.
+    import amulet
+    d = amulet.Deployment()
+    d.add('wordpress')
+    try:
+        d.setup(timeout=900)
+    except amulet.helpers.TimeoutError:
+        # Setup didn't complete before timeout
+        pass
+    d.add_unit('wordpress')
+    d.add_unit('wordpresss', units=2)
 
 `Deployment.build_relations()`
 
@@ -172,9 +196,7 @@ Change configuration options for a service.
 
   - `service` The service to configure.
   - `options` Dict of configuration options.
-    
     import amulet
-    
     d = amulet.Deployment()
     d.add('postgresql')
     d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})
@@ -189,14 +211,11 @@ Create deployer file from provided services and relations.
 
 Indicate if a service should be exposed after deployment.
 
-  - `service` \- Name of service to expose
-    
+  - `service` - Name of service to expose
     import amulet
-    
     d = amulet.Deployment()
     d.add('varnish')
     d.expose('varnish')
-    
 
 `Deployment.load(deploy_cfg)`
 
@@ -207,20 +226,18 @@ Import an existing deployer object.
 
 Relate two services together.
 
-  - `*args` \- `service:relation` to be related.
+  - `*args` - `service:relation` to be related.
 
 If more than two arguments are given, it's assumed they're to be added to the
 first argument as a relation.
 
     import amulet
-    
     d = amulet.Deployment()
     d.add('postgresql')
     d.add('mysql')
     d.add('wordpress')
     d.add('mediawiki')
     d.add('discourse')
-    
     d.relate('postgresql:db-admin', 'discourse:db')
     d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
 
@@ -230,9 +247,7 @@ This will create the deployer mapping, create any sentries that are required,
 and execute juju-deployer with the generated mapping.
 
   - `timeout` in seconds, how long to wait for setup
-    
     import amulet
-    
     d = amulet.Deployment()
     d.add('wordpress')
     d.add('mysql')
@@ -259,17 +274,13 @@ Using the above example from ## Deployer, each service and unit can be accessed
 using the following:
 
     import amulet
-    
     d = amulet.Deployment()
     d.add('mediawiki')
     d.add('mysql')
     d.setup()
-    
     d.sentry.wait()
-    
     d.sentry.unit['mysql/0']
     d.sentry.unit['mediawiki/0']
-    
 
 Sentries provide several methods for which you can use to gather information
 about an environment. The following are a few examples.
@@ -292,10 +303,10 @@ Each unit is assigned a UnitSentry
 
 `UnitSentry.from_unitdata(unit, unit_data, port=9001, sentry=None)`
 
-  - `unit` \- `service/#` formatted string of unit name
-  - `unit_data` \- Object of unit status output
-  - `port` \- Sentry port
-  - `sentry` \- RelationSentry
+  - `unit` - `service/#` formatted string of unit name
+  - `unit_data` - Object of unit status output
+  - `port` - Sentry port
+  - `sentry` - RelationSentry
 
 #### Methods:
 
@@ -380,7 +391,6 @@ Here are a few examples of Amulet tests
 #### tests/00-setup
 
     #!/bin/bash
-    
     sudo apt-get install amulet python-requests
 
 #### tests/01-simple
@@ -388,15 +398,12 @@ Here are a few examples of Amulet tests
     import os
     import amulet
     import requests
-    
     from .lib import helper
-    
     d = amulet.Deployment()
     d.add('mysql')
     d.add('wordpress')
     d.relate('mysql:db', 'wordpress:db')
     d.expose('wordpress')
-    
     try:
         # Create the deployment described above, give us 900 seconds to do it
         d.setup(timeout=900)
@@ -410,11 +417,9 @@ Here are a few examples of Amulet tests
         # Something else has gone wrong, raise the error so we can see it and this
         # will automatically "FAIL" the test.
         raise
-    
     # Shorten the names a little to make working with unit data easier
     wp_unit = d.sentry.unit['wordpress/0']
     mysql_unit = d.sentry.unit['mysql/0']
-    
     # WordPress requires user input to "finish" a setup. This code is contained in
     # the helper.py file found in the lib directory. If it's not able to complete
     # the WordPress setup we need to quit the test, not as failed per se, but as a
@@ -423,23 +428,53 @@ Here are a few examples of Amulet tests
         helper.finish_setup(wp_unit.info['public-address'], password='amulet-test')
     except:
         amulet.raise_status(amulet.SKIP, msg="Unable to finish WordPress setup")
-    
     home_page = requests.get('http://%s/' % wp_unit.info['public-address'])
     home_page.raise_for_status() # Make sure it's not 5XX error
 
 #### tests/lib/helper.py
 
     import requests
-    
     def finish_setup(unit, user='admin', password=None):
         h = {'User-Agent': 'Mozilla/5.0 Gecko/20100101 Firefox/12.0',
              'Content-Type': 'application/x-www-form-urlencoded',
              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*',
              'Accept-Encoding': 'gzip, deflate'}
-    
         r = requests.post('http://%s/wp-admin/install.php?step=2' % unit,
                           headers=h, data={'weblog_title': 'Amulet Test %s' % unit,
                           'user_name': user, 'admin_password': password,
                           'admin_email': 'test@example.tld',
                           'admin_password2': password,
                           'Submit': 'Install WordPress'})
+
+  - ## [Juju](/)
+
+    - [Charms](/charms/)
+    - [Features](/features/)
+    - [Deployment](/deployment/)
+  - ## [Resources](/resources/)
+
+    - [Overview](/resources/overview/)
+    - [Documentation](/docs/)
+    - [The Juju web UI](/resources/juju-gui/)
+    - [The charm store](/docs/authors-charm-store.html)
+    - [Tutorial](/docs/getting-started.html#test)
+    - [Videos](/resources/videos/)
+    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
+  - ## [Community](/community)
+
+    - [Juju Blog](/community/blog/)
+    - [Events](/events/)
+    - [Weekly charm meeting](/community/weekly-charm-meeting/)
+    - [Charmers](/community/charmers/)
+    - [Write a charm](/docs/authors-charm-writing.html)
+    - [Help with documentation](/docs/contributing.html)
+    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
+    - [Juju Labs](/communiy/labs/)
+  - ## [Try Juju](https://jujucharms.com/sidebar/)
+
+    - [Charm store](https://jujucharms.com/)
+    - [Download Juju](/download/)
+
+(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
+[Canonical Ltd](http://www.canonical.com).
+
