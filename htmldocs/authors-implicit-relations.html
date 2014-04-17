@@ -2,30 +2,23 @@
 <html>
 <!--Head-->
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Juju Documentation</title>
 		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
  		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
-		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
-		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+		<link href="./css/main.css" rel="stylesheet" type="text/css" />
 		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
 <!--End-Head-->
-
-
-
-
-
-
 
   <body class="resources">
   	
@@ -71,24 +64,39 @@
         <div class="grid-9 doc-content">
 <!--End-Preamble-->
           <article>
-            <section id="implicit-relations">
-            <h1>Implicit relations</h1>
-            <p>Implicit relations allow for interested services to gather lifecycle-oriented events and data about other services without expecting or requiring any modifications on the part of the author of the other service's charm.</p>
-            <p>Implicit relationships are named in the reserved juju-* namespace. Both the relation name and interface names provided by Juju are prefixed with <cite>juju-</cite>. Charms attempting to provide new relationships in this namespace will trigger an error.</p>
-            <p>Juju currently provides one implicit relationship to all deployed services.</p>
-            <p><cite>juju-info</cite>, if specified would look like:</p>
-            <pre>provides:
+            <section>
+            <h1 id="implicit-relations">Implicit relations</h1>
+            <p>Implicit relations allow for interested services to gather lifecycle-oriented events and data about 
+            other services without expecting or requiring any modifications on the part of the author of the other 
+            service's charm.</p>
+            <p>Implicit relationships are named in the reserved juju-* namespace. Both the relation name and 
+            interface names provided by Juju are prefixed with <code>juju-</code>. Charms attempting to provide new 
+            relationships in this namespace will trigger an error.</p>
+            <p>Juju currently provides one implicit relationship to all deployed services:</p>
+            <p><code>juju-info</code>, if specified would look like:</p>
+            <pre class="prettyprint">provides:
                 juju-info:
                     interface: juju-info</pre>
                     
-            <p>The charm author should not declare the <cite>juju-info</cite> relation and is provided here only as an example. The <cite>juju-info</cite> relation is implicitly provided by all charms, and enables the requiring unit to obtain basic details about the related-to unit. The following settings will be implicitly provided by the remote unit in a relation through its <cite>juju-info</cite> relation</p>
-            <pre><span class="n">private</span><span class="o">-</span><span class="n">address</span> <span class="n">public</span><span class="o">-</span><span class="n">address</span>
+            <p>The charm author should not declare the <code>juju-info</code> relation and is provided here only 
+            as an example. The <code>juju-info</code> relation is implicitly provided by all charms, and enables 
+            the requiring unit to obtain basic details about the related-to unit. The following settings will be 
+            implicitly provided by the remote unit in a relation through its <code>juju-info</code> relation</p>
+            
+            <pre class="prettyprint">
+            private-address
+            public-address
             </pre>
             
             
             <h2>Relationship resolution</h2>
-            <p>If <strong>rsyslog</strong> is a <a class="reference external" href="authors-subordinate-services.html"><em>subordinate charm</em></a> and requires a valid <cite>scope: container</cite> relationship in order to deploy. It can take advantage of optional support from the principal charm but in the event that the principal charm doesn't provide this support it will still require a <cite>scope: container</cite> relationship. In this event the logging charm author can take advantage of the implicit relationship offered by all charms, <cite>juju-info</cite>.</p>
-            <pre>requires:
+            <p><code>rsyslog</code> is a <a class="reference external" href="authors-subordinate-services.html">
+            <em>subordinate charm</em></a> and requires a valid <code>scope: container</code> relationship in 
+            order to deploy. It can take advantage of optional support from the principal charm but in the event 
+            that the principal charm doesn't provide this support it will still require a <code>scope: container</code>
+            relationship. In this event the logging charm author can take advantage of the implicit relationship 
+            offered by all charms, <code>juju-info</code>.</p>
+            <pre class="prettyprint">requires:
               logging:
                   interface: logging-directory
                   scope: container
@@ -97,9 +105,13 @@
                   scope: container</pre>
                   
             <p>The admin then issues the following</p>
-            <pre>juju add-relation wordpress rsyslog</pre>
+            <pre class="prettyprint">juju add-relation wordpress rsyslog</pre>
             
-            <p>If the wordpress charm author doesn't define the <cite>logging-directory</cite> interface Juju will use the less-specific (in the sense that it likely provides less information) <cite>juju-info</cite> interface. Juju always attempts to match user provided relations outside the <cite>juju-*</cite> namespace before looking for possible relationship matches in the <cite>juju-*</cite> namespace.</p>
+            <p>If the wordpress charm author doesn't define the <code>logging-directory</code> interface, 
+            Juju will use the less-specific (in the sense that it likely provides less information) 
+            <code>juju-info</code> interface. Juju always attempts to match user provided relations outside 
+            the <code>juju-*</code> namespace before looking for possible relationship matches in the 
+            <code>juju-*</code> namespace.</p>
             
             </section>
           </article>
@@ -119,17 +131,17 @@
 						<li>
 							<h2><a href="/">Juju</a></h2>
 							<ul>
-								<li><a href="/charms">Charms</a></li>
-								<li><a href="/features">Features</a></li>
-								<li><a href="/deployment">Deployment</a></li>
+								<li><a href="/charms/">Charms</a></li>
+								<li><a href="/features/">Features</a></li>
+								<li><a href="/deployment/">Deployment</a></li>
 							</ul>
 						</li>
 						<li>
-							<h2><a href="/resources">Resources</a></h2>
+							<h2><a href="/resources/">Resources</a></h2>
 							<ul>
-								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/resources/overview/">Overview</a></li>
 								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
 								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
 								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
 								<li><a href="/resources/videos/">Videos</a></li>
@@ -145,7 +157,7 @@
 								<li><a href="/community/charmers/">Charmers</a></li>
 								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
 								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
 							</ul>
 						</li>
 						<li>
@@ -160,13 +172,11 @@
 			</div>
 		</nav>
 		<div class="legal clearfix">
-			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
 		</div>
 	</footer>
 
 <!--End-Footer-->
-
-
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -190,10 +200,4 @@
    })();
     </script>
 <!--End-Scripts-->
-
-
-
-
-
-
 </body></html>

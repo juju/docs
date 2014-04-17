@@ -38,7 +38,7 @@ Tips for production usage:
 If written in Bash:
 
   - Use `set -e` for all hooks written in Bash. This option tells bash to exit the script if a command returns a non true result. This option prevents the script from continuing when the script is known to be in an error state.
-  - `${variable}-value` rather than `$variable-value`?
+  - `{variable}-value` rather than `$variable-value`?
   - `$(COMMAND)` vs. `COMMAND`?
   - Use `install` rather than `mkdir; chown`
 
@@ -52,16 +52,15 @@ environment: `cheetah fill --env -p templates/celerymon_conf.tmpl >
 
 In this example, the template looks like this:
 
-    start on started celeryd
-    stop on stopping celeryd
-
-    env CODEDIR=$CODE_LOCATION
-    env PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
-
-    exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
-    PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
-    /srv/${BASEDIR}/var/celeryev.pid"
-    respawn
+                start on started celeryd
+                stop on stopping celeryd
+                env CODEDIR=$CODE_LOCATION
+                env
+                PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
+                exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
+                PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
+                /srv/${BASEDIR}/var/celeryev.pid"
+                respawn
 
   - Do all config options have appropriate descriptions?
   - Are all hooks idempotent?

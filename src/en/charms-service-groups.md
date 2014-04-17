@@ -66,7 +66,7 @@ and to other services via
 
 There are also interesting use-cases for breaking large services down into
 separate groups of units. Instead of a single 5000-node hadoop service named
-*hadoop-slave*, you might build that cluster from multiple smaller service
+_hadoop-slave_, you might build that cluster from multiple smaller service
 groups.
 
     juju deploy hadoop hadoop-master
@@ -74,6 +74,7 @@ groups.
     juju deploy hadoop hadoop-slave-B -n2500
     juju add-relation hadoop-master:namenode hadoop-slave-A:datanode
     juju add-relation hadoop-master:namenode hadoop-slave-B:datanode
+    ...
 
 These service groups can be managed independently by Juju for upgrades and
 configuration

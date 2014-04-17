@@ -20,13 +20,14 @@ and bundles must:
   - Must be under a [Free license](http://opensource.org/osd). 
   - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
   - Must not run any network services using default passwords.
-  - Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a hard coded path. Should default to use software that is included in the Ubuntu archive, however we encourage that charm authors have a config options for allowing users to deploy from newer upstream releases, or even right from VCS if it's useful to users.
+  - Must call Juju API tools (relation-*, unit-*, config-*, etc) without a hard coded path. Should default to use software that is included in the Ubuntu archive, however we encourage that charm authors have a config options for allowing users to deploy from newer upstream releases, or even right from VCS if it's useful to users.
   - Should not use anything infrastructure-provider specific (i.e. querying EC2 metadata service) symlinks must be self contained within a charm.
   - Should make use of [AppArmor](https://help.ubuntu.com/12.04/serverguide/apparmor.html) to increase security.
   - Bundles must only use charms which are already in the store, they cannot reference charms in personal namespaces.
 
 The charm store referred to in this document is the collection of Juju charms
-and bundles hosted at <https://launchpad.net/charms>.
+and bundles hosted at
+[https://launchpad.net/charms](https://launchpad.net/charms).
 
 # Charm Metadata
 

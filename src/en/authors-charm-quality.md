@@ -6,10 +6,7 @@ an ideal charm provides users. So we rate charms by the following criteria.
 These features are shown to users in the charm store so that they can see what
 features a charm provides at a glance.
 
-!!__Note: __This is an ideal list of what we'd like charms to be. Most charms
-today do not offer every feature; it's a target we set for ourselves so we can
-determine how we can improve individual charms. It also gives contributors a
-general idea of where they can spend their time to fix something.
+**Note: **This is an ideal list of what we'd like charms to be. Most charms today do not offer every feature; it's a target we set for ourselves so we can determine how we can improve individual charms. It also gives contributors a general idea of where they can spend their time to fix something.
 
 ## Data Handling
 
@@ -20,7 +17,7 @@ general idea of where they can spend their time to fix something.
 
 ## Secure
 
-  - Contains a well tested [AppArmor profile](https://help.ubuntu.com/12.04/serverguide/apparmor.html) \- These can be provided by the package itself.
+  - Contains a well tested [AppArmor profile](https://help.ubuntu.com/12.04/serverguide/apparmor.html) - These can be provided by the package itself.
   - Doesn't run as root - the service should not run as root. Refer to the [Upstart documentation](http://upstart.ubuntu.com/cookbook/#run-a-job-as-a-different-user) for tips on how to do this.
   - Per instance or service access control - Accept relationships only from trusted instances and/or services.
   - Defaults to secure communication - default to secure channels when communicating with other services and/or multiple units of the same service.

@@ -4,7 +4,7 @@ Few services you might want to run can do so completely independently - most of
 them rely on some other software components to be present and running too (e.g.
 a database). There would be little point in Juju making it supremely easy to
 deploy services if it didn't also make it easy to connect them up to services
-they need to get running! The Juju magic in this case involves the __hooks__
+they need to get running! The Juju magic in this case involves the **hooks**
 built in to each charm which allow them to communicate. Unless you are writing
 charms, there is no need to go into detail on hooks, but these are the parts
 that make creating relationships between services so easy.
@@ -41,9 +41,6 @@ In some cases, there may be ambiguity about how the services should connect. For
 example, in the case of specifying a database for the Mediawiki charm.
 
     juju add-relation mediawiki mysql
-
-Which results in the following:
-
     error: ambiguous relation: "mediawiki mysql" could refer to "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 
 the soloution in these cases is to specify the nature of the relation using the
@@ -101,7 +98,6 @@ has been established:
             agent-version: 1.10.0
             machine: "1"
             public-address: 15.185.89.204
-    
 
 ## Removing Relations
 
@@ -109,4 +105,4 @@ There are times when a relationship just isn't working and it is time to move
 on. Fortunately, it is a simple single-line command to break off these
 relationships:
 
-    juju destroy-relation mediawiki mysql
+    juju remove-relation mediawiki mysql

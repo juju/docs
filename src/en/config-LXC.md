@@ -3,9 +3,7 @@
 ## Prerequisites
 
 The LXC local provider enables you to run Juju on a single system like your
-local computer or a single server. This way you can simply evaluate the software
-or service configurations, develop your own charms or run a single server
-system.
+local computer or a single server. This way you can simply evaluate the software or service configurations, develop your own charms or run a single server system.
 
 If you're not already using the stable release PPA you can make sure you've
 added it:
@@ -13,8 +11,7 @@ added it:
     sudo apt-add-repository ppa:juju/stable
     sudo apt-get update
 
-Then you can install the local provider, the commands depend on the Juju version
-you are using:
+Then you can install the local provider, the commands depend on the Juju version you are using:
 
 ### For Ubuntu versions newer than 12.04:
 
@@ -32,25 +29,21 @@ Stack](https://wiki.ubuntu.com/Kernel/LTSEnablementStack):
 You will need to reboot into the new kernel in order to use Juju with the local
 provider.
 
-If you're not running Ubuntu please consult your operating system distribution's
-documentation for instructions on installing the LXC userspace tools and the
-MongoDB server. Juju requires a MongoDB server built with SSL support.
+If you're not running Ubuntu please consult your operating system distribution's documentation for instructions on installing the LXC userspace tools and the MongoDB server. Juju requires a MongoDB server built with SSL support.
 
 ## Configuration
 
 You should start by generating a generic configuration file for Juju and then
 switching to the local provider by using the command:
 
-    juju init
+    juju generate-config
     juju switch local
 
 This will generate a file, `environments.yaml` (if it doesn't already exist),
 which will live in your `~/.juju/` directory (and will create the directory if
 it doesn't already exist).
 
-!!__Note:__ If you have an existing configuration, you can use `juju generate-
-config --show` to output the new config file, then copy and paste relevant areas
-in a text editor etc.
+**Note:** If you have an existing configuration, you can use `juju generate-config --show` to output the new config file, then copy and paste relevant areas in a text editor etc.
 
 The generic configuration sections generated for the local provider will look
 something like this, though Juju will generate this automatically you usually
@@ -78,25 +71,46 @@ location can be changed as well as the ports of the storage and the shared
 storage. This may be useful in the case of multiple parallel running local
 providers or conflicts with other programs on your system.
 
-!!__Note: __If you are using encrypted home directories you have to set
-`$JUJU_HOME` or `root-dir` to point to a location __outside__ your home
-directory.
+**Note: **If you are using encrypted home directories you have to set `$JUJU_HOME` or `root-dir` to point to a location **outside** your home directory.
 
 ## Bootstrapping and Destroying
 
-The usage of LXC Linux Containers enforces that bootstrapping and destroying of
-an environment are done as __root__. All other operations can be executed as
-non-root. E.g.
+The usage of LXC Linux Containers requires **root** privileges for some steps.
+Juju will prompt for your password if needed. Juju cannot be run under sudo
+because it needs to manage permission as the real user.
 
-    sudo juju bootstrap
-    juju deploy mysql
+**Note:** If you are running a firewall such as **ufw**, it may interfere with the correct operation of Juju using LXC containers and might need to be halted.
 
-Once you're ready to tear down, issue the destroy environment command:
+If you have used the local provider in the past when it required `sudo`, you may need to manually clean up some files that are still owned by root. If your local environment is named "local" then there may be a local.jenv owned by root in the JUJU_HOME directory (~/.juju). After the local environment is destroyed, you can remove the file like this:
 
-    sudo juju destroy-environment
+    sudo rm ~/.juju/environments/local.jenv
 
-!!__Note:__ If you are running a firewall such as __ufw__, it may interfere with
-the correct operation of Juju using LXC containers and might need to be halted.
+## Fast LXC creation
+
+The local provider can use lxc-clone to create the containers used as machines.
+This feature is controlled by the `lxc-clone` option in environments.yaml. The
+default is "true" for Trusty and above, and "false" for earlier Ubuntu releases.
+
+You can try to use lxc-clone on earlier releases, but it is not a supported. It
+may well work. You can enable lxc-clone in environments.yaml thusly:
+
+    local:
+        type: local
+        lxc-clone: true
+
+The local provider is btrfs-aware. If your LXC directory is on a btrfs
+filesystem, the clones use snapshots and are much faster to create and take up
+much less space. There is also support for using aufs as a backing-store for the LXC clones, but there are some situations where aufs doesn’t entirely behave as intuitively as one might expect, so this must be turned on explicitly in `environments.yaml`.
+
+    local:
+        type: local
+        lxc-clone-aufs: true
+
+When using clone, the first machine to be created will create a "template"
+machine that is used as the basis for the clones. This will be called
+"juju-<series>-template", so for a precise image, the name is "juju-precise-
+template". Do not modify or start this image while a local provider environment
+is running because you cannot clone a running lxc machine.
 
 ## Caveats
 
@@ -111,13 +125,11 @@ available for review outside of `juju debug-log`. First, find out what the name
 of your environment is by running `juju switch`. If you're using the default
 `environments.yaml` you'll find this be `local`. All log files for the local
 provider are stored in `~/.juju/<environment>/log`, as such you can duplicate
-the functionality of `juju debug-log` using the following (assuming your current
-environment is "local"):
+the functionality of `juju debug-log` using the following (assuming your current environment is "local"):
 
     tail -f ~/.juju/local/log/unit-*.log
 
 ### juju ssh
 
 While `juju ssh` does work if you supply it a unit (eg: `mysql/0`) the command
-does not work with machine numbers at this time (`juju ssh 1`). To access a unit
-via ssh make sure to use its corresponding unit name not the machine number.
+does not work with machine numbers at this time (`juju ssh 1`). To access a unit via ssh make sure to use its corresponding unit name not the machine number.

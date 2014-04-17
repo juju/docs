@@ -10,7 +10,7 @@ need:
 
 # Installation
 
-## Ubuntu
+[Ubuntu](.) [Mac OSX](.) [Windows](.)
 
 To install Juju, you simply need to grab the latest juju-core package from the
 PPA:
@@ -18,13 +18,9 @@ PPA:
     sudo add-apt-repository ppa:juju/stable
     sudo apt-get update && sudo apt-get install juju-core
 
-## Mac OSX
-
 Juju is in [Homebrew](http://brew.sh/), to install do:
 
     brew install juju
-
-## Windows
 
 Download and run the [Juju windows installer from
 here.](https://juju.ubuntu.com/install/)
@@ -43,9 +39,9 @@ To generate an initial config file, you simply need to run:
 
     juju generate-config
 
-This command will cause a file to be written to your `~/.juju` directory if an
-environments.yaml file does not already exist. It will also create the
-`~./juju` directory if that does not exist.
+This command will cause a file to be written to your ~/.juju directory if an
+environments.yaml file does not already exist. It will also create the ~./juju
+directory if that does not exist.
 
 This file will contain sample profiles for different types of cloud services,
 but you will need to edit the files to provide specific information for your
@@ -57,7 +53,7 @@ more specifics on what needs to be changed, see the relevant sections below.
   - [Configuring for Windows Azure](config-azure.html)
   - [Configuring for HP Cloud](config-hpcloud.html)
   - [Configuring for OpenStack](config-openstack.html)
-  - [Configuring for MAAS](config-maas.html)
+  - [Configuring for bare metal using MAAS](config-maas.html)
   - [Configuring for LXC local provider (Linux)](config-local.html)
 
 # Testing your setup
@@ -75,9 +71,7 @@ bootstrap instance.
 
     juju bootstrap
 
-!!__Note:__ If you have multiple environments configured, you can choose which one
-to address with a particular command by adding the `-e` switch followed by the
-environment name, E.g. `-e hpcloud`.
+**Note:** If you have multiple environments configured, you can choose which one to address with a particular command by adding the `-e` switch followed by the environment name, E.g. `-e hpcloud`.
 
 You may have to wait a few moments for this command to return, as it needs to
 perform various tasks and contact your cloud provider.
@@ -85,26 +79,24 @@ perform various tasks and contact your cloud provider.
 Assuming it returns successfully, we can now deploy some services and explore
 the basic operations of Juju.
 
-To start with, we will deploy WordPress, by running this command:
+To start with, we will deploy Wordpress, by running this command:
 
     juju deploy wordpress
 
-Now juju will fetch the WordPress charm and use it, through the bootstrap
+Now juju will fetch the Wordpress charm and use it, through the bootstrap
 instance to request and deploy whatever resources it needs to set up this
 service.
 
-WordPress needs a database though, so we will also deploy one of those:
+Wordpress needs a database though, so we will also deploy one of those:
 
     juju deploy mysql
 
 Once again, juju will do whatever is necessary to deploy this service for you,
 and it may take some time for the command to return.
 
-!!__Note:__ If you want to get more information on what is actually happening, or
-to help resolve problems, you can add the `--show-log` switch to the juju command
-to get verbose output.
+**Note:** If you want to get more information on what is actually happening, or to help resolve problems, you can add the --show-log switch to the juju command to get verbose output.
 
-Although we have deployed WordPress and a MySQL database, they are not linked
+Although we have deployed Wordpress and a MySQL database, they are not linked
 together in any way yet. To do this we should run:
 
     juju add-relation wordpress mysql
@@ -127,57 +119,55 @@ able to see what services are running, and where they are located.
 
 The output from this command should look something like this:
 
-```yaml
-machines:
-  "0":
-    agent-state: started
-    agent-version: 1.10.0
-    dns-name: ec2-50-16-167-135.compute-1.amazonaws.com
-    instance-id: i-781bf614
-    series: precise
-  "1":
-    agent-state: started
-    agent-version: 1.10.0
-    dns-name: ec2-23-22-225-54.compute-1.amazonaws.com
-    instance-id: i-9e8927f6
-    series: precise
-  "2":
-    agent-state: started
-    agent-version: 1.10.0
-    dns-name: ec2-54-224-220-210.compute-1.amazonaws.com
-    instance-id: i-5c440436
-    series: precise
-services:
-  mysql:
-    charm: cs:precise/mysql-18
-    exposed: false
-    relations:
-      db:
-      - wordpress
-    units:
-      mysql/0:
+    machines:
+      "0":
         agent-state: started
         agent-version: 1.10.0
-        machine: "1"
-        public-address: ec2-23-22-225-54.compute-1.amazonaws.com
-  wordpress:
-    charm: cs:precise/wordpress-12
-    exposed: true
-    relations:
-      db:
-      - mysql
-      loadbalancer:
-      - wordpress
-    units:
-      wordpress/0:
+        dns-name: ec2-50-16-167-135.compute-1.amazonaws.com
+        instance-id: i-781bf614
+        series: precise
+      "1":
         agent-state: started
         agent-version: 1.10.0
-        machine: "2"
-        public-address: ec2-54-224-220-210.compute-1.amazonaws.com
-```
+        dns-name: ec2-23-22-225-54.compute-1.amazonaws.com
+        instance-id: i-9e8927f6
+        series: precise
+      "2":
+        agent-state: started
+        agent-version: 1.10.0
+        dns-name: ec2-54-224-220-210.compute-1.amazonaws.com
+        instance-id: i-5c440436
+        series: precise
+    services:
+      mysql:
+        charm: cs:precise/mysql-18
+        exposed: false
+        relations:
+          db:
+          - wordpress
+        units:
+          mysql/0:
+            agent-state: started
+            agent-version: 1.10.0
+            machine: "1"
+            public-address: ec2-23-22-225-54.compute-1.amazonaws.com
+      wordpress:
+        charm: cs:precise/wordpress-12
+        exposed: true
+        relations:
+          db:
+          - mysql
+          loadbalancer:
+          - wordpress
+        units:
+          wordpress/0:
+            agent-state: started
+            agent-version: 1.10.0
+            machine: "2"
+            public-address: ec2-54-224-220-210.compute-1.amazonaws.com
 
 There is quite a lot of information here. the first section, titled
-`machines:`, details all the instances which are currently running. For each
+**machines:**, details all the instances which are currently running. For each
 you will see the version of Juju they are running, their hostname, instance id
 and the series or version of Ubuntu they are running.
 
@@ -190,7 +180,8 @@ exist.
 From this status readout, we can see that wordpress is exposed and ready. If we
 simply copy the address into a web browser, we should be able to see it running
 
-![Image showing wordpress in a web browser](media/getting_started-wordpress.png)
+![Image showing wordpress in a web browser](./media/getting_started-
+wordpress.png)
 
 Congratulations, you have just deployed a service with Juju!
 

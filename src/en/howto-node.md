@@ -1,4 +1,4 @@
-# Using Juju to Deploy your Node.js Application
+#  Using Juju to Deploy your Node.js Application
 
 One of Juju's main use cases is to deploy your application directly out of
 version control and into a cloud. Since Juju supports local and remote clouds,
@@ -45,12 +45,10 @@ relate them
 open it up to the outside world
 
     juju expose haproxy
-    
 
 Find the haproxy instance's public URL from
 
     juju status
-    
 
 (or attach it to an elastic IP via the AWS console) and open it up in a browser.
 
@@ -70,8 +68,8 @@ laptop and then push out to the public cloud.
 
 We need to configure 2 environments, a local one and a public cloud one.
 
-  1. Configure the [local provider](https://juju.ubuntu.com/docs/config-local.html) on your machine. 
-  2. Configure a public or private cloud on your machine. 
+1. Configure the [local provider](https://juju.ubuntu.com/docs/config-local.html) on your machine. 
+1. Configure a public or private cloud on your machine. 
   - [AWS](https://juju.ubuntu.com/docs/config-aws.html)
   - [HP Cloud](https://juju.ubuntu.com/docs/config-hpcloud.html)
   - [OpenStack](https://juju.ubuntu.com/docs/config-openstack.html)
@@ -162,15 +160,15 @@ application let's also stop spending money:
 This section is to explain how the charm works and is provided here as a
 reference.
 
-###  What the formula does
+###  What the charm does
 
 During the `install` hook,
 
-  - installs `node`/`npm`
-  - clones your node app from the repo specified in `app_repo`
-  - runs `npm` if your app contains `package.json`
-  - configures networking if your app contains `config/config.js`
-  - waits to be joined to a `mongodb` service 
+- installs `node`/`npm`
+- clones your node app from the repo specified in `app_repo`
+- runs `npm` if your app contains `package.json`
+- configures networking if your app contains `config/config.js`
+- waits to be joined to a `mongodb` service 
 
 when related to a `mongodb` service, the formula
 
@@ -214,7 +212,7 @@ This config can be used from within your application using snippets like
     server.listen(config.listen_port);
     ...
 
-Alternatively you could use a a€oeProcfilea€ in root directory like this:
+Alternatively you could use a `Procfile` in root directory like this:
 
     web: node app.js
 

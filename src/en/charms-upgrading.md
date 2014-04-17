@@ -3,5 +3,3 @@
 # Charm upgrades
 
 # Service upgrades
-
-# Juju

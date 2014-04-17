@@ -2,30 +2,23 @@
 <html>
 <!--Head-->
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Juju Documentation</title>
 		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
  		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
-		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
-		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+		<link href="./css/main.css" rel="stylesheet" type="text/css" />
 		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
 <!--End-Head-->
-
-
-
-
-
-
 
   <body class="resources">
   	
@@ -97,7 +90,7 @@
                         <pre class="prettyprint">juju deploy mysql</pre>
 
                         <p>Running this will do exactly what you expect - fetch
-                        the latest juju charm for the series you are running
+                        the latest Juju charm for the series you are running
                         and then use the bootstrap environment to initiate a
                         new instance and deploy MySQL</p>
 
@@ -108,7 +101,7 @@
                         <pre class="prettyprint">juju deploy cs:precise/mysql</pre>
 
                         <p>which follows the format:</p>
-                        <pre class="prettyprint">&LT;repository&GT;:&LT;series&GT;/&LT;service&GT;</pre>
+                        <pre class="prettyprint">&lt;repository&gt;:&lt;series&gt;/&lt;service&gt;</pre>
 
                         <h1 id="local">Deploying from a local repository</h1>
 
@@ -130,20 +123,50 @@
                         imagine yourselves.</p>
 
                         <p>Juju can be pointed at a local directory to source
-                        charms from using the <code>--repository=&LT;path/to/files&GT;</code>
+                        charms from using the <code>--repository=&lt;path/to/files&gt;</code>
                         switch like this:</p>
-<pre class="prettyprint">juju deploy --repository=/usr/share/charms/ local:precise/vsftpd</pre>
+
+<pre class="prettyprint lang-bash">
+juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
+</pre>
+
+                        <p>The <code>--repository</code>: switch can be omitted
+                        when shell environment defines
+                        <code>JUJU_REPOSITORY</code> like so:</p>
+
+<pre class="prettyprint lang-bash">
+export JUJU_REPOSITORY=/usr/share/charms/
+juju deploy local:trusty/vsftpd
+</pre>
 
                         <p>You can also make use of standard filesystem
-                        shortcuts, so the following examples are also
-                        valid:</p>
+                        shortcuts, if the environment specifies the
+                        <code>default-series</code>.The following examples
+                        will deploy the trusty charms in the local repository
+                        when default-series is set to trusty:</p>
 
-                        <pre class="prettyprint">
+<pre class="prettyprint lang-bash">
 juju deploy --repository=. local:haproxy
-juju deploy --repository ~/charms/ local:wordpress</pre>
+juju deploy --repository ~/charms/ local:wordpress
+</pre>
+
+                        <p>The default-series can
+                        be specified in environments.yaml thusly:</p>
+
+<pre class="prettyprint lang-yaml">
+default-series: precise
+</pre>
+
+                        <p>The default-series can also be added to any
+                        bootstrapped environment with the
+                        <code>set-env </code>:</p>
+
+<pre class="prettyprint lang-bash">
+juju set-env "default-series=trusty"
+</pre>
 
                         <p class="note"><strong>Note:</strong> Specifying a
-                        local repository makes juju look there
+                        local repository makes Juju look there
                         <strong>first</strong>, but if the relevant charm is
                         not found in that repository, it will fall back to
                         fetching it from the charm store. If you wish to check
@@ -152,7 +175,7 @@ juju deploy --repository ~/charms/ local:wordpress</pre>
 
                         <h1>A note about caching...</h1>
 
-                        <p>After juju resolves a charm and its dependencies, it
+                        <p>After Juju resolves a charm and its dependencies, it
                         bundles them and deploys them to a machine provider
                         charm cache/repository (e.g. ~/.juju/charmcache). This
                         allows the same charm to be deployed to multiple
@@ -316,6 +339,7 @@ juju add-unit rabbitmq-server
                             </li>
                         </ul>
                     </section>
+                  </article>
 <!--Postamble-->
         </div>
       </div>
@@ -333,17 +357,17 @@ juju add-unit rabbitmq-server
 						<li>
 							<h2><a href="/">Juju</a></h2>
 							<ul>
-								<li><a href="/charms">Charms</a></li>
-								<li><a href="/features">Features</a></li>
-								<li><a href="/deployment">Deployment</a></li>
+								<li><a href="/charms/">Charms</a></li>
+								<li><a href="/features/">Features</a></li>
+								<li><a href="/deployment/">Deployment</a></li>
 							</ul>
 						</li>
 						<li>
-							<h2><a href="/resources">Resources</a></h2>
+							<h2><a href="/resources/">Resources</a></h2>
 							<ul>
-								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/resources/overview/">Overview</a></li>
 								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
 								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
 								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
 								<li><a href="/resources/videos/">Videos</a></li>
@@ -359,7 +383,7 @@ juju add-unit rabbitmq-server
 								<li><a href="/community/charmers/">Charmers</a></li>
 								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
 								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
 							</ul>
 						</li>
 						<li>
@@ -374,12 +398,11 @@ juju add-unit rabbitmq-server
 			</div>
 		</nav>
 		<div class="legal clearfix">
-			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
 		</div>
 	</footer>
 
 <!--End-Footer-->
-
 
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
@@ -404,10 +427,5 @@ juju add-unit rabbitmq-server
    })();
     </script>
 <!--End-Scripts-->
-
-
-
-
-
 
 </body></html>

@@ -43,28 +43,36 @@ Before you start you will need:
 
 Once you have those, fire up Inkscape and we can begin!
 
+1
+
 ## Open the template!
 
-From Inkscape load the __icon.svg__ file. Select the Layer called "BACKGROUND",
+From Inkscape load the **icon.svg** file. Select the Layer called "BACKGROUND",
 either from the drop down at the bottom, or from the layer dialog.
 
 ![Step one](./media/author-charm-icons-1.png)
 
+2
+
 ## Add colour
 
-Select __Object&GT;Fill and Stroke__ from the menu to adjust the colour. Apply a
+Select **Object&GT;Fill and Stroke** from the menu to adjust the colour. Apply a
 flat colour or a gradient, but make sure you edit the gradient file to make it
 lighter at the top and darker at the bottom.
 
 ![Step two](./media/author-charm-icons-2.png)
 
+3
+
 ## Show the guides
 
 Choose the "PICTOGRAM" layer, which is where your logo will live. To help you
-place it properly, choose __View&GT;Guides__ from the menu. A grid will appear
+place it properly, choose **View&GT;Guides** from the menu. A grid will appear
 showing the limits of the pictogram area.
 
 ![Step three](./media/author-charm-icons-3.png)
+
+4
 
 ## Draw something
 
@@ -77,14 +85,18 @@ and delete the bitmap.
 
 ![Step four](./media/author-charm-icons-4.png)
 
+5
+
 ## Add a shadow
 
 If you want to apply a drop shadow to your design to make it stand out from the
 background a bit more, there is a quick filter to help. Choose
-__Filter&GT;Filter Editor__ from the menu and select "Drop shadow" from the
+**Filter&GT;Filter Editor** from the menu and select "Drop shadow" from the
 list.
 
 ![Step five](./media/author-charm-icons-5.png)
+
+6
 
 ## Check it over
 

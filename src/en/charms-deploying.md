@@ -11,57 +11,66 @@ relevant charm, so deploying can be straightforward and easy.
 
 # Deploying from the Charm Store
 
-In most cases, you will want to deploy charms by fetching them directly from the
-charm store. This ensures that you get the relevant, up to date version of the
-charm and "everything just works". To deploy a charm like this you can just
+In most cases, you will want to deploy charms by fetching them directly from the charm store. This ensures that you get the relevant, up to date version of the charm and "everything just works". To deploy a charm like this you can just
 specify:
 
     juju deploy mysql
 
-Running this will do exactly what you expect - fetch the latest juju charm for
+Running this will do exactly what you expect - fetch the latest Juju charm for
 the series you are running and then use the bootstrap environment to initiate a
 new instance and deploy MySQL
 
-Juju usefully supports a system of namespaces that means you can actually deploy
-charms from a variety of sources. The default source is the charm store. The
-above command is the same as running:
+Juju usefully supports a system of namespaces that means you can actually deploy charms from a variety of sources. The default source is the charm store. The above command is the same as running:
 
     juju deploy cs:precise/mysql
 
 which follows the format:
 
-    &LT;repository&GT;:&LT;series&GT;/&LT;service&GT;
+    <repository>:<series>/<service>
 
 # Deploying from a local repository
 
 There are many cases when you may wish to deploy charms from a local filesytem
 source rather than the charm store:
 
-  - When testing charms you have written.
-  - When you have modified store charms for some reason.
-  - When you don't have direct internet access.
+- When testing charms you have written.
+- When you have modified store charms for some reason.
+- When you don't have direct internet access.
 
 ... and probably a lot more times which you can imagine yourselves.
 
 Juju can be pointed at a local directory to source charms from using the
-`\--repository=&LT;path/to/files&GT;` switch like this:
+`--repository=<path/to/files>` switch like this:
 
-    juju deploy --repository=/usr/share/charms/ local:precise/vsftpd
+    juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
 
-You can also make use of standard filesystem shortcuts, so the following
-examples are also valid:
+The `--repository`: switch can be omitted when shell environment defines
+`JUJU_REPOSITORY` like so:
+
+    export JUJU_REPOSITORY=/usr/share/charms/
+    juju deploy local:trusty/vsftpd
+
+You can also make use of standard filesystem shortcuts, if the environment
+specifies the `default-series`.The following examples will deploy the trusty
+charms in the local repository when default-series is set to trusty:
 
     juju deploy --repository=. local:haproxy
     juju deploy --repository ~/charms/ local:wordpress
 
-!!__Note:__ Specifying a local repository makes juju look there __first__, but if
-the relevant charm is not found in that repository, it will fall back to
-fetching it from the charm store. If you wish to check where a charm was
-installed from, it is listed in the `juju status` output.
+The default-series can be specified in environments.yaml thusly:
+
+    default-series: precise
+
+The default-series can also be added to any bootstrapped environment with the
+`set-env `:
+
+    juju set-env "default-series=trusty"
+
+**Note:** Specifying a local repository makes Juju look there **first**, but if the relevant charm is not found in that repository, it will fall back to fetching it from the charm store. If you wish to check where a charm was installed from, it is listed in the `juju status` output.
 
 # A note about caching...
 
-After juju resolves a charm and its dependencies, it bundles them and deploys
+After Juju resolves a charm and its dependencies, it bundles them and deploys
 them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache).
 This allows the same charm to be deployed to multiple machines repeatably and
 with minimal network transfers.
@@ -73,9 +82,7 @@ to. This is useful for a few reasons. The most obvious reason is to save money
 when deploying to a public cloud. Instead of having one machine per unit we can
 consolidate services.
 
-In this example we use the `\--constraints` flag to fire up a bootstrap node
-with 4G of RAM so we can deploy other services to it by using the `\--to`
-command:
+In this example we use the `--constraints` flag to fire up a bootstrap node with 4G of RAM so we can deploy other services to it by using the `--to` command:
 
     juju bootstrap --constraints="mem=4G"
     juju deploy --to 0 mysql
@@ -97,7 +104,7 @@ Note that you need to know the identifier of the machine that you are going to
 the above example works nicely. Doing a `juju status` will show you a list of
 all the machines and their machine numbers for you to decide what to deploy to.
 
-The `add-unit` command also supports the `\--to` option, so it's now possible to
+The `add-unit` command also supports the `--to` option, so it's now possible to
 specifically target machines when expanding service capacity:
 
     juju deploy --constraints="mem=4G" openstack-dashboard
@@ -180,8 +187,8 @@ network ports. We are working to containerize everything so that this does not
 happen and every service is in its own container, but this work is not yet
 complete.
 
-While the "add-unit" command supports the `\--to` option, you can elect not use
-`\--to` when doing an "add-unit" to scale out the service on its own node.
+While the "add-unit" command supports the `--to` option, you can elect not use
+`--to` when doing an "add-unit" to scale out the service on its own node.
 
     juju add-unit rabbitmq-server
 

@@ -2,10 +2,7 @@
 
 Juju has a graphical user interface (GUI) available to help with the tasks of
 managing and monitoring your Juju environment. The GUI is a JavaScript and HTML
-web application that is encapsulated in its own charm, which can be installed to
-its own service or alongside another service. Once installed, the GUI will talk
-with Juju over a websocket to provide a real-time interface with the services
-installed, the units that comprise them, and the machines available.
+web application that is encapsulated in its own charm, which can be installed to its own service or alongside another service. Once installed, the GUI will talk with Juju over a websocket to provide a real-time interface with the services installed, the units that comprise them, and the machines available.
 Additionally, the GUI can talk with the charm store in order to search, browse,
 and deploy charms to your environment.
 
@@ -17,8 +14,7 @@ Installing the GUI works the same as installing any other charm:
     juju expose juju-gui
 
 Once the service is deployed and exposed, you can find the address for the GUI
-by running juju status and looking for the public-address field for the juju-gui
-service
+by running juju status and looking for the public-address field for the juju-gui service.
 
 In more recent versions of Juju, you can also deploy the GUI along-side another
 service on an existing machine. This might be the case if you wish to conserve
@@ -30,15 +26,11 @@ resources. The following command will deploy juju-gui to an existing machine 1:
 Check `juju help deploy` to find out more about this option, and whether or not
 it is available in your version.
 
-!!__Note:__ If you are deploying behind a firewall, make sure to check out the
-charm's [README](https://jujucharms.com/fullscreen/search/precise/juju-gui/#bws-
-readme) for more information on getting the GUI up and running and talking to
-your environment
+**Note:** If you are deploying behind a firewall, make sure to check out the charm's [README](https://jujucharms.com/fullscreen/search/precise/juju-gui/#bws-readme) for more information on getting the GUI up and running and talking to your environment
 
 ## Configuration
 
-There are a few pertinent configuration options that might help you when working
-with the GUI. You can read about all of them on the GUI's [charm
+There are a few pertinent configuration options that might help you when working with the GUI. You can read about all of them on the GUI's [charm
 page](https://jujucharms.com/fullscreen/search/precise/juju-gui/), but there is
 one that is worth discussing immediately:
 
@@ -49,9 +41,7 @@ with all of their meta-data, in a read-only mode, meaning that you will not be
 able to make changes to the environment through the GUI. This is good for a
 monitoring type scenario.
 
-!!__Note:__ read-only mode in the GUI simply prevents actions taken within the GUI
-from being sent to the Juju environment, and is *not* additional security
-against the Juju API.
+**Note:** read-only mode in the GUI simply prevents actions taken within the GUI from being sent to the Juju environment, and is _not_ additional security against the Juju API.
 
 # Using the GUI
 
@@ -97,10 +87,7 @@ will give you the option to configure and deploy a new service.
 
 ![](./media/gui_mangement-charmstore.png)
 
-Once deployed, clicking on the service will allow you to not only view the units
-and machines comprising it, but also to scale the service out or back, change
-constraints on new units, re-configure the service, resolve or retry units in an
-error state and more.
+Once deployed, clicking on the service will allow you to not only view the units and machines comprising it, but also to scale the service out or back, change constraints on new units, re-configure the service, resolve or retry units in an error state and more.
 
 Relations can be added between services - even in the case of ambiguous
 relationships, such as a master or slave database - by clicking the 'add
@@ -117,3 +104,5 @@ them.
 
 For an example of this, check out this demonstration of building an OpenStack
 instance in Juju using the GUI:
+
+[video goes here]

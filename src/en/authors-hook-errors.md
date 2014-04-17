@@ -39,3 +39,13 @@ except during development.
 They can be resolved either by forcing an upgrade to a different charm version,
 or by manually resolving the git conflicts in the charm directory and running
 `juju resolved` to cause the unit agent to continue.
+
+## Charm integrity errors
+
+Some charms use symlinks to redirect hook execution to a common file. Naturally
+these symlinks must be preserved to allow proper operation of the charm. If you
+are developing a charm and manually copy it over to a system, you should verify
+that the hook symlinks are preserved as expected. For example, `scp` will follow
+symlinks, not replicate them, which can lead to a broken charm.
+
+We recommend using either `rsync` or generating a tarball of your charm first if you're going to use `scp`.

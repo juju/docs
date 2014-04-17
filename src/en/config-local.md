@@ -4,8 +4,7 @@ The purpose of the "local provider" is to provide a testing ground or sandbox
 for users to experiment with Juju and speed up the process of writing charms.
 Although Juju is intended to work on bare metal (via
 [MAAS](http://maas.ubuntu.com)) or through a variety of cloud providers or your
-own private cloud, it can also be configured to run solely on a local machine by
-means of containers or virtualisation.
+own private cloud, it can also be configured to run solely on a local machine by means of containers or virtualisation.
 
 Currently, the only stable implementation of this is using the Linux containers
 system, LXC ([see linuxcontainers.org](http://linuxcontainers.org/)). However,
@@ -20,4 +19,3 @@ The following pages cover the different local providers available:
   - [Installing and configuring Juju for LXC (Linux)](./config-LXC.html)
   - [Using Juju with Vagrant(Linux/Mac/Windows)](./config-vagrant.html)`Beta!`
   - Running Juju with virtualised containers. `Coming Soon!`
-

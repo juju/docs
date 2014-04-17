@@ -1,4 +1,4 @@
-# Using Juju to Deploy your Rails Application
+#  Using Juju to Deploy your Rails Application
 
 One of Juju's main use cases is to deploy your application directly out of
 version control and into a cloud. Since Juju supports local and remote clouds,
@@ -18,9 +18,10 @@ Before moving on you should have gone through the [Getting
 Started](https://juju.ubuntu.com/docs/getting-started.html) section and
 installed and configured Juju.
 
-## Basic Usage of the Ruby on Rails Charm
+##  Basic Usage of the Ruby on Rails Charm
 
 Create a YAML config file with your application's name and its git location
+
 `sample-app.yaml`
 
     sample-app:
@@ -68,8 +69,8 @@ laptop and then push out to the public cloud.
 
 We need to configure 2 environments, a local one and a public cloud one.
 
-  1. Configure the [local provider](./config-local.html) on your machine. 
-  2. Configure a public or private cloud on your machine. 
+1. Configure the [local provider](./config-local.html) on your machine. 
+1. Configure a public or private cloud on your machine. 
   - [AWS](./config-aws.html)
   - [HP Cloud](./config-hpcloud.html)
   - [OpenStack](./config-openstack.html)
@@ -82,6 +83,7 @@ and bootstrap.
     juju bootstrap
 
 Create a YAML config file with your application's name and its git location
+
 `sample-app.yaml`
 
     sample-app:
@@ -99,7 +101,7 @@ and relate them:
 Now open up your browser and go to `http://localhost` to get your application
 loaded in your browser.
 
-### Continuous Deployment
+###  Continuous Deployment
 
 Continue to write your code, push to git as you land features and fixes. When
 you're ready to test it you can tell Juju to check the git repository again:
@@ -112,7 +114,7 @@ The charm will then fetch the latest code and you can refresh your browser at
 Repeat pushing to git and using the juju set command to keep a live instance of
 your application running in your local environment.
 
-### Push to your Public/Private Cloud
+###  Push to your Public/Private Cloud
 
 After you've repeatedly upgraded your application locally it's time to push it
 out to a place where your coworkers can see your app in all its glory, let's
@@ -152,8 +154,8 @@ The local containers survive reboots and do not go away until you explicitly
 tear the environment down. Now that your coworkers have seen your great
 application let's also stop spending money:
 
-    juju destroy-environment -e amazon
-    juju destroy-environment -e local
+    $ juju destroy-environment -e amazon
+    $ juju destroy-environment -e local
 
 ##  Charm Details
 

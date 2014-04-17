@@ -6,7 +6,7 @@ manage a charms.
 
 # Installation
 
-## Ubuntu
+[Ubuntu](.) [Mac OSX](.) [Windows](.)
 
 To install the latest Charm Tools, you simply need to grab the latest charm-
 tools package from this PPA:
@@ -14,16 +14,12 @@ tools package from this PPA:
     sudo add-apt-repository ppa:juju/stable
     sudo apt-get update && sudo apt-get install charm-tools
 
-## Mac OSX
-
 Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
 running the latest version of homebrew before proceeding.
 
 To install, run the following:
 
     brew install charm-tools
-
-## Windows
 
 Charm Tools is available for, and tested, on Microsoft Windows 7 and 8. While
 the installer may work on previous versions of Windows there is no guarentee.
@@ -47,7 +43,7 @@ replace all instances of `juju charm` with just `charm`.
 
 There are several tools available within charm tools itself. At any time you can
 run `juju charm` to view the available subcommands and all subcommands have
-independent help pages, accesible using either the `-h` or `\--help` flags.
+independent help pages, accesible using either the `-h` or `--help` flags.
 
 ## Add
 
@@ -77,6 +73,8 @@ will need to be modified.
 
     juju charm add tests
 
+* * *
+
 ## Create
 
     juju charm create [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
@@ -92,9 +90,6 @@ provided.
 Below is an example of the charm structure created during `juju charm create`
 
     juju charm create my-charm
-
-This will produce a skeleton of a charm:    
-    
     my-charm
     ├── config.yaml
     ├── hooks
@@ -111,6 +106,8 @@ This will produce a skeleton of a charm:
     ├── metadata.yaml
     ├── README.ex
     └── revision
+
+* * *
 
 ## Get
 
@@ -130,6 +127,8 @@ Will download the MySQL charm to a mysql directory within your current path.
 
 Will download the WordPress charm to `~/charms/precise/wordpress`
 
+* * *
+
 ## Getall
 
     juju charm getall [-h|--help] [CHARMS_DIRECTORY]
@@ -138,6 +137,8 @@ Similar to `get`, `getall` will fetch all official charm store charms and place
 them in the `CHARMS_DIRECTORY`, or your current directory if no
 `CHARMS_DIRECTORY` is provided. This command can take quite a while to complete
 - there are a lot of charms!
+
+* * *
 
 ## Info
 
@@ -172,13 +173,13 @@ will prevent promulgation if errors occur.
 
 ### Promulgate Options
 
-  - `-b`, `\--branch`: The location of the charm public branch. Will be determined from the bzr configuration if omitted.
-  - `-s`, `\--series`: The distribution series on which to set the official branch. Defaults to setting it in the current development series (LTS).
-  - `-v`, `\--verbose`: Increase verbosity level.
-  - `-u`, `\--unpromulgate`: Un-promulgate this branch instead of prolugating it.
-  - `-f`, `\--force`: Override warnings and errors. USE WITH EXTREME CARE!
-  - `-w`, `\--ignore-warnings`: Promulgate this branch even with warnings from charm proof.
-  - `-o`, `\--owner-branch`: Promulgate a branch owned by a someone/group other than ~charmers.
+  - `-b`, `--branch`: The location of the charm public branch. Will be determined from the bzr configuration if omitted.
+  - `-s`, `--series`: The distribution series on which to set the official branch. Defaults to setting it in the current development series (LTS).
+  - `-v`, `--verbose`: Increase verbosity level.
+  - `-u`, `--unpromulgate`: Un-promulgate this branch instead of prolugating it.
+  - `-f`, `--force`: Override warnings and errors. USE WITH EXTREME CARE!
+  - `-w`, `--ignore-warnings`: Promulgate this branch even with warnings from charm proof.
+  - `-o`, `--owner-branch`: Promulgate a branch owned by a someone/group other than ~charmers.
 
 ## Proof
 
@@ -200,6 +201,8 @@ This provides a copy of the [juju charms review
 queue](http://manage.jujucharms.com/review-queue) which is used by ~charmers to
 know which charms are available for review.
 
+* * *
+
 ## Search
 
     juju charm search [-h|--help]
@@ -207,6 +210,8 @@ know which charms are available for review.
 This provides a copy of the [juju charms review
 queue](http://manage.jujucharms.com/review-queue) which is used by ~charmers to
 know which charms are available for review.
+
+* * *
 
 ## unpromulgate
 

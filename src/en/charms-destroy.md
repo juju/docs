@@ -1,59 +1,47 @@
 # Removal within Juju
 
 Juju isn't just about magically spinning up services as and when you need them,
-it is also about quickly, sanely and efficiently destroying everything when you
-no longer need it. This section deals with the sort of things you can ruthlessly
+it is also about quickly, sanely and efficiently removing something when you no
+longer need it. This section deals with the sort of things you can ruthlessly
 destroy, and how to go about it.
 
-## Destroying/Removing Services
+## Removing Services
 
 Once a service is no longer required it can be removed with a simple command.
 
-    juju destroy-service &LT;service-name&GT;
+    juju remove-service <service-name>
 
-!!__Warning!:__ Destroying a service which has active relations with another
-running service will break that relation. This can cause errors in both
-services, as such review and potentially remove any relationships first.
+**Warning!:** Removing a service which has active relations with another running service will break that relation. This can cause errors in both services, as such review and potentially remove any relationships first.
 
 A service can take a while to "die", but if running a juju status reveals that
 the service is listed as dying, but also reports an error state, then the
 zombied service will still be hanging around. See caveats for how to manage
 services in a dying state.
 
-!!__Note:__ Destroying a service removes that service, but not any nodes which may
-have been created for it to run on. This is juju's way of preserving data to the
-best of its ability. See Destroying Machines for additional details.
+**Note:** Destroying a service removes that service, but not any nodes which may have been created for it to run on. This is juju's way of preserving data to the best of its ability. See Destroying Machines for additional details.
 
-## Destroying Units
+## Removing Units
 
 It is also possible to spin down individual units, or a sequence of units
 running within a service:
 
     juju remove-unit mediawiki/1
 
-The `remove-unit` command is an alias for `destroy-unit`, and can be used
-interchangeably, so the above is identical to:
-
-    juju destroy-unit mediawiki/1
-
 If you wish to remove more than one unit, you may list them all following the
 command:
 
     juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2 ...
 
-!!__Note:__ As with destroying a service, removing units will NOT actually remove
-any instances which were created, it only removes the service units. More
-details can be found in the [Scaling Services](charms-scaling.html) section.
+**Note:** As with removing a service, removing units will NOT actually remove any instances which were created, it only removes the service units. More details can be found in the [Scaling Services](charms-scaling.html) section.
 
-As with destroying services, See caveats for how to manage units in a dying
-state.
+As with removing services, See caveats for how to manage units in a dying state.
 
-## Destroying Machines
+## Removing Machines
 
 Instances or machines which have no currently assigned workload can be removed
 from your cloud using the following command:
 
-    juju destroy-machine &LT;number&GT;
+    juju remove-machine <number>
 
 A machine which is currently idle will be removed almost instantaneously from
 the cloud, along with anything else which may have been on the instance which
@@ -67,23 +55,19 @@ form:
 ## Destroying Environments
 
 To completely remove and terminate all running services, the instances they were
-running on and the bootstrap node itself, simply run the command:
+running on and the bootstrap node itself, you need to run the command:
 
-    juju destroy-environment
+    juju destroy-environment <environment>
 
 This will completely remove all instances running under the current environment
-profile. You can of course specify a different environment profile using the
-`-e` switch, or any one of [these other](config-environments.html) methods:
+profile. As there is no 'undo' capability, some further safety precautions have
+been added to this command.
 
-    juju destroy-environment -e mycloud
-
-You should be pretty sure that this is what you want to do, as there is no undo
-command! Everything in the selected environment will be removed.
+- You will be prompted to confirm the destruction of the environment
 
 ## Removing Relations
 
-To remove relations between deployed services, you should see [ the docs section
-on charm relationships](charms-relations.html#removing).
+To remove relations between deployed services, you should see [ the docs section on charm relationships](charms-relations.html#removing).
 
 ## Caveats
 
@@ -101,12 +85,9 @@ this run
 
     juju resolved <unit>
 
-to have the next event processed. You may need to run the `resolved` command run
-several times against a unit.
+to have the next event processed. You may need to run the `resolved` command run several times against a unit.
 
 If the unit isn't in an error state, there may be an error elsewhere in the
 environment. Since removing a unit or destroying a service also breaks the
 relation, if there's an error in the relation-removal event on one or more of
-the connected services that may also halt the event loop for that unit. Check to
-make sure no other units are in an error state and clear those using the `juju
-resolved` command.
+the connected services that may also halt the event loop for that unit. Check to make sure no other units are in an error state and clear those using the `juju resolved` command.

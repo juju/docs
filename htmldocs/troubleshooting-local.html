@@ -2,24 +2,25 @@
 <html>
 <!--Head-->
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Juju Documentation</title>
 		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
  		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
 		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
-		<link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
-		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
+		<link href="./css/main.css" rel="stylesheet" type="text/css" />
 		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
 <!--End-Head-->
+
+
 
 
 
@@ -79,15 +80,15 @@
     	<section id="bootstrap_fails">
     	<h2>Bootstrap fails</h2>
 
-		<p>Every time bootstrap fails, you'll need to run <code>sudo juju destroy-environment</code> prior to continuing. First let's rerun a bootstrap in debug mode:</p>
+		<p>Every time bootstrap fails, you'll need to run <code>juju destroy-environment -e local</code> prior to continuing. First let's rerun a bootstrap in debug mode:</p>
 
 <pre class="prettyprint lang-bash">
-sudo juju boostrap --show-log --debug
+juju boostrap --show-log --debug
 </pre>
 
 		<p>This will print very verbose output. If you're receiving <code>connection failed, will retry: dial tcp 127.0.0.1:37017: connection refused</code> error at the end of the run, proceed with the troubleshooting guide. If not the error presented will inform you what went wrong.</p>
 
-		<p>In certain cases you might get this something similar to thiserror: <code>Get http://10.0.3.1:8040/provider-state: dial tcp 10.0.3.1:8040: connection refused</code>.
+		<p>In certain cases you might get this something similar to thiserror: <code>Get http://10.0.3.1:8040/provider-state: dial tcp 10.0.3.1:8040: connection refused</code>.</p>
 
 		<p>This can be solved by removing miscellaneous .jenv files in <code>~/.juju/environments</code> and rerunning the bootstrap command.</p>
 		</section>
@@ -97,31 +98,31 @@ sudo juju boostrap --show-log --debug
 
 		<p>This occurs when the juju API server and Database server fail to start within the alloted timeout. This can occur for one of several reasons. After the bootstrap command fails run the following command:</p>
 
-<pre class="prettyprint">
+<pre class="prettyprint lang-bash">
 sudo initctl list | grep juju
 </pre>
 
-		<p>You should see two jobs listed. One that starts with <code>juju-db</code> the other <code>juju-agent</code>. If these are both in a start/running state then your machine took longer than juju expected to get these services started. If you're on an encrypted partition see TODO: INSTRUCTIONS ON THIS. If you're not TODO: <INSTRUCTIONS ON RAM DISK DOES NOT EXIST>.</p>
+		<p>You should see two jobs listed. One that starts with <code>juju-db</code> the other <code>juju-agent</code>. If these are both in a start/running state then your machine took longer than juju expected to get these services started. If you're on an encrypted partition see TODO: INSTRUCTIONS ON THIS. If you're not TODO: INSTRUCTIONS ON RAM DISK DOES NOT EXIST.</p>
 
 		<p>If either of these have stopped, investigate the logs at <code>/var/log/upstart/juju-db*.log</code> or <code>/var/log/upstart/juju-agent*.log</code> If the juju-db service failed to start with messages of unsupported command-line options, check the version of mongodb installed:</p>
 
-<pre class="prettyprint">
+<pre class="prettyprint lang-bash">
 dpkg -l | grep mongodb-server
 </pre>
 
-		<p>If you have a version less than 1:2.2.4-0ubuntu1 make sure you have either the <a href="https://wiki.ubuntu.com/ServerTeam/CloudToolsArchive">Cloud Tools Archive</a> or ppa:juju/stable added to your system. <code>sudo apt-get update</code> then install juju-local package. Before retrying, make sure you run <code>sudo juju destroy-environment</code>
+		<p>If you have a version less than 1:2.2.4-0ubuntu1 make sure you have either the <a href="https://wiki.ubuntu.com/ServerTeam/CloudToolsArchive">Cloud Tools Archive</a> or ppa:juju/stable added to your system. <code>sudo apt-get update</code> then install juju-local package. Before retrying, make sure you run <code>juju destroy-environment</code></p>
 		</section>
 
 	    <section id="no_machines_start">
         <h2>No machines start</h2>
 
-		<p>If you get a successful bootstrap, but services you deploy never come up, there's a chance that you have an older version of the Ubuntu Cloud Image cached on your machine. To verify this, check the timestamp of the contents in <code>/var/cache/lxc/cloud-precise/</code>
+		<p>If you get a successful bootstrap, but services you deploy never come up, there's a chance that you have an older version of the Ubuntu Cloud Image cached on your machine. To verify this, check the timestamp of the contents in <code>/var/cache/lxc/cloud-precise/</code></p>
 
 <pre class="prettyprint lang-bash">
 ls -lh /var/cache/lxc/cloud-precise/
 </pre>
 
-		<p>If the contents of this directory are older than a few weeks, delete files present, destroy the environment with `sudo juju destroy-environment`, rebootstrap and attempt deployment again.</p>
+		<p>If the contents of this directory are older than a few weeks, delete files present, destroy the environment with <code>juju destroy-environment</code>, rebootstrap and attempt deployment again.</p>
 		</section>
 
 </article>
@@ -141,17 +142,17 @@ ls -lh /var/cache/lxc/cloud-precise/
 						<li>
 							<h2><a href="/">Juju</a></h2>
 							<ul>
-								<li><a href="/charms">Charms</a></li>
-								<li><a href="/features">Features</a></li>
-								<li><a href="/deployment">Deployment</a></li>
+								<li><a href="/charms/">Charms</a></li>
+								<li><a href="/features/">Features</a></li>
+								<li><a href="/deployment/">Deployment</a></li>
 							</ul>
 						</li>
 						<li>
-							<h2><a href="/resources">Resources</a></h2>
+							<h2><a href="/resources/">Resources</a></h2>
 							<ul>
-								<li><a href="/resources/juju-overview/">Overview</a></li>
+								<li><a href="/resources/overview/">Overview</a></li>
 								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
 								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
 								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
 								<li><a href="/resources/videos/">Videos</a></li>
@@ -167,7 +168,7 @@ ls -lh /var/cache/lxc/cloud-precise/
 								<li><a href="/community/charmers/">Charmers</a></li>
 								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
 								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/labs/">Juju Labs</a></li>
+								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
 							</ul>
 						</li>
 						<li>
@@ -182,11 +183,13 @@ ls -lh /var/cache/lxc/cloud-precise/
 			</div>
 		</nav>
 		<div class="legal clearfix">
-			<p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
 		</div>
 	</footer>
 
 <!--End-Footer-->
+
+
 
 <!--Scripts-->
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
@@ -211,6 +214,8 @@ ls -lh /var/cache/lxc/cloud-precise/
    })();
     </script>
 <!--End-Scripts-->
+
+
 
 
 
