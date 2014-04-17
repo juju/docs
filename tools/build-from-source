@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for f in src/en/*.md; do
+  echo "Converting $(basename $f)"
+  txt=`markdown_py -x partial_gfm $f`
+  DOCNAV="$(cat src/navigation.tpl)" CONTENT=$txt cheetah fill --stdout --env src/base.tpl > htmldocs/`basename ${f%.*}`.html
+done
