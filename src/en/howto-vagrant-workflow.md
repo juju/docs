@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 #  Vagrant Juju Workflow on OSX
 
 Developing charms on Ubuntu is an extremely straight forward process thanks to
@@ -32,10 +15,10 @@ solution like [Vagrant](config-vagrant.html)!
 To start you will want to ensure you've got the following tools installed on
 your development machine:
 
-  - [Homebrew](http://brew.sh)
-  - [Vagrant](http://vagrantup.com)
-  - [VirtualBox](https://www.virtualbox.org/)
-  - [Juju](http://juju.ubuntu.com)
+- [Homebrew](http://brew.sh)
+- [Vagrant](http://vagrantup.com)
+- [VirtualBox](https://www.virtualbox.org/)
+- [Juju](http://juju.ubuntu.com)
 
 ### Fetching the boxfile
 
@@ -203,11 +186,9 @@ Ensure that you have sshuttle installed
 
 **Note:** If your local network is using 10.0.3.x you will need to alter the Juju networking in the vagrant box, and substitute the network provided in the command above
 
-When prompted for the password enter `vagrant` and you should see output similar
-to the following:
+When prompted for the password enter `vagrant` and you should see output similar to the following:
 
-Now we are free to connect to genghis. Open up the Genghis running unit list and
-click on the Genghis host, then click on the port 80 link in the service detail.
+Now we are free to connect to genghis. Open up the Genghis running unit list and click on the Genghis host, then click on the port 80 link in the service detail.
 
 ![](media/howto-vagrant-workflow-juju-gui-wait.png)
 
@@ -218,39 +199,6 @@ click on the Genghis host, then click on the port 80 link in the service detail.
 With vagrant fully setup, our charm deployed. We can now iterate over our charm
 and update/test via normal means.
 
-  - Make edits on your HOST in your favorite editor
-  - run commands inside the JujuBox vagrant environment. `juju upgrade-charm genghis`
-  - view results in our HOST browser of choice.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
+- Make edits on your HOST in your favorite editor
+- run commands inside the JujuBox vagrant environment. `juju upgrade-charm genghis`
+- view results in our HOST browser of choice.

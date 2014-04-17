@@ -1,30 +1,10 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Manual Provisioning
 
 ## Introduction
 
 Juju provides a feature called "manual provisioning" that enables you to deploy
 Juju, and charms, to existing systems. This is useful if you have groups of
-machines that you want to use for Juju but don't want to add the complexity of a
-new OpenStack or MAAS setup. It is also useful as a means of deploying workloads
-to VPS providers and other cheap hosting options. We will describe in this
-section how to configure an environment using this feature.
+machines that you want to use for Juju but don't want to add the complexity of a new OpenStack or MAAS setup. It is also useful as a means of deploying workloads to VPS providers and other cheap hosting options. We will describe in this section how to configure an environment using this feature.
 
 ## Prerequisites
 
@@ -40,8 +20,8 @@ switching to the Manual provider by using the command:
     juju generate-config
     juju switch manual
 
-This will generate a file, **environments.yaml** (if it doesn't already exist),
-which will live in your **~/.juju/** directory (and will create the directory if
+This will generate a file, `environments.yaml` (if it doesn't already exist),
+which will live in your `~/.juju/` directory (and will create the directory if
 it doesn't already exist).
 
 **Note:** If you have an existing configuration, you can use `juju generate-config --show` to output the new config file, then copy and paste relevant areas in a text editor etc.
@@ -70,8 +50,7 @@ don't need to edit it:
             # on. It defaults to 8040
             # storage-port: 8040
 
-When bootstrapped, tools storage will be served from the `bootstrap-host` on the
-specified `storage-listen-ip` and `storage-port`.
+When bootstrapped, tools storage will be served from the `bootstrap-host` on the specified `storage-listen-ip` and `storage-port`.
 
 The manual provider does not perform automatic machine provisioning like other
 providers; instead, you must manually provision machines into the environment.
@@ -80,9 +59,7 @@ Provisioning machines is described in the following sections.
 ## Bootstrapping
 
 To bootstrap a manual environment, you must specify the `bootstrap-host`
-configuration, and optionally the `bootstrap-user` configuration. If `bootstrap-
-user` is not specified, then Juju will ssh to the bootstrap host as the current
-user. Once the configuration is specified, you bootstrap as usual:
+configuration, and optionally the `bootstrap-user` configuration. If `bootstrap-user` is not specified, then Juju will ssh to the bootstrap host as the current user. Once the configuration is specified, you bootstrap as usual:
 
     juju bootstrap
 
@@ -116,41 +93,8 @@ As is implied by its name, the manual provider does not attempt to control all
 aspects of the environment, and leaves much to the user. There are several
 additional things to consider:
 
-  - All machines added with `juju add-machine ssh:...` must be able to address and communicate directly with the `bootstrap-host`, and vice-versa.
-  - Sudo access is required on all manually provisioned machines, to install the Juju upstart services.
-  - Manually provisioned machines must be running a supported version of Ubuntu (12.04+).
-  - It is possible to manually provision machines into non-manual provider environments, however the machine must be placed on the same private subnet as the other machines in the environment.
-  - Since adding machines is a manual step, using the manual provider doesn't have the "instant elasticity" benefits of using a proper provider; if you're an IaaS provider and want to help us natively support you, [please contact us](https://juju.ubuntu.com/community/).
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
+- All machines added with `juju add-machine ssh:...` must be able to address and communicate directly with the `bootstrap-host`, and vice-versa.
+- Sudo access is required on all manually provisioned machines, to install the Juju upstart services.
+- Manually provisioned machines must be running a supported version of Ubuntu (12.04+).
+- It is possible to manually provision machines into non-manual provider environments, however the machine must be placed on the same private subnet as the other machines in the environment.
+- Since adding machines is a manual step, using the manual provider doesn't have the "instant elasticity" benefits of using a proper provider; if you're an IaaS provider and want to help us natively support you, [please contact us](https://juju.ubuntu.com/community/).

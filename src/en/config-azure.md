@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Configuring for Windows Azure
 
 This process requires you to have an Windows Azure account. If you have not
@@ -26,11 +9,12 @@ command:
 
     juju generate-config
 
-This will generate a file, **environments.yaml**, which will live in your
-**~/.juju/** directory (and will create the directory if it doesn't already
+This will generate a file, `environments.yaml`, which will live in your
+`~/.juju/` directory (and will create the directory if it doesn't already
 exist).
 
 **Note:** The above command will not overwrite your existing environments.yaml file, or output to stdout. In order to see the boilerplate environment.yaml on stdout you need to append the `--show` option. This is helpful if you have an existing environment.yaml and just need to add a section. For example:
+
     juju generate-config --show
 
 You can then copy and paste the needed section.
@@ -82,52 +66,18 @@ the following commands on Ubuntu to generate a new certificate:
     chmod 600 azure.pem
 
 Login to the Windows Azure console @ [
-https://manage.windowsazure.com](https://manage.windowsazure.com). From here you
-can gather the following information:
+https://manage.windowsazure.com](https://manage.windowsazure.com). From here you can gather the following information:
 
-  - **Settings** Left Navigation: get the `SUBSCRIPTION ID` of the account you upload to. This will be used for the `management-subscription-id`
-  - **Settings** Left Navigation: "upload" the MyCert.cer file above (if you created one). This is the certificate you used for the `management-certificate-path`
-  - **Storage** Left Navigation:
-    - Click New (bottom left)
-    - Click Quick Create
-    - Add a name in url (for example `juju0useast0`). This is the value to be used for `storage-account-name`.
-    - Select Location (for example: East US)
-    - Select Subscription
-    - Disable "Enable Geo-Replication" (not applicable)
+- **Settings** Left Navigation: get the `SUBSCRIPTION ID` of the account you upload to. This will be used for the `management-subscription-id`
+- **Settings** Left Navigation: "upload" the MyCert.cer file above (if you created one). This is the certificate you used for the `management-certificate-path`
+- **Storage** Left Navigation:
+  - Click New (bottom left)
+  - Click Quick Create
+  - Add a name in url (for example `juju0useast0`). This is the value to be used for `storage-account-name`.
+  - Select Location (for example: East US)
+  - Select Subscription
+  - Disable "Enable Geo-Replication" (not applicable)
 
 **Note:** You must create the storage account in the same region/location specified by the `location` key value. For example, if `location: West US` is set then `storage-account-name:` must also have a storage set up in `West US`. Failure to do so will result in a group affinity error.
 
 Ensure the environments.yaml is configured with the above values and save.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-

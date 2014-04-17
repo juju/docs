@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Configuring for MAAS (bare metal)
 
 Metal As A Service is software which allows you to deal with physical hardware
@@ -29,8 +12,8 @@ command:
 
     juju generate-config
 
-This will generate a file, **environments.yaml**, which will live in your
-**~/.juju/** directory (and will create the directory if it doesn't already
+This will generate a file, `environments.yaml`, which will live in your
+`~/.juju/`` directory (and will create the directory if it doesn't already
 exist).
 
 **Note:** If you have an existing configuration, you can use `juju generate-config --show` to output the new config file, then copy and paste relevant areas in a text editor etc.
@@ -44,9 +27,9 @@ you set up within a single MAAS cluster.
 
 To get the API key:
 
-  1. Go to your MAAS preferences page, or go to your MAAS home page and choose Preferences from the drop-down menu that appears when clicking your username at the top-right of the page.
-  2. Optionally add a new MAAS key. Do this if you're setting up another environment within the same MAAS cluster.
-  3. Copy the key value - you will need it shortly!
+1. Go to your MAAS preferences page, or go to your MAAS home page and choose Preferences from the drop-down menu that appears when clicking your username at the top-right of the page.
+1. Optionally add a new MAAS key. Do this if you're setting up another environment within the same MAAS cluster.
+1. Copy the key value - you will need it shortly!
 
 #  Edit or create the configuration
 
@@ -69,36 +52,3 @@ The default series for MAAS will automatically be set to 'precise'.
 
 For further steps with Juju, you should check out the [Juju instructions in the
 MAAS documentation](http://maas.ubuntu.com/docs/juju-quick-start.html)
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-

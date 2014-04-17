@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 #  Using Juju to Deploy your Node.js Application
 
 One of Juju's main use cases is to deploy your application directly out of
@@ -45,37 +28,37 @@ pointing to your github repo:
 
 If you have not already bootstrapped an environment, do so:
 
-    $ juju bootstrap
+    juju bootstrap
 
 Then wait a few minutes while your cloud spins up. Then deploy some basic
 services:
 
-    $ juju deploy --config myapp.yaml node-app myapp
-    $ juju deploy mongodb
-    $ juju deploy haproxy
+    juju deploy --config myapp.yaml node-app myapp
+    juju deploy mongodb
+    juju deploy haproxy
 
 relate them
 
-    $ juju add-relation mongodb myapp
-    $ juju add-relation myapp haproxy
+    juju add-relation mongodb myapp
+    juju add-relation myapp haproxy
 
 open it up to the outside world
 
-    $ juju expose haproxy
+    juju expose haproxy
 
 Find the haproxy instance's public URL from
 
-    $ juju status
+    juju status
 
 (or attach it to an elastic IP via the AWS console) and open it up in a browser.
 
 scale up your app (to 10 nodes for example)
 
-    $ juju add-unit -n 10 myapp
+    juju add-unit -n 10 myapp
 
 and scale it back down
 
-    $ juju remove-unit myapp/9 myapp/8 myapp/7 myapp/6 myapp/5 myapp/4 myapp/3 myapp/2 myapp/1
+    juju remove-unit myapp/9 myapp/8 myapp/7 myapp/6 myapp/5 myapp/4 myapp/3 myapp/2 myapp/1
 
 ##  Local to Cloud Workflow
 
@@ -85,8 +68,8 @@ laptop and then push out to the public cloud.
 
 We need to configure 2 environments, a local one and a public cloud one.
 
-  1. Configure the [local provider](https://juju.ubuntu.com/docs/config-local.html) on your machine. 
-  2. Configure a public or private cloud on your machine. 
+1. Configure the [local provider](https://juju.ubuntu.com/docs/config-local.html) on your machine. 
+1. Configure a public or private cloud on your machine. 
   - [AWS](https://juju.ubuntu.com/docs/config-aws.html)
   - [HP Cloud](https://juju.ubuntu.com/docs/config-hpcloud.html)
   - [OpenStack](https://juju.ubuntu.com/docs/config-openstack.html)
@@ -95,8 +78,8 @@ In this example the local environment is named `local` and we'll deploy to an
 AWS environment called `amazon`. First let's `switch` to the local environment
 and bootstrap.
 
-    $ juju switch local
-    $ juju bootstrap
+    juju switch local
+    juju bootstrap
 
 Create a configuration file `myapp.yaml` to add info about your app pointing to
 your github repo:
@@ -106,12 +89,12 @@ your github repo:
 
 Then deploy some basic services:
 
-    $ juju deploy --config ~/myapp.yaml node-app myapp 
-    $ juju deploy mongodb
+    juju deploy --config ~/myapp.yaml node-app myapp 
+    juju deploy mongodb
 
 relate them
 
-    $ juju add-relation mongodb myapp
+    juju add-relation mongodb myapp
 
 Now open up your browser and go to `http://localhost` to get your application
 loaded in your browser.
@@ -121,7 +104,7 @@ loaded in your browser.
 Continue to write your code, push to git as you land features and fixes. When
 you're ready to test it you can tell Juju to check the git repository again:
 
-    $ juju set myapp app_branch=https://github.com/yourapplication
+    juju set myapp app_branch=https://github.com/yourapplication
 
 The charm will then fetch the latest code and you can refresh your browser at
 `http://localhost`.
@@ -136,30 +119,30 @@ out to a place where your coworkers can see your app in all it's glory, let's
 push this to AWS. Same exact commands as before, just to a different
 environment:
 
-    $ juju switch amazon
-    $ juju bootstrap
-    $ juju deploy --config ~/myapp.yaml node-app myapp 
-    $ juju deploy mongodb
-    $ juju add-relation mongodb myapp
+    juju switch amazon
+    juju bootstrap
+    juju deploy --config ~/myapp.yaml node-app myapp 
+    juju deploy mongodb
+    juju add-relation mongodb myapp
 
 Since we're on a public cloud and not on a local provider we need to explicitly
 expose the service and get its public IP:
 
-    $ juju expose myapp
-    $ juju status myapp
+    juju expose myapp
+    juju status myapp
 
 And put the ec2 URL in your browser. If you want to enable some horizontal
 scalability to your application you can do so, even after you've deployed!
 
-    $ juju deploy haproxy
-    $ juju add-relation haproxy myapp
-    $ juju expose haproxy
-    $ juju unexpose myapp
+    juju deploy haproxy
+    juju add-relation haproxy myapp
+    juju expose haproxy
+    juju unexpose myapp
 
 And then get the public IP from the haproxy instead (notice how we've unexposed
 your application so that only haproxy is serving the public internet):
 
-    $ juju status haproxy
+    juju status haproxy
 
 Now you can `juju add-unit myapp` and `juju remove-unit myapp` based on load.
 
@@ -169,23 +152,23 @@ The local containers survive reboots and do not go away until you explicitly
 tear the environment down. Now that your coworkers have seen your great
 application let's also stop spending money:
 
-    $ juju destroy-environment -e amazon
-    $ juju destroy-environment -e local
+    juju destroy-environment -e amazon
+    juju destroy-environment -e local
 
 ##  Charm Details
 
 This section is to explain how the charm works and is provided here as a
 reference.
 
-###  What the formula does
+###  What the charm does
 
 During the `install` hook,
 
-  - installs `node`/`npm`
-  - clones your node app from the repo specified in `app_repo`
-  - runs `npm` if your app contains `package.json`
-  - configures networking if your app contains `config/config.js`
-  - waits to be joined to a `mongodb` service 
+- installs `node`/`npm`
+- clones your node app from the repo specified in `app_repo`
+- runs `npm` if your app contains `package.json`
+- configures networking if your app contains `config/config.js`
+- waits to be joined to a `mongodb` service 
 
 when related to a `mongodb` service, the formula
 
@@ -198,7 +181,7 @@ Configurable aspects of the charm are listed in `config.yaml` and can be set by
 either editing the default values directly in the yaml file or passing a
 `myapp.yaml` configuration file during deployment
 
-    $ juju deploy --config ~/myapp.yaml node-app myapp
+    juju deploy --config ~/myapp.yaml node-app myapp
 
 Some of these parameters are used directly by the charm, and some are passed
 through to the node app using `config/config.js`.
@@ -229,7 +212,7 @@ This config can be used from within your application using snippets like
     server.listen(config.listen_port);
     ...
 
-Alternatively you could use a a€oeProcfilea€ in root directory like this:
+Alternatively you could use a `Procfile` in root directory like this:
 
     web: node app.js
 
@@ -260,7 +243,7 @@ easily be done by adding
 to the bottom of the `install` hook, and then once your stack is started, you
 expose
 
-    $ juju expose myapp
+    juju expose myapp
 
 it to the outside world.
 
@@ -278,36 +261,3 @@ is application startup. A simple application will want to start upon install
 (startup code goes in the `install` hook), whereas some applications will not
 want to start up until a database has be associated (startup code goes in the
 `db-relation-joined` hooks).
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-

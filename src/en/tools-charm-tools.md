@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Introduction
 
 Charm tools is a collection of tools designed as a Juju Plugin. Charm tools
@@ -171,16 +154,12 @@ This will print the raw README for the WordPress charm
 
     juju charm info wordpress
 
-* * *
-
 ## List
 
     juju charm list [-h|--help]
 
 Show all charms (both official and person) in the charm store. This produces an
 exhaustive list of all charms available in the store.
-
-* * *
 
 ## Promulgate
 
@@ -202,8 +181,6 @@ will prevent promulgation if errors occur.
   - `-w`, `--ignore-warnings`: Promulgate this branch even with warnings from charm proof.
   - `-o`, `--owner-branch`: Promulgate a branch owned by a someone/group other than ~charmers.
 
-* * *
-
 ## Proof
 
     juju charm proof CHARM_DIRECTORY
@@ -215,8 +192,6 @@ informational. These are things a charm could do but don't currently. `W` is a
 warning. These are things that aren't complete blockers but need to be
 addressed. `E` is an error. These are items that are major and need to be
 addressed.
-
-* * *
 
 ## Review-queue
 
@@ -245,44 +220,9 @@ know which charms are available for review.
 This is simply a convience method to running `juju charm promulgate
 --unpromulgate`.
 
-* * *
-
 ## update
 
     juju charm update [-h|--help] [-f|--fix] [CHARMS_DIRECTORY]
 
 Update is used for `CHARMS_DIRECTORY`, when `CHARMS_DIRECTORY` is a repository
 created via `getall`
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-

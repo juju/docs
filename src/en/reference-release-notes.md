@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # History
 
 This section details all the available release notes for the stable series of
@@ -30,8 +13,7 @@ replaces 1.18.0.
 #### Getting Juju
 
 juju-core 1.18.1 is available in trusty and backported to earlier series in the
-following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.ne
-t/%7Ejuju/+archive/stable)
+following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
 
 If you use the local provider, be sure to install the juju-local package if it
 is not already installed. Juju's local requirements have changed. Upgrading
@@ -70,15 +52,10 @@ environment in environments.yaml:
 
 There are many ways to specify the series to deploy with a charm. In most cases
 you don't need to. When you don't specify a series, Juju checks the
-environment's "default-series", and if that isn't set, Juju asks the charm store
-to select the best series to deploy with the charm. The series of the state-
-server does not restrict the series of the charm. You can use the best series
-for a charm when deploying a service.
+environment's "default-series", and if that isn't set, Juju asks the charm store to select the best series to deploy with the charm. The series of the state-server does not restrict the series of the charm. You can use the best series for a charm when deploying a service.
 
 When working with local charms, Juju cannot fall back to the charm store, it
-falls back to the environment's "default-series". You must specify the series in
-the environment or when deploying the charm. If your environment is running, you
-can add "default-series" like so: juju set-environment default-series=precise
+falls back to the environment's "default-series". You must specify the series in the environment or when deploying the charm. If your environment is running, you can add "default-series" like so: `juju set-environment default-series=precise`
 
 These commands choose Ubuntu 12.04 Precise when "default-series" is set to
 "precise" in the environment:
@@ -97,8 +74,7 @@ replaces 1.16.6.
 #### Getting Juju
 
 juju-core 1.18.0 is available in trusty and backported to earlier series in the
-following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.ne
-t/%7Ejuju/+archive/stable)
+following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
 
 If you use the local provider, be sure to install the juju-local package if it
 is not already installed. Juju’s local requirements have changed. Upgrading
@@ -179,36 +155,29 @@ Juju's ssh key management allows people other than the person who bootstrapped
 an environment to ssh into Juju machines/nodes. The authorised-keys command
 accepts 4 subcommands:
 
-  - add - add ssh keys for a Juju user
-  - delete - delete ssh keys for a Juju user
-  - list - list ssh keys for a Juju user
-  - import - import Launchpad or Github ssh keys
+- add - add ssh keys for a Juju user
+- delete - delete ssh keys for a Juju user
+- list - list ssh keys for a Juju user
+- import - import Launchpad or Github ssh keys
 
 `import` can be used in clouds with open networks to pull ssh keys from
 Launchpad or Github. For example:
 
     juju authorised-keys import lp:wallyworld
 
-`add` can be used to import the provided key, which is necessary for clouds that
-do not have internet access.
+`add` can be used to import the provided key, which is necessary for clouds that do not have internet access.
 
 Use the key fingerprint or comment to specify which key to delete. You can find
 the fingerprint for a key using `ssh-keygen`.
 
-Juju cannot not manage existing keys on manually provisioned machines. Juju will
-prepend "Juju:" to the comments of all keys that it adds to a machine. These are
-the only keys it can "list" or "delete".
+Juju cannot not manage existing keys on manually provisioned machines. Juju will prepend "Juju:" to the comments of all keys that it adds to a machine. These are the only keys it can "list" or "delete".
 
-Note that keys are global and grant access to all machines. When a key is added,
-it is propagated to all machines in the environment. When a key is deleted, it
-is removed from all machines. You can learn more details by running "juju
-authorised-keys --help".
+Note that keys are global and grant access to all machines. When a key is added, it is propagated to all machines in the environment. When a key is deleted, it is removed from all machines. You can learn more details by running `juju authorised-keys --help`.
 
 ### Backup and restore state-server (bootstrap node)
 
 Juju provides backup and restore commands to recover the juju state-server in
-case or failure. The juju backup command creates a tarball of the state-server’s
-configuration, keys, and environment data.
+case or failure. The juju backup command creates a tarball of the state-server’s configuration, keys, and environment data.
 
     juju switch my-env
     juju backup
@@ -222,7 +191,7 @@ creates the replacement. As with the normal bootstrap command, you can pass
     juju switch my-env
     juju restore juju-backup-2014-02-21.tgz
 
-You can learn more details by running "juju restore --help".
+You can learn more details by running `juju restore --help`.
 
 ### Run arbitrary commands on some or all instances
 
@@ -260,13 +229,9 @@ run "juju metadata --help".
 
 The bootstrap --source option was replaced with --metadata-source
 
-The juju bootstrap command previously accepted the --source option which was the
-local path to a directory of juju tools. The bootstrap command now has a
+The juju bootstrap command previously accepted the --source option which was the local path to a directory of juju tools. The bootstrap command now has a
 --metadata-source option that accepts the local path to simple streams metadata
-and tools. If your workflow previously was to download the juju tools to a local
-directory, then bootstrap with the --source option to upload the tools to your
-environment, you need to run "juju metadata generate-tools" per the previous
-section. For more details, run "juju bootstrap --help".
+and tools. If your workflow previously was to download the juju tools to a local directory, then bootstrap with the --source option to upload the tools to your environment, you need to run "juju metadata generate-tools" per the previous section. For more details, run "juju bootstrap --help".
 
 ### Timeouts for bootstrap are configurable for environments.
 
@@ -281,11 +246,7 @@ timeout to 1800.
 ### Bootstrapping the local-provider for lxc no longer requires sudo
 
 The Juju bootstrap command cannot be run as root. Bootstrap will prompt for a
-password to use sudo as needed to set up the environment. This addresses several
-issues that arose because the owner and permissions of the local environment
-files were different from the owner of the process. The juju status command for
-example now reports the status of the machines without the need to run it with
-sudo.
+password to use sudo as needed to set up the environment. This addresses several issues that arose because the owner and permissions of the local environment files were different from the owner of the process. The juju status command for example now reports the status of the machines without the need to run it with sudo.
 
 If you have used the local provider before, you may need to manually clean up
 some files that are still owned by root. The environment’s jenv file commonly
@@ -316,16 +277,12 @@ intuitively as one might expect, so this must be turned on explicitly.
 When using clone, the first machine to be created will create a "template"
 machine that is used as the basis for the clones. This will be called "juju--
 template", so for a precise image, the name is "juju-precise-template". Do not
-modify or start this image while a local provider environment is running because
-you cannot clone a running lxc machine.
+modify or start this image while a local provider environment is running because you cannot clone a running lxc machine.
 
 ### Juju now supports juju-mongodb, a mongodb tuned for juju’s needs
 
 The Juju state-server (bootstrap node) prefers juju-mongodb. The package is
-available in Ubuntu Trusty, the new db will be used when a Trusty environment is
-bootstrapped. The juju-local package on Trusty will install juju-mongodb if it
-is not already installed. Upgrades of the juju-local package will continue to
-use mongodb-server to preserve continuity with existing local environments.
+available in Ubuntu Trusty, the new db will be used when a Trusty environment is bootstrapped. The juju-local package on Trusty will install juju-mongodb if it is not already installed. Upgrades of the juju-local package will continue to use mongodb-server to preserve continuity with existing local environments.
 
 ### Destroying environments
 
@@ -708,36 +665,3 @@ line):
 For HP Cloud the public bucket is available at:
 
     public-bucket-url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/60502529753910
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-

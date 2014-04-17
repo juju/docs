@@ -1,28 +1,8 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # What is the GUI?
 
 Juju has a graphical user interface (GUI) available to help with the tasks of
 managing and monitoring your Juju environment. The GUI is a JavaScript and HTML
-web application that is encapsulated in its own charm, which can be installed to
-its own service or alongside another service. Once installed, the GUI will talk
-with Juju over a websocket to provide a real-time interface with the services
-installed, the units that comprise them, and the machines available.
+web application that is encapsulated in its own charm, which can be installed to its own service or alongside another service. Once installed, the GUI will talk with Juju over a websocket to provide a real-time interface with the services installed, the units that comprise them, and the machines available.
 Additionally, the GUI can talk with the charm store in order to search, browse,
 and deploy charms to your environment.
 
@@ -34,8 +14,7 @@ Installing the GUI works the same as installing any other charm:
     juju expose juju-gui
 
 Once the service is deployed and exposed, you can find the address for the GUI
-by running juju status and looking for the public-address field for the juju-gui
-service
+by running juju status and looking for the public-address field for the juju-gui service.
 
 In more recent versions of Juju, you can also deploy the GUI along-side another
 service on an existing machine. This might be the case if you wish to conserve
@@ -51,8 +30,7 @@ it is available in your version.
 
 ## Configuration
 
-There are a few pertinent configuration options that might help you when working
-with the GUI. You can read about all of them on the GUI's [charm
+There are a few pertinent configuration options that might help you when working with the GUI. You can read about all of them on the GUI's [charm
 page](https://jujucharms.com/fullscreen/search/precise/juju-gui/), but there is
 one that is worth discussing immediately:
 
@@ -109,10 +87,7 @@ will give you the option to configure and deploy a new service.
 
 ![](./media/gui_mangement-charmstore.png)
 
-Once deployed, clicking on the service will allow you to not only view the units
-and machines comprising it, but also to scale the service out or back, change
-constraints on new units, re-configure the service, resolve or retry units in an
-error state and more.
+Once deployed, clicking on the service will allow you to not only view the units and machines comprising it, but also to scale the service out or back, change constraints on new units, re-configure the service, resolve or retry units in an error state and more.
 
 Relations can be added between services - even in the case of ambiguous
 relationships, such as a master or slave database - by clicking the 'add
@@ -130,35 +105,4 @@ them.
 For an example of this, check out this demonstration of building an OpenStack
 instance in Juju using the GUI:
 
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
+[video goes here]

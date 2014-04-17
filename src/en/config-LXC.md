@@ -1,28 +1,9 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # Configuring for LXC
 
 ## Prerequisites
 
 The LXC local provider enables you to run Juju on a single system like your
-local computer or a single server. This way you can simply evaluate the software
-or service configurations, develop your own charms or run a single server
-system.
+local computer or a single server. This way you can simply evaluate the software or service configurations, develop your own charms or run a single server system.
 
 If you're not already using the stable release PPA you can make sure you've
 added it:
@@ -30,8 +11,7 @@ added it:
     sudo apt-add-repository ppa:juju/stable
     sudo apt-get update
 
-Then you can install the local provider, the commands depend on the Juju version
-you are using:
+Then you can install the local provider, the commands depend on the Juju version you are using:
 
 ### For Ubuntu versions newer than 12.04:
 
@@ -49,9 +29,7 @@ Stack](https://wiki.ubuntu.com/Kernel/LTSEnablementStack):
 You will need to reboot into the new kernel in order to use Juju with the local
 provider.
 
-If you're not running Ubuntu please consult your operating system distribution's
-documentation for instructions on installing the LXC userspace tools and the
-MongoDB server. Juju requires a MongoDB server built with SSL support.
+If you're not running Ubuntu please consult your operating system distribution's documentation for instructions on installing the LXC userspace tools and the MongoDB server. Juju requires a MongoDB server built with SSL support.
 
 ## Configuration
 
@@ -103,11 +81,7 @@ because it needs to manage permission as the real user.
 
 **Note:** If you are running a firewall such as **ufw**, it may interfere with the correct operation of Juju using LXC containers and might need to be halted.
 
-If you have used the local provider in the past when it required `sudo`, you may
-need to manually clean up some files that are still owned by root. If your local
-environment is named "local" then there may be a local.jenv owned by root in the
-JUJU_HOME directory (~/.juju). After the local environment is destroyed, you can
-remove the file like this:
+If you have used the local provider in the past when it required `sudo`, you may need to manually clean up some files that are still owned by root. If your local environment is named "local" then there may be a local.jenv owned by root in the JUJU_HOME directory (~/.juju). After the local environment is destroyed, you can remove the file like this:
 
     sudo rm ~/.juju/environments/local.jenv
 
@@ -116,6 +90,7 @@ remove the file like this:
 The local provider can use lxc-clone to create the containers used as machines.
 This feature is controlled by the `lxc-clone` option in environments.yaml. The
 default is "true" for Trusty and above, and "false" for earlier Ubuntu releases.
+
 You can try to use lxc-clone on earlier releases, but it is not a supported. It
 may well work. You can enable lxc-clone in environments.yaml thusly:
 
@@ -125,10 +100,7 @@ may well work. You can enable lxc-clone in environments.yaml thusly:
 
 The local provider is btrfs-aware. If your LXC directory is on a btrfs
 filesystem, the clones use snapshots and are much faster to create and take up
-much less space. There is also support for using aufs as a backing-store for the
-LXC clones, but there are some situations where aufs doesn’t entirely behave as
-intuitively as one might expect, so this must be turned on explicitly in
-environments.yaml.
+much less space. There is also support for using aufs as a backing-store for the LXC clones, but there are some situations where aufs doesn’t entirely behave as intuitively as one might expect, so this must be turned on explicitly in `environments.yaml`.
 
     local:
         type: local
@@ -153,46 +125,11 @@ available for review outside of `juju debug-log`. First, find out what the name
 of your environment is by running `juju switch`. If you're using the default
 `environments.yaml` you'll find this be `local`. All log files for the local
 provider are stored in `~/.juju/<environment>/log`, as such you can duplicate
-the functionality of `juju debug-log` using the following (assuming your current
-environment is "local"):
+the functionality of `juju debug-log` using the following (assuming your current environment is "local"):
 
     tail -f ~/.juju/local/log/unit-*.log
 
 ### juju ssh
 
 While `juju ssh` does work if you supply it a unit (eg: `mysql/0`) the command
-does not work with machine numbers at this time (`juju ssh 1`). To access a unit
-via ssh make sure to use its corresponding unit name not the machine number.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
+does not work with machine numbers at this time (`juju ssh 1`). To access a unit via ssh make sure to use its corresponding unit name not the machine number.

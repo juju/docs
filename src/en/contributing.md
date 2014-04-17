@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # How you can contribute!
 
 It's a tough job writing documentation which covers every use case and scenario
@@ -34,14 +17,13 @@ from them to add to the current docs
 
 # How to write docs!
 
-Contributing to the docs is really easy because it is all written in HTML5. In a
-very minimal way too - you will find most of the source documents are very
+Contributing to the docs is really easy because it is all written in HTML5. In a very minimal way too - you will find most of the source documents are very
 straightforward and human-readable, if you just want to dip in and change a
 paragraph or add some extra info.
 
 Below is a list of the current style conventions in use in the docs.
 
-Text is just written using standard &LT;p&GT; tags
+> Text is just written using standard <p&GT; tags
 
 ## Sections
 
@@ -131,38 +113,4 @@ contribute:
   - Add or edit the documentation in your favorite text editor
   - [Submit a pull requestion](https://help.github.com/articles/creating-a-pull-request)
 
-And that's it! Someone from the Juju team will review your work and merge it in!
-Please don't forget to review the page before submission.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
+And that's it! Someone from the Juju team will review your work and merge it in! Please don't forget to review the page before submission.

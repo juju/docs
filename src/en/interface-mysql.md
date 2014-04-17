@@ -1,20 +1,3 @@
-[ ![Juju logo](//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png) Juju
-](https://juju.ubuntu.com/)
-
-  - Jump to content
-  - [Charms](https://juju.ubuntu.com/charms/)
-  - [Features](https://juju.ubuntu.com/features/)
-  - [Deploy](https://juju.ubuntu.com/deployment/)
-  - [Resources](https://juju.ubuntu.com/resources/)
-  - [Community](https://juju.ubuntu.com/community/)
-  - [Install Juju](https://juju.ubuntu.com/download/)
-
-Search: Search
-
-## Juju documentation
-
-LINKS
-
 # mysql interface
 
 The mysql interface is provided by the mysql charm, and is required by a number
@@ -26,26 +9,19 @@ actually require a MySQL database.
 ### In theory
 
 When the mysql charm is notified of a “relation joined” event, it creates a
-database. String values are generated for the credentials needed to authenticate
-a connection to this database: the database name, a username and password. The
-mysql charm will also check the instance’s hostname and pass that value too, as
-well as a string containing “True” or “False” to indicate whether this unit is a
-slave.
+database. String values are generated for the credentials needed to authenticate a connection to this database: the database name, a username and password. The mysql charm will also check the instance’s hostname and pass that value too, as well as a string containing “True” or “False” to indicate whether this unit is a slave.
 
-A charm joining this relationship will typically have a relationship-joined hook
-which will wait to see when the mysql charm has set one of the expected values
-(all values are set simultaneously, so the availability of one indicates that
-all are available).
+A charm joining this relationship will typically have a relationship-joined hook which will wait to see when the mysql charm has set one of the expected values (all values are set simultaneously, so the availability of one indicates that all are available).
 
 ### In practice
 
 Upon relation joined, mysql sets the following:
 
-  - database (string)
-  - user (string)
-  - password (string)
-  - host (string)
-  - slave (string)
+- database (string)
+- user (string)
+- password (string)
+- host (string)
+- slave (string)
 
 The corresponding `relation-joined` hook in any charm connecting to the mysql
 charm should fetch any or all of these values.
@@ -78,39 +54,4 @@ Implementation in `bash`:
 
 The only other hook actually implemented for this interface by the mysql charm
 is relation-broken. This does not actually interact with connected charms using
-the interface, but performs some housekeeping for the mysql charm. However, this
-does not mean that other event driven hooks should not be created for requirer
-charms to do whatever they may need.
-
-  - ## [Juju](/)
-
-    - [Charms](/charms/)
-    - [Features](/features/)
-    - [Deployment](/deployment/)
-  - ## [Resources](/resources/)
-
-    - [Overview](/resources/overview/)
-    - [Documentation](/docs/)
-    - [The Juju web UI](/resources/juju-gui/)
-    - [The charm store](/docs/authors-charm-store.html)
-    - [Tutorial](/docs/getting-started.html#test)
-    - [Videos](/resources/videos/)
-    - [Easy tasks for new developers](/resources/easy-tasks-for-new-developers/)
-  - ## [Community](/community)
-
-    - [Juju Blog](/community/blog/)
-    - [Events](/events/)
-    - [Weekly charm meeting](/community/weekly-charm-meeting/)
-    - [Charmers](/community/charmers/)
-    - [Write a charm](/docs/authors-charm-writing.html)
-    - [Help with documentation](/docs/contributing.html)
-    - [File a bug](https://bugs.launchpad.net/juju-core/+filebug)
-    - [Juju Labs](/communiy/labs/)
-  - ## [Try Juju](https://jujucharms.com/sidebar/)
-
-    - [Charm store](https://jujucharms.com/)
-    - [Download Juju](/download/)
-
-(C) 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of
-[Canonical Ltd](http://www.canonical.com).
-
+the interface, but performs some housekeeping for the mysql charm. However, this does not mean that other event driven hooks should not be created for requirer charms to do whatever they may need.
