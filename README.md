@@ -1,6 +1,6 @@
 # Documentation for Juju
 
-The documentation is written in HTML5.
+The documentation is written in Markdown, and then generated into HTML.
 
 The latest version of these docs live at:
 
