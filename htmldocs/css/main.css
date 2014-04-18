@@ -67,13 +67,13 @@ pre, code {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   padding: 2px;
-  white-space: pre-line;
   color: #000;
 }
 
 pre {
   width: 95%;
   padding: 10px;
+  white-space: pre-line;
   overflow-x: auto;
 }
 
@@ -527,16 +527,21 @@ hr {
 }
 
 #content h2 {
-  font-size: 24px;
+  font-size: 1.8em;
 }
 
 #content h3 {
-  font-size: 18px;
+  font-size: 1.5em;
 }
 
 #content h4 {
-  font-size: 14px;
+  font-size: 1.2em;
   font-weight: 800;
+}
+
+.doc-content h5 {
+  color: #5E2750;
+  font-weight: 600;
 }
 
 dl { border: 1px dotted #aaa; padding: 0.5em; background: #eeeeee; } 
@@ -573,3 +578,4 @@ h5:hover .anchor {
   background-color: #ddd;
   border-radius: 2px;
 }
+
