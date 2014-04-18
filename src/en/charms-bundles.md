@@ -22,6 +22,8 @@ The easiest way to import a bundle into the GUI is by dragging the bundle file
 from your desktop and dropping it on the GUI canvas. If the file has multiple
 bundles in it you’ll be prompted to select the single bundle you wish to deploy.
 
+<iframe style="margin-left: 20%;" class="youtube-player" type="text/html" width="420" height="350" src="//www.youtube.com/embed/oSPB_qjeEsg"></iframe>
+
 A second way to import into the GUI is via the `Import` button on the GUI
 masthead. After clicking the button you’ll be prompted to select the bundle
 file. Once a file is selected the process is the same as the drag-and-drop

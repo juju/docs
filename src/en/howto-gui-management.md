@@ -105,4 +105,4 @@ them.
 For an example of this, check out this demonstration of building an OpenStack
 instance in Juju using the GUI:
 
-[video goes here]
+<iframe style="margin-left: 20%;" class="youtube-player" type="text/html" width="420" height="350" src="//www.youtube.com/embed/V2H3fat0K5w"></iframe>
