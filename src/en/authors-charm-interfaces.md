@@ -8,7 +8,9 @@ In short, this means that you need to set the same settings as do all the other
 charms with the same role for the interface; and you should only expect to be
 able to read those settings set by the other charms with the counterpart role.
 
-**Note: ** Some popular interfaces are documented and we have reference implementations for them. If you are just starting out with interfaces, you  may find it easier to start with these.
+**Note:** Some popular interfaces are documented and we have reference
+implementations for them. If you are just starting out with interfaces, you
+may find it easier to start with these.
 
 ## Determining charm relation interfaces
 

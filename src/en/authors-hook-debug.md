@@ -18,7 +18,8 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 
     juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 
-**Note:** It is possible and often desirable to run debug-hooks on more than one unit at a time. You should open a new terminal window for each.
+**Note:** It is possible and often desirable to run debug-hooks on more than
+one unit at a time. You should open a new terminal window for each.
 
 ## Running a debug session
 
@@ -28,17 +29,17 @@ session on the machine running the requested unit (if you are unfamiliar with
 
 The `tmux` session will start with window 0. This window does nothing other than
 keep the session alive (though it can be used, for example, to view the logs for
-that unit (in ` /var/log/juju/`).
+that unit (in `/var/log/juju/`).
 
 When the first hook event is queued for a hook that is in the list of those to
 be debugged:
 
   - a new window will be attached to the tmux session.
   - the bottom left of the status bar will change to indicate the current hook that has been trapped.
-  - the prompt will change to indicate the hook related to the window (e.g. `mysql/0:db-relation-joined %`
+  - the prompt will change to indicate the hook related to the window (e.g. `mysql/0:db-relation-joined %`)
   - the shell will be running in the standard [hook environment](./authors-hook-environment.html).
   - additionally, `$JUJU_HOOK_NAME` is set appropriately.
-![Image showing tmux debug hooks session](./media/authors-hook-debug-1.png)
+  ![Image showing tmux debug hooks session](./media/authors-hook-debug-1.png)
 
 To proceed, you should **manually execute the hook**, or perform whatever other
 actions you want. At any time during a debug-hooks window 1 session you can run
@@ -58,13 +59,15 @@ queue until you exit your current window. See the  special considerations below.
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
 
-**Note: ** To allow Juju to continue processing events normally, you **must** exit the hook execution window with the `exit` command, otherwise all further events on that unit will be paused indefinitely.
+**Note:** To allow Juju to continue processing events normally, you **must**
+exit the hook execution window with the `exit` command, otherwise all further
+events on that unit will be paused indefinitely.
 
 The queue can be halted by exiting with an `exit 1` command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending
 everything until this error status is resolved, which you can do by issuing the
-command (from your juju terminal window, not the debugging window) of `juju
-resolved &LT;unit&GT;`.
+command (from your juju terminal window, not the debugging window) of
+`juju resolved <unit>`.
 
 You can finish your debugging session by closing all windows in the tmux
 session. Make sure to exit appropriately from all hook windows before
@@ -139,7 +142,9 @@ make the output more useful, e.g. to filter the whole log for lines matching
 
     juju debug-log -n +1  | grep 'INFO'
 
-**Note: ** As the command uses the follow behaviour of `tail` by default, you do not need to specify the `-f` switch. You will also need to end the session with `Control-C`
+**Note:** As the command uses the follow behaviour of `tail` by default, you do
+not need to specify the `-f` switch. You will also need to end the session
+with `Control-C`
 
 # What on earth is tmux?
 
@@ -237,5 +242,5 @@ Control-a :
 
     Enter the command prompt (for tmux commands)
 
-You can get more info on tmux and its commands at the [ relevant Ubuntu manpage
+You can get more info on tmux and its commands at the [relevant Ubuntu manpage
 entry.](http://manpages.ubuntu.com/manpages/trusty/man1/tmux.1.html)

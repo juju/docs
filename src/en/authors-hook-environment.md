@@ -251,8 +251,8 @@ specify them together with the command. So
 Note that `relation-get` produces results that are _consistent_ but not
 necessarily _accurate_, in that you will always see settings that:
 
-  - were accurate at some point in the reasonably recent past 
-  - are always the same within a single hook run... 
+  - were accurate at some point in the reasonably recent past
+  - are always the same within a single hook run...
   - _except_ when inspecting the unit's own relation settings, in which case local changes from `relation-set` will be seen correctly.
 
 You should never depend upon the presence of any given key in `relation-get`
@@ -267,11 +267,13 @@ sufficient to complete all configuration that depends on remote unit settings.
 Settings for remote units already known to have departed remain accessible for
 the lifetime of the relation.
 
-`relation-get` currently has a [bug](https://bugs.launchpad.net/juju-
-core/+bug/1223339) that allows units of the same service to see each other's
+`relation-get` currently has a
+[bug](https://bugs.launchpad.net/juju-core/+bug/1223339)
+that allows units of the same service to see each other's
 settings outside of a peer relation. Depending on this behaviour is foolish in
 the extreme: if you need to share settings between units of the same service,
-always use a peer relation to do so, or you may be seriously inconvenienced when the hole is closed without notice.
+always use a peer relation to do so, or you may be seriously inconvenienced when
+the hole is closed without notice.
 
 ### relation-list
 

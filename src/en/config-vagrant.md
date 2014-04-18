@@ -11,9 +11,14 @@ Using these images gives you a couple of things:
 - The Juju GUI accessible locally through your browser.
 - A functional, self contained Juju environment.
 
-In short, enough of an environment to write and test charms or sandbox your Juju deployments.
+In short, enough of an environment to write and test charms or sandbox your Juju
+deployments.
 
-**Warning:** While these images are based on the Ubuntu Cloud Images, they should be treated as beta quality images. Should you encounter a problem, please pop into #juju on Freenode and ask Ben (utlemming) and the Juju community questions. Obviously, as this is a beta image, please be patient if the image fails to work for you first time.
+**Warning:** While these images are based on the Ubuntu Cloud Images, they should
+be treated as beta quality images. Should you encounter a problem, please pop
+into #juju on Freenode and ask Ben (utlemming) and the Juju community questions.
+Obviously, as this is a beta image, please be patient if the image fails to work
+for you first time.
 
 ## Installing
 
@@ -64,7 +69,8 @@ AMD64). If you need other versions of Ubuntu, check out the [Cloud Images](http
 
 Vagrant makes getting started really easy.
 
-Choose a directory to work in. This directory will be shared with the guest, and contain the vagrant configuration for the machine. Run:
+Choose a directory to work in. This directory will be shared with the guest, and
+contain the vagrant configuration for the machine. Run:
 
     vagrant box add JujuBox <URL>
 

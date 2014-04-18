@@ -45,12 +45,10 @@ You can retrieve these values easily from your AWS Management Console at
 name in the top-right and then the "Security Credentials" link from the drop
 down menu.
 
-![Amazon accounts page showing Security Credentials link](./media
-/getting_started-aws_security.png)
+![Amazon accounts page with Security Creds](./media/getting_started-aws_security.png)
 
 Under the "Access Keys" heading click the "Create New Root Key" button. You will be prompted to "Download Key File" which by default is named rootkey.csv. Open this file to get the **access-key** and **secret-key** for the environments.yaml configuration file.
 
-![Amazon Access Credentials page showing key values](./media/getting_started-
-aws_keys.png)
+![Amazon Access Credentials page showing key values](./media/getting_started-aws_keys.png)
 
 The **region:** value corresponds to the AWS regions.

@@ -29,10 +29,17 @@ Container relation
 
 ## Relations
 
-When a traditional relation is added between two services, all the service units for the first service will receive relation events about all service units for the second service. Subordinate services have a very tight relationship with their principal service, so it makes sense to be able to restrict that communication in some cases so that they only receive events about each other. That's precisely what happens when a relation is tagged as being a scoped to the container. See [_scoped relations_](charm.html).
+When a traditional relation is added between two services, all the service units
+for the first service will receive relation events about all service units for
+the second service. Subordinate services have a very tight relationship with
+their principal service, so it makes sense to be able to restrict that
+communication in some cases so that they only receive events about each other.
+That's precisely what happens when a relation is tagged as being a scoped to the
+container. See [scoped relations](charm.html).
 
 Container relations exist because they simplify responsibilities for the
-subordinate service charm author who would otherwise always have to filter units of their relation before finding the unit they can operate on.
+subordinate service charm author who would otherwise always have to filter units
+of their relation before finding the unit they can operate on.
 
 If a subordinate service needs to communicate with all units of the principal
 service, it can still establish a traditional (non-container) relationship to
@@ -48,7 +55,8 @@ explicit relationship for the subordinate to join, using an [_implicit relation_
 No special changes are made for the purpose of naming or addressing subordinate
 units. If a subordinate logging service is deployed with a single unit of
 wordpress we would expect the logging unit to be addressable as logging/0, if
-this service were then related to a mysql service with a single unit we'd expect logging/1 to be deployed in its container. Subordinate units inherit the
+this service were then related to a mysql service with a single unit we'd expect
+logging/1 to be deployed in its container. Subordinate units inherit the
 public/private address of the principal service. The container of the principal
 defines the network setup.
 
@@ -70,9 +78,9 @@ will only be able to form relations with subordinate: true charms.
 The example below shows adding a container relation to a charm.
 
     requires:
-        logging-directory:
-           interface: logging
-           scope: container
+      logging-directory:
+        interface: logging
+        scope: container
 
 ## Status of subordinates
 

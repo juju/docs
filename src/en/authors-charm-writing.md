@@ -15,8 +15,8 @@ Vanilla forum software](http://vanillaforums.org/)
 ## Prepare yourself
 
 As we are writing a charm, it makes sense to create it in a local charm
-repository (see how to deploy from a local repository [here](./charms-
-deploying.html)) to make it easy to test in your Juju environment.
+repository (see how to deploy from a local repository
+[here](./charms-deploying.html)) to make it easy to test in your Juju environment.
 
 Go to your home directory (or wherever is appropriate and make the appropriate
 file structure:
@@ -65,7 +65,7 @@ Obviously, you can include any useful info you wish.
 
 ## Make some metadata.yaml
 
-The **metadata.yaml** file is really important. This is the file that Juju reads
+The `metadata.yaml` file is really important. This is the file that Juju reads
 to find out what a charm is, what it does and what it needs to do it.
 
 The YAML syntax is at once simple, but exact, so if you have any future problems
@@ -77,7 +77,7 @@ first four are pretty self explanatory:
     summary: Vanilla is an open-source, pluggable, multi-lingual forum.
     maintainer: Your Name <your@email.tld>
     description: |
-      Vanilla is designed to deploy and grow small communities to scale. 
+      Vanilla is designed to deploy and grow small communities to scale.
       This charm deploys Vanilla Forums as outlined by the Vanilla Forums
       installation guide.
 
@@ -87,18 +87,18 @@ the description can go into more detail.
 The next value to define is the category. This is primarily for organising the
 charm in the charm store. The available categories are:
 
-  - **databases -** MySQL, PostgreSQL, CouchDB, etc.
-  - **file-servers - **storage apps such as Ceph
-  - **applications -**applications like MediaWiki, WordPress
-  - **cache-proxy - **services such as HAProxy and Varnish.
-  - **app-servers - **infrastructure services like Apache and Tomcat
-  - **miscellaneous - **anything which doesn't neatly fit anywhere above.
+  - `databases` - MySQL, PostgreSQL, CouchDB, etc.
+  - `file-servers` - storage apps such as Ceph
+  - `applications` - applications like MediaWiki, WordPress
+  - `cache-proxy` - services such as HAProxy and Varnish.
+  - `app-servers` - infrastructure services like Apache and Tomcat
+  - `miscellaneous` - anything which doesn't neatly fit anywhere above.
 
 Your charm can belong to more than one category, though in almost all cases it
 should be in just one. Because there could be more than one entry here, the YAML
 is formatted as a list:
 
-    categories:  
+    categories:
       - applications
 
 Next we need to explain which services are actually provided by this service.
@@ -109,8 +109,8 @@ hooks.
 
 Our Vanilla charm is a web-based service which exposes a simple HTTP interface:
 
-    provides:  
-      website:  
+    provides:
+      website:
         interface: http
 
 The name given here is important as it will be used in hooks that we write
@@ -128,7 +128,7 @@ The final file should look like this:
     summary: Vanilla is an open-source, pluggable, themeable, multi-lingual forum.
     maintainer: Your Name <your@email.tld>
     description: |
-      Vanilla is designed to deploy and grow small communities to scale. 
+      Vanilla is designed to deploy and grow small communities to scale.
       This charm deploys Vanilla Forums as outlined by the Vanilla Forums installation guide.
     categories:
       - applications
@@ -161,8 +161,8 @@ For our charm, the hooks we will need to create are:
 So first up we should create the hooks directory, and start creating our first
 hook:
 
-    mkdir hooks  
-    cd hooks  
+    mkdir hooks
+    cd hooks
     vi start
 
 (Use your favourite editor, naturally - no flames please)
@@ -171,8 +171,8 @@ We have started with the start hook, because it is pretty simple. Our charm will
 be served up by Apache, so all we need to do to start the service is make sure
 Apache is running:
 
-    #!/bin/bash  
-    set -e  
+    #!/bin/bash
+    set -e
     service apache2 restart
 
 A bit of explanation for this one. As we are writing in bash, and we need the
@@ -197,46 +197,48 @@ With the easy bit out of the way, how about the install hook? This needs to
 install any dependencies, fetch the actual software and do any other config and
 service jobs that need to happen. Here is an example for our vanilla charm:
 
-    #!/bin/bash
-    set -e # If any command fails, stop execution of the hook with that error
-    apt-get install -y apache2 php5-cgi php5-mysql curl php5-gd wget libapache2-mod-php5
-    dl="https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz"
-    # Grab Vanilla from upstream.
-    juju-log "Fetching $dl"
-    wget "$dl" -O /tmp/vanilla.tar.gz
-    # IDEMPOTENCY is very important in all charm hooks, even the install hook.
-    if [ -f /var/www/vanilla/conf/config.php ]; then
-      cp /var/www/vanilla/conf/config.php /tmp/
-      rm -rf /var/www/vanilla
-    fi
-    # Extract to a known location
-    juju-log "Extracting Vanilla"
-    tar -xvzf /tmp/vanilla.tar.gz -C /var/www/
-    mv /var/www/Garden-Vanilla* /var/www/vanilla
-    if [ -f /tmp/config.php ]; then
-      mv /tmp/config.php /var/www/vanilla/conf/
-    fi
-    chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
-    juju-log "Creating apache2 configuration"
-    cat <<EOF > /etc/apache2/sites-available/vanilla
-    <VirtualHost *:80>
-      ServerAdmin webmaster@localhost
-      DocumentRoot /var/www/vanilla
-      <Directory /var/www/vanilla>
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride All
-        Order allow,deny
-        allow from all
-      </Directory>
-      ErrorLog \${APACHE_LOG_DIR}/vanilla.log
-      LogLevel warn
-      CustomLog \${APACHE_LOG_DIR}/access.log combined
-    </VirtualHost>
-    EOF
-    a2dissite 000-default
-    a2ensite vanilla
-    service apache2 reload
-    juju-log "Files extracted, waiting for other events before we do anything else!"
+```bash
+#!/bin/bash
+set -e # If any command fails, stop execution of the hook with that error
+apt-get install -y apache2 php5-cgi php5-mysql curl php5-gd wget libapache2-mod-php5
+dl="https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz"
+# Grab Vanilla from upstream.
+juju-log "Fetching $dl"
+wget "$dl" -O /tmp/vanilla.tar.gz
+# IDEMPOTENCY is very important in all charm hooks, even the install hook.
+if [ -f /var/www/vanilla/conf/config.php ]; then
+  cp /var/www/vanilla/conf/config.php /tmp/
+  rm -rf /var/www/vanilla
+fi
+# Extract to a known location
+juju-log "Extracting Vanilla"
+tar -xvzf /tmp/vanilla.tar.gz -C /var/www/
+mv /var/www/Garden-Vanilla* /var/www/vanilla
+if [ -f /tmp/config.php ]; then
+  mv /tmp/config.php /var/www/vanilla/conf/
+fi
+chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
+juju-log "Creating apache2 configuration"
+cat <<EOF > /etc/apache2/sites-available/vanilla
+<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/vanilla
+  <Directory /var/www/vanilla>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Order allow,deny
+    allow from all
+  </Directory>
+  ErrorLog \${APACHE_LOG_DIR}/vanilla.log
+  LogLevel warn
+  CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOF
+a2dissite 000-default
+a2ensite vanilla
+service apache2 reload
+juju-log "Files extracted, waiting for other events before we do anything else!"
+```
 
 We aren't going to go for a line-by-line explanation of that, but there are a
 few things worth noting
@@ -262,26 +264,28 @@ to you to decide which events require a hook.
 
 Let's take a stab at the 'database-relation-changed' hook:
 
-    #!/bin/bash
-    set -e # If any command fails, stop execution of the hook with that error
-    db_user=`relation-get user`
-    db_db=`relation-get database`
-    db_pass=`relation-get password`
-    db_host=`relation-get private-address`
-    if [ -z "$db_db" ]; then
-      juju-log "No database information sent yet. Silently exiting"
-      exit 0
-    fi
-    vanilla_config="/var/www/vanilla/conf/config.php"
-    cat <<EOF > $vanilla_config
-    <?php if (!defined('APPLICATION')) exit();
-    \$Configuration['Database']['Host'] = '$db_host';
-    \$Configuration['Database']['Name'] = '$db_db';
-    \$Configuration['Database']['User'] = '$db_user';
-    \$Configuration['Database']['Password'] = '$db_pass';
-    EOF
-    juju-log "Make the application port available, now that we know we have a site to expose"
-    open-port 80
+```bash
+#!/bin/bash
+set -e # If any command fails, stop execution of the hook with that error
+db_user=`relation-get user`
+db_db=`relation-get database`
+db_pass=`relation-get password`
+db_host=`relation-get private-address`
+if [ -z "$db_db" ]; then
+  juju-log "No database information sent yet. Silently exiting"
+  exit 0
+fi
+vanilla_config="/var/www/vanilla/conf/config.php"
+cat <<EOF > $vanilla_config
+<?php if (!defined('APPLICATION')) exit();
+\$Configuration['Database']['Host'] = '$db_host';
+\$Configuration['Database']['Name'] = '$db_db';
+\$Configuration['Database']['User'] = '$db_user';
+\$Configuration['Database']['Password'] = '$db_pass';
+EOF
+juju-log "Make the application port available, now that we know we have a site to expose"
+open-port 80
+```
 
 You will notice that this script uses the backticked command relation-get. This
 is a Juju helper command that fetches the named values from the corresponding
@@ -302,7 +306,7 @@ checks one value to see if it exists - if not the corresponding charm hasn't set
 When it has the values we can use these to modify the config file for Vanilla in the relevant place, and finally open the port to make the service active.
 
 The final hook we need to write is for other services which may want to consume
-Vanilla, 'website-relation-joined'.
+Vanilla, `website-relation-joined`.
 
     #!/bin/sh
     relation-set hostname=`unit-get private-address` port=80
@@ -374,5 +378,5 @@ Congratulations!
 
 With the charm working properly, you may consider everything a job well done. If your charm is really great and you want to share it, particularly on the charm store, then there are a couple of things you ought to add.
 
-1. Create a file called 'copyright' and place whatever license information you require in there. 
+1. Create a file called 'copyright' and place whatever license information you require in there.
 1. Add a beautiful icon ([there is a guide to making one here](./authors-charm-icon.html)) so others can recognise it in the charm store!

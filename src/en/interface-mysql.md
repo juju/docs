@@ -17,11 +17,11 @@ A charm joining this relationship will typically have a relationship-joined hook
 
 Upon relation joined, mysql sets the following:
 
-- database (string)
-- user (string)
-- password (string)
-- host (string)
-- slave (string)
+ - database (string)
+ - user (string)
+ - password (string)
+ - host (string)
+ - slave (string)
 
 The corresponding `relation-joined` hook in any charm connecting to the mysql
 charm should fetch any or all of these values.

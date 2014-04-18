@@ -1,8 +1,7 @@
 # Configuring for Windows Azure
 
 This process requires you to have an Windows Azure account. If you have not
-signed up for one yet, it can obtained at [http://azure.microsoft.com/en-
-us/](http://azure.microsoft.com/en-us/).
+signed up for one yet, it can obtained at http://azure.microsoft.com/en-us/.
 
 You should start by generating a generic configuration file for Juju, using the
 command:
@@ -13,7 +12,10 @@ This will generate a file, `environments.yaml`, which will live in your
 `~/.juju/` directory (and will create the directory if it doesn't already
 exist).
 
-**Note:** The above command will not overwrite your existing environments.yaml file, or output to stdout. In order to see the boilerplate environment.yaml on stdout you need to append the `--show` option. This is helpful if you have an existing environment.yaml and just need to add a section. For example:
+**Note:** The above command will not overwrite your existing environments.yaml
+file, or output to stdout. In order to see the boilerplate environment.yaml on
+stdout you need to append the `--show` option. This is helpful if you have an
+existing environment.yaml and just need to add a section. For example:
 
     juju generate-config --show
 
@@ -50,10 +52,11 @@ something like this:
             # image-stream: "released"
 
 This is the configuration environments.yaml file needed to run on Windows Azure.
-You will need to set the `management-subscription-id`, `management-certificate-
-path`, and `storage-account-name`.
+You will need to set the `management-subscription-id`,
+`management-certificate-path`, and `storage-account-name`.
 
-**Note:** Other than `location` the other key vaule defaults are recommended, but can be updated to your preference.
+**Note:** Other than `location` the other key vaule defaults are recommended,
+but can be updated to your preference.
 
 ## Config Values
 
@@ -65,8 +68,9 @@ the following commands on Ubuntu to generate a new certificate:
     openssl x509 -inform pem -in azure.pem -outform der -out azure.cer
     chmod 600 azure.pem
 
-Login to the Windows Azure console @ [
-https://manage.windowsazure.com](https://manage.windowsazure.com). From here you can gather the following information:
+Login to the Windows Azure console @
+[https://manage.windowsazure.com](https://manage.windowsazure.com). From here
+you can gather the following information:
 
 - **Settings** Left Navigation: get the `SUBSCRIPTION ID` of the account you upload to. This will be used for the `management-subscription-id`
 - **Settings** Left Navigation: "upload" the MyCert.cer file above (if you created one). This is the certificate you used for the `management-certificate-path`
@@ -78,6 +82,9 @@ https://manage.windowsazure.com](https://manage.windowsazure.com). From here you
   - Select Subscription
   - Disable "Enable Geo-Replication" (not applicable)
 
-**Note:** You must create the storage account in the same region/location specified by the `location` key value. For example, if `location: West US` is set then `storage-account-name:` must also have a storage set up in `West US`. Failure to do so will result in a group affinity error.
+**Note:** You must create the storage account in the same region/location
+specified by the `location` key value. For example, if `location: West US` is
+set then `storage-account-name:` must also have a storage set up in `West US`.
+Failure to do so will result in a group affinity error.
 
 Ensure the environments.yaml is configured with the above values and save.

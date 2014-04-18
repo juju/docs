@@ -21,7 +21,7 @@ the devops community.
 
 Tips for production usage:
 
-  - Provide an overview of the service in the README and metadata. 
+  - Provide an overview of the service in the README and metadata.
   - Use packaged software (i.e. debian packages) where possible, and "backport" any packages needed outside of the archives from whatever PPA you have them to an internal accessible repository.
   - Do not duplicate any service components for which there are pre-existing charms.
   - Follow the coding guidelines for charms (see below).
@@ -52,15 +52,15 @@ environment: `cheetah fill --env -p templates/celerymon_conf.tmpl >
 
 In this example, the template looks like this:
 
-                start on started celeryd
-                stop on stopping celeryd
-                env CODEDIR=$CODE_LOCATION
-                env
-                PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
-                exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
-                PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
-                /srv/${BASEDIR}/var/celeryev.pid"
-                respawn
+    start on started celeryd
+    stop on stopping celeryd
+    env CODEDIR=$CODE_LOCATION
+    env
+    PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
+    exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
+    PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
+    /srv/${BASEDIR}/var/celeryev.pid"
+    respawn
 
   - Do all config options have appropriate descriptions?
   - Are all hooks idempotent?

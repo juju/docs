@@ -9,10 +9,10 @@ Whenever a hook-worthy event takes place, the unit agent first checks whether
 that hook is being [debugged](./authors-hook-debug.html), and if so hands over
 control to the user. Otherwise, it tries to find a hook with precisely the right
 name. If the hook doesn't exist, the agent continues without complaint; if it
-does, it is invoked without arguments in a specific [environment](./authors-
-hook-environment.html), and its output is written to the unit agent's log. If it
-returns a non-zero exit code, the agent enters an [error state](./authors-hook-
-errors.html) and awaits user intervention.
+does, it is invoked without arguments in a specific
+[environment](./authors-hook-environment.html), and its output is written to
+the unit agent's log. If it returns a non-zero exit code, the agent enters an
+[error state](./authors-hook-errors.html) and awaits user intervention.
 
 The agent will also enter an error state if the unit agent process is aborted
 during hook execution.
@@ -20,7 +20,10 @@ during hook execution.
 There are two types of hooks, described in more detail in the following
 sections.
 
-**Note: **None of the unit or relation hooks are required; if you don't implement a hook, it just doesn't get run. When a hook event occurs, Juju will look for the corresponding hook file to execute, but if it finds none, will continue running without generating an error.
+**Note: **None of the unit or relation hooks are required; if you don't
+implement a hook, it just doesn't get run. When a hook event occurs, Juju will
+look for the corresponding hook file to execute, but if it finds none, will
+continue running without generating an error.
 
 ## Unit hooks
 
@@ -77,8 +80,8 @@ While the forced upgrade functionality is intended as a developer tool, and is
 not generally suitable for end users, it's somewhat optimistic to depend on the
 functionality never being abused. In light of this, if you need to run an
 `upgrade-charm` hook before your other hooks will work correctly, it may be wise
-to preface all your other hooks with a quick call to your (idempotent)`upgrade-
-charm`.
+to preface all your other hooks with a quick call to your (idempotent)
+`upgrade-charm`.
 
 ### stop
 
@@ -177,7 +180,7 @@ Independent of the nuts and bolts, though, good hooks display a number of useful
 high-level properties:
 
   - They are _idempotent_: that is to say that there should be no observable difference between running a hook once, and running it N times in a row. If this property does not hold, you are likely to be making your own life unnecesarily difficult: apart from anything else, the average user's most likely first response to a failed hook will be to try to run it again (if they don't just skip it).
-  - They are _easy to read_ and understand. It's tempting to write a single file that does everything, and which just calls different functions internally depending on the value of `argv[0]`, and to symlink that one file for every hook; but such structures quickly become unwieldy.  
+  - They are _easy to read_ and understand. It's tempting to write a single file that does everything, and which just calls different functions internally depending on the value of `argv[0]`, and to symlink that one file for every hook; but such structures quickly become unwieldy.
 The time taken to write a library, separate from the hooks, is very likely to be
 well spent: it lets you write single hooks that are clear and focused, and
 insulates the maintainer from irrelevant details.

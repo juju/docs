@@ -6,7 +6,7 @@ an ideal charm provides users. So we rate charms by the following criteria.
 These features are shown to users in the charm store so that they can see what
 features a charm provides at a glance.
 
-**Note: **This is an ideal list of what we'd like charms to be. Most charms today do not offer every feature; it's a target we set for ourselves so we can determine how we can improve individual charms. It also gives contributors a general idea of where they can spend their time to fix something.
+**Note:** This is an ideal list of what we'd like charms to be. Most charms today do not offer every feature; it's a target we set for ourselves so we can determine how we can improve individual charms. It also gives contributors a general idea of where they can spend their time to fix something.
 
 ## Data Handling
 

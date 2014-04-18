@@ -12,12 +12,12 @@ helpers are designed to make hook writing easier, they are not required to write
 tests for charms. This library is offered as a completely optional set of tools
 for you to use.
 
-# Installation
+## Installation
 
 Amulet is available as both a package and via pip. For source packages, see [
 GitHub](https://github.com/marcoceppi/amulet/releases).
 
-[Ubuntu](.) [Mac OSX](.) [Windows](.) [Source](.)
+### Ubuntu
 
 Amulet is available in the Juju Stable PPA for Ubuntu
 
@@ -25,14 +25,18 @@ Amulet is available in the Juju Stable PPA for Ubuntu
     sudo apt-get update
     sudo apt-get install amulet
 
+### Mac OSX
+
 Amulet is available via Pip:
 
     sudo pip install amulet
 
+### Windows
 Amulet is available via Pip:
 
     pip install amulet
 
+### Source
 Amulet is built with Python3, make sure it's installed prior to following these
 steps. While you can run Amulet from source, it's not recommended as it requires
 several changes to environment variables in order for Amulet to operate as it
@@ -130,30 +134,31 @@ Juju API or the juju commands.
 
 #### Class:
 
-`Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-
-deployer', sentry_template=None)`
+    Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-deployer', sentry_template=None)
 
 #### Methods:
 
-`Deployment.add(service, charm=None, units=1)`
+##### Deployment.add(service, charm=None, units=1)
 
 Add a new service to the deployment schema.
 
   - `service` Name of the service to deploy.
   - `charm` If provided, will be the charm used. Otherwise service is used as the charm.
   - `units` Number of units to deploy.
+
     import amulet
     d = amulet.Deployment()
     d.add('wordpress')
     d.add('second-wp', charm='wordpress')
     d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)
 
-`Deployment.add_unit(service, units=1)`
+##### Deployment.add_unit(service, units=1)
 
 Add more units of an existing service after deployment.
 
   - `service` Name of the service to add, must already be added.
   - `units` Number of units to add, default is one.
+
     import amulet
     d = amulet.Deployment()
     d.add('wordpress')
@@ -165,47 +170,51 @@ Add more units of an existing service after deployment.
     d.add_unit('wordpress')
     d.add_unit('wordpresss', units=2)
 
-`Deployment.build_relations()`
+##### Deployment.build_relations()
 
 Private method invoked during deployer_map. Creates relation mapping.
 
-`Deployment.build_sentries()`
+##### Deployment.build_sentries()
 
 Private method invoked during deployer_map. Creates sentries for services.
 
-`Deployment.configure(service, **options)`
+##### Deployment.configure(service, **options)
 
 Change configuration options for a service.
 
   - `service` The service to configure.
   - `options` Dict of configuration options.
+
     import amulet
     d = amulet.Deployment()
     d.add('postgresql')
     d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})
 
-`Deployment.deployer_map(services, relations)`
+##### Deployment.deployer_map(services, relations)
 
 Create deployer file from provided services and relations.
 
   - `services` Object of service and service data.
   - `relations` List of relations to map.
-`Deployment.expose(service)`
+
+##### Deployment.expose(service)
 
 Indicate if a service should be exposed after deployment.
 
   - `service` - Name of service to expose
+
     import amulet
     d = amulet.Deployment()
     d.add('varnish')
     d.expose('varnish')
 
-`Deployment.load(deploy_cfg)`
+##### Deployment.load(deploy_cfg)
 
 Import an existing deployer object.
 
   - `deploy_cfg` Already parsed deployer yaml/json file.
-`Deployment.relate(*args)`
+
+    Deployment.relate(*args)
 
 Relate two services together.
 
@@ -224,12 +233,13 @@ first argument as a relation.
     d.relate('postgresql:db-admin', 'discourse:db')
     d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
 
-`Deployment.setup(timeout=600)`
+##### Deployment.setup(timeout=600)
 
 This will create the deployer mapping, create any sentries that are required,
 and execute juju-deployer with the generated mapping.
 
   - `timeout` in seconds, how long to wait for setup
+
     import amulet
     d = amulet.Deployment()
     d.add('wordpress')
@@ -270,7 +280,7 @@ about an environment. The following are a few examples.
 
 #### Methods
 
-`wait(timeout=300)`
+##### wait(timeout=300)
 
 Wait for all hooks to finish execution on deployment
 
@@ -284,7 +294,7 @@ Each unit is assigned a UnitSentry
 
 #### Class:
 
-`UnitSentry.from_unitdata(unit, unit_data, port=9001, sentry=None)`
+##### UnitSentry.from_unitdata(unit, unit_data, port=9001, sentry=None)
 
   - `unit` - `service/#` formatted string of unit name
   - `unit_data` - Object of unit status output
@@ -293,11 +303,11 @@ Each unit is assigned a UnitSentry
 
 #### Methods:
 
-`UnitSentry.directory(dir)`
+##### UnitSentry.directory(dir)
 
 See UnitSentry.directory_stat()
 
-`UnitSentry.directory_contents(dir)`
+##### UnitSentry.directory_contents(dir)
 
 Return files and directories of directory
 
@@ -308,7 +318,7 @@ Example of output
     {'files': []
      'directories': []}
 
-`UnitSentry.directory_stat(dir)`
+##### UnitSentry.directory_stat(dir)
 
 Return stat of directory
 
@@ -322,11 +332,11 @@ Example of output
      'gid': fs_stat.st_gid,
      'mode': fs_stat.st_mode}
 
-`UnitSentry.file(filename)`
+##### UnitSentry.file(filename)
 
 See UnitSentry.file_stat()
 
-`UnitSentry.file_contents(filename)`
+##### UnitSentry.file_contents(filename)
 
 Return contents of filename
 
@@ -345,7 +355,7 @@ Example of output
      'gid': fs_stat.st_gid,
      'mode': fs_stat.st_mode}
 
-`UnitSentry.relation(from_rel, to_rel)`
+##### UnitSentry.relation(from_rel, to_rel)
 
 Return stat of path
 
@@ -354,7 +364,7 @@ Return stat of path
 
 Output is an object of key, val relation data
 
-`UnitSentry.run(command)`
+##### UnitSentry.run(command)
 
 Execute specified command as root on remote machine
 

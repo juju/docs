@@ -4,7 +4,10 @@
 
 Juju provides a feature called "manual provisioning" that enables you to deploy
 Juju, and charms, to existing systems. This is useful if you have groups of
-machines that you want to use for Juju but don't want to add the complexity of a new OpenStack or MAAS setup. It is also useful as a means of deploying workloads to VPS providers and other cheap hosting options. We will describe in this section how to configure an environment using this feature.
+machines that you want to use for Juju but don't want to add the complexity of
+a new OpenStack or MAAS setup. It is also useful as a means of deploying
+workloads to VPS providers and other cheap hosting options. We will describe in
+this section how to configure an environment using this feature.
 
 ## Prerequisites
 
@@ -24,7 +27,9 @@ This will generate a file, `environments.yaml` (if it doesn't already exist),
 which will live in your `~/.juju/` directory (and will create the directory if
 it doesn't already exist).
 
-**Note:** If you have an existing configuration, you can use `juju generate-config --show` to output the new config file, then copy and paste relevant areas in a text editor etc.
+**Note:** If you have an existing configuration, you can use
+`juju generate-config --show` to output the new config file, then copy and paste
+relevant areas in a text editor etc.
 
 The generic configuration sections generated for the manual provider will look
 something like this, though Juju will generate this automatically you usually
@@ -50,7 +55,8 @@ don't need to edit it:
             # on. It defaults to 8040
             # storage-port: 8040
 
-When bootstrapped, tools storage will be served from the `bootstrap-host` on the specified `storage-listen-ip` and `storage-port`.
+When bootstrapped, tools storage will be served from the `bootstrap-host` on the
+specified `storage-listen-ip` and `storage-port`.
 
 The manual provider does not perform automatic machine provisioning like other
 providers; instead, you must manually provision machines into the environment.
@@ -59,7 +65,9 @@ Provisioning machines is described in the following sections.
 ## Bootstrapping
 
 To bootstrap a manual environment, you must specify the `bootstrap-host`
-configuration, and optionally the `bootstrap-user` configuration. If `bootstrap-user` is not specified, then Juju will ssh to the bootstrap host as the current user. Once the configuration is specified, you bootstrap as usual:
+configuration, and optionally the `bootstrap-user` configuration. If
+`bootstrap-user` is not specified, then Juju will ssh to the bootstrap host as
+the current user. Once the configuration is specified, you bootstrap as usual:
 
     juju bootstrap
 

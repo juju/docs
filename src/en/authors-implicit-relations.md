@@ -14,8 +14,8 @@ Juju currently provides one implicit relationship to all deployed services:
 `juju-info`, if specified would look like:
 
     provides:
-                    juju-info:
-                        interface: juju-info
+      juju-info:
+        interface: juju-info
 
 The charm author should not declare the `juju-info` relation and is provided
 here only as an example. The `juju-info` relation is implicitly provided by all
@@ -23,8 +23,8 @@ charms, and enables the requiring unit to obtain basic details about the
 related-to unit. The following settings will be implicitly provided by the
 remote unit in a relation through its `juju-info` relation
 
-                private-address
-                public-address
+    private-address
+    public-address
 
 ## Relationship resolution
 
@@ -33,12 +33,12 @@ requires a valid `scope: container` relationship in order to deploy. It can take
 advantage of the implicit relationship offered by all charms, `juju-info`.
 
     requires:
-                  logging:
-                      interface: logging-directory
-                      scope: container
-                  juju-info:
-                      interface: juju-info
-                      scope: container
+      logging:
+          interface: logging-directory
+          scope: container
+      juju-info:
+          interface: juju-info
+          scope: container
 
 The admin then issues the following
 

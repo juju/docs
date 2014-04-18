@@ -15,8 +15,8 @@ consists of a squircle (a square with rounded corners) which looks â€˜embossedâ€
 the UI. A unique pictogram (usually monochromatic) is displayed in the middle of
 the squircle.
 
-![Image showing specifications of charm icon](./media/author-charm-icons-
-light.png)
+![Image showing specifications
+of charm icon](./media/author-charm-icons-light.png)
 
 The squircle can be filled with either a flat color or a vertical gradient. In
 case of a gradient, the darker colour should correspond to the bottom of the
@@ -37,13 +37,11 @@ If meeting the above spec seems more complicated than creating your charm in the
 first place, then fear not, because we have an easy step-by-step guide for you.
 Before you start you will need:
 
-  - A vector graphic editor. We strongly recommend the cross-platform and most excellent [ Inkscape ](http://www.inkscape.org) for all your vector graphic needs. 
+  - A vector graphic editor. We strongly recommend the cross-platform and most excellent [ Inkscape ](http://www.inkscape.org) for all your vector graphic needs.
   - The template file, [ which you can download from this link ](./media/icon.svg)
   - An existing logo you can import, or the ability to draw one in Inkscape
 
 Once you have those, fire up Inkscape and we can begin!
-
-1
 
 ## Open the template!
 
@@ -51,8 +49,6 @@ From Inkscape load the **icon.svg** file. Select the Layer called "BACKGROUND",
 either from the drop down at the bottom, or from the layer dialog.
 
 ![Step one](./media/author-charm-icons-1.png)
-
-2
 
 ## Add colour
 
@@ -62,8 +58,6 @@ lighter at the top and darker at the bottom.
 
 ![Step two](./media/author-charm-icons-2.png)
 
-3
-
 ## Show the guides
 
 Choose the "PICTOGRAM" layer, which is where your logo will live. To help you
@@ -71,8 +65,6 @@ place it properly, choose **View&GT;Guides** from the menu. A grid will appear
 showing the limits of the pictogram area.
 
 ![Step three](./media/author-charm-icons-3.png)
-
-4
 
 ## Draw something
 
@@ -85,8 +77,6 @@ and delete the bitmap.
 
 ![Step four](./media/author-charm-icons-4.png)
 
-5
-
 ## Add a shadow
 
 If you want to apply a drop shadow to your design to make it stand out from the
@@ -96,8 +86,6 @@ list.
 
 ![Step five](./media/author-charm-icons-5.png)
 
-6
-
 ## Check it over
 
 You can check what your icon might look like with the reviewed badge by making
@@ -106,7 +94,7 @@ file. Congratulations, your shiny icon is now ready!
 
 ![Step six](./media/author-charm-icons-6.png)
 
-##  And finally... some quick Dos and Don'ts
+## And finally... some quick Dos and Don'ts
 
 Icons should not be overly complicated. Charm icons are displayed in various
 sizes (from 160x160 to 32x32 pixels) and they should be always legible. In
