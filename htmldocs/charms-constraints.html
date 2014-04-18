@@ -166,7 +166,7 @@ amd64):</p>
 <pre><code>juju deploy --constraints "cpu-cores=8 mem=32G" mysql
 </code></pre>
 <p>Deploy to t1.micros on AWS:</p>
-<pre><code>juju bootstrap --constraints "cpu-power=0 cpu-power=0 mem=512M"
+<pre><code>juju bootstrap --constraints "cpu-power=0 mem=512M"
 </code></pre>
 <p>Launch all future "mysql" machines with at least 8GiB of RAM and 4 ECU:</p>
 <pre><code>juju set-constraints --service mysql mem=8G cpu-cores=4
