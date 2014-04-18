@@ -9,7 +9,7 @@ words, but your knowledge is very useful to us.
 
 # How to write docs!
 
-Contributing to the docs is really easy because it is all written in [Markdown](http://askubuntu.com/editing-help). You will find most of the source documents are very straightforward and human-readable, if you just want to dip in and change a paragraph or add some extra info.
+Contributing to the docs is really easy because it is all written in GitHub flavored [Markdown](https://help.github.com/articles/github-flavored-markdown). You will find most of the source documents are very straightforward and human-readable, if you just want to dip in and change a paragraph or add some extra info.
 
 ## Grab the docs and get to work
 
@@ -20,7 +20,7 @@ We enforce 80 columns for every text file to keep it readable. Here are instruct
 - [vim](http://stackoverflow.com/questions/3033423/vim-command-to-restructure-force-text-to-80-columns)
 - [emacs](http://www.emacswiki.org/emacs/EightyColumnRule)
 
-Here is a handy [Markdown reference](http://askubuntu.com/editing-help)) to get you started.
+Here is a handy [Markdown reference](http://askubuntu.com/editing-help)) to get you started, and don't forget to reference the [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown) reference.
 
 ## Sections
 
