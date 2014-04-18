@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -17,7 +17,7 @@
       <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body class="resources">	
+  <body class="resources">
     <header class="banner global" role="banner">
       <nav role="navigation" class="nav-primary nav-right">
         <div class="logo">
@@ -40,9 +40,9 @@
             <label class="off-left" for="s">Search:</label>
             <input class="form-text" type="text" value="" name="s" id="s" />
             <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-          </form>		
+          </form>
         </div>
-      </nav>	
+      </nav>
     </header>
     <div class="wrapper">
       <div id="main-content" class="inner-wrapper" role="main">
@@ -120,7 +120,7 @@
      <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
+     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
      <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
      <script type="text/javascript" src="./js/main.js"></script>
      <script type="text/javascript" src="./js/jquery.details.js"></script>
