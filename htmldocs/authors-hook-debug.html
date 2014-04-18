@@ -146,7 +146,8 @@ names, causing all hooks to be debugged:</p>
 check the <code>db-relation-joined</code> and <code>db-relation-broken</code> hooks:</p>
 <pre><code>juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 </code></pre>
-<p class="note"><strong>Note:</strong> It is possible and often desirable to run debug-hooks on more than one unit at a time. You should open a new terminal window for each.</p>
+<p class="note"><strong>Note:</strong> It is possible and often desirable to run debug-hooks on more than
+one unit at a time. You should open a new terminal window for each.</p>
 <h2 id="running-a-debug-session">Running a debug session</h2>
 <p>When you run the debug-hooks command, Juju creates a slightly customised <code>tmux</code>
 session on the machine running the requested unit (if you are unfamiliar with
@@ -159,10 +160,10 @@ be debugged:</p>
 <ul>
 <li>a new window will be attached to the tmux session.</li>
 <li>the bottom left of the status bar will change to indicate the current hook that has been trapped.</li>
-<li>the prompt will change to indicate the hook related to the window (e.g. <code>mysql/0:db-relation-joined %</code></li>
+<li>the prompt will change to indicate the hook related to the window (e.g. <code>mysql/0:db-relation-joined %</code>)</li>
 <li>the shell will be running in the standard <a href="./authors-hook-environment.html">hook environment</a>.</li>
 <li>additionally, <code>$JUJU_HOOK_NAME</code> is set appropriately.
-<img alt="Image showing tmux debug hooks session" src="./media/authors-hook-debug-1.png" /></li>
+  <img alt="Image showing tmux debug hooks session" src="./media/authors-hook-debug-1.png" /></li>
 </ul>
 <p>To proceed, you should <strong>manually execute the hook</strong>, or perform whatever other
 actions you want. At any time during a debug-hooks window 1 session you can run
@@ -178,12 +179,14 @@ to run. Even hooks which are not in your list to debug will be suspended in the
 queue until you exit your current window. See the  special considerations below.</p>
 <p>The queue for pending hooks will restart once you exit the window with an <code>exit</code>
 command.</p>
-<p><strong>Note: </strong> To allow Juju to continue processing events normally, you <strong>must</strong> exit the hook execution window with the <code>exit</code> command, otherwise all further events on that unit will be paused indefinitely.</p>
+<p class="note"><strong>Note:</strong> To allow Juju to continue processing events normally, you <strong>must</strong>
+exit the hook execution window with the <code>exit</code> command, otherwise all further
+events on that unit will be paused indefinitely.</p>
 <p>The queue can be halted by exiting with an <code>exit 1</code> command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending
 everything until this error status is resolved, which you can do by issuing the
-command (from your juju terminal window, not the debugging window) of <code>juju
-resolved &amp;LT;unit&amp;GT;</code>.</p>
+command (from your juju terminal window, not the debugging window) of
+<code>juju resolved &lt;unit&gt;</code>.</p>
 <p>You can finish your debugging session by closing all windows in the tmux
 session. Make sure to exit appropriately from all hook windows before
 terminating.</p>
@@ -239,7 +242,9 @@ make the output more useful, e.g. to filter the whole log for lines matching
 'INFO':</p>
 <pre><code>juju debug-log -n +1  | grep 'INFO'
 </code></pre>
-<p><strong>Note: </strong> As the command uses the follow behaviour of <code>tail</code> by default, you do not need to specify the <code>-f</code> switch. You will also need to end the session with <code>Control-C</code></p>
+<p class="note"><strong>Note:</strong> As the command uses the follow behaviour of <code>tail</code> by default, you do
+not need to specify the <code>-f</code> switch. You will also need to end the session
+with <code>Control-C</code></p>
 <h1 id="what-on-earth-is-tmux?">What on earth is tmux?</h1>
 <p>The Ubuntu images used by Juju also include a slightly customised version of
 <code>tmux</code>, a terminal multiplexer.</p>
@@ -319,7 +324,7 @@ hand. Here are some of the ones you may find useful:</p>
 <p>Control-a :</p>
 <pre><code>Enter the command prompt (for tmux commands)
 </code></pre>
-<p>You can get more info on tmux and its commands at the <a href="http://manpages.ubuntu.com/manpages/trusty/man1/tmux.1.html"> relevant Ubuntu manpage
+<p>You can get more info on tmux and its commands at the <a href="http://manpages.ubuntu.com/manpages/trusty/man1/tmux.1.html">relevant Ubuntu manpage
 entry.</a></p>
               </article>
             </div>

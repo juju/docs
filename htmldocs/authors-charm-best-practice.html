@@ -149,7 +149,7 @@ these criteria to be in the Charm Store, they are included here to share with
 the devops community.</p>
 <p>Tips for production usage:</p>
 <ul>
-<li>Provide an overview of the service in the README and metadata. </li>
+<li>Provide an overview of the service in the README and metadata.</li>
 <li>Use packaged software (i.e. debian packages) where possible, and "backport" any packages needed outside of the archives from whatever PPA you have them to an internal accessible repository.</li>
 <li>Do not duplicate any service components for which there are pre-existing charms.</li>
 <li>Follow the coding guidelines for charms (see below).</li>
@@ -178,15 +178,15 @@ environment: <code>cheetah fill --env -p templates/celerymon_conf.tmpl &gt;
 /etc/init/celerymon.conf</code></li>
 </ul>
 <p>In this example, the template looks like this:</p>
-<pre><code>            start on started celeryd
-            stop on stopping celeryd
-            env CODEDIR=$CODE_LOCATION
-            env
-            PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
-            exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
-            PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
-            /srv/${BASEDIR}/var/celeryev.pid"
-            respawn
+<pre><code>start on started celeryd
+stop on stopping celeryd
+env CODEDIR=$CODE_LOCATION
+env
+PYTHONPATH=$CODE_LOCATION/apps:$CODE_LOCATION:$CODE_LOCATION/lib/python2.7/site-packages
+exec sudo -u $USER_CODE_RUNNER sh -c "cd \$CODEDIR;
+PYTHONPATH=\$PYTHONPATH ./certification-manage.py celerycam --pidfile
+/srv/${BASEDIR}/var/celeryev.pid"
+respawn
 </code></pre>
 <ul>
 <li>Do all config options have appropriate descriptions?</li>

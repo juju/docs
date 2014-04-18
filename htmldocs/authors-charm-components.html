@@ -178,7 +178,12 @@ the charm. When <a href="./authors-charm-upgrades.html">upgrading a charm</a>, a
 that would cause runtime state to be overwritten will cause juju to abort the
 operation and hand over to the user for resolution. This is inconvenient for the
 users and undermines confidence in the charm.</p>
-<p><strong>Note: </strong> You need to be especially aware of the following when writing python code: Python packages run without bytecode suppression will write <code>.pyc</code> files into the package, and subsequent attempts to move or remove the package will fail: the .pyc files are treated as important hook-relevant runtime state information, to be recorded and tracked, and the loss of their directory will put the unit into an upgrade error state as referenced above.</p>
+<p class="note"><strong>Note:</strong> You need to be especially aware of the following when writing python
+code: Python packages run without bytecode suppression will write <code>.pyc</code> files
+into the package, and subsequent attempts to move or remove the package will
+fail: the .pyc files are treated as important hook-relevant runtime state
+information, to be recorded and tracked, and the loss of their directory will
+put the unit into an upgrade error state as referenced above.</p>
               </article>
             </div>
           </div>

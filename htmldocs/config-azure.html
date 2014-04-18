@@ -133,8 +133,7 @@
               <article>
                 <h1 id="configuring-for-windows-azure">Configuring for Windows Azure</h1>
 <p>This process requires you to have an Windows Azure account. If you have not
-signed up for one yet, it can obtained at <a href="http://azure.microsoft.com/en-us/"><a href="http://azure.microsoft.com/en-">http://azure.microsoft.com/en-</a>
-us/</a>.</p>
+signed up for one yet, it can obtained at <a href="http://azure.microsoft.com/en-us/">http://azure.microsoft.com/en-us/</a>.</p>
 <p>You should start by generating a generic configuration file for Juju, using the
 command:</p>
 <pre><code>juju generate-config
@@ -142,7 +141,10 @@ command:</p>
 <p>This will generate a file, <code>environments.yaml</code>, which will live in your
 <code>~/.juju/</code> directory (and will create the directory if it doesn't already
 exist).</p>
-<p class="note"><strong>Note:</strong> The above command will not overwrite your existing environments.yaml file, or output to stdout. In order to see the boilerplate environment.yaml on stdout you need to append the <code>--show</code> option. This is helpful if you have an existing environment.yaml and just need to add a section. For example:</p>
+<p class="note"><strong>Note:</strong> The above command will not overwrite your existing environments.yaml
+file, or output to stdout. In order to see the boilerplate environment.yaml on
+stdout you need to append the <code>--show</code> option. This is helpful if you have an
+existing environment.yaml and just need to add a section. For example:</p>
 <pre><code>juju generate-config --show
 </code></pre>
 <p>You can then copy and paste the needed section.</p>
@@ -176,9 +178,10 @@ something like this:</p>
         # image-stream: "released"
 </code></pre>
 <p>This is the configuration environments.yaml file needed to run on Windows Azure.
-You will need to set the <code>management-subscription-id</code>, <code>management-certificate-
-path</code>, and <code>storage-account-name</code>.</p>
-<p class="note"><strong>Note:</strong> Other than <code>location</code> the other key vaule defaults are recommended, but can be updated to your preference.</p>
+You will need to set the <code>management-subscription-id</code>,
+<code>management-certificate-path</code>, and <code>storage-account-name</code>.</p>
+<p class="note"><strong>Note:</strong> Other than <code>location</code> the other key vaule defaults are recommended,
+but can be updated to your preference.</p>
 <h2 id="config-values">Config Values</h2>
 <p>Generate a new certificate for juju usage (or use an existing one). Suggest to
 use a 'Common Name' with 'Juju' in it so its obvious in the web UI later. Run
@@ -187,8 +190,9 @@ the following commands on Ubuntu to generate a new certificate:</p>
 openssl x509 -inform pem -in azure.pem -outform der -out azure.cer
 chmod 600 azure.pem
 </code></pre>
-<p>Login to the Windows Azure console @ <a href="https://manage.windowsazure.com">
-<a href="https://manage.windowsazure.com">https://manage.windowsazure.com</a></a>. From here you can gather the following information:</p>
+<p>Login to the Windows Azure console @
+<a href="https://manage.windowsazure.com"><a href="https://manage.windowsazure.com">https://manage.windowsazure.com</a></a>. From here
+you can gather the following information:</p>
 <ul>
 <li><strong>Settings</strong> Left Navigation: get the <code>SUBSCRIPTION ID</code> of the account you upload to. This will be used for the <code>management-subscription-id</code></li>
 <li><strong>Settings</strong> Left Navigation: "upload" the MyCert.cer file above (if you created one). This is the certificate you used for the <code>management-certificate-path</code></li>
@@ -200,7 +204,10 @@ chmod 600 azure.pem
 <li>Select Subscription</li>
 <li>Disable "Enable Geo-Replication" (not applicable)</li>
 </ul>
-<p class="note"><strong>Note:</strong> You must create the storage account in the same region/location specified by the <code>location</code> key value. For example, if <code>location: West US</code> is set then <code>storage-account-name:</code> must also have a storage set up in <code>West US</code>. Failure to do so will result in a group affinity error.</p>
+<p class="note"><strong>Note:</strong> You must create the storage account in the same region/location
+specified by the <code>location</code> key value. For example, if <code>location: West US</code> is
+set then <code>storage-account-name:</code> must also have a storage set up in <code>West US</code>.
+Failure to do so will result in a group affinity error.</p>
 <p>Ensure the environments.yaml is configured with the above values and save.</p>
               </article>
             </div>

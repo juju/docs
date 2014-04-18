@@ -137,76 +137,84 @@ command:</p>
 <pre><code>juju generate-config
 </code></pre>
 <p>This will generate a file, <code>environments.yaml</code>, which will live in your
-`~/.juju/`` directory (and will create the directory if it doesn't already
+<code>~/.juju/</code> directory (and will create the directory if it doesn't already
 exist).</p>
-<p class="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
+<p class="note"><strong>Note:</strong> If you have an existing configuration, you can use
+<code>juju generate-config --show</code> to output the new config file, then copy and
+paste relevant areas in a text editor etc.</p>
 <p>The essential configuration sections for OpenStack look like this:</p>
-<pre><code>   type: openstack
-   # use-floating-ip specifies whether a floating IP address is
-   # required to give the nodes a public IP address. Some
-   # installations assign public IP addresses by default without
-   # requiring a floating IP address.
-   #
-   # use-floating-ip: false
-   # use-default-secgroup specifies whether new machine instances
-   # should have the "default" Openstack security group assigned.
-   #
-   # use-default-secgroup: false
-   # network specifies the network label or uuid to bring machines up
-   # on, in the case where multiple networks exist. It may be omitted
-   # otherwise.
-   #
-   # network: &lt;your network label or uuid&gt;
-   # tools-metadata-url specifies the location of the Juju tools and
-   # metadata. It defaults to the global public tools metadata
-   # location https://streams.canonical.com/tools.
-   #
-   # tools-metadata-url:  https://your-tools-metadata-url
-   # image-metadata-url specifies the location of Ubuntu cloud image
-   # metadata. It defaults to the global public image metadata
-   # location https://cloud-images.ubuntu.com/releases.
-   #
-   # image-metadata-url:  https://your-image-metadata-url
-   # image-stream chooses a simplestreams stream to select OS images
-   # from, for example daily or released images (or any other stream
-   # available on simplestreams).
-   #
-   # image-stream: "released"
-   # auth-url defaults to the value of the environment variable
-   # OS_AUTH_URL, but can be specified here.
-   #
-   # auth-url: https://yourkeystoneurl:443/v2.0/
-   # tenant-name holds the openstack tenant name. It defaults to the
-   # environment variable OS_TENANT_NAME.
-   #
-   # tenant-name: &lt;your tenant name&gt;
-   # region holds the openstack region. It defaults to the
-   # environment variable OS_REGION_NAME.
-   #
-   # region: &lt;your region&gt;
-   # The auth-mode, username and password attributes are used for
-   # userpass authentication (the default).
-   #
-   # auth-mode holds the authentication mode. For user-password
-   # authentication, auth-mode should be "userpass" and username and
-   # password should be set appropriately; they default to the
-   # environment variables OS_USERNAME and OS_PASSWORD respectively.
-   #
-   # auth-mode: userpass
-   # username: &lt;your username&gt;
-   # password: &lt;secret&gt;
-   #
-   # For key-pair authentication, auth-mode should be "keypair" and
-   # access-key and secret-key should be set appropriately; they
-   # default to the environment variables OS_ACCESS_KEY and
-   # OS_SECRET_KEY respectively.
-   #
-   # auth-mode: keypair
-   #access-key: &lt;secret&gt;
-   # secret-key: &lt;secret&gt;
-</code></pre>
-<p class="note"><strong>Note:</strong> At any time you can run <code>juju generate-config --show</code> to display the most revent version of the environments.yaml template file, instead of having it write to file.</p>
-<p>Remember to substitute in the parts of the snippet that are important to you. If you are deploying on OpenStack the following documentation might also be useful:</p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">openstack</span>
+<span class="c1"># use-floating-ip specifies whether a floating IP address is</span>
+<span class="c1"># required to give the nodes a public IP address. Some</span>
+<span class="c1"># installations assign public IP addresses by default without</span>
+<span class="c1"># requiring a floating IP address.</span>
+<span class="c1">#</span>
+<span class="c1"># use-floating-ip: false</span>
+<span class="c1"># use-default-secgroup specifies whether new machine instances</span>
+<span class="c1"># should have the &quot;default&quot; Openstack security group assigned.</span>
+<span class="c1">#</span>
+<span class="c1"># use-default-secgroup: false</span>
+<span class="c1"># network specifies the network label or uuid to bring machines up</span>
+<span class="c1"># on, in the case where multiple networks exist. It may be omitted</span>
+<span class="c1"># otherwise.</span>
+<span class="c1">#</span>
+<span class="c1"># network: &lt;your network label or uuid&gt;</span>
+<span class="c1"># tools-metadata-url specifies the location of the Juju tools and</span>
+<span class="c1"># metadata. It defaults to the global public tools metadata</span>
+<span class="c1"># location https://streams.canonical.com/tools.</span>
+<span class="c1">#</span>
+<span class="c1"># tools-metadata-url:  https://your-tools-metadata-url</span>
+<span class="c1"># image-metadata-url specifies the location of Ubuntu cloud image</span>
+<span class="c1"># metadata. It defaults to the global public image metadata</span>
+<span class="c1"># location https://cloud-images.ubuntu.com/releases.</span>
+<span class="c1">#</span>
+<span class="c1"># image-metadata-url:  https://your-image-metadata-url</span>
+<span class="c1"># image-stream chooses a simplestreams stream to select OS images</span>
+<span class="c1"># from, for example daily or released images (or any other stream</span>
+<span class="c1"># available on simplestreams).</span>
+<span class="c1">#</span>
+<span class="c1"># image-stream: &quot;released&quot;</span>
+<span class="c1"># auth-url defaults to the value of the environment variable</span>
+<span class="c1"># OS_AUTH_URL, but can be specified here.</span>
+<span class="c1">#</span>
+<span class="c1"># auth-url: https://yourkeystoneurl:443/v2.0/</span>
+<span class="c1"># tenant-name holds the openstack tenant name. It defaults to the</span>
+<span class="c1"># environment variable OS_TENANT_NAME.</span>
+<span class="c1">#</span>
+<span class="c1"># tenant-name: &lt;your tenant name&gt;</span>
+<span class="c1"># region holds the openstack region. It defaults to the</span>
+<span class="c1"># environment variable OS_REGION_NAME.</span>
+<span class="c1">#</span>
+<span class="c1"># region: &lt;your region&gt;</span>
+<span class="c1"># The auth-mode, username and password attributes are used for</span>
+<span class="c1"># userpass authentication (the default).</span>
+<span class="c1">#</span>
+<span class="c1"># auth-mode holds the authentication mode. For user-password</span>
+<span class="c1"># authentication, auth-mode should be &quot;userpass&quot; and username and</span>
+<span class="c1"># password should be set appropriately; they default to the</span>
+<span class="c1"># environment variables OS_USERNAME and OS_PASSWORD respectively.</span>
+<span class="c1">#</span>
+<span class="c1"># auth-mode: userpass</span>
+<span class="c1"># username: &lt;your username&gt;</span>
+<span class="c1"># password: &lt;secret&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># For key-pair authentication, auth-mode should be &quot;keypair&quot; and</span>
+<span class="c1"># access-key and secret-key should be set appropriately; they</span>
+<span class="c1"># default to the environment variables OS_ACCESS_KEY and</span>
+<span class="c1"># OS_SECRET_KEY respectively.</span>
+<span class="c1">#</span>
+<span class="c1"># auth-mode: keypair</span>
+<span class="c1">#access-key: &lt;secret&gt;</span>
+<span class="c1"># secret-key: &lt;secret&gt;</span>
+</pre></div>
+
+
+<p class="note"><strong>Note:</strong> At any time you can run <code>juju generate-config --show</code> to display the
+most revent version of the environments.yaml template file, instead of having
+it write to file.</p>
+<p>Remember to substitute in the parts of the snippet that are important to you.
+If you are deploying on OpenStack the following documentation might also be
+useful:</p>
 <p><a href="https://help.ubuntu.com/community/UbuntuCloudInfrastructure">Ubuntu Cloud
 Infrastructure</a></p>
               </article>

@@ -136,9 +136,14 @@
 directory. A metadata file must be a valid yaml dictionary, containing at least
 the following fields:</p>
 <ul>
-<li><code>name</code> is the charm name, which is used to form the charm URL. It must contain only <code>a-z</code>, <code>0-9</code>, and <code>-</code>; must start with <code>a-z</code>; must not end with a <code>-</code>; and may only end with digits if the digits are <em>not</em> directly preceded by a space. Stick with names like <code>foo</code> and <code>foo-bar-baz</code> and you needn't pay further attention to the restrictions.</li>
+<li><code>name</code> is the charm name, which is used to form the charm URL. It must
+  contain only <code>a-z</code>, <code>0-9</code>, and <code>-</code>; must start with <code>a-z</code>; must not end
+  with a <code>-</code>; and may only end with digits if the digits are <em>not</em> directly
+  preceded by a space. Stick with names like <code>foo</code> and <code>foo-bar-baz</code> and you
+  needn't pay further attention to the restrictions.</li>
 <li><code>summary</code> is a one-line description of the charm.</li>
-<li><code>description</code> is a long-form description of the charm and its features. It will also appear in the juju GUI.</li>
+<li><code>description</code> is a long-form description of the charm and its features.
+  It will also appear in the juju GUI.</li>
 </ul>
 <p>Here's a valid metadata file:</p>
 <pre><code>name: minecraft
@@ -150,8 +155,11 @@ description: |
 for use in the Charm Store should always set the following fields as well, for
 categorization and display in the GUI:</p>
 <ul>
-<li><code>maintainer</code> is the name and email address for the main point of contact for the development and maintenance of the charm. Or, at least, it should be: in frequent practice, it's just a name. Please update your charms as you get the opportunity.</li>
-<li><code>categories</code> is a list containing one or more of the following: <ul>
+<li><code>maintainer</code> is the name and email address for the main point of contact
+  for the development and maintenance of the charm. Or, at least, it should be:
+  in frequent practice, it's just a name. Please update your charms as you get
+  the opportunity.</li>
+<li><code>categories</code> is a list containing one or more of the following:<ul>
 <li>applications</li>
 <li>app-servers</li>
 <li>cache-proxy</li>
@@ -164,8 +172,8 @@ categorization and display in the GUI:</p>
 <p>In almost all cases, only one category will be appropriate. The categories help
 keep the Charm Store organised.</p>
 <p>Finally, a metadata file defines the charm's relations, and whether it's
-designed for deployment as a <a href="./authors-subordinate-
-services.html">subordinate service</a>.</p>
+designed for deployment as a
+<a href="./authors-subordinate-services.html">subordinate service</a>.</p>
 <ul>
 <li><code>subordinate</code> should be set to true if the charm is a subordinate. If omitted, the charm will be presumed not to be subordinate.</li>
 <li><code>provides</code>, <code>requires</code>, and <code>peers</code> define the various relations the charm will participate in.</li>
@@ -222,46 +230,56 @@ case, the <code>interface</code> key must be specified explicitly, and a number 
 possibilities become available:</p>
 <ul>
 <li>
-<p><code>scope</code> defaults to <code>global</code>, but may be set to <code>container</code>. The scope controls the set of remote units that are reported to the unit as members of the relation: container-scoped relations are restricted to reporting details of a single principal unit to a single subordinate, and vice versa, while global relations consider all possible remote units.<br />
-<a href="authors-charm-subordinates.html">Subordinate</a> charms are only valid if they
-have at least one <code>requires</code> relation with <code>container</code> scope.</p>
+<p><code>scope</code> defaults to <code>global</code>, but may be set to <code>container</code>. The scope
+  controls the set of remote units that are reported to the unit as members of
+  the relation: container-scoped relations are restricted to reporting details
+  of a single principal unit to a single subordinate, and vice versa, while
+  global relations consider all possible remote units.
+  <a href="authors-charm-subordinates.html">Subordinate</a> charms are only valid if they
+  have at least one <code>requires</code> relation with <code>container</code> scope.</p>
 </li>
 <li>
-<p><code>limit</code> is ignored by juju, but if present should be a positive integer N indicating that the charm is not designed to use this interface in more than N relations at once.<br />
-For example, if you're writing a really simple exploratory charm for your
-particular data store, you could just create a single shared store and write the
-same access credentials for every relation. A limit of 1 is thus useful in that
-it does <em>document</em> the restriction, even though it's not automatically enforced
-today.</p>
+<p><code>limit</code> is ignored by juju, but if present should be a positive integer N
+  indicating that the charm is not designed to use this interface in more than N relations at once.
+  For example, if you're writing a really simple exploratory charm for your
+  particular data store, you could just create a single shared store and write
+  the same access credentials for every relation. A limit of 1 is thus useful
+  in that it does <em>document</em> the restriction, even though it's not automatically
+  enforced today.</p>
 </li>
 <li>
-<p><code>optional</code> is ignored by juju, but if present should only be set to true, on <code>requires</code> relations, to indicate that the charm can still function effectively without having those relations added.<br />
-For example, the my-node-app charm might also define:</p>
-<p>requires:
+<p><code>optional</code> is ignored by juju, but if present should only be set to true,
+  on <code>requires</code> relations, to indicate that the charm can still function
+  effectively without having those relations added. For example, the my-node-app
+  charm might also define:</p>
+<pre><code>requires:
   database: mongodb
   memcache:
     interface: memcached
-    optional: true</p>
+    optional: true
+</code></pre>
 </li>
 </ul>
 <p>...to indicate that it can integrate with memcached if it's available, but that
-it can't be expected to do anything useful without a mongodb service available.</p>
+  it can't be expected to do anything useful without a mongodb service available.</p>
 <ul>
-<li><code>gets</code> and <code>sets</code> are ignored by juju at present, but are valuable <a href="./authors-charm-interfaces.html">documentation</a>.</li>
+<li><code>gets</code> and <code>sets</code> are ignored by juju at present, but are valuable
+  <a href="./authors-charm-interfaces.html">documentation</a>.</li>
 </ul>
 <h2 id="sample-metadata.yaml-files">Sample metadata.yaml files</h2>
 <p>The MySQL charm metadata:</p>
-<pre><code>    name: mysql
-    summary: MySQL is a fast, stable and true multi-user, multi-threaded SQL database
-    maintainer: Marco Ceppi
-    description: |
-    MySQL is a fast, stable and true multi-user, multi-threaded SQL database
-    server. SQL (Structured Query Language) is the most popular database query
-    language in the world. The main goals of MySQL are speed, robustness and
-    ease of use.
-    categories:
-    - databases
-  provides:
+<pre><code>name: mysql
+summary: MySQL is a fast, stable and true multi-user, multi-threaded SQL database
+maintainer: Marco Ceppi
+description: |
+MySQL is a fast, stable and true multi-user, multi-threaded SQL database
+server. SQL (Structured Query Language) is the most popular database query
+language in the world. The main goals of MySQL are speed, robustness and
+ease of use.
+categories:
+- databases
+</code></pre>
+<p>provides:
     db:
       interface: mysql
     db-admin:
@@ -287,8 +305,7 @@ requires:
       interface: ceph-client
     ha:
       interface: hacluster
-      scope: container
-</code></pre>
+      scope: container</p>
               </article>
             </div>
           </div>

@@ -134,13 +134,15 @@
                 <h1 id="configuring-for-lxc">Configuring for LXC</h1>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>The LXC local provider enables you to run Juju on a single system like your
-local computer or a single server. This way you can simply evaluate the software or service configurations, develop your own charms or run a single server system.</p>
+local computer or a single server. This way you can simply evaluate the software
+or service configurations, develop your own charms or run a single server system.</p>
 <p>If you're not already using the stable release PPA you can make sure you've
 added it:</p>
 <pre><code>sudo apt-add-repository ppa:juju/stable
 sudo apt-get update
 </code></pre>
-<p>Then you can install the local provider, the commands depend on the Juju version you are using:</p>
+<p>Then you can install the local provider, the commands depend on the Juju version
+you are using:</p>
 <h3 id="for-ubuntu-versions-newer-than-12.04:">For Ubuntu versions newer than 12.04:</h3>
 <pre><code>sudo apt-get install juju-local
 </code></pre>
@@ -153,7 +155,9 @@ Stack</a>:</p>
 </code></pre>
 <p>You will need to reboot into the new kernel in order to use Juju with the local
 provider.</p>
-<p>If you're not running Ubuntu please consult your operating system distribution's documentation for instructions on installing the LXC userspace tools and the MongoDB server. Juju requires a MongoDB server built with SSL support.</p>
+<p>If you're not running Ubuntu please consult your operating system distribution's
+documentation for instructions on installing the LXC userspace tools and the
+MongoDB server. Juju requires a MongoDB server built with SSL support.</p>
 <h2 id="configuration">Configuration</h2>
 <p>You should start by generating a generic configuration file for Juju and then
 switching to the local provider by using the command:</p>
@@ -163,7 +167,9 @@ juju switch local
 <p>This will generate a file, <code>environments.yaml</code> (if it doesn't already exist),
 which will live in your <code>~/.juju/</code> directory (and will create the directory if
 it doesn't already exist).</p>
-<p class="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
+<p class="note"><strong>Note:</strong> If you have an existing configuration, you can use
+<code>juju generate-config --show</code> to output the new config file, then copy and
+paste relevant areas in a text editor etc.</p>
 <p>The generic configuration sections generated for the local provider will look
 something like this, though Juju will generate this automatically you usually
 don't need to edit it:</p>
@@ -188,13 +194,20 @@ which defaults to <code>~/.juju/</code>. By uncommenting and setting <code>root-
 location can be changed as well as the ports of the storage and the shared
 storage. This may be useful in the case of multiple parallel running local
 providers or conflicts with other programs on your system.</p>
-<p><strong>Note: </strong>If you are using encrypted home directories you have to set <code>$JUJU_HOME</code> or <code>root-dir</code> to point to a location <strong>outside</strong> your home directory.</p>
+<p class="note"><strong>Note:</strong> If you are using encrypted home directories you have to set
+<code>$JUJU_HOME</code> or <code>root-dir</code> to point to a location <strong>outside</strong> your home
+directory.</p>
 <h2 id="bootstrapping-and-destroying">Bootstrapping and Destroying</h2>
 <p>The usage of LXC Linux Containers requires <strong>root</strong> privileges for some steps.
 Juju will prompt for your password if needed. Juju cannot be run under sudo
 because it needs to manage permission as the real user.</p>
-<p class="note"><strong>Note:</strong> If you are running a firewall such as <strong>ufw</strong>, it may interfere with the correct operation of Juju using LXC containers and might need to be halted.</p>
-<p>If you have used the local provider in the past when it required <code>sudo</code>, you may need to manually clean up some files that are still owned by root. If your local environment is named "local" then there may be a local.jenv owned by root in the JUJU_HOME directory (~/.juju). After the local environment is destroyed, you can remove the file like this:</p>
+<p class="note"><strong>Note:</strong> If you are running a firewall such as <strong>ufw</strong>, it may interfere with
+the correct operation of Juju using LXC containers and might need to be halted.</p>
+<p>If you have used the local provider in the past when it required <code>sudo</code>, you may
+need to manually clean up some files that are still owned by root. If your local
+environment is named "local" then there may be a local.jenv owned by root in the
+JUJU_HOME directory (~/.juju). After the local environment is destroyed, you can
+remove the file like this:</p>
 <pre><code>sudo rm ~/.juju/environments/local.jenv
 </code></pre>
 <h2 id="fast-lxc-creation">Fast LXC creation</h2>
@@ -209,16 +222,19 @@ may well work. You can enable lxc-clone in environments.yaml thusly:</p>
 </code></pre>
 <p>The local provider is btrfs-aware. If your LXC directory is on a btrfs
 filesystem, the clones use snapshots and are much faster to create and take up
-much less space. There is also support for using aufs as a backing-store for the LXC clones, but there are some situations where aufs doesn’t entirely behave as intuitively as one might expect, so this must be turned on explicitly in <code>environments.yaml</code>.</p>
+much less space. There is also support for using aufs as a backing-store for the
+LXC clones, but there are some situations where aufs doesn’t entirely behave as
+intuitively as one might expect, so this must be turned on explicitly in
+<code>environments.yaml</code>.</p>
 <pre><code>local:
     type: local
     lxc-clone-aufs: true
 </code></pre>
 <p>When using clone, the first machine to be created will create a "template"
 machine that is used as the basis for the clones. This will be called
-"juju-<series>-template", so for a precise image, the name is "juju-precise-
-template". Do not modify or start this image while a local provider environment
-is running because you cannot clone a running lxc machine.</p>
+<code>juju-&lt;series&gt;-template</code>, so for a precise image, the name is
+<code>juju-precise-template</code>. Do not modify or start this image while a local
+provider environment is running because you cannot clone a running lxc machine.</p>
 <h2 id="caveats">Caveats</h2>
 <p>There are several special circumstances tied to the local provider, given it's
 development focused nature. These are outlined below.</p>
@@ -229,12 +245,10 @@ available for review outside of <code>juju debug-log</code>. First, find out wha
 of your environment is by running <code>juju switch</code>. If you're using the default
 <code>environments.yaml</code> you'll find this be <code>local</code>. All log files for the local
 provider are stored in <code>~/.juju/&lt;environment&gt;/log</code>, as such you can duplicate
-the functionality of <code>juju debug-log</code> using the following (assuming your current environment is "local"):</p>
+the functionality of <code>juju debug-log</code> using the following (assuming your current
+environment is "local"):</p>
 <pre><code>tail -f ~/.juju/local/log/unit-*.log
 </code></pre>
-<h3 id="juju-ssh">juju ssh</h3>
-<p>While <code>juju ssh</code> does work if you supply it a unit (eg: <code>mysql/0</code>) the command
-does not work with machine numbers at this time (<code>juju ssh 1</code>). To access a unit via ssh make sure to use its corresponding unit name not the machine number.</p>
               </article>
             </div>
           </div>

@@ -143,21 +143,24 @@ authors. Amulet aims to be:</p>
 helpers are designed to make hook writing easier, they are not required to write
 tests for charms. This library is offered as a completely optional set of tools
 for you to use.</p>
-<h1 id="installation">Installation</h1>
+<h2 id="installation">Installation</h2>
 <p>Amulet is available as both a package and via pip. For source packages, see <a href="https://github.com/marcoceppi/amulet/releases">
 GitHub</a>.</p>
-<p><a href=".">Ubuntu</a> <a href=".">Mac OSX</a> <a href=".">Windows</a> <a href=".">Source</a></p>
+<h3 id="ubuntu">Ubuntu</h3>
 <p>Amulet is available in the Juju Stable PPA for Ubuntu</p>
 <pre><code>sudo add-apt-repository ppa:juju/stable
 sudo apt-get update
 sudo apt-get install amulet
 </code></pre>
+<h3 id="mac-osx">Mac OSX</h3>
 <p>Amulet is available via Pip:</p>
 <pre><code>sudo pip install amulet
 </code></pre>
+<h3 id="windows">Windows</h3>
 <p>Amulet is available via Pip:</p>
 <pre><code>pip install amulet
 </code></pre>
+<h3 id="source">Source</h3>
 <p>Amulet is built with Python3, make sure it's installed prior to following these
 steps. While you can run Amulet from source, it's not recommended as it requires
 several changes to environment variables in order for Amulet to operate as it
@@ -232,71 +235,81 @@ outside of of juju-deployer. So the same commands (add, relate, configure,
 expose) will instead interact directly with the environment by using either the
 Juju API or the juju commands.</p>
 <h4 id="class:">Class:</h4>
-<p><code>Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-
-deployer', sentry_template=None)</code></p>
+<pre><code>Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-deployer', sentry_template=None)
+</code></pre>
 <h4 id="methods:">Methods:</h4>
-<p><code>Deployment.add(service, charm=None, units=1)</code></p>
+<h5 id="deployment.add(service,-charm=none,-units=1)">Deployment.add(service, charm=None, units=1)</h5>
 <p>Add a new service to the deployment schema.</p>
 <ul>
 <li><code>service</code> Name of the service to deploy.</li>
 <li><code>charm</code> If provided, will be the charm used. Otherwise service is used as the charm.</li>
-<li><code>units</code> Number of units to deploy.
-    import amulet
-    d = amulet.Deployment()
-    d.add('wordpress')
-    d.add('second-wp', charm='wordpress')
-    d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)</li>
+<li>
+<p><code>units</code> Number of units to deploy.</p>
+<p>import amulet
+d = amulet.Deployment()
+d.add('wordpress')
+d.add('second-wp', charm='wordpress')
+d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)</p>
+</li>
 </ul>
-<p><code>Deployment.add_unit(service, units=1)</code></p>
+<h5 id="deployment.add_unit(service,-units=1)">Deployment.add_unit(service, units=1)</h5>
 <p>Add more units of an existing service after deployment.</p>
 <ul>
 <li><code>service</code> Name of the service to add, must already be added.</li>
-<li><code>units</code> Number of units to add, default is one.
-    import amulet
-    d = amulet.Deployment()
-    d.add('wordpress')
-    try:
-        d.setup(timeout=900)
-    except amulet.helpers.TimeoutError:
-        # Setup didn't complete before timeout
-        pass
-    d.add_unit('wordpress')
-    d.add_unit('wordpresss', units=2)</li>
+<li>
+<p><code>units</code> Number of units to add, default is one.</p>
+<p>import amulet
+d = amulet.Deployment()
+d.add('wordpress')
+try:
+    d.setup(timeout=900)
+except amulet.helpers.TimeoutError:
+    # Setup didn't complete before timeout
+    pass
+d.add_unit('wordpress')
+d.add_unit('wordpresss', units=2)</p>
+</li>
 </ul>
-<p><code>Deployment.build_relations()</code></p>
+<h5 id="deployment.build_relations()">Deployment.build_relations()</h5>
 <p>Private method invoked during deployer_map. Creates relation mapping.</p>
-<p><code>Deployment.build_sentries()</code></p>
+<h5 id="deployment.build_sentries()">Deployment.build_sentries()</h5>
 <p>Private method invoked during deployer_map. Creates sentries for services.</p>
-<p><code>Deployment.configure(service, **options)</code></p>
+<h5 id="deployment.configure(service,-**options)">Deployment.configure(service, **options)</h5>
 <p>Change configuration options for a service.</p>
 <ul>
 <li><code>service</code> The service to configure.</li>
-<li><code>options</code> Dict of configuration options.
-    import amulet
-    d = amulet.Deployment()
-    d.add('postgresql')
-    d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})</li>
+<li>
+<p><code>options</code> Dict of configuration options.</p>
+<p>import amulet
+d = amulet.Deployment()
+d.add('postgresql')
+d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})</p>
+</li>
 </ul>
-<p><code>Deployment.deployer_map(services, relations)</code></p>
+<h5 id="deployment.deployer_map(services,-relations)">Deployment.deployer_map(services, relations)</h5>
 <p>Create deployer file from provided services and relations.</p>
 <ul>
 <li><code>services</code> Object of service and service data.</li>
-<li><code>relations</code> List of relations to map.
-<code>Deployment.expose(service)</code></li>
+<li><code>relations</code> List of relations to map.</li>
 </ul>
+<h5 id="deployment.expose(service)">Deployment.expose(service)</h5>
 <p>Indicate if a service should be exposed after deployment.</p>
 <ul>
-<li><code>service</code> - Name of service to expose
-    import amulet
-    d = amulet.Deployment()
-    d.add('varnish')
-    d.expose('varnish')</li>
+<li>
+<p><code>service</code> - Name of service to expose</p>
+<p>import amulet
+d = amulet.Deployment()
+d.add('varnish')
+d.expose('varnish')</p>
+</li>
 </ul>
-<p><code>Deployment.load(deploy_cfg)</code></p>
+<h5 id="deployment.load(deploy_cfg)">Deployment.load(deploy_cfg)</h5>
 <p>Import an existing deployer object.</p>
 <ul>
-<li><code>deploy_cfg</code> Already parsed deployer yaml/json file.
-<code>Deployment.relate(*args)</code></li>
+<li>
+<p><code>deploy_cfg</code> Already parsed deployer yaml/json file.</p>
+<p>Deployment.relate(*args)</p>
+</li>
 </ul>
 <p>Relate two services together.</p>
 <ul>
@@ -314,22 +327,24 @@ d.add('discourse')
 d.relate('postgresql:db-admin', 'discourse:db')
 d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
 </code></pre>
-<p><code>Deployment.setup(timeout=600)</code></p>
+<h5 id="deployment.setup(timeout=600)">Deployment.setup(timeout=600)</h5>
 <p>This will create the deployer mapping, create any sentries that are required,
 and execute juju-deployer with the generated mapping.</p>
 <ul>
-<li><code>timeout</code> in seconds, how long to wait for setup
-    import amulet
-    d = amulet.Deployment()
-    d.add('wordpress')
-    d.add('mysql')
-    d.configure('wordpress', debug=True)
-    d.relate('wordpress:db', 'mysql:db')
-    try:
-        d.setup(timeout=900)
-    except amulet.helpers.TimeoutError:
-        # Setup didn't complete before timeout
-        pass</li>
+<li>
+<p><code>timeout</code> in seconds, how long to wait for setup</p>
+<p>import amulet
+d = amulet.Deployment()
+d.add('wordpress')
+d.add('mysql')
+d.configure('wordpress', debug=True)
+d.relate('wordpress:db', 'mysql:db')
+try:
+    d.setup(timeout=900)
+except amulet.helpers.TimeoutError:
+    # Setup didn't complete before timeout
+    pass</p>
+</li>
 </ul>
 <h3 id="amulet.sentry">amulet.sentry</h3>
 <p>Sentries are an additional service built in to the Deployment tool which allow
@@ -354,7 +369,7 @@ d.sentry.unit['mediawiki/0']
 <p>Sentries provide several methods for which you can use to gather information
 about an environment. The following are a few examples.</p>
 <h4 id="methods">Methods</h4>
-<p><code>wait(timeout=300)</code></p>
+<h5 id="wait(timeout=300)">wait(timeout=300)</h5>
 <p>Wait for all hooks to finish execution on deployment</p>
 <ul>
 <li><code>timeout</code> Duration in seconds to wait before raising exception, default 300 seconds</li>
@@ -363,7 +378,7 @@ about an environment. The following are a few examples.</p>
 <h3 id="amulet.sentry.unit">amulet.sentry.unit</h3>
 <p>Each unit is assigned a UnitSentry</p>
 <h4 id="class:">Class:</h4>
-<p><code>UnitSentry.from_unitdata(unit, unit_data, port=9001, sentry=None)</code></p>
+<h5 id="unitsentry.from_unitdata(unit,-unit_data,-port=9001,-sentry=none)">UnitSentry.from_unitdata(unit, unit_data, port=9001, sentry=None)</h5>
 <ul>
 <li><code>unit</code> - <code>service/#</code> formatted string of unit name</li>
 <li><code>unit_data</code> - Object of unit status output</li>
@@ -371,9 +386,9 @@ about an environment. The following are a few examples.</p>
 <li><code>sentry</code> - RelationSentry</li>
 </ul>
 <h4 id="methods:">Methods:</h4>
-<p><code>UnitSentry.directory(dir)</code></p>
+<h5 id="unitsentry.directory(dir)">UnitSentry.directory(dir)</h5>
 <p>See UnitSentry.directory_stat()</p>
-<p><code>UnitSentry.directory_contents(dir)</code></p>
+<h5 id="unitsentry.directory_contents(dir)">UnitSentry.directory_contents(dir)</h5>
 <p>Return files and directories of directory</p>
 <ul>
 <li><code>dir</code> Directory on remote machine</li>
@@ -382,7 +397,7 @@ about an environment. The following are a few examples.</p>
 <pre><code>{'files': []
  'directories': []}
 </code></pre>
-<p><code>UnitSentry.directory_stat(dir)</code></p>
+<h5 id="unitsentry.directory_stat(dir)">UnitSentry.directory_stat(dir)</h5>
 <p>Return stat of directory</p>
 <ul>
 <li><code>dir</code> Directory on remote machine</li>
@@ -394,9 +409,9 @@ about an environment. The following are a few examples.</p>
  'gid': fs_stat.st_gid,
  'mode': fs_stat.st_mode}
 </code></pre>
-<p><code>UnitSentry.file(filename)</code></p>
+<h5 id="unitsentry.file(filename)">UnitSentry.file(filename)</h5>
 <p>See UnitSentry.file_stat()</p>
-<p><code>UnitSentry.file_contents(filename)</code></p>
+<h5 id="unitsentry.file_contents(filename)">UnitSentry.file_contents(filename)</h5>
 <p>Return contents of filename</p>
 <ul>
 <li><code>filename</code> File on remote machine
@@ -413,14 +428,14 @@ about an environment. The following are a few examples.</p>
  'gid': fs_stat.st_gid,
  'mode': fs_stat.st_mode}
 </code></pre>
-<p><code>UnitSentry.relation(from_rel, to_rel)</code></p>
+<h5 id="unitsentry.relation(from_rel,-to_rel)">UnitSentry.relation(from_rel, to_rel)</h5>
 <p>Return stat of path</p>
 <ul>
 <li><code>from_rel</code> The relation of the unit eg <code>rel</code></li>
 <li><code>to_rel</code> Service and relation connection, eg: <code>service:rel</code></li>
 </ul>
 <p>Output is an object of key, val relation data</p>
-<p><code>UnitSentry.run(command)</code></p>
+<h5 id="unitsentry.run(command)">UnitSentry.run(command)</h5>
 <p>Execute specified command as root on remote machine</p>
 <ul>
 <li><code>command</code> Shell command to execute</li>

@@ -142,28 +142,28 @@ error.</p>
 <p>Juju currently provides one implicit relationship to all deployed services:</p>
 <p><code>juju-info</code>, if specified would look like:</p>
 <pre><code>provides:
-                juju-info:
-                    interface: juju-info
+  juju-info:
+    interface: juju-info
 </code></pre>
 <p>The charm author should not declare the <code>juju-info</code> relation and is provided
 here only as an example. The <code>juju-info</code> relation is implicitly provided by all
 charms, and enables the requiring unit to obtain basic details about the
 related-to unit. The following settings will be implicitly provided by the
 remote unit in a relation through its <code>juju-info</code> relation</p>
-<pre><code>            private-address
-            public-address
+<pre><code>private-address
+public-address
 </code></pre>
 <h2 id="relationship-resolution">Relationship resolution</h2>
 <p><code>rsyslog</code> is a <a href="authors-subordinate-services.html"> <em>subordinate charm</em></a> and
 requires a valid <code>scope: container</code> relationship in order to deploy. It can take advantage of optional support from the principal charm but in the event that the principal charm doesn't provide this support it will still require a <code>scope: container</code> relationship. In this event the logging charm author can take
 advantage of the implicit relationship offered by all charms, <code>juju-info</code>.</p>
 <pre><code>requires:
-              logging:
-                  interface: logging-directory
-                  scope: container
-              juju-info:
-                  interface: juju-info
-                  scope: container
+  logging:
+      interface: logging-directory
+      scope: container
+  juju-info:
+      interface: juju-info
+      scope: container
 </code></pre>
 <p>The admin then issues the following</p>
 <pre><code>juju add-relation wordpress rsyslog

@@ -143,8 +143,8 @@ plugin for Juju, Charm Tools. <a href="tools-charm-tools.html"> Find out how to 
 Vanilla forum software</a></p>
 <h2 id="prepare-yourself">Prepare yourself</h2>
 <p>As we are writing a charm, it makes sense to create it in a local charm
-repository (see how to deploy from a local repository <a href="./charms-
-deploying.html">here</a>) to make it easy to test in your Juju environment.</p>
+repository (see how to deploy from a local repository
+<a href="./charms-deploying.html">here</a>) to make it easy to test in your Juju environment.</p>
 <p>Go to your home directory (or wherever is appropriate and make the appropriate
 file structure:</p>
 <pre><code>cd ~
@@ -180,7 +180,7 @@ And finally expose the Vanilla service:
 </code></pre>
 <p>Obviously, you can include any useful info you wish.</p>
 <h2 id="make-some-metadata.yaml">Make some metadata.yaml</h2>
-<p>The <strong>metadata.yaml</strong> file is really important. This is the file that Juju reads
+<p>The <code>metadata.yaml</code> file is really important. This is the file that Juju reads
 to find out what a charm is, what it does and what it needs to do it.</p>
 <p>The YAML syntax is at once simple, but exact, so if you have any future problems
 with Juju not recognising your charm, this is the first port of call! The
@@ -190,7 +190,7 @@ first four are pretty self explanatory:</p>
 summary: Vanilla is an open-source, pluggable, multi-lingual forum.
 maintainer: Your Name &lt;your@email.tld&gt;
 description: |
-  Vanilla is designed to deploy and grow small communities to scale. 
+  Vanilla is designed to deploy and grow small communities to scale.
   This charm deploys Vanilla Forums as outlined by the Vanilla Forums
   installation guide.
 </code></pre>
@@ -199,17 +199,17 @@ the description can go into more detail.</p>
 <p>The next value to define is the category. This is primarily for organising the
 charm in the charm store. The available categories are:</p>
 <ul>
-<li><strong>databases -</strong> MySQL, PostgreSQL, CouchDB, etc.</li>
-<li><strong>file-servers - </strong>storage apps such as Ceph</li>
-<li><strong>applications -</strong>applications like MediaWiki, WordPress</li>
-<li><strong>cache-proxy - </strong>services such as HAProxy and Varnish.</li>
-<li><strong>app-servers - </strong>infrastructure services like Apache and Tomcat</li>
-<li><strong>miscellaneous - </strong>anything which doesn't neatly fit anywhere above.</li>
+<li><code>databases</code> - MySQL, PostgreSQL, CouchDB, etc.</li>
+<li><code>file-servers</code> - storage apps such as Ceph</li>
+<li><code>applications</code> - applications like MediaWiki, WordPress</li>
+<li><code>cache-proxy</code> - services such as HAProxy and Varnish.</li>
+<li><code>app-servers</code> - infrastructure services like Apache and Tomcat</li>
+<li><code>miscellaneous</code> - anything which doesn't neatly fit anywhere above.</li>
 </ul>
 <p>Your charm can belong to more than one category, though in almost all cases it
 should be in just one. Because there could be more than one entry here, the YAML
 is formatted as a list:</p>
-<pre><code>categories:  
+<pre><code>categories:
   - applications
 </code></pre>
 <p>Next we need to explain which services are actually provided by this service.
@@ -218,8 +218,8 @@ description of the interface. The interface name is important as it can be used
 elsewhere in the environment to relate back to this charm, e.g. when writing
 hooks.</p>
 <p>Our Vanilla charm is a web-based service which exposes a simple HTTP interface:</p>
-<pre><code>provides:  
-  website:  
+<pre><code>provides:
+  website:
     interface: http
 </code></pre>
 <p>The name given here is important as it will be used in hooks that we write
@@ -234,7 +234,7 @@ metadata.</p>
 summary: Vanilla is an open-source, pluggable, themeable, multi-lingual forum.
 maintainer: Your Name &lt;your@email.tld&gt;
 description: |
-  Vanilla is designed to deploy and grow small communities to scale. 
+  Vanilla is designed to deploy and grow small communities to scale.
   This charm deploys Vanilla Forums as outlined by the Vanilla Forums installation guide.
 categories:
   - applications
@@ -263,16 +263,16 @@ execute on an Ubuntu server.</p>
 </ul>
 <p>So first up we should create the hooks directory, and start creating our first
 hook:</p>
-<pre><code>mkdir hooks  
-cd hooks  
+<pre><code>mkdir hooks
+cd hooks
 vi start
 </code></pre>
 <p>(Use your favourite editor, naturally - no flames please)</p>
 <p>We have started with the start hook, because it is pretty simple. Our charm will
 be served up by Apache, so all we need to do to start the service is make sure
 Apache is running:</p>
-<pre><code>#!/bin/bash  
-set -e  
+<pre><code>#!/bin/bash
+set -e
 service apache2 restart
 </code></pre>
 <p>A bit of explanation for this one. As we are writing in bash, and we need the
@@ -293,47 +293,49 @@ executable too!</p>
 <p>With the easy bit out of the way, how about the install hook? This needs to
 install any dependencies, fetch the actual software and do any other config and
 service jobs that need to happen. Here is an example for our vanilla charm:</p>
-<pre><code>#!/bin/bash
-set -e # If any command fails, stop execution of the hook with that error
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="nb">set</span> -e <span class="c"># If any command fails, stop execution of the hook with that error</span>
 apt-get install -y apache2 php5-cgi php5-mysql curl php5-gd wget libapache2-mod-php5
-dl="https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz"
-# Grab Vanilla from upstream.
-juju-log "Fetching $dl"
-wget "$dl" -O /tmp/vanilla.tar.gz
-# IDEMPOTENCY is very important in all charm hooks, even the install hook.
-if [ -f /var/www/vanilla/conf/config.php ]; then
-  cp /var/www/vanilla/conf/config.php /tmp/
+<span class="nv">dl</span><span class="o">=</span><span class="s2">&quot;https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz&quot;</span>
+<span class="c"># Grab Vanilla from upstream.</span>
+juju-log <span class="s2">&quot;Fetching $dl&quot;</span>
+wget <span class="s2">&quot;$dl&quot;</span> -O /tmp/vanilla.tar.gz
+<span class="c"># IDEMPOTENCY is very important in all charm hooks, even the install hook.</span>
+<span class="k">if</span> <span class="o">[</span> -f /var/www/vanilla/conf/config.php <span class="o">]</span>; <span class="k">then</span>
+<span class="k">  </span>cp /var/www/vanilla/conf/config.php /tmp/
   rm -rf /var/www/vanilla
-fi
-# Extract to a known location
-juju-log "Extracting Vanilla"
+<span class="k">fi</span>
+<span class="c"># Extract to a known location</span>
+juju-log <span class="s2">&quot;Extracting Vanilla&quot;</span>
 tar -xvzf /tmp/vanilla.tar.gz -C /var/www/
 mv /var/www/Garden-Vanilla* /var/www/vanilla
-if [ -f /tmp/config.php ]; then
-  mv /tmp/config.php /var/www/vanilla/conf/
-fi
+<span class="k">if</span> <span class="o">[</span> -f /tmp/config.php <span class="o">]</span>; <span class="k">then</span>
+<span class="k">  </span>mv /tmp/config.php /var/www/vanilla/conf/
+<span class="k">fi</span>
 chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
-juju-log "Creating apache2 configuration"
-cat &lt;&lt;EOF &gt; /etc/apache2/sites-available/vanilla
-&lt;VirtualHost *:80&gt;
-  ServerAdmin webmaster@localhost
-  DocumentRoot /var/www/vanilla
-  &lt;Directory /var/www/vanilla&gt;
-    Options Indexes FollowSymLinks MultiViews
-    AllowOverride All
-    Order allow,deny
-    allow from all
-  &lt;/Directory&gt;
-  ErrorLog \${APACHE_LOG_DIR}/vanilla.log
-  LogLevel warn
-  CustomLog \${APACHE_LOG_DIR}/access.log combined
-&lt;/VirtualHost&gt;
-EOF
+juju-log <span class="s2">&quot;Creating apache2 configuration&quot;</span>
+cat <span class="s">&lt;&lt;EOF &gt; /etc/apache2/sites-available/vanilla</span>
+<span class="s">&lt;VirtualHost *:80&gt;</span>
+<span class="s">  ServerAdmin webmaster@localhost</span>
+<span class="s">  DocumentRoot /var/www/vanilla</span>
+<span class="s">  &lt;Directory /var/www/vanilla&gt;</span>
+<span class="s">    Options Indexes FollowSymLinks MultiViews</span>
+<span class="s">    AllowOverride All</span>
+<span class="s">    Order allow,deny</span>
+<span class="s">    allow from all</span>
+<span class="s">  &lt;/Directory&gt;</span>
+<span class="s">  ErrorLog \${APACHE_LOG_DIR}/vanilla.log</span>
+<span class="s">  LogLevel warn</span>
+<span class="s">  CustomLog \${APACHE_LOG_DIR}/access.log combined</span>
+<span class="s">&lt;/VirtualHost&gt;</span>
+<span class="s">EOF</span>
 a2dissite 000-default
 a2ensite vanilla
 service apache2 reload
-juju-log "Files extracted, waiting for other events before we do anything else!"
-</code></pre>
+juju-log <span class="s2">&quot;Files extracted, waiting for other events before we do anything else!&quot;</span>
+</pre></div>
+
+
 <p>We aren't going to go for a line-by-line explanation of that, but there are a
 few things worth noting</p>
 <p>Firstly, note the use of the -y option of the apt-get command. this assumes a
@@ -351,27 +353,29 @@ possible events if they are not required - if Juju doesn't find a hook file for
 a paticular action, it just assumes everything is okay and carries on. It is up
 to you to decide which events require a hook.</p>
 <p>Let's take a stab at the 'database-relation-changed' hook:</p>
-<pre><code>#!/bin/bash
-set -e # If any command fails, stop execution of the hook with that error
-db_user=`relation-get user`
-db_db=`relation-get database`
-db_pass=`relation-get password`
-db_host=`relation-get private-address`
-if [ -z "$db_db" ]; then
-  juju-log "No database information sent yet. Silently exiting"
-  exit 0
-fi
-vanilla_config="/var/www/vanilla/conf/config.php"
-cat &lt;&lt;EOF &gt; $vanilla_config
-&lt;?php if (!defined('APPLICATION')) exit();
-\$Configuration['Database']['Host'] = '$db_host';
-\$Configuration['Database']['Name'] = '$db_db';
-\$Configuration['Database']['User'] = '$db_user';
-\$Configuration['Database']['Password'] = '$db_pass';
-EOF
-juju-log "Make the application port available, now that we know we have a site to expose"
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="nb">set</span> -e <span class="c"># If any command fails, stop execution of the hook with that error</span>
+<span class="nv">db_user</span><span class="o">=</span><span class="sb">`</span>relation-get user<span class="sb">`</span>
+<span class="nv">db_db</span><span class="o">=</span><span class="sb">`</span>relation-get database<span class="sb">`</span>
+<span class="nv">db_pass</span><span class="o">=</span><span class="sb">`</span>relation-get password<span class="sb">`</span>
+<span class="nv">db_host</span><span class="o">=</span><span class="sb">`</span>relation-get private-address<span class="sb">`</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$db_db&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">  </span>juju-log <span class="s2">&quot;No database information sent yet. Silently exiting&quot;</span>
+  <span class="nb">exit </span>0
+<span class="k">fi</span>
+<span class="nv">vanilla_config</span><span class="o">=</span><span class="s2">&quot;/var/www/vanilla/conf/config.php&quot;</span>
+cat <span class="s">&lt;&lt;EOF &gt; $vanilla_config</span>
+<span class="s">&lt;?php if (!defined(&#39;APPLICATION&#39;)) exit();</span>
+<span class="s">\$Configuration[&#39;Database&#39;][&#39;Host&#39;] = &#39;$db_host&#39;;</span>
+<span class="s">\$Configuration[&#39;Database&#39;][&#39;Name&#39;] = &#39;$db_db&#39;;</span>
+<span class="s">\$Configuration[&#39;Database&#39;][&#39;User&#39;] = &#39;$db_user&#39;;</span>
+<span class="s">\$Configuration[&#39;Database&#39;][&#39;Password&#39;] = &#39;$db_pass&#39;;</span>
+<span class="s">EOF</span>
+juju-log <span class="s2">&quot;Make the application port available, now that we know we have a site to expose&quot;</span>
 open-port 80
-</code></pre>
+</pre></div>
+
+
 <p>You will notice that this script uses the backticked command relation-get. This
 is a Juju helper command that fetches the named values from the corresponding
 hook on the service we are connecting to. Usually there will be some indication
@@ -387,7 +391,7 @@ find a description of the mysql interface here</a>.</p>
 checks one value to see if it exists - if not the corresponding charm hasn't set the values yet.</p>
 <p>When it has the values we can use these to modify the config file for Vanilla in the relevant place, and finally open the port to make the service active.</p>
 <p>The final hook we need to write is for other services which may want to consume
-Vanilla, 'website-relation-joined'.</p>
+Vanilla, <code>website-relation-joined</code>.</p>
 <pre><code>#!/bin/sh
 relation-set hostname=`unit-get private-address` port=80
 </code></pre>
@@ -442,7 +446,7 @@ Congratulations!</p>
 <h2 id="tidying-up">Tidying up</h2>
 <p>With the charm working properly, you may consider everything a job well done. If your charm is really great and you want to share it, particularly on the charm store, then there are a couple of things you ought to add.</p>
 <ol>
-<li>Create a file called 'copyright' and place whatever license information you require in there. </li>
+<li>Create a file called 'copyright' and place whatever license information you require in there.</li>
 <li>Add a beautiful icon (<a href="./authors-charm-icon.html">there is a guide to making one here</a>) so others can recognise it in the charm store!</li>
 </ol>
               </article>
