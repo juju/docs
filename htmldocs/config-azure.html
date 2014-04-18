@@ -1,88 +1,160 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<!--Head-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Juju Documentation</title>
-		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
- 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-		<link href="./css/main.css" rel="stylesheet" type="text/css" />
-		
-		<!--[if lt IE 9]>
-		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-	</head>
-<!--End-Head-->
-
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Juju Documentation</title>
+    <script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+    <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+    <link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
   <body class="resources">
-  	
-<!--Header-->
+    <header class="banner global" role="banner">
+      <nav role="navigation" class="nav-primary nav-right">
+        <div class="logo">
+          <a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+            <img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+            <span>Juju</span>
+          </a>
+        </div>
+        <ul>
+          <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+          <li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+          <li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+          <li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+          <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+        </ul>
+        <div id="box-search">
+          <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+            <label class="off-left" for="s">Search:</label>
+            <input class="form-text" type="text" value="" name="s" id="s" />
+            <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <div id="main-content" class="inner-wrapper" role="main">
+        <div class="row no-border">
+         <div class="header-navigation-secondary"></div>
+         <h2 class="pagetitle">Juju documentation</h2>
+        </div>
+        <section id="content" class="container-12">
+          <div class="grid-12 doc-container">
+            <div id="navlinks" class="grid-3 doc-navigation">
+                          <h1>User Guide</h1>
+            <ul class="no-margin">
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
+              <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
+              <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
+              <li class=" sub"><a href="config-local.html">Local</a></li>
+              <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
+              <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-service-groups.html">Groups of Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+              <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
+              <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=""><a href="howto.html">How to...</a></li>
+              <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
+              <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
+              <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
+              <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
+              <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+              <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
+              <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
+              <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
+              <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul class="no-margin">
+              <li class=""><a href="authors-intro.html">Getting started</a></li>
+              <li class=""><a href="authors-charm-components.html">Components of a charm</a></li>
+              <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
+              <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
+              <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
+              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
+              <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+              <li class=" sub"><a href="authors-charm-interfaces.html">Implementing interfaces</a></li>
+              <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
+              <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+              <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+              <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>
 
-	<header class="banner global" role="banner">
-		<nav role="navigation" class="nav-primary nav-right">
-			<div class="logo">
-				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
-					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
-					<span>Juju</span>
-				</a>
-			</div>
-			<ul>
-				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
-				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
-				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
-				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
-			</ul>
-			<div id="box-search">
-				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
-					<label class="off-left" for="s">Search:</label>
-					<input class="form-text" type="text" value="" name="s" id="s" />
-					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-				</form>		
-			</div>
-		</nav>	
-	</header>
-<!--End-Header-->
-<!--Preamble-->
-<div class="wrapper">
-  <div id="main-content" class="inner-wrapper" role="main">
-    <div class="row no-border">
-     <div class="header-navigation-secondary"></div>
-     <h2 class="pagetitle">Juju documentation</h2>
-    </div>
-    <section id="content" class="container-12">
-      <div class="grid-12 doc-container">
-        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
-        <div class="grid-9 doc-content">
-<!--End-Preamble-->
-          <article>
-            <section id="config_azure">
-            <h1>Configuring for Windows Azure</h1>
-            <p>This process requires you to have an Windows Azure account. If you have not signed up for one yet, it can obtained at <a href="http://azure.microsoft.com/en-us/">http://azure.microsoft.com/en-us/</a>.</p>
-            <p>You should start by generating a generic configuration file for Juju, using the command:
-            <pre class="prettyprint">juju generate-config</pre>
-            <p>This will generate a file, <strong>environments.yaml</strong>, which will live in your <strong>~/.juju/</strong> directory (and will create the directory if it doesn't already exist).
-            <p class="note"><strong>Note:</strong> The above command will not overwrite your existing environments.yaml file, or output to stdout. In order to see the boilerplate environment.yaml on stdout you need to append the <code>--show</code> option. This is helpful if you have an existing environment.yaml and just need to add a section. For example:</p>
-            <pre class="prettyprint">juju generate-config --show</pre>
-            <p>You can then copy and paste the needed section.</p>
-            <p>The generic configuration sections generated for Windows Azure will look something like this:</p>
-            <pre class="prettyprint lang-yaml"># https://juju.ubuntu.com/docs/config-azure.html
+
+              <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+              <li class=" sub"><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+              <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+              <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+              <li class=" sub"><a href="authors-charm-quality.html">Charm Feature Rating</a></li>
+              <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
+
+            <h1>Tools</h1>
+            <ul class="no-margin">
+              <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
+              <li class=""><a href="tools-amulet.html">Amulet</a></li>
+            </ul>
+
+            <h1>Reference</h1>
+            <ul class="no-margin">
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
+              <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+            </div>
+            <div class="grid-9 doc-content">
+              <article>
+                <h1 id="configuring-for-windows-azure">Configuring for Windows Azure</h1>
+<p>This process requires you to have an Windows Azure account. If you have not
+signed up for one yet, it can obtained at <a href="http://azure.microsoft.com/en-us/"><a href="http://azure.microsoft.com/en-">http://azure.microsoft.com/en-</a>
+us/</a>.</p>
+<p>You should start by generating a generic configuration file for Juju, using the
+command:</p>
+<pre><code>juju generate-config
+</code></pre>
+<p>This will generate a file, <code>environments.yaml</code>, which will live in your
+<code>~/.juju/</code> directory (and will create the directory if it doesn't already
+exist).</p>
+<p class="note"><strong>Note:</strong> The above command will not overwrite your existing environments.yaml file, or output to stdout. In order to see the boilerplate environment.yaml on stdout you need to append the <code>--show</code> option. This is helpful if you have an existing environment.yaml and just need to add a section. For example:</p>
+<pre><code>juju generate-config --show
+</code></pre>
+<p>You can then copy and paste the needed section.</p>
+<p>The generic configuration sections generated for Windows Azure will look
+something like this:</p>
+<pre><code># https://juju.ubuntu.com/docs/config-azure.html
     azure:
         type: azure
-    
         # location specifies the place where instances will be started,
         # for example: West US, North Europe.
         #
         location: West US
-    
         # The following attributes specify Windows Azure Management
         # information. See:
         # http://msdn.microsoft.com/en-us/library/windowsazure
@@ -90,136 +162,125 @@
         #
         management-subscription-id: &lt;00000000-0000-0000-0000-000000000000&gt;
         management-certificate-path: /home/me/azure.pem
-    
         # storage-account-name holds Windows Azure Storage info.
         #
         storage-account-name: abcdefghijkl
-    
         # force-image-name overrides the OS image selection to use a fixed
         # image for all deployments. Most useful for developers.
         #
         # force-image-name: b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-13_10-amd64-server-DEVELOPMENT-20130713-Juju_ALPHA-en-us-30GB
-    
         # image-stream chooses a simplestreams stream to select OS images
         # from, for example daily or released images (or any other stream
         # available on simplestreams).
         #
         # image-stream: "released"
-
-            </pre>
-            <p> This is the configuration environments.yaml file needed to run on Windows Azure. You will need to set the <code>management-subscription-id</code>, <code>management-certificate-path</code>, and <code>storage-account-name</code>.
-            <p class="note"><strong>Note:</strong> Other than <code>location</code> the other key vaule defaults are recommended, but can be updated to your preference.</p>
-          <h2 id="azure-config-update">Config Values</h2>
-            <p>Generate a new certificate for juju usage (or use an existing one). Suggest to use a 'Common Name' with 'Juju' in it so its obvious in the web UI later. Run the following commands on Ubuntu to generate a new certificate:
-            <pre class="prettyprint lang-yaml">
-openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout azure.pem -out azure.pem
+</code></pre>
+<p>This is the configuration environments.yaml file needed to run on Windows Azure.
+You will need to set the <code>management-subscription-id</code>, <code>management-certificate-
+path</code>, and <code>storage-account-name</code>.</p>
+<p class="note"><strong>Note:</strong> Other than <code>location</code> the other key vaule defaults are recommended, but can be updated to your preference.</p>
+<h2 id="config-values">Config Values</h2>
+<p>Generate a new certificate for juju usage (or use an existing one). Suggest to
+use a 'Common Name' with 'Juju' in it so its obvious in the web UI later. Run
+the following commands on Ubuntu to generate a new certificate:</p>
+<pre><code>openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout azure.pem -out azure.pem
 openssl x509 -inform pem -in azure.pem -outform der -out azure.cer
 chmod 600 azure.pem
-            </pre>
-	    <p>Login to the Windows Azure console @ <a href="https://manage.windowsazure.com"> https://manage.windowsazure.com</a>. From here you can gather the following information:  </p>
-            <ul>
-              <li><strong>Settings</strong> Left Navigation: get the <code>SUBSCRIPTION ID</code> of the account you upload to. This will be used for the <code>management-subscription-id</code></li>
-              <li><strong>Settings</strong> Left Navigation: "upload" the MyCert.cer file above (if you created one). This is the certificate you used for the <code>management-certificate-path</code></li>
-              <li><strong>Storage</strong> Left Navigation:</li> 
-              <ul>
-                <li>Click New (bottom left)</li>
-                <li>Click Quick Create</li>
-                <li>Add a name in url (for example <code>juju0useast0</code>). This is the value to be used for <code>storage-account-name</code>.</li>
-                <li>Select Location (for example: East US)</li>
-                <li>Select Subscription</li>
-                <li>Disable "Enable Geo-Replication" (not applicable)</li>
-             </ul>
-            </ul>
-            </p>
-            <p class="note"><strong>Note:</strong> You must create the storage account in the same region/location specified by the <code>location</code> key value. For example, if <code>location: West US</code> is set then <code>storage-account-name:</code> must also have a storage set up in <code>West US</code>. Failure to do so will result in a group affinity error.</p>
-            <p>Ensure the environments.yaml is configured with the above values and save.</p>
-             </section>
-          </article>
-<!--Postamble-->
-        </div>
+</code></pre>
+<p>Login to the Windows Azure console @ <a href="https://manage.windowsazure.com">
+<a href="https://manage.windowsazure.com">https://manage.windowsazure.com</a></a>. From here you can gather the following information:</p>
+<ul>
+<li><strong>Settings</strong> Left Navigation: get the <code>SUBSCRIPTION ID</code> of the account you upload to. This will be used for the <code>management-subscription-id</code></li>
+<li><strong>Settings</strong> Left Navigation: "upload" the MyCert.cer file above (if you created one). This is the certificate you used for the <code>management-certificate-path</code></li>
+<li><strong>Storage</strong> Left Navigation:</li>
+<li>Click New (bottom left)</li>
+<li>Click Quick Create</li>
+<li>Add a name in url (for example <code>juju0useast0</code>). This is the value to be used for <code>storage-account-name</code>.</li>
+<li>Select Location (for example: East US)</li>
+<li>Select Subscription</li>
+<li>Disable "Enable Geo-Replication" (not applicable)</li>
+</ul>
+<p class="note"><strong>Note:</strong> You must create the storage account in the same region/location specified by the <code>location</code> key value. For example, if <code>location: West US</code> is set then <code>storage-account-name:</code> must also have a storage set up in <code>West US</code>. Failure to do so will result in a group affinity error.</p>
+<p>Ensure the environments.yaml is configured with the above values and save.</p>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-</div>
-<!--End-Postamble-->
-<!--Footer-->
-	<footer class="global clearfix" role="contentinfo">
-		<nav role="navigation">
-			<div class="footer-a">
-				<div class="clearfix">
-					<ul>
-						<li>
-							<h2><a href="/">Juju</a></h2>
-							<ul>
-								<li><a href="/charms/">Charms</a></li>
-								<li><a href="/features/">Features</a></li>
-								<li><a href="/deployment/">Deployment</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/resources/">Resources</a></h2>
-							<ul>
-								<li><a href="/resources/overview/">Overview</a></li>
-								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
-								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
-								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
-								<li><a href="/resources/videos/">Videos</a></li>
-								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/community">Community</a></h2>
-							<ul>
-								<li><a href="/community/blog/">Juju Blog</a></li>
-								<li><a href="/events/">Events</a></li>
-								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
-								<li><a href="/community/charmers/">Charmers</a></li>
-								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
-							<ul>
-								<li><a href="https://jujucharms.com/">Charm store</a></li>
-								<li><a href="/download/">Download Juju</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="legal clearfix">
-			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
-		</div>
-	</footer>
+    </div>
+    <footer class="global clearfix" role="contentinfo">
+      <nav role="navigation">
+        <div class="footer-a">
+          <div class="clearfix">
+            <ul>
+             <li>
+               <h2><a href="/">Juju</a></h2>
+               <ul>
+                 <li><a href="/charms">Charms</a></li>
+                 <li><a href="/features">Features</a></li>
+                 <li><a href="/deployment">Deployment</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/resources">Resources</a></h2>
+               <ul>
+                 <li><a href="/resources/juju-overview/">Overview</a></li>
+                 <li><a href="/docs/">Documentation</a></li>
+                 <li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+                 <li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+                 <li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+                 <li><a href="/resources/videos/">Videos</a></li>
+                 <li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/community">Community</a></h2>
+                 <ul>
+                   <li><a href="/community/blog/">Juju Blog</a></li>
+                   <li><a href="/events/">Events</a></li>
+                   <li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+                   <li><a href="/community/charmers/">Charmers</a></li>
+                   <li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+                   <li><a href="/docs/contributing.html">Help with documentation</a></li>
+                   <li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li>
+                   <li><a href="/labs/">Juju Labs</a></li>
+                 </ul>
+               </li>
+               <li>
+                 <h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+                 <ul>
+                   <li><a href="https://jujucharms.com/">Charm store</a></li>
+                   <li><a href="/download/">Download Juju</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+       <div class="legal clearfix">
+         <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+       </div>
+     </footer>
+     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+     <script type="text/javascript" src="./js/main.js"></script>
+     <script type="text/javascript" src="./js/jquery.details.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+     <!-- google analytics -->
+     <script>
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-1018242-41']);
+       _gaq.push(['_trackPageview']);
 
-<!--End-Footer-->
-
-<!--Scripts-->
-    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/jquery.details.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-    <!-- google analytics -->
-    <script>
-   var _gaq = _gaq || [];
-   _gaq.push(['_setAccount', 'UA-1018242-41']);
-   _gaq.push(['_trackPageview']);
-  
-   (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   })();
+       (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
     </script>
-<!--End-Scripts-->
-
-</body></html>
+  </body>
+</html>

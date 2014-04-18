@@ -1,242 +1,302 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<!--Head-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Juju Documentation</title>
-		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
- 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-		<link href="./css/main.css" rel="stylesheet" type="text/css" />
-		
-		<!--[if lt IE 9]>
-		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-	</head>
-<!--End-Head-->
-
-
-
-
-
-
-
-
-
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Juju Documentation</title>
+    <script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+    <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+    <link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
   <body class="resources">
-  	
-<!--Header-->
-
-	<header class="banner global" role="banner">
-		<nav role="navigation" class="nav-primary nav-right">
-			<div class="logo">
-				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
-					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
-					<span>Juju</span>
-				</a>
-			</div>
-			<ul>
-				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
-				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
-				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
-				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
-			</ul>
-			<div id="box-search">
-				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
-					<label class="off-left" for="s">Search:</label>
-					<input class="form-text" type="text" value="" name="s" id="s" />
-					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-				</form>		
-			</div>
-		</nav>	
-	</header>
-<!--End-Header-->
-<!--Preamble-->
-<div class="wrapper">
-  <div id="main-content" class="inner-wrapper" role="main">
-    <div class="row no-border">
-     <div class="header-navigation-secondary"></div>
-     <h2 class="pagetitle">Juju documentation</h2>
-    </div>
-    <section id="content" class="container-12">
-      <div class="grid-12 doc-container">
-        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
-        <div class="grid-9 doc-content">
-<!--End-Preamble-->
-          <article>
-            <section id ="charms-constraints">
-              <h1>Machine Constraints</h1>
-              <p>Machine constraints allow you to choose the hardware to which your services will be deployed.</p>
-              <p>Constraints can be set for environments and services, with service constraints overriding environment constraints, the default values set by juju when otherwise unspecified. Changes to constraints do not affect any unit that has already been assigned to a machine.</p>
-              <p>Constraint can be set by the <code>juju set-constraints</code> command, taking an optional <code>--service</code> arg, and any number of <code>key=value</code> pairs. When the service name is specified, the constraints are set on that service; otherwise they are set on the environment.</p>
-              <p>Valid choices for the <code>value</code> are generally dependent on the particular constraint, with one exception:</p>
-              
-              <ul>
-                <li>An empty value always means &quot;not constrained&quot;. This allows you to ignore environment settings at the service level without having to explicitly remember and re-set the juju default values. Note that there is no way to change the juju default values, though environment settings will override them.</li>
-              </ul>
-              
-              <p>The commands <code>juju deploy</code>, <code>juju bootstrap</code>, and <code>juju add-machine</code> have a <code>--constraints</code> flag which expects a single string of space-separated constraints, understood as above.  Deployment constraints will be set on the service before the first unit is deployed, and bootstrap constraints will be set on the environment and used to provision the initial master machine.</p>
-              <p>Please note that there is no constraints flag for the <code>juju add-unit</code> command; juju is explicitly focused on <strong>service</strong> orchestration, and it is counterproductive to encourage users to consider individual units. This can be worked around by setting new service constraints before adding new units, but is not encouraged.</p>
-              <p>The <code>juju get-constraints</code> command is used to see the currently applicable constraints. When called without an argument, it outputs the environment constraints as key=value pairs.  Alternatively, you can request yaml or json with the <code>--format</code> flag.  By passing the name of a service as an argument, it will output the constraints on that particular service.</p>
-              <h2>Examples</h2>
-              <p>Deploy MySQL on a machine with at least 32GiB of RAM, and at least 8 ECU of CPU power (architecture will be inherited from the environment, or default to amd64):</p>
-              <pre class="prettyprint">juju deploy --constraints "cpu-cores=8 mem=32G" mysql</pre>
-              
-              <p>Deploy to t1.micros on AWS:</p>
-              <pre class="prettyprint">juju bootstrap --constraints "cpu-power=0 cpu-power=0 mem=512M"</pre>
-              
-              <p>Launch all future &quot;mysql&quot; machines with at least 8GiB of RAM and 4 ECU:</p>
-              <pre class="prettyprint">juju set-constraints --service mysql mem=8G cpu-cores=4</pre>
-              
-              <p>Output current environment constraints:</p>
-              <pre class="prettyprint">juju get-constraints</pre>
-              
-              <p>Output constraints for mysql</p>
-              <pre class="prettyprint">juju get-constraints mysql</pre>
-            
-            </section>
-            <section id="provider-constraints">
-              <h1>Provider Constraints</h1>
-              <p>See a <a href="reference-constraints.html">complete listing of constraints</a> for details on what each constraint means. Two of the most commonly used are:</p>
-              <ul>
-                <li><code>cpu-cores</code>: The minimum processing power of the machine, roughly indicated by how many cores are available.</li>
-                <li><code>mem</code>: The minimum memory for the machine, defaulting to 512MB.</li>
-              </ul>
-
-
-            </section>
-            <section id="examples-constraints">
-              <h1>Working with constraints</h1>
-              <p>Here are some examples of working with constraints.</p>
-              <p>When bootstrapping an environment, you can set the constraints directly:</p>
-              <pre class="prettyprint">juju bootstrap --constraints arch=i386</pre>
-              
-              <p>The above command did two things:</p>
-              
-              <ul>
-              <li><p class="first">Set the environment constraints to require machines with an i386 architecture, leaving the other defaults untouched; this is precisely equivalent to:</p>
-              <pre class="prettyprint">juju bootstrap --constraints "arch=i386 cpu-cores= mem= "</pre>
-              <p>...but rather more convenient to type.</p>
-              </li>
-              <li><p class="first">Started the bootstrap/master machine with the above constraints.</p>
-              </li>
-              </ul>
-              <p>Because the environment constraints were set, subsequent deployments will use the same values:</p>
-              <pre class="prettyprint">juju deploy mysql</pre>
-              
-              <p>...but other services can be started with their own constraints:</p>
-              <pre class="prettyprint">juju deploy wordpress --constraints mem=1024</pre>
-              
-              <p>Note that if you try to deploy a machine or service with a constraint that cannot be fulfilled by the environment, the deployment will fail.  Running juju status will show an error in the status for that machine.  You can fix the problem by removing the machine (and the service assigned to the machine, if any) and retrying the deployment with different constraints.</p>
-              <h2 id="constraints-maas"> MAAS constraints</h2>
-              <p>If you are deploying to a MAAS provider, you may use the additional constraint <code>tags=</code>, followed by a comma-delimited list of tags. Only MAAS nodes thus tagged will be considered appropriate for deploying the service.</p>
-              <p>E.g.</p>
-              <pre class="prettyprint">juju deploy mysql --constraints tags=foo,bar</pre>  
-              <p>...will deploy MySQL only to a node which has been tagged with both "foo" and "bar".
-           </article>
-<!--Postamble-->
+    <header class="banner global" role="banner">
+      <nav role="navigation" class="nav-primary nav-right">
+        <div class="logo">
+          <a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+            <img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+            <span>Juju</span>
+          </a>
         </div>
+        <ul>
+          <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+          <li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+          <li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+          <li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+          <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+        </ul>
+        <div id="box-search">
+          <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+            <label class="off-left" for="s">Search:</label>
+            <input class="form-text" type="text" value="" name="s" id="s" />
+            <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <div id="main-content" class="inner-wrapper" role="main">
+        <div class="row no-border">
+         <div class="header-navigation-secondary"></div>
+         <h2 class="pagetitle">Juju documentation</h2>
+        </div>
+        <section id="content" class="container-12">
+          <div class="grid-12 doc-container">
+            <div id="navlinks" class="grid-3 doc-navigation">
+                          <h1>User Guide</h1>
+            <ul class="no-margin">
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
+              <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
+              <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
+              <li class=" sub"><a href="config-local.html">Local</a></li>
+              <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
+              <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-service-groups.html">Groups of Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+              <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
+              <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=""><a href="howto.html">How to...</a></li>
+              <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
+              <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
+              <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
+              <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
+              <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+              <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
+              <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
+              <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
+              <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul class="no-margin">
+              <li class=""><a href="authors-intro.html">Getting started</a></li>
+              <li class=""><a href="authors-charm-components.html">Components of a charm</a></li>
+              <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
+              <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
+              <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
+              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
+              <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+              <li class=" sub"><a href="authors-charm-interfaces.html">Implementing interfaces</a></li>
+              <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
+              <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+              <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+              <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>
+
+
+              <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+              <li class=" sub"><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+              <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+              <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+              <li class=" sub"><a href="authors-charm-quality.html">Charm Feature Rating</a></li>
+              <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
+
+            <h1>Tools</h1>
+            <ul class="no-margin">
+              <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
+              <li class=""><a href="tools-amulet.html">Amulet</a></li>
+            </ul>
+
+            <h1>Reference</h1>
+            <ul class="no-margin">
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
+              <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+            </div>
+            <div class="grid-9 doc-content">
+              <article>
+                <h1 id="machine-constraints">Machine Constraints</h1>
+<p>Machine constraints allow you to choose the hardware to which your services will be deployed.</p>
+<p>Constraints can be set for environments and services, with service constraints
+overriding environment constraints, the default values set by juju when
+otherwise unspecified. Changes to constraints do not affect any unit that has
+already been assigned to a machine.</p>
+<p>Constraint can be set by the <code>juju set-constraints</code> command, taking an optional
+<code>--service</code> arg, and any number of <code>key=value</code> pairs. When the service name is
+specified, the constraints are set on that service; otherwise they are set on
+the environment.</p>
+<p>Valid choices for the <code>value</code> are generally dependent on the particular
+constraint, with one exception:</p>
+<ul>
+<li>An empty value always means "not constrained". This allows you to ignore environment settings at the service level without having to explicitly remember and re-set the juju default values. Note that there is no way to change the juju default values, though environment settings will override them.</li>
+</ul>
+<p>The commands <code>juju deploy</code>, <code>juju bootstrap</code>, and <code>juju add-machine</code> have a
+<code>--constraints</code> flag which expects a single string of space-separated
+constraints, understood as above. Deployment constraints will be set on the
+service before the first unit is deployed, and bootstrap constraints will be set on the environment and used to provision the initial master machine.</p>
+<p>Please note that there is no constraints flag for the <code>juju add-unit</code> command;
+juju is explicitly focused on <strong>service</strong> orchestration, and it is
+counterproductive to encourage users to consider individual units. This can be
+worked around by setting new service constraints before adding new units, but is not encouraged.</p>
+<p>The <code>juju get-constraints</code> command is used to see the currently applicable
+constraints. When called without an argument, it outputs the environment
+constraints as key=value pairs. Alternatively, you can request yaml or json with
+the <code>--format</code> flag. By passing the name of a service as an argument, it will
+output the constraints on that particular service.</p>
+<h2 id="examples">Examples</h2>
+<p>Deploy MySQL on a machine with at least 32GiB of RAM, and at least 8 ECU of CPU
+power (architecture will be inherited from the environment, or default to
+amd64):</p>
+<pre><code>juju deploy --constraints "cpu-cores=8 mem=32G" mysql
+</code></pre>
+<p>Deploy to t1.micros on AWS:</p>
+<pre><code>juju bootstrap --constraints "cpu-power=0 cpu-power=0 mem=512M"
+</code></pre>
+<p>Launch all future "mysql" machines with at least 8GiB of RAM and 4 ECU:</p>
+<pre><code>juju set-constraints --service mysql mem=8G cpu-cores=4
+</code></pre>
+<p>Output current environment constraints:</p>
+<pre><code>juju get-constraints
+</code></pre>
+<p>Output constraints for mysql</p>
+<pre><code>juju get-constraints mysql
+</code></pre>
+<h1 id="provider-constraints">Provider Constraints</h1>
+<p>See a <a href="reference-constraints.html">complete listing of constraints</a> for details
+on what each constraint means. Two of the most commonly used are:</p>
+<ul>
+<li><code>cpu-cores</code>: The minimum processing power of the machine, roughly indicated by how many cores are available.</li>
+<li><code>mem</code>: The minimum memory for the machine, defaulting to 512MB.</li>
+</ul>
+<h1 id="working-with-constraints">Working with constraints</h1>
+<p>Here are some examples of working with constraints.</p>
+<p>When bootstrapping an environment, you can set the constraints directly:</p>
+<pre><code>juju bootstrap --constraints arch=i386
+</code></pre>
+<p>The above command did two things:</p>
+<ul>
+<li>Set the environment constraints to require machines with an i386 architecture, leaving the other defaults untouched; this is precisely equivalent to:
+    juju bootstrap --constraints "arch=i386 cpu-cores= mem= "</li>
+</ul>
+<p>...but rather more convenient to type.</p>
+<ul>
+<li>Started the bootstrap/master machine with the above constraints.</li>
+</ul>
+<p>Because the environment constraints were set, subsequent deployments will use
+the same values:</p>
+<pre><code>juju deploy mysql
+</code></pre>
+<p>...but other services can be started with their own constraints:</p>
+<pre><code>juju deploy wordpress --constraints mem=1024
+</code></pre>
+<p>Note that if you try to deploy a machine or service with a constraint that
+cannot be fulfilled by the environment, the deployment will fail. Running juju
+status will show an error in the status for that machine. You can fix the
+problem by removing the machine (and the service assigned to the machine, if
+any) and retrying the deployment with different constraints.</p>
+<h2 id="maas-constraints">MAAS constraints</h2>
+<p>If you are deploying to a MAAS provider, you may use the additional constraint
+<code>tags=</code>, followed by a comma-delimited list of tags. Only MAAS nodes thus tagged will be considered appropriate for deploying the service.</p>
+<p>E.g.</p>
+<pre><code>juju deploy mysql --constraints tags=foo,bar
+</code></pre>
+<p>...will deploy MySQL only to a node which has been tagged with both "foo" and
+"bar".</p>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-</div>
-<!--End-Postamble-->
-<!--Footer-->
-	<footer class="global clearfix" role="contentinfo">
-		<nav role="navigation">
-			<div class="footer-a">
-				<div class="clearfix">
-					<ul>
-						<li>
-							<h2><a href="/">Juju</a></h2>
-							<ul>
-								<li><a href="/charms/">Charms</a></li>
-								<li><a href="/features/">Features</a></li>
-								<li><a href="/deployment/">Deployment</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/resources/">Resources</a></h2>
-							<ul>
-								<li><a href="/resources/overview/">Overview</a></li>
-								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
-								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
-								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
-								<li><a href="/resources/videos/">Videos</a></li>
-								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/community">Community</a></h2>
-							<ul>
-								<li><a href="/community/blog/">Juju Blog</a></li>
-								<li><a href="/events/">Events</a></li>
-								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
-								<li><a href="/community/charmers/">Charmers</a></li>
-								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
-							<ul>
-								<li><a href="https://jujucharms.com/">Charm store</a></li>
-								<li><a href="/download/">Download Juju</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="legal clearfix">
-			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
-		</div>
-	</footer>
+    </div>
+    <footer class="global clearfix" role="contentinfo">
+      <nav role="navigation">
+        <div class="footer-a">
+          <div class="clearfix">
+            <ul>
+             <li>
+               <h2><a href="/">Juju</a></h2>
+               <ul>
+                 <li><a href="/charms">Charms</a></li>
+                 <li><a href="/features">Features</a></li>
+                 <li><a href="/deployment">Deployment</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/resources">Resources</a></h2>
+               <ul>
+                 <li><a href="/resources/juju-overview/">Overview</a></li>
+                 <li><a href="/docs/">Documentation</a></li>
+                 <li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+                 <li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+                 <li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+                 <li><a href="/resources/videos/">Videos</a></li>
+                 <li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/community">Community</a></h2>
+                 <ul>
+                   <li><a href="/community/blog/">Juju Blog</a></li>
+                   <li><a href="/events/">Events</a></li>
+                   <li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+                   <li><a href="/community/charmers/">Charmers</a></li>
+                   <li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+                   <li><a href="/docs/contributing.html">Help with documentation</a></li>
+                   <li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li>
+                   <li><a href="/labs/">Juju Labs</a></li>
+                 </ul>
+               </li>
+               <li>
+                 <h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+                 <ul>
+                   <li><a href="https://jujucharms.com/">Charm store</a></li>
+                   <li><a href="/download/">Download Juju</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+       <div class="legal clearfix">
+         <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+       </div>
+     </footer>
+     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+     <script type="text/javascript" src="./js/main.js"></script>
+     <script type="text/javascript" src="./js/jquery.details.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+     <!-- google analytics -->
+     <script>
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-1018242-41']);
+       _gaq.push(['_trackPageview']);
 
-<!--End-Footer-->
-
-
-
-
-<!--Scripts-->
-    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/jquery.details.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-    <!-- google analytics -->
-    <script>
-   var _gaq = _gaq || [];
-   _gaq.push(['_setAccount', 'UA-1018242-41']);
-   _gaq.push(['_trackPageview']);
-  
-   (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   })();
+       (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
     </script>
-<!--End-Scripts-->
-
-
-
-
-
-
-
-
-</body></html>
+  </body>
+</html>

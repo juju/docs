@@ -1,110 +1,164 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<!--Head-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Juju Documentation</title>
-		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
- 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-		<link href="./css/main.css" rel="stylesheet" type="text/css" />
-		
-		<!--[if lt IE 9]>
-		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-	</head>
-<!--End-Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Juju Documentation</title>
+    <script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+    <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+    <link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="resources">
+    <header class="banner global" role="banner">
+      <nav role="navigation" class="nav-primary nav-right">
+        <div class="logo">
+          <a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+            <img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+            <span>Juju</span>
+          </a>
+        </div>
+        <ul>
+          <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+          <li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+          <li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+          <li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+          <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+        </ul>
+        <div id="box-search">
+          <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+            <label class="off-left" for="s">Search:</label>
+            <input class="form-text" type="text" value="" name="s" id="s" />
+            <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <div id="main-content" class="inner-wrapper" role="main">
+        <div class="row no-border">
+         <div class="header-navigation-secondary"></div>
+         <h2 class="pagetitle">Juju documentation</h2>
+        </div>
+        <section id="content" class="container-12">
+          <div class="grid-12 doc-container">
+            <div id="navlinks" class="grid-3 doc-navigation">
+                          <h1>User Guide</h1>
+            <ul class="no-margin">
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
+              <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
+              <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
+              <li class=" sub"><a href="config-local.html">Local</a></li>
+              <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
+              <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-service-groups.html">Groups of Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+              <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
+              <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=""><a href="howto.html">How to...</a></li>
+              <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
+              <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
+              <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
+              <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
+              <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+              <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
+              <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
+              <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
+              <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul class="no-margin">
+              <li class=""><a href="authors-intro.html">Getting started</a></li>
+              <li class=""><a href="authors-charm-components.html">Components of a charm</a></li>
+              <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
+              <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
+              <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
+              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
+              <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+              <li class=" sub"><a href="authors-charm-interfaces.html">Implementing interfaces</a></li>
+              <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
+              <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+              <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+              <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>
 
 
+              <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+              <li class=" sub"><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+              <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+              <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+              <li class=" sub"><a href="authors-charm-quality.html">Charm Feature Rating</a></li>
+              <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
 
+            <h1>Tools</h1>
+            <ul class="no-margin">
+              <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
+              <li class=""><a href="tools-amulet.html">Amulet</a></li>
+            </ul>
 
-
-  <body class="resources">	
-<!--Header-->
-
-	<header class="banner global" role="banner">
-		<nav role="navigation" class="nav-primary nav-right">
-			<div class="logo">
-				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
-					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
-					<span>Juju</span>
-				</a>
-			</div>
-			<ul>
-				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
-				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
-				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
-				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
-			</ul>
-			<div id="box-search">
-				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
-					<label class="off-left" for="s">Search:</label>
-					<input class="form-text" type="text" value="" name="s" id="s" />
-					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-				</form>		
-			</div>
-		</nav>	
-	</header>
-<!--End-Header-->
-<!--Preamble-->
-<div class="wrapper">
-  <div id="main-content" class="inner-wrapper" role="main">
-    <div class="row no-border">
-     <div class="header-navigation-secondary"></div>
-     <h2 class="pagetitle">Juju documentation</h2>
-    </div>
-    <section id="content" class="container-12">
-      <div class="grid-12 doc-container">
-        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
-        <div class="grid-9 doc-content">
-<!--End-Preamble-->
-<article>
-<section id="mysql-interface">
-<h1>mysql interface</h1>
-
-<p>The mysql interface is provided by the mysql charm, and is required by a number of charms currently in the Charm Store and elsewhere which would like to use or actually require a MySQL database.
-</p>
-
-<h2>Hook Implementation: relation-joined</h2>
-
-<h3>In theory</h3>
-
-<p>When the mysql charm is notified of a “relation joined” event, it creates a database. String values are generated for the credentials needed to authenticate a connection to this database: the database name, a username and password. The mysql charm will also check the instance’s hostname and pass that value too, as well as a string containing “True” or “False” to indicate whether this unit is a slave.  
-</p>
-<p>A charm joining this relationship will typically have a relationship-joined hook which will wait to see when the mysql charm has set one of the expected values (all values are set simultaneously, so the availability of one indicates that all are available).
-</p>
-
-
-<h3>In practice</h3>
-
+            <h1>Reference</h1>
+            <ul class="no-margin">
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
+              <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+            </div>
+            <div class="grid-9 doc-content">
+              <article>
+                <h1 id="mysql-interface">mysql interface</h1>
+<p>The mysql interface is provided by the mysql charm, and is required by a number
+of charms currently in the Charm Store and elsewhere which would like to use or
+actually require a MySQL database.</p>
+<h2 id="hook-implementation:-relation-joined">Hook Implementation: relation-joined</h2>
+<h3 id="in-theory">In theory</h3>
+<p>When the mysql charm is notified of a “relation joined” event, it creates a
+database. String values are generated for the credentials needed to authenticate a connection to this database: the database name, a username and password. The mysql charm will also check the instance’s hostname and pass that value too, as well as a string containing “True” or “False” to indicate whether this unit is a slave.</p>
+<p>A charm joining this relationship will typically have a relationship-joined hook which will wait to see when the mysql charm has set one of the expected values (all values are set simultaneously, so the availability of one indicates that all are available).</p>
+<h3 id="in-practice">In practice</h3>
 <p>Upon relation joined, mysql sets the following:</p>
-<ul>   <li>database (string)</li>
-   <li>user (string)</li>
-   <li>password (string)</li>
-   <li>host (string)</li>
-   <li>slave (string)</li></ul>
-
-<p>The corresponding <code>relation-joined</code> hook in any charm connecting to the mysql charm should fetch any or all of these values.
-</p>
-<h3 id="mysql-interface-example">Reference examples:</h3>
-
+<ul>
+<li>database (string)</li>
+<li>user (string)</li>
+<li>password (string)</li>
+<li>host (string)</li>
+<li>slave (string)</li>
+</ul>
+<p>The corresponding <code>relation-joined</code> hook in any charm connecting to the mysql
+charm should fetch any or all of these values.</p>
+<h3 id="reference-examples:">Reference examples:</h3>
 <p>Implementation in <code>bash</code>:</p>
-<pre class="prettyprint lang-bash">#!/bin/sh
+<pre><code>#!/bin/sh
 # db-relation-joined example
-
 set -ex # -x for verbose logging to juju debug-log
 juju-log "Joining database at $JUJU_REMOTE_UNIT"
 hostname=`unit-get public-address`
 juju-log "from host: $hostname"
-
 # Check to see if 'database' has been set, and loop until it is
 database=`relation-get database`
 if [ -z "$database" ] ; then
@@ -115,112 +169,93 @@ user=`relation-get user`
 password=`relation-get password`
 host=`relation-get private-address`
 slave=`relation-get slave`
-
 # do something with these values
 juju-log "Database acquired"
 juju-log "database: $database username: $user host: $host"
-
-</pre>
-
-
-<h2>
-Other relation hooks</h2>
-
-<p>The only other hook actually implemented for this interface by the mysql charm is relation-broken. This does not actually interact with connected charms using the interface, but performs some housekeeping for the mysql charm.
-However, this does not mean that other event driven hooks should not be created for requirer charms to do whatever they may need.</p>
-</section>
-</article>
-<!--Postamble-->
-        </div>
+</code></pre>
+<h2 id="other-relation-hooks">Other relation hooks</h2>
+<p>The only other hook actually implemented for this interface by the mysql charm
+is relation-broken. This does not actually interact with connected charms using
+the interface, but performs some housekeeping for the mysql charm. However, this does not mean that other event driven hooks should not be created for requirer charms to do whatever they may need.</p>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-</div>
-<!--End-Postamble-->
-<!--Footer-->
-	<footer class="global clearfix" role="contentinfo">
-		<nav role="navigation">
-			<div class="footer-a">
-				<div class="clearfix">
-					<ul>
-						<li>
-							<h2><a href="/">Juju</a></h2>
-							<ul>
-								<li><a href="/charms/">Charms</a></li>
-								<li><a href="/features/">Features</a></li>
-								<li><a href="/deployment/">Deployment</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/resources/">Resources</a></h2>
-							<ul>
-								<li><a href="/resources/overview/">Overview</a></li>
-								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
-								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
-								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
-								<li><a href="/resources/videos/">Videos</a></li>
-								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/community">Community</a></h2>
-							<ul>
-								<li><a href="/community/blog/">Juju Blog</a></li>
-								<li><a href="/events/">Events</a></li>
-								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
-								<li><a href="/community/charmers/">Charmers</a></li>
-								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
-							<ul>
-								<li><a href="https://jujucharms.com/">Charm store</a></li>
-								<li><a href="/download/">Download Juju</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="legal clearfix">
-			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
-		</div>
-	</footer>
+    </div>
+    <footer class="global clearfix" role="contentinfo">
+      <nav role="navigation">
+        <div class="footer-a">
+          <div class="clearfix">
+            <ul>
+             <li>
+               <h2><a href="/">Juju</a></h2>
+               <ul>
+                 <li><a href="/charms">Charms</a></li>
+                 <li><a href="/features">Features</a></li>
+                 <li><a href="/deployment">Deployment</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/resources">Resources</a></h2>
+               <ul>
+                 <li><a href="/resources/juju-overview/">Overview</a></li>
+                 <li><a href="/docs/">Documentation</a></li>
+                 <li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+                 <li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+                 <li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+                 <li><a href="/resources/videos/">Videos</a></li>
+                 <li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/community">Community</a></h2>
+                 <ul>
+                   <li><a href="/community/blog/">Juju Blog</a></li>
+                   <li><a href="/events/">Events</a></li>
+                   <li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+                   <li><a href="/community/charmers/">Charmers</a></li>
+                   <li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+                   <li><a href="/docs/contributing.html">Help with documentation</a></li>
+                   <li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li>
+                   <li><a href="/labs/">Juju Labs</a></li>
+                 </ul>
+               </li>
+               <li>
+                 <h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+                 <ul>
+                   <li><a href="https://jujucharms.com/">Charm store</a></li>
+                   <li><a href="/download/">Download Juju</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+       <div class="legal clearfix">
+         <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+       </div>
+     </footer>
+     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+     <script type="text/javascript" src="./js/main.js"></script>
+     <script type="text/javascript" src="./js/jquery.details.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+     <!-- google analytics -->
+     <script>
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-1018242-41']);
+       _gaq.push(['_trackPageview']);
 
-<!--End-Footer-->
-
-
-
-<!--Scripts-->
-    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/jquery.details.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-    <!-- google analytics -->
-    <script>
-   var _gaq = _gaq || [];
-   _gaq.push(['_setAccount', 'UA-1018242-41']);
-   _gaq.push(['_trackPageview']);
-  
-   (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   })();
+       (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
     </script>
-<!--End-Scripts-->
-
-
-
-
-
-</body></html>
+  </body>
+</html>

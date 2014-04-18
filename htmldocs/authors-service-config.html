@@ -1,101 +1,179 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<!--Head-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Juju Documentation</title>
-		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
- 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-		<link href="./css/main.css" rel="stylesheet" type="text/css" />
-		
-		<!--[if lt IE 9]>
-		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-	</head>
-<!--End-Head-->
-
-
-
-
-
-
-
-
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Juju Documentation</title>
+    <script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+    <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+    <link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
   <body class="resources">
-  	
-<!--Header-->
+    <header class="banner global" role="banner">
+      <nav role="navigation" class="nav-primary nav-right">
+        <div class="logo">
+          <a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+            <img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+            <span>Juju</span>
+          </a>
+        </div>
+        <ul>
+          <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+          <li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+          <li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+          <li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+          <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+        </ul>
+        <div id="box-search">
+          <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+            <label class="off-left" for="s">Search:</label>
+            <input class="form-text" type="text" value="" name="s" id="s" />
+            <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <div id="main-content" class="inner-wrapper" role="main">
+        <div class="row no-border">
+         <div class="header-navigation-secondary"></div>
+         <h2 class="pagetitle">Juju documentation</h2>
+        </div>
+        <section id="content" class="container-12">
+          <div class="grid-12 doc-container">
+            <div id="navlinks" class="grid-3 doc-navigation">
+                          <h1>User Guide</h1>
+            <ul class="no-margin">
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
+              <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
+              <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
+              <li class=" sub"><a href="config-local.html">Local</a></li>
+              <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
+              <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-service-groups.html">Groups of Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+              <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
+              <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=""><a href="howto.html">How to...</a></li>
+              <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
+              <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
+              <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
+              <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
+              <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+              <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
+              <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
+              <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
+              <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul class="no-margin">
+              <li class=""><a href="authors-intro.html">Getting started</a></li>
+              <li class=""><a href="authors-charm-components.html">Components of a charm</a></li>
+              <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
+              <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
+              <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
+              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
+              <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+              <li class=" sub"><a href="authors-charm-interfaces.html">Implementing interfaces</a></li>
+              <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
+              <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+              <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+              <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>
 
-	<header class="banner global" role="banner">
-		<nav role="navigation" class="nav-primary nav-right">
-			<div class="logo">
-				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
-					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
-					<span>Juju</span>
-				</a>
-			</div>
-			<ul>
-				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
-				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
-				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
-				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
-			</ul>
-			<div id="box-search">
-				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
-					<label class="off-left" for="s">Search:</label>
-					<input class="form-text" type="text" value="" name="s" id="s" />
-					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-				</form>		
-			</div>
-		</nav>	
-	</header>
-<!--End-Header-->
-<!--Preamble-->
-<div class="wrapper">
-  <div id="main-content" class="inner-wrapper" role="main">
-    <div class="row no-border">
-     <div class="header-navigation-secondary"></div>
-     <h2 class="pagetitle">Juju documentation</h2>
-    </div>
-    <section id="content" class="container-12">
-      <div class="grid-12 doc-container">
-        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
-        <div class="grid-9 doc-content">
-<!--End-Preamble-->
-<article>
-<h1>Service configuration</h1>
-<h2>Introduction</h2>
-<p>A <a href="./charm.html">Charm</a> often will require access to specific options or configuration. Charms allow for the manipulation of the various configuration options which the charm author has chosen to expose. juju provides tools to help manage these options and respond to changes in these options over the lifetime of the service deployment. These options apply to the entire service, as opposed to only a specific unit or relation. Configuration is modified by an administrator at deployment time or over the lifetime of the services.</p>
-<p>As an example a wordpress service may expose a 'blog-title' option. This option would control the title of the blog being published. Changes to this option would be applied to all units implementing this service through the invocation of a hook on each of them.</p>
-<h2>Using configuration options</h2>
-<p>Configuration options are manipulated using a command line interface. juju provide a set command to aid the administrator in changing values.</p>
-<pre><code>juju set &lt;service name&gt; option=value [option=value]</code></pre>
+
+              <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+              <li class=" sub"><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+              <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+              <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+              <li class=" sub"><a href="authors-charm-quality.html">Charm Feature Rating</a></li>
+              <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
+
+            <h1>Tools</h1>
+            <ul class="no-margin">
+              <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
+              <li class=""><a href="tools-amulet.html">Amulet</a></li>
+            </ul>
+
+            <h1>Reference</h1>
+            <ul class="no-margin">
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
+              <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+            </div>
+            <div class="grid-9 doc-content">
+              <article>
+                <h1 id="service-configuration">Service configuration</h1>
+<h2 id="introduction">Introduction</h2>
+<p>A <a href="./charm.html">Charm</a> often will require access to specific options or
+configuration. Charms allow for the manipulation of the various configuration
+options which the charm author has chosen to expose. juju provides tools to help manage these options and respond to changes in these options over the lifetime of the service deployment. These options apply to the entire service, as opposed to only a specific unit or relation. Configuration is modified by an
+administrator at deployment time or over the lifetime of the services.</p>
+<p>As an example a wordpress service may expose a 'blog-title' option. This option
+would control the title of the blog being published. Changes to this option
+would be applied to all units implementing this service through the invocation
+of a hook on each of them.</p>
+<h2 id="using-configuration-options">Using configuration options</h2>
+<p>Configuration options are manipulated using a command line interface. juju
+provide a set command to aid the administrator in changing values.</p>
+<pre><code>juju set &lt;service name&gt; option=value [option=value]
+</code></pre>
 <p>This command allows changing options at runtime and takes one or more name/value pairs which will be set into the service options. Configuration options which are set together are delivered to the services for handling together. E.g. if you are changing a username and a password, changing them individually may yield bad results since the username will temporarily be set with an incorrect password.</p>
 <p>While its possible to set multiple configuration options on the command line its also convenient to pass multiple configuration options via the --file argument which takes the name of a YAML file. The contents of this file will be applied as though these elements had been passed to juju set.</p>
-<p>A configuration file may be provided at deployment time using the --config option, as follows:</p>
+<p>A configuration file may be provided at deployment time using the --config
+option, as follows:</p>
 <pre><code>juju deploy [--config local.yaml] wordpress myblog
-juju deploy [--config local.yaml] postgres</code></pre>
-<p>The service name is looked up inside the YAML file to allow for related service configuration options to be collected into a single file for the purposes of deployment and passed repeated to each juju deploy invocation.</p>
-<p>Below is an example local.yaml containing options which would be used during deployment of a service named myblog.</p>
+juju deploy [--config local.yaml] postgres
+</code></pre>
+<p>The service name is looked up inside the YAML file to allow for related service
+configuration options to be collected into a single file for the purposes of
+deployment and passed repeated to each juju deploy invocation.</p>
+<p>Below is an example local.yaml containing options which would be used during
+deployment of a service named myblog.</p>
 <pre><code>myblog:
-   blog-roll: [&#39;http://foobar.com&#39;, &#39;http://testing.com&#39;]
+   blog-roll: ['http://foobar.com', 'http://testing.com']
    blog-title: Awesome Sauce
    password: n0nsense
 postgres:
    port: 5432
-   cluster-name: main</code></pre>
-<h2>Creating charms</h2>
-<p>Charm authors create a config.yaml file which resides in the charm's top-level directory. The configuration options supported by a service are defined within its respective charm. juju will only allow the manipulation of options which were explicitly defined as supported.</p>
+   cluster-name: main
+</code></pre>
+<h2 id="creating-charms">Creating charms</h2>
+<p>Charm authors create a config.yaml file which resides in the charm's top-level
+directory. The configuration options supported by a service are defined within
+its respective charm. juju will only allow the manipulation of options which
+were explicitly defined as supported.</p>
 <p>The specification of possible configuration values is intentionally minimal, but still evolving. Currently the charm define a list of names which they react. Information includes a human readable description and an optional default value. Additionally type may be specified. All options have a default type of 'str' which means its value will only be treated as a text string. Other valid options are 'int' and 'float'.</p>
-<p>The following config.yaml would be included in the top level directory of a charm and includes a list of option definitions:</p>
+<p>The following config.yaml would be included in the top level directory of a
+charm and includes a list of option definitions:</p>
 <pre><code>options:
     port:
         default: 80
@@ -104,118 +182,106 @@ postgres:
     admin-email:
         # type: str is implied
         default: null
-        description: Email address for the site administrator.</code></pre>
+        description: Email address for the site administrator.
+</code></pre>
 <p>To access these configuration options from a hook we provide the following:</p>
-<pre><code>config-get [option name]</code></pre>
+<pre><code>config-get [option name]
+</code></pre>
 <p>config-get returns all the configuration options for a service as JSON data when no option name is specified. If an option name is specified the value of that option is output according to the normal rules and obeying the --output and --format arguments. Hooks implicitly know the service they are executing for and config-get always gets values from the service of the hook.</p>
-<p>Changes to options (see previous section) trigger the charm's config-changed hook. The config-changed hook is guaranteed to run after any changes are made to the configuration, but it is possible that multiple changes will be observed at once. Because its possible to set many configuration options on a single command line invocation it is easily possible to ensure related options are available to the service at the same time.</p>
-<p>The config-changed hook must be written in such a way as to deal with changes to one or more options and deal gracefully with options that are required by the charm but not yet set by an administrator. Errors in the config-changed hook force juju to assume the service is no longer properly configured. If the service is not already in a stopped state it will be stopped and taken out of service. The status command will be extended in the future to report on workflow and unit agent status which will help reveal error conditions of this nature.</p>
-<p>When options are passed using juju deploy their values will be read in from a file and made available to the service prior to the invocation of the its install hook. The install and start hooks will have access to config-get and thus complete access to the configuration options during their execution. If the install or start hooks don't directly need to deal with options they can simply invoke the config-changed hook.</p>
-<h2>Internals</h2>
-<blockquote>
-<p><strong>note</strong></p>
-<dl>
-<dt>This section explains details useful to the implementation but not of</dt>
-<dd><p>interest to the casual reader.</p>
-</dd>
-</dl>
-</blockquote>
-<p>Hooks normally attempt to provide a consistent view of the shared state of the system and the handling of config options within hooks (config-changed and the relation hooks) is no different. The first access to the configuration data of a service will retain a cached copy of the service options. Cached data will be used for the duration of the hook invocation.</p>
-</article>
-<!--Postamble-->
-        </div>
+<p>Changes to options (see previous section) trigger the charm's config-changed
+hook. The config-changed hook is guaranteed to run after any changes are made to the configuration, but it is possible that multiple changes will be observed at once. Because its possible to set many configuration options on a single command line invocation it is easily possible to ensure related options are available to the service at the same time.</p>
+<p>The config-changed hook must be written in such a way as to deal with changes to one or more options and deal gracefully with options that are required by the charm but not yet set by an administrator. Errors in the config-changed hook force juju to assume the service is no longer properly configured. If the
+service is not already in a stopped state it will be stopped and taken out of
+service. The status command will be extended in the future to report on workflow and unit agent status which will help reveal error conditions of this nature.</p>
+<p>When options are passed using juju deploy their values will be read in from a
+file and made available to the service prior to the invocation of the its
+install hook. The install and start hooks will have access to config-get and
+thus complete access to the configuration options during their execution. If theinstall or start hooks don't directly need to deal with options they can simply invoke the config-changed hook.</p>
+<h2 id="internals">Internals</h2>
+<p><strong>Note</strong>: This section explains details useful to the implementation but not of interest to the casual reader.</p>
+<p>Hooks normally attempt to provide a consistent view of the shared state of the
+system and the handling of config options within hooks (config-changed and the
+relation hooks) is no different. The first access to the configuration data of a service will retain a cached copy of the service options. Cached data will be
+used for the duration of the hook invocation.</p>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-</div>
-<!--End-Postamble-->
-<!--Footer-->
-	<footer class="global clearfix" role="contentinfo">
-		<nav role="navigation">
-			<div class="footer-a">
-				<div class="clearfix">
-					<ul>
-						<li>
-							<h2><a href="/">Juju</a></h2>
-							<ul>
-								<li><a href="/charms/">Charms</a></li>
-								<li><a href="/features/">Features</a></li>
-								<li><a href="/deployment/">Deployment</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/resources/">Resources</a></h2>
-							<ul>
-								<li><a href="/resources/overview/">Overview</a></li>
-								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
-								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
-								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
-								<li><a href="/resources/videos/">Videos</a></li>
-								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/community">Community</a></h2>
-							<ul>
-								<li><a href="/community/blog/">Juju Blog</a></li>
-								<li><a href="/events/">Events</a></li>
-								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
-								<li><a href="/community/charmers/">Charmers</a></li>
-								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
-							<ul>
-								<li><a href="https://jujucharms.com/">Charm store</a></li>
-								<li><a href="/download/">Download Juju</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="legal clearfix">
-			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
-		</div>
-	</footer>
+    </div>
+    <footer class="global clearfix" role="contentinfo">
+      <nav role="navigation">
+        <div class="footer-a">
+          <div class="clearfix">
+            <ul>
+             <li>
+               <h2><a href="/">Juju</a></h2>
+               <ul>
+                 <li><a href="/charms">Charms</a></li>
+                 <li><a href="/features">Features</a></li>
+                 <li><a href="/deployment">Deployment</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/resources">Resources</a></h2>
+               <ul>
+                 <li><a href="/resources/juju-overview/">Overview</a></li>
+                 <li><a href="/docs/">Documentation</a></li>
+                 <li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+                 <li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+                 <li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+                 <li><a href="/resources/videos/">Videos</a></li>
+                 <li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/community">Community</a></h2>
+                 <ul>
+                   <li><a href="/community/blog/">Juju Blog</a></li>
+                   <li><a href="/events/">Events</a></li>
+                   <li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+                   <li><a href="/community/charmers/">Charmers</a></li>
+                   <li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+                   <li><a href="/docs/contributing.html">Help with documentation</a></li>
+                   <li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li>
+                   <li><a href="/labs/">Juju Labs</a></li>
+                 </ul>
+               </li>
+               <li>
+                 <h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+                 <ul>
+                   <li><a href="https://jujucharms.com/">Charm store</a></li>
+                   <li><a href="/download/">Download Juju</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+       <div class="legal clearfix">
+         <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+       </div>
+     </footer>
+     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+     <script type="text/javascript" src="./js/main.js"></script>
+     <script type="text/javascript" src="./js/jquery.details.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+     <!-- google analytics -->
+     <script>
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-1018242-41']);
+       _gaq.push(['_trackPageview']);
 
-<!--End-Footer-->
-
-
-
-
-<!--Scripts-->
-    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/jquery.details.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-    <!-- google analytics -->
-    <script>
-   var _gaq = _gaq || [];
-   _gaq.push(['_setAccount', 'UA-1018242-41']);
-   _gaq.push(['_trackPageview']);
-  
-   (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   })();
+       (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
     </script>
-<!--End-Scripts-->
-
-
-
-
-
-
-
-</body></html>
+  </body>
+</html>

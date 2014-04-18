@@ -1,267 +1,315 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<!--Head-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Juju Documentation</title>
-		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
- 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-		<link href="./css/main.css" rel="stylesheet" type="text/css" />
-		
-		<!--[if lt IE 9]>
-		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-	</head>
-<!--End-Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Juju Documentation</title>
+    <script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+    <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+    <link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="resources">
+    <header class="banner global" role="banner">
+      <nav role="navigation" class="nav-primary nav-right">
+        <div class="logo">
+          <a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+            <img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+            <span>Juju</span>
+          </a>
+        </div>
+        <ul>
+          <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+          <li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+          <li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+          <li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+          <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+        </ul>
+        <div id="box-search">
+          <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+            <label class="off-left" for="s">Search:</label>
+            <input class="form-text" type="text" value="" name="s" id="s" />
+            <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <div id="main-content" class="inner-wrapper" role="main">
+        <div class="row no-border">
+         <div class="header-navigation-secondary"></div>
+         <h2 class="pagetitle">Juju documentation</h2>
+        </div>
+        <section id="content" class="container-12">
+          <div class="grid-12 doc-container">
+            <div id="navlinks" class="grid-3 doc-navigation">
+                          <h1>User Guide</h1>
+            <ul class="no-margin">
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
+              <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
+              <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
+              <li class=" sub"><a href="config-local.html">Local</a></li>
+              <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
+              <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-service-groups.html">Groups of Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+              <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
+              <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=""><a href="howto.html">How to...</a></li>
+              <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
+              <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
+              <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
+              <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
+              <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+              <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
+              <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
+              <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
+              <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul class="no-margin">
+              <li class=""><a href="authors-intro.html">Getting started</a></li>
+              <li class=""><a href="authors-charm-components.html">Components of a charm</a></li>
+              <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
+              <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
+              <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
+              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
+              <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+              <li class=" sub"><a href="authors-charm-interfaces.html">Implementing interfaces</a></li>
+              <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
+              <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+              <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+              <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>
 
 
+              <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+              <li class=" sub"><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+              <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+              <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+              <li class=" sub"><a href="authors-charm-quality.html">Charm Feature Rating</a></li>
+              <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
 
+            <h1>Tools</h1>
+            <ul class="no-margin">
+              <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
+              <li class=""><a href="tools-amulet.html">Amulet</a></li>
+            </ul>
 
-
-
-  <body class="resources">	
-<!--Header-->
-
-	<header class="banner global" role="banner">
-		<nav role="navigation" class="nav-primary nav-right">
-			<div class="logo">
-				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
-					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
-					<span>Juju</span>
-				</a>
-			</div>
-			<ul>
-				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
-				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
-				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
-				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
-			</ul>
-			<div id="box-search">
-				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
-					<label class="off-left" for="s">Search:</label>
-					<input class="form-text" type="text" value="" name="s" id="s" />
-					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-				</form>		
-			</div>
-		</nav>	
-	</header>
-<!--End-Header-->
-<!--Preamble-->
-<div class="wrapper">
-  <div id="main-content" class="inner-wrapper" role="main">
-    <div class="row no-border">
-     <div class="header-navigation-secondary"></div>
-     <h2 class="pagetitle">Juju documentation</h2>
-    </div>
-    <section id="content" class="container-12">
-      <div class="grid-12 doc-container">
-        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
-        <div class="grid-9 doc-content">
-<!--End-Preamble-->
-<article>
-    <section id='environments'>
-          <h1>Managing environments</h1>
-          <p>Juju can be used to manage multiple clouds on different environments. The environments themselves need only be defined in the <code>environments.yaml</code> file as more fully described in the configuration section of the documentation. It is entirely possible to have multiple environments with the same cloud provider (providing they are of course separate environments on the cloud too) or across all the different types of supported cloud providers.</p>
-
-          <h2 id="environment-identifying">Identifying the current environment</h2>
-          <p>The order of precedence for determining the environment a command will be executed on is:</p>
-          <ol>
-            <li> The environment specified by the use of the <code>-e</code> switch.</li>
-            <li> The environment set by the <code>JUJU_ENV</code> environment variable.</li>
-            <li> The environment last specified with the <code>switch</code> command. </li>
-            <li> The environment specified as the default in <code>environments.yaml</code>.</li>
-          </ol>
-<p>To determine which environment a command will act on, you can issue the <code>switch</code> command with no parameters:</p>
-<pre class="prettyprint lang-bash">
-juju switch
-
+            <h1>Reference</h1>
+            <ul class="no-margin">
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
+              <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+            </div>
+            <div class="grid-9 doc-content">
+              <article>
+                <h1 id="managing-environments">Managing environments</h1>
+<p>Juju can be used to manage multiple clouds on different environments. The
+environments themselves need only be defined in the <code>environments.yaml</code> file as
+more fully described in the configuration section of the documentation. It is
+entirely possible to have multiple environments with the same cloud provider
+(providing they are of course separate environments on the cloud too) or across
+all the different types of supported cloud providers.</p>
+<h2 id="identifying-the-current-environment">Identifying the current environment</h2>
+<p>The order of precedence for determining the environment a command will be
+executed on is:</p>
+<ol>
+<li>The environment specified by the use of the <code>-e</code> switch.</li>
+<li>The environment set by the <code>JUJU_ENV</code> environment variable.</li>
+<li>The environment last specified with the <code>switch</code> command. </li>
+<li>The environment specified as the default in <code>environments.yaml</code>.</li>
+</ol>
+<p>To determine which environment a command will act on, you can issue the <code>switch</code>
+command with no parameters:</p>
+<pre><code>juju switch
 Current environment: "amazon" (from JUJU_ENV)
-</pre>
-
-<p>It is also possible to determine the current environment by checking the <code>JUJU_ENV</code> variable, and if that is empty, the contents of the file <code>~/.juju/current-environment</code>:</p>
-<pre class="prettyprint lang-bash">
-echo $JUJU_ENV
-
-cat ~/.juju/current-environment 
-</pre>
-
-
-          <h2 id="environment-e">Specifying an environment</h2>
-          <p> You can use the <code>-e</code> switch with a Juju command, followed by a valid environment label, to specify that the command should be run against that environment. Using the <code>-e</code> switch takes precedence over any other setting.</p>
-          <p> For example:</p>
-<pre class="prettyprint lang-bash">
-juju bootstrap                 # bootstraps the default environment
+</code></pre>
+<p>It is also possible to determine the current environment by checking the
+<code>JUJU_ENV</code> variable, and if that is empty, the contents of the file <code>~/.juju
+/current-environment</code>:</p>
+<pre><code>echo $JUJU_ENV
+cat ~/.juju/current-environment
+</code></pre>
+<h2 id="specifying-an-environment">Specifying an environment</h2>
+<p>You can use the <code>-e</code> switch with a Juju command, followed by a valid environment label, to specify that the command should be run against that environment. Using the <code>-e</code> switch takes precedence over any other setting.</p>
+<p>For example:</p>
+<pre><code>juju bootstrap                 # bootstraps the default environment
 juju switch amazon             # switches the environment to the cloud defined by 'amazon'
 juju deploy mysql -e mycloud   # deploys mysql charm on the cloud defined by 'mycloud'
-</pre>
-<p class="note"><strong>Note: </strong> Unlike many switches used with juju, <code>-e</code> must come at the end of the command in order to be parsed correctly.</p>
-
-          <h2 id="environment-switch">Switching environments</h2>
-          <p> When managing several cloud environments, it can be bothersome to issue a long list of commands and remember to prepend the <code>-e</code> switch to each one. For this reason, you can switch the current environment using the <code>switch</code> command:</p>
-
-<pre class="prettyprint lang-bash">
-juju switch hpcloud
-juju bootstrap  
-</pre>
-          <p>... will bootstrap the environment defined by the 'hpcloud' label</p>
-          <p>This command will return with an error message if <code>JUJU_ENV</code>is set (as this takes precedence).</p>
-<p class="note"><strong>Note: </strong>The environment selected with <code>switch</code> is persistent. Even if you log out, switch your computer off, travel into space or sail around the world, when you start using Juju again, it will still point at the last environment you specified with <code>switch</code>.</p>
-
-
-
-          <h2 id="environment-default">Default environment</h2>
-          <p>The default environment is the environment which will be used if you have not issued a <a href="#environment-switch"><code>switch</code> command</a> and do not specify an environment to use with the <code>-e</code> switch or alter the <code>JUJU_ENV</code> environment variable. The default environment is specified at the top of the <code>environments.yaml</code> file, before the environment specifications themselves, like this:</p>
-<pre class="prettyprint lang-yaml">
-...
+</code></pre>
+<p><strong>Note: </strong> Unlike many switches used with juju, <code>-e</code> must come at the end of the command in order to be parsed correctly.</p>
+<h2 id="switching-environments">Switching environments</h2>
+<p>When managing several cloud environments, it can be bothersome to issue a long
+list of commands and remember to prepend the <code>-e</code> switch to each one. For this
+reason, you can switch the current environment using the <code>switch</code> command:</p>
+<pre><code>juju switch hpcloud
+juju bootstrap
+</code></pre>
+<p>... will bootstrap the environment defined by the 'hpcloud' label</p>
+<p>This command will return with an error message if <code>JUJU_ENV</code>is set (as this
+takes precedence).</p>
+<p class="note"><strong>Note:</strong> The environment selected with <code>switch</code> is persistent. Even if you log out, switch your computer off, travel into space or sail around the world, when you start using Juju again, it will still point at the last environment you specified with <code>switch</code>.</p>
+<h2 id="default-environment">Default environment</h2>
+<p>The default environment is the environment which will be used if you have not
+issued a <code>switch</code> command and do not specify an environment to use with the <code>-e</code> switch or alter the <code>JUJU_ENV</code> environment variable. The default environment is specified at the top of the <code>environments.yaml</code> file, before the environment
+specifications themselves, like this:</p>
+<pre><code>...
 default: amazon
-
 environments:
   ## https://juju.ubuntu.com/docs/config-openstack.html
   openstack:
 ...
-</pre>
- 
-          <h2 id="bootstrapped-environment-update">Updating running environments</h2>
-          <p>Juju has a set of commands that permit you to view and change the configuration of a running environment. The commands can be used to make temporary changes, such as to logging, or permanent changes, such as to take advantage of new features after juju is upgraded.</p>
-          <p>The <code>get-environment</code> command will display all the environment's configured options. You can pass the name of an option to see just the one value. For example, to see the default series that charms are deployed with, type:</p>
-
-<pre class="prettyprint lang-bash">
-juju get-environment default-series
-</pre>
-
-          <p>The <code>set-environment</code> command will set a configuration option to the specified value. For example, you can set the default series that charms are deployed with to trusty like this:</p>
-
-<pre class="prettyprint lang-bash">
-juju set-environment default-series=trusty
-</pre>
-
-          <p>The <code>unset-environment</code> command will set a configuration option to the default value. It acts as a reset. Options without default value are removed. It is an error to unset a required option. For example, you can unset the default series that charms are deployed with (so that the juju store can choose the best series for a charm) like this:</p>
-
-<pre class="prettyprint lang-bash">
-juju unset-environment default-series
-</pre>
-
-          <h2 id="environment-upgrade">Upgrading environments</h2>
-          <p>The <code>upgrade-juju</code> command upgrades a running environment. It selects the most recent supported version of juju compatible with the command-line version. The juju machine and unit agents will be updated to the new version. The <code>--version</code> option can be used to select a specific version to upgrade to.</p>
-
-<pre class="prettyprint lang-bash">
-juju upgrade-juju
-</pre>
-
-          <h2 id="environment-update">Updating environments</h2>
-          <p>Juju will attempt to maintain a high degree of legacy compatibility for the environments.yaml definitions, so you should be able to update to stable versions of the software without worrying about reconfiguring your environments each time. However, new releases do sometimes add support for new cloud providers, add additional settings or change to adapt to configuration changes for the providers themselves. In these cases it can be useful to generate a new boilerplate <code>environments.yaml</code> so you can easily manually edit your own configurations or cut and paste new environments into your existing configuration.</p>
-          <p>To generate a new boilerplate <code>environments.yaml</code> file direct to the console you can use:</p>
-<pre class="prettyprint lang-bash">
-juju generate-config --show
-</pre>
-          <p> Or:</p>
-<pre class="prettyprint lang-bash">
-juju init --show
-</pre>
+</code></pre>
+<h2 id="updating-running-environments">Updating running environments</h2>
+<p>Juju has a set of commands that permit you to view and change the configuration
+of a running environment. The commands can be used to make temporary changes,
+such as to logging, or permanent changes, such as to take advantage of new
+features after juju is upgraded.</p>
+<p>The <code>get-environment</code> command will display all the environment's configured
+options. You can pass the name of an option to see just the one value. For
+example, to see the default series that charms are deployed with, type:</p>
+<pre><code>juju get-environment default-series
+</code></pre>
+<p>The <code>set-environment</code> command will set a configuration option to the specified
+value. For example, you can set the default series that charms are deployed with to trusty like this:</p>
+<pre><code>juju set-environment default-series=trusty
+</code></pre>
+<p>The <code>unset-environment</code> command will set a configuration option to the default
+value. It acts as a reset. Options without default value are removed. It is an
+error to unset a required option. For example, you can unset the default series
+that charms are deployed with (so that the juju store can choose the best series for a charm) like this:</p>
+<pre><code>juju unset-environment default-series
+</code></pre>
+<h2 id="upgrading-environments">Upgrading environments</h2>
+<p>The <code>upgrade-juju</code> command upgrades a running environment. It selects the most
+recent supported version of juju compatible with the command-line version. The
+juju machine and unit agents will be updated to the new version. The <code>--version</code> option can be used to select a specific version to upgrade to.</p>
+<pre><code>juju upgrade-juju
+</code></pre>
+<h2 id="updating-environments">Updating environments</h2>
+<p>Juju will attempt to maintain a high degree of legacy compatibility for the
+environments.yaml definitions, so you should be able to update to stable
+versions of the software without worrying about reconfiguring your environments
+each time. However, new releases do sometimes add support for new cloud
+providers, add additional settings or change to adapt to configuration changes
+for the providers themselves. In these cases it can be useful to generate a new
+boilerplate <code>environments.yaml</code> so you can easily manually edit your own
+configurations or cut and paste new environments into your existing
+configuration.</p>
+<p>To generate a new boilerplate <code>environments.yaml</code> file direct to the console you can use:</p>
+<pre><code>juju generate-config --show
+</code></pre>
+<p>Or:</p>
+<pre><code>juju init --show
+</code></pre>
 <p>as the <code>init</code>command is an alias for <code>generate-config</code>.</p>
-</section>
-</article>
-<!--Postamble-->
-        </div>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-</div>
-<!--End-Postamble-->
-<!--Footer-->
-	<footer class="global clearfix" role="contentinfo">
-		<nav role="navigation">
-			<div class="footer-a">
-				<div class="clearfix">
-					<ul>
-						<li>
-							<h2><a href="/">Juju</a></h2>
-							<ul>
-								<li><a href="/charms/">Charms</a></li>
-								<li><a href="/features/">Features</a></li>
-								<li><a href="/deployment/">Deployment</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/resources/">Resources</a></h2>
-							<ul>
-								<li><a href="/resources/overview/">Overview</a></li>
-								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
-								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
-								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
-								<li><a href="/resources/videos/">Videos</a></li>
-								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/community">Community</a></h2>
-							<ul>
-								<li><a href="/community/blog/">Juju Blog</a></li>
-								<li><a href="/events/">Events</a></li>
-								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
-								<li><a href="/community/charmers/">Charmers</a></li>
-								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
-							<ul>
-								<li><a href="https://jujucharms.com/">Charm store</a></li>
-								<li><a href="/download/">Download Juju</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="legal clearfix">
-			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
-		</div>
-	</footer>
+    </div>
+    <footer class="global clearfix" role="contentinfo">
+      <nav role="navigation">
+        <div class="footer-a">
+          <div class="clearfix">
+            <ul>
+             <li>
+               <h2><a href="/">Juju</a></h2>
+               <ul>
+                 <li><a href="/charms">Charms</a></li>
+                 <li><a href="/features">Features</a></li>
+                 <li><a href="/deployment">Deployment</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/resources">Resources</a></h2>
+               <ul>
+                 <li><a href="/resources/juju-overview/">Overview</a></li>
+                 <li><a href="/docs/">Documentation</a></li>
+                 <li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+                 <li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+                 <li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+                 <li><a href="/resources/videos/">Videos</a></li>
+                 <li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/community">Community</a></h2>
+                 <ul>
+                   <li><a href="/community/blog/">Juju Blog</a></li>
+                   <li><a href="/events/">Events</a></li>
+                   <li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+                   <li><a href="/community/charmers/">Charmers</a></li>
+                   <li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+                   <li><a href="/docs/contributing.html">Help with documentation</a></li>
+                   <li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li>
+                   <li><a href="/labs/">Juju Labs</a></li>
+                 </ul>
+               </li>
+               <li>
+                 <h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+                 <ul>
+                   <li><a href="https://jujucharms.com/">Charm store</a></li>
+                   <li><a href="/download/">Download Juju</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+       <div class="legal clearfix">
+         <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+       </div>
+     </footer>
+     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+     <script type="text/javascript" src="./js/main.js"></script>
+     <script type="text/javascript" src="./js/jquery.details.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+     <!-- google analytics -->
+     <script>
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-1018242-41']);
+       _gaq.push(['_trackPageview']);
 
-<!--End-Footer-->
-
-
-
-<!--Scripts-->
-    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/jquery.details.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-    <!-- google analytics -->
-    <script>
-   var _gaq = _gaq || [];
-   _gaq.push(['_setAccount', 'UA-1018242-41']);
-   _gaq.push(['_trackPageview']);
-  
-   (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   })();
+       (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
     </script>
-<!--End-Scripts-->
-
-
-
-
-
-
-</body></html>
+  </body>
+</html>

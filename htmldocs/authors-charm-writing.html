@@ -1,170 +1,236 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<!--Head-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Juju Documentation</title>
-		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
- 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-		<link href="./css/main.css" rel="stylesheet" type="text/css" />
-		
-		<!--[if lt IE 9]>
-		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-	</head>
-<!--End-Head-->
-
-
-
-
-
-
-
-
-
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Juju Documentation</title>
+    <script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+    <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+    <link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
   <body class="resources">
-  	
-<!--Header-->
+    <header class="banner global" role="banner">
+      <nav role="navigation" class="nav-primary nav-right">
+        <div class="logo">
+          <a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+            <img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+            <span>Juju</span>
+          </a>
+        </div>
+        <ul>
+          <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+          <li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+          <li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+          <li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+          <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+        </ul>
+        <div id="box-search">
+          <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+            <label class="off-left" for="s">Search:</label>
+            <input class="form-text" type="text" value="" name="s" id="s" />
+            <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <div id="main-content" class="inner-wrapper" role="main">
+        <div class="row no-border">
+         <div class="header-navigation-secondary"></div>
+         <h2 class="pagetitle">Juju documentation</h2>
+        </div>
+        <section id="content" class="container-12">
+          <div class="grid-12 doc-container">
+            <div id="navlinks" class="grid-3 doc-navigation">
+                          <h1>User Guide</h1>
+            <ul class="no-margin">
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
+              <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
+              <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
+              <li class=" sub"><a href="config-local.html">Local</a></li>
+              <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
+              <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-service-groups.html">Groups of Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+              <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
+              <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=""><a href="howto.html">How to...</a></li>
+              <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
+              <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
+              <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
+              <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
+              <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+              <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
+              <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
+              <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
+              <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul class="no-margin">
+              <li class=""><a href="authors-intro.html">Getting started</a></li>
+              <li class=""><a href="authors-charm-components.html">Components of a charm</a></li>
+              <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
+              <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
+              <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
+              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
+              <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+              <li class=" sub"><a href="authors-charm-interfaces.html">Implementing interfaces</a></li>
+              <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
+              <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+              <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+              <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>
 
-	<header class="banner global" role="banner">
-		<nav role="navigation" class="nav-primary nav-right">
-			<div class="logo">
-				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
-					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
-					<span>Juju</span>
-				</a>
-			</div>
-			<ul>
-				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
-				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
-				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
-				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
-			</ul>
-			<div id="box-search">
-				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
-					<label class="off-left" for="s">Search:</label>
-					<input class="form-text" type="text" value="" name="s" id="s" />
-					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-				</form>		
-			</div>
-		</nav>	
-	</header>
-<!--End-Header-->
-<!--Preamble-->
-<div class="wrapper">
-  <div id="main-content" class="inner-wrapper" role="main">
-    <div class="row no-border">
-     <div class="header-navigation-secondary"></div>
-     <h2 class="pagetitle">Juju documentation</h2>
-    </div>
-    <section id="content" class="container-12">
-      <div class="grid-12 doc-container">
-        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
-        <div class="grid-9 doc-content">
-<!--End-Preamble-->
-          <article>
-<h1>Your First charm starts here!</h1>
-<p>Okay, so you have read up all the background info on what a charm is, how it works, and what parts of the charm do what, now it is time to dust off your favourite code editor (no arguments please) and get charming!</p>
-<p>Although it is possible to create a charm without using anything other than a text editor, we are also going to make use of 
-the very excellent timesaving plugin for Juju, Charm Tools. <a href="tools-charm-tools.html"> Find out how to get and install charm tools here</a>. Then hurry back.
-<p>For this example, we are imagining that we want to create a charm for <a href="http://vanillaforums.org/" >the Vanilla forum software</a></p>
 
-<span class="number"> 1 </span>
-          <div class="step" id="step01">
-          <h2>Prepare yourself</h2>
-          <p>As we are writing a charm, it makes sense to create it in a local charm repository (see how to deploy from a local repository <a href="./charms-deploying.html" target="#local">here</a>) to make it easy to test in your Juju environment.</p>
-          <p>Go to your home directory (or wherever is appropriate and make the appropriate file structure:</p>
-          <pre class="prettyprint lang-bash">
-cd ~
+              <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+              <li class=" sub"><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+              <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+              <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+              <li class=" sub"><a href="authors-charm-quality.html">Charm Feature Rating</a></li>
+              <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
+
+            <h1>Tools</h1>
+            <ul class="no-margin">
+              <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
+              <li class=""><a href="tools-amulet.html">Amulet</a></li>
+            </ul>
+
+            <h1>Reference</h1>
+            <ul class="no-margin">
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
+              <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+            </div>
+            <div class="grid-9 doc-content">
+              <article>
+                <h1 id="your-first-charm-starts-here!">Your First charm starts here!</h1>
+<p>Okay, so you have read up all the background info on what a charm is, how it
+works, and what parts of the charm do what, now it is time to dust off your
+favourite code editor (no arguments please) and get charming!</p>
+<p>Although it is possible to create a charm without using anything other than a
+text editor, we are also going to make use of the very excellent timesaving
+plugin for Juju, Charm Tools. <a href="tools-charm-tools.html"> Find out how to get and install charm tools here
+</a>. Then hurry back.</p>
+<p>For this example, we are imagining that we want to create a charm for <a href="http://vanillaforums.org/">the
+Vanilla forum software</a></p>
+<h2 id="prepare-yourself">Prepare yourself</h2>
+<p>As we are writing a charm, it makes sense to create it in a local charm
+repository (see how to deploy from a local repository <a href="./charms-
+deploying.html">here</a>) to make it easy to test in your Juju environment.</p>
+<p>Go to your home directory (or wherever is appropriate and make the appropriate
+file structure:</p>
+<pre><code>cd ~
 mkdir -p charms/precise
 cd charms/precise
-</pre>
-
-          
-          </div>
-
-<span class="number" > 2 </span>
-          <div class="step" id="step02">
-          <h2>Create a barebones charm with Charm Tools</h2>
-          <p>Using the charm tools plugin, we can create the directory structure we need for our charm quickly and easily:</p>
-          <pre class="prettyprint lang-bash">juju charm create vanilla</pre>
-          <p>This not only creates the directory structure, it also prepopulates it with template files for you to edit. Your directory will now look like this</p>
-<img src="./media/author-charm-writing-01.png" width='600' alt="directory tree"> 
-
-          </div>
-<span class="number" > 3 </span>
-          <div class="step" id="step03">
-          <h2>Create the README file</h2>
-          <p>Fire up your text editor and load/edit the readme file.</p>
-          <p>This step is especially important if you intend making your charm public, but it is very useful even if your charm will only ever be seen by you. The README is a good place to make nots about how the charm works, what information it expects to communicate and how.</p>
-          <p>Although a plain text file is fine, you can also write your README file using Markdown (in which case use the .md suffix). The advantage of this, other than it looks quite neat, is that the Charm Store will render Mardown properly online, so your README will look and read better.</p>
-          <p>Here is a quick example README file for our Vanilla charm:</p>
-          <pre class="prettyprint lang-yaml">
-# Overview
-
+</code></pre>
+<h2 id="create-a-barebones-charm-with-charm-tools">Create a barebones charm with Charm Tools</h2>
+<p>Using the charm tools plugin, we can create the directory structure we need for
+our charm quickly and easily:</p>
+<pre><code>juju charm create vanilla
+</code></pre>
+<p>This not only creates the directory structure, it also prepopulates it with
+template files for you to edit. Your directory will now look like this</p>
+<p><img alt="directory tree" src="./media/author-charm-writing-01.png" /></p>
+<h2 id="create-the-readme-file">Create the README file</h2>
+<p>Fire up your text editor and load/edit the readme file.</p>
+<p>This step is especially important if you intend making your charm public, but it is very useful even if your charm will only ever be seen by you. The README is a good place to make nots about how the charm works, what information it expects to communicate and how.</p>
+<p>Although a plain text file is fine, you can also write your README file using
+Markdown (in which case use the .md suffix). The advantage of this, other than
+it looks quite neat, is that the Charm Store will render Mardown properly
+online, so your README will look and read better.</p>
+<p>Here is a quick example README file for our Vanilla charm:</p>
+<pre><code># Overview
 Vanilla is a powerful open source web-based forum. This charm will deploy the forum software and connect it to a running MySQL database. This charm will install the Vanilla files in /var/www/vanilla/
-
 # Installation
-
 To deploy this charm you will need at a minimum: a cloud environment, working Juju installation and a successful bootstrap. Once bootstrapped, deploy the MySQL charm and then this Vanilla charm:
-
     juju deploy mysql
     juju deploy vanilla
-
 Add a relation between the two of them:
-
     juju add-relation mysql vanilla
-
 And finally expose the Vanilla service:
-
-    juju expose vanilla</pre>
-
-          <p>Obviously, you can include any useful info you wish.</p>
-          </div>
-          
-<span class="number" > 4 </span>
-          <div class="step" id="step04">
-          <h2>Make some metadata.yaml</h2>
-          <p>The <strong>metadata.yaml</strong> file is really important. This is the file that Juju reads to find out what a charm is, what it does and what it needs to do it.</p>
-          <p>The YAML syntax is at once simple, but exact, so if you have any future problems with Juju not recognising your charm, this is the first port of call! The information is stored in simple <span class="pre">&LT;key&GT; : &LT;value&GT;</span> associations. The first four are pretty self explanatory:</p>
-          <pre class="prettyprint lang-yaml">
-name: vanilla
+    juju expose vanilla
+</code></pre>
+<p>Obviously, you can include any useful info you wish.</p>
+<h2 id="make-some-metadata.yaml">Make some metadata.yaml</h2>
+<p>The <strong>metadata.yaml</strong> file is really important. This is the file that Juju reads
+to find out what a charm is, what it does and what it needs to do it.</p>
+<p>The YAML syntax is at once simple, but exact, so if you have any future problems
+with Juju not recognising your charm, this is the first port of call! The
+information is stored in simple &LT;key&GT; : &LT;value&GT; associations. The
+first four are pretty self explanatory:</p>
+<pre><code>name: vanilla
 summary: Vanilla is an open-source, pluggable, multi-lingual forum.
 maintainer: Your Name &lt;your@email.tld&gt;
 description: |
   Vanilla is designed to deploy and grow small communities to scale. 
   This charm deploys Vanilla Forums as outlined by the Vanilla Forums
   installation guide.
-</pre>
-          <p>The summary should be a brief description of the service being deployed, whereas the description can go into more detail.</p>
-          <p>The next value to define is the category. This is primarily for organising the charm in the charm store. The available categories are:</p>
-          <ul>
-          <li><strong>databases -</strong> MySQL, PostgreSQL, CouchDB, etc.</li>
-          <li><strong>file-servers - </strong>storage apps such as Ceph</li>
-          <li><strong>applications -</strong>applications like MediaWiki, WordPress</li>
-          <li><strong>cache-proxy - </strong>services such as HAProxy and Varnish.</li>
-          <li><strong>app-servers - </strong>infrastructure services like Apache and Tomcat</li>
-          <li><strong>miscellaneous - </strong>anything which doesn't neatly fit anywhere above.</li>
-          </ul>
-          <p>Your charm can belong to more than one category, though in almost all cases it should be in just one. Because there could be more than one entry here, the YAML is formatted as a list:</p>
-          <pre class="prettyprint lang-yaml">categories:<br>  - applications</pre>
-          <p>Next we need to explain which services are actually provided by this service. This is done using an indent for each service provided, followed by a description of the interface. The interface name is important as it can be used elsewhere in the environment to relate back to this charm, e.g. when writing hooks.</p>
-          <p>Our Vanilla charm is a web-based service which exposes a simple HTTP interface:</p> 
-          <pre class="prettyprint lang-yaml">provides:<br>  website:<br>    interface: http</pre>
-          <p>The name given here is important as it will be used in hooks that we write later, and the interface name will be used by other charms which may want to relate to this one.</p>
-          <p>Similarly we also need to provide a "requires" section. In this case we need a database. Checking out the metadata of the MySQL charm we can see that it provides this via the interface name "mysql", so we can use this name in our metadata.</p>
-          <p>The final file should look like this:</p>
-          <pre class="prettyprint lang-yaml">
-name: vanilla
+</code></pre>
+<p>The summary should be a brief description of the service being deployed, whereas
+the description can go into more detail.</p>
+<p>The next value to define is the category. This is primarily for organising the
+charm in the charm store. The available categories are:</p>
+<ul>
+<li><strong>databases -</strong> MySQL, PostgreSQL, CouchDB, etc.</li>
+<li><strong>file-servers - </strong>storage apps such as Ceph</li>
+<li><strong>applications -</strong>applications like MediaWiki, WordPress</li>
+<li><strong>cache-proxy - </strong>services such as HAProxy and Varnish.</li>
+<li><strong>app-servers - </strong>infrastructure services like Apache and Tomcat</li>
+<li><strong>miscellaneous - </strong>anything which doesn't neatly fit anywhere above.</li>
+</ul>
+<p>Your charm can belong to more than one category, though in almost all cases it
+should be in just one. Because there could be more than one entry here, the YAML
+is formatted as a list:</p>
+<pre><code>categories:  
+  - applications
+</code></pre>
+<p>Next we need to explain which services are actually provided by this service.
+This is done using an indent for each service provided, followed by a
+description of the interface. The interface name is important as it can be used
+elsewhere in the environment to relate back to this charm, e.g. when writing
+hooks.</p>
+<p>Our Vanilla charm is a web-based service which exposes a simple HTTP interface:</p>
+<pre><code>provides:  
+  website:  
+    interface: http
+</code></pre>
+<p>The name given here is important as it will be used in hooks that we write
+later, and the interface name will be used by other charms which may want to
+relate to this one.</p>
+<p>Similarly we also need to provide a "requires" section. In this case we need a
+database. Checking out the metadata of the MySQL charm we can see that it
+provides this via the interface name "mysql", so we can use this name in our
+metadata.</p>
+<p>The final file should look like this:</p>
+<pre><code>name: vanilla
 summary: Vanilla is an open-source, pluggable, themeable, multi-lingual forum.
 maintainer: Your Name &lt;your@email.tld&gt;
 description: |
@@ -177,296 +243,287 @@ provides:
     interface: http
 requires:
   database:
-    interface: mysql</pre>
-          <p>
-          <p>For some charms you will want a "peers" section also. This follows the same format, and its used for optional connections, such as you might use for interconnecting services in a cluster
-          </p>
-          
-
-          </div>         
-<span class="number" > 5 </span>
-          <div class="step" id="step05">
-          <h2>Writing hooks</h2>
-          <p>As you will know from your thorough reading of the <a href="./authors-charm-components.html">charm components</a>, the hooks are the important scripts that actually do things. You can write hooks in whatever language you can reasonably expect to execute on an Ubuntu server.</p>
-          <p>For our charm, the hooks we will need to create are:</p>
-          <ul>
-          <li>start - for when the service needs to be started.</li>
-          <li>stop - for stopping it again.</li>
-          <li>install - for actually fetching and installing the Vanilla code.</li>
-          <li>database-relation-changed - this will run when we connect (or re-connect, or disconnect) our service to the MySQL database. This hook will need to manage this connection.</li>
-          <li>website-relation-joined - this will run when/if a service connects to our charm.</li>
-          </ul>
-          <p>So first up we should create the hooks directory, and start creating our first hook:</p>
-          <pre>mkdir hooks<br>cd hooks<br>vi start</pre>
-          <p>(Use your favourite editor, naturally - no flames please)</p>
-          <p>We have started with the start hook, because it is pretty simple. Our charm will be served up by Apache, so all we need to do to start the service is make sure Apache is running:</p>
-          <pre class="prettyprint lang-bash">#!/bin/bash<br>set -e<br>service apache2 restart</pre>
-          <p>A bit of explanation for this one. As we are writing in bash, and we need the files to be executable, we start with a hash-bang line indicating this is a bash file.
-          the <span class="pre">set -e</span> line means that if any subsequent command returns false (non-zero) the script will stop and raise an error - this is important so that Juju can work out if things are running properly.
-          </p>
-          <p>The final line starts the Apache web server, thus also starting our Vanilla service. Why do we call 'restart'? One of the important ideas behind hooks is that they should be 'idempotent'. That means that the operation should be capable of being run many times without changing the intended result (basically). In this case, we don't want an error if Apache is actually already running, we just want it to run and reload any config changes.</p>
-          <p>Once you have saved the file, it is important to make sure that you set it to be executable too!</p>
-          <pre>chmod +x start</pre>
-          <p>With the easy bit out of the way, how about the install hook? This needs to install any dependencies, fetch the actual software and do any other config and service jobs that need to happen. Here is an example for our vanilla charm:</p>
-                    
-<pre class="prettyprint">
-#!/bin/bash
-
+    interface: mysql
+</code></pre>
+<p>For some charms you will want a "peers" section also. This follows the same
+format, and its used for optional connections, such as you might use for
+interconnecting services in a cluster</p>
+<h2 id="writing-hooks">Writing hooks</h2>
+<p>As you will know from your thorough reading of the <a href="./authors-
+charm-components.html">charm components</a>, the hooks are the important scripts that actually do
+things. You can write hooks in whatever language you can reasonably expect to
+execute on an Ubuntu server.</p>
+<p>For our charm, the hooks we will need to create are:</p>
+<ul>
+<li>start - for when the service needs to be started.</li>
+<li>stop - for stopping it again.</li>
+<li>install - for actually fetching and installing the Vanilla code.</li>
+<li>database-relation-changed - this will run when we connect (or re-connect, or disconnect) our service to the MySQL database. This hook will need to manage this connection.</li>
+<li>website-relation-joined - this will run when/if a service connects to our charm.</li>
+</ul>
+<p>So first up we should create the hooks directory, and start creating our first
+hook:</p>
+<pre><code>mkdir hooks  
+cd hooks  
+vi start
+</code></pre>
+<p>(Use your favourite editor, naturally - no flames please)</p>
+<p>We have started with the start hook, because it is pretty simple. Our charm will
+be served up by Apache, so all we need to do to start the service is make sure
+Apache is running:</p>
+<pre><code>#!/bin/bash  
+set -e  
+service apache2 restart
+</code></pre>
+<p>A bit of explanation for this one. As we are writing in bash, and we need the
+files to be executable, we start with a hash-bang line indicating this is a bash
+file. the set -e line means that if any subsequent command returns false (non-
+zero) the script will stop and raise an error - this is important so that Juju
+can work out if things are running properly.</p>
+<p>The final line starts the Apache web server, thus also starting our Vanilla
+service. Why do we call 'restart'? One of the important ideas behind hooks is
+that they should be 'idempotent'. That means that the operation should be
+capable of being run many times without changing the intended result
+(basically). In this case, we don't want an error if Apache is actually already
+running, we just want it to run and reload any config changes.</p>
+<p>Once you have saved the file, it is important to make sure that you set it to be
+executable too!</p>
+<pre><code>chmod +x start
+</code></pre>
+<p>With the easy bit out of the way, how about the install hook? This needs to
+install any dependencies, fetch the actual software and do any other config and
+service jobs that need to happen. Here is an example for our vanilla charm:</p>
+<pre><code>#!/bin/bash
 set -e # If any command fails, stop execution of the hook with that error
-
 apt-get install -y apache2 php5-cgi php5-mysql curl php5-gd wget libapache2-mod-php5
-
 dl="https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz"
-
 # Grab Vanilla from upstream.
 juju-log "Fetching $dl"
 wget "$dl" -O /tmp/vanilla.tar.gz
-
 # IDEMPOTENCY is very important in all charm hooks, even the install hook.
 if [ -f /var/www/vanilla/conf/config.php ]; then
   cp /var/www/vanilla/conf/config.php /tmp/
   rm -rf /var/www/vanilla
 fi
-
 # Extract to a known location
 juju-log "Extracting Vanilla"
 tar -xvzf /tmp/vanilla.tar.gz -C /var/www/
 mv /var/www/Garden-Vanilla* /var/www/vanilla
-
 if [ -f /tmp/config.php ]; then
   mv /tmp/config.php /var/www/vanilla/conf/
 fi
-
 chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
-
 juju-log "Creating apache2 configuration"
 cat &lt;&lt;EOF &gt; /etc/apache2/sites-available/vanilla
 &lt;VirtualHost *:80&gt;
   ServerAdmin webmaster@localhost
   DocumentRoot /var/www/vanilla
-  
   &lt;Directory /var/www/vanilla&gt;
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Order allow,deny
     allow from all
   &lt;/Directory&gt;
-
   ErrorLog \${APACHE_LOG_DIR}/vanilla.log
   LogLevel warn
-
   CustomLog \${APACHE_LOG_DIR}/access.log combined
 &lt;/VirtualHost&gt;
 EOF
-
 a2dissite 000-default
 a2ensite vanilla
-
 service apache2 reload
-
 juju-log "Files extracted, waiting for other events before we do anything else!"
-</pre>
-          <p>We aren't going to go for a line-by-line explanation of that, but there are a few things worth noting</p>
-          <p>Firstly, note the use of the -y option of the apt-get command. this assumes a 'yes' answer to any questions and removes any manual install options (e.g. services that run config dialogs when they install).</p>
-          <p>In our script, we are fetching the tarball of the Vanilla software. In these cases, it is obviously always better to point to a specific, permanent link to a version of the software. </p>         
-          <p>Also, you will notice that we have used the <span class="pre">juju-log</span> command. This basically spits messages out into the Juju log, which is very useful for testing and debugging. We will cover that in more detail later in this walkthrough. </p>
-          <p>The next step is to create the relationship hooks... </p>
-          <p>We know from our metadata that we have a connection called 'database', so we can have hooks that relate to that. Note that we don't have to create hooks for all possible events if they are not required - if Juju doesn't find a hook file for a paticular action, it just assumes everything is okay and carries on. It is up to you to decide which events require a hook.</p>
-          <p>Let's take a stab at the 'database-relation-changed' hook:</p>
-          <pre class="prettyprint">#!/bin/bash
-
+</code></pre>
+<p>We aren't going to go for a line-by-line explanation of that, but there are a
+few things worth noting</p>
+<p>Firstly, note the use of the -y option of the apt-get command. this assumes a
+'yes' answer to any questions and removes any manual install options (e.g.
+services that run config dialogs when they install).</p>
+<p>In our script, we are fetching the tarball of the Vanilla software. In these
+cases, it is obviously always better to point to a specific, permanent link to a version of the software.</p>
+<p>Also, you will notice that we have used the juju-log command. This basically
+spits messages out into the Juju log, which is very useful for testing and
+debugging. We will cover that in more detail later in this walkthrough.</p>
+<p>The next step is to create the relationship hooks...</p>
+<p>We know from our metadata that we have a connection called 'database', so we can
+have hooks that relate to that. Note that we don't have to create hooks for all
+possible events if they are not required - if Juju doesn't find a hook file for
+a paticular action, it just assumes everything is okay and carries on. It is up
+to you to decide which events require a hook.</p>
+<p>Let's take a stab at the 'database-relation-changed' hook:</p>
+<pre><code>#!/bin/bash
 set -e # If any command fails, stop execution of the hook with that error
-
 db_user=`relation-get user`
 db_db=`relation-get database`
 db_pass=`relation-get password`
 db_host=`relation-get private-address`
-
 if [ -z "$db_db" ]; then
   juju-log "No database information sent yet. Silently exiting"
   exit 0
 fi
-
 vanilla_config="/var/www/vanilla/conf/config.php"
-
 cat &lt;&lt;EOF &gt; $vanilla_config
 &lt;?php if (!defined('APPLICATION')) exit();
-
 \$Configuration['Database']['Host'] = '$db_host';
 \$Configuration['Database']['Name'] = '$db_db';
 \$Configuration['Database']['User'] = '$db_user';
 \$Configuration['Database']['Password'] = '$db_pass';
 EOF
-
 juju-log "Make the application port available, now that we know we have a site to expose"
-
 open-port 80
-
-</pre>
-
-<p>You will notice that this script uses the backticked command <span class="pre">relation-get</span>. This is a Juju helper command that fetches the named values from the corresponding hook on the service we are connecting to.
-Usually there will be some indication of what these values are, but you can always inspect the corresponding hooks to find out. In this case we know that when connected, the MySQL charm will create a database and generate random values for things like a username and password.</p>
-<p>Interfaces in general are determined by the consensus of the charms which use them. There is a lot <a href="./authors-charm-interfaces.html">more information on decoding interfaces here</a>. Some of the major interfaces are being documented to make it easier to use them, and fortunately, mysql is one of them - <a href="./interface-mysql.html">You can find a description of the mysql interface here</a>.
-<p>These values will all be set at one time, so the next little bit of script just checks one value to see if it exists - if not the corresponding charm hasn't set the values yet.</p>
+</code></pre>
+<p>You will notice that this script uses the backticked command relation-get. This
+is a Juju helper command that fetches the named values from the corresponding
+hook on the service we are connecting to. Usually there will be some indication
+of what these values are, but you can always inspect the corresponding hooks to
+find out. In this case we know that when connected, the MySQL charm will create
+a database and generate random values for things like a username and password.</p>
+<p>Interfaces in general are determined by the consensus of the charms which use
+them. There is a lot <a href="./authors-
+charm-interfaces.html">more information on decoding interfaces here</a>. Some of the major interfaces are being documented to
+make it easier to use them, and fortunately, mysql is one of them - <a href="./interface-mysql.html">You can
+find a description of the mysql interface here</a>.</p>
+<p>These values will all be set at one time, so the next little bit of script just
+checks one value to see if it exists - if not the corresponding charm hasn't set the values yet.</p>
 <p>When it has the values we can use these to modify the config file for Vanilla in the relevant place, and finally open the port to make the service active.</p>
-<p>The final hook we need to write is for other services which may want to consume Vanilla, 'website-relation-joined'.</p>
-<pre class="prettyprint">#!/bin/sh
-
+<p>The final hook we need to write is for other services which may want to consume
+Vanilla, 'website-relation-joined'.</p>
+<pre><code>#!/bin/sh
 relation-set hostname=`unit-get private-address` port=80
-</pre>
-<p>Here we can see the other end of the information sharing - in this case <span class="pre">relation-set</span> exposes the given values to the connecting charm. In this case one of the commands is backticked, as <span class="pre">unit-get</span> is another helper command, in this case one which returns the requested value form the machine the charm is running on, specifically here it's IP address.</p>
-<p>So, any connecting charm will be able to ask for the values 'hostname' and 'port'. Remember, once you have finished writing your hooks make sure you 'chmod +x' them.</p>
-<p>For our simplistic charm, that is all the hooks we need for the moment, so now we can test it out!</p>
-</div>
-
-<span class="number"> 6 </span>
-          <div class="step" id="step06">
-          <h2>Run the charm proof tool</h2>
-          <p>Another part of the Charm Tools plugin is a useful lint-like tool which will check for 
-          errors in the files of your charm. Run it like this:</p>
-<pre class="prettyprint lang-bash">juju charm proof [CHARM_DIRECTORY]
-</pre>
-<p> The output classifies messages as:</p>
-<ul><li>I - for information</li>
+</code></pre>
+<p>Here we can see the other end of the information sharing - in this case
+relation-set exposes the given values to the connecting charm. In this case one
+of the commands is backticked, as unit-get is another helper command, in this
+case one which returns the requested value form the machine the charm is running on, specifically here it's IP address.</p>
+<p>So, any connecting charm will be able to ask for the values <code>hostname</code> and
+<code>port</code>. Remember, once you have finished writing your hooks make sure you <code>chmod +x</code> them.</p>
+<p>For our simplistic charm, that is all the hooks we need for the moment, so now
+we can test it out!</p>
+<h2 id="run-the-charm-proof-tool">Run the charm proof tool</h2>
+<p>Another part of the Charm Tools plugin is a useful lint-like tool which will
+check for errors in the files of your charm. Run it like this:</p>
+<pre><code>juju charm proof [CHARM_DIRECTORY]
+</code></pre>
+<p>The output classifies messages as:</p>
+<ul>
+<li>I - for information</li>
 <li>W - A warning; something which should be looked at but won't necessarily stop the charm working.</li>
 <li>E - An error; these are blocker which must be fixed for the charm to be used.</li>
+</ul>
 <p>some example output might be:</p>
-<pre class="prettyprint lang-bash">
-E: no copyright file
+<pre><code>E: no copyright file
 E: README.ex Includes boilerplate README.ex line 1
 I: relation peer-relation has no hooks
-</pre>
-<p>Which tells you that you forgot to add a <code>copyright</code> file, you have left some default text in the README, and one of your relations has no hooks. All useful stuff.</p>
-
-</div>
-<span class="number"> 7 </span>
-          <div class="step" id="step07">
-          <h2>Testing</h2>
-          <p>Before we congratulate ourselves too much, we should check that the charm actually works. To help with this, we should open a new terminal window and run the following command:</p>
-          <pre>juju debug-log</pre>
-          <p>This starts a process to tail the Juju log file and show us just exactly what is happening. It won't do much to begin with, but you should see messages appearing when we start to deploy our charm.</p>
-          <p>Following our own recipe, in another terminal we should now do the following (assuming you already have a bootstrapped environment):</p>
-          <pre>juju deploy mysql
+</code></pre>
+<p>Which tells you that you forgot to add a <code>copyright</code> file, you have left some
+default text in the README, and one of your relations has no hooks. All useful
+stuff.</p>
+<h2 id="testing">Testing</h2>
+<p>Before we congratulate ourselves too much, we should check that the charm
+actually works. To help with this, we should open a new terminal window and run
+the following command:</p>
+<pre><code>juju debug-log
+</code></pre>
+<p>This starts a process to tail the Juju log file and show us just exactly what is happening. It won't do much to begin with, but you should see messages appearing when we start to deploy our charm.</p>
+<p>Following our own recipe, in another terminal we should now do the following
+(assuming you already have a bootstrapped environment):</p>
+<pre><code>juju deploy mysql
 juju deploy --repository=/home/$USER/charms/ local:precise/vanilla
 juju add-relation mysql vanilla
 juju expose vanilla
-</pre>
-<p>We used the local deploy options to deploy our charm - substitute the path for your own environment. Everything should now be working away, and your log window will look something like this:</p>
-
-          <img src="./media/author-charm-writing-debug.png" width='600' alt="Step five - debug">  
-<p>If you wait for all the Juju operations to finish and run a <span class="pre">juju status</span> command, you will be able to retrieve the public address for the Vanilla forum we just deployed. Copy it into your browser and you should see the setup page (prepopulated with the database config) waiting for any changes. Congratulations!</p>
-          <img src="./media/author-charm-writing-vanilla.png" width='600' alt="Step five - vanilla">           
-
-          
+</code></pre>
+<p>We used the local deploy options to deploy our charm - substitute the path for
+your own environment. Everything should now be working away, and your log window will look something like this:</p>
+<p><img alt="Step five - debug" src="./media/author-charm-writing-debug.png" /></p>
+<p>If you wait for all the Juju operations to finish and run a juju status command, you will be able to retrieve the public address for the Vanilla forum we just deployed. Copy it into your browser and you should see the setup page
+(prepopulated with the database config) waiting for any changes.
+Congratulations!</p>
+<p><img alt="Step five - vanilla" src="./media/author-charm-writing-vanilla.png" /></p>
+<h2 id="tidying-up">Tidying up</h2>
+<p>With the charm working properly, you may consider everything a job well done. If your charm is really great and you want to share it, particularly on the charm store, then there are a couple of things you ought to add.</p>
+<ol>
+<li>Create a file called 'copyright' and place whatever license information you require in there. </li>
+<li>Add a beautiful icon (<a href="./authors-charm-icon.html">there is a guide to making one here</a>) so others can recognise it in the charm store!</li>
+</ol>
+              </article>
+            </div>
           </div>
-
-<span class="number"> 8 </span>
-          <div class="step" id="step08">
-          <h2>Tidying up</h2>
-          <p>With the charm working properly, you may consider everything a job well done. If your charm is really great and you want to share it, particularly on the charm store, then there are a couple of things you ought to add.</p>
-          <ol>
-
-          <li>Create a file called 'copyright' and place whatever license information you require in there. </li>
-          <li>Add a beautiful icon (<a href="./authors-charm-icon.html">there is a guide to making one here</a>) so others can recognise it in the charm store!</li>
-          </ol>
-          </div>  
-                  
-          </article>
-<!--Postamble-->
-        </div>
+        </section>
       </div>
-    </section>
-  </div>
-</div>
-<!--End-Postamble-->
-<!--Footer-->
-	<footer class="global clearfix" role="contentinfo">
-		<nav role="navigation">
-			<div class="footer-a">
-				<div class="clearfix">
-					<ul>
-						<li>
-							<h2><a href="/">Juju</a></h2>
-							<ul>
-								<li><a href="/charms/">Charms</a></li>
-								<li><a href="/features/">Features</a></li>
-								<li><a href="/deployment/">Deployment</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/resources/">Resources</a></h2>
-							<ul>
-								<li><a href="/resources/overview/">Overview</a></li>
-								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
-								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
-								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
-								<li><a href="/resources/videos/">Videos</a></li>
-								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/community">Community</a></h2>
-							<ul>
-								<li><a href="/community/blog/">Juju Blog</a></li>
-								<li><a href="/events/">Events</a></li>
-								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
-								<li><a href="/community/charmers/">Charmers</a></li>
-								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
-							<ul>
-								<li><a href="https://jujucharms.com/">Charm store</a></li>
-								<li><a href="/download/">Download Juju</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="legal clearfix">
-			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
-		</div>
-	</footer>
+    </div>
+    <footer class="global clearfix" role="contentinfo">
+      <nav role="navigation">
+        <div class="footer-a">
+          <div class="clearfix">
+            <ul>
+             <li>
+               <h2><a href="/">Juju</a></h2>
+               <ul>
+                 <li><a href="/charms">Charms</a></li>
+                 <li><a href="/features">Features</a></li>
+                 <li><a href="/deployment">Deployment</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/resources">Resources</a></h2>
+               <ul>
+                 <li><a href="/resources/juju-overview/">Overview</a></li>
+                 <li><a href="/docs/">Documentation</a></li>
+                 <li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+                 <li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+                 <li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+                 <li><a href="/resources/videos/">Videos</a></li>
+                 <li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/community">Community</a></h2>
+                 <ul>
+                   <li><a href="/community/blog/">Juju Blog</a></li>
+                   <li><a href="/events/">Events</a></li>
+                   <li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+                   <li><a href="/community/charmers/">Charmers</a></li>
+                   <li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+                   <li><a href="/docs/contributing.html">Help with documentation</a></li>
+                   <li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li>
+                   <li><a href="/labs/">Juju Labs</a></li>
+                 </ul>
+               </li>
+               <li>
+                 <h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+                 <ul>
+                   <li><a href="https://jujucharms.com/">Charm store</a></li>
+                   <li><a href="/download/">Download Juju</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+       <div class="legal clearfix">
+         <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+       </div>
+     </footer>
+     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+     <script type="text/javascript" src="./js/main.js"></script>
+     <script type="text/javascript" src="./js/jquery.details.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+     <!-- google analytics -->
+     <script>
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-1018242-41']);
+       _gaq.push(['_trackPageview']);
 
-<!--End-Footer-->
-
-
-
-
-<!--Scripts-->
-    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/jquery.details.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-    <!-- google analytics -->
-    <script>
-   var _gaq = _gaq || [];
-   _gaq.push(['_setAccount', 'UA-1018242-41']);
-   _gaq.push(['_trackPageview']);
-  
-   (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   })();
+       (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
     </script>
-<!--End-Scripts-->
-
-
-
-
-
-
-
-
-</body></html>
+  </body>
+</html>

@@ -1,128 +1,203 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<!--Head-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Juju Documentation</title>
-		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
- 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-		<link href="./css/main.css" rel="stylesheet" type="text/css" />
-		
-		<!--[if lt IE 9]>
-		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-	</head>
-<!--End-Head-->
-
-
-
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Juju Documentation</title>
+    <script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+    <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+    <link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
   <body class="resources">
-<!--Header-->
+    <header class="banner global" role="banner">
+      <nav role="navigation" class="nav-primary nav-right">
+        <div class="logo">
+          <a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+            <img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+            <span>Juju</span>
+          </a>
+        </div>
+        <ul>
+          <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+          <li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+          <li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+          <li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+          <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+        </ul>
+        <div id="box-search">
+          <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+            <label class="off-left" for="s">Search:</label>
+            <input class="form-text" type="text" value="" name="s" id="s" />
+            <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <div id="main-content" class="inner-wrapper" role="main">
+        <div class="row no-border">
+         <div class="header-navigation-secondary"></div>
+         <h2 class="pagetitle">Juju documentation</h2>
+        </div>
+        <section id="content" class="container-12">
+          <div class="grid-12 doc-container">
+            <div id="navlinks" class="grid-3 doc-navigation">
+                          <h1>User Guide</h1>
+            <ul class="no-margin">
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
+              <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
+              <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
+              <li class=" sub"><a href="config-local.html">Local</a></li>
+              <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
+              <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-service-groups.html">Groups of Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+              <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
+              <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=""><a href="howto.html">How to...</a></li>
+              <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
+              <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
+              <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
+              <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
+              <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+              <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
+              <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
+              <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
+              <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul class="no-margin">
+              <li class=""><a href="authors-intro.html">Getting started</a></li>
+              <li class=""><a href="authors-charm-components.html">Components of a charm</a></li>
+              <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
+              <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
+              <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
+              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
+              <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+              <li class=" sub"><a href="authors-charm-interfaces.html">Implementing interfaces</a></li>
+              <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
+              <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+              <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+              <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>
 
-	<header class="banner global" role="banner">
-		<nav role="navigation" class="nav-primary nav-right">
-			<div class="logo">
-				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
-					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
-					<span>Juju</span>
-				</a>
-			</div>
-			<ul>
-				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
-				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
-				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
-				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
-			</ul>
-			<div id="box-search">
-				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
-					<label class="off-left" for="s">Search:</label>
-					<input class="form-text" type="text" value="" name="s" id="s" />
-					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-				</form>		
-			</div>
-		</nav>	
-	</header>
-<!--End-Header-->
-<!--Preamble-->
-<div class="wrapper">
-  <div id="main-content" class="inner-wrapper" role="main">
-    <div class="row no-border">
-     <div class="header-navigation-secondary"></div>
-     <h2 class="pagetitle">Juju documentation</h2>
-    </div>
-    <section id="content" class="container-12">
-      <div class="grid-12 doc-container">
-        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
-        <div class="grid-9 doc-content">
-<!--End-Preamble-->
-          <article>
-            <section id="intro">
-              <h1>Introduction</h1>
-              <p>Charm tools is a collection of tools designed as a Juju Plugin. Charm tools offer a means for users and charm authors to
-              create, search, fetch, update, and manage a charms.</p>
-              <h1>Installation</h1>
-              <section class="code-example code-overflow">
-                <nav class="control">
-                  <a href="." class="selected" data-action="ubuntu">Ubuntu</a>
-                  <a href="." class="" data-action="osx">Mac OSX</a>
-                  <a href="." class="" data-action="windows">Windows</a>
-                </nav>
-                <div class="terminal-wrap">
-                  <div data-section="ubuntu">
-                    <p>To install the latest Charm Tools, you simply need to grab the latest charm-tools package from this PPA:</p>
-<pre class="prettyprint lang-bash">sudo add-apt-repository ppa:juju/stable
-sudo apt-get update && sudo apt-get install charm-tools</pre>
-                  </div>
-                  <div data-section="osx">
-                    <p>Charm Tools is available via <a href="http://brew.sh/" target="_blank">Homebrew</a>. Make sure you're running the latest version of homebrew before proceeding.</p>
-                    <p>To install, run the following:</p>
-                    <pre class="prettyprint lang-bash">brew install charm-tools</pre>
-                  </div>
-                  <div data-section="windows">
-                    <p>Charm Tools is available for, and tested, on Microsoft Windows 7 and 8. While the installer may work on previous versions of Windows there is no guarentee.</p>
-                    <p>To install, first download the Charm Tools installer from <a href="https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-tools_1.2.9.exe">launchpad</a>. Once downloaded, execute the installer and follow the on-screen prompts. After installation you can access Charm Tools either via the <code>charm</code> command or <code>juju charm</code> plugin from either the command line or powershell.</p>
-                    <p>To uninstall, please remove Charm Tools from the Add/Remove Software section of the Windows Control Panel</p>
-                  </div>
-                </div>
-              </section>
-            </section>
-            <section id="usage">
-              <h1>Usage</h1>
-              <p>Charm Tools comes packaged as both a stand alone tool and a juju plugin. For the sake of documentation purposes, the plugin syntax, <code>juju charm</code>, is shown.
-              If you wish to use the stand alone client, or don't have juju installed, you can replace all instances of <code>juju charm</code> with just <code>charm</code>.</p>
-              <p>There are several tools available within charm tools itself. At any time you can run <code>juju charm</code> to view the available subcommands and all subcommands have
-              independent help pages, accesible using either the <code>-h</code> or <code>--help</code> flags.</p>
-              <h2 id="add">Add</h2>
-              <pre class="prettyprint lang-bash">juju charm add [-h|--help] tests,readme [CHARM_DIRECTORY]</pre>
-              <p>Add is a generator function which can be used to extend a charm depending on the subcommand issued.</p>
-              <h3 id="add-readme">Readme</h3>
-              <p><code>readme</code> will create a <code>README.ex</code> in the <code>CHARM_DIRECTORY</code> from the template charm.</p>
-              <h4 id="add-readme-example">Add Readme Example</h4>
-              <pre class="prettyprint lang-bash">juju charm add readme</pre>
-              <h3 id="add-tests">Tests</h3>
-              <p><code>tests</code> will create a tests directory for a charm and generate an example test using the Amulet framework. This command will ingest relation data from the charm
-              <code>metadata.yaml</code> and create test file, <code>00-autogen</code>, based on matching charms to the interfaces listed. This is merely an example to start with and will need to be modified.</p>
-              <h4 id="add-tests-example">Add Tests Example</h4>
-              <pre class="prettyprint lang-bash">juju charm add tests</pre>
-              <hr>
-              <h2 id="create">Create</h2>
-              <pre class="prettyprint lang-bash">juju charm create [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]</pre>
-              <p>This command, <code>create</code>, will produce a boilerplate template of a charm to expedite the charm creation process. Replace <code>CHARM_NAME</code> with
-              the name you want the new charm to be. A directory called <code>CHARM_NAME</code> will be created in the <code>[CHARMS_DIRECTORY]</code>, or your current directory
-              if no <code>[CHARMS_DIRECTORY]</code> is provided.</p>
-              <h3 id="create-example">Create Example</h3>
-              <p>Below is an example of the charm structure created during <code>juju charm create</code></p>
-              <pre class="prettyprint lang-bash">juju charm create my-charm</pre>
-              <pre class="prettyprint lang-yaml">my-charm
+
+              <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+              <li class=" sub"><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+              <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+              <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+              <li class=" sub"><a href="authors-charm-quality.html">Charm Feature Rating</a></li>
+              <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
+
+            <h1>Tools</h1>
+            <ul class="no-margin">
+              <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
+              <li class=""><a href="tools-amulet.html">Amulet</a></li>
+            </ul>
+
+            <h1>Reference</h1>
+            <ul class="no-margin">
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
+              <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+            </div>
+            <div class="grid-9 doc-content">
+              <article>
+                <h1 id="introduction">Introduction</h1>
+<p>Charm tools is a collection of tools designed as a Juju Plugin. Charm tools
+offer a means for users and charm authors to create, search, fetch, update, and
+manage a charms.</p>
+<h1 id="installation">Installation</h1>
+<p><a href=".">Ubuntu</a> <a href=".">Mac OSX</a> <a href=".">Windows</a></p>
+<p>To install the latest Charm Tools, you simply need to grab the latest charm-
+tools package from this PPA:</p>
+<pre><code>sudo add-apt-repository ppa:juju/stable
+sudo apt-get update &amp;&amp; sudo apt-get install charm-tools
+</code></pre>
+<p>Charm Tools is available via <a href="http://brew.sh/">Homebrew</a>. Make sure you're
+running the latest version of homebrew before proceeding.</p>
+<p>To install, run the following:</p>
+<pre><code>brew install charm-tools
+</code></pre>
+<p>Charm Tools is available for, and tested, on Microsoft Windows 7 and 8. While
+the installer may work on previous versions of Windows there is no guarentee.</p>
+<p>To install, first download the Charm Tools installer from
+<a href="https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-
+tools_1.2.9.exe">launchpad</a>. Once downloaded, execute the installer and follow the on-
+screen prompts. After installation you can access Charm Tools either via the
+<code>charm</code> command or <code>juju charm</code> plugin from either the command line or
+powershell.</p>
+<p>To uninstall, please remove Charm Tools from the Add/Remove Software section of
+the Windows Control Panel</p>
+<h1 id="usage">Usage</h1>
+<p>Charm Tools comes packaged as both a stand alone tool and a juju plugin. For the
+sake of documentation purposes, the plugin syntax, <code>juju charm</code>, is shown. If
+you wish to use the stand alone client, or don't have juju installed, you can
+replace all instances of <code>juju charm</code> with just <code>charm</code>.</p>
+<p>There are several tools available within charm tools itself. At any time you can
+run <code>juju charm</code> to view the available subcommands and all subcommands have
+independent help pages, accesible using either the <code>-h</code> or <code>--help</code> flags.</p>
+<h2 id="add">Add</h2>
+<pre><code>juju charm add [-h|--help] tests,readme [CHARM_DIRECTORY]
+</code></pre>
+<p>Add is a generator function which can be used to extend a charm depending on the
+subcommand issued.</p>
+<h3 id="readme">Readme</h3>
+<p><code>readme</code> will create a <code>README.ex</code> in the <code>CHARM_DIRECTORY</code> from the template
+charm.</p>
+<h4 id="add-readme-example">Add Readme Example</h4>
+<pre><code>juju charm add readme
+</code></pre>
+<h3 id="tests">Tests</h3>
+<p><code>tests</code> will create a tests directory for a charm and generate an example test
+using the Amulet framework. This command will ingest relation data from the
+charm <code>metadata.yaml</code> and create test file, <code>00-autogen</code>, based on matching
+charms to the interfaces listed. This is merely an example to start with and
+will need to be modified.</p>
+<h4 id="add-tests-example">Add Tests Example</h4>
+<pre><code>juju charm add tests
+</code></pre>
+<hr />
+<h2 id="create">Create</h2>
+<pre><code>juju charm create [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
+</code></pre>
+<p>This command, <code>create</code>, will produce a boilerplate template of a charm to
+expedite the charm creation process. Replace <code>CHARM_NAME</code> with the name you want
+the new charm to be. A directory called <code>CHARM_NAME</code> will be created in the
+<code>[CHARMS_DIRECTORY]</code>, or your current directory if no <code>[CHARMS_DIRECTORY]</code> is
+provided.</p>
+<h3 id="create-example">Create Example</h3>
+<p>Below is an example of the charm structure created during <code>juju charm create</code></p>
+<pre><code>juju charm create my-charm
+my-charm
 ├── config.yaml
 ├── hooks
 │   ├── config-changed
@@ -138,171 +213,176 @@ sudo apt-get update && sudo apt-get install charm-tools</pre>
 ├── metadata.yaml
 ├── README.ex
 └── revision
-              </pre>
-              <hr>
-              <h2 id="get">Get</h2>
-              <pre class="prettyprint lang-bash">juju charm get [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]</pre>
-              <p>If you want to branch one of the charm store charms, use the <code>get</code> command specifying the <code>CHARM_NAME</code> you want to copy and provide an
-              optional <code>CHARMS_DIRECTORY</code>. Otherwise the current directory will be used</p>
-              <h3 id="get-example">Get Example</h3>
-              <pre class="prettyprint lang-bash">juju charm get mysql</pre>
-              <p>Will download the MySQL charm to a mysql directory within your current path.</p>
-              <pre class="prettyprint lang-bash">juju charm get wordpress ~/charms/precise/</pre>
-              <p>Will download the WordPress charm to <code>~/charms/precise/wordpress</code></p>
-              <hr>
-              <h2 id="getall">Getall</h2>
-              <pre class="prettyprint lang-bash">juju charm getall [-h|--help] [CHARMS_DIRECTORY]</pre>
-              <p>Similar to <a href="#get"><code>get</code></a>, <code>getall</code> will fetch all official charm store charms and place them in the
-              <code>CHARMS_DIRECTORY</code>, or your current directory if no <code>CHARMS_DIRECTORY</code> is provided. This command can take quite a while to complete - there are a lot of charms!</p>
-              <hr>
-              <h2 id="info">Info</h2>
-              <pre class="prettyprint lang-bash">juju charm info [-h|--help] [CHARM]</pre>
-              <p>Info is used to query the README file for a charm. This command accepts various forms of a valid "charm id". Any ID that can be used to
-              deploy a charm with <code>juju deploy</code>, with the exception of <code>local:</code>, can be used with this command.</p>
-              <h3 id="info-example">Info Example</h3>
-              <p>This will print the raw README for the WordPress charm</p>
-              <pre class="prettyprint lang-bash">juju charm info wordpress</pre>
-              <hr>
-              <h2 id="list">List</h2>
-              <pre class="prettyprint lang-bash">juju charm list [-h|--help]</pre>
-              <p>Show all charms (both official and person) in the charm store. This produces an exhaustive list of all charms available in the store.</p>
-              <hr>
-              <h2 id="promulgate">Promulgate</h2>
-              <pre class="prettyprint lang-bash">juju charm promulgate [-h|--help] [-b|--branch] [-s|--series] [-v|--verbose] [-u|--unpromulgate] [-f|--force] [-w|--ignore-warnings] [-o|--owner-branch] CHARM_DIRECTORY</pre>
-              <p>Promulgate is used to promote a charm to the charm store. This command is only available to users in the ~charmers group and is meant to be
-              run only after a charm passes the review process. <code>CHARM_DIRECTORY</code> is the path to the charm to be promulgated. When promulgating
-              <a href="#proof"><code>proof</code></a> is run and unless otherwise forced, will prevent promulgation if errors occur.</p>
-              <h3 id="promulgate-options">Promulgate Options</h3>
-              <ul>
-                <li><code>-b</code>, <code>--branch</code>: The location of the charm public branch. Will be determined from the bzr configuration if omitted.</li>
-                <li><code>-s</code>, <code>--series</code>: The distribution series on which to set the official branch. Defaults to setting it in the current development series (LTS).</li>
-                <li><code>-v</code>, <code>--verbose</code>: Increase verbosity level.</li>
-                <li><code>-u</code>, <code>--unpromulgate</code>: Un-promulgate this branch instead of prolugating it.</li>
-                <li><code>-f</code>, <code>--force</code>: Override warnings and errors. USE WITH EXTREME CARE!</li>
-                <li><code>-w</code>, <code>--ignore-warnings</code>: Promulgate this branch even with warnings from charm proof.</li>
-                <li><code>-o</code>, <code>--owner-branch</code>: Promulgate a branch owned by a someone/group other than ~charmers.</li>
-              </ul>
-              <hr>
-              <h2 id="proof">Proof</h2>
-              <pre class="prettyprint lang-bash">juju charm proof CHARM_DIRECTORY</pre>
-              <p>Proof is designed to perform a "lint" against a charms structure to validate if it conforms to what the Charm Store thinks a charm structure and layout should be.
-              <code>proof</code> will provide output at varying levels of severtiy. <code>I</code> is informational. These are things a charm could do but don't currently. <code>W</code>
-              is a warning. These are things that aren't complete blockers but need to be addressed. <code>E</code> is an error. These are items that are major and need to be
-              addressed.</p>
-              <hr>
-              <h2 id="review-queue">Review-queue</h2>
-              <pre class="prettyprint lang-bash">juju charm review-queue [-h|--help]</pre>
-              <p>This provides a copy of the <a href="http://manage.jujucharms.com/review-queue">juju charms review queue</a> which is used by ~charmers to know which charms are available for review.</p>
-              <hr>
-              <h2 id="search">Search</h2>
-              <pre class="prettyprint lang-bash">juju charm search [-h|--help]</pre>
-              <p>This provides a copy of the <a href="http://manage.jujucharms.com/review-queue">juju charms review queue</a> which is used by ~charmers to know which charms are available
-              for review.</p>
-              <hr>
-              <h2 id="search">unpromulgate</h2>
-              <pre class="prettyprint lang-bash">juju charm unpromulgate [-h|--help] [-f|--force]</pre>
-              <p>This is simply a convience method to running <code>juju charm promulgate --unpromulgate</code>.</p>
-              <hr>
-              <h2 id="search">update</h2>
-              <pre class="prettyprint lang-bash">juju charm update [-h|--help] [-f|--fix] [CHARMS_DIRECTORY]</pre>
-              <p>Update is used for <code>CHARMS_DIRECTORY</code>, when <code>CHARMS_DIRECTORY</code> is a repository created via <a href="#getall"><code>getall</code></a></p>
-            </section>
-          </article>
-<!--Postamble-->
-        </div>
+</code></pre>
+<hr />
+<h2 id="get">Get</h2>
+<pre><code>juju charm get [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
+</code></pre>
+<p>If you want to branch one of the charm store charms, use the <code>get</code> command
+specifying the <code>CHARM_NAME</code> you want to copy and provide an optional
+<code>CHARMS_DIRECTORY</code>. Otherwise the current directory will be used</p>
+<h3 id="get-example">Get Example</h3>
+<pre><code>juju charm get mysql
+</code></pre>
+<p>Will download the MySQL charm to a mysql directory within your current path.</p>
+<pre><code>juju charm get wordpress ~/charms/precise/
+</code></pre>
+<p>Will download the WordPress charm to <code>~/charms/precise/wordpress</code></p>
+<hr />
+<h2 id="getall">Getall</h2>
+<pre><code>juju charm getall [-h|--help] [CHARMS_DIRECTORY]
+</code></pre>
+<p>Similar to <code>get</code>, <code>getall</code> will fetch all official charm store charms and place
+them in the <code>CHARMS_DIRECTORY</code>, or your current directory if no
+<code>CHARMS_DIRECTORY</code> is provided. This command can take quite a while to complete
+- there are a lot of charms!</p>
+<hr />
+<h2 id="info">Info</h2>
+<pre><code>juju charm info [-h|--help] [CHARM]
+</code></pre>
+<p>Info is used to query the README file for a charm. This command accepts various
+forms of a valid "charm id". Any ID that can be used to deploy a charm with
+<code>juju deploy</code>, with the exception of <code>local:</code>, can be used with this command.</p>
+<h3 id="info-example">Info Example</h3>
+<p>This will print the raw README for the WordPress charm</p>
+<pre><code>juju charm info wordpress
+</code></pre>
+<h2 id="list">List</h2>
+<pre><code>juju charm list [-h|--help]
+</code></pre>
+<p>Show all charms (both official and person) in the charm store. This produces an
+exhaustive list of all charms available in the store.</p>
+<h2 id="promulgate">Promulgate</h2>
+<pre><code>juju charm promulgate [-h|--help] [-b|--branch] [-s|--series] [-v|--verbose] [-u|--unpromulgate] [-f|--force] [-w|--ignore-warnings] [-o|--owner-branch] CHARM_DIRECTORY
+</code></pre>
+<p>Promulgate is used to promote a charm to the charm store. This command is only
+available to users in the ~charmers group and is meant to be run only after a
+charm passes the review process. <code>CHARM_DIRECTORY</code> is the path to the charm to
+be promulgated. When promulgating <code>proof</code> is run and unless otherwise forced,
+will prevent promulgation if errors occur.</p>
+<h3 id="promulgate-options">Promulgate Options</h3>
+<ul>
+<li><code>-b</code>, <code>--branch</code>: The location of the charm public branch. Will be determined from the bzr configuration if omitted.</li>
+<li><code>-s</code>, <code>--series</code>: The distribution series on which to set the official branch. Defaults to setting it in the current development series (LTS).</li>
+<li><code>-v</code>, <code>--verbose</code>: Increase verbosity level.</li>
+<li><code>-u</code>, <code>--unpromulgate</code>: Un-promulgate this branch instead of prolugating it.</li>
+<li><code>-f</code>, <code>--force</code>: Override warnings and errors. USE WITH EXTREME CARE!</li>
+<li><code>-w</code>, <code>--ignore-warnings</code>: Promulgate this branch even with warnings from charm proof.</li>
+<li><code>-o</code>, <code>--owner-branch</code>: Promulgate a branch owned by a someone/group other than ~charmers.</li>
+</ul>
+<h2 id="proof">Proof</h2>
+<pre><code>juju charm proof CHARM_DIRECTORY
+</code></pre>
+<p>Proof is designed to perform a "lint" against a charms structure to validate if
+it conforms to what the Charm Store thinks a charm structure and layout should
+be. <code>proof</code> will provide output at varying levels of severtiy. <code>I</code> is
+informational. These are things a charm could do but don't currently. <code>W</code> is a
+warning. These are things that aren't complete blockers but need to be
+addressed. <code>E</code> is an error. These are items that are major and need to be
+addressed.</p>
+<h2 id="review-queue">Review-queue</h2>
+<pre><code>juju charm review-queue [-h|--help]
+</code></pre>
+<p>This provides a copy of the <a href="http://manage.jujucharms.com/review-queue">juju charms review
+queue</a> which is used by ~charmers to
+know which charms are available for review.</p>
+<hr />
+<h2 id="search">Search</h2>
+<pre><code>juju charm search [-h|--help]
+</code></pre>
+<p>This provides a copy of the <a href="http://manage.jujucharms.com/review-queue">juju charms review
+queue</a> which is used by ~charmers to
+know which charms are available for review.</p>
+<hr />
+<h2 id="unpromulgate">unpromulgate</h2>
+<pre><code>juju charm unpromulgate [-h|--help] [-f|--force]
+</code></pre>
+<p>This is simply a convience method to running <code>juju charm promulgate
+--unpromulgate</code>.</p>
+<h2 id="update">update</h2>
+<pre><code>juju charm update [-h|--help] [-f|--fix] [CHARMS_DIRECTORY]
+</code></pre>
+<p>Update is used for <code>CHARMS_DIRECTORY</code>, when <code>CHARMS_DIRECTORY</code> is a repository
+created via <code>getall</code></p>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-</div>
-<!--End-Postamble-->
-<!--Footer-->
-	<footer class="global clearfix" role="contentinfo">
-		<nav role="navigation">
-			<div class="footer-a">
-				<div class="clearfix">
-					<ul>
-						<li>
-							<h2><a href="/">Juju</a></h2>
-							<ul>
-								<li><a href="/charms/">Charms</a></li>
-								<li><a href="/features/">Features</a></li>
-								<li><a href="/deployment/">Deployment</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/resources/">Resources</a></h2>
-							<ul>
-								<li><a href="/resources/overview/">Overview</a></li>
-								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
-								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
-								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
-								<li><a href="/resources/videos/">Videos</a></li>
-								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/community">Community</a></h2>
-							<ul>
-								<li><a href="/community/blog/">Juju Blog</a></li>
-								<li><a href="/events/">Events</a></li>
-								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
-								<li><a href="/community/charmers/">Charmers</a></li>
-								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
-							<ul>
-								<li><a href="https://jujucharms.com/">Charm store</a></li>
-								<li><a href="/download/">Download Juju</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="legal clearfix">
-			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
-		</div>
-	</footer>
+    </div>
+    <footer class="global clearfix" role="contentinfo">
+      <nav role="navigation">
+        <div class="footer-a">
+          <div class="clearfix">
+            <ul>
+             <li>
+               <h2><a href="/">Juju</a></h2>
+               <ul>
+                 <li><a href="/charms">Charms</a></li>
+                 <li><a href="/features">Features</a></li>
+                 <li><a href="/deployment">Deployment</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/resources">Resources</a></h2>
+               <ul>
+                 <li><a href="/resources/juju-overview/">Overview</a></li>
+                 <li><a href="/docs/">Documentation</a></li>
+                 <li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+                 <li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+                 <li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+                 <li><a href="/resources/videos/">Videos</a></li>
+                 <li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/community">Community</a></h2>
+                 <ul>
+                   <li><a href="/community/blog/">Juju Blog</a></li>
+                   <li><a href="/events/">Events</a></li>
+                   <li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+                   <li><a href="/community/charmers/">Charmers</a></li>
+                   <li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+                   <li><a href="/docs/contributing.html">Help with documentation</a></li>
+                   <li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li>
+                   <li><a href="/labs/">Juju Labs</a></li>
+                 </ul>
+               </li>
+               <li>
+                 <h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+                 <ul>
+                   <li><a href="https://jujucharms.com/">Charm store</a></li>
+                   <li><a href="/download/">Download Juju</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+       <div class="legal clearfix">
+         <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+       </div>
+     </footer>
+     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+     <script type="text/javascript" src="./js/main.js"></script>
+     <script type="text/javascript" src="./js/jquery.details.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+     <!-- google analytics -->
+     <script>
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-1018242-41']);
+       _gaq.push(['_trackPageview']);
 
-<!--End-Footer-->
-
-
-
-
-<!--Scripts-->
-    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/jquery.details.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-    <!-- google analytics -->
-    <script>
-   var _gaq = _gaq || [];
-   _gaq.push(['_setAccount', 'UA-1018242-41']);
-   _gaq.push(['_trackPageview']);
-  
-   (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   })();
+       (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
     </script>
-<!--End-Scripts-->
-
-
-
-
-
-
-
-
-</body></html>
+  </body>
+</html>

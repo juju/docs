@@ -1,172 +1,219 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<!--Head-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Juju Documentation</title>
-		<script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css" />
- 		<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css" />
-		<link href="./css/main.css" rel="stylesheet" type="text/css" />
-		
-		<!--[if lt IE 9]>
-		<script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-	</head>
-<!--End-Head-->
-
-
-
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Juju Documentation</title>
+    <script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
+    <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
+    <link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
+    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
   <body class="resources">
-<!--Header-->
+    <header class="banner global" role="banner">
+      <nav role="navigation" class="nav-primary nav-right">
+        <div class="logo">
+          <a class="logo-ubuntu" href="https://juju.ubuntu.com/">
+            <img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
+            <span>Juju</span>
+          </a>
+        </div>
+        <ul>
+          <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
+          <li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
+          <li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
+          <li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
+          <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
+          <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
+          <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+        </ul>
+        <div id="box-search">
+          <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
+            <label class="off-left" for="s">Search:</label>
+            <input class="form-text" type="text" value="" name="s" id="s" />
+            <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
+      <div id="main-content" class="inner-wrapper" role="main">
+        <div class="row no-border">
+         <div class="header-navigation-secondary"></div>
+         <h2 class="pagetitle">Juju documentation</h2>
+        </div>
+        <section id="content" class="container-12">
+          <div class="grid-12 doc-container">
+            <div id="navlinks" class="grid-3 doc-navigation">
+                          <h1>User Guide</h1>
+            <ul class="no-margin">
+              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
+              <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
+              <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
+              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
+              <li class=" sub"><a href="config-local.html">Local</a></li>
+              <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
+              <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
+              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=""><a href="charms.html">Using Charms</a></li>
+              <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
+              <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
+              <li class=" sub"><a href="charms-config.html">Service Configuration</a></li>
+              <li class=" sub"><a href="charms-relations.html">Service Relationships</a></li>
+              <li class=" sub"><a href="charms-exposing.html">Exposing Services</a></li>
+              <li class=" sub"><a href="charms-scaling.html">Scaling Services</a></li>
+              <li class=" sub"><a href="charms-service-groups.html">Groups of Services</a></li>
+              <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
+              <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
+              <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=""><a href="howto.html">How to...</a></li>
+              <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
+              <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
+              <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
+              <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
+              <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+              <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
+              <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
+              <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
+              <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
+            </ul>
+            <h1>Charm Authors</h1>
+            <ul class="no-margin">
+              <li class=""><a href="authors-intro.html">Getting started</a></li>
+              <li class=""><a href="authors-charm-components.html">Components of a charm</a></li>
+              <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
+              <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
+              <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
+              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
+              <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+              <li class=" sub"><a href="authors-charm-interfaces.html">Implementing interfaces</a></li>
+              <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
+              <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
+              <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+              <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>
 
-	<header class="banner global" role="banner">
-		<nav role="navigation" class="nav-primary nav-right">
-			<div class="logo">
-				<a class="logo-ubuntu" href="https://juju.ubuntu.com/">
-					<img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
-					<span>Juju</span>
-				</a>
-			</div>
-			<ul>
-				<li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-				<li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
-				<li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
-				<li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
-				<li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-				<li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-				<li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
-			</ul>
-			<div id="box-search">
-				<form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
-					<label class="off-left" for="s">Search:</label>
-					<input class="form-text" type="text" value="" name="s" id="s" />
-					<button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-				</form>		
-			</div>
-		</nav>	
-	</header>
-<!--End-Header-->
-<!--Preamble-->
-<div class="wrapper">
-  <div id="main-content" class="inner-wrapper" role="main">
-    <div class="row no-border">
-     <div class="header-navigation-secondary"></div>
-     <h2 class="pagetitle">Juju documentation</h2>
-    </div>
-    <section id="content" class="container-12">
-      <div class="grid-12 doc-container">
-        <div id="navlinks" class="grid-3 doc-navigation">LINKS</div>
-        <div class="grid-9 doc-content">
-<!--End-Preamble-->
-          <article>
-            <section id="amulet">
-                <h1>Amulet, a testing harness</h1>
-<p>Amulet is a set of tools designed to simplify the testing process for charm authors. Amulet aims to be:</p>
+
+              <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
+              <li class=" sub"><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+              <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+              <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
+              <li class=" sub"><a href="authors-charm-quality.html">Charm Feature Rating</a></li>
+              <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
+
+            <h1>Tools</h1>
+            <ul class="no-margin">
+              <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
+              <li class=""><a href="tools-amulet.html">Amulet</a></li>
+            </ul>
+
+            <h1>Reference</h1>
+            <ul class="no-margin">
+              <li class="sub"><a href="commands.html">Juju commands</a></li>
+              <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
+              <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
+              <li class="sub"><a href="glossary.html">Glossary</a></li>
+              <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
+              <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>
+            </ul>
+            </div>
+            <div class="grid-9 doc-content">
+              <article>
+                <h1 id="amulet,-a-testing-harness">Amulet, a testing harness</h1>
+<p>Amulet is a set of tools designed to simplify the testing process for charm
+authors. Amulet aims to be:</p>
 <ul>
 <li>a testing harness for writing and running tests.</li>
 <li>a way to validate charm relation data (not just what a charm expects/receives).</li>
 <li>a method to exercise and test charm relations outside of a deployment.</li>
-    </ul>
-<p>While these tools are designed to help make test writing easier, much like charm helpers are designed to make hook writing easier, they are not required to write tests for charms. This library is offered as a completely optional set of tools for you to use.</p>
-</section>
-<section id="install">
-
-                <h1 >Installation</h1>
-                <p>Amulet is available as both a package and via pip. For source packages, see <a href="https://github.com/marcoceppi/amulet/releases"> GitHub</a>.</p>
-              <section class="code-example code-overflow">
-                <nav class="control">
-                  <a href="." class="selected" data-action="ubuntu">Ubuntu</a>
-                  <a href="." class="" data-action="macosx">Mac OSX</a>
-                  <a href="." class="" data-action="windows">Windows</a>
-                  <a href="." class="" data-action="source">Source</a>
-                </nav>
-                <div class="terminal-wrap">
-                  <div data-section="ubuntu">
-                    <p>Amulet is available in the Juju Stable PPA for Ubuntu</p>
-
-<pre class="prettyprint">sudo add-apt-repository ppa:juju/stable
+</ul>
+<p>While these tools are designed to help make test writing easier, much like charm
+helpers are designed to make hook writing easier, they are not required to write
+tests for charms. This library is offered as a completely optional set of tools
+for you to use.</p>
+<h1 id="installation">Installation</h1>
+<p>Amulet is available as both a package and via pip. For source packages, see <a href="https://github.com/marcoceppi/amulet/releases">
+GitHub</a>.</p>
+<p><a href=".">Ubuntu</a> <a href=".">Mac OSX</a> <a href=".">Windows</a> <a href=".">Source</a></p>
+<p>Amulet is available in the Juju Stable PPA for Ubuntu</p>
+<pre><code>sudo add-apt-repository ppa:juju/stable
 sudo apt-get update
 sudo apt-get install amulet
-</pre>
-                  </div>
-                  <div data-section="macosx">
-                    <p>Amulet is available via Pip:</p>
-
-<pre class="prettyprint lang-bash">sudo pip install amulet</pre>
-
-                  </div>
-                  <div data-section="windows">
-                  <p>Amulet is available via Pip:</p>
-
-<pre class="prettyprint lang-bash">pip install amulet</pre>
-                  </div>
-                  <div data-section="source">
-                   <p>Amulet is built with Python3, make sure it's installed prior to following these steps. While you can run Amulet from source, it's not recommended as it requires several changes to environment variables in order for Amulet to operate as it does in the packaged version.</p>
-
+</code></pre>
+<p>Amulet is available via Pip:</p>
+<pre><code>sudo pip install amulet
+</code></pre>
+<p>Amulet is available via Pip:</p>
+<pre><code>pip install amulet
+</code></pre>
+<p>Amulet is built with Python3, make sure it's installed prior to following these
+steps. While you can run Amulet from source, it's not recommended as it requires
+several changes to environment variables in order for Amulet to operate as it
+does in the packaged version.</p>
 <p>To install Amulet from source, first get the source:</p>
-
-<pre class="prettyprint lang-bash">git clone https://github.com/marcoceppi/amulet.git</pre>
-<p>Move in to the <code>amulet</code> directory and run 
-<pre class="prettyprint lang-bash">sudo python3 setup.py install</pre>
-<p>You can also access the Python libraries; however, your <code>PYTHONPATH</code> will need to be amended in order for it to find the amulet directory.</p>
-
-                  </div>
-                </div>
-              </section>
-         
-
-
-
-<section>
+<pre><code>git clone https://github.com/marcoceppi/amulet.git
+</code></pre>
+<p>Move in to the <code>amulet</code> directory and run</p>
+<pre><code>sudo python3 setup.py install
+</code></pre>
+<p>You can also access the Python libraries; however, your <code>PYTHONPATH</code> will need
+to be amended in order for it to find the amulet directory.</p>
 <h2 id="usage">Usage</h2>
-              
-<p>Amulet comes packaged with several tools. In order to provide the most flexibility, Amulet offers both direct Python library access and generic access via a programmable API for other languages (for example, <code>bash</code>).</p>
-
-<h3>Python</h3>
-
+<p>Amulet comes packaged with several tools. In order to provide the most
+flexibility, Amulet offers both direct Python library access and generic access
+via a programmable API for other languages (for example, <code>bash</code>).</p>
+<h3 id="python">Python</h3>
 <p>Amulet is made available to Python via the <code>amulet</code> module which you can import:</p>
-
-<pre class="prettyprint lang-python">import amulet</pre>
-<p>The amulet module seeds each module/command directly, so Deployment is made available in amulet/deployer.py and is accessible directly from amulet using:</p>
-
-<pre class="prettyprint lang-python">from amulet import Deployment</pre>
-<p>Though <code>deployer</code> is also available in the event you wish to execute any of the helper functions:</p>
-<pre class="prettyprint lang-python">
-from amulet import deployer
+<pre><code>import amulet
+</code></pre>
+<p>The amulet module seeds each module/command directly, so Deployment is made
+available in amulet/deployer.py and is accessible directly from amulet using:</p>
+<pre><code>from amulet import Deployment
+</code></pre>
+<p>Though <code>deployer</code> is also available in the event you wish to execute any of the
+helper functions:</p>
+<pre><code>from amulet import deployer
 d = deployer.Deployment()
-</pre>                
-                
-<h3 id="api">Programmable API</h3>
-
-<p>A limited number of functions are made available through a generic forking API. The following examples assume you're using a BOURNE Shell, though this syntax could be used from within other languauges with the same expected results.</p>
-
-<p>Unlike the Python modules, only some of the functions of Amulet are available through this API, though efforts are being made to make the majority of the core functionality available.</p>
-
-<p>This API follows the subcommand workflow, much like Git or Bazaar. Amulet makes an amulet command available and each function is tied to a sub-command. To mimic the Python example you can create a a new Deployment by issuing the following command:</p>
-
-<pre class="prettyprint lang-bash">amulet deployment</pre>
-                
-<p>Depending on the syntax and worflow for each function you can expect to provide either additional sub-commands, command-line flags, or a combination of the two.</p>
-
-<h2 id="functionality">Core functionality</h2>
-<p>This section is deigned to outline the core functions of Amulet. Again, please refer to the developer documentation for an exhaustive list of functions and methods.
-
+</code></pre>
+<h3 id="programmable-api">Programmable API</h3>
+<p>A limited number of functions are made available through a generic forking API.
+The following examples assume you're using a BOURNE Shell, though this syntax
+could be used from within other languauges with the same expected results.</p>
+<p>Unlike the Python modules, only some of the functions of Amulet are available
+through this API, though efforts are being made to make the majority of the core
+functionality available.</p>
+<p>This API follows the subcommand workflow, much like Git or Bazaar. Amulet makes
+an amulet command available and each function is tied to a sub-command. To mimic
+the Python example you can create a a new Deployment by issuing the following
+command:</p>
+<pre><code>amulet deployment
+</code></pre>
+<p>Depending on the syntax and worflow for each function you can expect to provide
+either additional sub-commands, command-line flags, or a combination of the two.</p>
+<h2 id="core-functionality">Core functionality</h2>
+<p>This section is deigned to outline the core functions of Amulet. Again, please
+refer to the developer documentation for an exhaustive list of functions and
+methods.</p>
 <h3 id="amulet.deployer">amulet.deployer</h3>
-
-<p>The Deployer module houses several classes for interacting and setting up an environment. These classes and methods are outlined below
-
-amulet.deployer.Deployment()
-
-<p>Deployment (amulet deployment, from amulet import Deployment) is an abstraction layer to the juju-deployer Juju plugin and a service lifecycle management tool. It's designed to allow an author to describe their deployment in simple terms:</p>
-<pre class="prettyprint lang-python">
-import amulet
-
+<p>The Deployer module houses several classes for interacting and setting up an
+environment. These classes and methods are outlined below
+amulet.deployer.Deployment()</p>
+<p>Deployment (amulet deployment, from amulet import Deployment) is an abstraction
+layer to the juju-deployer Juju plugin and a service lifecycle management tool.
+It's designed to allow an author to describe their deployment in simple terms:</p>
+<pre><code>import amulet
 d = amulet.Deployment()
 d.add('mysql')
 d.add('mediawiki')
@@ -174,290 +221,231 @@ d.relate('mysql:db', 'mediawiki:db')
 d.expose('mediawiki')
 d.configure('mediawiki', title="My Wiki", skin="Nostolgia")
 d.setup()
-</pre>
-<p>
-That information is then translated to a Juju Deployer deployment file then, finally, juju-deployer executes the described setup. Amulet strives to ensure it implements the correct version and syntax of Juju Deployer, to avoid charm authors having to potentially intervene each time an update to <code>juju-deployer</code> is made.
-</p>
-<p>Once an environment has been set up, deployer can still drive the environment outside of of juju-deployer. So the same commands (add, relate, configure, expose) will instead interact directly with the environment by using either the Juju API or the juju commands.</p>
-
-<h4 id="Deployment">Class:</h4>
-<p><code>Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-deployer', sentry_template=None)</code></p>
-
-<h4>Methods:</h4>
-<details id="Deployment.add"><summary><code class="method">Deployment.add(service, charm=None, units=1)</code>
-
-<p>Add a new service to the deployment schema.</p></summary>
-
-<ul><li><code>service</code> Name of the service to deploy.</li>
+</code></pre>
+<p>That information is then translated to a Juju Deployer deployment file then,
+finally, juju-deployer executes the described setup. Amulet strives to ensure it
+implements the correct version and syntax of Juju Deployer, to avoid charm
+authors having to potentially intervene each time an update to <code>juju-deployer</code>
+is made.</p>
+<p>Once an environment has been set up, deployer can still drive the environment
+outside of of juju-deployer. So the same commands (add, relate, configure,
+expose) will instead interact directly with the environment by using either the
+Juju API or the juju commands.</p>
+<h4 id="class:">Class:</h4>
+<p><code>Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-
+deployer', sentry_template=None)</code></p>
+<h4 id="methods:">Methods:</h4>
+<p><code>Deployment.add(service, charm=None, units=1)</code></p>
+<p>Add a new service to the deployment schema.</p>
+<ul>
+<li><code>service</code> Name of the service to deploy.</li>
 <li><code>charm</code> If provided, will be the charm used. Otherwise service is used as the charm.</li>
-<li><code>units</code> Number of units to deploy.</li></ul>
-<pre class="prettyprint lang-python">import amulet
-
-d = amulet.Deployment()
-d.add('wordpress')
-d.add('second-wp', charm='wordpress')
-d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)
-</pre>
-</details>    
-<details id="Deployment.add_unit"><summary><code class="method">Deployment.add_unit(service, units=1)</code>
-
-<p>Add more units of an existing service after deployment.</p></summary>
-
-<ul><li><code>service</code> Name of the service to add, must already be added.</li>
-<li><code>units</code> Number of units to add, default is one.</li></ul>
-<pre class="prettyprint lang-python">import amulet
-
-d = amulet.Deployment()
-d.add('wordpress')
-try:
-    d.setup(timeout=900)
-except amulet.helpers.TimeoutError:
-    # Setup didn't complete before timeout
-    pass
-d.add_unit('wordpress')
-d.add_unit('wordpresss', units=2)
-</pre>
-</details>    
-<details id="Deployment.build_relations"><summary><code class="method">Deployment.build_relations()</code>
-
-<p>Private method invoked during deployer_map. Creates relation mapping.</p></summary></details>
-
-<details id="Deployment.build_sentries"><summary><code class="method">Deployment.build_sentries()</code>
-
-<p>Private method invoked during deployer_map. Creates sentries for services.</p>
-    </summary></details>
-<details id="Deployment.configure"><summary><code class="method">Deployment.configure(service, **options)</code>
-
-<p>Change configuration options for a service.</p></summary>
-
-<ul><li><code>service</code>  The service to configure.</li>
-<li><code>options</code>  Dict of configuration options.</li></ul>
-<pre class="prettyprint lang-python">    
-import amulet
-
-d = amulet.Deployment()
-d.add('postgresql')
-d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})
-</pre>
-</details>
-<details id="Deployment.deployer_map"><summary><code class="method">Deployment.deployer_map(services, relations)</code>
-
-<p>Create deployer file from provided services and relations.</p>
-</summary>
-
-<ul><li><code>services</code> Object of service and service data.</li>
-<li><code>relations</code> List of relations to map.</li>
+<li><code>units</code> Number of units to deploy.
+    import amulet
+    d = amulet.Deployment()
+    d.add('wordpress')
+    d.add('second-wp', charm='wordpress')
+    d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)</li>
 </ul>
-</details>
-<details id="Deployment.expose"><summary><code class="method">Deployment.expose(service)</code>
-
-<p>Indicate if a service should be exposed after deployment.</p></summary>
-
-<ul><li><code>service</code> -  Name of service to expose</li></ul>
-<pre class="prettyprint lang-python">    
-import amulet
-
-d = amulet.Deployment()
-d.add('varnish')
-d.expose('varnish')
-</pre></details>
-<details id="Deployment.load"><summary><code class="method">Deployment.load(deploy_cfg)</code>
-
+<p><code>Deployment.add_unit(service, units=1)</code></p>
+<p>Add more units of an existing service after deployment.</p>
+<ul>
+<li><code>service</code> Name of the service to add, must already be added.</li>
+<li><code>units</code> Number of units to add, default is one.
+    import amulet
+    d = amulet.Deployment()
+    d.add('wordpress')
+    try:
+        d.setup(timeout=900)
+    except amulet.helpers.TimeoutError:
+        # Setup didn't complete before timeout
+        pass
+    d.add_unit('wordpress')
+    d.add_unit('wordpresss', units=2)</li>
+</ul>
+<p><code>Deployment.build_relations()</code></p>
+<p>Private method invoked during deployer_map. Creates relation mapping.</p>
+<p><code>Deployment.build_sentries()</code></p>
+<p>Private method invoked during deployer_map. Creates sentries for services.</p>
+<p><code>Deployment.configure(service, **options)</code></p>
+<p>Change configuration options for a service.</p>
+<ul>
+<li><code>service</code> The service to configure.</li>
+<li><code>options</code> Dict of configuration options.
+    import amulet
+    d = amulet.Deployment()
+    d.add('postgresql')
+    d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})</li>
+</ul>
+<p><code>Deployment.deployer_map(services, relations)</code></p>
+<p>Create deployer file from provided services and relations.</p>
+<ul>
+<li><code>services</code> Object of service and service data.</li>
+<li><code>relations</code> List of relations to map.
+<code>Deployment.expose(service)</code></li>
+</ul>
+<p>Indicate if a service should be exposed after deployment.</p>
+<ul>
+<li><code>service</code> - Name of service to expose
+    import amulet
+    d = amulet.Deployment()
+    d.add('varnish')
+    d.expose('varnish')</li>
+</ul>
+<p><code>Deployment.load(deploy_cfg)</code></p>
 <p>Import an existing deployer object.</p>
-</summary>
-<ul><li><code>deploy_cfg</code> Already parsed deployer yaml/json file.</li></ul>
-</details>   
-<details id="Deployment.relate"><summary><code class="method">Deployment.relate(*args)</code>
-
-<p>Relate two services together.</p></summary>
-
-<ul><li><code>*args</code> - <code>service:relation</code> to be related.</li></ul>
-<p>If more than two arguments are given, it's assumed they're to be added to the first argument as a relation.</p>
-<pre class="prettyprint lang-python">import amulet
-
+<ul>
+<li><code>deploy_cfg</code> Already parsed deployer yaml/json file.
+<code>Deployment.relate(*args)</code></li>
+</ul>
+<p>Relate two services together.</p>
+<ul>
+<li><code>*args</code> - <code>service:relation</code> to be related.</li>
+</ul>
+<p>If more than two arguments are given, it's assumed they're to be added to the
+first argument as a relation.</p>
+<pre><code>import amulet
 d = amulet.Deployment()
 d.add('postgresql')
 d.add('mysql')
 d.add('wordpress')
 d.add('mediawiki')
 d.add('discourse')
-
 d.relate('postgresql:db-admin', 'discourse:db')
 d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
-</pre>
-</details>
-    
-<details id="Deployment.setup"><summary><code class="method">Deployment.setup(timeout=600)</code>
-
-<p>This will create the deployer mapping, create any sentries that are required, and execute juju-deployer with the generated mapping.</p></summary>
-
-<ul><li><code>timeout</code> in seconds, how long to wait for setup</li></ul>
-
-<pre class="prettyprint lang-python">import amulet
-
-d = amulet.Deployment()
-d.add('wordpress')
-d.add('mysql')
-d.configure('wordpress', debug=True)
-d.relate('wordpress:db', 'mysql:db')
-try:
-    d.setup(timeout=900)
-except amulet.helpers.TimeoutError:
-    # Setup didn't complete before timeout
-    pass
-
-</pre></details>
+</code></pre>
+<p><code>Deployment.setup(timeout=600)</code></p>
+<p>This will create the deployer mapping, create any sentries that are required,
+and execute juju-deployer with the generated mapping.</p>
+<ul>
+<li><code>timeout</code> in seconds, how long to wait for setup
+    import amulet
+    d = amulet.Deployment()
+    d.add('wordpress')
+    d.add('mysql')
+    d.configure('wordpress', debug=True)
+    d.relate('wordpress:db', 'mysql:db')
+    try:
+        d.setup(timeout=900)
+    except amulet.helpers.TimeoutError:
+        # Setup didn't complete before timeout
+        pass</li>
+</ul>
 <h3 id="amulet.sentry">amulet.sentry</h3>
-<p>Sentries are an additional service built in to the Deployment tool which allow an author the ability to dig deeper in to a deployment environment. This is done by adding a set of tools to each service/unit deployed via a subordinate charm and a final "relation sentry" charm is deployed which all relations are proxied through. In doing so you can inspect on each service/unit deployed as well as receive detailed information about what data is being sent by which units/service during a relation.</p>
-
-<p>Sentries can be accessed from within your deployment using the sentry object. Using the above example from ## Deployer, each service and unit can be accessed using the following:</p>
-<pre class="prettyprint lang-python">
-import amulet
-
+<p>Sentries are an additional service built in to the Deployment tool which allow
+an author the ability to dig deeper in to a deployment environment. This is done
+by adding a set of tools to each service/unit deployed via a subordinate charm
+and a final "relation sentry" charm is deployed which all relations are proxied
+through. In doing so you can inspect on each service/unit deployed as well as
+receive detailed information about what data is being sent by which
+units/service during a relation.</p>
+<p>Sentries can be accessed from within your deployment using the sentry object.
+Using the above example from ## Deployer, each service and unit can be accessed
+using the following:</p>
+<pre><code>import amulet
 d = amulet.Deployment()
 d.add('mediawiki')
 d.add('mysql')
 d.setup()
-
 d.sentry.wait()
-
 d.sentry.unit['mysql/0']
 d.sentry.unit['mediawiki/0']
-</pre>
-<p>Sentries provide several methods for which you can use to gather information about an environment. The following are a few examples.</p>
-
-<h4>Methods</h4>
-
-<details id="amulet.sentry.wait"><summary><code class="method">wait(timeout=300)</code>
-
+</code></pre>
+<p>Sentries provide several methods for which you can use to gather information
+about an environment. The following are a few examples.</p>
+<h4 id="methods">Methods</h4>
+<p><code>wait(timeout=300)</code></p>
 <p>Wait for all hooks to finish execution on deployment</p>
-</summary>
-<ul><li><code>timeout</code> Duration in seconds to wait before raising exception, default 300 seconds</li></ul>
-
-<p>If timeout is met prior to ready state, <code>TimeoutError</code> is raised.</p>
-</details>
-
-<h3 id="amulet.sentry.unit">amulet.sentry.unit</h3>
-<p>Each unit is assigned a <a href="#UnitSentry.from_unitdata">UnitSentry</a></p>
-
-<h4 id="UnitSentry.from_unitdata">Class:</h4>
-<p><code>UnitSentry.from_unitdata(unit, unit_data, port=9001, sentry=None)</code></p>
-
 <ul>
-    <li><code>unit</code> - <code>service/#</code> formatted string of unit name</li>
-    <li><code>unit_data</code> - Object of unit status output</li>
-    <li><code>port</code> - Sentry port</li>
-    <li><code>sentry</code> - RelationSentry</li>
+<li><code>timeout</code> Duration in seconds to wait before raising exception, default 300 seconds</li>
 </ul>
-
-<h4>Methods:</h4>
-<details id="UnitSentry.directory"><summary><code class="method">UnitSentry.directory(dir)</code>
-
-<p>See <a href='#UnitSentry.directory_stat'>UnitSentry.directory_stat()</a></p>
-</summary></details>
-
-<details id="UnitSentry.directory_contents"><summary><code class="method">UnitSentry.directory_contents(dir)</code>
-
+<p>If timeout is met prior to ready state, <code>TimeoutError</code> is raised.</p>
+<h3 id="amulet.sentry.unit">amulet.sentry.unit</h3>
+<p>Each unit is assigned a UnitSentry</p>
+<h4 id="class:">Class:</h4>
+<p><code>UnitSentry.from_unitdata(unit, unit_data, port=9001, sentry=None)</code></p>
+<ul>
+<li><code>unit</code> - <code>service/#</code> formatted string of unit name</li>
+<li><code>unit_data</code> - Object of unit status output</li>
+<li><code>port</code> - Sentry port</li>
+<li><code>sentry</code> - RelationSentry</li>
+</ul>
+<h4 id="methods:">Methods:</h4>
+<p><code>UnitSentry.directory(dir)</code></p>
+<p>See UnitSentry.directory_stat()</p>
+<p><code>UnitSentry.directory_contents(dir)</code></p>
 <p>Return files and directories of directory</p>
-</summary>
-<ul><li><code>dir</code> Directory on remote machine</li></ul>
-
+<ul>
+<li><code>dir</code> Directory on remote machine</li>
+</ul>
 <p>Example of output</p>
-
-<pre class="prettyprint">{'files': []
- 'directories': []}</pre>
-</details>
-
-<details id="UnitSentry.directory_stat"><summary><code class="method">UnitSentry.directory_stat(dir)</code>
-
+<pre><code>{'files': []
+ 'directories': []}
+</code></pre>
+<p><code>UnitSentry.directory_stat(dir)</code></p>
 <p>Return stat of directory</p>
-</summary>
-<ul><li><code>dir</code> Directory on remote machine</li></ul>
-
+<ul>
+<li><code>dir</code> Directory on remote machine</li>
+</ul>
 <p>Example of output</p>
-
-<pre class="prettyprint">{'mtime': fs_stat.st_mtime,
+<pre><code>{'mtime': fs_stat.st_mtime,
  'size': fs_stat.st_size,
  'uid': fs_stat.st_uid,
  'gid': fs_stat.st_gid,
- 'mode': fs_stat.st_mode}</pre>
-</details>
-
-<details id="UnitSentry.file"><summary><code class="method">UnitSentry.file(filename)</code>
-
-<p>See <a href='#UnitSentry.file_stat'>UnitSentry.file_stat()</a></p>
-</summary>
-</details>
-
-<details id="UnitSentry.file_contents"><summary><code class="method">UnitSentry.file_contents(filename)</code>
-
+ 'mode': fs_stat.st_mode}
+</code></pre>
+<p><code>UnitSentry.file(filename)</code></p>
+<p>See UnitSentry.file_stat()</p>
+<p><code>UnitSentry.file_contents(filename)</code></p>
 <p>Return contents of filename</p>
-</summary>
-<ul><li><code>filename</code> File on remote machine</li></ul>
-</details>
-
-<details id="UnitSentry.file_stat"><summary><code class="method">UnitSentry.file_stat(filename)</code>
-
+<ul>
+<li><code>filename</code> File on remote machine
+<code>UnitSentry.file_stat(filename)</code></li>
+</ul>
 <p>Return stat of path</p>
-</summary>
-<ul><li><code>filename</code> File on remote machine</li></ul>
-
+<ul>
+<li><code>filename</code> File on remote machine</li>
+</ul>
 <p>Example of output</p>
-
-<pre class="prettyprint">{'mtime': fs_stat.st_mtime,
+<pre><code>{'mtime': fs_stat.st_mtime,
  'size': fs_stat.st_size,
  'uid': fs_stat.st_uid,
  'gid': fs_stat.st_gid,
- 'mode': fs_stat.st_mode}</pre>
-</details>
-
-<details id="UnitSentry.relation"><summary><code class="method">UnitSentry.relation(from_rel, to_rel)</code>
-
+ 'mode': fs_stat.st_mode}
+</code></pre>
+<p><code>UnitSentry.relation(from_rel, to_rel)</code></p>
 <p>Return stat of path</p>
-</summary>
-<ul><li><code>from_rel</code> The relation of the unit eg <code>rel</code></li>
-<li><code>to_rel</code> Service and relation connection, eg: <code>service:rel</code></li></ul>
-
+<ul>
+<li><code>from_rel</code> The relation of the unit eg <code>rel</code></li>
+<li><code>to_rel</code> Service and relation connection, eg: <code>service:rel</code></li>
+</ul>
 <p>Output is an object of key, val relation data</p>
-</details>
-
-<details id="UnitSentry.run"><summary><code class="method">UnitSentry.run(command)</code>
-
+<p><code>UnitSentry.run(command)</code></p>
 <p>Execute specified command as root on remote machine</p>
-</summary>
-<ul><li><code>command</code> Shell command to execute</li></ul>
-
+<ul>
+<li><code>command</code> Shell command to execute</li>
+</ul>
 <p>Returns a tuple of output string and exit code</p>
-
-<pre class="prettyprint">>>> d.sentry.unit['ubuntu/0'].run('whoami')
-('root', 0)</pre>
-</details>
-
+<pre><code>&gt;&gt;&gt; d.sentry.unit['ubuntu/0'].run('whoami')
+('root', 0)
+</code></pre>
 <h2 id="examples">Examples</h2>
 <p>Here are a few examples of Amulet tests</p>
-
-<h3>WordPress</h3>
-
-<h4>tests/00-setup</h4>
-<pre class="prettyprint lang-python">
-#!/bin/bash
-
+<h3 id="wordpress">WordPress</h3>
+<h4 id="tests/00-setup">tests/00-setup</h4>
+<pre><code>#!/bin/bash
 sudo apt-get install amulet python-requests
-</pre>
-<h4>tests/01-simple</h4>
-<pre class="prettyprint lang-python">
-import os
+</code></pre>
+<h4 id="tests/01-simple">tests/01-simple</h4>
+<pre><code>import os
 import amulet
 import requests
-
 from .lib import helper
-
 d = amulet.Deployment()
 d.add('mysql')
 d.add('wordpress')
 d.relate('mysql:db', 'wordpress:db')
 d.expose('wordpress')
-
 try:
     # Create the deployment described above, give us 900 seconds to do it
     d.setup(timeout=900)
@@ -471,11 +459,9 @@ except:
     # Something else has gone wrong, raise the error so we can see it and this
     # will automatically "FAIL" the test.
     raise
-
 # Shorten the names a little to make working with unit data easier
 wp_unit = d.sentry.unit['wordpress/0']
 mysql_unit = d.sentry.unit['mysql/0']
-
 # WordPress requires user input to "finish" a setup. This code is contained in
 # the helper.py file found in the lib directory. If it's not able to complete
 # the WordPress setup we need to quit the test, not as failed per se, but as a
@@ -484,123 +470,102 @@ try:
     helper.finish_setup(wp_unit.info['public-address'], password='amulet-test')
 except:
     amulet.raise_status(amulet.SKIP, msg="Unable to finish WordPress setup")
-
 home_page = requests.get('http://%s/' % wp_unit.info['public-address'])
 home_page.raise_for_status() # Make sure it's not 5XX error
-</pre>    
-<h4>tests/lib/helper.py</h4>
-<pre class="prettyprint lang-python">
-import requests
-
+</code></pre>
+<h4 id="tests/lib/helper.py">tests/lib/helper.py</h4>
+<pre><code>import requests
 def finish_setup(unit, user='admin', password=None):
     h = {'User-Agent': 'Mozilla/5.0 Gecko/20100101 Firefox/12.0',
          'Content-Type': 'application/x-www-form-urlencoded',
          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*',
          'Accept-Encoding': 'gzip, deflate'}
-
     r = requests.post('http://%s/wp-admin/install.php?step=2' % unit,
                       headers=h, data={'weblog_title': 'Amulet Test %s' % unit,
                       'user_name': user, 'admin_password': password,
                       'admin_email': 'test@example.tld',
                       'admin_password2': password,
                       'Submit': 'Install WordPress'})
-</pre>
-    
-
-  
-            </section>
-          </article>
-<!--Postamble-->
-        </div>
+</code></pre>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-</div>
-<!--End-Postamble-->
-<!--Footer-->
-	<footer class="global clearfix" role="contentinfo">
-		<nav role="navigation">
-			<div class="footer-a">
-				<div class="clearfix">
-					<ul>
-						<li>
-							<h2><a href="/">Juju</a></h2>
-							<ul>
-								<li><a href="/charms/">Charms</a></li>
-								<li><a href="/features/">Features</a></li>
-								<li><a href="/deployment/">Deployment</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/resources/">Resources</a></h2>
-							<ul>
-								<li><a href="/resources/overview/">Overview</a></li>
-								<li><a href="/docs/">Documentation</a></li>
-								<li><a href="/resources/juju-gui/">The Juju web UI</a></li>
-								<li><a href="/docs/authors-charm-store.html">The charm store</a></li>
-								<li><a href="/docs/getting-started.html#test">Tutorial</a></li>
-								<li><a href="/resources/videos/">Videos</a></li>
-								<li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="/community">Community</a></h2>
-							<ul>
-								<li><a href="/community/blog/">Juju Blog</a></li>
-								<li><a href="/events/">Events</a></li>
-								<li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
-								<li><a href="/community/charmers/">Charmers</a></li>
-								<li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-								<li><a href="/docs/contributing.html">Help with documentation</a></li>
-								<li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li> <li><a href="/communiy/labs/">Juju Labs</a></li>
-							</ul>
-						</li>
-						<li>
-							<h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
-							<ul>
-								<li><a href="https://jujucharms.com/">Charm store</a></li>
-								<li><a href="/download/">Download Juju</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="legal clearfix">
-			<p>&copy; 2013-2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://www.canonical.com">Canonical Ltd</a>.</p>
-		</div>
-	</footer>
+    </div>
+    <footer class="global clearfix" role="contentinfo">
+      <nav role="navigation">
+        <div class="footer-a">
+          <div class="clearfix">
+            <ul>
+             <li>
+               <h2><a href="/">Juju</a></h2>
+               <ul>
+                 <li><a href="/charms">Charms</a></li>
+                 <li><a href="/features">Features</a></li>
+                 <li><a href="/deployment">Deployment</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/resources">Resources</a></h2>
+               <ul>
+                 <li><a href="/resources/juju-overview/">Overview</a></li>
+                 <li><a href="/docs/">Documentation</a></li>
+                 <li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
+                 <li><a href="/docs/authors-charm-store.html">The charm store</a></li>
+                 <li><a href="/docs/getting-started.html#test">Tutorial</a></li>
+                 <li><a href="/resources/videos/">Videos</a></li>
+                 <li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
+               </ul>
+             </li>
+             <li>
+               <h2><a href="/community">Community</a></h2>
+                 <ul>
+                   <li><a href="/community/blog/">Juju Blog</a></li>
+                   <li><a href="/events/">Events</a></li>
+                   <li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
+                   <li><a href="/community/charmers/">Charmers</a></li>
+                   <li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
+                   <li><a href="/docs/contributing.html">Help with documentation</a></li>
+                   <li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li>
+                   <li><a href="/labs/">Juju Labs</a></li>
+                 </ul>
+               </li>
+               <li>
+                 <h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
+                 <ul>
+                   <li><a href="https://jujucharms.com/">Charm store</a></li>
+                   <li><a href="/download/">Download Juju</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+       <div class="legal clearfix">
+         <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
+       </div>
+     </footer>
+     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+     <script type="text/javascript" src="./js/main.js"></script>
+     <script type="text/javascript" src="./js/jquery.details.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+     <!-- google analytics -->
+     <script>
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-1018242-41']);
+       _gaq.push(['_trackPageview']);
 
-<!--End-Footer-->
-
-
-
-
-<!--Scripts-->
-    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>    
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/jquery.details.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
-    <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-    <!-- google analytics -->
-    <script>
-   var _gaq = _gaq || [];
-   _gaq.push(['_setAccount', 'UA-1018242-41']);
-   _gaq.push(['_trackPageview']);
-  
-   (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   })();
+       (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
     </script>
-<!--End-Scripts-->
-
-
-
-</body></html>
-  
+  </body>
+</html>
