@@ -18,8 +18,8 @@ All charms share some of the same characteristics. They all have a yaml file
 called `metadata.yaml`, and when deployed, juju will always attempt to progress
 the state of the service from install to config to started. Because of this, all charms can be tested using the following algorithm:
 
-    deploy charm  
-     while state != started       
+    deploy charm
+     while state != started
      if timeout is reached, FAIL
      if state == install_error, config_error, or start_error, FAIL
      if state == started, PASS
@@ -103,16 +103,129 @@ test, and then the file ended with `INFO: END filename`.
 
 #### Deploy requirements and Poll
 
-The test below [*] deploys mediawiki with mysql and memcached related to it, and then tests to make sure it returns a page via http with "<title>" somewhere in the content.:
+The test below [*] deploys mediawiki with mysql and memcached related to it, and then tests to make sure it returns a page via http with `<title>` somewhere in the content.:
 
-TODO: PASTE IN FROM HTML
+```bash
+#!/bin/sh
 
+set -e
+
+teardown() {
+    if [ -n "$datadir" ] ; then
+        if [ -f $datadir/passed ]; then
+            rm -r $datadir
+        else
+            echo INFO: $datadir preserved
+            if [ -f $datadir/wget.log ] ; then
+                echo INFO: BEGIN wget.log
+                cat $datadir/wget.log
+                echo INFO: END wget.log
+            fi
+        fi
+    fi
+}
+trap teardown EXIT
+
+
+juju deploy mediawiki
+juju deploy mysql
+juju deploy memcached
+juju add-relation mediawiki:db mysql:db
+juju add-relation memcached mediawiki
+juju expose mediawiki
+
+for try in `seq 1 600` ; do
+    host=`juju status | tests/get-unit-info mediawiki public-address`
+    if [ -z "$host" ] ; then
+        sleep 1
+    else
+        break
+    fi
+done
+
+if [ -z "$host" ] ; then
+    echo FAIL: status timed out
+    exit 1
+fi
+
+datadir=`mktemp -d ${TMPDIR:-/tmp}/wget.test.XXXXXXX`
+echo INFO: datadir=$datadir
+
+wget --tries=100 --timeout=6 http://$host/ -O - -a $datadir/wget.log | grep -q '<title>'
+
+if [ $try -eq 600 ] ; then
+    echo FAIL: Timed out waiting.
+    exit 1
+fi
+
+touch $datadir/passed
+
+trap - EXIT
+teardown
+
+echo PASS
+exit 0
+```
 
 ### Test config settings
 
 The following example tests checks to see if the default_port change the admin
 asks for is actually respected post-deploy:
-TODO PASTE IN HTML
+
+```bash
+#!/bin/sh
+
+if [ -z "`which nc`" ] ; then
+    echo "SKIP: cannot run tests without netcat"
+    exit 100
+fi
+
+set -e
+
+juju deploy mongodb
+juju expose mongodb
+
+for try in `seq 1 600` ; do
+    host=`juju status | tests/get-unit-info mongodb public-address`
+    if [ -z "$host" ] ; then
+        sleep 1
+    else
+        break
+    fi
+done
+
+if [ -z "$host" ] ; then
+    echo FAIL: status timed out
+    exit 1
+fi
+
+assert_is_listening() {
+    local port=$1
+    listening=""
+    for try in `seq 1 10` ; do
+        if ! nc $host $port < /dev/null ; then
+            continue
+        fi
+        listening="$port"
+        break
+    done
+
+    if [ -z "$listening" ] ; then
+       echo "FAIL: not listening on port $port after 10 retries"
+       return 1
+    else
+        echo "PASS: listening on port $listening"
+        return 0
+    fi
+}
+
+assert_is_listening 27017
+
+juju set mongodb default_port=55555
+assert_is_listening 55555
+echo PASS: config change tests passed.
+exit 0
+```
 
 get-unit-info The example tests script uses a tool that is not widely available
 yet, `get-unit-info`. In the future enhancements should be made to juju core to

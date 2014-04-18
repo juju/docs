@@ -145,8 +145,8 @@ specification.</p>
 <p>All charms share some of the same characteristics. They all have a yaml file
 called <code>metadata.yaml</code>, and when deployed, juju will always attempt to progress
 the state of the service from install to config to started. Because of this, all charms can be tested using the following algorithm:</p>
-<pre><code>deploy charm  
- while state != started       
+<pre><code>deploy charm
+ while state != started
  if timeout is reached, FAIL
  if state == install_error, config_error, or start_error, FAIL
  if state == started, PASS
@@ -218,12 +218,127 @@ BEGIN filename</code>, where filename is a logical name unique to this run of th
 test, and then the file ended with <code>INFO: END filename</code>.</p>
 <h3 id="example-tests">Example Tests</h3>
 <h4 id="deploy-requirements-and-poll">Deploy requirements and Poll</h4>
-<p>The test below [*] deploys mediawiki with mysql and memcached related to it, and then tests to make sure it returns a page via http with "<title>" somewhere in the content.:</p>
-<p>TODO: PASTE IN FROM HTML</p>
+<p>The test below [*] deploys mediawiki with mysql and memcached related to it, and then tests to make sure it returns a page via http with <code>&lt;title&gt;</code> somewhere in the content.:</p>
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+<span class="nb">set</span> -e
+
+teardown<span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;$datadir&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">        if</span> <span class="o">[</span> -f <span class="nv">$datadir</span>/passed <span class="o">]</span>; <span class="k">then</span>
+<span class="k">            </span>rm -r <span class="nv">$datadir</span>
+        <span class="k">else</span>
+<span class="k">            </span><span class="nb">echo </span>INFO: <span class="nv">$datadir</span> preserved
+            <span class="k">if</span> <span class="o">[</span> -f <span class="nv">$datadir</span>/wget.log <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">                </span><span class="nb">echo </span>INFO: BEGIN wget.log
+                cat <span class="nv">$datadir</span>/wget.log
+                <span class="nb">echo </span>INFO: END wget.log
+            <span class="k">fi</span>
+<span class="k">        fi</span>
+<span class="k">    fi</span>
+<span class="o">}</span>
+<span class="nb">trap </span>teardown EXIT
+
+
+juju deploy mediawiki
+juju deploy mysql
+juju deploy memcached
+juju add-relation mediawiki:db mysql:db
+juju add-relation memcached mediawiki
+juju expose mediawiki
+
+<span class="k">for </span>try in <span class="sb">`</span>seq 1 600<span class="sb">`</span> ; <span class="k">do</span>
+<span class="k">    </span><span class="nv">host</span><span class="o">=</span><span class="sb">`</span>juju status | tests/get-unit-info mediawiki public-address<span class="sb">`</span>
+    <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$host&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">        </span>sleep 1
+    <span class="k">else</span>
+<span class="k">        </span><span class="nb">break</span>
+<span class="nb">    </span><span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$host&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo </span>FAIL: status timed out
+    <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="nv">datadir</span><span class="o">=</span><span class="sb">`</span>mktemp -d <span class="k">${</span><span class="nv">TMPDIR</span><span class="k">:-</span><span class="p">/tmp</span><span class="k">}</span>/wget.test.XXXXXXX<span class="sb">`</span>
+<span class="nb">echo </span>INFO: <span class="nv">datadir</span><span class="o">=</span><span class="nv">$datadir</span>
+
+wget --tries<span class="o">=</span>100 --timeout<span class="o">=</span>6 http://<span class="nv">$host</span>/ -O - -a <span class="nv">$datadir</span>/wget.log | grep -q <span class="s1">&#39;&lt;title&gt;&#39;</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$try</span> -eq 600 <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo </span>FAIL: Timed out waiting.
+    <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+touch <span class="nv">$datadir</span>/passed
+
+<span class="nb">trap</span> - EXIT
+teardown
+
+<span class="nb">echo </span>PASS
+<span class="nb">exit </span>0
+</pre></div>
+
+
 <h3 id="test-config-settings">Test config settings</h3>
 <p>The following example tests checks to see if the default_port change the admin
-asks for is actually respected post-deploy:
-TODO PASTE IN HTML</p>
+asks for is actually respected post-deploy:</p>
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;`which nc`&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;SKIP: cannot run tests without netcat&quot;</span>
+    <span class="nb">exit </span>100
+<span class="k">fi</span>
+
+<span class="nb">set</span> -e
+
+juju deploy mongodb
+juju expose mongodb
+
+<span class="k">for </span>try in <span class="sb">`</span>seq 1 600<span class="sb">`</span> ; <span class="k">do</span>
+<span class="k">    </span><span class="nv">host</span><span class="o">=</span><span class="sb">`</span>juju status | tests/get-unit-info mongodb public-address<span class="sb">`</span>
+    <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$host&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">        </span>sleep 1
+    <span class="k">else</span>
+<span class="k">        </span><span class="nb">break</span>
+<span class="nb">    </span><span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$host&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo </span>FAIL: status timed out
+    <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+assert_is_listening<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">local </span><span class="nv">port</span><span class="o">=</span><span class="nv">$1</span>
+    <span class="nv">listening</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="k">for </span>try in <span class="sb">`</span>seq 1 10<span class="sb">`</span> ; <span class="k">do</span>
+<span class="k">        if</span> ! nc <span class="nv">$host</span> <span class="nv">$port</span> &lt; /dev/null ; <span class="k">then</span>
+<span class="k">            continue</span>
+<span class="k">        fi</span>
+<span class="k">        </span><span class="nv">listening</span><span class="o">=</span><span class="s2">&quot;$port&quot;</span>
+        <span class="nb">break</span>
+<span class="nb">    </span><span class="k">done</span>
+
+<span class="k">    if</span> <span class="o">[</span> -z <span class="s2">&quot;$listening&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">       </span><span class="nb">echo</span> <span class="s2">&quot;FAIL: not listening on port $port after 10 retries&quot;</span>
+       <span class="k">return </span>1
+    <span class="k">else</span>
+<span class="k">        </span><span class="nb">echo</span> <span class="s2">&quot;PASS: listening on port $listening&quot;</span>
+        <span class="k">return </span>0
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+assert_is_listening 27017
+
+juju <span class="nb">set </span>mongodb <span class="nv">default_port</span><span class="o">=</span>55555
+assert_is_listening 55555
+<span class="nb">echo </span>PASS: config change tests passed.
+<span class="nb">exit </span>0
+</pre></div>
+
+
 <p>get-unit-info The example tests script uses a tool that is not widely available
 yet, <code>get-unit-info</code>. In the future enhancements should be made to juju core to
 allow such things to be made into plugins. Until then, it can be included in
