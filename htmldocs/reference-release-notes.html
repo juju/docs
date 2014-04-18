@@ -135,480 +135,586 @@
 <p>This section details all the available release notes for the stable series of
 <code>juju-core</code>.</p>
 <p>The versions covered here are:</p>
-<p><strong>juju-core 1.18.1</strong></p>
-<p>A new stable release of Juju, juju-core 1.18.1, is now available. This release
-replaces 1.18.0.</p>
-<h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.18.1 is available in trusty and backported to earlier series in the
-following PPA <a href="https://launchpad.net/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<p>If you use the local provider, be sure to install the juju-local package if it
-is not already installed. Juju's local requirements have changed. Upgrading
-local juju environments without the juju-local package is not advised.</p>
-<h4 id="notable">Notable</h4>
+<p><details id="1.18.1"><summary><strong>juju-core 1.18.1</strong></summary>
+<p>A new stable release of Juju, juju-core 1.18.1, is now available.
+This release replaces 1.18.0.</p>
+<h4>Getting Juju</h4>
+<p>juju-core 1.18.1 is available in trusty and backported to earlier
+series in the following PPA <a href="https://launchpad.net/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable</a></p><p>If">https://launchpad.net/~juju/+archive/stable</a></p><p>If</a> you use the local provider, be sure to install the juju-local package
+if it is not already installed. Juju's local requirements have changed.
+Upgrading local juju environments without the juju-local package is not
+advised.</p>
+<h4>Notable</h4>
+<ul><li>Working with Ubuntu 12.04 Precise and 14.04 Trusty</li></ul>
+<h4>Resolved issues</h4>
 <ul>
-<li>Working with Ubuntu 12.04 Precise and 14.04 Trusty</li>
+<li>Juju upgrade-juju 1.16.6 -&gt; 1.18 (tip) fails
+Lp 1299802</li>
+<li>Peer relation disappears during upgrade of juju
+Lp 303697</li>
+<li>The public-address changed to internal bridge after juju-upgrade
+Lp 1303735</li>
+<li>juju cannot downgrade to same major.minor version with earlier
+patch number
+Lp 1306296</li>
+<li>Juju 1.18.0, can not deploy local charms without series
+Lp 1303880</li>
+<li>Juju scp no longer allows multiple extra arguments to pass through
+Lp 1306208</li>
+<li>Juju tests fail with release version number 1.18.0
+Lp 1302313</li>
+<li>Charm store tests do not pass with juju-mongodb
+Lp 1304770</li>
 </ul>
-<h4 id="resolved-issues">Resolved issues</h4>
-<ul>
-<li>Juju upgrade-juju 1.16.6 -&gt; 1.18 (tip) fails Lp 1299802</li>
-<li>Peer relation disappears during upgrade of juju Lp 303697</li>
-<li>The public-address changed to internal bridge after juju-upgrade Lp 1303735</li>
-<li>juju cannot downgrade to same major.minor version with earlier patch number Lp 1306296</li>
-<li>Juju 1.18.0, can not deploy local charms without series Lp 1303880</li>
-<li>Juju scp no longer allows multiple extra arguments to pass through Lp 1306208</li>
-<li>Juju tests fail with release version number 1.18.0 Lp 1302313</li>
-<li>Charm store tests do not pass with juju-mongodb Lp 1304770</li>
-</ul>
-<h4 id="working-with-ubuntu-12.04-precise-and-14.04-trusty">Working with Ubuntu 12.04 Precise and 14.04 Trusty</h4>
-<p>Juju 1.18.x is the first Juju that is aware of two Ubuntu LTS releases. In the
-past, when bootstrapping the state-server or deploying a charm, Juju selected
-Ubuntu 12.04 Precise when the serie was not specified. If you care about the
-version of Ubuntu used, then you want to specify the series</p>
-<p>You can specify the series of the state-server and set the default charm series
-by adding "default-series" to environments.yaml. Setting "default-series" is the
-only way to specify the series of the state-server (bootstrap node). For
-example, if your local machine is Ubuntu 14.04 trusty, but your organisation
-only supports Ubuntu 12.04 Precise in the cloud, you can add this to your
-environment in environments.yaml:</p>
-<pre><code>    default-series: precise
-</code></pre>
-<p>There are many ways to specify the series to deploy with a charm. In most cases
-you don't need to. When you don't specify a series, Juju checks the
-environment's "default-series", and if that isn't set, Juju asks the charm store to select the best series to deploy with the charm. The series of the state-server does not restrict the series of the charm. You can use the best series for a charm when deploying a service.</p>
-<p>When working with local charms, Juju cannot fall back to the charm store, it
-falls back to the environment's "default-series". You must specify the series in the environment or when deploying the charm. If your environment is running, you can add "default-series" like so: <code>juju set-environment default-series=precise</code></p>
-<p>These commands choose Ubuntu 12.04 Precise when "default-series" is set to
-"precise" in the environment:</p>
-<pre><code>    juju deploy cs:precise/mysql
-    juju deploy precise/mysql
-    juju deploy mysql
-    juju deploy local:precise/mysql
-    juju deploy loca:mysql
-</code></pre>
-<p>juju-core 1.18.0</p>
-<p>A new stable release of Juju, juju-core 1.18.0, is now available. This release
-replaces 1.16.6.</p>
+<h4>Working with Ubuntu 12.04 Precise and 14.04 Trusty</h4>
+<p>Juju 1.18.x is the first Juju that is aware of two Ubuntu LTS releases.
+In the past, when bootstrapping the state-server or deploying a charm,
+Juju selected Ubuntu 12.04 Precise when the serie was not specified. If
+you care about the version of Ubuntu used, then you want to specify the
+series</p><p>You can specify the series of the state-server and set the default charm
+series by adding "default-series" to environments.yaml. Setting
+"default-series" is the only way to specify the series of the
+state-server (bootstrap node). For example, if your local machine is
+Ubuntu 14.04 trusty, but your organisation only supports Ubuntu 12.04
+Precise in the cloud, you can add this to your environment in
+environments.yaml:</p>
+<pre class="prettyprint">
+default-series: precise
+</pre>
+<p>
+There are many ways to specify the series to deploy with a charm. In
+most cases you don't need to. When you don't specify a series, Juju
+checks the environment's "default-series", and if that isn't set, Juju
+asks the charm store to select the best series to deploy with the charm.
+The series of the state-server does not restrict the series of the
+charm. You can use the best series for a charm when deploying a service.</p>
+<p>When working with local charms, Juju cannot fall back to the charm
+store, it falls back to the environment's "default-series". You must
+specify the series in the environment or when deploying the charm. If
+your environment is running, you can add "default-series" like so:</p>
+<pre>juju set-environment default-series=precise</pre>
+<p>These commands choose Ubuntu 12.04 Precise when "default-series" is set
+to "precise" in the environment:</p>
+<pre class="prettyprint">
+juju deploy cs:precise/mysql
+juju deploy precise/mysql
+juju deploy mysql
+juju deploy local:precise/mysql
+juju deploy loca:mysql
+</pre></p>
+<p></details>
+<details id="1.18.0"><summary>juju-core 1.18.0</summary>
+<p>A new stable release of Juju, juju-core 1.18.0, is now available.
+This release replaces 1.16.6.</p>
 <h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.18.0 is available in trusty and backported to earlier series in the
-following PPA <a href="https://launchpad.net/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<p>If you use the local provider, be sure to install the juju-local package if it
-is not already installed. Juju’s local requirements have changed. Upgrading
-local juju environments without the juju-local package is not advised.</p>
-<h4 id="new-and-notable">New and Notable</h4>
+<p>juju-core 1.18.0 is available in trusty and backported to earlier
+series in the following PPA
+  <a href="https://launchpad.net/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable</a></p><p>If">https://launchpad.net/~juju/+archive/stable</a></p><p>If</a> you use the local provider, be sure to install the juju-local package
+if it is not already installed. Juju’s local requirements have changed.
+Upgrading local juju environments without the juju-local package is not
+advised.</p>
+<h4 id="new-and-notable">New and Notable</h4></p>
 <ul>
 <li>Support for proxies</li>
-<li>Managing authorised ssh keys</li>
-<li>Backup and restore the state-server (bootstrap node)</li>
-<li>Run arbitrary commands on some or all instances</li>
-<li>Use metadata generate-tools instead of sync-tools to generated simple streams metadata</li>
+<li>Managing authorised ssh keys</li><li>Backup and restore the state-server (bootstrap node)</li><li>Run arbitrary commands on some or all instances</li>
+<li>Use metadata generate-tools instead of sync-tools to generated
+simple streams metadata</li>
 <li>The bootstrap --source option was replaced with --metadata-source</li>
 <li>Timeouts for bootstrap are configurable for environments</li>
 <li>Bootstrapping the local provider for lxc no longer requires sudo</li>
 <li>Juju local provider can use clone for faster LXC</li>
 <li>Juju now supports juju-mongodb, a mongodb tuned for juju’s needs</li>
-<li>The "null" provider is now called "manual" in the juju config.</li>
+<li>The &quot;null&quot; provider is now called &quot;manual&quot; in the juju config.</li>
 <li>The destroy-environment command requires the environment name</li>
 <li>Juju unset-env</li>
 <li>Juju retry-provisioning</li>
 <li>Bash completions include flags, machines, services, and units</li>
 </ul>
+
 <h4 id="resolved-issues">Resolved issues</h4>
+
 <ul>
-<li>--upload-tools failure preventing bootstrap completing. Lp 1239558</li>
-<li>Invalid SSL certificate after rebootstrapping. Lp 1130255</li>
-<li>Killing instance outside of juju, doesn't get noticed. Lp 1205451</li>
-<li>Juju bootstrap fails with openstack provider (failed unmarshaling the response body) Lp 1209003</li>
-<li>Manual provider bootstrap fails with error about sftp scheme. Lp 1235717</li>
-<li>Manual provider doesn't install mongo from the cloud archive. Lp 1238934</li>
-<li>Manual provider uses reverse-lookup result instead of "bootstrap-host" Lp 1246905</li>
-<li>Manual provider requires that machines have DNS records. Lp 1254629</li>
-<li>Juju broken with OpenStack Havana for tenants with multiple networks. Lp 1241674</li>
-<li>Juju destroy-environment no longer returns error when no environment exists Lp 1225238</li>
-<li>Local provider isn't usable after an old environment has been destroyed Lp 1238541</li>
-<li>Manual provider client cache prevents reuse of env by name Lp 1238948</li>
-<li>destroy-environment no longer removes .jenv Lp 1246343</li>
-<li>Manual bootstrap / provisioning does not add the ubuntu user Lp 1261343</li>
-<li>Concurrent charm deployments corrupts deployments Lp 1067979</li>
-<li>Juju status reports 'missing' instance-state when not run as root Lp 1237259</li>
-<li>Juju uses tools for the wrong architecture when unable to find correct tools Lp 1227722</li>
-<li>Call to relation-get failing with 'permission denied' Lp 1239681</li>
-</ul>
+<li>--upload-tools failure preventing bootstrap completing.
+Lp 1239558</li><li>Invalid SSL certificate after rebootstrapping.
+Lp 1130255</li><li>Killing instance outside of juju, doesn&#39;t get noticed.
+Lp 1205451</li><li>Juju bootstrap fails with openstack provider (failed unmarshaling the
+response body)
+Lp 1209003</li><li>Manual provider bootstrap fails with error about sftp scheme.
+Lp 1235717</li><li>Manual provider doesn&#39;t install mongo from the cloud archive.
+Lp 1238934</li><li>Manual provider uses reverse-lookup result instead of &quot;bootstrap-host&quot;
+Lp 1246905</li><li>Manual provider requires that machines have DNS records.
+Lp 1254629</li><li>Juju broken with OpenStack Havana for tenants with multiple networks.
+Lp 1241674</li><li>Juju destroy-environment no longer returns error when no environment
+exists
+Lp 1225238</li><li>Local provider isn&#39;t usable after an old environment has been
+destroyed
+Lp 1238541</li><li>Manual provider client cache prevents reuse of env by name
+Lp 1238948</li><li>destroy-environment no longer removes .jenv
+Lp 1246343</li><li>Manual bootstrap / provisioning does not add the ubuntu user
+Lp 1261343</li><li>Concurrent charm deployments corrupts deployments
+Lp 1067979</li><li>Juju status reports &#39;missing&#39; instance-state when not run as root
+Lp 1237259</li><li>Juju uses tools for the wrong architecture when unable to find correct
+tools
+Lp 1227722</li><li>Call to relation-get failing with &#39;permission denied&#39;
+Lp 1239681</li></ul>
+
 <h3 id="support-for-proxies">Support for proxies</h3>
-<p>Proxies can now be configured for the providers in the environments.yaml file,
-or added to an existing environment using "juju set-env" The configuration
-options are:</p>
-<pre><code>- http-proxy
-- https-proxy
-- ftp-proxy
-- no-proxy
-</code></pre>
-<p>The protocol-specific options accept a URL. The "no-proxy" option accepts a
-comma-separated list of host names or addresses.</p>
+
+<p>Proxies can now be configured for the providers in the environments.yaml
+file, or added to an existing environment using &quot;juju set-env&quot; The
+configuration options are:</p>
+
+<div class="highlight"><pre><span class="o">-</span> <span class="n">http</span><span class="o">-</span><span class="n">proxy</span>
+<span class="o">-</span> <span class="n">https</span><span class="o">-</span><span class="n">proxy</span>
+<span class="o">-</span> <span class="n">ftp</span><span class="o">-</span><span class="n">proxy</span>
+<span class="o">-</span> <span class="n">no</span><span class="o">-</span><span class="n">proxy</span>
+</pre></div>
+
+<p>The protocol-specific options accept a URL. The &quot;no-proxy&quot; option
+accepts a comma-separated list of host names or addresses.</p>
+
 <p>The proxy options are exported in all hook execution contexts, and also
-available in the shell through "juju ssh" or "juju run".</p>
-<p>There are three additional proxy options specific for apt. These are set to be
-the same as the non-apt proxy values, but can be overridden independently:</p>
-<pre><code>- apt-http-proxy
-- apt-https-proxy
-- apt-ftp-proxy
-</code></pre>
-<p>For example, with a squid-deb-proxy running on a laptop, you can specify the
-apt-http-proxy to use it for the containers by specifying the host machine’s
-network-bridge:</p>
-<pre><code>apt-http-proxy: http://10.0.3.1:8000
-</code></pre>
+available in the shell through &quot;juju ssh&quot; or &quot;juju run&quot;.</p>
+
+<p>There are three additional proxy options specific for apt. These are set
+to be the same as the non-apt proxy values, but can be overridden
+independently:</p>
+
+<div class="highlight"><pre><span class="o">-</span> <span class="n">apt</span><span class="o">-</span><span class="n">http</span><span class="o">-</span><span class="n">proxy</span>
+<span class="o">-</span> <span class="n">apt</span><span class="o">-</span><span class="n">https</span><span class="o">-</span><span class="n">proxy</span>
+<span class="o">-</span> <span class="n">apt</span><span class="o">-</span><span class="n">ftp</span><span class="o">-</span><span class="n">proxy</span>
+</pre>
+
+<p>For example, with a squid-deb-proxy running on a laptop, you can specify
+the apt-http-proxy to use it for the containers by specifying the host
+machine’s network-bridge:</p>
+<pre class="prettyprint">apt-http-proxy: http://10.0.3.1:8000</pre>
+
 <h3 id="managing-authorised-ssh-keys">Managing authorised ssh keys</h3>
-<p>Juju's ssh key management allows people other than the person who bootstrapped
-an environment to ssh into Juju machines/nodes. The authorised-keys command
-accepts 4 subcommands:</p>
+<p>Juju&#39;s ssh key management allows people other than the person who
+bootstrapped an environment to ssh into Juju machines/nodes.
+The authorised-keys command accepts 4 subcommands:</p>
 <ul>
-<li>add - add ssh keys for a Juju user</li>
-<li>delete - delete ssh keys for a Juju user</li>
-<li>list - list ssh keys for a Juju user</li>
-<li>import - import Launchpad or Github ssh keys</li>
-</ul>
+<li>add - add ssh keys for a Juju user</li><li>delete - delete ssh keys for a Juju user</li><li>list - list ssh keys for a Juju user</li><li>import - import Launchpad or Github ssh keys</li></ul>
 <p><code>import</code> can be used in clouds with open networks to pull ssh keys from
-Launchpad or Github. For example:</p>
-<pre><code>juju authorised-keys import lp:wallyworld
-</code></pre>
-<p><code>add</code> can be used to import the provided key, which is necessary for clouds that do not have internet access.</p>
-<p>Use the key fingerprint or comment to specify which key to delete. You can find
-the fingerprint for a key using <code>ssh-keygen</code>.</p>
-<p>Juju cannot not manage existing keys on manually provisioned machines. Juju will prepend "Juju:" to the comments of all keys that it adds to a machine. These are the only keys it can "list" or "delete".</p>
-<p>Note that keys are global and grant access to all machines. When a key is added, it is propagated to all machines in the environment. When a key is deleted, it is removed from all machines. You can learn more details by running <code>juju authorised-keys --help</code>.</p>
+Launchpad or Github. For example:</p><div class="highlight"><pre><span class="n">juju</span> <span class="n">authorised</span><span class="o">-</span><span class="n">keys</span> <span class="n">import</span> <span class="n">lp</span><span class="o">:</span><span class="n">wallyworld</span>
+</pre></div><p><code>add</code> can be used to import the provided key, which is necessary for
+clouds that do not have internet access.</p><p>Use the key fingerprint or comment to specify which key to delete.
+You can find the fingerprint for a key using <code>ssh-keygen</code>.</p><p>Juju cannot not manage existing keys on manually provisioned machines.
+Juju will prepend &quot;Juju:&quot; to the comments of all keys that it adds to a
+machine. These are the only keys it can &quot;list&quot; or &quot;delete&quot;.</p><p>Note that keys are global and grant access to all machines. When a key
+is added, it is propagated to all machines in the environment. When a
+key is deleted, it is removed from all machines. You can learn more
+details by running &quot;juju authorised-keys --help&quot;.</p>
 <h3 id="backup-and-restore-state-server-(bootstrap-node)">Backup and restore state-server (bootstrap node)</h3>
-<p>Juju provides backup and restore commands to recover the juju state-server in
-case or failure. The juju backup command creates a tarball of the state-server’s configuration, keys, and environment data.</p>
-<pre><code>juju switch my-env
+<p>Juju provides backup and restore commands to recover the juju
+state-server in case or failure. The juju backup command creates a
+tarball of the state-server’s configuration, keys, and environment data.</p>
+<pre class="prettyprint">
+juju switch my-env
 juju backup
-</code></pre>
-<p>The juju restore command creates a new juju bootstrap instance using a backup
-file. It updates the existing instances in the environment to recognise the new
-state-server. The command ensures the state-server is not running before it
-creates the replacement. As with the normal bootstrap command, you can pass
---constraints to setup the new state-server.</p>
-<pre><code>juju switch my-env
+</pre>
+<p>The juju restore command creates a new juju bootstrap instance using a
+backup file. It updates the existing instances in the environment to
+recognise the new state-server. The command ensures the state-server is
+not running before it creates the replacement. As with the normal
+bootstrap command, you can pass --constraints to setup the new
+state-server.</p>
+<pre class="prettyprint">
+juju switch my-env
 juju restore juju-backup-2014-02-21.tgz
-</code></pre>
-<p>You can learn more details by running <code>juju restore --help</code>.</p>
+</pre>
+<p>You can learn more details by running &quot;juju restore --help&quot;.</p>
 <h3 id="run-arbitrary-commands-on-some-or-all-instances">Run arbitrary commands on some or all instances</h3>
-<p>The run command can be used by devops or scripts to inspect or do work on
-services, units, or machines. Commands for services or units are executed in a
-hook context. Charm authors can use the run command to develop and debug scripts
-that run in hooks.</p>
-<p>For example, to run <code>uname</code> on every instance:</p>
-<pre><code>juju run "uname -a" --all
-</code></pre>
+<p>The run command can be used by devops or scripts to inspect or do
+work on services, units, or machines. Commands for services or units
+are executed in a hook context. Charm authors can use the run
+command to develop and debug scripts that run in hooks.</p><p>For example, to run <code>uname</code> on every instance:</p>
+<pre class="prettyprint">
+juju run "uname -a" --all
+</pre>
 <p>Or to run uptime on some instances:</p>
-<pre><code>juju run "uptime" --machine=2
+<pre class="prettyprint">
+juju run "uptime" --machine=2
 juju run "uptime" --service=mysql
-</code></pre>
+</pre>
 <p>You can learn more details by running <code>juju run --help</code>.</p>
-<h3 id="use-metadata-generate-tools-instead-of-sync-tools-to-generate-simplestreams">Use metadata generate-tools instead of sync-tools to generate simplestreams</h3>
-<p>metadata</p>
-<p>The <code>sync-tools</code> command previously generated simple streams metadata for local
-juju tools when provided with the --destination option. This is no longer the
-case. You can create the simple streams metadata for tools thusly:</p>
-<pre><code>mkdir -p $MY_DIR/tools/streams/v1
+
+<h3 id="use-metadata-generate-tools">Use metadata generate-tools instead of sync-tools to generate simplestreams metadata</h3>
+<p>The <code>sync-tools</code> command previously generated simple streams metadata for
+local juju tools when provided with the --destination option. This is no
+longer the case. You can create the simple streams metadata for tools
+thusly:
+
+<pre class="prettyprint">
+mkdir -p $MY_DIR/tools/streams/v1
 mkdir -p $MY_DIR/tools/releases
 cp $PUBLIC_TOOLS/*tgz $MY_DIR/tools/releases
 juju metadata generate-tools -d $MY_DIR
-</code></pre>
-<p>Upload the tools directory to your private cloud. Set the tools-metadata-url
-option in the environment’s yaml to point to the tools URL. For more details,
-run "juju metadata --help".</p>
-<p>The bootstrap --source option was replaced with --metadata-source</p>
-<p>The juju bootstrap command previously accepted the --source option which was the local path to a directory of juju tools. The bootstrap command now has a
---metadata-source option that accepts the local path to simple streams metadata
-and tools. If your workflow previously was to download the juju tools to a local directory, then bootstrap with the --source option to upload the tools to your environment, you need to run "juju metadata generate-tools" per the previous section. For more details, run "juju bootstrap --help".</p>
+</pre>
+
+<p>Upload the tools directory to your private cloud. Set the
+tools-metadata-url option in the environment’s yaml to point to the
+tools URL. For more details, run &quot;juju metadata --help&quot;.</p><p>The bootstrap --source option was replaced with --metadata-source</p><p>The juju bootstrap command previously accepted the --source option which
+was the local path to a directory of juju tools. The bootstrap command
+now has a --metadata-source option that accepts the local path to simple
+streams metadata and tools. If your workflow previously was to download
+the juju tools to a local directory, then bootstrap with the --source
+option to upload the tools to your environment, you need to run &quot;juju
+metadata generate-tools&quot; per the previous section. For more details,
+run &quot;juju bootstrap --help&quot;.</p>
 <h3 id="timeouts-for-bootstrap-are-configurable-for-environments.">Timeouts for bootstrap are configurable for environments.</h3>
-<p>Environments that need more time to provision an instance can configure 3
-options the environments.yaml. MAAS environments often need to set bootstrap-
-timeout to 1800.</p>
+<p>Environments that need more time to provision an instance can configure
+3 options the environments.yaml. MAAS environments often need to set
+bootstrap-timeout to 1800.</p>
 <ul>
-<li>bootstrap-timeout (default: 600s)</li>
-<li>bootstrap-retry-delay (default: 5s)</li>
-<li>bootstrap-addresses-delay (default: 10s)</li>
-</ul>
+<li>bootstrap-timeout (default: 600s)</li><li>bootstrap-retry-delay (default: 5s)</li><li>bootstrap-addresses-delay (default: 10s)</li></ul>
+
 <h3 id="bootstrapping-the-local-provider-for-lxc-no-longer-requires-sudo">Bootstrapping the local-provider for lxc no longer requires sudo</h3>
-<p>The Juju bootstrap command cannot be run as root. Bootstrap will prompt for a
-password to use sudo as needed to set up the environment. This addresses several issues that arose because the owner and permissions of the local environment files were different from the owner of the process. The juju status command for example now reports the status of the machines without the need to run it with sudo.</p>
-<p>If you have used the local provider before, you may need to manually clean up
-some files that are still owned by root. The environment’s jenv file commonly
-needs to be removed. If your local environment is named "local" then there may
-be a local.jenv owned by root with the JUJU_HOME directory (~/.juju). After the
-local environment is destroyed, you can remove the file like this</p>
-<pre><code>$ sudo rm ~/.juju/environments/local.jenv
-</code></pre>
-<p>Juju local provider can use clone for faster LXC</p>
-<p>The local provider can use lxc-clone to create the containers used as machines.
-This feature is controlled by the "lxc-clone" option. The default is "true" for
-Trusty and above, and "false" for earlier Ubuntu releases. You can try to use
-lxc-clone on earlier releases, but it is not a supported. It may well work. You
-can enable lxc-clone in environments.yaml thusly:</p>
-<pre><code>lxc-clone: true
-</code></pre>
-<p>The local provider is btrfs-aware. If your LXC directory is on a btrfs
-filesystem, the clones use snapshots and are much faster to create and take up
-much less space. There is also support for using aufs as a backing-store for the
-LXC clones, but there are some situations where aufs doesn’t entirely behave as
-intuitively as one might expect, so this must be turned on explicitly.</p>
-<pre><code>lxc-clone-aufs: true
-</code></pre>
-<p>When using clone, the first machine to be created will create a "template"
-machine that is used as the basis for the clones. This will be called "juju--
-template", so for a precise image, the name is "juju-precise-template". Do not
-modify or start this image while a local provider environment is running because you cannot clone a running lxc machine.</p>
+<p>The Juju bootstrap command cannot be run as root. Bootstrap will prompt
+for a password to use sudo as needed to set up the environment. This
+addresses several issues that arose because the owner and permissions of
+the local environment files were different from the owner of the
+process. The juju status command for example now reports the status of
+the machines without the need to run it with sudo.</p><p>If you have used the local provider before, you may need to manually
+clean up some files that are still owned by root. The environment’s jenv
+file commonly needs to be removed. If your local environment is named
+&quot;local&quot; then there may be a local.jenv owned by root with the JUJU_HOME
+directory (~/.juju). After the local environment is destroyed, you can
+remove the file like this</p><div class="highlight"><pre><span class="err">$</span> <span class="n">sudo</span> <span class="n">rm</span> <span class="o">~/</span><span class="p">.</span><span class="n">juju</span><span class="o">/</span><span class="n">environments</span><span class="o">/</span><span class="n">local</span><span class="p">.</span><span class="n">jenv</span>
+</pre></div><p>Juju local provider can use clone for faster LXC</p><p>The local provider can use lxc-clone to create the containers used as
+machines. This feature is controlled by the &quot;lxc-clone&quot; option. The
+default is &quot;true&quot; for Trusty and above, and &quot;false&quot; for earlier Ubuntu
+releases. You can try to use lxc-clone on earlier releases, but it is
+not a supported. It may well work. You can enable lxc-clone in
+environments.yaml thusly:</p><div class="highlight"><pre><span class="n">lxc</span><span class="o">-</span><span class="n">clone</span><span class="o">:</span> <span class="nb">true</span>
+</pre></div><p>The local provider is btrfs-aware. If your LXC directory is on a btrfs
+filesystem, the clones use snapshots and are much faster to create and
+take up much less space. There is also support for using aufs as a
+backing-store for the LXC clones, but there are some situations where
+aufs doesn’t entirely behave as intuitively as one might expect, so this
+must be turned on explicitly.</p>
+<div class="highlight"><pre><span class="n">lxc</span><span class="o">-</span><span class="n">clone</span><span class="o">-</span><span class="n">aufs</span><span class="o">:</span> <span class="nb">true</span>
+</pre></div><p>When using clone, the first machine to be created will create a
+&quot;template&quot; machine that is used as the basis for the clones. This will
+be called `juju-[series]-template`, so for a precise image, the name is
+&quot;juju-precise-template&quot;. Do not modify or start this image while a
+local provider environment is running because you cannot clone a running
+lxc machine.</p>
 <h3 id="juju-now-supports-juju-mongodb,-a-mongodb-tuned-for-juju’s-needs">Juju now supports juju-mongodb, a mongodb tuned for juju’s needs</h3>
-<p>The Juju state-server (bootstrap node) prefers juju-mongodb. The package is
-available in Ubuntu Trusty, the new db will be used when a Trusty environment is bootstrapped. The juju-local package on Trusty will install juju-mongodb if it is not already installed. Upgrades of the juju-local package will continue to use mongodb-server to preserve continuity with existing local environments.</p>
+<p>The Juju state-server (bootstrap node) prefers juju-mongodb. The package
+is available in Ubuntu Trusty, the new db will be used when a Trusty
+environment is bootstrapped. The juju-local package on Trusty will
+install juju-mongodb if it is not already installed. Upgrades of the
+juju-local package will continue to use mongodb-server to preserve
+continuity with existing local environments.</p>
 <h3 id="destroying-environments">Destroying environments</h3>
-<p>The destroy-environment command requires you to specify the environment name:</p>
-<pre><code>$ juju destroy-environment my-press-site
-</code></pre>
-<p>Previously, destroy-environment would destroy the current environment, which
-might not be the one you want to destroy.</p>
+<p>The destroy-environment command requires you to specify the environment
+name:</p><div class="highlight"><pre><span class="err">$</span> <span class="n">juju</span> <span class="n">destroy</span><span class="o">-</span><span class="n">environment</span> <span class="n">my</span><span class="o">-</span><span class="n">press</span><span class="o">-</span><span class="n">site</span>
+</pre></div><p>Previously, destroy-environment would destroy the current environment,
+which might not be the one you want to destroy.</p>
 <h3 id="juju-unset-env">Juju unset-env</h3>
 <p>The unset-env command allows you to reset one or more the environment
-configuration attributes to its default value in a running Juju instance.
-Attributes without defaults are removed. Attempting to remove a required
-attribute with no default will result in an error. Multiple attributes may be
-removed at once; keys are space-separated.</p>
-<pre><code>$ juju unset-env
-</code></pre>
+configuration attributes to its default value in a running Juju
+instance. Attributes without defaults are removed. Attempting to
+remove a required attribute with no default will result in an error.
+Multiple attributes may be removed at once; keys are space-separated.</p><div class="highlight"><pre><span class="err">$</span> <span class="n">juju</span> <span class="n">unset</span><span class="o">-</span><span class="n">env</span>
+</pre></div>
 <h3 id="juju-retry-provisioning">Juju retry-provisioning</h3>
-<p>You can use the retry-provisioning command in cases where deploying services,
-adding units, or adding machines fails. The command allows you to specify
-machines which should be retried to resolve errors reported in status.</p>
-<p>For example, after you deployed 100 units and machines, status reports that
-machines 3, 27 and 57 could not be provisioned because of a rate limit exceeded
-error. You can ask juju to retry:</p>
-<pre><code>$ juju retry-provisioning 3 27 5
-</code></pre>
+<p>You can use the retry-provisioning command in cases where deploying
+services, adding units, or adding machines fails. The command allows you
+to specify machines which should be retried to resolve errors reported
+in status.</p><p>For example, after you deployed 100 units and machines, status reports
+that machines 3, 27 and 57 could not be provisioned because of a rate
+limit exceeded error. You can ask juju to retry:</p><div class="highlight"><pre><span class="err">$</span> <span class="n">juju</span> <span class="n">retry</span><span class="o">-</span><span class="n">provisioning</span> <span class="mi">3</span> <span class="mi">27</span> <span class="mi">5</span>
+</pre></div>
 <h3 id="bash-completions-include-flags,-machines,-services,-and-units">Bash completions include flags, machines, services, and units</h3>
-<p>Bash command line completions are improved. Pressing the TAB key will complete
-juju commands and their flags. Completion will also look up the machines,
-services, and units in an environment and suggest them.</p>
-<p>We encourage everyone to subscribe the mailing list at <a href="mailto:juju-dev@lists.canonical.com">juju-
-<a href="mailto:dev@lists.canonical.com">dev@lists.canonical.com</a></a>, or join us on</p>
-<h1 id="juju-dev-on-freenode.">juju-dev on freenode.</h1>
-<p>juju-core 1.16.6</p>
-<p>A new stable release of Juju, juju-core 1.16.6, is now available. This release
-replaces 1.16.5.</p>
-<h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.16.6 is available in trusty and backported to earlier series in the
-following PPA <a href="https://launchpad.ne
-t/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<h4 id="resolved-issues">Resolved issues</h4>
+<p>Bash command line completions are improved. Pressing the TAB key will
+complete juju commands and their flags. Completion will also look up the
+machines, services, and units in an environment and suggest them.</p><p>We encourage everyone to subscribe the mailing list at
+<a href="mailto:juju-dev@lists.canonical.com">juju-dev@lists.canonical.com</a>, or join us on #juju-dev on freenode.</p>
+</details>
+
+<details id="1.16.6"><summary>juju-core 1.16.6</summary>
+<p>A new stable release of Juju, juju-core 1.16.6, is now available.
+This release replaces 1.16.5.</p>
+<h4>Getting Juju</h4>
+<p>juju-core 1.16.6 is available in trusty and backported to earlier
+series in the following PPA <a href="https://launchpad.net/%7Ejuju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></p>
+<h4>Resolved issues</h4>
+
 <ul>
-<li>Azure provider handles 307 temporary redirects poorly Lp 1269835</li>
-<li>Loading state on bootstrap ignores ssl-hostname-verification setting Lp 1268913</li>
-<li>Provide remove-* aliases for destroy-service and destroy-machine Lp 1261628</li>
-</ul>
-<h4 id="notable-changes">Notable Changes</h4>
+<li>Azure provider handles 307 temporary redirects poorly
+Lp 1269835</li>
+<li>Loading state on bootstrap ignores ssl-hostname-verification setting
+Lp 1268913</li>
+<li>Provide remove-* aliases for destroy-service and destroy-machine
+Lp 1261628</li>
+</ul><h4>Notable Changes</h4>
 <p>This release addresses intermittent failures observed in recent weeks in Azure.
 Users may have seen “(request failed...307: Temporary Redirect)” when issuing
-juju commands.</p>
-<p>The destroy-service and destroy-machine commands were renamed to remove-service
+juju commands.</p><p>The destroy-service and destroy-machine commands were renamed to remove-service
 and remove-machine respectively. The commands are still available under their
 old names; no scripts were harmed in the making of this release.</p>
-<p>juju-core 1.16.5</p>
-<p>A new stable release of Juju, juju-core 1.16.5, is now available. This release
-replaces 1.16.4.</p>
-<h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.16.5 is available in trusty and backported to earlier series in the
-following PPA <a href="https://launchpad.ne
-t/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<h4 id="resolved-issues">Resolved issues</h4>
+</details>
+<details id="1.16.5"><summary>juju-core 1.16.5</summary>
+<p>A new stable release of Juju, juju-core 1.16.5, is now available.
+This release replaces 1.16.4.</p>
+<h4>Getting Juju</h4>
+<p>juju-core 1.16.5 is available in trusty and backported to earlier
+series in the following PPA <a href="https://launchpad.net/%7Ejuju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></p>
+<h4>Resolved issues</h4>
+
 <ul>
-<li>service with no units stuck in lifecycle dying Lp 1233457</li>
-<li>destroy-machine --force Lp 089291</li>
-<li>destroy-machine --force plays badly with provisioner-safe-mode Lp 1259473</li>
-<li>API incompatibility: ERROR no such request "DestroyMachines" on Client Lp 1252469</li>
-<li>juju destroy-machine is incompatible in trunk vs 1.16 Lp 1253643</li>
-<li>juju get give a "panic: index out of range" error Lp 1227952</li>
-<li>[maas] juju set-env fails after upgrading to 1.16.2+ Lp 1256179</li>
-<li>juju destroy-environment destroys other environments Lp 1257481</li>
-</ul>
-<h4 id="notable-changes">Notable Changes</h4>
-<p>Juju may report the status of a service and machine that was terminated outside
-of Juju. Juju did not notice that the machine is gone. This release provides
-minor fixes to identify the case, and a feature to explicitly tell juju that the
-machine is gone.</p>
-<p>juju destroy-machine --force</p>
-<p>The destroy-machine command will destroy the machine as needed, and remove it
-from its list of available machines. Machines that are responsible for the
-environment cannot be destroyed. Machines running units or containers can only
-be destroyed with the --force flag; doing so will also destroy all those units
-and containers without giving them any opportunity to shut down cleanly.</p>
-<p>Future version of Juju will notice when machines <em>disappear</em> without the need of
-“destroy-machine --force”.</p>
-<p>juju-core 1.16.4</p>
-<p>A new stable release of Juju, juju-core 1.16.4, is now available. This release
-replaces 1.16.3.</p>
-<h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.16.4 is available in trusty and backported to earlier series in the
-following PPA <a href="https://launchpad.ne
-t/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<h4 id="resolved-issues">Resolved issues</h4>
+<li>service with no units stuck in lifecycle dying
+Lp 1233457</li>
+<li>destroy-machine --force
+Lp 089291</li>
+<li>destroy-machine --force plays badly with provisioner-safe-mode
+Lp 1259473</li>
+<li>API incompatibility: ERROR no such request "DestroyMachines" on Client
+Lp 1252469</li>
+<li>juju destroy-machine is incompatible in trunk vs 1.16
+Lp 1253643</li>
+<li>juju get give a "panic: index out of range" error
+Lp 1227952</li>
+<li>[maas] juju set-env fails after upgrading to 1.16.2+
+Lp 1256179</li>
+<li>juju destroy-environment destroys other environments
+Lp 1257481</li>
+</ul><h4>Notable Changes</h4>
+<p>Juju may report the status of a service and machine that was terminated
+outside of Juju. Juju did not notice that the machine is gone. This
+release provides minor fixes to identify the case, and a feature to
+explicitly tell juju that the machine is gone.</p><p>juju destroy-machine --force</p><p>The destroy-machine command will destroy the machine as needed, and
+remove it from its list of available machines. Machines that are
+responsible for the environment cannot be destroyed. Machines running
+units or containers can only be destroyed with the --force flag; doing
+so will also destroy all those units and containers without giving them
+any opportunity to shut down cleanly.</p><p>Future version of Juju will notice when machines <em>disappear</em> without the
+need of “destroy-machine --force”.</p>
+</details>
+
+
+<details id="1.16.4"><summary>juju-core 1.16.4</summary>
+<p>A new stable release of Juju, juju-core 1.16.4, is now available.
+This release replaces 1.16.3.</p>
+<h4>Getting Juju</h4>
+<p>juju-core 1.16.4 is available in trusty and backported to earlier
+series in the following PPA <a href="https://launchpad.net/%7Ejuju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></p>
+<h4>Resolved issues</h4>
+
 <ul>
-<li>Update Juju to make a "safe mode" for the provisioner Lp 1254729</li>
-<li>juju set-env fails for boolean attributes Lp 1254938</li>
-<li>juju-update-bootstrap-address plugin Lp 1254579
-juju-core 1.16.3</li>
+<li>Update Juju to make a "safe mode" for the provisioner
+Lp 1254729</li>
+<li>juju set-env fails for boolean attributes
+Lp 1254938</li>
+<li>juju-update-bootstrap-address plugin
+Lp 1254579</li>
 </ul>
-<p>A new stable release of Juju, juju-core 1.16.3, is now available. This release
-replaces 1.16.0.</p>
-<h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.16.3 is available in trusty and backported to earlier series in the
-following PPA <a href="https://launchpad.ne
-t/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<h4 id="resolved-issues">Resolved issues</h4>
+</details>
+<details id="1.16.3"><summary>juju-core 1.16.3</summary>
+<p>A new stable release of Juju, juju-core 1.16.3, is now available. This
+release replaces 1.16.0.</p>
+<h4>Getting Juju</h4>
+<p>juju-core 1.16.3 is available in trusty and backported to earlier series
+in the following PPA <a href="https://launchpad.net/%7Ejuju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></p>
+<h4>Resolved issues</h4>
+
+<ul><li>local provider deploys fail with 'install hook failed'
+Lp 247299</li></ul>
+</details>
+
+<details id="1.16.2"><summary>juju-core 1.16.2</summary>
+<p>A new stable release of Juju, juju-core 1.16.2, is now available.
+This release replaces 1.16.0.</p>
+<h4>Getting Juju</h4>
+<p>juju-core 1.16.2 is available in trusty and backported to earlier
+series in the following PPA <a href="https://launchpad.net/%7Ejuju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></p>
+<h4>Resolved issues</h4>
+
 <ul>
-<li>local provider deploys fail with 'install hook failed' Lp 247299
-juju-core 1.16.2</li>
+<li>Azure bootstrap fails, versioning header is not specified. All
+versions of juju deploying to Azure experienced this bug when
+Azure updated its API on 2013-10-28. This release restores service.
+Lp 1246320.</li>
+<li>Local provider fails to start; connection refused or machines stuck
+in pending. Local deploys (LXC) are now given storage. Container
+information is now provided for MaaS config.
+Lp 1240709 and Lp 1246556</li>
+<li>Running destroy-environment with juju on MaaS must only destroy
+nodes that juju controls.
+Lp 1081247 and Lp 1081247</li>
+<li>Ensure the cloud-archive key is installed so that downloads work
+without additional verification.
+Lp 1243861.</li>
+<li>Relation names can contain underscores.
+Lp 1245004</li>
 </ul>
-<p>A new stable release of Juju, juju-core 1.16.2, is now available. This release
-replaces 1.16.0.</p>
-<h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.16.2 is available in trusty and backported to earlier series in the
-following PPA <a href="https://launchpad.ne
-t/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<h4 id="resolved-issues">Resolved issues</h4>
-<ul>
-<li>Azure bootstrap fails, versioning header is not specified. All versions of juju deploying to Azure experienced this bug when Azure updated its API on 2013-10-28. This release restores service. Lp 1246320.</li>
-<li>Local provider fails to start; connection refused or machines stuck in pending. Local deploys (LXC) are now given storage. Container information is now provided for MaaS config. Lp 1240709 and Lp 1246556</li>
-<li>Running destroy-environment with juju on MaaS must only destroy nodes that juju controls. Lp 1081247 and Lp 1081247</li>
-<li>Ensure the cloud-archive key is installed so that downloads work without additional verification. Lp 1243861.</li>
-<li>Relation names can contain underscores. Lp 1245004
-juju core 1.16.1</li>
-</ul>
-<p>Released:2013-10-31</p>
-<p>juju-core 1.16.0</p>
+
+</details>
+
+<details id="1.16.1"><summary>juju core 1.16.1</summary>
+<p>Released:2013-10-31 </p>
+</details>
+
+<details id="1.16.0"><summary>juju-core 1.16.0</summary>
 <p>A new stable release of Juju, juju-core 1.16.0, is now available.</p>
-<h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.16.0 is available in Saucy and backported to earlier series in the
-following PPA <a href="https://launchpad.ne
-t/%7Ejuju/+archive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<h4 id="new-and-notable">New and Notable</h4>
+<h4>Getting Juju</h4>
+<p>juju-core 1.16.0 is available in Saucy and backported to earlier series
+in the following PPA <a href="https://launchpad.net/%7Ejuju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></p>
+<h4>New and Notable</h4>
+
 <ul>
-<li>bootstrap now matches on major and minor version numbers when locating tools</li>
-<li>public-bucket-url is deprecated, use tools-url and/or image-metadata-url instead</li>
-<li>users running from source no longer need to manually specify --upload-tools in order to have tools available for bootstrapping</li>
-<li>tools retrieval is now handled using simplestreams metadata, similar to how image id lookup works</li>
-<li>tools no longer have to be located in a publicly readable cloud storage instance; they can be served by any HTTP server eg apache</li>
-<li>new constraint: tags. This constraint is currently only supported by MaaS environments, and allows you to specify nodes by tags applied to them in MaaS. Example: juju deploy mysql --constraints tags=foo,bar will deploy mysql to a node that is tagged with both the "foo" tag and the "bar" tag.</li>
-<li>the "null" provider is now available, for creating environments with existing machines.</li>
-<li>admin-secret is now chosen automatically if omitted from the configuration of a new environment.</li>
-<li>control-bucket is now chosen automatically if omitted from the configuration for new ec2 and openstack environments.</li>
-<li>Logging has changed. You can specify an environment variable "JUJU_LOGGING_CONFIG", or you can specify --log-config on the command line. To show the log on the command line, now use --show-log. The --debug has been kept to be short-hand for "--log-config==DEBUG --show-log", and --verbose has been deprecated with its current meaning.</li>
-</ul>
-<h4 id="resolved-issues">Resolved issues</h4>
+<li>bootstrap now matches on major and minor version numbers when locating
+tools</li>
+<li>public-bucket-url is deprecated, use tools-url and/or
+image-metadata-url instead</li>
+<li>users running from source no longer need to manually specify
+--upload-tools in order to have tools available for bootstrapping</li>
+<li>tools retrieval is now handled using simplestreams metadata, similar
+to how image id lookup works</li>
+<li>tools no longer have to be located in a publicly readable cloud
+storage instance; they can be served by any HTTP server eg apache</li>
+<li>new constraint: tags. This constraint is currently only supported by
+MaaS environments, and allows you to specify nodes by tags applied to
+them in MaaS. Example: juju deploy mysql --constraints tags=foo,bar
+will deploy mysql to a node that is tagged with both the "foo" tag and
+the "bar" tag.</li>
+<li>the "null" provider is now available, for creating environments with
+existing machines.</li>
+<li>admin-secret is now chosen automatically if omitted from the
+configuration of a new environment.</li>
+<li>control-bucket is now chosen automatically if omitted from the
+configuration for new ec2 and openstack environments.</li>
+<li>Logging has changed. You can specify an environment variable
+"JUJU_LOGGING_CONFIG", or you can specify --log-config on the command
+line. To show the log on the command line, now use --show-log. The
+--debug has been kept to be short-hand for "--log-config==DEBUG
+--show-log", and --verbose has been deprecated with its current meaning.</li>
+</ul><h4>Resolved issues</h4>
+
 <ul>
-<li>"juju add-machine ssh:..." no longer fails when an IP address is specified instead of a hostname. LP #1225825</li>
-<li>Bootstrap nodes will now only run one copy of Mongodb, this will result in lower resource utilisation and faster startup of the bootstrap node. Closes LP #1210407</li>
+<li>"juju add-machine ssh:..." no longer fails when an IP address is
+specified instead of a hostname. LP #1225825</li>
+<li>Bootstrap nodes will now only run one copy of Mongodb, this will
+result in lower resource utilisation and faster startup of the bootstrap
+node. Closes LP #1210407</li>
 <li>EC2 accounts in default VPC mode now work with juju. LP #1221868</li>
-<li>The unset command is now available from the command line. LP #1237929 Configuration changes</li>
-<li>tools-url is a new configuration option used to specify the location where the tools tarballs may be found. If specified, this overrides the default tools repository.</li>
-<li>image-metadata-url is a new configuration option used to specify the location where image metadata may be found. This is only normally required for private Openstack deployments.</li>
-<li>public-bucket-url is deprecated - use tools-url to specify where tools are located (if not handled automatically by your cloud provider).</li>
-</ul>
-<h4 id="testing-on-canonistack-and-hp-cloud">Testing on Canonistack and HP Cloud</h4>
-<p>Starting with this release, there is no longer any requirement to use a public-
-bucket-url configuration attribute when bootstrapping Canonistack or HP Cloud
-environments. The public-bucket-url attribute is deprecated and you are advised
-to remove it from your environment configuration.</p>
-<h4 id="bootstrapping-and-tools">Bootstrapping and tools</h4>
-<p>When Juju bootstraps an environment, it searches for a tools tarball matching
-the version of the Juju client used to run the bootstrap. Prior to this release,
-any tools with the same major version number as the Juju client were considered
-a match. Starting with this release, both the major and minor version numbers
-must match. This is to prevent any subtle and hard to find bugs due to version
-mismatch from manifesting themselves.</p>
-<p>For users of Juju on EC2, HP Cloud, Azure, and Canonistack, where the tools are
-maintained by Canonical in the cloud itself, and MASS, with access to the web to
-download the tools, there will be no noticeable change. For private cloud
-setups, more care will be needed to ensure all the required tools tarballs are
-available.</p>
-<h4 id="configuring-tools">Configuring tools</h4>
-<p>A focus of this release is to make bootstrapping a Juju environment work better
-out of the box, eliminating the need for manual configuration steps. To this
-end, the following improvements are delivered:</p>
+<li>The unset command is now available from the command line. LP #1237929
+Configuration changes</li>
+<li>tools-url is a new configuration option used to specify the location
+where the tools tarballs may be found. If specified, this overrides the
+default tools repository.</li>
+<li>image-metadata-url is a new configuration option used to specify the
+location where image metadata may be found. This is only normally
+required for private Openstack deployments.</li>
+<li>public-bucket-url is deprecated - use tools-url to specify where tools
+are located (if not handled automatically by your cloud provider).</li>
+</ul><h4>Testing on Canonistack and HP Cloud</h4>
+<p>Starting with this release, there is no longer any requirement to use a
+public-bucket-url configuration attribute when bootstrapping Canonistack
+or HP Cloud environments. The public-bucket-url attribute is deprecated
+and you are advised to remove it from your environment configuration.</p>
+<h4>Bootstrapping and tools</h4>
+<p>When Juju bootstraps an environment, it searches for a tools tarball
+matching the version of the Juju client used to run the bootstrap. Prior
+to this release, any tools with the same major version number as the
+Juju client were considered a match. Starting with this release, both
+the major and minor version numbers must match. This is to prevent any
+subtle and hard to find bugs due to version mismatch from manifesting
+themselves.</p><p>For users of Juju on EC2, HP Cloud, Azure, and Canonistack, where the
+tools are maintained by Canonical in the cloud itself, and MASS, with
+access to the web to download the tools, there will be no noticeable
+change. For private cloud setups, more care will be needed to ensure all
+the required tools tarballs are available.</p>
+<h4>Configuring tools</h4>
+<p>A focus of this release is to make bootstrapping a Juju environment work
+better out of the box, eliminating the need for manual configuration
+steps. To this end, the following improvements are delivered:</p>
 <ol>
-<li>HP Cloud and Canonistack users no longer need any special configuration over and above what goes into any generic Openstack setup for Juju.</li>
-<li>Users who compile and run Juju from source can bootstrap without manually having to tell Juju to upload a custom tools tarball. The upload-tools bootstrap option is still available to force a tools upgrade, but it is no longer required just to bootstrap the first time or when starting again after an environment has been destroyed.</li>
-</ol>
-<p>Users who wish to run Juju in HP Cloud from scratch can now just follow the same
-steps as used for EC2:</p>
+<li>HP Cloud and Canonistack users no longer need any special
+configuration over and above what goes into any generic Openstack setup
+for Juju.</li>
+<li>Users who compile and run Juju from source can bootstrap without
+manually having to tell Juju to upload a custom tools tarball. The
+upload-tools bootstrap option is still available to force a tools
+upgrade, but it is no longer required just to bootstrap the first time
+or when starting again after an environment has been destroyed.</li>
+</ol><p>Users who wish to run Juju in HP Cloud from scratch can now just follow
+the same steps as used for EC2:</p>
 <ol>
 <li>run juju init</li>
-<li>source a credentials file containing username, password, region etc, or edit the newly created ~/.juju/environments.yaml file to add username, password, region etc to the hpcloud environment block</li>
+<li>source a credentials file containing username, password, region etc,
+or edit the newly created ~/.juju/environments.yaml file to add
+username, password, region etc to the hpcloud environment block</li>
 <li>run juju bootstrap -e hpcloud</li>
-</ol>
-<p>HP Cloud users can run juju switch hpcloud to make the default environment
-hpcloud and remove the need to use the -e parameter with each Juju command.</p>
-<h4 id="private-openstack-deployments">Private Openstack deployments</h4>
-<p>Tools can now be served by any http server, or from a shared mounted directory
-accessible from the cloud, removing the requirement to place the tools in a
-cloud storage instance. Using a cloud storage instance is still possible of
-course, but this option may be more desirable for users who wish to set up a
-private cloud without outgoing web access. The steps are as follows:</p>
+</ol><p>HP Cloud users can run juju switch hpcloud to make the default
+environment hpcloud and remove the need to use the -e parameter with
+each Juju command.</p>
+<h4>Private Openstack deployments</h4>
+<p>Tools can now be served by any http server, or from a shared mounted
+directory accessible from the cloud, removing the requirement to place
+the tools in a cloud storage instance. Using a cloud storage instance is
+still possible of course, but this option may be more desirable for
+users who wish to set up a private cloud without outgoing web access.
+The steps are as follows:</p>
 <ol>
-<li>Copy the tools tarballs for a given Juju version to a directory named like: /tools/releases</li>
+<li>Copy the tools tarballs for a given Juju version to a directory
+named like:
+/tools/releases</li>
 <li>run juju sync-tools --all --source= --destination=</li>
-<li>Configure your http server to serve to contents of under http://</li>
+<li>Configure your http server to serve to contents of
+under http://</li>
 <li>Add tools-url: http:// to your environments.yaml file.</li>
-</ol>
-<p>An alternative to using http is to copy the tools directory itself, from , to a
-shared drive which is accessible to client machines and cloud instances via a
-common mounted directory. In that case, add an entry like this to your
-environments.yaml:</p>
-<pre><code>tools-url: file://mounted_dir
-</code></pre>
-<p>Users who still wish to place the tools in a cloud instance should copy the
-tools directory itself to a publicly readable storage instance. Thenadd the
-tools-url entry to environments.yml:</p>
-<pre><code>tools-url: https:///tools
-</code></pre>
-<p>A final alternative for locating tools is to copy the entire tools directory
-created above to the cloud’s control bucket, as specified in the
-environments.yaml file. No tools-url configuration is required, but note that
-these tools will only be visible to that one particular Juju environment.</p>
-<h4 id="configuring-image-metadata">Configuring image metadata</h4>
-<p>Just as private Openstack deployments need to configure where tools are located,
-so too does the location of the image metadata need to be specified. This is not
-applicable for supported openstack clouds like HP Cloud and Canonistack, only
-private deployments. Prior to this release, the public-bucket-url was used to
-point to the location of the metadata. Now, configure the image-metadata-url as
-follows:</p>
-<pre><code>  image-metadata-url: /juju-dist
-</code></pre>
+</ol><p>An alternative to using http is to copy the tools directory itself, from
+, to a shared drive which is accessible to client machines
+and cloud instances via a common mounted directory. In that case, add an
+entry like this to your environments.yaml:
+<pre class="prettyprint">tools-url: file://mounted_dir</pre>
+<p>Users who still wish to place the tools in a cloud instance should
+copy the tools directory itself to a publicly readable storage instance.
+Thenadd the tools-url entry to environments.yml:
+<pre class="prettyprint">tools-url: https:///tools</pre>
+<p>A final alternative for locating tools is to copy the entire tools
+directory created above to the cloud’s control bucket, as specified in
+the environments.yaml file. No tools-url configuration is required, but
+note that these tools will only be visible to that one particular Juju
+environment.</p>
+<h4>Configuring image metadata</h4>
+<p>Just as private Openstack deployments need to configure where tools are
+located, so too does the location of the image metadata need to be
+specified. This is not applicable for supported openstack clouds like HP
+Cloud and Canonistack, only private deployments. Prior to this release,
+the public-bucket-url was used to point to the location of the metadata.
+Now, configure the image-metadata-url as follows:
+<pre class="prettyprint">  image-metadata-url: /juju-dist</pre>
 <p>Note that the image metadata no longer has to be kept in a cloud storage
-instance. The above example simply assumes the metadata will be kept in the same
-location as prior to this release. But as with tools, the image metadata may be
-server from any http url or even a directory using file://</p>
-<p>juju-core 1.14.1</p>
-<p>A new stable release of Juju, juju-core 1.14.1, is now available.</p>
-<p>This release replaces juju-core 1.14.0. It reconciles differences between juju
-clients.</p>
-<h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.14.1 is available in Saucy and backported to earlier series in the
-following PPA</p>
-<p><a href="https://launchpad.net/%7Ejuju/+arc
-hive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<h4 id="new-and-notable">New and Notable</h4>
+instance. The above example simply assumes the metadata will be kept in
+the same location as prior to this release. But as with tools, the image
+metadata may be server from any http url or even a directory using
+file://</p>
+</details>
+
+
+<details id="1.14.1"><summary>juju-core 1.14.1</summary>
+<p>A new stable release of Juju, juju-core 1.14.1, is now available.</p><p>This release replaces juju-core 1.14.0. It reconciles differences between juju clients.</p>
+<h4>Getting Juju</h4>
+<p>juju-core 1.14.1 is available in Saucy and backported to earlier series in the following PPA</p><p><a href="https://launchpad.net/%7Ejuju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></p>
+<h4>New and Notable</h4>
+
 <ul>
 <li>The Microsoft Azure provider is now considered ready for use.</li>
 <li>lp # 1184786 juju cli now gives a clearer error message when the deprecated default-image-id key is found.</li>
-<li>When debugging hooks, juju will set the $PS1 value to $JUJU_UNIT_NAME:$JUJU_HOOK_NAME %. This results in a shorter and more useful prompt. Closes ##1212903</li>
+<li>When debugging hooks, juju will set the $PS1 value to $JUJU<em>UNIT</em>NAME:$JUJU<em>HOOK</em>NAME %. This results in a shorter and more useful prompt. Closes ##1212903</li>
 <li>Juju plugins no longer required the caller to escape all arguments passed to the plugin.</li>
-<li>The new command “juju unset …” allows a configuration setting for a service to be removed. Removing the configuration setting will revert it to the charm default. This is the first step in solving #1194945.</li>
+<li>The new command “juju unset  …” allows a configuration setting for a service to be removed. Removing the configuration setting will revert it to the charm default. This is the first step in solving #1194945.</li>
 <li>The Windows Azure provider now defines a public storage container for tools. No configuration changes are required. Closes #1216770.</li>
 <li>The debug-hooks subcommand is now implemented. Closed issue #1027876</li>
 <li>The status subcommand now accepts service/unit filters, to limit output; see “juju help status” for more information. Partially addresses issue #1121916</li>
 <li>The juju cli command now returns a better error message when run against an environment that has not been bootstrapped. Closes issue #1028053.</li>
-</ul>
-<h4 id="resolved-issues">Resolved issues</h4>
+</ul><h4>Resolved issues</h4>
+
 <ul>
 <li>The destroy-environment subcommand now requests confirmation before running, with an option to quietly proceed (-y/--yes). Closed issue #1121914.</li>
 <li>The cost calculation for the openstack provider was updated to bias towards the lowest number of CPU cores when choosing a machine type matching the provided instance constraints. This closes issue #1210086.</li>
@@ -616,40 +722,38 @@ hive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launc
 <li>A bug relating to the formatting of tool versions has been resolved. This formatting error was only visible when using the -v or --debug flag. Closes #1216285.</li>
 <li>lp #1206628 a bug related to the name of an upstart job created for a service unit has been corrected.</li>
 <li>lp # 1207230 a bug related specifying the type of local provider container has been corrected.</li>
-</ul>
-<h4 id="known-issues">Known issues</h4>
-<ul>
-<li>The JUJU_ENV environment variable is not being passed down to plugins. LP #1216254.</li>
-</ul>
-<h4 id="testing-on-canonistack-and-hp-cloud">Testing on Canonistack and HP Cloud</h4>
-<p>A publicly readable bucket has been created for holding the Juju tools on
-Canonistack. To use it, put this in your ~/.juju/environments.yaml (all on one
-line):</p>
-<pre><code>    public-bucket-url: https://swift.canonistack.canonical.com/v1/AUTH_526ad877f3e3464589dc1145dfeaac60
-</code></pre>
+</ul><h4>Known issues</h4>
+
+<ul><li>The JUJU_ENV environment variable is not being passed down to plugins. LP #1216254.</li></ul><h4>Testing on Canonistack and HP Cloud</h4>
+<p>A publicly readable bucket has been created for holding the Juju tools on Canonistack. To use it, put this in your ~/.juju/environments.yaml (all on one line):</p>
+
+<pre class="prettyprint">
+public-bucket-url: https://swift.canonistack.canonical.com/v1/AUTH_526ad877f3e3464589dc1145dfeaac60
+</pre>
 <p>For HP Cloud the public bucket is available at:</p>
-<pre><code>    public-bucket-url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/60502529753910
-</code></pre>
-<p>juju-core 1.14.0</p>
+<pre class="prettyprint">
+public-bucket-url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/60502529753910
+</pre>
+</details>
+
+<details id="1.14.0"><summary>juju-core 1.14.0</summary>
 <p>A new stable release of Juju, juju-core 1.14.0, is now available.</p>
-<h4 id="getting-juju">Getting Juju</h4>
-<p>juju-core 1.14.0 is available in Saucy and backported to earlier series in the
-following PPA</p>
-<p><a href="https://launchpad.net/%7Ejuju/+arc
-hive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></a></p>
-<h4 id="new-and-notable">New and Notable</h4>
+<h4>Getting Juju</h4>
+<p>juju-core 1.14.0 is available in Saucy and backported to earlier series in the following PPA</p><p><a href="https://launchpad.net/%7Ejuju/+archive/stable">https://launchpad.net/~juju/+archive/stable</a></p>
+<h4>New and Notable</h4>
+
 <ul>
 <li>The Microsoft Azure provider is now considered ready for use.</li>
 <li>lp # 1184786 juju cli now gives a clearer error message when the deprecated default-image-id key is found.</li>
-<li>When debugging hooks, juju will set the $PS1 value to $JUJU_UNIT_NAME:$JUJU_HOOK_NAME %. This results in a shorter and more useful prompt. Closes ##1212903</li>
+<li>When debugging hooks, juju will set the $PS1 value to $JUJU<em>UNIT</em>NAME:$JUJU<em>HOOK</em>NAME %. This results in a shorter and more useful prompt. Closes ##1212903</li>
 <li>Juju plugins no longer required the caller to escape all arguments passed to the plugin.</li>
-<li>The new command “juju unset …” allows a configuration setting for a service to be removed. Removing the configuration setting will revert it to the charm default. This is the first step in solving #1194945.</li>
+<li>The new command “juju unset  …” allows a configuration setting for a service to be removed. Removing the configuration setting will revert it to the charm default. This is the first step in solving #1194945.</li>
 <li>The Windows Azure provider now defines a public storage container for tools. No configuration changes are required. Closes #1216770.</li>
 <li>The debug-hooks subcommand is now implemented. Closed issue #1027876</li>
 <li>The status subcommand now accepts service/unit filters, to limit output; see “juju help status” for more information. Partially addresses issue #1121916</li>
 <li>The juju cli command now returns a better error message when run against an environment that has not been bootstrapped. Closes issue #1028053.</li>
-</ul>
-<h4 id="resolved-issues">Resolved issues</h4>
+</ul><h4>Resolved issues</h4>
+
 <ul>
 <li>The destroy-environment subcommand now requests confirmation before running, with an option to quietly proceed (-y/--yes). Closed issue #1121914.</li>
 <li>The cost calculation for the openstack provider was updated to bias towards the lowest number of CPU cores when choosing a machine type matching the provided instance constraints. This closes issue #1210086.</li>
@@ -657,20 +761,19 @@ hive/stable"><a href="https://launchpad.net/~juju/+archive/stable">https://launc
 <li>A bug relating to the formatting of tool versions has been resolved. This formatting error was only visible when using the -v or --debug flag. Closes #1216285.</li>
 <li>lp #1206628 a bug related to the name of an upstart job created for a service unit has been corrected.</li>
 <li>lp # 1207230 a bug related specifying the type of local provider container has been corrected.</li>
-</ul>
-<h4 id="known-issues">Known issues</h4>
-<ul>
-<li>The JUJU_ENV environment variable is not being passed down to plugins. LP #1216254.</li>
-</ul>
-<h4 id="testing-on-canonistack-and-hp-cloud">Testing on Canonistack and HP Cloud</h4>
-<p>A publicly readable bucket has been created for holding the Juju tools on
-Canonistack. To use it, put this in your ~/.juju/environments.yaml (all on one
-line):</p>
-<pre><code>public-bucket-url: https://swift.canonistack.canonical.com/v1/AUTH_526ad877f3e3464589dc1145dfeaac60
-</code></pre>
+</ul><h4>Known issues</h4>
+
+<ul><li>The JUJU_ENV environment variable is not being passed down to plugins. LP #1216254.</li></ul><h4>Testing on Canonistack and HP Cloud</h4>
+<p>A publicly readable bucket has been created for holding the Juju tools on Canonistack. To use it, put this in your ~/.juju/environments.yaml (all on one line):</p>
+
+<pre class="prettyprint">
+public-bucket-url: https://swift.canonistack.canonical.com/v1/AUTH_526ad877f3e3464589dc1145dfeaac60
+</pre>
 <p>For HP Cloud the public bucket is available at:</p>
-<pre><code>public-bucket-url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/60502529753910
-</code></pre>
+<pre class="prettyprint">
+public-bucket-url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/60502529753910
+</pre>
+</details>
               </article>
             </div>
           </div>
