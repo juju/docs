@@ -222,7 +222,7 @@ d.add('mysql')
 d.add('mediawiki')
 d.relate('mysql:db', 'mediawiki:db')
 d.expose('mediawiki')
-d.configure('mediawiki', title="My Wiki", skin="Nostolgia")
+d.configure('mediawiki', {'title': 'My Wiki', 'skin': 'Nostolgia'})
 d.setup()
 </code></pre>
 <p>That information is then translated to a Juju Deployer deployment file then,
@@ -245,11 +245,12 @@ Juju API or the juju commands.</p>
 <li><code>charm</code> If provided, will be the charm used. Otherwise service is used as the charm.</li>
 <li>
 <p><code>units</code> Number of units to deploy.</p>
-<p>import amulet
+<pre><code>import amulet
 d = amulet.Deployment()
 d.add('wordpress')
 d.add('second-wp', charm='wordpress')
-d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)</p>
+d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)
+</code></pre>
 </li>
 </ul>
 <h5 id="deployment.add_unit(service,-units=1)">Deployment.add_unit(service, units=1)</h5>
@@ -258,7 +259,7 @@ d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)</p>
 <li><code>service</code> Name of the service to add, must already be added.</li>
 <li>
 <p><code>units</code> Number of units to add, default is one.</p>
-<p>import amulet
+<pre><code>import amulet
 d = amulet.Deployment()
 d.add('wordpress')
 try:
@@ -267,7 +268,8 @@ except amulet.helpers.TimeoutError:
     # Setup didn't complete before timeout
     pass
 d.add_unit('wordpress')
-d.add_unit('wordpresss', units=2)</p>
+d.add_unit('wordpresss', units=2)
+</code></pre>
 </li>
 </ul>
 <h5 id="deployment.build_relations()">Deployment.build_relations()</h5>
@@ -280,10 +282,11 @@ d.add_unit('wordpresss', units=2)</p>
 <li><code>service</code> The service to configure.</li>
 <li>
 <p><code>options</code> Dict of configuration options.</p>
-<p>import amulet
+<pre><code>>import amulet
 d = amulet.Deployment()
 d.add('postgresql')
-d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})</p>
+d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})
+</code></pre>
 </li>
 </ul>
 <h5 id="deployment.deployer_map(services,-relations)">Deployment.deployer_map(services, relations)</h5>
@@ -297,10 +300,11 @@ d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})</p>
 <ul>
 <li>
 <p><code>service</code> - Name of service to expose</p>
-<p>import amulet
+<pre><code>import amulet
 d = amulet.Deployment()
 d.add('varnish')
-d.expose('varnish')</p>
+d.expose('varnish')
+</code></pre>
 </li>
 </ul>
 <h5 id="deployment.load(deploy_cfg)">Deployment.load(deploy_cfg)</h5>
@@ -333,7 +337,7 @@ and execute juju-deployer with the generated mapping.</p>
 <ul>
 <li>
 <p><code>timeout</code> in seconds, how long to wait for setup</p>
-<p>import amulet
+<pre><code>import amulet
 d = amulet.Deployment()
 d.add('wordpress')
 d.add('mysql')
@@ -343,7 +347,8 @@ try:
     d.setup(timeout=900)
 except amulet.helpers.TimeoutError:
     # Setup didn't complete before timeout
-    pass</p>
+    pass
+</code></pre>
 </li>
 </ul>
 <h3 id="amulet.sentry">amulet.sentry</h3>
