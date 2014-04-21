@@ -118,7 +118,7 @@ It's designed to allow an author to describe their deployment in simple terms:
     d.add('mediawiki')
     d.relate('mysql:db', 'mediawiki:db')
     d.expose('mediawiki')
-    d.configure('mediawiki', title="My Wiki", skin="Nostolgia")
+    d.configure('mediawiki', {'title': 'My Wiki', 'skin': 'Nostolgia'})
     d.setup()
 
 That information is then translated to a Juju Deployer deployment file then,
@@ -146,6 +146,8 @@ Add a new service to the deployment schema.
   - `charm` If provided, will be the charm used. Otherwise service is used as the charm.
   - `units` Number of units to deploy.
 
+Example:
+
     import amulet
     d = amulet.Deployment()
     d.add('wordpress')
@@ -158,6 +160,8 @@ Add more units of an existing service after deployment.
 
   - `service` Name of the service to add, must already be added.
   - `units` Number of units to add, default is one.
+
+Example:
 
     import amulet
     d = amulet.Deployment()
@@ -184,6 +188,8 @@ Change configuration options for a service.
 
   - `service` The service to configure.
   - `options` Dict of configuration options.
+
+Example:
 
     import amulet
     d = amulet.Deployment()
@@ -239,6 +245,8 @@ This will create the deployer mapping, create any sentries that are required,
 and execute juju-deployer with the generated mapping.
 
   - `timeout` in seconds, how long to wait for setup
+
+Example:
 
     import amulet
     d = amulet.Deployment()
