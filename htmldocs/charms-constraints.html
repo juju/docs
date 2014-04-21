@@ -59,6 +59,7 @@
               <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
               <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
               <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
+              <li class=" sub"><a href="config-joyent.html">Joyent</a></li>
               <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
               <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
               <li class=" sub"><a href="config-local.html">Local</a></li>
@@ -166,7 +167,7 @@ amd64):</p>
 <pre><code>juju deploy --constraints "cpu-cores=8 mem=32G" mysql
 </code></pre>
 <p>Deploy to t1.micros on AWS:</p>
-<pre><code>juju bootstrap --constraints "cpu-power=0 mem=512M"
+<pre><code>juju bootstrap --constraints "cpu-power=0 cpu-power=0 mem=512M"
 </code></pre>
 <p>Launch all future "mysql" machines with at least 8GiB of RAM and 4 ECU:</p>
 <pre><code>juju set-constraints --service mysql mem=8G cpu-cores=4
