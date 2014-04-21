@@ -132,93 +132,63 @@
             </div>
             <div class="grid-9 doc-content">
               <article>
-                <h1 id="machine-constraints">Machine Constraints</h1>
-<p>Machine constraints allow you to choose the hardware to which your services will be deployed.</p>
-<p>Constraints can be set for environments and services, with service constraints
-overriding environment constraints, the default values set by juju when
-otherwise unspecified. Changes to constraints do not affect any unit that has
-already been assigned to a machine.</p>
-<p>Constraint can be set by the <code>juju set-constraints</code> command, taking an optional
-<code>--service</code> arg, and any number of <code>key=value</code> pairs. When the service name is
-specified, the constraints are set on that service; otherwise they are set on
-the environment.</p>
-<p>Valid choices for the <code>value</code> are generally dependent on the particular
-constraint, with one exception:</p>
+                <h1 id="configuring-for-joyent-cloud">Configuring for Joyent Cloud</h1>
+<p>This process requires you to have a Joyent account. If you
+have not signed up for one yet, it can obtained at
+<a href="http://www.joyent.com/"><a href="http://www.joyent.com/">http://www.joyent.com/</a></a>.</p>
+<p>You should start by generating a generic configuration file for Juju, using the
+command:</p>
+<pre><code>juju generate-config
+</code></pre>
+<p>This will generate a file, <code>environments.yaml</code>, which will live in your
+<code>~/.juju/</code> directory (and will create the directory if it doesn't already
+exist).</p>
+<p class="note"><strong>Note:</strong> If you have an existing configuration, you can use <code>juju generate-config --show</code> to output the new config file, then copy and paste relevant areas in a text editor etc.</p>
+<p>The generic configuration sections generated for Joyent will look something like
+this:</p>
+<pre><code>joyent:
+  type: joyent
+
+  # SDC config
+  # Can be set via env variables, or specified here
+  # sdc-user: &lt;secret&gt;
+  # Can be set via env variables, or specified here
+  # sdc-key-id: &lt;secret&gt;
+  # url defaults to us-west-1 DC, override if required
+  # sdc-url: https://us-west-1.api.joyentcloud.com
+
+  # Manta config
+  # Can be set via env variables, or specified here
+  # manta-user: &lt;secret&gt;
+  # Can be set via env variables, or specified here
+  # manta-key-id: &lt;secret&gt;
+  # url defaults to us-east DC, override if required
+  # manta-url: https://us-east.manta.joyent.com
+
+  # Auth config
+  # private-key-path is the private key used to sign Joyent requests.
+  # Defaults to ~/.ssh/id_rsa, override if a different ssh key is used.
+  # Alternatively, you can supply "private-key" with the content of the private
+  # key instead supplying the path to a file.
+  # private-key-path: ~/.ssh/id_rsa
+  # algorithm defaults to rsa-sha256, override if required
+  # algorithm: rsa-sha256
+</code></pre>
+<p>This is a simple configuration intended to run on Joyent with Manta storage. Values for the default settings can be changed simply by editing this file, uncommenting the relevant lines and adding your own settings. All you need to do to get Juju deploying services on Joyent is to set:</p>
 <ul>
-<li>An empty value always means "not constrained". This allows you to ignore environment settings at the service level without having to explicitly remember and re-set the juju default values. Note that there is no way to change the juju default values, though environment settings will override them.</li>
+<li><code>sdc-user</code> (Joyent login username)</li>
+<li><code>sdc-key-id</code> (finger print from ssh key uploaded to Joyent)</li>
+<li><code>manta-user</code> (login username -same as <code>sdc-user</code>)</li>
+<li><code>manta-key-id</code> (finger print from uploaded ssh key -same as <code>sdc-key-id</code>)</li>
+<li><code>private-key-path</code> (if your private is not at <code>~/.ssh/id_rsa</code>)</li>
 </ul>
-<p>The commands <code>juju deploy</code>, <code>juju bootstrap</code>, and <code>juju add-machine</code> have a
-<code>--constraints</code> flag which expects a single string of space-separated
-constraints, understood as above. Deployment constraints will be set on the
-service before the first unit is deployed, and bootstrap constraints will be set on the environment and used to provision the initial master machine.</p>
-<p>Please note that there is no constraints flag for the <code>juju add-unit</code> command;
-juju is explicitly focused on <strong>service</strong> orchestration, and it is
-counterproductive to encourage users to consider individual units. This can be
-worked around by setting new service constraints before adding new units, but is not encouraged.</p>
-<p>The <code>juju get-constraints</code> command is used to see the currently applicable
-constraints. When called without an argument, it outputs the environment
-constraints as key=value pairs. Alternatively, you can request yaml or json with
-the <code>--format</code> flag. By passing the name of a service as an argument, it will
-output the constraints on that particular service.</p>
-<h2 id="examples">Examples</h2>
-<p>Deploy MySQL on a machine with at least 32GiB of RAM, and at least 8 ECU of CPU
-power (architecture will be inherited from the environment, or default to
-amd64):</p>
-<pre><code>juju deploy --constraints "cpu-cores=8 mem=32G" mysql
-</code></pre>
-<p>Deploy to t1.micros on AWS:</p>
-<pre><code>juju bootstrap --constraints "cpu-power=0 cpu-power=0 mem=512M"
-</code></pre>
-<p>Launch all future "mysql" machines with at least 8GiB of RAM and 4 ECU:</p>
-<pre><code>juju set-constraints --service mysql mem=8G cpu-cores=4
-</code></pre>
-<p>Output current environment constraints:</p>
-<pre><code>juju get-constraints
-</code></pre>
-<p>Output constraints for mysql</p>
-<pre><code>juju get-constraints mysql
-</code></pre>
-<h1 id="provider-constraints">Provider Constraints</h1>
-<p>See a <a href="reference-constraints.html">complete listing of constraints</a> for details
-on what each constraint means. Two of the most commonly used are:</p>
-<ul>
-<li><code>cpu-cores</code>: The minimum processing power of the machine, roughly indicated by how many cores are available.</li>
-<li><code>mem</code>: The minimum memory for the machine, defaulting to 512MB.</li>
-</ul>
-<h1 id="working-with-constraints">Working with constraints</h1>
-<p>Here are some examples of working with constraints.</p>
-<p>When bootstrapping an environment, you can set the constraints directly:</p>
-<pre><code>juju bootstrap --constraints arch=i386
-</code></pre>
-<p>The above command did two things:</p>
-<ul>
-<li>Set the environment constraints to require machines with an i386 architecture, leaving the other defaults untouched; this is precisely equivalent to:
-    juju bootstrap --constraints "arch=i386 cpu-cores= mem= "</li>
-</ul>
-<p>...but rather more convenient to type.</p>
-<ul>
-<li>Started the bootstrap/master machine with the above constraints.</li>
-</ul>
-<p>Because the environment constraints were set, subsequent deployments will use
-the same values:</p>
-<pre><code>juju deploy mysql
-</code></pre>
-<p>...but other services can be started with their own constraints:</p>
-<pre><code>juju deploy wordpress --constraints mem=1024
-</code></pre>
-<p>Note that if you try to deploy a machine or service with a constraint that
-cannot be fulfilled by the environment, the deployment will fail. Running juju
-status will show an error in the status for that machine. You can fix the
-problem by removing the machine (and the service assigned to the machine, if
-any) and retrying the deployment with different constraints.</p>
-<h2 id="maas-constraints">MAAS constraints</h2>
-<p>If you are deploying to a MAAS provider, you may use the additional constraint
-<code>tags=</code>, followed by a comma-delimited list of tags. Only MAAS nodes thus tagged will be considered appropriate for deploying the service.</p>
-<p>E.g.</p>
-<pre><code>juju deploy mysql --constraints tags=foo,bar
-</code></pre>
-<p>...will deploy MySQL only to a node which has been tagged with both "foo" and
-"bar".</p>
+<p class="note"><strong>Note:</strong> If you are having issues with <code>private-key-path</code> suggest to paste your Joyent <em>matching</em> private key directly under the <code>private-key</code> value. Remember to indent properly and to append a <code>|</code> after <code>private-key</code> to span multiple lines.</p>
+<p>You can retrieve these values easily from Joyent Dashboard  at
+<a href="https://my.joyent.com"><a href="https://my.joyent.com/main/#!/account">https://my.joyent.com/main/#!/account</a></a>. Click on your
+name in the top-right and then the "Account" link from the drop
+down menu.</p>
+<p><img alt="Joyent Dashbard to access username and fingerprint" src="./media/getting_started-joyent-account-dropdown.png" /></p>
+<p class="note"><strong>Note:</strong> If you are having issues provisioning instances contact Joyent support @ <a href="https://help.joyent.com/home"><a href="https://help.joyent.com/home">https://help.joyent.com/home</a></a></p>
               </article>
             </div>
           </div>
