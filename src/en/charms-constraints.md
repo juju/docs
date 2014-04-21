@@ -43,7 +43,7 @@ amd64):
 
 Deploy to t1.micros on AWS:
 
-    juju bootstrap --constraints "cpu-power=0 cpu-power=0 mem=512M"
+    juju bootstrap --constraints "cpu-power=0 cpu-cores=0 mem=512M"
 
 Launch all future "mysql" machines with at least 8GiB of RAM and 4 ECU:
 
