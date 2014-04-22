@@ -15,7 +15,7 @@ You will find most of the source documents are very straightforward and
 human-readable, if you just want to dip in and change a paragraph or add some
 extra info. The Juju docs use a modified version of the [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) to compose the content of the docs. We've retained the majority of GFM, with the exception of "Username linking" and "Emoji", both of which are Github specific.
 
-In addition to the removals, we've also create several new Markdown definitions to implement features required for the docs. These definitions are outlined below.
+In addition to the removals, we've also created several new Markdown definitions to implement features required for the docs. These definitions are outlined below.
 
 ## Grab the docs and get to work
 
@@ -58,9 +58,9 @@ Use a backtick to `inline commands and other literals`.
 
 ## Notes, Warnings, Callouts, Admonishments
 
-Callouts are used to notify the user of additional information or warn them of potential pitfalls. This will create a notifications resembling the following in the docs:
+Callouts are used to notify the user of additional information or warn them of potential pitfalls. This will create a notification resembling the following in the docs:
 
-![callout](http://i.imgur.com/kAHA4cH.png)
+![callout](media/note.png)
 
 To implement this callout, use the following syntax:
 
