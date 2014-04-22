@@ -103,7 +103,7 @@ As this is a consolidated log you don't need to specify a unit.
 
 #### Usage:
 
-    juju debug-log [-n &LT;number&GT;] [-n +&LT;number&GT;] [-e &LT;environment&GT;]
+    juju debug-log [-n <number>] [-n +<number>] [-e <environment>]
 
 Where the `-n` switch is given and followed by a number, the log will be tailed
 from that many lines in the past (i.e., those number of existing lines in the
@@ -118,8 +118,7 @@ the standard Unix `tail` command. In fact, it is analagous to running `tail -f
 
 #### Examples:
 
-To read the ten most recent log entries and follow any subsequent entries to the
-log:
+To read the ten most recent log entries and follow any subsequent entries to the log:
 
     juju debug-log
 
@@ -185,11 +184,7 @@ Key:
 
 ### Key bindings
 
-All of tmux's special functions can be run by pressing the `prefix-key` followed
-by another key or key combination. The default prefix-key for tmux is Control-b,
-but many users find this an unnecessary stretch. This version uses Control-a as
-the prefix key, which is a bit easier on the fingers and is also the same
-combination used by `screen`, an alternative terminal multiplexer.
+All of tmux's special functions can be run by pressing the `prefix-key` followed by another key or key combination. The default prefix-key for tmux is Control-b, but many users find this an unnecessary stretch. This version uses Control-a as the prefix key, which is a bit easier on the fingers and is also the same combination used by `screen`, an alternative terminal multiplexer.
 
 There are many key-combinations, not all of which are of use in the task at
 hand. Here are some of the ones you may find useful:

@@ -59,6 +59,8 @@ more specifics on what needs to be changed, see the relevant sections below.
   - [Configuring for bare metal using MAAS](config-maas.html)
   - [Configuring for LXC local provider (Linux)](config-local.html)
 
+**Note:** Juju's command line interface includes documentation, doing `juju help` will show you the topics. You can also check out the [Juju command cheatsheet](https://github.com/juju/cheatsheet) if you are looking for a handy command guide.
+
 # Testing your setup
 
 Once you have installed and configured Juju, it is probably a good idea to take
@@ -196,8 +198,7 @@ Congratulations, you have just deployed a service with Juju!
 Now you are ready to deploy whatever service you really want from the 100s
 available at the [Juju Charm Store.](http://jujucharms.com)
 
-To remove all current deployments and clear up everything in your cloud, you can
-run the command:
+To remove all current deployments and clear up everything in your cloud, you can run the command:
 
     juju destroy-environment
 
