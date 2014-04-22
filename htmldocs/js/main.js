@@ -9,30 +9,23 @@ var redirect_hashes = ['introduction', 'installation',
 
 $(document).ready(function() {
   if($.inArray(window.location.hash, redirect_hashes) > -1) {
-    window.location.replace(window.location.pathname + '/' + window.location.hash)
+    window.location.replace(window.location.pathname + '/' + window.location.hash);
   }
 
-  $("#navlinks").load("navigation.html", function() {
-    url = window.location.pathname;
-    cur_page = url.substring(url.lastIndexOf('/')+1) + window.location.hash;
-    console.log('loaded');
-    $('#navlinks ul li').each(function() {
-      if($(this).children('a').attr('href') == cur_page) {
-        console.log($(this), $(this).children('a'))
-        $(this).addClass('selected');
-      }
-    });
+  var url = window.location.pathname;
+  var cur_page = url.substring(url.lastIndexOf('/')+1) + window.location.hash;
+  $('#navlinks ul li').each(function() {
+    if($(this).children('a').attr('href') == cur_page) {
+      $(this).addClass('selected');
+    }
   });
-});
 
-$(document).ready(function() {
   var anchor_tpl = $('<a>').addClass('anchor');
   $('h1, h2, h3, h4, h5').each(function() {
     if($(this).attr('id')) {
       var id = $(this).attr('id');
       var link = anchor_tpl.clone();
       link.attr('href', '#'+id);
-      console.log(link);
       $(this).append(link);
     }
   });
