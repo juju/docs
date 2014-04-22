@@ -13,7 +13,9 @@ Contributing to the docs is really easy because it is all written in GitHub
 flavored [Markdown](https://help.github.com/articles/github-flavored-markdown).
 You will find most of the source documents are very straightforward and
 human-readable, if you just want to dip in and change a paragraph or add some
-extra info.
+extra info. The Juju docs use a modified version of the [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) to compose the content of the docs. We've retained the majority of GFM, with the exception of "Username linking" and "Emoji", both of which are Github specific.
+
+In addition to the removals, we've also created several new Markdown definitions to implement features required for the docs. These definitions are outlined below.
 
 ## Grab the docs and get to work
 
@@ -54,13 +56,28 @@ To code block something indent each line with 4 whitespace characters.
 
 Use a backtick to `inline commands and other literals`.
 
-## Notes
+## Notes, Warnings, Callouts, Admonishments
 
-    **Note:** Put your note here
+Callouts are used to notify the user of additional information or warn them of potential pitfalls. This will create a notification resembling the following in the docs:
 
-Is rendered like
+![callout](media/note.png)
 
-**Note:** Put your note here
+To implement this callout, use the following syntax:
+
+```
+!!! Note: If you want to get more information on what is actually happening, or to help resolve problems, you can add the `--show-log` switch to the juju command to get verbose output.
+```
+
+## Foldouts
+
+When a page contains a high volume of information that would otherwise require a table of contents, or similar method of quick navigation, a foldout can be used. This will create a collapsed header which, when clicked, will expand to display all the content below it.
+
+```
+^# Header
+  Content can be multi-paragraphed and will be sent through the Markdown parser
+
+  As long as content is continually indented under the header
+```
 
 # Adding pages
 
@@ -74,6 +91,10 @@ Add the page with the following format:
 
 in the appropriate section. Please make sure you submit a merge proposal
 with a description of the new page and why it is needed!
+
+## Adding Screenshots
+
+When adding screenshots place them in `htmldocs/media`. To reference them in your page use the syntax `![description](media/picture.png)`
 
 # Testing or Deploying locally
 
