@@ -25,7 +25,7 @@
 							</ul>
 						</li>
 						<li>
-							<h2><a href="/community">Community</a></h2>
+							<h2><a href="/community/">Community</a></h2>
 							<ul>
 								<li><a href="/community/blog/">Juju Blog</a></li>
 								<li><a href="/events/">Events</a></li>
