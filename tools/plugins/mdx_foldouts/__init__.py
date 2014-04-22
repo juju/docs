@@ -14,7 +14,7 @@ class FoldoutProcessor(BlockProcessor):
     def test(self, parent, block):
         sibling = self.lastChild(parent)
         return bool(block.startswith('^#') or
-                    (block.startswith(' ' * self.tab_length) and sibling and
+                    (block.startswith(' ' * 2) and sibling and
                      sibling.tag == 'details'))
 
     def run(self, parent, blocks):
@@ -30,7 +30,10 @@ class FoldoutProcessor(BlockProcessor):
         else:
             details = sibling
 
+        tl = self.tab_length
+        self.tab_length = 2
         block, theRest = self.detab(block)
+        self.tab_length = tl
         self.parser.parseChunk(details, block)
 
         if theRest:
