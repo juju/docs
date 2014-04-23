@@ -68,7 +68,7 @@ Lets charm up [GenghisApp](http://genghisapp.com/) - a single file MongoDB
 adminsitration app.
 
     cd charms/precise
-    charm create genghis
+    charm create genghisapp
 
 This will create a skeleton structure of a charm ready for you to edit and
 populate with your services deployment and orchestration logic.
@@ -158,7 +158,7 @@ GUI is accessible from [http://localhost:6080](http://localhost:6080)
 
 **Note:** The password is output in your console feedback from the juju bootstrap.
 
-**Note:** All your charms in $HOME/charms are available in the /vagrant directory of our JujuBox 
+**Note:** All your charms in $HOME/charms are available in the /vagrant directory of our JujuBox
 
 ### Deploying our charm in vagrant
 
@@ -166,7 +166,7 @@ You'll need to enter the juju environment we just bootstrapped in $HOME/charms
 
     vagrant ssh
     juju deploy mongodb
-    juju deploy --repository=/vagrant local:precise/genghis
+    juju deploy --repository=/vagrant local:precise/genghisapp
 
 We are now free to watch progress through the GUI
 
@@ -200,5 +200,5 @@ With vagrant fully setup, our charm deployed. We can now iterate over our charm
 and update/test via normal means.
 
 - Make edits on your HOST in your favorite editor
-- run commands inside the JujuBox vagrant environment. `juju upgrade-charm genghis`
+- run commands inside the JujuBox vagrant environment. `juju upgrade-charm genghisapp`
 - view results in our HOST browser of choice.
