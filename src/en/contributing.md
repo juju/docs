@@ -108,11 +108,11 @@ first get the dependencies and make the docs:
 dependencies you'll need to build the docs going forward.
 
 The documentation makes use of Javascript for some functionality, so in order
-to test the docs properly or serve them localyl, you will need to have an http
+to test the docs properly or serve them locally, you will need to have an http
 server set up.
 
 On Ubuntu this is easy. Install (if you need to) and start the apache2 web
-server, then just copy the htmnldocs directory to a convenient location -
+server, then just copy the htmldocs directory to a convenient location -
 
     sudo cp -R htmldocs /var/www/htmldocs
 
