@@ -429,7 +429,8 @@ The versions covered here are:
     * Update Juju to make a "safe mode" for the provisioner Lp 1254729
     * juju set-env fails for boolean attributes Lp 1254938
     * juju-update-bootstrap-address plugin Lp 1254579
-  juju-core 1.16.3
+
+^# juju-core 1.16.3
 
   A new stable release of Juju, juju-core 1.16.3, is now available. This release
   replaces 1.16.0.
@@ -443,7 +444,8 @@ The versions covered here are:
   ### Resolved issues
 
     * local provider deploys fail with 'install hook failed' Lp 247299
-  juju-core 1.16.2
+
+^# juju-core 1.16.2
 
   A new stable release of Juju, juju-core 1.16.2, is now available. This release
   replaces 1.16.0.
@@ -461,7 +463,8 @@ The versions covered here are:
     * Running destroy-environment with juju on MaaS must only destroy nodes that juju controls. Lp 1081247 and Lp 1081247
     * Ensure the cloud-archive key is installed so that downloads work without additional verification. Lp 1243861.
     * Relation names can contain underscores. Lp 1245004
-  juju core 1.16.1
+
+^# juju core 1.16.1
 
   Released:2013-10-31
 
