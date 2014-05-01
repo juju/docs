@@ -34,6 +34,7 @@
           <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
           <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
           <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
+          <li class="page_item page-item-1192"><a href="https://juju.ubuntu.com/docs/">Docs</a></li>
         </ul>
         <div id="box-search">
           <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
