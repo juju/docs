@@ -68,6 +68,19 @@ The default-series can also be added to any bootstrapped environment with the
 
 **Note:** Specifying a local repository makes Juju look there **first**, but if the relevant charm is not found in that repository, it will fall back to fetching it from the charm store. If you wish to check where a charm was installed from, it is listed in the `juju status` output.
 
+
+# Deploying with a configuration file
+
+Deployed services usually start with a sane default configuration. However, for
+some services it is desireable (and quicker) to configure them at deployment
+time. This can be done by creating a YAML format file of configuration values and 
+using the `--config=` switch:
+
+    juju deploy mysql --config=myconfig.yaml
+    
+There is more information on this, and other ways to configure services in the 
+[documentation for configuring services](./charms-config.html).
+
 # A note about caching...
 
 After Juju resolves a charm and its dependencies, it bundles them and deploys
