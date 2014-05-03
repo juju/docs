@@ -1,7 +1,7 @@
 # Configuring for Joyent Cloud 
 
 This process requires you to have a Joyent account. If you have not signed up
-for one yet, it can obtained at
+for one yet, you can do so at
 [http://www.joyent.com/](http://www.joyent.com/).
 
 You should start by generating a generic configuration file for Juju, using the
@@ -50,7 +50,7 @@ do to get Juju deploying services on Joyent is to set:
 - `manta-key-id` (finger print from uploaded ssh key -same as `sdc-key-id`)
 - `private-key-path` (if your private is not at `~/.ssh/id_rsa`)
 
-**Note:** If you are having issues with `private-key-path` suggest to paste
+**Note:** If you are having issues with `private-key-path` we suggest you paste
 your Joyent _matching_ private key directly under the `private-key` value.
 Remember to indent properly and to append a `|` after `private-key` to span
 multiple lines.
