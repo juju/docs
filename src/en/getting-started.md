@@ -200,9 +200,11 @@ available at the [Juju Charm Store.](http://jujucharms.com)
 
 To remove all current deployments and clear up everything in your cloud, you can run the command:
 
-    juju destroy-environment
+    juju destroy-environment  <environment-name>
 
-This will remove everything, including the bootstrap node.
+Where the `<environment-name>` is the name you gave the environment when you configured it. This 
+extra details is to help prevent accidents! You will also see a warning and will be prompted
+whether or not to continue - this action will remove everything, including the bootstrap node.
 
 To learn more about charms, including configuring options and managing running
 systems, you should continue to [read the charm documentation.](./charms.html)
