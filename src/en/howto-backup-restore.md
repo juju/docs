@@ -13,7 +13,7 @@ command.
     juju switch my-env
     juju backup
 
-Unline most juju commands, `backup` does not accept the -e option to specific
+Unlike most juju commands, `backup` does not accept the -e option to specific
 the environment. You must `switch` to the environment or specify the envronment
 name in the `JUJU_ENV` shell env variable.
 
