@@ -73,7 +73,7 @@ default; and if they're running in a -joined, -changed, or -broken hook, the
 current remote unit is set as the default.
 
 Best use of relation hooks will be made by those who understand the [relation
-model](./authors-relations-in-depth).
+model](./authors-relations-in-depth.html).
 
 ### juju-log
 
