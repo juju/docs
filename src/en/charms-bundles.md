@@ -32,11 +32,22 @@ method.
 ### Local deploy via command-line
 
 A bundle file can be deployed via the command-line interface by using the `juju
-quickstart` tool. You should always check the bundle to make sure it is correct
+quickstart` tool.
+
+The juju quickstart tool can be installed on Ubuntu versions newer than 14.04 by
+running the following command:
+    
+    sudo apt-get install juju-quickstart
+
+
+You must always perform a bundle proof to check for some possible errors
 before deploying it:
 
-    juju bundle proof bundles.yaml    # optional
-    juju quickstart bundles.yaml
+    juju bundle proof ../path-your-bundle-name    # defaults your current working directory
+
+Then you can use the quickstart tool to deploy your bundle:
+
+    juju quickstart -n bundle-name bundles.yaml
 
 ## Creating a bundle
 
@@ -96,7 +107,7 @@ After you have created the bundles.yaml and readme, you need to proof the bundle
 
 **Tip:** You should review the configuration options for the charms you are planning to use in a bundle, some of them generate passwords for services or might need configuration as a separate step. This may or may not be desireable for users, so if there are any extra steps required document them in your README.md file.**
 
-    juju bundle proof bundles.yaml
+    juju bundle proof ../bundle-directory/ #default current working directory
     bzr push lp:~yourusername/charms/bundles/yourbundlename/bundle
 
 - Next file a bug against charms at [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug). This is used to track the progress of your charm.
