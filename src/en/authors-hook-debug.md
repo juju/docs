@@ -11,7 +11,7 @@ The `juju debug-hooks` command accepts a unit and an optional list of hooks to
 debug (which must be named individually in a space-delimited list) or no hook
 names, causing all hooks to be debugged:
 
-    juju debug-hooks &LT;service/unit&GT; [hook-name hook-name2 ...]
+    juju debug-hooks <service/unit> [hook-name hook-name2 ...]
 
 So for example, imagine you are deploying the `mysql` charm and you want to only
 check the `db-relation-joined` and `db-relation-broken` hooks:
