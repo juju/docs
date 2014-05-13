@@ -23,8 +23,8 @@ installed and configured Juju.
 First, create a configuration file `myapp.yaml` to add info about your app
 pointing to your github repo:
 
-    sample-node:
-      repo: https://github.com/yourapplication
+    node-app:
+      app_url: https://github.com/yourapplication
 
 If you have not already bootstrapped an environment, do so:
 
