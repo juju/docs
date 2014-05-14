@@ -22,6 +22,7 @@
               <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
               <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
               <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=" sub"><a href="charms-working-with-units.html">Working with Units</a></li>
               <li class=""><a href="howto.html">How to...</a></li>
               <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
               <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
