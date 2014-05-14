@@ -1,10 +1,10 @@
 # Using Units
 
 Each node is that Juju manages is referred to as a "unit". Generally speaking
-when using Juju you interact with the services at their level. There are times
-when interacting with units is useful, particularly for debugging purposes.
-This page will outline different commands and techniques for interacting with
-units.
+when using Juju you interact with the services at the service level. There are
+times when working directly with units is useful though, particularly for
+debugging purposes. Juju provides a few different commands to make this
+easier.
 
 ## The `juju ssh` command
 
@@ -12,8 +12,9 @@ The `juju ssh` command will ssh you into a target unit. For example:
 
     juju ssh mysql/3
 
-This will ssh you into the 3rd mysql unit. This is useful for investigating
-things that happen on a unit.  
+This will start an ssh session on the 3rd mysql unit. This is useful for
+investigating things that happen on a unit, checking resources or viewing
+system logs.
 
 It is possible to run commands via `juju ssh`, for example, `juju ssh 1 uname
 -a` will run the uname command on node one. This works for simple commands,
@@ -47,11 +48,11 @@ Copy a local file to the second apache unit of the environment "testing":
 
     juju scp -e testing foo.txt apache2/1:
 
-See also the `juju help scp` command for more information
+For more information, run the `juju help scp` command.
 
 ## The `juju run` command
 
-The run command can be used by devops or scripts to inspect or do work on
+The `run` command can be used by devops or scripts to inspect or do work on
 services, units, or machines. Commands for services or units are executed in a
 hook context. Charm authors can use the run command to develop and debug
 scripts that run in hooks.
@@ -74,4 +75,4 @@ terasort:
 
     juju run --unit hadoop-master/0 "sudo -u hdfs /usr/lib/hadoop/terasort.sh"
 
-See also the `juju help run` command for more information
+For more information see the `juju help run` command.
