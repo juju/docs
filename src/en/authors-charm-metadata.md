@@ -156,30 +156,30 @@ The MySQL charm metadata:
     ease of use.
     categories:
     - databases
-  provides:
-    db:
-      interface: mysql
-    db-admin:
-      interface: mysql-root
-    shared-db:
-      interface: mysql-shared
-    master:
-      interface: mysql-oneway-replication
-    munin:
-      interface: munin-node
-    monitors:
-      interface: monitors
-    local-monitors:
-      interface: local-monitors
-    scope: container
-peers:
-    cluster:
-      interface: mysql-ha
-requires:
-    slave:
-      interface: mysql-oneway-replication
-    ceph:
-      interface: ceph-client
-    ha:
-      interface: hacluster
-      scope: container
+    provides:
+      db:
+        interface: mysql
+      db-admin:
+        interface: mysql-root
+      shared-db:
+        interface: mysql-shared
+      master:
+        interface: mysql-oneway-replication
+      munin:
+        interface: munin-node
+      monitors:
+        interface: monitors
+      local-monitors:
+        interface: local-monitors
+        scope: container
+    peers:
+        cluster:
+          interface: mysql-ha
+    requires:
+        slave:
+          interface: mysql-oneway-replication
+        ceph:
+          interface: ceph-client
+        ha:
+          interface: hacluster
+          scope: container
