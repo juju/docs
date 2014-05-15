@@ -171,7 +171,7 @@ The MySQL charm metadata:
         interface: monitors
       local-monitors:
         interface: local-monitors
-      scope: container
+        scope: container
     peers:
         cluster:
           interface: mysql-ha
