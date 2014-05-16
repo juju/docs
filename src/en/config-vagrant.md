@@ -22,7 +22,8 @@ The following instructions will help you get the environment set up:
 
 To install vagrant and the other required tools on Ubuntu, run:
 
-    sudo apt-get update sudo apt-get -y install virtualbox vagrant sshuttle
+    sudo apt-get update 
+    sudo apt-get -y install virtualbox vagrant sshuttle
 
 1. Fetch and install VirtualBox from
 [virtualbox.org](https://www.virtualbox.org/) 1. Install Vagrant from
