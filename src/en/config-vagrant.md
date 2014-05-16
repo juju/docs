@@ -11,14 +11,14 @@ Using these images gives you a couple of things:
 - The Juju GUI accessible locally through your browser.
 - A functional, self contained Juju environment.
 
-In short, enough of an environment to write and test charms or sandbox your Juju
-deployments.
+In short, enough of an environment to write and test charms or sandbox your
+Juju deployments.
 
-**Warning:** While these images are based on the Ubuntu Cloud Images, they should
-be treated as beta quality images. Should you encounter a problem, please pop
-into #juju on Freenode and ask Ben (utlemming) and the Juju community questions.
-Obviously, as this is a beta image, please be patient if the image fails to work
-for you first time.
+**Warning:** While these images are based on the Ubuntu Cloud Images, they
+should be treated as beta quality images. Should you encounter a problem,
+please pop into #juju on Freenode and ask Ben (utlemming) and the Juju
+community questions.  Obviously, as this is a beta image, please be patient if
+the image fails to work for you first time.
 
 ## Installing
 
@@ -28,20 +28,21 @@ The following instructions will help you get the environment set up:
 
 To install vagrant and the other required tools on Ubuntu, run:
 
-    sudo apt-get update
-    sudo apt-get -y install virtualbox vagrant sshuttle
+    sudo apt-get update sudo apt-get -y install virtualbox vagrant sshuttle
 
-1. Fetch and install VirtualBox from [virtualbox.org](https://www.virtualbox.org/)
-1. Install Vagrant from [vagrantup.com](http://www.vagrantup.com/downloads.html)
-1. (optional) Install Sshuttle. You can do this via `homebrew`:
-    brew install sshuttle
+1. Fetch and install VirtualBox from
+[virtualbox.org](https://www.virtualbox.org/) 1. Install Vagrant from
+[vagrantup.com](http://www.vagrantup.com/downloads.html) 1. (optional) Install
+Sshuttle. You can do this via `homebrew`: brew install sshuttle
 
 Or you can get the source from
 [github.com/apenwarr/sshuttle](https://github.com/apenwarr/sshuttle)
 
-1. Fetch and install VirtualBox from [virtualbox.org](https://www.virtualbox.org/)
-1. Install Vagrant from [vagrantup.com](http://www.vagrantup.com/downloads.html)
-1. (optional) Install Sshuttle. (this requires the [node.js binary for Windows](http://nodejs.org/download/))
+1. Fetch and install VirtualBox from
+[virtualbox.org](https://www.virtualbox.org/) 1. Install Vagrant from
+[vagrantup.com](http://www.vagrantup.com/downloads.html) 1. (optional) Install
+Sshuttle. (this requires the [node.js binary for
+Windows](http://nodejs.org/download/))
 
 Run: `npm install sshuttle`
 
@@ -50,34 +51,35 @@ Run: `npm install sshuttle`
 Vagrant uses "boxes," as a way of distributing the virtual machine images. We
 have put all our boxes on the Ubuntu Cloud Images site. The quick links are:
 
+### 14.04 LTS:
+
+- [trusty-server-cloudimg-amd64-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box)
+- [trusty-server-cloudimg-i386-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-juju-vagrant-disk1.box)
+
 ### 12.04 LTS:
 
-- [precise-server-cloudimg-amd64-juju-vagrant-disk1.box](http://cloud-
-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-
-vagrant-disk1.box)
+- [precise-server-cloudimg-amd64-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box)
+- [precise-server-cloudimg-i386-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-juju-vagrant-disk1.box)
 
-- [precise-server-cloudimg-i386-juju-vagrant-disk1.box](http://cloud-
-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-juju-
-vagrant-disk1.box)
-
-If you are unsure which one to fetch, use the 12.04 builds, as this is the long
-term support release of Ubuntu. Most modern machines are now 64bit (x86_64
-AMD64). If you need other versions of Ubuntu, check out the [Cloud Images](http
-://cloud-images.ubuntu.com/vagrant/)
+If you are unsure which one to fetch, use the 64-bit builds as most modern
+machines are now 64bit (x86_64 AMD64). If you need other versions of Ubuntu,
+check out the [Cloud Images](http ://cloud-images.ubuntu.com/vagrant/). These
+images are also listed on [Vagrant Cloud](https://vagrantcloud.com/ubuntu).
 
 ## Getting started!
 
 Vagrant makes getting started really easy.
 
-Choose a directory to work in. This directory will be shared with the guest, and
-contain the vagrant configuration for the machine. Run:
+Choose a directory to work in. This directory will be shared with the guest,
+and contain the vagrant configuration for the machine. Run:
 
     vagrant box add JujuBox <URL>
 
 The URL can be from the list above or a local file if you have already
 downloaded a suitable box. For example:
 
-    vagrant box add JujuBox http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box
+    vagrant box add JujuBox
+http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box
 
 This will download the box from the URL you chose above.The box will be given
 the name of "JujuBox"
@@ -99,8 +101,8 @@ The box will start and configure Juju for you.
 ## Access the GUI
 
 In order to access the GUI, go to the url:
-[http://127.0.0.1:6080](http://127.0.0.1:6080) Until the Juju GUI is deployed,
-you will see a status page. Wait a few minutes, referesh the page. Once the GUI
+[http://127.0.0.1:6080](http://127.0.0.1:6080). Until the Juju GUI is deployed,
+you will see a status page. Wait a few minutes, refresh the page. Once the GUI
 is deployed, it will display the password on the login page.
 
 ![Step three](./media/config-vagrant-step03.png)
@@ -127,6 +129,7 @@ access your charms locally.
 The Juju Quickstart uses 10.0.3.0/24 as the LXC network. To grant local access
 to that group, run:
 
-    sshuttle -e 'ssh -o UserKnownHostsFile=/dev/null vagrant@localhost:2222' 10.0.3.0/24
+    sshuttle -e 'ssh -o UserKnownHostsFile=/dev/null vagrant@localhost:2222'
+10.0.3.0/24
 
 Use the password "vagrant"
