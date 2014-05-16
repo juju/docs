@@ -3,7 +3,7 @@
 The Juju Vagrant images are a way of extending the portability and ease of use
 of LXC containers to other platforms. The initial image is based on the Ubuntu
 Cloud Images. Juju is configured to use the local LXC provider and is preseeded
-with the latest 12.04 LTS release so deployments should be relatively fast.
+with the latest LTS releases so deployments should be relatively fast.
 
 Using these images gives you a couple of things:
 
@@ -13,12 +13,6 @@ Using these images gives you a couple of things:
 
 In short, enough of an environment to write and test charms or sandbox your
 Juju deployments.
-
-**Warning:** While these images are based on the Ubuntu Cloud Images, they
-should be treated as beta quality images. Should you encounter a problem,
-please pop into #juju on Freenode and ask Ben (utlemming) and the Juju
-community questions.  Obviously, as this is a beta image, please be patient if
-the image fails to work for you first time.
 
 ## Installing
 
@@ -122,11 +116,11 @@ To ssh in, run `vagrant ssh`
 
 If you want to use this environment for developing Juju Charms, you can do so
 with the aid of SSHuttle. SSHuttle is a slick tool for using SSH as a VPN. When
-used with the Juju Quickstart images, it means that you can have a completely
+used with the Juju Vagrant images, it means that you can have a completely
 disposable development environment, you can use your preferred editor, and
 access your charms locally.
 
-The Juju Quickstart uses 10.0.3.0/24 as the LXC network. To grant local access
+The box uses 10.0.3.0/24 as the LXC network. To grant local access
 to that group, run:
 
     sshuttle -e 'ssh -o UserKnownHostsFile=/dev/null vagrant@localhost:2222'
