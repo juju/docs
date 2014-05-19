@@ -213,7 +213,7 @@ fi
 # Extract to a known location
 juju-log "Extracting Vanilla"
 tar -xvzf /tmp/vanilla.tar.gz -C /var/www/
-mv /var/www/Garden-Vanilla* /var/www/vanilla
+mv /var/www/vanilla-Vanilla* /var/www/vanilla
 if [ -f /tmp/config.php ]; then
   mv /tmp/config.php /var/www/vanilla/conf/
 fi
