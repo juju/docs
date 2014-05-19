@@ -20,29 +20,32 @@ manner that ensures peer reviews and quality.
 
 ## Submitting a new Charm
 
+You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not required to submit to both releases, but we recommend supporting both whenever possible so that users get the most flexibility:
+
   1. Install juju and charm-tools.
-  2. Create a repository, something like `mkdir -p ~/charms/precise`, precise is the release code name for the [release of Ubuntu](http://releases.ubuntu.com) you wish to target your charm at.
-  3. If you haven't created your charm yet, you can use `charm create ubuntu-package-name` which will fill in some basic metadata info for you. You can check to see if it already exists at [http://jujucharms.com/](http://jujucharms.com/). Also make sure to [check the list of open charms](http://goo.gl/mvtPh) to see if anybody is already working on a charm for the service you want to work on. Bugs which have had no activity by the assignee for more than 30 days are fair game and should be unassigned.
-  4. Once your charm is working and tested with any compatible charms, make sure it passes `charm proof path/to/your/charm`
-  5. `bzr init` in your charm's root directory
-  6. `bzr add` to add all files.
-  7. `bzr ci -m'Initial charm'`
-  8. `bzr push lp:~your-launchpad-username/charms/precise/your-charms-name/trunk`
-  9. File a bug against charms at [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug) This is used to track the progress of your charm.
-  10. Now you just need to attach your branch to the bug report, go to [your code page](https://code.launchpad.net/people/+me), find your branch, and click on it. Then click on "Link a bug report", and put in the number of the bug you filed.
-  11. Subscribe the `charmers` team by clicking "Subscribe someone else" on the right side of the launchpad page. This is important as it gets your charm in the review queue!
+  1. Create a repository, something like `mkdir -p ~/charms/precise`, precise is the release code name for the [release of Ubuntu](http://releases.ubuntu.com) you wish to target your charm at. You can also use `trusty` if you're submitting to that series.
+  1. If you haven't created your charm yet, you can use `charm create ubuntu-package-name` which will fill in some basic metadata info for you. You can check to see if it already exists at [http://jujucharms.com/](http://jujucharms.com/). Also make sure to [check the list of open charms](http://goo.gl/mvtPh) to see if anybody is already working on a charm for the service you want to work on. Bugs which have had no activity by the assignee for more than 30 days are fair game and should be unassigned.
+  1. Once your charm is working and tested with any compatible charms, make sure it passes `charm proof path/to/your/charm`
+  1. `bzr init` in your charm's root directory
+  1. `bzr add` to add all files.
+  1. `bzr ci -m'Initial charm'`
+  1. To submit your charm for 12.04: `bzr push lp:~your-launchpad-username/charms/precise/your-charms-name/trunk`
+  1. To submit your charm for 14.04: `bzr push lp:~your-launchpad-username/charms/trusty/your-charms-name/trunk`
+  1. File a bug against charms at [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug) This is used to track the progress of your charm.
+  1. Now you just need to attach your branch to the bug report, go to [your code page](https://code.launchpad.net/people/+me), find your branch, and click on it. Then click on "Link a bug report", and put in the number of the bug you filed. If you are submitting to multiple releases please make one bug per release.
+  1. Subscribe the `charmers` team by clicking "Subscribe someone else" on the right side of the launchpad page. This is important as it gets your charm in the review queue!
 
 Your charm should then be looked at in a timely manner.
 
 ## Submitting a fix to an existing Charm
 
   1. Grab the charm you want to fix, we'll use Nagios as an example: `bzr branch lp:charms/precise/nagios`
-  2. Modify it to meet your needs.
-  3. Commit your fixes `bzr commit -m'Your changelog entry goes here'`
-  4. `bzr push lp:~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
-  5. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals) by going to your branch's code page: `https://code.launchpad.net/~charmers/charms/precise/nagios/trunk` and clicking "Propose for merging"
-  6. In the merge proposal form select the charm's lp name: `~lp:charms/nagios`
-  7. For the reviewer field put the `charmers` team, this will get your code into the review queue!
+  1. Modify it to meet your needs.
+  1. Commit your fixes `bzr commit -m'Your changelog entry goes here'`
+  1. `bzr push lp:~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
+  1. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals) by going to your branch's code page: `https://code.launchpad.net/~charmers/charms/precise/nagios/trunk` and clicking "Propose for merging"
+  1. In the merge proposal form select the charm's lp name: `~lp:charms/nagios`
+  1. For the reviewer field put the `charmers` team, this will get your code into the review queue!
 
 ## Submitting bundles to the Charm Store
 
