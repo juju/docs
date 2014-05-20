@@ -280,8 +280,12 @@ using the following:
     d.add('mysql')
     d.setup()
     d.sentry.wait()
-    d.sentry.unit['mysql/0']
-    d.sentry.unit['mediawiki/0']
+    # get UnitSentry for a specific service/unit
+    d.sentry['mysql/0']
+    d.sentry['mediawiki/0']
+    # get list of all UnitSentry objects for a service, one per unit
+    d.sentry['mysql']
+    assert d.sentry['mysql/0'] in d.sentry['mysql']
 
 Sentries provide several methods for which you can use to gather information
 about an environment. The following are a few examples.
@@ -380,7 +384,7 @@ Execute specified command as root on remote machine
 
 Returns a tuple of output string and exit code
 
-    >>> d.sentry.unit['ubuntu/0'].run('whoami')
+    >>> d.sentry['ubuntu/0'].run('whoami')
     ('root', 0)
 
 ## Examples
@@ -419,8 +423,8 @@ Here are a few examples of Amulet tests
         # will automatically "FAIL" the test.
         raise
     # Shorten the names a little to make working with unit data easier
-    wp_unit = d.sentry.unit['wordpress/0']
-    mysql_unit = d.sentry.unit['mysql/0']
+    wp_unit = d.sentry['wordpress/0']
+    mysql_unit = d.sentry['mysql/0']
     # WordPress requires user input to "finish" a setup. This code is contained in
     # the helper.py file found in the lib directory. If it's not able to complete
     # the WordPress setup we need to quit the test, not as failed per se, but as a
