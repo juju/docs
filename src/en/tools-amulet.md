@@ -220,9 +220,9 @@ Import an existing deployer object.
 
   - `deploy_cfg` Already parsed deployer yaml/json file.
 
-    Deployment.relate(*args)
+##### Deployment.relate(*args)
 
-Relate two services together.
+Relate services together.
 
   - `*args` - `service:relation` to be related.
 
@@ -238,6 +238,9 @@ first argument as a relation.
     d.add('discourse')
     d.relate('postgresql:db-admin', 'discourse:db')
     d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
+    # previous command is equivalent too:
+    d.relate('mysql:db', 'wordpress:db')
+    d.relate('mysql:db', 'mediawiki:database')
 
 ##### Deployment.setup(timeout=600)
 
@@ -259,6 +262,28 @@ Example:
     except amulet.helpers.TimeoutError:
         # Setup didn't complete before timeout
         pass
+
+##### Deployment.unrelate(*args)
+
+Remove a relation between two services.
+
+  - `*args` - `service:relation` to be unrelated.
+
+Exactly two arguments must be given.
+
+    import amulet
+    d = amulet.Deployment()
+    d.add('postgresql')
+    d.add('mysql')
+    d.add('wordpress')
+    d.add('mediawiki')
+    d.add('discourse')
+    d.relate('postgresql:db-admin', 'discourse:db')
+    d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
+    # unrelate all the services we just related
+    d.unrelate('postgresql:db-admin', 'discourse:db')
+    d.unrelate('mysql:db', 'wordpress:db')
+    d.unrelate('mysql:db', 'mediawiki:database')
 
 ### amulet.sentry
 
