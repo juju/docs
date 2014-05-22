@@ -28,3 +28,19 @@ server is not running before it creates the replacement.
 
 As with the normal bootstrap command, you can pass --constraints to setup the
 new state-server.
+
+The 'HA' case:
+
+HA is a work in progress, for the moment we have a basic support which is an
+extension of the regular backup functionality.
+Please read carefully before attempting backup/restore on an HA environment.
+
+The contemplated case for HA backup/restore is when you have lost all your state
+servers and require to recover a basic setup in order to be able to perform
+ensure availability again.
+When backing up an HA enabled install, back-up will use the initial state-server
+ and, in case of running restore, the only check performed is to make sure 
+that same initial state-server is not up.
+BEWARE, only run restore in the case where you no longer have working
+State Servers since otherwise this will take them out of line and possibly
+cripple your environment
