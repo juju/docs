@@ -7,6 +7,7 @@ instructions on how Juju works, this section is all about putting those commands
 - [Deploying a Node.js application](howto-node.html)
 - [Deploying with the Rails framework](howto-rails.html)
 - [Deploy services with the Juju-GUI](howto-gui-management.html)
+- [Deploy services with the Juju-GUI](howto-gui-management.html)
 
 Got an idea for something to add here? Check out [how to contribute to the
 docs](contributing.html)
