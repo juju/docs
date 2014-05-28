@@ -43,7 +43,8 @@ metadata. The path components (in order of lookup) are:
   1. User supplied location (specified by tools-metadata-url or image-metadata-url config settings).
   2. The environment's cloud storage.
   3. Provider specific locations (eg keystone endpoint if on Openstack).
-  4. A web location with metadata for supported public clouds (https://streams.canonical.com).
+  4. A web location with metadata for supported public clouds 
+     (https://streams.canonical.com for tools and http://cloud-images.ubuntu.com for images).
 
 Metadata may be inline signed, or unsigned. We indicate a metadata file is
 signed by using the '.sjson' extension. Each location in the path is first
@@ -51,10 +52,10 @@ searched for signed metadata, and if none is found, unsigned metadata is
 attempted before moving onto the next path location.
 
 Juju ships with public keys used to validate the integrity of image and tools
-metadata obtained from https://streams.canonical.com. So out of the box, Juju
-will "Just Work" with any supported public cloud, using signed metadata. Setting
-up metadata for a private (eg Openstack) cloud requires metadata to be generated
-using tools which ship with Juju.
+metadata obtained from http://cloud-images.ubuntu.com and https://streams.canonical.com.
+So out of the box, Juju will "Just Work" with any supported public cloud, using
+signed metadata. Setting up metadata for a private (eg Openstack) cloud requires
+metadata to be generated using tools which ship with Juju.
 
 ## Image Metadata Contents
 
@@ -188,7 +189,13 @@ implementation will vary.
 ### Central web location
 ([https://streams.canonical.com](https://streams.canonical.com))
 
-This is the default location used to search for image and tools metadata and is
+This is the default location used to search for tools metadata and is
+used if no matches are found earlier in any of the above locations. No user
+configuration is required.
+
+([http://cloud-images.ubuntu.com](http://cloud-images.ubuntu.com))
+
+This is the default location used to search for image metadata and is
 used if no matches are found earlier in any of the above locations. No user
 configuration is required.
 
