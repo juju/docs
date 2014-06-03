@@ -1,16 +1,10 @@
 # Deploying Charms Offline
 
 Many private clouds have no direct access to the internet due to security
-reasons. In these cases the standard installation of OpenStack using Juju
-doesn't work, because the Juju agents on the fresh installed nodes are not
-able to retrieve the charms needed to fulfill the installation directly
-from the charm store.
+reasons.
 
-Here the solution is the usage of a client which is able to connect to the
-internet, retrieve the needed charms, storm them in a local repository and
-then deploy using this repository. Here the client for the retrieval surely
-can be a different system than the one for deployment as long as both have
-access to a shared filesystem.
+In these cases it's useful to maintain a copy of the internet-accessible
+Charm Store for your local deployments.
 
 ## Rerieving charms using the Charm Tools
 
@@ -116,7 +110,7 @@ the `set-env` command:
 juju set-env "default-series=trusty"
 ```
 
-!!! Note: Specifying a local repository makes Juju look there *first*, but if 
+!!! Note: Specifying a local repository makes Juju look there *first*, but if
 the relevant charm is not found in that repository, it will fall back to
 fetching it from the charm store. If you wish to check where a charm was
 installed from, it is listed in the `juju status` output.
