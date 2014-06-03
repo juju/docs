@@ -6,6 +6,12 @@ reasons.
 In these cases it's useful to maintain a copy of the internet-accessible
 Charm Store for your local deployments.
 
+!!! Note: Though this method will ensure that the charms themselves are
+available on systems without outside internet access, there is no 
+guarantee that a charm will work in a disconnected state. Some charms
+pull code from the outside world, such as github. We recommend modifying
+these charms to pull code from an internal server when appropriate.
+
 ## Rerieving charms using the Charm Tools
 
 ### Installation
