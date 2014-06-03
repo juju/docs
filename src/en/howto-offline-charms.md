@@ -16,9 +16,8 @@ these charms to pull code from an internal server when appropriate.
 
 ### Installation
 
-Charm tools was included in the list of packages recommended by in
-the [Juju installation documentation](https://juju.ubuntu.com/docs/#installation).
-If you didn't install it then, you can do so now:
+In addition to [Juju](https://juju.ubuntu.com/docs/#installation) we need
+to install charm-tools: 
 
 ```
 sudo apt-get update && sudo apt-get install charm-tools
