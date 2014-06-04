@@ -58,7 +58,7 @@ have put all our boxes on the Ubuntu Cloud Images site. The quick links are:
 
 If you are unsure which one to fetch, use the 64-bit builds as most modern
 machines are now 64bit (x86_64 AMD64). If you need other versions of Ubuntu,
-check out the [Cloud Images](http ://cloud-images.ubuntu.com/vagrant/). These
+check out the [Cloud Images](http://cloud-images.ubuntu.com/vagrant/). These
 images are also listed on [Vagrant Cloud](https://vagrantcloud.com/ubuntu).
 
 ## Getting started!
