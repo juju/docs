@@ -68,9 +68,9 @@ Tools which do not produce output also accept the `--format` flag, but ignore
 it, for compatibility reasons.
 
 The various "relation-" tools infer context from the hook where possible. If
-they're running in a relation hook, the current relation id is set as the
-default; and if they're running in a -joined, -changed, or -broken hook, the
-current remote unit is set as the default.
+they're running in a relation hook, the current relation identifier is set as 
+the default; and if they're running in a -joined, -changed, or -broken hook, 
+the current remote unit is set as the default.
 
 Best use of relation hooks will be made by those who understand the [relation
 model](./authors-relations-in-depth.html).
@@ -173,12 +173,16 @@ Close port 80 if it was open:
 ### relation-set
 
 `relation-set` writes the local unit's settings for some relation. It accepts
-any number of `key=value` strings, and an optional `-r` argument, which defaults to the current relation id. If it's not running in a relation hook, `-r` needs to be specified. The `value` part of an argument is not inspected, and is stored directly as a string. Setting an empty string causes the setting to be removed.
+any number of `key=value` strings, and an optional `-r` argument, which 
+defaults to the current relation identifier. If it's not running in a relation 
+hook, `-r` needs to be specified. The `value` part of an argument is not 
+inspected, and is stored directly as a string. Setting an empty string causes 
+the setting to be removed.
 
 Examples:
 
-Setting a pair of values for the local unit in the default relation which is
-stored in the environment variable `JUJU_RELATION_ID`:
+Setting a pair of values for the local unit in the default relation identifier 
+which is stored in the environment variable `JUJU_RELATION_ID`:
 
     echo $JUJU_RELATION_ID
     server:3
@@ -188,7 +192,7 @@ The setting is done with:
     relation-set username=bob password=2db673e81ffa264c
 
 To set the pair of values for the local unit in a specific relation specify the
-relation id:
+relation identifier:
 
     relation-set -r server:3 username=jim password=12345
 
@@ -216,14 +220,16 @@ any hook on the local unit can write settings for any relation the local unit is
 
 ### relation-get
 
-`relation-get` reads the settings of the local unit, or of any remote unit, in a given relation (set with `-r`, defaulting to the current relation, as in
-`relation-set`). The first argument specifies the settings key, and the second
-the remote unit, which may be omitted if a default is available (that is, when
-running a relation hook other than -broken).
+`relation-get` reads the settings of the local unit, or of any remote unit, 
+in a given relation (set with `-r`, defaulting to the current relation 
+identifier, as in `relation-set`). The first argument specifies the settings 
+key, and the second the remote unit, which may be omitted if a default is 
+available (that is, when running a relation hook other than -broken).
 
 If the first argument is omitted, a dictionary of all current keys and values
-will be printed; all values are always plain strings without any interpretation. If you need to specify a remote unit but want to see all settings, use `-` for
-the first argument.
+will be printed; all values are always plain strings without any 
+interpretation. If you need to specify a remote unit but want to see all 
+settings, use `-` for the first argument.
 
 The environment variable `JUJU_REMOTE_UNIT` stores the default remote unit:
 
@@ -277,42 +283,48 @@ the hole is closed without notice.
 
 ### relation-list
 
-`relation-list` accepts the `-r` flag as above, and outputs the names of every
-remote unit currently known to be in the relation.
+`relation-list` outputs a list of all the related **units** for a relation 
+identifier. If not running in a relation hook context, `-r` needs to be 
+specified with a relation identifier similar to the`relation-get` and 
+`relation-set` commands. 
 
 Examples:
 
-To show all remote units in the current relation enter:
+To show all remote units for the current relation identifier enter:
 
     relation-list
     mongodb/0
     mongodb/2
     mongodb/3
 
-All remote units in a specific relation can be shown with:
+All remote units in a specific relation identifier can be shown with:
 
     relation-list -r website:2
     haproxy/0
 
 ### relation-ids
 
-`relation-ids` accepts a single argument which, in a relation hook, defaults to
-the name of the current relation.
+`relation-ids` outputs a list of the related **services** with an relation 
+name. Accepts a single argument (relation-name) which, in a relation hook, 
+defaults to the name of the current relation. The output is useful as input 
+to the `relation-list`, `relation-get`, and `relation-set` commands to read 
+or write other relation values.
 
 Examples:
 
-The current relation is stored in the environment variable `JUJU_RELATION`. So
-all relations like the current one can be shown with:
+The current relation name is stored in the environment variable 
+`JUJU_RELATION`. All "server" relation identifiers can be shown with:
 
     relation-ids
     server:1
     server:7
     server:9
 
-To show all relations with a given name pass it as argument:
+To show all relation identifiers with a different name pass it as argument:
 
     relation-ids reverseproxy
     reverseproxy:3
 
 Note again that all commands that produce output accept `--format json` and
-`--format yaml`, and you may consider it smarter to use those for clarity's sake than to depend on the default `smart` format.
+`--format yaml`, and you may consider it smarter to use those for clarity's 
+sake than to depend on the default `smart` format.
