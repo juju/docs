@@ -40,17 +40,38 @@ or modify ~/.juju/environments.yaml with the following content:
 
       maas:
         type: maas
-        maas-server: 'http://&LT;my-maas-server&GT;:80/MAAS'
-        maas-oauth: '&LT;MAAS-API-KEY&GT;'
+        maas-server: 'http://<my-maas-server>:80/MAAS'
+        maas-oauth: 'MAAS-API-KEY'
 
 Substitute the API key from earlier into the `MAAS_API_KEY` slot. You may need
 to modify the `my-maas-server` setting too; if you're running from the maas
 package it should be something like "http://hostname.xxxx.yyy/MAAS".
 
+It is also useful to add your SSH keys to the configuration, as then MAAS will
+be able to automatically add them to each unit. This may be done simply by 
+adding the following option to the config:
+
+```
+        authorized-keys-path: ~/.ssh/id_rsa.pub 
+```
+
+...or point to any other appropriate key file.
+
 An admin password will be generated when you try and bootstrap the Juju
-instance.
+instance. you can specify this explicitly in the configuration if you like:
 
-The default series for MAAS will automatically be set to 'precise'.
+```
+        admin-secret: asecurepassword
+```
 
-For further steps with Juju, you should check out the [Juju instructions in the
-MAAS documentation](http://maas.ubuntu.com/docs/juju-quick-start.html)
+The default series for MAAS will automatically be set to 'precise'. You can override 
+this setting by adding the optional configuration:
+
+```
+        default-series: trusty
+```
+
+
+
+For further steps with Juju on MAAS, you should check out the 
+[Juju instructions in the MAAS documentation](http://maas.ubuntu.com/docs/juju-quick-start.html)

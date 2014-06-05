@@ -21,7 +21,7 @@ Here's a valid metadata file:
       Will deploy OpenJDK 6 JRE and the latest Minecraft server
 
 With only those fields, a metadata file is valid, but not very useful. Charms
-for use in the Charm Store should always set the following fields as well, for
+for use in the [Charm Store](https://jujucharms.com/) should always set the following fields as well, for
 categorization and display in the GUI:
 
   - `maintainer` is the name and email address for the main point of contact
@@ -156,30 +156,30 @@ The MySQL charm metadata:
     ease of use.
     categories:
     - databases
-  provides:
-    db:
-      interface: mysql
-    db-admin:
-      interface: mysql-root
-    shared-db:
-      interface: mysql-shared
-    master:
-      interface: mysql-oneway-replication
-    munin:
-      interface: munin-node
-    monitors:
-      interface: monitors
-    local-monitors:
-      interface: local-monitors
-    scope: container
-peers:
-    cluster:
-      interface: mysql-ha
-requires:
-    slave:
-      interface: mysql-oneway-replication
-    ceph:
-      interface: ceph-client
-    ha:
-      interface: hacluster
-      scope: container
+    provides:
+      db:
+        interface: mysql
+      db-admin:
+        interface: mysql-root
+      shared-db:
+        interface: mysql-shared
+      master:
+        interface: mysql-oneway-replication
+      munin:
+        interface: munin-node
+      monitors:
+        interface: monitors
+      local-monitors:
+        interface: local-monitors
+        scope: container
+    peers:
+        cluster:
+          interface: mysql-ha
+    requires:
+        slave:
+          interface: mysql-oneway-replication
+        ceph:
+          interface: ceph-client
+        ha:
+          interface: hacluster
+          scope: container

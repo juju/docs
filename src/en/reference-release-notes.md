@@ -5,6 +5,60 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+
+^# juju-core 1.18.3
+
+  A new stable release of Juju, juju-core 1.18.3, is now available.
+  This release replaces 1.18.2.
+
+  ###Getting Juju
+
+  juju-core 1.18.3 is available in trusty and backported to earlier
+  series in the following PPA
+  `https://launchpad.net/~juju/+archive/stable`
+
+  If you use the local provider, be sure to install the juju-local package
+  if it is not already installed. Juju's local requirements have changed.
+  Upgrading local juju environments without the juju-local package is not
+  advised.
+
+  ###Resolved issues
+  
+  * juju sync-tools destroys the environment when given an invalid source Lp 1316869
+  * Local provider behaves poorly when juju-mongodb is not installed
+  on trusty Lp 1301538
+  * Juju bootstrap defaults to i386 Lp 1304407
+  * LXC local provider fails to provision precise instances from a trusty host Lp 1306537
+  * LXC nested within kvm machines do not use lxc-clone Lp 1315216
+
+^# juju-core 1.18.2
+
+  A new stable release of Juju, juju-core 1.18.2, is now available.
+  This release replaces 1.18.1.
+
+  ###Getting Juju
+
+  juju-core 1.18.2 is available in trusty and backported to earlier
+  series in the following PPA
+    https://launchpad.net/~juju/+archive/stable
+  
+  If you use the local provider, be sure to install the juju-local package
+  if it is not already installed. Juju's local requirements have changed.
+  Upgrading local juju environments without the juju-local package is not
+  advised.
+  
+  ###Resolved issues
+
+  * Manual provisioned systems stuck in pending on arm64 Lp 1302205
+  * Version reports "armhf" on arm64  Lp 1304742
+  * Juju deploy --to lxc:0 cs:trusty/ubuntu creates precise container Lp 1302820
+  * If the provisioner fails to find tools for one machine it fails
+    to provision the others LP 1311676
+  * Juju status panic() when unable to parse .jenv Lp 1312136
+  * Juju authorised-keys should have an authorized-keys alias Lp 1312537
+  * Race condition on bootstrap machine addresses with manual provider Lp 1314430
+
+
 ^# juju-core 1.18.1
   A new stable release of Juju, juju-core 1.18.1, is now available. This release
   replaces 1.18.0.

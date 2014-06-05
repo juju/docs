@@ -22,6 +22,7 @@
               <li class=" sub"><a href="charms-destroy.html">Destroying Services</a></li>
               <li class=" sub"><a href="charms-environments.html">Managing environments</a></li>
               <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
+              <li class=" sub"><a href="charms-working-with-units.html">Working with Units</a></li>
               <li class=""><a href="howto.html">How to...</a></li>
               <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
               <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
@@ -29,6 +30,7 @@
               <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
               <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
               <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
+              <li class=" sub"><a href="howto-offline-charms.html">Deploy charms offline</a></li>
               <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
               <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
               <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
