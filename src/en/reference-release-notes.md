@@ -5,6 +5,32 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+
+^# juju-core 1.18.3
+
+  A new stable release of Juju, juju-core 1.18.3, is now available.
+  This release replaces 1.18.2.
+
+  ###Getting Juju
+
+  juju-core 1.18.3 is available in trusty and backported to earlier
+  series in the following PPA
+  `https://launchpad.net/~juju/+archive/stable`
+
+  If you use the local provider, be sure to install the juju-local package
+  if it is not already installed. Juju's local requirements have changed.
+  Upgrading local juju environments without the juju-local package is not
+  advised.
+
+  ###Resolved issues
+  
+  * juju sync-tools destroys the environment when given an invalid source Lp 1316869
+  * Local provider behaves poorly when juju-mongodb is not installed
+  on trusty Lp 1301538
+  * Juju bootstrap defaults to i386 Lp 1304407
+  * LXC local provider fails to provision precise instances from a trusty host Lp 1306537
+  * LXC nested within kvm machines do not use lxc-clone Lp 1315216
+
 ^# juju-core 1.18.1
   A new stable release of Juju, juju-core 1.18.1, is now available. This release
   replaces 1.18.0.
