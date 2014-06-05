@@ -43,7 +43,7 @@ example, in the case of specifying a database for the Mediawiki charm.
     juju add-relation mediawiki mysql
     error: ambiguous relation: "mediawiki mysql" could refer to "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 
-the soloution in these cases is to specify the nature of the relation using the
+the solution in these cases is to specify the nature of the relation using the
 hook identifier. In this case, we want MySQL to provide the backend database for
 mediawiki, so this is what we need to enter:
 
