@@ -34,18 +34,26 @@ The following variables are always available.
 
 In addition, every relation hook makes available relation-specific variables.
 
-  - The `$JUJU_RELATION` variable holds the relation name. This information is of limited value, because it's always the same as the part of the hook name just before "-relation-".
-  - The `$JUJU_RELATION_ID` variable holds an opaque relation identifier, used to distinguish between multiple relations with the same name. It is vitally important, because it's the only reasonable way of telling the difference between (say) a database service's many independent clients.
+  - The `$JUJU_RELATION` variable holds the relation name. This information
+  is of limited value, because it's always the same as the part of the hook
+  name just before "-relation-".
+  - The `$JUJU_RELATION_ID` variable holds an opaque relation identifier, used
+  to distinguish between multiple relations with the same name. It is vitally
+  important, because it's the only reasonable way of telling the difference
+  between (say) a database service's many independent clients.
 
 ...and, if that relation hook is not a -broken hook:
 
-  - The `$JUJU_REMOTE_UNIT` variable holds the name of the unit which is being reported to have -joined, -changed, or -departed.
+  - The `$JUJU_REMOTE_UNIT` variable holds the name of the unit which is
+  being reported to have -joined, -changed, or -departed.
 
 Juju does _not_ pay any attention to the values of the above variables when
 running hook tools: they're a one-way communication channel from juju to the
 charm only. Finally, in all cases:
 
-  - The `$JUJU_AGENT_SOCKET` and `$JUJU_CONTEXT_ID` variables allow the hook tools to work: juju _does_ pay attention to them, but you should treat them as opaque and avoid messing with them.
+  - The `$JUJU_AGENT_SOCKET` and `$JUJU_CONTEXT_ID` variables allow the hook
+    tools to work: juju _does_ pay attention to them, but you should treat
+    them as opaque and avoid messing with them.
 
 Finally, if you're [debugging](./authors-hook-debug.html), you'll also have
 access to:
@@ -54,7 +62,8 @@ access to:
 
 ## Hook tools
 
-All hook tools are available in all hooks. Many of the tools produce output, and those that do accept a `--format` flag whose value can be set to `json` or
+All hook tools are available in all hooks. Many of the tools produce output,
+and those that do accept a `--format` flag whose value can be set to `json` or
 `yaml` as desired. If it's not specified, the format defaults to `smart`, which
 transforms the basic output as follows:
 
@@ -77,7 +86,9 @@ model](./authors-relations-in-depth.html).
 
 ### juju-log
 
-`juju-log` writes its arguments directly to the unit's log file. All hook output is currently logged anyway, so it's theoretically redundant with `echo`, but this is an implementation detail and should not be depended upon. If it's
+`juju-log` writes its arguments directly to the unit's log file. All hook
+output is currently logged anyway, so it's theoretically redundant with `echo`,
+but this is an implementation detail and should not be depended upon. If it's
 important, please `juju-log` it.
 
     juju-log "some important text"
@@ -127,12 +138,14 @@ To retrieve a specific value pass its key as argument:
     config-get [key]
     some-value
 
-The command can also be call if no value is set and no default is set of even if the setting doesn't exist. In both cases nothing will be returned.
+The command can also be call if no value is set and no default is set of even
+if the setting doesn't exist. In both cases nothing will be returned.
 
     config-get [key-with-no-default]
     config-get [missing-key]
 
-**Note: ** The above two examples are not misprints - asking for a value which doesn't exist or has not been set returns nothing and raises no errors.
+**Note: ** The above two examples are not misprints - asking for a value which
+doesn't exist or has not been set returns nothing and raises no errors.
 
 ### open-port
 
@@ -209,14 +222,17 @@ propagated via relation-set, with the single exception of the `private-address`
 key, which is always set before the unit joins.
 
 You may wish to overwrite the `private-address` setting, for example if you're
-writing a charm that serves as a proxy for some external service; but you should in general avoid _removing_ that key, because most charms expect that value to exist unconditionally.
+writing a charm that serves as a proxy for some external service; but you 
+should in general avoid _removing_ that key, because most charms expect that
+value to exist unconditionally.
 
 All values set are stored locally until the hook completes; at that point, if
 the hook exit code is 0, all changed values will be communicated to the rest of
 the system, causing -changed hooks to run in all related units.
 
 There is no way to write settings for any unit other than the local unit; but
-any hook on the local unit can write settings for any relation the local unit is participating in.
+any hook on the local unit can write settings for any relation the local unit
+is participating in.
 
 ### relation-get
 
@@ -262,7 +278,10 @@ necessarily _accurate_, in that you will always see settings that:
   - _except_ when inspecting the unit's own relation settings, in which case local changes from `relation-set` will be seen correctly.
 
 You should never depend upon the presence of any given key in `relation-get`
-output. Processing that depends on specific values (other than `private-addres`) should be restricted to -changed hooks for the relevant unit, and the absence of a remote unit's value should never be treated as an [error](./authors-hook-errors.html) in the local unit.
+output. Processing that depends on specific values (other than `private-address`) 
+should be restricted to -changed hooks for the relevant unit, and the absence
+of a remote unit's value should never be treated as an
+[error](./authors-hook-errors.html) in the local unit.
 
 In practice, it is common and encouraged for -relation-changed hooks to exit
 early, without error, after inspecting `relation-get` output and determining it
@@ -304,7 +323,7 @@ All remote units in a specific relation identifier can be shown with:
 
 ### relation-ids
 
-`relation-ids` outputs a list of the related **services** with an relation 
+`relation-ids` outputs a list of the related **services** with a relation 
 name. Accepts a single argument (relation-name) which, in a relation hook, 
 defaults to the name of the current relation. The output is useful as input 
 to the `relation-list`, `relation-get`, and `relation-set` commands to read 
