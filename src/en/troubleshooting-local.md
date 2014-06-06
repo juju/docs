@@ -10,7 +10,7 @@ on diagnosing and solving Juju local provider issues.
 Every time bootstrap fails, you'll need to run `juju destroy-environment -e
 local` prior to continuing. First let's rerun a bootstrap in debug mode:
 
-    juju boostrap --show-log --debug
+    juju bootstrap --show-log --debug
 
 This will print very verbose output. If you're receiving `connection failed,
 will retry: dial tcp 127.0.0.1:37017: connection refused` error at the end of
