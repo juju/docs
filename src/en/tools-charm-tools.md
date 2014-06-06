@@ -6,16 +6,15 @@ manage a charms.
 
 # Installation
 
-[Ubuntu](.) [Mac OSX](.) [Windows](.)
 
-#### Ubuntu
+## Ubuntu
 To install the latest Charm Tools, you simply need to grab the latest charm-
 tools package from this PPA:
 
     sudo add-apt-repository ppa:juju/stable
     sudo apt-get update && sudo apt-get install charm-tools
 
-#### Mac OSX
+## Mac OSX
 Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
 running the latest version of homebrew before proceeding.
 
@@ -23,7 +22,7 @@ To install, run the following:
 
     brew install charm-tools
 
-#### Windows
+## Windows
 Charm Tools is available for, and tested, on Microsoft Windows 7 and 8. While
 the installer may work on previous versions of Windows there is no guarentee.
 
