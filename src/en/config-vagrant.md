@@ -124,7 +124,7 @@ access your charms locally.
 The box uses 10.0.3.0/24 as the LXC network. To grant local access
 to that group, run:
 
-    sshuttle -e 'ssh -o UserKnownHostsFile=/dev/null vagrant@localhost:2222'
-10.0.3.0/24
+        sshuttle -r vagrant@localhost:2222 10.0.3.0/24
+
 
 Use the password "vagrant"
