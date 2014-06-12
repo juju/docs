@@ -58,6 +58,10 @@ You will need to set the `management-subscription-id`,
 **Note:** Other than `location` the other key vaule defaults are recommended,
 but can be updated to your preference.
 
+**Note:** Ensure that you set `management-certificate-path` is set to use the
+.pem file, NOT the .cer file, doing so will result in an
+[out of memory error](https://bugs.launchpad.net/ubuntu/+source/juju-core/+bug/1250007).
+
 ## Config Values
 
 Generate a new certificate for juju usage (or use an existing one). Suggest to
