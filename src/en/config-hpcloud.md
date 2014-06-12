@@ -8,12 +8,13 @@ the config file shown below and populate it with the necessary values given in
 
     ## https://juju.ubuntu.com/docs/config-hpcloud.html
       hpcloud:
+        use-floating-ip: true
         type: openstack
         tenant-name: <your HPCloud project name>
         username: <your HPCloud username>
         password: <your HPCloud password>
         auth-url: <The identity server for your project, e.g. https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/>
-        region: <availability zone + region - e.g. az-1.region-a.geo-1>
+        region: <Your activated region>
 
 The items in angled brackets will need to be entered by you, and are explained
 below. You will find most of the relevant is accessible by logging in to the
@@ -23,10 +24,8 @@ below. You will find most of the relevant is accessible by logging in to the
  - `username:` Enter your HP Cloud login username.
  - `password:` Enter your HP Cloud login password.
  - `auth-url:`This is the Keystone url for authentication. It is given in the [ Project > Access and Security page](https://horizon.hpcloud.com/project/access_and_security/), under the API access tab ![image showing service endpoints](media/config-hp002.png)
- - `region:` This is the longer format region name, including the availability zone. There are currently three availability zones in the US West region, and one in US East. You can use any of these provided you have [activated the relevant services in the console](https://horizon.hpcloud.com/landing/). The format is to use the availability zone as a prefix to the region identifier, so you should enter one of these values:
-    * az-1.region-a.geo-1
-    * az-2.region-a.geo-1
-    * az-3.region-a.geo-1
-    * az-1.region-b.geo-1
+ - `region:` You can use any regions provided you have [activated the relevant services in the console](https://horizon.hpcloud.com/landing/). Hp Public Cloud currently has two regions, one in US West, and one in US East:
+    * region-a.geo-1
+    * region-b.geo-1
 
 ** Note: ** HP make frequent updates and enhancements to their cloud service, and the user console. If the current version does not match the images and instructions here, you may at least be able to find the releavant information somewhere in the console. But please also [file a bug](https://bugs.launchpad.net/juju-core/+filebug) so we can update this page!
