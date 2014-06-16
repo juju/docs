@@ -127,21 +127,3 @@ machine that is used as the basis for the clones. This will be called
 `juju-<series>-template`, so for a precise image, the name is
 `juju-precise-template`. Do not modify or start this image while a local
 provider environment is running because you cannot clone a running lxc machine.
-
-## Caveats
-
-There are several special circumstances tied to the local provider, given it's
-development focused nature. These are outlined below.
-
-### juju debug-log
-
-There is currently a [bug](https://launchpad.net/bugs/1202682) which prevents
-`juju debug-log` from working as expected. However, the logs for juju are still
-available for review outside of `juju debug-log`. First, find out what the name
-of your environment is by running `juju switch`. If you're using the default
-`environments.yaml` you'll find this be `local`. All log files for the local
-provider are stored in `~/.juju/<environment>/log`, as such you can duplicate
-the functionality of `juju debug-log` using the following (assuming your current
-environment is "local"):
-
-    tail -f ~/.juju/local/log/unit-*.log
