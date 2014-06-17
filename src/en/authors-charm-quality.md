@@ -1,3 +1,5 @@
+Title:What makes a good charm
+
 # Charm Features
 
 People demand quality out of their tools, and the Charm Store is no different.
