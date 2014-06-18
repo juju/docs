@@ -4,7 +4,15 @@ This process requires you to have an Amazon Web Services (AWS) account. If you
 have not signed up for one yet, it can obtained at
 [http://aws.amazon.com](http://aws.amazon.com).
 
-You should start by generating a generic configuration file for Juju, using the
+You can configure Juju for use with AWS by issuing the following command:
+
+    juju quickstart -i
+
+And follow the instructions for generating a config for AWS by scrolling down
+to "Create a new environment" and selecting "new Amazon EC2 environment" and
+then fill in the appropriate fields.
+
+You can also generate a generic configuration file for Juju, using the
 command:
 
     juju generate-config

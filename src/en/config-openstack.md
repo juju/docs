@@ -1,6 +1,13 @@
 # Configuring for OpenStack
 
-You should start by generating a generic configuration file for Juju, using the
+You can use a menu driven environment to configure OpenStack by executing
+
+    juju quickstart -i
+
+Then scrolling down to "Create a new OpenStack environment" and hitting enter,
+and then adding the credentials to your cloud in the appropriate fields.
+
+You can also manually generate a generic configuration file for Juju, using the
 command:
 
     juju generate-config
@@ -83,7 +90,7 @@ type: openstack
 
 **Note:** At any time you can run `juju generate-config --show` to display the
 most revent version of the environments.yaml template file, instead of having
-it write to file.
+it write to file. Or you can invoke `juju quickstart -i` for an 
 
 Remember to substitute in the parts of the snippet that are important to you.
 If you are deploying on OpenStack the following documentation might also be

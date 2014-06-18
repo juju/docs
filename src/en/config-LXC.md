@@ -17,7 +17,7 @@ you are using:
 
 ### For Ubuntu versions newer than 12.04:
 
-    sudo apt-get install juju-local
+    sudo apt-get install juju-local juju-quickstart
 
 ### For 12.04 LTS users only:
 
@@ -40,12 +40,10 @@ MongoDB server. Juju requires a MongoDB server built with SSL support.
 You should start by generating a generic configuration file for Juju and then
 switching to the local provider by using the command:
 
-    juju generate-config
-    juju switch local
+    juju quickstart
 
-This will generate a file, `environments.yaml` (if it doesn't already exist),
-which will live in your `~/.juju/` directory (and will create the directory if
-it doesn't already exist).
+Then select "automatically create and bootstrap a local environment" and hit
+enter.
 
 **Note:** If you have an existing configuration, you can use
 `juju generate-config --show` to output the new config file, then copy and

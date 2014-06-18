@@ -3,7 +3,15 @@
 This process requires you to have an Windows Azure account. If you have not
 signed up for one yet, it can obtained at http://azure.microsoft.com/en-us/.
 
-You should start by generating a generic configuration file for Juju, using the
+You can configure Juju for use with Azure by issuing the following command:
+
+    juju quickstart -i
+
+And follow the instructions for generating a config for Azure by scrolling down
+to "Create a new environment" and selecting "new Windows Azure environment" and
+then fill in the appropriate fields.
+
+You can also manually generate a generic configuration file for Juju, using the
 command:
 
     juju generate-config
