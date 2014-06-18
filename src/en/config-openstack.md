@@ -90,7 +90,8 @@ type: openstack
 
 **Note:** At any time you can run `juju generate-config --show` to display the
 most revent version of the environments.yaml template file, instead of having
-it write to file. Or you can invoke `juju quickstart -i` for an 
+it write to file. Or you can invoke `juju quickstart -i` for an interactive way
+of changing fields.
 
 Remember to substitute in the parts of the snippet that are important to you.
 If you are deploying on OpenStack the following documentation might also be
