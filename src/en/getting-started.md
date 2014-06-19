@@ -22,7 +22,7 @@ PPA:
 
 Juju is in [Homebrew](http://brew.sh/), to install do:
 
-    brew install juju juju-quickstart
+    brew install juju-quickstart
 
 ## Windows
 
