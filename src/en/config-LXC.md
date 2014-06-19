@@ -40,7 +40,7 @@ MongoDB server. Juju requires a MongoDB server built with SSL support.
 You should start by generating a generic configuration file for Juju and then
 switching to the local provider by using the command:
 
-    juju quickstart
+    juju-quickstart -i
 
 Then select "automatically create and bootstrap a local environment" and hit
 enter.

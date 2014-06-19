@@ -24,6 +24,9 @@ Juju is in [Homebrew](http://brew.sh/), to install do:
 
     brew install juju-quickstart
 
+**Note:** To install brew run `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)`
+ and ensure [Xcode is installed](https://developer.apple.com/xcode/downloads/).
+
 ## Windows
 
 Download and run the [Juju windows installer](https://juju.ubuntu.com/install/).
@@ -44,7 +47,7 @@ To generate an initial config file, you simply need to run:
 
 This command will launch the quickstart config environment, where you can automatically
 generate config files for each cloud Juju supports and write it to
-`~.juju/environments.yaml`.
+`~/.juju/environments.yaml`.
 
 This file will contain sample profiles for different types of cloud services,
 but you will need to edit the files to provide specific information for your
