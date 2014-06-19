@@ -2,7 +2,7 @@
 
 You can use a menu driven environment to configure OpenStack by executing
 
-    juju quickstart -i
+    juju-quickstart -i
 
 Then scrolling down to "Create a new OpenStack environment" and hitting enter,
 and then adding the credentials to your cloud in the appropriate fields.

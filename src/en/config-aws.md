@@ -6,7 +6,7 @@ have not signed up for one yet, it can obtained at
 
 You can configure Juju for use with AWS by issuing the following command:
 
-    juju quickstart -i
+    juju-quickstart -i
 
 And follow the instructions for generating a config for AWS by scrolling down
 to "Create a new environment" and selecting "new Amazon EC2 environment" and

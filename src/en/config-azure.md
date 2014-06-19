@@ -5,7 +5,7 @@ signed up for one yet, it can obtained at http://azure.microsoft.com/en-us/.
 
 You can configure Juju for use with Azure by issuing the following command:
 
-    juju quickstart -i
+    juju-quickstart -i
 
 And follow the instructions for generating a config for Azure by scrolling down
 to "Create a new environment" and selecting "new Windows Azure environment" and

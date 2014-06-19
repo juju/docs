@@ -16,7 +16,7 @@ To install Juju, you simply need to grab the latest juju-core package from the
 PPA:
 
     sudo add-apt-repository ppa:juju/stable
-    sudo apt-get update && sudo apt-get install juju-core juju-quickstart
+    sudo apt-get update && sudo apt-get install juju-quickstart
 
 ## Mac OSX
 
