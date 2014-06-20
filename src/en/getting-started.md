@@ -16,13 +16,13 @@ To install Juju, you simply need to grab the latest juju-core package from the
 PPA:
 
     sudo add-apt-repository ppa:juju/stable
-    sudo apt-get update && sudo apt-get install juju-quickstart
+    sudo apt-get update && sudo apt-get install juju-core juju-quickstart
 
 ## Mac OSX
 
 Juju is in [Homebrew](http://brew.sh/), to install do:
 
-    brew install juju-quickstart
+    brew install juju juju-quickstart
 
 **Note:** To install brew run `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)`
  and ensure [Xcode is installed](https://developer.apple.com/xcode/downloads/).
