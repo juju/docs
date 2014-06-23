@@ -107,6 +107,14 @@ Depending on the template being used, `juju charm create` may prompt for
 user input. To suppress prompts and accept all defaults instead, use the
 `-a` or `--accept-defaults` option.
 
+### Create Options
+
+  - `-h`, `--help`: Show help.
+  - `-t`, `--template`: The template to use when creating the charm.
+  - `-a`, `--accept-defaults`: If the chosen template prompts for user
+    input, suppress all prompts and accept the defaults instead.
+  - `-v`, `--verboes`: Show debug output.
+
 ### Bash Example
 
 Below is the structure of a bash charm created by `juju charm create -t bash my-charm`:
