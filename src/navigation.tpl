@@ -64,6 +64,7 @@
             <h1>Tools</h1>
             <ul class="no-margin">
               <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
+              <li class=""><a href="tools-charm-helpers.html">Charm Helpers</a></li>
               <li class=""><a href="tools-amulet.html">Amulet</a></li>
             </ul>
 
