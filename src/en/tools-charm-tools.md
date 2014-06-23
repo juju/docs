@@ -49,10 +49,20 @@ independent help pages, accesible using either the `-h` or `--help` flags.
 
 ## Add
 
-    juju charm add [-h|--help] tests,readme [CHARM_DIRECTORY]
+    juju charm add [-h|--help] tests,readme,icon [CHARM_DIRECTORY]
 
 Add is a generator function which can be used to extend a charm depending on the
 subcommand issued.
+
+### Icon
+
+`icon` will create an `icon.svg` in the `CHARM_DIRECTORY`. This icon is
+a template and should be customized by the charm author (see [Charm
+Icons documentation](authors-charm-icon.html)).
+
+#### Add Icon Example
+
+    juju charm add icon
 
 ### Readme
 
@@ -79,19 +89,28 @@ will need to be modified.
 
 ## Create
 
-    juju charm create [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
+    juju charm create [-h] [-t TEMPLATE] [-a] [-v] charmname [charmhome]
 
-This command, `create`, will produce a boilerplate template of a charm to
-expedite the charm creation process. Replace `CHARM_NAME` with the name you want
-the new charm to be. A directory called `CHARM_NAME` will be created in the
-`[CHARMS_DIRECTORY]`, or your current directory if no `[CHARMS_DIRECTORY]` is
-provided.
+The `create` command will produce a new boilerplate charm. Replace `charmname`
+with the name of your new charm. A directory called `charmname` will be created
+in the `[charmhome]` directory, or your current directory if no `[charmhome]`
+directory is provided.
 
-### Create Example
+By default, your new charm is created using the python template. Use the
+`-t TEMPLATE` option to create a charm using a different template, e.g.:
 
-Below is an example of the charm structure created during `juju charm create`
+    juju charm create -t bash my-charm
 
-    juju charm create my-charm
+To see the list of installed templates use `juju charm create -h`.
+
+Depending on the template being used, `juju charm create` may prompt for
+user input. To suppress prompts and accept all defaults instead, use the
+`-a` or `--accept-defaults` option.
+
+### Bash Example
+
+Below is the structure of a bash charm created by `juju charm create -t bash my-charm`:
+
     my-charm
     ├── config.yaml
     ├── hooks
@@ -108,6 +127,37 @@ Below is an example of the charm structure created during `juju charm create`
     ├── metadata.yaml
     ├── README.ex
     └── revision
+
+### Python Example
+
+Below is the structure of a python charm created by `juju charm create -t python my-charm`:
+
+    my-charm/
+    ├── charm-helpers.yaml
+    ├── config.yaml
+    ├── hooks
+    │   ├── config-changed
+    │   ├── install
+    │   ├── start
+    │   ├── stop
+    │   └── upgrade-charm
+    ├── icon.svg
+    ├── lib
+    │   └── charmhelpers
+    │       ├── core
+    │       │   ├── fstab.py
+    │       │   ├── hookenv.py
+    │       │   ├── host.py
+    │       │   └── __init__.py
+    │       └── __init__.py
+    ├── metadata.yaml
+    ├── README.ex
+    ├── revision
+    ├── scripts
+    │   └── charm_helpers_sync.py
+    └── tests
+        ├── 00-setup
+        └── 10-deploy
 
 * * *
 
