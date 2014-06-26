@@ -26,6 +26,7 @@
               <li class=""><a href="howto.html">How to...</a></li>
               <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
               <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
+              <li class=" sub"><a href="howto-docker.html">Orchestrate Docker Containers</a></li>
               <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
               <li class=" sub"><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
               <li class=" sub"><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
