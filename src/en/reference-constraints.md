@@ -81,7 +81,7 @@ multiple constraints delimited by a space.
     Comma-delimited list of networks that must be available to the
     machine. Networks that must not be available to the machine are
     prefixed with a "^". For example. "db,^dmz".
-    Currently only supported by MaaS
+    Currently only supported by MaaS.
 
 - root-disk
 
