@@ -212,3 +212,20 @@ horizontally scale out on dedicated machines when you need to.
 
   - [ Scaling Down in the Cloud with Juju](http://www.jorgecastro.org/2013/07/31/deploying-wordpress-to-the-cloud-with-juju/)
   - [ Targeted Machine Deployment with Juju](http://javacruft.wordpress.com/2013/07/25/juju-put-it-there-please/)
+
+# Selecting and enabling networks
+
+Use the `networks` option to specify service-specific network
+requirements. The `networks` option takes a comma-delimited list of
+juju-specific network names. Juju will enable the networks on the
+machines that host service units. This is different from the network
+constraint which selects a machine that matches the networks, but does
+not configure the machine to use them For example, this commands deploys
+a service to a machine on the "db" and "monitor" networks and enabled
+them:
+
+    juju deploy --network db,monitor mysql
+
+**Note:** The `networks` option only recongnises MaaS networks at this
+time, and the environment must be bootstrapped with 1.20.0 or newer.
+MaaS networks are not detected when Juju is upgraded to 1.20.0 or newer.
