@@ -15,6 +15,7 @@ here, with some examples.
   - **deploy:** deploy a new service
   - **destroy-environment:** terminate all machines and other associated resources for an environment
   - **env:** alias for switch
+  - **ensure-availability:**  ensure the availability of Juju state servers
   - **expose:** expose a service
   - **generate-config:** generate boilerplate configuration for juju environments
   - **get:** get service configuration options
