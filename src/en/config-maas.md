@@ -71,7 +71,21 @@ this setting by adding the optional configuration:
         default-series: trusty
 ```
 
+# MAAS specific features
 
+Juju automatically detects MAAS networks, and recognises physical and
+virtual networks on each machine. No configuration is needed. `juju
+status` will show the discovered networks. See [Juju
+Constraints](reference-constraints.html) and [Deploying
+Services](charms-deploying.html) to learn how to select machines with
+networks and enable the networks for use.
+
+Juju recognises MAAS-controlled hostnames. You can use the hostname
+when bootstrapping the state-server on a specific machine and add
+existing MAAS-controlled machines to the juju environment. For example:
+
+    juju bootstrap --to <hostname>
+    juju add-machine <hostname>
 
 For further steps with Juju on MAAS, you should check out the 
 [Juju instructions in the MAAS documentation](http://maas.ubuntu.com/docs/juju-quick-start.html)
