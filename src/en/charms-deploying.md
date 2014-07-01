@@ -224,8 +224,8 @@ not configure the machine to use them For example, this commands deploys
 a service to a machine on the "db" and "monitor" networks and enabled
 them:
 
-    juju deploy --network db,monitor mysql
+    juju deploy --networks db,monitor mysql
 
-**Note:** The `networks` option only recongnises MaaS networks at this
+**Note:** The `networks` option only recognises MaaS networks at this
 time, and the environment must be bootstrapped with 1.20.0 or newer.
 MaaS networks are not detected when Juju is upgraded to 1.20.0 or newer.
