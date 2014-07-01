@@ -19,12 +19,13 @@ the config file shown below and populate it with the necessary values given in
 
 The items in angled brackets will need to be entered by you, and are explained
 below. You will find most of the relevant is accessible by logging in to the
-[HP Cloud Console](https://horizon.hpcloud.com/landing/). The list access and
-secret keys is available in the dropdown on the top right of the screen.
+[HP Cloud Console](https://horizon.hpcloud.com/landing/). Managing keys is available
+in the user account dropdown in the top right of the UI. From there you can create
+and manage the `access-key` and `secret-key`.
 
- - `tenant-name:` For HP Public Cloud, this is listed as the project name on various pages of the HP Cloud console. On the [ main landing page](https://horizon.hpcloud.com/landing/) it is displayed in the area highlighted below. ![image showing project name](media/config-hp001.png)
- - `username:` Enter your HP Cloud login username.
- - `password:` Enter your HP Cloud login password.
+ - `tenant-name:` For HP Public Cloud, this is listed as the project name on various pages of the HP Cloud console. On the [main landing page](https://horizon.hpcloud.com/landing/) it is displayed in the area highlighted below. ![image showing project name](media/config-hp001.png)
+ - `access-key`: You need to generate this key from the account dropdown.
+ - `secret-key`: You need to generate this key for the specific access key you've generated in the account dropdown.
  - `auth-url:`This is the Keystone url for authentication. It is given in the [ Project > Access and Security page](https://horizon.hpcloud.com/project/access_and_security/), under the API access tab ![image showing service endpoints](media/config-hp002.png)
  - `region:` You can use any regions provided you have [activated the relevant services in the console](https://horizon.hpcloud.com/landing/). Hp Public Cloud currently has two regions, one in US West, and one in US East:
     * region-a.geo-1
