@@ -34,7 +34,7 @@
               <li class=" sub"><a href="howto-offline-charms.html">Deploy charms offline</a></li>
               <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
               <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
-              <li class=""><a href="troubleshooting-local.html">Troubleshooting</a></li>
+              <li class=""><a href="troubleshooting.html">Troubleshooting</a></li>
             </ul>
             <h1>Charm Authors</h1>
             <ul class="no-margin">
