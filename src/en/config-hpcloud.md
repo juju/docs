@@ -11,14 +11,16 @@ the config file shown below and populate it with the necessary values given in
         use-floating-ip: true
         type: openstack
         tenant-name: <your HPCloud project name>
-        username: <your HPCloud username>
-        password: <your HPCloud password>
+        auth-mode: keypair
+        access-key: <your access key>
+        secret-key: <your secret key>
         auth-url: <The identity server for your project, e.g. https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/>
         region: <Your activated region>
 
 The items in angled brackets will need to be entered by you, and are explained
 below. You will find most of the relevant is accessible by logging in to the
-[HP Cloud Console](https://horizon.hpcloud.com/landing/).
+[HP Cloud Console](https://horizon.hpcloud.com/landing/). The list access and
+secret keys is available in the dropdown on the top right of the screen.
 
  - `tenant-name:` For HP Public Cloud, this is listed as the project name on various pages of the HP Cloud console. On the [ main landing page](https://horizon.hpcloud.com/landing/) it is displayed in the area highlighted below. ![image showing project name](media/config-hp001.png)
  - `username:` Enter your HP Cloud login username.
