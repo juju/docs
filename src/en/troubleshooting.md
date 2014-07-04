@@ -1,8 +1,10 @@
+Title: Juju troubleshooting
+
 # Troubleshooting the Local Provider
 
 The local provider uses LXC containers under the hood to provide nodes for you
 to deploy on. Sometimes things go wrong and you need to debug what is happening
-on your machine. This page is a collection of best practices from the communtiy
+on your machine. This section is a collection of best practices from the communtiy
 on diagnosing and solving Juju local provider issues.
 
 ## Bootstrap fails
@@ -14,9 +16,10 @@ local` prior to continuing. First let's rerun a bootstrap in debug mode:
 
 This will print very verbose output. If you're receiving `connection failed,
 will retry: dial tcp 127.0.0.1:37017: connection refused` error at the end of
-the run, proceed with the troubleshooting guide. If not the error presented will inform you what went wrong.
+the run, proceed with the troubleshooting guide. If not the error presented will 
+inform you what went wrong.
 
-In certain cases you might get this something similar to thiserror: `Get
+In certain cases you might get this something similar to this error: `Get
 http://10.0.3.1:8040/provider-state: dial tcp 10.0.3.1:8040: connection
 refused`.
 
@@ -32,9 +35,13 @@ bootstrap command fails run the following command:
     sudo initctl list | grep juju
 
 You should see two jobs listed. One that starts with `juju-db` the other `juju-
-agent`. If these are both in a start/running state then your machine took longer than juju expected to get these services started. If you're on an encrypted partition see TODO: INSTRUCTIONS ON THIS. If you're not TODO: INSTRUCTIONS ON RAM DISK DOES NOT EXIST.
+agent`. If these are both in a start/running state then your machine took longer
+than juju expected to get these services started.
 
-If either of these have stopped, investigate the logs at `/var/log/upstart/juju-db*.log` or `/var/log/upstart/juju-agent*.log` If the juju-db service failed to start with messages of unsupported command-line options, check the version of mongodb installed:
+If either of these have stopped, investigate the logs at 
+`/var/log/upstart/juju-db*.log` or `/var/log/upstart/juju-agent*.log` If the 
+juju-db service failed to start with messages of unsupported command-line 
+options, check the version of mongodb installed:
 
     dpkg -l | grep mongodb-server
 
@@ -46,7 +53,8 @@ local package. Before retrying, make sure you run `juju destroy-environment`
 ## No machines start
 
 If you get a successful bootstrap, but services you deploy never come up,
-there's a chance that you have an older version of the Ubuntu Cloud Image cached on your machine. To verify this, check the timestamp of the contents in
+there's a chance that you have an older version of the Ubuntu Cloud Image 
+cached on your machine. To verify this, check the timestamp of the contents in
 `/var/cache/lxc/cloud-precise/`
 
     ls -lh /var/cache/lxc/cloud-precise/
