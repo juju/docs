@@ -1,3 +1,5 @@
+Title: Best Practice for Charm Authors
+
 # Best Practice for Charm Authors
 
 This document is to capture charm best practices from the community. We expect
