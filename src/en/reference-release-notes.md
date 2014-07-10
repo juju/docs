@@ -7,13 +7,56 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.20.1
+
+  A new stable release of Juju, juju-core 1.20.1, is now available.
+  This release replaces 1.20.0.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.1 is available for utopic and backported to earlier
+  series in the following PPA:
+  
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Noteworthy
+
+  This release fixes several issues seen in slower environments. The
+  performance improvements also improved reliability. Juju CI saw a 35%
+  speed improvement in the test suite.  While we had planned to release
+  1.20.1 on 2014-07-17, the performance improvements were just too good to
+  delay a whole week.
+
+
+  ### Resolved issues
+
+  * Juju 1.20 consistently fails to bootstrap a MAAS environment
+  Lp 1339240
+
+  * Juju bootstrap fails because mongodb is unreachable
+  Lp 1337340
+
+  * Juju 1.20.x slow bootstrap
+  Lp 1338179
+
+  * API-endpoints fails if run just after bootstrap
+  Lp 1338511
+
+  * Machines are killed if mongo fails
+  Lp 1339770
+
+  * Restore doesn't
+  Lp 1336967
 
 
 ^# juju-core 1.20.0
 
   A new stable release of Juju, juju-core 1.20.0, is now available.
 
-  Getting Juju
+  ## Getting Juju
 
   juju-core 1.20.0 is available for utopic and backported to earlier
   series in the following PPA:
