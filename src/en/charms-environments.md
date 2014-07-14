@@ -1,3 +1,5 @@
+Title: Managing environments
+
 # Managing environments
 
 Juju can be used to manage multiple clouds on different environments. The
@@ -92,7 +94,8 @@ value. For example, you can set the default series that charms are deployed with
 The `unset-environment` command will set a configuration option to the default
 value. It acts as a reset. Options without default value are removed. It is an
 error to unset a required option. For example, you can unset the default series
-that charms are deployed with (so that the juju store can choose the best series for a charm) like this:
+that charms are deployed with (so that the juju store can choose the best series 
+for a charm) like this:
 
     juju unset-environment default-series
 
@@ -100,7 +103,8 @@ that charms are deployed with (so that the juju store can choose the best series
 
 The `upgrade-juju` command upgrades a running environment. It selects the most
 recent supported version of juju compatible with the command-line version. The
-juju machine and unit agents will be updated to the new version. The `--version` option can be used to select a specific version to upgrade to.
+juju machine and unit agents will be updated to the new version. The `--version` 
+option can be used to select a specific version to upgrade to.
 
     juju upgrade-juju
 
@@ -120,8 +124,12 @@ To generate a new boilerplate `environments.yaml` file direct to the console you
 
     juju generate-config --show
 
-Or:
+## Destroying environments
 
-    juju init --show
+To terminate a running environment, including removing all services and
+allocated machines, please see the section 
+[on removing things with Juju](./charms-destroy.html#destroying-environments)
 
-as the `init`command is an alias for `generate-config`.
+**Note:** Destroying the environment means that it will destroy all the running 
+assets related to that environment, including the bootstrap node. It does not
+remove the configuration from the `environments.yaml` file.
