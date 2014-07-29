@@ -41,7 +41,7 @@ template files for you to edit. Your directory will now look like this
 
 Fire up your text editor and load/edit the readme file.
 
-This step is especially important if you intend making your charm public, but it is very useful even if your charm will only ever be seen by you. The README is a good place to make nots about how the charm works, what information it expects to communicate and how.
+This step is especially important if you intend making your charm public, but it is very useful even if your charm will only ever be seen by you. The README is a good place to make notes about how the charm works, what information it expects to communicate and how.
 
 Although a plain text file is fine, you can also write your README file using
 Markdown (in which case use the .md suffix). The advantage of this, other than
