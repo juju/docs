@@ -48,13 +48,13 @@ have put all our boxes on the Ubuntu Cloud Images site. The quick links are:
 
 ### 14.04 LTS:
 
-- [trusty-server-cloudimg-amd64-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box)
-- [trusty-server-cloudimg-i386-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-juju-vagrant-disk1.box)
+- [trusty-server-cloudimg-amd64-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box)
+- [trusty-server-cloudimg-i386-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-i386-juju-vagrant-disk1.box)
 
 ### 12.04 LTS:
 
-- [precise-server-cloudimg-amd64-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box)
-- [precise-server-cloudimg-i386-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-juju-vagrant-disk1.box)
+- [precise-server-cloudimg-amd64-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/precise/precise-server-cloudimg-amd64-juju-vagrant-disk1.box)
+- [precise-server-cloudimg-i386-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/precise/precise-server-cloudimg-i386-juju-vagrant-disk1.box)
 
 If you are unsure which one to fetch, use the 64-bit builds as most modern
 machines are now 64bit (x86_64 AMD64). If you need other versions of Ubuntu,
