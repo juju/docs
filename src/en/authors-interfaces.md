@@ -73,6 +73,7 @@ Something like:
         - database_name
         - database_user
         - database_password
+        - encoding
 
 but really, that's not complete. In fact, it's not even enough information to
 implement hooks for a new service that needs to talk to mysql. The timing and
