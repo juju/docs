@@ -1,10 +1,5 @@
 # Resources
 
-## A collection of some of the most important online references for Juju users
-and developers.
-
-LINKS
-
 # Charm upgrades
 
 A service's charm can be changed at runtime with the `upgrade-charm` command. By
