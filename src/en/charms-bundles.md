@@ -83,7 +83,7 @@ following data:
 
 ## Naming your Bundle
 
-By default the Juju GUI will name the bundle `envExport`. This is the first linein a bundle. The bundle must have a unique name. We recommend descriptive names for your bundle but nothing too long. `wordpress-simple`, `hadoop-cluster`, and `mongodb-sharded` are some examples of bundle names. Avoid CamelCase and periods for bundle names.
+By default the Juju GUI will name the bundle `envExport`. This is the first line in a bundle. The bundle must have a unique name. We recommend descriptive names for your bundle but nothing too long. `wordpress-simple`, `hadoop-cluster`, and `mongodb-sharded` are some examples of bundle names. Avoid CamelCase and periods for bundle names.
 
 ## Sharing your Bundle with the Community
 
