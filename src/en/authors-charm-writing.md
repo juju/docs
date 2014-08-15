@@ -218,6 +218,10 @@ if [ -f /tmp/config.php ]; then
   mv /tmp/config.php /var/www/vanilla/conf/
 fi
 chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
+# Patch: DB points to 'localhost' on setup page instead of MySQL IP
+juju-log "Patching class.setupcontroller.php to allow DB Host from config.php"
+sed -i 's#\($ConfigurationModel.*localhost\)#// \1#' \
+  /var/www/vanilla/applications/dashboard/controllers/class.setupcontroller.php
 juju-log "Creating apache2 configuration"
 cat <<EOF > /etc/apache2/sites-available/vanilla
 <VirtualHost *:80>
