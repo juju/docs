@@ -283,6 +283,10 @@ cat <<EOF > $vanilla_config
 \$Configuration['Database']['User'] = '$db_user';
 \$Configuration['Database']['Password'] = '$db_pass';
 EOF
+chgrp www-data $vanilla_config
+juju-log "Changed group of $vanilla_config to www-data"
+chmod g+w $vanilla_config
+juju-log "Made $vanilla_config group writable"
 juju-log "Make the application port available, now that we know we have a site to expose"
 open-port 80
 ```
