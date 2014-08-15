@@ -14,7 +14,7 @@ and bundles must:
   - Must be entirely self contained or depend only on reliable external services.
   - Must include a full description of what the software does in the metadata.
   - Must provide a means to protect users from known security vulnerabilities in a way consistent with best practices as defined by either Ubuntu policies or upstream documentation. Basically this means there must be instructions on how to apply updates if you use software not from Ubuntu.
-  - Must pass "charm proof" or "bundle proof" with no errors (lines prefixed with E:), remember this step!
+  - Must pass "[charm proof](./tools-charm-tools.html#proof)" or "[bundle proof](./tools-charm-tools.html#proof)" with no Errors or Warnings (lines prefixed with E: or W:).
   - Must have a maintainer email address in metadata.yaml attached to a team or individual who are responsive to contact.
   - Must include a license. Call the file 'copyright' and make sure all files' licenses are specified clearly.
   - Must be under a [Free license](http://opensource.org/osd). 
