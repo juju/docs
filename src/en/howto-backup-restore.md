@@ -1,7 +1,7 @@
 # Backup and Restore of the Juju State-Server
 
 Juju provides `backup` and `restore` commands to recover the juju state-server
-(bootstrap node) in case or failure. The juju backup command creates a archive
+(bootstrap node) in case of failure. The juju backup command creates a archive
 of the state-server’s configuration, keys, and environment data. If the state-
 server or its host machine failes, a new state-server can be created from the
 backup file.
