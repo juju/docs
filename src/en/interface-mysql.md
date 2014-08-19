@@ -13,6 +13,15 @@ database. String values are generated for the credentials needed to authenticate
 
 A charm joining this relationship will typically have a relationship-joined hook which will wait to see when the mysql charm has set one of the expected values (all values are set simultaneously, so the availability of one indicates that all are available).
 
+A charm joining this relationship may also request that the created database set an encoding. The default encoding is utf8 and so most charms do not need to request a change. To request the created database to use a different encoding, use relation-set in the db-relation-joined hook.
+
+Implementation in `bash`:
+
+    #!/bin/sh
+    # db-relation-joined example
+    relation-set encoding=latin1
+    juju-log "db-relation-joined set encoding=latin1"
+
 ### In practice
 
 Upon relation joined, mysql sets the following:
@@ -22,6 +31,7 @@ Upon relation joined, mysql sets the following:
  - password (string)
  - host (string)
  - slave (string)
+ - encoding (optional string)
 
 The corresponding `relation-joined` hook in any charm connecting to the mysql
 charm should fetch any or all of these values.
