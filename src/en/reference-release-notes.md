@@ -7,6 +7,100 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.20.5
+
+  A new stable release of Juju, juju-core 1.20.5, is now available.
+  This release replaces 1.20.1.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.5 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+
+  ## Noteworthy
+
+  This releases addresses stability and performance issues.
+
+
+  ### Resolved issues
+
+  * Juju is stripping underscore from options
+    Lp 1243827
+
+  * Juju api-endpoints cannot distinguish public and private addresses
+    Lp 1311227
+
+  * API server inaccessible for roughly 5 seconds after bootstrap
+    Lp 1351083
+
+  * Juju bootstrap in an existing environment destroys the environment
+    Lp 1340893
+
+  * The jujud on state server panic misses transaction in queue
+    Lp 1318366
+
+  * Juju machine agents suiciding
+    Lp 1345014
+
+  * Juju state server database is overly large
+    Lp 1344940
+
+  * Jujud rewrites /etc/init/juju-db.conf constantly
+    Lp 1349969
+
+  * Juju writes to mongo without an actual change occurring
+    Lp 1345832
+
+  * Talking to mongo can fail with "TCP i/o timeout"
+    Lp 1307434
+
+  * Bootstrap fails if /usr/lib/juju/bin/mongod doesn't already exist
+    Lp 1350700
+
+  * Support the new v4 signing format used by the new China region
+    Lp 1319475
+
+  * Azure: secondary state servers do not load balance API server port
+    Lp 1347371
+
+  * Network error causes tools download to fail
+    Lp 1349989
+
+  * Maas provider: allow users to specify network bridge interface.
+    Lp 1337091
+
+  * ppc64 architecture miss match for MAAS ppc64el
+    Lp 1349771
+
+  * MAAS provider uses dead instance address
+    Lp 1353442
+
+  * Juju bootstrap fails if kvm-ok not in path
+    Lp 1342747
+
+  * Juju-local needs new dep dbus -- specifically to work in lxc
+    Lp 1343301
+
+  * LXC clonetemplate lock can be left stale
+    Lp 1311668
+
+  * LXC deploys broken on precise
+    Lp 1350011
+
+  * LXC template fails to stop
+    Lp 1348386
+
+  * Distribution tarball has licensing problems that prevent 
+    redistribution
+    Lp 1341589
+
+
 ^# juju-core 1.20.1
 
   A new stable release of Juju, juju-core 1.20.1, is now available.
