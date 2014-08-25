@@ -45,7 +45,7 @@ point your DNS to.
 Now that you are behind a load balancer, you can grow the mediawiki instances
 behind the proxy as you see fit, let's add 5 more:
 
-    	juju add-unit -n5 mediawiki
+    juju add-unit -n5 mediawiki
 
 You don't need to worry about manually adding your units to the load balancer,
 you've made the relationship at the _service level_, so the new units know
