@@ -37,7 +37,8 @@ features a charm provides at a glance.
   - Reuses existing charms for supporting services - If the service needs relationships to other services it should reuse existing charms from the charm store instead of bundling its own.
   - Monitoring - has relationships to allow the service to be monitored by any existing monitoring charm.
   - Remote Logging - has relationships to allow the service to remote log.
-  - ## Upstream Friendly
+
+## Upstream Friendly
 
   - Follow deployment recommendations from upstream best practices - Most services have a known-good recommendation from the project itself, these should be available for users
   - Provide up to date versions of the upstream release - Provide a config option to allow the user to run newer versions of the service.
