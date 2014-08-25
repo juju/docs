@@ -115,7 +115,7 @@ the `set-env` command:
 juju set-env "default-series=trusty"
 ```
 
-!!! Note: Specifying a local repository makes Juju look there *first*, but if
+**Note: ** Specifying a local repository makes Juju look there *first*, but if
 the relevant charm is not found in that repository, it will fall back to
 fetching it from the charm store. If you wish to check where a charm was
 installed from, it is listed in the `juju status` output.

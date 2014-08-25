@@ -113,7 +113,7 @@ user input. To suppress prompts and accept all defaults instead, use the
   - `-t`, `--template`: The template to use when creating the charm.
   - `-a`, `--accept-defaults`: If the chosen template prompts for user
     input, suppress all prompts and accept the defaults instead.
-  - `-v`, `--verboes`: Show debug output.
+  - `-v`, `--verbose`: Show debug output.
 
 ### Bash Example
 
