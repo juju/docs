@@ -103,7 +103,7 @@ test, and then the file ended with `INFO: END filename`.
 
 #### Deploy requirements and Poll
 
-The test below [*] deploys mediawiki with mysql and memcached related to it, and then tests to make sure it returns a page via http with `<title>` somewhere in the content.:
+The test below deploys mediawiki with mysql and memcached related to it, and then tests to make sure it returns a page via http with `<title>` somewhere in the content.:
 
 ```bash
 #!/bin/sh

@@ -66,7 +66,7 @@ Or to run uptime on some instances:
     juju run "uptime" --machine=2
     juju run "uptime" --service=mysql
 
-!!! Note: When using `juju run` with the `--service` option, keep in mind that
+**Note: ** When using `juju run` with the `--service` option, keep in mind that
 whichever command you pass will run on *every unit* of that service.
 
 When used in combination with certain services you can script out certain
