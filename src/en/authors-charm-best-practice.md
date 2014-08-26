@@ -34,6 +34,7 @@ Tips for production usage:
   - Which checks are prompt-critical (in other words, constitutes a user-affecting outage that would warrant waking an "oncall" sysadmin over a weekend)?
   - Confirm what data/logs from the application needs to be made visible to developers, and in what format?
   - Some organizations use proxies, do not assume that every port is available, consider using common ports like 80/443 to ensure your charm can run in as many environments as possible. For added flexibility we recommend exposing port configuration in the charm as a config option.
+  - The configuration should not be [immutable](http://en.wikipedia.org/wiki/Immutable_object).  This means that the charm should react to all configuration options as they are changed throughout the lifecycle of that service.  Immutable configuration breaks the user experience, and should only be used to prevent data loss. If a user deploys a charm and later sets the configuration values the user would expect the charm to react to those changes accordingly.
 
 ## Charm Coding Guidelines
 
