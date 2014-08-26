@@ -91,3 +91,10 @@ useful:
 
 [Ubuntu Cloud
 Infrastructure](https://help.ubuntu.com/community/UbuntuCloudInfrastructure)
+
+# Bootstrapping
+
+Before being able to bootstrap into a Private Openstack Cloud you'll need to generate
+simplestreams metadata:
+
+[How to setup a Private Cloud](howto-privatecloud.html)
