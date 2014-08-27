@@ -18,25 +18,29 @@ Juju deployments.
 
 The following instructions will help you get the environment set up:
 
-[Ubuntu](.) [Mac OSX](.) [Windows](.)
+### Ubuntu
 
 To install vagrant and the other required tools on Ubuntu, run:
 
     sudo apt-get update 
     sudo apt-get -y install virtualbox vagrant sshuttle
 
+### Mac OSX
+
 1. Fetch and install VirtualBox from
-[virtualbox.org](https://www.virtualbox.org/) 1. Install Vagrant from
-[vagrantup.com](http://www.vagrantup.com/downloads.html) 1. (optional) Install
-Sshuttle. You can do this via `homebrew`: brew install sshuttle
+[virtualbox.org](https://www.virtualbox.org/)
+2. Install Vagrant from
+[vagrantup.com](http://www.vagrantup.com/downloads.html)
+3. (optional) Install Sshuttle. You can do this via `homebrew`: brew install sshuttle
 
 Or you can get the source from
 [github.com/apenwarr/sshuttle](https://github.com/apenwarr/sshuttle)
 
-1. Fetch and install VirtualBox from
-[virtualbox.org](https://www.virtualbox.org/) 1. Install Vagrant from
-[vagrantup.com](http://www.vagrantup.com/downloads.html) 1. (optional) Install
-Sshuttle. (this requires the [node.js binary for
+### Windows
+
+1. Fetch and install VirtualBox from [virtualbox.org](https://www.virtualbox.org/)
+2. Install Vagrant from [vagrantup.com](http://www.vagrantup.com/downloads.html) 
+3. (optional) Install Sshuttle. (This requires the [node.js binary for
 Windows](http://nodejs.org/download/))
 
 Run: `npm install sshuttle`
