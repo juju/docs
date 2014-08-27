@@ -16,13 +16,16 @@ To install Juju, you simply need to grab the latest juju-core package from the
 PPA:
 
     sudo add-apt-repository ppa:juju/stable
-    sudo apt-get update && sudo apt-get install juju-core
+    sudo apt-get update && sudo apt-get install juju-core juju-quickstart
 
 ## Mac OSX
 
 Juju is in [Homebrew](http://brew.sh/), to install do:
 
-    brew install juju
+    brew install juju juju-quickstart
+
+**Note:** To install brew run `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)`
+ and ensure [Xcode is installed](https://developer.apple.com/xcode/downloads/).
 
 ## Windows
 
@@ -40,11 +43,11 @@ potential errors).
 
 To generate an initial config file, you simply need to run:
 
-    juju generate-config
+    juju quickstart
 
-This command will cause a file to be written to your ~/.juju directory if an
-environments.yaml file does not already exist. It will also create the ~./juju
-directory if that does not exist.
+This command will launch the quickstart config environment, where you can automatically
+generate config files for each cloud Juju supports and write it to
+`~/.juju/environments.yaml`.
 
 This file will contain sample profiles for different types of cloud services,
 but you will need to edit the files to provide specific information for your
@@ -69,12 +72,14 @@ Because Juju makes it really easy to deploy services, this is actually quick and
 straightforward.
 
 The first thing to do is set up a bootstrap environment. This is an instance in
-the cloud that Juju will use to deploy and control other services with. It will
-be created according to the configuration you have provided, and your SSH key
-will automatically be uploaded so that Juju can communicate securely with the
-bootstrap instance.
+the cloud that Juju will use to deploy and control other services with. By
+default quickstart will offer you the option to automatically create and
+bootstrap a local environment, just follow its instructions.
+
 
 <iframe style="margin-left: 20%;" class="youtube-player" type="text/html" width="420" height="350" src="//www.youtube.com/embed/0AT6qKyam9I"></iframe>
+
+To fire off an environment manually you can always:
 
     juju bootstrap
 
@@ -202,7 +207,7 @@ To remove all current deployments and clear up everything in your cloud, you can
 
     juju destroy-environment  <environment-name>
 
-Where the `<environment-name>` is the name you gave the environment when you configured it. This 
+Where the `<environment-name>` is the name you gave the environment when you configured it. This
 extra details is to help prevent accidents! You will also see a warning and will be prompted
 whether or not to continue - this action will remove everything, including the bootstrap node.
 

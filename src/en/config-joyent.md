@@ -1,8 +1,16 @@
-# Configuring for Joyent Cloud 
+# Configuring for Joyent Cloud
 
 This process requires you to have a Joyent account. If you have not signed up
 for one yet, you can do so at
 [http://www.joyent.com/](http://www.joyent.com/).
+
+You can configure Juju for use with Joyent by issuing the following command:
+
+    juju-quickstart -i
+
+And follow the instructions for generating a config for Joyent by scrolling down
+to "Create a new environment" and selecting "new Joyent environment" and
+then fill in the appropriate fields.
 
 You should start by generating a generic configuration file for Juju, using the
 command:
@@ -21,17 +29,17 @@ The generic configuration sections generated for Joyent will look something
 like this:
 
     joyent: type: joyent
-    
+
       # SDC config Can be set via env variables, or specified here sdc-user:
       # <secret> Can be set via env variables, or specified here sdc-key-id:
       # <secret> url defaults to us-west-1 DC, override if required sdc-url:
       # https://us-west-1.api.joyentcloud.com
-    
+
       # Manta config Can be set via env variables, or specified here
       # manta-user: <secret> Can be set via env variables, or specified here
       # manta-key-id: <secret> url defaults to us-east DC, override if required
       # manta-url: https://us-east.manta.joyent.com
-    
+
       # Auth config private-key-path is the private key used to sign Joyent
       # requests.  Defaults to ~/.ssh/id_rsa, override if a different ssh key
       # is used.  Alternatively, you can supply "private-key" with the content
