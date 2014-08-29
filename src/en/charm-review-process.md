@@ -163,7 +163,7 @@ Post that information to the bug report or merge request, starting off with a "T
 no matter the outcome of the review. If you are a community member and/or contributor, 
 you can leave your general approval or disapproval based on your findings. Normally 
 people use "+1 LGTM" to indicate approval. Of course, in moments of disapproval, we 
-suggest posting information as to why you disapprov.
+suggest posting information as to why you disapprove.
 
 ### Part of the ~charmers group, hold up!
 
