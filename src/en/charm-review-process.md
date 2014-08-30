@@ -35,7 +35,10 @@ placed with the series relating to the charm that is being reviewed.
 
     cd charm-name
 
-Lets jump into the charm directory so we can get started on the next step.
+For existing charms don't forget to branch in the merge proposal after 
+changing directory.
+
+    bzr merge lp:~the-username/charms/precise/charm-name/trunk
 
 ## Charm Information Review
 
