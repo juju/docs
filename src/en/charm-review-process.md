@@ -49,13 +49,12 @@ we need to run the following command:
 
     charm proof
 
-Essentially, this command is meant to validate if it conforms to what the 
+Essentially, the [proof](tools-charm-tools.html#proof) command is meant to validate if it conforms to what the 
 Charm Store thinks a charm structure and layout should be and will output 
-particular information with a level of severity. You can learn more about
-the proof tool by clicking [here](tools-charms-tools.html#proof).
+particular information with a level of severity.
 
 In essense, you should make note of output for the end of the charm review 
-process. If you come across errors (output starting with ```E```), these 
+process. If you come across errors (output starting with `E`), these 
 are typically major issues and will result in a broken charm. Ideally, you 
 should determine whether this charm is likely to be deployable. If so, 
 continue on with the review.
@@ -144,9 +143,9 @@ jump into the machine the charm is running on.
 
     juju ssh charm-name/0
 
-Use ```top``` or ```ps``` to show if the charm's process is running. Some 
-services status would also be available with ```sudo service name status``` 
-(example: ```sudo service apache2 status```).
+Use `top` or `ps` to show if the charm's process is running. Some 
+services status would also be available with `sudo service name status` 
+(example: `sudo service apache2 status`).
 
 !!! Note: If the charm itself is not a process, but relies on something like 
 nginx or apache2, be sure to check those services are running. A good example 
@@ -170,8 +169,7 @@ suggest posting information as to why you disapprove.
 
 ### Part of the ~charmers group, hold up!
 
-If you are part of the ~charmers team, follow up the review process with information 
-found [here](reference-reviewers.html).
+If you are a ~charmer, make sure you are applying the [Reviewers Guidelines](reference-reviewers.html).
 
 ### Not part of the ~charmers group?
 
