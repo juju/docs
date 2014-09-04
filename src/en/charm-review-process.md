@@ -3,10 +3,20 @@
 Reviewing a Juju Charm is a process that can easily be broken down into
 the following parts:
 
-1. Setting up a branch of the charm
-2. Charm Information Review
-3. Charm Deployment, Configuration and Testing
-4. Gathering / Submitting Your Results
+1. Identifying what to review
+2. Setting up a branch of the charm
+3. Charm Information Review
+4. Charm Deployment, Configuration and Testing
+5. Gathering / Submitting Your Results
+
+## Identifying what to review
+
+When determining what charm (or merge request for a charm) you should
+review, prioritize whichever you think best achieves the goal of helping people
+enjoy getting things done in Juju. That might be the newest ones, neglected
+patches, easy patches, or those from new contributors. Take a look at the
+[Review Queue](http://review.juju.solutions) to best determine what needs to
+be done!
 
 ## Setting up a branch of the charm
 Lets get started with setting up a branch of the charm. The process below
