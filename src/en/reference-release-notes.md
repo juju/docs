@@ -7,6 +7,57 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.20.6
+
+  A new stable release of Juju, juju-core 1.20.6, is now available.
+  This release replaces 1.20.5.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.6 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+
+  ## Noteworthy
+
+  This releases addresses stability issues, particularly with LXC.
+
+
+  ### Resolved issues
+
+  * Arguments no longer passed to plugins if you don't have an environment set
+    Lp 1359170
+
+  * ERROR Nonce already used
+    Lp 1190986
+
+  * Juju status returns private IP in 'public-ip' field.
+    Lp 1348287
+
+  * Juju status <unit> nil pointer reference.
+    Lp 1357482
+
+  * LXC containers created, juju can't seen or communicate with them
+    Lp 1357552
+
+  * Cannot get tools from machine for lxc container
+    Lp 1359800
+
+  * Tools download can fail and is not always retried
+    Lp 1360994
+
+  * Containers not starting on machine
+    Lp 1362360
+
+  * Update the add machine api to accept both environment name and UUID
+    Lp 1360063
+
+
 ^# juju-core 1.20.5
 
   A new stable release of Juju, juju-core 1.20.5, is now available.
