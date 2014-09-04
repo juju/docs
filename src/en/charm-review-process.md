@@ -191,7 +191,7 @@ suggest posting information as to why you disapprove.
 
 ### Part of the ~charmers group, hold up!
 
-If you are a ~charmer, make sure you are applying the [Reviewers Guidelines](reference-reviewers.html).
+If you are a ~charmer or wishing to become a ~charmer, make sure you are applying the [Reviewers Guidelines](reference-reviewers.html).
 
 ### Not part of the ~charmers group?
 
