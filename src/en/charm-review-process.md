@@ -10,7 +10,7 @@ the following parts:
 
 ## Setting up a branch of the charm
 Lets get started with setting up a branch of the charm. The process below
-highlights how you would branch a charm that is for Ubuntu 12.04 (precise),
+highlights how you would branch a charm that is for Ubuntu 12.04 (`precise`),
 but branching process is essentially the same for other series such as
 Ubuntu 14.04 `trusty`.
 
