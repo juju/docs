@@ -57,6 +57,7 @@
               <li class=""><a href="authors-charm-store.html">The Juju Charm Store</a></li>
               <li class=" sub"><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
               <li class=" sub"><a href="authors-charm-policy.html">Charm store policy</a></li>
+              <li class=" sub"><a href="charm-review-process.html">Charm review process</a></li>
               <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
               <li class=" sub"><a href="authors-charm-quality.html">Charm Feature Rating</a></li>
               <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
