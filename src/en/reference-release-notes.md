@@ -985,7 +985,7 @@ The versions covered here are:
     * the "null" provider is now available, for creating environments with existing machines.
     * admin-secret is now chosen automatically if omitted from the configuration of a new environment.
     * control-bucket is now chosen automatically if omitted from the configuration for new ec2 and openstack environments.
-    * Logging has changed. You can specify an environment variable "JUJU_LOGGING_CONFIG", or you can specify --log-config on the command line. To show the log on the command line, now use --show-log. The --debug has been kept to be short-hand for `--log-config==DEBUG --show-log`, and --verbose has been deprecated with its current meaning.
+    * Logging has changed. You can specify an environment variable "JUJU_LOGGING_CONFIG", or you can specify --logging-config on the command line. To show the log on the command line, now use --show-log. The --debug has been kept to be short-hand for `--logging-config==DEBUG --show-log`, and --verbose has been deprecated with its current meaning.
 
   ### Resolved issues
 
