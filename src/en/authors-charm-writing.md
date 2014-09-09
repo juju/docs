@@ -32,9 +32,11 @@ appropriate file structure:
 ## Create a barebones charm with Charm Tools
 
 Using the charm tools plugin, we can create the directory structure we
-need for our charm quickly and easily:
+need for our charm quickly and easily.  Charm tools supports a variety
+of charm styles. In this example, we will generate a barebones bash
+template.
 
-    juju charm create vanilla
+    juju charm create -t bash vanilla
 
 This not only creates the directory structure, it also prepopulates it
 with template files for you to edit. Your directory will now look like
@@ -158,12 +160,27 @@ use for interconnecting services in a cluster
 ## Writing hooks
 
 As you will know from your thorough reading of the
-[charm components](./authors- charm-components.html), the hooks are
-the important scripts that actually do things. You can write hooks in
-whatever language you can reasonably expect to execute on an Ubuntu
-server.
+[charm components](./authors- charm-components.html), juju executes
+hook scripts to make things happen. You can write hooks in whatever
+language you can reasonably expect to execute on an Ubuntu server.
 
-For our charm, the hooks we will need to create are:
+Charms and their hooks can model very complex behavior and offer
+authors alot of power, freedom, and responsibility. If you like to
+write python the
+[charm helpers](http://pythonhosted.org//charmhelpers) python library
+provides a grab bag of python helpers and
+[simple basic frameworks](http://pythonhosted.org//charmhelpers/examples/services.html)
+for managing charm tasks large and small.  Charm helpers also provides
+support for charm authors who already know
+[ansible](http://docs.ansible.com) or
+[salt](http://docs.saltstack.com/en/latest) and want to author charm
+hooks as
+[salt states](http://pythonhosted.org//charmhelpers/api/charmhelpers.contrib.saltstack.html)
+or
+[ansible playbooks](http://pythonhosted.org//charmhelpers/api/charmhelpers.contrib.ansible.html).
+
+Whatever languages and tools you decide to employ, for our charm, the
+hooks we will need to create are:
 
   - start - for when the service needs to be started.
   - stop - for stopping it again.
