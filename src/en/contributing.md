@@ -133,7 +133,7 @@ contribute:
 - The code is available on [github.com/juju/docs](http://github.com/juju/docs)
 - [Fork the repository](https://help.github.com/articles/fork-a-repo)
 - Add or edit the documentation in your favorite text editor
-- [Submit a pull requestion](https://help.github.com/articles/creating-a-pull-request)
+- [Submit a pull request](https://help.github.com/articles/creating-a-pull-request)
 
 And that's it! Someone from the Juju team will review your work and merge it
 in! Please don't forget to review the page before submission.
