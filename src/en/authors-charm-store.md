@@ -43,8 +43,8 @@ Your charm should then be looked at in a timely manner.
   1. Modify it to meet your needs.
   1. Commit your fixes `bzr commit -m'Your changelog entry goes here'`
   1. `bzr push lp:~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
-  1. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals) by going to your branch's code page: `https://code.launchpad.net/~charmers/charms/precise/nagios/trunk` and clicking "Propose for merging"
-  1. In the merge proposal form select the charm's lp name: `~lp:charms/nagios`
+  1. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals) by going to your branch's code page: `https://code.launchpad.net/~your-launchpad-username/charms/precise/nagios/fixed-charms-name` and clicking "Propose for merging"
+  1. In the merge proposal form select the charm's lp name: `~lp:charms/nagios` for the target branch, if not already selected.
   1. For the reviewer field put the `charmers` team, this will get your code into the review queue!
 
 ## Submitting bundles to the Charm Store
