@@ -7,9 +7,9 @@ authors. Amulet aims to be:
 - a way to validate charm relation data (not just what a charm expects/receives).
 - a method to exercise and test charm relations outside of a deployment.
 
-While these tools are designed to help make test writing easier, much like charm
-helpers are designed to make hook writing easier, they are not required to write
-tests for charms. This library is offered as a completely optional set of tools
+While these tools are designed to help make test writing easier, much like [Charm
+Helpers](./tools-charm-helpers.html) are designed to make hook writing easier, they are not required to write
+tests for charms. These libraries are offered as a completely optional set of tools
 for you to use.
 
 ## Installation
@@ -37,7 +37,7 @@ Amulet is available via Pip:
     pip install amulet
 
 ### Source
-Amulet is built with Python3, make sure it's installed prior to following these
+Amulet is built with Python3, so please make sure it's installed prior to following these
 steps. While you can run Amulet from source, it's not recommended as it requires
 several changes to environment variables in order for Amulet to operate as it
 does in the packaged version.
@@ -46,7 +46,7 @@ To install Amulet from source, first get the source:
 
     git clone https://github.com/marcoceppi/amulet.git
 
-Move in to the `amulet` directory and run
+Move in to the `amulet` directory and run:
 
     sudo python3 setup.py install
 
