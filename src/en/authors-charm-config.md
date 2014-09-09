@@ -9,7 +9,7 @@ contain any number of the following fields:
 
   - `type` can be `string`, `int`, `float`, or `boolean`. If not present, it defaults to `string`.
   - `description` should contain an explanation of what the user might achieve by altering the setting.
-  - `default` should, if present, contain a value of the appropriate type. If not present it is treated as null (which is always a valid value in this context); an option with no default will not normally be reported by the config-get [hook tool](./authors-hook-environment.html) unless it has been explicitly set.
+  - `default` should contain a value of the appropriate type. If set as `default:` with no trailing characters, it is treated as null (which is always a valid value in this context); an option with no default will not normally be reported by the config-get [hook tool](./authors-hook-environment.html) unless it has been explicitly set.
 
 ## What to expose to users
 
