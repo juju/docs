@@ -32,9 +32,11 @@ appropriate file structure:
 ## Create a barebones charm with Charm Tools
 
 Using the charm tools plugin, we can create the directory structure we
-need for our charm quickly and easily:
+need for our charm quickly and easily.  Charm tools supports a variety
+of charm styles. In this example, we will generate a barebones bash
+template.
 
-    juju charm create vanilla
+    juju charm create -t bash vanilla
 
 This not only creates the directory structure, it also prepopulates it
 with template files for you to edit. Your directory will now look like
