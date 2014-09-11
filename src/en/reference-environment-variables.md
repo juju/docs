@@ -6,79 +6,27 @@ grep -r JUJU_ * | perl -ne 'if (/(JUJU_[A-Z_]+)/) { print "$1\n"; }'|sort | uniq
 
 # Environment Variables
 
-- JUJU_AGENT_SOCKET
+## Juju API Server
 
-    The socket that Unit Agent uses to communicate with Units.
-
-- JUJU_API_ADDRESSES
-
-    A space-separated list of API servers.
-
-- JUJU_CONTAINER_TYPE
-
-    Used by MAAS to find the address of a machine.
-
-- JUJU_CONTEXT_ID
-
-    Used by juju to communicate to ask a running agent to execute a command on juju's behalf.
-
-- JUJU_DEBUG
-
-    The temporary directory where <code>juju debug-hooks</code> is spawned from.
-
-- JUJU_DUMMY_DELAY
-
-    A delay to operations in the dummy provider environment. This can be set by setting <code>JUJU_DUMMY_DELAY</code> to a [time.Duration](http://golang.org/pkg/time/#Duration) parsable value.
+These variables are available on the Juju API server in order to change its default behavior.
 
 - JUJU_ENV
 
     Juju has three ways it will check, in descending order, to determine the current environment:
 
     1. Check to see if <code>JUJU_ENV</code> is set.
+
+            JUJU_ENV=local
+
     2. Read <code>$JUJU_HOME/current-environment</code>, which is set by <code>juju switch $environment</code>
     3. Read <code>$JUJU_HOME/environments.yaml</code> and use the default environment.
 
-
-- JUJU_ENV_NAME
-
-    The human-friendly name of the current environment.
-
-- JUJU_ENV_UUID
-
-    The unique identifier of the juju environment.
 
 - JUJU_HOME
 
     The path to juju's configuration files.
 
-    Default: <code>~/.juju</code>
-
-- JUJU_HOOK_NAME
-
-    The name of the hook being executed.
-
-- JUJU_LOGGING_CONFIG
-
-    All agents are started with all logging set to DEBUG. You can change the logging options to be more or less verbose. For example:
-
-        juju set-environment logging-config "juju=WARNING; unit=INFO"
-
-- JUJU_NOTEST_MONGOJS
-
-    Some tests assume a MongoDB instance that supports Javascript for map-reduce functions. These functions are not supported by juju-mongodb and will fail unless <code>JUJU_NOTEST_MONGOJS</code> is defined:
-        JUJU_NOTEST_MONGOJS=1 go test launchpad.net/juju-core/...
-
-- JUJU_RELATION
-
-    The relation name being executed.
-
-- JUJU_RELATION_ID
-
-    The ID of the relation being executed.
-
-- JUJU_REMOTE_UNIT
-
-    The name of the current related unit.
+        JUJU_HOME=~/.juju
 
 - JUJU_REPOSITORY
 
@@ -89,6 +37,77 @@ grep -r JUJU_ * | perl -ne 'if (/(JUJU_[A-Z_]+)/) { print "$1\n"; }'|sort | uniq
         export JUJU_RELATION=/vagrant
         juju deploy local:series/charm
 
+- JUJU_LOGGING_CONFIG
+
+    All agents are started with all logging set to DEBUG. You can change the logging options to be more or less verbose. For example:
+
+        juju set-environment logging-config "juju=WARNING; unit=INFO"
+
+
+# Unit
+
+These variables are available to charms during hook execution.
+
+- JUJU_API_ADDRESSES
+
+    A space-separated list of API servers.
+
+        JUJU_API_ADDRESSES="10.0.3.1:17070"
+
+- JUJU_AGENT_SOCKET
+
+    The socket that the Unit Agent uses to communicate with individual Units.
+        JUJU_AGENT_SOCKET="@/var/lib/juju/agents/unit-postgresql-0/agent.socket"
+
+- JUJU_CONTEXT_ID
+
+    Used by juju to communicate to ask a running agent to execute a command on juju's behalf.
+        JUJU_CONTEXT_ID="postgresql/0:db-relation-joined:34317605475203611"
+
+- JUJU_DEBUG
+
+    The temporary directory where <code>juju debug-hooks</code> is spawned from.
+
+        JUJU_DEBUG="/tmp/tmp.vGQlc2bTcV"
+
+- JUJU_ENV_NAME
+
+    The human-friendly name of the current environment.
+
+        JUJU_ENV_NAME="local"
+
+- JUJU_ENV_UUID
+
+    The unique identifier of the juju environment.
+
+        JUJU_ENV_UUID="2c0896ce-fd6c-4647-8540-26f848e061f9"
+
+- JUJU_HOOK_NAME
+
+    The name of the hook being executed.
+
+        JUJU_HOOK_NAME="db-relation-joined"
+
+- JUJU_RELATION
+
+    The relation name being executed.
+
+        JUJU_RELATION="db"
+
+- JUJU_RELATION_ID
+
+    The ID of the relation being executed.
+
+        JUJU_RELATION_ID="db:20"
+
+- JUJU_REMOTE_UNIT
+
+    The name of the current related unit.
+
+        JUJU_REMOTE_UNIT="reddit/0"
+
 - JUJU_UNIT_NAME
 
     The name of the local unit being executed.
+
+        JUJU_UNIT_NAME="postgresql/0"
