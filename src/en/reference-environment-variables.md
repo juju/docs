@@ -39,9 +39,9 @@ These variables are available on the Juju API server in order to change its defa
 
 - JUJU_LOGGING_CONFIG
 
-    All agents are started with all logging set to DEBUG. You can change the logging options to be more or less verbose. For example:
+    In stable Juju releases, agents are started with logging set to WARNING, and units are set to INFO. Development releases are set to DEBUG globally. You can change the logging options to be more or less verbose. For example:
 
-        juju set-environment logging-config "juju=WARNING; unit=INFO"
+        juju set-environment logging-config "juju=DEBUG; unit=WARNING"
 
 
 # Unit
