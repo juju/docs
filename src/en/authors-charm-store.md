@@ -16,7 +16,7 @@ call The Charm Store.
 
 There are currently 2 methods to submit a charm and have it listed in the charm
 store. Both methods have their perks - but it is suggested to start with your
-user space before asking for a charmer featured charm.
+personal namespace before asking for a charmer featured charm.
 
 ## Charm Store Process
 
@@ -51,7 +51,8 @@ Your charm should then be looked at in a timely manner.
 
 ### Name Space Charms
 
-There are some key differences with regard to deployment of User Space charms.
+There are some key differences with regard to deployment charms in your personal
+namespace.
 
   - Submission Process
   - Deployment
