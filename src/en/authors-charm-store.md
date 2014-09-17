@@ -12,6 +12,12 @@ call The Charm Store.
   - Here is the official tutorial for charm authors: [https://juju.ubuntu.com/docs/write-charm.html](https://juju.ubuntu.com/docs/write-charm.html)
   - Here is the official tutorial for bundle authors: [https://juju.ubuntu.com/docs/charms-bundles.html](https://juju.ubuntu.com/docs/charms-bundles.html)
 
+## Charm Store Submission
+
+There are currently 2 methods to submit a charm and have it listed in the charm
+store. Both methods have their perks - but it is suggested to start with your
+user space before asking for a charmer featured charm.
+
 ## Charm Store Process
 
 This process is designed to allow prospective developers to have their charms
@@ -20,7 +26,15 @@ manner that ensures peer reviews and quality.
 
 ## Submitting a new Charm
 
-You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not required to submit to both releases, but we recommend supporting both whenever possible so that users get the most flexibility:
+Everyone with a launchpad account has access to have their charms listed in the
+charm store, without review, approximately 20 minutes after the initial push to
+their launchpad branch. Authors are free to request ~charmer/peer review from
+their personal name space branch.
+
+
+You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
+ required to submit to both releases, but we recommend supporting both whenever
+ possible so that users get the most flexibility:
 
   1. Install juju and charm-tools.
   1. Create a repository, something like `mkdir -p ~/charms/precise`, precise is the release code name for the [release of Ubuntu](http://releases.ubuntu.com) you wish to target your charm at. You can also use `trusty` if you're submitting to that series.
@@ -31,20 +45,90 @@ You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
   1. `bzr ci -m'Initial charm'`
   1. To submit your charm for 12.04: `bzr push lp:~your-launchpad-username/charms/precise/your-charms-name/trunk`
   1. To submit your charm for 14.04: `bzr push lp:~your-launchpad-username/charms/trusty/your-charms-name/trunk`
+
+
+Your charm should then be looked at in a timely manner.
+
+### Name Space Charms
+
+There are some key differences with regard to deployment of User Space charms.
+
+  - Submission Process
+  - Deployment
+  - Charm Store Display
+  - Workflow to accept contributions
+
+
+#### Submission Process
+
+When you feel your charm is ready for submission to your personal name space,
+you must initialize the repository and push your development branch to LaunchPad.
+
+For the purpose of this documentation, we will call our charm `ubucharm`
+
+  bzr push lp:~username/charms/series/ubucharm/trunk
+
+The /trunk branch identifier is the *only* branch that will be recognized by the
+charm store ingestion process. This free's the developer to push multiple branches
+and gate features/fixes into their personal branch without listing multiple copies
+of the charm in the store.
+
+To break down the launchpad link structure, the segments will be listed in bold
+with a description following.
+
+  - **lp:~username** : This is your launchpad username
+  - **/charms/** : Charms is the project descriptor
+  - **/precise/** : All charms are targeted against a series
+  - **/ubucharm/** : This is the charm name and should match whats listed in metdata.yaml
+  - **/trunk** : The branch target. *Remember* only /trunk will be ingested into the charm store.
+
+#### Deployment
+
+Once your charm has been ingested it will be deployable via your personal name space
+url.
+
+  juju deploy cs:~username/series/ubucharm
+
+#### Charm Store Display
+
+Name Spaced charms will be displayed under the **other** category in the GUI.
+They will be displayed with non-descript category icons for the service. Only
+recommended charms display the shipped ICON for the service.
+
+#### Workflow to accept contributions
+
+To accept contributions, and/or merge patches into your personal namespace - as
+the owner of the charm, you are responsible for reviewing and accepting/rejecting
+contributions.
+
+  bzr push lp:~username/charms/series/ubucharm/feature_branch
+
+and a subsequent Merge Proposal should be issued against your branch following
+the launchpad [Developer Merge Proposal Documentation](https://dev.launchpad.net/UsingMergeProposals)
+
+
+### Recommended Charms
+
+To have your charm listed as a charmer team recommended charm, you have to
+under-go a rigorous review process where we evaluate the charm, evaluate tests
+for your charm, and deploy & run tests against the provided service with
+different configuration patterns.
+
+after following the Submission Process outlined above:
+
   1. File a bug against charms at [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug) This is used to track the progress of your charm.
   1. Now you just need to attach your branch to the bug report, go to [your code page](https://code.launchpad.net/people/+me), find your branch, and click on it. Then click on "Link a bug report", and put in the number of the bug you filed. If you are submitting to multiple releases please make one bug per release.
   1. Subscribe the `charmers` team by clicking "Subscribe someone else" on the right side of the launchpad page. This is important as it gets your charm in the review queue!
 
-Your charm should then be looked at in a timely manner.
 
 ## Submitting a fix to an existing Charm
 
   1. Grab the charm you want to fix, we'll use Nagios as an example: `bzr branch lp:charms/precise/nagios`
   1. Modify it to meet your needs.
-  1. Commit your fixes `bzr commit -m'Your changelog entry goes here'`
+  1. Commit your fixes `bzr commit -m 'Your changelog entry goes here'`
   1. `bzr push lp:~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
   1. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals) by going to your branch's code page: `https://code.launchpad.net/~your-launchpad-username/charms/precise/nagios/fixed-charms-name` and clicking "Propose for merging"
-  1. In the merge proposal form select the charm's lp name: `~lp:charms/nagios` for the target branch, if not already selected.
+  1. In the merge proposal form select the charm's lp name: `lp:charms/nagios` for the target branch, if not already selected.
   1. For the reviewer field put the `charmers` team, this will get your code into the review queue!
 
 ## Submitting bundles to the Charm Store
