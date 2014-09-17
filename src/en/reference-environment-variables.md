@@ -32,9 +32,9 @@ These variables are available on the Juju API server in order to change its defa
 
     This allows you to set the repository that Juju looks for charms in. This can also be done by passing <code>--repository=/path/to/charms</code> when executing <code>juju deploy</code>.
 
-    For example, if you are running juju in a Vagrant  virtual machine, you could set <code>JUJU-RELATION</code> to your shared folder:
+    For example, if you are running juju in a Vagrant  virtual machine, you could set <code>JUJU_REPOSITORY</code> to your shared folder:
 
-        export JUJU_RELATION=/vagrant
+        export JUJU_REPOSITORY=/vagrant
         juju deploy local:series/charm
 
 - JUJU_LOGGING_CONFIG
