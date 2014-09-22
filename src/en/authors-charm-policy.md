@@ -29,6 +29,9 @@ The charm store referred to in this document is the collection of Juju charms
 and bundles hosted at
 [https://launchpad.net/charms](https://launchpad.net/charms).
 
+If a charm no longer complys with the policy, there is a process to remove
+[unmaintained charms](./charm-unmaintained-process.html) from the charm store.
+
 # Charm Metadata
 
 ## metadata.yaml
