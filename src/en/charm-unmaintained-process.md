@@ -34,7 +34,6 @@ If any of the above conditions exist, follow the unmaintained charm process.
 
 1. Contact any of the charmers via IRC in #juju@freenode.net or if you would
 like confirmation on your findings.  
-
 2. [Report a bug](https://bugs.launchpad.net/charms/) against the charm if
    there is not already one  
 
@@ -50,7 +49,6 @@ like confirmation on your findings.
         - Tag the bug with “maintainer-needed”
         - If you can address the failure, and there is no maintainer, please
           consider listing yourself as the maintainer.  
-
 3. Email <juju@lists.ubuntu.com> for assistance in resolving the issue
    identified.  This email is intended to let interested parties know the given
    charm is a candidate for removal from recommended status referencing
@@ -62,7 +60,6 @@ like confirmation on your findings.
     for removal.
   - List the number of bugs against this charm.
   - List attempts to contact the maintainer.
-
 4. After 1 month of no response to email or resolutions to the bug that cause
    the charm to fail policy, the charm should no longer be recommended. Contact
    a charmer to move the charm to unmaintained.
