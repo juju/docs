@@ -1,23 +1,4 @@
-# High Availability
-As of version 1.20, Juju supports high-availability both for services and for
-state.
-
-## High Availability for state servers
-
-The Juju state-server (bootstrap node) can be placed into high availability
-mode. Juju will automatically recover when one or more the state-servers fail.
-It will use Availability Zones or Availability sets on supported providers.
-
-You can use the 'ensure-availability' command to create the additional
-state-servers:
-
-    juju ensure-availability
-
-The 'ensure-availability' command creates 3 state servers by default, but you
-may use the '-n' option to specify a larger number. The number of state servers
-must be odd. The command supports the 'series' and 'constraints' options, like
-the 'bootstrap' command.
-
+# Service High Availability
 
 ## Distribution groups
 Juju works with OpenStack, Amazon EC2 and Azure providers to ensure that in
