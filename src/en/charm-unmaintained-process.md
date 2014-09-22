@@ -35,8 +35,7 @@ If any of the above conditions exist, follow the unmaintained charm process.
 1. Contact any of the charmers via IRC in #juju@freenode.net or if you would
 like confirmation on your findings.  
 2. [Report a bug](https://bugs.launchpad.net/charms/) against the charm if
-   there is not already one  
-
+   there is not already one.  
     - When filing a bug in Launchpad check the following:
       - Is the charm bug tracker completely barren?
       - How many bugs are there for this charm? (expired or current)
@@ -53,7 +52,6 @@ like confirmation on your findings.
    identified.  This email is intended to let interested parties know the given
    charm is a candidate for removal from recommended status referencing
    critical bugs (bugs that cause the charm to fail policy).  
-
   - If a maintainer is needed, use the subject of "[maintainer-needed] - charm
     name"  
   - Reference the problem that is failing policy and thus should be considered
