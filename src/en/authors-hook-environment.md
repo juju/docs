@@ -42,7 +42,7 @@ In addition, every relation hook makes available relation-specific variables.
   important, because it's the only reasonable way of telling the difference
   between (say) a database service's many independent clients.
 
-...and, if that relation hook is not a [-broken](authors-charm-hooks.html#<name>-relation-broken) hook:
+...and, if that relation hook is not a [-broken](authors-charm-hooks.html#[name]-relation-broken) hook:
 
   - The `$JUJU_REMOTE_UNIT` variable holds the name of the unit which is
   being reported to have -joined, -changed, or -departed.
@@ -276,7 +276,7 @@ necessarily _accurate_, in that you will always see settings that:
 
 You should never depend upon the presence of any given key in `relation-get`
 output. Processing that depends on specific values (other than `private-address`) 
-should be restricted to [-changed](authors-charm-hooks.html#<name>-relation-changed) hooks for the relevant unit, and the absence
+should be restricted to [-changed](authors-charm-hooks.html#[name]-relation-changed) hooks for the relevant unit, and the absence
 of a remote unit's value should never be treated as an
 [error](./authors-hook-errors.html) in the local unit.
 
