@@ -39,10 +39,10 @@ charm:
 For every relation defined by a charm, an additional 4 "relation hooks" can be
 implemented, named after the charm relation:
 
-  - <name>-relation-joined
-  - <name>-relation-changed
-  - <name>-relation-departed
-  - <name>-relation-broken
+  - [name]-relation-joined
+  - [name]-relation-changed
+  - [name]-relation-departed
+  - [name]-relation-broken
 
 ### install
 
@@ -110,9 +110,9 @@ only be connected to one provider anyway.
 When a unit running a given charm participates in a given relation, it runs at
 least three hooks for every remote unit it becomes aware of in that relation.
 
-### <name>-relation-joined
+### [name]-relation-joined
 
-`<name>-relation-joined` is run once only, when that remote unit is first
+`[name]-relation-joined` is run once only, when that remote unit is first
 observed by the unit. It should be used to `relation-set` any local unit
 settings that can be determined using no more than the name of the joining unit
 and the remote `private-address` setting, which is always available when the
@@ -122,9 +122,9 @@ You should not depend upon any other relation settings in the -joined hook
 because they're not guaranteed to be present; if you need more information you
 should wait for a -changed hook that presents the right information.
 
-### <name>-relation-changed
+### [name]-relation-changed
 
-`<name>-relation-changed` is always run once, after `-joined`, and will
+`[name]-relation-changed` is always run once, after `-joined`, and will
 subsequently be run whenever that remote unit changes its settings for the
 relation. It should be the _only_ hook that _relies_ upon remote relation
 settings from `relation-get`, and it should _not_ error if the settings are
@@ -134,9 +134,9 @@ the hook will be run again.
 The settings that you can get, and that you should set, are determined by the
 relation's [interface](./authors-charm-interfaces.html).
 
-### <name>-relation-departed
+### [name]-relation-departed
 
-`<name>-relation-departed` is run once only, when the remote unit is known to be
+`[name]-relation-departed` is run once only, when the remote unit is known to be
 leaving the relation; it will only run once at least one `-changed` has been run,
 and after `-departed` has run, no further `-changed` hooks will be run. This should be
 used to remove all references to the remote unit, because there's no guarantee
@@ -151,9 +151,9 @@ departure of each individual remote unit.
 Once all necessary `-departed` hooks have been run for such a relation, the unit
 agent will run the final relation hook:
 
-### <name>-relation-broken
+### [name]-relation-broken
 
-`<name>-relation-broken` indicates that the current relation is no longer valid,
+`[name]-relation-broken` indicates that the current relation is no longer valid,
 and that the charm's software must be configured as though the relation had
 never existed. It will only be called after every necessary `-departed` hook has
 been run; if it's being executed, you can be sure that no remote units are
