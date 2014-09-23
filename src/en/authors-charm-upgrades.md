@@ -28,7 +28,7 @@ settings will not be affected by subsequent changes to the service's settings.
 
 ## Forced charm upgrades
 
-Juju defines the upgrade-charm [hook](./authors-hook-kinds.html) for resolving
+Juju defines the [upgrade-charm hook](authors-charm-hooks.html#upgrade-charm) for resolving
 differences between versions of the same charm. No notice is given of charm
 upgrades; a charm upgrade may run at any time the unit is started, and the only
 opportunity for resolution that exists occurs *after* the change has taken

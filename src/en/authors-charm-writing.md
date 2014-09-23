@@ -12,7 +12,7 @@ Tools. [ Find out how to get and install charm tools here ](tools-charm-tools.ht
 hurry back.
 
 For this example, we are imagining that we want to create a charm for
-[the Vanilla forum software](http://vanillaforums.org/)
+[the Vanilla forum software](http://vanillaforums.org/).
 
 
 ## Prepare yourself
@@ -22,7 +22,7 @@ charm repository (see how to deploy from a local repository
 [here](./charms-deploying.html)) to make it easy to test in your Juju
 environment.
 
-Go to your home directory (or wherever is appropriate and make the
+Go to your home directory (or wherever is appropriate) and make the
 appropriate file structure:
 
     cd ~
@@ -46,7 +46,7 @@ this
 
 ## Create the README file
 
-Fire up your text editor and load/edit the readme file.
+Fire up your text editor and load/edit the `README.ex` file.
 
 This step is especially important if you intend making your charm
 public, but it is very useful even if your charm will only ever be
@@ -72,7 +72,10 @@ Here is a quick example README file for our Vanilla charm:
     And finally expose the Vanilla service:
         juju expose vanilla
 
-Obviously, you can include any useful info you wish.
+Obviously, you can include any useful info you wish. After sufficiently modifying the README.ex file, we recommend changing 
+the extension from .ex to .md to make it more clear that it is utilizing Markdown formatting.
+
+    mv README.ex README.md
 
 ## Make some metadata.yaml
 
@@ -214,8 +217,8 @@ raise an error - this is important so that Juju can work out if things
 are running properly.
 
 The final line starts the Apache web server, thus also starting our
-Vanilla service. Why do we call 'restart'? One of the important ideas
-behind hooks is that they should be 'idempotent'. That means that the
+Vanilla service. Why do we call `restart`? One of the important ideas
+behind hooks is that they should be idempotent, meaning that the
 operation should be capable of being run many times without changing
 the intended result (basically). In this case, we don't want an error
 if Apache is actually already running, we just want it to run and
@@ -395,7 +398,7 @@ The output classifies messages as:
  - E - An error; these are blocker which must be fixed for the charm
        to be used.
 
-some example output might be:
+Some example output might be:
 
     E: no copyright file
     E: README.ex Includes boilerplate README.ex line 1
@@ -418,7 +421,7 @@ exactly what is happening. It won't do much to begin with, but you
 should see messages appearing when we start to deploy our charm.
 
 Following our own recipe, in another terminal we should now do the
-following (assuming you already have a bootstrapped environment):
+following (assuming you already have a [bootstrapped environment](getting-started.html)):
 
     juju deploy mysql
     juju deploy --repository=/home/$USER/charms/ local:precise/vanilla

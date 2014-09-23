@@ -42,7 +42,7 @@ In addition, every relation hook makes available relation-specific variables.
   important, because it's the only reasonable way of telling the difference
   between (say) a database service's many independent clients.
 
-...and, if that relation hook is not a -broken hook:
+...and, if that relation hook is not a [-broken](authors-charm-hooks.html#<name>-relation-broken) hook:
 
   - The `$JUJU_REMOTE_UNIT` variable holds the name of the unit which is
   being reported to have -joined, -changed, or -departed.
@@ -94,10 +94,7 @@ important, please `juju-log` it.
     juju-log "some important text"
 
 It accepts a `--debug` flag which causes the message to be logged at `DEBUG`
-level; in all other cases it's logged at `INFO` level. The `-l`/`--level`
-argument is ignored, and is present only to prevent legacy charms from entirely
-failing to run; the inability to specify logging levels and targets in more
-detail is a known [bug](https://bugs.launchpad.net/juju-core/+bug/1223325).
+level; in all other cases it's logged at `INFO` level.
 
 ### unit-get
 
@@ -144,7 +141,7 @@ if the setting doesn't exist. In both cases nothing will be returned.
     config-get [key-with-no-default]
     config-get [missing-key]
 
-**Note: ** The above two examples are not misprints - asking for a value which
+!!! Note: The above two examples are not misprints - asking for a value which
 doesn't exist or has not been set returns nothing and raises no errors.
 
 ### open-port
@@ -264,7 +261,7 @@ To get one setting from the default remote unit in the default relation enter:
     jim
 
 To get all settings from a particular remote unit in a particular relation you
-specify them together with the command. So
+specify them together with the command.
 
     relation-get -r database:7 - mongodb/5
     username: bob
@@ -279,21 +276,20 @@ necessarily _accurate_, in that you will always see settings that:
 
 You should never depend upon the presence of any given key in `relation-get`
 output. Processing that depends on specific values (other than `private-address`) 
-should be restricted to -changed hooks for the relevant unit, and the absence
+should be restricted to [-changed](authors-charm-hooks.html#<name>-relation-changed) hooks for the relevant unit, and the absence
 of a remote unit's value should never be treated as an
 [error](./authors-hook-errors.html) in the local unit.
 
 In practice, it is common and encouraged for -relation-changed hooks to exit
 early, without error, after inspecting `relation-get` output and determining it
-to be inadequate; and for [all other hooks](./authors-hook-kinds.html) to be
+to be inadequate; and for [all other hooks](authors-charm-hooks.html) to be
 resilient in the face of missing keys, such that -relation-changed hooks will be
 sufficient to complete all configuration that depends on remote unit settings.
 
 Settings for remote units already known to have departed remain accessible for
 the lifetime of the relation.
 
-`relation-get` currently has a
-[bug](https://bugs.launchpad.net/juju-core/+bug/1223339)
+!!! Note: `relation-get` currently has a [bug](https://bugs.launchpad.net/juju-core/+bug/1223339)
 that allows units of the same service to see each other's
 settings outside of a peer relation. Depending on this behaviour is foolish in
 the extreme: if you need to share settings between units of the same service,
