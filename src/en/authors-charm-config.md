@@ -37,14 +37,6 @@ first time someone uses your charm, they're likely to run `juju deploy
 yourcharm` and see what happens; if it doesn't work out of the box ont the first
 go, many potential users won't give it a second try.
 
-## Warning
-
-**Warning:** There's a [bug](https://bugs.launchpad.net/juju-core/+bug/1194945)
-in the service configuration CLI at the moment; if a string-typed option has an
-explicit default that is _not_ the empty string, it will become impossible to
-set the value to the empty string at runtime. If your option needs to accept an
-empty string value, it should make the empty string the explicit default value.
-
 ## Sample config.yaml files
 
 The MediaWiki has some simple but useful configuration options:

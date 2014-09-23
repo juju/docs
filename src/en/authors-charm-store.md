@@ -67,7 +67,7 @@ you must initialize the repository and push your development branch to LaunchPad
 
 For the purpose of this documentation, we will call our charm `ubucharm`
 
-  bzr push lp:~username/charms/series/ubucharm/trunk
+    bzr push lp:~username/charms/series/ubucharm/trunk
 
 The /trunk branch identifier is the *only* branch that will be recognized by the
 charm store ingestion process. This free's the developer to push multiple branches
