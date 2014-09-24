@@ -27,8 +27,7 @@ the state of the service from install to config to started. Because of this, all
 Other generic tests may be identified, so a collection of generic tests should
 be the focus of an implementation.
 
-Note that this requirement is already satisfied by Mark Mims' jenkins tester:
-[https://github.com/mmm/charmtester/](https://github.com/mmm/charmtester/)
+Note that this requirement is already satisfied by [Mark Mims' jenkins tester](https://github.com/mmm/charmtester/).
 
 ## Phase 2 - Charm Specific tests
 
