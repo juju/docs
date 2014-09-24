@@ -65,9 +65,9 @@ namespace.
 When you feel your charm is ready for submission to your personal name space,
 you must initialize the repository and push your development branch to LaunchPad.
 
-For the purpose of this documentation, we will call our charm `ubucharm`
+For the purpose of this documentation, we will call our charm `nagios`
 
-    bzr push lp:~username/charms/series/ubucharm/trunk
+    bzr push lp:~your-launchpad-username/charms/series/nagios/trunk
 
 The /trunk branch identifier is the *only* branch that will be recognized by the
 charm store ingestion process. This free's the developer to push multiple branches
@@ -80,7 +80,7 @@ with a description following.
   - **lp:~username** : This is your launchpad username
   - **/charms/** : Charms is the project descriptor
   - **/precise/** : All charms are targeted against a series
-  - **/ubucharm/** : This is the charm name and should match whats listed in metdata.yaml
+  - **/nagios/** : This is the charm name and should match whats listed in metdata.yaml
   - **/trunk** : The branch target. *Remember* only /trunk will be ingested into the charm store.
 
 #### Deployment
@@ -88,13 +88,13 @@ with a description following.
 Once your charm has been ingested it will be deployable via your personal name space
 url.
 
-  juju deploy cs:~username/series/ubucharm
+      juju deploy cs:~your-launchpad-username/series/nagios
 
 #### Charm Store Display
 
 Name Spaced charms will be displayed under the **other** category in the GUI.
 They will be displayed with non-descript category icons for the service. Only
-recommended charms display the shipped ICON for the service.
+recommended charms display the shipped icon for the service.
 
 #### Workflow to accept contributions
 
@@ -102,7 +102,7 @@ To accept contributions, and/or merge patches into your personal namespace - as
 the owner of the charm, you are responsible for reviewing and accepting/rejecting
 contributions.
 
-  bzr push lp:~username/charms/series/ubucharm/feature_branch
+    bzr push lp:~your-launchpad-username/charms/series/nagios/feature_branch
 
 and a subsequent Merge Proposal should be issued against your branch following
 the launchpad [Developer Merge Proposal Documentation](https://dev.launchpad.net/UsingMergeProposals)
