@@ -1,17 +1,19 @@
 # Unmaintained charms
 
-As charms go through the software lifecycle there comes a time where a charm has
-not been properly kept up-to-date. Specifically, a charm may fail to deploy,
-relate, or execute defined config options. When this occurs this process to
-follow.  We always strive to keep charms in the Charm Store as we value the
-work it takes to author a charm and pass review. Having a rich set of charms is
-the primary mission of the Juju community.
+As charms go through the software lifecycle there may come a time where a charm
+has not been properly kept up-to-date. Specifically, a charm may fail to deploy,
+relate, or execute defined configuration options.  
 
-## Identifying charms that are unmaintained
+When this unfortunate event occurs we will follow this process to determine the
+next steps.  We always strive to keep charms in the Charm Store as we value the
+work it takes to author a charm and pass review. Having a rich set of _valuable_
+charms is the primary mission of the Juju community.  
 
 The following process should be executed in order, and each point must be
-address ending with a bug report detailing the process taken to arrive at the
-conclusion of a charm being unmaintained.
+address culminating with a bug report detailing the process taken to arrive at
+the conclusion of a charm being unmaintained.
+
+## Identifying charms that are unmaintained
 
 - Does the charm have any of the following conditions?
   - Fail `charm proof`, or lint
@@ -32,8 +34,8 @@ If any of the above conditions exist, follow the unmaintained charm process.
 
 ##  Unmaintained charm process
 
-1. Contact any of the charmers via IRC in #juju@freenode.net or if you would
-like confirmation on your findings.  
+1. Join the #juju channel on the Freenode.net IRC server and ask for help
+   confirming your findings.  
 2. [Report a bug](https://bugs.launchpad.net/charms/) against the charm if
    there is not already one.  
     - When filing a bug in Launchpad check the following:
@@ -48,7 +50,7 @@ like confirmation on your findings.
         - Tag the bug with “maintainer-needed”
         - If you can address the failure, and there is no maintainer, please
           consider listing yourself as the maintainer.  
-3. Email <juju@lists.ubuntu.com> for assistance in resolving the issue
+3. Email juju@lists.ubuntu.com for assistance in resolving the issue
    identified.  This email is intended to let interested parties know the given
    charm is a candidate for removal from recommended status referencing
    critical bugs (bugs that cause the charm to fail policy).  
@@ -58,15 +60,16 @@ like confirmation on your findings.
     for removal.
   - List the number of bugs against this charm.
   - List attempts to contact the maintainer.
-4. After 1 month of no response to email or resolutions to the bug that cause
-   the charm to fail policy, the charm should no longer be recommended. Contact
-   a charmer to move the charm to unmaintained.
+4. After 1 month of no responses to Juju email list or resolutions to the bug
+   that cause the charm to fail policy, the charm should no longer be
+   recommended. Contact a charmer to move the charm to unmaintained.
 
 ### Consequences of unmaintaned charms
 
-Moving the charm to unmaintained means moving the charm from `lp:~charmers` to
-`lp:~unmaintained-charms`.  Since it involves the `charmers` group, this process
-can only be done by a charmer.  
+Moving the charm to unmaintained means unpromulgation (no longer recommending)
+and moving the charm from `lp:~charmers` to `lp:~unmaintained-charms`.  
+Since it involves the `charmers` group, this process can only be done by a
+charmer.  
 
 Moving to unmaintained-charms affects the charm's listing as recommended,
 code reviews, automated charm testing for merge proposals, and deploy
