@@ -31,7 +31,7 @@ and bundles hosted at
 
 If a charm is no longer being properly maintained and is failing to adhere to
 policy the charm will undergo the
-[unmaintained charms](./charm-unmaintained-process.html).  This process confirms
+[unmaintained charm process](./charm-unmaintained-process.html).  This process confirms
 the charm is no longer being maintained, fails to adhere to Charm Store policy,
 and thus is removed from the recommended status in the Juju Charm Store.  
 
