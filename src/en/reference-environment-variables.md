@@ -6,9 +6,9 @@ grep -r JUJU_ * | perl -ne 'if (/(JUJU_[A-Z_]+)/) { print "$1\n"; }'|sort | uniq
 
 # Environment Variables
 
-## Juju API Server
+## Juju Client
 
-These variables are available on the Juju API server in order to change its default behavior.
+These variables are available on the juju client in order to change its default behavior.
 
 - JUJU_ENV
 
@@ -39,7 +39,7 @@ These variables are available on the Juju API server in order to change its defa
 
 - JUJU_LOGGING_CONFIG
 
-    In stable Juju releases, agents are started with logging set to WARNING, and units are set to INFO. Development releases are set to DEBUG globally. You can change the logging options to be more or less verbose. For example:
+    This setting takes effect on an environment only at bootstrap time. In stable Juju releases, agents are started with logging set to WARNING, and units are set to INFO. Development releases are set to DEBUG globally. Post bootstrap, on a running environment you can change the logging options to be more or less verbose. For example:
 
         juju set-environment logging-config "juju=DEBUG; unit=WARNING"
 
