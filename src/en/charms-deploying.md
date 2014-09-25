@@ -73,17 +73,15 @@ The default-series can also be added to any bootstrapped environment with the
 
 Deployed services usually start with a sane default configuration. However, for
 some services it is desireable (and quicker) to configure them at deployment
-time. This can be done by creating a YAML format file of configuration values and 
+time. This can be done by creating a YAML format file of configuration values and
 using the `--config=` switch:
 
     juju deploy mysql --config=myconfig.yaml
-    
-There is more information on this, and other ways to configure services in the 
+
+There is more information on this, and other ways to configure services in the
 [documentation for configuring services](./charms-config.html).
 
-# A note about caching...
-
-After Juju resolves a charm and its dependencies, it bundles them and deploys
+!!! Note: After Juju resolves a charm and its dependencies, it bundles them and deploys
 them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache).
 This allows the same charm to be deployed to multiple machines repeatably and
 with minimal network transfers.
