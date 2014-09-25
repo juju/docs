@@ -127,5 +127,5 @@ constraints. **region** and **transfer**
  data centers are supported and various short hand aliases are defined. ie.
  valid values include ams2, nyc1, nyc2, sfo1, sg1. The plugin defaults to nyc2.
 
-- transfer - to denote the terabytes of transfer included in the instance montly
+- transfer - to denote the terabytes of transfer included in the instance monthly
 cost (integer size in gigabytes).
