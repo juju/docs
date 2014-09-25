@@ -7,7 +7,7 @@ allows Juju users to implement any cloud provider's API calls and act similar to
 a provider implemented in the Juju Core code base.
 
 
-This process requires you to have an Digital Ocean account. If you
+This process requires you to have a DigitalOcean account. If you
 have not signed up for one yet, it can obtained at
 [http://digitalocean.com](http://digitalocean.com).
 
