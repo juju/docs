@@ -1,13 +1,21 @@
 # Configuring for DigitalOcean
 
+!!! **Note:** This particular provider is in "beta" as it is developed by a
+community member [Kapil Thangavelu](http://github.com/kapilt/juju-digitalocean)
+and makes use of [manual provisioning](config-manual.html). Manual provisioning
+allows Juju users to implement any cloud provider's API calls and act similar to
+a provider implemented in the Juju Core code base.
+
+
 This process requires you to have an Digital Ocean account. If you
 have not signed up for one yet, it can obtained at
 [http://digitalocean.com](http://digitalocean.com).
 
 ## Prerequisites
 
-You should start by installing juju, as well as the juju-docean plugin from pip.
-this may require you to install python-pip if you do not already have it installed.
+You should start by installing Juju, as well as the juju-docean plugin from pip.
+this may require you to install python-pip if you do not already have it
+installed.
 
     add-apt-repository ppa:juju/stable
     apt-get update
@@ -26,7 +34,7 @@ This will generate a file, `environments.yaml`, which will live in your
 `~/.juju/` directory (and will create the directory if it doesn't already
 exist).
 
-**Note:** If you have an existing configuration, you can use
+!!! **Note:** If you have an existing configuration, you can use
 `juju generate-config --show` to output the new config file, then copy and paste
  relevant areas in a text editor etc.
 
@@ -40,8 +48,9 @@ following:
             bootstrap-user: root
 
 
-This is a simple configuration intended to run on Digital Ocean. When bootstrapped,
-the tools will be served from the bootstrap-host on storage port 8040.
+This is a simple configuration intended to run on Digital Ocean. When
+bootstrapped, the tools will be served from the bootstrap-host on storage port
+8040.
 
 You will also need to obtain your accounts `ClientID` and `APIKey` from the
 Apps & API page.
@@ -60,24 +69,29 @@ for example append the following to `~/.bashrc`
 then source the file so it's loaded in your current environment.
 `source ~/.bashrc`
 
-## Digital Ocean Configuration
+## DigitalOcean Configuration
 
-In order for juju to access the nodes, you will have to have an ssh key
+In order for Juju to access the nodes, you will have to have an ssh key
 populated within the Digital Ocean Control panel.
 
 ![Digital Ocean SSH Key Listing](./media/getting_started_do_ssh_key.png)
 
 ## Bootstrapping
 
+
+In order to make DigitalOcean the default provider in which all subsequent
+commands issued will be performed against
+
+    juju switch digitalocean
+
 To bootstrap a Digital Ocean environment, you will need to route the command
 through the docean plugin that we installed via `pip`.
 
-    juju switch digitalocean
     juju docean bootstrap
 
-This command also respects constraints so you can size your bootstrap node
-accordingly should your deployment be of larger scale than the default instance
-type can handle
+This command also respects [constraints](charms-constraints.html) so you can
+size your bootstrap node accordingly should your deployment be of larger scale
+than the default instance type can handle
 
     juju docean bootstrap --constraints="mem=2G, region=nyc2"
 
@@ -106,8 +120,8 @@ This plugin accepts the standard juju constraints
 - memory
 - root-disk
 
-**Note:** Additionally it supports the following provider specific constraints.
-**region** and **transfer**
+!!! **Note:** Additionally it supports the following provider specific
+constraints. **region** and **transfer**
 
 - region - to denote the digital ocean data center to utilize. All digitalocean
  data centers are supported and various short hand aliases are defined. ie.
