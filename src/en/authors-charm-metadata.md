@@ -4,23 +4,35 @@ The only file that must be present in a charm is `metadata.yaml`, in the root
 directory. A metadata file must be a valid yaml dictionary, containing at least
 the following fields:
 
-  - `name` is the charm name, which is used to form the charm URL. It must
-  contain only `a-z`, `0-9`, and `-`; must start with `a-z`; must not end
-  with a `-`; and may only end with digits if the digits are _not_ directly
-  preceded by a space. Stick with names like `foo` and `foo-bar-baz` and you
-  needn't pay further attention to the restrictions.
+  - `name` is the charm name, which is used to form the charm URL.
+    - It must contain only `a-z`, `0-9`, and `-`; must start with `a-z`; must not end
+      with a `-`; and may only end with digits if the digits are _not_ directly
+      preceded by a space. Stick with names like `foo` and `foo-bar-baz` and you
+      needn't pay further attention to the restrictions.
   - `summary` is a one-line description of the charm.
   - `description` is a long-form description of the charm and its features.
   It will also appear in the juju GUI.
   - `tags` is a descriptive tag that is used to sort the charm in the store.
 
+
+
 Here's a valid metadata file:
 
-    name: minecraft
-    summary: Minecraft Server
+    name: mongodb
+    summary: An open-source document database, and the leading NoSQL database
     description: |
-      Will deploy OpenJDK 6 JRE and the latest Minecraft server
-    tags: social
+      MongoDB is a high-performance, open source, schema-free document- oriented
+      data store that's easy to deploy, manage and use. It's network accessible,
+      written in C++ and offers the following features:  
+      - Collection oriented storage
+      - easy storage of object-style data
+      - Full index support, including on inner objects
+      - Query profiling
+      - Replication and fail-over support
+      - Efficient storage of binary data including large objects (e.g. videos)
+      - Auto-sharding for cloud-level scalability (Q209) High performance,
+      scalability, and reasonable depth of functionality are the goals for the
+      project.
 
 With only those fields, a metadata file is valid, but not very useful. Charms
 for use in the [Charm Store](https://jujucharms.com/) should always set the
@@ -56,6 +68,8 @@ following fields as well, for categorization and display in the GUI:
 
 In almost all cases, only one tag will be appropriate. The categories help
 keep the Charm Store organised.
+
+![Juju Charm Store metadata Listing](./media/authors-metadata-display.png)
 
 Finally, a metadata file defines the charm's [relations](./authors-interfaces.html),
 and whether it's designed for deployment as a
