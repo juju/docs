@@ -89,7 +89,10 @@ Looking at the MongoDB peering relationship, we see the charm defines
       replica-set:
         interface: mongodb-replica-set
 
-
+As outlined in the relationship - peering relationships are particularly useful
+when your service supports clustering. Think about the implications of services
+such as MongoDB, Postgres, and elasticsearch where clusters must exchange
+information amongst one another to perform proper clustering.
 
 ## Configuring relations
 
