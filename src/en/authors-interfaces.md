@@ -91,7 +91,7 @@ Looking at the MongoDB peering relationship, we see the charm defines
 
 As outlined in the relationship - peering relationships are particularly useful
 when your service supports clustering. Think about the implications of services
-such as MongoDB, Postgres, and elasticsearch where clusters must exchange
+such as MongoDB, Postgres, and ElasticSearch where clusters must exchange
 information amongst one another to perform proper clustering.
 
 ## Configuring relations
@@ -145,7 +145,7 @@ relation-joined, db-relation-changed" (based on the mysql relation names).
 
 # Authoring Charm Interfaces
 
-Relations are basically two-way channels of communications between services.
+Relations are basically a bidirectional channel of communication between services.
 They're not actually talking directly, the agents communicate via the state
 server, but it helps to think of it as direct communication between the
 services. Relation hooks can call tools such as `relation-get` and `relation-
@@ -163,11 +163,11 @@ For example, `wordpress` and `mysql` might have a conversation like the followin
       your credentials are "admin/pass1234"
       you can access the db on "my.host.addr:port"
     wordpress:
-      cool, let me write the wordpress config files needed to access that
+      let me write the wordpress config files needed to access that
       database (and bounce the server to pick up those changes)
-      later
+      bye
     mysql:
-      cool, msyql out.
+      see-ya
 
 We'll go over some more detailed versions of this, but this is the high-level
 conversation that occurs between two services when they are related in a

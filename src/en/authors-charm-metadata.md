@@ -5,10 +5,10 @@ directory. A metadata file must be a valid yaml dictionary, containing at least
 the following fields:
 
   - `name` is the charm name, which is used to form the charm URL.
-    - It must contain only `a-z`, `0-9`, and `-`; must start with `a-z`; must not end
-      with a `-`; and may only end with digits if the digits are _not_ directly
-      preceded by a space. Stick with names like `foo` and `foo-bar-baz` and you
-      needn't pay further attention to the restrictions.
+    - It can only contain `a-z`, `0-9`, and `-`; must start with `a-z`; must not
+      end with a `-`; and may only end with digits if the digits are _not_
+      directly preceded by a space. Stick with names like `foo` and `foo-bar-baz`
+      and you needn't pay further attention to the restrictions.
   - `summary` is a one-line description of the charm.
   - `description` is a long-form description of the charm and its features.
   It will also appear in the juju GUI.
