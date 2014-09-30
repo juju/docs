@@ -62,6 +62,40 @@ The versions covered here are:
   * Sshstorage fails in non-english locale
     Lp 1367695
 
+
+^# juju-core 1.20.7
+
+  A new stable release of Juju, juju-core 1.20.7, is now available.
+  This release replaces 1.20.6.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.7 is available for utopic and backported to earlier
+  series in the following PPA:
+
+      ```
+      https://launchpad.net/~juju/+archive/stable
+      ```
+
+
+  ## Noteworthy
+
+  This release contains various bug fixes.
+
+
+  ### Resolved issues
+
+  * --keep-broken bootstrap option to keep failed environments
+    Lp 1362923
+
+  * LXC was not created, no errors, no logs -> pending state.
+    Lp 1354027
+
+  * Juju status still returns private IP in 'public-ip' field
+    Lp 1364419
+
+
 ^# juju-core 1.20.6
 
   A new stable release of Juju, juju-core 1.20.6, is now available.
