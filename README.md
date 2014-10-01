@@ -20,6 +20,17 @@ HTML, only if the headers and footers have been
 changed. The [contributing section](https://juju.ubuntu.com/docs/contributing.html) contains more
 information on this.
 
+### If you want 'phaux live reload'
+
+there is a make target to 'watch' the directory and only build the source files that have changed,
+enabling you the doc editor, to simply refresh your browser to see your changes without re-building
+the entire doc tree.
+
+to gain this functionality you will need the `watchdog` python module, which is pip installable
+
+    pip install watchdog
+    make watch
+
 # Typical Github workflow
 
 

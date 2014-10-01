@@ -1,7 +1,18 @@
 #!/bin/bash
 
-for f in src/en/*.md; do
-  echo "Converting $(basename $f)"
-  txt=`markdown_py -x callouts -x partial_gfm -x anchors_away -x foldouts -x meta $f`
-  DOCNAV="$(cat src/navigation.tpl)" CONTENT=$txt cheetah fill --stdout --env src/base.tpl > htmldocs/`basename ${f%.*}`.html
+
+function build() {
+   echo "Converting $(basename $1)"
+   txt=`markdown_py -x callouts -x partial_gfm -x anchors_away -x foldouts -x meta $1`
+   DOCNAV="$(cat src/navigation.tpl)" CONTENT=$txt cheetah fill --stdout --env src/base.tpl > htmldocs/`basename ${1%.*}`.html
+}
+
+if [ "$1" ]; then
+  f=("src/en/$1")
+else
+  f=$(find src/en/ -type f -name "*.md")
+fi
+
+for file in $f; do
+  build $file
 done
