@@ -74,9 +74,9 @@ The versions covered here are:
   juju-core 1.20.7 is available for utopic and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
 
   ## Noteworthy
