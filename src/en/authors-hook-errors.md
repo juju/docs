@@ -23,7 +23,7 @@ ssh` into the unit and use it as though you were the sole administrator; juju
 will only take back control of the directory when explicitly requested, in
 response to either `juju resolved` or `juju upgrade-charm --force`.
 
-  - `juju resolved` causes the unit to unblock itself and continue as though the hook had completed successfuly. The ideal charm will be aware of this possibility and will therefore trust information from its [environment](./authors-hook-environment.html) to be more recent and correct than anything it may have previously have recorded in the local [charm directory](./authors-charm-components.html).
+  - `juju resolved` causes the unit to unblock itself and continue as though the hook had completed successfully. The ideal charm will be aware of this possibility and will therefore trust information from its [environment](./authors-hook-environment.html) to be more recent and correct than anything it may have previously have recorded in the local [charm directory](./authors-charm-components.html).
   - `juju resolved --retry` reverts the charm directory's contents to whatever they were at the start of the failed hook, and runs the hook again exactly as before. This, in combination with the [debug-hooks](./authors-hook-debug.html) command, is your main entry point for investigating an error in detail. If the hook fails again when retried, it will set an error as before and wait again for user resolution.
   - `juju upgrade-charm --force` merges into the charm directory the contents of the newer charm version, and continues blocking in the original hook error state. Each time a new upgrade is forced, the charm directory is rolled back to the state from which it was originally upgraded before proceeding; this means that a forced upgrade back to the original charm will always be a no-op, regardless of what other upgrade attempts have been made in the interim.
 
@@ -37,7 +37,7 @@ upgrade](./authors-charm-upgrades.html) conflict, which should never happen
 except during development.
 
 They can be resolved either by forcing an upgrade to a different charm version,
-or by manually resolving the git conflicts in the charm directory and running
+or by manually resolving the conflicts in the charm directory and running
 `juju resolved` to cause the unit agent to continue.
 
 ## Charm integrity errors
