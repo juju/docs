@@ -1,14 +1,6 @@
-#  Vagrant Juju Workflow on OSX
+#  Vagrant Juju Workflow on OS X
 
-Developing charms on Ubuntu is an extremely straight forward process thanks to
-the addition of the local provider. LXC containers spin up quickly, integrate
-directly into your desktop OS, and leave you with very little configuration
-needed out of the box to get started.
-
-What about users on OSX? What's their developer story like? The technical
-limitation is that OS X does not support operating system-level virtualization,
-like containers in Linux. The next best thing is to use a virtualization wrapper
-solution like [Vagrant](config-vagrant.html)!
+Running juju on Ubuntu is an extremely straightforward process thanks to the addition of the local provider. OS X does not support virtualization at the operating system level, however. The next best solution is to use a virtualization wrapper like [Vagrant](config-vagrant.html).
 
 ##  Getting Started
 
@@ -18,35 +10,24 @@ your development machine:
 - [Homebrew](http://brew.sh)
 - [Vagrant](http://vagrantup.com)
 - [VirtualBox](https://www.virtualbox.org/)
-- [Juju](http://juju.ubuntu.com)
 
-### Fetching the boxfile
+### Preparing to use Vagrant
 
-Head over to the [Juju Vagrant](config-vagrant.html) provider documentation.
-We'll need to fetch the latest basebox for Vagrant. I recommend using the
-precise basebox.
+Head over to the [Juju Vagrant](config-vagrant.html) provider documentation for instructions on downloading and preparing your new virtual machine.
 
-    vagrant box add JujuBox http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box
+## Writing your first charm
 
-This process takes a short while to complete, as its downloading a 200mb virtual
-machine image. Once its complete you can verify everything completed correctly
-by listing out the boxes that vagrant is tracking.
-
-    vagrant box list
-
-If you see **JujuBox** listed, we're ready to proceed to the next step.
 
 ###  Preparing our local charm repository
 
-We will need to create a directory structure that reflects the current standard
-for juju charm repositories. I recommend putting this in $HOME
+We will need to create a directory structure that reflects the current standard for juju charm repositories. I recommend putting this in $HOME
 
-    mkdir -p ~/charms/precise
+    mkdir -p ~/vagrant/charms/precise
 
 Feel free to add any other LTS based target directory, for example if you were
-to target Trusty Tahr as a release for your charm, the command would be
+to target Trusty Tahr as a release for your charm, the command would be:
 
-    mkdir -p ~/charms/trusty
+    mkdir -p ~/vagrant/charms/trusty
 
 For the remainder of this tutorial, I will assume we are targeting Precise, as
 its the current LTS target of choice.
@@ -65,27 +46,28 @@ These can be installed via homebrew.
 ##  Creating our first charm
 
 Lets charm up [GenghisApp](http://genghisapp.com/) - a single file MongoDB
-adminsitration app.
+administration app.
 
     cd charms/precise
-    charm create genghisapp
+    charm create genghisapp -t bash
 
 This will create a skeleton structure of a charm ready for you to edit and
 populate with your services deployment and orchestration logic.
 
+    ├── README.ex
     ├── config.yaml
-    ├── copyright
     ├── hooks
-    │   ├── config-changed
-    │   ├── install
-    │   ├── restart
-    │   ├── start
-    │   ├── stop
-    │   ├── upgrade-charm
-    │   └── website-relation-joined
+    │   ├── config-changed
+    │   ├── install
+    │   ├── relation-name-relation-broken
+    │   ├── relation-name-relation-changed
+    │   ├── relation-name-relation-departed
+    │   ├── relation-name-relation-joined
+    │   ├── start
+    │   ├── stop
+    │   └── upgrade-charm
     ├── icon.svg
     ├── metadata.yaml
-    ├── README
     └── revision
 
 ### Writing the Charm
@@ -146,7 +128,7 @@ hooks.
 Since vagrant is going to be our working environment, we'll want to make sure
 its aware of all our charms; not just the current charm we are working on.
 
-    cd ~/charms
+    cd ~/vagrant
     vagrant init JujuBox
     vagrant up
 
@@ -199,6 +181,10 @@ Now we are free to connect to genghis. Open up the Genghis running unit list and
 With vagrant fully setup, our charm deployed. We can now iterate over our charm
 and update/test via normal means.
 
-- Make edits on your HOST in your favorite editor
+- Make edits on your HOST in your favorite editor, such as [TextMate](http://macromates.com/), [Atom](https://atom.io/), or [Brackets](http://brackets.io/).
 - run commands inside the JujuBox vagrant environment. `juju upgrade-charm genghisapp`
-- view results in our HOST browser of choice.
+- view results in your HOST browser of choice.
+
+## Next steps
+
+Installing juju, for deploying to non-local environments
