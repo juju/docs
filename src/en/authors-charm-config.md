@@ -3,13 +3,17 @@
 The optional `config.yaml` file defines how a service running the charm can be
 configured by its user.
 
-If it exists, it must contain a dictionary of `options`, in which each possible
-setting is named by the key and defined by the value. An option definition may
-contain any number of the following fields:
+If `config.yaml` exists, it must contain a dictionary of `options`, in which
+each possible setting is named by the key and defined by the value. An option
+definition must contain all of the following fields:
 
-  - `type` can be `string`, `int`, `float`, or `boolean`. If not present, it defaults to `string`.
-  - `description` should contain an explanation of what the user might achieve by altering the setting.
-  - `default` should, if present, contain a value of the appropriate type. If not present it is treated as null (which is always a valid value in this context); an option with no default will not normally be reported by the config-get [hook tool](./authors-hook-environment.html) unless it has been explicitly set.
+  - `type` can be `string`, `int`, `float`, or `boolean`. The default type is `string`.
+  - `description` should contain an explanation of what the user might achieve by altering the setting along with valid values.
+  - `default` should contain a value of the appropriate type. If set as `default:` with no trailing characters, it is treated as null (which is always a valid value in this context).
+
+Any option without these three fields will generate a Warning from the the
+[charm proof tool](tools-charm-tools.html#proof)
+indicating the option is not compliant with charm store policy.  
 
 ## What to expose to users
 
@@ -64,4 +68,3 @@ The MediaWiki has some simple but useful configuration options:
         default: false
         type: boolean
         description: turn on debugging features of mediawiki
-

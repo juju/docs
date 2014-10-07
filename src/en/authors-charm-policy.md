@@ -17,7 +17,7 @@ and bundles must:
   - Must pass "[charm proof](./tools-charm-tools.html#proof)" or "[bundle proof](./tools-charm-tools.html#proof)" with no Errors or Warnings (lines prefixed with E: or W:).
   - Must have a maintainer email address in metadata.yaml attached to a team or individual who are responsive to contact.
   - Must include a license. Call the file 'copyright' and make sure all files' licenses are specified clearly.
-  - Must be under a [Free license](http://opensource.org/osd). 
+  - Must be under a [Free license](http://opensource.org/osd).
   - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
   - Must not run any network services using default passwords.
   - Must call Juju API tools (relation-*, unit-*, config-*, etc) without a hard coded path. Should default to use software that is included in the Ubuntu archive, however we encourage that charm authors have a config options for allowing users to deploy from newer upstream releases, or even right from VCS if it's useful to users.
@@ -44,6 +44,10 @@ Any de-facto config options must be kept at least until the next major charm
 series release. Removed config options should be deprecated first by noting that
 they are deprecated, and why, in their description. Instructions for converting
 values must be added to README as well.
+
+Each [configuration option](authors-charm-config.html#charm-configuration)
+must have `type`, `description`, and `default` fields that give users more
+information about the option and how it can be used.
 
 ## README.md
 
@@ -80,7 +84,7 @@ Each series can be in one of these states:
   - Experimental - Charms can be added, but are in a state of flux.
   - Active - The Charm store is actively accepting new charms and changes.
   - Frozen - Only critical fixes are accepted.
-  - EOL - The OS version is not supported by the vendor, and thus, neither are the charms. 
+  - EOL - The OS version is not supported by the vendor, and thus, neither are the charms.
 
 ## Experimental
 
