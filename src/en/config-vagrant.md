@@ -22,7 +22,7 @@ The following instructions will help you get the environment set up:
 
 To install vagrant and the other required tools on Ubuntu, run:
 
-    sudo apt-get update 
+    sudo apt-get update
     sudo apt-get -y install virtualbox vagrant sshuttle
 
 ### Mac OSX
@@ -39,7 +39,7 @@ Or you can get the source from
 ### Windows
 
 1. Fetch and install VirtualBox from [virtualbox.org](https://www.virtualbox.org/)
-2. Install Vagrant from [vagrantup.com](http://www.vagrantup.com/downloads.html) 
+2. Install Vagrant from [vagrantup.com](http://www.vagrantup.com/downloads.html)
 3. (optional) Install Sshuttle. (This requires the [node.js binary for
 Windows](http://nodejs.org/download/))
 
@@ -65,8 +65,12 @@ images are also listed on [Vagrant Cloud](https://vagrantcloud.com/ubuntu).
 
 Vagrant makes getting started really easy.
 
-Choose a directory to work in. This directory will be shared with the guest,
-and contain the vagrant configuration for the machine. Run:
+Create a directory to work in. This directory will be shared with the guest, and contain the vagrant configuration for the machine. 
+
+    mkdir ~/vagrant
+    cd ~/vagrant
+
+and run:
 
     vagrant box add JujuBox <URL>
 
