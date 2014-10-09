@@ -77,7 +77,7 @@ and run:
 The URL can be from the list above or a local file if you have already
 downloaded a suitable box. For example:
 
-    vagrant box add JujuBox http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box
+    vagrant box add JujuBox http://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box
 
 This will download the box from the URL you chose above.The box will be given
 the name of "JujuBox"
