@@ -58,6 +58,7 @@ more specifics on what needs to be changed, see the relevant sections below.
   - [Configuring for OpenStack](config-openstack.html)
   - [Configuring for bare metal using MAAS](config-maas.html)
   - [Configuring for LXC local provider (Linux)](config-local.html)
+  - [Configuring for Vagrant local provider (OSX)](config-vagrant.html)
 
 **Note:** Juju's command line interface includes documentation, doing `juju help` will show you the topics. You can also check out the [Juju command cheatsheet](https://github.com/juju/cheatsheet) if you are looking for a handy command guide.
 
