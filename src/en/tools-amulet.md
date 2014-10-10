@@ -220,9 +220,9 @@ Import an existing deployer object.
 
   - `deploy_cfg` Already parsed deployer yaml/json file.
 
-    Deployment.relate(*args)
+##### Deployment.relate(*args)
 
-Relate two services together.
+Relate services together.
 
   - `*args` - `service:relation` to be related.
 
@@ -238,6 +238,9 @@ first argument as a relation.
     d.add('discourse')
     d.relate('postgresql:db-admin', 'discourse:db')
     d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
+    # previous command is equivalent too:
+    d.relate('mysql:db', 'wordpress:db')
+    d.relate('mysql:db', 'mediawiki:database')
 
 ##### Deployment.setup(timeout=600)
 
@@ -260,6 +263,28 @@ Example:
         # Setup didn't complete before timeout
         pass
 
+##### Deployment.unrelate(*args)
+
+Remove a relation between two services.
+
+  - `*args` - `service:relation` to be unrelated.
+
+Exactly two arguments must be given.
+
+    import amulet
+    d = amulet.Deployment()
+    d.add('postgresql')
+    d.add('mysql')
+    d.add('wordpress')
+    d.add('mediawiki')
+    d.add('discourse')
+    d.relate('postgresql:db-admin', 'discourse:db')
+    d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
+    # unrelate all the services we just related
+    d.unrelate('postgresql:db-admin', 'discourse:db')
+    d.unrelate('mysql:db', 'wordpress:db')
+    d.unrelate('mysql:db', 'mediawiki:database')
+
 ### amulet.sentry
 
 Sentries are an additional service built in to the Deployment tool which allow
@@ -280,8 +305,12 @@ using the following:
     d.add('mysql')
     d.setup()
     d.sentry.wait()
-    d.sentry.unit['mysql/0']
-    d.sentry.unit['mediawiki/0']
+    # get UnitSentry for a specific service/unit
+    d.sentry['mysql/0']
+    d.sentry['mediawiki/0']
+    # get list of all UnitSentry objects for a service, one per unit
+    d.sentry['mysql']
+    assert d.sentry['mysql/0'] in d.sentry['mysql']
 
 Sentries provide several methods for which you can use to gather information
 about an environment. The following are a few examples.
@@ -380,7 +409,7 @@ Execute specified command as root on remote machine
 
 Returns a tuple of output string and exit code
 
-    >>> d.sentry.unit['ubuntu/0'].run('whoami')
+    >>> d.sentry['ubuntu/0'].run('whoami')
     ('root', 0)
 
 ## Examples
@@ -419,8 +448,8 @@ Here are a few examples of Amulet tests
         # will automatically "FAIL" the test.
         raise
     # Shorten the names a little to make working with unit data easier
-    wp_unit = d.sentry.unit['wordpress/0']
-    mysql_unit = d.sentry.unit['mysql/0']
+    wp_unit = d.sentry['wordpress/0']
+    mysql_unit = d.sentry['mysql/0']
     # WordPress requires user input to "finish" a setup. This code is contained in
     # the helper.py file found in the lib directory. If it's not able to complete
     # the WordPress setup we need to quit the test, not as failed per se, but as a
