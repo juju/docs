@@ -262,7 +262,7 @@ structured like this:
 
 Now generate relevant metadata for the tools by running the command:
 
-    juju generate-tools -d <tools_dir>
+    juju metadata generate-tools -d <tools_dir>
 
 Finally, the contents of  can be uploaded to a location in the Juju metadata
 search path. As per the Configuration section, this may be somewhere specified
