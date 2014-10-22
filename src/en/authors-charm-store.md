@@ -93,7 +93,7 @@ url.
 #### Charm Store Display
 
 Name Spaced charms will be displayed under the **other** category in the GUI.
-They will be displayed with non-descript category icons for the service. Only
+They will be displayed with non-descript icons for the service. Only
 recommended charms display the shipped icon for the service.
 
 #### Workflow to accept contributions
