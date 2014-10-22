@@ -12,6 +12,7 @@ the following fields:
   - `summary` is a one-line description of the charm.
   - `description` is a long-form description of the charm and its features.
   It will also appear in the juju GUI.
+  - `tags` is a descriptive tag that is used to sort the charm in the store.
 
 Here's a valid metadata file:
 
@@ -19,24 +20,41 @@ Here's a valid metadata file:
     summary: Minecraft Server
     description: |
       Will deploy OpenJDK 6 JRE and the latest Minecraft server
+    tags: social
 
 With only those fields, a metadata file is valid, but not very useful. Charms
-for use in the [Charm Store](https://jujucharms.com/) should always set the following fields as well, for
-categorization and display in the GUI:
+for use in the [Charm Store](https://jujucharms.com/) should always set the
+following fields as well, for categorization and display in the GUI:
 
   - `maintainer` is the name and email address for the main point of contact
   for the development and maintenance of the charm. Or, at least, it should be:
   in frequent practice, it's just a name. Please update your charms as you get
   the opportunity.
-  - `categories` is a list containing one or more of the following:
-    - applications
-    - app-servers
-    - cache-proxy
-    - databases
-    - file-servers
-    - misc
+  - `tags` is a list containing one or more of the following:
+     - analytics
+     - big_data
+     - ecommerce
+     - openstack
+     - cloudfoundry
+     - cms
+     - social
+     - streaming
+     - wiki
+     - ops
+     - backup
+     - identity
+     - monitoring
+     - performance
+     - audits
+     - security
+     - network
+     - storage
+     - database
+     - cache-proxy
+     - application_development
+     - web_server
 
-In almost all cases, only one category will be appropriate. The categories help
+In almost all cases, only one tag will be appropriate. The categories help
 keep the Charm Store organised.
 
 Finally, a metadata file defines the charm's relations, and whether it's
