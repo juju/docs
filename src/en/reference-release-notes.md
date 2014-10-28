@@ -7,6 +7,37 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.20.11
+
+  A new stable release of Juju, juju-core 1.20.11, is now available.
+  This release replaced stable 1.20.10.
+
+
+  Getting Juju
+
+  juju-core 1.20.11 is available for utopic and backported to earlier
+  series in the following PPA:
+
+      ```
+      https://launchpad.net/~juju/+archive/stable
+      ```
+
+  Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  Resolved issues
+
+  * Local environment machine deployments fail after "juju destroy-
+    machine" has been used
+    Lp 1379802
+
+  * Juju does not consider whether it has permission to an availability
+    zone
+    Lp 1380557
+
+
 ^# juju-core 1.20.10
 
   A new stable release of Juju, juju-core 1.20.10, is now available.
