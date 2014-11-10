@@ -9,32 +9,48 @@ backup file.
 
 ## backup
 
-`juju backup`
+Use the `create` command to create a new backup file:
 
-The `backup` command creates an archive file for the state-server in an
-environment.  Unlike most juju commands, `backup` does not accept the -e
-option to specify the environment.  You must `switch` to the environment
-or specify the envronment name in the `JUJU_ENV` shell env variable.
+`juju backups create [-e ENV] [--quiet] [--filename=FILENAME | --no-download]`
 
-The backup archive is created with a default name that incorporates the
-date and time, like `juju-backup-20140403-1408.tar.gz`.  The filename is
-printed once the backup completes.
+The `create` command creates an archive file for the state-server in an
+environment, along with metadata about that file.  By default the current
+environment is used.  It may be explicitly identified by the -e option
+or the `JUJU_ENV` shell env variable.
+
+As a convenience, the state-server stores both the file and the
+metadata.  However, the state-server may not be available when you need
+access to the archive.  So it is up to you to keep a local copy of any
+backup archive you may need later.  By default `juju backups create`
+will download the new backup file, though you can use the --no-download
+option to disable this.
+
+If the --filename option is not provided to `create` then the backup
+archive is downloaded with a default name that incorporates the date and
+time, like `juju-backup-20140403-1408.tar.gz`.  The filename is printed
+once the backup completes.  Unless the --quiet option is used, the backup
+metadata is also printed.
 
 Examples:
 
 ```shell
+juju backups create -e my-env
+JUJU_ENV=my-env juju backups create
 juju switch my-env
-juju backup
-JUJU_ENV=my-env juju backup
+juju backups create
+juju backups create --filename backup-19.tgz
 ```
 
 ## restore
 
-`juju restore [--constraints CONSTRAINTS] [-e ENV] FILENAME`
+Use the `restore` command to replace an environment's state-server with
+a new one based on a backup archive:
+
+`juju backups restore [--constraints CONSTRAINTS] [-e ENV] FILENAME`
 
 The `restore` command creates a new juju state-server instance using the
 data from the backup file.  This happens in the current environment (the
-default) or the named environment, if provided.  As with the normal
+default) or the named environment if provided.  As with the normal
 bootstrap command, any constraints you provide are applied to the new
 state-server.
 
@@ -47,8 +63,8 @@ creates a replacement.
 Examples:
 
 ```shell
-juju restore juju-backup-20140403-1408.tar.gz
-juju restore -e my-env backup-19.tgz
+juju backups restore juju-backup-20140403-1408.tar.gz
+juju backups restore -e my-env backup-19.tgz
 ```
 
 ## HA (High Availability)
