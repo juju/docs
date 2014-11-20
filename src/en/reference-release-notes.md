@@ -7,6 +7,48 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.20.12
+
+  A new stable release of Juju, juju-core 1.20.12, is now available.
+  This release replaces stable 1.20.11.
+
+
+  Getting Juju
+
+  juju-core 1.20.12 is available for utopic and backported to earlier
+  series in the following PPA:
+
+      ```
+      https://launchpad.net/~juju/+archive/stable
+      ```
+
+  Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  Resolved issues
+
+  * Juju run doesn't after upgrade to 1.20.11
+    Lp 1392745
+
+  * Non subordinate container scoped relations broken
+    Lp 1382751
+
+  * Juju add-machine lxc:0 fails to start due to incorrect network name
+    in trusty config
+    Lp 1340261
+
+  * Cloud-init network error when using maas/juju
+    Lp 1345433
+
+  * Juju deploy --to lxc:0 works ok but juju deploy --to lxc:1 fails
+    Lp 1368976
+
+  * Juju deploy to kvm:0 fails for br0
+    Lp 1386575
+
+
 ^# juju-core 1.20.11
 
   A new stable release of Juju, juju-core 1.20.11, is now available.
