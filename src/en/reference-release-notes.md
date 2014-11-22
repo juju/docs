@@ -7,6 +7,32 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.20.13
+
+  A new stable release of Juju, juju-core 1.20.13, is now available.
+  This release  replaces stable 1.20.12.
+
+
+  Getting Juju
+
+  juju-core 1.20.13 is available for utopic and backported to earlier
+  series in the following PPA:
+
+      ```
+      https://launchpad.net/~juju/+archive/stable
+      ```
+
+  Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  Resolved issues
+
+  * 1.20.12 breaks neutron-gateway, since all interfaces are brought up
+    Lp 1395081
+
+
 ^# juju-core 1.20.12
 
   A new stable release of Juju, juju-core 1.20.12, is now available.
