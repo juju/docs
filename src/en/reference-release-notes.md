@@ -18,9 +18,9 @@ The versions covered here are:
   juju-core 1.20.13 is available for utopic and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   Notable Changes
 
@@ -44,9 +44,9 @@ The versions covered here are:
   juju-core 1.20.12 is available for utopic and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   Notable Changes
 
@@ -86,9 +86,9 @@ The versions covered here are:
   juju-core 1.20.11 is available for utopic and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   Notable Changes
 
@@ -117,9 +117,9 @@ The versions covered here are:
   juju-core 1.20.10 is available for utopic and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   Notable Changes
 
@@ -143,9 +143,9 @@ The versions covered here are:
   juju-core 1.20.9 is available for utopic and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   Notable Changes
 
@@ -172,9 +172,9 @@ The versions covered here are:
   juju-core 1.20.8 is available for utopic and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   ## Notable Changes
 
