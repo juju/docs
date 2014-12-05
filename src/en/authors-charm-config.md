@@ -51,9 +51,11 @@ The MediaWiki has some simple but useful configuration options:
         description: skin for the Wiki
         type: string
       logo:
+        default:
         description: URL to fetch logo from
         type: string
       admins:
+        default:
         description: Admin users to create, user:pass
         type: string
       debug:
