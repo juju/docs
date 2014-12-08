@@ -4,8 +4,7 @@ Running juju on Ubuntu is an extremely straightforward process thanks to the add
 
 ##  Getting Started
 
-To start you will want to ensure you've got the following tools installed on
-your development machine:
+To start you will want to ensure you've got the following tools installed on your development machine:
 
 - [Homebrew](http://brew.sh)
 - [Vagrant](http://vagrantup.com)
@@ -20,24 +19,21 @@ Head over to the [Juju Vagrant](config-vagrant.html) provider documentation for 
 
 ###  Preparing our local charm repository
 
-We will need to create a directory structure that reflects the current standard for juju charm repositories. I recommend putting this in $HOME
-
-    mkdir -p ~/vagrant/charms/precise
-
-Feel free to add any other LTS based target directory, for example if you were
-to target Trusty Tahr as a release for your charm, the command would be:
+We will need to create a directory structure that reflects the current standard for juju charm repositories.
 
     mkdir -p ~/vagrant/charms/trusty
 
-For the remainder of this tutorial, I will assume we are targeting Precise, as
-its the current LTS target of choice.
+Feel free to add any other LTS based target directory, for example if you were to target Precise Pangolin as a release for your charm, the command would be:
+
+    mkdir -p ~/vagrant/charms/precise
+
+For the remainder of this tutorial, I will assume we are targeting Trusty, as it's the current LTS target of choice.
 
 ###  Installing Charm-Tools
 
 Now is a good time to fetch Charm Tools. But what are charm tools you ask?
 
-> Charm Tools offer a means for users and charm authors to create, search,
-fetch, update, and manage charms.
+> Charm Tools offer a means for users and charm authors to create, search, fetch, update, and manage charms.
 
 These can be installed via homebrew.
 
