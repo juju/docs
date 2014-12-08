@@ -56,16 +56,14 @@ have put all our boxes on the Ubuntu Cloud Images site. The quick links are:
 - [trusty-server-cloudimg-i386-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-i386-juju-vagrant-disk1.box)
 
 
-If you are unsure which one to fetch, use the 64-bit builds as most modern
-machines are now 64bit (x86_64 AMD64). If you need other versions of Ubuntu,
-check out the [Cloud Images](http://cloud-images.ubuntu.com/vagrant/). These
+If you are unsure which one to fetch, use the 64-bit builds as most modern machines are now 64bit (x86_64 AMD64). If you need other versions of Ubuntu, check out the [Cloud Images](http://cloud-images.ubuntu.com/vagrant/). These
 images are also listed on [Vagrant Cloud](https://vagrantcloud.com/ubuntu).
 
 ## Getting started!
 
 Vagrant makes getting started really easy.
 
-Create a directory to work in. This directory will be shared with the guest, and contain the vagrant configuration for the machine. 
+Create a directory to work in. This directory will be shared with the guest, and contain the vagrant configuration for the machine.
 
     mkdir ~/vagrant
     cd ~/vagrant
