@@ -44,7 +44,7 @@ These can be installed via homebrew.
 Lets charm up [GenghisApp](http://genghisapp.com/) - a single file MongoDB
 administration app.
 
-    cd charms/precise
+    cd charms/trusty
     charm create genghisapp -t bash
 
 This will create a skeleton structure of a charm ready for you to edit and
@@ -144,7 +144,7 @@ You'll need to enter the juju environment we just bootstrapped in $HOME/charms
 
     vagrant ssh
     juju deploy mongodb
-    juju deploy --repository=/vagrant local:precise/genghisapp
+    juju deploy --repository=/vagrant local:trusty/genghisapp
 
 We are now free to watch progress through the GUI
 
