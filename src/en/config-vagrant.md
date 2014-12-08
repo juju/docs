@@ -77,10 +77,10 @@ and run:
 The URL can be from the list above or a local file if you have already
 downloaded a suitable box. For example:
 
-    vagrant box add JujuBox http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-juju-vagrant-disk1.box
+    vagrant box add JujuBox http://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box
 
-This will download the box from the URL you chose above.The box will be given
-the name of "JujuBox"
+This will download the box from the URL you chose above. The box will be named
+"JujuBox".
 
 ## Initialise and start
 
@@ -88,7 +88,16 @@ Initialize this environment by running:
 
     vagrant init JujuBox
 
-Then start it with:
+!!! Note: Vagrant boxes based on the Ubuntu cloud images are configured to
+use 2GB of memory by default. This is suitable for most charm development,
+but large charms (>500MB) may require more memory. In general, allocate an
+additional 1GB of memory for every 500MB of disk space that your charm requires.
+For example, a 500MB charm may need a Vagrant image with 3GB of memory;
+a 1GB charm may need 4GB; etc. See the
+[Vagrant documentation](https://docs.vagrantup.com/v2/virtualbox/configuration.html)
+for details on configuring Vagrant box memory settings.
+
+Start your JujuBox with:
 
     vagrant up
 

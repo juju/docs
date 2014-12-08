@@ -7,6 +7,249 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.20.13
+
+  A new stable release of Juju, juju-core 1.20.13, is now available.
+  This release  replaces stable 1.20.12.
+
+
+  Getting Juju
+
+  juju-core 1.20.13 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  Resolved issues
+
+  * 1.20.12 breaks neutron-gateway, since all interfaces are brought up
+    Lp 1395081
+
+
+^# juju-core 1.20.12
+
+  A new stable release of Juju, juju-core 1.20.12, is now available.
+  This release replaces stable 1.20.11.
+
+
+  Getting Juju
+
+  juju-core 1.20.12 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  Resolved issues
+
+  * Juju run doesn't after upgrade to 1.20.11
+    Lp 1392745
+
+  * Non subordinate container scoped relations broken
+    Lp 1382751
+
+  * Juju add-machine lxc:0 fails to start due to incorrect network name
+    in trusty config
+    Lp 1340261
+
+  * Cloud-init network error when using maas/juju
+    Lp 1345433
+
+  * Juju deploy --to lxc:0 works ok but juju deploy --to lxc:1 fails
+    Lp 1368976
+
+  * Juju deploy to kvm:0 fails for br0
+    Lp 1386575
+
+
+^# juju-core 1.20.11
+
+  A new stable release of Juju, juju-core 1.20.11, is now available.
+  This release replaced stable 1.20.10.
+
+
+  Getting Juju
+
+  juju-core 1.20.11 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  Resolved issues
+
+  * Local environment machine deployments fail after "juju destroy-
+    machine" has been used
+    Lp 1379802
+
+  * Juju does not consider whether it has permission to an availability
+    zone
+    Lp 1380557
+
+
+^# juju-core 1.20.10
+
+  A new stable release of Juju, juju-core 1.20.10, is now available.
+  This release replaces stable 1.20.9.
+
+
+  Getting Juju
+
+  juju-core 1.20.10 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  Notable Changes
+
+  This releases addresses packaging and documentation issues.
+
+
+  Resolved issues
+
+  * make-release-tarball could check the packages with dependencies.tsv
+    Lp 1368417
+
+
+^# juju-core 1.20.9
+
+  A new stable release of Juju, juju-core 1.20.9, is now available.
+  This release replaces stable 1.20.8.
+
+
+  Getting Juju
+
+  juju-core 1.20.9 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  Resolved issues
+
+  * Not okforstorage error when deploying local charm
+    Lp 1308146
+
+  * Cloud-archive on precise not pinned when juju calls apt-get upgrade
+    Lp 1370781
+
+
+^# juju-core 1.20.8
+
+  A new stable release of Juju, juju-core 1.20.8, is now available.
+  This release may replace stable 1.20.7.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.8 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+  ### Resolved issues
+
+  * Maas provider assumes machine uses dhcp for eth0
+    Lp 1361374
+
+  * Relation-get with invalid relation name panics agent
+    Lp 1365412
+
+  * Bootstrap on maas fails trying to access cloud-images.ubuntu.com
+    Lp 1365135
+
+  * Not okforstorage error when deploying local charm
+    Lp 1308146
+
+  * Add-machine containers should default to latest lts
+    Lp 1363971
+
+  * Juju add-machine still assumes precise (maas)
+    Lp 1315473
+
+  * Juju-core client panics with juju set empty string
+    Lp 1348829
+
+  * --keep-broken option still allows instance to be stopped
+    Lp 1365772
+
+  * Some third party embedded sources in the source tarball are missing
+    dependencies.tsv entries
+    Lp 1368321
+
+  * Licensing is inconsistent
+    Lp 1368358
+
+  * Sshstorage fails in non-english locale
+    Lp 1367695
+
+
+^# juju-core 1.20.7
+
+  A new stable release of Juju, juju-core 1.20.7, is now available.
+  This release replaces 1.20.6.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.7 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+
+  ## Noteworthy
+
+  This release contains various bug fixes.
+
+
+  ### Resolved issues
+
+  * --keep-broken bootstrap option to keep failed environments
+    Lp 1362923
+
+  * LXC was not created, no errors, no logs -> pending state.
+    Lp 1354027
+
+  * Juju status still returns private IP in 'public-ip' field
+    Lp 1364419
+
+
 ^# juju-core 1.20.6
 
   A new stable release of Juju, juju-core 1.20.6, is now available.

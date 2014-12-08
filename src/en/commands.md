@@ -9,6 +9,7 @@ here, with some examples.
   - **add-unit:** add one or more units of an already-deployed service
   - **api-endpoints:** print the API server addresses
   - **authorised-keys:** manage authorised ssh keys
+  - **backups:** manage state-server backups for an environment
   - **bootstrap:** start up an environment from scratch
   - **debug-hooks:** launch a tmux session to debug a hook
   - **debug-log:** display the consolidated log file

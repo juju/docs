@@ -1,29 +1,25 @@
 # Your First charm starts here!
 
-Okay, so you have read up all the background info on what a charm is,
-how it works, and what parts of the charm do what, now it is time to
-dust off your favourite code editor (no arguments please) and get
-charming!
+Okay, so you have read up all the background info on what a charm is, how it
+works, and what parts of the charm do what, now it is time to dust off your
+favourite code editor (no arguments please) and get charming!
 
-Although it is possible to create a charm without using anything other
-than a text editor, we are also going to make use of the very
-excellent timesaving plugin for Juju, Charm
-Tools. [ Find out how to get and install charm tools here ](tools-charm-tools.html). Then
-hurry back.
+Although it is possible to create a charm without using anything other than a
+text editor, we are also going to make use of the very excellent timesaving
+plugin for Juju, Charm Tools. [ Find out how to get and install charm tools here
+](tools-charm-tools.html). Then hurry back.
 
-For this example, we are imagining that we want to create a charm for
-[the Vanilla forum software](http://vanillaforums.org/)
-
+For this example, we are imagining that we want to create a charm for [the
+Vanilla forum software](http://vanillaforums.org/)
 
 ## Prepare yourself
 
-As we are writing a charm, it makes sense to create it in a local
-charm repository (see how to deploy from a local repository
-[here](./charms-deploying.html)) to make it easy to test in your Juju
-environment.
+As we are writing a charm, it makes sense to create it in a local charm
+repository (see how to deploy from a local repository
+[here](./charms-deploying.html)) to make it easy to test in your Juju environment.
 
-Go to your home directory (or wherever is appropriate and make the
-appropriate file structure:
+Go to your home directory (or wherever is appropriate and make the appropriate
+file structure:
 
     cd ~
     mkdir -p charms/precise
@@ -31,16 +27,13 @@ appropriate file structure:
 
 ## Create a barebones charm with Charm Tools
 
-Using the charm tools plugin, we can create the directory structure we
-need for our charm quickly and easily.  Charm tools supports a variety
-of charm styles. In this example, we will generate a barebones bash
-template.
+Using the charm tools plugin, we can create the directory structure we need for
+our charm quickly and easily:
 
-    juju charm create -t bash vanilla
+    juju charm create vanilla
 
-This not only creates the directory structure, it also prepopulates it
-with template files for you to edit. Your directory will now look like
-this
+This not only creates the directory structure, it also prepopulates it with
+template files for you to edit. Your directory will now look like this
 
 ![directory tree](./media/author-charm-writing-01.png)
 
@@ -48,16 +41,15 @@ this
 
 Fire up your text editor and load/edit the readme file.
 
-This step is especially important if you intend making your charm
-public, but it is very useful even if your charm will only ever be
-seen by you. The README is a good place to make notes about how the
-charm works, what information it expects to communicate and how.
+This step is especially important if you intend making your charm public, but it
+is very useful even if your charm will only ever be seen by you. The README is a
+good place to make notes about how the charm works, what information it expects
+to communicate and how.
 
-Although a plain text file is fine, you can also write your README
-file using Markdown (in which case use the .md suffix). The advantage
-of this, other than it looks quite neat, is that the Charm Store will
-render Mardown properly online, so your README will look and read
-better.
+Although a plain text file is fine, you can also write your README file using
+Markdown (in which case use the .md suffix). The advantage of this, other than
+it looks quite neat, is that the Charm Store will render Mardown properly
+online, so your README will look and read better.
 
 Here is a quick example README file for our Vanilla charm:
 
@@ -76,15 +68,13 @@ Obviously, you can include any useful info you wish.
 
 ## Make some metadata.yaml
 
-The `metadata.yaml` file is really important. This is the file that
-Juju reads to find out what a charm is, what it does and what it needs
-to do it.
+The `metadata.yaml` file is really important. This is the file that Juju reads
+to find out what a charm is, what it does and what it needs to do it.
 
-The YAML syntax is at once simple, but exact, so if you have any
-future problems with Juju not recognising your charm, this is the
-first port of call! The information is stored in simple &LT;key&GT; :
-&LT;value&GT; associations. The first four are pretty self
-explanatory:
+The YAML syntax is at once simple, but exact, so if you have any future problems
+with Juju not recognising your charm, this is the first port of call! The
+information is stored in simple &LT;key&GT; : &LT;value&GT; associations. The
+first four are pretty self explanatory:
 
     name: vanilla
     summary: Vanilla is an open-source, pluggable, multi-lingual forum.
@@ -93,48 +83,66 @@ explanatory:
       Vanilla is designed to deploy and grow small communities to scale.
       This charm deploys Vanilla Forums as outlined by the Vanilla Forums
       installation guide.
+    tags: social
 
-The summary should be a brief description of the service being
-deployed, whereas the description can go into more detail.
+The summary should be a brief description of the service being deployed, whereas
+the description can go into more detail.
 
-The next value to define is the category. This is primarily for
-organising the charm in the charm store. The available categories are:
+The next value to define is the tag. This is primarily for organising the
+charm in the charm store. The available tags are:
 
-  - `databases` - MySQL, PostgreSQL, CouchDB, etc.
-  - `file-servers` - storage apps such as Ceph
-  - `applications` - applications like MediaWiki, WordPress
-  - `cache-proxy` - services such as HAProxy and Varnish.
-  - `app-servers` - infrastructure services like Apache and Tomcat
-  - `miscellaneous` - anything which doesn't neatly fit anywhere above.
+- analytics
+- big_data
+- ecommerce
+- openstack
+- cloudfoundry
+- cms
+- social
+- streaming
+- wiki
+- ops
+- backup
+- identity
+- monitoring
+- performance
+- audits
+- security
+- network
+- storage
+- database
+- cache-proxy
+- application_development - use this for platform charms like Rails, Django, etc.
+- web_server
 
-Your charm can belong to more than one category, though in almost all
-cases it should be in just one. Because there could be more than one
-entry here, the YAML is formatted as a list:
+Your charm can belong to more than one tag, though in almost all cases it
+should be in just one. Because there could be more than one entry here, the YAML
+is formatted as a list:
 
-    categories:
-      - applications
+    tags:
+      - social
+      - wiki
+      - ecommerce
 
-Next we need to explain which services are actually provided by this
-service.  This is done using an indent for each service provided,
-followed by a description of the interface. The interface name is
-important as it can be used elsewhere in the environment to relate
-back to this charm, e.g. when writing hooks.
+Next we need to explain which services are actually provided by this service.
+This is done using an indent for each service provided, followed by a
+description of the interface. The interface name is important as it can be used
+elsewhere in the environment to relate back to this charm, e.g. when writing
+hooks.
 
-Our Vanilla charm is a web-based service which exposes a simple HTTP
-interface:
+Our Vanilla charm is a web-based service which exposes a simple HTTP interface:
 
     provides:
       website:
         interface: http
 
-The name given here is important as it will be used in hooks that we
-write later, and the interface name will be used by other charms which
-may want to relate to this one.
+The name given here is important as it will be used in hooks that we write
+later, and the interface name will be used by other charms which may want to
+relate to this one.
 
-Similarly we also need to provide a "requires" section. In this case
-we need a database. Checking out the metadata of the MySQL charm we
-can see that it provides this via the interface name "mysql", so we
-can use this name in our metadata.
+Similarly we also need to provide a "requires" section. In this case we need a
+database. Checking out the metadata of the MySQL charm we can see that it
+provides this via the interface name "mysql", so we can use this name in our
+metadata.
 
 The final file should look like this:
 
@@ -144,8 +152,8 @@ The final file should look like this:
     description: |
       Vanilla is designed to deploy and grow small communities to scale.
       This charm deploys Vanilla Forums as outlined by the Vanilla Forums installation guide.
-    categories:
-      - applications
+    tags:
+      - social
     provides:
       website:
         interface: http
@@ -153,83 +161,63 @@ The final file should look like this:
       database:
         interface: mysql
 
-For some charms you will want a "peers" section also. This follows the
-same format, and its used for optional connections, such as you might
-use for interconnecting services in a cluster
+For some charms you will want a "peers" section also. This follows the same
+format, and its used for optional connections, such as you might use for
+interconnecting services in a cluster
 
 ## Writing hooks
 
-As you will know from your thorough reading of the
-[charm components](./authors-charm-components.html), juju executes
-hook scripts to make things happen. You can write hooks in whatever
-language you can reasonably expect to execute on an Ubuntu server.
+As you will know from your thorough reading of the [charm components](./authors-
+charm-components.html), the hooks are the important scripts that actually do
+things. You can write hooks in whatever language you can reasonably expect to
+execute on an Ubuntu server.
 
-Charms and their hooks can model very complex behavior and offer
-authors alot of power, freedom, and responsibility. If you like to
-write python the
-[charm helpers](http://pythonhosted.org/charmhelpers) python library
-provides a grab bag of python helpers and
-[simple basic frameworks](http://pythonhosted.org/charmhelpers/examples/services.html)
-for managing charm tasks large and small.  Charm helpers also provides
-support for charm authors who already know
-[ansible](http://docs.ansible.com) or
-[salt](http://docs.saltstack.com/en/latest) and want to author charm
-hooks as
-[salt states](http://pythonhosted.org//charmhelpers/api/charmhelpers.contrib.saltstack.html)
-or
-[ansible playbooks](http://pythonhosted.org//charmhelpers/api/charmhelpers.contrib.ansible.html).
-
-Whatever languages and tools you decide to employ, for our charm, the
-hooks we will need to create are:
+For our charm, the hooks we will need to create are:
 
   - start - for when the service needs to be started.
   - stop - for stopping it again.
   - install - for actually fetching and installing the Vanilla code.
-  - database-relation-changed - this will run when we connect (or
-    re-connect, or disconnect) our service to the MySQL database. This
-    hook will need to manage this connection.
-  - website-relation-joined - this will run when/if a service connects
-    to our charm.
+  - database-relation-changed - this will run when we connect (or re-connect, or disconnect) our service to the MySQL database. This hook will need to manage this connection.
+  - website-relation-joined - this will run when/if a service connects to our charm.
 
-So first up we should create the hooks directory, and start creating
-our first hook:
+So first up we should create the hooks directory, and start creating our first
+hook:
 
     mkdir hooks
     cd hooks
-    $EDITOR start
+    vi start
 
-We have started with the start hook, because it is pretty simple. Our
-charm will be served up by Apache, so all we need to do to start the
-service is make sure Apache is running:
+(Use your favourite editor, naturally - no flames please)
+
+We have started with the start hook, because it is pretty simple. Our charm will
+be served up by Apache, so all we need to do to start the service is make sure
+Apache is running:
 
     #!/bin/bash
     set -e
     service apache2 restart
 
-A bit of explanation for this one. As we are writing in bash, and we
-need the files to be executable, we start with a hash-bang line
-indicating this is a bash file. the set -e line means that if any
-subsequent command returns false (non- zero) the script will stop and
-raise an error - this is important so that Juju can work out if things
-are running properly.
+A bit of explanation for this one. As we are writing in bash, and we need the
+files to be executable, we start with a hash-bang line indicating this is a bash
+file. the set -e line means that if any subsequent command returns false (non-
+zero) the script will stop and raise an error - this is important so that Juju
+can work out if things are running properly.
 
-The final line starts the Apache web server, thus also starting our
-Vanilla service. Why do we call 'restart'? One of the important ideas
-behind hooks is that they should be 'idempotent'. That means that the
-operation should be capable of being run many times without changing
-the intended result (basically). In this case, we don't want an error
-if Apache is actually already running, we just want it to run and
-reload any config changes.
+The final line starts the Apache web server, thus also starting our Vanilla
+service. Why do we call 'restart'? One of the important ideas behind hooks is
+that they should be 'idempotent'. That means that the operation should be
+capable of being run many times without changing the intended result
+(basically). In this case, we don't want an error if Apache is actually already
+running, we just want it to run and reload any config changes.
 
-Once you have saved the file, it is important to make sure that you
-set it to be executable too!
+Once you have saved the file, it is important to make sure that you set it to be
+executable too!
 
     chmod +x start
 
-With the easy bit out of the way, how about the install hook? This
-needs to install any dependencies, fetch the actual software and do
-any other config and service jobs that need to happen. Here is an
-example for our vanilla charm:
+With the easy bit out of the way, how about the install hook? This needs to
+install any dependencies, fetch the actual software and do any other config and
+service jobs that need to happen. Here is an example for our vanilla charm:
 
 ```bash
 #!/bin/bash
@@ -252,10 +240,6 @@ if [ -f /tmp/config.php ]; then
   mv /tmp/config.php /var/www/vanilla/conf/
 fi
 chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
-# Patch: DB points to 'localhost' on setup page instead of MySQL IP
-juju-log "Patching class.setupcontroller.php to allow DB Host from config.php"
-sed -i 's#\($ConfigurationModel.*localhost\)#// \1#' \
-  /var/www/vanilla/applications/dashboard/controllers/class.setupcontroller.php
 juju-log "Creating apache2 configuration"
 cat <<EOF > /etc/apache2/sites-available/vanilla
 <VirtualHost *:80>
@@ -278,30 +262,28 @@ service apache2 reload
 juju-log "Files extracted, waiting for other events before we do anything else!"
 ```
 
-We aren't going to go for a line-by-line explanation of that, but
-there are a few things worth noting
+We aren't going to go for a line-by-line explanation of that, but there are a
+few things worth noting
 
-Firstly, note the use of the -y option of the apt-get command. this
-assumes a 'yes' answer to any questions and removes any manual install
-options (e.g.  services that run config dialogs when they install).
+Firstly, note the use of the -y option of the apt-get command. this assumes a
+'yes' answer to any questions and removes any manual install options (e.g.
+services that run config dialogs when they install).
 
-In our script, we are fetching the tarball of the Vanilla software. In
-these cases, it is obviously always better to point to a specific,
-permanent link to a version of the software.
+In our script, we are fetching the tarball of the Vanilla software. In these
+cases, it is obviously always better to point to a specific, permanent link to a
+version of the software.
 
-Also, you will notice that we have used the juju-log command. This
-basically spits messages out into the Juju log, which is very useful
-for testing and debugging. We will cover that in more detail later in
-this walkthrough.
+Also, you will notice that we have used the juju-log command. This basically
+spits messages out into the Juju log, which is very useful for testing and
+debugging. We will cover that in more detail later in this walkthrough.
 
 The next step is to create the relationship hooks...
 
-We know from our metadata that we have a connection called 'database',
-so we can have hooks that relate to that. Note that we don't have to
-create hooks for all possible events if they are not required - if
-Juju doesn't find a hook file for a paticular action, it just assumes
-everything is okay and carries on. It is up to you to decide which
-events require a hook.
+We know from our metadata that we have a connection called 'database', so we can
+have hooks that relate to that. Note that we don't have to create hooks for all
+possible events if they are not required - if Juju doesn't find a hook file for
+a paticular action, it just assumes everything is okay and carries on. It is up
+to you to decide which events require a hook.
 
 Let's take a stab at the 'database-relation-changed' hook:
 
@@ -324,76 +306,61 @@ cat <<EOF > $vanilla_config
 \$Configuration['Database']['User'] = '$db_user';
 \$Configuration['Database']['Password'] = '$db_pass';
 EOF
-chgrp www-data $vanilla_config
-juju-log "Changed group of $vanilla_config to www-data"
-chmod g+w $vanilla_config
-juju-log "Made $vanilla_config group writable"
 juju-log "Make the application port available, now that we know we have a site to expose"
 open-port 80
 ```
 
-You will notice that this script uses the backticked command
-relation-get. This is a Juju helper command that fetches the named
-values from the corresponding hook on the service we are connecting
-to. Usually there will be some indication of what these values are,
-but you can always inspect the corresponding hooks to find out. In
-this case we know that when connected, the MySQL charm will create a
-database and generate random values for things like a username and
-password.
+You will notice that this script uses the backticked command relation-get. This
+is a Juju helper command that fetches the named values from the corresponding
+hook on the service we are connecting to. Usually there will be some indication
+of what these values are, but you can always inspect the corresponding hooks to
+find out. In this case we know that when connected, the MySQL charm will create
+a database and generate random values for things like a username and password.
 
-Interfaces in general are determined by the consensus of the charms
-which use them. There is a lot
-[more information on decoding interfaces here](./authors-
-charm-interfaces.html). Some of the major interfaces are being
-documented to make it easier to use them, and fortunately, mysql is
-one of them -
-[You can find a description of the mysql interface here](./interface-mysql.html).
+Interfaces in general are determined by the consensus of the charms which use
+them. There is a lot [more information on decoding interfaces here](./authors-
+charm-interfaces.html). Some of the major interfaces are being documented to
+make it easier to use them, and fortunately, mysql is one of them - [You can
+find a description of the mysql interface here](./interface-mysql.html).
 
-These values will all be set at one time, so the next little bit of
-script just checks one value to see if it exists - if not the
-corresponding charm hasn't set the values yet.
+These values will all be set at one time, so the next little bit of script just
+checks one value to see if it exists - if not the corresponding charm hasn't set
+the values yet.
 
-When it has the values we can use these to modify the config file for
-Vanilla in the relevant place, and finally open the port to make the
-service active.
+When it has the values we can use these to modify the config file for Vanilla in
+the relevant place, and finally open the port to make the service active.
 
-The final hook we need to write is for other services which may want
-to consume Vanilla, `website-relation-joined`.
+The final hook we need to write is for other services which may want to consume
+Vanilla, `website-relation-joined`.
 
     #!/bin/sh
     relation-set hostname=`unit-get private-address` port=80
 
-Here we can see the other end of the information sharing - in this
-case relation-set exposes the given values to the connecting charm. In
-this case one of the commands is backticked, as unit-get is another
-helper command, in this case one which returns the requested value
-form the machine the charm is running on, specifically here it's IP
-address.
+Here we can see the other end of the information sharing - in this case
+relation-set exposes the given values to the connecting charm. In this case one
+of the commands is backticked, as unit-get is another helper command, in this
+case one which returns the requested value form the machine the charm is running
+on, specifically here it's IP address.
 
-So, any connecting charm will be able to ask for the values `hostname`
-and `port`. Remember, once you have finished writing your hooks make
-sure you `chmod +x` them.
+So, any connecting charm will be able to ask for the values `hostname` and
+`port`. Remember, once you have finished writing your hooks make sure you `chmod
++x` them.
 
-For our simplistic charm, that is all the hooks we need for the
-moment, so now we can test it out!
+For our simplistic charm, that is all the hooks we need for the moment, so now
+we can test it out!
 
 ## Run the charm proof tool
 
-Another part of the Charm Tools plugin is a useful lint-like tool
-which will check for errors in the files of your charm. Run it like
-this:
+Another part of the Charm Tools plugin is a useful lint-like tool which will
+check for errors in the files of your charm. Run it like this:
 
     juju charm proof [CHARM_DIRECTORY]
 
 The output classifies messages as:
 
- - I - for information
-
- - W - A warning; something which should be looked at but won't
-       necessarily stop the charm working.
-
- - E - An error; these are blocker which must be fixed for the charm
-       to be used.
+- I - for information
+- W - A warning; something which should be looked at but won't necessarily stop the charm working.
+- E - An error; these are blocker which must be fixed for the charm to be used.
 
 some example output might be:
 
@@ -401,54 +368,48 @@ some example output might be:
     E: README.ex Includes boilerplate README.ex line 1
     I: relation peer-relation has no hooks
 
-Which tells you that you forgot to add a `copyright` file, you have
-left some default text in the README, and one of your relations has no
-hooks. All useful stuff.
+Which tells you that you forgot to add a `copyright` file, you have left some
+default text in the README, and one of your relations has no hooks. All useful
+stuff.
 
 ## Testing
 
-Before we congratulate ourselves too much, we should check that the
-charm actually works. To help with this, we should open a new terminal
-window and run the following command:
+Before we congratulate ourselves too much, we should check that the charm
+actually works. To help with this, we should open a new terminal window and run
+the following command:
 
     juju debug-log
 
-This starts a process to tail the Juju log file and show us just
-exactly what is happening. It won't do much to begin with, but you
-should see messages appearing when we start to deploy our charm.
+This starts a process to tail the Juju log file and show us just exactly what is
+happening. It won't do much to begin with, but you should see messages appearing
+when we start to deploy our charm.
 
-Following our own recipe, in another terminal we should now do the
-following (assuming you already have a bootstrapped environment):
+Following our own recipe, in another terminal we should now do the following
+(assuming you already have a bootstrapped environment):
 
     juju deploy mysql
     juju deploy --repository=/home/$USER/charms/ local:precise/vanilla
     juju add-relation mysql vanilla
     juju expose vanilla
 
-We used the local deploy options to deploy our charm - substitute the
-path for your own environment. Everything should now be working away,
-and your log window will look something like this:
+We used the local deploy options to deploy our charm - substitute the path for
+your own environment. Everything should now be working away, and your log window will look something like this:
 
 ![Step five - debug](./media/author-charm-writing-debug.png)
 
-If you wait for all the Juju operations to finish and run a juju
-status command, you will be able to retrieve the public address for
-the Vanilla forum we just deployed. Copy it into your browser and you
-should see the setup page (prepopulated with the database config)
-waiting for any changes.  Congratulations!
+If you wait for all the Juju operations to finish and run a juju status command,
+you will be able to retrieve the public address for the Vanilla forum we just
+deployed. Copy it into your browser and you should see the setup page
+(prepopulated with the database config) waiting for any changes.
+Congratulations!
 
 ![Step five - vanilla](./media/author-charm-writing-vanilla.png)
 
 ## Tidying up
 
-With the charm working properly, you may consider everything a job
-well done. If your charm is really great and you want to share it,
-particularly on the charm store, then there are a couple of things you
-ought to add.
+With the charm working properly, you may consider everything a job well done. If
+your charm is really great and you want to share it, particularly on the charm
+store, then there are a couple of things you ought to add.
 
-1. Create a file called 'copyright' and place whatever license
-   information you require in there.
-
-1. Add a beautiful icon
-   ([there is a guide to making one here](./authors-charm-icon.html))
-   so others can recognise it in the charm store!
+1. Create a file called 'copyright' and place whatever license information you require in there.
+1. Add a beautiful icon ([there is a guide to making one here](./authors-charm-icon.html)) so others can recognise it in the charm store!

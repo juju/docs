@@ -36,7 +36,7 @@ something like this:
             # http://msdn.microsoft.com/en-us/library/windowsazure
             # for details.
             #
-            management-subscription-id: <00000000-0000-0000-0000-000000000000>
+            management-subscription-id: 00000000-0000-0000-0000-000000000000
             management-certificate-path: /home/me/azure.pem
             # storage-account-name holds Windows Azure Storage info.
             #
@@ -53,7 +53,8 @@ something like this:
 
 This is the configuration environments.yaml file needed to run on Windows Azure.
 You will need to set the `management-subscription-id`,
-`management-certificate-path`, and `storage-account-name`.
+`management-certificate-path`, and `storage-account-name`, replacing the dummy 
+values with the relevant details for your account.
 
 **Note:** Other than `location` the other key vaule defaults are recommended,
 but can be updated to your preference.

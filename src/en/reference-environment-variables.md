@@ -6,9 +6,9 @@ grep -r JUJU_ * | perl -ne 'if (/(JUJU_[A-Z_]+)/) { print "$1\n"; }'|sort | uniq
 
 # Environment Variables
 
-## Juju API Server
+## Juju Client
 
-These variables are available on the Juju API server in order to change its default behavior.
+These variables are available on the juju client in order to change its default behavior.
 
 - JUJU_ENV
 
@@ -32,14 +32,14 @@ These variables are available on the Juju API server in order to change its defa
 
     This allows you to set the repository that Juju looks for charms in. This can also be done by passing <code>--repository=/path/to/charms</code> when executing <code>juju deploy</code>.
 
-    For example, if you are running juju in a Vagrant  virtual machine, you could set <code>JUJU-RELATION</code> to your shared folder:
+    For example, if you are running juju in a Vagrant  virtual machine, you could set <code>JUJU_REPOSITORY</code> to your shared folder:
 
-        export JUJU_RELATION=/vagrant
+        export JUJU_REPOSITORY=/vagrant
         juju deploy local:series/charm
 
 - JUJU_LOGGING_CONFIG
 
-    In stable Juju releases, agents are started with logging set to WARNING, and units are set to INFO. Development releases are set to DEBUG globally. You can change the logging options to be more or less verbose. For example:
+    This setting takes effect on an environment only at bootstrap time. In stable Juju releases, agents are started with logging set to WARNING, and units are set to INFO. Development releases are set to DEBUG globally. Post bootstrap, on a running environment you can change the logging options to be more or less verbose. For example:
 
         juju set-environment logging-config "juju=DEBUG; unit=WARNING"
 

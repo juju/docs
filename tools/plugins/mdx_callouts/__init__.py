@@ -12,13 +12,20 @@ class CalloutProcessor(BlockProcessor):
     """ Process Callouts. """
 
     def test(self, parent, block):
-        return bool(block.startswith('**Note:** '))
+        if block.startswith('**Note:** ') or block.startswith('!!! '):
+            return True
+        return False
 
     def run(self, parent, blocks):
+        def bold(m):
+            if m.group(0).startswith('**'):
+                return m.group(0)
+            return "**%s**" % m.group(0)
+
         raw_block = blocks.pop(0)
         p = etree.SubElement(parent, 'p')
         p.set('class', 'note')
-        p.text = raw_block.replace('!!', '', 1)
+        p.text = re.sub(r'(?:^\s*\w+)', bold, raw_block.replace('!!!', '', 1))
 
 
 class DefListExtension(Extension):
