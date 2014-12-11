@@ -7,6 +7,42 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.20.14
+
+  A new stable release of Juju, juju-core 1.20.14, is now available.
+  This release replacea 1.20.13.
+
+
+  Getting Juju
+
+  juju-core 1.20.14 is available for utopic and backported to earlier
+  series in the following PPA:
+
+      ```
+      https://launchpad.net/~juju/+archive/stable
+      ```
+
+  Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  Resolved issues
+
+  * Container scoped relations between 2 subordinates broken in 1.20.12
+    Lp 1396625
+
+  * Azure instance-types and regions missing
+    Lp 1389422
+
+  * Ec2 says agent-state-info: 'cannot run instances: no default
+    subnet for availability zone: ''us-east-1e''. (invalidinput)'
+    Lp 1388860
+
+  * Lxc containers in pending state due to juju-br0 misconfiguration
+    Lp 1395908
+
+
 ^# juju-core 1.20.13
 
   A new stable release of Juju, juju-core 1.20.13, is now available.
