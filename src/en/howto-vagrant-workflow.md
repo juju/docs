@@ -217,4 +217,4 @@ Installing juju, for deploying to non-local environments
 
 ## Reporting issues with the Vagrant Image
 
-If you encounter any bugs with the vagrant images, please [file a bug](https://bugs.launchpad.net/juju-vagrant-images)
+If you encounter any bugs with the vagrant images, please [file a bug](https://bugs.launchpad.net/juju-vagrant-images) report.

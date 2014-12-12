@@ -174,3 +174,7 @@ to that group, run:
 
 
 Use the password "vagrant"
+
+## Reporting issues with the Vagrant Image
+
+If you encounter any bugs with the vagrant images, please [file a bug](https://bugs.launchpad.net/juju-vagrant-images) report.
