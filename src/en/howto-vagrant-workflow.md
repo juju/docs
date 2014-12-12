@@ -151,7 +151,7 @@ We are now free to watch progress through the GUI
 
 When the Genghis badge turns green, we are ready to vpn our traffic through the vagrant image and interface with the Genghis server
 
-### Routing traffic to Vagrant
+### Routing local traffic to Vagrant
 
 **Note:** If your local network is using 10.0.3.x you will need to alter the Juju networking in the vagrant box, and substitute the network provided in the command above
 
