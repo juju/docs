@@ -123,7 +123,43 @@ To destroy it, run `vagrant destroy`
 
 To ssh in, run `vagrant ssh`
 
-## SSHuttle (optional)
+## Extras
+
+For your convenience
+
+## Routing local traffic to Vagrant
+
+**Note:** If your local network is using 10.0.3.x you will need to alter the Juju networking in the vagrant box, and substitute the network provided in the command above
+
+
+### Native routing (optional, OS X 10.10 and above)
+
+It is possible to natively route traffic from your local machine to the lxc containers running within the Vagrant virtual machine.
+
+sudo route add -net 10.0.3.0/24 172.16.250.15
+
+This will only work until your next reboot. Instead, there is a way to create the route when you `up` your vagrant image and tear it down when you `halt`:
+
+Install the [vagrant-triggers](https://github.com/emyl/vagrant-triggers) plugin:
+
+    vagrant plugin install vagrant-triggers
+
+Add the config.trigger rules in your Vagrantfile:
+
+    config.trigger.after [:provision, :up, :reload] do
+        system('sudo route add -net 10.0.3.0/24 172.16.250.15 >/dev/null')
+    end
+
+    config.trigger.after [:halt, :destroy] do
+        system('sudo route delete -net 10.0.3.0/24 172.16.250.15 >/dev/null')
+    end
+
+Now, when you `up` and `halt` your Vagrant box, the route will be handled for you.
+
+### Using sshuttle (OS X 10.9 and below)
+
+
+## SSHuttle (optional, OS X 10.9 and below)
 
 If you want to use this environment for developing Juju Charms, you can do so
 with the aid of SSHuttle. SSHuttle is a slick tool for using SSH as a VPN. When
