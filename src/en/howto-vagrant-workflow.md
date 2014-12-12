@@ -4,8 +4,7 @@ Running juju on Ubuntu is an extremely straightforward process thanks to the add
 
 ##  Getting Started
 
-To start you will want to ensure you've got the following tools installed on
-your development machine:
+To start you will want to ensure you've got the following tools installed on your development machine:
 
 - [Homebrew](http://brew.sh)
 - [Vagrant](http://vagrantup.com)
@@ -20,24 +19,21 @@ Head over to the [Juju Vagrant](config-vagrant.html) provider documentation for 
 
 ###  Preparing our local charm repository
 
-We will need to create a directory structure that reflects the current standard for juju charm repositories. I recommend putting this in $HOME
-
-    mkdir -p ~/vagrant/charms/precise
-
-Feel free to add any other LTS based target directory, for example if you were
-to target Trusty Tahr as a release for your charm, the command would be:
+We will need to create a directory structure that reflects the current standard for juju charm repositories.
 
     mkdir -p ~/vagrant/charms/trusty
 
-For the remainder of this tutorial, I will assume we are targeting Precise, as
-its the current LTS target of choice.
+Feel free to add any other LTS based target directory, for example if you were to target Precise Pangolin as a release for your charm, the command would be:
+
+    mkdir -p ~/vagrant/charms/precise
+
+For the remainder of this tutorial, I will assume we are targeting Trusty, as it's the current LTS target of choice.
 
 ###  Installing Charm-Tools
 
 Now is a good time to fetch Charm Tools. But what are charm tools you ask?
 
-> Charm Tools offer a means for users and charm authors to create, search,
-fetch, update, and manage charms.
+> Charm Tools offer a means for users and charm authors to create, search, fetch, update, and manage charms.
 
 These can be installed via homebrew.
 
@@ -45,10 +41,9 @@ These can be installed via homebrew.
 
 ##  Creating our first charm
 
-Lets charm up [GenghisApp](http://genghisapp.com/) - a single file MongoDB
-administration app.
+Lets charm up [GenghisApp](http://genghisapp.com/) - a single file MongoDB administration app.
 
-    cd charms/precise
+    cd charms/trusty
     charm create genghisapp -t bash
 
 This will create a skeleton structure of a charm ready for you to edit and
@@ -148,16 +143,46 @@ You'll need to enter the juju environment we just bootstrapped in $HOME/charms
 
     vagrant ssh
     juju deploy mongodb
-    juju deploy --repository=/vagrant local:precise/genghisapp
+    juju deploy --repository=/vagrant local:trusty/genghisapp
 
 We are now free to watch progress through the GUI
 
 ![juju-gui](media/howto-vagrant-workflow-juju-gui-wait.png)
 
-When the Genghis badge turns green, we are ready to vpn our traffic through the
-vagrant image and interface with the Genghis server
+When the Genghis badge turns green, we are ready to vpn our traffic through the vagrant image and interface with the Genghis server
 
-### Routing traffic with sshuttle
+### Routing local traffic to Vagrant
+
+**Note:** If your local network is using 10.0.3.x you will need to alter the Juju networking in the vagrant box, and substitute the network provided in the command above
+
+
+#### Native routing (OS X 10.10 and above)
+
+It is possible to natively route traffic from your local machine to the lxc containers running within the Vagrant virtual machine.
+
+    sudo route add -net 10.0.3.0/24 172.16.250.15
+
+This will only work until your next reboot. Instead, there is a way to create the route when you `up` your vagrant image and tear it down when you `halt`:
+
+Install the [vagrant-triggers](https://github.com/emyl/vagrant-triggers) plugin:
+
+    vagrant plugin install vagrant-triggers
+
+Add the config.trigger rules in your Vagrantfile:
+
+    config.trigger.after [:provision, :up, :reload] do
+        system('sudo route add -net 10.0.3.0/24 172.16.250.15 >/dev/null')
+    end
+
+    config.trigger.after [:halt, :destroy] do
+        system('sudo route delete -net 10.0.3.0/24 172.16.250.15 >/dev/null')
+    end
+
+Now, when you `up` and `halt` your Vagrant box, the route will be handled for you.
+
+#### Using sshuttle (OS X 10.9 and below)
+
+sshuttle creates a transparent proxy server on your local machine that allows you to connect directly to the lxc containers running within the Vagrant virtual machine. This process disassembles the TCP stream locally, multiplexes it statefully over the ssh session, and reassembles the packets on the other end of the tunnel.
 
 Ensure that you have sshuttle installed
 
@@ -166,9 +191,11 @@ Ensure that you have sshuttle installed
 
 **Note:** You can skip the brew install line if you already have sshuttle installed
 
-**Note:** If your local network is using 10.0.3.x you will need to alter the Juju networking in the vagrant box, and substitute the network provided in the command above
+**Note:** sshuttle does not work under OS X 10.10 (Yosemite) due to the deprecation of ipfw in favor of pf.
 
-When prompted for the password enter `vagrant` and you should see output similar to the following:
+When prompted for the password enter `vagrant`.
+
+## Connecting to your application
 
 Now we are free to connect to genghis. Open up the Genghis running unit list and click on the Genghis host, then click on the port 80 link in the service detail.
 
@@ -178,8 +205,7 @@ Now we are free to connect to genghis. Open up the Genghis running unit list and
 
 ##  Iterating
 
-With vagrant fully setup, our charm deployed. We can now iterate over our charm
-and update/test via normal means.
+With vagrant fully setup, our charm deployed. We can now iterate over our charm and update/test via normal means.
 
 - Make edits on your HOST in your favorite editor, such as [TextMate](http://macromates.com/), [Atom](https://atom.io/), or [Brackets](http://brackets.io/).
 - run commands inside the JujuBox vagrant environment. `juju upgrade-charm genghisapp`
@@ -188,3 +214,7 @@ and update/test via normal means.
 ## Next steps
 
 Installing juju, for deploying to non-local environments
+
+## Reporting issues with the Vagrant Image
+
+If you encounter any bugs with the vagrant images, please [file a bug](https://bugs.launchpad.net/juju-vagrant-images) report.
