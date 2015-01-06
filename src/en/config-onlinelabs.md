@@ -20,7 +20,7 @@ This plugin is highly inspired from [kAPIlt](https://github.com/kAPIlt) Juju plu
 
 !!! **Note:** This process requires you to have an Online Labs account.
 The service is in preview for a few weeks and an invitation is required.
-To get one, ask [@online_en](http://twitter.com) on twitter.
+To get one, ask [@online_en](http://twitter.com/online_en) on twitter.
 
 - You have an account and are logged into [cloud.online.net](https://cloud.online.net)
 - You have configured your [SSH Key](https://doc.cloud.online.net/howto/ssh_keys.html)
