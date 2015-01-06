@@ -126,3 +126,21 @@ message like this:
 
 You can learn more by running `juju debug-log --help` and `juju help 
 logging`.
+
+##  Unit KVM / LXC container problems:
+
+Sometimes you may see unexpected behaviors on a unit when deploying to
+a nested KVM or LXC container via `juju deploy --to lxc:#` and its kvm
+equivalent. It can be helpful to capture the output of what commands are being
+run on the unit to create the containers/vm's.
+
+
+    juju set-env 'logging-config=juju.container.kvm=TRACE'
+    juju set-env 'logging-config=juju.container.lxc=TRACE'
+
+Warning, this will increase log verbosity by quite a lot, and should only be
+enabled during debugging, and reset to the default value when completed via:
+
+    juju set-env 'logging-config=<root>=WARN'
+
+
