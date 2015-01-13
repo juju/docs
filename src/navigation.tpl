@@ -27,6 +27,7 @@
               <li class=" sub"><a href="juju-ha.html">Juju High Availability</a></li>
               <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
               <li class=" sub"><a href="charms-working-with-units.html">Working with Units</a></li>
+              <li class=" sub"><a href="charms-actions.html">Using Actions</a></li>
               <li class=""><a href="howto.html">How to...</a></li>
               <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
               <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
@@ -46,6 +47,7 @@
               <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
               <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
               <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-actions.html">actions.yaml</a></li>
               <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
               <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
               <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
