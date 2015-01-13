@@ -121,7 +121,7 @@ will define an Action for `<A>` (and `<B>`, `<C>`, and so on) with JSON-Schema:
     "<PAA>": {YAA as JSON},
     "<PAB>": {YAB as JSON}
   },
-  "required": ["filename"]
+  "required": ["filename"],
   "<C>": X,
   "<D>": Y,
   ...
