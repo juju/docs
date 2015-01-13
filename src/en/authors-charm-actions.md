@@ -43,11 +43,11 @@ resolution of remote objects.
 
  > Charm dir
 ```
-/actions/
-/actions/report
-/actions/snapshot
-/actions.yaml
-/...
+├── actions
+│   ├── report
+│   └── run
+├── actions.yaml
+...
 ```
 
  > actions.yaml example
