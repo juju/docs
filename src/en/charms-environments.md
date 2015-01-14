@@ -16,7 +16,7 @@ executed on is:
 
 1. The environment specified by the use of the `-e` switch.
 1. The environment set by the `JUJU_ENV` environment variable.
-1. The environment last specified with the `switch` command. 
+1. The environment last specified with the `switch` command.
 1. The environment specified as the default in `environments.yaml`.
 
 To determine which environment a command will act on, you can issue the `switch`
@@ -30,7 +30,7 @@ It is also possible to determine the current environment by checking the
 /current-environment`:
 
     echo $JUJU_ENV
-    cat ~/.juju/current-environment 
+    cat ~/.juju/current-environment
 
 ## Specifying an environment
 
@@ -51,7 +51,7 @@ list of commands and remember to prepend the `-e` switch to each one. For this
 reason, you can switch the current environment using the `switch` command:
 
     juju switch hpcloud
-    juju bootstrap  
+    juju bootstrap
 
 ... will bootstrap the environment defined by the 'hpcloud' label
 
@@ -69,7 +69,7 @@ specifications themselves, like this:
     ...
     default: amazon
     environments:
-      ## https://juju.ubuntu.com/docs/config-openstack.html
+      ## https://jujucharms.com/docs/config-openstack.html
       openstack:
     ...
 
@@ -94,7 +94,7 @@ value. For example, you can set the default series that charms are deployed with
 The `unset-environment` command will set a configuration option to the default
 value. It acts as a reset. Options without default value are removed. It is an
 error to unset a required option. For example, you can unset the default series
-that charms are deployed with (so that the juju store can choose the best series 
+that charms are deployed with (so that the juju store can choose the best series
 for a charm) like this:
 
     juju unset-environment default-series
@@ -103,7 +103,7 @@ for a charm) like this:
 
 The `upgrade-juju` command upgrades a running environment. It selects the most
 recent supported version of juju compatible with the command-line version. The
-juju machine and unit agents will be updated to the new version. The `--version` 
+juju machine and unit agents will be updated to the new version. The `--version`
 option can be used to select a specific version to upgrade to.
 
     juju upgrade-juju
@@ -127,9 +127,9 @@ To generate a new boilerplate `environments.yaml` file direct to the console you
 ## Destroying environments
 
 To terminate a running environment, including removing all services and
-allocated machines, please see the section 
+allocated machines, please see the section
 [on removing things with Juju](./charms-destroy.html#destroying-environments)
 
-**Note:** Destroying the environment means that it will destroy all the running 
+**Note:** Destroying the environment means that it will destroy all the running
 assets related to that environment, including the bootstrap node. It does not
 remove the configuration from the `environments.yaml` file.

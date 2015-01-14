@@ -203,7 +203,7 @@ To remove all current deployments and clear up everything in your cloud, you can
 
     juju destroy-environment  <environment-name>
 
-Where the `<environment-name>` is the name you gave the environment when you configured it. This 
+Where the `<environment-name>` is the name you gave the environment when you configured it. This
 extra details is to help prevent accidents! You will also see a warning and will be prompted
 whether or not to continue - this action will remove everything, including the bootstrap node.
 

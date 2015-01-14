@@ -24,7 +24,7 @@ You can then copy and paste the needed section.
 The generic configuration sections generated for Windows Azure will look
 something like this:
 
-    # https://juju.ubuntu.com/docs/config-azure.html
+    # https://jujucharms.com/docs/config-azure.html
         azure:
             type: azure
             # location specifies the place where instances will be started,
@@ -53,7 +53,7 @@ something like this:
 
 This is the configuration environments.yaml file needed to run on Windows Azure.
 You will need to set the `management-subscription-id`,
-`management-certificate-path`, and `storage-account-name`, replacing the dummy 
+`management-certificate-path`, and `storage-account-name`, replacing the dummy
 values with the relevant details for your account.
 
 **Note:** Other than `location` the other key vaule defaults are recommended,

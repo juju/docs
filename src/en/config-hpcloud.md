@@ -6,7 +6,7 @@ unnecessary items, and some omissions. For the moment it is easier to replicate
 the config file shown below and populate it with the necessary values given in
 <angle brackets>.
 
-    ## https://juju.ubuntu.com/docs/config-hpcloud.html
+    ## https://jujucharms.com/docs/config-hpcloud.html
       hpcloud:
         use-floating-ip: true
         type: openstack
