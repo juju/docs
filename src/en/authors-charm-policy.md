@@ -24,6 +24,7 @@ and bundles must:
   - Should not use anything infrastructure-provider specific (i.e. querying EC2 metadata service) symlinks must be self contained within a charm.
   - Should make use of [AppArmor](https://help.ubuntu.com/12.04/serverguide/apparmor.html) to increase security.
   - Bundles must only use charms which are already in the store, they cannot reference charms in personal namespaces.
+  - Must include tests for trusty series and any series afterwards. Testing is defined as unit tests, functional tests, or integration tests.
 
 The charm store referred to in this document is the collection of Juju charms
 and bundles hosted at
