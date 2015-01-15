@@ -15,7 +15,7 @@ deploy to a cloud, this is a powerful method for developing your application in
 an environment that more closely resembles production.
 
 Before moving on you should have gone through the [Getting
-Started](https://jujucharms.com/docs/getting-started.html) section and
+Started](getting-started.html) section and
 installed and configured Juju.
 
 ##  Basic Usage of the Ruby on Rails Charm

@@ -16,7 +16,7 @@ these charms to pull code from an internal server when appropriate.
 
 ### Installation
 
-In addition to [Juju](https://jujucharms.com/docs/#installation) we need
+In addition to [Juju](getting-started#installation) we need
 to install charm-tools:
 
 ```
@@ -49,15 +49,16 @@ The command
 juju charm get mysql
 ```
 
-will download the MySQL charm to a `mysql` directory within your current path. By
-running
+will download the MySQL charm to a `mysql` directory within your current path.
+By running
 
 ```
 juju charm get wordpress ~/charms/precise/
 ```
 
-you will download the WordPress charm to `~/charms/precise/wordpress`. It is also
-possible to fetch all official charm store charms. The command for this task is
+you will download the WordPress charm to `~/charms/precise/wordpress`. It is
+also possible to fetch all official charm store charms. The command for this
+task is:
 
 ```
 juju charm getall [-h|--help] [CHARMS_DIRECTORY]

@@ -68,11 +68,11 @@ laptop and then push out to the public cloud.
 
 We need to configure 2 environments, a local one and a public cloud one.
 
-1. Configure the [local provider](https://jujucharms.com/docs/config-local.html) on your machine.
+1. Configure the [local provider](config-local.html) on your machine.
 1. Configure a public or private cloud on your machine.
-  - [AWS](https://jujucharms.com/docs/config-aws.html)
-  - [HP Cloud](https://jujucharms.com/docs/config-hpcloud.html)
-  - [OpenStack](https://jujucharms.com/docs/config-openstack.html)
+  - [AWS](config-aws.html)
+  - [HP Cloud](config-hpcloud.html)
+  - [OpenStack](config-openstack.html)
 
 In this example the local environment is named `local` and we'll deploy to an
 AWS environment called `amazon`. First let's `switch` to the local environment

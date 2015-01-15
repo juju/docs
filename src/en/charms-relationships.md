@@ -39,7 +39,7 @@ implementing it. If not feel free to create a new one.
 # How do I get/send data?
 
 Once you've defined your metadata, you'll need to create a few [new
-hooks](https://jujucharms.com/docs/authors-charm-hooks.html#relation-hooks)
+hooks](authors-charm-hooks.html#relation-hooks)
 the hook names are defined in the linked documentation, but since you're
 _just_ sending the address information we'll keep with a simple bash example
 of the implementation of each hook.
@@ -66,11 +66,16 @@ example:
 
     relation-set hostname=`unit-get private-address` public-address=`unit-get public-address`
 
-This will send two keys, `hostname` and `public-address` to whatever service it's connected to.
+This will send two keys, `hostname` and `public-address` to whatever service
+it's connected to.
 
 ## foo-client/hooks/backend-relation-changed
 
-Notice the difference in file name, this is invoking the `relation-changed` hook instead of `relation-joined`. Presumably the server is just giving the details of where it lives, so the client charm needs to know where that address is. By putting this in the relation-changed hook every time data on the relation is updated the hook is called again.
+Notice the difference in file name, this is invoking the `relation-changed` hook
+instead of `relation-joined`. Presumably the server is just giving the details
+of where it lives, so the client charm needs to know where that address is. By
+putting this in the relation-changed hook every time data on the relation is
+updated the hook is called again.
 
     #!/bin/bash
     set -eux
@@ -97,5 +102,5 @@ we don't have data. Yes, but, it's more along the lines of "We don't have
 data, yet". By exiting zero, once the corresponding service actually sets
 the value, it'll trigger the `relation-changed` hook again and we'll be able
 to read the value. This is considered an example of an [idempotency
-guard](https://jujucharms.com/docs/authors-charm-hooks.html#writing-hooks)
+guard](authors-charm-hooks.html#writing-hooks)
 which are crucial as you write hooks.
