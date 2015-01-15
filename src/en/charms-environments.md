@@ -34,7 +34,9 @@ It is also possible to determine the current environment by checking the
 
 ## Specifying an environment
 
-You can use the `-e` switch with a Juju command, followed by a valid environment label, to specify that the command should be run against that environment. Using the `-e` switch takes precedence over any other setting.
+You can use the `-e` switch with a Juju command, followed by a valid environment
+label, to specify that the command should be run against that environment. Using
+the `-e` switch takes precedence over any other setting.
 
 For example:
 
@@ -42,7 +44,8 @@ For example:
     juju switch amazon             # switches the environment to the cloud defined by 'amazon'
     juju deploy mysql -e mycloud   # deploys mysql charm on the cloud defined by 'mycloud'
 
-**Note: ** Unlike many switches used with juju, `-e` must come at the end of the command in order to be parsed correctly.
+**Note: ** Unlike many switches used with juju, `-e` must come at the end of the
+command in order to be parsed correctly.
 
 ## Switching environments
 
@@ -58,12 +61,17 @@ reason, you can switch the current environment using the `switch` command:
 This command will return with an error message if `JUJU_ENV`is set (as this
 takes precedence).
 
-**Note:** The environment selected with `switch` is persistent. Even if you log out, switch your computer off, travel into space or sail around the world, when you start using Juju again, it will still point at the last environment you specified with `switch`.
+**Note:** The environment selected with `switch` is persistent. Even if you log
+out, switch your computer off, travel into space or sail around the world, when
+you start using Juju again, it will still point at the last environment you
+specified with `switch`.
 
 ## Default environment
 
 The default environment is the environment which will be used if you have not
-issued a `switch` command and do not specify an environment to use with the `-e` switch or alter the `JUJU_ENV` environment variable. The default environment is specified at the top of the `environments.yaml` file, before the environment
+issued a `switch` command and do not specify an environment to use with the `-e`
+switch or alter the `JUJU_ENV` environment variable. The default environment is
+specified at the top of the `environments.yaml` file, before the environment
 specifications themselves, like this:
 
     ...
@@ -87,7 +95,8 @@ example, to see the default series that charms are deployed with, type:
     juju get-environment default-series
 
 The `set-environment` command will set a configuration option to the specified
-value. For example, you can set the default series that charms are deployed with to trusty like this:
+value. For example, you can set the default series that charms are deployed with
+to trusty like this:
 
     juju set-environment default-series=trusty
 
@@ -120,7 +129,8 @@ boilerplate `environments.yaml` so you can easily manually edit your own
 configurations or cut and paste new environments into your existing
 configuration.
 
-To generate a new boilerplate `environments.yaml` file direct to the console you can use:
+To generate a new boilerplate `environments.yaml` file direct to the console you
+can use:
 
     juju generate-config --show
 
