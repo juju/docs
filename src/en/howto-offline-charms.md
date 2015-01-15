@@ -7,7 +7,7 @@ In these cases it's useful to maintain a copy of the internet-accessible
 Charm Store for your local deployments.
 
 !!! Note: Though this method will ensure that the charms themselves are
-available on systems without outside internet access, there is no 
+available on systems without outside internet access, there is no
 guarantee that a charm will work in a disconnected state. Some charms
 pull code from the outside world, such as github. We recommend modifying
 these charms to pull code from an internal server when appropriate.
@@ -16,8 +16,8 @@ these charms to pull code from an internal server when appropriate.
 
 ### Installation
 
-In addition to [Juju](https://juju.ubuntu.com/docs/#installation) we need
-to install charm-tools: 
+In addition to [Juju](https://jujucharms.com/docs/#installation) we need
+to install charm-tools:
 
 ```
 sudo apt-get update && sudo apt-get install charm-tools

@@ -5,9 +5,9 @@ the relation in each charms `metadata.yaml` file. Given a defined a
 server/client role this document will explain how to define relationships
 using the examples below with `foo-server` and `foo-client` charms. Since
 it's likely the server _providing_ the majority of the data to the _client_
-their metadata.yaml files would look as such:  
+their metadata.yaml files would look as such:
 
-## foo-server  
+## foo-server
 
     name: foo-server
     description: Something more than this
@@ -39,7 +39,7 @@ implementing it. If not feel free to create a new one.
 # How do I get/send data?
 
 Once you've defined your metadata, you'll need to create a few [new
-hooks](https://juju.ubuntu.com/docs/authors-charm-hooks.html#relation-hooks)
+hooks](https://jujucharms.com/docs/authors-charm-hooks.html#relation-hooks)
 the hook names are defined in the linked documentation, but since you're
 _just_ sending the address information we'll keep with a simple bash example
 of the implementation of each hook.
@@ -49,7 +49,7 @@ a "server" relation with the foo interface. `foo-client` requires a
 "backend" relation with the foo interface. Relation hooks are named based on
 the relation-name (not the interface name). These could both be called
 server, but to illustrate that juju matches on interface and not relation,
-I've made the `foo-client` relation name "backend".  
+I've made the `foo-client` relation name "backend".
 
 ## foo-server/hooks/server-relation-joined
 
@@ -62,7 +62,7 @@ This is a very basic example, where we're creating a relation key called
 private-address of the unit the charm is deployed to. This address will vary
 from provider to provider, but it will always be reachable within a juju
 environment. You can set multiple keys by adding a space between keys, for
-example:  
+example:
 
     relation-set hostname=`unit-get private-address` public-address=`unit-get public-address`
 
@@ -97,5 +97,5 @@ we don't have data. Yes, but, it's more along the lines of "We don't have
 data, yet". By exiting zero, once the corresponding service actually sets
 the value, it'll trigger the `relation-changed` hook again and we'll be able
 to read the value. This is considered an example of an [idempotency
-guard](https://juju.ubuntu.com/docs/authors-charm-hooks.html#writing-hooks)
-which are crucial as you write hooks. 
+guard](https://jujucharms.com/docs/authors-charm-hooks.html#writing-hooks)
+which are crucial as you write hooks.

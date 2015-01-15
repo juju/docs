@@ -15,7 +15,7 @@ deploy to a cloud, this is a powerful method for developing your application in
 an environment that more closely resembles production.
 
 Before moving on you should have gone through the [Getting
-Started](https://juju.ubuntu.com/docs/getting-started.html) section and
+Started](https://jujucharms.com/docs/getting-started.html) section and
 installed and configured Juju.
 
 ##  Basic Usage of the Ruby on Rails Charm
@@ -69,8 +69,8 @@ laptop and then push out to the public cloud.
 
 We need to configure 2 environments, a local one and a public cloud one.
 
-1. Configure the [local provider](./config-local.html) on your machine. 
-1. Configure a public or private cloud on your machine. 
+1. Configure the [local provider](./config-local.html) on your machine.
+1. Configure a public or private cloud on your machine.
   - [AWS](./config-aws.html)
   - [HP Cloud](./config-hpcloud.html)
   - [OpenStack](./config-openstack.html)
@@ -123,7 +123,7 @@ environment:
 
     juju switch amazon
     juju bootstrap
-    juju deploy --config ~/myapp.yaml rails myapp 
+    juju deploy --config ~/myapp.yaml rails myapp
     juju deploy postgresql
     juju add-relation postgresql myapp
 

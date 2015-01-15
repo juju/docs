@@ -9,8 +9,8 @@ call The Charm Store.
 
   - The main project page is here: [https://launchpad.net/charms](https://launchpad.net/charms)
   - There are useful tools for downloading, modifying, and contributing here: [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools)
-  - Here is the official tutorial for charm authors: [https://juju.ubuntu.com/docs/write-charm.html](https://juju.ubuntu.com/docs/write-charm.html)
-  - Here is the official tutorial for bundle authors: [https://juju.ubuntu.com/docs/charms-bundles.html](https://juju.ubuntu.com/docs/charms-bundles.html)
+  - Here is the official tutorial for charm authors: [https://jujucharms.com/docs/authors-charm-writing](https://jujucharms.com/docs/authors-charm-writing)
+  - Here is the official tutorial for bundle authors: [https://jujucharms.com/docs/charms-bundles.html](https://jujucharms.com/docs/charms-bundles.html)
 
 ## Charm Store Submission
 
