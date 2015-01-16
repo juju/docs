@@ -1,35 +1,62 @@
 # Actions for the Charm author
 
----
+Actions are scripts, binaries, or other executables defined on a charm which may be invoked or queued remotely by the user on demand.  For example, the Charm author might include a `snapshot` Action on a database Charm.  [See here for more on Actions and their use](actions.html).
 
- - ### [Defining Actions](#defining-actions)
-    - #### [Requirements](#requirements)
-    - #### [Example Schema](#example-schema)
-    - #### [Action Tools](#action-tools)
-        - ##### [action-get](#action-get)
-        - ##### [action-set](#action-set)
-        - ##### [action-fail](#action-fail) 
- - ### [Params Transformation](#params-transformation)
-    - #### [Simple YAML transform example](#simple-yaml-transform-example)
-    - #### [More complex YAML transform example](#more-complex-yaml-transform-example)
-
----
-
-## Defining Actions
-
-To define Actions ([see here for more about Actions](actions.html)) on a Charm, executables (scripts, binaries, etc.) for each Action must be included in the `/actions` directory in the Charm, and each named executable must be defined in a YAML map in `/actions.yaml` in the Charm.
-
-Actions may be called with parameters.  These parameters are specified in [`actions.yaml`](#requirements) for each Action.  [See below](#example-schema) for an example.
+The user may give arguments when invoking the Action.  Complex, nested arguments are possible.  The Charm uses a file named `actions.yaml` to specify the type and parameters of these arguments.  On [juju-gui](howto-gui-management.html), the UI for an Action invocation will be automatically built based on `actions.yaml`.
 
 [Action Tools](#action-tools) may be used by the author to define how Actions interact with Juju.  Actions can retrieve params passed by the user, set responses in a map, or set a failure status with a message.
 
-### Requirements
+## Defining Actions
+
+To define the Actions available on a Charm, executables (scripts, binaries, etc.) for each Action must be included in the `/actions` directory in the Charm, and the name of each executable must be a top-level key in a YAML map in `/actions.yaml` in the Charm root:
+
+ > Charm dir
+```
+├── actions
+│   ├── pause
+│   ├── resume
+│   └── snapshot
+├── actions.yaml
+...
+```
+
+ > `actions.yaml` defining three rudimentary Actions.
+```yaml
+pause:
+  description: Pause the database.
+resume:
+  description: Resume a paused database.
+snapshot:
+  description: Take a snapshot of the database.
+```
+
+Actions may be called with parameters.  These parameters are specified as a child YAML map under a `params` key for each Action in `actions.yaml`.  Note that Actions support [JSON-Schema](http://json-schema.org) to enable nested schemas, and many other features. 
+
+ > A simple Action schema showing the use of `params` 
+```yaml
+snapshot:
+  description: Take a snapshot of the database.
+  params:
+    outfile:
+      type: string
+      description: The filename to write to.
+  required: [outfile]
+  additionalProperties: false
+```
+
+[See below](#example-schema) for a more detailed example.
+
+
+### Schema Requirements
+
+`actions.yaml` must be included in the charm root, and must conform to the following requirements:
 
  - Each Action is defined as a top-level key of a YAML map, with the same name as the script it defines.
  - The value of each Action must be a map, which should include a `description` key and may include a `params` key to define a schema.  If no `description` is given, a default empty description will be used.
  - The value of `params`, if it is included, must be a YAML map.  Each key under `params` must be a string, and must have valid [JSON-Schema](http://json-schema.org/example2.html) as its value, transformed to a YAML map.  JSON-Schema  may be nested to create complex schemas.
  - JSON-Schema defines special keys such as `required` and `additionalProperties`, which may be given for the whole action at the same level as `description` and `params`, or within nested schemas at the usual level.
- - At this time, the `$schema` key is not supported by Juju, as it may trigger resolution of remote objects.
+ - At this time, the `$schema` and `$ref` keys are not supported by Juju, as they may trigger resolution of remote objects and other issues.
+ - `additionalProperties: false` should be included at the same level as the `description` key if additional params passed by the user should be rejected.
 
 ### Example Schema
 
