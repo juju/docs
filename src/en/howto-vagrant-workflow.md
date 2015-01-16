@@ -7,7 +7,7 @@ Running juju on Ubuntu is an extremely straightforward process thanks to the add
 To start you will want to ensure you've got the following tools installed on your development machine:
 
 - [Homebrew](http://brew.sh)
-- [Vagrant](http://vagrantup.com)
+- [Vagrant](https://www.vagrantup.com)
 - [VirtualBox](https://www.virtualbox.org/)
 
 ### Preparing to use Vagrant
