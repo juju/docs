@@ -10,24 +10,24 @@ The versions covered here are:
 ^# juju-core 1.20.14
 
   A new stable release of Juju, juju-core 1.20.14, is now available.
-  This release replacea 1.20.13.
+  This release replaces 1.20.13.
 
 
-  Getting Juju
+  ## Getting Juju
 
-  juju-core 1.20.14 is available for utopic and backported to earlier
+  juju-core 1.20.14 is available for utopic (Ubuntu 14.10) and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+```
+https://launchpad.net/~juju/+archive/stable
+```
 
-  Notable Changes
+  ## Notable Changes
 
   This releases addresses stability and performance issues.
 
 
-  Resolved issues
+  ### Resolved issues
 
   * Container scoped relations between 2 subordinates broken in 1.20.12
     Lp 1396625
@@ -49,7 +49,7 @@ The versions covered here are:
   This release  replaces stable 1.20.12.
 
 
-  Getting Juju
+  ## Getting Juju
 
   juju-core 1.20.13 is available for utopic and backported to earlier
   series in the following PPA:
@@ -58,12 +58,12 @@ The versions covered here are:
   https://launchpad.net/~juju/+archive/stable
   ```
 
-  Notable Changes
+  ## Notable Changes
 
   This releases addresses stability and performance issues.
 
 
-  Resolved issues
+  ### Resolved issues
 
   * 1.20.12 breaks neutron-gateway, since all interfaces are brought up
     Lp 1395081
@@ -75,7 +75,7 @@ The versions covered here are:
   This release replaces stable 1.20.11.
 
 
-  Getting Juju
+  ## Getting Juju
 
   juju-core 1.20.12 is available for utopic and backported to earlier
   series in the following PPA:
@@ -84,12 +84,12 @@ The versions covered here are:
   https://launchpad.net/~juju/+archive/stable
   ```
 
-  Notable Changes
+  ## Notable Changes
 
   This releases addresses stability and performance issues.
 
 
-  Resolved issues
+  ### Resolved issues
 
   * Juju run doesn't after upgrade to 1.20.11
     Lp 1392745
@@ -117,7 +117,7 @@ The versions covered here are:
   This release replaced stable 1.20.10.
 
 
-  Getting Juju
+  ## Getting Juju
 
   juju-core 1.20.11 is available for utopic and backported to earlier
   series in the following PPA:
@@ -126,12 +126,12 @@ The versions covered here are:
   https://launchpad.net/~juju/+archive/stable
   ```
 
-  Notable Changes
+  ## Notable Changes
 
   This releases addresses stability and performance issues.
 
 
-  Resolved issues
+  ### Resolved issues
 
   * Local environment machine deployments fail after "juju destroy-
     machine" has been used
@@ -148,7 +148,7 @@ The versions covered here are:
   This release replaces stable 1.20.9.
 
 
-  Getting Juju
+  ## Getting Juju
 
   juju-core 1.20.10 is available for utopic and backported to earlier
   series in the following PPA:
@@ -157,12 +157,12 @@ The versions covered here are:
   https://launchpad.net/~juju/+archive/stable
   ```
 
-  Notable Changes
+  ## Notable Changes
 
   This releases addresses packaging and documentation issues.
 
 
-  Resolved issues
+  ### Resolved issues
 
   * make-release-tarball could check the packages with dependencies.tsv
     Lp 1368417
@@ -174,7 +174,7 @@ The versions covered here are:
   This release replaces stable 1.20.8.
 
 
-  Getting Juju
+  ## Getting Juju
 
   juju-core 1.20.9 is available for utopic and backported to earlier
   series in the following PPA:
@@ -183,12 +183,12 @@ The versions covered here are:
   https://launchpad.net/~juju/+archive/stable
   ```
 
-  Notable Changes
+  ## Notable Changes
 
   This releases addresses stability and performance issues.
 
 
-  Resolved issues
+  ### Resolved issues
 
   * Not okforstorage error when deploying local charm
     Lp 1308146
