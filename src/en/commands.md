@@ -4,6 +4,9 @@ You can get a list of the currently used commands by entering `juju help
 commands` from the commandline. The currently understood commands are listed
 here, with some examples.
 
+  - **action:** execute and manage actions on units: queue up new actions,
+    monitor the status of the running actions, retrieve the results of
+    completed actions, etc.
   - **add-machine:** start a new, empty machine and optionally a container, or add a container to a machine
   - **add-relation:** add a relation between two services
   - **add-unit:** add one or more units of an already-deployed service
