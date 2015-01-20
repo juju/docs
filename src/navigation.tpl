@@ -53,6 +53,7 @@
               <li class=" sub"><a href="authors-charm-interfaces.html">Implementing relations</a></li>
               <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
               <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class=" sub"><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
               <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
               <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
               <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>
