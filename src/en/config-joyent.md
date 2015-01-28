@@ -62,5 +62,6 @@ name in the top-right and then the "Account" link from the drop down menu.
 ![Joyent Dashbard to access username and
 fingerprint](./media/getting_started-joyent-account-dropdown.png)
 
-**Note:** If you are having issues provisioning instances contact Joyent
-support @ [https://help.joyent.com/home](https://help.joyent.com/home)
+**Note:** During intial setup if you are having issues deploying charms contact
+Joyent support @ [https://help.joyent.com/home](https://help.joyent.com/home) 
+to validate your account is enabled provision virtual machines.
