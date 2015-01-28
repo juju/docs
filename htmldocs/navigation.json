@@ -6,6 +6,8 @@
         "Amazon Web Services": "config-aws.html",
         "Windows Azure": "config-azure.html",
         "HP Public Cloud": "config-hpcloud.html",
+        "Joyent": "config-joyent.html",
+        "DigitalOcean (beta)": "config-digitalocean.html",
         "OpenStack": "config-openstack.html",
         "MAAS (bare metal)": "config-maas.html",
         "Local": "config-local.html",

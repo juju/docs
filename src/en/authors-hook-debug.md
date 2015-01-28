@@ -5,6 +5,8 @@ don't happen quite as you expected. That's why Juju includes two tools to help
 you debug charm hooks: The `juju debug-hooks` command and the `juju debug-log`
 command.
 
+The [dhx debugging plugin](./authors-hook-debug-dhx.html) is also available.
+
 ##  The 'debug-hooks' command
 
 The `juju debug-hooks` command accepts a unit and an optional list of hooks to
@@ -191,51 +193,31 @@ hand. Here are some of the ones you may find useful:
 
 #### Window-related:
 
-Control-a 0
-
-    Switch to window 0 (similarly, any other numbered window).
-Control-a c
-
-    Create a new window.
-Control-a n
-
-    Switch to the next window.
-Control-a p
-
-    Switch to the previous window.
-Control-a w
-
-    Choose a window from a list.
+| Shortcut | Description |
+| -------- | -------- |
+| Control-a 0 | Switch to window 0 (similarly, any other numbered window). |
+| Control-a c | Create a new window. |
+| Control-a n | Switch to the next window. |
+| Control-a p | Switch to the previous window. |
+| Control-a w | Choose a window from a list. |
 
 #### Pane-related:
 
-Control-a %
-
-    Split pane vertically.
-Control-a |
-
-    Split pane horizontally.
-Control-a o
-
-    Switch focus to next pane.
-Control-a ;
-
-    Switch focus to the previous pane.
-Control-a !
-
-    Move current pane to a new window.
-Control-a x
-
-    Kill the current pane.
+| Shortcut | Description |
+| -------- | -------- |
+| Control-a % | Split pane vertically. |
+| Control-a &#124; | Split pane horizontally. |
+| Control-a o | Switch focus to next pane. |
+| Control-a ; | Switch focus to the previous pane. |
+| Control-a ! | Move current pane to a new window. |
+| Control-a x | Kill the current pane. |
 
 #### Miscellaneous:
 
-Control-a ?
-
-    Show currently configured keys.
-Control-a :
-
-    Enter the command prompt (for tmux commands)
+| Shortcut | Description |
+| -------- | -------- |
+| Control-a ? | Show currently configured keys. |
+| Control-a : | Enter the command prompt (for tmux commands) |
 
 You can get more info on tmux and its commands at the [relevant Ubuntu manpage
 entry.](http://manpages.ubuntu.com/manpages/trusty/man1/tmux.1.html)

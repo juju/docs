@@ -4,17 +4,22 @@ You can get a list of the currently used commands by entering `juju help
 commands` from the commandline. The currently understood commands are listed
 here, with some examples.
 
+  - **action:** execute and manage actions on units: queue up new actions,
+    monitor the status of the running actions, retrieve the results of
+    completed actions, etc.
   - **add-machine:** start a new, empty machine and optionally a container, or add a container to a machine
   - **add-relation:** add a relation between two services
   - **add-unit:** add one or more units of an already-deployed service
   - **api-endpoints:** print the API server addresses
   - **authorised-keys:** manage authorised ssh keys
+  - **backups:** manage state-server backups for an environment
   - **bootstrap:** start up an environment from scratch
   - **debug-hooks:** launch a tmux session to debug a hook
   - **debug-log:** display the consolidated log file
   - **deploy:** deploy a new service
   - **destroy-environment:** terminate all machines and other associated resources for an environment
   - **env:** alias for switch
+  - **ensure-availability:**  ensure the availability of Juju state servers
   - **expose:** expose a service
   - **generate-config:** generate boilerplate configuration for juju environments
   - **get:** get service configuration options

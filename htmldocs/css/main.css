@@ -141,7 +141,8 @@ code {
   margin-bottom: 1px;
   font-size: 13px;
   font-weight:bold;
-  height: 21px;
+  height: auto;
+  min-height: 22px !important;
   line-height: 22px;
 }
 

@@ -4,21 +4,32 @@ The documentation is written in Markdown, and then generated into HTML.
 
 The latest version of these docs live at:
 
-- [github.com/juju/docs](https://juju.ubuntu.com/docs/contributing.html)
-- [juju.ubuntu.com/docs](http://juju.ubuntu.com/docs) - Rendered docs, generated twice a day.
+- [github.com/juju/docs](https://github.com/juju/docs)
+- [jujucharms.com/docs](http://jujucharms.com/docs) - Rendered docs, generated every 15 minutes.
 
-For advice on contributing to the docs (please!), see 
-the [contributing.html](https://juju.ubuntu.com/docs/contributing.html) page in this project.
+For advice on contributing to the docs (please!), see
+the [contributing.html](https://jujucharms.com/docs/contributing.html) page in this project.
 
 ## Building the Docs
 
-The tools directory contains a Python build script for 
-adding the headers and footers when structural 
+The tools directory contains a Python build script for
+adding the headers and footers when structural
 elements of the pages are altered. It is NOT
 necessary to run the build tool for deployment of the
 HTML, only if the headers and footers have been
-changed. The [contributing section](https://juju.ubuntu.com/docs/contributing.html) contains more
+changed. The [contributing section](https://jujucharms.com/docs/contributing.html) contains more
 information on this.
+
+### If you want 'phaux live reload'
+
+there is a make target to 'watch' the directory and only build the source files that have changed,
+enabling you the doc editor, to simply refresh your browser to see your changes without re-building
+the entire doc tree.
+
+to gain this functionality you will need the `watchdog` python module, which is pip installable
+
+    pip install watchdog
+    make watch
 
 # Typical Github workflow
 
@@ -26,13 +37,13 @@ information on this.
 Git allows you to work in a lot of different work flows. Here is one that
 works well for our environment, if you are not already familiar with git.
 
-To set up the environment, first fork the [juju/docs](https://github.com/juju/docs) github 
+To set up the environment, first fork the [juju/docs](https://github.com/juju/docs) github
 repository when you are logged into the github.com website. Once the fork is
 complete, create a local copy and work on a feature branch.
 
     git clone git@github.com:{yourusername}/docs.git juju-docs
     cd juju-docs
-    
+
 Add a second remote to the upstream Juju repository your fork came from. This lets you use commands such as `git pull upstream master` to update a branch from the original trunk, as you'll see below.
 
     git remote add upstream https://github.com/juju/docs.git
@@ -40,7 +51,7 @@ Add a second remote to the upstream Juju repository your fork came from. This le
 Create a feature branch to work on:
 
     git checkout -b {featureBranchName}
-    
+
 Hacky hacky hacky on your docs. To push code for review, cleanup the commit history.
 
 Optional: rebase your commit history into one or more meaningful commits.

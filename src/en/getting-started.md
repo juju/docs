@@ -58,6 +58,7 @@ more specifics on what needs to be changed, see the relevant sections below.
   - [Configuring for OpenStack](config-openstack.html)
   - [Configuring for bare metal using MAAS](config-maas.html)
   - [Configuring for LXC local provider (Linux)](config-local.html)
+  - [Configuring for Vagrant local provider (OSX)](config-vagrant.html)
 
 **Note:** Juju's command line interface includes documentation, doing `juju help` will show you the topics. You can also check out the [Juju command cheatsheet](https://github.com/juju/cheatsheet) if you are looking for a handy command guide.
 
@@ -202,7 +203,7 @@ To remove all current deployments and clear up everything in your cloud, you can
 
     juju destroy-environment  <environment-name>
 
-Where the `<environment-name>` is the name you gave the environment when you configured it. This 
+Where the `<environment-name>` is the name you gave the environment when you configured it. This
 extra details is to help prevent accidents! You will also see a warning and will be prompted
 whether or not to continue - this action will remove everything, including the bootstrap node.
 

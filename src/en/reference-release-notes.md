@@ -1,9 +1,876 @@
+Title: Juju Release Notes
+
 # History
 
 This section details all the available release notes for the stable series of
 `juju-core`.
 
 The versions covered here are:
+
+^# juju-core 1.20.14
+
+  A new stable release of Juju, juju-core 1.20.14, is now available.
+  This release replaces 1.20.13.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.14 is available for utopic (Ubuntu 14.10) and backported to earlier
+  series in the following PPA:
+
+```
+https://launchpad.net/~juju/+archive/stable
+```
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ### Resolved issues
+
+  * Container scoped relations between 2 subordinates broken in 1.20.12
+    Lp 1396625
+
+  * Azure instance-types and regions missing
+    Lp 1389422
+
+  * Ec2 says agent-state-info: 'cannot run instances: no default
+    subnet for availability zone: ''us-east-1e''. (invalidinput)'
+    Lp 1388860
+
+  * Lxc containers in pending state due to juju-br0 misconfiguration
+    Lp 1395908
+
+
+^# juju-core 1.20.13
+
+  A new stable release of Juju, juju-core 1.20.13, is now available.
+  This release  replaces stable 1.20.12.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.13 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ### Resolved issues
+
+  * 1.20.12 breaks neutron-gateway, since all interfaces are brought up
+    Lp 1395081
+
+
+^# juju-core 1.20.12
+
+  A new stable release of Juju, juju-core 1.20.12, is now available.
+  This release replaces stable 1.20.11.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.12 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ### Resolved issues
+
+  * Juju run doesn't after upgrade to 1.20.11
+    Lp 1392745
+
+  * Non subordinate container scoped relations broken
+    Lp 1382751
+
+  * Juju add-machine lxc:0 fails to start due to incorrect network name
+    in trusty config
+    Lp 1340261
+
+  * Cloud-init network error when using maas/juju
+    Lp 1345433
+
+  * Juju deploy --to lxc:0 works ok but juju deploy --to lxc:1 fails
+    Lp 1368976
+
+  * Juju deploy to kvm:0 fails for br0
+    Lp 1386575
+
+
+^# juju-core 1.20.11
+
+  A new stable release of Juju, juju-core 1.20.11, is now available.
+  This release replaced stable 1.20.10.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.11 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ### Resolved issues
+
+  * Local environment machine deployments fail after "juju destroy-
+    machine" has been used
+    Lp 1379802
+
+  * Juju does not consider whether it has permission to an availability
+    zone
+    Lp 1380557
+
+
+^# juju-core 1.20.10
+
+  A new stable release of Juju, juju-core 1.20.10, is now available.
+  This release replaces stable 1.20.9.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.10 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Notable Changes
+
+  This releases addresses packaging and documentation issues.
+
+
+  ### Resolved issues
+
+  * make-release-tarball could check the packages with dependencies.tsv
+    Lp 1368417
+
+
+^# juju-core 1.20.9
+
+  A new stable release of Juju, juju-core 1.20.9, is now available.
+  This release replaces stable 1.20.8.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.9 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ### Resolved issues
+
+  * Not okforstorage error when deploying local charm
+    Lp 1308146
+
+  * Cloud-archive on precise not pinned when juju calls apt-get upgrade
+    Lp 1370781
+
+
+^# juju-core 1.20.8
+
+  A new stable release of Juju, juju-core 1.20.8, is now available.
+  This release may replace stable 1.20.7.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.8 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+  ### Resolved issues
+
+  * Maas provider assumes machine uses dhcp for eth0
+    Lp 1361374
+
+  * Relation-get with invalid relation name panics agent
+    Lp 1365412
+
+  * Bootstrap on maas fails trying to access cloud-images.ubuntu.com
+    Lp 1365135
+
+  * Not okforstorage error when deploying local charm
+    Lp 1308146
+
+  * Add-machine containers should default to latest lts
+    Lp 1363971
+
+  * Juju add-machine still assumes precise (maas)
+    Lp 1315473
+
+  * Juju-core client panics with juju set empty string
+    Lp 1348829
+
+  * --keep-broken option still allows instance to be stopped
+    Lp 1365772
+
+  * Some third party embedded sources in the source tarball are missing
+    dependencies.tsv entries
+    Lp 1368321
+
+  * Licensing is inconsistent
+    Lp 1368358
+
+  * Sshstorage fails in non-english locale
+    Lp 1367695
+
+
+^# juju-core 1.20.7
+
+  A new stable release of Juju, juju-core 1.20.7, is now available.
+  This release replaces 1.20.6.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.7 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+
+  ## Noteworthy
+
+  This release contains various bug fixes.
+
+
+  ### Resolved issues
+
+  * --keep-broken bootstrap option to keep failed environments
+    Lp 1362923
+
+  * LXC was not created, no errors, no logs -> pending state.
+    Lp 1354027
+
+  * Juju status still returns private IP in 'public-ip' field
+    Lp 1364419
+
+
+^# juju-core 1.20.6
+
+  A new stable release of Juju, juju-core 1.20.6, is now available.
+  This release replaces 1.20.5.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.6 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+
+  ## Noteworthy
+
+  This releases addresses stability issues, particularly with LXC.
+
+
+  ### Resolved issues
+
+  * Arguments no longer passed to plugins if you don't have an environment set
+    Lp 1359170
+
+  * ERROR Nonce already used
+    Lp 1190986
+
+  * Juju status returns private IP in 'public-ip' field.
+    Lp 1348287
+
+  * Juju status <unit> nil pointer reference.
+    Lp 1357482
+
+  * LXC containers created, juju can't seen or communicate with them
+    Lp 1357552
+
+  * Cannot get tools from machine for lxc container
+    Lp 1359800
+
+  * Tools download can fail and is not always retried
+    Lp 1360994
+
+  * Containers not starting on machine
+    Lp 1362360
+
+  * Update the add machine api to accept both environment name and UUID
+    Lp 1360063
+
+
+^# juju-core 1.20.5
+
+  A new stable release of Juju, juju-core 1.20.5, is now available.
+  This release replaces 1.20.1.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.5 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+
+  ## Noteworthy
+
+  This releases addresses stability and performance issues.
+
+
+  ### Resolved issues
+
+  * Juju is stripping underscore from options
+    Lp 1243827
+
+  * Juju api-endpoints cannot distinguish public and private addresses
+    Lp 1311227
+
+  * API server inaccessible for roughly 5 seconds after bootstrap
+    Lp 1351083
+
+  * Juju bootstrap in an existing environment destroys the environment
+    Lp 1340893
+
+  * The jujud on state server panic misses transaction in queue
+    Lp 1318366
+
+  * Juju machine agents suiciding
+    Lp 1345014
+
+  * Juju state server database is overly large
+    Lp 1344940
+
+  * Jujud rewrites /etc/init/juju-db.conf constantly
+    Lp 1349969
+
+  * Juju writes to mongo without an actual change occurring
+    Lp 1345832
+
+  * Talking to mongo can fail with "TCP i/o timeout"
+    Lp 1307434
+
+  * Bootstrap fails if /usr/lib/juju/bin/mongod doesn't already exist
+    Lp 1350700
+
+  * Support the new v4 signing format used by the new China region
+    Lp 1319475
+
+  * Azure: secondary state servers do not load balance API server port
+    Lp 1347371
+
+  * Network error causes tools download to fail
+    Lp 1349989
+
+  * Maas provider: allow users to specify network bridge interface.
+    Lp 1337091
+
+  * ppc64 architecture miss match for MAAS ppc64el
+    Lp 1349771
+
+  * MAAS provider uses dead instance address
+    Lp 1353442
+
+  * Juju bootstrap fails if kvm-ok not in path
+    Lp 1342747
+
+  * Juju-local needs new dep dbus -- specifically to work in lxc
+    Lp 1343301
+
+  * LXC clonetemplate lock can be left stale
+    Lp 1311668
+
+  * LXC deploys broken on precise
+    Lp 1350011
+
+  * LXC template fails to stop
+    Lp 1348386
+
+  * Distribution tarball has licensing problems that prevent 
+    redistribution
+    Lp 1341589
+
+
+^# juju-core 1.20.1
+
+  A new stable release of Juju, juju-core 1.20.1, is now available.
+  This release replaces 1.20.0.
+
+
+  ## Getting Juju
+
+  juju-core 1.20.1 is available for utopic and backported to earlier
+  series in the following PPA:
+  
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Noteworthy
+
+  This release fixes several issues seen in slower environments. The
+  performance improvements also improved reliability. Juju CI saw a 35%
+  speed improvement in the test suite.  While we had planned to release
+  1.20.1 on 2014-07-17, the performance improvements were just too good to
+  delay a whole week.
+
+
+  ### Resolved issues
+
+  * Juju 1.20 consistently fails to bootstrap a MAAS environment
+  Lp 1339240
+
+  * Juju bootstrap fails because mongodb is unreachable
+  Lp 1337340
+
+  * Juju 1.20.x slow bootstrap
+  Lp 1338179
+
+  * API-endpoints fails if run just after bootstrap
+  Lp 1338511
+
+  * Machines are killed if mongo fails
+  Lp 1339770
+
+  * Restore doesn't
+  Lp 1336967
+
+
+^# juju-core 1.20.0
+
+  A new stable release of Juju, juju-core 1.20.0, is now available.
+
+  ## Getting Juju
+
+  juju-core 1.20.0 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+
+  ### New and Notable
+
+    * High Availability
+    * Availability Zone Placement
+    * Azure Availability Sets
+    * Juju debug-log Command Supports Filtering and Works with LXC
+    * Constraints Support instance-type
+    * The lxc-use-clone Option Makes LXC Faster for Non-Local Providers
+    * Support for Multiple NICs with the Same MAC
+    * MaaS Network Constraints and Deploy Argument
+    * MAAS Provider Supports Placement and add-machine
+    * Server-Side API Versioning
+
+
+  ### Resolved issues
+
+  * Juju client is not using the floating ip to connect to the
+  state server
+  `Lp 1308767`
+
+  * Juju help promotes the 'wrong' versions of commands
+  `Lp 1299120`
+
+  * Juju backup command fails against trusty bootstrap node
+  `Lp 1305780`
+
+  * The root-disk constraint is broken on ec2
+  Lp 1324729
+
+  * Bootstrapping juju from within a juju deployed unit fails
+  Lp 1285256
+
+  * Images are not found if endpoint and region are inherited from
+  the top level in simplestreams metadata
+  Lp 1329805
+
+  * Missing @ syntax for reading config setting from file content
+  Lp 1216967
+
+  * Deploy --config assumes relative path if it starts with a tilde (~)
+  Lp 1271819
+
+  * local charm deployment fails with symlinks
+  Lp 1330919
+
+  * Git usage can trigger disk space/memory issues for charms with blobs
+  Lp 1232304
+
+  * Juju upgrade-charm fails because of git
+  Lp 1297559
+
+  * .pyc files caused upgrade-charm to fail with merge conflicts
+  Lp 1191028
+
+  * Juju debug-hooks should display a start message
+  Lp 1270856
+
+  * Can't determine which relation is in error from status
+  Lp 1194481
+
+  * Dying units departure is reported late
+  Lp 1192433
+
+  * Juju upgrade-juju needs a dry run mode
+  Lp 1272544
+
+  * Restarting API server with lots of agents gets hung
+  Lp 1290843
+
+  * Juju destroy-environment >=256 nodes fails
+  Lp 1316272
+
+  * Azure destroy-environment does not complete
+  Lp 1324910
+
+  * Azure bootstrap dies with xml schema validation error
+  Lp 1259947
+
+  * Azure provider stat output does not show machine hardware info
+  Lp 1215177
+
+  * Bootstrapping azure causes memory to fill
+  Lp 1250007
+
+  * Juju destroy-environment on openstack should remove sec groups
+  Lp 1227574
+
+  * Floating IPs are not recycled in OpenStack Havana
+  Lp 1247500
+
+  * LXC cloning should be default behaviour
+  Lp 1318485
+
+  * Nasty worrying output using local provider
+  Lp 1304132
+
+  * Intermittent error destroying local provider environments
+  Lp 1307290
+
+  * Default bootstrap timeout is too low for MAAS environments
+  Lp 1314665
+
+  * MAAS provider cannot provision named instance
+  Lp 1237709
+
+  * Manual provisioning requires target hostname to be directly resolvable
+  Lp 1300264
+
+  * Manual provider specify bash as shell for ubuntu user
+  Lp 1303195
+
+
+  ### High Availability
+
+  The juju state-server (bootstrap node) can be placed into high
+  availability mode. Juju will automatically recover when one or more the
+  state-servers fail. You can use the 'ensure-availability' command to
+  create the additional state-servers:
+
+  ```
+  juju ensure-availability
+  ```
+
+  The 'ensure-availability' command creates 3 state servers by default,
+  but you may use the '-n' option to specify a larger number. The number
+  of state servers must be odd. The command supports the 'series' and
+  'constraints' options like the 'bootstrap' command. You can learn more
+  details by running 'juju ensure-availability --help'
+
+
+  ### Availability Zone Placement
+
+  Juju supports explicit placement of machines to availability zones
+  (AZs), and implicitly spreads units across the available zones.
+
+  When bootstrapping or adding a machine, you can specify the availability
+  zone explicitly as a placement directive. e.g.
+
+  ```
+    juju bootstrap --to zone=us-east-1b
+    juju add-machine zone=us-east-1c
+  ```
+  
+  If you don't specify a zone explicitly, Juju will automatically and
+  uniformly distribute units across the available zones within the region.
+  Assuming the charm and the charm's service are well written, you can
+  rest assured that IaaS downtime will not affect your application.
+  Commands you already use will ensure your services are always available.
+  e.g.
+
+  
+  ```
+    juju deploy -n 10 <service>
+  ```
+  
+  When adding machines without an AZ explicitly specified, or when adding
+  units to a service, the ec2 and openstack providers will now
+  automatically spread instances across all available AZs in the region.
+  The spread is based on density of instance "distribution groups".
+
+  State servers compose a distribution group: when running 'juju
+  ensure-availability', state servers will be spread across AZs. Each
+  deployed service (e.g. mysql, redis, whatever) composes a separate
+  distribution group; the AZ spread of one service does not affect the AZ
+  spread of another service.
+
+  Amazon's EC2 and OpenStack Havana-based clouds and newer are supported.
+  This includes HP Cloud. Older versions of OpenStack are not supported.
+
+
+  ### Azure availability sets
+
+  Azure environments can be configured to use availability sets. This
+  feature ensures services are distributed for high availability; as long
+  as at least two units are deployed, Azure guarantees 99.95% availability
+  of the service overall. Exposed ports will be automatically load
+  balanced across all units within the service.
+
+  New Azure environments will have support for availability sets by
+  default. To revert to the previous behaviour, the
+  'availability-sets-enabled' option must be set in environments.yaml like
+  so:
+  
+  ```
+    availability-sets-enabled: false
+  ```
+  
+  Placement is disabled when 'availability-sets-enabled' is true. The
+  option cannot be disabled after the environment is bootstrapped.
+
+
+  ### Juju debug-log Command Supports Filtering and Works with LXC
+
+  The 'debug-log' command shows the consolidate logs of all juju agents
+  running on all machines in the environment. The command operates like
+  'tail -f' to stream the logs to the your terminal. The feature now
+  support local-provider LXC environments. Several options are available
+  to select which log lines to display.
+
+  The 'lines' and 'limit' options allow you to select the starting log
+  line and how many additional lines to display. The default behaviour is
+  to show the last 10 lines of the log. The 'lines' option selects the
+  starting line from the end of the log. The 'limit' option restricts the
+  number of lines to show. For example, you can see just 20 lines from
+  last 100 lines of the log like this:
+
+      juju debug-log --lines 100 --limit 20
+
+  There are many ways to filter the juju log to see just the pertinent
+  information. A juju log line is written in this format:
+
+      <entity> <timestamp> <log-level> <module>:<line-no> <message>
+
+  The 'include' and 'exclude' options select the entity that logged the
+  message. An entity is a juju machine or unit agent. The entity names are
+  similar to the names shown by 'juju status'. You can exclude all the log
+  messages from the bootstrap machine that hosts the state-server like
+  this:
+
+      juju debug-log --exclude machine-0
+
+  The options can be used multiple times to select the log messages. This
+  example selects all the message from a unit and its machine as reported
+  by status:
+
+      juju debug-log --include unit-mysql-0 --include machine-1
+
+  The 'level' option restricts messages to the specified log-level or
+  greater. The levels from lowest to highest are TRACE, DEBUG, INFO,
+  WARNING, and ERROR. The WARNING and ERROR messages from the log can seen
+  thusly:
+
+      juju debug-log --level WARNING
+
+  The 'include-module' and 'exclude-module' are used to select the kind of
+  message displayed. The module name is dotted. You can specify all or
+  some of a module name to include or exclude messages from the log. This
+  example progressively excludes more content from the logs
+ 
+  ```
+  juju debug-log --exclude-module juju.state.apiserver
+  juju debug-log --exclude-module juju.state
+  juju debug-log --exclude-module juju
+  ```
+  
+  The 'include-module' and 'exclude-module' options can be used multiple
+  times to select the modules you are interested in. For example, you can
+  see the juju.cmd and juju.worker messages like this:
+
+      juju debug-log --include-module juju.cmd --include-module juju.worker
+
+  The 'debug-log' command output can be piped to grep to filter the
+  message like this:
+
+      juju debug-log --lines 500 | grep amd64
+
+  You can learn more by running 'juju debug-log --help' and 'juju help
+  logging'
+
+
+  ### Constraints Support instance-type
+
+  You can specify 'instance-type' with the 'constraints' option to
+  select a specific image defined by the cloud provider. The
+  'instance-type' constraint can be used with Azure, EC2, HP Cloud, and
+  all OpenStack-based clouds. For example, when creating an EC2
+  environment, you can specify 'm1.small':
+
+    juju bootstrap --constraints instance-type=m1.small
+
+  Constraints are validated by all providers to ensure values conflicts
+  and unsupported options are rejected. Previously, juju would reconcile
+  such problems and select an image, possibly one that didn't meet the
+  needs of the service.
+
+
+  ### The lxc-use-clone Option Makes LXC Faster for Non-Local Providers
+
+  When 'lxc-use-clone' is set to true, the LXC provisioner will be
+  configured to use cloning regardless of provider type. This option
+  cannot be changed once it is set. You can set the option to true in
+  environments.yaml like this:
+
+      lxc-use-clone: true
+
+  This speeds up LXC provisioning when using placement with any provider.
+  For example, deploying mysql to a new LXC container on machine 0 will
+  start faster:
+
+      juju deploy --to lxc:0 mysql
+
+
+  ### Support for Multiple NICs with the Same MAC
+
+  Juju now supports multiple physical and virtual network interfaces with
+  the same MAC address on the same machine. Juju takes care of this
+  automatically, there is nothing you need to do.
+
+  Caution, network settings are not upgraded from 1.18.x to 1.20.x. If you
+  used juju 1.18.x to deploy an environment with specified networks, you
+  must redeploy your environment instead of upgrading to 1.20.0.
+
+  The output of 'juju status'  will include information about networks
+  when there is more than one. The networks will be presented in this
+  manner:
+
+    machines: ...
+    services: ...
+    networks:
+      net1:
+        provider-id: foo
+        cidr: 0.1.2.0/24
+        vlan-tag: 42
+
+
+  ### MaaS Network Constraints and Deploy Argument
+
+  You can specify which networks to include or exclude as a constraint to
+  the deploy command. The constraint is used to select a machine to deploy
+  the service's units too. The value of 'networks' is a comma-delimited
+  list of juju network names (provided by MaaS). Excluded networks are
+  prefixed with a "^". For example, this command specify the service
+  requires the "logging" and "storage" networks and conflicts with the
+  "db" and "dmz" networks.
+
+    juju deploy mongodb --constraints networks=logging,storage,^db,^dmz
+
+  The network constraint does not enable the network for the service. It
+  only defines what machine to pick.
+
+  Use the 'deploy' command's 'networks' option to specify service-specific
+  network requirements. The 'networks' option takes a comma-delimited list
+  of juju-specific network names. Juju will enable the networks on the
+  machines that host service units.
+
+  Juju networking support is still experimental and under development,
+  currently only supported with the MaaS provider.
+
+  juju deploy mongodb --networks=logging,storage
+
+  The 'exclude-network' option was removed from the deploy command as it
+  is superseded by the constraint option.
+
+  There are plans to add support for network constraint and argument with
+  Amazon EC2, Azure, and OpenStack Havana-based clouds like HP Cloud in
+  the future.
+
+
+  ### MAAS Provider Supports Placement and add-machine
+
+  You can specify which MAAS host to place the juju state-server on with
+  the 'to' option. To bootstrap on a host named 'fnord', run this:
+
+    juju bootstrap --to fnord
+
+  The MAAS provider support the add-machine command now. You can provision
+  an existing host in the MAAS-based Juju environment. For example, you
+  can  add running machine named fnord like this:
+
+    juju add-machine fnord
+
+
+  ### Server Side API Versioning
+
+  The Juju API server now has support for a Version field in requests that
+  are made. For this release, there are no RPC calls that require anything
+  other than 'version=0' which is the default when no Version is supplied.
+  This should have limited impact on existing CLI or API users, since it
+  allows us to maintain exact compatibility with existing requests. New
+  features and APIs should be exposed under versioned requests.
+
+  For details on the internals (for people writing API clients), see:
+   [this document](https://docs.google.com/document/d/1fPOSUu7Dc_23pil1HGNTSpdFRhkMHGxe4o6jBghZZ1A/edit?usp=sharing)
+
+
+  ### Finally
+
+  We encourage everyone to subscribe the mailing list at
+  juju-dev@lists.canonical.com, or join us on #juju-dev on freenode.
+
+
 
 
 ^# juju-core 1.18.3
@@ -542,7 +1409,7 @@ The versions covered here are:
     * the "null" provider is now available, for creating environments with existing machines.
     * admin-secret is now chosen automatically if omitted from the configuration of a new environment.
     * control-bucket is now chosen automatically if omitted from the configuration for new ec2 and openstack environments.
-    * Logging has changed. You can specify an environment variable "JUJU_LOGGING_CONFIG", or you can specify --log-config on the command line. To show the log on the command line, now use --show-log. The --debug has been kept to be short-hand for `--log-config==DEBUG --show-log`, and --verbose has been deprecated with its current meaning.
+    * Logging has changed. You can specify an environment variable "JUJU_LOGGING_CONFIG", or you can specify --logging-config on the command line. To show the log on the command line, now use --show-log. The --debug has been kept to be short-hand for `--logging-config==DEBUG --show-log`, and --verbose has been deprecated with its current meaning.
 
   ### Resolved issues
 

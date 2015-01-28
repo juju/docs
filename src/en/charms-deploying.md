@@ -73,17 +73,15 @@ The default-series can also be added to any bootstrapped environment with the
 
 Deployed services usually start with a sane default configuration. However, for
 some services it is desireable (and quicker) to configure them at deployment
-time. This can be done by creating a YAML format file of configuration values and 
+time. This can be done by creating a YAML format file of configuration values and
 using the `--config=` switch:
 
     juju deploy mysql --config=myconfig.yaml
-    
-There is more information on this, and other ways to configure services in the 
+
+There is more information on this, and other ways to configure services in the
 [documentation for configuring services](./charms-config.html).
 
-# A note about caching...
-
-After Juju resolves a charm and its dependencies, it bundles them and deploys
+!!! Note: After Juju resolves a charm and its dependencies, it bundles them and deploys
 them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache).
 This allows the same charm to be deployed to multiple machines repeatably and
 with minimal network transfers.
@@ -212,3 +210,20 @@ horizontally scale out on dedicated machines when you need to.
 
   - [ Scaling Down in the Cloud with Juju](http://www.jorgecastro.org/2013/07/31/deploying-wordpress-to-the-cloud-with-juju/)
   - [ Targeted Machine Deployment with Juju](http://javacruft.wordpress.com/2013/07/25/juju-put-it-there-please/)
+
+# Selecting and enabling networks
+
+Use the `networks` option to specify service-specific network
+requirements. The `networks` option takes a comma-delimited list of
+juju-specific network names. Juju will enable the networks on the
+machines that host service units. This is different from the network
+constraint which selects a machine that matches the networks, but does
+not configure the machine to use them For example, this commands deploys
+a service to a machine on the "db" and "monitor" networks and enabled
+them:
+
+    juju deploy --networks db,monitor mysql
+
+**Note:** The `networks` option only recognises MaaS networks at this
+time, and the environment must be bootstrapped with 1.20.0 or newer.
+MaaS networks are not detected when Juju is upgraded to 1.20.0 or newer.

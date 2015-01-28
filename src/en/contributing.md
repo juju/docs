@@ -13,9 +13,17 @@ Contributing to the docs is really easy because it is all written in GitHub
 flavored [Markdown](https://help.github.com/articles/github-flavored-markdown).
 You will find most of the source documents are very straightforward and
 human-readable, if you just want to dip in and change a paragraph or add some
-extra info. The Juju docs use a modified version of the [Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) to compose the content of the docs. We've retained the majority of GFM, with the exception of "Username linking" and "Emoji", both of which are Github specific.
+extra info. The Juju docs use a modified version of the 
+[Github Flavored Markdown](https://guides.github.com/features/mastering-markdown/) 
+to compose the content of the docs. We've retained the majority of GFM, with
+the exception of "Username linking" and "Emoji", both of which are Github
+specific.
 
-In addition to the removals, we've also created several new Markdown definitions to implement features required for the docs. These definitions are outlined below.
+In addition to the removals, we've also created several new Markdown definitions
+to implement features required for the docs. These definitions are outlined
+below.
+
+
 
 ## Grab the docs and get to work
 
@@ -58,19 +66,26 @@ Use a backtick to `inline commands and other literals`.
 
 ## Notes, Warnings, Callouts, Admonishments
 
-Callouts are used to notify the user of additional information or warn them of potential pitfalls. This will create a notification resembling the following in the docs:
+Callouts are used to notify the user of additional information or warn them of
+potential pitfalls. This will create a notification resembling the following in
+the docs:
 
 ![callout](media/note.png)
 
 To implement this callout, use the following syntax:
 
 ```
-!!! Note: If you want to get more information on what is actually happening, or to help resolve problems, you can add the `--show-log` switch to the juju command to get verbose output.
+!!! Note: If you want to get more information on what is actually happening, or
+to help resolve problems, you can add the `--show-log` switch to the juju
+command to get verbose output.
 ```
 
 ## Foldouts
 
-When a page contains a high volume of information that would otherwise require a table of contents, or similar method of quick navigation, a foldout can be used. This will create a collapsed header which, when clicked, will expand to display all the content below it.
+When a page contains a high volume of information that would otherwise require a
+table of contents, or similar method of quick navigation, a foldout can be used.
+This will create a collapsed header which, when clicked, will expand to display
+all the content below it.
 
 ```
 ^# Header
@@ -94,7 +109,8 @@ with a description of the new page and why it is needed!
 
 ## Adding Screenshots
 
-When adding screenshots place them in `htmldocs/media`. To reference them in your page use the syntax `![description](media/picture.png)`
+When adding screenshots place them in `htmldocs/media`. To reference them in
+your page use the syntax `![description](media/picture.png)`
 
 # Testing or Deploying locally
 
@@ -125,6 +141,63 @@ following:
 
     python -m SimpleHTTPServer
 
+# Style and Language
+
+We are putting together a more comprehensive style guide, but for the moment the
+following are good guidelines:
+
+ - Resist being overly formal. The documentation should be like having a 
+conversation with a knowledgeable friend
+ - Remember the readers are *users* not necessarily Juju developers
+ - Spell things properly! (see below)
+ - If including links or examples, double-check they actually work
+
+## Using en-GB for en-US writers
+
+The official language of Canonical documentation is English, or en-GB to be
+more precise. There are all sorts of minor differences between English and 
+American English, including spelling, verb morphology, transitives, etc.
+
+Many of these differences will thankfully have no impact on writing the 
+documentation for Juju though - it is unlikely you will be talking about 
+"pants" or "hockey" or "tabling motions" for example. The main and most
+notable difference is in spelling.
+
+Popular belief is that you will merely need to add a few 'u's to words and 
+change -ize to -ise everywhere. It is a bit more complicated than that though.
+In fact, many -ize endings *are* acceptable in en-GB, though the -ise endings
+are generally preferred. The Oxford English Dictionary Style Guide (1998) has
+this to say:
+
+"The verbal ending -ize has been in general use since the 16th century; it is
+favoured in American English and in much British writing, and remains the
+current preferred style of Oxford University Press in academic and general books
+published in Britain. However, the alternative spelling -ise is now widespread
+(partly under the influence of French), especially in Britain, and may be
+adopted provided that its use is consistent.
+...
+A number of verbs always end in -ise in British use, notably advertise,
+chastise, despise, disguise, franchise, merchandise, surmise, and all verbs
+ending in -cise, -prise, -vise (including comprise, excise, prise (open),
+supervise, surprise, televise, etc.), but -ize is always used for prize
+(=value), capsize, size.
+...
+Spellings with -yze (paralyze, analyze) are only acceptable in American use."
+
+As you can see, it can be rather tricky. And that is only the ize/ize issue.
+There are many other endings which differ (e.g. -eled/-elled as in "travelled" 
+and "labelled". The best way to ensure that you are using consistent en-GB 
+spelling is to simply enable the en-GB dictionary on whatever software you 
+generally use for writing. For example, in vim you could execute the command:
+
+```
+:setlocal spell spelllang=en_gb 
+```
+This will change the spelling highlight options for the local buffer only, so
+you won't have to worry about whatever language you normally use. Do not worry
+about your atrocious grammar (in either variant of the language) as the docs 
+monkeys are used to tidying that up!
+
 ## Submitting your work
 
 We love it when the community contributes to documentation, here's how to
@@ -133,7 +206,7 @@ contribute:
 - The code is available on [github.com/juju/docs](http://github.com/juju/docs)
 - [Fork the repository](https://help.github.com/articles/fork-a-repo)
 - Add or edit the documentation in your favorite text editor
-- [Submit a pull requestion](https://help.github.com/articles/creating-a-pull-request)
+- [Submit a pull request](https://help.github.com/articles/creating-a-pull-request)
 
 And that's it! Someone from the Juju team will review your work and merge it
 in! Please don't forget to review the page before submission.

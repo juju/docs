@@ -6,23 +6,26 @@ unnecessary items, and some omissions. For the moment it is easier to replicate
 the config file shown below and populate it with the necessary values given in
 <angle brackets>.
 
-    ## https://juju.ubuntu.com/docs/config-hpcloud.html
+    ## https://jujucharms.com/docs/config-hpcloud.html
       hpcloud:
         use-floating-ip: true
         type: openstack
         tenant-name: <your HPCloud project name>
-        username: <your HPCloud username>
-        password: <your HPCloud password>
+        auth-mode: keypair
+        access-key: <your access key>
+        secret-key: <your secret key>
         auth-url: <The identity server for your project, e.g. https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/>
         region: <Your activated region>
 
 The items in angled brackets will need to be entered by you, and are explained
 below. You will find most of the relevant is accessible by logging in to the
-[HP Cloud Console](https://horizon.hpcloud.com/landing/).
+[HP Cloud Console](https://horizon.hpcloud.com/landing/). Managing keys is available
+in the user account dropdown in the top right of the UI. From there you can create
+and manage the `access-key` and `secret-key`.
 
- - `tenant-name:` For HP Public Cloud, this is listed as the project name on various pages of the HP Cloud console. On the [ main landing page](https://horizon.hpcloud.com/landing/) it is displayed in the area highlighted below. ![image showing project name](media/config-hp001.png)
- - `username:` Enter your HP Cloud login username.
- - `password:` Enter your HP Cloud login password.
+ - `tenant-name:` For HP Public Cloud, this is listed as the project name on various pages of the HP Cloud console. On the [main landing page](https://horizon.hpcloud.com/landing/) it is displayed in the area highlighted below. ![image showing project name](media/config-hp001.png)
+ - `access-key`: You need to generate this key from the account dropdown.
+ - `secret-key`: You need to generate this key for the specific access key you've generated in the account dropdown.
  - `auth-url:`This is the Keystone url for authentication. It is given in the [ Project > Access and Security page](https://horizon.hpcloud.com/project/access_and_security/), under the API access tab ![image showing service endpoints](media/config-hp002.png)
  - `region:` You can use any regions provided you have [activated the relevant services in the console](https://horizon.hpcloud.com/landing/). Hp Public Cloud currently has two regions, one in US West, and one in US East:
     * region-a.geo-1

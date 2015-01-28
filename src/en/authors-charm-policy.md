@@ -14,20 +14,27 @@ and bundles must:
   - Must be entirely self contained or depend only on reliable external services.
   - Must include a full description of what the software does in the metadata.
   - Must provide a means to protect users from known security vulnerabilities in a way consistent with best practices as defined by either Ubuntu policies or upstream documentation. Basically this means there must be instructions on how to apply updates if you use software not from Ubuntu.
-  - Must pass "charm proof" or "bundle proof" with no errors (lines prefixed with E:), remember this step!
+  - Must pass "[charm proof](./tools-charm-tools.html#proof)" or "[bundle proof](./tools-charm-tools.html#proof)" with no Errors or Warnings (lines prefixed with E: or W:).
   - Must have a maintainer email address in metadata.yaml attached to a team or individual who are responsive to contact.
   - Must include a license. Call the file 'copyright' and make sure all files' licenses are specified clearly.
-  - Must be under a [Free license](http://opensource.org/osd). 
+  - Must be under a [Free license](http://opensource.org/osd).
   - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
   - Must not run any network services using default passwords.
   - Must call Juju API tools (relation-*, unit-*, config-*, etc) without a hard coded path. Should default to use software that is included in the Ubuntu archive, however we encourage that charm authors have a config options for allowing users to deploy from newer upstream releases, or even right from VCS if it's useful to users.
   - Should not use anything infrastructure-provider specific (i.e. querying EC2 metadata service) symlinks must be self contained within a charm.
   - Should make use of [AppArmor](https://help.ubuntu.com/12.04/serverguide/apparmor.html) to increase security.
   - Bundles must only use charms which are already in the store, they cannot reference charms in personal namespaces.
+  - Must include tests for trusty series and any series afterwards. Testing is defined as unit tests, functional tests, or integration tests.
 
 The charm store referred to in this document is the collection of Juju charms
 and bundles hosted at
 [https://launchpad.net/charms](https://launchpad.net/charms).
+
+If a charm is no longer being properly maintained and is failing to adhere to
+policy the charm will undergo the
+[unmaintained charm process](./charm-unmaintained-process.html).  This process confirms
+the charm is no longer being maintained, fails to adhere to Charm Store policy,
+and thus is removed from the recommended status in the Juju Charm Store.  
 
 # Charm Metadata
 
@@ -44,6 +51,10 @@ Any de-facto config options must be kept at least until the next major charm
 series release. Removed config options should be deprecated first by noting that
 they are deprecated, and why, in their description. Instructions for converting
 values must be added to README as well.
+
+Each [configuration option](authors-charm-config.html#charm-configuration)
+must have `type`, `description`, and `default` fields that give users more
+information about the option and how it can be used.
 
 ## README.md
 
@@ -80,7 +91,7 @@ Each series can be in one of these states:
   - Experimental - Charms can be added, but are in a state of flux.
   - Active - The Charm store is actively accepting new charms and changes.
   - Frozen - Only critical fixes are accepted.
-  - EOL - The OS version is not supported by the vendor, and thus, neither are the charms. 
+  - EOL - The OS version is not supported by the vendor, and thus, neither are the charms.
 
 ## Experimental
 

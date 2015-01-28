@@ -27,8 +27,7 @@ the state of the service from install to config to started. Because of this, all
 Other generic tests may be identified, so a collection of generic tests should
 be the focus of an implementation.
 
-Note that this requirement is already satisfied by Mark Mims' jenkins tester:
-[https://github.com/mmm/charmtester/](https://github.com/mmm/charmtester/)
+Note that this requirement is already satisfied by [Mark Mims' jenkins tester](https://github.com/mmm/charmtester/).
 
 ## Phase 2 - Charm Specific tests
 
@@ -103,7 +102,7 @@ test, and then the file ended with `INFO: END filename`.
 
 #### Deploy requirements and Poll
 
-The test below [*] deploys mediawiki with mysql and memcached related to it, and then tests to make sure it returns a page via http with `<title>` somewhere in the content.:
+The test below deploys mediawiki with mysql and memcached related to it, and then tests to make sure it returns a page via http with `<title>` somewhere in the content.:
 
 ```bash
 #!/bin/sh

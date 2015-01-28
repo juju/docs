@@ -113,7 +113,7 @@ user input. To suppress prompts and accept all defaults instead, use the
   - `-t`, `--template`: The template to use when creating the charm.
   - `-a`, `--accept-defaults`: If the chosen template prompts for user
     input, suppress all prompts and accept the defaults instead.
-  - `-v`, `--verboes`: Show debug output.
+  - `-v`, `--verbose`: Show debug output.
 
 ### Bash Example
 
@@ -248,10 +248,11 @@ will prevent promulgation if errors occur.
 Proof is designed to perform a "lint" against a charms structure to validate if
 it conforms to what the Charm Store thinks a charm structure and layout should
 be. `proof` will provide output at varying levels of severtiy. `I` is
-informational. These are things a charm could do but don't currently. `W` is a
-warning. These are things that aren't complete blockers but need to be
-addressed. `E` is an error. These are items that are major and need to be
-addressed.
+informational - these are things a charm could do but don't currently. `W` is a
+warning - these are items that violate charm store policy or have an adverse affect
+on tools in the juju ecosystem. `E` is an error - these are items that are major
+and will result in a broken charm. Any charm with a Warning or Error will not
+pass charm store review policy.
 
 ## Review-queue
 
