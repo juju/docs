@@ -64,4 +64,4 @@ fingerprint](./media/getting_started-joyent-account-dropdown.png)
 
 **Note:** During intial setup if you are having issues deploying charms contact
 Joyent support @ [https://help.joyent.com/home](https://help.joyent.com/home) 
-to validate your account is enabled provision virtual machines.
+to validate your account is enabled to provision virtual machines.
