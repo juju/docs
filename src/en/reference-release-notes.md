@@ -18,15 +18,15 @@ The versions covered here are:
   juju-core 1.21.1 is available for utopic and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   Windows and OS X users will find installers at:
 
-      ```
-      https://launchpad.net/juju-core/+milestone/1.21.1
-      ```
+  ```
+  https://launchpad.net/juju-core/+milestone/1.21.1
+  ```
 
 
   ## Notable Changes
@@ -38,7 +38,7 @@ The versions covered here are:
     * Selecting the agent stream to get alternate version of Juju
     * Tuning Juju to take advantage of NUMA
     * Configuring the MAAS network rules
-    * Improved availability zone selection in Openstack and MAAS
+    * Improved availability zone selection in OpenStack and MAAS
     * Juju now prefers SSD storage in AWS
     * Adding many machines
     * Choosing the nodes used to ensure high availability
@@ -58,17 +58,17 @@ The versions covered here are:
   required. This can help keep your costs low, and keep you out of web
   consoles. Juju supports several harvesting modes to suit your needs.
 
-  Destroyed: Juju will harvest only machine instances that are marked as
+  _Destroyed:_ Juju will harvest only machine instances that are marked as
   dead, and that Juju knows about. Running instances unknown to Juju will
   not be harvested. This is the default mode.
 
-  Unknown: Juju will harvest only instances that Juju does not know about.
+  _Unknown:_ Juju will harvest only instances that Juju does not know about.
 
-  All: Juju will terminate all instances – destroyed or unknown – that it
+  _All:_ Juju will terminate all instances – destroyed or unknown – that it
   finds. This is a good option if you are only utilizing Juju for your
   environment.
 
-  None: Juju won't harvest any machines. This is the most conservative
+  _None:_ Juju won't harvest any machines. This is the most conservative
   mode, and a good choice if you manage your machines utilizing a separate
   process outside of Juju.
 
@@ -76,14 +76,14 @@ The versions covered here are:
 
       provisioner-harvest-mode: <MODE>
 
-  'provisioner-harvest-mode' replaces 'safe-mode'. Environments with
-  'safe-mode' set will be converted to 'provisioner-harvest-mode' when
+  ```provisioner-harvest-mode``` replaces ```safe-mode```. Environments with
+  ```safe-mode``` set will be converted to ```provisioner-harvest-mode``` when
   upgraded.
 
 
   ### Using apt mirrors
 
-  You can now configure 'apt-mirror' in environments.yaml to specify the
+  You can now configure ```apt-mirror``` in environments.yaml to specify the
   mirror used by all the machines provisioned in the environment:
 
       apt-mirror: http://my.archive.ubuntu.com
@@ -93,7 +93,7 @@ The versions covered here are:
   precise archives. Charms developed on precise will see the same packages
   when deployed into a Juju provisioned machine. If your precise charm
   requires packages from the cloud tool's archive, you can use the
-  'target-release' option to specify the archive to select:
+  ```target-release``` option to specify the archive to select:
 
       apt-get --target-release precise-updates/cloud-tools my-package
 
@@ -108,9 +108,9 @@ The versions covered here are:
 
   Two configuration options are available to disable apt updates and
   upgrades. When your OS images are fresh, you can set both
-  'enable-os-refresh-update', and 'enable-os-upgrade' to false. When you
-  know that some charms want the latest packages to to set up services,
-  you will want to keep 'enable-os-refresh-update' set to "true".
+  ```enable-os-refresh-update```, and ```enable-os-upgrade``` to false. When you
+  know that some charms want the latest packages to set up services,
+  you will want to keep ```enable-os-refresh-update``` set to "true".
 
   You can configure the options in environments.yaml for fast provisioning
   like so:
@@ -120,13 +120,13 @@ The versions covered here are:
 
   The local provider skips apt upgrades by default for faster
   provisioning. If you wish to enable upgrades in your local
-  development, set 'enable-os-upgrade' to
+  development, set ```enable-os-upgrade``` to
   "true" in your environments.yaml:
 
       enable-os-upgrade: true
 
   If you are using the local-provider to develop charms or test, you
-  will want to regularly purge the juju template and lxc caches to
+  will want to regularly purge the Juju template and LXC caches to
   be certain you are using fresh images. For example, before you start
   testing a new trusty charm, you can remove the template and cloud
   image like this:
@@ -138,7 +138,7 @@ The versions covered here are:
   ### Using daily image streams for faster provisioning
 
   Juju prefers to use the slow-changing "released" images when
-  provisioning machines. The 'image-stream' option in environments.yaml
+  provisioning machines. The ```image-stream``` option in environments.yaml
   can be set to "daily" use more up-to-date images, thus shortening the
   time it takes to perform apt-get update/upgrade. While this feature has
   existed since 1.18.0, it was not applied consistently to KVM containers.
@@ -149,10 +149,10 @@ The versions covered here are:
 
   ### Selecting the agent stream to get alternate version of Juju
 
-  The 'agent-stream' config option selects the versions of Juju that
+  The ```agent-stream``` config option selects the versions of Juju that
   an environment can deploy and upgrade to. The default behaviour
   of Juju is to select agents from the "released" stream. These are
-  the most stable versions of Juju. You can set 'agent-stream' to
+  the most stable versions of Juju. You can set ```agent-stream``` to
   select "devel" streams now to test the unstable versions of Juju:
 
       agent-stream: devel
@@ -162,13 +162,13 @@ The versions covered here are:
 
       agent-stream: proposed
 
-  The 'tools-metadata-url' was renamed to 'agent-metadata-url' and it does
+  The ```tools-metadata-url``` was renamed to ```agent-metadata-url``` and it does
   not need to be set to get "devel" or "proposed". You can remove it from
-  environments.yaml if you have set it. 'agent-metadata-url' is
+  environments.yaml if you have set it. ```agent-metadata-url``` is
   only needed to select a private stream.
 
-  If you have an existing test environment using 'tools-metadata-url' or
-  'agent-metadata-url' to test proposed versions, you can still upgrade to
+  If you have an existing test environment using ```tools-metadata-url``` or
+  ```agent-metadata-url``` to test proposed versions, you can still upgrade to
   1.21.0. After you upgrade, you can update the environment to use the
   devel streams at the default stream location:
 
@@ -182,7 +182,7 @@ The versions covered here are:
 
   Juju can be tuned to take advantage of NUMA machines. If your
   state-server will be on a machine with NUMA support, you can set
-  'set-numa-control-policy' to true in environments.yaml like this:
+  ```set-numa-control-policy``` to true in environments.yaml like this:
 
       set-numa-control-policy: true
 
@@ -193,7 +193,7 @@ The versions covered here are:
 
   Juju and MAAS cannot both be in control of the network. When MAAS
   is managing the bridge and bringing networks up and down, set the
-  'disable-network-management' option in environments.yaml to "true":
+  ```disable-network-management``` option in environments.yaml to "true":
 
       disable-network-management: true
 
@@ -202,11 +202,11 @@ The versions covered here are:
   network config when its agents start.
 
 
-  ### Improved availability zone selection in Openstack and MAAS
+  ### Improved availability zone selection in OpenStack and MAAS
 
-  The Openstack and MAAS providers now attempt to start instances in all
+  The OpenStack and MAAS providers now attempt to start instances in all
   available zones until they find one which succeeds, rather than trying
-  just the first zone and failing. This aligns OpenStack and MASS
+  just the first zone and failing. This aligns OpenStack and MAAS
   behaviour with that of AWS.
 
 
@@ -219,12 +219,12 @@ The versions covered here are:
 
   ### Adding many machines
 
-  Juju's 'add-machine' command now accepts the '-n' option to add many
+  Juju's ```add-machine``` command now accepts the "-n" option to add many
   machines. For example, to add two machines:
 
       juju add-machine -n 2
 
-  The '-n' option can be combined with placement. You can add two lxc
+  The "-n" option can be combined with placement. You can add two LXC
   containers to machine 1 thusly:
 
        juju add-machine lxc:1 -n 2
@@ -232,9 +232,9 @@ The versions covered here are:
 
   ### Choosing the nodes used to ensure high availability
 
-  Just as 'juju bootstrap' supports the ability to specify a particular
-  node using '--to' placement directives, so too can 'juju
-  ensure-availability' specify a comma separated list of machines to use
+  Just as ```juju bootstrap``` supports the ability to specify a particular
+  node using "--to" placement directives, so too can 
+  ```juju ensure-availability``` specify a comma separated list of machines to use
   for any newly required state servers. For example:
 
       juju ensure-availability -n 3 --to name1,name2
@@ -242,24 +242,24 @@ The versions covered here are:
 
   ### Inspecting the API connection settings
 
-  The 'juju api-info' command shows the settings used to connect to the
+  The ```juju api-info``` command shows the settings used to connect to the
   Juju state-server's API. You can see the settings for all the fields
   (except for password) like so:
 
       juju api-info
 
   If you want to see the password being used, you need to either use the
-  '--password' option
+  "--password" option:
 
       juju api-info --password
 
-  Or specify the password field as the only field to show
+  or specify the password field as the only field to show:
 
       juju api-info password
 
   You can learn the value of any field by including it in the command
   line. For example, to learn the name of user created during bootstrap,
-  type
+  type:
 
       juju api-info user
 
@@ -269,16 +269,16 @@ The versions covered here are:
   Juju now supports multiple people connecting to the environment with
   their own identity and credentials.
 
-  When an environment is bootstrapped the “admin” user is created (this
+  When an environment is bootstrapped the "admin" user is created (this
   will change with 1.22 to reflect the name of the logged in user).
 
-  Even though we have multiple users, we do not yet support fine grain
-  permissions. These will come in time, and do depend on this work. The
-  only permission checked at this stage is that only the “admin” user
+  Even though there is support for multiple users, there is not yet support
+  for fine grain permissions. These will come in time. The
+  only permission checked at this stage is that only the "admin" user
   can create or disable other users. Any user is now able to change
   their own password.
 
-  The user commands are grouped under the 'juju user' command:
+  The user commands are grouped under the ```juju user``` command:
 
       juju user
       usage: juju user <command> ...
@@ -317,10 +317,10 @@ The versions covered here are:
       $JUJU_HOME/environments/app-stack.jenv
 
   Juju will ask for a password to be typed in. If you'd prefer a strong
-  random password, you can use the '--generate' option. You can also
+  random password, you can use the "--generate" option. You can also
   control the location and name of the environments file that is created.
 
-  You can see which users have been created using the ‘juju user list'
+  You can see which users have been created using the ```juju user list```
   command:
 
       juju user list
@@ -330,7 +330,7 @@ The versions covered here are:
       thumper Tim 5 seconds ago never connected
 
   The output of this command can also be in YAML or JSON using the usual
-  '--format' options.
+  "--format" options.
 
   Any user that is created will be able to access the environment. To
   stop this, you can disable the user.
@@ -403,19 +403,19 @@ The versions covered here are:
   after a kernel upgrade, or to upgrade the entire system. The charm may
   not be able to complete the hook until the machine is rebooted.
 
-  The 'juju-reboot' command allows charm authors schedule a reboot from
+  The ```juju-reboot``` command allows charm authors schedule a reboot from
   inside a charm hook. The reboot will only happen if the hook completes
   without error. You can schedule a reboot like so:
 
       juju-reboot
 
-  The '--now' option can be passed to block hook execution. The
-  'juju-reboot' command will hang until the unit agent stops the hook and
+  The ```--now``` option can be passed to block hook execution. The
+  ```juju-reboot``` command will hang until the unit agent stops the hook and
   re-queues it for next run. This will allow you to create multi-step
   install hooks.
 
-  Charm authors must wrap calls to 'juju-reboot' th ensure it is
-  actually necessary, otherwise The charm risks entering a reboot loop.
+  Charm authors must wrap calls to ```juju-reboot``` to ensure it is
+  actually necessary, otherwise the charm risks entering a reboot loop.
   The preferred work-flow is to check if the feature/charm is in the
   desired state, and reboot when needed. This bash example assumes that
   "$FEATURE_IS_INSTALLED" variable was defined by a check for the feature,
@@ -427,18 +427,18 @@ The versions covered here are:
           juju-reboot --now
       fi
 
-  The 'juju-reboot' command can be called from any hook. It can also be called
-  using the 'juju run' command.
+  The ```juju-reboot``` command can be called from any hook. It can also be called
+  using the ```juju run``` command.
 
 
   ### Improvements to ports management for charms
 
-  Your charm hooks can call the new 'opened-ports' shell command to get
+  Your charm hooks can call the new ```opened-ports``` shell command to get
   a listing of the open ports on the unit.
 
       opened-ports
 
-  The 'open-port' and 'close-port' commands both support single ports and
+  The ```open-port``` and ```close-port``` commands both support single ports and
   ranges, for example, to open ports 80 through 100 on tcp:
 
       open-port 80-100/tcp
@@ -449,11 +449,11 @@ The versions covered here are:
 
   Juju now keeps track of what ports are opened by other units on the same
   machine and does not allow conflicting ports to be opened. The
-  'open-port' and 'close-port' commands can return a conflict error when
+  ```open-port``` and ```close-port``` commands can return a conflict error when
   the port was opened or closed by another charm. Additionally, both
-  open-port and close-port commands work transactionally, like the other
-  hook commands, i.e. until the hook is committed no actual changes are
-  done (opening or closing ports).
+  these commands work transactionally, in common with other
+  hook commands; until the hook is committed no actual changes are
+  made (opening or closing ports).
 
 
   ### Developing Juju providers for clouds without storage
