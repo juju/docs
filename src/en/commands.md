@@ -459,7 +459,7 @@ Click on the expander to see details for each command.
   
   Private clouds may need to specify their own custom image metadata, and possibly upload
   Juju tools to cloud storage if no outgoing Internet access is available. In this case,
-  use the --metadata-source paramater to tell bootstrap a local directory from which to
+  use the --metadata-source parameter to tell bootstrap a local directory from which to
   upload tools and/or image metadata.
   
   See Also:
@@ -2032,7 +2032,7 @@ Click on the expander to see details for each command.
   _-e, --environment (= "")_  juju environment to operate in
   
   Set one or more configuration options for the specified service to their
-  default. See also the set commmand to set one or more configuration options for
+  default. See also the set command to set one or more configuration options for
   a specified service.
 
 
@@ -2242,7 +2242,7 @@ Click on the expander to see details for each command.
 
   _- The highest patch.build version of the *current* major.minor version._  
   Both of these depend on tools availability, which some situations (no
-  outgoing internet access) and provider types (such as maas) require that
+  outgoing Internet access) and provider types (such as maas) require that
   you manage yourself; see the documentation for "sync-tools".
   
   The upgrade-juju command will abort if an upgrade is already in
