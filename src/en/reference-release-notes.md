@@ -710,9 +710,9 @@ The versions covered here are:
   juju-core 1.20.14 is available for utopic (Ubuntu 14.10) and backported to earlier
   series in the following PPA:
 
-```
-https://launchpad.net/~juju/+archive/stable
-```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   ## Notable Changes
 
