@@ -35,7 +35,7 @@ The generic configuration sections generated for the manual provider will look
 something like this, though Juju will generate this automatically you usually
 don't need to edit it:
 
-    ## https://juju.ubuntu.com/docs/config-manual.html
+    ## https://jujucharms.com/docs/config-manual.html
         manual:
             type: manual
             # bootstrap-host holds the host name of the machine where the
@@ -83,7 +83,7 @@ password-less ssh and sudo for the ubuntu user.
 To add another machine into a manual environment, you must use a variant of the
 `juju add-machine` command, such as follows:
 
-    juju add-machine ssh:juju.ubuntu.com
+    juju add-machine ssh:jujucharms.com
     juju add-machine ssh:10.1.1.2
     juju add-machine ssh:otheruser@10.1.1.3
 
@@ -105,4 +105,4 @@ additional things to consider:
 - Sudo access is required on all manually provisioned machines, to install the Juju upstart services.
 - Manually provisioned machines must be running a supported version of Ubuntu (12.04+).
 - It is possible to manually provision machines into non-manual provider environments, however the machine must be placed on the same private subnet as the other machines in the environment.
-- Since adding machines is a manual step, using the manual provider doesn't have the "instant elasticity" benefits of using a proper provider; if you're an IaaS provider and want to help us natively support you, [please contact us](https://juju.ubuntu.com/community/).
+- Since adding machines is a manual step, using the manual provider doesn't have the "instant elasticity" benefits of using a proper provider; if you're an IaaS provider and want to help us natively support you, [please contact us](https://jujucharms.com/community).

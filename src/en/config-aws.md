@@ -18,7 +18,7 @@ exist).
 The generic configuration sections generated for AWS will look something like
 this:
 
-    # https://juju.ubuntu.com/docs/config-aws.html
+    # https://jujucharms.com/docs/config-aws.html
         amazon:
             type: ec2
             # region specifies the EC2 region. It defaults to us-east-1.

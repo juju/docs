@@ -30,7 +30,7 @@ To install vagrant and the other required tools on Ubuntu, run:
 1. Fetch and install VirtualBox from
 [virtualbox.org](https://www.virtualbox.org/)
 2. Install Vagrant from
-[vagrantup.com](http://www.vagrantup.com/downloads.html)
+[vagrantup.com](https://www.vagrantup.com/downloads.html)
 3. (optional) Install Sshuttle. You can do this via `homebrew`: brew install sshuttle
 
 Or you can get the source from
@@ -39,9 +39,9 @@ Or you can get the source from
 ### Windows
 
 1. Fetch and install VirtualBox from [virtualbox.org](https://www.virtualbox.org/)
-2. Install Vagrant from [vagrantup.com](http://www.vagrantup.com/downloads.html)
+2. Install Vagrant from [vagrantup.com](https://www.vagrantup.com/downloads.html)
 3. (optional) Install Sshuttle. (This requires the [node.js binary for
-Windows](http://nodejs.org/download/))
+Windows](https://nodejs.org/download/))
 
 Run: `npm install sshuttle`
 
@@ -52,11 +52,11 @@ have put all our boxes on the Ubuntu Cloud Images site. The quick links are:
 
 ### 14.04 LTS:
 
-- [trusty-server-cloudimg-amd64-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box)
-- [trusty-server-cloudimg-i386-juju-vagrant-disk1.box](http://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-i386-juju-vagrant-disk1.box)
+- [trusty-server-cloudimg-amd64-juju-vagrant-disk1.box](https://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box)
+- [trusty-server-cloudimg-i386-juju-vagrant-disk1.box](https://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-i386-juju-vagrant-disk1.box)
 
 
-If you are unsure which one to fetch, use the 64-bit builds as most modern machines are now 64bit (x86_64 AMD64). If you need other versions of Ubuntu, check out the [Cloud Images](http://cloud-images.ubuntu.com/vagrant/). These
+If you are unsure which one to fetch, use the 64-bit builds as most modern machines are now 64bit (x86_64 AMD64). If you need other versions of Ubuntu, check out the [Cloud Images](https://cloud-images.ubuntu.com/vagrant/). These
 images are also listed on [Vagrant Cloud](https://vagrantcloud.com/ubuntu).
 
 ## Getting started!
@@ -75,7 +75,7 @@ and run:
 The URL can be from the list above or a local file if you have already
 downloaded a suitable box. For example:
 
-    vagrant box add JujuBox http://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box
+    vagrant box add JujuBox https://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box
 
 This will download the box from the URL you chose above. The box will be named
 "JujuBox".

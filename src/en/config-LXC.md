@@ -55,7 +55,7 @@ The generic configuration sections generated for the local provider will look
 something like this, though Juju will generate this automatically you usually
 don't need to edit it:
 
-    ## https://juju.ubuntu.com/get-started/local/
+    ## https://jujucharms.com/get-started/local/
     local:
         type: local
         admin-secret: 772b9471131c6b5883475e3908156d32

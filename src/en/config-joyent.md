@@ -13,7 +13,7 @@ This will generate a file, `environments.yaml`, which will live in your
 `~/.juju/` directory (and will create the directory if it doesn't already
 exist).
 
-**Note:** If you have an existing configuration, you can use `juju
+!!! Note: If you have an existing configuration, you can use `juju
 generate-config --show` to output the new config file, then copy and paste
 relevant areas in a text editor etc.
 
@@ -50,8 +50,14 @@ do to get Juju deploying services on Joyent is to set:
 - `manta-key-id` (finger print from uploaded ssh key -same as `sdc-key-id`)
 - `private-key-path` (if your private is not at `~/.ssh/id_rsa`)
 
-**Note:** If you are having issues with `private-key-path` we suggest you paste
-your Joyent _matching_ private key directly under the `private-key` value.
+!!! Note: The private key is currently uploaded to the cloud in order to 
+remotely sign requests to the Joyent API. It is highly recommended that the
+private key used in this way _should not_ be a common SSH key you use for other
+purposes, but a specific one used for the Joyent cloud.
+Until there is a more robust workaround, you are strongly urged to generate a 
+new keypair for use with the Joyent cloud, and either set that file in your 
+`private-key-path` or paste it directly into the configuration as a `private-key`
+value, instead of the `private-key-path`.
 Remember to indent properly and to append a `|` after `private-key` to span
 multiple lines.
 
@@ -62,5 +68,6 @@ name in the top-right and then the "Account" link from the drop down menu.
 ![Joyent Dashbard to access username and
 fingerprint](./media/getting_started-joyent-account-dropdown.png)
 
-**Note:** If you are having issues provisioning instances contact Joyent
-support @ [https://help.joyent.com/home](https://help.joyent.com/home)
+!!! Note: During intial setup if you are having issues deploying charms contact
+Joyent support @ [https://help.joyent.com/home](https://help.joyent.com/home) 
+to validate your account is enabled to provision virtual machines.

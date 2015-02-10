@@ -24,7 +24,7 @@ You can then copy and paste the needed section.
 The generic configuration sections generated for Windows Azure will look
 something like this:
 
-    # https://juju.ubuntu.com/docs/config-azure.html
+    # https://jujucharms.com/docs/config-azure.html
         azure:
             type: azure
             # location specifies the place where instances will be started,
@@ -53,7 +53,7 @@ something like this:
 
 This is the configuration environments.yaml file needed to run on Windows Azure.
 You will need to set the `management-subscription-id`,
-`management-certificate-path`, and `storage-account-name`, replacing the dummy 
+`management-certificate-path`, and `storage-account-name`, replacing the dummy
 values with the relevant details for your account.
 
 **Note:** Other than `location` the other key vaule defaults are recommended,
@@ -93,3 +93,16 @@ set then `storage-account-name:` must also have a storage set up in `West US`.
 Failure to do so will result in a group affinity error.
 
 Ensure the environments.yaml is configured with the above values and save.
+
+## Using Availability Sets
+
+With Azure, each Cloud Service has zero or more Availability Sets within it; 
+a Role can be assigned to at most one of them. As long as there are at least two
+Roles in the same Availability Set, then Azure will guarantee at least
+99.95% availability under the Azure Service Level Agreement (SLA).
+
+Juju creates a single Availability Set for each Cloud Service, and all roles
+are added to it. Thus, all Juju-deployed services are, by default, covered
+by the Azure SLA.
+
+You can [read more about Availability Sets on the Azure website](http://azure.microsoft.com/en-gb/documentation/articles/virtual-machines-manage-availability/)

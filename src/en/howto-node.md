@@ -15,7 +15,7 @@ deploy to a cloud, this is a powerful method for developing your application in
 an environment that more closely resembles production.
 
 Before moving on you should have gone through the [Getting
-Started](https://juju.ubuntu.com/docs/getting-started.html) section and
+Started](https://jujucharms.com/docs/getting-started.html) section and
 installed and configured Juju.
 
 ##  Basic Usage of the Node.js Charm
@@ -68,11 +68,11 @@ laptop and then push out to the public cloud.
 
 We need to configure 2 environments, a local one and a public cloud one.
 
-1. Configure the [local provider](https://juju.ubuntu.com/docs/config-local.html) on your machine. 
-1. Configure a public or private cloud on your machine. 
-  - [AWS](https://juju.ubuntu.com/docs/config-aws.html)
-  - [HP Cloud](https://juju.ubuntu.com/docs/config-hpcloud.html)
-  - [OpenStack](https://juju.ubuntu.com/docs/config-openstack.html)
+1. Configure the [local provider](config-local.html) on your machine.
+1. Configure a public or private cloud on your machine.
+  - [AWS](config-aws.html)
+  - [HP Cloud](config-hpcloud.html)
+  - [OpenStack](config-openstack.html)
 
 In this example the local environment is named `local` and we'll deploy to an
 AWS environment called `amazon`. First let's `switch` to the local environment
@@ -89,7 +89,7 @@ your github repo:
 
 Then deploy some basic services:
 
-    juju deploy --config ~/myapp.yaml node-app myapp 
+    juju deploy --config ~/myapp.yaml node-app myapp
     juju deploy mongodb
 
 relate them
@@ -121,7 +121,7 @@ environment:
 
     juju switch amazon
     juju bootstrap
-    juju deploy --config ~/myapp.yaml node-app myapp 
+    juju deploy --config ~/myapp.yaml node-app myapp
     juju deploy mongodb
     juju add-relation mongodb myapp
 
@@ -168,12 +168,12 @@ During the `install` hook,
 - clones your node app from the repo specified in `app_repo`
 - runs `npm` if your app contains `package.json`
 - configures networking if your app contains `config/config.js`
-- waits to be joined to a `mongodb` service 
+- waits to be joined to a `mongodb` service
 
 when related to a `mongodb` service, the formula
 
   - configures db access if your app contains `config/config.js`
-  - starts your node app as a service 
+  - starts your node app as a service
 
 ###  Charm configuration
 

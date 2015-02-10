@@ -5,6 +5,8 @@ don't happen quite as you expected. That's why Juju includes two tools to help
 you debug charm hooks: The `juju debug-hooks` command and the `juju debug-log`
 command.
 
+The [dhx debugging plugin](./authors-hook-debug-dhx.html) is also available.
+
 ##  The 'debug-hooks' command
 
 The `juju debug-hooks` command accepts a unit and an optional list of hooks to

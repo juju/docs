@@ -65,7 +65,7 @@ You can avoid this repetition by adding this environment variables in your shell
 The next step is to add an environment for Online Labs in your '~/.juju/environments.yaml'. This environment will look like the following:
 
 ```
-    # https://juju.ubuntu.com/docs/config-onlinelabs.html
+    # https://jujucharms.com/docs/config-onlinelabs.html
     onlinelabs:
         type: manual
         bootstrap-host: null

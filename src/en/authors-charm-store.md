@@ -9,14 +9,16 @@ call The Charm Store.
 
   - The main project page is here: [https://launchpad.net/charms](https://launchpad.net/charms)
   - There are useful tools for downloading, modifying, and contributing here: [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools)
-  - Here is the official tutorial for charm authors: [https://juju.ubuntu.com/docs/write-charm.html](https://juju.ubuntu.com/docs/write-charm.html)
-  - Here is the official tutorial for bundle authors: [https://juju.ubuntu.com/docs/charms-bundles.html](https://juju.ubuntu.com/docs/charms-bundles.html)
+  - Here is the official tutorial for charm authors: [https://jujucharms.com/docs/authors-charm-writing](authors-charm-writing)
+  - Here is the official tutorial for bundle authors: [https://jujucharms.com/docs/charms-bundles.html](charms-bundles.html)
 
 ## Charm Store Submission
 
 There are currently 2 methods to submit a charm and have it listed in the charm
 store. Both methods have their perks - but it is suggested to start with your
 personal namespace before asking for a charmer featured charm.
+
+!!! Note: if you are a member of the Charm Partner Program, you will want to ensure that your Charm gets into the Recommended Charms section of the Charm Store, so please follow the instructions in the [Recommended Charms](#recommended-charms) section below.
 
 ## Charm Store Process
 
@@ -37,7 +39,7 @@ You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
  possible so that users get the most flexibility:
 
   1. Install juju and charm-tools.
-  1. Create a repository, something like `mkdir -p ~/charms/precise`, precise is the release code name for the [release of Ubuntu](http://releases.ubuntu.com) you wish to target your charm at. You can also use `trusty` if you're submitting to that series.
+  1. Create a repository, something like `mkdir -p ~/charms/precise`; 'precise' is the release code name for the [release of Ubuntu](http://releases.ubuntu.com) you wish to target your charm at. You can also use `trusty` if you're submitting to that series.
   1. If you haven't created your charm yet, you can use `charm create ubuntu-package-name` which will fill in some basic metadata info for you. You can check to see if it already exists at [http://jujucharms.com/](http://jujucharms.com/). Also make sure to [check the list of open charms](http://goo.gl/mvtPh) to see if anybody is already working on a charm for the service you want to work on. Bugs which have had no activity by the assignee for more than 30 days are fair game and should be unassigned.
   1. Once your charm is working and tested with any compatible charms, make sure it passes `charm proof path/to/your/charm`
   1. `bzr init` in your charm's root directory
@@ -111,11 +113,11 @@ the launchpad [Developer Merge Proposal Documentation](https://dev.launchpad.net
 ### Recommended Charms
 
 To have your charm listed as a charmer team recommended charm, you have to
-under-go a rigorous review process where we evaluate the charm, evaluate tests
-for your charm, and deploy & run tests against the provided service with
+undergo a rigorous review process where the team evaluate the charm, evaluate 
+tests for your charm, and deploy & run tests against the provided service with
 different configuration patterns.
 
-after following the Submission Process outlined above:
+After following the Submission Process outlined above:
 
   1. File a bug against charms at [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug) This is used to track the progress of your charm.
   1. Now you just need to attach your branch to the bug report, go to [your code page](https://code.launchpad.net/people/+me), find your branch, and click on it. Then click on "Link a bug report", and put in the number of the bug you filed. If you are submitting to multiple releases please make one bug per release.

@@ -12,6 +12,7 @@
               <li class=" sub"><a href="config-local.html">Local</a></li>
               <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
               <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
+              <li class=" sub"><a href="config-general.html">General config options</a></li>
               <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
               <li class=""><a href="charms.html">Using Juju</a></li>
               <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
@@ -27,6 +28,7 @@
               <li class=" sub"><a href="juju-ha.html">Juju High Availability</a></li>
               <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
               <li class=" sub"><a href="charms-working-with-units.html">Working with Units</a></li>
+	      <li class=" sub"><a href="actions.html">Working with Actions</a></li>
               <li class=""><a href="howto.html">How to...</a></li>
               <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
               <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
@@ -45,6 +47,7 @@
               <li class=""><a href="authors-charm-components.html">Components of a charm</a></li>
               <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
               <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
+              <li class=" sub"><a href="authors-charm-actions.html">/actions and actions.yaml</a></li>
               <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
               <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
               <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
@@ -52,6 +55,7 @@
               <li class=" sub"><a href="authors-charm-interfaces.html">Implementing relations</a></li>
               <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
               <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
+              <li class=" sub"><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
               <li class="sub"><a href="authors-subordinate-services.html">Subordinate services</a></li>
               <li class="sub"><a href="authors-implicit-relations.html">Implicit Relations</a></li>
               <li class="sub"><a href="authors-testing.html">Charm Testing</a></li>

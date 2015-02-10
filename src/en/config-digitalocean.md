@@ -41,7 +41,7 @@ exist).
 You will need to add a section for Digital Ocean which will look like the
 following:
 
-    # https://juju.ubuntu.com/docs/config-digitalocean.html
+    # https://jujucharms.com/docs/config-digitalocean.html
         digitalocean:
             type: manual
             bootstrap-host: null
