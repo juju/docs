@@ -264,7 +264,7 @@ Now generate relevant metadata for the tools by running the command:
 
     juju metadata generate-tools -d <tools_dir>
 
-Finally, the contents of  can be uploaded to a location in the Juju metadata
+Finally, the contents of `<tools_dir>` can be uploaded to a location in the Juju metadata
 search path. As per the Configuration section, this may be somewhere specified
 by the tools-metadata-url setting or the cloud's storage path settings etc.
 
@@ -272,12 +272,12 @@ Examples:
 
 1. tools-metadata-url
 
-  - upload contents of  to `http://somelocation`
+  - upload contents of `<tools_dir>` to `http://somelocation`
   - set tools-metadata-url to `http://somelocation/tools`
 
 2. Cloud storage
 
-  - upload contents of  directly to environment's cloud storage
+  - upload contents of `<tools_dir>` directly to environment's cloud storage
 
 As with image metadata, the validation command is used to ensure tools are
 available for Juju to use:
