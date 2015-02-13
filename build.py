@@ -159,6 +159,9 @@ class DocBuilder(object):
         '''
         Simplify the process of checking out a git branch or tag.
         '''
+        if self.repo.is_dirty():
+            logging.info('skipping checkout; the repo has unsaved changes')
+            return
         if ref == 'latest':
             ref = self.config['default_branch']
         try:
