@@ -22,7 +22,6 @@ The following files will be treated specially, if present:
  - `/actions` must be a directory holding executables with specific names, which the user may invoke through Juju as desired.  [Adding actions to a charm is described here.](./authors-charm-actions.html)
  - `actions.yaml` specifies charm actions and their schemas, and must be defined if `/actions` is used. [See here for more on creating charm actions.](./authors-charm-actions.html)
  - `config.yaml` defines service configuration options.[ The config.yaml file is descibed more fully here](./authors-charm-config.html).
- - `actions.yaml` defines juju actions and valid parameters. [The actions.yaml file is described here](./authors-charm-actions.html)
  - `icon.svg` is used to identify your charm in the GUI and in the charm store.[See the walkthrough for creating an icon.](authors-charm-icon.html)
  - `README` is made available in the charm store. It should be comprehensible to a reasonably ignorant user.
  - `revision` is now deprecated.
