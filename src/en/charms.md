@@ -1,5 +1,4 @@
 # Introducing Charms
-## Missing Words
 
 The magic behind Juju is a collection of software components called charms.
 These are the encapsulated knowledge of how to properly deploy and configure
