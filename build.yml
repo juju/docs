@@ -1,0 +1,7 @@
+site_dir: htmldocs
+default_branch: master
+docs_dir: src
+theme_dir: ubuntu_theme
+template_file: ubuntu_theme/base.tpl
+nav_file: ubuntu_theme/navigation.tpl
+versions: [versioned-docs]

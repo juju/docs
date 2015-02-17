@@ -1,3 +1,4 @@
 *.pyc
-htmldocs/*.html
+htmldocs
+.vagrant
 *.swp
