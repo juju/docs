@@ -44,8 +44,6 @@ class DocBuilder(object):
         original_ref = self.repo.head.reference
         try:
             # Grab the correct version.
-            assert not self.repo.bare
-            assert not self.repo.is_dirty()
             self.checkout(version)
 
             # Load markdown files.
@@ -159,6 +157,7 @@ class DocBuilder(object):
         '''
         Simplify the process of checking out a git branch or tag.
         '''
+        assert not self.repo.bare
         if self.repo.is_dirty():
             logging.info('skipping checkout; the repo has unsaved changes')
             return
