@@ -18,17 +18,17 @@ The versions covered here are:
   juju-core 1.21.3 is available for utopic and backported to earlier
   series in the following PPA:
 
-    ```
-    https://launchpad.net/~juju/+archive/stable
-    ```
-
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+  
   Windows and OS X users will find installers at:
-
-    ```
-    https://launchpad.net/juju-core/+milestone/1.21.3
-    ```
-
-
+  
+  ```
+  https://launchpad.net/juju-core/+milestone/1.21.3
+  ```
+  
+  
   ## Notable Changes
 
   This releases addresses stability and performance issues.
