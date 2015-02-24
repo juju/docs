@@ -7,6 +7,84 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^#juju-core 1.21.3
+
+  A new stable release of Juju, juju-core 1.21.3, is released.
+  This release may replaces 1.21.1.
+
+
+  ## Getting Juju
+
+  juju-core 1.21.3 is available for utopic and backported to earlier
+  series in the following PPA:
+
+    ```
+    https://launchpad.net/~juju/+archive/stable
+    ```
+
+  Windows and OS X users will find installers at:
+
+    ```
+    https://launchpad.net/juju-core/+milestone/1.21.3
+    ```
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+  * Unable to override network-bridge if container type is kvm (local
+    provider)
+    Lp 1416134
+
+  * Src/bitbucket.org/kardianos/osext/license is wrong
+    Lp 1416425
+
+  * Github.com/juju/syslog has contradicting licensing info
+    Lp 1416433
+
+  * Some files refer to an include license file that is not included
+    Lp 1416430
+
+  * Github.com/juju/utils has contradictory licence info
+    Lp 1416436
+
+  * Juju restore no longer works with azure: error: cannot re-bootstrap
+    environment: cannot determine state server instances: environment is
+    not bootstrapped
+    Lp 1417178
+
+  * Unit ports not populated by api megawatcher
+    Lp 1418433
+
+  * Apt-proxy can be incorrectly set when the fallback from http-proxy
+    is used
+    Lp 1417617
+
+  * Juju agent using lxcbr0 address as apiaddress instead of juju-br0
+    breaks agents
+    Lp 1416928
+
+  * Juju-quickstart: bad api server response: 'nonetype' object is not
+    iterable
+    Lp 1420403
+
+  * Error juju.worker runner.go:219 exited "rsyslog": x509: certificate
+    signed by unknown authority
+    Lp 1417875
+
+  * Juju references old dns-name and ip addresses after restore. (failed
+    juju ssh)
+    Lp 1420316
+
+  * Ensure-availability fails with 'failed to find any voting machines'
+    after backup/restore.
+    Lp 1420306
+
+
 ^# juju-core 1.21.1
 
   A new stable release of Juju, juju-core 1.21.1, is now available.
