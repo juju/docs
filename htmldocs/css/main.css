@@ -551,10 +551,17 @@ hr {
   font-weight: 600;
 }
 
-dl { border: 1px dotted #aaa; padding: 0.5em; background: #eeeeee; } 
-dt { float: left; clear: left; width: 100px; text-align: left; font-weight: bold; color: #000; } 
-dd { margin: 0 0 0 110px; padding: 0 0 0.5em 0; }
+dl {
+  border: 1px dotted #aaa;
+  padding: 0.5em;
+  background: #eeeeee;
+  margin-bottom: .75em;
+} 
+dt { float: left; clear: left; width: 130px; text-align: left; font-weight: bold; color: #000; } 
+dd { margin: 0 0 0 140px; padding: 0 0 0.5em 0; }
 dd:before { content: "- "; }
+dd.instruction:before  { content: none; }
+
 
 li img {
   margin-top: 10px;
@@ -585,4 +592,6 @@ h5:hover .anchor {
   background-color: #ddd;
   border-radius: 2px;
 }
-
+td pre {
+  text-align: left;
+}

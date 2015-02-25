@@ -82,6 +82,7 @@
               <li class="sub"><a href="commands.html">Juju commands</a></li>
               <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
               <li class="sub"><a href="reference-environment-variables.html">Juju environment variables</a></li>
+              <li class="sub"><a href="reference-releases.html">Releases</a></li>
               <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
               <li class="sub"><a href="glossary.html">Glossary</a></li>
               <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
