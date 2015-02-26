@@ -3,7 +3,7 @@
 
 function build() {
    echo "Converting $(basename $1)"
-   txt=`markdown_py -x callouts -x partial_gfm -x anchors_away -x foldouts -x meta $1`
+   txt=`markdown_py -x callouts -x partial_gfm -x anchors_away -x foldouts -x meta -x def_list -x attr_list $1`
    DOCNAV="$(cat src/navigation.tpl)" CONTENT=$txt cheetah fill --stdout --env src/base.tpl > htmldocs/`basename ${1%.*}`.html
 }
 
