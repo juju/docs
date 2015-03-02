@@ -31,6 +31,7 @@ git fetch > /dev/null 2>&1
 while [ $# -ne 0 ]
 do
   version=${1}
+  git branch --track ${version} > /dev/null 2>&1
   echo "Fetching version \"${version}\"..."
   git clone --branch "${version}" --single-branch . "${output_dir}/${version}" \
     > /dev/null 2>&1
