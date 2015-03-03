@@ -83,7 +83,7 @@ you can gather the following information:
   - Click New (bottom left)
   - Click Quick Create
   - Add a name in url (for example `juju0useast0`). This is the value to be used for `storage-account-name`.
-  - Select Location (for example: East US)
+  - Select Location (for example: West US)
   - Select Subscription
   - Disable "Enable Geo-Replication" (not applicable)
 
