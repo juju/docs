@@ -1,3 +1,5 @@
+Title: The hook environment, hook tools and how hooks are run
+
 # How hooks are run
 
 When a charm is deployed onto a unit, the raw charm is extracted into a
@@ -81,20 +83,21 @@ they're running in a relation hook, the current relation identifier is set as
 the default; and if they're running in a -joined, -changed, or -broken hook, 
 the current remote unit is set as the default.
 
-Best use of relation hooks will be made by those who understand the [relation
-model](./authors-relations-in-depth.html).
+To use relation hooks effectively, you should spend time making sure you 
+understand the [relation model](./authors-relations-in-depth.html).
 
 ### juju-log
 
 `juju-log` writes its arguments directly to the unit's log file. All hook
-output is currently logged anyway, so it's theoretically redundant with `echo`,
-but this is an implementation detail and should not be depended upon. If it's
-important, please `juju-log` it.
+output is currently logged anyway, though this may not always be the case - If 
+it's important, please `juju-log` it.
 
-    juju-log "some important text"
+```
+juju-log "some important text"
+```
 
-It accepts a `--debug` flag which causes the message to be logged at `DEBUG`
-level; in all other cases it's logged at `INFO` level.
+This tool accepts a `--debug` flag which causes the message to be logged at
+`DEBUG` level; in all other cases it's logged at `INFO` level.
 
 ### unit-get
 
@@ -102,10 +105,12 @@ level; in all other cases it's logged at `INFO` level.
 argument, which must be `private-address` or `public-address`. It is not
 affected by context:
 
-    unit-get private-address
-    10.0.1.101
-    unit-get public-address
-    foo.example.com
+```
+unit-get private-address
+10.0.1.101
+unit-get public-address
+foo.example.com
+```
 
 ### config-get
 
@@ -119,50 +124,77 @@ config keys are reported as having a value of nil, and do not return an error.
 
 Getting the interesting bits of the config is done with:
 
-    config-get
-    key: some-value
-    another-key: default-value
+```
+config-get
+key: some-value
+another-key: default-value
+```
 
 To get the whole config including the nulls:
 
-    config-get --all
-    key: some-value
-    another-key: default-value
-    no-default: null
+```
+config-get --all
+key: some-value
+another-key: default-value
+no-default: null
+```
 
 To retrieve a specific value pass its key as argument:
 
-    config-get [key]
-    some-value
+```
+config-get [key]
+some-value
+```
 
-The command can also be call if no value is set and no default is set of even
+This command will also work if no value is set and no default is set or even
 if the setting doesn't exist. In both cases nothing will be returned.
 
-    config-get [key-with-no-default]
-    config-get [missing-key]
+```
+config-get [key-with-no-default]
+config-get [missing-key]
+```
 
 !!! Note: The above two examples are not misprints - asking for a value which
 doesn't exist or has not been set returns nothing and raises no errors.
 
 ### open-port
 
-`open-port` marks a port on the local system as appropriate to open, if and when
-the service is exposed to the outside world. It accepts a single port with an
-optional protocol, which may be `udp` or `tcp`, where `tcp` is the default.
+`open-port` marks a port or range of ports on the local system as appropriate to
+open, if and when the service is exposed to the outside world. It accepts a
+single port or range of ports with an optional protocol, which may be `udp` or
+`tcp`, where `tcp` is the default.
 
 Examples:
 
 Open 80/tcp if and when the service is exposed:
 
-    open-port 80
+```
+open-port 80
+```
 
 Open 1234/udp if and when the service is exposed:
 
-    open-port 1234/udp
+```
+open-port 1234/udp
+```
+
+Open the range 8000 to 8080:
+
+```
+open 8000-8080/tcp
+```
 
 `open-port` will not have any effect if the service is not exposed, and may have
-a somewhat delayed effect even if it is. It accepts and ignores `--format`,
-because it doesn't produce any output.
+a somewhat delayed effect even if it is. This operation is transactional, so 
+changes will certainly not be made unless the hook exits successfully.
+
+Juju also tracks ports opened across the machine and will not allow conflicts - 
+if another charm has already opened the port 
+(**or one or more ports in a range**) you have specified,
+your request will be ignored. 
+ 
+This command accepts and ignores `--format` for
+compatibility purposes, but it doesn't produce any output.
 
 ### close-port
 
@@ -174,11 +206,43 @@ Examples:
 
 Close 1234/udp if it was open:
 
-    close-port 1234/udp
+```
+close-port 1234/udp
+```
 
 Close port 80 if it was open:
 
-    close-port 80
+```
+close-port 80
+```
+
+Close a range of ports:
+
+```
+close-port 80-100
+```
+
+### opened-ports
+
+The opened-ports hook tool lists all the ports currently opened 
+**by the running charm**. It does not, at the moment, include ports which may
+be opened by other charms co-hosted on the same machine
+[lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770). 
+
+The command returns a list of one port or range of ports per line, with the port
+number followed by the protocol (tcp or udp).
+
+For example, running `opened-ports` may return:
+
+```
+70-80/tcp
+81/tcp
+```
+
+!!!Note: opening ports is transactional (i.e. will take place on successfuly 
+exiting the current hook), and therefore `opened-ports` will not return any
+values for pending `open-port` operations run from within the same hook. 
+
 
 ### relation-set
 
@@ -194,21 +258,29 @@ Examples:
 Setting a pair of values for the local unit in the default relation identifier 
 which is stored in the environment variable `JUJU_RELATION_ID`:
 
-    echo $JUJU_RELATION_ID
-    server:3
+```
+echo $JUJU_RELATION_ID
+server:3
+```
 
 The setting is done with:
 
-    relation-set username=bob password=2db673e81ffa264c
+```
+relation-set username=bob password=2db673e81ffa264c
+```
 
 To set the pair of values for the local unit in a specific relation specify the
 relation identifier:
 
-    relation-set -r server:3 username=jim password=12345
+```
+relation-set -r server:3 username=jim password=12345
+```
 
 To clear a value for the local unit in the default relation enter:
 
-    relation-set deprecated-or-unused=
+```
+relation-set deprecated-or-unused=
+```
 
 `relation-set` is the single tool at your disposal for communicating your own
 configuration to units of related services. At least by convention, the charm
@@ -246,37 +318,49 @@ settings, use `-` for the first argument.
 
 The environment variable `JUJU_REMOTE_UNIT` stores the default remote unit:
 
-    echo $JUJU_REMOTE_UNIT
-    mongodb/2
+```
+echo $JUJU_REMOTE_UNIT
+ mongodb/2
+```
 
 Getting the settings of the default unit in the default relation is done with:
 
-    relation-get
-    username: jim
-    password: "12345"
+```
+relation-get
+ username: jim
+ password: "12345"
+```
 
-To get one setting from the default remote unit in the default relation enter:
+To get a specific setting from the default remote unit in the default relation
+you would instead use:
 
-    relation-get username
-    jim
+    
+```
+relation-get username
+ jim
+```
 
 To get all settings from a particular remote unit in a particular relation you
-specify them together with the command.
+specify them together with the command:
 
-    relation-get -r database:7 - mongodb/5
-    username: bob
-    password: 2db673e81ffa264c
+```
+relation-get -r database:7 - mongodb/5
+ username: bob
+ password: 2db673e81ffa264c
+```
 
 Note that `relation-get` produces results that are _consistent_ but not
 necessarily _accurate_, in that you will always see settings that:
 
   - were accurate at some point in the reasonably recent past
   - are always the same within a single hook run...
-  - _except_ when inspecting the unit's own relation settings, in which case local changes from `relation-set` will be seen correctly.
+  - _except_ when inspecting the unit's own relation settings, in which case
+    local changes from `relation-set` will be seen correctly.
 
 You should never depend upon the presence of any given key in `relation-get`
 output. Processing that depends on specific values (other than `private-address`) 
-should be restricted to [-changed](authors-charm-hooks.html#[name]-relation-changed) hooks for the relevant unit, and the absence
+should be restricted to [-changed](authors-charm-hooks.html#[name]-relation-changed)
+hooks for the relevant unit, and the absence
 of a remote unit's value should never be treated as an
 [error](./authors-hook-errors.html) in the local unit.
 
@@ -305,17 +389,23 @@ specified with a relation identifier similar to the`relation-get` and
 
 Examples:
 
-To show all remote units for the current relation identifier enter:
+To show all remote units for the current relation identifier:
 
-    relation-list
-    mongodb/0
-    mongodb/2
-    mongodb/3
+```relation-list```
 
+Which should return something similar to:
+
+```
+mongodb/0
+mongodb/2
+mongodb/3
+```
 All remote units in a specific relation identifier can be shown with:
 
-    relation-list -r website:2
-    haproxy/0
+```
+relation-list -r website:2
+ haproxy/0
+```
 
 ### relation-ids
 
@@ -330,15 +420,20 @@ Examples:
 The current relation name is stored in the environment variable 
 `JUJU_RELATION`. All "server" relation identifiers can be shown with:
 
-    relation-ids
-    server:1
-    server:7
-    server:9
+```
+relation-ids
+server:1
+server:7
+server:9
+```
 
-To show all relation identifiers with a different name pass it as argument:
+To show all relation identifiers with a different name pass it as an argument -
+for example:
 
-    relation-ids reverseproxy
+```
+relation-ids reverseproxy
     reverseproxy:3
+```
 
 Note again that all commands that produce output accept `--format json` and
 `--format yaml`, and you may consider it smarter to use those for clarity's 
