@@ -99,6 +99,43 @@ juju-log "some important text"
 This tool accepts a `--debug` flag which causes the message to be logged at
 `DEBUG` level; in all other cases it's logged at `INFO` level.
 
+### juju-reboot [--now]
+
+There are several cases where a charm needs to reboot a machine, such as 
+after a kernel upgrade, or to upgrade the entire system. The charm may not
+be able to complete the hook until the machine is rebooted.
+
+The juju-reboot command allows charm authors to schedule a reboot from inside
+a charm hook. The reboot will only happen if the hook completes without error. 
+You can schedule a reboot like so:
+
+```
+juju-reboot
+```
+
+The `--now` option can be passed to block hook execution. in this case the
+`juju-reboot` command will hang until the unit agent stops the hook and 
+re-queues it for the next run. This will allow you to create multi-step 
+install hooks.
+
+Charm authors must wrap calls to juju-reboot to ensure it is actually 
+necessary, otherwise the charm risks entering a reboot loop. The preferred
+work-flow is to check if the feature/charm is in the desired state, and
+reboot when needed. This bash example assumes that "$FEATURE_IS_INSTALLED"
+variable was defined by a check for the feature, then 'juju-reboot' is
+called if the variable is false:
+
+```
+if [[ $FEATURE_IS_INSTALLED  == "false" ]]
+then
+    install_feature
+    juju-reboot --now
+fi
+```
+
+The `juju-reboot` command can be called from any hook. It can also be 
+called using the `juju run` command.
+
 ### unit-get
 
 `unit-get` returns information about the local unit. It accepts a single
