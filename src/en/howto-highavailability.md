@@ -10,10 +10,18 @@ if omitted 3 will be used, the number must be odd, to avoid ties when the
 master is voted among all the State Servers; due to constraints of the 
 underlying persistence layer the maximum number is 7
 
+For more precise management, it is also possible to specify the machines 
+to use for the extra state servers, e.g.:
+
+```
+juju ensure-availability -n 3 --to name1,name2
+```
+
 Once it has been run, every subsequent run (without `-n`) will make juju
 ensure that there are at least the last requested number of State Servers;
 bare in mind that this number can be increased by calling it again with 
-`-n` but currently there is no way to decrease it (but its planned).
+`-n` but currently there is no way to decrease it (planned for a future 
+release).
 
 The ability to recover is limited by the remaining amount of State Servers;
 to be able to recover half the Servers need to be up, for instance if you
