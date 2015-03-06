@@ -13,6 +13,19 @@ list](https://lists.ubuntu.com/mailman/listinfo/juju) with some ideas on what
 you'd like to see added. Ideally we'd like to document all sorts of great ideas
 on how people are using Juju.
 
+## Best Practice Tips for using Juju in general
+
+- Check out the [Juju cheat sheet](https://github.com/juju/cheatsheet)
+- Check out the [Juju plugins](https://github.com/juju/plugins)
+- if you run under "local" environment and your LXC machine get unexpected network errors try [disabling IPv6](http://askubuntu.com/questions/440649/how-to-disable-ipv6-in-ubuntu-14-04) on the main host.
+
+## Best Practice Tips for Charm Authors
+
+- Avoid symlinks if you can, people can use Windows for charms. If you prefer having your hook code in one file you can achieve the same affect by stubbing hooks which import your hooks.py file and invoke the methods that are wrapped with the Hook decorator.
+- Juju can also run on other Linuxes, so if you want to make something more agnostic, you can leverage configuration management tools for things like the installation hooks to abstract those bits.
+- If you need to deploy things offline or on a network restricted network, consider using [Juju resources](http://pythonhosted.org/jujuresources/).
+- Implement a pattern that can be easily unit testable, and submit unit tests with your charm.
+
 ## Juju Best Practices and Tips from Canonical's Infrastructure Team
 
 Since Canonical IS uses Juju in production they have certain requirements from
