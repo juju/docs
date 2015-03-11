@@ -289,4 +289,4 @@ defacto standard.
 Below is a list of the interfaces for which we have compiled documentation and
 reference implementations.
 
-  - [ mysql ](/interface-mysql.html) - the database interface used by MySQL and client services.
+  - [ mysql ](interface-mysql.html) - the database interface used by MySQL and client services.
