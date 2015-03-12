@@ -36,8 +36,7 @@ Windows
 
 ## Proposed
 
-No version is currently proposed to become stable.
-The current version in proposed is identical to stable.
+The current proposed stable version of Juju is 1.22.0.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
@@ -52,11 +51,11 @@ sudo apt-get install juju-core</pre>
 {: .instruction }
 
 OS X
-: [juju-1.21.3-osx.tar.gz](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-1.21.3-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-1.21.3-osx.tar.gz/+md5))
+: [juju-1.22.0-osx.tar.gz](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-1.22.0-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-1.22.0-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.21.3-signed.exe](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-setup-1.21.3-signed.exe) ([md5](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-1.21.3-osx.tar.gz/+md5))
+: [juju-setup-1.22.0.exe](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0.exe/+md5))
 {: .instruction }
 
 Proposed releases use the 'proposed' simple-streams. You must configure
@@ -68,7 +67,9 @@ juju agents.
 
 ## Development
 
-The current development release is 1.22-beta5.
+No version is currently in development for testing.
+The next development release will be for the 1.23 series.
+The previous development release was 1.22-beta5
 
 Development releases provide new features that are being stablised.
 These releases are *not* suitable for production environments. Upgrading
