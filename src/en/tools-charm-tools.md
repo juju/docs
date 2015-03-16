@@ -259,7 +259,7 @@ pass charm store review policy.
     juju charm review-queue [-h|--help]
 
 This provides a copy of the [juju charms review
-queue](http://manage.jujucharms.com/review-queue) which is used by ~charmers to
+queue](http://review.juju.solutions) which is used by ~charmers to
 know which charms are available for review.
 
 * * *
@@ -269,7 +269,7 @@ know which charms are available for review.
     juju charm search [-h|--help]
 
 This provides a copy of the [juju charms review
-queue](http://manage.jujucharms.com/review-queue) which is used by ~charmers to
+queue](http://review.juju.solutions) which is used by ~charmers to
 know which charms are available for review.
 
 * * *
