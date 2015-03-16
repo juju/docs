@@ -18,7 +18,10 @@ and thus lighten the development workload on everyone.
 - Use your best judgement.
 - Send a brief mail after your stint, to say what you did and how it worked out. If you have feedback on the review system or the process, speak up.
 - You're not obliged to deal with all the open patches. We appreciate what you do do.
-- You can prioritize whichever you think best achieves the goal of helping people enjoy getting things done in Juju. That might be the newest ones, neglected patches, easy patches, or those from new contributors. The [Review Queue](http://manage.jujucharms.com/tools/review-queue) sorts by age.
+- You can prioritize whichever you think best achieves the goal of helping
+  people enjoy getting things done in Juju. That might be the newest ones,
+neglected patches, easy patches, or those from new contributors. The [Review
+Queue](http://review.juju.solutions) sorts by age.
 - If you are unfamiliar with the package, make sure you review everything you can, it's not necessarily your job to merge/promulgate it. If, after you did your review, you can get the contributor in touch with somebody who knows the codebase better, you already helped out a lot.
 - Consider blogging about a particularly nice contribution. This will not only make the contributor feel valued, but also inspire others with a good example of great work.
 - Encourage contributors to apply for ~charmers if you think they're ready.
