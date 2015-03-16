@@ -26,12 +26,12 @@ resources. The following command will deploy juju-gui to an existing machine 1:
 Check `juju help deploy` to find out more about this option, and whether or not
 it is available in your version.
 
-**Note:** If you are deploying behind a firewall, make sure to check out the charm's [README](https://jujucharms.com/fullscreen/search/precise/juju-gui/#bws-readme) for more information on getting the GUI up and running and talking to your environment
+**Note:** If you are deploying behind a firewall, make sure to check out the charm's [README](https://jujucharms.com/juju-gui/) for more information on getting the GUI up and running and talking to your environment
 
 ## Configuration
 
 There are a few pertinent configuration options that might help you when working with the GUI. You can read about all of them on the GUI's [charm
-page](https://jujucharms.com/fullscreen/search/precise/juju-gui/), but there is
+page](https://jujucharms.com/juju-gui/), but there is
 one that is worth discussing immediately:
 
 read-only
