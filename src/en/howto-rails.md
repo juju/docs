@@ -154,13 +154,13 @@ The local containers survive reboots and do not go away until you explicitly
 tear the environment down. Now that your coworkers have seen your great
 application let's also stop spending money:
 
-    $ juju destroy-environment -e amazon
-    $ juju destroy-environment -e local
+    juju destroy-environment -e amazon
+    juju destroy-environment -e local
 
 ##  Charm Details
 
 This document just scratches the surface of what is possible with the Rails
 charm, for more deployment options, including support for more databases,
 integrated logging with Logstash/Kibana, and Nagios integration, make sure you
-check out the [Charm README](https://jujucharms.com/precise/rails-HEAD/) for
+check out the [Charm README](https://jujucharms.com/rails) for
 more information.
