@@ -26,6 +26,19 @@ on how people are using Juju.
 - If you need to deploy things offline or on a network restricted network, consider using [Juju resources](http://pythonhosted.org/jujuresources/).
 - Implement a pattern that can be easily unit testable, and submit unit tests with your charm.
 
+## Examples of Best Practice Charms
+
+Here is a list of charms that leverage a particular technology that you might want to look at as examples:
+
+- Ansible integration - The [ElasticSearch charm](http://jujucharms.com/elasticsearch)
+- Chef integration - The [Rails charm](http://jujucharms.com/rails)
+- Puppet integration - Work in Progress with someone at Puppet Labs.
+- Charm written in Python - Any of the [Zabbix charms](https://jujucharms.com/q/zabbix)
+- Tomcat integration - The [OpenBook charm](http://jujucharms.com/openbook) or the [OpenMRS charm](http://jujucharms.com/openmrs)
+- Choosing a Java SDK based on target platform (useful for POWER8) - Check out the big data branch of [charm tools](http://bazaar.launchpad.net/~bigdata-dev/bigdata-data/trunk/view/head:/common/noarch/java-installer.sh). (Temporary location, this will be incorporated into charm tools soon.)
+- Example cinder charm - The [cinder-vnx charm](http://jujucharms.com/cinder-vnx), use this if you're interested in adding support for your specific storage hardware to Ubuntu OpenStack.
+- Example neutron charm - The [neutron-openvswitch charm](http://jujucharms.com/neutron-openvswitch), use this if you're interested in adding support for your specific networking hardware to Ubuntu OpenStack.
+
 ## Juju Best Practices and Tips from Canonical's Infrastructure Team
 
 Since Canonical IS uses Juju in production they have certain requirements from
