@@ -1,4 +1,4 @@
-# Juju Actions (DRAFT)
+# Juju Actions
 
 Juju Charms can describe Actions that users can take on deployed services.  [More on Actions for Charm authors here](authors-charm-actions.html).
 
@@ -6,20 +6,20 @@ Actions are scripts that can be triggered on a unit by the Juju user via CLI or 
 
 Actions are sub-commands of the `juju action` command.  For more on their usage, you can use `juju action help` to see more details.
 
-As Actions are a work in progress in Juju 1.22, they are only enabled in the CLI when `JUJU_DEV_FEATURE_FLAG=actions`.
+Actions are exposed as of Juju 1.23.  In Juju 1.22, they are only enabled in the CLI when `JUJU_DEV_FEATURE_FLAG=actions` is set.
 
 The following subcommands are specified:
 
 ```
-defined - WIP: show actions defined for a service
-do      - WIP: queue an action for execution
-fetch   - WIP: show results of an action by UUID
-status  - WIP: show results of an action by identifier
+defined - show actions defined for a service
+do      - queue an action for execution
+fetch   - show results of an action by ID
+status  - show results of all actions filtered by optional ID prefix
 ```
 
 ## Action commands 
 
-### juju action defined
+### `juju action defined`
 
 A user can list the actions defined on a service.
 
@@ -63,33 +63,33 @@ run:
 
 ### juju action do
 
-A user can trigger an Action from the command-line, passing an optional YAML file as parameters, or defining parameters directly via the CLI.  The UUID of the Action will be shown, for use with `juju action fetch <UUID>`.
+A user can trigger an Action from the command-line, passing an optional YAML file as parameters, or defining parameters directly via the CLI.  The UUID of the Action will be shown, for use with `juju action fetch <ID>`.
 
 ```bash
 juju action do mysql/0 backup
-Action queued with id: <UUID>
+Action queued with id: <ID>
 
 juju action do mysql/0 tpcc
 ERROR action "tpcc" not defined on unit "mysql/0"
 
 juju action do mysql/0 benchmark
-Action queued with id: <UUID>
+Action queued with id: <ID>
 
 juju action do mysql/0 benchmark --parameters bm.yaml
-Action queued with id: <UUID>
+Action queued with id: <ID>
 
 juju action do mysql/0 restart
-Action queued with id: <UUID>
+Action queued with id: <ID>
 ```
 
 The user may also provide params directly via the command-line.
 
 ```bash
 juju action do mysql/0 benchmark bench="foo"
-Action queued with id: <UUID>
+Action queued with id: <ID>
 
 juju action do mysql/0 benchmark bench.kind="foo" bench.speed="fast"
-Action queued with id: <UUID>
+Action queued with id: <ID>
 ```
 
 For complex schemas, the user may define params in a YAML file.  The user may also overwrite values via the command-line:
@@ -105,15 +105,15 @@ bench:
 
 ```bash
 juju action do mysql/0 bench --params=path/to/params.yml bench.speed=slow
-Action queued with id: <UUID>
+Action queued with id: <ID>
 ```
 
 ### juju action fetch
 
-The user may fetch the results of an Action by UUID:
+The user may fetch the results of an Action by ID:
 
 ```bash
-juju action fetch <UUID>
+juju action fetch <ID>
 message: <any error message>
 results:
 # An arbitrary YAML map set by the Action.
@@ -126,15 +126,15 @@ status: completed
 
 ### juju action status
 
-The user may look up the status of an Action by UUID:
+The user may look up the status of an Action by ID:
 
 ```bash
-juju action status <UUID>
+juju action status <ID>
 action: UUID
 status: running
 invoked: TIME
 
-juju action status <UUID>
+juju action status <ID>
 action: UUID
 status: failure
 failure: <message>
