@@ -11,7 +11,7 @@ current stable release to manage cloud deployments.
 
 ## Stable
 
-The current stable version of Juju is 1.21.3.
+The current stable version of Juju is 1.22.0.
 
 Stable juju is suitable for everyday production use.
 
@@ -26,17 +26,18 @@ OS X Homebrew
 {: .instruction }
 
 OS X
-: [juju-1.21.3-osx.tar.gz](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-1.21.3-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-1.21.3-osx.tar.gz/+md5))
+: [juju-1.22.0-osx.tar.gz](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-1.22.0-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-1.22.0-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.21.3-signed.exe](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-setup-1.21.3-signed.exe) ([md5](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-1.21.3-osx.tar.gz/+md5))
+: [juju-setup-1.22.0-signed.exe](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0-signed.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0-signed.exe/+md5))
 {: .instruction }
 
 
 ## Proposed
 
-The current proposed stable version of Juju is 1.22.0.
+No version is currently proposed to become stable.
+The current version in proposed is identical to stable.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
@@ -55,7 +56,7 @@ OS X
 {: .instruction }
 
 Windows
-: [juju-setup-1.22.0.exe](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0.exe/+md5))
+: [juju-setup-1.22.0-signed.exe](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0-signed.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0-signed.exe/+md5))
 {: .instruction }
 
 Proposed releases use the 'proposed' simple-streams. You must configure
