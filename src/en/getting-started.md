@@ -18,15 +18,20 @@ PPA:
     sudo add-apt-repository ppa:juju/stable
     sudo apt-get update && sudo apt-get install juju-core
 
+For more information on installing and the current versions available, see [the releases page](reference-releases.html).
+
 ## Mac OSX
 
 Juju is in [Homebrew](http://brew.sh/), to install do:
 
     brew install juju
 
+For more information on installing and the current versions available, see [the releases page](reference-releases.html).
+
 ## Windows
 
-Download and run the [Juju windows installer](https://juju.ubuntu.com/install/).
+See [the releases page](reference-releases.html) to download and run the
+latest version of the Juju Windows installer 
 
 # Configuring
 
