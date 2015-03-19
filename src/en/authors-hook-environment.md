@@ -33,8 +33,10 @@ The following variables are always available.
   - The `$PATH` variable is prefixed with the path to the hook tools directory.
   - The `$JUJU_UNIT_NAME` variable holds the name of the unit.
   - The `$JUJU_API_ADDRESSES` variable holds a space-separated list of API server addresses.
-
-In addition, every relation hook makes available relation-specific variables.
+  - The `$JUJU_AVAILABILITY_ZONE` variable holds the current availability zone
+the charm is running in (not all cloud providers support Availability Zones).
+   
+In addition, every relation hook makes available relation-specific variables:
 
   - The `$JUJU_RELATION` variable holds the relation name. This information
   is of limited value, because it's always the same as the part of the hook
