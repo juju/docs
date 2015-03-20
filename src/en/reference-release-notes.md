@@ -296,11 +296,11 @@ The versions covered here are:
           "Type": "Annotations",
           "Request": "Set",
           "Params": {
-               "Annotations": {{
+               "Annotations": { {
                    "EntityTag": a, "Annotations": pairs1
                    },{
                    "EntityTag": b, "Annotations": pairs2
-               }}
+               } }
       }
 
   The corresponding GET annotations call takes this form:
