@@ -15,7 +15,8 @@ class AnchorsProcessor(Treeprocessor):
         RE = re.compile(r'^h([1-9])$')
         for c in root:
             if RE.match(c.tag):
-                c.set('id', c.text.replace(' ', '-').lower())
+                if c.text:
+                    c.set('id', c.text.replace(' ', '-').lower())
         return root
 
 
