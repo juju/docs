@@ -32,7 +32,7 @@ while [ $# -ne 0 ]
 do
   version=${1}
   echo "Fetching version \"${version}\"..."
-  git branch --track "${version}" "origin/${version}"
+  git branch -f --track "${version}" "origin/${version}"
   git clone --branch "${version}" --single-branch . "${output_dir}/${version}"
   shift
 done
