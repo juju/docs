@@ -56,7 +56,8 @@ one-time setup operations only.
   - immediately after "install"
   - immediately after "upgrade-charm"
   - at least once when the unit agent is restarted (but, if the unit is in an [error state](./authors-hook-errors.html), it won't be run until after the error state is cleared).
-
+  - after changing charm configuration using a command line interface
+  
 It cannot assume that the software has already been started; it should not start
 stopped software, but should (if appropriate) restart running software to take
 configuration changes into account.
