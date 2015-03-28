@@ -115,14 +115,18 @@ Deploy your own private cloud on bare metal servers. If you want to evaluate Ope
 ## How does Juju use containers?
 Juju can use both Docker-style application containers and LXD-style system containers. Charms can use Docker to deliver, start, and stop the workload they are deploying. Juju administrators can use system containers just like virtual machines but without the overhead of virtualisation.
 For example, to deploy three different services onto three separate containers in “machine:0”:
+```
 juju deploy mysql --to machine:0/lxc
 juju deploy wordpress --to machine:0/lxc
 juju deploy haproxy --to machine:0/lxc
+```
 And if any of those charms use Docker then you would have Docker running the app inside an LXC system container! For extremely dense deployment on clouds or on laptops, containers offer much greater utilisation of the system capacity than traditional virtual machines.
-Where can I get enterprise-grade support for Juju and charms?
+
+## Where can I get enterprise-grade support for Juju and charms?
 Canonical, the company behind Ubuntu, provides commercial professional support for Juju.
-Landscape, our enterprise systems management tool, is included in all of our support packages. Check out Ubuntu Advantage, Canonical’s support programme, and choose the level of service you need:
-www.ubuntu.com/cloud/management
+L
+andscape, our enterprise systems management tool, is included in all of our support packages. Check out Ubuntu Advantage, Canonical’s support programme, and choose the level of service you need:
+[www.ubuntu.com/cloud/management](www.ubuntu.com/cloud/management)
 Where can I learn more?
 The Ubuntu Cloud pages give you an overview of our cloud suite and how Juju fits in:
 www.ubuntu.com/cloud
