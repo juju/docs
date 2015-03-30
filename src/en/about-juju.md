@@ -21,6 +21,8 @@ It is common for people to start creating a charm by bringing together the Puppe
 
 Even better, two different charms from different teams that use different tools will still happily work together to deploy a solution. In a large organisation, it is common for different teams choose different tools; Juju allows teams to pick whatever works for them and  their expertise in their services, but still reuse whatever they want from other teams.
 
+![charm diagram](./media/about-charms.png)
+
 Different service charms can use entirely different configuration management tools
 
 
@@ -101,26 +103,27 @@ Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure s
 <table>
   <tr>
     <td width=400>
-     <img src="x.png" alt="icon" class="tableicon">
-     <strong>Hadoop</strong><br>
+     <img src="./media/hadoop-icon-160.png" alt="icon" class="tableicon">
+     <strong>Hadoop &reg;</strong><br>
      Try one of the simple HDFS bundles or deploy a more complex sentiment-analysis application to look at twitter streams for brands you are interested in.
     </td>
     <td width=400>
-     <img src="x.png" alt="icon" class="tableicon" >
-     <strong>Cloud Foundry</strong><br>
+     <img src="./media/cfoundry-icon-160.png" alt="icon" class="tableicon" >
+     <strong>Cloud Foundry &trade;</strong><br>
      Spin up a multi-service PAAS on whichever cloud you like!
     </td> 
   </tr>
   <tr>
-    
     <td>
-    <img src="x.png" alt="icon" class="tableicon" >
-    <strong>Docker</strong><br>
-Try Kubernetes, the Docker management system from Google, on any cloud supported by Juju.</td>
+     <img src="./media/docker-icon-160.png" alt="icon" class="tableicon" >
+     <strong>Docker</strong><br>
+     Try Kubernetes, the Docker management system from Google, on any cloud supported by Juju.
+    </td>
     <td>
-    <img src="x.png" alt="icon" class="tableicon" >
-    <strong>OpenStack</strong><br>
-Deploy your own private cloud on bare metal servers. If you want to evaluate OpenStack, you can use Juju to spin it up on VMware too. Advanced users can use exactly the same charms to deploy OpenStack on top of any other cloud like AWS!</td> 
+     <img src="./media/openstack-icon-160.png" alt="icon" class="tableicon" >
+     <strong>OpenStack &trade;</strong><br>
+     Deploy your own private cloud on bare metal servers. If you want to evaluate OpenStack, you can use Juju to spin it up on VMware too. Advanced users can use exactly the same charms to deploy OpenStack on top of any other cloud like AWS!
+    </td> 
   </tr>
 </table>
 
@@ -139,15 +142,19 @@ And if any of those charms use Docker then you would have Docker running the app
 Canonical, the company behind Ubuntu, provides commercial professional support for Juju.
 
 Landscape, our enterprise systems management tool, is included in all of our support packages. Check out Ubuntu Advantage, Canonical’s support programme, and choose the level of service you need:
+
 [www.ubuntu.com/cloud/management](http://www.ubuntu.com/cloud/management)
 
 ## Where can I learn more?
 
 The Ubuntu Cloud pages give you an overview of our cloud suite and how Juju fits in:
+
 [www.ubuntu.com/cloud](http://www.ubuntu.com/cloud)
 
 The Juju community pages include information on charms, getting started, and lots more:
+
 [jujucharms.com/community](https://jujucharms.com/community)
 
 Ready to speak to us? Get in touch with Canonical now: 
+
 [www.ubuntu.com/management/contact-us](http://www.ubuntu.com/management/contact-us)
