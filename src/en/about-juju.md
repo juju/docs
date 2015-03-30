@@ -85,7 +85,7 @@ We do encourage the charming community to keep their charms open source in order
 
 Absolutely. A charm is just a collection of scripts and metadata. You can get started quickly by copying existing charms - respecting their license if they are copyleft!
 
-Use the language of your choice. It’s normal to get something quick-and-dirty working in bash, then switch to a more sophisticated language as the charm takes shape or becomes more complex. Charms are code - operational code - so you want to think of them that way. Use revision control from the start, collaborate with colleagues, and consider including test suites so you can automate quality control for deployments very easily. There are extra Juju charm tools [#REF] to make it easier to test charms,  and templates that get you started quickly.
+Use the language of your choice. It’s normal to get something quick-and-dirty working in bash, then switch to a more sophisticated language as the charm takes shape or becomes more complex. Charms are code - operational code - so you want to think of them that way. Use revision control from the start, collaborate with colleagues, and consider including test suites so you can automate quality control for deployments very easily. There are extra [Juju charm tools](tools-charm-tools.html) to make it easier to test charms, and templates that get you started quickly.
 
 If you want, you can also share your charm with the world and gain feedback and contributions from others! In our experience, the more widely a charm is used the more useful it becomes. Different teams bring different expertise - security, performance, scale, and all of those things make for improvements in the charm that are very hard for a single team to achieve.
 
@@ -97,20 +97,32 @@ What are the best workloads to try with Juju?
 
 Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure such as OpenStack, or container management systems. Pick your favourite cloud and launch a juju server, deploy the Juju GUI there and then drop one of the bundles from the charm store into the blank canvas.
 
-### Hadoop
-Try one of the simple HDFS bundles or deploy a more complex sentiment-analysis application to look at twitter streams for brands you are interested in.
-
-### Cloud Foundry
-Spin up a multi-service PAAS on whichever cloud you like!
-
-
-### Docker
-Try Kubernetes, the Docker management system from Google, on any cloud supported by Juju.
-
-### OpenStack
-Deploy your own private cloud on bare metal servers. If you want to evaluate OpenStack, you can use Juju to spin it up on VMware too. Advanced users can use exactly the same charms to deploy OpenStack on top of any other cloud like AWS!
-
-
+<style>.tableicon{width:100px;height:100px;float:right;}</style>
+<table>
+  <tr>
+    <td width=400>
+     <img src="x.png" alt="icon" class="tableicon">
+     <strong>Hadoop</strong><br>
+     Try one of the simple HDFS bundles or deploy a more complex sentiment-analysis application to look at twitter streams for brands you are interested in.
+    </td>
+    <td width=400>
+     <img src="x.png" alt="icon" class="tableicon" >
+     <strong>Cloud Foundry</strong><br>
+     Spin up a multi-service PAAS on whichever cloud you like!
+    </td> 
+  </tr>
+  <tr>
+    
+    <td>
+    <img src="x.png" alt="icon" class="tableicon" >
+    <strong>Docker</strong><br>
+Try Kubernetes, the Docker management system from Google, on any cloud supported by Juju.</td>
+    <td>
+    <img src="x.png" alt="icon" class="tableicon" >
+    <strong>OpenStack</strong><br>
+Deploy your own private cloud on bare metal servers. If you want to evaluate OpenStack, you can use Juju to spin it up on VMware too. Advanced users can use exactly the same charms to deploy OpenStack on top of any other cloud like AWS!</td> 
+  </tr>
+</table>
 
 ## How does Juju use containers?
 Juju can use both Docker-style application containers and LXD-style system containers. Charms can use Docker to deliver, start, and stop the workload they are deploying. Juju administrators can use system containers just like virtual machines but without the overhead of virtualisation.
@@ -123,14 +135,19 @@ juju deploy haproxy --to machine:0/lxc
 And if any of those charms use Docker then you would have Docker running the app inside an LXC system container! For extremely dense deployment on clouds or on laptops, containers offer much greater utilisation of the system capacity than traditional virtual machines.
 
 ## Where can I get enterprise-grade support for Juju and charms?
+
 Canonical, the company behind Ubuntu, provides commercial professional support for Juju.
-L
-andscape, our enterprise systems management tool, is included in all of our support packages. Check out Ubuntu Advantage, Canonical’s support programme, and choose the level of service you need:
-[www.ubuntu.com/cloud/management](www.ubuntu.com/cloud/management)
-Where can I learn more?
+
+Landscape, our enterprise systems management tool, is included in all of our support packages. Check out Ubuntu Advantage, Canonical’s support programme, and choose the level of service you need:
+[www.ubuntu.com/cloud/management](http://www.ubuntu.com/cloud/management)
+
+## Where can I learn more?
+
 The Ubuntu Cloud pages give you an overview of our cloud suite and how Juju fits in:
-www.ubuntu.com/cloud
+[www.ubuntu.com/cloud](http://www.ubuntu.com/cloud)
+
 The Juju community pages include information on charms, getting started, and lots more:
- juju.ubuntu.com 
+[jujucharms.com/community](https://jujucharms.com/community)
+
 Ready to speak to us? Get in touch with Canonical now: 
-www.ubuntu.com/management/contact-us
+[www.ubuntu.com/management/contact-us](http://www.ubuntu.com/management/contact-us)
