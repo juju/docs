@@ -13,7 +13,7 @@
               <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
               <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
               <li class=" sub"><a href="config-general.html">General config options</a></li>
-              <li class=" sub"><a href="getting-started.html#test">Testing your setup</a></li>
+              <li class=" sub"><a href="getting-started.html#testing-your-setup">Testing your setup</a></li>
               <li class=""><a href="charms.html">Using Juju</a></li>
               <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
               <li class=" sub"><a href="charms-constraints.html">Using constraints</a></li>
