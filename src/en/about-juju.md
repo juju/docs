@@ -98,14 +98,14 @@ If you get stuck, our charm developer community is only a click away.
 What are the best workloads to try with Juju?
 
 Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure such as OpenStack, or container management systems. Pick your favourite cloud and launch a juju server, deploy the Juju GUI there and then drop one of the bundles from the charm store into the blank canvas.
-
-<style>.tableicon{width:100px;height:100px;float:right;}</style>
+ 
+<style>.tableicon{width:100px;height:100px;float:right;margin: 5px 5px 40px 20px;}</style>
 <table>
   <tr>
     <td width=400>
      <img src="./media/hadoop-icon-160.png" alt="icon" class="tableicon">
      <strong>Hadoop &reg;</strong><br>
-     Try one of the simple HDFS bundles or deploy a more complex sentiment-analysis application to look at twitter streams for brands you are interested in.
+     Try one of the simple HDFS bundles or deploy a more complex sentiment-analysis application to scan twitter streams for brands you are interested in.
     </td>
     <td width=400>
      <img src="./media/cfoundry-icon-160.png" alt="icon" class="tableicon" >
@@ -122,7 +122,7 @@ Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure s
     <td>
      <img src="./media/openstack-icon-160.png" alt="icon" class="tableicon" >
      <strong>OpenStack &trade;</strong><br>
-     Deploy your own private cloud on bare metal servers. If you want to evaluate OpenStack, you can use Juju to spin it up on VMware too. Advanced users can use exactly the same charms to deploy OpenStack on top of any other cloud like AWS!
+     Deploy your own private cloud on bare metal servers. If you want to evaluate OpenStack, you can use Juju to spin it up on VMware too. 
     </td> 
   </tr>
 </table>
