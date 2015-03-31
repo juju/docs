@@ -13,7 +13,6 @@
               <li class=" sub"><a href="config-local.html">Local</a></li>
               <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
               <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
-              <li class=" sub"><a href="config-general.html">General config options</a></li>
               <li class=" sub"><a href="getting-started.html#testing-your-setup">Testing your setup</a></li>
               <li class=""><a href="charms.html">Using Juju</a></li>
               <li class=" sub"><a href="charms-deploying.html">Deploying Services</a></li>
@@ -29,7 +28,6 @@
               <li class=" sub"><a href="juju-ha.html">Juju High Availability</a></li>
               <li class=" sub"><a href="charms-bundles.html">Using bundles</a></li>
               <li class=" sub"><a href="charms-working-with-units.html">Working with Units</a></li>
-	      <li class=" sub"><a href="actions.html">Working with Actions</a></li>
               <li class=""><a href="howto.html">How to...</a></li>
               <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
               <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
@@ -82,7 +80,6 @@
               <li class="sub"><a href="commands.html">Juju commands</a></li>
               <li class="sub"><a href="reference-constraints.html">Juju constraints</a></li>
               <li class="sub"><a href="reference-environment-variables.html">Juju environment variables</a></li>
-              <li class="sub"><a href="reference-releases.html">Releases</a></li>
               <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
               <li class="sub"><a href="glossary.html">Glossary</a></li>
               <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
