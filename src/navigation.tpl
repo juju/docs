@@ -1,6 +1,7 @@
             <h1>User Guide</h1>
             <ul class="no-margin">
-              <li class=""><a href="getting-started.html">Getting Started</a></li>
+              <li class=""><a href="about-juju.html">About Juju</a></li>
+              <li class=""><a href="getting-started.html">Install &amp; Configure</a></li>
               <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
               <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
               <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
