@@ -1,5 +1,8 @@
 # Relationships
 
+Relations are one of the things which make Juju so very useful. 
+
+
 ### What is a relation?
 Relationships in juju are a loosely typed definition of how services should
 interact with one another. The definition of a relationship is handled through
