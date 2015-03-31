@@ -25,15 +25,14 @@ echo "Generating versioned source in \"${output_dir}\"..."
 mkdir -p "${output_dir}"
 
 # Grab the latest tags and branches.
-git fetch > /dev/null 2>&1
+git fetch
 
 # Fetch each version.
 while [ $# -ne 0 ]
 do
   version=${1}
-  git branch --track ${version} > /dev/null 2>&1
   echo "Fetching version \"${version}\"..."
-  git clone --branch "${version}" --single-branch . "${output_dir}/${version}" \
-    > /dev/null 2>&1
+  git branch -f --track "${version}" "origin/${version}"
+  git clone --branch "${version}" --single-branch . "${output_dir}/${version}"
   shift
 done

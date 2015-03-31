@@ -33,8 +33,10 @@ The following variables are always available.
   - The `$PATH` variable is prefixed with the path to the hook tools directory.
   - The `$JUJU_UNIT_NAME` variable holds the name of the unit.
   - The `$JUJU_API_ADDRESSES` variable holds a space-separated list of API server addresses.
-
-In addition, every relation hook makes available relation-specific variables.
+  - The `$JUJU_AVAILABILITY_ZONE` variable holds the current availability zone
+the charm is running in (not all cloud providers support Availability Zones).
+   
+In addition, every relation hook makes available relation-specific variables:
 
   - The `$JUJU_RELATION` variable holds the relation name. This information
   is of limited value, because it's always the same as the part of the hook
@@ -276,7 +278,7 @@ For example, running `opened-ports` may return:
 81/tcp
 ```
 
-!!!Note: opening ports is transactional (i.e. will take place on successfuly 
+!!! Note: opening ports is transactional (i.e. will take place on successfuly 
 exiting the current hook), and therefore `opened-ports` will not return any
 values for pending `open-port` operations run from within the same hook. 
 
