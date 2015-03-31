@@ -278,7 +278,7 @@ For example, running `opened-ports` may return:
 81/tcp
 ```
 
-!!!Note: opening ports is transactional (i.e. will take place on successfuly 
+!!! Note: opening ports is transactional (i.e. will take place on successfuly 
 exiting the current hook), and therefore `opened-ports` will not return any
 values for pending `open-port` operations run from within the same hook. 
 
