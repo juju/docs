@@ -7,6 +7,52 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.22.1
+
+A new stable release of Juju, juju-core 1.22.1, is now available.
+This release replaces 1.22.0.
+
+
+## Getting Juju
+
+juju-core 1.22.1 is available for utopic and backported to earlier
+series in the following PPA:
+
+    https://launchpad.net/~juju/+archive/stable
+
+
+
+## Notable Changes
+
+This releases addresses stability and performance issues.
+
+
+## Resolved issues
+
+* Juju cannot deploy when distro-info-data gets a new series
+  Lp 1427879
+
+* Juju backup fails when journal files are present
+  Lp 1423936
+
+* Copyright information is not available for some files
+  Lp 1435974
+
+* Juju restore failed with "error: cannot update machines: machine
+  update failed: ssh command failed:"
+  Lp 1434437
+
+* Unit test failure:
+  testnewdefaultserver.n40_github_com_juju_juju_cert_test.certsuite
+  Lp 1437040
+
+* Certsuite.testnewdefaultserver failure
+  Lp 1435860
+
+* Apt-http-proxy being reset to bridge address
+  Lp 1437296
+
+
 ^# juju-core 1.22.0
 
   A new stable release of Juju, juju-core 1.22.0, is now available.
