@@ -26,12 +26,16 @@ Juju is in [Homebrew](http://brew.sh/), to install do:
 
     brew install juju
 
+We also recommend trying Juju in [our Vagrant box](config-vagrant.html).
+
 For more information on installing and the current versions available, see [the releases page](reference-releases.html).
 
 ## Windows
 
 See [the releases page](reference-releases.html) to download and run the
-latest version of the Juju Windows installer 
+latest version of the Juju Windows installer.
+
+We also recommend trying Juju in [our Vagrant box](config-vagrant.html).
 
 # Configuring
 
@@ -63,7 +67,7 @@ more specifics on what needs to be changed, see the relevant sections below.
   - [Configuring for OpenStack](config-openstack.html)
   - [Configuring for bare metal using MAAS](config-maas.html)
   - [Configuring for LXC local provider (Linux)](config-local.html)
-  - [Configuring for Vagrant local provider (OSX)](config-vagrant.html)
+  - [Configuring for Vagrant local provider (OSX, Linux, and Windows)](config-vagrant.html)
 
 **Note:** Juju's command line interface includes documentation, doing `juju help` will show you the topics. You can also check out the [Juju command cheatsheet](https://github.com/juju/cheatsheet) if you are looking for a handy command guide.
 
