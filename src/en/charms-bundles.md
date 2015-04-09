@@ -81,6 +81,58 @@ following data:
         - - "wordpress:db"
           - "mysql:db"
 
+## Service constraints in a bundle
+
+When defining a service in a bundle, it's common to set minimum constraints
+against a charmed service, much like you would when deploying on the command
+line. This is a simple key addition to the service definition, using the proper
+constraint key/value pair as outlined in the [Constraints]() documentation.
+
+    mysql:
+      charm: "cs:precise/mysql-27"
+      num_units: 1
+      constraints:
+        - mem=2G
+        - cpu-cores=4
+      annotations:
+          "gui-x": "139"
+          "gui-y": "168"
+
+
+## Bundle placement directives
+
+You can co-locate services using the placement directive key in the bundle.
+Much like Service Constraints, it requires adding the placement key in the
+service definition.
+
+> note: you can also specify isolation by including the container format in the
+> placement directive. Some clouds support LXC and KVM.
+
+     mysql:
+      charm: "cs:precise/mysql-27"
+      num_units: 1
+      to: lxc:wordpress/0
+      annotations:
+          "gui-x": "139"
+          "gui-y": "168"
+
+
+or
+
+     mysql:
+      charm: "cs:precise/mysql-27"
+      num_units: 1
+      to: lxc:1
+      annotations:
+          "gui-x": "139"
+          "gui-y": "168"
+
+
+**Note** the difference between notation when specifying service colocation and
+machine placement directives.
+
+
+
 ## Naming your Bundle
 
 By default the Juju GUI will name the bundle `envExport`. This is the first linein a bundle. The bundle must have a unique name. We recommend descriptive names for your bundle but nothing too long. `wordpress-simple`, `hadoop-cluster`, and `mongodb-sharded` are some examples of bundle names. Avoid CamelCase and periods for bundle names.
