@@ -89,54 +89,69 @@ line. This is a simple key addition to the service definition, using the proper
 constraint key/value pair as outlined in the
 [Constraints](charms-constraints.html) documentation.
 
-    mysql:
-      charm: "cs:precise/mysql-27"
-      num_units: 1
-      constraints:
-        - mem=2G
-        - cpu-cores=4
-      annotations:
-          "gui-x": "139"
-          "gui-y": "168"
+For example, to add memory and CPU constraints to a charm in a bundle, the
+bundle file would have an additional `constraints` field with specific values:
 
+```
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  constraints:
+    - mem=2G
+    - cpu-cores=4
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
 
 ## Bundle placement directives
 
 You can co-locate services using the placement directive key in the bundle.
-Much like Service Constraints, it requires adding the placement key in the
+Much like service constraints, it requires adding the placement key `to` in the
 service definition.
+Where supported by the cloud provider, it is also possible to isolate charms
+by including the container format in the placement directive. Some clouds
+support LXC and KVM.
 
-> note: you can also specify isolation by including the container format in the
-> placement directive. Some clouds support LXC and KVM.
+For example:
 
-     mysql:
-      charm: "cs:precise/mysql-27"
-      num_units: 1
-      to: lxc:wordpress/0
-      annotations:
-          "gui-x": "139"
-          "gui-y": "168"
+```
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to: lxc:wordpress/0
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
 
+which will install the mysql service into an LXC container on the same machine
+as the wordpress/0 unit. Or:
 
-or
-
-     mysql:
-      charm: "cs:precise/mysql-27"
-      num_units: 1
-      to: lxc:1
-      annotations:
-          "gui-x": "139"
-          "gui-y": "168"
-
-
+```
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to: lxc:1
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
+which will install the mysql service into an LXC container on machine '1'. 
 
 ## Naming your Bundle
 
-By default the Juju GUI will name the bundle `envExport`. This is the first linein a bundle. The bundle must have a unique name. We recommend descriptive names for your bundle but nothing too long. `wordpress-simple`, `hadoop-cluster`, and `mongodb-sharded` are some examples of bundle names. Avoid CamelCase and periods for bundle names.
+By default the Juju GUI will name the bundle `envExport`. This is the first line
+in the bundle. The bundle must have a unique name. We recommend descriptive names
+for your bundle but nothing too long. `wordpress-simple`, `hadoop-cluster`, and
+`mongodb-sharded` are some examples of bundle names. Avoid CamelCase and periods
+for bundle names.
 
 ## Sharing your Bundle with the Community
 
-Bundles are shared by putting a branch onto Launchpad with specific naming which will then be pulled into the Charm Store. The branch must be constructed and named according to the following rules.
+Bundles are shared by putting a branch onto Launchpad with specific naming which
+will then be pulled into the Charm Store. The branch must be constructed and named
+according to the following rules.
 
 The branch name must be structured as:
 
