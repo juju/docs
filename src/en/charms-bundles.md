@@ -86,7 +86,8 @@ following data:
 When defining a service in a bundle, it's common to set minimum constraints
 against a charmed service, much like you would when deploying on the command
 line. This is a simple key addition to the service definition, using the proper
-constraint key/value pair as outlined in the [Constraints]() documentation.
+constraint key/value pair as outlined in the
+[Constraints](charms-constraints.html) documentation.
 
     mysql:
       charm: "cs:precise/mysql-27"
@@ -126,10 +127,6 @@ or
       annotations:
           "gui-x": "139"
           "gui-y": "168"
-
-
-**Note** the difference between notation when specifying service colocation and
-machine placement directives.
 
 
 
