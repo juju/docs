@@ -36,7 +36,7 @@ Windows
 
 ## Proposed
 
-Current proposed is identical to current released.
+Current proposed is identical to current stable release.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
@@ -67,8 +67,8 @@ juju agents.
 
 ## Development
 
-1.23-beta3 is currently in development for testing.
-The previous development release was 1.23-beta2
+1.23-beta4 is currently in development for testing.
+The previous development release was 1.23-beta3
 
 Development releases provide new features that are being stablised.
 These releases are *not* suitable for production environments. Upgrading
@@ -83,11 +83,11 @@ sudo apt-get install juju-core</pre>
 {: .instruction }
 
 OS X
-: [juju-1.23-beta3-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23-beta3/+download/juju-1.23-beta3-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23-beta3/+download/juju-1.23-beta3-osx.tar.gz/+md5))
+: [juju-1.23-beta4-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-1.23-beta4-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-1.23-beta4-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.23-beta3.exe](https://launchpad.net/juju-core/1.23/1.23-beta3/+download/juju-setup-1.23-beta3.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23-beta3/+download/juju-setup-1.23-beta3.exe/+md5))
+: [juju-setup-1.23-beta4.exe](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-setup-1.23-beta4.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-setup-1.23-beta4.exe/+md5))
 {: .instruction }
 
 Development releases use the 'devel' simple-streams. You must configure
