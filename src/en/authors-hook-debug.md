@@ -1,3 +1,5 @@
+Title: Debugging Juju charm hooks
+
 # Debugging hooks
 
 Not everything works first time, and sometimes even when it does work, things
