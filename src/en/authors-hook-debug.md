@@ -105,22 +105,20 @@ As this is a consolidated log you don't need to specify a unit.
 
 #### Usage:
 
-    juju debug-log [-n <number>] [-n +<number>] [-e <environment>]
+    juju debug-log [-n <number>] [--replay] [-e <environment>]
+
+N.B. For full usage, see the [command reference page](commands.html)
 
 Where the `-n` switch is given and followed by a number, the log will be tailed
 from that many lines in the past (i.e., those number of existing lines in the
 log will be included in the output, along with any subsequent output).
 
-Where the `-n` switch is given and followed by a '+' and a number, the log will
-be tailed starting from that specific line in the log file.
 
-This somewhat unusual syntax has been chosen so that the command behaves like
-the standard Unix `tail` command. In fact, it is analagous to running `tail -f
-[options] /var/log/juju/all-machines.log` on the bootstrap node.
 
 #### Examples:
 
-To read the ten most recent log entries and follow any subsequent entries to the log:
+To read the ten most recent log entries and follow any subsequent entries to the
+log:
 
     juju debug-log
 
@@ -131,7 +129,7 @@ the log:
 
 To read all the log entries and follow any subsequent entries to the log:
 
-    juju debug-log -n +1
+    juju debug-log --replay
 
 To read the twenty most recent log entries on the 'local' environment:
 
@@ -141,7 +139,7 @@ And of course it is possible to combine the command with other shell tools to
 make the output more useful, e.g. to filter the whole log for lines matching
 'INFO':
 
-    juju debug-log -n +1  | grep 'INFO'
+    juju debug-log --replay  | grep 'INFO'
 
 **Note:** As the command uses the follow behaviour of `tail` by default, you do
 not need to specify the `-f` switch. You will also need to end the session
@@ -186,7 +184,11 @@ Key:
 
 ### Key bindings
 
-All of tmux's special functions can be run by pressing the `prefix-key` followed by another key or key combination. The default prefix-key for tmux is Control-b, but many users find this an unnecessary stretch. This version uses Control-a as the prefix key, which is a bit easier on the fingers and is also the same combination used by `screen`, an alternative terminal multiplexer.
+All of tmux's special functions can be run by pressing the `prefix-key` followed
+by another key or key combination. The default prefix-key for tmux is Control-b,
+but many users find this an unnecessary stretch. This version uses Control-a as
+the prefix key, which is a bit easier on the fingers and is also the same
+combination used by `screen`, an alternative terminal multiplexer.
 
 There are many key-combinations, not all of which are of use in the task at
 hand. Here are some of the ones you may find useful:
