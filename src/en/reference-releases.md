@@ -11,7 +11,7 @@ current stable release to manage cloud deployments.
 
 ## Stable
 
-The current stable version of Juju is 1.21.3.
+The current stable version of Juju is 1.22.1.
 
 Stable juju is suitable for everyday production use.
 
@@ -26,22 +26,22 @@ OS X Homebrew
 {: .instruction }
 
 OS X
-: [juju-1.21.3-osx.tar.gz](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-1.21.3-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-1.21.3-osx.tar.gz/+md5))
+: [juju-1.22.1-osx.tar.gz](https://launchpad.net/juju-core/1.22/1.22.1/+download/juju-1.22.1-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.22/1.22.1/+download/juju-1.22.1-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.21.3-signed.exe](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-setup-1.21.3-signed.exe) ([md5](https://launchpad.net/juju-core/1.21/1.21.3/+download/juju-1.21.3-osx.tar.gz/+md5))
+: [juju-setup-1.22.1-signed.exe](https://launchpad.net/juju-core/1.22/1.22.1/+download/juju-setup-1.22.1-signed.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22.1/+download/juju-setup-1.22.1-signed.exe/+md5))
 {: .instruction }
 
 
 ## Proposed
 
-The current proposed stable version of Juju is 1.22.0.
+Current proposed is identical to current stable release.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
 require evaluation from the community to verify no regressions are
-present. A propose version will not be promoted to stable if a
+present. A proposed version will not be promoted to stable if a
 regression is reported.
 
 Ubuntu
@@ -51,11 +51,11 @@ sudo apt-get install juju-core</pre>
 {: .instruction }
 
 OS X
-: [juju-1.22.0-osx.tar.gz](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-1.22.0-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-1.22.0-osx.tar.gz/+md5))
+: [juju-1.22.1-osx.tar.gz](https://launchpad.net/juju-core/1.22/1.22.1/+download/juju-1.22.1-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.22/1.22.1/+download/juju-1.22.1-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.22.0.exe](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22.0/+download/juju-setup-1.22.0.exe/+md5))
+: [juju-setup-1.22.1-signed.exe](https://launchpad.net/juju-core/1.22/1.22.1/+download/juju-setup-1.22.1-signed.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22.1/+download/juju-setup-1.22.1-signed.exe/+md5))
 {: .instruction }
 
 Proposed releases use the 'proposed' simple-streams. You must configure
@@ -67,9 +67,8 @@ juju agents.
 
 ## Development
 
-No version is currently in development for testing.
-The next development release will be for the 1.23 series.
-The previous development release was 1.22-beta5
+1.23-beta4 is currently in development for testing.
+The previous development release was 1.23-beta3
 
 Development releases provide new features that are being stablised.
 These releases are *not* suitable for production environments. Upgrading
@@ -84,11 +83,11 @@ sudo apt-get install juju-core</pre>
 {: .instruction }
 
 OS X
-: [juju-1.22-beta5-osx.tar.gz](https://launchpad.net/juju-core/1.22/1.22-beta5/+download/juju-1.22-beta5-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.22/1.22-beta5/+download/juju-1.22-beta5-osx.tar.gz/+md5))
+: [juju-1.23-beta4-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-1.23-beta4-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-1.23-beta4-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.22-beta5.exe](https://launchpad.net/juju-core/1.22/1.22-beta5/+download/juju-setup-1.22-beta5.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22-beta5/+download/juju-setup-1.22-beta5.exe/+md5))
+: [juju-setup-1.23-beta4.exe](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-setup-1.23-beta4.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-setup-1.23-beta4.exe/+md5))
 {: .instruction }
 
 Development releases use the 'devel' simple-streams. You must configure
