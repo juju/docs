@@ -6,7 +6,7 @@
               <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
               <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
               <li class=" sub"><a href="config-joyent.html">Joyent</a></li>
-              <li class=" sub"><a href="config-onlinelabs.html">Online Labs</a></li>
+              <li class=" sub"><a href="config-scaleway.html">Scaleway</a></li>
               <li class=" sub"><a href="config-digitalocean.html">DigitalOcean</a></li>
               <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
               <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
