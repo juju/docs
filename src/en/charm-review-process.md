@@ -208,5 +208,5 @@ If you are a ~charmer or wishing to become a ~charmer, make sure you are applyin
 First off, thank you for your review of the charm. Your review helps improve the Juju
 community as a whole and we appreciate your time and effort. If you've found that you
 are ready to be part of the ~charmers group and want the responsibilities of a member
-of the ~charmers team, we recommend you seek out how to [apply for membership](https://juju.ubuntu.com/community/charmers/) to the
+of the ~charmers team, we recommend you seek out how to [apply for membership](https://jujucharms.com/community/charmers/) to the
 team via #juju on IRC (Freenode) and on the Juju [mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
