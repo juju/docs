@@ -91,10 +91,6 @@ Use the language of your choice. It’s normal to get something quick-and-dirty 
 
 If you want, you can also share your charm with the world and gain feedback and contributions from others! In our experience, the more widely a charm is used the more useful it becomes. Different teams bring different expertise - security, performance, scale, and all of those things make for improvements in the charm that are very hard for a single team to achieve.
 
-
-As always, there is a whole host of tools to help you get started:
-juju.ubuntu.com/resources
-If you get stuck, our charm developer community is only a click away.
 What are the best workloads to try with Juju?
 
 Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure such as OpenStack, or container management systems. Pick your favourite cloud and launch a juju server, deploy the Juju GUI there and then drop one of the bundles from the charm store into the blank canvas.
