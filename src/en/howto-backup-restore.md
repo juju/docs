@@ -69,7 +69,7 @@ juju backups restore -e my-env backup-19.tgz
 
 ## HA (High Availability)
 
-As stated by [Juju HA](https://juju.ubuntu.com/docs/juju-ha.html) High Availability in general terms means that a Juju environment has 3 or more (up to 7) redundant state servers. 
+As stated by [Juju HA](juju-ha.html) High Availability in general terms means that a Juju environment has 3 or more (up to 7) redundant state servers. 
 
 The contemplated case for HA backup/restore is when you have lost all your state servers and need to recover a basic setup in order to be able to perform ensure availability again
 
