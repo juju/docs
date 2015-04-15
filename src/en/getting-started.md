@@ -40,12 +40,18 @@ We also recommend trying Juju in [our Vagrant box](config-vagrant.html).
 # Configuring
 
 Now the Juju software is installed, it needs to be configured to use your
-particular cloud provider. This is done by generating and editing a file,
-`environments.yaml`, which will live in your `~/.juju/` directory on Linux and
-OSX, `%LOCALAPPDATA%/Juju` on Windows. You can generate the environments file
-manually, but Juju also includes a boilerplate configuration option that will
-flesh out most of the file for you and minimise the amount of work (and
-potential errors).
+particular cloud provider. This is done by generating and editing the following file.
+
+## Linux & Mac OSX
+
+    ~/.juju/environments.yaml
+
+## Windows
+    %LOCALAPPDATA%/Juju
+    
+You can generate the environments file manually, but Juju also includes a 
+boilerplate configuration option that will flesh out most of the file for 
+you and minimise the amount of work (and potential errors).
 
 To generate an initial config file, you simply need to run:
 
