@@ -143,7 +143,7 @@ You'll need to enter the juju environment we just bootstrapped in $HOME/charms
 
     vagrant ssh
     juju deploy mongodb
-    juju deploy --repository=/vagrant local:trusty/genghisapp
+    juju deploy --repository=/vagrant/charms local:trusty/genghisapp
 
 We are now free to watch progress through the GUI
 
