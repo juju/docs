@@ -7,6 +7,462 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.22.1
+
+  A new stable release of Juju, juju-core 1.22.1, is now available.
+  This release replaces 1.22.0.
+
+  ## Getting Juju
+
+  juju-core 1.22.1 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+  
+  
+  ### Vivid local-provider limitations
+  
+  Juju 1.22.x on Vivid is suitable for creating and maintaining Juju
+  environments in public and private clouds, including MAAS.
+  Local-provider support for Vivid's default systemd installation will
+  land in 1.23. To use Juju 1.22 on Vivid for local testing and charm
+  development you must take some additional steps.
+
+  You can switch back to upstart, as explained at:
+
+      ```
+      https://wiki.ubuntu.com/SystemdForUpstartUsers
+      ```
+
+  Alternatively you can run Ubuntu Trusty inside a KVM or Docker running
+  on your localhost. Many charm authors prefer to use Vagrant for
+  development to separate the Juju from their localhost. We provide Juju
+  Vagrant boxes:
+
+      ```
+      https://jujucharms.com/docs/stable/config-vagrant
+      ```
+
+  The Juju (1.23.x) will support systemd on Vivid. You can test and
+  develop using the local-provider. 1.23.x will first be available via
+  the official stable PPA:
+
+      ```
+      https://launchpad.net/~juju/+archive/stable
+      ```
+
+  And will appear in the release shortly thereafter. 
+
+
+  ## Resolved issues
+
+  * Juju cannot deploy when distro-info-data gets a new series
+    Lp 1427879
+
+  * Juju backup fails when journal files are present
+    Lp 1423936
+
+  * Copyright information is not available for some files
+    Lp 1435974
+
+  * Juju restore failed with "error: cannot update machines: machine
+    update failed: ssh command failed:"
+    Lp 1434437
+
+  * Unit test failure:
+    testnewdefaultserver.n40_github_com_juju_juju_cert_test.certsuite
+    Lp 1437040
+
+  * Certsuite.testnewdefaultserver failure
+    Lp 1435860
+
+  * Apt-http-proxy being reset to bridge address
+    Lp 1437296
+
+^# juju-core 1.22.0
+
+  A new stable release of Juju, juju-core 1.22.0, is now available.
+  This release replaces 1.21.3.
+
+
+  ## Getting Juju
+
+  juju-core 1.22.0 is available for utopic and backported to earlier
+  series in the following PPA:
+
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
+
+  Windows and OS X users will find installers at:
+
+  ```
+  https://launchpad.net/juju-core/+milestone/1.22.0
+  ```
+
+
+  ## Notable Changes
+
+    * Blocking changes to the environment
+    * LXC image caching and the cached-images command
+    * Juju state backup improvements
+    * Static internal route for Joyent instances
+    * The instance availability zone is exposed to charms
+    * Relaxed checked for container scoped relations
+    * Windows workloads preview
+    * New annotations client includes charms and bulk calls
+    * Upgrade robustness
+    * Multi-environment infrastructure
+
+
+  ### Blocking changes to the environment
+
+  The 'block' and 'unblock' commands control which changes can be made to
+  a running environment. Use the 'block' command to lockdown the
+  environment to prevent accidental changes. Three levels of restrictions
+  can be applied, 'destroy-environment', 'remove-object', and
+  'all-changes'.
+
+  The 'destroy-environment' level blocks just the 'destroy-environment'
+  command. You can prevent an environment from being destroyed like this:
+
+      juju block destroy-environment
+
+  The 'remove-object' level blocks the 'destroy-environment',
+  'remove-machine', 'remove-relation', 'remove-service', and 'remove-unit'
+  commands from being run. You can prevent the machines, services, units
+  and relations from being removed thusly:
+
+      juju block remove-object
+
+  The 'all-changes' level blocks commands that add, alter, or remove
+  things in the running environment. These commands are blocked:
+  'add-machine', 'add-relation', 'add-unit', 'authorised-keys add',
+  'authorised-keys delete', 'authorised-keys import', 'deploy',
+  'destroy-environment', 'ensure-availability', 'expose', 'resolved',
+  'remove-machine', 'remove-relation', 'remove-service', 'remove-unit',
+  'retry-provisioning', 'run', 'set', 'set-constraints', 'set-env',
+  'unexpose', 'unset', 'unset-env', 'upgrade-charm', 'upgrade-juju',
+  'user add', 'user change-password', 'user disable', and 'user enable'
+  You can lockdown the environment to prevent all changes like this:
+
+      juju block all-changes
+
+  When a command is blocked, and you are certain you need to alter the
+  environment, you can remove the block using the 'unblock' command. For
+  example, to permit the remove-relation command blocked by the
+  'remove-object' level, run:
+
+      juju unblock remove-object
+
+  You can restore the block after you complete your changes.
+
+  Note that some commands have a '--force' option bypasses the
+  restrictions set by 'block'. Only use the '--force' option *after* the
+  command was run without it to ensure you are aware of the restrictions
+  set on the environment by the 'block' command.
+
+  For more information run 'juju help block' and 'juju help unblock'.
+
+
+  ### LXC image caching and the cached-images command
+
+  From Juju 1.22 onwards, LXC images are cached in the Juju environment
+  when they are retrieved to instantiate a new LXC container. This applies
+  to the local provider and all other cloud providers. This caching is
+  done independently of whether image cloning is enabled.
+
+  Note: Due to current upgrade limitations, image caching is currently not
+  available for machines upgraded to 1.22. Only machines deployed with
+  1.22 will cache the images.
+
+  In Juju 1.22, lxc-create is configured to fetch images from the Juju
+  state server. If no image is available, the state server will fetch the
+  image from http://cloud-images.ubuntu.com and then cache it. This means
+  that the retrieval of images from the external site is only done once
+  per *environment*, not once per new machine which is the default
+  behaviour of lxc. The next time lxc-create needs to fetch an image, it
+  comes directly from the Juju environment cache.
+
+  The 'cached-images' command can list and delete cached LXC images stored
+  in the Juju environment. The 'list' and 'delete' subcommands support
+  '--arch' and '--series' options to filter the result.
+
+  To see all cached images, run:
+
+      juju cached-images list
+
+  Or to see just the amd64 trusty images run:
+
+      juju cached-images list --series trusty --arch amd64
+
+  To delete the amd64 trusty cached images run:
+
+    juju cache-images delete --series trusty --arch amd64
+
+  Future development work will allow Juju to automatically download new
+  LXC images when they becomes available, but for now, the only way update
+  a cached image is to remove the old one from the Juju environment. Juju
+  will also support KVM image caching in the future.
+
+  See 'juju cached-images list --help' and 'juju cached-images delete
+  --help' for more details.
+
+
+  ### Juju state backup improvements
+
+  The backup CLI plugin is replaced by the native 'backups' command. The
+  command can create, manage, and restore state backups. The new backup
+  features are also available using the API endpoints too.
+
+  You can create a backup like this:
+
+      juju backups create
+
+  Backups are kept on the state-server by default, but you can use the
+  'download' and 'upload' subcommands to move backups between locations.
+
+      juju backups download <id>
+      juju backups upload <filename>
+
+  You can list the backups and see info about a specific backup using
+  these subcommands:
+
+      juju backups list
+      juju backups info <id>
+
+  You can remove unwanted backups like this:
+
+      juju backups remove <id>
+
+  The juju 'restore' command is unchanged. You can learn more about
+  backups by reading the details of 'juju help backups'.
+
+
+  ### The instance availability zone is exposed to charms
+
+  Charms can query the 'JUJU_AVAILABILITY_ZONE' environmental variable to
+  learn the instance's availability zone. Not all clouds/providers support
+  availability zones, but this information is available when the charm is
+  deployed in EC2 and HP Cloud for example.
+
+
+  ### Relaxed checked for container scoped relations
+
+  Container scoped relations are now allowed as long a there is at least
+  one subordinate service involved. Previously there had to be exactly one
+  subordinate service in the relation.
+
+
+  ### Static internal route for Joyent instances
+
+  When running in Joyent, Juju creates a static route to ensure that it is
+  always possible for instance to communicate over the internal network
+  interface.
+
+
+  ### Windows workloads preview
+
+  Juju 1.22.0 has initial Windows workload support. This is BETA, and will
+  be improved in the following releases.
+
+  Deploying Windows charms is just the same as it is for Ubuntu:
+
+      juju deploy lp:~me/win2012r2/my-charm
+
+  or from a local repository
+
+      juju deploy --repository=/home/me/charms local:win2012r2/my-charm
+
+  A Juju charm boilerplate is available:
+
+      ```
+      https://github.com/cloudbase/windows-charms-boilerplate
+      ```
+
+  Powershell is the language of choice when writing Juju charms for
+  Windows, as it is tightly coupled to Windows automation. You may use any
+  language you see fit.
+
+  There are a few notable differences between charms running on Ubuntu and
+  charms running on Windows:
+
+    * All charm hooks must have one of the following extensions: .ps1,
+      .cmd, .bat, .exe. The extensions will be searched in order, with
+      powershell being default.
+    * All juju files/charms are located in: C:\juju . The folder
+      structure should be the same as on ubuntu, with C:\juju as the root.
+    * Cloudbase-init installs a local copy of python 2.7 (soon to switch
+      to 3.X). If you wish, you can write python code to deploy your
+      applications, but keep in mind you would have to wrap the execution
+      of your script with one of the supported filetypes (.ps1, .cmd,
+      .bat, .exe).
+    * If the machine reboots, Juju machine agents and unit agents will
+      have a delayed start. This means that Juju services
+      will start 2 minutes after the last Windows service is started. So
+      if the Juju services are listed as "Stopped" immediately after
+      reboot, don't panic.
+    * All Juju services (and therefor charms) will run under an
+      administrator account called: jujud. This will allow charms to use
+      installers that require a real user, and not just the "system" user.
+
+  Juju requires Windows images with cloudbase-init to deploy Juju
+  services. For public clouds which run KVM/Hyper-V and have one of the
+  supported metadata services in cloudbase-init, there is a downloadable:
+
+      ```
+      http://www.cloudbase.it/ws2012r2/
+      ```
+
+  You need to upload custom images. So roughly, the steps would be:
+
+    1. Download image from http://www.cloudbase.it/ws2012r2/
+    2. Add it to your cloud provider
+    3. Generate necessary metadata using
+       juju-metadata generate-image -s win2012r2 -i <image id from provider>
+    4. Make the generated files available. A simple webserver or simply
+       uploading the files to the provider's object storage should do. As
+       long as they are accessible to the newly booted up instances.
+    5. Change agent-metadata-url in environments.yaml to point to the "tools"
+       directory that 'generate-image' created.
+    6. Bootstrap your environment
+
+  If you want to use other Windows version in your cloud, or if you need
+  image formats other then vhdx or qcow2, you can generate your own image
+  using the following tools:
+
+      ```
+      https://github.com/cloudbase/windows-openstack-imaging-tools
+      ```
+
+  Current Windows limitations:
+
+    * Windows cannot be used as a bootstrap machine for the state-server.
+      Only machine agents are supported.
+    * 'juju ssh' currently does not work with Windows. The implementation
+      is tightly coupled with *nix systems, and having OpenSSH deployed on
+      Windows machines might later become a security risk due to the fact
+      that it is not part of normal Windows update systems. Work is being
+      done to integrate WinRM support into Juju. This will allow us to
+      offer the same level of integration using powershell remoting
+      (http://msdn.microsoft.com/en-us/library/dd357801.aspx)
+    * Manual provider is not supported. Manual provider requires SSH to
+      deploy. See above mention.
+    * Local provider is not supported. Local provider relies on LXC
+      or KVM and it deploys a state-server to the host, which is
+      not supported on Windows.
+    * Debug hooks are not yet supported yet. The current implementation
+      requires SSH and tmux to work, which is very platform specific. This
+      will be implemented for Windows soon.
+
+
+  ### New annotations client includes charms and bulk calls
+
+  The new api.annotations.client supports annotating charms, the
+  environment, machines, services, and units. It supports bulk calls. The
+  old api.client annotation functions are deprecated.
+
+  The SET annotations call takes this form:
+
+      {
+          "Type": "Annotations",
+          "Request": "Set",
+          "Params": {
+               "Annotations": { {
+                   "EntityTag": a, "Annotations": pairs1
+                   },{
+                   "EntityTag": b, "Annotations": pairs2
+               } }
+      }
+
+  The corresponding GET annotations call takes this form:
+
+      {
+          "Type": "Annotations",
+          "Request": "Get",
+          "Params": {
+             "Entities": {
+                 {Entity {"Tag": a}},
+                 {Entity {"Tag": b},
+             }
+          }
+      }
+
+  The GET response looks like this:
+
+      {
+          "Results": {
+              {"EntityTag": a, "Annotations": pairs1, "Error": nil},
+              {"EntityTag": b, "Annotations": pairs2, "Error": nil},
+
+          }
+      }
+
+
+  ### Juju upgrade robustness
+
+  During Juju upgrades (the 'upgrade-juju' command), steps specific to
+  Juju state-servers are now run before other upgrade steps. Database
+  migrations on the state-server are completed before machine updates and
+  updates of the Juju agents on deployed units.
+
+
+  ### Multi-environment infrastructure
+
+  Juju will soon be able to support multiple environments managed by a
+  single state server (or state server cluster). Although this is not yet
+  visible, version 1.22 includes much of the infrastructure changes for
+  multi-environment support.
+
+
+  ## Resolved issues
+
+    * Interface mtu management across maas/juju
+      Lp 1355813
+
+    * State server certificate has empty san list
+      Lp 1397909
+
+    * Api server restarts soon after state server comes up
+      Lp 1403721
+
+    * Cmdline: implement juju environment jenv
+      Lp 1409784
+
+    * Juju should wait until a node's status is 'deployed' to attempt
+      ssh'ing into it
+      Lp 1394680
+
+    * Lock contention running apt in bootstrap
+      Lp 1384259
+
+    * Juju status --format summary panics with unresolvable ips
+      Lp 1410320
+
+    * Machine hasvote/wantsvote should be included in allwatcher deltas
+      Lp 1402965
+
+    * Open-stack provider breaks swift with standard config
+      Lp 1312217
+
+    * 'juju switch' should not require an entry in environments.yaml
+      Lp 1334768
+
+    * Provider/maas: stopinstances may fail if nodes are removed out of
+      band
+      Lp 1319016
+
+    * Unit "(anycharm)" is not assigned to a machine when deploying with
+      juju 1.22-beta5
+      Lp 1430049
+
+
 ^#juju-core 1.21.3
 
   A new stable release of Juju, juju-core 1.21.3, is released.
