@@ -24,6 +24,40 @@ The versions covered here are:
   ## Notable Changes
 
   This releases addresses stability and performance issues.
+  
+  
+  ### Vivid local-provider limitations
+  
+  Juju 1.22.x on Vivid is suitable for creating and maintaining Juju
+  environments in public and private clouds, including MAAS.
+  Local-provider support for Vivid's default systemd installation will
+  land in 1.23. To use Juju 1.22 on Vivid for local testing and charm
+  development you must take some additional steps.
+
+  You can switch back to upstart, as explained at:
+
+      ```
+      https://wiki.ubuntu.com/SystemdForUpstartUsers
+      ```
+
+  Alternatively you can run Ubuntu Trusty inside a KVM or Docker running
+  on your localhost. Many charm authors prefer to use Vagrant for
+  development to separate the Juju from their localhost. We provide Juju
+  Vagrant boxes:
+
+      ```
+      https://jujucharms.com/docs/stable/config-vagrant
+      ```
+
+  The Juju (1.23.x) will support systemd on Vivid. You can test and
+  develop using the local-provider. 1.23.x will first be available via
+  the official stable PPA:
+
+      ```
+      https://launchpad.net/~juju/+archive/stable
+      ```
+
+  And will appear in the release shortly thereafter. 
 
 
   ## Resolved issues
