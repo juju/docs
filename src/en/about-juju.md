@@ -1,15 +1,15 @@
 ##What is Juju?
-Juju is a state-of--the--art, open source, service orchestration tool. Juju allows you to configure, manage, maintain, deploy, and scale cloud services quickly and efficiently on public clouds, as well as on physical servers, OpenStack, and containers. You can use Juju from the command line or through its beautiful GUI.
+Juju is a state-of-the-art, open source, universal model for service oriented architecture and service oriented
+deployments. Juju allows you to deploy, configure, manage, maintain, and scale cloud services quickly and efficiently on public clouds, as well as on physical servers, OpenStack, and containers. You can use Juju from the command line or through its beautiful GUI.
 
-##What is service orchestration?
-Service orchestration is a layer above configuration management and automation.
+##What is service modelling?
 
-While traditional configuration management automates the configuration of machines to a particular specification, service orchestration encapsulates expertise for a given service, which can be reused on different machines in different clouds and in different companies.
+In modern environments, services are rarely deployed in isolation. Even simple applications may require several actual services in order to function - like a database and a web server for example. For deploying a more complex system, e.g. OpenStack, many more services need to be installed, configured and connected to each other. Juju's service modelling provides tools to express the intent of how to deploy such services and to subsequently scale and manage them.
 
-Service orchestration depends on configuration management tools like Chef and Puppet or even general scripting languages like Python and Bash, but encapsulates their scripts so that they can be reused across institutions and across clouds.
-Service orchestration is model-driven: you create a model of the relationships between services that make up your solution and you have a mapping of the parts of that model to machines. The service orchestration system then applies the necessary configuration management scripts to each machine in the model.
+At the lowest level, traditional configuration management tools like Chef and Puppet, or even general scripting languages such as Python or bash, automate the configuration of machines to a particular specification. 
+With Juju, you create a model of the relationships between services that make up your solution and you have a mapping of the parts of that model to machines. Juju then applies the necessary configuration management scripts to each machine in the model.
 
-In Juju, application-specific knowledge such as dependencies, scale-out practices, operational events like backups and updates, and integration options with other pieces of software are encapsulated in ‘charms.’ This can be shared between team members, reused everywhere from laptops to virtual machines and cloud, and shared with other organisations.
+Application-specific knowledge such as dependencies, scale-out practices, operational events like backups and updates, and integration options with other pieces of software are encapsulated in Juju's 'charms'. This knowledge can then be shared between team members, reused everywhere from laptops to virtual machines and cloud, and shared with other organisations.
 
 The charm defines everything you all collaboratively know about deploying that particular service brilliantly. All you have to do is use any available charm (or write your own), and the corresponding service will be deployed in seconds, on any cloud or server or virtual machine.
 
@@ -91,10 +91,6 @@ Use the language of your choice. It’s normal to get something quick-and-dirty 
 
 If you want, you can also share your charm with the world and gain feedback and contributions from others! In our experience, the more widely a charm is used the more useful it becomes. Different teams bring different expertise - security, performance, scale, and all of those things make for improvements in the charm that are very hard for a single team to achieve.
 
-
-As always, there is a whole host of tools to help you get started:
-juju.ubuntu.com/resources
-If you get stuck, our charm developer community is only a click away.
 What are the best workloads to try with Juju?
 
 Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure such as OpenStack, or container management systems. Pick your favourite cloud and launch a juju server, deploy the Juju GUI there and then drop one of the bundles from the charm store into the blank canvas.
