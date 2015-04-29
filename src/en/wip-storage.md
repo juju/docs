@@ -82,6 +82,23 @@ AWS/EC2
 
 ### Adding storage to the metadata.yaml
 
+Storage requirements _may_ be added to the 'metadata.yaml' of the charm as follows:
+
+```
+storage:
+  data:
+    type: filesystem
+    location: /srv/data
+```
+
+Here the charm is asking for storage it is calling 'data', and it further defines a type and location. It is possible to specify as many entries as desired for storage, and all of the related keys are optional. E.g.
+
+```
+storage:
+   data:
+      type:filesystem
+   cache:
+```
 ### Implementing hooks
 
 for each storage entity contained in the metadata.yaml, the following hooks may be implemented:
