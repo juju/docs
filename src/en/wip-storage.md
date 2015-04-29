@@ -1,8 +1,8 @@
 # Storage support (work in progress)
 
-!!! Note: This page is a draft of the storage support to be included in a future version of juju-core. When the feature lands in a stable version, this information will be moved to appropriate parts of the existing documentation.
+!!! Note: This page is a draft of the storage support to be included in a future version of juju-core. When the feature lands in a stable version, this information will be moved to appropriate parts of the existing documentation. _*NONE OF THE INSTRUCTIONS HERE ARE GUARANTEED TO WORK*_
 
-> for testing purposes, please see #REF #Testing for requirements of storage support and notes on the current implementation
+> for testing purposes, please see the #Testing section for requirements of storage support and notes on the current implementation
 
 
 Many services require access to a storage resource of some form. Juju charms can declare what storage requirements  they have,
