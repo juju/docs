@@ -23,7 +23,7 @@ This plugin is highly inspired from [kAPIlt](https://github.com/kAPIlt) Juju plu
 
 - You have an account and are logged into [cloud.scaleway.com](https://cloud.scaleway.com)
 - You have configured your [SSH Key](https://www.scaleway.com/docs/configure_new_ssh_key)
-
+- You have installed libffi-dev and libssl-dev
 
 ## Installation
 
