@@ -86,23 +86,10 @@ AWS/EC2
 
 for each storage entity contained in the metadata.yaml, the following hooks may be implemented:
 
-*-relation-joined
-*-relation-changed
-*-relation-broken
-*-relation-departed
 *-storage-attached
 *-storage-detaching(not yet supported)
 
 ### Additional considerations
-
-
-
-
-
-
-
-
-
 
 
 
@@ -116,7 +103,7 @@ prior to bootstrapping.
 EXAMPLE
 --------------
 
-A while back I modified the PostgreSQL charm to use the storage feature. You can find my branch at
+There is a modified version of the PostgreSQL charm using the storage feature. You can find the branch at
  https://code.launchpad.net/~axwalk/charms/trusty/postgresql/trunk. If you're interested in seeing the changes required to the charm, they're here: http://bazaar.launchpad.net/~axwalk/charms/trusty/postgresql/trunk/revision/112 (4 lines of code, 4 lines of YAML - not bad!)
 
 Anyway, here's how you can go about using the new feature.
