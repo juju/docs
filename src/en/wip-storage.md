@@ -51,22 +51,30 @@ Juju will use a default size of 1G, unless the charm itself has specified a mini
 
 When deploying on a provider which supplies storage, the supported storage pool types may be used in addition to ‘loop’ and ‘rootfs’. For example, on using Amazon’s EC2 provider, we can make use of the default ‘ebs’ storage pool
 
-    juju deploy cs:~axwalk/postgresql --storage data=ebs,10G
+```
+juju deploy cs:~axwalk/postgresql --storage data=ebs,10G
+```
 
 Cloud providers may support more than one type of storage. For example, in the case of EC2, we can also make use of the ebd-ssd pool, which is SSD-based storage, and hence faster and better for some storage requirements.
 
-    juju deploy cs:~axwalk/postgresql --storage data=ebs-ssd
+```
+juju deploy cs:~axwalk/postgresql --storage data=ebs-ssd
+```
 
 We can also merely specify the size, in which case Juju will use the default pool for the selected environment.  E.g. 
-    juju deploy cs:~axwalk/postgresql --storage data=10G
+
+```
+juju deploy cs:~axwalk/postgresql --storage data=10G
+```
 
 Which, on the EC2 provider, will create a 10 gigabyte volume in the ‘ebs’ pool.
 
 Charms may specify as many different types of storage as they require, in which case they may all be specified using the constraint, or some or all can be omitted to accept the default values:
 
 
-
-    juju deploy cs:~axwalk/postgresql --storage data=ebs,10G cache=ebs-ssd
+```
+juju deploy cs:~axwalk/postgresql --storage data=ebs,10G cache=ebs-ssd
+```
 
 ### Persistence (provisional)
 
@@ -125,6 +133,7 @@ There is a modified version of the PostgreSQL charm using the storage feature. Y
 
 Anyway, here's how you can go about using the new feature.
 
+```
 $ export JUJU_DEV_FEATURE_FLAGS=storage
 $ juju bootstrap --upload-tools # only because it's from source!
 $ juju deploy cs:~axwalk/postgresql pg-rootfs
@@ -142,7 +151,7 @@ $ juju storage list
     pg-magnetic/0 data/2 /srv/data attached false      
     pg-rootfs/0   data/0 /srv/data attached false      
     pg-ssd/0      data/3 /srv/data attached false
-
+```
 
 IMPLEMENTED FEATURES
 ---------------------------------------
