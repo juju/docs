@@ -17,11 +17,13 @@ https://code.launchpad.net/~axwalk/charms/trusty/postgresql/trunk
 By default, charms with storage requirements will allocate those resources on the root filesystem of the unit where they are deployed.
 To make use of additional storage resources, Juju needs to know what they are. Some providers (eg EC2) support generic default storage pools (see #REF  the documentation on provider support), but in the case of no default support or a desire to be more specific, Juju has the `juju storage` command and subcommands to create and manage storage resources
 
+```
 juju storage 
 juju storage list
 juju storage pool list
 juju storage pool create
 juju storage volume list
+```
 
 
 
@@ -75,20 +77,23 @@ juju deploy cs:~axwalk/postgresql --storage data=10G
 
 Which, on the EC2 provider, will create a 10 gigabyte volume in the ‘ebs’ pool.
 
-Charms may specify as many different types of storage as they require, in which case they may all be specified using the constraint, or some or all can be omitted to accept the default values:
+Charms may declare multiple types of storage, in which case they may all be specified using the constraint, or some or all can be omitted to accept the default values:
 
 
 ```
 juju deploy cs:~axwalk/postgresql --storage data=ebs,10G cache=ebs-ssd
 ```
 
-### Persistence (provisional)
+### Persistence (not working!)
 
 Some providers have the option to detach storage from the lifespan of the instance(s) which created/used it. This means that even after services have been removed, the storage and its contents still exist in your cloud, which may be useful for backup, recovery or transport purposes. Juju will not allow you to completely destroy an environment which contains such storage (except by using the --force option). If this feature is enabled for storage pools, you must remember to decommission the storage manually.
 
 ### Provider-specific options
 
 AWS/EC2
+OpenStack
+MAAS
+
 
 ## Writing a charm which supports storage
 
@@ -132,7 +137,7 @@ def data_storage_attached():
 
 ## TESTING
 
-If you are so inclined to test this feature out, you will need to build from source (1.24+) and enable the feature with:
+Currently, if you wish to test this feature, you will need to build from source (1.24+) and enable the feature with:
     export JUJU_DEV_FEATURE_FLAGS=storage
 prior to bootstrapping.
 
