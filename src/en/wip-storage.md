@@ -37,15 +37,21 @@ juju deploy <charm> --storage <label>=<pool>,<size>
 
 For example, to deploy the postgresql service and have it use the unit’s local filesystem for 10 Gigabytes of storage for its ‘data’ storage requirement:
 
-    juju deploy cs:~axwalk/postgresql --storage data=rootfs,10G
+```
+juju deploy cs:~axwalk/postgresql --storage data=rootfs,10G
+```
 
 We can also deploy using a local loopback mount
 
-    juju deploy cs:~axwalk/postgresql --storage data=loop,5G
+```
+juju deploy cs:~axwalk/postgresql --storage data=loop,5G
+```
 
 If the size is omitted...
 
-    juju deploy cs:~axwalk/postgresql --storage data=rootfs
+```
+juju deploy cs:~axwalk/postgresql --storage data=rootfs
+```
 
 Juju will use a default size of 1G, unless the charm itself has specified a minimum value, in which case that will be used.
 
@@ -99,14 +105,8 @@ storage:
     location: /srv/data
 ```
 
-Here the charm is asking for storage it is calling 'data', and it further defines a type and location. It is possible to specify as many entries as desired for storage, and all of the related keys are optional. E.g.
+Here the charm is asking for storage it is calling 'data', and it further defines a type and location. It is possible to specify as many entries as desired for storage, and all of the related keys are optional. 
 
-```
-storage:
-   data:
-      type:filesystem
-   cache:
-```
 ### Implementing hooks
 
 for each storage entity contained in the metadata.yaml, the following hooks may be implemented:
