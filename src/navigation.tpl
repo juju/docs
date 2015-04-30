@@ -69,7 +69,10 @@
               <li class=" sub"><a href="authors-charm-best-practice.html">Best practices</a></li>
               <li class=" sub"><a href="authors-charm-icon.html">Charm Icons</a></li>
             </ul>
-
+            <h1> In Progress</h1>
+            <ul class="no-margin">
+            	<li class=""><a href="wip-storage.html">Storage</a></li>
+            </ul>
             <h1>Tools</h1>
             <ul class="no-margin">
               <li class=""><a href="tools-charm-tools.html">Charm Tools</a></li>
