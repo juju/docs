@@ -114,6 +114,18 @@ for each storage entity contained in the metadata.yaml, the following hooks may 
 *-storage-attached
 *-storage-detaching(not yet supported)
 
+So, for example, if we had specified a need for storage labelled 'data', we would probably
+want to implement the hook 'data-storage-attached', which might look something like:
+
+```
+@hooks.hook('data-storage-attached')
+def data_storage_attached():
+    hookenv.log("Storage ready and mounted", hookenv.DEBUG)
+    config_changed(mount_point=external_volume_mount)
+```
+(this example assumes you are writing hooks in python using the charm helpers)
+
+
 ### Additional considerations
 
 
