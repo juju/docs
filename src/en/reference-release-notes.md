@@ -78,15 +78,19 @@ This release replaces version 1.22.1.
   project, a service account is set up automatically when you create
   your project. Juju uses that service account to connect to the GCE API
   and does so with the proper authentication scope.  After you have
-  created the project go to the following URL to get the
-  credentials to use in environments.yaml:
-
-  If you extracted the 'private-key' by hand from the GCE project json,
-  change "\u003d" to "=".
+  created the project you must get the credentials to use in
+  environments.yaml.  The client ID and client email address are found at
+  the following URL:
 
       ```
       https://console.developers.google.com/project/<project-id>/apiui/credential
       ```
+
+  To get the private key you must create a new one by pressing the
+  'Generate new JSON key' button in the 'Service Account' section of the
+  credentials page.  Download the JSON file and copy the "private-key"
+  value into your environments.yaml.  You may need to change "\u003d"
+  to "=".  Note that the file also contains the client ID and email.
 
   For more information please refer to
 
