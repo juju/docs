@@ -54,6 +54,7 @@ This release replaces version 1.22.1.
       my-gce:
        type: gce
        project-id: <your-project-id>
+       auth-file: <path-to-json-file-from-google>
        private-key: <your-private-key>
        client-email: <your-client-email>
        client-id: <your-client-id>
@@ -72,21 +73,25 @@ This release replaces version 1.22.1.
   environment's resources as well as to track the environment's cost and
   resource usage.
 
-  'private-key', 'client-email', and 'client-id' are your GCE OAuth
-  credentials.  These details are associated with the 'service account' of
-  the GCE project you will use for your Juju environment.  For each GCE
-  project, a service account is set up automatically when you create
-  your project. Juju uses that service account to connect to the GCE API
-  and does so with the proper authentication scope.  After you have
-  created the project go to the following URL to get the
-  credentials to use in environments.yaml:
-
-  If you extracted the 'private-key' by hand from the GCE project json,
-  change "\u003d" to "=".
+  'auth-file' is the path to a JSON file you get from your GCE console
+  that contains all the authentication credentials it needs.  After you
+  have created your project, download the file by pressing the
+  'Generate new JSON key' button in the 'Service Account' section of
 
       ```
       https://console.developers.google.com/project/<project-id>/apiui/credential
       ```
+
+  If necessary, instead of 'auth-file' you may set the 'private-key',
+  'client-email', and 'client-id' fields in your environments.yaml.  They
+  are your GCE OAuth credentials (matching those in the JSON file).  You
+  may need to change "\u003d" in the private key to "=".
+
+  Either way, these details are associated with the 'service account' of
+  the GCE project you will use for your Juju environment.  For each GCE
+  project, a service account is set up automatically when you create the
+  project.  Juju uses that service account to connect to the GCE API and
+  does so with the proper authentication scope.
 
   For more information please refer to
 
