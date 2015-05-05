@@ -1,6 +1,6 @@
 # Configuring for Windows Azure
 
-This process requires you to have an Windows Azure account. If you have not
+This process requires you to have a Windows Azure account. If you have not
 signed up for one yet, it can obtained at http://azure.microsoft.com/en-us/.
 
 You should start by generating a generic configuration file for Juju, using the
@@ -13,9 +13,9 @@ This will generate a file, `environments.yaml`, which will live in your
 exist).
 
 **Note:** The above command will not overwrite your existing environments.yaml
-file, or output to stdout. In order to see the boilerplate environment.yaml on
+file, or output to stdout. In order to see the boilerplate environments.yaml on
 stdout you need to append the `--show` option. This is helpful if you have an
-existing environment.yaml and just need to add a section. For example:
+existing environments.yaml and just need to add a section. For example:
 
     juju generate-config --show
 
@@ -56,7 +56,7 @@ You will need to set the `management-subscription-id`,
 `management-certificate-path`, and `storage-account-name`, replacing the dummy
 values with the relevant details for your account.
 
-**Note:** Other than `location` the other key vaule defaults are recommended,
+**Note:** Other than `location` the other key value defaults are recommended,
 but can be updated to your preference.
 
 **Note:** Ensure that you set `management-certificate-path` is set to use the
