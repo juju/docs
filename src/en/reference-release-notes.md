@@ -7,6 +7,360 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.23.2
+
+A new stable release of Juju, juju-core 1.23.2, is now available.
+This release replaces version 1.22.1.
+
+
+## Getting Juju
+
+  juju-core 1.23.2 is available for vivid and backported to earlier
+  series in the following PPA:
+
+      ```
+      https://launchpad.net/~juju/+archive/stable
+      ```
+
+  Windows and OS X users will find installers at:
+
+      ```
+      https://launchpad.net/juju-core/+milestone/1.23.2
+      ```
+
+  ## Notable Changes
+
+    * New Support for Google Compute Engine (GCE)
+    * Support for systemd (and Vivid)
+    * New Style Restore
+    * Improved Proxy Support for Restrictive Networks
+    * New Charm Actions
+    * New blocks and Messages. 
+    * Experimental: Service Leader Elections
+    * Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
+
+
+  ### New Support for Google Compute Engine (GCE)
+
+  A new provider has been added that supports hosting a Juju environment
+  in GCE. This feature leverages the support for Ubuntu cloud-images that
+  GCE added late 2014. It uses Google's GCE API to interact with your
+  account there. API authentication credentials, as well as other config
+  options, must be added to your environments.yaml file before running
+  'juju bootstrap'. The different options are described below.
+
+  The basic config options in your environments.yaml will look like this:
+
+      my-gce:
+       type: gce
+       project-id: <your-project-id>
+       auth-file: <path-to-json-file-from-google>
+       private-key: <your-private-key>
+       client-email: <your-client-email>
+       client-id: <your-client-id>
+
+  The values in angle brackets need to be replaced with your GCE
+  information.
+
+  'project-id' must identify a GCE project that already exists before you
+  run "juju bootstrap".  This means creating a new one through the
+  developer console (https://console.developers.google.com/project) before
+  bootstrapping Juju.  To make it easier to quickly identify in your GCE
+  console, we recommend that the name start with 'juju-' and that it
+  include the environment name you are planning to use.  You could also
+  use an existing project but we recommend against that if possible.
+  Using a new project will make it easier for you to manage the
+  environment's resources as well as to track the environment's cost and
+  resource usage.
+
+  'auth-file' is the path to a JSON file you get from your GCE console
+  that contains all the authentication credentials it needs.  After you
+  have created your project, download the file by pressing the
+  'Generate new JSON key' button in the 'Service Account' section of
+
+      ```
+      https://console.developers.google.com/project/<project-id>/apiui/credential
+      ```
+
+  If necessary, instead of 'auth-file' you may set the 'private-key',
+  'client-email', and 'client-id' fields in your environments.yaml.  They
+  are your GCE OAuth credentials (matching those in the JSON file).  You
+  may need to change "\u003d" in the private key to "=".
+
+  Either way, these details are associated with the 'service account' of
+  the GCE project you will use for your Juju environment.  For each GCE
+  project, a service account is set up automatically when you create the
+  project.  Juju uses that service account to connect to the GCE API and
+  does so with the proper authentication scope.
+
+  For more information please refer to
+
+      ```
+      https://developers.google.com/accounts/docs/OAuth2ServiceAccount#creatinganaccount
+      ```
+      and
+      ```
+      https://developers.google.com/accounts/docs/OAuth2#serviceaccount.
+      ```
+
+  If the project's service account has any permissions problems go to the
+  following page to fix them:
+
+      ```
+      https://console.developers.google.com/project/<project-id>/permissions
+      ```
+
+  The GCE API should already be activated for the project. It it isn't,
+  go to the following URL in your console:
+
+      ```
+      https://console.developers.google.com/project/<project-name>/apiui/api
+      ```
+
+  Also see step 2 on
+
+      ```
+      https://cloud.google.com/compute/docs/api/how-tos/authorization.
+      ```
+
+  The following config options in your environments.yaml file are
+  optional:
+
+      region - (default us-central1) The location to place the
+             environment.
+      image-endpoint - (default https://www.googleapis.com) This is
+             where Juju will look for disk images when provisioning a
+             new instance on GCE.
+
+  All Juju 1.23 provider capabilities are available for GCE except for
+  networking.
+
+
+  ### Support for systemd (and Vivid)
+
+  In addition to upstart, Juju now supports Ubuntu hosts using systemd as
+  their init system.
+
+  Support for systemd allows Juju to run on Ubuntu 15.04 (Vivid Vervet),
+  which is the first Ubuntu release to boot with systemd. This means you
+  can bootstrap Juju on a Vivid host. Note that the charm store
+  (jujucharms.com) only support LTS releases. You can develop and test
+  vivid charms in a local charm repository.
+
+
+  ### New Style Restore
+
+  You can now restore a backup with the new 'backups restore' command,
+  which is more reliable and fast. New restore supports backups generated
+  with the deprecated Juju backup plugin and with the recently added 'juju
+  backups create' command. You can restore from a local backup file like
+  so:
+
+      juju backups restore [-b] --file <backup file>
+
+  Which will optionally bootstrap a new state server, upload a backup file
+  and restore it. The -b option will fail if there is a running state
+  server.
+
+  You can also restore from a backup stored on the state-server:
+
+      juju backups restore --id <on server backup id>
+
+  To obtain a list of the existing backups in the state-server you can
+  use:
+
+      juju backups list
+
+
+  ### Improved Proxy Support for Restrictive Networks
+
+  A few of issues around HTTP/HTTPS and apt proxy support were fixed (Lp
+  1403225, Lp 1417617). Charm downloads from the charm store which could
+  not be completed due to connectivity issues are now retried every few
+  minutes rather than once every 24 hours. Proxy settings from the
+  environment (http-proxy, https-proxy, ftp-proxy, apt-http-proxy,
+  apt-https-proxy, apt-ftp-proxy, and no-proxy) are properly propagated to
+  all machines, and Juju agents use them for all external connectivity.
+  The juju run command also uses proxy settings when defined, as well as
+  debug-hooks and all hooks the a charm runs. You can specify one or more
+  proxy settings via environment variables (http_proxy, https_proxy, etc.)
+  or inside your environments.yaml. Other related proxies are configured
+  as needed (e.g. you can specify just http-proxy, and that will also be
+  used for https, ftp, and apt proxies).
+
+
+  ### New Charm Actions
+
+  Juju charms can describe actions that users can take on deployed
+  services. These actions are scripts that can be triggered on a unit by
+  the via the Juju CLI (support for triggering actions from the Juju GUI
+  will follow soon). Schemas for each action are defined in an
+  actions.yaml file in the charm root, and conform to JSON-Schema. When an
+  action is invoked, passed parameters are validated against the
+  respective schema as explained in "Actions for the Charm author" at both
+  the API and the unit level:
+
+      ```
+      https://jujucharms.com/docs/1.20/authors-charm-actions
+      ```
+
+  CLI Actions are sub-commands of the 'juju action' command. For more
+  details on their usage, 'juju action help' has examples and further
+  material.
+
+  The following subcommands are currently specified:
+
+    * defined - show actions defined for a service
+    * do - queue an action for execution
+    * fetch - show results of an action by ID
+    * status - show results of actions filtered by optional ID prefix
+
+
+  ### New Blocks and Messages
+
+  You can now specify block message when you enable a block. For example,
+  you can add a message to 'destroy-environment':
+
+      juju block destroy-environment "Don't destroy this environment"
+      juju destroy-environment
+      ERROR Don't destroy this environment
+
+  You can list the blocks enabled in the environment like so:
+
+      juju block list
+      destroy-environment=on, Don't destroy this environment
+      remove-object=off
+      all-changes=off
+
+  The Multiwatcher now has information about blocks. There is now block
+  client capable of switching blocks on/off as well as listing all enabled
+  blocks.
+
+
+  ### Experimental: Service Leader Elections
+
+  Services can now coordinate leadership among the deployed units using
+  Juju's service leader election support.
+
+  Charms now have access to three new hook tools:
+
+      is-leader - returns true only if the executing unit is guaranteed
+        service leadership for the next 30s
+      leader-get - as relation-get; accessible only within the service
+      leader-set - as relation-set; will fail if not executed on leader
+
+  ...and two new hooks:
+
+      leader-elected - runs when the unit takes service leadership
+      leader-settings-changed - runs when another unit runs leader-set
+
+  When a unit starts up, it will always run either leader-elected or
+  leader-settings-changed as soon as possible, delaying only doing so only
+  to run the install hook; complete any queued or in-flight operation; or
+  resolve a hook or upgrade error.
+
+
+  ### Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
+
+  The Juju AWS and MAAS providers now support starting LXC containers. The
+  MAAS providers also supports networking on KVM. Containers and Virtual
+  Machines will be given statically allocated private IP addresses from
+  the same subnet as their host machine. For example on MAAS you can now:
+
+      juju deploy wordpress --to lxc:0
+      juju add-unit mysql --to kvm:1
+
+  This experimental feature can be enabled when the environment is
+  bootstrapped like so:
+
+      JUJU_DEV_FEATURE_FLAGS="address-allocation" juju bootstrap
+   
+  Known limitations: 
+
+    * Amazon limits the number of addresses the containers an instance can
+      have based on it’s size. 
+    * Statically allocated addresses are not released on container shutdown. 
+    * Container addressability does not survive a host reboot. 
+    * No public IP address is added on AWS, and we don’t yet support
+      dynamic port mapping -- so you can not yet expose containerized
+      services on Amazon.
+
+
+  ## Resolved issues
+
+    * Allow annotations to be set on charms
+      Lp 1313016
+
+    * Juju-backup is not a valid plugin
+      Lp 1389326
+
+    * Juju needs to support systemd for >= vivid
+      Lp 1409639
+
+    * Joyent provider uploads user's private ssh key by default
+      Lp 1415671
+
+    * Unable to bootstrap on cn-north-1
+      Lp 1415693
+
+    * Debug messages show when only info was asked for
+      Lp 1421237
+
+    * Juju default logging leaks credentials
+      Lp 1423272
+
+    * Juju resolve doesn't recognize error state
+      Lp 1424069
+
+    * Juju status --format=tabular
+      Lp 1424590
+
+    * Ec2 provider unaware of c3 types in sa-east-1
+      Lp 1427840
+
+    * Ec2 eu-central-1 region not in provider
+      Lp 1428117
+
+    * Ec2 provider does not include c4 instance family
+      Lp 1428119
+
+    * Allwatcher does not remove last closed port for a unit, last removed
+      service config
+      Lp 1428430
+
+    * Make kvm containers addressable (esp. on maas)
+      Lp 1431130
+
+    * Fix container addressability issues with cloud-init, precise, when
+      lxc-clone is true
+      Lp 1431134
+
+    * Dhcp's "option interface-mtu 9000" is being ignored on bridge
+      interface br0
+      Lp 1403955
+
+    * Juju-1.23beta3 breaks glance <-> mysql relation when glance is
+      hosted in a container
+      Lp 1441811
+
+    * Juju ensure-availability should be able to target existing
+      machines
+      Lp 1394755
+
+    * Juju 1.23b4 vivid panic: runtime error: invalid memory address or
+      nil pointer dereference
+      Lp 1443541
+
+    * 1.23-beta4 sporadically fails autotests
+      Lp 1443440
+
+    * 1.23.1: bootstrap failure, vivid, local provider
+      Lp 1447446
+
+    * Hooks don't fire after upgrade 1.23.0
+      Lp 1447846
+
+
 ^# juju-core 1.22.1
 
   A new stable release of Juju, juju-core 1.22.1, is now available.
