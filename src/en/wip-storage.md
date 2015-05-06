@@ -31,19 +31,23 @@ juju storage volume list
 
 As previously mentioned, a charm which requires storage will automatically allocate the default storage (unit filesystem) by default. It is possible to instead specify the storage to be used when the service is deployed, using constraints.
 
-The constraints can specify the type/pool and size of the storage required.
+The constraints can specify the type/pool, size and count, of the storage required. At least one of the constraints must be specified, but otherwise they are all optional.
+
+If pool is not specified, then Juju will select the default storage provider for the current environment (e.g. cinder for openstack, ebs for ec2, loop for local).
+If size is not specified, then Juju will use the minimum size specified in the charm's storage metadata, or 1GiB if the metadata does not specify.
+If count is not specified, then Juju will create a single instance of the store.
 
 ```
-juju deploy <charm> --storage <label>=<pool>,<size>
+juju deploy <charm> --storage <label>=<pool>,<size>,count
 ```
 
-For example, to deploy the postgresql service and have it use the unit’s local filesystem for 10 Gigabytes of storage for its ‘data’ storage requirement:
+For example, to deploy the postgresql service and have it use the unit’s local filesystem for 10 gibibytes of storage for its ‘data’ storage requirement:
 
 ```
 juju deploy cs:~axwalk/postgresql --storage data=rootfs,10G
 ```
 
-We can also deploy using a local loopback mount
+We can also deploy using a local loop device
 
 ```
 juju deploy cs:~axwalk/postgresql --storage data=loop,5G
@@ -55,7 +59,7 @@ If the size is omitted...
 juju deploy cs:~axwalk/postgresql --storage data=rootfs
 ```
 
-Juju will use a default size of 1G, unless the charm itself has specified a minimum value, in which case that will be used.
+Juju will use a default size of 1GiB, unless the charm itself has specified a minimum value, in which case that will be used.
 
 When deploying on a provider which supplies storage, the supported storage pool types may be used in addition to ‘loop’ and ‘rootfs’. For example, on using Amazon’s EC2 provider, we can make use of the default ‘ebs’ storage pool
 
@@ -75,7 +79,7 @@ We can also merely specify the size, in which case Juju will use the default poo
 juju deploy cs:~axwalk/postgresql --storage data=10G
 ```
 
-Which, on the EC2 provider, will create a 10 gigabyte volume in the ‘ebs’ pool.
+Which, on the EC2 provider, will create a 10 gibibyte volume in the ‘ebs’ pool.
 
 Charms may declare multiple types of storage, in which case they may all be specified using the constraint, or some or all can be omitted to accept the default values:
 
@@ -84,16 +88,28 @@ Charms may declare multiple types of storage, in which case they may all be spec
 juju deploy cs:~axwalk/postgresql --storage data=ebs,10G cache=ebs-ssd
 ```
 
-### Persistence (not working!)
+### Persistence (incomplete!)
 
-Some providers have the option to detach storage from the lifespan of the instance(s) which created/used it. This means that even after services have been removed, the storage and its contents still exist in your cloud, which may be useful for backup, recovery or transport purposes. Juju will not allow you to completely destroy an environment which contains such storage (except by using the --force option). If this feature is enabled for storage pools, you must remember to decommission the storage manually.
+Some providers have the option to detach storage from the lifespan of the instance(s) which created/used it. This means that even after services have been removed, the storage and its contents still exist in your cloud, which may be useful for backup, recovery or transport purposes. Juju will not allow you to completely destroy an environment which contains such storage (except by using the --force option). To create persistent volumes, create a storage pool with the "persistent" attribute set to "true". Persistent volumes are currently supported by the EBS and Cinder storage providers. Currently, all Cinder volumes are considered persistent, regardless of whether the pool is configured as such.
 
-### Provider-specific options
+Juju does not currently provide any means of decomissioning persistent storage, so you must do this manually after force-destroying the environment. This will be rectified in a future version of Juju.
 
-AWS/EC2
-OpenStack
-MAAS
+### Provider support
 
+All environment providers support the following storage providers:
+ - loop: block-type, creates a file in the agent data-dir and attaches a loop device to it. See the caveats section below for a comment on using the loop storage provider with local/LXC.
+ - rootfs: filesystem-type, creates a sub-directory in the agent's data-dir for the unit/charm to use
+ - tmpfs: filesystem-type, creates a tmpfs
+
+Additionally, native storage providers exist for the EC2 (ebs) and OpenStack (cinder).
+
+The EC2/EBS provider currently supports the following pool configuration attributes:
+ - volume-type: specifies the EBS volume type to create. You can use either the EBS volume type names, or synonyms defined by Juju (in parentheses): gp2 (ssd), io1 (provisioned-iops), standard (magnetic). By default, magnetic/standard volumes will be created. An 'ebs-ssd' pool is created in all EC2 environments, which defaults the volume type to ssd/gp2 instead.
+ - iops: the number of IOPS for provisioned-iops volume types. There are restrictions on minimum and maximum IOPS, as a ratio of the size of volumes; see the URL below for more information.
+ - encrypted: true|false, indicating whether or not to encrypt volumes created by the pool.
+For information regarding EBS volume types, see http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html.
+
+The OpenStack/Cinder provider does not currently have any configuration.
 
 ## Writing a charm which supports storage
 
@@ -107,29 +123,45 @@ Storage requirements _may_ be added to the 'metadata.yaml' of the charm as follo
 storage:
   data:
     type: filesystem
+    description: junk storage
+    shared: false # not yet supported, see description below
+    read-only: false # not yet supported, see description below
+    minimum-size: 100M
     location: /srv/data
 ```
 
-Here the charm is asking for storage it is calling 'data', and it further defines a type and location. It is possible to specify as many entries as desired for storage, and all of the related keys are optional. 
+Here the charm is asking for storage it is calling 'data', and it further defines a type and location. It is possible to specify as many entries as desired for storage, and all but the 'type' key are optional. The 'type' attribute specifies the type of the storage: filesystem or block (i.e. block device/disk). The 'minimum-size' attribute specifies the minimum size of the store, overriding the default of 1GiB if the user does not specify a size. The location specifies the path at which to mount filesystem-type storage. The 'read-only' and 'shared' attributes are currently not handled. Support will be added in a future version of Juju.
+
+By default, stores are singletons; a charm will have exactly one of the specified store. It is also possible for a charm to specify storage that may have multiple instantiations, e.g. multiple disks to add to a pool. To do this, you can specify the "multiple" attribute:
+
+```
+storage:
+  disks:
+    type: block
+    multiple:
+      range: 0-10
+```
+
+The above says that the charm may have anywhere from zero to ten block devices allocated to the 'disks' store. The formats supported by "range" are: m (a fixed number), m-n (an explicit range), and m- (a minimum number). 
 
 ### Implementing hooks
 
 for each storage entity contained in the metadata.yaml, the following hooks may be implemented:
 
 *-storage-attached
-*-storage-detaching(not yet supported)
+*-storage-detaching
 
-So, for example, if we had specified a need for storage labelled 'data', we would probably
-want to implement the hook 'data-storage-attached', which might look something like:
+Each hook is prefixed with the name of the store, similar to how relation hooks are prefixed
+with the name of the relation. So, for example, if we had specified a need for storage labelled
+'data', we would probably want to implement the hook 'data-storage-attached', which might look
+something like:
 
 ```
-@hooks.hook('data-storage-attached')
-def data_storage_attached():
-    hookenv.log("Storage ready and mounted", hookenv.DEBUG)
-    config_changed(mount_point=external_volume_mount)
+mountpoint=$(storage-get location)
+sed -i /etc/myservice.conf "s,MOUNTPOINT,$mountpoint"
 ```
-(this example assumes you are writing hooks in python using the charm helpers)
 
+The storage-attached hooks will be run before the install and upgrade-charm hooks, so that installation and upgrade routines may use the storage. The storage-detaching hooks will be run before storage is detached, and always before the stop hook is run, to allow the charm to gracefully release resources before they are removed and before the unit terminates.
 
 ### Additional considerations
 
@@ -137,22 +169,17 @@ def data_storage_attached():
 
 ## TESTING
 
-Currently, if you wish to test this feature, you will need to build from source (1.24+) and enable the feature with:
-    export JUJU_DEV_FEATURE_FLAGS=storage
-prior to bootstrapping.
-
+The storage feature is available from Juju 1.24 onwards.
 
 EXAMPLE
 --------------
 
 There is a modified version of the PostgreSQL charm using the storage feature. You can find the branch at
- https://code.launchpad.net/~axwalk/charms/trusty/postgresql/trunk. If you're interested in seeing the changes required to the charm, they're here: http://bazaar.launchpad.net/~axwalk/charms/trusty/postgresql/trunk/revision/112 (4 lines of code, 4 lines of YAML - not bad!)
+ https://code.launchpad.net/~axwalk/charms/trusty/postgresql/trunk.
 
-Anyway, here's how you can go about using the new feature.
+Here is how you can go about using the new feature.
 
 ```
-$ export JUJU_DEV_FEATURE_FLAGS=storage
-$ juju bootstrap --upload-tools # only because it's from source!
 $ juju deploy cs:~axwalk/postgresql pg-rootfs
 $ juju deploy cs:~axwalk/postgresql --storage data=loop,1G pg-loop
 $ juju deploy cs:~axwalk/postgresql --storage data=ebs,10G pg-magnetic
@@ -185,33 +212,17 @@ IMPLEMENTED FEATURES
   * list storage instances/attachments
   * list volumes/attachments
   * list and create storage pools
-- probably other things which elude me
-
-PROVIDER SUPPORT
--------------------------------
-
-All environment providers support the following storage providers:
- - loop: block-kind, creates a file in the agent data-dir and attaches a loop device to it. See the caveats section below for a comment on using the loop storage provider with local/LXC.
- - rootfs: filesystem-kind, creates a sub-directory in the agent's data-dir for the unit/charm to use
-
-We have implemented support for creating volumes in the ec2 provider, via the "ebs" storage provider. By default, the ebs provider will create cheap and nasty magnetic volumes. There is also an "ebs-ssd" storage pool provided OOTB that will create SSD (gp2) volumes. Finally, you can create your own pools if you like; the parameters for ebs are:
-  - volume-type: may be "magnetic", "ssd", or "provisioned-iops"
-  - iops: number of provisioned IOPS (requires volume-type=provisioned-iops)
-
-Some storage providers also support a "persistent=<bool>" pool attribute. By using this, Juju will not tie the lifetime of storage entities (volumes, filesystems) to the lifetime of the machines that they are attached to. In EC2/EBS terms, a persistent volume is one without any attachments having the DeleteOnTermination flag set. Juju will not allow you to cleanly destroy an environment with persistent volumes; you may use "--force" to subvert this as usual, but please be aware that this will leak the resource.
 
 UNIMPLEMENTED/CAVEATS
 -----------------------------------------
 
-- Storage destruction. Unit and machine destruction are prevented if they have attached storage, so if you're playing with storage expect to have to "destroy-environment --force".
-- Unit agent will not yet wait for required storage before installing.
+- Persistent storage destruction. If you use persistent storage, you must use "destroy-environment --force" and manually destroy the storage through your cloud's management UI.
 - Unit/machine placement is currently disabled if storage is specified.
-- Doesn't matter at the moment due to above point, but charm deployment currently does not check for mount-point conflicts.
+- Charm deployment currently does not check for mount-point conflicts.
 - Charm upgrade does not currently check for incompatible changes to storage requirements in deployed charms.
-- No X-storage-detach(ing|ed) hook yet; it hopefully goes without saying, but anyway: since storage destruction isn't yet done, you won't be notified when storage is destroyed.
-- storage-add command: this is being worked on now, and will hopefully be ready soon.
-- OpenStack/Cinder storage provider. This is well under way, and should be ready within the next couple of weeks.
-- MAAS storage provider. We've been syncing up with the MAAS team, but unfortunately we have not yet been able to schedule time to do the work. Work will commence as soon as the Cinder provider lands.
+- Shared and read-only storage are not yet fully implemented.
+- storage-add command: this is being worked on now, and will be ready for Juju 1.25.
+- MAAS storage provider.
 - For LXC (local provider or not), you must currently set "allow-lxc-loop-mounts" for the loop storage provider to work. With the default AppArmor profile, LXC does not permit containers to mount loop devices. By setting allow-lxc-loop-mounts=true, you are explicitly enabling this, and access to all loop devices on the host.
 - For LXC only, loop devices should but are not currently marked as "persistent". This is because loop devices remain in use even after the container is destroyed. As such, you will need to use "losetup" to detach loop devices that were allocated by containers.
 
