@@ -220,6 +220,7 @@ UNIMPLEMENTED/CAVEATS
 - Unit/machine placement is currently disabled if storage is specified.
 - Charm deployment currently does not check for mount-point conflicts.
 - Charm upgrade does not currently check for incompatible changes to storage requirements in deployed charms.
+- Shared and read-only storage are not yet fully implemented.
 - storage-add command: this is being worked on now, and will be ready for Juju 1.25.
 - MAAS storage provider.
 - For LXC (local provider or not), you must currently set "allow-lxc-loop-mounts" for the loop storage provider to work. With the default AppArmor profile, LXC does not permit containers to mount loop devices. By setting allow-lxc-loop-mounts=true, you are explicitly enabling this, and access to all loop devices on the host.
