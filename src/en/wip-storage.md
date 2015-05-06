@@ -34,7 +34,7 @@ As previously mentioned, a charm which requires storage will automatically alloc
 The constraints can specify the type/pool, size and count, of the storage required. At least one of the constraints must be specified, but otherwise they are all optional.
 
 If pool is not specified, then Juju will select the default storage provider for the current environment (e.g. cinder for openstack, ebs for ec2, loop for local).
-If size is not specified, then Juju will use the minimum size specified in the charm's storage metadata, or 1G if the metadata does not specify.
+If size is not specified, then Juju will use the minimum size specified in the charm's storage metadata, or 1GiB if the metadata does not specify.
 If count is not specified, then Juju will create a single instance of the store.
 
 ```
@@ -59,7 +59,7 @@ If the size is omitted...
 juju deploy cs:~axwalk/postgresql --storage data=rootfs
 ```
 
-Juju will use a default size of 1G, unless the charm itself has specified a minimum value, in which case that will be used.
+Juju will use a default size of 1GiB, unless the charm itself has specified a minimum value, in which case that will be used.
 
 When deploying on a provider which supplies storage, the supported storage pool types may be used in addition to ‘loop’ and ‘rootfs’. For example, on using Amazon’s EC2 provider, we can make use of the default ‘ebs’ storage pool
 
@@ -104,9 +104,10 @@ All environment providers support the following storage providers:
 Additionally, native storage providers exist for the EC2 (ebs) and OpenStack (cinder).
 
 The EC2/EBS provider currently supports the following pool configuration attributes:
- - volume-type: specifies the EBS volume type to create (gp2 (ssd), io1 (provisioned-iops), standard (magnetic)). By default, magnetic/standard volumes will be created. An 'ebs-ssd' pool is created in all EC2 environments, which defaults the volume-type to ssd/gp2.
- - iops: the number of IOPS for provisioned-iops volume types.
+ - volume-type: specifies the EBS volume type to create. You can use either the EBS volume type names, or synonyms defined by Juju (in parentheses): gp2 (ssd), io1 (provisioned-iops), standard (magnetic). By default, magnetic/standard volumes will be created. An 'ebs-ssd' pool is created in all EC2 environments, which defaults the volume type to ssd/gp2 instead.
+ - iops: the number of IOPS for provisioned-iops volume types. There are restrictions on minimum and maximum IOPS, as a ratio of the size of volumes; see the URL below for more information.
  - encrypted: true|false, indicating whether or not to encrypt volumes created by the pool.
+For information regarding EBS volume types, see http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html.
 
 The OpenStack/Cinder provider does not currently have any configuration.
 
@@ -123,13 +124,13 @@ storage:
   data:
     type: filesystem
     description: junk storage
-    shared: false
-    read-only: false
+    shared: false # not yet supported, see description below
+    read-only: false # not yet supported, see description below
     minimum-size: 100M
     location: /srv/data
 ```
 
-Here the charm is asking for storage it is calling 'data', and it further defines a type and location. It is possible to specify as many entries as desired for storage, and all but the 'type' key are optional. The 'type' attribute specifies the type of the storage: filesystem or block (i.e. block device/disk). The 'minimum-size' attribute specifies the minimum size of the store, overriding the default of 1G if the user does not specify a size. The location specifies the path at which to mount filesystem-type storage. The 'read-only' and 'shared' attributes are currently not handled. Support will be added in a future version of Juju.
+Here the charm is asking for storage it is calling 'data', and it further defines a type and location. It is possible to specify as many entries as desired for storage, and all but the 'type' key are optional. The 'type' attribute specifies the type of the storage: filesystem or block (i.e. block device/disk). The 'minimum-size' attribute specifies the minimum size of the store, overriding the default of 1GiB if the user does not specify a size. The location specifies the path at which to mount filesystem-type storage. The 'read-only' and 'shared' attributes are currently not handled. Support will be added in a future version of Juju.
 
 By default, stores are singletons; a charm will have exactly one of the specified store. It is also possible for a charm to specify storage that may have multiple instantiations, e.g. multiple disks to add to a pool. To do this, you can specify the "multiple" attribute:
 
@@ -160,7 +161,7 @@ mountpoint=$(storage-get location)
 sed -i /etc/myservice.conf "s,MOUNTPOINT,$mountpoint"
 ```
 
-The storage-attached hooks will be run before the install and upgrade-harm hooks, so that installation and upgrade routines may use the storage. The storage-detaching hooks will be run before storage is detached, and always before the stop hook is run, to allow the charm to gracefully release resources before they are removed and before the unit terminates.
+The storage-attached hooks will be run before the install and upgrade-charm hooks, so that installation and upgrade routines may use the storage. The storage-detaching hooks will be run before storage is detached, and always before the stop hook is run, to allow the charm to gracefully release resources before they are removed and before the unit terminates.
 
 ### Additional considerations
 
@@ -219,7 +220,7 @@ UNIMPLEMENTED/CAVEATS
 - Unit/machine placement is currently disabled if storage is specified.
 - Charm deployment currently does not check for mount-point conflicts.
 - Charm upgrade does not currently check for incompatible changes to storage requirements in deployed charms.
-- storage-add command: this is being worked on now, and will hopefully be ready soon.
+- storage-add command: this is being worked on now, and will be ready for Juju 1.25.
 - MAAS storage provider.
 - For LXC (local provider or not), you must currently set "allow-lxc-loop-mounts" for the loop storage provider to work. With the default AppArmor profile, LXC does not permit containers to mount loop devices. By setting allow-lxc-loop-mounts=true, you are explicitly enabling this, and access to all loop devices on the host.
 - For LXC only, loop devices should but are not currently marked as "persistent". This is because loop devices remain in use even after the container is destroyed. As such, you will need to use "losetup" to detach loop devices that were allocated by containers.
