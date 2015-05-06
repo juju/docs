@@ -31,13 +31,15 @@ juju storage volume list
 
 As previously mentioned, a charm which requires storage will automatically allocate the default storage (unit filesystem) by default. It is possible to instead specify the storage to be used when the service is deployed, using constraints.
 
-The constraints can specify the type/pool and size, and optionally a count, of the storage required.
+The constraints can specify the type/pool, size and count, of the storage required. At least one of the constraints must be specified, but otherwise they are all optional.
+
+If pool is not specified, then Juju will select the default storage provider for the current environment (e.g. cinder for openstack, ebs for ec2, loop for local).
+If size is not specified, then Juju will use the minimum size specified in the charm's storage metadata, or 1G if the metadata does not specify.
+If count is not specified, then Juju will create a single instance of the store.
 
 ```
-juju deploy <charm> --storage <label>=<pool>,<size>[,count]
+juju deploy <charm> --storage <label>=<pool>,<size>,count
 ```
-
-Unless specified, the count is 1; this means that only one instance of the specified store will be created.
 
 For example, to deploy the postgresql service and have it use the unit’s local filesystem for 10 gibibytes of storage for its ‘data’ storage requirement:
 
