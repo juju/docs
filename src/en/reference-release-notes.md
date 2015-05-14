@@ -7,6 +7,68 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.23.3
+
+  A new stable stable release of Juju, juju-core 1.23.3, is now available.
+  This release replaces version 1.23.2.
+
+
+  ## Getting Juju
+
+  juju-core 1.23.3 is available for vivid and backported to earlier
+  series in the following PPA:
+
+      ```
+      https://launchpad.net/~juju/+archive/stable
+      ```
+
+  Windows and OS X users will find installers at:
+
+      ```
+      https://launchpad.net/juju-core/+milestone/1.23.3
+      ```
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Broken db field ordering when upgrading to juju compiled with go
+      1.3+
+      Lp 1451674
+
+    * Log files are lost when agents are restarted under systemd
+      Lp 1452113
+
+    * Jujud does not restart after upgrade-juju on systemd hosts
+      Lp 1452511
+
+    * Environment variables are not propagated to jujud on vivid
+      Lp 1449436
+
+    * Local charms are not added to storage on upgrade to 1.22.x
+      Lp 1447853
+
+    * Jujud won't start if apt-get of juju-mongodb package fails
+      Lp 1441904
+
+    * Upgrade from 1.18 to 1.23 fails: password for machine agent can't
+      be set
+      Lp 1451297
+
+    * Juju 1.23-beta4 introduces ssh key bug when used w/ dhx
+      Lp 1444861
+
+    * Debug-hooks exit 1 , doesn't mark hook as failed
+      Lp 1415176
+
+    * Unnecessary errors emitted during init system discovery
+      Lp 1452114
+
+
 ^# juju-core 1.23.2
 
 A new stable release of Juju, juju-core 1.23.2, is now available.
