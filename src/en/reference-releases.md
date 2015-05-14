@@ -11,7 +11,7 @@ current stable release to manage cloud deployments.
 
 ## Stable
 
-The current stable version of Juju is 1.23.2.
+The current stable version of Juju is 1.23.3.
 
 Stable juju is suitable for everyday production use.
 
@@ -26,11 +26,11 @@ OS X Homebrew
 {: .instruction }
 
 OS X
-: [juju-1.23.2-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-1.23.2-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-1.23.2-osx.tar.gz/+md5))
+: [juju-1.23.3-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-1.23.3-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-1.23.3-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.23.2-signed.exe](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-setup-1.23.2-signed.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-setup-1.23.2-signed.exe/+md5))
+: [juju-setup-1.23.3-signed.exe](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-setup-1.23.3-signed.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-setup-1.23.3-signed.exe/+md5))
 {: .instruction }
 
 
