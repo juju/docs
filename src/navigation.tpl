@@ -49,7 +49,7 @@
               <li class=" sub"><a href="authors-charm-actions.html">/actions and actions.yaml</a></li>
               <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
               <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
-              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run</a></li>
+              <li class=" sub"><a href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
               <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
               <li class=" sub"><a href="authors-charm-interfaces.html">Implementing relations</a></li>
               <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
