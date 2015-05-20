@@ -18,15 +18,15 @@ The versions covered here are:
   juju-core 1.23.3 is available for vivid and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   Windows and OS X users will find installers at:
 
-      ```
-      https://launchpad.net/juju-core/+milestone/1.23.3
-      ```
+  ```
+  https://launchpad.net/juju-core/+milestone/1.23.3
+  ```
 
 
   ## Notable Changes
@@ -80,15 +80,15 @@ This release replaces version 1.22.1.
   juju-core 1.23.2 is available for vivid and backported to earlier
   series in the following PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   Windows and OS X users will find installers at:
 
-      ```
-      https://launchpad.net/juju-core/+milestone/1.23.2
-      ```
+  ```
+  https://launchpad.net/juju-core/+milestone/1.23.2
+  ```
 
   ## Notable Changes
 
@@ -140,9 +140,9 @@ This release replaces version 1.22.1.
   have created your project, download the file by pressing the
   'Generate new JSON key' button in the 'Service Account' section of
 
-      ```
-      https://console.developers.google.com/project/<project-id>/apiui/credential
-      ```
+  ```
+  https://console.developers.google.com/project/<project-id>/apiui/credential
+  ```
 
   If necessary, instead of 'auth-file' you may set the 'private-key',
   'client-email', and 'client-id' fields in your environments.yaml.  They
@@ -157,33 +157,35 @@ This release replaces version 1.22.1.
 
   For more information please refer to
 
-      ```
-      https://developers.google.com/accounts/docs/OAuth2ServiceAccount#creatinganaccount
-      ```
-      and
-      ```
-      https://developers.google.com/accounts/docs/OAuth2#serviceaccount.
-      ```
+  
+  https://developers.google.com/accounts/docs/OAuth2ServiceAccount#creatinganaccount
+  
+  and
+  
+  https://developers.google.com/accounts/docs/OAuth2#serviceaccount
+  
 
   If the project's service account has any permissions problems go to the
   following page to fix them:
 
-      ```
-      https://console.developers.google.com/project/<project-id>/permissions
-      ```
+  ```
+  https://console.developers.google.com/project/<project-id>/permissions
+  ```
+  (remember to insert the *project id*)
 
   The GCE API should already be activated for the project. It it isn't,
   go to the following URL in your console:
 
-      ```
-      https://console.developers.google.com/project/<project-name>/apiui/api
-      ```
+  ```
+  https://console.developers.google.com/project/<project-name>/apiui/api
+  ```
+  (insert the *project name*)
 
   Also see step 2 on
 
-      ```
-      https://cloud.google.com/compute/docs/api/how-tos/authorization.
-      ```
+  
+  https://cloud.google.com/compute/docs/api/how-tos/authorization.
+  
 
   The following config options in your environments.yaml file are
   optional:
@@ -218,7 +220,9 @@ This release replaces version 1.22.1.
   backups create' command. You can restore from a local backup file like
   so:
 
-      juju backups restore [-b] --file <backup file>
+  ```
+  juju backups restore [-b] --file <backup file>
+  ```
 
   Which will optionally bootstrap a new state server, upload a backup file
   and restore it. The -b option will fail if there is a running state
@@ -226,12 +230,16 @@ This release replaces version 1.22.1.
 
   You can also restore from a backup stored on the state-server:
 
-      juju backups restore --id <on server backup id>
+  ```
+  juju backups restore --id <on server backup id>
+  ```
 
   To obtain a list of the existing backups in the state-server you can
   use:
 
-      juju backups list
+  ```
+  juju backups list
+  ```
 
 
   ### Improved Proxy Support for Restrictive Networks
@@ -262,9 +270,8 @@ This release replaces version 1.22.1.
   respective schema as explained in "Actions for the Charm author" at both
   the API and the unit level:
 
-      ```
-      https://jujucharms.com/docs/1.20/authors-charm-actions
-      ```
+  https://jujucharms.com/docs/1.20/authors-charm-actions
+  
 
   CLI Actions are sub-commands of the 'juju action' command. For more
   details on their usage, 'juju action help' has examples and further
@@ -452,26 +459,26 @@ This release replaces version 1.22.1.
 
   You can switch back to upstart, as explained at:
 
-      ```
-      https://wiki.ubuntu.com/SystemdForUpstartUsers
-      ```
+  ```
+  https://wiki.ubuntu.com/SystemdForUpstartUsers
+  ```
 
   Alternatively you can run Ubuntu Trusty inside a KVM or Docker running
   on your localhost. Many charm authors prefer to use Vagrant for
   development to separate the Juju from their localhost. We provide Juju
   Vagrant boxes:
 
-      ```
-      https://jujucharms.com/docs/stable/config-vagrant
-      ```
+  ```
+  https://jujucharms.com/docs/stable/config-vagrant
+  ```
 
   The Juju (1.23.x) will support systemd on Vivid. You can test and
   develop using the local-provider. 1.23.x will first be available via
   the official stable PPA:
 
-      ```
-      https://launchpad.net/~juju/+archive/stable
-      ```
+  ```
+  https://launchpad.net/~juju/+archive/stable
+  ```
 
   And will appear in the release shortly thereafter. 
 
