@@ -1,3 +1,5 @@
+Title: Configuring Juju for MAAS
+
 # Configuring for MAAS (bare metal)
 
 Metal As A Service is software which allows you to deal with physical hardware
