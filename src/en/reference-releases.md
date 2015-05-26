@@ -11,7 +11,7 @@ current stable release to manage cloud deployments.
 
 ## Stable
 
-The current stable version of Juju is 1.23.2.
+The current stable version of Juju is 1.23.3.
 
 Stable juju is suitable for everyday production use.
 
@@ -26,17 +26,17 @@ OS X Homebrew
 {: .instruction }
 
 OS X
-: [juju-1.23.2-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-1.23.2-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-1.23.2-osx.tar.gz/+md5))
+: [juju-1.23.3-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-1.23.3-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-1.23.3-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.23.2-signed.exe](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-setup-1.23.2-signed.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-setup-1.23.2-signed.exe/+md5))
+: [juju-setup-1.23.3-signed.exe](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-setup-1.23.3-signed.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-setup-1.23.3-signed.exe/+md5))
 {: .instruction }
 
 
 ## Proposed
 
-Current proposed version is 1.23.2, which became the stable release.
+Current proposed version is 1.23.3, which became the stable release.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
@@ -51,11 +51,11 @@ sudo apt-get install juju-core</pre>
 {: .instruction }
 
 OS X
-: [juju-1.23.2-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-1.23.2-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-1.23.2-osx.tar.gz/+md5))
+: [juju-1.23.3-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-1.23.3-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-1.23.3-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.23.2-signed.exe](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-setup-1.23.2.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23.2/+download/juju-setup-1.23.2.exe/+md5))
+: [juju-setup-1.23.3-signed.exe](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-setup-1.23.3.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23.3/+download/juju-setup-1.23.3.exe/+md5))
 {: .instruction }
 
 Proposed releases use the 'proposed' simple-streams. You must configure
@@ -67,8 +67,8 @@ juju agents.
 
 ## Development
 
-1.23-beta4 is currently in development for testing.
-The previous development release was 1.23-beta3
+1.24-beta4 is currently in development for testing.
+The previous development release was 1.24-beta3.
 
 Development releases provide new features that are being stablised.
 These releases are *not* suitable for production environments. Upgrading
@@ -83,11 +83,11 @@ sudo apt-get install juju-core</pre>
 {: .instruction }
 
 OS X
-: [juju-1.23-beta4-osx.tar.gz](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-1.23-beta4-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-1.23-beta4-osx.tar.gz/+md5))
+: [juju-1.24-beta4-osx.tar.gz](https://launchpad.net/juju-core/1.24/1.24-beta4/+download/juju-1.24-beta4-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.24/1.24-beta4/+download/juju-1.24-beta4-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.23-beta4.exe](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-setup-1.23-beta4.exe) ([md5](https://launchpad.net/juju-core/1.23/1.23-beta4/+download/juju-setup-1.23-beta4.exe/+md5))
+: [juju-setup-1.24-beta4.exe](https://launchpad.net/juju-core/1.24/1.24-beta4/+download/juju-setup-1.24-beta4.exe) ([md5](https://launchpad.net/juju-core/1.24/1.24-beta4/+download/juju-setup-1.24-beta4.exe/+md5))
 {: .instruction }
 
 Development releases use the 'devel' simple-streams. You must configure
