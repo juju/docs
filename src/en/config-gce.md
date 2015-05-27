@@ -21,7 +21,7 @@ exist).
 file, or output to stdout. In order to see the boilerplate environments.yaml on
 stdout you need to append the `--show` option. This is helpful if you have an
 existing environments.yaml and just need to add a section. E.g. 
-'juju generate-config --show`. You can then copy and paste the needed section.
+`juju generate-config --show`. You can then copy and paste the needed section.
 
 The generic configuration section generated for Windows Azure will look
 something like this:
