@@ -20,6 +20,21 @@ If you bundle a benchmarking service as part of your service, or if the benchmar
 suite for your application runs on the same machine, this will likely be the path
 for you.
 
+To start, create an action for your charm. The name of this action can be whatever
+best represents the action the user is taking. As an example, to run the
+cassandra-stress tool in the cassandra charm, you run the action named "stress".
+If there is no simple name, "benchmark" is a great placeholder. Going forward, in
+this example, the benchmark action will be named "load-gen". Here's an example
+`action.yaml`
+
+```yaml
+load-gen:
+  description: Generate load against the service
+  params:
+    size:
+      type: number
+
+
 ## Load generation charm
 
 ### Subordinate load generation charm
