@@ -23,7 +23,7 @@ stdout you need to append the `--show` option. This is helpful if you have an
 existing environments.yaml and just need to add a section. E.g. 
 `juju generate-config --show`. You can then copy and paste the needed section.
 
-The generic configuration section generated for Windows Azure will look
+The generic configuration section generated for GCE will look
 something like this:
 
 ```
@@ -64,7 +64,7 @@ something like this:
       # image-endpoint: https://www.googleapis.com
 ```
 
-In order to find out the necessary values to add to the configuration, you will
+To determine the values to add to the configuration, you will
 first have to set up a compatible project in GCE, by following these steps:
 
 ## 1. Create a Google Compute Engine project
