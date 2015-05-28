@@ -4,6 +4,7 @@
               <li class=""><a href="getting-started.html">Install &amp; Configure</a></li>
               <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
               <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-gce.html">Google Compute Engine</a></li>
               <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
               <li class=" sub"><a href="config-joyent.html">Joyent</a></li>
               <li class=" sub"><a href="config-scaleway.html">Scaleway</a></li>
