@@ -212,7 +212,7 @@ simply copy the address into a web browser, we should be able to see it running
 Congratulations, you have just deployed a service with Juju!
 
 Now you are ready to deploy whatever service you really want from the 100s
-available at the [Juju Charm Store.](http://jujucharms.com)
+available at the [Juju Charm Store.](https://jujucharms.com)
 
 To remove all current deployments and clear up everything in your cloud, you can run the command:
 
