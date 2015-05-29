@@ -33,6 +33,11 @@ load-gen:
   params:
     size:
       type: number
+      description: size of load to generate
+      default: 1
+```
+
+
 
 
 ## Load generation charm
