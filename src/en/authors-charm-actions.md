@@ -64,7 +64,7 @@ snapshot:
 ```
 ├── actions
 │   ├── report
-│   └── run
+│   └── snapshot
 ├── actions.yaml
 ...
 ```
@@ -74,6 +74,7 @@ snapshot:
 # actions.yaml
 
 report:
+  description: Make a report of the system status.
 snapshot: 
   description: Take a snapshot of the database.
   params:
