@@ -126,6 +126,11 @@ private key. You can however generate a new key by returning to the credentials
 page and clicking on the `Generate new JSON key` button, after which you may
 want to delete the original fingerprint entry from the list on the same page.
 
+## 4a. Enable Google Compute Engine API
+
+Enable the Google Compute API for this project - click 'APIs' under APIs
+& auth, click Compute Engine API or search for it, click Enable API
+
 ## 5. Enter the credentials into your environments.yaml file
 
 There are two ways to add this information to the environments.yaml file used by
