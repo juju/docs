@@ -133,16 +133,17 @@ incomplete: you can guarantee that when the remote unit changes its settings,
 the hook will be run again.
 
 The settings that you can get, and that you should set, are determined by the
-relation's [interface](./authors-charm-interfaces.html).
+relation's [interface](./authors-relations.html).
 
 ### [name]-relation-departed
 
 `[name]-relation-departed` is run once only, when the remote unit is known to be
-leaving the relation; it will only run once at least one `-changed` has been run,
-and after `-departed` has run, no further `-changed` hooks will be run. This should be
-used to remove all references to the remote unit, because there's no guarantee
-that it's still part of the system; it's perfectly probable (although not
-guaranteed) that the system running that unit has already shut down.
+leaving the relation; it will only run once at least one `-changed` has been
+run, and after `-departed` has run, no further `-changed` hooks will be run.
+This should be used to remove all references to the remote unit, because there's
+no guarantee that it's still part of the system; it's perfectly probable
+(although not guaranteed) that the system running that unit has already shut
+down.
 
 When a unit's own participation in a relation is known to be ending, the unit
 agent continues to uphold the ordering guarantees above; but within those

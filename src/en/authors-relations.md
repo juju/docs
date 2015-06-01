@@ -1,6 +1,6 @@
-# Relationships
+Title: Implementing Relations in Juju charms
 
-### What is a relation?
+# What is a relation?
 Relationships in juju are a loosely typed definition of how services should
 interact with one another. The definition of a relationship is handled through
 an interface, and does not restrict the user to a traditional RFC approach.
@@ -18,13 +18,6 @@ the other charms with the counterpart role.
 
 Juju decides which services can be related based on the interface names only.
 They have to match.
-
-
-<!-- commenting out until this is actually the case
-!!! Note: Some popular interfaces are documented and we have reference
-implementations for them. If you are just starting out with interfaces, you
-may find it easier to start with these.
--->
 
 ## Relation Composition
 
@@ -61,22 +54,23 @@ interface, but that's irrelevant to the mongodb charm. (But an haproxy charm
 might well define, say, `reverseproxy`, that `requires` the `http` interface
 provided by my-node-app.)
 
-<!--
+
 ## Relation interfaces
 
-An interface is a string that must only contain `a-z` and `-`, and neither start
-nor end with `-`. It's the single determiner of compatibility between charms;
-and it carries with it nothing more than a mutual promise that the provider and
-requirer somehow know the communication protocol implied by the name.
+An interface name is a string that must only contain `a-z` and `-`, and neither 
+start nor end with `-`. It's the single determiner of compatibility between
+charms; and it carries with it nothing more than a mutual promise that the
+provider and requirer somehow know the communication protocol implied by the
+name.
 
 So, the relation namespace is essentially unrestricted (with one enforced
 exception: you may not _provide_ a relation named `juju`, or starting with
 `juju-`). This allows for rapid development in some situations; but, in the
 example above, there is a potential problem: we've picked _two_ interface names
 that already have meanings in the charm ecosystem, and that means we have to be
-[compatible](./authors-charm-interfaces.html); but that's a concern for a bit
+compatible. That's a concern for a bit
 later, when we're actually writing the relation hooks.
- -->
+
 ### Peers
 Charms can declare relations under `peers` which causes each unit of a
 single service to respond to the other units in the same service. A peer
@@ -289,4 +283,5 @@ defacto standard.
 Below is a list of the interfaces for which we have compiled documentation and
 reference implementations.
 
-  - [ mysql ](interface-mysql.html) - the database interface used by MySQL and client services.
+  - [ mysql ](interface-mysql.html) - the database interface used by MySQL and
+  client services.

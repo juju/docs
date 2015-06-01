@@ -71,7 +71,8 @@ keep the Charm Store organised.
 
 ![Juju Charm Store metadata Listing](./media/authors-metadata-display.png)
 
-Finally, a metadata file defines the charm's [relations](./authors-interfaces.html),
+Finally, a metadata file defines the charm's 
+[relations](./authors-relations.html),
 and whether it's designed for deployment as a
 [subordinate service](./authors-subordinate-services.html).
 

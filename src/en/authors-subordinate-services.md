@@ -35,7 +35,7 @@ the second service. Subordinate services have a very tight relationship with
 their principal service, so it makes sense to be able to restrict that
 communication in some cases so that they only receive events about each other.
 That's precisely what happens when a relation is tagged as being a scoped to the
-container. See [scoped relations](charm.html).
+container. See [scoped relations](./authors-interfaces#configuring-relations).
 
 Container relations exist because they simplify responsibilities for the
 subordinate service charm author who would otherwise always have to filter units
@@ -47,8 +47,9 @@ it.
 
 In order to deploy a subordinate service a scope: container relationship is
 required. Even when the principal services' charm author doesn't provide an
-explicit relationship for the subordinate to join, using an [_implicit relation_
-](implicit-relations.html) with scope: container will satisfy this constraint.
+explicit relationship for the subordinate to join, using an 
+[_implicit relation_](authors-implicit-relations.html) with scope: container 
+will satisfy this constraint.
 
 ## Addressability
 
@@ -147,4 +148,6 @@ as usual.
 ## Restrictions
 
 The initial release of subordinates doesn't include support for removing
-subordinate units from their principal service apart from removing the principal service itself. This limitation stems from the current policy around service shutdown and the invocation of stop hooks.
+subordinate units from their principal service apart from removing the principal
+service itself. This limitation stems from the current policy around service
+shutdown and the invocation of stop hooks.
