@@ -54,7 +54,7 @@
               <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
               <li class=" sub"><a href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
               <li class=" sub"><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
-              <li class=" sub"><a href="authors-charm-interfaces.html">Implementing relations</a></li>
+              <li class=" sub"><a href="authors-relations.html">Implementing relations</a></li>
               <li class=" sub"><a href="authors-hook-errors.html">Hook Errors</a></li>
               <li class=" sub"><a href="authors-hook-debug.html">Hook Debugging</a></li>
               <li class=" sub"><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
