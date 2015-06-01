@@ -23,7 +23,7 @@ personal namespace before asking for a charmer featured charm.
 ## Charm Store Process
 
 This process is designed to allow prospective developers to have their charms
-reviewed and updated in the [Charm Store](http://jujucharms.com) in a timely
+reviewed and updated in the [Charm Store](https://jujucharms.com) in a timely
 manner that ensures peer reviews and quality.
 
 ## Submitting a new Charm
@@ -40,7 +40,7 @@ You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
 
   1. Install juju and charm-tools.
   1. Create a repository, something like `mkdir -p ~/charms/precise`; 'precise' is the release code name for the [release of Ubuntu](http://releases.ubuntu.com) you wish to target your charm at. You can also use `trusty` if you're submitting to that series.
-  1. If you haven't created your charm yet, you can use `charm create ubuntu-package-name` which will fill in some basic metadata info for you. You can check to see if it already exists at [http://jujucharms.com/](http://jujucharms.com/). Also make sure to [check the list of open charms](http://goo.gl/mvtPh) to see if anybody is already working on a charm for the service you want to work on. Bugs which have had no activity by the assignee for more than 30 days are fair game and should be unassigned.
+  1. If you haven't created your charm yet, you can use `charm create ubuntu-package-name` which will fill in some basic metadata info for you. You can check to see if it already exists at [https://jujucharms.com/](https://jujucharms.com/). Also make sure to [check the list of open charms](http://goo.gl/mvtPh) to see if anybody is already working on a charm for the service you want to work on. Bugs which have had no activity by the assignee for more than 30 days are fair game and should be unassigned.
   1. Once your charm is working and tested with any compatible charms, make sure it passes `charm proof path/to/your/charm`
   1. `bzr init` in your charm's root directory
   1. `bzr add` to add all files.

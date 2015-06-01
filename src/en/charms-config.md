@@ -11,7 +11,7 @@ You can discover what configuration options are available for a specific charm
 in various ways
 
   - By running the `juju get <service>` command.
-  - By viewing the charm in the [charm store.](http://jujucharms.com)
+  - By viewing the charm in the [charm store.](https://jujucharms.com)
   - By examining the **config.yaml** file in the charm itself.
 
 The configurations setting names and the values they take will obviously vary
