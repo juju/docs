@@ -36,7 +36,7 @@ Windows
 
 ## Proposed
 
-Current proposed version is 1.22.4, which may become the 1.22 supported
+Current proposed version is 1.22.5, which may become the 1.22 supported
 release on June 4.
 
 Proposed releases may be promoted to stable releases after a period of
@@ -52,11 +52,11 @@ sudo apt-get install juju-core</pre>
 {: .instruction }
 
 OS X
-: [juju-1.22.4-osx.tar.gz](https://launchpad.net/juju-core/1.22/1.22.4/+download/juju-1.22.4-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.22/1.22.4/+download/juju-1.22.4-osx.tar.gz/+md5))
+: [juju-1.22.5-osx.tar.gz](https://launchpad.net/juju-core/1.22/1.22.5/+download/juju-1.22.5-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.22/1.22.5/+download/juju-1.22.5-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.22.4-signed.exe](https://launchpad.net/juju-core/1.22/1.22.4/+download/juju-setup-1.22.4.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22.4/+download/juju-setup-1.22.4.exe/+md5))
+: [juju-setup-1.22.5-signed.exe](https://launchpad.net/juju-core/1.22/1.22.5/+download/juju-setup-1.22.5.exe) ([md5](https://launchpad.net/juju-core/1.22/1.22.5/+download/juju-setup-1.22.5.exe/+md5))
 {: .instruction }
 
 Proposed releases use the 'proposed' simple-streams. You must configure
