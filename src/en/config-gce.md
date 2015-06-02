@@ -94,9 +94,22 @@ this elsewhere, so don't make it too unwieldy)
 
 ![image showing project details](media/config-gce03.png)
 
-## 3. Generate OAuth credentials for the project
+## 3. Enable the Google Compute Engine API
 
-Once you have created a project, you will be returned to the main console
+Juju requires the Google Compute Engine API to be active for the project. This is _usually_ activated by default, but it is worth checking at this point. From the Main console Window, select `APIs & auth` and then `APIs` to see the list of available APIs.
+
+![image showing APIs](media/config-gce-extra01.png)
+
+Click on Compute Engine API, the first in the list.
+On the new screen which opens, if there is a button titled `Enable` (as shown
+below), then you should click it. If the API is already enabled, the button will
+show `Disable Api` instead, as well as details of your usage. Don't disable it!
+
+![image showing Enable option](media/config-gce-extra02.png)
+
+## 4. Generate OAuth credentials for the project
+
+You will be returned to the main console
 screen. In order to let Juju have access to the environment, you will need to
 generate and retrieve some credentials. In the navigation on the left, you
 should select `APIs & auth`, and then select `Credentials` from the panel which
@@ -114,7 +127,7 @@ create new instances.
 
 ![image showing account popup](media/config-gce06.png)
 
-## 4. Retrieve the credentials
+## 5. Retrieve the credentials
 
 Once you have clicked on the `Create Client ID` button, the GCE website will
 automatically generate a JSON file containing the credentials and download it
@@ -126,12 +139,12 @@ private key. You can however generate a new key by returning to the credentials
 page and clicking on the `Generate new JSON key` button, after which you may
 want to delete the original fingerprint entry from the list on the same page.
 
-## 5. Enter the credentials into your environments.yaml file
+## 6. Enter the credentials into your environments.yaml file
 
 There are two ways to add this information to the environments.yaml file used by
 Juju, both of which are explained here:
 
-### 5.a Use the JSON file directly
+### 6.a Use the JSON file directly
 
 Juju can decipher the contents of the JSON file you downloaded from GCE. In this
 case it is necessary to store the actual file somewhere where Juju can access it
@@ -149,7 +162,7 @@ configuration should contain the *full path* to the file, e.g.:
  auth-file: /home/juju-user/.juju/Juju-GCE-7e04ea455a2d.json
 ```
 
-### 5.b Use the information in the JSON file to edit the configuration
+### 6.b Use the information in the JSON file to edit the configuration
 
 In cases where you don't want to rely on an extra file to authorise access, it
 is possible to extract the key pieces of information from the downloaded JSON
@@ -184,7 +197,7 @@ private_key: |
   ...
 ```
 
-## 6. Add the Project ID
+## 7. Add the Project ID
 
 The credentials do not include the ID of the project you created for Juju to
 use, and this needs to be added to the `environments.yaml` configuration too, 
@@ -213,7 +226,7 @@ this section of the config should then look like this, for example:
 
 Obviously, you should replace `juju-gce-0202030` above with your own project id.
 
-## 7. Optional configuration
+## 8. Optional configuration
 
 The default value for `region` is `us-central1`. This may be changed to any
 valid available GCE zone (e.g. `us-central1-b`, `europe-west1-d`,`asia-east1-a`
