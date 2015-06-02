@@ -89,9 +89,8 @@ hooks.
 
     #!/bin/bash
     set -ex
-    apt-get install -y ruby1.9.3 rubygems
-    update-alternatives --set ruby /usr/bin/ruby1.9.1
-    update-alternatives --set gem /usr/bin/gem1.9.1
+    # Prior to ubuntu 14.04, rubygems-integration should be replaced by rubygems on the following line
+    apt-get install -y ruby1.9.3 rubygems-integration build-essential
     HOME=/root gem install genghisapp bson_ext --no-ri --no-rdoc
 
 ####  Config-Changed Hook
@@ -106,7 +105,7 @@ hooks.
 
     #!/bin/bash
     set -ex
-    PORT=`config-get port`
+    PORT=80
     if [ ! -f /root/.vegas/genghisapp/genghisapp.pid ] ; then
         HOME=/root genghisapp -L -p $PORT
     fi
