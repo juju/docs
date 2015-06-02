@@ -39,9 +39,12 @@ for use in the [Charm Store](https://jujucharms.com/) should always set the
 following fields as well, for categorization and display in the GUI:
 
   - `maintainer` is the name and email address for the main point of contact
-  for the development and maintenance of the charm. Or, at least, it should be:
-  in frequent practice, it's just a name. Please update your charms as you get
-  the opportunity.
+  for the development and maintenance of the charm. The maintainer field
+  should be in the format `Charm Author Name <author@email>`.
+
+  - `maintainers` is a list of people who maintain the charm. Use the yaml
+  sequence format when there are more than one person maintaining the project.
+
   - `tags` is a list containing one or more of the following:
      - analytics
      - big_data
