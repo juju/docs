@@ -15,12 +15,16 @@ The `juju debug-hooks` command accepts a unit and an optional list of hooks to
 debug (which must be named individually in a space-delimited list) or no hook
 names, causing all hooks to be debugged:
 
-    juju debug-hooks <service/unit> [hook-name hook-name2 ...]
+```bash
+juju debug-hooks <service/unit> [hook-name hook-name2 ...]
+```
 
 So for example, imagine you are deploying the `mysql` charm and you want to only
 check the `db-relation-joined` and `db-relation-broken` hooks:
 
-    juju debug-hooks mysql/0 db-relation-joined db-relation-broken
+```bash
+juju debug-hooks mysql/0 db-relation-joined db-relation-broken
+```
 
 **Note:** It is possible and often desirable to run debug-hooks on more than
 one unit at a time. You should open a new terminal window for each.
@@ -54,7 +58,9 @@ during their respective trapped events.
 For example, for the `db-relation-joined` hook we mentioned above, you could
 run:
 
-    ./hooks/db-relation-joined
+```bash
+./hooks/db-relation-joined
+```
 
 Whilst you are debugging a hook, it is possible that other hooks will be queued
 to run. Even hooks which are not in your list to debug will be suspended in the
@@ -107,7 +113,9 @@ As this is a consolidated log you don't need to specify a unit.
 
 #### Usage:
 
-    juju debug-log [-n <number>] [--replay] [-e <environment>]
+```bash
+juju debug-log [-n <number>] [--replay] [-e <environment>]
+```
 
 N.B. For full usage, see the [command reference page](commands.html)
 
@@ -122,26 +130,36 @@ log will be included in the output, along with any subsequent output).
 To read the ten most recent log entries and follow any subsequent entries to the
 log:
 
-    juju debug-log
+```bash
+juju debug-log
+```
 
 To read the thirty most recent log entries and follow any subsequent entries to
 the log:
 
-    juju debug-log -n 30
+```bash
+juju debug-log -n 30
+```
 
 To read all the log entries and follow any subsequent entries to the log:
 
-    juju debug-log --replay
+```bash
+juju debug-log --replay
+```
 
 To read the twenty most recent log entries on the 'local' environment:
 
-    juju debug-log -n 20 -e local
+```bash
+juju debug-log -n 20 -e local
+```
 
 And of course it is possible to combine the command with other shell tools to
 make the output more useful, e.g. to filter the whole log for lines matching
 'INFO':
 
-    juju debug-log --replay  | grep 'INFO'
+```bash
+juju debug-log --replay  | grep 'INFO'
+```
 
 **Note:** As the command uses the follow behaviour of `tail` by default, you do
 not need to specify the `-f` switch. You will also need to end the session
