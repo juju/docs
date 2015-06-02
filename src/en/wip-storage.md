@@ -97,19 +97,62 @@ Juju does not currently provide any means of decomissioning persistent storage, 
 ### Provider support
 
 All environment providers support the following storage providers:
- - loop: block-type, creates a file in the agent data-dir and attaches a loop device to it. See the caveats section below for a comment on using the loop storage provider with local/LXC.
- - rootfs: filesystem-type, creates a sub-directory in the agent's data-dir for the unit/charm to use
- - tmpfs: filesystem-type, creates a tmpfs
 
-Additionally, native storage providers exist for the EC2 (ebs) and OpenStack (cinder).
+- loop
+
+    block-type, creates a file in the agent data-dir and attaches a loop device
+    to it. See the Known Limitations section below for a comment on using the
+    loop storage provider with local/LXC.
+
+- rootfs
+
+    filesystem-type, creates a sub-directory in the agent's data-dir for the
+    unit/charm to use
+
+- tmpfs
+
+    filesystem-type, creates a tmpfs
+
+Additionally, native storage providers exist for the EC2 (ebs), OpenStack
+(cinder) and MAAS (maas) providers.
+
+#### EC2/EBS
 
 The EC2/EBS provider currently supports the following pool configuration attributes:
- - volume-type: specifies the EBS volume type to create. You can use either the EBS volume type names, or synonyms defined by Juju (in parentheses): gp2 (ssd), io1 (provisioned-iops), standard (magnetic). By default, magnetic/standard volumes will be created. An 'ebs-ssd' pool is created in all EC2 environments, which defaults the volume type to ssd/gp2 instead.
- - iops: the number of IOPS for provisioned-iops volume types. There are restrictions on minimum and maximum IOPS, as a ratio of the size of volumes; see the URL below for more information.
- - encrypted: true|false, indicating whether or not to encrypt volumes created by the pool.
+
+- volume-type
+
+    specifies the EBS volume type to create. You can use either the EBS volume
+    type names, or synonyms defined by Juju (in parentheses): gp2 (ssd), io1
+    (provisioned-iops), standard (magnetic). By default, magnetic/standard
+    volumes will be created. An 'ebs-ssd' pool is created in all EC2
+    environments, which defaults the volume type to ssd/gp2 instead.
+
+- iops
+
+    the number of IOPS for provisioned-iops volume types. There are
+    restrictions on minimum and maximum IOPS, as a ratio of the size of
+    volumes; see the URL below for more information.
+
+- encrypted
+
+    true|false, indicating whether or not to encrypt volumes created by the pool.
+
 For information regarding EBS volume types, see http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html.
 
+#### OpenStack/Cinder
+
 The OpenStack/Cinder provider does not currently have any configuration.
+
+#### MAAS
+
+The MAAS provider currently has a single configuration attribute:
+
+- tags
+
+    a comma-separated list of tags to match on the disks in MAAS. For example,
+    you might tag some disks as "fast"; you can then create a storage pool in
+    Juju that will draw from the disks with those tags.
 
 ## Writing a charm which supports storage
 
@@ -148,8 +191,9 @@ The above says that the charm may have anywhere from zero to ten block devices a
 
 for each storage entity contained in the metadata.yaml, the following hooks may be implemented:
 
-*-storage-attached
-*-storage-detaching
+- *-storage-attached
+
+- *-storage-detaching
 
 Each hook is prefixed with the name of the store, similar to how relation hooks are prefixed
 with the name of the relation. So, for example, if we had specified a need for storage labelled
@@ -200,29 +244,83 @@ $ juju storage list
 IMPLEMENTED FEATURES
 ---------------------------------------
 
-- deploy services with storage (requires a charm that declares storage requirements)
-  * block-device storage, i.e. no filesystem, charm can do with the block device what it wants
-  * filesystem storage, i.e. a mounted filesystem, may be local or remote
-  * volume-backed filesystems, Juju will manage a filesystem on block-device storage
-- add machine with volumes (mostly used for testing)
-  * syntax is "juju add-machine --disks=<pool,size,count>
-- X-storage-attached hook, notifying units of storage attachment
-- storage-get hook, enabling units to enquire about properties of the attached storage
-- "juju storage" CLI:
-  * list storage instances/attachments
-  * list volumes/attachments
-  * list and create storage pools
+- Deploy services with storage (requires a charm that declares storage requirements)
 
-UNIMPLEMENTED/CAVEATS
+  - block-device storage, i.e. no filesystem, charm can do with the block device what it wants
+
+  - filesystem storage, i.e. a mounted filesystem, may be local or remote
+
+  - volume-backed filesystems, Juju will manage a filesystem on block-device storage
+
+- Add machine with volumes (mostly used for testing)
+
+  - syntax is "juju add-machine --disks=<pool,size,count>
+
+- X-storage-attached hook, notifying units of storage attachment
+
+- Storage hook tools:
+
+  - storage-get, enables units to enquire about properties of attached storage
+
+  - storage-add, enables units to allocate additional storage instances, up to
+    the maximum range specified in the charm metadata
+
+- "juju storage" CLI:
+
+  - list storage instances/attachments
+
+  - list volumes/attachments
+
+  - list and create storage pools
+
+  - add storage instances to units
+
+- Unit/machine placement, for charms with dynamic storage
+
+- MAAS storage provider
+
+  - this is a "static" storage provider; it only supports acquiring storage
+    at the same time as acquiring a machine.
+
+  - requires MAAS 1.8+
+
+- Charm upgrades now check for incompatible storage changes:
+
+  - type, read-only, shared, location may not be changed
+
+  - range cannot be contracted, i.e. the minimum may not be
+    increased, nor the maximium decreased.
+
+- Read-only filesystems can be created, as well as read-only loop device
+  attachments.
+
+KNOWN LIMITATIONS
 -----------------------------------------
 
-- Persistent storage destruction. If you use persistent storage, you must use "destroy-environment --force" and manually destroy the storage through your cloud's management UI.
-- Unit/machine placement is currently disabled if storage is specified.
+- Persistent storage destruction. If you use persistent storage, you must use
+  "destroy-environment --force" and manually destroy the storage through your
+  cloud's management UI.
+
+- It is not currently possible to upgrade a charm if it adds required storage,
+  as there is no way to specify the storage constraints at upgrade time. Until
+  such support is added, it is only possible to upgrade a charm from having no
+  storage to having optional storage (i.e. minimum count of 0), and adding the
+  storage after upgrade.
+
 - Charm deployment currently does not check for mount-point conflicts.
-- Charm upgrade does not currently check for incompatible changes to storage requirements in deployed charms.
-- Shared and read-only storage are not yet fully implemented.
+
+- Shared storage is not yet supported.
+
 - storage-add command: this is being worked on now, and will be ready for Juju 1.25.
-- MAAS storage provider.
-- For LXC (local provider or not), you must currently set "allow-lxc-loop-mounts" for the loop storage provider to work. With the default AppArmor profile, LXC does not permit containers to mount loop devices. By setting allow-lxc-loop-mounts=true, you are explicitly enabling this, and access to all loop devices on the host.
-- For LXC only, loop devices should but are not currently marked as "persistent". This is because loop devices remain in use even after the container is destroyed. As such, you will need to use "losetup" to detach loop devices that were allocated by containers.
+
+- For LXC (local provider or not), you must currently set "allow-lxc-loop-mounts"
+  for the loop storage provider to work. With the default AppArmor profile,
+  LXC does not permit containers to mount loop devices. By setting
+  allow-lxc-loop-mounts=true, you are explicitly enabling this, and access to
+  all loop devices on the host.
+
+- For LXC only, loop devices should but are not currently marked as
+  "persistent". This is because loop devices remain in use even after the
+  container is destroyed. As such, you will need to use "losetup" to detach
+  loop devices that were allocated by containers.
 
