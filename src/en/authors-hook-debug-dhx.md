@@ -47,7 +47,7 @@ the other very useful Juju plugins in the bundle.
 Next, you'll want to create a configuration file to define what
 customizations to perform. For example:
 
-```
+```bash
 cat > ~/.juju/debug-hooks-rc.yaml <EOF
 use_tmux_keybindings: true
 uploads:
@@ -92,22 +92,22 @@ thing.
 For example, in a case where you had three units running, two of which were
 currently in an error state:
 Running:
-```
+```bash
 juju pprint
 ```
 might return:
-```
+```bash
 - chamilo/0: 10.0.3.107 (error)
 - mysql/0: 10.0.3.139 (started)
 - mysql/1: 10.0.3.181 (error)
 ```
 To start a debug session, you could enter:
-```
+```bash
 juju dhx
 ```
 The plugin will then list the known units and prompt for your choice,
 defaulting to the first unit found to be in the error state:
-```
+```nohighlight
 Units:
 0: chamilo/0 (error)
 1: mysql/0
@@ -117,12 +117,12 @@ Select a unit by number or name: [chamilo/0]
 ```
 
 You can also specify a service, like so:
-```
+```bash
 juju dhx mysql
 ```
 in this case only units running the given service are listed, and again, 
 the default choice is the first one found in the error state:
-```
+```nohighlight
 Units:
 0: mysql/0
 1: mysql/1 (error)
@@ -140,7 +140,7 @@ it.
 Instead of manually running `juju resolved --retry $unit`, you can just add the
 `--retry` (or just `-r`) option to dhx:
 
-```
+```bash
 juju dhx -r
 ```
 
@@ -162,7 +162,7 @@ to the charm on a remote unit, and dhx makes it super easy to use. Just invoke
 dhx with the `--sync` (or just `-s`) option, and any changes you make during
 your debugging session will be automatically pulled back down when you are done:
 
-```
+```bash
 juju dhx -s
 ```
 
@@ -184,7 +184,7 @@ to join your session.
 Let's say you want to have a paired session with Bob. You would start your
 session with:
 
-```
+```bash
 juju dhx -i bob
 ```
 
@@ -192,7 +192,7 @@ For Bob to join your session, you will need to tell him the public address of
 the unit, which you can get from `juju status`. Then Bob can join your session
 using the `--join` (or just `-j`) option:
 
-```
+```bash
 juju dhx -j $public_address
 ```
 
@@ -200,6 +200,6 @@ Bob will be connected and immediately brought into your tmux session.
 
 Bob may also join the session without using DHX, using the following:
 
-```
+```bash
 ssh -t ubuntu@$public_address 'sudo tmux attach'
 ```
