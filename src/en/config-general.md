@@ -151,52 +151,62 @@ to any of the above values.
 
 | Key                        | Type   | Default| Valid values             | Purpose |
 |----------------------------|--------|--------|--------------------------|---------|
-|admin-secret                |String  |        |                          |   |
-|agent-version               |String  |        |                          |   |
-|agent-metadata-url          |String  |        | url                      | set private stream  |
-|agent-stream                |String  |released| released/devel/proposed  | set version of Juju to use for deploy/upgrades|
-|api-port                    |ForceInt|17070   |                          | port the API server is listening on|
-|apt-mirror                  |String  |        |                          |   |
-|apt-ftp-proxy               |String  |        | url                      | proxy for apt sources|
-|apt-http-proxy              |String  |        | url                      | proxy for apt sources|
-|apt-https-proxy             |String  |        | url                      | proxy for apt sources|
-|authorized-keys             |String  |   -    |                          | pasted text of SSH key  |
-|authorized-keys-path        |String  |   -    |                          |   |
-|bootstrap-addresses-delay   |ForceInt|10      |                          |The amount of time between refreshing the addresses in seconds. Not too frequent as we refresh addresses from the provider each time|
-|bootstrap-retry-delay       |ForceInt|5       |                          |Time between attempts to connect to an address in seconds|
-|bootstrap-timeout           |ForceInt|600     |                          |The amount of time to wait contacting a state server in seconds|
-|ca-cert                     |String  |        |                          |   |
-|ca-cert-path                |String  |        |                          |   |
-|ca-private-key              |String  |        |                          |   |
-|ca-private-key-path         |String  |        |                          |   |
-|charm-store-auth            |String  |        |                          |   |
-|default-series              |String  |        |series name, e.g "trusty" | The default series of Ubuntu to use for deploying charms |
-|development                 |Bool    |FALSE   |                          |   |
-|disable-network-management  |Bool    |FALSE   |                          | On MAAS environment, set to TRUE for MAAS to control networks  |
-|enable-os-refresh-update    |Bool    |        |                          |   |
-|enable-os-upgrade           |Bool    |        |                          |   |
-|firewall-mode               |String  |instance|                          | 'instance' requests the use of an individual firewall per instance.|
-|ftp-proxy                   |String  |        | url                      | proxy setting|
-|http-proxy                  |String  |        | url                      | proxy setting|
-|https-proxy                 |String  |        | url                      | proxy setting |
-|image-metadata-url          |String  |        |                          |   |
-|image-stream                |String  |        |                          |   |
-|logging-config              |String  |        |                          |   |
-|lxc-clone-aufs              |Bool    |        |                          |   |
-|lxc-clone                   |Bool    |        |                          |   |
-|name                        |String  |        |                          | the name of the current environment|
-|no-proxy                    |String  |        | domain list              | comma delimited list of domain addresses not to be proxied|
-|prefer-ipv6                 |Bool    |FALSE   |                          |   |
-|provisioner-harvest-mode    |String  |destroyed|all/none/unknown/destroyed| [see the section above](#juju-lifecycle-and-harvesting) |
-|proxy-ssh                   |Bool    |TRUE    |                          |   |
-|rsyslog-ca-cert             |String  |        |                          |   |
-|set-numa-control-policy     |Bool    |FALSE   |                          | Tune Juju state-server to work with NUMA if present |
-|ssl-hostname-verification   |Bool    |TRUE    |                          |   |
-|state-port                  |ForceInt|37017   |                          | port the state server is listening on|
-|syslog-port                 |ForceInt|6514    |                          | port that the syslog UDP/TCP listener is listening on|
-|test-mode                   |Bool    |        |                          |   |
-|type                        |String  |        | supported cloud types    | type of environment, e.g. local |
-|uuid                        |UUID    |        |                          |   |
+admin-secret | string |  |  | The password for the administrator user
+agent-metadata-url | string |  |  | URL of private stream
+agent-stream | string | released | released/devel/proposed | Version of Juju to use for deploy/upgrades
+agent-version | string |  |  | The desired Juju agent version to use
+allow-lxc-loop-mounts | bool | false |  | whether loop devices are allowed to be mounted inside lxc containers.
+api-port | int | 17070 |  | The TCP port for the API servers to listen on
+apt-ftp-proxy | string |  |  | The APT FTP proxy for the environment
+apt-http-proxy | string |  |  | The APT HTTP proxy for the environment
+apt-https-proxy | string |  |  | The APT HTTPS proxy for the environment
+apt-mirror | string |  |  | The APT mirror for the environment
+authorized-keys | string |  |  | Any authorized SSH public keys for the environment, as found in a ~/.ssh/authorized_keys file
+authorized-keys-path | string |  |  | Path to file containing SSH authorized keys
+block-all-changes | bool |  |  | Whether all changes to the environment will be prevented
+block-destroy-environment | bool |  |  | Whether the environment will be prevented from destruction
+block-remove-object | bool |  |  | Whether remove operations (machine, service, unit or relation) will be prevented
+bootstrap-addresses-delay | int | 10 |  | The amount of time between refreshing the addresses in seconds. Not too frequent as we refresh addresses from the provider each time.
+bootstrap-retry-delay | int | 5 |  | Time between attempts to connect to an address in seconds.
+bootstrap-timeout | int | 600 |  | The amount of time to wait contacting a state server in seconds
+ca-cert | string |  |  | The certificate of the CA that signed the state server certificate, in PEM format
+ca-cert-path | string |  |  | Path to file containing CA certificate
+ca-private-key | string |  |  | The private key of the CA that signed the state server certificate, in PEM format
+ca-private-key-path | string |  |  | Path to file containing CA private key
+default-series | string |  |  | The default series of Ubuntu to use for deploying charms
+development | bool | false |  | Whether the environment is in development mode
+disable-network-management | bool | false |  | Whether the provider should control networks (on MAAS environments, set to true for MAAS to control networks
+enable-os-refresh-update | bool | true |  | Whether newly provisioned instances should run their respective OS's update capability.
+enable-os-upgrade | bool | true |  | Whether newly provisioned instances should run their respective OS's upgrade capability.
+firewall-mode | string |  | instance/global/none | The mode to use for network firewalling.  'instance' requests the use of an individual firewall per instance.  'global' uses a single firewall for all instances (access for a network port is enabled to one instance if any instance requires that port).  'none' requests that no firewalling should be performed inside the environment. It's useful for clouds without support for either global or per instance security groups.
+ftp-proxy | string |  |  | The FTP proxy value to configure on instances, in the FTP_PROXY environment variable
+http-proxy | string |  |  | The HTTP proxy value to configure on instances, in the HTTP_PROXY environment variable
+https-proxy | string |  |  | The HTTPS proxy value to configure on instances, in the HTTPS_PROXY environment variable
+image-metadata-url | string |  |  | The URL at which the metadata used to locate OS image ids is located
+image-stream | string |  |  | The simplestreams stream used to identify which image ids to search when starting an instance.
+logging-config | string |  |  | The configuration string to use when configuring Juju agent logging (see http://godoc.org/github.com/juju/loggo#ParseConfigurationString for details)
+lxc-clone | bool |  |  | Whether to use lxc-clone to create new LXC containers
+lxc-clone-aufs | bool | false |  | Whether the LXC provisioner should creat an LXC clone using AUFS if available
+lxc-default-mtu | int |  |  | The MTU setting to use for network interfaces in LXC containers
+lxc-use-clone | bool |  |  | Whether the LXC provisioner should create a template and use cloning to speed up container provisioning. (deprecated by lxc-clone)
+name | string |  |  | The name of the current environment
+no-proxy | string |  |  | List of domain addresses not to be proxied (comma-separated)
+prefer-ipv6 | bool | false |  | Whether to prefer IPv6 over IPv4 addresses for API endpoints and machines
+provisioner-harvest-mode | string |  | all/none/unknown/destroyed | What to do with unknown machines. See https://jujucharms.com/docs/stable/config-general#juju-lifecycle-and-harvesting (default destroyed)
+provisioner-safe-mode | bool |  |  | Whether to run the provisioner in "destroyed" harvest mode (deprecated, superceded by provisioner-harvest-mode)
+proxy-ssh | bool |  |  | Whether SSH commands should be proxied through the API server
+rsyslog-ca-cert | string |  |  | The certificate of the CA that signed the rsyslog certificate, in PEM format.
+rsyslog-ca-key | string |  |  | The private key of the CA that signed the rsyslog certificate, in PEM format
+set-numa-control-policy | bool |  |  | Tune Juju state-server to work with NUMA if present (default false)
+ssl-hostname-verification | bool |  |  | Whether SSL hostname verification is enabled (default true)
+state-port | int | 37017 |  | Port for the API server to listen on.
+storage-default-block-source | string |  |  | The default block storage source for the environment
+syslog-port | int | 6514 |  | Port for the syslog UDP/TCP listener to listen on.
+test-mode | bool |  |  | Whether the environment is intended for testing. If true, accessing the charm store does not affect statistical data of the store. (default false)
+tools-metadata-url | string |  |  | deprecated, superceded by agent-metadata-url
+tools-stream | string |  |  | deprecated, superceded by agent-stream
+type | string |  |  | Type of environment, e.g. local, ec2
+uuid | string |  |  | The UUID of the environment
 
 These keys are now deprecated:
 
