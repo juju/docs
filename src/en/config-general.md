@@ -184,14 +184,14 @@ http-proxy | string |  | url  | The HTTP proxy value to configure on instances, 
 https-proxy | string |  | url | The HTTPS proxy value to configure on instances, in the HTTPS_PROXY environment variable
 image-metadata-url | string |  | url | The URL at which the metadata used to locate OS image ids is located
 image-stream | string |  |  | The simplestreams stream used to identify which image ids to search when starting an instance
-logging-config | string |  |  | The configuration string to use when configuring Juju agent logging (see http://godoc.org/github.com/juju/loggo#ParseConfigurationString for details)
+logging-config | string |  |  | The configuration string to use when configuring Juju agent logging (see [this link](http://godoc.org/github.com/juju/loggo#ParseConfigurationString) for details)
 lxc-clone | bool |  |  | Whether to use lxc-clone to create new LXC containers
 lxc-clone-aufs | bool | false |  | Whether the LXC provisioner should creat an LXC clone using AUFS if available
 lxc-default-mtu | int |  |  | The MTU setting to use for network interfaces in LXC containers
 name | string |  |  | The name of the current environment
 no-proxy | string |  |  | List of domain addresses not to be proxied (comma-separated)
 prefer-ipv6 | bool | false |  | Whether to prefer IPv6 over IPv4 addresses for API endpoints and machines
-provisioner-harvest-mode | string | destroyed | all/none/unknown/destroyed | What to do with unknown machines. See https://jujucharms.com/docs/stable/config-general#juju-lifecycle-and-harvesting
+provisioner-harvest-mode | string | destroyed | all/none/unknown/destroyed | What to do with unknown machines. See [harvesting section](#juju-lifecycle-and-harvesting)
 proxy-ssh | bool |  |  | Whether SSH commands should be proxied through the API server
 rsyslog-ca-cert | string |  |  | The certificate of the CA that signed the rsyslog certificate, in PEM format
 rsyslog-ca-key | string |  |  | The private key of the CA that signed the rsyslog certificate, in PEM format
