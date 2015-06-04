@@ -964,6 +964,64 @@ This release replaces version 1.22.1.
     Lp 1420306
 
 
+^# juju-core 1.22.5
+
+  A new stable release of Juju, juju-core 1.22.5, is now available.
+  This release replaces version 1.22.1.
+
+  Juju 1.22.x is an older supported version of juju. The current Juju
+  version is 1.23.3
+
+
+  ## Getting Juju
+
+  juju-core 1.22.5 is available for vivid and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/1.22
+
+  Windows and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.22.5
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Transaction collection (txns) grows without bound
+      Lp 1453785
+
+    * /var/spool/rsyslog grows without bound
+      Lp 1453801
+
+    * Instancepoller compares wrong address list and always requests
+      updated state addresses
+      Lp 1454043
+
+    * Firewaller gets an exception if a machine is not provisioned
+      Lp 1454599
+
+    * Jujud leaking file handles
+      Lp 1454697
+
+    * Agents see "too many open files" errors after many failed api
+      attempts
+      Lp 1420057
+
+    * 1.20.x client cannot communicate with 1.22.x env
+      Lp 1454829
+
+    * Intermittent panic: rescanned document
+      Lp 1449054
+
+    * Harvest mode setting not used by container provisioner
+      Lp 1459885
+
+
 ^# juju-core 1.21.1
 
   A new stable release of Juju, juju-core 1.21.1, is now available.

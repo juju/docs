@@ -36,8 +36,7 @@ Windows
 
 ## Proposed
 
-Current proposed version is 1.22.5, which may become the 1.22 supported
-release on June 4.
+Current proposed version is 1.22.5, which became the 1.22 supported release.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
