@@ -1,3 +1,5 @@
+Title: Configuring Juju to work with MAAS(bare metal)
+
 # Configuring for MAAS (bare metal)
 
 Metal As A Service is software which allows you to deal with physical hardware
@@ -10,7 +12,7 @@ For more information about MAAS, see [ maas.ubuntu.com ](http://maas.ubuntu.com)
 To enable Juju to work with MAAS, you should start by generating a generic 
 configuration file using the command:
 
-```
+```bash
 juju generate-config
 ```
 
@@ -31,8 +33,11 @@ you set up within a single MAAS cluster.
 
 To get the API key:
 
-1. Go to your MAAS preferences page, or go to your MAAS home page and choose Preferences from the drop-down menu that appears when clicking your username at the top-right of the page.
-1. Optionally add a new MAAS key. Do this if you're setting up another environment within the same MAAS cluster.
+1. Go to your MAAS preferences page, or go to your MAAS home page and choose
+   Preferences from the drop-down menu that appears when clicking your username
+   at the top-right of the page.
+1. Optionally add a new MAAS key. Do this if you're setting up another
+   environment within the same MAAS cluster.
 1. Copy the key value - you will need it shortly!
 
 ##  Edit or create the configuration
@@ -40,7 +45,7 @@ To get the API key:
 Create or modify `~/.juju/environments.yaml` with the following content: Create
 or modify ~/.juju/environments.yaml with the following content:
 
-```
+```yaml
 maas:
     type: maas
     maas-server: 'http://<my-maas-server>:80/MAAS'
@@ -55,23 +60,23 @@ It is also useful to add your SSH keys to the configuration, as then MAAS will
 be able to automatically add them to each unit. This may be done simply by 
 adding the following option to the config:
 
-```
+```bash
 authorized-keys-path: ~/.ssh/id_rsa.pub 
 ```
 
 ...or point to any other appropriate key file.
 
 An admin password will be generated when you try and bootstrap the Juju
-instance. you can specify this explicitly in the configuration if you like:
+instance. You can specify this explicitly in the configuration if you like:
 
-```
+```yaml
  admin-secret: asecurepassword
 ```
 
 The default series for MAAS will automatically be set to 'precise'. You can override 
 this setting by adding the optional configuration:
 
-```
+```yaml
  default-series: trusty
 ```
 
@@ -87,7 +92,7 @@ with networks and enable the networks for use.
 There is one case where an additional configuration option should be made: 
 when MAAS is managing the bridge and bringing networks up and down, set the 
 "disable-network-management" option in environments.yaml to "true":
-```
+```yaml
 disable-network-management: true
 ```
 This tells Juju not to create a network bridge or to bring eth0 up and down 
@@ -98,7 +103,7 @@ Juju recognises MAAS-controlled hostnames. You can use the hostname
 when bootstrapping the state-server on a specific machine and add
 existing MAAS-controlled machines to the juju environment. For example:
 
-```
+```bash
 juju bootstrap --to <hostname>
 juju add-machine <hostname>
 ```
