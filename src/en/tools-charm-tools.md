@@ -11,8 +11,10 @@ manage a charms.
 To install the latest Charm Tools, you simply need to grab the latest charm-
 tools package from this PPA:
 
-    sudo add-apt-repository ppa:juju/stable
-    sudo apt-get update && sudo apt-get install charm-tools
+```bash
+sudo add-apt-repository ppa:juju/stable
+sudo apt-get update && sudo apt-get install charm-tools
+```
 
 ## Mac OSX
 Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
@@ -20,7 +22,9 @@ running the latest version of homebrew before proceeding.
 
 To install, run the following:
 
-    brew install charm-tools
+```bash
+brew install charm-tools
+```
 
 ## Windows
 Charm Tools is available for, and tested, on Microsoft Windows 7 and 8. While
@@ -49,7 +53,9 @@ independent help pages, accesible using either the `-h` or `--help` flags.
 
 ## Add
 
-    juju charm add [-h|--help] tests,readme,icon [CHARM_DIRECTORY]
+```bash
+juju charm add [-h|--help] tests,readme,icon [CHARM_DIRECTORY]
+```
 
 Add is a generator function which can be used to extend a charm depending on the
 subcommand issued.
@@ -62,7 +68,9 @@ Icons documentation](authors-charm-icon.html)).
 
 #### Add Icon Example
 
-    juju charm add icon
+```bash
+juju charm add icon
+```
 
 ### Readme
 
@@ -71,7 +79,9 @@ charm.
 
 #### Add Readme Example
 
-    juju charm add readme
+```bash
+juju charm add readme
+```
 
 ### Tests
 
@@ -83,13 +93,17 @@ will need to be modified.
 
 #### Add Tests Example
 
-    juju charm add tests
+```bash
+juju charm add tests
+```
 
 * * *
 
 ## Create
 
-    juju charm create [-h] [-t TEMPLATE] [-a] [-v] charmname [charmhome]
+```bash
+juju charm create [-h] [-t TEMPLATE] [-a] [-v] charmname [charmhome]
+```
 
 The `create` command will produce a new boilerplate charm. Replace `charmname`
 with the name of your new charm. A directory called `charmname` will be created
@@ -99,7 +113,9 @@ directory is provided.
 By default, your new charm is created using the python template. Use the
 `-t TEMPLATE` option to create a charm using a different template, e.g.:
 
-    juju charm create -t bash my-charm
+```bash
+juju charm create -t bash my-charm
+```
 
 To see the list of installed templates use `juju charm create -h`.
 
@@ -138,7 +154,11 @@ Below is the structure of a bash charm created by `juju charm create -t bash my-
 
 ### Python Example
 
-Below is the structure of a python charm created by `juju charm create -t python my-charm`:
+Below is the structure of a python charm created by
+
+```bash
+juju charm create -t python my-charm
+```
 
     my-charm/
     ├── charm-helpers.yaml
@@ -171,7 +191,9 @@ Below is the structure of a python charm created by `juju charm create -t python
 
 ## Get
 
-    juju charm get [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
+```bash
+juju charm get [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
+```
 
 If you want to branch one of the charm store charms, use the `get` command
 specifying the `CHARM_NAME` you want to copy and provide an optional
@@ -179,11 +201,15 @@ specifying the `CHARM_NAME` you want to copy and provide an optional
 
 ### Get Example
 
-    juju charm get mysql
+```bash
+juju charm get mysql
+```
 
 Will download the MySQL charm to a mysql directory within your current path.
 
-    juju charm get wordpress ~/charms/precise/
+```bash
+juju charm get wordpress ~/charms/precise/
+```
 
 Will download the WordPress charm to `~/charms/precise/wordpress`
 
@@ -191,7 +217,9 @@ Will download the WordPress charm to `~/charms/precise/wordpress`
 
 ## Getall
 
-    juju charm getall [-h|--help] [CHARMS_DIRECTORY]
+```bash
+juju charm getall [-h|--help] [CHARMS_DIRECTORY]
+```
 
 Similar to `get`, `getall` will fetch all official charm store charms and place
 them in the `CHARMS_DIRECTORY`, or your current directory if no
@@ -202,7 +230,9 @@ them in the `CHARMS_DIRECTORY`, or your current directory if no
 
 ## Info
 
-    juju charm info [-h|--help] [CHARM]
+```bash
+juju charm info [-h|--help] [CHARM]
+```
 
 Info is used to query the README file for a charm. This command accepts various
 forms of a valid "charm id". Any ID that can be used to deploy a charm with
@@ -212,18 +242,24 @@ forms of a valid "charm id". Any ID that can be used to deploy a charm with
 
 This will print the raw README for the WordPress charm
 
-    juju charm info wordpress
+```bash
+juju charm info wordpress
+```
 
 ## List
 
-    juju charm list [-h|--help]
+```bash
+juju charm list [-h|--help]
+```
 
 Show all charms (both official and person) in the charm store. This produces an
 exhaustive list of all charms available in the store.
 
 ## Promulgate
 
-    juju charm promulgate [-h|--help] [-b|--branch] [-s|--series] [-v|--verbose] [-u|--unpromulgate] [-f|--force] [-w|--ignore-warnings] [-o|--owner-branch] CHARM_DIRECTORY
+```bash
+juju charm promulgate [-h|--help] [-b|--branch] [-s|--series] [-v|--verbose] [-u|--unpromulgate] [-f|--force] [-w|--ignore-warnings] [-o|--owner-branch] CHARM_DIRECTORY
+```
 
 Promulgate is used to promote a charm to the charm store. This command is only
 available to users in the ~charmers group and is meant to be run only after a
@@ -243,7 +279,9 @@ will prevent promulgation if errors occur.
 
 ## Proof
 
-    juju charm proof CHARM_DIRECTORY
+```bash
+juju charm proof CHARM_DIRECTORY
+```
 
 Proof is designed to perform a "lint" against a charms structure to validate if
 it conforms to what the Charm Store thinks a charm structure and layout should
@@ -256,7 +294,9 @@ pass charm store review policy.
 
 ## Review-queue
 
-    juju charm review-queue [-h|--help]
+```bash
+juju charm review-queue [-h|--help]
+```
 
 This provides a copy of the [juju charms review
 queue](http://review.juju.solutions) which is used by ~charmers to
@@ -266,7 +306,9 @@ know which charms are available for review.
 
 ## Search
 
-    juju charm search [-h|--help]
+```bash
+juju charm search [-h|--help]
+```
 
 This provides a copy of the [juju charms review
 queue](http://review.juju.solutions) which is used by ~charmers to
@@ -276,14 +318,18 @@ know which charms are available for review.
 
 ## unpromulgate
 
-    juju charm unpromulgate [-h|--help] [-f|--force]
+```bash
+juju charm unpromulgate [-h|--help] [-f|--force]
+```
 
 This is simply a convience method to running `juju charm promulgate
 --unpromulgate`.
 
 ## update
 
-    juju charm update [-h|--help] [-f|--fix] [CHARMS_DIRECTORY]
+```bash
+juju charm update [-h|--help] [-f|--fix] [CHARMS_DIRECTORY]
+```
 
 Update is used for `CHARMS_DIRECTORY`, when `CHARMS_DIRECTORY` is a repository
 created via `getall`
