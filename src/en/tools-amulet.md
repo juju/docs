@@ -388,8 +388,10 @@ Return files and directories of directory
 
 Example of output
 
-    {'files': []
-     'directories': []}
+```no-highlight
+{'files': []
+ 'directories': []}
+```
 
 ##### UnitSentry.directory_stat(dir)
 
@@ -399,11 +401,13 @@ Return stat of directory
 
 Example of output
 
-    {'mtime': fs_stat.st_mtime,
-     'size': fs_stat.st_size,
-     'uid': fs_stat.st_uid,
-     'gid': fs_stat.st_gid,
-     'mode': fs_stat.st_mode}
+```no-highlight
+{'mtime': fs_stat.st_mtime,
+ 'size': fs_stat.st_size,
+ 'uid': fs_stat.st_uid,
+ 'gid': fs_stat.st_gid,
+ 'mode': fs_stat.st_mode}
+```
 
 ##### UnitSentry.file(filename)
 
@@ -422,11 +426,13 @@ Return stat of path
 
 Example of output
 
-    {'mtime': fs_stat.st_mtime,
-     'size': fs_stat.st_size,
-     'uid': fs_stat.st_uid,
-     'gid': fs_stat.st_gid,
-     'mode': fs_stat.st_mode}
+```no-highlight
+{'mtime': fs_stat.st_mtime,
+ 'size': fs_stat.st_size,
+ 'uid': fs_stat.st_uid,
+ 'gid': fs_stat.st_gid,
+ 'mode': fs_stat.st_mode}
+```
 
 ##### UnitSentry.relation(from_rel, to_rel)
 
@@ -445,8 +451,10 @@ Execute specified command as root on remote machine
 
 Returns a tuple of output string and exit code
 
-    >>> d.sentry['ubuntu/0'].run('whoami')
-    ('root', 0)
+```no-highlight
+>>> d.sentry['ubuntu/0'].run('whoami')
+('root', 0)
+```
 
 ## Examples
 

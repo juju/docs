@@ -133,8 +133,13 @@ user input. To suppress prompts and accept all defaults instead, use the
 
 ### Bash Example
 
-Below is the structure of a bash charm created by `juju charm create -t bash my-charm`:
+Below is the structure of a bash charm created by
 
+```bash
+juju charm create -t bash my-charm
+```
+
+```no-highlight
     my-charm
     ├── config.yaml
     ├── hooks
@@ -151,6 +156,7 @@ Below is the structure of a bash charm created by `juju charm create -t bash my-
     ├── metadata.yaml
     ├── README.ex
     └── revision
+```
 
 ### Python Example
 
@@ -160,6 +166,7 @@ Below is the structure of a python charm created by
 juju charm create -t python my-charm
 ```
 
+```no-highlight
     my-charm/
     ├── charm-helpers.yaml
     ├── config.yaml
@@ -186,6 +193,7 @@ juju charm create -t python my-charm
     └── tests
         ├── 00-setup
         └── 10-deploy
+```
 
 * * *
 
