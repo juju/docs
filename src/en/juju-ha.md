@@ -68,4 +68,3 @@ If fewer than half of the original state servers are still running, you cannot
 recover by using the ensure-availability command because the MongoDB replicaset
 does not have a quorum with which to elect a new master.  In this case, you must
 restore from a previous backup.
-
