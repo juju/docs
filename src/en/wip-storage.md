@@ -4,7 +4,6 @@
 
 !!! Note: For testing purposes, please see the #Testing section for requirements of storage support and notes on the current implementation
 
-
 Many services require access to a storage resource of some form. Juju charms can declare what storage requirements  they have,
 and these can be allocated when the charm is deployed. Charms may declare several types of storage requirement (e.g. for persistent storage and an additional cache) so that resources can be allocated at a more granular level.
 
@@ -17,15 +16,13 @@ https://code.launchpad.net/~axwalk/charms/trusty/postgresql/trunk
 By default, charms with storage requirements will allocate those resources on the root filesystem of the unit where they are deployed.
 To make use of additional storage resources, Juju needs to know what they are. Some providers (eg EC2) support generic default storage pools (see #REF  the documentation on provider support), but in the case of no default support or a desire to be more specific, Juju has the `juju storage` command and subcommands to create and manage storage resources
 
-```
+```bash
 juju storage 
 juju storage list
 juju storage pool list
 juju storage pool create
 juju storage volume list
 ```
-
-
 
 ### deploying with storage constraints
 
@@ -37,25 +34,25 @@ If pool is not specified, then Juju will select the default storage provider for
 If size is not specified, then Juju will use the minimum size specified in the charm's storage metadata, or 1GiB if the metadata does not specify.
 If count is not specified, then Juju will create a single instance of the store.
 
-```
+```bash
 juju deploy <charm> --storage <label>=<pool>,<size>,count
 ```
 
 For example, to deploy the postgresql service and have it use the unit’s local filesystem for 10 gibibytes of storage for its ‘data’ storage requirement:
 
-```
+```bash
 juju deploy cs:~axwalk/postgresql --storage data=rootfs,10G
 ```
 
 We can also deploy using a local loop device
 
-```
+```bash
 juju deploy cs:~axwalk/postgresql --storage data=loop,5G
 ```
 
 If the size is omitted...
 
-```
+```bash
 juju deploy cs:~axwalk/postgresql --storage data=rootfs
 ```
 
@@ -63,19 +60,19 @@ Juju will use a default size of 1GiB, unless the charm itself has specified a mi
 
 When deploying on a provider which supplies storage, the supported storage pool types may be used in addition to ‘loop’ and ‘rootfs’. For example, on using Amazon’s EC2 provider, we can make use of the default ‘ebs’ storage pool
 
-```
+```bash
 juju deploy cs:~axwalk/postgresql --storage data=ebs,10G
 ```
 
 Cloud providers may support more than one type of storage. For example, in the case of EC2, we can also make use of the ebd-ssd pool, which is SSD-based storage, and hence faster and better for some storage requirements.
 
-```
+```bash
 juju deploy cs:~axwalk/postgresql --storage data=ebs-ssd
 ```
 
 We can also merely specify the size, in which case Juju will use the default pool for the selected environment.  E.g. 
 
-```
+```bash
 juju deploy cs:~axwalk/postgresql --storage data=10G
 ```
 
@@ -84,7 +81,7 @@ Which, on the EC2 provider, will create a 10 gibibyte volume in the ‘ebs’ po
 Charms may declare multiple types of storage, in which case they may all be specified using the constraint, or some or all can be omitted to accept the default values:
 
 
-```
+```bash
 juju deploy cs:~axwalk/postgresql --storage data=ebs,10G cache=ebs-ssd
 ```
 
@@ -156,13 +153,11 @@ The MAAS provider currently has a single configuration attribute:
 
 ## Writing a charm which supports storage
 
-
-
 ### Adding storage to the metadata.yaml
 
 Storage requirements _may_ be added to the 'metadata.yaml' of the charm as follows:
 
-```
+```no-highlight
 storage:
   data:
     type: filesystem
@@ -177,7 +172,7 @@ Here the charm is asking for storage it is calling 'data', and it further define
 
 By default, stores are singletons; a charm will have exactly one of the specified store. It is also possible for a charm to specify storage that may have multiple instantiations, e.g. multiple disks to add to a pool. To do this, you can specify the "multiple" attribute:
 
-```
+```no-highlight
 storage:
   disks:
     type: block
@@ -200,7 +195,7 @@ with the name of the relation. So, for example, if we had specified a need for s
 'data', we would probably want to implement the hook 'data-storage-attached', which might look
 something like:
 
-```
+```no-highlight
 mountpoint=$(storage-get location)
 sed -i /etc/myservice.conf "s,MOUNTPOINT,$mountpoint"
 ```
@@ -208,8 +203,6 @@ sed -i /etc/myservice.conf "s,MOUNTPOINT,$mountpoint"
 The storage-attached hooks will be run before the install and upgrade-charm hooks, so that installation and upgrade routines may use the storage. The storage-detaching hooks will be run before storage is detached, and always before the stop hook is run, to allow the charm to gracefully release resources before they are removed and before the unit terminates.
 
 ### Additional considerations
-
-
 
 ## TESTING
 
@@ -223,22 +216,27 @@ There is a modified version of the PostgreSQL charm using the storage feature. Y
 
 Here is how you can go about using the new feature.
 
+```bash
+juju deploy cs:~axwalk/postgresql pg-rootfs
+juju deploy cs:~axwalk/postgresql --storage data=loop,1G pg-loop
+juju deploy cs:~axwalk/postgresql --storage data=ebs,10G pg-magnetic
+juju deploy cs:~axwalk/postgresql --storage data=ebs-ssd,10G pg-ssd
+juju storage pool create ebs-iops ebs volume-type=provisioned-iops iops=300
+juju deploy cs:~axwalk/postgresql --storage data=ebs-iops,10G pg-iops
+sleep $AWHILE
+juju storage list
 ```
-$ juju deploy cs:~axwalk/postgresql pg-rootfs
-$ juju deploy cs:~axwalk/postgresql --storage data=loop,1G pg-loop
-$ juju deploy cs:~axwalk/postgresql --storage data=ebs,10G pg-magnetic
-$ juju deploy cs:~axwalk/postgresql --storage data=ebs-ssd,10G pg-ssd
-$ juju storage pool create ebs-iops ebs volume-type=provisioned-iops iops=300
-$ juju deploy cs:~axwalk/postgresql --storage data=ebs-iops,10G pg-iops
-$ sleep $AWHILE
-$ juju storage list
-    [Storage]     
-    UNIT          ID     LOCATION  STATUS   PERSISTENT
-    pg-iops/0     data/4           pending  false      
-    pg-loop/0     data/1 /srv/data attached false      
-    pg-magnetic/0 data/2 /srv/data attached false      
-    pg-rootfs/0   data/0 /srv/data attached false      
-    pg-ssd/0      data/3 /srv/data attached false
+
+Output:
+
+```no-highlight
+[Storage]     
+UNIT          ID     LOCATION  STATUS   PERSISTENT
+pg-iops/0     data/4           pending  false      
+pg-loop/0     data/1 /srv/data attached false      
+pg-magnetic/0 data/2 /srv/data attached false      
+pg-rootfs/0   data/0 /srv/data attached false      
+pg-ssd/0      data/3 /srv/data attached false
 ```
 
 IMPLEMENTED FEATURES
