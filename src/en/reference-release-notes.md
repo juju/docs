@@ -1095,7 +1095,7 @@ juju deploy lp:~me/win2012r2/my-charm
 
   Juju's harvesting behaviour is set through the environments.yaml file.
 
-```no-highlight
+```yaml
 provisioner-harvest-mode: <MODE>
 ```
 
@@ -1140,7 +1140,7 @@ apt-get --target-release precise-updates/cloud-tools my-package
   You can configure the options in environments.yaml for fast provisioning
   like so:
 
-```no-highlight
+```yaml
 enable-os-upgrade: false
 enable-os-refresh-update: false
 ```
@@ -1150,7 +1150,7 @@ enable-os-refresh-update: false
   development, set ```enable-os-upgrade``` to
   "true" in your environments.yaml:
 
-```no-highlight
+```yaml
 enable-os-upgrade: true
 ```
 
@@ -1175,7 +1175,7 @@ sudo rm -r /var/cache/lxc/cloud-trusty
   existed since 1.18.0, it was not applied consistently to KVM containers.
   KVM containers will now use "daily" when environments.yaml is set to:
 
-```no-highlight
+```yaml
 image-stream: daily
 ```
 
@@ -1188,14 +1188,14 @@ image-stream: daily
   the most stable versions of Juju. You can set ```agent-stream``` to
   select "devel" streams now to test the unstable versions of Juju:
 
-```no-highlight
+```yaml
 agent-stream: devel
 ```
 
   You can evaluate the next stable version of Juju before it is the default
   version by selecting the "proposed" stream like this:
 
-```no-highlight
+```yaml
 agent-stream: proposed
 ```
 
@@ -1223,7 +1223,7 @@ juju set-env agent-stream=proposed
   state-server will be on a machine with NUMA support, you can set
   ```set-numa-control-policy``` to true in environments.yaml like this:
 
-```no-highlight
+```yaml
 set-numa-control-policy: true
 ```
 
@@ -1236,7 +1236,7 @@ set-numa-control-policy: true
   is managing the bridge and bringing networks up and down, set the
   ```disable-network-management``` option in environments.yaml to "true":
 
-```no-highlight
+```yaml
 disable-network-management: true
 ```
 
@@ -2425,7 +2425,7 @@ juju deploy -n 10 <service>
   'availability-sets-enabled' option must be set in environments.yaml like
   so:
   
-```no-highlight
+```yaml
 availability-sets-enabled: false
 ```
   
@@ -2541,7 +2541,7 @@ juju bootstrap --constraints instance-type=m1.small
   cannot be changed once it is set. You can set the option to true in
   environments.yaml like this:
 
-```no-highlight
+```yaml
 lxc-use-clone: true
 ```
 
@@ -2756,7 +2756,7 @@ juju add-machine fnord
   organisation only supports Ubuntu 12.04 Precise in the cloud, you can add this
   to your environment in environments.yaml:
 
-```no-highlight
+```yaml
 default-series: precise
 ```
 
@@ -2872,7 +2872,7 @@ juju deploy loca:mysql
   apt-http-proxy to use it for the containers by specifying the host machine’s
   network-bridge:
 
-```no-highlight
+```yaml
 apt-http-proxy: http://10.0.3.1:8000
 ```
 
@@ -3020,7 +3020,7 @@ sudo rm ~/.juju/environments/local.jenv
   try to use lxc-clone on earlier releases, but it is not a supported. It may
   well work. You can enable lxc-clone in environments.yaml thusly:
 
-```no-highlight
+```yaml
 lxc-clone: true
 ```
 
@@ -3031,7 +3031,7 @@ lxc-clone: true
   behave as intuitively as one might expect, so this must be turned on
   explicitly.
 
-```no-highlight
+```yaml
 lxc-clone-aufs: true
 ```
 
@@ -3307,7 +3307,7 @@ juju destroy-machine --force
   a common mounted directory. In that case, add an entry like this to your
   environments.yaml:
 
-```no-highlight
+```yaml
 tools-url: file://mounted_dir
 ```
 
@@ -3315,7 +3315,7 @@ tools-url: file://mounted_dir
   tools directory itself to a publicly readable storage instance. Thenadd the
   tools-url entry to environments.yml:
 
-```no-highlight
+```yaml
 tools-url: https:///tools
 ```
 
@@ -3333,7 +3333,7 @@ tools-url: https:///tools
   bucket-url was used to point to the location of the metadata. Now, configure
   the image-metadata-url as follows:
 
-```no-highlight
+```yaml
 image-metadata-url: /juju-dist
 ```
 
