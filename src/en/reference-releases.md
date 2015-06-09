@@ -62,8 +62,9 @@ Proposed releases use the 'proposed' simple-streams. You must configure
 the 'agent-stream' option in your environments.yaml to use the matching
 juju agents.
 
-    agent-stream: proposed
-
+```no-highlight
+agent-stream: proposed
+```
 
 ## Development
 
@@ -98,4 +99,6 @@ Development releases use the 'devel' simple-streams. You must configure
 the 'agent-stream' option in your environments.yaml to use the matching
 juju agents.
 
-    agent-stream: devel
+```no-highlight
+agent-stream: devel
+```
