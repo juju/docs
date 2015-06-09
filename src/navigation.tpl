@@ -13,6 +13,7 @@
               <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
               <li class=" sub"><a href="config-scaleway.html">Scaleway</a></li>              
               <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
+              <li class=" sub"><a href="config-vmware.html">VMWare vSphere</a></li>
               <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
               <li class=" sub"><a href="config-general.html">General config options</a></li>
               <li class=" sub"><a href="getting-started.html#testing-your-setup">Testing your setup</a></li>
