@@ -67,8 +67,8 @@ The versions covered here are:
 
 ^# juju-core 1.23.2
 
-A new stable release of Juju, juju-core 1.23.2, is now available.
-This release replaces version 1.22.1.
+  A new stable release of Juju, juju-core 1.23.2, is now available.
+  This release replaces version 1.22.1.
 
 
 ## Getting Juju
