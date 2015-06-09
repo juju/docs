@@ -106,7 +106,7 @@ This release replaces version 1.22.1.
 
   The basic config options in your environments.yaml will look like this:
 
-```no-highlight
+```yaml
 my-gce:
  type: gce
  project-id: <your-project-id>
