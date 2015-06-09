@@ -12,7 +12,9 @@ four subcommands:
 `import` can be used in clouds with open networks to pull ssh keys from
 Launchpad or Github. For example:
 
-    juju authorised-keys import lp:wallyworld
+```bash
+juju authorised-keys import lp:wallyworld
+```
 
 `add` can be used to import the provided key, which is necessary for clouds that
 do not have internet access.

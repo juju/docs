@@ -23,42 +23,59 @@ installed and configured Juju.
 First, create a configuration file `myapp.yaml` to add info about your app
 pointing to your github repo:
 
-    node-app:
-      app_url: https://github.com/yourapplication
+```no-highlight
+node-app:
+  app_url: https://github.com/yourapplication
+```
 
 If you have not already bootstrapped an environment, do so:
 
-    juju bootstrap
+```bash
+juju bootstrap
+```
 
 Then wait a few minutes while your cloud spins up. Then deploy some basic
 services:
 
-    juju deploy --config myapp.yaml node-app myapp
-    juju deploy mongodb
-    juju deploy haproxy
+```bash
+juju deploy --config myapp.yaml node-app myapp
+juju deploy mongodb
+juju deploy haproxy
+```
 
 relate them
 
-    juju add-relation mongodb myapp
-    juju add-relation myapp haproxy
+```bash
+juju add-relation mongodb myapp
+juju add-relation myapp haproxy
+```
 
 open it up to the outside world
 
-    juju expose haproxy
+```bash
+juju expose haproxy
+```
 
 Find the haproxy instance's public URL from
 
-    juju status
+```bash
+juju status
+```
 
 (or attach it to an elastic IP via the AWS console) and open it up in a browser.
 
 scale up your app (to 10 nodes for example)
 
-    juju add-unit -n 10 myapp
+```bash
+juju add-unit -n 10 myapp
+```
 
 and scale it back down
 
-    juju remove-unit myapp/9 myapp/8 myapp/7 myapp/6 myapp/5 myapp/4 myapp/3 myapp/2 myapp/1
+```bash
+juju remove-unit myapp/9 myapp/8 myapp/7 myapp/6 myapp/5 myapp/4 myapp/3 myapp/2 myapp/1
+```
+
 
 ##  Local to Cloud Workflow
 
@@ -78,33 +95,44 @@ In this example the local environment is named `local` and we'll deploy to an
 AWS environment called `amazon`. First let's `switch` to the local environment
 and bootstrap.
 
-    juju switch local
-    juju bootstrap
+```bash
+juju switch local
+juju bootstrap
+```
 
 Create a configuration file `myapp.yaml` to add info about your app pointing to
 your github repo:
 
-    sample-node:
-      app_url: https://github.com/yourapplication
+```no-highlight
+sample-node:
+  app_url: https://github.com/yourapplication
+```
 
 Then deploy some basic services:
 
-    juju deploy --config ~/myapp.yaml node-app myapp
-    juju deploy mongodb
+```bash
+juju deploy --config ~/myapp.yaml node-app myapp
+juju deploy mongodb
+```
 
 relate them
 
-    juju add-relation mongodb myapp
+```bash
+juju add-relation mongodb myapp
+```
 
 Now open up your browser and go to `http://localhost` to get your application
 loaded in your browser.
+
 
 ###  Continuous Deployment
 
 Continue to write your code, push to git as you land features and fixes. When
 you're ready to test it you can tell Juju to check the git repository again:
 
-    juju set myapp app_branch=https://github.com/yourapplication
+```bash
+juju set myapp app_branch=https://github.com/yourapplication
+```
 
 The charm will then fetch the latest code and you can refresh your browser at
 `http://localhost`.
@@ -119,32 +147,41 @@ out to a place where your coworkers can see your app in all it's glory, let's
 push this to AWS. Same exact commands as before, just to a different
 environment:
 
-    juju switch amazon
-    juju bootstrap
-    juju deploy --config ~/myapp.yaml node-app myapp
-    juju deploy mongodb
-    juju add-relation mongodb myapp
+```bash
+juju switch amazon
+juju bootstrap
+juju deploy --config ~/myapp.yaml node-app myapp
+juju deploy mongodb
+juju add-relation mongodb myapp
+```
 
 Since we're on a public cloud and not on a local provider we need to explicitly
 expose the service and get its public IP:
 
-    juju expose myapp
-    juju status myapp
+```bash
+juju expose myapp
+juju status myapp
+```
 
 And put the ec2 URL in your browser. If you want to enable some horizontal
 scalability to your application you can do so, even after you've deployed!
 
-    juju deploy haproxy
-    juju add-relation haproxy myapp
-    juju expose haproxy
-    juju unexpose myapp
+```bash
+juju deploy haproxy
+juju add-relation haproxy myapp
+juju expose haproxy
+juju unexpose myapp
+```
 
 And then get the public IP from the haproxy instead (notice how we've unexposed
 your application so that only haproxy is serving the public internet):
 
-    juju status haproxy
+```bash
+juju status haproxy
+```
 
 Now you can `juju add-unit myapp` and `juju remove-unit myapp` based on load.
+
 
 ###  Tearing it all down
 
@@ -152,13 +189,16 @@ The local containers survive reboots and do not go away until you explicitly
 tear the environment down. Now that your coworkers have seen your great
 application let's also stop spending money:
 
-    juju destroy-environment -e amazon
-    juju destroy-environment -e local
+```bash
+juju destroy-environment -e amazon
+juju destroy-environment -e local
+```
 
 ##  Charm Details
 
 This section is to explain how the charm works and is provided here as a
 reference.
+
 
 ###  What the charm does
 
@@ -175,28 +215,34 @@ when related to a `mongodb` service, the formula
   - configures db access if your app contains `config/config.js`
   - starts your node app as a service
 
+
 ###  Charm configuration
 
 Configurable aspects of the charm are listed in `config.yaml` and can be set by
 either editing the default values directly in the yaml file or passing a
 `myapp.yaml` configuration file during deployment
 
-    juju deploy --config ~/myapp.yaml node-app myapp
+```bash
+juju deploy --config ~/myapp.yaml node-app myapp
+```
 
 Some of these parameters are used directly by the charm, and some are passed
 through to the node app using `config/config.js`.
+
 
 ###  Application configuration
 
 The formula looks for `config/config.js` in your app which starts off looking
 something like this
 
-    module.exports = config = {
-      "name" : "mynodeapp"
-      ,"listen_port" : 8000
-      ,"mongo_host" : "localhost"
-      ,"mongo_port" : 27017
-    }
+```no-highlight
+module.exports = config = {
+  "name" : "mynodeapp"
+  ,"listen_port" : 8000
+  ,"mongo_host" : "localhost"
+  ,"mongo_port" : 27017
+}
+```
 
 and gets modified with contextually correct configuration information during
 either deployment (via the `install` hook) or relation to another service
@@ -204,30 +250,39 @@ either deployment (via the `install` hook) or relation to another service
 
 This config can be used from within your application using snippets like
 
-    ...
-    var config = require('./config/config')
-    ...
-    new mongo.Server(config.mongo_host, config.mongo_port, {}),
-    ...
-    server.listen(config.listen_port);
-    ...
+```no-highlight
+...
+var config = require('./config/config')
+...
+new mongo.Server(config.mongo_host, config.mongo_port, {}),
+...
+server.listen(config.listen_port);
+...
+```
 
 Alternatively you could use a `Procfile` in root directory like this:
 
-    web: node app.js
+```no-highlight
+web: node app.js
+```
 
 and then get the environment variables from the running environment like this:
 
-    app.set('port', process.env.PORT);
+```no-highlight
+app.set('port', process.env.PORT);
+```
 
 The defined environment variables are:
 
-    NAME
-    PORT
-    NODE_ENV
-    MONGO_HOST
-    MONGO_PORT
-    MONGO_REPLSET
+```no-highlight
+NAME
+PORT
+NODE_ENV
+MONGO_HOST
+MONGO_PORT
+MONGO_REPLSET
+```
+
 
 ###  Network access
 
@@ -238,17 +293,22 @@ outside world. This allows for instant horizontal scalability.
 If your node app is itself a proxy and you want it directly exposed, this can
 easily be done by adding
 
-    open-port $app_port
+```no-highlight
+open-port $app_port
+```
 
 to the bottom of the `install` hook, and then once your stack is started, you
 expose
 
-    juju expose myapp
+```bash
+juju expose myapp
+```
 
 it to the outside world.
 
 By default, juju services within the same environment can talk to each other on
 any port over internal network interfaces.
+
 
 ###  Making this work with your node.js app
 

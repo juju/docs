@@ -19,7 +19,7 @@ these charms to pull code from an internal server when appropriate.
 In addition to [Juju](getting-started#installation) we need
 to install charm-tools:
 
-```
+```bash
 sudo apt-get update && sudo apt-get install charm-tools
 ```
 
@@ -37,7 +37,7 @@ If you want to retrieve and branch one of the charm store charms, use the `get`
 command specifying the `CHARM_NAME` you want to copy and provide an optional
 `CHARMS_DIRECTORY`. Otherwise the current directory will be used.
 
-```
+```bash
 juju charm get [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
 ```
 
@@ -45,22 +45,22 @@ juju charm get [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
 
 The command
 
-```
+```bash
 juju charm get mysql
 ```
 
 will download the MySQL charm to a `mysql` directory within your current path.
 By running
 
-```
+```bash
 juju charm get wordpress ~/charms/precise/
 ```
 
-you will download the WordPress charm to `~/charms/precise/wordpress`. It is
+You will download the WordPress charm to `~/charms/precise/wordpress`. It is
 also possible to fetch all official charm store charms. The command for this
 task is:
 
-```
+```bash
 juju charm getall [-h|--help] [CHARMS_DIRECTORY]
 ```
 
@@ -82,14 +82,14 @@ source rather than the charm store:
 Juju can be pointed at a local directory to source charms from using the
 `--repository=<path/to/files>` switch like this:
 
-```
+```bash
 juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
 ```
 
 The `--repository` switch can be omitted when shell environment
 defines `JUJU_REPOSITORY` like so:
 
-```
+```bash
 export JUJU_REPOSITORY=/usr/share/charms/
 juju deploy local:trusty/vsftpd
 ```
@@ -98,21 +98,21 @@ You can also make use of standard filesystem shortcuts, if the environment
 specifies the `default-series`. The following examples will deploy the trusty
 charms in the local repository when `default-series` is set to trusty:
 
-```
+```bash
 juju deploy --repository=. local:haproxy
 juju deploy --repository ~/charms/ local:wordpress
 ```
 
 The `default-series` can be specified in `environments.yaml` thusly:
 
-```
+```no-highlight
 default-series: precise
 ```
 
 The default-series can also be added to any bootstrapped environment with
 the `set-env` command:
 
-```
+```bash
 juju set-env "default-series=trusty"
 ```
 
