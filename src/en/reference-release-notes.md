@@ -816,7 +816,7 @@ juju deploy lp:~me/win2012r2/my-charm
 
   The corresponding GET annotations call takes this form:
 
-```no-highlight
+```json
 {
     "Type": "Annotations",
     "Request": "Get",
@@ -831,7 +831,7 @@ juju deploy lp:~me/win2012r2/my-charm
 
   The GET response looks like this:
 
-```no-highlight
+```json
 {
     "Results": {
         {"EntityTag": a, "Annotations": pairs1, "Error": nil},
