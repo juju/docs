@@ -4,14 +4,14 @@
               <li class=""><a href="getting-started.html">Install &amp; Configure</a></li>
               <li class=" sub"><a href="config-aws.html">Amazon Web Service</a></li>
               <li class=" sub"><a href="config-azure.html">Windows Azure</a></li>
+              <li class=" sub"><a href="config-digitalocean.html">DigitalOcean</a></li>
               <li class=" sub"><a href="config-gce.html">Google Compute Engine</a></li>
               <li class=" sub"><a href="config-hpcloud.html">HP Public Cloud</a></li>
               <li class=" sub"><a href="config-joyent.html">Joyent</a></li>
-              <li class=" sub"><a href="config-scaleway.html">Scaleway</a></li>
-              <li class=" sub"><a href="config-digitalocean.html">DigitalOcean</a></li>
+              <li class=" sub"><a href="config-local.html">Local</a></li>              
+              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>              
               <li class=" sub"><a href="config-openstack.html">OpenStack</a></li>
-              <li class=" sub"><a href="config-maas.html">MAAS (bare metal)</a></li>
-              <li class=" sub"><a href="config-local.html">Local</a></li>
+              <li class=" sub"><a href="config-scaleway.html">Scaleway</a></li>              
               <li class=" sub"><a href="config-vagrant.html">Vagrant</a></li>
               <li class=" sub"><a href="config-manual.html">Manual Provisioning</a></li>
               <li class=" sub"><a href="config-general.html">General config options</a></li>
