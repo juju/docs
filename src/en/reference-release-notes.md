@@ -801,7 +801,7 @@ juju deploy lp:~me/win2012r2/my-charm
 
   The SET annotations call takes this form:
 
-```no-highlight
+```json
 {
     "Type": "Annotations",
     "Request": "Set",
