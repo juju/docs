@@ -1,3 +1,5 @@
+Title:Creating config.yaml and configuring charms
+
 # Charm configuration
 
 The optional `config.yaml` file defines how a service running the charm can be
@@ -7,9 +9,13 @@ If `config.yaml` exists, it must contain a dictionary of `options`, in which
 each possible setting is named by the key and defined by the value. An option
 definition must contain all of the following fields:
 
-  - `type` can be `string`, `int`, `float`, or `boolean`. The default type is `string`.
-  - `description` should contain an explanation of what the user might achieve by altering the setting along with valid values.
-  - `default` should contain a value of the appropriate type. If set as `default:` with no trailing characters, it is treated as null (which is always a valid value in this context).
+  - `type` can be `string`, `int`, `float`, or `boolean`. The default type is
+    `string`.
+  - `description` should contain an explanation of what the user might achieve
+    by altering the setting along with valid values.
+  - `default` should contain a value of the appropriate type. If set as
+    `default:` with no trailing characters, it is treated as null (which is
+    always a valid value in this context).
 
 Any option without these three fields will generate a Warning from the the
 [charm proof tool](tools-charm-tools.html#proof)
@@ -42,7 +48,8 @@ go, many potential users won't give it a second try.
 
 The MediaWiki has some simple but useful configuration options:
 
-    options:
+```yaml
+  options:
       name:
         default: Please set name of wiki
         description: The name, or Title of the Wiki
@@ -63,3 +70,4 @@ The MediaWiki has some simple but useful configuration options:
         default: false
         type: boolean
         description: turn on debugging features of mediawiki
+```
