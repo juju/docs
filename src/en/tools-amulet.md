@@ -378,7 +378,9 @@ See UnitSentry.file_stat()
 Return contents of filename
 
   - `filename` File on remote machine
-`UnitSentry.file_stat(filename)`
+
+
+##### UnitSentry.file_stat(filename)
 
 Return stat of path
 
