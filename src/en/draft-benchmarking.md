@@ -107,10 +107,18 @@ benchmark-finish
 # of your benchmark.
 
 # Raw results
-action-set results.raw="`cat /opt/load-gen/cpu/results/$run/load-gen.log`"
+benchmark-raw /opt/load-gen/cpu/results/$run/load-gen.log
 
 # Parse the output from load-gen
 score=`awk '{print $1}' /opt/load-gen/cpu/results/$run/load-gen.log`
+availability=`awk '{print $2}' /opt/load-gen/cpu/results/$run/load-gen.log`
+responsetime=`awk '{print $3}' /opt/load-gen/cpu/results/$run/load-gen.log`
+throughput=`awk '{print $4}' /opt/load-gen/cpu/results/$run/load-gen.log`
+
+benchmark-data 'score' '${score}' 'requests/sec' 'desc'
+benchmark-data 'availability' '${availability}'
+benchmark-data 'throughput' '${throughput}' 'bytes/sec' 'desc'
+benchmark-data 'response-time' '${responsetime}' 'secs' 'asc'
 
 # Set the composite score
 benchmark-composite ${score} "requests/sec" "desc"
