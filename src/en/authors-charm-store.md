@@ -110,7 +110,7 @@ with a description following.
 #### Deployment
 
 Once your charm has been ingested it will be deployable via your personal name
-space url.
+space URL.
 
 ```bash
 juju deploy cs:~your-launchpad-username/series/nagios
