@@ -23,7 +23,7 @@ Create a YAML config file with your application's name and its git location
 
 `sample-app.yaml`
 
-```no-highlight
+```yaml
 sample-app:
   repo: https://github.com/pavelpachkovskij/sample-rails
 ```
@@ -103,7 +103,7 @@ Create a YAML config file with your application's name and its git location
 
 `sample-app.yaml`
 
-```no-highlight
+```yaml
 sample-app:
   repo: https://github.com/pavelpachkovskij/sample-rails
 ```

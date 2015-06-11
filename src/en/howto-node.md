@@ -23,7 +23,7 @@ installed and configured Juju.
 First, create a configuration file `myapp.yaml` to add info about your app
 pointing to your github repo:
 
-```no-highlight
+```yaml
 node-app:
   app_url: https://github.com/yourapplication
 ```
@@ -235,7 +235,7 @@ through to the node app using `config/config.js`.
 The formula looks for `config/config.js` in your app which starts off looking
 something like this
 
-```no-highlight
+```javascript
 module.exports = config = {
   "name" : "mynodeapp"
   ,"listen_port" : 8000
@@ -250,7 +250,7 @@ either deployment (via the `install` hook) or relation to another service
 
 This config can be used from within your application using snippets like
 
-```no-highlight
+```javascript
 ...
 var config = require('./config/config')
 ...
@@ -293,7 +293,7 @@ outside world. This allows for instant horizontal scalability.
 If your node app is itself a proxy and you want it directly exposed, this can
 easily be done by adding
 
-```no-highlight
+```javascript
 open-port $app_port
 ```
 

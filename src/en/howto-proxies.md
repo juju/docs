@@ -12,7 +12,7 @@ existing environment using `juju set-env` The configuration options are:
 Each protocol-specific option accepts a URL. The `no-proxy` option is a list of
 host names and addresses that services can directly connect to. For example:
 
-```no-highlight
+```yaml
 http-proxy: http://proxy.example.com:9000
 https-proxy: https://user@10.0.0.1
 no-proxy: localhost,10.0.3.1
@@ -30,7 +30,7 @@ For example, with a squid-deb-proxy running on a laptop, you can specify the
 apt-http-proxy to use it for the containers by specifying the host machine’s
 network-bridge:
 
-```no-highlight
+```yaml
 apt-http-proxy: http://10.0.3.1:8000
 ```
 

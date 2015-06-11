@@ -125,7 +125,7 @@ Assume an Apache http server with base URL `https://juju-metadata`, providing
 access to information at `<base>/images` and `<base>/tools`. The Juju
 environments yaml file could have the following entries (one or both):
 
-```no-highlight
+```yaml
 tools-metadata-url: https://juju-metadata/tools
 image-metadata-url: https://juju-metadata/images
 ```

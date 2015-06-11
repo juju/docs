@@ -80,7 +80,7 @@ populate with your services deployment and orchestration logic.
 We'll start by editing the metadata.yaml to populate the information about our
 charm.
 
-```no-highlight
+```yaml
    name: genghisapp
    summary: Genghisapp the single file MongoDB administration tool
    maintainer: Charles Butler <chuck@dasroot.net>
