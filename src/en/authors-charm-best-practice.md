@@ -60,7 +60,7 @@ the devops community.
 Tips for production usage:
 
   - Provide an overview of the service in the README and metadata.
-  - Use packaged software (i.e. debian packages) where possible, and "backport"
+  - Use packaged software (i.e. Debian packages) where possible, and "backport"
     any packages needed outside of the archives from whatever PPA you have them
     to an internal accessible repository.
   - Do not duplicate any service components for which there are pre-existing
