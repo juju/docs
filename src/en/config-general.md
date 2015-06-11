@@ -150,7 +150,7 @@ to any of the above values.
 ## Alphabetical list of general configuration values
 
 | Key                        | Type   | Default| Valid values             | Purpose |
-|----------------------------|--------|--------|--------------------------|---------|
+|:----------------------------|--------|--------|--------------------------|:---------|
 admin-secret | string |  |  | The password for the administrator user
 agent-metadata-url | string |  |  | URL of private stream
 agent-stream | string | released | released/devel/proposed | Version of Juju to use for deploy/upgrades
