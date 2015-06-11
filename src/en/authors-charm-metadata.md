@@ -18,6 +18,7 @@ the following fields:
 
 Here's a valid metadata file:
 
+```yaml
     name: mongodb
     summary: An open-source document database, and the leading NoSQL database
     description: |
@@ -33,6 +34,7 @@ Here's a valid metadata file:
       - Auto-sharding for cloud-level scalability (Q209) High performance,
       scalability, and reasonable depth of functionality are the goals for the
       project.
+```
 
 With only those fields, a metadata file is valid, but not very useful. Charms
 for use in the [Charm Store](https://jujucharms.com/) should always set the
@@ -79,9 +81,12 @@ Finally, a metadata file defines the charm's
 and whether it's designed for deployment as a
 [subordinate service](./authors-subordinate-services.html).
 
-  - `subordinate` should be set to true if the charm is a subordinate. If omitted, the charm will be presumed not to be subordinate.
-  - `provides`, `requires`, and `peers` define the various relations the charm will participate in.
-  - if the charm is subordinate, it must contain at least one `requires` relation with container scope.
+  - `subordinate` should be set to true if the charm is a subordinate.
+    If omitted, the charm will be presumed not to be subordinate.
+  - `provides`, `requires`, and `peers` define the various relations the charm
+    will participate in.
+  - if the charm is subordinate, it must contain at least one `requires`
+    relation with container scope.
 
 Other field names should be considered to be reserved; please don't use any not
 listed above to avoid issues with future versions of Juju.
