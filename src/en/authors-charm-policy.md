@@ -31,7 +31,7 @@ and bundles must:
   - Must be under a [Free license](http://opensource.org/osd).
   - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
   - Must not run any network services using default passwords.
-  - Must call Juju API tools (relation-*, unit-*, config-*, etc) without a hard
+  - Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a hard
     coded path. Should default to use software that is included in the Ubuntu
     archive, however we encourage that charm authors have a config options for
     allowing users to deploy from newer upstream releases, or even right from
