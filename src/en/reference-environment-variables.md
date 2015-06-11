@@ -16,9 +16,7 @@ These variables are available on the juju client in order to change its default 
 
     1. Check to see if <code>JUJU_ENV</code> is set.
 
-```no-highlight
-JUJU_ENV=local
-```
+            JUJU_ENV=local
 
     2. Read <code>$JUJU_HOME/current-environment</code>, which is set by <code>juju switch $environment</code>
     3. Read <code>$JUJU_HOME/environments.yaml</code> and use the default environment.
@@ -26,11 +24,9 @@ JUJU_ENV=local
 
 - JUJU_HOME
 
-    The path to juju's configuration files.
+    The path to Juju's configuration files.
 
-```no-highlight
-JUJU_HOME=~/.juju
-```
+        JUJU_HOME=~/.juju
 
 - JUJU_REPOSITORY
 
@@ -38,18 +34,15 @@ JUJU_HOME=~/.juju
 
     For example, if you are running juju in a Vagrant  virtual machine, you could set <code>JUJU_REPOSITORY</code> to your shared folder:
 
-```bash
-export JUJU_REPOSITORY=/vagrant
-juju deploy local:series/charm
-```
+        export JUJU_REPOSITORY=/vagrant
+        juju deploy local:series/charm
 
 - JUJU_LOGGING_CONFIG
 
     This setting takes effect on an environment only at bootstrap time. In stable Juju releases, agents are started with logging set to WARNING, and units are set to INFO. Development releases are set to DEBUG globally. Post bootstrap, on a running environment you can change the logging options to be more or less verbose. For example:
 
-```bash
-juju set-environment logging-config "juju=DEBUG; unit=WARNING"
-```
+        juju set-environment logging-config "juju=DEBUG; unit=WARNING"
+
 
 # Unit
 
@@ -59,86 +52,64 @@ These variables are available to charms during hook execution.
 
     A space-separated list of API servers.
 
-```no-highlight
-JUJU_API_ADDRESSES="10.0.3.1:17070"
-```
+        JUJU_API_ADDRESSES="10.0.3.1:17070"
 
 - JUJU_AGENT_SOCKET
 
     The socket that the Unit Agent uses to communicate with individual Units.
 
-```no-highlight
-JUJU_AGENT_SOCKET="@/var/lib/juju/agents/unit-postgresql-0/agent.socket"
-```
+        JUJU_AGENT_SOCKET="@/var/lib/juju/agents/unit-postgresql-0/agent.socket"
 
 - JUJU_CONTEXT_ID
 
     Used by juju to communicate to ask a running agent to execute a command on juju's behalf.
 
-```no-highlight
-JUJU_CONTEXT_ID="postgresql/0:db-relation-joined:34317605475203611"
-```
+        JUJU_CONTEXT_ID="postgresql/0:db-relation-joined:34317605475203611"
 
 - JUJU_DEBUG
 
     The temporary directory where <code>juju debug-hooks</code> is spawned from.
 
-```no-highlight
-JUJU_DEBUG="/tmp/tmp.vGQlc2bTcV"
-```
+        JUJU_DEBUG="/tmp/tmp.vGQlc2bTcV"
 
 - JUJU_ENV_NAME
 
     The human-friendly name of the current environment.
 
-```no-highlight
-JUJU_ENV_NAME="local"
-```
+        JUJU_ENV_NAME="local"
 
 - JUJU_ENV_UUID
 
     The unique identifier of the juju environment.
 
-```no-highlight
-JUJU_ENV_UUID="2c0896ce-fd6c-4647-8540-26f848e061f9"
-```
+        JUJU_ENV_UUID="2c0896ce-fd6c-4647-8540-26f848e061f9"
 
 - JUJU_HOOK_NAME
 
     The name of the hook being executed.
 
-```no-highlight
-JUJU_HOOK_NAME="db-relation-joined"
-```
+        JUJU_HOOK_NAME="db-relation-joined"
 
 - JUJU_RELATION
 
     The relation name being executed.
 
-```no-highlight
-JUJU_RELATION="db"
-```
+        JUJU_RELATION="db"
 
 - JUJU_RELATION_ID
 
     The ID of the relation being executed.
 
-```no-highlight
-JUJU_RELATION_ID="db:20"
-```
+        JUJU_RELATION_ID="db:20"
 
 - JUJU_REMOTE_UNIT
 
     The name of the current related unit.
 
-```no-highlight
-JUJU_REMOTE_UNIT="reddit/0"
-```
+        JUJU_REMOTE_UNIT="reddit/0"
 
 - JUJU_UNIT_NAME
 
     The name of the local unit being executed.
 
-```no-highlight
-JUJU_UNIT_NAME="postgresql/0"
-```
+        JUJU_UNIT_NAME="postgresql/0"
