@@ -69,7 +69,6 @@ The versions covered here are:
 
   A new stable release of Juju, juju-core 1.23.2, is now available.
   This release replaces version 1.22.1.
- 
 
   ## Getting Juju
 
@@ -106,7 +105,7 @@ The versions covered here are:
 
   The basic config options in your environments.yaml will look like this:
 
-  ```no-highlight
+  ```yaml
   my-gce:
    type: gce
    project-id: <your-project-id>
@@ -801,7 +800,7 @@ The versions covered here are:
 
   The SET annotations call takes this form:
 
-  ```no-highlight
+  ```json
   {
       "Type": "Annotations",
       "Request": "Set",
@@ -816,7 +815,7 @@ The versions covered here are:
 
   The corresponding GET annotations call takes this form:
 
-  ```no-highlight
+  ```json
   {
       "Type": "Annotations",
       "Request": "Get",
@@ -831,12 +830,11 @@ The versions covered here are:
 
   The GET response looks like this:
 
-  ```no-highlight
+  ```json
   {
       "Results": {
 	  {"EntityTag": a, "Annotations": pairs1, "Error": nil},
 	  {"EntityTag": b, "Annotations": pairs2, "Error": nil},
-
       }
   }
   ```
@@ -1095,7 +1093,7 @@ The versions covered here are:
 
   Juju's harvesting behaviour is set through the environments.yaml file.
 
-  ```no-highlight
+  ```yaml
   provisioner-harvest-mode: <MODE>
   ```
 
@@ -1140,17 +1138,16 @@ The versions covered here are:
   You can configure the options in environments.yaml for fast provisioning
   like so:
 
-  ```no-highlight
+  ```yaml
   enable-os-upgrade: false
   enable-os-refresh-update: false
   ```
-
   The local provider skips apt upgrades by default for faster
   provisioning. If you wish to enable upgrades in your local
   development, set ```enable-os-upgrade``` to
   "true" in your environments.yaml:
 
-  ```no-highlight
+  ```yaml
   enable-os-upgrade: true
   ```
 
@@ -1175,10 +1172,9 @@ The versions covered here are:
   existed since 1.18.0, it was not applied consistently to KVM containers.
   KVM containers will now use "daily" when environments.yaml is set to:
 
-  ```no-highlight
+  ```yaml
   image-stream: daily
   ```
-
 
   ### Selecting the agent stream to get alternate version of Juju
 
@@ -1188,14 +1184,14 @@ The versions covered here are:
   the most stable versions of Juju. You can set ```agent-stream``` to
   select "devel" streams now to test the unstable versions of Juju:
 
-  ```no-highlight
+  ```yaml
   agent-stream: devel
   ```
 
   You can evaluate the next stable version of Juju before it is the default
   version by selecting the "proposed" stream like this:
 
-  ```no-highlight
+  ```yaml
   agent-stream: proposed
   ```
 
@@ -1223,7 +1219,7 @@ The versions covered here are:
   state-server will be on a machine with NUMA support, you can set
   ```set-numa-control-policy``` to true in environments.yaml like this:
 
-  ```no-highlight
+  ```yaml
   set-numa-control-policy: true
   ```
 
@@ -1236,7 +1232,7 @@ The versions covered here are:
   is managing the bridge and bringing networks up and down, set the
   ```disable-network-management``` option in environments.yaml to "true":
 
-  ```no-highlight
+  ```yaml
   disable-network-management: true
   ```
 
@@ -2425,7 +2421,7 @@ The versions covered here are:
   'availability-sets-enabled' option must be set in environments.yaml like
   so:
   
-  ```no-highlight
+  ```yaml
   availability-sets-enabled: false
   ```
   
@@ -2541,7 +2537,7 @@ The versions covered here are:
   cannot be changed once it is set. You can set the option to true in
   environments.yaml like this:
 
-  ```no-highlight
+  ```yaml
   lxc-use-clone: true
   ```
 
@@ -2652,9 +2648,6 @@ The versions covered here are:
   We encourage everyone to subscribe to the mailing list at
   juju-dev@lists.canonical.com, or join us on #juju-dev on freenode.
 
-
-
-
 ^# juju-core 1.18.3
 
   A new stable release of Juju, juju-core 1.18.3, is now available.
@@ -2711,6 +2704,7 @@ The versions covered here are:
 
 
 ^# juju-core 1.18.1
+
   A new stable release of Juju, juju-core 1.18.1, is now available. This release
   replaces 1.18.0.
 
@@ -2756,7 +2750,7 @@ The versions covered here are:
   organisation only supports Ubuntu 12.04 Precise in the cloud, you can add this
   to your environment in environments.yaml:
 
-  ```no-highlight
+  ```yaml
   default-series: precise
   ```
 
@@ -2788,6 +2782,7 @@ The versions covered here are:
   ```
 
 ^# juju-core 1.18.0
+
   A new stable release of Juju, juju-core 1.18.0, is now available. This release
   replaces 1.16.6.
 
@@ -2872,7 +2867,7 @@ The versions covered here are:
   apt-http-proxy to use it for the containers by specifying the host machine’s
   network-bridge:
 
-  ```no-highlight
+  ```yaml
   apt-http-proxy: http://10.0.3.1:8000
   ```
 
@@ -3020,7 +3015,7 @@ The versions covered here are:
   try to use lxc-clone on earlier releases, but it is not a supported. It may
   well work. You can enable lxc-clone in environments.yaml thusly:
 
-  ```no-highlight
+  ```yaml
   lxc-clone: true
   ```
 
@@ -3031,7 +3026,7 @@ The versions covered here are:
   behave as intuitively as one might expect, so this must be turned on
   explicitly.
 
-  ```no-highlight
+  ```yaml
   lxc-clone-aufs: true
   ```
 
@@ -3128,10 +3123,12 @@ The versions covered here are:
   A new stable release of Juju, juju-core 1.16.5, is now available. This release
   replaces 1.16.4.
 
+
   ### Getting Juju
 
   juju-core 1.16.5 is available in trusty and backported to earlier series in
   the following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
+
 
   ### Resolved issues
 
@@ -3143,6 +3140,7 @@ The versions covered here are:
    * juju get give a "panic: index out of range" error Lp 1227952
    * [maas] juju set-env fails after upgrading to 1.16.2+ Lp 1256179
    * juju destroy-environment destroys other environments Lp 1257481
+
 
   ### Notable Changes
 
@@ -3186,11 +3184,13 @@ The versions covered here are:
   A new stable release of Juju, juju-core 1.16.3, is now available. This release
   replaces 1.16.0.
 
+
   ### Getting Juju
 
   juju-core 1.16.3 is available in trusty and backported to earlier series in
   the following PPA [https://launchpad.net/~juju/+archive/stable](https://launch
   pad.net/%7Ejuju/+archive/stable)
+
 
   ### Resolved issues
 
@@ -3201,11 +3201,13 @@ The versions covered here are:
   A new stable release of Juju, juju-core 1.16.2, is now available. This release
   replaces 1.16.0.
 
+
   ### Getting Juju
 
   juju-core 1.16.2 is available in trusty and backported to earlier series in
   the following PPA [https://launchpad.net/~juju/+archive/stable](https://launch
   pad.net/%7Ejuju/+archive/stable)
+
 
   ### Resolved issues
 
@@ -3223,11 +3225,13 @@ The versions covered here are:
 
   A new stable release of Juju, juju-core 1.16.0, is now available.
 
+
   ### Getting Juju
 
   juju-core 1.16.0 is available in Saucy and backported to earlier series in the
   following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.
   net/%7Ejuju/+archive/stable)
+
 
   ### New and Notable
 
@@ -3241,6 +3245,7 @@ The versions covered here are:
     * admin-secret is now chosen automatically if omitted from the configuration of a new environment.
     * control-bucket is now chosen automatically if omitted from the configuration for new ec2 and openstack environments.
     * Logging has changed. You can specify an environment variable "JUJU_LOGGING_CONFIG", or you can specify --logging-config on the command line. To show the log on the command line, now use --show-log. The --debug has been kept to be short-hand for `--logging-config==DEBUG --show-log`, and --verbose has been deprecated with its current meaning.
+
 
   ### Resolved issues
 
@@ -3311,7 +3316,7 @@ The versions covered here are:
   a common mounted directory. In that case, add an entry like this to your
   environments.yaml:
 
-  ```no-highlight
+  ```yaml
   tools-url: file://mounted_dir
   ```
 
@@ -3319,7 +3324,7 @@ The versions covered here are:
   tools directory itself to a publicly readable storage instance. Thenadd the
   tools-url entry to environments.yml:
 
-  ```no-highlight
+  ```yaml
   tools-url: https:///tools
   ```
 
@@ -3337,7 +3342,7 @@ The versions covered here are:
   bucket-url was used to point to the location of the metadata. Now, configure
   the image-metadata-url as follows:
 
-  ```no-highlight
+  ```yaml
   image-metadata-url: /juju-dist
   ```
 
@@ -3398,6 +3403,7 @@ The versions covered here are:
       public-bucket-url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/60502529753910
 
 ^# juju-core 1.14.0
+
   A new stable release of Juju, juju-core 1.14.0, is now available.
 
   ### Getting Juju
