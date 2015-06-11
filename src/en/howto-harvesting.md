@@ -43,7 +43,7 @@ The machine is alive, but Juju knows nothing about it.
 
 ## None
 
-Utilizing this method, Juju won't harvest any machines. This is the
+Using this method, Juju won't harvest any machines. This is the
 most conservative, and a good choice if you manage your machines
 utilizing a separate process outside of Juju.
 

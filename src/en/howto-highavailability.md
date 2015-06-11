@@ -3,7 +3,6 @@
 Juju provides a `ensure-availability` command to set multiple State Servers.
 This means that you can recover from possible failures of a number of Servers.
 
-
 `ensure-availability` supports (among other common ones) the optional parameter
 `-n` which indicates the number of state server to ensure; 
 if omitted 3 will be used, the number must be odd, to avoid ties when the
@@ -13,7 +12,7 @@ underlying persistence layer the maximum number is 7
 For more precise management, it is also possible to specify the machines 
 to use for the extra state servers, e.g.:
 
-```
+```bash
 juju ensure-availability -n 3 --to name1,name2
 ```
 
