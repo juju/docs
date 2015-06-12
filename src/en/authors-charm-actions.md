@@ -153,7 +153,7 @@ For example, if an action named `snapshot` was defined on a mysql charm, and was
 invoked by the user as follows:
 
 ```bash
-juju action do mysql/0 snapshot outfile.name="foo"
+juju action do mysql/0 snapshot outfile="foo"
 ```
 
 then the `snapshot` could use `action-get` to retrieve the filename as follows:
@@ -162,7 +162,7 @@ then the `snapshot` could use `action-get` to retrieve the filename as follows:
 #!/bin/bash
 # An Action named "snapshot"
 
-action-get outfile.name
+action-get outfile
 # "foo" will be printed
 ```
 
