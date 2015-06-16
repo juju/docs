@@ -35,8 +35,8 @@ brew install juju
 
 We also recommend trying Juju in [our Vagrant box](config-vagrant.html).
 
-For more installation information and what versions are available, see [the
-releases page](reference-releases.html).
+For more installation information and what versions are available, see
+[the releases page](reference-releases.html).
 
 ## Windows
 
@@ -55,9 +55,12 @@ following file:
     ~/.juju/environments.yaml
 
 ## Windows
-    %LOCALAPPDATA%/Juju
+
+    %APPDATA%\Juju\environments.yaml
     
-Juju can automatically generate this file in this way:
+    %APPDATA% typically == C:\Users\<user>\AppData\Roaming
+
+Juju can automatically generate the file in this way:
 
 ```bash
 juju generate-config
@@ -69,17 +72,18 @@ services.  Edit it to provide specific information for your chosen cloud
 provider. For more specifics on what needs to be changed, see the relevant
 sections in the left pane (under *Install & Configure*).
 
-**Note:** Juju's command line interface includes documentation, doing `juju
-help` will show you the topics. You can also look at the [Juju command
-cheatsheet](https://github.com/juju/cheatsheet) if you are looking for a handy
-command guide.
+**Note:** Juju's command line interface includes documentation, running `juju
+help` will show you the topics. You can also look at the
+[Juju command cheatsheet](https://github.com/juju/cheatsheet) if you are
+looking for a convenient command guide.
 
 # Testing your setup
 
 The first step is to create a bootstrap environment. This is a cloud instance
 that Juju will use to deploy and manage services. It will be created according
-to the configuration you have provided, and your SSH key will automatically be
-injected so that Juju can communicate securely with the bootstrap instance.
+to the configuration you have provided, and your public SSH key will be
+uploaded automatically so that Juju can communicate securely with the
+bootstrap instance.
 
 <iframe style="margin-left: 20%;" class="youtube-player" type="text/html"
 width="420" height="350" src="//www.youtube.com/embed/0AT6qKyam9I"></iframe>

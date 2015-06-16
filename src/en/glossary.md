@@ -4,7 +4,7 @@
 Bootstrapping an environment will provision a new machine in the environment
 and run the Juju state server on that machine (also called the bootstrap node).
 
-**Bundle** - A set of Charms, their configuration, and corresponding Relations
+**Bundle** - A set of Juju charms, their configuration, and corresponding relations
 that can be deployed in a single step. Bundles are defined in the YAML format.
 
 **Charm** - The definition of a service, including its metadata, dependencies
@@ -36,62 +36,64 @@ restrictions:
 
 **Endpoint** - The combination of a service name and a relation name.
 
-**Environment** - A configured location where services can be deployed onto. An
-Environment typically has a name, which can usually be omitted when there's a
-single Environment configured, or when a default is explicitly defined.
-Depending on the type of Environment, it may have to be bootstrapped before
+**Environment** - A configured location where services can be deployed. An
+environment typically has a name, which can usually be omitted when there's a
+single environment configured, or when a default is explicitly defined.
+Depending on the type of environment, it may have to be bootstrapped before
 interactions with it may take place (e.g. EC2). The local environment
-configuration is defined in the ~/.juju/environments.yaml file.
+configuration is defined in the [environments.yaml](getting-started.html#configuring)
+file.
 
 **Machine Agent** - Software which runs inside each machine that is part of an
-Environment, and is able to handle the needs of deploying and managing Service
-Units in this machine.
+environment, and is able to handle the needs of deploying and managing service
+units in this machine.
 
 **Provisioning Agent** - Software responsible for automatically allocating and
-terminating machines in an Environment, as necessary for the requested configuration.
+terminating machines in an environment, as necessary for the requested
+configuration.
 
-**Relation** - The way in which juju enables Services to communicate with each
-other, and the way in which the topology of Services is assembled. The Charm
-defines which Relations it offers to other Services (provides), and what kind
-of Relations it can make with other Services (requires).
+**Relation** - The way in which Juju enables services to communicate with each
+other, and the way in which the topology of services is assembled. The charm
+defines which relations it offers to other services (provides), and what kind
+of relations it can make with other services (requires).
 
-In many cases, the establishment of a Relation will result into an actual TCP
-connection being created between the Service Units, but that's not necessarily
-the case. Relations may also be established to inform Services of configuration
+In many cases, the establishment of a relation will result into an actual TCP
+connection being created between the service units, but that's not necessarily
+the case. Relations may also be established to inform services of configuration
 parameters, to request monitoring information, or any other details which the
-Charm author has chosen to make available.
+charm author has chosen to make available.
 
-**Repository** - A location where multiple Charms are stored. Repositories may
+**Repository** - A location where multiple charms are stored. Repositories may
 be as simple as a directory structure on a local disk, or as complex as a rich
 smart server supporting remote searching and so on.
 
-**Service** - Juju operates in terms of services. A Juju Service is any application
-(or set of applications) that is integrated into the framework as an
-individual component which should generally be joined with other components to
-perform a more complex task.
+**Service** - Juju operates in terms of services. A Juju service is any
+application (or set of applications) that is integrated into the framework as
+an individual component which should generally be joined with other components
+to perform a more complex task.
 
 As an example, WordPress could be deployed as a service and, to perform its
 tasks properly, might communicate with a database service and a load balancer
 service.
 
 **Service Configuration** - There are many different settings in a Juju
-deployment, but the term Service Configuration refers to the settings which a
-user can define to customize the behaviour of a Service.
+deployment, but the term `Service Configuration` refers to the settings which a
+user can define to customize the behaviour of a service.
 
-The behaviour of a Service when its Service Configuration changes is entirely
-defined by its Charm.
+The behaviour of a service when its service configuration changes is entirely
+defined by its charm.
 
-**Service Unit** - A running instance of a given Juju Service. Simple Services
-may be deployed with a single Service Unit, but it is possible for an
-individual Service to have multiple Service Units running in independent
-machines. All Service Units for a given Service will share the same Charm, the
-same Relations, and the same user-provided configuration.
+**Service Unit** - A running instance of a given Juju service. Simple services
+may be deployed with a single service unit, but it is possible for an
+individual service to have multiple service units running in independent
+machines. All service units for a given service will share the same charm, the
+same relations, and the same user-provided configuration.
 
-For instance, one may deploy a single MongoDB Service, and specify that it
-should run 3 Units, so that the replica set is resilient to failures.
+For instance, one may deploy a single MongoDB service, and specify that it
+should run 3 units, so that the replica set is resilient to failures.
 Internally, even though the replica set shares the same user-provided
-configuration, each Unit may be performing different roles within the replica
-set, as defined by the Charm.
+configuration, each unit may be performing different roles within the replica
+set, as defined by the charm.
 
 **Service Unit Agent** - Software which manages the entire lifecycle of a
-single Service Unit.
+single service unit.
