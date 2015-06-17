@@ -7,6 +7,588 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.24.0
+
+  A new stable release of Juju, juju-core 1.24.0, is now available.
+  This release replaces version 1.23.3.
+
+
+  ## Getting Juju
+
+  juju-core 1.24.0 is available for vivid and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.24.0
+
+
+  ## Notable Changes
+
+    * VMWare (vSphere) Provider
+    * Resource Tagging (EC2, OpenStack)
+    * MAAS root-disk Constraint
+    * Service Status
+    * CentOS 7 Preview
+    * Storage (experimental)
+
+
+  ### VMWare (vSphere) Provider
+
+  Juju now supports VMWare's vSphere ("Software-Defined Data Center")
+  installations as a targetable cloud. It uses the vSphere API to interact
+  with the vCenter server. The vSphere provider uses the OVA images
+  provided by Ubuntu's official repository. API authentication
+  credentials, as well as other config options, must be added to your
+  environments.yaml file before running 'juju bootstrap'. The different
+  options are described below.
+
+  The basic config options in your environments.yaml will look like this:
+
+      my-vsphere:
+        type: vsphere
+        host: <192.168.1.10>
+        user: <some-user>
+        password: <some-password>
+        datacenter: <datacenter-name>
+        external-network: <external-network-name>
+
+  The values in angle brackets need to be replaced with your vSphere
+  information. 'host' must contain the IP address or DNS name of vSphere
+  API endpoint. 'user' and 'password' are fields that must contain your
+  vSphere user credentials. 'datacenter' field must contain the name of
+  your vSphere virtual datacenter. 'external-network' is an optional
+  field. If set, it must contain name of the network that will be used to
+  obtain public IP addresses for each virtual machine provisioned by juju.
+  An IP pool must be configured in this network and all available public
+  IP addresses must be added to this pool. For more information on IP
+  pools, see official documentation:
+
+      https://pubs.vmware.com/vsphere-51/index.jsp?topic=2Fcom.vmware.vsphere.vm_admin.doc%2FGUID-5B3AF10D-8E4A-403C-B6D1-91D9171A3371.html
+
+  NOTE that using the vSphere provider requires an existing vSphere
+  installation. Juju does not set up vSphere for you. The OVA images we
+  use support VMWare's Hardware Version 8 (or newer). This should not be a
+  problem for most vSphere installations.
+
+
+  ### Resource Tagging (EC2, OpenStack)
+
+  Juju now tags instances and volumes created by the EC2 and OpenStack
+  providers with the Juju environment UUID. Juju also adds any user-
+  specified tags set via the "resource-tags" environment setting. The
+  format of this setting is a space-separated list of key=value pairs:
+
+      resource-tags: key1=value1 [key2=value2 ...]
+
+  These tags may be used, for example, to set up chargeback accounting.
+  Any tags that Juju manages will be prefixed with "juju-"; users must
+  avoid modifying these.
+
+  Instances and volumes are now named consistently across EC2 and
+  OpenStack, using the scheme "juju-<env>-<resource-type>-<resource-
+  ID>", where <env> is the human-readable name of the environment as
+  specified in environments.yaml; <resource-type> is the type of the
+  resource ("machine" or "volume") and <resource-ID> is the numeric ID
+  of the Juju machine or volume corresponding to the IaaS resource.
+
+
+  ### MAAS root-disk Constraint
+
+  The MAAS provider now honours the root-disk constraint, if the targeted
+  MAAS supports disk constraints. Support for disk constraints was added
+  to MAAS 1.8.
+
+
+  ### Service Status
+
+  Juju provides new hooks for charm authors to report service status, and
+  'juju status' now includes the service status. This new functionality
+  allows charms to explicitly inform Juju of their status, rather than
+  Juju guessing. Charm authors have access to 2 new hook tools, and the
+  status report includes more information.
+
+  The 'status-set' hook tool allows a charm to report its status to Juju.
+  This is known as the workload status and is meant to reflect the state
+  of the software deployed by the charm. Charm authors are responsible for
+  setting the workload's status to "Active" when the charm is ready to run
+  its workload, and "Blocked" when it needs user intervention to resolve a
+  problem.
+
+      status-set:
+          status-set <maintenance | blocked | waiting | active> "message"
+
+  The 'status-get' hook tool allows a charm to query the current workload
+  status recorded in Juju. Without arguments, it just prints the workload
+  status value eg maintenance. With '--include-data' specified, it prints
+  YAML which contains the status value plus any data associated with the
+  status.
+
+      status-get:
+          status-get [--include-data]
+
+  Charms that do not make use of these hook tools will still work as
+  before, but Juju will not provide details about the workload status.
+
+  The above commands set the status of the individual units. Unit
+  leaders may also set and get the status of the service to which they
+  belong:
+
+  print the status of all units of the service and the service itself:
+  status-get --service
+
+  set the status of the service:
+  status-set --service <maintenance | blocked | waiting | active> "message" 
+
+  The 'juju status' command includes the 'workload-status' and
+  'service-status' in the report. for example:
+
+      services:
+       ...
+        wordpress:
+          charm: local:trusty/wordpress-93
+          exposed: false
+          service-status:                    <-- new service status
+            current: blocked
+            message: Waiting for database
+            since: 01 May 2015 17:39:38 AEST
+          relations:
+            loadbalancer:
+            - wordpress
+          units:
+            wordpress/0:
+              workload-status:                <-- new workload status
+                current: blocked
+                message: Waiting for database
+                since: 01 May 2015 17:39:38 AEST
+              agent-status:                   <-- new agent status
+                current: idle
+                since: 01 May 2015 17:39:44 AEST
+                version: 1.24-alpha1.1
+              agent-state: started            <-- legacy Juju agent state
+              agent-version: 1.24-alpha1.1
+              machine: "1"
+              open-ports:
+              - 80/tcp
+              public-address: 23.20.250.14
+
+  Juju aggregates all the unit 'workload-status' values to represent the
+  'service-status'. The 'service-status' value is derived from the worst
+  case status of all the units; eg. if any unit is in error, then the
+  service is in error.
+
+  The 'status' command will use a table layout in the future, and you can
+  set the environmental variable 'JUJU_CLI_VERSION' to "2" to see it like
+  so:
+
+      export JUJU_CLI_VERSION=2
+      juju status
+
+      NAME       STATUS  EXPOSED CHARM                      
+      mysql      unknown false   local:trusty/mysql-326     
+      wordpress  blocked false   local:trusty/wordpress-93  
+
+  The legacy status values are omitted from output. You can use the
+  '--yaml' option to see status in the Juju 1.x layout.
+
+  Juju also records a history of status changes for a unit, and tracks the
+  time when the status was last updated. The 'juju status-history' command
+  allows you to inspect a charm's status changes over time
+
+      juju status-history [options] [-n N] <unit>
+
+      options:
+      -e, --environment (= "")
+         juju environment to operate in
+      -n  (= 20)
+         size of logs backlog.
+      --type (= "combined")
+         type of statuses to be displayed [agent|workload|combined].
+      --utc  (= false)
+         display time as UTC in RFC3339 format
+
+      This command will report the history of status changes for
+      a given unit.
+      The statuses for the unit workload and/or agent are available.
+      -type supports:
+         agent: will show statuses for the unit's agent
+         workload: will show statuses for the unit's workload
+         combined: will show agent and workload statuses combined
+      and sorted by time of occurrence.
+
+  For example, to see the history of the unit wordpress/0
+
+      juju status-history wordpress/0
+
+      TIME                       TYPE     STATUS       MESSAGE
+      01 May 2015 17:33:20+06:00  workload  unknown      Waiting for agent initialization to finish
+      01 May 2015 17:33:20+06:00  agent     allocating
+      01 May 2015 17:36:37+06:00  agent     executing    running install hook
+      01 May 2015 17:36:37+06:00  workload  maintenance  installing charm software
+      01 May 2015 17:36:38+06:00  workload  maintenance  installing dependencies
+      01 May 2015 17:39:11+06:00  workload  maintenance  installing components
+      01 May 2015 17:39:18+06:00  agent     executing    running leader-elected hook
+      01 May 2015 17:39:18+06:00  agent     executing    running config-changed hook
+      01 May 2015 17:39:19+06:00  workload  maintenance  configuring nginx
+      01 May 2015 17:39:34+06:00  workload  maintenance  restarting services
+      01 May 2015 17:39:38+06:00  workload  blocked      Waiting for database
+      01 May 2015 17:39:39+06:00  agent     executing    running start hook
+      01 May 2015 17:39:44+06:00  agent     idle
+
+
+  ### CentOS 7 Preview
+
+  Juju 1.24.0 has initial CentOS support. This is experimental and has a
+  number of known issues. However, most of the functionality of Juju
+  should be there and ready to be used and tested. CentOS should be
+  deployable on any cloud that supports cloud-init in it's CentOS
+  images. It is possible to use CentOS as both a state machine (taking
+  the limitations at the bottom into account) and as a normal machine.
+
+  Deploying a charm on CentOS is no different than deploying one on
+  Ubuntu or Windows. The only thing that needs to change is the series
+  which is "centos7". For example, from Launchpad:
+
+      juju deploy lp:~me/centos7/charm
+
+  or Locally:
+
+      juju deploy --repository=/home/user/charms local:centos7/charm
+
+  However there are no charms currently available for CentOS. The
+  process or writing one should be no different from the Ubuntu charms
+  besides keeping in mind the fact that one shouldn't use Ubuntu
+  specific calls (such as apt).
+
+  There is a guide for setting up a MaaS environment using CentOS at
+
+      http://wiki.cloudbase.it/juju-centos
+
+
+  Note that Centos 7 agents are already in streams. There is no need
+  install Go, compile, tar, and running juju metadata. You can sync the
+  streams to a web server visible to your Juju environment.
+
+      mkdir local
+      juju sync-tools --local-dir local
+      cp -r local/tools <path/to/webserver>
+
+
+  Some of the known issues are:
+
+    * Containers are not yet supported
+
+    * There is a lack of mongo tools at the moment so any functionality
+      depending on those is not available(for example backups)
+
+    * There is no way to currently specify a proxy or mirror for yum in
+      the environment configuration. The values that you specific for apt
+      packages will be used for yum packages as well. This limitation
+      will be fixed as soon as possible.
+
+
+  ### Storage (experimental)
+
+  Juju now models storage, charms can request storage (volumes and
+  filesystems), and you can specify constraints on how to satisfy those
+  requests (which provider, what options, how large, how many).
+
+  Initially, Juju supports native volumes for the EC2 (EBS) and
+  OpenStack (Cinder), and MAAS providers. Juju also supports several
+  cloud-independent storage providers: tmpfs, loop (loop devices), root
+  filesystem. Future versions of Juju will extend this set with
+  providers for Ceph, NFS, and others.
+
+  The storage feature is experimental: it has some known caveats, and has
+  not yet been battle hardened. Instructions on use and caveats are
+  documented at https://jujucharms.com/docs/devel/wip-storage.
+
+
+  ### Storage (experimental) MAAS Provider Support
+
+  The MAAS provider now supports storage. Storage directives are used to
+  select machines which have the requisite number and size of volumes
+  available on the machine (usually physical volumes such as SSD or
+  magnetic drives).
+
+  Storage pools may be created to select volumes with specified tags.
+
+      juju storage create pool maas-ssd maas tags=ssd
+
+  The above creates a pool called "maas-ssd" and when used, will select
+  volumes tagged in MAAS with the "ssd" tag. Tags may be a comma separated
+  list.
+
+  Then to deploy a charm:
+
+      juju deploy mycharm --storage data=maas-ssd,50G
+
+  The above deploys a charm to a MAAS machine with the data store mounted
+  on a volume at least 50GiB in size with the tag "ssd".
+
+  It is also possible to specify the size of the root-disk using the root
+  disk constraint. This works the same way as for the AWS provider
+
+      juju deploy mysql --constraints root-disk=50G
+
+  Storage directives and root disk constraints may be combined.
+
+      juju deploy mysql --constraints root-disk=50G --storage data=maas-ssd,500G
+
+  NOTE: the root disk support has only just landed in MAAS trunk.
+  the Juju/MAAS storage support has been smoke tested using the NEC
+  MAAS test lab. It needs much more extensive testing!
+
+  NOTE: when using MAAS which does not support storage, if MAAS storage is
+  requested, an error is returned and the node is cleaned up.
+
+  The storage feature is experimental: it has some known caveats, and has
+  not yet been battle hardened. Instructions on use and caveats are
+  documented at https://jujucharms.com/docs/devel/wip-storage.
+
+
+  ### Storage (experimental) Unit Placement
+
+  It is now possible to deploy units with storage to existing machines.
+  This applies when using storage that is dynamically created, such as
+  EBS/Cinder volumes, loop devices, TMPFS, rootfs. It can't be used with
+  machine volumes on MAAS, but can be used to deploy charms to an existing
+  MAAS machine if a dynamic storage source is specified. eg.
+
+      juju deploy charm --to 2 --storage data=loop,2G
+
+  An Openstack deployment example:
+
+      juju deploy charm --to 2 --storage data=cinder,2G
+
+
+  ## Resolved issues
+
+    * Deploying into kvm with local provider, hostnames are not unique
+      Lp 1326091
+
+    * Juju status complains "config has no uuid" when no .jenv is
+      present
+      Lp 1436925
+
+    * Agent panic on maas network with uppercase characters
+      Lp 1446608
+
+    * Debug-log spammed with leader-election messages
+      Lp 1437015
+
+    * Eu-central-1 aws region v4 signing required and not supported
+      Lp 1447841
+
+    * Environment variables are not propagated to jujud on vivid
+      Lp 1449436
+
+    * Rsyslog-gnutls is not installed when enable-os-refresh-update is
+      false
+      Lp 1424892
+
+    * Juju stop responding after juju-upgrade
+      Lp 1438489
+
+    * Jujud won't start if apt-get of juju-mongodb package fails
+      Lp 1441904
+
+    * Juju cli compatibility option
+      Lp 1450701
+
+    * Upgrade from 1.18 to 1.23 fails: password for machine agent can't
+      be set
+      Lp 1451297
+
+    * Broken db field ordering when upgrading to juju compiled with go
+      1.3+
+      Lp 1451674
+
+    * Log files are lost when agents are restarted under systemd
+      Lp 1452113
+
+    * Worker/uniter: charm does not install properly if storage isn't
+      provisioned before uniter starts
+      Lp 1452207
+
+    * Jujud does not restart after upgrade-juju on systemd hosts
+      Lp 1452511
+
+    * Maas provider chokes on unexpected device labels
+      Lp 1452725
+
+    * Juju 1.23-beta4 introduces ssh key bug when used w/ dhx
+      Lp 1444861
+
+    * Retry-provisioning launches instances for containers; cannot retry
+      containers at all
+      Lp 1428439
+
+    * Debug-hooks exit 1 , doesn't mark hook as failed
+      Lp 1415176
+
+    * Default storage constraints are not quite correct
+      Lp 1452535
+
+    * Maas: implement root-disk constraint
+      Lp 1212689
+
+    * Juju upgrade-juju failed to configure mongodb replicasets
+      Lp 1441913
+
+    * Provider/openstack: volumes are recorded with 0 size
+      Lp 1450740
+
+    * Persist iptables rules / routes for addressable containers across
+      host reboots
+      Lp 1442012
+
+    * Deployer sometimes fails with a unit status not found error
+      Lp 1451283
+
+    * Logs don't rotate
+      Lp 1452285
+
+    * Collect-metric hook failure, metric batch uuid already exists
+      Lp 1452487
+
+    * Juju machine service for windows creates incorrect tools symlinks
+      Lp 1453280
+
+    * /var/spool/rsyslog grows without bound
+      Lp 1453801
+
+    * Instancepoller compares wrong address list and always requests
+      updated state addresses
+      Lp 1454043
+
+      * Agents see "too many open files" errors after many failed api
+      attempts
+      Lp 1420057
+
+    * Container destruction doesn't mark ip addresses as dead
+      Lp 1441206
+
+    * Debug-hooks not working with manually provisioned machines
+      Lp 1429790
+
+    * Joyent machines get stuck in provisioning
+      Lp 1446264
+
+    * Cannot process charms: finding charm revision info: cannot get
+      metadata from the charm store: verification failed: no macaroon
+      cookies in request
+      Lp 1453238
+
+    * Juju log spams error juju.worker.diskmanager lsblk.go:111 error
+      checking if "sr0" is in use: open /dev/sr0: no medium found
+      Lp 1454481
+
+    * Failed to retrieve the template to clone - 500 internal server
+      error - error creating container juju-trusty-lxc-template -
+      Lp 1454676
+
+    * 1.20.x client cannot communicate with 1.22.x env
+      Lp 1454829
+
+    * Received disconnect from ...: 2: too many authentication failures
+      for ubuntu
+      Lp 1456315
+
+      * Lxc network.mtu setting not set consistently across hosts
+      Lp 1442257
+
+    * Transaction collection (txns) grows without bound
+      Lp 1453785
+
+    * Firewaller gets an exception if a machine is not provisioned
+      Lp 1454599
+
+    * Jujud leaking file handles
+      Lp 1454697
+
+    * Destroying a machine with a placed unit errors then destroys
+      anyway.
+      Lp 1455158
+
+     * Intermittent panic: rescanned document
+      Lp 1449054
+
+    * `juju upgrade-juju --upload-tools` leaves local environment
+      unusable
+      Lp 1457728
+
+    * warning: log line attempted over max size - leadership related
+      Lp 1457645
+
+    * Debug-log eof: invalid tag and panic seen in state server logs
+      Lp 1461354
+
+    * Juju has conf files in /var/log/juju on instances
+      Lp 1370896
+
+    * Juju restore fails with "/var/lib/juju/agents: no such file or
+      directory"
+      Lp 1431372
+
+    * Cannot destroy-environment with 'juju user add' .jenv file
+      Lp 1403165
+
+    * Juju cannot create vivid containers
+      Lp 1442308
+
+    * State: availability zone upgrade fails if containers are present
+      Lp 1441478
+
+    * 1.23.2.1, mongo: document is larger than capped size
+      Lp 1454891
+
+    * "relation-set --file -" doesn't seem to work
+      Lp 1454678
+
+    * Maas provider doesn't know about "failed deployment" instance
+      status
+      Lp 1376246
+
+    * Juju status --utc does not display utc and is confused
+      Lp 1459611
+
+    * Juju agent opens api when upgrade is pending
+      Lp 1459912
+
+    * 'juju status' wall clock timestamps should display offset not tz
+      abbrev
+      Lp 1459616
+
+    * Harvest mode setting not used by container provisioner
+      Lp 1459885
+
+    * Allow status-set/get to a service by its leader unit
+      Lp 1461111
+
+    * Unit storage add should only accept count as constraint
+      Lp 1461342
+
+    * Golang.org/x/sys/windows requires go 1.4
+      Lp 1463439
+
+    * Erroneous juju user data on windows for juju version 1.23
+      Lp 1451626
+
+    * Cmd/juju/storage: "add" fails to dynamically add filesystem for
+      storage
+      Lp 1462146
+
+    * Worker/diskmanager sometimes goes into a restart loop due to
+      failing to update state
+      Lp 1461871
+
+    * Juju 1.24-beta6.1 unit commands in debug-hooks hang indefinitely
+      Lp 1463117
+
+
 ^# juju-core 1.23.3
 
   A new stable stable release of Juju, juju-core 1.23.3, is now available.
