@@ -36,7 +36,7 @@ The basic configuration will look something like this:
     external-network: <external-network-name>
 ```
 
-The values contained within angle brackets (`<` and `>`) need to be replaced
+The values indicated by angle brackets (`<` and `>`) need to be replaced, (e.g `user: vmuser`)
 with your vSphere information. 
   - `host` must contain the IP address or DNS name of vSphere API endpoint. 
   - `user` and `password` are fields that must contain your vSphere user credentials 
