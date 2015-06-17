@@ -21,20 +21,26 @@ GitHub](https://github.com/marcoceppi/amulet/releases).
 
 Amulet is available in the Juju Stable PPA for Ubuntu
 
-    sudo add-apt-repository ppa:juju/stable
-    sudo apt-get update
-    sudo apt-get install amulet
+```bash
+sudo add-apt-repository ppa:juju/stable
+sudo apt-get update
+sudo apt-get install amulet
+```
 
 ### Mac OSX
 
 Amulet is available via Pip:
 
-    sudo pip install amulet
+```bash
+sudo pip install amulet
+```
 
 ### Windows
 Amulet is available via Pip:
 
-    pip install amulet
+```bash
+pip install amulet
+```
 
 ### Source
 Amulet is built with Python3, so please make sure it's installed prior to following these
@@ -44,11 +50,15 @@ does in the packaged version.
 
 To install Amulet from source, first get the source:
 
-    git clone https://github.com/marcoceppi/amulet.git
+```bash
+git clone https://github.com/marcoceppi/amulet.git
+```
 
 Move in to the `amulet` directory and run:
 
-    sudo python3 setup.py install
+```bash
+sudo python3 setup.py install
+```
 
 You can also access the Python libraries; however, your `PYTHONPATH` will need
 to be amended in order for it to find the amulet directory.
@@ -63,18 +73,24 @@ via a programmable API for other languages (for example, `bash`).
 
 Amulet is made available to Python via the `amulet` module which you can import:
 
-    import amulet
+```python
+import amulet
+```
 
 The amulet module seeds each module/command directly, so Deployment is made
 available in amulet/deployer.py and is accessible directly from amulet using:
 
-    from amulet import Deployment
+```python
+from amulet import Deployment
+```
 
 Though `deployer` is also available in the event you wish to execute any of the
 helper functions:
 
-    from amulet import deployer
-    d = deployer.Deployment()
+```python
+from amulet import deployer
+d = deployer.Deployment()
+```
 
 ### Programmable API
 
@@ -88,10 +104,12 @@ functionality available.
 
 This API follows the subcommand workflow, much like Git or Bazaar. Amulet makes
 an amulet command available and each function is tied to a sub-command. To mimic
-the Python example you can create a a new Deployment by issuing the following
+the Python example you can create a new Deployment by issuing the following
 command:
 
-    amulet deployment
+```bash
+amulet deployment
+```
 
 Depending on the syntax and worflow for each function you can expect to provide
 either additional sub-commands, command-line flags, or a combination of the two.
@@ -112,14 +130,16 @@ Deployment (amulet deployment, from amulet import Deployment) is an abstraction
 layer to the juju-deployer Juju plugin and a service lifecycle management tool.
 It's designed to allow an author to describe their deployment in simple terms:
 
-    import amulet
-    d = amulet.Deployment()
-    d.add('mysql')
-    d.add('mediawiki')
-    d.relate('mysql:db', 'mediawiki:db')
-    d.expose('mediawiki')
-    d.configure('mediawiki', {'title': 'My Wiki', 'skin': 'Nostolgia'})
-    d.setup()
+```python
+import amulet
+d = amulet.Deployment()
+d.add('mysql')
+d.add('mediawiki')
+d.relate('mysql:db', 'mediawiki:db')
+d.expose('mediawiki')
+d.configure('mediawiki', {'title': 'My Wiki', 'skin': 'Nostolgia'})
+d.setup()
+```
 
 That information is then translated to a Juju Deployer deployment file then,
 finally, juju-deployer executes the described setup. Amulet strives to ensure it
@@ -148,11 +168,13 @@ Add a new service to the deployment schema.
 
 Example:
 
-    import amulet
-    d = amulet.Deployment()
-    d.add('wordpress')
-    d.add('second-wp', charm='wordpress')
-    d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)
+```python
+import amulet
+d = amulet.Deployment()
+d.add('wordpress')
+d.add('second-wp', charm='wordpress')
+d.add('personal-wp', charm='~marcoceppi/wordpress', units=2)
+```
 
 ##### Deployment.add_unit(service, units=1)
 
@@ -163,16 +185,18 @@ Add more units of an existing service after deployment.
 
 Example:
 
-    import amulet
-    d = amulet.Deployment()
-    d.add('wordpress')
-    try:
-        d.setup(timeout=900)
-    except amulet.helpers.TimeoutError:
-        # Setup didn't complete before timeout
-        pass
-    d.add_unit('wordpress')
-    d.add_unit('wordpresss', units=2)
+```python
+import amulet
+d = amulet.Deployment()
+d.add('wordpress')
+try:
+    d.setup(timeout=900)
+except amulet.helpers.TimeoutError:
+    # Setup didn't complete before timeout
+    pass
+d.add_unit('wordpress')
+d.add_unit('wordpresss', units=2)
+```
 
 ##### Deployment.build_relations()
 
@@ -191,10 +215,12 @@ Change configuration options for a service.
 
 Example:
 
-    import amulet
-    d = amulet.Deployment()
-    d.add('postgresql')
-    d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})
+```python
+import amulet
+d = amulet.Deployment()
+d.add('postgresql')
+d.configure('postgresql', {'autovacuum': True, 'cluster_name': 'cname'})
+```
 
 ##### Deployment.deployer_map(services, relations)
 
@@ -209,10 +235,12 @@ Indicate if a service should be exposed after deployment.
 
   - `service` - Name of service to expose
 
-    import amulet
-    d = amulet.Deployment()
-    d.add('varnish')
-    d.expose('varnish')
+```python
+import amulet
+d = amulet.Deployment()
+d.add('varnish')
+d.expose('varnish')
+```
 
 ##### Deployment.load(deploy_cfg)
 
@@ -229,18 +257,20 @@ Relate services together.
 If more than two arguments are given, it's assumed they're to be added to the
 first argument as a relation.
 
-    import amulet
-    d = amulet.Deployment()
-    d.add('postgresql')
-    d.add('mysql')
-    d.add('wordpress')
-    d.add('mediawiki')
-    d.add('discourse')
-    d.relate('postgresql:db-admin', 'discourse:db')
-    d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
-    # previous command is equivalent too:
-    d.relate('mysql:db', 'wordpress:db')
-    d.relate('mysql:db', 'mediawiki:database')
+```python
+import amulet
+d = amulet.Deployment()
+d.add('postgresql')
+d.add('mysql')
+d.add('wordpress')
+d.add('mediawiki')
+d.add('discourse')
+d.relate('postgresql:db-admin', 'discourse:db')
+d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
+# previous command is equivalent too:
+d.relate('mysql:db', 'wordpress:db')
+d.relate('mysql:db', 'mediawiki:database')
+```
 
 ##### Deployment.setup(timeout=600)
 
@@ -251,17 +281,19 @@ and execute juju-deployer with the generated mapping.
 
 Example:
 
-    import amulet
-    d = amulet.Deployment()
-    d.add('wordpress')
-    d.add('mysql')
-    d.configure('wordpress', debug=True)
-    d.relate('wordpress:db', 'mysql:db')
-    try:
-        d.setup(timeout=900)
-    except amulet.helpers.TimeoutError:
-        # Setup didn't complete before timeout
-        pass
+```python
+import amulet
+d = amulet.Deployment()
+d.add('wordpress')
+d.add('mysql')
+d.configure('wordpress', debug=True)
+d.relate('wordpress:db', 'mysql:db')
+try:
+    d.setup(timeout=900)
+except amulet.helpers.TimeoutError:
+    # Setup didn't complete before timeout
+    pass
+```
 
 ##### Deployment.unrelate(*args)
 
@@ -271,19 +303,21 @@ Remove a relation between two services.
 
 Exactly two arguments must be given.
 
-    import amulet
-    d = amulet.Deployment()
-    d.add('postgresql')
-    d.add('mysql')
-    d.add('wordpress')
-    d.add('mediawiki')
-    d.add('discourse')
-    d.relate('postgresql:db-admin', 'discourse:db')
-    d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
-    # unrelate all the services we just related
-    d.unrelate('postgresql:db-admin', 'discourse:db')
-    d.unrelate('mysql:db', 'wordpress:db')
-    d.unrelate('mysql:db', 'mediawiki:database')
+```python
+import amulet
+d = amulet.Deployment()
+d.add('postgresql')
+d.add('mysql')
+d.add('wordpress')
+d.add('mediawiki')
+d.add('discourse')
+d.relate('postgresql:db-admin', 'discourse:db')
+d.relate('mysql:db', 'wordpress:db', 'mediawiki:database')
+# unrelate all the services we just related
+d.unrelate('postgresql:db-admin', 'discourse:db')
+d.unrelate('mysql:db', 'wordpress:db')
+d.unrelate('mysql:db', 'mediawiki:database')
+```
 
 ### amulet.sentry
 
@@ -299,18 +333,20 @@ Sentries can be accessed from within your deployment using the sentry object.
 Using the above example from ## Deployer, each service and unit can be accessed
 using the following:
 
-    import amulet
-    d = amulet.Deployment()
-    d.add('mediawiki')
-    d.add('mysql')
-    d.setup()
-    d.sentry.wait()
-    # get UnitSentry for a specific service/unit
-    d.sentry['mysql/0']
-    d.sentry['mediawiki/0']
-    # get list of all UnitSentry objects for a service, one per unit
-    d.sentry['mysql']
-    assert d.sentry['mysql/0'] in d.sentry['mysql']
+```python
+import amulet
+d = amulet.Deployment()
+d.add('mediawiki')
+d.add('mysql')
+d.setup()
+d.sentry.wait()
+# get UnitSentry for a specific service/unit
+d.sentry['mysql/0']
+d.sentry['mediawiki/0']
+# get list of all UnitSentry objects for a service, one per unit
+d.sentry['mysql']
+assert d.sentry['mysql/0'] in d.sentry['mysql']
+```
 
 Sentries provide several methods for which you can use to gather information
 about an environment. The following are a few examples.
@@ -352,8 +388,10 @@ Return files and directories of directory
 
 Example of output
 
-    {'files': []
-     'directories': []}
+```no-highlight
+{'files': []
+ 'directories': []}
+```
 
 ##### UnitSentry.directory_stat(dir)
 
@@ -363,11 +401,13 @@ Return stat of directory
 
 Example of output
 
-    {'mtime': fs_stat.st_mtime,
-     'size': fs_stat.st_size,
-     'uid': fs_stat.st_uid,
-     'gid': fs_stat.st_gid,
-     'mode': fs_stat.st_mode}
+```no-highlight
+{'mtime': fs_stat.st_mtime,
+ 'size': fs_stat.st_size,
+ 'uid': fs_stat.st_uid,
+ 'gid': fs_stat.st_gid,
+ 'mode': fs_stat.st_mode}
+```
 
 ##### UnitSentry.file(filename)
 
@@ -378,7 +418,9 @@ See UnitSentry.file_stat()
 Return contents of filename
 
   - `filename` File on remote machine
-`UnitSentry.file_stat(filename)`
+
+
+##### UnitSentry.file_stat(filename)
 
 Return stat of path
 
@@ -386,11 +428,13 @@ Return stat of path
 
 Example of output
 
-    {'mtime': fs_stat.st_mtime,
-     'size': fs_stat.st_size,
-     'uid': fs_stat.st_uid,
-     'gid': fs_stat.st_gid,
-     'mode': fs_stat.st_mode}
+```no-highlight
+{'mtime': fs_stat.st_mtime,
+ 'size': fs_stat.st_size,
+ 'uid': fs_stat.st_uid,
+ 'gid': fs_stat.st_gid,
+ 'mode': fs_stat.st_mode}
+```
 
 ##### UnitSentry.relation(from_rel, to_rel)
 
@@ -409,8 +453,10 @@ Execute specified command as root on remote machine
 
 Returns a tuple of output string and exit code
 
-    >>> d.sentry['ubuntu/0'].run('whoami')
-    ('root', 0)
+```no-highlight
+>>> d.sentry['ubuntu/0'].run('whoami')
+('root', 0)
+```
 
 ## Examples
 
@@ -420,58 +466,64 @@ Here are a few examples of Amulet tests
 
 #### tests/00-setup
 
-    #!/bin/bash
-    sudo apt-get install amulet python-requests
+```bash
+#!/bin/bash
+sudo apt-get install amulet python-requests
+```
 
 #### tests/01-simple
 
-    import os
-    import amulet
-    import requests
-    from .lib import helper
-    d = amulet.Deployment()
-    d.add('mysql')
-    d.add('wordpress')
-    d.relate('mysql:db', 'wordpress:db')
-    d.expose('wordpress')
-    try:
-        # Create the deployment described above, give us 900 seconds to do it
-        d.setup(timeout=900)
-        # Setup will only make sure the services are deployed, related, and in a
-        # "started" state. We can employ the sentries to actually make sure there
-        # are no more hooks being executed on any of the nodes.
-        d.sentry.wait()
-    except amulet.helpers.TimeoutError:
-        amulet.raise_status(amulet.SKIP, msg="Environment wasn't stood up in time")
-    except:
-        # Something else has gone wrong, raise the error so we can see it and this
-        # will automatically "FAIL" the test.
-        raise
-    # Shorten the names a little to make working with unit data easier
-    wp_unit = d.sentry['wordpress/0']
-    mysql_unit = d.sentry['mysql/0']
-    # WordPress requires user input to "finish" a setup. This code is contained in
-    # the helper.py file found in the lib directory. If it's not able to complete
-    # the WordPress setup we need to quit the test, not as failed per se, but as a
-    # SKIPed test since we can't accurately setup the environment
-    try:
-        helper.finish_setup(wp_unit.info['public-address'], password='amulet-test')
-    except:
-        amulet.raise_status(amulet.SKIP, msg="Unable to finish WordPress setup")
-    home_page = requests.get('http://%s/' % wp_unit.info['public-address'])
-    home_page.raise_for_status() # Make sure it's not 5XX error
+```python
+import os
+import amulet
+import requests
+from .lib import helper
+d = amulet.Deployment()
+d.add('mysql')
+d.add('wordpress')
+d.relate('mysql:db', 'wordpress:db')
+d.expose('wordpress')
+try:
+    # Create the deployment described above, give us 900 seconds to do it
+    d.setup(timeout=900)
+    # Setup will only make sure the services are deployed, related, and in a
+    # "started" state. We can employ the sentries to actually make sure there
+    # are no more hooks being executed on any of the nodes.
+    d.sentry.wait()
+except amulet.helpers.TimeoutError:
+    amulet.raise_status(amulet.SKIP, msg="Environment wasn't stood up in time")
+except:
+    # Something else has gone wrong, raise the error so we can see it and this
+    # will automatically "FAIL" the test.
+    raise
+# Shorten the names a little to make working with unit data easier
+wp_unit = d.sentry['wordpress/0']
+mysql_unit = d.sentry['mysql/0']
+# WordPress requires user input to "finish" a setup. This code is contained in
+# the helper.py file found in the lib directory. If it's not able to complete
+# the WordPress setup we need to quit the test, not as failed per se, but as a
+# SKIPed test since we can't accurately setup the environment
+try:
+    helper.finish_setup(wp_unit.info['public-address'], password='amulet-test')
+except:
+    amulet.raise_status(amulet.SKIP, msg="Unable to finish WordPress setup")
+home_page = requests.get('http://%s/' % wp_unit.info['public-address'])
+home_page.raise_for_status() # Make sure it's not 5XX error
+```
 
 #### tests/lib/helper.py
 
-    import requests
-    def finish_setup(unit, user='admin', password=None):
-        h = {'User-Agent': 'Mozilla/5.0 Gecko/20100101 Firefox/12.0',
-             'Content-Type': 'application/x-www-form-urlencoded',
-             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*',
-             'Accept-Encoding': 'gzip, deflate'}
-        r = requests.post('http://%s/wp-admin/install.php?step=2' % unit,
-                          headers=h, data={'weblog_title': 'Amulet Test %s' % unit,
-                          'user_name': user, 'admin_password': password,
-                          'admin_email': 'test@example.tld',
-                          'admin_password2': password,
-                          'Submit': 'Install WordPress'})
+```python
+import requests
+def finish_setup(unit, user='admin', password=None):
+    h = {'User-Agent': 'Mozilla/5.0 Gecko/20100101 Firefox/12.0',
+         'Content-Type': 'application/x-www-form-urlencoded',
+         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*',
+         'Accept-Encoding': 'gzip, deflate'}
+    r = requests.post('http://%s/wp-admin/install.php?step=2' % unit,
+                      headers=h, data={'weblog_title': 'Amulet Test %s' % unit,
+                      'user_name': user, 'admin_password': password,
+                      'admin_email': 'test@example.tld',
+                      'admin_password2': password,
+                      'Submit': 'Install WordPress'})
+```

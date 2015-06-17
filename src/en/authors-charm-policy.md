@@ -9,22 +9,40 @@ and bundles must:
 
   - Must follow the spirit of the [Ubuntu Philosophy](http://www.ubuntu.com/about/about-ubuntu/our-philosophy).
   - Must serve a useful purpose and have well defined behaviour.
-  - Must also be valid for the charm and/or bundle format defined in Juju's documentation.
-  - Must verify that any software installed or utilized is verified as coming from the intended source. Any software installed from the Ubuntu archive satisfies this due to the apt sources including cryptographic signing information.
+  - Must also be valid for the charm and/or bundle format defined in Juju's
+    documentation.
+  - Must verify that any software installed or utilized is verified as coming
+    from the intended source. Any software installed from the Ubuntu archive
+    satisfies this due to the apt sources including cryptographic signing
+    information.
   - Must be entirely self contained or depend only on reliable external services.
   - Must include a full description of what the software does in the metadata.
-  - Must provide a means to protect users from known security vulnerabilities in a way consistent with best practices as defined by either Ubuntu policies or upstream documentation. Basically this means there must be instructions on how to apply updates if you use software not from Ubuntu.
-  - Must pass "[charm proof](./tools-charm-tools.html#proof)" or "[bundle proof](./tools-charm-tools.html#proof)" with no Errors or Warnings (lines prefixed with E: or W:).
-  - Must have a maintainer email address in metadata.yaml attached to a team or individual who are responsive to contact.
-  - Must include a license. Call the file 'copyright' and make sure all files' licenses are specified clearly.
+  - Must provide a means to protect users from known security vulnerabilities in
+    a way consistent with best practices as defined by either Ubuntu policies or
+    upstream documentation. Basically this means there must be instructions on
+    how to apply updates if you use software not from Ubuntu.
+  - Must pass "[charm proof](./tools-charm-tools.html#proof)" or 
+    "[bundle proof](./tools-charm-tools.html#proof)" with no Errors or Warnings
+    (lines prefixed with E: or W:).
+  - Must have a maintainer email address in metadata.yaml attached to a team or
+    individual who are responsive to contact.
+  - Must include a license. Call the file 'copyright' and make sure all files'
+    licenses are specified clearly.
   - Must be under a [Free license](http://opensource.org/osd).
   - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
   - Must not run any network services using default passwords.
-  - Must call Juju API tools (relation-*, unit-*, config-*, etc) without a hard coded path. Should default to use software that is included in the Ubuntu archive, however we encourage that charm authors have a config options for allowing users to deploy from newer upstream releases, or even right from VCS if it's useful to users.
-  - Should not use anything infrastructure-provider specific (i.e. querying EC2 metadata service) symlinks must be self contained within a charm.
+  - Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a hard
+    coded path. Should default to use software that is included in the Ubuntu
+    archive, however we encourage that charm authors have a config options for
+    allowing users to deploy from newer upstream releases, or even right from
+    VCS if it's useful to users.
+  - Should not use anything infrastructure-provider specific (i.e. querying EC2
+    metadata service) symlinks must be self contained within a charm.
   - Should make use of [AppArmor](https://help.ubuntu.com/12.04/serverguide/apparmor.html) to increase security.
-  - Bundles must only use charms which are already in the store, they cannot reference charms in personal namespaces.
-  - Must include tests for trusty series and any series afterwards. Testing is defined as unit tests, functional tests, or integration tests.
+  - Bundles must only use charms which are already in the store, they cannot
+    reference charms in personal namespaces.
+  - Must include tests for trusty series and any series afterwards. Testing is
+    defined as unit tests, functional tests, or integration tests.
 
 The charm store referred to in this document is the collection of Juju charms
 and bundles hosted at
@@ -32,9 +50,9 @@ and bundles hosted at
 
 If a charm is no longer being properly maintained and is failing to adhere to
 policy the charm will undergo the
-[unmaintained charm process](./charm-unmaintained-process.html).  This process confirms
-the charm is no longer being maintained, fails to adhere to Charm Store policy,
-and thus is removed from the recommended status in the Juju Charm Store.  
+[unmaintained charm process](./charm-unmaintained-process.html). This process
+confirms the charm is no longer being maintained, fails to adhere to Charm Store
+policy, and thus is removed from the recommended status in the Juju Charm Store. 
 
 # Charm Metadata
 
@@ -98,7 +116,16 @@ Each series can be in one of these states:
 Experimental series charms should adhere to the charm policy except that
 interfaces are never made 'de-facto' in an experimental series.
 
-  - Active - When a series is active, all changes are subject to the de-facto rules above.
-  - Frozen - The charmers team on launchpad has discretion when a series is frozen as to whether or not a change should be accepted.
-  - EOL - No changes will be accepted except those which help users who need to migrate to a supported series.
-  - Process - Charm store releases will be moved from Active to Frozen periodically to allow de-facto changes to settle and allow testing of infrastructure. New releases of target OS's will be reflected in the charm store as an experimental series. There can be multiple Active series at one time. Maintainers can choose whether or not to support their charm in all of the Active series, as long as the charm is maintained in at least one Active series.
+  - Active - When a series is active, all changes are subject to the de-facto
+    rules above.
+  - Frozen - The charmers team on launchpad has discretion when a series is
+    frozen as to whether or not a change should be accepted.
+  - EOL - No changes will be accepted except those which help users who need to
+    migrate to a supported series.
+  - Process - Charm store releases will be moved from Active to Frozen
+    periodically to allow de-facto changes to settle and allow testing of
+    infrastructure. New releases of target OS's will be reflected in the Charm
+    Store as an experimental series. There can be multiple Active series at one
+    time. Maintainers can choose whether or not to support their charm in all of
+    the Active series, as long as the charm is maintained in at least one Active
+    series.

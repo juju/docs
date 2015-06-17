@@ -11,22 +11,32 @@ relevant charm, so deploying can be straightforward and easy.
 
 # Deploying from the Charm Store
 
-In most cases, you will want to deploy charms by fetching them directly from the charm store. This ensures that you get the relevant, up to date version of the charm and "everything just works". To deploy a charm like this you can just
+In most cases, you will want to deploy charms by fetching them directly from the
+Charm Store. This ensures that you get the relevant, up to date version of the
+charm and "everything just works". To deploy a charm like this you can just
 specify:
 
-    juju deploy mysql
+```bash
+juju deploy mysql
+```
 
 Running this will do exactly what you expect - fetch the latest Juju charm for
 the series you are running and then use the bootstrap environment to initiate a
 new instance and deploy MySQL
 
-Juju usefully supports a system of namespaces that means you can actually deploy charms from a variety of sources. The default source is the charm store. The above command is the same as running:
+Juju usefully supports a system of namespaces that means you can actually deploy
+charms from a variety of sources. The default source is the charm store. The
+above command is the same as running:
 
-    juju deploy cs:precise/mysql
+```bash
+juju deploy cs:precise/mysql
+```
 
 which follows the format:
 
-    <repository>:<series>/<service>
+```nohighlight
+<repository>:<series>/<service>
+```
 
 # Deploying from a local repository
 
@@ -42,29 +52,38 @@ source rather than the charm store:
 Juju can be pointed at a local directory to source charms from using the
 `--repository=<path/to/files>` switch like this:
 
-    juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
+```bash
+juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
+```
 
 The `--repository`: switch can be omitted when shell environment defines
 `JUJU_REPOSITORY` like so:
 
-    export JUJU_REPOSITORY=/usr/share/charms/
-    juju deploy local:trusty/vsftpd
-
+```bash
+export JUJU_REPOSITORY=/usr/share/charms/
+juju deploy local:trusty/vsftpd
+```
 You can also make use of standard filesystem shortcuts, if the environment
 specifies the `default-series`.The following examples will deploy the trusty
 charms in the local repository when default-series is set to trusty:
 
-    juju deploy --repository=. local:haproxy
-    juju deploy --repository ~/charms/ local:wordpress
+```bash
+juju deploy --repository=. local:haproxy
+juju deploy --repository ~/charms/ local:wordpress
+```
 
 The default-series can be specified in environments.yaml thusly:
 
-    default-series: precise
+```yaml
+default-series: precise
+```
 
 The default-series can also be added to any bootstrapped environment with the
 `set-env `:
 
-    juju set-env "default-series=trusty"
+```bash
+juju set-env "default-series=trusty"
+```
 
 **Note:** Specifying a local repository makes Juju look there **first**, but if the relevant charm is not found in that repository, it will fall back to fetching it from the charm store. If you wish to check where a charm was installed from, it is listed in the `juju status` output.
 
@@ -73,10 +92,12 @@ The default-series can also be added to any bootstrapped environment with the
 
 Deployed services usually start with a sane default configuration. However, for
 some services it is desireable (and quicker) to configure them at deployment
-time. This can be done by creating a YAML format file of configuration values and
-using the `--config=` switch:
+time. This can be done by creating a YAML format file of configuration values
+and using the `--config=` switch:
 
-    juju deploy mysql --config=myconfig.yaml
+```bash
+juju deploy mysql --config=myconfig.yaml
+```
 
 There is more information on this, and other ways to configure services in the
 [documentation for configuring services](./charms-config.html).
@@ -93,19 +114,24 @@ to. This is useful for a few reasons. The most obvious reason is to save money
 when deploying to a public cloud. Instead of having one machine per unit we can
 consolidate services.
 
-In this example we use the `--constraints` flag to fire up a bootstrap node with 4G of RAM so we can deploy other services to it by using the `--to` command:
+In this example we use the `--constraints` flag to fire up a bootstrap node with
+4G of RAM so we can deploy other services to it by using the `--to` command:
 
-    juju bootstrap --constraints="mem=4G"
-    juju deploy --to 0 mysql
-    juju deploy --to 0 rabbitmq-server
+```bash
+juju bootstrap --constraints="mem=4G"
+juju deploy --to 0 mysql
+juju deploy --to 0 rabbitmq-server
+```
 
 As you can see from the example we've deployed mysql and rabbitmq-server "to"
 node 0.
 
 You can also deploy to containers:
 
-    juju deploy mysql --to 24/lxc/3
-    juju deploy mysql --to lxc:25
+```bash
+juju deploy mysql --to 24/lxc/3
+juju deploy mysql --to lxc:25
+```
 
 In the previous example we deployed MySQL to container #3 on machine #24.
 Similarly the 2nd example deploys MySQL to a new container on machine #25.
@@ -118,16 +144,21 @@ all the machines and their machine numbers for you to decide what to deploy to.
 The `add-unit` command also supports the `--to` option, so it's now possible to
 specifically target machines when expanding service capacity:
 
-    juju deploy --constraints="mem=4G" openstack-dashboard
-    juju add-unit --to 1 rabbitmq-server
+```bash
+juju deploy --constraints="mem=4G" openstack-dashboard
+juju add-unit --to 1 rabbitmq-server
+```
 
 I should now have a second machine running both the openstack-dashboard service
 and a second unit of the rabbitmq-server service:
 
-    juju status
+```bash
+juju status
+```
 
 Which results in the following
 
+```yaml
     machines:
       "0":
         agent-state: started
@@ -185,6 +216,7 @@ Which results in the following
             agent-version: 1.11.4
             machine: "1"
             public-address: 10.5.0.45
+```
 
 These two features make it much easier to deploy complex services such as
 OpenStack which use a large number of charms on a limited number of physical
@@ -201,7 +233,9 @@ complete.
 While the "add-unit" command supports the `--to` option, you can elect not use
 `--to` when doing an "add-unit" to scale out the service on its own node.
 
-    juju add-unit rabbitmq-server
+```bash
+juju add-unit rabbitmq-server
+```
 
 This will allow you to save money when you need it by using --to, but also
 horizontally scale out on dedicated machines when you need to.
@@ -222,8 +256,10 @@ not configure the machine to use them For example, this commands deploys
 a service to a machine on the "db" and "monitor" networks and enabled
 them:
 
-    juju deploy --networks db,monitor mysql
+```bash
+juju deploy --networks db,monitor mysql
+```
 
-**Note:** The `networks` option only recognises MaaS networks at this
+**Note:** The `networks` option only recognises MAAS networks at this
 time, and the environment must be bootstrapped with 1.20.0 or newer.
-MaaS networks are not detected when Juju is upgraded to 1.20.0 or newer.
+MAAS networks are not detected when Juju is upgraded to 1.20.0 or newer.

@@ -49,12 +49,16 @@ So the charm has passed all criteria and is ready to land in the store. Before
 you can promulgate, you’ll need to run the following commands. (This is only
 needed if you don’t have charm-tools >= 1.1 - This is being fixed in charm tools and will be landing soon).
 
-    bzr init lp:~charmers/charms/precise/<CHARM_NAME>/trunk
-    bzr push lp:~charmers/charms/precise/<CHARM_NAME>/trunk
+```bash
+bzr init lp:~charmers/charms/precise/<CHARM_NAME>/trunk
+bzr push lp:~charmers/charms/precise/<CHARM_NAME>/trunk
+```
 
 Without this, LP will automatically stack on top of the user’s branch which will make it really really hard to delete from the store in the future. Now you can promulgate:
 
-    juju charm promulgate 
+```bash
+juju charm promulgate 
+```
 
 #### Updating existing charms in the store
 
@@ -62,7 +66,9 @@ Make sure you thank them profusely for fixing something or adding something, no 
 
 Grab the charm from the store either with charm-tools or just bzr branch it.
 
-    juju charm get 
+```bash
+juju charm get 
+```
 
 **Note:** Backwards compatibility is important! Any changes that would change the structure of the charm, data, configuration options, etc and doesn’t perform due diligence to make sure the charm does what it needs to, should be rejected.
 
@@ -83,8 +89,10 @@ audit.
 
 Bundles are simpler to push to the store:
 
-    bzr init lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
-    bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle 
+```bash
+bzr init lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
+bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle 
+```
 
 There is no promulgation step for bundles.
 
