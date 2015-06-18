@@ -6,7 +6,7 @@ Actions are scripts that can be triggered on a unit by the Juju user via CLI or 
 
 Actions are sub-commands of the `juju action` command.  For more on their usage, you can use `juju action help` to see more details.
 
-Actions are exposed as of Juju 1.23.  In Juju 1.22, they are only enabled in the CLI when `JUJU_DEV_FEATURE_FLAG=actions` is set.
+Actions are exposed as of Juju 1.23.  In Juju 1.22, they are only enabled in the CLI when `JUJU_DEV_FEATURE_FLAG=action` is set.
 
 The following subcommands are specified:
 
