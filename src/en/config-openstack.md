@@ -1,9 +1,11 @@
 # Configuring for OpenStack
 
-You should start by generating a generic configuration file for Juju, using the
+Start by generating a generic configuration file for Juju, using the
 command:
 
-    juju generate-config
+```bash
+juju generate-config
+```
 
 This will generate a file, `environments.yaml`, which will live in your
 `~/.juju/` directory (and will create the directory if it doesn't already
@@ -89,8 +91,8 @@ Remember to substitute in the parts of the snippet that are important to you.
 If you are deploying on OpenStack the following documentation might also be
 useful:
 
-[Ubuntu Cloud
-Infrastructure](https://help.ubuntu.com/community/UbuntuCloudInfrastructure)
+[Ubuntu Cloud Infrastructure](https://help.ubuntu.com/community/UbuntuCloudInfrastructure)
+
 
 # Bootstrapping
 

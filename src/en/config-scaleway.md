@@ -2,22 +2,23 @@ Title: Configuring Juju for the Scaleway provider
 
 # Configuring for Scaleway
 
-!!! **Note:** This provider is in "beta"
-and makes use of [manual provisioning](config-manual.html). Manual provisioning
-allows Juju users to implement any cloud provider's API calls and act similar to
-a provider implemented in the Juju Core code base.
-You can access the provider source-code on [github](https://github.com/scaleway/juju-scaleway)
+!!! **Note:** This provider is in "beta" and makes use of
+[manual provisioning](config-manual.html). Manual provisioning allows Juju
+users to implement any cloud provider's API calls and acts similar to a
+standard provider implemented via the Juju project. You can access the provider
+source code on [github](https://github.com/scaleway/juju-scaleway)
 
-This package provides a CLI plugin for Juju that allows automated
-provisioning of C1 BareMetal SSD servers on Scaleway.
+This package provides a CLI plugin for Juju that allows automated provisioning
+of C1 BareMetal SSD servers on Scaleway.
 
-Scaleway is the first IaaS provider worldwide to offer an ARM based cloud.
-It’s the ideal platform for horizontal scaling.
-The solution provides on demand resources: it comes with on-demand SSD storage
-movable IPs, images, security group and an Object Storage solution.
-https://scaleway.com
+[Scaleway](https://scaleway.com) is the first IaaS provider worldwide to offer
+an ARM based cloud. It’s the ideal platform for horizontal scaling. The
+solution provides on-demand resources: SSD storage, movable IPs, images,
+security groups, and object storage.
 
-This plugin is highly inspired from [kAPIlt](https://github.com/kAPIlt) Juju plugins.
+This plugin is highly inspired from [kAPIlt](https://github.com/kAPIlt) Juju
+plugins.
+
 
 ## Requirements
 
@@ -27,10 +28,12 @@ This plugin is highly inspired from [kAPIlt](https://github.com/kAPIlt) Juju plu
 - You have configured your [SSH Key](https://www.scaleway.com/docs/configure_new_ssh_key)
 - You have installed libffi-dev and libssl-dev
 
+
 ## Installation
 
-Plugin installation is done via pipi, the Python package manager, available by
+Plugin installation is done via 'pip', the Python package manager, available by
 default on Ubuntu.
+
 A [virtualenv](http://virtualenv.readthedocs.org/en/latest/index.html) is also
 recommanded to sandbox this install from your system packages:
 
@@ -63,29 +66,31 @@ export SCALEWAY_ACCESS_KEY=<organization_key>
 export SCALEWAY_SECRET_KEY=<secret_token>
 ```
 
-!!! **Note:** As environment variables are not shared between shells, you will need to repeat this operation for every shell.
-You can avoid this repetition by adding this environment variables in your shell's rc files, for instance append them to your `~/.bashrc` or `~/.zshrc`
+!!! **Note:** As environment variables are not shared between shells, you will
+need to repeat this operation for every shell.  You can avoid this repetition
+by adding this environment variables in your shell's rc files, for instance
+append them to your `~/.bashrc` or `~/.zshrc`
 
 ### Juju configuration
 
-The next step is to add an environment for Scaleway in your '~/.juju/environments.yaml'. This environment will look like the following:
+Next, add an environment for Scaleway in '~/.juju/environments.yaml'. This
+environment will look like the following:
 
 ```yaml
-    # https://jujucharms.com/docs/config-scaleway.html
-    scaleway:
-        type: manual
-        bootstrap-host: null
-        bootstrap-user: root
+# https://jujucharms.com/docs/config-scaleway.html
+scaleway:
+    type: manual
+    bootstrap-host: null
+    bootstrap-user: root
 ```
 
-Then, you have to tell Juju which environment to use.
-To do this, in a terminal use the following command:
+Then, tell Juju which environment to use:
 
 ```bash
 export JUJU_ENV=scaleway
 ```
 
-To set Scaleway as your default provider, run the following command in your terminal:
+Set Scaleway as your default provider by running:
 
 ```bash
 juju switch scaleway
@@ -93,27 +98,26 @@ juju switch scaleway
 
 ## Bootstrapping
 
-Now you can bootstrap your Scaleway environment.
-You need to route the command through the scaleway plugin that we installed via pip.
+You can now bootstrap your Scaleway environment. You need to route the command
+through the scaleway plugin that we installed via pip:
 
 ```bash
 juju scaleway bootstrap
 ```
 
-All machines created by this plugin will have the Juju environment
-name as a prefix for their servers name, for instance `scaleway-XXXYYYZZZ`
+All machines created by this plugin will have the Juju environment name as a
+prefix for their servers name, for instance `scaleway-XXXYYYZZZ`
 
-After your environment is bootstrapped you can add additional machines
-to it via the `add-machine` command, for instance the following will
-add 2 additional machines:
+After your environment is bootstrapped you can add additional machines to it
+via the `add-machine` command, for instance the following will add 2 additional
+machines:
 
 ```bash
 juju scaleway add-machine -n 2
 juju status
 ```
 
-You can now use standard Juju commands to deploy service workloads (also known
-as charms):
+You can now use standard Juju commands to deploy services via charms:
 
 ```bash
 juju deploy wordpress
@@ -136,9 +140,9 @@ Assemble these workloads together via relations like lego blocks:
 juju add-relation wordpress mysql
 ```
 
-You can list all machines in Scaleway that are part of the Juju
-environment with the list-machines command. This directly queries the Scaleway
-API and does not interact with the Juju API.
+You can list all machines in Scaleway that are part of the Juju environment
+with the list-machines command. This directly queries the Scaleway API and does
+not interact with the Juju API:
 
 ```bash
 juju scaleway list-machines
@@ -166,4 +170,3 @@ juju scaleway destroy-environment
 The `destroy-environment` command also takes a --force option which only uses
 the Scaleway API. It's helpful if the state server or other machines are
 killed independently of Juju.
-
