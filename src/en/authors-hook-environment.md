@@ -94,7 +94,7 @@ understand the [relation model](./authors-relations-in-depth.html).
 output is currently logged anyway, though this may not always be the case - If 
 it's important, please `juju-log` it.
 
-```
+```bash
 juju-log "some important text"
 ```
 
@@ -111,7 +111,7 @@ The juju-reboot command allows charm authors to schedule a reboot from inside
 a charm hook. The reboot will only happen if the hook completes without error. 
 You can schedule a reboot like so:
 
-```
+```bash
 juju-reboot
 ```
 
@@ -127,7 +127,7 @@ reboot when needed. This bash example assumes that "$FEATURE_IS_INSTALLED"
 variable was defined by a check for the feature, then 'juju-reboot' is
 called if the variable is false:
 
-```
+```bash
 if [[ $FEATURE_IS_INSTALLED  == "false" ]]
 then
     install_feature
@@ -144,7 +144,7 @@ called using the `juju run` command.
 argument, which must be `private-address` or `public-address`. It is not
 affected by context:
 
-```
+```no-highlight
 unit-get private-address
 10.0.1.101
 unit-get public-address
@@ -163,7 +163,7 @@ config keys are reported as having a value of nil, and do not return an error.
 
 Getting the interesting bits of the config is done with:
 
-```
+```no-highlight
 config-get
 key: some-value
 another-key: default-value
@@ -171,7 +171,7 @@ another-key: default-value
 
 To get the whole config including the nulls:
 
-```
+```no-highlight
 config-get --all
 key: some-value
 another-key: default-value
@@ -180,7 +180,7 @@ no-default: null
 
 To retrieve a specific value pass its key as argument:
 
-```
+```no-highlight
 config-get [key]
 some-value
 ```
@@ -188,7 +188,7 @@ some-value
 This command will also work if no value is set and no default is set or even
 if the setting doesn't exist. In both cases nothing will be returned.
 
-```
+```no-highlight
 config-get [key-with-no-default]
 config-get [missing-key]
 ```
@@ -207,19 +207,19 @@ Examples:
 
 Open 80/tcp if and when the service is exposed:
 
-```
+```no-highlight
 open-port 80
 ```
 
 Open 1234/udp if and when the service is exposed:
 
-```
+```no-highlight
 open-port 1234/udp
 ```
 
 Open the range 8000 to 8080:
 
-```
+```no-highlight
 open 8000-8080/tcp
 ```
 
@@ -245,19 +245,19 @@ Examples:
 
 Close 1234/udp if it was open:
 
-```
+```no-highlight
 close-port 1234/udp
 ```
 
 Close port 80 if it was open:
 
-```
+```no-highlight
 close-port 80
 ```
 
 Close a range of ports:
 
-```
+```no-highlight
 close-port 80-100
 ```
 
@@ -273,7 +273,7 @@ number followed by the protocol (tcp or udp).
 
 For example, running `opened-ports` may return:
 
-```
+```no-highlight
 70-80/tcp
 81/tcp
 ```
@@ -297,27 +297,27 @@ Examples:
 Setting a pair of values for the local unit in the default relation identifier 
 which is stored in the environment variable `JUJU_RELATION_ID`:
 
-```
+```bash
 echo $JUJU_RELATION_ID
 server:3
 ```
 
 The setting is done with:
 
-```
+```no-highlight
 relation-set username=bob password=2db673e81ffa264c
 ```
 
 To set the pair of values for the local unit in a specific relation specify the
 relation identifier:
 
-```
+```no-highlight
 relation-set -r server:3 username=jim password=12345
 ```
 
 To clear a value for the local unit in the default relation enter:
 
-```
+```no-highlight
 relation-set deprecated-or-unused=
 ```
 
@@ -357,14 +357,14 @@ settings, use `-` for the first argument.
 
 The environment variable `JUJU_REMOTE_UNIT` stores the default remote unit:
 
-```
+```bash
 echo $JUJU_REMOTE_UNIT
  mongodb/2
 ```
 
 Getting the settings of the default unit in the default relation is done with:
 
-```
+```no-highlight
 relation-get
  username: jim
  password: "12345"
@@ -374,7 +374,7 @@ To get a specific setting from the default remote unit in the default relation
 you would instead use:
 
     
-```
+```no-highlight
 relation-get username
  jim
 ```
@@ -382,7 +382,7 @@ relation-get username
 To get all settings from a particular remote unit in a particular relation you
 specify them together with the command:
 
-```
+```no-highlight
 relation-get -r database:7 - mongodb/5
  username: bob
  password: 2db673e81ffa264c
@@ -430,18 +430,20 @@ Examples:
 
 To show all remote units for the current relation identifier:
 
-```relation-list```
+```no-highlight
+relation-list
+```
 
 Which should return something similar to:
 
-```
+```no-highlight
 mongodb/0
 mongodb/2
 mongodb/3
 ```
 All remote units in a specific relation identifier can be shown with:
 
-```
+```no-highlight
 relation-list -r website:2
  haproxy/0
 ```
@@ -459,7 +461,7 @@ Examples:
 The current relation name is stored in the environment variable 
 `JUJU_RELATION`. All "server" relation identifiers can be shown with:
 
-```
+```no-highlight
 relation-ids
 server:1
 server:7
@@ -469,7 +471,7 @@ server:9
 To show all relation identifiers with a different name pass it as an argument -
 for example:
 
-```
+```no-highlight
 relation-ids reverseproxy
     reverseproxy:3
 ```
