@@ -6,7 +6,7 @@ By design, Juju operates a very secure environment for deploying your services.
 Even if you have deployed services, they won't be publically available unless
 you explicitly make them so. To allow public access to services, the
 appropriate changes must be made to the cloud provider firewall settings. As
-the procedure or doing this varies depending on the provider, Juju helpfully
+the procedure for doing this varies depending on the provider, Juju helpfully
 abtracts this into a single command, `juju expose <servicename>`
 
 For example, you may have deployed a WordPress service using the relevant
