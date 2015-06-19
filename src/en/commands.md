@@ -1855,6 +1855,14 @@ Click on the expander to see details for each command.
   Wildcards ('*') may be specified in service/unit names to match any sequence
   of characters. For example, 'nova-*' will match any service whose name begins
   with 'nova-': 'nova-compute', 'nova-volume', etc.
+
+#### Examples: 
+
+      # Display environment status in short format
+      juju status --format short 
+      # Watch (very useful to observe changes) environment status in short format
+      watch juju status --format short 
+
   
   aliases: stat
 
