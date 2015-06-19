@@ -22,15 +22,19 @@ executed on is:
 To determine which environment a command will act on, you can issue the `switch`
 command with no parameters:
 
-    juju switch
-    Current environment: "amazon" (from JUJU_ENV)
+```bash
+juju switch
+Current environment: "amazon" (from JUJU_ENV)
+```
 
 It is also possible to determine the current environment by checking the
 `JUJU_ENV` variable, and if that is empty, the contents of the file `~/.juju
 /current-environment`:
 
-    echo $JUJU_ENV
-    cat ~/.juju/current-environment
+```bash
+echo $JUJU_ENV
+cat ~/.juju/current-environment
+```
 
 ## Specifying an environment
 
@@ -40,9 +44,11 @@ the `-e` switch takes precedence over any other setting.
 
 For example:
 
-    juju bootstrap                 # bootstraps the default environment
-    juju switch amazon             # switches the environment to the cloud defined by 'amazon'
-    juju deploy mysql -e mycloud   # deploys mysql charm on the cloud defined by 'mycloud'
+```no-highlight
+juju bootstrap                 # bootstraps the default environment
+juju switch amazon             # switches the environment to the cloud defined by 'amazon'
+juju deploy mysql -e mycloud   # deploys mysql charm on the cloud defined by 'mycloud'
+```
 
 **Note: ** Unlike many switches used with juju, `-e` must come at the end of the
 command in order to be parsed correctly.
@@ -53,8 +59,10 @@ When managing several cloud environments, it can be bothersome to issue a long
 list of commands and remember to prepend the `-e` switch to each one. For this
 reason, you can switch the current environment using the `switch` command:
 
-    juju switch hpcloud
-    juju bootstrap
+```bash
+juju switch hpcloud
+juju bootstrap
+```
 
 ... will bootstrap the environment defined by the 'hpcloud' label
 
@@ -74,12 +82,14 @@ switch or alter the `JUJU_ENV` environment variable. The default environment is
 specified at the top of the `environments.yaml` file, before the environment
 specifications themselves, like this:
 
+```yaml
     ...
     default: amazon
     environments:
       ## https://jujucharms.com/docs/config-openstack.html
       openstack:
     ...
+```
 
 ## Updating running environments
 
@@ -92,13 +102,17 @@ The `get-environment` command will display all the environment's configured
 options. You can pass the name of an option to see just the one value. For
 example, to see the default series that charms are deployed with, type:
 
-    juju get-environment default-series
+```bash
+juju get-environment default-series
+```
 
 The `set-environment` command will set a configuration option to the specified
 value. For example, you can set the default series that charms are deployed with
 to trusty like this:
 
-    juju set-environment default-series=trusty
+```bash
+juju set-environment default-series=trusty
+```
 
 The `unset-environment` command will set a configuration option to the default
 value. It acts as a reset. Options without default value are removed. It is an
@@ -106,7 +120,9 @@ error to unset a required option. For example, you can unset the default series
 that charms are deployed with (so that the juju store can choose the best series
 for a charm) like this:
 
-    juju unset-environment default-series
+```bash
+juju unset-environment default-series
+```
 
 ## Upgrading environments
 
@@ -115,7 +131,9 @@ recent supported version of juju compatible with the command-line version. The
 juju machine and unit agents will be updated to the new version. The `--version`
 option can be used to select a specific version to upgrade to.
 
-    juju upgrade-juju
+```bash
+juju upgrade-juju
+```
 
 ## Updating environments
 
@@ -132,7 +150,9 @@ configuration.
 To generate a new boilerplate `environments.yaml` file direct to the console you
 can use:
 
-    juju generate-config --show
+```bash
+juju generate-config --show
+```
 
 ## Destroying environments
 
