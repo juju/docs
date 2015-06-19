@@ -85,7 +85,8 @@ juju block all-changes
 
 ## Adding restrictions via environments.yaml
 
-You have the option of hardcoding restriction levels via environments.yaml.
+You have the option of setting restriction levels via environments.yaml instead
+of using the 'block' command.
 
 The three (Boolean) parameters corresponding to the three levels are:
 
