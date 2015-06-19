@@ -1,3 +1,5 @@
+Title: Using Juju block to prevent accidental changes
+
 # Restricting changes to the running Juju environment
 
 Changes to a running Juju environment can be restricted in order to prevent accidental
@@ -80,6 +82,19 @@ This restriction level gets applied in this way:
 ```bash
 juju block all-changes
 ```
+
+## Adding restrictions via environments.yaml
+
+You have the option of hardcoding restriction levels via environments.yaml.
+
+The three (Boolean) parameters corresponding to the three levels are:
+
+- block-destroy-environment
+- block-remove-object
+- block-all-changes
+
+See the full
+[list of configuration parameters](config-general.html#alphabetical-list-of-general-configuration-values).
 
 
 ## Removing restrictions
