@@ -33,6 +33,7 @@
               <li class=" sub"><a href="charms-working-with-units.html">Working with Units</a></li>
 	      <li class=" sub"><a href="actions.html">Working with Actions</a></li>
               <li class=""><a href="howto.html">How to...</a></li>
+              <li class=" sub"><a href="howto-juju-block.html">Restrict/block Juju commands</a></li>
               <li class=" sub"><a href="howto-node.html">Deploy a Node.js app</a></li>
               <li class=" sub"><a href="howto-rails.html">Test and deploy on Rails</a></li>
               <li class=" sub"><a href="howto-backup-restore.html">Backup and Restore</a></li>
