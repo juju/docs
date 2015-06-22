@@ -25,7 +25,7 @@ Additional values may be seen for a unit which have been set by Juju rather
 than the charm, under the circumstances explained below:
 
 |Status       | colour in GUI* |Meaning                                      |
-|=============|================|=============================================|
+|-------------|:---------------|:--------------------------------------------|
 | error       | red            |A charm hook for this unit has exited with a non-zero exit code (crashed).
 
 No further hooks will be called or messages delivered until this is resolved; manually resolving or manually asking for the hook to be run, successfully, addresses the issue and resets the state to "unknown" with a message of "Error resolved with no further status from charm".|
