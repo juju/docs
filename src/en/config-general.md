@@ -1,91 +1,98 @@
-Title:General configuration options
-Commands:get-env, set-env
+Title: General configuration options
+Commands: get-env, set-env
 
 # General configuration options
 
-There may be many cases, particularly when dealing with complex cloud
-environments or running multiple instances of Juju, where it would be useful to
-control further aspects of the Juju environment.
-Many options can be changed by adding extra key:value pairs to the
-environments.yaml file which Juju uses to initiate environments. Options which
-are specific to certain cloud providers are detailed in the individual 
-configuration pages, but there are additional settings which can be applied to
-any environment.
-Some of these may be useful for particular use cases as outlined in the sections
-below, or you can [skip to the table](#alphabetical-list-of-general-configuration-values)
-of all the values.
+There may be times, particularly when dealing with complex cloud environments
+or running multiple instances of Juju, where it would be useful to control
+further aspects of the Juju environment. Many options can be changed by adding
+extra key:value pairs to the environments.yaml file which Juju uses to initiate
+environments. Options which are specific to certain cloud providers are
+detailed in the individual configuration pages, but there are additional
+settings which can be applied to any environment. Some of these may be useful
+for particular use cases as outlined in the sections below, or you can
+[skip to the table](#alphabetical-list-of-general-configuration-values) of all
+the values.
 
 
 ## Getting and setting individual values
 
-If you have a currently initiated Juju environment, you can find out what
-environment settings it is using by running the command:
-```
+You can display the environment settings of a running Juju environment by
+running the command:
+
+```bash
 juju get-env
 ```
-This will return a list of all the currently set options - whether they were set
+
+This will include all the currently set options - whether they were set
 by the individual configuration in the environments.yaml file, set specifically
 by you or inherited as a default value. 
 
 You may also set individual values for the current environment using the
 corresponding ```juju set-env``` command, and providing a key=value pair:
-```
+
+```bash
 juju set-env noproxy=jujucharms.com
 ```
-In some cases it makes more sense to add these values explicity by editing the 
-"~/.juju/environments.yaml" file, as not all values can successfully be applied
-to a running environment.
 
-!!! Note: Juju does not currently check that the provided key is actually a
-valid setting, so make sure you spell it correctly.
+Some values will need to be specified via the environments.yaml file, as not
+all values can be applied to a running environment.
+
+!!! Note: Juju does not currently check that the provided key is a valid
+setting, so make sure you spell it correctly.
 
 
 ## Apt mirror
 
-The apt packaging system is used extensively to install and upgrade software on 
-machines provisioned in the environment, and many charms also use apt to 
-install the latest versions of services they deploy.
-It is possible to set a specific mirror for the apt packages to use, by settting
-"apt-mirror" in the environments.yaml file or directly in a running environment:
+The APT packaging system is used to install and upgrade software on
+machines provisioned in the environment, and many charms also use APT to
+install software for the services they deploy. It is possible to set a
+specific mirror for the APT packages to use, by settting "apt-mirror" in the
+environments.yaml file or directly in a running environment:
 
-```
+```bash
 juju set-env apt-mirror=http://archive.ubuntu.com/ubuntu/
 ```
 
 It is also possible to set this to a local mirror if desired.
 
 You may also run:
-```
+
+```bash
 juju unset-env apt-mirror
 ```
 to restore the default behaviour in a running environment.
 
+
 ## Versions and Streams
 
-The ```agent-stream``` config option selects the versions of Juju which an
-environment can deploy and upgrade to. This defaults to "released", indicating
-that only the latest stable versions of Juju should be used, which is the 
-recommended setting.
+The ```agent-stream``` option selects the versions of Juju which an environment
+can deploy and upgrade to. This defaults to "released", indicating that only
+the latest stable versions of Juju should be used, which is the recommended
+setting.
 
-If you would prefer to run the upcoming stable release before it has been
-accepted you can set:
+To run the upcoming stable release (before it has passed the normal QA process)
+you can set:
 
-```
+```yaml
 agent-stream: proposed
 ```
-Alternatively, for testing purposes you can use the latest unstable version of
+
+Alternatively, for testing purposes, you can use the latest unstable version of
 Juju by setting:
-```
+
+```yaml
 agent-stream: devel
 ```
 
 ### Updating from versions prior to 1.21.1
 
 If you have an existing test environment using tools-metadata-url or
-agent-metadata-url to test proposed versions, you can still upgrade to 1.21.1+
-After you upgrade, you can update the environment to use the devel streams at 
+agent-metadata-url to test proposed versions, you can still upgrade to 1.21.1+.
+After you upgrade, you can update the environment to use the devel streams at
 the default stream location:
-```
+
+```bash
 juju unset-env agent-metadata-url
 juju set-env agent-stream=proposed
 ```
@@ -99,21 +106,24 @@ The Juju state server can be run in a mode tuned to be efficient on NUMA
 hardware. To enable this feature you should add the following to your
 environments.yaml file:
 
-```
+```yaml
 set-numa-control-policy: true
 ```
+
 It is not desirable to set this feature on hardware which is not NUMA
 compatible.
 
+
 ## Juju lifecycle and harvesting
 
-Juju keeps a model of what it thinks the running environment
-looks like, and based on that model, can harvest machines which it
-deems are no longer required. This can help reduce running costs and
-keep the environment 'tidy'.
+Juju keeps state on the running environment from which it builds a model.
+Based on that model, it can harvest machines which it deems are no longer
+required. This can help reduce running costs and keep the environment 'tidy'.
+Harvesting is guided by what "harvesting mode" has been set by the
+system administrator. 
 
 Before explaining the different modes, it is useful to understand how Juju
-percieves machines. As far as it is concerned, machines are in one of four 
+percieves machines. As far as it is concerned, machines are in one of four
 states:
 
 - **Alive:** The machine is running and being used.
@@ -130,9 +140,9 @@ machines from the environment
 - **None:** Using this method, Juju won't harvest any machines. This is the
 most conservative, and a good choice if you manage your machines
 using a separate process outside of Juju.
-- **Destroyed:** This is the default setting. Using this methodology, Juju will
-harvest only machine instances that are dead, and that Juju knows about. Unknown
-instances will not be harvested.
+- **Destroyed:** This is the default setting. Juju will harvest only machine
+instances that are dead, and that Juju knows about. Unknown instances will
+not be harvested.
 - **Unknown:** With this method, Juju will harvest only instances that Juju
 doesn't know about. Use this with caution in a mixed environment or one which 
 may contain multiple instances of Juju.
@@ -142,10 +152,12 @@ This is a good option if you are only utilizing Juju for your
 environment.
 
 The default mode can be overriden by setting the 
-```
+
+```yaml
 provisioner-harvest-mode:
 ```
 to any of the above values.
+
 
 ## Alphabetical list of general configuration values
 
@@ -212,5 +224,3 @@ These keys are now deprecated:
 |provisioner-safe-mode | Whether to run the provisioner in "destroyed" harvest mode (deprecated, superceded by provisioner-harvest-mode)|
 |tools-metadata-url | replaced by agent-metadata-url, see [release notes for 1.21.1](reference-release-notes.html)|
 |tools-stream | superceded by agent-stream |
-
-
