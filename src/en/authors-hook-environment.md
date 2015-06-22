@@ -479,3 +479,35 @@ relation-ids reverseproxy
 Note again that all commands that produce output accept `--format json` and
 `--format yaml`, and you may consider it smarter to use those for clarity's 
 sake than to depend on the default `smart` format.
+
+
+### status-set
+
+Introduced in version 1.24 of Juju, a new status mechanism allows Juju and its 
+charms to more accurately reflect their current status. This places the 
+responsibility on the charm to know its status, and set it accordingly using
+the `status-set` hook tool.
+This hook tool takes 2 arguments. The first is the status to report, which can 
+be one of the following:
+
+  - maintenance (the unit is not currently providing a service, but expects to 
+    be soon, E.g. when first installing)
+  - blocked (the unit cannot continue without user input)
+  - waiting (the unit itself is not in error and requires no intervention, 
+    but it is not currently in service as it depends on some external factor, 
+    e.g. a service to which it is related is not running)   
+  - active (This unit believes it is correctly offering all the services it is
+    primarily installed to provide)
+
+For more extensive explanations of these statuses, and other possible status
+values which may be set by Juju itself,
+[please see the status reference page](./reference-statuses)
+
+The second argument is a user-facing message, which will be displayed to any
+users viewing the status, and will also be visible in the status history. This
+can contain any useful information - in the case of a blocked status though
+the **status message should tell the user explicitly how to unblock the unit**,
+ 
+
+
+
