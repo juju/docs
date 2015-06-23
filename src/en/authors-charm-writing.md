@@ -159,7 +159,7 @@ later, and the interface name will be used by other charms which may want to
 relate to this one.
 
 Similarly we also need to provide a "requires" section. In this case we need a
-database. Checking out the metadata of the MySQL charm we can see that it
+database. Checking out the metadata of the charm for MySQL we can see that it
 provides this via the interface name "mysql", so we can use this name in our
 metadata.
 
@@ -306,12 +306,12 @@ version of the software.
 Also, you will notice that we have used the `juju-log` command and the 
 `status-set` command. These are helper commands for Juju hooks (known as
 "Hook tools") and you will find them covered in more detail
-[in the "how hooks are run" page](authors-hook-environment.html).
+in the ["how hooks are run" page](authors-hook-environment.html).
 
 The `status-set` command is used to update the status and message displayed by
 Juju when users run the `juju status` command to see what is going on in the 
 environment. There are a number of pre-defined statuses explained in more 
-detail [on the status reference page](reference-status.html). It is a good idea
+detail [status reference page](reference-status.html). It is a good idea
 to think about updating the status when significant events occur which have an
 effect on the operation of the service.
 
@@ -358,7 +358,7 @@ is another Juju Hook tool, which in this case fetches the named values from
 the corresponding hook on the service we are connecting to. Usually there will
 be some indication of what these values are, but you can always inspect the
 corresponding hooks to find out. In this case we know that when connected, the 
-MySQL charm will create a database and generate random values for things like a
+'mysql' charm will create a database and generate random values for things like a
 username and password.
 
 Interfaces in general are determined by the consensus of the charms which use
