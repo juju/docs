@@ -304,11 +304,11 @@ cases, it is obviously always better to point to a specific, permanent link to a
 version of the software.
 
 Also, you will notice that we have used the `juju-log` command and the 
-`set-status` command. These are helper commands for Juju hooks (known as
+`status-set` command. These are helper commands for Juju hooks (known as
 "Hook tools") and you will find them covered in more detail
 [in the "how hooks are run" page](authors-hook-environment.html).
 
-The `set-status` command is used to update the status and message displayed by
+The `status-set` command is used to update the status and message displayed by
 Juju when users run the `juju status` command to see what is going on in the 
 environment. There are a number of pre-defined statuses explained in more 
 detail [on the status reference page](reference-status.html). It is a good idea
