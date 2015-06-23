@@ -90,6 +90,7 @@
               <li class="sub"><a href="reference-environment-variables.html">Juju environment variables</a></li>
               <li class="sub"><a href="reference-releases.html">Releases</a></li>
               <li class="sub"><a href="reference-release-notes.html">Release notes</a></li>
+              <li class="sub"><a href="reference-status.html">Status values</a></li>
               <li class="sub"><a href="glossary.html">Glossary</a></li>
               <li class="sub"><a href="reference-reviewers.html">Charm Review Criteria</a></li>
               <li class="sub"><a href="contributing.html">Contribute to the Docs!</a></li>

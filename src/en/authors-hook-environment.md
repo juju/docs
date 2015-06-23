@@ -32,9 +32,11 @@ The following variables are always available.
   - The `$CHARM_DIR` variable is the path to the charm directory.
   - The `$PATH` variable is prefixed with the path to the hook tools directory.
   - The `$JUJU_UNIT_NAME` variable holds the name of the unit.
-  - The `$JUJU_API_ADDRESSES` variable holds a space-separated list of API server addresses.
+  - The `$JUJU_API_ADDRESSES` variable holds a space-separated list of API 
+    server addresses.
   - The `$JUJU_AVAILABILITY_ZONE` variable holds the current availability zone
-the charm is running in (not all cloud providers support Availability Zones).
+    the charm is running in (not all cloud providers support Availability 
+    Zones).
    
 In addition, every relation hook makes available relation-specific variables:
 
@@ -46,7 +48,8 @@ In addition, every relation hook makes available relation-specific variables:
   important, because it's the only reasonable way of telling the difference
   between (say) a database service's many independent clients.
 
-...and, if that relation hook is not a [-broken](authors-charm-hooks.html#[name]-relation-broken) hook:
+...and, if that relation hook is not a 
+[-broken](authors-charm-hooks.html#[name]-relation-broken) hook:
 
   - The `$JUJU_REMOTE_UNIT` variable holds the name of the unit which is
   being reported to have -joined, -changed, or -departed.
@@ -412,11 +415,12 @@ sufficient to complete all configuration that depends on remote unit settings.
 Settings for remote units already known to have departed remain accessible for
 the lifetime of the relation.
 
-!!! Note: `relation-get` currently has a [bug](https://bugs.launchpad.net/juju-core/+bug/1223339)
+!!! Note: `relation-get` currently has a
+[bug](https://bugs.launchpad.net/juju-core/+bug/1223339)
 that allows units of the same service to see each other's
-settings outside of a peer relation. Depending on this behaviour is foolish in
-the extreme: if you need to share settings between units of the same service,
-always use a peer relation to do so, or you may be seriously inconvenienced when
+settings outside of a peer relation. Depending on this behaviour inadvisable: if
+you need to share settings between units of the same service, always use a peer
+relation to do so, or you may be seriously inconvenienced when
 the hole is closed without notice.
 
 ### relation-list
@@ -501,13 +505,67 @@ be one of the following:
 
 For more extensive explanations of these statuses, and other possible status
 values which may be set by Juju itself,
-[please see the status reference page](./reference-statuses)
+[please see the status reference page](./reference-status.html).
 
 The second argument is a user-facing message, which will be displayed to any
 users viewing the status, and will also be visible in the status history. This
-can contain any useful information - in the case of a blocked status though
-the **status message should tell the user explicitly how to unblock the unit**,
- 
+can contain any useful information - 
+
+This status message provides valuable feedback to the user about what is
+happening. Changes in the status message are not broadcast to peers and
+counterpart units - they are for the benefit of humans only, so tools
+representing Juju services should ask occasionally and be told the current
+status message.
+
+Spamming the status with many changes per second would not be welcome
+(and might be throttled by the state server). Nevertheless, a thoughtful charm
+will provide appropriate and timely feedback for human users, with estimated
+times of completion of long-running status changes, for example.
+
+In the case of a `blocked` status though the **status message should tell the
+user explicitly how to unblock the unit** insofar as possible, as this is
+primary way of indicating any action to be taken (and may be surfaced by other
+tools using Juju, e.g. the Juju GUI).
+
+A unit in the `active` state with should not generally expect anyone to look at
+its status message, and often it is better not to set one at all. In the event
+of a degradation of service, this is a good place to surface an explanation for
+the degradation (load, hardware failure or other issue).
+
+A unit in `error` state will have a message that is set by Juju and not the
+charm because the error state represents a crash in a charm hook - an unmanaged
+and uninterpretable situation. Juju will set the message to be a reflection of
+the hook which crashed. For example “Crashed installing the software” for an
+install hook crash, or “Crash establishing db link to postgres” for a crash in a
+relationship hook.
+
+
+Examples:
+
+```no-highlight
+status-set maintenance "installing software"
+status-set maintenance "formatting storage space, time left: 120s"
+status-set waiting "waiting for database"
+status-set active 
+status-set active "Storage 95% full"
+status-set blocked "Need a database relation"
+status-set blocked "Storage full"
+```
+
+### status-get
+
+The status-get hook tool allows a charm to query what is recorded in Juju as the
+current workload status. Without arguments, it just prints the workload status
+value eg maintenance. With `--include-data` specified, it prints YAML which 
+contains the status value plus any data associated with the status.
+
+Examples:
+
+```nohighlight
+status-get
+status-get --include-data
+```
+
 
 
 
