@@ -40,8 +40,7 @@ Windows
 
 ## Proposed
 
-Current proposed version is 1.22.5. This is an update to the older supported
-1.22.x version of Juju.
+Current proposed version is 1.22.6 and it was released.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
