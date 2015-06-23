@@ -509,13 +509,13 @@ values which may be set by Juju itself,
 
 The second argument is a user-facing message, which will be displayed to any
 users viewing the status, and will also be visible in the status history. This
-can contain any useful information - 
+can contain any useful information. 
 
 This status message provides valuable feedback to the user about what is
 happening. Changes in the status message are not broadcast to peers and
 counterpart units - they are for the benefit of humans only, so tools
-representing Juju services should ask occasionally and be told the current
-status message.
+representing Juju services (e.g. the Juju GUI) should check occasionally 
+and be told the current status message.
 
 Spamming the status with many changes per second would not be welcome
 (and might be throttled by the state server). Nevertheless, a thoughtful charm
@@ -536,9 +536,8 @@ A unit in `error` state will have a message that is set by Juju and not the
 charm because the error state represents a crash in a charm hook - an unmanaged
 and uninterpretable situation. Juju will set the message to be a reflection of
 the hook which crashed. For example “Crashed installing the software” for an
-install hook crash, or “Crash establishing db link to postgres” for a crash in a
+install hook crash, or “Crash establishing database link” for a crash in a
 relationship hook.
-
 
 Examples:
 
@@ -554,14 +553,14 @@ status-set blocked "Storage full"
 
 ### status-get
 
-The status-get hook tool allows a charm to query what is recorded in Juju as the
-current workload status. Without arguments, it just prints the workload status
-value eg maintenance. With `--include-data` specified, it prints YAML which 
-contains the status value plus any data associated with the status.
+The `status-get` hook tool allows a charm to query what is recorded in Juju as 
+the current workload status. Without arguments, it just prints the workload
+status value e.g. 'maintenance'. With `--include-data` specified, it prints
+YAML which contains the status value plus any data associated with the status.
 
 Examples:
 
-```nohighlight
+```no-highlight
 status-get
 status-get --include-data
 ```
