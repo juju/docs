@@ -7,6 +7,588 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.24.0
+
+  A new stable release of Juju, juju-core 1.24.0, is now available.
+  This release replaces version 1.23.3.
+
+
+  ## Getting Juju
+
+  juju-core 1.24.0 is available for vivid and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.24.0
+
+
+  ## Notable Changes
+
+    * VMWare (vSphere) Provider
+    * Resource Tagging (EC2, OpenStack)
+    * MAAS root-disk Constraint
+    * Service Status
+    * CentOS 7 Preview
+    * Storage (experimental)
+
+
+  ### VMWare (vSphere) Provider
+
+  Juju now supports VMWare's vSphere ("Software-Defined Data Center")
+  installations as a targetable cloud. It uses the vSphere API to interact
+  with the vCenter server. The vSphere provider uses the OVA images
+  provided by Ubuntu's official repository. API authentication
+  credentials, as well as other config options, must be added to your
+  environments.yaml file before running 'juju bootstrap'. The different
+  options are described below.
+
+  The basic config options in your environments.yaml will look like this:
+
+      my-vsphere:
+        type: vsphere
+        host: <192.168.1.10>
+        user: <some-user>
+        password: <some-password>
+        datacenter: <datacenter-name>
+        external-network: <external-network-name>
+
+  The values in angle brackets need to be replaced with your vSphere
+  information. 'host' must contain the IP address or DNS name of vSphere
+  API endpoint. 'user' and 'password' are fields that must contain your
+  vSphere user credentials. 'datacenter' field must contain the name of
+  your vSphere virtual datacenter. 'external-network' is an optional
+  field. If set, it must contain name of the network that will be used to
+  obtain public IP addresses for each virtual machine provisioned by juju.
+  An IP pool must be configured in this network and all available public
+  IP addresses must be added to this pool. For more information on IP
+  pools, see official documentation:
+
+      https://pubs.vmware.com/vsphere-51/index.jsp?topic=2Fcom.vmware.vsphere.vm_admin.doc%2FGUID-5B3AF10D-8E4A-403C-B6D1-91D9171A3371.html
+
+  NOTE that using the vSphere provider requires an existing vSphere
+  installation. Juju does not set up vSphere for you. The OVA images we
+  use support VMWare's Hardware Version 8 (or newer). This should not be a
+  problem for most vSphere installations.
+
+
+  ### Resource Tagging (EC2, OpenStack)
+
+  Juju now tags instances and volumes created by the EC2 and OpenStack
+  providers with the Juju environment UUID. Juju also adds any user-
+  specified tags set via the "resource-tags" environment setting. The
+  format of this setting is a space-separated list of key=value pairs:
+
+      resource-tags: key1=value1 [key2=value2 ...]
+
+  These tags may be used, for example, to set up chargeback accounting.
+  Any tags that Juju manages will be prefixed with "juju-"; users must
+  avoid modifying these.
+
+  Instances and volumes are now named consistently across EC2 and
+  OpenStack, using the scheme "juju-<env>-<resource-type>-<resource-
+  ID>", where <env> is the human-readable name of the environment as
+  specified in environments.yaml; <resource-type> is the type of the
+  resource ("machine" or "volume") and <resource-ID> is the numeric ID
+  of the Juju machine or volume corresponding to the IaaS resource.
+
+
+  ### MAAS root-disk Constraint
+
+  The MAAS provider now honours the root-disk constraint, if the targeted
+  MAAS supports disk constraints. Support for disk constraints was added
+  to MAAS 1.8.
+
+
+  ### Service Status
+
+  Juju provides new hooks for charm authors to report service status, and
+  'juju status' now includes the service status. This new functionality
+  allows charms to explicitly inform Juju of their status, rather than
+  Juju guessing. Charm authors have access to 2 new hook tools, and the
+  status report includes more information.
+
+  The 'status-set' hook tool allows a charm to report its status to Juju.
+  This is known as the workload status and is meant to reflect the state
+  of the software deployed by the charm. Charm authors are responsible for
+  setting the workload's status to "Active" when the charm is ready to run
+  its workload, and "Blocked" when it needs user intervention to resolve a
+  problem.
+
+      status-set:
+          status-set <maintenance | blocked | waiting | active> "message"
+
+  The 'status-get' hook tool allows a charm to query the current workload
+  status recorded in Juju. Without arguments, it just prints the workload
+  status value eg maintenance. With '--include-data' specified, it prints
+  YAML which contains the status value plus any data associated with the
+  status.
+
+      status-get:
+          status-get [--include-data]
+
+  Charms that do not make use of these hook tools will still work as
+  before, but Juju will not provide details about the workload status.
+
+  The above commands set the status of the individual units. Unit
+  leaders may also set and get the status of the service to which they
+  belong:
+
+  print the status of all units of the service and the service itself:
+  status-get --service
+
+  set the status of the service:
+  status-set --service <maintenance | blocked | waiting | active> "message" 
+
+  The 'juju status' command includes the 'workload-status' and
+  'service-status' in the report. for example:
+
+      services:
+       ...
+        wordpress:
+          charm: local:trusty/wordpress-93
+          exposed: false
+          service-status:                    <-- new service status
+            current: blocked
+            message: Waiting for database
+            since: 01 May 2015 17:39:38 AEST
+          relations:
+            loadbalancer:
+            - wordpress
+          units:
+            wordpress/0:
+              workload-status:                <-- new workload status
+                current: blocked
+                message: Waiting for database
+                since: 01 May 2015 17:39:38 AEST
+              agent-status:                   <-- new agent status
+                current: idle
+                since: 01 May 2015 17:39:44 AEST
+                version: 1.24-alpha1.1
+              agent-state: started            <-- legacy Juju agent state
+              agent-version: 1.24-alpha1.1
+              machine: "1"
+              open-ports:
+              - 80/tcp
+              public-address: 23.20.250.14
+
+  Juju aggregates all the unit 'workload-status' values to represent the
+  'service-status'. The 'service-status' value is derived from the worst
+  case status of all the units; eg. if any unit is in error, then the
+  service is in error.
+
+  The 'status' command will use a table layout in the future, and you can
+  set the environmental variable 'JUJU_CLI_VERSION' to "2" to see it like
+  so:
+
+      export JUJU_CLI_VERSION=2
+      juju status
+
+      NAME       STATUS  EXPOSED CHARM                      
+      mysql      unknown false   local:trusty/mysql-326     
+      wordpress  blocked false   local:trusty/wordpress-93  
+
+  The legacy status values are omitted from output. You can use the
+  '--yaml' option to see status in the Juju 1.x layout.
+
+  Juju also records a history of status changes for a unit, and tracks the
+  time when the status was last updated. The 'juju status-history' command
+  allows you to inspect a charm's status changes over time
+
+      juju status-history [options] [-n N] <unit>
+
+      options:
+      -e, --environment (= "")
+         juju environment to operate in
+      -n  (= 20)
+         size of logs backlog.
+      --type (= "combined")
+         type of statuses to be displayed [agent|workload|combined].
+      --utc  (= false)
+         display time as UTC in RFC3339 format
+
+      This command will report the history of status changes for
+      a given unit.
+      The statuses for the unit workload and/or agent are available.
+      -type supports:
+         agent: will show statuses for the unit's agent
+         workload: will show statuses for the unit's workload
+         combined: will show agent and workload statuses combined
+      and sorted by time of occurrence.
+
+  For example, to see the history of the unit wordpress/0
+
+      juju status-history wordpress/0
+
+      TIME                       TYPE     STATUS       MESSAGE
+      01 May 2015 17:33:20+06:00  workload  unknown      Waiting for agent initialization to finish
+      01 May 2015 17:33:20+06:00  agent     allocating
+      01 May 2015 17:36:37+06:00  agent     executing    running install hook
+      01 May 2015 17:36:37+06:00  workload  maintenance  installing charm software
+      01 May 2015 17:36:38+06:00  workload  maintenance  installing dependencies
+      01 May 2015 17:39:11+06:00  workload  maintenance  installing components
+      01 May 2015 17:39:18+06:00  agent     executing    running leader-elected hook
+      01 May 2015 17:39:18+06:00  agent     executing    running config-changed hook
+      01 May 2015 17:39:19+06:00  workload  maintenance  configuring nginx
+      01 May 2015 17:39:34+06:00  workload  maintenance  restarting services
+      01 May 2015 17:39:38+06:00  workload  blocked      Waiting for database
+      01 May 2015 17:39:39+06:00  agent     executing    running start hook
+      01 May 2015 17:39:44+06:00  agent     idle
+
+
+  ### CentOS 7 Preview
+
+  Juju 1.24.0 has initial CentOS support. This is experimental and has a
+  number of known issues. However, most of the functionality of Juju
+  should be there and ready to be used and tested. CentOS should be
+  deployable on any cloud that supports cloud-init in it's CentOS
+  images. It is possible to use CentOS as both a state machine (taking
+  the limitations at the bottom into account) and as a normal machine.
+
+  Deploying a charm on CentOS is no different than deploying one on
+  Ubuntu or Windows. The only thing that needs to change is the series
+  which is "centos7". For example, from Launchpad:
+
+      juju deploy lp:~me/centos7/charm
+
+  or Locally:
+
+      juju deploy --repository=/home/user/charms local:centos7/charm
+
+  However there are no charms currently available for CentOS. The
+  process or writing one should be no different from the Ubuntu charms
+  besides keeping in mind the fact that one shouldn't use Ubuntu
+  specific calls (such as apt).
+
+  There is a guide for setting up a MaaS environment using CentOS at
+
+      http://wiki.cloudbase.it/juju-centos
+
+
+  Note that Centos 7 agents are already in streams. There is no need
+  install Go, compile, tar, and running juju metadata. You can sync the
+  streams to a web server visible to your Juju environment.
+
+      mkdir local
+      juju sync-tools --local-dir local
+      cp -r local/tools <path/to/webserver>
+
+
+  Some of the known issues are:
+
+    * Containers are not yet supported
+
+    * There is a lack of mongo tools at the moment so any functionality
+      depending on those is not available(for example backups)
+
+    * There is no way to currently specify a proxy or mirror for yum in
+      the environment configuration. The values that you specific for apt
+      packages will be used for yum packages as well. This limitation
+      will be fixed as soon as possible.
+
+
+  ### Storage (experimental)
+
+  Juju now models storage, charms can request storage (volumes and
+  filesystems), and you can specify constraints on how to satisfy those
+  requests (which provider, what options, how large, how many).
+
+  Initially, Juju supports native volumes for the EC2 (EBS) and
+  OpenStack (Cinder), and MAAS providers. Juju also supports several
+  cloud-independent storage providers: tmpfs, loop (loop devices), root
+  filesystem. Future versions of Juju will extend this set with
+  providers for Ceph, NFS, and others.
+
+  The storage feature is experimental: it has some known caveats, and has
+  not yet been battle hardened. Instructions on use and caveats are
+  documented at https://jujucharms.com/docs/devel/wip-storage.
+
+
+  ### Storage (experimental) MAAS Provider Support
+
+  The MAAS provider now supports storage. Storage directives are used to
+  select machines which have the requisite number and size of volumes
+  available on the machine (usually physical volumes such as SSD or
+  magnetic drives).
+
+  Storage pools may be created to select volumes with specified tags.
+
+      juju storage create pool maas-ssd maas tags=ssd
+
+  The above creates a pool called "maas-ssd" and when used, will select
+  volumes tagged in MAAS with the "ssd" tag. Tags may be a comma separated
+  list.
+
+  Then to deploy a charm:
+
+      juju deploy mycharm --storage data=maas-ssd,50G
+
+  The above deploys a charm to a MAAS machine with the data store mounted
+  on a volume at least 50GiB in size with the tag "ssd".
+
+  It is also possible to specify the size of the root-disk using the root
+  disk constraint. This works the same way as for the AWS provider
+
+      juju deploy mysql --constraints root-disk=50G
+
+  Storage directives and root disk constraints may be combined.
+
+      juju deploy mysql --constraints root-disk=50G --storage data=maas-ssd,500G
+
+  NOTE: the root disk support has only just landed in MAAS trunk.
+  the Juju/MAAS storage support has been smoke tested using the NEC
+  MAAS test lab. It needs much more extensive testing!
+
+  NOTE: when using MAAS which does not support storage, if MAAS storage is
+  requested, an error is returned and the node is cleaned up.
+
+  The storage feature is experimental: it has some known caveats, and has
+  not yet been battle hardened. Instructions on use and caveats are
+  documented at https://jujucharms.com/docs/devel/wip-storage.
+
+
+  ### Storage (experimental) Unit Placement
+
+  It is now possible to deploy units with storage to existing machines.
+  This applies when using storage that is dynamically created, such as
+  EBS/Cinder volumes, loop devices, TMPFS, rootfs. It can't be used with
+  machine volumes on MAAS, but can be used to deploy charms to an existing
+  MAAS machine if a dynamic storage source is specified. eg.
+
+      juju deploy charm --to 2 --storage data=loop,2G
+
+  An Openstack deployment example:
+
+      juju deploy charm --to 2 --storage data=cinder,2G
+
+
+  ## Resolved issues
+
+    * Deploying into kvm with local provider, hostnames are not unique
+      Lp 1326091
+
+    * Juju status complains "config has no uuid" when no .jenv is
+      present
+      Lp 1436925
+
+    * Agent panic on maas network with uppercase characters
+      Lp 1446608
+
+    * Debug-log spammed with leader-election messages
+      Lp 1437015
+
+    * Eu-central-1 aws region v4 signing required and not supported
+      Lp 1447841
+
+    * Environment variables are not propagated to jujud on vivid
+      Lp 1449436
+
+    * Rsyslog-gnutls is not installed when enable-os-refresh-update is
+      false
+      Lp 1424892
+
+    * Juju stop responding after juju-upgrade
+      Lp 1438489
+
+    * Jujud won't start if apt-get of juju-mongodb package fails
+      Lp 1441904
+
+    * Juju cli compatibility option
+      Lp 1450701
+
+    * Upgrade from 1.18 to 1.23 fails: password for machine agent can't
+      be set
+      Lp 1451297
+
+    * Broken db field ordering when upgrading to juju compiled with go
+      1.3+
+      Lp 1451674
+
+    * Log files are lost when agents are restarted under systemd
+      Lp 1452113
+
+    * Worker/uniter: charm does not install properly if storage isn't
+      provisioned before uniter starts
+      Lp 1452207
+
+    * Jujud does not restart after upgrade-juju on systemd hosts
+      Lp 1452511
+
+    * Maas provider chokes on unexpected device labels
+      Lp 1452725
+
+    * Juju 1.23-beta4 introduces ssh key bug when used w/ dhx
+      Lp 1444861
+
+    * Retry-provisioning launches instances for containers; cannot retry
+      containers at all
+      Lp 1428439
+
+    * Debug-hooks exit 1 , doesn't mark hook as failed
+      Lp 1415176
+
+    * Default storage constraints are not quite correct
+      Lp 1452535
+
+    * Maas: implement root-disk constraint
+      Lp 1212689
+
+    * Juju upgrade-juju failed to configure mongodb replicasets
+      Lp 1441913
+
+    * Provider/openstack: volumes are recorded with 0 size
+      Lp 1450740
+
+    * Persist iptables rules / routes for addressable containers across
+      host reboots
+      Lp 1442012
+
+    * Deployer sometimes fails with a unit status not found error
+      Lp 1451283
+
+    * Logs don't rotate
+      Lp 1452285
+
+    * Collect-metric hook failure, metric batch uuid already exists
+      Lp 1452487
+
+    * Juju machine service for windows creates incorrect tools symlinks
+      Lp 1453280
+
+    * /var/spool/rsyslog grows without bound
+      Lp 1453801
+
+    * Instancepoller compares wrong address list and always requests
+      updated state addresses
+      Lp 1454043
+
+      * Agents see "too many open files" errors after many failed api
+      attempts
+      Lp 1420057
+
+    * Container destruction doesn't mark ip addresses as dead
+      Lp 1441206
+
+    * Debug-hooks not working with manually provisioned machines
+      Lp 1429790
+
+    * Joyent machines get stuck in provisioning
+      Lp 1446264
+
+    * Cannot process charms: finding charm revision info: cannot get
+      metadata from the charm store: verification failed: no macaroon
+      cookies in request
+      Lp 1453238
+
+    * Juju log spams error juju.worker.diskmanager lsblk.go:111 error
+      checking if "sr0" is in use: open /dev/sr0: no medium found
+      Lp 1454481
+
+    * Failed to retrieve the template to clone - 500 internal server
+      error - error creating container juju-trusty-lxc-template -
+      Lp 1454676
+
+    * 1.20.x client cannot communicate with 1.22.x env
+      Lp 1454829
+
+    * Received disconnect from ...: 2: too many authentication failures
+      for ubuntu
+      Lp 1456315
+
+      * Lxc network.mtu setting not set consistently across hosts
+      Lp 1442257
+
+    * Transaction collection (txns) grows without bound
+      Lp 1453785
+
+    * Firewaller gets an exception if a machine is not provisioned
+      Lp 1454599
+
+    * Jujud leaking file handles
+      Lp 1454697
+
+    * Destroying a machine with a placed unit errors then destroys
+      anyway.
+      Lp 1455158
+
+     * Intermittent panic: rescanned document
+      Lp 1449054
+
+    * `juju upgrade-juju --upload-tools` leaves local environment
+      unusable
+      Lp 1457728
+
+    * warning: log line attempted over max size - leadership related
+      Lp 1457645
+
+    * Debug-log eof: invalid tag and panic seen in state server logs
+      Lp 1461354
+
+    * Juju has conf files in /var/log/juju on instances
+      Lp 1370896
+
+    * Juju restore fails with "/var/lib/juju/agents: no such file or
+      directory"
+      Lp 1431372
+
+    * Cannot destroy-environment with 'juju user add' .jenv file
+      Lp 1403165
+
+    * Juju cannot create vivid containers
+      Lp 1442308
+
+    * State: availability zone upgrade fails if containers are present
+      Lp 1441478
+
+    * 1.23.2.1, mongo: document is larger than capped size
+      Lp 1454891
+
+    * "relation-set --file -" doesn't seem to work
+      Lp 1454678
+
+    * Maas provider doesn't know about "failed deployment" instance
+      status
+      Lp 1376246
+
+    * Juju status --utc does not display utc and is confused
+      Lp 1459611
+
+    * Juju agent opens api when upgrade is pending
+      Lp 1459912
+
+    * 'juju status' wall clock timestamps should display offset not tz
+      abbrev
+      Lp 1459616
+
+    * Harvest mode setting not used by container provisioner
+      Lp 1459885
+
+    * Allow status-set/get to a service by its leader unit
+      Lp 1461111
+
+    * Unit storage add should only accept count as constraint
+      Lp 1461342
+
+    * Golang.org/x/sys/windows requires go 1.4
+      Lp 1463439
+
+    * Erroneous juju user data on windows for juju version 1.23
+      Lp 1451626
+
+    * Cmd/juju/storage: "add" fails to dynamically add filesystem for
+      storage
+      Lp 1462146
+
+    * Worker/diskmanager sometimes goes into a restart loop due to
+      failing to update state
+      Lp 1461871
+
+    * Juju 1.24-beta6.1 unit commands in debug-hooks hang indefinitely
+      Lp 1463117
+
+
 ^# juju-core 1.23.3
 
   A new stable stable release of Juju, juju-core 1.23.3, is now available.
@@ -18,15 +600,11 @@ The versions covered here are:
   juju-core 1.23.3 is available for vivid and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   Windows and OS X users will find installers at:
 
-  ```
   https://launchpad.net/juju-core/+milestone/1.23.3
-  ```
 
 
   ## Notable Changes
@@ -71,24 +649,20 @@ The versions covered here are:
 
 ^# juju-core 1.23.2
 
-A new stable release of Juju, juju-core 1.23.2, is now available.
-This release replaces version 1.22.1.
+  A new stable release of Juju, juju-core 1.23.2, is now available.
+  This release replaces version 1.22.1.
 
-
-## Getting Juju
+  ## Getting Juju
 
   juju-core 1.23.2 is available for vivid and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   Windows and OS X users will find installers at:
 
-  ```
   https://launchpad.net/juju-core/+milestone/1.23.2
-  ```
+
 
   ## Notable Changes
 
@@ -113,13 +687,15 @@ This release replaces version 1.22.1.
 
   The basic config options in your environments.yaml will look like this:
 
-      my-gce:
-       type: gce
-       project-id: <your-project-id>
-       auth-file: <path-to-json-file-from-google>
-       private-key: <your-private-key>
-       client-email: <your-client-email>
-       client-id: <your-client-id>
+  ```yaml
+  my-gce:
+   type: gce
+   project-id: <your-project-id>
+   auth-file: <path-to-json-file-from-google>
+   private-key: <your-private-key>
+   client-email: <your-client-email>
+   client-id: <your-client-id>
+  ```
 
   The values in angle brackets need to be replaced with your GCE
   information.
@@ -140,9 +716,7 @@ This release replaces version 1.22.1.
   have created your project, download the file by pressing the
   'Generate new JSON key' button in the 'Service Account' section of
 
-  ```
   https://console.developers.google.com/project/<project-id>/apiui/credential
-  ```
 
   If necessary, instead of 'auth-file' you may set the 'private-key',
   'client-email', and 'client-id' fields in your environments.yaml.  They
@@ -156,7 +730,6 @@ This release replaces version 1.22.1.
   does so with the proper authentication scope.
 
   For more information please refer to
-
   
   https://developers.google.com/accounts/docs/OAuth2ServiceAccount#creatinganaccount
   
@@ -168,24 +741,20 @@ This release replaces version 1.22.1.
   If the project's service account has any permissions problems go to the
   following page to fix them:
 
-  ```
   https://console.developers.google.com/project/<project-id>/permissions
-  ```
+  
   (remember to insert the *project id*)
 
   The GCE API should already be activated for the project. It it isn't,
   go to the following URL in your console:
-
-  ```
+ 
   https://console.developers.google.com/project/<project-name>/apiui/api
-  ```
+
   (insert the *project name*)
 
   Also see step 2 on
-
   
   https://cloud.google.com/compute/docs/api/how-tos/authorization.
-  
 
   The following config options in your environments.yaml file are
   optional:
@@ -220,7 +789,7 @@ This release replaces version 1.22.1.
   backups create' command. You can restore from a local backup file like
   so:
 
-  ```
+  ```bash
   juju backups restore [-b] --file <backup file>
   ```
 
@@ -230,14 +799,14 @@ This release replaces version 1.22.1.
 
   You can also restore from a backup stored on the state-server:
 
-  ```
+  ```bash
   juju backups restore --id <on server backup id>
   ```
 
   To obtain a list of the existing backups in the state-server you can
   use:
 
-  ```
+  ```bash
   juju backups list
   ```
 
@@ -290,16 +859,20 @@ This release replaces version 1.22.1.
   You can now specify block message when you enable a block. For example,
   you can add a message to 'destroy-environment':
 
-      juju block destroy-environment "Don't destroy this environment"
-      juju destroy-environment
-      ERROR Don't destroy this environment
+  ```bash
+  juju block destroy-environment "Don't destroy this environment"
+  juju destroy-environment
+  ERROR Don't destroy this environment
+  ```
 
   You can list the blocks enabled in the environment like so:
 
-      juju block list
-      destroy-environment=on, Don't destroy this environment
-      remove-object=off
-      all-changes=off
+  ```no-highlight
+  juju block list
+  destroy-environment=on, Don't destroy this environment
+  remove-object=off
+  all-changes=off
+  ```
 
   The Multiwatcher now has information about blocks. There is now block
   client capable of switching blocks on/off as well as listing all enabled
@@ -313,15 +886,19 @@ This release replaces version 1.22.1.
 
   Charms now have access to three new hook tools:
 
-      is-leader - returns true only if the executing unit is guaranteed
-        service leadership for the next 30s
-      leader-get - as relation-get; accessible only within the service
-      leader-set - as relation-set; will fail if not executed on leader
+  ```no-highlight
+  is-leader - returns true only if the executing unit is guaranteed
+    service leadership for the next 30s
+  leader-get - as relation-get; accessible only within the service
+  leader-set - as relation-set; will fail if not executed on leader
+  ```
 
   ...and two new hooks:
 
-      leader-elected - runs when the unit takes service leadership
-      leader-settings-changed - runs when another unit runs leader-set
+  ```no-highlight
+  leader-elected - runs when the unit takes service leadership
+  leader-settings-changed - runs when another unit runs leader-set
+  ```
 
   When a unit starts up, it will always run either leader-elected or
   leader-settings-changed as soon as possible, delaying only doing so only
@@ -336,18 +913,22 @@ This release replaces version 1.22.1.
   Machines will be given statically allocated private IP addresses from
   the same subnet as their host machine. For example on MAAS you can now:
 
-      juju deploy wordpress --to lxc:0
-      juju add-unit mysql --to kvm:1
+  ```bash
+  juju deploy wordpress --to lxc:0
+  juju add-unit mysql --to kvm:1
+  ```
 
   This experimental feature can be enabled when the environment is
   bootstrapped like so:
 
-      JUJU_DEV_FEATURE_FLAGS="address-allocation" juju bootstrap
+  ```no-highlight
+  JUJU_DEV_FEATURE_FLAGS="address-allocation" juju bootstrap
+  ```
    
   Known limitations: 
 
     * Amazon limits the number of addresses the containers an instance can
-      have based on it’s size. 
+      have based on its size. 
     * Statically allocated addresses are not released on container shutdown. 
     * Container addressability does not survive a host reboot. 
     * No public IP address is added on AWS, and we don’t yet support
@@ -440,9 +1021,7 @@ This release replaces version 1.22.1.
   juju-core 1.22.1 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   ## Notable Changes
 
@@ -459,26 +1038,20 @@ This release replaces version 1.22.1.
 
   You can switch back to upstart, as explained at:
 
-  ```
   https://wiki.ubuntu.com/SystemdForUpstartUsers
-  ```
 
   Alternatively you can run Ubuntu Trusty inside a KVM or Docker running
   on your localhost. Many charm authors prefer to use Vagrant for
   development to separate the Juju from their localhost. We provide Juju
   Vagrant boxes:
 
-  ```
   https://jujucharms.com/docs/stable/config-vagrant
-  ```
 
   The Juju (1.23.x) will support systemd on Vivid. You can test and
   develop using the local-provider. 1.23.x will first be available via
   the official stable PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   And will appear in the release shortly thereafter. 
 
@@ -519,15 +1092,11 @@ This release replaces version 1.22.1.
   juju-core 1.22.0 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   Windows and OS X users will find installers at:
 
-  ```
   https://launchpad.net/juju-core/+milestone/1.22.0
-  ```
 
 
   ## Notable Changes
@@ -555,14 +1124,18 @@ This release replaces version 1.22.1.
   The 'destroy-environment' level blocks just the 'destroy-environment'
   command. You can prevent an environment from being destroyed like this:
 
-      juju block destroy-environment
+  ```bash
+  juju block destroy-environment
+  ```
 
   The 'remove-object' level blocks the 'destroy-environment',
   'remove-machine', 'remove-relation', 'remove-service', and 'remove-unit'
   commands from being run. You can prevent the machines, services, units
   and relations from being removed thusly:
 
-      juju block remove-object
+  ```bash
+  juju block remove-object
+  ```
 
   The 'all-changes' level blocks commands that add, alter, or remove
   things in the running environment. These commands are blocked:
@@ -575,14 +1148,18 @@ This release replaces version 1.22.1.
   'user add', 'user change-password', 'user disable', and 'user enable'
   You can lockdown the environment to prevent all changes like this:
 
-      juju block all-changes
+  ```bash
+  juju block all-changes
+  ```
 
   When a command is blocked, and you are certain you need to alter the
   environment, you can remove the block using the 'unblock' command. For
   example, to permit the remove-relation command blocked by the
   'remove-object' level, run:
 
-      juju unblock remove-object
+  ```bash
+  juju unblock remove-object
+  ```
 
   You can restore the block after you complete your changes.
 
@@ -619,15 +1196,21 @@ This release replaces version 1.22.1.
 
   To see all cached images, run:
 
-      juju cached-images list
+  ```bash
+  juju cached-images list
+  ```
 
   Or to see just the amd64 trusty images run:
 
-      juju cached-images list --series trusty --arch amd64
+  ```bash
+  juju cached-images list --series trusty --arch amd64
+  ```
 
   To delete the amd64 trusty cached images run:
 
-    juju cache-images delete --series trusty --arch amd64
+  ```bash
+  juju cache-images delete --series trusty --arch amd64
+  ```
 
   Future development work will allow Juju to automatically download new
   LXC images when they becomes available, but for now, the only way update
@@ -646,23 +1229,31 @@ This release replaces version 1.22.1.
 
   You can create a backup like this:
 
-      juju backups create
+  ```bash
+  juju backups create
+  ```
 
   Backups are kept on the state-server by default, but you can use the
   'download' and 'upload' subcommands to move backups between locations.
 
-      juju backups download <id>
-      juju backups upload <filename>
+  ```bash
+  juju backups download <id>
+  juju backups upload <filename>
+  ```
 
   You can list the backups and see info about a specific backup using
   these subcommands:
 
-      juju backups list
-      juju backups info <id>
+  ```bash
+  juju backups list
+  juju backups info <id>
+  ```
 
   You can remove unwanted backups like this:
 
-      juju backups remove <id>
+  ```bash
+  juju backups remove <id>
+  ```
 
   The juju 'restore' command is unchanged. You can learn more about
   backups by reading the details of 'juju help backups'.
@@ -697,17 +1288,19 @@ This release replaces version 1.22.1.
 
   Deploying Windows charms is just the same as it is for Ubuntu:
 
-      juju deploy lp:~me/win2012r2/my-charm
+  ```bash
+  juju deploy lp:~me/win2012r2/my-charm
+  ```
 
   or from a local repository
 
-      juju deploy --repository=/home/me/charms local:win2012r2/my-charm
+  ```bash
+  juju deploy --repository=/home/me/charms local:win2012r2/my-charm
+  ```
 
   A Juju charm boilerplate is available:
 
-      ```
       https://github.com/cloudbase/windows-charms-boilerplate
-      ```
 
   Powershell is the language of choice when writing Juju charms for
   Windows, as it is tightly coupled to Windows automation. You may use any
@@ -739,9 +1332,7 @@ This release replaces version 1.22.1.
   services. For public clouds which run KVM/Hyper-V and have one of the
   supported metadata services in cloudbase-init, there is a downloadable:
 
-      ```
       http://www.cloudbase.it/ws2012r2/
-      ```
 
   You need to upload custom images. So roughly, the steps would be:
 
@@ -760,9 +1351,7 @@ This release replaces version 1.22.1.
   image formats other then vhdx or qcow2, you can generate your own image
   using the following tools:
 
-      ```
       https://github.com/cloudbase/windows-openstack-imaging-tools
-      ```
 
   Current Windows limitations:
 
@@ -793,39 +1382,44 @@ This release replaces version 1.22.1.
 
   The SET annotations call takes this form:
 
-      {
-          "Type": "Annotations",
-          "Request": "Set",
-          "Params": {
-               "Annotations": { {
-                   "EntityTag": a, "Annotations": pairs1
-                   },{
-                   "EntityTag": b, "Annotations": pairs2
-               } }
-      }
+  ```json
+  {
+      "Type": "Annotations",
+      "Request": "Set",
+      "Params": {
+	   "Annotations": { {
+	       "EntityTag": a, "Annotations": pairs1
+	       },{
+	       "EntityTag": b, "Annotations": pairs2
+	   } }
+  }
+  ```
 
   The corresponding GET annotations call takes this form:
 
-      {
-          "Type": "Annotations",
-          "Request": "Get",
-          "Params": {
-             "Entities": {
-                 {Entity {"Tag": a}},
-                 {Entity {"Tag": b},
-             }
-          }
+  ```json
+  {
+      "Type": "Annotations",
+      "Request": "Get",
+      "Params": {
+	 "Entities": {
+	     {Entity {"Tag": a}},
+	     {Entity {"Tag": b},
+	 }
       }
+  }
+  ```
 
   The GET response looks like this:
 
-      {
-          "Results": {
-              {"EntityTag": a, "Annotations": pairs1, "Error": nil},
-              {"EntityTag": b, "Annotations": pairs2, "Error": nil},
-
-          }
+  ```json
+  {
+      "Results": {
+	  {"EntityTag": a, "Annotations": pairs1, "Error": nil},
+	  {"EntityTag": b, "Annotations": pairs2, "Error": nil},
       }
+  }
+  ```
 
 
   ### Juju upgrade robustness
@@ -897,15 +1491,11 @@ This release replaces version 1.22.1.
   juju-core 1.21.3 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
   
   Windows and OS X users will find installers at:
   
-  ```
   https://launchpad.net/juju-core/+milestone/1.21.3
-  ```
   
   
   ## Notable Changes
@@ -964,6 +1554,64 @@ This release replaces version 1.22.1.
     Lp 1420306
 
 
+^# juju-core 1.22.5
+
+  A new stable release of Juju, juju-core 1.22.5, is now available.
+  This release replaces version 1.22.1.
+
+  Juju 1.22.x is an older supported version of juju. The current Juju
+  version is 1.23.3
+
+
+  ## Getting Juju
+
+  juju-core 1.22.5 is available for vivid and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/1.22
+
+  Windows and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.22.5
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Transaction collection (txns) grows without bound
+      Lp 1453785
+
+    * /var/spool/rsyslog grows without bound
+      Lp 1453801
+
+    * Instancepoller compares wrong address list and always requests
+      updated state addresses
+      Lp 1454043
+
+    * Firewaller gets an exception if a machine is not provisioned
+      Lp 1454599
+
+    * Jujud leaking file handles
+      Lp 1454697
+
+    * Agents see "too many open files" errors after many failed api
+      attempts
+      Lp 1420057
+
+    * 1.20.x client cannot communicate with 1.22.x env
+      Lp 1454829
+
+    * Intermittent panic: rescanned document
+      Lp 1449054
+
+    * Harvest mode setting not used by container provisioner
+      Lp 1459885
+
+
 ^# juju-core 1.21.1
 
   A new stable release of Juju, juju-core 1.21.1, is now available.
@@ -975,15 +1623,11 @@ This release replaces version 1.22.1.
   juju-core 1.21.1 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   Windows and OS X users will find installers at:
 
-  ```
   https://launchpad.net/juju-core/+milestone/1.21.1
-  ```
 
 
   ## Notable Changes
@@ -1031,7 +1675,9 @@ This release replaces version 1.22.1.
 
   Juju's harvesting behaviour is set through the environments.yaml file.
 
-      provisioner-harvest-mode: <MODE>
+  ```yaml
+  provisioner-harvest-mode: <MODE>
+  ```
 
   ```provisioner-harvest-mode``` replaces ```safe-mode```. Environments with
   ```safe-mode``` set will be converted to ```provisioner-harvest-mode``` when
@@ -1052,7 +1698,9 @@ This release replaces version 1.22.1.
   requires packages from the cloud tool's archive, you can use the
   ```target-release``` option to specify the archive to select:
 
-      apt-get --target-release precise-updates/cloud-tools my-package
+  ```bash
+  apt-get --target-release precise-updates/cloud-tools my-package
+  ```
 
 
   ### Configuring OS update and upgrade for faster provisioning
@@ -1072,15 +1720,18 @@ This release replaces version 1.22.1.
   You can configure the options in environments.yaml for fast provisioning
   like so:
 
-      enable-os-upgrade: false
-      enable-os-refresh-update: false
-
+  ```yaml
+  enable-os-upgrade: false
+  enable-os-refresh-update: false
+  ```
   The local provider skips apt upgrades by default for faster
   provisioning. If you wish to enable upgrades in your local
   development, set ```enable-os-upgrade``` to
   "true" in your environments.yaml:
 
-      enable-os-upgrade: true
+  ```yaml
+  enable-os-upgrade: true
+  ```
 
   If you are using the local-provider to develop charms or test, you
   will want to regularly purge the Juju template and LXC caches to
@@ -1088,8 +1739,10 @@ This release replaces version 1.22.1.
   testing a new trusty charm, you can remove the template and cloud
   image like this:
 
-      sudo lxc-destroy -n juju-trusty-lxc-template
-      sudo rm -r /var/cache/lxc/cloud-trusty
+  ```bash
+  sudo lxc-destroy -n juju-trusty-lxc-template
+  sudo rm -r /var/cache/lxc/cloud-trusty
+  ```
 
 
   ### Using daily image streams for faster provisioning
@@ -1101,8 +1754,9 @@ This release replaces version 1.22.1.
   existed since 1.18.0, it was not applied consistently to KVM containers.
   KVM containers will now use "daily" when environments.yaml is set to:
 
-      image-stream: daily
-
+  ```yaml
+  image-stream: daily
+  ```
 
   ### Selecting the agent stream to get alternate version of Juju
 
@@ -1112,12 +1766,16 @@ This release replaces version 1.22.1.
   the most stable versions of Juju. You can set ```agent-stream``` to
   select "devel" streams now to test the unstable versions of Juju:
 
-      agent-stream: devel
+  ```yaml
+  agent-stream: devel
+  ```
 
   You can evaluate the next stable version of Juju before it is the default
   version by selecting the "proposed" stream like this:
 
-      agent-stream: proposed
+  ```yaml
+  agent-stream: proposed
+  ```
 
   The ```tools-metadata-url``` was renamed to ```agent-metadata-url``` and it does
   not need to be set to get "devel" or "proposed". You can remove it from
@@ -1129,8 +1787,10 @@ This release replaces version 1.22.1.
   1.21.0. After you upgrade, you can update the environment to use the
   devel streams at the default stream location:
 
-      juju unset-env agent-metadata-url
-      juju set-env agent-stream=proposed
+  ```bash
+  juju unset-env agent-metadata-url
+  juju set-env agent-stream=proposed
+  ```
 
   Subsequent upgrades will "just work".
 
@@ -1141,7 +1801,9 @@ This release replaces version 1.22.1.
   state-server will be on a machine with NUMA support, you can set
   ```set-numa-control-policy``` to true in environments.yaml like this:
 
-      set-numa-control-policy: true
+  ```yaml
+  set-numa-control-policy: true
+  ```
 
   The default value is false.
 
@@ -1152,7 +1814,9 @@ This release replaces version 1.22.1.
   is managing the bridge and bringing networks up and down, set the
   ```disable-network-management``` option in environments.yaml to "true":
 
-      disable-network-management: true
+  ```yaml
+  disable-network-management: true
+  ```
 
   This tells Juju not to create a network bridge or to bring eth0
   up and down during cloud-init. Juju will not make changes to the
@@ -1179,12 +1843,16 @@ This release replaces version 1.22.1.
   Juju's ```add-machine``` command now accepts the "-n" option to add many
   machines. For example, to add two machines:
 
-      juju add-machine -n 2
+  ```bash
+  juju add-machine -n 2
+  ```
 
   The "-n" option can be combined with placement. You can add two LXC
   containers to machine 1 thusly:
 
-       juju add-machine lxc:1 -n 2
+  ```bash
+  juju add-machine lxc:1 -n 2
+  ```
 
 
   ### Choosing the nodes used to ensure high availability
@@ -1194,7 +1862,9 @@ This release replaces version 1.22.1.
   ```juju ensure-availability``` specify a comma separated list of machines to use
   for any newly required state servers. For example:
 
-      juju ensure-availability -n 3 --to name1,name2
+  ```bash
+  juju ensure-availability -n 3 --to name1,name2
+  ```
 
 
   ### Inspecting the API connection settings
@@ -1203,22 +1873,30 @@ This release replaces version 1.22.1.
   Juju state-server's API. You can see the settings for all the fields
   (except for password) like so:
 
-      juju api-info
+  ```bash
+  juju api-info
+  ```
 
   If you want to see the password being used, you need to either use the
   "--password" option:
 
-      juju api-info --password
+  ```bash
+  juju api-info --password
+  ```
 
   or specify the password field as the only field to show:
 
-      juju api-info password
+  ```bash
+  juju api-info password
+  ```
 
   You can learn the value of any field by including it in the command
   line. For example, to learn the name of user created during bootstrap,
   type:
 
-      juju api-info user
+  ```bash
+  juju api-info user
+  ```
 
 
   ### Managing who can connect to the Juju environment
@@ -1236,10 +1914,12 @@ This release replaces version 1.22.1.
   their own password.
 
   The user commands are grouped under the ```juju user``` command:
-
-      juju user
-      usage: juju user <command> ...
-      purpose: manage user accounts and access control
+ 
+  ```bash
+  juju user
+  usage: juju user <command> ...
+  purpose: manage user accounts and access control
+  ```
 
       "juju user" is used to manage the user accounts and access control
       in the Juju environment.
@@ -1256,13 +1936,18 @@ This release replaces version 1.22.1.
 
   You can add a user like this:
 
-      juju user add test "Test User"
+  ```bash
+  juju user add test "Test User"
+  ```
 
-      To generate a random strong password, use the --generate option.
-      password:
-      type password again:
-      user "Test User (test)" added
-      environment file written to /home/tim/some-dir/test.jenv
+  To generate a random strong password, use the --generate option.
+
+  ```bash
+  password:
+  type password again:
+  user "Test User (test)" added
+  environment file written to /home/tim/some-dir/test.jenv
+  ```
 
   The generated environment file still needs to be copied into the user's
   $JUJU_HOME/environments directory in order to be used. Future versions
@@ -1271,7 +1956,9 @@ This release replaces version 1.22.1.
   the user will probably want to rename it too. For example, an
   environment named app-stack will have an env named:
 
-      $JUJU_HOME/environments/app-stack.jenv
+  ```no-highlight
+  $JUJU_HOME/environments/app-stack.jenv
+  ```
 
   Juju will ask for a password to be typed in. If you'd prefer a strong
   random password, you can use the "--generate" option. You can also
@@ -1280,11 +1967,13 @@ This release replaces version 1.22.1.
   You can see which users have been created using the ```juju user list```
   command:
 
-      juju user list
-      NAME DISPLAY NAME DATE CREATED LAST CONNECTION
-      admin admin 23 minutes ago just now
-      test Test User 5 minutes ago never connected
-      thumper Tim 5 seconds ago never connected
+  ```bash
+  juju user list
+  NAME DISPLAY NAME DATE CREATED LAST CONNECTION
+  admin admin 23 minutes ago just now
+  test Test User 5 minutes ago never connected
+  thumper Tim 5 seconds ago never connected
+  ```
 
   The output of this command can also be in YAML or JSON using the usual
   "--format" options.
@@ -1292,15 +1981,17 @@ This release replaces version 1.22.1.
   Any user that is created will be able to access the environment. To
   stop this, you can disable the user.
 
-      juju user disable test
-      User "test" disabled
+  ```bash
+  juju user disable test
+  User "test" disabled
 
-      juju api-info user -e local-test
-      test
+  juju api-info user -e local-test
+  test
 
-      juju user info -e local-test
-      WARNING discarding API open error: environment "local-test" not found
-      ERROR invalid entity name or password
+  juju user info -e local-test
+  WARNING discarding API open error: environment "local-test" not found
+  ERROR invalid entity name or password
+  ```
 
   Unfortunately the warning there is due to legacy environment support
   that is checked as a fallback when the initial connection failed due to
@@ -1308,30 +1999,35 @@ This release replaces version 1.22.1.
 
   Disabled users are not shown by default with the listing:
 
-      juju user list
-      NAME DISPLAY NAME DATE CREATED LAST CONNECTION
-      admin admin 30 minutes ago just now
-      thumper Tim 6 minutes ago never connected
+  ```bash
+  juju user list
+  NAME DISPLAY NAME DATE CREATED LAST CONNECTION
+  admin admin 30 minutes ago just now
+  thumper Tim 6 minutes ago never connected
+  ```
 
   But they can be included with the '--all' option:
 
-      juju user list --all
-      NAME DISPLAY NAME DATE CREATED LAST CONNECTION
-      admin admin 32 minutes ago just now
-      test Test User 13 minutes ago 2 minutes ago (disabled)
-      thumper Tim 8 minutes ago never connected
+  ```bash
+  juju user list --all
+  NAME DISPLAY NAME DATE CREATED LAST CONNECTION
+  admin admin 32 minutes ago just now
+  test Test User 13 minutes ago 2 minutes ago (disabled)
+  thumper Tim 8 minutes ago never connected
+  ```
 
   Disabled users can be enabled again using the enable command:
 
-      juju user enable test
-      User "test" enabled
+  ```bash
+  juju user enable test
+  User "test" enabled
 
-      juju user info -e local-test
-      user-name: test
-      display-name: Test User
-      date-created: 14 minutes ago
-      last-connection: just now
-
+  juju user info -e local-test
+  user-name: test
+  display-name: Test User
+  date-created: 14 minutes ago
+  last-connection: just now
+  ```
 
   ### Upgrade robustness
 
@@ -1364,7 +2060,9 @@ This release replaces version 1.22.1.
   inside a charm hook. The reboot will only happen if the hook completes
   without error. You can schedule a reboot like so:
 
-      juju-reboot
+  ```bash
+  juju-reboot
+  ```
 
   The ```--now``` option can be passed to block hook execution. The
   ```juju-reboot``` command will hang until the unit agent stops the hook and
@@ -1378,11 +2076,13 @@ This release replaces version 1.22.1.
   "$FEATURE_IS_INSTALLED" variable was defined by a check for the feature,
   then 'juju-reboot' is called if the variable is false:
 
-      if [[ $FEATURE_IS_INSTALLED  == "false" ]]
-      then
-          install_feature
-          juju-reboot --now
-      fi
+  ```bash
+  if [[ $FEATURE_IS_INSTALLED  == "false" ]]
+  then
+      install_feature
+      juju-reboot --now
+  fi
+  ```
 
   The ```juju-reboot``` command can be called from any hook. It can also be called
   using the ```juju run``` command.
@@ -1393,16 +2093,22 @@ This release replaces version 1.22.1.
   Your charm hooks can call the new ```opened-ports``` shell command to get
   a listing of the open ports on the unit.
 
-      opened-ports
+  ```bash
+  opened-ports
+  ```
 
   The ```open-port``` and ```close-port``` commands both support single ports and
   ranges, for example, to open ports 80 through 100 on tcp:
 
-      open-port 80-100/tcp
+  ```bash
+  open-port 80-100/tcp
+  ```
 
   And you can close a range like so:
 
-      close-port 90-100/tcp
+  ```bash
+  close-port 90-100/tcp
+  ```
 
   Juju now keeps track of what ports are opened by other units on the same
   machine and does not allow conflicting ports to be opened. The
@@ -1667,9 +2373,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.14 is available for utopic (Ubuntu 14.10) and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   ## Notable Changes
 
@@ -1703,9 +2407,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.13 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   ## Notable Changes
 
@@ -1729,9 +2431,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.12 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   ## Notable Changes
 
@@ -1771,9 +2471,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.11 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   ## Notable Changes
 
@@ -1802,9 +2500,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.10 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   ## Notable Changes
 
@@ -1828,9 +2524,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.9 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   ## Notable Changes
 
@@ -1857,9 +2551,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.8 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   ## Notable Changes
 
@@ -1913,9 +2605,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.7 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
 
   ## Noteworthy
@@ -1946,9 +2636,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.6 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
 
   ## Noteworthy
@@ -1997,9 +2685,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.5 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
 
   ## Noteworthy
@@ -2091,9 +2777,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.1 is available for utopic and backported to earlier
   series in the following PPA:
   
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
   ## Noteworthy
 
@@ -2134,9 +2818,7 @@ This release replaces version 1.22.1.
   juju-core 1.20.0 is available for utopic and backported to earlier
   series in the following PPA:
 
-  ```
   https://launchpad.net/~juju/+archive/stable
-  ```
 
 
   ### New and Notable
@@ -2258,9 +2940,9 @@ This release replaces version 1.22.1.
   state-servers fail. You can use the 'ensure-availability' command to
   create the additional state-servers:
 
-  ```
+  ```bash
   juju ensure-availability
-  ```
+   ```
 
   The 'ensure-availability' command creates 3 state servers by default,
   but you may use the '-n' option to specify a larger number. The number
@@ -2277,9 +2959,9 @@ This release replaces version 1.22.1.
   When bootstrapping or adding a machine, you can specify the availability
   zone explicitly as a placement directive. e.g.
 
-  ```
-    juju bootstrap --to zone=us-east-1b
-    juju add-machine zone=us-east-1c
+  ```bash
+  juju bootstrap --to zone=us-east-1b
+  juju add-machine zone=us-east-1c
   ```
   
   If you don't specify a zone explicitly, Juju will automatically and
@@ -2289,9 +2971,8 @@ This release replaces version 1.22.1.
   Commands you already use will ensure your services are always available.
   e.g.
 
-  
-  ```
-    juju deploy -n 10 <service>
+  ```bash
+  juju deploy -n 10 <service>
   ```
   
   When adding machines without an AZ explicitly specified, or when adding
@@ -2322,8 +3003,8 @@ This release replaces version 1.22.1.
   'availability-sets-enabled' option must be set in environments.yaml like
   so:
   
-  ```
-    availability-sets-enabled: false
+  ```yaml
+  availability-sets-enabled: false
   ```
   
   Placement is disabled when 'availability-sets-enabled' is true. The
@@ -2345,12 +3026,16 @@ This release replaces version 1.22.1.
   number of lines to show. For example, you can see just 20 lines from
   last 100 lines of the log like this:
 
-      juju debug-log --lines 100 --limit 20
+  ```bash
+  juju debug-log --lines 100 --limit 20
+  ```
 
   There are many ways to filter the juju log to see just the pertinent
   information. A juju log line is written in this format:
 
-      <entity> <timestamp> <log-level> <module>:<line-no> <message>
+  ```no-highlight
+  <entity> <timestamp> <log-level> <module>:<line-no> <message>
+  ```
 
   The 'include' and 'exclude' options select the entity that logged the
   message. An entity is a juju machine or unit agent. The entity names are
@@ -2358,27 +3043,33 @@ This release replaces version 1.22.1.
   messages from the bootstrap machine that hosts the state-server like
   this:
 
-      juju debug-log --exclude machine-0
+  ```bash
+  juju debug-log --exclude machine-0
+  ```
 
   The options can be used multiple times to select the log messages. This
   example selects all the message from a unit and its machine as reported
   by status:
 
-      juju debug-log --include unit-mysql-0 --include machine-1
+  ```bash
+  juju debug-log --include unit-mysql-0 --include machine-1
+  ```
 
   The 'level' option restricts messages to the specified log-level or
   greater. The levels from lowest to highest are TRACE, DEBUG, INFO,
   WARNING, and ERROR. The WARNING and ERROR messages from the log can seen
   thusly:
 
-      juju debug-log --level WARNING
+  ```bash
+  juju debug-log --level WARNING
+  ```
 
   The 'include-module' and 'exclude-module' are used to select the kind of
   message displayed. The module name is dotted. You can specify all or
   some of a module name to include or exclude messages from the log. This
   example progressively excludes more content from the logs
  
-  ```
+  ```bash
   juju debug-log --exclude-module juju.state.apiserver
   juju debug-log --exclude-module juju.state
   juju debug-log --exclude-module juju
@@ -2388,12 +3079,16 @@ This release replaces version 1.22.1.
   times to select the modules you are interested in. For example, you can
   see the juju.cmd and juju.worker messages like this:
 
-      juju debug-log --include-module juju.cmd --include-module juju.worker
+  ```bash
+  juju debug-log --include-module juju.cmd --include-module juju.worker
+  ```
 
   The 'debug-log' command output can be piped to grep to filter the
   message like this:
 
-      juju debug-log --lines 500 | grep amd64
+  ```bash
+  juju debug-log --lines 500 | grep amd64
+  ```
 
   You can learn more by running 'juju debug-log --help' and 'juju help
   logging'
@@ -2407,7 +3102,9 @@ This release replaces version 1.22.1.
   all OpenStack-based clouds. For example, when creating an EC2
   environment, you can specify 'm1.small':
 
-    juju bootstrap --constraints instance-type=m1.small
+  ```bash
+  juju bootstrap --constraints instance-type=m1.small
+  ```
 
   Constraints are validated by all providers to ensure values conflicts
   and unsupported options are rejected. Previously, juju would reconcile
@@ -2422,13 +3119,17 @@ This release replaces version 1.22.1.
   cannot be changed once it is set. You can set the option to true in
   environments.yaml like this:
 
-      lxc-use-clone: true
+  ```yaml
+  lxc-use-clone: true
+  ```
 
   This speeds up LXC provisioning when using placement with any provider.
   For example, deploying mysql to a new LXC container on machine 0 will
   start faster:
 
-      juju deploy --to lxc:0 mysql
+  ```bash
+  juju deploy --to lxc:0 mysql
+  ```
 
 
   ### Support for Multiple NICs with the Same MAC
@@ -2445,13 +3146,15 @@ This release replaces version 1.22.1.
   when there is more than one. The networks will be presented in this
   manner:
 
-    machines: ...
-    services: ...
-    networks:
-      net1:
-        provider-id: foo
-        cidr: 0.1.2.0/24
-        vlan-tag: 42
+  ```no-highlight
+  machines: ...
+  services: ...
+  networks:
+    net1:
+      provider-id: foo
+      cidr: 0.1.2.0/24
+      vlan-tag: 42
+  ```
 
 
   ### MaaS Network Constraints and Deploy Argument
@@ -2464,7 +3167,9 @@ This release replaces version 1.22.1.
   requires the "logging" and "storage" networks and conflicts with the
   "db" and "dmz" networks.
 
-    juju deploy mongodb --constraints networks=logging,storage,^db,^dmz
+  ```bash
+  juju deploy mongodb --constraints networks=logging,storage,^db,^dmz
+  ```
 
   The network constraint does not enable the network for the service. It
   only defines what machine to pick.
@@ -2477,7 +3182,9 @@ This release replaces version 1.22.1.
   Juju networking support is still experimental and under development,
   currently only supported with the MaaS provider.
 
+  ```bash
   juju deploy mongodb --networks=logging,storage
+  ```
 
   The 'exclude-network' option was removed from the deploy command as it
   is superseded by the constraint option.
@@ -2492,13 +3199,17 @@ This release replaces version 1.22.1.
   You can specify which MAAS host to place the juju state-server on with
   the 'to' option. To bootstrap on a host named 'fnord', run this:
 
-    juju bootstrap --to fnord
+  ```bash
+  juju bootstrap --to fnord
+  ```
 
   The MAAS provider support the add-machine command now. You can provision
   an existing host in the MAAS-based Juju environment. For example, you
   can  add running machine named fnord like this:
 
-    juju add-machine fnord
+  ```bash
+  juju add-machine fnord
+  ```
 
 
   ### Server Side API Versioning
@@ -2516,11 +3227,8 @@ This release replaces version 1.22.1.
 
   ### Finally
 
-  We encourage everyone to subscribe the mailing list at
+  We encourage everyone to subscribe to the mailing list at
   juju-dev@lists.canonical.com, or join us on #juju-dev on freenode.
-
-
-
 
 ^# juju-core 1.18.3
 
@@ -2531,7 +3239,8 @@ This release replaces version 1.22.1.
 
   juju-core 1.18.3 is available in trusty and backported to earlier
   series in the following PPA
-  `https://launchpad.net/~juju/+archive/stable`
+
+  https://launchpad.net/~juju/+archive/stable
 
   If you use the local provider, be sure to install the juju-local package
   if it is not already installed. Juju's local requirements have changed.
@@ -2563,6 +3272,7 @@ This release replaces version 1.22.1.
   Upgrading local juju environments without the juju-local package is not
   advised.
   
+
   ###Resolved issues
 
   * Manual provisioned systems stuck in pending on arm64 Lp 1302205
@@ -2576,8 +3286,10 @@ This release replaces version 1.22.1.
 
 
 ^# juju-core 1.18.1
+
   A new stable release of Juju, juju-core 1.18.1, is now available. This release
   replaces 1.18.0.
+
 
   ### Getting Juju
 
@@ -2588,9 +3300,11 @@ This release replaces version 1.22.1.
   is not already installed. Juju's local requirements have changed. Upgrading
   local juju environments without the juju-local package is not advised.
 
+
   ### Notable
 
     * Working with Ubuntu 12.04 Precise and 14.04 Trusty
+
 
   ### Resolved issues
 
@@ -2602,6 +3316,7 @@ This release replaces version 1.22.1.
     * Juju scp no longer allows multiple extra arguments to pass through Lp 1306208
     * Juju tests fail with release version number 1.18.0 Lp 1302313
     * Charm store tests do not pass with juju-mongodb Lp 1304770
+
 
   ### Working with Ubuntu 12.04 Precise and 14.04 Trusty
 
@@ -2617,7 +3332,9 @@ This release replaces version 1.22.1.
   organisation only supports Ubuntu 12.04 Precise in the cloud, you can add this
   to your environment in environments.yaml:
 
-      default-series: precise
+  ```yaml
+  default-series: precise
+  ```
 
   There are many ways to specify the series to deploy with a charm. In most
   cases you don't need to. When you don't specify a series, Juju checks the
@@ -2631,20 +3348,26 @@ This release replaces version 1.22.1.
   in the environment or when deploying the charm. If your environment is
   running, you can add `default-series` like so:
 
-      juju set-environment default-series=precise
+  ```bash
+  juju set-environment default-series=precise
+  ```
 
   These commands choose Ubuntu 12.04 Precise when `default-series` is set to
   "precise" in the environment:
 
-      juju deploy cs:precise/mysql
-      juju deploy precise/mysql
-      juju deploy mysql
-      juju deploy local:precise/mysql
-      juju deploy loca:mysql
+  ```bash
+  juju deploy cs:precise/mysql
+  juju deploy precise/mysql
+  juju deploy mysql
+  juju deploy local:precise/mysql
+  juju deploy loca:mysql
+  ```
 
 ^# juju-core 1.18.0
+
   A new stable release of Juju, juju-core 1.18.0, is now available. This release
   replaces 1.16.6.
+
 
   ### Getting Juju
 
@@ -2655,6 +3378,7 @@ This release replaces version 1.22.1.
   If you use the local provider, be sure to install the juju-local package if it
   is not already installed. Juju’s local requirements have changed. Upgrading
   local juju environments without the juju-local package is not advised.
+
 
   ### New and Notable
 
@@ -2673,6 +3397,7 @@ This release replaces version 1.22.1.
     * Juju unset-env
     * Juju retry-provisioning
     * Bash completions include flags, machines, services, and units
+
 
   ### Resolved issues
 
@@ -2694,6 +3419,7 @@ This release replaces version 1.22.1.
     * Juju status reports 'missing' instance-state when not run as root Lp 1237259
     * Juju uses tools for the wrong architecture when unable to find correct tools Lp 1227722
     * Call to relation-get failing with 'permission denied' Lp 1239681
+
 
   ### Support for proxies
 
@@ -2723,7 +3449,9 @@ This release replaces version 1.22.1.
   apt-http-proxy to use it for the containers by specifying the host machine’s
   network-bridge:
 
-      apt-http-proxy: http://10.0.3.1:8000
+  ```yaml
+  apt-http-proxy: http://10.0.3.1:8000
+  ```
 
   ### Managing authorised ssh keys
 
@@ -2739,7 +3467,9 @@ This release replaces version 1.22.1.
   `import` can be used in clouds with open networks to pull ssh keys from
   Launchpad or Github. For example:
 
-      juju authorised-keys import lp:wallyworld
+  ```bash
+  juju authorised-keys import lp:wallyworld
+  ```
 
   `add` can be used to import the provided key, which is necessary for clouds
   that do not have internet access.
@@ -2762,8 +3492,10 @@ This release replaces version 1.22.1.
   case or failure. The juju backup command creates a tarball of the state-
   server’s configuration, keys, and environment data.
 
-      juju switch my-env
-      juju backup
+  ```bash
+  juju switch my-env
+  juju backup
+  ```
 
   The juju restore command creates a new juju bootstrap instance using a backup
   file. It updates the existing instances in the environment to recognise the
@@ -2771,8 +3503,10 @@ This release replaces version 1.22.1.
   it creates the replacement. As with the normal bootstrap command, you can pass
   `--constraints` to setup the new state-server.
 
-      juju switch my-env
-      juju restore juju-backup-2014-02-21.tgz
+  ```bash
+  juju switch my-env
+  juju restore juju-backup-2014-02-21.tgz
+  ```
 
   You can learn more details by running "juju restore --help".
 
@@ -2785,12 +3519,16 @@ This release replaces version 1.22.1.
 
   For example, to run `uname` on every instance:
 
-      juju run "uname -a" --all
+  ```bash
+  juju run "uname -a" --all
+  ```
 
   Or to run uptime on some instances:
 
-      juju run "uptime" --machine=2
-      juju run "uptime" --service=mysql
+  ```bash
+  juju run "uptime" --machine=2
+  juju run "uptime" --service=mysql
+  ```
 
   You can learn more details by running `juju run --help`.
 
@@ -2801,10 +3539,12 @@ This release replaces version 1.22.1.
   local juju tools when provided with the `--destination` option. This is no
   longer the case. You can create the simple streams metadata for tools thusly:
 
-      mkdir -p $MY_DIR/tools/streams/v1
-      mkdir -p $MY_DIR/tools/releases
-      cp $PUBLIC_TOOLS/*tgz $MY_DIR/tools/releases
-      juju metadata generate-tools -d $MY_DIR
+  ```bash
+  mkdir -p $MY_DIR/tools/streams/v1
+  mkdir -p $MY_DIR/tools/releases
+  cp $PUBLIC_TOOLS/*tgz $MY_DIR/tools/releases
+  juju metadata generate-tools -d $MY_DIR
+  ```
 
   Upload the tools directory to your private cloud. Set the tools-metadata-url
   option in the environment’s yaml to point to the tools URL. For more details,
@@ -2845,7 +3585,9 @@ This release replaces version 1.22.1.
   be a local.jenv owned by root with the JUJU_HOME directory (~/.juju). After
   the local environment is destroyed, you can remove the file like this
 
-      sudo rm ~/.juju/environments/local.jenv
+  ```bash
+  sudo rm ~/.juju/environments/local.jenv
+  ```
 
   Juju local provider can use clone for faster LXC
 
@@ -2855,7 +3597,9 @@ This release replaces version 1.22.1.
   try to use lxc-clone on earlier releases, but it is not a supported. It may
   well work. You can enable lxc-clone in environments.yaml thusly:
 
-      lxc-clone: true
+  ```yaml
+  lxc-clone: true
+  ```
 
   The local provider is btrfs-aware. If your LXC directory is on a btrfs
   filesystem, the clones use snapshots and are much faster to create and take up
@@ -2864,7 +3608,9 @@ This release replaces version 1.22.1.
   behave as intuitively as one might expect, so this must be turned on
   explicitly.
 
-      lxc-clone-aufs: true
+  ```yaml
+  lxc-clone-aufs: true
+  ```
 
   When using clone, the first machine to be created will create a "template"
   machine that is used as the basis for the clones. This will be called
@@ -2884,7 +3630,9 @@ This release replaces version 1.22.1.
 
   The destroy-environment command requires you to specify the environment name:
 
-      juju destroy-environment my-press-site
+  ```bash
+  juju destroy-environment my-press-site
+  ```
 
   Previously, destroy-environment would destroy the current environment, which
   might not be the one you want to destroy.
@@ -2897,7 +3645,10 @@ This release replaces version 1.22.1.
   attribute with no default will result in an error. Multiple attributes may be
   removed at once; keys are space-separated.
 
-      juju unset-env
+  ```bash
+  juju unset-env
+  ```
+
 
   ### Juju retry-provisioning
 
@@ -2909,7 +3660,9 @@ This release replaces version 1.22.1.
   machines 3, 27 and 57 could not be provisioned because of a rate limit
   exceeded error. You can ask juju to retry:
 
-      juju retry-provisioning 3 27 5
+  ```bash
+  juju retry-provisioning 3 27 5
+  ```
 
   ### Bash completions include flags, machines, services, and units
 
@@ -2922,6 +3675,7 @@ This release replaces version 1.22.1.
   #juju-dev on freenode.
 
 ^# juju-core 1.16.6
+
   A new stable release of Juju, juju-core 1.16.6, is now available. This release
   replaces 1.16.5.
 
@@ -2947,13 +3701,16 @@ This release replaces version 1.22.1.
   under their old names; no scripts were harmed in the making of this release.
 
 ^# juju-core 1.16.5
+
   A new stable release of Juju, juju-core 1.16.5, is now available. This release
   replaces 1.16.4.
+
 
   ### Getting Juju
 
   juju-core 1.16.5 is available in trusty and backported to earlier series in
   the following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
+
 
   ### Resolved issues
 
@@ -2966,6 +3723,7 @@ This release replaces version 1.22.1.
    * [maas] juju set-env fails after upgrading to 1.16.2+ Lp 1256179
    * juju destroy-environment destroys other environments Lp 1257481
 
+
   ### Notable Changes
 
   Juju may report the status of a service and machine that was terminated
@@ -2973,7 +3731,9 @@ This release replaces version 1.22.1.
   provides minor fixes to identify the case, and a feature to explicitly tell
   juju that the machine is gone.
 
-      juju destroy-machine --force
+  ```bash
+  juju destroy-machine --force
+  ```
 
   The destroy-machine command will destroy the machine as needed, and remove it
   from its list of available machines. Machines that are responsible for the
@@ -2985,6 +3745,7 @@ This release replaces version 1.22.1.
   of `destroy-machine --force`.
 
 ^# juju-core 1.16.4
+
   A new stable release of Juju, juju-core 1.16.4, is now available. This release
   replaces 1.16.3.
 
@@ -3005,11 +3766,13 @@ This release replaces version 1.22.1.
   A new stable release of Juju, juju-core 1.16.3, is now available. This release
   replaces 1.16.0.
 
+
   ### Getting Juju
 
   juju-core 1.16.3 is available in trusty and backported to earlier series in
   the following PPA [https://launchpad.net/~juju/+archive/stable](https://launch
   pad.net/%7Ejuju/+archive/stable)
+
 
   ### Resolved issues
 
@@ -3020,11 +3783,13 @@ This release replaces version 1.22.1.
   A new stable release of Juju, juju-core 1.16.2, is now available. This release
   replaces 1.16.0.
 
+
   ### Getting Juju
 
   juju-core 1.16.2 is available in trusty and backported to earlier series in
   the following PPA [https://launchpad.net/~juju/+archive/stable](https://launch
   pad.net/%7Ejuju/+archive/stable)
+
 
   ### Resolved issues
 
@@ -3039,13 +3804,16 @@ This release replaces version 1.22.1.
   Released:2013-10-31
 
 ^# juju-core 1.16.0
+
   A new stable release of Juju, juju-core 1.16.0, is now available.
+
 
   ### Getting Juju
 
   juju-core 1.16.0 is available in Saucy and backported to earlier series in the
   following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.
   net/%7Ejuju/+archive/stable)
+
 
   ### New and Notable
 
@@ -3059,6 +3827,7 @@ This release replaces version 1.22.1.
     * admin-secret is now chosen automatically if omitted from the configuration of a new environment.
     * control-bucket is now chosen automatically if omitted from the configuration for new ec2 and openstack environments.
     * Logging has changed. You can specify an environment variable "JUJU_LOGGING_CONFIG", or you can specify --logging-config on the command line. To show the log on the command line, now use --show-log. The --debug has been kept to be short-hand for `--logging-config==DEBUG --show-log`, and --verbose has been deprecated with its current meaning.
+
 
   ### Resolved issues
 
@@ -3129,15 +3898,17 @@ This release replaces version 1.22.1.
   a common mounted directory. In that case, add an entry like this to your
   environments.yaml:
 
-
-      tools-url: file://mounted_dir
+  ```yaml
+  tools-url: file://mounted_dir
+  ```
 
   Users who still wish to place the tools in a cloud instance should copy the
   tools directory itself to a publicly readable storage instance. Thenadd the
   tools-url entry to environments.yml:
 
-
-      tools-url: https:///tools
+  ```yaml
+  tools-url: https:///tools
+  ```
 
   A final alternative for locating tools is to copy the entire tools directory
   created above to the cloud’s control bucket, as specified in the
@@ -3153,8 +3924,9 @@ This release replaces version 1.22.1.
   bucket-url was used to point to the location of the metadata. Now, configure
   the image-metadata-url as follows:
 
-
-      image-metadata-url: /juju-dist
+  ```yaml
+  image-metadata-url: /juju-dist
+  ```
 
   Note that the image metadata no longer has to be kept in a cloud storage
   instance. The above example simply assumes the metadata will be kept in the
@@ -3162,6 +3934,7 @@ This release replaces version 1.22.1.
   may be server from any http url or even a directory using `file://`
 
 ^# juju-core 1.14.1
+
   A new stable release of Juju, juju-core 1.14.1, is now available.
 
   This release replaces juju-core 1.14.0. It reconciles differences between juju
@@ -3212,6 +3985,7 @@ This release replaces version 1.22.1.
       public-bucket-url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/60502529753910
 
 ^# juju-core 1.14.0
+
   A new stable release of Juju, juju-core 1.14.0, is now available.
 
   ### Getting Juju
