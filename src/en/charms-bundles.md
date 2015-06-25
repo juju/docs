@@ -94,6 +94,63 @@ envExport:
       - "mysql:db"
 ```
 
+## Service constraints in a bundle
+
+When defining a service in a bundle, it's common to set minimum constraints
+against a charmed service, much like you would when deploying on the command
+line. This is a simple key addition to the service definition, using the proper
+constraint key/value pair as outlined in the
+[Constraints](charms-constraints.html) documentation.
+
+For example, to add memory and CPU constraints to a charm in a bundle, the
+bundle file would have an additional `constraints` field with specific values:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  constraints:
+    - mem=2G
+    - cpu-cores=4
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
+
+## Bundle placement directives
+
+You can co-locate services using the placement directive key in the bundle.
+Much like service constraints, it requires adding the placement key `to` in the
+service definition.
+Where supported by the cloud provider, it is also possible to isolate charms
+by including the container format in the placement directive. Some clouds
+support LXC and KVM.
+
+For example:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to: lxc:wordpress/0
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
+
+which will install the mysql service into an LXC container on the same machine
+as the wordpress/0 unit. Or:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to: lxc:1
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
+which will install the mysql service into an LXC container on machine '1'. 
 
 ## Naming your Bundle
 
