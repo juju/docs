@@ -1,20 +1,26 @@
+Title: Creating and using Bundles
 # Creating and using Bundles
 
-A bundle is a set of services with a specific configuration and their
-corresponding relations that can be deployed together via a single step. Instead of deploying a single service, they can be used to deploy an entire workload, with working relations and configuration. The use of bundles allows for easy repeatability and for sharing of complex, multi-service deployments.
+A Bundle is a set of services with a specific configuration and their
+corresponding relations that can be deployed together in a single step.
+Instead of deploying a single service, they can be used to deploy an entire
+workload, with working relations and configuration. The use of bundles allows
+for easy repeatability and for sharing of complex, multi-service deployments.
 
 Bundles are defined in text files, called “bundle files” or “deployer files”.
 Each file may contain one or more bundle definitions. For simplicity, the files
-generated as described below will only have one bundle.
+generated as described below will contain a single bundle.
+
 
 ## Using bundles
 
 A bundle file can be used in two distinct ways. One is to use it locally,
 deploying from your computer, which is useful to initially ensure it works and
 for experimenting. After you are satisfied with the bundle, you can push it to
-Launchpad where it will be available to you and others via the Charm Store. If
-you're looking to find bundles you can just [search the
-store](https://jujucharms.com/sidebar/search/?text=bundle).
+Launchpad where it will be available to you and others via the Charm Store.
+If you simply want to download some you can 
+[search the store for bundles](https://jujucharms.com/sidebar/search/?text=bundle)
+too.
 
 ### Local import to Juju GUI
 
@@ -37,17 +43,22 @@ quickstart` tool.
 The juju quickstart tool can be installed on Ubuntu versions newer than 14.04 by
 running the following command:
     
-    sudo apt-get install juju-quickstart
+```bash
+sudo apt-get install juju-quickstart
+```
 
+Always perform a "bundle proof" to check for possible errors before using it:
 
-You must always perform a bundle proof to check for some possible errors
-before deploying it:
-
-    juju bundle proof ../path-your-bundle-name    # defaults your current working directory
+```bash
+juju bundle proof ../path-your-bundle-name    # defaults to your current working directory
+```
 
 Then you can use the quickstart tool to deploy your bundle:
 
-    juju quickstart -n bundle-name bundles.yaml
+```bash
+juju quickstart -n bundle-name bundles.yaml
+```
+
 
 ## Creating a bundle
 
@@ -59,72 +70,161 @@ that is saved in your “Downloads” directory as defined by your browser.
 
 ![Export button in the Juju GU](media/charm_bundles_export-bundle.png)
 
-As an example here is an environment with a MySQL service and a Wordpress
+As an example, here is an environment with a MySQL service and a Wordpress
 service with a relation between the two. The exported bundle file contains the
 following data:
 
-    envExport: 
-      services: 
-        mysql: 
-          charm: "cs:precise/mysql-27"
-          num_units: 1
-          annotations: 
-            "gui-x": "139"
-            "gui-y": "168"
-        wordpress: 
-          charm: "cs:precise/wordpress-20"
-          num_units: 1
-          annotations: 
-            "gui-x": "481"
-            "gui-y": "178"
-      relations: 
-        - - "wordpress:db"
-          - "mysql:db"
+```yaml
+envExport: 
+  services: 
+    mysql: 
+      charm: "cs:precise/mysql-27"
+      num_units: 1
+      annotations: 
+        "gui-x": "139"
+        "gui-y": "168"
+    wordpress: 
+      charm: "cs:precise/wordpress-20"
+      num_units: 1
+      annotations: 
+        "gui-x": "481"
+        "gui-y": "178"
+  relations: 
+    - - "wordpress:db"
+      - "mysql:db"
+```
+
+## Service constraints in a bundle
+
+When defining a service in a bundle, it's common to set minimum constraints
+against a charmed service, much like you would when deploying on the command
+line. This is a simple key addition to the service definition, using the proper
+constraint key/value pair as outlined in the
+[Constraints](charms-constraints.html) documentation.
+
+For example, to add memory and CPU constraints to a charm in a bundle, the
+bundle file would have an additional `constraints` field with specific values:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  constraints:
+    - mem=2G
+    - cpu-cores=4
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
+
+## Bundle placement directives
+
+You can co-locate services using the placement directive key in the bundle.
+Much like service constraints, it requires adding the placement key `to` in the
+service definition.
+Where supported by the cloud provider, it is also possible to isolate charms
+by including the container format in the placement directive. Some clouds
+support LXC and KVM.
+
+For example:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to: lxc:wordpress/0
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
+
+which will install the mysql service into an LXC container on the same machine
+as the wordpress/0 unit. Or:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to: lxc:1
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
+which will install the mysql service into an LXC container on machine '1'. 
 
 ## Naming your Bundle
 
-By default the Juju GUI will name the bundle `envExport`. This is the first line in a bundle. The bundle must have a unique name. We recommend descriptive names for your bundle but nothing too long. `wordpress-simple`, `hadoop-cluster`, and `mongodb-sharded` are some examples of bundle names. Avoid CamelCase and periods for bundle names.
+By default the Juju GUI will name the bundle `envExport`. This is the first
+line in a bundle yet the bundle must have a unique name. We recommend short
+descriptive names for your bundle. `wordpress-simple`, `hadoop-cluster`, and
+`mongodb-sharded` are some examples of good bundle names.  Avoid CamelCase and
+periods for bundle names.
+
 
 ## Sharing your Bundle with the Community
 
-Bundles are shared by putting a branch onto Launchpad with specific naming which will then be pulled into the Charm Store. The branch must be constructed and named according to the following rules.
+Bundles are shared by putting a branch onto Launchpad with specific naming
+which will then be pulled into the Charm Store. The branch must be constructed
+and named according to the following rules.
 
-The branch name must be structured as:
+1.  The branch name must be structured as:
 
-    lp:~<your launchpad id>/charms/bundles/<your bundle name>/bundle
+    `lp:~<your launchpad id>/charms/bundles/<your bundle name>/bundle`
 
-A concrete example would be:
+    A concrete example would be:
 
-    lp:~bac/charms/bundles/wiki/bundle
+    `lp:~bac/charms/bundles/wiki/bundle`
 
-Inside the Bazaar branch, the following files are expected:
+1.  Inside the Bazaar branch, the following files are needed: `bundles.yaml`
+    and `README.md`
 
-    .
-    ├── bundles.yaml
-    └── README.md
-
-After you have created the bundles.yaml and readme, you need to proof the bundle to make sure it is valid. You can push them to your namespace, the Juju Charm store will automatically find your bundle and index it in the store. Ensure you are using your launchpad name and a unique bundle name:
-
-**Tip:** You should review the configuration options for the charms you are planning to use in a bundle, some of them generate passwords for services or might need configuration as a separate step. This may or may not be desireable for users, so if there are any extra steps required document them in your README.md file.**
-
-    juju bundle proof ../bundle-directory/ #default current working directory
+1.  Proof the bundle to make sure it is valid. You can push them to your
+    namespace, the Juju Charm store will automatically find your bundle and
+    index it in the store. Ensure you are using your correct Launchpad id and a
+    unique bundle name:
+            
+    ```bash
+    juju bundle proof ../bundle-directory
     bzr push lp:~yourusername/charms/bundles/yourbundlename/bundle
+    ```
 
-- Next file a bug against charms at [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug). This is used to track the progress of your charm.
-- Subscribe the charmers team by clicking "Subscribe someone else" on the right side of the launchpad page. This is important as it gets your charm in the review queue!
-- Now you just need to attach your branch to the bug report, go to [your code page](https://code.launchpad.net/people/+me), find your branch, and click on it. Then click on "Link a bug report", and put in the number of the bug you filed.
+    **Tip:** You should review the configuration options for the charms you are
+    planning to use in a bundle, some of them generate passwords for services or
+    might need configuration as a separate step. This may or may not be desireable
+    for users, so if there are any extra steps required document them in your
+    README.md file.
+
+1.  Next file a bug against charms at
+    [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug).
+
+    This is used to track the progress of your charm.
+
+1.  Subscribe the charmers team by clicking "Subscribe someone else" on the right
+    side of the launchpad page. This is important as it gets your charm in the
+    review queue!
+
+1.  Now you just need to attach your branch to the bug report, go to
+    [your code page](https://code.launchpad.net/people/+me), find your branch,
+    and click on it. Then click on "Link a bug report", and put in the number
+    of the bug you filed.
 
 Someone will come along and review your bundle for inclusion. If you need to
-contact someone you there will be patch pilots in #juju who can help you get
-your bundle accepted. You can also contact us on [the Juju mailing
-list](https://lists.ubuntu.com/mailman/listinfo/juju).
+speak to a human, there are patch pilots in the Juju IRC channel (#juju on
+Freenode) who can assist. You can also use the
+[Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+
 
 ## Deploying a Bundle from the Charm Store with the GUI
 
-To deploy a bundle from the Charm Store using the GUI, first find the bundle you wish to deploy via search or browsing the bundles to the left. To view bundle details, click on the bundle in the left sidebar; a pane will slide out
+To deploy a bundle from the Charm Store using the GUI, first find the bundle
+you wish to deploy via search or browsing the bundles to the left. To view
+bundle details, click on the bundle in the left sidebar; a pane will slide out
 containing the bundle details. You can then add the bundle to the canvas by
 clicking the button on the upper-right of the pane.
 
-Alternatively, you can add the bundle to the canvas without expanding the detail pane by dragging the bundle onto the environment.
+Alternatively, you can add the bundle to the canvas without expanding the
+detail pane by dragging the bundle onto the environment.
 
-After the service is on the canvas it is in a ghost state. Now you can configure the service in the service inspector to the right of the screen and then click the "Deploy" button.
+After the service is on the canvas it is in a ghost state. You should then
+configure the service in the service inspector to the right of the screen and
+then click the "Deploy" button.
