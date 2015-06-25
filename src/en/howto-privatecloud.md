@@ -206,7 +206,7 @@ Issue 2 means that tools need to be mirrored locally to make them accessible.
 
 Juju tools exist to help with generating and validating image and tools
 metadata. For tools, it is often easiest to just mirror
-`https://streams.canonical.com/tools`. However image metadata cannot be simply
+`https://streams.canonical.com/juju/tools`. However image metadata cannot be simply
 mirrored because the image ids are taken from the cloud storage provider, so
 this needs to be generated and validated using the commands described below.
 
@@ -271,7 +271,7 @@ the environment config.
 ### Tools metadata
 
 Generally, tools and related metadata are mirrored from
-`https://streams.canonical.com/tools`. However, it is possible to manually
+`https://streams.canonical.com/juju/tools`. However, it is possible to manually
 generate metadata for a custom built tools tarball.
 
 First, create a tarball of the relevant tools and place in a directory
