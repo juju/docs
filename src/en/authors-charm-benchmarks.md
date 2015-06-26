@@ -1,11 +1,15 @@
+Title: Adding benchmarks to your charm
+
 # Why benchmarking
 
 Before proceeding make sure to read and understand the [Juju Actions](./authors-charm-actions)
 section of the docs as it will be referenced heavily in the upcoming sections
 
+With the introduction of Actions, you are now able to write repeatable, reliable, composable benchmarks. This allows you to perform the same benchmark against a variety of hardware configuration, architecture, and cloud provider to identify bottlenecks and test configuration changes so that you can get the most out of your computing dollar.
+
 # Types of benchmarks in charms
 
-Two types of benchmark: specific and generic.
+Two types of benchmark: specific and generic. The former tests application-specific functionality, such as measuring message queue latency or database query performance are specific to an application, whereas the later test things like memory, cpu, and disk i/o.
 
 There are three ways to deliver benchmarks in Juju, covered in the sections below. How your service is benchmarked will determine which methods you'll wish to use.
 
@@ -20,12 +24,13 @@ If you bundle a benchmarking service as part of your service, or if the benchmar
 suite for your application runs on the same machine, this will likely be the path
 for you.
 
-To start, create an action for your charm. The name of this action can be whatever
-best represents the action the user is taking. As an example, to run the
-cassandra-stress tool in the cassandra charm, you run the action named "stress".
-If there is no simple name, "benchmark" is a great placeholder. Going forward, in
-this example, the benchmark action will be named "load-gen". Here's an example
-`action.yaml`
+In the example below, we will walk through the steps of adding a *benchmark-enabled* action to a charm.
+
+The name of the action can be whatever best represents the action the user is taking. For example, to run the cassandra-stress tool in the cassandra charm, you run the action named "stress". If there is no simple name, "benchmark" is a great placeholder.
+
+Going forward, in this example, the benchmark action will be named "load-gen".
+
+Here's the `action.yaml` for our charm, which informs juju about the action we're exposing and what parameter(s) it takes.
 
 ```yaml
 load-gen:
