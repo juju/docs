@@ -25,7 +25,8 @@ The generic configuration sections generated for Joyent will look something
 like this:
 
 ```yaml
-joyent: type: joyent
+joyent: 
+  type: joyent
 
   # SDC config Can be set via env variables, or specified here sdc-user:
   # <secret> Can be set via env variables, or specified here sdc-key-id:

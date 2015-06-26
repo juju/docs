@@ -1,14 +1,15 @@
 Title: Implementing Relations in Juju charms
 
 # What is a relation?
-Relationships in juju are a loosely typed definition of how services should
+
+Relationships in Juju are a loosely typed definition of how services should
 interact with one another. The definition of a relationship is handled through
 an interface, and does not restrict the user to a traditional RFC approach.
 
 As previously stated, relationships are 'loosely typed' - which means there is
-no de-facto spec for:
+no de-facto specification for:
 
-- what information a relationship must send/receive
+- What information a relationship must send/receive
 - What actions are to be taken with data sent/received over the wire
 
 With that being said, picking an interface is a strong statement; you need to
@@ -23,26 +24,30 @@ They have to match.
 
 ### Provides and Requires
 
-The `provides` and `requires` keys defined in [metadata.yaml](./authors-charm-metdata)
-are used to define pairings of charms that are likely to be fruitful. Consider
-mongodb's metadata:
+The `provides` and `requires` keys defined in
+[metadata.yaml](./authors-charm-metdata) are used to define pairings of charms
+that are likely to be fruitful. Consider mongodb's metadata:
 
-    name: mongodb
-    ...
-    provides:
-      database:
-        interface: mongodb
+```no-highlight
+name: mongodb
+...
+provides:
+  database:
+    interface: mongodb
+```
 
 ...and that of the node.js charm:
 
-    name: my-node-app
-    ...
-    requires:
-      database:
-        interface: mongodb
-    provides:
-      website:
-        interface: http
+```no-highlight
+name: my-node-app
+...
+requires:
+  database:
+    interface: mongodb
+provides:
+  website:
+    interface: http
+```
 
 Put together, these files indicate that a relation can be made between services.
 The mongodb charm `provides` a relation named `database` with the `mongodb`
@@ -57,21 +62,22 @@ provided by my-node-app.)
 
 ## Relation interfaces
 
-An interface name is a string that must only contain `a-z` and `-`, and neither 
-start nor end with `-`. It's the single determiner of compatibility between
-charms; and it carries with it nothing more than a mutual promise that the
-provider and requirer somehow know the communication protocol implied by the
-name.
+An interface name is a string that must only contain characters `a-z` and `-`,
+and neither start nor end with `-`. It's the single determiner of compatibility
+between charms; and it carries with it nothing more than a mutual promise that
+the provider and requirer somehow know the communication protocol implied by
+the name.
 
 So, the relation namespace is essentially unrestricted (with one enforced
 exception: you may not _provide_ a relation named `juju`, or starting with
 `juju-`). This allows for rapid development in some situations; but, in the
 example above, there is a potential problem: we've picked _two_ interface names
 that already have meanings in the charm ecosystem, and that means we have to be
-compatible. That's a concern for a bit
-later, when we're actually writing the relation hooks.
+compatible. That's a concern for later, when we're actually writing the
+relation hooks.
 
 ### Peers
+
 Charms can declare relations under `peers` which causes each unit of a
 single service to respond to the other units in the same service. A peer
 relation is defined in exactly the same way as any other relation.
@@ -79,14 +85,17 @@ relation is defined in exactly the same way as any other relation.
 Looking at the MongoDB peering relationship, we see the charm defines
 `replica-set` as the relationship, with the interface `mongodb-replica-set`
 
-    peers:
-      replica-set:
-        interface: mongodb-replica-set
+```yaml
+peers:
+  replica-set:
+    interface: mongodb-replica-set
+```
 
 As outlined in the relationship - peering relationships are particularly useful
 when your service supports clustering. Think about the implications of services
-such as MongoDB, Postgres, and ElasticSearch where clusters must exchange
+such as MongoDB, PostgreSQL, and ElasticSearch where clusters must exchange
 information amongst one another to perform proper clustering.
+
 
 ## Configuring relations
 
@@ -95,47 +104,50 @@ additional fields by replacing the interface name with a dictionary. In this
 case, the `interface` key must be specified explicitly, and a number of other
 possibilities become available:
 
-  - `scope` defaults to `global`, but may be set to `container`. The scope
-  controls the set of remote units that are reported to the unit as members of
-  the relation: container-scoped relations are restricted to reporting details
-  of a single principal unit to a single subordinate, and vice versa, while
-  global relations consider all possible remote units.
-  [Subordinate](authors-charm-subordinates.html) charms are only valid if they
-  have at least one `requires` relation with `container` scope.
+- `scope` defaults to `global`, but may be set to `container`. The scope
+controls the set of remote units that are reported to the unit as members of
+the relation: container-scoped relations are restricted to reporting details
+of a single principal unit to a single subordinate, and vice versa, while
+global relations consider all possible remote units.
+[Subordinate](authors-charm-subordinates.html) charms are only valid if they
+have at least one `requires` relation with `container` scope.
 
-  - `limit` is ignored by juju, but if present should be a positive integer N
-  indicating that the charm is not designed to use this interface in more than N
-  relations at once.
+- `limit` is ignored by Juju, but if present should be a positive integer N
+indicating that the charm is not designed to use this interface in more than N
+relations at once.
 
-  For example, if you're writing a really simple exploratory charm for your
-  particular data store, you could just create a single shared store and write
-  the same access credentials for every relation. A limit of 1 is thus useful
-  in that it does _document_ the restriction, even though it's not automatically
-  enforced today.
+For example, if you're writing a really simple exploratory charm for your
+particular data store, you could just create a single shared store and write
+the same access credentials for every relation. A limit of 1 is thus useful
+in that it does _document_ the restriction, even though it's not automatically
+enforced today.
 
-  - `optional` is ignored by juju, but if present should only be set to true,
-  on `requires` relations, to indicate that the charm can still function
-  effectively without having those relations added. For example, the my-node-app
-  charm might also define:
+- `optional` is ignored by Juju, but if present should only be set to true,
+on `requires` relations, to indicate that the charm can still function
+effectively without having those relations added. For example, the my-node-app
+charm might also define:
 
-        requires:
-          database:
-            interface: mongodb
-          memcache:
-            interface: memcached
-            optional: true
+```yaml
+requires:
+  database:
+    interface: mongodb
+  memcache:
+    interface: memcached
+    optional: true
+```
 
-  ...to indicate that it can integrate with memcached if it's available, but that
-  it can't be expected to do anything useful without a mongodb service available.
+...to indicate that it can integrate with memcached if it's available, but that
+it can't be expected to do anything useful without a MongoDB service available.
 
 
 ## Relationship Execution in Charms
 
 When services are related, Juju decides which hooks to call within each charm
-based on this local relation name. When wordpress is related to mysql, the
+based on this local relation name. When WordPress is related to MySQL, the
 "database-relation-joined, database-relation-changed, etc" hooks are called on
-the wordpress end. Corresponding hooks will be called on the mysql charm "db-
-relation-joined, db-relation-changed" (based on the mysql relation names).
+the WordPress end. Corresponding hooks will be called on the 'mysql' charm "db-
+relation-joined, db-relation-changed" (based on the 'mysql' relation names).
+
 
 # Authoring Charm Interfaces
 
@@ -149,19 +161,21 @@ set` to pass information back and forth between the service endpoints.
 
 For example, `wordpress` and `mysql` might have a conversation like the following:
 
-    wordpress:
-      I'm here and my service name is "wordpress"
-    mysql:
-      I'm here, let me create a db for you
-      your database/schema name is "wordpress"
-      your credentials are "admin/pass1234"
-      you can access the db on "my.host.addr:port"
-    wordpress:
-      let me write the wordpress config files needed to access that
-      database (and bounce the server to pick up those changes)
-      bye
-    mysql:
-      see-ya
+```no-highlight
+wordpress:
+  I'm here and my service name is "wordpress"
+mysql:
+  I'm here, let me create a db for you
+  your database/schema name is "wordpress"
+  your credentials are "admin/pass1234"
+  you can access the db on "my.host.addr:port"
+wordpress:
+  let me write the wordpress config files needed to access that
+  database (and bounce the server to pick up those changes)
+  bye
+mysql:
+  see-ya
+```
 
 We'll go over some more detailed versions of this, but this is the high-level
 conversation that occurs between two services when they are related in a
@@ -171,117 +185,127 @@ At first glance, it would appear that the _interface_ called `mysql` might be
 defined simply by the set of variables that get passed along the channel.
 Something like:
 
-    interface:
-      name: mysql
-      variables_set:
-        - service_name
-        - database_host
-        - database_port
-        - database_name
-        - database_user
-        - database_password
-        - encoding
+```no-highlight
+interface:
+  name: mysql
+  variables_set:
+    - service_name
+    - database_host
+    - database_port
+    - database_name
+    - database_user
+    - database_password
+    - encoding
+```
 
 but really, that's not complete. In fact, it's not even enough information to
-implement hooks for a new service that needs to talk to mysql. The timing and
+implement hooks for a new service that needs to talk to MySQL. The timing and
 sequencing are critical components of this conversation! They can't be left out.
-
 
 So let's dig a little deeper into this interface. Consider only the `relation-
 joined` and `relation-changed` hooks for now. The remaining `broken` and
 `departed` hooks are covered elsewhere.
 
-Actually, if we start from provisioning, the hooks that are called for wordpress
-are
+Actually, if we start from provisioning, the hooks that are called for 'wordpress'
+are:
 
-    # juju deploy wordpress
-    install
-    config-changed
-    start
-    # juju add-relation wordpress mysql
-    database-relation-joined
-    database-relation-changed
+```no-highlight
+# juju deploy wordpress
+install
+config-changed
+start
+# juju add-relation wordpress mysql
+database-relation-joined
+database-relation-changed
+```
 
-similarly, for mysql
+similarly, for 'mysql':
 
-    # juju deploy mysql
-    install
-    config-changed
-    start
-    # juju add-relation wordpress mysql
-    db-relation-joined
-    db-relation-changed
+```no-highlight
+# juju deploy mysql
+install
+config-changed
+start
+# juju add-relation wordpress mysql
+db-relation-joined
+db-relation-changed
+```
 
-and we can fill in a little of what the relation hooks are doing
+and we can fill in a little of what the relation hooks are doing:
 
-    # wordpress
-    database-relation-joined
-      <no-op>
-    database-relation-changed
-      relation-get database_name, creds, host/port
-      write config for wordpress
-      bounce wordpress
-    # mysql
-    db-relation-joined
-      relation-get service-name
-      create db, creds
-      relation-set db, creds, host/port
-    database-relation-changed
-      <no-op>
+```no-highlight
+# wordpress
+database-relation-joined
+  <no-op>
+database-relation-changed
+  relation-get database_name, creds, host/port
+  write config for wordpress
+  bounce wordpress
+# mysql
+db-relation-joined
+  relation-get service-name
+  create db, creds
+  relation-set db, creds, host/port
+database-relation-changed
+  <no-op>
+```
 
 _This_ conversation is the actual interface.
 
 
 ## Sample metadata.yaml files
 
-The MySQL charm metadata:
+The 'mysql' charm metadata:
 
-    name: mysql
-    summary: MySQL is a fast, stable and true multi-user, multi-threaded SQL database
-    maintainer: Marco Ceppi
-    description: |
-    MySQL is a fast, stable and true multi-user, multi-threaded SQL database
-    server. SQL (Structured Query Language) is the most popular database query
-    language in the world. The main goals of MySQL are speed, robustness and
-    ease of use.
-    categories:
-    - databases
-    provides:
-      db:
-        interface: mysql
-      db-admin:
-        interface: mysql-root
-      shared-db:
-        interface: mysql-shared
-      master:
-        interface: mysql-oneway-replication
-      munin:
-        interface: munin-node
-      monitors:
-        interface: monitors
-      local-monitors:
-        interface: local-monitors
-        scope: container
-    peers:
-        cluster:
-          interface: mysql-ha
-    requires:
-        slave:
-          interface: mysql-oneway-replication
-        ceph:
-          interface: ceph-client
-        ha:
-          interface: hacluster
-          scope: container
+```yaml
+name: mysql
+summary: MySQL is a fast, stable and true multi-user, multi-threaded SQL database
+maintainer: Marco Ceppi
+description: |
+MySQL is a fast, stable and true multi-user, multi-threaded SQL database
+server. SQL (Structured Query Language) is the most popular database query
+language in the world. The main goals of MySQL are speed, robustness and
+ease of use.
+categories:
+- databases
+provides:
+  db:
+    interface: mysql
+  db-admin:
+    interface: mysql-root
+  shared-db:
+    interface: mysql-shared
+  master:
+    interface: mysql-oneway-replication
+  munin:
+    interface: munin-node
+  monitors:
+    interface: monitors
+  local-monitors:
+    interface: local-monitors
+    scope: container
+peers:
+    cluster:
+      interface: mysql-ha
+requires:
+    slave:
+      interface: mysql-oneway-replication
+    ceph:
+      interface: ceph-client
+    ha:
+      interface: hacluster
+      scope: container
+```
+
 
 ## Interface Documentation
 
-Although we have described above that interfaces arrive by convention, there are
-several well-used interfaces which have enough implementations to define a
+Although we have described above that interfaces arrive by convention, there
+are several well-used interfaces which have enough implementations to define a
 defacto standard.
 
 Below is a list of the interfaces for which we have compiled documentation and
-reference implementations.
+reference implementations:
 
-  - [ mysql ](interface-mysql.html) - the database interface used by MySQL and
-  client services.
+- [ mysql ](interface-mysql.html) - the database interface used by MySQL and
+client services.

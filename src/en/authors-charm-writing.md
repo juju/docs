@@ -159,7 +159,7 @@ later, and the interface name will be used by other charms which may want to
 relate to this one.
 
 Similarly we also need to provide a "requires" section. In this case we need a
-database. Checking out the metadata of the MySQL charm we can see that it
+database. Checking out the metadata of the charm for MySQL we can see that it
 provides this via the interface name "mysql", so we can use this name in our
 metadata.
 
@@ -191,7 +191,7 @@ interconnecting services in a cluster
 As you will know from your thorough reading of the [charm components](./authors-
 charm-components.html), the hooks are the important scripts that actually do
 things. You can write hooks in whatever language you can reasonably expect to
-execute on an Ubuntu server.
+execute on your deployed environment (e.g. Ubuntu Server).
 
 For our charm, the hooks we will need to create are:
 
@@ -255,7 +255,7 @@ set -e # If any command fails, stop execution of the hook with that error
 apt-get install -y apache2 php5-cgi php5-mysql curl php5-gd wget libapache2-mod-php5
 dl="https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz"
 # Grab Vanilla from upstream.
-juju-log "Fetching $dl"
+status-set maintenance "Fetching and installing Vanilla"
 wget "$dl" -O /tmp/vanilla.tar.gz
 # IDEMPOTENCY is very important in all charm hooks, even the install hook.
 if [ -f /var/www/vanilla/conf/config.php ]; then
@@ -270,7 +270,7 @@ if [ -f /tmp/config.php ]; then
   mv /tmp/config.php /var/www/vanilla/conf/
 fi
 chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
-juju-log "Creating apache2 configuration"
+status-set maintenance "Creating apache2 configuration"
 cat <<EOF > /etc/apache2/sites-available/vanilla
 <VirtualHost *:80>
   ServerAdmin webmaster@localhost
@@ -289,7 +289,7 @@ EOF
 a2dissite 000-default
 a2ensite vanilla
 service apache2 reload
-juju-log "Files extracted, waiting for other events before we do anything else!"
+status-set blocked "Waiting for active database connection" 
 ```
 
 We aren't going to go for a line-by-line explanation of that, but there are a
@@ -303,9 +303,21 @@ In our script, we are fetching the tarball of the Vanilla software. In these
 cases, it is obviously always better to point to a specific, permanent link to a
 version of the software.
 
-Also, you will notice that we have used the juju-log command. This basically
-spits messages out into the Juju log, which is very useful for testing and
-debugging. We will cover that in more detail later in this walkthrough.
+Also, you will notice that we have used the `juju-log` command and the 
+`status-set` command. These are helper commands for Juju hooks (known as
+"Hook tools") and you will find them covered in more detail
+in the ["how hooks are run" page](authors-hook-environment.html).
+
+The `status-set` command is used to update the status and message displayed by
+Juju when users run the `juju status` command to see what is going on in the 
+environment. There are a number of pre-defined statuses explained in more 
+detail [status reference page](reference-status.html). It is a good idea
+to think about updating the status when significant events occur which have an
+effect on the operation of the service.
+
+The `juju-log` command basically spits messages out into the Juju log, which is 
+very useful for testing and debugging. We will cover that in more detail later
+in this walkthrough.
 
 The next step is to create the relationship hooks...
 
@@ -337,15 +349,17 @@ cat <<EOF > $vanilla_config
 \$Configuration['Database']['Password'] = '$db_pass';
 EOF
 juju-log "Make the application port available, now that we know we have a site to expose"
+status-set active
 open-port 80
 ```
 
 You will notice that this script uses the backticked command relation-get. This
-is a Juju helper command that fetches the named values from the corresponding
-hook on the service we are connecting to. Usually there will be some indication
-of what these values are, but you can always inspect the corresponding hooks to
-find out. In this case we know that when connected, the MySQL charm will create
-a database and generate random values for things like a username and password.
+is another Juju Hook tool, which in this case fetches the named values from 
+the corresponding hook on the service we are connecting to. Usually there will
+be some indication of what these values are, but you can always inspect the
+corresponding hooks to find out. In this case we know that when connected, the 
+'mysql' charm will create a database and generate random values for things like a
+username and password.
 
 Interfaces in general are determined by the consensus of the charms which use
 them. There is a lot [more information on decoding interfaces here](./authors-

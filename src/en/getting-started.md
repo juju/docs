@@ -52,13 +52,17 @@ following file:
 
 ## Linux & Mac OSX
 
-    ~/.juju/environments.yaml
+```no-highlight
+~/.juju/environments.yaml
+```
 
 ## Windows
 
-    %APPDATA%\Juju\environments.yaml
-    
-    %APPDATA% typically == C:\Users\<user>\AppData\Roaming
+```no-highlight
+%APPDATA%\Juju\environments.yaml
+```
+
+ %APPDATA% typically == C:\Users\<user>\AppData\Roaming
 
 Juju can automatically generate the file in this way:
 
