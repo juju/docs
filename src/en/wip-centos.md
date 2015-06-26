@@ -5,7 +5,7 @@ software is already supported on CentOS - see the
 [Releases](./reference-releases.html) page). This is experimental and has a 
 number of known issues. However, most of thefunctionality of Juju is there and
 ready to be used and tested. 
-CentOS should be deployable on any cloud that supports cloud-init in it's
+CentOS should be deployable on any cloud that supports `cloud-init` in it's
 CentOS images. It is possible to use CentOS as both a state machine (taking
 the [known limitations](#current-known-issues) into account) and as a normal 
 machine.
@@ -49,6 +49,6 @@ cp -r local/tools <path/to/webserver>
  - There is a lack of mongo tools at the moment so any functionality depending 
    on those is not available(for example backups)
  - There is no way to currently specify a proxy or mirror for `yum` in the
-   environment configuration. The values that you specific for `apt` packages 
+   environment configuration. The values that you specify for `apt` packages 
    will be used for `yum` packages as well. This limitation will be fixed as 
    soon as possible.
