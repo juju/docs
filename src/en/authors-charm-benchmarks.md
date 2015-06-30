@@ -1,36 +1,52 @@
-Title: Adding benchmarks to your charm
+Title: Benchmarking Juju Services
 
-# Why benchmarking
+# Overview
 
-Before proceeding make sure to read and understand the [Juju Actions](./authors-charm-actions)
-section of the docs as it will be referenced heavily in the upcoming sections
+Note: [Juju Actions](authors-charm-actions.html) are required for Juju
+Benchmarking and knowledge of them is assumed in this section.
 
-With the introduction of Actions, you are now able to write repeatable, reliable, composable benchmarks. This allows you to perform the same benchmark against a variety of hardware configuration, architecture, and cloud provider to identify bottlenecks and test configuration changes so that you can get the most out of your computing dollar.
+With the introduction of Actions, you are now able to write repeatable,
+reliable, composable benchmarks. This allows you to perform the same benchmark
+against a variety of hardware configuration, architecture, and cloud provider
+to identify bottlenecks and test configuration changes so that you can get the
+most out of your computing dollar.
 
-# Types of benchmarks in charms
 
-Two types of benchmark: specific and generic. The former tests application-specific functionality, such as measuring message queue latency or database query performance are specific to an application, whereas the later test things like memory, cpu, and disk i/o.
+# Types of Benchmarks
 
-There are three ways to deliver benchmarks in Juju, covered in the sections below. How your service is benchmarked will determine which methods you'll wish to use.
+There are two types of benchmarks: specific and generic. The former tests
+application-specific functionality, such as measuring message queue latency or
+database query performance, are specific to an application, whereas the later
+test general things like memory, cpu, and disk i/o.
 
-For the cases where benchmarking is done as part of the software you're delivering, then the [As part of the charm](#as-part-of-the-charm) section will work best for you.
-If you charm requires software to be run externally across a network to
-benchmark the service, creating a [Load generation charm](#load-generation-charm)
-will be the section of most interest for you. Lastly, you can create a [subordinate load generation charm](#subordinate-load-generation-charm) that runs general-purpose benchmarks across a variety of services.
+There are three ways to deliver benchmarks in Juju and the nature of the
+benchmark will determine which method to use:
 
-## As part of the charm
+1. [Integrated into a service charm](#integrated-into-a-service-charm)
+    - Use this if you bundle benchmarking as part of your service, or if the
+      benchmark suite for your application runs on the same machine.
+2. [Load generation charm](#load-generation-charm)
+    - Use this if your charm requires software to be run externally across a
+      network to benchmark the service.
+3. [Subordinate load generation charm](#subordinate-load-generation-charm)
+    - Use this for general-purpose benchmarks applied against a variety of
+      services.
 
-If you bundle a benchmarking service as part of your service, or if the benchmark
-suite for your application runs on the same machine, this will likely be the path
-for you.
 
-In the example below, we will walk through the steps of adding a *benchmark-enabled* action to a charm.
+## Integrated into a Service Charm
 
-The name of the action can be whatever best represents the action the user is taking. For example, to run the cassandra-stress tool in the cassandra charm, you run the action named "stress". If there is no simple name, "benchmark" is a great placeholder.
+With this method, we add a *benchmark-enabled* action to a charm.
 
-Going forward, in this example, the benchmark action will be named "load-gen".
+The name of the action can be whatever best represents the action the user is
+taking. For example, to run the cassandra-stress tool in the cassandra charm,
+the action can be named "stress". If there is no simple name, "benchmark" is a
+great placeholder.
 
-Here's the `action.yaml` for our charm, which informs juju about the action we're exposing and what parameter(s) it takes.
+In this section and in the ones that follow, the benchmark action is named
+"load-gen".
+
+Here's the `action.yaml` for our charm, which informs Juju about the action
+we're exposing and what parameter(s) it takes:
 
 ```yaml
 load-gen:
@@ -42,16 +58,18 @@ load-gen:
       default: 1
 ```
 
+
 ## Load generation charm
 
-If the benchmarking service you wish to run should be run from a standalone machine, this is likely the path for you. You can find a good example of this in the [Siege](https://github.com/juju-solutions/siege) charm.
-
 Writing a benchmark is similar to writing a charm, with a few new additions.
-First is the addition of `actions.yaml` and the `actions` directory, containing files corresponding to the benchmark defined in the previous `actions.yaml` example. There's also a new `benchmark` interface to support, plus installing a lightweight support library, `charm-benchmark`
+First is the addition of `actions.yaml` and the `actions` directory, containing
+files corresponding to the benchmark defined in the previous `actions.yaml`
+example. There's also a new `benchmark` interface to support, plus installing a
+lightweight support library, `charm-benchmark`.
 
-Here is an example of what a load-generation charm might look like:
+This is an example layout for a load-generation charm:
 
-```bash
+```no-highlight
 .
 ├── README.md
 ├── actions
@@ -65,7 +83,8 @@ Here is an example of what a load-generation charm might look like:
 └── metadata.yaml
 ```
 
-Use the install hook to make sure all necessary software is installed to run your benchmarks. For example
+Use the install hook to ensure all the required software to run your benchmarks
+is installed. For example:
 
 ```bash
 #!/bin/bash
@@ -74,21 +93,35 @@ set -eux
 apt-get install -y python-pip load-gen && pip install charm-benchmark
 ```
 
-### Subordinate load generation charm
+A good example of a load generation charm is the
+[Siege](https://github.com/juju-solutions/siege) charm.
 
-[Subordinate](./authors-subordinate-service) charms are installed to the machine they are related to. This can be useful when you have a benchmark that functions against multiple types of charm.
 
-The [mysql-benchmark](https://github.com/juju-solutions/mysql-benchmark) charm, for example, is a subordinate that can run against any related MySQL-compatible database, such as MySQL, Percona, and MariaDB.
+## Subordinate load generation charm
 
-# Anatomy of a benchmark
+[Subordinate charms](authors-subordinate-services.html) are installed to the
+machine they are related to. This can be useful when you have a benchmark that
+functions against multiple types of charms.
+
+The [mysql-benchmark](https://github.com/juju-solutions/mysql-benchmark) charm,
+for instance, is a subordinate charm that can run against any related
+MySQL-compatible database, such as MySQL, Percona, and MariaDB.
+
+
+# Anatomy of a Benchmark
 
 ## charm-benchmark
 
-We've created a helper library to ease the development of benchmarks. The `charm-benchmark` library is a Python package, but includes shims to call it's commands from any language. You can find the latest documentation on using it at [readthedocs.org](http://charm-benchmark.readthedocs.org/en/latest/).
+The `charm-benchmark` helper library makes the development of benchmarks
+easier. Although this library is a Python package, it includes shims to call its
+commands from any language. For usage see the
+[charm-benchmark documentation](http://charm-benchmark.readthedocs.org/en/latest/).
 
-## How to write a benchmark
 
-Benchmarks are simply *Juju Actions* that follow a specific pattern. For example, here's what `actions/load-gen` might look like:
+## How to Write a Benchmark
+
+Benchmarks are simply *Juju Actions* that follow a specific pattern. For
+example, here's what `actions/load-gen` might look like:
 
 ```bash
 #!/bin/bash
@@ -129,11 +162,17 @@ benchmark-data 'response-time' '${responsetime}' 'secs' 'asc'
 benchmark-composite ${score} "requests/sec" "desc"
 ```
 
+
 ## Interfaces
 
-You may have noticed the `benchmark-relation-changed` hook in the previous example of a load-gen charm. This new interface allows a benchmark-enabled charm to inform the Benchmark GUI of what actions are available. While not required, it is highly recommended to implement this interface. It allows for better integration between your benchmarks and the Benchmark GUI.
+You may have noticed the `benchmark-relation-changed` hook in the [Load
+generation charm](#load-generation-charm). This new interface allows a
+benchmark-enabled charm to inform the Benchmark GUI of what actions are
+available. While not required, it is highly recommended to implement this
+interface. It allows for better integration between your benchmarks and the
+Benchmark GUI.
 
-Simply add the interface to the provides stanza of `metadata.yaml`:
+Simply add the interface to the 'provides' stanza of `metadata.yaml`:
 
 ```yaml
 provides:
