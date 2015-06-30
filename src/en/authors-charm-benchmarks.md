@@ -12,14 +12,9 @@ to identify bottlenecks and test configuration changes so that you can get the
 most out of your computing dollar.
 
 
-# Types of Benchmarks
+# Benchmark Execution Methods
 
-There are two types of benchmarks: specific and generic. The former tests
-application-specific functionality, such as measuring message queue latency or
-database query performance, are specific to an application, whereas the later
-test general things like memory, cpu, and disk i/o.
-
-There are three ways to deliver benchmarks in Juju and the nature of the
+There are three ways to execute benchmarks in Juju and the nature of the
 benchmark will determine which method to use:
 
 1. [Integrated into a service charm](#integrated-into-a-service-charm)
@@ -90,7 +85,7 @@ is installed. For example:
 #!/bin/bash
 set -eux
 
-apt-get install -y python-pip load-gen && pip install charm-benchmark
+apt-get install -y python-pip load-gen && pip install -U charm-benchmark
 ```
 
 A good example of a load generation charm is the
