@@ -20,7 +20,7 @@ juju deploy lp:~me/centos7/charm
 
 or from a local charm:
 
-```
+```bash
 juju deploy --repository=/home/user/charms local:centos7/charm
 ```
 
@@ -29,11 +29,11 @@ The process or writing one should be no different from the Ubuntu charms besides
 keeping in mind the fact that one shouldn't use Ubuntu specific calls
 (such as `apt-get`).
 
-There is a guide for setting up a MAAS environment using CentOS at:
+Cloudbase have a guide for setting up a MAAS environment using CentOS at:
 
 http://wiki.cloudbase.it/juju-centos
 
-Note that Centos 7 agents are already in streams. There is no need install Go,
+Note that Centos7 agents are already in streams. There is no need install Go,
 compile, tar, and running Juju metadata. You can sync the streams to a web 
 server visible to your Juju environment.
 
@@ -43,7 +43,7 @@ juju sync-tools --local-dir local
 cp -r local/tools <path/to/webserver>
 ```
 
-## current known issues
+## Current known issues
 
  - Containers are not yet supported
  - There is a lack of mongo tools at the moment so any functionality depending 
