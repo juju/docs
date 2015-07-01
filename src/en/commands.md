@@ -4,7 +4,10 @@ Title:Juju commands and usage
 
 You can get a list of the currently used commands by entering
 ```juju help commands``` from the commandline. The currently understood commands
-are listed here, with usage and examples.
+are listed here, with usage and examples. (If you are looking for the commands 
+which can be run by charms inside a hook environment, please see
+[the Hook Environment documentation.](authors-hook-environment#hook-tools)
+)
 
 Click on the expander to see details for each command. 
 
