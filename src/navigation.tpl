@@ -53,6 +53,7 @@
               <li class=" sub"><a href="authors-charm-metadata.html">metadata.yaml</a></li>
               <li class=" sub"><a href="authors-charm-hooks.html">/hooks</a></li>
               <li class=" sub"><a href="authors-charm-actions.html">/actions and actions.yaml</a></li>
+              <li class=" sub"><a href="authors-charm-benchmarks.html">Benchmarks (optional)</a></li>
               <li class=" sub"><a href="authors-charm-config.html">config.yaml</a></li>
               <li class=""><a href="authors-charm-writing.html">Charm walkthrough</a></li>
               <li class=" sub"><a href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
