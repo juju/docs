@@ -4,40 +4,67 @@ Title:Juju commands and usage
 
 You can get a list of the currently used commands by entering
 ```juju help commands``` from the commandline. The currently understood commands
-are listed here, with usage and examples. (If you are looking for the commands 
-which can be run by charms inside a hook environment, please see
-[the Hook Environment documentation.](authors-hook-environment#hook-tools)
-)
+are listed here, with usage and examples.
 
 Click on the expander to see details for each command. 
 
-^# add-machine
-
+^# action
 
   #### usage:
 
+  ```no-highlight
+  juju action [options] <command> ...
   ```
-  juju add-machine [options] [<container>:machine | <container> | ssh:[user@]host | placement]
+
+  #### purpose:
+
+   execute, manage, monitor, and retrieve results of actions
+
+  
+  #### options:
+
+  _--description  (= false)_  
+
+  _-h, --help  (= false)_  show help on a command or other topic
+  
+  "juju action" executes and manages actions on units; it queues up new actions,
+  monitors the status of running actions, and retrieves the results of completed
+  actions.
+  
+  #### subcommands:
+
+  defined - show actions defined for a service
+
+  do      - queue an action for execution
+
+  fetch   - show results of an action by ID
+
+  help    - show help on a command or other topic
+
+  status  - show results of all actions filtered by optional ID prefix
+
+^# add-machine
+
+  #### usage:
+
+  ```no-highlight
+  juju machine add [options] [<container>:machine | <container> | ssh:[user@]host | placement]
   ```
 
   #### purpose:
 
    start a new, empty machine and optionally a container, or add a container to a machine
 
-
   
   #### options:
 
-
-
   _--constraints  (= )_  additional machine constraints
 
+  _--disks  (= )_  constraints for disks to attach to the machine
 
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _-n  (= 1)_  The number of machines to add
-
 
   _--series (= "")_  the charm series
   
@@ -47,13 +74,13 @@ Click on the expander to see details for each command.
   and containers on machines. Machines are created in a clean state and
   ready to have units deployed.
   
-  Without any parameters, add-machine will allocate a new provider-specific
+  Without any parameters, add machine will allocate a new provider-specific
   machine (multiple, if "-n" is provided). When adding a new machine, you
   may specify constraints for the machine to be provisioned; the provider
   will interpret these constraints in order to decide what kind of machine
   to allocate.
   
-  If a container type is specified (e.g. "lxc"), then add-machine will
+  If a container type is specified (e.g. "lxc"), then add machine will
   allocate a container of that type on a new provider-specific machine. It is
   also possible to add containers to existing machines using the format
   <container type>:<machine number>. Constraints cannot be combined with
@@ -73,28 +100,24 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju add-machine                      (starts a new machine)
-      juju add-machine -n 2                 (starts 2 new machines)
-      juju add-machine lxc                  (starts a new machine with an lxc container)
-      juju add-machine lxc -n 2             (starts 2 new machines with an lxc container)
-      juju add-machine lxc:4                (starts a new lxc container on machine 4)
-      juju add-machine --constraints mem=8G (starts a machine with at least 8GB RAM)
-      juju add-machine ssh:user@10.10.0.3   (manually provisions a machine with ssh)
-      juju add-machine zone=us-east-1a
-
+      juju machine add                      (starts a new machine)
+      juju machine add -n 2                 (starts 2 new machines)
+      juju machine add lxc                  (starts a new machine with an lxc container)
+      juju machine add lxc -n 2             (starts 2 new machines with an lxc container)
+      juju machine add lxc:4                (starts a new lxc container on machine 4)
+      juju machine add --constraints mem=8G (starts a machine with at least 8GB RAM)
+      juju machine add ssh:user@10.10.0.3   (manually provisions a machine with ssh)
+      juju machine add zone=us-east-1a
 
   See Also:
-
-    - juju help constraints
-    - juju help placement
-
+  juju help constraints
+  juju help placement
 
 ^# add-relation
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju add-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
   ```
 
@@ -102,45 +125,35 @@ Click on the expander to see details for each command.
 
    add a relation between two services
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
 ^# add-unit
 
-
   #### usage:
 
-  ```
-  juju add-unit [options] <service name>
+  ```no-highlight
+  juju service add-unit [options] <service name>
   ```
 
   #### purpose:
 
    add one or more units of an already-deployed service
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _-n, --num-units  (= 1)_  number of service units to add
-
 
   _--to (= "")_  the machine or container to deploy the unit in, bypasses constraints
   
   Adding units to an existing service is a way to scale out an environment by
   deploying more instances of a service.  Add-unit must be called on services that
-  have already been deployed via juju deploy.  
+  have already been deployed via juju deploy.
   
   By default, services are deployed to newly provisioned machines.  Alternatively,
   service units can be added to a specific existing machine using the --to
@@ -148,18 +161,16 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju add-unit mysql -n 5          (Add 5 mysql units on 5 new machines)
-      juju add-unit mysql --to 23       (Add a mysql unit to machine 23)
-      juju add-unit mysql --to 24/lxc/3 (Add unit to lxc container 3 on host machine 24)
-      juju add-unit mysql --to lxc:25   (Add unit to a new lxc container on host machine 25)
-
+      juju service add-unit mysql -n 5          (Add 5 mysql units on 5 new machines)
+      juju service add-unit mysql --to 23       (Add a mysql unit to machine 23)
+      juju service add-unit mysql --to 24/lxc/3 (Add unit to lxc container 3 on host machine 24)
+      juju service add-unit mysql --to lxc:25   (Add unit to a new lxc container on host machine 25)
 
 ^# api-endpoints
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju api-endpoints [options]
   ```
 
@@ -167,23 +178,16 @@ Click on the expander to see details for each command.
 
    print the API server address(es)
 
-
   
   #### options:
 
-
-
   _--all  (= false)_  display all known endpoints, not just the first one
-
 
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--format  (= smart)_  specify output format (json|smart|yaml)
 
-
   _-o, --output (= "")_  specify an output file
-
 
   _--refresh  (= false)_  connect to the API to ensure an up-to-date endpoint location
   
@@ -209,13 +213,11 @@ Click on the expander to see details for each command.
   Additionally, you can use the --format argument to specify the output format.
   Supported formats are: "yaml", "json", or "smart" (default - host:port, one per line).
 
-
 ^# api-info
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju api-info [options] [field ...]
   ```
 
@@ -223,23 +225,16 @@ Click on the expander to see details for each command.
 
    print the field values used to connect to the environment's API servers
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _--format  (= default)_  specify output format (default|json|yaml)
 
-
   _-o, --output (= "")_  specify an output file
 
-
   _--password  (= false)_  include the password in the output fields
-
 
   _--refresh  (= false)_  connect to the API to ensure an up-to-date endpoint location
   
@@ -264,7 +259,6 @@ Click on the expander to see details for each command.
       environ-uuid: 373b309b-4a86-4f13-88e2-c213d97075b8
       state-servers:
 
-
   _- localhost:17070_
 
   _- 10.0.3.1:17070_
@@ -272,9 +266,7 @@ Click on the expander to see details for each command.
   _- 192.168.2.21:17070_      ca-cert: '-----BEGIN CERTIFICATE-----
       ...
 
-
   _-----END CERTIFICATE-----_      '
-
 
   $ juju api-info user
   admin
@@ -283,13 +275,11 @@ Click on the expander to see details for each command.
   user: admin
   password: sekrit
 
-
 ^# authorised-keys
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju authorized-keys [options] <command> ...
   ```
 
@@ -297,14 +287,10 @@ Click on the expander to see details for each command.
 
    manage authorized ssh keys
 
-
   
   #### options:
 
-
-
   _--description  (= false)_  
-
 
   _-h, --help  (= false)_  show help on a command or other topic
   
@@ -315,33 +301,23 @@ Click on the expander to see details for each command.
 
   add    - add new authorized ssh keys for a Juju user
 
-
   delete - delete authorized ssh keys for a Juju user
-
 
   help   - show help on a command or other topic
 
-
   import - using ssh-import-id, import new authorized ssh keys for a Juju user
-
 
   list   - list authorized ssh keys for a specified user
 
-
   
 
-
   aliases: authorised-keys
-
-
-
 
 ^# authorized-keys
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju authorized-keys [options] <command> ...
   ```
 
@@ -349,14 +325,10 @@ Click on the expander to see details for each command.
 
    manage authorized ssh keys
 
-
   
   #### options:
 
-
-
   _--description  (= false)_  
-
 
   _-h, --help  (= false)_  show help on a command or other topic
   
@@ -367,33 +339,102 @@ Click on the expander to see details for each command.
 
   add    - add new authorized ssh keys for a Juju user
 
-
   delete - delete authorized ssh keys for a Juju user
-
 
   help   - show help on a command or other topic
 
-
   import - using ssh-import-id, import new authorized ssh keys for a Juju user
-
 
   list   - list authorized ssh keys for a specified user
 
-
   
-
 
   aliases: authorised-keys
 
-
-
-
-^# bootstrap
-
+^# backups
 
   #### usage:
 
+  ```no-highlight
+  juju backups [options] <command> ...
   ```
+
+  #### purpose:
+
+   create, manage, and restore backups of juju's state
+
+  
+  #### options:
+
+  _--description  (= false)_  
+
+  _-h, --help  (= false)_  show help on a command or other topic
+  
+  "juju backups" is used to manage backups of the state of a juju environment.
+  
+  #### subcommands:
+
+  create   - create a backup
+
+  download - get an archive file
+
+  help     - show help on a command or other topic
+
+  info     - get metadata
+
+  list     - get all metadata
+
+  remove   - delete a backup
+
+  restore  - restore from a backup archive to a new state server
+
+  upload   - store a backup archive file remotely in juju
+
+^# block
+
+  #### usage:
+
+  ```no-highlight
+  juju block [options] <command> ...
+  ```
+
+  #### purpose:
+
+   list and enable environment blocks
+
+  
+  #### options:
+
+  _--description  (= false)_  
+
+  _-h, --help  (= false)_  show help on a command or other topic
+  
+  Juju allows to safeguard deployed environments from unintentional damage by preventing
+  execution of operations that could alter environment.
+  
+  This is done by blocking certain commands from successful execution. Blocked commands
+  must be manually unblocked to proceed.
+  
+  "juju block" is used to list or to enable environment blocks in
+  the Juju environment.
+  
+  #### subcommands:
+
+  all-changes         - block operations that could change Juju environment
+
+  destroy-environment - block an operation that would destroy Juju environment
+
+  help                - show help on a command or other topic
+
+  list                - list juju blocks
+
+  remove-object       - block an operation that would remove an object
+
+^# bootstrap
+
+  #### usage:
+
+  ```no-highlight
   juju bootstrap [options]
   ```
 
@@ -401,32 +442,22 @@ Click on the expander to see details for each command.
 
    start up an environment from scratch
 
-
   
   #### options:
 
-
-
   _--constraints  (= )_  set environment constraints
-
 
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--keep-broken  (= false)_  do not destroy the environment if bootstrap fails
-
 
   _--metadata-source (= "")_  local path to use as tools and/or metadata source
 
-
   _--series  (= )_  see --upload-series (OBSOLETE)
-
 
   _--to (= "")_  a placement directive indicating an instance to bootstrap
 
-
   _--upload-series  (= )_  upload tools for supplied comma-separated series list (OBSOLETE)
-
 
   _--upload-tools  (= false)_  upload local version of tools before bootstrapping
   
@@ -452,33 +483,59 @@ Click on the expander to see details for each command.
   the default timeout and retry delays used during the bootstrap by changing the
   following settings in your environments.yaml (all values represent number of seconds):
   
-  
-      # How long to wait for a connection to the state server:
-      bootstrap-timeout: 600 # default: 10 minutes
-      # How long to wait between connection attempts to a state server address:
-      bootstrap-retry-delay: 5 # default: 5 seconds
-      # How often to refresh state server addresses from the API server.
-      bootstrap-addresses-delay: 10 # default: 10 seconds
+  # How long to wait for a connection to the state server.
+  bootstrap-timeout: 600 # default: 10 minutes
+  # How long to wait between connection attempts to a state server address.
+  bootstrap-retry-delay: 5 # default: 5 seconds
+  # How often to refresh state server addresses from the API server.
+  bootstrap-addresses-delay: 10 # default: 10 seconds
   
   Private clouds may need to specify their own custom image metadata, and possibly upload
   Juju tools to cloud storage if no outgoing Internet access is available. In this case,
-  use the --metadata-source parameter to tell bootstrap a local directory from which to
+  use the --metadata-source paramater to tell bootstrap a local directory from which to
   upload tools and/or image metadata.
   
   See Also:
+  juju help switch
+  juju help constraints
+  juju help set-constraints
+  juju help placement
 
-    - juju help switch
-    - juju help constraints
-    - juju help set-constraints
-    - juju help placement
-
-
-^# debug-hooks
-
+^# cached-images
 
   #### usage:
 
+  ```no-highlight
+  juju cached-images [options] <command> ...
   ```
+
+  #### purpose:
+
+   manage cached os images
+
+  
+  #### options:
+
+  _--description  (= false)_  
+
+  _-h, --help  (= false)_  show help on a command or other topic
+  
+  "juju cached-images" is used to manage the cached os images in
+  the Juju environment.
+  
+  #### subcommands:
+
+  delete - delete cached os images
+
+  help   - show help on a command or other topic
+
+  list   - shows cached os images
+
+^# debug-hooks
+
+  #### usage:
+
+  ```no-highlight
   juju debug-hooks [options] <unit name> [hook names]
   ```
 
@@ -486,29 +543,22 @@ Click on the expander to see details for each command.
 
    launch a tmux session to debug a hook
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--proxy  (= true)_  proxy through the API server
-
 
   _--pty  (= true)_  enable pseudo-tty allocation
   
   Interactively debug a hook remotely on a service unit.
 
-
 ^# debug-log
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju debug-log [options]
   ```
 
@@ -516,48 +566,35 @@ Click on the expander to see details for each command.
 
    display the consolidated log file
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _--exclude-module  (= )_  do not show log messages for these logging modules
 
-
   _-i, --include  (= )_  only show log messages for these entities
-
 
   _--include-module  (= )_  only show log messages for these logging modules
 
-
   _-l, --level (= "")_  log level to show, one of [TRACE, DEBUG, INFO, WARNING, ERROR]
-
 
   _--limit  (= 0)_  show at most this many lines
 
-
   _-n, --lines  (= 10)_  go back this many lines from the end before starting to filter
 
-
   _--replay  (= false)_  start filtering from the start
-
 
   _-x, --exclude  (= )_  do not show log messages for these entities
   
   Stream the consolidated debug log file. This file contains the log messages
   from all nodes in the environment.
 
-
 ^# deploy
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju deploy [options] <charm name> [<service name>]
   ```
 
@@ -565,32 +602,24 @@ Click on the expander to see details for each command.
 
    deploy a new service
 
-
   
   #### options:
 
-
-
   _--config  (= )_  path to yaml-formatted service config
-
 
   _--constraints  (= )_  set service constraints
 
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _-n, --num-units  (= 1)_  number of service units to deploy for principal charms
 
-
   _--networks (= "")_  bind the service to specific networks
-
 
   _--repository (= "")_  local charm repository
 
+  _--storage  (= )_  charm storage constraints
 
   _--to (= "")_  the machine or container to deploy the unit in, bypasses constraints
-
 
   _-u, --upgrade  (= false)_  increment local charm directory revision (DEPRECATED)
   
@@ -598,11 +627,11 @@ Click on the expander to see details for each command.
   assuming a current series of "precise", the following forms will be accepted:
   
   For cs:precise/mysql
-      mysql
-      precise/mysql
+  mysql
+  precise/mysql
   
   For cs:~user/precise/mysql
-      cs:~user/mysql
+  cs:~user/mysql
   
   The current series is determined first by the default-series environment
   setting, followed by the preferred series for the charm in the charm store.
@@ -630,7 +659,7 @@ Click on the expander to see details for each command.
   where <series> is the OS series, for example 'juju-trusty-template'.
   
   You can override the use of clone by changing the provider configuration:
-  ```lxc-clone: false```
+  lxc-clone: false
   
   If you have the main container directory mounted on a btrfs partition,
   then the clone will be using btrfs snapshots to create the containers.
@@ -645,9 +674,14 @@ Click on the expander to see details for each command.
       juju deploy mysql --to 23       (deploy to machine 23)
       juju deploy mysql --to 24/lxc/3 (deploy to lxc container 3 on host machine 24)
       juju deploy mysql --to lxc:25   (deploy to a new lxc container on host machine 25)
-      juju deploy mysql -n 5 --constraints mem=8G (deploy 5 instances of mysql with at least 8 GB of RAM each)
-      juju deploy mysql --networks=storage,mynet --constraints networks=^logging,db (deploy mysql on machines with "storage", "mynet" and "db" networks,
-  but not on machines with "logging" network, also configure "storage" and "mynet" networks)
+
+  juju deploy mysql -n 5 --constraints mem=8G
+  (deploy 5 instances of mysql with at least 8 GB of RAM each)
+  
+  juju deploy mysql --networks=storage,mynet --constraints networks=^logging,db
+  (deploy mysql on machines with "storage", "mynet" and "db" networks,
+  but not on machines with "logging" network, also configure "storage" and
+  "mynet" networks)
   
   Like constraints, service-specific network requirements can be
   specified with the --networks argument, which takes a comma-delimited
@@ -658,18 +692,15 @@ Click on the expander to see details for each command.
   the service. Not supported on all providers.
   
   See Also:
-
-    - juju help constraints
-    - juju help set-constraints
-    - juju help get-constraints
-
+  juju help constraints
+  juju help set-constraints
+  juju help get-constraints
 
 ^# destroy-environment
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju destroy-environment [options] <environment name>
   ```
 
@@ -677,42 +708,31 @@ Click on the expander to see details for each command.
 
    terminate all machines and other associated resources for an environment
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _--force  (= false)_  Forcefully destroy the environment, directly through the environment provider
 
-
   _-y, --yes  (= false)_  Do not ask for confirmation
-
 
 ^# destroy-machine
 
-
   #### usage:
 
-  ```
-  juju remove-machine [options] <machine> ...
+  ```no-highlight
+  juju machine remove [options] <machine> ...
   ```
 
   #### purpose:
 
    remove machines from the environment
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _--force  (= false)_  completely remove machine and all dependencies
   
@@ -724,21 +744,16 @@ Click on the expander to see details for each command.
   #### Examples: 
 
       # Remove machine number 5 which has no running units or containers
-      $ juju remove-machine 5
+      $ juju machine remove 5
 
-
-      # Remove machine 6 and any running units or containers
-      $ juju remove-machine 6 --force
-  
-  aliases: destroy-machine, terminate-machine
-
+  # Remove machine 6 and any running units or containers
+  $ juju machine remove 6 --force
 
 ^# destroy-relation
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
   ```
 
@@ -746,23 +761,18 @@ Click on the expander to see details for each command.
 
    remove a relation between two services
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
   aliases: destroy-relation
 
-
 ^# destroy-service
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju remove-service [options] <service>
   ```
 
@@ -770,25 +780,27 @@ Click on the expander to see details for each command.
 
    remove a service from the environment
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
   Removing a service will remove all its units and relations.
   
-  aliases: destroy-service
+  If this is the only service running, the machine on which
+  the service is hosted will also be destroyed, if possible.
+  The machine will be destroyed if:
 
+  _- it is not a state server_
+
+  _- it is not hosting any Juju managed containers_  
+  aliases: destroy-service
 
 ^# destroy-unit
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju remove-unit [options] <unit> [...]
   ```
 
@@ -796,53 +808,48 @@ Click on the expander to see details for each command.
 
    remove service units from the environment
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
   
-  aliases: destroy-unit
+  Remove service units from the environment.
+  
+  If this is the only unit running, the machine on which
+  the unit is hosted will also be destroyed, if possible.
+  The machine will be destroyed if:
 
+  _- it is not a state server_
+
+  _- it is not hosting any Juju managed containers_  
+  aliases: destroy-unit
 
 ^# ensure-availability
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju ensure-availability [options]
   ```
 
   #### purpose:
 
-   ensure the availability of Juju state servers
-
+   ensure that sufficient state servers exist to provide redundancy
 
   
   #### options:
 
-
-
   _--constraints  (= )_  additional machine constraints
-
 
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--format  (= simple)_  specify output format (json|simple|yaml)
-
 
   _-n  (= 0)_  number of state servers to make available
 
-
   _-o, --output (= "")_  specify an output file
 
-
   _--series (= "")_  the charm series
-
 
   _--to (= "")_  the machine(s) to become state servers, bypasses constraints
   
@@ -855,36 +862,27 @@ Click on the expander to see details for each command.
   #### Examples: 
 
       juju ensure-availability
-
-  Ensure that the system is still in highly available mode. If
-  there is only 1 state server running, this will ensure there
-  are 3 running. If you have previously requested more than 3,
-  then that number will be ensured.
-  
+      Ensure that the system is still in highly available mode. If
+      there is only 1 state server running, this will ensure there
+      are 3 running. If you have previously requested more than 3,
+      then that number will be ensured.
       juju ensure-availability -n 5 --series=trusty
-
-  Ensure that 5 state servers are available, with newly created
-  state server machines having the "trusty" series.
-  
+      Ensure that 5 state servers are available, with newly created
+      state server machines having the "trusty" series.
       juju ensure-availability -n 7 --constraints mem=8G
-
-  Ensure that 7 state servers are available, with newly created
-  state server machines having the default series, and at least
-  8GB RAM.
-  
+      Ensure that 7 state servers are available, with newly created
+      state server machines having the default series, and at least
+      8GB RAM.
       juju ensure-availability -n 7 --to server1,server2 --constraints mem=8G
-
-  Ensure that 7 state servers are available, with machines server1 and
-  server2 used first, and if necessary, newly created state server
-  machines having the default series, and at least 8GB RAM.
-
+      Ensure that 7 state servers are available, with machines server1 and
+      server2 used first, and if necessary, newly created state server
+      machines having the default series, and at least 8GB RAM.
 
 ^# env
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju switch [options] [environment name]
   ```
 
@@ -892,11 +890,8 @@ Click on the expander to see details for each command.
 
    show or change the default juju environment name
 
-
   
   #### options:
-
-
 
   _-l, --list  (= false)_  list the environment names
   
@@ -911,13 +906,50 @@ Click on the expander to see details for each command.
   
   aliases: env
 
-
-^# expose
-
+^# environment
 
   #### usage:
 
+  ```no-highlight
+  juju environment [options] <command> ...
   ```
+
+  #### purpose:
+
+   manage environments
+
+  
+  #### options:
+
+  _--description  (= false)_  
+
+  _-h, --help  (= false)_  show help on a command or other topic
+  
+  "juju environment" provides commands to interact with the Juju environment.
+  
+  #### subcommands:
+
+  get                - view environment values
+
+  get-constraints    - view constraints on the environment
+
+  help               - show help on a command or other topic
+
+  jenv               - import previously generated Juju environment files
+
+  retry-provisioning - retries provisioning for failed machines
+
+  set                - replace environment values
+
+  set-constraints    - set constraints on the environment
+
+  unset              - unset environment values
+
+^# expose
+
+  #### usage:
+
+  ```no-highlight
   juju expose [options] <service>
   ```
 
@@ -925,24 +957,19 @@ Click on the expander to see details for each command.
 
    expose a service
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
   Adjusts firewall rules and similar security mechanisms of the provider, to
   allow the service to be accessed on its public address.
 
-
 ^# generate-config
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju init [options]
   ```
 
@@ -950,44 +977,33 @@ Click on the expander to see details for each command.
 
    generate boilerplate configuration for juju environments
 
-
   
   #### options:
 
-
-
   _-f  (= false)_  force overwriting environments.yaml file even if it exists (ignored if --show flag specified)
-
 
   _--show  (= false)_  print the generated configuration data to stdout instead of writing it to a file
   
   aliases: generate-config
 
-
 ^# get
-
 
   #### usage:
 
-  ```
-  juju get [options] <service>
+  ```no-highlight
+  juju service get [options] <service>
   ```
 
   #### purpose:
 
    get service configuration options
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--format  (= yaml)_  specify output format (yaml)
-
 
   _-o, --output (= "")_  specify an output file
   
@@ -995,32 +1011,30 @@ Click on the expander to see details for each command.
   settings for <service>, including the setting name, whether it uses the default value
   or not ("default: true"), description (if set), type, and current value. Example:
   
-      $ juju get wordpress
+  $ juju service get wordpress
   
-      charm: wordpress
-      service: wordpress
-      settings:
-      engine:
-      default: true
-      description: 'Currently two ...'
-      type: string
-      value: nginx
-      tuning:
-      description: "This is the tuning level..."
-      type: string
-      value: optimized
+  charm: wordpress
+  service: wordpress
+  settings:
+  engine:
+  default: true
+  description: 'Currently two ...'
+  type: string
+  value: nginx
+  tuning:
+  description: "This is the tuning level..."
+  type: string
+  value: optimized
   
   NOTE: In the example above the descriptions and most other settings were omitted for
   brevity. The "engine" setting was left at its default value ("nginx"), while the
   "tuning" setting was set to "optimized" (the default value is "single").
 
-
 ^# get-constraints
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju get-constraints [options] [<service>]
   ```
 
@@ -1028,17 +1042,12 @@ Click on the expander to see details for each command.
 
    view constraints on the environment or a service
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--format  (= constraints)_  specify output format (constraints|json|yaml)
-
 
   _-o, --output (= "")_  specify an output file
   
@@ -1047,35 +1056,27 @@ Click on the expander to see details for each command.
   for a specific service by using juju get-constraints <service>.
   
   See Also:
-
-    - juju help constraints
-    - juju help set-constraints
-
+  juju help constraints
+  juju help set-constraints
 
 ^# get-env
 
-
   #### usage:
 
-  ```
-  juju get-environment [options] [<environment key>]
+  ```no-highlight
+  juju environment get [options] [<environment key>]
   ```
 
   #### purpose:
 
    view environment values
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--format  (= smart)_  specify output format (json|smart|yaml)
-
 
   _-o, --output (= "")_  specify an output file
   
@@ -1087,35 +1088,26 @@ Click on the expander to see details for each command.
   
   #### Example: 
 
-      juju get-environment default-series  (returns the default series for the environment)
-  
-  aliases: get-env
-
+  juju environment get default-series  (returns the default series for the environment)
 
 ^# get-environment
 
-
   #### usage:
 
-  ```
-  juju get-environment [options] [<environment key>]
+  ```no-highlight
+  juju environment get [options] [<environment key>]
   ```
 
   #### purpose:
 
    view environment values
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--format  (= smart)_  specify output format (json|smart|yaml)
-
 
   _-o, --output (= "")_  specify an output file
   
@@ -1127,17 +1119,13 @@ Click on the expander to see details for each command.
   
   #### Example: 
 
-      juju get-environment default-series  (returns the default series for the environment)
-  
-  aliases: get-env
-
+  juju environment get default-series  (returns the default series for the environment)
 
 ^# help
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju help [topic]
   ```
 
@@ -1145,17 +1133,14 @@ Click on the expander to see details for each command.
 
    show help on a command or other topic
 
-
   
   See also: topics
 
-
 ^# help-tool
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju help-tool [tool]
   ```
 
@@ -1163,15 +1148,11 @@ Click on the expander to see details for each command.
 
    show help on a juju charm tool
 
-
-
-
 ^# init
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju init [options]
   ```
 
@@ -1179,26 +1160,49 @@ Click on the expander to see details for each command.
 
    generate boilerplate configuration for juju environments
 
-
   
   #### options:
 
-
-
   _-f  (= false)_  force overwriting environments.yaml file even if it exists (ignored if --show flag specified)
-
 
   _--show  (= false)_  print the generated configuration data to stdout instead of writing it to a file
   
   aliases: generate-config
 
-
-^# publish
-
+^# machine
 
   #### usage:
 
+  ```no-highlight
+  juju machine [options] <command> ...
   ```
+
+  #### purpose:
+
+   manage machines
+
+  
+  #### options:
+
+  _--description  (= false)_  
+
+  _-h, --help  (= false)_  show help on a command or other topic
+  
+  "juju machine" provides commands to add and remove machines in the Juju environment.
+  
+  #### subcommands:
+
+  add    - start a new, empty machine and optionally a container, or add a container to a machine
+
+  help   - show help on a command or other topic
+
+  remove - remove machines from the environment
+
+^# publish
+
+  #### usage:
+
+  ```no-highlight
   juju publish [options] [<charm url>]
   ```
 
@@ -1206,14 +1210,10 @@ Click on the expander to see details for each command.
 
    publish charm to the store
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _--from (= ".")_  path for charm to be published
   
@@ -1221,40 +1221,32 @@ Click on the expander to see details for each command.
   the following forms are accepted:
   
   For cs:precise/mysql
-      
-      cs:precise/mysql
-      precise/mysql
+  cs:precise/mysql
+  precise/mysql
   
   For cs:~user/precise/mysql
-  
-      cs:~user/precise/mysql
+  cs:~user/precise/mysql
   
   There is no default series, so one must be provided explicitly when
   informing a charm URL. If the URL isn't provided, an attempt will be
   made to infer it from the current branch push URL.
 
-
 ^# remove-machine
-
 
   #### usage:
 
-  ```
-  juju remove-machine [options] <machine> ...
+  ```no-highlight
+  juju machine remove [options] <machine> ...
   ```
 
   #### purpose:
 
    remove machines from the environment
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _--force  (= false)_  completely remove machine and all dependencies
   
@@ -1266,19 +1258,16 @@ Click on the expander to see details for each command.
   #### Examples: 
 
       # Remove machine number 5 which has no running units or containers
-      juju remove-machine 5
-      # Remove machine 6 and any running units or containers
-      juju remove-machine 6 --force
-  
-  aliases: destroy-machine, terminate-machine
+      $ juju machine remove 5
 
+  # Remove machine 6 and any running units or containers
+  $ juju machine remove 6 --force
 
 ^# remove-relation
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
   ```
 
@@ -1286,23 +1275,18 @@ Click on the expander to see details for each command.
 
    remove a relation between two services
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
   aliases: destroy-relation
 
-
 ^# remove-service
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju remove-service [options] <service>
   ```
 
@@ -1310,25 +1294,27 @@ Click on the expander to see details for each command.
 
    remove a service from the environment
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
   Removing a service will remove all its units and relations.
   
-  aliases: destroy-service
+  If this is the only service running, the machine on which
+  the service is hosted will also be destroyed, if possible.
+  The machine will be destroyed if:
 
+  _- it is not a state server_
+
+  _- it is not hosting any Juju managed containers_  
+  aliases: destroy-service
 
 ^# remove-unit
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju remove-unit [options] <unit> [...]
   ```
 
@@ -1336,23 +1322,27 @@ Click on the expander to see details for each command.
 
    remove service units from the environment
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
   
-  aliases: destroy-unit
+  Remove service units from the environment.
+  
+  If this is the only unit running, the machine on which
+  the unit is hosted will also be destroyed, if possible.
+  The machine will be destroyed if:
 
+  _- it is not a state server_
+
+  _- it is not hosting any Juju managed containers_  
+  aliases: destroy-unit
 
 ^# resolved
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju resolved [options] <unit>
   ```
 
@@ -1360,46 +1350,35 @@ Click on the expander to see details for each command.
 
    marks unit errors resolved
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _-r, --retry  (= false)_  re-execute failed hooks
 
-
 ^# retry-provisioning
-
 
   #### usage:
 
-  ```
-  juju retry-provisioning [options] <machine> [...]
+  ```no-highlight
+  juju environment retry-provisioning [options] <machine> [...]
   ```
 
   #### purpose:
 
    retries provisioning for failed machines
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
 ^# run
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju run [options] <commands>
   ```
 
@@ -1407,32 +1386,22 @@ Click on the expander to see details for each command.
 
    run the commands on the remote targets specified
 
-
   
   #### options:
 
-
-
   _--all  (= false)_  run the commands on all the machines
-
 
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--format  (= smart)_  specify output format (json|smart|yaml)
-
 
   _--machine  (= )_  one or more machine ids
 
-
   _-o, --output (= "")_  specify an output file
-
 
   _--service  (= )_  one or more service names
 
-
   _--timeout  (= 5m0s)_  how long to wait before the remote command is considered to have failed
-
 
   _--unit  (= )_  one or more unit ids
   
@@ -1451,26 +1420,21 @@ Click on the expander to see details for each command.
   service. For example, if there was a service "mysql" and that service
   had two units, "mysql/0" and "mysql/1", then
 
-
   _--service mysql_  is equivalent to
-
 
   _--unit mysql/0,mysql/1_  
   Commands run for services or units are executed in a 'hook context' for
   the unit.
   
 
-
   _--all is provided as a simple way to run the command on all the machines_  in the environment.  If you specify --all you cannot provide additional
   targets.
 
-
 ^# scp
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju scp [options] <file1> ... <file2> [scp-option...]
   ```
 
@@ -1478,17 +1442,12 @@ Click on the expander to see details for each command.
 
    launch a scp command to copy files to/from remote machine(s)
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--proxy  (= true)_  proxy through the API server
-
 
   _--pty  (= true)_  enable pseudo-tty allocation
   
@@ -1505,48 +1464,77 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-
-
   Copy a single file from machine 2 to the local machine:
   
-      juju scp 2:/var/log/syslog .
+  juju scp 2:/var/log/syslog .
   
   Copy 2 files from two units to the local backup/ directory, passing -v
   to scp as an extra argument:
   
-      juju scp -- -v ubuntu/0:/path/file1 ubuntu/1:/path/file2 backup/
+  juju scp -- -v ubuntu/0:/path/file1 ubuntu/1:/path/file2 backup/
   
   Recursively copy the directory /var/log/mongodb/ on the first mongodb
   server to the local directory remote-logs:
   
-      juju scp -- -r mongodb/0:/var/log/mongodb/ remote-logs/
+  juju scp -- -r mongodb/0:/var/log/mongodb/ remote-logs/
   
   Copy a local file to the second apache unit of the environment "testing":
   
-      juju scp -e testing foo.txt apache2/1:
+  juju scp -e testing foo.txt apache2/1:
 
-
-^# set
-
+^# service
 
   #### usage:
 
+  ```no-highlight
+  juju service [options] <command> ...
   ```
-  juju set [options] <service> name=value ...
+
+  #### purpose:
+
+   manage services
+
+  
+  #### options:
+
+  _--description  (= false)_  
+
+  _-h, --help  (= false)_  show help on a command or other topic
+  
+  "juju service" provides commands to manage Juju services.
+  
+  #### subcommands:
+
+  add-unit        - add one or more units of an already-deployed service
+
+  get             - get service configuration options
+
+  get-constraints - view constraints on a service
+
+  help            - show help on a command or other topic
+
+  set             - set service config options
+
+  set-constraints - set constraints on a service
+
+  unset           - set service config options back to their default
+
+^# set
+
+  #### usage:
+
+  ```no-highlight
+  juju service set [options] <service> name=value ...
   ```
 
   #### purpose:
 
    set service config options
 
-
   
   #### options:
 
-
-
   _--config  (= )_  path to yaml-formatted service config
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
@@ -1561,13 +1549,11 @@ Click on the expander to see details for each command.
   Option values may be any UTF-8 encoded string. UTF-8 is accepted on the command
   line and in configuration files.
 
-
 ^# set-constraints
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju set-constraints [options] [key=[value] ...]
   ```
 
@@ -1575,14 +1561,10 @@ Click on the expander to see details for each command.
 
    set constraints on the environment or a service
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _-s, --service (= "")_  set service constraints
   
@@ -1598,78 +1580,61 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      set-constraints mem=8G                         (all new machines in the environment must have at least 8GB of RAM)
-      set-constraints --service wordpress mem=4G     (all new wordpress machines can ignore the 8G constraint above, and require only 4G)
+  set-constraints mem=8G                         (all new machines in the environment must have at least 8GB of RAM)
+  set-constraints --service wordpress mem=4G     (all new wordpress machines can ignore the 8G constraint above, and require only 4G)
   
   See Also:
-
-    - juju help constraints
-    - juju help get-constraints
-    - juju help deploy
-    - juju help add-machine
-    - juju help add-unit
-
+  juju help constraints
+  juju help get-constraints
+  juju help deploy
+  juju help add-machine
+  juju help add-unit
 
 ^# set-env
 
-
   #### usage:
 
-  ```
-  juju set-environment [options] key=[value] ...
+  ```no-highlight
+  juju environment set [options] key=[value] ...
   ```
 
   #### purpose:
 
    replace environment values
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
   Updates the environment of a running Juju instance.  Multiple key/value pairs
   can be passed on as command line arguments.
-  
-  aliases: set-env
-
 
 ^# set-environment
 
-
   #### usage:
 
-  ```
-  juju set-environment [options] key=[value] ...
+  ```no-highlight
+  juju environment set [options] key=[value] ...
   ```
 
   #### purpose:
 
    replace environment values
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
   Updates the environment of a running Juju instance.  Multiple key/value pairs
   can be passed on as command line arguments.
-  
-  aliases: set-env
-
 
 ^# ssh
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju ssh [options] <target> [<ssh args>...]
   ```
 
@@ -1677,17 +1642,12 @@ Click on the expander to see details for each command.
 
    launch an ssh shell on a given unit or machine
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--proxy  (= true)_  proxy through the API server
-
 
   _--pty  (= true)_  enable pseudo-tty allocation
   
@@ -1700,101 +1660,29 @@ Click on the expander to see details for each command.
 
   Connect to machine 0:
   
-      juju ssh 0
+  juju ssh 0
   
   Connect to machine 1 and run 'uname -a':
   
-      juju ssh 1 uname -a
+  juju ssh 1 uname -a
   
   Connect to the first mysql unit:
   
-      juju ssh mysql/0
+  juju ssh mysql/0
   
   Connect to the first mysql unit and run 'ls -la /var/log/juju':
   
-      juju ssh mysql/0 ls -la /var/log/juju
+  juju ssh mysql/0 ls -la /var/log/juju
   
   Connect to the first jenkins unit as the user jenkins:
   
-      juju ssh jenkins@jenkins/0
-
+  juju ssh jenkins@jenkins/0
 
 ^# stat
 
-
   #### usage:
 
-  ```
-  juju stat [options] [pattern ...]
-  ```
-
-  #### purpose:
-
-   output status information about an environment
-
-
-  
-  #### options:
-
-
-
-  _-e, --environment (= "")_  juju environment to operate in
-
-
-  _--format  (= yaml)_  specify output format (json|oneline|summary|tabular|yaml)
-
-
-  _-o, --output (= "")_  specify an output file
-  
-  This command will report on the runtime state of various system entities.
-  
-  There are a number of ways to format the status output:
-  
-
-
-  _- oneline: List units and their subordinates. For each unit, the IP_  address and agent status are listed.
-
-
-  _- summary: Displays the subnet(s) and port(s) the environment utilizes._  Also displays aggregate information about:
-
-
-  _- MACHINES: total #, and # in each state._
-
-  _- UNITS: total #, and # in each state._
-
-  _- SERVICES: total #, and # exposed of each service._
-
-  _- tabular: Displays information in a tabular format in these sections:_
-
-  _- Machines: ID, STATE, VERSION, DNS, INS-ID, SERIES, HARDWARE_
-
-  _- Services: NAME, EXPOSED, CHARM_
-
-  _- Units: ID, STATE, VERSION, MACHINE, PORTS, PUBLIC-ADDRESS_
-
-  _- Also displays subordinate units._
-
-  _- yaml (DEFAULT): Displays information on machines, services, and units_  in the yaml format.
-  
-  Service or unit names may be specified to filter the status to only those
-  services and units that match, along with the related machines, services
-  and units. If a subordinate unit is matched, then its principal unit will
-  be displayed. If a principal unit is matched, then all of its subordinates
-  will be displayed.
-  
-  Wildcards ('*') may be specified in service/unit names to match any sequence
-  of characters. For example, 'nova-*' will match any service whose name begins
-  with 'nova-': 'nova-compute', 'nova-volume', etc.
-  
-  aliases: stat
-
-
-^# status
-
-
-  #### usage:
-
-  ```
+  ```no-highlight
   juju status [options] [pattern ...]
   ```
 
@@ -1802,31 +1690,25 @@ Click on the expander to see details for each command.
 
    output status information about an environment
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
 
-
-  _--format  (= yaml)_  specify output format (json|oneline|summary|tabular|yaml)
-
+  _--format  (= yaml)_  specify output format (json|line|oneline|short|summary|tabular|yaml)
 
   _-o, --output (= "")_  specify an output file
+
+  _--utc  (= false)_  display time as UTC in RFC3339 format
   
   This command will report on the runtime state of various system entities.
   
   There are a number of ways to format the status output:
   
 
-
-  _- oneline: List units and their subordinates. For each unit, the IP_  address and agent status are listed.
-
+  _- {short|line|oneline}: List units and their subordinates. For each_  unit, the IP address and agent status are listed.
 
   _- summary: Displays the subnet(s) and port(s) the environment utilizes._  Also displays aggregate information about:
-
 
   _- MACHINES: total #, and # in each state._
 
@@ -1855,24 +1737,144 @@ Click on the expander to see details for each command.
   Wildcards ('*') may be specified in service/unit names to match any sequence
   of characters. For example, 'nova-*' will match any service whose name begins
   with 'nova-': 'nova-compute', 'nova-volume', etc.
-
-#### Examples: 
-
-      # Display environment status in short format
-      juju status --format short 
-      # Watch (very useful to observe changes) environment status in short format
-      watch juju status --format short 
-
   
   aliases: stat
 
-
-^# switch
-
+^# status
 
   #### usage:
 
+  ```no-highlight
+  juju status [options] [pattern ...]
   ```
+
+  #### purpose:
+
+   output status information about an environment
+
+  
+  #### options:
+
+  _-e, --environment (= "")_  juju environment to operate in
+
+  _--format  (= yaml)_  specify output format (json|line|oneline|short|summary|tabular|yaml)
+
+  _-o, --output (= "")_  specify an output file
+
+  _--utc  (= false)_  display time as UTC in RFC3339 format
+  
+  This command will report on the runtime state of various system entities.
+  
+  There are a number of ways to format the status output:
+  
+
+  _- {short|line|oneline}: List units and their subordinates. For each_  unit, the IP address and agent status are listed.
+
+  _- summary: Displays the subnet(s) and port(s) the environment utilizes._  Also displays aggregate information about:
+
+  _- MACHINES: total #, and # in each state._
+
+  _- UNITS: total #, and # in each state._
+
+  _- SERVICES: total #, and # exposed of each service._
+
+  _- tabular: Displays information in a tabular format in these sections:_
+
+  _- Machines: ID, STATE, VERSION, DNS, INS-ID, SERIES, HARDWARE_
+
+  _- Services: NAME, EXPOSED, CHARM_
+
+  _- Units: ID, STATE, VERSION, MACHINE, PORTS, PUBLIC-ADDRESS_
+
+  _- Also displays subordinate units._
+
+  _- yaml (DEFAULT): Displays information on machines, services, and units_  in the yaml format.
+  
+  Service or unit names may be specified to filter the status to only those
+  services and units that match, along with the related machines, services
+  and units. If a subordinate unit is matched, then its principal unit will
+  be displayed. If a principal unit is matched, then all of its subordinates
+  will be displayed.
+  
+  Wildcards ('*') may be specified in service/unit names to match any sequence
+  of characters. For example, 'nova-*' will match any service whose name begins
+  with 'nova-': 'nova-compute', 'nova-volume', etc.
+  
+  aliases: stat
+
+^# status-history
+
+  #### usage:
+
+  ```no-highlight
+  juju status-history [options] [-n N] <unit>
+  ```
+
+  #### purpose:
+
+   output past statuses for a unit
+
+  
+  #### options:
+
+  _-e, --environment (= "")_  juju environment to operate in
+
+  _-n  (= 20)_  size of logs backlog.
+
+  _--type (= "combined")_  type of statuses to be displayed [agent|workload|combined].
+
+  _--utc  (= false)_  display time as UTC in RFC3339 format
+  
+  This command will report the history of status changes for
+  a given unit.
+  The statuses for the unit workload and/or agent are available.
+
+  _-type supports:_  agent: will show statuses for the unit's agent
+  workload: will show statuses for the unit's workload
+  combined: will show agent and workload statuses combined
+  and sorted by time of occurence.
+
+^# storage
+
+  #### usage:
+
+  ```no-highlight
+  juju storage [options] <command> ...
+  ```
+
+  #### purpose:
+
+   manage storage instances
+
+  
+  #### options:
+
+  _--description  (= false)_  
+
+  _-h, --help  (= false)_  show help on a command or other topic
+  
+  "juju storage" is used to manage storage instances in
+  the Juju environment.
+  
+  #### subcommands:
+
+  add    - adds unit storage dynamically
+
+  help   - show help on a command or other topic
+
+  list   - lists storage
+
+  pool   - manage storage pools
+
+  show   - shows storage instance
+
+  volume - manage storage volumes
+
+^# switch
+
+  #### usage:
+
+  ```no-highlight
   juju switch [options] [environment name]
   ```
 
@@ -1880,11 +1882,8 @@ Click on the expander to see details for each command.
 
    show or change the default juju environment name
 
-
   
   #### options:
-
-
 
   _-l, --list  (= false)_  list the environment names
   
@@ -1899,13 +1898,11 @@ Click on the expander to see details for each command.
   
   aliases: env
 
-
 ^# sync-tools
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju sync-tools [options]
   ```
 
@@ -1913,39 +1910,27 @@ Click on the expander to see details for each command.
 
    copy tools from the official tool store into a local environment
 
-
   
   #### options:
 
-
-
   _--all  (= false)_  copy all versions, not just the latest
 
-
   _--destination (= "")_  local destination directory
-
 
   _--dev  (= false)_  consider development versions as well as released ones
   DEPRECATED: use --stream instead
 
-
   _--dry-run  (= false)_  don't copy, just print what would be copied
-
 
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--local-dir (= "")_  local destination directory
-
 
   _--public  (= false)_  tools are for a public cloud, so generate mirrors information
 
-
   _--source (= "")_  local source directory
 
-
   _--stream (= "")_  simplestreams stream for which to sync metadata
-
 
   _--version (= "")_  copy a specific major[.minor] version
   
@@ -1958,28 +1943,22 @@ Click on the expander to see details for each command.
   and sometimes you just want to avoid having to access data outside of
   the local cloud.
 
-
 ^# terminate-machine
-
 
   #### usage:
 
-  ```
-  juju remove-machine [options] <machine> ...
+  ```no-highlight
+  juju machine remove [options] <machine> ...
   ```
 
   #### purpose:
 
    remove machines from the environment
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _--force  (= false)_  completely remove machine and all dependencies
   
@@ -1991,20 +1970,99 @@ Click on the expander to see details for each command.
   #### Examples: 
 
       # Remove machine number 5 which has no running units or containers
-      juju remove-machine 5
+      $ juju machine remove 5
 
-      # Remove machine 6 and any running units or containers
-      juju remove-machine 6 --force
-  
-  aliases: destroy-machine, terminate-machine
+  # Remove machine 6 and any running units or containers
+  $ juju machine remove 6 --force
 
-
-^# unexpose
-
+^# unblock
 
   #### usage:
 
+  ```no-highlight
+  juju unblock [options] destroy-environment | remove-object | all-changes
   ```
+
+  #### purpose:
+
+   unblock an operation that would alter a running environment
+
+  
+  #### options:
+
+  _-e, --environment (= "")_  juju environment to operate in
+  
+  Juju allows to safeguard deployed environments from unintentional damage by preventing
+  execution of operations that could alter environment.
+  
+  This is done by blocking certain commands from successful execution. Blocked commands
+  must be manually unblocked to proceed.
+  
+  Some comands offer a --force option that can be used to bypass a block.
+  
+  Commands that can be unblocked are grouped based on logical operations as follows:
+  
+  destroy-environment includes command:
+  destroy-environment
+  
+  remove-object includes termination commands:
+  destroy-environment
+  remove-machine
+  remove-relation
+  remove-service
+  remove-unit
+  
+  all-changes includes all alteration commands
+  add-machine
+  add-relation
+  add-unit
+  authorised-keys add
+  authorised-keys delete
+  authorised-keys import
+  deploy
+  destroy-environment
+  ensure-availability
+  expose
+  remove-machine
+  remove-relation
+  remove-service
+  remove-unit
+  resolved
+  retry-provisioning
+  run
+  set
+  set-constraints
+  set-env
+  sync-tools
+  unexpose
+  unset
+  unset-env
+  upgrade-charm
+  upgrade-juju
+  user add
+  user change-password
+  user disable
+  user enable
+  
+  #### Examples: 
+
+      To allow the environment to be destroyed:
+      juju unblock destroy-environment
+
+  To allow the machines, services, units and relations to be removed:
+  juju unblock remove-object
+  
+  To allow changes to the environment:
+  juju unblock all-changes
+  
+  See Also:
+  juju help block
+
+^# unexpose
+
+  #### usage:
+
+  ```no-highlight
   juju unexpose [options] <service>
   ```
 
@@ -2012,59 +2070,46 @@ Click on the expander to see details for each command.
 
    unexpose a service
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
 ^# unset
 
-
   #### usage:
 
-  ```
-  juju unset [options] <service> name ...
+  ```no-highlight
+  juju service unset [options] <service> name ...
   ```
 
   #### purpose:
 
    set service config options back to their default
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
   Set one or more configuration options for the specified service to their
-  default. See also the set command to set one or more configuration options for
+  default. See also the set commmand to set one or more configuration options for
   a specified service.
-
 
 ^# unset-env
 
-
   #### usage:
 
-  ```
-  juju unset-environment [options] <environment key> ...
+  ```no-highlight
+  juju environment unset [options] <environment key> ...
   ```
 
   #### purpose:
 
    unset environment values
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
@@ -2073,29 +2118,22 @@ Click on the expander to see details for each command.
   and attempting to remove a required attribute with no default will result
   in an error.
   
-  Multiple attributes may be removed at once; keys are space-separated.
-  
-  aliases: unset-env
-
+  Multiple attributes may be removed at once; keys should be space-separated.
 
 ^# unset-environment
 
-
   #### usage:
 
-  ```
-  juju unset-environment [options] <environment key> ...
+  ```no-highlight
+  juju environment unset [options] <environment key> ...
   ```
 
   #### purpose:
 
    unset environment values
 
-
   
   #### options:
-
-
 
   _-e, --environment (= "")_  juju environment to operate in
   
@@ -2104,17 +2142,13 @@ Click on the expander to see details for each command.
   and attempting to remove a required attribute with no default will result
   in an error.
   
-  Multiple attributes may be removed at once; keys are space-separated.
-  
-  aliases: unset-env
-
+  Multiple attributes may be removed at once; keys should be space-separated.
 
 ^# upgrade-charm
 
-
   #### usage:
 
-  ```
+  ```no-highlight
   juju upgrade-charm [options] <service>
   ```
 
@@ -2122,23 +2156,16 @@ Click on the expander to see details for each command.
 
    upgrade a service's charm
 
-
   
   #### options:
 
-
-
   _-e, --environment (= "")_  juju environment to operate in
-
 
   _--force  (= false)_  upgrade all units immediately, even if in error state
 
-
   _--repository (= "")_  local charm repository path
 
-
   _--revision  (= -1)_  explicit revision of current charm
-
 
   _--switch (= "")_  crossgrade to a different charm
   
@@ -2164,15 +2191,12 @@ Click on the expander to see details for each command.
   regardless of potential havoc, so long as the following conditions hold:
   
 
-
   _- The new charm must declare all relations that the service is currently_  participating in.
-
 
   _- All config settings shared by the old and new charms must_  have the same types.
   
   The new charm may add new relations and configuration settings.
   
-
 
   _--switch and --revision are mutually exclusive. To specify a given revision_  number with --switch, give it in the charm URL, for instance "cs:wordpress-5"
   would specify revision number 5 of the wordpress charm.
@@ -2181,13 +2205,11 @@ Click on the expander to see details for each command.
   error state will not have upgrade-charm hooks executed, and may cause unexpected
   behavior.
 
-
 ^# upgrade-juju
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju upgrade-juju [options]
   ```
 
@@ -2195,29 +2217,20 @@ Click on the expander to see details for each command.
 
    upgrade the tools in a juju environment
 
-
   
   #### options:
 
-
-
   _--dry-run  (= false)_  don't change anything, just report what would change
-
 
   _-e, --environment (= "")_  juju environment to operate in
 
-
   _--reset-previous-upgrade  (= false)_  clear the previous (incomplete) upgrade status (use with care)
-
 
   _--series  (= )_  upload tools for supplied comma-separated series list (OBSOLETE)
 
-
   _--upload-tools  (= false)_  upload local version of tools
 
-
   _--version (= "")_  upgrade to specific version
-
 
   _-y, --yes  (= false)_  answer 'yes' to confirmation prompts
   
@@ -2231,11 +2244,9 @@ Click on the expander to see details for each command.
   development version may be chosen in two cases:
   
 
+   - when the current agent version is a development one and there is a more recent version available with the same major.minor numbers;
 
-  _- when the current agent version is a development one and there is_  a more recent version available with the same major.minor numbers;
-
-
-  _- when an explicit --version major.minor is given (e.g. --version 1.17,_  or 1.17.2, but not just 1)
+   - when an explicit --version major.minor is given (e.g. --version 1.17,_  or 1.17.2, but not just 1)
   
   For development use, the --upload-tools flag specifies that the juju tools will
   packaged (or compiled locally, if no jujud binaries exists, for which you will
@@ -2248,12 +2259,12 @@ Click on the expander to see details for each command.
   value of the environment's agent-version setting:
   
 
+   - The highest patch.build version of the *next* stable major.minor version.
 
-  _- The highest patch.build version of the *next* stable major.minor version._
+  - The highest patch.build version of the *current* major.minor version.
 
-  _- The highest patch.build version of the *current* major.minor version._  
   Both of these depend on tools availability, which some situations (no
-  outgoing Internet access) and provider types (such as maas) require that
+  outgoing internet access) and provider types (such as maas) require that
   you manage yourself; see the documentation for "sync-tools".
   
   The upgrade-juju command will abort if an upgrade is already in
@@ -2263,13 +2274,11 @@ Click on the expander to see details for each command.
   been resolved, the --reset-previous-upgrade flag can be used to reset
   the environment's upgrade tracking state, allowing further upgrades.
 
-
 ^# user
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju user [options] <command> ...
   ```
 
@@ -2277,14 +2286,10 @@ Click on the expander to see details for each command.
 
    manage user accounts and access control
 
-
   
   #### options:
 
-
-
   _--description  (= false)_  
-
 
   _-h, --help  (= false)_  show help on a command or other topic
   
@@ -2295,33 +2300,23 @@ Click on the expander to see details for each command.
 
   add             - adds a user
 
-
   change-password - changes the password for a user
-
 
   disable         - disable a user to stop the user logging in
 
-
   enable          - reenables a disabled user to allow the user to log in
-
 
   help            - show help on a command or other topic
 
-
   info            - shows information on a user
-
 
   list            - shows all users
 
-
-
-
 ^# version
-
 
   #### usage:
 
-  ```
+  ```no-highlight
   juju version [options]
   ```
 
@@ -2329,15 +2324,10 @@ Click on the expander to see details for each command.
 
    print the current version
 
-
   
   #### options:
 
-
-
   _--format  (= smart)_  specify output format (json|smart|yaml)
 
-
   _-o, --output (= "")_  specify an output file
-
 
