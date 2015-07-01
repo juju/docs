@@ -205,6 +205,7 @@ no-proxy | string |  |  | List of domain addresses not to be proxied (comma-sepa
 prefer-ipv6 | bool | false |  | Whether to prefer IPv6 over IPv4 addresses for API endpoints and machines
 provisioner-harvest-mode | string | destroyed | all/none/unknown/destroyed | What to do with unknown machines. See [harvesting section](#juju-lifecycle-and-harvesting)
 proxy-ssh | bool |  |  | Whether SSH commands should be proxied through the API server
+resource-tags | string | none | | Space-separated list of key=value pairs used to apply as tags on supported cloud environments
 rsyslog-ca-cert | string |  |  | The certificate of the CA that signed the rsyslog certificate, in PEM format
 rsyslog-ca-key | string |  |  | The private key of the CA that signed the rsyslog certificate, in PEM format
 set-numa-control-policy | bool | false |  | Tune Juju state-server to work with NUMA if present

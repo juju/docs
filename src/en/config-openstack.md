@@ -1,3 +1,4 @@
+Title: Configuring Juju for OpenStack
 # Configuring for OpenStack
 
 Start by generating a generic configuration file for Juju, using the
@@ -94,9 +95,16 @@ useful:
 [Ubuntu Cloud Infrastructure](https://help.ubuntu.com/community/UbuntuCloudInfrastructure)
 
 
-# Bootstrapping
+## Bootstrapping
 
 Before being able to bootstrap into a Private Openstack Cloud you'll need to generate
 simplestreams metadata:
 
 [How to setup a Private Cloud](howto-privatecloud.html)
+
+##Additional notes
+
+Juju-owned instances running in OpenStack support consistent naming, tagging and
+the ability to add user-controlled tags to created instances. 
+See the [naming and tagging documentation](config-tagging.html) for more
+information.
