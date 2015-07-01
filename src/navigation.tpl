@@ -42,6 +42,7 @@
               <li class=" sub"><a href="howto-proxies.html">Configure Proxy Access</a></li>
               <li class=" sub"><a href="howto-offline-charms.html">Deploy charms offline</a></li>
               <li class="sub"><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
+              <li class="sub"><a href="howto-drupal-iis.html">Deploy Drupal Windows charm</a></li>
               <li class="sub"><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
               <li class=""><a href="troubleshooting.html">Troubleshooting</a></li>
             </ul>
