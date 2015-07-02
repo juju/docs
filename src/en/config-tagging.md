@@ -44,7 +44,8 @@ juju set-env resource-tags="origin=evilnick owner=Canonical"
 ![user tagged instances in Amazon](./media/config-tagging-user.png)
 
 You can change the tags again by simply running the above command again with
-different values.
+different values. Changes will not be made to existing machines, but the 
+new tags will apply to any future machines created.
 
 These tags may be used, for example, to set up chargeback accounting.
 
