@@ -39,37 +39,39 @@ We also recommend trying Juju in [our Vagrant box](config-vagrant.html).
 
 # Configuring
 
-Now the Juju software is installed, it needs to be configured to use your
-particular cloud provider. This is done by generating and editing a file,
-`environments.yaml`, which will live in your `~/.juju/` directory on Linux and
-OSX, `%LOCALAPPDATA%/Juju` on Windows. You can generate the environments file
-manually, but Juju also includes a boilerplate configuration option that will
-flesh out most of the file for you and minimise the amount of work (and
-potential errors).
+Juju needs to be configured to use your cloud provider. This is done via the
+following file:
 
-To generate an initial config file, you simply need to run:
+## Linux & Mac OSX
 
-    juju generate-config
+```no-highlight
+~/.juju/environments.yaml
+```
 
-This command will cause a file to be written to your ~/.juju directory if an
-environments.yaml file does not already exist. It will also create the ~./juju
-directory if that does not exist.
+## Windows
 
-This file will contain sample profiles for different types of cloud services,
-but you will need to edit the files to provide specific information for your
-cloud provider. Sections are created for Amazon (AWS) services, HPCloud and a
-generic OpenStack instance (and for the local provider if running on Linux). For
-more specifics on what needs to be changed, see the relevant sections below.
+```no-highlight
+%APPDATA%\Juju\environments.yaml
+```
 
-  - [Configuring for Amazon AWS](config-aws.html)
-  - [Configuring for Windows Azure](config-azure.html)
-  - [Configuring for HP Cloud](config-hpcloud.html)
-  - [Configuring for OpenStack](config-openstack.html)
-  - [Configuring for bare metal using MAAS](config-maas.html)
-  - [Configuring for LXC local provider (Linux)](config-local.html)
-  - [Configuring for Vagrant local provider (OSX, Linux, and Windows)](config-vagrant.html)
+ Note: %APPDATA% typically == C:\Users\<user>\AppData\Roaming
 
-**Note:** Juju's command line interface includes documentation, doing `juju help` will show you the topics. You can also check out the [Juju command cheatsheet](https://github.com/juju/cheatsheet) if you are looking for a handy command guide.
+Juju can automatically generate the file in this way:
+
+```bash
+juju generate-config
+```
+
+This action will not overwrite an existing file but merely dump the information
+onscreen (STDOUT). It will contain sample profiles for different types of cloud
+services.  Edit it to provide specific information for your chosen cloud
+provider. For more specifics on what needs to be changed, see the relevant
+sections in the left pane (under *Install & Configure*).
+
+**Note:** Juju's command line interface includes documentation, running `juju
+help` will show you the topics. You can also look at the
+[Juju command cheatsheet](https://github.com/juju/cheatsheet) if you are
+looking for a convenient command guide..
 
 # Testing your setup
 
