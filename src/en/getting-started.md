@@ -44,10 +44,17 @@ particular cloud provider. This is done by generating and editing the following 
 
 ## Linux & Mac OSX
 
-    ~/.juju/environments.yaml
+```no-highlight
+~/.juju/environments.yaml
+```
 
 ## Windows
-    %LOCALAPPDATA%/Juju
+
+```no-highlight
+%APPDATA%\Juju\environments.yaml
+```
+
+ Note: %APPDATA% typically == C:\Users\<user>\AppData\Roaming
     
 You can generate the environments file manually, but Juju also includes a 
 boilerplate configuration option that will flesh out most of the file for 
