@@ -15,7 +15,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju action [options] <command> ...
   ```
 
@@ -50,7 +50,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju machine add [options] [<container>:machine | <container> | ssh:[user@]host | placement]
   ```
 
@@ -120,7 +120,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju add-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
   ```
 
@@ -137,7 +137,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju service add-unit [options] <service name>
   ```
 
@@ -173,7 +173,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju api-endpoints [options]
   ```
 
@@ -220,7 +220,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju api-info [options] [field ...]
   ```
 
@@ -320,7 +320,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju authorized-keys [options] <command> ...
   ```
 
@@ -358,7 +358,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju backups [options] <command> ...
   ```
 
@@ -397,7 +397,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju block [options] <command> ...
   ```
 
@@ -437,7 +437,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju bootstrap [options]
   ```
 
@@ -508,7 +508,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju cached-images [options] <command> ...
   ```
 
@@ -538,7 +538,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju debug-hooks [options] <unit name> [hook names]
   ```
 
@@ -561,7 +561,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju debug-log [options]
   ```
 
@@ -597,7 +597,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju deploy [options] <charm name> [<service name>]
   ```
 
@@ -703,7 +703,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju destroy-environment [options] <environment name>
   ```
 
@@ -724,7 +724,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju machine remove [options] <machine> ...
   ```
 
@@ -756,7 +756,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
   ```
 
@@ -775,7 +775,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju remove-service [options] <service>
   ```
 
@@ -803,7 +803,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju remove-unit [options] <unit> [...]
   ```
 
@@ -831,7 +831,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju ensure-availability [options]
   ```
 
@@ -885,7 +885,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju switch [options] [environment name]
   ```
 
@@ -913,7 +913,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju environment [options] <command> ...
   ```
 
@@ -952,7 +952,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju expose [options] <service>
   ```
 
@@ -972,7 +972,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju init [options]
   ```
 
@@ -993,7 +993,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju service get [options] <service>
   ```
 
@@ -1037,7 +1037,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju get-constraints [options] [<service>]
   ```
 
@@ -1066,7 +1066,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju environment get [options] [<environment key>]
   ```
 
@@ -1097,7 +1097,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju environment get [options] [<environment key>]
   ```
 
@@ -1128,7 +1128,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju help [topic]
   ```
 
@@ -1143,7 +1143,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju help-tool [tool]
   ```
 
@@ -1155,7 +1155,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju init [options]
   ```
 
@@ -1176,7 +1176,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju machine [options] <command> ...
   ```
 
@@ -1205,7 +1205,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju publish [options] [<charm url>]
   ```
 
@@ -1238,7 +1238,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju machine remove [options] <machine> ...
   ```
 
@@ -1270,7 +1270,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
   ```
 
@@ -1289,7 +1289,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju remove-service [options] <service>
   ```
 
@@ -1317,7 +1317,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju remove-unit [options] <unit> [...]
   ```
 
@@ -1345,7 +1345,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju resolved [options] <unit>
   ```
 
@@ -1364,7 +1364,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju environment retry-provisioning [options] <machine> [...]
   ```
 
@@ -1381,7 +1381,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju run [options] <commands>
   ```
 
@@ -1437,7 +1437,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju scp [options] <file1> ... <file2> [scp-option...]
   ```
 
@@ -1489,7 +1489,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju service [options] <command> ...
   ```
 
@@ -1526,7 +1526,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju service set [options] <service> name=value ...
   ```
 
@@ -1556,7 +1556,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju set-constraints [options] [key=[value] ...]
   ```
 
@@ -1597,7 +1597,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju environment set [options] key=[value] ...
   ```
 
@@ -1617,7 +1617,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju environment set [options] key=[value] ...
   ```
 
@@ -1637,7 +1637,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju ssh [options] <target> [<ssh args>...]
   ```
 
@@ -1685,7 +1685,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju status [options] [pattern ...]
   ```
 
@@ -1747,7 +1747,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju status [options] [pattern ...]
   ```
 
@@ -1809,7 +1809,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju status-history [options] [-n N] <unit>
   ```
 
@@ -1841,7 +1841,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju storage [options] <command> ...
   ```
 
@@ -1877,7 +1877,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju switch [options] [environment name]
   ```
 
@@ -1905,7 +1905,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju sync-tools [options]
   ```
 
@@ -1950,7 +1950,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju machine remove [options] <machine> ...
   ```
 
@@ -1982,7 +1982,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju unblock [options] destroy-environment | remove-object | all-changes
   ```
 
@@ -2049,14 +2049,19 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      To allow the environment to be destroyed:
-      juju unblock destroy-environment
-
-  To allow the machines, services, units and relations to be removed:
-  juju unblock remove-object
+   To allow the environment to be destroyed:
+  ```
+  juju unblock destroy-environment
+  ```
   
+  To allow the machines, services, units and relations to be removed:
+  ```
+  juju unblock remove-object
+  ```
   To allow changes to the environment:
+  ```
   juju unblock all-changes
+  ```
   
   See Also:
   juju help block
@@ -2065,7 +2070,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju unexpose [options] <service>
   ```
 
@@ -2082,7 +2087,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju service unset [options] <service> name ...
   ```
 
@@ -2103,7 +2108,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju environment unset [options] <environment key> ...
   ```
 
@@ -2127,7 +2132,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju environment unset [options] <environment key> ...
   ```
 
@@ -2151,7 +2156,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju upgrade-charm [options] <service>
   ```
 
@@ -2212,7 +2217,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju upgrade-juju [options]
   ```
 
@@ -2281,7 +2286,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju user [options] <command> ...
   ```
 
@@ -2319,7 +2324,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju version [options]
   ```
 
