@@ -9,8 +9,8 @@ The versions covered here are:
 
 ^# juju-core 1.24.2
 
-  A new proposed stable release of Juju, juju-core 1.24.2, is now available.
-  This release may replace version 1.24.0 on Tuesday July 07.
+  A new stable release of Juju, juju-core 1.24.2, is now available.
+  This release replaces version 1.24.0.
 
 
   ## Getting Juju
@@ -18,15 +18,11 @@ The versions covered here are:
   juju-core 1.24.2 is available for Wily and backported to earlier
   series in the following PPA:
 
-      https://launchpad.net/~juju/+archive/proposed
+      https://launchpad.net/~juju/+archive/stable
 
   Windows, Centos, and OS X users will find installers at:
 
       https://launchpad.net/juju-core/+milestone/1.24.2
-
-  Proposed releases use the "proposed" simple-streams. You must configure
-  the `agent-stream` option in your environments.yaml to use the matching
-  juju agents.
 
 
   ## Notable Changes
