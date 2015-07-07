@@ -7,6 +7,80 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.24.2
+
+  A new proposed stable release of Juju, juju-core 1.24.2, is now available.
+  This release may replace version 1.24.0 on Tuesday July 07.
+
+
+  ## Getting Juju
+
+  juju-core 1.24.2 is available for Wily and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/proposed
+
+  Windows, Centos, and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.24.2
+
+  Proposed releases use the "proposed" simple-streams. You must configure
+  the `agent-stream` option in your environments.yaml to use the matching
+  juju agents.
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Destroy-machine --force no longer forceably destroys machine
+      Lp 1464616
+
+    * Inconsistent juju status from cli vs api
+      Lp 1467690
+
+    * Dhcp addresses for containers should be released on teardown
+      Lp 1348663
+
+    * "relation-set --file -" doesn't seem to work
+      Lp 1454678
+
+    * Debug-hooks no longer works with 1.24-beta6
+      Lp 1466167
+
+    * Panic if jujud restarts while action is running
+      Lp 1447895
+
+    * Mysterious env.lock held message
+      Lp 1454323
+
+    * Upgrade fails moving syslog config files "invalid argument"
+      Lp 1468815
+
+    * Leadership settings documents written out without env-uuid field
+      Lp 1468994
+
+    * Debug-log does not work with local provider
+      Lp 1464335
+
+    * A subordinate charm hook scheduled to run(but waiting for the
+      principal charm hook to release the lock) goes to an error state
+      after the principal charm hook triggers a reboot.
+      Lp 1464470
+
+    * Upgrading 1.20.14 -> 1.24.0 fails
+      Lp 1466969
+
+    * Subordinate charm action data not reported by api
+      Lp 1457205
+
+    * Centos fails to bootstrap using juju 1.24
+      Lp 1470150
+
+
 ^# juju-core 1.24.0
 
   A new stable release of Juju, juju-core 1.24.0, is now available.
