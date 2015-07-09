@@ -1,11 +1,13 @@
+Title: Configuring for LXC
+
 # Configuring for LXC
 
 ## Prerequisites
 
-The LXC local provider enables you to run Juju on a single system like your
-local computer or a single server. This way you can simply evaluate the
-software or service configurations, develop your own charms or run a single
-server system.
+The LXC local provider enables multiple Juju-deployed services with a single
+operating system. This easily makes available a number options: evaluation of
+Juju; evaluation of the software being deployed, experimentation with various
+service configurations; and charm development.
 
 If you're not already using the stable release PPA you can add it like this:
 
@@ -40,10 +42,11 @@ If you're not running Ubuntu please consult your operating system distribution's
 documentation for instructions on installing the LXC userspace tools and the
 MongoDB server. Juju requires a MongoDB server built with SSL support.
 
+
 ## Configuration
 
-You should start by generating a generic configuration file for Juju and then
-switching to the local provider:
+Start by generating a generic configuration file for Juju and then switching to
+the local provider:
 
 ```bash
 juju generate-config
@@ -51,16 +54,15 @@ juju switch local
 ```
 
 This will generate a file, `environments.yaml` (if it doesn't already exist),
-which will live in your `~/.juju/` directory (and will create the directory if
-it doesn't already exist).
+which will live, on Ubuntu, in your `~/.juju/` directory (and will create the
+directory if it doesn't already exist).
 
 **Note:** If you have an existing configuration, you can use
 `juju generate-config --show` to output the new config file, then copy and
 paste relevant areas in a text editor etc.
 
 The generic configuration sections generated for the local provider will look
-something like this, though Juju will generate this automatically you usually
-don't need to edit it:
+something like this and will normally work out of the box (no need to edit):
 
 ```yaml
 ## https://jujucharms.com/get-started/local/
@@ -83,12 +85,26 @@ Using Juju with this configuration, the storage files and the database will be
 located in the directory specified by the environment variable `$JUJU_HOME`,
 which defaults to `~/.juju/`. By uncommenting and setting `root-dir` this
 location can be changed as well as the ports of the storage and the shared
-storage. This may be useful in the case of multiple parallel running local
-providers or conflicts with other programs on your system.
+storage. This may be useful if you want to run mulitple local providers
+simulataneously or to deal with possible conflicts with other programs on your
+system.
 
-**Note:** If you are using encrypted home directories you have to set
-`$JUJU_HOME` or `root-dir` to point to a location **outside** your home
-directory.
+Ensure all local providers are using different ports. The default port numbers
+for `api-port`, `state-port`, and `storage-port` are 17071, 37017, and 8040
+respectively. Also, the name of each provider is arbitrary. For instance:
+
+
+```yaml
+# another local environment
+another-local:
+    type: local
+    api-port: 17072
+    state-port: 37018
+    storage-port: 8041
+```
+
+**Note:** If your home directory is encrypted you cannot point `$JUJU_HOME` or
+`root-dir` to a location within it. Use locations **outside** of it.
 
 
 ## Bootstrapping and Destroying
@@ -97,8 +113,9 @@ The usage of LXC containers requires **root** privileges for some steps and
 Juju will prompt for your password if needed. Juju cannot be run under sudo
 because it needs to manage permission as the real user.
 
-**Note:** If you are running a firewall such as **ufw**, it may interfere with
-the correct operation of Juju with LXC containers and might need to be halted.
+**Note:** If you are running iptables (firewall) or even an iptables frontend
+such as `ufw`, the local provider might not work properly. Troubleshoot
+accordingly or stop the firewall altogether.
 
 If you have used the local provider in the past when it required `sudo`, you may
 need to manually clean up some files that are still owned by root. If your local
