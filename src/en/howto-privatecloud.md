@@ -171,10 +171,11 @@ are defined as follows:
 
 juju-tools
 
-     the &LT;path_url&GT; value as described above in Tools Metadata Contents
+    the <path_url> value as described above in Tools Metadata Contents
+
 product-streams
 
-    the &LT;path_url&GT; value as described above in Image Metadata Contents
+    the <path_url> value as described above in Image Metadata Contents
 
 Other providers may similarly be able to specify locations, though the
 implementation will vary.

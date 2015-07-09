@@ -14,7 +14,8 @@ WordPress, traditionally available via APT, into Juju.
 
 **Charm URL** - A resource locator for a charm, with the following format and
 restrictions:
-    &LT;schema&GT;:[~&LT;user&GT;/]&LT;collection&GT;/&LT;name&GT;[-&LT;revision&GT;]
+
+    <schema>:[~<user>/]<collection>/<name>[-<revision>]
 
   - `schema` must be either "cs", for a charm from the Juju charm store, or
   "local", for a charm from a local repository.
