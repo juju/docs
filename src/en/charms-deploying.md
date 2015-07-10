@@ -136,10 +136,20 @@ juju deploy mysql --to lxc:25
 In the previous example we deployed MySQL to container #3 on machine #24.
 Similarly the 2nd example deploys MySQL to a new container on machine #25.
 
-Note that you need to know the identifier of the machine that you are going to
-`deploy --to` – in all deployments, machine 0 is always the bootstrap node so
+The above examples show how to deploy to a machine where you know the machine's
+identifier – in all deployments, machine 0 is always the bootstrap node so
 the above example works nicely. Doing a `juju status` will show you a list of
 all the machines and their machine numbers for you to decide what to deploy to.
+
+It is also possible to deploy units using placement directives as --to arguments.
+Placement directives are provider specific. For example:
+
+```bash
+juju deploy mysql --to zone=us-east-1a
+juju deploy mysql --to host.mass
+```
+The first example deploys to a specified zone for AWS.
+The second example deploys to a named machine in MAAS.
 
 The `add-unit` command also supports the `--to` option, so it's now possible to
 specifically target machines when expanding service capacity:
@@ -221,6 +231,19 @@ Which results in the following
 These two features make it much easier to deploy complex services such as
 OpenStack which use a large number of charms on a limited number of physical
 servers.
+
+As with deploy, the --to option used with `add-unit` also supports placement
+directives. A comma separated list of directives can be provided to cater for 
+the case where more than one unit is being added.
+
+```bash
+juju add-unit rabbitmq-server -n 4 --to zone=us-west-1a,zone=us-east-1b
+juju add-unit rabbitmq-server -n 4 --to host1,host2,host3,host4
+```
+
+Any extra placement directives are ignored. If not enough placement directives
+are supplied, then the remaining units will be assigned as normal to a new, clean
+machine.
 
 ## Considerations
 
