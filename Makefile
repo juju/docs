@@ -2,8 +2,10 @@
 build:
 	PYTHONPATH="$(CURDIR)/tools/plugins:$(CURDIR)/tools/plugins/gfm:$(PYTHONPATH)" tools/build-from-source $(doc)
 
+new:
+	tools/mdbuild.py
 serve:
-	cd htmldocs; python -m SimpleHTTPServer
+	cd htmldocs/en ; python -m SimpleHTTPServer
 
 sysdeps:
 	sudo apt-get install python-html2text python-markdown python-cheetah git
