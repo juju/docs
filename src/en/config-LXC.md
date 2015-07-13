@@ -9,7 +9,7 @@ operating system. This easily makes available a number options: evaluation of
 Juju; evaluation of the software being deployed, experimentation with various
 service configurations; and charm development.
 
-If you're not already using the stable release PPA you can add it like this:
+Begin by adding the Juju stable release PPA:
 
 ```bash
 sudo apt-add-repository ppa:juju/stable
@@ -114,7 +114,7 @@ Juju will prompt for your password if needed. Juju cannot be run under sudo
 because it needs to manage permission as the real user.
 
 **Note:** If you are running iptables (firewall) or even an iptables frontend
-such as `ufw`, the local provider might not work properly. Troubleshoot
+such as `ufw`, the LXC local provider might not work properly. Troubleshoot
 accordingly or stop the firewall altogether.
 
 If you have used the local provider in the past when it required `sudo`, you may
