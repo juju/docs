@@ -1,8 +1,5 @@
 
 build:
-	PYTHONPATH="$(CURDIR)/tools/plugins:$(CURDIR)/tools/plugins/gfm:$(PYTHONPATH)" tools/build-from-source $(doc)
-
-new:
 	tools/mdbuild.py
 serve:
 	cd htmldocs/en ; python -m SimpleHTTPServer
@@ -14,8 +11,4 @@ sysdeps:
 multi:
 	tools/make_versions.sh
 
-watch:
-	@echo "Requires watchdog module to be installed. - to install pip install watchdog."	
-	@tools/watch.sh
-
-.PHONY: build serve sysdeps multi watch
+.PHONY: build serve sysdeps multi 
