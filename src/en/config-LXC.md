@@ -127,6 +127,7 @@ remove the file like this:
 sudo rm ~/.juju/environments/local.jenv
 ```
 
+
 ## Fast LXC creation
 
 The local provider can use lxc-clone to create the containers used as machines.
@@ -161,3 +162,9 @@ machine that is used as the basis for the clones. This will be called
 `juju-<series>-template`, so for a precise image, the name is
 `juju-precise-template`. Do not modify or start this image while a local
 provider environment is running because you cannot clone a running lxc machine.
+
+
+## LXC Containers within KVM guests
+
+You can also use Juju to create KVM guests within which are placed LXC
+containers. See [Configuring for KVM](./config-KVM.html).

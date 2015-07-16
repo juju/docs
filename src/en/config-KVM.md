@@ -186,4 +186,3 @@ To remove one of these containers (1/lxc/0 here):
 ```bash
 juju destroy-machine --force 1/lxc/0
 ```
-
