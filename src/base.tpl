@@ -6,8 +6,8 @@
 <head>
 
 <title>
-    Introducing Charms | Documentation
- | Juju</title>
+%%TITLE%%
+</title>
 
 <meta charset="UTF-8" />
 <meta name="description" content="Learn how to install, configure, bootstrap Juju and how to create a charm through the Juju documentation" />
@@ -198,13 +198,13 @@ combo load -->
                 </button>
             </form>
             <div class="twelve-col">
-              $DOCNAV
+              %%DOCNAV%%
             </div>
         </div>
         <div class="eight-col last-col">
             <div class="jujudocs-content">
 
-                $CONTENT
+               %%CONTENT%%
 
 
               </div>
