@@ -167,4 +167,4 @@ provider environment is running because you cannot clone a running lxc machine.
 ## LXC Containers within KVM guests
 
 You can also use Juju to create KVM guests within which are placed LXC
-containers. See [Configuring for KVM](./config-KVM.html).
+containers. See [Configuring for KVM](./config-KVM.html#lxc-containers-within-a-kvm-guest).
