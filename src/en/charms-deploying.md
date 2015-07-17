@@ -9,6 +9,7 @@ charms to take into account any subtle changes in the underlying OS. For the
 most part you can forget about this, as Juju will always try to apply the most
 relevant charm, so deploying can be straightforward and easy.
 
+
 # Deploying from the Charm Store
 
 In most cases, you will want to deploy charms by fetching them directly from the
@@ -37,6 +38,7 @@ which follows the format:
 ```nohighlight
 <repository>:<series>/<service>
 ```
+
 
 # Deploying from a local repository
 
@@ -106,6 +108,7 @@ There is more information on this, and other ways to configure services in the
 them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache).
 This allows the same charm to be deployed to multiple machines repeatably and
 with minimal network transfers.
+
 
 # Deploying to specific machines and containers
 
@@ -245,6 +248,22 @@ Any extra placement directives are ignored. If not enough placement directives
 are supplied, then the remaining units will be assigned as normal to a new, clean
 machine.
 
+
+## Juju retry-provisioning
+
+You can use the `retry-provisioning` command in cases where deploying services,
+adding units, or adding machines fails. It allows you to specify machines which
+should be retried to resolve errors reported with `juju status`.
+
+For example, after having deployed 100 units and machines, status reports that
+machines 3, 27 and 57 could not be provisioned because of a 'rate limit exceeded'
+error. You can ask Juju to retry:
+
+```bash
+juju retry-provisioning 3 27 5
+```
+
+
 ## Considerations
 
 Charms are running without any separation, so its entirely possible for Charms
@@ -263,10 +282,12 @@ juju add-unit rabbitmq-server
 This will allow you to save money when you need it by using --to, but also
 horizontally scale out on dedicated machines when you need to.
 
+
 ## References and Examples
 
   - [ Scaling Down in the Cloud with Juju](http://www.jorgecastro.org/2013/07/31/deploying-wordpress-to-the-cloud-with-juju/)
   - [ Targeted Machine Deployment with Juju](http://javacruft.wordpress.com/2013/07/25/juju-put-it-there-please/)
+
 
 # Selecting and enabling networks
 
