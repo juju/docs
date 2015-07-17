@@ -9,7 +9,7 @@ operating system. This easily makes available a number options: evaluation of
 Juju; evaluation of the software being deployed, experimentation with various
 service configurations; and charm development.
 
-If you're not already using the stable release PPA you can add it like this:
+Begin by adding the Juju stable release PPA:
 
 ```bash
 sudo apt-add-repository ppa:juju/stable
@@ -114,7 +114,7 @@ Juju will prompt for your password if needed. Juju cannot be run under sudo
 because it needs to manage permission as the real user.
 
 **Note:** If you are running iptables (firewall) or even an iptables frontend
-such as `ufw`, the local provider might not work properly. Troubleshoot
+such as `ufw`, the LXC local provider might not work properly. Troubleshoot
 accordingly or stop the firewall altogether.
 
 If you have used the local provider in the past when it required `sudo`, you may
@@ -126,6 +126,7 @@ remove the file like this:
 ```bash
 sudo rm ~/.juju/environments/local.jenv
 ```
+
 
 ## Fast LXC creation
 
@@ -161,3 +162,9 @@ machine that is used as the basis for the clones. This will be called
 `juju-<series>-template`, so for a precise image, the name is
 `juju-precise-template`. Do not modify or start this image while a local
 provider environment is running because you cannot clone a running lxc machine.
+
+
+## LXC Containers within KVM guests
+
+You can also use Juju to create KVM guests within which are placed LXC
+containers. See [Configuring for KVM](./config-KVM.html#lxc-containers-within-a-kvm-guest).
