@@ -76,6 +76,8 @@
             <ul class="no-margin">
               <li class=""><a href="wip-storage.html">Storage</a></li>
               <li class=""><a href="wip-centos.html">CentOS support</a></li>
+              <li class=""><a href="wip-systems.html">Juju Environment System (DRAFT)</a></li>
+              <li class=""><a href="wip-users.html">Managing Users (DRAFT)</a></li>
             </ul>
             <h1>Tools</h1>
             <ul class="no-margin">
