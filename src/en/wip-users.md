@@ -1,16 +1,18 @@
-Title: How to work with users in Juju
+Title: Managing users in Juju
 
-# User overview
+# Managing users in Juju
 
-Juju has understanding of two different types of users:
-local users, those stored in the database along side the environments and
-entities in those environments; and remote users, those whose authenticiation
+Juju considers users to be of one of two types:
+
+  1. **local users**, those stored in the database along side the environments and
+entities in those environments
+  1. **remote users**, those whose authenticiation
 is managed by an external service and reserved for future use.
 
-When a Juju System is bootstrapped, an initial user is created when the intial
-environment is created. This user is considered the administrator for the Juju
-System. This user is the only user able to create other users until Juju has
-full fine grained role based permissions.
+When a Juju System is bootstrapped, an initial user is created with the 
+environment. This user is considered to be the administrator for the Juju
+System. Only this user can create other users until such a time as Juju has
+full fine grained role-based permissions.
 
 All user managment functionality is managed though the 'juju user' collection
 of commands.
@@ -69,7 +71,8 @@ first machine.
 # Other user administration commands
 
 Other commands that are useful for system administrators are:
- - juju user list
- - juju user disable <username>
- - juju user enable <username>
+
+  - `juju user list`
+  - `juju user disable <username>`
+  - `juju user enable <username>`
 
