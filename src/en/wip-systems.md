@@ -26,18 +26,19 @@ not expected that production deployments will use any feature flags.
 
 ## Juju systems and environments
 
-A Juju Environment System (JES), also sometimes shortened to 'Juju system',
+A Juju Environment System (JES), also sometimes shortened to 'Juju System',
 describes the environment that runs and manages the Juju API servers and the
 underlying database.
 
-This initial environment is also called the 'system environment', and is what is
-created when the bootstrap command is used.  This system environment is a
+This initial environment is also called the 'system environment' 
+(or 'bootsrap environment'), and is what is
+created when the bootstrap command is used.  This System environment is a
 normal Juju environment that just happens to have machines that manage Juju.
 
 In order to keep a clean separation of concerns, it is considered best
 practice to create additional environments for real workload deployment.
 
-Services can still be deployed to the system environment, but it is generally
+Services can still be deployed to the System environment, but it is generally
 expected that these services are more for management and monitoring purposes,
 like Landscape and Nagios.
 
@@ -125,7 +126,7 @@ calls if the API is not accessible.
 
 If there were hosted environments running that had cloud machines allocated to
 it, and the API server was not accessible, the machines will need to be
-manually reclaimed through the cloud providers tools.
+manually reclaimed through the cloud provider's tools.
 
 ## Creating additional users
 

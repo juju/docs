@@ -2,9 +2,11 @@ Title: Managing users in Juju
 
 # Managing users in Juju
 
-Juju has understanding of two different types of users:
-local users, those stored in the database along side the environments and
-entities in those environments; and remote users, those whose authenticiation
+Juju considers users to be of one of two types:
+
+  1. **local users**, those stored in the database along side the environments and
+entities in those environments
+  1. **remote users**, those whose authenticiation
 is managed by an external service and reserved for future use.
 
 When a Juju System is bootstrapped, an initial user is created with the 
