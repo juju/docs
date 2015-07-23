@@ -181,13 +181,16 @@ information is to run something like:
 python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' < gce-auth-file.json 
 ```
 
+> **Note** the resulting keys will use underscores '_', and they need to be
+> converted to hyphens '-'.
+
 In any case, the auth section of the config file should look something like
 this:
 
 ```
-client_email: 1875876080463-bsssadkian8h395vc11kl@developer.gserviceaccount.com
-client_id: 1875876080463-bsssadkian8h395vc11kl.apps.googleusercontent.com
-private_key: |
+client-email: 1875876080463-bsssadkian8h395vc11kl@developer.gserviceaccount.com
+client-id: 1875876080463-bsssadkian8h395vc11kl.apps.googleusercontent.com
+private-key: |
   -----BEGIN PRIVATE KEY-----
   MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAOqasd71HPJPzekB
   /0OiLIZ64Xc5oMoknrxmuhtbfzsNbom5o61K2INGWCS7zzhPRKgTV2+Im0ov4c7H
