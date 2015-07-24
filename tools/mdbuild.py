@@ -142,7 +142,8 @@ class Page:
             ('%%TITLE%%', title),
             ('%%CONTENT%%', self.parsed),
             ('%%DOCNAV%%', doc_nav),
-            ('(src="media/ | src="./media/)', 'src="../media/')
+            ('src="media/', 'src="../media/'),
+            ('code class="', 'code class="language-')
         ]
         for pair in replace:
             self.output = re.sub(pair[0], pair[1], self.output)

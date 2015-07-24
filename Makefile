@@ -2,7 +2,7 @@
 build:
 	tools/mdbuild.py
 serve:
-	cd htmldocs/en ; python -m SimpleHTTPServer
+	cd htmldocs; python -m SimpleHTTPServer
 
 sysdeps:
 	sudo apt-get install python-html2text python-markdown python-pip git
