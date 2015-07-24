@@ -181,6 +181,9 @@ information is to run something like:
 python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' < gce-auth-file.json 
 ```
 
+> **Note** the resulting keys will use underscores '_', and they need to be
+> converted to hyphens '-'.
+
 In any case, the auth section of the config file should look something like
 this:
 
