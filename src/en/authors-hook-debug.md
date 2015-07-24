@@ -9,6 +9,7 @@ command.
 
 The [dhx debugging plugin](./authors-hook-debug-dhx.html) is also available.
 
+
 ##  The 'debug-hooks' command
 
 The `juju debug-hooks` command accepts a unit and an optional list of hooks to
@@ -28,6 +29,7 @@ juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 
 **Note:** It is possible and often desirable to run debug-hooks on more than
 one unit at a time. You should open a new terminal window for each.
+
 
 ## Running a debug session
 
@@ -93,6 +95,7 @@ of it), and start your session only when the unit reports an [error status
 ](./authors-hook-errors.html). You should then run `juju resolved --retry` for
 the affected unit, and go back to the debug-hooks session to interact.
 
+
 ## Special considerations
 
 While you're debugging hooks for one unit on a machine, you're blocking
@@ -103,67 +106,13 @@ the same machine will block one another, and that you can't control relative
 execution order directly (other than by erroring out of hooks you don't want to
 run yet, and retrying them later).
 
-##  The 'debug-log' command
 
-Sometimes for working out where problems occur, it is simply enough to be able
-to view the log files. As well as the logs on individual units, Juju keeps a
-consolidated log file which can be viewed with the `juju debug-log` command.
+## The 'debug-log' command
 
-As this is a consolidated log you don't need to specify a unit.
+Logs are indispensable when it comes time to troubleshoot. View the logs with
+the `debug-log` command. See
+[Troubleshooting with debug-log](./troubleshooting-debug-log.html).
 
-#### Usage:
-
-```bash
-juju debug-log [-n <number>] [--replay] [-e <environment>]
-```
-
-N.B. For full usage, see the [command reference page](commands.html)
-
-Where the `-n` switch is given and followed by a number, the log will be tailed
-from that many lines in the past (i.e., those number of existing lines in the
-log will be included in the output, along with any subsequent output).
-
-
-
-#### Examples:
-
-To read the ten most recent log entries and follow any subsequent entries to the
-log:
-
-```bash
-juju debug-log
-```
-
-To read the thirty most recent log entries and follow any subsequent entries to
-the log:
-
-```bash
-juju debug-log -n 30
-```
-
-To read all the log entries and follow any subsequent entries to the log:
-
-```bash
-juju debug-log --replay
-```
-
-To read the twenty most recent log entries on the 'local' environment:
-
-```bash
-juju debug-log -n 20 -e local
-```
-
-And of course it is possible to combine the command with other shell tools to
-make the output more useful, e.g. to filter the whole log for lines matching
-'INFO':
-
-```bash
-juju debug-log --replay  | grep 'INFO'
-```
-
-**Note:** As the command uses the follow behaviour of `tail` by default, you do
-not need to specify the `-f` switch. You will also need to end the session
-with `Control-C`
 
 # What on earth is tmux?
 
