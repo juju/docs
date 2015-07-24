@@ -21,37 +21,37 @@ logging`.
 
 ## Examples:
 
-**#1** - To begin with the last ten log messages:
+To begin with the last ten log messages:
 
 ```bash
 juju debug-log
 ```
 
-**#2** - To begin with the last thirty log messages:
+To begin with the last thirty log messages:
 
 ```bash
 juju debug-log -n 30
 ```
 
-**#3** - To begin with all the log messages:
+To begin with all the log messages:
 
 ```bash
 juju debug-log --replay
 ```
 
-**#4** - To begin with the last twenty log messages for the 'local' environment:
+To begin with the last twenty log messages for the 'local' environment:
 
 ```bash
 juju debug-log -n 20 -e local
 ```
 
-**#5** - To begin with the last 500 lines filtered by the string 'amd64':
+To begin with the last 500 lines filtered by the string 'amd64':
 
 ```bash
 juju debug-log --lines 500 | grep amd64
 ```
 
-**#6** - To begin with the first 20 lines from last 3000 lines of the entire log:
+To begin with the first 20 lines from last 3000 lines of the entire log:
 
 ```bash
 juju debug-log --lines 3000 --limit 20
@@ -68,35 +68,39 @@ The `include` and `exclude` options select and deselect, respectively, the
 entity that logged the message. An entity is a juju machine or unit agent. The
 entity names are similar to the names shown by `juju status`.
 
+Similarly, the `include-module` and `exclude-module` options can be used to
+influence the type of message displayed based on a (dotted) module name. The
+module name can be truncated.
+
 ### Examples:
 
-**#7** - To exclude all the log messages from the bootstrap machine (the
+To exclude all the log messages from the bootstrap machine (the
 state-server; always machine "0") in the last 1000 lines:
 
 ```bash
 juju debug-log --lines 1000 --exclude machine-0
 ```
 
-**#8** - To select all the messages emitted from a particular unit and a particular
+To select all the messages emitted from a particular unit and a particular
 machine in the entire log:
 
 ```bash
 juju debug-log --replay --include unit-mysql-0 --include machine-1
 ```
 
-**Note:** The unit can also be written `mysql/0` (as shown with status).
+!!! Note: The unit can also be written `mysql/0` (as shown by 'juju status').
 
-**#9** - To see all WARNING and ERROR messages in the entire log:
+To see all WARNING and ERROR messages in the entire log:
 
 ```bash
 juju debug-log --replay --level WARNING
 ```
 
-**Note**: The `level` option restricts messages to the specified log-level or
+!!! Note: The `level` option restricts messages to the specified log-level or
 greater. The levels from lowest to highest are TRACE, DEBUG, INFO, WARNING, and
 ERROR.
 
-**#10** - To progressively exclude more content from the entire log:
+To progressively exclude more content from the entire log:
 
 ```bash
 juju debug-log --replay --exclude-module juju.state.apiserver
@@ -104,11 +108,7 @@ juju debug-log --replay --exclude-module juju.state
 juju debug-log --replay --exclude-module juju
 ```
 
-**Note:** The `include-module` and `exclude-module` are used to select/deselect the
-type of message displayed based on a (dotted) module name. The module name can
-be truncated.
-
-**#11** - To see messages pertaining to both the juju.cmd and juju.worker modules
+To see messages pertaining to both the juju.cmd and juju.worker modules
 from the last 2000 lines of the log:
 
 ```bash
