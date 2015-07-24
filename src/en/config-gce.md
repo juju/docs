@@ -196,7 +196,10 @@ private-key: |
   E2sZPXYMT8TmQnat35f4+h4FT5MYPHpr/OS27kejHLjxpWkbz3Dziqx6upM+fMiY
   ...
 ```
-!!! Note: The JSON file presents the keys as `client_email:`, `client_id:` and `private_key`, with underscores. Juju will not accept these keys, and they must be changed to `client-email:`,`client-id` and `private-key`, with dashes, in order to be recognised. 
+!!! Note: The JSON file presents the key names as `client_email:`, `client_id:`
+and `private_key`, with underscores. Juju will not accept these keys, and they
+must be changed to `client-email:`,`client-id` and `private-key`, with dashes,
+in order to be recognised. 
 
 ## 7. Add the Project ID
 
