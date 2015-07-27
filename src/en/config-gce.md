@@ -9,7 +9,7 @@ do not yet have one, log into your Google account and sign up at:
 If you have not run Juju before, you should start by generating a generic 
 configuration file for Juju, using the command:
 
-```bash
+```
 juju generate-config
 ```
 
@@ -26,7 +26,7 @@ existing environments.yaml and just need to add a section. E.g.
 The generic configuration section generated for GCE will look
 something like this:
 
-```yaml
+```
     gce:
       type: gce
     
@@ -155,7 +155,7 @@ procedures in place.
 In this case, the `Auth` section of the gce part of the `environments.yaml`
 configuration should contain the *full path* to the file, e.g.:
 
-```yaml
+```
  # The key information can be downloaded as a JSON file, or copied, from:
  #   https://console.developers.google.com/project/<projet>/apiui/credential
  # Either set the path to the downloaded JSON file here:
@@ -177,17 +177,17 @@ continuous string. You will need to strip out line endings and translate any
 unicode characters in the string. A simple way to pre-format some of this
 information is to run something like:
 
-```bash
+```
 python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' < gce-auth-file.json 
 ```
 
 In any case, the auth section of the config file should look something like
 this:
 
-```yaml
-client_email: 1875876080463-bsssadkian8h395vc11kl@developer.gserviceaccount.com
-client_id: 1875876080463-bsssadkian8h395vc11kl.apps.googleusercontent.com
-private_key: |
+```
+client-email: 1875876080463-bsssadkian8h395vc11kl@developer.gserviceaccount.com
+client-id: 1875876080463-bsssadkian8h395vc11kl.apps.googleusercontent.com
+private-key: |
   -----BEGIN PRIVATE KEY-----
   MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAOqasd71HPJPzekB
   /0OiLIZ64Xc5oMoknrxmuhtbfzsNbom5o61K2INGWCS7zzhPRKgTV2+Im0ov4c7H
@@ -196,6 +196,10 @@ private_key: |
   E2sZPXYMT8TmQnat35f4+h4FT5MYPHpr/OS27kejHLjxpWkbz3Dziqx6upM+fMiY
   ...
 ```
+!!! Note: The JSON file presents the key names as `client_email:`, `client_id:`
+and `private_key`, with underscores. Juju will not accept these keys, and they
+must be changed to `client-email:`,`client-id` and `private-key`, with dashes,
+in order to be recognised. 
 
 ## 7. Add the Project ID
 
@@ -211,7 +215,7 @@ forgotten that ID, you can retrieve it from the
 
 this section of the config should then look like this, for example:
 
-```yaml
+```
       # Google instance info
       # To provision instances and perform related operations, the provider
       # will need to know which GCE project to use and into which region to
