@@ -29,6 +29,7 @@
 <!-- stylesheets -->
 <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/responsive/latest/ubuntu-styles.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="../css/prism.css" />
 
 <!-- load basic yui, our modules file, the loader and sub to set up modules with
 combo load -->
@@ -67,6 +68,11 @@ combo load -->
     window.csUrl = "https://api.jujucharms.com/charmstore/v4";
 </script>
 
+<script type="text/javascript"
+    
+    src="../../js/prism.js">
+    
+</script>
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@ubuntucloud">
