@@ -7,6 +7,91 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.24.3
+
+  A new stable release of Juju, juju-core 1.24.3, is now available.
+  This release replaces version 1.24.2.
+
+
+  ## Getting Juju
+
+  juju-core 1.24.3 is available for Wily and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows, OS X, and Centos users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.24.3
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Upgrade fails on windows machines
+      Lp 1471332
+
+    * Juju 1.24.0: wget cert issues causing failure to create containers
+      on 14.04.2 with lxc 1.07
+      Lp 1472014
+
+    * Juju environment not usable after the upgrade
+      Lp 1473517
+
+    * Rsyslog connections fail with certificate verification errors
+      after upgrade to 1.24.2
+      Lp 1474614
+
+    * Rebooting the virtual machines breaks juju networking
+      Lp 1474508
+
+    * Failed upgrade, mixed up ha addresses
+      Lp 1463480
+
+    * Debug-log does not work with local provider
+      Lp 1464335
+
+    * Jujud hanging after upgrading from 1.24.0 to 1.24.1(and 1.24.2)
+      Lp 1468653
+
+    * Juju bootstrap fails - waiting for api to become available error
+      cannot get all blocks: eof
+      Lp 1468581
+
+    * Tools migration fails when upgrading 1.20.14 to 1.24.1 on ec2
+      Lp 1469130
+
+    * State server seems to have died
+      Lp 1469199
+
+    * Github.com/juju/utils has contradictory licences
+      Lp 1472749
+
+    * Transient error with juju-unit-agent on windows hosts
+      Lp 1430245
+
+    * Agent shutdown can cause cert updater channel already closed panic
+      Lp 1472729
+
+    * Juju 1.24 memory leakage
+      Lp 1474195
+
+    * $set updates may clear out the env-uuid field
+      Lp 1474606
+
+    * Ec2: provisioning machines sometimes fails with "tagging instance:
+      the instance id <id> does not exist"
+      Lp 1474788
+
+    * When the uniter fails to run an operation due to an error, the
+      agent state is not set to "failed"
+      Lp 1475163
+
+
 ^# juju-core 1.24.2
 
   A new stable release of Juju, juju-core 1.24.2, is now available.
