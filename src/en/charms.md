@@ -18,5 +18,5 @@ provides a practical overview of using Juju.
 
 Generally, you follow a simple three-step procedure: deploy, configure, and
 expose services. The sub-sections in the left navigation pane under **Juju
-Charms** explore in detail this procedure as well the everyday operations
+Charms** explore in detail this procedure in addition to the everyday operations
 you are likely to perform as you work with Juju Charms.
