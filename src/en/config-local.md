@@ -21,5 +21,5 @@ The following pages cover the different local providers available:
 
   - [Installing and configuring Juju for LXC (Linux)](./config-LXC.html)
   - [Installing and configuring Juju for KVM (Linux)](./config-KVM.html)
-  - [Using Juju with Vagrant(Linux/Mac/Windows)](./config-vagrant.html)`Beta!`
+  - [Using Juju with Vagrant(Linux/Mac/Windows)](./config-vagrant.html) `Beta!`
   - Running Juju with virtualised containers. `Coming Soon!`
