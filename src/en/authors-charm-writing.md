@@ -423,6 +423,7 @@ Which tells you that you forgot to add a `copyright` file, you have left some
 default text in the README, and one of your relations has no hooks. All useful
 stuff.
 
+
 ## Testing
 
 Before we congratulate ourselves too much, we should check that the charm
@@ -435,7 +436,8 @@ juju debug-log
 
 This starts a process to tail the Juju log file and show us just exactly what is
 happening. It won't do much to begin with, but you should see messages appearing
-when we start to deploy our charm.
+when we start to deploy our charm. See 
+[Troubleshooting with debug-log](./troubleshooting-debug-log.html) for more details.
 
 Following our own recipe, in another terminal we should now do the following
 (assuming you already have a bootstrapped environment):

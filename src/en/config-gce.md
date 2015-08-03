@@ -185,9 +185,9 @@ In any case, the auth section of the config file should look something like
 this:
 
 ```
-client_email: 1875876080463-bsssadkian8h395vc11kl@developer.gserviceaccount.com
-client_id: 1875876080463-bsssadkian8h395vc11kl.apps.googleusercontent.com
-private_key: |
+client-email: 1875876080463-bsssadkian8h395vc11kl@developer.gserviceaccount.com
+client-id: 1875876080463-bsssadkian8h395vc11kl.apps.googleusercontent.com
+private-key: |
   -----BEGIN PRIVATE KEY-----
   MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAOqasd71HPJPzekB
   /0OiLIZ64Xc5oMoknrxmuhtbfzsNbom5o61K2INGWCS7zzhPRKgTV2+Im0ov4c7H
@@ -196,6 +196,10 @@ private_key: |
   E2sZPXYMT8TmQnat35f4+h4FT5MYPHpr/OS27kejHLjxpWkbz3Dziqx6upM+fMiY
   ...
 ```
+!!! Note: The JSON file presents the key names as `client_email:`, `client_id:`
+and `private_key`, with underscores. Juju will not accept these keys, and they
+must be changed to `client-email:`,`client-id` and `private-key`, with dashes,
+in order to be recognised. 
 
 ## 7. Add the Project ID
 
