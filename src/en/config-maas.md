@@ -1,5 +1,6 @@
 Title: Configuring for MAAS (bare metal)
 
+
 # Configuring for MAAS (bare metal)
 
 Metal As A Service is software which allows you to deal with physical hardware
@@ -85,9 +86,9 @@ this setting by adding the optional configuration:
 ## MAAS specific features
 
 Juju automatically detects MAAS networks, and recognises physical and
-virtual networks on each machine. ```juju status``` will show the discovered
-networks. See [Juju Constraints](reference-constraints.html) and [Deploying
-Services](charms-deploying.html) to learn how to select machines with networks
+virtual networks on each machine. `juju status` will show the discovered
+networks. See [Juju Constraints](./reference-constraints.html) and [Deploying
+Services](./charms-deploying.html) to learn how to select machines with networks
 and enable the networks for use.
 
 There is one case where an additional configuration option should be made: 
@@ -114,5 +115,8 @@ juju add-machine <hostname>
 For further information on using Juju with MAAS, see the
 [MAAS and Juju Quick Start guide](http://maas.ubuntu.com/docs/juju-quick-start.html).
 
-See also the section on [general configuration options](config-general.html)
-for additional and advanced customization of your environment.
+
+## Additional notes
+
+See [General config options](config-general.html) for additional and advanced
+customization of your environment.

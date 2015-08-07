@@ -1,6 +1,7 @@
-Title:Juju commands and usage
+Title: Juju command reference
 
-# Juju Command reference
+
+# Juju command reference
 
 You can get a list of the currently used commands by entering
 ```juju help commands``` from the commandline. The currently understood commands
@@ -99,7 +100,14 @@ Click on the expander to see details for each command.
   "placement directives" with "--to"; these give the provider additional
   information about how to allocate the machine. For example, one can direct the
   MAAS provider to acquire a particular node by specifying its hostname with
-  "--to". For more information on placement directives, see "juju help placement".
+  "--to".
+
+  See Also:
+  juju help constraints
+  juju help placement
+
+  The per-provider [Install & Configure](./getting-started.html) section mentions
+  these and any other provider-specific settings.
   
   #### Examples: 
 
@@ -110,11 +118,8 @@ Click on the expander to see details for each command.
       juju machine add lxc:4                (starts a new lxc container on machine 4)
       juju machine add --constraints mem=8G (starts a machine with at least 8GB RAM)
       juju machine add ssh:user@10.10.0.3   (manually provisions a machine with ssh)
-      juju machine add zone=us-east-1a
-
-  See Also:
-  juju help constraints
-  juju help placement
+      juju machine add zone=us-east-1a	    (zones not available to all providers)
+      juju machine add --to hostname	    (add a machine to a specific MAAS host)
 
 ^# add-relation
 
