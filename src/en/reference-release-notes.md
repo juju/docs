@@ -7,6 +7,49 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.24.4
+
+  A new stable release of Juju, juju-core 1.24.4, is now available.
+  This release replaces version 1.24.3.
+
+
+  ## Getting Juju
+
+  juju-core 1.24.4 is available for Wily and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.24.4
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Looping config-changed hooks in fresh juju-core 1.24.3 openstack
+      deployment
+      Lp 1478024
+
+    * Cannot boostrap from custom image-metadata-url or by specifying
+      metadata-source
+      Lp 1452422
+
+    * No output from ssh problems during bootstrap
+      Lp 1477358
+
+    * Leadership unreliable in HA
+      Lp 1461890
+
+    * Juju 1.22.6 cannot upgrade to 1.24.3/1.24.4
+      Lp 1479931
+
+
 ^# juju-core 1.24.3
 
   A new stable release of Juju, juju-core 1.24.3, is now available.
