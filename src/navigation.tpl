@@ -2,6 +2,12 @@
               <li class="section"><h4 class="header toggle-target">User Guide</h4>
                 <ul>
                   <li><a href="about-juju.html">About Juju</a></li>
+                  <li class="section"><a class="header" href="juju-topics.html">Juju topics</a>
+                    <ul class="sub">
+                      <li><a href="juju-ha.html">Juju High Availability</a></li>
+                      <li><a href="juju-systemd.html">Juju and systemd</a></li>
+                    </ul>
+                  </li>
                   <li class="section"><a class="header" href="getting-started.html">Install &amp; Configure</a>
                     <ul class="sub">
                       <li><a href="config-aws.html">Amazon Web Service</a></li>
@@ -33,7 +39,6 @@
                       <li><a href="charms-destroy.html">Destroying Services</a></li>
                       <li><a href="charms-environments.html">Managing environments</a></li>
                       <li><a href="charms-ha.html">Charm High Availability</a></li>
-                      <li><a href="juju-ha.html">Juju High Availability</a></li>
                       <li><a href="charms-bundles.html">Using bundles</a></li>
                       <li><a href="charms-working-with-units.html">Working with Units</a></li>
                       <li><a href="actions.html">Working with Actions</a></li>
