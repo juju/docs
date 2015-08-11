@@ -40,7 +40,7 @@ Windows
 
 ## Proposed
 
-Current proposed version is 1.24.5, which became the stable release.
+Current proposed version is 1.24.5.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
