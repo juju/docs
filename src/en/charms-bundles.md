@@ -8,9 +8,7 @@ workload, with working relations and configuration. The use of bundles allows
 for easy repeatability and for sharing of complex, multi-service deployments.
 
 Bundles are defined in text files, called “bundle files” or “deployer files”.
-Each file may contain one or more bundle definitions. For simplicity, the files
-generated as described below will contain a single bundle.
-
+Each file may contain only one bundle.
 
 ## Using bundles
 
@@ -25,8 +23,7 @@ too.
 ### Local import to Juju GUI
 
 The easiest way to import a bundle into the GUI is by dragging the bundle file
-from your desktop and dropping it on the GUI canvas. If the file has multiple
-bundles in it you’ll be prompted to select the single bundle you wish to deploy.
+from your desktop and dropping it on the GUI canvas. 
 
 <iframe style="margin-left: 20%;" class="youtube-player" type="text/html" width="420" height="350" src="//www.youtube.com/embed/oSPB_qjeEsg"></iframe>
 
@@ -56,7 +53,7 @@ juju bundle proof ../path-your-bundle-name    # defaults to your current working
 Then you can use the quickstart tool to deploy your bundle:
 
 ```bash
-juju quickstart -n bundle-name bundles.yaml
+juju quickstart bundles.yaml
 ```
 
 
@@ -65,7 +62,7 @@ juju quickstart -n bundle-name bundles.yaml
 The standard way to create a bundle is via the Juju GUI. When a set of services
 are deployed and configured the bundle definition can be saved either by
 clicking on the export icon on the Juju GUI masthead or via the keyboard
-shortcut “shift-d”. This results in the creation of a file called “export.yaml”
+shortcut “shift-d”. This results in the creation of a file called “bundle.yaml”
 that is saved in your “Downloads” directory as defined by your browser.
 
 ![Export button in the Juju GU](media/charm_bundles_export-bundle.png)
@@ -75,23 +72,35 @@ service with a relation between the two. The exported bundle file contains the
 following data:
 
 ```yaml
-envExport: 
-  services: 
-    mysql: 
-      charm: "cs:precise/mysql-27"
-      num_units: 1
-      annotations: 
-        "gui-x": "139"
-        "gui-y": "168"
-    wordpress: 
-      charm: "cs:precise/wordpress-20"
-      num_units: 1
-      annotations: 
-        "gui-x": "481"
-        "gui-y": "178"
-  relations: 
-    - - "wordpress:db"
-      - "mysql:db"
+series: trusty
+services: 
+  wordpress: 
+    charm: "cs:trusty/wordpress-2"
+    num_units: 1
+    annotations: 
+      "gui-x": "339.5"
+      "gui-y": "-171"
+    to: 
+      - "0"
+  mysql: 
+    charm: "cs:trusty/mysql-26"
+    num_units: 1
+    annotations: 
+      "gui-x": "79.5"
+      "gui-y": "-142"
+    to: 
+      - "1"
+relations: 
+  - - "wordpress:db"
+    - "mysql:db"
+machines: 
+  "0": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+  "1": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+
 ```
 
 ## Service constraints in a bundle
@@ -152,14 +161,19 @@ mysql:
 ```
 which will install the mysql service into an LXC container on machine '1'. 
 
-## Naming your Bundle
+## Machine specifications in a bundle
 
-By default the Juju GUI will name the bundle `envExport`. This is the first
-line in a bundle yet the bundle must have a unique name. We recommend short
-descriptive names for your bundle. `wordpress-simple`, `hadoop-cluster`, and
-`mongodb-sharded` are some examples of good bundle names.  Avoid CamelCase and
-periods for bundle names.
+Bundles may optionally include a machine specification, which allows you to set
+up specific machines and then to place units of your services on those machines
+however you wish.  A machine specification is a YAML object with named machines
+(integers are always used for names).  These machines are objects with three
+possible fields: `series`, `constraints`, and `annotations`.
 
+Note that the machine spec is optional.  If it is not included, solutions such
+as the juju deployer will fail if a placement specification refers to a machine
+other than "0", which is used to represent the bootstrap node.  Leaving the
+machine specification out of your bundle tells Juju to place units on new
+machines if no placement directives are given.
 
 ## Sharing your Bundle with the Community
 
@@ -175,7 +189,7 @@ and named according to the following rules.
 
     `lp:~bac/charms/bundles/wiki/bundle`
 
-1.  Inside the Bazaar branch, the following files are needed: `bundles.yaml`
+1.  Inside the Bazaar branch, the following files are needed: `bundle.yaml`
     and `README.md`
 
 1.  Proof the bundle to make sure it is valid. You can push them to your
