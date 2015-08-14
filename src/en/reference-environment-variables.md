@@ -24,7 +24,7 @@ These variables are available on the juju client in order to change its default 
 
 - JUJU_HOME
 
-    The path to juju's configuration files.
+    The path to Juju's configuration files.
 
         JUJU_HOME=~/.juju
 
@@ -57,11 +57,13 @@ These variables are available to charms during hook execution.
 - JUJU_AGENT_SOCKET
 
     The socket that the Unit Agent uses to communicate with individual Units.
+
         JUJU_AGENT_SOCKET="@/var/lib/juju/agents/unit-postgresql-0/agent.socket"
 
 - JUJU_CONTEXT_ID
 
     Used by juju to communicate to ask a running agent to execute a command on juju's behalf.
+
         JUJU_CONTEXT_ID="postgresql/0:db-relation-joined:34317605475203611"
 
 - JUJU_DEBUG

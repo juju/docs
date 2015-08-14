@@ -18,7 +18,10 @@ and thus lighten the development workload on everyone.
 - Use your best judgement.
 - Send a brief mail after your stint, to say what you did and how it worked out. If you have feedback on the review system or the process, speak up.
 - You're not obliged to deal with all the open patches. We appreciate what you do do.
-- You can prioritize whichever you think best achieves the goal of helping people enjoy getting things done in Juju. That might be the newest ones, neglected patches, easy patches, or those from new contributors. The [Review Queue](http://manage.jujucharms.com/tools/review-queue) sorts by age.
+- You can prioritize whichever you think best achieves the goal of helping
+  people enjoy getting things done in Juju. That might be the newest ones,
+neglected patches, easy patches, or those from new contributors. The [Review
+Queue](http://review.juju.solutions) sorts by age.
 - If you are unfamiliar with the package, make sure you review everything you can, it's not necessarily your job to merge/promulgate it. If, after you did your review, you can get the contributor in touch with somebody who knows the codebase better, you already helped out a lot.
 - Consider blogging about a particularly nice contribution. This will not only make the contributor feel valued, but also inspire others with a good example of great work.
 - Encourage contributors to apply for ~charmers if you think they're ready.
@@ -46,12 +49,16 @@ So the charm has passed all criteria and is ready to land in the store. Before
 you can promulgate, you’ll need to run the following commands. (This is only
 needed if you don’t have charm-tools >= 1.1 - This is being fixed in charm tools and will be landing soon).
 
-    bzr init lp:~charmers/charms/precise/<CHARM_NAME>/trunk
-    bzr push lp:~charmers/charms/precise/<CHARM_NAME>/trunk
+```bash
+bzr init lp:~charmers/charms/precise/<CHARM_NAME>/trunk
+bzr push lp:~charmers/charms/precise/<CHARM_NAME>/trunk
+```
 
 Without this, LP will automatically stack on top of the user’s branch which will make it really really hard to delete from the store in the future. Now you can promulgate:
 
-    juju charm promulgate 
+```bash
+juju charm promulgate 
+```
 
 #### Updating existing charms in the store
 
@@ -59,7 +66,9 @@ Make sure you thank them profusely for fixing something or adding something, no 
 
 Grab the charm from the store either with charm-tools or just bzr branch it.
 
-    juju charm get 
+```bash
+juju charm get 
+```
 
 **Note:** Backwards compatibility is important! Any changes that would change the structure of the charm, data, configuration options, etc and doesn’t perform due diligence to make sure the charm does what it needs to, should be rejected.
 
@@ -80,8 +89,10 @@ audit.
 
 Bundles are simpler to push to the store:
 
-    bzr init lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
-    bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle 
+```bash
+bzr init lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
+bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle 
+```
 
 There is no promulgation step for bundles.
 

@@ -1,3 +1,5 @@
+Title: Debugging Juju charm hooks
+
 # Debugging hooks
 
 Not everything works first time, and sometimes even when it does work, things
@@ -5,21 +7,29 @@ don't happen quite as you expected. That's why Juju includes two tools to help
 you debug charm hooks: The `juju debug-hooks` command and the `juju debug-log`
 command.
 
+The [dhx debugging plugin](./authors-hook-debug-dhx.html) is also available.
+
+
 ##  The 'debug-hooks' command
 
 The `juju debug-hooks` command accepts a unit and an optional list of hooks to
 debug (which must be named individually in a space-delimited list) or no hook
 names, causing all hooks to be debugged:
 
-    juju debug-hooks <service/unit> [hook-name hook-name2 ...]
+```bash
+juju debug-hooks <service/unit> [hook-name hook-name2 ...]
+```
 
 So for example, imagine you are deploying the `mysql` charm and you want to only
 check the `db-relation-joined` and `db-relation-broken` hooks:
 
-    juju debug-hooks mysql/0 db-relation-joined db-relation-broken
+```bash
+juju debug-hooks mysql/0 db-relation-joined db-relation-broken
+```
 
 **Note:** It is possible and often desirable to run debug-hooks on more than
 one unit at a time. You should open a new terminal window for each.
+
 
 ## Running a debug session
 
@@ -50,7 +60,9 @@ during their respective trapped events.
 For example, for the `db-relation-joined` hook we mentioned above, you could
 run:
 
-    ./hooks/db-relation-joined
+```bash
+./hooks/db-relation-joined
+```
 
 Whilst you are debugging a hook, it is possible that other hooks will be queued
 to run. Even hooks which are not in your list to debug will be suspended in the
@@ -83,6 +95,7 @@ of it), and start your session only when the unit reports an [error status
 ](./authors-hook-errors.html). You should then run `juju resolved --retry` for
 the affected unit, and go back to the debug-hooks session to interact.
 
+
 ## Special considerations
 
 While you're debugging hooks for one unit on a machine, you're blocking
@@ -93,57 +106,13 @@ the same machine will block one another, and that you can't control relative
 execution order directly (other than by erroring out of hooks you don't want to
 run yet, and retrying them later).
 
-##  The 'debug-log' command
 
-Sometimes for working out where problems occur, it is simply enough to be able
-to view the log files. As well as the logs on individual units, Juju keeps a
-consolidated log file which can be viewed with the `juju debug-log` command.
+## The 'debug-log' command
 
-As this is a consolidated log you don't need to specify a unit.
+Logs are indispensable when it comes time to troubleshoot. View the logs with
+the `debug-log` command. See
+[Troubleshooting with debug-log](./troubleshooting-debug-log.html).
 
-#### Usage:
-
-    juju debug-log [-n <number>] [-n +<number>] [-e <environment>]
-
-Where the `-n` switch is given and followed by a number, the log will be tailed
-from that many lines in the past (i.e., those number of existing lines in the
-log will be included in the output, along with any subsequent output).
-
-Where the `-n` switch is given and followed by a '+' and a number, the log will
-be tailed starting from that specific line in the log file.
-
-This somewhat unusual syntax has been chosen so that the command behaves like
-the standard Unix `tail` command. In fact, it is analagous to running `tail -f
-[options] /var/log/juju/all-machines.log` on the bootstrap node.
-
-#### Examples:
-
-To read the ten most recent log entries and follow any subsequent entries to the log:
-
-    juju debug-log
-
-To read the thirty most recent log entries and follow any subsequent entries to
-the log:
-
-    juju debug-log -n 30
-
-To read all the log entries and follow any subsequent entries to the log:
-
-    juju debug-log -n +1
-
-To read the twenty most recent log entries on the 'local' environment:
-
-    juju debug-log -n 20 -e local
-
-And of course it is possible to combine the command with other shell tools to
-make the output more useful, e.g. to filter the whole log for lines matching
-'INFO':
-
-    juju debug-log -n +1  | grep 'INFO'
-
-**Note:** As the command uses the follow behaviour of `tail` by default, you do
-not need to specify the `-f` switch. You will also need to end the session
-with `Control-C`
 
 # What on earth is tmux?
 
@@ -184,7 +153,11 @@ Key:
 
 ### Key bindings
 
-All of tmux's special functions can be run by pressing the `prefix-key` followed by another key or key combination. The default prefix-key for tmux is Control-b, but many users find this an unnecessary stretch. This version uses Control-a as the prefix key, which is a bit easier on the fingers and is also the same combination used by `screen`, an alternative terminal multiplexer.
+All of tmux's special functions can be run by pressing the `prefix-key` followed
+by another key or key combination. The default prefix-key for tmux is Control-b,
+but many users find this an unnecessary stretch. This version uses Control-a as
+the prefix key, which is a bit easier on the fingers and is also the same
+combination used by `screen`, an alternative terminal multiplexer.
 
 There are many key-combinations, not all of which are of use in the task at
 hand. Here are some of the ones you may find useful:

@@ -1,10 +1,14 @@
 
 build:
-	PYTHONPATH="$(CURDIR)/tools/plugins:$(CURDIR)/tools/plugins/gfm:$(PYTHONPATH)" tools/build-from-source $(doc)
+	tools/mdbuild.py
+serve:
+	cd htmldocs; python -m SimpleHTTPServer
 
 sysdeps:
-	sudo apt-get install python-html2text python-markdown python-cheetah
+	sudo apt-get install python-html2text python-markdown python-pip git
+	sudo pip install mdx-anchors-away mdx-callouts mdx-foldouts
 
-watch:
-	@echo "Requires watchdog module to be installed. - to install pip install watchdog."	
-	@tools/watch.sh
+multi:
+	tools/make_versions.sh
+
+.PHONY: build serve sysdeps multi 

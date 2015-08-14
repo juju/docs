@@ -1,143 +1,277 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Juju Documentation</title>
-    <script src="/wp-content/themes/ubuntu/library/js/all-yui.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/reset.css">
-    <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
-    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/latest/ubuntu-styles.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/ubuntu/latest/u/css/global.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/960.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="https://juju.ubuntu.com/wp-content/themes/juju-website/css/home-new.css">
-    <link rel="stylesheet" id="stacktack-css" href="https://juju.ubuntu.com/wp-content/plugins/stacktack/css/stacktack.min.css?ver=3.4.2" type="text/css" media="all">
-    <link href="./css/main.css" rel="stylesheet" type="text/css">
-    <!--[if lt IE 9]>
-      <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body class="resources">
-    <header class="banner global" role="banner">
-      <nav role="navigation" class="nav-primary nav-right">
-        <div class="logo">
-          <a class="logo-ubuntu" href="https://juju.ubuntu.com/">
-            <img width="118" height="27" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logo.png" alt="Juju logo" />
-            <span>Juju</span>
-          </a>
-        </div>
-        <ul>
-          <li class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></li>
-          <li class="page_item page-item-8"><a href="https://juju.ubuntu.com/charms/">Charms</a></li>
-          <li class="page_item page-item-10"><a href="https://juju.ubuntu.com/features/">Features</a></li>
-          <li class="page_item page-item-12"><a href="https://juju.ubuntu.com/deployment/">Deploy</a></li>
-          <li class="page_item page-item-14"><a href="https://juju.ubuntu.com/resources/">Resources</a></li>
-          <li class="page_item page-item-16"><a href="https://juju.ubuntu.com/community/">Community</a></li>
-          <li class="page_item page-item-18"><a href="https://juju.ubuntu.com/download/">Install Juju</a></li>
-          <li class="page_item page-item-1192 active"><a href="https://juju.ubuntu.com/docs/">Docs</a></li>
-        </ul>
-        <div id="box-search">
-          <form class="search-form" method="get" id="searchform" action="https://juju.ubuntu.com/">
-            <label class="off-left" for="s">Search:</label>
-            <input class="form-text" type="text" value="" name="s" id="s" />
-            <button class="off-left form-submit" type="submit" id="searchsubmit">Search</button>
-          </form>
-        </div>
-      </nav>
-    </header>
-    <div class="wrapper">
-      <div id="main-content" class="inner-wrapper" role="main">
-        <div class="row no-border">
-         <div class="header-navigation-secondary"></div>
-         <h2 class="pagetitle">Juju documentation</h2>
-        </div>
-        <section id="content" class="container-12">
-          <div class="grid-12 doc-container">
-            <div id="navlinks" class="grid-3 doc-navigation">
-              $DOCNAV
-            </div>
-            <div class="grid-9 doc-content">
-              <article>
-                $CONTENT
-              </article>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-    <footer class="global clearfix" role="contentinfo">
-      <nav role="navigation">
-        <div class="footer-a">
-          <div class="clearfix">
-            <ul>
-             <li>
-               <h2><a href="/">Juju</a></h2>
-               <ul>
-                 <li><a href="/charms">Charms</a></li>
-                 <li><a href="/features">Features</a></li>
-                 <li><a href="/deployment">Deployment</a></li>
-               </ul>
-             </li>
-             <li>
-               <h2><a href="/resources">Resources</a></h2>
-               <ul>
-                 <li><a href="/resources/juju-overview/">Overview</a></li>
-                 <li><a href="/docs/">Documentation</a></li>
-                 <li><a href="/resources/the-juju-gui/">The Juju web UI</a></li>
-                 <li><a href="/docs/authors-charm-store.html">The charm store</a></li>
-                 <li><a href="/docs/getting-started.html#test">Tutorial</a></li>
-                 <li><a href="/resources/videos/">Videos</a></li>
-                 <li><a href="/resources/easy-tasks-for-new-developers/">Easy tasks for new developers</a></li>
-               </ul>
-             </li>
-             <li>
-               <h2><a href="/community/">Community</a></h2>
-                 <ul>
-                   <li><a href="/community/blog/">Juju Blog</a></li>
-                   <li><a href="/events/">Events</a></li>
-                   <li><a href="/community/weekly-charm-meeting/">Weekly charm meeting</a></li>
-                   <li><a href="/community/charmers/">Charmers</a></li>
-                   <li><a href="/docs/authors-charm-writing.html">Write a charm</a></li>
-                   <li><a href="/docs/contributing.html">Help with documentation</a></li>
-                   <li><a href="https://bugs.launchpad.net/juju-core/+filebug">File a bug</a></li>
-                   <li><a href="/labs/">Juju Labs</a></li>
-                 </ul>
-               </li>
-               <li>
-                 <h2><a href="https://jujucharms.com/sidebar/">Try Juju</a></h2>
-                 <ul>
-                   <li><a href="https://jujucharms.com/">Charm store</a></li>
-                   <li><a href="/download/">Download Juju</a></li>
-                 </ul>
-               </li>
-             </ul>
-           </div>
-         </div>
-       </nav>
-       <div class="legal clearfix">
-         <p>&copy; 2013 Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>.</p>
-       </div>
-     </footer>
-     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-     <script src="//d38yea5fb4e2oh.cloudfront.net/jquery.stacktack.min.js"></script>
-     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-     <script type="text/javascript" src="./js/main.js"></script>
-     <script type="text/javascript" src="./js/jquery.details.js"></script>
-     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
-     <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-     <!-- google analytics -->
-     <script>
-       var _gaq = _gaq || [];
-       _gaq.push(['_setAccount', 'UA-1018242-41']);
-       _gaq.push(['_trackPageview']);
+<!doctype html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en" dir="ltr"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en" dir="ltr"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="en" dir="ltr"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" dir="ltr" itemscope itemtype="http://schema.org/Product"> <!--<![endif]-->
+<head>
 
-       (function() {
-         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-       })();
-    </script>
-  </body>
-</html>
+<title>
+%%TITLE%%
+</title>
+
+<meta charset="UTF-8" />
+<meta name="description" content="Learn how to install, configure, bootstrap Juju and how to create a charm through the Juju documentation" />
+<meta name="keywords" content="juju, charms, services, service orchestration, cloud, deployment, puppet, chef, fuel, cloud tools, service management, cloud management, configuration management, linux tool, openstack tool, ubuntu, cloud design, cloud orchestration" />
+
+
+<meta name="author" content="Canonical" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<![endif]-->
+
+<link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon" />
+
+<!-- google fonts -->
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic%7CUbuntu+Mono' rel='stylesheet' type='text/css' />
+
+<!-- stylesheets -->
+<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/responsive/latest/ubuntu-styles.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="../css/prism.css" />
+
+<!-- load basic yui, our modules file, the loader and sub to set up modules with
+combo load -->
+<script type="text/javascript"
+    
+    src="/prod/combo?yui/yui/yui-min.js&amp;app/modules-min.js&amp;yui/loader/loader-min.js&amp;yui/substitute/substitute-min.js&amp;plugins/respond.min.js&amp;plugins/modernizr.2.7.1.js&amp;plugins/handlebars.runtime-v2.0.0.js&amp;templates/templates.js">
+    
+</script>
+
+<script type="text/javascript">
+      YUI.GlobalConfig = {
+          combine: true,
+          base: '/prod/combo?yui/',
+          comboBase: '/prod/combo?',
+          maxURLLength: 1300,
+          root: 'yui/',
+            groups: {
+              app: {
+                  combine: true,
+                  base: '/prod/combo?app',
+                  comboBase: '/prod/combo?',
+                  root: 'app/',
+                  
+                  filter: 'min',
+                  
+                  // From modules.js
+                  modules: YUI_MODULES,
+              }
+          },
+          static_root:'/static/'
+    };
+ </script>
+
+<!-- provide charmstore url -->
+<script type="text/javascript">
+    window.csUrl = "https://api.jujucharms.com/charmstore/v4";
+</script>
+
+<script type="text/javascript"
+    
+    src="../../js/prism.js">
+    
+</script>
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ubuntucloud">
+<meta name="twitter:creator" content="@ubuntucloud">
+<meta name="twitter:domain" content="jujucharms.com">
+<meta name="twitter:title" content="Documentation - Juju">
+<meta name="twitter:description" content="Learn about the using Juju through the Juju GUI or CLI and see how it makes creating, configuring, deploying and managing services in the cloud simple.">
+<meta name="twitter:image" content="http://jujucharms.com/static/img/juju-twitter.png">
+
+
+</head>
+
+<body class="
+
+"
+>
+
+<header class="banner global" role="banner">
+
+    
+        <nav role="navigation" class="nav-primary nav-right">
+    <div class="logo">
+        <a class="logo-ubuntu" href="/">
+            <img width="139" height="19" src="/static/img/logos/juju-logo.png" alt="Juju logo for print" />
+        </a>
+    </div>
+
+    
+
+    <ul>
+        <li class="accessibility-aid">
+            <a accesskey="s" href="#main-content">Jump to content</a>
+        </li>
+
+        <li>
+    <a
+        class=""
+        href="/solutions"
+    >
+       Solutions
+    </a>
+    </li>
+        <li><a href="https://demo.jujucharms.com" target="_blank" class="external">Demo</a></li>
+        <li>
+    <a
+        class=""
+        href="/about"
+    >
+       About
+    </a>
+    </li>
+        <li>
+    <a
+        class=""
+        href="/about/features"
+    >
+       Features
+    </a>
+    </li>
+        <li>
+    <a
+        class=""
+        href="/community"
+    >
+       Community
+    </a>
+    </li>
+        <li>
+    <a
+        class="active"
+        href="/docs/"
+    >
+       Docs
+    </a>
+    </li>
+        <li>
+    <a
+        class=""
+        href="/get-started"
+    >
+       Get started
+    </a>
+    </li>
+        <li class="user-dropdown"><span id="user-dropdown"></span></li>
+    </ul>
+    <a href="#canonlist" class="nav-toggle no-script">*</a>
+</nav>
+    
+
+</header>
+
+
+
+<div class="contextual-bar">
+    
+        <form class="search-form" action="/q" method="GET">
+    <input
+        type="search" name="text"
+        class="form-text" placeholder="Search for solutions"
+        value=""
+    />
+    <button type="submit">
+        <img
+            src="/static/img/shared/search-icon.svg"
+            alt="Search" height="28"
+        />
+    </button>
+    
+</form>
+    
+</div>
+
+<div class="wrapper">
+<div id="main-content">
+
+
+
+
+
+    
+<div class="row jujudocs">
+    <div class="inner-wrapper">
+        <div class="four-col box jujudocs-nav">
+            <form action="/docs/search/" method="GET" class="search-form">
+                <input type="text" name="text" placeholder="Search docs" />
+                <button type="submit">
+                    <img src="/static/img/shared/search-icon.svg"
+                        alt="Search" height="28" />
+                </button>
+            </form>
+            <div class="twelve-col">
+              %%DOCNAV%%
+            </div>
+        </div>
+        <div class="eight-col last-col">
+            <div class="jujudocs-content">
+
+               %%CONTENT%%
+
+
+              </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div><!-- /.inner-wrapper -->
+
+</div><!-- /.wrapper -->
+
+
+<div class="footer-wrapper strip-light">
+<div class="solutions-cta">
+    <a href="/solutions">Browse all solutions&nbsp;&rsaquo;</a>
+</div>
+<footer class="global clearfix">
+    <p class="top-link">
+        <a href="#">Back to the top</a>
+    </p>
+    <nav role="navigation" class="inner-wrapper">
+        <div class="row">
+            <div class="seven-col">
+                <ul class="no-bullets">
+                    <li><a class="external" href="https://demo.jujucharms.com">Demo</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/about/features">Features</a></li>
+                    <li><a href="/docs">Docs</a></li>
+                    <li><a href="/get-started">Get Started</a></li>
+                </ul>
+            </div>
+            <div class="five-col last-col">
+                <ul class="social--right">
+                    <li class="social__item">
+                        <a href="https://plus.google.com/103184405956510785630/posts" class="social__google"><span class="accessibility-aid">Juju on Google+</span></a>
+                    </li>
+                    <li class="social__item">
+                        <a href="http://www.twitter.com/ubuntucloud" class="social__twitter"><span class="accessibility-aid">Ubuntu Cloud on Twitter</span></a>
+                    </li>
+                    <li class="social__item">
+                        <a href="http://www.facebook.com/ubuntucloud" class="social__facebook"><span class="accessibility-aid">Ubuntu Cloud on Facebook</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="legal clearfix">
+        <div class="legal-inner">
+            <p class="twelve-col">
+                &copy; 2014 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.
+            </p>
+            <ul class="inline bullets clear">
+                <li><a href="http://www.ubuntu.com/legal">Legal information</a></li>
+                <li><a href="https://github.com/CanonicalLtd/jujucharms.com/issues">Report a bug on this site</a></li>
+            </ul>
+            <span class="accessibility-aid">
+                <a href="#">Got to the top of the page</a>
+            </span>
+        </div>
+    </div>
+</footer>
+</div>

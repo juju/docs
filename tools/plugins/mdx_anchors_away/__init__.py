@@ -15,7 +15,13 @@ class AnchorsProcessor(Treeprocessor):
         RE = re.compile(r'^h([1-9])$')
         for c in root:
             if RE.match(c.tag):
-                c.set('id', c.text.replace(' ', '-').lower())
+                if c.text:
+                    id_anchor = c.text.replace(' ', '-').lower()
+                    c.set('id', id_anchor)
+                    etree.SubElement(c,
+                                     'a',
+                                     {'class': 'anchor',
+                                      'href': '#' + id_anchor})
         return root
 
 

@@ -58,12 +58,14 @@ Non-released images (eg beta, daily etc) have product ids like:
 The metadata index and product files are required to be in the following
 directory tree (relative to the URL associated with each path component):
 
-    <path_url>
-      |-streams
-          |-v1
-             |-index.(s)json
-             |-product-foo.(s)json
-             |-product-bar.(s)json
+```no-highlight
+<path_url>
+  |-streams
+      |-v1
+         |-index.(s)json
+         |-product-foo.(s)json
+         |-product-bar.(s)json
+```
 
 The index file must be called "index.(s)json" (sjson for signed). The various
 product files are named according to the Path values contained in the index
@@ -84,19 +86,22 @@ The metadata index and product files are required to be in the following
 directory tree (relative to the URL associated with each path component). In
 addition, tools tarballs which Juju needs to download are also expected.
 
-      |-streams
-      |   |-v1
-      |      |-index.(s)json
-      |      |-product-foo.(s)json
-      |      |-product-bar.(s)json
-      |
-      |-releases
-          |-tools-abc.tar.gz
-          |-tools-def.tar.gz
-          |-tools-xyz.tar.gz
+```no-highlight
+|-streams
+|   |-v1
+|      |-index.(s)json
+|      |-product-foo.(s)json
+|      |-product-bar.(s)json
+|
+|-releases
+    |-tools-abc.tar.gz
+    |-tools-def.tar.gz
+    |-tools-xyz.tar.gz
+```
 
 The index file must be called "index.(s)json" (sjson for signed). The product
 file and tools tarball name(s) match whatever is in the index/product files.
+
 
 ## Configuration
 
@@ -118,10 +123,12 @@ instances running in the cloud.
 
 Assume an Apache http server with base URL `https://juju-metadata`, providing
 access to information at `<base>/images` and `<base>/tools`. The Juju
-environment yaml file could have the following entries (one or both):
+environments yaml file could have the following entries (one or both):
 
-    tools-metadata-url: https://juju-metadata/tools
-    image-metadata-url: https://juju-metadata/images
+```yaml
+tools-metadata-url: https://juju-metadata/tools
+image-metadata-url: https://juju-metadata/images
+```
 
 The required files in each location is as per the directory layout described
 earlier. For a shared directory, use a URL of the form "file:///sharedpath".
@@ -137,14 +144,16 @@ Azure, the "storage-account-name" value is relevant.
 
 The (optional) directory structure inside the cloud storage is as follows:
 
-      |-tools
-      |   |-streams
-      |       |-v1
-      |   |-releases
-      |
-      |-images
-          |-streams
-              |-v1
+```no-highlight
+|-tools
+|   |-streams
+|       |-v1
+|   |-releases
+|
+|-images
+    |-streams
+        |-v1
+```
 
 Of course, if only custom image metadata is required, the tools directory will
 not be required, and vice versa.
@@ -152,6 +161,7 @@ not be required, and vice versa.
 Note that if juju bootstrap is run with the `--upload-tools` option, the tools
 and metadata are placed according to the above structure. That's why the tools
 are then available for Juju to use.
+
 
 ### Provider specific storage
 
@@ -161,10 +171,11 @@ are defined as follows:
 
 juju-tools
 
-     the &LT;path_url&GT; value as described above in Tools Metadata Contents
+    the <path_url> value as described above in Tools Metadata Contents
+
 product-streams
 
-    the &LT;path_url&GT; value as described above in Image Metadata Contents
+    the <path_url> value as described above in Image Metadata Contents
 
 Other providers may similarly be able to specify locations, though the
 implementation will vary.
@@ -182,6 +193,7 @@ This is the default location used to search for image metadata and is
 used if no matches are found earlier in any of the above locations. No user
 configuration is required.
 
+
 # Deploying Private Clouds
 
 There are two main issues when deploying a private cloud:
@@ -195,13 +207,15 @@ Issue 2 means that tools need to be mirrored locally to make them accessible.
 
 Juju tools exist to help with generating and validating image and tools
 metadata. For tools, it is often easiest to just mirror
-`https://streams.canonical.com/tools`. However image metadata cannot be simply
+`https://streams.canonical.com/juju/tools`. However image metadata cannot be simply
 mirrored because the image ids are taken from the cloud storage provider, so
 this needs to be generated and validated using the commands described below.
 
 The available Juju metadata tools can be seen by using the help command:
 
-    juju help metadata
+```bash
+juju help metadata
+```
 
 The overall workflow is:
 
@@ -214,7 +228,9 @@ The overall workflow is:
 
 Generate image metadata using
 
-    juju metadata generate-image -d <metadata_dir>
+```bash
+juju metadata generate-image -d <metadata_dir>
+```
 
 As a minimum, the above command needs to know the image id to use and a
 directory in which to write the files.
@@ -241,7 +257,10 @@ Examples:
 
   - Upload contents of  directly to environment's cloud storage
   - Use the validation command to ensure an image id can be discovered for a given scenario (region series, arch): 
-      juju metadata validate-images
+
+```bash
+juju metadata validate-images
+```
 
 If run without parameters, the validation command will take all required details
 from the current Juju environment (or as specified by -e) and output the image
@@ -249,10 +268,11 @@ id it would use to spin up an instance. Alternatively, series, region,
 architecture etc. can be specified on the command line to override the values in
 the environment config.
 
+
 ### Tools metadata
 
 Generally, tools and related metadata are mirrored from
-`https://streams.canonical.com/tools`. However, it is possible to manually
+`https://streams.canonical.com/juju/tools`. However, it is possible to manually
 generate metadata for a custom built tools tarball.
 
 First, create a tarball of the relevant tools and place in a directory
@@ -262,9 +282,11 @@ structured like this:
 
 Now generate relevant metadata for the tools by running the command:
 
-    juju metadata generate-tools -d <tools_dir>
+```bash
+juju metadata generate-tools -d <tools_dir>
+```
 
-Finally, the contents of  can be uploaded to a location in the Juju metadata
+Finally, the contents of `<tools_dir>` can be uploaded to a location in the Juju metadata
 search path. As per the Configuration section, this may be somewhere specified
 by the tools-metadata-url setting or the cloud's storage path settings etc.
 
@@ -272,17 +294,19 @@ Examples:
 
 1. tools-metadata-url
 
-  - upload contents of  to `http://somelocation`
+  - upload contents of `<tools_dir>` to `http://somelocation`
   - set tools-metadata-url to `http://somelocation/tools`
 
 2. Cloud storage
 
-  - upload contents of  directly to environment's cloud storage
+  - upload contents of `<tools_dir>` directly to environment's cloud storage
 
 As with image metadata, the validation command is used to ensure tools are
 available for Juju to use:
 
-      juju metadata validate-tools
+```bash
+juju metadata validate-tools
+```
 
 The same comments apply. Run the validation tool without parameters to use
 details from the Juju environment, or override values as required on the command

@@ -10,8 +10,10 @@ and deploy charms to your environment.
 
 Installing the GUI works the same as installing any other charm:
 
-    juju deploy juju-gui
-    juju expose juju-gui
+```bash
+juju deploy juju-gui
+juju expose juju-gui
+```
 
 Once the service is deployed and exposed, you can find the address for the GUI
 by running juju status and looking for the public-address field for the juju-gui service.
@@ -20,21 +22,25 @@ In more recent versions of Juju, you can also deploy the GUI along-side another
 service on an existing machine. This might be the case if you wish to conserve
 resources. The following command will deploy juju-gui to an existing machine 1:
 
-    juju deploy --to 1 juju-gui
-    juju expose juju-gui
+```bash
+juju deploy --to 1 juju-gui
+juju expose juju-gui
+```
 
 Check `juju help deploy` to find out more about this option, and whether or not
 it is available in your version.
 
-**Note:** If you are deploying behind a firewall, make sure to check out the charm's [README](https://jujucharms.com/fullscreen/search/precise/juju-gui/#bws-readme) for more information on getting the GUI up and running and talking to your environment
+**Note:** If you are deploying behind a firewall, make sure to check out the charm's [README](https://jujucharms.com/juju-gui/) for more information on getting the GUI up and running and talking to your environment
+
 
 ## Configuration
 
-There are a few pertinent configuration options that might help you when working with the GUI. You can read about all of them on the GUI's [charm
-page](https://jujucharms.com/fullscreen/search/precise/juju-gui/), but there is
+There are a few pertinent configuration options that might help you when working with the GUI. You can read about all of them on the GUI's [charm page](https://jujucharms.com/juju-gui/), but there is
 one that is worth discussing immediately:
 
+```no-highlight
 read-only
+```
 
 This option will cause the GUI to display services, units, and machines, along
 with all of their meta-data, in a read-only mode, meaning that you will not be
@@ -43,10 +49,12 @@ monitoring type scenario.
 
 **Note:** read-only mode in the GUI simply prevents actions taken within the GUI from being sent to the Juju environment, and is _not_ additional security against the Juju API.
 
+
 # Using the GUI
 
 The GUI has a few different uses. You can use it to monitor the status of your
 environment, and you can use it to interact with your environment.
+
 
 ## Monitoring
 
@@ -69,6 +77,7 @@ The GUI can be used to offer insight into not only the status of your cloud
 deployment, but also the overall structure of your services and how they are
 related, adding to the ability to visualize the way in which all of the
 components of your project work together.
+
 
 ## Building
 

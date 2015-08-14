@@ -9,8 +9,8 @@ call The Charm Store.
 
   - The main project page is here: [https://launchpad.net/charms](https://launchpad.net/charms)
   - There are useful tools for downloading, modifying, and contributing here: [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools)
-  - Here is the official tutorial for charm authors: [https://juju.ubuntu.com/docs/write-charm.html](https://juju.ubuntu.com/docs/write-charm.html)
-  - Here is the official tutorial for bundle authors: [https://juju.ubuntu.com/docs/charms-bundles.html](https://juju.ubuntu.com/docs/charms-bundles.html)
+  - Here is the official tutorial for charm authors: [https://jujucharms.com/docs/authors-charm-writing](authors-charm-writing)
+  - Here is the official tutorial for bundle authors: [https://jujucharms.com/docs/charms-bundles.html](charms-bundles.html)
 
 ## Charm Store Submission
 
@@ -18,10 +18,12 @@ There are currently 2 methods to submit a charm and have it listed in the charm
 store. Both methods have their perks - but it is suggested to start with your
 personal namespace before asking for a charmer featured charm.
 
+!!! Note: if you are a member of the Charm Partner Program, you will want to ensure that your Charm gets into the Recommended Charms section of the Charm Store, so please follow the instructions in the [Recommended Charms](#recommended-charms) section below.
+
 ## Charm Store Process
 
 This process is designed to allow prospective developers to have their charms
-reviewed and updated in the [Charm Store](http://jujucharms.com) in a timely
+reviewed and updated in the [Charm Store](https://jujucharms.com) in a timely
 manner that ensures peer reviews and quality.
 
 ## Submitting a new Charm
@@ -37,14 +39,34 @@ You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
  possible so that users get the most flexibility:
 
   1. Install juju and charm-tools.
-  1. Create a repository, something like `mkdir -p ~/charms/precise`, precise is the release code name for the [release of Ubuntu](http://releases.ubuntu.com) you wish to target your charm at. You can also use `trusty` if you're submitting to that series.
-  1. If you haven't created your charm yet, you can use `charm create ubuntu-package-name` which will fill in some basic metadata info for you. You can check to see if it already exists at [http://jujucharms.com/](http://jujucharms.com/). Also make sure to [check the list of open charms](http://goo.gl/mvtPh) to see if anybody is already working on a charm for the service you want to work on. Bugs which have had no activity by the assignee for more than 30 days are fair game and should be unassigned.
-  1. Once your charm is working and tested with any compatible charms, make sure it passes `charm proof path/to/your/charm`
+  1. Create a repository, something like `mkdir -p ~/charms/precise`; 'precise'
+     is the release code name for the [release of Ubuntu](http://releases.ubuntu.com)
+     you wish to target your charm at. You can also use `trusty` if you're
+     submitting to that series.
+  1. If you haven't created your charm yet, you can use
+     `charm create ubuntu-package-name` which will fill in some basic metadata
+     info for you. You can check to see if it already exists at
+     [https://jujucharms.com/](https://jujucharms.com/). Also make sure to 
+     [check the list of open charms](http://goo.gl/mvtPh) to see if anybody is
+     already working on a charm for the service you want to work on. Bugs which
+     have had no activity by the assignee for more than 30 days are fair game
+     and should be unassigned.
+  1. Once your charm is working and tested with any compatible charms, make sure
+     it passes `charm proof path/to/your/charm`
   1. `bzr init` in your charm's root directory
   1. `bzr add` to add all files.
   1. `bzr ci -m'Initial charm'`
-  1. To submit your charm for 12.04: `bzr push lp:~your-launchpad-username/charms/precise/your-charms-name/trunk`
-  1. To submit your charm for 14.04: `bzr push lp:~your-launchpad-username/charms/trusty/your-charms-name/trunk`
+  1. To submit your charm for 12.04:
+     
+     ```bash
+     bzr push lp:~<your-lp-username>/charms/precise/<your-charm>/trunk
+     ```
+
+  1. To submit your charm for 14.04: 
+     
+     ```bash
+     bzr push lp:~<your-lp-username>/charms/trusty/<your-charm>/trunk
+     ```
 
 
 Your charm should then be looked at in a timely manner.
@@ -70,9 +92,9 @@ For the purpose of this documentation, we will call our charm `nagios`
     bzr push lp:~your-launchpad-username/charms/series/nagios/trunk
 
 The /trunk branch identifier is the *only* branch that will be recognized by the
-charm store ingestion process. This free's the developer to push multiple branches
-and gate features/fixes into their personal branch without listing multiple copies
-of the charm in the store.
+charm store ingestion process. This free's the developer to push multiple
+branches and gate features/fixes into their personal branch without listing
+multiple copies of the charm in the store.
 
 To break down the launchpad link structure, the segments will be listed in bold
 with a description following.
@@ -80,15 +102,19 @@ with a description following.
   - **lp:~username** : This is your launchpad username
   - **/charms/** : Charms is the project descriptor
   - **/precise/** : All charms are targeted against a series
-  - **/nagios/** : This is the charm name and should match whats listed in metdata.yaml
-  - **/trunk** : The branch target. *Remember* only /trunk will be ingested into the charm store.
+  - **/nagios/** : This is the charm name and should match whats listed in
+    metdata.yaml
+  - **/trunk** : The branch target. *Remember* only /trunk will be ingested into
+    the charm store.
 
 #### Deployment
 
-Once your charm has been ingested it will be deployable via your personal name space
-url.
+Once your charm has been ingested it will be deployable via your personal name
+space URL.
 
-      juju deploy cs:~your-launchpad-username/series/nagios
+```bash
+juju deploy cs:~your-launchpad-username/series/nagios
+```
 
 #### Charm Store Display
 
@@ -102,24 +128,35 @@ To accept contributions, and/or merge patches into your personal namespace - as
 the owner of the charm, you are responsible for reviewing and accepting/rejecting
 contributions.
 
-    bzr push lp:~your-launchpad-username/charms/series/nagios/feature_branch
+```bash
+bzr push lp:~<your-lp-username>/charms/series/nagios/feature_branch
+```
 
 and a subsequent Merge Proposal should be issued against your branch following
-the launchpad [Developer Merge Proposal Documentation](https://dev.launchpad.net/UsingMergeProposals)
+the Launchpad 
+[Developer Merge Proposal Documentation](https://dev.launchpad.net/UsingMergeProposals)
 
 
 ### Recommended Charms
 
 To have your charm listed as a charmer team recommended charm, you have to
-under-go a rigorous review process where we evaluate the charm, evaluate tests
-for your charm, and deploy & run tests against the provided service with
+undergo a rigorous review process where the team evaluate the charm, evaluate 
+tests for your charm, and deploy & run tests against the provided service with
 different configuration patterns.
 
-after following the Submission Process outlined above:
+After following the Submission Process outlined above:
 
-  1. File a bug against charms at [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug) This is used to track the progress of your charm.
-  1. Now you just need to attach your branch to the bug report, go to [your code page](https://code.launchpad.net/people/+me), find your branch, and click on it. Then click on "Link a bug report", and put in the number of the bug you filed. If you are submitting to multiple releases please make one bug per release.
-  1. Subscribe the `charmers` team by clicking "Subscribe someone else" on the right side of the launchpad page. This is important as it gets your charm in the review queue!
+  1. File a bug against charms at 
+     [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug)
+     This is used to track the progress of your charm.
+  1. Now you just need to attach your branch to the bug report, go to
+     [your code page](https://code.launchpad.net/people/+me), find your branch
+     and click on it. Then click on "Link a bug report", and put in the number
+     of the bug you filed. If you are submitting to multiple releases please
+     make one bug per release.
+  1. Subscribe the `charmers` team by clicking "Subscribe someone else" on the
+     right side of the launchpad page. This is important as it gets your charm
+     in the review queue!
 
 
 ## Submitting a fix to an existing Charm
@@ -150,5 +187,8 @@ expert to help you out or help you run a Charm School.
 
 Some notes:
 
-  - Please respect that these people might have a few other charms in their queue already.
-  - The package you have a question about might not necessarily be part of the patch pilot's area of expertise. They will still try to help you get your fix in and probably get you in touch with the 'right' people.
+  - Please respect that these people might have a few other charms in their
+    queue already.
+  - The package you have a question about might not necessarily be part of the
+    patch pilot's area of expertise. They will still try to help you get your
+    fix in and probably get you in touch with the 'right' people.
