@@ -8,6 +8,10 @@ Ubuntu: upstart to systemd.
 
 See [https://wiki.ubuntu.com/SystemdForUpstartUsers](https://wiki.ubuntu.com/SystemdForUpstartUsers).
 
+**Note:** Due to the issues involving Ubuntu 15.04 (Vivid) in various scenarios
+with the Local Provider, at this time **we do not recommend using Vivid as host
+or as Juju instance with the Local Provider (LXC)**.
+
 
 ## General
 
@@ -25,10 +29,8 @@ sudo update-grub
 On Vivid, once 1.23 is updated on it, the older (< 1.23) packages will equally
 be updated to enforce the above automatically.
 
-### Issues
 
-- For the Local Provider (LXC), a Vivid (systemd) container may not boot on a non-Vivid
-  host. See [LP bug #1347020](https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/1347020).
+## Issues
 
 - The provisioning of a Juju-managed machine requires knowledge of the init
   system in use on that machine. This is achieved by mapping the init system to
@@ -41,6 +43,14 @@ be updated to enforce the above automatically.
   This mapping may not always hold true. To force the provisiniong process
   (`cloud-init`) to use upstart set `JUJU_DEV_FEATURE_FLAGS=legacy-upstart` in
   the Juju user's shell environment.
+
+- For the Local Provider (LXC):
+
+    - a Vivid host does not bootstrap under upstart. See
+      [LP #1450092](https://bugs.launchpad.net/juju-core/+bug/1450092).
+
+    - a Vivid container does not boot on a Trusty host. See
+      [LP bug #1347020](https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/1347020).
 
 
 ## Charms
