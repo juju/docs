@@ -52,8 +52,8 @@ have put all our boxes on the Ubuntu Cloud Images site. The quick links are:
 
 ### 14.04 LTS:
 
-- [trusty-server-cloudimg-amd64-juju-vagrant-disk1.box](https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box)
-- [trusty-server-cloudimg-i386-juju-vagrant-disk1.box](https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-juju-vagrant-disk1.box)
+- [trusty-server-cloudimg-amd64-juju-vagrant-disk1.box](https://cloud-images.ubuntu.com/vagrant/trusty/20150611/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box)
+- [trusty-server-cloudimg-i386-juju-vagrant-disk1.box](https://cloud-images.ubuntu.com/vagrant/trusty/20150611/trusty-server-cloudimg-i386-juju-vagrant-disk1.box)
 
 If you are unsure which one to use, try the 64-bit builds as most modern
 machines are now 64bit (x86_64 AMD64). If you need other versions of Ubuntu,
@@ -83,7 +83,7 @@ The URL can be from the list above or a local file if you have already
 downloaded a suitable box. For example:
 
 ```bash
-vagrant box add JujuBox https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box
+vagrant box add JujuBox https://cloud-images.ubuntu.com/vagrant/trusty/20150611/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box
 ```
 
 This will download the box from the URL you specified above. The box will be
