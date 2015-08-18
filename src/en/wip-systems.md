@@ -51,9 +51,9 @@ environments are called 'hosted environments', as they are hosted within a
 Juju System. When creating an environment, the user will need to specify cloud
 credentials.
 
-|| This section is confusing.  EC2 requires several items for credentials
-|| (access-key are secret-key are two.  An example of a config file would be
-|| nice.
+> This section is confusing.  EC2 requires several items for credentials
+> (access-key are secret-key are two.  An example of a config file would be
+> nice.
 
 For instance, EC2 requires an 'access-key' and a 'secret-key'. So a
 configuration file (e.g. ec2-secrets) should be created that looks like:
