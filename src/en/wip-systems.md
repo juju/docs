@@ -2,13 +2,13 @@ Title: How to configure Juju to manage multiple environments
 
 # The Juju Environment System
 
-Experimental in version 1.25, the Juju Environment System (JES) enables new 
-features for managing environments and controlling access to them through user 
+Experimental in version 1.25, the Juju Environment System (JES) enables new
+features for managing environments and controlling access to them through user
 identities.
 
 ## Enabling the Juju Environment System feature flag
 
-In order to use the multiple environment features of the Juju Environment System 
+In order to use the multiple environment features of the Juju Environment System
 (JES), you need to enable a development feature flag:
 
 ```bash
@@ -30,10 +30,10 @@ A Juju Environment System (JES), also sometimes shortened to 'Juju System',
 describes the environment that runs and manages the Juju API servers and the
 underlying database.
 
-This initial environment is also called the 'system environment' 
-(or 'bootsrap environment'), and is what is
-created when the bootstrap command is used.  This System environment is a
-normal Juju environment that just happens to have machines that manage Juju.
+This initial environment is also called the 'system environment' (or
+'bootstrap environment'), and is created when the bootstrap command is used.
+This System environment is a normal Juju environment that just happens to have
+machines that manage Juju.
 
 In order to keep a clean separation of concerns, it is considered best
 practice to create additional environments for real workload deployment.
@@ -51,13 +51,25 @@ environments are called 'hosted environments', as they are hosted within a
 Juju System. When creating an environment, the user will need to specify cloud
 credentials.
 
-These credentials can be specified either through command line options, a yaml
-formatted configuration file, or as environment variable that the cloud
+|| This section is confusing.  EC2 requires several items for credentials
+|| (access-key are secret-key are two.  An example of a config file would be
+|| nice.
+
+For instance, EC2 requires an 'access-key' and a 'secret-key'. So a
+configuration file (e.g. ec2-secrets) should be created that looks like:
+
+```
+access-key: <your access key here>
+secret-key: <your secret key here>
+```
+
+These credentials can be specified either through command line options, a
+YAML-formatted configuration file, or as environment variable that the cloud
 provider defines. These are the same values that you would use to bootstrap an
 environment.
 
 ```bash
-juju system create-environment test
+juju system create-environment test --config=$HOME/ec2-secrets
 ```
 ... should return output of the form:
 
@@ -117,7 +129,7 @@ server is not accessible, this command will fail.
 ### `juju system kill`
 
 This command's primary use case is to deal with the situation where the remote
-API server is not accessible, and replaces the older `juju destroy-environment 
+API server is not accessible, and replaces the older `juju destroy-environment
 --force` command.
 
 The command will first attempt to destroy all the environments through the
@@ -220,4 +232,3 @@ mary-server (system) -> bob-test
 The local name for the environment is by default 'owner-name', so since this
 environment is owned by 'bob@local' and called 'test', for Mary the environment
 is called 'bob-test'.
-
