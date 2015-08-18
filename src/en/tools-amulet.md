@@ -65,12 +65,6 @@ to be amended in order for it to find the amulet directory.
 
 ## Usage
 
-Amulet comes packaged with several tools. In order to provide the most
-flexibility, Amulet offers both direct Python library access and generic access
-via a programmable API for other languages (for example, `bash`).
-
-### Python
-
 Amulet is made available to Python via the `amulet` module which you can import:
 
 ```python
@@ -91,28 +85,6 @@ helper functions:
 from amulet import deployer
 d = deployer.Deployment()
 ```
-
-### Programmable API
-
-A limited number of functions are made available through a generic forking API.
-The following examples assume you're using a BOURNE Shell, though this syntax
-could be used from within other languauges with the same expected results.
-
-Unlike the Python modules, only some of the functions of Amulet are available
-through this API, though efforts are being made to make the majority of the core
-functionality available.
-
-This API follows the subcommand workflow, much like Git or Bazaar. Amulet makes
-an amulet command available and each function is tied to a sub-command. To mimic
-the Python example you can create a new Deployment by issuing the following
-command:
-
-```bash
-amulet deployment
-```
-
-Depending on the syntax and worflow for each function you can expect to provide
-either additional sub-commands, command-line flags, or a combination of the two.
 
 ## Core functionality
 
