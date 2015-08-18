@@ -5,6 +5,7 @@ build:
 clean:
 	find . -name '*.bak' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
+	rm -rf htmldocs/en
 
 serve:
 	cd htmldocs; python -m SimpleHTTPServer
