@@ -6,7 +6,7 @@ Juju considers users to be of one of two types:
 
   1. **local users**, those stored in the database along side the environments and
 entities in those environments
-  1. **remote users**, those whose authenticiation
+  1. **remote users**, those whose authentication
 is managed by an external service and reserved for future use.
 
 When a Juju System is bootstrapped, an initial user is created with the 
@@ -14,13 +14,13 @@ environment. This user is considered to be the administrator for the Juju
 System. Only this user can create other users until such a time as Juju has
 full fine grained role-based permissions.
 
-All user managment functionality is managed though the 'juju user' collection
+All user management functionality is managed though the 'juju user' collection
 of commands.
 
 # Adding a new user
 
 The primary user commands are used by the admin users to create users and
-disable or reenable login access.
+disable or re-enable login access.
 
 ```bash
 $ juju user add bob "Bob Brown"
@@ -54,7 +54,7 @@ $ juju user change-password bob
 # Copying a local identity to use on another machine
 
 The `juju user credentials` command gives any user the ability to export the
-credentails they are using to access an environment to a file that they can
+credentials they are using to access an environment to a file that they can
 use elsewhere to login to the same Juju System.
 
 ```bash

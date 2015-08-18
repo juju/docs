@@ -35,7 +35,7 @@ something like this:
       # you set it up and get the relevant credentials. For more information
       # see https://cloud.google.com/compute/docs/api/how-tos/authorization.
       # The key information can be downloaded as a JSON file, or copied, from:
-      #   https://console.developers.google.com/project/<projet>/apiui/credential
+      #   https://console.developers.google.com/project/<project>/apiui/credential
       # Either set the path to the downloaded JSON file here:
       auth-file:
     
@@ -157,7 +157,7 @@ configuration should contain the *full path* to the file, e.g.:
 
 ```
  # The key information can be downloaded as a JSON file, or copied, from:
- #   https://console.developers.google.com/project/<projet>/apiui/credential
+ #   https://console.developers.google.com/project/<project>/apiui/credential
  # Either set the path to the downloaded JSON file here:
  auth-file: /home/juju-user/.juju/Juju-GCE-7e04ea455a2d.json
 ```
@@ -174,7 +174,7 @@ Remember that
 [you can use the `|` character](http://www.yaml.org/spec/1.2/spec.html#id2760844)
 as the first line of a YAML value to interpret all subsequent indented text as a
 continuous string. You will need to strip out line endings and translate any 
-unicode characters in the string. A simple way to pre-format some of this
+Unicode characters in the string. A simple way to pre-format some of this
 information is to run something like:
 
 ```

@@ -33,7 +33,7 @@ This can be solved by removing miscellaneous .jenv files in
 ## Connection failed, will retry
 
 This occurs when the juju API server and Database server fail to start within
-the alloted timeout. This can occur for one of several reasons. After the
+the allotted timeout. This can occur for one of several reasons. After the
 bootstrap command fails run the following command:
 
 ```bash
@@ -71,7 +71,7 @@ ls -lh /var/cache/lxc/cloud-precise/
 ```
 
 If the contents of this directory are older than a few weeks, delete files
-present, destroy the environment with `juju destroy-environment`, rebootstrap
+present, destroy the environment with `juju destroy-environment`, re-bootstrap
 and attempt deployment again.
 
 
