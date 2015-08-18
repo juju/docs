@@ -45,15 +45,17 @@ like Landscape and Nagios.
 
 ## Creating environments in a Juju System
 
+> Somewhere it should be noted that an initial juju environment must be
+> bootstrapped before 'system create-environment' can be called.
+> Later in the discussion of `juju system destroy` it becomes clear this
+> original, bootstrapped environment is the `system` and it must be
+> bootstrapped before proceeding.
+
 The `juju system create-environment` command will create a new empty
 environment that has the current user as the owner. These secondary
 environments are called 'hosted environments', as they are hosted within a
 Juju System. When creating an environment, the user will need to specify cloud
 credentials.
-
-> This section is confusing.  EC2 requires several items for credentials
-> (access-key are secret-key are two.  An example of a config file would be
-> nice.
 
 For instance, EC2 requires an 'access-key' and a 'secret-key'. So a
 configuration file (e.g. ec2-secrets) should be created that looks like:
@@ -76,6 +78,12 @@ juju system create-environment test --config=$HOME/ec2-secrets
 ```no-highlight
 created environment "test"
 staging (system) -> test
+```
+
+If your config file is improperly formatted you'll get an error like:
+
+```no-highlight
+ERROR json: unsupported type: map[interface {}]interface {}
 ```
 
 When the environment has been created, it becomes the current environment. A
@@ -136,8 +144,12 @@ The command will first attempt to destroy all the environments through the
 API, but will fall back to destroying the machines using direct cloud provider
 calls if the API is not accessible.
 
+> The following statement needs to be given more prominence as it means
+> provider resources will be left hanging around with the meter still
+> running.
+
 If there were hosted environments running that had cloud machines allocated to
-it, and the API server was not accessible, the machines will need to be
+them, and the API server was not accessible, the machines will need to be
 manually reclaimed through the cloud provider's tools.
 
 ## Creating additional users
