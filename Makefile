@@ -1,6 +1,11 @@
 
 build:
 	tools/mdbuild.py
+
+clean:
+	find . -name '*.bak' -exec rm -f {} +
+	find . -name '*~' -exec rm -f {} +
+
 serve:
 	cd htmldocs; python -m SimpleHTTPServer
 
@@ -12,6 +17,6 @@ multi:
 	tools/make_versions.sh
 
 spell:
-	spell -b `find src/en -name "*.md"` | sort | uniq 
+	spell -b `find src/en -name "*.md"` | sort | uniq
 
-.PHONY: build serve sysdeps multi spell
+.PHONY: build clean multi serve spell sysdeps
