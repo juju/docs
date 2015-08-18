@@ -7,6 +7,39 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.24.5
+
+  A new stable release of Juju, juju-core 1.24.5, is now available.
+  This release replaces version 1.24.4.
+
+
+  ## Getting Juju
+
+  juju-core 1.24.5 is available for Wily and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows, Centos, and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.24.5
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Deploy hangs: jujud-machine-0 upstart process running but juju
+      status shows it down
+      Lp 1481368
+
+    * Juju uses proxy to access bootstrap node
+      Lp 1478660
+
+
 ^# juju-core 1.24.4
 
   A new stable release of Juju, juju-core 1.24.4, is now available.
