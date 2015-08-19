@@ -43,10 +43,10 @@ pip install amulet
 ```
 
 ### Source
-Amulet is built with Python3, so please make sure it's installed prior to following these
-steps. While you can run Amulet from source, it's not recommended as it requires
-several changes to environment variables in order for Amulet to operate as it
-does in the packaged version.
+Amulet is built with Python3, so please make sure it's installed prior to
+following these steps. While you can run Amulet from source, it's not
+recommended as it requires several changes to environment variables in order for
+Amulet to operate as it does in the packaged version.
 
 To install Amulet from source, first get the source:
 
@@ -64,12 +64,6 @@ You can also access the Python libraries; however, your `PYTHONPATH` will need
 to be amended in order for it to find the amulet directory.
 
 ## Usage
-
-Amulet comes packaged with several tools. In order to provide the most
-flexibility, Amulet offers both direct Python library access and generic access
-via a programmable API for other languages (for example, `bash`).
-
-### Python
 
 Amulet is made available to Python via the `amulet` module which you can import:
 
@@ -92,28 +86,6 @@ from amulet import deployer
 d = deployer.Deployment()
 ```
 
-### Programmable API
-
-A limited number of functions are made available through a generic forking API.
-The following examples assume you're using a BOURNE Shell, though this syntax
-could be used from within other languauges with the same expected results.
-
-Unlike the Python modules, only some of the functions of Amulet are available
-through this API, though efforts are being made to make the majority of the core
-functionality available.
-
-This API follows the subcommand workflow, much like Git or Bazaar. Amulet makes
-an amulet command available and each function is tied to a sub-command. To mimic
-the Python example you can create a new Deployment by issuing the following
-command:
-
-```bash
-amulet deployment
-```
-
-Depending on the syntax and worflow for each function you can expect to provide
-either additional sub-commands, command-line flags, or a combination of the two.
-
 ## Core functionality
 
 This section is deigned to outline the core functions of Amulet. Again, please
@@ -127,7 +99,7 @@ environment. These classes and methods are outlined below
 amulet.deployer.Deployment()
 
 Deployment (amulet deployment, from amulet import Deployment) is an abstraction
-layer to the juju-deployer Juju plugin and a service lifecycle management tool.
+layer to the juju-deployer Juju plugin and a service life cycle management tool.
 It's designed to allow an author to describe their deployment in simple terms:
 
 ```python
