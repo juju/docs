@@ -113,7 +113,7 @@ return value, the hook will simply exit. However, it's exiting with a zero
 status so it won't crop up as an error in Juju.
 
 This seems counter intuitive as we technically have a problem because we don't
-have data. This sitatuion should be seen as "We don't have data, yet". By
+have data. This situation should be seen as "We don't have data, yet". By
 exiting zero, once the corresponding service actually sets the value, it'll
 trigger the `relation-changed` hook again and we'll be able to read the value.
 This is considered an example of an

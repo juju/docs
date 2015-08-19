@@ -160,7 +160,7 @@ foo.example.com
 the charm). If called without arguments, it returns a dictionary containing all
 config settings that are either explicitly set, or which have a non-nil default
 value. If the `--all` flag is passed, it returns a dictionary containing all
-definied config settings including nil values (for those without defaults). If
+defined config settings including nil values (for those without defaults). If
 called with a single argument, it returns the value of that config key. Missing
 config keys are reported as having a value of nil, and do not return an error.
 
@@ -281,7 +281,7 @@ For example, running `opened-ports` may return:
 81/tcp
 ```
 
-!!! Note: opening ports is transactional (i.e. will take place on successfuly 
+!!! Note: opening ports is transactional (i.e. will take place on successfully 
 exiting the current hook), and therefore `opened-ports` will not return any
 values for pending `open-port` operations run from within the same hook. 
 
