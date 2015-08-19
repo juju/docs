@@ -2,13 +2,13 @@ Title: How to configure Juju to manage multiple environments
 
 # The Juju Environment System
 
-Experimental in version 1.25, the Juju Environment System (JES) enables new 
-features for managing environments and controlling access to them through user 
-identities.
+Experimental in version 1.25, the Juju Environment System (JES) enables new
+features for managing multiple environments and controlling access to them
+through user identities.
 
 ## Enabling the Juju Environment System feature flag
 
-In order to use the multiple environment features of the Juju Environment System 
+In order to use the multiple environment features of the Juju Environment System
 (JES), you need to enable a development feature flag:
 
 ```bash
@@ -30,7 +30,7 @@ A Juju Environment System (JES), also sometimes shortened to 'Juju System',
 describes the environment that runs and manages the Juju API servers and the
 underlying database.
 
-This initial environment is also called the 'system environment' 
+This initial environment is also called the 'system environment'
 (or 'bootstrap environment'), and is what is
 created when the bootstrap command is used.  This System environment is a
 normal Juju environment that just happens to have machines that manage Juju.
@@ -117,7 +117,7 @@ server is not accessible, this command will fail.
 ### `juju system kill`
 
 This command's primary use case is to deal with the situation where the remote
-API server is not accessible, and replaces the older `juju destroy-environment 
+API server is not accessible, and replaces the older `juju destroy-environment
 --force` command.
 
 The command will first attempt to destroy all the environments through the
@@ -220,4 +220,3 @@ mary-server (system) -> bob-test
 The local name for the environment is by default 'owner-name', so since this
 environment is owned by 'bob@local' and called 'test', for Mary the environment
 is called 'bob-test'.
-
