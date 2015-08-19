@@ -85,8 +85,8 @@ Using Juju with this configuration, the storage files and the database will be
 located in the directory specified by the environment variable `$JUJU_HOME`,
 which defaults to `~/.juju/`. By uncommenting and setting `root-dir` this
 location can be changed as well as the ports of the storage and the shared
-storage. This may be useful if you want to run mulitple local providers
-simulataneously or to deal with possible conflicts with other programs on your
+storage. This may be useful if you want to run multiple local providers
+simultaneously or to deal with possible conflicts with other programs on your
 system.
 
 Ensure all local providers are using different ports. The default port numbers

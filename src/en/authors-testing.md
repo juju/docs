@@ -40,13 +40,13 @@ Note that this requirement is already satisfied by [Mark Mims' jenkins tester](h
 Charm authors will have the best insight into whether or not a charm is working
 properly.
 
-A simple structure will be utilized to attach tests to charms. Under the charm
+A simple structure will be utilised to attach tests to charms. Under the charm
 root directory, a sub-directory named 'tests' will be scanned by a test runner
 for executable files matching the glob `*.test`. These will be run in lexical
-order by the test runner, with a predictible environment. The tests can make 
+order by the test runner, with a predictable environment. The tests can make 
 the following assumptions:
 
-- A minimal install of the release of Ubuntu which the charm is targetted at 
+- A minimal install of the release of Ubuntu which the charm is targeted at 
   will be available.
 - A version of juju is installed and available in the system path.
 - A juju environment with no services deployed inside it is already 
@@ -89,7 +89,7 @@ things to test in each charm beyond install/start is:
   listening on the intended ports and is functional.
 - Adding, removing, and re-adding a relation should work without error.
 - Setting config values should result in the config value reflected in the 
-  service's configuraion.
+  service's configuration.
 - Adding multiple units to a web app charm and relating to a load balancer 
   results in the same HTML on both units directly and the load balancer.
 
@@ -113,7 +113,7 @@ defined above. The correlation is:
 - SKIP - 100
 
 Anything else intentional should be prefixed with the word 'INFO'. If the
-contents of files are to be logged, the contents should be preceeded by `INFO:
+contents of files are to be logged, the contents should be preceded by `INFO:
 BEGIN filename`, where filename is a logical name unique to this run of the
 test, and then the file ended with `INFO: END filename`.
 

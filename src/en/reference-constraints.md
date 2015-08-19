@@ -7,7 +7,7 @@ constraints](charms-constraints.html) for how to specify these in a
 deployment.
 
 Each constraint defines a minimum acceptable value for a characteristic of a
-machine.  Juju will provision the least expensive machine that fulfills all the
+machine.  Juju will provision the least expensive machine that fulfils all the
 constraints specified.  Note that these values are the minimum, and the actual
 machine used may exceed these specifications if one that exactly matches does
 not exist.

@@ -28,7 +28,7 @@ brew install charm-tools
 
 ## Windows
 Charm Tools is available for, and tested, on Microsoft Windows 7 and 8. While
-the installer may work on previous versions of Windows there is no guarentee.
+the installer may work on previous versions of Windows there is no guarantee.
 
 To install, first download the Charm Tools installer from
 [launchpad](https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-
@@ -49,7 +49,7 @@ replace all instances of `juju charm` with just `charm`.
 
 There are several tools available within charm tools itself. At any time you can
 run `juju charm` to view the available subcommands and all subcommands have
-independent help pages, accesible using either the `-h` or `--help` flags.
+independent help pages, accessible using either the `-h` or `--help` flags.
 
 ## Add
 
@@ -63,7 +63,7 @@ subcommand issued.
 ### Icon
 
 `icon` will create an `icon.svg` in the `CHARM_DIRECTORY`. This icon is
-a template and should be customized by the charm author (see [Charm
+a template and should be customised by the charm author (see [Charm
 Icons documentation](authors-charm-icon.html)).
 
 #### Add Icon Example
@@ -280,7 +280,7 @@ will prevent promulgation if errors occur.
   - `-b`, `--branch`: The location of the charm public branch. Will be determined from the bzr configuration if omitted.
   - `-s`, `--series`: The distribution series on which to set the official branch. Defaults to setting it in the current development series (LTS).
   - `-v`, `--verbose`: Increase verbosity level.
-  - `-u`, `--unpromulgate`: Un-promulgate this branch instead of prolugating it.
+  - `-u`, `--unpromulgate`: Un-promulgate this branch instead of promulgating it.
   - `-f`, `--force`: Override warnings and errors. USE WITH EXTREME CARE!
   - `-w`, `--ignore-warnings`: Promulgate this branch even with warnings from charm proof.
   - `-o`, `--owner-branch`: Promulgate a branch owned by a someone/group other than ~charmers.
@@ -293,7 +293,7 @@ juju charm proof CHARM_DIRECTORY
 
 Proof is designed to perform a "lint" against a charms structure to validate if
 it conforms to what the Charm Store thinks a charm structure and layout should
-be. `proof` will provide output at varying levels of severtiy. `I` is
+be. `proof` will provide output at varying levels of severity. `I` is
 informational - these are things a charm could do but don't currently. `W` is a
 warning - these are items that violate charm store policy or have an adverse affect
 on tools in the juju ecosystem. `E` is an error - these are items that are major
@@ -330,7 +330,7 @@ know which charms are available for review.
 juju charm unpromulgate [-h|--help] [-f|--force]
 ```
 
-This is simply a convience method to running `juju charm promulgate
+This is simply a convenience method to running `juju charm promulgate
 --unpromulgate`.
 
 ## update

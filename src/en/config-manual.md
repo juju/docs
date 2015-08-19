@@ -55,7 +55,7 @@ don't need to edit it:
         # on. By default, storage will be served on all
         # network interfaces.
         # storage-listen-ip:
-        # storage-port specifes the TCP port that the
+        # storage-port specifies the TCP port that the
         # bootstrap machine's Juju storage server will listen
         # on. It defaults to 8040
         # storage-port: 8040

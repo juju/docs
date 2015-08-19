@@ -1,5 +1,5 @@
 *.pyc
-htmldocs/*.html
+htmldocs/en
 _versioned_src
 _build
 *.swp

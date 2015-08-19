@@ -96,7 +96,7 @@ d = deployer.Deployment()
 
 A limited number of functions are made available through a generic forking API.
 The following examples assume you're using a BOURNE Shell, though this syntax
-could be used from within other languauges with the same expected results.
+could be used from within other languages with the same expected results.
 
 Unlike the Python modules, only some of the functions of Amulet are available
 through this API, though efforts are being made to make the majority of the core
@@ -111,7 +111,7 @@ command:
 amulet deployment
 ```
 
-Depending on the syntax and worflow for each function you can expect to provide
+Depending on the syntax and workflow for each function you can expect to provide
 either additional sub-commands, command-line flags, or a combination of the two.
 
 ## Core functionality
@@ -127,7 +127,7 @@ environment. These classes and methods are outlined below
 amulet.deployer.Deployment()
 
 Deployment (amulet deployment, from amulet import Deployment) is an abstraction
-layer to the juju-deployer Juju plugin and a service lifecycle management tool.
+layer to the juju-deployer Juju plugin and a service life cycle management tool.
 It's designed to allow an author to describe their deployment in simple terms:
 
 ```python

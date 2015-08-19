@@ -71,9 +71,9 @@ You can retrieve these values easily from Joyent Dashboard at
 [https://my.joyent.com/main/#!/account](https://my.joyent.com). Click on your
 name in the top-right and then the "Account" link from the drop down menu.
 
-![Joyent Dashbard to access username and
+![Joyent Dashboard to access username and
 fingerprint](./media/getting_started-joyent-account-dropdown.png)
 
-!!! Note: During intial setup if you are having issues deploying charms contact
+!!! Note: During initial setup if you are having issues deploying charms contact
 Joyent support at [https://help.joyent.com/home](https://help.joyent.com/home) 
 to verify your account is capable of provisioning virtual machines.
