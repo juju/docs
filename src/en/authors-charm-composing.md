@@ -34,6 +34,11 @@ sudo apt-get install charm-tools
 export JUJU_REPOSITORY=$HOME/charms
 mkdir -p $JUJU_REPOSITORY/{layers,trusty}
 cd $JUJU_REPOSITORY/layers
+```
+
+Then create a directory for your layer:
+
+```bash
 mkdir vanilla
 cd vanilla
 ```
@@ -201,6 +206,9 @@ The final directory structure looks like this:
 
 Check out the [repo][] for the complete charm layer.
 
+It is important to note that we didn't have to create any hooks.  Those were
+all handled by the other layers and interfaces.
+
 
 ## Composing your layers
 
@@ -238,6 +246,7 @@ juju expose vanilla
 [deploying]: ./charms-deploying.html
 [apache-php5]: https://github.com/johnsca/apache-php
 [http interface]: https://code.launchpad.net/~bcsaller/charms/+source/http/+git/http
+[mysql interface]: https://github.com/johnsca/juju-relation-mysql
 [charms.reactive]: http://pythonhosted.org/charms.reactive/
 [reactive-bash]: http://pythonhosted.org/charms.reactive/#non-python-reactive-handlers
 [repo]: https://github.com/johnsca/layered-vanilla
