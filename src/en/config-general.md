@@ -47,7 +47,7 @@ setting, so make sure you spell it correctly.
 The APT packaging system is used to install and upgrade software on
 machines provisioned in the environment, and many charms also use APT to
 install software for the services they deploy. It is possible to set a
-specific mirror for the APT packages to use, by settting "apt-mirror" in the
+specific mirror for the APT packages to use, by setting "apt-mirror" in the
 environments.yaml file or directly in a running environment:
 
 ```bash
@@ -123,7 +123,7 @@ Harvesting is guided by what "harvesting mode" has been set by the
 system administrator. 
 
 Before explaining the different modes, it is useful to understand how Juju
-percieves machines. As far as it is concerned, machines are in one of four
+perceives machines. As far as it is concerned, machines are in one of four
 states:
 
 - **Alive:** The machine is running and being used.
@@ -148,10 +148,10 @@ doesn't know about. Use this with caution in a mixed environment or one which
 may contain multiple instances of Juju.
 - **All:** This is the most aggressive setting. In this mode Juju will
 terminate all instances which it considers to be "destroyed" or "unknown". 
-This is a good option if you are only utilizing Juju for your
+This is a good option if you are only utilising Juju for your
 environment.
 
-The default mode can be overriden by setting the 
+The default mode can be overridden by setting the 
 
 ```yaml
 provisioner-harvest-mode:
@@ -198,7 +198,7 @@ image-metadata-url | string |  | url | The URL at which the metadata used to loc
 image-stream | string |  |  | The simplestreams stream used to identify which image ids to search when starting an instance
 logging-config | string |  |  | The configuration string to use when configuring Juju agent logging (see [this link](http://godoc.org/github.com/juju/loggo#ParseConfigurationString) for details)
 lxc-clone | bool |  |  | Whether to use lxc-clone to create new LXC containers
-lxc-clone-aufs | bool | false |  | Whether the LXC provisioner should creat an LXC clone using AUFS if available
+lxc-clone-aufs | bool | false |  | Whether the LXC provisioner should create an LXC clone using AUFS if available
 lxc-default-mtu | int |  |  | The MTU setting to use for network interfaces in LXC containers
 name | string |  |  | The name of the current environment
 no-proxy | string |  |  | List of domain addresses not to be proxied (comma-separated)
@@ -222,6 +222,6 @@ These keys are now deprecated:
 | Key               | Reason/replacement                                   |
 |-------------------|------------------------------------------------------|
 |lxc-use-clone | replaced by lxc-clone|
-|provisioner-safe-mode | Whether to run the provisioner in "destroyed" harvest mode (deprecated, superceded by provisioner-harvest-mode)|
+|provisioner-safe-mode | Whether to run the provisioner in "destroyed" harvest mode (deprecated, superseded by provisioner-harvest-mode)|
 |tools-metadata-url | replaced by agent-metadata-url, see [release notes for 1.21.1](reference-release-notes.html)|
-|tools-stream | superceded by agent-stream |
+|tools-stream | superseded by agent-stream |

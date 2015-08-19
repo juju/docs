@@ -181,7 +181,7 @@ sense of the basics. To fill out your knowledge, you'll want to study the hook
 Independent of the nuts and bolts, though, good hooks display a number of useful
 high-level properties:
 
-  - They are _idempotent_: that is to say that there should be no observable difference between running a hook once, and running it N times in a row. If this property does not hold, you are likely to be making your own life unnecesarily difficult: apart from anything else, the average user's most likely first response to a failed hook will be to try to run it again (if they don't just skip it).
+  - They are _idempotent_: that is to say that there should be no observable difference between running a hook once, and running it N times in a row. If this property does not hold, you are likely to be making your own life unnecessarily difficult: apart from anything else, the average user's most likely first response to a failed hook will be to try to run it again (if they don't just skip it).
   - They are _easy to read_ and understand. It's tempting to write a single file that does everything, and which just calls different functions internally depending on the value of `argv[0]`, and to symlink that one file for every hook; but such structures quickly become unwieldy.
 The time taken to write a library, separate from the hooks, is very likely to be
 well spent: it lets you write single hooks that are clear and focused, and
@@ -191,6 +191,6 @@ insulates the maintainer from irrelevant details.
   - They do not return [errors](./authors-hook-errors.html) unless there is a good reason to believe that they cannot be resolved without user intervention. Doing so is an admission of defeat: a user who sees your charm returning an error state is unlikely to have the specific expertise necessary to resolve it. If you have to return an error, please be sure to at least write any context you can to the log before you do so.
   - They write only _very_ sparingly to the [charm directory](./authors-charm-components.html).
 
-We recommend you also familiarize yourself with the [best practices](./authors-
+We recommend you also familiarise yourself with the [best practices](./authors-
 charm-best-practice.html) and, if you plan to distribute your charm, the [charm
 store policy](./authors-charm-policy.html).

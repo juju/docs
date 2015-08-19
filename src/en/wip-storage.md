@@ -89,7 +89,7 @@ juju deploy cs:~axwalk/postgresql --storage data=ebs,10G cache=ebs-ssd
 
 Some providers have the option to detach storage from the lifespan of the instance(s) which created/used it. This means that even after services have been removed, the storage and its contents still exist in your cloud, which may be useful for backup, recovery or transport purposes. Juju will not allow you to completely destroy an environment which contains such storage (except by using the --force option). To create persistent volumes, create a storage pool with the "persistent" attribute set to "true". Persistent volumes are currently supported by the EBS and Cinder storage providers. Currently, all Cinder volumes are considered persistent, regardless of whether the pool is configured as such.
 
-Juju does not currently provide any means of decomissioning persistent storage, so you must do this manually after force-destroying the environment. This will be rectified in a future version of Juju.
+Juju does not currently provide any means of decommissioning persistent storage, so you must do this manually after force-destroying the environment. This will be rectified in a future version of Juju.
 
 ### Provider support
 
@@ -287,7 +287,7 @@ IMPLEMENTED FEATURES
   - type, read-only, shared, location may not be changed
 
   - range cannot be contracted, i.e. the minimum may not be
-    increased, nor the maximium decreased.
+    increased, nor the maximum decreased.
 
 - Read-only filesystems can be created, as well as read-only loop device
   attachments.

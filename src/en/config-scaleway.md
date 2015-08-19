@@ -35,7 +35,7 @@ Plugin installation is done via 'pip', the Python package manager, available by
 default on Ubuntu.
 
 A [virtualenv](http://virtualenv.readthedocs.org/en/latest/index.html) is also
-recommanded to sandbox this install from your system packages:
+recommended to sandbox this install from your system packages:
 
 ```bash
 pip install -U juju-scaleway
@@ -134,7 +134,7 @@ juju deploy mysql --to=2
 
 This command deploys a mysql unit to the server number #2
 
-Assemble these workloads together via relations like lego blocks:
+Assemble these workloads together via relations like Lego blocks:
 
 ```bash
 juju add-relation wordpress mysql
@@ -154,7 +154,7 @@ Id       Name               Status   Created      Address
 ```
 
 You can terminate allocated machines via their machine id. By default, the
-Scaleway plugin forces the terminatiom of machines, which also terminates any
+Scaleway plugin forces the termination of machines, which also terminates any
 service unit running on on those machines:
 
 ```bash

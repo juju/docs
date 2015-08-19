@@ -85,14 +85,14 @@ namespace.
 #### Submission Process
 
 When you feel your charm is ready for submission to your personal name space,
-you must initialize the repository and push your development branch to LaunchPad.
+you must initialise the repository and push your development branch to Launchpad.
 
 For the purpose of this documentation, we will call our charm `nagios`
 
     bzr push lp:~your-launchpad-username/charms/series/nagios/trunk
 
-The /trunk branch identifier is the *only* branch that will be recognized by the
-charm store ingestion process. This free's the developer to push multiple
+The /trunk branch identifier is the *only* branch that will be recognised by the
+charm store ingestion process. This frees the developer to push multiple
 branches and gate features/fixes into their personal branch without listing
 multiple copies of the charm in the store.
 
@@ -103,7 +103,7 @@ with a description following.
   - **/charms/** : Charms is the project descriptor
   - **/precise/** : All charms are targeted against a series
   - **/nagios/** : This is the charm name and should match whats listed in
-    metdata.yaml
+    metadata.yaml
   - **/trunk** : The branch target. *Remember* only /trunk will be ingested into
     the charm store.
 

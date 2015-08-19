@@ -25,7 +25,7 @@ They have to match.
 ### Provides and Requires
 
 The `provides` and `requires` keys defined in
-[metadata.yaml](./authors-charm-metdata) are used to define pairings of charms
+[metadata.yaml](./authors-charm-metadata) are used to define pairings of charms
 that are likely to be fruitful. Consider mongodb's metadata:
 
 ```no-highlight

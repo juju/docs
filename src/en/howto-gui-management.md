@@ -75,7 +75,7 @@ relations, and other details.
 
 The GUI can be used to offer insight into not only the status of your cloud
 deployment, but also the overall structure of your services and how they are
-related, adding to the ability to visualize the way in which all of the
+related, adding to the ability to visualise the way in which all of the
 components of your project work together.
 
 
@@ -94,7 +94,7 @@ been deployed and contributed to, and so on. From here, you can add the charm to
 your environment (or simply drag it onto the canvas from the side-bar), which
 will give you the option to configure and deploy a new service.
 
-![](./media/gui_mangement-charmstore.png)
+![](./media/gui_management-charmstore.png)
 
 Once deployed, clicking on the service will allow you to not only view the units and machines comprising it, but also to scale the service out or back, change constraints on new units, re-configure the service, resolve or retry units in an error state and more.
 
