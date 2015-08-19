@@ -14,7 +14,7 @@ environment. This user is considered to be the administrator for the Juju
 System. Only this user can create other users until such a time as Juju has
 full fine grained role-based permissions.
 
-All user managment functionality is managed though the 'juju user' collection
+All user management functionality is managed though the 'juju user' collection
 of commands.
 
 # Adding a new user
@@ -67,6 +67,10 @@ Note that when logging in to the system on the new machine the `--keep-
 password` option should be used, otherwise Juju will generate a new random
 strong password for the user, thus invalidating the password stored on the
 first machine.
+
+>
+> Why then is --keep-password not the default?
+>
 
 # Other user administration commands
 
