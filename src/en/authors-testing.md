@@ -42,8 +42,9 @@ properly.
 
 A simple structure will be utilized to attach tests to charms. Under the charm
 root directory, a sub-directory named 'tests' will be scanned by a test runner
-for executable files. These will be run in lexical order by the test runner,
-with a predictible environment. The tests can make the following assumptions:
+for executable files matching the glob `*.test`. These will be run in lexical
+order by the test runner, with a predictible environment. The tests can make 
+the following assumptions:
 
 - A minimal install of the release of Ubuntu which the charm is targetted at 
   will be available.
@@ -75,8 +76,8 @@ packages: [ package1, package2, package3 ]
 
 If a tool is needed to perform a test and is not available in the Ubuntu
 archive, it can also be included in the `tests/` directory, as long as the file
-which contains it is not executable. Note that build tools cannot be assumed to
-be available on the testing system.
+which contains it does not end in `.test`. Note that build tools cannot be
+assumed to be available on the testing system.
 
 ### Purpose of tests
 
