@@ -1,7 +1,10 @@
+Title: Testing Juju charms
+
 # Charm Testing
 
 Juju has been designed from the start to foster a large collection of "charms".
-Charms are expected to number in the thousands, and be self contained, with well defined interfaces for defining their relationships to one another.
+Charms are expected to number in the thousands, and be self contained, with 
+well defined interfaces for defining their relationships to one another.
 
 Because this is a large complex system, not unlike a Linux software
 distribution, there is a need to test the charms and how they interact with one
@@ -16,13 +19,16 @@ specification.
 
 All charms share some of the same characteristics. They all have a yaml file
 called `metadata.yaml`, and when deployed, juju will always attempt to progress
-the state of the service from install to config to started. Because of this, all charms can be tested using the following algorithm:
+the state of the service from install to config to started. Because of this, 
+all charms can be tested using the following algorithm:
 
+```no-highlight
     deploy charm
      while state != started
      if timeout is reached, FAIL
      if state == install_error, config_error, or start_error, FAIL
      if state == started, PASS
+```
 
 Other generic tests may be identified, so a collection of generic tests should
 be the focus of an implementation.
@@ -34,17 +40,24 @@ Note that this requirement is already satisfied by [Mark Mims' jenkins tester](h
 Charm authors will have the best insight into whether or not a charm is working
 properly.
 
-A simple structure will be utilized to attach tests to charms. Under the charm
+A simple structure will be utilised to attach tests to charms. Under the charm
 root directory, a sub-directory named 'tests' will be scanned by a test runner
-for executable files matching the glob `*.test`. These will be run in lexical
-order by the test runner, with a predictible environment. The tests can make the following assumptions:
+for executable files. These will be run in lexical order by the test runner,
+with a predictible environment. The tests can make the following assumptions:
 
-- A minimal install of the release of Ubuntu which the charm is targetted at will be available.
+- A minimal install of the release of Ubuntu which the charm is targeted at 
+  will be available.
 - A version of juju is installed and available in the system path.
-- A juju environment with no services deployed inside it is already bootstrapped, and will be the default for command line usage.
+- A juju environment with no services deployed inside it is already 
+  bootstrapped, and will be the default for command line usage.
 - The CWD is the `tests` directory off the charm root.
 - Full network access to deployed nodes will be allowed.
-- the bare name of any charm in arguments to juju will be resolved to a charm url and/or repository arguments of the test runner's choice. This means that if you need mysql, you do not do `juju deploy cs:mysql` or `juju deploy --repository ~/charms local:mysql`, but just `juju deploy mysql`. A wrapper will resolve this to the latest version of the given charm from the list of official charms.
+- the bare name of any charm in arguments to juju will be resolved to a charm 
+  url and/or repository arguments of the test runner's choice. This means that 
+  if you need mysql, you do not do `juju deploy cs:mysql` or 
+  `juju deploy --repository ~/charms local:mysql`, but just `juju deploy mysql`.
+  A wrapper will resolve this to the latest version of the given charm from the
+  list of official charms.
 
 The following restrictions may be enforced:
 
@@ -56,12 +69,14 @@ packages can _only_ be installed from the official, default Ubuntu archive for
 the release which the charm is intended for, from any of the repositories
 enabled by default in said release. The format of tests.yaml is as such:
 
-    packages: [ package1, package2, package3 ]
+```yaml
+packages: [ package1, package2, package3 ]
+```
 
 If a tool is needed to perform a test and is not available in the Ubuntu
 archive, it can also be included in the `tests/` directory, as long as the file
-which contains it does not end in `.test`. Note that build tools cannot be
-assumed to be available on the testing system.
+which contains it is not executable. Note that build tools cannot be assumed to
+be available on the testing system.
 
 ### Purpose of tests
 
@@ -69,10 +84,13 @@ The purpose of these tests is to assert that the charm works well on the
 intended platform and performs the expected configuration steps. Examples of
 things to test in each charm beyond install/start is:
 
-- After install, expose, and adding of required relations, the service is listening on the intended ports and is functional.
+- After install, expose, and adding of required relations, the service is 
+  listening on the intended ports and is functional.
 - Adding, removing, and re-adding a relation should work without error.
-- Setting config values should result in the config value reflected in the service's configuraion.
-- Adding multiple units to a web app charm and relating to a load balancer results in the same HTML on both units directly and the load balancer.
+- Setting config values should result in the config value reflected in the 
+  service's configuration.
+- Adding multiple units to a web app charm and relating to a load balancer 
+  results in the same HTML on both units directly and the load balancer.
 
 ### Exit Codes
 
@@ -94,7 +112,7 @@ defined above. The correlation is:
 - SKIP - 100
 
 Anything else intentional should be prefixed with the word 'INFO'. If the
-contents of files are to be logged, the contents should be preceeded by `INFO:
+contents of files are to be logged, the contents should be preceded by `INFO:
 BEGIN filename`, where filename is a logical name unique to this run of the
 test, and then the file ended with `INFO: END filename`.
 
@@ -102,7 +120,9 @@ test, and then the file ended with `INFO: END filename`.
 
 #### Deploy requirements and Poll
 
-The test below deploys mediawiki with mysql and memcached related to it, and then tests to make sure it returns a page via http with `<title>` somewhere in the content.:
+The test below deploys mediawiki with mysql and memcached related to it, and 
+then tests to make sure it returns a page via http with `<title>` somewhere 
+in the content:
 
 ```bash
 #!/bin/sh
@@ -226,16 +246,18 @@ echo PASS: config change tests passed.
 exit 0
 ```
 
-get-unit-info The example tests script uses a tool that is not widely available
-yet, `get-unit-info`. In the future enhancements should be made to juju core to
-allow such things to be made into plugins. Until then, it can be included in
-each test dir that uses it, or we can build a package of tools that are common
-to tests.
+**get-unit-info**: The example tests script uses a tool that is not widely 
+available yet, `get-unit-info`. In the future enhancements should be made to
+Juju core to allow such things to be made into plugins. Until then, it can be
+included in each test dir that uses it, or we can build a package of tools 
+that are common to tests.
 
 ## Test Runner
 
 A test runner will periodically poll the collection of charms for changes since
-the last test run. If there have been changes, the entire set of changes will be tested as one delta. This delta will be recorded in the test results in such a way where a developer can repeat the exact set of changes for debugging
+the last test run. If there have been changes, the entire set of changes will
+be tested as one delta. This delta will be recorded in the test results in such
+a way where a developer can repeat the exact set of changes for debugging
 purposes.
 
 All of the charms will be scanned for tests in lexical order by series, charm
