@@ -16,14 +16,14 @@ A bundle file can be used in two distinct ways. One is to use it locally,
 deploying from your computer, which is useful to initially ensure it works and
 for experimenting. After you are satisfied with the bundle, you can push it to
 Launchpad where it will be available to you and others via the Charm Store.
-If you simply want to download some you can 
+If you simply want to download some you can
 [search the store for bundles](https://jujucharms.com/sidebar/search/?text=bundle)
 too.
 
 ### Local import to Juju GUI
 
 The easiest way to import a bundle into the GUI is by dragging the bundle file
-from your desktop and dropping it on the GUI canvas. 
+from your desktop and dropping it on the GUI canvas.
 
 <iframe style="margin-left: 20%;" class="youtube-player" type="text/html" width="420" height="350" src="//www.youtube.com/embed/oSPB_qjeEsg"></iframe>
 
@@ -39,7 +39,7 @@ quickstart` tool.
 
 The juju quickstart tool can be installed on Ubuntu versions newer than 14.04 by
 running the following command:
-    
+
 ```bash
 sudo apt-get install juju-quickstart
 ```
@@ -53,7 +53,7 @@ juju bundle proof ../path-your-bundle-name    # defaults to your current working
 Then you can use the quickstart tool to deploy your bundle:
 
 ```bash
-juju quickstart bundles.yaml
+juju quickstart bundle.yaml
 ```
 
 
@@ -73,31 +73,31 @@ following data:
 
 ```yaml
 series: trusty
-services: 
-  wordpress: 
+services:
+  wordpress:
     charm: "cs:trusty/wordpress-2"
     num_units: 1
-    annotations: 
+    annotations:
       "gui-x": "339.5"
       "gui-y": "-171"
-    to: 
+    to:
       - "0"
-  mysql: 
+  mysql:
     charm: "cs:trusty/mysql-26"
     num_units: 1
-    annotations: 
+    annotations:
       "gui-x": "79.5"
       "gui-y": "-142"
-    to: 
+    to:
       - "1"
-relations: 
+relations:
   - - "wordpress:db"
     - "mysql:db"
-machines: 
-  "0": 
+machines:
+  "0":
     series: trusty
     constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
-  "1": 
+  "1":
     series: trusty
     constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
 
@@ -159,7 +159,7 @@ mysql:
       "gui-x": "139"
       "gui-y": "168"
 ```
-which will install the mysql service into an LXC container on machine '1'. 
+which will install the mysql service into an LXC container on machine '1'.
 
 ## Machine specifications in a bundle
 
@@ -196,7 +196,7 @@ and named according to the following rules.
     namespace, the Juju Charm store will automatically find your bundle and
     index it in the store. Ensure you are using your correct Launchpad id and a
     unique bundle name:
-            
+
     ```bash
     juju bundle proof ../bundle-directory
     bzr push lp:~yourusername/charms/bundles/yourbundlename/bundle
