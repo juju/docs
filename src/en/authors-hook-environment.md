@@ -499,7 +499,7 @@ be one of the following:
   - blocked (the unit cannot continue without user input)
   - waiting (the unit itself is not in error and requires no intervention, 
     but it is not currently in service as it depends on some external factor, 
-    e.g. a service to which it is related is not running)   
+    e.g. a service to which it is related is not running)
   - active (This unit believes it is correctly offering all the services it is
     primarily installed to provide)
 

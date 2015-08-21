@@ -38,7 +38,8 @@ on how people are using Juju.
 
 ## Examples of Best Practice Charms
 
-Here is a list of charms that leverage a particular technology that you might want to look at as examples:
+Here is a list of charms that leverage a particular technology that you might
+want to look at as examples:
 
 - Ansible integration - The [ElasticSearch charm](https://jujucharms.com/elasticsearch)
 - Chef integration - The [Rails charm](https://jujucharms.com/rails)
@@ -127,10 +128,16 @@ respawn
 
   - Do all config options have appropriate descriptions?
   - Are all hooks idempotent?
-  - No hard coded values for things that may need changing - exposed via config.yaml options
-  - No hard coding of full paths for system tools/binaries - we should ensure $PATH is set appropriately.
+  - No hard coded values for things that may need changing - exposed via 
+    config.yaml options
+  - No hard coding of full paths for system tools/binaries - we should ensure 
+    `$PATH` is set appropriately.
   - Has `charm proof` been run against the charm?
   - Has testing of adding units and removing units been done?
-  - Has testing of changing all config options and verifying they get changed in the application (and applied, i.e. service reloaded if appropriate) been done?
-  - Any cron entries should be in `/etc/cron.d` rather than stored in user crontabs.
-  - This allows for easier visibility of active cronjobs across the whole system, as well as making editing things much easier.
+  - Has testing of changing all config options and verifying they get changed in
+    the application (and applied, i.e. service reloaded if appropriate) been
+    done?
+  - Any cron entries should be in `/etc/cron.d` rather than stored in user
+    crontabs.
+  - This allows for easier visibility of active cronjobs across the whole
+    system, as well as making editing things much easier.
