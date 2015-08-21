@@ -1,8 +1,8 @@
 Title: Charm Tools
 
-Charm tools is a collection of tools designed as a Juju Plugin. Charm tools
-offer a means for users and charm authors to create, search, fetch, update, and
-manage a charms. The source for this 
+The 'Charm Tools' Juju Plugin is a collection of commands enabling users
+and charm authors to create, search, fetch, update, and
+manage charms.
 
 # Installation
 
