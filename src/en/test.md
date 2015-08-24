@@ -41,7 +41,7 @@ such as _emphasis of words_ and ``` inline code```
 Here are some highlighting tests:
 
 ```no-highlight
-no higlighting:
+no highlighting:
 is good
 for some things
 ```

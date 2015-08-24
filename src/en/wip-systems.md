@@ -31,7 +31,7 @@ describes the environment that runs and manages the Juju API servers and the
 underlying database.
 
 This initial environment is also called the 'system environment' 
-(or 'bootsrap environment'), and is what is
+(or 'bootstrap environment'), and is what is
 created when the bootstrap command is used.  This System environment is a
 normal Juju environment that just happens to have machines that manage Juju.
 

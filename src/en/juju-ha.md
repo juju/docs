@@ -1,70 +1,84 @@
-# Juju High Availability
+Title: Juju High Availability
 
-As of version 1.20, Juju supports high availability for its state server.
 
-High Availability in general terms means that a Juju environment has 3 or more
-(up to 7) redundant state servers. One of these is the master with automatic
-failover occurring should something happen to the master.
+# High Availability
 
-This section describes how Juju's high availability features works.
+Juju High Availability (HA) means that a Juju environment has 3 or more (up to
+7) state servers (bootstrap nodes) one of which is the *master*. Automatic
+failover occurs should the master lose connectivity.
 
-### MongoDB
 
-Juju's High Availability (HA) mode is tightly integrated and dependent on
-MongoDB.  Juju stores all its data about the environment in a MongoDB database.
-MongoDB has an HA implementation that connects multiple MongoDB databases in a
-cluster called a [replicaset](http://docs.mongodb.org/manual/replication/).  The
-replicaset has a 1:1 relation to Juju state servers, and the master of the
-replicaset is the master of the Juju state servers.
+## Juju HA and MongoDB
 
-### Ensure Availability
+Juju HA is tightly integrated with the MongoDB database since that is where all
+environment data is stored. The MongoDB software has a native HA implementation
+and this is what Juju HA uses. A MongoDB cluster is called a
+[replica set](http://docs.mongodb.org/manual/replication/) and, in the context
+of Juju HA, i) each of its members corresponds to a different Juju state server
+and ii) the MongoDB replica set master corresponds to the Juju state server master.
 
-Juju's HA mode is turned on using the `juju ensure-availability` command. By
-default this sets the desired number of state machines in the environment to 3.
-There is an optional `-n` parameter which can be used to set this number higher.
+The number of state servers must be an odd number to prevent ties during voting
+for master, and the number of state servers cannot exceed 7, due to MongoDB
+limitations. This means a Juju HA cluster can have 3, 5 or 7 state servers.
 
-As stated above, there is a 1:1 relationship between the number of state
-machines and the number of MongoDB instances. This means that the number of
-state machines must be an odd number to prevent ties during voting for master,
-and the number of state servers cannot exceed 7, due to MongoDB limits.  In
-practice, this means the possibilities are 3, 5 or 7 state machines.
- 
-Currently the number of state machines can be increased using the -n flag on
-`juju ensure-availability`, but not decreased. The only way to decrease the
-number of machines is to create a backup of your environment and then restore
-the backup to a new environment, which starts with a single state server.
 
-Whenever you run ensure-availability, the command will report the changes that
-it made to the system's desired model, which will shortly be reflected in
-reality.
+## Activating and modifying HA
 
-### When State Servers Fail
+Juju HA is activated and modified with the `juju ensure-availability` command.
+As will be shown in the next section, it is also used to recover from failed
+state servers.
 
-Juju does not automatically re-spawn state machines if one or more fail.
-However, if an environment is already in HA mode, you can recover from state
-machine failure by manually re-running `juju ensure-availability`. This can be
-done as long as more than half the original number of machines are still
-running.
+When activating HA, by default, this command sets the number of state
+servers in the environment to 3. The optional `-n` switch can modify this 
+number.
 
-The process to recovering when state servers have failed is:
+When modifying HA, the `-n` switch can be used to increase the number of state
+servers. The only way to decrease is to create a backup of your environment
+and then restore the backup to a new environment, which starts with a single
+state server. You can then increase to the desired number.
 
-* Run `juju ensure-availability`. New state servers will be created to replace
-  the dead ones.
-* After some time the new state servers will be ready and the dead state servers
-  will be removed from Juju's set of high availability state servers. This will
-  take on the order of 30 seconds to 20 minutes depending on variables like the
-  load on the machines and the amount of Juju configuration data to
-  replicate. In the output from `juju status` the new state servers will have a
-  `state-server-member-status` value of `has-vote` and the dead state servers
-  will have `no-vote`. At this point, the state servers in the environment are
-  fully-redundant again.
-* To have Juju not treat the dead state server machines as state servers any
-  more, run `juju ensure-availability` again. The `state-server-member-status`
-  attribute will disappear from these machines in the `juju status` output.
-* The dead state server hosts can now be completely removed from Juju's
-  configuration by using `juju remove-machine`.
-  
-If fewer than half of the original state servers are still running, you cannot
-recover by using the ensure-availability command because the MongoDB replicaset
-does not have a quorum with which to elect a new master.  In this case, you must
-restore from a previous backup.
+Whenever you run ensure-availability, the command will report the changes it
+intends to make, which will shortly be implemented.
+
+For complete syntax, see the [command reference page](./commands.html#ensure-availability
+).
+
+
+## Recovering from state server failure
+
+In the advent of failed state servers, Juju does not automatically re-spawn new
+state servers nor remove the failed ones. However, as long as more than half of
+the original number of state servers remain available you can manually recover.
+The process is detailed below.
+
+1. Run `juju ensure-availability`.
+1. Verify that the output of `juju status` shows a value of `has-vote` for the
+   `state-server-member-status` attribute for each new server and a value of
+   `no-vote` for each old server. Once confirmed, the new servers are fully
+   operational as cluster members and the old servers have been demoted (no longer
+   part of HA). This process can take between 30 seconds to 20 minutes depending
+   on machine resources and Juju data volume.
+1. Run `juju ensure-availability` again to have Juju no longer consider the
+   old machines as state servers. The `state-server-member-status` attribute
+   should disappear from these machines.
+1. Use the `juju remove-machine` command to remove the old machines entirely.
+
+You cannot repair the cluster as outlined above if fewer than half of the
+original state servers remain available because the MongoDB replica set will not
+have the quorum necessary to elect a new master. You must restore from backups
+in this case.
+
+
+## HA and logging
+
+All Juju units send logs to all state servers in the HA cluster and the user
+accesses those logs in the usual manner, via `juju debug-log` (see 
+[Troubleshooting with debug-log](./troubleshooting-debug-log.html)) or by
+viewing the logs directly on any state server (/var/log/juju).
+
+Logging to a state server begins once it becomes fully operational. One caveat
+is that past cluster logs are not sent to the new "slave" state server. It
+should therefore be noted that all state servers are not guaranteed to house
+the same logs. In particular, this should be understood when using `juju
+debug-log` as this triggers a connection to be made to a random state server.
+This will be corrected in the near future (past logs will be synced).

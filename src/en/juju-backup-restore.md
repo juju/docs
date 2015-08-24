@@ -81,7 +81,7 @@ The contemplated case for HA backup/restore is when you have lost all your state
 ### Backups on HA
 
 When you perform a `backup` on a juju installation that has multiple redundant state-servers,
-the initial state-server will be choosen to backup from.
+the initial state-server will be chosen to backup from.
 
 As an example, the following environment has 3 active state-servers :
 

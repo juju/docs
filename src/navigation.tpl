@@ -39,19 +39,23 @@
                       <li><a href="actions.html">Working with Actions</a></li>
                     </ul>
                   </li>
+                  <li class="section">Managing Juju systems</a>
+                    <ul class="sub">
+                      <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
+                      <li><a href="juju-backup-restore.html">Backup and Restore</a></li>
+                      <li><a href="juju-gui-management.html">Manage Juju with the GUI</a></li>
+                      <li><a href="juju-proxies.html">Configure Proxy Access</a></li>
+                      <li><a href="juju-offline-charms.html">Deploying charms offline</a></li>
+                      <li><a href="juju-authorised-keys.html">Manage Authorised Keys</a></li>
+                    </ul>
+                  </li>
                   <li class="section"><a class="header" href="howto.html">How to...</a>
                     <ul class="sub">
-                      <li><a href="howto-juju-block.html">Restrict/block Juju commands</a></li>
                       <li><a href="howto-node.html">Deploy a Node.js app</a></li>
                       <li><a href="howto-rails.html">Test and deploy on Rails</a></li>
-                      <li><a href="howto-backup-restore.html">Backup and Restore</a></li>
-                      <li><a href="howto-gui-management.html">Manage Juju with the GUI</a></li>
                       <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
-                      <li><a href="howto-proxies.html">Configure Proxy Access</a></li>
-                      <li><a href="howto-offline-charms.html">Deploy charms offline</a></li>
                       <li><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
                       <li><a href="howto-drupal-iis.html">Deploy Drupal Windows charm</a></li>
-                      <li><a href="howto-authorised-keys.html">Manage Authorised Keys</a></li>
                     </ul>
                   </li>
                   <li><a href="troubleshooting.html">Troubleshooting</a></li>
@@ -97,6 +101,7 @@
                 <ul>
                   <li><a href="wip-storage.html">Storage</a></li>
                   <li><a href="wip-centos.html">CentOS support</a></li>
+                  <li><a href="wip-numbering.html">Machine/unit numbering</a></li>
                   <li><a href="wip-systems.html">Juju Environment System (DRAFT)</a></li>
                   <li><a href="wip-users.html">Managing Users (DRAFT)</a></li>
                 </ul>

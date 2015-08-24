@@ -1,4 +1,5 @@
 Title: Configuring Juju for Amazon Web Services
+
 # Configuring for Amazon Web Services
 
 This process requires you to have an Amazon Web Services (AWS) account. If you
@@ -69,9 +70,23 @@ Open this file to get the **access-key** and **secret-key** for the
 The **region:** value corresponds to the AWS regions.
 
 
-##Additional notes
+## AWS specific features
 
-Juju-owned instances running in AWS support consistent naming, tagging and the 
-ability to add user-controlled tags to created instances. 
-See the [naming and tagging documentation](config-tagging.html) for more
-information.
+Features supported by Juju-owned instances running within AWS:
+
+- Consistent naming, tagging, and the ability to add user-controlled tags to
+  created instances. See [Instance naming and tagging](config-tagging.html) for
+  more information.
+
+- The selection (placement) of availability zones, if existing, when adding a
+  machine:
+
+```bash
+juju machine add zone=us-east-1a
+```
+
+
+## Additional notes
+
+See [General config options](config-general.html) for additional and advanced
+customization of your environment.

@@ -1,6 +1,8 @@
-Title:Ensuring High Availability (HA) for deployed services
+Title: Ensuring High Availability (HA) for deployed services
 
-# Service High Availability
+
+# Service High Availability (HA)
+
 
 ## Distribution groups
 Juju works with OpenStack, Amazon EC2 and Azure providers to ensure that in
@@ -23,29 +25,33 @@ juju deploy -n 10 <service>
 The way this works depends on whether Juju uses Availability Zones or
 Availability Sets for that provider.
 
+
 ## Availability Zones
 
 Juju supports Availability Zones on Amazon's EC2 and OpenStack-based clouds.
 Openstack Havana and newer is supported, which includes HP Cloud. Older
-versions of OpenStack are not supported.
+versions of OpenStack are not supported. See the per-provider [Install &
+Configure](./getting-started.html) section for more on these and any other
+provider-specific settings.
 
 If you do not specify a zone explicitly, Juju will automatically and uniformly
-distribute units across the available zones within the region.  The spread is
-based on density of instance "distribution groups".  This can be overridden
-with a placement directive.  e.g.
+distribute units across the available zones within the region. The spread is
+based on density of instance "distribution groups". This can be overridden
+with a placement directive:
 
 ```bash
 juju bootstrap --to zone=us-east-1b
 juju add-machine zone=us-east-1c
 ```
 
+
 ## Azure Availability Sets
 
-Juju supports Availability Sets on Microsoft's Azure.
-As long as at least two units are deployed, Azure guarantees 99.95%
-availability of the service overall.  Exposed ports are automatically
-load-balanced across all units within the service.  Using availability sets
-disables manual placement and the "add-machine" command.
+Juju supports Availability Sets on Microsoft's Azure.  As long as at least two
+units are deployed, Azure guarantees 99.95% availability of the service
+overall.  Exposed ports are automatically load-balanced across all units within
+the service.  Using availability sets disables manual placement and the
+"add-machine" command.
 
 In Juju 1.20 and later, new Azure environments use availability sets by
 default. To disable availability sets, the 'availability-sets-enabled' option

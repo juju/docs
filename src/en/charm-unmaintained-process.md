@@ -1,7 +1,7 @@
 Title: Unmaintained charms
 # Unmaintained charms
 
-As a charm goes through its software lifecycle it may become outdated if it is
+As a charm goes through its software life cycle it may become outdated if it is
 not maintained.  Specifically, a charm may fail to deploy, relate, or execute
 defined configuration options.  
 
@@ -23,7 +23,7 @@ at the conclusion of a charm being unmaintained.
   - Fail to deploy
   - Fail to relate to defined relations
   - Fail to respond to defined config options
-  - Fail to properly go through the Juju lifecycle (deploy, scale up/down,
+  - Fail to properly go through the Juju life cycle (deploy, scale up/down,
     relation join/depart, destroy)
       - If a core hook is broken (install, config-changed, start, stop,
         upgrade-charm), is this fixable by the reviewer?
@@ -67,7 +67,7 @@ If any of the above conditions exist, follow the unmaintained charm process.
    that cause the charm to fail policy, the charm should no longer be
    recommended. Contact a charmer to move the charm to unmaintained.
 
-### Consequences of unmaintaned charms
+### Consequences of unmaintained charms
 
 Moving the charm to unmaintained means unpromulgation (no longer recommending)
 and moving the charm from `lp:~charmers` to `lp:~unmaintained-charms`.  

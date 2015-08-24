@@ -1,5 +1,6 @@
 Title: Troubleshooting with debug-log
 
+
 # Troubleshooting with debug-log
 
 When problems arise the first step in determining the cause is to look at the
@@ -17,6 +18,9 @@ For complete syntax, see the [command reference page](./commands.html).
 
 You can also learn more by running `juju debug-log --help` and `juju help 
 logging`.
+
+See [Juju High Availability](./juju-ha.html#ha-and-logging) when viewing logs
+in an HA context.
 
 
 ## Examples:

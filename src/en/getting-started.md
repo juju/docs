@@ -1,3 +1,6 @@
+Title: Getting started with Juju
+
+
 # Introduction
 
 This tutorial will explain how to get started with Juju, including installing,
@@ -5,12 +8,14 @@ configuring, and bootstrapping a new Juju environment. Prerequisites include:
 
   - An Ubuntu, OSX, or Windows machine to install the client upon.
   - An environment which can provide a new server with an Ubuntu cloud operating
-  system image on-demand. This includes services such as Amazon EC2, HP Cloud,
-  an OpenStack installation, or your local machine
+  system image on-demand. See under `Install & Configure` on the left for how
+  to use different providers, including any provider-specific settings.
   - An SSH key-pair. On Linux and Mac OSX: `ssh-keygen -t rsa -b 2048` On Windows:
-  See the [Windows instructions for SSH and PuTTY](getting-started-keygen-win.html)
+  See the [Windows instructions for SSH and PuTTY](getting-started-keygen-win.html).
+
 
 # Installation
+
 
 ## Ubuntu
 
@@ -25,6 +30,7 @@ sudo apt-get update && sudo apt-get install juju-core
 For more information on installing and the current versions available, see
 [the releases page](reference-releases.html).
 
+
 ## Mac OSX
 
 Juju is in [Homebrew](http://brew.sh/), to install do:
@@ -38,6 +44,7 @@ We also recommend trying Juju in [our Vagrant box](config-vagrant.html).
 For more installation information and what versions are available, see
 [the releases page](reference-releases.html).
 
+
 ## Windows
 
 See [the releases page](reference-releases.html) to download and run the
@@ -45,16 +52,19 @@ latest version of the Juju Windows installer.
 
 We also recommend trying Juju in [our Vagrant box](config-vagrant.html).
 
+
 # Configuring
 
 Juju needs to be configured to use your cloud provider. This is done via the
 following file:
+
 
 ## Linux & Mac OSX
 
 ```no-highlight
 ~/.juju/environments.yaml
 ```
+
 
 ## Windows
 
@@ -80,6 +90,7 @@ sections in the left pane (under *Install & Configure*).
 help` will show you the topics. You can also look at the
 [Juju command cheatsheet](https://github.com/juju/cheatsheet) if you are
 looking for a convenient command guide.
+
 
 # Testing your setup
 

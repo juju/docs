@@ -9,8 +9,8 @@ call The Charm Store.
 
   - The main project page is here: [https://launchpad.net/charms](https://launchpad.net/charms)
   - There are useful tools for downloading, modifying, and contributing here: [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools)
-  - Here is the official tutorial for charm authors: [https://jujucharms.com/docs/authors-charm-writing](authors-charm-writing)
-  - Here is the official tutorial for bundle authors: [https://jujucharms.com/docs/charms-bundles.html](charms-bundles.html)
+  - Here is the official tutorial for charm authors: [https://jujucharms.com/docs/stable/authors-charm-writing](authors-charm-writing.html)
+  - Here is the official tutorial for bundle authors: [https://jujucharms.com/docs/stable/charms-bundles.html](charms-bundles.html)
 
 ## Charm Store Submission
 
@@ -18,7 +18,10 @@ There are currently 2 methods to submit a charm and have it listed in the charm
 store. Both methods have their perks - but it is suggested to start with your
 personal namespace before asking for a charmer featured charm.
 
-!!! Note: if you are a member of the Charm Partner Program, you will want to ensure that your Charm gets into the Recommended Charms section of the Charm Store, so please follow the instructions in the [Recommended Charms](#recommended-charms) section below.
+!!! Note: if you are a member of the Charm Partner Program, you will want to
+ensure that your Charm gets into the Recommended Charms section of the Charm
+Store, so please follow the instructions in the
+[Recommended Charms](#recommended-charms) section below.
 
 ## Charm Store Process
 
@@ -35,8 +38,8 @@ their personal name space branch.
 
 
 You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
- required to submit to both releases, but we recommend supporting both whenever
- possible so that users get the most flexibility:
+required to submit to both releases, but we recommend supporting both whenever
+possible so that users get the most flexibility:
 
   1. Install juju and charm-tools.
   1. Create a repository, something like `mkdir -p ~/charms/precise`; 'precise'
@@ -58,15 +61,14 @@ You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
   1. `bzr ci -m'Initial charm'`
   1. To submit your charm for 12.04:
      
-     ```bash
-     bzr push lp:~<your-lp-username>/charms/precise/<your-charm>/trunk
-     ```
-
-  1. To submit your charm for 14.04: 
+```bash
+bzr push lp:~<your-lp-username>/charms/precise/<your-charm>/trunk
+``` 
+or to submit your charm for 14.04: 
      
-     ```bash
-     bzr push lp:~<your-lp-username>/charms/trusty/<your-charm>/trunk
-     ```
+```bash
+bzr push lp:~<your-lp-username>/charms/trusty/<your-charm>/trunk
+``` 
 
 
 Your charm should then be looked at in a timely manner.
@@ -85,14 +87,16 @@ namespace.
 #### Submission Process
 
 When you feel your charm is ready for submission to your personal name space,
-you must initialize the repository and push your development branch to LaunchPad.
+you must initialise the repository and push your development branch to Launchpad.
 
 For the purpose of this documentation, we will call our charm `nagios`
 
-    bzr push lp:~your-launchpad-username/charms/series/nagios/trunk
+```bash 
+bzr push lp:~your-launchpad-username/charms/series/nagios/trunk
+```
 
-The /trunk branch identifier is the *only* branch that will be recognized by the
-charm store ingestion process. This free's the developer to push multiple
+The /trunk branch identifier is the *only* branch that will be recognised by the
+charm store ingestion process. This frees the developer to push multiple
 branches and gate features/fixes into their personal branch without listing
 multiple copies of the charm in the store.
 
@@ -103,7 +107,7 @@ with a description following.
   - **/charms/** : Charms is the project descriptor
   - **/precise/** : All charms are targeted against a series
   - **/nagios/** : This is the charm name and should match whats listed in
-    metdata.yaml
+    metadata.yaml
   - **/trunk** : The branch target. *Remember* only /trunk will be ingested into
     the charm store.
 
@@ -165,9 +169,14 @@ After following the Submission Process outlined above:
   1. Modify it to meet your needs.
   1. Commit your fixes `bzr commit -m 'Your changelog entry goes here'`
   1. `bzr push lp:~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
-  1. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals) by going to your branch's code page: `https://code.launchpad.net/~your-launchpad-username/charms/precise/nagios/fixed-charms-name` and clicking "Propose for merging"
-  1. In the merge proposal form select the charm's lp name: `lp:charms/nagios` for the target branch, if not already selected.
-  1. For the reviewer field put the `charmers` team, this will get your code into the review queue!
+  1. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals) 
+     by going to your branch's code page:
+     `https://code.launchpad.net/~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
+     and clicking "Propose for merging"
+  1. In the merge proposal form select the charm's lp name: `lp:charms/nagios`
+     for the target branch, if not already selected.
+  1. For the reviewer field put the `charmers` team, this will get your code
+     into the review queue!
 
 ## Submitting bundles to the Charm Store
 

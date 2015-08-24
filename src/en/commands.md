@@ -1,9 +1,10 @@
-Title:Juju commands and usage
+Title: Juju command reference
 
-# Juju Command reference
+
+# Juju command reference
 
 You can get a list of the currently used commands by entering
-```juju help commands``` from the commandline. The currently understood commands
+```juju help commands``` from the command line. The currently understood commands
 are listed here, with usage and examples. (If you are looking for the commands 
 which can be run by charms inside a hook environment, please see
 [the Hook Environment documentation.](authors-hook-environment#hook-tools)
@@ -99,7 +100,14 @@ Click on the expander to see details for each command.
   "placement directives" with "--to"; these give the provider additional
   information about how to allocate the machine. For example, one can direct the
   MAAS provider to acquire a particular node by specifying its hostname with
-  "--to". For more information on placement directives, see "juju help placement".
+  "--to".
+
+  See Also:
+  juju help constraints
+  juju help placement
+
+  The per-provider [Install & Configure](./getting-started.html) section mentions
+  these and any other provider-specific settings.
   
   #### Examples: 
 
@@ -110,11 +118,8 @@ Click on the expander to see details for each command.
       juju machine add lxc:4                (starts a new lxc container on machine 4)
       juju machine add --constraints mem=8G (starts a machine with at least 8GB RAM)
       juju machine add ssh:user@10.10.0.3   (manually provisions a machine with ssh)
-      juju machine add zone=us-east-1a
-
-  See Also:
-  juju help constraints
-  juju help placement
+      juju machine add zone=us-east-1a	    (zones not available to all providers)
+      juju machine add --to hostname	    (add a machine to a specific MAAS host)
 
 ^# add-relation
 
@@ -479,7 +484,7 @@ Click on the expander to see details for each command.
   "placement directive", which tells Juju how to identify the first machine to use.
   For more information on placement directives, see "juju help placement".
   
-  Bootstrap initializes the cloud environment synchronously and displays information
+  Bootstrap initialises the cloud environment synchronously and displays information
   about the current installation steps.  The time for bootstrap to complete varies
   across cloud providers from a few seconds to several minutes.  Once bootstrap has
   completed, you can run other juju commands against your environment. You can change
@@ -495,7 +500,7 @@ Click on the expander to see details for each command.
   
   Private clouds may need to specify their own custom image metadata, and possibly upload
   Juju tools to cloud storage if no outgoing Internet access is available. In this case,
-  use the --metadata-source paramater to tell bootstrap a local directory from which to
+  use the --metadata-source parameter to tell bootstrap a local directory from which to
   upload tools and/or image metadata.
   
   See Also:
@@ -1657,7 +1662,7 @@ Click on the expander to see details for each command.
   Launch an ssh shell on the machine identified by the <target> parameter.
   <target> can be either a machine id  as listed by "juju status" in the
   "machines" section or a unit name as listed in the "services" section.
-  Any extra parameters are passsed as extra parameters to the ssh command.
+  Any extra parameters are passed as extra parameters to the ssh command.
   
   #### Examples: 
 
@@ -1711,7 +1716,7 @@ Click on the expander to see details for each command.
 
   _- {short|line|oneline}: List units and their subordinates. For each_  unit, the IP address and agent status are listed.
 
-  _- summary: Displays the subnet(s) and port(s) the environment utilizes._  Also displays aggregate information about:
+  _- summary: Displays the subnet(s) and port(s) the environment utilises._  Also displays aggregate information about:
 
   _- MACHINES: total #, and # in each state._
 
@@ -1773,7 +1778,7 @@ Click on the expander to see details for each command.
 
   _- {short|line|oneline}: List units and their subordinates. For each_  unit, the IP address and agent status are listed.
 
-  _- summary: Displays the subnet(s) and port(s) the environment utilizes._  Also displays aggregate information about:
+  _- summary: Displays the subnet(s) and port(s) the environment utilises._  Also displays aggregate information about:
 
   _- MACHINES: total #, and # in each state._
 
@@ -1835,7 +1840,7 @@ Click on the expander to see details for each command.
   _-type supports:_  agent: will show statuses for the unit's agent
   workload: will show statuses for the unit's workload
   combined: will show agent and workload statuses combined
-  and sorted by time of occurence.
+  and sorted by time of occurrence.
 
 ^# storage
 
@@ -2001,7 +2006,7 @@ Click on the expander to see details for each command.
   This is done by blocking certain commands from successful execution. Blocked commands
   must be manually unblocked to proceed.
   
-  Some comands offer a --force option that can be used to bypass a block.
+  Some commands offer a --force option that can be used to bypass a block.
   
   Commands that can be unblocked are grouped based on logical operations as follows:
   
@@ -2101,7 +2106,7 @@ Click on the expander to see details for each command.
   _-e, --environment (= "")_  juju environment to operate in
   
   Set one or more configuration options for the specified service to their
-  default. See also the set commmand to set one or more configuration options for
+  default. See also the set command to set one or more configuration options for
   a specified service.
 
 ^# unset-env
@@ -2312,7 +2317,7 @@ Click on the expander to see details for each command.
 
   disable         - disable a user to stop the user logging in
 
-  enable          - reenables a disabled user to allow the user to log in
+  enable          - re-enables a disabled user to allow the user to log in
 
   help            - show help on a command or other topic
 
