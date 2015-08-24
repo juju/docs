@@ -33,15 +33,15 @@
                       <li><a href="charms-destroy.html">Destroying Services</a></li>
                       <li><a href="charms-environments.html">Managing environments</a></li>
                       <li><a href="charms-ha.html">Charm High Availability</a></li>
-                      <li><a href="juju-ha.html">Juju High Availability</a></li>
                       <li><a href="charms-bundles.html">Using bundles</a></li>
                       <li><a href="charms-working-with-units.html">Working with Units</a></li>
                       <li><a href="actions.html">Working with Actions</a></li>
                     </ul>
                   </li>
-                  <li class="section">Managing Juju systems</a>
+                  <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
                     <ul class="sub">
                       <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
+                      <li><a href="juju-ha.html">Juju High Availability</a></li>
                       <li><a href="juju-backup-restore.html">Backup and Restore</a></li>
                       <li><a href="juju-gui-management.html">Manage Juju with the GUI</a></li>
                       <li><a href="juju-proxies.html">Configure Proxy Access</a></li>
