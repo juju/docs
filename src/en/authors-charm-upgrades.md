@@ -1,4 +1,4 @@
-# Resources
+Title: Upgrading a charm
 
 # Charm upgrades
 
@@ -11,10 +11,13 @@ argument in the same way as in `juju deploy`.
 For a charm to replace another, though, there is a minimum standard of
 compatibility, which applies regardless of the particular change. That is:
 
-  - a subordinate charm must be replaced by a subordinate charm, and a principal charm must be replaced by a principal charm.
+  - a subordinate charm must be replaced by a subordinate charm, and a principal
+    charm must be replaced by a principal charm.
   - every runtime relation used by the service must exist in both charms.
-  - charm relations that are defined, but not in use at runtime, may be removed freely.
-  - in particular, it's not possible to remove a peer relation by upgrading, because peer relations are always in use.
+  - charm relations that are defined, but not in use at runtime, may be removed
+    freely.
+  - in particular, it's not possible to remove a peer relation by upgrading,
+    because peer relations are always in use.
 
 No other factor is used in determining compatibility: configuration settings in
 particular are converted completely naively, such that any settings from the
@@ -28,11 +31,11 @@ settings will not be affected by subsequent changes to the service's settings.
 
 ## Forced charm upgrades
 
-Juju defines the [upgrade-charm hook](authors-charm-hooks.html#upgrade-charm) for resolving
-differences between versions of the same charm. No notice is given of charm
-upgrades; a charm upgrade may run at any time the unit is started, and the only
-opportunity for resolution that exists occurs *after* the change has taken
-place.
+Juju defines the [upgrade-charm hook](authors-charm-hooks.html#upgrade-charm)
+for resolving differences between versions of the same charm. No notice is given
+of charm upgrades; a charm upgrade may run at any time the unit is started, and
+the only opportunity for resolution that exists occurs *after* the change has
+taken place.
 
 This is quite a tight restriction, but nonetheless valuable, so long as you can
 guarantee it'll run. However, it's important to understand that the upgrade-
@@ -63,9 +66,9 @@ and you can also avoid them by rigorously delineating the parts of your charm
 directory that you write to at runtime, and ensuring you never add a file to the
 raw charm that could conflict with the runtime state.
 
-If you're writing your hooks in python, you should be doubly aware of this: if
-you don't configure python to suppress bytecode caching, it will write `.pyc`
-files next to your python files at runtime, and effectively prevent you from
+If you're writing your hooks in Python, you should be doubly aware of this: if
+you don't configure Python to suppress bytecode caching, it will write `.pyc`
+files next to your Python files at runtime, and effectively prevent you from
 rearranging those directories in future. This is not an unreasonable burden to
 bear, but it's important to know you're taking it on.
 

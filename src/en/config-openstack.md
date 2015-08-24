@@ -1,4 +1,6 @@
 Title: Configuring Juju for OpenStack
+
+
 # Configuring for OpenStack
 
 Start by generating a generic configuration file for Juju, using the
@@ -12,9 +14,9 @@ This will generate a file, `environments.yaml`, which will live in your
 `~/.juju/` directory (and will create the directory if it doesn't already
 exist).
 
-**Note:** If you have an existing configuration, you can use
-`juju generate-config --show` to output the new config file, then copy and
-paste relevant areas in a text editor etc.
+**Note:** If you have an existing configuration, you can use `juju
+generate-config --show` to output the new config file, then copy and paste
+relevant areas in a text editor etc.
 
 The essential configuration sections for OpenStack look like this:
 
@@ -85,26 +87,35 @@ type: openstack
 ```
 
 **Note:** At any time you can run `juju generate-config --show` to display the
-most revent version of the environments.yaml template file, instead of having
+most recent version of the environments.yaml template file, instead of having
 it write to file.
 
 Remember to substitute in the parts of the snippet that are important to you.
-If you are deploying on OpenStack the following documentation might also be
-useful:
-
-[Ubuntu Cloud Infrastructure](https://help.ubuntu.com/community/UbuntuCloudInfrastructure)
 
 
 ## Bootstrapping
 
-Before being able to bootstrap into a Private Openstack Cloud you'll need to generate
-simplestreams metadata:
+Before being able to bootstrap into a Private Openstack Cloud you'll need to
+generate simplestreams metadata. See
+[How to setup a Private Cloud](howto-privatecloud.html).
 
-[How to setup a Private Cloud](howto-privatecloud.html)
 
-##Additional notes
+## OpenStack specific features
 
-Juju-owned instances running in OpenStack support consistent naming, tagging and
-the ability to add user-controlled tags to created instances. 
-See the [naming and tagging documentation](config-tagging.html) for more
-information.
+Features supported by Juju-owned instances running within OpenStack:
+
+- Consistent naming, tagging, and the ability to add user-controlled tags to
+  created instances. See [Instance naming and tagging](config-tagging.html) for
+  more information.
+
+- The selection (placement) of availability zones, if existing, when adding a
+  machine:
+
+```bash
+juju machine add zone=us-east-1a
+```
+
+## Additional notes
+
+See [General config options](config-general.html) for additional and advanced
+customisation of your environment.

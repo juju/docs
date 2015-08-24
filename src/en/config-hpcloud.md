@@ -45,7 +45,7 @@ HP Public Cloud currently has two regions, one in US West, and one in US East:
 
 **Note:** HP makes frequent updates and enhancements to their cloud service, and
 the user console. If the current version does not match the images and
-instructions here, you may at least be able to find the releavant information
+instructions here, you may at least be able to find the relevant information
 somewhere in the console. Please do
 [file a bug](https://bugs.launchpad.net/juju-core/+filebug) report so we can
 update this page!

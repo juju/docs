@@ -15,7 +15,7 @@ tutorial). [Cloudbase](http://www.cloudbase.it/) has a wiki
 how to create a MAAS environment with Windows images. Also, ensure that Juju is
 properly installed and configured. You can visit [Getting
 Started](https://jujucharms.com/docs/getting-started.html) section to get
-intructions on that.
+instructions on that.
 
 ##  Basic Usage of the Drupal IIS Charm
 

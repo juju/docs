@@ -12,7 +12,7 @@ guarantee that a charm will work in a disconnected state. Some charms
 pull code from the outside world, such as github. We recommend modifying
 these charms to pull code from an internal server when appropriate.
 
-## Rerieving charms using the Charm Tools
+## Retrieving charms using the Charm Tools
 
 ### Installation
 
@@ -31,7 +31,7 @@ So you simply can call it with `charm` or as usual for Juju commands with
 
 There are several tools available within the Charm Tools itself. At any time
 you can run `juju charm` to view the available subcommands and all subcommands
-have independent help pages, accesible using either the `-h` or `--help` flags.
+have independent help pages, accessible using either the `-h` or `--help` flags.
 
 If you want to retrieve and branch one of the charm store charms, use the `get`
 command specifying the `CHARM_NAME` you want to copy and provide an optional
@@ -70,7 +70,7 @@ while to complete - there are a lot of charms!
 
 ### Deploying from a local repository
 
-There are many cases when you may wish to deploy charms from a local filesytem
+There are many cases when you may wish to deploy charms from a local filesystem
 source rather than the charm store:
 
   - When testing charms you have written.

@@ -7,7 +7,7 @@ works, and what parts of the charm do what, now it is time to dust off your
 favourite code editor (no arguments please) and get charming!
 
 Although it is possible to create a charm without using anything other than a
-text editor, we are also going to make use of the very excellent timesaving
+text editor, we are also going to make use of the very excellent time saving
 plugin for Juju, Charm Tools. [ Find out how to get and install charm tools here
 ](tools-charm-tools.html). Then hurry back.
 
@@ -30,7 +30,7 @@ mkdir -p charms/precise
 cd charms/precise
 ```
 
-## Create a barebones charm with Charm Tools
+## Create a bare bones charm with Charm Tools
 
 Using the charm tools plugin, we can create the directory structure we need for
 our charm quickly and easily:
@@ -46,7 +46,7 @@ template files for you to edit. Your directory will now look like this:
 
 ## Create the README file
 
-Fire up your text editor and load/edit the readme file.
+Fire up your text editor and load/edit the README file.
 
 This step is especially important if you intend making your charm public, but it
 is very useful even if your charm will only ever be seen by you. The README is a
@@ -55,7 +55,7 @@ to communicate and how.
 
 Although a plain text file is fine, you can also write your README file using
 Markdown (in which case use the .md suffix). The advantage of this, other than
-it looks quite neat, is that the Charm Store will render Mardown properly
+it looks quite neat, is that the Charm Store will render Markdown properly
 online, so your README will look and read better.
 
 Here is a quick example README file for our Vanilla charm:
@@ -317,14 +317,14 @@ effect on the operation of the service.
 
 The `juju-log` command basically spits messages out into the Juju log, which is 
 very useful for testing and debugging. We will cover that in more detail later
-in this walkthrough.
+in this walk through.
 
 The next step is to create the relationship hooks...
 
 We know from our metadata that we have a connection called 'database', so we can
 have hooks that relate to that. Note that we don't have to create hooks for all
 possible events if they are not required - if Juju doesn't find a hook file for
-a paticular action, it just assumes everything is okay and carries on. It is up
+a particular action, it just assumes everything is okay and carries on. It is up
 to you to decide which events require a hook.
 
 Let's take a stab at the 'database-relation-changed' hook:
@@ -458,7 +458,7 @@ will look something like this:
 If you wait for all the Juju operations to finish and run a juju status command,
 you will be able to retrieve the public address for the Vanilla forum we just
 deployed. Copy it into your browser and you should see the setup page
-(prepopulated with the database config) waiting for any changes.
+(pre-populated with the database config) waiting for any changes.
 Congratulations!
 
 ![Step five - vanilla](./media/author-charm-writing-vanilla.png)
