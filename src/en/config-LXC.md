@@ -1,6 +1,8 @@
 Title: Configuring for LXC
 
+
 # Configuring for LXC
+
 
 ## Prerequisites
 
@@ -162,6 +164,56 @@ machine that is used as the basis for the clones. This will be called
 `juju-<series>-template`, so for a precise image, the name is
 `juju-precise-template`. Do not modify or start this image while a local
 provider environment is running because you cannot clone a running lxc machine.
+
+
+## Juju caching for LXC images
+
+From Juju 1.22 onwards, LXC images are cached in the Juju environment
+when they are retrieved to instantiate a new LXC container. This applies
+to the Local Provider and all other cloud providers. This caching is
+done independently of whether image cloning ('lxc-clone') is enabled.
+
+Note: Due to current upgrade limitations, image caching is currently not
+available for machines upgraded to 1.22. Only machines deployed with
+1.22 (or greater) will cache the images.
+
+In Juju 1.22, lxc-create is configured to fetch images from the Juju
+state server. If no image is available, the state server will fetch the
+image from http://cloud-images.ubuntu.com and then cache it. This means
+that the retrieval of images from the external site is only done once
+per environment, not once per new machine which is the default
+behaviour of lxc. The next time lxc-create needs to fetch an image, it
+comes directly from the Juju environment cache.
+
+The 'cached-images' command can list and delete cached LXC images stored
+in the Juju environment. The 'list' and 'delete' subcommands support
+'--arch' and '--series' options to filter the result.
+
+To see all cached images, run:
+
+```bash
+juju cached-images list
+```
+
+To see just the amd64 trusty image:
+
+```bash
+juju cached-images list --series trusty --arch amd64
+```
+
+To delete the amd64 trusty cached image:
+
+```bash
+juju cache-images delete  --kind lxc --series trusty --arch amd64
+```
+
+Future development work will allow Juju to automatically download new
+LXC images when they becomes available, but for now, the only way update
+a cached image is to remove the old one from the Juju environment. Juju
+will also support KVM image caching in the future.
+
+See 'juju cached-images list --help' and 'juju cached-images delete
+--help' for more details.
 
 
 ## LXC Containers within KVM guests
