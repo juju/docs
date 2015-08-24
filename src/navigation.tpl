@@ -2,12 +2,6 @@
               <li class="section"><h4 class="header toggle-target">User Guide</h4>
                 <ul>
                   <li><a href="about-juju.html">About Juju</a></li>
-                  <li class="section"><a class="header" href="juju-topics.html">Juju topics</a>
-                    <ul class="sub">
-                      <li><a href="juju-ha.html">Juju High Availability</a></li>
-                      <li><a href="juju-systemd.html">Juju and systemd</a></li>
-                    </ul>
-                  </li>
                   <li class="section"><a class="header" href="getting-started.html">Install &amp; Configure</a>
                     <ul class="sub">
                       <li><a href="config-aws.html">Amazon Web Service</a></li>
@@ -27,7 +21,7 @@
                       <li><a href="getting-started.html#testing-your-setup">Testing your setup</a></li>
                     </ul>
                   </li>
-                  <li class="section"><a class="header" href="charms.html">Using Juju Charms</a>
+                  <li class="section"><a class="header" href="charms.html">Juju Charms</a>
                     <ul class="sub">
                       <li><a href="charms-deploying.html">Deploying Services</a></li>
                       <li><a href="charms-constraints.html">Using constraints</a></li>
@@ -44,8 +38,10 @@
                       <li><a href="actions.html">Working with Actions</a></li>
                     </ul>
                   </li>
-                  <li class="section">Managing Juju systems</a>
+                  <li class="section">Managing Juju</a>
                     <ul class="sub">
+                      <li><a href="juju-systemd.html">Juju and systemd</a></li>
+                      <li><a href="juju-ha.html">Juju High Availability</a></li>
                       <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                       <li><a href="juju-backup-restore.html">Backup and Restore</a></li>
                       <li><a href="juju-gui-management.html">Manage Juju with the GUI</a></li>
