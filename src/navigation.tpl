@@ -21,7 +21,7 @@
                       <li><a href="getting-started.html#testing-your-setup">Testing your setup</a></li>
                     </ul>
                   </li>
-                  <li class="section"><a class="header" href="charms.html">Juju Charms</a>
+                  <li class="section"><a class="header" href="charms.html">Using Juju Charms</a>
                     <ul class="sub">
                       <li><a href="charms-deploying.html">Deploying Services</a></li>
                       <li><a href="charms-constraints.html">Using constraints</a></li>
