@@ -204,7 +204,7 @@ juju cached-images list --series trusty --arch amd64
 To delete the amd64 trusty cached image:
 
 ```bash
-juju cache-images delete  --kind lxc --series trusty --arch amd64
+juju cached-images delete  --kind lxc --series trusty --arch amd64
 ```
 
 Future development work will allow Juju to automatically download new
