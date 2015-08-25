@@ -2,9 +2,14 @@ Title: Test
 
 #Rendering test page
 
-This page is to test the rendering of various aspect of the markdown conversion
+This page is to test the rendering of various aspects of the markdown conversion
 
-## Tables
+# h1 heading
+## h2 heading
+### h3 heading
+#### h4 heading
+
+# Tables
 
 | column 1 | column2 | column3 |
 |----------|:--------|:-------:|
