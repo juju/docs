@@ -170,6 +170,7 @@ OpenStack, Keystone endpoints may be created by the cloud administrator. These
 are defined as follows:
 
 **juju-tools** the <path_url> value as described above in Tools Metadata Contents
+
 **product-streams** the <path_url> value as described above in Image Metadata Contents
 
 Other providers may similarly be able to specify locations, though the
