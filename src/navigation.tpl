@@ -38,16 +38,16 @@
                       <li><a href="actions.html">Working with Actions</a></li>
                     </ul>
                   </li>
-                  <li class="section">Managing Juju</a>
+                  <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
                     <ul class="sub">
+                      <li><a href="juju-ha.html">Juju high availability</a></li>
                       <li><a href="juju-systemd.html">Juju and systemd</a></li>
-                      <li><a href="juju-ha.html">Juju High Availability</a></li>
                       <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
-                      <li><a href="juju-backup-restore.html">Backup and Restore</a></li>
-                      <li><a href="juju-gui-management.html">Manage Juju with the GUI</a></li>
-                      <li><a href="juju-proxies.html">Configure Proxy Access</a></li>
-                      <li><a href="juju-offline-charms.html">Deploying charms offline</a></li>
-                      <li><a href="juju-authorised-keys.html">Manage Authorised Keys</a></li>
+                      <li><a href="juju-backup-restore.html">Backup and restore</a></li>
+                      <li><a href="juju-gui-management.html">Using the Juju GUI</a></li>
+                      <li><a href="juju-proxies.html">Juju and proxies</a></li>
+                      <li><a href="juju-offline-charms.html">Deploy charms offline</a></li>
+                      <li><a href="juju-authorised-keys.html">Authorised keys</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="howto.html">How to...</a>
