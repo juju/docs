@@ -171,11 +171,15 @@ are defined as follows:
 
 juju-tools
 
+```bash
     the <path_url> value as described above in Tools Metadata Contents
+```
 
 product-streams
 
+```bash
     the <path_url> value as described above in Image Metadata Contents
+```
 
 Other providers may similarly be able to specify locations, though the
 implementation will vary.
