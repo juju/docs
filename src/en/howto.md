@@ -8,7 +8,6 @@ instructions on how Juju works, this section is all about putting those commands
 - [Deploying with the Rails framework](howto-rails.html)
 - [Deploy services with the Juju-GUI](howto-gui-management.html)
 - [Set up a private cloud with Simplestreams](howto-privatecloud.html)
-- [Manage authorised SSH keys](howto-authorised-keys.html)
 
 Got an idea for something to add here? Check out [how to contribute to the
 docs](contributing.html)
