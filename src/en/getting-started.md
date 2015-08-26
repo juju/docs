@@ -72,11 +72,7 @@ following file:
 %APPDATA%\Juju\environments.yaml
 ```
 
-%APPDATA% is typically defined as
-
-```no-highlight
-C:\Users\<user>\AppData\Roaming
-```
+Where `%APPDATA%` is typically defined as `C:\Users\<user>\AppData\Roaming`.
 
 Juju can automatically generate the file in this way:
 
