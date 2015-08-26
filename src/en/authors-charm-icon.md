@@ -54,7 +54,7 @@ either from the drop down at the bottom, or from the layer dialog.
 
 ## Add colour
 
-Select **Object&GT;Fill and Stroke** from the menu to adjust the colour. Apply a
+Select **Object** and then **Fill and Stroke** from the menu to adjust the colour. Apply a
 flat colour or a gradient, but make sure you edit the gradient file to make it
 lighter at the top and darker at the bottom.
 
