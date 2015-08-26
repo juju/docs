@@ -47,12 +47,14 @@ cd vanilla
 ## Determine a base layer and additional relations
 
 To best leverage existing work, it is important to choose the right base layer
-for your charm.   In our case, Vanilla is a PHP5 application, so the layer we
-will use is the [apache-php5][] layer.  This is a "runtime" layer that provides
-a common basis for specific applications to built on top of.  Out of the box,
-this will give us Apache2 running on a configurable port, mod-php5, and support
-for the [http interface][] for running behind a proxy for high availability and
-scaling.
+for your charm.  The available layers and interfaces can be found at
+[interfaces.juju.solutions][].
+
+In our case, Vanilla is a PHP5 application, so the layer we will use is the
+[apache-php5][] layer.  This is a "runtime" layer that provides a common basis
+for specific applications to built on top of.  Out of the box, this will give
+us Apache2 running on a configurable port, mod-php5, and support for the
+[http interface][] for running behind a proxy for high availability and scaling.
 
 On top of that, we'll want to use the [mysql interface][].
 
@@ -207,7 +209,13 @@ The final directory structure looks like this:
 Check out the [repo][] for the complete charm layer.
 
 It is important to note that we didn't have to create any hooks.  Those were
-all handled by the other layers and interfaces.
+all handled by the other layers and interfaces.  This is common when using
+composition and relation stubs.
+
+It's also worth noting that there is a file for each layer in the `reactive`
+directory.  This allows the handlers for each layer to remain separate and
+not conflict.  All handlers from each of those files will be discovered and
+dispatched according to the [discovery and dispatch rules][].
 
 
 ## Composing your layers
@@ -250,3 +258,5 @@ juju expose vanilla
 [charms.reactive]: http://pythonhosted.org/charms.reactive/
 [reactive-bash]: http://pythonhosted.org/charms.reactive/#non-python-reactive-handlers
 [repo]: https://github.com/johnsca/layered-vanilla
+[interfaces.juju.solutions]: http://interfaces.juju.solutions/
+[discovery and dispatch rules]: http://pythonhosted.org/charms.reactive/#discovery-and-dispatch-of-reactive-handlers
