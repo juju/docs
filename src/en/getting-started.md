@@ -72,7 +72,7 @@ following file:
 %APPDATA%\Juju\environments.yaml
 ```
 
- %APPDATA% typically == C:\Users\<user>\AppData\Roaming
+ %APPDATA% is typically defined as C:\Users\<user>\AppData\Roaming
 
 Juju can automatically generate the file in this way:
 
