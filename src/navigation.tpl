@@ -36,6 +36,7 @@
                       <li><a href="charms-bundles.html">Using bundles</a></li>
                       <li><a href="charms-working-with-units.html">Working with Units</a></li>
                       <li><a href="actions.html">Working with Actions</a></li>
+                      <li><a href="storage.html">Using storage</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
@@ -100,7 +101,6 @@
               <li>
               <li class="section"><h4 class="header toggle-target">Experimental</h4>
                 <ul>
-                  <li><a href="wip-storage.html">Storage</a></li>
                   <li><a href="wip-centos.html">CentOS support</a></li>
                   <li><a href="wip-numbering.html">Machine/unit numbering</a></li>
                   <li><a href="wip-systems.html">Juju Environment System (DRAFT)</a></li>
