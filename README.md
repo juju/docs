@@ -1,3 +1,15 @@
+# WARNING!
+
+This version of the documentation is **no longer updated** or supported as it has been superceeded by later versions of the software. This version of the docs is for historical reference only/
+
+
+
+* * *
+
+
+
+
+
 # Documentation for Juju
 
 The documentation is written in Markdown, and then generated into HTML.
