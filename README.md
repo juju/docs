@@ -70,23 +70,23 @@ easily for our documentation.
  `https://github.com/{yourusername}/docs`)
 3. Create a local copy:
 
-       git clone https://github.com/{yourusername}/docs 
-       cd docs
+        git clone https://github.com/{yourusername}/docs 
+        cd docs
 
 4. Add a git `remote` to your local repository. This links it with the 'upstream' 
    version of the documentation, which makes it easier to update your fork and 
    local version of the docs:
 
-       git remote add upstream https://github.com/juju/docs
+        git remote add upstream https://github.com/juju/docs
 
 5. Create a 'feature branch' to add your content/changes
 
-       git checkout -b {branchname}
+        git checkout -b {branchname}
 
 6. Edit files and make changes in this branch. To 'save' your changes locally, 
    you should make a commit to this branch
 
-      git commit -m 'my commit message which says something useful'
+        git commit -m 'my commit message which says something useful'
 
 7. Check that the changes you have made make sense! You can build a local
    version of the docs (` make && make serve`) to check it renders
@@ -94,7 +94,7 @@ easily for our documentation.
 
 8. Push the branch back to **your** fork on Github
 
-      git push origin {branchName}
+        git push origin {branchName}
 
    Do not be alarmed if you are asked for your username/password, it is part of
    the authentication, though you can make things easier by any of:
@@ -137,17 +137,17 @@ by pulling from the original Juju repository (see below).
 You should now have both the upstream branch and your fork listed in git, 
 `git remote -v` should return something like:
 
-    upstream	https://github.com/juju/docs.git (fetch)
-    upstream	https://github.com/juju/docs.git (push)
-    origin	https://github.com/castrojo/docs (fetch)
-    origin	https://github.com/castrojo/docs (push)
+        upstream    	https://github.com/juju/docs.git (fetch)
+        upstream	https://github.com/juju/docs.git (push)
+        origin  	https://github.com/castrojo/docs (fetch)
+        origin  	https://github.com/castrojo/docs (push)
 
 To fetch and merge with the upstream branch:
 
-    git checkout master
-    git fetch upstream
-    git merge --ff-only upstream/master
-    git push origin master
+        git checkout master
+        git fetch upstream
+        git merge --ff-only upstream/master
+        git push origin master
 
 
 
