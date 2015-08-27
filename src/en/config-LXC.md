@@ -187,13 +187,15 @@ Once the Juju LXC cache, and optionally the LXC host cache, is populated:
 
 ### Notes on Juju image caching
 
-Specific to the Local Provider:
+**Specific to the Local Provider**  
+
 - It is independent of image cloning ('lxc-clone'), which is enabled by
   default.
 - Future development work will allow Juju to automatically download new images
   when they become available.
 
-General:
+**General**  
+
 - It applies to all provider types. 
 - It is only available to hosts installed with 1.22 (or greater); not upgraded
   to that level.
@@ -210,7 +212,7 @@ To see all cached images:
 
 ```bash
 juju cached-images list
- ```
+```
 
 To see just the amd64 trusty image:
 
@@ -221,7 +223,7 @@ juju cached-images list --series trusty --arch amd64
 To delete the amd64 trusty image:
 
 ```bash
-juju cached-images delete  --kind lxc --series trusty --arch amd64
+juju cached-images delete --kind lxc --series trusty --arch amd64
 ```
 
 See 'juju cached-images list --help' and 'juju cached-images delete --help' for
@@ -236,8 +238,8 @@ caching). See
 ### Ensuring a fresh cache
 
 Due to the interaction of both the Juju cache and the LXC host cache, in
-addition to the above issue, it is recommended to simply flush both caches
-together and on a regular basis:
+addition to the above issue, to ensure stale images are not being used it is
+recommended to simply flush both caches together and on a regular basis:
 
 For the Juju cache, as shown previously:
 
