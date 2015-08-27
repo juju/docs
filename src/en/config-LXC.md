@@ -174,7 +174,7 @@ the state server (MongoDB). The same image will be copied to the host's
 filesystem (/var/cache/lxc) if LXC host caching is enabled (the default).
 
 This means that the external retrieval of images is done once per environment,
-and not once per machine which is the normal behaviour of LXC.
+and not once per machine which is the normal behaviour for LXC.
 
 ### Use of cached images
 
