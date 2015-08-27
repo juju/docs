@@ -168,32 +168,49 @@ provider environment is running because you cannot clone a running lxc machine.
 
 ## Juju caching for LXC images
 
-From Juju 1.22 onwards, LXC images are cached in the Juju environment
-when they are retrieved to instantiate a new LXC container. This applies
-to the Local Provider and all other cloud providers. This caching is
-done independently of whether image cloning ('lxc-clone') is enabled.
+Starting with Juju 1.22, the first time a host (local or remote) needs a LXC
+image it will be downloaded from http://cloud-images.ubuntu.com and cached on
+the state server (MongoDB). The same image will be copied to the host's
+filesystem (/var/cache/lxc) if LXC host caching is enabled (the default).
 
-Note: Due to current upgrade limitations, image caching is currently not
-available for machines upgraded to 1.22. Only machines deployed with
-1.22 (or greater) will cache the images.
+This means that the external retrieval of images is done once per environment,
+and not once per machine which is the normal behaviour of LXC.
 
-In Juju 1.22, lxc-create is configured to fetch images from the Juju
-state server. If no image is available, the state server will fetch the
-image from http://cloud-images.ubuntu.com and then cache it. This means
-that the retrieval of images from the external site is only done once
-per environment, not once per new machine which is the default
-behaviour of lxc. The next time lxc-create needs to fetch an image, it
-comes directly from the Juju environment cache.
+### Use of cached images
 
-The 'cached-images' command can list and delete cached LXC images stored
-in the Juju environment. The 'list' and 'delete' subcommands support
-'--arch' and '--series' options to filter the result.
+Once the Juju LXC cache, and optionally the LXC host cache, is populated:
 
-To see all cached images, run:
+- Juju will supply its cached image to a new (non-local) machine that needs it
+  for its own containers.
+- When Juju creates a (local) container, that container will use the LXC host
+  cached image (if enabled). Otherwise it will use the Juju cached image.
+
+### Notes on Juju image caching
+
+Specific to the Local Provider:
+- It is independent of image cloning ('lxc-clone'), which is enabled by
+  default.
+- Future development work will allow Juju to automatically download new images
+  when they become available.
+
+General:
+- It applies to all provider types. 
+- It is only available to hosts installed with 1.22 (or greater); not upgraded
+  to that level.
+
+### Commands
+
+The 'cached-images' command can list and delete cached LXC images stored in the
+Juju environment. The 'list' and 'delete' subcommands support '--arch' and
+'--series' options to filter the result.
+
+Examples:
+
+To see all cached images:
 
 ```bash
 juju cached-images list
-```
+ ```
 
 To see just the amd64 trusty image:
 
@@ -201,19 +218,45 @@ To see just the amd64 trusty image:
 juju cached-images list --series trusty --arch amd64
 ```
 
-To delete the amd64 trusty cached image:
+To delete the amd64 trusty image:
 
 ```bash
 juju cached-images delete  --kind lxc --series trusty --arch amd64
 ```
 
-Future development work will allow Juju to automatically download new
-LXC images when they becomes available, but for now, the only way update
-a cached image is to remove the old one from the Juju environment. Juju
-will also support KVM image caching in the future.
+See 'juju cached-images list --help' and 'juju cached-images delete --help' for
+more details.
 
-See 'juju cached-images list --help' and 'juju cached-images delete
---help' for more details.
+### Issues
+
+Juju cached LXC images do not return to the cache once deleted (due to host
+caching). See
+[LP bug #1483987](https://bugs.launchpad.net/juju-core/+bug/1483987).
+
+### Ensuring a fresh cache
+
+Due to the interaction of both the Juju cache and the LXC host cache, in
+addition to the above issue, it is recommended to simply flush both caches
+together and on a regular basis:
+
+For the Juju cache, as shown previously:
+
+```bash
+juju cached-images delete --kind lxc --series trusty --arch amd64
+```
+
+For the LXC host cache:
+
+```bash
+sudo rm -r /var/cache/lxc/cloud-trusty
+```
+
+Do not forget to also remove the source clone image (template) if lxc-clone is
+enabled (the default):
+
+```bash
+sudo lxc-destroy -n juju-trusty-lxc-template
+```
 
 
 ## LXC Containers within KVM guests
