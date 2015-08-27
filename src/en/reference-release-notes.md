@@ -1244,34 +1244,31 @@ The versions covered here are:
 
 ^# juju-core 1.22.8
 
-A new supported release of Juju, juju-core 1.22.8, is now available.
-This release replaces version 1.22.6.
+  A new supported release of Juju, juju-core 1.22.8, is now available.
+  This release replaces version 1.22.6.
 
+  ## Getting Juju
 
-## Getting Juju
+  juju-core 1.22.8 is available for Wily and backported to earlier
+  series in the following PPA:
 
-juju-core 1.22.8 is available for Wily and backported to earlier
-series in the following PPA:
+      https://launchpad.net/~juju/+archive/1.22
 
-    https://launchpad.net/~juju/+archive/1.22
+  Windows and OS X users will find installers at:
+ 
+      https://launchpad.net/juju-core/+milestone/1.22.8
 
-Windows and OS X users will find installers at:
+  ## Notable Changes
 
-    https://launchpad.net/juju-core/+milestone/1.22.8
+  This releases addresses stability and performance issues.
 
+  ## Resolved issues
 
-## Notable Changes
+    * Juju uses proxy to access bootstrap node
+      Lp 1478660
 
-This releases addresses stability and performance issues.
-
-
-## Resolved issues
-
-  * Juju uses proxy to access bootstrap node
-    Lp 1478660
-
-  * Juju environment not usable after the upgrade
-    Lp 1473517
+    * Juju environment not usable after the upgrade
+      Lp 1473517
 
 
 ^# juju-core 1.22.6
