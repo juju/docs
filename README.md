@@ -10,121 +10,158 @@ The latest version of these docs live at:
 For advice on contributing to the docs (please!), see
 the [contributing.html](https://jujucharms.com/docs/contributing.html) page in this project.
 
-## Building the Docs
+## Docs structure
 
-The tools directory contains a Python build script for
-adding the headers and footers when structural
-elements of the pages are altered. It is NOT
-necessary to run the build tool for deployment of the
-HTML, only if the headers and footers have been
-changed. The [contributing section](https://jujucharms.com/docs/contributing.html) contains more
-information on this.
+For editing actual documentation, you will find the Markdown format source 
+files in the `src/en` directory. At some point we hope to offer multilingual 
+versions of the docs, whereupon these will live in similarly titled directories 
+(e.g. 'fr', 'de', etc.)
 
-### If you want 'phaux live reload'
+There are two other files in the `src` directory:
 
-there is a make target to 'watch' the directory and only build the source files that have changed,
-enabling you the doc editor, to simply refresh your browser to see your changes without re-building
-the entire doc tree.
+**navigation.tpl** - This is used to build the navigation for the website. You 
+won't need to change this unless you are adding a new page (and even then, 
+please ask about where it should go)
 
-to gain this functionality you will need the `watchdog` python module, which is pip installable
+**base.tpl** - this is the HTML template local docs use. This is as far as 
+possible a simulation of how the docs appear online, but changes to this file 
+do not alter the online appearance of the docs
 
-    pip install watchdog
-    make watch
+The `htmldocs` directory is where local builds of the docs are made, and 
+contains some support files (CSS, JavaScript) and all the graphics used by the 
+docs. If you need to add graphics, add them here. 
 
-# Typical Github workflow
+**NOTE!** Please don't _replace_ graphics unless you know what you are doing. 
+These image files are used by all versions of the docs, so usually you will want
+to add files rather than change existing ones, unless the changes apply to all 
+versions of Juju (e.g. website images).
 
+The `tools` directory is reserved for build tools and support files.
 
-Git allows you to work in a lot of different work flows. Here is one that
-works well for our environment, if you are not already familiar with git.
+The `versions` file contains a list of github branches which represent the 
+current supported versions of documentation. Many tools rely on this list, it 
+should not be changed lightly!
 
-To set up the environment, first fork the [juju/docs](https://github.com/juju/docs) github
-repository when you are logged into the github.com website. Once the fork is
-complete, create a local copy and work on a feature branch.
+The `archive` file contains a list of github branches which contain unmaintained,
+older versions of documentation.
 
-    git clone git@github.com:{yourusername}/docs.git juju-docs
-    cd juju-docs
-
-Add a second remote to the upstream Juju repository your fork came from. This lets you use commands such as `git pull upstream master` to update a branch from the original trunk, as you'll see below.
-
-    git remote add upstream https://github.com/juju/docs.git
-
-Create a feature branch to work on:
-
-    git checkout -b {featureBranchName}
-
-Hacky hacky hacky on your docs. To push code for review, cleanup the commit history.
-
-Optional: rebase your commit history into one or more meaningful commits.
-
-    git rebase -i --autosquash
-
-And push your feature branch up to your fork on Github.
-
-    git push origin {featureBranchName}
+The `Makefile` is used to build local versions of the docs, and other useful 
+things. Some of the make targets are:
+ 
+ - **sysdeps** Run this first! It makes sure you have the required packages to 
+    build the docs.
+ - **build** Uses the `tools/mdtool.py` program to build a local version of the 
+    docs in the htmldocs directory
+ - **clean** Removes temp files and generated docs
+ - **serve** Runs a simple Python HTTP server on port 8000, which points at the
+    htmldocs directory - essential for testing!
 
 
-In order to submit your code for review, you need to generate a pull request.
-Go to your github repository and generate a pull request to the `juju:docs`
-branch.
 
-After review has been signed off on and the test run has updated the pull
-request, a member of the `juju` organization can submit the branch for landing.
+## Typical Github workflow
+
+Github, and git, allow you to use many different styles of workflow, but it is 
+tricky to get your head around initially, so here is an example of how to use it
+easily for our documentation.
+
+1. Make sure you have a Github account! [https://github.com/join](https://github.com/join)
+2. Fork the [juju/docs](https://github.com/juju/docs) github repository. This 
+ creates your own version of the repository (which you can then find online at
+ `https://github.com/{yourusername}/docs`)
+3. Create a local copy:
+
+       git clone https://github.com/{yourusername}/docs 
+       cd docs
+
+4. Add a git `remote` to your local repository. This links it with the 'upstream' 
+   version of the documentation, which makes it easier to update your fork and 
+   local version of the docs:
+
+       git remote add upstream https://github.com/juju/docs
+
+5. Create a 'feature branch' to add your content/changes
+
+       git checkout -b {branchname}
+
+6. Edit files and make changes in this branch. To 'save' your changes locally, 
+   you should make a commit to this branch
+
+      git commit -m 'my commit message which says something useful'
+
+7. Check that the changes you have made make sense! You can build a local
+   version of the docs (` make && make serve`) to check it renders
+   properly.
+
+8. Push the branch back to **your** fork on Github
+
+      git push origin {branchName}
+
+   Do not be alarmed if you are asked for your username/password, it is part of
+   the authentication, though you can make things easier by any of:
+    
+    - [configuring git](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) properly
+    - using an [authentication token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)
+    - caching your [password] (https://help.github.com/articles/caching-your-github-password-in-git/)
+
+9. Create a pull request. This is easily done in the web interface of Github:
+   navigate to your branch on the web interface and hit the compare button - 
+   this will allow you to compare across forks to the juju/docs master branch, 
+   which is where your changes will hopefully end up. the comparison will show 
+   you a diff of the changes  - it is useful to look over this to avoid 
+   mistakes. Then click on the button to Create a pull request.
+   Add any useful info about the changes in the comments (e.g. if it fixes an
+   issue you can refer to it by number to automatically link your pull request 
+   to the issue)
+
+10. Wait. The documentation team will usually get to your pull request within a 
+   day or two. Be prepared for suggested changes and comments. If there are 
+   changes to be made:
+
+   - make the changes in your local branch
+   - use `git commit -m 'some message' ` to commit the new changes
+   - push the branch to your fork again with `git push origin {branchname}`
+   - there is no need to update the pull request, it will be updated automatically
+ 
+
 
 Once the code has been landed you can remove your feature branch from both the
-remote and your local fork. Github provides a button to do so in the bottom of
-the pull request, or you can use git to remove the branch. Removing from your
-local fork is listed below.
-
-    git push origin :{featureBranchName}
-
-And to remove your local branch
-
-    git branch -D {featureBranchName}
+remote and your local fork. Github provides a button for this at the bottom of
+the pull request, or you can use `git` to remove the branch. 
 
 Before creating another feature branch, make sure you update your fork's code
-by pulling from the original Juju repository.
+by pulling from the original Juju repository (see below).
 
-    git checkout master
-    git fetch upstream
-    git merge --ff-only juju-docs-upstream/master
-
-And start your second feature branch.
-
-    git checkout -b {featureBranch2}
 
 ## Keeping your fork in sync with Juju docs upstream
 
-You should now have both the upstream branch and your fork listed in git, `git remote -v` should return something like:
+You should now have both the upstream branch and your fork listed in git, 
+`git remote -v` should return something like:
 
     upstream	https://github.com/juju/docs.git (fetch)
     upstream	https://github.com/juju/docs.git (push)
-    origin	git@github.com:castrojo/docs (fetch)
-    origin	git@github.com:castrojo/docs (push)
+    origin	https://github.com/castrojo/docs (fetch)
+    origin	https://github.com/castrojo/docs (push)
 
 To fetch and merge with the upstream branch:
 
-    git checkout master; git fetch upstream; git merge --ff-only juju-docs-upstream/master
+    git checkout master
+    git fetch upstream
+    git merge --ff-only upstream/master
     git push origin master
 
-# Doc Build Workflow
-
-This code is pulled into this branch in launchpad:
-
-    https://code.launchpad.net/~charmers/juju-core/github-docs
-
-The cron job that builds the docs once a day pulls from Launchpad, NOT this repository; if you are trying to fix something
-quickly on the production site you need to click "Import Now" on that branch to grab the fresh code from here.
-
-# Helpful Git tools and aliases
-
-## Tools
 
 
-[Git Remote Branch](https://github.com/webmat/git_remote_branch>) - A tool to simplify working
-with remote branches (Detailed installation instructions are in their readme).
+## Additional resources
 
-## Aliases
+### Tools
 
+
+[Git Remote Branch](https://github.com/webmat/git_remote_branch>) - A tool to 
+simplify working with remote branches (Detailed installation instructions are
+in their README).
+
+
+### Using git aliases
 
 Git provides a mechanism for creating aliases for complex or multi-step
 commands. These are located in your ``.gitconfig`` file under the
@@ -133,8 +170,8 @@ commands. These are located in your ``.gitconfig`` file under the
 If you would like more details on Git aliases, You can find out more
 information here: [How to add Git aliases](https://git.wiki.kernel.org/index.php/Aliases>)
 
-Below are a few helpful aliases we'll refer to in other parts of the
-documentation to make working with the Juju Docs easier.
+Below are a few helpful aliases that have been suggested:
+
 
     # Bring down the pull request number from the remote specified.
     # Note, the remote that the pull request is merging into may not be your
