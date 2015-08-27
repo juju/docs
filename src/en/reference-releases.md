@@ -76,8 +76,8 @@ agent-stream: proposed
 
 ## Development
 
-1.24-beta6 is currently in development for testing.
-The previous development release was 1.24-beta5.
+1.25-alpha1 is currently in development for testing.
+The previous development release was 1.24-beta6.
 
 Development releases provide new features that are being stablised.
 These releases are *not* suitable for production environments. Upgrading
@@ -92,15 +92,15 @@ sudo apt-get install juju-core</pre>
 {: .instruction }
 
 Centos
-: [juju-1.24-beta6-centos7.tar.gz](https://launchpad.net/juju-core/1.24/1.24-beta6/+download/juju-1.24-beta6-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/1.24/1.24-beta6/+download/juju-1.24-beta6-centos7.tar.gz/+md5))
+: [juju-1.25-alpha1-centos7.tar.gz](https://launchpad.net/juju-core/1.25/1.25-alpha1/+download/juju-1.25-alpha1-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/1.25/1.25-alpha1/+download/juju-1.25-alpha1-centos7.tar.gz/+md5))
 {: .instruction }
 
 OS X
-: [juju-1.24-beta6-osx.tar.gz](https://launchpad.net/juju-core/1.24/1.24-beta6/+download/juju-1.24-beta6-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.24/1.24-beta6/+download/juju-1.24-beta6-osx.tar.gz/+md5))
+: [juju-1.25-alpha1-osx.tar.gz](https://launchpad.net/juju-core/1.25/1.25-alpha1/+download/juju-1.25-alpha1-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.25/1.25-alpha1/+download/juju-1.25-alpha1-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.24-beta6.exe](https://launchpad.net/juju-core/1.24/1.24-beta6/+download/juju-setup-1.24-beta6.exe) ([md5](https://launchpad.net/juju-core/1.24/1.24-beta6/+download/juju-setup-1.24-beta6.exe/+md5))
+: [juju-setup-1.25-alpha1.exe](https://launchpad.net/juju-core/1.25/1.25-alpha1/+download/juju-setup-1.25-alpha1.exe) ([md5](https://launchpad.net/juju-core/1.25/1.25-alpha1/+download/juju-setup-1.25-alpha1.exe/+md5))
 {: .instruction }
 
 Development releases use the 'devel' simple-streams. You must configure
