@@ -8,7 +8,9 @@ The latest version of these docs live at:
 - [jujucharms.com/docs](http://jujucharms.com/docs) - Rendered docs, generated every 15 minutes.
 
 For advice on contributing to the docs (please!), see
-the [contributing.html](https://jujucharms.com/docs/contributing.html) page in this project.
+the [contributing.html](https://jujucharms.com/docs/contributing.html) page in 
+this project. This has important information on style, the use of Markdown and
+other useful tips.
 
 ## Docs structure
 
@@ -29,7 +31,7 @@ do not alter the online appearance of the docs
 
 The `htmldocs` directory is where local builds of the docs are made, and 
 contains some support files (CSS, JavaScript) and all the graphics used by the 
-docs. If you need to add graphics, add them here. 
+docs. If you need to add graphics, add them here (`htmldocs/media`). 
 
 **NOTE!** Please don't _replace_ graphics unless you know what you are doing. 
 These image files are used by all versions of the docs, so usually you will want
@@ -83,8 +85,21 @@ easily for our documentation.
 
         git checkout -b {branchname}
 
-6. Edit files and make changes in this branch. To 'save' your changes locally, 
-   you should make a commit to this branch
+6. Edit files and make changes in this branch. You can use the command:
+       
+        git status
+
+   to check which files you have added or edited. For each of these you will
+   need to explicitly add the files to the repository. For example:
+
+        git add src/en/about-juju.md
+        git add htmldocs/media/about-charms.jpg
+  
+  If you wish to move or rename files you need to use the `git mv` command, and 
+  the `git rm` command to delete them 
+
+
+7. To 'save' your changes locally, you should make a commit:
 
         git commit -m 'my commit message which says something useful'
 
