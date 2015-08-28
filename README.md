@@ -17,17 +17,17 @@ other useful tips.
 For editing actual documentation, you will find the Markdown format source 
 files in the `src/en` directory. At some point we hope to offer multilingual 
 versions of the docs, whereupon these will live in similarly titled directories 
-(e.g. 'fr', 'de', etc.)
+(e.g. 'fr', 'de', etc.).
 
 There are two other files in the `src` directory:
 
 **navigation.tpl** - This is used to build the navigation for the website. You 
 won't need to change this unless you are adding a new page (and even then, 
-please ask about where it should go)
+please ask about where it should go).
 
 **base.tpl** - this is the HTML template local docs use. This is as far as 
 possible a simulation of how the docs appear online, but changes to this file 
-do not alter the online appearance of the docs
+do not alter the online appearance of the docs.
 
 The `htmldocs` directory is where local builds of the docs are made, and 
 contains some support files (CSS, JavaScript) and all the graphics used by the 
@@ -40,11 +40,11 @@ versions of Juju (e.g. website images).
 
 The `tools` directory is reserved for build tools and support files.
 
-The `versions` file contains a list of github branches which represent the 
+The `versions` file contains a list of Github branches which represent the 
 current supported versions of documentation. Many tools rely on this list, it 
-should not be changed lightly!
+should not be changed by anyone but the docs team!
 
-The `archive` file contains a list of github branches which contain unmaintained,
+The `archive` file contains a list of Github branches which contain unmaintained,
 older versions of documentation.
 
 The `Makefile` is used to build local versions of the docs, and other useful 
@@ -67,7 +67,7 @@ tricky to get your head around initially, so here is an example of how to use it
 easily for our documentation.
 
 1. Make sure you have a Github account! [https://github.com/join](https://github.com/join)
-2. Fork the [juju/docs](https://github.com/juju/docs) github repository. This 
+2. Fork the [juju/docs](https://github.com/juju/docs) Github repository. This 
  creates your own version of the repository (which you can then find online at
  `https://github.com/{yourusername}/docs`)
 3. Create a local copy:
@@ -121,7 +121,7 @@ easily for our documentation.
 9. Create a pull request. This is easily done in the web interface of Github:
    navigate to your branch on the web interface and hit the compare button - 
    this will allow you to compare across forks to the juju/docs master branch, 
-   which is where your changes will hopefully end up. the comparison will show 
+   which is where your changes will hopefully end up. The comparison will show 
    you a diff of the changes  - it is useful to look over this to avoid 
    mistakes. Then click on the button to Create a pull request.
    Add any useful info about the changes in the comments (e.g. if it fixes an
