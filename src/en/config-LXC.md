@@ -165,6 +165,11 @@ machine that is used as the basis for the clones. This will be called
 `juju-precise-template`. Do not modify or start this image while a local
 provider environment is running because you cannot clone a running lxc machine.
 
+Newly provisioned machines on the Local Provider have package upgrades disabled
+by default. This, again, is to accelerate provisioning. To allow automatic
+software upgrades to occur you will need to configure accordingly. See
+[General Configuration](./config-general.html#local-provider).
+
 
 ## Juju caching for LXC images
 
