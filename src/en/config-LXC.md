@@ -185,20 +185,18 @@ Once the Juju LXC cache, and optionally the LXC host cache, is populated:
 - When Juju creates a (local) container, that container will use the LXC host
   cached image (if enabled). Otherwise it will use the Juju cached image.
 
-### Notes on Juju image caching
+### General notes on Juju image caching
 
-**Specific to the Local Provider**  
-
+- It applies to all provider types.
 - It is independent of image cloning ('lxc-clone'), which is enabled by
   default.
-- Future development work will allow Juju to automatically download new images
+- Future development work will allow Juju to automatically download new LXC images
   when they become available.
-
-**General**  
-
-- It applies to all provider types. 
 - It is only available to hosts installed with 1.22 (or greater); not upgraded
   to that level.
+
+*Recall that LXC containers can be deployed on all types of providers, not just
+the Local Provider.*
 
 ### Commands
 
