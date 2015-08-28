@@ -152,7 +152,7 @@ by pulling from the original Juju repository (see below).
 You should now have both the upstream branch and your fork listed in git, 
 `git remote -v` should return something like:
 
-        upstream https://github.com/juju/docs.git (fetch)
+        upstream   https://github.com/juju/docs.git (fetch)
         upstream	https://github.com/juju/docs.git (push)
         origin  	https://github.com/castrojo/docs (fetch)
         origin  	https://github.com/castrojo/docs (push)
