@@ -100,6 +100,38 @@ juju set-env agent-stream=proposed
 Subsequent upgrades will "just work".
 
 
+## Provision machines faster by disabling software upgrades
+
+When Juju provisions a machine, its default behaviour is to upgrade existing
+packages to their latest version. If your OS images are fresh and/or your
+deployed services do not require the latest package versions, you can disable
+upgrades in order to provision machines faster.
+
+Two Boolean configuration options are available to disable APT updates and
+upgrades: `enable-os-refresh-update` (apt-get update) and `enable-os-upgrade`
+(apt-get upgrade), respectively. By default, these are both set to 'true'.
+To disable them set them to 'false' in environments.yaml like so:
+
+```yaml
+enable-os-refresh-update: false
+enable-os-upgrade: false
+```
+
+You may also want to just update the package list to ensure a Charm has the
+latest software available to it by disabling upgrades but enabling updates.
+
+### Local Provider
+
+The Local Provider, however, skips upgrades by default for faster provisioning.
+If you wish to enable upgrades in your local development, you will need to
+explicitly set enable-os-upgrade to "true".
+
+If you are using the Local Provider to develop Charms or test, you will want to
+regularly purge the Juju LXC template and LXC host cache to be certain you are
+using fresh images. See
+[Configuring Local Provider (LXC)](https://jujucharms.com/docs/devel/config-LXC#ensuring-a-fresh-cache).
+
+
 ## NUMA
 
 The Juju state server can be run in a mode tuned to be efficient on NUMA
