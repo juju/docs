@@ -129,7 +129,7 @@ explicitly set enable-os-upgrade to "true".
 If you are using the Local Provider to develop Charms or test, you will want to
 regularly purge the Juju LXC template and LXC host cache to be certain you are
 using fresh images. See
-[Configuring Local Provider (LXC)](https://jujucharms.com/docs/devel/config-LXC#ensuring-a-fresh-cache).
+[Configuring Local Provider (LXC)](./config-LXC.html#ensuring-a-fresh-cache).
 
 
 ## NUMA
