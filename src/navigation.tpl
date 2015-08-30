@@ -46,9 +46,8 @@
                       <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                       <li><a href="juju-backup-restore.html">Backup and restore</a></li>
                       <li><a href="juju-gui-management.html">Using the Juju GUI</a></li>
-                      <li><a href="juju-proxies.html">Juju and proxies</a></li>
                       <li><a href="juju-offline-charms.html">Deploy charms offline</a></li>
-                      <li><a href="juju-authorised-keys.html">Authorised keys</a></li>
+                      <li><a href="juju-misc.html">Miscellaneous</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="howto.html">How to...</a>
