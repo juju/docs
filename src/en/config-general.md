@@ -129,7 +129,7 @@ explicitly set enable-os-upgrade to "true".
 If you are using the Local Provider to develop Charms or test, you will want to
 regularly purge the Juju LXC template and LXC host cache to be certain you are
 using fresh images. See
-[Installing and configuring Juju for LXC (Linux)](./config-LXC.html).
+[Installing and configuring Juju for LXC (Linux)](./config-LXC.html#ensuring-a-fresh-cache).
 
 
 ## NUMA
