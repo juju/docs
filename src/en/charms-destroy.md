@@ -1,112 +1,128 @@
 Title: Removing services, units and environments in Juju
 
-# Removal within Juju
 
-Juju isn't just about magically spinning up services as and when you need them,
-it is also about quickly, sanely and efficiently removing something when you no
-longer need it. This section deals with the sort of things you can ruthlessly
-destroy, and how to go about it.
+# Removing services, units and environments
 
-## Removing Services
+Juju can sanely and efficiently removing something when you no longer need it.
+This section looks at how to remove services, units and environments.
 
-Once a service is no longer required it can be removed with a simple command.
+
+## Removing a service
+
+Once a service is no longer required it can be removed with:
 
 ```bash
-juju remove-service <service-name>
+juju destroy-service <service-name>
 ```
 
-**Warning!:** Removing a service which has active relations with another running service will break that relation. This can cause errors in both services, as such review and potentially remove any relationships first.
+**Warning!:** Removing a service which has active relations with another
+running service will break that relation. This can cause errors in both
+services. Make sure you review this aspect and, if required, remove the
+relations first.
 
-A service can take a while to "die", but if running a juju status reveals that
-the service is listed as dying, but also reports an error state, then the
-zombied service will still be hanging around. See caveats for how to manage
-services in a dying state.
+This is the order of events for removing a service:
 
-**Note:** Destroying a service removes that service, but not any nodes which may have been created for it to run on. This is juju's way of preserving data to the best of its ability. See Destroying Machines for additional details.
+1. The Juju client tells the state server that every unit (in this service) is
+to be destroyed.
+1. The state server signals to the service (charm) that it is going to be
+destroyed.
+1. The charm breaks any relations to its service by calling `relationship-broken`
+and `relationship-departed`.
+1. The charm calls its 'stop hook' which **should**:
+    - Stop the service
+    - Remove any files/configuration created during the service lifecycle
+    - Prepare any backup(s) of the service that are required for restore purposes.
+1. The service and all its units are then removed.
 
-## Removing Units
+A service can take a while to "die", but if `juju status` reveals that the
+service is listed as dying, but also reports an error state, then the removed
+service will not go away. See section 'Caveats' below for how to manage services
+stuck in a dying state.
 
-It is also possible to spin down individual units, or a sequence of units
-running within a service:
+**Note:** It is the responsibility of the charm author to implement the above
+'stop hook' logic.
+
+Any associated instances are tagged "dirty" to ensure they will not be reused.
+These can then be removed manually. See section 'Removing Machines' below.
+
+
+## Removing units
+
+It is possible to spin down individual units instead of the entire service:
 
 ```bash
 juju remove-unit mediawiki/1
 ```
 
-If you wish to remove more than one unit, you may list them all following the
-command:
+To remove multiple units:
 
 ```bash
-juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2 ...
+juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2
 ```
 
-**Note:** As with removing a service, removing units will NOT actually remove any instances which were created, it only removes the service units. More details can be found in the [Scaling Services](charms-scaling.html) section.
+**Note:** Like service removal, unit removal will not remove corresponding
+machines/instances. More details can be found in the
+[Scaling Services](./charms-scaling.html) section.
 
-As with removing services, See caveats for how to manage units in a dying state.
+See section 'Caveats' below for how to manage units in a dying state.
 
-## Removing Machines
 
-Instances or machines which have no currently assigned workload can be removed
-from your cloud using the following command:
+## Removing machines
+
+Machines (instances) can be removed like this:
 
 ```bash
-juju remove-machine <number>
+juju destroy-machine <number>
 ```
 
-A machine which is currently idle will be removed almost instantaneously from
-the cloud, along with anything else which may have been on the instance which
-juju was not aware of. To prevent accidents and awkward moments with running
-services, it is not possible to remove an instance which is currently allocated
-to a service. If you try to do so, you will get a polite error message in the
-form:
+However, it is not possible to remove an instance which is currently allocated
+to a service. If attempted, this message will be emitted:
 
 ```no-highlight
 error: no machines were destroyed: machine 3 has unit "mysql/0" assigned
 ```
 
-## Destroying Environments
 
-To completely remove and terminate all running services, the instances they were
-running on and the bootstrap node itself, you need to run the command:
+## Destroying the environment
+
+Destroying the environment means to remove all running services, their
+associated instances and the bootstrap node itself:
 
 ```bash
 juju destroy-environment <environment>
 ```
 
-This will completely remove all instances running under the current environment
-profile. As there is no 'undo' capability, some further safety precautions have
-been added to this command.
+**Note:** The '-e' switch is deprecated. The environment should be specified as
+above (positional argument).
 
-- You will be prompted to confirm the destruction of the environment
+Due to the gravity of this action, you will be prompted for a confirmation.
 
-## Removing Relations
 
-To remove relations between deployed services, you should see [ the docs section on charm relationships](charms-relations.html#removing).
+## Removing relations
+
+To remove relations between deployed services, see
+[Charm relations](charms-relations.html#removing).
+
 
 ## Caveats
 
-These are caveats which you may encounter while trying to remove items within
-Juju
+These are caveats which you may encounter while removing items.
 
-### life: dying
+### state of *life: dying*
 
-If you have a unit or serving in a dying state that has not gone away check to
-see if that unit, or any units within the service, are in an error state. Since
-Juju is an event driven orchestration client, the "removal" of a unit and
-service is also modeled as an event within Juju. As such, when a unit enters an
-error state all other events within that unit's lifecycle are queued. To clear
-this run
+If you have a unit or service that persists in a dying state check to see if
+that unit, or any units within the associated service, are in an error state. A
+"removal" is an event within the queue of a unit's lifecycle so when a unit
+enters an error state all events within the queue are blocked. To unblock the
+unit's error you need to resolve it. Do so like this:
 
 ```bash
 juju resolved <unit>
 ```
 
-to have the next event processed. You may need to run the `resolved` command run
-several times against a unit.
+The above command may need to be repeated to resolve other errors on the unit.
 
-If the unit isn't in an error state, there may be an error elsewhere in the
-environment. Since removing a unit or destroying a service also breaks the
-relation, if there's an error in the relation-removal event on one or more of
-the connected services that may also halt the event loop for that unit. Check to
-make sure no other units are in an error state and clear those using the
-`juju resolved` command.
+There may be errors on other units caused by the breaking of relations that
+occur when removing a unit or service. Therefore also verify that the
+associated units are not in an error state and apply the above command to them
+if they are.
