@@ -247,7 +247,7 @@ juju expose vanilla
 ```
 
 
-[writing]: ./authors-charm-composing.html
+[writing]: ./authors-charm-writing.html
 [charm-helpers]: https://pypi.python.org/pypi/charmhelpers/
 [Vanilla forum software]: http://vanillaforums.org/
 [Charm Tools]: ./tools-charm-tools.html
