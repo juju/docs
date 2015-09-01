@@ -6,34 +6,33 @@ Topic: Management tasks; Miscellaneous
 ## Manage access with authorised SSH keys
 
 Juju's SSH key management allows people other than the person who bootstrapped
-an environment to ssh into Juju machines. The `authorised-keys` command accepts
-four subcommands:
+an environment to ssh into Juju machines. This is achieved with the
+`juju authorised-keys` command.
 
-- add -- add ssh keys for a Juju user
-- delete -- delete ssh keys for a Juju user
-- list -- list ssh keys for a Juju user
-- import -- import Launchpad or Github ssh keys
+For syntax use `juju authorised-keys --help` or `juju authorised-keys
+<sub-command> --help` or see the
+[command reference page](./commands.html#user).
 
-`import` can be used in clouds with open networks to pull SSH keys from
-Launchpad or Github. For example:
+Import a public SSH key from Launchpad (or Github):
 
 ```bash
-juju authorised-keys import lp:wallyworld
+juju authorised-keys import lp:some_launchpad_user
 ```
 
-`add` can be used to import the provided key, which is necessary for clouds that
-do not have internet access.
+You can use `add` to bring in a local key if the environment does not have
+internet access. You will need to paste the key on the command line (or use
+something like `$(cat key_file)`).
 
 Use the key fingerprint or comment to specify which key to `delete`. You can
 find the fingerprint for a key using `ssh-keygen`.
 
-When Juju adds a key to a machine, the string "Juju:" will be prefixed to the
-key's comment. Juju cannot manage, in particular `list` or `delete`, any other
-keys, such as those that may exist on manually provisioned machines.
+When Juju adds/imports a key, the string "Juju:" will be prefixed to the key's
+comment. Juju can only manage (`list` or `delete`) keys that it has
+added/imported.
 
-Keys are global and grant access to all machines. When a key is added, it is
-propagated to all machines in the environment. Similarly, when a key is deleted,
-it is removed from all machines.
+Keys grant access to all machines. When a key is added, it is propagated to all
+machines in the environment, even those created prior to the addition of the
+key. When a key is deleted, it is removed from all machines.
 
 
 ## Configure Proxy Access
@@ -103,4 +102,10 @@ example, to discover the name of user created during the bootstrap stage, type:
 
 ```bash
 juju api-info user
+```
+
+Recall that you can specify the environment:
+
+```bash
+juju api-info user -e local-env
 ```
