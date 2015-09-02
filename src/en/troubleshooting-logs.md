@@ -1,11 +1,76 @@
-Title: Troubleshooting with debug-log
+Title: Juju | Viewing logs
 
 
-# Troubleshooting with debug-log
+# Viewing logs
 
-When problems arise the first step in determining the cause is to look at the
-logs. The `debug-log` command shows the consolidate logs of all Juju agents
-running on all machines in the environment.
+Logs can be inspected via the traditional method of reading log files directly
+on the filesystem. The administrator can also view logs via the `juju
+debug-log` command. Both methods are described below.
+
+See [Juju high availability](./juju-ha.html#ha-and-logging) when viewing logs
+in an HA context.
+
+
+## Log files
+
+The log files are located on the state server under `/var/log/juju*`. The exact
+directory name depends on the type of environment in use. Below is listed the
+contents of the `/var/log/juju-ubuntu-lxc` directory where the Local Provider
+(LXC) is in use:
+
+```no-highlight
+-rw------- 1 syslog adm    34K Sep  2 00:49 all-machines.log
+-rw------- 1 syslog syslog 883 Sep  2 00:49 ca-cert.pem
+-rw------- 1 syslog syslog 600 Sep  2 00:49 logrotate.conf
+-rwx------ 1 syslog syslog 105 Sep  2 00:49 logrotate.run
+-rw------- 1 syslog syslog 32K Sep  2 00:49 machine-0.log
+-rw------- 1 syslog syslog 928 Sep  2 00:49 rsyslog-cert.pem
+-rw------- 1 syslog syslog 891 Sep  2 00:49 rsyslog-key.pem
+```
+
+The file `machine-0.log` is the log for machine '0' which is always the state
+server (bootstrap node).
+
+The file `all-machines.log` is the log for all the machines/instances in this
+particular environment.
+
+Adding an instance (issuing `juju add-machine`) gives us:
+
+```no-highlight
+-rw------- 1 syslog adm     34K Sep  2 00:49 all-machines.log
+-rw-r--r-- 1 root   root    883 Sep  2 00:54 ca-cert.pem
+-rw------- 1 syslog syslog  600 Sep  2 00:49 logrotate.conf
+-rwx------ 1 syslog syslog  105 Sep  2 00:49 logrotate.run
+-rw------- 1 syslog syslog  32K Sep  2 00:49 machine-0.log
+-rw------- 1 syslog syslog 3.4K Sep  2 00:54 machine-1.log
+-rw------- 1 syslog syslog  928 Sep  2 00:49 rsyslog-cert.pem
+-rw------- 1 syslog syslog  891 Sep  2 00:49 rsyslog-key.pem
+```
+
+Where `machine-1.log` is the log file for the new machine.
+
+There are also log files for [service units](./glossary.html). For instance, if
+MySQL is deployed (`juju deploy mysql`) a log file will appear for the machine
+that is spawned (`machine-2.log`) in addition to the file for the unit itself
+(`unit-mysql-0.log`):
+
+```no-highlight
+-rw------- 1 syslog adm     63K Sep  2 00:58 all-machines.log
+-rw-r--r-- 1 root   root    883 Sep  2 00:57 ca-cert.pem
+-rw------- 1 syslog syslog  600 Sep  2 00:49 logrotate.conf
+-rwx------ 1 syslog syslog  105 Sep  2 00:49 logrotate.run
+-rw------- 1 syslog syslog  32K Sep  2 00:49 machine-0.log
+-rw------- 1 syslog syslog 3.4K Sep  2 00:54 machine-1.log
+-rw------- 1 syslog syslog 3.3K Sep  2 00:57 machine-2.log
+-rw------- 1 syslog syslog  928 Sep  2 00:49 rsyslog-cert.pem
+-rw------- 1 syslog syslog  891 Sep  2 00:49 rsyslog-key.pem
+-rw------- 1 syslog syslog  22K Sep  2 00:58 unit-mysql-0.log
+```
+
+## The debug-log command
+
+The `debug-log` command shows the consolidate logs of all Juju agents (machine
+and unit logs) running in the environment.
 
 The output is a fixed number of existing log lines (number specified by
 possible options; the default is 10) and a stream of newly appended messages.
@@ -19,8 +84,6 @@ For complete syntax, see the [command reference page](./commands.html).
 You can also learn more by running `juju debug-log --help` and `juju help 
 logging`.
 
-See [Juju High Availability](./juju-ha.html#ha-and-logging) when viewing logs
-in an HA context.
 
 
 ## Examples:

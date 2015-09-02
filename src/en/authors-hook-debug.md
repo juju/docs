@@ -111,7 +111,7 @@ run yet, and retrying them later).
 
 Logs are indispensable when it comes time to troubleshoot. View the logs with
 the `debug-log` command. See
-[Troubleshooting with debug-log](./troubleshooting-debug-log.html).
+[Viewing logs](./troubleshooting-logs.html#the-debug-log-command).
 
 
 # What on earth is tmux?
