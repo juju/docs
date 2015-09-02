@@ -1,5 +1,6 @@
 Title: Writing your first Juju charm
 
+
 # Your first charm starts here!
 
 Okay, so you have read up all the background info on what a charm is, how it
@@ -437,7 +438,7 @@ juju debug-log
 This starts a process to tail the Juju log file and show us just exactly what is
 happening. It won't do much to begin with, but you should see messages appearing
 when we start to deploy our charm. See 
-[Troubleshooting with debug-log](./troubleshooting-debug-log.html) for more details.
+[Viewing logs](./troubleshooting-logs.html#the-debug-log-command) for more details.
 
 Following our own recipe, in another terminal we should now do the following
 (assuming you already have a bootstrapped environment):
