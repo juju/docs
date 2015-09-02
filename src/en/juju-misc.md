@@ -23,11 +23,15 @@ You can use `add` to bring in a local key if the environment does not have
 internet access. You will need to paste the key on the command line (or use
 something like `$(cat key_file)`).
 
-Use the key fingerprint or comment to specify which key to `delete`. You can
-find the fingerprint for a key using `ssh-keygen`.
+Use the key fingerprint or comment to specify which key to `delete`. The
+fingerprint can be found with:
+
+```bash
+ssh-keygen -l -f <public or private key file>
+```
 
 When Juju adds/imports a key, the string "Juju:" will be prefixed to the key's
-comment. Juju can only manage (`list` or `delete`) keys that it has
+comment. Juju can only manage (`list` or `delete`) the keys which it has
 added/imported.
 
 Keys grant access to all machines. When a key is added, it is propagated to all
