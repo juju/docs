@@ -90,6 +90,13 @@ to preface all your other hooks with a quick call to your (idempotent)
 should be used to ensure that the charm's software is not running, and will not
 start again on reboot.
 
+This hook is called when a service removal is requested by the client. It should
+implement the following logic:
+
+- Stop the service
+- Remove any files/configuration created during the service lifecycle
+- Prepare any backup(s) of the service that are required for restore purposes.
+
 ## Relation hooks
 
 Units will only participate in relations after they're been started, and before
