@@ -11,6 +11,11 @@ a new OpenStack or MAAS setup. It is also useful as a means of deploying
 workloads to VPS providers and other cheap hosting options. We will describe in
 this section how to configure an environment using this feature.
 
+**Note:** Since adding machines is a manual step, using the manual provider doesn't
+have the "instant elasticity" benefits of using a proper provider; if you're
+an IaaS provider and want to help us natively support you,
+[please contact us](https://jujucharms.com/community).
+
 ## Prerequisites
 
 Manual provisioning enables you to run Juju on systems that have a supported
@@ -123,7 +128,3 @@ additional things to consider:
 - It is possible to manually provision machines into non-manual provider
   environments, however the machine must be placed on the same private subnet
   as the other machines in the environment.
-- Since adding machines is a manual step, using the manual provider doesn't
-  have the "instant elasticity" benefits of using a proper provider; if you're
-  an IaaS provider and want to help us natively support you,
-  [please contact us](https://jujucharms.com/community).
