@@ -132,27 +132,10 @@ manually reclaimed through the cloud provider's tools.
 
 When creating a Juju system that is going to be used by more than one person,
 it is good practice to create users for each individual that will be accessing
-the environments.
+the environments. See
+[Managing multi-user environments](./juju-multiuser-environments.html) for
+a detailed treatment on this topic.
 
-Users are managed within the Juju system using the 'juju user' command. This
-allows the creation, listing, and disabling of users. When a juju system is
-initially bootstrapped, there is only one user.  Additional users are created
-as follows:
-
-```bash
-$ juju user add bob "Bob Brown"
-user "Bob Brown (bob)" added
-server file written to /current/working/directory/bob.server
-```
-
-This command will create a local file "bob.server". The name of the file is
-customisable using the --output option on the command. This 'server file'
-should then be sent to Bob. Bob can then use this file to login to the Juju
-system.
-
-The server file contains everything that Juju needs to connect to the API
-server of the Juju system. It has the network address, server certificate,
-username and a randomly generated password.
 
 ## Logging in to someone else's system
 

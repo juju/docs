@@ -42,6 +42,7 @@
                   <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
                     <ul class="sub">
                       <li><a href="juju-ha.html">Juju high availability</a></li>
+                      <li><a href="juju-multiuser-environments.html">Multi-user environments</a></li>
                       <li><a href="juju-systemd.html">Juju and systemd</a></li>
                       <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                       <li><a href="juju-backup-restore.html">Backup and restore</a></li>
