@@ -39,6 +39,8 @@
                   </li>
                   <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
                     <ul class="sub">
+                      <li><a href="juju-ha.html">Juju high availability</a></li>
+                      <li><a href="juju-multiuser-environments.html">Multi-user environments</a></li>
                       <li><a href="juju-systemd.html">Juju and systemd</a></li>
                       <li><a href="charms-environments.html">Managing environments</a></li>
                       <li><a href="charms-destroy.html">Destroying Services, Units, and environments</a></li>
