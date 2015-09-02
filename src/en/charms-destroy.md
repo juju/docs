@@ -3,7 +3,7 @@ Title: Removing services, units and environments in Juju
 
 # Removing services, units and environments
 
-Juju can sanely and efficiently removing something when you no longer need it.
+Juju can sanely and efficiently remove something when you no longer need it.
 This section looks at how to remove services, units and environments.
 
 
@@ -12,10 +12,10 @@ This section looks at how to remove services, units and environments.
 Once a service is no longer required it can be removed with:
 
 ```bash
-juju destroy-service <service-name>
+juju remove-service <service-name>
 ```
 
-**Warning!:** Removing a service which has active relations with another
+!!! Warning: Removing a service which has active relations with another
 running service will break that relation. This can cause errors in both
 services. Make sure you review this aspect and, if required, remove the
 relations first.
@@ -36,14 +36,14 @@ and `relationship-departed`.
 
 A service can take a while to "die", but if `juju status` reveals that the
 service is listed as dying, but also reports an error state, then the removed
-service will not go away. See section 'Caveats' below for how to manage services
+service will not go away. See the 'Caveats' section below for how to manage services
 stuck in a dying state.
 
-**Note:** It is the responsibility of the charm author to implement the above
+!!! Note: It is the responsibility of the charm author to implement the above
 'stop hook' logic.
 
 Any associated instances are tagged "dirty" to ensure they will not be reused.
-These can then be removed manually. See section 'Removing Machines' below.
+These can then be removed manually. See the 'Removing Machines' section below.
 
 
 ## Removing units
@@ -72,7 +72,7 @@ See section 'Caveats' below for how to manage units in a dying state.
 Machines (instances) can be removed like this:
 
 ```bash
-juju destroy-machine <number>
+juju remove-machine <number>
 ```
 
 However, it is not possible to remove an instance which is currently allocated
@@ -92,8 +92,8 @@ associated instances and the bootstrap node itself:
 juju destroy-environment <environment>
 ```
 
-**Note:** The '-e' switch is deprecated. The environment should be specified as
-above (positional argument).
+!!! Note: Older versions required the use of the environment switch ('-e') with
+this command. This switch is no longer required for this command.
 
 Due to the gravity of this action, you will be prompted for a confirmation.
 
