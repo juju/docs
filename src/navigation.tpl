@@ -29,6 +29,7 @@
                       <li><a href="charms-relations.html">Service Relations</a></li>
                       <li><a href="charms-exposing.html">Exposing Services</a></li>
                       <li><a href="charms-scaling.html">Scaling Services</a></li>
+                      <li><a href="charms-destroy.html">Removing Services &amp; Units</a></li>
                       <li><a href="charms-service-groups.html">Groups of Services</a></li>
                       <li><a href="charms-ha.html">Charm high availability</a></li>
                       <li><a href="charms-bundles.html">Using bundles</a></li>
@@ -43,8 +44,7 @@
                       <li><a href="juju-multiuser-environments.html">Multi-user environments</a></li>
                       <li><a href="juju-systemd.html">Juju and systemd</a></li>
                       <li><a href="charms-environments.html">Managing environments</a></li>
-                      <li><a href="charms-destroy.html">Destroying Services, Units, and environments</a></li>
-                      <li><a href="juju-ha.html">Juju high availability</a></li>
+                      
                       <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                       <li><a href="juju-backup-restore.html">Backup and restore</a></li>
                       <li><a href="juju-gui-management.html">Using the Juju GUI</a></li>
