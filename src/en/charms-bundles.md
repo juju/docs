@@ -19,7 +19,7 @@ deploying from your computer, which is useful to initially ensure it works and
 for experimenting. After you are satisfied with the bundle, you can push it to
 Launchpad where it will be available to you and others via the Charm Store.
 If you simply want to download some you can 
-[search the store for bundles](https://jujucharms.com/sidebar/search/?text=bundle)
+[search the store for bundles](https://jujucharms.com/q/?type=bundle)
 too.
 
 ### Local import to Juju GUI
