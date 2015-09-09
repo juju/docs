@@ -20,6 +20,8 @@ If you simply want to download some you can
 [search the store for bundles](https://jujucharms.com/q/?type=bundle)
 too.
 
+
+
 ### Local import to Juju GUI
 
 The easiest way to import a bundle into the GUI is by dragging the bundle file
@@ -32,7 +34,11 @@ masthead. After clicking the button you’ll be prompted to select the bundle
 file. Once a file is selected the process is the same as the drag-and-drop
 method.
 
-### Local deploy via command-line
+### Command-line deployment 
+
+#### Deployment from Juju charm store 
+
+The easiest way to use bundle is to deploy it from command line. 
 
 A bundle file can be deployed via the command-line interface by using the `juju
 quickstart` tool.
@@ -43,6 +49,12 @@ running the following command:
 ```bash
 sudo apt-get install juju-quickstart
 ```
+
+E.g this bundle https://jujucharms.com/u/jean-deruelle/mobicents-restcomm-mysql-bundle on top of the page  you will find command line command you can use to deploy this bundle. 
+
+juju quickstart u/jean-deruelle/mobicents-restcomm-mysql-bundle/4 
+
+#### Local deploy
 
 Always perform a "bundle proof" to check for possible errors before using it:
 
