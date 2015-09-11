@@ -121,6 +121,7 @@
                   <li><a href="commands.html">Juju commands</a></li>
                   <li><a href="reference-constraints.html">Juju constraints</a></li>
                   <li><a href="reference-environment-variables.html">Juju environment variables</a></li>
+                  <li><a href="http://godoc.org/github.com/juju/juju/api">Juju API docs</a></li>
                   <li><a href="reference-releases.html">Releases</a></li>
                   <li><a href="reference-release-notes.html">Release notes</a></li>
                   <li><a href="reference-status.html">Status values</a></li>
