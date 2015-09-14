@@ -14,7 +14,7 @@ and thus lighten the development workload on everyone.
 - Follow [these instructions](http://wiki.bazaar.canonical.com/PatchPilot) as well as you can.
 - If this is your first time patch piloting, you may feel more comfortable being a co-pilot your first few runs. Find a pilot in your timezone and reschedule your time to coincide with theirs.
 - Be super thorough, don’t be afraid to be firm with people. However, respect that charms are opinionated - just don’t be afraid to be opinionated yourself.
-- Please use the official [_Charm Store Policy_](policy.html) document.
+- Please use the official [Charm Store Policy](./authors-charm-policy.html) document.
 - Use your best judgement.
 - Send a brief mail after your stint, to say what you did and how it worked out. If you have feedback on the review system or the process, speak up.
 - You're not obliged to deal with all the open patches. We appreciate what you do do.
