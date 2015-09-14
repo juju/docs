@@ -44,7 +44,7 @@
                       <li><a href="juju-multiuser-environments.html">Multi-user environments</a></li>
                       <li><a href="juju-systemd.html">Juju and systemd</a></li>
                       <li><a href="charms-environments.html">Managing environments</a></li>
-                      
+
                       <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                       <li><a href="juju-backup-restore.html">Backup and restore</a></li>
                       <li><a href="juju-gui-management.html">Using the Juju GUI</a></li>
@@ -88,6 +88,7 @@
                       <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
                       <li><a href="authors-testing.html">Charm Testing</a></li>
                       <li><a href="authors-charm-composing.html">Composing a Charm from Layers</a></li>
+                      <li><a href="authors-charm-with-docker.html">Charming with Docker</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="authors-charm-store.html">The Juju Charm Store</a>
