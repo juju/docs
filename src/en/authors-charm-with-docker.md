@@ -156,7 +156,6 @@ boolean logic to run when the state or combination of states is correct. States
 may be useful to other layers so it is very important to document in the
 `README.md` what states are set or removed in this layer.
 
-<a name="layer-docker-nginx"></a>
 ## layer-docker-nginx
 The layer-docker-nginx charm adds the [Nginx](http://nginx.org/) HTTP server
 docker image to the layer-docker charm by using `charm compose` and also uses
