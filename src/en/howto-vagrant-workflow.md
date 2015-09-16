@@ -1,10 +1,18 @@
+Title:  Vagrant Juju Workflow on OS X
+
+
 #  Vagrant Juju Workflow on OS X
 
-Running juju on Ubuntu is an extremely straightforward process thanks to the addition of the local provider. OS X does not support virtualization at the operating system level, however. The next best solution is to use a virtualization wrapper like [Vagrant](config-vagrant.html).
+Running Juju on Ubuntu is a straightforward process thanks to the addition of
+the Local Provider. OS X does not support virtualization at the operating
+system level, however. The next best solution is to use a virtualization
+wrapper like [Vagrant](https://www.vagrantup.com).
+
 
 ##  Getting Started
 
-To start you will want to ensure you've got the following tools installed on your development machine:
+Ensure the following software components are installed on your development
+machine:
 
 - [Homebrew](http://brew.sh)
 - [Vagrant](https://www.vagrantup.com)
@@ -12,32 +20,34 @@ To start you will want to ensure you've got the following tools installed on you
 
 ### Preparing to use Vagrant
 
-Head over to the [Juju Vagrant](config-vagrant.html) provider documentation for instructions on downloading and preparing your new virtual machine.
+See [Configuring for Vagrant](./config-vagrant.html) for instructions on
+downloading and preparing your new virtual machine.
+
 
 ## Writing your first charm
 
-
 ###  Preparing our local charm repository
 
-We will need to create a directory structure that reflects the current standard for juju charm repositories.
+We will need to create a directory structure that reflects the current standard
+for Juju charm repositories.
 
 ```bash
 mkdir -p ~/vagrant/charms/trusty
 ```
 
-Feel free to add any other LTS based target directory, for example if you were to target Precise Pangolin as a release for your charm, the command would be:
+Feel free to add any other LTS based target directory, for example if you were
+to target Precise Pangolin as a release for your charm, the command would be:
 
 ```bash
 mkdir -p ~/vagrant/charms/precise
 ```
 
-For the remainder of this tutorial, I will assume we are targeting Trusty, as it's the current LTS target of choice.
+For the remainder of this tutorial Trusty will be used.
 
-###  Installing Charm-Tools
+###  Installing Charm Tools
 
-Now is a good time to fetch Charm Tools. But what are charm tools you ask?
-
-> Charm Tools offer a means for users and charm authors to create, search, fetch, update, and manage charms.
+Charm Tools offer a means for users and charm authors to create, search, fetch,
+update, and manage charms.
 
 These can be installed via homebrew.
 
@@ -47,7 +57,8 @@ brew install charm-tools
 
 ##  Creating our first charm
 
-Lets charm up [GenghisApp](http://genghisapp.com/) - a single file MongoDB administration app.
+Let's write a charm for [GenghisApp](http://genghisapp.com/) - a single file
+MongoDB administration application.
 
 ```bash
 cd charms/trusty
@@ -77,7 +88,7 @@ populate with your services deployment and orchestration logic.
 
 ### Writing the Charm
 
-We'll start by editing the metadata.yaml to populate the information about our
+Begin by editing the metadata.yaml file to populate the information about our
 charm.
 
 ```yaml
@@ -94,7 +105,7 @@ charm.
       interface: http
 ```
 
-Now that juju knows something about our service we're ready to start writing the
+Now that Juju knows something about our service we're ready to start writing the
 hooks.
 
 ####  Install Hook
@@ -150,18 +161,20 @@ vagrant up
 
 ![Vagrant Bootstrap](media/howto-vagrant-workflow-vagrantup.png)
 
-You now have a Juju installation ready to be used for testing your charm on OSX,
-and an instance of Juju-Gui to interface with your services. Validate that the
-GUI is accessible from [http://localhost:6080](http://localhost:6080)
+You now have a Juju installation ready to be used for testing your charm on
+OSX, and an instance of Juju Gui to interface with your services. Validate that
+the GUI is accessible from [http://localhost:6080](http://localhost:6080)
 
-**Note:** The password is output in your console feedback from the juju bootstrap.
+!!! Note: The password is output in your console feedback from the Juju
+bootstrap.
 
-**Note:** All your charms in $HOME/charms are available in the /vagrant directory of our JujuBox
+!!! Note: All your charms in $HOME/charms are available in the /vagrant
+directory of our JujuBox.
 
 
 ### Deploying our charm in vagrant
 
-You'll need to enter the juju environment we just bootstrapped in $HOME/charms
+You'll need to enter the Juju environment we just bootstrapped in $HOME/charms:
 
 ```bash
 vagrant ssh
@@ -169,27 +182,32 @@ juju deploy mongodb
 juju deploy --repository=/vagrant/charms local:trusty/genghisapp
 ```
 
-We are now free to watch progress through the GUI
+Progress can be tracked with the GUI.
 
 ![juju-gui](media/howto-vagrant-workflow-juju-gui-wait.png)
 
-When the Genghis badge turns green, we are ready to vpn our traffic through the vagrant image and interface with the Genghis server
+When the Genghis badge turns green, it is time to tunnel (VPN) traffic through
+the Vagrant image and interface with the Genghis server.
 
 
 ### Routing local traffic to Vagrant
 
-**Note:** If your local network is using 10.0.3.x you will need to alter the Juju networking in the vagrant box, and substitute the network provided in the command above
+!!! Note: If your local network is using 10.0.3.x you will need to alter the
+Juju networking in the Vagrant box, and substitute the network provided in the
+command above.
 
 
 #### Native routing (OS X 10.10 and above)
 
-It is possible to natively route traffic from your local machine to the lxc containers running within the Vagrant virtual machine.
+It is possible to natively route traffic from your local machine to the LXC
+containers running within the Vagrant virtual machine.
 
 ```bash
 sudo route add -net 10.0.3.0/24 172.16.250.15
 ```
 
-This will only work until your next reboot. Instead, there is a way to create the route when you `up` your vagrant image and tear it down when you `halt`:
+This will only work until your next reboot. Instead, there is a way to create
+the route when you `up` your Vagrant image and tear it down when you `halt`:
 
 Install the [vagrant-triggers](https://github.com/emyl/vagrant-triggers) plugin:
 
@@ -209,12 +227,17 @@ config.trigger.after [:halt, :destroy] do
 end
 ```
 
-Now, when you `up` and `halt` your Vagrant box, the route will be handled for you.
+Now, when you `up` and `halt` your Vagrant box, the route will be handled for
+you.
 
 
 #### Using sshuttle (OS X 10.9 and below)
 
-sshuttle creates a transparent proxy server on your local machine that allows you to connect directly to the lxc containers running within the Vagrant virtual machine. This process disassembles the TCP stream locally, multiplexes it statefully over the ssh session, and reassembles the packets on the other end of the tunnel.
+sshuttle creates a transparent proxy server on your local machine that allows
+you to connect directly to the LXC containers running within the Vagrant
+virtual machine. This process disassembles the TCP stream locally, multiplexes
+it statefully over the ssh session, and reassembles the packets on the other
+end of the tunnel.
 
 Ensure that you have sshuttle installed
 
@@ -223,16 +246,20 @@ brew install sshuttle
 sshuttle -r vagrant@localhost:2222 10.0.3.0/24
 ```
 
-**Note:** You can skip the brew install line if you already have sshuttle installed
+!!! Note: You can skip the brew install line if you already have sshuttle
+installed
 
-**Note:** sshuttle does not work under OS X 10.10 (Yosemite) due to the deprecation of ipfw in favor of pf.
+!!! Note: sshuttle does not work under OS X 10.10 (Yosemite) due to the
+deprecation of ipfw in favor of pf.
 
 When prompted for the password enter `vagrant`.
 
 
 ## Connecting to your application
 
-Now we are free to connect to genghis. Open up the Genghis running unit list and click on the Genghis host, then click on the port 80 link in the service detail.
+Now we are free to connect to Genghis. Open up the Genghis running unit list
+and click on the Genghis host, then click on the port 80 link in the service
+detail.
 
 ![](media/howto-vagrant-workflow-juju-gui-wait.png)
 
@@ -241,17 +268,23 @@ Now we are free to connect to genghis. Open up the Genghis running unit list and
 
 ##  Iterating
 
-With vagrant fully setup, our charm deployed. We can now iterate over our charm and update/test via normal means.
+With Vagrant fully set up and our charm deployed, we can iterate over our charm
+and update/test via normal means.
 
-- Make edits on your HOST in your favorite editor, such as [TextMate](http://macromates.com/), [Atom](https://atom.io/), or [Brackets](http://brackets.io/).
-- run commands inside the JujuBox vagrant environment. `juju upgrade-charm genghisapp`
-- view results in your HOST browser of choice.
+- Make edits on your HOST in your favorite editor, such as
+  [TextMate](http://macromates.com/), [Atom](https://atom.io/), or
+  [Brackets](http://brackets.io/).
+- Run commands inside the JujuBox vagrant environment. `juju upgrade-charm
+  genghisapp`
+- View results in your HOST browser of choice.
 
 
 ## Next steps
 
-Installing juju, for deploying to non-local environments
+Installing Juju, for deploying to non-local environments
+
 
 ## Reporting issues with the Vagrant Image
 
-If you encounter any issues with the vagrant images, please [file a bug report](https://bugs.launchpad.net/juju-vagrant-images).
+If you encounter any issues with the Vagrant images, please
+[file a bug report](https://bugs.launchpad.net/juju-vagrant-images).
