@@ -369,8 +369,8 @@ machines:
 
 ```
 
-Performing a backup on this environment, will be based on the first state-server
-machine (0):
+Performing a backup on this environment, will be based on the first state-server,
+_machine 0_:
 
 ```bash
 juju backups create
