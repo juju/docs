@@ -28,6 +28,9 @@ sudo apt-get update
 sudo apt-get install juju-core
 ```
 
+For more installation information and what versions are available, see
+[the releases page](reference-releases.html).
+ 
 ## Terminology - the software running in a Juju environment
 
 Several terms are in circulation that are used to denote the environment software:
@@ -47,10 +50,10 @@ Overview:
 - The server software is a single binary (`jujud`) that runs on every Juju
   machine and for every Juju unit. This typically results in multiple binaries
   per machine. Support for a single binary is in development.
-- The upgrade is initiated via the `upgrade-juju` command.
+- The upgrade is initiated via the `upgrade-juju` command, discussed below.
 - In the advent that the state server is without internet access, the client
   will first supply the software to the state server's cache via the
-  `sync-tools` command.
+  `sync-tools` command, discussed below.
 - During the upgrade invocation, an algorithm will be used that will select a
   version to upgrade to if a version (`--version`) is not specified.
 - Juju machines request the determined/requested software version from the
