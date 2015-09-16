@@ -10,10 +10,12 @@ At the highest level, a Juju topology can be divided into two main parts:
 
 The software at each of the above are managed differently.
 
-The client software is managed by the OS package management system whereas the
-software running in an environment, including the state server (bootstrap
-node), is managed by Juju itself. This section is primarily devoted to
-describing the procedure for upgrading this environment software.
+The software for the client, which is responsible for administring all Juju
+services in every environment, is managed by the OS package management system.
+The software for the environment, which consists of the state server (bootstrap
+node) and Juju machines/services, is managed by Juju itself. This section is
+primarily devoted to describing the procedure for upgrading this environment
+software.
 
 
 ## Upgrading the client software
@@ -26,7 +28,7 @@ sudo apt-get update
 sudo apt-get install juju-core
 ```
 
-## Terminology - environment software
+## Terminology - the software running in a Juju environment
 
 Several terms are in circulation that are used to denote the environment software:
 
@@ -46,9 +48,9 @@ Overview:
   machine and for every Juju unit. This typically results in multiple binaries
   per machine. Support for a single binary is in development.
 - The upgrade is initiated via the `upgrade-juju` command.
-- In the advent that the state server is without internet, the client will
-  first supply the software to the state server's cache via the `sync-tools`
-  command.
+- In the advent that the state server is without internet access, the client
+  will first supply the software to the state server's cache via the
+  `sync-tools` command.
 - During the upgrade invocation, an algorithm will be used that will select a
   version to upgrade to if a version (`--version`) is not specified.
 - Juju machines request the determined/requested software version from the
@@ -136,7 +138,8 @@ state server:
 juju sync-tools --version 1.23 --debug
 ```
 
-!!! Note: the `sync-tools --version` command only accepts `major[.minor]`.
+!!! Note: the `sync-tools --version` command only accepts `major[.minor]`
+("e.g. use '1.24' not '1.24.5').
 
 For complete syntax, see the [command reference page](./commands.html#sync-tools)
 or by running `juju help sync-tools`.

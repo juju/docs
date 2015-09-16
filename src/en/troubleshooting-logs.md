@@ -1,4 +1,4 @@
-Title: Juju | Viewing logs
+Title: Viewing logs
 
 
 # Viewing logs
@@ -76,6 +76,8 @@ agents:
 ```bash
 juju ssh 2 'ls -lh /var/lib/juju/agents'
 ```
+
+This will provide output similar to:
 
 ```no-highlight
 drwxr-xr-x 2 root root 4.0K Sep  2 02:17 machine-2

@@ -22,16 +22,25 @@ the daemon. For example, for machine #2:
 juju ssh 2 'ls -lh /etc/init/juju*'
 ```
 
+This will return something similar to:
+
 ```no-highlight
 -rw-r--r-- 1 root root 506 Sep  2 00:57 /etc/init/jujud-machine-2.conf
 -rw-r--r-- 1 root root 533 Sep  2 00:57 /etc/init/jujud-unit-mysql-0.conf
 ```
 
-Therefore, if the agent for machine #2 is not coming up:
+Therefore, if the agent for machine #2 is not coming up you can connect to the
+machine:
 
 ```bash
 juju ssh 2
-<modify/restore /var/lib/juju/agents/machine-2/agent.conf>
+```
+
+Modify or restore the agent file
+(`/var/lib/juju/agents/machine-2/agent.conf`), and while still connected to the
+machine, restart the agent:
+
+```bash
 sudo service jujud-machine-2 restart
 ```
 
