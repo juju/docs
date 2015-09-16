@@ -138,6 +138,8 @@ set of subcommands:
 
 ### juju backups list    
 
+usage: `juju backups list [--brief]`
+
 The `list` subcommand will display all the backups currently available on the 
 state server. There are two options for the output:
 
@@ -272,6 +274,8 @@ juju backups help <command>
 ```
 
 ### Restoring from a backup
+
+usage: `juju backups restore --id=<ID> | --file=<filname> [-b] [--constraints=<string>]`
 
 If the state server for the environment is still operational it can be restored
 from one of the stored backups by specifying the ID:
