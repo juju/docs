@@ -1,4 +1,4 @@
-Title: Juju | Viewing logs
+Title: Viewing logs
 
 
 # Viewing logs
@@ -66,6 +66,39 @@ that is spawned (`machine-2.log`) in addition to the file for the unit itself
 -rw------- 1 syslog syslog  891 Sep  2 00:49 rsyslog-key.pem
 -rw------- 1 syslog syslog  22K Sep  2 00:58 unit-mysql-0.log
 ```
+
+### Logging agents
+
+The entity doing the logging is the *Juju agent*, `jujud`, which runs for each
+Juju machine and unit. For instance, for machine #2, we see evidence of the two
+agents:
+
+```bash
+juju ssh 2 'ls -lh /var/lib/juju/agents'
+```
+
+This will provide output similar to:
+
+```no-highlight
+drwxr-xr-x 2 root root 4.0K Sep  2 02:17 machine-2
+drwxr-xr-x 4 root root 4.0K Sep  2 02:17 unit-mysql-0
+```
+
+The contents of one of these directories
+
+```bash
+juju ssh 2 'ls -lh /var/lib/juju/agents/machine-2'
+```
+reveals the agent's configuration file:
+
+```no-highlight
+-rw------- 1 root root 1.4K Sep  2 02:17 agent.conf
+```
+
+Consider keeping backups of these files, especially prior to upgrading the
+environment. See
+[Upgrading Juju software](./juju-upgrade.html#upgrading-the-server-software).
+
 
 ## The debug-log command
 
