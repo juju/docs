@@ -1,4 +1,7 @@
-# Using Juju with Vagrant
+Title: Configuring for Vagrant
+
+
+# Configuring for Vagrant
 
 The Juju Vagrant images are a way of extending the portability and ease of use
 of LXC containers to other platforms. The initial image is based on the Ubuntu
