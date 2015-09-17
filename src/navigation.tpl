@@ -105,9 +105,7 @@
               <li class="section"><h4 class="header toggle-target">Experimental</h4>
                 <ul>
                   <li><a href="wip-centos.html">CentOS support</a></li>
-                  <li><a href="wip-numbering.html">Machine/unit numbering</a></li>
-                  <li><a href="wip-systems.html">Juju Environment System (DRAFT)</a></li>
-                  <li><a href="wip-users.html">Managing Users (DRAFT)</a></li>
+
                 </ul>
               </li>
               <li class="section"><h4 class="header toggle-target">Tools</h4>
