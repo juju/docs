@@ -193,6 +193,10 @@ results:
   outcome: success
 status: completed
 ```
+Note that there are some restrictions on the names you can give to action 
+keys: they must start and end with lowercase alphanumeric characters, and only 
+contain lowercase alphanumeric characters, the hyphen "-" or full stop"."
+characters.
 
 #### action-fail
 
