@@ -20,7 +20,7 @@ Now install the local provider and the KVM/libvirt software, including helper
 tools:
 
 ```bash
-sudo apt-get install juju-local qemu-kvm libvirt-bin bridge-utils virt-manager qemu-system uvtool-libvivrt uvtool
+sudo apt-get install juju-local qemu-kvm libvirt-bin bridge-utils virt-manager qemu-system uvtool-libvirt uvtool
 ```
 
 
