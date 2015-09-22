@@ -45,7 +45,7 @@
                       <li><a href="juju-systemd.html">Juju and systemd</a></li>
                       <li><a href="charms-environments.html">Managing environments</a></li>
                       <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
-                      <li><a href="juju-backup-restore.html">Backup and restore</a></li>
+                      <li><a href="juju-backups.html">Backup and restore</a></li>
                       <li><a href="juju-upgrade.html">Upgrading Juju</a></li>
                       <li><a href="juju-gui-management.html">Using the Juju GUI</a></li>
                       <li><a href="juju-offline-charms.html">Deploy charms offline</a></li>
