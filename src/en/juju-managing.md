@@ -3,13 +3,9 @@ Title: Managing Juju
 
 # Managing Juju
 
-This section contains guidelines for managing Juju. 
+Distinct from deploying and managing Juju Charms, there are many Juju commands 
+which deal with the management of Juju itself, covering actions from disabling
+certain commands, enabling high availability for the Juju state server.
 
-- [Juju high availability](./juju-ha.html)
-- [Juju and systemd](./juju-systemd.html)
-- [Restrict/block Juju commands](./juju-block.html)
-- [Backup and restore](./juju-backup-restore.html)
-- [Using the Juju GUI](./juju-gui-management.html)
-- [Juju and proxies](./juju-proxies.html)
-- [Deploy charms offline](./juju-offline-charms.html)
-- [Authorised keys](./juju-authorised-keys.html)
+These topics are covered in the pages listed under this topic in the navigation 
+menu on the left.
