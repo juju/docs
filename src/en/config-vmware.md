@@ -1,4 +1,3 @@
-
 Title: Configuring Juju for use with vSphere
 
 # Configuring the VMWare (vSphere) Provider
@@ -37,6 +36,7 @@ vsphere:
 
 The values indicated by angle brackets (`<` and `>`) need to be replaced, (e.g `user: vmuser`)
 with your vSphere information. 
+
   - `host` must contain the IP address or DNS name of vSphere API endpoint. 
   - `user` and `password` are fields that must contain your vSphere user credentials 
   - `datacenter` field must contain the name of your vSphere virtual datacenter. 
