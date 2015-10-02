@@ -70,8 +70,7 @@ to install and upgrade docker. Freeing you to focus on delivering your applicati
 layer and focus on how to do that.
 
 ## A guided example
-The [Charming with Reactive and Docker](#)
-section does a great job of illustrating the workflow. The resulting charm will
+In the first section we illustratated the workflow. The resulting charm will
 be a simple method to serve static content with NGinx, including a relation to
 a load balancer charm.
 
