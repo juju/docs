@@ -106,6 +106,7 @@
                 <ul>
                   <li><a href="wip-centos.html">CentOS support</a></li>
                   <li><a href="wip-numbering.html">Machine/unit numbering</a></li>
+                  <li><a href="wip-charm-leadership.html">Charm leadership</a></li>
                   <li><a href="wip-systems.html">Juju Environment System (DRAFT)</a></li>
                   <li><a href="wip-users.html">Managing Users (DRAFT)</a></li>
                 </ul>
