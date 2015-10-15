@@ -40,7 +40,7 @@ Windows
 
 ## Proposed
 
-Current proposed version is 1.24.6, which became stable.
+Current proposed version is 1.24.7.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
@@ -55,15 +55,15 @@ sudo apt-get install juju-core</pre>
 {: .instruction }
 
 Centos
-: [juju-1.24.5-centos7.tar.gz](https://launchpad.net/juju-core/1.24/1.24.6/+download/juju-1.24.6-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/1.24/1.24.6/+download/juju-1.24.6-centos7.tar.gz/+md5))
+: [juju-1.24.7-centos7.tar.gz](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-1.24.7-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-1.24.7-centos7.tar.gz/+md5))
 {: .instruction }
 
 OS X
-: [juju-1.24.5-osx.tar.gz](https://launchpad.net/juju-core/1.24/1.24.6/+download/juju-1.24.6-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.24/1.24.6/+download/juju-1.24.6-osx.tar.gz/+md5))
+: [juju-1.24.7-osx.tar.gz](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-1.24.7-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-1.24.7-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.24.5-signed.exe](https://launchpad.net/juju-core/1.24/1.24.6/+download/juju-setup-1.24.6.exe) ([md5](https://launchpad.net/juju-core/1.24/1.24.6/+download/juju-setup-1.24.6.exe/+md5))
+: [juju-setup-1.24.7-signed.exe](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-setup-1.24.7.exe) ([md5](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-setup-1.24.7.exe/+md5))
 {: .instruction }
 
 Proposed releases use the 'proposed' simple-streams. You must configure
