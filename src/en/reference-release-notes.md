@@ -7,6 +7,88 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.24.7
+
+  A new stable release of Juju, juju-core 1.24.7, is now available.
+  This release replaces version 1.24.6.
+
+
+  ## Getting Juju
+
+  juju-core 1.24.7 is available for Wily and backported to earlier
+  series in the following PPA:
+
+     https://launchpad.net/~juju/+archive/stable
+
+  Windows, Centos7, and OS X users will find installers at:
+
+     https://launchpad.net/juju-core/+milestone/1.24.7
+
+
+  ## Notable Changes
+
+  ### The default EC2 instance is m3.medium
+
+  AWS deprecated the m1.* instance type. Juju now uses the m3.medium as
+  the default instance type when provisioning machines in EC2.
+
+   * m1.* instances will only be selected when specified using the
+     "instance-type" constraint.
+
+   * When no constraints are specified, the m3.medium type will be selected.
+
+   * When constraints are specified, m1 instance types which satisfy
+     the constraints will be ignored.
+
+
+  ### Use the "storage" feature flag to try charms that support storage.
+
+  Storage was classified as experimental in 1.24, and has been found to be
+  problematic. Since storage is used implicitly by charms with default
+  stores, the feature was placed behind a feature flag. You can test
+  charms that support storage by bootstrapping a new environment with
+  "storage" enabled like so:
+
+     JUJU_DEV_FEATURE_FLAG=storage juju bootstrap
+
+
+  ## Resolved issues
+
+   * Maas provider with maas 1.9 - /etc/network/interfaces "auto eth0"
+     gets removed and bridge is not setup
+     Lp 1494476
+
+   * Switch default instance type from m1.small to t2.small/m3.medium
+     for ec2 provider
+     Lp 1373516
+
+   * Destroy-environment reports warning cannot delete security group
+     Lp 1335885
+
+   * Storage should be behind a feature flag in 1.24
+     Lp 1503740
+
+   * Configstore should break fslock if time > few seconds
+     Lp 1500613
+
+   * Config-changed error does not cause error state
+     Lp 1494542
+
+   * Setapihostports shouldn't record just one address per api server
+     Lp 1497094
+
+   * Failed worker can result in large number of goroutines and open
+     socket connections and eventually gets picked on by the oom killer
+     Lp 1496750
+
+   * Upgrade in progress reported, but panic happening behind scenes
+     Lp 1493123
+
+   * juju occasionally switches a units public-address if an additional
+     interface is added post-deployment
+     Lp 1435283
+
+
 ^# juju-core 1.24.6
 
   A new stable release of Juju, juju-core 1.24.6, is now available.
