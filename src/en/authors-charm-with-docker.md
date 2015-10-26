@@ -16,7 +16,7 @@ of Juju software on <https://jujucharms.com>.  This document will detail some of
 the higher level [concepts of Juju](https://jujucharms.com/docs/stable/glossary).
 
 
-### Reactive and composing charms
+### Reactive and layered charms
 
 #### Reactive
 
@@ -29,11 +29,11 @@ execution is controlled by boolean logic. You can define when the conditions
 are right, run this code, or when something is not set, run different code or
 do nothing at all.
 
-#### Composition
+#### Layers
 
-The idea of composition is to combine objects or data into more complex objects
-or data. When applied to Charms, composition allows you to extend or build off
-other charms to make more complex or useful charms.  The `compose.yaml` file in
+The idea of charm layers is to combine objects or data into more complex objects
+or data. When applied to Charms, layers allow you to extend or build off
+other charms to make more complex or useful charms.  The `layers.yaml` file in
 the root directory of the charm controls what layer(s) will be imported.
 
 #### Reactive Charms
@@ -43,10 +43,10 @@ The docker charm makes use of the
 The code for the docker layer can be found in the `reactive/` folder in the
 root charm directory.
 
-#### Composing Charms
+#### Building Charms
 
 The docker layer makes use of the
-[Charm Composition](https://jujucharms.com/docs/master/authors-charm-composing)
+[Charm Layers](https://jujucharms.com/docs/master/authors-charm-building)
 concept building off the base charm and creating its own layer of added
 functionality,
 
@@ -61,11 +61,11 @@ such as `docker.available`, and forthcoming support for the plugins that Docker
 is growing. This charm is designed to be a base for other docker based charms.
 
 This can be achieved by creating a new charm directory, and placing the following
-directives in your `composer.yaml`
+directives in your `layers.yaml`
 
     includes: ['layer:docker']
 
-When you run `charm compose` the resulting charm will contain all of the logic
+When you run `charm build` the resulting charm will contain all of the logic
 to install and upgrade docker. Freeing you to focus on delivering your application
 layer and focus on how to do that.
 

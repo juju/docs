@@ -1,7 +1,7 @@
-Title: Composing a Juju charm
+Title: Building a Juju charm
 
 
-# Composing is easier than writing
+# Building is easier than writing
 
 When creating a charm, you always have the option of doing it by
 [hand][writing].  That is, you can create each hook, implement the side of the
@@ -11,21 +11,21 @@ However, what you really want to do is focus on *your* charm.  So, why not
 leverage the work of others and keep your charm code as minimal and tightly
 focused as possible?
 
-Enter the concept of composing charms.  Composing lets you build on the work
-of other charmers, whether that work is in the form of other charms that you
-can extend and modify, interfaces that are already built for you and know how
-to communicate with a remote service and let you know when that service is
-ready and what it provides for you, or partial base layers that make managing
+Enter the concept of building charms from layers.  Layers let you build on
+the work of other charmers, whether that work is in the form of other charms
+that you can extend and modify, interfaces that are already built for you and
+know how to communicate with a remote service and let you know when that service
+is ready and what it provides for you, or partial base layers that make managing
 dependencies much easier.  And it does this in a consistent, repeatable, and
 auditable way.
 
 For this example, we will create a charm for the same [Vanilla forum software][]
-as [before][writing], but using composition.
+as [before][writing], but using layers.
 
 
 ## Preparation
 
-First off, composing charms requires [Charm Tools][], as well as a [local charm
+First off, building charms requires [Charm Tools][], as well as a [local charm
 repository][deploying] in which to work.  So, if you haven't set those up yet,
 use the previous links to do so.  For example:
 
@@ -58,7 +58,7 @@ us Apache2 running on a configurable port, mod-php5, and support for the
 
 On top of that, we'll want to use the [mysql interface][].
 
-We will put these in a `composer.yaml` file, which tells the composer what layers
+We will put these in a `layers.yaml` file, which tells the builder what layers
 and interfaces to combine with yours to create the finished charm:
 
 ```yaml
@@ -210,7 +210,7 @@ Check out the [repo][] for the complete charm layer.
 
 It is important to note that we didn't have to create any hooks.  Those were
 all handled by the other layers and interfaces.  This is common when using
-composition and relation stubs.
+layers.
 
 It's also worth noting that there is a file for each layer in the `reactive`
 directory.  This allows the handlers for each layer to remain separate and
@@ -218,23 +218,23 @@ not conflict.  All handlers from each of those files will be discovered and
 dispatched according to the [discovery and dispatch rules][].
 
 
-## Composing your layers
+## Buidling your charm
 
-Now that the layer is done, let's compose it together and deploy the final
+Now that the layer is done, let's build it together and deploy the final
 charm.  From within the layer directory, this is as simple as:
 
 ```bash
-charm compose
+charm build
 ```
 
-Composer will take all of the layers and create a new charm into
+Build will take all of the layers and create a new charm into
 `$JUJU_REPOSITORY/trusty/vanilla`:
 
 ```
-composer: Composing into /home/user/charms
-composer: Processing layer: layer:basic
-composer: Processing layer: layer:apache-php
-composer: Processing layer: .
+build: Composing into /home/user/charms
+build: Processing layer: layer:basic
+build: Processing layer: layer:apache-php
+build: Processing layer: .
 ```
 
 Then we can deploy mysql and our new charm as usual:
