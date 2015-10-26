@@ -87,7 +87,7 @@
                       <li><a href="authors-subordinate-services.html">Subordinate services</a></li>
                       <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
                       <li><a href="authors-testing.html">Charm Testing</a></li>
-                      <li><a href="authors-charm-composing.html">Composing a Charm from Layers</a></li>
+                      <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
                       <li><a href="authors-charm-with-docker.html">Charming with Docker</a></li>
                     </ul>
                   </li>
