@@ -7,6 +7,213 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.25.0
+
+  A new stable release of Juju, juju-core 1.25.0, is now available.
+  This release replaces version 1.24.7.
+
+
+  ## Getting Juju
+
+  juju-core 1.25.0 is available for Wily and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows Centos, and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.25.0
+
+
+  ## Notable Changes
+    * (Experimental) Improved networking features for AWS
+      * New 'spaces' and 'subnet' commands
+      * New 'spaces' constraints support
+    * Support for "devices" on MAAS 1.8+
+    * Storage support for GCE and Azure providers
+    * Payload management for charmers
+
+
+  ### (Experimental) Improved networking features for AWS
+
+  Juju has experimental support for deploying services on AWS in isolation,
+  taking advantage of the enhanced AWS VPC networking features. This is just a
+  first step towards a full-fledged networking model support in Juju.
+
+
+  #### New 'spaces' and 'subnet' commands
+
+  Juju introduces the 'space' and 'subnet' commands to manage the networks
+  available to services. A Juju network space is a collection of related subnets
+  that have no firewalls between each other and have the same ingress and egress
+  policies.
+
+  You can create a new Juju space, and optionally associate existing subnets
+  with it by specifying their CIDRs using the 'create' subcommand. The command
+  looks like this:
+
+      juju space create <name> [<CIDR1> <CIDR2> …]
+
+  The list of registered spaces can be seen using the 'list' subcommand:
+
+      juju space list [--short] [--format yaml|json] [--output <path>]
+
+  You can add an existing AWS subnet to a space by CIDR or AWS ID, for example:
+
+      juju subnet add <CIDR>|<AWS-subnet-id> <space-name>
+
+  You can list all the subnets known by Juju and optionally filtering them by
+  space and/or availability zone like so:
+
+      juju subnet list [--zone <name>] [--space <name>] [<zone1> <zone2> …]
+
+  For more information about these commands, type:
+
+      juju <command> --help
+
+
+  #### New 'spaces' constraints support
+
+  The new 'spaces' constraint instructs Juju to deploy a service's units in
+  subnets of the given space.
+
+  Similar to the 'tags' constraint, the 'spaces' constraint takes a comma-
+  delimited list of existing Juju network spaces. Both positive (without prefix)
+  and negative (prefixed by "^") spaces are allowed in the list. For this alpha
+  release, the first positive space name is used, the rest is ignored.
+
+  You can constrain a service to a space like this:
+
+      juju deploy <charm-URL> [<service-name>] [--constraints "spaces=<list>"]
+
+  For more information, run
+
+      juju help glossary
+
+  and
+
+      juju help constraints
+
+
+  #### Known issues
+
+  Deploying a service to a space that has no subnets will cause the agent to
+  panic and is a known issue (https://launchpad.net/bugs/1499426). This issue
+  can be mitigated by always adding at least one subnet to the space.
+
+
+  ### Support "devices" on MAAS 1.8+
+
+  MAAS 1.8 introduced a new feature called "devices". This allows the
+  association of a "device", that requires an IP address, with a parent machine
+  managed by MAAS. There is a view in the MAAS UI showing all devices.
+
+  With the "address-allocation" feature flag enabled, Juju will register LXC and
+  KVM containers as devices on MAAS 1.8+. They are visible in the MAAS UI. If
+  the environment is forcibly shut down, the IP addresses allocated to the
+  containers will be released by MAAS.
+
+  You can enable "address-allocation" is new Juju environments like so:
+
+      JUJU_DEV_FEATURE_FLAG=address-allocation juju bootstrap
+
+
+  ### Storage support for GCE and Azure providers
+
+  Juju's storage feature can now be used with the Google Compute Engine and
+  Azure providers. Storage is now supported for local, AWS, Openstack, MAAS, GCE
+  and Azure. See https://jujucharms.com/docs/devel/storage for more information.
+
+
+  ### Status for storage volumes
+
+  Volumes now have status associated, so provisioning progress can be observed.
+  List the volumes to see their status:
+
+      juju storage volume list
+
+
+  ### Payload management for charmers
+
+  The new payload management feature allows charmers to more accurately define
+  large and complex deployments by registering different payloads, such as LXC,
+  KVM, and docker, with Juju. This lets the operator better understand the
+  purpose and function of these payloads on a given machine.
+
+  You define these payloads in the metadata.yaml of the charm under the
+  payloads section. You create a class for the payload, "monitoring" or "kvm-
+  guest", and assign the type.
+
+      payloads:
+          monitoring:
+              type: docker
+          kvm-guest:
+              type: kvm
+
+  From your charm hook you can manage your payload with the following
+  commands:
+
+      payload-register <type> <class> <ID> [tags]
+      payload-unregister <type> <class> <ID>
+      payload-status-set <type> <class> <ID> <starting, running, stopping, stopped>
+
+  From the Juju command line you can view your payloads like this:
+
+        juju list-payloads <filter>
+
+  For more information run:
+
+      juju help payloads
+
+
+  ## Resolved issues
+
+    * Failed configuring a static ip for container "1/lxc/0": cannot
+      allocate addresses: instid not supported
+      Lp 1498982
+
+    * Addresses logged by apiaddressupdater aren't accurate
+      Lp 1497098
+
+    * Server should handle tools of unknown or unsupported series
+      Lp 1403689
+
+    * Provider/gce: devicenames populated in volume attachment info are
+      invalid
+      Lp 1500703
+
+    * Provider/ec2: volumes should be attached with name "xvdf" instead
+      of "xvdf1" by default
+      Lp 1500721
+
+    * Provider/ec2: "iops" should be per-gib in ebs pool config
+      Lp 1501637
+
+    * Provider/ec2: min/max ebs volume sizes are wrong for ssd/iops
+      Lp 1501642
+
+    * Worker/storageprovisioner: worker bounces upon finding invalid
+      volume/filesystem params
+      Lp 1501710
+
+    * Config-get returns scientific notation for large ints
+      Lp 1302118
+
+    * Sending a sigabrt to jujud process causes jujud to uninstall
+      (wiping /var/lib/juju)
+      Lp 1464304
+
+    * Juju-core 1.20.11 crashes (sigsegv) if apiaddresses key is missing
+      from agent.conf
+      Lp 1392814
+
+    * Session closed in data source
+      Lp 1497829
+
+    * Support use of cloud-images mirror for container images
+      Lp 1357045
+
+
 ^# juju-core 1.24.7
 
   A new stable release of Juju, juju-core 1.24.7, is now available.
