@@ -1972,7 +1972,7 @@ Click on the expander to see details for each command.
   supported access: "public" (using shadow addresses) or "private"
   (using cloud-local addresses, this is the default). For more
   information about subnets and shadow addresses, please refer to Juju's
-  [glossary help topics](https://jujucharms.com/docs/stable/glossary).
+  [glossary help topics](./glossary).
 
   #### subcommands:
 
