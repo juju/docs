@@ -84,16 +84,6 @@ virtual networks on each machine.
 [Deploying Services](charms-deploying.html) to learn how to select machines
 with networks and enable the networks for use.
 
-There is one case where an additional configuration option should be made: 
-when MAAS is managing the bridge and bringing networks up and down, set the 
-"disable-network-management" option in environments.yaml to "true":
-```
-disable-network-management: true
-```
-This tells Juju not to create a network bridge or to bring eth0 up and down 
-during the cloud-init install phase. Juju will not make changes to the 
-network configuration when its agents start.
-
 Juju recognises MAAS-controlled hostnames. You can use the hostname
 when bootstrapping the state-server on a specific machine and add
 existing MAAS-controlled machines to the juju environment. For example:
