@@ -7,6 +7,69 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.24.6
+
+  A new stable release of Juju, juju-core 1.24.6, is now available.
+  This releases replaces 1.24.5.
+
+
+  ## Getting Juju
+
+  juju-core 1.24.6 is available for Wily and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows, Centos7, and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.24.6
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Regression: juju ssh dies with (publickey)
+      Lp 1472632
+
+    * Juju bootstrap fails to work due to incorrect identities
+      restriction.
+      Lp 1486074
+
+    * Cpu-power constraint conflicts with with instance-type when trying
+      to launch a t2.medium
+      Lp 1489142
+
+    * I/o timeout errors can cause non-atomic service deploys
+      Lp 1486553
+
+    * Juju status should show if an upgrade is available
+      Lp 1464633
+
+    * Juju bootstrap failed - cannot dial mongo to initiate replicaset:
+      no reachable servers
+      Lp 1468579
+
+    * Storage/provider: managedfs fails to create fs on full disks
+      Lp 1483086
+
+    * Provider/maas: volume source won't work for physical
+      machines/disks
+      Lp 1483082
+
+    * Upgrade fails if no explicit version is specified
+      Lp 1447899
+
+    * Juju upgrade from 1.24-beta2 to 1.24.5 broken
+      Lp 1493444
+
+    * Cannot remove an environment user with upper case characters
+      Lp 1467037
+
+
 ^# juju-core 1.24.5
 
   A new stable release of Juju, juju-core 1.24.5, is now available.
