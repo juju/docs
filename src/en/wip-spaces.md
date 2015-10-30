@@ -6,7 +6,7 @@ Juju provides a set of features allowing the users to have better and
 finer-grained control over the networking aspects of the environment
 and service deployments in particular. Not all cloud providers support
 these enhanced networking features yet, in fact they are currently
-supported on AWS only. Support for MaaS and OpenStack is planed and
+supported on AWS only. Support for MAAS and OpenStack is planed and
 will be available in future releases of Juju.
 
 Juju network spaces (or just "spaces") represent sets of disjoint
@@ -54,7 +54,7 @@ environment.
 Spaces are created like this:
 
 ```bash
-$ juju space create <name> [ <CIDR1> <CIDR2> ... ] [--private|--public]
+juju space create <name> [ <CIDR1> <CIDR2> ... ] [--private|--public]
 ```
 
 They can be listed in various formats using the "list" subcommand. See
@@ -64,7 +64,7 @@ also "juju space help" for more information. Other space subcommands are
 Existing subnets can be added using:
 
 ```bash
-$ juju subnet add <CIDR>|<subnet-provider-id> <space> [<zone1> <zone2> ...]
+juju subnet add <CIDR>|<subnet-provider-id> <space> [<zone1> <zone2> ...]
 ```
 
 Like spaces they can be listed by the subcommand "list". See
@@ -132,31 +132,31 @@ created to each one. These steps will be automated, and the subnet
 creation will be possible directly from Juju in a future release.
 
 ```bash
-$ juju space create dmz
-$ juju space create cms
-$ juju space create database
-$ juju subnet add 172.31.0.0/20 dmz
-$ juju subnet add 172.31.16.0/20 dmz
-$ juju subnet add 172.31.50.0/24 database
-$ juju subnet add 172.31.51.0/24 database
-$ juju subnet add 172.31.100.0/24 cms
-$ juju subnet add 172.31.110.0/24 cms
+juju space create dmz
+juju space create cms
+juju space create database
+juju subnet add 172.31.0.0/20 dmz
+juju subnet add 172.31.16.0/20 dmz
+juju subnet add 172.31.50.0/24 database
+juju subnet add 172.31.51.0/24 database
+juju subnet add 172.31.100.0/24 cms
+juju subnet add 172.31.110.0/24 cms
 ```
 
 Now we can deploy the services into their respective spaces,
 relate them and expose haproxy:
 
 ```bash
-$ juju deploy haproxy -n 2 --constraints spaces=dmz
-$ juju deploy mediawiki -n 2 --constraints spaces=cms
-$ juju deploy mysql -n 2 --constraints spaces=database
-$ juju add-relation haproxy mediawiki
-$ juju add-relation mediawiki mysql
-$ juju expose haproxy
+juju deploy haproxy -n 2 --constraints spaces=dmz
+juju deploy mediawiki -n 2 --constraints spaces=cms
+juju deploy mysql -n 2 --constraints spaces=database
+juju add-relation haproxy mediawiki
+juju add-relation mediawiki mysql
+juju expose haproxy
 ```
 
 Once all the units are up, you will be able to get the public
-IP address of one of the haproxy units (from $ juju status), and
+IP address of one of the haproxy units (from ```juju status```), and
 open it in a browser, seeing the mediawiki page.
 
 In an upcoming release, Juju will provide much better visibility
