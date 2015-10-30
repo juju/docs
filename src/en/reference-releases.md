@@ -11,7 +11,7 @@ current stable release to manage cloud deployments.
 
 ## Stable
 
-The current stable version of Juju is 1.24.7.
+The current stable version of Juju is 1.25.0.
 
 Stable juju is suitable for everyday production use.
 
@@ -26,21 +26,21 @@ OS X Homebrew
 {: .instruction }
 
 Centos
-: [juju-1.24.7-centos7.tar.gz](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-1.24.7-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-1.24.7-centos7.tar.gz/+md5))
+: [juju-1.25.0-centos7.tar.gz](https://launchpad.net/juju-core/1.25/1.25.0/+download/juju-1.25.0-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/1.25/1.25.0/+download/juju-1.25.0-centos7.tar.gz/+md5))
 {: .instruction }
 
 OS X
-: [juju-1.24.7-osx.tar.gz](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-1.24.7-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-1.24.7-osx.tar.gz/+md5))
+: [juju-1.25.0-osx.tar.gz](https://launchpad.net/juju-core/1.25/1.25.0/+download/juju-1.25.0-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.25/1.25.0/+download/juju-1.25.0-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.24.7-signed.exe](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-setup-1.24.7-signed.exe) ([md5](https://launchpad.net/juju-core/1.24/1.24.7/+download/juju-setup-1.24.7-signed.exe/+md5))
+: [juju-setup-1.25.0-signed.exe](https://launchpad.net/juju-core/1.25/1.25.0/+download/juju-setup-1.25.0-signed.exe) ([md5](https://launchpad.net/juju-core/1.25/1.25.0/+download/juju-setup-1.25.0-signed.exe/+md5))
 {: .instruction }
 
 
 ## Proposed
 
-Current proposed version is 1.25.0.
+Current proposed version is 1.25.0, which became stable on 2015-10-28.
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stablised features. They
