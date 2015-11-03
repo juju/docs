@@ -21,8 +21,8 @@ transforms the basic output as follows:
   - lists of strings are converted to a single newline-separated string
   - all other types (in general, dictionaries) are formatted as YAML
 
-Also see the [hook environment](./authors-hook-envitronment) page for further 
-details of the hook environment
+Also see the [hook environment](./authors-hook-environment.html) page for further 
+details of the hook environment.
 
 ## Available commands:
 
@@ -60,7 +60,7 @@ config settings that are either explicitly set, or which have a non-nil default
 value. If the `--all` flag is passed, it returns a dictionary containing all
 defined config settings including nil values (for those without defaults). If
 called with a single argument, it returns the value of that config key. Missing
-config keys are reported as having a value of nil, and do not return an error.
+config keys are reported as nulls, and do not return an error.
 
 Getting the interesting bits of the config is done with:
 
@@ -70,7 +70,7 @@ key: some-value
 another-key: default-value
 ```
 
-To get the whole config including the nulls:
+To get the whole config including any nulls:
 
 ```no-highlight
 config-get --all
@@ -101,7 +101,7 @@ doesn't exist or has not been set returns nothing and raises no errors.
 
 `juju-log` writes its arguments directly to the unit's log file. All hook
 output is currently logged anyway, though this may not always be the case - If 
-it's important, please `juju-log` it.
+it's important, use`juju-log`.
 
 ```bash
 juju-log "some important text"
@@ -124,7 +124,7 @@ You can schedule a reboot like so:
 juju-reboot
 ```
 
-The `--now` option can be passed to block hook execution. in this case the
+The `--now` option can be passed to block hook execution. In this case the
 `juju-reboot` command will hang until the unit agent stops the hook and 
 re-queues it for the next run. This will allow you to create multi-step 
 install hooks.
@@ -151,19 +151,20 @@ called using the `juju run` command.
 ### is-leader
 
 `is-leader` will write `"True"` or `"False"` to stdout, and return 0, if
-the unit is currently leader and can be guaranteed to remain so for 30s.
+the unit is currently leader and can be guaranteed to remain so for 30
+seconds.
     
 Output can be expressed as `--format json` or `--format yaml` if desired.
 
 If it returns a non-zero exit code, no inferences regarding true leadership
 status can be made, but you should generally opt to fail safe and refrain from
-acting as leader when not sure.
+acting as the leader when not sure.
 
 The result of `is-leader` truth is independent of hook sequence. If a unit has 
-been designated leader while the hook is running, it will start to return true; 
-and if a unit were to (for example) lose its state-server connection mid-hook
- and be unable to verify continued leadership past lease expiry time, it would
-start to return false.
+been designated as the leader while the hook is running, it will start to 
+return true; and if a unit were to (for example) lose its state-server 
+connection mid-hook and be unable to verify continued leadership past lease 
+expiry time, it would start to return false.
 
 ### leader-set
 
@@ -199,7 +200,7 @@ where minions may end up seeing a sandbox in which only `foo` is set to the
 
 `leader-get` acts much like relation-get, in that it lets you read string
 values by key (and expose them in helpful formats), but it reads only from the 
-single leader-settings bucket
+single leader-settings bucket.
 
 As with `realtion-get`, it presents a sandboxed view of leader-settings data. 
 This is necessary, as it is for relation data, because a hook context needs
@@ -236,10 +237,10 @@ open 8000-8080/tcp
 
 `open-port` will not have any effect if the service is not exposed, and may have
 a somewhat delayed effect even if it is. This operation is transactional, so 
-changes will certainly not be made unless the hook exits successfully.
+changes will not be made unless the hook exits successfully.
 
-Juju also tracks ports opened across the machine and will not allow conflicts - 
-if another charm has already opened the port 
+Juju also tracks ports opened across the machine and will not allow conflict; if 
+another charm has already opened the port 
 (**or one or more ports in a range**) you have specified,
 your request will be ignored. 
  
@@ -251,7 +252,7 @@ compatibility purposes, but it doesn't produce any output.
 The opened-ports hook tool lists all the ports currently opened 
 **by the running charm**. It does not, at the moment, include ports which may
 be opened by other charms co-hosted on the same machine
-[lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770). 
+[lp #1427770](https://bugs.launchpad.net/juju-core/+bug/1427770). 
 
 The command returns a list of one port or range of ports per line, with the port
 number followed by the protocol (tcp or udp).
@@ -320,9 +321,9 @@ Note that `relation-get` produces results that are _consistent_ but not
 necessarily _accurate_, in that you will always see settings that:
 
   - were accurate at some point in the reasonably recent past
-  - are always the same within a single hook run...
-  - _except_ when inspecting the unit's own relation settings, in which case
-    local changes from `relation-set` will be seen correctly.
+  - are always the same within a single hook run, _except_ when inspecting the 
+    unit's own relation settings, in which case local changes from `relation-set` 
+    will be seen correctly.
 
 You should never depend upon the presence of any given key in `relation-get`
 output. Processing that depends on specific values (other than `private-address`) 
@@ -340,13 +341,12 @@ sufficient to complete all configuration that depends on remote unit settings.
 Settings for remote units already known to have departed remain accessible for
 the lifetime of the relation.
 
-!!! Note: `relation-get` currently has a
-[bug](https://bugs.launchpad.net/juju-core/+bug/1223339)
-that allows units of the same service to see each other's
-settings outside of a peer relation. Depending on this behaviour inadvisable: if
+!!! Note: `relation-get` currently has a bug
+[LP #1223339](https://bugs.launchpad.net/juju-core/+bug/1223339)
+which allows units of the same service to see each other's
+settings outside of a peer relation. Depending on this behaviour is inadvisable: if
 you need to share settings between units of the same service, always use a peer
-relation to do so, or you may be seriously inconvenienced when
-the hole is closed without notice.
+relation to do so, or your charm may fail unexpectedly when the bug is fixed.
 
 ### relation-list
 
@@ -397,8 +397,7 @@ server:7
 server:9
 ```
 
-To show all relation identifiers with a different name pass it as an argument -
-for example:
+To show all relation identifiers with a different name pass it as an argument:
 
 ```no-highlight
 relation-ids reverseproxy
@@ -455,17 +454,19 @@ Whatever information you need to propagate for the remote charm to work must be
 propagated via relation-set, with the single exception of the `private-address`
 key, which is always set before the unit joins.
 
-You may wish to overwrite the `private-address` setting, for example if you're
-writing a charm that serves as a proxy for some external service; but you 
-should in general avoid _removing_ that key, because most charms expect that
-value to exist unconditionally.
+For some charms you may wish to overwrite the `private-address` setting, for 
+example if you're writing a charm that serves as a proxy for some external 
+service. It is rarely a good idea to _remove_ that key though, as most charms 
+expect that value to exist unconditionally and may fail if it is not
+present.
 
-All values set are stored locally until the hook completes; at that point, if
-the hook exit code is 0, all changed values will be communicated to the rest of
-the system, causing -changed hooks to run in all related units.
+All values are set transactionally at the point when the hook terminates 
+successfully (i.e. the hook exit code is 0). At that point all changed values will 
+be communicated to the rest of the system, causing -changed hooks to run in
+all related units.
 
-There is no way to write settings for any unit other than the local unit; but
-any hook on the local unit can write settings for any relation the local unit
+There is no way to write settings for any unit other than the local unit. However,
+any hook on the local unit can write settings for any relation which the local unit
 is participating in.
 
 
@@ -517,10 +518,10 @@ counterpart units - they are for the benefit of humans only, so tools
 representing Juju services (e.g. the Juju GUI) should check occasionally 
 and be told the current status message.
 
-Spamming the status with many changes per second would not be welcome
+Spamming the status with many changes per second is therefore rather redundant
 (and might be throttled by the state server). Nevertheless, a thoughtful charm
 will provide appropriate and timely feedback for human users, with estimated
-times of completion of long-running status changes, for example.
+times of completion of long-running status changes.
 
 In the case of a `blocked` status though the **status message should tell the
 user explicitly how to unblock the unit** insofar as possible, as this is
@@ -550,6 +551,7 @@ status-set active "Storage 95% full"
 status-set blocked "Need a database relation"
 status-set blocked "Storage full"
 ```
+
 ### unit-get
 
 `unit-get` returns information about the local unit. It accepts a single
