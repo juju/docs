@@ -81,6 +81,7 @@
                       <li><a href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
                       <li><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
                       <li><a href="authors-relations.html">Implementing relations</a></li>
+                      <li><a href="authors-charm-leadership.html">Charm leadership</a></li>
                       <li><a href="authors-hook-errors.html">Hook Errors</a></li>
                       <li><a href="authors-hook-debug.html">Hook Debugging</a></li>
                       <li><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
@@ -106,8 +107,6 @@
                 <ul>
                   <li><a href="wip-spaces.html">Network spaces</a></li>
                   <li><a href="wip-centos.html">CentOS support</a></li>
-                  <li><a href="wip-numbering.html">Machine/unit numbering</a></li>
-                  <li><a href="wip-charm-leadership.html">Charm leadership</a></li>
                   <li><a href="wip-systems.html">Juju Environment System (DRAFT)</a></li>
                   <li><a href="wip-users.html">Managing Users (DRAFT)</a></li>
                 </ul>
@@ -124,10 +123,12 @@
                   <li><a href="commands.html">Juju commands</a></li>
                   <li><a href="reference-constraints.html">Juju constraints</a></li>
                   <li><a href="reference-environment-variables.html">Juju environment variables</a></li>
+                  <li><a href="reference-hook-tools.html">Juju 'Hook Tools'</a></li>
                   <li><a href="http://godoc.org/github.com/juju/juju/api">Juju API docs</a></li>
                   <li><a href="reference-releases.html">Releases</a></li>
                   <li><a href="reference-release-notes.html">Release notes</a></li>
                   <li><a href="reference-status.html">Status values</a></li>
+                  <li><a href="reference-numbering.html">Machine/unit numbering</a></li>
                   <li><a href="glossary.html">Glossary</a></li>
                   <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
                   <li><a href="contributing.html">Contribute to the Docs!</a></li>
