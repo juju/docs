@@ -128,7 +128,7 @@
                   <li><a href="reference-releases.html">Releases</a></li>
                   <li><a href="reference-release-notes.html">Release notes</a></li>
                   <li><a href="reference-status.html">Status values</a></li>
-                  <li><a href="wip-numbering.html">Machine/unit numbering</a></li>
+                  <li><a href="reference-numbering.html">Machine/unit numbering</a></li>
                   <li><a href="glossary.html">Glossary</a></li>
                   <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
                   <li><a href="contributing.html">Contribute to the Docs!</a></li>
