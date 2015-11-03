@@ -99,6 +99,23 @@ MAAS-controlled machines to the Juju environment. For example:
 juju bootstrap --to <hostname>
 juju add-machine <hostname>
 ```
+### MAAS devices
+
+MAAS 1.8 introduced a new feature called "devices". This allows the
+association of a "device", that requires an IP address, with a parent machine
+managed by MAAS. There is a view in the MAAS UI showing all devices.
+
+With the "address-allocation" feature flag enabled, Juju will register LXC and
+KVM containers as devices on MAAS 1.8+. They are visible in the MAAS UI. If
+the environment is forcibly shut down, the IP addresses allocated to the
+containers will be released by MAAS.
+
+You can enable "address-allocation" in new Juju environments like so:
+
+    JUJU_DEV_FEATURE_FLAGS=address-allocation
+
+
+
 
 For further information on using Juju with MAAS, see the
 [MAAS and Juju Quick Start guide](http://maas.ubuntu.com/docs/juju-quick-start.html).

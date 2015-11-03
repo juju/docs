@@ -115,7 +115,7 @@ The versions covered here are:
 
   You can enable "address-allocation" is new Juju environments like so:
 
-      JUJU_DEV_FEATURE_FLAG=address-allocation juju bootstrap
+      JUJU_DEV_FEATURE_FLAGS=address-allocation juju bootstrap
 
 
   ### Storage support for GCE and Azure providers
