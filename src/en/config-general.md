@@ -219,7 +219,7 @@ ca-private-key | string |  |  | The private key of the CA that signed the state 
 ca-private-key-path | string |  |  | Path to file containing CA private key
 default-series | string |  | valid series name, e.g. 'trusty' | The default series of Ubuntu to use for deploying charms
 development | bool | false |  | Whether the environment is in development mode
-disable-network-management | bool | false |  | Whether the provider should control networks (on MAAS environments, set to true for MAAS to control networks
+disable-network-management | bool | false |  | Whether the provider should control networks (only applies to MAAS environments, this should usually be set to false(default) otherwise Juju will not be able to create containers)
 enable-os-refresh-update | bool | true |  | Whether newly provisioned instances should run their respective OS's update capability.
 enable-os-upgrade | bool | true |  | Whether newly provisioned instances should run their respective OS's upgrade capability
 firewall-mode | string | instance | instance/global/none | The mode to use for network firewalling.  'instance' requests the use of an individual firewall per instance.  'global' uses a single firewall for all instances (access for a network port is enabled to one instance if any instance requires that port).  'none' requests that no firewalling should be performed inside the environment. It's useful for clouds without support for either global or per instance security groups
