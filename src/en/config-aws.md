@@ -69,7 +69,7 @@ Open this file to get the **access-key** and **secret-key** for the
 
 The **region:** value corresponds to the AWS regions.
 
-By default, Juju will deploy units to m3.medium instances, unless otherwise constrained.
+By default, Juju will deploy units to m1.small instances, unless otherwise constrained.
 
 ## AWS specific features
 
