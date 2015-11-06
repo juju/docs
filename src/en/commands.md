@@ -17,7 +17,7 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
+  ```
   juju action [options] <command> ...
   ```
 
