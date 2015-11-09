@@ -66,29 +66,19 @@
               </li>
               <li class="section"><h4 class="header toggle-target">Developer Guide</h4>
                 <ul>
-                  <li class="section"><a class="header" href="developer-tools-prerequisites.html">Tools &amp; Prerequisites</a>
+                  <li class="section"><a class="header" href="developer-getting-started.html">Getting Started</a>
                     <ul class="sub">
-                      <li><a href="developer-tools-prerequisites.html#subtarget">subtarget</a></li>
+                      <li><a href="developer-getting-started.html#prerequisites-and-tools">Prerequisites and Tools</a></li>
+                      <li><a href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
+                      <li><a href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
+                      <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
                     </ul>
                   </li>
-                  <li class="section"><a class="header" href="developer-design-charm.html">Designing your charm</a>
+                  <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
                     <ul class="sub">
                       <li><a href="developer-design-charm.html#juju-model">Juju model</a></li>
                       <li><a href="developer-design-charm.html#relations">Relations</a></li>
                       <li><a href="developer-design-charm.html#configuration">Configuration</a></li>
-                    </ul>
-                  </li>
-                  <li class="section"><a class="header" href="developer-writing-charm.html">Writing your charm</a>
-                    <ul class="sub">
-                      <li><a href="developer-writing-charm.html#create-layer">Creating a layer</a></li>
-                      <li><a href="developer-writing-charm.html#charm-build">Charm build</a></li>
-
-                    </ul>
-                  </li>
-                  <li class="section"><a class="header" href="developer-writing-tests.html">Writing Tests</a>
-                    <ul class="sub">
-                      <li><a href="developer-writing-tests.html#charm-test">Testing a charm with amulet</a></li>
-                      <li><a href="developer-writing-tests.html#bundle-test">Testing a bundle with amulet</a></li>
                     </ul>
                   </li>
                 </ul>
