@@ -64,19 +64,17 @@
                   <li><a href="troubleshooting.html">Troubleshooting</a></li>
                 </ul>
               </li>
-              <li class="section"><h4 class="header toggle-target">Charm Authors</h4>
+              <li class="section"><h4 class="header toggle-target">Developer Guide</h4>
                 <ul>
-                  <li><a href="authors-intro.html">Getting started</a></li>
-                  <li class="section"><a class="header" href="authors-charm-components.html">Components of a charm</a>
+                  <li class="section"><a class="header" href="developer-getting-started.html">Getting Started</a>
                     <ul class="sub">
-                      <li><a href="authors-charm-metadata.html">metadata.yaml</a></li>
-                      <li><a href="authors-charm-hooks.html">/hooks</a></li>
-                      <li><a href="authors-charm-actions.html">/actions and actions.yaml</a></li>
-                      <li><a href="authors-charm-benchmarks.html">Benchmarks (optional)</a></li>
-                      <li><a href="authors-charm-config.html">config.yaml</a></li>
+                      <li><a href="developer-getting-started.html#prerequisites-and-tools">Prerequisites and Tools</a></li>
+                      <li><a href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
+                      <li><a href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
+                      <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
                     </ul>
                   </li>
-                  <li class="section"><a class="header" href="authors-charm-writing.html">Charm walkthrough</a>
+                  <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
                     <ul class="sub">
                       <li><a href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
                       <li><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
@@ -90,15 +88,6 @@
                       <li><a href="authors-testing.html">Charm Testing</a></li>
                       <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
                       <li><a href="authors-charm-with-docker.html">Charming with Docker</a></li>
-                    </ul>
-                  </li>
-                  <li class="section"><a class="header" href="authors-charm-store.html">The Juju Charm Store</a>
-                    <ul class="sub">
-                      <li><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
-                      <li><a href="authors-charm-policy.html">Charm store policy</a></li>
-                      <li><a href="charm-review-process.html">Charm review process</a></li>
-                      <li><a href="authors-charm-best-practice.html">Best practices</a></li>
-                      <li><a href="authors-charm-icon.html">Charm Icons</a></li>
                     </ul>
                   </li>
                 </ul>
