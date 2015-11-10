@@ -74,6 +74,11 @@
                       <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
                     </ul>
                   </li>
+                  <li class="section"><a class="header" href="developer-event-cycle.html">Event Cycle</a>
+                    <ul class="sub">
+                      <li><a href="developer-event-cycle.html#handling-reactive-states">Handling Reactive States</a></li>
+                    </ul>
+                  </li>
                   <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
                     <ul class="sub">
                       <li><a href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
