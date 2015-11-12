@@ -8,37 +8,37 @@ appropriate event.
 
 There are several core lifecycle hooks that can be implemented by any charm:  
 
-* install
-* config-changed
-* start
-* upgrade-charm
-* stop
-* update-status
-* leader-elected
-* leader-settings-changed
+* [install](./reference-charm-hooks#install)
+* [config-changed](./reference-charm-hooks#config-changed)
+* [start](./reference-charm-hooks#start)
+* [upgrade-charm](./reference-charm-hooks#upgrade-charm)
+* [stop](./reference-charm-hooks#stop)
+* [update-status](./reference-charm-hooks#update-status)
+* [leader-elected](./reference-charm-hooks#leader-elected)
+* [leader-settings-changed](./reference-charm-hooks#leader-settings-changed)
 
 For every relation defined by a charm, an additional four "relation hooks" can
 be implemented, named after the charm relation:  
 
-* [name]-relation-joined
-* [name]-relation-changed
-* [name]-relation-departed
-* [name]-relation-broken
+* [[name]-relation-joined](./reference-charm-hooks#[name]-relation-joined)
+* [[name]-relation-changed](./reference-charm-hooks#[name]-relation-changed)
+* [[name]-relation-departed](./reference-charm-hooks#[name]-relation-departed)
+* [[name]-relation-broken](./reference-charm-hooks#[name]-relation-broken)
 
 For every storage pool created a charm can implement two additional storage
 hooks:  
 
-* [name]-storage-attached
-* [name]-storage-detaching
+* [[name]-storage-attached](./reference-charm-hooks#[name]-storage-attached)
+* [[name]-storage-detaching](./reference-charm-hooks#[name]-storage-detaching)
 
-There is more information on [Charm Hooks in the Juju
-documentation](./authors-charm-hooks.html).
+There is more information on [Charm Hooks](./reference-charm-hooks) in the
+Reference section of the Juju documentation.
 
 # Deployment Events by example
 
 When deploying a charm, there is a guaranteed set lifecycle events that every
 charm will run - this is the basic series of hooks executed in the initial
-deployment cycle.
+deployment cycle.  
 
 1. install
 1. leader-elected (leader-settings-changed respectively)
