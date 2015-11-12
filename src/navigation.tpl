@@ -116,6 +116,7 @@
                 <ul>
                   <li><a href="commands.html">Juju commands</a></li>
                   <li><a href="reference-constraints.html">Juju constraints</a></li>
+                  <li><a href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
                   <li><a href="reference-environment-variables.html">Juju environment variables</a></li>
                   <li><a href="reference-hook-tools.html">Juju 'Hook Tools'</a></li>
                   <li><a href="http://godoc.org/github.com/juju/juju/api">Juju API docs</a></li>
