@@ -5,27 +5,27 @@ charms. This guide introduces some new concepts that once you learn can help
 you make some very powerful and reusable code components in the Juju ecosystem.
 
 This guide assumes you have already  [installed
-Juju](./getting-started#installation), [tested your
-setup](./getting-started#testing-your-setup), and are able to deploy a charm to
-an environment. Since Juju provides the same user experience on all
-environments, many developers use the [local provider](./config-local) to
+Juju](./getting-started.html#installation), [tested your
+setup](./getting-started.html#testing-your-setup), and are able to deploy a
+charm to an environment. Since Juju provides the same user experience on all
+environments, many developers use the [local provider](./config-local.html) to
 develop  because it is easier, faster, and cheaper than a traditional cloud
 environment.
 
 ## Prerequisites and Tools
 
 We have created tools to make writing charms easier. Developers should [install
-Charm Tools](./tools-charm-tools) which makes it easy to create,  build, fetch
-and find common charm errors.
+Charm Tools](./tools-charm-tools.html) which makes it easy to create,  build,
+fetch and find common charm errors.
 
 ```bash
 sudo apt-get install charm-tools
 ```
 
 While a charm can be written in any language that will run on a cloud image, we
-recommend Python. [Charm Helpers](./tools-charm-helpers) is a Python  library
-that provides an extensive collection of functions for developers to  reuse.
-Spending time reading the [Charm Helpers
+recommend Python. [Charm Helpers](./tools-charm-helpers.html) is a Python
+library that provides an extensive collection of functions for developers to
+reuse. Spending time reading the [Charm Helpers
 documentation](http://pythonhosted.org/charmhelpers/) would be well spent
 because several common charm patterns are encapsulated in functions in this
 library.
@@ -75,8 +75,8 @@ makes layers possible.
 
 ### Creating a new layer
 
-First off, you require a [local charm repository](./charms-deploying) in which
-to work. For example:
+First off, you require a [local charm repository](./charms-deploying.html) in
+which to work. For example:
 
 ```bash
 export JUJU_REPOSITORY=$HOME/charms
@@ -140,8 +140,8 @@ installing all the required packages, so the tests can be run automatically with
 a tool called [bundletester](https://github.com/juju-solutions/bundletester).
 Similar to hooks tests should be executable files in a `tests` directory of the
 charm.  While you can write tests in Bash or other languages, the [Amulet
-library](./tools-amulet) is highly suggested and makes it easy to write tests in
-Python.
+library](./tools-amulet.html) is highly suggested and makes it easy to write
+tests in Python.
 
 The automated test tool will run the tests in an alphanumeric ordering based on
 the file name.  A common pattern is to use a filename that sorts first (00-setup
