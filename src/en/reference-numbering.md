@@ -2,7 +2,7 @@ Title: Machine & Unit Numbering
 
 # Machine and Unit numbering
 
-Within an environment juju keeps track of sequences for machines and units.
+Within an environment Juju keeps track of sequences for machines and units.
 (Prior to 1.25 just machines). This means that for the life of an environment the number
 associated with a machine will only ever increase. For example:
 
@@ -14,7 +14,7 @@ juju add-machine # Add machine 2
 ```
 
 From 1.25 onwards unit numbering follows the same scheme. For each service name the number
-will only every increase. For example:
+will only ever increase. For example:
 ```bash
 juju deploy mongodb -n 2 # Adds units 0,1
 juju destroy-service mongodb # Removed units 0,1
