@@ -5,7 +5,7 @@ the Juju agent to trigger events in a charm.
 
 All the hooks must be written to be
 [idempotent](https://en.wikipedia.org/wiki/Idempotence), meaning that there
-should be no difference from running the charm once to running it multiple
+should be no difference from running the hook once from running it multiple
 times.  This property is important because hooks can be run multiple times by
 the Juju system in ways that might be difficult to predict.
 
@@ -43,7 +43,7 @@ the leader.  Authors can use this hook to take action if their protocols for
 leadership, consensus, raft, or quorum require one unit to assert leadership.
 If the election process is done internally to the service, other code should be
 used to signal the leader to Juju.  For more information read the [charm
-leadership document](./authors-charm-leadership).  
+leadership document](./authors-charm-leadership.html).  
 
 ### leader-settings-changed
 
@@ -51,7 +51,7 @@ leadership document](./authors-charm-leadership).
 units to respond to.  Much like (config-changed)[#config-changed) but for the
 leaders to send values to other units.  Follower units can implement this hook
 and take action when the leader sets values.  For more information read the
-[charm leadership document](./authors-charm-leadership).  
+[charm leadership document](./authors-charm-leadership.html).  
 
 ### start
 
@@ -170,7 +170,7 @@ runtime relations in play with the same name, and that they're independent: one
 Juju can provides a variety of storage to charms.  The charms can define several
 different types of storage that are allocated from Juju.  To read more
 information, see the [storage
-document](https://jujucharms.com/docs/master/storage)
+document](./storage.html)
 
 ### [name]-storage-attached
 
@@ -178,7 +178,7 @@ document](https://jujucharms.com/docs/master/storage)
 added.  The storage-attached hooks will be run before the install hook, so that
 the installation routine may use the storage.  The name prefix of this hook will
 depend on the storage key [defined in the
-metadata.yaml](./storage#adding-storage-to-the-metadata.yaml) file.
+metadata.yaml](./storage.html#adding-storage-to-the-metadata.yaml) file.
 
 ### [name]-storage-detaching
 
@@ -187,4 +187,4 @@ removed.  The storage-detaching hooks will be run before storage is detached,
 and always before the stop hook is run, to allow the charm to gracefully release
 resources before they are removed and before the unit terminates.  The name
 prefix of the hook will depend on the storage key [defined in the
-`metadata.yaml`](./storage#adding-storage-to-the-metadata.yaml) file.
+`metadata.yaml`](./storage.html#adding-storage-to-the-metadata.yaml) file.
