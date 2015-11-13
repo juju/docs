@@ -79,6 +79,8 @@
                       <li><a href="developer-event-cycle.html#handling-reactive-states">Handling Reactive States</a></li>
                     </ul>
                   </li>
+                  <li class="section"><a class="header" href="developer-hook-tools.html">Hook Tools</a>
+                  </li>
                   <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
                     <ul class="sub">
                       <li><a href="developer-design-charm.html#juju-model">Juju model</a></li>
