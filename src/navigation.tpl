@@ -35,7 +35,7 @@
                       <li><a href="charms-bundles.html">Using bundles</a></li>
                       <li><a href="charms-working-with-units.html">Working with Units</a></li>
                       <li><a href="actions.html">Working with Actions</a></li>
-                      <li><a href="storage.html">Using storage</a></li>
+                      <li><a href="charms-storage.html">Using storage</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
@@ -78,6 +78,10 @@
                     <ul class="sub">
                       <li><a href="developer-event-cycle.html#handling-reactive-states">Handling Reactive States</a></li>
                     </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-action.html">Implementing Actions</a>
+                  </li>
+                  <li class="section"><a class="header" href="developer-storage.html">Implementing Storage</a>
                   </li>
                   <li class="section"><a class="header" href="developer-hook-tools.html">Hook Tools</a>
                   </li>
