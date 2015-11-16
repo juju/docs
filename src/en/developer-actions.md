@@ -1,4 +1,4 @@
-Title: implementing actions in juju charms
+Title: implementing actions in Juju charms
 
 # Actions for the Charm author
 
