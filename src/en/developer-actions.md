@@ -133,7 +133,7 @@ This schema would support a call such as:
 juju action do mysql/0 snapshot filename=out.tar.gz compression.type=gzip
 ```
 
-### Action Tools
+## Action Tools
 
 Three tools are provided to the Action author for the Action to interact with Juju:
 
