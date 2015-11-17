@@ -8,7 +8,7 @@ to storage changes.
 If you are interested in information of how to deploy charms that use the
 storage feature read the [Using Charms](./charms-storage.html) document.
 
-## Adding storage to the metadata.yaml
+## Adding storage
 
 Storage requirements _may_ be added to the `metadata.yaml` file of the charm as
 follows:

@@ -79,11 +79,33 @@
                       <li><a href="developer-event-cycle.html#handling-reactive-states">Handling Reactive States</a></li>
                     </ul>
                   </li>
+                  <li class="section"><a class="header" href="developer-hook-tools.html">Hook Tools</a>
+                  </li>
                   <li class="section"><a class="header" href="developer-action.html">Implementing Actions</a>
+                    <ul class="sub">
+                      <li><a href="developer-actions.html#defining-actions"></a>Defining Actions</li>
+                      <li><a href="developer-actions.html#action-tools">Action Tools</a></li>
+                    </ul>
                   </li>
                   <li class="section"><a class="header" href="developer-storage.html">Implementing Storage</a>
+                    <ul class="sub">
+                      <li><a href="developer-storage.html#adding-storage"></a>Adding Storage</li>
+                      <li><a href="developer-storage.html#storage-hooks">Storage hooks</a></li>
+                    </ul>
                   </li>
-                  <li class="section"><a class="header" href="developer-hook-tools.html">Hook Tools</a>
+                  <li class="section"><a class="header" href="developer-layers.html">Charm Layers</a>
+                    <ul class="sub">
+                      <li><a href="developer-layers.html#what-are-layers?"></a>What are Layers</li>
+                      <li><a href="developer-layers.html#states">States</a></li>
+                      <li><a href="developer-layer-example.html">How to Write a Layer</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-layers-interfaces.html">Interface Layers</a>
+                    <ul class="sub">
+                      <li><a href="developer-layers-interfaces.html#design-considerations"></a>Design Considerations</li>
+                      <li><a href="developer-layers-interfaces.html#communication-scopes"></a>Communication Scopes</li>
+                      <li><a href="developer-layers-interfaces.html#writing-an-interface-layer"></a>Writing an Interface</li>
+                    </ul>
                   </li>
                   <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
                     <ul class="sub">
