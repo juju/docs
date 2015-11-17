@@ -38,6 +38,8 @@ combine with yours to create the finished charm: includes: ['layer:apache-php',
 icon, and copyright file will be the same. The `metadata.yaml` will be the same
 except that the website relation will be managed for us, so we can leave out
 the provides section:
+
+```yaml
 name: vanilla
 	summary: Vanilla is an open-source, pluggable, themeable, multi-lingual forum.
 	maintainer: Your Name <your@email.tld>
@@ -49,10 +51,12 @@ name: vanilla
 	requires:
 	  database:
 	    interface: mysql
-
+```
 
 The apache-php layer requires some additional configuration to tell it how to
-install and configure your application. This goes in an apache.yaml file:
+install and configure your application. This goes in an `apache.yaml` file:
+
+```yaml
 packages:
 	  - 'php5-mysql'
 	  - 'php5-gd'
@@ -61,11 +65,12 @@ packages:
 	    options: 'Indexes FollowSymLinks MultiViews'
 	    install_from:
 	      source: https://github.com/vanillaforums/Garden/archive/Vanilla_2.0.18.8.tar.gz#sha256=acf61a7ffca9359c1e1d721777182e51637be59744925935291801ccc8e8fd55
+```
 
 This tells the apache-php layer to install some additional packages for PHP,
 where to fetch your application from (as well as its cryptographic hash to
 verify the payload), and a few options for the vhost entry. The application will
-be installed under /var/www/{site_name} where {site_name} is the name of the
+be installed under `/var/www/{site_name}` where {site_name} is the name of the
 block under sites (in this case vanilla).
 ### Implementing your layer
 
@@ -82,9 +87,11 @@ you with a complete set of database credentials. Thus, by watching for both of
 those states, you can easily tell when the right time to set up your application
 is:
 
+```python
     @when('apache.available', 'database.available')
     	def setup_vanilla(mysql):
     	    pass
+```
 
 You'll notice that the MySQL relation is passed in so that you can easily access
 the database connection information. Since the Apache installation and MySQL
@@ -141,7 +148,7 @@ intelligent manner:
 By setting the apache.start state, we are letting the apache-php layer know that
 we have finished configuring the application and it is ready to start.
 
-The templates/vanilla_config.php file is straightforward:
+The `templates/vanilla_config.php` file is straightforward:
 
 ```php
 <?php if (!defined('APPLICATION')) exit();
