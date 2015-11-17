@@ -85,6 +85,13 @@
                   </li>
                   <li class="section"><a class="header" href="developer-hook-tools.html">Hook Tools</a>
                   </li>
+                  <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
+                    <ul class="sub">
+                      <li><a href="developer-debugging.html#the-'debug-hooks'-command">debug-hooks</a></li>
+                      <li><a href="developer-debugging.html#the-'debug-log'-command">debug-logs</a></li>
+                      <li><a href="developer-debug-dhx.html">DHX</a></li>
+                    </ul>
+                  </li>
                   <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
                     <ul class="sub">
                       <li><a href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
