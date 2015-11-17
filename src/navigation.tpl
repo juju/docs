@@ -88,7 +88,7 @@
                   <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
                     <ul class="sub">
                       <li><a href="developer-debugging.html#the-'debug-hooks'-command">debug-hooks</a></li>
-                      <li><a href="developer-debugging.html#the-'debug-log'-command">debug-logs</a></li>
+                      <li><a href="developer-debugging.html#the-'debug-log'-command">debug-log</a></li>
                       <li><a href="developer-debug-dhx.html">DHX</a></li>
                     </ul>
                   </li>
