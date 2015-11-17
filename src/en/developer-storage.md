@@ -10,7 +10,8 @@ storage feature read the [Using Charms](./charms-storage.html) document.
 
 ## Adding storage to the metadata.yaml
 
-Storage requirements _may_ be added to the `metadata.yaml` file of the charm as follows:
+Storage requirements _may_ be added to the `metadata.yaml` file of the charm as
+follows:
 
 ```yaml
 storage:
@@ -33,12 +34,14 @@ location specifies the path at which to mount filesystem-type storage. The
 'read-only' and 'shared' attributes are currently not handled. Support will be
 added in a future version of Juju.
 
-A filesystem-type store yields a directory in which the charm may store files.
-Block-type stores yield raw block devices -- typically disks or logical volumes.
-If the charm specifies a filesystem-type store, and the storage provider
-supports provisioning only disks, then a disk will be created, attached,
-partitioned, and a filesystem created on top. The filesystem will be presented
-to the charm, and rest of the details will be managed by Juju.
+A [filesystem-type](./charms-storage.html#provider-support) store yields a
+directory in which the charm may store files.
+[Block-type](./charms-storage.html#ec2/ebs-(ebs)) stores yield raw block
+devices -- typically disks or logical volumes. If the charm specifies a
+filesystem-type store, and the storage provider supports provisioning only
+disks, then a disk will be created, attached, partitioned, and a filesystem
+created on top. The filesystem will be presented to the charm, and rest of the
+details will be managed by Juju.
 
 By default, stores are singletons; a charm will have exactly one of the
 specified store. It is also possible for a charm to specify storage that may
@@ -64,8 +67,8 @@ metadata. It is then possible to add instances (up to the maximum) by using the
 
 ## Storage hooks
 
-For each storage entity defined in the metadata.yaml, the following hooks may be
-implemented:
+For each storage entity defined in the `metadata.yaml` file, the following hooks
+may be implemented:
 
 - [[name]-storage-attached](./reference-charm-hooks.html#[name]-storage-attached)
 
@@ -84,10 +87,10 @@ sed -i /etc/myservice.conf "s,MOUNTPOINT,$mountpoint"
 status-set maintenance “Storage ready and mounted.”
 ```
 
-The `[name]-storage-attached` hooks will be run before the install hook, so that the
-installation routine may use the storage. The `[name]-storage-detaching` hook will
-be run before storage is detached, and always before the stop hook is run,
-to allow the charm to gracefully release resources before they are removed
+The `[name]-storage-attached` hooks will be run before the install hook, so that
+the installation routine may use the storage. The `[name]-storage-detaching`
+hook will be run before storage is detached, and always before the stop hook is
+run, to allow the charm to gracefully release resources before they are removed
 and before the unit terminates.
 
 There are several hook tools available for dealing with storage within a
