@@ -142,8 +142,9 @@ class HttpProvides(RelationBase):
         # Remove the state that our relationship is now available to our principal layer(s)
         self.remove_state('{relation_name}.available')
 
-    # Anonymous method passed into methods decorated with
+    # call this method when passed into methods decorated with
     # @when('{relation}.available')
+    # to configure the relation data
     def configure(self, port):
         relation_info = {
             'hostname': hookenv.unit_get('private-address'),
