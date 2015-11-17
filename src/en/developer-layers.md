@@ -151,3 +151,10 @@ function deploy_middleware(){
    # doing something to deploy middleware
  }
 ```
+
+## Writing a layer
+
+The Getting Started guide example illustrates charming the layer-vanilla, which
+is an excellent example for how to write your own layer.
+
+[Layer Example](developer-layer-example.html)
