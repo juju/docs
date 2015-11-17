@@ -15,7 +15,7 @@ either side of the relation. Instead, they are solely responsible for the
 end to decide what to do with the results of that communication.
 
 Interface layers currently must be written in Python and extend the ReactiveBase
-class, though they can then be used by any language using the built-in CLI API.
+class, though they can then be __used__ by any language using the built-in CLI API.
 
 ## Design considerations
 
@@ -152,6 +152,8 @@ class HttpProvides(RelationBase):
         self.set_remote(**relation_info)
 ```
 
+#### Implementing the provides side
+
 With our provider interface written, lets take a look at how we might implement
 this in a charm.
 
@@ -173,3 +175,81 @@ def configure_website(website):
 
 
 #### Writing the requires side
+
+We're now ready to implement the requirer interface in `requires.py`
+
+```python
+from charms.reactive import hook
+from charms.reactive import RelationBase
+from charms.reactive import scopes
+
+
+class HttpRequires(RelationBase):
+    scope = scopes.UNIT
+
+    @hook('{requires:http}-relation-{joined,changed}')
+    def changed(self):
+        conv = self.conversation()
+        if conv.get_remote('port'):
+            # this unit's conversation has a port, so
+            # it is part of the set of available units
+            conv.set_state('{relation_name}.available')
+
+    @hook('{requires:http}-relation-{departed,broken}')
+    def broken(self):
+        conv = self.conversation()
+        conv.remove_state('{relation_name}.available')
+
+    def services(self):
+        """
+        Returns a list of available HTTP services and their associated hosts
+        and ports.
+        The return value is a list of dicts of the following form::
+            [
+                {
+                    'service_name': name_of_service,
+                    'hosts': [
+                        {
+                            'hostname': address_of_host,
+                            'port': port_for_host,
+                        },
+                        # ...
+                    ],
+                },
+                # ...
+            ]
+        """
+        services = {}
+        for conv in self.conversations():
+            service_name = conv.scope.split('/')[0]
+            service = services.setdefault(service_name, {
+                'service_name': service_name,
+                'hosts': [],
+            })
+            host = conv.get_remote('hostname') or conv.get_remove('private-address')
+            port = conv.get_remote('port')
+            if host and port:
+                service['hosts'].append({
+                    'hostname': host,
+                    'port': port,
+                })
+        return [s for s in services.values() if s['hosts']]
+```
+
+#### Implementing the requires side
+
+```python
+from charms.reactive.helpers import data_changed
+
+@when('reverseproxy.available')
+def update_reverse_proxy_config(reverseproxy):
+    services = reverseproxy.services()
+    if not data_changed('reverseproxy.services', services):
+        return
+    for service in services:
+        for host in service['hosts']:
+            hookenv.log('{} has a unit {}:{}'.format(
+                services['service_name'],
+                host['hostname'],
+                host['port']))
+```
