@@ -238,6 +238,18 @@ class HttpRequires(RelationBase):
 
 #### Implementing the requires side
 
+With our requirer interface written, lets take a look at how we might implement this in a charm.
+
+In our metadata we define a reverseproxy relation implementing the interface:
+
+```yaml
+requires:
+  reverseproxy:
+    interface: website
+```
+
+And in our reactive file, we implement it as so:
+
 ```python
 from charms.reactive.helpers import data_changed
 
