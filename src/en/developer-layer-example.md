@@ -78,7 +78,7 @@ The apache-php layer and mysql interface use
 [charms.reactive](http://pythonhosted.org/charms.reactive/) to coordinate with
 your layer. This makes it easy to coordinate the state of multiple layers,
 relations, configuration options, etc. Code for reactive handlers should live
-under a reactive/ folder in your charm layer. In our case, we'll use
+under a `reactive/` directory in your charm layer. In our case, we'll use
 `reactive/vanilla.py`. The apache-php layer sets an apache.available state when
 your application is done being installed, and the mysql interface sets a similar
 {relation_name}.available state (where {relation_name} depends on what you
@@ -96,7 +96,7 @@ is:
 You'll notice that the MySQL relation is passed in so that you can easily access
 the database connection information. Since the Apache installation and MySQL
 relation negotiation are all handled for us, the only thing left to do is create
-the conf/config.php file for Vanilla. To make things easy, we will render a
+the `conf/config.php` file for Vanilla. To make things easy, we will render a
 template to populate the values. We'll also handle a few more state changes to
 provide better status reporting and react to our database going away in an
 intelligent manner:
