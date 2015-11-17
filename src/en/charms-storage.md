@@ -6,7 +6,7 @@ the charm is deployed. Charms may declare several types of storage requirement
 (e.g. for persistent storage and an additional cache) so that resources can be
 allocated at a more granular level.
 
-Juju has the `[juju storage](./commands.html#storage)` command and
+Juju has the [`juju storage`](./commands.html#storage) command and
 subcommands to create and manage storage resources.  All commands and
 subcommands accept the “--help” flag for usage and help information.
 
