@@ -3,13 +3,13 @@
 
 # Why build from layers
 
-When creating a charm, you always have the option of doing it by
-hand writing.  That is, you can create each hook, implement the side of the
-interface you need for each relation your charm requires or provides, manage the
-dependencies, such as [charm-helpers][https://pythonhosted.org/charmhelpers/],
-that your charm uses, et cetera. However, what you really want to do is focus on
-*your* charm.  So, why not leverage the work of others and keep your charm code
-as minimal and tightly focused as possible?
+When creating a charm, you always have the option of doing it traditional way by
+creating each hook, implementing each side of the interface you need for each
+relation your charm requires or provides, manage the dependencies, such as
+[charm-helpers](https://pythonhosted.org/charmhelpers/), that your charm uses,
+et cetera. However, what you really want to do is focus on *your* charm.  So,
+why not leverage the reusable work of others and keep your charm code as minimal and
+tightly focused as possible?
 
 Enter the concept of building charms from layers.  Layers let you build on the
 work of other charmers, whether that work is in the form of other charms that
@@ -24,7 +24,7 @@ audit-able way.
 Layers are encapsulated charm code which lend themselves to being re-used across
 charms. They come in distinct flavors:
 
-- Base, or runtime layers Interface layers Charm layers
+- Base/runtime, Interface, or Charm layers
 
 Each of these has a distinct role, and it’s important to understand how a charm
 should be broken up into these types of layers. Generally, a charm will contain
@@ -57,7 +57,7 @@ can be done trivially by building the base layer off of layer-basic.
 
 ## Interface Layers
 
-Interface layers are perhaps the most confusing type of layer, and are
+Interface layers are perhaps the most misunderstood type of layer, and are
 responsible for the communication that transpires over a relation between two
 services. This type of layer encapsulates a single “interface protocol” and is
 generally written and maintained by the author of the primary charm that
