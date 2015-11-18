@@ -35,7 +35,7 @@
                       <li><a href="charms-bundles.html">Using bundles</a></li>
                       <li><a href="charms-working-with-units.html">Working with Units</a></li>
                       <li><a href="actions.html">Working with Actions</a></li>
-                      <li><a href="storage.html">Using storage</a></li>
+                      <li><a href="charms-storage.html">Using storage</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
@@ -57,26 +57,69 @@
                       <li><a href="howto-node.html">Deploy a Node.js app</a></li>
                       <li><a href="howto-rails.html">Test and deploy on Rails</a></li>
                       <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
-                      <li><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
                       <li><a href="howto-drupal-iis.html">Deploy Drupal Windows charm</a></li>
                     </ul>
                   </li>
                   <li><a href="troubleshooting.html">Troubleshooting</a></li>
                 </ul>
               </li>
-              <li class="section"><h4 class="header toggle-target">Charm Authors</h4>
+              <li class="section"><h4 class="header toggle-target">Developer Guide</h4>
                 <ul>
-                  <li><a href="authors-intro.html">Getting started</a></li>
-                  <li class="section"><a class="header" href="authors-charm-components.html">Components of a charm</a>
+                  <li class="section"><a class="header" href="developer-getting-started.html">Getting Started</a>
                     <ul class="sub">
-                      <li><a href="authors-charm-metadata.html">metadata.yaml</a></li>
-                      <li><a href="authors-charm-hooks.html">/hooks</a></li>
-                      <li><a href="authors-charm-actions.html">/actions and actions.yaml</a></li>
-                      <li><a href="authors-charm-benchmarks.html">Benchmarks (optional)</a></li>
-                      <li><a href="authors-charm-config.html">config.yaml</a></li>
+                      <li><a href="developer-getting-started.html#prerequisites-and-tools">Prerequisites and Tools</a></li>
+                      <li><a href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
+                      <li><a href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
+                      <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
                     </ul>
                   </li>
-                  <li class="section"><a class="header" href="authors-charm-writing.html">Charm walkthrough</a>
+                  <li class="section"><a class="header" href="developer-event-cycle.html">Event Cycle</a>
+                    <ul class="sub">
+                      <li><a href="developer-event-cycle.html#handling-reactive-states">Handling Reactive States</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-layers.html">Charm Layers</a>
+                    <ul class="sub">
+                      <li><a href="developer-layers.html#what-are-layers?">What are Layers</a></li>
+                      <li><a href="developer-layers.html#states">States</a></li>
+                      <li><a href="developer-layer-example.html">How to Write a Layer</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-layers-interfaces.html">Interface Layers</a>
+                    <ul class="sub">
+                      <li><a href="developer-layers-interfaces.html#design-considerations">Design Considerations</a></li>
+                      <li><a href="developer-layers-interfaces.html#communication-scopes">Communication Scopes</a></li>
+                      <li><a href="developer-layers-interfaces.html#writing-an-interface-layer">Writing an Interface</a></li>
+                    </ul>
+                  </li>
+                  </li>
+                  <li class="section"><a class="header" href="developer-action.html">Implementing Actions</a>
+                    <ul class="sub">
+                      <li><a href="developer-actions.html#defining-actions">Defining Actions</a></li>
+                      <li><a href="developer-actions.html#action-tools">Action Tools</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-storage.html">Implementing Storage</a>
+                    <ul class="sub">
+                      <li><a href="developer-storage.html#adding-storage">Adding Storage</a></li>
+                      <li><a href="developer-storage.html#storage-hooks">Storage hooks</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
+                    <ul class="sub">
+                      <li><a href="developer-debugging.html#the-'debug-hooks'-command">debug-hooks</a></li>
+                      <li><a href="developer-debugging.html#the-'debug-log'-command">debug-log</a></li>
+                      <li><a href="developer-debug-dhx.html">DHX</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-hook-tools.html">Hook Tools</a>
+                  <li class="section"><a class="header" href="developer-howto.html">How to...</a>
+                    <ul class="sub">
+                      <li><a href="howto-charm-with-docker.html">Charm with Docker</a></li>
+                      <li><a href="howto-vagrant-workflow.html">Work with Vagrant</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
                     <ul class="sub">
                       <li><a href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
                       <li><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
@@ -89,16 +132,6 @@
                       <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
                       <li><a href="authors-testing.html">Charm Testing</a></li>
                       <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
-                      <li><a href="authors-charm-with-docker.html">Charming with Docker</a></li>
-                    </ul>
-                  </li>
-                  <li class="section"><a class="header" href="authors-charm-store.html">The Juju Charm Store</a>
-                    <ul class="sub">
-                      <li><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
-                      <li><a href="authors-charm-policy.html">Charm store policy</a></li>
-                      <li><a href="charm-review-process.html">Charm review process</a></li>
-                      <li><a href="authors-charm-best-practice.html">Best practices</a></li>
-                      <li><a href="authors-charm-icon.html">Charm Icons</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -122,6 +155,7 @@
                 <ul>
                   <li><a href="commands.html">Juju commands</a></li>
                   <li><a href="reference-constraints.html">Juju constraints</a></li>
+                  <li><a href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
                   <li><a href="reference-environment-variables.html">Juju environment variables</a></li>
                   <li><a href="reference-hook-tools.html">Juju 'Hook Tools'</a></li>
                   <li><a href="http://godoc.org/github.com/juju/juju/api">Juju API docs</a></li>
