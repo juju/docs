@@ -54,6 +54,7 @@
                   </li>
                   <li class="section"><a class="header" href="howto.html">How to...</a>
                     <ul class="sub">
+                      <li><a href="howto-charm-with-docker.html">Charm with Docker</a></li>
                       <li><a href="howto-node.html">Deploy a Node.js app</a></li>
                       <li><a href="howto-rails.html">Test and deploy on Rails</a></li>
                       <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
@@ -74,6 +75,26 @@
                       <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
                     </ul>
                   </li>
+                  <li class="section"><a class="header" href="developer-storage.html">Implementing Storage</a>
+                    <ul class="sub">
+                      <li><a href="developer-storage.html#adding-storage">Adding Storage</a></li>
+                      <li><a href="developer-storage.html#storage-hooks">Storage hooks</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-layers.html">Charm Layers</a>
+                    <ul class="sub">
+                      <li><a href="developer-layers.html#what-are-layers?">What are Layers</a></li>
+                      <li><a href="developer-layers.html#states">States</a></li>
+                      <li><a href="developer-layer-example.html">How to Write a Layer</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-layers-interfaces.html">Interface Layers</a>
+                    <ul class="sub">
+                      <li><a href="developer-layers-interfaces.html#design-considerations">Design Considerations</a></li>
+                      <li><a href="developer-layers-interfaces.html#communication-scopes">Communication Scopes</a></li>
+                      <li><a href="developer-layers-interfaces.html#writing-an-interface-layer">Writing an Interface</a></li>
+                    </ul>
+                  </li>
                   <li class="section"><a class="header" href="developer-event-cycle.html">Event Cycle</a>
                     <ul class="sub">
                       <li><a href="developer-event-cycle.html#handling-reactive-states">Handling Reactive States</a></li>
@@ -83,28 +104,8 @@
                   </li>
                   <li class="section"><a class="header" href="developer-action.html">Implementing Actions</a>
                     <ul class="sub">
-                      <li><a href="developer-actions.html#defining-actions"></a>Defining Actions</li>
+                      <li><a href="developer-actions.html#defining-actions">Defining Actions</a></li>
                       <li><a href="developer-actions.html#action-tools">Action Tools</a></li>
-                    </ul>
-                  </li>
-                  <li class="section"><a class="header" href="developer-storage.html">Implementing Storage</a>
-                    <ul class="sub">
-                      <li><a href="developer-storage.html#adding-storage"></a>Adding Storage</li>
-                      <li><a href="developer-storage.html#storage-hooks">Storage hooks</a></li>
-                    </ul>
-                  </li>
-                  <li class="section"><a class="header" href="developer-layers.html">Charm Layers</a>
-                    <ul class="sub">
-                      <li><a href="developer-layers.html#what-are-layers?"></a>What are Layers</li>
-                      <li><a href="developer-layers.html#states">States</a></li>
-                      <li><a href="developer-layer-example.html">How to Write a Layer</a></li>
-                    </ul>
-                  </li>
-                  <li class="section"><a class="header" href="developer-layers-interfaces.html">Interface Layers</a>
-                    <ul class="sub">
-                      <li><a href="developer-layers-interfaces.html#design-considerations"></a>Design Considerations</li>
-                      <li><a href="developer-layers-interfaces.html#communication-scopes"></a>Communication Scopes</li>
-                      <li><a href="developer-layers-interfaces.html#writing-an-interface-layer"></a>Writing an Interface</li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
@@ -116,9 +117,17 @@
                   </li>
                   <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
                     <ul class="sub">
-                      <li><a href="developer-design-charm.html#juju-model">Juju model</a></li>
-                      <li><a href="developer-design-charm.html#relations">Relations</a></li>
-                      <li><a href="developer-design-charm.html#configuration">Configuration</a></li>
+                      <li><a href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
+                      <li><a href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+                      <li><a href="authors-relations.html">Implementing relations</a></li>
+                      <li><a href="authors-charm-leadership.html">Charm leadership</a></li>
+                      <li><a href="authors-hook-errors.html">Hook Errors</a></li>
+                      <li><a href="authors-hook-debug.html">Hook Debugging</a></li>
+                      <li><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
+                      <li><a href="authors-subordinate-services.html">Subordinate services</a></li>
+                      <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
+                      <li><a href="authors-testing.html">Charm Testing</a></li>
+                      <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -127,8 +136,6 @@
                 <ul>
                   <li><a href="wip-spaces.html">Network spaces</a></li>
                   <li><a href="wip-centos.html">CentOS support</a></li>
-                  <li><a href="wip-numbering.html">Machine/unit numbering</a></li>
-                  <li><a href="wip-charm-leadership.html">Charm leadership</a></li>
                   <li><a href="wip-systems.html">Juju Environment System (DRAFT)</a></li>
                   <li><a href="wip-users.html">Managing Users (DRAFT)</a></li>
                 </ul>
