@@ -82,7 +82,7 @@ a need for storage labelled 'data', we would probably want to implement the hook
 ```bash
 #!/bin/bash
 set -eux
-mountpoint=$(storage-get location)
+mountpoint=$(storage-get -s osd-devices/1 location)
 sed -i /etc/myservice.conf "s,MOUNTPOINT,$mountpoint"
 status-set maintenance “Storage ready and mounted.”
 ```
@@ -142,17 +142,8 @@ multiple machines. We intend to support multiple attachment within Juju. Shared
 storage will be assigned to a service, and each unit of the service will attach
 to the same shared storage instance.
 
-### Known limitations
+### More information
 
-- It is not currently possible to upgrade a charm if it adds required storage,
-  as there is no way to specify the storage constraints at upgrade time. Until
-  such support is added, it is only possible to upgrade a charm from having no
-  storage to having optional storage (i.e. minimum count of 0), and adding the
-  storage after upgrade.
-
-- For LXC (local provider or not), you must currently set
-  ["allow-lxc-loop-mounts"](./config-general.html#alphabetical-list-of-general-configuration-values)
-  to "true" for the lxc provider to work. With the default AppArmor profile,
-  LXC does not permit containers to mount loop devices. By setting
-  `allow-lxc-loop-mounts=true`, you are explicitly enabling this, and access
-  to all loop devices on the host.
+If you are interested in more information on provider types or how to deploy a
+charm that uses the storage feature read
+[using Juju storage](./charms-storage.html).
