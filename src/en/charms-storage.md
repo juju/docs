@@ -251,6 +251,23 @@ pg-rootfs/0   data/0 /srv/data attached false
 pg-ssd/0      data/3 /srv/data attached false
 ```
 
-If you are interested in more information on how to write a charm that uses
+### Known limitations
+
+- It is not currently possible to upgrade a charm if it adds required storage,
+  as there is no way to specify the storage constraints at upgrade time. Until
+  such support is added, it is only possible to upgrade a charm from having no
+  storage to having optional storage (i.e. minimum count of 0), and adding the
+  storage after upgrade.
+
+- For LXC (local provider or not), you must currently set
+  ["allow-lxc-loop-mounts"](./config-general.html#alphabetical-list-of-general-configuration-values)
+  to "true" for the lxc provider to work. With the default AppArmor profile,
+  LXC does not permit containers to mount loop devices. By setting
+  `allow-lxc-loop-mounts=true`, you are explicitly enabling this, and access
+  to all loop devices on the host.
+
+### More information
+
+If you are interested in more information on how to create a charm that uses
 the storage feature read
-[writing a charm using storage](./developer-storage.html).
+[writing charms that use storage](./developer-storage.html).

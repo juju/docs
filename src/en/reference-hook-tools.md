@@ -472,7 +472,7 @@ is participating in.
 
 ### status-get
 
-`status-get` allows a charm code to query what is recorded in Juju as
+`status-get` allows charms to query what is recorded in Juju as
 the current workload status. Without arguments, it just prints the workload
 status value e.g. 'maintenance'. With `--include-data` specified, it prints
 YAML which contains the status value plus any data associated with the status.
@@ -487,7 +487,7 @@ status-get --include-data
 
 ### status-set
 
-`status-set` allows a charm to describe their current status. This places the
+`status-set` allows charms to describe their current status. This places the
 responsibility on the charm to know its status, and set it accordingly using
 the `status-set` hook tool.
 
@@ -585,6 +585,9 @@ location: /srv/data
 
 storage-get -s data/0 --format json
 {"kind":"filesystem","location":"/srv/data"}
+
+storage-get -s data/0 location
+/srv/data
 ```
 
 ### storage-list
