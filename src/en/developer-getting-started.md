@@ -12,6 +12,11 @@ environments, many developers use the [local provider](./config-local.html) to
 develop  because it is easier, faster, and cheaper than a traditional cloud
 environment.
 
+This guide also uses the [Vanilla PHP Forum software](http://vanillaforums.org)
+as our example application for getting started charming, as it's a great example
+of a typical three factor application consisting of a Database, a PHP web
+application served over HTTP.
+
 ## Prerequisites and Tools
 
 We have created tools to make writing charms easier. Developers should [install
