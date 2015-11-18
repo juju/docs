@@ -54,11 +54,9 @@
                   </li>
                   <li class="section"><a class="header" href="howto.html">How to...</a>
                     <ul class="sub">
-                      <li><a href="howto-charm-with-docker.html">Charm with Docker</a></li>
                       <li><a href="howto-node.html">Deploy a Node.js app</a></li>
                       <li><a href="howto-rails.html">Test and deploy on Rails</a></li>
                       <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
-                      <li><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
                       <li><a href="howto-drupal-iis.html">Deploy Drupal Windows charm</a></li>
                     </ul>
                   </li>
@@ -73,12 +71,6 @@
                       <li><a href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
                       <li><a href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
                       <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
-                    </ul>
-                  </li>
-                  <li class="section"><a class="header" href="developer-storage.html">Implementing Storage</a>
-                    <ul class="sub">
-                      <li><a href="developer-storage.html#adding-storage">Adding Storage</a></li>
-                      <li><a href="developer-storage.html#storage-hooks">Storage hooks</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="developer-layers.html">Charm Layers</a>
@@ -108,11 +100,23 @@
                       <li><a href="developer-actions.html#action-tools">Action Tools</a></li>
                     </ul>
                   </li>
+                  <li class="section"><a class="header" href="developer-storage.html">Implementing Storage</a>
+                    <ul class="sub">
+                      <li><a href="developer-storage.html#adding-storage">Adding Storage</a></li>
+                      <li><a href="developer-storage.html#storage-hooks">Storage hooks</a></li>
+                    </ul>
+                  </li>
                   <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
                     <ul class="sub">
                       <li><a href="developer-debugging.html#the-'debug-hooks'-command">debug-hooks</a></li>
                       <li><a href="developer-debugging.html#the-'debug-log'-command">debug-log</a></li>
                       <li><a href="developer-debug-dhx.html">DHX</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="developer-howto.html">How to...</a>
+                    <ul class="sub">
+                      <li><a href="howto-charm-with-docker.html">Charm with Docker</a></li>
+                      <li><a href="howto-vagrant-workflow.html">Work with Vagrant</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
