@@ -44,9 +44,55 @@ These variables are available on the juju client in order to change its default 
         juju set-environment logging-config "juju=DEBUG; unit=WARNING"
 
 
+- JUJU_DEV_FEATURE_FLAGS
+
+  This setting takes effect on an environment only at bootstrap time. Unstable
+  or pre-release features are enabled only when the feature flag is enabled prior
+  to bootstrapping the environment.
+
+      JUJU_DEV_FEATURE_FLAGS=storage,network-spaces juju bootstrap
+
+- JUJU_STARTUP_LOGGING_CONFIG
+
+    This setting takes effect on an environment only at bootstrap time, and is
+    used to set the verbosity of the bootstrap process. For example, to troubleshoot
+    a failure bootstrapping during provider development, you can set the log level
+    to TRACE.
+
+          JUJU_STARTUP_LOGGING_CONFIG=TRACE juju bootstrap
+
+- JUJU_CLI_VERSION
+
+  This allows you to change the behavior of the CLI between major juju releases
+  and exists as a compatibility flag for those users wishing to enable the newer
+  behavior of the Juju CLI. As the CLI output and behavior is stable between minor
+  releases of Juju, setting JUJU_CLI_VERSION will enable developers and users to
+  preview the newer behavior of the CLI.
+
+      export JUJU_CLI_VERSION=2
+      juju status
+
 # Unit
 
 These variables are available to charms during hook execution.
+
+- JUJU_ACTION_NAME
+
+  The name of the currently executing action
+
+      JUJU_ACTION_NAME="backup"
+
+- JUJU_ACTION_TAG
+
+    A concatenation of `JUJU_ACTION_UUID` and the word 'action'
+
+      JUJU_ACTION_TAG=action-97db750c-c7d7-47a4-8b57-9cc3e85f8153
+
+- JUJU_ACTION_UUID
+
+    The current UUID of the executing action
+
+      JUJU_ACTION_UUID=97db750c-c7d7-47a4-8b57-9cc3e85f8153
 
 - JUJU_API_ADDRESSES
 
@@ -60,11 +106,20 @@ These variables are available to charms during hook execution.
 
         JUJU_AGENT_SOCKET="@/var/lib/juju/agents/unit-postgresql-0/agent.socket"
 
+
+- JUJU_CHARM_DIR
+
+  The path to the currently executing charm directory.
+
+      JUJU_CHARM_DIR="/var/lib/juju/agents/unit-postgresql-0/charm"
+
+
 - JUJU_CONTEXT_ID
 
     Used by juju to communicate to ask a running agent to execute a command on juju's behalf.
 
         JUJU_CONTEXT_ID="postgresql/0:db-relation-joined:34317605475203611"
+
 
 - JUJU_DEBUG
 
@@ -90,6 +145,13 @@ These variables are available to charms during hook execution.
 
         JUJU_HOOK_NAME="db-relation-joined"
 
+- JUJU_MACHINE_ID
+
+  The ID of the machine that's currently executing the hook
+
+      JUJU_MACHINE_ID="1"
+
+
 - JUJU_RELATION
 
     The relation name being executed.
@@ -112,4 +174,12 @@ These variables are available to charms during hook execution.
 
     The name of the local unit being executed.
 
-        JUJU_UNIT_NAME="postgresql/0"
+
+
+
+
+# Internal Use only
+
+- JUJU_DUMMY_DELAY
+- JUJU_NOTEST_MONGOJS
+- JUJU_AVAILABILITY_ZONE
