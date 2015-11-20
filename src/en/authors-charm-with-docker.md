@@ -101,8 +101,8 @@ An example of a charm using the reactive pattern is the
 [layer-docker charm](https://github.com/juju-solutions/layer-docker).
 It also uses the compose workflow and can serve as the base for other Docker
 charms.  This document will focus on the reactive parts of the layer-docker
-charm.  If you want to read more about compose in the Juju
-[composing documentation](https://jujucharms.com/docs/devel/authors-charm-composing).
+charm. You can read more about layers in the
+[building a charm with layers documentation](https://jujucharms.com/docs/1.24/authors-charm-building).
 
 ```
 ├── composer.yaml
