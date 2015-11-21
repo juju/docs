@@ -8,12 +8,12 @@ for using Juju to deploy Docker images.
 
 This document assumes you already know about [Docker](http://docker.com) and
 how to create, pull and use application containers.
-[Juju](https://jujucharms.com/docs/stable/about-juju) may be a new
-concept so you should [get started](https://jujucharms.com/get-started)
+[Juju](about-juju.html) may be a new
+concept so you should [get started](get-started.html)
 with the technology, there is more information on
-[installation and configuration](https://jujucharms.com/docs/stable/getting-started)
+[installation and configuration](getting-started.html)
 of Juju software on <https://jujucharms.com>.  This document will detail some of
-the higher level [concepts of Juju](https://jujucharms.com/docs/stable/glossary).
+the higher level [concepts of Juju](glossary.html).
 
 
 ### Reactive and layered charms
@@ -46,7 +46,7 @@ root charm directory.
 #### Building Charms
 
 The docker layer makes use of the
-[Charm Layers](https://jujucharms.com/docs/master/authors-charm-building)
+[Charm Layers](authors-charm-building.html)
 concept building off the base charm and creating its own layer of added
 functionality,
 
@@ -101,8 +101,8 @@ An example of a charm using the reactive pattern is the
 [layer-docker charm](https://github.com/juju-solutions/layer-docker).
 It also uses the compose workflow and can serve as the base for other Docker
 charms.  This document will focus on the reactive parts of the layer-docker
-charm.  If you want to read more about compose in the Juju
-[composing documentation](https://jujucharms.com/docs/devel/authors-charm-composing).
+charm.  You can read more about layers in the
++[building a charm with layers documentation](authors-charm-building.html).
 
 ```
 ├── composer.yaml
