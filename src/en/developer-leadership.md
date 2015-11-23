@@ -45,8 +45,7 @@ If it returns a non-zero exit code, no inferences regarding true leadership
 status can be made, but you should generally fail safe and refrain from
 acting as leader when you cannot be sure.
 
-
-truth is independent of hook sequence. If a unit has been
+Truth is independent of hook sequence. If a unit has been
 designated leader while mid-hook, it will start to return true; and if a
 unit were to (say) lose its state-server connection mid-hook, and be unable
 to verify continued leadership past lease expiry time, it would start to
