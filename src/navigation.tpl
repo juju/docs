@@ -93,6 +93,13 @@
                     </ul>
                   </li>
                   </li>
+                  <li class="section"><a class="header" href="developer-leadership.html">Implementing Leadership</a>
+                    <ul class="sub">
+                      <li><a href="developer-leadership.html#leadership-hooks">Leadership Hooks</a></li>
+                      <li><a href="developer-leadership.html#leadership-tools">Leadership Tools</a></li>
+                      <li><a href="developer-leadership.html#leadership-howtos">Leadership How-Tos</a></li>
+                    </ul>
+                  </li>
                   <li class="section"><a class="header" href="developer-action.html">Implementing Actions</a>
                     <ul class="sub">
                       <li><a href="developer-actions.html#defining-actions">Defining Actions</a></li>
