@@ -17,11 +17,11 @@ leader to drop out.
 If you wish to be notified when your unit's leadership status changes, you
 should implement the following hooks:
 
-####  `leader-elected`
+####  [`leader-elected`](reference-hook-tools.html#leader-elected)
 which will run at least once, when the unit is known to be leader and guaranteed
 to remain so for at least 30s.
 
-####  `leader-settings-changed`
+####  [`leader-settings-changed`](reference-hook-tools.html#leader-settings-changed)
 will run at least once when the unit is not guaranteed continued leadership for
 the next 30s; and also whenever some other unit writes leader settings.
 
@@ -37,7 +37,7 @@ running. There is deliberately no mechanism for discovering which *other* unit
 is the leader; such data always risks staleness and opens the door to a lot of
 race scenarios.
 
-### `is-leader`
+### [`is-leader`](refence-hook-tools.html#is-leader)
 will write `"True"` or `"False"` to stdout, and return 0, if
 the unit is currently leader and can be guaranteed to remain so for 30s.
 Output can be expressed as `--format json` or `--format yaml` if desired.
@@ -45,8 +45,7 @@ If it returns a non-zero exit code, no inferences regarding true leadership
 status can be made, but you should generally fail safe and refrain from
 acting as leader when you cannot be sure.
 
-### `is-leader`
-truth is independent of hook sequence. If a unit has been
+Truth is independent of hook sequence. If a unit has been
 designated leader while mid-hook, it will start to return true; and if a
 unit were to (say) lose its state-server connection mid-hook, and be unable
 to verify continued leadership past lease expiry time, it would start to
@@ -55,7 +54,7 @@ return false.
 Every service deployed by juju also has access to a pseudo-relation over which
 leader settings can be communicated with the following tools:
 
-### `leader-set`
+### [`leader-set`](refrence-hook-tools.html#leader-set)
 acts much like `relation-set`, in that it lets you write string
 key/value pairs (in which an empty value removes the key), but with the
 following differences:
@@ -81,7 +80,7 @@ rather than `leader-set foo=bar; leader-set baz=qux` etc, in which minions
 may end up seeing a sandbox in which only `foo` is set to the "correct"
 value).
 
-### `leader-get`
+### [`leader-get`](reference-hook-tools.html#leader-get)
 acts much like relation-get, in that it lets you read string
 values by key (and expose them in helpful formats), but with the following
 difference:
@@ -98,7 +97,7 @@ on users of `leader-set`.
 
 # Leadership HowTo's
 
-## How do I...
+### How do I...
 
 ### ...share one-shot configuration among units?
 
