@@ -109,11 +109,12 @@
                   <li class="section"><a class="header" href="developer-storage.html">Implementing Storage</a>
                     <ul class="sub">
                       <li><a href="developer-storage.html#adding-storage">Adding Storage</a></li>
-                      <li><a href="developer-storage.html#storage-hooks">Storage hooks</a></li>
+                      <li><a href="developer-storage.html#storage-hooks">Storage Hooks</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
                     <ul class="sub">
+                      <li><a href="developer-debugging-layers.html">Debugging Layers</li>
                       <li><a href="developer-debugging.html#the-'debug-hooks'-command">debug-hooks</a></li>
                       <li><a href="developer-debugging.html#the-'debug-log'-command">debug-log</a></li>
                       <li><a href="developer-debug-dhx.html">DHX</a></li>
