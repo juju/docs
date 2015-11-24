@@ -153,4 +153,4 @@ library](./tools-amulet.html) is highly suggested and makes it easy to write
 tests in Python.
 
 For more information about writing tests please refer to the
-[testing reference document](./reference-testing.md).
+[charm testing guide](./developer-testing.md).
