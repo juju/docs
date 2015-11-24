@@ -51,7 +51,7 @@ of information in their respective files.
 
 Given this behavior, it can be extremely difficult to assemble from layers,
 charms written in other frameworks/technologies other than Reactive. As Hooks
-would contain the majority of the code this can be problematic as hooks will
+would contain the majority of the code this can be problematic as Hooks will
 overwrite one another.
 
 ### Where did this file come from?
