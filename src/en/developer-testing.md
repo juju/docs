@@ -1,4 +1,4 @@
-Title: Testing Juju charms
+Title: Writing Charm Tests
 
 # Writing Charm Tests
 
@@ -45,15 +45,17 @@ be available on the testing system.
 
 ## Test automation
 
-The test runner will be run automatically so all charm tests must be self
-contained, meaning tests must install or package the files required to test
+The charm tests will be run automatically so all tests must not require user
+interaction. The test code must install or package the files required to test
 the charm.  The test runner will find and execute each test within that
 directory and produce a report.
 
 If tests exit with services still in the environment, the test runner may clean
 them up, whether by destroying the environment or destroying the services
-explicitly, and the machines may be terminated as well. Any artifacts needed
-from the test machines should be retrieved and displayed before the test exits.
+explicitly, and the machines may be terminated as well. For this reason tests
+should not make assumptions on machine numbers or other factors in the
+environment that could be reset.  Any artifacts needed from the test machines
+should be retrieved and displayed before the test exits.
 
 ### Exit codes
 
@@ -67,15 +69,17 @@ Upon exit, the test's exit code will be evaluated to mean the following:
 
 The `charm-tools` package contains a static charm analysis tool called
 `charm proof`.  This tool checks the charm structure and gives Informational,
-Warning, and Error messages on potential issues with the charm structure. All
+Warning, and Error messages on potential issues with the charm structure. To be
+in line with [Charm Store policy](./authors-charm-policy.html), all
 charms should pass `charm proof` with Information messages only.
-Warning or Error messages indicate a problem that should be fixed in the charm.
+Warning or Error messages indicate a problem in the charm and the automated
+tests will fail the `charm proof` step.
 
 ## Amulet
 
 While you can write tests in Bash or other languages, the
-[Amulet library](./tools-amulet.html) makes it easy to write tests in Python and is
-recommended.
+[Amulet library](./tools-amulet.html) makes it easy to write tests in Python
+and is recommended.
 
 ## BundleTester
 
