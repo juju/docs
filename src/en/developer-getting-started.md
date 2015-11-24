@@ -85,6 +85,8 @@ which to work. For example:
 
 ```bash
 export JUJU_REPOSITORY=$HOME/charms
+LAYER_PATH=$JUJU_REPOSITORY/layers
+INTERFACE_PATH=$JUJURE_REPOSITORY/interfaces
 mkdir -p $JUJU_REPOSITORY/layers
 cd $JUJU_REPOSITORY/layers
 ```
