@@ -1,17 +1,41 @@
-### Introduction
+## Writing a layer by example
 
-Vanilla is an open source themeable, pluggable, multi-lingual forum software,
-which enables communities to host a forum for discussion topics at scale.
-Powered by PHP and MySQL Vanilla is a fine example of a 3 tiered application
+In this howto, we will be writing a charm layer for Vanilla. Vanilla is an open
+source themeable, pluggable, multi-lingual forum software, which enables
+communities to host a forum for discussion topics at scale. Powered by PHP and
+MySQL Vanilla is a fine example of a 3 tiered application
 
-Database (MySQL) Middleware (PHP App) Load Balancing via HTTP interface
+- Database (MySQL)
+- Middleware (PHP App)
+- Load Balancing via HTTP interface
 
-### Create the layer for the Vanilla layer
+### Prepare your workspace
 
 From within your local repository which is designated by the environment
-variable: $JUJU_REPOSITORY
+variable: [`$JUJU_REPOSITORY`](reference-environment-variables.html#juju-repository)
 
-    mkdir $JUJU_REPOSITORY/layers/vanilla cd $JUJU_REPOSITORY/layers/vanilla
+There are 2 additional environment variables to assign while working with
+layers. These are great candidates for inclusion in your shells rc files.
+
+#### LAYER_PATH
+
+Defines the location on disk to search for local layers
+
+#### INTERFACE_PATH
+
+Defines the location on disk to search for interface layers
+
+```bash
+LAYER_PATH=$JUJU_REPOSITORY/layers
+INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
+```
+
+And create our charm layer for Vanilla
+
+```bash
+mkdir -p $LAYER_PATH/vanilla
+cd $LAYER_PATH/vanilla
+```
 
 ### Determine a base layer and additional relations
 
