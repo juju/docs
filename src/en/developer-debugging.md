@@ -12,7 +12,9 @@ Juju provides two commands [`juju debug-log`](#the-'debug-log'-command) and
 [`juju debug-hooks`](#the-'debug-hooks'-command) to help developers resolve
 problems in their code.  The [dhx debugging plugin](./developer-debug-dhx.html)
 improves the debug-hooks experience by performing some common actions
-automatically.
+automatically. Or maybe you're having an issue with building from your charm
+layer, in which case the [debugging with layers](./developer-debug-layers.html)
+is where to look.
 
 ## The 'debug-log' command
 
