@@ -116,7 +116,7 @@
                     <ul class="sub">
                       <li><a href="developer-testing.html#charm-proof">Charm Proof</a></li>
                       <li><a href="developer-testing.html#amulet">Amulet</a></li>
-                      <li><a href="developer-testing.html#bundle-tester">BundleTester</a></li>
+                      <li><a href="developer-testing.html#bundletester">BundleTester</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
