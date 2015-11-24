@@ -90,7 +90,7 @@ python:
 ```python
 from charmhelpers.core.hookenv import config
 
-# Get all the configuration as a dictionary.
+# Get all the configuration from charmhelpers as a dictionary.
 cfg =config()
 # Get the value for the "interval" key.
 interval = cfg.get(‘interval’)
@@ -98,6 +98,8 @@ interval = cfg.get(‘interval’)
 bash:  
 ```bash
 INTERVAL=$(config-get interval)
+
+config-get --all
 ```
 
 
@@ -136,7 +138,7 @@ juju_log('Something has transpired', 'INFO')
 ```
 bash:  
 ```bash
-juju-log -l 'INFO' Something has transpired
+juju-log -l 'WARN' Something has transpired
 ```
 
 
@@ -193,7 +195,7 @@ ADDRESSS=$(leader-get cluster-leader-address)
 
 ## leader-set
 
-`leader-set` immediately writes the  key/value pairs to the state server,
+`leader-set` immediately writes the key/value pairs to the state server,
 which will then inform non-leader units of the change. It will fail if called
 without arguments, or if called by a unit that is not currently service leader.
 
@@ -239,6 +241,8 @@ open_port(80, protocol='TCP')
 bash:  
 ```bash
 open-port 80/tcp
+
+open-port 1234/udp
 ```
 
 
@@ -324,11 +328,14 @@ python:
 from charmhelpers.core.hookenv import relation_list
 from charmhelpers.core.hookenv import relation_id
 
-relation_list(relation_id())
+# List the units on a relation for the given relation id.
+related_units = relation_list(relation_id())
 ```
 bash:  
 ```bash
 relation-list 9
+
+relation-list -r website:2
 ```
 
 
@@ -348,6 +355,8 @@ relation_set({'port': 80, 'tuning': 'default'})
 bash:  
 ```bash
 relation-set port=80 tuning=default
+
+relation-set -r server:3 username=jim password=12345
 ```
 
 
@@ -364,12 +373,14 @@ charm_status = status_get()
 bash:  
 ```bash
 status-get
+
+status-get --include-data
 ```
 
 
 ## status-set
 
-`status-set` wites the workload state with an optional message which is visible
+`status-set` writes the workload state with an optional message which is visible
 to the user using `juju status`
 
 python:  
@@ -380,7 +391,13 @@ status_set('blocked', 'Unable to continue until related to a database')
 ```
 bash:  
 ```bash
-status-set blocked 'Unable to continue until related to a database'
+status-set maintenance "installing software"
+status-set maintenance "formatting storage space, time left: 120s"
+status-set waiting "waiting for database"
+status-set active
+status-set active "Storage 95% full"
+status-set blocked "Need a database relation"
+status-set blocked "Storage full"
 ```
 
 
@@ -417,6 +434,8 @@ check_call(["storage-get", "21127934-8986-11e5-af63-feff819cdc9f"])
 bash:
 ```bash
 storage-get 21127934-8986-11e5-af63-feff819cdc9f
+
+storage-get -s data/0
 ```
 
 

@@ -73,7 +73,7 @@ Warning, and Error messages on potential issues with the charm structure. To be
 in line with [Charm Store policy](./authors-charm-policy.html), all
 charms should pass `charm proof` with Information messages only.
 Warning or Error messages indicate a problem in the charm and the automated
-tests will fail the `charm proof` step.
+tests will fail the on the `charm proof` step.
 
 ## Amulet
 
