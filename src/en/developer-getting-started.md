@@ -140,23 +140,17 @@ juju expose vanilla
 
 ## Testing your Charm
 
-All new charms require tests so we can ensure that the service installs,
-configures, scales and relates as intended. These tests are required to ensure
-quality and compatibility with other charms. The tests should be self contained,
-installing all the required packages, so the tests can be run automatically with
-a tool called [bundletester](https://github.com/juju-solutions/bundletester).
-Similar to hooks tests should be executable files in a `tests` directory of the
-charm.  While you can write tests in Bash or other languages, the [Amulet
+Because Juju is a large complex system, not unlike a Linux software
+distribution, there is a need to test the charms themselves and how they
+interact with one another. All new charms require tests that verify the service
+installs, configures, scales and relates as intended. The tests should be self
+contained, installing all the required packages, so the tests can be run
+automatically with a tool called
+[`bundletester`](https://github.com/juju-solutions/bundletester). Similar to
+hooks the tests should be executable files in a `tests` directory of the charm.
+While you can write tests in Bash or other languages, the [Amulet
 library](./tools-amulet.html) is highly suggested and makes it easy to write
 tests in Python.
 
-The automated test tool will run the tests in an alphanumeric ordering based on
-the file name.  A common pattern is to use a filename that sorts first (00-setup
-for example) which installs Juju if not already installed and any other packages
-required for testing.
-
-The other files in the test directory can now be written in Python and use the
-Amulet library.  The tests should deploy the charm, change configuration, relate
-to other charms where appropriate.  The test should ensure the service is
-running, operational, received the configuration from the test and was
-successfully related to the other charms.
+For more information about writing tests please refer to the
+[charm testing guide](./developer-testing.html).
