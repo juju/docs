@@ -38,9 +38,17 @@ The tests can make the following assumptions:
 - Tests should run automatically and not require (such as passwords) or human
   intervention to get a successful test result.
 
+If a tool is needed to perform a test and is not available in the Ubuntu
+archive, it can also be included in the `tests/` directory, as long as the file
+which contains it is not executable. Note that build tools cannot be assumed to
+be available on the testing system.
+
 ## Test automation
 
-Any automation concerns?
+The test runner will be run automatically so all charm tests must be self
+contained, meaning tests must install or package the files required to test
+the charm.  The test runner will find and execute each test within that
+directory and produce a report.
 
 If tests exit with services still in the environment, the test runner may clean
 them up, whether by destroying the environment or destroying the services
@@ -69,32 +77,34 @@ While you can write tests in Bash or other languages, the
 [Amulet library](./tools-amulet) makes it easy to write tests in Python and is
 recommended.
 
-## bundletester
+## BundleTester
+
+The charm test runner is a tool called
+[bundletester](https://github.com/juju-solutions/bundletester). The
+bundletester tool is used to find, fetch, and run tests on charms and
+[bundles](charms-bundles.html).
 
 ### tests.yaml
-If present, tests/tests.yaml will be read to determine packages that need to be
-installed on the host running tests in order to facilitate the tests. The
-packages can _only_ be installed from the official, default Ubuntu archive for
-the release which the charm is intended for, from any of the repositories
-enabled by default in said release. The format of tests.yaml is as such:
 
-```yaml
-packages: [ package1, package2, package3 ]
-```
+The optional driver file, `tests/tests.yaml` can be used to to control the
+overall flow of how tests are run. All values in this file are optional and
+when not provided default values will be used.
 
-If a tool is needed to perform a test and is not available in the Ubuntu
-archive, it can also be included in the `tests/` directory, as long as the file
-which contains it is not executable. Note that build tools cannot be assumed to
-be available on the testing system.
-
+Read the
+[bundletester `README.md`](https://github.com/juju-solutions/bundletester)
+file or more information on the options included in the  
+[`tests.yaml`](https://github.com/juju-solutions/bundletester#testsyaml)
+file.
 
 ### Example Tests
 
-A common pattern is to use a filename that sorts first (00-setup for
-example) which installs Juju if not already installed and any other packages
-required for testing.
+#### Initial test can install Amulet
 
-#### 00-setup
+Since the tests are run in lexical order, a common pattern is to use a filename
+that sorts first (`00-setup` for example) which installs Juju and the Amulet
+Python package if not already installed and any other packages required for
+testing.
+
 ```bash
 #!/bin/bash
 # Check if amulet is installed before adding repository and updating apt-get.
@@ -104,8 +114,47 @@ if [ $? -ne 0 ]; then
     sudo apt-get update
     sudo apt-get install -y amulet
 fi
-# Install any additional python packages or software here.
-sudo apt-get install -y python3-requests
+# Install any additional python packages or testing software here.
 ```
 
-#### python example
+#### Following tests can be written in Amulet
+
+The remaining tests can assume Amulet is now installed and use the library to
+create tests for the charm.
+
+You are free to write the tests in any style you want, but a common pattern is
+to use the
+["unittest" framework](https://docs.python.org/2/library/unittest.html)
+from Python to set up and deploy the charms.  The other methods starting with
+"test" will be run afterward.
+
+```python
+#!/usr/bin/env python3
+
+import amulet
+import requests
+import unittest
+
+
+class TestDeployment(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.deployment = amulet.Deployment()
+
+        cls.deployment.add('charm-name')
+        cls.deployment.expose('charm-name')
+
+        try:
+            cls.deployment.setup(timeout=900)
+            cls.deployment.sentry.wait()
+        except amulet.helpers.TimeoutError:
+            amulet.raise_status(amulet.SKIP, msg="Environment wasn't stood up in time")
+        except:
+            raise
+        cls.unit = cls.deployment.sentry.unit['charm-name/0']
+
+# Test methods would go here.
+
+if __name__ == '__main__':
+    unittest.main()
+```
