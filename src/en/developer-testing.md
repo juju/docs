@@ -74,7 +74,7 @@ Warning or Error messages indicate a problem that should be fixed in the charm.
 ## Amulet
 
 While you can write tests in Bash or other languages, the
-[Amulet library](./tools-amulet) makes it easy to write tests in Python and is
+[Amulet library](./tools-amulet.html) makes it easy to write tests in Python and is
 recommended.
 
 ## BundleTester
@@ -82,7 +82,7 @@ recommended.
 The charm test runner is a tool called
 [bundletester](https://github.com/juju-solutions/bundletester). The
 bundletester tool is used to find, fetch, and run tests on charms and
-[bundles](charms-bundles.html).
+[bundles](./charms-bundles.html).
 
 ### tests.yaml
 

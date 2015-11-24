@@ -112,6 +112,13 @@
                       <li><a href="developer-storage.html#storage-hooks">Storage hooks</a></li>
                     </ul>
                   </li>
+                  <li class="section"><a class="header" href="developer-testing.html">Writing Tests</a>
+                    <ul class="sub">
+                      <li><a href="developer-testing.html#charm-proof">Charm Proof</a></li>
+                      <li><a href="developer-testing.html#amulet">Amulet</a></li>
+                      <li><a href="developer-testing.html#bundle-tester">BundleTester</a></li>
+                    </ul>
+                  </li>
                   <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
                     <ul class="sub">
                       <li><a href="developer-debugging.html#the-'debug-hooks'-command">debug-hooks</a></li>
