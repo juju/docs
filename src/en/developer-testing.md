@@ -1,6 +1,6 @@
 Title: Testing Juju charms
 
-# Charm Testing
+# Writing Charm Tests
 
 Charm authors will have the best insight into whether or not a charm is working
 properly.  It is up to the author to create tests that ensure quality and
@@ -55,7 +55,7 @@ them up, whether by destroying the environment or destroying the services
 explicitly, and the machines may be terminated as well. Any artifacts needed
 from the test machines should be retrieved and displayed before the test exits.
 
-### Exit Codes
+### Exit codes
 
 Upon exit, the test's exit code will be evaluated to mean the following:
 
@@ -63,12 +63,12 @@ Upon exit, the test's exit code will be evaluated to mean the following:
 - 1: Failed test
 - 100: Test is skipped because of incomplete environment
 
-## charm proof
+## `charm proof`
 
 The `charm-tools` package contains a static charm analysis tool called
 `charm proof`.  This tool checks the charm structure and gives Informational,
 Warning, and Error messages on potential issues with the charm structure. All
-charms should pass `charm proof` with no messages or Information messages only.
+charms should pass `charm proof` with Information messages only.
 Warning or Error messages indicate a problem that should be fixed in the charm.
 
 ## Amulet
@@ -80,8 +80,8 @@ recommended.
 ## BundleTester
 
 The charm test runner is a tool called
-[bundletester](https://github.com/juju-solutions/bundletester). The
-bundletester tool is used to find, fetch, and run tests on charms and
+[`bundletester`](https://github.com/juju-solutions/bundletester). The
+`bundletester` tool is used to find, fetch, and run tests on charms and
 [bundles](./charms-bundles.html).
 
 ### tests.yaml
@@ -100,10 +100,10 @@ file.
 
 #### Initial test can install Amulet
 
-Since the tests are run in lexical order, a common pattern is to use a filename
-that sorts first (`00-setup` for example) which installs Juju and the Amulet
-Python package if not already installed and any other packages required for
-testing.
+Since the tests are run in lexical order, a common pattern is to use an
+executable file with a name that sorts first (`00-setup` for example) which
+installs Juju and the Amulet Python package if not already installed and any
+other packages required for testing.
 
 ```bash
 #!/bin/bash
@@ -119,7 +119,7 @@ fi
 
 #### Following tests can be written in Amulet
 
-The remaining tests can assume Amulet is now installed and use the library to
+The remaining tests can now assume Amulet is installed and use the library to
 create tests for the charm.
 
 You are free to write the tests in any style you want, but a common pattern is
