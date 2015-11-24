@@ -146,11 +146,11 @@ interact with one another. All new charms require tests that verify the service
 installs, configures, scales and relates as intended. The tests should be self
 contained, installing all the required packages, so the tests can be run
 automatically with a tool called
-[bundletester](https://github.com/juju-solutions/bundletester). Similar to hooks
-the tests should be executable files in a `tests` directory of the charm. While
-you can write tests in Bash or other languages, the [Amulet
+[`bundletester`](https://github.com/juju-solutions/bundletester). Similar to
+hooks the tests should be executable files in a `tests` directory of the charm.
+While you can write tests in Bash or other languages, the [Amulet
 library](./tools-amulet.html) is highly suggested and makes it easy to write
 tests in Python.
 
 For more information about writing tests please refer to the
-[charm testing guide](./developer-testing.md).
+[charm testing guide](./developer-testing.html).
