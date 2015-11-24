@@ -63,7 +63,7 @@ Upon exit, the test's exit code will be evaluated to mean the following:
 - 1: Failed test
 - 100: Test is skipped because of incomplete environment
 
-## `charm proof`
+## charm proof
 
 The `charm-tools` package contains a static charm analysis tool called
 `charm proof`.  This tool checks the charm structure and gives Informational,
