@@ -9,18 +9,20 @@ configuration, even determining which unit is the leader in a cluster. The
 listed hook-tools are available in any hook running on the unit, and are only
 available within ‘hook context’.
 
-> Note: You can view a detailed listing of what each command listed below does
+!!! Note: You can view a detailed listing of what each command listed below does
 on your client with `juju help-tool {command}`. Or for more detailed help on
 individual commands run the command with the -h flag.
 
-> Note: Many of the tools produce text based output, and those that do accept a
---format flag which can be set to json or yaml as desired.
+!!! Note:  Many of the tools produce text based output, and those that do accept
+a `--format` flag which can be set to json or yaml as desired.
 
 ## action-fail
 
 `action-fail` sets the action's fail state with a given error message.  Using
 `action-fail` without a failure message will set a default message indicating a
-problem with the action.
+problem with the action. For more information about where you might use this
+command, read more about [Juju Actions](actions.html) or
+[how to write Juju Actions](developer-actions.html).
 
 python:  
 ```python
@@ -38,7 +40,8 @@ action-fail ‘unable to contact remote service’
 
 `action-get` will print the value of the parameter at the given key, serialized
 as YAML.  If multiple keys are passed, `action-get` will recurse into the param
-map as needed.
+map as needed. Read more about [Juju Actions](actions.html) or
+[how to write Juju Actions](developer-actions.html).
 
 python:  
 ```python
@@ -54,10 +57,10 @@ TIMEOUT=$(action-get timeout)
 
 ## action-set
 
-`action-set` adds the given values to the results map of the Action.  This map
-is returned to the user after the completion of the Action.  Keys must start
-and end with lowercase alphanumeric, and contain only lowercase alphanumeric,
-hyphens and periods.
+`action-set` adds the given values to the results map of the
+[Action](actions.html).  This map is returned to the user after the
+completion of the Action.  Keys must start and end with lowercase alphanumeric,
+and contain only lowercase alphanumeric, hyphens and periods.
 
 python:  
 ```python
@@ -95,12 +98,12 @@ close-port 9000-9999/udp
 ## config-get
 
 `config-get` returns information about the service configuration (as defined by
-`config.yaml`). If called without arguments, it returns a dictionary containing all
-config settings that are either explicitly set, or which have a non-nil default
-value. If the `--all` flag is passed, it returns a dictionary containing all
-defined config settings including nil values (for those without defaults). If
-called with a single argument, it returns the value of that config key. Missing
-config keys are reported as nulls, and do not return an error.
+`config.yaml`). If called without arguments, it returns a dictionary containing
+all config settings that are either explicitly set, or which have a non-nil
+default value. If the `--all` flag is passed, it returns a dictionary containing
+all defined config settings including nil values (for those without defaults).
+If called with a single argument, it returns the value of that config key.
+Missing config keys are reported as nulls, and do not return an error.
 
 python:  
 ```python
@@ -167,13 +170,13 @@ hosted on the machine.
 An invocation without arguments will allow the current hook to complete, and
 will only cause a reboot if the hook completes successfully.
 
-If the --now flag is passed, the current hook will terminate immediately, and
+If the `--now` flag is passed, the current hook will terminate immediately, and
 be restarted from scratch after reboot. This allows charm authors to write
 hooks that need to reboot more than once in the course of installing software.
 
-The --now flag cannot terminate a debug-hooks session; hooks using --now should
-be sure to terminate on unexpected errors, so as to guarantee expected behavior
-in all situations.
+The `--now` flag cannot terminate a debug-hooks session; hooks using `--now`
+should be sure to terminate on unexpected errors, so as to guarantee expected
+behavior in all situations.
 
 `juju-reboot` is not supported when running actions.
 
@@ -247,10 +250,10 @@ leader-set cluster-leader-address=10.0.0.123
 
 ## opened-ports
 
-`opened-ports` lists all ports or ranges opened by the unit. The opened-ports
-hook tool lists all the ports currently opened **by the running charm**. It does
-not, at the moment, include ports which may be opened by other charms co-hosted
-on the same machine
+`opened-ports` lists all ports or ranges opened by the **unit**. The
+opened-ports hook tool lists all the ports currently opened **by the running
+charm**. It does not, at the moment, include ports which may be opened by other
+charms co-hosted on the same machine
 [lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770).
 
 !!! Note: opening ports is transactional (i.e. will take place on successfully
@@ -340,77 +343,63 @@ payload-unregister monitoring 0fcgaba
 in a given relation (set with `-r`, defaulting to the current relation
 identifier, as in `relation-set`). The first argument specifies the settings
 key, and the second the remote unit, which may be omitted if a default is
-available (that is, when running a relation hook other than -broken).
+available (that is, when running a relation hook other than
+[-relation-broken](authors-charm-hooks.html#[name]-relation-broken)).
 
 If the first argument is omitted, a dictionary of all current keys and values
 will be printed; all values are always plain strings without any
 interpretation. If you need to specify a remote unit but want to see all
 settings, use `-` for the first argument.
 
-The environment variable `JUJU_REMOTE_UNIT` stores the default remote unit:
-
-```bash
-echo $JUJU_REMOTE_UNIT
- mongodb/2
-```
-
-Getting the settings of the default unit in the default relation is done with:
-
-```no-highlight
-relation-get
- username: jim
- password: "12345"
-```
-
-To get a specific setting from the default remote unit in the default relation
-you would instead use:
-
-
-```no-highlight
-relation-get username
- jim
-```
-
-To get all settings from a particular remote unit in a particular relation you
-specify them together with the command:
-
-```no-highlight
-relation-get -r database:7 - mongodb/5
- username: bob
- password: 2db673e81ffa264c
-```
-
-Note that `relation-get` produces results that are _consistent_ but not
-necessarily _accurate_, in that you will always see settings that:
-
-  - were accurate at some point in the reasonably recent past
-  - are always the same within a single hook run, _except_ when inspecting the
-    unit's own relation settings, in which case local changes from `relation-set`
-    will be seen correctly.
+The environment variable
+[`JUJU_REMOTE_UNIT`](reference-environment-variables.html#juju-remote-unit)
+stores the default remote unit.
 
 You should never depend upon the presence of any given key in `relation-get`
 output. Processing that depends on specific values (other than `private-address`)
-should be restricted to [-changed](authors-charm-hooks.html#[name]-relation-changed)
-hooks for the relevant unit, and the absence
-of a remote unit's value should never be treated as an
-[error](./authors-hook-errors.html) in the local unit.
+should be restricted to
+[-relation-changed](authors-charm-hooks.html#[name]-relation-changed) hooks for
+the relevant unit, and the absence of a remote unit's value should never be
+treated as an [error](./authors-hook-errors.html) in the local unit.
 
-In practice, it is common and encouraged for -relation-changed hooks to exit
-early, without error, after inspecting `relation-get` output and determining it
-to be inadequate; and for [all other hooks](authors-charm-hooks.html) to be
-resilient in the face of missing keys, such that -relation-changed hooks will be
-sufficient to complete all configuration that depends on remote unit settings.
+In practice, it is common and encouraged for
+[-relation-changed](authors-charm-hooks.html#[name]-relation-changed) hooks to
+exit early, without error, after inspecting `relation-get` output and
+determining the data is inadequate; and for
+[all other hooks](authors-charm-hooks.html) to be resilient in the face of
+missing keys, such that -relation-changed hooks will be sufficient to complete
+all configuration that depends on remote unit settings.
 
-Settings for remote units already known to have departed remain accessible for
-the lifetime of the relation.
+Key value pairs for remote units that have departed remain accessible for the
+lifetime of the relation.
 
-!!! Note: `relation-get` currently has a bug
-[LP #1223339](https://bugs.launchpad.net/juju-core/+bug/1223339)
-which allows units of the same service to see each other's
-settings outside of a peer relation. Depending on this behaviour is inadvisable: if
-you need to share settings between units of the same service, always use a peer
-relation to do so, or your charm may fail unexpectedly when the bug is fixed.
+python:
+```python
+from charmhelpers.core.hookenv import relation_get
 
+# Since we define the relation id on every call to relation_get, both bash
+# examples look like the line below
+relation_get(rel_id)
+
+# To get a specific setting from the remote unit in the specified relation
+relation_get(rel_id, 'username')
+```
+bash:
+```bash
+# Getting the settings of the default unit in the default relation is done with:
+ relation-get
+  username: jim
+  password: "12345"
+
+# To get a specific setting from the default remote unit in the default relation
+  relation-get username
+   jim
+
+# To get all settings from a particular remote unit in a particular relation you
+   relation-get -r database:7 - mongodb/5
+    username: bob
+    password: 2db673e81ffa264c
+```
 
 ## relation-ids
 
@@ -462,10 +451,10 @@ running in a relation hook, `-r` needs to be specified. The `value` part of an
 argument is not inspected, and is stored directly as a string. Setting an empty
 string causes the setting to be removed.
 
-`relation-set` is the single tool at your disposal for communicating between
-units of related services. At least by convention, the charm that `provides` an
+`relation-set` is the tool for communicating information between
+units of related services. By convention the charm that `provides` an
 interface is likely to set values, and a charm that `requires` that interface
-will read them; but there is nothing enforcing this. Whatever information you
+will read values; but there is nothing enforcing this. Whatever information you
 need to propagate for the remote charm to work must be propagated via
 relation-set, with the single exception of the `private-address` key, which is
 always set before the unit joins.
@@ -595,9 +584,10 @@ status-set blocked "Storage full"
 
 ## storage-add
 
-`storage-add` may be used to add storage to the unit.  The tool takes the name
-of the storage (as defined in the charm metadata), and optionally the number of storage
-instances to add; by default it will add a single storage instance of the name.
+`storage-add` may be used to add storage to the **unit**.  The tool takes the
+name of the storage (as defined in the charm metadata), and optionally the
+number of storage instances to add; by default it will add a single storage
+instance of the name.
 
 python:  
 ```python
@@ -657,9 +647,9 @@ storage-list
 
 ## unit-get
 
-`unit-get` returns information about the local unit. It accepts a single
+`unit-get` returns information about the local **unit**. It accepts a single
 argument, which must be `private-address` or `public-address`. It is not
-affected by context:  
+affected by context.
 
 python:  
 ```python
