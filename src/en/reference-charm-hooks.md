@@ -75,11 +75,11 @@ implement the following logic:
 
 ### upgrade-charm
 
-`upgrade-charm` runs immediately after any [upgrade](./authors-charm-
-upgrades.html) operation that does _not_ itself interrupt an existing [error
-state](./authors-hook-errors.html). It should be used to reconcile local state
-written by some other version of the charm into whatever form it needs to take
-to be manipulated by the current version.
+`upgrade-charm` runs immediately after any
+[upgrade](./developer-upgrade-charm.html) operation that does _not_ itself
+interrupt an existing [error state](./authors-hook-errors.html). It should be
+used to reconcile local state written by some other version of the charm into
+whatever form it needs to take to be manipulated by the current version.
 
 While the forced upgrade functionality is intended as a developer tool, and is
 not generally suitable for end users, it's somewhat optimistic to depend on the

@@ -2,382 +2,406 @@ Title: Hook tools
 
 # Hook tools
 
-Juju incorporates a number of helper functions called 'hook-tools' which can be
-executed from within the hook environment - i.e. they can form part of the code
-for a charm's hooks (and also can be used during debug sessions). They are
-provided as shell commands, but if you are writing your charm using Python,
-they are wrapped by the charmhelpers module (
-[see the relevant docs for charmhelpers here](https://pythonhosted.org/charmhelpers/api/charmhelpers.core.hookenv.html))
+Units deployed with juju have a suite of tooling available to them, called ‘hook
+tools’. These commands provide the charm developer with a consistent interface
+to take action on the units behalf, such as opening ports, obtaining
+configuration, even determining which unit is the leader in a cluster. The
+listed hook-tools are available in any hook running on the unit, and are only
+available within ‘hook context’.
 
-Many of the tools produce output,
-and those that do accept a `--format` flag whose value can be set to `json` or
-`yaml` as desired. If it's not specified, the format defaults to `smart`, which
-transforms the basic output as follows:
+!!! Note: You can view a detailed listing of what each command listed below does
+on your client with `juju help-tool {command}`. Or for more detailed help on
+individual commands run the command with the -h flag.
 
+!!! Note:  Many of the tools produce text based output, and those that do accept
+a `--format` flag which can be set to json or yaml as desired.
 
-  - strings are left untouched
-  - boolean values are converted to the strings `True` and `False`
-  - ints and floats are converted directly to strings
-  - lists of strings are converted to a single newline-separated string
-  - all other types (in general, dictionaries) are formatted as YAML
+## action-fail
 
-Also see the [hook environment](./authors-hook-environment.html) page for further
-details of the hook environment.
+`action-fail` sets the action's fail state with a given error message.  Using
+`action-fail` without a failure message will set a default message indicating a
+problem with the action. For more information about where you might use this
+command, read more about [Juju Actions](actions.html) or
+[how to write Juju Actions](developer-actions.html).
 
-## Available commands:
+python:  
+```python
+from charmhelpers.core.hookenv import action_fail
 
-### close-port
-
-`close-port` unmarks a local system port. If the service is not exposed, it has
-no effect; otherwise the port is marked for imminent closure. It accepts the
-same flags and arguments as `open-port`.
-
-Examples:
-
-Close 1234/udp if it was open:
-
-```no-highlight
-close-port 1234/udp
+action_fail(‘Unable to contact remote service’)
+```
+bash:  
+```bash
+action-fail ‘unable to contact remote service’
 ```
 
-Close port 80 if it was open:
 
-```no-highlight
+## action-get
+
+`action-get` will print the value of the parameter at the given key, serialized
+as YAML.  If multiple keys are passed, `action-get` will recurse into the param
+map as needed. Read more about [Juju Actions](actions.html) or
+[how to write Juju Actions](developer-actions.html).
+
+python:  
+```python
+from charmhelpers.core.hookenv import action_get
+
+timeout = action_get(‘timeout’)
+```
+bash:  
+```bash
+TIMEOUT=$(action-get timeout)
+```
+
+
+## action-set
+
+`action-set` adds the given values to the results map of the
+[Action](actions.html).  This map is returned to the user after the
+completion of the Action.  Keys must start and end with lowercase alphanumeric,
+and contain only lowercase alphanumeric, hyphens and periods.
+
+python:  
+```python
+from charmhelpers.core.hookenv import action_set
+
+action_set('com.juju.result', 'we are the champions')
+```
+bash:  
+```bash
+action-set com.juju.result 'we are the champions'
+```
+
+
+## close-port
+
+`close-port` ensures a port or range is not accessible from the public
+interface.
+
+python:  
+```python
+from charmhelpers.core.hookenv import close_port
+
+# Close a single port
+close_port(80, protocol="UDP")
+```
+bash:  
+```bash
+# Close single port
 close-port 80
+# Close a range of ports
+close-port 9000-9999/udp
 ```
 
-Close a range of ports:
 
-```no-highlight
-close-port 80-100
-```
-
-### config-get
+## config-get
 
 `config-get` returns information about the service configuration (as defined by
-the charm). If called without arguments, it returns a dictionary containing all
-config settings that are either explicitly set, or which have a non-nil default
-value. If the `--all` flag is passed, it returns a dictionary containing all
-defined config settings including nil values (for those without defaults). If
-called with a single argument, it returns the value of that config key. Missing
-config keys are reported as nulls, and do not return an error.
+`config.yaml`). If called without arguments, it returns a dictionary containing
+all config settings that are either explicitly set, or which have a non-nil
+default value. If the `--all` flag is passed, it returns a dictionary containing
+all defined config settings including nil values (for those without defaults).
+If called with a single argument, it returns the value of that config key.
+Missing config keys are reported as nulls, and do not return an error.
 
-Getting the interesting bits of the config is done with:
+python:  
+```python
+from charmhelpers.core.hookenv import config
 
-```no-highlight
-config-get
-key: some-value
-another-key: default-value
+# Get all the configuration from charmhelpers as a dictionary.
+cfg =config()
+# Get the value for the "interval" key.
+interval = cfg.get(‘interval’)
 ```
+bash:  
+```bash
+INTERVAL=$(config-get interval)
 
-To get the whole config including any nulls:
-
-```no-highlight
 config-get --all
-key: some-value
-another-key: default-value
-no-default: null
 ```
 
-To retrieve a specific value pass its key as argument:
 
-```no-highlight
-config-get [key]
-some-value
-```
-
-This command will also work if no value is set and no default is set or even
-if the setting doesn't exist. In both cases nothing will be returned.
-
-```no-highlight
-config-get [key-with-no-default]
-config-get [missing-key]
-```
-
-!!! Note: The above two examples are not misprints - asking for a value which
-doesn't exist or has not been set returns nothing and raises no errors.
-
-### juju-log
-
-`juju-log` writes its arguments directly to the unit's log file. All hook
-output is currently logged anyway, though this may not always be the case - If
-it's important, use`juju-log`.
-
-```bash
-juju-log "some important text"
-```
-
-This tool accepts a `--debug` flag which causes the message to be logged at
-`DEBUG` level; in all other cases it's logged at `INFO` level.
-
-### juju-reboot [--now]
-
-There are several cases where a charm needs to reboot a machine, such as
-after a kernel upgrade, or to upgrade the entire system. The charm may not
-be able to complete the hook until the machine is rebooted.
-
-The juju-reboot command allows charm authors to schedule a reboot from inside
-a charm hook. The reboot will only happen if the hook completes without error.
-You can schedule a reboot like so:
-
-```bash
-juju-reboot
-```
-
-The `--now` option can be passed to block hook execution. In this case the
-`juju-reboot` command will hang until the unit agent stops the hook and
-re-queues it for the next run. This will allow you to create multi-step
-install hooks.
-
-Charm authors must wrap calls to juju-reboot to ensure it is actually
-necessary, otherwise the charm risks entering a reboot loop. The preferred
-work-flow is to check if the feature/charm is in the desired state, and
-reboot when needed. This bash example assumes that "$FEATURE_IS_INSTALLED"
-variable was defined by a check for the feature, then 'juju-reboot' is
-called if the variable is false:
-
-```bash
-if [[ $FEATURE_IS_INSTALLED  == "false" ]]
-then
-    install_feature
-    juju-reboot --now
-fi
-```
-
-The `juju-reboot` command can be called from any hook. It can also be
-called using the `juju run` command.
-
-
-### is-leader
+## is-leader
 
 `is-leader` will write `"True"` or `"False"` to stdout, and return 0, if
 the unit is currently leader and can be guaranteed to remain so for 30
-seconds.
+seconds. Output can be expressed as `--format json` or `--format yaml` if
+desired.
 
-Output can be expressed as `--format json` or `--format yaml` if desired.
+python:  
+```python
+from charmhelpers.core.hookenv import is_leader
 
-If it returns a non-zero exit code, no inferences regarding true leadership
-status can be made, but you should generally opt to fail safe and refrain from
-acting as the leader when not sure.
+if is_leader():
+    # Do something a leader would do
+```
+bash:  
+```bash
+LEADER=$(is-leader)
+if [ "${LEADER}" == "True" ]; then
+  # Do something a leader would do
+fi
+```
 
-The result of `is-leader` truth is independent of hook sequence. If a unit has
-been designated as the leader while the hook is running, it will start to
-return true; and if a unit were to (for example) lose its state-server
-connection mid-hook and be unable to verify continued leadership past lease
-expiry time, it would start to return false.
 
-### leader-set
+## juju-log
 
-Every service deployed by Juju has access to a pseudo-relation over which
-leader settings can be communicated.
+`juju-log` writes messages directly to the unit's log file. Valid
+levels are: INFO, WARN, ERROR, DEBUG
 
-`leader-set` acts much like [`relation-set`](#relation-set), in that it lets
-you write string key/value pairs (in which an empty value removes the key), but
-with the following differences:
+python:  
+```python
+from charmhelpers.core.hookenv import juju_log
 
-      * there's only one leader-settings bucket per service (not one per unit)
-      * only the leader can write to the bucket
-      * only minions are informed of changes to the bucket
-      * changes are propagated instantly, bypassing the sandbox
+juju_log('Something has transpired', 'INFO')
+```
+bash:  
+```bash
+juju-log -l 'WARN' Something has transpired
+```
+
+
+## juju-reboot
+
+`juju-reboot` causes the host machine to reboot, after stopping all containers
+hosted on the machine.
+
+An invocation without arguments will allow the current hook to complete, and
+will only cause a reboot if the hook completes successfully.
+
+If the `--now` flag is passed, the current hook will terminate immediately, and
+be restarted from scratch after reboot. This allows charm authors to write
+hooks that need to reboot more than once in the course of installing software.
+
+The `--now` flag cannot terminate a debug-hooks session; hooks using `--now`
+should be sure to terminate on unexpected errors, so as to guarantee expected
+behavior in all situations.
+
+`juju-reboot` is not supported when running actions.
+
+python:  
+```python
+from subprocess import check_call
+
+check_call(["juju-reboot", "--now"])
+```
+bash:  
+```bash
+# immediately reboot
+juju-reboot --now
+
+# Reboot after current hook exits
+juju-reboot
+```
+
+
+## leader-get
+
+`leader-get` prints the value of a leadership setting specified by key.  
+`leader-get` acts much like [`relation-set`](#relation-set)) but only reads
+from the leader settings. If no key is given, or if the key is "-", all keys
+and values will be printed.
+
+python:  
+```python
+from charmhelpers.core.hookenv import leader_get
+
+address = leader_get('cluster-leader-address')
+```
+bash:  
+```bash
+ADDRESSS=$(leader-get cluster-leader-address)
+```
+
+
+## leader-set
+
+`leader-set` immediately writes the key/value pairs to the juju controller,
+which will then inform non-leader units of the change. It will fail if called
+without arguments, or if called by a unit that is not currently service leader.
+
+`leader-set` lets you write string key=value pairs, but with the following
+differences:
+
+- there's only one leader-settings bucket per service (not one per unit)
+- only the leader can write to the bucket
+- only minions are informed of changes to the bucket
+- changes are propagated instantly
 
 The instant propagation may be surprising, but it exists to satisfy the use case
-where shared data can be chosen by the leader at the very beginning of (say)
-the install hook. By propagating it instantly, any running minions can make
-use of the data and progress immediately, without having to wait for the
-leader to finish its hook.
+where shared data can be chosen by the leader at the very beginning of the
+install hook.
 
-It also means that you can guarantee that a successful `leader-set` call has
-been reflected in the database, and that all minions will converge towards
-seeing that value, even if an unexpected error takes down the current hook.
+It is strongly recommended that leader settings are always written as a
+self-consistent group `leader-set one=one two=two three=three`.
 
-For both these reasons it is strongly recommended that leader settings are
-always written as a self-consistent group (`leader-set foo=bar baz=qux ping=pong`,
-rather than `leader-set foo=bar; leader-set baz=qux` etc, to avoid situations
-where minions may end up seeing a sandbox in which only `foo` is set to the
-"correct" value).
+python:  
+```python
+from charmhelpers.core.hookenv import leader_set
 
-### leader-get
-
-`leader-get` acts much like relation-get, in that it lets you read string
-values by key (and expose them in helpful formats), but it reads only from the
-single leader-settings bucket.
-
-As with `realtion-get`, it presents a sandboxed view of leader-settings data.
-This is necessary, as it is for relation data, because a hook context needs
-to present *consistent* data; but it means that there's a small extra burden
-on users of `leader-set`.
-
-
-### open-port
-
-`open-port` marks a port or range of ports on the local system as appropriate to
-open, if and when the service is exposed to the outside world. It accepts a
-single port or range of ports with an optional protocol, which may be `udp` or
-`tcp`, where `tcp` is the default.
-
-Examples:
-
-Open 80/tcp if and when the service is exposed:
-
-```no-highlight
-open-port 80
+leader_set('cluster-leader-address', "10.0.0.123")
+```
+bash:  
+```bash
+leader-set cluster-leader-address=10.0.0.123
 ```
 
-Open 1234/udp if and when the service is exposed:
 
-```no-highlight
-open-port 1234/udp
-```
+## opened-ports
 
-Open the range 8000 to 8080:
-
-```no-highlight
-open 8000-8080/tcp
-```
-
-`open-port` will not have any effect if the service is not exposed, and may have
-a somewhat delayed effect even if it is. This operation is transactional, so
-changes will not be made unless the hook exits successfully.
-
-Juju also tracks ports opened across the machine and will not allow conflict; if
-another charm has already opened the port
-(**or one or more ports in a range**) you have specified,
-your request will be ignored.
-
-This command accepts and ignores `--format` for
-compatibility purposes, but it doesn't produce any output.
-
-### opened-ports
-
-The opened-ports hook tool lists all the ports currently opened
-**by the running charm**. It does not, at the moment, include ports which may
-be opened by other charms co-hosted on the same machine
-[lp #1427770](https://bugs.launchpad.net/juju-core/+bug/1427770).
-
-The command returns a list of one port or range of ports per line, with the port
-number followed by the protocol (tcp or udp).
-
-For example, running `opened-ports` may return:
-
-```no-highlight
-70-80/tcp
-81/tcp
-```
+`opened-ports` lists all ports or ranges opened by the **unit**. The
+opened-ports hook tool lists all the ports currently opened **by the running
+charm**. It does not, at the moment, include ports which may be opened by other
+charms co-hosted on the same machine
+[lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770).
 
 !!! Note: opening ports is transactional (i.e. will take place on successfully
 exiting the current hook), and therefore `opened-ports` will not return any
 values for pending `open-port` operations run from within the same hook.
 
+python:  
+```python
+from subprocess import check_output
+
+range = check_output(["opened-ports"])
+```
+bash:  
+```bash
+opened-ports
+```
 
 
+## open-port
 
-### relation-get
+`open-port` registers a port or range to open on the public-interface. On public
+clouds the port will only be open while the service is exposed. It accepts a
+single port or range of ports with an optional protocol, which may be `udp` or
+`tcp`, where `tcp` is the default.
+
+`open-port` will not have any effect if the service is not exposed, and may have
+a somewhat delayed effect even if it is. This operation is transactional, so
+changes will not be made unless the hook exits successfully.
+
+python:  
+```python
+from charmhelpers.core.hookenv import open_port
+
+open_port(80, protocol='TCP')
+```
+bash:  
+```bash
+open-port 80/tcp
+
+open-port 1234/udp
+```
+
+
+## payload-register
+
+`payload-register` used while a hook is running to let Juju know that a
+payload has been started. The information used to start the payload must be
+provided when "register" is run.
+
+The payload class must correspond to one of the payloads defined in
+the charm's metadata.yaml.
+
+python:  
+```python
+from subprocess import check_call
+
+check_call(["payload-register", "monitoring", "docker", "0fcgaba"])
+```
+bash:  
+```bash
+payload-register monitoring docker 0fcgaba
+```
+
+
+## payload-unregister
+
+`payload-unregister` used while a hook is running to let Juju know
+that a payload has been manually stopped. The `class` and `id` provided
+must match a payload that has been previously registered with juju using
+payload-register.
+
+python:  
+```python
+from subprocess import check_call
+
+check_call(["payload-unregister", "monitoring", "0fcgaba"])
+```
+bash:  
+```bash
+payload-unregister monitoring 0fcgaba
+```
+
+
+## relation-get
 
 `relation-get` reads the settings of the local unit, or of any remote unit,
 in a given relation (set with `-r`, defaulting to the current relation
 identifier, as in `relation-set`). The first argument specifies the settings
 key, and the second the remote unit, which may be omitted if a default is
-available (that is, when running a relation hook other than -broken).
+available (that is, when running a relation hook other than
+[-relation-broken](authors-charm-hooks.html#[name]-relation-broken)).
 
 If the first argument is omitted, a dictionary of all current keys and values
 will be printed; all values are always plain strings without any
 interpretation. If you need to specify a remote unit but want to see all
 settings, use `-` for the first argument.
 
-The environment variable `JUJU_REMOTE_UNIT` stores the default remote unit:
-
-```bash
-echo $JUJU_REMOTE_UNIT
- mongodb/2
-```
-
-Getting the settings of the default unit in the default relation is done with:
-
-```no-highlight
-relation-get
- username: jim
- password: "12345"
-```
-
-To get a specific setting from the default remote unit in the default relation
-you would instead use:
-
-
-```no-highlight
-relation-get username
- jim
-```
-
-To get all settings from a particular remote unit in a particular relation you
-specify them together with the command:
-
-```no-highlight
-relation-get -r database:7 - mongodb/5
- username: bob
- password: 2db673e81ffa264c
-```
-
-Note that `relation-get` produces results that are _consistent_ but not
-necessarily _accurate_, in that you will always see settings that:
-
-  - were accurate at some point in the reasonably recent past
-  - are always the same within a single hook run, _except_ when inspecting the
-    unit's own relation settings, in which case local changes from `relation-set`
-    will be seen correctly.
+The environment variable
+[`JUJU_REMOTE_UNIT`](reference-environment-variables.html#juju-remote-unit)
+stores the default remote unit.
 
 You should never depend upon the presence of any given key in `relation-get`
 output. Processing that depends on specific values (other than `private-address`)
-should be restricted to [-changed](authors-charm-hooks.html#[name]-relation-changed)
-hooks for the relevant unit, and the absence
-of a remote unit's value should never be treated as an
-[error](./authors-hook-errors.html) in the local unit.
+should be restricted to
+[-relation-changed](authors-charm-hooks.html#[name]-relation-changed) hooks for
+the relevant unit, and the absence of a remote unit's value should never be
+treated as an [error](./authors-hook-errors.html) in the local unit.
 
-In practice, it is common and encouraged for -relation-changed hooks to exit
-early, without error, after inspecting `relation-get` output and determining it
-to be inadequate; and for [all other hooks](authors-charm-hooks.html) to be
-resilient in the face of missing keys, such that -relation-changed hooks will be
-sufficient to complete all configuration that depends on remote unit settings.
+In practice, it is common and encouraged for
+[-relation-changed](authors-charm-hooks.html#[name]-relation-changed) hooks to
+exit early, without error, after inspecting `relation-get` output and
+determining the data is inadequate; and for
+[all other hooks](authors-charm-hooks.html) to be resilient in the face of
+missing keys, such that -relation-changed hooks will be sufficient to complete
+all configuration that depends on remote unit settings.
 
-Settings for remote units already known to have departed remain accessible for
-the lifetime of the relation.
+Key value pairs for remote units that have departed remain accessible for the
+lifetime of the relation.
 
-!!! Note: `relation-get` currently has a bug
-[LP #1223339](https://bugs.launchpad.net/juju-core/+bug/1223339)
-which allows units of the same service to see each other's
-settings outside of a peer relation. Depending on this behaviour is inadvisable: if
-you need to share settings between units of the same service, always use a peer
-relation to do so, or your charm may fail unexpectedly when the bug is fixed.
+python:
+```python
+from charmhelpers.core.hookenv import relation_get
 
-### relation-list
+# Since we define the relation id on every call to relation_get, both bash
+# examples look like the line below
+relation_get(rel_id)
 
-`relation-list` outputs a list of all the related **units** for a relation
-identifier. If not running in a relation hook context, `-r` needs to be
-specified with a relation identifier similar to the`relation-get` and
-`relation-set` commands.
+# To get a specific setting from the remote unit in the specified relation
+relation_get(rel_id, 'username')
+```
+bash:
+```bash
+# Getting the settings of the default unit in the default relation is done with:
+ relation-get
+  username: jim
+  password: "12345"
 
-Examples:
+# To get a specific setting from the default remote unit in the default relation
+  relation-get username
+   jim
 
-To show all remote units for the current relation identifier:
-
-```no-highlight
-relation-list
+# To get all settings from a particular remote unit in a particular relation you
+   relation-get -r database:7 - mongodb/5
+    username: bob
+    password: 2db673e81ffa264c
 ```
 
-Which should return something similar to:
-
-```no-highlight
-mongodb/0
-mongodb/2
-mongodb/3
-```
-All remote units in a specific relation identifier can be shown with:
-
-```no-highlight
-relation-list -r website:2
- haproxy/0
-```
-
-### relation-ids
+## relation-ids
 
 `relation-ids` outputs a list of the related **services** with a relation
 name. Accepts a single argument (relation-name) which, in a relation hook,
@@ -385,74 +409,55 @@ defaults to the name of the current relation. The output is useful as input
 to the `relation-list`, `relation-get`, and `relation-set` commands to read
 or write other relation values.
 
-Examples:
+python:  
+```python
+from charmhelpers.core.hookenv import relation_ids
 
-The current relation name is stored in the environment variable
-`JUJU_RELATION`. All "server" relation identifiers can be shown with:
-
-```no-highlight
-relation-ids
-server:1
-server:7
-server:9
+relation_ids('database')
 ```
-
-To show all relation identifiers with a different name pass it as an argument:
-
-```no-highlight
-relation-ids reverseproxy
-    reverseproxy:3
-```
-
-Note again that all commands that produce output accept `--format json` and
-`--format yaml`, and you may consider it smarter to use those for clarity's
-sake than to depend on the default `smart` format.
-
-### relation-set
-
-`relation-set` writes the local unit's settings for some relation. It accepts
-any number of `key=value` strings, and an optional `-r` argument, which
-defaults to the current relation identifier. If it's not running in a relation
-hook, `-r` needs to be specified. The `value` part of an argument is not
-inspected, and is stored directly as a string. Setting an empty string causes
-the setting to be removed.
-
-Examples:
-
-Setting a pair of values for the local unit in the default relation identifier
-which is stored in the environment variable `JUJU_RELATION_ID`:
-
+bash:  
 ```bash
-echo $JUJU_RELATION_ID
-server:3
+relation-ids database
 ```
 
-The setting is done with:
 
-```no-highlight
-relation-set username=bob password=2db673e81ffa264c
+## relation-list
+
+`relation-list` outputs a list of all the related **units** for a relation
+identifier. If not running in a relation hook context, `-r` needs to be
+specified with a relation identifier similar to the`relation-get` and
+`relation-set` commands.
+
+python:  
+```python
+from charmhelpers.core.hookenv import relation_list
+from charmhelpers.core.hookenv import relation_id
+
+# List the units on a relation for the given relation id.
+related_units = relation_list(relation_id())
+```
+bash:  
+```bash
+relation-list 9
+
+relation-list -r website:2
 ```
 
-To set the pair of values for the local unit in a specific relation specify the
-relation identifier:
 
-```no-highlight
-relation-set -r server:3 username=jim password=12345
-```
+## relation-set
 
-To clear a value for the local unit in the default relation enter:
+`relation-set` writes the local unit's settings for some relation. If it's not
+running in a relation hook, `-r` needs to be specified. The `value` part of an
+argument is not inspected, and is stored directly as a string. Setting an empty
+string causes the setting to be removed.
 
-```no-highlight
-relation-set deprecated-or-unused=
-```
-
-`relation-set` is the single tool at your disposal for communicating your own
-configuration to units of related services. At least by convention, the charm
-that `provides` an interface is likely to set values, and a charm that
-`requires` that interface will read them; but there's nothing forcing this.
-Whatever information you need to propagate for the remote charm to work must be
-propagated via relation-set, with the single exception of the `private-address`
-key, which is always set before the unit joins.
+`relation-set` is the tool for communicating information between
+units of related services. By convention the charm that `provides` an
+interface is likely to set values, and a charm that `requires` that interface
+will read values; but there is nothing enforcing this. Whatever information you
+need to propagate for the remote charm to work must be propagated via
+relation-set, with the single exception of the `private-address` key, which is
+always set before the unit joins.
 
 For some charms you may wish to overwrite the `private-address` setting, for
 example if you're writing a charm that serves as a proxy for some external
@@ -460,32 +465,52 @@ service. It is rarely a good idea to _remove_ that key though, as most charms
 expect that value to exist unconditionally and may fail if it is not
 present.
 
-All values are set transactionally at the point when the hook terminates
-successfully (i.e. the hook exit code is 0). At that point all changed values will
-be communicated to the rest of the system, causing -changed hooks to run in
-all related units.
+All values are set in a
+[transaction](https://en.wikipedia.org/wiki/Transaction_processing) at the
+point when the hook terminates successfully (i.e. the hook exit code is 0). At
+that point all changed values will be communicated to the rest of the system,
+causing -changed hooks to run in all related units.
 
-There is no way to write settings for any unit other than the local unit. However,
-any hook on the local unit can write settings for any relation which the local unit
-is participating in.
+There is no way to write settings for any unit other than the local unit.
+However, any hook on the local unit can write settings for any relation which
+the local unit is participating in.
+
+python:  
+```python
+from charmhelpers.core.hookenv import relation_set
+
+relation_set({'port': 80, 'tuning': 'default'})
+```
+bash:  
+```bash
+relation-set port=80 tuning=default
+
+relation-set -r server:3 username=jim password=12345
+```
 
 
-### status-get
+## status-get
 
 `status-get` allows charms to query what is recorded in Juju as
 the current workload status. Without arguments, it just prints the workload
 status value e.g. 'maintenance'. With `--include-data` specified, it prints
 YAML which contains the status value plus any data associated with the status.
 
-Examples:
+python:  
+```python
+from charmhelpers.core.hookenv import status_get
 
-```no-highlight
+charm_status = status_get()
+```
+bash:  
+```bash
 status-get
+
 status-get --include-data
 ```
 
 
-### status-set
+## status-set
 
 `status-set` allows charms to describe their current status. This places the
 responsibility on the charm to know its status, and set it accordingly using
@@ -494,14 +519,14 @@ the `status-set` hook tool.
 This hook tool takes 2 arguments. The first is the status to report, which can
 be one of the following:
 
-  - maintenance (the unit is not currently providing a service, but expects to
-    be soon, E.g. when first installing)
-  - blocked (the unit cannot continue without user input)
-  - waiting (the unit itself is not in error and requires no intervention,
-    but it is not currently in service as it depends on some external factor,
-    e.g. a service to which it is related is not running)
-  - active (This unit believes it is correctly offering all the services it is
-    primarily installed to provide)
+- `maintenance` (the unit is not currently providing a service, but expects to
+  be soon, E.g. when first installing)
+- `blocked` (the unit cannot continue without user input)
+- `waiting` (the unit itself is not in error and requires no intervention,
+  but it is not currently in service as it depends on some external factor,
+  e.g. a service to which it is related is not running)
+- `active` (This unit believes it is correctly offering all the services it is
+  primarily installed to provide)
 
 For more extensive explanations of these statuses, and other possible status
 values which may be set by Juju itself,
@@ -539,9 +564,14 @@ the hook which crashed. For example “Crashed installing the software” for an
 install hook crash, or “Crash establishing database link” for a crash in a
 relationship hook.
 
-Examples:
+python:  
+```python
+from charmhelpers.core.hookenv import status_set
 
-```no-highlight
+status_set('blocked', 'Unable to continue until related to a database')
+```
+bash:  
+```bash
 status-set maintenance "installing software"
 status-set maintenance "formatting storage space, time left: 120s"
 status-set waiting "waiting for database"
@@ -551,20 +581,27 @@ status-set blocked "Need a database relation"
 status-set blocked "Storage full"
 ```
 
-### storage-add
 
-`storage-add` may be used to add storage to the unit.  The tool takes the name
-of the storage (as in the charm metadata), and optionally the number of storage
-instances to add; by default it will add a single storage instance of the name.
+## storage-add
 
-Examples:  
+`storage-add` may be used to add storage to the **unit**.  The tool takes the
+name of the storage (as defined in the charm metadata), and optionally the
+number of storage instances to add; by default it will add a single storage
+instance of the name.
 
-```no-highlight
-storage-add data
-storage-add block=4
+python:  
+```python
+from subprocess import check_call
+
+check_call(["storage-add", "database-storage=1"])
+```
+bash:  
+```bash
+storage-add database-storage=1
 ```
 
-### storage-get
+
+## storage-get
 
 `storage-get` may be used to obtain information about storage being attached to,
 or detaching from, the unit. If the executing hook is a storage hook,
@@ -576,45 +613,51 @@ storage-get should be used to identify the storage location during
 storage-attached and storage-detaching hooks. The exception to this is when the
 charm specifies a static location for singleton stores.
 
-Examples:  
+python:  
+```python
+from subprocess import check_call
 
-```no-highlight
+check_call(["storage-get", "21127934-8986-11e5-af63-feff819cdc9f"])
+```
+bash:
+```bash
+storage-get 21127934-8986-11e5-af63-feff819cdc9f
+
 storage-get -s data/0
-kind: filesystem
-location: /srv/data
-
-storage-get -s data/0 --format json
-{"kind":"filesystem","location":"/srv/data"}
-
-storage-get -s data/0 location
-/srv/data
 ```
 
-### storage-list
+
+## storage-list
 
 `storage-list` may be used to list storage instances that are attached to the
 unit. The storage instance identifiers returned from `storage-list` may be
 passed through to the `storage-get` command using the -s flag.
 
-Examples:  
+python:  
+```python
+from subprocess import check_output
 
-```no-highlight
+storage = check_output(["storage-list"])
+```
+bash:  
+```bash
 storage-list
-data/0
-
-storage-list --format json
-["data/0"]
 ```
 
-### unit-get
 
-`unit-get` returns information about the local unit. It accepts a single
+## unit-get
+
+`unit-get` returns information about the local **unit**. It accepts a single
 argument, which must be `private-address` or `public-address`. It is not
-affected by context:  
+affected by context.
 
-```no-highlight
-unit-get private-address
-10.0.1.101
+python:  
+```python
+from charmhelpers.core.hookenv import unit_get
+
+address = unit_get('public-address')
+```
+bash:  
+```bash
 unit-get public-address
-foo.example.com
 ```

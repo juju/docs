@@ -57,6 +57,7 @@
                       <li><a href="howto-node.html">Deploy a Node.js app</a></li>
                       <li><a href="howto-rails.html">Test and deploy on Rails</a></li>
                       <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+                      <li><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
                       <li><a href="howto-drupal-iis.html">Deploy Drupal Windows charm</a></li>
                     </ul>
                   </li>
@@ -127,7 +128,6 @@
                       <li><a href="developer-debug-dhx.html">DHX</a></li>
                     </ul>
                   </li>
-                  <li class="section"><a class="header" href="developer-hook-tools.html">Hook Tools</a>
                   <li class="section"><a class="header" href="developer-howto.html">How to...</a>
                     <ul class="sub">
                       <li><a href="howto-charm-with-docker.html">Charm with Docker</a></li>
@@ -147,6 +147,16 @@
                       <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
                       <li><a href="authors-testing.html">Charm Testing</a></li>
                       <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
+                      <li><a href="authors-charm-with-docker.html">Charming with Docker</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="authors-charm-store.html">The Juju Charm Store</a>
+                    <ul class="sub">
+                      <li><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+                      <li><a href="authors-charm-policy.html">Charm store policy</a></li>
+                      <li><a href="charm-review-process.html">Charm review process</a></li>
+                      <li><a href="authors-charm-best-practice.html">Best practices</a></li>
+                      <li><a href="authors-charm-icon.html">Charm Icons</a></li>
                     </ul>
                   </li>
                 </ul>
