@@ -127,7 +127,6 @@
                       <li><a href="developer-debug-dhx.html">DHX</a></li>
                     </ul>
                   </li>
-                  <li class="section"><a class="header" href="developer-hook-tools.html">Hook Tools</a>
                   <li class="section"><a class="header" href="developer-howto.html">How to...</a>
                     <ul class="sub">
                       <li><a href="howto-charm-with-docker.html">Charm with Docker</a></li>
