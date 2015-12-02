@@ -80,6 +80,14 @@ close-port 80
 # Close a range of ports
 close-port 9000-9999/udp
 ```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+# Close a single port
+Close-JujuPort "80/TCP"
+# Close a range of ports
+Close-JujuPort "1000-2000/UDP"
+```
 
 
 ## config-get
@@ -99,7 +107,11 @@ bash:
 ```bash
 INTERVAL=$(config-get interval)
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+$interval = Get-JujuCharmConfig "interval"
+```
 
 ## is-leader
 
@@ -121,6 +133,13 @@ if [ "${LEADER}" == "True" ]; then
   # Do something a leader would do
 fi
 ```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+if (Is-Leader) {
+    # Do something a leader would do
+}
+```
 
 
 ## juju-log
@@ -138,7 +157,14 @@ bash:
 ```bash
 juju-log -l 'INFO' Something has transpired
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+# Basic logging
+Write-JujuLog "Something has transpired"
+# Logs the message and throws an error, stopping the script
+Write-JujuError "Something has transpired. Throwing an error..."
+```
 
 ## juju-reboot
 
@@ -172,7 +198,12 @@ juju-reboot --now
 # Reboot after current hook exits
 juju-reboot
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+# immediately reboot
+ExitFrom-JujuHook -WithReboot
+```
 
 ## leader-get
 
@@ -189,7 +220,11 @@ bash:
 ```bash
 ADDRESSS=$(leader-get cluster-leader-address)
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+$clusterLeaderAddress = Get-LeaderData "cluster-leader-address"
+```
 
 ## leader-set
 
@@ -207,7 +242,11 @@ bash:
 ```bash
 leader-set cluster-leader-address=10.0.0.123
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Set-LeaderData @{"cluster-leader-address"="10.0.0.123"}
+```
 
 ## opened-ports
 
@@ -222,6 +261,12 @@ range = check_output(["opened-ports"])
 bash:  
 ```bash
 opened-ports
+```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+# returns boolean
+$isRangeOpen = Is-JujuPortRangeOpen "100-1000/TCP"
 ```
 
 
@@ -239,6 +284,14 @@ open_port(80, protocol='TCP')
 bash:  
 ```bash
 open-port 80/tcp
+```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+# Open a single port
+Open-JujuPort "80/TCP"
+# Open a range of ports
+Open-JujuPort "1000-2000/UDP"
 ```
 
 
@@ -297,7 +350,11 @@ bash:
 ```bash
 relation-get private-address
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Get-JujuRelation -Attr "private-address"
+```
 
 ## relation-ids
 
@@ -312,6 +369,11 @@ relation_ids('database')
 bash:  
 ```bash
 relation-ids database
+```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Get-JujuRelationIds -RelType "database"
 ```
 
 
@@ -329,6 +391,11 @@ relation_list(relation_id())
 bash:  
 ```bash
 relation-list 9
+```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Get-JujuRelatedUnits -RelId (Get-JujuRelationId)
 ```
 
 
@@ -348,6 +415,11 @@ relation_set({'port': 80, 'tuning': 'default'})
 bash:  
 ```bash
 relation-set port=80 tuning=default
+```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Set-JujuRelation -Relation_Settings @{"port"=80;"tuning"="default"}
 ```
 
 
@@ -452,4 +524,9 @@ address = unit_get('public-address')
 bash:  
 ```bash
 unit-get public-address
+```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Get-JujuUnit -Attr "public-address"
 ```
