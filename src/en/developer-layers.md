@@ -96,8 +96,6 @@ possible.
 Charm layers can be written in any language, and there are helpers for writing
 them in Bash.
 
-## Layer Encapsulation
-
 ## States
 
 States are synthetic events that are defined by the layers author. States allow
@@ -131,8 +129,8 @@ from charms.reactive import set_state
 set_state('apache.available')
 ```
 
- ```bash
- charms.reactive set_state 'apache.available'
+```bash
+charms.reactive set_state 'apache.available'
 ```
 
 And subsequently subscribe to them:
