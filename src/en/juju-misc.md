@@ -19,9 +19,13 @@ Import a public SSH key from Launchpad (or Github):
 juju authorised-keys import lp:some_launchpad_user
 ```
 
-You can use `add` to bring in a local key if the environment does not have
-internet access. You will need to paste the key on the command line (or use
-something like `$(cat key_file)`).
+Or add an ssh key (for an environment without internet access):
+
+```bash
+juju authorised-keys import 'ssh-rsa AAAAB3NzaC1... comment'
+# you can also use something like this:
+juju authorised-keys import "$(cat id_rsa.pub)"
+```
 
 Use the key fingerprint or comment to specify which key to `delete`. The
 fingerprint can be found with:
