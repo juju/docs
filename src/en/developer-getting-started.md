@@ -4,41 +4,55 @@ The developer guide is for anyone wanting to write bits of code that we call
 charms. This guide introduces some new concepts that once you learn can help
 you make some very powerful and reusable code components in the Juju ecosystem.
 
-This guide assumes you have already  [installed
-Juju](./getting-started.html#installation), [tested your
-setup](./getting-started.html#testing-your-setup), and are able to deploy a
-charm to an environment. Since Juju provides the same user experience on all
-environments, many developers use the [local provider](./config-local.html) to
-develop  because it is easier, faster, and cheaper than a traditional cloud
-environment.
+## Install Juju
+To develop charms you will need the Juju client installed. The Juju client is
+available for Linux, Windows and Mac OS.  
+
+## Configure Juju
+Juju needs to be configured before it can orchestrate an environment. Juju
+defaults to an Amazon EC2 environment, but for testing and development you may
+wish to configure the local provider such as LXC or KVM.
+
+## Test your Juju setup
+You will want to make sure everything is running properly before writing code.
+Bootstrapping an environment is a good way to tell if the environment is
+configured correctly.  
+
+For more information on these steps, read these pages and be sure to come back
+to continue the development journey.
+* [Installing Juju](./getting-started.html#installation).
+* [Configure the local environment](./config-local.html)
+* [Test your Juju setup](./getting-started.html#testing-your-setup)
 
 This guide also uses the [Vanilla PHP Forum software](http://vanillaforums.org)
 as our example application for getting started charming, as it's a great example
 of a typical three factor application consisting of a Database, a PHP web
 application served over HTTP.
 
-## Prerequisites and Tools
+## Install libraries and tools
 
+### Charm Tools
 We have created tools to make writing charms easier. Developers should [install
-Charm Tools](./tools-charm-tools.html) which makes it easy to create,  build,
-fetch and find common charm errors.
+Charm Tools](./tools-charm-tools.html) software. Charm Tools are command line
+utilities that make it easy to create, build, fetch and find common charm errors.
 
 ```bash
 sudo apt-get install charm-tools
+charm help
 ```
 
-While a charm can be written in any language that will run on a cloud image, we
-recommend Python. [Charm Helpers](./tools-charm-helpers.html) is a Python
-library that provides an extensive collection of functions for developers to
-reuse. Spending time reading the [Charm Helpers
-documentation](http://pythonhosted.org/charmhelpers/) would be well spent
-because several common charm patterns are encapsulated in functions in this
-library.
+### Charm Helpers
+[Charm Helpers](./tools-charm-helpers.html) is a Python library that provides
+an extensive collection of functions for developers to reuse. Spending time
+reading the [Charm Helpers documentation](http://pythonhosted.org/charmhelpers/)
+would be well spent because several common charm patterns are encapsulated in
+functions in this library.
 
-Once the charm is complete you can submit it for review, where if accepted would
-be included in the recommended section of the Juju Charm Store.  Charms in this
-section have a flat namespace and are listed higher in search results on
-<http://jujucharms.com>
+```python
+from charmhelpers.core import hookenv
+config = hookenv.config()
+value = config.get('key')
+```
 
 ## Designing your charm
 
@@ -81,7 +95,8 @@ makes layers possible.
 ### Creating a new layer
 
 First off, you require a [local charm repository](./charms-deploying.html) in
-which to work. For example:
+which to work. This involves creating some directories and setting some
+environment variables.  For example:
 
 ```bash
 export JUJU_REPOSITORY=$HOME/charms
@@ -144,13 +159,22 @@ Because Juju is a large complex system, not unlike a Linux software
 distribution, there is a need to test the charms themselves and how they
 interact with one another. All new charms require tests that verify the service
 installs, configures, scales and relates as intended. The tests should be self
-contained, installing all the required packages, so the tests can be run
+contained, installing all the required packages so the tests can be run
 automatically with a tool called
 [`bundletester`](https://github.com/juju-solutions/bundletester). Similar to
-hooks the tests should be executable files in a `tests` directory of the charm.
+hooks the tests should be executable files in a `tests/` directory of the charm.
 While you can write tests in Bash or other languages, the [Amulet
 library](./tools-amulet.html) is highly suggested and makes it easy to write
 tests in Python.
 
 For more information about writing tests please refer to the
 [charm testing guide](./developer-testing.html).
+
+## Submitting your charm for review
+
+Once the charm is complete you can  [submit the charm for
+review](./charm-review-process.html), where if accepted  would be included in
+the recommended section of the Juju Charm Store.  Charms in the recommended
+section follow Charm Store policy and best pratctices for charms. The
+recommended charms have a shorter namespace on the Charm Store website, and are
+listed higher in search results on <http://jujucharms.com>
