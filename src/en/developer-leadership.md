@@ -17,11 +17,11 @@ leader to drop out.
 If you wish to be notified when your unit's leadership status changes, you
 should implement the following hooks:
 
-####  [`leader-elected`](reference-hook-tools.html#leader-elected)
+####  [`leader-elected`](reference-charm-hooks.html#leader-elected)
 which will run at least once, when the unit is known to be leader and guaranteed
 to remain so for at least 30s.
 
-####  [`leader-settings-changed`](reference-hook-tools.html#leader-settings-changed)
+####  [`leader-settings-changed`](reference-charm-hooks.html#leader-settings-changed)
 will run at least once when the unit is not guaranteed continued leadership for
 the next 30s; and also whenever some other unit writes leader settings.
 
