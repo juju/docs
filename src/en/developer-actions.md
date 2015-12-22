@@ -1,30 +1,38 @@
 Title: Implementing actions in Juju charms
 
-# Actions for the Charm author
 
-Actions are scripts, binaries, or other executables defined on a charm which may
-be invoked or queued remotely by the user on demand.  For example, the Charm
-author might include a `snapshot` Action on a database Charm.
-[See here for more on Actions and their use](actions.html).
+# Actions for the charm author
 
-The user may give arguments when invoking the Action.  Complex, nested arguments
-are possible.  The Charm uses a file named `actions.yaml` to specify the type
-and parameters of these arguments.  On [juju-gui](howto-gui-management.html),
-the UI for an Action invocation will be automatically built based on
-`actions.yaml`.
+Actions are executables associated with a charm that may be invoked (or queued
+remotely) by the user on demand. For example, the charm author might include a
+`snapshot` action on a database charm. See [Juju Actions](./actions.html) on
+how to use actions.
+ 
+The user may give arguments, optionally nested, when invoking the action. The
+charm uses a file named `actions.yaml` to specify the parameter type for the
+arguments. In the [Juju GUI](./juju-gui-management.html), the invocation of an
+action will be automatically built based on `actions.yaml`.
 
-[Action Tools](#action-tools) may be used by the author to define how Actions
-interact with Juju.  Actions can retrieve params passed by the user, set
+[Action tools](#action-tools) may be used by the author to define how actions
+interact with Juju. Actions can retrieve parameters passed by the user, set
 responses in a map, or set a failure status with a message.
 
-## Defining Actions
 
-To define the Actions available on a Charm, executables (scripts, binaries,
-etc.) for each Action must be included in the `/actions` directory in the Charm,
-and the name of each executable must be a top-level key in a YAML map in
-`/actions.yaml` in the Charm root:
+## Implementing actions
 
-Charm dir:
+Every implemented action must include:
+
+ - its executable (script, binary, etc.) in the charm's `/actions` directory.
+ - the executable's name as a top-level key in a YAML map in the `actions.yaml`
+   file.
+
+!!! Note: action names must start and end with lowercase alphanumeric
+characters, and only contain lowercase alphanumeric characters, the hyphen "-"
+or full stop"." characters.
+
+Here is a sample partial layout of a charm's root directory that shows actions
+called 'pause', 'resume', and 'snapshot':
+
 ```nohighlight
 ├── actions
 │   ├── pause
@@ -34,7 +42,47 @@ Charm dir:
 ...
 ```
 
-`actions.yaml` defining three rudimentary Actions:
+Below is an `actions.yaml` file that shows the three executables as "top-level
+keys":
+
+```yaml
+pause:
+resume:
+snapshot:
+```
+
+That is a "barebones" configuration. As the next section will make clear, there
+is a lot more that can, and should, be placed in this file.
+
+
+## Options and format: `actions.yaml`
+
+Here is a list of options that can be used in `actions.yaml` along with their
+respective format.
+
+ - Each action is defined as a top-level key of a
+   [YAML](https://en.wikipedia.org/wiki/YAML) map, with the same name as its
+   corresponding executable.
+ - The value of each action **should** include a `description` key and **may**
+   include a `params` key. If no description is given, an empty description
+   will be used.
+ - The value of the `params` key is also a YAML map where each key is a string
+   whose value is a ['JSON Schema'](http://json-schema.org/example2.html)
+   transformed to a YAML map. The 'JSON Schema' itself, may, in turn, be nested.
+ - The 'JSON Schema' keys `required` and `additionalProperties` can be used
+   under the action key (parallel to `description` and `params`) but they can
+   also be used anywhere within a nested schema.
+ - Use `additionalProperties: false` under the action key to reject additional
+   parameters passed by the user.
+ - At this time, the `$schema` and `$ref` keys are not supported by Juju, as
+   they may trigger resolution of remote objects and other issues.
+
+
+## Detailed example
+
+Using the above information the previous example can be extended with the
+`description` key:
+
 ```yaml
 pause:
   description: Pause the database.
@@ -44,67 +92,27 @@ snapshot:
   description: Take a snapshot of the database.
 ```
 
-Actions may be called with parameters.  These parameters are specified as a
-child YAML map under a `params` key for each Action in `actions.yaml`.  Note
-that Actions support [JSON-Schema](http://json-schema.org) to enable nested
-schemas, and many other features.
+The `snapshot` action can be enriched with the `params` key:
 
-#### A simple Action schema showing the use of `params`
 ```yaml
+...
 snapshot:
   description: Take a snapshot of the database.
   params:
     outfile:
       type: string
       description: The filename to write to.
-  required: [outfile]
-  additionalProperties: false
-```
-
-[See below](#example-schema) for a more detailed example.
-
-
-### Schema Requirements
-
-`actions.yaml` must be included in the charm root, and must conform to the
-following requirements:
-
- - Each Action is defined as a top-level key of a YAML map, with the same name
-   as the script it defines.
- - The value of each Action must be a map, which should include a `description`
-   key and may include a `params` key to define a schema.  If no `description`
-   is given, a default empty description will be used.
- - The value of `params`, if it is included, must be a YAML map.  Each key under
-   `params` must be a string, and must have valid
-   [JSON-Schema](http://json-schema.org/example2.html)
-   as its value, transformed to a YAML map.  JSON-Schema  may be nested to
-   create complex schemas.
- - JSON-Schema defines special keys such as `required` and
-   `additionalProperties`, which may be given for the whole action at the same
-   level as `description` and `params`, or within nested schemas at the usual
-   level.
- - At this time, the `$schema` and `$ref` keys are not supported by Juju, as
-   they may trigger resolution of remote objects and other issues.
- - `additionalProperties: false` should be included at the same level as the
-   `description` key if additional params passed by the user should be rejected.
-
-### Example Schema
-
-Charm dir:
-```nohighlight
-├── actions
-│   ├── report
-│   └── snapshot
-├── actions.yaml
 ...
 ```
 
-#### actions.yaml example
-```yaml
-# actions.yaml
+A sample complete `actions.yaml` file after extending the snapshot action and
+adding the `required` and `additionalProperties` keys:
 
-report:
-  description: Make a report of the system status.
+```yaml
+pause:
+  description: Pause the database.
+resume:
+  description: Resume a paused database.
 snapshot:
   description: Take a snapshot of the database.
   params:
@@ -127,63 +135,74 @@ snapshot:
   additionalProperties: false
 ```
 
-This schema would support a call such as:
+This action would support a call such as:
 
 ```bash
 juju action do mysql/0 snapshot filename=out.tar.gz compression.type=gzip
 ```
 
-## Action Tools
 
-Three tools are provided to the Action author for the Action to interact with Juju:
+## Action tools
 
- - [`action-get`](#action-get) retrieves the params passed when invoking the Action.
- - [`action-set`](#action-set) sets values in a map to be returned after the Action finishes.
- - [`action-fail`](#action-fail) sets the Action status to `failed` when it finishes, with a message to be returned to the user.  The results set by `action-set` are preserved.
+Three tools are provided to the action author for the action to interact with Juju:
+
+ - [`action-get`](#action-get) retrieves the params passed when invoking the
+   action.
+ - [`action-set`](#action-set) sets values in a map to be returned after the
+   action finishes.
+ - [`action-fail`](#action-fail) sets the action status to `failed` when it
+   finishes, with a message to be returned to the user. The results set by
+   `action-set` are preserved.
 
 Use `juju help-tool <tool name>` to see more detail on each tool.
 
-#### action-get
+
+### action-get
 
 `action-get` prints the value of the parameter at the given key, serialized
-according to the `--format` option.  If multiple keys are passed, action-get
-will recurse into the param map as needed.
+according to the `--format` option. If multiple keys are passed, action-get
+will recurse into the parameter map as needed.
 
-For example, if an action named `snapshot` was defined on a mysql charm, and was
-invoked by the user as follows:
+For example, if an action named `snapshot` was defined on a MySQL charm, and
+was invoked by the user as follows:
 
 ```bash
 juju action do mysql/0 snapshot outfile="foo"
 ```
 
-then the `snapshot` could use `action-get` to retrieve the filename as follows:
+then the `snapshot` could use `action-get` to retrieve the filename:
 
 ```bash
 #!/bin/bash
-# An Action named "snapshot"
+# An action named "snapshot"
 
 action-get outfile
 # "foo" will be printed
 ```
 
-#### action-set
 
-`action-set` permits the Action to set results in a map to be returned at
-completion of the Action.
+### action-set
 
-#### Example:
+`action-set` permits the action to set results in a map to be returned at the
+completion of the action. Here is an example:
+
 ```bash
 #!/bin/bash
-# An Action named "report"
+# An action named "report"
 
 action-set result-map.time-completed="$(date)" result-map.message="Hello world!"
 action-set outcome="success"
 ```
 
-#### Results for this Action
-```nohighlight
-juju action fetch <some action ID>
+Using the above action ('report'), the command
 
+```bash
+juju action fetch <ID>
+```
+
+will produce output similar to:
+
+```nohighlight
 # ...
 message: "" # No error message.
 results:
@@ -193,22 +212,22 @@ results:
   outcome: success
 status: completed
 ```
-Note that there are some restrictions on the names you can give to action
-keys: they must start and end with lowercase alphanumeric characters, and only
-contain lowercase alphanumeric characters, the hyphen "-" or full stop"."
-characters.
 
-#### action-fail
 
-`action-fail` causes the Action to finish as `failed` after completion.  This
-might be used to indicate a full disk if a database dump was attempted, or
-perhaps to indicate that a remote service was unable to be resolved. The
-results set by `action-set` before or after failure are retained, and an Action
+### action-fail
+
+`action-fail` causes the action to finish as `failed` upon completion. For
+instance, this might be used to indicate a full disk if a database dump was
+attempted, or to indicate that a remote service was unable to be resolved. The
+results set by `action-set` before or after failure are retained, and an action
 fail status cannot be unset.
 
-#### Example:
+Example:
+
 ```bash
-# An Action named "sayhello"
+#!/bin/bash
+# An action named "sayhello"
+
 command=$(action-get command)
 
 action-set received.value="$command"
@@ -224,13 +243,16 @@ fi
 action-set timestamp="$(date)"
 ```
 
+Using the above action ('sayhello'), the command
+
 ```bash
 juju action do <unit> sayhello command="greetme"
 # ...
 ```
 
-#### Results
-```yaml
+will produce output similar to:
+
+```nohighlight
 message: I only know one command.
 results:
   received:
@@ -240,16 +262,14 @@ results:
 status: failed
 ```
 
----
 
-## Params Transformation
+## Params transformation
 
-This section specifies the transformation from `params` to JSON-Schema.  This is
-meant as a clarifying aid to creating more complex schemas and should not be
-necessary for most Actions.  If that is what the reader seeks, read on!
+This section covers the transformation from `params` to JSON-Schema. This is
+meant as an aid to creating more complex schemas and should not be necessary
+for most actions.
 
-The `params` key of an action in `actions.yaml` defines a YAML map which is
-transformed to JSON-Schema as follows:
+The transformation to JSON-Schema is as follows:
 
 ```yaml
 # actions.yaml
@@ -267,7 +287,8 @@ transformed to JSON-Schema as follows:
   ...
 ```
 
-will define an Action for `<A>` (and `<B>`, `<C>`, and so on) with JSON-Schema:
+The above, which defines an action for `<A>` (and `<B>` , `<C>` , and so on),
+becomes the following in JSON-Schema format:
 
 ```json
 {
@@ -285,11 +306,7 @@ will define an Action for `<A>` (and `<B>`, `<C>`, and so on) with JSON-Schema:
 }
 ```
 
-which is valid JSON-Schema.
-
-### Simple YAML transform example
-
-For example, a simple schema such as:
+For example, a simple YAML file such as:
 
 ```yaml
 # actions.yaml
@@ -300,7 +317,7 @@ snapshot:
       type: string
 ```
 
-will be transformed to an Action with JSON-Schema:
+will be transformed to this:
 
 ```json
 {
@@ -315,13 +332,17 @@ will be transformed to an Action with JSON-Schema:
 }
 ```
 
-### More complex YAML transform example
 
-The first example given at the top of this document would transform as follows:
+### A complex YAML transform example
+
+Here we transform the example given at the top of this page:
 
 ```yaml
 # actions.yaml
-report:
+pause:
+  description: Pause the database.
+resume:
+  description: Resume a paused database.
 snapshot:
   description: Take a snapshot of the database.
   params:
@@ -344,13 +365,23 @@ snapshot:
   additionalProperties: false
 ```
 
-becomes two Actions, with respective JSON-Schema:
+It becomes three actions, with respective JSON-Schema:
 
-report:
+pause:
 ```json
 {
-  "description": "No description",
-  "title": "report",
+  "description": "Pause the database.",
+  "title": "pause",
+  "type": "object",
+  "properties": {}
+}
+```
+
+resume:
+```json
+{
+  "description": "Resume a paused database.",
+  "title": "resume",
   "type": "object",
   "properties": {}
 }
