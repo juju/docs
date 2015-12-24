@@ -146,6 +146,7 @@ react to our database going away in an intelligent manner:
 ```python
 import pwd
 import os
+from subprocess import call
 from charmhelpers.core.hookenv import status_set
 from charmhelpers.core.templating import render
 from charms.reactive import when, when_not
@@ -164,6 +165,7 @@ def setup_vanilla(mysql):
     uid = pwd.getpwnam('www-data').pw_uid
     os.chown('/var/www/vanilla/cache', uid, -1)
     os.chown('/var/www/vanilla/uploads', uid, -1)
+    call('chmod -R 777 /var/www/vanilla/conf'.split(), shell=False)
     set_state('apache.start')
     status_set('maintenance', 'Starting Apache')
 
