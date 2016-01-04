@@ -68,7 +68,7 @@ should do this by virtue of never having had the opportunity to observe the
 change.
 
 Finally, any file written at runtime constrains all future implementations of
-the charm. When [upgrading a charm](./authors-charm-upgrades.html), any change
+the charm. When [upgrading a charm](./developer-upgrade-charm.html), any change
 that would cause runtime state to be overwritten will cause juju to abort the
 operation and hand over to the user for resolution. This is inconvenient for the
 users and undermines confidence in the charm.
