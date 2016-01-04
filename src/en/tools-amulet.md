@@ -15,7 +15,7 @@ for you to use.
 ## Installation
 
 Amulet is available as both a package and via pip. For source packages, see [
-GitHub](https://github.com/marcoceppi/amulet/releases).
+GitHub](https://github.com/juju/amulet/releases).
 
 ### Ubuntu
 
