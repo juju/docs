@@ -222,11 +222,11 @@ mountpoint=$(storage-get location)
 sed -i /etc/myservice.conf "s,MOUNTPOINT,$mountpoint"
 ```
 
-The storage-attached hooks will be run before the install and upgrade-charm
-hooks, so that installation and upgrade routines may use the storage. The
-storage-detaching hooks will be run before storage is detached, and always
-before the stop hook is run, to allow the charm to gracefully release resources
-before they are removed and before the unit terminates.
+The storage-attached hooks will be run before the install hook, so that the
+installation routine may use the storage. The storage-detaching hooks will
+be run before storage is detached, and always before the stop hook is run,
+to allow the charm to gracefully release resources before they are removed
+and before the unit terminates.
 
 There are several hook tools available for dealing with storage within a
 charm, described below
@@ -238,11 +238,16 @@ charm, described below
 
 - storage-get
 
-    storage-get may be used to obtain information about storage attached
-    to the unit. If the executing hook is a storage hook, information
-    about the storage related to the hook will be reported; this may be
-    overridden by specifying the name of the storage as reported by
-    storage-list, and must be specified for non-storage hooks.
+    storage-get may be used to obtain information about storage being
+    attached to, or detaching from, the unit. If the executing hook is a
+    storage hook, information about the storage related to the hook will
+    be reported; this may be overridden by specifying the name of the
+    storage as reported by storage-list, and must be specified for
+    non-storage hooks.
+
+    storage-get should be used to identify the storage location during
+    storage-attached and storage-detaching hooks. The exception to this
+    is when the charm specifies a static location for singleton stores.
 
 - storage-add
 

@@ -1,4 +1,3 @@
-
 build:
 	tools/mdbuild.py
 
@@ -8,7 +7,7 @@ clean:
 	rm -rf htmldocs/en
 
 serve:
-	cd htmldocs; python -m SimpleHTTPServer
+	tools/serve.py htmldocs 8000
 
 sysdeps:
 	sudo apt-get install python-html2text python-markdown python-pip git spell ispell ibritish

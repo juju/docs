@@ -1,6 +1,6 @@
-Title: Upgrading a charm
+Title: Upgrading a Charm
 
-# Charm upgrades
+# Upgrade Charm
 
 A service's charm can be changed at runtime with the `upgrade-charm` command. By
 default, it changes to the latest available version of the same charm; if
@@ -31,14 +31,14 @@ settings will not be affected by subsequent changes to the service's settings.
 
 ## Forced charm upgrades
 
-Juju defines the [upgrade-charm hook](authors-charm-hooks.html#upgrade-charm)
+Juju defines the [upgrade-charm hook](reference-charm-hooks.html#upgrade-charm)
 for resolving differences between versions of the same charm. No notice is given
 of charm upgrades; a charm upgrade may run at any time the unit is started, and
 the only opportunity for resolution that exists occurs *after* the change has
 taken place.
 
 This is quite a tight restriction, but nonetheless valuable, so long as you can
-guarantee it'll run. However, it's important to understand that the upgrade-
+guarantee it will run. However, it's important to understand that the upgrade-
 charm accepts a `--force` flag: a forced charm upgrade will upgrade even units
 that are currently in an [error](./authors-hook-errors.html) state, at the cost
 of skipping the `upgrade-charm` hook for those units.
