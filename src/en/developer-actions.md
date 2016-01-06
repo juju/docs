@@ -7,10 +7,10 @@ Actions are executables associated with a charm that may be invoked by the user.
 For example, the charm author might include a `snapshot` action on a database
 charm. See [Juju Actions](./actions.html) on how to use actions.
 
-The user may give arguments, optionally nested, when invoking the action. The
-charm uses a file named `actions.yaml` to specify the parameter type for the
-arguments. In the [Juju GUI](./juju-gui-management.html), the invocation of an
-action will be automatically built based on `actions.yaml`.
+The user may pass arguments when invoking the action. The charm uses an
+`actions.yaml` file to specify the parameter type for the arguments. In the
+[Juju GUI](./juju-gui-management.html), the invocation of an action will be
+automatically built based on `actions.yaml`.
 
 [Action tools](#action-tools) may be used by the author to define how actions
 interact with Juju. Actions can retrieve parameters passed by the user, set
