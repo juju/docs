@@ -16,7 +16,7 @@ wish to configure the local provider such as LXC or KVM.
 ## Test your Juju setup
 You will want to make sure everything is running properly before writing code.
 Bootstrapping an environment is a good way to tell if the environment is
-configured correctly. 
+configured correctly.
 
 For more information on these steps, read these pages and be sure to come back
 to continue the development journey.
@@ -76,16 +76,14 @@ is already in [the charm store](https://jujucharms.com/mariadb).
 
 ## Writing your Charm
 
-The fastest way to write a new charm is to build off of layers that have already
-been done. This allows you to create code that is very focused for the service
-you are trying to implement.
+The fastest way to write a new charm is to build off of existing layers. This
+allows you to create code that is very focused for the service you are trying
+to implement.
 
 Layers let you build on the work of other charmers, whether that work is in the
-form of other charms that you can extend and modify, interfaces that are already
-built for you and know how to communicate with a remote service and let you know
-when that service is ready and what it provides for you, or partial base layers
-that make managing dependencies much easier. And it does this in a consistent,
-repeatable, and incremental way.
+form of other charms that you can extend and modify, interfaces that communicate
+with remote services, or partial base layers that make managing dependencies
+much easier. And it does this in a consistent, repeatable, and incremental way.
 
 The available layers and interfaces can be found at
 [interfaces.juju.solutions](http://interfaces.juju.solutions/). The `basic`
