@@ -133,7 +133,7 @@ $JUJU_REPOSITORY/trusty/vanilla:
 
 ![Charm layer diagram](./media/vanilla-layers.png)
 
-To inspect how the charm was assembled, there is a command `charm layers` that
+To inspect how the charm was assembled, there is a `charm layers` command that
 shows what file belongs to which layer. Change to the charm directory and view
 the layer map:  
 
