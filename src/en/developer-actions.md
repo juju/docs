@@ -16,7 +16,6 @@ automatically built based on `actions.yaml`.
 interact with Juju. Actions can retrieve parameters passed by the user, set
 responses in a map, or set a failure status with a message.
 
-
 ## Implementing actions
 
 Every implemented action must include:
@@ -52,7 +51,6 @@ snapshot:
 
 That is a "barebones" configuration. As the next section will make clear, there
 is a lot more that can, and should, be placed in this file.
-
 
 ## Options and format: `actions.yaml`
 
