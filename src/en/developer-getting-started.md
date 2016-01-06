@@ -60,7 +60,7 @@ In order to begin writing a charm, you should have a good plan of how it’s
 going to be implemented, what configuration options you wish to expose to anyone
 deploying the charm, and what dependent charms (if any) it will be related to.
 It’s encouraged to diagram this out, using any of the freely available mockup
-tools available on the web. Google Draw, DIA, Gliffy, Draw.io - just to name a
+tools available on the web. Google Draw, DIA, Gliffy, or Draw.io, just to name a
 few.
 
 The visual representation of your charm deployment will help to solidify the
