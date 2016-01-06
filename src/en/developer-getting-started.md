@@ -170,9 +170,9 @@ For more information about writing tests please refer to the
 
 ## Submitting your charm for review
 
-Once the charm is complete you can  [submit the charm for
-review](./charm-review-process.html), where if accepted  would be included in
+Once the charm is complete you can [submit the charm for
+review](./charm-review-process.html) where, if accepted, would be included in
 the recommended section of the Juju Charm Store. Charms in the recommended
-section follow Charm Store policy and best pratctices for charms. The
+section must follow Charm Store policy and best practices for charms. These
 recommended charms have a shorter namespace on the Charm Store website, and are
 listed higher in search results on <http://jujucharms.com>
