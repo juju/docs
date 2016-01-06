@@ -33,7 +33,7 @@ application served over HTTP.
 
 ### Charm Tools
 We have created tools to make writing charms easier. Developers should [install
-Charm Tools](./tools-charm-tools.html) software. Charm Tools are command line
+the Charm Tools](./tools-charm-tools.html) software. Charm Tools are command line
 utilities that make it easy to create, build, fetch and find common charm errors.
 
 ```bash
