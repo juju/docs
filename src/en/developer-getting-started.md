@@ -20,7 +20,7 @@ configured correctly
 
 For more information on these steps, read these pages and be sure to come back
 to continue the development journey.
-* [Installing Juju](./getting-started.html#installation).
+* [Installing Juju](./getting-started.html#installation)
 * [Configure the local environment](./config-local.html)
 * [Test your Juju setup](./getting-started.html#testing-your-setup)
 
