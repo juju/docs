@@ -1,7 +1,7 @@
 # Using Juju Storage
 
 Many services require access to a storage resource of some form. Juju charms can
-declare what storage requirements  they have, and these can be allocated when
+declare what storage requirements they have, and these can be allocated when
 the charm is deployed. Charms may declare several types of storage requirement
 (e.g. for persistent storage and an additional cache) so that resources can be
 allocated at a more granular level.
@@ -32,7 +32,7 @@ the root filesystem of the unit where they are deployed. To make use of
 additional storage resources, Juju needs to know what they are. Some providers
 (e.g. EC2) support generic default storage pools (see the documentation on
 [provider support](#provider-support)), but in the case of no default support or
-a desire to be more specific. Use the `juju storage pool create` subcommand to
+a desire to be more specific, use the `juju storage pool create` subcommand to
 create storage.
 
 ```bash
@@ -60,7 +60,7 @@ tempy:
 
 If the storage provider supports dynamically adding storage to a machine, then a
 service/unit deployed with storage may be placed on an existing machine. Not all
-providers support dynamic storage; for example: MAAS provides an interface to
+providers support dynamic storage; for example, MAAS provides an interface to
 physical hardware.
 
 ### Provider support
