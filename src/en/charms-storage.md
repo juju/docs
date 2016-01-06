@@ -144,10 +144,9 @@ configuration.
 
 ### Deploying with storage constraints
 
-A charm which requires storage will automatically
-allocate the default storage (unit filesystem). It is possible to
-instead specify the storage to be used when the service is deployed, using
-constraints.
+A charm which requires storage will have the default storage (unit filesystem)
+allocated for it automatically. Constraints can be used, when deploying a
+service, to override the default requirements.
 
 The constraints can specify the type/pool, size and count, of the storage
 required. At least one of the constraints must be specified, but otherwise they
