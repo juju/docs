@@ -1,7 +1,7 @@
 # Getting Started Developing Charms
 
 The developer guide is for anyone wanting to write bits of code that we call
-charms. This guide introduces some new concepts that once you learn can help
+charms. This guide introduces some new concepts that, once learned, can help
 you make some very powerful and reusable code components in the Juju ecosystem.
 
 ## Install Juju
