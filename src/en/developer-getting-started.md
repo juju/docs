@@ -6,7 +6,7 @@ you make some very powerful and reusable code components in the Juju ecosystem.
 
 ## Install Juju
 To develop charms you will need the Juju client installed. The Juju client is
-available for Linux, Windows and Mac OS.  
+available for Linux, Windows and Mac OS.
 
 ## Configure Juju
 Juju needs to be configured before it can orchestrate an environment. Juju
@@ -16,7 +16,7 @@ wish to configure the local provider such as LXC or KVM.
 ## Test your Juju setup
 You will want to make sure everything is running properly before writing code.
 Bootstrapping an environment is a good way to tell if the environment is
-configured correctly.  
+configured correctly. 
 
 For more information on these steps, read these pages and be sure to come back
 to continue the development journey.
@@ -69,34 +69,34 @@ example:
 
 ![Charm Design Diagram](./media/vanilla-planning.png)
 
-Looking at this diagram we see the Vanilla charm with two units.  The Vanilla
+Looking at this diagram we see the Vanilla charm with two units. The Vanilla
 service requires a relationship to a database using the “mysql” interface. The
 MariaDB charm implements the mysql interface, which fulfills the db relation and
-is already in [the charm store](https://jujucharms.com/mariadb).  
+is already in [the charm store](https://jujucharms.com/mariadb).
 
 ## Writing your Charm
 
 The fastest way to write a new charm is to build off of layers that have already
-been done.  This allows you to create code that is very focused for the service
-you are trying to implement.  
+been done. This allows you to create code that is very focused for the service
+you are trying to implement.
 
 Layers let you build on the work of other charmers, whether that work is in the
 form of other charms that you can extend and modify, interfaces that are already
 built for you and know how to communicate with a remote service and let you know
 when that service is ready and what it provides for you, or partial base layers
 that make managing dependencies much easier. And it does this in a consistent,
-repeatable, and incremental way.  
+repeatable, and incremental way.
 
 The available layers and interfaces can be found at
-[interfaces.juju.solutions](http://interfaces.juju.solutions/).  The `basic`
+[interfaces.juju.solutions](http://interfaces.juju.solutions/). The `basic`
 layer provides charm helpers python library and the reactive framework that
-makes layers possible.  
+makes layers possible.
 
 ### Creating a new layer
 
 First off, you require a [local charm repository](./charms-deploying.html) in
 which to work. This involves creating some directories and setting some
-environment variables.  For example:
+environment variables. For example:
 
 ```bash
 export JUJU_REPOSITORY=$HOME/charms
@@ -136,7 +136,7 @@ $JUJU_REPOSITORY/trusty/vanilla:
 ![Charm layer diagram](./media/vanilla-layers.png)
 
 To inspect how the charm was assembled, there is a command `charm layers` that
-shows what file belongs to which layer.  Change to the charm directory and view
+shows what file belongs to which layer. Change to the charm directory and view
 the layer map:  
 
 ```bash
@@ -174,7 +174,7 @@ For more information about writing tests please refer to the
 
 Once the charm is complete you can  [submit the charm for
 review](./charm-review-process.html), where if accepted  would be included in
-the recommended section of the Juju Charm Store.  Charms in the recommended
+the recommended section of the Juju Charm Store. Charms in the recommended
 section follow Charm Store policy and best pratctices for charms. The
 recommended charms have a shorter namespace on the Charm Store website, and are
 listed higher in search results on <http://jujucharms.com>
