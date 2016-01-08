@@ -41,7 +41,7 @@ Here is an overview of the features:
 First, follow [the instructions in the README](https://github.com/juju/plugins#install)
 to install the plugin bundle.
 This should be straightforward and will give you access to all of the
-juju plugins, DHX included.
+Juju plugins, DHX included.
 
 Next, you'll want to create a configuration file to define what
 customizations to perform. For example:
