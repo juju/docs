@@ -7,7 +7,7 @@ Juju, making developing and debugging hooks as painless as possible.
 It is a drop in replacement for
 [`juju debug-hooks`](./developer-debugging.html#the-'debug-hooks'-command).
 It is still a plugin and not yet integrated into Juju itself, so currently
-considered beta quality.  DHX is recommended for more advanced users who need to
+considered beta quality. DHX is recommended for more advanced users who need to
 [debug hooks](./developer-debugging.html) repetitively.
 
 Bugs, feature requests, and pull requests can be submitted against the [Juju
@@ -179,7 +179,7 @@ performing the sync. The list also supports the use of wildcards.
 ## Remote Paired Debugging
 
 It can be useful to get another set of eyes on a problem, so dhx also
-makes it easy to do paired development when debugging charms.  When creating a
+makes it easy to do paired development when debugging charms. When creating a
 dhx session, you can import another developer's Launchpad ID to allow them
 to join your session.
 
