@@ -1,13 +1,11 @@
 # DHX: A Customized Hook Debugging Environment Plugin
 
-[DHX](https://github.com/juju/plugins/blob/master/juju-dhx) is a Juju plugin
-that allows you to fully and automatically customise the machines created by
-Juju, making developing and debugging hooks as painless as possible.
-
-It is a drop in replacement for
-[`juju debug-hooks`](./developer-debugging.html#the-'debug-hooks'-command).
-It is still a plugin and not yet integrated into Juju itself, so currently
-considered beta quality. DHX is recommended for more advanced users who need to
+[DHX](https://github.com/juju/plugins/blob/master/juju-dhx) is a plugin --
+scripts that extend the functionality of Juju -- that allows you to fully and
+automatically customize the machines created by Juju, making developing and
+debugging hooks as painless as possible. It is drop in replacement for
+[`juju debug-hooks`](./developer-debugging.html#the-'debug-hooks'-command),
+recommended for more advanced users who need to
 [debug hooks](./developer-debugging.html) repetitively.
 
 Bugs, feature requests, and pull requests can be submitted against the [Juju
@@ -16,18 +14,17 @@ Plugins project](https://github.com/juju/plugins).
 ## Overview
 
 The machines created by Juju are completely standard, based on the Ubuntu Cloud
-Image. While this consistency is great for running charms, when developing and
-debugging those charms, most developers would prefer to be able to tweak things
-such as their editor configuration, bash configuration or install additional
-editors or debugging libraries. Doing this each time on a new
-machine spun up by Juju is repetitive and tedious.
+Image. While this consistency is great for running charms and while developing
+and debugging those charms, many developers prefer to tweak things such as their
+editor or bash configurations, or install additional tools and debugging
+libraries. Doing this each time on a new machine spun up by Juju is repetitive
+and tedious.
 
-DHX allows allows you to define setup and customizations that will be
-automatically run the first time you start a debug session on a new machine.
-Additionally, it has options for assisting with debugging, such as
-automatically pulling down changes made to the remote charm during debugging,
-or restarting the failed hook and automatically dropping you into a debug
-session for that hook.
+DHX allows you to customize the environment and tools available when you start
+a debug session on a new machine. Additionally, it has options to aid debugging,
+such as automatically syncing changes made to the charm on a remote machine or
+restarting the failed hook and automatically dropping you into a debug session
+for that hook.
 
 Here is an overview of the features:
 
@@ -43,8 +40,8 @@ Here is an overview of the features:
 
 First, follow [the instructions in the README](https://github.com/juju/plugins#install)
 to install the plugin bundle.
-This should be straightforward and will give you access to DHX as well as all
-the other very useful Juju plugins in the bundle.
+This should be straightforward and will give you access to all of the
+juju plugins, DHX included.
 
 Next, you'll want to create a configuration file to define what
 customizations to perform. For example:
@@ -83,8 +80,7 @@ customized and, if not, apply your customizations.
 
 Instead of typing out the full unit name, in the form `service/0`, you can let
 DHX figure out which unit you want to debug. It will use cues such as which
-units are in error state, the charm you're working on in the current
-directory, or a service name you give it instead of a unit name.
+units are in error state, the charm in your current directory, or service name.
 
 If DHX can't unambiguously choose a unit, it will present you with its best
 guess along with a list of units that you can choose from by number or name, so
@@ -135,18 +131,17 @@ Select a unit by number or name: [mysql/1]
 ## Retrying Failed Hooks
 
 The most common reason why you need to start a debug-hooks session is because a
-hook failed and you want to debug it to figure out why. Once you are in the
-debug-hooks session, you want to restart the failed hook and start debugging
-it.
+hook failed and you want to figure out why. Once you are in the debug-hooks
+session, you want to restart the failed hook and start debugging it.
 
 Instead of manually running `juju resolved --retry $unit`, you can just add the
-`--retry` (or just `-r`) option to dhx:
+`--retry` (or just `-r`) option to DHX:
 
 ```bash
 juju dhx -r
 ```
 
-You will then be connected to the unit, it will be customised if necessary, and
+You will then be connected to the unit, it will be customized if necessary, and
 the hook will be immediately restarted and paused for you to debug.
 
 You can also set `auto_retry: true` in your config file to always assume the
@@ -159,10 +154,11 @@ out what went wrong and resolve the problem. However, it is easy to forget to
 apply all of those changes to your local copy of the charm once you're
 done.
 
-There is a plugin in the bundle, `sync-charm`, which pulls down any changes made
-to the charm on a remote unit, and dhx makes it super easy to use. Just invoke
-dhx with the `--sync` (or just `-s`) option, and any changes you make during
-your debugging session will be automatically pulled back down when you are done:
+DHX integrates with the `sync-charm` plugin, which downloads changes made to
+the charm on the remote unit and applies them to your local codebase. Just
+invoke DHX with the `--sync` (or just `-s`) option, and any changes you make
+during your debugging session will be automatically pulled back down when you
+are done:
 
 ```bash
 juju dhx -s
@@ -178,10 +174,9 @@ performing the sync. The list also supports the use of wildcards.
 
 ## Remote Paired Debugging
 
-It can be useful to get another set of eyes on a problem, so dhx also
-makes it easy to do paired development when debugging charms. When creating a
-dhx session, you can import another developer's Launchpad ID to allow them
-to join your session.
+Paired programming can be useful for applying another set of eyes to a problem.
+DHX supports this by allowing you to import another developer's Launchpad ID,
+allowing them to join your session.
 
 Let's say you want to have a paired session with Bob. You would start your
 session with:
