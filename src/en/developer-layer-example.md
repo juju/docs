@@ -52,7 +52,7 @@ interface](https://code.launchpad.net/~bcsaller/charms/+source/http/+git/http)
 for running behind a proxy for high availability and scaling. On top of that,
 we'll want to use the [mysql
 interface](https://github.com/johnsca/juju-relation-mysql). We will put these in
-a `layer.yaml` file, which tells the builder what layers and interfaces to
+a `layers.yaml` file, which tells the builder what layers and interfaces to
 combine with yours to create the finished charm: includes: ['layer:apache-php',
 'interface:mysql']
 
