@@ -48,10 +48,9 @@ These two files are special cases, and are merged into a single file in the top
 most charm layer, allowing the developer to define only fragments of information
 in their respective files.
 
-Given this behavior, it can be extremely difficult to assemble from layers,
-charms written in other frameworks/technologies other than Reactive. As Hooks
-would contain the majority of the code this can be problematic as Hooks will
-overwrite one another.
+Given this behavior, it can be extremely difficult to assemble layer-based
+charms written in frameworks other than Reactive, leading to situations where
+hooks (containing the majority of the code) can be overwritten.
 
 ### Where did this file come from?
 
