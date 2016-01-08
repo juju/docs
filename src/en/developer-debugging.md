@@ -4,13 +4,13 @@ Title: Debugging Juju charm hooks
 
 Not everything works the first time, and sometimes even when it seems to work,
 things don't happen quite as you expected. Juju provides commands to help
-developers debug charm code. There are also community written
+developers debug charm code, and there are also community written
 [plugins](https://github.com/juju/plugins) that can help with the debugging
 process.
 
-Juju provides two commands [`juju debug-log`](#the-'debug-log'-command) and
-[`juju debug-hooks`](#the-'debug-hooks'-command) to help developers resolve
-problems in their code.  The [dhx debugging plugin](./developer-debug-dhx.html)
+Juju provides two commands, [`juju debug-log`](#the-'debug-log'-command) and
+[`juju debug-hooks`](#the-'debug-hooks'-command), to help developers resolve
+problems in their code. The [dhx debugging plugin](./developer-debug-dhx.html)
 improves the debug-hooks experience by performing some common actions
 automatically. Or maybe you're having an issue with building from your charm
 layer, in which case the [debugging with layers](./developer-debug-layers.html)
@@ -20,7 +20,7 @@ is where to look.
 
 Logs are indispensable when it comes time to troubleshoot. View the log with
 the `juju debug-log` command. The output is a consolidation of all the Juju log
-files streaming in real time.  The logs show you detailed inner workings of Juju
+files streaming in real time. The logs show you detailed inner workings of Juju
 and any [`juju-log`](./reference-hook-tools.html#juju-log) messages that are
 run from the charm code.
 
@@ -30,13 +30,13 @@ details and [filtering](./troubleshooting-logs.html#advanced-filtering) options
 with the `juju debug-log` command.
 
 If the error has already passed by viewing the actual log files on the unit is
-helpful.  If you `juju ssh` to the unit you can view the Juju machine and unit
+helpful. If you `juju ssh` to the unit you can view the Juju machine and unit
 log files in the `/var/log/juju/` directory.
 
 ##  The 'debug-hooks' command
 
 If a hook returns non-zero return code this puts the charm in error state and
-Juju halts execution of the event cycle.  The `juju debug-hooks` command accepts
+Juju halts execution of the event cycle. The `juju debug-hooks` command accepts
 a unit and an optional list of hooks to debug (which must be named individually
 in a space-delimited list) or no hook names, causing all hooks to be debugged:  
 
