@@ -29,9 +29,9 @@ logs](./troubleshooting-logs.html#the-debug-log-command) section for more
 details and [filtering](./troubleshooting-logs.html#advanced-filtering) options
 with the `juju debug-log` command.
 
-If the error has already passed by viewing the actual log files on the unit is
-helpful. If you `juju ssh` to the unit you can view the Juju machine and unit
-log files in the `/var/log/juju/` directory.
+You can also view Juju logs logs on an individual machine by using
+`juju ssh` to login to the unit in question and manipulate the log files in the
+`/var/log/juju` directory.
 
 ##  The 'debug-hooks' command
 
