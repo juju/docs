@@ -35,9 +35,11 @@ You can also view Juju logs logs on an individual machine by using
 
 ##  The 'debug-hooks' command
 
-If a hook returns non-zero return code this puts the charm in error state and
-Juju halts execution of the event cycle. The `juju debug-hooks` command accepts
-a unit and an optional list of hooks to debug (which must be named individually
+It's often useful to be able to test code in the same context that a hook
+executes in. The `juju debug-hooks` command allows you to do exactly that,
+whether it's to debug a failed hook or to write and test new hook code.
+
+`juju debug-hooks` accepts a unit and an optional list of hooks to debug (which must be named individually
 in a space-delimited list) or no hook names, causing all hooks to be debugged:  
 
 ```bash
@@ -49,6 +51,13 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 
 ```bash
 juju debug-hooks mysql/0 db-relation-joined db-relation-broken
+```
+
+Additionally, if your hook is already in an error state, you can tell Juju to
+retry the hook after running `juju debug-hooks`:
+
+```bash
+juju resolved mysql/0 --retry
 ```
 
 **Note:** It is possible and often desirable to run debug-hooks on more than
