@@ -265,7 +265,7 @@ python:
 ```python
 from subprocess import check_output
 
-range = check_output(["opened-ports"])
+ports = check_output(["opened-ports"])
 ```
 bash:  
 ```bash
