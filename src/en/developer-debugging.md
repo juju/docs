@@ -101,7 +101,7 @@ run:
 
 Whilst you are debugging a hook, it is possible that other hooks will be queued
 to run. Even hooks which are not in your list to debug will be suspended in the
-queue until you exit your current window. See the  special considerations below.
+queue until you exit your current window. See the special considerations below.
 
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
