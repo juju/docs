@@ -108,7 +108,7 @@ python:
 from charmhelpers.core.hookenv import config
 
 # Get all the configuration as a dictionary.
-cfg =config()
+cfg = config()
 # Get the value for the "interval" key.
 interval = cfg.get(‘interval’)
 ```
