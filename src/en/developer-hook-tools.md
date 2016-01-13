@@ -288,11 +288,21 @@ python:
 ```python
 from charmhelpers.core.hookenv import open_port
 
+# Open a single port
 open_port(80, protocol='TCP')
+
+# Open a range of ports
+for port in xrange(1000, 2000):
+    open_port(port, protocol='UDP')
 ```
 bash:  
 ```bash
+
+# Open a single port
 open-port 80/tcp
+
+# Open a range of ports
+open-port 1000-2000/UDP
 ```
 powershell:  
 ```powershell
