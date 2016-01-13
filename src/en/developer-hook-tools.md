@@ -1,6 +1,11 @@
 # Juju tools
 
-Units deployed with juju have a suite of tooling available to them, called ‘hook tools’. These commands provide the charm developer with a consistent interface to take action on the units behalf, such as opening ports, obtaining configuration, even determining which unit is the leader in a cluster. The listed hook-tools are available in any hook running on the unit, and are only available within ‘hook context’.
+Units deployed with Juju have a suite of tooling, called `hook tools`, available
+to them. These commands provide the charm developer with a consistent interface
+to take action on the units behalf, such as opening ports, obtaining
+configuration settings, and even determining which unit is the leader in a
+cluster. The listed hook-tools are available in any hook running on the unit,
+and are only available within ‘hook context’.
 
 > Note: you can view a detailed listing of what each command listed below does
 on your client with `juju help-tool {command}`. Or for more detailed help on
@@ -8,7 +13,7 @@ individual commands run the command with the -h flag.
 
 ## action-fail
 
-`action-fail` sets the action's fail state with a given error message.  Using
+`action-fail` sets the action's fail state with a given error message. Using
 `action-fail` without a failure message will set a default message indicating a
 problem with the action.
 
@@ -27,7 +32,7 @@ action-fail ‘unable to contact remote service’
 ## action-get
 
 `action-get` will print the value of the parameter at the given key, serialized
-as YAML.  If multiple keys are passed, `action-get` will recurse into the param
+as YAML. If multiple keys are passed, `action-get` will recurse into the param
 map as needed.
 
 python:  
@@ -44,8 +49,8 @@ TIMEOUT=$(action-get timeout)
 
 ## action-set
 
-`action-set` adds the given values to the results map of the Action.  This map
-is returned to the user after the completion of the Action.  Keys must start
+`action-set` adds the given values to the results map of the Action. This map
+is returned to the user after the completion of the Action. Keys must start
 and end with lowercase alphanumeric, and contain only lowercase alphanumeric,
 hyphens and periods.
 
