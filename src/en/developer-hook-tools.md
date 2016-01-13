@@ -77,6 +77,10 @@ from charmhelpers.core.hookenv import close_port
 
 # Close a single port
 close_port(80, protocol="UDP")
+
+# Close a range of ports
+for port in xrange(9000, 9999):
+    close_port(port, protocol="UDP")
 ```
 bash:  
 ```bash
