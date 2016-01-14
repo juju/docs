@@ -1,6 +1,6 @@
 ## Writing a layer by example
 
-In this document we will be writing a charm layer for Vanilla. Vanilla is an
+In this document, we will be writing a charm layer for Vanilla. Vanilla is an
 open source, themeable, pluggable, and multi-lingual forum software, which
 enables communities to host a forum for discussion topics at scale. Powered by
 PHP and MySQL, Vanilla is a fine example of a three-tiered application:
