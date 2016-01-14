@@ -15,11 +15,12 @@ either side of the relation. Instead, they are solely responsible for the
 end to decide what to do with the results of that communication.
 
 Interface layers currently must be written in Python and extend the ReactiveBase
-class, though they can then be __used__ by any language using the built-in CLI API.
+class, though they can then be __used__ by any language using the built-in CLI
+API.
 
 ## Design considerations
 
- When writing an interface, there is a small amount of pre-planning into what
+When writing an interface, there is a small amount of pre-planning into what
 that interface should look like in terms of the communication between
 services/unit(s) participating in the relationship.
 
@@ -39,7 +40,7 @@ this interface?
 - What states (if any) should this interface raise on the requirer?
 
 
-## What communication scopes are, and how to use them
+## Communication scopes and how to use them
 
 When writing an interface, there is also the concept of a communication scope.
 There are three distinct flavors of scoping for a conversation. At times there
@@ -101,13 +102,13 @@ The export of `INTERFACE_PATH` is an environment variable which tells the
 
 With our interface repository created, we can now create our new interface.
 
-Start by creating the directory to warehouse your interface
+Next, create the directory to warehouse your interface.
 
 ```Bash
 mkdir -p $INTERFACE_PATH/http
 ```
 
-And declare the interface's metadata in `interface.yaml`
+And declare the interface's metadata in `interface.yaml`.
 
 ```yaml
 name: http
@@ -239,7 +240,8 @@ class HttpRequires(RelationBase):
 
 #### Implementing the requires side
 
-With our requirer interface written, lets take a look at how we might implement this in a charm.
+With our requirer interface written, lets take a look at how we might implement
+this in a charm.
 
 In our metadata we define a reverseproxy relation implementing the interface:
 
