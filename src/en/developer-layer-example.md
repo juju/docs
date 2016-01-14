@@ -1,9 +1,9 @@
 ## Writing a layer by example
 
-In this howto, we will be writing a charm layer for Vanilla. Vanilla is an open
-source themeable, pluggable, multi-lingual forum software, which enables
-communities to host a forum for discussion topics at scale. Powered by PHP and
-MySQL Vanilla is a fine example of a 3 tiered application
+In this document we will be writing a charm layer for Vanilla. Vanilla is an
+open source, themeable, pluggable, and multi-lingual forum software, which
+enables communities to host a forum for discussion topics at scale. Powered by
+PHP and MySQL, Vanilla is a fine example of a three-tiered application:
 
 - Database (MySQL)
 - Middleware (PHP App)
@@ -11,11 +11,10 @@ MySQL Vanilla is a fine example of a 3 tiered application
 
 ### Prepare your workspace
 
-From within your local repository which is designated by the environment
-variable: [`$JUJU_REPOSITORY`](reference-environment-variables.html#juju-repository)
-
-There are 2 additional environment variables to assign while working with
-layers. These are great candidates for inclusion in your shells rc files.
+Building off of [`$JUJU_REPOSITORY`](reference-environment-variables.html#juju-repository),
+we want to add two more environment variables to your session. We recommend
+adding these into your shell configuration file so that they are always
+available.
 
 #### LAYER_PATH
 
@@ -50,15 +49,19 @@ of. Out of the box, this will give us Apache2 running on a configurable port,
 mod-php5, and support for the [http
 interface](https://code.launchpad.net/~bcsaller/charms/+source/http/+git/http)
 for running behind a proxy for high availability and scaling. On top of that,
-we'll want to use the [mysql
-interface](https://github.com/johnsca/juju-relation-mysql). We will put these in
-a `layer.yaml` file, which tells the builder what layers and interfaces to
-combine with yours to create the finished charm: includes: ['layer:apache-php',
-'interface:mysql']
+we'll use the [mysql
+interface](https://github.com/johnsca/juju-relation-mysql) to facilitate our
+database interface. We will put these in a `layer.yaml` file, which tells the
+builder what layers and interfaces to combine with yours to create the finished
+charm:
+
+```yaml
+includes: ['layer:apache-php', 'interface:mysql']
+```
 
 ### Fill in your charm layer
 
- With that decided, we're ready to start creating our charm layer. The README,
+With that decided, we're ready to start creating our charm layer. The README,
 icon, and copyright file will be the same. The `metadata.yaml` will be the same
 except that the website relation will be managed for us, so we can leave out
 the provides section:
