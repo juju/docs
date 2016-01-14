@@ -4,8 +4,9 @@ Title: LXD local provider
 # Overview
 
 The LXD local provider is the most efficient and featureful way to use Juju
-locally on Ubuntu. It enables multiple Juju-deployed services within a single
-operating system, making available a number options:
+locally on Ubuntu. It leverages [LXD](https://linuxcontainers.org/lxd/) to
+enable multiple Juju-deployed services within a single operating system.
+Immediate uses include:
 
  - Evaluation of Juju
  - Evaluation of deployed software
@@ -24,15 +25,12 @@ notable differences:
    (`/var/cache/lxc`).
 
 Although this document does provide enough information to get you running with
-generic LXD (this document is ultimately about running LXD with Juju) it does
+LXD itself (this document is ultimately about running LXD with Juju) it does
 so assuming you are setting up LXD for the first time.
 
 **Note:** If you are running iptables (firewall) or even an iptables frontend
 such as `ufw`, the LXD local provider might not work properly. Troubleshoot
 accordingly or stop the firewall altogether.
-
-See [linuxcontainers.org/lxd](https://linuxcontainers.org/lxd/) for more on LXD
-itself.
 
 
 # Prerequisites and installation of Juju and LXD
@@ -66,8 +64,8 @@ newgrp lxd
 # Images
 
 Images need to be made available to LXD via either a local or network-based
-store. These can be called a local remote image store - **local remote** or a
-networked remote image store - **networked remote**. For Juju, they must have
+store. These can be called a local remote image store, a **local remote**, or a
+networked remote image store, a **network remote**. For Juju, they must have
 the names (aliases) in the format `ubuntu-<codename>` such as 'ubuntu-trusty'
 and 'ubuntu-xenial'.
 
@@ -76,19 +74,19 @@ subsequent requests will be satisfied by the LXD cache. In this way, a store is
 sollicited once per environment for any given image, and not once per machine
 (LXC host) which is the normal behaviour for LXC.
 
-NEEDS REDOING:
-Note that although there is a sync mechanism for images, the LXC host cache
-needs to be managed separately. See [below](#ensuring-fresh-images) for
-refreshing the LXC host cache.
+There is a sync mechanism for local remote images and a flushing mechanism for
+network remote images. This will be clarified later.
 
 For any image-related command, an image is specified by its alias or by its
-*fingerprint*. Both are shown in image lists (explained later). The beginning
-of a cached image's filename is comprised of its fingerprint.
+*fingerprint*. Both are shown in image lists (explained later). A cached
+image's filename is its *full fingerprint*. The fingerprint shown in an image
+list is its *partial fingerprint* (the beginning portion of the cached image's
+filename). Either type of fingerprint can be used to refer to images.
 
 
-## Networked image store remote
+## Network image store remote
 
-Read this if you using a networked image store remote.
+Read this if you are using a network remote.
 
 Public image servers are becoming available and there is one at
 [images.linuxcontainers.org](http://images.linuxcontainers.org). Using such a
@@ -120,7 +118,7 @@ IMAGE
 
 ## Local image store remote
 
-Read this if you using a local image store remote.
+Read this if you are using a local remote.
 
 Import a 64bit Trusty image, tag it to be synced, and create the alias:
 
@@ -128,20 +126,22 @@ Import a 64bit Trusty image, tag it to be synced, and create the alias:
 lxd-images import ubuntu trusty amd64 --sync --alias ubuntu-trusty
 ```
 
+This will pull official Ubuntu cloud images from
+http://cloud-images.ubuntu.com.
+
 To sync, run:
 
 ```bash
 lxd-images sync
 ```
 
-By default the above is managed via cron with `/etc/default/lxd` and
-`/var/cron.d/hourly/lxd` (see
-[GH #1347020](https://github.com/lxc/lxc/issues/764)).
+By default, the above is managed by cron with `/var/cron.d/hourly/lxd`.
 
 Once any given image is imported it is cached at
 `/var/lib/lxd/images` and shows up with `lxc image list`:
 
 IMAGE
+
 
 # LXD test
 
@@ -227,24 +227,35 @@ juju bootstrap --upload-tools
 Looks like we log to `/var/log/lxd/juju-{uuid}-machine-#/ ?
 Is `/var/log/lxd/lxd.log` important? 
 
-need to be root to poke around in here? normal?
+
+# Other useful commands
+
+There is a cornucopia of commands available. Some common ones not yet covered
+are shown below.
+
+client commands					| meaning
+------------------------------------------------|----------------------
+`lxc remote list`				| list remotes
+`lxc info`					| displays status of localhost
+`lxc info <container>`				| displays status of container
+`lxc config show <container>`			| displays config of container
+`lxc image info <alias or fingerprint>`		| displays status of image
+`lxc exec <container> <executable>`		| run prgram on container
+`lxc exec <container> /bin/bash`		| spawn shell on container
+`lxc file pull <container></path/to/file> .` 	| copy file from container
+`lxc file push </path/to/file> <container>/` 	| copy file to container
+`lxc stop <container>`				| stop container
+`lxc image alias delete <alias>`		| delete image alias
+`lxc image alias create <alias> <fingerprint>`	| create image alias
 
 
-# Other useful LXD commands
+See upstream documentation for more on the
+[lxc command line tool](https://github.com/lxc/lxd/blob/master/specs/command-line-user-experience.md)
+and how to
+[configure the lxd daemon and containers](https://github.com/lxc/lxd/blob/master/specs/configuration.md).
 
-lxc remote list
 
-lxc info ubuntu-container
-
-lxc exec ubuntu-container /bin/bash
-
-lxc file pull ubuntu-container/path/to/file .
-
-lxc file push /path/to/file ubuntu-container/
-
-lxc stop ubuntu-container
-
-===========
+= ALL OF BELOW NEEDS TO BE REVIEWED =
 
 Using Juju with this configuration, the storage files and the database will be
 located in the directory specified by the environment variable `$JUJU_HOME`,
@@ -311,57 +322,3 @@ Newly provisioned machines on the Local Provider have package upgrades disabled
 by default. This, again, is to accelerate provisioning. To allow automatic
 software upgrades to occur you will need to configure accordingly. See
 [General config options](./config-general.html#local-provider).
-
-
-### Commands
-
-There is a cornucopia of commands available. Examples of the common ones are show below.
-
-The 'lxc image list' command lists available images  and delete cached LXC images stored in the
-Juju environment. The 'list' and 'delete' subcommands support '--arch' and
-'--series' options to filter the result.
-
-Examples:
-
-To see all available images:
-
-```bash
-
-```
-
-To see just the amd64 trusty image:
-
-```bash
-
-```
-
-To delete the amd64 trusty image:
-
-```bash
-
-```
-
-See 'juju cached-images list --help' and 'juju cached-images delete --help' for
-more details.
-
-### Ensuring fresh images
-
-In addition to tagging local images with `sync`, to ensure stale images are not being used
-you need to also flush the LXC host cache on a regular basis:
-
-```bash
-sudo rm -r /var/cache/lxc/cloud-trusty
-```
-
-Do not forget to also remove the source clone image (template) if lxc-clone is
-enabled (the default):
-
-```bash
-sudo lxc-destroy -n juju-trusty-lxc-template
-```
-
-
-## LXC containers within KVM guests
-
-You can also use Juju to create KVM guests within which are placed LXC
-containers. See [Configuring for KVM](./config-KVM.html#lxc-containers-within-a-kvm-guest).
