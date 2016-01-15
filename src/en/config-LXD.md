@@ -63,19 +63,17 @@ newgrp lxd
 
 # Images
 
-Images need to be made available to LXD via either a local or network-based
-store. These can be called a local remote image store, a **local remote**, or a
-networked remote image store, a **network remote**. For Juju, they must have
-the names (aliases) in the format `ubuntu-<codename>` such as 'ubuntu-trusty'
-and 'ubuntu-xenial'.
+With standalone LXD, images are available via either a local or network-based
+store. These can be called a local image store *remote*, a **local remote**, or a
+networked image store remote, a **non-local remote**. Juju, however, only
+supports local remotes at this time. Images stored on them must also have the
+names (aliases) in the format `ubuntu-<codename>` such as 'ubuntu-trusty' and
+'ubuntu-xenial'.
 
-The first time an image is needed the image store will supply it and any
-subsequent requests will be satisfied by the LXD cache. In this way, a store is
-sollicited once per environment for any given image, and not once per machine
-(LXC host) which is the normal behaviour for LXC.
-
-There is a sync mechanism for local remote images and a flushing mechanism for
-network remote images. This will be clarified later.
+The first time an image is needed the store will supply it and any subsequent
+requests will be satisfied by the LXD cache. In this way, a store is sollicited
+once per environment for any given image, and not once per machine (LXC host)
+which is the normal behaviour for LXC. There is a also an image sync mechanism.
 
 For any image-related command, an image is specified by its alias or by its
 *fingerprint*. Both are shown in image lists (explained later). A cached
@@ -84,41 +82,7 @@ list is its *partial fingerprint* (the beginning portion of the cached image's
 filename). Either type of fingerprint can be used to refer to images.
 
 
-## Network image store remote
-
-Read this if you are using a network remote.
-
-Public image servers are becoming available and there is one at
-[images.linuxcontainers.org](http://images.linuxcontainers.org). Using such a
-server avoids the necessity of downloading and maintaining images locally.
-Images on the above particular server are refreshed regularly and the images
-themselves are paired down LXC images (not standard cloud images). Suchlike
-features may be different on another server.
-
-Add a remote image server (called 'remote-store') and list its images:
-
-```bash
-lxc remote add remote-store images.linuxcontainers.org
-lxc image list remote-store:
-```
-
-For all operations, the local server is assumed in the absence of the remote
-server's name plus the addition of a colon (`remote-store:`).
-
-**Note:** Do not confuse command `lxc` with the binary shipped with traditional
-LXC. All the latter's binaries are of the form `lxc-<subcommand>`. The `lxc`
-binary actually comes from the `lxd-client` package.
-
-Once any given image is used to create a container the image is cached at
-`/var/lib/lxd/images` and shows up with `lxc image list` (no longer the
-networked remote):
-
-IMAGE
-
-
-## Local image store remote
-
-Read this if you are using a local remote.
+## Import an image into the local remote
 
 Import a 64bit Trusty image, tag it to be synced, and create the alias:
 
@@ -126,8 +90,13 @@ Import a 64bit Trusty image, tag it to be synced, and create the alias:
 lxd-images import ubuntu trusty amd64 --sync --alias ubuntu-trusty
 ```
 
-This will pull official Ubuntu cloud images from
+This sort of invocation will pull official Ubuntu cloud images from
 http://cloud-images.ubuntu.com.
+
+Once any given image is imported it is cached at
+`/var/lib/lxd/images` and shows up with `lxc image list`:
+
+![lxc image list after importing](./media/image_list-imported_image-reduced70.png)
 
 To sync, run:
 
@@ -135,41 +104,16 @@ To sync, run:
 lxd-images sync
 ```
 
-By default, the above is managed by cron with `/var/cron.d/hourly/lxd`.
-
-Once any given image is imported it is cached at
-`/var/lib/lxd/images` and shows up with `lxc image list`:
-
-IMAGE
+By default, the above is managed via cron (`/var/cron.d/hourly/lxd`).
 
 
 # LXD test
 
 Although the objective here is to have Juju launch containers as it needs them,
 as a test for your LXD installation, you should manually launch one now (here
-called 'ubuntu-trusty-64-test'):
+called 'ubuntu-trusty-64-test').
 
-
-## If using a networked remote
-
-Here, the image alias on the networked server is 'ubuntu/trusty/amd64',
-
-```bash
-lxc launch remote-store:ubuntu/trusty/amd64 ubuntu-trusty-64-test
-```
-
-There will be no alias for the cached image of the networked remote. Create the
-required one (`ubuntu-<codename>`) (assuming a partial fingerprint of
-`53b79865a0b4`):
-
-```bash
-lxc image alias create ubuntu-trusty 53b79865a0b4
-```
-
-
-## If using a local remote
-
-Here, the image alias we made during importation is 'ubuntu-trusty':
+We refer to the alias created during importation.
 
 ```bash
 lxc launch ubuntu-trusty ubuntu-trusty-64-test
@@ -181,6 +125,10 @@ List all containers and then remove the test container:
 lxc list
 lxc delete ubuntu-trusty-64-test
 ```
+
+**Note:** Do not confuse command `lxc` with the binary shipped with traditional
+LXC. All the latter's binaries are of the form `lxc-<subcommand>`. The `lxc`
+binary actually comes from the `lxd-client` package.
 
 
 # Configure and bootstrap
@@ -224,14 +172,16 @@ juju bootstrap --upload-tools
 
 # Logs
 
-Looks like we log to `/var/log/lxd/juju-{uuid}-machine-#/ ?
-Is `/var/log/lxd/lxd.log` important? 
+LXD itself logs to `/var/log/lxd/lxd.log` and Juju machines created via the
+LXD local provider log to `/var/log/lxd/juju-{uuid}-machine-{#}`. However,
+the standard way to view logs is with the `juju debug-log` command. See
+[Viewing logs](./troubleshooting-logs.html) for more details.
 
 
 # Other useful commands
 
 There is a cornucopia of commands available. Some common ones not yet covered
-are shown below.
+are given below.
 
 client commands					| meaning
 ------------------------------------------------|----------------------
@@ -248,77 +198,7 @@ client commands					| meaning
 `lxc image alias delete <alias>`		| delete image alias
 `lxc image alias create <alias> <fingerprint>`	| create image alias
 
-
 See upstream documentation for more on the
 [lxc command line tool](https://github.com/lxc/lxd/blob/master/specs/command-line-user-experience.md)
 and how to
 [configure the lxd daemon and containers](https://github.com/lxc/lxd/blob/master/specs/configuration.md).
-
-
-= ALL OF BELOW NEEDS TO BE REVIEWED =
-
-Using Juju with this configuration, the storage files and the database will be
-located in the directory specified by the environment variable `$JUJU_HOME`,
-which defaults to `~/.juju/`. By uncommenting and setting `root-dir` this
-location can be changed as well as the ports of the storage and the shared
-storage. This may be useful if you want to run multiple local providers
-simultaneously or to deal with possible conflicts with other programs on your
-system.
-
-Ensure all local providers are using different ports. The default port numbers
-for `api-port`, `state-port`, and `storage-port` are 17071, 37017, and 8040
-respectively. Also, the name of each provider is arbitrary. For instance:
-
-
-```yaml
-# another local environment
-another-local:
-    type: lxd
-    api-port: 17072
-    state-port: 37018
-    storage-port: 8041
-```
-
-**Note:** If your home directory is encrypted you cannot point `$JUJU_HOME` or
-`root-dir` to a location within it. Use locations **outside** of it.
-
-
-## Fast LXC creation
-
-The LXD local provider can use lxc-clone to create the containers used as machines.
-This feature is controlled by the `lxc-clone` option in environments.yaml. The
-default is "true" for Trusty and above, and "false" for earlier Ubuntu releases.
-
-You can try to use lxc-clone on earlier releases, and it may well work, but it
-is not a supported feature. You can enable lxc-clone in environments.yaml like
-this:
-
-```yaml
-local:
-    type: lxd
-    lxc-clone: true
-```
-
-The local provider is btrfs-aware. If your LXC directory is on a btrfs
-filesystem, the clones use btrfs snapshots and are much faster to create and
-take up much less space. There is also support for using aufs as a
-backing-store for the LXC clones, but there are some situations where aufs
-doesn’t entirely behave as intuitively as one might expect, so this must be
-turned on explicitly in `environments.yaml`.
-
-```yaml
-local:
-    type: lxd
-    lxc-clone-aufs: true
-```
-
-When using clone, the first machine to be created will create a "template"
-machine that is used as the basis for the clones. This will be called
-`juju-<series>-template`, so for a precise image, the name is
-`juju-precise-template`. Do not modify or start this image while a local
-provider environment is running because you cannot clone a running LXC machine.
-
-Newly provisioned machines on the Local Provider have package upgrades disabled
-by default. This, again, is to accelerate provisioning. To allow automatic
-software upgrades to occur you will need to configure accordingly. See
-[General config options](./config-general.html#local-provider).
