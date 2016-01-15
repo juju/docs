@@ -104,7 +104,7 @@ To sync, run:
 lxd-images sync
 ```
 
-By default, the above is managed via cron (`/var/cron.d/hourly/lxd`).
+By default, the above is managed via cron (`/etc/cron.hourly/lxd`).
 
 
 # LXD test
