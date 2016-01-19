@@ -1,8 +1,8 @@
 # Writing charms that use storage
 
 The storage feature can be implemented in any charm running on Juju version
-1.25 or later.  For services that can take advantage of block storage or other
-types  of storage there are two additional storage hooks for the code to react
+1.25 or later. For services that can take advantage of block storage or other
+types of storage there are two additional storage hooks for the code to react
 to storage changes.
 
 If you are interested in information of how to deploy charms that use the
@@ -24,7 +24,7 @@ storage:
     location: /srv/data
 ```
 
-In this definition the charm is asking for storage it is calling 'data', and it
+In this definition, the charm is asking for storage called 'data', and it
 further defines a type and location. It is possible to specify as many entries
 as desired for storage, and all but the 'type' key are optional. The 'type'
 attribute specifies the type of the storage: filesystem or block (i.e. block
