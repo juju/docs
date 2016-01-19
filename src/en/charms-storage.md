@@ -71,7 +71,7 @@ All environment providers support the following storage providers:
 
     block-type, creates a file in the agent data-dir and attaches a loop device
     to it. See the
-    [Known limitations](./developer-storage.html#Known-limitations) section
+    [Known limitations](#known-limitations) section
     below for a comment on using the loop storage with the local/LXC provider.
 
 - [rootfs](https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt)

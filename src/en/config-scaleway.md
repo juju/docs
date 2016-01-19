@@ -25,7 +25,7 @@ plugins.
 !!! **Note:** This process requires you to have an Scaleway account.
 
 - You have an account and are logged into [cloud.scaleway.com](https://cloud.scaleway.com)
-- You have configured your [SSH Key](https://www.scaleway.com/docs/configure_new_ssh_key)
+- You have configured your [SSH Key](https://www.scaleway.com/docs/configure-new-ssh-key/)
 - You have installed libffi-dev and libssl-dev
 
 
@@ -48,7 +48,7 @@ pip install -U juju-scaleway
 Before you can start using Juju with Scaleway, you will need to get an API token.
 API tokens are unique identifiers associated with your Scaleway account.
 
-To get one, open the pull-down menu on your account name and click on 
+To get one, open the pull-down menu on your account name and click on
 the "My Credentials" link.
 
 ![Credentials](http://i.imgur.com/3rZpnTJ.png)

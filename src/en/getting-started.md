@@ -59,14 +59,14 @@ Juju needs to be configured to use your cloud provider. This is done via the
 following file:
 
 
-## Linux & Mac OSX
+## Linux & Mac OSX configuration
 
 ```no-highlight
 ~/.juju/environments.yaml
 ```
 
 
-## Windows
+## Windows configuration
 
 ```no-highlight
 %APPDATA%\Juju\environments.yaml
