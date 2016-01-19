@@ -101,7 +101,7 @@ Due to the gravity of this action, you will be prompted for a confirmation.
 ## Removing relations
 
 To remove relations between deployed services, see
-[Charm relations](charms-relations.html#removing).
+[Charm relations](charms-relations.html#removing-relations).
 
 
 ## Caveats

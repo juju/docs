@@ -75,7 +75,7 @@ Interface layers currently must be written in Python and extend the ReactiveBase
 class, though they can then be used by any language using the built-in CLI API.
 
 There's more on programming interface layers in the [Developing Interface
-Layers](developers-interface-layers.html) guide.
+Layers](developers-layers-interfaces.html) guide.
 
 ## Charm Layers
 

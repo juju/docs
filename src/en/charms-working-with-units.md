@@ -9,7 +9,7 @@ debugging purposes. Juju provides a few different commands to make this
 easier.
 
 
-## The `juju ssh` command
+## The juju ssh command
 
 The `juju ssh` command will connect you, via SSH, into a target unit. For
 example:
@@ -29,7 +29,7 @@ however for more complex commands we recommend using `juju run` instead.
 See also the `juju help ssh` command for more information.
 
 
-## The `juju scp` command
+## The juju scp command
 
 Copying files to and from units can be a common task depending on your
 workload, so Juju provides a `juju scp` command for copying files securely to
@@ -66,11 +66,11 @@ juju scp -e testing foo.txt apache2/1:
 For more information, run the `juju help scp` command.
 
 
-## The `juju run` command
+## The juju run command
 
-The `run` command can be used by devops or scripts to inspect or do work on
-services, units, or machines. Commands for services or units are executed in a
-hook context. Charm authors can use the run command to develop and debug
+The `juju run` command can be used by devops or scripts to inspect or do work
+on services, units, or machines. Commands for services or units are executed in
+a hook context. Charm authors can use the run command to develop and debug
 scripts that run in hooks.
 
 For example, to run uname on every instance:
@@ -90,7 +90,8 @@ juju run "uptime" --service=mysql
 whichever command you pass will run on *every unit* of that service.
 
 When used in combination with certain services you can script certain tasks.
-For instance, in the 'hadoop' charm you can use `juju run` to initiate a terasort:
+For instance, in the 'hadoop' charm you can use `juju run` to initiate a
+terasort:
 
 ```bash
 juju run --unit hadoop-master/0 "sudo -u hdfs /usr/lib/hadoop/terasort.sh"

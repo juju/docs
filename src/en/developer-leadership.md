@@ -17,11 +17,11 @@ leader to drop out.
 If you wish to be notified when your unit's leadership status changes, you
 should implement the following hooks:
 
-####  [`leader-elected`](reference-charm-hooks.html#leader-elected)
+#### [`leader-elected`](reference-charm-hooks.html#leader-elected)
 which will run at least once, when the unit is known to be leader and guaranteed
 to remain so for at least 30 seconds.
 
-####  [`leader-settings-changed`](reference-charm-hooks.html#leader-settings-changed)
+#### [`leader-settings-changed`](reference-charm-hooks.html#leader-settings-changed)
 will run at least once when the unit is not guaranteed continued leadership for
 the next 30 seconds; and also whenever some other unit writes leader settings.
 
@@ -37,7 +37,7 @@ running. There is deliberately no mechanism for discovering which *other* unit
 is the leader; such data always risks staleness and opens the door to a lot of
 race scenarios.
 
-### [`is-leader`](refence-hook-tools.html#is-leader)
+### [`is-leader`](reference-hook-tools.html#is-leader)
 will write `"True"` or `"False"` to stdout, and return 0, if
 the unit is currently leader and can be guaranteed to remain so for 30 seconds.
 Output can be expressed as `--format json` or `--format yaml` if desired.
@@ -54,7 +54,7 @@ return false.
 Every service deployed by Juju also has access to a pseudo-relation over which
 leader settings can be communicated with the following tools:
 
-### [`leader-set`](refrence-hook-tools.html#leader-set)
+### [`leader-set`](reference-hook-tools.html#leader-set)
 acts much like `relation-set`, in that it lets you write string
 key/value pairs (in which an empty value removes the key), but with the
 following differences:

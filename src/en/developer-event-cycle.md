@@ -156,7 +156,7 @@ code in the [relationship hook sequence](#relation-events-by-example).
 In the vanilla `layers.yaml` file, we include “interface:mysql". This relates
 directly to the “database” relation defined in `metadata.yaml`; with this
 inclusion in `layers.yaml`, your charm will pick up the mysql interface layer
-from [the layers webservice](https://interfaces.jujusolutions.com). The vanilla
+from [the layers webservice](http://interfaces.juju.solutions/). The vanilla
 code can then react to the “database.connected” state and/or the
 “database.available” state.
 

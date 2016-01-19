@@ -352,7 +352,7 @@ interpretation. If you need to specify a remote unit but want to see all
 settings, use `-` for the first argument.
 
 The environment variable
-[`JUJU_REMOTE_UNIT`](reference-environment-variables.html#juju-remote-unit)
+[`JUJU_REMOTE_UNIT`](reference-environment-variables.html#juju_remote_unit)
 stores the default remote unit.
 
 You should never depend upon the presence of any given key in `relation-get`

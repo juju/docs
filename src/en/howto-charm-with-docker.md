@@ -1,6 +1,6 @@
 # Charming with Docker
 
-You have a Docker container and you heard about Juju.  Juju can deploy your
+You have a Docker container and you heard about Juju. Juju can deploy your
 Docker container to any cloud. This document will outline the best practices
 for using Juju to deploy Docker images.
 
@@ -9,12 +9,11 @@ for using Juju to deploy Docker images.
 This document assumes you already know about [Docker](http://docker.com) and
 how to create, pull and use application containers.
 [Juju](about-juju.html) may be a new
-concept so you should [get started](get-started.html)
+concept so you should get familiar
 with the technology, there is more information on
-[installation and configuration](getting-started.html)
-of Juju software on <https://jujucharms.com>.  This document will detail some of
+[installation and configuration](getting-started.html#installation)
+of Juju software on <https://jujucharms.com>. This document will detail some of
 the higher level [concepts of Juju](glossary.html).
-
 
 ### Reactive and layered charms
 
@@ -33,7 +32,7 @@ do nothing at all.
 
 The idea of charm layers is to combine objects or data into more complex objects
 or data. When applied to Charms, layers allow you to extend or build off
-other charms to make more complex or useful charms.  The `layers.yaml` file in
+other charms to make more complex or useful charms. The `layers.yaml` file in
 the root directory of the charm controls what layer(s) will be imported.
 
 #### Reactive Charms
@@ -100,8 +99,8 @@ layers and accompanying code.
 An example of a charm using the reactive pattern is the
 [layer-docker charm](https://github.com/juju-solutions/layer-docker).
 It also uses the compose workflow and can serve as the base for other Docker
-charms.  This document will focus on the reactive parts of the layer-docker
-charm.  You can read more about layers in the
+charms. This document will focus on the reactive parts of the layer-docker
+charm. You can read more about layers in the
 +[building a charm with layers documentation](authors-charm-building.html).
 
 ```
@@ -119,7 +118,7 @@ Making a charm "reactive" adds two directories (`reactive` and `hooks/relations`
 to the basic charm structure. The layer-docker charm only has a `reactive`
 directory because it does not add (or provide) any new relations.
 
-Inside the `reactive` directory there is a file `docker.py`.  The reactive
+Inside the `reactive` directory there is a file `docker.py`. The reactive
 framework goes into the reactive directory and finds the `docker.py` file.
 
 ```python
@@ -135,13 +134,13 @@ def install():
 
 The file contains a single function named "install" which has a decorator
 `@hook` indicating this function should be called on the `install` event. The
-reactive framework handles hooks in a special way.  All the hooks of the same
+reactive framework handles hooks in a special way. All the hooks of the same
 name will be run in a non-determinded order, so generally only one layer should
 implement a hook for best results.
 
 This install hook creates a path to an install script and calls the script to
-install Docker.  After Docker installs it calls the reactive `set_state`
-method.  This method puts the "docker.available" state in the reactive
+install Docker. After Docker installs it calls the reactive `set_state`
+method. This method puts the "docker.available" state in the reactive
 framework so that other layers know that Docker is installed and available.
 
 The layer-docker charm is a great example of how small and focused a charm can
@@ -149,7 +148,7 @@ be when it uses reactive and compose concepts.
 
 ## States
 
-States can be thought of as persistent events.  The code using the reactive
+States can be thought of as persistent events. The code using the reactive
 framework can set and remove states. Other code known as handlers can use the
 boolean logic to run when the state or combination of states is correct. States
 may be useful to other layers so it is very important to document in the
@@ -158,7 +157,7 @@ may be useful to other layers so it is very important to document in the
 ## layer-docker-nginx
 The layer-docker-nginx charm adds the [Nginx](http://nginx.org/) HTTP server
 docker image to the layer-docker charm by using `charm compose` and also uses
-the reactive framework.  The
+the reactive framework. The
 [layer-docker-nginx charm](https://github.com/juju-solutions/layer-docker-nginx)
 can be found on github.
 
@@ -187,7 +186,7 @@ to determine if the port has changed and the container needs to be recycled.
 
 ## Reactive functions
 The `nginx.py` file contains several functions that make use of the reactive
-framework.  The `@when` and `@when_not` are
+framework. The `@when` and `@when_not` are
 [charms.reactive decorators](http://pythonhosted.org/charms.reactive/charms.reactive.decorators.html).
 The decorated functions are only run if the conditions match the current state.
 The functions described here are specific to the nginx workload, but the
@@ -196,9 +195,9 @@ with the layer-docker charm as the base.
 
 #### install_nginx
 The layer-docker charm sets the "docker.available" state after installing and
-configuring Docker.  The `install_nginx` function is decorated with
+configuring Docker. The `install_nginx` function is decorated with
 `@when('docker.available')` meaning that the code will run after Docker is
-installed and configured.  The install_nginx function sets the state
+installed and configured. The install_nginx function sets the state
 "nginx.available" when it is complete.
 ```python
 @when('docker.available')
@@ -218,10 +217,10 @@ def install_nginx():
 
 #### run_container
 This function handles running the nginx container which many Docker charms
-will have to do.  The run_container function is decorated with two decorators
+will have to do. The run_container function is decorated with two decorators
 `@when('nginx.available', 'docker.available')` and `@when_not('nginx.started')`.
 The `@when` decorator indicates the desired states and both must be set before
-the run_container function is executed.  The `@when_not` decorator indicates
+the run_container function is executed. The `@when_not` decorator indicates
 the state that must not be active for this function to run. Since the
 run_container function sets the "nginx.started" state this ensures the
 container is not started over and over again.
@@ -259,7 +258,7 @@ def run_container(webroot=None):
 
 #### stop_container
 The stop_container function is decorated with
-`@when('nginx.stop', 'docker.available')`.  The "nginx.stop" state is an
+`@when('nginx.stop', 'docker.available')`. The "nginx.stop" state is an
 indication to stop the container in which case it will set the "nginx.stopped"
 state. The decorator `@when_not('nginx.stopped')` protects this function from
 being called repeatedly. Note the `reactive.remove_state('nginx.stop')` and
@@ -316,8 +315,9 @@ def configure_website_port(http):
 ## Now write your own compose and reactive charm
 
 The [layer-docker charm](https://github.com/juju-solutions/layer-docker) was
-designed to be a base layer for other charms that need to do Docker things. By
-using the reactive framework the charms that you write can be very small and
-concentrate on the service or services that your charm provides.  Use the
-compose workflow and reactive framwork to create a new charm with your Docker
-image very similar to the [layer-docker-nginx](#layer-docker-nginx) charm.
+designed to be a base layer for other charms that want to run Docker
+containers. By using the reactive framework the charms that you write can be
+very small and concentrate on the service or services that your charm provides.
+Use the compose workflow and reactive framework to create a new charm with your
+Docker image very similar to the [layer-docker-nginx](#layer-docker-nginx)
+charm.

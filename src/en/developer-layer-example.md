@@ -11,7 +11,7 @@ PHP and MySQL, Vanilla is a fine example of a three-tiered application:
 
 ### Prepare your workspace
 
-Building off of [`$JUJU_REPOSITORY`](reference-environment-variables.html#juju-repository),
+Building off of [`$JUJU_REPOSITORY`](reference-environment-variables.html#juju_repository),
 we want to add two more environment variables to your session. We recommend
 adding these into your shell configuration file so that they are always
 available.

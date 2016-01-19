@@ -59,14 +59,14 @@ Juju needs to be configured to use your cloud provider. This is done via the
 following file:
 
 
-## Linux & Mac OSX
+## Linux & Mac OSX configuration
 
 ```no-highlight
 ~/.juju/environments.yaml
 ```
 
 
-## Windows
+## Windows configuration
 
 ```no-highlight
 %APPDATA%\Juju\environments.yaml
@@ -82,7 +82,7 @@ juju generate-config
 
 This action will not overwrite an existing file but merely dump the information
 onscreen (STDOUT). It will contain sample profiles for different types of cloud
-services.  Edit it to provide specific information for your chosen cloud
+services. Edit it to provide specific information for your chosen cloud
 provider. For more specifics on what needs to be changed, see the relevant
 sections in the left pane (under *Install & Configure*).
 

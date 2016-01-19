@@ -72,11 +72,11 @@ may be implemented:
 
 - [[name]-storage-attached](./reference-charm-hooks.html#[name]-storage-attached)
 
-- [[name]-storage-detaching](.reference-charm-hooks.html#[name]-storage-detaching)
+- [[name]-storage-detaching](./reference-charm-hooks.html#[name]-storage-detaching)
 
 Each hook is prefixed with the name of the store, similar to how relation hooks
 are prefixed with the name of the relation. So, for example, if we had specified
-a need for storage labelled 'data', we would probably want to implement the hook
+a need for storage labeled 'data', we would probably want to implement the hook
 'data-storage-attached', which might look something like:
 
 ```bash
