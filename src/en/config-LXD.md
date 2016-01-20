@@ -35,8 +35,8 @@ accordingly or stop the firewall altogether.
 
 # Prerequisites and installation of Juju and LXD
 
- - The LXD local provider will not work on Ubuntu 12.04 LTS and backporting to
-   Ubuntu 14.04 LTS is incomplete.
+ - The LXD local provider will not work on Ubuntu 12.04 LTS (Precies) and
+   backporting to Ubuntu 14.04 LTS (Trusty) is incomplete.
 
  - Ubuntu 15.10 (Wily) or Ubuntu 16.04 LTS (Xenial) is needed.
 
@@ -71,7 +71,7 @@ names (aliases) in the format `ubuntu-<codename>` such as 'ubuntu-trusty' and
 'ubuntu-xenial'.
 
 The first time an image is needed the store will supply it and any subsequent
-requests will be satisfied by the LXD cache. In this way, a store is sollicited
+requests will be satisfied by the LXD cache. In this way, a store is solicited
 once per environment for any given image, and not once per machine (LXC host)
 which is the normal behaviour for LXC. There is a also an image sync mechanism.
 
@@ -180,7 +180,7 @@ the standard way to view logs is with the `juju debug-log` command. See
 
 # Other useful commands
 
-There is a cornucopia of commands available. Some common ones not yet covered
+There are many commands available. Some common ones not yet covered
 are given below.
 
 client commands					| meaning
