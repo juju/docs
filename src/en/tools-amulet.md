@@ -124,11 +124,11 @@ outside of of juju-deployer. So the same commands (add, relate, configure,
 expose) will instead interact directly with the environment by using either the
 Juju API or the juju commands.
 
-#### Class:
+#### Deployer Class:
 
     Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-deployer', sentry_template=None)
 
-#### Methods:
+#### Deployer Methods:
 
 ##### Deployment.add(service, charm=None, units=1)
 
@@ -337,7 +337,7 @@ If timeout is met prior to ready state, `TimeoutError` is raised.
 
 Each unit is assigned a UnitSentry
 
-#### Class:
+#### UnitSentry Class:
 
 ##### UnitSentry.from_unitdata(unit, unit_data, port=9001, sentry=None)
 
@@ -346,7 +346,7 @@ Each unit is assigned a UnitSentry
   - `port` - Sentry port
   - `sentry` - RelationSentry
 
-#### Methods:
+#### UnitSentry Methods:
 
 ##### UnitSentry.directory(dir)
 

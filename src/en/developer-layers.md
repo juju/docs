@@ -3,20 +3,20 @@
 
 # Why build from layers
 
-When creating a charm, you always have the option of doing it traditional way by
-creating each hook, implementing each side of the interface you need for each
-relation your charm requires or provides, manage the dependencies, such as
+When creating a charm, you always have the option of doing it the traditional
+way by creating each hook, implementing each side of the interface you need for
+each relation your charm requires or provides, manage the dependencies, such as
 [charm-helpers](https://pythonhosted.org/charmhelpers/), that your charm uses,
-et cetera. However, what you really want to do is focus on *your* charm.  So,
-why not leverage the reusable work of others and keep your charm code as minimal and
-tightly focused as possible?
+et cetera. What you really want to do, however, is focus on *your* charm. So,
+why not leverage the reusable work of others and keep your charm code as minimal
+and tightly focused as possible?
 
-Enter the concept of building charms from layers.  Layers let you build on the
+Enter the concept of building charms from layers. Layers let you build on the
 work of other charmers, whether that work is in the form of other charms that
 you can extend and modify, interfaces that are already built for you and know
 how to communicate with a remote service and let you know when that service is
 ready and what it provides for you, or partial base layers that make managing
-dependencies much easier.  And it does this in a consistent, repeatable, and
+dependencies much easier. And it does this in a consistent, repeatable, and
 audit-able way.
 
 # What are layers?
@@ -75,7 +75,7 @@ Interface layers currently must be written in Python and extend the ReactiveBase
 class, though they can then be used by any language using the built-in CLI API.
 
 There's more on programming interface layers in the [Developing Interface
-Layers](developers-interface-layers.html) guide.
+Layers](developers-layers-interfaces.html) guide.
 
 ## Charm Layers
 

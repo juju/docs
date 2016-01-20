@@ -4,13 +4,13 @@ Title: Debugging Juju charm hooks
 
 Not everything works the first time, and sometimes even when it seems to work,
 things don't happen quite as you expected. Juju provides commands to help
-developers debug charm code. There are also community written
+developers debug charm code, and there are also community written
 [plugins](https://github.com/juju/plugins) that can help with the debugging
 process.
 
-Juju provides two commands [`juju debug-log`](#the-'debug-log'-command) and
-[`juju debug-hooks`](#the-'debug-hooks'-command) to help developers resolve
-problems in their code.  The [dhx debugging plugin](./developer-debug-dhx.html)
+Juju provides two commands, [`juju debug-log`](#the-'debug-log'-command) and
+[`juju debug-hooks`](#the-'debug-hooks'-command), to help developers resolve
+problems in their code. The [dhx debugging plugin](./developer-debug-dhx.html)
 improves the debug-hooks experience by performing some common actions
 automatically. Or maybe you're having an issue with building from your charm
 layer, in which case the [debugging with layers](./developer-debug-layers.html)
@@ -20,7 +20,7 @@ is where to look.
 
 Logs are indispensable when it comes time to troubleshoot. View the log with
 the `juju debug-log` command. The output is a consolidation of all the Juju log
-files streaming in real time.  The logs show you detailed inner workings of Juju
+files streaming in real time. The logs show you detailed inner workings of Juju
 and any [`juju-log`](./reference-hook-tools.html#juju-log) messages that are
 run from the charm code.
 
@@ -29,15 +29,17 @@ logs](./troubleshooting-logs.html#the-debug-log-command) section for more
 details and [filtering](./troubleshooting-logs.html#advanced-filtering) options
 with the `juju debug-log` command.
 
-If the error has already passed by viewing the actual log files on the unit is
-helpful.  If you `juju ssh` to the unit you can view the Juju machine and unit
-log files in the `/var/log/juju/` directory.
+You can also view Juju logs logs on an individual machine by using
+`juju ssh` to login to the unit in question and manipulate the log files in the
+`/var/log/juju` directory.
 
 ##  The 'debug-hooks' command
 
-If a hook returns non-zero return code this puts the charm in error state and
-Juju halts execution of the event cycle.  The `juju debug-hooks` command accepts
-a unit and an optional list of hooks to debug (which must be named individually
+It's often useful to be able to test code in the same context that a hook
+executes in. The `juju debug-hooks` command allows you to do exactly that,
+whether it's to debug a failed hook or to write and test new hook code.
+
+`juju debug-hooks` accepts a unit and an optional list of hooks to debug (which must be named individually
 in a space-delimited list) or no hook names, causing all hooks to be debugged:  
 
 ```bash
@@ -49,6 +51,13 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 
 ```bash
 juju debug-hooks mysql/0 db-relation-joined db-relation-broken
+```
+
+Additionally, if your hook is already in an error state, you can tell Juju to
+retry the hook after running `juju debug-hooks`:
+
+```bash
+juju resolved mysql/0 --retry
 ```
 
 **Note:** It is possible and often desirable to run debug-hooks on more than
@@ -92,7 +101,7 @@ run:
 
 Whilst you are debugging a hook, it is possible that other hooks will be queued
 to run. Even hooks which are not in your list to debug will be suspended in the
-queue until you exit your current window. See the  special considerations below.
+queue until you exit your current window. See the special considerations below.
 
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.

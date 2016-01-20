@@ -2,7 +2,7 @@ Title: Hook tools
 
 # Hook tools
 
-Units deployed with juju have a suite of tooling available to them, called ‘hook
+Units deployed with Juju have a suite of tooling available to them, called ‘hook
 tools’. These commands provide the charm developer with a consistent interface
 to take action on the units behalf, such as opening ports, obtaining
 configuration, even determining which unit is the leader in a cluster. The
@@ -18,7 +18,7 @@ a `--format` flag which can be set to json or yaml as desired.
 
 ## action-fail
 
-`action-fail` sets the action's fail state with a given error message.  Using
+`action-fail` sets the action's fail state with a given error message. Using
 `action-fail` without a failure message will set a default message indicating a
 problem with the action. For more information about where you might use this
 command, read more about [Juju Actions](actions.html) or
@@ -39,7 +39,7 @@ action-fail ‘unable to contact remote service’
 ## action-get
 
 `action-get` will print the value of the parameter at the given key, serialized
-as YAML.  If multiple keys are passed, `action-get` will recurse into the param
+as YAML. If multiple keys are passed, `action-get` will recurse into the param
 map as needed. Read more about [Juju Actions](actions.html) or
 [how to write Juju Actions](developer-actions.html).
 
@@ -58,8 +58,8 @@ TIMEOUT=$(action-get timeout)
 ## action-set
 
 `action-set` adds the given values to the results map of the
-[Action](actions.html).  This map is returned to the user after the
-completion of the Action.  Keys must start and end with lowercase alphanumeric,
+[Action](actions.html). This map is returned to the user after the
+completion of the Action. Keys must start and end with lowercase alphanumeric,
 and contain only lowercase alphanumeric, hyphens and periods.
 
 python:  
@@ -198,7 +198,7 @@ juju-reboot
 
 ## leader-get
 
-`leader-get` prints the value of a leadership setting specified by key.  
+`leader-get` prints the value of a leadership setting specified by key.
 `leader-get` acts much like [`relation-set`](#relation-set)) but only reads
 from the leader settings. If no key is given, or if the key is "-", all keys
 and values will be printed.
@@ -217,7 +217,7 @@ ADDRESSS=$(leader-get cluster-leader-address)
 
 ## leader-set
 
-`leader-set` immediately writes the key/value pairs to the juju controller,
+`leader-set` immediately writes the key/value pairs to the Juju controller,
 which will then inform non-leader units of the change. It will fail if called
 without arguments, or if called by a unit that is not currently service leader.
 
@@ -322,7 +322,7 @@ payload-register monitoring docker 0fcgaba
 
 `payload-unregister` used while a hook is running to let Juju know
 that a payload has been manually stopped. The `class` and `id` provided
-must match a payload that has been previously registered with juju using
+must match a payload that has been previously registered with Juju using
 payload-register.
 
 python:  
@@ -352,7 +352,7 @@ interpretation. If you need to specify a remote unit but want to see all
 settings, use `-` for the first argument.
 
 The environment variable
-[`JUJU_REMOTE_UNIT`](reference-environment-variables.html#juju-remote-unit)
+[`JUJU_REMOTE_UNIT`](reference-environment-variables.html#juju_remote_unit)
 stores the default remote unit.
 
 You should never depend upon the presence of any given key in `relation-get`
@@ -584,7 +584,7 @@ status-set blocked "Storage full"
 
 ## storage-add
 
-`storage-add` may be used to add storage to the **unit**.  The tool takes the
+`storage-add` may be used to add storage to the **unit**. The tool takes the
 name of the storage (as defined in the charm metadata), and optionally the
 number of storage instances to add; by default it will add a single storage
 instance of the name.

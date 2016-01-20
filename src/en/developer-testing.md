@@ -3,7 +3,7 @@ Title: Writing Charm Tests
 # Writing Charm Tests
 
 Charm authors will have the best insight into whether or not a charm is working
-properly.  It is up to the author to create tests that ensure quality and
+properly. It is up to the author to create tests that ensure quality and
 compatibility with other charms.
 
 ## The purpose of tests
@@ -20,15 +20,15 @@ things to test in each charm is:
 
 ## Where to put tests
 
-The charm directory should contain a sub-directory named 'tests'.  This
+The charm directory should contain a sub-directory named 'tests'. This
 directory will be scanned by a test runner for executable files. The executable
-files will be run in lexical order by the test runner, with a juju environment.
+files will be run in lexical order by the test runner, with a Juju environment.
 The tests can make the following assumptions:
 
 - A minimal install of the release of Ubuntu which the charm is targeted at
   will be available.
-- A version of juju is installed and available in the system path.
-- A juju environment with no services deployed inside it is already
+- A version of Juju is installed and available in the system path.
+- A Juju environment with no services deployed inside it is already
   bootstrapped, and will be the default for command line usage.
 - The CWD is the `tests` directory off the charm root.
 - Full access to other public charms will be available to build a solution of
@@ -45,16 +45,16 @@ be available on the testing system.
 
 ## Test automation
 
-The charm tests will be run automatically so all tests must not require user
+The charm tests will be run automatically, so all tests must not require user
 interaction. The test code must install or package the files required to test
-the charm.  The test runner will find and execute each test within that
+the charm. The test runner will find and execute each test within that
 directory and produce a report.
 
 If tests exit with services still in the environment, the test runner may clean
 them up, whether by destroying the environment or destroying the services
 explicitly, and the machines may be terminated as well. For this reason tests
 should not make assumptions on machine numbers or other factors in the
-environment that could be reset.  Any artifacts needed from the test machines
+environment that could be reset. Any artifacts needed from the test machines
 should be retrieved and displayed before the test exits.
 
 ### Exit codes
@@ -68,7 +68,7 @@ Upon exit, the test's exit code will be evaluated to mean the following:
 ## charm proof
 
 The `charm-tools` package contains a static charm analysis tool called
-`charm proof`.  This tool checks the charm structure and gives Informational,
+`charm proof`. This tool checks the charm structure and gives Informational,
 Warning, and Error messages on potential issues with the charm structure. To be
 in line with [Charm Store policy](./authors-charm-policy.html), all
 charms should pass `charm proof` with Information messages only.
@@ -105,7 +105,7 @@ file.
 #### Initial test can install Amulet
 
 Since the tests are run in lexical order, a common pattern is to use an
-executable file with a name that sorts first (`00-setup` for example) which
+executable file with a name that sorts first (`00-setup` for example), which
 installs Juju and the Amulet Python package if not already installed and any
 other packages required for testing.
 
@@ -129,7 +129,7 @@ create tests for the charm.
 You are free to write the tests in any style you want, but a common pattern is
 to use the
 ["unittest" framework](https://docs.python.org/2/library/unittest.html)
-from Python to set up and deploy the charms.  The other methods starting with
+from Python to set up and deploy the charms. The other methods starting with
 "test" will be run afterward.
 
 ```python
