@@ -40,7 +40,7 @@ accordingly or stop the firewall altogether.
 
  - Ubuntu 15.10 (Wily) or Ubuntu 16.04 LTS (Xenial) is needed.
 
- - The LXD stable PPA is need on Ubuntu 15.10 (Wily).
+ - The LXD stable PPA is needed on Ubuntu 15.10 (Wily).
 
  - The Juju devel PPA (may change) is needed.
 
