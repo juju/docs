@@ -40,16 +40,25 @@ accordingly or stop the firewall altogether.
 
  - Ubuntu 15.10 (Wily) or Ubuntu 16.04 LTS (Xenial) is needed.
 
- - The LXD stable PPA and the Juju devel PPA (may change) are needed.
+ - The LXD stable PPA is need on Ubuntu 15.10 (Wily).
+
+ - The Juju devel PPA (may change) is needed.
 
  - Container migration (copying/moving) requires a modern version of the
    *criu* binary and a 4.4 Linux kernel (Xenial).
 
-Proceed to install the software:
+Proceed to install the software.
+
+On Wily, add this:
+
+```bash
+sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
+```
+
+Proceed with the rest:
 
 ```bash
 sudo apt-add-repository -y ppa:juju/devel
-sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
 sudo apt-get update
 sudo apt-get install juju-local lxd
 ```
