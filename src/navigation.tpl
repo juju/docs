@@ -100,7 +100,7 @@
                       <li><a href="developer-leadership.html#leadership-howtos">Leadership How-Tos</a></li>
                     </ul>
                   </li>
-                  <li class="section"><a class="header" href="developer-action.html">Implementing Actions</a>
+                  <li class="section"><a class="header" href="developer-actions.html">Implementing Actions</a>
                     <ul class="sub">
                       <li><a href="developer-actions.html#defining-actions">Defining Actions</a></li>
                       <li><a href="developer-actions.html#action-tools">Action Tools</a></li>
