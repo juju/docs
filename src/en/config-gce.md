@@ -1,5 +1,6 @@
 Title: Configuring Juju for Google Compute Engine
 
+
 # Configuring Juju for Google Compute Engine
 
 This process requires you to have a Google Compute Engine (GCE) account. If you
@@ -9,7 +10,7 @@ do not yet have one, log into your Google account and sign up at:
 If you have not run Juju before, you should start by generating a generic 
 configuration file for Juju, using the command:
 
-```
+```bash
 juju generate-config
 ```
 
@@ -26,7 +27,7 @@ existing environments.yaml and just need to add a section. E.g.
 The generic configuration section generated for GCE will look
 something like this:
 
-```
+```yaml
     gce:
       type: gce
     
@@ -64,8 +65,12 @@ something like this:
       # image-endpoint: https://www.googleapis.com
 ```
 
+!!! Warning: See [GH #747](https://github.com/juju/docs/issues/747) regarding
+configuration issues. This documentation should be fixed soon.
+
 To determine the values to add to the configuration, you will
 first have to set up a compatible project in GCE, by following these steps:
+
 
 ## 1. Create a Google Compute Engine project
 
@@ -82,6 +87,7 @@ If you already have a GCE account, login to the main GCE page at:
 
 ![image showing menu](media/config-gce02.png)
 
+
 ## 2. Enter details for the project
 
 In either case above, you will be prompted to enter some details for the
@@ -93,6 +99,7 @@ some random numbers or a UUID to the end is useful (though you will need to copy
 this elsewhere, so don't make it too unwieldy)
 
 ![image showing project details](media/config-gce03.png)
+
 
 ## 3. Enable the Google Compute Engine API
 
@@ -106,6 +113,7 @@ below), then you should click it. If the API is already enabled, the button will
 show `Disable Api` instead, as well as details of your usage. Don't disable it!
 
 ![image showing Enable option](media/config-gce-extra02.png)
+
 
 ## 4. Generate OAuth credentials for the project
 
@@ -127,6 +135,7 @@ create new instances.
 
 ![image showing account popup](media/config-gce06.png)
 
+
 ## 5. Retrieve the credentials
 
 Once you have clicked on the `Create Client ID` button, the GCE website will
@@ -138,6 +147,7 @@ If for any reason you lose this information, you *cannot* regenerate the
 private key. You can however generate a new key by returning to the credentials
 page and clicking on the `Generate new JSON key` button, after which you may
 want to delete the original fingerprint entry from the list on the same page.
+
 
 ## 6. Enter the credentials into your environments.yaml file
 
@@ -155,7 +165,7 @@ procedures in place.
 In this case, the `Auth` section of the gce part of the `environments.yaml`
 configuration should contain the *full path* to the file, e.g.:
 
-```
+```yaml
  # The key information can be downloaded as a JSON file, or copied, from:
  #   https://console.developers.google.com/project/<project>/apiui/credential
  # Either set the path to the downloaded JSON file here:
@@ -177,14 +187,14 @@ continuous string. You will need to strip out line endings and translate any
 Unicode characters in the string. A simple way to pre-format some of this
 information is to run something like:
 
-```
+```bash
 python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' < gce-auth-file.json 
 ```
 
 In any case, the auth section of the config file should look something like
 this:
 
-```
+```yaml
 client-email: 1875876080463-bsssadkian8h395vc11kl@developer.gserviceaccount.com
 client-id: 1875876080463-bsssadkian8h395vc11kl.apps.googleusercontent.com
 private-key: |
@@ -196,10 +206,12 @@ private-key: |
   E2sZPXYMT8TmQnat35f4+h4FT5MYPHpr/OS27kejHLjxpWkbz3Dziqx6upM+fMiY
   ...
 ```
+
 !!! Note: The JSON file presents the key names as `client_email:`, `client_id:`
 and `private_key`, with underscores. Juju will not accept these keys, and they
 must be changed to `client-email:`,`client-id` and `private-key`, with dashes,
 in order to be recognised. 
+
 
 ## 7. Add the Project ID
 
@@ -215,7 +227,7 @@ forgotten that ID, you can retrieve it from the
 
 this section of the config should then look like this, for example:
 
-```
+```yaml
       # Google instance info
       # To provision instances and perform related operations, the provider
       # will need to know which GCE project to use and into which region to
@@ -225,10 +237,10 @@ this section of the config should then look like this, for example:
       # see https://cloud.google.com/compute/docs/zones.
 
       project-id: juju-gce-0202030
-
 ```
 
 Obviously, you should replace `juju-gce-0202030` above with your own project id.
+
 
 ## 8. Optional configuration
 
@@ -241,4 +253,3 @@ entail is explained on the relevant GCE page at
 You may also wish to check out the 
 [additional general configuration options](config-general)
 for additional settings which can be configured for this environment.
-
