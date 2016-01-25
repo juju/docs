@@ -15,7 +15,7 @@ for you to use.
 ## Installation
 
 Amulet is available as both a package and via pip. For source packages, see [
-GitHub](https://github.com/marcoceppi/amulet/releases).
+GitHub](https://github.com/juju/amulet/releases).
 
 ### Ubuntu
 
@@ -124,11 +124,11 @@ outside of of juju-deployer. So the same commands (add, relate, configure,
 expose) will instead interact directly with the environment by using either the
 Juju API or the juju commands.
 
-#### Class:
+#### Deployer Class:
 
     Deployment(juju_env=None, series='precise', sentries=True, juju_deployer='juju-deployer', sentry_template=None)
 
-#### Methods:
+#### Deployer Methods:
 
 ##### Deployment.add(service, charm=None, units=1)
 
@@ -313,11 +313,11 @@ d.add('mysql')
 d.setup()
 d.sentry.wait()
 # get UnitSentry for a specific service/unit
-d.sentry['mysql/0']
-d.sentry['mediawiki/0']
+d.sentry['mysql'][0]
+d.sentry['mediawiki'][0]
 # get list of all UnitSentry objects for a service, one per unit
 d.sentry['mysql']
-assert d.sentry['mysql/0'] in d.sentry['mysql']
+assert d.sentry['mysql'][0] in d.sentry['mysql']
 ```
 
 Sentries provide several methods for which you can use to gather information
@@ -337,7 +337,7 @@ If timeout is met prior to ready state, `TimeoutError` is raised.
 
 Each unit is assigned a UnitSentry
 
-#### Class:
+#### UnitSentry Class:
 
 ##### UnitSentry.from_unitdata(unit, unit_data, port=9001, sentry=None)
 
@@ -346,7 +346,7 @@ Each unit is assigned a UnitSentry
   - `port` - Sentry port
   - `sentry` - RelationSentry
 
-#### Methods:
+#### UnitSentry Methods:
 
 ##### UnitSentry.directory(dir)
 
@@ -469,8 +469,8 @@ except:
     # will automatically "FAIL" the test.
     raise
 # Shorten the names a little to make working with unit data easier
-wp_unit = d.sentry['wordpress/0']
-mysql_unit = d.sentry['mysql/0']
+wp_unit = d.sentry['wordpress'][0]
+mysql_unit = d.sentry['mysql'][0]
 # WordPress requires user input to "finish" a setup. This code is contained in
 # the helper.py file found in the lib directory. If it's not able to complete
 # the WordPress setup we need to quit the test, not as failed per se, but as a

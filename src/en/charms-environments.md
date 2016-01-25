@@ -158,7 +158,7 @@ juju generate-config --show
 
 To terminate a running environment, including removing all services and
 allocated machines, please see the section
-[on removing things with Juju](./charms-destroy.html#destroying-environments)
+[on removing things with Juju](./charms-destroy.html#destroying-the-environment)
 
 **Note:** Destroying the environment means that it will destroy all the running
 assets related to that environment, including the bootstrap node. It does not

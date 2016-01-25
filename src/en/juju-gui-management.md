@@ -1,10 +1,16 @@
-# What is the GUI?
+Title: The Juju GUI
+
+# The Juju GUI
 
 Juju has a graphical user interface (GUI) available to help with the tasks of
 managing and monitoring your Juju environment. The GUI is a JavaScript and HTML
-web application that is encapsulated in its own charm, which can be installed to its own service or alongside another service. Once installed, the GUI will talk with Juju over a websocket to provide a real-time interface with the services installed, the units that comprise them, and the machines available.
+web application that is encapsulated in its own charm, which can be installed
+to its own service or alongside another service. Once installed, the GUI will
+talk with Juju over a websocket to provide a real-time interface with the
+services installed, the units that comprise them, and the machines available.
 Additionally, the GUI can talk with the charm store in order to search, browse,
 and deploy charms to your environment.
+
 
 # Installation
 

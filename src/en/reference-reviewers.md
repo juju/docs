@@ -26,7 +26,7 @@ Queue](http://review.juju.solutions) sorts by age.
 - Consider blogging about a particularly nice contribution. This will not only make the contributor feel valued, but also inspire others with a good example of great work.
 - Encourage contributors to apply for ~charmers if you think they're ready.
 
-Sponsorship is organized into
+Sponsorship is organized into:
 
   - [https://launchpad.net/~charmers](https://launchpad.net/~charmers):
 
@@ -36,7 +36,8 @@ You can see the currently pending requests at:
 
 - [https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers](https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers)
 - [https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&field.component=3&field.component=4](https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&field.component=3&field.component=4)
-- [http://manage.jujucharms.com/tools/review-queue](http://manage.jujucharms.com/tools/review-queue)
+- The [Review Queue](http://review.juju.solutions/) at
+<http://review.juju.solutions/> 
 
 ### Updating the store with new Charms
 
@@ -57,7 +58,7 @@ bzr push lp:~charmers/charms/precise/<CHARM_NAME>/trunk
 Without this, LP will automatically stack on top of the user’s branch which will make it really really hard to delete from the store in the future. Now you can promulgate:
 
 ```bash
-juju charm promulgate 
+juju charm promulgate
 ```
 
 #### Updating existing charms in the store
@@ -67,7 +68,7 @@ Make sure you thank them profusely for fixing something or adding something, no 
 Grab the charm from the store either with charm-tools or just bzr branch it.
 
 ```bash
-juju charm get 
+juju charm get
 ```
 
 **Note:** Backwards compatibility is important! Any changes that would change the structure of the charm, data, configuration options, etc and doesn’t perform due diligence to make sure the charm does what it needs to, should be rejected.
@@ -91,7 +92,7 @@ Bundles are simpler to push to the store:
 
 ```bash
 bzr init lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
-bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle 
+bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
 ```
 
 There is no promulgation step for bundles.
