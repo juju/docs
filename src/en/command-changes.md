@@ -4,7 +4,7 @@ TODO: Add new commands
 
 # Command changes from 1.25 to 2.0
 
-!!! Note: These are provisional changes at the moment, not guaranteed
+!!! Note: These are provisional changes at the moment, no guarantees!
 
 
 <style> table td{text-align:left;}</style>
