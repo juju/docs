@@ -5,7 +5,7 @@ TODO: Add extra changes as required
 # Introducing Juju 2.0
 
 If you are familiar with Juju, you are no doubt excited to get started with the
-wealth of exciting new features introduced in the new 2.0 release (and if you 
+wealth of powerful new features introduced in the new 2.0 release (and if you 
 haven't tried Juju before, see [this introduction](./about-juju.html) ). But 
 what are the new features? What has changed? 
 This page will give you an overview of the significant changes that you really
@@ -22,7 +22,7 @@ works really well with tab completion! The documentation has been updated to
 include all these new commands, so you can check relevant pages for guides to
 the new commands, or browse through the [reference guide](./commands.html).
 There is also a handy [crib sheet](./command-changes.html) to show you the new
-versions of old commands at the end of this document.
+versions of old commands.
 
  - **Terminology:** You are probably used to thinking of Juju in terms of the 
 bootstrap node (state server) and environments. You will now find that the 
@@ -35,7 +35,7 @@ documentation to understand how these models can be shared amongst multiple
 users.
 
   - **Providers:** As well as updates to the Azure provider and the new 
-Rackspace provider, juju now makes extensive use of LXD. This makes 'local' 
+Rackspace provider, Juju now makes extensive use of LXD. This makes 'local' 
 models leaner and faster and also brings benefits to placing containers within 
 models. You can find out more about setting up 
 [LXD for Juju here](./config-LXD.html).
@@ -55,7 +55,7 @@ You must upgrade Juju to the latest 1.x series version of Juju first:
 ```bash
 juju upgrade-juju --version=1.25.2
 ```
-The proceed as below:
+Then proceed as below:
 
 ### If you are on version 1.25.2 of Juju
 
