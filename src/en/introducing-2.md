@@ -30,7 +30,7 @@ documentation talks about "Controllers" and "models" instead. Why? Part of this
 is to do with the way Juju organises itself - now multiple models (environments)
 can be driven from one controller (state-server). This means that for a given
 cloud you only need one controller, but can drive several models. You should 
-also check through the (multi-user)(./juju-multiuser-environments.html) 
+also check through the [multi-user](./juju-multiuser-environments.html) 
 documentation to understand how these models can be shared amongst multiple
 users.
 
