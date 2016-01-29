@@ -1,4 +1,5 @@
-Title: LXD local provider
+Title: Juju LXD local provider
+TODO: Confirm iptables troubleshooting rationale; add details
 
 
 # Overview
@@ -28,7 +29,7 @@ Although this document does provide enough information to get you running with
 LXD itself (this document is ultimately about running LXD with Juju) it does
 so assuming you are setting up LXD for the first time.
 
-**Note:** If you are running iptables (firewall) or even an iptables frontend
+!!! Note: If you are running iptables (firewall) or even an iptables frontend
 such as `ufw`, the LXD local provider might not work properly. Troubleshoot
 accordingly or stop the firewall altogether.
 
@@ -135,7 +136,7 @@ lxc list
 lxc delete ubuntu-trusty-64-test
 ```
 
-**Note:** Do not confuse command `lxc` with the binary shipped with traditional
+!!! Note: Do not confuse command `lxc` with the binary shipped with traditional
 LXC. All the latter's binaries are of the form `lxc-<subcommand>`. The `lxc`
 binary actually comes from the `lxd-client` package.
 
@@ -192,8 +193,10 @@ the standard way to view logs is with the `juju debug-log` command. See
 There are many commands available. Some common ones not yet covered
 are given below.
 
-client commands					| meaning
-------------------------------------------------|----------------------
+<style> table td{text-align:left;}</style>
+
+| client commands                               | meaning                            |
+|----------------------------------------------|-----------------------------------|
 `lxc remote list`				| list remotes
 `lxc info`					| displays status of localhost
 `lxc info <container>`				| displays status of container
