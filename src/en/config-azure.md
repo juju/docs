@@ -4,18 +4,18 @@ TODO: Decide on what to do with provider-specific features (e.g. placement).
 
 # Overview
 
-Juju now supports Microsoft Azure's Resource Manager API. The Azure provider
-has effectively been rewritten, but old models are still supported. To use the
-new provider support, you must bootstrap a new model with new configuration.
-There is no automated migration method.
+The new Azure provider is backwards compatible with the previous provider but
+supports several additional features, in particular, support for unit placement
+(i.e. units can be deployed to specific existing machines). In lieu of this,
+the old default behaviour is used: units of a service will be allocated to
+machines in a service-specific Availability Set. Read the
+[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
+availability sets affect uptime guarantees.
 
-The new provider is backwards compatible with the old provider but supports
-several additional features, in particular, support for unit placement (i.e.
-units can be deployed to specific existing machines). In lieu of this, the old
-default behaviour is used: units of a service will be allocated to machines in
-a service-specific Availability Set. Read the
-[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to
-learn how availability sets affect uptime guarantees.
+!!! Note: Juju now supports Microsoft Azure's Resource Manager API. The Azure
+provider has effectively been rewritten, but old models are still supported. To
+use the new provider support, you must bootstrap a new model with new
+configuration. There is no automated migration method.
 
 
 # Prerequisites and installation of Juju and the Azure CLI tool
@@ -58,7 +58,7 @@ azure login
 ```
 
 You will be prompted to visit a website to enter the provided code. It will
-therefore be easier to perform this on a (graphical) Ubuntu desktop.
+therefore be easier to perform this on a graphical desktop.
 
 
 # Configuring for Microsoft Azure
@@ -110,10 +110,23 @@ List your account and get the subscription ID, the **SUB_ID**:
 azure account list
 ```
 
-Set its value in the terminal. It will look similar to:
+Sample output:
+
+```no-highlight
+---------------------------------------
+info:    Executing command account list
+data:    Name        Id                                    Current  State
+data:    ----------  ------------------------------------  -------  -------
+data:    Free Trial  f717c8c1-8e5e-4d38-be7f-ed1e1c879e18  true     Enabled
+info:    account list command OK
+---------------------------------------
+```
+
+The subscription ID can now be stored in a local environment variable, by
+entering:
 
 ```bash
-SUB_ID=f717c8c1-8e5e-4d38-be7f-ed1e1c879e1a
+SUB_ID=f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
 ```
 
 ### `application-password`
@@ -146,7 +159,7 @@ Note the application ID, the **APP_ID**. It will look similar to:
 APP_ID=f6ab7cbd-5029-43ef-85e3-5c4442a00ba8
 ```
 
-Use the APP_ID to create a server principal:
+Use the APP_ID to create an Active Directory (Kerberos) server principal:
 
 ```bash
 azure ad sp create $APP_ID
@@ -196,6 +209,8 @@ According to all the above, the Azure section of file `environments.yaml` for
 this example would look like this (comments removed for simplicity):
 
 ```yaml
+    azure:
+        type: azure
         storage-account-type: Standard_LRS
         location: East US
         subscription-id: f717c8c1-8e5e-4d38-be7f-ed1e1c879e1a
