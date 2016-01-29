@@ -2,6 +2,7 @@
               <li class="section"><h4 class="header toggle-target">User Guide</h4>
                 <ul>
                   <li><a href="about-juju.html">About Juju</a></li>
+                  <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
                   <li class="section"><a class="header" href="getting-started.html">Install &amp; Configure</a>
                     <ul class="sub">
                       <li><a href="config-aws.html">Amazon Web Service</a></li>
