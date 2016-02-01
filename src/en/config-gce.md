@@ -1,13 +1,20 @@
+Title: Juju GCE provider
+
+
 # Overview
 
-???
+Google Compute Engine (GCE) is the Infrastructure as a Service (IaaS) component
+of Google Cloud Platform which is built on the global infrastructure that runs
+Google’s search engine, Gmail, YouTube, and other services. GCE enables users to
+launch virtual machines on demand. Juju can use GCE by communicating with it
+via API calls.
 
 
 # Prerequisites and installation
 
- - A Google account is required. See http://google.com.
+ - A Google account is required. See http://google.com .
 
- - A GCE account is required. See https://cloud.google.com/compute/.
+ - A GCE account is required. See https://cloud.google.com/compute/ .
 
  - The Juju devel PPA (may change) is needed.
 
@@ -22,13 +29,36 @@ sudo apt-get update
 sudo apt-get install -y juju-core
 ```
 
+
+# Create a GCE project
+
+A separate GCE *project* is needed.
+
+According to Google: "A project is a container for all GCE resources. Each
+project is a compartmentalized world. They do not share resources, can have
+different owners/users, and are billed separately.".
+
+Create a project now. If you have already used GCE your existing projects will
+be listed in the pull-down menu with one being selected as your currently
+active project (here 'Juju-GCE'). The dialog is found at the top-right corner:
+
+![create_gce_project_dropdown](./media/config-gce-new_project_dropdown.png)
+
+Enter some details. If you have already created a project in the past you
+will not see the extra two questions shown below:
+
+![create_gce_project_details](./media/config-gce-first_project_create.png)
+
+The *project id* (used later) will be generated automatically. Use the 'Edit'
+button to change it.
+
+
 ## Google Compute Engine API
 
 The Google Compute Engine API needs to be enabled for your new project in order
-for Juju to communicate with it. This is done automatically if you have set up
-a "billing method". A trial account typically suffices as a billing method. By
-following the below steps you will discover whether you need to do something or
-not.
+for Juju to communicate with it. This is done automatically if a "billing
+method" has been set up. By following the below steps you will discover whether
+you need to set up billing or not. Check to see if a trial account is available.
 
 At the top-left of the web UI there is an icon representing 'Product &
 services'. It is denoted by this icon:
@@ -40,11 +70,13 @@ screen, it will show:
 
 ![API Manager screen](./media/config-gce-api_manager.png)
 
-Select 'Compute Engine API'. This will show:
+Select 'Compute Engine API' to get:
 
 ![Compute Engine API](./media/config-gce-api_manager_compute_enabled.png)
 
-The API is enabled if the button displays 'Disable API'.
+The API is already enabled if the button displays 'Disable API'. If the button
+shows 'Enable API', clicking it may prompt you to set up a billing method (if
+not already done).
 
 
 ## GCE project credentials file
@@ -53,8 +85,8 @@ A collection of credentials-related material will be required. This is obtained
 by downloading a file from the UI.
 
 Return to the 'API Manager' and choose the 'Credentials' screen. By default you
-will be within the 'Credentials' tab. Click the 'New credentials' button and choose
-'Service account key' among the 3 options available:
+will be within the 'Credentials' tab. Click the 'New credentials' button and
+choose 'Service account key' among the 3 options available:
 
 ![Create credentials dialog #1](./media/config-gce-api_manager_create_credentials-1.png)
 
@@ -69,8 +101,8 @@ regenerated (although a new one can easily be created).
 
 Place this file where the Juju client can find it. This may or may not be on
 the computer you downloaded the file to. We recommend the `~/.juju` directory.
-For the current example, the file is called, based on our project name of
-'Juju-GCE', `Juju-GCE-f33a6cdbd8e3.json`. Let it be put here:
+For the current example, the file is called `Juju-GCE-f33a6cdbd8e3.json` (based
+on our project name of 'Juju-GCE'. Let it be put here:
 
 `/home/ubuntu/.juju/Juju-GCE-f33a6cdbd8e3.json`
 
@@ -111,59 +143,16 @@ Values will need to be found for the following parameters:
 
 ### `auth-file`
 
-The value of `auth-file` is the path to the credentials file downloaded previously.
+The value of `auth-file` is the path to the credentials file downloaded
+previously.
 
-  "type": "service_account",
-  "private_key_id": "f33a6cdbd8e3df4510ebb97cb866f72ac3497306",
-CkC2si4Rvz0NYZal63WKcqn8\nrgeIhrGPhfQ7y8i939CY2AZvEnbS0xetpIc15UUpMQKBgQDvZxYzij3rlPJaHW1x\nCOe3fe/qWrctdWRhPbEpmUWB3R6RFv8GFpigozAt41bPDYYMc0SXYKkJKm5szcE6\nTvWsAnaKx+X81Zz3jzo2+EVI2fM+CpYSdWl9OVzQQ2NMY4kgEdBW0CWCnNJAdCck\nxBPm1Pbhpinj8EyOe5+OMcaYKwKBgQCwvGAsn8bcSoHTT35c1HFe6qhj8+WZP6WT\nc21V4T0/a+Ud7JaxN4Saw8NyYjEsGRmQFrtHr2/AhRYdSq5fpD5/aXZ8hN8mIRMo\n59aiu0/bvlOMOFTCrYDELOEHQr9v3pC2oiyyp86BLBklEC6ubZkN+c2cSLA4TCU9\nrWiYoNL5FQKBgGmzklHfT8ecVAUFyTSHQgf6StumggpIMrHck0RSsCXOg5h8Fs2R\nXIJQiw03uzRgPDdzDW3o97lcSrUvg4lDI6V20PAlop4nks6bJpDuvWiVEpjqA6jS\nvmjT0u8BUe6AZCMMungaHvW0WACtSDsrd74LeZXXz9ccWjDu1FvsDktRAoGBAJYX\nlLGxC2hAGltDsnPRs2pBbLpeAkoQhGRh7aO2gpZe4hh0uVFNbd8li9GTVGE3+76j\nn270rbpZC/vaVZZB3RXFkeuTyBMQmb3ujhhrbRmYXEnD+S/Pu4BfAMhyxjOSV2HS\n/pTG8BhBRCV2xb46s3XsBNLJ5GYbPLFRmHeudR01AoGAPAxUmIP0E3RTkC3EdeZY\nfrwDAKj3NBLI6oDu83NizaFXA4l7VKH0sesWk9EmapSsRCI+E6l99ti5hbBDrEqT\nNGuQja/RKZHbm35eSf2as4HDHGZNGEMib1ZVETyyo8xqOKqNZ+t2M/qM1c38noQA\neWjQE2W5OGJNHguxRcvx7ew=\n-----END PRIVATE KEY-----\n",
-  "client_email": "juju-gce-service-account@juju-gce-1202.iam.gserviceaccount.com",
-  "client_id":
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQClRwjoIFo6qdX+\n7EtxOW983Xf9J26dP9K6a1GzQd5Pd/9MSDFwQDBiHQVI7CjsI4Iu3pJPbE/6rBmZ\n5fyZuVETdm9gqpC09d4AcFMABOqAiYIouS8OOeuekScUfplJcFMNDTUwxXkfZCiL\nABzvgXS3T46sS86gkVna+2SUovSfGFsdeNMuMP86+Hy5A9QbJTQOn7wsT+64QXW1\nr7ugngm17yUeuHjxmTKnAh/EaF8a7VSPDFVNFjv/2yFN1adHQmRJZLzNiJLD0389\nA0pRGxfK3busNDfd/xDo56bbo3zKB5tIpDflYb8/HkVULcsH2T9PcSzso7yKU//h\nKp/ykk6HAgMBAAECggEAJoy5ARt6sDAo37rRpekVnfQyJnPqEvdt+VlKxxrX9YUx\noOM91MbEAj5umyGqMdneZXw4eBn1VayKlCDWmCxnQrjfJZbjBbJLQ6LvWRPMdoqc\nN09qMFFGKcgFa3xT2JNAa8zm2SdWJwI/ipxOI3b4eEEwL/PGkCEW6kK0pQ6VK/4r\nQmEL3q9JgikMLd10pzlSuQUGlS1Sad2qVBxkASdf7zfEZnPm4nDprKE1D6za44K1\nJ0hO087xuNdZkXTqKu7eSJnBVfU/wIM9ecIg
+### `project-id`
+
+The value of `project-id` is based on the name of the project you created earlier.
+Take it from the downloaded file.
 
 According to all the above, the GCE section of file `environments.yaml` for
 this example would look like this (comments removed for simplicity):
-
-```yaml
-        storage-account-type: Standard_LRS
-        location: East US
-        subscription-id: f717c8c1-8e5e-4d38-be7f-ed1e1c879e1a
-        application-password: some_password
-        application-id: f6ab7cbd-5029-43ef-85e3-5c4442a00ba8
-        tenant-id: daff614b-725e-4b9a-bc57-7763017c1cfb
-```
-
-Finally, switch to the Azure provider and bootstrap:
-
-```bash
-juju switch azure
-juju bootstrap --debug
-```
-
-A successful bootstrap will result in the controller being visible in the
-[Azure portal](http://portal.azure.com):
-
-![bootstrap machine 0 in Azure portal](./media/azure_portal-machine_0.png)
-
-
-# Additional notes
-
-See [General configuration options](https://jujucharms.com/docs/stable/config-general)
-for additional and advanced customization of your environment.
-
-
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
-
-
-
-
-The minimal configuration will look
-something like this:
 
 ```yaml
     gce:
@@ -172,54 +161,41 @@ something like this:
       project-id: juju-gce-1202
 ```
 
-## 1. Create a Google Compute Engine project
+Finally, switch to the GCE provider and bootstrap:
 
-If this is the first time you have used GCE, you will be prompted to set up a 
-project with this screen:
+```bash
+juju switch gce
+juju bootstrap --debug
+```
 
-![image showing prompt](media/config-gce01.png)
+A successful bootstrap will result in the controller being visible in the
+[GCE console](https://console.cloud.google.com/compute):
 
-**OR:**
-
-If you already have a GCE account, login to the main GCE page at:
-[https://console.developers.google.com/project](https://console.developers.google.com/project)
-... and select `Create a project` from the pull-down menu:
-
-![image showing menu](media/config-gce02.png)
+![bootstrap machine 0 in GCE portal](./media/config-gce-gce_portal-machine_0.png)
 
 
-## 2. Enter details for the project
+# Additional notes
+
+See [General configuration options](https://jujucharms.com/docs/stable/config-general)
+for additional and advanced customization of your environment.
 
 
-## 3. Enable the Google Compute Engine API
+## gcloud compute CLI tool
 
+The *gcloud compute* tool is a CLI utility for querying and configuring a CGE
+account/project. It is not required nor sufficient for setting up Juju for GCE.
+It does, however, have many uses. In particular, it can be used to change
+defaults such as compute *zone* and *region*. The Google Cloud SDK gets installed
+along with the tool.
 
-## 4. Generate OAuth credentials for the project
+Installation:
 
+```bash
+curl https://sdk.cloud.google.com | bash
+exec -l $SHELL
+gcloud init
+```
 
-## 5. Retrieve the credentials
+For further information on the gcloud tool:
 
-
-## 6. Enter the credentials into your environments.yaml file
-
-Juju can decipher the contents of the JSON file you downloaded from GCE. In this
-case it is necessary to store the actual file somewhere where Juju can access it
-directly. The recommended place for this is in the Juju users' `.juju/`
-directory, where it will accessible and presumably included in any backup
-procedures in place.
-
-
-## 7. Add the Project ID
-
-
-## 8. Optional configuration
-
-The default value for `region` is `us-central1`. This may be changed to any
-valid available GCE zone (e.g. `us-central1-b`, `europe-west1-d`,`asia-east1-a`
-...). A complete and up to date list of the zones, and what using them may
-entail is explained on the relevant GCE page at 
-[https://cloud.google.com/compute/docs/zones](https://cloud.google.com/compute/docs/zones)
-
-You may also wish to check out the 
-[additional general configuration options](config-general)
-for additional settings which can be configured for this environment.
+https://cloud.google.com/sdk/gcloud/
