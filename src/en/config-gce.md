@@ -16,15 +16,12 @@ via API calls.
 
  - A GCE account is required. See https://cloud.google.com/compute/ .
 
- - The Juju devel PPA (may change) is needed.
-
  - The Juju client (the host running the below commands) will need the ability
    to contact the GCE infrastructure on TCP ports 22 and 17070.
 
 Proceed to install the software.
 
 ```bash
-sudo apt-add-repository -y ppa:juju/devel
 sudo apt-get update
 sudo apt-get install -y juju-core
 ```
@@ -58,7 +55,7 @@ button to change it.
 The Google Compute Engine API needs to be enabled for your new project in order
 for Juju to communicate with it. This is done automatically if a "billing
 method" has been set up. By following the below steps you will discover whether
-you need to set up billing or not. Check to see if a trial account is available.
+you need to set up billing or not.
 
 At the top-left of the web UI there is an icon representing 'Product &
 services'. It is denoted by this icon:
@@ -81,12 +78,13 @@ not already done).
 
 ## GCE project credentials file
 
-A collection of credentials-related material will be required. This is obtained
-by downloading a file from the UI.
+A collection of credentials-related material will be required for Juju to
+communicate with your GCE project. This is obtained by downloading a file from
+the UI.
 
 Return to the 'API Manager' and choose the 'Credentials' screen. By default you
 will be within the 'Credentials' tab. Click the 'New credentials' button and
-choose 'Service account key' among the 3 options available:
+choose 'Service account key' from the 3 options available:
 
 ![Create credentials dialog #1](./media/config-gce-api_manager_create_credentials-1.png)
 
@@ -109,7 +107,7 @@ on our project name of 'Juju-GCE'. Let it be put here:
 !!! Warning: Due to
 [LP #1533790](https://bugs.launchpad.net/juju-core/+bug/1533790) make a copy of
 the original file and put it in another location. Edit the original file by
-removing the lines containing these keywords: 'project-id', 'auth-uri',
+removing the sections containing these keywords: 'project-id', 'auth-uri',
 'token_uri', 'auth_provider_x509_cert_url', and 'client-x509-cert-url'.
 
 
@@ -124,14 +122,14 @@ juju generate-config
 
 If it does exist (but it was created with an older version of Juju), first move
 it out of the way (back it up) and *then* generate a new one. Alternatively,
-you can output a generic file to screen (STDOUT) and paste the Azure parts into
+you can output a generic file to screen (STDOUT) and paste the GCE parts into
 your existing file:
 
 ```bash
 juju generate-config --show
 ```
 
-The file will contain a section for the Azure provider.
+The file will contain a section for the GCE provider.
 
 
 ## Configure and bootstrap
@@ -158,7 +156,7 @@ this example would look like this (comments removed for simplicity):
     gce:
       type: gce
       auth-file: /home/ubuntu/.juju/Juju-GCE-f33a6cdbd8e3.json
-      project-id: juju-gce-1202
+      project-id: juju-gce-1204
 ```
 
 Finally, switch to the GCE provider and bootstrap:
@@ -180,7 +178,7 @@ See [General configuration options](https://jujucharms.com/docs/stable/config-ge
 for additional and advanced customization of your environment.
 
 
-## gcloud compute CLI tool
+## Using the gcloud compute CLI tool
 
 The *gcloud compute* tool is a CLI utility for querying and configuring a CGE
 account/project. It is not required nor sufficient for setting up Juju for GCE.
