@@ -36,7 +36,7 @@ accordingly or stop the firewall altogether.
 
 # Prerequisites and installation of Juju and LXD
 
- - The LXD local provider will not work on Ubuntu 12.04 LTS (Precies) and
+ - The LXD local provider will not work on Ubuntu 12.04 LTS (Precise) and
    backporting to Ubuntu 14.04 LTS (Trusty) is incomplete.
 
  - Ubuntu 15.10 (Wily) or Ubuntu 16.04 LTS (Xenial) is needed.
