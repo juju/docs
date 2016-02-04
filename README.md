@@ -57,6 +57,8 @@ things. Some of the make targets are:
  - **clean** Removes temp files and generated docs
  - **serve** Runs a simple Python HTTP server on port 8000, which points at the
     htmldocs directory - essential for testing!
+ - **todo** Scans the source files for metadata 'TODO' items, and dumps them in a 
+    file called 'TODO.txt'
 
 
 
