@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 A tool to convert Juju docs markdown -> html
 """
@@ -68,12 +68,11 @@ def main():
     doc_nav = t.read()
     t.close()
     mdparser = markdown.Markdown(extensions=extlist)
-    print extlist
     if (args.file):
         p = Page(args.file[0], mdparser)
         p.convert()
         p.write(getoutfile(p.filename, args.outpath))
-        print p.output
+        print(p.output)
     else:
         for lang in next(os.walk(args.source))[1]:
             output_path = os.path.join(args.outpath, lang)
@@ -83,13 +82,13 @@ def main():
             for mdfile in next(os.walk(src_path))[2]:
                 if (os.path.splitext(mdfile)[1] == '.md'):
                     if not args.quiet:
-                        print "processing: ", mdfile
+                        print("processing: ", mdfile)
                     p = Page(os.path.join(src_path, mdfile), mdparser)
                     p.convert()
                     p.write(getoutfile(p.filename, output_path))
                 else:
                     if not args.quiet:
-                        print "skipping ", mdfile
+                        print("skipping ", mdfile)
 
 # Classes
 
