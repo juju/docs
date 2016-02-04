@@ -36,6 +36,27 @@ Once submitted, someone from the docs team will review your work, suggest
 improvements, and eventually merge it with the master branch. Don't forget to
 review your work before submission!
 
+## Metadata
+
+Each file has the potential to include metadata for various purposes. At the moment 
+this is used to provide a title element, and also to implement a limited form
+of todo list items. Metadata is written as _key : value_ pairs AT THE VERY TOP
+of the document. E.g.
+
+```
+Title: Contributing to Juju Docs
+TODO: add section on metadata
+      spellcheck everything
+
+# Title of document
+
+Well written text goes here blah blah
+```
+
+As you can see, the TODO metadata can have more than one item, as long 
+as additional items are indented by at least 4 spaces directly after the 
+previous one. The Metadata section ends immediately there is a blank line, 
+and the normal document text can begin.
 
 ## Sections
 
@@ -48,7 +69,14 @@ nothing extra you need to do:
 
 ## Code Blocks
 
-To code block something indent each line with 4 whitespace characters.
+To code block something indent use the code-fencing markup of three
+backticks, preferably followed by the type of code 
+(e.g. 'bash', 'yaml'...)
+
+     ```bash
+     juju do something
+     juju status
+     ```
 
 ## Inline code
 
