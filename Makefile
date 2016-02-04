@@ -10,7 +10,7 @@ serve:
 	tools/serve.py htmldocs 8000
 
 sysdeps:
-	sudo apt-get install python-html2text python-markdown python3-pip git spell ispell ibritish
+	sudo apt-get install python-html2text python3-markdown python3-pip git spell ispell ibritish
 	sudo pip3 install mdx-anchors-away mdx-callouts mdx-foldouts
 
 multi:
