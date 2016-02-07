@@ -68,7 +68,7 @@
                 <ul>
                   <li class="section"><a class="header" href="developer-getting-started.html">Getting Started</a>
                     <ul class="sub">
-                      <li><a href="developer-getting-started.html#prerequisites-and-tools">Prerequisites and Tools</a></li>
+                      <li><a href="developer-getting-started.html#install-libraries-and-tools">Prerequisites and Tools</a></li>
                       <li><a href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
                       <li><a href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
                       <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
@@ -103,7 +103,7 @@
                   </li>
                   <li class="section"><a class="header" href="developer-actions.html">Implementing Actions</a>
                     <ul class="sub">
-                      <li><a href="developer-actions.html#defining-actions">Defining Actions</a></li>
+                      <li><a href="developer-actions.html#implementing-actions">Defining Actions</a></li>
                       <li><a href="developer-actions.html#action-tools">Action Tools</a></li>
                     </ul>
                   </li>
@@ -122,7 +122,7 @@
                   </li>
                   <li class="section"><a class="header" href="developer-debugging.html">Debugging</a>
                     <ul class="sub">
-                      <li><a href="developer-debugging-layers.html">Debugging Layers</li>
+                      <li><a href="developer-debug-layers.html">Debugging Layers</li>
                       <li><a href="developer-debugging.html#the-'debug-hooks'-command">debug-hooks</a></li>
                       <li><a href="developer-debugging.html#the-'debug-log'-command">debug-log</a></li>
                       <li><a href="developer-debug-dhx.html">DHX</a></li>
@@ -151,7 +151,7 @@
                   </li>
                   <li class="section"><a class="header" href="authors-charm-store.html">The Juju Charm Store</a>
                     <ul class="sub">
-                      <li><a href="authors-charm-store.html#submitting">Submit a charm</a></li>
+                      <li><a href="authors-charm-store.html#submitting-a-new-charm">Submit a charm</a></li>
                       <li><a href="authors-charm-policy.html">Charm store policy</a></li>
                       <li><a href="charm-review-process.html">Charm review process</a></li>
                       <li><a href="authors-charm-best-practice.html">Best practices</a></li>
@@ -181,7 +181,7 @@
                   <li><a href="reference-constraints.html">Juju constraints</a></li>
                   <li><a href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
                   <li><a href="reference-environment-variables.html">Juju environment variables</a></li>
-                  <li><a href="reference-hook-tools.html">Juju 'Hook Tools'</a></li>
+                  <li><a href="reference-hook-tools.html">Juju Hook Tools</a></li>
                   <li><a href="http://godoc.org/github.com/juju/juju/api">Juju API docs</a></li>
                   <li><a href="reference-releases.html">Releases</a></li>
                   <li><a href="reference-release-notes.html">Release notes</a></li>
