@@ -40,7 +40,7 @@ this interface?
 - What states (if any) should this interface raise on the requirer?
 
 
-## Communication scopes and how to use them
+## Communication scopes 
 
 When writing an interface, there is also the concept of a communication scope.
 There are three distinct flavors of scoping for a conversation. At times there
