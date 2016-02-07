@@ -4,9 +4,9 @@
 scripts that extend the functionality of Juju -- which allows you to fully and
 automatically customize the machines created by Juju, making developing and
 debugging hooks as painless as possible. It is drop in replacement for
-[`juju debug-hooks`](./developer-debugging.html#the-'debug-hooks'-command),
+[`juju debug-hooks`](developer-debugging.html#the-'debug-hooks'-command),
 recommended for more advanced users who need to
-[debug hooks](./developer-debugging.html) repetitively.
+[debug hooks](developer-debugging.html) repetitively.
 
 Bugs, feature requests, and pull requests can be submitted against the [Juju
 Plugins project](https://github.com/juju/plugins).
