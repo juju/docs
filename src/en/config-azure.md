@@ -2,7 +2,7 @@ Title: Juju Azure provider
 TODO: Decide on what to do with provider-specific features (e.g. placement).
 
 
-# Overview
+# Configuring for Azure 
 
 The new Azure provider is backwards compatible with the previous provider but
 supports several additional features, in particular, support for unit placement
