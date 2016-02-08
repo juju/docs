@@ -7,7 +7,7 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
-^## juju-core 1.25.3
+^# juju-core 1.25.3
 
   A new stable release of Juju, juju-core 1.25.3, is now available.
   This release replaces version 1.25.0.
