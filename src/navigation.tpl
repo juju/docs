@@ -191,6 +191,6 @@
                   <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
                 </ul>
               </li>
-               <li><a href="contributing.html">Helping with these docs</a></li>
-               <li><a href="https://github.com/juju/docs/issues/new">Report an issue with these docs</a></li>
+               <li><a href="contributing.html">Help with these docs</a></li>
+               <li><a href="https://github.com/juju/docs/issues/new">Report a docs issue</a></li>
             </ul>

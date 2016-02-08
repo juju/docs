@@ -2,24 +2,27 @@ Title: Contributing to Juju docs
 
 # Contributing to Juju documentation
 
-Juju documentation is published on [jujucharms.com](http://jujucharms.com/docs)
-and hosted on [GitHub](http://github.com). Its source documents are easy to
-understand and edit since they're written, essentially, in standard
-[GitHub Flavored Markdown](https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/)
-format. Here are a few [cheat](http://askubuntu.com/editing-help)
+Juju documentation is hosted on [GitHub](http://github.com) and published on
+[jujucharms.com](http://jujucharms.com/docs). Its source documents are easy to
+understand and edit due to the format used: standard
+[GitHub Flavored Markdown](https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/).
+Conventions have been added to support doc features such as *foldouts* and
+*admonishments* (explained below).
+
+Here are a few [cheat](http://askubuntu.com/editing-help)
 [sheets](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for
 writing in GFM.
 
 
 ## Documentation bugs
 
-Bugs for documentation issues are listed here:
-
-https://github.com/juju/docs/issues/
-
-and submitted here:
+Bugs for documentation issues are submitted here:
 
 https://github.com/juju/docs/issues/new
+
+and listed here:
+
+https://github.com/juju/docs/issues
 
 
 ## How to contribute text
@@ -139,7 +142,7 @@ in the appropriate section. Please make sure you submit a Pull Request with a
 description of the new page and why it is needed!
 
 
-## Adding Screenshots
+## Adding screenshots
 
 When adding screenshots place them in `htmldocs/media`. To reference them in
 your page use the syntax `![description](media/picture.png)`
@@ -173,64 +176,20 @@ following:
     python -m SimpleHTTPServer
 
 
-# Style and Language
+# Style and language
 
 We are putting together a more comprehensive style guide, but for the moment the
 following are good guidelines:
 
  - Resist being overly formal. The documentation should be like having a 
-conversation with a knowledgeable friend
+   conversation with a knowledgeable friend
  - Remember the readers are *users* not necessarily Juju developers
  - Spell things properly! (see below)
+ - We use British English (en-GB). See
+   [language details](./contributing-en-GB.html), including a comparison with
+   American English (en-US).
  - If including links or examples, double-check they actually work
  - We enforce 80 columns for every text file to keep it readable. Here are
-instructions for the [vim](http://stackoverflow.com/questions/3033423/vim-command-to-restructure-force-text-to-80-columns)
-and [emacs](http://www.emacswiki.org/emacs/EightyColumnRule) editors.
-
-
-## Using en-GB for en-US writers
-
-The official language of Canonical documentation is English, or en-GB to be
-more precise. There are all sorts of minor differences between English and 
-American English, including spelling, verb morphology, transitives, etc.
-
-Many of these differences will thankfully have no impact on writing the 
-documentation for Juju though - it is unlikely you will be talking about 
-"pants" or "hockey" or "tabling motions" for example. The main and most
-notable difference is in spelling.
-
-Popular belief is that you will merely need to add a few 'u's to words and 
-change -ize to -ise everywhere. It is a bit more complicated than that though.
-In fact, many -ize endings *are* acceptable in en-GB, though the -ise endings
-are generally preferred. The Oxford English Dictionary Style Guide (1998) has
-this to say:
-
-"The verbal ending -ize has been in general use since the 16th century; it is
-favoured in American English and in much British writing, and remains the
-current preferred style of Oxford University Press in academic and general books
-published in Britain. However, the alternative spelling -ise is now widespread
-(partly under the influence of French), especially in Britain, and may be
-adopted provided that its use is consistent.
-...
-A number of verbs always end in -ise in British use, notably advertise,
-chastise, despise, disguise, franchise, merchandise, surmise, and all verbs
-ending in -cise, -prise, -vise (including comprise, excise, prise (open),
-supervise, surprise, televise, etc.), but -ize is always used for prize
-(=value), capsize, size.
-...
-Spellings with -yze (paralyze, analyze) are only acceptable in American use."
-
-As you can see, it can be rather tricky. And that is only the ize/ize issue.
-There are many other endings which differ (e.g. -eled/-elled as in "travelled" 
-and "labelled". The best way to ensure that you are using consistent en-GB 
-spelling is to simply enable the en-GB dictionary on whatever software you 
-generally use for writing. For example, in `vim` you could execute the command:
-
-```
-:setlocal spell spelllang=en_gb 
-```
-
-This will change the spelling highlight options for the local buffer only, so
-you won't have to worry about whatever language you normally use. Do not worry
-about your atrocious grammar (in either variant of the language) as the docs 
-monkeys are used to tidying that up!
+   instructions for the
+   [vim](http://stackoverflow.com/questions/3033423/vim-command-to-restructure-force-text-to-80-columns)
+   and [emacs](http://www.emacswiki.org/emacs/EightyColumnRule) editors.
