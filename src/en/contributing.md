@@ -1,26 +1,34 @@
+Title: Contributing to Juju docs
+
 # Contributing to Juju documentation
 
-Contributing to the Juju documentation is made easy by the format it's
-written in:
-[GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown)
-(or GFM). You will therefore find the source documents straightforward and
-human-readable.
-
-The GFM implementation used does not include "Username linking"
-and "Emoji" since these [features](https://guides.github.com/features/mastering-markdown)
-are GitHub specific. In addition to those removals, however, we've created
-several new Markdown definitions to implement features required for the docs.
-These definitions are outlined below.
+Juju documentation is published on [jujucharms.com](http://jujucharms.com/docs)
+and hosted on [GitHub](http://github.com). Its source documents are easy to
+understand and edit since they're written, essentially, in standard
+[GitHub Flavored Markdown](https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/)
+format. Here are a few [cheat](http://askubuntu.com/editing-help)
+[sheets](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for
+writing in GFM.
 
 
-## How to contribute
+## Documentation bugs
 
-We love it when the community contributes to documentation. Here are the essential
-steps:
+Bugs for documentation issues are listed here:
+
+https://github.com/juju/docs/issues/
+
+and submitted here:
+
+https://github.com/juju/docs/issues/new
+
+
+## How to contribute text
+
+Here are the basic steps necessary to get a change published on the website:
 
 - [Fork the repository](https://help.github.com/articles/fork-a-repo) from [github.com/juju/docs](http://github.com/juju/docs)
 - Make a local branch from your fork (and enter that branch)
-- Edit the source documents with your favourite text editor
+- Edit the source documents
 - Push your branch back to your fork on GitHub
 - [Submit a Pull Request](https://help.github.com/articles/creating-a-pull-request)
 
@@ -28,23 +36,20 @@ The source documents are located in the `src` directory. From there each
 language is separated into its own directory by language code. For instance,
 English is under `src/en`.
 
-Here is a handy [Markdown reference](http://askubuntu.com/editing-help) to get
-you started. Afterwards, do take a look at the main
-[GFM site](https://help.github.com/articles/github-flavored-markdown).
+Once submitted, a Docs team member will review your work, suggest improvements,
+and eventually merge it with the master branch. Don't forget to review your
+work before submission!
 
-Once submitted, someone from the docs team will review your work, suggest
-improvements, and eventually merge it with the master branch. Don't forget to
-review your work before submission!
 
-## Metadata
+### Metadata
 
-Each file has the potential to include metadata for various purposes. At the moment 
-this is used to provide a title element, and also to implement a limited form
-of todo list items. Metadata is written as _key : value_ pairs AT THE VERY TOP
-of the document. E.g.
+Each file has the potential to include metadata for various purposes. At the
+moment this is used to provide a title element, and also to implement a limited
+form of todo list items. Metadata is written as _key : value_ pairs AT THE VERY
+TOP of the document. E.g.
 
 ```
-Title: Contributing to Juju Docs
+Title: Contributing to Juju docs
 TODO: add section on metadata
       spellcheck everything
 
@@ -53,12 +58,13 @@ TODO: add section on metadata
 Well written text goes here blah blah
 ```
 
-As you can see, the TODO metadata can have more than one item, as long 
-as additional items are indented by at least 4 spaces directly after the 
-previous one. The Metadata section ends immediately there is a blank line, 
-and the normal document text can begin.
+As you can see, the TODO metadata can have more than one item, as long as
+additional items are indented by at least 4 spaces directly after the previous
+one. The Metadata section ends immediately there is a blank line, and the
+normal document text can begin.
 
-## Sections
+
+### Sections
 
 All the text is organised into sections. These are auto-generated, there is
 nothing extra you need to do:
@@ -67,22 +73,27 @@ nothing extra you need to do:
     ## <h2> equivalent
     ### <h3> equivalent
 
-## Code Blocks
 
-To code block something indent use the code-fencing markup of three
-backticks, preferably followed by the type of code 
-(e.g. 'bash', 'yaml'...)
+### Code blocks
+
+Create a code block using the code-fencing markup of three backticks,
+preferably followed by the type of code:
 
      ```bash
      juju do something
      juju status
      ```
 
-## Inline code
+The most common "types" used in this documentation are: `bash`, `yaml`, `json`,
+and `no-highlight`.
 
-Use a backtick to `inline commands and other literals`.
 
-## Notes, Warnings, Callouts, Admonishments
+### Inline code
+
+Use a backtick to `inline commands and other literals`:
+
+
+### Notes, warnings, callouts, and admonishments
 
 Callouts are used to notify the user of additional information or warn them of
 potential pitfalls. This will create a notification resembling the following in
@@ -92,18 +103,19 @@ the docs:
 
 To implement this callout, use the following syntax:
 
-```
+```no-highlight
 !!! Note: If you want to get more information on what is actually happening, or
 to help resolve problems, you can add the `--show-log` switch to the juju
 command to get verbose output.
 ```
 
-## Foldouts
 
-When a page contains a high volume of information that would otherwise require a
-table of contents, or similar method of quick navigation, a foldout can be used.
-This will create a collapsed header which, when clicked, will expand to display
-all the content below it.
+### Foldouts
+
+When a page contains a high volume of information that would otherwise require
+a table of contents, or similar method of quick navigation, a *foldout* can be
+used. This will create a collapsed header which, when clicked, will expand to
+display all the content below it.
 
 ```
 ^# Header
@@ -112,7 +124,8 @@ all the content below it.
   as long as content is continually indented under the header.
 ```
 
-# Adding pages
+
+## Adding pages
 
 Adding a page (file) to the documentation requires the altering of
 `src/navigation.tpl`. Doing so will insert an entry into the left navigation
@@ -125,12 +138,14 @@ Add the page with the following format:
 in the appropriate section. Please make sure you submit a Pull Request with a
 description of the new page and why it is needed!
 
+
 ## Adding Screenshots
 
 When adding screenshots place them in `htmldocs/media`. To reference them in
 your page use the syntax `![description](media/picture.png)`
 
-# Testing or Deploying locally
+
+# Testing or deploying locally
 
 First you need to generate the docs from the Markdown. In the root directory
 first get the dependencies and make the docs:
@@ -138,7 +153,7 @@ first get the dependencies and make the docs:
     make sysdeps
     make
 
-**Note:** You only need to `make sysdeps` once, after that you'll have all the
+!!! Note: You only need to `make sysdeps` once, after that you'll have all the
 dependencies you'll need to build the docs going forward.
 
 The documentation makes use of Javascript for some functionality, so in order
@@ -156,6 +171,7 @@ directory. Navigate to the `/htmldocs` directory of the docs and run the
 following:
 
     python -m SimpleHTTPServer
+
 
 # Style and Language
 
@@ -218,4 +234,3 @@ This will change the spelling highlight options for the local buffer only, so
 you won't have to worry about whatever language you normally use. Do not worry
 about your atrocious grammar (in either variant of the language) as the docs 
 monkeys are used to tidying that up!
-
