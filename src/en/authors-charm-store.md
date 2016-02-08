@@ -9,8 +9,8 @@ call The Charm Store.
 
   - The main project page is here: [https://launchpad.net/charms](https://launchpad.net/charms)
   - There are useful tools for downloading, modifying, and contributing here: [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools)
-  - Here is the official tutorial for charm authors: [https://jujucharms.com/docs/stable/authors-charm-writing](authors-charm-writing.html)
-  - Here is the official tutorial for bundle authors: [https://jujucharms.com/docs/stable/charms-bundles.html](charms-bundles.html)
+  - Here is the official tutorial for charm authors: [authors-charm-writing](authors-charm-writing.html)
+  - Here is the official tutorial for bundle authors: [charms-bundles](charms-bundles.html)
 
 ## Charm Store Submission
 
@@ -50,7 +50,7 @@ possible so that users get the most flexibility:
      `charm create ubuntu-package-name` which will fill in some basic metadata
      info for you. You can check to see if it already exists at
      [https://jujucharms.com/](https://jujucharms.com/). Also make sure to 
-     [check the list of open charms](http://goo.gl/mvtPh) to see if anybody is
+     [check the list of open bugs](http://goo.gl/mvtPh) to see if anybody is
      already working on a charm for the service you want to work on. Bugs which
      have had no activity by the assignee for more than 30 days are fair game
      and should be unassigned.
