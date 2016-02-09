@@ -101,7 +101,7 @@ so the charm can react storage is attached and when it is detached.
 1. [name]-storage-detached
 
 There is more information about [storage feature in the Juju
-documentation](./storage.html).
+documentation](./charms-storage.html).
 
 While these concepts are important to understand how Juju works, [creating a
 charm in the reactive framework](./authors-charm-building.html) reduces the need

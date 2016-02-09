@@ -1,3 +1,8 @@
+Title: Using storage with Juju charms
+TODO: LXC/local caveat needs editing or removing
+      Commands need updating for 2.0
+      Storage commands need more examples/usage
+
 # Using Juju Storage
 
 Many services require access to a storage resource of some form. Juju charms can
@@ -110,11 +115,28 @@ The EC2/EBS provider currently supports the following pool configuration attribu
 
     true|false, indicating whether or not to encrypt volumes created by the pool.
 
-For information regarding EBS volume types, see [the EBS documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
+For information regarding EBS volume types, see 
+[the EBS documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 
 #### OpenStack/Cinder (cinder)
 
-The OpenStack/Cinder provider does not currently have any configuration.
+The OpenStack/Cinder provider does not currently have any specific 
+configuration options.
+
+OpenStack defaults to using Cinder for additional specified storage,
+so it is possible to use cinder storage like this:
+
+```bash
+juju deploy cs:~axwalk/postgresql --storage data=10G
+```
+
+which will create a 10G Cinder volume. Or if you wish to be more specific:
+
+```bash
+juju deploy cs:~axwalk/postgresql --storage data=cinder,10G
+```
+
+will achieve the same result.
 
 #### MAAS (maas)
 
