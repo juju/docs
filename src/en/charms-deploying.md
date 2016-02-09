@@ -93,7 +93,7 @@ juju set-env "default-series=trusty"
 # Deploying with a configuration file
 
 Deployed services usually start with a sane default configuration. However, for
-some services it is desireable (and quicker) to configure them at deployment
+some services it is desirable (and quicker) to configure them at deployment
 time. This can be done by creating a YAML format file of configuration values
 and using the `--config=` switch:
 
