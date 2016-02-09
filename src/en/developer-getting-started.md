@@ -156,8 +156,8 @@ juju expose vanilla
 Because Juju is a large complex system, not unlike a Linux software
 distribution, there is a need to test the charms themselves and how they
 interact with one another. All new charms require tests that verify the service
-installs, configures, scales and relates as intended. The tests should be self
-contained, installing all the required packages so the tests can be run
+installs, configures, scales and relates as intended. The tests should be
+self-contained, installing all the required packages so the tests can be run
 automatically with a tool called
 [`bundletester`](https://github.com/juju-solutions/bundletester). Similar to
 hooks the tests should be executable files in a `tests/` directory of the charm.
