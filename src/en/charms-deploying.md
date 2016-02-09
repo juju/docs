@@ -93,7 +93,7 @@ juju set-env "default-series=trusty"
 # Deploying with a configuration file
 
 Deployed services usually start with a sane default configuration. However, for
-some services it is desireable (and quicker) to configure them at deployment
+some services it is desirable (and quicker) to configure them at deployment
 time. This can be done by creating a YAML format file of configuration values
 and using the `--config=` switch:
 
@@ -296,7 +296,7 @@ requirements. The `networks` option takes a comma-delimited list of
 juju-specific network names. Juju will enable the networks on the
 machines that host service units. This is different from the network
 constraint which selects a machine that matches the networks, but does
-not configure the machine to use them For example, this commands deploys
+not configure the machine to use them. For example, this commands deploys
 a service to a machine on the "db" and "monitor" networks and enabled
 them:
 
