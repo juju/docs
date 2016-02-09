@@ -32,7 +32,7 @@ do nothing at all.
 
 The idea of charm layers is to combine objects or data into more complex objects
 or data. When applied to Charms, layers allow you to extend or build off
-other charms to make more complex or useful charms. The `layers.yaml` file in
+other charms to make more complex or useful charms. The `layer.yaml` file in
 the root directory of the charm controls what layer(s) will be imported.
 
 #### Reactive Charms
@@ -60,7 +60,7 @@ such as `docker.available`, and forthcoming support for the plugins that Docker
 is growing. This charm is designed to be a base for other docker based charms.
 
 This can be achieved by creating a new charm directory, and placing the following
-directives in your `layers.yaml`
+directives in your `layer.yaml`
 
     includes: ['layer:docker']
 

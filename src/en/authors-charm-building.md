@@ -58,7 +58,7 @@ us Apache2 running on a configurable port, mod-php5, and support for the
 
 On top of that, we'll want to use the [mysql interface][].
 
-We will put these in a `layers.yaml` file, which tells the builder what layers
+We will put these in a `layer.yaml` file, which tells the builder what layers
 and interfaces to combine with yours to create the finished charm:
 
 ```yaml
@@ -220,7 +220,7 @@ not conflict.  All handlers from each of those files will be discovered and
 dispatched according to the [discovery and dispatch rules][].
 
 
-## Buidling your charm
+## Building your charm
 
 Now that the layer is done, let's build it together and deploy the final
 charm.  From within the layer directory, this is as simple as:

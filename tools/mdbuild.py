@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 A tool to convert Juju docs markdown -> html
 """
@@ -45,6 +45,8 @@ def getargs():
     parser.add_argument(
         '--quiet', dest='quiet', action='store_true', help="disable STDOUT")
     parser.add_argument(
+        '--todo', dest='todo', action='store_true', help="output TODO.txt")
+    parser.add_argument(
         '--outpath', nargs=1, default='./htmldocs', help="output path")
     return (parser.parse_args())
 
@@ -68,12 +70,23 @@ def main():
     doc_nav = t.read()
     t.close()
     mdparser = markdown.Markdown(extensions=extlist)
-    print extlist
     if (args.file):
         p = Page(args.file[0], mdparser)
         p.convert()
         p.write(getoutfile(p.filename, args.outpath))
-        print p.output
+        print(p.output)
+    elif (args.todo):
+        lang= 'en'
+        out = codecs.open("TODO.txt", "w", encoding='utf-8')
+        src_path = os.path.join(args.source, lang)
+        for mdfile in next(os.walk(src_path))[2]:
+            if (os.path.splitext(mdfile)[1] == '.md'):
+                p = Page(os.path.join(src_path, mdfile), mdparser)
+                p.convert()
+                if 'todo' in p.parser.Meta:
+                    out.write(mdfile+":\n")
+                    for i in p.parser.Meta['todo']:
+                        out.write(' - '+i+'\n')
     else:
         for lang in next(os.walk(args.source))[1]:
             output_path = os.path.join(args.outpath, lang)
@@ -83,13 +96,13 @@ def main():
             for mdfile in next(os.walk(src_path))[2]:
                 if (os.path.splitext(mdfile)[1] == '.md'):
                     if not args.quiet:
-                        print "processing: ", mdfile
+                        print("processing: ", mdfile)
                     p = Page(os.path.join(src_path, mdfile), mdparser)
                     p.convert()
                     p.write(getoutfile(p.filename, output_path))
                 else:
                     if not args.quiet:
-                        print "skipping ", mdfile
+                        print("skipping ", mdfile)
 
 # Classes
 

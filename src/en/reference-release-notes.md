@@ -7,6 +7,137 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.25.3
+
+  A new stable release of Juju, juju-core 1.25.3, is now available.
+  This release replaces version 1.25.0.
+
+
+  ## Getting Juju
+
+  juju-core 1.25.3 is available for Xenial and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows, Centos, and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.25.3
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Unit loses network connectivity during bootstrap: juju 1.25.2 +
+      maas 1.9
+      Lp 1534795
+
+   * "cannot allocate memory" when running "juju run"
+      Lp 1382556
+
+    * Bootstrap with the vsphere provider fails to log into the virtual
+      machine
+      Lp 1511138
+
+    * Add-machine with vsphere triggers machine-0: panic: juju home
+      hasn't been initialized
+      Lp 1513492
+
+    * Using maas 1.9 as provider using dhcp nic will prevent juju
+      bootstrap
+      Lp 1512371
+
+    * Worker/storageprovisioner: machine agents attempting to attach
+      environ-scoped volumes
+      Lp 1483492
+
+    * Restore: agent old password not found in configuration
+      Lp 1452082
+
+    * "ignore-machine-addresses" broken for containers
+      Lp 1509292
+
+    * Deploying a service to a space which has no subnets causes the
+      agent to panic
+      Lp 1499426
+
+    * /var/lib/juju gone after 1.18->1.20 upgrade and manual edit of
+      agent.conf
+      Lp 1444912
+
+    * Juju bootstrap fails to successfully configure the bridge juju-br0
+      when deploying with wily 4.2 kernel
+      Lp 1496972
+
+    * Incompatible cookie format change
+      Lp 1511717
+
+    * Error environment destruction failed: destroying storage: listing
+      volumes: get https://x.x.x.x:8776/v2/<uuid>/volumes/detail: local
+      error: record overflow
+      Lp 1512399
+
+    * Replica set emptyconfig maas bootstrap
+      Lp 1412621
+
+    * Juju can't find daily image streams from cloud-
+      images.ubuntu.com/daily
+      Lp 1513982
+
+    * Rsyslog certificate fails when using ipv6/4 dual stack with
+      prefer-ipv6: true
+      Lp 1478943
+
+    * Improper address:port joining
+      Lp 1518128
+
+    * Juju status <service_name> broken
+      Lp 1516989
+
+    * 1.25.1 with maas 1.8: devices dns allocation uses non-unique
+      hostname
+      Lp 1525280
+
+    * Increment minimum juju version for 2.0 upgrade to 1.25.3
+      Lp 1533751
+
+    * Make assignment of units to machines use a worker
+      Lp 1497312
+
+    * `juju environments` fails due to missing ~/.juju/current-
+      environment
+      Lp 1506680
+
+    * Juju 1.25 misconfigures juju-br0 when using maas 1.9 bonded
+      interface
+      Lp 1516891
+
+    * Destroy-environment on an unbootstrapped maas environment can
+      release all my nodes
+      Lp 1490865
+
+    * On juju upgrade the security group lost ports for the exposed
+      services
+      Lp 1506649
+
+    * Support centos and windows image metadata
+      Lp 1523693
+
+    * Upgrade-juju shows available tools and best version but did not
+      output what it decided to do
+      Lp 1403655
+
+    * Invalid binary version, version "1.23.3--amd64" or "1.23.3--armhf"
+      Lp 1459033
+
+    * Add xenial to supported series
+      Lp 1533262
+
+
 ^# juju-core 1.25.0
 
   A new stable release of Juju, juju-core 1.25.0, is now available.

@@ -1,123 +1,238 @@
-# Configuring for Windows Azure
+Title: Juju Azure provider
+TODO: Decide on what to do with provider-specific features (e.g. placement).
 
-This process requires you to have a Windows Azure account. If you have not
-signed up for one yet, it can obtained at http://azure.microsoft.com/en-us/.
 
-You should start by generating a generic configuration file for Juju, using the
-command:
+# Overview
+
+The new Azure provider is backwards compatible with the previous provider but
+supports several additional features, in particular, support for unit placement
+(i.e. units can be deployed to specific existing machines). In lieu of this,
+the old default behaviour is used: units of a service will be allocated to
+machines in a service-specific Availability Set. Read the
+[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
+availability sets affect uptime guarantees.
+
+!!! Note: Juju now supports Microsoft Azure's Resource Manager API. The Azure
+provider has effectively been rewritten, but old models are still supported. To
+use the new provider support, you must bootstrap a new model with new
+configuration. There is no automated migration method.
+
+
+# Prerequisites and installation of Juju and the Azure CLI tool
+
+ - An Azure account is required. See http://azure.microsoft.com.
+
+ - The Juju devel PPA (may change) is needed.
+
+ - The Azure CLI tool is used to both gather information and to perform
+   necessary actions.
+
+ - The Juju client (the host running the below commands) will need the ability
+   to contact the Azure infrastructure on TCP ports 22 and 17070.
+
+Proceed to install the software.
+
+```bash
+sudo apt-add-repository -y ppa:juju/devel
+sudo apt-get update
+sudo apt-get install -y juju-core nodejs-legacy npm
+sudo npm install -g azure-cli
+```
+
+## Azure CLI tool preliminaries
+
+The Azure CLI tool gets installed here:
+
+```bash
+ls -lh /usr/bin/azure
+lrwxrwxrwx 1 root root 39 Jan 18 22:58 /usr/bin/azure -> ../lib/node_modules/azure-cli/bin/azure
+```
+
+Confirm it's installed correctly by viewing its online help. Then put it in
+*Azure Resource Manager* mode and log in:
+
+```bash
+azure help
+azure config mode arm
+azure login
+```
+
+You will be prompted to visit a website to enter the provided code. It will
+therefore be easier to perform this on a graphical desktop.
+
+
+# Configuring for Microsoft Azure
+
+If this is a new Juju install then you do not yet have a
+`~/.juju/environments.yaml` file. Create one with
 
 ```bash
 juju generate-config
 ```
 
-This will generate a file, `environments.yaml`, which will live in your
-`~/.juju/` directory (and will create the directory if it doesn't already
-exist).
-
-**Note:** The above command will not overwrite your existing environments.yaml
-file, or output to stdout. In order to see the boilerplate environments.yaml on
-stdout you need to append the `--show` option. This is helpful if you have an
-existing environments.yaml and just need to add a section. For example:
+If it does exist (but it was created with an older version of Juju), first move
+it out of the way (back it up) and *then* generate a new one. Alternatively,
+you can output a generic file to screen (STDOUT) and paste the Azure parts into
+your existing file:
 
 ```bash
 juju generate-config --show
 ```
 
-You can then copy and paste the needed section.
-
-The generic configuration sections generated for Windows Azure will look
-something like this:
-
-```yaml
-# https://jujucharms.com/docs/config-azure.html
-    azure:
-        type: azure
-        # location specifies the place where instances will be started,
-        # for example: West US, North Europe.
-        #
-        location: West US
-        # The following attributes specify Windows Azure Management
-        # information. See:
-        # http://msdn.microsoft.com/en-us/library/windowsazure
-        # for details.
-        #
-        management-subscription-id: 00000000-0000-0000-0000-000000000000
-        management-certificate-path: /home/me/azure.pem
-        # storage-account-name holds Windows Azure Storage info.
-        #
-        storage-account-name: abcdefghijkl
-        # force-image-name overrides the OS image selection to use a fixed
-        # image for all deployments. Most useful for developers.
-        #
-        # force-image-name: b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-13_10-amd64-server-DEVELOPMENT-20130713-Juju_ALPHA-en-us-30GB
-        # image-stream chooses a simplestreams stream to select OS images
-        # from, for example daily or released images (or any other stream
-        # available on simplestreams).
-        #
-        # image-stream: "released"
-```
-
-This is the configuration environments.yaml file needed to run on Windows Azure.
-You will need to set relevant values for options `management-subscription-id`,
-`management-certificate-path`, and `storage-account-name`.
-
-**Note:** Other than `location` the other key value defaults are recommended,
-but can be updated to your preference.
-
-**Note:** Ensure that `management-certificate-path` is set to use the .pem
-file, NOT the .cer file, doing so will result in an
-[out of memory error](https://bugs.launchpad.net/ubuntu/+source/juju-core/+bug/1250007).
+The file will contain a section for the Azure provider.
 
 
-## Config Values
+## Configure and bootstrap
 
-Generate a new certificate for Juju usage (or use an existing one). Suggest to
-use a 'Common Name' with 'Juju' in it so it's obvious when viewed in the web UI
-later. On Ubuntu, run the following commands to generate a new certificate:
+Values will need to be found for the following parameters:
+
+ - storage-account-type
+ - location
+ - subscription-id
+ - application-password
+ - application-id
+ - tenant-id
+
+#### `storage-account-type`
+
+Use the generic value of 'Standard_LRS' for this.
+
+### `location`
+
+Choose an [Azure region](https://azure.microsoft.com/en-us/regions/). Here we will use
+'East US'.
+
+### `subscription-id`
+
+List your account and get the subscription ID, the **SUB_ID**:
 
 ```bash
-openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout azure.pem -out azure.pem
-openssl x509 -inform pem -in azure.pem -outform der -out azure.cer
-chmod 600 azure.pem
+azure account list
 ```
 
-Log in to the Windows Azure console at
-[https://manage.windowsazure.com](https://manage.windowsazure.com). From there
-you can gather the following information:
+Sample output:
 
-- **Settings** Left Navigation: get the `SUBSCRIPTION ID` of the account you
-  upload to. This will be used for the `management-subscription-id`
-- **Settings** Left Navigation: "upload" the MyCert.cer file above (if you
-  created one). This is the certificate you used for the
-  `management-certificate-path`
-- **Storage** Left Navigation:
-  - Click New (bottom left)
-  - Click Quick Create
-  - Add a name in url (for example `juju0useast0`). This is the value to be
-    used for `storage-account-name`.
-  - Select Location (for example: West US)
-  - Select Subscription
-  - Disable "Enable Geo-Replication" (not applicable)
+```no-highlight
+---------------------------------------
+info:    Executing command account list
+data:    Name        Id                                    Current  State
+data:    ----------  ------------------------------------  -------  -------
+data:    Free Trial  f717c8c1-8e5e-4d38-be7f-ed1e1c879e18  true     Enabled
+info:    account list command OK
+---------------------------------------
+```
 
-**Note:** You must create the storage account in the same region/location
-specified by the `location` key value. For example, if `location: West US` is
-set then `storage-account-name:` must also have a storage set up in `West US`.
-Failure to do so will result in a group affinity error.
+The subscription ID can now be stored in a local environment variable, by
+entering:
 
-Edit `environments.yaml` according to the above configuration settings and save
-it to disk.
+```bash
+SUB_ID=f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
+```
+
+### `application-password`
+
+You will create an application in the next step. For now, create a password for
+it, the **APP_PASSWORD**.
+
+```bash
+APP_PASSWORD=some_password
+```
+
+### `application-id`
+
+Create an Azure Active Directory (AAD) application:
+
+```bash
+azure ad app create \
+	--name "ubuntu.example.com" \
+	--home-page "http://ubuntu.example.com" \
+	--identifier-uris "http://ubuntu.example.com" \
+	--password $APP_PASSWORD
+```
+
+The options `--name`, `--home-page`, and `--identifier-uris` are arbitrary but
+you should use values that make sense for your environment.
+
+Note the application ID, the **APP_ID**. It will look similar to:
+
+```bash
+APP_ID=f6ab7cbd-5029-43ef-85e3-5c4442a00ba8
+```
+
+Use the APP_ID to create an Active Directory (Kerberos) server principal:
+
+```bash
+azure ad sp create $APP_ID
+```
+
+Note its object ID, the **OBJ_ID**:
+
+```bash
+OBJ_ID=aab17f6f-6b9a-43ae-8d6d-2ff889aa8941
+```
+
+Now grant permissions to the principal (OBJ_ID) associated with your
+subscription (SUB_ID):
+
+```bash
+azure role assignment create \
+	--objectId $OBJ_ID \
+	-o Owner \
+	-c /subscriptions/$SUB_ID/
+```
+
+### `tenant-id`
+
+Get the tenant id, the **TENANT_ID**:
+
+```bash
+azure account show
+```
+
+It will look like:
+
+```bash
+TENANT_ID=daff614b-725e-4b9a-bc57-7763017c1cfb
+```
+
+You can test by logging in using the application principal as your identity:
+
+```bash
+azure login \
+	-u "$APP_ID" \
+	-p "$APP_PASSWORD" \
+	--service-principal \
+	--tenant "$TENANT_ID"
+```
+
+According to all the above, the Azure section of file `environments.yaml` for
+this example would look like this (comments removed for simplicity):
+
+```yaml
+    azure:
+        type: azure
+        storage-account-type: Standard_LRS
+        location: East US
+        subscription-id: f717c8c1-8e5e-4d38-be7f-ed1e1c879e1a
+        application-password: some_password
+        application-id: f6ab7cbd-5029-43ef-85e3-5c4442a00ba8
+        tenant-id: daff614b-725e-4b9a-bc57-7763017c1cfb
+```
+
+Finally, switch to the Azure provider and bootstrap:
+
+```bash
+juju switch azure
+juju bootstrap --debug
+```
+
+A successful bootstrap will result in the controller being visible in the
+[Azure portal](http://portal.azure.com):
+
+![bootstrap machine 0 in Azure portal](media/azure_portal-machine_0.png)
 
 
-## Using Availability Sets
+# Additional notes
 
-With Azure, each Cloud Service has zero or more Availability Sets within it and
-a Role can be assigned to at most one of them. As long as there are at least
-two Roles in the same Availability Set, then Azure will guarantee at least
-99.95% availability under the Azure Service Level Agreement (SLA).
-
-Juju creates a single Availability Set for each Cloud Service, and all Roles
-are added to it. Thus, all Juju-deployed services are, by default, covered by
-the Azure SLA.
-
-You can read more about
-[Azure Availability Sets](http://azure.microsoft.com/en-gb/documentation/articles/virtual-machines-manage-availability/).
+See [General configuration options](https://jujucharms.com/docs/stable/config-general)
+for additional and advanced customization of your environment.
