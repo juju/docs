@@ -6,7 +6,7 @@ the Juju agent to trigger events in a charm.
 All the hooks must be written to be
 [idempotent](https://en.wikipedia.org/wiki/Idempotence), meaning that there
 should be no difference from running the hook once from running it multiple
-times.  This property is important because hooks can be run multiple times by
+times. This property is important because hooks can be run multiple times by
 the Juju system in ways that might be difficult to predict.
 
 ## Core lifecycle hooks
@@ -32,25 +32,25 @@ configuration changes into account.
 
 `install` is run at the beginning of a charm lifecycle. The hook should be used
 to perform one-time setup operations, such as installing prerequisite software
-that will not change with configuration changes.  Like all hooks this must be
+that will not change with configuration changes. Like all hooks this must be
 idempotent because there are scenarios where this hook can be run more than
 once.
 
 ### leader-elected
 
 `leader-elected` run at least once to signify that Juju decided this unit is
-the leader.  Authors can use this hook to take action if their protocols for
+the leader. Authors can use this hook to take action if their protocols for
 leadership, consensus, raft, or quorum require one unit to assert leadership.
 If the election process is done internally to the service, other code should be
-used to signal the leader to Juju.  For more information read the [charm
+used to signal the leader to Juju. For more information read the [charm
 leadership document](./authors-charm-leadership.html).  
 
 ### leader-settings-changed
 
 `leader-settings-changed` runs when the leader has set values for the other
-units to respond to.  Much like (config-changed)[#config-changed) but for the
-leaders to send values to other units.  Follower units can implement this hook
-and take action when the leader sets values.  For more information read the
+units to respond to. Much like (config-changed)[#config-changed) but for the
+leaders to send values to other units. Follower units can implement this hook
+and take action when the leader sets values. For more information read the
 [charm leadership document](./authors-charm-leadership.html).  
 
 ### start
@@ -91,7 +91,7 @@ to preface all your other hooks with a quick call to your (idempotent)
 ### update-status
 
 `update-status` provides constant feedback to the user about the status of the
-service the charm is modeling.  The charm is run by Juju at regular intervals,
+service the charm is modeling. The charm is run by Juju at regular intervals,
 and gives authors an opportunity to run code that gets the “health” of the
 service or services.  
 
@@ -167,24 +167,24 @@ runtime relations in play with the same name, and that they're independent: one
 
 ## Storage Charm Hooks
 
-Juju can provides a variety of storage to charms.  The charms can define several
-different types of storage that are allocated from Juju.  To read more
+Juju can provides a variety of storage to charms. The charms can define several
+different types of storage that are allocated from Juju. To read more
 information, see the [storage
-document](./storage.html)
+document](./developer-storage.html)
 
 ### [name]-storage-attached
 
 `[name]-storage-attached` allows the charm to run code when storage has been
-added.  The storage-attached hooks will be run before the install hook, so that
-the installation routine may use the storage.  The name prefix of this hook will
+added. The storage-attached hooks will be run before the install hook, so that
+the installation routine may use the storage. The name prefix of this hook will
 depend on the storage key [defined in the
-metadata.yaml](./storage.html#adding-storage-to-the-metadata.yaml) file.
+metadata.yaml](./developer-storage.html#adding-storage) file.
 
 ### [name]-storage-detaching
 
 `[name]-storage-detaching` allows the charm to run code before storage is
-removed.  The storage-detaching hooks will be run before storage is detached,
+removed. The storage-detaching hooks will be run before storage is detached,
 and always before the stop hook is run, to allow the charm to gracefully release
-resources before they are removed and before the unit terminates.  The name
+resources before they are removed and before the unit terminates. The name
 prefix of the hook will depend on the storage key [defined in the
-`metadata.yaml`](./storage.html#adding-storage-to-the-metadata.yaml) file.
+`metadata.yaml`](./developer-storage.html#adding-storage) file.
