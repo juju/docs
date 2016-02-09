@@ -296,7 +296,7 @@ requirements. The `networks` option takes a comma-delimited list of
 juju-specific network names. Juju will enable the networks on the
 machines that host service units. This is different from the network
 constraint which selects a machine that matches the networks, but does
-not configure the machine to use them For example, this commands deploys
+not configure the machine to use them. For example, this commands deploys
 a service to a machine on the "db" and "monitor" networks and enabled
 them:
 
