@@ -1,7 +1,7 @@
 Title: Juju GCE provider
 
 
-# Overview
+# Configuring for the Google Compute Engine 
 
 Google Compute Engine (GCE) is the Infrastructure as a Service (IaaS) component
 of Google Cloud Platform which is built on the global infrastructure that runs
