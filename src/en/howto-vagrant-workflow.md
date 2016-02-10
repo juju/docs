@@ -1,4 +1,4 @@
-Title:  Vagrant Juju Workflow on OS X
+Title:  Vagrant Juju Workflow on OS X  
 
 
 #  Vagrant Juju Workflow on OS X

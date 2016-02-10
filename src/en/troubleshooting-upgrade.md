@@ -1,4 +1,4 @@
-Title: Juju troubleshooting - environment upgrade
+Title: Juju troubleshooting - environment upgrade  
 
 
 # Troubleshooting environment upgrades

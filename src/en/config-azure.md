@@ -1,5 +1,5 @@
-Title: Juju Azure provider
-TODO: Decide on what to do with provider-specific features (e.g. placement).
+Title: Juju Azure provider  
+TODO: Decide on what to do with provider-specific features (e.g. placement).  
 
 
 # Configuring for Azure 

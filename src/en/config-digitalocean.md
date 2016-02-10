@@ -1,4 +1,6 @@
-# Configuring for DigitalOcean
+Title: Configuring for Digital Ocean  
+
+# Configuring for Digital Ocean
 
 !!! **Note:** This particular provider is in "beta" as it is developed by
 community member [Kapil Thangavelu](http://github.com/kapilt/juju-digitalocean)

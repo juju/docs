@@ -1,3 +1,5 @@
+Title: Writing layer example  
+
 ## Writing a layer by example
 
 In this document, we will be writing a charm layer for Vanilla. Vanilla is an

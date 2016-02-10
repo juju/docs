@@ -1,4 +1,4 @@
-Title: Charm Tools
+Title: Charm tools  
 
 The 'Charm Tools' Juju Plugin is a collection of commands enabling users
 and charm authors to create, search, fetch, update, and

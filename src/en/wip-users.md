@@ -1,4 +1,4 @@
-Title: Managing users in Juju
+Title: Managing users in Juju  
 
 # Managing users in Juju
 

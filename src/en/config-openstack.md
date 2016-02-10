@@ -1,4 +1,4 @@
-Title: Configuring Juju for OpenStack
+Title: Configuring Juju for OpenStack  
 
 
 # Configuring for OpenStack

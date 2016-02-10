@@ -1,4 +1,4 @@
-Title: Machine & Unit Numbering
+Title: Machine and unit numbering  
 
 # Machine and Unit numbering
 

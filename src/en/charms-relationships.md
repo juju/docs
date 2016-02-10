@@ -1,3 +1,5 @@
+Title: Defining relationships in Juju  
+
 # How do I define a relationship?
 
 In order to define a relationship between two charms you must first define the

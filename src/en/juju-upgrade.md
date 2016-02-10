@@ -1,4 +1,4 @@
-Title: Upgrading Juju software
+Title: Upgrading Juju software  
 
 
 # Upgrading Juju software

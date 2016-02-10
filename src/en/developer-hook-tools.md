@@ -1,3 +1,5 @@
+Title: Juju tools  
+
 # Juju tools
 
 Units deployed with Juju have a suite of tooling, called `hook tools`, available

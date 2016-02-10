@@ -1,3 +1,5 @@
+Title: Using Docker in charms  
+
 # Charming with Docker
 
 You have a Docker container and you heard about Juju. Juju can deploy your

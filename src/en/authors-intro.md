@@ -1,4 +1,4 @@
-Title: How to become a Juju charm author
+Title: How to become a Juju charm author  
 
 # Becoming a charm author
 

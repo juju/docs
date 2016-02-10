@@ -1,4 +1,4 @@
-Title: Juju troubleshooting - Local Provider (LXC)
+Title: Juju troubleshooting - Local Provider (LXC)  
 
 
 # Troubleshooting the Local Provider (LXC)

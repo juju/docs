@@ -1,3 +1,5 @@
+Title: Getting things done  
+
 # Getting things done
 
 Juju is not all about marvelling about how great service orchestration is, it's

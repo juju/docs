@@ -1,4 +1,4 @@
-Title: Juju and multi-user environments
+Title: Juju and multi-user environments  
 
 
 # Managing multi-user environments
