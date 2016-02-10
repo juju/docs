@@ -1,3 +1,5 @@
+Title: Deploying charms offline  
+
 # Deploying Charms Offline
 
 Many private clouds have no direct access to the internet due to security

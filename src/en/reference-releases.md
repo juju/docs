@@ -1,4 +1,4 @@
-Title: Juju Releases
+Title: Juju releases  
 
 
 # Get the Latest Juju

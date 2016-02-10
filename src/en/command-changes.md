@@ -1,6 +1,6 @@
-Title: Command changes 1.x to 2.0
-TODO: Add new commands 
-      Add completely new commands
+Title: Command changes 1.x to 2.0  
+TODO: Add new commands   
+      Add completely new commands  
 
 # Command changes from 1.25 to 2.0
 

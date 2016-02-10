@@ -1,4 +1,4 @@
-Title: Configuring for MAAS (bare metal)
+Title: Configuring for MAAS (bare metal)  
 
 
 # Configuring for MAAS (bare metal)

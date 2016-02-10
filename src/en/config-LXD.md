@@ -1,5 +1,5 @@
-Title: Juju LXD local provider
-TODO: Confirm iptables troubleshooting rationale; add details
+Title: Juju LXD local provider  
+TODO: Confirm iptables troubleshooting rationale; add details  
 
 
 # Overview

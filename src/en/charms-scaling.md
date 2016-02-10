@@ -1,4 +1,5 @@
-Title: Scaling Charms
+Title: Scaling charms  
+
 # Scaling Charms
 
 One of the killer features of computing in the cloud is that it (should)

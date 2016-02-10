@@ -1,4 +1,4 @@
-Title:Components of a Charm
+Title: Components of a charm  
 
 # What makes a Charm?
 

@@ -1,3 +1,5 @@
+Title: Deploying Rails apps with Juju  
+
 #  Using Juju to Deploy your Rails Application
 
 One of Juju's main use cases is to deploy your application directly out of

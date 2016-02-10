@@ -1,3 +1,5 @@
+Title: Charm hooks reference  
+
 # Charm hooks reference
 
 Hooks are executable files in a charm’s `hooks` directory. Hooks are invoked by

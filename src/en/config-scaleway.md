@@ -1,4 +1,4 @@
-Title: Configuring Juju for the Scaleway provider
+Title: Configuring Juju for the Scaleway provider  
 
 # Configuring for Scaleway
 

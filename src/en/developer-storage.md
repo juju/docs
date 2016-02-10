@@ -1,3 +1,5 @@
+Title: Writing charms using storage  
+
 # Writing charms that use storage
 
 The storage feature can be implemented in any charm running on Juju version

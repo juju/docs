@@ -1,4 +1,5 @@
-Title: Creating and using Bundles
+Title: Creating and using bundles  
+
 # Creating and using Bundles
 
 A Bundle is a set of services with a specific configuration and their

@@ -1,4 +1,4 @@
-Title: Using Juju block to prevent accidental changes
+Title: Using Juju block to prevent accidental changes  
 
 # Restricting changes to the running Juju environment
 

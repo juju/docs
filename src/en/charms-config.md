@@ -1,3 +1,5 @@
+Title: Service configuration  
+
 # Service Configuration
 
 When deploying a service, the charm you use will often support or even require

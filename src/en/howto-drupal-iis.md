@@ -1,3 +1,5 @@
+Title: Deploying Drupal Windows with Juju charms  
+
 #  Using Juju to Deploy Drupal Windows Charm
 
 Juju is able to deploy workloads on top of Windows. For the moment, only MAAS

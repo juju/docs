@@ -1,4 +1,4 @@
-Title: The lifecycle of charm relations
+Title: The lifecycle of charm relations  
 
 # The Relations lifecycle
 

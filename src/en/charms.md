@@ -1,4 +1,4 @@
-Title: Introduction to Juju Charms
+Title: Introduction to Juju charms  
 
 
 # Introduction to Juju Charms

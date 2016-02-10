@@ -1,4 +1,4 @@
-Title: Charm/Unit statuses and their meanings
+Title: Charm unit status and their meanings  
 
 
 # Unit status
