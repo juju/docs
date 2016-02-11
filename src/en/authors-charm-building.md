@@ -1,4 +1,4 @@
-Title: Building a Juju charm
+Title: Building a Juju charm  
 
 
 # Building is easier than writing

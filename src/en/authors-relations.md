@@ -1,4 +1,4 @@
-Title: Implementing Relations in Juju charms
+Title: Implementing Relations in Juju charms  
 
 # What is a relation?
 

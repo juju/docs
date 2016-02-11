@@ -1,4 +1,4 @@
-Title: Implementing leadership in Juju charms
+Title: Implementing leadership in Juju charms  
 
 # Leadership for the Charm author
 

@@ -1,3 +1,5 @@
+Title: Deploying node.js apps with Juju  
+
 #  Using Juju to Deploy your Node.js Application
 
 One of Juju's main use cases is to deploy your application directly out of

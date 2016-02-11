@@ -1,3 +1,5 @@
+Title: Getting started developing charms  
+
 # Getting Started Developing Charms
 
 The developer guide is for anyone wanting to write bits of code that we call

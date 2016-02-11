@@ -1,4 +1,5 @@
-Title: Groups of Services
+Title: Groups of services  
+
 # Groups of Services
 
 Juju deploys units of a service from a charm. The simplest way to do this is

@@ -1,3 +1,5 @@
+Title: The Juju charm store  
+
 # The Juju Charm Store
 
 Juju includes a collection of what we call `Charms` that let you deploy whatever

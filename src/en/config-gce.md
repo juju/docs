@@ -1,4 +1,4 @@
-Title: Juju GCE provider
+Title: Juju GCE provider  
 
 
 # Configuring for the Google Compute Engine 

@@ -1,5 +1,4 @@
-
- Title: Layers for Charm Authoring
+Title: Layers for charm authoring  
 
 # Why build from layers
 

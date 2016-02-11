@@ -1,4 +1,4 @@
-Title: Configuring Juju for use with vSphere
+Title: Configuring Juju for use with vSphere  
 
 # Configuring the VMWare (vSphere) Provider
 

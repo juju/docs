@@ -1,4 +1,4 @@
-Title: Juju support for CentOS7
+Title: Juju support for CentOS7  
 
 # Juju and CentOS
 Juju 1.24.0 has initial support for CentOS as a deployment OS (the Juju client

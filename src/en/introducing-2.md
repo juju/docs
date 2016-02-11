@@ -1,6 +1,6 @@
-Title: Introducing Juju 2.0
-TODO: Add extra changes as required
-      Test upgrade instructions
+Title: Introducing Juju 2.0  
+TODO: Add extra changes as required  
+      Test upgrade instructions  
 
 # Introducing Juju 2.0
 

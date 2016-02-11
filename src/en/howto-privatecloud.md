@@ -1,3 +1,5 @@
+Title: Setting up private clouds with Simplestreams  
+
 #  Set up a Private Cloud using Simplestreams
 
 When Juju bootstraps a cloud, it needs two critical pieces of information:

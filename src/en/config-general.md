@@ -1,5 +1,5 @@
-Title: General configuration options
-Commands: get-env, set-env
+Title: General configuration options  
+Commands: get-env, set-env  
 
 # General configuration options
 

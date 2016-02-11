@@ -1,4 +1,4 @@
-Title: Upgrading a Charm
+Title: Upgrading a charm  
 
 # Upgrade Charm
 

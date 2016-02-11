@@ -1,4 +1,4 @@
-Title: Getting started with Juju
+Title: Getting started with Juju  
 
 
 # Introduction

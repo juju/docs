@@ -1,4 +1,4 @@
-Title: Instance naming and tagging in clouds
+Title: Instance naming and tagging in clouds  
 
 # Instance naming and tagging
 Juju now tags instances and volumes created by supported providers with the 

@@ -1,3 +1,5 @@
+Title: High Availability Juju state servers  
+
 # High Availability of Juju State Servers
 
 Juju provides a `ensure-availability` command to set multiple State Servers.

@@ -1,4 +1,4 @@
-Title: Writing your first Juju charm
+Title: Writing your first Juju charm  
 
 
 # Your first charm starts here!

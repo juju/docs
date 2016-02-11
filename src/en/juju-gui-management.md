@@ -1,4 +1,4 @@
-Title: The Juju GUI
+Title: The Juju GUI  
 
 # The Juju GUI
 

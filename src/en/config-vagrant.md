@@ -1,4 +1,4 @@
-Title: Configuring for Vagrant
+Title: Configuring for Vagrant  
 
 
 # Configuring for Vagrant

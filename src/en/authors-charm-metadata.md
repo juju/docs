@@ -1,3 +1,5 @@
+Title: Charm metadata  
+
 # Charm metadata
 
 The only file that must be present in a charm is `metadata.yaml`, in the root
