@@ -172,7 +172,7 @@ this example would look like this (comments removed for simplicity):
         location: Central US
         storage-account-name: jujuazure
         management-subscription-id: f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
-	management-certificate-path: /home/ubuntu/.juju/juju-azure.pem
+        management-certificate-path: /home/ubuntu/.juju/juju-azure.pem
 ```
 
 Finally, switch to the Azure provider and bootstrap:
