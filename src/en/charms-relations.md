@@ -34,7 +34,12 @@ juju deploy mysql
 
 Then you create the relationship by specifying these two services with the `add-
 relation` command:
-
+<!--TEST
+options: False
+setup:
+  - juju deploy wordpress
+  - juju deploy mysql
+-->
 ```bash
 juju add-relation mysql wordpress
 ```
@@ -56,6 +61,11 @@ The solution in this case is to specify the nature of the relation using the
 hook identifier. In this case, we want MySQL to provide the backend database
 for mediawiki, so this is what we need to enter:
 
+<!--TEST
+setup:
+  - juju deploy mediawiki
+  - juju deploy mysql
+-->
 ```bash
 juju add-relation mediawiki:db mysql
 ```
@@ -119,6 +129,13 @@ There are times when a relationship just isn't working and it is time to move
 on. Fortunately, it is a simple single-line command to break off these
 relationships:
 
+<!--TEST
+options: False
+setup:
+  - juju deploy wordpress
+  - juju deploy mysql
+  - juju add-relation mediawiki:db mysql
+-->
 ```bash
 juju remove-relation mediawiki mysql
 ```
