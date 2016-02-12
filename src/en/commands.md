@@ -13,9 +13,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju action [options] <command> ...
-  ```
+  
+        juju action [options] <command> ...
+  
   #### purpose:
 
    execute, manage, monitor, and retrieve results of actions
@@ -47,9 +47,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju add-machine [options] [<container>:machine | <container> | ssh:[user@]host | placement]
-  ```
+  
+        juju add-machine [options] [<container>:machine | <container> | ssh:[user@]host | placement]
+  
 
   #### purpose:
 
@@ -99,15 +99,15 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju add-machine                      (starts a new machine)
-      juju add-machine -n 2                 (starts 2 new machines)
-      juju add-machine lxc                  (starts a new machine with an lxc container)
-      juju add-machine lxc -n 2             (starts 2 new machines with an lxc container)
-      juju add-machine lxc:4                (starts a new lxc container on machine 4)
-      juju add-machine --constraints mem=8G (starts a machine with at least 8GB RAM)
-      juju add-machine ssh:user@10.10.0.3   (manually provisions a machine with ssh)
-      juju add-machine zone=us-east-1a      (start a machine in zone us-east-1a on AWS)
-      juju add-machine maas2.name           (acquire machine maas2.name on MAAS)
+        juju add-machine                      (starts a new machine)
+        juju add-machine -n 2                 (starts 2 new machines)
+        juju add-machine lxc                  (starts a new machine with an lxc container)
+        juju add-machine lxc -n 2             (starts 2 new machines with an lxc container)
+        juju add-machine lxc:4                (starts a new lxc container on machine 4)
+        juju add-machine --constraints mem=8G (starts a machine with at least 8GB RAM)
+        juju add-machine ssh:user@10.10.0.3   (manually provisions a machine with ssh)
+        juju add-machine zone=us-east-1a      (start a machine in zone us-east-1a on AWS)
+        juju add-machine maas2.name           (acquire machine maas2.name on MAAS)
 
 
   See Also:
@@ -123,9 +123,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju add-machine [options] [<container>:machine | <container> | ssh:[user@]host | placement]
-  ```
+  
+        juju add-machine [options] [<container>:machine | <container> | ssh:[user@]host | placement]
+  
 
   #### purpose:
 
@@ -207,9 +207,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju add-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
-  ```
+  
+        juju add-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
+  
 
   #### purpose:
 
@@ -229,9 +229,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju space create [options] <name> [<CIDR1> <CIDR2> ...]
-  ```
+  
+        juju space create [options] <name> [<CIDR1> <CIDR2> ...]
+  
 
   #### purpose:
 
@@ -254,9 +254,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju add-ssh-key [options] <ssh key> ...
-  ```
+  
+        juju add-ssh-key [options] <ssh key> ...
+  
 
   #### purpose:
 
@@ -280,9 +280,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju add-ssh-key [options] <ssh key> ...
-  ```
+  
+        juju add-ssh-key [options] <ssh key> ...
+  
 
   #### purpose:
 
@@ -306,9 +306,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju storage add [options] 
-  ```
+  
+        juju storage add [options] 
+  
 
   <unit name> <storage directive> ...
   where storage directive is 
@@ -359,30 +359,29 @@ Click on the expander to see details for each command.
 
       Add 3 ebs storage instances for "data" storage to unit u/0:     
 
-
-  juju storage add u/0 data=ebs,1024,3 
+        juju storage add u/0 data=ebs,1024,3 
   or
-  juju storage add u/0 data=ebs,3
+        juju storage add u/0 data=ebs,3
   or
-  juju storage add u/0 data=ebs,,3 
+        juju storage add u/0 data=ebs,,3 
   
   
   Add 1 storage instances for "data" storage to unit u/0 
   using default model provider pool:
   
-  juju storage add u/0 data=1 
+        juju storage add u/0 data=1 
   or
-  juju storage add u/0 data
-
+        juju storage add u/0 data
+ 
 
 ^# add-subnet
 
 
   #### usage:
 
-  ```no-highlight
-  juju subnet add [options] <CIDR>|<provider-id> <space> [<zone1> <zone2> ...]
-  ```
+  
+        juju subnet add [options] <CIDR>|<provider-id> <space> [<zone1> <zone2> ...]
+  
 
   #### purpose:
 
@@ -418,9 +417,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju add-unit [options] <service name>
-  ```
+  
+        juju add-unit [options] <service name>
+  
 
   #### purpose:
 
@@ -450,10 +449,10 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju add-unit mysql -n 5          (Add 5 mysql units on 5 new machines)
-      juju add-unit mysql --to 23       (Add a mysql unit to machine 23)
-      juju add-unit mysql --to 24/lxc/3 (Add unit to lxc container 3 on host machine 24)
-      juju add-unit mysql --to lxc:25   (Add unit to a new lxc container on host machine 25)
+        juju add-unit mysql -n 5          (Add 5 mysql units on 5 new machines)
+        juju add-unit mysql --to 23       (Add a mysql unit to machine 23)
+        juju add-unit mysql --to 24/lxc/3 (Add unit to lxc container 3 on host machine 24)
+        juju add-unit mysql --to lxc:25   (Add unit to a new lxc container on host machine 25)
 
 
   aliases: add-units
@@ -464,9 +463,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju add-unit [options] <service name>
-  ```
+  
+        juju add-unit [options] <service name>
+  
 
   #### purpose:
 
@@ -496,10 +495,10 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju add-unit mysql -n 5          (Add 5 mysql units on 5 new machines)
-      juju add-unit mysql --to 23       (Add a mysql unit to machine 23)
-      juju add-unit mysql --to 24/lxc/3 (Add unit to lxc container 3 on host machine 24)
-      juju add-unit mysql --to lxc:25   (Add unit to a new lxc container on host machine 25)
+        juju add-unit mysql -n 5          (Add 5 mysql units on 5 new machines)
+        juju add-unit mysql --to 23       (Add a mysql unit to machine 23)
+        juju add-unit mysql --to 24/lxc/3 (Add unit to lxc container 3 on host machine 24)
+        juju add-unit mysql --to lxc:25   (Add unit to a new lxc container on host machine 25)
 
 
   aliases: add-units
@@ -510,9 +509,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju add-user [options] <username> [<display name>]
-  ```
+  
+        juju add-user [options] <username> [<display name>]
+  
 
   #### purpose:
 
@@ -539,7 +538,7 @@ Click on the expander to see details for each command.
   #### Examples: 
 
       # Add user "foobar" with a strong random password is generated.
-      juju add-user foobar
+        juju add-user foobar
 
 
   
@@ -552,9 +551,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju agree [options] <term>
-  ```
+  
+        juju agree [options] <term>
+  
 
   #### purpose:
 
@@ -585,12 +584,12 @@ Click on the expander to see details for each command.
 
 
 
-  juju agree somePlan/1
+        juju agree somePlan/1
   Displays terms for somePlan revision 1 and prompts for agreement.
-  juju agree somePlan/1 otherPlan/2
+        juju agree somePlan/1 otherPlan/2
   Displays the terms for revision 1 of somePlan, revision 2 of otherPlan,
   and prompts for agreement.
-  juju agree somePlan/1 otherPlan/2 --yes
+        juju agree somePlan/1 otherPlan/2 --yes
   Agrees to the terms without prompting.
 
 
@@ -599,9 +598,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju allocate [options]
-  ```
+  
+        juju allocate [options]
+  
 
   #### purpose:
 
@@ -620,13 +619,13 @@ Click on the expander to see details for each command.
   
   Usage:
   
-  juju allocate <budget>:<value> <service> [<service2> ...]
+        juju allocate <budget>:<value> <service> [<service2> ...]
   
   #### Example: 
 
 
 
-  juju allocate somebudget:42 db
+        juju allocate somebudget:42 db
   Assigns service "db" to an allocation on budget "somebudget" with the limit "42".
 
 
@@ -635,9 +634,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju api-endpoints [options]
-  ```
+  
+        juju api-endpoints [options]
+  
 
   #### purpose:
 
@@ -671,11 +670,11 @@ Click on the expander to see details for each command.
   to the API server. When no cache is available or --refresh is given, api-endpoints
   connects to the API server, retrieves all known endpoints and updates the .jenv
   file before returning the first one. Example:
-  $ juju api-endpoints
+        juju api-endpoints
   10.0.3.1:17070
   
   If --all is given, api-endpoints returns all known endpoints. Example:
-  $ juju api-endpoints --all
+        juju api-endpoints --all
   10.0.3.1:17070
   localhost:170170
   
@@ -691,9 +690,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju api-info [options] [field ...]
-  ```
+  
+        juju api-info [options] [field ...]
+  
 
   #### purpose:
 
@@ -735,29 +734,25 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      $ juju api-info
-      user: admin
-      environ-uuid: 373b309b-4a86-4f13-88e2-c213d97075b8
-      controllers:
+        juju api-info
+        user: admin
+        environ-uuid: 373b309b-4a86-4f13-88e2-c213d97075b8
+        controllers:
+          - localhost:17070_
+          - 10.0.3.1:17070_
+          - 192.168.2.21:17070_      
+        ca-cert: '-----BEGIN CERTIFICATE-----
+        ...
+        -----END CERTIFICATE-----_      '
 
 
-  _- localhost:17070_
 
-  _- 10.0.3.1:17070_
-
-  _- 192.168.2.21:17070_      ca-cert: '-----BEGIN CERTIFICATE-----
-      ...
-
-
-  _-----END CERTIFICATE-----_      '
-
-
-  $ juju api-info user
-  admin
+        juju api-info user
+        admin
   
-  $ juju api-info user password
-  user: admin
-  password: sekrit
+        juju api-info user password
+        user: admin
+        password: sekrit
 
 
 ^# backups
@@ -765,9 +760,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju backups [options] <command> ...
-  ```
+  
+        juju backups [options] <command> ...
+  
 
   #### purpose:
 
@@ -806,7 +801,7 @@ Click on the expander to see details for each command.
   Backups are only supported on juju controllers, not hosted models.  For
   more information on juju controllers, see:
   
-  juju help juju-controllers
+      jujuhelp juju-controllers
   
   #### subcommands:
 
@@ -841,9 +836,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju block [options] <command> ...
-  ```
+  
+        juju block [options] <command> ...
+  
 
   #### purpose:
 
@@ -893,9 +888,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju bootstrap [options]
-  ```
+  
+        juju bootstrap [options]
+  
 
   #### purpose:
 
@@ -991,9 +986,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju cached-images [options] <command> ...
-  ```
+  
+        juju cached-images [options] <command> ...
+  
 
   #### purpose:
 
@@ -1031,9 +1026,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju change-user-password [options] [username]
-  ```
+  
+        juju change-user-password [options] [username]
+  
 
   #### purpose:
 
@@ -1063,10 +1058,10 @@ Click on the expander to see details for each command.
 
 
   # Change the password to a random strong password.
-  juju change-user-password --generate
+      jujuchange-user-password --generate
   
   # Change the password for bob, this always uses a random password
-  juju change-user-password bob
+      jujuchange-user-password bob
 
 
 ^# collect-metrics
@@ -1074,9 +1069,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju collect-metrics [options] [service or unit]
-  ```
+  
+        juju collect-metrics [options] [service or unit]
+  
 
   #### purpose:
 
@@ -1099,9 +1094,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju backups create [options] [<notes>]
-  ```
+  
+        juju backups create [options] [<notes>]
+  
 
   #### purpose:
 
@@ -1145,9 +1140,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju create-budget
-  ```
+  
+        juju create-budget
+  
 
   #### purpose:
 
@@ -1159,8 +1154,9 @@ Click on the expander to see details for each command.
   
   #### Example: 
 
-      juju create-budget qa 42
-      Creates a budget named 'qa' with a limit of 42.
+        juju create-budget qa 42
+    
+   Creates a budget named 'qa' with a limit of 42.
 
 
 ^# create-model
@@ -1168,9 +1164,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju create-model [options] <name> [key=[value] ...]
-  ```
+  
+        juju create-model [options] <name> [key=[value] ...]
+  
 
   #### purpose:
 
@@ -1203,9 +1199,9 @@ Click on the expander to see details for each command.
 
 
 
-  juju create-model new-model
+        juju create-model new-model
   
-  juju create-model new-model --config=aws-creds.yaml
+        juju create-model new-model --config=aws-creds.yaml
   
   See Also:
   juju help model share
@@ -1216,9 +1212,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju debug-hooks [options] <unit name> [hook names]
-  ```
+  
+        juju debug-hooks [options] <unit name> [hook names]
+  
 
   #### purpose:
 
@@ -1246,9 +1242,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju debug-log [options]
-  ```
+  
+        juju debug-log [options]
+  
 
   #### purpose:
 
@@ -1298,9 +1294,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju debug-metrics [options] [service or unit]
-  ```
+  
+        juju debug-metrics [options] [service or unit]
+  
 
   #### purpose:
 
@@ -1329,9 +1325,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju deploy [options] <charm or bundle> [<service name>]
-  ```
+  
+        juju deploy [options] <charm or bundle> [<service name>]
+  
 
   #### purpose:
 
@@ -1386,15 +1382,15 @@ Click on the expander to see details for each command.
   accepted:
   
   For cs:trusty/mysql
-  mysql
-  trusty/mysql
+        mysql
+        trusty/mysql
   
   For cs:~user/trusty/mysql
-  cs:~user/mysql
+        cs:~user/mysql
   
   For cs:bundle/mediawiki-single
-  mediawiki-single
-  bundle/mediawiki-single
+        mediawiki-single
+        bundle/mediawiki-single
   
   The current series for charms is determined first by the default-series model
   setting, followed by the preferred series for the charm in the charm store.
@@ -1405,29 +1401,30 @@ Click on the expander to see details for each command.
   Charms may also be deployed from a user specified path. In this case, the
   path to the charm is specified along with an optional series.
   
-  juju deploy /path/to/charm --series trusty
+        juju deploy /path/to/charm --series trusty
   
   If series is not specified, the charm's default series is used. The default series
   for a charm is the first one specified in the charm metadata. If the specified series
   is not supported by the charm, this results in an error, unless --force is used.
   
-  juju deploy /path/to/charm --series wily --force
+        juju deploy /path/to/charm --series wily --force
   
   Deploying using a local repository is supported but deprecated.
   In this case, when the default-series is not specified in the
   model, one must specify the series. For example:
-  local:precise/mysql
+
+        local:precise/mysql
   
   Local bundles can be specified either with a local:bundle/<name> URL, which is
   interpreted relative to $JUJU_REPOSITORY, or with a direct path to a
   bundle.yaml file. For example, to deploy the bundle in
   $JUJU_REPOSITORY/bundle/openstack:
   
-  juju deploy local:bundle/openstack
+        juju deploy local:bundle/openstack
   
   To deploy this using a direct path:
   
-  juju deploy $JUJU_REPOSITORY/bundle/openstack/bundle.yaml
+        juju deploy $JUJU_REPOSITORY/bundle/openstack/bundle.yaml
   
   <service name>, if omitted, will be derived from <charm name>.
   
@@ -1441,11 +1438,11 @@ Click on the expander to see details for each command.
   to create the container where possible. For Ubuntu deployments, lxc-clone
   is supported for the trusty OS series and later. A 'template' container is
   created with the name
-  juju-<series>-template
+         juju-<series>-template
   where <series> is the OS series, for example 'juju-trusty-template'.
   
   You can override the use of clone by changing the provider configuration:
-  lxc-clone: false
+        lxc-clone: false
   
   In more complex scenarios, Juju's network spaces are used to partition the cloud
   networking layer into sets of subnets. Instances hosting units inside the
@@ -1471,15 +1468,15 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju deploy mysql --to 23       (deploy to machine 23)
-      juju deploy mysql --to 24/lxc/3 (deploy to lxc container 3 on host machine 24)
-      juju deploy mysql --to lxc:25   (deploy to a new lxc container on host machine 25)
+        juju deploy mysql --to 23       (deploy to machine 23)
+        juju deploy mysql --to 24/lxc/3 (deploy to lxc container 3 on host machine 24)
+        juju deploy mysql --to lxc:25   (deploy to a new lxc container on host machine 25)
 
 
-  juju deploy mysql -n 5 --constraints mem=8G
+        juju deploy mysql -n 5 --constraints mem=8G
   (deploy 5 instances of mysql with at least 8 GB of RAM each)
   
-  juju deploy haproxy -n 2 --constraints spaces=dmz,^cms,^database
+        juju deploy haproxy -n 2 --constraints spaces=dmz,^cms,^database
   (deploy 2 instances of haproxy on cloud instances being part of the dmz
   space but not of the cmd and the database space)
   
@@ -1495,9 +1492,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju destroy-controller [options] <controller name>
-  ```
+  
+        juju destroy-controller [options] <controller name>
+  
 
   #### purpose:
 
@@ -1522,9 +1519,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju destroy-model [options] <model name>
-  ```
+  
+        juju destroy-model [options] <model name>
+  
 
   #### purpose:
 
@@ -1546,9 +1543,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
-  ```
+  
+        juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
+  
 
   #### purpose:
 
@@ -1570,9 +1567,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-service [options] <service>
-  ```
+  
+        juju remove-service [options] <service>
+  
 
   #### purpose:
 
@@ -1604,9 +1601,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-unit [options] <unit> [...]
-  ```
+  
+        juju remove-unit [options] <unit> [...]
+  
 
   #### purpose:
 
@@ -1638,9 +1635,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju disable-user [options] <username>
-  ```
+  
+        juju disable-user [options] <username>
+  
 
   #### purpose:
 
@@ -1660,7 +1657,7 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju disable-user foobar
+        juju disable-user foobar
 
 
   See Also:
@@ -1672,9 +1669,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju enable-ha [options]
-  ```
+  
+        juju enable-ha [options]
+  
 
   #### purpose:
 
@@ -1714,19 +1711,26 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju enable-ha
+        juju enable-ha
+
       Ensure that the controller is still in highly available mode. If
       there is only 1 controller running, this will ensure there
       are 3 running. If you have previously requested more than 3,
       then that number will be ensured.
-      juju enable-ha -n 5 --series=trusty
+
+        juju enable-ha -n 5 --series=trusty
+
       Ensure that 5 controllers are available, with newly created
       controller machines having the "trusty" series.
-      juju enable-ha -n 7 --constraints mem=8G
+
+        juju enable-ha -n 7 --constraints mem=8G
+  
       Ensure that 7 controllers are available, with newly created
       controller machines having the default series, and at least
       8GB RAM.
-      juju enable-ha -n 7 --to server1,server2 --constraints mem=8G
+  
+        juju enable-ha -n 7 --to server1,server2 --constraints mem=8G
+    
       Ensure that 7 controllers are available, with machines server1 and
       server2 used first, and if necessary, newly created controller
       machines having the default series, and at least 8GB RAM.
@@ -1737,9 +1741,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju enable-user [options] <username>
-  ```
+  
+        juju enable-user [options] <username>
+  
 
   #### purpose:
 
@@ -1759,11 +1763,11 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju enable-user foobar
+        juju enable-user foobar
 
 
   See Also:
-  juju help disable-user
+  juju disable-user
 
 
 ^# expose
@@ -1771,9 +1775,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju expose [options] <service>
-  ```
+  
+        juju expose [options] <service>
+  
 
   #### purpose:
 
@@ -1796,9 +1800,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju init [options]
-  ```
+  
+        juju init [options]
+  
 
   #### purpose:
 
@@ -1823,9 +1827,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju get-config [options] <service>
-  ```
+  
+        juju get-config [options] <service>
+  
 
   #### purpose:
 
@@ -1849,20 +1853,22 @@ Click on the expander to see details for each command.
   settings for <service>, including the setting name, whether it uses the default value
   or not ("default: true"), description (if set), type, and current value. Example:
   
-  $ juju get-config wordpress
+        juju get-config wordpress
   
-  charm: wordpress
-  service: wordpress
-  settings:
-  engine:
-  default: true
-  description: 'Currently two ...'
-  type: string
-  value: nginx
-  tuning:
-  description: "This is the tuning level..."
-  type: string
-  value: optimized
+  might return:
+
+        charm: wordpress
+        service: wordpress
+        settings:
+          engine:
+            default: true
+            description: 'Currently two ...'
+            type: string
+            value: nginx
+          tuning:
+            description: "This is the tuning level..."
+            type: string
+            value: optimized
   
   NOTE: In the example above the descriptions and most other settings were omitted or
   truncated for brevity. The "engine" setting was left at its default value ("nginx"),
@@ -1879,9 +1885,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju get-config [options] <service>
-  ```
+  
+        juju get-config [options] <service>
+  
 
   #### purpose:
 
@@ -1935,9 +1941,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju get-constraints [options] <service>
-  ```
+  
+        juju get-constraints [options] <service>
+  
 
   #### purpose:
 
@@ -1970,7 +1976,7 @@ Click on the expander to see details for each command.
 
 
 
-  get-constraints wordpress
+        juju get-constraints wordpress
   
   See Also:
   juju help constraints
@@ -1985,9 +1991,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju get-model-config [options] [<model key>]
-  ```
+  
+        juju get-model-config [options] [<model key>]
+  
 
   #### purpose:
 
@@ -2017,7 +2023,7 @@ Click on the expander to see details for each command.
 
 
 
-  juju get-model-config default-series  (returns the default series for the model)
+        juju get-model-config default-series  (returns the default series for the model)
 
 
 ^# get-model-constraints
@@ -2025,9 +2031,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju get-model-constraints [options]
-  ```
+  
+        juju get-model-constraints [options]
+  
 
   #### purpose:
 
@@ -2069,9 +2075,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju get-user-credentials [options]
-  ```
+  
+        juju get-user-credentials [options]
+  
 
   #### purpose:
 
@@ -2096,11 +2102,11 @@ Click on the expander to see details for each command.
 
 
 
-  $ juju get-user-credentials --output staging.creds
+        juju get-user-credentials --output staging.creds
   
   # copy the staging.creds file to another machine
   
-  $ juju login staging --server staging.creds --keep-password
+        juju login staging --server staging.creds --keep-password
   
   
   See Also:
@@ -2112,9 +2118,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju help [topic]
-  ```
+  
+        juju help [topic]
+  
 
   #### purpose:
 
@@ -2130,9 +2136,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju help-tool [tool]
-  ```
+  
+        juju help-tool [tool]
+  
 
   #### purpose:
 
@@ -2146,9 +2152,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju import-ssh-key [options] <ssh key id> ...
-  ```
+  
+        juju import-ssh-key [options] <ssh key id> ...
+  
 
   #### purpose:
 
@@ -2173,9 +2179,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju import-ssh-key [options] <ssh key id> ...
-  ```
+  
+        juju import-ssh-key [options] <ssh key id> ...
+  
 
   #### purpose:
 
@@ -2200,9 +2206,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju init [options]
-  ```
+  
+        juju init [options]
+  
 
   #### purpose:
 
@@ -2227,9 +2233,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju kill-controller [options] <controller name>
-  ```
+  
+        juju kill-controller [options] <controller name>
+  
 
   #### purpose:
 
@@ -2259,9 +2265,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju action defined [options] <service name>
-  ```
+  
+        juju action defined [options] <service name>
+  
 
   #### purpose:
 
@@ -2295,9 +2301,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-all-blocks [options]
-  ```
+  
+        juju list-all-blocks [options]
+  
 
   #### purpose:
 
@@ -2325,9 +2331,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-budgets [options]
-  ```
+  
+        juju list-budgets [options]
+  
 
   #### purpose:
 
@@ -2348,7 +2354,7 @@ Click on the expander to see details for each command.
   
   #### Example: 
 
-      juju list-budgets
+          juju list-budgets
 
 
 ^# list-controllers
@@ -2356,9 +2362,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-controllers
-  ```
+  
+        juju list-controllers
+  
 
   #### purpose:
 
@@ -2384,9 +2390,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-machines [options]
-  ```
+  
+        juju list-machines [options]
+  
 
   #### purpose:
 
@@ -2423,9 +2429,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-machines [options]
-  ```
+  
+        juju list-machines [options]
+  
 
   #### purpose:
 
@@ -2462,9 +2468,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-models [options]
-  ```
+  
+        juju list-models [options]
+  
 
   #### purpose:
 
@@ -2513,9 +2519,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-payloads [options] [pattern ...]
-  ```
+  
+        juju list-payloads [options] [pattern ...]
+  
 
   #### purpose:
 
@@ -2562,9 +2568,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-plans [options]
-  ```
+  
+        juju list-plans [options]
+  
 
   #### purpose:
 
@@ -2585,7 +2591,7 @@ Click on the expander to see details for each command.
   
   #### Example: 
 
-      juju list-plans cs:webapp
+         juju list-plans cs:webapp
 
 
 ^# list-shares
@@ -2593,9 +2599,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-shares [options]
-  ```
+  
+        juju list-shares [options]
+  
 
   #### purpose:
 
@@ -2623,9 +2629,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju space list [options] [--short] [--format yaml|json] [--output <path>]
-  ```
+  
+        juju space list [options] [--short] [--format yaml|json] [--output <path>]
+  
 
   #### purpose:
 
@@ -2661,9 +2667,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-ssh-keys [options]
-  ```
+  
+        juju list-ssh-keys [options]
+  
 
   #### purpose:
 
@@ -2691,9 +2697,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-ssh-keys [options]
-  ```
+  
+        juju list-ssh-keys [options]
+  
 
   #### purpose:
 
@@ -2721,9 +2727,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju storage list [options]
-  ```
+  
+        juju storage list [options]
+  
 
   #### purpose:
 
@@ -2763,9 +2769,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-users [options]
-  ```
+  
+        juju list-users [options]
+  
 
   #### purpose:
 
@@ -2802,9 +2808,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju login [options] <name>
-  ```
+  
+        juju login [options] <name>
+  
 
   #### purpose:
 
@@ -2832,8 +2838,8 @@ Click on the expander to see details for each command.
   If you have been sent one of these server files, you can login by doing the
   following:
   
-  # if you have saved the server file as ~/erica.server
-  juju login --server=~/erica.server test-controller
+  if you have saved the server file as ~/erica.server
+        jujulogin --server=~/erica.server test-controller
   
   A new strong random password is generated to replace the password defined in
   the server file. The 'test-controller' will also become the current controller that
@@ -2857,9 +2863,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-machines [options]
-  ```
+  
+        juju list-machines [options]
+  
 
   #### purpose:
 
@@ -2896,9 +2902,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-machines [options]
-  ```
+  
+        juju list-machines [options]
+  
 
   #### purpose:
 
@@ -2935,9 +2941,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju publish [options] [<charm url>]
-  ```
+  
+        juju publish [options] [<charm url>]
+  
 
   #### purpose:
 
@@ -2958,11 +2964,11 @@ Click on the expander to see details for each command.
   the following forms are accepted:
   
   For cs:precise/mysql
-  cs:precise/mysql
-  precise/mysql
+        cs:precise/mysql
+        precise/mysql
   
   For cs:~user/precise/mysql
-  cs:~user/precise/mysql
+        cs:~user/precise/mysql
   
   There is no default series, so one must be provided explicitly when
   informing a charm URL. If the URL isn't provided, an attempt will be
@@ -2974,9 +2980,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-all-blocks [options]
-  ```
+  
+        juju remove-all-blocks [options]
+  
 
   #### purpose:
 
@@ -3005,9 +3011,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-machine [options] <machineID[s]> ...
-  ```
+  
+        juju remove-machine [options] <machineID[s]> ...
+  
 
   #### purpose:
 
@@ -3031,12 +3037,12 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      # Remove machine number 5 which has no running units or containers
-      $ juju remove-machine 5
+        # Remove machine number 5 which has no running units or containers
+        juju remove-machine 5
 
 
-  # Remove machine 6 and any running units or containers
-  $ juju remove-machine 6 --force
+        # Remove machine 6 and any running units or containers
+        $ juju remove-machine 6 --force
   
   aliases: remove-machines
 
@@ -3046,9 +3052,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-machine [options] <machineID[s]> ...
-  ```
+  
+        juju remove-machine [options] <machineID[s]> ...
+  
 
   #### purpose:
 
@@ -3072,12 +3078,12 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      # Remove machine number 5 which has no running units or containers
-      $ juju remove-machine 5
+        # Remove machine number 5 which has no running units or containers
+        $ juju remove-machine 5
 
 
-  # Remove machine 6 and any running units or containers
-  $ juju remove-machine 6 --force
+        # Remove machine 6 and any running units or containers
+        $ juju remove-machine 6 --force
   
   aliases: remove-machines
 
@@ -3087,9 +3093,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
-  ```
+  
+        juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]
+  
 
   #### purpose:
 
@@ -3111,9 +3117,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-service [options] <service>
-  ```
+  
+        juju remove-service [options] <service>
+  
 
   #### purpose:
 
@@ -3145,9 +3151,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-ssh-key [options] <ssh key id> ...
-  ```
+  
+        juju remove-ssh-key [options] <ssh key id> ...
+  
 
   #### purpose:
 
@@ -3173,9 +3179,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-ssh-key [options] <ssh key id> ...
-  ```
+  
+        juju remove-ssh-key [options] <ssh key id> ...
+  
 
   #### purpose:
 
@@ -3201,9 +3207,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju remove-unit [options] <unit> [...]
-  ```
+  
+        juju remove-unit [options] <unit> [...]
+  
 
   #### purpose:
 
@@ -3235,9 +3241,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju resolved [options] <unit>
-  ```
+  
+        juju resolved [options] <unit>
+  
 
   #### purpose:
 
@@ -3260,9 +3266,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju backups restore [options]
-  ```
+  
+        juju backups restore [options]
+  
 
   #### purpose:
 
@@ -3313,9 +3319,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju retry-provisioning [options] <machine> [...]
-  ```
+  
+        juju retry-provisioning [options] <machine> [...]
+  
 
   #### purpose:
 
@@ -3335,9 +3341,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju run [options] <commands>
-  ```
+  
+        juju run [options] <commands>
+  
 
   #### purpose:
 
@@ -3406,9 +3412,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju action do [options] <unit> <action name> [key.key.key...=value]
-  ```
+  
+        juju action do [options] <unit> <action name> [key.key.key...=value]
+  
 
   #### purpose:
 
@@ -3454,53 +3460,54 @@ Click on the expander to see details for each command.
 
 
 
-  $ juju action do mysql/3 backup 
-  action: <ID>
+        $ juju action do mysql/3 backup 
+        action: <ID>
   
-  $ juju action fetch <ID>
-  result:
-  status: success
-  file:
-  size: 873.2
-  units: GB
-  name: foo.sql
+         $ juju action fetch <ID>
+         result:
+         status: success
+         file:
+         size: 873.2
+         units: GB
+        name: foo.sql
   
-  $ juju action do mysql/3 backup --params parameters.yml
-  ...
-  Params sent will be the contents of parameters.yml.
-  ...
+        $ juju action do mysql/3 backup --params parameters.yml
+        ...
+        Params sent will be the contents of parameters.yml.
+        ...
   
-  $ juju action do mysql/3 backup out=out.tar.bz2 file.kind=xz file.quality=high
-  ...
-  Params sent will be:
+        $ juju action do mysql/3 backup out=out.tar.bz2 file.kind=xz file.quality=high
+        ...
+        Params sent will be:
   
-  out: out.tar.bz2
-  file:
-  kind: xz
-  quality: high
-  ...
+        out: out.tar.bz2
+        file:
+        kind: xz
+        quality: high
+        ...
   
-  $ juju action do mysql/3 backup --params p.yml file.kind=xz file.quality=high
-  ...
+        $ juju action do mysql/3 backup --params p.yml file.kind=xz file.quality=high
+        ...
+  
   If p.yml contains:
   
-  file:
-  location: /var/backups/mysql/
-  kind: gzip
+        file:
+        location: /var/backups/mysql/
+        kind: gzip
   
   then the merged args passed will be:
   
-  file:
-  location: /var/backups/mysql/
-  kind: xz
-  quality: high
-  ...
+        file:
+        location: /var/backups/mysql/
+        kind: xz
+        quality: high
+        ...
   
-  $ juju action do sleeper/0 pause time=1000
-  ...
+        $ juju action do sleeper/0 pause time=1000
+        ...
   
-  $ juju action do sleeper/0 pause --string-args time=1000
-  ...
+        $ juju action do sleeper/0 pause --string-args time=1000
+        ...
   The value for the "time" param will be the string literal "1000".
 
 
@@ -3509,9 +3516,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju scp [options] <file1> ... <file2> [scp-option...]
-  ```
+  
+        juju scp [options] <file1> ... <file2> [scp-option...]
+  
 
   #### purpose:
 
@@ -3548,21 +3555,21 @@ Click on the expander to see details for each command.
 
   Copy a single file from machine 2 to the local machine:
   
-  juju scp 2:/var/log/syslog .
+        juju scp 2:/var/log/syslog .
   
   Copy 2 files from two units to the local backup/ directory, passing -v
   to scp as an extra argument:
   
-  juju scp -- -v ubuntu/0:/path/file1 ubuntu/1:/path/file2 backup/
+        juju scp -- -v ubuntu/0:/path/file1 ubuntu/1:/path/file2 backup/
   
   Recursively copy the directory /var/log/mongodb/ on the first mongodb
   server to the local directory remote-logs:
   
-  juju scp -- -r mongodb/0:/var/log/mongodb/ remote-logs/
+        juju scp -- -r mongodb/0:/var/log/mongodb/ remote-logs/
   
   Copy a local file to the second apache unit of the model "testing":
   
-  juju scp -m testing foo.txt apache2/1:
+        juju scp -m testing foo.txt apache2/1:
 
 
 ^# set-budget
@@ -3570,9 +3577,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju set-budget
-  ```
+  
+        juju set-budget
+  
 
   #### purpose:
 
@@ -3584,8 +3591,9 @@ Click on the expander to see details for each command.
   
   #### Example: 
 
-      juju set-budget personal 96
-      Sets the monthly limit for budget named 'personal' to 96.
+        juju set-budget personal 96
+  
+  Sets the monthly limit for budget named 'personal' to 96.
 
 
 ^# set-config
@@ -3593,9 +3601,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju set-config [options] <service> name=value ...
-  ```
+  
+        juju set-config [options] <service> name=value ...
+  
 
   #### purpose:
 
@@ -3632,9 +3640,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju set-config [options] <service> name=value ...
-  ```
+  
+        juju set-config [options] <service> name=value ...
+  
 
   #### purpose:
 
@@ -3671,9 +3679,10 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju set-constraints [options] <service> [key=[value] ...]
-  ```
+  
+      
+        juju set-constraints [options] <service> [key=[value] ...]
+  
 
   #### purpose:
 
@@ -3690,7 +3699,7 @@ Click on the expander to see details for each command.
   Sets machine constraints on specific service, which are used as the
   default constraints for all new machines provisioned by that service.
   You can also set constraints on a model by using
-  juju model set-constraints.
+      jujumodel set-constraints.
   
   Constraints set on a service are combined with model constraints for
   commands (such as juju deploy) that provision machines for services.  Where
@@ -3701,7 +3710,7 @@ Click on the expander to see details for each command.
 
 
 
-  set-constraints wordpress mem=4G     (all new wordpress machines must have at least 4GB of RAM)
+        juju set-constraints wordpress mem=4G     (all new wordpress machines must have at least 4GB of RAM)
   
   See Also:
   juju help constraints
@@ -3716,9 +3725,10 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju set-meter-status [options] [service or unit] status
-  ```
+  
+      
+      juju set-meter-status [options] [service or unit] status
+  
 
   #### purpose:
 
@@ -3747,9 +3757,10 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju set-model-config [options] key=[value] ...
-  ```
+  
+      
+        juju set-model-config [options] key=[value] ...
+  
 
   #### purpose:
 
@@ -3772,9 +3783,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju set-model-constraints [options] [key=[value] ...]
-  ```
+  
+        juju set-model-constraints [options] [key=[value] ...]
+  
 
   #### purpose:
 
@@ -3791,7 +3802,7 @@ Click on the expander to see details for each command.
   Sets machine constraints on the model, which are used as the default
   constraints for all new machines provisioned in the model (unless
   overridden).  You can also set constraints on a specific service by using
-  juju set-constraints.
+      juju set-constraints.
   
   Constraints set on a service are combined with model constraints for
   commands (such as juju deploy) that provision machines for services.  Where
@@ -3800,9 +3811,9 @@ Click on the expander to see details for each command.
   
   #### Example: 
 
-
-
-  juju model set-constraints mem=8G                         (all new machines in the model must have at least 8GB of RAM)
+        juju model set-constraints mem=8G
+  
+  (all new machines in the model must have at least 8GB of RAM)
   
   See Also:
   juju help constraints
@@ -3817,9 +3828,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju set-plan [options] <service name> <plan>
-  ```
+  
+        juju set-plan [options] <service name> <plan>
+  
 
   #### purpose:
 
@@ -3839,13 +3850,13 @@ Click on the expander to see details for each command.
   
   Usage:
   
-  juju set-plan [options] <service name> <plan name>
+        juju set-plan [options] <service name> <plan name>
   
   #### Example: 
 
 
 
-  juju set-plan myapp example/uptime
+        juju set-plan myapp example/uptime
 
 
 ^# share-model
@@ -3853,9 +3864,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju share-model [options] <user> ...
-  ```
+  
+        juju share-model [options] <user> ...
+  
 
   #### purpose:
 
@@ -3873,14 +3884,14 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju share-model joe
-      Give local user "joe" access to the current model
+        juju share-model joe
+  Give local user "joe" access to the current model
 
 
-  juju share-model user1 user2 user3@ubuntuone
+        juju share-model user1 user2 user3@ubuntuone
   Give two local users and one remote user access to the current model
   
-  juju share-model sam --model myenv
+        juju share-model sam --model myenv
   Give local user "sam" access to the model named "myenv"
 
 
@@ -3889,9 +3900,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju action fetch [options] <action ID>
-  ```
+  
+        juju action fetch [options] <action ID>
+  
 
   #### purpose:
 
@@ -3929,9 +3940,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju action status [options] [<action ID>|<action ID prefix>]
-  ```
+  
+        juju action status [options] [<action ID>|<action ID prefix>]
+  
 
   #### purpose:
 
@@ -3959,9 +3970,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju show-budget [options]
-  ```
+  
+        juju show-budget [options]
+  
 
   #### purpose:
 
@@ -3982,7 +3993,7 @@ Click on the expander to see details for each command.
   
   #### Example: 
 
-      juju show-budget personal
+         juju show-budget personal
 
 
 ^# show-machine
@@ -3990,9 +4001,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju show-machine [options] <machineID> ...
-  ```
+  
+        juju show-machine [options] <machineID> ...
+  
 
   #### purpose:
 
@@ -4017,16 +4028,16 @@ Click on the expander to see details for each command.
   
   Show a specified machine on a model:
   
-  juju show-machine <machineID> ...
+        juju show-machine <machineID> ...
   
   For example:
   
-  juju show-machine 0
+        juju show-machine 0
   
   or for multiple machines
   (the following will display status for machines 1, 2 & 3):
   
-  juju show-machine 1 2 3
+        juju show-machine 1 2 3
   
   Default format is in yaml, other formats can be specified
   with the "--format" option.  Available formats are yaml,
@@ -4040,9 +4051,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju show-machine [options] <machineID> ...
-  ```
+  
+        juju show-machine [options] <machineID> ...
+  
 
   #### purpose:
 
@@ -4067,16 +4078,16 @@ Click on the expander to see details for each command.
   
   Show a specified machine on a model:
   
-  juju show-machine <machineID> ...
+      juju show-machine <machineID> ...
   
   For example:
   
-  juju show-machine 0
+        juju show-machine 0
   
   or for multiple machines
   (the following will display status for machines 1, 2 & 3):
   
-  juju show-machine 1 2 3
+        juju show-machine 1 2 3
   
   Default format is in yaml, other formats can be specified
   with the "--format" option.  Available formats are yaml,
@@ -4090,9 +4101,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju status [options] [pattern ...]
-  ```
+  
+        juju status [options] [pattern ...]
+  
 
   #### purpose:
 
@@ -4165,9 +4176,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju storage show [options]
-  ```
+  
+        juju storage show [options]
+  
 
   #### purpose:
 
@@ -4211,9 +4222,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju show-user [options] <username>
-  ```
+  
+        juju show-user [options] <username>
+  
 
   #### purpose:
 
@@ -4248,26 +4259,26 @@ Click on the expander to see details for each command.
       last-connection: 2014-01-01 00:00:00 +0000 UTC
 
 
-  # Show information on a user with the given username
-  $ juju show-user jsmith
-  user-name: jsmith
-  display-name: John Smith
-  date-created : 1981-02-27 16:10:05 +0000 UTC
-  last-connection: 2014-01-01 00:00:00 +0000 UTC
+      # Show information on a user with the given username
+      $ juju show-user jsmith
+      user-name: jsmith
+      display-name: John Smith
+      date-created : 1981-02-27 16:10:05 +0000 UTC
+      last-connection: 2014-01-01 00:00:00 +0000 UTC
   
-  # Show information on the current user in JSON format
-  $ juju show-user --format json
-  {"user-name":"foobar",
-  "display-name":"Foo Bar",
-  "date-created": "1981-02-27 16:10:05 +0000 UTC",
-  "last-connection": "2014-01-01 00:00:00 +0000 UTC"}
+      # Show information on the current user in JSON format
+      $ juju show-user --format json
+      {"user-name":"foobar",
+      "display-name":"Foo Bar",
+      "date-created": "1981-02-27 16:10:05 +0000 UTC",
+      "last-connection": "2014-01-01 00:00:00 +0000 UTC"}
   
-  # Show information on the current user in YAML format
-  $ juju show-user --format yaml
-  user-name: foobar
-  display-name: Foo Bar
-  date-created : 1981-02-27 16:10:05 +0000 UTC
-  last-connection: 2014-01-01 00:00:00 +0000 UTC
+      # Show information on the current user in YAML format
+      $ juju show-user --format yaml
+      user-name: foobar
+      display-name: Foo Bar
+      date-created : 1981-02-27 16:10:05 +0000 UTC
+      last-connection: 2014-01-01 00:00:00 +0000 UTC
 
 
 ^# space
@@ -4275,9 +4286,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju space [options] <command> ...
-  ```
+  
+        juju space [options] <command> ...
+  
 
   #### purpose:
 
@@ -4350,9 +4361,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju ssh [options] <target> [<ssh args>...]
-  ```
+  
+        juju ssh [options] <target> [<ssh args>...]
+  
 
   #### purpose:
 
@@ -4383,23 +4394,23 @@ Click on the expander to see details for each command.
 
   Connect to machine 0:
   
-  juju ssh 0
+      juju ssh 0
   
   Connect to machine 1 and run 'uname -a':
   
-  juju ssh 1 uname -a
+      juju ssh 1 uname -a
   
   Connect to the first mysql unit:
   
-  juju ssh mysql/0
+      juju ssh mysql/0
   
   Connect to the first mysql unit and run 'ls -la /var/log/juju':
   
-  juju ssh mysql/0 ls -la /var/log/juju
+      juju ssh mysql/0 ls -la /var/log/juju
   
   Connect to the first jenkins unit as the user jenkins:
   
-  juju ssh jenkins@jenkins/0
+      juju ssh jenkins@jenkins/0
 
 
 ^# ssh-key
@@ -4407,9 +4418,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-ssh-keys [options]
-  ```
+  
+        juju list-ssh-keys [options]
+  
 
   #### purpose:
 
@@ -4437,9 +4448,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju list-ssh-keys [options]
-  ```
+  
+        juju list-ssh-keys [options]
+  
 
   #### purpose:
 
@@ -4467,9 +4478,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju status [options] [pattern ...]
-  ```
+  
+        juju status [options] [pattern ...]
+  
 
   #### purpose:
 
@@ -4542,9 +4553,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju status-history [options] [-n N] <unit>
-  ```
+  
+        juju status-history [options] [-n N] <unit>
+  
 
   #### purpose:
 
@@ -4583,9 +4594,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju storage [options] <command> ...
-  ```
+  
+        juju storage [options] <command> ...
+  
 
   #### purpose:
 
@@ -4635,9 +4646,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju subnet [options] <command> ...
-  ```
+  
+        juju subnet [options] <command> ...
+  
 
   #### purpose:
 
@@ -4683,9 +4694,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju switch [options] [model name]
-  ```
+  
+        juju switch [options] [model name]
+  
 
   #### purpose:
 
@@ -4714,9 +4725,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju sync-tools [options]
-  ```
+  
+        juju sync-tools [options]
+  
 
   #### purpose:
 
@@ -4773,9 +4784,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju unblock [options] destroy-model | remove-object | all-changes
-  ```
+  
+        juju unblock [options] destroy-model | remove-object | all-changes
+  
 
   #### purpose:
 
@@ -4800,58 +4811,58 @@ Click on the expander to see details for each command.
   Commands that can be unblocked are grouped based on logical operations as follows:
   
   destroy-model includes command:
-  destroy-model
+   - destroy-model
   
   remove-object includes termination commands:
-  destroy-model
-  remove-machine
-  remove-relation
-  remove-service
-  remove-unit
+   - destroy-model
+   - remove-machine
+   - remove-relation
+   - remove-service
+   - remove-unit
   
   all-changes includes all alteration commands
-  add-machine
-  add-relation
-  add-unit
-  authorised-keys add
-  authorised-keys delete
-  authorised-keys import
-  deploy
-  destroy-model
-  enable-ha
-  expose
-  remove-machine
-  remove-relation
-  remove-service
-  remove-unit
-  resolved
-  retry-provisioning
-  run
-  set
-  set-constraints
-  set-model-config
-  sync-tools
-  unexpose
-  unset
-  unset-model-config
-  upgrade-charm
-  upgrade-juju
-  add-user
-  change-user-password
-  disable-user
-  enable-user
+   - add-machine
+   - add-relation
+   - add-unit
+   - authorised-keys add
+   - authorised-keys delete
+   - authorised-keys import
+   - deploy
+   - destroy-model
+   - enable-ha
+   - expose
+   - remove-machine
+   - remove-relation
+   - remove-service
+   - remove-unit
+   - resolved
+   - retry-provisioning
+   - run
+   - set
+   - set-constraints
+   - set-model-config
+   - sync-tools
+   - unexpose
+   - unset
+   - unset-model-config
+   - upgrade-charm
+   - upgrade-juju
+   - add-user
+   - change-user-password
+   - disable-user
+   - enable-user
   
   #### Examples: 
 
-      To allow the model to be destroyed:
-      juju unblock destroy-model
+   To allow the model to be destroyed:
+        juju unblock destroy-model
 
 
   To allow the machines, services, units and relations to be removed:
-  juju unblock remove-object
+        juju unblock remove-object
   
   To allow changes to the model:
-  juju unblock all-changes
+        juju unblock all-changes
   
   See Also:
   juju help block
@@ -4862,9 +4873,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju unexpose [options] <service>
-  ```
+  
+        juju unexpose [options] <service>
+  
 
   #### purpose:
 
@@ -4884,9 +4895,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju unset-model-config [options] <model key> ...
-  ```
+  
+        juju unset-model-config [options] <model key> ...
+  
 
   #### purpose:
 
@@ -4913,9 +4924,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju unshare-model [options] <user> ...
-  ```
+  
+        juju unshare-model [options] <user> ...
+  
 
   #### purpose:
 
@@ -4933,14 +4944,15 @@ Click on the expander to see details for each command.
   
   #### Examples: 
 
-      juju unshare-model joe
-      Deny local user "joe" access to the current model
+        juju unshare-model joe
+  Deny local user "joe" access to the current model
 
-
-  juju unshare-model user1 user2 user3@ubuntuone
+        juju unshare-model user1 user2 user3@ubuntuone
+  
   Deny two local users and one remote user access to the current model
   
-  juju unshare-model sam -m/--model myenv
+        juju unshare-model sam -m/--model myenv
+  
   Deny local user "sam" access to the model named "mymodel"
 
 
@@ -4949,9 +4961,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju update-allocation [options]
-  ```
+  
+        juju update-allocation [options]
+  
 
   #### purpose:
 
@@ -4969,8 +4981,8 @@ Click on the expander to see details for each command.
   
   #### Example: 
 
-      juju update-allocation wordpress 10
-      Sets the allocation for the wordpress service to 10.
+        juju update-allocation wordpress 10
+  Sets the allocation for the wordpress service to 10.
 
 
 ^# upgrade-charm
@@ -4978,9 +4990,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju upgrade-charm [options] <service>
-  ```
+  
+        juju upgrade-charm [options] <service>
+  
 
   #### purpose:
 
@@ -5079,9 +5091,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju upgrade-juju [options]
-  ```
+  
+        juju upgrade-juju [options]
+  
 
   #### purpose:
 
@@ -5158,9 +5170,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju use-model [options]
-  ```
+  
+        juju use-model [options]
+  
 
   #### purpose:
 
@@ -5190,28 +5202,30 @@ Click on the expander to see details for each command.
   If there is just one model called "test" in the current controller that you
   have access to, then you can just specify the name.
   
-  $ juju use-model test
+        $ juju use-model test
   
   If however there are multiple models called "test" that are owned
   
-  $ juju use-model test
-  Multiple models matched name "test":
-  cb4b94e8-29bb-44ae-820c-adac21194395, owned by bob@local
-  ae673c19-73ef-437f-8224-4842a1772bdf, owned by mary@local
-  Please specify either the model UUID or the owner to disambiguate.
-  ERROR multiple models matched
+   
+        $ juju use-model test
+  
+        Multiple models matched name "test":
+        cb4b94e8-29bb-44ae-820c-adac21194395, owned by bob@local
+        ae673c19-73ef-437f-8224-4842a1772bdf, owned by mary@local
+        Please specify either the model UUID or the owner to disambiguate.
+        ERROR multiple models matched
   
   You can specify either the model UUID like this:
   
-  $ juju use-model cb4b94e8-29bb-44ae-820c-adac21194395
+        $ juju use-model cb4b94e8-29bb-44ae-820c-adac21194395
   
   Or, specify the owner:
   
-  $ juju use-model mary@local/test
+        $ juju use-model mary@local/test
   
   Since '@local' is the default for users, this can be shortened to:
   
-  $ juju use-model mary/test
+        $ juju use-model mary/test
   
   
   See Also:
@@ -5228,9 +5242,9 @@ Click on the expander to see details for each command.
 
   #### usage:
 
-  ```no-highlight
-  juju version [options]
-  ```
+  
+        juju version [options]
+  
 
   #### purpose:
 
