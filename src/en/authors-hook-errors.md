@@ -1,4 +1,4 @@
-Title: Dealing with errors encountered by charm hooks
+Title: Dealing with errors encountered by charm hooks  
 
 # Hook errors
 

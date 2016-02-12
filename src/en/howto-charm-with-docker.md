@@ -1,3 +1,5 @@
+Title: Using Docker in charms  
+
 # Charming with Docker
 
 You have a Docker container and you heard about Juju. Juju can deploy your
@@ -204,7 +206,7 @@ installed and configured. The install_nginx function sets the state
 def install_nginx():
     '''
     Default to only pulling the image once. A forced upgrade of the image is
-    planned later. Updating on every run may not be desireable as it can leave
+    planned later. Updating on every run may not be desirable as it can leave
     the service in an inconsistent state.
     '''
     if reactive.is_state('nginx.available'):

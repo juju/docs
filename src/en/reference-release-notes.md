@@ -1,6 +1,6 @@
-Title: Juju Release Notes
+Title: Juju Release Notes  
 
-# History
+# Release Notes History
 
 This section details all the available release notes for the stable series of
 `juju-core`.

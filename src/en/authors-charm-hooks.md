@@ -1,3 +1,5 @@
+Title: Charm hooks  
+
 # Charm hooks
 
 A service unit's direct action is entirely defined by its charm's hooks. Hooks

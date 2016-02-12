@@ -1,4 +1,4 @@
-Title: Implementing leadership in Juju charms
+Title: Implementing leadership in Juju charms  
 
 # Leadership for the Charm author
 
@@ -94,7 +94,7 @@ This is necessary, as it is for relation data, because a hook context needs
 to present *consistent* data; but it means that there's a small extra burden
 on users of `leader-set`.
 
-# Leadership HowTo's
+# Leadership howtos 
 
 ### How do I...
 

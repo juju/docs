@@ -1,4 +1,4 @@
-Title: Managing Juju
+Title: Managing Juju  
 
 
 # Managing Juju

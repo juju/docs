@@ -1,4 +1,4 @@
-Title: Getting started with Juju
+Title: Getting started with Juju  
 
 
 # Introduction
@@ -148,8 +148,8 @@ juju add-relation wordpress mysql
 
 This command uses information provided by the relevant charms to associate these
 services with each other in whatever way makes sense. There is much more to be
-said about linking services together which is covered in the Juju command
-documentation, but for the moment, we just need to know that it will link these
+said about linking services together which is covered in the Juju [command
+documentation](commands.html), but for the moment, we just need to know that it will link these
 services together.
 
 In order to make our WordPress public, we now need to expose this service:

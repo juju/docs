@@ -1,7 +1,7 @@
-Title: Using storage with Juju charms
-TODO: LXC/local caveat needs editing or removing
-      Commands need updating for 2.0
-      Storage commands need more examples/usage
+Title: Using storage with Juju charms  
+TODO: LXC/local caveat needs editing or removing  
+      Commands need updating for 2.0  
+      Storage commands need more examples/usage  
 
 # Using Juju Storage
 

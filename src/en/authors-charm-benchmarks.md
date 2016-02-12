@@ -1,4 +1,4 @@
-Title: Benchmarking Juju Services
+Title: Benchmarking Juju services  
 
 # Overview
 

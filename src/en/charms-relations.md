@@ -1,4 +1,5 @@
-Title: Managing Relationships
+Title: Managing relationships  
+
 # Managing Relationships
 
 Few services you might want to run can do so completely independently - most of

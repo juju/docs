@@ -1,3 +1,5 @@
+Title: Machine constraints  
+
 # Machine Constraints
 
 Machine constraints allow you to choose the hardware to which your services will
@@ -18,7 +20,7 @@ constraint, with one exception:
 
   - An empty value always means "not constrained". This allows you to ignore
     environment settings at the service level without having to explicitly
-    remember and re-set the juju default values. Note that there is no way to
+    remember and reset the juju default values. Note that there is no way to
     change the juju default values, though environment settings will override
     them.
 

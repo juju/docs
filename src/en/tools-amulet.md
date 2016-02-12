@@ -1,3 +1,5 @@
+Title: Amulet  
+
 # Amulet, a testing harness
 
 Amulet is a set of tools designed to simplify the testing process for charm

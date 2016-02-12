@@ -1,4 +1,4 @@
-Title: Best Practice for Charm Authors
+Title: Best practice for charm authors  
 
 # Best Practice for Charm Authors
 

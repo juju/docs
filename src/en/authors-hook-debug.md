@@ -1,4 +1,4 @@
-Title: Debugging Juju charm hooks
+Title: Debugging Juju charm hooks   
 
 # Debugging hooks
 

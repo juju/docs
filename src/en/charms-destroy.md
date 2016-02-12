@@ -1,4 +1,4 @@
-Title: Removing services, units and environments in Juju
+Title: Removing services, units and environments in Juju  
 
 
 # Removing services, units and environments

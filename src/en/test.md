@@ -1,4 +1,4 @@
-Title: Test
+Title: Markdown rendering test  
 
 #Rendering test page
 

@@ -1,4 +1,4 @@
-Title: Configuring Juju for Joyent Cloud 
+Title: Configuring Juju for Joyent Cloud  
 
 # Configuring for Joyent Cloud 
 

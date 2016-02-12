@@ -1,4 +1,4 @@
-Title: How to configure Juju to manage multiple environments
+Title: How to configure Juju to manage multiple environments  
 
 # The Juju Environment System
 

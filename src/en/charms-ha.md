@@ -1,4 +1,4 @@
-Title: Ensuring High Availability (HA) for deployed services
+Title: Ensuring High Availability (HA) for deployed services  
 
 
 # Service High Availability (HA)

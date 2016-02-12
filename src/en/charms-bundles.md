@@ -1,4 +1,5 @@
-Title: Creating and using Bundles
+Title: Creating and using bundles  
+
 # Creating and using Bundles
 
 A Bundle is a set of services with a specific configuration and their
@@ -204,7 +205,7 @@ and named according to the following rules.
 
     **Tip:** You should review the configuration options for the charms you are
     planning to use in a bundle, some of them generate passwords for services or
-    might need configuration as a separate step. This may or may not be desireable
+    might need configuration as a separate step. This may or may not be desirable
     for users, so if there are any extra steps required document them in your
     README.md file.
 

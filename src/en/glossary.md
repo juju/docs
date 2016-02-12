@@ -1,3 +1,5 @@
+Title: Glossary  
+
 # Glossary of terms
 
 **Bootstrap** - Initialize a Juju environment so that services may be deployed.

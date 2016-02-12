@@ -1,4 +1,4 @@
-Title: Contributing to Juju docs
+Title: Contributing to Juju docs  
 
 # Contributing to Juju documentation
 

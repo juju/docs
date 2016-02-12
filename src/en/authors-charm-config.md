@@ -1,4 +1,4 @@
-Title:Creating config.yaml and configuring charms
+Title: Creating config.yaml and configuring charms  
 
 # Charm configuration
 
