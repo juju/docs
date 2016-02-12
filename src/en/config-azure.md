@@ -63,7 +63,7 @@ therefore be easier to perform this on a graphical desktop.
 ## Configure and bootstrap
 
 If this is a new Juju install then you do not yet have a
-`~/.juju/environments.yaml` file. Create one with
+`~/.local/share/juju/environments.yaml` file. Create one with
 
 ```bash
 juju generate-config
