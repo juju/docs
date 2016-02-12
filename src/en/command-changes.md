@@ -21,51 +21,52 @@ TODO: Add new commands
 | juju api-endpoints		       | deprecated (see [show-model][show-model])|
 | juju api-info                        | deprecated (see [show-model][show-model])|
 | juju authorised-keys add             | `juju add-ssh-key`                 |
-| juju authorised-keys delete          |                                    |
-| juju authorised-keys import          |                                    |
-| juju authorised-keys list            |                                    |
-| juju backups create                  |                                    |
-| juju backups download                |                                    |
-| juju backups info                    |                                    |
-| juju backups list                    |                                    |
-| juju backups remove                  |                                    |
-| juju backups restore                 |                                    |
-| juju backups upload                  |                                    |
-| juju block all-changes               |                                    |
-| juju block destroy-model             |                                    |
-| juju block list                      |                                    |
-| juju block remove-object             |                                    |
-| juju cached-images delete            |                                    |
-| juju cached-images list              |                                    |
-| juju debug-hooks                     |                                    |
-| juju debug-log                       |                                    |
-| juju destroy-environment             |                                    |
-| juju destroy-relation                |                                    |
-| juju destroy-service                 |                                    |
-| juju destroy-unit                    |                                    |
-| juju ensure-availability             |                                    |
-| juju environment get                 |                                    |
-| juju environment retry-provisioning  |                                    |
-| juju environment set                 |                                    |
-| juju environment unset               |                                    |
-| juju expose                          |                                    |
+| juju authorised-keys delete          | `juju remove-ssh-key`              |
+| juju authorised-keys import          | `juju import-ssh-key`              |
+| juju authorised-keys list            | `juju list-ssh-key`                |
+| juju backups create                  | `juju create-backup`               |
+| juju backups download                | `juju download-backup`             |
+| juju backups info                    | `juju show-backup`                 |
+| juju backups list                    | `juju list-backup`                 |
+| juju backups remove                  | `juju remove-backup`               |
+| juju backups restore                 | `juju restore-backup`              |
+| juju backups upload                  | `juju upload-backup`               |
+| juju block all-changes               | `juju disable-command`             |
+| juju block destroy-model             | `juju disable-command`             |
+| juju block list                      | `juju list-disable-commands`       |
+| juju block remove-object             | `juju disable-command`             |
+| juju bootstrap                       | UNCHANGED                          |
+| juju cached-images delete            | `juju remove-cached-image`         |
+| juju cached-images list              | `juju list-cached-images`          |
+| juju debug-hooks                     | UNCHANGED                          |
+| juju debug-log                       | UNCHANGED                          |
+| juju destroy-environment             | `juju destroy-model`               |
+| juju destroy-relation                | `juju remove-relation`             |
+| juju destroy-service                 | `juju remove-service`              |
+| juju destroy-unit                    | `juju remove-unit`                 |
+| juju ensure-availability             | `juju enable-ha`  (to enable)      |
+| juju ensure-availability             | `juju restore-ha` (to restore)     |
+| juju environment retry-provisioning  | `juju retry-machine`               |
+| juju environment set                 | `juju set-model-config`            |
+| juju environment unset               | `juju set-model-config --default`  |
+| juju expose                          | UNCHANGED                          |
 | juju generate-config                 | deprecated ([see config docs][init])|
-| juju get                             |                                    |
-| juju get-constraints                 |                                    |
-| juju get-environment                 |                                    |
-| juju help                            |                                    |
-| juju help tool                       |                                    |
+| juju get                             | `juju get-config`                  |
+| juju get-constraints                 | UNCHANGED                          |
+| juju get-environment                 | deprecated                         |
+| juju help                            | UNCHANGED                          |
+| juju help tool                       | `juju list-hook-tools`             |
 | juju init                            | deprecated ([see config docs][init])|
-| juju list-payloads                   |                                    |
-| juju machine add                     |                                    |
-| juju machine remove                  |                                    |
+| juju list-payloads                   | UNCHANGED                          |
+| juju machine add                     | `juju add-machine`                 |
+| juju machine remove                  | `juju remove-machine`             |
 | juju publish                         | deprecated ([see docs on publishing charms][charm-publishing])|
-| juju remove-machine                  |                                    |
-| juju remove-relation                 |                                    |
-| juju remove-service                  |                                    |
-| juju remove-unit                     |                                    |
-| juju resolved                        |                                    |
-| juju retry-provisioning              |                                    |
+| juju remove-machine                  | UNCHANGED                          |
+| juju remove-relation                 | UNCHANGED                          |
+| juju remove-service                  | UNCHANGED                          |
+| juju remove-unit                     | UNCHANGED                          |
+| juju resolved                        | `juju set-resolved` (see also `retry-hook`)|
+| juju retry-provisioning              | `juju retry-machine`               |
 | juju service add-unit                |                                    |
 | juju service get                     |                                    |
 | juju service get-constraints         |                                    |
