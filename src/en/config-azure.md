@@ -1,4 +1,4 @@
-Title: Configuring Microsoft Azure
+Title: Configuring for Microsoft Azure
 TODO: Decide on what to do with provider-specific features (e.g. placement).  
 
 
