@@ -1,12 +1,7 @@
-Title: Juju Azure provider  
+Title: Configuring for Microsoft Azure
 
 
-# Configuring for Azure 
-
-The default behaviour is for units of a service to be allocated to
-machines in a service-specific Availability Set. Read the
-[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
-availability sets affect uptime guarantees.
+# Configuring for Microsoft Azure 
 
 !!! Warning: Azure has two concurrent UI versions: the older "classic" console
 (https://manage.windowsazure.com) and the "new" console
@@ -14,14 +9,14 @@ availability sets affect uptime guarantees.
 available in the classic portal.
 
 
-## Prerequisites and installation of Juju
+## Prerequisites
 
  - An Azure account is required. See http://azure.microsoft.com.
 
  - An SSL/TLS certificate, either an existing one or a new one, will be needed to
    communicate with Azure.
 
- - The Juju stable PPA is needed.
+ - Juju 1.25 (or greater) is needed for [storage support](./storage.html).
 
  - The Juju client (the host running the below commands) will need the ability
    to contact the Azure infrastructure on TCP ports 22 and 17070.
@@ -75,17 +70,6 @@ At the bottom there is an 'Upload' icon.  Use it to upload the certificate
 (`juju-azure.cer`).
 
 
-## Software installation
-
-Proceed to install the software.
-
-```bash
-sudo apt-add-repository -y ppa:juju/stable
-sudo apt-get update
-sudo apt-get install -y juju-core
-```
-
-
 ## Configure and bootstrap
 
 If this is a new Juju install then you do not yet have a
@@ -95,10 +79,9 @@ If this is a new Juju install then you do not yet have a
 juju generate-config
 ```
 
-If it does exist (but it was created with an older version of Juju), first move
-it out of the way (back it up) and *then* generate a new one. Alternatively,
-you can output a generic file to screen (STDOUT) and paste the Azure parts into
-your existing file:
+If it does exist first move it out of the way (back it up) and *then* generate
+a new one. Alternatively, you can output a generic file to screen (STDOUT) and
+paste the Azure parts into your existing file:
 
 ```bash
 juju generate-config --show
@@ -127,16 +110,11 @@ take note of its `subscription ID`. This is the value to be used for
 ### `storage-account-name`
 
 First create a *storage account*. In the left pane, scroll down to 'Storage'
-and press the **+ NEW** icon in the bottom-left. An overlay page will appear.
-Click 'Quick Create' and fill in a value in the 'URL' field (e.g. `jujuazure`).
-This is the value to be used for `storage-account-name`.
+and press the **+ NEW** icon (bottom-left). An overlay page will appear. Click
+'Quick Create' and fill in the 'URL' field (e.g. `jujuazure`). This is the
+value to be used for `storage-account-name`.
 
 ![azure_storage account_creation](media/config-azure-stable_storage.png)
-
-!!! Note: Once you bootstrap an Azure affinity group (e.g. `juju-azure-ag`)
-will appear in this list if you ever come back to it. See
-[stackoverflow.com: "Azure Availability Set vs Affinity Group"](http://stackoverflow.com/questions/25472549/azure-availability-set-vs-affinity-group)
-for context.
 
 ### `location`
 
@@ -153,6 +131,12 @@ UI. Choose one that is closest to you:
 For insight into the 'Replication' field see
 [Azure storage redundancy documentation](https://azure.microsoft.com/documentation/articles/storage-redundancy)
 .
+
+!!! Note: Once you bootstrap Juju, an Azure affinity group (e.g.
+`juju-azure-ag`) will appear in this list if you ever come back to it. See
+[stackoverflow.com: "Azure Availability Set vs Affinity
+Group"](http://stackoverflow.com/questions/25472549/azure-availability-set-vs-affinity-group)
+for context.
 
 ### `management-certificate-path`
 
@@ -172,7 +156,7 @@ this example would look like this (comments removed for simplicity):
         location: Central US
         storage-account-name: jujuazure
         management-subscription-id: f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
-	management-certificate-path: /home/ubuntu/.juju/juju-azure.pem
+        management-certificate-path: /home/ubuntu/.juju/juju-azure.pem
 ```
 
 Finally, switch to the Azure provider and bootstrap:
@@ -189,6 +173,11 @@ under 'Virtual Machines' in the left pane:
 
 
 ## Additional notes
+
+The default behaviour is for units of a service to be allocated to
+machines in a service-specific Availability Set. Read the
+[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
+availability sets affect uptime guarantees.
 
 See [General configuration options](https://jujucharms.com/docs/stable/config-general)
 for additional and advanced customization of your environment.
