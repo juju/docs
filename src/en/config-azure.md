@@ -1,8 +1,8 @@
-Title: Juju Azure provider  
+Title: Configuring for Microsoft Azure
 TODO: Decide on what to do with provider-specific features (e.g. placement).  
 
 
-# Configuring for Azure 
+# Configuring for Microsoft Azure 
 
 The new Azure provider is backwards compatible with the previous provider but
 supports several additional features, in particular, support for unit placement
@@ -18,11 +18,11 @@ use the new provider support, you must bootstrap a new model with new
 configuration. There is no automated migration method.
 
 
-# Prerequisites and installation of Juju and the Azure CLI tool
+## Prerequisites and the Azure CLI tool
 
  - An Azure account is required. See http://azure.microsoft.com.
 
- - The Juju devel PPA (may change) is needed.
+ - Juju 2.0 (or greater) is needed.
 
  - The Azure CLI tool is used to both gather information and to perform
    necessary actions.
@@ -30,16 +30,15 @@ configuration. There is no automated migration method.
  - The Juju client (the host running the below commands) will need the ability
    to contact the Azure infrastructure on TCP ports 22 and 17070.
 
-Proceed to install the software.
+
+## Azure CLI tool installation
+
+Proceed to install the software:
 
 ```bash
-sudo apt-add-repository -y ppa:juju/devel
-sudo apt-get update
-sudo apt-get install -y juju-core nodejs-legacy npm
+sudo apt-get install -y nodejs-legacy npm
 sudo npm install -g azure-cli
 ```
-
-## Azure CLI tool preliminaries
 
 The Azure CLI tool gets installed here:
 
@@ -61,28 +60,24 @@ You will be prompted to visit a website to enter the provided code. It will
 therefore be easier to perform this on a graphical desktop.
 
 
-# Configuring for Microsoft Azure
+## Configure and bootstrap
 
 If this is a new Juju install then you do not yet have a
-`~/.juju/environments.yaml` file. Create one with
+`~/.local/share/juju/environments.yaml` file. Create one with
 
 ```bash
 juju generate-config
 ```
 
-If it does exist (but it was created with an older version of Juju), first move
-it out of the way (back it up) and *then* generate a new one. Alternatively,
-you can output a generic file to screen (STDOUT) and paste the Azure parts into
-your existing file:
+If it does exist first move it out of the way (back it up) and *then* generate
+a new one. Alternatively, you can output a generic file to screen (STDOUT) and
+paste the Azure parts into your existing file:
 
 ```bash
 juju generate-config --show
 ```
 
 The file will contain a section for the Azure provider.
-
-
-## Configure and bootstrap
 
 Values will need to be found for the following parameters:
 
@@ -113,13 +108,11 @@ azure account list
 Sample output:
 
 ```no-highlight
----------------------------------------
 info:    Executing command account list
 data:    Name        Id                                    Current  State
 data:    ----------  ------------------------------------  -------  -------
 data:    Free Trial  f717c8c1-8e5e-4d38-be7f-ed1e1c879e18  true     Enabled
 info:    account list command OK
----------------------------------------
 ```
 
 The subscription ID can now be stored in a local environment variable, by
@@ -205,6 +198,9 @@ azure login \
 	--tenant "$TENANT_ID"
 ```
 
+
+## Confirm configuration and bootstrap
+
 According to all the above, the Azure section of file `environments.yaml` for
 this example would look like this (comments removed for simplicity):
 
@@ -232,7 +228,7 @@ A successful bootstrap will result in the controller being visible in the
 ![bootstrap machine 0 in Azure portal](media/azure_portal-machine_0.png)
 
 
-# Additional notes
+## Additional notes
 
 See [General configuration options](https://jujucharms.com/docs/stable/config-general)
 for additional and advanced customization of your environment.
