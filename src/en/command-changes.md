@@ -1,6 +1,5 @@
 Title: Command changes 1.x to 2.0  
-TODO: Add new commands   
-      Add completely new commands  
+TODO: Add completely new commands  
 
 # Command changes from 1.25 to 2.0
 
@@ -59,7 +58,7 @@ TODO: Add new commands
 | juju init                            | deprecated ([see config docs][init])|
 | juju list-payloads                   | UNCHANGED                          |
 | juju machine add                     | `juju add-machine`                 |
-| juju machine remove                  | `juju remove-machine`             |
+| juju machine remove                  | `juju remove-machine`              |
 | juju publish                         | deprecated ([see docs on publishing charms][charm-publishing])|
 | juju remove-machine                  | UNCHANGED                          |
 | juju remove-relation                 | UNCHANGED                          |
@@ -67,49 +66,47 @@ TODO: Add new commands
 | juju remove-unit                     | UNCHANGED                          |
 | juju resolved                        | `juju set-resolved` (see also `retry-hook`)|
 | juju retry-provisioning              | `juju retry-machine`               |
-| juju service add-unit                |                                    |
-| juju service get                     |                                    |
-| juju service get-constraints         |                                    |
-| juju service help                    |                                    |
-| juju service set                     |                                    |
-| juju service set-constraints         |                                    |
-| juju service unset                   |                                    |
-| juju set-constraints                 |                                    |
-| juju set-environment                 |                                    |
+| juju service add-unit                | `juju add-unit`                    |
+| juju service get                     | `juju get-config`                  |
+| juju service get-constraints         | `juju get-constraints`             |
+| juju service help                    | deprecated                         |
+| juju service set                     | `juju set-config`                  |
+| juju service set-constraints         | `juju set-constraints`             |
+| juju service unset                   | deprecated (use `juju set-config --default`)|
+| juju set-constraints                 | `juju set-constraints`             |
+| juju set-environment                 | deprecated                         |
 | juju ssh                             | UNCHANGED                          |
-| juju status                          | UNCHANGED                          |
-| juju status-history                  |                                    |
-| juju space create                    |                                    |
-| juju space help                      |                                    |
-| juju space list                      |                                    |
-| juju storage add                     |                                    |
-| juju storage filesystem              |                                    |
-| juju storage help                    |                                    |
-| juju storage list                    |                                    |
-| juju storage pool                    |                                    |
-| juju storage show                    |                                    |
-| juju storage volume                  |                                    |
-| juju subnet add                      |                                    |
-| juju subnet help                     |                                    |
-| juju subnet list                     |                                    |
+| juju status                          | UNCHANGED (now defaults to tabular format)|
+| juju status-history                  | `juju show-status-log`             |
+| juju space create                    | `juju add-space`                   |
+| juju space list                      | `juju list-space`                  |
+| juju storage add                     | `juju add-storage`                 |
+| juju storage filesystem              | deprecated                         |
+| juju storage list                    | `juju list-storage`                |
+| juju storage pool                    | `juju list pools`, `juju add-pool` |
+| juju storage show                    | `juju show-storage`                |
+| juju storage volume                  | deprecated                         |
+| juju subnet add                      | `juhu add-subnet`                  |
+| juju subnet list                     | `juju list-subnet`                 |
 | juju switch                          | UNCHANGED                          |
 | juju sync-tools                      | deprecated                         |
-| juju terminate-machine               |                                    |
-| juju unblock all-changes             |                                    |
-| juju unblock destroy-environment     |                                    |
-| juju unblock remove-object           |                                    |
-| juju unset                           |                                    |
-| juju unset-env                       |                                    |
-| juju unset-environment               |                                    |
-| juju upgrade-charm                   |                                    |
+| juju terminate-machine               | use `juju remove-machine`          |
+| juju unblock all-changes             | `juju enable-commands --all`       |
+| juju unblock destroy-environment     | `juju enable-commands --destroy-model`|
+| juju unblock remove-object           | `juju enable-command --remove-object`|
+| juju unexpose                        | UNCHANGED                          |
+| juju upgrade-charm                   | UNCHANGED                          |
+| juju unset                           | deprecated                         |
+| juju unset-env                       | deprecated                         |
+| juju unset-environment               | deprecated                         |
+| juju upgrade-charm                   | UNCHANGED                          |
 | juju upgrade-juju                    | UNCHANGED                          |
-| juju user add                        |                                    |
-| juju user change-password            |                                    |
-| juju user disable                    |                                    |
-| juju user enable                     |                                    |
-| juju user help                       |                                    |
-| juju user info                       |                                    |
-| juju user list                       |                                    |
+| juju user add                        | `juju add-user`                    |
+| juju user change-password            | `juju change-password`             |
+| juju user disable                    | `juju disable-user`                |
+| juju user enable                     | `juju enable-user`                 |
+| juju user info                       | `juju show-user`                   |
+| juju user list                       | `juju list-user`                   |
 | juju version                         | UNCHANGED                          |
 
 
