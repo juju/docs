@@ -11,6 +11,7 @@ what are the new features? What has changed?
 This page will give you an overview of the significant changes that you really
 need to know about before you do anything else, followed by a short guide to 
 upgrading your existing Juju client and deployments to the very latest version.
+You can also review the [complete release notes here](./temp-release-notes.md).
 
  - **Commands:** Probably the most immediate change you will come across is that
 practically every command has changed! Really! Significant work has been done to
