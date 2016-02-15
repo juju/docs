@@ -16,8 +16,6 @@ available in the classic portal.
  - An SSL/TLS certificate, either an existing one or a new one, will be needed to
    communicate with Azure.
 
- - Juju 1.25 (or greater) is needed for [storage support](./storage.html).
-
  - The Juju client (the host running the below commands) will need the ability
    to contact the Azure infrastructure on TCP ports 22 and 17070.
 
@@ -120,11 +118,8 @@ value to be used for `storage-account-name`.
 
 In the same dialog, select a 'Location/Affinity Group'.
 
-If you intend to use [storage support](./storage.html) then this value and the
-value you provide the `location` paramter must be the same. Failure to do so
-will result in storage being used local to the Juju machine where the charm is
-being run. Note that there is a limited set of regions available in the Azure
-UI. Choose one that is closest to you:
+Note that there is a limited set of regions available in the Azure UI. Choose
+one that is closest to you:
 
 ![azure_storage_region_dropdown](media/config-azure-stable_storage_locations_dropdown.png)
 
