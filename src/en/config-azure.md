@@ -1,123 +1,178 @@
-# Configuring for Windows Azure
+Title: Configuring for Microsoft Azure
 
-This process requires you to have a Windows Azure account. If you have not
-signed up for one yet, it can obtained at http://azure.microsoft.com/en-us/.
 
-You should start by generating a generic configuration file for Juju, using the
-command:
+# Configuring for Microsoft Azure 
+
+!!! Warning: Azure has two concurrent UI versions: the older "classic" console
+(https://manage.windowsazure.com) and the "new" console
+(https://portal.azure.com). The features necessary in this document are only
+available in the classic portal.
+
+
+## Prerequisites
+
+ - An Azure account is required. See http://azure.microsoft.com.
+
+ - An SSL/TLS certificate, either an existing one or a new one, will be needed to
+   communicate with Azure.
+
+ - The Juju client (the host running the below commands) will need the ability
+   to contact the Azure infrastructure on TCP ports 22 and 17070.
+
+### SSL/TLS certificate
+
+The certificate will be uploaded to Azure to enable the Juju client to
+authenticate (and communicate securely) using the associated private key.
+
+Certificate creation is dependant on platform. Below, the *openssl* command
+on Ubuntu is used to create a
+[self-signed certificate](https://en.wikipedia.org/wiki/Self-signed_certificate).
+
+During the creation process, you will be prompted for some information
+(country, state, location, organisation, and common name). 'country' must be a
+valid 2-character value but the others are arbitrary.
+
+!!! Note: We recommend a meaningful name for 'common name' such as 'juju-azure'
+as this will become the "name" of the certificate.
+
+Create the key and certificate now:
+
+```bash
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+	-keyout juju-azure.pem -out juju-azure.pem
+openssl x509 -inform pem -in juju-azure.pem -outform der -out juju-azure.cer
+chmod 600 juju-azure.pem
+```
+
+The certificate is in file `juju-azure.cer` and the private key is in
+`juju-azure.pem`.
+
+!!! Note: The PEM file (`juju-azure.pem`) actually contains both the private key
+and the certificate.
+
+Copy the PEM file to where Juju can find it:
+
+```bash
+cp juju-azure.pem /home/ubuntu/.juju
+```
+
+#### Upload certificate to Azure
+
+Log in to the classic console at https://manage.windowsazure.com and in the
+left pane, scroll down and select 'Settings'. Select the 'Management
+Certificates' tab in the right pane. 
+
+![azure_settings_and_certificates](media/config-azure-stable_settings_and_certificates.png)
+
+At the bottom there is an 'Upload' icon.  Use it to upload the certificate
+(`juju-azure.cer`).
+
+
+## Configure and bootstrap
+
+If this is a new Juju install then you do not yet have a
+`~/.juju/environments.yaml` file. Create one with
 
 ```bash
 juju generate-config
 ```
 
-This will generate a file, `environments.yaml`, which will live in your
-`~/.juju/` directory (and will create the directory if it doesn't already
-exist).
-
-**Note:** The above command will not overwrite your existing environments.yaml
-file, or output to stdout. In order to see the boilerplate environments.yaml on
-stdout you need to append the `--show` option. This is helpful if you have an
-existing environments.yaml and just need to add a section. For example:
+If it does exist first move it out of the way (back it up) and *then* generate
+a new one. Alternatively, you can output a generic file to screen (STDOUT) and
+paste the Azure parts into your existing file:
 
 ```bash
 juju generate-config --show
 ```
 
-You can then copy and paste the needed section.
+The file will contain a section for the Azure provider.
 
-The generic configuration sections generated for Windows Azure will look
-something like this:
+Values will need to be found for the following parameters:
+
+ - management-subscription-id
+ - storage-account-name
+ - location
+ - management-certificate-path
+
+Access the Classic Azure console (https://manage.windowsazure.com) again to
+gather the first three values.
+
+### `management-subscription-id`
+
+Enter 'Settings' again, find the appropriate subscription in the right pane, and
+take note of its `subscription ID`. This is the value to be used for
+`management-subscription-id`.
+
+![azure_settings_page](media/config-azure-stable_settings-page.png)
+
+### `storage-account-name`
+
+First create a *storage account*. In the left pane, scroll down to 'Storage'
+and press the **+ NEW** icon (bottom-left). An overlay page will appear. Click
+'Quick Create' and fill in the 'URL' field (e.g. `jujuazure`). This is the
+value to be used for `storage-account-name`.
+
+![azure_storage account_creation](media/config-azure-stable_storage.png)
+
+### `location`
+
+In the same dialog, select a 'Location/Affinity Group'.
+
+Note that there is a limited set of regions available in the Azure UI. Choose
+one that is closest to you:
+
+![azure_storage_region_dropdown](media/config-azure-stable_storage_locations_dropdown.png)
+
+For insight into the 'Replication' field see
+[Azure storage redundancy documentation](https://azure.microsoft.com/documentation/articles/storage-redundancy)
+.
+
+!!! Note: Once you bootstrap Juju, an Azure affinity group (e.g.
+`juju-azure-ag`) will appear in this list if you ever come back to it. See
+[stackoverflow.com: "Azure Availability Set vs Affinity
+Group"](http://stackoverflow.com/questions/25472549/azure-availability-set-vs-affinity-group)
+for context.
+
+### `management-certificate-path`
+
+The value of this parameter is the file path of the private key (and
+certificate) stored in the PEM file created earlier:
+`/home/ubuntu/.juju/juju-azure.pem`.
+
+
+## Confirm configuration and bootstrap
+
+According to all the above, the Azure section of file `environments.yaml` for
+this example would look like this (comments removed for simplicity):
 
 ```yaml
-# https://jujucharms.com/docs/config-azure.html
     azure:
         type: azure
-        # location specifies the place where instances will be started,
-        # for example: West US, North Europe.
-        #
-        location: West US
-        # The following attributes specify Windows Azure Management
-        # information. See:
-        # http://msdn.microsoft.com/en-us/library/windowsazure
-        # for details.
-        #
-        management-subscription-id: 00000000-0000-0000-0000-000000000000
-        management-certificate-path: /home/me/azure.pem
-        # storage-account-name holds Windows Azure Storage info.
-        #
-        storage-account-name: abcdefghijkl
-        # force-image-name overrides the OS image selection to use a fixed
-        # image for all deployments. Most useful for developers.
-        #
-        # force-image-name: b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-13_10-amd64-server-DEVELOPMENT-20130713-Juju_ALPHA-en-us-30GB
-        # image-stream chooses a simplestreams stream to select OS images
-        # from, for example daily or released images (or any other stream
-        # available on simplestreams).
-        #
-        # image-stream: "released"
+        location: Central US
+        storage-account-name: jujuazure
+        management-subscription-id: f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
+        management-certificate-path: /home/ubuntu/.juju/juju-azure.pem
 ```
 
-This is the configuration environments.yaml file needed to run on Windows Azure.
-You will need to set relevant values for options `management-subscription-id`,
-`management-certificate-path`, and `storage-account-name`.
-
-**Note:** Other than `location` the other key value defaults are recommended,
-but can be updated to your preference.
-
-**Note:** Ensure that `management-certificate-path` is set to use the .pem
-file, NOT the .cer file, doing so will result in an
-[out of memory error](https://bugs.launchpad.net/ubuntu/+source/juju-core/+bug/1250007).
-
-
-## Config Values
-
-Generate a new certificate for Juju usage (or use an existing one). Suggest to
-use a 'Common Name' with 'Juju' in it so it's obvious when viewed in the web UI
-later. On Ubuntu, run the following commands to generate a new certificate:
+Finally, switch to the Azure provider and bootstrap:
 
 ```bash
-openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout azure.pem -out azure.pem
-openssl x509 -inform pem -in azure.pem -outform der -out azure.cer
-chmod 600 azure.pem
+juju switch azure
+juju bootstrap --debug
 ```
 
-Log in to the Windows Azure console at
-[https://manage.windowsazure.com](https://manage.windowsazure.com). From there
-you can gather the following information:
+A successful bootstrap will result in the controller being visible in the Classic console
+under 'Virtual Machines' in the left pane:
 
-- **Settings** Left Navigation: get the `SUBSCRIPTION ID` of the account you
-  upload to. This will be used for the `management-subscription-id`
-- **Settings** Left Navigation: "upload" the MyCert.cer file above (if you
-  created one). This is the certificate you used for the
-  `management-certificate-path`
-- **Storage** Left Navigation:
-  - Click New (bottom left)
-  - Click Quick Create
-  - Add a name in url (for example `juju0useast0`). This is the value to be
-    used for `storage-account-name`.
-  - Select Location (for example: West US)
-  - Select Subscription
-  - Disable "Enable Geo-Replication" (not applicable)
-
-**Note:** You must create the storage account in the same region/location
-specified by the `location` key value. For example, if `location: West US` is
-set then `storage-account-name:` must also have a storage set up in `West US`.
-Failure to do so will result in a group affinity error.
-
-Edit `environments.yaml` according to the above configuration settings and save
-it to disk.
+![bootstrap machine 0 in Azure portal](media/config-azure-stable_machine_0.png)
 
 
-## Using Availability Sets
+## Additional notes
 
-With Azure, each Cloud Service has zero or more Availability Sets within it and
-a Role can be assigned to at most one of them. As long as there are at least
-two Roles in the same Availability Set, then Azure will guarantee at least
-99.95% availability under the Azure Service Level Agreement (SLA).
+The default behaviour is for units of a service to be allocated to
+machines in a service-specific Availability Set. Read the
+[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
+availability sets affect uptime guarantees.
 
-Juju creates a single Availability Set for each Cloud Service, and all Roles
-are added to it. Thus, all Juju-deployed services are, by default, covered by
-the Azure SLA.
-
-You can read more about
-[Azure Availability Sets](http://azure.microsoft.com/en-gb/documentation/articles/virtual-machines-manage-availability/).
+See [General configuration options](https://jujucharms.com/docs/stable/config-general)
+for additional and advanced customization of your environment.
