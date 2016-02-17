@@ -17,7 +17,7 @@ operational.
 Each charm will have its own set of options and possible values. You can
 discover these in several ways:
 
-  - By running the `juju-config` command.
+  - By running the `juju get-config` command.
   - By viewing the charm in the [charm store.](https://jujucharms.com)
   - By examining the **config.yaml** file in the charm itself.
 
