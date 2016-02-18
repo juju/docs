@@ -202,7 +202,7 @@ azure login \
 ## Confirm configuration and bootstrap
 
 According to all the above, the Azure section of file `environments.yaml` for
-this example would look like this (comments removed for simplicity):
+our example would look like this (comments removed for simplicity):
 
 ```yaml
     azure:
