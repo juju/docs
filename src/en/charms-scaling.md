@@ -182,7 +182,7 @@ remove multiple units in the same command:
 juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5
 ```
 !!! Note: the unit numbers may not necessarily be sequential, see the
-[notes on machine/unit numbering](./https://jujucharms.com/docs/stable/reference-numbering)
+[notes on machine/unit numbering](./reference-numbering)
 
 
 The `remove-unit` command can be run to remove running units safely. The
