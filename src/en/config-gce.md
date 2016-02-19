@@ -1,4 +1,4 @@
-Title: Juju GCE provider  
+Title: Configuring for the Google Compute Engine
 
 
 # Configuring for the Google Compute Engine 
@@ -10,7 +10,7 @@ launch virtual machines on demand. Juju can use GCE by communicating with it
 via API calls.
 
 
-# Prerequisites and installation
+## Prerequisites
 
  - A Google account is required. See http://google.com .
 
@@ -19,15 +19,8 @@ via API calls.
  - The Juju client (the host running the below commands) will need the ability
    to contact the GCE infrastructure on TCP ports 22 and 17070.
 
-Proceed to install the software.
 
-```bash
-sudo apt-get update
-sudo apt-get install -y juju-core
-```
-
-
-# Create a GCE project
+## Create a GCE project
 
 A separate GCE *project* is needed.
 
@@ -100,7 +93,7 @@ regenerated (although a new one can easily be created).
 Place this file where the Juju client can find it. This may or may not be on
 the computer you downloaded the file to. We recommend the `~/.juju` directory.
 For the current example, the file is called `Juju-GCE-f33a6cdbd8e3.json` (based
-on our project name of 'Juju-GCE'. Let it be put here:
+on our project name of 'Juju-GCE'). Let it be put here:
 
 `/home/ubuntu/.juju/Juju-GCE-f33a6cdbd8e3.json`
 
@@ -111,28 +104,24 @@ removing the sections containing these keywords: 'project-id', 'auth-uri',
 'token_uri', 'auth_provider_x509_cert_url', and 'client-x509-cert-url'.
 
 
-# Configuring for GCE
+## Configure
 
 If this is a new Juju install then you do not yet have a
-`~/.juju/environments.yaml` file. Create one with
+`~/.local/share/juju/environments.yaml` file. Create one with
 
 ```bash
 juju generate-config
 ```
 
-If it does exist (but it was created with an older version of Juju), first move
-it out of the way (back it up) and *then* generate a new one. Alternatively,
-you can output a generic file to screen (STDOUT) and paste the GCE parts into
-your existing file:
+If it does exist first move it out of the way (back it up) and *then* generate
+a new one. Alternatively, you can output a generic file to screen (STDOUT) and
+paste the GCE parts into your existing file:
 
 ```bash
 juju generate-config --show
 ```
 
 The file will contain a section for the GCE provider.
-
-
-## Configure and bootstrap
 
 Values will need to be found for the following parameters:
 
@@ -149,8 +138,11 @@ previously.
 The value of `project-id` is based on the name of the project you created earlier.
 Take it from the downloaded file.
 
-According to all the above, the GCE section of file `environments.yaml` for
-this example would look like this (comments removed for simplicity):
+
+## Confirm configuration and bootstrap
+
+According to all the above, the GCE section of file `environments.yaml` in our
+example would look like this (comments removed for simplicity):
 
 ```yaml
     gce:
@@ -172,13 +164,12 @@ A successful bootstrap will result in the controller being visible in the
 ![bootstrap machine 0 in GCE portal](./media/config-gce-gce_portal-machine_0.png)
 
 
-# Additional notes
+## Additional notes
 
 See [General configuration options](https://jujucharms.com/docs/stable/config-general)
 for additional and advanced customization of your environment.
 
-
-## Using the gcloud compute CLI tool
+### Using the gcloud compute CLI tool
 
 The *gcloud compute* tool is a CLI utility for querying and configuring a CGE
 account/project. It is not required nor sufficient for setting up Juju for GCE.
