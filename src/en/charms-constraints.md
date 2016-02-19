@@ -10,7 +10,7 @@ overriding environment constraints, the default values set by juju when
 otherwise unspecified. Changes to constraints do not affect any unit that has
 already been assigned to a machine.
 
-Constraint can be set by the `juju set-constraints` command, taking an optional
+Constraints can be set by the `juju set-constraints` command, taking an optional
 `--service` arg, and any number of `key=value` pairs. When the service name is
 specified, the constraints are set on that service; otherwise they are set on
 the environment.
