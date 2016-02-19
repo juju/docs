@@ -1,6 +1,6 @@
-Title: Configuring for Digital Ocean  
+Title: Configuring for DigitalOcean  
 
-# Configuring for Digital Ocean
+# Configuring for DigitalOcean
 
 !!! **Note:** This particular provider is in "beta" as it is developed by
 community member [Kapil Thangavelu](http://github.com/kapilt/juju-digitalocean)
@@ -42,7 +42,7 @@ exist).
 generate-config --show` to output the new config file, then copy and paste
 relevant areas in a text editor etc.
 
-You will need to add a section for Digital Ocean which will look like the
+You will need to add a section for DigitalOcean which will look like the
 following:
 
 ```yaml
@@ -54,15 +54,15 @@ following:
 ```
 
 
-This is a simple configuration intended to run on Digital Ocean. When
+This is a simple configuration intended to run on DigitalOcean. When
 bootstrapped, the tools will be served from the bootstrap-host on storage port
 8040.
 
 You will also need to obtain your account's `ClientID` and `APIKey` from the
 Apps & API page.
 
-![Digital Ocean Apps and API page v2 Listing](./media/getting_started_do_api_v2.png)
-![Digital Ocean Apps and API page v1 Listing](./media/getting_started_do_api_v1.png)
+![DigitalOcean Apps and API page v2 Listing](./media/getting_started_do_api_v2.png)
+![DigitalOcean Apps and API page v1 Listing](./media/getting_started_do_api_v1.png)
 
 You will additionally need to set your API Key and ID in your shell's rc files,
 for example append the following to `~/.bashrc`
@@ -81,9 +81,9 @@ source ~/.bashrc
 ## DigitalOcean configuration
 
 In order for Juju to access the nodes, you will need an SSH key populated
-within the Digital Ocean Control panel.
+within the DigitalOcean Control panel.
 
-![Digital Ocean SSH Key Listing](./media/getting_started_do_ssh_key.png)
+![DigitalOcean SSH Key Listing](./media/getting_started_do_ssh_key.png)
 
 
 ## Bootstrapping
@@ -95,7 +95,7 @@ commands issued will be performed against
 juju switch digitalocean
 ```
 
-To bootstrap a Digital Ocean environment, you will need to route the command
+To bootstrap a DigitalOcean environment, you will need to route the command
 through the docean plugin that we installed via `pip`.
 
 ```bash
@@ -140,7 +140,7 @@ This plugin accepts these standard Juju constraints:
 !!! **Note:** Additionally it supports the following provider specific
 constraints. **region** and **transfer**
 
-- region - to denote the Digital Ocean data centre to utilize. All Digital Ocean
+- region - to denote the DigitalOcean data centre to utilize. All DigitalOcean
   data centres are supported and various short hand aliases are defined. ie.
   valid values include ams2, nyc1, nyc2, sfo1, sg1. The plugin defaults to 'nyc2'.
 
