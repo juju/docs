@@ -1,6 +1,6 @@
 Title: Deploying node.js apps with Juju  
 
-#  Using Juju to Deploy your Node.js Application
+#  Using Juju to deploy your node.js application
 
 One of Juju's main use cases is to deploy your application directly out of
 version control and into a cloud. Since Juju supports local and remote clouds,
@@ -20,7 +20,7 @@ Before moving on you should have gone through the [Getting
 Started](https://jujucharms.com/docs/getting-started.html) section and
 installed and configured Juju.
 
-##  Basic Usage of the Node.js Charm
+##  Basic usage of the node.js charm
 
 First, create a configuration file `myapp.yaml` to add info about your app
 pointing to your github repo:
@@ -79,7 +79,7 @@ juju remove-unit myapp/9 myapp/8 myapp/7 myapp/6 myapp/5 myapp/4 myapp/3 myapp/2
 ```
 
 
-##  Local to Cloud Workflow
+##  Local to cloud workflow
 
 The previous example deploys your application quickly to the cloud, in this
 example we will show how to hack and test on an application locally on your
@@ -127,7 +127,7 @@ Now open up your browser and go to `http://localhost` to get your application
 loaded in your browser.
 
 
-###  Continuous Deployment
+###  Continuous deployment
 
 Continue to write your code, push to git as you land features and fixes. When
 you're ready to test it you can tell Juju to check the git repository again:
@@ -142,7 +142,7 @@ The charm will then fetch the latest code and you can refresh your browser at
 Repeat pushing to git and using the juju set command to keep a live instance of
 your application running in your local environment.
 
-###  Push to your Public/Private Cloud
+###  Push to your public/private cloud
 
 After you've repeatedly upgraded your application locally it's time to push it
 out to a place where your coworkers can see your app in all it's glory, let's
@@ -196,7 +196,7 @@ juju destroy-environment -e amazon
 juju destroy-environment -e local
 ```
 
-##  Charm Details
+##  Charm details
 
 This section is to explain how the charm works and is provided here as a
 reference.

@@ -1,6 +1,6 @@
 Title: Upgrading a charm  
 
-# Upgrade Charm
+# Upgrade charm
 
 A service's charm can be changed at runtime with the `upgrade-charm` command. By
 default, it changes to the latest available version of the same charm; if

@@ -1,6 +1,6 @@
 Title:Juju commands and usage
 
-# Juju Command reference
+# Juju command reference
 
 You can get a list of the currently used commands by entering
 ```juju help commands``` from the commandline. The currently understood commands

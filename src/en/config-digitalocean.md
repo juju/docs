@@ -78,7 +78,7 @@ then source the file so it's loaded in your current environment:
 source ~/.bashrc
 ```
 
-## DigitalOcean Configuration
+## DigitalOcean configuration
 
 In order for Juju to access the nodes, you will need an SSH key populated
 within the Digital Ocean Control panel.

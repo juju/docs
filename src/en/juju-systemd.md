@@ -44,7 +44,7 @@ be updated to enforce the above automatically.
   (`cloud-init`) to use upstart set `JUJU_DEV_FEATURE_FLAGS=legacy-upstart` in
   the Juju user's shell environment.
 
-- For the Local Provider (LXC):
+- For the local provider (LXC):
 
     - a Vivid host does not bootstrap under upstart. See
       [LP #1450092](https://bugs.launchpad.net/juju-core/+bug/1450092).

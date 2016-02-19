@@ -1,8 +1,8 @@
 Title: Creating and using bundles  
 
-# Creating and using Bundles
+# Creating and using bundles
 
-A Bundle is a set of services with a specific configuration and their
+A bundle is a set of services with a specific configuration and their
 corresponding relations that can be deployed together in a single step.
 Instead of deploying a single service, they can be used to deploy an entire
 workload, with working relations and configuration. The use of bundles allows
@@ -176,7 +176,7 @@ other than "0", which is used to represent the bootstrap node.  Leaving the
 machine specification out of your bundle tells Juju to place units on new
 machines if no placement directives are given.
 
-## Sharing your Bundle with the Community
+## Sharing your bundle with the community
 
 Bundles are shared by putting a branch onto Launchpad with specific naming
 which will then be pulled into the Charm Store. The branch must be constructed
@@ -229,7 +229,7 @@ Freenode) who can assist. You can also use the
 [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
 
 
-## Deploying a Bundle from the Charm Store with the GUI
+## Deploying a bundle from the charm store with the GUI
 
 To deploy a bundle from the Charm Store using the GUI, first find the bundle
 you wish to deploy via search or browsing the bundles to the left. To view

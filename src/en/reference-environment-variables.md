@@ -10,7 +10,7 @@ Use header tags so we can link to these variables individually.
 
 # Environment Variables
 
-## Juju Client
+## Juju client
 
 These variables are available on the juju client in order to change its default
 behavior.
@@ -223,7 +223,7 @@ JUJU_UNIT_NAME=vanilla/0
 ```
 
 
-# Internal Use only
+# Internal use only
 
 #### JUJU_DUMMY_DELAY
 #### JUJU_NOTEST_MONGOJS

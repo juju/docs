@@ -1,6 +1,6 @@
 Title: Charm store policy  
 
-# Charm Store Policy
+# Charm store policy
 
 This document serves to record the policies around charms and bundles included
 in the charm store, and the management of said collection. Charms and bundles in
@@ -58,7 +58,7 @@ policy the charm will undergo the
 confirms the charm is no longer being maintained, fails to adhere to Charm Store
 policy, and thus is removed from the recommended status in the Juju Charm Store. 
 
-# Charm Metadata
+# Charm metadata
 
 ## metadata.yaml
 

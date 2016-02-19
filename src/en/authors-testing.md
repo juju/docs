@@ -1,6 +1,6 @@
 Title: Testing Juju charms  
 
-# Charm Testing
+# Charm testing
 
 Juju has been designed from the start to foster a large collection of "charms".
 Charms are expected to number in the thousands, and be self contained, with 
@@ -35,7 +35,7 @@ be the focus of an implementation.
 
 Note that this requirement is already satisfied by [Mark Mims' jenkins tester](https://github.com/mmm/charmtester/).
 
-## Phase 2 - Charm Specific tests
+## Phase 2 - charm specific tests
 
 Charm authors will have the best insight into whether or not a charm is working
 properly.
@@ -92,7 +92,7 @@ things to test in each charm beyond install/start is:
 - Adding multiple units to a web app charm and relating to a load balancer 
   results in the same HTML on both units directly and the load balancer.
 
-### Exit Codes
+### Exit codes
 
 Upon exit, the test's exit code will be evaluated to mean the following:
 
@@ -116,9 +116,9 @@ contents of files are to be logged, the contents should be preceded by `INFO:
 BEGIN filename`, where filename is a logical name unique to this run of the
 test, and then the file ended with `INFO: END filename`.
 
-### Example Tests
+### Example tests
 
-#### Deploy requirements and Poll
+#### Deploy requirements and poll
 
 The test below deploys mediawiki with mysql and memcached related to it, and 
 then tests to make sure it returns a page via http with `<title>` somewhere 
@@ -252,7 +252,7 @@ Juju core to allow such things to be made into plugins. Until then, it can be
 included in each test dir that uses it, or we can build a package of tools 
 that are common to tests.
 
-## Test Runner
+## Test runner
 
 A test runner will periodically poll the collection of charms for changes since
 the last test run. If there have been changes, the entire set of changes will

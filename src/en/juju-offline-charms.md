@@ -1,6 +1,6 @@
 Title: Deploying charms offline  
 
-# Deploying Charms Offline
+# Deploying charms offline
 
 Many private clouds have no direct access to the internet due to security
 reasons.
@@ -14,7 +14,7 @@ guarantee that a charm will work in a disconnected state. Some charms
 pull code from the outside world, such as github. We recommend modifying
 these charms to pull code from an internal server when appropriate.
 
-## Retrieving charms using the Charm Tools
+## Retrieving charms using the charm tools package
 
 ### Installation
 
@@ -27,11 +27,11 @@ sudo apt-get update && sudo apt-get install charm-tools
 
 ### Usage
 
-The Charm Tools comes packaged as both a stand alone tool and a juju plugin.
+The charm tools come packaged as both a stand alone tool and a Juju plugin.
 So you simply can call it with `charm` or as usual for Juju commands with
 `juju charm`.
 
-There are several tools available within the Charm Tools itself. At any time
+There are several tools available within the charm-tools package itself. At any time
 you can run `juju charm` to view the available subcommands and all subcommands
 have independent help pages, accessible using either the `-h` or `--help` flags.
 

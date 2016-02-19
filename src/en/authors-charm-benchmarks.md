@@ -12,7 +12,7 @@ to identify bottlenecks and test configuration changes so that you can get the
 most out of your computing dollar.
 
 
-# Benchmark Execution Methods
+# Benchmark execution methods
 
 There are three ways to execute benchmarks in Juju and the nature of the
 benchmark will determine which method to use:
@@ -28,7 +28,7 @@ benchmark will determine which method to use:
       services.
 
 
-## Integrated into a Service Charm
+## Integrated into a service charm
 
 With this method, we add a *benchmark-enabled* action to a charm.
 
@@ -103,7 +103,7 @@ for instance, is a subordinate charm that can run against any related
 MySQL-compatible database, such as MySQL, Percona, and MariaDB.
 
 
-# Anatomy of a Benchmark
+# Anatomy of a benchmark
 
 ## charm-benchmark
 
@@ -113,7 +113,7 @@ commands from any language. For usage see the
 [charm-benchmark documentation](http://charm-benchmark.readthedocs.org/en/latest/).
 
 
-## How to Write a Benchmark
+## How to write a benchmark
 
 Benchmarks are simply *Juju Actions* that follow a specific pattern. For
 example, here's what `actions/load-gen` might look like:

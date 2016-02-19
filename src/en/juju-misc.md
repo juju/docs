@@ -43,7 +43,7 @@ machines in the environment, even those created prior to the addition of the
 key. When a key is deleted, it is removed from all machines.
 
 
-## Configure Proxy Access
+## Configure proxy access
 
 Juju supports proxies and has special support for proxying APT. Proxies can be
 configured for the providers in the environments.yaml file, or added to an

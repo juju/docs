@@ -27,7 +27,7 @@ Upgrading from older releases to this development release is not
 supported.
 
 
-## Notable Changes
+## Notable changes
 
 * Terminology
 * Command Name Changes
@@ -64,7 +64,7 @@ will become
 The "state-server" from Juju 1.x becomes a "controller" in 2.0.
 
 
-### Command Name Changes
+### Command name changes
 
 After a while experimenting with nested command structures, the decision
 was made to go back to a flat command namespace as the nested commands
@@ -145,7 +145,7 @@ used for things that can be easily added back, whereas 'destroy' is used
 when it is not so easy to add back.
 
 
-### New Juju Home Directory
+### New Juju home directory
 
 The directory where Juju stores its working data has changed. We now
 follow the XDG directory specification. By default, the Juju data
@@ -156,7 +156,7 @@ Juju 2.0's data is not compatible with Juju 1.x. Do not set JUJU_DATA to
 the and old JUJU_HOME (~/.juju).
 
 
-### Multi-Model Support Active by Default
+### Multi-Model support active by default
 
 The multiple model support that was previously behind the "jes"
 developer feature flag is now enabled by default. Along with the
@@ -217,7 +217,7 @@ forcibly taking down a controller could leave other models running
 with no way to talk to an API server.
 
 
-### Native Support for Charm Bundles
+### Native support for charm bundles
 
 The Juju 'deploy' command can now deploy a bundle. The Juju Quickstart
 or Deployer plugins are not needed to deploy a bundle of charms. You can
@@ -270,7 +270,7 @@ you want each unit of ceph-osd to have 3x50GiB disks:
     juju deploy ./openstack/bundle.yaml --storage ceph-osd:osd-devices=3,50G
 
 
-### Multi Series Charms
+### Multi series charms
 
 Charms now have the capability to declare that they support more than
 one  series. Previously a separate copy of the charm was required for
@@ -331,7 +331,7 @@ units'):
     juju upgrade-charm mycharm --force-series
 
 
-### Improved Local Charm Deployment
+### Improved local charm deployment
 
 Local charms can be deployed directly from their source directory
 without  having to set up a pre-determined local repository file
@@ -355,13 +355,13 @@ structure can  be used, including simply pulling the charm source from a
 VCS, hacking on  the code, and deploying directly from the local repo.
 
 
-### LXC Local Provider No Longer Available
+### LXC local provider no longer available
 
 With the introduction of the LXD provider (below), the LXC version of
 the Local Provider is no longer supported.
 
 
-### LXD Provider
+### LXD provider
 
 The new LXD provider is the best way to use Juju locally.
 
@@ -405,7 +405,7 @@ controller and services.
 Logs are located at '/var/log/lxd/juju-{uuid}-machine-#/ ?
 
 
-#### Specifying a LXD Controller
+#### Specifying a LXD controller
 
 In your ~/.local/share/juju/environments.yaml, you'll now find a block
 for LXD providers:
@@ -451,7 +451,7 @@ for LXD providers:
         # client-key:
 
 
-### Microsoft Azure Resource Manager Provider
+### Microsoft Azure Resource Manager provider
 
 Juju now supports Microsoft Azure's new Resource Manager API. The Azure
 provider has effectively been rewritten, but old models are still
@@ -517,7 +517,7 @@ updating an  existing Azure account:
     azure provider register Microsoft.Storage
 
 
-### New Support for Rackspace
+### New support for Rackspace
 
 A new provider has been added that supports hosting a Juju model in
 Rackspace  Public Cloud As Rackspace  Cloud is based on OpenStack,
@@ -550,7 +550,7 @@ parameters.  If you use 'keypair' mode 'access-key' and 'secret-key'
 parameters must be  provided.
 
 
-### Bootstrap Constraints, Series
+### Bootstrap constraints, series
 
 While bootstrapping, you can now specify constraints for the bootstrap
 machine independently of the service constraints:
@@ -563,7 +563,7 @@ You can also specify the series of the bootstrap machine:
     juju bootstrap --bootstrap-series trusty
 
 
-### MAAS Spaces
+### MAAS spaces
 
 Spaces are automatically discovered from MAAS (1.9+) on bootstrap and
 available for binding or deployment.
@@ -574,7 +574,7 @@ updates its definitions when the controller starts, so forcing a restart
 of the controller is a workaround.
 
 
-### Juju Logging Improvements
+### Juju logging improvements
 
 Logs from Juju's machine and unit agents are now streamed to the Juju
 controllers over the Juju API in preference to using rsyslogd. This is
@@ -608,7 +608,7 @@ Juju 2.0 supports an alternate API long method based on macaroons. This
 will support the new charm publishing workflow coming future releases
 
 
-### Unit Agent Improvements
+### Unit agent improvements
 
 We've made improvements to worker lifecycle management in the unit agent
 in this release. The resource dependencies (API connections, locks,
@@ -622,7 +622,7 @@ contexts to execute concurrently, which supports features in development
 targeting 2.0.
 
 
-### Juju Status Improvements
+### Juju status improvements
 
 The default Juju status format is now tabular (not yaml). Yaml can still
 be output by using the '--format yaml' arguments. The deprecated agent-

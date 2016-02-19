@@ -1,6 +1,6 @@
 Title: Setting up private clouds with Simplestreams  
 
-#  Set up a Private Cloud using Simplestreams
+#  Set up a private cloud using Simplestreams
 
 When Juju bootstraps a cloud, it needs two critical pieces of information:
 
@@ -20,7 +20,7 @@ implementation](https://launchpad.net/simplestreams)). Below we will discuss how
 Juju determines which metadata to use, and how to create your own images and
 tools and have Juju use them instead of the defaults.
 
-## Basic Workflow
+## Basic workflow
 
 Whether images or tools, Juju uses a search path to try and find suitable
 metadata. The path components (in order of lookup) are:
@@ -42,7 +42,7 @@ So out of the box, Juju will "Just Work" with any supported public cloud, using
 signed metadata. Setting up metadata for a private (eg Openstack) cloud requires
 metadata to be generated using tools which ship with Juju.
 
-## Image Metadata Contents
+## Image metadata contents
 
 Image metadata uses a simplestreams content type of "image-ids". The product id
 is formed as follows:
@@ -73,7 +73,7 @@ The index file must be called "index.(s)json" (sjson for signed). The various
 product files are named according to the Path values contained in the index
 file.
 
-# Tools Metadata Contents
+# Tools metadata contents
 
 Tools metadata uses a simplestreams content type of "content-download". The
 product id is formed as follows:
@@ -194,7 +194,7 @@ used if no matches are found earlier in any of the above locations. No user
 configuration is required.
 
 
-# Deploying Private Clouds
+# Deploying private clouds
 
 There are two main issues when deploying a private cloud:
 

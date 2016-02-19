@@ -1,6 +1,6 @@
 Title: Machine and unit numbering  
 
-# Machine and Unit numbering
+# Machine and unit numbering
 
 Within an environment juju keeps track of sequences for machines and units.
 (Prior to 1.25 just machines). This means that for the life of an environment the number

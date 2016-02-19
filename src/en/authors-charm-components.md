@@ -1,6 +1,6 @@
 Title: Components of a charm  
 
-# What makes a Charm?
+# What makes a charm?
 
 Each charm is a structured bundle of files. Conceptually, charms are composed of
 metadata, configuration data, and hooks with some extra support files.

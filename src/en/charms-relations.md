@@ -1,6 +1,6 @@
 Title: Managing relationships  
 
-# Managing Relationships
+# Managing relationships
 
 Few services you might want to run can do so completely independently - most of
 them rely on some other software components to be present and running too (e.g.
@@ -22,7 +22,7 @@ that and acknowledging the task. As you will see though, adding a relationship
 is much easier than even this brief explanation.
 
 
-## Creating Relations
+## Creating relations
 
 Creating relationships is usually very straightforward. Simply deploy the two
 services:
@@ -113,7 +113,7 @@ services:
 ```
 
 
-## Removing Relations
+## Removing relations
 
 There are times when a relationship just isn't working and it is time to move
 on. Fortunately, it is a simple single-line command to break off these

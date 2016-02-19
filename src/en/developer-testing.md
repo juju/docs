@@ -1,6 +1,6 @@
 Title: Writing charm tests  
 
-# Writing Charm Tests
+# Writing charm tests
 
 Charm authors will have the best insight into whether or not a charm is working
 properly. It is up to the author to create tests that ensure quality and
@@ -100,7 +100,7 @@ file or more information on the options included in the
 [`tests.yaml`](https://github.com/juju-solutions/bundletester#testsyaml)
 file.
 
-### Example Tests
+### Example tests
 
 #### Initial test can install Amulet
 

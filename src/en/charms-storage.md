@@ -3,7 +3,7 @@ TODO: LXC/local caveat needs editing or removing
       Commands need updating for 2.0  
       Storage commands need more examples/usage  
 
-# Using Juju Storage
+# Using Juju storage
 
 Many services require access to a storage resource of some form. Juju charms can
 declare what storage requirements they have, and these can be allocated when

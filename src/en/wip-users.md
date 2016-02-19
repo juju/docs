@@ -9,7 +9,7 @@ entities in those environments
   1. **remote users**, those whose authentication
 is managed by an external service and reserved for future use.
 
-When a Juju System is bootstrapped, an initial user is created with the 
+When a Juju system is bootstrapped, an initial user is created with the 
 environment. This user is considered to be the administrator for the Juju
 System. Only this user can create other users until such a time as Juju has
 full fine grained role-based permissions.

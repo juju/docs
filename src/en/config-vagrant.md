@@ -24,7 +24,7 @@ The following instructions will help you get the environment set up:
 
 ### Ubuntu
 
-To install vagrant and the other required tools on Ubuntu, run:
+To install Vagrant and the other required tools on Ubuntu, run:
 
 ```bash
 sudo apt-get update
@@ -69,7 +69,7 @@ images are also listed on [Vagrant Cloud](https://vagrantcloud.com/ubuntu).
 Vagrant makes getting started really easy.
 
 Create a directory to work in. This directory will be shared with the guest,
-and contain the vagrant configuration for the machine.
+and contain the Vagrant configuration for the machine.
 
 ```bash
 mkdir ~/vagrant
@@ -145,7 +145,7 @@ To SSH in, run `vagrant ssh`
 ## Routing local traffic to Vagrant
 
 **Note:** If your local network is using 10.0.3.x you will need to alter the
-Juju networking in the vagrant box, and substitute the network provided in the
+Juju networking in the Vagrant box, and substitute the network provided in the
 command above
 
 ### Native routing (optional, OS X 10.10 and above)
@@ -198,7 +198,7 @@ sshuttle -r vagrant@localhost:2222 10.0.3.0/24
 Use the password "vagrant"
 
 
-## Reporting issues with the Vagrant Image
+## Reporting issues with the Vagrant image
 
 If you encounter any bugs with the Vagrant images, please
 [file a bug](https://bugs.launchpad.net/juju-vagrant-images) report.

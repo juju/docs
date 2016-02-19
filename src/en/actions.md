@@ -1,6 +1,6 @@
 Title: Juju actions  
 
-# Juju Actions
+# Juju actions
 
 Juju Charms can describe Actions that users can take on deployed services.
 

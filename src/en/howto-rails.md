@@ -1,6 +1,6 @@
 Title: Deploying Rails apps with Juju  
 
-#  Using Juju to Deploy your Rails Application
+#  Using Juju to deploy your Rails application
 
 One of Juju's main use cases is to deploy your application directly out of
 version control and into a cloud. Since Juju supports local and remote clouds,
@@ -19,7 +19,7 @@ an environment that more closely resembles production.
 Before moving on you should have gone through the [Getting Started](getting-started.html)
 section and installed and configured Juju.
 
-##  Basic Usage of the Ruby on Rails Charm
+##  Basic usage of the Ruby on Rails charm
 
 Create a YAML config file with your application's name and its git location
 
@@ -78,7 +78,7 @@ juju remove-unit myapp
 
 Or go even larger with `juju add-unit -n10 myapp` for 10 nodes.
 
-##  Local to Cloud Workflow
+##  Local to cloud workflow
 
 The previous example deploys your application quickly to the cloud, in this
 example we will show how to hack and test on an application locally on your
@@ -127,7 +127,7 @@ Now open up your browser and go to `http://localhost` to get your application
 loaded in your browser.
 
 
-###  Continuous Deployment
+###  Continuous deployment
 
 Continue to write your code, push to git as you land features and fixes. When
 you're ready to test it you can tell Juju to check the git repository again:
@@ -143,7 +143,7 @@ Repeat pushing to git and using the juju set command to keep a live instance of
 your application running in your local environment.
 
 
-###  Push to your Public/Private Cloud
+###  Push to your public/private cloud
 
 After you've repeatedly upgraded your application locally it's time to push it
 out to a place where your coworkers can see your app in all its glory, let's
@@ -197,7 +197,7 @@ juju destroy-environment -e local
 ```
 
 
-##  Charm Details
+##  Charm details
 
 This document just scratches the surface of what is possible with the Rails
 charm, for more deployment options, including support for more databases,

@@ -1,7 +1,7 @@
 Title: Juju releases  
 
 
-# Get the Latest Juju
+# Get the latest Juju
 
 Juju is available for Ubuntu (and Debian-based OSes), Windows, and OS X.
 There can be 3 concurrent releases representing the stability of Juju's

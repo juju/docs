@@ -1,6 +1,6 @@
 Title: Implementing actions in Juju charms  
 
-# Actions for the Charm author
+# Actions for the charm author
 
 Actions are scripts, binaries, or other executables defined on a charm which may
 be invoked or queued remotely by the user on demand.  For example, the Charm
@@ -17,7 +17,7 @@ the UI for an Action invocation will be automatically built based on
 interact with Juju.  Actions can retrieve params passed by the user, set
 responses in a map, or set a failure status with a message.
 
-## Defining Actions
+## Defining actions
 
 To define the Actions available on a Charm, executables (scripts, binaries,
 etc.) for each Action must be included in the `/actions` directory in the Charm,
@@ -64,7 +64,7 @@ snapshot:
 [See below](#example-schema) for a more detailed example.
 
 
-### Schema Requirements
+### Schema requirements
 
 `actions.yaml` must be included in the charm root, and must conform to the
 following requirements:
@@ -88,7 +88,7 @@ following requirements:
  - `additionalProperties: false` should be included at the same level as the
    `description` key if additional params passed by the user should be rejected.
 
-### Example Schema
+### Example schema
 
 Charm dir:
 ```nohighlight
@@ -133,7 +133,7 @@ This schema would support a call such as:
 juju action do mysql/0 snapshot filename=out.tar.gz compression.kind=gzip
 ```
 
-### Action Tools
+### Action tools
 
 Three tools are provided to the Action author for the Action to interact with Juju:
 
@@ -180,7 +180,7 @@ action-set result-map.time-completed="$(date)" result-map.message="Hello world!"
 action-set outcome="success"
 ```
 
-#### Results for this Action
+#### Results for this action
 ```nohighlight
 juju action fetch <some action ID>
 
@@ -242,7 +242,7 @@ status: failed
 
 ---
 
-## Params Transformation
+## Params transformation
 
 This section specifies the transformation from `params` to JSON-Schema.  This is
 meant as a clarifying aid to creating more complex schemas and should not be

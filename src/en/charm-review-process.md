@@ -1,8 +1,8 @@
 Title: Charm review process  
 
-# Charm Review Process
+# Charm review process
 
-Reviewing a Juju Charm is a process that can easily be broken down into
+Reviewing a Juju charm is a process that can easily be broken down into
 the following parts:
 
 1. Identifying what to review
@@ -66,9 +66,9 @@ cd charm-name
 ```
 
 
-## Charm Information Review
+## Charm information review
 
-### Charm Proofing
+### Charm proofing
 
 Now that we have set up / branched the charm and are in the charm's directory,
 we need to run the following command:
@@ -93,7 +93,7 @@ charm is likely to be deployable, continue on with the review. Just be sure to
 note that the charm, as it stands, breaks Charm Store Policy and will not be
 accepted in its current form.
 
-### Reading The README
+### Reading the README
 
 Understanding the purpose of the charm is crucial for both those that are
 reviewing as well as for those that may want to deploy the charm. We recommend
@@ -111,7 +111,7 @@ and relations.
 
 Make note of sections of the README that need improvement or are missing.
 
-### Charm Configuration
+### Charm configuration
 
 Take a look at the charm's config.yaml file, using the
 [Charm Configuration](authors-charm-config.html) document for reference. We
@@ -124,7 +124,7 @@ Inspect the charm's metadata.yaml file and use the
 [Charm metadata](authors-charm-metadata.html) document as reference.
 
 
-## Charm Code Review
+## Charm code review
 
 Reviewing a charm's code is an **optional** step for community reviewers.
 If you feel comfortable reviewing the charm's code, here are some things to
@@ -138,7 +138,7 @@ watch out for in the charms code:
    failed execution, thereby allowing Juju to more accurately detect a failed hook.
 
 
-## Charm Deployment, Configuration, and Testing
+## Charm deployment, configuration, and testing
 
 If a charm has tests (you can determine if it does by checking for a "tests"
 folder), run the command below and verify the charm that way:
@@ -220,7 +220,7 @@ files, check that file for the values you set earlier. Check the hooks to see
 which ones are written to configuration files (if applicable at all).
 
 
-## Gathering / Submitting Your Results
+## Gathering / Submitting your results
 
 Gather the information that you have obtained from the charm review, such as
 whether the charm proof passes or has issues, if the README is understandable

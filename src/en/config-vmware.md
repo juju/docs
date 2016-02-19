@@ -1,6 +1,6 @@
 Title: Configuring Juju for use with vSphere  
 
-# Configuring the VMWare (vSphere) Provider
+# Configuring the VMWare (vSphere) provider
 
 Juju supports VMWare's vSphere ("Software-Defined Data Center") installations
 as a targetable cloud. In order to use the vSphere provider, you will need to

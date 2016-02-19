@@ -30,7 +30,7 @@ should be broken up into these types of layers. Generally, a charm will contain
 one base layer, one charm layer, and one or more interface layers, but it is
 possible that a charm might include more than one base layer, as well.
 
-## Base, or Runtime, Layers
+## Base, or Runtime, layers
 
 Base layers are layers that other charms can be built on. They contain things
 that are common to many different charms, and allow charms to reuse that
@@ -54,7 +54,7 @@ Base layers can be written in any language, but must at a minimum provide the
 reactive framework that glues layers together, which is written in Python. This
 can be done trivially by building the base layer off of layer-basic.
 
-## Interface Layers
+## Interface layers
 
 Interface layers are perhaps the most misunderstood type of layer, and are
 responsible for the communication that transpires over a relation between two
@@ -76,7 +76,7 @@ class, though they can then be used by any language using the built-in CLI API.
 There's more on programming interface layers in the [Developing Interface
 Layers](developer-layers-interfaces.html) guide.
 
-## Charm Layers
+## Charm layers
 
 Building on base and interface layers, charm layers are what actually get turned
 into charms. This is where the core logic of the charm should go, the logic

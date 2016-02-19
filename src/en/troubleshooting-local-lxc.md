@@ -1,9 +1,9 @@
 Title: Juju troubleshooting - Local Provider (LXC)  
 
 
-# Troubleshooting the Local Provider (LXC)
+# Troubleshooting the local provider (LXC)
 
-The LXC Local Provider uses LXC containers to provide nodes for you to deploy
+The LXC local provider uses LXC containers to provide nodes for you to deploy
 on. This section is a collection of best practices for diagnosing and solving
 LXC Local Provider issues.
 

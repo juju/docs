@@ -1,6 +1,6 @@
 Title: Juju and machine utilization  
 
-# Juju and Utilized Machines
+# Juju and utilized machines
 
 Juju can manage the entire life cycle of a service. When deploying a
 Charm, Juju will start and provision machines. Likewise, when
@@ -16,7 +16,7 @@ keep you out of web consoles.
 
 So how does harvesting in Juju work?
 
-# Machine States
+# Machine states
 
 To discuss how Juju manages machines, it's important to first
 understand how Juju perceives machines in the environment.
@@ -41,7 +41,7 @@ being tracked for removal.
 
 The machine is alive, but Juju knows nothing about it.
 
-# Harvesting Modes
+# Harvesting modes
 
 ## None
 
@@ -67,7 +67,7 @@ terminate all instances &#x2013; destroyed or unknown &#x2013; that it
 finds. This is a good option if you are only utilizing Juju for your
 environment.
 
-# Modifying Harvesting Mode
+# Modifying harvesting mode
 
 Juju's harvesting behaviour is set through the environments.yaml file.
 To change the default behaviour, edit this file and set the

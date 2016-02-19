@@ -1,7 +1,7 @@
 Title: Exposing services    
 
 
-# Exposing Services
+# Exposing services
 
 By design, Juju operates a very secure environment for deploying your services.
 Even if you have deployed services, they won't be publicly available unless

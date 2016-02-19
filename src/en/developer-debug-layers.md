@@ -1,12 +1,12 @@
 Title: Debugging building layers  
 
-# Debugging Building Layers
+# Debugging building layers
 
 While building from charm layers is a quick and easy process most of the time,
 occasionally things surface which are not immediately obvious to us as the end
 user. Thankfully layers are straightforward and simple to debug.
 
-### Environment Variables
+### Environment variables
 
 Often times, unexpected behavior comes from not having the proper environment
 variables set on your workspace. The three required environment variables to

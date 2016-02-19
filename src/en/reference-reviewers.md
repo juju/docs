@@ -1,8 +1,8 @@
 Title: Reviewing charms and bundles  
 
-# Reviewing Charms and Bundles
+# Reviewing charms and bundles
 
-### Review Tips and Criteria
+### Review tips and criteria
 
 The goal is to _welcome_ the contributor and help them have a good experience
 getting fixes into Ubuntu; your first response should be to _thank them
@@ -41,12 +41,12 @@ You can see the currently pending requests at:
 - The [Review Queue](http://review.juju.solutions/) at
 <http://review.juju.solutions/> 
 
-### Updating the store with new Charms
+### Updating the store with new charms
 
 There are two methods of updating the store. One is promulgation of new charms,
 the other is updates to charms which already exist in the store:
 
-#### New Charms
+#### New charms
 
 So the charm has passed all criteria and is ready to land in the store. Before
 you can promulgate, you’ll need to run the following commands. (This is only
@@ -88,7 +88,7 @@ If you find anything that's lacking in the charm feel free to open bugs against
 that charm. This will help us curb the amount of charms to review during our
 audit.
 
-### Updating the store with Bundles
+### Updating the store with bundles
 
 Bundles are simpler to push to the store:
 
@@ -99,7 +99,7 @@ bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
 
 There is no promulgation step for bundles.
 
-## Join Us!
+## Join us!
 
 We also need help reviewing and testing charms. The Charmers team is granted
 write access to the Charm Collection and charm-tools. If you'd like to join that

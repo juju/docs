@@ -1,6 +1,6 @@
 Title: Machine constraints  
 
-# Machine Constraints
+# Machine constraints
 
 Machine constraints allow you to choose the hardware to which your services will
 be deployed.
@@ -67,7 +67,7 @@ Output constraints for mysql
 ```bash
 juju get-constraints mysql
 ```
-# Provider Constraints
+# Provider constraints
 
 See a [complete listing of constraints](reference-constraints.html) for details
 on what each constraint means. Two of the most commonly used are:

@@ -1,6 +1,6 @@
 Title: Back up and restore Juju  
 
-# Backing up And Restoring Juju
+# Backing up and restoring Juju
 
 It is always a good idea to keep backups, and it is possible to back up both the 
 Juju client environment and the Juju state server (bootstrap node) to be able to 

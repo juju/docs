@@ -1,6 +1,6 @@
 Title: Manual provisioning  
 
-# Manual Provisioning
+# Manual provisioning
 
 ## Introduction
 

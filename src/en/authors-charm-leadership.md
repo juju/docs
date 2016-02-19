@@ -1,6 +1,6 @@
 Title: Implementing leadership in Juju charms  
 
-# Leadership for the Charm author
+# Leadership for the charm author
 
 Leadership provides a mechanism whereby multiple units of a service can make
 use of a single, shared, authoritative source for charm-driven configuration

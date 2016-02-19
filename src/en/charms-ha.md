@@ -26,7 +26,7 @@ The way this works depends on whether Juju uses Availability Zones or
 Availability Sets for that provider.
 
 
-## Availability Zones
+## Availability zones
 
 Juju supports Availability Zones on Amazon's EC2 and OpenStack-based clouds.
 Openstack Havana and newer is supported, which includes HP Cloud. Older
@@ -45,7 +45,7 @@ juju add-machine zone=us-east-1c
 ```
 
 
-## Azure Availability Sets
+## Azure availability sets
 
 Juju supports Availability Sets on Microsoft's Azure.  As long as at least two
 units are deployed, Azure guarantees 99.95% availability of the service

@@ -20,9 +20,9 @@ the other charms with the counterpart role.
 Juju decides which services can be related based on the interface names only.
 They have to match.
 
-## Relation Composition
+## Relation composition
 
-### Provides and Requires
+### Provides and requires
 
 The `provides` and `requires` keys defined in
 [metadata.yaml](./authors-charm-metadata) are used to define pairings of charms
@@ -140,7 +140,7 @@ requires:
 it can't be expected to do anything useful without a MongoDB service available.
 
 
-## Relationship Execution in Charms
+## Relationship execution in charms
 
 When services are related, Juju decides which hooks to call within each charm
 based on this local relation name. When WordPress is related to MySQL, the
@@ -149,7 +149,7 @@ the WordPress end. Corresponding hooks will be called on the 'mysql' charm "db-
 relation-joined, db-relation-changed" (based on the 'mysql' relation names).
 
 
-# Authoring Charm Interfaces
+# Authoring charm interfaces
 
 Relations are basically a bidirectional channel of communication between services.
 They're not actually talking directly, the agents communicate via the state
@@ -157,7 +157,7 @@ server, but it helps to think of it as direct communication between the
 services. Relation hooks can call tools such as `relation-get` and `relation-
 set` to pass information back and forth between the service endpoints.
 
-### Pseudo Relationship Talk
+### Pseudo relationship talk
 
 For example, `wordpress` and `mysql` might have a conversation like the following:
 
@@ -298,7 +298,7 @@ requires:
 ```
 
 
-## Interface Documentation
+## Interface documentation
 
 Although we have described above that interfaces arrive by convention, there
 are several well-used interfaces which have enough implementations to define a
