@@ -1,4 +1,5 @@
 Title: Scaling charms  
+TODO: Check final note still relevant for 2.0 release  
 
 # Scaling Charms
 
@@ -10,7 +11,7 @@ front page of hacker news (yet), but it does mean that when you do you can
 reliably scale your services to meet the demand.
 
 
-#  Adding Units
+##  Adding Units
 
 The general usage to scale a service up is via the `add-unit` command:
 
@@ -30,7 +31,7 @@ The command options are:
 ```
 
 
-# Scaling behind a Load Balancer
+## Scaling behind a Load Balancer
 
 Usually you just can't add more units to a service and have it magically scale
 - you need to use a load balancer. In this case you can just deploy a proxy in
@@ -63,7 +64,7 @@ Now that you are behind a load balancer, you can grow the MediaWiki instances
 behind the proxy as you see fit, let's add 5 more:
 
 ```bash
-juju add-unit -n5 mediawiki
+juju add-unit -n 5 mediawiki
 ```
 
 You don't need to worry about manually adding your units to the load balancer.
@@ -73,7 +74,7 @@ are installed and configured _before_ adding them to the load balancer,
 ensuring minimal user disruption of the service.
 
 
-# Scaling Charms with built in Horizontal scaling
+## Scaling Charms with built in Horizontal scaling
 
 Some charms have native scaling built in. For instance, the WordPress charm
 has built in load balancing. In this case, scaling up services is really as
@@ -99,7 +100,7 @@ currently running one. Behind the scenes, Juju is adding an instance to the
 environment (also called a 'machine') and provisioning the specified service
 onto that instance/machine.
 
-Suppose your MySQL service needs hyperscale, you can use the `-n` or `--num-
+Now suppose your MySQL service needs hyperscale, you can use the `-n` or `--num-
 units` options to `add-unit` to specify the desired number of units you want
 added to the service. For example, to scale up your service by 100 units simply
 do:
@@ -114,17 +115,31 @@ or you can use `--num-unit` which has the same result, but is more readable:
 juju add-unit --num-unit 100 mysql
 ```
 
+### Co-location
+
+As with the `juju deploy` command, it is possible to co-locate services on machines.
 If you would like to add a unit to a specific machine just append the `--to`
-option:
+option, for example:
 
 ```bash
-# add unit to machine 23
 juju add-unit mysql --to 23
-# add unit to lxc container 3 on host machine 24
+```
+...adds a unit to machine 23,
+
+```bash 
 juju add-unit mysql --to 24/lxc/3 
-# add unit to a new lxc container on host machine 25
+```
+...adds a unit to lxc container 3 on host machine 24.
+
+It is worth noting that not all services will happily co-exist and it is much 
+safer to create a new container when co-locating:
+  
+```bash
 juju add-unit mysql --to lxc:25
 ```
+...add unit of mysql to a new lxc container on host machine 25
+
+## Constraints
 
 The `add-unit` command deploys a machine matching the constraints of the
 initially deployed service. For example, if MySQL was deployed with the
@@ -141,20 +156,8 @@ juju add-machine --constraints="mem=16G"
 juju add-unit mysql --to 3
 ```
 
-**Note:** Keep in mind you can always use the `-e` or `--environment` options
-to specify which environment/cloud you would like the command to run against.
-In the following example the `-e hpcloud` adds 100 units to the mysql service
-in HP's cloud:
 
-```bash
-juju add-unit -n 100 mysql -e hpcloud
-```
-
-See [deploying to specific machines](charms-deploying.html#deploying-to-
-machines).
-
-
-# Scaling Back
+## Scaling Back
 
 Sometimes you may want to scale back some of your services, and this too is
 easy with Juju.
@@ -165,30 +168,33 @@ The general usage to scale down a service is with the `remove-unit` command:
 juju remove-unit [options] <unit> [...]
 ```
 
-For example, the following scales down the MediaWiki service by one unit:
+For example, the following scales down the MediaWiki service by removing a
+specific unit:
 
 ```bash
 juju remove-unit mediawiki/1
 ```
 
 If you have scaled-up the MediaWiki service by more than one unit you can
-remove multiple units in the same command as long as you know the unit name (ie
-`<service>/#`).
+remove multiple units in the same command:
 
 ```bash
 juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5
 ```
+!!! Note: the unit numbers may not necessarily be sequential, see the
+[notes on machine/unit numbering](./reference-numbering)
+
 
 The `remove-unit` command can be run to remove running units safely. The
 running services should automatically adjust to the change.
 
-**Note:** After removing a service the machine will still be running. In order
+!!! Note: After removing a service the machine will still be running. In order
 to completely remove the machine that once housed the service you need to issue
-a `destroy-machine`. For example, to remove machine 1 that the unit
+a `remove-machine`. For example, to remove machine 1 that the unit
 `mediawiki/1` was housed on use the command: 
     
 ```bash
-juju destroy-machine 1
+juju remove-machine 1
 ```
 
 For more information on removing services, please see the section on
