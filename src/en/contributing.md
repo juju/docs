@@ -16,13 +16,13 @@ writing in GFM.
 
 ## Documentation bugs
 
-Bugs for documentation issues are submitted here:
+You can submit a new documentation bug (issue) with this link:
 
-https://github.com/juju/docs/issues/new
+[Submit a new documentation issue](https://github.com/juju/docs/issues/new)
 
-and listed here:
+and view existing documentation issues here:
 
-https://github.com/juju/docs/issues
+[Documentation Issues](https://github.com/juju/docs/issues)
 
 
 ## How to contribute text
@@ -63,7 +63,7 @@ Well written text goes here blah blah
 
 As you can see, the TODO metadata can have more than one item, as long as
 additional items are indented by at least 4 spaces directly after the previous
-one. The Metadata section ends immediately there is a blank line, and the
+one. The Metadata section ends immediately when there is a blank line, and the
 normal document text can begin.
 
 
