@@ -77,7 +77,7 @@ A charm is also a collection of scripts that handle different kinds of events. T
 
 ## What charms are currently available?
 Charms are available for hundreds of common and popular cloud-oriented applications such as MySQL, MongoDB, and others, with new ones being added every day. Check out the public charm store for an up to the minute list of charms:
-jujucharms.com
+[Juju Charm Store](https://jujucharms.com)
 
 ## Are charms open source? Under what license?
 Charms can be published under whatever license the author prefers, there are charms under just about every kind of license out there today. In many cases, charms follow the license of the applications that they deploy, but this is not a requirement. There are open source charms that deploy proprietary software, for example, and the reverse would be possible as well.
