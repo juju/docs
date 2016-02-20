@@ -2,7 +2,7 @@ Title: Juju constraints
 
 # Constraints
 
-Constraints constrain the possible instances that may be started by juju
+Constraints constrain the possible instances that may be started by Juju
 commands. They are usually passed as a flag to commands that provision a
 new machine (such as bootstrap, deploy, and add-machine). See [using
 constraints](charms-constraints.html) for how to specify these in a
@@ -16,10 +16,10 @@ not exist.
 
 If a constraint is defined that cannot be fulfilled by any machine in the
 environment, no machine will be provisioned, and an error will be printed in the
-machine's entry in juju status.
+machine's entry in Juju status.
 
 Constraint defaults can be set on an environment or on specific services by
-using the set-constraints command (see juju help set-constraints).  Constraints
+using the set-constraints command (see `juju help set-constraints`).  Constraints
 set on the environment or on a service can be viewed by using the get-
 constraints command.  In addition, you can specify constraints when executing a
 command by using the --constraints flag (for commands that support it).
@@ -27,7 +27,7 @@ command by using the --constraints flag (for commands that support it).
 Constraints specified on the environment and service will be combined to
 determine the full list of constraints on the machine(s) to be provisioned by
 the command.  Service-specific constraints will override environment-specific
-constraints, which override the juju default constraints.
+constraints, which override the Juju default constraints.
 
 Constraints are specified as key value pairs separated by an equals sign, with
 multiple constraints delimited by a space.
@@ -111,7 +111,7 @@ multiple constraints delimited by a space.
 
 ## Legacy constraints
 
-In pre-1.0 juju some additional or differently named constraints were
+In pre-1.0 Juju some additional or differently named constraints were
 also supported, these need to be migrated when upgrading.
 
 - cpu
@@ -122,7 +122,7 @@ also supported, these need to be migrated when upgrading.
 - ec2-zone
 
     EC2 availability zone that a service unit must be deployed into. No
-    equivalent implemented as of juju 1.12, follow [bug
+    equivalent implemented as of Juju 1.12, follow [bug
     1183831](https://bugs.launchpad.net/juju-core/+bug/1183831).
 
 - maas-name

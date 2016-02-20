@@ -113,7 +113,7 @@ events on that unit will be paused indefinitely.
 The queue can be halted by exiting with an `exit 1` command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending
 everything until this error status is resolved, which you can do by issuing the
-command (from your juju terminal window, not the debugging window) of
+command (from your Juju terminal window, not the debugging window) of
 `juju resolved <unit>`.
 
 You can finish your debugging session by closing all windows in the tmux

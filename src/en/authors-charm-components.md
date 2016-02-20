@@ -7,7 +7,7 @@ metadata, configuration data, and hooks with some extra support files.
 
 ## Required files
 
-A charm requires only a single file in order to be considered valid by juju:
+A charm requires only a single file in order to be considered valid by Juju:
 
  - `metadata.yaml` [describes the charm](./authors-charm-metadata.html) and the
     relations it can participate in.
@@ -20,7 +20,7 @@ actually do anything. For that, some additional files will be required.
 The following files will be treated specially, if present:
 
  - `/hooks` must be a directory holding executables with specific names, that
-   will be invoked by juju at the relevant times. A charm needs to implement at
+   will be invoked by Juju at the relevant times. A charm needs to implement at
    least one hook in order to do anything at all. How to implement hooks is
    covered more thoroughly in the [Hooks section](./authors-charm-hooks.html)
  - `/actions` must be a directory holding executables with specific names, which
@@ -55,7 +55,7 @@ at runtime, copy them on the system alongside the software and reference those
 instead.
 
 This is because the software does _not_ have control over the charm directory;
-_juju_ has control over the charm directory, which it temporarily cedes to the
+_Juju_ has control over the charm directory, which it temporarily cedes to the
 charm only when running a hook. Juju will occasionally do things to the contents
 of that directory that assume it is neither read nor written outside a hook, and
 the results of such interactions can only be undefined.
@@ -69,7 +69,7 @@ change.
 
 Finally, any file written at runtime constrains all future implementations of
 the charm. When [upgrading a charm](./developer-upgrade-charm.html), any change
-that would cause runtime state to be overwritten will cause juju to abort the
+that would cause runtime state to be overwritten will cause Juju to abort the
 operation and hand over to the user for resolution. This is inconvenient for the
 users and undermines confidence in the charm.
 

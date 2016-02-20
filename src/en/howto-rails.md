@@ -139,7 +139,7 @@ juju set myapp repo=https://github.com/yourapplication
 The charm will then fetch the latest code and you can refresh your browser at
 `http://localhost`.
 
-Repeat pushing to git and using the juju set command to keep a live instance of
+Repeat pushing to git and using the `juju set` command to keep a live instance of
 your application running in your local environment.
 
 

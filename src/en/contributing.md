@@ -108,7 +108,7 @@ To implement this callout, use the following syntax:
 
 ```no-highlight
 !!! Note: If you want to get more information on what is actually happening, or
-to help resolve problems, you can add the `--show-log` switch to the juju
+to help resolve problems, you can add the `--show-log` switch to the Juju
 command to get verbose output.
 ```
 

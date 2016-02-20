@@ -4,7 +4,7 @@ Title: Charm hooks
 
 A service unit's direct action is entirely defined by its charm's hooks. Hooks
 are executable files in a charm's `hooks` directory; hooks with particular names
-(see below) will be invoked by the juju unit agent at particular times, and
+(see below) will be invoked by the Juju unit agent at particular times, and
 thereby cause changes to the world.
 
 Whenever a hook-worthy event takes place, the unit agent first checks whether
@@ -69,7 +69,7 @@ configuration changes into account.
 `start` runs immediately after the first `config-changed` hook. It should be
 used to ensure the charm's software is running. Note that the charm's software
 should be configured so as to persist through reboots without further
-intervention on juju's part.
+intervention on Juju's part.
 
 ### upgrade-charm
 
@@ -111,7 +111,7 @@ services. Units of a single client service will surely want to connect to, and
 use, the same database; but if units of another client service were to use that
 same database, the consequences could be catastrophic for all concerned.
 
-If juju respected the `limit` field in relation [metadata](./authors-charm-
+If Juju respected the `limit` field in relation [metadata](./authors-charm-
 metadata.html), it would be possible to work around this, but it's not a high-
 priority [bug](https://bugs.launchpad.net/bugs/1089297): most provider services
 _should_ be able to handle multiple requirers anyway; and most requirers will

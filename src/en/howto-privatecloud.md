@@ -160,7 +160,7 @@ The (optional) directory structure inside the cloud storage is as follows:
 Of course, if only custom image metadata is required, the tools directory will
 not be required, and vice versa.
 
-Note that if juju bootstrap is run with the `--upload-tools` option, the tools
+Note that if `juju bootstrap` is run with the `--upload-tools` option, the tools
 and metadata are placed according to the above structure. That's why the tools
 are then available for Juju to use.
 

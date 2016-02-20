@@ -43,7 +43,7 @@ You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
 required to submit to both releases, but we recommend supporting both whenever
 possible so that users get the most flexibility:
 
-  1. Install juju and charm-tools.
+  1. Install Juju and charm-tools.
   1. Create a repository, something like `mkdir -p ~/charms/precise`; 'precise'
      is the release code name for the [release of Ubuntu](http://releases.ubuntu.com)
      you wish to target your charm at. You can also use `trusty` if you're

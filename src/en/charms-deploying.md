@@ -295,7 +295,7 @@ horizontally scale out on dedicated machines when you need to.
 
 Use the `networks` option to specify service-specific network
 requirements. The `networks` option takes a comma-delimited list of
-juju-specific network names. Juju will enable the networks on the
+Juju-specific network names. Juju will enable the networks on the
 machines that host service units. This is different from the network
 constraint which selects a machine that matches the networks, but does
 not configure the machine to use them. For example, this commands deploys

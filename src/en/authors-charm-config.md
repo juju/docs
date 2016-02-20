@@ -20,7 +20,7 @@ definition must contain all of the following fields:
 Any option without these three fields will generate a Warning from the the
 [charm proof tool](tools-charm-tools.html#proof)
 indicating the option is not compliant with charm store policy. This policy
-allows older versions of juju to safely unset values.
+allows older versions of Juju to safely unset values.
 
 ## What to expose to users
 

@@ -155,7 +155,7 @@ if (Is-Leader) {
 
 ## juju-log
 
-`juju-log` writes a message to the juju log at the appropriate log level. Valid
+`juju-log` writes a message to the Juju log at the appropriate log level. Valid
 levels are: INFO, WARN, ERROR, DEBUG
 
 python:  
@@ -341,7 +341,7 @@ payload-register monitoring docker 0fcgaba
 
 `payload-unregister` used while a hook is running to let Juju know
 that a payload has been manually stopped. The <class> and <id> provided
-must match a payload that has been previously registered with juju using
+must match a payload that has been previously registered with Juju using
 payload-register.
 
 python:  

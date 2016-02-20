@@ -60,7 +60,7 @@ and take action when the leader sets values. For more information read the
 `start` runs immediately after the first `config-changed` hook. It should be
 used to ensure the charm's software is running. Note that the charm's software
 should be configured so as to persist through reboots without further
-intervention on juju's part.
+intervention on Juju's part.
 
 ### stop
 

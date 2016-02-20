@@ -33,7 +33,7 @@ subordinate services will execute.
 running container of another service unit.
 
 **Container relation**: A scope:container relationship. While modeled
-identically to traditional, scope: global, relationships, juju only implements
+identically to traditional, scope: global, relationships, Juju only implements
 the relationship between the units belonging to the same container.
 
 ## Relations

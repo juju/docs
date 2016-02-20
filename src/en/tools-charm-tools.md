@@ -44,9 +44,9 @@ the Windows Control Panel
 
 # Usage
 
-Charm Tools comes packaged as both a stand alone tool and a juju plugin. For the
+Charm Tools comes packaged as both a stand alone tool and a Juju plugin. For the
 sake of documentation purposes, the plugin syntax, `juju charm`, is shown. If
-you wish to use the stand alone client, or don't have juju installed, you can
+you wish to use the stand alone client, or don't have Juju installed, you can
 replace all instances of `juju charm` with just `charm`.
 
 There are several tools available within charm tools itself. At any time you can
@@ -258,7 +258,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   be. `proof` will provide output at varying levels of severity. `I` is
   informational - these are things a charm could do but don't currently. `W` is a
   warning - these are items that violate charm store policy or have an adverse affect
-  on tools in the juju ecosystem. `E` is an error - these are items that are major
+  on tools in the Juju ecosystem. `E` is an error - these are items that are major
   and will result in a broken charm. Any charm with a Warning or Error will not
   pass charm store review policy.
 
@@ -267,7 +267,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
       juju charm review-queue [-h|--help]
 
   This provides a copy of the
-  [juju charms review queue](http://review.juju.solutions) which is used by 
+  [Juju charms review queue](http://review.juju.solutions) which is used by 
   ~charmers to identify which charms are available for review.
 
 

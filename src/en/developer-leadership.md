@@ -151,7 +151,7 @@ Juju's leadership concept is, by choice, relatively fine-grained, to ensure
 timely handover of agent-level responsibilities. That's why `is-leader` success
 guarantees only 30 seconds of leadership; but it's no fun running a separate
 watchdog process to `juju-run is-leader` every 30 seconds and kill your process
-when that stops working (apart from anything else, your juju-run could be
+when that stops working (apart from anything else, your `juju-run` could be
 blocked by other operations, so you can't guarantee a run every 30 seconds
 anyway).
 

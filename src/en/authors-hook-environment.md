@@ -4,11 +4,11 @@ Title: The hook environment, hook tools and how hooks are run
 
 When a charm is deployed onto a unit, the raw charm is extracted into a
 directory; this directory is known as the charm directory. It's owned and
-operated by juju, and juju sometimes temporarily cedes control of it to user
+operated by Juju, and Juju sometimes temporarily cedes control of it to user
 code, by running a hook inside it.
 
 When a hook's running, it should be considered to have sole access to the charm
-directory; at all other times, you should consider that juju may be making
+directory; at all other times, you should consider that Juju may be making
 arbitrarily scary changes to the directory, and that it is not safe to read or
 write to anything in there at all.
 
@@ -19,7 +19,7 @@ of your _software_ must remain unperturbed by direct changes to the charm.
 
 So, every hook runs with easy access to the charm files. Every hook also runs as
 root, with a number of useful variables set, and has access to hook-specific
-tools that let you interrogate and affect the juju environment.
+tools that let you interrogate and affect the Juju environment.
 
 No more than one hook will execute on a given system at a given time. A unit in
 a container is considered to be on a different system to any unit on the
@@ -55,11 +55,11 @@ In addition, every relation hook makes available relation-specific variables:
   being reported to have -joined, -changed, or -departed.
 
 Juju does _not_ pay any attention to the values of the above variables when
-running hook tools: they're a one-way communication channel from juju to the
+running hook tools: they're a one-way communication channel from Juju to the
 charm only. Finally, in all cases:
 
   - The `$JUJU_AGENT_SOCKET` and `$JUJU_CONTEXT_ID` variables allow the hook
-    tools to work: juju _does_ pay attention to them, but you should treat
+    tools to work: Juju _does_ pay attention to them, but you should treat
     them as opaque and avoid messing with them.
 
 Finally, if you're [debugging](./authors-hook-debug.html), you'll also have
@@ -110,7 +110,7 @@ There are several cases where a charm needs to reboot a machine, such as
 after a kernel upgrade, or to upgrade the entire system. The charm may not
 be able to complete the hook until the machine is rebooted.
 
-The juju-reboot command allows charm authors to schedule a reboot from inside
+The `juju-reboot` command allows charm authors to schedule a reboot from inside
 a charm hook. The reboot will only happen if the hook completes without error. 
 You can schedule a reboot like so:
 
@@ -123,7 +123,7 @@ The `--now` option can be passed to block hook execution. in this case the
 re-queues it for the next run. This will allow you to create multi-step 
 install hooks.
 
-Charm authors must wrap calls to juju-reboot to ensure it is actually 
+Charm authors must wrap calls to `juju-reboot` to ensure it is actually 
 necessary, otherwise the charm risks entering a reboot loop. The preferred
 work-flow is to check if the feature/charm is in the desired state, and
 reboot when needed. This bash example assumes that "$FEATURE_IS_INSTALLED"

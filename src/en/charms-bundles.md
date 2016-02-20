@@ -38,7 +38,7 @@ method.
 A bundle file can be deployed via the command-line interface by using the `juju
 quickstart` tool.
 
-The juju quickstart tool can be installed on Ubuntu versions newer than 14.04 by
+The Juju quickstart tool can be installed on Ubuntu versions newer than 14.04 by
 running the following command:
 
 ```bash
@@ -171,7 +171,7 @@ however you wish.  A machine specification is a YAML object with named machines
 possible fields: `series`, `constraints`, and `annotations`.
 
 Note that the machine spec is optional.  If it is not included, solutions such
-as the juju deployer will fail if a placement specification refers to a machine
+as the Juju deployer will fail if a placement specification refers to a machine
 other than "0", which is used to represent the bootstrap node.  Leaving the
 machine specification out of your bundle tells Juju to place units on new
 machines if no placement directives are given.

@@ -18,7 +18,7 @@ specification.
 ## Phase 1 - Generic tests
 
 All charms share some of the same characteristics. They all have a yaml file
-called `metadata.yaml`, and when deployed, juju will always attempt to progress
+called `metadata.yaml`, and when deployed, Juju will always attempt to progress
 the state of the service from install to config to started. Because of this, 
 all charms can be tested using the following algorithm:
 
@@ -47,12 +47,12 @@ with a predictible environment. The tests can make the following assumptions:
 
 - A minimal install of the release of Ubuntu which the charm is targeted at 
   will be available.
-- A version of juju is installed and available in the system path.
-- A juju environment with no services deployed inside it is already 
+- A version of Juju is installed and available in the system path.
+- A Juju environment with no services deployed inside it is already 
   bootstrapped, and will be the default for command line usage.
 - The CWD is the `tests` directory off the charm root.
 - Full network access to deployed nodes will be allowed.
-- the bare name of any charm in arguments to juju will be resolved to a charm 
+- the bare name of any charm in arguments to Juju will be resolved to a charm 
   url and/or repository arguments of the test runner's choice. This means that 
   if you need mysql, you do not do `juju deploy cs:mysql` or 
   `juju deploy --repository ~/charms local:mysql`, but just `juju deploy mysql`.
@@ -264,7 +264,7 @@ All of the charms will be scanned for tests in lexical order by series, charm
 name, branch name. Non official charms which have not been reviewed by charmers
 will not have their tests run until the test runner's restrictions have been
 vetted for security, since we will be running potentially malicious code. It is
-left to the implementor to determine what mix of juju, client platform, and
+left to the implementor to determine what mix of Juju, client platform, and
 environment settings are appropriate, as all of these are variables that will
 affect the running charms, and so may affect the outcome.
 
