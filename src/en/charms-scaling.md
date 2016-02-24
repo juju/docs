@@ -1,7 +1,7 @@
 Title: Scaling charms  
 TODO: Check final note still relevant for 2.0 release  
 
-# Scaling Charms
+# Scaling charms
 
 One of the killer features of computing in the cloud is that it (should)
 seamlessly allow you to scale up or down your services to meet your needs and
@@ -31,7 +31,7 @@ The command options are:
 ```
 
 
-## Scaling behind a Load Balancer
+## Scaling behind a load balancer
 
 Usually you just can't add more units to a service and have it magically scale
 - you need to use a load balancer. In this case you can just deploy a proxy in
@@ -74,7 +74,7 @@ are installed and configured _before_ adding them to the load balancer,
 ensuring minimal user disruption of the service.
 
 
-## Scaling Charms with built in Horizontal scaling
+## Scaling charms with built in horizontal scaling
 
 Some charms have native scaling built in. For instance, the WordPress charm
 has built in load balancing. In this case, scaling up services is really as
@@ -157,7 +157,7 @@ juju add-unit mysql --to 3
 ```
 
 
-## Scaling Back
+## Scaling back
 
 Sometimes you may want to scale back some of your services, and this too is
 easy with Juju.

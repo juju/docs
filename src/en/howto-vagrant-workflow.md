@@ -9,7 +9,7 @@ system level, however. The next best solution is to use a virtualization
 wrapper like [Vagrant](https://www.vagrantup.com).
 
 
-##  Getting Started
+##  Getting started
 
 Ensure the following software components are installed on your development
 machine:
@@ -44,7 +44,7 @@ mkdir -p ~/vagrant/charms/precise
 
 For the remainder of this tutorial Trusty will be used.
 
-###  Installing Charm Tools
+###  Installing charm tools
 
 Charm Tools offer a means for users and charm authors to create, search, fetch,
 update, and manage charms.
@@ -86,7 +86,7 @@ populate with your services deployment and orchestration logic.
 └── revision
 ```
 
-### Writing the Charm
+### Writing the charm
 
 Begin by editing the metadata.yaml file to populate the information about our
 charm.
@@ -108,7 +108,7 @@ charm.
 Now that Juju knows something about our service we're ready to start writing the
 hooks.
 
-####  Install Hook
+####  Install hook
 
 ```bash
 #!/bin/bash
@@ -118,7 +118,7 @@ apt-get install -y ruby1.9.3 rubygems-integration build-essential
 HOME=/root gem install genghisapp bson_ext --no-ri --no-rdoc
 ```
 
-####  Config-Changed Hook
+####  Config-Changed hook
 
 ```bash
 #!/bin/bash
@@ -128,7 +128,7 @@ sleep 2
 hooks/start
 ```
 
-####  Start Hook
+####  Start hook
 
 ```bash
 #!/bin/bash
@@ -140,7 +140,7 @@ fi
 open-port $PORT
 ```
 
-####  Stop Hook
+####  Stop hook
 
 ```bash
 #!/bin/bash
@@ -172,7 +172,7 @@ bootstrap.
 directory of our JujuBox.
 
 
-### Deploying our charm in vagrant
+### Deploying our charm in Vagrant
 
 You'll need to enter the Juju environment we just bootstrapped in $HOME/charms:
 
@@ -284,7 +284,7 @@ and update/test via normal means.
 Installing Juju, for deploying to non-local environments
 
 
-## Reporting issues with the Vagrant Image
+## Reporting issues with the Vagrant image
 
 If you encounter any issues with the Vagrant images, please
 [file a bug report](https://bugs.launchpad.net/juju-vagrant-images).

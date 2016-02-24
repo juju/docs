@@ -1,6 +1,6 @@
 Title: Working with units  
 
-# Using Units
+# Using units
 
 Each node that Juju manages is referred to as a "unit". Generally speaking,
 when using Juju you interact with the services at the service level. There are
@@ -9,7 +9,7 @@ debugging purposes. Juju provides a few different commands to make this
 easier.
 
 
-## The juju ssh command
+## The Juju ssh command
 
 The `juju ssh` command will connect you, via SSH, into a target unit. For
 example:
@@ -29,7 +29,7 @@ however for more complex commands we recommend using `juju run` instead.
 See also the `juju help ssh` command for more information.
 
 
-## The juju scp command
+## The Juju scp command
 
 Copying files to and from units can be a common task depending on your
 workload, so Juju provides a `juju scp` command for copying files securely to
@@ -66,7 +66,7 @@ juju scp -e testing foo.txt apache2/1:
 For more information, run the `juju help scp` command.
 
 
-## The juju run command
+## The Juju run command
 
 The `juju run` command can be used by devops or scripts to inspect or do work
 on services, units, or machines. Commands for services or units are executed in

@@ -37,14 +37,14 @@ or data. When applied to Charms, layers allow you to extend or build off
 other charms to make more complex or useful charms. The `layer.yaml` file in
 the root directory of the charm controls what layer(s) will be imported.
 
-#### Reactive Charms
+#### Reactive charms
 
 The docker charm makes use of the
 [charms.reactive](http://pythonhosted.org/charms.reactive/) python framework.
 The code for the docker layer can be found in the `reactive/` folder in the
 root charm directory.
 
-#### Building Charms
+#### Building charms
 
 The docker layer makes use of the
 [Charm Layers](authors-charm-building.html)
@@ -87,7 +87,7 @@ For the most complete information on charms.reactive go to
 <http://pythonhosted.org/charms.reactive/>
 
 
-## The Big Picture Decomposed
+## The big picture decomposed
 
 We're going to be dissecting each section of the layers. To give you a top-down
 view of what we'll be examining, the following illustration will provide the
@@ -309,7 +309,7 @@ def configure_website_port(http):
     hookenv.status_set('active', '')
 ```
 
-## Fully Assembled Diagram
+## Fully assembled diagram
 
 ![Charm artifact composed diagram](./media/charm-layers-composed.png)
 

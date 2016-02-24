@@ -1,6 +1,6 @@
 Title: Testing Juju charms  
 
-# Charm Testing
+# Charm testing
 
 Juju has been designed from the start to foster a large collection of "charms".
 Charms are expected to number in the thousands, and be self contained, with 
@@ -18,7 +18,7 @@ specification.
 ## Phase 1 - Generic tests
 
 All charms share some of the same characteristics. They all have a yaml file
-called `metadata.yaml`, and when deployed, juju will always attempt to progress
+called `metadata.yaml`, and when deployed, Juju will always attempt to progress
 the state of the service from install to config to started. Because of this, 
 all charms can be tested using the following algorithm:
 
@@ -35,7 +35,7 @@ be the focus of an implementation.
 
 Note that this requirement is already satisfied by [Mark Mims' jenkins tester](https://github.com/mmm/charmtester/).
 
-## Phase 2 - Charm Specific tests
+## Phase 2 - charm specific tests
 
 Charm authors will have the best insight into whether or not a charm is working
 properly.
@@ -47,12 +47,12 @@ with a predictible environment. The tests can make the following assumptions:
 
 - A minimal install of the release of Ubuntu which the charm is targeted at 
   will be available.
-- A version of juju is installed and available in the system path.
-- A juju environment with no services deployed inside it is already 
+- A version of Juju is installed and available in the system path.
+- A Juju environment with no services deployed inside it is already 
   bootstrapped, and will be the default for command line usage.
 - The CWD is the `tests` directory off the charm root.
 - Full network access to deployed nodes will be allowed.
-- the bare name of any charm in arguments to juju will be resolved to a charm 
+- the bare name of any charm in arguments to Juju will be resolved to a charm 
   url and/or repository arguments of the test runner's choice. This means that 
   if you need mysql, you do not do `juju deploy cs:mysql` or 
   `juju deploy --repository ~/charms local:mysql`, but just `juju deploy mysql`.
@@ -92,7 +92,7 @@ things to test in each charm beyond install/start is:
 - Adding multiple units to a web app charm and relating to a load balancer 
   results in the same HTML on both units directly and the load balancer.
 
-### Exit Codes
+### Exit codes
 
 Upon exit, the test's exit code will be evaluated to mean the following:
 
@@ -116,9 +116,9 @@ contents of files are to be logged, the contents should be preceded by `INFO:
 BEGIN filename`, where filename is a logical name unique to this run of the
 test, and then the file ended with `INFO: END filename`.
 
-### Example Tests
+### Example tests
 
-#### Deploy requirements and Poll
+#### Deploy requirements and poll
 
 The test below deploys mediawiki with mysql and memcached related to it, and 
 then tests to make sure it returns a page via http with `<title>` somewhere 
@@ -252,7 +252,7 @@ Juju core to allow such things to be made into plugins. Until then, it can be
 included in each test dir that uses it, or we can build a package of tools 
 that are common to tests.
 
-## Test Runner
+## Test runner
 
 A test runner will periodically poll the collection of charms for changes since
 the last test run. If there have been changes, the entire set of changes will
@@ -264,7 +264,7 @@ All of the charms will be scanned for tests in lexical order by series, charm
 name, branch name. Non official charms which have not been reviewed by charmers
 will not have their tests run until the test runner's restrictions have been
 vetted for security, since we will be running potentially malicious code. It is
-left to the implementor to determine what mix of juju, client platform, and
+left to the implementor to determine what mix of Juju, client platform, and
 environment settings are appropriate, as all of these are variables that will
 affect the running charms, and so may affect the outcome.
 

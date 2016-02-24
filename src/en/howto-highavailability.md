@@ -18,7 +18,7 @@ to use for the extra state servers, e.g.:
 juju ensure-availability -n 3 --to name1,name2
 ```
 
-Once it has been run, every subsequent run (without `-n`) will make juju
+Once it has been run, every subsequent run (without `-n`) will make Juju
 ensure that there are at least the last requested number of State Servers;
 bare in mind that this number can be increased by calling it again with 
 `-n` but currently there is no way to decrease it (planned for a future 

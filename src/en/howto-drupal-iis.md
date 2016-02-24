@@ -1,6 +1,6 @@
 Title: Deploying Drupal Windows with Juju charms  
 
-#  Using Juju to Deploy Drupal Windows Charm
+#  Using Juju to deploy Drupal Windows charm
 
 Juju is able to deploy workloads on top of Windows. For the moment, only MAAS
 and OpenStack can be used as providers, but shortly in the future,
@@ -19,7 +19,7 @@ properly installed and configured. You can visit [Getting
 Started](https://jujucharms.com/docs/getting-started.html) section to get
 instructions on that.
 
-##  Basic Usage of the Drupal IIS Charm
+##  Basic usage of the Drupal IIS charm
 
 First, make sure you bootstrapped an environment. If you have not already,
 do so:

@@ -1,6 +1,6 @@
 Title: Best practice for charm authors  
 
-# Best Practice for Charm Authors
+# Best practice for charm authors
 
 This document is to capture charm best practices from the community. We expect
 devops to be strongly opinionated, therefore some strong opinions don't make
@@ -13,7 +13,7 @@ list](https://lists.ubuntu.com/mailman/listinfo/juju) with some ideas on what
 you'd like to see added. Ideally we'd like to document all sorts of great ideas
 on how people are using Juju.
 
-## Best Practice Tips for using Juju in general
+## Best practice tips for using Juju in general
 
 - Check out the [Juju cheat sheet](https://github.com/juju/cheatsheet)
 - Check out the [Juju plugins](https://github.com/juju/plugins)
@@ -22,7 +22,7 @@ on how people are using Juju.
   [disabling IPv6](http://askubuntu.com/questions/440649/how-to-disable-ipv6-in-ubuntu-14-04)
   on the main host.
 
-## Best Practice Tips for Charm Authors
+## Best practice tips for charm authors
 
 - Avoid symlinks if you can, people can use Windows for charms. If you prefer
   having your hook code in one file you can achieve the same affect by stubbing
@@ -36,7 +36,7 @@ on how people are using Juju.
 - Implement a pattern that can be easily unit testable, and submit unit tests
   with your charm.
 
-## Examples of Best Practice Charms
+## Examples of best practice charms
 
 Here is a list of charms that leverage a particular technology that you might
 want to look at as examples:
@@ -50,7 +50,7 @@ want to look at as examples:
 - Example cinder charm - The [cinder-vnx charm](https://jujucharms.com/cinder-vnx), use this if you're interested in adding support for your specific storage hardware to Ubuntu OpenStack.
 - Example neutron charm - The [neutron-openvswitch charm](https://jujucharms.com/neutron-openvswitch), use this if you're interested in adding support for your specific networking hardware to Ubuntu OpenStack.
 
-## Juju Best Practices and Tips from Canonical's Infrastructure Team
+## Juju best practices and tips from Canonical's Infrastructure Team
 
 Since Canonical IS uses Juju in production they have certain requirements from
 charms in order for them to run on a production OpenStack deployment. Though
@@ -91,7 +91,7 @@ Tips for production usage:
     data loss. If a user deploys a charm and later sets the configuration values
     the user would expect the charm to react to those changes accordingly.
 
-## Charm Coding Guidelines
+## Charm coding guidelines
 
 If written in Bash:
 

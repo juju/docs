@@ -1,6 +1,6 @@
-Title:Juju commands and usage
+Title: Juju commands and usage
 
-# Juju Command reference
+# Juju command reference
 
 You can get a list of the currently used commands by entering
 ```juju help commands``` from the commandline. The currently understood commands
@@ -441,7 +441,7 @@ Click on the expander to see details for each command.
   
   Adding units to an existing service is a way to scale out a model by
   deploying more instances of a service.  Add-unit must be called on services that
-  have already been deployed via juju deploy.
+  have already been deployed via `juju deploy`.
   
   By default, services are deployed to newly provisioned machines.  Alternatively,
   service units can be added to a specific existing machine using the --to
@@ -487,7 +487,7 @@ Click on the expander to see details for each command.
   
   Adding units to an existing service is a way to scale out a model by
   deploying more instances of a service.  Add-unit must be called on services that
-  have already been deployed via juju deploy.
+  have already been deployed via `juju deploy`.
   
   By default, services are deployed to newly provisioned machines.  Alternatively,
   service units can be added to a specific existing machine using the --to
@@ -679,7 +679,7 @@ Click on the expander to see details for each command.
   localhost:170170
   
   The first endpoint is guaranteed to be an IP address and port. If a single endpoint
-  is available and it's a hostname, juju tries to resolve it locally first.
+  is available and it's a hostname, Juju tries to resolve it locally first.
   
   Additionally, you can use the --format argument to specify the output format.
   Supported formats are: "yaml", "json", or "smart" (default - host:port, one per line).
@@ -766,7 +766,7 @@ Click on the expander to see details for each command.
 
   #### purpose:
 
-   create, manage, and restore backups of juju's state
+   create, manage, and restore backups of Juju's state
 
 
   
@@ -797,9 +797,9 @@ Click on the expander to see details for each command.
 
   _-v, --verbose  (= false)_  show more verbose output
   
-  "juju backups" is used to manage backups of the state of a juju controller.
-  Backups are only supported on juju controllers, not hosted models.  For
-  more information on juju controllers, see:
+  "juju backups" is used to manage backups of the state of a Juju controller.
+  Backups are only supported on Juju controllers, not hosted models.  For
+  more information on Juju controllers, see:
   
       jujuhelp juju-controllers
   
@@ -826,7 +826,7 @@ Click on the expander to see details for each command.
   restore  - restore from a backup archive to a new controller
 
 
-  upload   - store a backup archive file remotely in juju
+  upload   - store a backup archive file remotely in Juju
 
 
 
@@ -875,7 +875,7 @@ Click on the expander to see details for each command.
   help          - show help on a command or other topic
 
 
-  list          - list juju blocks
+  list          - list Juju blocks
 
 
   remove-object - block an operation that would remove an object
@@ -933,16 +933,16 @@ Click on the expander to see details for each command.
   
   bootstrap starts a new model of the current type (it will return an error
   if the model has already been bootstrapped).  Bootstrapping a model
-  will provision a new machine in the model and run the juju controller on
+  will provision a new machine in the model and run the Juju controller on
   that machine.
   
   If boostrap-constraints are specified in the bootstrap command, 
-  they will apply to the machine provisioned for the juju controller, 
+  they will apply to the machine provisioned for the Juju controller, 
   and any future controllers provisioned for HA.
   
   If constraints are specified, they will be set as the default constraints 
   on the model for all future workload machines, 
-  exactly as if the constraints were set with juju set-constraints.
+  exactly as if the constraints were set with `juju set-constraints`.
   
   It is possible to override constraints and the automatic machine selection
   algorithm by using the "--to" flag. The value associated with "--to" is a
@@ -952,7 +952,7 @@ Click on the expander to see details for each command.
   Bootstrap initialises the cloud environment synchronously and displays information
   about the current installation steps.  The time for bootstrap to complete varies
   across cloud providers from a few seconds to several minutes.  Once bootstrap has
-  completed, you can run other juju commands against your model. You can change
+  completed, you can run other Juju commands against your model. You can change
   the default timeout and retry delays used during the bootstrap by changing the
   following settings in your environments.yaml (all values represent number of seconds):
   
@@ -1040,7 +1040,7 @@ Click on the expander to see details for each command.
 
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
 
 
   _--generate  (= false)_  generate a new strong password
@@ -1116,10 +1116,10 @@ Click on the expander to see details for each command.
 
   _--no-download  (= false)_  do not download the archive
   
-  "create" requests that juju create a backup of its state and print the
+  "create" requests that Juju create a backup of its state and print the
   backup's unique ID.  You may provide a note to associate with the backup.
   
-  The backup archive and associated metadata are stored remotely by juju.
+  The backup archive and associated metadata are stored remotely by Juju.
   
   The --download option may be used without the --filename option.  In
   that case, the backup archive will be stored in the current working
@@ -1178,7 +1178,7 @@ Click on the expander to see details for each command.
 
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
 
 
   _--config  (= )_  path to yaml-formatted file containing model config values
@@ -1498,7 +1498,7 @@ Click on the expander to see details for each command.
 
   #### purpose:
 
-   terminate all machines and other associated resources for the juju controller
+   terminate all machines and other associated resources for the Juju controller
 
 
   
@@ -1649,7 +1649,7 @@ Click on the expander to see details for each command.
 
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
   
   Disabling a user stops that user from being able to log in. The user still
   exists and can be reenabled using the "juju enable-user" command.  If the user is
@@ -1755,7 +1755,7 @@ Click on the expander to see details for each command.
 
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
   
   Enabling a user that is disabled allows that user to log in again. The user
   still exists and can be reenabled using the "juju enable-user" command.  If the
@@ -1806,7 +1806,7 @@ Click on the expander to see details for each command.
 
   #### purpose:
 
-   generate boilerplate configuration for juju models
+   generate boilerplate configuration for Juju models
 
 
   
@@ -1964,11 +1964,11 @@ Click on the expander to see details for each command.
   _-o, --output (= "")_  specify an output file
   
   Shows the list of constraints that have been set on the specified service
-  using juju service set-constraints.  You can also view constraints
-  set for a model by using juju model get-constraints.
+  using Juju service set-constraints.  You can also view constraints
+  set for a model by using Juju model get-constraints.
   
   Constraints set on a service are combined with model constraints for
-  commands (such as juju deploy) that provision machines for services.  Where
+  commands (such as `juju deploy`) that provision machines for services.  Where
   model and service constraints overlap, the service constraints take
   precedence.
   
@@ -2054,11 +2054,11 @@ Click on the expander to see details for each command.
   _-o, --output (= "")_  specify an output file
   
   Shows a list of constraints that have been set on the model
-  using juju set-model-constraints.  You can also view constraints
-  set for a specific service by using juju get-constraints <service>.
+  using `juju set-model-constraints`.  You can also view constraints
+  set for a specific service by using `juju get-constraints <service>`.
   
   Constraints set on a service are combined with model constraints for
-  commands (such as juju deploy) that provision machines for services.  Where
+  commands (such as `juju deploy`) that provision machines for services.  Where
   model and service constraints overlap, the service constraints take
   precedence.
   
@@ -2212,7 +2212,7 @@ Click on the expander to see details for each command.
 
   #### purpose:
 
-   generate boilerplate configuration for juju models
+   generate boilerplate configuration for Juju models
 
 
   
@@ -2239,7 +2239,7 @@ Click on the expander to see details for each command.
 
   #### purpose:
 
-   forcibly terminate all machines and other associated resources for a juju controller
+   forcibly terminate all machines and other associated resources for a Juju controller
 
 
   
@@ -2315,7 +2315,7 @@ Click on the expander to see details for each command.
 
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
 
 
   _--format  (= tabular)_  specify output format (json|tabular|yaml)
@@ -2415,7 +2415,7 @@ Click on the expander to see details for each command.
 
   _--utc  (= false)_  display time as UTC in RFC3339 format
   
-  List all the machines in a juju model.
+  List all the machines in a Juju model.
   Default display is in tabular format with the following sections:
   ID, STATE, DNS, INS-ID, SERIES, AZ
   
@@ -2454,7 +2454,7 @@ Click on the expander to see details for each command.
 
   _--utc  (= false)_  display time as UTC in RFC3339 format
   
-  List all the machines in a juju model.
+  List all the machines in a Juju model.
   Default display is in tabular format with the following sections:
   ID, STATE, DNS, INS-ID, SERIES, AZ
   
@@ -2485,7 +2485,7 @@ Click on the expander to see details for each command.
   _--all  (= false)_  show all models  (administrative users only)
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
 
 
   _--exact-time  (= false)_  use full timestamp precision
@@ -2786,7 +2786,7 @@ Click on the expander to see details for each command.
   _--all  (= false)_  include disabled users in the listing
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
 
 
   _--exact-time  (= false)_  use full timestamp precision
@@ -2827,7 +2827,7 @@ Click on the expander to see details for each command.
 
   _--server  (= )_  path to yaml-formatted server file
   
-  login connects to a juju controller and caches the information that juju
+  login connects to a Juju controller and caches the information that Juju
   needs to connect to the api server in the $(JUJU_DATA)/models directory.
   
   In order to login to a controller, you need to have a user already created for you
@@ -2843,7 +2843,7 @@ Click on the expander to see details for each command.
   
   A new strong random password is generated to replace the password defined in
   the server file. The 'test-controller' will also become the current controller that
-  the juju command will talk to by default.
+  the Juju command will talk to by default.
   
   If you have used the 'api-info' command to generate a copy of your current
   credentials for a controller, you should use the --keep-password option as it will
@@ -2888,7 +2888,7 @@ Click on the expander to see details for each command.
 
   _--utc  (= false)_  display time as UTC in RFC3339 format
   
-  List all the machines in a juju model.
+  List all the machines in a Juju model.
   Default display is in tabular format with the following sections:
   ID, STATE, DNS, INS-ID, SERIES, AZ
   
@@ -2927,7 +2927,7 @@ Click on the expander to see details for each command.
 
   _--utc  (= false)_  display time as UTC in RFC3339 format
   
-  List all the machines in a juju model.
+  List all the machines in a Juju model.
   Default display is in tabular format with the following sections:
   ID, STATE, DNS, INS-ID, SERIES, AZ
   
@@ -2994,7 +2994,7 @@ Click on the expander to see details for each command.
 
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
   
   Remove all blocks in the Juju controller.
   
@@ -3702,7 +3702,7 @@ Click on the expander to see details for each command.
       jujumodel set-constraints.
   
   Constraints set on a service are combined with model constraints for
-  commands (such as juju deploy) that provision machines for services.  Where
+  commands (such as `juju deploy`) that provision machines for services.  Where
   model and service constraints overlap, the service constraints take
   precedence.
   
@@ -3805,7 +3805,7 @@ Click on the expander to see details for each command.
       juju set-constraints.
   
   Constraints set on a service are combined with model constraints for
-  commands (such as juju deploy) that provision machines for services.  Where
+  commands (such as `juju deploy`) that provision machines for services.  Where
   model and service constraints overlap, the service constraints take
   precedence.
   
@@ -4236,7 +4236,7 @@ Click on the expander to see details for each command.
 
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
 
 
   _--exact-time  (= false)_  use full timestamp precision
@@ -4700,7 +4700,7 @@ Click on the expander to see details for each command.
 
   #### purpose:
 
-   show or change the default juju model or controller name
+   show or change the default Juju model or controller name
 
 
   
@@ -4710,7 +4710,7 @@ Click on the expander to see details for each command.
 
   _-l, --list  (= false)_  list the model names
   
-  Show or change the default juju model or controller name.
+  Show or change the default Juju model or controller name.
   
   If no command line parameters are passed, switch will output the current
   model as defined by the file $JUJU_DATA/current-model.
@@ -5056,7 +5056,7 @@ Click on the expander to see details for each command.
   with an entirely different one. The new charm's URL and revision are inferred as
   they would be when running a deploy command.
   
-  Please note that --switch is dangerous, because juju only has limited
+  Please note that --switch is dangerous, because Juju only has limited
   information with which to determine compatibility; the operation will succeed,
   regardless of potential havoc, so long as the following conditions hold:
   
@@ -5097,7 +5097,7 @@ Click on the expander to see details for each command.
 
   #### purpose:
 
-   upgrade the tools in a juju model
+   upgrade the tools in a Juju model
 
 
   
@@ -5123,7 +5123,7 @@ Click on the expander to see details for each command.
   _-y, --yes  (= false)_  answer 'yes' to confirmation prompts
   
   The upgrade-juju command upgrades a running model by setting a version
-  number for all juju agents to run. By default, it chooses the most recent
+  number for all Juju agents to run. By default, it chooses the most recent
   supported version compatible with the command-line tools version.
   
   A development version is defined to be any version with an odd minor
@@ -5138,11 +5138,11 @@ Click on the expander to see details for each command.
 
   _- when an explicit --version major.minor is given (e.g. --version 1.17,_  or 1.17.2, but not just 1)
   
-  For development use, the --upload-tools flag specifies that the juju tools will
+  For development use, the --upload-tools flag specifies that the Juju tools will
   packaged (or compiled locally, if no jujud binaries exists, for which you will
   need the golang packages installed) and uploaded before the version is set.
   Currently the tools will be uploaded as if they had the version of the current
-  juju tool, unless specified otherwise by the --version flag.
+  Juju tool, unless specified otherwise by the --version flag.
   
   When run without arguments. upgrade-juju will try to upgrade to the
   following versions, in order of preference, depending on the current
@@ -5184,7 +5184,7 @@ Click on the expander to see details for each command.
 
 
 
-  _-c, --controller (= "")_  juju controller to operate in
+  _-c, --controller (= "")_  Juju controller to operate in
 
 
   _--name (= "")_  the local name for this model

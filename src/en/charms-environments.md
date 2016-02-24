@@ -50,7 +50,7 @@ juju switch amazon             # switches the environment to the cloud defined b
 juju deploy mysql -e mycloud   # deploys mysql charm on the cloud defined by 'mycloud'
 ```
 
-**Note: ** Unlike many switches used with juju, `-e` must come at the end of the
+**Note: ** Unlike many switches used with `juju`, `-e` must come at the end of the
 command in order to be parsed correctly.
 
 ## Switching environments
@@ -96,7 +96,7 @@ specifications themselves, like this:
 Juju has a set of commands that permit you to view and change the configuration
 of a running environment. The commands can be used to make temporary changes,
 such as to logging, or permanent changes, such as to take advantage of new
-features after juju is upgraded.
+features after Juju is upgraded.
 
 The `get-environment` command will display all the environment's configured
 options. You can pass the name of an option to see just the one value. For
@@ -117,7 +117,7 @@ juju set-environment default-series=trusty
 The `unset-environment` command will set a configuration option to the default
 value. It acts as a reset. Options without default value are removed. It is an
 error to unset a required option. For example, you can unset the default series
-that charms are deployed with (so that the juju store can choose the best series
+that charms are deployed with (so that the Juju store can choose the best series
 for a charm) like this:
 
 ```bash
@@ -127,8 +127,8 @@ juju unset-environment default-series
 ## Upgrading environments
 
 The `upgrade-juju` command upgrades a running environment. It selects the most
-recent supported version of juju compatible with the command-line version. The
-juju machine and unit agents will be updated to the new version. The `--version`
+recent supported version of Juju compatible with the command-line version. The
+Juju machine and unit agents will be updated to the new version. The `--version`
 option can be used to select a specific version to upgrade to.
 
 ```bash

@@ -456,7 +456,7 @@ will look something like this:
 
 ![Step five - debug](./media/author-charm-writing-debug.png)
 
-If you wait for all the Juju operations to finish and run a juju status command,
+If you wait for all the Juju operations to finish and run a `juju status` command,
 you will be able to retrieve the public address for the Vanilla forum we just
 deployed. Copy it into your browser and you should see the setup page
 (pre-populated with the database config) waiting for any changes.

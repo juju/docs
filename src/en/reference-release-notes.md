@@ -1,6 +1,6 @@
 Title: Juju Release Notes  
 
-# Release Notes History
+# Release Notes history
 
 This section details all the available release notes for the stable series of
 `juju-core`.
@@ -25,7 +25,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.25.3
 
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -156,7 +156,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.25.0
 
 
-  ## Notable Changes
+  ## Notable changes
     * (Experimental) Improved networking features for AWS
       * New 'spaces' and 'subnet' commands
       * New 'spaces' constraints support
@@ -363,7 +363,7 @@ The versions covered here are:
      https://launchpad.net/juju-core/+milestone/1.24.7
 
 
-  ## Notable Changes
+  ## Notable changes
 
   ### The default EC2 instance is m3.medium
 
@@ -445,7 +445,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.24.6
 
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -508,7 +508,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.24.5
 
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -541,7 +541,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.24.4
 
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -584,7 +584,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.24.3
 
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -669,7 +669,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.24.2
 
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -739,7 +739,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.24.0
 
 
-  ## Notable Changes
+  ## Notable changes
 
     * VMWare (vSphere) Provider
     * Resource Tagging (EC2, OpenStack)
@@ -749,7 +749,7 @@ The versions covered here are:
     * Storage (experimental)
 
 
-  ### VMWare (vSphere) Provider
+  ### VMWare (vSphere) provider
 
   Juju now supports VMWare's vSphere ("Software-Defined Data Center")
   installations as a targetable cloud. It uses the vSphere API to interact
@@ -788,7 +788,7 @@ The versions covered here are:
   problem for most vSphere installations.
 
 
-  ### Resource Tagging (EC2, OpenStack)
+  ### Resource tagging (EC2, OpenStack)
 
   Juju now tags instances and volumes created by the EC2 and OpenStack
   providers with the Juju environment UUID. Juju also adds any user-
@@ -809,14 +809,14 @@ The versions covered here are:
   of the Juju machine or volume corresponding to the IaaS resource.
 
 
-  ### MAAS root-disk Constraint
+  ### MAAS root-disk constraint
 
   The MAAS provider now honours the root-disk constraint, if the targeted
   MAAS supports disk constraints. Support for disk constraints was added
   to MAAS 1.8.
 
 
-  ### Service Status
+  ### Service status
 
   Juju provides new hooks for charm authors to report service status, and
   'juju status' now includes the service status. This new functionality
@@ -952,7 +952,7 @@ The versions covered here are:
       01 May 2015 17:39:44+06:00  agent     idle
 
 
-  ### CentOS 7 Preview
+  ### CentOS 7 preview
 
   Juju 1.24.0 has initial CentOS support. This is experimental and has a
   number of known issues. However, most of the functionality of Juju
@@ -1020,7 +1020,7 @@ The versions covered here are:
   documented at https://jujucharms.com/docs/devel/wip-storage.
 
 
-  ### Storage (experimental) MAAS Provider Support
+  ### Storage (experimental) MAAS provider support
 
   The MAAS provider now supports storage. Storage directives are used to
   select machines which have the requisite number and size of volumes
@@ -1063,7 +1063,7 @@ The versions covered here are:
   documented at https://jujucharms.com/docs/devel/wip-storage.
 
 
-  ### Storage (experimental) Unit Placement
+  ### Storage (experimental) unit placement
 
   It is now possible to deploy units with storage to existing machines.
   This applies when using storage that is dynamically created, such as
@@ -1321,7 +1321,7 @@ The versions covered here are:
   https://launchpad.net/juju-core/+milestone/1.23.3
 
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -1378,7 +1378,7 @@ The versions covered here are:
   https://launchpad.net/juju-core/+milestone/1.23.2
 
 
-  ## Notable Changes
+  ## Notable changes
 
     * New Support for Google Compute Engine (GCE)
     * Support for systemd (and Vivid)
@@ -1390,7 +1390,7 @@ The versions covered here are:
     * Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
 
 
-  ### New Support for Google Compute Engine (GCE)
+  ### New support for Google Compute Engine (GCE)
 
   A new provider has been added that supports hosting a Juju environment
   in GCE. This feature leverages the support for Ubuntu cloud-images that
@@ -1495,7 +1495,7 @@ The versions covered here are:
   vivid charms in a local charm repository.
 
 
-  ### New Style Restore
+  ### New style restore
 
   You can now restore a backup with the new 'backups restore' command,
   which is more reliable and fast. New restore supports backups generated
@@ -1525,7 +1525,7 @@ The versions covered here are:
   ```
 
 
-  ### Improved Proxy Support for Restrictive Networks
+  ### Improved proxy support for restrictive networks
 
   A few of issues around HTTP/HTTPS and apt proxy support were fixed (Lp
   1403225, Lp 1417617). Charm downloads from the charm store which could
@@ -1542,7 +1542,7 @@ The versions covered here are:
   used for https, ftp, and apt proxies).
 
 
-  ### New Charm Actions
+  ### New charm actions
 
   Juju charms can describe actions that users can take on deployed
   services. These actions are scripts that can be triggered on a unit by
@@ -1568,7 +1568,7 @@ The versions covered here are:
     * status - show results of actions filtered by optional ID prefix
 
 
-  ### New Blocks and Messages
+  ### New blocks and messages
 
   You can now specify block message when you enable a block. For example,
   you can add a message to 'destroy-environment':
@@ -1593,7 +1593,7 @@ The versions covered here are:
   blocks.
 
 
-  ### Experimental: Service Leader Elections
+  ### Experimental: Service leader elections
 
   Services can now coordinate leadership among the deployed units using
   Juju's service leader election support.
@@ -1620,7 +1620,7 @@ The versions covered here are:
   resolve a hook or upgrade error.
 
 
-  ### Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
+  ### Experimental: Addressable LXC containers and KVM instances on AWS and MAAS
 
   The Juju AWS and MAAS providers now support starting LXC containers. The
   MAAS providers also supports networking on KVM. Containers and Virtual
@@ -1741,7 +1741,7 @@ The versions covered here are:
  
       https://launchpad.net/juju-core/+milestone/1.22.8
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -1775,7 +1775,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.22.6
 
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -1817,7 +1817,7 @@ The versions covered here are:
       https://launchpad.net/juju-core/+milestone/1.22.5
 
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -1866,7 +1866,7 @@ The versions covered here are:
 
   https://launchpad.net/~juju/+archive/stable
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
   
@@ -1942,7 +1942,7 @@ The versions covered here are:
   https://launchpad.net/juju-core/+milestone/1.22.0
 
 
-  ## Notable Changes
+  ## Notable changes
 
     * Blocking changes to the environment
     * LXC image caching and the cached-images command
@@ -2341,7 +2341,7 @@ The versions covered here are:
   https://launchpad.net/juju-core/+milestone/1.21.3
   
   
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -2415,7 +2415,7 @@ The versions covered here are:
   https://launchpad.net/juju-core/+milestone/1.21.1
 
 
-  ## Notable Changes
+  ## Notable changes
 
     * Selecting provisioner harvest modes
     * Using apt mirrors
@@ -3160,7 +3160,7 @@ The versions covered here are:
 
   https://launchpad.net/~juju/+archive/stable
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -3194,7 +3194,7 @@ The versions covered here are:
 
   https://launchpad.net/~juju/+archive/stable
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -3218,7 +3218,7 @@ The versions covered here are:
 
   https://launchpad.net/~juju/+archive/stable
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -3258,7 +3258,7 @@ The versions covered here are:
 
   https://launchpad.net/~juju/+archive/stable
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -3287,7 +3287,7 @@ The versions covered here are:
 
   https://launchpad.net/~juju/+archive/stable
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses packaging and documentation issues.
 
@@ -3311,7 +3311,7 @@ The versions covered here are:
 
   https://launchpad.net/~juju/+archive/stable
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -3338,7 +3338,7 @@ The versions covered here are:
 
   https://launchpad.net/~juju/+archive/stable
 
-  ## Notable Changes
+  ## Notable changes
 
   This releases addresses stability and performance issues.
 
@@ -3736,7 +3736,7 @@ The versions covered here are:
   details by running 'juju ensure-availability --help'
 
 
-  ### Availability Zone Placement
+  ### Availability zone placement
 
   Juju supports explicit placement of machines to availability zones
   (AZs), and implicitly spreads units across the available zones.
@@ -3917,7 +3917,7 @@ The versions covered here are:
   ```
 
 
-  ### Support for Multiple NICs with the Same MAC
+  ### Support for multiple NICs with the same MAC
 
   Juju now supports multiple physical and virtual network interfaces with
   the same MAC address on the same machine. Juju takes care of this
@@ -3942,7 +3942,7 @@ The versions covered here are:
   ```
 
 
-  ### MaaS Network Constraints and Deploy Argument
+  ### MaaS network constraints and deploy argument
 
   You can specify which networks to include or exclude as a constraint to
   the deploy command. The constraint is used to select a machine to deploy
@@ -3979,7 +3979,7 @@ The versions covered here are:
   the future.
 
 
-  ### MAAS Provider Supports Placement and add-machine
+  ### MAAS provider supports placement and add-machine
 
   You can specify which MAAS host to place the juju state-server on with
   the 'to' option. To bootstrap on a host named 'fnord', run this:
@@ -3997,7 +3997,7 @@ The versions covered here are:
   ```
 
 
-  ### Server Side API Versioning
+  ### Server side API versioning
 
   The Juju API server now has support for a Version field in requests that
   are made. For this release, there are no RPC calls that require anything
@@ -4165,7 +4165,7 @@ The versions covered here are:
   local juju environments without the juju-local package is not advised.
 
 
-  ### New and Notable
+  ### New and notable
 
     * Support for proxies
     * Managing authorised ssh keys
@@ -4475,7 +4475,7 @@ The versions covered here are:
     * Loading state on bootstrap ignores ssl-hostname-verification setting Lp 1268913
     * Provide remove-* aliases for destroy-service and destroy-machine Lp 1261628
 
-  ### Notable Changes
+  ### Notable changes
 
   This release addresses intermittent failures observed in recent weeks in
   Azure. Users may have seen “(request failed...307: Temporary Redirect)” when
@@ -4509,7 +4509,7 @@ The versions covered here are:
    * juju destroy-environment destroys other environments Lp 1257481
 
 
-  ### Notable Changes
+  ### Notable changes
 
   Juju may report the status of a service and machine that was terminated
   outside of Juju. Juju did not notice that the machine is gone. This release
@@ -4600,7 +4600,7 @@ The versions covered here are:
   net/%7Ejuju/+archive/stable)
 
 
-  ### New and Notable
+  ### New and notable
 
     * bootstrap now matches on major and minor version numbers when locating tools
     * public-bucket-url is deprecated, use tools-url and/or image-metadata-url instead
@@ -4732,7 +4732,7 @@ The versions covered here are:
 
   [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
 
-  ### New and Notable
+  ### New and notable
 
     * The Microsoft Azure provider is now considered ready for use.
     * lp # 1184786 juju cli now gives a clearer error message when the deprecated default-image-id key is found.
@@ -4780,7 +4780,7 @@ The versions covered here are:
 
   [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
 
-  ### New and Notable
+  ### New and notable
 
     * The Microsoft Azure provider is now considered ready for use.
     * lp # 1184786 juju cli now gives a clearer error message when the deprecated default-image-id key is found.

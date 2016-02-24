@@ -1,12 +1,12 @@
 Title: How to configure Juju to manage multiple environments  
 
-# The Juju Environment System
+# The Juju environment system
 
 Experimental in version 1.25, the Juju Environment System (JES) enables new 
 features for managing environments and controlling access to them through user 
 identities.
 
-## Enabling the Juju Environment System feature flag
+## Enabling the Juju environment system feature flag
 
 In order to use the multiple environment features of the Juju Environment System 
 (JES), you need to enable a development feature flag:

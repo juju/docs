@@ -1,16 +1,16 @@
 Title: Machine constraints  
 
-# Machine Constraints
+# Machine constraints
 
 Machine constraints allow you to choose the hardware to which your services will
 be deployed.
 
 Constraints can be set for environments and services, with service constraints
-overriding environment constraints, the default values set by juju when
+overriding environment constraints, the default values set by Juju when
 otherwise unspecified. Changes to constraints do not affect any unit that has
 already been assigned to a machine.
 
-Constraint can be set by the `juju set-constraints` command, taking an optional
+Constraints can be set by the `juju set-constraints` command, taking an optional
 `--service` arg, and any number of `key=value` pairs. When the service name is
 specified, the constraints are set on that service; otherwise they are set on
 the environment.
@@ -20,8 +20,8 @@ constraint, with one exception:
 
   - An empty value always means "not constrained". This allows you to ignore
     environment settings at the service level without having to explicitly
-    remember and reset the juju default values. Note that there is no way to
-    change the juju default values, though environment settings will override
+    remember and reset the Juju default values. Note that there is no way to
+    change the Juju default values, though environment settings will override
     them.
 
 The commands `juju deploy`, `juju bootstrap`, and `juju add-machine` have a
@@ -67,7 +67,7 @@ Output constraints for mysql
 ```bash
 juju get-constraints mysql
 ```
-# Provider Constraints
+# Provider constraints
 
 See a [complete listing of constraints](reference-constraints.html) for details
 on what each constraint means. Two of the most commonly used are:

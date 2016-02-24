@@ -2,7 +2,7 @@ Title: Dealing with errors encountered by charm hooks
 
 # Hook errors
 
-If any of your hooks returns a non-zero exit code, juju will stop managing the
+If any of your hooks returns a non-zero exit code, Juju will stop managing the
 unit directly and will wait for user intervention. This is a Bad Thing, and you
 should make every effort to avoid it, because the average user may not be in a
 position to diagnose the fault with any great degree of sophistication.
@@ -21,7 +21,7 @@ potentially underinformed responses to those errors.
 
 When a unit agent sets an error status, it stops running hooks and relinquishes
 control over the charm directory. This means that it's generally safe to `juju
-ssh` into the unit and use it as though you were the sole administrator; juju
+ssh` into the unit and use it as though you were the sole administrator; Juju
 will only take back control of the directory when explicitly requested, in
 response to either `juju resolved` or `juju upgrade-charm --force`.
 

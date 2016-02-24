@@ -64,7 +64,7 @@ juju unset-env apt-mirror
 to restore the default behaviour in a running environment.
 
 
-## Versions and Streams
+## Versions and streams
 
 The ```agent-stream``` option selects the versions of Juju which an environment
 can deploy and upgrade to. This defaults to "released", indicating that only
@@ -120,13 +120,13 @@ enable-os-upgrade: false
 You may also want to just update the package list to ensure a Charm has the
 latest software available to it by disabling upgrades but enabling updates.
 
-### Local Provider
+### Local provider
 
-The Local Provider, however, skips upgrades by default for faster provisioning.
+The local provider, however, skips upgrades by default for faster provisioning.
 If you wish to enable upgrades in your local development, you will need to
 explicitly set enable-os-upgrade to "true".
 
-If you are using the Local Provider to develop Charms or test, you will want to
+If you are using the local provider to develop charms or test, you will want to
 regularly purge the Juju LXC template and LXC host cache to be certain you are
 using fresh images. See
 [Installing and configuring Juju for LXC (Linux)](./config-LXC.html#ensuring-a-fresh-cache).

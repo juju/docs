@@ -10,14 +10,14 @@ Use header tags so we can link to these variables individually.
 
 # Environment Variables
 
-## Juju Client
+## Juju client
 
-These variables are available on the juju client in order to change its default
+These variables are available on the Juju client in order to change its default
 behavior.
 
 #### JUJU_ENV
 
-The current environment that juju will use by default. Juju has three ways it
+The current environment that Juju will use by default. Juju has three ways it
 will  determine current environment, in descending order:
 
 1. Check to see if `JUJU_ENV` is set.
@@ -52,7 +52,7 @@ This allows you to set the repository that Juju looks for charms in. This can
 also be done by passing `--repository=/path/to/charms` when running the command
 `juju deploy`.
 
-For example, if you are running juju in a Vagrant virtual machine, you could
+For example, if you are running Juju in a Vagrant virtual machine, you could
 set `JUJU_REPOSITORY` to your shared folder:
 
 ```
@@ -95,7 +95,7 @@ JUJU_STARTUP_LOGGING_CONFIG=TRACE juju bootstrap
 #### JUJU_CLI_VERSION
 
 This allows you to change the behavior of the command line interface (CLI)
-between major juju releases and exists as a compatibility flag for those users
+between major Juju releases and exists as a compatibility flag for those users
 wishing to enable the newer behavior of the Juju CLI. As the CLI output and
 behavior is stable between minor releases of Juju, setting JUJU_CLI_VERSION will
 enable developers and users to preview the newer behavior of the CLI.
@@ -154,7 +154,7 @@ JUJU_CHARM_DIR=/var/lib/juju/agents/unit-postgresql-0/charm
 
 #### JUJU_CONTEXT_ID
 
-Used by juju to communicate to ask a running agent to execute a command on juju's behalf.
+Used by Juju to communicate to ask a running agent to execute a command on Juju's behalf.
 ```
 JUJU_CONTEXT_ID=postgresql/0:db-relation-joined:34317605475203611
 ```
@@ -175,7 +175,7 @@ JUJU_ENV_NAME=local
 
 #### JUJU_ENV_UUID
 
-The unique identifier of the juju environment.
+The unique identifier of the Juju environment.
 ```
 JUJU_ENV_UUID=2c0896ce-fd6c-4647-8540-26f848e061f9
 ```
@@ -223,7 +223,7 @@ JUJU_UNIT_NAME=vanilla/0
 ```
 
 
-# Internal Use only
+# Internal use only
 
 #### JUJU_DUMMY_DELAY
 #### JUJU_NOTEST_MONGOJS

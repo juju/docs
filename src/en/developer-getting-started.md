@@ -1,6 +1,6 @@
 Title: Getting started developing charms  
 
-# Getting Started Developing Charms
+# Getting started developing charms
 
 The developer guide is for anyone wanting to write bits of code that we call
 charms. This guide introduces some new concepts that, once learned, can help
@@ -76,7 +76,7 @@ service requires a relationship to a database using the “mysql” interface. T
 MariaDB charm implements the mysql interface, which fulfills the db relation and
 is already in [the charm store](https://jujucharms.com/mariadb).
 
-## Writing your Charm
+## Writing your charm
 
 The fastest way to write a new charm is to build off of existing layers. This
 allows you to create code that is very focused for the service you are trying
@@ -153,7 +153,7 @@ juju add-relation mariadb vanilla
 juju expose vanilla
 ```
 
-## Testing your Charm
+## Testing your charm
 
 Because Juju is a large complex system, not unlike a Linux software
 distribution, there is a need to test the charms themselves and how they

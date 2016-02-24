@@ -1,6 +1,6 @@
-Title: Event Cycle  
+Title: Event cycle  
 
-# Event Cycle
+# Event cycle
 
  Taking a broad look at multiple services, there are several common events that
 each service goes through: install, configure, start, upgrade, and stop. To
@@ -36,7 +36,7 @@ hooks:
 There is more information on [Charm Hooks](./reference-charm-hooks.html) in the
 Reference section of the Juju documentation.
 
-# Deployment Events by example
+# Deployment events by example
 
 When deploying a charm, there is a guaranteed set lifecycle events that every
 charm will run - this is the basic series of hooks executed in the initial
@@ -48,7 +48,7 @@ deployment cycle.
 1. start
 1. update-status
 
-# Configuration Events by example
+# Configuration events by example
 
 Other event chains can be initiated by Juju commands or actions in the GUI.
 These chains follow a few different paths depending on which event is triggered
@@ -57,7 +57,7 @@ vanilla charm, Juju would then call the config-changed hook, and nothing else.
 
 1. config-changed
 
-# Relation Events by example
+# Relation events by example
 
 When a relation is added from the vanilla charm to a database charm, the first
 event is `database-relation-joined` the two units know about each other and the
@@ -79,7 +79,7 @@ configuration and restart the service if necessary.
 1. database-relation-departed
 1. database-relation-broken
 
-# Leader Events by example
+# Leader events by example
 
 Software with many distributed services may require a notion of a “leader”, or a
 single service as the organizer of the other services. Such services often have
@@ -93,7 +93,7 @@ an event if the leader is ever destroyed or otherwise displaced.
 There is more detailed information about [Charm Leadership in the Juju
 documentation](./authors-charm-leadership.html).
 
-# Storage Events by example
+# Storage events by example
 
 Many services require access to storage resources. Juju has events related to
 storage for the charm to respond to. There are two events related to storage,

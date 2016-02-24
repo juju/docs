@@ -1,7 +1,7 @@
 Title: Juju releases  
 
 
-# Get the Latest Juju
+# Get the latest Juju
 
 Juju is available for Ubuntu (and Debian-based OSes), Windows, and OS X.
 There can be 3 concurrent releases representing the stability of Juju's
@@ -13,7 +13,7 @@ current stable release to manage cloud deployments.
 
 The current stable version of Juju is 1.25.3.
 
-Stable juju is suitable for everyday production use.
+Stable Juju is suitable for everyday production use.
 
 Ubuntu
 : <pre>sudo add-apt-repository ppa:juju/stable
@@ -68,7 +68,7 @@ Windows
 
 Proposed releases use the 'proposed' simple-streams. You must configure
 the 'agent-stream' option in your environments.yaml to use the matching
-juju agents.
+Juju agents.
 
 ```no-highlight
 agent-stream: proposed
@@ -105,7 +105,7 @@ Windows
 
 Development releases use the 'devel' simple-streams. You must configure
 the 'agent-stream' option in your environments.yaml to use the matching
-juju agents.
+Juju agents.
 
 ```no-highlight
 agent-stream: devel

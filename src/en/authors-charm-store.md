@@ -1,6 +1,6 @@
 Title: The Juju charm store  
 
-# The Juju Charm Store
+# The Juju charm store
 
 Juju includes a collection of what we call `Charms` that let you deploy whatever
 services you want in Juju. A collection of charms that are designed to work
@@ -14,7 +14,7 @@ call The Charm Store.
   - Here is the official tutorial for charm authors: [authors-charm-writing](authors-charm-writing.html)
   - Here is the official tutorial for bundle authors: [charms-bundles](charms-bundles.html)
 
-## Charm Store Submission
+## Charm store submission
 
 There are currently 2 methods to submit a charm and have it listed in the charm
 store. Both methods have their perks - but it is suggested to start with your
@@ -25,13 +25,13 @@ ensure that your Charm gets into the Recommended Charms section of the Charm
 Store, so please follow the instructions in the
 [Recommended Charms](#recommended-charms) section below.
 
-## Charm Store Process
+## Charm store process
 
 This process is designed to allow prospective developers to have their charms
 reviewed and updated in the [Charm Store](https://jujucharms.com) in a timely
 manner that ensures peer reviews and quality.
 
-## Submitting a new Charm
+## Submitting a new charm
 
 Everyone with a launchpad account has access to have their charms listed in the
 charm store, without review, approximately 20 minutes after the initial push to
@@ -43,7 +43,7 @@ You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
 required to submit to both releases, but we recommend supporting both whenever
 possible so that users get the most flexibility:
 
-  1. Install juju and charm-tools.
+  1. Install Juju and charm-tools.
   1. Create a repository, something like `mkdir -p ~/charms/precise`; 'precise'
      is the release code name for the [release of Ubuntu](http://releases.ubuntu.com)
      you wish to target your charm at. You can also use `trusty` if you're
@@ -75,7 +75,7 @@ bzr push lp:~<your-lp-username>/charms/trusty/<your-charm>/trunk
 
 Your charm should then be looked at in a timely manner.
 
-### Name Space Charms
+### Name-Space charms
 
 There are some key differences with regard to deployment charms in your personal
 namespace.
@@ -86,7 +86,7 @@ namespace.
   - Workflow to accept contributions
 
 
-#### Submission Process
+#### Submission process
 
 When you feel your charm is ready for submission to your personal name space,
 you must initialise the repository and push your development branch to Launchpad.
@@ -122,7 +122,7 @@ space URL.
 juju deploy cs:~your-launchpad-username/series/nagios
 ```
 
-#### Charm Store Display
+#### Charm store display
 
 Name Spaced charms will be displayed under the **other** category in the GUI.
 They will be displayed with non-descript icons for the service. Only
@@ -143,14 +143,14 @@ the Launchpad
 [Developer Merge Proposal Documentation](https://dev.launchpad.net/UsingMergeProposals)
 
 
-### Recommended Charms
+### Recommended charms
 
 To have your charm listed as a charmer team recommended charm, you have to
 undergo a rigorous review process where the team evaluate the charm, evaluate 
 tests for your charm, and deploy & run tests against the provided service with
 different configuration patterns.
 
-After following the Submission Process outlined above:
+After following the submission process outlined above:
 
   1. File a bug against charms at 
      [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug)
@@ -165,7 +165,7 @@ After following the Submission Process outlined above:
      in the review queue!
 
 
-## Submitting a fix to an existing Charm
+## Submitting a fix to an existing charm
 
   1. Grab the charm you want to fix, we'll use Nagios as an example: `bzr branch lp:charms/precise/nagios`
   1. Modify it to meet your needs.
@@ -180,12 +180,12 @@ After following the Submission Process outlined above:
   1. For the reviewer field put the `charmers` team, this will get your code
      into the review queue!
 
-## Submitting bundles to the Charm Store
+## Submitting bundles to the charm store
 
 Refer to the [Bundles page](charms-bundles.html) for instructions on how to
 create bundles of charms and submit them to the store.
 
-## Getting Help
+## Getting help
 
 Inspired by [Bazaar's Patch Pilot
 programme](http://wiki.bazaar.canonical.com/PatchPilot) there will be patch

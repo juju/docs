@@ -1,6 +1,6 @@
 Title: Groups of services  
 
-# Groups of Services
+# Groups of services
 
 Juju deploys units of a service from a charm. The simplest way to do this is
 
@@ -82,7 +82,7 @@ juju add-relation mywiki:slave slavedb:db
 ```
 
 
-## Upgrade Groups and/or Config Groups
+## Upgrade groups and/or config groups
 
 There are also interesting use-cases for breaking large services down into
 separate groups of units. Instead of a single 5000-node hadoop service named

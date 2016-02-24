@@ -1,6 +1,6 @@
 Title: Using the local provider  
 
-# Using the Local Provider
+# Using the local provider
 
 The purpose of the "local provider" is to provide a testing ground or sandbox
 for users to experiment with Juju and to speed up the process of writing

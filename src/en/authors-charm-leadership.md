@@ -1,12 +1,12 @@
 Title: Implementing leadership in Juju charms  
 
-# Leadership for the Charm author
+# Leadership for the charm author
 
 Leadership provides a mechanism whereby multiple units of a service can make
 use of a single, shared, authoritative source for charm-driven configuration
 settings.
 
-Every service deployed by juju is guaranteed to have at most one leader at any
+Every service deployed by Juju is guaranteed to have at most one leader at any
 time. This is true independent of what the charm author does; whether or not
 you implement the hooks or use the tools, the unit agents will each seek to
 acquire leadership, and maintain it while they have it or wait for the current
@@ -24,7 +24,7 @@ should implement the following hooks:
     some other unit writes leader settings).
 
 No particular guarantees can be made regarding the timeliness of the
-`leader-settings-changed` hook; it's always possible for the juju agent itself
+`leader-settings-changed` hook; it's always possible for the Juju agent itself
 to be taken out of commission at the wrong moment and not restarted for a long
 time.
 
@@ -48,7 +48,7 @@ unprepossessing race scenarios.
     to verify continued leadership past lease expiry time, it would start to
     return false.
 
-Every service deployed by juju also has access to a pseudo-relation over which
+Every service deployed by Juju also has access to a pseudo-relation over which
 leader settings can be communicated with the following tools:
 
   * `leader-set` acts much like `relation-set`, in that it lets you write string
@@ -149,7 +149,7 @@ operations, so you can't guarantee a run every 30s anyway).
 
 And we don't plan to allow coarser-grained leadership requests. This is because
 if one unit could declare itself leader for a day (or even an hour) a failed
-leader will leave other parts of juju blocked for that length of time, and we're
+leader will leave other parts of Juju blocked for that length of time, and we're
 not willing to take on that cost; the 30-60s handover delay is bad enough
 already.
 
@@ -168,7 +168,7 @@ If you start your long-lived process in `leader-elected`, and stop it in
 `leader-settings-changed`, this will *usually* do what you want, but is
 vulnerable to a number of failure modes -- both because hook execution may be
 blocked until after the leadership lease has actually expired, *and* because
-total juju failure could also cause the hook not to run (but leave the workload
+total Juju failure could also cause the hook not to run (but leave the workload
 untouched).
 
 In the future, we may implement a `leader-deposed` hook, that can run with

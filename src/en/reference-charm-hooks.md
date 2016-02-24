@@ -60,7 +60,7 @@ and take action when the leader sets values. For more information read the
 `start` runs immediately after the first `config-changed` hook. It should be
 used to ensure the charm's software is running. Note that the charm's software
 should be configured so as to persist through reboots without further
-intervention on juju's part.
+intervention on Juju's part.
 
 ### stop
 
@@ -167,7 +167,7 @@ And, again, it's important to internalise the fact that there may be multiple
 runtime relations in play with the same name, and that they're independent: one
 `-broken` hook does not mean that _every_ such relation is broken.
 
-## Storage Charm Hooks
+## Storage charm hooks
 
 Juju can provides a variety of storage to charms. The charms can define several
 different types of storage that are allocated from Juju. To read more

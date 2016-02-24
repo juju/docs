@@ -6,7 +6,7 @@ The mysql interface is provided by the mysql charm, and is required by a number
 of charms currently in the Charm Store and elsewhere which would like to use or
 actually require a MySQL database.
 
-## Hook Implementation: relation-joined
+## Hook implementation: relation-joined
 
 ### In theory
 

@@ -94,7 +94,7 @@ And `juju status` should give something similar to:
 ```
 
 
-## LXC Containers within a KVM Guest
+## LXC containers within a KVM guest
 
 You can go further and use the KVM guest as a hosting system for LXC
 containers. This is achieved in the manner in which Juju commands are invoked;
@@ -109,7 +109,7 @@ recommended to use LXC cloning to speed up the creation of LXC containers.
 Unfortunately, `lxc-clone` cannot be specified during run-time with `juju
 set-env`.
 
-### KVM Guest Network Bridge
+### KVM guest network bridge
 
 Connect to the KVM guest, assuming a Juju machine # of '1' (based on the above
 output for `juju status`):

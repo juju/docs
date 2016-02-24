@@ -1,6 +1,6 @@
 Title: DHX plugin  
 
-# DHX: A Customized Hook Debugging Environment Plugin
+# DHX: A customized hook debugging environment plugin
 
 [DHX](https://github.com/juju/plugins/blob/master/juju-dhx) is a Juju plugin
 that allows you to fully and automatically customise the machines created by
@@ -39,7 +39,7 @@ Here is an overview of the features:
 - Automatic sync of changes made to charm during debug session
 - Support for easy paired debug sessions
 
-# Installation and Setup
+# Installation and setup
 
 First, follow [the instructions in the README](https://github.com/juju/plugins#install)
 to install the plugin bundle.
@@ -79,7 +79,7 @@ dhx` (or `juju debug-hooks-ext`, if you want to be verbose). This will
 automatically detect if the environment you're connecting to has been
 customized and, if not, apply your customizations.
 
-## Improved Unit Selection
+## Improved unit selection
 
 Instead of typing out the full unit name, in the form `service/0`, you can let
 DHX figure out which unit you want to debug. It will use cues such as which
@@ -132,7 +132,7 @@ Units:
 Select a unit by number or name: [mysql/1]
 ```
 
-## Retrying Failed Hooks
+## Retrying failed hooks
 
 The most common reason why you need to start a debug-hooks session is because a
 hook failed and you want to debug it to figure out why. Once you are in the 

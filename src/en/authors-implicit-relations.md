@@ -6,7 +6,7 @@ Implicit relations allow for interested services to gather lifecycle-oriented
 events and data about other services without expecting or requiring any
 modifications on the part of the author of the other service's charm.
 
-Implicit relationships are named in the reserved juju-* namespace. Both the
+Implicit relationships are named in the reserved `juju-*` namespace. Both the
 relation name and interface names provided by Juju are prefixed with `juju-`.
 Charms attempting to provide new relationships in this namespace will trigger an
 error.

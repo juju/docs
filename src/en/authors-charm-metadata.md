@@ -13,7 +13,7 @@ the following fields:
       and you needn't pay further attention to the restrictions.
   - `summary` is a one-line description of the charm.
   - `description` is a long-form description of the charm and its features.
-  It will also appear in the juju GUI.
+  It will also appear in the Juju GUI.
   - `tags` is a descriptive tag that is used to sort the charm in the store.
 
 

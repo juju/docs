@@ -109,7 +109,7 @@ another-local:
 `root-dir` to a location within it. Use locations **outside** of it.
 
 
-## Bootstrapping and Destroying
+## Bootstrapping and destroying
 
 The usage of LXC containers requires **root** privileges for some steps and
 Juju will prompt for your password if needed. Juju cannot be run under sudo
@@ -264,7 +264,7 @@ sudo lxc-destroy -n juju-trusty-lxc-template
 ```
 
 
-## LXC Containers within KVM guests
+## LXC containers within KVM guests
 
 You can also use Juju to create KVM guests within which are placed LXC
 containers. See [Configuring for KVM](./config-KVM.html#lxc-containers-within-a-kvm-guest).

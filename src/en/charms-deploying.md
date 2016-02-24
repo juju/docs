@@ -1,6 +1,6 @@
 Title: Deploying services  
 
-# Deploying Services
+# Deploying services
 
 The fundamental point of Juju is that you can use it to deploy services through
 the use of charms (the magic bits of code that make things just work). These
@@ -12,7 +12,7 @@ most part you can forget about this, as Juju will always try to apply the most
 relevant charm, so deploying can be straightforward and easy.
 
 
-# Deploying from the Charm Store
+# Deploying from the charm store
 
 In most cases, you will want to deploy charms by fetching them directly from the
 Charm Store. This ensures that you get the relevant, up to date version of the
@@ -285,7 +285,7 @@ This will allow you to save money when you need it by using --to, but also
 horizontally scale out on dedicated machines when you need to.
 
 
-## References and Examples
+## References and examples
 
   - [ Scaling Down in the Cloud with Juju](http://www.jorgecastro.org/2013/07/31/deploying-wordpress-to-the-cloud-with-juju/)
   - [ Targeted Machine Deployment with Juju](http://javacruft.wordpress.com/2013/07/25/juju-put-it-there-please/)
@@ -295,7 +295,7 @@ horizontally scale out on dedicated machines when you need to.
 
 Use the `networks` option to specify service-specific network
 requirements. The `networks` option takes a comma-delimited list of
-juju-specific network names. Juju will enable the networks on the
+Juju-specific network names. Juju will enable the networks on the
 machines that host service units. This is different from the network
 constraint which selects a machine that matches the networks, but does
 not configure the machine to use them. For example, this commands deploys

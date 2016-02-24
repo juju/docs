@@ -1,6 +1,6 @@
 Title: Service configuration  
 
-# Service Configuration
+# Service configuration
 
 When deploying a service, the charm you use will often support or even require
 specific configuration options to be set.
