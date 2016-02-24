@@ -1,121 +1,213 @@
 Title: Getting started with Juju  
+TODO: Testing section needs rewrite
+      Commands are as spec, but not implemented yet
+      Headings need looking at!
+      Links need to be reverified when supporting pages are written
 
+!!! Note: These instructions are currently transitional. They will become the 
+standard instructions for the stable 2.0 release, but as not all features of
+that release are fully finalised, some parts may change. If you are currently 
+using a pre-release version of Juju, please also refer to the release notes
+for caveats and install information. There are many broken links etc, this is 
+all work in progress
 
-# Introduction
+# Getting started with Juju
 
-This tutorial will explain how to get started with Juju, including installing,
-configuring, and bootstrapping a new Juju environment. Prerequisites include:
+Before you start on your Juju adventure, please make sure you have the 
+following:
 
-  - An Ubuntu, OSX, or Windows machine to install the client upon.
-  - An environment which can provide a new server with an Ubuntu cloud operating
-  system image on-demand. See under `Install & Configure` on the left for how
-  to use different providers, including any provider-specific settings.
+  - An Ubuntu, CentOS, MacOSX, or Windows machine to install the client on.
+  - Credentials to access a cloud (e.g. AWS, GCE, OpenStack...)
   - An SSH key-pair. On Linux and Mac OSX: `ssh-keygen -t rsa -b 2048` On Windows:
-  See the [Windows instructions for SSH and PuTTY](getting-started-keygen-win.html).
+  See the [Windows instructions for SSH and PuTTY][keygen].
 
+The rest of this page will guide you through installing the software, accessing
+your cloud and deploying a test workload.
 
-# Installation
+# 1. Install Juju
 
-
+Juju is currently available for Ubuntu, CentOS, MacOSX and Windows.
+    
 ## Ubuntu
 
-To install Juju, you simply need to grab the latest juju-core package from the
+To install Juju, you simply need to grab the latest juju2 package from the
 PPA:
-
+  
 ```bash
 sudo add-apt-repository ppa:juju/stable
-sudo apt-get update && sudo apt-get install juju-core
+sudo apt-get update && sudo apt-get install juju2
 ```
 
-For more information on installing and the current versions available, see
-[the releases page](reference-releases.html).
+Using this PPA resource gurantees you will always have access to the very latest
+stable version of Juju.
 
 
-## Mac OSX
+## CentOS, MacOSX, Windows
 
-Juju is in [Homebrew](http://brew.sh/), to install do:
+See [the releases page](reference-releases.html) for instructions on how to
+install the versions currently available.
 
+
+# 2. Choose a cloud
+
+Juju maintains knowledge about supported public clouds and their regions. To see
+the list of clouds Juju currently knows about, simply enter:
+  
 ```bash
-brew install juju
+juju list-clouds
 ```
+Which should return a list like this:
 
-We also recommend trying Juju in [our Vagrant box](config-vagrant.html).
-
-For more installation information and what versions are available, see
-[the releases page](reference-releases.html).
-
-
-## Windows
-
-See [the releases page](reference-releases.html) to download and run the
-latest version of the Juju Windows installer.
-
-We also recommend trying Juju in [our Vagrant box](config-vagrant.html).
-
-
-# Configuring
-
-Juju needs to be configured to use your cloud provider. This is done via the
-following file:
-
-
-## Linux & Mac OSX configuration
-
+<!--CLOUD LIST -->
 ```no-highlight
-~/.juju/environments.yaml
+CLOUD        TYPE        REGIONS
+aws          ec2         us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2 ...
+aws-china    ec2         cn-north-1
+aws-gov      ec2         us-gov-west-1
+azure        azure       centralus, eastus, eastus2, northcentralus, southcentralus, westus, northeurope ...
+azure-china  azure       chinaeast, chinanorth
+cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
+google       gce         us-east1, us-central1, europe-west1, asia-east1
+joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
+rackspace    rackspace   DFW, ORD, IAD, LON, SYD, HKG
 ```
 
+Juju already knows how to talk to these cloud providers, but it can also work 
+with other clouds, including any OpenStack cloud, a MAAS environment, or the 
+amazingly fast 'local' provider (Linux only), which is ideal for development
+and testing.
 
-## Windows configuration
+To let Juju know about other clouds, or to customise the configuration further,
+please [read the instructions on managing clouds][clouds].
 
+If you have an account with a listed cloud, you don't need to configure anything,
+Juju just needs your credentials for accessing the cloud.
+
+!!! Note: alpha/beta versions require some extra configuration for streams, 
+see the release notes!
+
+# 3. Enter your credentials
+
+Juju currently uses three possible ways to get your credentials for a cloud:
+  
+  - Scanning appropriate environment variables for credentials
+  - Reading its own credentials.yaml file
+  - Passing the values on the commandline when bootstrapping
+  
+## Using environment variables  
+
+Some cloud providers (e.g. AWS, Openstack) have commandline tools which rely on
+environment variables being used to store credentials. If these are in use on
+your system already, or you choose to define them ([there is extra info here][env]), 
+Juju will use them too.
+
+For example, AWS uses the following environment variables (among others):
+  
+  **`AWS_ACCESS_KEY_ID`**
+  
+  **`AWS_SECRET_ACCESS_KEY`**
+
+If these are already set in your shell (you can `echo $AWS_ACCESS_KEY_ID` to 
+test) they can be used by Juju.
+
+To store these credentials permanently for Juju, it is recommended to run the 
+command:
+
+```bash
+juju autoload-credentials
+```  
+
+
+## Specifying credentials
+
+Juju maintains a file of known credentials 
+(`~/.local/share/juju/credentials.yaml` on Ubuntu) for accessing clouds. You can
+add credentials by running the command:
+  
+```bash
+juju add-credential <cloud>
+```  
+Juju will then interactively ask for the information it needs. This may vary 
+according to the cloud you are using, but will typically look something like
+this:
+  
+```bash
+juju add-credential aws 
+credential name: carol
+select auth-type [userpass, oauth, etc]: userpass
+enter username: cjones
+enter password: *******
+```
+You can also specify a YAML format source file for the credentials. The source
+file would be similar to:
+
+```yaml
+credentials:
+  aws:
+    default-credential: bob
+    default-region: us-east-1
+    bob:
+      auth-type: access-key
+      access-key: AHJHKUWK7HIW
+      secret-key: 21f8cbb668263a1223755b5f15c48a
+```
+
+A source file like the above can be added to Juju's list of credentials with
+the command:
+  
+```bash
+juju add-credential aws -f mycreds.yaml
+```
+
+You can check what credentials are stored by Juju by running the command:
+  
+```bash
+juju list-credentials
+```
+which will return a list of the known credentials. For example:
+  
 ```no-highlight
-%APPDATA%\Juju\environments.yaml
+CLOUD   CREDENTIALS
+aws     bob*, carol
+google  wayne
 ```
+The asterisk '*' denotes the default credential, which will be used for the 
+named cloud unless another is specified.
 
-Where `%APPDATA%` is typically defined as `C:\Users\<user>\AppData\Roaming`.
+(For more help with credentials, auth-types and the commands mentioned here, 
+please [see this guide to credentials][credentials]) 
 
-Juju can automatically generate the file in this way:
+# 4. Bootstrap
 
+Before you can start using Juju to spin up services in a cloud, it needs to 
+create its own instance to act as a controller. The controller is your Juju
+agent in the cloud, receiving and processing commands and communicating with any
+other instances you create there.
+
+To do this, we use the `bootstrap` command:
+  
 ```bash
-juju generate-config
+juju bootstrap <controller-name>  <cloud>
 ```
-
-This action will not overwrite an existing file but merely dump the information
-onscreen (STDOUT). It will contain sample profiles for different types of cloud
-services. Edit it to provide specific information for your chosen cloud
-provider. For more specifics on what needs to be changed, see the relevant
-sections in the left pane (under *Install & Configure*).
-
-**Note:** Juju's command line interface includes documentation, running `juju
-help` will show you the topics. You can also look at the
-[Juju command cheatsheet](https://github.com/juju/cheatsheet) if you are
-looking for a convenient command guide.
-
-
-# Testing your setup
-
-The first step is to create a bootstrap environment. This is a cloud instance
-that Juju will use to deploy and manage services. It will be created according
-to the configuration you have provided, and your public SSH key will be
-uploaded automatically so that Juju can communicate securely with the
-bootstrap instance.
-
-<iframe style="margin-left: 20%;" class="youtube-player" type="text/html"
-width="420" height="350" src="//www.youtube.com/embed/0AT6qKyam9I"></iframe>
-
+So, assuming we are using the cloud 'aws', we should run:
+  
 ```bash
-juju bootstrap
+juju bootstrap test aws
 ```
 
-**Note:** If you have multiple environments configured, you can choose which one
-to address with a particular command by adding the `-e` switch followed by the
-environment name, E.g. `-e hpcloud`.
+This bootstrap process may take a few minutes to complete as it creates a new 
+instance in the cloud and fetches the sofware it requires, but you should see
+plenty of feedback in your shell.
 
-You may have to wait a few moments for this command to return, as it needs to
-perform various tasks and contact your cloud provider.
+!!! Note: If there any errors in the bootstrap process, take a look at our 
+[FAQ][faq] for possible solutions!
 
-Assuming it returns successfully, we can now deploy some services and explore
-the basic operations of Juju.
+
+# 5. Testing 
+
+!!! Note: This section not yet updated for 2.0
+
+With the Juju controller running, you can now start deploying services. 
 
 To start with, we will deploy WordPress:
 
@@ -149,8 +241,8 @@ juju add-relation wordpress mysql
 This command uses information provided by the relevant charms to associate these
 services with each other in whatever way makes sense. There is much more to be
 said about linking services together which is covered in the Juju [command
-documentation](commands.html), but for the moment, we just need to know that it will link these
-services together.
+documentation](commands.html), but for the moment, we just need to know that it 
+will link these services together.
 
 In order to make our WordPress public, we now need to expose this service:
 
@@ -169,66 +261,13 @@ juju status
 The output from this command should look something like this:
 
 ```no-highlight
-machines:
-  "0":
-    agent-state: started
-    agent-version: 1.10.0
-    dns-name: ec2-50-16-167-135.compute-1.amazonaws.com
-    instance-id: i-781bf614
-    series: precise
-  "1":
-    agent-state: started
-    agent-version: 1.10.0
-    dns-name: ec2-23-22-225-54.compute-1.amazonaws.com
-    instance-id: i-9e8927f6
-    series: precise
-  "2":
-    agent-state: started
-    agent-version: 1.10.0
-    dns-name: ec2-54-224-220-210.compute-1.amazonaws.com
-    instance-id: i-5c440436
-    series: precise
-services:
-  mysql:
-    charm: cs:precise/mysql-18
-    exposed: false
-    relations:
-      db:
-      - wordpress
-    units:
-      mysql/0:
-        agent-state: started
-        agent-version: 1.10.0
-        machine: "1"
-        public-address: ec2-23-22-225-54.compute-1.amazonaws.com
-  wordpress:
-    charm: cs:precise/wordpress-12
-    exposed: true
-    relations:
-      db:
-      - mysql
-      loadbalancer:
-      - wordpress
-    units:
-      wordpress/0:
-        agent-state: started
-        agent-version: 1.10.0
-        machine: "2"
-        public-address: ec2-54-224-220-210.compute-1.amazonaws.com
+
+TO BE UPDATED
+
 ```
 
-There is quite a lot of information here. The first section, titled
-**machines:**, details all the instances which are currently running. For each
-you will see the version of Juju they are running, their hostname, instance id
-and the series or version of Ubuntu they are running.
 
-After that, the sections list the services which are currently deployed. The
-information here differs slightly according to the service and how it is
-configured. It will, however, always list the charm that was used to deploy the
-service, whether it is exposed or not, its address and what relations
-exist.
-
-From this readout, we can see that WordPress is exposed and ready. If we
+From this output, we can see that WordPress is exposed and ready. If we
 point a web browser at the address we should be able to access it:
 
 ![WordPress in a web browser](./media/getting_started-wordpress.png)
@@ -242,13 +281,33 @@ To remove all current deployments and clear everything in your cloud, you can
 run:
 
 ```bash
-juju destroy-environment <environment-name>
+juju destroy-controller <controller-name>
 ```
 
-Where `<environment-name>` is the name you gave the environment when you
-configured it. A warning will be displayed and the user will be prompted whether
-or not to continue. This action will remove everything in the specified
-environment, including the bootstrap node.
+Where `<controller-name>` is the name you gave the controller when you
+bootstrapped it. A warning will be displayed and the user will be prompted whether
+or not to continue. 
 
-See the [charm documentation](./charms.html) to learn more about charms,
-including configuring options and managing running systems.
+# Next Steps
+
+Now you have a Juju-powered cloud, it is time to explore the amazing things you
+can do with it! 
+
+We suggest you take the time to read the following:
+  
+  - [Juju concepts][concepts] - This page explains the terminology used throughout this 
+    documentation and describes what Juju can do 
+  - [Clouds][clouds] goes into detail about configuring clouds, including the 
+    'local' cloud, which is great for lightning fast testing and development.
+  - [Charms/Services][charms] - find out how to construct complicated workloads 
+    in next to no time.
+
+
+[clouds]: ./clouds.html  "Configuring Juju Clouds"
+[charm store]: https://jujucharms.com "Juju Charm Store"
+[releases]: reference-releases.html 
+[keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
+[concepts]: ./juju-concepts.html "Juju concepts"
+[charms]: ./charms-intro.html
+[credentials]: ./credentials.html
+[faq]: ./getting-started-faq.html
