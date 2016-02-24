@@ -72,7 +72,7 @@ TODO: Add completely new commands
 | juju service help                    | deprecated                         |
 | juju service set                     | `juju set-config`                  |
 | juju service set-constraints         | `juju set-constraints`             |
-| juju service unset                   | deprecated (use `juju set-config --default`)|
+| juju service unset                   | deprecated (use `juju set-config --to-default`)|
 | juju set-constraints                 | `juju set-constraints`             |
 | juju set-environment                 | deprecated                         |
 | juju ssh                             | UNCHANGED                          |

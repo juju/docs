@@ -1,6 +1,6 @@
 Title: What is Juju?  
 
-##What is Juju?
+#What is Juju?
 Juju is a state-of-the-art, open source, universal model for service oriented architecture and service oriented
 deployments. Juju allows you to deploy, configure, manage, maintain, and scale cloud services quickly and efficiently on public clouds, as well as on physical servers, OpenStack, and containers. You can use Juju from the command line or through its beautiful GUI.
 
@@ -77,7 +77,7 @@ A charm is also a collection of scripts that handle different kinds of events. T
 
 ## What charms are currently available?
 Charms are available for hundreds of common and popular cloud-oriented applications such as MySQL, MongoDB, and others, with new ones being added every day. Check out the public charm store for an up to the minute list of charms:
-jujucharms.com
+[Juju Charm Store](https://jujucharms.com)
 
 ## Are charms open source? Under what license?
 Charms can be published under whatever license the author prefers, there are charms under just about every kind of license out there today. In many cases, charms follow the license of the applications that they deploy, but this is not a requirement. There are open source charms that deploy proprietary software, for example, and the reverse would be possible as well.
@@ -95,7 +95,7 @@ If you want, you can also share your charm with the world and gain feedback and 
 
 What are the best workloads to try with Juju?
 
-Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure such as OpenStack, or container management systems. Pick your favourite cloud and launch a juju server, deploy the Juju GUI there and then drop one of the bundles from the charm store into the blank canvas.
+Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure such as OpenStack, or container management systems. Pick your favourite cloud and launch a Juju server, deploy the Juju GUI there and then drop one of the bundles from the charm store into the blank canvas.
  
 <style>.tableicon{width:100px;height:100px;float:right;margin: 5px 5px 40px 20px;}</style>
 <table>

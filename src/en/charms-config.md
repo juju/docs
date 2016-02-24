@@ -17,15 +17,15 @@ operational.
 Each charm will have its own set of options and possible values. You can
 discover these in several ways:
 
-  - By running the `juju get <service>` command.
-  - By viewing the charm in the [charm store.](https://jujucharms.com)
+  - By running the `juju get-config` command.
+  - By viewing the charm in the [charm store](https://jujucharms.com).
   - By examining the **config.yaml** file in the charm itself.
 
 
 ## Configuring a service at deployment
 
 It is possible to set configuration values when deploying a service by
-providing a yaml-formatted file containing configuration values.
+providing a [yaml-formatted][yaml] file containing configuration values.
 
 For example, upon investigation we discover that the Mediawiki charm allows us
 to set values for the name of the wiki and the 'skin' to use. We can put these
@@ -44,7 +44,7 @@ We can then use this configuration when we deploy the service:
 juju deploy --config myconfig.yaml mediawiki
 ```
 
-**Caution:** If the yaml configuration file cannot be read or contains some
+!!! WARNING: If the yaml configuration file cannot be read or contains some
 syntax errors or invalid options, you will receive an error message to this
 effect. However, **the service will still be deployed **. 
 
@@ -55,10 +55,10 @@ It is possible to set or change configuration of a service which is already
 deployed.
 
 Before you set any of these options, you may want to check what current options
-are already set, using the `juju get <service>` command. For example:
+are already set, using the `juju get-config <service>` command. For example:
 
 ```bash
-juju get mediawiki
+juju get-config mediawiki
 ```
 
 Should return something like this:
@@ -92,18 +92,34 @@ settings:
     description: skin for the Wiki
     type: string
     value: vector
+  use_suffix:
+    description: If we should put '/mediawiki' suffix on the url
+    type: boolean
+    value: false
 ```
 
-You can set the options using the `juju set <service>`, specifying
-multiple key=value pairs if necessary:
+You can set the options using the `juju set-config <service>`, specifying
+multiple space-separated key=value pairs if necessary:
 
 ```bash
-juju set mediawiki skin=monoblock name='Juju Wiki' 
+juju set-config mediawiki skin=monoblock name='Juju Wiki' 
+```
+It is also possible to set the configuration options from a YAML file after
+the service has been deployed:
+  
+```bash
+juju set-config --config=m.yaml mediawiki
 ```
 
-Setting an option back to its default value is done using the `unset` command
-followed by the service and the respective options:
+  
+Setting an option back to its default value is achieved by using the 
+`set-config` command, but with the `--to-default` switch, followed by the 
+service and a space separated list of the values to return to the default
+setting:
 
 ```bash
-juju unset mediawiki admins name 
+juju set-config --to-default mediawiki admins name
 ```
+
+
+[yaml]: http://yaml.org/spec/1.1/current.html "YAML spec page"
