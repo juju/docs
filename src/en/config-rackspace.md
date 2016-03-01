@@ -98,9 +98,9 @@ juju bootstrap controller-rackspace rackspace --debug --upload-tools --config=~/
 ```
 
 A successful bootstrap will result in the controller being visible in the
-[GCE console](https://console.cloud.google.com/compute):
+[Rackspace cloud console](https://mycloud.rackspace.com):
 
-![bootstrap machine 0 in GCE portal](./media/config-gce-gce_portal-machine_0.png)
+![bootstrap machine 0 in Rackspace portal](./media/config-rackspace_portal-machine_0.png)
 
 
 ## Additional notes
