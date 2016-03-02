@@ -20,18 +20,22 @@ available.
 
 #### LAYER_PATH
 
-Defines the location on disk to search for local layers
-
-#### INTERFACE_PATH
-
-Defines the location on disk to search for interface layers
+Defines the location on disk to search for local layers. First, create the base
+directory, if it doesn't exist:
 
 ```bash
-LAYER_PATH=$JUJU_REPOSITORY/layers
-INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
+mkdir $HOME/charms
+export JUJU_REPOSITORY=$HOME/charms
 ```
 
-And create our charm layer for Vanilla
+Next, create the directory where layered charms will reside:
+
+```bash
+mkdir $JUJU_REPOSITORY/layers
+export LAYER_PATH=$JUJU_REPOSITORY/layers
+```
+
+And finally, create our charm layer for Vanilla:
 
 ```bash
 mkdir -p $LAYER_PATH/vanilla

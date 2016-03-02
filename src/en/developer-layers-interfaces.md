@@ -42,7 +42,7 @@ this interface?
 - What states (if any) should this interface raise on the requirer?
 
 
-## Communication scopes 
+## Communication scopes
 
 When writing an interface, there is also the concept of a communication scope.
 There are three distinct flavors of scoping for a conversation. At times there
@@ -92,6 +92,15 @@ class MyRelationClient(RelationBase):
 ## Writing an interface-layer
 
 Begin by making an interface repository if you don't currently have one.
+
+Create the base charms directory, if it doesn't exist:
+
+```bash
+mkdir $HOME/charms
+export JUJU_REPOSITORY=$HOME/charms
+```
+
+Then, create the directory where the interfaces you write will reside:
 
 ```bash
 mkdir -p $JUJU_REPOSITORY/interfaces

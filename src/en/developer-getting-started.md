@@ -95,14 +95,22 @@ makes layers possible.
 ### Creating a new layer
 
 First off, you require a [local charm repository](./charms-deploying.html) in
-which to work. This involves creating some directories and setting some
-environment variables. For example:
+which to work. This involves creating three directories -- `layers`,
+`interfaces`, and `charms` -- and setting some environment variables.
+
+The `layers` directory contains the source code of the layered charm covered in
+our examples. The `interfaces` directory is where you'd place any
+[interface-layers](./charms-layers-interfaces.md) you may wish to write, and the
+`charms` directory holds the assembled, ready to deploy charm.
 
 ```bash
+mkdir $HOME/charms
 export JUJU_REPOSITORY=$HOME/charms
+
+mkdir $JUJU_REPOSITORY/{interfaces,layers}
 export LAYER_PATH=$JUJU_REPOSITORY/layers
 export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
-mkdir -p $JUJU_REPOSITORY/layers
+
 cd $JUJU_REPOSITORY/layers
 ```
 
