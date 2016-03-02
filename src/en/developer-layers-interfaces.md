@@ -250,7 +250,7 @@ In our metadata we define a reverseproxy relation implementing the interface:
 ```yaml
 requires:
   reverseproxy:
-    interface: website
+    interface: http
 ```
 
 And in our reactive file, we implement it as so:
