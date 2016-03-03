@@ -1,9 +1,19 @@
 Title: Configuring for Rackspace
-TODO: Review again when Juju 2.0 more mature ('juju add-credential rackspace' should exist)
-      Need exhaustive list of conf/cred parameters to use ('juju help rackspace-provider' should exist)
+TODO: Review again soon (created: March 2016)
+      'juju add-credential rackspace' should exist
+      Need exhaustive list of conf/cred parameters to use
+      Does 'juju show-cloud rackspace' replace 'juju help rackspace-provider'? Confirm these commands
+      Confirm navigation.tpl contains controllers & models (see links in first paragraph)
+      Explain the configuration parameters (like credentials parameters)
+      Explain how to use auth-type 'access-key'
 
 
 # Configuring for Rackspace
+
+Here we gather the ingredients necessary for the creation of a *controller* for
+the Rackspace cloud provider (see [Controllers](./controllers.html)). If your
+objective is instead to create a Rackspace *model* please see [Defining a
+model](./models-defining.html).
 
 
 ## Prerequisites
@@ -16,43 +26,36 @@ TODO: Review again when Juju 2.0 more mature ('juju add-credential rackspace' sh
  - An understanding of the [Getting started](./getting-started.html) page.
 
 
-## Configuration
-
-Values will need to be found for the following parameters:
-
- - default-region
- - auth-type
- - username
- - password
- - tenant-name
-
-### `default-region`
-
-### `auth-type`
-
-### `username`
-
-### `password`
-
-### `tenant-name`
-
-The file `~/config-rackspace.yaml` in this example would look like this:
-
-```yaml
-logging-config: "<root>=DEBUG"
-agent-metadata-url: https://streams.canonical.com/juju/tools
-image-metadata-url: http://0315ec36e423bb7dba4b-3eabf88619cf7b7e6fc262bcf48df10b.r19.cf1.rackcdn.com/images
-image-stream: "released"
-default-series: "trusty"
-```
-
-!!! Note: A temporary URL provided by Rackspace has been used for
-'image-metadata-url' in the example configuration.
-
-
 ## Credentials
 
-The file `credentials-rackspace.yaml` in this example would look like this:
+Values will need to be found for certain parameters:
+
+**`default-region`**<br/>
+Decide on the default Rackspace *region*. See 
+[Rackspace regions](https://support.rackspace.com/how-to/about-regions/).
+or the output to `juju list-clouds`.
+
+**`auth-type`**<br/>
+This can be either 'access-key' or 'userpass'. Here, we'll use 'userpass'.
+
+**`username`**<br/>
+For the 'userpass' auth-type, this is the name used to log in to the
+[Rackspace cloud control panel](https://mycloud.rackspace.com).
+
+**`password`**<br/>
+For the 'userpass' auth-type, this is the password associated with the value of
+'username'.
+
+**`tenant-name`**<br/>
+This is the Rackspace account number. You can view it in the cloud control
+panel in the top-right corner (under your username).
+
+See `juju show-cloud rackspace`.
+
+### Add credentials
+
+Create a YAML file called, say, `credentials-rackspace.yaml` and provide the
+credential-related material. In this example, it would look like this:
 
 ```yaml
     rackspace:
@@ -60,13 +63,13 @@ The file `credentials-rackspace.yaml` in this example would look like this:
         default-region: DFW
         some_label:
             auth-type: userpass
-            username: username
-            password: secret_password
-            tenant-name: "######'
+            username: your_username
+            password: your_password
+            tenant-name: "123456"
 ```
 
-Now add these credentials to the system. At time of this writing, you must
-manually add the above block to the user-wide credentials file
+Now add this to the system. At time of this writing, you must manually add the
+above block to the user-wide credentials file
 `~/.local/share/juju/credentials`. Put it under the 'credentials:' section.
 Therefore, if this is the sole block in that file, the entire file would appear
 as:
@@ -78,27 +81,38 @@ credentials:
         default-region: DFW
         some_label:
             auth-type: userpass
-            username: username
-            password: secret_password
-            tenant-name: "######'
+            username: your_username
+            password: your_password
+            tenant-name: "123456"
 ```
 
-```bash
-juju list-credentials
+
+## Configuration
+
+Create a YAML file called, say, `~/config-rackspace.yaml` and provide the
+configuration-related material. In this example, it would look like this:
+
+```yaml
+logging-config: "<root>=DEBUG"
+agent-metadata-url: https://streams.canonical.com/juju/tools
+image-metadata-url: http://0315ec36e423bb7dba4b-3eabf88619cf7b7e6fc262bcf48df10b.r19.cf1.rackcdn.com/images
+image-stream: "released"
+default-series: "trusty"
 ```
 
-## Bootstrap
+!!! Note: A temporary URL provided by Rackspace has been used for
+'image-metadata-url' in the example configuration. This should not be needed in
+the long term.
 
-Once the configuration and credentials files have been set it is time to
-bootstrap. Here we call the controller 'controller-rackspace' and use `--upload-tools`
-to make the agent software available to our chosen series (Trusty):
 
-```bash
-juju bootstrap controller-rackspace rackspace --debug --upload-tools --config=~/config-rackspace.yaml
-```
+## Create controller
 
-A successful bootstrap will result in the controller being visible in the
-[Rackspace cloud console](https://mycloud.rackspace.com):
+Once the configuration and credentials information have been entered it is time
+to create the controller for Rackspace. See
+[Creating a controller](./controllers-creating.html).
+
+This will result in the controller being visible in the
+[Rackspace cloud control panel](https://mycloud.rackspace.com):
 
 ![bootstrap machine 0 in Rackspace portal](./media/config-rackspace_portal-machine_0.png)
 
