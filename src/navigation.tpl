@@ -13,6 +13,7 @@
                       <li><a href="config-local.html">Local</a></li>
                       <li><a href="config-maas.html">MAAS (bare metal)</a></li>
                       <li><a href="config-openstack.html">OpenStack</a></li>
+                      <li><a href="config-rackspace.html">Rackspace</a></li>
                       <li><a href="config-scaleway.html">Scaleway</a></li>
                       <li><a href="config-vagrant.html">Vagrant</a></li>
                       <li><a href="config-vmware.html">VMWare vSphere</a></li>
