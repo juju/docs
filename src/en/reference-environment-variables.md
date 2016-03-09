@@ -105,6 +105,32 @@ export JUJU_CLI_VERSION=2
 juju status
 ```
 
+# Building
+
+These variables are available to the `charm build` process.
+
+#### LAYER_PATH
+
+Sets the location to search for charm-layers. If
+no layer is found in this location, it defaults to searching the directory
+at `interfaces.juju.solutions` for the requested charm-layer.
+
+```
+LAYER_PATH=$JUJU_REPOSITORY/layers
+```
+
+#### INTERFACE_PATH
+
+Sets the location to search for interface-layers. If
+no interface is found in this location, it defaults to searching the directory
+at `interfaces.juju.solutions` for the requested interface-layer.
+
+
+```
+INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
+```
+
+
 # Unit
 
 These variables are available to charms during hook execution.
