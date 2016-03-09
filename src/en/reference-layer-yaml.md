@@ -1,17 +1,19 @@
 Title: Charm Layer.yaml Reference  
 
-# Layer.yaml
+## Layer.yaml
 
 Each layer used to build a charm can have a `layer.yaml` file. The top layer
 (the one actually invoked from the command line) must. These tell the generator
-what do, ranging from which base layers to include, to which interfaces. They
+what do, ranging from which base layers, to which interfaces to include. They
 also allow for the inclusion of specialized directives for processing some
 types of files.
 
 
 ### Layer Options
 
-Any layer can define options in its `layer.yaml`. Those options can then be set by other layers to change the behavior of your layer. The options are defined using [jsonschema](http://json-schema.org/), which is the same way that action
+Any layer can define options in its `layer.yaml`. Those options can then be set
+by other layers to change the behavior of your layer. The options are defined
+using [jsonschema](http://json-schema.org/), which is the same way that action
 parameters are defined.
 
 For example, the foo layer could include the following option definitions:
@@ -37,7 +39,7 @@ options:
 
 ### Yaml Modifications
 
-config and metadata take optional lists of keys to remove from `config.yaml`
+Config and metadata take optional lists of keys to remove from `config.yaml`
 and `metadata.yaml` when generating their data. This allows for charms to,
 for example, narrow what they expose to clients.
 
@@ -55,14 +57,16 @@ Keys:
 
 ### Custom Tactics
 
-Each file in each layer gets matched by a single Tactic. Tactics implement how
-the data in a file moves from one layer to the next (and finally to the target
-charm). By default this will be a simple copy but in the cases of certain files
-(mostly known YAML files like `metadata.yaml` and `config.yaml`) each layer is
-combined with the previous layers before being written.
+This is an advanced topic - or a "Low Level Build interface". If you need to
+customize how certain file(s)/file types are handled during the charm build
+process your layer can include Tactics. Tactics represent how various build
+targets are assembled between layers. Usually you can ignore this entirely,
+but if you have very specific needs charm build can be customized by
+including custom tactics.
 
 Normally the default tactics are fine but you have the ability in the
 `layer.yaml` to list a set of Tactics objects that will be checked before
 the default and control how data moves from one layer to the next.
 
-To view more about tactics - you can look at the source in [charmtools/build/tactics.py](https://github.com/juju/charm-tools/blob/master/charmtools/build/tactics.py#L14)
+To view more about tactics - you can look at the source in
+[charmtools/build/tactics.py](https://github.com/juju/charm-tools/blob/master/charmtools/build/tactics.py#L14)
