@@ -117,6 +117,10 @@ to. This is useful for a few reasons. The most obvious reason is to save money
 when deploying to a public cloud. Instead of having one machine per unit we can
 consolidate services.
 
+!!! Note: The 'local provider' is a special case, where machine 0 is effectively
+the host. You can still colocate services on other created machines, but not 
+on machine 0, so the following example will not work with the local provider
+
 In this example we use the `--constraints` flag to fire up a bootstrap node with
 4G of RAM so we can deploy other services to it by using the `--to` command:
 
