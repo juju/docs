@@ -1,6 +1,6 @@
 Title: Charm Layer.yaml Reference  
 
-## Layer.yaml
+# Layer.yaml
 
 Each layer used to build a charm can have a `layer.yaml` file. The top layer
 (the one actually invoked from the command line) must. These tell the generator
@@ -9,7 +9,7 @@ also allow for the inclusion of specialized directives for processing some
 types of files.
 
 
-### Layer Options
+## Layer Options
 
 Any layer can define options in its `layer.yaml`. Those options can then be set
 by other layers to change the behavior of your layer. The options are defined
@@ -37,7 +37,7 @@ options:
 ```
 
 
-### Yaml Modifications
+## Yaml Modifications
 
 Config and metadata take optional lists of keys to remove from `config.yaml`
 and `metadata.yaml` when generating their data. This allows for charms to,
@@ -55,7 +55,7 @@ Keys:
 ```
 
 
-### Custom Tactics
+## Custom Tactics
 
 This is an advanced topic - or a "Low Level Build interface". If you need to
 customize how certain file(s)/file types are handled during the charm build
