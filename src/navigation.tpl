@@ -13,6 +13,7 @@
                       <li><a href="config-local.html">Local</a></li>
                       <li><a href="config-maas.html">MAAS (bare metal)</a></li>
                       <li><a href="config-openstack.html">OpenStack</a></li>
+                      <li><a href="config-rackspace.html">Rackspace</a></li>
                       <li><a href="config-scaleway.html">Scaleway</a></li>
                       <li><a href="config-vagrant.html">Vagrant</a></li>
                       <li><a href="config-vmware.html">VMWare vSphere</a></li>
@@ -182,6 +183,7 @@
                   <li><a href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
                   <li><a href="reference-environment-variables.html">Juju environment variables</a></li>
                   <li><a href="reference-hook-tools.html">Juju Hook Tools</a></li>
+                  <li><a href="reference-layer-yaml.html">Layer.yaml</a></li>
                   <li><a href="http://godoc.org/github.com/juju/juju/api">Juju API docs</a></li>
                   <li><a href="reference-releases.html">Releases</a></li>
                   <li><a href="reference-release-notes.html">Release notes</a></li>

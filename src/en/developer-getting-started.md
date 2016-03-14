@@ -113,8 +113,9 @@ git clone http://github.com/juju-solutions/layer-vanilla.git
 cd layer-vanilla
 ```
 
-> If you would like to jump right into how the layers are implemented, you can
-read the [vanilla layer walk through](./developer-layer-example.html)
+If you'd like to write your own layer, or simply learn more about how
+layers are implemented, see [How to Write a
+Layer](./developer-layer-example.html).
 
 ### Assemble the layers
 
