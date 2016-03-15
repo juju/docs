@@ -1,5 +1,6 @@
 Title: Juju clouds
-
+TODO: Needs to explain available auth types for clouds
+  
 # Clouds
 
 Juju ships with the ability to seamlessly use a number of public clouds
@@ -55,7 +56,7 @@ to run this periodically, or if you are sure there are additional regions/clouds
 Juju supports which are not currently listed.
 
 !!! Note: juju can work with any OpenStack cloud, see the notes below for
-[specifying additional clouds][#specifying-additional-clouds]
+[specifying additional clouds](#specifying-additional-clouds)
 
 ### Special clouds
 
@@ -79,14 +80,75 @@ clouds: MAAS, LXD and Manual.
   protocols used by Juju. As long as you have SSH access to these machines, you
   can get part of the Juju magic and deploy services. See 
   [this documentation][juju-manual] for details on how to register these 
-  machines with Juju and use them as part of a cloud
+  machines with Juju and use them as part of a cloud.
 
 ## Specifying additional clouds
 
+There are cases (an OpenStack cloud is a common one) where the cloud you want to 
+use is not on Juju's list of known clouds. In this case it is possible to create
+a [YAML][yaml] formatted file with the information Juju requires and import this
+new definition. The file should follow this general format:
+  
+```yaml
+clouds:
+  <cloud_name>:
+    type: <type_of_cloud>
+    regions:
+      <region-name>:
+        auth-url: <https://xxx.yyy.zzz:35574/v3.0/>
+        auth-types: <[access-key, oauth, userpass]>
+```
+with the releavant values substituted in for the parts indicated
+(within '<' '>').
+
+For example, a typical OpenStack cloud on the local network you want to call 
+'mystack' would appear something like this:
+  
+```yaml
+clouds:
+    mystack:
+      type: openstack
+      regions:
+        dev1:
+          auth-url: https://openstack.example.com:35574/v3.0/
+          auth-types: [access-key, userpass]
+```
+With the yaml file saved, you can now import this information into Juju like so:
+  
+```
+juju add-cloud mystack mystack.yaml
+```
+
+Note that the name you give your cloud MUST match the value given inside the 
+YAML file you created.
+
+Having added a new cloud, if you re-run the `juju list-clouds` command, you 
+should see something like this:
+
+```
+CLOUD          TYPE        REGIONS
+aws            ec2         us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2 ...
+aws-china      ec2         cn-north-1
+aws-gov        ec2         us-gov-west-1
+azure          azure       centralus, eastus, eastus2, northcentralus, southcentralus, westus, northeurope ...
+azure-china    azure       chinaeast, chinanorth
+cloudsigma     cloudsigma  hnl, mia, sjc, wdc, zrh
+google         gce         us-east1, us-central1, europe-west1, asia-east1
+joyent         joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
+lxd            lxd         localhost
+maas           maas        
+manual         manual      
+rackspace      rackspace   DFW, ORD, IAD, LON, SYD, HKG
+local:mystack  openstack   dev1
+```
+
+The 'local:' prefix indicates that this is a cloud you have added yourself. 
 
 
-
-
-
-
-[credentials]: ./credentials.html
+[credentials]: ./credentials.html "Juju documentation > Credentials"
+[LXD-site]: http://www.ubuntu.com/cloud/lxd "LXD"
+[juju-lxd]: ./cloud-LXD.html "Juju documentation > LXD"
+[maas-site]: http://maas.io "MAAS website"
+[juju-maas]: ./cloud-maas.html "Juju documentation > MAAS"
+[juju-manual]: ./cloud-manual.html "Juju documentation > Manual cloud"
+[yaml]: http://www.yaml.org/spec/1.2/spec.html
