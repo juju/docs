@@ -56,7 +56,7 @@ will fetch the latest information on supported public clouds. It is a good idea
 to run this periodically, or if you are sure there are additional regions/clouds 
 Juju supports which are not currently listed.
 
-!!! Note: juju can work with any OpenStack cloud, see the notes below for
+!!! Note: Juju can work with any OpenStack cloud, see the notes below for
 [specifying additional clouds](#specifying-additional-clouds)
 
 ### Special clouds
