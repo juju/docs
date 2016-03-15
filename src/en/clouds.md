@@ -5,11 +5,12 @@ TODO: Needs to explain available auth types for clouds
 
 Juju ships with the ability to seamlessly use a number of public clouds
 (including Amazon Web Services, Azure, Google Compute Engine, Joyent and
-Rackspace) to deploy workloads. 
+Rackspace) to deploy workloads, as well as private clouds (e.g.
+OpenStack) which you configure.
 
-The knowledge to run these clouds is 'baked-in', so for the majority of
-use-cases there is no additional configuration to be done - you can simply
-specify the cloud you wish to use, supply Juju with some
+The knowledge to run these public clouds is 'baked-in', so for the majority
+of use-cases there is no additional configuration to be done - you can
+simply specify the cloud you wish to use, supply Juju with some
 [credentials][credentials] and start deploying services.
 
 ## Listing available clouds
