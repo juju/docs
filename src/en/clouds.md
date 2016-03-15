@@ -115,7 +115,7 @@ clouds:
 ```
 With the yaml file saved, you can now import this information into Juju like so:
   
-```
+```bash
 juju add-cloud mystack mystack.yaml
 ```
 
@@ -125,7 +125,7 @@ YAML file you created.
 Having added a new cloud, if you re-run the `juju list-clouds` command, you 
 should see something like this:
 
-```
+```no-highlight
 CLOUD          TYPE        REGIONS
 aws            ec2         us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2 ...
 aws-china      ec2         cn-north-1
