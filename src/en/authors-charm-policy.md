@@ -5,8 +5,10 @@ Title: Charm store policy
 This document serves to record the policies around charms and bundles included
 in the charm store, and the management of said collection. Charms and bundles in
 the store are peer reviewed by the community and are considered ready for
-consumption. These charms are marked as reviewed in the GUI and must follow
-these quality guidelines in ordered to be considered for the Store, otherwise they can live in personal name spaces. These charms and bundles must:
+production grade consumption. These charms are marked as reviewed in the GUI and must follow
+these quality guidelines in ordered to be considered for the Store, otherwise they can live in personal name spaces.
+
+They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHOULD's are strong recommendations and not a hard requirement and are listed below the MUSTs in each section:
 
 ## General Guidelines
 
@@ -23,6 +25,10 @@ these quality guidelines in ordered to be considered for the Store, otherwise th
     upstream documentation. Basically this means there must be instructions on
     how to apply updates if you use software not from distribution channels.
 - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
+
+<hr>
+
+- Should be built using [charm layers](authors-charm-building.html).
 
 ## Testing and Quality Requirements
 
@@ -43,6 +49,10 @@ these quality guidelines in ordered to be considered for the Store, otherwise th
 - Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a
              hard coded path.
 
+<hr>
+
+- Should include `tests.yaml` for all integration tests
+
 ## Metadata Requirements
 
 - Must include a full description of what the software does in the metadata.
@@ -57,24 +67,26 @@ these quality guidelines in ordered to be considered for the Store, otherwise th
   - Must describe how it interacts with other services if applicable.
   - Must document the interfaces.
   - Must show how to deploy the charm.
-  - Should link to a recommend production usage bundle and recommended configuration if this differs from the default.
   - Must define external dependencies if applicable.
+
+  <hr>
+
+- Should link to a recommend production usage bundle and recommended configuration if this differs from the default.
+
 
 ## Security Requirements
 
 - Must not run any network services using default passwords.
-- Should make use of whatever Mandatory Access Control system is provided by the distribution:
-  - [AppArmor](https://help.ubuntu.com/lts/serverguide/apparmor.html) for Ubuntu.
-  - [SELinux](https://wiki.centos.org/HowTos/SELinux) for CentOS systems.
 - Must verify and validate any external payload
   - Known and understood packaging systems that verify packages like apt, pip, and yum are ok.
   - `wget | sh` style is not ok.
 
-## Best Practice
+  <hr>
 
-These are not requirements for inclusion in the store, but are strongly recommended in order to expedite the review process:
-
-- Should be built using [charm layers](authors-charm-building.html)
+- Should make use of whatever Mandatory Access Control system is provided by the distribution:
+  - [AppArmor](https://help.ubuntu.com/lts/serverguide/apparmor.html) for Ubuntu.
+  - [SELinux](https://wiki.centos.org/HowTos/SELinux) for CentOS systems.
+- Should avoid running services as root.
 
 The charm store referred to in this document is the collection of Juju charms
 and bundles hosted at
