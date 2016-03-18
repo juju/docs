@@ -6,47 +6,75 @@ This document serves to record the policies around charms and bundles included
 in the charm store, and the management of said collection. Charms and bundles in
 the store are peer reviewed by the community and are considered ready for
 consumption. These charms are marked as reviewed in the GUI and must follow
-these quality guidelines in ordered to be considered for the Store. These charms
-and bundles must:
+these quality guidelines in ordered to be considered for the Store, otherwise they can live in personal name spaces. These charms and bundles must:
 
-  - Must follow the spirit of the [Ubuntu Philosophy](http://www.ubuntu.com/about/about-ubuntu/our-philosophy).
-  - Must serve a useful purpose and have well defined behaviour.
-  - Must also be valid for the charm and/or bundle format defined in Juju's
+## General Guidelines
+
+- Must follow the spirit of the [Ubuntu Philosophy](http://www.ubuntu.com/about/about-ubuntu/our-philosophy).
+- Must serve a useful purpose and have well defined behaviour.
+- Must also be valid for the charm and/or bundle format defined in Juju's
     documentation.
-  - Must verify that any software installed or utilized is verified as coming
-    from the intended source. Any software installed from the Ubuntu archive
-    satisfies this due to the apt sources including cryptographic signing
+- Must verify that any software installed or utilized is verified as coming
+    from the intended source. Any software installed from the Ubuntu or CentOS archives
+    satisfies this due to the apt and yum sources including cryptographic signing
     information.
-  - Must be entirely self contained or depend only on reliable external services.
-  - Must include a full description of what the software does in the metadata.
-  - Must provide a means to protect users from known security vulnerabilities in
-    a way consistent with best practices as defined by either Ubuntu policies or
+- Must be entirely self contained or depend only on reliable external services.
+- Must provide a means to protect users from known security vulnerabilities in
+    a way consistent with best practices as defined by either operating system policies or
     upstream documentation. Basically this means there must be instructions on
-    how to apply updates if you use software not from Ubuntu.
-  - Must pass "[charm proof](./tools-charm-tools.html#proof)" or 
-    "[bundle proof](./tools-charm-tools.html#proof)" with no Errors or Warnings
-    (lines prefixed with E: or W:).
-  - Must have a maintainer email address in metadata.yaml attached to a team or
+    how to apply updates if you use software not from distribution channels.
+
+## Testing and Quality Requirements
+
+- Must pass `charm test`
+  - Results must not result in errors or warnings. These are shown as an E: or W: in the `charm test`'s output.
+- Must include tests for trusty series and any series afterwards. Testing is
+      defined as unit tests, functional tests, or integration tests. The tests must exercise:
+       - Relations
+          - Validate all relations that the charm provides and requires
+       - Configuration
+          - set, unset, and reset must be tested as a minimum
+       - Deployment testing
+          - Scale test production deployment test (multiple units) and recommended config.
+          - Smoke test (bare minimum to have the service working)
+- Should not use anything infrastructure-provider specific (i.e. querying EC2
+          metadata service) symlinks must be self contained within a charm.
+- Bundles must only use charms which are already in the store, they cannot
+           reference charms in personal namespaces.
+- Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a
+             hard coded path. Should default to use software that is included in the
+             operating system archive, however we encourage that charm authors have a config
+             options for allowing users to deploy from newer upstream releases, or even
+             right from VCS if it's useful to users.
+
+## Metadata Requirements
+
+- Must include a full description of what the software does in the metadata.
+- Must have a maintainer email address in metadata.yaml attached to a team or
     individual who are responsive to contact.
-  - Must include a license. Call the file 'copyright' and make sure all files'
+- Must include a license. Call the file 'copyright' and make sure all files'
     licenses are specified clearly.
-  - Must be under a [Free license](http://opensource.org/osd).
-  - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
-  - Must not run any network services using default passwords.
-  - Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a
-    hard coded path. Should default to use software that is included in the
-    Ubuntu archive, however we encourage that charm authors have a config
-    options for allowing users to deploy from newer upstream releases, or even
-    right from VCS if it's useful to users.
-  - Should not use anything infrastructure-provider specific (i.e. querying EC2
-    metadata service) symlinks must be self contained within a charm.
-  - Should make use of 
-    [AppArmor](https://help.ubuntu.com/12.04/serverguide/apparmor.html) to
-    increase security.
-  - Bundles must only use charms which are already in the store, they cannot
-    reference charms in personal namespaces.
-  - Must include tests for trusty series and any series afterwards. Testing is
-    defined as unit tests, functional tests, or integration tests.
+- Must be under a [Free license](http://opensource.org/osd).
+- Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
+- Must have a well documented and valid `README.md`.
+  - Fill out the relevant sections as provided by `charm add readme`.
+  - Must describe the service.
+  - Must describe how it interacts with other services if applicable.
+  - Must document the interfaces.
+  - Must show how to deploy the charm.
+  - Should recommend production usage, including multiple units if applicable.
+  - Should document recommended configuration if this differs from the default
+  - Must define external dependencies if applicable.
+
+## Security Requirements
+
+- Must not run any network services using default passwords.
+- Should make use of whatever Mandatory Access Control system is provided by the distribution:
+  - [AppArmor](https://help.ubuntu.com/lts/serverguide/apparmor.html) for Ubuntu.
+  - [SELinux](https://wiki.centos.org/HowTos/SELinux) for CentOS systems.
+- Must verify and validate any external payload
+  - Known and understood packaging systems that verify packages like apt, pip, and yum are ok.
+  - `wget | sh` style is not ok.
 
 The charm store referred to in this document is the collection of Juju charms
 and bundles hosted at
@@ -56,7 +84,7 @@ If a charm is no longer being properly maintained and is failing to adhere to
 policy the charm will undergo the
 [unmaintained charm process](./charm-unmaintained-process.html). This process
 confirms the charm is no longer being maintained, fails to adhere to Charm Store
-policy, and thus is removed from the recommended status in the Juju Charm Store. 
+policy, and thus is removed from the recommended status in the Juju Charm Store.
 
 # Charm Metadata
 
