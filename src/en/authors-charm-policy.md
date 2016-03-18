@@ -15,39 +15,33 @@ these quality guidelines in ordered to be considered for the Store, otherwise th
 - Must also be valid for the charm and/or bundle format defined in Juju's
     documentation.
 - Must verify that any software installed or utilized is verified as coming
-    from the intended source. Any software installed from the Ubuntu or CentOS archives
-    satisfies this due to the apt and yum sources including cryptographic signing
-    information.
-- Must be entirely self contained or depend only on reliable external services.
+    from the intended source.
+    - Any software installed from the Ubuntu or CentOS archives satisfies this due to the apt and yum sources including cryptographic signing information.
+    - All other payloads should be delivered using Juju Resources by default. Using other means is encouraged via a config option.
 - Must provide a means to protect users from known security vulnerabilities in
     a way consistent with best practices as defined by either operating system policies or
     upstream documentation. Basically this means there must be instructions on
     how to apply updates if you use software not from distribution channels.
 - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
 
-
 ## Testing and Quality Requirements
 
 - Must pass `charm test`
-  - Results must not result in errors or warnings. These are shown as an E: or W: in the `charm test`'s output.
-- Must include tests for trusty series and any series afterwards. Testing is
-      defined as unit tests, functional tests, or integration tests. The tests must exercise:
-       - Relations
-          - Validate all relations that the charm provides and requires
-       - Configuration
-          - set, unset, and reset must be tested as a minimum
-       - Deployment testing
-          - Scale test production deployment test (multiple units) and recommended config.
-          - Smoke test (bare minimum to have the service working)
-- Should not use anything infrastructure-provider specific (i.e. querying EC2
-          metadata service) symlinks must be self contained within a charm.
+  - Results must not result in errors or warnings. These are shown as an E: or W: in `charm test`'s output.
+- Must include tests. Testing is defined as unit tests, functional tests, or integration tests. The tests must exercise:
+  - Relations
+    - Validate all relations that the charm provides and requires
+  - Configuration
+    - `set-config`, `unset-config`, and `re-set` must be tested as a minimum
+  - Deployment testing
+    - Scale test: Production deployment test with multiple units and recommended config.
+    - Smoke test: Bare minimum to have the service working
+- Must not use anything infrastructure-provider specific (i.e. querying EC2
+          metadata service) symlinks must be self contained within a charm unless the charm is a proxy for an existing cloud service, eg. `ec2-elb` charm.
 - Bundles must only use charms which are already in the store, they cannot
            reference charms in personal namespaces.
 - Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a
-             hard coded path. Should default to use software that is included in the
-             operating system archive, however we encourage that charm authors have a config
-             options for allowing users to deploy from newer upstream releases, or even
-             right from VCS if it's useful to users.
+             hard coded path.
 
 ## Metadata Requirements
 
@@ -63,8 +57,7 @@ these quality guidelines in ordered to be considered for the Store, otherwise th
   - Must describe how it interacts with other services if applicable.
   - Must document the interfaces.
   - Must show how to deploy the charm.
-  - Should recommend production usage, including multiple units if applicable.
-  - Should document recommended configuration if this differs from the default
+  - Should link to a recommend production usage bundle and recommended configuration if this differs from the default.
   - Must define external dependencies if applicable.
 
 ## Security Requirements
@@ -76,6 +69,12 @@ these quality guidelines in ordered to be considered for the Store, otherwise th
 - Must verify and validate any external payload
   - Known and understood packaging systems that verify packages like apt, pip, and yum are ok.
   - `wget | sh` style is not ok.
+
+## Best Practice
+
+These are not requirements for inclusion in the store, but are strongly recommended in order to expedite the review process:
+
+- Should be built using [charm layers](authors-charm-building.html)
 
 The charm store referred to in this document is the collection of Juju charms
 and bundles hosted at
