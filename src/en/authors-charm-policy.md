@@ -23,6 +23,8 @@ these quality guidelines in ordered to be considered for the Store, otherwise th
     a way consistent with best practices as defined by either operating system policies or
     upstream documentation. Basically this means there must be instructions on
     how to apply updates if you use software not from distribution channels.
+- Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
+
 
 ## Testing and Quality Requirements
 
@@ -55,7 +57,6 @@ these quality guidelines in ordered to be considered for the Store, otherwise th
 - Must include a license. Call the file 'copyright' and make sure all files'
     licenses are specified clearly.
 - Must be under a [Free license](http://opensource.org/osd).
-- Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
 - Must have a well documented and valid `README.md`.
   - Fill out the relevant sections as provided by `charm add readme`.
   - Must describe the service.
