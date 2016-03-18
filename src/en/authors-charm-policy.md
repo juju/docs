@@ -89,6 +89,8 @@ They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHO
   - [SELinux](https://wiki.centos.org/HowTos/SELinux) for CentOS systems.
 - Should avoid running services as root.
 
+## Other
+
 The charm store referred to in this document is the collection of Juju charms
 and bundles hosted at
 [https://launchpad.net/charms](https://launchpad.net/charms).
