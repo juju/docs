@@ -72,6 +72,7 @@ They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHO
   <hr>
 
 - Should link to a recommend production usage bundle and recommended configuration if this differs from the default.
+- Should reference and link to upstream documentation and best practices.
 
 
 ## Security Requirements
