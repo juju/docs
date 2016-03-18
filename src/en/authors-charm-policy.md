@@ -43,7 +43,7 @@ They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHO
     - Scale test: Production deployment test with multiple units and recommended config.
     - Smoke test: Bare minimum to have the service working
 - Must not use anything infrastructure-provider specific (i.e. querying EC2
-          metadata service) symlinks must be self contained within a charm unless the charm is a proxy for an existing cloud service, eg. `ec2-elb` charm.
+          metadata service) symlinks. Must be self contained within a charm unless the charm is a proxy for an existing cloud service, eg. `ec2-elb` charm.
 - Bundles must only use charms which are already in the store, they cannot
            reference charms in personal namespaces.
 - Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a
