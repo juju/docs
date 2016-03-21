@@ -114,7 +114,7 @@ to create the controller for Rackspace. See
 This will result in the controller being visible in the
 [Rackspace cloud control panel](https://mycloud.rackspace.com):
 
-![bootstrap machine 0 in Rackspace portal](./media/config-rackspace_portal-machine_0.png)
+![bootstrap machine 0 in LXC CLI](./media/config-lxd_cli-machine_0.png)
 
 
 ## Additional notes
