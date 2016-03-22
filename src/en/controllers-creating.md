@@ -29,7 +29,7 @@ that Juju will default to the latest LTS (see `distro-info --lts` command).
 juju bootstrap \
 	--upload-tools --config=~/config-rackspace.yaml \
 	controller-rackspace rackspace
-`
+```
 
 **2.** Create LXD controller 'lxd-trusty':
 
