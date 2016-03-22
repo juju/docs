@@ -8,7 +8,7 @@ just as easily as virtual nodes. MAAS lets you treat physical servers like
 virtual machines in the cloud. Rather than having to manage each server
 individually, MAAS turns your bare metal into an elastic cloud-like resource.
 Specifically, MAAS allows for services to be deployed to bare metal via Juju.
-For more information about MAAS, see [maas.ubuntu.com](http://maas.ubuntu.com).
+For more information about MAAS, see [maas.io](http://maas.io).
 
 To enable Juju to work with MAAS, you should start by generating a generic
 configuration file using the command:
