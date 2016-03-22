@@ -5,9 +5,9 @@ TODO: Review again soon (created: March 2016)
 # Creating a controller
 
 Use the `juju bootstrap` command to create a controller (and model) for a given
-cloud provider:
+cloud:
 
-`juju bootstrap [options] <controller name> <provider name>`
+`juju bootstrap [options] <controller name> <cloud name>`
 
 See `juju help bootstrap` for details on this command or see the
 [command reference page](./commands.html#juju-bootstrap).
@@ -27,14 +27,12 @@ that Juju will default to the latest LTS (see `distro-info --lts` command).
 
 ```bash
 juju bootstrap \
-	--debug --upload-tools --config=~/config-rackspace.yaml \
+	--upload-tools --config=~/config-rackspace.yaml \
 	controller-rackspace rackspace
 `
 
 **2.** Create LXD controller 'lxd-trusty':
 
 ```bash
-juju bootstrap \
-	--debug --upload-tools \
-	lxd-trusty lxd
+juju bootstrap  --upload-tools lxd-trusty lxd
 ```
