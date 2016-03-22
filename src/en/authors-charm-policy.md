@@ -12,14 +12,18 @@ They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHO
 
 ## General Guidelines
 
+Not following these guidelines will result in an ERROR (E:) in `charm test`:
+
 - Must follow the spirit of the [Ubuntu Philosophy](http://www.ubuntu.com/about/about-ubuntu/our-philosophy).
 - Must serve a useful purpose and have well defined behaviour.
 - Must also be valid for the charm and/or bundle format defined in Juju's
     documentation.
 - Must verify that any software installed or utilized is verified as coming
     from the intended source.
-    - Any software installed from the Ubuntu or CentOS archives satisfies this due to the apt and yum sources including cryptographic signing information.
-    - All other payloads should be delivered using Juju Resources by default. Using other means is encouraged via a config option.
+    - Any software installed from the Ubuntu or CentOS default archives satisfies this due to the apt and yum sources including cryptographic signing information.
+    - Third party repositories must be listed as a configuration option that can be overridden by the user and not hard coded in the charm itself. 
+    - Launchpad PPAs are acceptable as the `add-apt-repository` command retrieves the keys securely.
+    - Other third party repositories are acceptable if the signing key is embedded in the charm.
 - Must provide a means to protect users from known security vulnerabilities in
     a way consistent with best practices as defined by either operating system policies or
     upstream documentation. Basically this means there must be instructions on
@@ -28,9 +32,14 @@ They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHO
 
 <hr>
 
+Not following these guidelines will result in a WARNING (W:) in `charm test`:
+
 - Should be built using [charm layers](authors-charm-building.html).
+- Should be delivered using Juju Resources by default. 
 
 ## Testing and Quality Requirements
+
+Not following these guidelines will result in an ERROR (E:) in `charm test`:
 
 - Must pass `charm test`
   - Results must not result in errors or warnings. These are shown as an E: or W: in `charm test`'s output.
@@ -51,9 +60,13 @@ They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHO
 
 <hr>
 
+Not following these guidelines will result in a WARNING (W:) in `charm test`:
+
 - Should include `tests.yaml` for all integration tests
 
 ## Metadata Requirements
+
+Not following these guidelines will result in an ERROR (E:) in `charm test`:
 
 - Must include a full description of what the software does in the metadata.
 - Must have a maintainer email address in metadata.yaml attached to a team or
@@ -70,6 +83,8 @@ They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHO
   - Must define external dependencies if applicable.
 
   <hr>
+  
+Not following these guidelines will result in a WARNING (W:) in `charm test`:
 
 - Should link to a recommend production usage bundle and recommended configuration if this differs from the default.
 - Should reference and link to upstream documentation and best practices.
@@ -77,12 +92,16 @@ They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHO
 
 ## Security Requirements
 
+Not following these guidelines will result in an ERROR (E:) in `charm test`:
+
 - Must not run any network services using default passwords.
 - Must verify and validate any external payload
   - Known and understood packaging systems that verify packages like apt, pip, and yum are ok.
   - `wget | sh` style is not ok.
 
   <hr>
+  
+Not following these guidelines will result in a WARNING (W:) in `charm test`:
 
 - Should make use of whatever Mandatory Access Control system is provided by the distribution:
   - [AppArmor](https://help.ubuntu.com/lts/serverguide/apparmor.html) for Ubuntu.
