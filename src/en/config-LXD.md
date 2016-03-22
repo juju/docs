@@ -4,8 +4,8 @@ TODO: Remove Note re Juju only supporting 'local' (by beta3?)
 
 # Configuring for LXD
 
-Here we provide an overview for the creation of a controller for the LXD
-provider (see [Controllers](./controllers.html)). If your objective is instead
+Here we provide an overview for the creation of a controller for LXD
+(see [Controllers](./controllers.html)). If your objective is instead
 to create a LXD model please see [Defining a model](./models-defining.html).
 
 Unlike other providers, with LXD, Juju does not need to be supplied with any
@@ -25,10 +25,10 @@ Immediate uses include:
  - Experimentation with various service configurations
  - Charm development
 
-It is a replacement for the traditional LXC local provider and has some
-notable differences:
+It is a replacement for the LXC local provider supported by earlier versions
+of Juju and has some notable differences:
 
- - The state server is no longeer localhost but just another LXC container.
+ - The state server is no longer localhost but just another LXC container.
    The benefits of keeping installed software/files isolated in a container far
    outweigh the extra time needed to create this container.
  - Due to the above, superuser privileges (sudo) are no longer required.
@@ -55,7 +55,7 @@ so assuming you are setting up LXD for the first time.
 
 Proceed to install the software.
 
-On Wily, add this:
+On 15.10, add this:
 
 ```bash
 sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
@@ -70,7 +70,7 @@ use:
 newgrp lxd
 ```
 
-Xenial is shipped with LXD pre-installed.
+Ubuntu 16.04(Xenial) is shipped with LXD pre-installed.
 
 
 ## LXD and images
@@ -173,20 +173,20 @@ above, are given below.
 
 | client commands                               | meaning                            |
 |----------------------------------------------|-----------------------------------|
-`lxc launch`					| creates an LXD container
-`lxc list`					| lists all LXD containers
-`lxc delete`					| deletes an LXD container
-`lxc remote list`				| lists remotes
-`lxc info`					| displays status of localhost
-`lxc info <container>`				| displays status of container
-`lxc config show <container>`			| displays config of container
-`lxc image info <alias or fingerprint>`		| displays status of image
-`lxc exec <container> <executable>`		| runs prgram on container
-`lxc exec <container> /bin/bash`		| spawns shell on container
-`lxc file pull <container></path/to/file> .` 	| copies file from container
-`lxc file push </path/to/file> <container>/` 	| copies file to container
-`lxc stop <container>`				| stops container
-`lxc image alias delete <alias>`		| deletes image alias
+`lxc launch`					                              | creates an LXD container
+`lxc list`				                                	| lists all LXD containers
+`lxc delete`					                              | deletes an LXD container
+`lxc remote list`				                          | lists remotes
+`lxc info`					                                | displays status of localhost
+`lxc info <container>`			                     	| displays status of container
+`lxc config show <container>`			               | displays config of container
+`lxc image info <alias or fingerprint>`		      | displays status of image
+`lxc exec <container> <executable>`	          	| runs program on container
+`lxc exec <container> /bin/bash`		             | spawns shell on container
+`lxc file pull <container></path/to/file> .` 	 | copies file from container
+`lxc file push </path/to/file> <container>/`  	| copies file to container
+`lxc stop <container>`				                     | stops container
+`lxc image alias delete <alias>`		             | deletes image alias
 `lxc image alias create <alias> <fingerprint>`	| creates image alias
 
 Use `lxc --help` for more on client usage and `lxd --help` for assistance with the daemon.
