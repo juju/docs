@@ -68,6 +68,10 @@ password` option should be used, otherwise Juju will generate a new random
 strong password for the user, thus invalidating the password stored on the
 first machine.
 
+>
+> Why then is --keep-password not the default?
+>
+
 # Other user administration commands
 
 Other commands that are useful for system administrators are:
