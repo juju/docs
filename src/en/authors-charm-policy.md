@@ -4,11 +4,11 @@ Title: Charm store policy
 
 This document serves to record the policies around charms and bundles included
 in the charm store, and the management of said collection. Charms and bundles in
-the store are peer reviewed by the community and are considered ready for
+the store are peer-reviewed by the community and are considered ready for
 production grade consumption. These charms are marked as reviewed in the GUI and must follow
 these quality guidelines in ordered to be considered for the Store, otherwise they can live in personal name spaces.
 
-They are broken in things the charm/bundle MUST do, and things it SHOULD do. SHOULD's are strong recommendations and not a hard requirement and are listed below the MUSTs in each section:
+These guidelines include things the charm/bundle MUST do; these requirements will return an ERROR if not properly followed. These are listed first in each section. The guidelines also include things charm/bundle SHOULD do; these recommendations will return a WARNING if not properly followed. These strong recommendations are not hard requirements and are listed second in each section.
 
 ## General Guidelines
 
@@ -26,7 +26,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
     - Other third party repositories are acceptable if the signing key is embedded in the charm.
 - Must provide a means to protect users from known security vulnerabilities in
     a way consistent with best practices as defined by either operating system policies or
-    upstream documentation. Basically this means there must be instructions on
+    upstream documentation. Basically, this means there must be instructions on
     how to apply updates if you use software not from distribution channels.
 - Must have hooks that are [idempotent](http://en.wikipedia.org/wiki/Idempotence).
 
@@ -37,11 +37,11 @@ Not following these guidelines will result in a WARNING (W:) in `charm test`:
 - Should be built using [charm layers](authors-charm-building.html).
 - Should be delivered using Juju Resources by default. 
 
-## Testing and Quality Requirements
+## Testing and Quality Guidelines
 
 Not following these guidelines will result in an ERROR (E:) in `charm test`:
 
-- Must pass `charm test`
+- Must pass `charm test`.
   - Results must not result in errors or warnings. These are shown as an E: or W: in `charm test`'s output.
 - Must include tests. Testing is defined as unit tests, functional tests, or integration tests. The tests must exercise:
   - Relations
@@ -52,7 +52,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
     - Scale test: Production deployment test with multiple units and recommended config.
     - Smoke test: Bare minimum to have the service working
 - Must not use anything infrastructure-provider specific (i.e. querying EC2
-          metadata service) symlinks. Must be self contained within a charm unless the charm is a proxy for an existing cloud service, eg. `ec2-elb` charm.
+          metadata service) or symlinks. Must be self contained within a charm unless the charm is a proxy for an existing cloud service, eg. `ec2-elb` charm.
 - Bundles must only use charms which are already in the store, they cannot
            reference charms in personal namespaces.
 - Must call Juju API tools (`relation-*`, `unit-*`, `config-*`, etc) without a
@@ -64,7 +64,7 @@ Not following these guidelines will result in a WARNING (W:) in `charm test`:
 
 - Should include `tests.yaml` for all integration tests
 
-## Metadata Requirements
+## Metadata Guidelines
 
 Not following these guidelines will result in an ERROR (E:) in `charm test`:
 
@@ -77,10 +77,10 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
 - Must have a well documented and valid `README.md`.
   - Fill out the relevant sections as provided by `charm add readme`.
   - Must describe the service.
-  - Must describe how it interacts with other services if applicable.
+  - Must describe how it interacts with other services, if applicable.
   - Must document the interfaces.
   - Must show how to deploy the charm.
-  - Must define external dependencies if applicable.
+  - Must define external dependencies, if applicable.
 
   <hr>
   
@@ -90,7 +90,7 @@ Not following these guidelines will result in a WARNING (W:) in `charm test`:
 - Should reference and link to upstream documentation and best practices.
 
 
-## Security Requirements
+## Security Guidelines
 
 Not following these guidelines will result in an ERROR (E:) in `charm test`:
 
@@ -142,8 +142,8 @@ information about the option and how it can be used.
 
 ## README.md
 
-Charms that want to display instructions to users can do so in either plain text
-by including a file called README. If the author would like to use markdown, the
+Charms that want to display instructions to users can do so in plain text
+by including a file called README. If the author would like to use Markdown, the
 file should be called README.md, and if the author would like to use
 restructured text, the file should be called README.rst. Only one of these files
 can be included in the charm. We recommend Markdown due to its popularity and
@@ -153,7 +153,7 @@ Remember that the README is used by the GUI and website as the default "front
 page" of the charm: it is user facing and should include easy to read
 instructions for deployment.
 
-A bundle's README is use by the GUI and the website as the default "front page"
+A bundle's README is used by the GUI and the website as the default "front page"
 of the bundle, so it should not only include information on how to use the
 bundle, but also mention which charms the bundle contains and how the bundle is
 meant to be used.
