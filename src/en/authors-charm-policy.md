@@ -8,7 +8,7 @@ the store are peer-reviewed by the community and are considered ready for
 production grade consumption. These charms are marked as reviewed in the GUI and must follow
 these quality guidelines in ordered to be considered for the Store, otherwise they can live in personal name spaces.
 
-These guidelines include things the charm/bundle MUST do; these requirements will return an ERROR if not properly followed. These are listed first in each section. The guidelines also include things charm/bundle SHOULD do; these recommendations will return a WARNING if not properly followed. These strong recommendations are not hard requirements and are listed second in each section.
+These guidelines include things the charm/bundle MUST do, requirements that will return an ERROR if not properly followed are listed first in each section. The guidelines also include things charm/bundle SHOULD do, strong recommendations that are not hard requirements but which will return a WARNING if not properly followed are listed second in each section.
 
 ## General Guidelines
 
