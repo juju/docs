@@ -23,7 +23,7 @@ that Juju will default to the latest LTS (see `distro-info --lts` command).
 
 ## Examples
 
-**1.** Create Rackspace controller 'controller-rackspace':
+**1.** Create a Rackspace controller 'controller-rackspace':
 
 ```bash
 juju bootstrap \
@@ -31,8 +31,14 @@ juju bootstrap \
 	controller-rackspace rackspace
 ```
 
-**2.** Create LXD controller 'lxd-trusty':
+**2.** Create an LXD Trusty controller 'lxd-trusty':
 
 ```bash
-juju bootstrap  --upload-tools lxd-trusty lxd
+juju bootstrap --upload-tools lxd-trusty lxd
+```
+
+**3.** Create an LXD Xenial controller 'lxd-xenial' (before Xenial is officially released):
+
+```bash
+juju bootstrap --config default-series=xenial lxd-xenial lxd
 ```
