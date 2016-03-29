@@ -122,6 +122,9 @@ LXD local provider log to `/var/log/lxd/juju-{uuid}-machine-{#}`. However,
 the standard way to view logs is with the `juju debug-log` command. See
 [Viewing logs](./troubleshooting-logs.html) for more details.
 
+<!---
+Including this table is confusing and not really appropriate for Juju docs.
+Still, it's such a nice table that I could not delete it. (pmatulis)
 
 ## Useful client commands
 
@@ -147,14 +150,16 @@ above, are given below.
 `lxc stop <container>`				| stops container
 `lxc image alias delete <alias>`		| deletes image alias
 `lxc image alias create <alias> <fingerprint>`	| creates image alias
-
-Use `lxc --help` for more on client usage and `lxd --help` for assistance with the daemon.
-See upstream documentation for how to
-[configure the lxd daemon and containers](https://github.com/lxc/lxd/blob/master/doc/configuration.md)
-.
+-->
 
 
 ## Additional notes
+
+Although not Juju-related, see `lxc --help` for more on LXD client usage and
+`lxd --help` for assistance with the daemon. See upstream documentation for
+how to
+[configure the lxd daemon and containers](https://github.com/lxc/lxd/blob/master/doc/configuration.md)
+.
 
 See [General configuration options](https://jujucharms.com/docs/stable/config-general)
 for additional and advanced customization of your environment.
