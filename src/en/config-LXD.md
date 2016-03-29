@@ -1,5 +1,5 @@
 Title: Juju LXD local provider  
-TODO: Remove Note re Juju only supporting 'local' (by beta3?)
+TODO: 
 
 
 # Configuring for LXD
@@ -36,9 +36,9 @@ of Juju and has some notable differences:
    (`/var/lib/lxd/images`) which is separate from the traditional LXC cache
    (`/var/cache/lxc`).
 
-Although this document does provide enough information to get you running with
-LXD itself (this document is ultimately about running LXD with Juju) it does
-so assuming you are setting up LXD for the first time.
+!!! Note: Do not confuse command `lxc` with the binary shipped with traditional
+LXC. All the latter's binaries are of the form `lxc-<subcommand>`. The `lxc`
+binary actually comes from the `lxd-client` package.
 
 
 ## Prerequisites
@@ -53,9 +53,10 @@ so assuming you are setting up LXD for the first time.
  - Container migration (copying/moving) requires a modern version of the
    *criu* binary and a 4.4 Linux kernel (Xenial).
 
-Proceed to install the software.
+Ubuntu 16.04 (Xenial) is shipped with LXD pre-installed. See the next section
+for Ubuntu 15.10.
 
-On 15.10, add this:
+### On Ubuntu 15.10
 
 ```bash
 sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
@@ -70,8 +71,6 @@ use:
 newgrp lxd
 ```
 
-Ubuntu 16.04(Xenial) is shipped with LXD pre-installed.
-
 
 ## LXD and images
 
@@ -82,63 +81,23 @@ configured to talk to it (named 'local'). The client is also configured to talk
 to several other, non-local, ones (named 'ubuntu', 'ubuntu-daily', and
 'images').
 
-!!! Note: Juju currently only supports 'local'. Because of this, the
-intermediary step of importing a desired image into 'local' is necessary.
-
 An image is identified by its fingerprint (SHA-256 hash), and can be tagged
 with multiple aliases. Juju looks for images with aliases in the format
 ubuntu-&lt;codename&gt;, for instance 'ubuntu-trusty' or 'ubuntu-xenial'.
-
-The first time an image is needed the local remote will supply it and any
-subsequent requests will be satisfied by the LXD cache.
-
-Image cache expiration and image synchronization/updates are built-in.
 
 For any image-related command, an image is specified by its alias or by its
 fingerprint. Both are shown in image lists. An image's filename is its *full
 fingerprint* while an image list displays its *partial fingerprint*. Either
 type of fingerprint can be used to refer to images.
 
-
-### Import an image into the local remote
-
-Import a 64bit Trusty image and create the alias:
-
-```bash
-lxd-images import ubuntu trusty amd64 --alias ubuntu-trusty
-```
-
-Such an invocation will pull official Ubuntu cloud images from
-http://cloud-images.ubuntu.com.
-
-Once any given image is imported it is cached at
-`/var/lib/lxd/images` and shows up with `lxc image list`:
+Juju pulls official cloud images from the 'ubuntu' remote
+(http://cloud-images.ubuntu.com) and creates the necessary alias. Any
+subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
+Cached images can be seen with `lxc image list`:
 
 ![lxc image list after importing](./media/image_list-imported_image-reduced70.png)
 
-
-## LXD test
-
-Although the objective here is to have Juju launch containers as it needs them,
-as a test for your LXD installation, you should manually launch one now (here
-called 'ubuntu-trusty-64-test').
-
-We refer to the alias created during importation.
-
-```bash
-lxc launch ubuntu-trusty ubuntu-trusty-64-test
-```
-
-List all containers and then remove the test container:
-
-```bash
-lxc list
-lxc delete ubuntu-trusty-64-test
-```
-
-!!! Note: Do not confuse command `lxc` with the binary shipped with traditional
-LXC. All the latter's binaries are of the form `lxc-<subcommand>`. The `lxc`
-binary actually comes from the `lxd-client` package.
+Image cache expiration and image synchronization mechanisms are built-in.
 
 
 ## Create controller
@@ -164,7 +123,7 @@ the standard way to view logs is with the `juju debug-log` command. See
 [Viewing logs](./troubleshooting-logs.html) for more details.
 
 
-# Useful client commands
+## Useful client commands
 
 There are many client commands available. Some common ones, including those covered
 above, are given below.
@@ -172,21 +131,21 @@ above, are given below.
 <style> table td{text-align:left;}</style>
 
 | client commands                               | meaning                            |
-|----------------------------------------------|-----------------------------------|
-`lxc launch`					                              | creates an LXD container
-`lxc list`				                                	| lists all LXD containers
-`lxc delete`					                              | deletes an LXD container
-`lxc remote list`				                          | lists remotes
-`lxc info`					                                | displays status of localhost
-`lxc info <container>`			                     	| displays status of container
-`lxc config show <container>`			               | displays config of container
-`lxc image info <alias or fingerprint>`		      | displays status of image
-`lxc exec <container> <executable>`	          	| runs program on container
-`lxc exec <container> /bin/bash`		             | spawns shell on container
-`lxc file pull <container></path/to/file> .` 	 | copies file from container
+|-----------------------------------------------|------------------------------------|
+`lxc launch`					| creates an LXD container
+`lxc list`	                             	| lists all LXD containers
+`lxc delete`					| deletes an LXD container
+`lxc remote list`				| lists remotes
+`lxc info`					| displays status of localhost
+`lxc info <container>`				| displays status of container
+`lxc config show <container>`			| displays config of container
+`lxc image info <alias or fingerprint>`		| displays status of image
+`lxc exec <container> <executable>`		| runs program on container
+`lxc exec <container> /bin/bash`		| spawns shell on container
+`lxc file pull <container></path/to/file> .`	| copies file from container
 `lxc file push </path/to/file> <container>/`  	| copies file to container
-`lxc stop <container>`				                     | stops container
-`lxc image alias delete <alias>`		             | deletes image alias
+`lxc stop <container>`				| stops container
+`lxc image alias delete <alias>`		| deletes image alias
 `lxc image alias create <alias> <fingerprint>`	| creates image alias
 
 Use `lxc --help` for more on client usage and `lxd --help` for assistance with the daemon.
