@@ -96,7 +96,7 @@ clouds:
     type: <type_of_cloud>
     regions:
       <region-name>:
-        auth-url: <https://xxx.yyy.zzz:35574/v3.0/>
+        endpoint: <https://xxx.yyy.zzz:35574/v3.0/>
         auth-types: <[access-key, oauth, userpass]>
 ```
 with the releavant values substituted in for the parts indicated
@@ -111,9 +111,11 @@ clouds:
       type: openstack
       regions:
         dev1:
-          auth-url: https://openstack.example.com:35574/v3.0/
+          endpoint: https://openstack.example.com:35574/v3.0/
           auth-types: [access-key, userpass]
 ```
+In this case the url is at https://openstack.example.com:35574/v3.0/, and the cloud accepts either access-key or username/password authentication methods.
+
 With the yaml file saved, you can now import this information into Juju like so:
   
 ```bash
