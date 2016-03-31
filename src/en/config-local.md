@@ -5,7 +5,7 @@ Title: Using the local provider
 The purpose of the "local provider" is to provide a testing ground or sandbox
 for users to experiment with Juju and to speed up the process of writing
 charms. Although Juju is intended to work on bare metal (via
-[MAAS](http://maas.ubuntu.com)) or through a variety of cloud providers or your
+[MAAS](http://maas.io)) or through a variety of cloud providers or your
 own private cloud, it can also be configured to run solely on a local machine
 by means of containers or virtualisation.
 
