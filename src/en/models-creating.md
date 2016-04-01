@@ -3,7 +3,7 @@ TODO: Review again soon (created: March 2016)
       Remove Note re bug 1552469 when fixed; remove Note and --config option from Rackspace example
 
 
-# Defining a model
+# Creating a model
 
 Use the `juju create-model` command to create a *hosted model* for a given
 provider:
