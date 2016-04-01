@@ -172,8 +172,8 @@ We suggest you take the time to read the following:
   
   - [Juju concepts][concepts] - This page explains the terminology used 
     throughout this documentation and describes what Juju can do. 
-  - [Clouds][clouds] goes into detail about configuring clouds, including the 
-    'local' cloud, which is great for lightning fast testing and development.
+  - [Clouds][clouds] goes into detail about configuring other clouds, including the 
+    public clouds like Azure, AWS, Google Compute Engine and Rackspace.
   - [Charms/Services][charms] - find out how to construct complicated workloads 
     in next to no time.
 
