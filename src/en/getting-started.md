@@ -130,7 +130,7 @@ with. Juju will install both these services and add a relation between them -
 this is part of the magic of Juju: it isn't just about deploying services, Juju 
 also knows how to connect them together.
 
-Installing shouldn't take long. you can check on how far Juju has got by running
+Installing shouldn't take long. You can check on how far Juju has got by running
 the command:
  
 ```bash
@@ -174,8 +174,7 @@ can do with it!
 
 We suggest you take the time to read the following:
   
-  - [Juju concepts][concepts] - This page explains the terminology used 
-    throughout this documentation and describes what Juju can do. 
+
   - [Clouds][clouds] goes into detail about configuring other clouds, including the 
     public clouds like Azure, AWS, Google Compute Engine and Rackspace.
   - [Charms/Services][charms] - find out how to construct complicated workloads 
