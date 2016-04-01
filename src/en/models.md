@@ -17,7 +17,7 @@ infrastructure. Services can still be deployed to the controller model, but it
 is generally expected that these be solely for management and monitoring
 purposes (e.g. Nagios, Landscape).
 
-See [Defining a model](./models-defining.html).
+See [Creating a model](./models-creating.html).
 
 
 ## Related commands
