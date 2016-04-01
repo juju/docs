@@ -163,8 +163,8 @@ address, you should see the site running.
 Congratulations, you have just deployed a service with Juju!
 
 !!! Note: To remove all the services in the model you just created, it is 
-quickest to destroy the model (` juju destroy-model test`) and create a new 
-one.
+often quickest to destroy the model with the command 'juju destroy-model test` 
+and then create a new model.
 
 
 ## Next Steps
