@@ -17,7 +17,7 @@ To get the best experience, as well as Juju, this guide will also set up:
 
 Both the above are provided with Ubuntu 16.04LTS.
 
-# Installing the software
+# Install the software
 
 Run the following commands to install the required software:
 
@@ -29,7 +29,7 @@ Run the following commands to install the required software:
   sudo apt install juju2
 ```
 
-# Preparing ZFS
+# Prepare ZFS
 
 Using ZFS we can create sparse backing-storage for any of the containers which
 LXD creates for Juju. You can create this storage anywhere (e.g. the fastest
