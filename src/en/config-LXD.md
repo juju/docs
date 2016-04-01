@@ -44,7 +44,7 @@ LXD can optionally use an alternative file-system for containers. We recommend
 using ZFS for the best experience. To use ZFS with LXD enter these commands:
 
 ```bash
-sudo apt install zfsutils-linux
+sudo apt-get install zfsutils-linux
 sudo mkdir /var/lib/zfs
 sudo truncate -s 32G /var/lib/zfs/lxd.img
 sudo zpool create lxd /var/lib/zfs/lxd.img
