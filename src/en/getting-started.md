@@ -115,7 +115,7 @@ juju switch
 ```no-highlight
 local.lxd-test:test
 ```
-# Deploying services
+# Deploy!
 
 Juju is now ready to deploy any services from the hundreds included in the
 [https://jujucharms.com](juju charm store). It is a good idea to test your new 
