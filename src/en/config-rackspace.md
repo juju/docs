@@ -12,8 +12,8 @@ TODO: Review again soon (created: March 2016)
 
 Here we gather the ingredients necessary for the creation of a *controller* for
 the Rackspace cloud provider (see [Controllers](./controllers.html)). If your
-objective is instead to create a Rackspace *model* please see [Defining a
-model](./models-defining.html).
+objective is instead to create a Rackspace *model* please see [Creating a
+model](./models-creating.html).
 
 
 ## Prerequisites
