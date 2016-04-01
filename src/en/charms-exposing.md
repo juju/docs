@@ -7,8 +7,8 @@ By design, Juju operates a very secure environment for deploying your services.
 Even if you have deployed services, they won't be publicly available unless
 you explicitly make them so. To allow public access to services, the
 appropriate changes must be made to the cloud provider firewall settings. As
-the procedure for doing this varies depending on the provider, Juju helpfully
-abstracts this into a single command, `juju expose <servicename>`
+the procedure for doing this varies depending on your cloud, Juju helpfully
+abstracts this into a single command, `juju expose <servicename>`.
 
 For example, you may have deployed a WordPress service using the relevant
 charm. Once deployed, the service still cannot be accessed by the public,
@@ -54,10 +54,11 @@ ID         STATE   DNS            INS-ID     SERIES AZ
 2          started 54.224.143.151 i-9626540e trusty us-east-1c 
 ```
 
-As you can see here under [Services], the `EXPOSED:` status is listed as true, and the
-service is running and available to users.
+As you can see here under [Services], the `EXPOSED:` status is listed as true,
+and the service is running and available to users.
 
-**Note:** Exposing the service does not change any DNS or other settings which may be necessary to get your service running as you expect.
+**Note:** Exposing the service does not change any DNS or other settings which
+may be necessary to get your service running as you expect.
 
 # Unexposing a service
 

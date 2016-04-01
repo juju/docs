@@ -1,132 +1,173 @@
-Title: Machine constraints  
+Title: Constraints  
 
-# Machine Constraints
+# Constraints
 
-Machine constraints allow you to choose the hardware to which your services will
-be deployed.
+Constraints allow you to choose the hardware (or virtual hardware)
+to which your services will be deployed, e.g. by specifying the amount of RAM
+you want them to have. This is particularly useful for making sure that the 
+service is deployed somewhere it can actually run efficiently, or that it is 
+connected to the right network.
 
-Constraints can be set for environments and services, with service constraints
-overriding environment constraints, the default values set by juju when
-otherwise unspecified. Changes to constraints do not affect any unit that has
-already been assigned to a machine.
+Constraints may be set for models and services, with service constraints
+taking precedence. Changes to constraints do not affect any units which have 
+already been placed on machines.
 
-Constraint can be set by the `juju set-constraints` command, taking an optional
-`--service` arg, and any number of `key=value` pairs. When the service name is
-specified, the constraints are set on that service; otherwise they are set on
-the environment.
+For more granularity, it is also possible to add a machine with specific 
+constraints (`juju add-machine`) and then specify that machine when deploying 
+services ([see the documentation on `juju deploy`](./charms-deploying.html)).
 
-Valid choices for the `value` are generally dependent on the particular
-constraint, with one exception:
+## What constraints can be used?
 
-  - An empty value always means "not constrained". This allows you to ignore
-    environment settings at the service level without having to explicitly
-    remember and reset the juju default values. Note that there is no way to
-    change the juju default values, though environment settings will override
-    them.
+There is a full list of the constraints used 
+[in the reference section](reference-constraints.html). Be aware that some of 
+these are specific to the type of cloud you are using. For example, AWS may
+understand an "instancetype" constraint, but MAAS will not. 
 
-The commands `juju deploy`, `juju bootstrap`, and `juju add-machine` have a
-`--constraints` flag which expects a single string of space-separated
-constraints, understood as above. Deployment constraints will be set on the
-service before the first unit is deployed, and bootstrap constraints will be
-set on the environment and used to provision the initial master machine.
+The most useful constraints for Juju in general are:
+  
+  - **mem** : This indicates the minimum number of megabytes of RAM that must 
+  be available to a service unit. An optional suffix of M/G/T/P indicates the 
+  value is mega-/giga-/tera-/peta- bytes.
 
-The `juju get-constraints` command is used to see the currently applicable
-constraints. When called without an argument, it outputs the environment
-constraints as key=value pairs. Alternatively, you can request yaml or json with
-the `--format` flag. By passing the name of a service as an argument, it will
-output the constraints on that particular service.
+  - **cpu-cores** :  How many cpu-cores the host machine should have. This is a
+  crude indicator of system performance.
+    
+  - **spaces** : Target a particular network space, or avoid one (not supported
+  all clouds).
+  
+  - **arch** : Short for 'architecture', indicates the processor type a service 
+  must run on. One of amd64, arm, i386, arm64, or ppc64.
+  
+With these you can make sure a service has the resources it needs to run 
+properly.
 
-## Examples
+Constraints can be used with commands that support the '--constraints' option. 
+These are covered in more detail below, but there are some aspects of specifying
+constraints that are worth mentioning first.
 
-Deploy MySQL on a machine with at least 32GiB of RAM, and at least 8 ECU of CPU
-power (architecture will be inherited from the environment, or default to
-amd64):
-
+In the following examples, we will be using the `juju deploy` command, as this
+is the simplest and most frequent case for using constraints. So, to deploy the
+'mariadb' service to a machine with 4 gigabytes of memory or more:
+  
 ```bash
-juju deploy --constraints "cpu-cores=8 mem=32G" mysql
+juju deploy mariadb --constraints mem=4G
 ```
 
-Deploy to t1.micros on AWS:
-
+To further ensure that it also has at least 2 CPU cores:
+  
 ```bash
-juju bootstrap --constraints "cpu-power=0 cpu-cores=0 mem=512M"
+juju deploy mariadb --constraints mem=4G cpu-cores=2
 ```
 
-Launch all future "mysql" machines with at least 8GiB of RAM and 4 ECU:
+or
 
 ```bash
-juju set-constraints --service mysql mem=8G cpu-cores=4
+juju deploy mariadb --constraints "mem=4G cpu-cores=2"
 ```
-Output current environment constraints:
 
+To ignore any constraints which may have been previously set, you can assign a 
+'null' value. If the service or model constraints for the 'mariadb' charm have 
+already been set to 8 cpu-cores for example, you can ignore that constraint at 
+deploy time with:
+  
 ```bash
-juju get-constraints
+juju deploy mariadb --constraints mem=4G cpu-cores= 
 ```
-Output constraints for mysql
 
+In the event that a constraint cannot be met, the unit will not be deployed.
+
+!!!Note: Constraints work on an "or better" basis: If you ask for 4 CPUs, you 
+may get 8, but you won't get 2
+
+
+    
+## Using constraints when creating a controller
+
+A controller is created using the `bootstrap` command, which accepts a 
+'--constraints' switch to specify which machine to use. When you create the
+controller with constraints, the same constraints apply to each subsequent 
+machine created, so setting constraints on the controller is the same as making
+global constraints. These can of course be overriden by constraints at the
+model, service or machine level as detailed below.
+
+Example:
+  
+Creating a new AWS controller to use a particular amount of memory:
+  
 ```bash
-juju get-constraints mysql
+juju bootstrap mycloud aws --constraints mem=4G
 ```
-# Provider Constraints
 
-See a [complete listing of constraints](reference-constraints.html) for details
-on what each constraint means. Two of the most commonly used are:
+## Setting constraints for a model
 
-  - `cpu-cores`: The minimum processing power of the machine, roughly indicated
-     by how many cores are available.
-  - `mem`: The minimum memory for the machine, defaulting to 512MB.
-
-# Working with constraints
-
-Here are some examples of working with constraints.
-
-When bootstrapping an environment, you can set the constraints directly:
-
+At the model level, constraints can be set like this:
+  
 ```bash
-juju bootstrap --constraints arch=i386
+juju set-model-constraints mem=4G
 ```
-The above command did two things:
 
-  - Set the environment constraints to require machines with an i386 
-    architecture, leaving the other defaults untouched; this is precisely
-    equivalent to:
-    ```bash
-    juju bootstrap --constraints "arch=i386 cpu-cores= mem= "
-    ```
-...but rather more convenient to type.
-
-  - Started the bootstrap/master machine with the above constraints.
-
-Because the environment constraints were set, subsequent deployments will use
-the same values:
-
+In this example, any subsequent machines created in this model will have at
+least 4 gigabytes of memory. You can check the current constraints with:
+  
 ```bash
-juju deploy mysql
+juju get-model-constraints
 ```
-...but other services can be started with their own constraints:
 
+As with similar commands, you can 'unset' the constraint by setting its value to
+null:
+  
 ```bash
-juju deploy wordpress --constraints mem=1024
+juju set-model-constraints mem=
 ```
 
-Note that if you try to deploy a machine or service with a constraint that
-cannot be fulfilled by the environment, the deployment will fail. Running `juju
-status` will show an error in the status for that machine. You can fix the
-problem by removing the machine (and the service assigned to the machine, if
-any) and retrying the deployment with different constraints.
+Model-related constraints can also be overridden at the service and machine
+level.
 
-##  MAAS constraints
+## Setting constraints for a service
 
-If you are deploying to a MAAS provider, you may use the additional constraint
-`tags=`, followed by a comma-delimited list of tags. Only MAAS nodes thus tagged
-will be considered appropriate for deploying the service.
-
-E.g.
-
+Usually, constraints for a service are set at deploy time, by passing the 
+required parameters using the deploy command:
+  
 ```bash
-juju deploy mysql --constraints tags=foo,bar
+juju deploy mariadb cpu-cores=4
 ```
 
-...will deploy MySQL only to a node which has been tagged with both "foo" and
-"bar".
+Subsequently, you can set constraints for the any additional units added to the 
+service by running:
+  
+```bash
+juju set-constraints mariadb cpu-cores=2
+```
+
+The constraints work on a named-service as well. So the following also works
+as expected:
+  
+```bash
+juju deploy mariadb database1
+juju deploy mariadb database2
+juju set-constraints database1 mem=4096M
+```
+
+You can fetch the current constraints like this:
+  
+```bash
+juju get-constraints mariadb
+juju get-constraints database1
+```
+
+## Adding a machine with constraints
+
+The `juju add-machine` command also accepts the '--constraints' flag, which can
+be useful when trying to target a specific machine or type of machine.
+
+For example:
+
+```bash 
+juju add-machine --constraints spaces=storage,db
+```
+
+Will provision a machine that is connected to both the 'storage' and 'db' 
+network spaces. You can subsequently deploy services to this machine using
+the '--to' placement switch - 
+[see the documentation on deploying charms](./charms-deploy.html)
 
