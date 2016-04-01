@@ -32,7 +32,11 @@ Juju is currently available for Ubuntu, CentOS, MacOSX and Windows.
 
 To install Juju, you simply need to grab the latest juju2 package from the
 PPA:
-  
+
+!!! Note: Until the release of Juju2.0, you can install beta versions by using 
+`sudo add-apt-repository ppa:juju/devel` instead of the repository mentioned 
+below.
+
 ```bash
 sudo add-apt-repository ppa:juju/stable
 sudo apt-get update && sudo apt-get install juju2
