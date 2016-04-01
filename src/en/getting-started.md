@@ -8,7 +8,7 @@ experience. At the moment, that means using the very latest release of
 Ubuntu, [16.04LTS(Xenial)](http://cdimage.ubuntu.com/releases/16.04/).
 
 If you are using a different OS, please read the 
-[general install instructions here](./getting-started-general.md).
+[general install instructions here](./getting-started-general.html).
 
 To get the best experience, as well as Juju, this guide will also set up:
    
