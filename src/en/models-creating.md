@@ -1,4 +1,4 @@
-Title: Defining a Juju Model
+Title: Creating a Juju Model
 TODO: Review again soon (created: March 2016)
       Remove Note re bug 1552469 when fixed; remove Note and --config option from Rackspace example
 
