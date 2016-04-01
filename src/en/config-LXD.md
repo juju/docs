@@ -29,8 +29,8 @@ sudo apt-get install lxd
 newgrp lxd
 ```
 
-LXD is pre-installed on 16.04 cloud images. Users of regular ISOs will need to
-install it:
+LXD is pre-installed on 16.04 cloud images. Users of regular Xenial ISOs will
+need to install it:
 
 ```bash
 sudo apt-get install lxd
