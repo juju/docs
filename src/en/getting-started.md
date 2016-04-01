@@ -45,7 +45,7 @@ As this is sparse storage, it won't actually take up disk space until it is
 actually being used. You can check the file has been added to a ZFS pool with 
 the following command:
   
-``no-highlight
+```no-highlight
 sudo zpool status
 ```
 
