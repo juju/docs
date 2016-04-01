@@ -23,7 +23,7 @@ Run the following commands to install the required software:
 
 ```no-highlight  
   sudo add-apt-repository ppa:juju/devel
-  sudo apt-get update
+  sudo apt update
   sudo apt install zfsutils-linux
   sudo apt install lxd
   sudo apt install juju2
