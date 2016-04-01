@@ -35,15 +35,19 @@ Using ZFS we can create sparse backing-storage for any of the containers which
 LXD creates for Juju. You can create this storage anywhere (e.g. the fastest
 drive you have). This example creates a 50G file to use:
 
-  sudo mkdir /var/lib/zfs
-  sudo truncate -s 50G /var/lib/zfs/lxd.img
-  sudo zpool create lxd /var/lib/zfs/lxd.img
-  
+```no-highlight
+sudo mkdir /var/lib/zfs
+sudo truncate -s 50G /var/lib/zfs/lxd.img
+sudo zpool create lxd /var/lib/zfs/lxd.img
+```
+
 As this is sparse storage, it won't actually take up disk space until it is 
 actually being used. You can check the file has been added to a ZFS pool with 
 the following command:
   
-  sudo zpool status
+``no-highlight
+sudo zpool status
+```
 
 This should indicate that the newly created pool is 'ONLINE' and ready.
 
@@ -138,8 +142,8 @@ something like this:
 ![juju status](./media/juju-mediawiki-status.png)
 
 There is quite a lot of information there but the important parts for now are 
-the [Services] section, which show that mediawiki and mysql are installed, and
-the  [Units] section, which crucially shows the IP addresses allocated to them.
+the [Services] section, which show that Mediawiki and MySQL are installed, and
+the [Units] section, which crucially shows the IP addresses allocated to them.
 
 By default, Juju is secure - you won't be able to connect to any services 
 unless they are specifically exposed. This adjusts the relevant firewall 
