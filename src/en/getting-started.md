@@ -118,7 +118,7 @@ local.lxd-test:test
 # Deploy!
 
 Juju is now ready to deploy any services from the hundreds included in the
-[https://jujucharms.com](juju charm store). It is a good idea to test your new 
+[juju charm store](https://jujucharms.com). It is a good idea to test your new 
 model. How about a Mediawiki site?
 
 ```bash
