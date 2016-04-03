@@ -35,11 +35,11 @@ Run the following commands to install the required software:
 
 Using ZFS we can create sparse backing-storage for any of the containers which
 LXD creates for Juju. You can create this storage anywhere (e.g. the fastest
-drive you have). This example creates a 50G file to use:
+drive you have). This example creates a 32G file to use:
 
 ```no-highlight
 sudo mkdir /var/lib/zfs
-sudo truncate -s 50G /var/lib/zfs/lxd.img
+sudo truncate -s 32G /var/lib/zfs/lxd.img
 sudo zpool create lxd /var/lib/zfs/lxd.img
 ```
 
@@ -59,7 +59,7 @@ Now we need to tell LXD about this storage
 
 ```bash
 sudo lxd init --auto --storage-backend zfs --storage-pool lxd
-newgrp - lxd
+newgrp - 
 ```
 
 To have the group changes take effect, you may now need to logout of your
@@ -188,4 +188,4 @@ We suggest you take the time to read the following:
 [releases]: reference-releases.html 
 [keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
 [concepts]: ./juju-concepts.html "Juju concepts"
-[charms]: ./charms-intro.html
+[charms]: ./charms.html
