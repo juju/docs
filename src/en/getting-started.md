@@ -1,5 +1,7 @@
 Title: Getting started with Juju 2.0
 Todo: remove ppa/devel after release
+      simplify zfs install
+      remove default-seies config
 
 # Getting started with Juju 2.0
 
@@ -57,10 +59,10 @@ Now we need to tell LXD about this storage
 
 ```bash
 sudo lxd init --auto --storage-backend zfs --storage-pool lxd
-newgrp - 
+newgrp - lxd
 ```
 
-To have the group changes take effect, you will now need to logout of your
+To have the group changes take effect, you may now need to logout of your
 current session and log in once again, or execute the following in your shell:
   
 ```no-highlight
