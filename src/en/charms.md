@@ -138,7 +138,7 @@ By default, Juju is very secure. Juju itself, and the services it deploys can
 see the other services in your cloud, but nothing and nobody else can. This
 isn't much use for a web service we want users to connect to, but Juju can
 easily make these services public. With it's understanding of the underlying 
-cloud, juju can make whatever firewall changes are necessary to expose these
+cloud, Juju can make whatever firewall changes are necessary to expose these
 services to the wider world:
 
 ```bash
@@ -154,3 +154,4 @@ juju expose haproxy
 [deploy]: ./charms-deploying.html
 [relations]: ./charms-relations.html
 [scaling]: ./charms-scaling.html
+[started]: ./getting-started.html
