@@ -36,7 +36,7 @@ The most useful constraints for Juju in general are:
   all clouds).
   
   - **arch** : Short for 'architecture', indicates the processor type a service 
-  must run on. One of amd64, arm, i386, arm64, or ppc64.
+  must run on. One of amd64, arm, i386, arm64, or ppc64el.
   
 With these you can make sure a service has the resources it needs to run 
 properly.
