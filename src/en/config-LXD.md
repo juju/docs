@@ -6,7 +6,7 @@ TODO:
 
 Here we provide an overview for the creation of a controller for LXD
 (see [Controllers](./controllers.html)). If your objective is instead
-to create a LXD model please see [Defining a model](./models-defining.html).
+to create a LXD model please see [Defining a model](./models-creating.html).
 
 Unlike other providers, with LXD, Juju does not need to be supplied with any
 information regarding configuration or credentials. This makes it extremely
