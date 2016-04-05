@@ -239,7 +239,7 @@ class HttpRequires(RelationBase):
                 'service_name': service_name,
                 'hosts': [],
             })
-            host = conv.get_remote('hostname') or conv.get_remove('private-address')
+            host = conv.get_remote('hostname') or conv.get_remote('private-address')
             port = conv.get_remote('port')
             if host and port:
                 service['hosts'].append({
@@ -259,7 +259,7 @@ In our metadata we define a reverseproxy relation implementing the interface:
 ```yaml
 requires:
   reverseproxy:
-    interface: website
+    interface: http
 ```
 
 And in our reactive file, we implement it as so:
@@ -275,7 +275,7 @@ def update_reverse_proxy_config(reverseproxy):
     for service in services:
         for host in service['hosts']:
             hookenv.log('{} has a unit {}:{}'.format(
-                services['service_name'],
+                service['service_name'],
                 host['hostname'],
                 host['port']))
 ```

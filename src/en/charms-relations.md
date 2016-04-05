@@ -49,12 +49,14 @@ example, in the case of specifying a database for the Mediawiki charm.
 
 ```bash
 juju add-relation mediawiki mysql
-error: ambiguous relation: "mediawiki mysql" could refer to "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
+error: ambiguous relation: "mediawiki mysql" could refer to 
+  "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 ```
 
-The solution in this case is to specify the nature of the relation using the
-hook identifier. In this case, we want MySQL to provide the backend database
-for mediawiki, so this is what we need to enter:
+The solution is to specify the nature of the relation using the
+relation interface identifier. In this case, we want MySQL to provide the 
+backend database for mediawiki ('db' relation), so this is what we need to 
+enter:
 
 ```bash
 juju add-relation mediawiki:db mysql
@@ -63,54 +65,9 @@ juju add-relation mediawiki:db mysql
 We can check the output from `juju status` to make sure the correct relationship
 has been established:
 
-```no-highlight
-machines:
-  "0":
-    agent-state: started
-    agent-version: 1.10.0
-    dns-name: 15.185.88.51
-    instance-id: "1736045"
-    series: precise
-  "1":
-    agent-state: started
-    agent-version: 1.10.0
-    dns-name: 15.185.89.204
-    instance-id: "1736065"
-    series: precise
-  "3":
-    agent-state: started
-    agent-version: 1.10.0
-    dns-name: 15.185.89.236
-    instance-id: "1736119"
-    series: precise
-services:
-  mediawiki:
-    charm: cs:precise/mediawiki-8
-    exposed: false
-    relations:
-      db:
-      - mysql
-    units:
-      mediawiki/0:
-        agent-state: pending
-        agent-version: 1.10.0
-        machine: "3"
-        public-address: 15.185.89.236
-  mysql:
-    charm: cs:precise/mysql-24
-    exposed: false
-    relations:
-      cluster:
-      - mysql
-      db:
-      - mediawiki
-    units:
-      mysql/0:
-        agent-state: started
-        agent-version: 1.10.0
-        machine: "1"
-        public-address: 15.185.89.204
-```
+![Status output](media/charms-relations-status.png)
+
+The second section of the status output shows all current established relations.
 
 
 ## Removing Relations
@@ -121,4 +78,11 @@ relationships:
 
 ```bash
 juju remove-relation mediawiki mysql
+```
+
+In cases where there is more than one relation between the two services, it is
+necessary to specify the interface at least once:
+  
+```bash
+juju remove-relation mediawiki mysql:db
 ```

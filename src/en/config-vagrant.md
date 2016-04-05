@@ -148,13 +148,17 @@ To SSH in, run `vagrant ssh`
 Juju networking in the vagrant box, and substitute the network provided in the
 command above
 
-### Native routing (optional, OS X 10.10 and above)
+### Native routing (optional, OS X 10.10 or Windows 7 and above)
 
 It is possible to natively route traffic from your local machine to the LXC
 containers running within the Vagrant virtual machine:
 
 ```bash
+# MacOSX
 sudo route add -net 10.0.3.0/24 172.16.250.15
+
+# Windows (run with administrative access on cmd.exe)
+route add 10.0.3.0/24 172.16.250.15
 ```
 
 This will only work until your next reboot. Instead, there is a way to create
