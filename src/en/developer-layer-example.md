@@ -21,17 +21,20 @@ available.
 #### LAYER_PATH
 
 First off, you require a [local charm repository](./charms-deploying.html) in
-which to work. This involves creating two directories -- `layers` and `charms`
--- and setting some environment variables.
+which to work. This involves creating three directories -- `layers`,
+`interfaces`, and `charms` -- and setting some environment variables.
 
 The `layers` directory contains the source code of the layered charm covered in
-our examples, and the `charms` directory holds the assembled, ready to deploy
-charm.
+our examples. The `interfaces` directory is where you'd place any
+[interface-layers](./charms-layers-interfaces.md) you may wish to write, and the
+`charms` directory holds the assembled, ready to deploy charm.
 
 ```bash
 export JUJU_REPOSITORY=$HOME/charms
 export LAYER_PATH=$JUJU_REPOSITORY/layers
-mkdir -p $JUJU_REPOSITORY $LAYER_PATH $LAYER_PATH/vanilla
+export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
+
+mkdir -p $LAYER_PATH $LAYER_PATH/vanilla
 
 cd $LAYER_PATH/vanilla
 ```

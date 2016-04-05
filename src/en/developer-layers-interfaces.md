@@ -105,7 +105,7 @@ export JUJU_REPOSITORY=$HOME/charms
 export LAYER_PATH=$JUJU_REPOSITORY/layers
 export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
 
-mkdir -p $JUJU_REPOSITORY $LAYER_PATH $INTERFACE_PATH
+mkdir -p $LAYER_PATH $INTERFACE_PATH
 ```
 
 The export of `INTERFACE_PATH` is an environment variable which tells the
