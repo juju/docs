@@ -20,25 +20,19 @@ available.
 
 #### LAYER_PATH
 
-Defines the location on disk to search for local layers. First, create the base
-directory, if it doesn't exist:
+First off, you require a [local charm repository](./charms-deploying.html) in
+which to work. This involves creating two directories -- `layers` and `charms`
+-- and setting some environment variables.
+
+The `layers` directory contains the source code of the layered charm covered in
+our examples, and the `charms` directory holds the assembled, ready to deploy
+charm.
 
 ```bash
-mkdir $HOME/charms
 export JUJU_REPOSITORY=$HOME/charms
-```
-
-Next, create the directory where layered charms will reside:
-
-```bash
-mkdir $JUJU_REPOSITORY/layers
 export LAYER_PATH=$JUJU_REPOSITORY/layers
-```
+mkdir -p $JUJU_REPOSITORY $LAYER_PATH $LAYER_PATH/vanilla
 
-And finally, create our charm layer for Vanilla:
-
-```bash
-mkdir -p $LAYER_PATH/vanilla
 cd $LAYER_PATH/vanilla
 ```
 

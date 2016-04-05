@@ -104,12 +104,11 @@ our examples. The `interfaces` directory is where you'd place any
 `charms` directory holds the assembled, ready to deploy charm.
 
 ```bash
-mkdir $HOME/charms
 export JUJU_REPOSITORY=$HOME/charms
-
-mkdir $JUJU_REPOSITORY/{interfaces,layers}
 export LAYER_PATH=$JUJU_REPOSITORY/layers
 export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
+
+mkdir -p $JUJU_REPOSITORY $LAYER_PATH $INTERFACE_PATH
 
 cd $JUJU_REPOSITORY/layers
 ```

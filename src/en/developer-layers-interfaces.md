@@ -91,20 +91,21 @@ class MyRelationClient(RelationBase):
 
 ## Writing an interface-layer
 
-Begin by making an interface repository if you don't currently have one.
+First off, you require a [local charm repository](./charms-deploying.html) in
+which to work. This involves creating three directories -- `layers`,
+`interfaces`, and `charms` -- and setting some environment variables.
 
-Create the base charms directory, if it doesn't exist:
+The `layers` directory contains the source code of the layered charm covered in
+our examples. The `interfaces` directory is where you'd place any
+[interface-layers](./charms-layers-interfaces.md) you may wish to write, and the
+`charms` directory holds the assembled, ready to deploy charm.
 
 ```bash
-mkdir $HOME/charms
 export JUJU_REPOSITORY=$HOME/charms
-```
-
-Then, create the directory where the interfaces you write will reside:
-
-```bash
-mkdir -p $JUJU_REPOSITORY/interfaces
+export LAYER_PATH=$JUJU_REPOSITORY/layers
 export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
+
+mkdir -p $JUJU_REPOSITORY $LAYER_PATH $INTERFACE_PATH
 ```
 
 The export of `INTERFACE_PATH` is an environment variable which tells the
