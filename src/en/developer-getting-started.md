@@ -92,6 +92,12 @@ The available layers and interfaces can be found at
 layer provides charm helpers python library and the reactive framework that
 makes layers possible.
 
+### Python 3
+
+The reactive framework used with layered charms runs under Python 3, so you'll
+want to be aware of [compatibility](http://python-future.org/compatible_idioms.html)
+issues between Python 2 and 3.
+
 ### Creating a new layer
 
 First off, you require a [local charm repository](./charms-deploying.html) in
