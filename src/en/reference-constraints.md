@@ -46,7 +46,7 @@ multiple constraints delimited by a space.
 
     Name of container type that a service unit must run inside. Can be
     left blank to indicate no preference, or one of `none` for
-    uncontainerised, `lxc`, or `kvm`.
+    uncontainerised or `lxc``.
 
 - cpu-cores
 
