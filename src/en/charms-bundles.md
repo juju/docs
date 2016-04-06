@@ -40,7 +40,7 @@ method.
 A bundle file can be deployed via the command-line interface by using the `juju
 deploy` command.
 
-Always do a `charm proof1 to check for possible errors before using it:
+Always do a `charm proof` to check for possible errors before using it:
 
 ```bash
 charm proof directory-of-bundle/    # defaults to your current working directory
