@@ -6,7 +6,7 @@ manage charms.
 
 # Installation
 
-The source project can be found at 
+The source project can be found at
 [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools).
 
 ## Ubuntu
@@ -36,26 +36,21 @@ To install, first download the Charm Tools installer from
 [launchpad](https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-
 tools_1.2.9.exe). Once downloaded, execute the installer and follow the on-
 screen prompts. After installation you can access Charm Tools either via the
-`charm` command or `juju charm` plugin from either the command line or
-powershell.
+`charm` command from either the command line or powershell.
 
 To uninstall, please remove Charm Tools from the Add/Remove Software section of
 the Windows Control Panel
 
 # Usage
 
-Charm Tools comes packaged as both a stand alone tool and a juju plugin. For the
-sake of documentation purposes, the plugin syntax, `juju charm`, is shown. If
-you wish to use the stand alone client, or don't have juju installed, you can
-replace all instances of `juju charm` with just `charm`.
-
+Charm Tools comes packaged as a stand alone tool and provides the `charm` command.
 There are several tools available within charm tools itself. At any time you can
-run `juju charm` to view the available subcommands and all subcommands have
+run `charm` to view the available subcommands and all subcommands have
 independent help pages, accessible using either the `-h` or `--help` flags.
 
 ^# add
 
-      juju charm add [-h|--help] tests,readme,icon [CHARM_DIRECTORY]
+      charm add [-h] [--description] [-b] [--debug] {tests,readme,icon}
 
   Add is a generator function which can be used to extend a charm depending on
   the subcommand issued:
@@ -63,7 +58,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   ### icon
 
   `icon` will create an `icon.svg` in the `CHARM_DIRECTORY`. This icon is
-  a template and should be customised by the charm author (see 
+  a template and should be customised by the charm author (see
   [Charm Icons documentation](authors-charm-icon.html)).
 
   ### readme
@@ -79,12 +74,18 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   charms to the interfaces listed. This is merely an example to start with and
   will need to be modified.
 
+^# attach
+
+      charm attach [options] <charm id> <resource=<file>
+
+  The attach command uploads a file as a new resource for a charm.
+
+      charm attach ~james/xenial/wordpress website-data ./foo.zip
 
 ^# create
 
 
-      juju charm create [-h] [-t TEMPLATE] [-a] [-v] <charmname> [charmhome]
-
+      charm create [-h] [-t TEMPLATE] [-a] [-v] <charmname> [charmhome]
 
   The `create` command will produce a new boilerplate charm. Replace `<charmname>`
   with the name of your new charm. A directory called `<charmname>` will be created
@@ -94,12 +95,11 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   By default, your new charm is created using the python template. Use the
   `-t TEMPLATE` option to create a charm using a different template, e.g.:
 
-      juju charm create -t bash my-charm
- 
+      charm create -t bash my-charm
 
-  To see the list of installed templates use `juju charm create -h`.
+  To see the list of installed templates use `charm create -h`.
 
-  Depending on the template being used, `juju charm create` may prompt for
+  Depending on the template being used, `harm create` may prompt for
   user input. To suppress prompts and accept all defaults instead, use the
   `-a` or `--accept-defaults` option.
 
@@ -112,9 +112,9 @@ independent help pages, accessible using either the `-h` or `--help` flags.
     - `-v`, `--verbose`: Show debug output.
 
   ### Bash Example
- 
-      juju charm create -t bash my-charm
- 
+
+      charm create -t bash my-charm
+
   will create the following charm structure:
 
         my-charm
@@ -133,11 +133,11 @@ independent help pages, accessible using either the `-h` or `--help` flags.
         ├── metadata.yaml
         ├── README.ex
         └── revision
- 
+
 
   ### Python Example
 
-      juju charm create -t python my-charm
+      charm create -t python-basic my-charm
 
   will create the following structure:
 
@@ -145,169 +145,386 @@ independent help pages, accessible using either the `-h` or `--help` flags.
         ├── charm-helpers.yaml
         ├── config.yaml
         ├── hooks
-        │   ├── config-changed
-        │   ├── install
-        │   ├── start
-        │   ├── stop
-        │   └── upgrade-charm
-        ├── icon.svg
-        ├── lib
-        │   └── charmhelpers
-        │       ├── core
-        │       │   ├── fstab.py
-        │       │   ├── hookenv.py
-        │       │   ├── host.py
-        │       │   └── __init__.py
-        │       └── __init__.py
-        ├── metadata.yaml
-        ├── README.ex
-        ├── revision
-        ├── scripts
-        │   └── charm_helpers_sync.py
-        └── tests
-            ├── 00-setup
-            └── 10-deploy
+            │   ├── config-changed
+            │   ├── install
+            │   ├── start
+            │   ├── stop
+            │   └── upgrade-charm
+            ├── icon.svg
+            ├── lib
+            │   └── charmhelpers
+            │       ├── core
+            │       │   ├── decorators.py
+            │       │   ├── files.py
+            │       │   ├── fstab.py
+            │       │   ├── hookenv.py
+            │       │   ├── host.py
+            │       │   ├── hugepage.py
+            │       │   ├── __init__.py
+            │       │   ├── kernel.py
+            │       │   ├── services
+            │       │   │   ├── base.py
+            │       │   │   ├── helpers.py
+            │       │   │   └── __init__.py
+            │       │   ├── strutils.py
+            │       │   ├── sysctl.py
+            │       │   ├── templating.py
+            │       │   └── unitdata.py
+            │       └── __init__.py
+            ├── metadata.yaml
+            ├── README.ex
+            ├── revision
+            ├── scripts
+            │   └── charm_helpers_sync.py
+            └── tests
+                ├── 00-setup
+                └── 10-deploy
 
+^# grant
 
+      grant [options] <charm or bundle id> [--channel <channel>] [--acl (read|write)] [--set] [,,...]
 
-^# get
+  Grant charm or bundle permissions in the Charm Store. When charms are pushed
+  they default to only being shown to you, in order for other people to see
+  your charm, you need to explicitly grant them permissions.
 
-      juju charm get [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
+  The grant command extends permissions for the given charm or bundle to the
+  given users.
 
-  If you want to branch one of the charm store charms, use the `get` command
-  specifying the `CHARM_NAME` you want to copy and provide an optional
+      charm grant ~kirk/wordpress james
+
+  The command accepts many users (comma-separated list) or everyone.
+
+  The --acl parameter accepts "read" and "write" values. By default "read"
+  permissions are granted.
+
+      charm grant ~kirk/wordpress --acl write james
+
+  The --set parameters is used to overwrite any existing ACLs for the charm or
+  bundle.
+
+      charm grant ~kirk/wordpress --acl write --set james,robert
+
+  To select a channel, use the --channel option, for instance:
+
+      charm grant ~kirk/wordpress --channel development --acl write --set james,robert
+
+^# help
+
+      charm help [topic]
+
+  show help on a command or other topic. Running `charm` with no arguments will
+  also show topics.
+
+^# layers
+
+      charm-layers [-h] [-r] [-l LOG_LEVEL] [--description] [charm]
+
+  Inspect the layers of a built charm. The output is color coded. Each of the
+  results in the layers section is assigned a unique color that corresponds to
+  each file that is part of that layer.
+
+^# list
+      charm list [-h|--help] [-u <username>]
+
+  list charms for a given user name.
+
+      charm list -u lars
+
+  When no arguments are given it returns a list of charms that the currently
+  logged in user has pushed.
+
+       charm list
+
+^# list-resources
+
+      charm list-resources [options] <charm>
+
+  This command will report the resources for a charm in the charm store.
+
+  <charm> can be a charm URL, or an unambiguously condensed form of
+  it. So the following forms will be accepted:
+
+      charm list-resources cs:xenial/mysql
+      charm list-respirces mysql
+      charm list-resources trusty/mysql
+
+      charm list-resources cs:~kirk/xenial/mysql
+      charm list-resources cs:~kirk/mysql
+
+  Where the series is not supplied, the series from your local host is used.
+  Thus the above examples imply that the local series is trusty.
+
+^# login
+
+  The login command uses Ubuntu SSO to obtain security credentials for the charm
+  store. Note that the charm command will prompt you if you need to login to the
+  store before any operation that requires authentication, so you don't usually
+  need to run this command stand-alone.
+
+^# logout
+
+  The logout command removes all security credentials for the charm store.
+
+^# proof
+
+      charm proof CHARM_DIRECTORY
+
+  Proof is designed to perform a "lint" against a charm or bundle's structure
+  to validate if it conforms to what the Charm Store will accept. `proof` will
+  provide output at varying levels of severity. `I` is informational - these
+  are things a charm could do but don't currently. `W` is a warning - these are
+  items that violate charm store policy or have an adverse affect on tools in
+  the juju ecosystem. `E` is an error - these are items that are major and will
+  result in a broken charm. Any charm with a Warning or Error will not pass
+  charm store review policy. The charm store itself will not accept a push that
+  has an error.
+
+^# publish
+
+      charm publish [options] <charm or bundle id> [--channel <channel>]
+
+  The publish command publishes a charm or bundle in the charm store.
+  Publishing is the action of assigning one channel to a specific charm
+  or bundle revision (revision need to be specified), so that it can be shared
+  with other users and also referenced without specifying the revision.
+
+  Two channels are supported: "stable" and "development"; the "stable" channel is
+  used by default.
+
+      charm publish ~lars/xenial/wordpress
+
+  To select another channel, use the --channel option, for instance:
+
+      charm publish ~lars/xenial/wordpress --channel stable
+      charm publish xenial/django-42 -c development --resource website-3 --resource data-2
+
+  If your charm uses resources, you must specify what revision of each resource
+  will be published along with the charm, using the --resource flag (one per
+  resource). Note that resource info is embedded in bundles, so you cannot use
+  this flag with bundles.
+
+      charm publish xenial/django-42 --resource website-3 --resource data-2
+
+^# pull
+
+      charm pull [options] <charm or bundle id> [--channel <channel>] [<directory>]
+
+  If you want to grab one of the charm store charms or bundles, use the `get`
+  command specifying the `CHARM_NAME` you want to copy and provide an optional
   `CHARMS_DIRECTORY`. Otherwise the current directory will be used
 
   For example:
 
-      juju charm get mysql
+      charm pull mysql
 
   Will download the MySQL charm to a mysql directory within your current path.
 
-      juju charm get wordpress ~/charms/precise/
+      charm pull wordpress ~/charms/
+
+  Will download the WordPress charm to `~/charms/wordpress`
+
+      charm pull trusty/wordpress
+
+  Will fetch the trusty version of the wordpress charm into the directory
+  "wordpress" in the current directory.
+
+  To select a channel, use the --channel option, for instance:
+
+      charm pull wordpress --channel development
+
+  Note that `charm pull` only pulls down a copy of the charm that is in the
+  store, it should not be used when you want to hack on a charm, for that you
+  should use `charm pull-source`.
 
 
-  Will download the WordPress charm to `~/charms/precise/wordpress`
+^# pull-source
 
+      charm pull-source [-h] [-v] [--description] item [dir]
 
-^# getall
+  Download the source code for a charm, layer, or interface.
 
-      juju charm getall [-h|--help] [CHARMS_DIRECTORY]
+  The item to download can be specified using any of the following forms:
 
-  Similar to `get`, `getall` will fetch all official charm store charms and place
-  them in the `CHARMS_DIRECTORY`, or your current directory if no
-  `CHARMS_DIRECTORY` is provided. This command can take quite a while to complete
-  - there are a lot of charms!
+   - [cs:]charm
+   - [cs:]series/charm
+   - [cs:]~user/charm
+   - [cs:]~user/series/charm
+   - layer:layer-name
+   - interface:interface-name
 
+  If the item is a layered charm, and the top layer of the charm has a repository
+  key in layer.yaml, the top layer repository will be cloned. Otherwise, the charm
+  archive will be downloaded and extracted from the charm store.
 
-^# info
+  If a download directory is not specified, the following environment vars
+  will be used to determine the download location:
 
-      juju charm info [-h|--help] CHARM
+   - For charms, `$JUJU_REPOSITORY`
+   - For layers, `$LAYER_PATH`
+   - For interfaces, `$INTERFACE_PATH`
 
-  Info is used to query the README file for a charm. This command accepts various
-  forms of a valid "charm id". Any ID that can be used to deploy a charm with
-  `juju deploy`, with the exception of `local:`, can be used with this command.
+  If a download location can not be determined from environment variables,
+  the current working directory will be used.
 
-  For example, this will print the raw README for the WordPress charm:
+  The download is aborted if the destination directory already exists.
 
-      juju charm info wordpress
+  positional arguments:
+    item           Name of the charm, layer, or interface to download.
+    dir            Directory in which to place the downloaded source.
 
+^# push
 
-^# list
- 
-      juju charm list [-h|--help]
+      charm push [options] <directory> [<charm or bundle id>]
 
+  The push command uploads a charm or bundle from the local directory
+  to the charm store.
 
-  Show all charms (both official and personal) in the charm store. This produces
-  an exhaustive list of all charms available in the store.
+  The charm or bundle id must not specify a revision: the revision will be
+  chosen by the charm store to be one more than any existing revision.
+  If the id is not specified, the current logged-in charm store user name is
+  used, and the charm or bundle name is taken from the provided directory name.
 
-^# promulgate
+  The pushed charm or bundle is unpublished and therefore usually only available
+  to a restricted set of users. See the publish command for info on how to make
+  charms and bundles available to others.
 
- 
-      juju charm promulgate [-h|--help] [-b|--branch] [-s|--series] [-v|--verbose] [-u|--unpromulgate] [-f|--force] [-w|--ignore-warnings] [-o|--owner-branch] CHARM_DIRECTORY
+      	charm push .
+      	charm push /path/to/wordpress wordpress
+      	charm push . cs:~lars/trusty/wordpress
 
+  Resources may be uploaded at the same time by specifying the --resource flag.
+  Following the resource flag should be a name=filepath pair.  This flag may be
+  repeated more than once to upload more than one resource.
 
-  Promulgate is used to promote a charm to the charm store. This command is only
-  available to users in the ~charmers group and is meant to be run only after a
-  charm passes the review process. `CHARM_DIRECTORY` is the path to the charm to
-  be promulgated. When promulgating `proof` is run and unless otherwise forced,
-  will prevent promulgation if errors occur.
+        charm push . --resource website=~/some/file.tgz --resource config=./docs/cfg.xml
 
-  ### Promulgate Options
+^# revoke
 
-    - `-b`, `--branch`: The location of the charm public branch. Will be
-      determined from the bzr configuration if omitted.
-    - `-s`, `--series`: The distribution series on which to set the official 
-      branch. Defaults to setting it in the current development series (LTS).
-    - `-v`, `--verbose`: Increase verbosity level.
-    - `-u`, `--unpromulgate`: Un-promulgate this branch instead of promulgating
-      it.
-    - `-f`, `--force`: Override warnings and errors. USE WITH EXTREME CARE!
-    - `-w`, `--ignore-warnings`: Promulgate this branch even with warnings from
-      charm proof.
-    - `-o`, `--owner-branch`: Promulgate a branch owned by a someone/group other
-      than ~charmers.
+      charm revoke [options] <charm or bundle id> [--channel <channel>] [--acl (read|write)] [,,...]
 
-^# proof
+  The revoke command restricts permissions for the given charm or bundle to the
+  given users.
 
- 
-      juju charm proof CHARM_DIRECTORY
- 
-  Proof is designed to perform a "lint" against a charms structure to validate if
-  it conforms to what the Charm Store thinks a charm structure and layout should
-  be. `proof` will provide output at varying levels of severity. `I` is
-  informational - these are things a charm could do but don't currently. `W` is a
-  warning - these are items that violate charm store policy or have an adverse affect
-  on tools in the juju ecosystem. `E` is an error - these are items that are major
-  and will result in a broken charm. Any charm with a Warning or Error will not
-  pass charm store review policy.
+      charm revoke ~kirk/wordpress james
 
-^# review-queue
+  The command accepts many users (comma-separated list) or everyone.
 
-      juju charm review-queue [-h|--help]
+  The --acl parameter accepts "read" and "write" values. By default all
+  permissions are revoked.
 
-  This provides a copy of the
-  [juju charms review queue](http://review.juju.solutions) which is used by 
-  ~charmers to identify which charms are available for review.
+      charm revoke ~kirk/wordpress --acl write james
 
+  To select a channel, use the --channel option, for instance:
 
-^# search
+      charm revoke ~kirk/wordpress --channel development --acl write james,robert
 
-      juju charm search [-h|--help] <text>
+^# set
 
+      charm set [options] <charm or bundle id> [--channel <channel>] name=value [name=value]
 
-  This command will search the charm repository (including namespace charms) for 
-  matching charms, and return a list showing their Launchpad identifier.
+  The set command updates the extra-info, home page or bugs URL for the given charm or
+  bundle.
 
-  For example: 
- 
-      juju charm search kafka
+      charm set wordpress bugs-url=https://bugspageforwordpress.none
+      charm set wordpress homepage=https://homepageforwordpress.none
 
+  The separator used when passing key/value pairs determines the type:
+  "=" for string fields, ":=" for non-string JSON data fields. Some
+  fields are forced to string and cannot be arbitrary JSON.
 
-  might return:
+  To select a channel, use the --channel option, for instance:
 
-      lp:~arosales/charms/trusty/kafka/trunk
-      lp:~bigdata-dev/charms/trusty/apache-kafka/trunk
-      lp:~hazmat/charms/trusty/kafka/trunk
-      lp:~merlijn-sebrechts/charms/precise/kafka/trunk
-      lp:~samuel-cozannet/charms/trusty/kafka-twitter/trunk
-      lp:~samuel-cozannet/charms/trusty/kafka/trunk
-      lp:~vpalos/charms/bundles/kafka-storm/bundle
-      lp:~vpalos/charms/trusty/kafka/trunk
-      lp:~x3v947pl/charms/trusty/kafka-dh/trunk
- 
+      charm set wordpress someinfo=somevalue --channel development
 
-^# unpromulgate
+^# show
 
-      juju charm unpromulgate [-h|--help] [-f|--force]
-  This is simply a convenience method to running `juju charm promulgate
-  --unpromulgate`.
+      charm show [options] <charm or bundle id> [--channel <channel>] [--list] [field1 ...]
 
-^# update
+  The show command prints information about a charm
+  or bundle. By default, all known metadata is printed.
 
- 
-      juju charm update [-h|--help] [-f|--fix] [CHARMS_DIRECTORY]
- 
+      charm show trusty/wordpress
 
-  Update is used for `CHARMS_DIRECTORY`, when `CHARMS_DIRECTORY` is a repository
-  created via `getall`
+  To select a channel, use the --channel option, for instance:
+
+      charm show wordpress --channel development
+
+  To specify one or more specific metadatas:
+
+     charm show wordpress charm-metadata charm-config
+
+  To get a list of metadata available:
+
+     charm show --list
+
+^# terms
+
+      charm terms [options]
+
+  Charms can require users to accept terms before deployment. This is useful for
+  software that needs a EULA. The terms command lists the terms owned by this
+  user and the charms that require these terms to be agreed to.
+
+^# test
+
+      charm test [-h] [--description] [--timeout TIMEOUT] [--isolate JUJU_ENV]
+                       [-o LOGDIR] [--setup-timeout SETUP_TIMEOUT] [--fail-on-skip]
+                       [--on-timeout {fail,skip,pass}] [--set-e] [-v] [-q]
+                       [-p PRESERVE_ENVIRONMENT_VARIABLES] [-e JUJU_ENV]
+                       [--upload-tools] [--constraints CONSTRAINTS]
+                       [TEST [TEST ...]]
+
+  Executes charm functional tests. It should always be run from inside the
+  charm's directory.
+
+  Given the following example charm layout:
+  .
+  ├── config.yaml
+  ├── copyright
+  ├── hooks
+  │   └── ...
+  ├── icon.svg
+  ├── metadata.yaml
+  ├── README.md
+  └── tests
+      ├── 00-tool_setup
+      ├── 01-standard
+      ├── 02-at_scale
+      └── 03-different_database
+
+  Run all tests for current charm
+
+      charm test
+
+  Run one or more tests
+
+    charm test 01-standard 03-different_database
+
+  output:
+
+  Each unit test will return an output in the form or either:
+
+        RESULT   : SYM
+
+      or
+
+      RESULT   : SYM (SYM)
+
+  Where SYM is a Symbol representing PASS: ✔, FAIL: ✘, SKIP: ↷, or TIMEOUT: ⌛
+  In the event a status is rewritten by either the --fail-on-skip flag or the
+  --on-timeout flag the original status will be displayed in () next to the
+  computed status.
+
+^# version
+
+      charm version
+
+  Display tooling versioning information.
+
+^# whoami
+
+      charm-version [-h] [--description] [-b] [--debug]
+
+  The whoami command prints the current jaas user name and list of groups
+  of which the user is a member.
