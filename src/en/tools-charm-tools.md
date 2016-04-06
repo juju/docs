@@ -195,17 +195,17 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
   The command accepts many users (comma-separated list) or everyone.
 
-  The --acl parameter accepts "read" and "write" values. By default "read"
+  The `--acl` parameter accepts "read" and "write" values. By default "read"
   permissions are granted.
 
       charm grant ~kirk/wordpress --acl write james
 
-  The --set parameters is used to overwrite any existing ACLs for the charm or
+  The `--set` parameters is used to overwrite any existing ACLs for the charm or
   bundle.
 
       charm grant ~kirk/wordpress --acl write --set james,robert
 
-  To select a channel, use the --channel option, for instance:
+  To select a channel, use the `--channel` option, for instance:
 
       charm grant ~kirk/wordpress --channel development --acl write --set james,robert
 
@@ -294,7 +294,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
       charm publish ~lars/xenial/wordpress
 
-  To select another channel, use the --channel option, for instance:
+  To select another channel, use the `--channel` option, for instance:
 
       charm publish ~lars/xenial/wordpress --channel stable
       charm publish xenial/django-42 -c development --resource website-3 --resource data-2
@@ -329,7 +329,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   Will fetch the trusty version of the wordpress charm into the directory
   "wordpress" in the current directory.
 
-  To select a channel, use the --channel option, for instance:
+  To select a channel, use the `--channel` option, for instance:
 
       charm pull wordpress --channel development
 
@@ -354,7 +354,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
    - interface:interface-name
 
   If the item is a layered charm, and the top layer of the charm has a repository
-  key in layer.yaml, the top layer repository will be cloned. Otherwise, the charm
+  key in `layer.yaml`, the top layer repository will be cloned. Otherwise, the charm
   archive will be downloaded and extracted from the charm store.
 
   If a download directory is not specified, the following environment vars
@@ -410,12 +410,12 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
   The command accepts many users (comma-separated list) or everyone.
 
-  The --acl parameter accepts "read" and "write" values. By default all
+  The `--acl` parameter accepts "read" and "write" values. By default all
   permissions are revoked.
 
       charm revoke ~kirk/wordpress --acl write james
 
-  To select a channel, use the --channel option, for instance:
+  To select a channel, use the `--channel` option, for instance:
 
       charm revoke ~kirk/wordpress --channel development --acl write james,robert
 
@@ -433,7 +433,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   "=" for string fields, ":=" for non-string JSON data fields. Some
   fields are forced to string and cannot be arbitrary JSON.
 
-  To select a channel, use the --channel option, for instance:
+  To select a channel, use the `--channel` option, for instance:
 
       charm set wordpress someinfo=somevalue --channel development
 
@@ -446,17 +446,17 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
       charm show trusty/wordpress
 
-  To select a channel, use the --channel option, for instance:
+  To select a channel, use the `--channel` option, for instance:
 
       charm show wordpress --channel development
 
   To specify one or more specific metadatas:
 
-     charm show wordpress charm-metadata charm-config
+      charm show wordpress charm-metadata charm-config
 
   To get a list of metadata available:
 
-     charm show --list
+      charm show --list
 
 ^# terms
 
@@ -512,8 +512,8 @@ independent help pages, accessible using either the `-h` or `--help` flags.
       RESULT   : SYM (SYM)
 
   Where SYM is a Symbol representing PASS: ✔, FAIL: ✘, SKIP: ↷, or TIMEOUT: ⌛
-  In the event a status is rewritten by either the --fail-on-skip flag or the
-  --on-timeout flag the original status will be displayed in () next to the
+  In the event a status is rewritten by either the `--fail-on-skip` flag or the
+  `--on-timeout` flag the original status will be displayed in () next to the
   computed status.
 
 ^# version
