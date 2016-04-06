@@ -134,7 +134,7 @@ Much like service constraints, it requires adding the placement key `to` in the
 service definition.
 Where supported by the cloud provider, it is also possible to isolate charms
 by including the container format in the placement directive. Some clouds
-support LXC and KVM.
+support LXC.
 
 For example:
 

@@ -13,7 +13,7 @@ available for Linux, Windows and Mac OS.
 ## Configure Juju
 Juju needs to be configured before it can orchestrate an environment. Juju
 defaults to an Amazon EC2 environment, but for testing and development you may
-wish to configure the local provider such as LXC or KVM.
+wish to configure the local provider such as LXC.
 
 ## Test your Juju setup
 You will want to make sure everything is running properly before writing code.
