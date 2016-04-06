@@ -84,7 +84,7 @@ Click on the expander to see details for each command.
   also possible to add containers to existing machines using the format
   <container type>:<machine number>. Constraints cannot be combined with
   deploying a container to an existing machine. The currently supported
-  container types are: lxc, kvm.
+  container types are: lxc.
   
   Manual provisioning is the process of installing Juju on an existing machine
   and bringing it under Juju's management; currently this requires that the
@@ -168,7 +168,7 @@ Click on the expander to see details for each command.
   also possible to add containers to existing machines using the format
   <container type>:<machine number>. Constraints cannot be combined with
   deploying a container to an existing machine. The currently supported
-  container types are: lxc, kvm.
+  container types are: lxc.
   
   Manual provisioning is the process of installing Juju on an existing machine
   and bringing it under Juju's management; currently this requires that the
