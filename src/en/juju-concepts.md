@@ -8,10 +8,11 @@ documenting Juju 2.0.
 
 ## The Juju client
 
-The Juju package which you install and run from your local computer is sometimes
-referred to as the Juju client. This is the software which manages your 
-connection to Juju controllers in the cloud, and from which you issue commands
-to deploy and manage services.
+The Juju client is CLI software that is used to manage Juju, whether as an 
+administrator or as a regular user. It is installed, via an APT package 
+(juju2), onto your personal workstation. This software manages your 
+connection to Juju controllers in the cloud, and from which you issue 
+commands to deploy and manage services.
 
 ## Clouds
 
@@ -21,15 +22,16 @@ as Amazon Web Services, Google Compute Engine and Microsoft Azure, as well as
 (possibly private) clouds such as OpenStack.
 
 It also includes things which may not strictly speaking be clouds, but Juju can
-treat as a cloud, such as [MAAS][maas] and your local computer using LXD.
+treat as a cloud, such as [MAAS][maas] and your local computer using [LXD][lxd].
 
 
 ## The Juju controller
 
 The controller is a special instance which Juju will create in a cloud when you
-run the bootstrap command. The controller is effectively a Juju agent which runs
-inside the cloud, and it maintains the models that you create there. You can run
-multiple controllers with Juju, and each can maintain multiple models.
+run the bootstrap command. The controller manages the internals of Juju for the
+chosen cloud, including the models (see next section) you create within it.
+Multiple clouds (and thus controllers) are possible and each one may contain
+multiple models.
 
 ## Models
 
@@ -41,7 +43,8 @@ multiple users.
 
 The magic behind Juju is a collection of software components called Charms. They
 contain all the instructions necessary for deploying and configuring 
-cloud-based services. The charms publicly available in the online Charm Store 
+cloud-based services. The charms publicly available in the online 
+[Charm Store][charmstore] 
 represent the distilled DevOps knowledge of experts. Charms make it easy to 
 reliably and repeatedly deploy services, then scale up as required with minimal 
 effort.
@@ -80,7 +83,7 @@ conserve resources) or possibly no units at all: a machine can be created
 independently of services, though usually this is with the intention of 
 eventually running a service on it!
 
-## Units
+## Units/Services
 
 A unit is a running instance of a given Juju service. Simple services may be 
 deployed with a single service unit, but it is possible for an individual 
@@ -96,3 +99,5 @@ set, as defined by the charm.
 
 [maas]: https://maas.io "Metal as a Service"
 [bundles]: ./charms-bundles.html
+[lxd]: http://www.ubuntu.com/cloud/lxd
+[charmstore]: https://jujucharms.com/store
