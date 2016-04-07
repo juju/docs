@@ -3,27 +3,30 @@
                 <ul>
                   <li><a href="about-juju.html">About Juju</a></li>
                   <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
-                  <li class="section"><a class="header" href="getting-started.html">Install &amp; Configure</a>
-                    <ul class="sub">
-                      <li><a href="config-aws.html">Amazon Web Service</a></li>
-                      <li><a href="config-azure.html">Windows Azure</a></li>
-                      <li><a href="config-digitalocean.html">DigitalOcean</a></li>
-                      <li><a href="config-gce.html">Google Compute Engine</a></li>
-                      <li><a href="config-joyent.html">Joyent</a></li>
-                      <li><a href="config-local.html">Local</a></li>
-                      <li><a href="config-maas.html">MAAS (bare metal)</a></li>
-                      <li><a href="config-openstack.html">OpenStack</a></li>
-                      <li><a href="config-rackspace.html">Rackspace</a></li>
-                      <li><a href="config-scaleway.html">Scaleway</a></li>
-                      <li><a href="config-vagrant.html">Vagrant</a></li>
-                      <li><a href="config-vmware.html">VMWare vSphere</a></li>
-                      <li><a href="config-manual.html">Manual Provisioning</a></li>
-                      <li><a href="config-general.html">General config options</a></li>
-                      <li><a href="getting-started.html#testing-your-setup">Testing your setup</a></li>
-                    </ul>
+                  <li ><a href="getting-started.html">Getting Started</a></li>
+                  <li ><a href="install.html">Install Juju</a></li>
+                  <li><a href="concepts.html">Juju concepts</a></li>
+                  <li class="section"><a class="header" href="clouds.html">Clouds</a>
                   </li>
-                  <li class="section"><a class="header" href="charms.html">Using Juju Charms</a>
-                    <ul class="sub">
+                  <li class="section"><a class="header" href="controllers.html">Controllers</a>
+                     <ul class="sub">
+                      <li><a href="controllers-creating.html">Creating a controller</a></li>
+                      <li><a href="controllers-removing.html">Removing a controller</a></li>
+                    </ul>                  
+                  </li>
+                  
+                  <li class="section"><a class="header" href="models.html">Models</a></li>
+                     <ul class="sub">
+                      <li><a href="models-creating.html">Creating a model</a></li>
+                      <li><a href="models-sharing.html">Sharing a model</a></li>
+                      <li><a href="models-removing.html">Removing a model</a></li>
+                    </ul>  
+                  </li>
+                  
+                  
+                  
+                  <li class="section"><a class="header" href="charms.html">Charms & services</a></li>
+                   <ul class="sub">
                       <li><a href="charms-deploying.html">Deploying Services</a></li>
                       <li><a href="charms-constraints.html">Using constraints</a></li>
                       <li><a href="charms-config.html">Service configuration</a></li>
@@ -39,6 +42,8 @@
                       <li><a href="charms-storage.html">Using storage</a></li>
                     </ul>
                   </li>
+                  <li class="section"><a class="header" href="bundles.html">Bundles</a></li>
+                  <li class="section"><a class="header" href="users.html">Users</a></li>
                   <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
                     <ul class="sub">
                       <li><a href="juju-ha.html">Juju high availability</a></li>

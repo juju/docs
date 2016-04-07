@@ -1,4 +1,7 @@
 Title: Configuring for MAAS (bare metal)  
+Todo: Update MAAS instructions
+
+!!! NOTE: This page has not been updated for Juju 2.0 
 
 
 # Configuring for MAAS (bare metal)
