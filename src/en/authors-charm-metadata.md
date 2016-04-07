@@ -78,7 +78,21 @@ keep the Charm Store organised.
 
 ![Juju Charm Store metadata Listing](./media/authors-metadata-display.png)
 
-Finally, a metadata file defines the charm's 
+[Storage](./developer-storage.md) can also be declared in a charm's metadata,
+as such:
+
+```yaml
+storage:
+  data:
+    type: filesystem
+    description: junk storage
+    shared: false # not yet supported, see description below
+    read-only: false # not yet supported, see description below
+    minimum-size: 100M
+    location: /srv/data
+```
+
+Finally, a metadata file defines the charm's
 [relations](./authors-relations.html),
 and whether it's designed for deployment as a
 [subordinate service](./authors-subordinate-services.html).
