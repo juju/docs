@@ -3,25 +3,21 @@ Title: Building a Juju charm
 
 # Building is easier than writing
 
-When creating a charm, you always have the option of doing it by
-[hand][writing].  That is, you can create each hook, implement the side of the
-interface you need for each relation your charm requires or provides, manage
-the dependencies, such as [charm-helpers][], that your charm uses, et cetera.
-However, what you really want to do is focus on *your* charm.  So, why not
-leverage the work of others and keep your charm code as minimal and tightly
-focused as possible?
-
-Enter the concept of building charms from layers.  Layers let you build on
-the work of other charmers, whether that work is in the form of other charms
-that you can extend and modify, interfaces that are already built for you and
-know how to communicate with a remote service and let you know when that service
-is ready and what it provides for you, or partial base layers that make managing
+Charms are built from layers.  Layers let you build on the work of other
+charmers, whether that work is in the form of other charms that you can extend
+and modify or interfaces that are already built for you and know how to
+communicate with a remote service and let you know when that service is ready
+and what it provides for you. There are also partial base layers that make managing
 dependencies much easier.  And it does this in a consistent, repeatable, and
 auditable way.
 
+So for example, if the software you want to charm needs a Java runtime, you can
+reuse a layer that provides that. In the future when that layer is updated and
+improved, every single charm that uses that layer can take advantage of those
+improvements.
+
 For this example, we will create a charm for the same [Vanilla forum software][]
 as [before][writing], but using layers.
-
 
 ## Preparation
 

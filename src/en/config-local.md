@@ -10,7 +10,7 @@ own private cloud, it can also be configured to run solely on a local machine
 by means of containers or virtualisation.
 
 Currently, the only stable implementation of this is using Linux containers,
-LXC ([see linuxcontainers.org](http://linuxcontainers.org/)). However, this
+LXD ([see linuxcontainers.org](http://www.ubuntu.com/cloud/lxd)). However, this
 option isn't available to those running Juju on Mac and Windows systems so
 further methods of containerisation and virtualisation are intended to be
 added. These are collectively referred to as using "the local provider", even
@@ -19,8 +19,6 @@ you use, ultimately it should be largely transparent to the user.
 
 The following pages cover the different local providers available:
 
-  - [LXC (Linux)](./config-LXC.html)
   - [LXD (Linux)](./config-LXD.html)
-  - [KVM (Linux)](./config-KVM.html)
   - [Vagrant (Linux/Mac/Windows)](./config-vagrant.html) `Beta!`
   - Running Juju with virtualised containers. `Coming Soon!`

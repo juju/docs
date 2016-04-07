@@ -59,11 +59,11 @@ to modify the `my-maas-server` setting too; if you're running from the maas
 package it should be something like "http://hostname.xxxx.yyy/MAAS".
 
 It is also useful to add your SSH keys to the configuration, as MAAS will then
-be able to automatically add them to each unit. This may be done simply by 
+be able to automatically add them to each unit. This may be done simply by
 adding the following option to the config:
 
 ```yaml
-authorized-keys-path: ~/.ssh/id_rsa.pub 
+authorized-keys-path: ~/.ssh/id_rsa.pub
 ```
 
 ...or point to any other appropriate key file.
@@ -75,7 +75,7 @@ instance. This can optionally be specified in the configuration:
  admin-secret: asecurepassword
 ```
 
-The default series for MAAS will automatically be set to 'precise'. You can override 
+The default series for MAAS will automatically be set to 'precise'. You can override
 this setting by adding the optional configuration:
 
 ```yaml
@@ -105,10 +105,10 @@ MAAS 1.8 introduced a new feature called "devices". This allows the
 association of a "device", that requires an IP address, with a parent machine
 managed by MAAS. There is a view in the MAAS UI showing all devices.
 
-With the "address-allocation" feature flag enabled, Juju will register LXC and
-KVM containers as devices on MAAS 1.8+. They are visible in the MAAS UI. If
-the environment is forcibly shut down, the IP addresses allocated to the
-containers will be released by MAAS.
+With the "address-allocation" feature flag enabled, Juju will register LXC
+containers as devices on MAAS 1.8+. They are visible in the MAAS UI. If the
+environment is forcibly shut down, the IP addresses allocated to the containers
+will be released by MAAS.
 
 You can enable "address-allocation" in new Juju environments like so:
 
