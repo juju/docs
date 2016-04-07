@@ -37,7 +37,7 @@ To scan your system for credentials Juju can use, run the command:
 juju autoload-credentials
 ```
 
-This will will interactively ask you whether to store each set of credentials
+This will will ask you whether to store each set of credentials
 it finds. Note that this is a 'snapshot' of those stored values - Juju will not 
 notice if they change in future.
 
@@ -71,16 +71,14 @@ juju set-default-credential <cloud> <credential>
 If you are having difficulty finding the correct credential information for 
 your cloud, please see the [help pages][help].
 
-### Adding credentials from a YAMl file.
+### Adding credentials from a YAML file.
 
-You can also specify a YAML format source file for the credentials. The source 
+You can also specify a YAML format file for the credentials. This  
 file would be similar to:
 
 ```yaml
 credentials:
   aws:
-    default-credential: bob
-    default-region: us-east-1
     bob:
       auth-type: access-key
       access-key: AHJHKUWK7HIW
@@ -113,7 +111,7 @@ google  wayne
 The asterisk '*' denotes the default credential, which will be used for the
 named cloud unless another is specified.
 
-You can choose the default credential:
+You can set the default credential:
 
 ```bash
 juju set-default-credential aws carol
