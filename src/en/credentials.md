@@ -25,7 +25,7 @@ You can add credentials by running the command:
 ```bash
 juju add-credential <cloud>
 ```
-Juju will then interactively ask for the information it needs. This may vary 
+Juju will then ask for the information it needs. This may vary 
 according to the cloud you are using, but will typically look something like
 this:
 
