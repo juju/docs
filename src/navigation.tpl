@@ -3,32 +3,23 @@
                 <ul>
                   <li><a href="about-juju.html">About Juju</a></li>
                   <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
-                  <li class="section"><a class="header" href="getting-started.html">Install</a>
-                    <ul class="sub">
-                      <li><a href="getting-started-general.html">Getting started</a></li>
-                      <li><a href="concepts.html">Juju concepts</a></li>
-                    </ul>
-                  </li>
+                  <li ><a href="getting-started.html">Getting Started</a></li>
+                  <li ><a href="install.html">Install Juju</a></li>
+                  <li><a href="concepts.html">Juju concepts</a></li>
                   <li class="section"><a class="header" href="clouds.html">Clouds</a>
-                    <ul class="sub">
-                      <li><a href="clouds.html#specifying-additional-clouds">Specifying additional clouds</a></li>
-                      <li><a href="clouds-LXD.html">Local(LXD) cloud</a></li>
-                      <li><a href="clouds-MAAS.html">MAAS</a></li>
-                      <li><a href="clouds-manual.html">Manual cloud setup</a></li>
-                    </ul>       
                   </li>
                   <li class="section"><a class="header" href="controllers.html">Controllers</a>
                      <ul class="sub">
-                      <li><a href="controllers-creating.html#specifying-additional-clouds">Creating a controller</a></li>
-                      <li><a href="controllers-removing">Removing a controller</a></li>
+                      <li><a href="controllers-creating.html">Creating a controller</a></li>
+                      <li><a href="controllers-removing.html">Removing a controller</a></li>
                     </ul>                  
                   </li>
                   
                   <li class="section"><a class="header" href="models.html">Models</a></li>
                      <ul class="sub">
-                      <li><a href="models-creating.html#specifying-additional-clouds">Creating a model</a></li>
-                      <li><a href="models-sharing">Sharing a model</a></li>
-                      <li><a href="models-removing">Removing a model</a></li>
+                      <li><a href="models-creating.html">Creating a model</a></li>
+                      <li><a href="models-sharing.html">Sharing a model</a></li>
+                      <li><a href="models-removing.html">Removing a model</a></li>
                     </ul>  
                   </li>
                   
