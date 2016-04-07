@@ -3,17 +3,52 @@ Title: Juju credentials
 # Cloud credentials
 
 In order to access your cloud (with the exception of [LXD][lxd]), Juju will
-need to know how to authenticate itself. We use the term “credential” to 
-describe the tokens or keys or secrets needed to spin up resources on clouds.
+need to know how to authenticate itself. We use the term “credentials” to 
+describe the tokens or keys or secrets used - a set of credentials 
+is represented by a _credential name_ that is used to refer to those 
+credentials in subsequent commands.
 
 
 Currently, Juju can use one of three ways to get your credentials for a cloud:
 
+ - Entering credentials interactively on the command-line
  - Scanning existing credentials (e.g. environment variables, .novarc files)
  - Importing a user-provided [YAML-formatted][yaml] file.
- - Entering credentials interactively on the command-line
+ 
 
 These methods are explained in more detail below.
+
+### Adding credentials via the commandline
+
+You can add credentials by running the command:
+
+```bash
+juju add-credential <cloud>
+```
+Juju will then interactively ask for the information it needs. This may vary 
+according to the cloud you are using, but will typically look something like
+this:
+
+```no-highlight
+juju add-credential aws 
+credential name: carol
+select auth-type [userpass, oauth, etc]: userpass
+enter username: cjones
+enter password: *******
+```
+
+Once you have supplied all the information, the credentials will be added.
+
+At present, you will need to manually set one to be the default, if you 
+have more than one for a cloud:
+
+```bash
+juju set-default-credential <cloud> <credential>
+```
+
+If you are having difficulty finding the correct credential information for 
+your cloud, please see the [help pages][help].
+
 
 ### Scanning existing credentials
 
@@ -40,36 +75,6 @@ juju autoload-credentials
 This will will ask you whether to store each set of credentials
 it finds. Note that this is a 'snapshot' of those stored values - Juju will not 
 notice if they change in future.
-
-### Adding credentials via the commandline
-
-You can add credentials by running the command:
-
-```bash
-juju add-credential <cloud>
-```
-Juju will then interactively ask for the information it needs. This may vary 
-according to the cloud you are using, but will typically look something like
-this:
-
-```no-highlight
-juju add-credential aws 
-credential name: carol
-select auth-type [userpass, oauth, etc]: userpass
-enter username: cjones
-enter password: *******
-```
-
-Once you have supplied all the information, the credential will be added.
-
-At present, you will need to manually set this to be the default:
-
-```bash
-juju set-default-credential <cloud> <credential>
-```
-
-If you are having difficulty finding the correct credential information for 
-your cloud, please see the [help pages][help].
 
 ### Adding credentials from a YAML file.
 
@@ -130,3 +135,4 @@ juju remove-credential aws bob
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [help]: ./help-credentials.html
+[lxd]: ./clouds-LXD.html
