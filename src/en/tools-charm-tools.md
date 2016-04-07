@@ -20,7 +20,7 @@ sudo apt-get update && sudo apt-get install charm-tools
 
 ## Mac OSX
 Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
-running the latest version of homebrew before proceeding.
+running the latest version of Homebrew before proceeding.
 
 To install, run the following:
 
@@ -29,14 +29,14 @@ brew install charm-tools
 ```
 
 ## Windows
-Charm Tools is available for, and tested, on Microsoft Windows 7 and 8. While
+Charm Tools is available for, and tested on, Microsoft Windows 7 and 8. While
 the installer may work on previous versions of Windows there is no guarantee.
 
 To install, first download the Charm Tools installer from
 [launchpad](https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-
 tools_1.2.9.exe). Once downloaded, execute the installer and follow the on-
-screen prompts. After installation you can access Charm Tools either via the
-`charm` command from either the command line or powershell.
+screen prompts. After installation you can access Charm Tools via the
+`charm` command from either the command line or PowerShell.
 
 To uninstall, please remove Charm Tools from the Add/Remove Software section of
 the Windows Control Panel
@@ -92,21 +92,21 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   in the `[charmhome]` directory, or your current directory if no `[charmhome]`
   directory is provided.
 
-  By default, your new charm is created using the python template. Use the
+  By default, your new charm is created using the Python template. Use the
   `-t TEMPLATE` option to create a charm using a different template, e.g.:
 
       charm create -t bash my-charm
 
   To see the list of installed templates use `charm create -h`.
 
-  Depending on the template being used, `harm create` may prompt for
+  Depending on the template being used, `charm create` may prompt for
   user input. To suppress prompts and accept all defaults instead, use the
   `-a` or `--accept-defaults` option.
 
   ### Create Options
 
     - `-h`, `--help`: Show help.
-    - `-t`, `--template`: The template to use when creating the charm.
+    - `-t`, `--template`: Designate the template to use when creating the charm.
     - `-a`, `--accept-defaults`: If the chosen template prompts for user
       input, suppress all prompts and accept the defaults instead.
     - `-v`, `--verbose`: Show debug output.
@@ -120,15 +120,15 @@ independent help pages, accessible using either the `-h` or `--help` flags.
         my-charm
         ├── config.yaml
         ├── hooks
-        │   ├── config-changed
-        │   ├── install
-        │   ├── relation-name-relation-broken
-        │   ├── relation-name-relation-changed
-        │   ├── relation-name-relation-departed
-        │   ├── relation-name-relation-joined
-        │   ├── start
-        │   ├── stop
-        │   └── upgrade-charm
+        │   ├── config-changed
+        │   ├── install
+        │   ├── relation-name-relation-broken
+        │   ├── relation-name-relation-changed
+        │   ├── relation-name-relation-departed
+        │   ├── relation-name-relation-joined
+        │   ├── start
+        │   ├── stop
+        │   └── upgrade-charm
         ├── icon.svg
         ├── metadata.yaml
         ├── README.ex
@@ -145,37 +145,37 @@ independent help pages, accessible using either the `-h` or `--help` flags.
         ├── charm-helpers.yaml
         ├── config.yaml
         ├── hooks
-            │   ├── config-changed
-            │   ├── install
-            │   ├── start
-            │   ├── stop
-            │   └── upgrade-charm
+            │   ├── config-changed
+            │   ├── install
+            │   ├── start
+            │   ├── stop
+            │   └── upgrade-charm
             ├── icon.svg
             ├── lib
-            │   └── charmhelpers
-            │       ├── core
-            │       │   ├── decorators.py
-            │       │   ├── files.py
-            │       │   ├── fstab.py
-            │       │   ├── hookenv.py
-            │       │   ├── host.py
-            │       │   ├── hugepage.py
-            │       │   ├── __init__.py
-            │       │   ├── kernel.py
-            │       │   ├── services
-            │       │   │   ├── base.py
-            │       │   │   ├── helpers.py
-            │       │   │   └── __init__.py
-            │       │   ├── strutils.py
-            │       │   ├── sysctl.py
-            │       │   ├── templating.py
-            │       │   └── unitdata.py
-            │       └── __init__.py
+            │   └── charmhelpers
+            │       ├── core
+            │       │   ├── decorators.py
+            │       │   ├── files.py
+            │       │   ├── fstab.py
+            │       │   ├── hookenv.py
+            │       │   ├── host.py
+            │       │   ├── hugepage.py
+            │       │   ├── __init__.py
+            │       │   ├── kernel.py
+            │       │   ├── services
+            │       │   │   ├── base.py
+            │       │   │   ├── helpers.py
+            │       │   │   └── __init__.py
+            │       │   ├── strutils.py
+            │       │   ├── sysctl.py
+            │       │   ├── templating.py
+            │       │   └── unitdata.py
+            │       └── __init__.py
             ├── metadata.yaml
             ├── README.ex
             ├── revision
             ├── scripts
-            │   └── charm_helpers_sync.py
+            │   └── charm_helpers_sync.py
             └── tests
                 ├── 00-setup
                 └── 10-deploy
@@ -220,8 +220,8 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
       charm-layers [-h] [-r] [-l LOG_LEVEL] [--description] [charm]
 
-  Inspect the layers of a built charm. The output is color coded. Each of the
-  results in the layers section is assigned a unique color that corresponds to
+  Inspect the layers of a built charm. The output is colour coded. Each of the
+  results in the layers section is assigned a unique colour that corresponds to
   each file that is part of that layer.
 
 ^# list
@@ -246,7 +246,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   it. So the following forms will be accepted:
 
       charm list-resources cs:xenial/mysql
-      charm list-respirces mysql
+      charm list-resources mysql
       charm list-resources trusty/mysql
 
       charm list-resources cs:~kirk/xenial/mysql
@@ -275,7 +275,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   provide output at varying levels of severity. `I` is informational - these
   are things a charm could do but don't currently. `W` is a warning - these are
   items that violate charm store policy or have an adverse affect on tools in
-  the juju ecosystem. `E` is an error - these are items that are major and will
+  the Juju ecosystem. `E` is an error - these are items that are major and will
   result in a broken charm. Any charm with a Warning or Error will not pass
   charm store review policy. The charm store itself will not accept a push that
   has an error.
@@ -394,7 +394,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
       	charm push . cs:~lars/trusty/wordpress
 
   Resources may be uploaded at the same time by specifying the --resource flag.
-  Following the resource flag should be a name=filepath pair.  This flag may be
+  Following the resource flag should be a name=filepath pair. This flag may be
   repeated more than once to upload more than one resource.
 
         charm push . --resource website=~/some/file.tgz --resource config=./docs/cfg.xml
@@ -450,7 +450,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
       charm show wordpress --channel development
 
-  To specify one or more specific metadatas:
+  To specify metadata for one or more specific channels:
 
       charm show wordpress charm-metadata charm-config
 
@@ -483,7 +483,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   ├── config.yaml
   ├── copyright
   ├── hooks
-  │   └── ...
+  │   └── ...
   ├── icon.svg
   ├── metadata.yaml
   ├── README.md
@@ -505,7 +505,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
   Each unit test will return an output in the form or either:
 
-        RESULT   : SYM
+      RESULT   : SYM
 
       or
 
@@ -526,5 +526,5 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
       charm-version [-h] [--description] [-b] [--debug]
 
-  The whoami command prints the current jaas user name and list of groups
+  The whoami command prints the current Juju user name and list of groups
   of which the user is a member.
