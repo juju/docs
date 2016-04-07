@@ -1,5 +1,8 @@
 Title: Manual provisioning  
 
+
+!!! Note: This page has not been updated for Juju 2.0 yet
+
 # Manual Provisioning
 
 ## Introduction
