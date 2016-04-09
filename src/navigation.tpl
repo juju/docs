@@ -3,7 +3,9 @@
                 <ul>
                   <li><a href="about-juju.html">About Juju</a></li>
                   <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
-                  <li class="section"><a class="header" href="getting-started.html">Install &amp; Configure</a>
+                  <li><a href="getting-started.html">Getting Started</a></li>
+                  <li><a href="juju-concepts.html">Juju concepts</a></li>
+                  <li class="section"><a class="header" href="getting-started-general.html">Install &amp; Configure</a>
                     <ul class="sub">
                       <li><a href="config-aws.html">Amazon Web Service</a></li>
                       <li><a href="config-azure.html">Windows Azure</a></li>
@@ -20,6 +22,11 @@
                       <li><a href="config-manual.html">Manual Provisioning</a></li>
                       <li><a href="config-general.html">General config options</a></li>
                       <li><a href="getting-started.html#testing-your-setup">Testing your setup</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="clouds.html">Clouds</a>
+                    <ul class="sub">
+                      <li><a href="credentials.html">Credentials</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="charms.html">Using Juju Charms</a>
