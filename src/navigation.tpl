@@ -29,7 +29,17 @@
                       <li><a href="credentials.html">Credentials</a></li>
                     </ul>
                   </li>
-                  <li class="section"><a class="header" href="charms.html">Using Juju Charms</a>
+                  <li class="section"><a class="header" href="controllers.html">Controllers</a>
+                    <ul class="sub">
+                      <li><a href="controllers-creating.html">Creating</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="models.html">Models</a>
+                    <ul class="sub">
+                      <li><a href="models-creating.html">Creating</a></li>
+                    </ul>
+                  </li>
+                  <li class="section"><a class="header" href="charms.html">Charms & Services</a>
                     <ul class="sub">
                       <li><a href="charms-deploying.html">Deploying Services</a></li>
                       <li><a href="charms-constraints.html">Using constraints</a></li>
