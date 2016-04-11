@@ -7,7 +7,7 @@ Todo: remove ppa/devel after release
 
 The instructions here will get you up and running and deliver the best-possible
 experience. At the moment, that means using the very latest release of 
-Ubuntu, [16.04LTS(Xenial)](http://cdimage.ubuntu.com/releases/16.04/).
+Ubuntu, [16.04LTS (Xenial)](http://cdimage.ubuntu.com/releases/16.04/).
 
 If you are using a different OS, please read the 
 [general install instructions here](./getting-started-general.html).
@@ -95,7 +95,7 @@ local.lxd-test*  default  admin@local  10.0.3.124:17070
 ```
 
 Creating a new controller automatically creates two empty models. The 'admin' 
-model,and a model called "default", which is automatically selected and ready for 
+model, and a model called "default", which is automatically selected and ready for 
 use.
 
 ```bash 
