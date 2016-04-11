@@ -12,7 +12,7 @@ serve:
 todo:
 	tools/mdbuild.py --todo
 sysdeps:
-	sudo apt-get install python-html2text python3-markdown python3-pip git spell ispell ibritish
+	sudo apt-get install python-html2text python3-markdown python3-pip git spell ispell ibritish python3-setuptools
 	sudo pip3 install mdx-anchors-away mdx-callouts mdx-foldouts
 
 multi:
