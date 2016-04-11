@@ -94,20 +94,9 @@ CONTROLLER       MODEL    USER         SERVER
 local.lxd-test*  default  admin@local  10.0.3.124:17070
 ```
 
-# Create a model
-
-Before we deploy any services, we will create a model. A model in Juju is like a 
-workspace where you can deploy and relate the services you want. A controller 
-can create many models, and as you will see, Juju is able to share selected 
-models with other users too. For now we will create a new model called 'test':
-
-```bash
-juju create-model test
-```
-
-The model is now created. Each time you create a new model, control is 
-automatically switched to that model. You can find out which model you are 
-currently using with the `juju switch` command:
+Creating a new controller automatically creates two empty models. The 'admin' 
+model,and a model called "default", which is automatically selected and ready for 
+use.
 
 ```bash 
 juju switch
@@ -115,8 +104,9 @@ juju switch
 ...will return model and controller we are currently using:
 
 ```no-highlight
-local.lxd-test:test
+local.lxd-test:default
 ```
+
 # Deploy!
 
 Juju is now ready to deploy any services from the hundreds included in the
@@ -165,7 +155,7 @@ address, you should see the site running.
 Congratulations, you have just deployed a service with Juju!
 
 !!! Note: To remove all the services in the model you just created, it is 
-often quickest to destroy the model with the command 'juju destroy-model test` 
+often quickest to destroy the model with the command 'juju destroy-model default` 
 and then create a new model.
 
 
@@ -179,6 +169,7 @@ We suggest you take the time to read the following:
 
   - [Clouds][clouds] goes into detail about configuring other clouds, including the 
     public clouds like Azure, AWS, Google Compute Engine and Rackspace.
+  - [Models][models] - Learn how to create, destroy and manage models.
   - [Charms/Services][charms] - find out how to construct complicated workloads 
     in next to no time.
 
@@ -189,3 +180,4 @@ We suggest you take the time to read the following:
 [keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
 [concepts]: ./juju-concepts.html "Juju concepts"
 [charms]: ./charms.html
+[models]: ./models.html
