@@ -9,15 +9,15 @@ The charm store is broken down into two main sections: Recommended and
 Community. Recommended charms have been vetted and reviewed by a Juju
 Charmer and all updates to the charm are also vetted prior to landing.
 Community charms have been shared by members of the community, but were
-not submitted and have not been vetted by Juju Charmers.
+not submitted by and have not been vetted by Juju Charmers.
 
   - [Charm development information](developer-getting-started.html)
   - [Bundle creation information](charms-bundles.html)
 
 In order to interact with the charm store you will need the latest
 [charm command](tools-charm-tools.html), an
-[Ubuntu SSO account](https://login.ubuntu.com/+login), and have logged in
-once to [Launchpad](https://launchpad.net/+login).
+[Ubuntu SSO account](https://login.ubuntu.com/+login), and you must have
+logged in to [Launchpad](https://launchpad.net/+login) at least once.
 
 ## Login to the store
 
@@ -28,8 +28,8 @@ following information:
 
  - `Username` - typically the email address used to access Ubuntu SSO
  - `Password` - Ubuntu SSO password
- - `Two-factor auth` - If enabled, enter 2FA information. Otherwise 
-<kbd>Return</kbd> for None
+ - `Two-factor auth` - If enabled, enter two-factor authentication (2FA)
+information. Otherwise <kbd>Return</kbd> for None
 
 ## Entities explained
 
@@ -42,7 +42,6 @@ pushed 4 times, the revision history would look like this:
 
 ```
 entity: 0---1---2---3
-
 ```
 
 Channels group entity revisions into named streams. There are currently two
