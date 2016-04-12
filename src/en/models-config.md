@@ -180,15 +180,15 @@ perceives machines. As far as it is concerned, machines are in one of four
 states:
 
 - **Alive:** The machine is running and being used.
-- **Dying:** The machine is in the process of being terminated by Juju, but hasn't
-yet finished.
+- **Dying:** The machine is in the process of being terminated by Juju, but 
+  hasn't yet finished.
 - **Dead:** The machine has been successfully brought down by Juju, but is still
-being tracked for removal.
+  being tracked for removal.
 - **Unknown:** The machine exists, but Juju knows nothing about it.
 
 ### Harvesting modes
 With the above in mind, Juju can use one of several strategies to delete or harvest
-machines from the model
+machines from the model:
 
 - **None:** Using this method, Juju won't harvest any machines. This is the
 most conservative, and a good choice if you manage your machines
