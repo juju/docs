@@ -37,6 +37,7 @@
                   <li class="section"><a class="header" href="models.html">Models</a>
                     <ul class="sub">
                       <li><a href="models-creating.html">Creating</a></li>
+                      <li><a href="models-config.html">Additional configuration</a></li>
                     </ul>
                   </li>
                   <li class="section"><a class="header" href="charms.html">Charms & Services</a>
