@@ -5,7 +5,7 @@ TODO: check options haven't changed
 
 There may be times, particularly when dealing with complex cloud environments
 or running multiple instances of Juju, where it would be useful to control
-further aspects of the models you create with Juju. 
+further aspects of the models you create. 
 
 
 ## Getting and setting individual values
