@@ -44,8 +44,7 @@ automatically, but in the case of a manual cloud you will have to specify these
 resources.
 
 This is done by using the `add-machine` command in Juju. This will install the 
-default series on a given resource (in this case a machine on the network to
-which you have access and the relevant permissions), and prepare it for
+default series on a given resource, and prepare it for
 deploying services.
 
 For example, if you have a machine with the IP address 192.168.1.129, you could 
