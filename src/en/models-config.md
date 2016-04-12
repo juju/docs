@@ -5,7 +5,7 @@ TODO: check options haven't changed
 
 There may be times, particularly when dealing with complex cloud environments
 or running multiple instances of Juju, where it would be useful to control
-further aspects of the models you create. 
+further aspects of the models you create and the machines they deploy.
 
 
 ## Getting and setting individual values
@@ -129,7 +129,7 @@ to restore the default behaviour in a running model.
 
 ## Versions and Streams
 
-The ```agent-stream``` option selects the versions of Juju which an model
+The ```agent-stream``` option selects the versions of Juju which a model
 can deploy and upgrade to. This defaults to "released", indicating that only
 the latest stable versions of Juju should be used, which is the recommended
 setting.
@@ -169,7 +169,7 @@ latest software available to it by disabling upgrades but enabling updates.
 
 ## Juju lifecycle and harvesting
 
-Juju keeps state on the running model from which it builds a model.
+Juju keeps state on the running model.
 Based on that model, it can harvest machines which it deems are no longer
 required. This can help reduce running costs and keep the model 'tidy'.
 Harvesting is guided by what "harvesting mode" has been set by the
