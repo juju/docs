@@ -126,7 +126,8 @@ within the layer directory, this is as simple as:
 charm build
 ```
 
-Build will take all of the layers and create a new charm into
+Build will take all of the layers, looking first in your local LAYER_PATH and
+then querying interfaces.juju.solutions, and create a new charm into
 $JUJU_REPOSITORY/trusty/vanilla:
 
     build: Composing into /home/user/charms
