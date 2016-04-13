@@ -7,6 +7,104 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^# juju-core 1.25.5
+
+  A stable release of Juju, juju-core 1.25.5, is now available.
+  This release replaces version 1.25.3
+
+
+  ## Getting Juju
+
+  juju-core 1.25.5 is available for Xenial and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows, Centos, and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.25.5
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Jujud offers poodle vulnerable sslv3 on 17070
+      Lp 1536269
+
+    * Leadership dependency failures in ci deploy tests
+      Lp 1539656
+
+    * Upgrade 1.24.7 -> 1.25.3 fails
+      Lp 1546100
+
+    * Destroyed leader, new leader not elected.
+      Lp 1511659
+
+    * New ec2 korea region
+      Lp 1530957
+
+    * Maas bridge script handles vlan nics incorrectly
+      Lp 1532167
+
+    * 1.25.0: bootstrap failure - warning discarding api open error: eof
+      Lp 1538303
+
+    * Bootstrap node does not use the proxy to fetch tools from
+      streams.c.c
+      Lp 1515289
+
+    * Payload/persistence intermittent failure
+      Lp 1519061
+
+    * 1.25.3 can't bootstrap xenial environments
+      Lp 1550306
+
+    * Enable daily image stream in juju local provider
+      Lp 1554073
+
+    * Juju's maas bridge script is echoed to the console by cloud-init
+      during bootstrap
+      Lp 1536587
+
+    * Cookies file locked for too long
+      Lp 1534643
+
+    * 1.25.4: units attempt to go through the proxy to download charm
+      from state server
+      Lp 1556207
+
+    * Xenial juju 1.25.3 unable to deploy to lxc containers
+      Lp 1557345
+
+    * Provider/maas bridge script is not idempotent
+      Lp 1553915
+
+    * Unable to bootstrap lxd provider on s390x
+      Lp 1554675
+
+    * Gce invalid volume id destroying environment
+      Lp 1556293
+
+    * Juju_availability_zone not set in maas
+      Lp 1559099
+
+    * Handle multi-series charms in 1.25
+      Lp 1563607
+
+    * Apt-mirror is not used in containers with maas provider
+      Lp 1560391
+
+    * Proxy updater fails with "permission denied"
+      Lp 1564694
+
+    * Can-upgrade-to suggests a downgrade
+      Lp 1319890
+
+
 ^# juju-core 1.25.3
 
   A new stable release of Juju, juju-core 1.25.3, is now available.

@@ -2,204 +2,230 @@ Title: The Juju charm store
 
 # The Juju Charm Store
 
-Juju includes a collection of what we call `Charms` that let you deploy whatever
-services you want in Juju. A collection of charms that are designed to work
-together is called a `Bundle`. Since charms and bundles are open and worked on
-by the community, they represent a distilled set of best practices for deploying
-these services. Both charms and bundles are included in what we collectively
-call The Charm Store.
+Juju includes a charm store where charms and bundles can be uploaded,
+published, and optionally shared with other users.
 
-  - The main project page is here: [https://launchpad.net/charms](https://launchpad.net/charms)
-  - There are useful tools for downloading, modifying, and contributing here: [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools)
-  - Here is the official tutorial for charm authors: [authors-charm-writing](authors-charm-writing.html)
-  - Here is the official tutorial for bundle authors: [charms-bundles](charms-bundles.html)
+The charm store is broken down into two main sections: Recommended and
+Community. Recommended charms have been vetted and reviewed by a Juju
+Charmer and all updates to the charm are also vetted prior to landing.
+Community charms have been shared by members of the community, but were
+not submitted by and have not been vetted by Juju Charmers.
 
-## Charm Store Submission
+  - [Charm development information](developer-getting-started.html)
+  - [Bundle creation information](charms-bundles.html)
 
-There are currently 2 methods to submit a charm and have it listed in the charm
-store. Both methods have their perks - but it is suggested to start with your
-personal namespace before asking for a charmer featured charm.
+In order to interact with the charm store you will need the latest
+[charm command](tools-charm-tools.html), an
+[Ubuntu SSO account](https://login.ubuntu.com/+login), and you must have
+logged in to [Launchpad](https://launchpad.net/+login) at least once.
 
-!!! Note: if you are a member of the Charm Partner Program, you will want to
-ensure that your Charm gets into the Recommended Charms section of the Charm
-Store, so please follow the instructions in the
-[Recommended Charms](#recommended-charms) section below.
+## Login to the store
 
-## Charm Store Process
+Most charm commands require authentication in order to operate. You can
+log in or log out of the store at any time by issuing `charm login` or
+`charm logout` respectively. During login you will be prompted for the
+following information:
 
-This process is designed to allow prospective developers to have their charms
-reviewed and updated in the [Charm Store](https://jujucharms.com) in a timely
-manner that ensures peer reviews and quality.
+ - `Username` - typically the email address used to access Ubuntu SSO
+ - `Password` - Ubuntu SSO password
+ - `Two-factor auth` - If enabled, enter two-factor authentication (2FA)
+information. Otherwise <kbd>Return</kbd> for None
 
-## Submitting a new Charm
+## Entities explained
 
-Everyone with a launchpad account has access to have their charms listed in the
-charm store, without review, approximately 20 minutes after the initial push to
-their launchpad branch. Authors are free to request ~charmer/peer review from
-their personal name space branch.
+When a charm or bundle, referred to as entity from this point forward, is
+pushed for the first time to the store, the entity is named version 0 in
+the unpublished channel. Every revision of an entity lives in the
+unpublished channel. Subsequent pushes of different content to the store
+will automatically increment this number. So if an entity is changed and
+pushed 4 times, the revision history would look like this:
 
-
-You can submit your charm to the 12.04 and 14.04 releases of Ubuntu. You are not
-required to submit to both releases, but we recommend supporting both whenever
-possible so that users get the most flexibility:
-
-  1. Install juju and charm-tools.
-  1. Create a repository, something like `mkdir -p ~/charms/precise`; 'precise'
-     is the release code name for the [release of Ubuntu](http://releases.ubuntu.com)
-     you wish to target your charm at. You can also use `trusty` if you're
-     submitting to that series.
-  1. If you haven't created your charm yet, you can use
-     `charm create ubuntu-package-name` which will fill in some basic metadata
-     info for you. You can check to see if it already exists at
-     [https://jujucharms.com/](https://jujucharms.com/). Also make sure to 
-     [check the list of open bugs](http://goo.gl/mvtPh) to see if anybody is
-     already working on a charm for the service you want to work on. Bugs which
-     have had no activity by the assignee for more than 30 days are fair game
-     and should be unassigned.
-  1. Once your charm is working and tested with any compatible charms, make sure
-     it passes `charm proof path/to/your/charm`
-  1. `bzr init` in your charm's root directory
-  1. `bzr add` to add all files.
-  1. `bzr ci -m'Initial charm'`
-  1. To submit your charm for 12.04:
-     
-```bash
-bzr push lp:~<your-lp-username>/charms/precise/<your-charm>/trunk
-``` 
-or to submit your charm for 14.04: 
-     
-```bash
-bzr push lp:~<your-lp-username>/charms/trusty/<your-charm>/trunk
-``` 
-
-
-Your charm should then be looked at in a timely manner.
-
-### Name Space Charms
-
-There are some key differences with regard to deployment charms in your personal
-namespace.
-
-  - Submission Process
-  - Deployment
-  - Charm Store Display
-  - Workflow to accept contributions
-
-
-#### Submission Process
-
-When you feel your charm is ready for submission to your personal name space,
-you must initialise the repository and push your development branch to Launchpad.
-
-For the purpose of this documentation, we will call our charm `nagios`
-
-```bash 
-bzr push lp:~your-launchpad-username/charms/series/nagios/trunk
+```
+entity: 0---1---2---3
 ```
 
-The /trunk branch identifier is the *only* branch that will be recognised by the
-charm store ingestion process. This frees the developer to push multiple
-branches and gate features/fixes into their personal branch without listing
-multiple copies of the charm in the store.
+Channels group entity revisions into named streams. There are currently two
+published channels: stable and development. Each channel also tracks
+history of revisions. When a revision is published to a channel, that
+channel pointer is changed and the history for the channel is updated.
 
-To break down the launchpad link structure, the segments will be listed in bold
-with a description following.
+Building on the previous example, when a user published revision 2 to the
+stable channel, the history would look like this:
 
-  - **lp:~username** : This is your launchpad username
-  - **/charms/** : Charms is the project descriptor
-  - **/precise/** : All charms are targeted against a series
-  - **/nagios/** : This is the charm name and should match whats listed in
-    metadata.yaml
-  - **/trunk** : The branch target. *Remember* only /trunk will be ingested into
-    the charm store.
-
-#### Deployment
-
-Once your charm has been ingested it will be deployable via your personal name
-space URL.
-
-```bash
-juju deploy cs:~your-launchpad-username/series/nagios
+```
+                  stable (2)
+                 /
+entity: 0---1---2---3
 ```
 
-#### Charm Store Display
+If, then, revision 3 is published to the development channel the history
+would look like this:
 
-Name Spaced charms will be displayed under the **other** category in the GUI.
-They will be displayed with non-descript icons for the service. Only
-recommended charms display the shipped icon for the service.
-
-#### Workflow to accept contributions
-
-To accept contributions, and/or merge patches into your personal namespace - as
-the owner of the charm, you are responsible for reviewing and accepting/rejecting
-contributions.
-
-```bash
-bzr push lp:~<your-lp-username>/charms/series/nagios/feature_branch
+```
+                  stable (2)
+                 /
+entity: 0---1---2---3
+                     \
+                      development (3)
 ```
 
-and a subsequent Merge Proposal should be issued against your branch following
-the Launchpad 
-[Developer Merge Proposal Documentation](https://dev.launchpad.net/UsingMergeProposals)
+During this time, more revisions can be pushed to the default, unpublished
+channel. This represents general development iterations. As iterations are
+pushed during development, the stable and development channels are not
+updated.
 
 
-### Recommended Charms
+```
+                  stable (2)
+                 /
+entity: 0---1---2---3---4---5---6
+                     \
+                      development (3)
+```
 
-To have your charm listed as a charmer team recommended charm, you have to
-undergo a rigorous review process where the team evaluate the charm, evaluate 
-tests for your charm, and deploy & run tests against the provided service with
-different configuration patterns.
+The author can, at any time, publish a revision to a channel. Revisions
+can also exist in the same channel at the same time. For example, the
+author chooses to publish revision 3 to the stable channel without
+updating the development channel:
 
-After following the Submission Process outlined above:
+```
+                      stable (3, 2)
+                     /
+entity: 0---1---2---3---4---5---6
+                     \
+                      development (3)
+```
 
-  1. File a bug against charms at 
-     [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug)
-     This is used to track the progress of your charm.
-  1. Now you just need to attach your branch to the bug report, go to
-     [your code page](https://code.launchpad.net/people/+me), find your branch
-     and click on it. Then click on "Link a bug report", and put in the number
-     of the bug you filed. If you are submitting to multiple releases please
-     make one bug per release.
-  1. Subscribe the `charmers` team by clicking "Subscribe someone else" on the
-     right side of the launchpad page. This is important as it gets your charm
-     in the review queue!
+In doing so, the stable channel is updated to point to revision 3 and
+revision 3 is added to the channel history. The author can continue to
+push and publish. Since revisions are a constant stream there are
+scenarios where the stable channel may be pointed to a higher revision
+even though development revision is actually newer.
 
+In the following example revision 8 is development, a bug is found in the
+latest stable revision (5) so a hot fix is applied and pushed as 9.
+That revision is then published to the stable channel, like this:
 
-## Submitting a fix to an existing Charm
+```
+                                              stable (9, 5, 3, 2)
+                                             /
+entity: 0---1---2---3---4---5---6---7---8---9
+                                         \
+                                          development (8, 3)
+```
 
-  1. Grab the charm you want to fix, we'll use Nagios as an example: `bzr branch lp:charms/precise/nagios`
-  1. Modify it to meet your needs.
-  1. Commit your fixes `bzr commit -m 'Your changelog entry goes here'`
-  1. `bzr push lp:~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
-  1. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals) 
-     by going to your branch's code page:
-     `https://code.launchpad.net/~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
-     and clicking "Propose for merging"
-  1. In the merge proposal form select the charm's lp name: `lp:charms/nagios`
-     for the target branch, if not already selected.
-  1. For the reviewer field put the `charmers` team, this will get your code
-     into the review queue!
+While authors can publish older versions to the channels it is not
+encouraged. For example, an author could mistakenly publish revision 10 to
+the stable channel and not development, then the author could re-publish
+revision 9 to stable:
 
-## Submitting bundles to the Charm Store
+```
+                                              stable (9, 10, 9, 5, 3, 2)
+                                             /
+entity: 0---1---2---3---4---5---6---7---8---9---10
+                                         \
+                                          development (8, 3)
+```
 
-Refer to the [Bundles page](charms-bundles.html) for instructions on how to
-create bundles of charms and submit them to the store.
+If a user managed to deploy that first mistaken revision during the time
+it was available, they would later be notified of an "upgrade" by Juju
+which will effectively downgrade the charm back to revision 9.
 
-## Getting Help
+## Pushing to the store
 
-Inspired by [Bazaar's Patch Pilot
-programme](http://wiki.bazaar.canonical.com/PatchPilot) there will be patch
-pilots in #juju who can help you get your patch accepted. Check the topic to see
-who's on duty. Still need help? Contact us on [the Juju mailing
-list](https://lists.ubuntu.com/mailman/listinfo/juju) ; if you're from an
-upstream project who wants more detailed help/tutoring, then contact [Jorge
-Castro](http://launchpad.net/~jorge) and we'd be more than happy to get a charm
-expert to help you out or help you run a Charm School.
+After building a charm or bundle, navigate to it's directory on disk and
+push it to the store.
 
-Some notes:
+```
+cd src/charms/foobar
+charm push .
+```
 
-  - Please respect that these people might have a few other charms in their
-    queue already.
-  - The package you have a question about might not necessarily be part of the
-    patch pilot's area of expertise. They will still try to help you get your
-    fix in and probably get you in touch with the 'right' people.
+The `charm push` command will return the full ID for the pushed item.
+Since this is the first time foobar was pushed, the output of the command
+is:
+
+```
+cs:~USER/foobar-0
+```
+
+If a charm or bundle id is not provided, they will default to
+`cs:~USER/NAME` where `USER` is the `User` from the output of
+`charm whoami` and `NAME` is the metadata.yaml `name` for charms and
+directory basename for bundles.
+
+To define a series or different bundle name an id can be provided during
+push. The following is a set of different support permutations given the
+following `charm whoami` output:
+
+```
+User: kirk
+Group membership: charm-examples 
+```
+
+User `kirk` can perform the following operations:
+
+```
+charm push .
+charm push . charm-name
+charm push . bundle/bundle-name
+charm push . ~charm-examples/charm-name
+charm push . cs:~charm-examples/charm-name
+```
+
+Push will always increment the charm version in the unpublished channel.
+
+## Publishing to channels
+
+The charm store supports two published channels: development and stable.
+Revisions are associated with channels by using the publish charm command.
+Publish is executed against an existing revision and places that revision
+as the channel pointer.
+
+Given the following example:
+
+```
+$ charm push . foo
+cs:~kirk/foo-9
+```
+
+The author could publish foo-9 to either the stable or development channel
+as follows, showing the commands for stable and development respectively:
+
+```
+charm publish cs:~kirk/foo-9
+charm publish cs:~kirk/foo-9 --channel development
+```
+
+After running both commands, revision 9 exists in both the stable channel
+and the development channel.
+
+## Sharing charms and bundles
+
+All channels (unpublished, development, and stable) have read and write
+ACLs. By default, only the owner of the entity exists in these ACLs.
+
+To update the ACL for an entity you must grant users an ACL to the channel
+you want them to access. By default, if you do not supply an entity when
+granting access, the recipient will receive only read access to the
+stable channel, as in this example where we grant james access to the
+stable channel of the cs:~kirk/foo entity.
+
+```
+charm grant cs:~kirk/foo james
+```
+
+If, instead you wanted to give write access to the development channel
+to lars, you would issue the following command:
+
+```
+charm grant cs:~kirk/foo --channel development --acl write lars
+```
+
+Finally, to make the entity available for all to consume, there is a
+special `everyone` user you can use to make an entity available to the
+general public.
+
+```
+charm grant cs:~kirk/foo everyone
+```

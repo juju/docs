@@ -20,21 +20,22 @@ available.
 
 #### LAYER_PATH
 
-Defines the location on disk to search for local layers
+First off, you require a [local charm repository](./charms-deploying.html) in
+which to work. This involves creating three directories -- `layers`,
+`interfaces`, and `charms` -- and setting some environment variables.
 
-#### INTERFACE_PATH
-
-Defines the location on disk to search for interface layers
-
-```bash
-LAYER_PATH=$JUJU_REPOSITORY/layers
-INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
-```
-
-And create our charm layer for Vanilla
+The `layers` directory contains the source code of the layered charm covered in
+our examples. The `interfaces` directory is where you'd place any
+[interface-layers](./charms-layers-interfaces.md) you may wish to write, and the
+`charms` directory holds the assembled, ready to deploy charm.
 
 ```bash
-mkdir -p $LAYER_PATH/vanilla
+export JUJU_REPOSITORY=$HOME/charms
+export LAYER_PATH=$JUJU_REPOSITORY/layers
+export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
+
+mkdir -p $LAYER_PATH $LAYER_PATH/vanilla
+
 cd $LAYER_PATH/vanilla
 ```
 

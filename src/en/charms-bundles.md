@@ -8,15 +8,17 @@ Instead of deploying a single service, they can be used to deploy an entire
 workload, with working relations and configuration. The use of bundles allows
 for easy repeatability and for sharing of complex, multi-service deployments.
 
-Bundles are defined in text files, called “bundle files” or “deployer files”.
-Each file may contain only one bundle.
+Bundles are defined in text files, called “bundle files”. Each file may contain
+only one bundle.
 
 ## Using bundles
 
 A bundle file can be used in two distinct ways. One is to use it locally,
 deploying from your computer, which is useful to initially ensure it works and
-for experimenting. After you are satisfied with the bundle, you can push it to
-Launchpad where it will be available to you and others via the Charm Store.
+for experimenting. After you are satisfied with the bundle, you can  
+[publish it](authors-charm-store.html) to the so it is available to you
+and others via the Charm Store.
+
 If you simply want to download some you can
 [search the store for bundles](https://jujucharms.com/q/?type=bundle)
 too.
@@ -36,25 +38,18 @@ method.
 ### Local deploy via command-line
 
 A bundle file can be deployed via the command-line interface by using the `juju
-quickstart` tool.
+deploy` command.
 
-The juju quickstart tool can be installed on Ubuntu versions newer than 14.04 by
-running the following command:
+Always do a `charm proof` to check for possible errors before using it:
 
 ```bash
-sudo apt-get install juju-quickstart
+charm proof directory-of-bundle/    # defaults to your current working directory
 ```
 
-Always perform a "bundle proof" to check for possible errors before using it:
+Then you can use Juju to deploy your bundle:
 
 ```bash
-juju bundle proof ../path-your-bundle-name    # defaults to your current working directory
-```
-
-Then you can use the quickstart tool to deploy your bundle:
-
-```bash
-juju quickstart bundle.yaml
+juju deploy bundle.yaml
 ```
 
 
@@ -134,7 +129,7 @@ Much like service constraints, it requires adding the placement key `to` in the
 service definition.
 Where supported by the cloud provider, it is also possible to isolate charms
 by including the container format in the placement directive. Some clouds
-support LXC and KVM.
+support LXC.
 
 For example:
 
@@ -178,50 +173,9 @@ machines if no placement directives are given.
 
 ## Sharing your Bundle with the Community
 
-Bundles are shared by putting a branch onto Launchpad with specific naming
-which will then be pulled into the Charm Store. The branch must be constructed
-and named according to the following rules.
-
-1.  The branch name must be structured as:
-
-    `lp:~<your launchpad id>/charms/bundles/<your bundle name>/bundle`
-
-    A concrete example would be:
-
-    `lp:~bac/charms/bundles/wiki/bundle`
-
-1.  Inside the Bazaar branch, the following files are needed: `bundle.yaml`
-    and `README.md`
-
-1.  Proof the bundle to make sure it is valid. You can push them to your
-    namespace, the Juju Charm store will automatically find your bundle and
-    index it in the store. Ensure you are using your correct Launchpad id and a
-    unique bundle name:
-
-    ```bash
-    juju bundle proof ../bundle-directory
-    bzr push lp:~yourusername/charms/bundles/yourbundlename/bundle
-    ```
-
-    **Tip:** You should review the configuration options for the charms you are
-    planning to use in a bundle, some of them generate passwords for services or
-    might need configuration as a separate step. This may or may not be desirable
-    for users, so if there are any extra steps required document them in your
-    README.md file.
-
-1.  Next file a bug against charms at
-    [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug).
-
-    This is used to track the progress of your charm.
-
-1.  Subscribe the charmers team by clicking "Subscribe someone else" on the right
-    side of the launchpad page. This is important as it gets your charm in the
-    review queue!
-
-1.  Now you just need to attach your branch to the bug report, go to
-    [your code page](https://code.launchpad.net/people/+me), find your branch,
-    and click on it. Then click on "Link a bug report", and put in the number
-    of the bug you filed.
+After you have tested and deployed your bundle you need to publish it to share
+it with people, this is covered in the
+[Charm Store Publishing documentation](authors-charm-store.html). 
 
 Someone will come along and review your bundle for inclusion. If you need to
 speak to a human, there are patch pilots in the Juju IRC channel (#juju on

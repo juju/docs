@@ -13,7 +13,7 @@ available for Linux, Windows and Mac OS.
 ## Configure Juju
 Juju needs to be configured before it can orchestrate an environment. Juju
 defaults to an Amazon EC2 environment, but for testing and development you may
-wish to configure the local provider such as LXC or KVM.
+wish to configure the local provider such as LXC.
 
 ## Test your Juju setup
 You will want to make sure everything is running properly before writing code.
@@ -92,17 +92,30 @@ The available layers and interfaces can be found at
 layer provides charm helpers python library and the reactive framework that
 makes layers possible.
 
+### Python 3
+
+The reactive framework used with layered charms runs under Python 3, so you'll
+want to be aware of [compatibility](http://python-future.org/compatible_idioms.html)
+issues between Python 2 and 3.
+
 ### Creating a new layer
 
 First off, you require a [local charm repository](./charms-deploying.html) in
-which to work. This involves creating some directories and setting some
-environment variables. For example:
+which to work. This involves creating three directories -- `layers`,
+`interfaces`, and `charms` -- and setting some environment variables.
+
+The `layers` directory contains the source code of the layered charm covered in
+our examples. The `interfaces` directory is where you'd place any
+[interface-layers](./charms-layers-interfaces.md) you may wish to write, and the
+`charms` directory holds the assembled, ready to deploy charm.
 
 ```bash
 export JUJU_REPOSITORY=$HOME/charms
 export LAYER_PATH=$JUJU_REPOSITORY/layers
 export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
-mkdir -p $JUJU_REPOSITORY/layers
+
+mkdir -p $LAYER_PATH $INTERFACE_PATH
+
 cd $JUJU_REPOSITORY/layers
 ```
 
@@ -126,9 +139,16 @@ within the layer directory, this is as simple as:
 charm build
 ```
 
+<<<<<<< HEAD
 Build will take all of the layers, looking first in your local LAYER_PATH and
 then querying interfaces.juju.solutions, and create a new charm into
 $JUJU_REPOSITORY/trusty/vanilla:
+=======
+Build will take all of the layers and interfaces included by your charm, either
+from your local LAYER_PATH and INTERFACE_PATH directories or automatically
+downloaded from [interfaces.juju.solutions](http://interfaces.juju.solutions/)
+and create a new charm into $JUJU_REPOSITORY/trusty/vanilla:
+>>>>>>> master
 
     build: Composing into /home/user/charms
     build: Processing layer: layer:basic

@@ -8,7 +8,6 @@ Make sure you have [Juju installed](./getting-started.html#installation) and
 configured correctly.
 
 - [Troubleshooting Juju itself](./troubleshooting-juju.html) - `Coming soon!`
-- [Troubleshooting the Local Provider (LXC)](./troubleshooting-local-lxc.html)
 - [Viewing logs](./troubleshooting-logs.html)
 - [Troubleshooting environment upgrades](./troubleshooting-upgrade.html) - for
 information moving from one version of Juju to another.
