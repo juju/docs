@@ -139,16 +139,10 @@ within the layer directory, this is as simple as:
 charm build
 ```
 
-<<<<<<< HEAD
-Build will take all of the layers, looking first in your local LAYER_PATH and
-then querying interfaces.juju.solutions, and create a new charm into
-$JUJU_REPOSITORY/trusty/vanilla:
-=======
 Build will take all of the layers and interfaces included by your charm, either
 from your local LAYER_PATH and INTERFACE_PATH directories or automatically
 downloaded from [interfaces.juju.solutions](http://interfaces.juju.solutions/)
 and create a new charm into $JUJU_REPOSITORY/trusty/vanilla:
->>>>>>> master
 
     build: Composing into /home/user/charms
     build: Processing layer: layer:basic
