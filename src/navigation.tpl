@@ -67,6 +67,8 @@
                       <li><a href="juju-upgrade.html">Upgrading Juju</a></li>
                       <li><a href="juju-gui-management.html">Using the Juju GUI</a></li>
                       <li><a href="juju-offline-charms.html">Deploy charms offline</a></li>
+                      <li><a href="juju-centos.html">CentOS support</a></li>
+                      <li><a href="network-spaces.html">Network spaces</a></li>
                       <li><a href="juju-misc.html">Miscellaneous</a></li>
                     </ul>
                   </li>
@@ -176,16 +178,6 @@
                       <li><a href="authors-charm-icon.html">Charm Icons</a></li>
                     </ul>
                   </li>
-                </ul>
-              <li>
-              <li class="section"><h4 class="header toggle-target">Experimental</h4>
-                <ul>
-                  <li><a href="wip-spaces.html">Network spaces</a></li>
-                  <li><a href="wip-centos.html">CentOS support</a></li>
-                  <li><a href="wip-systems.html">Juju Environment System (DRAFT)</a></li>
-                  <li><a href="wip-users.html">Managing Users (DRAFT)</a></li>
-                </ul>
-              </li>
               <li class="section"><h4 class="header toggle-target">Tools</h4>
                 <ul>
                   <li><a href="tools-charm-tools.html">Charm Tools</a></li>
