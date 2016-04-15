@@ -1,7 +1,8 @@
 Title: Getting started with Juju 2.0
-Todo: remove ppa/devel after release
+TODO: remove ppa/devel after release
       simplify zfs install
       remove default-seies config
+
 
 # Getting started with Juju 2.0
 
@@ -19,7 +20,8 @@ To get the best experience, as well as Juju, this guide will also set up:
 
 Both the above are provided with Ubuntu 16.04LTS.
 
-# Install the software
+
+## Install the software
 
 Run the following commands to install the required software:
 
@@ -28,10 +30,11 @@ Run the following commands to install the required software:
   sudo apt update
   sudo apt install zfsutils-linux
   sudo apt install lxd
-  sudo apt install juju2
+  sudo apt install juju
 ```
 
-# Prepare ZFS
+
+## Prepare ZFS
 
 Using ZFS we can create sparse backing-storage for any of the containers which
 LXD creates for Juju. You can create this storage anywhere (e.g. the fastest
@@ -53,7 +56,8 @@ sudo zpool status
 
 This should indicate that the newly created pool is 'ONLINE' and ready.
 
-# Initialise LXD
+
+## Initialise LXD
 
 Now we need to tell LXD about this storage
 
@@ -68,7 +72,8 @@ current session and log in once again, or execute the following in your shell:
 ```no-highlight
 su -l $USER
 ```
-# Create a controller
+
+## Create a controller
 
 Juju needs to create a controller instance in the cloud to manage the models
 you create. We use the `juju bootstrap` command to create that controller. For 
@@ -107,7 +112,7 @@ juju switch
 local.lxd-test:default
 ```
 
-# Deploy!
+## Deploy
 
 Juju is now ready to deploy any services from the hundreds included in the
 [juju charm store](https://jujucharms.com). It is a good idea to test your new 
