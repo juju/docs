@@ -76,7 +76,7 @@ agent-stream: proposed
 
 ## Development
 
-2.0-beta3 is currently in development for testing.
+2.0-beta4 is currently in development for testing.
 The previous development release was 2.0-beta2.
 
 Development releases provide new features that are being stablised.
@@ -88,19 +88,19 @@ and fixes.
 Ubuntu
 : <pre>sudo add-apt-repository ppa:juju/devel
 sudo apt-get update
-sudo apt-get install juju-core</pre>
+sudo apt-get install juju</pre>
 {: .instruction }
 
 Centos
-: [juju-2.0-beta3-centos7.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta3/+download/juju-2.0-beta3-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta3/+download/juju-2.0-beta3-centos7.tar.gz/+md5))
+: [juju-2.0-beta4-centos7.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta4/+download/juju-2.0-beta4-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta4/+download/juju-2.0-beta4-centos7.tar.gz/+md5))
 {: .instruction }
 
 OS X
-: [juju-2.0-beta3-osx.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta3/+download/juju-2.0-beta3-osx.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta3/+download/juju-2.0-beta3-osx.tar.gz/+md5))
+: [juju-2.0-beta4-osx.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta4/+download/juju-2.0-beta4-osx.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta4/+download/juju-2.0-beta4-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-2.0-beta3.exe](https://launchpad.net/juju-core/trunk/2.0-beta3/+download/juju-setup-2.0-beta3.exe) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta3/+download/juju-setup-2.0-beta3.exe/+md5))
+: [juju-setup-2.0-beta4.exe](https://launchpad.net/juju-core/trunk/2.0-beta4/+download/juju-setup-2.0-beta4.exe) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta4/+download/juju-setup-2.0-beta4.exe/+md5))
 {: .instruction }
 
 Development releases use the 'devel' simple-streams. You must configure
