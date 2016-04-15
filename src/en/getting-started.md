@@ -75,23 +75,39 @@ su -l $USER
 
 ## Create a controller
 
-Juju needs to create a controller instance in the cloud to manage the models
-you create. We use the `juju bootstrap` command to create that controller. For 
-use with our LXD 'cloud', we will create a new controller called 'lxd-test':
+Juju needs a controller instance to manage your models and the `juju bootstrap`
+command is used to create one.
+
+However, if this is the first time using LXD then you'll need to configure it
+and expose a "network bridge" that Juju requires:
+
+```bash
+sudo dpkg-reconfigure -p medium lxd
+lxc finger
+```
+
+!!! Note: During the configuration dialog, the bridge must be 'lxcbr0'. You
+can accept all other prompts although the last question (IPv6) is probably not
+needed. In a later Juju release, Juju will require bridge 'lxdbr0'.
+
+Proceed with the creation of the controller. For use with our LXD "cloud", we
+will make a controller called 'lxd-test':
 
 ```bash
 juju bootstrap --config default-series=xenial lxd-test lxd
 ```
 
-This may take a few minutes as initially, LXD needs to download an image for 
+This may take a few minutes as, initially, LXD needs to download an image for 
 Xenial. 
 
-Once the process has completed, Juju now has a controller. You can check this:
+Once the process has completed you can check that the controller has been
+created:
 
 ```bash
 juju list-controllers 
 ```
-...will return a list of the controllers known to Juju, which at the moment is
+
+This will return a list of the controllers known to Juju, which at the moment is
 the one we just created:
   
 ```no-highlight
@@ -99,18 +115,26 @@ CONTROLLER       MODEL    USER         SERVER
 local.lxd-test*  default  admin@local  10.0.3.124:17070
 ```
 
-Creating a new controller automatically creates two empty models. The 'admin' 
-model, and a model called "default", which is automatically selected and ready for 
-use.
+Notice that the prefix 'local.' is added to the controller name we specified.
+
+Newly-created controllers come bundled with two models: The 'admin' model,
+which should be used only by Juju for internal management, and a 'default'
+model, which is ready for actual use.
+
+The following command shows the currently active controller and model:
 
 ```bash 
 juju switch
 ```
-...will return model and controller we are currently using:
+
+In our example, the output should look like this:
 
 ```no-highlight
 local.lxd-test:default
 ```
+
+The format is 'controller:model'.
+
 
 ## Deploy
 
