@@ -1,40 +1,39 @@
-# juju-core 2.0-beta3
+# juju 2.0-beta4
 
-A new development release of Juju, juju-core 2.0-beta3, is now available.
-This release replaces version 2.0-beta2.
+A new development release of Juju, juju 2.0-beta4, is now available.
+This release replaces version 2.0-beta3.
 
 
 ## Getting Juju
 
-Juju 2.0-beta3 is available for Xenial and backported to earlier
+Juju 2.0-beta4 is available for Xenial and backported to earlier
 series in the following PPA:
 
     https://launchpad.net/~juju/+archive/devel
 
 Windows, Centos, and OS X users will find installers at:
 
-    https://launchpad.net/juju-core/+milestone/2.0-beta3
+    https://launchpad.net/juju-core/+milestone/2.0-beta4
 
-Upgrading from stable releases to development releases is not
-supported. You can upgrade test environments to development releases
-to test new features and fixes, but it is not advised to upgrade
-production environments to 2.0-beta3.
+Upgrading to this development releases is not supported.
+
 
 ## Getting started with Juju 2.0
 
 Juju 2.0 allows you to get started creating models without modifying any
-definition files.  Just provide your credentials and go!  (*Note: to fully
-understand the new bootstrap experience please see the "New Bootstrap and
-Cloud Management Experience" section below)
+definition files.  Just provide your credentials and go!  (*Note: to
+fully understand the new bootstrap experience please see the "New
+Bootstrap and Cloud Management Experience" section below)
 
-* LXD provider (requires lxd 2.0.0~rc2-0ubuntu2 or later):
+* LXD provider (requires lxd 2.0.0~rc9 or later):
   The LXD provider requires no credentials, so you can create a
   controller by just specifying its name:
 
-    juju bootstrap <controller name> lxd --upload-tools
+    juju bootstrap <controller name> lxd
 
-  --upload-tools is not needed when bootstrapping a Xenial controller.
-  See the LXD Provider section for more details.
+Note that the lxdbr0 bridge needs to be properly configured for the lxd
+provider to work, for details see: 
+http://insights.ubuntu.com/2016/04/07/lxd-networking-lxdbr0-explained/
 
 * Public Clouds:
   Known public clouds can be listed with juju list-clouds:
@@ -45,7 +44,7 @@ Cloud Management Experience" section below)
         aws                ec2         us-east-1, us-west-1, us-west-2, ...
         aws-china          ec2         cn-north-1
         aws-gov            ec2         us-gov-west-1
-        azure              azure       japanwest, centralindia, eastus2,...
+        azure              azure       japanwest, centralindia, eastus2, ...
         azure-china        azure       chinaeast, chinanorth
         cloudsigma         cloudsigma  mia, sjc, wdc, zrh, hnl
         google             gce         us-east1, us-central1, ...
@@ -64,14 +63,14 @@ or
     juju autoload-credentials
 
 When specifying just the cloud, juju add-credential will allow a new
-credential to be added interactively. You will be prompted type the required
-credential attributes.  Example:
+credential to be added interactively. You will be prompted type the
+required credential attributes. Example:
 
 juju add-credential maas
   credential name: hmaas
   replace existing credential? [y/N]: y
   auth-type: oauth1
-  maas-oauth:
+  maas-oauth: 
 credentials added for cloud maas
 
 The new credentials.yaml file at: ~/.local/share/juju/credentials.yaml
@@ -80,8 +79,8 @@ The autoload tool will search for existing credentials for AWS,
 OpenStack/Rackspace, and Google clouds. You will then be prompted for
 which ones you'd like to save.
 
-If you have an existing credential.yaml file, you can also import a named
-credential, eg for MAAS
+If you have an existing credential.yaml file, you can also import a
+named credential, eg for MAAS
 
     cat credentials.yaml
 
@@ -115,126 +114,31 @@ Examples:
 
 In the MAAS example above, you specify the host address of the MAAS
 controller. So to use Juju on MAAS out of the box, you set up a
-credentials file (either interactively, or based on the example above) and
-then bootstrap. This avoids the need for any cloud configuration. But it's
-also possible to set up a named MAAS cloud definition as explained later.
+credentials file (either interactively, or based on the example above)
+and then bootstrap. This avoids the need for any cloud configuration.
+But it's also possible to set up a named MAAS cloud definition as
+explained later.
 
 More details on the new bootstrap experience, including defining private
 clouds can be found in the New Bootstrap and Cloud Management Experience
 section.
 
 
-## What's New in Beta3
+## What's New in Beta4
 
-* juju status now shows provisioning feedback as machines are allocated in
-  MAAS and other clouds and containers
-* Unit status terminology change - Agent State becomes Juju Status, Workload
-  State becomes Workload Status.
-* Machine status terminology change - Agent State becomes Juju Status.
-* New remove-credential command
-* New interactive add-credential command
-* New support for Keystone 3 identity provider in Openstack
-* New automatic creation of hosted model on bootstrap
-* New juju create-model experience
-* New local login uses macaroons
-* Enhanced juju show-controller
-* Enhanced juju list-credentials
-* juju set-default-credential / region now support inbuilt clouds
-* Joyent provider no longer uses Manta storage
-* New local resources
-* New Openstack machines can be provisioned based on virtualisation type
-  (kvm, lxd)
-* Charms can declare minimum Juju version
-* Machine provisioning status
-
-
-## Resolved issues
-
-  * Some providers release wrong resources when destroying hosted
-    models
-    Lp 1536792
-
-  * Juju run gets 'permission denied (publickey)' in models other than
-    the controller model
-    Lp 1559233
-
-  * Unable to create-model in azure
-    Lp 1558769
-
-  * Joyent machines deployed to hosted models use wrong region
-    Lp 1561611
-
-  * Maas node has "failed deployment", juju just says "pending" when
-    using juju add-machine
-    Lp 1472711
-
-  * Destroy-environment on an unbootstrapped maas environment can
-    release all my nodes
-    Lp 1490865
-
-  * Juju behaviour in multi-hypervisor openstack clouds
-    Lp 1524297
-
-  * Bootstrap on joyent often fails with "model is not bootstrapped"
-    Lp 1542206
-
-  * Create-model confusing, does not just work
-    Lp 1547898
-
-  * Error zip: not a valid zip file while deploying invalid yaml
-    bundle
-    Lp 1551857
-
-  * Provider/maas bridge script is not idempotent
-    Lp 1553915
-
-  * Juju list-controllers --format yaml to include provider type and
-    properties
-    Lp 1554721
-
-  * Bootstrap fails if the current controller is switched
-    Lp 1555430
-
-  * Master dumps a "client.crt" and "client.key" file in cwd when
-    copying images
-    Lp 1555585
-
-  * "juju status-history" doesn't work correctly
-    Lp 1557714
-
-  * Creating hosted model config: maas-agent-name is already set; this
-    should not be set by hand
-    Lp 1558612
-
-  * Cannot obtain provisioning script
-    Lp 1559299
-
-  * Process exited with: 1. reason was:  ()
-    Lp 1559305
-
-  * Unable to add-credential for maas
-    Lp 1559131
-
-  * Bootstrap, destroy-controller and kill-controller all fail after a
-    failed bootstrap
-    Lp 1554042
-
-  * Provider/lxd: remove manual steps to add images
-    Lp 1524064
-
-  * Juju help still suggests juju init
-    Lp 1554044
-
-  * Restoring admin: model configuration has no admin-secret
-    Lp 1560192
-
-  * Can-upgrade-to suggests a downgrade
-    Lp 1319890
+* Mongo 3.2 is now used when bootstrapping on Xenial hosts
+* address-allocation feature flag no longer supported in MAAS provider
+* prefer-ipv6 setting is now ignored in all providers
+* MAAS 1.9+ provisioned LXD containers now have a bridge per NIC
+* extra-bindings support for charms metadata
+* network-get hook tool arguments changed
+* Accurate address selection based on spaces (in MAAS)
+* Juju GUI in the Controller
+* Juju Now Respects CharmStore Channels
 
 
 ## Notable Changes
 
-* Important Limitation
 * Terminology
 * Command Name Changes
 * New Juju home directory
@@ -243,6 +147,7 @@ section.
 * Native Support for Charm Bundles
 * Multi Series Charms
 * Improved Local Charm Deployment
+* Mongo 3.2 Support
 * LXC Local Provider No Longer Available
 * LXD Provider
 * LXD Containers
@@ -257,15 +162,8 @@ section.
 * Relation Get and Set Compatibility
 * Support for new AWS M4 Instance Types
 * Support for win10 and win2016
+* Juju Now Respects CharmStore Channels
 * Known Issues
-
-
-### Important Limitation
-
-Landscape and Deployer won't work with this beta3 release. These
-products are being updated to support the new 2.0 APIs and compatible
-versions will be released shortly. Until then, please continue to use
-the alpha 1 release found in ppa:juju/experimental.
 
 
 ### Terminology
@@ -371,8 +269,8 @@ follow the XDG directory specification. By default, the Juju data
 (formerly home) directory is located at ~/.local/share/juju. This may be
 overridden by setting the JUJU_DATA environment variable.
 
-Juju 2.0's data is not compatible with Juju 1.x. Do not set ```JUJU_DATA```
-to the old ```JUJU_HOME``` (~/.juju).
+Juju 2.0's data is not compatible with Juju 1.x.
+Do not set `JUJU_DATA` to the old `JUJU_HOME` (~/.juju).
 
 
 ### Multi-Model Support Active by Default
@@ -411,7 +309,7 @@ The main new commands of note are:
     juju grant
     Juju revoke
     juju list-shares
-    juju use-model
+    juju use-model 
     juju list-users
     juju switch-user
 
@@ -515,8 +413,8 @@ possible to define the default region to use for a cloud if none is
 specified when bootstrapping.
 
 If there's only one credential, that's what's used. Or you can define
-the default credential for a cloud. Otherwise you can specify the credential
-name when bootstrapping:
+the default credential for a cloud. Otherwise you can specify the
+credential name when bootstrapping:
 
     juju bootstrap mycontroller aws --credential mysecrets
 
@@ -561,16 +459,15 @@ Looking for cloud and credential information locally...
 
     1. aws credential "fred" (existing, will overwrite)
     2. aws credential "default" (new)
-    3. openstack region "home" project "fred_project" user "fred"
+    3. openstack region "home" project "fred_project" user "fred" 
        (existing, will overwrite)
     Save any? Type number, or Q to quit, then enter. 3
 
-    Enter cloud to which the credential belongs, or Q to quit
-    [home-openstack]
+    Enter cloud to which the credential belongs, or Q to quit [home-openstack] 
 
 
     Saved openstack region "home" project "fred_project" user "fred" to
-    cloud home-openstack.
+    cloud home-openstack
 
 When prompting which cloud for which to save the credentials, Juju will
 attempt to select a default cloud where you can just hit enter. If you
@@ -578,7 +475,7 @@ do type a cloud name, the type of cloud must match the credentials. eg
 you can't save Google credentials to the "aws" cloud.
 
 Once imported, credentials can be listed:
-
+  
     juju list-credentials
 
       CLOUD           CREDENTIALS
@@ -713,7 +610,8 @@ key details about the controller, including the type of cloud, the region in
 which the controller is running, and any additional user supplied bootstrap
 configuration. Account passwords are included if --show-passwords is used.
 
-    $ juju show-controller mycontroller
+    juju show-controller mycontroller
+
     mycontroller:
      details:
        servers: ['10.0.1.92:17070']
@@ -749,7 +647,7 @@ switches to that controller and model as the default for subsequent
 commands.
 
 
-#### LXD and Manual and MAAS Providers
+#### LXD and Manual and MAAS Providers 
 
 Bootstrapping models using the LXD, MAAS manual providers also Just Works.
 
@@ -801,7 +699,7 @@ Then when you juju list-clouds:
     azure-china      azure       chinaeast, chinanorth
     cloudsigma       cloudsigma  hnl, mia, sjc, wdc, zrh
     google           gce         us-east1, us-central1, europe-west1, ...
-    joyent           joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2 ...
+    joyent           joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2 ... 
     rackspace        rackspace   ORD, IAD, LON, SYD, HKG, DFW
     local:homestack  openstack   london
 
@@ -836,20 +734,21 @@ To specify a different name for the hosted model:
 
   juju bootstrap mycontroller aws --default-model mymodel
 
+
 #### Creating New Models
 
-Controller admin users can create new models without needing to specify any
-additional configuration:
+Controller admin users can create new models without needing to specify
+any additional configuration:
 
   juju create-model mynewmodel
 
-In such cases, the new model will inherit the credentials and authorized ssh
-keys of the admin model.
+n such cases, the new model will inherit the credentials and authorized
+ssh keys of the admin model.
 
-Where a cloud requires credentials, non-admin users, and admin users if they
-wish, are required to specify a named credential (so that resources created
-by the new model are allocated to the cloud account of the model creator),
-as well as authorized keys:
+Where a cloud requires credentials, non-admin users, and admin users if
+they wish, are required to specify a named credential (so that resources
+created by the new model are allocated to the cloud account of the model
+creator), as well as authorized keys:
 
   juju create-model mynewmodel --credential mysecrets
     --config authorized-keys="ssh-rsa ...."
@@ -858,12 +757,12 @@ Additional model config just for the new model may also be specified:
 
   Juju create-model --config image-stream=daily
 
+
 #### Sharing Models
 
 You can now easily give other people read-only or write access to your
-models, even if that
-user did not previously have the ability to login to the controller
-hosting the model.
+models, even if that user did not previously have the ability to login
+to the controller hosting the model.
 
     juju add-user bob --models mymodel --acl=write
 
@@ -878,8 +777,8 @@ the controller and access the shared model.
 
     juju register MDoTA2JvYjAREw8xMC4wLjEuMTI6MTcwNzAEIMZ7bVxwiApr
       Please set a name for this controller: controller
-      Enter password:
-      Confirm password:
+      Enter password:  
+      Confirm password:  
       Welcome, bob. You are now logged into "controller".
 
 The above process is cryptographically secure with end-end encryption
@@ -887,19 +786,14 @@ and message signing/authentication and is immune to man-in-the-middle
 attacks.
 
 
-#### Coming in Subsequent Betas
-
- * juju logout
- * Better current status when listing controllers/models
-   logged in, default, shared etc
-
-
 ### Joyent Provider No Longer Uses Manta Storage
 
-The use of Joyent Manta Storage is no longer necessary and has been removed.
-The Manta credential attributes is not supported. juju add-credential will
-not prompt for them. Existing credential.yaml files used in previous betas
-will need to be edited to remove: manta-user, manta-key-id, manta-url
+The use of Joyent Manta Storage is no longer necessary and has been
+removed. The Manta credential attributes is not supported. `juju add-
+credential` will not prompt for them. Existing credential.yaml files used
+in previous betas will need to be edited to remove: manta-user, manta-
+key-id, manta-url
+
 
 ### Native Support for Charm Bundles
 
@@ -908,7 +802,7 @@ or Deployer plugins are not needed to deploy a bundle of charms. You can
 deploy the mediawiki-single bundle like so:
 
     juju deploy cs:bundle/mediawiki-single
-
+ 
 Local bundles can be deployed by passing the path to the bundle. For
 example:
 
@@ -925,7 +819,7 @@ repository might look like this:
        |
        - openstack/
          |
-         - bundle.yaml
+         - bundle.yaml 
 
 and you can deploy the bundle like so:
 
@@ -1015,6 +909,54 @@ units'):
     juju upgrade-charm mycharm --force-series
 
 
+### Juju GUI in the Controller
+
+Juju GUI is now automatically included in every Juju controller after
+bootstrapping, thus eliminating the need to additionally deploy the Juju
+GUI charm.
+
+In order to  open the Juju GUI in the default browser the following
+command should be used.
+
+    juju gui
+
+The GUI connects to the model that is currently active. You are greeted
+with the login window, where you will have to provide the credentials to
+access the model. If you want to output your credentials in the
+terminal for easier copy/paste into login window, run the GUI with the
+'--show-credentials' option.
+
+    juju gui --show-credentials 
+
+
+#### juju upgrade-gui 
+
+The upgrade-gui command downloads the latest published GUI from the
+streams and replaces the one on the controller. To verify which versions
+of the GUI are available before the upgrade, try:
+
+    juju upgrade-gui --list
+
+If you want to upgrade (or downgrade) to a specific version of the GUI,
+provide the revision as a parameter to the upgrade-gui command, where
+the revision listed by the `juju upgrade-gui --list`. For example:
+
+    juju upgrade-gui 2.1.1 
+
+If you’d like to try a version of the GUI that has not been published in
+the streams and is not listed yet, you are able to provide the blob
+either from a charm or from the manually built GUI. Example:
+
+    juju upgrade-gui /path/to/release.tar.bz2
+
+In order to upgrade the GUI, you’ll have to have proper access rights to
+the controller. When an administrator upgrades the GUI, the users will
+have to reload the open sessions in the browser.
+
+If you don not want to install the GUI into the controller, bootstrap
+your controller with the '--no-gui option.
+
+
 ### Improved Local Charm Deployment
 
 Local charms can be deployed directly from their source directory
@@ -1038,6 +980,12 @@ locate  the charms in a directory named after a series. Any directory
 structure can  be used, including simply pulling the charm source from a
 VCS, hacking on  the code, and deploying directly from the local repo.
 
+
+### Mongo 3.2 Support
+
+Juju will now use mongo 3.2 for its database, with the new Wired Tiger
+storage engine enabled. This is initially only when bootstrapping on
+Xenial. Trusty and Wily will be supported soon.
 
 ### LXC Local Provider No Longer Available
 
@@ -1078,15 +1026,15 @@ Logs are located at '/var/log/lxd/juju-{uuid}-machine-#/
 
 LXD has been made available in Trusty backports, but needs manual
 dependency resolution:
-
+        
     sudo apt-get --target-release trusty-backports install lxd
-
+        
 Before using a locally running LXD after installing it, either through
 Juju or the LXD CLI ("lxc"), you must either log out and back in or run
 this command:
-
+        
     newgrp lxd
-
+               
 See: https://linuxcontainers.org/lxd/getting-started-cli/
 
 
@@ -1182,14 +1130,15 @@ identical.
 A note when entering credential attributes via juju add-credential:
 
 'tenant-name' must contain the rackspace Account Number.
-'region' must contain rackspace region (IAD, DFW, ORD, LON, HKG, SYD).
+'region' must contain rackspace region (IAD, DFW, ORD, LON, HKG, SYD). 
+
 
 ### Bootstrap Constraints, Series
 
 While bootstrapping, you can now specify constraints for the bootstrap
 machine independently of the service constraints:
 
-    juju bootstrap --constraints <service-constraints>
+    juju bootstrap --constraints <service-constraints> 
         --bootstrap-constraints <bootstrap-machine-constraints>
 
 You can also specify the series of the bootstrap machine:
@@ -1251,14 +1200,15 @@ using the following development feature flag:
 
 This flag is no longer supported and will not be accepted.
 
-### New Openstack machines can be provisioned based on virtualisation type
-(kvm, lxd)
 
-Openstack clouds with multi-hypervisor support have different images for LXD
-and KVM. Juju can now pick the right image for LXD or KVM instance based on
-the instance constraints:
+### New Openstack machines can be provisioned based on virtualisation type (kvm, lxd)
+
+Openstack clouds with multi-hypervisor support have different images for
+LXD and KVM. Juju can now pick the right image for LXD or KVM instance
+based on the instance constraints:
 
     juju deploy mysql --constraints="virt-type=lxd,mem=8G,cpu=4"
+
 
 ### Support for MAAS 1.9+ Spaces and Related APIs
 
@@ -1343,7 +1293,7 @@ address to use for a given unit.
 There is currently a mandatory '--primary-address' argument to 'network-
 get', which guarantees a single IP address to be returned.
 
-Example (within a charm hook):
+Example (within a charm hook): 
 
     relation-ids cluster
     url:2
@@ -1398,7 +1348,7 @@ can be declared as follows:
       name:
         type: file                         # the only type initially
         filename: filename.tgz
-        description: "A line that is useful when operators need to push it."
+        description: "One line that is useful when operators need to push it."
 
 
 #### New User Commands
@@ -1409,7 +1359,7 @@ Three new commands have been introduced:
 
     usage: juju list-resources [options] service-or-unit
     purpose: show the resources for a service or unit
-
+    
     options:
     --format  (= tabular)
         specify output format (json|tabular|yaml)
@@ -1417,21 +1367,21 @@ Three new commands have been introduced:
         juju model to operate in
     -o, --output (= "")
         specify an output file
-
+    
     This command shows the resources required by and those in use by an
     existing service or unit in your model.
-
+    
     aliases: resources
 
 2.  juju push-resource
 
     usage: juju push-resource [options] service name=file
     purpose: upload a file as a resource for a service
-
+    
     options:
     -m, --model (= "")
         juju model to operate in
-
+    
     This command uploads a file from your local disk to the juju
     controller to be used as a resource for a service.
 
@@ -1442,7 +1392,7 @@ Three new commands have been introduced:
 
     options:
     --description  (= false)
-
+    
     -h, --help  (= false)
         show help on a command or other topic
 
@@ -1452,8 +1402,7 @@ Three new commands have been introduced:
 
     commands:
         help           - show help on a command or other topic
-        list-resources - display the resources for a charm in the charm
-                         store
+        list-resources - display the resources for a charm in the charm store
         resources      - alias for 'list-resources'
 
 In addition, resources may be uploaded when deploying or upgrading
@@ -1461,13 +1410,11 @@ charms by specifying the resource option to the deploy command. Following
 the resource option should be name=filepath pair.  This option may be
 repeated more than once to upload more than one resource.
 
-    juju deploy foo --resource bar=/some/file.tgz --resource
-baz=./docs/cfg.xml
+    juju deploy foo --resource bar=/some/file.tgz --resource baz=./docs/cfg.xml
 
 or
 
-    juju upgrade-charm foo --resource bar=/some/file.tgz --resource
-baz=./docs/cfg.xml
+    juju upgrade-charm foo --resource bar=/some/file.tgz --resource baz=./docs/cfg.xml
 
 Where bar and baz are resources named in the metadata for the foo charm.
 
@@ -1510,21 +1457,23 @@ forcing an update if the resource has changed.
 Note that 'resource-get' only provides an FS path to the resource file.
 It does not provide any information about the resource (e.g. revision).
 
+
 ##### Charms can declare minimum Juju version
 
-There is a new (optional) top level field in the metadata.yaml file called
-min-juju-version.  If supplied, this value specifies the minimum version of
-a Juju server with which the charm is compatible.  When a user attempts to
-deploy a charm (whether from the charmstore or from local) that has
-min-juju-version specified, if the targeted model's Juju version is lower
-than that specified, then the user will be shown an error noting that the
-charm requires a newer version of Juju (and told what version they need).
-The format for min-juju-version is a string that follows the same scheme as
-our release versions, so you can be as specific as you like. For example,
-min-juju-version: "2.0.1-beta3" will deploy on 2.0.1 (release), but will not
-deploy on 2.0.1-alpha1 (since alpha1 is older than beta3).
+There is a new (optional) top level field in the metadata.yaml file
+called min-juju-version.  If supplied, this value specifies the minimum
+version of a Juju server with which the charm is compatible.  When a
+user attempts to deploy a charm (whether from the charmstore or from
+local) that has min-juju-version specified, if the targeted model's Juju
+version is lower than that specified, then the user will be shown an
+error noting that the charm requires a newer version of Juju (and told
+what version they need).  The format for min-juju-version is a string
+that follows the same scheme as our release versions, so you can be as
+specific as you like. For example, min-juju-version: "2.0.1-beta3" will
+deploy on 2.0.1 (release), but will not deploy on 2.0.1-alpha1 (since
+alpha1 is older than beta3).
 
-Note that, at this time, Juju 1.25.x does *not* recognize this flag, so
+Note that, at this time, Juju 1.25.x does *not* recognize this field, so
 charms using this field will, unfortunately, not be accepted by 1.25
 environments.
 
@@ -1539,31 +1488,32 @@ replaced since 1.24 by agent status and workload status attributes).
 The tabular status output now also includes relation information. This
 was previously only shown in the yaml and json output formats.
 
+
 #### Machine provisioning status
 
-Juju status for machines has a new "machine-status" value. This reflects the
-state of the machine as it is being allocated within the cloud. For
-providers like MAAS, it is possible to see the state of the machine as it
-transitions from allocating to deploying to deployed.
-For containers it also provide extra information about the container being
-created.
+Juju status for machines has a new "machine-status" value. This reflects
+the state of the machine as it is being allocated within the cloud. For
+providers like MAAS, it is possible to see the state of the machine as
+it transitions from allocating to deploying to deployed. For containers
+it also provide extra information about the container being created.
 
-$ juju status --format yaml
-model: admin
-machines:
- "0":
-   juju-status:
-     current: allocating
-     since: 24 Mar 2016 09:06:59+10:00
-     version: 2.0-beta3.1
-   dns-name: 10.0.1.92
-   instance-id: juju-16db5c82-f7af-4b0a-8507-2023df01ce89-machine-0
-   machine-status:
-     current: allocating
-     message: a2ef-dec1-8bfc-092e: deploying
-     since: 24 Mar 2016 09:06:59+10:00
-   series: trusty
-   hardware: arch=amd64 cpu-cores=0 mem=0M
+    juju status --format yaml
+
+        model: admin
+        machines:
+         "0":
+           juju-status:
+             current: allocating
+             since: 24 Mar 2016 09:06:59+10:00
+             version: 2.0-beta3.1
+           dns-name: 10.0.1.92
+           instance-id: juju-16db5c82-f7af-4b0a-8507-2023df01ce89-machine-0
+           machine-status:
+             current: allocating
+             message: a2ef-dec1-8bfc-092e: deploying
+             since: 24 Mar 2016 09:06:59+10:00
+           series: trusty
+           hardware: arch=amd64 cpu-cores=0 mem=0M
 
 
 ### Relation get-config and set-config compatibility
@@ -1599,29 +1549,305 @@ Juju now supports m4 instances on EC2.
 Juju now supports Windows 10 Enterprise and Windows Server 2016
 
 
+### Juju Now Respects CharmStore Channels
+
+For more information on the new support for channels in the Charm Store
+and how they work, please see our
+[documentation](https://jujucharms.com/docs/devel/authors-charm-store
+#entities-explained) on the subject.
+
+Support for channels has been brought into Juju via command options on the
+relevant sub-commands:
+
+    juju deploy
+    Juju upgrade-charm
+
+
 ### Keystone 3 support in Openstack.
 
-Juju now supports Openstack with Keystone Identity provider V3.
-Keystone 3 brings a new attribute to our credentials, “domain-name”
-(OS_DOMAIN_NAME) which is optional.
-If “domain-name” is present (and user/password too) juju will use V3
-authentication by default.
-In other cases where only user and password is present, it will query
-Openstack as to what identity providers are supported, and their endpoints.
-V3 will be tried and, if it works, set as the identity provider or else it
+Juju now supports Openstack with Keystone Identity provider V3. Keystone
+3 brings a new attribute to our credentials, “domain-name”
+(OS_DOMAIN_NAME) which is optional. If “domain-name” is present (and
+user/password too) juju will use V3 authentication by default. In other
+cases where only user and password is present, it will query Openstack
+as to what identity providers are supported, and their endpoints. V3
+will be tried and, if it works, set as the identity provider or else it
 will settle for V2, the previous standard.
+
+
+### Accurate Address Selection Based on Network Spaces (in MAAS)
+
+MAAS 1.9+ offers native support for Network Spaces, which Juju will
+discover and import. This means Juju knows which space any machine
+address comes from and can select addresses based on their space. An
+example for this improved support is the used by the 'network-get' hook
+tool. Earlier versions of Juju (and even this one on providers other
+than MAAS) use a simpler address selection based on scope and
+lexicographic order.
+
+
+### network-get Hook Tool Arguments Changed
+
+The new 'network-get' hook tool introduced in 2.0-alpha3 slightly
+changed:
+
+Before: network-get -r <relation-id> --primary-address
+Now:    network-get <binding-name> --primary-address
+
+Instead of taking an (implicit) -r argument with relation ID, the first
+expected argument is now a binding name. This can be a name listed
+inside the "extra-bindings" section of the charm metadata.yaml, or a
+name of a relation (from the "provides", "requires", or "peers"
+sections). The output is the same otherwise - a single address returned.
+
+
+### extra-bindings Support for Charms Metadata
+
+Many charms use a simple model where a relationship with another charm
+also indicates there is a network connection between units of those
+services. We have utilized this fact to add a network model that allows
+system operators to control where those TCP connections are made by
+binding the service relation endpoints onto a network space.
+
+
+However, some charms specifically use relation endpoints as simply a way
+to pass configuration around, and the relations don't map directly to
+services that are running in that charm and/or networking configuration.
+These charms want to be able to express that they have more networking
+configuration that an operator wants to control without having yet-
+another interface that will never be related to another service.
+
+Juju solves the aforementioned issues by introducing an optional new
+section in the charm metadata,yaml. The new section is called "extra-
+bindings". Similarly to the peers/provides/requires sections, extra-
+bindings contains a list of names, which can be used with 'juju deploy
+--bind' like relation names. Unlike relations, you don't have to define
+hooks or anything more complex to allow the users of the charm to bind
+those names to Juju spaces.
+
+Example: ceph charm's metadata.yaml would look like:
+
+    name: ceph
+    summary: Highly scalable distributed storage
+    maintainer: OpenStack Charmers <openstack-charmers@lists.ubuntu.com>
+    description: |
+     Ceph is a distributed storage and network file system designed to provide
+     excellent performance, reliability, and scalability.
+    tags:
+      - openstack
+      - storage
+      - file-servers
+      - misc
+    peers:
+      mon:
+        interface: ceph
+    extra-bindings:
+      cluster:
+      public:
+    provides:
+      nrpe-external-master:
+        interface: nrpe-external-master
+        scope: container
+    …
+    storage:
+      osd-devices:
+        type: block
+        multiple:
+          range: 0-
+      osd-journal:
+        type: block
+        multiple:
+          range: 0-1
+
+
+As a user then you can deploy this charm and tell Juju to provide
+distinct addresses for it on one or more spaces:
+
+    juju deploy ~/path/to/charm/ceph --bind 'cluster=admin-api public=public-api internal-api'
+
+Units of the ceph service will be deployed on machines which have access
+to the "admin-api", "public-api", and "internal-api" spaces in MAAS, a
+different network interface and address for each binding.
+
+Then, e.g. in a hook of the same charm, running 'network-get cluster
+--primary-address' will only return the correct address - the one coming
+from the "admin-api" space.
 
 ### Known issues
 
-  * Local provider using KVM is not supported
+  * juju lxd bridge detection fallback is not reliable
+    Lp 1570573
+  * Juju 2.0 no longer supports KVM for local provider
     Lp 1547665
   * Cannot deploy a dense openstack bundle with native deploy
     Lp 1555808
-  * juju bootstrap does not error on unknown or incorrect config values
-    Lp 1554863
-  * --bootstrap-series can cause "no matching tools available" error
-    Lp 1538735
+  * Cannot add LXD containers in 2.0beta4 on trusty
+    Lp 1568895
+  * Address Allocation feature flag still enabled for MAAS provider
+    in Juju 2.0
+    Lp 1568925
+  * Newly created LXD container has zero network devices
+    Lp 1564395
+  * LXD containers /etc/network/interfaces as generated by Juju gets
+    overwritten by LXD container start
+    Lp 1566801
+  * juju restore-backup does not complete properly
+    Lp 1569467
   * Credentials files containing Joyent credentials must be updated to
     work with beta3 (See "Joyent Provider No Longer Uses Manta Storage")
 
 
+## Resolved issues
+
+  * Certificate error when visiting the embedded juju gui
+    Lp 1555083
+
+  * The client.watchall api command never responds when the model has
+    no machines
+    Lp 1560201
+
+  * Juju does not fall back to cloud-images if --bootstrap-series not
+    supplied
+    Lp 1560625
+
+  * Error cannot find network interface "lxcbr0": route ip+net: no
+    such network interface
+    Lp 1566589
+
+  * Juju cannot bootstrap on xenial without juju-mongodb3.2 package
+    Lp 1566628
+
+  * Agents stuck in "waiting for agent initialization to finish" with
+    lxd provider
+    Lp 1567683
+
+  * Juju should fallback to juju-mongodb after first failure to find
+    juju-mongodb3.2
+    Lp 1568312
+
+  * Fallback for mongo packages doesn't include wily
+    Lp 1568390
+
+  * Region names for rackspace should accept caps and lowercase
+    Lp 1569024
+
+  * Jujud fails to start with "could not find a suitable binary for
+    "0.0/mmapv1""
+    Lp 1569097
+
+  * Enable-ha with placement fails due to invalid jobmanagenetworking
+    Lp 1569196
+
+  * Failed to bootstrap because exec: "mongod": executable file not
+    found in $path
+    Lp 1569408
+
+  * Proxyupdater api facade does not set notifywatcherid in the result
+    Lp 1569725
+
+  * Provider/azure: creating subnet fails if the environment name is
+    too long
+    Lp 1524077
+
+  * Add xenial to supported series
+    Lp 1533262
+
+  * Ec2: destroy-controller blows the rate limit trying to delete
+    security group - can leave instances around
+    Lp 1537620
+
+  * --bootstrap-series can cause "no matching tools available" error
+    Lp 1538735
+
+  * Kill-controller fails on missing volume
+    Lp 1543223
+
+  * Concurent map access in joyent
+    Lp 1554251
+
+  * Help text for juju destroy-controller needs improving
+    Lp 1555248
+
+  * The addcharmwithauthorization api endpoint needs to respect
+    channels.
+    Lp 1560511
+
+  * Charm channels must be used on the controller.
+    Lp 1560520
+
+  * Charm store macaroons must be used on the controller.
+    Lp 1560531
+
+  * Juju 2 beta3 can't bootstrap to lcy02
+    Lp 1563576
+
+  * Destroy-controller blocks when you've not removed an empty default
+    model
+    Lp 1563615
+
+  * "juju upgrade-juju --upload-tools" fails after "juju login"
+    Lp 1563762
+
+  * Kvm containers don't use correct parent interface device
+    Lp 1563853
+
+  * Juju2: charms fail with series mismatch when deployed to
+    containers in bundle
+    Lp 1564057
+
+  * Juju ssh doesn't work with multiple models
+    Lp 1566237
+
+  * Fallback to installing mongo 2.4 if no 3.2 doesn't work
+    Lp 1567182
+
+  * "juju destroy-controller" can leak hosted models
+    Lp 1567228
+
+  * Juju-run does not work on windows hosts
+    Lp 1426729
+
+  * Help text for juju destroy-model needs improving
+    Lp 1553272
+
+  * Help text for juju remove-service needs improving
+    Lp 1554687
+
+  * Help text for juju list-models needs improving
+    Lp 1556249
+
+  * Help text for juju show-cloud needs improving
+    Lp 1560595
+
+  * Help text for juju status needs improving
+    Lp 1560665
+
+  * Help text for juju list-clouds needs improving
+    Lp 1560667
+
+  * Update-clouds message improvement when fully up to date
+    Lp 1563843
+
+  * Region names should be case-insensitive but displayed as lowercase
+    Lp 1563845
+
+  * Help text for juju set-model-config needs improving
+    Lp 1563923
+
+  * Help text for juju get-model-config needs improving
+    Lp 1563924
+
+  * Help text for juju get-model-constraints needs improving
+    Lp 1563927
+
+  * Help text for juju set-model-constraints needs improving
+    Lp 1563928
+
+  * Help text for juju unset-model-config needs improving
+    Lp 1563938
+
+  * Help text for juju update-clouds needs improving
+    Lp 1563958
+
+  * All: mutex's copied by value
+    Lp 1563628
