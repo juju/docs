@@ -145,6 +145,7 @@ Juju currently uses three possible ways to get your credentials for a cloud:
   
           juju add-credential aws -f mycreds.yaml
   
+ 
 
 You can check what credentials are stored by Juju by running the command:
   
