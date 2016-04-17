@@ -72,6 +72,7 @@ azure-china  azure       chinaeast, chinanorth
 cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
 google       gce         us-east1, us-central1, europe-west1, asia-east1
 joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
+lxd
 rackspace    rackspace   DFW, ORD, IAD, LON, SYD, HKG
 ```
 
@@ -101,7 +102,7 @@ Juju currently uses three possible ways to get your credentials for a cloud:
 
 Some cloud providers (e.g. AWS, Openstack) have commandline tools which rely on
 environment variables being used to store credentials. If these are in use on
-your system already, or you choose to define them ([there is extra info here][env]), 
+your system already, or you choose to define them, 
 Juju will use them too.
 
 For example, AWS uses the following environment variables (among others):

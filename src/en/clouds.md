@@ -152,6 +152,6 @@ The 'local:' prefix indicates that this is a cloud you have added yourself.
 [LXD-site]: http://www.ubuntu.com/cloud/lxd "LXD"
 [juju-lxd]: ./cloud-LXD.html "Juju documentation > LXD"
 [maas-site]: http://maas.io "MAAS website"
-[juju-maas]: ./cloud-maas.html "Juju documentation > MAAS"
-[juju-manual]: ./cloud-manual.html "Juju documentation > Manual cloud"
+[juju-maas]: ./clouds-maas.html "Juju documentation > MAAS"
+[juju-manual]: ./clouds-manual.html "Juju documentation > Manual cloud"
 [yaml]: http://www.yaml.org/spec/1.2/spec.html

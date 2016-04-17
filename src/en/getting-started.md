@@ -1,7 +1,8 @@
 Title: Getting started with Juju 2.0
-Todo: remove ppa/devel after release
+TODO: remove ppa/devel after release
       simplify zfs install
       remove default-seies config
+
 
 # Getting started with Juju 2.0
 
@@ -19,7 +20,8 @@ To get the best experience, as well as Juju, this guide will also set up:
 
 Both the above are provided with Ubuntu 16.04LTS.
 
-# Install the software
+
+## Install the software
 
 Run the following commands to install the required software:
 
@@ -28,10 +30,11 @@ Run the following commands to install the required software:
   sudo apt update
   sudo apt install zfsutils-linux
   sudo apt install lxd
-  sudo apt install juju2
+  sudo apt install juju
 ```
 
-# Prepare ZFS
+
+## Prepare ZFS
 
 Using ZFS we can create sparse backing-storage for any of the containers which
 LXD creates for Juju. You can create this storage anywhere (e.g. the fastest
@@ -53,7 +56,8 @@ sudo zpool status
 
 This should indicate that the newly created pool is 'ONLINE' and ready.
 
-# Initialise LXD
+
+## Initialise LXD
 
 Now we need to tell LXD about this storage
 
@@ -68,25 +72,42 @@ current session and log in once again, or execute the following in your shell:
 ```no-highlight
 su -l $USER
 ```
-# Create a controller
 
-Juju needs to create a controller instance in the cloud to manage the models
-you create. We use the `juju bootstrap` command to create that controller. For 
-use with our LXD 'cloud', we will create a new controller called 'lxd-test':
+## Create a controller
+
+Juju needs a controller instance to manage your models and the `juju bootstrap`
+command is used to create one.
+
+However, if this is the first time using LXD then you'll need to configure it
+and expose a "network bridge" that Juju requires:
+
+```bash
+sudo dpkg-reconfigure -p medium lxd
+lxc finger
+```
+
+!!! Note: During the configuration dialog, the bridge must be 'lxcbr0'. You
+can accept all other prompts although the last question (IPv6) is probably not
+needed. In a later Juju release, Juju will require bridge 'lxdbr0'.
+
+Proceed with the creation of the controller. For use with our LXD "cloud", we
+will make a controller called 'lxd-test':
 
 ```bash
 juju bootstrap --config default-series=xenial lxd-test lxd
 ```
 
-This may take a few minutes as initially, LXD needs to download an image for 
+This may take a few minutes as, initially, LXD needs to download an image for 
 Xenial. 
 
-Once the process has completed, Juju now has a controller. You can check this:
+Once the process has completed you can check that the controller has been
+created:
 
 ```bash
 juju list-controllers 
 ```
-...will return a list of the controllers known to Juju, which at the moment is
+
+This will return a list of the controllers known to Juju, which at the moment is
 the one we just created:
   
 ```no-highlight
@@ -94,20 +115,28 @@ CONTROLLER       MODEL    USER         SERVER
 local.lxd-test*  default  admin@local  10.0.3.124:17070
 ```
 
-Creating a new controller automatically creates two empty models. The 'admin' 
-model, and a model called "default", which is automatically selected and ready for 
-use.
+Notice that the prefix 'local.' is added to the controller name we specified.
+
+Newly-created controllers come bundled with two models: The 'admin' model,
+which should be used only by Juju for internal management, and a 'default'
+model, which is ready for actual use.
+
+The following command shows the currently active controller and model:
 
 ```bash 
 juju switch
 ```
-...will return model and controller we are currently using:
+
+In our example, the output should look like this:
 
 ```no-highlight
 local.lxd-test:default
 ```
 
-# Deploy!
+The format is 'controller:model'.
+
+
+## Deploy
 
 Juju is now ready to deploy any services from the hundreds included in the
 [juju charm store](https://jujucharms.com). It is a good idea to test your new 

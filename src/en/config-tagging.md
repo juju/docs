@@ -1,7 +1,7 @@
 Title: Instance naming and tagging in clouds  
 
 # Instance naming and tagging
-Juju now tags instances and volumes created by supported providers with the 
+Juju now tags instances and volumes created in supported clouds with the 
 Juju environment UUID, and related Juju entities. Instances will be tagged with
 the names of units initially assigned to the machine. Volumes will be tagged
 with the storage-instance name, and the owner (unit or service) of said storage.
@@ -14,9 +14,9 @@ using the scheme:
 juju-<env>-<resource-type>-<resource-ID>
 ```
 
-...where `<env>` is the human-readable name of the environment as specified in 
-**environments.yaml**; `<resource-type>` is the type of the resource ("machine" 
-or "volume") and `<resource-ID>` is the numeric ID of the Juju machine or volume
+...where `<env>` is the given name of the model; `<resource-type>` is the type 
+of the resource ("machine" or "volume") and `<resource-ID>` is the numeric ID
+of the Juju machine or volume
 corresponding to the IaaS resource.
 
 Names in Amazon AWS for example appear like this:
@@ -26,20 +26,19 @@ Names in Amazon AWS for example appear like this:
 
 ## User-defined tags
 
-Juju also adds any user-specified tags set via the "resource-tags" environment
+Juju also adds any user-specified tags set via the "resource-tags" model
 setting to instances and volumes. The format of this setting is a
-space-separated list of key=value pairs contained in the relevant section of
-your **environments.yaml** file:
+space-separated list of key=value pairs.
 
 ```no-highlight
 resource-tags: key1=value1 [key2=value2 ...]
 ```
 
 Alternatively, you can change the tags allocated to new machines in a 
-bootstrapped environment by using the 'juju set-env' command
+bootstrapped environment by using the 'juju set-model-config' command
 
 ```bash
-juju set-env resource-tags="origin=evilnick owner=Canonical"
+juju set-model-config resource-tags="origin=v2 owner=Canonical"
 ```
 ![user tagged instances in Amazon](./media/config-tagging-user.png)
 
