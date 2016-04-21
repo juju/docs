@@ -51,7 +51,6 @@ below, followed by specific notes detailing some of those options
 
 | Key                        | Type   | Default| Valid values             | Purpose |
 |:----------------------------|--------|--------|--------------------------|:---------|
-admin-secret | string |  |  | The password for the administrator user
 agent-metadata-url | string |  |  | URL of private stream
 agent-stream | string | released | released/devel/proposed | Version of Juju to use for deploy/upgrades
 agent-version | string |  |  | The desired Juju agent version to use
@@ -66,9 +65,6 @@ authorized-keys-path | string |  |  | Path to file containing SSH authorized key
 block-all-changes | bool |  |  | Whether all changes to the model will be prevented
 block-destroy-model | bool |  |  | Whether the model will be prevented from destruction
 block-remove-object | bool |  |  | Whether remove operations (machine, service, unit or relation) will be prevented
-bootstrap-addresses-delay | int | 10 |  | The amount of time between refreshing the addresses in seconds. Not too frequent as we refresh addresses from the provider each time
-bootstrap-retry-delay | int | 5 |  | Time between attempts to connect to an address in seconds.
-bootstrap-timeout | int | 600 |  | The amount of time to wait contacting a state server in seconds
 ca-cert | string |  |  | The certificate of the CA that signed the state server certificate, in PEM format
 ca-cert-path | string |  |  | Path to file containing CA certificate
 ca-private-key | string |  |  | The private key of the CA that signed the state server certificate, in PEM format
