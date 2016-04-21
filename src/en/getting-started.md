@@ -185,7 +185,7 @@ Congratulations, you have just deployed a service with Juju!
 
 !!! Note: To remove all the services in the model you just created, it is 
 often quickest to destroy the model with the command 'juju destroy-model default` 
-and then create a new model.
+and then [create a new model][models].
 
 
 ## Next Steps
