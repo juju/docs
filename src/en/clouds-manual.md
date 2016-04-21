@@ -96,6 +96,6 @@ There are some additional things to note when using the Manual provider:
 
 
 
-[models-config]: ./models-configuration
+[models-config]: ./models-config.html
 [placement]: ./charms-deploying#deploying-to-specific-machines-and-containers
 [commands]: ./commands.html
