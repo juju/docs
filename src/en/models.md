@@ -1,9 +1,10 @@
 Title: Juju Models
-TODO: Review again soon (created: March 2016)
+TODO: Review again soon (created: April 2016)
 
 
 # Models
 
+<<<<<<< HEAD
 A Juju *model* is an environment associated with a cloud provider type. When
 the **initial** model is added a *controller* (see
 [Controllers](./controllers.html)) is provisioned along with it. It is not
@@ -18,7 +19,20 @@ is generally expected that these be solely for management and monitoring
 purposes (e.g. Nagios, Landscape).
 
 See [Adding a model](./models-adding.html).
+=======
+A Juju *model* is an environment associated with a cloud. When
+a *controller* (see [Controllers](./controllers.html)) is 
+created by bootstrapping a cloud, two models are provisioned along 
+with it. 
 
+These initial models are named '**admin**' and '**default**'. The 'admin'
+model is not intended for general workloads but solely for monitoring
+and management purposes.
+
+The '**default**' model however is ready for immediate use, and multiple 
+subsequent models can also be created. 
+See [Creating a model](./models-creating.html).
+>>>>>>> upstream/master
 
 ## Related commands
 

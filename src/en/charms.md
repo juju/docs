@@ -108,7 +108,7 @@ service to make use of the MariaDB database for a backend, you need to add a
 relation between them.
 
 ```bash
-juju add-relation mediawiki mariadb:db
+juju add-relation mediawiki:db mariadb
 ```
 
 Normally, we only need to reference the services by name. In this case, we also 

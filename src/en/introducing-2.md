@@ -41,34 +41,25 @@ models leaner and faster and also brings benefits to placing containers within
 models. You can find out more about setting up 
 [LXD for Juju here](./config-LXD.html).
 
+## MAAS 2.0
+
+Juju supports MAAS 2.0, but at the moment, both MAAS and JUJU are in beta.
+
+To enable support for MAAS 2.0 in juju 2.0, you currently need to set an
+environment variable:
+
+```bash
+export JUJU_DEV_FEATURE_FLAGS=maas2
+```
+
+
 ## Upgrading from earlier versions
 
-!!! Note: This is pre-release documentation - upgrading does not currently work!
+At the current time, there is no upgrade path from Juju 1.x to Juju 2.x
 
-Before upgrading from an earlier version, ensure that there is sufficient disk 
-space for an upgrade. Upgrading could consume an additional 500MB to 1GB of 
-space on the controller, depending on the environment configuration.
-
-### If you are using a version < 1.25.2
-
-You must upgrade Juju to the latest 1.x series version of Juju first:
-
-```bash
-juju upgrade-juju --version=1.25.2
-```
-Then proceed as below:
-
-### If you are on version 1.25.2 of Juju
-
-Run the command:
-
-```bash
-juju upgrade-juju --version=2.0.0
-```
-
-For more information on upgrading, please see the 
-[upgrade documentation](./juju-upgrade.html).
-
+Both versions of Juju can co-exist, however. We will be adding documentation
+to explain how to manage both versions, and how to upgrade when it does become
+available
 
 
 

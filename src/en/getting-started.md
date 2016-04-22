@@ -8,7 +8,7 @@ TODO: remove ppa/devel after release
 
 The instructions here will get you up and running and deliver the best-possible
 experience. At the moment, that means using the very latest release of 
-Ubuntu, [16.04LTS (Xenial)](http://cdimage.ubuntu.com/releases/16.04/).
+Ubuntu, [16.04LTS (Xenial)](http://www.ubuntu.com/download/).
 
 If you are using a different OS, please read the 
 [general install instructions here](./getting-started-general.html).
@@ -185,7 +185,7 @@ Congratulations, you have just deployed a service with Juju!
 
 !!! Note: To remove all the services in the model you just created, it is 
 often quickest to destroy the model with the command 'juju destroy-model default` 
-and then create a new model.
+and then [create a new model][models].
 
 
 ## Next Steps
