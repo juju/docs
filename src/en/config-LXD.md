@@ -6,7 +6,7 @@ TODO:
 
 Here we provide an overview for the creation of a controller for LXD
 (see [Controllers](./controllers.html)). If your objective is instead
-to create a LXD model please see [Defining a model](./models-creating.html).
+to create a LXD model please see [Adding a model](./models-adding.html).
 
 Unlike other providers, with LXD, Juju does not need to be supplied with any
 information regarding configuration or credentials. This makes it extremely
@@ -83,7 +83,7 @@ See more examples of [Creating a controller](./controllers-creating.html).
 Typically, workload services are deployed on additional models (i.e. other
 than the initial 'admin' model). There is a 'default' model created when
 a controller is created but we recommend creatiing specially-named ones
-instead. See [Creating a model](./models-creating.html).
+instead. See [Adding a model](./models-adding.html).
 
 
 ## LXD and images
