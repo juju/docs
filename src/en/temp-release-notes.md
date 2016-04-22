@@ -246,7 +246,7 @@ So, we have the following changes:
 And for the extra commands previously under the "jes" feature flag but
 are now available out of the box:
 
-    juju system create-environment         juju create-model
+    juju system create-environment         juju add-model
     juju system destroy                    juju destroy-controller
     juju system environments               juju list-models
     juju system kill                       juju kill-controller
@@ -292,7 +292,7 @@ Juju models, meaning less resources are needed for Juju's management
 infrastructure and new models can be created almost instantly.
 
 In order to keep a clean separation of concerns, it is now considered
-best practice to create additional models for deploying workloads,
+best practice to add additional models for deploying workloads,
 leaving the controller model for Juju's own infrastructure. Services can
 still be deployed to the controller model, but it is generally expected
 that these be only for management and monitoring purposes (e.g Landscape
@@ -305,7 +305,7 @@ will be accessing the models.
 The main new commands of note are:
 
     juju list-models
-    juju create-model
+    juju add-model
     juju grant
     Juju revoke
     juju list-shares
@@ -580,7 +580,7 @@ We can see what controllers I can talk to:
 The default controller is indicated with an *.
 
 Note: currently the controller model (see multi-model above) is named
-after the controller. You would then create a new hosted model in which
+after the controller. You would then add a new hosted model in which
 workloads are run. The next Juju beta will create the controller model
 as "admin" and an initial hosted model as part of bootstrap.
 
@@ -640,9 +640,9 @@ configuration. Account passwords are included if --show-passwords is used.
 Note: The model commands used for multi-model support, as outlined in
 the previous section, work across multiple controllers also.
 
-    juju create-model mynewmodel -c mycontroller
+    juju add-model mynewmodel -c mycontroller
 
-The above command creates a new model on the nominated controller and
+The above command adds a new model on the nominated controller and
 switches to that controller and model as the default for subsequent
 commands.
 
@@ -735,14 +735,14 @@ To specify a different name for the hosted model:
   juju bootstrap mycontroller aws --default-model mymodel
 
 
-#### Creating New Models
+#### Adding New Models
 
-Controller admin users can create new models without needing to specify
+Controller admin users can add new models without needing to specify
 any additional configuration:
 
-  juju create-model mynewmodel
+  juju add-model mynewmodel
 
-n such cases, the new model will inherit the credentials and authorized
+In such cases, the new model will inherit the credentials and authorized
 ssh keys of the admin model.
 
 Where a cloud requires credentials, non-admin users, and admin users if
@@ -750,12 +750,12 @@ they wish, are required to specify a named credential (so that resources
 created by the new model are allocated to the cloud account of the model
 creator), as well as authorized keys:
 
-  juju create-model mynewmodel --credential mysecrets
+  juju add-model mynewmodel --credential mysecrets
     --config authorized-keys="ssh-rsa ...."
 
 Additional model config just for the new model may also be specified:
 
-  Juju create-model --config image-stream=daily
+  Juju add-model --config image-stream=daily
 
 
 #### Sharing Models
@@ -1216,7 +1216,7 @@ Juju 2.0 now natively supports the new spaces API in MAAS 1.9+. Spaces
 are automatically discovered from MAAS (1.9+) on bootstrap and available
 for use with service endpoint bindings or machine provisioning
 constraints (see below). Space discovery works for the controller model
-as well as any model created later using 'juju create-model'.
+as well as any model added later using 'juju add-model'.
 
 Currently there is no command to update the spaces in Juju if their
 corresponding MAAS spaces change. As a workaround, restarting the

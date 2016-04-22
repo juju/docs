@@ -201,6 +201,53 @@ Click on the expander to see details for each command.
   
   aliases: add-machines
 
+^# add-model
+
+
+  #### usage:
+
+
+        juju add-model [options] <name> [key=[value] ...]
+
+
+  #### purpose:
+
+   add a model within the Juju Model Server
+
+
+
+  #### options:
+
+
+
+  _-c, --controller (= "")_  juju controller to operate in
+
+
+  _--config  (= )_  path to yaml-formatted file containing model config values
+
+
+  _--owner (= "")_  the owner of the new model if not the current user
+
+  This command will add another model within the current Juju
+  Controller. The provider has to match, and the model config must
+  specify all the required configuration values for the provider. In the cases
+  of ‘ec2’ and ‘openstack’, the same model variables are checked for the
+  access and secret keys.
+
+  If configuration values are passed by both extra command line arguments and
+  the --config option, the command line args take priority.
+
+  #### Examples:
+
+
+
+        juju add-model new-model
+
+        juju add-model new-model --config=aws-creds.yaml
+
+  See Also:
+  juju help model share
+
 
 ^# add-relation
 
@@ -1157,54 +1204,6 @@ Click on the expander to see details for each command.
         juju create-budget qa 42
     
    Creates a budget named 'qa' with a limit of 42.
-
-
-^# create-model
-
-
-  #### usage:
-
-  
-        juju create-model [options] <name> [key=[value] ...]
-  
-
-  #### purpose:
-
-   create an model within the Juju Model Server
-
-
-  
-  #### options:
-
-
-
-  _-c, --controller (= "")_  juju controller to operate in
-
-
-  _--config  (= )_  path to yaml-formatted file containing model config values
-
-
-  _--owner (= "")_  the owner of the new model if not the current user
-  
-  This command will create another model within the current Juju
-  Controller. The provider has to match, and the model config must
-  specify all the required configuration values for the provider. In the cases
-  of ‘ec2’ and ‘openstack’, the same model variables are checked for the
-  access and secret keys.
-  
-  If configuration values are passed by both extra command line arguments and
-  the --config option, the command line args take priority.
-  
-  #### Examples: 
-
-
-
-        juju create-model new-model
-  
-        juju create-model new-model --config=aws-creds.yaml
-  
-  See Also:
-  juju help model share
 
 
 ^# debug-hooks
@@ -2381,7 +2380,7 @@ Click on the expander to see details for each command.
   See Also:
   juju help controllers
   juju help list-models
-  juju help create-model
+  juju help add-model
   juju help use-model
 
 
@@ -2853,7 +2852,7 @@ Click on the expander to see details for each command.
   See Also:
   juju help list-models
   juju help use-model
-  juju help create-model
+  juju help add-model
   juju help add-user
   juju help switch
 
@@ -5230,7 +5229,7 @@ Click on the expander to see details for each command.
   
   See Also:
   juju help controllers
-  juju help create-model
+  juju help add-model
   juju help model share
   juju help model unshare
   juju help switch
