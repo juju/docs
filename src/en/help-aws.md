@@ -59,7 +59,12 @@ Open this file to get the **access-key** and **secret-key**.
 
 ![Amazon Access Credentials page showing key values](./media/getting_started-aws_keys.png)
 .
-
+Armed with these values, you can then use the interactive command line tool to 
+add them to Juju:
+  
+```bash
+juju add-credential aws
+```
 
 
 
