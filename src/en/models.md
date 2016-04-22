@@ -1,7 +1,6 @@
 Title: Juju Models
 TODO: Review again soon (created: April 2016)
 
-
 # Models
 
 A Juju *model* is an environment associated with a cloud. When
@@ -20,7 +19,7 @@ See [Creating a model](./models-creating.html).
 ## Related commands
 
 `juju list-models`<br/ >
-`juju create-model`<br/ >
+`juju add-model`<br/ >
 `juju use-model`<br/ >
 `juju share-model`<br/ >
 `juju list-shares`<br/ >
