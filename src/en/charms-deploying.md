@@ -103,8 +103,8 @@ node 0.
 You can also deploy to containers:
 
 ```bash
-juju deploy mysql --to 24/lxc/3
-juju deploy mysql --to lxc:25
+juju deploy mysql --to 24/lxd/3
+juju deploy mysql --to lxd:25
 ```
 
 In the previous example we deployed MySQL to container #3 on machine #24.
