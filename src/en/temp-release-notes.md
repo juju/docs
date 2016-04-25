@@ -1566,8 +1566,8 @@ Juju now supports Windows 10 Enterprise and Windows Server 2016
 
 For more information on the new support for channels in the Charm Store
 and how they work, please see our
-[documentation](https://jujucharms.com/docs/devel/authors-charm-store
-#entities-explained) on the subject.
+[documentation](https://jujucharms.com/docs/devel/authors-charm-store#entities-explained)
+on the subject.
 
 Support for channels has been brought into Juju via command options on the
 relevant sub-commands:
