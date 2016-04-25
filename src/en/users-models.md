@@ -1,5 +1,5 @@
 Title: Juju users and models
-TODO: Stuff on user-created models (ssh key and credentials)
+TODO: Stuff on user-added models (ssh key and credentials)
 
 
 # Users and models
@@ -7,9 +7,9 @@ TODO: Stuff on user-created models (ssh key and credentials)
 This section is about understanding models with multiple users.
 
 
-## Creating models
+## Adding models
 
-When an administrator creates a model, by default, the cloud credentials used
+When an administrator adds a model, by default, the cloud credentials used
 throughout the model will be those that the admin used to create the controller
 and the SSH keys copied across the model will be those of the admin model. The
 administrator can override these defaults with the appropriate command options.
@@ -19,19 +19,19 @@ process does allow for owner designation.
 
 Examples:
 
-Create model 'mymodel' (in the current controller):
+Add model 'mymodel' (in the current controller):
 
 ```bash
-juju create-model mymodel
+juju add-model mymodel
 ```
 
-Create model 'mymodel' and designate user 'tron' as the owner:
+Add model 'mymodel' and designate user 'tron' as the owner:
 
 ```bash
-juju create-model --owner=tron mymodel
+juju add-model --owner=tron mymodel
 ```
 
-See [Creating a model](./models-creating.html) for details on creating models.
+See [Adding a model](./models-adding.html) for details on adding models.
 
 
 ## Models and user access
