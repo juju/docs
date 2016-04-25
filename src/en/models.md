@@ -14,7 +14,7 @@ and management purposes.
 
 The '**default**' model however is ready for immediate use, and multiple 
 subsequent models can also be created. 
-See [Creating a model](./models-creating.html).
+See [Adding a model](./models-adding.html).
 
 ## Related commands
 
