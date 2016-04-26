@@ -32,7 +32,7 @@ controller creation.
 
 *Credentials* managed in Juju are related to the accessing of the chosen
 cloud-backed resource. They are not related to Juju users themselves in any
-way. Credentials added to Juju remain local to each user (on Ubuntu:
+way. Credentials added to Juju remain local to the system user (on Ubuntu:
 `~/.local/share/juju/credentials.yaml`).
 
 See [Cloud credentials](./credentials.html) for more on this topic.

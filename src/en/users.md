@@ -4,12 +4,6 @@ TODO: User abilities, especially owners and regular users
 
 # Juju users
 
-Juju has the capacity to manage multiple users. This section covers this
-overall feature.
-
-
-## Introduction
-
 There are 3 kinds of Juju users: controller administrators, model owners, and
 regular users. Each user, no matter the kind, is associated with a controller.
 In particular, the namespace for users are controller-centric; names can be
@@ -32,7 +26,7 @@ during the model creation process.
 A *regular user* is one who is neither an administrator nor a model owner. Such a
 user requires access to a model in order to do anything at the Juju level. Note
 that although deemed "regular", such a user is far from ordinary since they can
-marshall the vast resources of the backing cloud and deploy complex services.
+marshal the vast resources of the backing cloud and deploy complex services.
 
 
 ## User abilities
@@ -43,13 +37,13 @@ users are also included.
 
 Actions available to a system user:
 
-    - Access general help (`juju help`)
-    - List supported cloud types (`juju list-clouds`)
-    - Show details on each cloud type (`juju show-cloud`)
-    - Register with a controller (`juju register`)
-    - Add credentials (`juju add-credential` and `juju autoload-credentials`)
-    - List cloud credentials (`juju list-credentials`)
-    - Create controllers (`juju bootstrap`)
+- Access general help (`juju help`)
+- List supported cloud types (`juju list-clouds`)
+- Show details on each cloud type (`juju show-cloud`)
+- Register with a controller (`juju register`)
+- Add credentials (`juju add-credential` and `juju autoload-credentials`)
+- List cloud credentials (`juju list-credentials`)
+- Create controllers (`juju bootstrap`)
 
 Once a system user has created a controller they are provided automatically, at
 the Juju level, with an administrator of that controller and inherit all the
@@ -63,38 +57,46 @@ allowed.
 
 See [Controllers](./controllers.html) for information on controllers.
 
-**Administrators**<br/>
+### Administrators
 Only an administrator has the power to perform these actions (in
 the context of their controller):
 
-    - Add users (`juju add-user`)
-    - Disable users (`juju disable-user`)
-    - Enable previously disabled users (`juju enable-user`)
-    - Create models (`juju create-model`)
-    - Grant user access to models (`juju grant`)
-    - Revoke user access from models (`juju revoke`)
-    - Remove models (`juju destroy-model`)
-    - Remove the controller (`juju destroy-controller`)
-    - Maintenance operations (e.g.: backups)
+- Add users (`juju add-user`)
+- Disable users (`juju disable-user`)
+- Enable previously disabled users (`juju enable-user`)
+- Create models (`juju create-model`)
+- Grant user access to models (`juju grant`)
+- Revoke user access from models (`juju revoke`)
+- Remove models (`juju destroy-model`)
+- Remove the controller (`juju destroy-controller`)
+- Maintenance operations (e.g.: backups)
 
-**Model owners**<br/>
+### Model owners
 A model owner has the power to list users who have access to the model they own
 (`juju list-shares`).
 
-**Regular users**<br/>
+### Regular users
 The ability of a regular user depends on the model access rights (read-only or
 write) they have been given.
 
 For read-only access, the user can do the following:
 
-    - List models (`juju list-models`)
-    - List machines (`juju list-machines`)
-    - Show the status (`juju status`)
+- List models (`juju list-models`)
+- List machines (`juju list-machines`)
+- Show the status (`juju status`)
 
-For write access, the user can also do the following:
+For write access, the user can begin with the following major commands:
 
-    - Deploy services (`juju deploy`)
-    - Scale out services (`juju add-unit`)
+- Deploy services (`juju deploy`)
+- Scale out services (`juju add-unit`)
 
-An explanation of how users gain access to models is provided in
-[Users and models](./users-models.html).
+Further reading:
+
+- A walkthrough of typical commands is provided in
+  [Workflow scenarios](./users-workflows#basic_setup_and_single_user.html).
+- Other write commands are listed on the
+  [command reference page](./commands.html).
+- An explanation of how users gain access to models is provided in
+  [Users and models](./users-models.html).
+- An analysis of the output to certain commands is given in
+  [Sample commands](./users-sample-commands.html).

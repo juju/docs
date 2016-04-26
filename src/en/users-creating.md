@@ -1,13 +1,7 @@
 Title: Creating Juju users
-TODO: 
 
 
 # Creating users
-
-This section is about getting going with a new user.
-
-
-## Overview
 
 A regular user is added to a controller by the controller administrator. This
 process yields an alphanumeric text string that encodes information about the
@@ -25,10 +19,10 @@ the network and has Juju installed.
 At this stage, the user is registered to a controller and is allowed to perform
 the following additional actions (in the context of the controller):
 
-    - List controllers (`juju list-controllers`)
-    - Show controller details (`juju show-controller`)
-    - List enabled controller users (`juju list-users`)
-    - Show details for controller users (`juju show-user`)
+- List controllers (`juju list-controllers`)
+- Show controller details (`juju show-controller`)
+- List enabled controller users (`juju list-users`)
+- Show details for controller users (`juju show-user`)
 
 To do anything further the user must wait to be granted access to a model by
 the administrator. See [Users and models](./users-models.html).

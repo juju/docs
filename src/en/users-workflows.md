@@ -1,5 +1,4 @@
 Title: Juju workflow scenarios
-TODO: 
 
 
 # Workflow scenarios
@@ -14,7 +13,7 @@ the cloud provider).
 
 ## Basic setup and single user
 
-**Controller creation**<br/>
+### Controller creation
 A system user creates a controller, thus becoming the controller's
 administrator. See [Controllers](./controllers.html) for information on
 controllers.
@@ -23,14 +22,14 @@ controllers.
 juju bootstrap lxd-controller-1 lxd
 ```
 
-**Administrator password creation**<br/>
+### Administrator password creation
 A new administrator does not have a real password. He should create it now:
 
 ```bash
 juju change-user-password
 ```
 
-**Regular user creation**<br/>
+### Regular user creation
 The administrator creates a regular user.
 
 ```bash
@@ -40,22 +39,22 @@ juju add-user tom
 This outputs a special string to provide to the user so user registration can
 take place (see below).
 
-**Hosted model creation**<br/>
-Although not strictly necessary (every controller comes
-with a usable model named 'default'), the administrator creates a hosted model:
+### Hosted model creation
+Although not strictly necessary (every controller comes with a usable model
+named 'default'), the administrator adds a hosted model:
 
 ```bash
-juju create-model lxd-model-1
+juju add-model lxd-model-1
 ```
 
-**Grant model access**<br/>
+### Grant model access
 The administrator grants the user write access to the previously created model:
 
 ```bash
 juju grant --acl=write tom lxd-model-1
 ```
 
-**User registration**<br/>
+### User registration
 The previously created regular user registers with the controller:
 
 ```bash
@@ -70,7 +69,7 @@ juju list-controllers
 juju list-models
 ```
 
-**Password change**<br/>
+### Password change
 Although a password is created in the above step the regular user may want to
 change it:
 
@@ -78,14 +77,15 @@ change it:
 juju change-user-password
 ```
 
-Juju usage Because the regular user has been provided write access to the model
+### Juju usage
+Because the regular user has been provided write access to the model
 he/she can begin to utilise Juju:
 
 ```bash
 juju deploy mysql mysql-staging
 ```
 
-**Logout**<br/>
+### Logout
 A login session expires after a fixed amount of time (24 hours) but the regular
 user can explicitly log out:
 

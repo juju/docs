@@ -40,6 +40,8 @@ Model access can be granted, by an administrator, to a regular user in
 read-only or write modes (ACL). Once a user has access to a model, he can apply
 commands to it. Which commands become available depend upon their assigned ACL.
 
+See [Users](./users.html#regular-users) for details on available commands.
+
 Examples:
 
 To grant user 'bob' read access to model 'mymodel':

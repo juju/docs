@@ -1,5 +1,4 @@
 Title: Juju sample commands
-TODO: 
 
 
 # Sample command usage and output interpretation
@@ -19,20 +18,20 @@ lxd-sam            -            -            10
 
 Interpretation:
 
-    - Controller 'lxd-trusty' is a controller that is local to the client
-      system (prefix 'local.'). It was bootstrapped there.
-    - The other 3 controllers are due to users being registered to the same
-      remote controller with IP address 10.195.10.130. Each user decided to
-      base the name of "their" controller on their name (i.e. 'lxd-jim').
-    - The "current" controller, model, and user are 'lxd-trusty',
-      'lxd-staging', and 'admin' respectively (the * character denotes this).
-      These will be used as the defaults in many commands.
-    - Users 'admin', 'jim', and 'rod' are logged in.
-    - User 'jim' has not been granted access to a model.
-    - An administrator on the remote controller has granted user 'rod' access
-      to model 'lxd-pilot'.
-    - The user (presumably 'sam') who named their controller 'lxd-sam' is
-      logged out and may, or may not, have access to a model.
+- Controller 'lxd-trusty' is a controller that is local to the client
+  system (prefix 'local.'). It was bootstrapped there.
+- The other 3 controllers are due to users being registered to the same
+  remote controller with IP address 10.195.10.130. Each user decided to
+  base the name of "their" controller on their name (i.e. 'lxd-jim').
+- The "current" controller, model, and user are 'lxd-trusty',
+  'lxd-staging', and 'admin' respectively (the * character denotes this).
+  These will be used as the defaults in many commands.
+- Users 'admin', 'jim', and 'rod' are logged in.
+- User 'jim' has not been granted access to a model.
+- An administrator on the remote controller has granted user 'rod' access
+  to model 'lxd-pilot'.
+- The user (presumably 'sam') who named their controller 'lxd-sam' is
+  logged out and may, or may not, have access to a model.
 
 Let's see how the above output is altered if we have user 'sam' log in to their
 controller. Before doing so, we list users to ensure 'sam' is the actual user
@@ -56,9 +55,9 @@ lxd-sam*          lxd-prod     sam@local    10.195.10.130:17070
 
 Interpretation:
 
-    - User 'sam' has indeed been granted access to a model ('lxd-prod').
-    - The "current" controller, model, and user are now 'lxd-sam', 'lxd-prod',
-      and 'sam' respectively.
+- User 'sam' has indeed been granted access to a model ('lxd-prod').
+- The "current" controller, model, and user are now 'lxd-sam', 'lxd-prod',
+  and 'sam' respectively.
 
 Note that a login cannot occur if there is an ongoing user session with that
 same controller. An error will be emitted. The other user will need to log out
@@ -77,5 +76,6 @@ login. In that case, the user will need to switch to the model:
 juju switch <model name>
 ```
 
-The `juju switch` command can refer to <controller name>, <model name>, or
-<controller name>:<model name>.
+The `juju switch` command can refer to &lt;controller name&gt;, &lt;model
+name&gt;, or  
+ &lt;controller name&gt;:&lt;model name&gt;.
