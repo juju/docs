@@ -92,5 +92,5 @@ Features supported by Juju-owned instances running within AWS:
   
 
 [aws]: http://console.aws.amazon.com
-[constraints]:./charms-constraints.html
+[constraints]:./reference-constraints.html
 [tagging]: ./config-tagging.html
