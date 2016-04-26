@@ -1,21 +1,21 @@
-# Juju 2.0-beta5
+# Juju 2.0-beta6
 
-A new development release of Juju, juju 2.0-beta5, is now available.
+A new development release of Juju, juju 2.0-beta6, is now available.
 This release replaces version 2.0-beta4.
 
 
 ## Getting Juju
 
-Juju 2.0-beta5 is available for Xenial and backported to earlier
+Juju 2.0-beta6 is available for Xenial and backported to earlier
 series in the following PPA:
 
     https://launchpad.net/~juju/+archive/devel
 
 Windows, Centos, and OS X users will find installers at:
 
-    https://launchpad.net/juju-core/+milestone/2.0-beta5
+    https://launchpad.net/juju-core/+milestone/2.0-beta6
 
-Upgrading environments to 2.0-beta5 is not supported.
+Upgrading environments to 2.0-beta6 is not supported.
 
 
 ## Getting started with Juju 2.0
@@ -123,22 +123,9 @@ More details on the new bootstrap experience, including defining private
 clouds can be found in the New Bootstrap and Cloud Management Experience
 section.
 
+## What's New in Beta6
 
-## What's New in Beta5
-
-* Support for local charm repositories removed.
-  * All local charms must now be deployed using the path to the charm
-    instead of a local URL.
-  * Bundles support specifying local charms using the path to the charm.
-
-* Notable Bug Fixes:
-  * GridFS namespace breaks charm and tools deduping across models
-    Lp 1569054
-  * Unable to download local: charm due to hash mismatch in
-    multi-model deployment
-    Lp 1541482
-  * Destroyed models still show up in list-models
-    Lp 1534627
+This releases addresses stability and performance issues.
 
 
 ## Notable Changes
@@ -1212,7 +1199,7 @@ using the following development feature flag:
 
     JUJU_DEV_FEATURE_FLAGS=address-allocation juju bootstrap ...
 
-This flag is no longer supported and will not be accepted.
+This flag is no longer supported and will log a warning message if used.
 
 
 ### New Openstack machines can be provisioned based on virtualisation type (kvm, lxd)
@@ -1706,155 +1693,36 @@ from the "admin-api" space.
 
 ## Resolved issues
 
-  * Newly created lxd container has zero network devices
-    Lp 1564395
+  * Juju rc1 loses agents during a lxd deploy
+    Lp 1572237
 
-  * Cloud-init cannot always use private ip address to fetch tools
-    (ec2 provider)
-    Lp 1566431
+  * Tools info mismatch on arch with lxd containers
+    Lp 1572781
 
-  * Address allocation feature flag still enabled for maas provider in
-    juju 2.0
-    Lp 1568925
+  * 'failed to ensure lxd image' creating lxd container
+    Lp 1573149
 
-  * Gridfs namespace breaks charm and tools deduping across models
-    Lp 1569054
+  * Non-admin users unable to share models
+    Lp 1573259
 
-  * Storage-get crashes on xenial (aws)
-    Lp 1569490
+  * Only one user can create local users
+    Lp 1573382
 
-  * Apiserver: digest sha header is incorrectly formed
-    Lp 1503992
+  * Maas provider bridge script deletes /etc/network/if-up.d/ntpdate
+    during bootstrap
+    Lp 1564397
 
-  * Destroyed models still show up in list-models
-    Lp 1534627
+  * Awaiting error resolution for "install" hook
+    Lp 1566130
 
-  * Unable to download local: charm due to hash mismatch in multi-
-    model deployment
-    Lp 1541482
+  * Model uuids shown in some "romulus" command output
+    Lp 1571055
 
-  * Help text for juju remove-relation needs improving
-    Lp 1555694
+  * Panic in when bootstrapping maas 2.0
+    Lp 1573659
 
-  * Ensure availability uses wrong constraints
-    Lp 1561315
+  * [lxd provider] trusty container is used by default on xenial host
+    Lp 1557747
 
-  * 'juju help glossary' and 'juju help topics' are deprecated
-    Lp 1564017
-
-  * Disallow upgrading with --upload-tools for hosted models
-    Lp 1567170
-
-  * List resources will not work correctly
-    Lp 1569386
-
-  * Juju lxd bridge detection fallback is not reliable
-    Lp 1570473
-
-  * Manpage still refers to 1.x config for 2.0
-    Lp 1570654
-
-  * Can't deploy multiseries charms in bundles
-    Lp 1571254
-
-  * "juju register" stores password on disk
-    Lp 1571476
-
-  * Juju login should only ask for password once
-    Lp 1571478
-
-  * "juju change-user-password --generate" is unhelpful
-    Lp 1571901
-
-  * Help text for juju import-ssh-key needs improving
-    Lp 1554700
-
-  * Help text for juju list-ssh-keys needs improving
-    Lp 1554705
-
-  * Help text for juju add-ssh-key needs improving
-    Lp 1557380
-
-  * Help text for juju remove ssh key needs improving
-    Lp 1558078
-
-  * Help text for juju set-constraints needs improving
-    Lp 1563932
-
-  * Help text for juju get-constraints needs improving
-    Lp 1563939
-
-  * Help text for juju set-config needs improving
-    Lp 1563942
-
-  * Help text for juju debug-log needs improving
-    Lp 1563950
-
-  * Help text for juju scp needs improving
-    Lp 1563956
-
-  * Help text for juju get-config needs improving
-    Lp 1564515
-
-  * Help text for juju remove-credential needs improving
-    Lp 1566332
-
-  * Help text for juju add-credential needs improving
-    Lp 1566362
-
-  * Help text for juju upgrade-juju needs improving
-    Lp 1566367
-
-  * Help text for juju ssh needs improving
-    Lp 1566369
-
-  * Help text for juju list-shares needs improving
-    Lp 1567719
-
-  * Help text for juju set-default-credential needs improving
-    Lp 1567721
-
-  * Help text for juju list-credentials needs improving
-    Lp 1567722
-
-  * Help text for juju add-cloud needs improving
-    Lp 1567724
-
-  * Help text for juju disable-user needs improving
-    Lp 1567726
-
-  * Help text for juju enable-user needs improving
-    Lp 1567728
-
-  * Help text for juju unexpose needs improving
-    Lp 1567730
-
-  * Help text for juju expose needs improving
-    Lp 1567732
-
-  * Help text for juju set-default-region needs improving
-    Lp 1567734
-
-  * Help text for juju add-unit needs improving
-    Lp 1567925
-
-  * Help text for juju bootstrap needs improving
-    Lp 1568848
-
-  * Help text for juju needs improving
-    Lp 1568862
-
-  * Help text for juju grant needs improving
-    Lp 1569652
-
-  * Help text for juju revoke needs improving
-    Lp 1569654
-
-  * Help text for juju show-controller needs improving
-    Lp 1569914
-
-  * Help text for juju list-machines needs improving
-    Lp 1569948
-
-  * Unhelpful error message shown when metered deployment fails
-    Lp 1571054
+  * Juju terms language confusing for locally-deployed charms
+    Lp 1573148
