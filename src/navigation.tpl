@@ -25,6 +25,16 @@
                 <li><a href="getting-started.html#testing-your-setup">Testing your setup</a></li>
             </ul>
         </li>
+        <li class="section"><a class="header" href="users.html">Users</a>
+            <ul class="sub">
+                <li><a href="users-auth.html">Authentication</a></li>
+                <li><a href="users-creating.html">Creating users</a></li>
+                <li><a href="users-models.html">Users and models</a></li>
+                <li><a href="users-manage.html">User management</a></li>
+                <li><a href="users-sample-commands.html">Sample commands</a></li>
+                <li><a href="users-workflows.html">Workflow scenarios</a></li>
+            </ul>
+        </li>
         <li class="section"><a class="header" href="clouds.html">Clouds</a>
             <ul class="sub">
                 <li><a href="credentials.html">Credentials</a></li>
