@@ -11,18 +11,20 @@ using a pre-release version of Juju, please also refer to the release notes
 for caveats and install information. There are many broken links etc, this is 
 all work in progress
 
+
 # Getting started with Juju
 
 Before you start on your Juju adventure, please make sure you have the 
 following:
 
-  - An Ubuntu, CentOS, MacOSX, or Windows machine to install the client on.
-  - Credentials to access a cloud (e.g. AWS, GCE, OpenStack...)
-  - An SSH key-pair. On Linux and Mac OSX: `ssh-keygen -t rsa -b 2048` On Windows:
+- An Ubuntu, CentOS, MacOSX, or Windows machine to install the client on.
+- Credentials to access a cloud (e.g. AWS, GCE, OpenStack...)
+- An SSH key-pair. On Linux and Mac OSX: `ssh-keygen -t rsa -b 2048` On Windows:
   See the [Windows instructions for SSH and PuTTY][keygen].
 
 The rest of this page will guide you through installing the software, accessing
 your cloud and deploying a test workload.
+
 
 # 1. Install Juju
 
@@ -35,7 +37,8 @@ PPA:
 
 ```bash
 sudo add-apt-repository ppa:juju/devel
-sudo apt-get update && sudo apt-get install juju2
+sudo apt update
+sudo apt install juju
 ```
 
 !!! Note: the above currently installs the 'devel' version of Juju, for 
@@ -72,7 +75,10 @@ azure-china  azure       chinaeast, chinanorth
 cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
 google       gce         us-east1, us-central1, europe-west1, asia-east1
 joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
-rackspace    rackspace   DFW, ORD, IAD, LON, SYD, HKG
+lxd          lxd         localhost
+maas         maas        
+manual       manual      
+rackspace    rackspace   dfw, ord, iad, lon, syd, hkg
 ```
 
 Juju already knows how to talk to these cloud providers, but it can also work 
@@ -89,13 +95,14 @@ Juju just needs your credentials for accessing the cloud.
 !!! Note: alpha/beta versions require some extra configuration for streams, 
 see the release notes!
 
+
 # 3. Enter your credentials
 
 Juju currently uses three possible ways to get your credentials for a cloud:
   
-  - Scanning appropriate environment variables for credentials
-  - Reading its own credentials.yaml file
-  - Passing the values on the commandline when bootstrapping
+- Scanning appropriate environment variables for credentials
+- Reading its own credentials.yaml file
+- Passing the values on the commandline when bootstrapping
   
 ^# Using environment variables  
 
@@ -165,6 +172,7 @@ named cloud unless another is specified.
 (For more help with credentials, auth-types and the commands mentioned here, 
 please [see this guide to credentials][credentials]) 
 
+
 # 4. Bootstrap
 
 Before you can start using Juju to spin up services in a cloud, it needs to 
@@ -192,7 +200,6 @@ plenty of feedback in your shell.
 
 
 # 5. Testing 
-
 
 Juju is now ready to deploy any services from the hundreds included in the
 [juju charm store](https://jujucharms.com). It is a good idea to test your new 

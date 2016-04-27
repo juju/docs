@@ -19,23 +19,24 @@ binary actually comes from the `lxd-client` package.
 
 ## Prerequisites
 
-LXD currently works only on Ubuntu 15.10 (Wily) and Ubuntu 16.04 (Xenial). For
-15.10, perform these additional steps:
+LXD currently works only on Ubuntu 15.10 (Wily) and Ubuntu 16.04 (Xenial).
+
+For 15.10, use a PPA to get the latest software:
 
 ```bash
 sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
-sudo apt-get update
-sudo apt-get install lxd
-newgrp lxd
+sudo apt update
 ```
 
-LXD is pre-installed on 16.04 cloud images. Users of regular Xenial ISOs will
-need to install it:
+Install LXD:
 
 ```bash
-sudo apt-get install lxd
+sudo apt install lxd
 newgrp lxd
 ```
+
+!!! Note: On 16.04, especially if you have Juju 2.0 installed, LXD may already
+be installed.
 
 
 ## Alternate backing file-system
@@ -44,7 +45,7 @@ LXD can optionally use an alternative file-system for containers. We recommend
 using ZFS for the best experience. To use ZFS with LXD enter these commands:
 
 ```bash
-sudo apt-get install zfsutils-linux
+sudo apt install zfsutils-linux
 sudo mkdir /var/lib/zfs
 sudo truncate -s 32G /var/lib/zfs/lxd.img
 sudo zpool create lxd /var/lib/zfs/lxd.img
@@ -60,12 +61,8 @@ device if available.
 It is time to create the controller for LXD. Below, we call it 'lxd-xenial':
 
 ```bash
-juju bootstrap --config default-series=xenial lxd-xenial lxd
+juju bootstrap lxd-test lxd
 ```
-
-!!! Note: The 'default-series' option was used because, at time of writing,
-Xenial was not officially released. LXD defaults to the most recent LTS
-release.
 
 This will result in the controller being visible with the LXC client:
 
