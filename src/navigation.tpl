@@ -6,35 +6,7 @@
         <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
         <li><a href="getting-started.html">Getting Started</a></li>
         <li><a href="juju-concepts.html">Juju concepts</a></li>
-        <li class="section"><a class="header" href="getting-started-general.html">Install &amp; Configure</a>
-            <ul class="sub">
-                <li><a href="config-aws.html">Amazon Web Service</a></li>
-                <li><a href="config-azure.html">Windows Azure</a></li>
-                <li><a href="config-digitalocean.html">DigitalOcean</a></li>
-                <li><a href="config-gce.html">Google Compute Engine</a></li>
-                <li><a href="config-joyent.html">Joyent</a></li>
-                <li><a href="config-local.html">Local</a></li>
-                <li><a href="config-maas.html">MAAS (bare metal)</a></li>
-                <li><a href="config-openstack.html">OpenStack</a></li>
-                <li><a href="config-rackspace.html">Rackspace</a></li>
-                <li><a href="config-scaleway.html">Scaleway</a></li>
-                <li><a href="config-vagrant.html">Vagrant</a></li>
-                <li><a href="config-vmware.html">VMWare vSphere</a></li>
-                <li><a href="config-manual.html">Manual Provisioning</a></li>
-                <li><a href="config-general.html">General config options</a></li>
-                <li><a href="getting-started.html#testing-your-setup">Testing your setup</a></li>
-            </ul>
-        </li>
-        <li class="section"><a class="header" href="users.html">Users</a>
-            <ul class="sub">
-                <li><a href="users-auth.html">Authentication</a></li>
-                <li><a href="users-creating.html">Creating users</a></li>
-                <li><a href="users-models.html">Users and models</a></li>
-                <li><a href="users-manage.html">User management</a></li>
-                <li><a href="users-sample-commands.html">Sample commands</a></li>
-                <li><a href="users-workflows.html">Workflow scenarios</a></li>
-            </ul>
-        </li>
+        <li><a href="getting-started-general.html">Install &amp; Configure</a></li>
         <li class="section"><a class="header" href="clouds.html">Clouds</a>
             <ul class="sub">
                 <li><a href="credentials.html">Credentials</a></li>
@@ -66,6 +38,16 @@
                 <li><a href="charms-working-with-units.html">Working with Units</a></li>
                 <li><a href="actions.html">Working with Actions</a></li>
                 <li><a href="charms-storage.html">Using storage</a></li>
+            </ul>
+        </li>
+        <li class="section"><a class="header" href="users.html">Users</a>
+            <ul class="sub">
+                <li><a href="users-auth.html">Authentication</a></li>
+                <li><a href="users-creating.html">Creating users</a></li>
+                <li><a href="users-models.html">Users and models</a></li>
+                <li><a href="users-manage.html">User management</a></li>
+                <li><a href="users-sample-commands.html">Sample commands</a></li>
+                <li><a href="users-workflows.html">Workflow scenarios</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="juju.html">Managing Juju</a>
