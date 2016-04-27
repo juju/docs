@@ -31,15 +31,14 @@ documentation talks about "Controllers" and "models" instead. Why? Part of this
 is to do with the way Juju organises itself - now multiple models (environments)
 can be driven from one controller (state-server). This means that for a given
 cloud you only need one controller, but can drive several models. You should 
-also check through the [multi-user](./juju-multiuser-environments.html) 
-documentation to understand how these models can be shared amongst multiple
-users.
+also check through the [documentation about users][users]
+to understand how these models can be shared.
 
   - **Providers:** As well as updates to the Azure provider and the new 
 Rackspace provider, Juju now makes extensive use of LXD. This makes 'local' 
 models leaner and faster and also brings benefits to placing containers within 
 models. You can find out more about setting up 
-[LXD for Juju here](./config-LXD.html).
+[LXD for Juju here][lxd].
 
 ## MAAS 2.0
 
@@ -62,6 +61,6 @@ to explain how to manage both versions, and how to upgrade when it does become
 available
 
 
-
-
+[lxd]: ./clouds-LXD.html
+[users]: ./users.html
 
