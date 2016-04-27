@@ -18,12 +18,12 @@ and deploy charms to your environment.
 
 Juju GUI is now automatically included in every Juju controller after 
 bootstrapping, thus eliminating the need to additionally deploy the Juju GUI 
-charm. As it's part of he controller, it won't appear as a normally deployed 
+charm. As it's part of the controller, it won't appear as a normally deployed 
 service.
 
 To open Juju GUI in your default browser, use following command:
 
-```
+```bash
 juju gui
 ```
 
@@ -31,13 +31,13 @@ If no default browser is available or configured, the output of this command
 will include a URL that can be used by any web browser with access to your 
 controller:
 
-```
+```no-highlight
 Opening the Juju GUI in your browser.
 If it does not open, open this URL:
 https://10.175.11.52:17070/gui/65c422e3-3c32-4155-8b49-f428a888e6dc/
 ```
 
-**Note:** If you are deploying behind a firewall, make sure to check out the 
+!!! Note: If you are deploying behind a firewall, make sure to check out the 
 charm's [README](https://jujucharms.com/juju-gui/) for more information on 
 getting the GUI up and running and talking to your environment
 
@@ -46,7 +46,7 @@ credentials to access the model. If you want to output your credentials in the
 terminal for easier copy/paste into the login window, run the following 
 command:
 
-```
+```bash
 juju gui --show-credentials 
 ```
 
@@ -63,7 +63,7 @@ The rings represent services running on the current model and by selecting the
 service, you can also see a more in-depth list of units and their states, as 
 well as further information about them such as their relations, whether 
 they're exposed and other details. Using the drop-down menu to the right of 
-your username at the top, can also use the GUI to create and switch between 
+your username at the top, you can also use the GUI to create and switch between 
 your various models.
 
 ![](./media/gui_management-unit.png)
@@ -114,16 +114,13 @@ them.
 
 The `upgrade-gui` command downloads the latest published GUI from the streams 
 and replaces the one on the controller. To verify which versions of the GUI 
-are available before the upgrade, try:
+are available before the upgrade, try ```juju upgrade-gui --list```.
 
-```
-juju upgrade-gui --list
-```
 If you want to upgrade (or downgrade) to a specific version of the GUI, 
 provide the revision as a parameter to the upgrade-gui command, where the 
 revision listed by the juju upgrade-gui --list. For example:
 
-```
+```bash
 juju upgrade-gui 2.1.1 
 ```
 
@@ -131,7 +128,7 @@ If you'd like to try a version of the GUI that has not been published in the
 streams and is not listed yet, you are able to provide the blob either from a 
 charm or from the manually built GUI. For example:
 
-```
+```bash
 juju upgrade-gui /path/to/release.tar.bz2
 ```
 In order to upgrade the GUI, you'll have to have proper access rights to the 
@@ -180,7 +177,7 @@ with all of their meta-data, in a read-only mode, meaning that you will not be
 able to make changes to the environment through the GUI. This is good for a
 monitoring type scenario.
 
-**Note:** read-only mode in the GUI simply prevents actions taken within the 
+!!! Note: read-only mode in the GUI simply prevents actions taken within the 
 GUI from being sent to the Juju environment, and is _not_ additional security 
 against the Juju API.
 
