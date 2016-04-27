@@ -57,7 +57,7 @@ uses for the GUI is that of monitoring. The GUI provides not only an overview
 of the health of your environment and the services comprising it, but also 
 details of the units and machines comprising those services.
 
-![](./media/gui_management-status.png)
+![](./media/gui2_management-status.png)
 
 The rings represent services running on the current model and by selecting the 
 service, you can also see a more in-depth list of units and their states, as 
@@ -66,7 +66,7 @@ they're exposed and other details. Using the drop-down menu to the right of
 your username at the top, you can also use the GUI to create and switch between 
 your various models.
 
-![](./media/gui_management-unit.png)
+![](./media/gui2_management-add-model.png)
 
 The GUI can be used to offer insight into not only the status of your cloud
 deployment, but also the overall structure of your services and how they are
@@ -90,7 +90,7 @@ updates. From here, you can add the charm to your environment by clicking 'Add
 to canvas' which
 will then give you the option to configure and deploy a new service.
 
-![](./media/gui_management-charmstore.png)
+![](./media/gui2_management-charmstore.png)
 
 Once deployed, clicking on the service will allow you to not only view the 
 units and machines comprising it, but also to scale the service out or back, 
@@ -102,7 +102,7 @@ relationships, such as a master or slave database - by clicking the 'add
 relation' menu item on one service, and then clicking on the destination
 service.
 
-![](./media/gui_management-build_relation.png)
+![](./media/gui2_management-relationship.png)
 
 The GUI will attempt to position services automatically so that they do not
 overlap. However, you may drag the services around the canvas so that they're
