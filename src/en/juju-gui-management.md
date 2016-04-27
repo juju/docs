@@ -2,14 +2,24 @@ Title: The Juju GUI
 
 # The Juju GUI
 
-Juju has a graphical user interface (GUI) available to help with the tasks of managing and monitoring your Juju environment. From Juju 2.0 onwards, unless you bootstrap your controller with the `--no-gui` option, the GUI is automatically embedded within every Juju controller.
+Juju has a graphical user interface (GUI) available to help with the tasks of 
+managing and monitoring your Juju environment. From Juju 2.0 onwards, unless 
+you bootstrap your controller with the `--no-gui` option, the GUI is 
+automatically embedded within every Juju controller.
 
-The GUI is a JavaScript and HTML web application that is encapsulated in its own charm. Once installed, the GUI will talk with Juju over a websocket to provide a real-time interface with the services installed, the units that comprise them, and the machines available. Additionally, the GUI can talk with the charm store in order to search, browse,
+The GUI is a JavaScript and HTML web application that is encapsulated in its 
+own charm. Once installed, the GUI will talk with Juju over a websocket to 
+provide a real-time interface with the services installed, the units that 
+comprise them, and the machines available. Additionally, the GUI can talk with 
+the charm store in order to search, browse,
 and deploy charms to your environment.
 
 # Using the GUI
 
-Juju GUI is now automatically included in every Juju controller after bootstrapping, thus eliminating the need to additionally deploy the Juju GUI charm. As it's part of he controller, it won't appear as a normally deployed service.
+Juju GUI is now automatically included in every Juju controller after 
+bootstrapping, thus eliminating the need to additionally deploy the Juju GUI 
+charm. As it's part of he controller, it won't appear as a normally deployed 
+service.
 
 To open Juju GUI in your default browser, use following command:
 
@@ -17,7 +27,9 @@ To open Juju GUI in your default browser, use following command:
 juju gui
 ```
 
-If no default browser is available or configured, the output of this command will include a URL that can be used by any web browser with access to your controller:
+If no default browser is available or configured, the output of this command 
+will include a URL that can be used by any web browser with access to your 
+controller:
 
 ```
 Opening the Juju GUI in your browser.
@@ -25,9 +37,14 @@ If it does not open, open this URL:
 https://10.175.11.52:17070/gui/65c422e3-3c32-4155-8b49-f428a888e6dc/
 ```
 
-**Note:** If you are deploying behind a firewall, make sure to check out the charm's [README](https://jujucharms.com/juju-gui/) for more information on getting the GUI up and running and talking to your environment
+**Note:** If you are deploying behind a firewall, make sure to check out the 
+charm's [README](https://jujucharms.com/juju-gui/) for more information on 
+getting the GUI up and running and talking to your environment
 
-You are greeted with the login window, where you will have to provide the credentials to access the model. If you want to output your credentials in the terminal for easier copy/paste into the login window, run the following command:
+You are greeted with the login window, where you will have to provide the 
+credentials to access the model. If you want to output your credentials in the 
+terminal for easier copy/paste into the login window, run the following 
+command:
 
 ```
 juju gui --show-credentials 
@@ -35,11 +52,19 @@ juju gui --show-credentials
 
 ## Monitoring
 
-The GUI connects to the model that is currently active, and one of the primary uses for the GUI is that of monitoring. The GUI provides not only an overview of the health of your environment and the services comprising it, but also details of the units and machines comprising those services.
+The GUI connects to the model that is currently active, and one of the primary 
+uses for the GUI is that of monitoring. The GUI provides not only an overview 
+of the health of your environment and the services comprising it, but also 
+details of the units and machines comprising those services.
 
 ![](./media/gui_management-status.png)
 
-The rings represent services running on the current model and by selecting the service, you can also see a more in-depth list of units and their states, as well as further information about them such as their relations, whether they're exposed and other details. Using the drop-down menu to the right of your username at the top, can also use the GUI to create and switch between your various models.
+The rings represent services running on the current model and by selecting the 
+service, you can also see a more in-depth list of units and their states, as 
+well as further information about them such as their relations, whether 
+they're exposed and other details. Using the drop-down menu to the right of 
+your username at the top, can also use the GUI to create and switch between 
+your various models.
 
 ![](./media/gui_management-unit.png)
 
@@ -57,13 +82,20 @@ Charm Store, allowing you to deploy hundreds of different services to your
 environment, or even to a sandbox environment, which you can then export to use
 later.
 
-Clicking on the 'Store' button will give you access to all the available charms. Selecting an individual charm will provide further details about the charm, including
-a general overview, its relations, which files it includes and any recent updates. From here, you can add the charm to your environment by clicking 'Add to canvas' which
+Clicking on the 'Store' button will give you access to all the available 
+charms. Selecting an individual charm will provide further details about the 
+charm, including
+a general overview, its relations, which files it includes and any recent 
+updates. From here, you can add the charm to your environment by clicking 'Add 
+to canvas' which
 will then give you the option to configure and deploy a new service.
 
 ![](./media/gui_management-charmstore.png)
 
-Once deployed, clicking on the service will allow you to not only view the units and machines comprising it, but also to scale the service out or back, change constraints on new units, re-configure the service, resolve or retry units in an error state and more.
+Once deployed, clicking on the service will allow you to not only view the 
+units and machines comprising it, but also to scale the service out or back, 
+change constraints on new units, re-configure the service, resolve or retry 
+units in an error state and more.
 
 Relations can be added between services - even in the case of ambiguous
 relationships, such as a master or slave database - by clicking the 'add
@@ -80,27 +112,36 @@ them.
 
 ## Upgrading Juju GUI
 
-The `upgrade-gui` command downloads the latest published GUI from the streams and replaces the one on the controller. To verify which versions of the GUI are available before the upgrade, try:
+The `upgrade-gui` command downloads the latest published GUI from the streams 
+and replaces the one on the controller. To verify which versions of the GUI 
+are available before the upgrade, try:
 
 ```
 juju upgrade-gui --list
 ```
-If you want to upgrade (or downgrade) to a specific version of the GUI, provide the revision as a parameter to the upgrade-gui command, where the revision listed by the juju upgrade-gui --list. For example:
+If you want to upgrade (or downgrade) to a specific version of the GUI, 
+provide the revision as a parameter to the upgrade-gui command, where the 
+revision listed by the juju upgrade-gui --list. For example:
 
 ```
 juju upgrade-gui 2.1.1 
 ```
 
-If you'd like to try a version of the GUI that has not been published in the streams and is not listed yet, you are able to provide the blob either from a charm or from the manually built GUI. For example:
+If you'd like to try a version of the GUI that has not been published in the 
+streams and is not listed yet, you are able to provide the blob either from a 
+charm or from the manually built GUI. For example:
 
 ```
 juju upgrade-gui /path/to/release.tar.bz2
 ```
-In order to upgrade the GUI, you'll have to have proper access rights to the controller. When an administrator upgrades the GUI, the users will have to reload the open sessions in the browser.
+In order to upgrade the GUI, you'll have to have proper access rights to the 
+controller. When an administrator upgrades the GUI, the users will have to 
+reload the open sessions in the browser.
 
 # Manual Installation
 
-If you opted to not install the Juju GUI when bootstrapping the controller, manual installation works the same as installing any other charm:
+If you opted to not install the Juju GUI when bootstrapping the controller, 
+manual installation works the same as installing any other charm:
 
 ```bash
 juju deploy juju-gui
@@ -108,9 +149,12 @@ juju expose juju-gui
 ```
 
 Once the service is deployed and exposed, you can find the address for the GUI
-by running juju status and looking for the public-address field for the juju-gui service.
+by running juju status and looking for the public-address field for the 
+juju-gui service.
 
-You can also deploy the GUI along-side another service on an existing machine. This might be the case if you wish to conserve resources. The following command will deploy juju-gui to an existing machine 1:
+You can also deploy the GUI along-side another service on an existing machine. 
+This might be the case if you wish to conserve resources. The following 
+command will deploy juju-gui to an existing machine 1:
 
 ```bash
 juju deploy --to 1 juju-gui
@@ -122,7 +166,10 @@ it is available in your version.
 
 ## Configuration
 
-There are a few pertinent configuration options that might help you when working with the GUI. You can read about all of them on the GUI's [charm page](https://jujucharms.com/juju-gui/), but there is one that is worth discussing immediately:
+There are a few pertinent configuration options that might help you when 
+working with the GUI. You can read about all of them on the GUI's [charm 
+page](https://jujucharms.com/juju-gui/), but there is one that is worth 
+discussing immediately:
 
 ```no-highlight
 read-only
@@ -133,7 +180,9 @@ with all of their meta-data, in a read-only mode, meaning that you will not be
 able to make changes to the environment through the GUI. This is good for a
 monitoring type scenario.
 
-**Note:** read-only mode in the GUI simply prevents actions taken within the GUI from being sent to the Juju environment, and is _not_ additional security against the Juju API.
+**Note:** read-only mode in the GUI simply prevents actions taken within the 
+GUI from being sent to the Juju environment, and is _not_ additional security 
+against the Juju API.
 
 
 
