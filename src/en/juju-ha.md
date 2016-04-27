@@ -51,8 +51,7 @@ state servers nor remove the failed ones. However, as long as more than half of
 the original number of state servers remain available you can manually recover.
 The process is detailed below.
 
-1. Run `juju enable-ha`. This process can take between 30 seconds to 20 
-   minutes depending on machine resources and Juju data volume.
+1. Run `juju enable-ha`.
 1. Verify that the output of `juju status` shows a value of `has-vote` for 
    the `controller-member-status` attribute for each new server and a value of
    `no-vote` for each old server. Once confirmed, the new servers are fully
