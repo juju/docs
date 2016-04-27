@@ -53,6 +53,12 @@ The process is detailed below.
 
 1. Run `juju enable-ha`. This process can take between 30 seconds to 20 
    minutes depending on machine resources and Juju data volume.
+1. Verify that the output of `juju status` shows a value of `has-vote` for 
+   the `controller-member-status` attribute for each new server and a value of
+   `no-vote` for each old server. Once confirmed, the new servers are fully
+   operational as cluster members and the old servers have been demoted (no longer
+   part of HA). This process can take between 30 seconds to 20 minutes depending
+   on machine resources and Juju data volume.
 1. Run `juju enable-ha` again to have Juju no longer consider the
    old machines as state servers.
 1. Use the `juju remove-machine` command to remove the old machines entirely.
