@@ -3,6 +3,8 @@ Title: Getting started with Juju
 
 # Introduction
 
+**Note:** If you've arrived here from Xenial you should read the docs for [Juju 2.0](https://jujucharms.com/docs/devel/getting-started)
+
 This tutorial will explain how to get started with Juju, including installing,
 configuring, and bootstrapping a new Juju environment. Prerequisites include:
 
