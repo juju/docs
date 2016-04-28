@@ -1,4 +1,5 @@
 Title: Juju High Availability  
+TODO: Remove citation of HA logging bug when fixed (section: 'HA and logging')
 
 
 # High Availability
@@ -71,13 +72,13 @@ in this case.
 
 ## HA and logging
 
-All Juju units send logs to all state servers in the HA cluster and the user
-accesses those logs in the usual manner, via `juju debug-log` 
-or by viewing the logs directly. See [Viewing logs](./troubleshooting-logs.html).
+All Juju machines send their logs to a controller in the HA cluster and the user
+accesses those logs via `juju debug-log`. See
+[Viewing logs](./troubleshooting-logs.html).
 
-Logging to a state server begins once it becomes fully operational. One caveat
-is that past cluster logs are not sent to the new "slave" state server. It
-should therefore be noted that all state servers are not guaranteed to house
-the same logs. In particular, this should be understood when using `juju
-debug-log` as this triggers a connection to be made to a random state server.
-This will be corrected in the near future (past logs will be synced).
+A controller accepts logs once it becomes fully operational. One caveat is that
+past cluster logs are not sent to the new "slave" controller. It should
+therefore be noted that all controllers are not guaranteed to house the same
+logs. In particular, this should be understood when using `juju debug-log` as
+this triggers a connection to be made to a random controller. This will be
+corrected in the near future (past logs will be synced).
