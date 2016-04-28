@@ -1,10 +1,11 @@
-Title: Removing services, units and environments in Juju  
+Title: Removing services, units and machines in Juju  
 
 
 # Removing services, units and environments
 
 Juju can sanely and efficiently remove something when you no longer need it.
-This section looks at how to remove services, units and environments.
+This section looks at how to remove services, units and environments. To 
+remove a model see the [models documentation][models].
 
 
 ## Removing a service
@@ -15,10 +16,10 @@ Once a service is no longer required it can be removed with:
 juju remove-service <service-name>
 ```
 
-!!! Warning: Removing a service which has active relations with another
-running service will break that relation. This can cause errors in both
-services. Make sure you review this aspect and, if required, remove the
-relations first.
+!!! Note: Removing a service which has active relations with another
+running service will terminate that relation. Charms are written
+to handle this, but be aware that the other service may no 
+longer work as expected.
 
 This is the order of events for removing a service:
 
@@ -39,16 +40,10 @@ service is listed as dying, but also reports an error state, then the removed
 service will not go away. See the 'Caveats' section below for how to manage services
 stuck in a dying state.
 
-!!! Note: It is the responsibility of the charm author to implement the above
-'stop hook' logic.
-
-Any associated instances are tagged "dirty" to ensure they will not be reused.
-These can then be removed manually. See the 'Removing Machines' section below.
-
 
 ## Removing units
 
-It is possible to spin down individual units instead of the entire service:
+It is possible to remove individual units instead of the entire service:
 
 ```bash
 juju remove-unit mediawiki/1
@@ -60,9 +55,8 @@ To remove multiple units:
 juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2
 ```
 
-**Note:** Like service removal, unit removal will not remove corresponding
-machines/instances. More details can be found in the
-[Scaling Services](./charms-scaling.html) section.
+In the case that these are the only units running on a machine, unless that machine
+was created manually with `juju add machine`, the machine will also be removed.
 
 See section 'Caveats' below for how to manage units in a dying state.
 
@@ -81,21 +75,6 @@ to a service. If attempted, this message will be emitted:
 ```no-highlight
 error: no machines were destroyed: machine 3 has unit "mysql/0" assigned
 ```
-
-
-## Destroying the environment
-
-Destroying the environment means to remove all running services, their
-associated instances and the bootstrap node itself:
-
-```bash
-juju destroy-environment <environment>
-```
-
-!!! Note: Older versions required the use of the environment switch ('-e') with
-this command. This switch is no longer required for this command.
-
-Due to the gravity of this action, you will be prompted for a confirmation.
 
 
 ## Removing relations
@@ -126,3 +105,6 @@ There may be errors on other units caused by the breaking of relations that
 occur when removing a unit or service. Therefore also verify that the
 associated units are not in an error state and apply the above command to them
 if they are.
+
+
+[models]: ./models-destroying.html

@@ -11,18 +11,20 @@ using a pre-release version of Juju, please also refer to the release notes
 for caveats and install information. There are many broken links etc, this is 
 all work in progress
 
+
 # Getting started with Juju
 
 Before you start on your Juju adventure, please make sure you have the 
 following:
 
-  - An Ubuntu, CentOS, MacOSX, or Windows machine to install the client on.
-  - Credentials to access a cloud (e.g. AWS, GCE, OpenStack...)
-  - An SSH key-pair. On Linux and Mac OSX: `ssh-keygen -t rsa -b 2048` On Windows:
+- An Ubuntu, CentOS, MacOSX, or Windows machine to install the client on.
+- Credentials to access a cloud (e.g. AWS, GCE, OpenStack...)
+- An SSH key-pair. On Linux and Mac OSX: `ssh-keygen -t rsa -b 2048` On Windows:
   See the [Windows instructions for SSH and PuTTY][keygen].
 
 The rest of this page will guide you through installing the software, accessing
 your cloud and deploying a test workload.
+
 
 # 1. Install Juju
 
@@ -35,7 +37,8 @@ PPA:
 
 ```bash
 sudo add-apt-repository ppa:juju/devel
-sudo apt-get update && sudo apt-get install juju2
+sudo apt update
+sudo apt install juju
 ```
 
 !!! Note: the above currently installs the 'devel' version of Juju, for 
@@ -72,7 +75,10 @@ azure-china  azure       chinaeast, chinanorth
 cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
 google       gce         us-east1, us-central1, europe-west1, asia-east1
 joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
-rackspace    rackspace   DFW, ORD, IAD, LON, SYD, HKG
+lxd          lxd         localhost
+maas         maas        
+manual       manual      
+rackspace    rackspace   dfw, ord, iad, lon, syd, hkg
 ```
 
 Juju already knows how to talk to these cloud providers, but it can also work 
@@ -89,78 +95,64 @@ Juju just needs your credentials for accessing the cloud.
 !!! Note: alpha/beta versions require some extra configuration for streams, 
 see the release notes!
 
+
 # 3. Enter your credentials
 
 Juju currently uses three possible ways to get your credentials for a cloud:
   
-  - Scanning appropriate environment variables for credentials
-  - Reading its own credentials.yaml file
-  - Passing the values on the commandline when bootstrapping
+- Scanning appropriate environment variables for credentials
+- Reading its own credentials.yaml file
+- Passing the values on the commandline when bootstrapping
   
-## Using environment variables  
+^# Using environment variables  
 
-Some cloud providers (e.g. AWS, Openstack) have commandline tools which rely on
-environment variables being used to store credentials. If these are in use on
-your system already, or you choose to define them ([there is extra info here][env]), 
-Juju will use them too.
+   Some cloud providers (e.g. AWS, Openstack) have commandline tools which rely on environment variables being used to store credentials. If these are in use on your system already, or you choose to define them ([there is extra info here][env]), Juju will use them too.
 
-For example, AWS uses the following environment variables (among others):
+   For example, AWS uses the following environment variables (among others):
   
-  **`AWS_ACCESS_KEY_ID`**
+     **`AWS_ACCESS_KEY_ID`**
   
-  **`AWS_SECRET_ACCESS_KEY`**
+    **`AWS_SECRET_ACCESS_KEY`**
 
-If these are already set in your shell (you can `echo $AWS_ACCESS_KEY_ID` to 
-test) they can be used by Juju.
+   If these are already set in your shell (you can `echo $AWS_ACCESS_KEY_ID` to test) they can be used by Juju.
 
-To store these credentials permanently for Juju, it is recommended to run the 
-command:
+   To store these credentials permanently for Juju, it is recommended to run the command:
 
-```bash
-juju autoload-credentials
-```  
+        juju autoload-credentials
 
 
-## Specifying credentials
 
-Juju maintains a file of known credentials 
-(`~/.local/share/juju/credentials.yaml` on Ubuntu) for accessing clouds. You can
-add credentials by running the command:
+^# Specifying credentials
+
+   Juju maintains a file of known credentials 
+   (`~/.local/share/juju/credentials.yaml` on Ubuntu) for accessing clouds. You can add credentials by running the command:
   
-```bash
-juju add-credential <cloud>
-```  
-Juju will then interactively ask for the information it needs. This may vary 
-according to the cloud you are using, but will typically look something like
-this:
+       juju add-credential <cloud>
   
-```bash
-juju add-credential aws 
-credential name: carol
-select auth-type [userpass, oauth, etc]: userpass
-enter username: cjones
-enter password: *******
-```
-You can also specify a YAML format source file for the credentials. The source
-file would be similar to:
-
-```yaml
-credentials:
-  aws:
-    default-credential: bob
-    default-region: us-east-1
-    bob:
-      auth-type: access-key
-      access-key: AHJHKUWK7HIW
-      secret-key: 21f8cbb668263a1223755b5f15c48a
-```
-
-A source file like the above can be added to Juju's list of credentials with
-the command:
+   Juju will then interactively ask for the information it needs. This may vary according to the cloud you are using, but will typically look something like this:
   
-```bash
-juju add-credential aws -f mycreds.yaml
-```
+        juju add-credential aws 
+       credential name: carol
+       select auth-type [userpass, oauth, etc]: userpass
+       enter username: cjones 
+       enter password: *******
+  
+   You can also specify a YAML format source file for the credentials. The source file would be similar to:
+
+         credentials:
+         aws:
+           default-credential: bob
+           default-region: us-east-1
+           bob:
+             auth-type: access-key
+             access-key: AHJHKUWK7HIW
+             secret-key: 21f8cbb668263a1223755b5f15c48a
+  
+    A source file like the above can be added to Juju's list of credentials with the command:
+  
+          juju add-credential aws -f mycreds.yaml
+  
+ 
 
 You can check what credentials are stored by Juju by running the command:
   
@@ -179,6 +171,7 @@ named cloud unless another is specified.
 
 (For more help with credentials, auth-types and the commands mentioned here, 
 please [see this guide to credentials][credentials]) 
+
 
 # 4. Bootstrap
 
@@ -208,88 +201,55 @@ plenty of feedback in your shell.
 
 # 5. Testing 
 
-!!! Note: This section not yet updated for 2.0
-
-With the Juju controller running, you can now start deploying services. 
-
-To start with, we will deploy WordPress:
+Juju is now ready to deploy any services from the hundreds included in the
+[juju charm store](https://jujucharms.com). It is a good idea to test your new 
+model. How about a Mediawiki site?
 
 ```bash
-juju deploy wordpress
+juju deploy mediawiki-single
 ```
+This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
+of services, in this case the 'Mediawiki' service, and a database to run it 
+with. Juju will install both these services and add a relation between them - 
+this is part of the magic of Juju: it isn't just about deploying services, Juju 
+also knows how to connect them together.
 
-Juju will download and use the WordPress charm, through the bootstrap instance,
-to request and deploy whatever resources it needs to install this service.
-
-Since WordPress requires a database, we will deploy one:
-
-```bash
-juju deploy mysql
-```
-
-Again, Juju will do whatever is necessary to deploy this service for you,
-and it may take some time for the command to return.
-
-**Note:** If you want to get more information on what is actually happening,
-or to help resolve problems, you can add the `--show-log` switch to the juju
-command to get verbose output.
-
-Although we have deployed WordPress and a MySQL database, they are not linked
-together in any way yet. To do this we run:
-
-```bash
-juju add-relation wordpress mysql
-```
-
-This command uses information provided by the relevant charms to associate these
-services with each other in whatever way makes sense. There is much more to be
-said about linking services together which is covered in the Juju [command
-documentation](commands.html), but for the moment, we just need to know that it 
-will link these services together.
-
-In order to make our WordPress public, we now need to expose this service:
-
-```bash
-juju expose wordpress
-```
-
-This service will now be configured to respond to web requests, so visitors can
-see it. But where exactly is it? If we run the `juju status` command, we will be
-able to see what services are running, and where they are located.
-
+Installing shouldn't take long. You can check on how far Juju has got by running
+the command:
+ 
 ```bash
 juju status
 ```
+When the services have been installed the output to the above command will look
+something like this:
 
-The output from this command should look something like this:
+![juju status](./media/juju-mediawiki-status.png)
 
-```no-highlight
+There is quite a lot of information there but the important parts for now are 
+the [Services] section, which show that Mediawiki and MySQL are installed, and
+the [Units] section, which crucially shows the IP addresses allocated to them.
 
-TO BE UPDATED
+By default, Juju is secure - you won't be able to connect to any services 
+unless they are specifically exposed. This adjusts the relevant firewall 
+controls (on any cloud, not just LXD) to allow external access. To make
+our Mediawiki visible, we run the command:
 
+```bash
+juju expose mediawiki
 ```
 
+From the status output, we can see that the Mediawiki service is running on 
+10.0.3.60 (your IP may vary). If we open up Firefox now and point it at that 
+address, you should see the site running.
 
-From this output, we can see that WordPress is exposed and ready. If we
-point a web browser at the address we should be able to access it:
-
-![WordPress in a web browser](./media/getting_started-wordpress.png)
+!["mediawiki site"](./media/juju-mediawiki-site.png)
 
 Congratulations, you have just deployed a service with Juju!
 
-Now you are ready to deploy whatever service you want from the 100s
-available at the [Juju Charm Store.](https://jujucharms.com).
+!!! Note: To remove all the services in the model you just created, it is 
+often quickest to destroy the model with the command 'juju destroy-model default` 
+and then create a new model.
 
-To remove all current deployments and clear everything in your cloud, you can
-run:
-
-```bash
-juju destroy-controller <controller-name>
-```
-
-Where `<controller-name>` is the name you gave the controller when you
-bootstrapped it. A warning will be displayed and the user will be prompted whether
-or not to continue. 
 
 # Next Steps
 

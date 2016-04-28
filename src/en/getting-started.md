@@ -1,43 +1,48 @@
 Title: Getting started with Juju 2.0
-Todo: remove ppa/devel after release
-      simplify zfs install
-      remove default-seies config
+TODO: remove ppa/devel after release
+      simplify ZFS install
+
 
 # Getting started with Juju 2.0
 
 The instructions here will get you up and running and deliver the best-possible
 experience. At the moment, that means using the very latest release of 
-Ubuntu, [16.04LTS (Xenial)](http://cdimage.ubuntu.com/releases/16.04/).
+Ubuntu, [16.04LTS (Xenial)](http://www.ubuntu.com/download/).
 
 If you are using a different OS, please read the 
 [general install instructions here](./getting-started-general.html).
 
 To get the best experience, as well as Juju, this guide will also set up:
    
-   - LXD - a hypervisor for LXC, providing fast, secure containers.
-   - ZFS - a combined filesystem/LVM which gives great performance.
+- LXD - a hypervisor for LXC, providing fast, secure containers.
+- ZFS - a combined filesystem/LVM which gives great performance.
 
 Both the above are provided with Ubuntu 16.04LTS.
 
-# Install the software
+
+## Install the software
 
 Run the following commands to install the required software:
 
-```no-highlight  
-  sudo add-apt-repository ppa:juju/devel
-  sudo apt update
-  sudo apt install zfsutils-linux
-  sudo apt install lxd
-  sudo apt install juju2
+```bash
+sudo add-apt-repository ppa:juju/devel
+sudo apt update
+sudo apt install juju zfsutils-linux lxd
+newgrp -
 ```
 
-# Prepare ZFS
+!!! Note: The `newgrp` command should only be necessary if package 'lxd' got
+installed (it may be already installed). This command will update your group
+memberships but will also start a new shell.
+
+
+## Prepare ZFS
 
 Using ZFS we can create sparse backing-storage for any of the containers which
 LXD creates for Juju. You can create this storage anywhere (e.g. the fastest
 drive you have). This example creates a 32G file to use:
 
-```no-highlight
+```bash
 sudo mkdir /var/lib/zfs
 sudo truncate -s 32G /var/lib/zfs/lxd.img
 sudo zpool create lxd /var/lib/zfs/lxd.img
@@ -47,46 +52,54 @@ As this is sparse storage, it won't actually take up disk space until it is
 actually being used. You can check the file has been added to a ZFS pool with 
 the following command:
   
-```no-highlight
-sudo zpool status
+```bash
+sudo zpool iostat -v
 ```
 
-This should indicate that the newly created pool is 'ONLINE' and ready.
 
-# Initialise LXD
+## Initialise LXD
 
-Now we need to tell LXD about this storage
+Now we need to tell LXD about this storage:
 
 ```bash
 sudo lxd init --auto --storage-backend zfs --storage-pool lxd
-newgrp - 
 ```
 
-To have the group changes take effect, you may now need to logout of your
-current session and log in once again, or execute the following in your shell:
-  
-```no-highlight
-su -l $USER
-```
-# Create a controller
 
-Juju needs to create a controller instance in the cloud to manage the models
-you create. We use the `juju bootstrap` command to create that controller. For 
-use with our LXD 'cloud', we will create a new controller called 'lxd-test':
+## Create a controller
+
+Juju needs a controller instance to manage your models and the `juju bootstrap`
+command is used to create one.
+
+However, if this is the first time using LXD then you'll need to configure it
+and expose a "network bridge" that Juju requires:
 
 ```bash
-juju bootstrap --config default-series=xenial lxd-test lxd
+sudo dpkg-reconfigure -p medium lxd
 ```
 
-This may take a few minutes as initially, LXD needs to download an image for 
-Xenial. 
+!!! Note: During the configuration dialog, the bridge must be 'lxdbr0'. You
+can accept all other prompts although the last question (IPv6) is probably not
+needed.
 
-Once the process has completed, Juju now has a controller. You can check this:
+Proceed with the creation of the controller. For use with our LXD "cloud", we
+will make a controller called 'lxd-test':
+
+```bash
+juju bootstrap lxd-test lxd
+```
+
+This may take a few minutes as LXD must download an image for Xenial. A cache
+will be used for subsequent containers.
+
+Once the process has completed you can check that the controller has been
+created:
 
 ```bash
 juju list-controllers 
 ```
-...will return a list of the controllers known to Juju, which at the moment is
+
+This will return a list of the controllers known to Juju, which at the moment is
 the one we just created:
   
 ```no-highlight
@@ -94,20 +107,34 @@ CONTROLLER       MODEL    USER         SERVER
 local.lxd-test*  default  admin@local  10.0.3.124:17070
 ```
 
-Creating a new controller automatically creates two empty models. The 'admin' 
-model, and a model called "default", which is automatically selected and ready for 
-use.
+Notice that the prefix 'local.' is added to the controller name we specified.
+
+Confirm ZFS is working by looking for changes to the storage pool:
+  
+```bash
+sudo zpool iostat -v
+```
+
+Newly-created controllers come bundled with two models: The 'admin' model,
+which should be used only by Juju for internal management, and a 'default'
+model, which is ready for actual use.
+
+The following command shows the currently active controller and model:
 
 ```bash 
 juju switch
 ```
-...will return model and controller we are currently using:
+
+In our example, the output should look like this:
 
 ```no-highlight
 local.lxd-test:default
 ```
 
-# Deploy!
+The format is 'controller:model'.
+
+
+## Deploy
 
 Juju is now ready to deploy any services from the hundreds included in the
 [juju charm store](https://jujucharms.com). It is a good idea to test your new 
@@ -154,24 +181,23 @@ address, you should see the site running.
 
 Congratulations, you have just deployed a service with Juju!
 
-!!! Note: To remove all the services in the model you just created, it is 
-often quickest to destroy the model with the command 'juju destroy-model default` 
-and then create a new model.
+!!! Note: To remove all the services in the model you just created, it is often
+quickest to destroy the model with the command 'juju destroy-model default` and
+then [create a new model][models].
 
 
 ## Next Steps
 
-Now you have a Juju-powered cloud, it is time to explore the amazing things you
-can do with it! 
+Now that you have a Juju-powered cloud, it is time to explore the amazing
+things you can do with it! 
 
 We suggest you take the time to read the following:
-  
 
-  - [Clouds][clouds] goes into detail about configuring other clouds, including the 
-    public clouds like Azure, AWS, Google Compute Engine and Rackspace.
-  - [Models][models] - Learn how to create, destroy and manage models.
-  - [Charms/Services][charms] - find out how to construct complicated workloads 
-    in next to no time.
+- [Clouds][clouds] goes into detail about configuring other clouds, including the 
+  public clouds like Azure, AWS, Google Compute Engine and Rackspace.
+- [Models][models] - Learn how to create, destroy and manage models.
+- [Charms/Services][charms] - find out how to construct complicated workloads 
+  in next to no time.
 
 
 [clouds]: ./clouds.html  "Configuring Juju Clouds"

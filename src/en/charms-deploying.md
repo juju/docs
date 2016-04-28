@@ -53,44 +53,13 @@ source rather than the charm store:
 
 ... and probably a lot more times which you can imagine yourselves.
 
-Juju can be pointed at a local directory to source charms from using the
-`--repository=<path/to/files>` switch like this:
+You may substitute a path pointing to a directory to deploy a
+'local' charm:
+
 
 ```bash
-juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
+juju deploy ./charms/wordpress
 ```
-
-The `--repository`: switch can be omitted when shell environment defines
-`JUJU_REPOSITORY` like so:
-
-```bash
-export JUJU_REPOSITORY=/usr/share/charms/
-juju deploy local:trusty/vsftpd
-```
-You can also make use of standard filesystem shortcuts, if the environment
-specifies the `default-series`.The following examples will deploy the trusty
-charms in the local repository when default-series is set to trusty:
-
-```bash
-juju deploy --repository=. local:haproxy
-juju deploy --repository ~/charms/ local:wordpress
-```
-
-The default-series can be specified in environments.yaml thusly:
-
-```yaml
-default-series: precise
-```
-
-The default-series can also be added to any bootstrapped environment with the
-`set-env `:
-
-```bash
-juju set-env "default-series=trusty"
-```
-
-**Note:** Specifying a local repository makes Juju look there **first**, but if the relevant charm is not found in that repository, it will fall back to fetching it from the charm store. If you wish to check where a charm was installed from, it is listed in the `juju status` output.
-
 
 # Deploying with a configuration file
 
@@ -134,8 +103,8 @@ node 0.
 You can also deploy to containers:
 
 ```bash
-juju deploy mysql --to 24/lxc/3
-juju deploy mysql --to lxc:25
+juju deploy mysql --to 24/lxd/3
+juju deploy mysql --to lxd:25
 ```
 
 In the previous example we deployed MySQL to container #3 on machine #24.
@@ -306,6 +275,3 @@ them:
 juju deploy --networks db,monitor mysql
 ```
 
-**Note:** The `networks` option only recognises MAAS networks at this
-time, and the environment must be bootstrapped with 1.20.0 or newer.
-MAAS networks are not detected when Juju is upgraded to 1.20.0 or newer.
