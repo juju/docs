@@ -2,9 +2,9 @@ Title: Writing charms using terms
 
 # Writing charms that use terms
 
-Many commercial applications require the acceptance of Terms in order to be
-installed. Starting with Juju 2, charms can require a user accept its terms in
-order for it to be deployed.
+Many applications require the acceptance of Terms in order to be installed.
+Starting with Juju 2, charms can require a user accept its terms in order for
+it to be deployed.
 
 Because of the nature of terms, the user must have a Launchpad account, and will
 be prompted to login when attempting to deploy a term-enabled charm.
