@@ -2,7 +2,7 @@ Title: Back up and restore Juju
 TODO: Actual backup command needs to be tested
   
   
-# Backing up And Restoring Juju
+# Backing Up and Restoring Juju
 
 It is always a good idea to keep backups, and it is possible to back up both the 
 Juju client environment and any Juju controllers to be able to 
@@ -48,7 +48,7 @@ step of encrypting this backup file may be advisable.
 For Ubuntu, restoring your Juju client settings is a simple 
 matter of extracting the archive you created above.
 
-```
+```bash
 cd ~
 tar xzf juju-yymmdd-hhmmss.tar.gz 
 ```
@@ -60,205 +60,185 @@ existing files in the Juju directory. Please be sure that this is what you want!
 ## The Juju state server (bootstrap node)
 
 Juju provides commands for recovering the Juju state server (bootstrap
-node) in case of failure. The included commands allow you to create, restore and 
+node) in case of failure. The current state is held within the 'admin' model, created alongside the 'default' model when you bootstrap your environment. As a result, all backup commands need to operate within the 'admin' model, either by using the `--model admin` argument with each command, or by ensuring you're within the 'admin' model prior to using a backup command (i.e.`'juju switch admin'`).
+
+The backup commands allow you to create, restore and 
 manage backup files containing the state server
 configuration, keys, and environment data. If the state server or
 its host machine later fails, you can create a new state server from the
 backup file. For environments with "High availability" enabled, also see the 
 [relevant sections below](#ha-(high-availability))
 
+
 ### Creating a backup file
 
-Use the `create` command to create a new backup file:
+Use the `create-backup` command to create a new backup file:
 
 ```bash
-juju backups create [-e ENV] [--quiet ] [--filename=FILENAME | --no-download]
+juju create-backup [--filename=FILENAME] [-m | --model] [--no-download]
 ```
 
-The `create` command creates an archive file for the state server in an
-environment, along with metadata about that file.  By default the current
-environment is used. It may be explicitly identified by the -e option
-or the `JUJU_ENV` shell environment variable.
+The `create-backup` command generates an archive file for the current environment, along with metadata about that file. Unless you issue the `--no-download` argument, the archive will be both stored on your state server and downloaded to your client as a 'tar.gz' file.
 
-As a convenience, the state server stores both the file and the
-metadata (use `juju backups list` to see stored files), however, it is up to the
-user to download and safely store these files for when they are needed. 
-By default `juju backups create` will download the new backup file, though you
-can use the --no-download option to disable this.
-
-If the --filename option is not provided to `create` then the backup
-archive is downloaded with a default name that incorporates the date and
-time, such as `juju-backup-20151103-1408.tar.gz`. The filename is displayed
-once the backup completes.  Unless the --quiet option is used, the backup
-metadata is also output.
+The backup name combines the date and time of a backup with a unique model identifier. The downloaded filename can be changed by using the `--filename` argument, but this won't change the name of the backup on the server.
 
 Examples:
 
 ```bash
-juju backups create 
-juju backups create --no-download
-juju backups create -e my-env
-juju backups create --filename backup-19.tgz
+juju create-backup -m admin
+juju switch admin; juju create-backup
+juju create-backup --filename backup.tar.gz
 ```
-
 Note that creating a backup may take a long time.
-
 
 ### Managing Backups
 
-Each time a backup is created, it is also stored on the state-server for
-safekeeping, along with associated metadata giving it a unique id value and a 
-timestamp. This means that you can manage backups from whatever client you can
-connect from, and fetch previous backups if the originally downloaded file has
-gone astray. For managing backups, the `juju backups` command has an additional 
-set of subcommands:
+As each backup is stored on the state server, you can manage backups from whatever client you can connect from, and fetch previous backups if the originally downloaded file has
+gone astray. You can use the following commands to manage and restore your backups:
 
-### juju backups list    
+### juju list-backups    
 
-usage: `juju backups list [--brief]`
+usage: `juju list-backups [-m | --model]`
 
-The `list` subcommand will display all the backups currently available on the 
-state server. There are two options for the output:
+The `list-backups` command will display the names of all the backups currently available on the state server. 
 
 ```bash
-juju backups list
+juju list-backups
 ```
-will display a complete list of all backup metadata for all the available 
-backups. As such, it can output a lot of data, so you may consider using 
-the `--brief` switch on the command, which will return just a list of the 
-backup ID values:
+The output will look something like the following:
 
 ```bash
-juju backups list --brief
-```
-
-should return something like:
-
-```bash
-20150910-150614.f41b1639-09b3-4eb7-8fbf-0927558cdf44
-20150911-192138.f41b1639-09b3-4eb7-8fbf-0927558cdf44
-20150912-100824.f41b1639-09b3-4eb7-8fbf-0927558cdf44
-20150914-160331.f41b1639-09b3-4eb7-8fbf-0927558cdf44
+20160428-172122.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+20160429-083238.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+20160429-091444.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+20160429-091622.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
 ```
 
 The appended alphanumeric string is not actually random gibberish, but is 
-an identifier for the instance the backup was created on. This information 
+a model identifier for the instance the backup was created on. This information 
 is not normally useful to the end user, but it does help give all backup 
 files a unique name.
 
-### juju backups download 
+### juju download-backup
 
-usage: `juju backups download [options] <ID>`
+usage: `juju download-backup  [--filename=FILENAME] [-m | --model] <ID>`
 
-The `download` command will fetch the backup specified from the environment 
-and download it for local storage. If the `--filename` switch is not used, the
-backup is downloaded to the current directory and the filename used (derived 
-from a timestamp and the ID) is output to the console. 
+The `download-backup` command will fetch the backup specified from the environment 
+and download it for local storage. The `<ID>` is the identifier for the backup, as shown in the output of the `create-backup` and `list-backups` commands. If the `--filename` argument is used, the backup is downloaded to the current directory using the name from the argument.
 
 Examples:
 
 ```bash
-juju backups download 20150914-150614.f41b1639-09b3-4eb7-8fbf-0927558cdf44
+juju download-backup 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
 ```
+will return the following file:
+
+```bash
+juju-backup-20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4.tar.gz
+```
+
+```bash
+juju download-backup --filename backup.tar.gz 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+```bash
+
 will return:
 
 ```bash
-juju-backup-20150914-150614.f41b1639-09b3-4eb7-8fbf-0927558cdf44.tar.gz
+backup.tar.gz
 ```
 
+### juju show-backup 
 
-### juju backups info  
-
-usage: `juju backups info [options] <ID>`
+usage: `juju show-backup [-m | --model] <ID>`
   
 This command outputs the complete metadata record for the specified backup.
+
 For example:
 
 ```bash
-juju backups info 20150914-150614.f41b1639-09b3-4eb7-8fbf-0927558cdf44
+juju show-backup 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
 ```
 
 will result in output such as:
 
 ```no-highlight
-backup ID:       "20150914-150614.f41b1639-09b3-4eb7-8fbf-0927558cdf44"
-checksum:        "gECSwsOc2QtVG2RNrzk1bzCb+JU="
+backup ID:       "20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4"
+checksum:        "7ChuK/4IWCzd4XysP9j0UMFRCL8="
 checksum format: "SHA-1, base64 encoded"
-size (B):        32583286
-stored:          2015-09-14 15:06:30 +0000 UTC
-started:         2015-09-14 15:06:14.433210757 +0000 UTC
-finished:        2015-09-14 15:06:23.634473665 +0000 UTC
+size (B):        45565185
+stored:          2016-04-29 09:20:59 +0000 UTC
+started:         2016-04-29 09:20:34 +0000 UTC
+finished:        2016-04-29 09:20:50 +0000 UTC
 notes:           ""
-environment ID:  "f41b1639-09b3-4eb7-8fbf-0927558cdf44"
+model ID:        "e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4"
 machine ID:      "0"
-created on host: "juju-f41b1639-09b3-4eb7-8fbf-0927558cdf44-machine-0"
-juju version:    1.24.5
-20150914-150614.f41b1639-09b3-4eb7-8fbf-0927558cdf44
+created on host: "juju-e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4-machine-0"
+juju version:    2.0
 ```
 
-
-
-
-### juju backups remove  
-usage: `juju backups remove [options] <ID>`
+### juju remove-backup  
+usage: `juju remove-backup [-m | --model] <ID>`
 
 If you wish to remove a particular backup file from the state server (perhaps to
-save space!), you can use the remove subcommand with the appropriate ID:
+save space!), you can use the `remove-backup` command with the appropriate ID:
 
 ```bash 
-juju backups remove 20150914-160331.f41b1639-09b3-4eb7-8fbf-0927558cdf44
+juju remove-backup 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
 ```
 After a short time, you should see a confirmation:
 
 ```bash
-successfully removed: 20150914-160331.f41b1639-09b3-4eb7-8fbf-0927558cdf44
+successfully removed: 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
 ```
 
 
-### juju backups upload  
-usage: `juju backups upload [options] <filename>`
+### juju upload-backup  
+usage: `juju upload-backup [-m | --model] <filename>`
 
 As well as downloading backups from the Juju state server, it is also possible
 to upload them. This can be useful either to break up the process of restoring from 
 a backup (upload the file, then restore using the ID), or in the case where backups
-have been removed from the state server.
-
-By default, this command will return the new ID for the uploaded backup file. It 
-is possible to return instead the complete metadata (using `--verbose`), or 
-nothing at all (using `--quiet`) 
+have been removed from the state server. On completion, the command will return all the metadata for the the uploaded backup file. 
 
 Examples:
 
 ```bash
-juju backups upload mybackup.tar.gz
-juju backups upload juju-backup-20150817-122042.tar.gz --quiet
-juju backups upload juju-backup-20150817-122042.tar.gz --verbose
+juju upload-backup backup.tar.gz
+```
+will result in output such as:
+
+```no-highlight
+backup ID:       "20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4"
+checksum:        "7ChuK/4IWCzd4XysP9j0UMFRCL8="
+checksum format: "SHA-1, base64 encoded"
+size (B):        45565185
+stored:          2016-04-29 10:46:22 +0000 UTC
+started:         2016-04-29 09:20:34 +0000 UTC
+finished:        2016-04-29 10:32:35 +0000 UTC
+notes:           ""
+model ID:        "e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4"
+machine ID:      "0"
+created on host: "juju-e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4-machine-0"
+juju version:    2.0
 ```
 
 The metadata of uploaded files will reflect the time it was stored, but should
-also determine the correct dates for when the backup was started/completed.
+also determine the correct date and time for when the backup was started/completed. It's this date and time that's used to name the backup on the state server.
 
 !!! Note: The filename you use to store local backups does not matter, but the 
 uploaded file is expected to be a gzipped tar file (e.g. a `.tgz` or `.tar.gz` 
 file)
 
-### juju backups help 
-
-You can get usage information from any of the backup commands by running:
-
-```bash
-juju backups help <command>
-```
-
 ### Restoring from a backup
 
-usage: `juju backups restore --id=<ID> | --file=<filname> [-b] [--constraints=<string>]`
+usage: `juju restore-backup --id=<ID> | --file=<filname> [-b] [-m | --model] [--upload-tools] [--constraints=<string>]`
 
 If the state server for the environment is still operational it can be restored
 from one of the stored backups by specifying the ID:
 
 ```bash 
-juju backups restore --id=20150914-160331.f41b1639-09b3-4eb7-8fbf-0927558cdf44
+juju restore-backup --id=20160429-091622.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
 ```
 
 It is also possible to restore from a local backup file by instead specifying
@@ -266,23 +246,20 @@ the filename. This will then be uploaded to the state server and used to restore
 it:
 
 ```bash
-juju backups restore --file=juju-backup-23.tgz
+juju restore-backup --file=backup.tar.gz
 ```
 In the case that the original state server no longer exists, it is possible to 
 re-bootstrap the environment and restore the backup to the new state-server. To 
 do this, use the '-b' switch:
 
 ```bash
-juju backups restore  -b --file=juju-backup-23.tgz
+juju restore-backup -b --file=backup.tar.gz
 ```
-
-In this case it is also possible to specify constraints for the newly created
-bootstrap node, for example:
+When re-bootstrapping, you can upload a local version of the tools with the `--upload-tools` argument, just as you might with the original bootstrap procedure. It is also possible to specify constraints for the newly created bootstrap node, for example:
 
 ```bash
-juju backups restore  -b --constraints="mem=4G" --file=juju-backup-23.tgz
+juju restore-backup -b --constraints="mem=4G" --file=backup.tar.gz
 ```
-
 Read the [constraints reference page](./reference-constraints.html) for more
 information on the constraints which may be used.
 
@@ -293,15 +270,15 @@ general terms means that a Juju environment has 3 or more (up to 7) redundant
 state servers. In the normal course of operation, having multiple, redundant 
 state servers means that requiring a backup is less likely. As long as one of 
 the original state servers remains, the others can be replaced by simply
-running the `juju ensure-availability` command again.
+running the `juju enable-ha` command again.
 
 The contemplated case for HA backup/restore is when you have lost all your state
 servers and need to recover a basic setup in order to be able to perform the 
-`ensure availability` step again.
+`juju enable-ha` step again.
 
 ### Backups on HA
 
-When you perform a `backup` on a Juju installation which has multiple redundant 
+When you perform a backup on a Juju installation which has multiple redundant 
 state-servers, the initial state-server will be chosen to perform the backup.
 
 As an example, the following environment has 3 active state-servers. Running the command:
@@ -313,77 +290,16 @@ juju status
 ... will return something similar to:
 
 ```no-highlight
-environment: jujutest
-machines:
-  "0":
-    agent-state: started
-    agent-version: 1.24.5
-    dns-name: 50.16.32.73
-    instance-id: i-a4fc2707
-    instance-state: running
-    series: trusty
-    hardware: arch=amd64 cpu-cores=1 cpu-power=100 mem=1740M root-disk=8192M availability-zone=us-east-1a
-    state-server-member-status: has-vote
-  "1":
-    agent-state: started
-    agent-version: 1.24.5
-    dns-name: 54.234.198.218
-    instance-id: i-a7814672
-    instance-state: running
-    series: trusty
-    hardware: arch=amd64 cpu-cores=1 cpu-power=100 mem=1740M root-disk=8192M availability-zone=us-east-1b
-    state-server-member-status: has-vote
-  "2":
-    agent-state: started
-    agent-version: 1.24.5
-    dns-name: 54.196.44.204
-    instance-id: i-2b1db88b
-    instance-state: running
-    series: trusty
-    hardware: arch=amd64 cpu-cores=1 cpu-power=100 mem=1740M root-disk=8192M availability-zone=us-east-1c
-    state-server-member-status: has-vote
-...
+[Services] 
+NAME       STATUS EXPOSED CHARM 
 
-```
+[Units] 
+ID      WORKLOAD-STATUS JUJU-STATUS VERSION MACHINE PORTS PUBLIC-ADDRESS MESSAGE 
 
-Performing a backup on this environment, will be based on the first state-server,
-_machine 0_:
+[Machines] 
+ID         STATE   DNS          INS-ID                               SERIES AZ   
 
-```bash
-juju backups create
-```
-...should return:
-
-```no-highlight
-backup ID:       "20150907-154511.19f1b8b2-29cc-43de-866d-48ef88cf2f17"
-checksum:        "9NttJ4ELrA9XBlBFBX0ToxmrlNM="
-checksum format: "SHA-1, base64 encoded"
-size (B):        33013934
-stored:          2015-09-07 15:45:59 +0000 UTC
-started:         2015-09-07 15:45:11.831515387 +0000 UTC
-finished:        2015-09-07 15:45:48.842386549 +0000 UTC
-notes:           ""
-environment ID:  "19f1b8b2-29cc-43de-866d-48ef88cf2f17"
-machine ID:      "0"
-created on host: "ip-10-180-194-91"
-juju version:    1.24.5
-20150907-154511.19f1b8b2-29cc-43de-866d-48ef88cf2f17
-downloading to juju-backup-20150907-154511.tar.gz
-
-```
-
-As with backing up a non-HA environment, the backup file is stored on the state
-server and automatically downloaded, or you can specify further options 
-as [stated above](#creating-a-backup-file).
-
-### Restoring on HA
-
-Please note that a restore must take place when you have lost all your redundant
-state-servers. If that is not the case, simply issuing the 
-`juju ensure-availability` command will be enough to create
-a new state-server replica on your environment.
-
-For performing a `restore`, the only check performed by the utility is to make
+For performing a `restore-backup`, the only check performed by the utility is to make
 sure that the initial state-server is not up. 
 
 !!! WARNING: If your Juju environment still contains existing state servers, 
@@ -393,7 +309,7 @@ To restore an initial bootstrap environment, the procedure is the same as for
 non-HA environments:
 
 ```bash
-juju backups restore  -b --file=juju-backup-23.tgz
+juju restore-backup  -b --file=backup.tar.gz
 ```
 
 Once this step is completed, you will have a single state-server running. To
@@ -401,7 +317,7 @@ recover the rest of the state-server replicas, all that remains is to reissue
 the command: 
 
 ```bash
-juju ensure-availability -n 3
+juju enable-ha -n 3
 ```
 
 This will create additional state-servers based on the restored one.
