@@ -329,8 +329,7 @@ ID         STATE   DNS          INS-ID                               SERIES AZ
   
 
 For performing a `restore-backup`, the only check performed by the utility is 
-to make
-sure that the initial state-server is not up. 
+to make sure that the initial state-server is not up. 
 
 !!! WARNING: If your Juju environment still contains existing state servers, 
 restoring a backup will overwrite their data or remove them.
