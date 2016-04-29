@@ -229,7 +229,7 @@ address = leader_get('cluster-leader-address')
 ```
 bash:  
 ```bash
-ADDRESSS=$(leader-get cluster-leader-address)
+ADDRESS=$(leader-get cluster-leader-address)
 ```
 powershell:  
 ```powershell

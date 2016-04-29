@@ -71,7 +71,7 @@ to install and upgrade docker. Freeing you to focus on delivering your applicati
 layer and focus on how to do that.
 
 ## A guided example
-In the first section we illustratated the workflow. The resulting charm will
+In the first section we illustrated the workflow. The resulting charm will
 be a simple method to serve static content with NGinx, including a relation to
 a load balancer charm.
 
@@ -137,7 +137,7 @@ def install():
 The file contains a single function named "install" which has a decorator
 `@hook` indicating this function should be called on the `install` event. The
 reactive framework handles hooks in a special way. All the hooks of the same
-name will be run in a non-determinded order, so generally only one layer should
+name will be run in a non-deterministic order, so generally only one layer should
 implement a hook for best results.
 
 This install hook creates a path to an install script and calls the script to
