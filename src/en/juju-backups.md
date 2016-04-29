@@ -347,6 +347,12 @@ as [stated above](#creating-a-backup-file).
 
 ### Restoring on HA
 
+Please note that a restore must take place when you have lost all your redundant
+state-servers. If that is not the case, simply issuing the
+`juju enable-ha` command will be enough to create
+a new state-server replica on your environment.
+
+
 For performing a `restore-backup`, the only check performed by the utility is 
 to make sure that the initial state-server is not up. 
 
