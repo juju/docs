@@ -10,7 +10,7 @@ cloud-based services. The charms publicly available in the online
 of experts. Charms make it easy to reliably and repeatedly deploy services, 
 then scale up as required with minimal effort.
 
-There are a variety of topics realted to charms to be found in the left navigation 
+There are a variety of topics related to charms to be found in the left navigation 
 pane under **Charms**. The three main topics you should get to know well are:
 
  - **[Deploying charms][deploy]** - which covers how to use charms to deploy 

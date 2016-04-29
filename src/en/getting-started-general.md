@@ -192,7 +192,7 @@ juju bootstrap test aws
 ```
 
 This bootstrap process may take a few minutes to complete as it creates a new 
-instance in the cloud and fetches the sofware it requires, but you should see
+instance in the cloud and fetches the software it requires, but you should see
 plenty of feedback in your shell.
 
 !!! Note: If there any errors in the bootstrap process, take a look at our 

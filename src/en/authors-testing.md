@@ -43,7 +43,7 @@ properly.
 A simple structure will be utilised to attach tests to charms. Under the charm
 root directory, a sub-directory named 'tests' will be scanned by a test runner
 for executable files. These will be run in lexical order by the test runner,
-with a predictible environment. The tests can make the following assumptions:
+with a predictable environment. The tests can make the following assumptions:
 
 - A minimal install of the release of Ubuntu which the charm is targeted at 
   will be available.
