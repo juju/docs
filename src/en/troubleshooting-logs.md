@@ -47,7 +47,7 @@ reveals the agent's configuration file:
 
 Consider keeping backups of these files, especially prior to upgrading the
 agents. See
-[Upgrading Juju software](./juju-upgrade.html#upgrading-the-server-software).
+[Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software).
 
 
 ## The debug-log command
