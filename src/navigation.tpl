@@ -21,6 +21,7 @@
             <ul class="sub">
                 <li><a href="models-adding.html">Adding</a></li>
                 <li><a href="models-configuring.html">Additional configuration</a></li>
+                <li><a href="models-upgrade.html">Upgrading</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="charms.html">Charms & Services</a>
@@ -57,7 +58,6 @@
                 <li><a href="charms-environments.html">Managing environments</a></li>
                 <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                 <li><a href="juju-backups.html">Backup and restore</a></li>
-                <li><a href="juju-upgrade.html">Upgrading Juju</a></li>
                 <li><a href="juju-gui-management.html">Using the Juju GUI</a></li>
                 <li><a href="juju-offline-charms.html">Deploy charms offline</a></li>
                 <li><a href="juju-centos.html">CentOS support</a></li>
