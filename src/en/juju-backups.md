@@ -132,9 +132,8 @@ The output will look something like the following:
 
 The appended alphanumeric string is not actually random gibberish, but is 
 a model identifier for the instance the backup was created on. This 
-information 
-is not normally useful to the end user, but it does help give all backup 
-files a unique name.
+information is not normally useful to the end user, but it does help give all 
+backup files a unique name.
 
 ### juju download-backup
 
@@ -317,16 +316,36 @@ juju status
 ... will return something similar to:
 
 ```no-highlight
-[Services] 
 NAME       STATUS EXPOSED CHARM 
 
 [Units] 
-ID      WORKLOAD-STATUS JUJU-STATUS VERSION MACHINE PORTS PUBLIC-ADDRESS 
-MESSAGE 
+ID      WORKLOAD-STATUS JUJU-STATUS VERSION MACHINE PORTS PUBLIC-ADDRESS MESSAGE 
 
 [Machines] 
-ID         STATE   DNS          INS-ID                               SERIES AZ 
-  
+ID         STATE   DNS          INS-ID                               SERIES AZ   
+0          started 10.55.61.153 f9bcfde5-a071-4892-aa05-16212256a125 trusty nova 
+1          started 10.55.61.86  899bd5c0-7b00-4ae5-bf09-fab206bf9b43 trusty nova 
+2          started 10.55.61.89  7d997259-31e5-4390-a14d-2d054685e2cd trusty nova
+```
+
+Performing a backup on this environment, will be based on the first state-server,
+_machine 0_:
+
+```bash
+juju create-backup
+```
+...should return:
+
+```no-highlight
+20160429-122136.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+downloading to juju-backup-20160429-122136.tar.gz
+```
+
+As with backing up a non-HA environment, the backup file is stored on the state
+server and automatically downloaded, or you can specify further options
+as [stated above](#creating-a-backup-file).
+
+### Restoring on HA
 
 For performing a `restore-backup`, the only check performed by the utility is 
 to make sure that the initial state-server is not up. 
