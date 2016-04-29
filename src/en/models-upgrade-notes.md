@@ -75,15 +75,15 @@ Transfer the server software (auto-selected) to the state server:
 juju sync-tools
 ```
 
-Transfer the specified server software (all patch versions of 1.23) to the
+Transfer the specified server software (all patch versions of 2.03) to the
 state server:
 
 ```bash
-juju sync-tools --version 1.23 --debug
+juju sync-tools --version 2.03 --debug
 ```
 
 !!! Note: the `sync-tools --version` command only accepts `major[.minor]`
-("e.g. use '1.24' not '1.24.5').
+("e.g. use '2.03' not '2.03.1').
 
 For complete syntax, see the [command reference page](./commands.html#sync-tools)
 or by running `juju help sync-tools`.
