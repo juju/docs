@@ -5,8 +5,7 @@ TODO: Actual backup command needs to be tested
 # Backing Up and Restoring Juju
 
 It is always a good idea to keep backups, and it is possible to back up both 
-the 
-Juju client environment and any Juju controllers to be able to 
+the Juju client environment and any Juju controllers to be able to 
 reconnect to running cloud environments. Both the backing up and restore 
 procedures for each are detailed below.
 
@@ -141,7 +140,7 @@ usage: `juju download-backup  [--filename=FILENAME] [-m | --model] <ID>`
 
 The `download-backup` command will fetch the backup specified from the 
 environment and download it for local storage. The `<ID>` is the identifier 
-for the backup, as shown in the output of the `create-backup` and `list-backups` 
+for the backup, as shown in the output from the `create-backup` and `list-backups` 
 commands. If the `--filename` argument is used, the backup is downloaded to 
 the current directory using the name from the argument.
 
