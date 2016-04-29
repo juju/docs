@@ -5,7 +5,7 @@ Title: Juju troubleshooting - environment upgrade
 
 This section provides strategies and techniques to assist with broken
 environment upgrades. See
-[Upgrading Juju software](./juju-upgrade.html#upgrading-the-server-software) for
+[Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software) for
 information and instructions pertaining to upgrading your environment.
 
 
