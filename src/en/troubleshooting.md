@@ -9,9 +9,8 @@ configured correctly.
 
 - [Troubleshooting Juju itself](./troubleshooting-juju.html) - `Coming soon!`
 - [Viewing logs](./troubleshooting-logs.html)
-- [Troubleshooting environment upgrades](./troubleshooting-upgrade.html) - for
-information moving from one version of Juju to another.
+- [Troubleshooting model upgrades](./troubleshooting-upgrade.html) - help for
+upgrading Juju across a model.
 
-If you are having an issue not addressed by these documents please check the
-[Juju questions on askubuntu.com](http://askubuntu.com/search?q=juju) where
-community members can get answers to their questions.
+If your issue is not addressed here, consider the
+[Juju section on askubuntu.com](http://askubuntu.com/search?q=juju).
