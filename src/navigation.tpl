@@ -19,10 +19,9 @@
         </li>
         <li class="section"><a class="header" href="models.html">Models</a>
             <ul class="sub">
-                <li><a href="models-adding.html">Adding</a></li>
-                <li><a href="models-managing.html">Managing</a></li>
-                <li><a href="models-configuring.html">Additional configuration</a></li>
+                <li><a href="models-config.html">Configuring</a></li>
                 <li><a href="models-upgrade.html">Upgrading</a></li>
+                <li><a href="models-ha.html">Juju HA</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="charms.html">Charms & Services</a>
@@ -54,7 +53,6 @@
         </li>
         <li class="section"><a class="header" href="juju.html">Managing Juju</a>
             <ul class="sub">
-                <li><a href="juju-ha.html">Juju high availability</a></li>
                 <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                 <li><a href="juju-backups.html">Backup and restore</a></li>
                 <li><a href="juju-gui-management.html">Using the Juju GUI</a></li>

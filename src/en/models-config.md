@@ -1,6 +1,7 @@
 Title: General configuration options  
 TODO: check options haven't changed
 
+
 # Configuring models
 
 There may be times, particularly when dealing with complex cloud environments
@@ -144,6 +145,7 @@ Juju by setting:
 agent-stream: devel
 ```
 
+
 ## Provision machines faster by disabling software upgrades
 
 When Juju provisions a machine, its default behaviour is to upgrade existing
@@ -163,13 +165,13 @@ enable-os-upgrade: false
 You may also want to just update the package list to ensure a Charm has the
 latest software available to it by disabling upgrades but enabling updates.
 
+
 ## Juju lifecycle and harvesting
 
-Juju keeps state on the running model.
-Based on that model, it can harvest machines which it deems are no longer
-required. This can help reduce running costs and keep the model 'tidy'.
-Harvesting is guided by what "harvesting mode" has been set by the
-system administrator. 
+Juju keeps state on the running model.  Based on that model, it can harvest
+machines which it deems are no longer required. This can help reduce running
+costs and keep the model 'tidy'.  Harvesting is guided by what "harvesting
+mode" has been set by the system administrator. 
 
 Before explaining the different modes, it is useful to understand how Juju
 perceives machines. As far as it is concerned, machines are in one of four
@@ -183,8 +185,9 @@ states:
 - **Unknown:** The machine exists, but Juju knows nothing about it.
 
 ### Harvesting modes
-With the above in mind, Juju can use one of several strategies to delete or harvest
-machines from the model:
+
+With the above in mind, Juju can use one of several strategies to delete or
+harvest machines from the model:
 
 - **None:** Using this method, Juju won't harvest any machines. This is the
 most conservative, and a good choice if you manage your machines
@@ -206,4 +209,3 @@ The default mode can be overridden by setting the
 provisioner-harvest-mode:
 ```
 to any of the above values.
-

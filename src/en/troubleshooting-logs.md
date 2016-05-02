@@ -1,7 +1,7 @@
-Title: Viewing Juju logs  
+Title: Juju logs  
 
 
-# Viewing logs
+# Juju logs
 
 Logs in Juju are intended to be inspected with the `juju debug-log` command. This
 method provides logs on a per-model basis and is therefore more convenient than
