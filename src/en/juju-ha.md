@@ -72,13 +72,8 @@ in this case.
 
 ## HA and logging
 
-All Juju machines send their logs to a controller in the HA cluster and the user
-accesses those logs via `juju debug-log`. See
+All Juju machines send their logs to a controller in the HA cluster. Each
+controller, in turn, sends those logs to a MongoDB database which is
+synchronized across controllers. The user reads logging information with the
+`juju debug-log` command as normal. See
 [Viewing logs](./troubleshooting-logs.html).
-
-A controller accepts logs once it becomes fully operational. One caveat is that
-past cluster logs are not sent to the new "slave" controller. It should
-therefore be noted that all controllers are not guaranteed to house the same
-logs. In particular, this should be understood when using `juju debug-log` as
-this triggers a connection to be made to a random controller. This will be
-corrected in the near future (past logs will be synced).
