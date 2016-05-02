@@ -37,11 +37,15 @@ you can ssh to the machine and view the log files. To access the individual
 machine use `juju ssh <machine-number>` to get access to the machine and the
 Juju log files can be found in the `/var/log/juju` directory.
 
+Fore more information about what you can do with the [log files](./troubleshooting-logs.html#log-files) please
+refer to [viewing logs](./troubleshooting-logs.html).
+
 ### Log files on the controller
 
-In Juju 2.0+ the machine running the  the controller is not represented in the
-Juju model and not accessible by machine number. If you need the log files from
-the controller you must switch to the "admin" model and ssh to machine 0.
+Beginning with Juju 2.0, the machine running the controller is not represented
+in the Juju model and therefore not accessible by machine number. If you need
+the log files from the controller you must switch to the "admin" model and ssh
+to machine 0.
 
 ```
 juju switch local.amazon:admin
