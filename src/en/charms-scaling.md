@@ -186,12 +186,14 @@ juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5
 
 
 The `remove-unit` command can be run to remove running units safely. The
-running services should automatically adjust to the change.
+running services should automatically adjust to the change. If the machine is
+not being used as controller, or hosting other Juju managed containers, 
+it will be destroyed automatically.
 
-!!! Note: After removing a service the machine will still be running. In order
-to completely remove the machine that once housed the service you need to issue
-a `remove-machine`. For example, to remove machine 1 that the unit
-`mediawiki/1` was housed on use the command: 
+!!! Note: If a machine has no running units, controllers or containers, and 
+hasn't been removed automatically, it can be removed with the `remove-machine`
+command. For example, to remove machine 1 that the unit `mediawiki/1` was housed on 
+use the command: 
     
 ```bash
 juju remove-machine 1
