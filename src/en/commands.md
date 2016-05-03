@@ -48,6 +48,7 @@ Click on the expander to see details for each command.
    _actions_
 
 
+ 
 
 ^# add-cloud
 
@@ -69,7 +70,7 @@ Click on the expander to see details for each command.
 
    A cloud definition file has the following YAML format:
 
-   clouds:
+         clouds:
 
            mycloud:
 
@@ -89,6 +90,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju add-cloud mycloud ~/mycloud.yaml
 
 
@@ -97,6 +99,7 @@ Click on the expander to see details for each command.
    [list-clouds](#list-clouds)
 
 
+ 
 
 ^# add-credential
 
@@ -123,7 +126,7 @@ Click on the expander to see details for each command.
    The user is prompted to add credentials interactively if a YAML-formatted
    credentials file is not specified. Here is a sample credentials file:
 
-   credentials:
+         credentials:
 
            aws:
 
@@ -162,6 +165,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju add-credential google
           juju add-credential aws -f ~/credentials.yaml
 
@@ -177,6 +181,7 @@ Click on the expander to see details for each command.
    [autoload-credentials](#autoload-credentials)
 
 
+ 
 
 ^# add-machine
 
@@ -244,6 +249,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
          juju add-machine                      (starts a new machine)
          juju add-machine -n 2                 (starts 2 new machines)
          juju add-machine lxc                  (starts a new machine with an lxc container)
@@ -257,17 +263,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [juju help constraints](#juju help constraints)
-
-   [juju help placement](#juju help placement)
-
-   [juju help remove-machine](#juju help remove-machine)
+   [remove-machine](#remove-machine)
 
    **Aliases:**
 
    _add-machines_
 
 
+ 
 
 ^# add-machines
 
@@ -335,6 +338,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
          juju add-machine                      (starts a new machine)
          juju add-machine -n 2                 (starts 2 new machines)
          juju add-machine lxc                  (starts a new machine with an lxc container)
@@ -348,17 +352,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [juju help constraints](#juju help constraints)
-
-   [juju help placement](#juju help placement)
-
-   [juju help remove-machine](#juju help remove-machine)
+   [remove-machine](#remove-machine)
 
    **Aliases:**
 
    _add-machines_
 
 
+ 
 
 ^# add-relation
 
@@ -375,6 +376,7 @@ Click on the expander to see details for each command.
    Model to operate in
 
 
+ 
 
 ^# add-space
 
@@ -399,6 +401,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# add-ssh-key
 
@@ -427,6 +430,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju add-ssh-key "ssh-rsa qYfS5LieM79HIOr535ret6xy
           AAAAB3NzaC1yc2EAAAADAQA6fgBAAABAQCygc6Rc9XgHdhQqTJ
           Wsoj+I3xGrOtk21xYtKijnhkGqItAHmrE5+VH6PY1rVIUXhpTg
@@ -436,6 +440,7 @@ Click on the expander to see details for each command.
           1LqLncXnBCJfjj0pADXaL5OQ9dmD3aCbi8KFyOEs3UumPosgmh
           VCAfjjHObWHwNQ/ZU2KrX1/lv/+lBChx2tJliqQpyYMiA3nrtS
           jfqQgZfjVF5vz8LESQbGc6+vLcXZ9KQpuYDt joe@ubuntu"
+
    For ease of use it is possible to use shell substitution to pass the key 
    to the command:
    juju add-ssh-key "$(cat ~/mykey.pub)"
@@ -454,6 +459,7 @@ Click on the expander to see details for each command.
    _add-ssh-keys_
 
 
+ 
 
 ^# add-ssh-keys
 
@@ -482,6 +488,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju add-ssh-key "ssh-rsa qYfS5LieM79HIOr535ret6xy
           AAAAB3NzaC1yc2EAAAADAQA6fgBAAABAQCygc6Rc9XgHdhQqTJ
           Wsoj+I3xGrOtk21xYtKijnhkGqItAHmrE5+VH6PY1rVIUXhpTg
@@ -491,6 +498,7 @@ Click on the expander to see details for each command.
           1LqLncXnBCJfjj0pADXaL5OQ9dmD3aCbi8KFyOEs3UumPosgmh
           VCAfjjHObWHwNQ/ZU2KrX1/lv/+lBChx2tJliqQpyYMiA3nrtS
           jfqQgZfjVF5vz8LESQbGc6+vLcXZ9KQpuYDt joe@ubuntu"
+
    For ease of use it is possible to use shell substitution to pass the key 
    to the command:
    juju add-ssh-key "$(cat ~/mykey.pub)"
@@ -509,10 +517,11 @@ Click on the expander to see details for each command.
    _add-ssh-keys_
 
 
+ 
 
 ^# add-storage
 
-   **Usage:** juju add-storage [options] <unit name> <storage directive> ...
+   **Usage:** ` juju add-storage [options] <unit name> <storage directive> ...`
 
    **Summary:**
 
@@ -536,8 +545,7 @@ Click on the expander to see details for each command.
    and storage constraints, e.g. pool, count, size.
 
    The acceptable format for storage constraints is a comma separated
-   sequence of: POOL, COUNT, and SIZE, where:
-     
+   sequence of: POOL, COUNT, and SIZE, where
              POOL identifies the storage pool. POOL can be a string
              starting with a letter, followed by zero or more digits
              or letters optionally separated by hyphens.
@@ -576,6 +584,7 @@ Click on the expander to see details for each command.
                juju add-storage u/0 data
 
 
+ 
 
 ^# add-subnet
 
@@ -613,6 +622,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# add-unit
 
@@ -657,12 +667,19 @@ Click on the expander to see details for each command.
    **Examples:**
 
    Add five units of wordpress on five new machines:
+
           juju add-unit wordpress -n 5
+
    Add one unit of mysql to the existing machine 23:
+
           juju add-unit mysql --to 23
+
    Create a new LXC container on machine 7 and add one unit of mysql:
+
           juju add-unit mysql --to lxc:7
+
    Add a unit of mariadb to LXC container number 3 on machine 24:
+
           juju add-unit mariadb --to 24/lxc/3
 
 
@@ -675,6 +692,7 @@ Click on the expander to see details for each command.
    _add-units_
 
 
+ 
 
 ^# add-units
 
@@ -719,12 +737,19 @@ Click on the expander to see details for each command.
    **Examples:**
 
    Add five units of wordpress on five new machines:
+
           juju add-unit wordpress -n 5
+
    Add one unit of mysql to the existing machine 23:
+
           juju add-unit mysql --to 23
+
    Create a new LXC container on machine 7 and add one unit of mysql:
+
           juju add-unit mysql --to lxc:7
+
    Add a unit of mariadb to LXC container number 3 on machine 24:
+
           juju add-unit mariadb --to 24/lxc/3
 
 
@@ -737,6 +762,7 @@ Click on the expander to see details for each command.
    _add-units_
 
 
+ 
 
 ^# add-user
 
@@ -777,6 +803,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju add-user bob
           juju add-user --share mymodel bob
           juju add-user --controller mycontroller bob
@@ -801,6 +828,7 @@ Click on the expander to see details for each command.
    [change-user-password](#change-user-password)
 
 
+ 
 
 ^# agree
 
@@ -837,6 +865,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
        juju agree somePlan/1
            Displays terms for somePlan revision 1 and prompts for agreement.
        juju agree somePlan/1 otherPlan/2
@@ -847,6 +876,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# allocate
 
@@ -879,6 +909,7 @@ Click on the expander to see details for each command.
               Assigns service "db" to an allocation on budget "somebudget" with the limit "42".
 
 
+ 
 
 ^# attach
 
@@ -903,6 +934,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# autoload-credentials
 
@@ -947,7 +979,7 @@ Click on the expander to see details for each command.
              2. Environment variables OS_USERNAME, OS_PASSWORD, OS_TENANT_NAME 
              
    
-   **Example:**
+   Example:
 
             juju autoload-credentials
             
@@ -959,6 +991,7 @@ Click on the expander to see details for each command.
    [juju add-credential](#juju add-credential)
 
 
+ 
 
 ^# backups
 
@@ -986,6 +1019,7 @@ Click on the expander to see details for each command.
    _backups_
 
 
+ 
 
 ^# block
 
@@ -1028,6 +1062,7 @@ Click on the expander to see details for each command.
              remove-object - block an operation that would remove an object
 
 
+ 
 
 ^# bootstrap
 
@@ -1150,6 +1185,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju bootstrap mycontroller google
           juju bootstrap --config=~/config-rs.yaml mycontroller rackspace
           juju bootstrap --config agent-version=1.25.3 mycontroller aws
@@ -1165,6 +1201,7 @@ Click on the expander to see details for each command.
    [set-constraints](#set-constraints)
 
 
+ 
 
 ^# cached-images
 
@@ -1217,6 +1254,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
         # List all cached images.
         juju list-cache-images
         # List cached images for xenial.
@@ -1230,6 +1268,7 @@ Click on the expander to see details for each command.
    _cached-images_
 
 
+ 
 
 ^# change-user-password
 
@@ -1255,6 +1294,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
         # Change the password for the user you are logged in as.
         juju change-user-password
         # Change the password for bob.
@@ -1262,6 +1302,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# charm
 
@@ -1295,6 +1336,7 @@ Click on the expander to see details for each command.
              resources      - alias for 'list-resources'
 
 
+ 
 
 ^# collect-metrics
 
@@ -1323,6 +1365,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# create-backup
 
@@ -1371,6 +1414,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# create-budget
 
@@ -1394,6 +1438,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# create-model
 
@@ -1451,6 +1496,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju create-model new-model
           juju create-model new-model --config aws-creds.yaml --config image-stream=daily
           
@@ -1462,6 +1508,7 @@ Click on the expander to see details for each command.
    [juju help model share](#juju help model share)
 
 
+ 
 
 ^# create-storage-pool
 
@@ -1517,6 +1564,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# debug-hooks
 
@@ -1548,6 +1596,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# debug-log
 
@@ -1631,17 +1680,26 @@ Click on the expander to see details for each command.
 
    Exclude all machine 0 messages; show a maximum of 100 lines; and continue
    to append filtered messages:
+
           juju debug-log --exclude machine-0 --lines 100
+
    Include only unit mysql/0 messages; show a maximum of 50 lines; and then
    exit:
+
           juju debug-log -T --include unit-mysql-0 --lines 50
+
    Show all messages from unit apache2/3 or machine 1 and then exit:
+
           juju debug-log -T --replay --include unit-apache2-3 --include machine-1
+
    Include all juju.worker.uniter logging module messages that are also unit
    wordpress/0 messages and continue to append filtered messages:
+
           juju debug-log --replay --include-module juju.worker.uniter --include \
               unit-wordpress-0
+
    To see all WARNING and ERROR messages:
+
           juju debug-log --replay --level WARNING
 
 
@@ -1650,6 +1708,7 @@ Click on the expander to see details for each command.
    [status](#status)
 
 
+ 
 
 ^# debug-metrics
 
@@ -1681,6 +1740,7 @@ Click on the expander to see details for each command.
    display recently collected metrics and exit
 
 
+ 
 
 ^# deploy
 
@@ -1834,6 +1894,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
          juju deploy mysql --to 23       (deploy to machine 23)
          juju deploy mysql --to 24/lxc/3 (deploy to lxc container 3 on host machine 24)
          juju deploy mysql --to lxc:25   (deploy to a new lxc container on host machine 25)
@@ -1855,6 +1916,7 @@ Click on the expander to see details for each command.
    [juju help get-constraints](#juju help get-constraints)
 
 
+ 
 
 ^# destroy-controller
 
@@ -1885,6 +1947,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju destroy-controller --destroy-all-models mycontroller
 
 
@@ -1893,6 +1956,7 @@ Click on the expander to see details for each command.
    [kill-controller](#kill-controller)
 
 
+ 
 
 ^# destroy-model
 
@@ -1921,12 +1985,17 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
             juju destroy-model test
             juju destroy-model -y mymodel
-   See also: destroy-controller
 
 
+   **See also:**
 
+   [estroy-controller](#estroy-controller)
+
+
+ 
 
 ^# destroy-relation
 
@@ -1957,9 +2026,12 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju remove-relation mysql wordpress
+
    In the case of multiple relations, the relation name should be specified
    at least once - the following examples will all have the same effect:
+
           juju remove-relation mediawiki:db mariadb:db
           juju remove-relation mediawiki mariadb:db
           juju remove-relation mediawiki:db mariadb
@@ -1977,6 +2049,7 @@ Click on the expander to see details for each command.
    _destroy-relation_
 
 
+ 
 
 ^# destroy-service
 
@@ -2007,6 +2080,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju remove-service hadoop
           juju remove-service -m test-model mariadb
 
@@ -2016,6 +2090,7 @@ Click on the expander to see details for each command.
    _destroy-service_
 
 
+ 
 
 ^# destroy-unit
 
@@ -2050,6 +2125,7 @@ Click on the expander to see details for each command.
    _destroy-unit_
 
 
+ 
 
 ^# disable-user
 
@@ -2077,6 +2153,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju disable-user bob
 
 
@@ -2089,6 +2166,7 @@ Click on the expander to see details for each command.
    [login](#login)
 
 
+ 
 
 ^# download-backup
 
@@ -2119,6 +2197,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# enable-ha
 
@@ -2170,6 +2249,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
        juju enable-ha
            Ensure that the controller is still in highly available mode. If
            there is only 1 controller running, this will ensure there
@@ -2189,6 +2269,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# enable-user
 
@@ -2213,6 +2294,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju enable-user bob
 
 
@@ -2225,6 +2307,7 @@ Click on the expander to see details for each command.
    [login](#login)
 
 
+ 
 
 ^# expose
 
@@ -2250,6 +2333,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju expose wordpress
 
 
@@ -2258,6 +2342,7 @@ Click on the expander to see details for each command.
    [unexpose](#unexpose)
 
 
+ 
 
 ^# get-config
 
@@ -2293,6 +2378,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju get-config mysql
           juju get-config mysql-testing
 
@@ -2310,6 +2396,7 @@ Click on the expander to see details for each command.
    _get-configs_
 
 
+ 
 
 ^# get-configs
 
@@ -2345,6 +2432,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju get-config mysql
           juju get-config mysql-testing
 
@@ -2362,6 +2450,7 @@ Click on the expander to see details for each command.
    _get-configs_
 
 
+ 
 
 ^# get-constraints
 
@@ -2405,6 +2494,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju get-constraints mysql
           juju get-constraints -m mymodel apache2
 
@@ -2418,6 +2508,7 @@ Click on the expander to see details for each command.
    [set-model-constraints](#set-model-constraints)
 
 
+ 
 
 ^# get-model-config
 
@@ -2453,14 +2544,21 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju get-model-config default-series
           juju get-model-config -m mymodel type
-   See also: list-models
-                set-model-config
-                unset-model-config
 
 
+   **See also:**
 
+   [ist-models](#ist-models)
+
+   [set-model-config](#set-model-config)
+
+   [unset-model-config](#unset-model-config)
+
+
+ 
 
 ^# get-model-constraints
 
@@ -2501,15 +2599,23 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju get-model-constraints
           juju get-model-constraints -m mymodel
-   See also: list-models
-                set-model-constraints
-                set-constraints
-                get-constraints
 
 
+   **See also:**
 
+   [ist-models](#ist-models)
+
+   [set-model-constraints](#set-model-constraints)
+
+   [set-constraints](#set-constraints)
+
+   [get-constraints](#get-constraints)
+
+
+ 
 
 ^# grant
 
@@ -2545,10 +2651,15 @@ Click on the expander to see details for each command.
    **Examples:**
 
    Grant user 'joe' default (read) access to model 'mymodel':
+
           juju grant joe mymodel
+
    Grant user 'jim' write access to model 'mymodel':
+
           juju grant --acl=write jim mymodel
+
    Grant user 'sam' default (read) access to models 'model1' and 'model2':
+
           juju grant sam model1 model2
 
 
@@ -2559,6 +2670,7 @@ Click on the expander to see details for each command.
    [add-user](#add-user)
 
 
+ 
 
 ^# gui
 
@@ -2598,6 +2710,7 @@ Click on the expander to see details for each command.
    An error is returned if the Juju GUI is not available in the controller.
 
 
+ 
 
 ^# help
 
@@ -2607,14 +2720,14 @@ Click on the expander to see details for each command.
 
    show help on a command or other topic
 
+Details:
 
-   
-   **Details:**
+   **See also:**
+
+   [opics](#opics)
 
 
-   See also: topics
-
-
+ 
 
 ^# help-tool
 
@@ -2625,6 +2738,7 @@ Click on the expander to see details for each command.
    show help on a juju charm tool
 
 
+ 
 
 ^# import-ssh-key
 
@@ -2661,8 +2775,11 @@ Click on the expander to see details for each command.
 
    Import all public keys associated with user account 'phamilton' on the
    GitHub service:
+
           juju import-ssh-key gh:phamilton
+
    Multiple identities may be specified in a space delimited list:
+
           juju import-ssh-key rheinlein lp:iasmiov gh:hharrison
 
 
@@ -2677,6 +2794,7 @@ Click on the expander to see details for each command.
    _import-ssh-keys_
 
 
+ 
 
 ^# import-ssh-keys
 
@@ -2713,8 +2831,11 @@ Click on the expander to see details for each command.
 
    Import all public keys associated with user account 'phamilton' on the
    GitHub service:
+
           juju import-ssh-key gh:phamilton
+
    Multiple identities may be specified in a space delimited list:
+
           juju import-ssh-key rheinlein lp:iasmiov gh:hharrison
 
 
@@ -2729,6 +2850,7 @@ Click on the expander to see details for each command.
    _import-ssh-keys_
 
 
+ 
 
 ^# kill-controller
 
@@ -2760,6 +2882,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# list-actions
 
@@ -2801,6 +2924,7 @@ Click on the expander to see details for each command.
    _actions_
 
 
+ 
 
 ^# list-agreements
 
@@ -2828,6 +2952,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# list-all-blocks
 
@@ -2858,6 +2983,7 @@ Click on the expander to see details for each command.
    List all blocks for models within the specified controller
 
 
+ 
 
 ^# list-backups
 
@@ -2885,6 +3011,7 @@ Click on the expander to see details for each command.
    _backups_
 
 
+ 
 
 ^# list-budgets
 
@@ -2915,6 +3042,7 @@ Click on the expander to see details for each command.
           juju list-budgets
 
 
+ 
 
 ^# list-cached-images
 
@@ -2967,6 +3095,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
         # List all cached images.
         juju list-cache-images
         # List cached images for xenial.
@@ -2980,6 +3109,7 @@ Click on the expander to see details for each command.
    _cached-images_
 
 
+ 
 
 ^# list-clouds
 
@@ -3015,13 +3145,20 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-clouds
-   See also: show-cloud
-                update-clouds
-                add-cloud
 
 
+   **See also:**
 
+   [how-cloud](#how-cloud)
+
+   [update-clouds](#update-clouds)
+
+   [add-cloud](#add-cloud)
+
+
+ 
 
 ^# list-controllers
 
@@ -3050,6 +3187,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-controllers
           juju list-controllers --format json --output ~/tmp/controllers.json
 
@@ -3061,6 +3199,7 @@ Click on the expander to see details for each command.
    [show-controller](#show-controller)
 
 
+ 
 
 ^# list-credentials
 
@@ -3110,6 +3249,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-credentials
           juju list-credentials aws
           juju list-credentials --format yaml --show-secrets
@@ -3126,6 +3266,7 @@ Click on the expander to see details for each command.
    [autoload-credentials](#autoload-credentials)
 
 
+ 
 
 ^# list-machine
 
@@ -3165,6 +3306,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
            juju list-machines
 
 
@@ -3181,6 +3323,7 @@ Click on the expander to see details for each command.
    _list-machine_
 
 
+ 
 
 ^# list-machines
 
@@ -3220,6 +3363,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
            juju list-machines
 
 
@@ -3236,6 +3380,7 @@ Click on the expander to see details for each command.
    _list-machine_
 
 
+ 
 
 ^# list-models
 
@@ -3287,14 +3432,21 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-models
           juju list-models --user bob
-   See also: create-model
-                share-model
-                unshare-model
 
 
+   **See also:**
 
+   [reate-model](#reate-model)
+
+   [share-model](#share-model)
+
+   [unshare-model](#unshare-model)
+
+
+ 
 
 ^# list-payloads
 
@@ -3337,6 +3489,7 @@ Click on the expander to see details for each command.
    - payload status
 
 
+ 
 
 ^# list-plans
 
@@ -3367,6 +3520,7 @@ Click on the expander to see details for each command.
           juju list-plans cs:webapp
 
 
+ 
 
 ^# list-resources
 
@@ -3408,6 +3562,7 @@ Click on the expander to see details for each command.
    _resources_
 
 
+ 
 
 ^# list-shares
 
@@ -3440,6 +3595,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-shares
           juju list-shares -m mymodel
 
@@ -3449,6 +3605,7 @@ Click on the expander to see details for each command.
    [grant](#grant)
 
 
+ 
 
 ^# list-spaces
 
@@ -3492,6 +3649,7 @@ Click on the expander to see details for each command.
    _spaces_
 
 
+ 
 
 ^# list-ssh-key
 
@@ -3527,8 +3685,11 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-ssh-keys
+
    To examine the full key, use the '--full' option:
+
           juju list-keys -m jujutest --full
 
 
@@ -3541,6 +3702,7 @@ Click on the expander to see details for each command.
    _list-ssh-key_
 
 
+ 
 
 ^# list-ssh-keys
 
@@ -3576,8 +3738,11 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-ssh-keys
+
    To examine the full key, use the '--full' option:
+
           juju list-keys -m jujutest --full
 
 
@@ -3590,6 +3755,7 @@ Click on the expander to see details for each command.
    _list-ssh-key_
 
 
+ 
 
 ^# list-storage
 
@@ -3643,6 +3809,7 @@ Click on the expander to see details for each command.
    _storage_
 
 
+ 
 
 ^# list-storage-pools
 
@@ -3712,6 +3879,7 @@ Click on the expander to see details for each command.
             pool name
 
 
+ 
 
 ^# list-subnets
 
@@ -3761,6 +3929,7 @@ Click on the expander to see details for each command.
    _subnets_
 
 
+ 
 
 ^# list-users
 
@@ -3801,6 +3970,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-users
 
 
@@ -3817,6 +3987,7 @@ Click on the expander to see details for each command.
    [enable-user](#enable-user)
 
 
+ 
 
 ^# login
 
@@ -3847,6 +4018,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
         # Log in as the current user for the controller.
         juju login
         # Log in as the user "bob".
@@ -3854,6 +4026,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# logout
 
@@ -3889,6 +4062,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# machine
 
@@ -3928,6 +4102,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
            juju list-machines
 
 
@@ -3944,6 +4119,7 @@ Click on the expander to see details for each command.
    _list-machine_
 
 
+ 
 
 ^# machines
 
@@ -3983,6 +4159,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
            juju list-machines
 
 
@@ -3999,6 +4176,7 @@ Click on the expander to see details for each command.
    _list-machine_
 
 
+ 
 
 ^# publish
 
@@ -4038,6 +4216,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# register
 
@@ -4065,6 +4244,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju register MFATA3JvZDAnExMxMDQuMTU0LjQyLjQ0OjE3MDcwExAxMC4xMjguMC4yOjE3MDcw
           BCBEFCaXerhNImkKKabuX5ULWf2Bp4AzPNJEbXVWgraLrAA=
 
@@ -4076,6 +4256,7 @@ Click on the expander to see details for each command.
    [change-user-password](#change-user-password)
 
 
+ 
 
 ^# remove-all-blocks
 
@@ -4108,6 +4289,7 @@ Click on the expander to see details for each command.
    [juju help unblock](#juju help unblock)
 
 
+ 
 
 ^# remove-backup
 
@@ -4131,6 +4313,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# remove-cached-images
 
@@ -4172,11 +4355,13 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
         # Remove cached lxd image for xenial amd64.
         juju remove-cached-images --kind lxd --series xenial --arch amd64
 
 
 
+ 
 
 ^# remove-credential
 
@@ -4199,6 +4384,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju remove-credential rackspace credential_name
 
 
@@ -4213,6 +4399,7 @@ Click on the expander to see details for each command.
    [autoload-credentials](#autoload-credentials)
 
 
+ 
 
 ^# remove-machine
 
@@ -4255,6 +4442,7 @@ Click on the expander to see details for each command.
    _remove-machines_
 
 
+ 
 
 ^# remove-machines
 
@@ -4297,6 +4485,7 @@ Click on the expander to see details for each command.
    _remove-machines_
 
 
+ 
 
 ^# remove-relation
 
@@ -4327,9 +4516,12 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju remove-relation mysql wordpress
+
    In the case of multiple relations, the relation name should be specified
    at least once - the following examples will all have the same effect:
+
           juju remove-relation mediawiki:db mariadb:db
           juju remove-relation mediawiki mariadb:db
           juju remove-relation mediawiki:db mariadb
@@ -4347,6 +4539,7 @@ Click on the expander to see details for each command.
    _destroy-relation_
 
 
+ 
 
 ^# remove-service
 
@@ -4377,6 +4570,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju remove-service hadoop
           juju remove-service -m test-model mariadb
 
@@ -4386,6 +4580,7 @@ Click on the expander to see details for each command.
    _destroy-service_
 
 
+ 
 
 ^# remove-ssh-key
 
@@ -4414,6 +4609,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju remove-ssh-key ubuntu@ubuntu
           juju remove-ssh-key 45:7f:33:2c:10:4e:6c:14:e3:a1:a4:c8:b2:e1:34:b4
           juju remove-ssh-key bob@ubuntu carol@ubuntu
@@ -4432,6 +4628,7 @@ Click on the expander to see details for each command.
    _remove-ssh-keys_
 
 
+ 
 
 ^# remove-ssh-keys
 
@@ -4460,6 +4657,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju remove-ssh-key ubuntu@ubuntu
           juju remove-ssh-key 45:7f:33:2c:10:4e:6c:14:e3:a1:a4:c8:b2:e1:34:b4
           juju remove-ssh-key bob@ubuntu carol@ubuntu
@@ -4478,6 +4676,7 @@ Click on the expander to see details for each command.
    _remove-ssh-keys_
 
 
+ 
 
 ^# remove-unit
 
@@ -4512,6 +4711,7 @@ Click on the expander to see details for each command.
    _destroy-unit_
 
 
+ 
 
 ^# resolved
 
@@ -4532,6 +4732,7 @@ Click on the expander to see details for each command.
    re-execute failed hooks
 
 
+ 
 
 ^# resources
 
@@ -4573,6 +4774,7 @@ Click on the expander to see details for each command.
    _resources_
 
 
+ 
 
 ^# restore-backup
 
@@ -4628,6 +4830,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# retry-provisioning
 
@@ -4644,6 +4847,7 @@ Click on the expander to see details for each command.
    Model to operate in
 
 
+ 
 
 ^# revoke
 
@@ -4677,8 +4881,11 @@ Click on the expander to see details for each command.
    **Examples:**
 
    Revoke read (and write) access from user 'joe' for model 'mymodel':
+
           juju revoke joe mymodel
+
    Revoke write access from user 'sam' for models 'model1' and 'model2':
+
           juju revoke --acl=write sam model1 model2
 
 
@@ -4687,6 +4894,7 @@ Click on the expander to see details for each command.
    [grant](#grant)
 
 
+ 
 
 ^# run
 
@@ -4764,6 +4972,7 @@ Click on the expander to see details for each command.
    started with juju run by calling "juju show-action-status --name juju-run".
 
 
+ 
 
 ^# run-action
 
@@ -4819,11 +5028,13 @@ Click on the expander to see details for each command.
    action: <ID>
    $ juju show-action-output <ID>
    result:
+
         status: success
         file:
           size: 873.2
           units: GB
           name: foo.sql
+
    $ juju run-action mysql/3 backup --params parameters.yml
    ...
    Params sent will be the contents of parameters.yml.
@@ -4833,20 +5044,26 @@ Click on the expander to see details for each command.
    Params sent will be:
    out: out.tar.bz2
    file:
+
         kind: xz
         quality: high
+
    ...
    $ juju run-action mysql/3 backup --params p.yml file.kind=xz file.quality=high
    ...
    If p.yml contains:
    file:
+
         location: /var/backups/mysql/
         kind: gzip
+
    then the merged args passed will be:
    file:
+
         location: /var/backups/mysql/
         kind: xz
         quality: high
+
    ...
    $ juju run-action sleeper/0 pause time=1000
    ...
@@ -4856,6 +5073,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# scp
 
@@ -4909,18 +5127,27 @@ Click on the expander to see details for each command.
 
    Copy file /var/log/syslog from machine 2 to the client's current working
    directory:
+
           juju scp 2:/var/log/syslog .
+
    Copy directory /var/log/mongodb, recursively, from a mongodb unit
    to the client's local directory remote-logs:
+
           juju scp -- -r mongodb/0:/var/log/mongodb/ remote-logs
+
    Copy file foo.txt, in verbose mode, from the client's current working
    directory to an apache2 unit of model "mymodel":
+
           juju scp -- -v -m mymodel foo.txt apache2/1:
+
    Copy multiple files from the client's current working directory to machine
    2:
+
           juju scp file1 file2 2:
+
    Copy multiple files from the bob user account on machine 3 to the client's
    current working directory:
+
           juju scp bob@3:'file1 file2' .
 
 
@@ -4929,6 +5156,7 @@ Click on the expander to see details for each command.
    [ssh](#ssh)
 
 
+ 
 
 ^# set-budget
 
@@ -4952,6 +5180,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# set-config
 
@@ -4997,6 +5226,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju set-config mysql dataset-size=80% backup_dir=/vol1/mysql/backups
           juju set-config apache2 --model mymodel --config /home/ubuntu/mysql.yaml
 
@@ -5014,6 +5244,7 @@ Click on the expander to see details for each command.
    _set-configs_
 
 
+ 
 
 ^# set-configs
 
@@ -5059,6 +5290,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju set-config mysql dataset-size=80% backup_dir=/vol1/mysql/backups
           juju set-config apache2 --model mymodel --config /home/ubuntu/mysql.yaml
 
@@ -5076,6 +5308,7 @@ Click on the expander to see details for each command.
    _set-configs_
 
 
+ 
 
 ^# set-constraints
 
@@ -5117,6 +5350,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju set-constraints mysql mem=8G cpu-cores=4
           juju set-constraints -m mymodel apache2 mem=8G arch=amd64
 
@@ -5130,6 +5364,7 @@ Click on the expander to see details for each command.
    [set-model-constraints](#set-model-constraints)
 
 
+ 
 
 ^# set-default-credential
 
@@ -5155,6 +5390,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju set-default-credential google credential_name
 
 
@@ -5169,6 +5405,7 @@ Click on the expander to see details for each command.
    [autoload-credentials](#autoload-credentials)
 
 
+ 
 
 ^# set-default-region
 
@@ -5188,6 +5425,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju set-default-region azure-china chinaeast
 
 
@@ -5196,6 +5434,7 @@ Click on the expander to see details for each command.
    [add-credential](#add-credential)
 
 
+ 
 
 ^# set-meter-status
 
@@ -5223,11 +5462,13 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
         juju set-meter-status myapp RED # Set Red meter status on all units of myapp
         juju set-meter-status myapp/0 AMBER --info "my message" # Set AMBER meter status with "my message" as info on unit myapp/0
 
 
 
+ 
 
 ^# set-model-config
 
@@ -5254,14 +5495,21 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju set-model-config logging-config='<root>=WARNING;unit=INFO'
           juju set-model-config -m mymodel api-port=17071 default-series=xenial
-   See also: list-models
-                get-model-config
-                unset-model-config
 
 
+   **See also:**
 
+   [ist-models](#ist-models)
+
+   [get-model-config](#get-model-config)
+
+   [unset-model-config](#unset-model-config)
+
+
+ 
 
 ^# set-model-constraints
 
@@ -5292,15 +5540,23 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju set-model-constraints cpu-cores=8 mem=16G
           juju set-model-constraints -m mymodel root-disk=64G
-   See also: list-models
-                get-model-constraints
-                set-constraints
-                get-constraints
 
 
+   **See also:**
 
+   [ist-models](#ist-models)
+
+   [get-model-constraints](#get-model-constraints)
+
+   [set-constraints](#set-constraints)
+
+   [get-constraints](#get-constraints)
+
+
+ 
 
 ^# set-plan
 
@@ -5333,6 +5589,7 @@ Click on the expander to see details for each command.
           juju set-plan myapp example/uptime
 
 
+ 
 
 ^# show-action-output
 
@@ -5374,6 +5631,7 @@ Click on the expander to see details for each command.
    displayed.  This is also the behavior when any negative time is given.
 
 
+ 
 
 ^# show-action-status
 
@@ -5409,6 +5667,7 @@ Click on the expander to see details for each command.
    If --name <name> is provided the search will be done by name rather than by ID.
 
 
+ 
 
 ^# show-backup
 
@@ -5432,6 +5691,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# show-budget
 
@@ -5466,6 +5726,7 @@ Click on the expander to see details for each command.
           juju show-budget personal
 
 
+ 
 
 ^# show-cloud
 
@@ -5495,13 +5756,19 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju show-cloud google
           juju show-cloud azure-china --output ~/azure_cloud_details.txt
-   See also: list-clouds
-                update-clouds
 
 
+   **See also:**
 
+   [ist-clouds](#ist-clouds)
+
+   [update-clouds](#update-clouds)
+
+
+ 
 
 ^# show-controller
 
@@ -5535,6 +5802,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju show-controller
           juju show-controller aws google
           
@@ -5549,6 +5817,7 @@ Click on the expander to see details for each command.
    _show-controllers_
 
 
+ 
 
 ^# show-controllers
 
@@ -5582,6 +5851,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju show-controller
           juju show-controller aws google
           
@@ -5596,6 +5866,7 @@ Click on the expander to see details for each command.
    _show-controllers_
 
 
+ 
 
 ^# show-machine
 
@@ -5647,6 +5918,7 @@ Click on the expander to see details for each command.
    _show-machines_
 
 
+ 
 
 ^# show-machines
 
@@ -5698,6 +5970,7 @@ Click on the expander to see details for each command.
    _show-machines_
 
 
+ 
 
 ^# show-model
 
@@ -5728,6 +6001,7 @@ Click on the expander to see details for each command.
    Show information about the current or specified model
 
 
+ 
 
 ^# show-status
 
@@ -5797,6 +6071,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju status
           juju status mysql
           juju status nova-*
@@ -5807,6 +6082,7 @@ Click on the expander to see details for each command.
    _show-status_
 
 
+ 
 
 ^# show-storage
 
@@ -5853,6 +6129,7 @@ Click on the expander to see details for each command.
    [space separated storage ids]
 
 
+ 
 
 ^# show-user
 
@@ -5890,6 +6167,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju show-user
           juju show-user jsmith
           juju show-user --format json
@@ -5906,6 +6184,7 @@ Click on the expander to see details for each command.
    [list-users](#list-users)
 
 
+ 
 
 ^# spaces
 
@@ -5949,6 +6228,7 @@ Click on the expander to see details for each command.
    _spaces_
 
 
+ 
 
 ^# ssh
 
@@ -5987,12 +6267,19 @@ Click on the expander to see details for each command.
    **Examples:**
 
    Connect to machine 0:
+
           juju ssh 0
+
    Connect to machine 1 and run command 'uname -a':
+
           juju ssh 1 uname -a
+
    Connect to a mysql unit:
+
           juju ssh mysql/0
+
    Connect to a jenkins unit as user jenkins:
+
           juju ssh jenkins@jenkins/0
 
 
@@ -6001,6 +6288,7 @@ Click on the expander to see details for each command.
    [scp](#scp)
 
 
+ 
 
 ^# ssh-key
 
@@ -6036,8 +6324,11 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-ssh-keys
+
    To examine the full key, use the '--full' option:
+
           juju list-keys -m jujutest --full
 
 
@@ -6050,6 +6341,7 @@ Click on the expander to see details for each command.
    _list-ssh-key_
 
 
+ 
 
 ^# ssh-keys
 
@@ -6085,8 +6377,11 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju list-ssh-keys
+
    To examine the full key, use the '--full' option:
+
           juju list-keys -m jujutest --full
 
 
@@ -6099,6 +6394,7 @@ Click on the expander to see details for each command.
    _list-ssh-key_
 
 
+ 
 
 ^# status
 
@@ -6168,6 +6464,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju status
           juju status mysql
           juju status nova-*
@@ -6178,6 +6475,7 @@ Click on the expander to see details for each command.
    _show-status_
 
 
+ 
 
 ^# status-history
 
@@ -6234,6 +6532,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# storage
 
@@ -6287,6 +6586,7 @@ Click on the expander to see details for each command.
    _storage_
 
 
+ 
 
 ^# subnets
 
@@ -6336,6 +6636,7 @@ Click on the expander to see details for each command.
    _subnets_
 
 
+ 
 
 ^# switch
 
@@ -6362,6 +6663,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju switch
           juju switch mymodel
           juju switch mycontroller
@@ -6377,6 +6679,7 @@ Click on the expander to see details for each command.
    [show-controller](#show-controller)
 
 
+ 
 
 ^# sync-tools
 
@@ -6445,6 +6748,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# unblock
 
@@ -6518,6 +6822,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
          To allow the model to be destroyed:
          juju unblock destroy-model
          To allow the machines, services, units and relations to be removed:
@@ -6531,6 +6836,7 @@ Click on the expander to see details for each command.
    [juju help block](#juju help block)
 
 
+ 
 
 ^# unexpose
 
@@ -6558,6 +6864,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju unexpose wordpress
 
 
@@ -6566,6 +6873,7 @@ Click on the expander to see details for each command.
    [expose](#expose)
 
 
+ 
 
 ^# unset-model-config
 
@@ -6597,12 +6905,18 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju unset-model-config api-port test-mode
-   See also: set-model-config
-                get-model-config
 
 
+   **See also:**
 
+   [et-model-config](#et-model-config)
+
+   [get-model-config](#get-model-config)
+
+
+ 
 
 ^# update-allocation
 
@@ -6631,6 +6945,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# update-clouds
 
@@ -6652,11 +6967,16 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju update-clouds
-   See also: list-clouds
 
 
+   **See also:**
 
+   [ist-clouds](#ist-clouds)
+
+
+ 
 
 ^# upgrade-charm
 
@@ -6764,6 +7084,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# upgrade-gui
 
@@ -6800,6 +7121,7 @@ Click on the expander to see details for each command.
    	juju upgrade-gui --list
 
 
+ 
 
 ^# upgrade-juju
 
@@ -6872,6 +7194,7 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
+
           juju upgrade-juju --dry-run
           juju upgrade-juju --version 2.0.1
           
@@ -6882,6 +7205,7 @@ Click on the expander to see details for each command.
    [sync-tools](#sync-tools)
 
 
+ 
 
 ^# upload-backup
 
@@ -6905,6 +7229,7 @@ Click on the expander to see details for each command.
 
 
 
+ 
 
 ^# version
 
@@ -6925,4 +7250,5 @@ Click on the expander to see details for each command.
    Specify an output file
 
 
+ 
 
