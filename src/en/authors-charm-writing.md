@@ -272,7 +272,7 @@ if [ -f /tmp/config.php ]; then
 fi
 chmod -R 777 /var/www/vanilla/conf /var/www/vanilla/uploads /var/www/vanilla/cache
 status-set maintenance "Creating apache2 configuration"
-cat <<EOF > /etc/apache2/sites-available/vanilla
+cat <<EOF > /etc/apache2/sites-available/vanilla.conf
 <VirtualHost *:80>
   ServerAdmin webmaster@localhost
   DocumentRoot /var/www/vanilla
