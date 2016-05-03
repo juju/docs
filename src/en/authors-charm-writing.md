@@ -39,6 +39,7 @@ our charm quickly and easily:
 ```bash
 juju charm create vanilla
 ```
+!!! Note: In some versions, the previous command should be executed as `charm create vanilla`
 
 This not only creates the directory structure, it also populates it with
 template files for you to edit. Your directory will now look like this:
