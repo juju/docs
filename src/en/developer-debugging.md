@@ -29,9 +29,30 @@ logs](./troubleshooting-logs.html#the-debug-log-command) section for more
 details and [filtering](./troubleshooting-logs.html#advanced-filtering) options
 with the `juju debug-log` command.
 
-You can also view Juju logs logs on an individual machine by using
-`juju ssh` to login to the unit in question and manipulate the log files in the
-`/var/log/juju` directory.
+### Log file location
+
+Since log messages stream in real time, it is possible to miss messages while
+using the debug-log command. In the case where you need to view the log files
+you can ssh to the machine and view the log files. To access the individual
+machine use `juju ssh <machine-number>` to get access to the machine and the
+Juju log files can be found in the `/var/log/juju` directory.
+
+Fore more information about what you can do with the [log files](./troubleshooting-logs.html#log-files) please
+refer to [viewing logs](./troubleshooting-logs.html).
+
+### Log files on the controller
+
+Beginning with Juju 2.0, the machine running the controller is not represented
+in the Juju model and therefore not accessible by machine number. If you need
+the log files from the controller you must switch to the "admin" model and ssh
+to machine 0.
+
+```
+juju switch local.amazon:admin
+juju ssh 0
+```
+Replace "local.amazon" with your current controller or just use "admin" to
+switch to the admin model for the default controller.
 
 ##  The 'debug-hooks' command
 

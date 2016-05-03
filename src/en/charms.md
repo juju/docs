@@ -10,7 +10,7 @@ cloud-based services. The charms publicly available in the online
 of experts. Charms make it easy to reliably and repeatedly deploy services, 
 then scale up as required with minimal effort.
 
-There are a variety of topics realted to charms to be found in the left navigation 
+There are a variety of topics related to charms to be found in the left navigation 
 pane under **Charms**. The three main topics you should get to know well are:
 
  - **[Deploying charms][deploy]** - which covers how to use charms to deploy 
@@ -33,9 +33,10 @@ you should gain an understanding of:
  - Removing services
  - Destroying your model
 
-!!! Note: this walkthrough assumes you have already installed Juju, connected to a 
-cloud and created a model. If you have not yet done these things, please see
-the [Getting Started page][started] first.
+!!! Note: this walkthrough assumes you have already installed Juju, connected 
+to a cloud and created a model. The 'default' model is created automatically 
+when you bootstrap your environment. If you have not yet done these things, 
+please see the [Getting Started page][started] first.
 
 For this walkthrough we are going to set up a simple MediaWiki site, then 
 prepare it for high traffic, before scaling it back and finally removing it 
@@ -145,10 +146,116 @@ services to the wider world:
 juju expose haproxy
 ```
 
-### Scaling up 
+Our example MediaWiki site is now exposed via the HAProxy service. You can
+check this by first getting the IP address of HAProxy from the output of
+`juju status haproxy` (beneath the 'Units' section):
+
+
+```bash
+haproxy/0   unknown         idle        2.0       80/tcp 10.175.11.250   
+```
+
+Use the IP address, 10.175.11.250 in the example above, within a web 
+browser running on your client machine.  With everything working correctly, 
+MediaWiki's main page will appear, containing the message 'MediaWiki has been 
+successfully  installed'.
+
+
+### Scaling up
+
+One of Juju's great strengths is that it makes it easy to scale your service to
+meet fluctuations in demand. We're going to demonstrate this with with the 
+MediaWiki service we've just deployed. Scale is handled by adding and removing 
+units, and you can add 5 units simply with the following command:
+
+```bash
+juju add-unit -n 5 mediawiki 
+```
+
+When you now check the output of the `juju status mediawiki` command, you'll see
+that 5 newly provisioned machines have been deployed to run MediaWiki. However,
+the load balancing is being performed by HAProxy, which is distributing any
+incoming connections to your cluster of MediaWiki machines, and the complexity
+of these added connections is being handled automatically by Juju. 
+
+
 ### Scaling back
+
+Reducing the scale of a deployment is almost as simple as increasing the scale,
+although you need to specify which specific units to remove. We currently have
+a total of 6 units assigned to MediaWiki, for example, as can be seen in the
+output of the `juju status mediawiki` command:
+
+
+```no-highlight
+mediawiki/0 unknown         idle        2.0 0       80/tcp 10.175.11.252          
+mediawiki/1 unknown         idle        2.0 3       80/tcp 10.175.11.244          
+mediawiki/2 unknown         idle        2.0 4       80/tcp 10.175.11.31           
+mediawiki/3 unknown         idle        2.0 5       80/tcp 10.175.11.62           
+mediawiki/4 unknown         idle        2.0 6       80/tcp 10.175.11.63           
+mediawiki/5 unknown         idle        2.0 7       80/tcp 10.175.11.65 
+```
+
+To scale back our deployment, use the `remove-unit` command followed by the 
+unit ID of each unit you'd like to remove:
+
+
+```bash
+juju remove-unit mediawiki/3 mediawiki/4 mediawiki/5
+```
+
+A hidden part of the above process is that the machines the units were
+running on will be destroyed automatically if the machine is not a 
+controller and not hosting other Juju managed containers.
+
+
 ### Removing services
+
+If you no longer require MediaWiki, you can remove the entire service, along
+with all the units and machines used to operate the service, with a single
+command:
+
+
+```bash
+juju remove-service mediawiki
+```
+
+When the removal has completed, you should see no trace of 'mediawiki' in the
+output of `juju status`, nor any of the units and machines that
+were used to run the service.
+
 ### Destroying the model
+
+Finally, to complete this brief walkthough, we're going to remove the model
+we've used to host our services. If this is a fresh Juju installation, you
+will have been operating within the 'default' model that's automatically
+generated when you bootstrap the environment. You can check which models you
+have available, along with which one is active, marked by the * symbol, 
+with the `juju list-models` command. Your output should be similar to the 
+following:
+
+```bash
+NAME      OWNER        STATUS     LAST CONNECTION
+admin     admin@local  available  3 hours ago
+default*  admin@local  available  7 minutes ago
+```
+
+To remove the default model, type `juju destroy-model default` and enter 'Y' to 
+accept the warning that this step will destroy all machines, services,
+data and other resources associated with the default model. A few moments
+later, depending on the complexity of your model, you should find it no longer
+listed in the output of the `list-models` command. 
+
+If you want to start again with a clean default model, restoring Juju to the
+state it was in before we deployed the MediaWiki charm, you can create one 
+with:
+
+```bash
+juju create-model default
+```
+
+For more information on the subjects we've covered in this walkthough, see our documentation on **[deploying charms][deploy]**, **[charm relations][relations]** and 
+**[scaling deployed services][scaling]**.
 
 
 [deploy]: ./charms-deploying.html

@@ -19,6 +19,9 @@ multi:
 	tools/make_versions.sh
 
 spell:
-	spell -b `find src/en -name "*.md"` | sort | uniq
+	spell -b `find src/en -name "*.md" | grep -v commands.md` | sort | uniq
 
-.PHONY: build clean multi serve spell sysdeps
+spell-commands:
+	spell -b src/en/commands.md | sort | uniq
+
+.PHONY: build clean multi serve spell spell-commands sysdeps
