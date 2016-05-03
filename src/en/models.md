@@ -127,7 +127,7 @@ Common model management tasks are summarized below.
 
 
 
-^# Configure
+^# Configure a model
 
    Configuration can occur at the model level. This will affect all Juju
    machines in the model. For instance, a logging level and API port can be
