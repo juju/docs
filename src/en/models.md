@@ -2,7 +2,6 @@ Title: Juju models
 TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the
       access and secret keys need to be provided." I tested ec2 and did not
       need to do this. OpenStack?
-      Due to bug https://goo.gl/yEGzP2 examples cannot use syntax highlighting.
 
 
 # Juju models
