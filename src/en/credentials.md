@@ -22,9 +22,13 @@ If you are having difficulty determining the credentials needed for your
 particular cloud, you should find these pages on specific clouds helpful: 
 
   [Amazon Web Services][aws]
+  
   [Microsoft Azure][azure]
+  
   [Google Compute Engine][gce]
+  
   [Joyent][joyent]
+  
   [Rackspace][rackspace]
 
 
