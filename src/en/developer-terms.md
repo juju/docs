@@ -60,7 +60,14 @@ TERM         	CHARM
 lorem-ipsum/1	cs:trusty/terms-example-0
 ```
 
-To display the list of terms the user has agreed to, use the
+You can also view the terms associated with a specific charm:
+```bash
+$ charm show cs:trusty/terms-example-0 terms
+terms:
+- lorem-ipsum/1
+```
+
+A user can view the list of terms they've agreed to via the
 `juju list-agreements` command:
 
 ```bash
