@@ -54,6 +54,16 @@ Common model management tasks are summarized below.
    For complete explanation and syntax, see the
    [command reference page](./commands.html#list-models) or the `juju help
    list-models` command.
+
+
+
+^# Configure a model
+
+   Configuration can occur at the model level. This will affect all Juju
+   machines in the model. For instance, a logging level and API port can be
+   stipulated.
+
+   This is a complex subject. See [Model configuration](./models-config.html).
    
 
 
@@ -127,16 +137,6 @@ Common model management tasks are summarized below.
 
 
 
-^# Configure a model
-
-   Configuration can occur at the model level. This will affect all Juju
-   machines in the model. For instance, a logging level and API port can be
-   stipulated.
-
-   This is a complex subject. See [Model configuration](./models-config.html).
-
-
-
 ^# View logs
 
    Juju logs are viewed at the model level. This allows inspection of
@@ -154,12 +154,3 @@ Common model management tasks are summarized below.
    to the Juju software package installed on a client system.
 
    This is a complex subject. See [Juju upgrades](./models-upgrade.html).
-
-
-
-^# Set up HA for a model
-
-   High availability in Juju provides resilience to the services offered by a
-   Juju controller.
-   
-   This is a complex subject. See [Juju HA](./models-ha.html).

@@ -15,13 +15,13 @@
         <li class="section"><a class="header" href="controllers.html">Controllers</a>
             <ul class="sub">
                 <li><a href="controllers-creating.html">Creating</a></li>
+                <li><a href="models-ha.html">Juju HA</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="models.html">Models</a>
             <ul class="sub">
                 <li><a href="models-config.html">Configuring</a></li>
                 <li><a href="models-upgrade.html">Upgrading</a></li>
-                <li><a href="models-ha.html">Juju HA</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="charms.html">Charms & Services</a>
