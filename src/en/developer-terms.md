@@ -16,9 +16,6 @@ check if the terms have been agreed to. If they have, the charm will deploy as
 usual. If not, the user will be prompted to run the `juju agree` command in
 order to deploy.
 
-You can view which charm terms you've accepted by installing
-[charm-tools](./tools-charm-tools.html) and running `charm terms`.
-
 # Managing terms
 
 ## Creating terms
@@ -48,7 +45,23 @@ version.
 
 ## Listing terms
 
-The `juju list-agreements` command will display the terms a user has accepted:
+There two distinctions when considering terms. There are the terms that are
+linked to a charm, and terms that have been accepted by the user.
+Developer-facing subcommands are run against the `charm` command, which is
+installed via [charm-tools](./tools-charm-tools.html), while users interact
+with `juju`.
+
+`charm terms` shows the terms that you have created, and which charms they
+are associated with:
+
+```bash
+$ charm terms
+TERM         	CHARM
+lorem-ipsum/1	cs:trusty/terms-example-0
+```
+
+To display the list of terms the user has agreed to, use the
+`juju list-agreements` command:
 
 ```bash
 $ juju list-agreements
