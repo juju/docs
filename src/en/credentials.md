@@ -46,8 +46,8 @@ have more than one for a cloud:
 juju set-default-credential <cloud> <credential>
 ```
 
-If you are having difficulty finding the correct credential information for 
-your cloud, please see the [help pages][help].
+The default credentials do not need to be specified on the commandline for 
+bootstrap (creating a controller).  
 
 
 ### Scanning existing credentials
@@ -134,5 +134,4 @@ juju remove-credential aws bob
 
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[help]: ./help-credentials.html
 [lxd]: ./clouds-LXD.html
