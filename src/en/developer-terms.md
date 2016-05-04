@@ -2,7 +2,7 @@ Title: Writing charms using terms
 
 # Writing charms that use terms
 
-Many applications require the acceptance of Terms in order to be installed.
+Many applications require the acceptance of terms in order to be installed.
 Starting with Juju 2, charms can require a user accept its terms in order for
 it to be deployed.
 
