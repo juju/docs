@@ -46,6 +46,22 @@ specific versions of a term, i.e., `lorem-ipsum/2` would reference the second
 version of the `lorem-ipsum` term. Omitting the version will require the latest
 version.
 
+## Listing terms
+
+The `juju list-agreements` command will display the terms a user has accepted:
+
+```bash
+$ juju list-agreements
+[
+    {
+        "user": "aisrael",
+        "term": "lorem-ipsum",
+        "revision": 1,
+        "created-on": "2016-04-20T21:01:24.84Z"
+    }
+]
+```
+
 ## Upgrading terms
 
 Deployed charms will run under the terms they were installed with. If the terms
