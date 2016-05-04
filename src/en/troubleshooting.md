@@ -8,7 +8,7 @@ Make sure you have [Juju installed](./getting-started.html#installation) and
 configured correctly.
 
 - [Troubleshooting Juju itself](./troubleshooting-juju.html) - `Coming soon!`
-- [Viewing logs](./troubleshooting-logs.html)
+- [Juju logs](./troubleshooting-logs.html)
 - [Troubleshooting model upgrades](./troubleshooting-upgrade.html) - help for
 upgrading Juju across a model.
 
