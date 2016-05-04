@@ -60,8 +60,9 @@ have more than one for a cloud:
 juju set-default-credential <cloud> <credential>
 ```
 
-The default credentials do not need to be specified on the commandline for 
-bootstrap (creating a controller).  
+Setting a default credential means this will be used by the bootstrap 
+command when creating a controller, without having to specify it with
+the `--credential` option.
 
 
 ### Scanning existing credentials
