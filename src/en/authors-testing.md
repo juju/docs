@@ -52,7 +52,7 @@ with a predictable environment. The tests can make the following assumptions:
   bootstrapped, and will be the default for command line usage.
 - The CWD is the `tests` directory off the charm root.
 - Full network access to deployed nodes will be allowed.
-- the bare name of any charm in arguments to juju will be resolved to a charm 
+- The bare name of any charm in arguments to juju will be resolved to a charm 
   url and/or repository arguments of the test runner's choice. This means that 
   if you need mysql, you do not do `juju deploy cs:mysql` or 
   `juju deploy --repository ~/charms local:mysql`, but just `juju deploy mysql`.
