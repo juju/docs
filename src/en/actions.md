@@ -1,8 +1,10 @@
 Title: Juju actions  
+TODO: Review "actions are sub-commands" bit
+
 
 # Juju Actions
 
-Juju Charms can describe Actions that users can take on deployed services.
+Juju charms can describe *actions* that users can take on deployed services.
 
 Actions are scripts that can be triggered on a unit via the CLI or the [Juju
 GUI](controllers-gui.html). Parameters for an action are passed as a map,
