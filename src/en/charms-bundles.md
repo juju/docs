@@ -29,8 +29,8 @@ users.
 ## Deploying a bundle from the Charm Store with the GUI
 
 To deploy a bundle from the Charm Store using the GUI, first find the bundle
-you wish to deploy either search or by expanding the 'Featured searches' with a
-click of the 'Show more' button. You can then select 'Bundles' to list
+you wish to deploy via search or by expanding the 'Featured searches' pane with
+a click of the 'Show more' button. You can then select 'Bundles' to list
 bundles within their own category. One useful feature of this list is that to
 the right of each bundle you'll see icons representing each separate service 
 embedded within the bundle, giving you a quick overview of a bundle's
@@ -38,13 +38,13 @@ complexity and potential resource requirements.
 
 ![Bundle resources in the Charm Store](media/juju2_gui_bundles_store.png)
 
-Select a bundle to see further details; a new pane will display a preview of the
+Select a bundle to see further details. A new pane will display a preview of the
 GUI's visual overview, previewing its services and connections. Further details,
-such as how the bundle supports scaling, can be found below. Click 'Add to
-canvas' to add the bundle. 
+such as how the bundle supports scaling, can be found below the preview. Click 
+'Add to canvas' to add the bundle. 
 
 Before deploying the bundle, check the configuration of each service by
-selecting them, making changes if necessary. Clicking on 'Deploy changes' will
+selecting them, making changes if necessary. Select 'Deploy changes' to
 activate your new bundle along with any changes you've made.   
 
 ### Local import to Juju GUI
@@ -56,7 +56,7 @@ You can also import the file using the 'Import' button located next to
 the 'Commit changes' button in the lower right corner of the GUI. After 
 clicking 'Import' you’ll be prompted to select the bundle file. 
 
-Once a file has been added, the GUI will briefly report `ChangeSet process`
+After a file has been added, the GUI will briefly report `ChangeSet process`
 followed by `ChangeSet complete`. The 'Commit changes' button will then update 
 to show the number of outstanding changes that need to be committed to
 activate your new bundle. Click on 'Commit changes' to review the deployment
