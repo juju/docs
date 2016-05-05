@@ -12,8 +12,8 @@
                 <li><a href="credentials.html">Credentials</a></li>
             </ul>
         </li>
-        <li class="section"><a class="header" href="controllers.html">Controllers</a></li>
-        <li class="section"><a class="header" href="models.html">Models</a></li>
+        <li><a href="controllers.html">Controllers</a></li>
+        <li><a href="models.html">Models</a></li>
         <li class="section"><a class="header" href="charms.html">Charms & Services</a>
             <ul class="sub">
                 <li><a href="charms-deploying.html">Deploying Services</a></li>
