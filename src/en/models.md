@@ -2,18 +2,17 @@ Title: Juju models
 TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the
       access and secret keys need to be provided." I tested ec2 and did not
       need to do this. OpenStack?
-      Due to bug https://goo.gl/yEGzP2 examples cannot use syntax highlighting.
 
 
 # Juju models
 
 A Juju *model* is an environment associated with a *controller* (see
 [Controllers](./controllers.html)). When a controller is created two models are
-provisioned along with it. These initial models are named '**admin**' and
-'**default**'. The 'admin' model is not intended for general workloads but
-solely for monitoring and management purposes. The '**default**' model,
-however, is ready for immediate use, and multiple subsequent models can be
-instantly added (see below). 
+provisioned along with it. These initial models are named 'admin' and
+'default'. The 'admin' model is not intended for general workloads but solely
+for monitoring and management purposes. The 'default' model, however, is ready
+for immediate use, and multiple subsequent models can be instantly added (see
+below). 
 
 
 ## Model management

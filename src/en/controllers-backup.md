@@ -1,5 +1,5 @@
 Title: Back up and restore Juju  
-TODO: Actual backup restore command needs to be tested
+TODO:  Actual backup restore command needs to be tested
   
   
 # Backing Up and Restoring Juju
@@ -35,7 +35,7 @@ cd ~
 tar -cpzf juju-client-$(date "+%Y%m%d-%H%M%S").tar.gz .local/share/juju 
 ```
 
-This command datestamps the created file for easy identification, you may of
+This command datestamps the created file for easy identification. You may, of
 course, call it what you wish. 
 
 !!! Note: As mentioned previously, the files in this backup include the keys 
@@ -45,8 +45,8 @@ further step of encrypting this backup file may be advisable.
  
 ### Restoring ~/.juju 
 
-For Ubuntu, restoring your Juju client settings is a simple 
-matter of extracting the archive you created above.
+For Ubuntu, restoring your Juju client settings is a simple matter of
+extracting the archive you created above.
 
 ```bash
 cd ~
@@ -58,21 +58,21 @@ any existing files in the Juju directory. Please be sure that this is what you
 want!
 
 
-## The Juju state server (bootstrap node)
+## The Juju controller
 
-Juju provides commands for recovering the Juju state server (bootstrap
-node) in case of failure. The current state is held within the 'admin' model, 
-created alongside the 'default' model when you bootstrap your environment. As 
-a result, all backup commands need to operate within the 'admin' model, either 
-by using the `--model admin` argument with each command, or by ensuring you're 
-within the 'admin' model prior to using a backup command (i.e.`'juju switch 
-admin'`).
+Juju provides commands for recovering a controller in case of failure. The
+current state is held within the 'admin' model. Therefore, all backup commands
+need to operate within that model, either by using the '--model admin' argument
+with each command, or by ensuring you're within the 'admin' model prior to
+using a backup command (i.e.`juju switch admin`). In addition, if there are
+mulitple cloud environments, and thus multiple controllers, ensure you are
+operating on the proper controller.
 
 The backup commands allow you to create, restore and manage backup files 
-containing the state server configuration, keys, and environment data. If the 
-state server or its host machine later fails, you can create a new state server 
-from the backup file. For environments with "High availability" enabled, also 
-see the relevant sections below](#ha-(high-availability))
+containing the controller configuration, keys, and environment data. If the 
+controller or its host machine later fails, you can recreate the controller
+from the backup file. For environments with high availability enabled, 
+see [the relevant section below](#ha-(high-availability)).
 
 
 ### Creating a backup file
@@ -83,9 +83,9 @@ Use the `create-backup` command to create a new backup file:
 juju create-backup [--filename=FILENAME] [-m | --model] [--no-download]
 ```
 
-The `create-backup` command generates an archive file for the current 
-environment, along with metadata about that file. Unless you issue the 
-`--no-download` argument, the archive will be both stored on your state server 
+The `create-backup` command generates an archive file for the current
+environment, along with metadata about that file. Unless you issue the
+`--no-download` argument, the archive will be both stored on your controller
 and downloaded to your client as a 'tar.gz' file.
 
 The backup name combines the date and time of a backup with a unique model 
@@ -103,7 +103,7 @@ Note that creating a backup may take a long time.
 
 ### Managing Backups
 
-As each backup is stored on the state server, you can manage backups from 
+As each backup is stored on the controller, you can manage backups from 
 whatever client you can connect from, and fetch previous backups if the 
 originally downloaded file has gone astray. You can use the following commands
 to manage and restore your backups:
@@ -113,7 +113,7 @@ to manage and restore your backups:
 usage: `juju list-backups [-m | --model]`
 
 The `list-backups` command will display the names of all the backups currently 
-available on the state server. 
+available on the controller. 
 
 ```bash
 juju list-backups
@@ -199,7 +199,7 @@ juju version:    2.0
 ### juju remove-backup  
 usage: `juju remove-backup [-m | --model] <ID>`
 
-If you wish to remove a particular backup file from the state server (perhaps 
+If you wish to remove a particular backup file from the controller (perhaps 
 to save space!), you can use the `remove-backup` command with the appropriate 
 ID:
 
@@ -216,11 +216,11 @@ successfully removed: 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
 ### juju upload-backup  
 usage: `juju upload-backup [-m | --model] <filename>`
 
-As well as downloading backups from the Juju state server, it is also possible
+As well as downloading backups from the controller, it is also possible
 to upload them. This can be useful either to break up the process of restoring 
 from a backup (upload the file, then restore using the ID), or in the case 
 where backups have been removed from the state server. On completion, the 
-command will return all the metadata for the the uploaded backup file. 
+command will return all the metadata for the uploaded backup file. 
 
 Examples:
 
@@ -247,7 +247,7 @@ juju version:    2.0
 The metadata of uploaded files will reflect the time it was stored, but should
 also determine the correct date and time for when the backup was 
 started/completed. It's this date and time that's used to name the backup on 
-the state server.
+the controller.
 
 !!! Note: The filename you use to store local backups does not matter, but the 
 uploaded file is expected to be a gzipped tar file (e.g. a `.tgz` or `.tar.gz` 
@@ -258,22 +258,22 @@ file)
 usage: `juju restore-backup --id=<ID> | --file=<filname> [-b] [-m | --model] 
 [--upload-tools] [--constraints=<string>]`
 
-If the state server for the environment is still operational it can be restored
-from one of the stored backups by specifying the ID:
+If the controller is still operational it can be restored from one of the
+stored backups by specifying the ID:
 
 ```bash 
 juju restore-backup --id=20160429-091622.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
 ```
 
 It is also possible to restore from a local backup file by instead specifying
-the filename. This will then be uploaded to the state server and used to 
+the filename. This will then be uploaded to the controller and used to 
 restore it:
 
 ```bash
 juju restore-backup --file=backup.tar.gz
 ```
-In the case that the original state server no longer exists, it is possible to 
-re-bootstrap the environment and restore the backup to the new state-server. 
+In the case that the original controller no longer exists, it is possible to 
+re-bootstrap the environment and restore the backup to the new controller. 
 To do this, use the '-b' switch:
 
 ```bash
@@ -292,23 +292,22 @@ information on the constraints which may be used.
 
 ## HA (High Availability)
 
-As stated in [the Juju HA documentation](./juju-ha.html), High Availability in
-general terms means that a Juju environment has 3 or more (up to 7) redundant
-state servers. In the normal course of operation, having multiple, redundant 
-state servers means that requiring a backup is less likely. As long as one of 
-the original state servers remains, the others can be replaced by simply
-running the `juju enable-ha` command again.
+As stated in [Juju HA](./controllers-ha.html), high availability, in general
+terms, indicates that a Juju environment has 3 or more (up to 7) redundant
+controllers. In the normal course of operation, this means that requiring a
+backup is less likely. As long as one of the original controller remains, the
+others can be replaced by simply running the `juju enable-ha` command again.
 
-The contemplated case for HA backup/restore is when you have lost all your 
-state servers and need to recover a basic setup in order to be able to perform the 
-`juju enable-ha` step again.
+The contemplated case for HA backup/restore is when you have lost all your
+controllers and need to recover a basic setup in order to be able to perform
+the `juju enable-ha` step again.
 
 ### Backups on HA
 
 When you perform a backup on a Juju installation which has multiple redundant 
-state-servers, the initial state-server will be chosen to perform the backup.
+controllers, the initial controller will be chosen to perform the backup.
 
-As an example, the following environment has 3 active state-servers. Running 
+As an example, the following environment has 3 active controllers. Running 
 the command:
 
 ```bash
@@ -333,7 +332,7 @@ ID         STATE   DNS          INS-ID                               SERIES AZ
 ```
 
 Performing a backup on this environment, will be based on the first 
-state-server,
+controller,
 _machine 0_:
 
 ```bash
@@ -346,22 +345,22 @@ juju create-backup
 downloading to juju-backup-20160429-124813.tar.gz
 ```
 
-As with backing up a non-HA environment, the backup file is stored on the state
-server and automatically downloaded, or you can specify further options
+As with backing up a non-HA environment, the backup file is stored on the 
+controller and automatically downloaded, or you can specify further options
 as [stated above](#creating-a-backup-file).
 
 ### Restoring on HA
 
 Please note that a restore must take place when you have lost all your 
-redundant state-servers. If that is not the case, simply issuing the
-`juju enable-ha` command will be enough to create a new state-server replica on 
+redundant controllers. If that is not the case, simply issuing the
+`juju enable-ha` command will be enough to create a new controller replica on 
 your environment.
 
 For performing a `restore-backup`, the only check performed by the utility is 
-to make sure that the initial state-server is not up. 
+to make sure that the initial controller is not up. 
 
-!!! WARNING: If your Juju environment still contains existing state servers, 
-restoring a backup will overwrite their data or remove them.
+!!! WARNING: If your Juju environment still contains an existing controller, 
+restoring a backup will overwrite its data or remove them.
 
 To restore an initial bootstrap environment, the procedure is the same as for 
 non-HA environments:
@@ -370,14 +369,14 @@ non-HA environments:
 juju restore-backup  -b --file=backup.tar.gz
 ```
 
-Once this step is completed, you will have a single state-server running. To
-recover the rest of the state-server replicas, all that remains is to reissue
+Once this step is completed, you will have a single controller running. To
+recover the rest of the controller replicas, all that remains is to reissue
 the command: 
 
 ```bash
 juju enable-ha -n 3
 ```
 
-This will create additional state-servers based on the restored one.
+This will create additional controllers based on the restored one.
 
 
