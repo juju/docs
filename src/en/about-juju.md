@@ -45,7 +45,7 @@ charm for a service includes (amongst other things) all the logic for writing
 configuration files for that service - that logic itself can be written in 
 whatever language or tool the author of the charm prefers.
 
-It is common for people to start creating a charm by bringing together the 
+It is common for people to start creating a charm by bringing together
 Puppet or Chef or other scripts which they currently use to automate the 
 writing of the necessary configuration files. If the charm is going to be 
 writing and updating configuration for the service, and there are already 
@@ -60,9 +60,8 @@ services, but still reuse whatever they want from other teams.
 
 ![charm diagram](./media/about-charms.png)
 
-Different service charms can use entirely different configuration management 
-tools
-
+Different service charms can use entirely different configuration management
+tools.
 
 The main change in moving configuration management scripts into a charm is 
 that one wants to focus only on a single service for each charm. If your 
@@ -126,9 +125,9 @@ up workloads on their laptops to simulate an environment similar to a real
 production deployment.
 
 Bundles can be shared publicly or privately. New bundles are added to the 
-public collection every week. Juju Quickstart is a plugin that lets you 
-bootstrap Juju, launch the GUI, and deploy a bundle, all with one command. You
-can go from zero to a full cloud deployment in seconds with the right bundle.
+public collection every week. And you can now bootstrap Juju, launch the GUI 
+and deploy a bundle with a single command. That means you can go from zero to
+a full cloud deployment in seconds with the right bundle.
 
 ## What about Windows or other Linux operating systems?
 
