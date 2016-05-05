@@ -18,6 +18,20 @@ Currently, Juju can use one of three ways to get your credentials for a cloud:
 
 These methods are explained in more detail below.
 
+If you are having difficulty determining the credentials needed for your 
+particular cloud, you should find these pages on specific clouds helpful: 
+
+  [Amazon Web Services][aws]
+  
+  [Microsoft Azure][azure]
+  
+  [Google Compute Engine][gce]
+  
+  [Joyent][joyent]
+  
+  [Rackspace][rackspace]
+
+
 ### Adding credentials via the commandline
 
 You can add credentials by running the command:
@@ -46,8 +60,9 @@ have more than one for a cloud:
 juju set-default-credential <cloud> <credential>
 ```
 
-If you are having difficulty finding the correct credential information for 
-your cloud, please see the [help pages][help].
+Setting a default credential means this will be used by the bootstrap 
+command when creating a controller, without having to specify it with
+the `--credential` option.
 
 
 ### Scanning existing credentials
@@ -134,5 +149,9 @@ juju remove-credential aws bob
 
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[help]: ./help-credentials.html
 [lxd]: ./clouds-LXD.html
+[aws]: ./help-aws.html
+[azure]: ./help-azure.html
+[gce]: ./help-google.html
+[joyent]: ./help-joyent.html
+[rackspace]: ./help-rackspace.html
