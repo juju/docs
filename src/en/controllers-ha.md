@@ -1,5 +1,6 @@
 Title: Juju High Availability  
 TODO: Remove citation of HA logging bug when fixed (section: 'HA and logging')
+      Review opening paragraph of HA
 
 
 # High availability
