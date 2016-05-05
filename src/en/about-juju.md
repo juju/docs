@@ -143,7 +143,7 @@ and deploy more software, or scale up your existing services.
 ## Can I use Juju to move services across clouds?
 
 You can use Juju to recreate application architectures on a wide number of 
-clouds and platforms. in other words, if you have deployed a set of services 
+clouds and platforms. In other words, if you have deployed a set of services 
 on one cloud, you can recreate all the same services with the same 
 relationships and the same configuration, on any other cloud or 
 “substrate” that Juju supports. If you are migrating from cloud to cloud, 
@@ -211,11 +211,11 @@ used the more useful it becomes. Different teams bring different expertise -
 security, performance, scale, and all of those things make for improvements in 
 the charm that are very hard for a single team to achieve.
 
-What are the best workloads to try with Juju?
+## What are the best workloads to try with Juju?
 
 Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure 
 such as OpenStack, or container management systems. Pick your favourite cloud 
-and launch a Juju server, deploy the Juju GUI there and then drop one of the 
+and launch a Juju server. From the integrated GUI, you can drop one of the 
 bundles from the charm store into the blank canvas.
  
 <style>.tableicon{width:100px;height:100px;float:right;margin: 5px 5px 40px 
