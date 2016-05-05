@@ -12,12 +12,7 @@
                 <li><a href="credentials.html">Credentials</a></li>
             </ul>
         </li>
-        <li class="section"><a class="header" href="controllers.html">Controllers</a>
-            <ul class="sub">
-                <li><a href="controllers-creating.html">Creating</a></li>
-                <li><a href="juju-ha.html">Juju HA</a></li>
-            </ul>
-        </li>
+        <li class="section"><a class="header" href="controllers.html">Controllers</a></li>
         <li class="section"><a class="header" href="models.html">Models</a></li>
         <li class="section"><a class="header" href="charms.html">Charms & Services</a>
             <ul class="sub">
@@ -49,8 +44,6 @@
         <li class="section"><a class="header" href="juju.html">Managing Juju</a>
             <ul class="sub">
                 <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
-                <li><a href="juju-backups.html">Backup and restore</a></li>
-                <li><a href="juju-gui-management.html">Using the Juju GUI</a></li>
                 <li><a href="juju-offline-charms.html">Deploy charms offline</a></li>
                 <li><a href="juju-centos.html">CentOS support</a></li>
                 <li><a href="network-spaces.html">Network spaces</a></li>

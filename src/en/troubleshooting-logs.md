@@ -9,7 +9,7 @@ reading individual logs on multiple (Juju) machines directly on the file system.
 The latter can nonetheless be done in exceptional circumstances and some explanation
 is provided here.
 
-See [Juju high availability](./juju-ha.html#ha-and-logging) when viewing logs
+See [Juju high availability](./controllers-ha.html#ha-and-logging) when viewing logs
 in an HA context.
 
 
@@ -210,6 +210,6 @@ Notice that the admin model was chosen with `juju ssh`. Also, a combination of
 commands `juju list-controllers` and `juju list-machines` yielded that the
 controller here has a machine id of '0' (typical).
 
-!!! Note: in a [High availability](./juju-ha.html) scenario, file `logsink.log`
+!!! Note: in a [High availability](./controllers-ha.html) scenario, file `logsink.log`
 is not guaranteed to contain all messages since agents have a choice of several
 controllers to send their logs to.

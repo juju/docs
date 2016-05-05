@@ -7,11 +7,11 @@ be invoked or queued remotely by the user on demand.  For example, the Charm
 author might include a `snapshot` Action on a database Charm.  
 [See here for more on Actions and their use](actions.html).
 
-The user may give arguments when invoking the Action.  Complex, nested arguments
-are possible.  The Charm uses a file named `actions.yaml` to specify the type
-and parameters of these arguments.  On [juju-gui](howto-gui-management.html),
-the UI for an Action invocation will be automatically built based on
-`actions.yaml`.
+The user may give arguments when invoking the action. Complex, nested
+arguments are possible. The charm uses a file named `actions.yaml` to specify
+the type and parameters of these arguments. On the
+[Juju GUI](controllers-gui.html), the UI for an action invocation will be
+automatically built based on `actions.yaml`.
 
 [Action Tools](#action-tools) may be used by the author to define how Actions
 interact with Juju.  Actions can retrieve params passed by the user, set
