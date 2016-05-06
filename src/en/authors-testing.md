@@ -50,7 +50,7 @@ with a predictable environment. The tests can make the following assumptions:
 - A version of juju is installed and available in the system path.
 - A juju environment with no services deployed inside it is already 
   bootstrapped, and will be the default for command line usage.
-- The CWD is the `tests` directory off the charm root.
+- The CWD is the `tests` directory inside the charm root.
 - Full network access to deployed nodes will be allowed.
 - The bare name of any charm in arguments to juju will be resolved to a charm 
   URL and/or repository arguments of the test runner's choice. This means that 
