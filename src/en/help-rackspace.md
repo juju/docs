@@ -3,7 +3,7 @@ Title: Help with Rackspace clouds
 # Using the Rackspace public cloud
 
 Juju already has knowledge of the Rackspace cloud, so unlike previous versions there
-is no need to provide a specific configuration for it, it 'just works'. Azure
+is no need to provide a specific configuration for it, it 'just works'. Rackspace
 will appear in the list of known clouds when you issue the command:
   
 ```bash
@@ -16,7 +16,7 @@ running:
 juju show-cloud azure
 ```
 
-If at any point you believe Juju's information is out of date (e.g. Azure just 
+If at any point you believe Juju's information is out of date (e.g. Rackspace just 
 announced support for a new region), you can update Juju's public cloud data by
 running:
   
