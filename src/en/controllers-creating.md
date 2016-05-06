@@ -15,15 +15,36 @@ See `juju help bootstrap` for details on this command or see the
 
 ## Notes
 
+Bootstrap has many options. Some commonly used options are described here with
+examples.
+
+## Create an LXD Xenial controller
+
+Because Xenial is the current LTS release, we do not have to mention it
+specifically. For our example, we name the controller lxd-xenial and instruct
+it to use the local lxd cloud.
+
+```bash
+juju bootstrap lxd-xenial lxd
+```
+
+## Create an LXD Trusty controller using more recent tools
+
 The '--upload-tools' option is used to make agent software available that is
 more recent than the default binary. This is done when some features may not
 yet be compiled in to the agent for the Ubuntu release being installed. Note
 that Juju will default to the latest LTS (see `distro-info --lts` command).
 
 
-## Examples
+```bash
+juju bootstrap --upload-tools --config default-series=trusty \
+	lxd-trusty lxd
+```
 
-**1.** Create a Rackspace controller 'controller-rackspace':
+## Create a Rackspace controller
+
+The example uses a previously defined configuration file called 
+config-rackspace.yaml. Many clouds are available, see [Clouds](./clouds.html).
 
 ```bash
 juju bootstrap \
@@ -31,14 +52,11 @@ juju bootstrap \
 	controller-rackspace rackspace
 ```
 
-**2.** Create an LXD Trusty controller 'lxd-trusty':
+## Create a controller with constraints
+
+This example provides 4G of RAM to the local lxd controller we create. For
+more details about constraints, see [Constraints](./reference-constraints.html).
 
 ```bash
-juju bootstrap --upload-tools lxd-trusty lxd
-```
-
-**3.** Create an LXD Xenial controller 'lxd-xenial' (before Xenial is officially released):
-
-```bash
-juju bootstrap --config default-series=xenial lxd-xenial lxd
+juju bootstrap --constraints="mem=4G" lxd-xenial lxd
 ```

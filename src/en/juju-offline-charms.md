@@ -1,124 +1,93 @@
 Title: Deploying charms offline  
+TODO: See whether it is still possible to download all charms (marco ignored me
+        on irc)
+      Downloading charms is shabby. See https://git.io/vwNLI . I therefore
+        ommitted the "feature" of specifying a download dir
+      Review specifying 'default-series' key at model level in conjunction with
+        deploying local and non-local charms. I detected flakiness.
+      Review whether Juju should go to the store when pointing to a local dir
+        with non-existant charm. It did not for me but the old version of this
+        doc said it should.
 
-# Deploying Charms Offline
 
-Many private clouds have no direct access to the internet due to security
-reasons.
+# Deploying charms offline
 
-In these cases it's useful to maintain a copy of the internet-accessible
-Charm Store for your local deployments.
+There are times when it may not be possible to use the charms located in the
+official Charm Store. Such cases include:
 
-!!! Note: Though this method will ensure that the charms themselves are
-available on systems without outside internet access, there is no
-guarantee that a charm will work in a disconnected state. Some charms
-pull code from the outside world, such as github. We recommend modifying
-these charms to pull code from an internal server when appropriate.
+- The backing cloud may be private and not have internet access.
+- The charms may not exist online. They are newly-written charms.
+- The charms may exist online but they have been customized.
 
-## Retrieving charms using the Charm Tools
+This page will explain how to manage local Juju charms.
+
+!!! Note: Although this method will ensure that the charms themselves are
+available on systems without outside internet access, there is no guarantee
+that a charm will work in a disconnected state. Some charms pull code from the
+internet, such as GitHub. We recommend modifying these charms to pull code from
+an internal server instead.
+
+
+## Using Charm Tools
+
+Charm Tools is a set of tools necessary when using Juju with locally stored charms.
+
+See [Charm Tools](https://jujucharms.com/docs/devel/tools-charm-tools) for more
+information.
 
 ### Installation
 
-In addition to [Juju](getting-started#installation) we need
-to install charm-tools:
+Users of Ubuntu 14.04 (Trusty) will need to first add a PPA:
 
 ```bash
-sudo apt-get update && sudo apt-get install charm-tools
+sudo add-apt-repository ppa:juju/stable
+sudo apt update
+```
+
+Install the software:
+
+```bash
+sudo apt install charm-tools
 ```
 
 ### Usage
 
-The Charm Tools comes packaged as both a stand alone tool and a juju plugin.
-So you simply can call it with `charm` or as usual for Juju commands with
-`juju charm`.
+Charm commands are called with `charm <subcommand>`.
 
-There are several tools available within the Charm Tools itself. At any time
-you can run `juju charm` to view the available subcommands and all subcommands
-have independent help pages, accessible using either the `-h` or `--help` flags.
-
-If you want to retrieve and branch one of the charm store charms, use the `get`
-command specifying the `CHARM_NAME` you want to copy and provide an optional
-`CHARMS_DIRECTORY`. Otherwise the current directory will be used.
+The command `charm-help` is used to view the available subcommands. Each
+subcommand has its own help page, which is accessible by adding either the `-h`
+or `--help` option:
 
 ```bash
-juju charm get [-h|--help] CHARM_NAME [CHARMS_DIRECTORY]
+charm add --help
 ```
 
-### Example
-
-The command
+When downloading charms, they end up in a directory with the same name as the
+charm. It is therefore a good idea to work from a central directory. For
+example, to download the MySQL and the WordPress charms:
 
 ```bash
-juju charm get mysql
+mkdir ~/charms
+cd ~/charms
+charm pull nfs
+charm pull vsftpd
 ```
-
-will download the MySQL charm to a `mysql` directory within your current path.
-By running
-
-```bash
-juju charm get wordpress ~/charms/precise/
-```
-
-You will download the WordPress charm to `~/charms/precise/wordpress`. It is
-also possible to fetch all official charm store charms. The command for this
-task is:
-
-```bash
-juju charm getall [-h|--help] [CHARMS_DIRECTORY]
-```
-
-The retrieved charms will be placed in the `CHARMS_DIRECTORY`, or your current
-directory if no `CHARMS_DIRECTORY` is provided. This command can take quite a
-while to complete - there are a lot of charms!
 
 ### Deploying from a local repository
 
-There are many cases when you may wish to deploy charms from a local filesystem
-source rather than the charm store:
-
-  - When testing charms you have written.
-  - When you have modified store charms for some reason.
-  - When you don't have direct internet access.
-
-... and probably a lot more times which you can imagine yourselves.
-
-Juju can be pointed at a local directory to source charms from using the
-`--repository=<path/to/files>` switch like this:
+To deploy services using local charms, specify the path to the charm directory.
+For example, to deploy vsftpd from above (on Trusty):
 
 ```bash
-juju deploy --repository=/usr/share/charms/ local:trusty/vsftpd
+juju deploy ~/charms/vsftpd --series trusty
 ```
 
-The `--repository` switch can be omitted when shell environment
-defines `JUJU_REPOSITORY` like so:
+The series does not require stating if the model configuration specifies a
+value for key `default-series`. For example:
 
 ```bash
-export JUJU_REPOSITORY=/usr/share/charms/
-juju deploy local:trusty/vsftpd
+juju set-model-config -m mymodel default-series=trusty
 ```
 
-You can also make use of standard filesystem shortcuts, if the environment
-specifies the `default-series`. The following examples will deploy the trusty
-charms in the local repository when `default-series` is set to trusty:
-
-```bash
-juju deploy --repository=. local:haproxy
-juju deploy --repository ~/charms/ local:wordpress
-```
-
-The `default-series` can be specified in `environments.yaml` thusly:
-
-```no-highlight
-default-series: precise
-```
-
-The default-series can also be added to any bootstrapped environment with
-the `set-env` command:
-
-```bash
-juju set-env "default-series=trusty"
-```
-
-!!! Note: Specifying a local repository makes Juju look there *first*, but if
-the relevant charm is not found in that repository, it will fall back to
-fetching it from the charm store. If you wish to check where a charm was
-installed from, it is listed in the `juju status` output.
+See [Configuring models](./models-config.md) for details on model level
+configuration.

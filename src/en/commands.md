@@ -1167,10 +1167,8 @@ Click on the expander to see details for each command.
 
              # How long to wait for a connection to the controller
              bootstrap-timeout: 600 # default: 10 minutes
-             # How long to wait between connection attempts to a controller 
-   
-   address.
-
+             # How long to wait between connection attempts to a controller
+             address.
              bootstrap-retry-delay: 5 # default: 5 seconds
              # How often to refresh controller addresses from the API server.
              bootstrap-addresses-delay: 10 # default: 10 seconds
