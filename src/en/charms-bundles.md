@@ -1,106 +1,119 @@
 Title: Creating and using bundles  
+Todo: Check more complex bundles after the release of 2.0
 
 # Creating and Using Bundles
 
-A Bundle is a set of services with a specific configuration and their
+*Charms* are seldom deployed in isolation. Even
+MediaWiki needs to be connected to a database. Instead, charms are mostly used
+to model more complex deployments, potentially including many different
+services and connections. A *Bundle* is an encapsulation of this model, or an
+atomic self-contained part of it. It may be as simple as MediaWiki and a
+database, or as complex as a full OpenStack cloud. But a bundle
+encapsulates all the charms and their relationships and enables you to install an
+entire working deployment just as easily as installing a single charm, whether
+that's from the [Juju Charm Store](https://jujucharms.com/q/?type=bundle) or by
+importing a previously exported deployment yourself.
+
+### Adding bundles from the command line
+
+Bundles are deployed on the command line exactly like
+[Charms](./charms-deploying.html), and use the same `deploy` command and
+syntax:
+
+```bash
+juju deploy wiki-simple
+```
+
+You can get the name of a bundle from the [Juju Charm
+Store](https://jujucharms.com/q/?type=bundle), just as you would a charm.
+Unlike charms, bundles embed more than a single service, and you can
+see icons representing each separate service alongside a bundle's name. This
+gives you a quick overview of a bundle's complexity and potential resource
+requirements.
+
+![Bundle resources in the Charm Store](media/juju2_gui_bundles_store.png)
+
+To get a bundle's name, select a bundle on the store and find the 'command
+prompt' icon at the top of the pane. Alongside this will be a correctly
+formatted `bundle` command, including the correct Charm Store URL for the
+bundle, which you can also run to deploy your chosen bundle:
+
+```bash
+juju deploy cs:bundle/wiki-simple-0
+```
+
+## Adding bundles with the GUI
+
+Bundles are just as easy to use and deploy within the
+Juju GUI, and the process of adding them from the Charm Store is almost
+identical to the way you add charms. 
+
+From the GUI, open the Store and select the bundle you're interested in. A new
+pane will display a preview of what the GUI's visual overview will look like
+with the bundle installed, showing services and connections. Further details,
+such as how a bundle supports scaling, can be found below the preview. Click
+'Add to canvas' to simply add the bundle. 
+
+Before clicking on 'Commit changes' to activate your new bundle, review the
+configuration of each service by selecting them and making any necessary
+changes. Click on 'Commit changes' to review the deployment summary followed by
+'Deploy' to set those changes in motion. Alternatively, click on 'Clear
+changes' to remove the bundle before it's activated.
+
+### Exporting and Importing bundles with the GUI
+
+From the GUI, you can easily export and re-import the current model as a local
+bundle, encapsulating your services and connections into a single file. To do
+this, click on the 'Export' button, or use the keyboard shortcut “shift-d”.
+This results in the creation of a file called `bundle.yaml` that your browser
+will typically prompt you to save or open.
+
+![Export button in the Juju GU](media/juju2_gui_bundles_export.png)
+
+You can import a saved bundle by either dragging `bundle.yaml` onto your
+browser canvas, or using the 'Import' button. After clicking 'Import' your
+browser will prompt you to select a bundle file.
+
+After a file has been added, the GUI will briefly report `ChangeSet process`
+followed by `ChangeSet complete`. As with adding bundles from the store, you
+may want to review the services, connections and various configuration options
+before clicking on 'Commit changes' and 'Deploy' to activate your bundle.
+
+### Local deploy via command-line
+
+After exporting a bundle from the GUI, you can also `deploy` the saved bundle
+from the command line: 
+
+```bash
+juju deploy bundle.yaml
+```
+Unlike when you import and deploy a bundle with the Juju GUI, running `juju
+deploy` on the command-line will not attempt to rename a new service if a
+service with the same name already exists.
+
+From the command line, you can also check for errors in a bundle before
+deploying it. Bundles downloaded from the Juju store need to be unzipped into
+their own directory, and your own `bundle.yaml` files will need to be
+accompanied by a `README.md` text file (although this file can be empty for
+testing purposes). You can then check for possible errors with the
+following command:
+
+```bash
+charm proof directory-of-bundle/    # defaults to your current working directory
+```
+If no errors are detected, there will be no output from `charm proof` and you
+can safely deploy your bundle. 
+
+## Creating a bundle
+
+A bundle is a set of services with a specific configuration and their
 corresponding relations that can be deployed together in a single step.
 Instead of deploying a single service, they can be used to deploy an entire
 workload, with working relations and configuration. The use of bundles allows
 for easy repeatability and for sharing of complex, multi-service deployments.
 
-## Using bundles
-
-Bundles are defined in text files called “bundle files”. Each file may contain
-only one bundle and there are two ways of using these files. The first is to 
-export a bundle from the Juju GUI. This is as simple as clicking on the `Export`
-button and saving the `bundle.yaml` file. With this file, you can easily import
-your saved bundle to recreate the same deployments.
-
-The second way of using bundle files is via the [Juju
-Charm Store](https://jujucharms.com/q/?type=bundle). Bundles downloaded and installed
-via the store have been edited, re-packaged and published as Zip archives.
-These can be downloaded and installed manually or within the GUI via the 
-'Store' button. 
-
-You can also [publish](authors-charm-store.html) your own bundles via the
-Charm Store, which is a great way to share your own deployments with other Juju
-users.
-
-## Deploying a bundle from the Charm Store with the GUI
-
-To deploy a bundle from the Charm Store using the GUI, first find the bundle
-you wish to deploy via search or by expanding the 'Featured searches' pane with
-a click of the 'Show more' button. You can then select 'Bundles' to list
-bundles within their own category. One useful feature of this list is that to
-the right of each bundle you'll see icons representing each separate service 
-embedded within the bundle, giving you a quick overview of a bundle's
-complexity and potential resource requirements.
-
-![Bundle resources in the Charm Store](media/juju2_gui_bundles_store.png)
-
-Select a bundle to see further details. A new pane will display a preview of the
-GUI's visual overview, previewing its services and connections. Further details,
-such as how the bundle supports scaling, can be found below the preview. Click 
-'Add to canvas' to add the bundle. 
-
-Before deploying the bundle, check the configuration of each service by
-selecting them, making changes if necessary. Select 'Deploy changes' to
-activate your new bundle along with any changes you've made.   
-
-### Local import to Juju GUI
-
-When using the Juju GUI, the easiest way to import a previously exported bundle
-is to drag the bundle file, usually called `bundle.yaml`, onto the GUI canvas.
-
-You can also import the file using the 'Import' button located next to 
-the 'Commit changes' button in the lower right corner of the GUI. After 
-clicking 'Import' you’ll be prompted to select the bundle file. 
-
-After a file has been added, the GUI will briefly report `ChangeSet process`
-followed by `ChangeSet complete`. The 'Commit changes' button will then update 
-to show the number of outstanding changes that need to be committed to
-activate your new bundle. Click on 'Commit changes' to review the deployment
-summary followed by 'Deploy' to set those changes in motion. Alternatively,
-click on 'Clear changes' to remove the bundle before it's activated.
-
-### Local deploy via command-line
-
-To check for errors on a bundle before using it, exported `bundle.yaml` files 
-will need to be placed within their own directories, alongside a `README.md` 
-text file (although this file can be empty for testing purposes). 
-Bundles downloaded from the Juju store need to be unzipped into their
-own directory too. You can then check for possible errors with the following
-command:
-
-```bash
-charm proof directory-of-bundle/    # defaults to your current working directory
-```
-
-If no errors are detected, there will be no output from `charm proof` and you
-can safely deploy your bundle. You can do this from the command-line with the 
-`juju deploy` command:
-
-```bash
-juju deploy bundle.yaml
-```
-
-Unlike when you deploy a bundle via the Juju GUI, running `juju deploy` on the
-command-line will not attempt to rename a new service if a service with the same name
-already exists.
-
-## Creating a bundle
-
-The standard way to create a bundle is via the Juju GUI. When a set of services
-are deployed and configured the bundle definition can be saved either by
-clicking on the 'Export' button or via the keyboard shortcut “shift-d”. This 
-results in the creation of a file called `bundle.yaml` that your browser will 
-typically prompt you to save or open.
-
-![Export button in the Juju GU](media/juju2_gui_bundles_export.png)
-
-As an example, here is an environment with a MySQL service and a Wordpress
-service with a relation between the two. The exported bundle file contains the
-following data:
+As an example, here is a bundle file with a MySQL service and a Wordpress
+service with a relation between the two: 
 
 ```yaml
 series: xenial
@@ -136,10 +149,10 @@ machines:
 
 ## Service constraints in a bundle
 
-When defining a service in a bundle, it's common to set minimum constraints
-against a charmed service, much like you would when deploying on the command
-line. This is a simple key addition to the service definition, using the proper
-constraint key/value pair as outlined in the
+To make your bundle as reusable as possible, it's common to set minimum
+constraints against a charmed service, much like you would when deploying 
+charms from the command line. This is a simple key addition to the service
+definition, using the proper constraint key/value pair as outlined in the
 [Constraints](charms-constraints.html) documentation.
 
 For example, to add memory and CPU constraints to a charm in a bundle, the
