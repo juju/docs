@@ -52,12 +52,11 @@ sudo apt install charm-tools
 
 ### Usage
 
-These tools come packaged as a standalone tool and should no longer be used as
-a Juju plugin. The commands are therefore called with `charm <subcommand>`.
+Charm commands are called with `charm <subcommand>`.
 
 The command `charm-help` is used to view the available subcommands. Each
-subcommand also has its own help page, which is accessible by adding either the
-`-h` or `--help` option:
+subcommand has its own help page, which is accessible by adding either the `-h`
+or `--help` option:
 
 ```bash
 charm add --help
