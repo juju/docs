@@ -26,7 +26,7 @@ limitations. This means a Juju HA cluster can have 3, 5 or 7 controllers.
 
 ## Activating and modifying HA
 
-Juju HA is activated and modified with the `juju ensure-availability` command.
+Juju HA is activated and modified with the `juju enable-ha` command.
 As will be shown in the next section, it is also used to recover from failed
 controllers.
 
@@ -39,7 +39,7 @@ servers. The only way to decrease is to create a backup of your environment
 and then restore the backup to a new environment, which starts with a single
 controller. You can then increase to the desired number.
 
-Whenever you run ensure-availability, the command will report the changes it
+Whenever you run enable-ha, the command will report the changes it
 intends to make, which will shortly be implemented.
 
 For complete syntax, see the
@@ -53,16 +53,13 @@ controllers nor remove the failed ones. However, as long as more than half of
 the original number of controllers remain available you can manually recover.
 The process is detailed below.
 
-1. Run `juju ensure-availability`.
-1. Verify that the output of `juju status` shows a value of `has-vote` for the
-   `state-server-member-status` attribute for each new server and a value of
+1. Run `juju enable-ha`.
+1. Verify that the output of `juju status` shows a value of `has-vote` for 
+   the `controller-member-status` attribute for each new server and a value of
    `no-vote` for each old server. Once confirmed, the new servers are fully
    operational as cluster members and the old servers have been demoted (no longer
    part of HA). This process can take between 30 seconds to 20 minutes depending
    on machine resources and Juju data volume.
-1. Run `juju ensure-availability` again to have Juju no longer consider the
-   old machines as controllers. The `state-server-member-status` attribute
-   should disappear from these machines.
 1. Use the `juju remove-machine` command to remove the old machines entirely.
 
 You cannot repair the cluster as outlined above if fewer than half of the

@@ -41,7 +41,7 @@
                 <li><a href="users-workflows.html">Workflow scenarios</a></li>
             </ul>
         </li>
-        <li class="section"><a class="header" href="juju.html">Managing Juju</a>
+        <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
             <ul class="sub">
                 <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                 <li><a href="juju-offline-charms.html">Deploy charms offline</a></li>
