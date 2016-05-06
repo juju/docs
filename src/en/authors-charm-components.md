@@ -26,6 +26,11 @@ The following files will be treated specially, if present:
  - `/actions` must be a directory holding executables with specific names, which
    the user may invoke through Juju as desired.
    [Adding actions to a charm is described here.](./authors-charm-actions.html)
+ - `/tests` is an optional directory containing scripts which will be executed
+   in order to ensure that the service works properly. Every executable file on
+   this direcectory will be executed by `juju test` and the Continous Interation
+   (CI) tools.
+   [See more on charm tests.](./authors-testing.html)
  - `actions.yaml` specifies charm actions and their schemas, and must be defined
    if `/actions` is used.
    [See here for more on creating charm actions.](./authors-charm-actions.html)
