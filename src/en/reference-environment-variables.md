@@ -18,7 +18,9 @@ behavior.
 
 #### JUJU_DATA
 
-This sets the path where Juju will look for its configuration files. You do not need to set this - by default Juju follows XDG guidelines and on Linux systems it will use the path:
+This sets the path where Juju will look for its configuration files. You do not
+need to set this - by default Juju follows XDG guidelines and on Linux systems
+it will use the path:
 
 ```no-highlight
 ~/.local/share/juju
@@ -26,7 +28,9 @@ This sets the path where Juju will look for its configuration files. You do not 
 
 #### JUJU_HOME (Deprecated)
 
-For versions of Juju prior to 2.0, this variable indicated the 'home' directory where Juju kept configuration and other data.
+For versions of Juju prior to 2.0, this variable indicated the 'home' directory
+where Juju kept configuration and other data.
+
 ```
 JUJU_HOME=~/.juju
 ```
