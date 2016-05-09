@@ -10,7 +10,7 @@ TODO: Add completely new commands
 
 | Old command                          | New command                        |
 |:-------------------------------------|:-----------------------------------|
-| juju action defined                  | `juju list-action`                 |
+| juju action defined                  | `juju list-actions`                |
 | juju action do                       | `juju run-action`                  |
 | juju action fetch                    | `juju show-action-output`          |
 | juju action status                   | `juju show-actions-status`         |
