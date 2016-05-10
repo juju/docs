@@ -1,5 +1,4 @@
 Title: Juju actions  
-TODO: Review "actions are sub-commands" bit
 
 # Juju Actions
 
@@ -14,14 +13,11 @@ information.
 
 The following commands are specified for dealing with actions:
 
-```no-highlight
-actions            - alias for 'list-actions'
-list-actions       - list actions defined for a service
-run-action         - queue an action for execution
-show-action-output - show results of an action by ID
-show-action-status - show results of all actions 
-                     filtered by optional ID prefix
-```
+`juju actions` - alias for list-actions  
+`juju list actions` - list actions defined for a service  
+`juju run-action` - queue an action for execution  
+`juju show-action-output` - show output of an action by ID  
+`juju show-action-status` - show status of all actions filtered by optional ID  
 
 ## Action commands 
 
@@ -71,10 +67,10 @@ add-repo:
 ...
 ```
 
-> Note that the full schema is under the `properties` key of the root Action.
-> Juju Actions rely on [JSON-Schema](http://json-schema.org) for validation.
-> The top-level keys shown for the Action (`description` and `properties`) may
-> include future additions to the feature.
+!!! Note: that the full schema is under the `properties` key of the root Action.
+Juju Actions rely on [JSON-Schema](http://json-schema.org) for validation.
+The top-level keys shown for the Action (`description` and `properties`) may
+include future additions to the feature.
 
 ### `juju run-action`
 
@@ -99,7 +95,7 @@ Action queued with id: 3a7cc626-4c4c-4f00-820f-f881b79586d10
 You can also set parameters indirectly via a YAML file, although you can
 override the parameters within the file by providing them directly.
 
- > Example params.yml
+*Example params.yml:*
 ```yaml
 repo: myproject
 sure: no
