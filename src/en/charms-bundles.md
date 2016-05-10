@@ -1,7 +1,7 @@
-Title: Creating and using bundles  
+Title: Using and Creating Bundles  
 Todo: Check more complex bundles after the release of 2.0
 
-# Creating and Using Bundles
+# Using and Creating Bundles
 
 *Charms* are seldom deployed in isolation. Even
 MediaWiki needs to be connected to a database. Instead, charms are mostly used
