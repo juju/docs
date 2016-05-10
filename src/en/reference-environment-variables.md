@@ -15,33 +15,22 @@ Use header tags so we can link to these variables individually.
 These variables are available on the juju client in order to change its default
 behavior.
 
-#### JUJU_ENV
 
-The current environment that juju will use by default. Juju has three ways it
-will  determine current environment, in descending order:
+#### JUJU_DATA
 
-1. Check to see if `JUJU_ENV` is set.
-```
-echo $JUJU_ENV
-local
-```
+This sets the path where Juju will look for its configuration files. You do not
+need to set this - by default Juju follows XDG guidelines and on Linux systems
+it will use the path:
 
-2. Read the `$JUJU_HOME/current-environment` file, which is set by the
-`juju switch` command.
-```
-juju switch amazon
-cat ~/.juju/current-environment
-amazon
+```no-highlight
+~/.local/share/juju
 ```
 
-3. Read `$JUJU_HOME/environments.yaml` and use the default environment.
-```yaml
-default: local
-```
+#### JUJU_HOME (Deprecated)
 
-#### JUJU_HOME
+For versions of Juju prior to 2.0, this variable indicated the 'home' directory
+where Juju kept configuration and other data.
 
-The path to Juju's configuration files.
 ```
 JUJU_HOME=~/.juju
 ```
@@ -95,10 +84,10 @@ JUJU_STARTUP_LOGGING_CONFIG=TRACE juju bootstrap
 #### JUJU_CLI_VERSION
 
 This allows you to change the behavior of the command line interface (CLI)
-between major juju releases and exists as a compatibility flag for those users
+between major Juju releases and exists as a compatibility flag for those users
 wishing to enable the newer behavior of the Juju CLI. As the CLI output and
-behavior is stable between minor releases of Juju, setting JUJU_CLI_VERSION will
-enable developers and users to preview the newer behavior of the CLI.
+behavior is stable between minor releases of Juju, setting JUJU_CLI_VERSION
+will enable developers and users to preview the newer behavior of the CLI.
 
 ```
 export JUJU_CLI_VERSION=2
