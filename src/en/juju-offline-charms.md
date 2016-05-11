@@ -17,7 +17,7 @@ official Charm Store. Such cases include:
 
 - The backing cloud may be private and not have internet access.
 - The charms may not exist online. They are newly-written charms.
-- The charms may exist online but they have been customized.
+- The charms may exist online but they have been customized locally.
 
 This page will explain how to manage local Juju charms.
 
@@ -73,7 +73,7 @@ charm pull nfs
 charm pull vsftpd
 ```
 
-### Deploying from a local repository
+### Deploying from a local charm
 
 To deploy services using local charms, specify the path to the charm directory.
 For example, to deploy vsftpd from above (on Trusty):

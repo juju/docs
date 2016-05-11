@@ -1,35 +1,45 @@
 Title: Deploying services  
+TODO: First section spent defining charms. This should all be placed in charms.md and
+	linked to from here. As of this writing, that page does not cover local charms.
+      Removed (commented out) section 'References and examples' due to the
+	references being 3 years old and not offering much at all.
+      This page is too long and should be broken up (or apply the fabled TOC).
+      Review: 'channel support' points (especially #2). See https://goo.gl/IKzRsD .
 
-# Deploying Services
+
+# Deploying services
 
 The fundamental point of Juju is that you can use it to deploy services through
 the use of charms (the magic bits of code that make things just work). These
-charms can be fetched from the charm store, stored in a local repository, or if
-you are feeling clever, written by you. Just as there are different series of
-Ubuntu ('precise', 'raring', etc), so there needs to be different series of
-charms to take into account any subtle changes in the underlying OS. For the
-most part you can forget about this, as Juju will always try to apply the most
-relevant charm, so deploying can be straightforward and easy.
+charms can exist remotely (online Charm Store) or locally (previously
+downloaded or written by you).
+
+Just as there are different series of Ubuntu ('precise', 'raring', etc) there
+needs to be different series of charms. For the most part, this is transparent
+as Juju will always try to use the most relevant charm. Deploying services with
+Juju is designed to be easy.
 
 
-# Deploying from the Charm Store
+## Deploying from the charm store
 
-In most cases, you will want to deploy charms by fetching them directly from the
-Charm Store. This ensures that you get the relevant, up to date version of the
-charm and "everything just works". To deploy a charm like this you can just
-specify:
+Typically, services are deployed using the online charms. This ensures that
+you get the latest version of the charm. To deploy in this way:
 
 ```bash
 juju deploy mysql
 ```
 
-Running this will do exactly what you expect - fetch the latest Juju charm for
-the series you are running and then use the bootstrap environment to initiate a
-new instance and deploy MySQL
+This will create a machine and use the latest online MySQL charm (for your
+default series) to deploy a MySQL service.
 
-Juju usefully supports a system of namespaces that means you can actually deploy
-charms from a variety of sources. The default source is the charm store. The
-above command is the same as running:
+!!! Note: The default series can be configured at a model level (see
+[Configuring model](./models-config.htmls)). In the absence of this setting,
+the default is to use the Ubuntu version running on the Juju client (i.e. where
+the Juju commands are being invoked).
+
+Juju supports a system of namespaces that means you can actually
+deploy charms from a variety of sources. The default source is the charm store.
+The above command is the same as running:
 
 ```bash
 juju deploy cs:precise/mysql
@@ -41,27 +51,51 @@ which follows the format:
 <repository>:<series>/<service>
 ```
 
+### Channel support	
 
-# Deploying from a local repository
+The charm store offers the availability of charms in different stages of
+developement. Such stages are called *channels*.
 
-There are many cases when you may wish to deploy charms from a local filesytem
-source rather than the charm store:
+```bash
+juju deploy mysql --channel &lt;channel&gt;
+```
 
-- When testing charms you have written.
-- When you have modified store charms for some reason.
-- When you don't have direct internet access.
+Such a channel will be used if the charm's revision is:
 
-... and probably a lot more times which you can imagine yourselves.
+ 1. undefined
+ 1. defined only for the specified non-stable channel
 
-You may substitute a path pointing to a directory to deploy a
-'local' charm:
+Each channel will have a "pointer" that redirects to a certain *revision*.
+Because the pointer can get reversed and point to a later
+revision, the following can occur on charm upgrade - if a charm revision that a
+channel points to is different than the current revision of a deployed charm:
+If a revision is older, downgrade the charm revision
+If a revision is newer, do an upgrade.
 
 
 ```bash
-juju deploy ./charms/wordpress
+juju charm-upgrade mysql --channel &lt;channel&gt;
 ```
 
-# Deploying with a configuration file
+Only do an upgrade if a pointer of a channel changes a charm revision. 
+
+If there is a charm in the channel with a newer revision than the currently
+deployed one, but the pointer is currently not pointing to it, do not perform
+an upgrade - that revision either was not approved yet or was revoked from
+being a default revision for the channel.
+juju status
+In the status, we show the ID of the charm. We could provide an additional
+information about the channel in brackets by the name if a charm has not been
+published to the stable channel to indicate this explicitly to the user.
+
+
+## Deploying from local charms
+
+This topic is covered in
+[Deploying charms offline](./juju-offline-charms.html).
+
+
+## Deploying with a configuration file
 
 Deployed services usually start with a sane default configuration. However, for
 some services it is desirable (and quicker) to configure them at deployment
@@ -75,13 +109,13 @@ juju deploy mysql --config=myconfig.yaml
 There is more information on this, and other ways to configure services in the
 [documentation for configuring services](./charms-config.html).
 
-!!! Note: After Juju resolves a charm and its dependencies, it bundles them and deploys
-them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache).
-This allows the same charm to be deployed to multiple machines repeatably and
-with minimal network transfers.
+!!! Note: After Juju resolves a charm and its dependencies, it bundles them and
+deploys them to a machine provider charm cache/repository (e.g.
+~/.juju/charmcache).  This allows the same charm to be deployed to multiple
+machines repeatably and with minimal network transfers.
 
 
-# Deploying to specific machines and containers
+## Deploying to specific machines and containers
 
 Juju has native support for specifying which machine a charm should be deployed
 to. This is useful for a few reasons. The most obvious reason is to save money
@@ -237,7 +271,7 @@ juju retry-provisioning 3 27 5
 
 ## Considerations
 
-Charms are running without any separation, so its entirely possible for Charms
+Charms are running without any separation, so its entirely possible for charms
 to stomp all over each others configuration files and try to bind to the same
 network ports. We are working to containerize everything so that this does not
 happen and every service is in its own container, but this work is not yet
@@ -254,24 +288,23 @@ This will allow you to save money when you need it by using --to, but also
 horizontally scale out on dedicated machines when you need to.
 
 
-## References and Examples
+## Selecting and enabling networks
 
-  - [ Scaling Down in the Cloud with Juju](http://www.jorgecastro.org/2013/07/31/deploying-wordpress-to-the-cloud-with-juju/)
-  - [ Targeted Machine Deployment with Juju](http://javacruft.wordpress.com/2013/07/25/juju-put-it-there-please/)
-
-
-# Selecting and enabling networks
-
-Use the `networks` option to specify service-specific network
-requirements. The `networks` option takes a comma-delimited list of
-juju-specific network names. Juju will enable the networks on the
-machines that host service units. This is different from the network
-constraint which selects a machine that matches the networks, but does
-not configure the machine to use them. For example, this commands deploys
-a service to a machine on the "db" and "monitor" networks and enabled
-them:
+Use the `networks` option to specify service-specific network requirements. The
+`networks` option takes a comma-delimited list of juju-specific network names.
+Juju will enable the networks on the machines that host service units. This is
+different from the network constraint which selects a machine that matches the
+networks, but does not configure the machine to use them. For example, this
+commands deploys a service to a machine on the "db" and "monitor" networks and
+enabled them:
 
 ```bash
 juju deploy --networks db,monitor mysql
 ```
 
+<!--
+## References and examples
+
+  - [ Scaling Down in the Cloud with Juju](http://www.jorgecastro.org/2013/07/31/deploying-wordpress-to-the-cloud-with-juju/)
+  - [ Targeted Machine Deployment with Juju](http://javacruft.wordpress.com/2013/07/25/juju-put-it-there-please/)
+-->
