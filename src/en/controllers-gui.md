@@ -21,7 +21,7 @@ bootstrapping, thus eliminating the need to additionally deploy the Juju GUI
 charm. As it's part of the controller, it won't appear as a normally deployed 
 service.
 
-To open Juju GUI in your default browser, use following command:
+To open Juju GUI in your default browser, use the following command:
 
 ```bash
 juju gui
