@@ -21,7 +21,7 @@ Common model management tasks are summarized below.
 
 ^# View status
    
-   Use the `juju status` command to view the status a model:
+   Use the `juju status` command to view the status of a model:
 
    `juju status [options] [filter pattern ...]`
    
