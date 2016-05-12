@@ -11,13 +11,13 @@ TODO: First section spent defining charms. This should all be placed in charms.m
 
 The fundamental point of Juju is that you can use it to deploy services through
 the use of charms (the magic bits of code that make things just work). These
-charms can exist remotely (online Charm Store) or locally (previously
-downloaded or written by you).
+charms can exist in the [Charm Store](https://jujucharms.com/store) or on the
+file system (previously downloaded from the store or written locally).
 
-Just as there are different series of Ubuntu ('precise', 'raring', etc) there
-needs to be different series of charms. For the most part, this is transparent
-as Juju will always try to use the most relevant charm. Deploying services with
-Juju is designed to be easy.
+Charms use the concept of *series* analogous as to how Juju does with Ubuntu
+series ('trusty', 'xenial', etc). For the most part, this is transparent as
+Juju will use the most relevant charm to ensure things "just work". This makes
+deploying services with Juju fun and easy.
 
 
 ## Deploying from the charm store
@@ -33,31 +33,26 @@ This will create a machine and use the latest online MySQL charm (for your
 default series) to deploy a MySQL service.
 
 !!! Note: The default series can be configured at a model level (see
-[Configuring model](./models-config.htmls)). In the absence of this setting,
+[Configuring model](./models-config.html)). In the absence of this setting,
 the default is to use the Ubuntu version running on the Juju client (i.e. where
 the Juju commands are being invoked).
 
-Juju supports a system of namespaces that means you can actually
-deploy charms from a variety of sources. The default source is the charm store.
-The above command is the same as running:
+Assuming that the Xenial series charm exists and was used above, an equivalent
+command is:
 
 ```bash
-juju deploy cs:precise/mysql
+juju deploy cs:xenial/mysql
 ```
 
-which follows the format:
-
-```nohighlight
-<repository>:<series>/<service>
-```
+Where 'cs' denotes the charm store.
 
 ### Channel support	
 
-The charm store offers the availability of charms in different stages of
-developement. Such stages are called *channels*.
+The charm store offers charms in different stages of development. Such stages
+are called *channels*.
 
 ```bash
-juju deploy mysql --channel &lt;channel&gt;
+juju deploy mysql --channel channel_name
 ```
 
 Such a channel will be used if the charm's revision is:
@@ -66,27 +61,20 @@ Such a channel will be used if the charm's revision is:
  1. defined only for the specified non-stable channel
 
 Each channel will have a "pointer" that redirects to a certain *revision*.
-Because the pointer can get reversed and point to a later
-revision, the following can occur on charm upgrade - if a charm revision that a
-channel points to is different than the current revision of a deployed charm:
-If a revision is older, downgrade the charm revision
-If a revision is newer, do an upgrade.
 
+#### Charm upgrades
+Because the pointer can fluctuate among revisions it is possible that during a
+charm upgrade the channel revision is different than the revision of a
+currently deployed charm. The following rules apply:
+
+- If a channel revision is older, downgrade the deployed charm to that revision
+- If a channel revision is newer, upgrade the deployed charm to that revision
+
+Below we specify a channel with the `charm-upgrade` commmand:
 
 ```bash
-juju charm-upgrade mysql --channel &lt;channel&gt;
+juju charm-upgrade mysql --channel channel_name
 ```
-
-Only do an upgrade if a pointer of a channel changes a charm revision. 
-
-If there is a charm in the channel with a newer revision than the currently
-deployed one, but the pointer is currently not pointing to it, do not perform
-an upgrade - that revision either was not approved yet or was revoked from
-being a default revision for the channel.
-juju status
-In the status, we show the ID of the charm. We could provide an additional
-information about the channel in brackets by the name if a charm has not been
-published to the stable channel to indicate this explicitly to the user.
 
 
 ## Deploying from local charms
