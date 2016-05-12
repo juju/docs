@@ -89,5 +89,5 @@ value for key `default-series`. For example:
 juju set-model-config -m mymodel default-series=trusty
 ```
 
-See [Configuring models](./models-config.md) for details on model level
+See [Configuring models](./models-config.html) for details on model level
 configuration.

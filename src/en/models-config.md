@@ -1,7 +1,8 @@
 Title: General configuration options  
 TODO: Check accuracy of key table
-	Confirm 'all' harvest mode state. Seems it should be "'Dead' or
+      Confirm 'all' harvest mode state. Seems it should be "'Dead' or
 	'Unknown'" OR "a combination of modes 'destroyed' and 'unknown'".
+      Make the table more space-efficient. Damn it's bulbous.
 
 
 # Configuring models
@@ -193,7 +194,7 @@ to most aggressive:
 - **none:** Machines will never be harvested. This is a good choice if machines
   are managed via a process outside of Juju.
 - **destroyed:** Machines will be harvested if i) Juju "knows" about them and
-  i) they are 'Dead'.
+  ii) they are 'Dead'.
 - **unknown:** Machines will be harvested if Juju does not "know" about them
   ('Unknown' state). Use with caution in a mixed environment or one which may
   contain multiple instances of Juju.
@@ -207,5 +208,3 @@ Below, the harvest mode key for the current model is set to 'none':
 ```bash
 juju set-model-config provisioner-harvest-mode=none
 ```
-
-to any of the above values.
