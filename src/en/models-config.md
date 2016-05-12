@@ -106,16 +106,14 @@ test-mode | bool | false |  | Whether the model is intended for testing. If true
 type | string |  | any of the supported provider types | Type of model, e.g. local, ec2
 uuid | string |  |  | The UUID of the model
 
-
-## Examples
-
+Some of these keys deserve further explanation. These are explored below.
 
 ### Apt mirror
 
-The APT packaging system is used to install and upgrade software on
-machines provisioned in the model, and many charms also use APT to
-install software for the services they deploy. It is possible to set a
-specific mirror for the APT packages to use, by setting 'apt-mirror':
+The APT packaging system is used to install and upgrade software on machines
+provisioned in the model, and many charms also use APT to install software for
+the services they deploy. It is possible to set a specific mirror for the APT
+packages to use, by setting 'apt-mirror':
 
 ```bash
 juju set-model-config apt-mirror=http://archive.ubuntu.com/ubuntu/
@@ -153,7 +151,7 @@ agent-stream: devel
 ```
 
 
-### APT updates and upgrades
+### APT updates and upgrades - faster machine provisioning
 
 When Juju provisions a machine, its default behaviour is to upgrade existing
 packages to their latest version. If your OS images are fresh and/or your
