@@ -3,6 +3,7 @@ TODO: First section spent defining charms. This should all be placed in charms.m
 	linked to from here. As of this writing, that page does not cover local charms.
       This page is too long and should be broken up (or apply the fabled TOC).
       PRIORITY: Review 'channel support'. See https://goo.gl/IKzRsD .
+      Add 'centos' and 'windows' stuff to series talk
 
 
 # Deploying services
