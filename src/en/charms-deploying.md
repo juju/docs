@@ -267,8 +267,7 @@ an internal server instead.
 Charm Tools is a set of tools that can be useful when using locally stored
 charms.
 
-See [Charm Tools](https://jujucharms.com/docs/devel/tools-charm-tools) for more
-information.
+See [Charm Tools](./tools-charm-tools.html) for more information.
 
 #### Installation
 
