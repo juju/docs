@@ -136,8 +136,6 @@ endpoint name must be left out (i.e. "foo": <anything> is invalid).
 
 Other available fields are:
 
-  - `format` ???
-  - `categories` ???
   - `series` is a list of versions of Ubuntu this charm is compatible with.
   - `terms` lists the terms the user must agree to before using the charm.
   - `min-juju-version` the minimum version of Juju this charm is compatible with.
