@@ -92,7 +92,7 @@ storage:
     location: /srv/data
 ```
 
-Finally, a metadata file defines the charm's
+A metadata file defines the charm's
 [relations](./authors-relations.html),
 and whether it's designed for deployment as a
 [subordinate service](./authors-subordinate-services.html).
@@ -103,6 +103,44 @@ and whether it's designed for deployment as a
     will participate in.
   - if the charm is subordinate, it must contain at least one `requires`
     relation with container scope.
+
+`resources` defines ???
+
+```yaml
+resources:
+  example:
+    type: file # "file" is the only type supported currently
+    filename: example.tar.gz
+    description: example resource
+```
+
+`payloads` defines ???
+
+```yaml
+payloads:
+  example:
+    type: kvm
+```
+
+`extra-bindings` represents an extra bindable endpoint that is not a relation.
+
+```yaml
+extra-bindings:
+  endpoint1:
+  endpoint2:
+```
+
+Endpoint names are strings and must not match existing relation names from
+the Provides, Requires, or Peers metadata sections. The values beside each
+endpoint name must be left out (i.e. "foo": <anything> is invalid).
+
+Other available fields are:
+
+  - `format` ???
+  - `categories` ???
+  - `series` is a list of versions of Ubuntu this charm is compatible with.
+  - `terms` lists the terms the user must agree to before using the charm.
+  - `min-juju-version` the minimum version of Juju this charm is compatible with.
 
 Other field names should be considered to be reserved; please don't use any not
 listed above to avoid issues with future versions of Juju.
