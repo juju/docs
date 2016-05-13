@@ -4,6 +4,15 @@ TODO: First section spent defining charms. This should all be placed in charms.m
       This page is too long and should be broken up (or apply the fabled TOC).
       PRIORITY: Review 'channel support'. See https://goo.gl/IKzRsD .
       Add 'centos' and 'windows' stuff to series talk
+      See whether it is still possible to download all charms (marco ignored me
+        on irc)
+      Downloading charms is shabby. See https://git.io/vwNLI . I therefore
+        ommitted the "feature" of specifying a download dir
+      Review specifying 'default-series' key at model level in conjunction with
+        deploying local and non-local charms. I detected flakiness.
+      Review whether Juju should go to the store when pointing to a local dir
+        with non-existant charm. It did not for me but the old version of this
+        doc said it should.
 
 
 # Deploying services
@@ -32,9 +41,8 @@ This will create a machine and use the latest online MySQL charm (for your
 default series) to deploy a MySQL service.
 
 !!! Note: The default series can be configured at a model level (see
-[Configuring model](./models-config.html)). In the absence of this setting,
-the default is to use the Ubuntu version running on the Juju client (i.e. where
-the Juju commands are being invoked).
+[Configuring models](./models-config.html)). In the absence of this setting,
+the default is to use the series specified by the charm.
 
 Assuming that the Xenial series charm exists and was used above, an equivalent
 command is:
@@ -44,6 +52,9 @@ juju deploy cs:xenial/mysql
 ```
 
 Where 'cs' denotes the charm store.
+
+!!! Note: A used charm gets cached on the controller's database to minimize
+network traffic for subsequent uses.
 
 ### Channel support	
 
@@ -62,6 +73,7 @@ Such a channel will be used if the charm's revision is:
 Each channel will have a "pointer" that redirects to a certain *revision*.
 
 #### Charm upgrades
+
 Because the pointer can fluctuate among revisions it is possible that during a
 charm upgrade the channel revision is different than the revision of a
 currently deployed charm. The following rules apply:
@@ -76,10 +88,27 @@ juju charm-upgrade mysql --channel channel_name
 ```
 
 
-## Deploying from local charms
+## Deploying from a local charm
 
-This topic is covered in
-[Deploying charms offline](./juju-offline-charms.html).
+To deploy services using local charms, specify the path to the charm directory.
+For example, to deploy vsftpd from above (on Trusty):
+
+```bash
+juju deploy ~/charms/vsftpd --series trusty
+```
+
+The series does not require stating if the model configuration specifies a
+value for key `default-series`. For example:
+
+```bash
+juju set-model-config -m mymodel default-series=trusty
+```
+
+See [Configuring models](./models-config.html) for details on model level
+configuration.
+
+See [Addendum: local charms](#addendum:-local-charms) below for further
+explanation of local charms and how they can be managed.
 
 
 ## Deploying with a configuration file
@@ -93,11 +122,7 @@ and using the `--config=` switch:
 juju deploy mysql --config=myconfig.yaml
 ```
 
-There is more information on this, and other ways to configure services in the
-[documentation for configuring services](./charms-config.html).
-
-!!! Note: A used charm gets cached on the controller's database to minimize
-network traffic for subsequent uses.
+See [Service configuration](./charms-config.html) for more on this.
 
 
 ## Deploying to specific machines and containers
@@ -111,7 +136,7 @@ enough memory for other services to run. The `--to` option is used to specify a
 machine:
 
 ```bash
-juju bootstrap --constraints="mem=4G" lxd lxd
+juju bootstrap --constraints="mem=4G" lxd-controller lxd
 juju deploy mysql
 juju deploy --to 0 rabbitmq-server
 ```
@@ -132,7 +157,7 @@ a MySQL service is deployed to a new container on machine '25'.
 The above examples show how to deploy to a machine where you know the machine's
 identifier. The output to `juju status` will provide this information.
 
-It is also possible to deploy units using placement directives as '--to'
+It is also possible to deploy units using placement directives as `--to`
 arguments. Placement directives are provider specific. For example:
 
 ```bash
@@ -217,4 +242,68 @@ enabled them:
 
 ```bash
 juju deploy --networks db,monitor mysql
+```
+
+
+## Addendum: local charms
+
+This is further explanation of offline/local charms.
+
+There are times when it may not be possible to use the charms located in the
+official Charm Store. Such cases include:
+
+- The backing cloud may be private and not have internet access.
+- The charms may not exist online. They are newly-written charms.
+- The charms may exist online but they have been customized locally.
+
+!!! Note: Although this method will ensure that the charms themselves are
+available on systems without outside internet access, there is no guarantee
+that a charm will work in a disconnected state. Some charms pull code from the
+internet, such as GitHub. We recommend modifying these charms to pull code from
+an internal server instead.
+
+### Using Charm Tools
+
+Charm Tools is a set of tools that can be useful when using locally stored
+charms.
+
+See [Charm Tools](https://jujucharms.com/docs/devel/tools-charm-tools) for more
+information.
+
+#### Installation
+
+Users of Ubuntu 14.04 (Trusty) will need to first add a PPA:
+
+```bash
+sudo add-apt-repository ppa:juju/stable
+sudo apt update
+```
+
+Install the software:
+
+```bash
+sudo apt install charm-tools
+```
+
+#### Usage
+
+Charm commands are called with `charm <subcommand>`.
+
+The command `charm-help` is used to view the available subcommands. Each
+subcommand has its own help page, which is accessible by adding either the `-h`
+or `--help` option:
+
+```bash
+charm add --help
+```
+
+When downloading charms, they end up in a directory with the same name as the
+charm. It is therefore a good idea to work from a central directory. For
+example, to download the MySQL and the WordPress charms:
+
+```bash
+mkdir ~/charms
+cd ~/charms
+charm pull nfs
+charm pull vsftpd
 ```
