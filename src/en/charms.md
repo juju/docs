@@ -1,5 +1,12 @@
 Title: Introduction to Juju charms  
-Todo: Add images
+TODO: Add images
+      To add (notes from PR #1093):
+      1. charms may be different depending on target OS
+      2. can choose which charm to use; can deploy on a series that it doesn't claim to
+	support
+      3. however, to have things 'just work', don't bother specifying anything and the
+	charm will decide which OS/version to use
+
 
 # Introduction to Juju Charms
 
