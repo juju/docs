@@ -76,7 +76,21 @@ keep the Charm Store organised.
 
 ![Juju Charm Store metadata Listing](./media/authors-metadata-display.png)
 
-Finally, a metadata file defines the charm's 
+[Storage](./developer-storage.md) can also be declared in a charm's metadata,
+as such:
+
+```yaml
+storage:
+  data:
+    type: filesystem
+    description: junk storage
+    shared: false # not yet supported, see description below
+    read-only: false # not yet supported, see description below
+    minimum-size: 100M
+    location: /srv/data
+```
+
+A metadata file defines the charm's
 [relations](./authors-relations.html),
 and whether it's designed for deployment as a
 [subordinate service](./authors-subordinate-services.html).
@@ -87,6 +101,22 @@ and whether it's designed for deployment as a
     will participate in.
   - if the charm is subordinate, it must contain at least one `requires`
     relation with container scope.
+
+`payloads` allows you to register payloads such as LXC, KVM, and docker with
+Juju. This lets the operator better understand the purpose and function of these
+payloads on a given machine.
+
+```yaml
+payloads:
+    monitoring:
+        type: docker
+    kvm-guest:
+        type: kvm
+```
+
+Other available fields are:
+
+  - `series` is a list of versions of Ubuntu this charm is compatible with.
 
 Other field names should be considered to be reserved; please don't use any not
 listed above to avoid issues with future versions of Juju.
