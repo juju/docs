@@ -76,8 +76,7 @@ keep the Charm Store organised.
 
 ![Juju Charm Store metadata Listing](./media/authors-metadata-display.png)
 
-[Storage](./developer-storage.md) can also be declared in a charm's metadata,
-as such:
+Storage can also be declared in a charm's metadata, as such:
 
 ```yaml
 storage:
