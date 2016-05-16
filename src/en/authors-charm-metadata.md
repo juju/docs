@@ -104,7 +104,7 @@ and whether it's designed for deployment as a
   - if the charm is subordinate, it must contain at least one `requires`
     relation with container scope.
 
-`resources` defines ???
+`resources` allows you to add a blob that your charm can utilize.
 
 ```yaml
 resources:
@@ -114,12 +114,16 @@ resources:
     description: example resource
 ```
 
-`payloads` defines ???
+`payloads` allows you to register payloads such as LXC, KVM, and docker with
+Juju. This lets the operator better understand the purpose and function of these
+payloads on a given machine.
 
 ```yaml
 payloads:
-  example:
-    type: kvm
+    monitoring:
+        type: docker
+    kvm-guest:
+        type: kvm
 ```
 
 `extra-bindings` represents an extra bindable endpoint that is not a relation.
