@@ -88,7 +88,7 @@ Features supported by Juju-owned instances running within AWS:
   more information.
 
 - Juju deploys to what Amazon refers to as *m3.medium* instances by default. you
-  can specify different instance types by using [constraints][constraints]
+  can specify different instance types by using [constraints][constraints].
   
 
 [aws]: http://console.aws.amazon.com

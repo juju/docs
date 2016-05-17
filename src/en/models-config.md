@@ -1,39 +1,45 @@
 Title: General configuration options  
-TODO: check options haven't changed
+TODO: Check accuracy of key table
+      Confirm 'all' harvest mode state. Seems it should be "'Dead' or
+	'Unknown'" OR "a combination of modes 'destroyed' and 'unknown'".
+      Make the table more space-efficient. Damn it's bulbous.
 
 
 # Configuring models
 
-There may be times, particularly when dealing with complex cloud environments
-or running multiple instances of Juju, where it would be useful to control
-further aspects of the models you create and the machines they deploy.
+A model influences all the machines that Juju creates within it and, in turn, the
+services that get deployed onto those machines. It is therefore a very powerful
+feature to be able to configure at the model level.
+
+Model configuration consists of a collection of keys and their respective
+values. An explanation of how to both view and set these key:value pairs is
+provided below. Notable examples are provided at the end.
 
 
-## Getting and setting individual values
+## Getting and setting values
 
-You can display the current model settings by
-running the command:
+You can display the current model settings by running the command:
 
 ```bash
 juju get-model-config
 ```
 
-This will include all the currently set options - whether they were set
+This will include all the currently set key values - whether they were set
 by you, inherited as a default value or dynamically set by Juju. 
 
-You may also set values for the current environment using the
-corresponding ```juju set-model-config``` command, and providing a key=value 
-pair:
+A key's value may be set for the current model using the `set-model-config`
+command:
 
 ```bash
 juju set-model-config noproxy=jujucharms.com
 ```
-It is possible to specify a list of space-delimited key-value pairs to set more
-than one configuration at a time:
+
+It is also possible to specify a list of key-value pairs:
   
 ```bash
 juju set-model-config test-mode=true enable-os-upgrade=false
 ```
+
 !!! Note: Juju does not currently check that the provided key is a valid
 setting, so make sure you spell it correctly.
 
@@ -44,11 +50,10 @@ used, specifying the key names:
 juju unset-model-config test-mode
 ```
 
-The list of possible values which may be configured is set out in the table
-below, followed by specific notes detailing some of those options
 
+## List of model keys
 
-## Alphabetical list of general configuration values
+The table below lists all the model keys which may be assigned a value.
 
 | Key                        | Type   | Default| Valid values             | Purpose |
 |:----------------------------|--------|--------|--------------------------|:---------|
@@ -70,7 +75,7 @@ ca-cert | string |  |  | The certificate of the CA that signed the state server 
 ca-cert-path | string |  |  | Path to file containing CA certificate
 ca-private-key | string |  |  | The private key of the CA that signed the state server certificate, in PEM format
 ca-private-key-path | string |  |  | Path to file containing CA private key
-default-series | string |  | valid series name, e.g. 'trusty' | The default series of Ubuntu to use for deploying charms
+default-series | string |  | valid series name, e.g. 'xenial' | The default series of Ubuntu to use for deploying charms
 development | bool | false |  | Whether the model is in development mode
 disable-network-management | bool | false |  | Whether the provider should control networks (only applies to MAAS models, this should usually be set to false(default) otherwise Juju will not be able to create containers)
 enable-os-refresh-update | bool | true |  | Whether newly provisioned instances should run their respective OS's update capability.
@@ -102,13 +107,14 @@ test-mode | bool | false |  | Whether the model is intended for testing. If true
 type | string |  | any of the supported provider types | Type of model, e.g. local, ec2
 uuid | string |  |  | The UUID of the model
 
+Some of these keys deserve further explanation. These are explored below.
 
-## Apt mirror
+### Apt mirror
 
-The APT packaging system is used to install and upgrade software on
-machines provisioned in the model, and many charms also use APT to
-install software for the services they deploy. It is possible to set a
-specific mirror for the APT packages to use, by setting "apt-mirror":
+The APT packaging system is used to install and upgrade software on machines
+provisioned in the model, and many charms also use APT to install software for
+the services they deploy. It is possible to set a specific mirror for the APT
+packages to use, by setting 'apt-mirror':
 
 ```bash
 juju set-model-config apt-mirror=http://archive.ubuntu.com/ubuntu/
@@ -121,15 +127,15 @@ You may also run:
 ```bash
 juju unset-model-config apt-mirror
 ```
+
 to restore the default behaviour in a running model.
 
 
-## Versions and Streams
+### Versions and streams
 
-The ```agent-stream``` option selects the versions of Juju which a model
-can deploy and upgrade to. This defaults to "released", indicating that only
-the latest stable versions of Juju should be used, which is the recommended
-setting.
+The `agent-stream` option selects the versions of Juju which a model can deploy
+and upgrade to. This defaults to 'released', indicating that only the latest
+stable versions of Juju should be used, which is the recommended setting.
 
 To run the upcoming stable release (before it has passed the normal QA process)
 you can set:
@@ -146,7 +152,7 @@ agent-stream: devel
 ```
 
 
-## Provision machines faster by disabling software upgrades
+### APT updates and upgrades - faster machine provisioning
 
 When Juju provisions a machine, its default behaviour is to upgrade existing
 packages to their latest version. If your OS images are fresh and/or your
@@ -155,27 +161,25 @@ upgrades in order to provision machines faster.
 
 Two Boolean configuration options are available to disable APT updates and
 upgrades: `enable-os-refresh-update` (apt-get update) and `enable-os-upgrade`
-(apt-get upgrade), respectively. By default, these are both set to 'true'.
+(apt-get upgrade), respectively.
 
 ```yaml
 enable-os-refresh-update: false
 enable-os-upgrade: false
 ```
 
-You may also want to just update the package list to ensure a Charm has the
+You may also want to just update the package list to ensure a charm has the
 latest software available to it by disabling upgrades but enabling updates.
 
 
-## Juju lifecycle and harvesting
+### Juju lifecycle and harvesting
 
-Juju keeps state on the running model.  Based on that model, it can harvest
-machines which it deems are no longer required. This can help reduce running
-costs and keep the model 'tidy'.  Harvesting is guided by what "harvesting
-mode" has been set by the system administrator. 
+Juju keeps state on the running model and it can harvest (remove) machines
+which it deems are no longer required. This can help reduce running costs and
+keep the model tidy. Harvesting is guided by what "harvesting mode" has been
+set. 
 
-Before explaining the different modes, it is useful to understand how Juju
-perceives machines. As far as it is concerned, machines are in one of four
-states:
+A Juju machine can be in one of four states:
 
 - **Alive:** The machine is running and being used.
 - **Dying:** The machine is in the process of being terminated by Juju, but 
@@ -184,28 +188,23 @@ states:
   being tracked for removal.
 - **Unknown:** The machine exists, but Juju knows nothing about it.
 
-### Harvesting modes
+Juju can be in one of several harvesting modes, in order of most conservative
+to most aggressive:
 
-With the above in mind, Juju can use one of several strategies to delete or
-harvest machines from the model:
+- **none:** Machines will never be harvested. This is a good choice if machines
+  are managed via a process outside of Juju.
+- **destroyed:** Machines will be harvested if i) Juju "knows" about them and
+  ii) they are 'Dead'.
+- **unknown:** Machines will be harvested if Juju does not "know" about them
+  ('Unknown' state). Use with caution in a mixed environment or one which may
+  contain multiple instances of Juju.
+- **all:** Machines will be harvested if Juju considers them to be 'destroyed'
+  or 'unknown'.
 
-- **None:** Using this method, Juju won't harvest any machines. This is the
-most conservative, and a good choice if you manage your machines
-using a separate process outside of Juju.
-- **Destroyed:** This is the default setting. Juju will harvest only machine
-instances that are dead, and that Juju knows about. Unknown instances will
-not be harvested.
-- **Unknown:** With this method, Juju will harvest only instances that Juju
-doesn't know about. Use this with caution in a mixed environment or one which 
-may contain multiple instances of Juju.
-- **All:** This is the most aggressive setting. In this mode Juju will
-terminate all instances which it considers to be "destroyed" or "unknown". 
-This is a good option if you are only utilising Juju for your
-environment.
+The default mode is **destroyed**.
 
-The default mode can be overridden by setting the 
+Below, the harvest mode key for the current model is set to 'none':
 
-```yaml
-provisioner-harvest-mode:
+```bash
+juju set-model-config provisioner-harvest-mode=none
 ```
-to any of the above values.

@@ -13,7 +13,7 @@ And you can see more specific information (e.g. the supported regions) by
 running:
   
 ```bash
-juju show-cloud azure
+juju show-cloud rackspace
 ```
 
 If at any point you believe Juju's information is out of date (e.g. Rackspace just 

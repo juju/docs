@@ -19,6 +19,7 @@ extlist = [
            'markdown.extensions.fenced_code',
            'markdown.extensions.def_list',
            'markdown.extensions.attr_list',
+           'markdown.extensions.toc',
            'callouts',
            'anchors_away',
            'foldouts'

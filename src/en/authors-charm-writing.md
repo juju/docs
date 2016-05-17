@@ -386,7 +386,7 @@ relation-set hostname=`unit-get private-address` port=80
 Here we can see the other end of the information sharing - in this case
 relation-set exposes the given values to the connecting charm. In this case one
 of the commands is backticked, as unit-get is another helper command, in this
-case one which returns the requested value form the machine the charm is running
+case one which returns the requested value from the machine the charm is running
 on, specifically here it's IP address.
 
 So, any connecting charm will be able to ask for the values `hostname` and

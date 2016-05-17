@@ -16,7 +16,7 @@ running:
 juju show-cloud google
 ```
 
-If at any point you believe Juju's information is out of date (e.g. Amazon just 
+If at any point you believe Juju's information is out of date (e.g. Google just 
 announced support for a new region), you can update Juju's public cloud data by
 running:
   
