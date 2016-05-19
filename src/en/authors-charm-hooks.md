@@ -1,3 +1,5 @@
+Title: Charm hooks  
+
 # Charm hooks
 
 A service unit's direct action is entirely defined by its charm's hooks. Hooks
@@ -35,6 +37,7 @@ charm:
   - start
   - upgrade-charm
   - stop
+  - update-status
 
 For every relation defined by a charm, an additional 4 "relation hooks" can be
 implemented, named after the charm relation:
@@ -96,6 +99,14 @@ implement the following logic:
 - Stop the service
 - Remove any files/configuration created during the service lifecycle
 - Prepare any backup(s) of the service that are required for restore purposes.
+
+### update-status
+
+`update-status` provides constant feedback to the user about the status of the
+service the charm is modeling. The charm is run by Juju at regular intervals,
+and gives authors an opportunity to run code that gets the "health" of the
+service or services.
+
 
 ## Relation hooks
 
