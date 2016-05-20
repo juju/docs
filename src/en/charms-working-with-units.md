@@ -68,26 +68,36 @@ For more information, run the `juju help scp` command.
 
 ## The `juju run` command
 
-The `run` command can be used by devops or scripts to inspect or do work on
-services, units, or machines. Commands for services or units are executed in a
-hook context. Charm authors can use the run command to develop and debug
-scripts that run in hooks.
+The `run` command can be used to invoke executables on Juju machines. These
+machines can be targetted using different options, with each associated with a
+possibly different user environment:
 
-For example, to run uname on every instance:
+ - service (native root)
+ - unit (native root)
+ - specific machines (effective root)
+ - all machines (effective root)
+
+Effective root is achieved via passwordless sudo access (user 'ubuntu').
+
+Commands for services or units are executed in a hook context. Charm authors
+can therefore use this command to develop and debug scripts that run in hooks.
+
+For example, to run `uname` on every machine:
 
 ```bash
 juju run "uname -a" --all
 ```
 
-Or to run uptime on some instances:
+Or to run `uptime` on some machines:
 
 ```bash
 juju run "uptime" --machine=2
 juju run "uptime" --service=mysql
+juju run "uptime" --unit=nfs1/0
 ```
 
-!!! Note: When using `juju run` with the `--service` option, keep in mind that
-whichever command you pass will run on *every unit* of that service.
+When using `juju run` with the `--service` option, the command is run on *every
+unit* of that service.
 
 When used in combination with certain services you can script certain tasks.
 For instance, in the 'hadoop' charm you can use `juju run` to initiate a terasort:
