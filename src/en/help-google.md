@@ -97,8 +97,8 @@ Place this file where the Juju client can find it. This may or may not be on
 the computer you downloaded the file to. We recommend storing this file in the 
 default Juju directory, to ensure that it is with your other Juju files in 
 whatever system backups you perform. 
-For the current example, the file is called `Juju-GCE-f33a6cdbd8e3.json` (based
-on our project name of 'Juju-GCE'). So for Ubuntu we would store it here:
+For the current example, say the file is called `Juju-GCE-f33a6cdbd8e3.json`
+(based on our project name of 'Juju-GCE'), on Ubuntu we would store it here:
 
 `~/.local/share/juju/Juju-GCE-f33a6cdbd8e3.json`
 
@@ -108,7 +108,9 @@ Armed with the file downloaded above, you can add the credential with the
 command:
 
 ```bash
-juju add-crdential google
+juju add-credential google
 ```
-For the authentication type, choose 'json' and give the full path to the file
-downloaded.
+
+The command will interactively prompt you for information about the credentials
+being added. For the authentication type, choose 'json' and then give the full
+path to the file downloaded.
