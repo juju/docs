@@ -218,7 +218,7 @@ not conflict.  All handlers from each of those files will be discovered and
 dispatched according to the [discovery and dispatch rules][].
 
 
-## Buidling your charm
+## Building your charm
 
 Now that the layer is done, let's build it together and deploy the final
 charm.  From within the layer directory, this is as simple as:
