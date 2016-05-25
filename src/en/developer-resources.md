@@ -23,9 +23,12 @@ one or more resources.
 resources:
   software:
     type: file
-    filename: software.tgz
+    filename: software.zip
     description: "One line description that is useful when operators need to push it."
 ```
+The `filename` is the name of the resource after it has been retrieved. Juju
+will check extension on files and will prevent files with other extensions
+to be uploaded.
 
 # Managing resources
 
@@ -37,36 +40,53 @@ is controlled by permissions.
 
 ### juju list-resources
 
-Operators can list the resources that are currently available by using the
-`juju list-resources` command. The command shows resources in a model.
+Users can list the resources that are currently available on the Juju
+controller by using the `juju list-resources` command. The command shows
+resources for a service or a unit.
 
 ```sh
-juju list-resources charm-name
+$ juju list-resources resources-example
+[Service]
+RESOURCE SUPPLIED BY REVISION
+software admin@local 2016-25-05T18:37
+
+$ juju list-resources resources-example/0
+[Unit]
+RESOURCE REVISION
+software 2016-25-05T18:37
 ```
 
 ## charm list-resources
 
-Operators can display the resources tat are currently available for a charm in
-the charm store with the `charm list-resources` command.
+Users can display the resources tat are currently available in Juju Charm Store
+for a charm or a specific revision number with the `charm list-resources`
+command.
 
 ```sh
-charm list-resources cs:~user/trusty/charm-name
+$ charm list-resources cs:~lazypower/etcd
+[Service]
+RESOURCE REVISION
+etcd     0
+etcdctl  0
 ```
 
 ## Adding resources
 
-### charm attach
+## juju attach
 
-Operators can upload a file as a new resource for a charm.
+The `juju attach` command uploads a file from local disk to the Juju controller
+to be used as a resource for a service. You must specify the charm name, the
+resource name and the path to the file.
 
 ```sh
-charm attach ~user/trusty/charm-name website-data ./foo.zip
+juju attach charm-name resource-name=filepath
 ```
 
-## charm deploy
-You can specify resources when you deploy a charm with the `--resource` command
-line flag. The resource should be specified in a name=filepath pair. You can
-specify multiple resources on one deploy command:
+## juju deploy
+
+Resources may be uploaded to the Juju controller at deploy time by specifying
+the --resource flag followed by resource-name=filepath pair. This flag may be
+repeated more than once to upload more than one resource.
 
 ```sh
 juju deploy charm-name --resource foo=/some/file.tgz --resource bar=./docs/cfg.xml
@@ -74,28 +94,38 @@ juju deploy charm-name --resource foo=/some/file.tgz --resource bar=./docs/cfg.x
 Where "foo" and "bar" are the resource names in metadata.yaml file for the
 charm-name charm.
 
-## juju attach
-The `juju attach` command uploads a file from local disk to the juju controller
-to be used as a resoruce for a service.
+### charm attach
+
+The `charm attach` command uploads a file to the Juju Charm Store as a new
+resource for the charm.
 
 ```sh
-juju attach charm-name name=filepath
+charm attach ~mbruzek/trusty/consul software=./consul_0.6.4_linux_amd64.zip
 ```
-
-## Upgrading resources
-
-TODO: ask natefinch about this: A resource update will trigger the `upgrade-charm` hook.
 
 # Using resources in a charm
 
 ## resource-get
 
-Get the resource by name.
+There is a charm command that will fetch the resource from the Juju controller
+or the Juju Charm store called `resource-get`. The `resource-get` command
+returns a local path to the file for a named resource.
+
+If `resource-get` for a resource has not been run before (for the unit) then the
+resource is downloaded from the controller at the revision associated with the
+unit's service. That file is stored in the unit's local cache. If `resource-get`
+*has* been run before then each subsequent run syncs the resource with the
+controller. This ensures that the revision of the unit-local copy of the
+resource matches the revision of the resource associated with the unit's
+service.
+
+The path provided by `resource-get` references the up-to-date file for the
+resource. Note that the resource may get updated on the controller for the
+service at any time, meaning the cached copy *may* be out of date at any time
+after you call `resource-get`. Consequently, the command should be run at every
+point where it is critical that the resource be up to date.
 
 ```sh
-resource-get software
+# resource-get software
+/var/lib/juju/agents/unit-resources-example-0/resources/software/software.zip
 ```
-
-# Caveats
-
-TODO: Document the limitations if any for this feature.
