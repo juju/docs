@@ -181,18 +181,18 @@ The temporary directory where `juju debug-hooks` is spawned from.
 JUJU_DEBUG=/tmp/tmp.vGQlc2bTcV
 ```
 
-#### JUJU_ENV_NAME
+#### JUJU_MODEL_NAME
 
-The human-friendly name of the current environment.
+The human-friendly name of the current model.
 ```
-JUJU_ENV_NAME=local
+JUJU_MODEL_NAME=default
 ```
 
-#### JUJU_ENV_UUID
+#### JUJU_MODEL_UUID
 
-The unique identifier of the juju environment.
+The unique identifier of the juju model.
 ```
-JUJU_ENV_UUID=2c0896ce-fd6c-4647-8540-26f848e061f9
+JUJU_MODEL_UUID=2c0896ce-fd6c-4647-8540-26f848e061f9
 ```
 
 #### JUJU_HOOK_NAME
