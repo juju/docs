@@ -2,22 +2,22 @@ Title: Writing charms using resources
 
 # Writing charms that use resources
 
-Many services require binary resources in order to be installed. While it is
+Many applications require binary resources in order to be installed. While it is
 possible for a charm to download the software from the package repositories, or
 other locations, some charms may be deployed network restricted environments
-that do not allow access to the Internet.
+that do not allow access to all areas of the Internet.
 
 Starting with version 2 of Juju, users can upload resources to the controller
 that charms can download. This is useful for Juju models in restrictive
-network environments and when you want to careful control the versions of
-software you deploy.
+network environments and when you want to control the versions of software that
+is deployed.
 
 # How it works
 
 ## Developing a charm with resources
 
-Charm developers can add a `resources` key to the metadata.yaml file to define
-one or more resources.
+Charm developers can add a `resources` key to the  `metadata.yaml` file to
+define one or more resources.
 
 ```yaml
 resources:
@@ -27,13 +27,13 @@ resources:
     description: "One line description that is useful when operators need to push it."
 ```
 The `filename` is the name of the resource after it has been retrieved. Juju
-will check extension on files and will prevent files with other extensions
-to be uploaded.
+will check extension on the file being uploaded and will prevent files with
+different extensions from being uploaded.
 
 # Managing resources
 
 Resources can be uploaded to a local Juju controller, where only charms from
-that controller can access the resources, or the Juju charm store where access
+that controller can access the resources, or the Juju Charm Store where access
 is controlled by permissions.
 
 ## Listing resources
@@ -91,7 +91,7 @@ repeated more than once to upload more than one resource.
 ```sh
 juju deploy charm-name --resource foo=/some/file.tgz --resource bar=./docs/cfg.xml
 ```
-Where "foo" and "bar" are the resource names in metadata.yaml file for the
+Where "foo" and "bar" are the resource names in `metadata.yaml` file for the
 charm-name charm.
 
 ### charm attach
@@ -107,23 +107,23 @@ charm attach ~mbruzek/trusty/consul software=./consul_0.6.4_linux_amd64.zip
 
 ## resource-get
 
-There is a charm command that will fetch the resource from the Juju controller
-or the Juju Charm store called `resource-get`. The `resource-get` command
-returns a local path to the file for a named resource.
+The charm command `resource-get` will fetch a resource from the Juju
+controller or the Juju Charm store. The command returns a local path to the
+file for a named resource.
 
-If `resource-get` for a resource has not been run before (for the unit) then the
+If `resource-get` has not been run for the named resource previously, then the
 resource is downloaded from the controller at the revision associated with the
 unit's service. That file is stored in the unit's local cache. If `resource-get`
-*has* been run before then each subsequent run syncs the resource with the
-controller. This ensures that the revision of the unit-local copy of the
+*has* been run before then each subsequent run synchronizes the resource with
+the controller. This ensures that the revision of the unit-local copy of the
 resource matches the revision of the resource associated with the unit's
 service.
 
 The path provided by `resource-get` references the up-to-date file for the
 resource. Note that the resource may get updated on the controller for the
 service at any time, meaning the cached copy *may* be out of date at any time
-after you call `resource-get`. Consequently, the command should be run at every
-point where it is critical that the resource be up to date.
+after `resource-get` is called. Consequently, the command should be run at
+every point where it is critical for the resource be up to date.
 
 ```sh
 # resource-get software
