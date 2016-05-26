@@ -56,7 +56,7 @@ RESOURCE REVISION
 software 2016-25-05T18:37
 ```
 
-## charm list-resources
+### charm list-resources
 
 Users can display the resources tat are currently available in Juju Charm Store
 for a charm or a specific revision number with the `charm list-resources`
@@ -72,7 +72,7 @@ etcdctl  0
 
 ## Adding resources
 
-## juju attach
+### juju attach
 
 The `juju attach` command uploads a file from local disk to the Juju controller
 to be used as a resource for a service. You must specify the charm name, the
@@ -82,7 +82,7 @@ resource name and the path to the file.
 juju attach charm-name resource-name=filepath
 ```
 
-## juju deploy
+### juju deploy
 
 Resources may be uploaded to the Juju controller at deploy time by specifying
 the --resource flag followed by resource-name=filepath pair. This flag may be
@@ -105,7 +105,7 @@ charm attach ~mbruzek/trusty/consul software=./consul_0.6.4_linux_amd64.zip
 
 # Using resources in a charm
 
-## resource-get
+### resource-get
 
 The charm command `resource-get` will fetch a resource from the Juju
 controller or the Juju Charm store. The command returns a local path to the
