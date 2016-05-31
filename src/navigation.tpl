@@ -14,16 +14,16 @@
         </li>
         <li><a href="controllers.html">Controllers</a></li>
         <li><a href="models.html">Models</a></li>
-        <li class="section"><a class="header" href="charms.html">Charms & Services</a>
+        <li class="section"><a class="header" href="charms.html">Charms & applications</a>
             <ul class="sub">
-                <li><a href="charms-deploying.html">Deploying Services</a></li>
+                <li><a href="charms-deploying.html">Deploying applications</a></li>
                 <li><a href="charms-constraints.html">Using constraints</a></li>
-                <li><a href="charms-config.html">Service configuration</a></li>
-                <li><a href="charms-relations.html">Service Relations</a></li>
-                <li><a href="charms-exposing.html">Exposing Services</a></li>
-                <li><a href="charms-scaling.html">Scaling Services</a></li>
-                <li><a href="charms-destroy.html">Removing Services &amp; Units</a></li>
-                <li><a href="charms-service-groups.html">Groups of Services</a></li>
+                <li><a href="charms-config.html">Application configuration</a></li>
+                <li><a href="charms-relations.html">Application Relations</a></li>
+                <li><a href="charms-exposing.html">Exposing applications</a></li>
+                <li><a href="charms-scaling.html">Scaling applications</a></li>
+                <li><a href="charms-destroy.html">Removing applications &amp; Units</a></li>
+                <li><a href="charms-service-groups.html">Groups of applications</a></li>
                 <li><a href="charms-ha.html">Charm high availability</a></li>
                 <li><a href="charms-bundles.html">Using bundles</a></li>
                 <li><a href="charms-working-with-units.html">Working with Units</a></li>
