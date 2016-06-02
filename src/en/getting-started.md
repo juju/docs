@@ -1,4 +1,5 @@
 Title: Getting started with Juju 2.0
+TODO: update mediawiki bundle example
 
 # Getting started with Juju 2.0
 
@@ -35,9 +36,10 @@ session. You can confirm your user is part of this group by running the command:
 ```bash
 groups
 ```
-This should indicate the user is a member of the lxd group, amongst others:
+This should indicate the user is a member of the lxd group, amongst others (your
+groups may vary from these):
 
-```bash 
+```no-highlight
 lxd adm cdrom sudo dip plugdev lpadmin sambashare ubuntu
 ```
 
