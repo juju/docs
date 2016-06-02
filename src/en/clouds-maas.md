@@ -11,7 +11,7 @@ on bare metal that you would get using any other cloud.
 
 For each MAAS you may have, you will need to define it so it may become a
 member of Juju's known clouds. This is done with the help of a YAML file. All
-what varies is the endpoint and the name, since they use the same
+that varies is the endpoint and the name, since they use the same
 authentication method. For example, below is the file maas-clouds.yaml:
  
 ```yaml
