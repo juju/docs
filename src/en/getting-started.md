@@ -1,7 +1,5 @@
 Title: Getting started with Juju 2.0
-TODO: remove ppa/devel after release
-      simplify ZFS install
-
+TODO: update mediawiki bundle example
 
 # Getting started with Juju 2.0
 
@@ -24,65 +22,117 @@ Both the above are provided with Ubuntu 16.04LTS.
 
 Run the following commands to install the required software:
 
-```bash
-sudo add-apt-repository ppa:juju/devel
+```no-highlight
 sudo apt update
-sudo apt install juju zfsutils-linux lxd
-newgrp -
+sudo apt install juju-2.0 zfsutils-linux
 ```
-
-!!! Note: The `newgrp` command should only be necessary if package 'lxd' got
-installed (it may be already installed). This command will update your group
-memberships but will also start a new shell.
-
-
-## Prepare ZFS
-
-Using ZFS we can create sparse backing-storage for any of the containers which
-LXD creates for Juju. You can create this storage anywhere (e.g. the fastest
-drive you have). This example creates a 32G file to use:
-
-```bash
-sudo mkdir /var/lib/zfs
-sudo truncate -s 32G /var/lib/zfs/lxd.img
-sudo zpool create lxd /var/lib/zfs/lxd.img
-```
-
-As this is sparse storage, it won't actually take up disk space until it is 
-actually being used. You can check the file has been added to a ZFS pool with 
-the following command:
-  
-```bash
-sudo zpool iostat -v
-```
-
 
 ## Initialise LXD
 
-Now we need to tell LXD about this storage:
+In order to use LXD, your user must be in the 'lxd' group. All system users are
+automatically added to this group, but you may need to refresh the current 
+session. You can confirm your user is part of this group by running the command:
 
 ```bash
-sudo lxd init --auto --storage-backend zfs --storage-pool lxd
+groups
+```
+This should indicate the user is a member of the lxd group, amongst others (your
+groups may vary from these):
+
+```no-highlight
+lxd adm cdrom sudo dip plugdev lpadmin sambashare ubuntu
 ```
 
+If the `lxd` group is not present, you can refresh group membership with the 
+command:
+  
+```bash
+newgrp lxd
+```
+
+LXD includes an interactive initialisation which will also set up a ZFS pool 
+to use and configures networking for your containers. To start this process, 
+enter:
+
+```bash
+sudo lxd init
+```
+
+You will be prompted for various options. As an example, to configure LXD to 
+create a new 32GB ZFS pool to use, called 'lxd-pool', and set up a bridge 
+network (required for Juju), your session would look like this:
+ 
+```no-highlight
+Name of the storage backend to use (dir or zfs): zfs
+Create a new ZFS pool (yes/no)? yes
+Name of the new ZFS pool: lxd-pool
+Would you like to use an existing block device (yes/no)? no
+Size in GB of the new loop device (1GB minimum): 32
+Would you like LXD to be available over the network (yes/no)? no
+Do you want to configure the LXD bridge (yes/no)? yes
+```
+
+The last question will initiate a series of dialogues to configure the bridge 
+device and subnet. Except in the case the subnet may clash with existing 
+networks, it is okay to accept the defaults on all dialogues (though it is not
+required to configure IPv6 networking).
+
+^# Walkthrough of network configuration
+
+   In order for networking to be established between containers and Juju, you 
+   need to set up a bridge device.
+
+   !["step 1"](../media/juju-lxd-config001.png)
+
+   The default name for the bridge device is `lxdbr0`. This name _must_ be used 
+   for Juju to be able to connect to the containers.
+   
+   !["step 2"](../media/juju-lxd-config002.png)
+   
+   Juju will expect an IPv4 network space for the containers, so you should 
+   enable this.
+   
+   !["step 3"](../media/juju-lxd-config003.png)
+   
+   The default address is chosen randomly in the 10.x.x.x space. You do not 
+   need to change this unless it conflicts with another subnet you know is on
+   your network.
+   
+   !["step 4"](../media/juju-lxd-config004.png)
+   
+   You need to enter a [CIDR](https://tools.ietf.org/html/rfc4632) mask value. 
+   The default of 24 gives you a possible 254 addresses for the subnet.
+   
+   !["step 5"](../media/juju-lxd-config005.png)
+   
+   You can now specify the start address for DHCP...
+   
+   !["step 6"](../media/juju-lxd-config006.png)
+   
+   And the end address...
+   
+   !["step 7"](../media/juju-lxd-config007.png)
+   
+   You can also specify the total number of DHCP clients to accept.
+   
+   !["step 8"](../media/juju-lxd-config008.png)
+   
+   Finally for IPv4, you should turn on Network Address Translation to enable
+   the contianers to communicate fully.
+   
+   !["step 9"](../media/juju-lxd-config009.png)
+   
+   You can continue to set up a similar IPv6 bridge device, but this is not 
+   required for Juju.
+   
+   !["step 10"](../media/juju-lxd-config010.png)
+   
+Now LXD is configured to create containers for Juju.
 
 ## Create a controller
 
 Juju needs a controller instance to manage your models and the `juju bootstrap`
-command is used to create one.
-
-However, if this is the first time using LXD then you'll need to configure it
-and expose a "network bridge" that Juju requires:
-
-```bash
-sudo dpkg-reconfigure -p medium lxd
-```
-
-!!! Note: During the configuration dialog, the bridge must be 'lxdbr0'. You
-can accept all other prompts although the last question (IPv6) is probably not
-needed.
-
-Proceed with the creation of the controller. For use with our LXD "cloud", we
+command is used to create one. For use with our LXD "cloud", we
 will make a controller called 'lxd-test':
 
 ```bash
@@ -109,13 +159,7 @@ local.lxd-test*  default  admin@local  10.0.3.124:17070
 
 Notice that the prefix 'local.' is added to the controller name we specified.
 
-Confirm ZFS is working by looking for changes to the storage pool:
-  
-```bash
-sudo zpool iostat -v
-```
-
-Newly-created controllers come bundled with two models: The 'admin' model,
+A newly-created controller has two models: The 'controller' model,
 which should be used only by Juju for internal management, and a 'default'
 model, which is ready for actual use.
 
