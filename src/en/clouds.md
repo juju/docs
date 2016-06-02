@@ -94,10 +94,10 @@ new definition. The file should follow this general format:
 clouds:
   <cloud_name>:
     type: <type_of_cloud>
+    auth-types: <[access-key, oauth, userpass]>
     regions:
       <region-name>:
         endpoint: <https://xxx.yyy.zzz:35574/v3.0/>
-        auth-types: <[access-key, oauth, userpass]>
 ```
 with the releavant values substituted in for the parts indicated
 (within '<' '>').
@@ -109,10 +109,10 @@ For example, a typical OpenStack cloud on the local network you want to call
 clouds:
     mystack:
       type: openstack
+      auth-types: [access-key, userpass]
       regions:
         dev1:
           endpoint: https://openstack.example.com:35574/v3.0/
-          auth-types: [access-key, userpass]
 ```
 In this case the url is at https://openstack.example.com:35574/v3.0/, and the cloud accepts either access-key or username/password authentication methods.
 
