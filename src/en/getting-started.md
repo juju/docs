@@ -82,50 +82,50 @@ required to configure IPv6 networking).
    In order for networking to be established between containers and Juju, you 
    need to set up a bridge device.
 
-   !["step 1"](../media/juju-lxd-config001.png)
+   !["step 1"](./media/juju-lxd-config001.png)
 
    The default name for the bridge device is `lxdbr0`. This name _must_ be used 
    for Juju to be able to connect to the containers.
    
-   !["step 2"](../media/juju-lxd-config002.png)
+   !["step 2"](./media/juju-lxd-config002.png)
    
    Juju will expect an IPv4 network space for the containers, so you should 
    enable this.
    
-   !["step 3"](../media/juju-lxd-config003.png)
+   !["step 3"](./media/juju-lxd-config003.png)
    
    The default address is chosen randomly in the 10.x.x.x space. You do not 
    need to change this unless it conflicts with another subnet you know is on
    your network.
    
-   !["step 4"](../media/juju-lxd-config004.png)
+   !["step 4"](./media/juju-lxd-config004.png)
    
    You need to enter a [CIDR](https://tools.ietf.org/html/rfc4632) mask value. 
    The default of 24 gives you a possible 254 addresses for the subnet.
    
-   !["step 5"](../media/juju-lxd-config005.png)
+   !["step 5"](./media/juju-lxd-config005.png)
    
    You can now specify the start address for DHCP...
    
-   !["step 6"](../media/juju-lxd-config006.png)
+   !["step 6"](./media/juju-lxd-config006.png)
    
    And the end address...
    
-   !["step 7"](../media/juju-lxd-config007.png)
+   !["step 7"](./media/juju-lxd-config007.png)
    
    You can also specify the total number of DHCP clients to accept.
    
-   !["step 8"](../media/juju-lxd-config008.png)
+   !["step 8"](./media/juju-lxd-config008.png)
    
    Finally for IPv4, you should turn on Network Address Translation to enable
    the contianers to communicate fully.
    
-   !["step 9"](../media/juju-lxd-config009.png)
+   !["step 9"](./media/juju-lxd-config009.png)
    
    You can continue to set up a similar IPv6 bridge device, but this is not 
    required for Juju.
    
-   !["step 10"](../media/juju-lxd-config010.png)
+   !["step 10"](./media/juju-lxd-config010.png)
    
 Now LXD is configured to create containers for Juju.
 
