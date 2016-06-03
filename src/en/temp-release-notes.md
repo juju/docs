@@ -230,7 +230,7 @@ and credentials that involves less editing of files and makes Juju work
 out of the box with major public clouds like AWS, Azure, Joyent,
 Rackspace, Google, Cloudsigma.
 
-There is no environments.yaml file to edit. Instead, dlouds and
+There is no environments.yaml file to edit. Instead, clouds and
 credentials are defined in separate files, and the only cloud
 information that requires editing is for private MAAS and OpenStack
 deployments.
