@@ -1567,26 +1567,38 @@ from the "admin-api" space.
 
 ### Automatic Retries of Failed Hooks
 
-Starting from 2.0 failing hooks are now being automatically retried by
-juju. This currently happens with an exponential backoff with a factor of 2 starting from 5 seconds and capped off at 5 minutes. (5, 10, ..., 5\*60 seconds)
+Starting from 2.0 failing hooks are now being automatically retried by Juju.
+This currently happens with an exponential backoff with a factor of 2 starting
+from 5 seconds and capped off at 5 minutes. (5, 10, ..., 5\*60 seconds)
 
-A model config flag `automatically-retry-hooks` is now available that
-will toggle this behavior. It affects all the units running in the same model. By default the flag is true and that is the recommended value for regular deployments. It is toggleable mainly for debugging purposes.
+A model config flag 'automatically-retry-hooks' is now available that will
+toggle this behaviour. It affects all the units running in the same model. By
+default the flag is true and that is the recommended value for regular
+deployments. It is toggleable mainly for debugging purposes.
 
-### Enhancements to juju run
 
-Starting from 2.0 juju run will work by queueing actions using the name
+### Enhancements to Juju Run
+
+Starting from 2.0 `juju run` will work by queueing actions using the name
 'Juju-run'.  The command line API has not changed.
 
 A few things to note:
-* Juju run is now supported on windows machines. The commands will be executed through powershell.
-* Any actions named 'juju-run' defined in the charm will **not** work anymore. The charm build tool will forbid any actions starting with 'juju-' to be defined, similar to relations.
-* Because the commands are now actions statistics related to queue times, execution times, etc. can be gathered.
-* The specified timeout is only taken into account when actually executing the action and does **not** account for delays that might come from the action waiting to be executed.
-* `show-action-status` will also list actions queued by `juju-run`
-* To avoid flooding a new flag has been created for `show-action-status`.  You can now use `--name <action-name>` to only get the actions corresponding to a particular name.
+* Juju run is now supported on windows machines. The commands will be executed
+  through powershell.
+* Any actions named `juju-run` defined in the charm will **not** work anymore.
+  The charm build tool will forbid any actions starting with 'juju-' to be
+  defined, similar to relations.
+* Because the commands are now actions statistics related to queue times,
+  execution times, etc. can be gathered.
+* The specified timeout is only taken into account when actually executing the
+  action and does **not** account for delays that might come from the action
+  waiting to be executed.
+* 'show-action-status' will also list actions queued by 'juju-run'
+* To avoid flooding a new flag has been created for `show-action-status`. You
+  can now use `--name <action-name>` to only get the actions corresponding to
+  a particular name.
 * `show-action-output` can be used to get more information on a
-particular command.
+  particular command.
 
 ### Known issues
 
