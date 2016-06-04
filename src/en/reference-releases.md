@@ -102,11 +102,3 @@ OS X
 Windows
 : [juju-setup-2.0-beta8.exe](https://launchpad.net/juju-core/trunk/2.0-beta8/+download/juju-setup-2.0-beta8.exe) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta8/+download/juju-setup-2.0-beta8.exe/+md5))
 {: .instruction }
-
-Development releases use the 'devel' simple-streams. You must configure
-the 'agent-stream' option in your environments.yaml to use the matching
-juju agents.
-
-```no-highlight
-agent-stream: devel
-```

@@ -19,7 +19,7 @@ Upgrading environments to 2.0-beta8 is not supported.
 
 ## What's New in Beta8
 
-* List-controller now lists cloud type and region
+* List-controllers now lists cloud type and region
 * New command to remove clouds.
   Usage: juju remove-cloud <cloud name>
 * MAAS and LXD machines and hostnames now use short names
@@ -457,9 +457,9 @@ To list the controllers that you have created, use:
 
     juju list-controllers
 
-      CONTROLLER    MODEL         USER         SERVER
-      mycontroller* controller    admin@local  10.0.1.12:17070
-      test          default       admin@local  10.0.3.13:17070
+      CONTROLLER    MODEL         USER         CLOUD/REGION
+      mycontroller* controller    admin@local  joyent/us-east-3
+      test          default       admin@local  AWS/eu-west-1
 
 The current controller is indicated with an *.
 
@@ -533,7 +533,7 @@ commands.
 
 To bootstrap models using the LXD, manual, and MAAS providers, use:
 
-    juju bootstrap mycontroller lxd
+    juju bootstrap mycontroller localhost
 
     juju bootstrap mycontroller manual/<hostname>
 
@@ -1603,16 +1603,11 @@ A few things to note:
 
 ## Getting started with Juju 2.0
 
-Juju 2.0 allows you to get started creating models without modifying any
-definition files.  Just provide your credentials and go!  (*Note: to
-fully understand the new bootstrap experience please see the "New
-Bootstrap and Cloud Management Experience" section below)
+To get started with Juju 2.0 we recommend you try the pure container
+hypervisor, LXD, on Ubuntu 16.04, which creates very lightweight machines
+on your laptop or workstation, as if you had your own personal cloud.
 
-* LXD provider (requires lxd 2.0.0~rc9 or later):
-  The LXD provider requires no credentials, so you can create a
-  controller by just specifying its name:
-
-    juju bootstrap <controller name> lxd
+    juju bootstrap <controller name> localhost
 
 Note that the lxdbr0 bridge needs to be properly configured for the lxd
 provider to work, for details see:
@@ -1632,7 +1627,7 @@ http://insights.ubuntu.com/2016/04/07/lxd-networking-lxdbr0-explained/
         cloudsigma         cloudsigma  mia, sjc, wdc, zrh, hnl
         google             gce         us-east1, us-central1, ...
         joyent             joyent      us-east-1, us-east-2, us-east-3, …
-        localhost          lxd          localhost
+        localhost          lxd         localhost
         rackspace          rackspace   lon, syd, hkg, dfw, ord, iad
 
 Add your credentials using either:
@@ -1724,9 +1719,6 @@ section.
 
 
 ## Resolved issues
-
-  * Every juju deployment subject to mitm attacks
-    Lp 1456916
 
   * Destroying the current model should clear the current-model
     Lp 1505504
