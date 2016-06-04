@@ -242,19 +242,17 @@ To see what clouds are available, use:
 
     juju list-clouds
 
-      CLOUD              TYPE        REGIONS
-      aws                ec2         us-east-1, us-west-1, us-west-2, ...
-      aws-china          ec2         cn-north-1
-      aws-gov            ec2         us-gov-west-1
-      azure              azure       japanwest, centralindia, eastus2, ...
-      azure-china        azure       chinaeast, chinanorth
-      cloudsigma         cloudsigma  mia, sjc, wdc, zrh, hnl
-      google             gce         us-east1, us-central1, ...
-      joyent             joyent      us-east-1, us-east-2, us-east-3, …
-      lxd                lxd
-      maas               maas
-      manual             manual
-      rackspace          rackspace   lon, syd, hkg, dfw, ord, iad
+      CLOUD             TYPE        REGIONS
+      aws               ec2         us-east-1, us-west-1, us-west-2, ...
+      aws-china         ec2         cn-north-1
+      aws-gov           ec2         us-gov-west-1
+      azure             azure       centralus, eastus, eastus2, ...
+      azure-china       azure       chinaeast, chinanorth
+      cloudsigma        cloudsigma  hnl, mia, sjc, wdc, zrh
+      google            gce         us-east1, us-central1, ...
+      joyent            joyent      eu-ams-1, us-sw-1, us-east-1, ...
+      rackspace         rackspace   dfw, ord, iad, lon, syd, hkg
+      localhost         lxd         localhost
 
 To see more detail about a particular cloud, use:
 
