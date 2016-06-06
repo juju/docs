@@ -6,13 +6,13 @@ Todo: Check more complex bundles after the release of 2.0
 *Charms* are seldom deployed in isolation. Even
 MediaWiki needs to be connected to a database. Instead, charms are mostly used
 to model more complex deployments, potentially including many different
-services and connections. A *Bundle* is an encapsulation of this model, or an
-atomic self-contained part of it. It may be as simple as MediaWiki and a
+applications and connections. A *Bundle* is an encapsulation of this model, or 
+an atomic self-contained part of it. It may be as simple as MediaWiki and a
 database, or as complex as a full OpenStack cloud. But a bundle
-encapsulates all the charms and their relationships and enables you to install an
-entire working deployment just as easily as installing a single charm, whether
-that's from the [Juju Charm Store](https://jujucharms.com/q/?type=bundle) or by
-importing a previously exported deployment yourself.
+encapsulates all the charms and their relationships and enables you to install
+an entire working deployment just as easily as installing a single charm,
+whether that's from the [Juju Charm Store][store]
+or by importing a previously exported deployment yourself.
 
 ### Adding bundles from the command line
 
@@ -24,10 +24,10 @@ syntax:
 juju deploy wiki-simple
 ```
 
-You can get the name of a bundle from the [Juju Charm
-Store](https://jujucharms.com/q/?type=bundle), just as you would a charm.
-Unlike charms, bundles embed more than a single service, and you can
-see icons representing each separate service alongside a bundle's name. This
+You can get the name of a bundle from the 
+[Juju Charm Store][store], just as you would a charm.
+Unlike charms, bundles embed more than a single application, and you can
+see icons representing each separate application alongside a bundle's name. This
 gives you a quick overview of a bundle's complexity and potential resource
 requirements.
 
@@ -50,12 +50,12 @@ identical to the way you add charms.
 
 From the GUI, open the Store and select the bundle you're interested in. A new
 pane will display a preview of what the GUI's visual overview will look like
-with the bundle installed, showing services and connections. Further details,
+with the bundle installed, showing applications and connections. Further details,
 such as how a bundle supports scaling, can be found below the preview. Click
 'Add to canvas' to simply add the bundle. 
 
 Before clicking on 'Commit changes' to activate your new bundle, review the
-configuration of each service by selecting them and making any necessary
+configuration of each application by selecting them and making any necessary
 changes. Click on 'Commit changes' to review the deployment summary followed by
 'Deploy' to set those changes in motion. Alternatively, click on 'Clear
 changes' to remove the bundle before it's activated.
@@ -63,8 +63,8 @@ changes' to remove the bundle before it's activated.
 ### Exporting and Importing bundles with the GUI
 
 From the GUI, you can easily export and re-import the current model as a local
-bundle, encapsulating your services and connections into a single file. To do
-this, click on the 'Export' button, or use the keyboard shortcut “shift-d”.
+bundle, encapsulating your applications and connections into a single file. To 
+do this, click on the 'Export' button, or use the keyboard shortcut “shift-d”.
 This results in the creation of a file called `bundle.yaml` that your browser
 will typically prompt you to save or open.
 
@@ -76,8 +76,9 @@ browser will prompt you to select a bundle file.
 
 After a file has been added, the GUI will briefly report `ChangeSet process`
 followed by `ChangeSet complete`. As with adding bundles from the store, you
-may want to review the services, connections and various configuration options
-before clicking on 'Commit changes' and 'Deploy' to activate your bundle.
+may want to review the applications, connections and various configuration 
+options before clicking on 'Commit changes' and 'Deploy' to activate your 
+bundle.
 
 ### Local deploy via command-line
 
@@ -88,8 +89,8 @@ from the command line:
 juju deploy bundle.yaml
 ```
 Unlike when you import and deploy a bundle with the Juju GUI, running `juju
-deploy` on the command-line will not attempt to rename a new service if a
-service with the same name already exists.
+deploy` on the command-line will not attempt to rename a new application if an
+application with the same name already exists.
 
 From the command line, you can also check for errors in a bundle before
 deploying it. Bundles downloaded from the Juju store need to be unzipped into
@@ -99,21 +100,24 @@ testing purposes). You can then check for possible errors with the
 following command:
 
 ```bash
-charm proof directory-of-bundle/    # defaults to your current working directory
+charm proof directory-of-bundle/    
 ```
+Note that if no directory is given, the command defaults to the current 
+directory.
+
 If no errors are detected, there will be no output from `charm proof` and you
 can safely deploy your bundle. 
 
 ## Creating a bundle
 
-A bundle is a set of services with a specific configuration and their
+A bundle is a set of applications with a specific configuration and their
 corresponding relations that can be deployed together in a single step.
-Instead of deploying a single service, they can be used to deploy an entire
+Instead of deploying a single application, they can be used to deploy an entire
 workload, with working relations and configuration. The use of bundles allows
-for easy repeatability and for sharing of complex, multi-service deployments.
+for easy repeatability and for sharing of complex, multi-application deployments.
 
-As an example, here is a bundle file with a MySQL service and a Wordpress
-service with a relation between the two: 
+As an example, here is a bundle file with a MySQL application and a Wordpress
+application with a relation between the two: 
 
 ```yaml
 series: xenial
@@ -150,10 +154,10 @@ machines:
 ## Service constraints in a bundle
 
 To make your bundle as reusable as possible, it's common to set minimum
-constraints against a charmed service, much like you would when deploying 
-charms from the command line. This is a simple key addition to the service
+constraints against a charmed application, much like you would when deploying 
+charms from the command line. This is a simple key addition to the application
 definition, using the proper constraint key/value pair as outlined in the
-[Constraints](charms-constraints.html) documentation.
+['constraints' documentation][constraints-docs].
 
 For example, to add memory and CPU constraints to a charm in a bundle, the
 bundle file would have an additional `constraints` field with specific values:
@@ -172,9 +176,9 @@ mysql:
 
 ## Bundle placement directives
 
-You can co-locate services using the placement directive key in the bundle.
-Much like service constraints, it requires adding the placement key `to` in the
-service definition.
+You can co-locate applications using the placement directive key in the bundle.
+Much like application constraints, it requires adding the placement key `to` in 
+the application definition.
 Where supported by the cloud provider, it is also possible to isolate charms
 by including the container format in the placement directive. Some clouds
 support LXC.
@@ -191,8 +195,8 @@ mysql:
       "gui-y": "168"
 ```
 
-which will install the mysql service into an LXC container on the same machine
-as the wordpress/0 unit. Or:
+which will install the MySQL application into an LXC container on the same
+machine as the wordpress/0 unit. Or:
 
 ```yaml
 mysql:
@@ -203,12 +207,12 @@ mysql:
       "gui-x": "139"
       "gui-y": "168"
 ```
-which will install the mysql service into an LXC container on machine '1'.
+which will install the MySQL application into an LXC container on machine '1'.
 
 ## Machine specifications in a bundle
 
 Bundles may optionally include a machine specification, which allows you to set
-up specific machines and then to place units of your services on those machines
+up specific machines and then to place units of your applications on those machines
 however you wish.  A machine specification is a YAML object with named machines
 (integers are always used for names).  These machines are objects with three
 possible fields: `series`, `constraints`, and `annotations`.
@@ -223,11 +227,15 @@ machines if no placement directives are given.
 
 After you have tested and deployed your bundle you need to publish it to share
 it with people, this is covered in the
-[Charm Store Publishing documentation](authors-charm-store.html). 
+[charm store documentation][store-docs]. 
 
 Someone will come along and review your bundle for inclusion. If you need to
 speak to a human, there are patch pilots in the Juju IRC channel (#juju on
 Freenode) who can assist. You can also use the
-[Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+[Juju mailing list][juju-list].
 
 
+[store]: https://jujucharms.com/q/?type=bundle
+[store-docs]: ./authors-charm-store.html
+[juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
+[constraints-docs]: ./charms-constraints.html
