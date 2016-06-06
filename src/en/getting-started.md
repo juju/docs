@@ -1,5 +1,5 @@
 Title: Getting started with Juju 2.0
-TODO: update mediawiki bundle example
+TODO: Mediawiki status needs new screenshot when status has been updated in Juju
 
 # Getting started with Juju 2.0
 
@@ -180,18 +180,18 @@ The format is 'controller:model'.
 
 ## Deploy
 
-Juju is now ready to deploy any services from the hundreds included in the
+Juju is now ready to deploy any applications from the hundreds included in the
 [juju charm store](https://jujucharms.com). It is a good idea to test your new 
 model. How about a Mediawiki site?
 
 ```bash
-juju deploy mediawiki-single
+juju deploy wiki-simple
 ```
 This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
-of services, in this case the 'Mediawiki' service, and a database to run it 
-with. Juju will install both these services and add a relation between them - 
-this is part of the magic of Juju: it isn't just about deploying services, Juju 
-also knows how to connect them together.
+of applications, in this case 'Mediawiki', and a database to run it 
+with. Juju will install both applications and add a relation between them - 
+this is part of the magic of Juju: it isn't just about deploying software, Juju 
+also knows how to connect it all together.
 
 Installing shouldn't take long. You can check on how far Juju has got by running
 the command:
@@ -199,16 +199,17 @@ the command:
 ```bash
 juju status
 ```
-When the services have been installed the output to the above command will look
-something like this:
+When the applications have been installed, the output to the above command will
+look something like this:
 
 ![juju status](./media/juju-mediawiki-status.png)
 
 There is quite a lot of information there but the important parts for now are 
-the [Services] section, which show that Mediawiki and MySQL are installed, and
+the [Applications] section, which show that Mediawiki and MySQL are installed, 
+and
 the [Units] section, which crucially shows the IP addresses allocated to them.
 
-By default, Juju is secure - you won't be able to connect to any services 
+By default, Juju is secure - you won't be able to connect to any applications 
 unless they are specifically exposed. This adjusts the relevant firewall 
 controls (on any cloud, not just LXD) to allow external access. To make
 our Mediawiki visible, we run the command:
@@ -217,17 +218,17 @@ our Mediawiki visible, we run the command:
 juju expose mediawiki
 ```
 
-From the status output, we can see that the Mediawiki service is running on 
+From the status output, we can see that Mediawiki is running on 
 10.0.3.60 (your IP may vary). If we open up Firefox now and point it at that 
 address, you should see the site running.
 
 !["mediawiki site"](./media/juju-mediawiki-site.png)
 
-Congratulations, you have just deployed a service with Juju!
+Congratulations, you have just deployed an application with Juju!
 
-!!! Note: To remove all the services in the model you just created, it is often
-quickest to destroy the model with the command 'juju destroy-model default` and
-then [create a new model][models].
+!!! Note: To remove all the applications in the model you just created, it is 
+often quickest to destroy the model with the command 
+'juju destroy-model default` and then [create a new model][models].
 
 
 ## Next Steps
@@ -237,11 +238,11 @@ things you can do with it!
 
 We suggest you take the time to read the following:
 
-- [Clouds][clouds] goes into detail about configuring other clouds, including the 
-  public clouds like Azure, AWS, Google Compute Engine and Rackspace.
+- [Clouds][clouds] goes into detail about configuring other clouds, including
+  the public clouds like Azure, AWS, Google Compute Engine and Rackspace.
 - [Models][models] - Learn how to create, destroy and manage models.
-- [Charms/Services][charms] - find out how to construct complicated workloads 
-  in next to no time.
+- [Charms & Applications][charms] - find out how to construct complicated 
+  workloads in next to no time.
 
 
 [clouds]: ./clouds.html  "Configuring Juju Clouds"
