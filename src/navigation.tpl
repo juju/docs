@@ -1,5 +1,5 @@
  <ul>
-<!--- SECTION --->
+<!-- SECTION -->
     <li class="section"><h4 class="header toggle-target">User Guide</h4>
         <ul>
         <li><a href="about-juju.html">About Juju</a></li>
@@ -61,7 +61,7 @@
         <li><a href="troubleshooting.html">Troubleshooting</a></li>
     </ul>
    </li>
-<!--- SECTION --->
+<!-- SECTION -->
     <li class="section"><h4 class="header toggle-target">Developer Guide</h4>
         <ul>
         <li class="section"><a class="header" href="developer-getting-started.html">Getting Started</a>
@@ -159,7 +159,7 @@
         </li>
     </ul>
    </li>
-<!--- SECTION --->
+<!-- SECTION -->
     <li class="section"><h4 class="header toggle-target">Tools</h4>
         <ul>
         <li><a href="tools-charm-tools.html">Charm Tools</a></li>
@@ -167,7 +167,7 @@
         <li><a href="tools-amulet.html">Amulet</a></li>
     </ul>
     </li>
-<!--- SECTION --->
+<!-- SECTION -->
     <li class="section"><h4 class="header toggle-target">Reference</h4>
         <ul>
         <li><a href="commands.html">Juju commands</a></li>
