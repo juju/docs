@@ -2,21 +2,21 @@ Title: Writing charms using resources
 
 # Writing charms that use resources
 
-Many applications require binary resources in order to be installed. While it is
-possible for a charm to download the software from the package repositories, or
-other locations, some charms may be deployed network restricted environments
-that do not allow access to all areas of the Internet.
+Many applications require binary resources to complete the install process. 
+While it is possible for a charm to download this software from package 
+repositories or other locations, some charms may be deployed in network 
+restricted environments that do not allow access to all areas of the Internet.
+It may also be desirable to more strictly control what specific resources are 
+deployed.
 
-Starting with version 2 of Juju, users can upload resources to the controller
-or the Juju Charm Store that charms can download. This is useful for Juju
-models in restrictive network environments and when you want to control the
-versions of software that is deployed.
+Starting with Juju 2.0, users can upload resources to the controller
+or the Juju Charm Store from where they are accessible to charms. 
 
 # How it works
 
 ## Developing a charm with resources
 
-Charm developers can add a `resources` key to the  `metadata.yaml` file to
+Charm developers can add a `resources` key to the `metadata.yaml` file to
 define one or more resources.
 
 ```yaml
@@ -26,16 +26,16 @@ resources:
     filename: software.zip
     description: "One line description that is useful when operators need to push it."
 ```
-The `filename` is what Juju names the file after it has been downloaded. Juju
-will check extension on the file being uploaded and will prevent files with
-different extensions from being uploaded.
+The `filename` is what Juju will name the file locally when it is downloaded. 
+Juju will check the extension on the file being uploaded and will prevent 
+files with different extensions from being uploaded.
 
 # Managing resources
 
 Resources can be uploaded to a local Juju controller, where only charms from
-that controller can access the resources, or the Juju Charm Store where access
-is controlled by permissions assigned to the charms to which the resources are
-attached.
+that controller can access the resources, or to the Juju Charm Store where 
+access is controlled by permissions assigned to the charms to which the 
+resources are attached.
 
 ## Listing resources
 
@@ -59,7 +59,7 @@ software 2016-25-05T18:37
 
 ### charm list-resources
 
-Users can display the resources tat are currently available in Juju Charm Store
+Users can display the resources that are currently available in Juju Charm Store
 for a charm or a specific revision number with the `charm list-resources`
 command.
 
@@ -95,7 +95,7 @@ repeated more than once to upload more than one resource.
 ```sh
 juju deploy charm-name --resource foo=/some/file.tgz --resource bar=./docs/cfg.xml
 ```
-Where "foo" and "bar" are the resource names in `metadata.yaml` file for the
+Where "foo" and "bar" are the resource names in the `metadata.yaml` file for the
 charm-name charm.
 
 ### charm attach
@@ -117,11 +117,11 @@ file for a named resource.
 
 If `resource-get` has not been run for the named resource previously, then the
 resource is downloaded from the controller at the revision associated with the
-unit's service. That file is stored in the unit's local cache. If `resource-get`
-*has* been run before then each subsequent run synchronizes the resource with
-the controller. This ensures that the revision of the unit-local copy of the
-resource matches the revision of the resource associated with the unit's
-service.
+unit's application. That file is stored in the unit's local cache. If 
+`resource-get` *has* been run before then each subsequent run synchronizes the
+resource with the controller. This ensures that the revision of the unit-local
+copy of the resource matches the revision of the resource associated with the
+unit's application.
 
 The path provided by `resource-get` references the up-to-date file for the
 resource. Note that the resource may get updated on the controller for the
