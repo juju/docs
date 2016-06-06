@@ -180,7 +180,7 @@ The format is 'controller:model'.
 
 ## Deploy
 
-Juju is now ready to deploy any applicatios from the hundreds included in the
+Juju is now ready to deploy any applications from the hundreds included in the
 [juju charm store](https://jujucharms.com). It is a good idea to test your new 
 model. How about a Mediawiki site?
 
