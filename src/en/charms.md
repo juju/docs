@@ -18,7 +18,8 @@ of experts. Charms make it easy to reliably and repeatedly deploy applications,
 then scale up as required with minimal effort.
 
 There are a variety of topics related to charms to be found in the left 
-navigation pane under **Charms**. The three main topics you should get to knowwell are:
+navigation pane under **Charms**. The three main topics you should get to know
+well are:
 
  - **[Deploying charms][deploy]** - which covers how to use charms to deploy 
    applications where and how you want them
@@ -149,7 +150,7 @@ mediawiki site is 'live'.
 By default, Juju is very secure. Juju itself, and the applications it deploys 
 can see the other applications in your cloud, but nothing and nobody else can. 
 This isn't much use for a web service we want users to connect to, but Juju can
-easily make these applications public. With it's understanding of the underlying 
+easily make these applications public. With its understanding of the underlying 
 cloud, Juju can make whatever firewall changes are necessary to expose these
 applications to the wider world:
 
