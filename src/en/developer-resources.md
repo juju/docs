@@ -8,9 +8,9 @@ other locations, some charms may be deployed network restricted environments
 that do not allow access to all areas of the Internet.
 
 Starting with version 2 of Juju, users can upload resources to the controller
-that charms can download. This is useful for Juju models in restrictive
-network environments and when you want to control the versions of software that
-is deployed.
+or the Juju Charm Store that charms can download. This is useful for Juju
+models in restrictive network environments and when you want to control the
+versions of software that is deployed.
 
 # How it works
 
@@ -26,7 +26,7 @@ resources:
     filename: software.zip
     description: "One line description that is useful when operators need to push it."
 ```
-The `filename` is the name of the resource after it has been retrieved. Juju
+The `filename` is what Juju names the file after it has been downloaded. Juju
 will check extension on the file being uploaded and will prevent files with
 different extensions from being uploaded.
 
@@ -34,7 +34,8 @@ different extensions from being uploaded.
 
 Resources can be uploaded to a local Juju controller, where only charms from
 that controller can access the resources, or the Juju Charm Store where access
-is controlled by permissions.
+is controlled by permissions assigned to the charms to which the resources are
+attached.
 
 ## Listing resources
 
@@ -81,6 +82,9 @@ resource name and the path to the file.
 ```sh
 juju attach charm-name resource-name=filepath
 ```
+
+If you attach a resource to a running charm the `upgrade-charm` hook is run.
+This gives charm authors the ability to handle new resources appropriately. 
 
 ### juju deploy
 
