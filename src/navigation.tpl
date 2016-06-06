@@ -60,6 +60,7 @@
         </li>
         <li><a href="troubleshooting.html">Troubleshooting</a></li>
     </ul>
+   </li>
 <!--- SECTION --->
     <li class="section"><h4 class="header toggle-target">Developer Guide</h4>
         <ul>
@@ -157,6 +158,7 @@
             </ul>
         </li>
     </ul>
+   </li>
 <!--- SECTION --->
     <li class="section"><h4 class="header toggle-target">Tools</h4>
         <ul>
@@ -164,6 +166,7 @@
         <li><a href="tools-charm-helpers.html">Charm Helpers</a></li>
         <li><a href="tools-amulet.html">Amulet</a></li>
     </ul>
+    </li>
 <!--- SECTION --->
     <li class="section"><h4 class="header toggle-target">Reference</h4>
         <ul>
@@ -181,6 +184,7 @@
         <li><a href="glossary.html">Glossary</a></li>
         <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
     </ul>
+   </li>
 <li><a href="contributing.html">Help improve these docs</a></li>
 <li><a href="https://github.com/juju/docs/issues/new">Report a docs issue</a></li>
 </ul>
