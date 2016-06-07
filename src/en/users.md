@@ -26,7 +26,8 @@ during the model creation process.
 A *regular user* is one who is neither an administrator nor a model owner. Such a
 user requires access to a model in order to do anything at the Juju level. Note
 that although deemed "regular", such a user is far from ordinary since they can
-marshal the vast resources of the backing cloud and deploy complex services.
+marshal the vast resources of the backing cloud and deploy complex
+applications.
 
 
 ## User abilities
@@ -87,8 +88,8 @@ For read-only access, the user can do the following:
 
 For write access, the user can begin with the following major commands:
 
-- Deploy services (`juju deploy`)
-- Scale out services (`juju add-unit`)
+- Deploy applications (`juju deploy`)
+- Scale out applications (`juju add-unit`)
 
 Further reading:
 
