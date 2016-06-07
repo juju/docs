@@ -191,8 +191,8 @@ A successful bootstrap will result in the controller being visible in the
 Juju 2.x support for Azure is backwards compatible with older versions of Juju
 but supports several additional features, in particular, support for unit 
 placement (i.e. units can be deployed to specific existing machines). In lieu
-of this, the old default behaviour is used: units of a service will be 
-allocated to machines in a service-specific Availability Set. Read the
+of this, the old default behaviour is used: units of an application will be 
+allocated to machines in an application-specific Availability Set. Read the
 [Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
 availability sets affect uptime guarantees.
 
