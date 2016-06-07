@@ -11,7 +11,7 @@ OpenStack) which you configure.
 The knowledge to run these public clouds is 'baked-in', so for the majority
 of use-cases there is no additional configuration to be done - you can
 simply specify the cloud you wish to use, supply Juju with some
-[credentials][credentials] and start deploying services.
+[credentials][credentials] and start deploying applications.
 
 ## Listing available clouds
 
@@ -34,8 +34,6 @@ cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
 google       gce         us-east1, us-central1, europe-west1, asia-east1
 joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
 lxd          lxd         localhost
-maas         maas        
-manual       manual      
 rackspace    rackspace   DFW, ORD, IAD, LON, SYD, HKG
 ```
 
@@ -61,7 +59,7 @@ Juju supports which are not currently listed.
 
 ### Special clouds
 
-You will see, listed among the clouds Juju knows about, three special types of
+There are three special types of
 clouds: MAAS, LXD and Manual.
 
   - **LXD:** This is the cloud you want to use if you are testing Juju or 
@@ -79,7 +77,7 @@ clouds: MAAS, LXD and Manual.
   - **Manual:** There may be occassions where you can bring up machines for Juju
   to use which aren't part of a recognised public cloud or do not support other
   protocols used by Juju. As long as you have SSH access to these machines, you
-  can get part of the Juju magic and deploy services. See 
+  can get part of the Juju magic and deploy applications. See 
   [this documentation][juju-manual] for details on how to register these 
   machines with Juju and use them as part of a cloud.
 
@@ -139,8 +137,6 @@ cloudsigma     cloudsigma  hnl, mia, sjc, wdc, zrh
 google         gce         us-east1, us-central1, europe-west1, asia-east1
 joyent         joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
 lxd            lxd         localhost
-maas           maas        
-manual         manual      
 rackspace      rackspace   DFW, ORD, IAD, LON, SYD, HKG
 local:mystack  openstack   dev1
 ```

@@ -38,7 +38,7 @@ juju deploy mysql
 ```
 
 This will create a machine and use the latest online MySQL charm (for your
-default series) to deploy a MySQL service.
+default series) to deploy a MySQL application.
 
 !!! Note: The default series can be configured at a model level (see
 [Configuring models](./models-config.html)). In the absence of this setting,
@@ -122,14 +122,15 @@ and using the `--config=` switch:
 juju deploy mysql --config=myconfig.yaml
 ```
 
-See [Service configuration](./charms-config.html) for more on this.
+See [application configuration](./charms-config.html) for more on this.
 
 
 ## Deploying to specific machines and containers
 
-It is possible to specify which machine or container a service is to be
+It is possible to specify which machine or container an application is to be
 deployed to. One notable reason is to reduce costs when using a public cloud;
-services can be consolidated instead of dedicating a machine per service unit.
+services can be consolidated instead of dedicating a machine per application 
+unit.
 
 Below, the `--constraints` option is used to create an LXD controller with
 enough memory for other services to run. The `--to` option is used to specify a
@@ -152,7 +153,7 @@ juju deploy mysql --to lxd:25
 ```
 
 Above, MySQL is deployed to existing container '3' on machine '24'. Afterwards,
-a MySQL service is deployed to a new container on machine '25'.
+a MySQL application is deployed to a new container on machine '25'.
 
 The above examples show how to deploy to a machine where you know the machine's
 identifier. The output to `juju status` will provide this information.
@@ -169,7 +170,7 @@ The first example deploys to a specified zone for AWS. The second example
 deploys to a named machine in MAAS.
 
 The `add-unit` command also supports the `--to` option, so it's now possible to
-specifically target machines when expanding service capacity:
+specifically target machines when expanding application capacity:
 
 ```bash
 juju deploy --constraints="mem=4G" openstack-dashboard
@@ -177,8 +178,8 @@ juju add-unit --to 1 rabbitmq-server
 ```
 
 There should now be a second machine running both the openstack-dashboard
-service and a second unit of the rabbitmq-server service. The `juju status`
-command will show this.
+application and a second unit of the rabbitmq-server application. The 
+`juju status` command will show this.
 
 These two features make it much easier to deploy complex services such as
 OpenStack which use a large number of charms on a limited number of physical
@@ -194,8 +195,8 @@ juju add-unit rabbitmq-server -n 4 --to host1,host2,host3,host4
 ```
 
 Any extra placement directives are ignored. If not enough placement directives
-are supplied, then the remaining units will be assigned as normal to a new, clean
-machine.
+are supplied, then the remaining units will be assigned as normal to a new, 
+clean machine.
 
 
 ## Juju retry-provisioning
@@ -215,12 +216,12 @@ juju retry-provisioning 3 27 5
 
 ## Considerations
 
-Although we are working to have each service co-locatable without the danger of
-conflicting configuration files and network configurations this work is not yet
-complete.
+Although we are working to have each application co-locatable without the danger
+of conflicting configuration files and network configurations this work is not
+yet complete.
 
 While the `add-unit` command supports the `--to` option, you can elect not use
-`--to` when doing an "add-unit" to scale out the service on its own node.
+`--to` when doing an "add-unit" to scale out the application on its own node.
 
 ```bash
 juju add-unit rabbitmq-server
@@ -232,13 +233,14 @@ horizontally scale out on dedicated machines when you need to.
 
 ## Selecting and enabling networks
 
-Use the `networks` option to specify service-specific network requirements. The
-`networks` option takes a comma-delimited list of Juju-specific network names.
-Juju will enable the networks on the machines that host service units. This is
-different from the network constraint which selects a machine that matches the
-networks, but does not configure the machine to use them. For example, this
-commands deploys a service to a machine on the "db" and "monitor" networks and
-enabled them:
+Use the `networks` option to specify application-specific network requirements.
+The `networks` option takes a comma-delimited list of Juju-specific network
+names.
+Juju will enable the networks on the machines that host application units. This
+is different from the network constraint which selects a machine that matches
+the networks, but does not configure the machine to use them. For example, this
+commands deploys an application to a machine on the "db" and "monitor" networks
+and enables them:
 
 ```bash
 juju deploy --networks db,monitor mysql
