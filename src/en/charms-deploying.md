@@ -1,4 +1,4 @@
-Title: Deploying services  
+Title: Deploying applications 
 TODO: First section spent defining charms. This should all be placed in charms.md and
 	linked to from here. As of this writing, that page does not cover local charms.
       This page is too long and should be broken up (or apply the fabled TOC).
@@ -13,11 +13,11 @@ TODO: First section spent defining charms. This should all be placed in charms.m
       Review whether Juju should go to the store when pointing to a local dir
         with non-existant charm. It did not for me but the old version of this
         doc said it should.
+      Needs explanation of resources (esp. in the local/offline charms sections).
 
+# Deploying applications
 
-# Deploying services
-
-The fundamental point of Juju is that you can use it to deploy services through
+The fundamental point of Juju is that you can use it to deploy applications through
 the use of charms (the magic bits of code that make things just work). These
 charms can exist in the [Charm Store](https://jujucharms.com/store) or on the
 file system (previously downloaded from the store or written locally).
@@ -25,12 +25,12 @@ file system (previously downloaded from the store or written locally).
 Charms use the concept of *series* analogous as to how Juju does with Ubuntu
 series ('trusty', 'xenial', etc). For the most part, this is transparent as
 Juju will use the most relevant charm to ensure things "just work". This makes
-deploying services with Juju fun and easy.
+deploying applications with Juju fun and easy.
 
 
 ## Deploying from the charm store
 
-Typically, services are deployed using the online charms. This ensures that
+Typically, applications are deployed using the online charms. This ensures that
 you get the latest version of the charm. To deploy in this way:
 
 ```bash
@@ -56,21 +56,41 @@ Where 'cs' denotes the charm store.
 !!! Note: A used charm gets cached on the controller's database to minimize
 network traffic for subsequent uses.
 
-### Channel support	
+### Channels	
 
 The charm store offers charms in different stages of development. Such stages
 are called *channels*.
 
+Channels offer a way for charm developers, and the users of charms, to manage 
+and offer charms at various stages of development. Some users may want the very 
+latest features, or be part of a beta test; others may want to only install the
+most reliable software. The channels are:
+
+ - **stable**: (default) This is the latest, tested, working stable version of the charm.
+ - **candidate**: A release candidate. There is high confidence this will work fine, but there may be minor bugs.
+ - **beta**: A beta testing milestone release.
+ - **edge**: The very latest version - expect bugs!
+
+As each new version of a charm is automatically versioned, these channels serve 
+as pointers to a specific version number. It may be that after time a beta 
+version becomes a candidate, or a candidate (hopefully) becomes the new stable 
+version. 
+
+By default you will get the 'stable' channel, but you can specify a channel 
+when using the `deploy` command:
+
+
 ```bash
-juju deploy mysql --channel channel_name
+juju deploy mysql --channel <channel_name>
 ```
 
-Such a channel will be used if the charm's revision is:
+In the case of there being no version of the charm specified for that 
+channel, Juju will fall back to the next 'most stable'; e.g. if you were to 
+specify the 'beta' channel, but no charm version is set for that channel, Juju
+will try to deploy from the 'candidate' channel instead, and so on. This means 
+that whenever you specify a channel, you will always end up with something that
+best approximates your choice if it is not available.
 
- 1. undefined
- 1. defined only for the specified non-stable channel
-
-Each channel will have a "pointer" that redirects to a certain *revision*.
 
 #### Charm upgrades
 
@@ -90,21 +110,24 @@ juju charm-upgrade mysql --channel channel_name
 
 ## Deploying from a local charm
 
-To deploy services using local charms, specify the path to the charm directory.
-For example, to deploy vsftpd from above (on Trusty):
+To deploy applications using local charms, you may specify the path to the charm
+directory.
+For example, to deploy vsftpd from a local filesystem:
 
 ```bash
 juju deploy ~/charms/vsftpd --series trusty
 ```
 
-The series does not require stating if the model configuration specifies a
-value for key `default-series`. For example:
+Local charms may not have a specific declared series (charms fetched from the 
+store always have an implied series). You do not have to specify the series 
+if the charm contains a series declaration, or if you have specified a 
+default series in the model configuraion. For example:
 
 ```bash
 juju set-model-config -m mymodel default-series=trusty
 ```
 
-See [Configuring models](./models-config.html) for details on model level
+See [Configuring models](./models-config.html) for more details on model level
 configuration.
 
 See [Addendum: local charms](#addendum:-local-charms) below for further
@@ -113,10 +136,10 @@ explanation of local charms and how they can be managed.
 
 ## Deploying with a configuration file
 
-Deployed services usually start with a sane default configuration. However, for
-some services it is desirable (and quicker) to configure them at deployment
-time. This can be done by creating a YAML format file of configuration values
-and using the `--config=` switch:
+Deployed applications usually start with a sane default configuration. However, 
+for some applications it is desirable (and quicker) to configure them at 
+deployment time. This can be done by creating a YAML format file of
+configuration values and using the `--config=` switch:
 
 ```bash
 juju deploy mysql --config=myconfig.yaml
@@ -129,12 +152,12 @@ See [application configuration](./charms-config.html) for more on this.
 
 It is possible to specify which machine or container an application is to be
 deployed to. One notable reason is to reduce costs when using a public cloud;
-services can be consolidated instead of dedicating a machine per application 
+applications can be consolidated instead of dedicating a machine per application 
 unit.
 
 Below, the `--constraints` option is used to create an LXD controller with
-enough memory for other services to run. The `--to` option is used to specify a
-machine:
+enough memory for other applications to run. The `--to` option is used to 
+specify a machine:
 
 ```bash
 juju bootstrap --constraints="mem=4G" lxd-controller lxd
@@ -145,7 +168,7 @@ juju deploy --to 0 rabbitmq-server
 Here, MySQL is deployed as the first unit (in the 'default' model) and so ends
 up on machine '0'. Then Rabbitmq gets deployed to machine '0' as well.
 
-Services can also be deployed to containers:
+Applications can also be deployed to containers:
 
 ```bash
 juju deploy mysql --to 24/lxd/3
@@ -181,7 +204,7 @@ There should now be a second machine running both the openstack-dashboard
 application and a second unit of the rabbitmq-server application. The 
 `juju status` command will show this.
 
-These two features make it much easier to deploy complex services such as
+These two features make it much easier to deploy complex applications such as
 OpenStack which use a large number of charms on a limited number of physical
 servers.
 
@@ -201,9 +224,9 @@ clean machine.
 
 ## Juju retry-provisioning
 
-You can use the `retry-provisioning` command in cases where deploying services,
-adding units, or adding machines fails. It allows you to specify machines which
-should be retried to resolve errors reported with `juju status`.
+You can use the `retry-provisioning` command in cases where deploying 
+applications, adding units, or adding machines fails. It allows you to specify
+machines which should be retried to resolve errors reported with `juju status`.
 
 For example, after having deployed 100 units and machines, status reports that
 machines '3', '27' and '57' could not be provisioned because of a 'rate limit
@@ -260,9 +283,8 @@ official Charm Store. Such cases include:
 
 !!! Note: Although this method will ensure that the charms themselves are
 available on systems without outside internet access, there is no guarantee
-that a charm will work in a disconnected state. Some charms pull code from the
-internet, such as GitHub. We recommend modifying these charms to pull code from
-an internal server instead.
+that a charm will work in a disconnected state. Some charms will attempt to pull
+code from sources on the internet such as GitHub. 
 
 ### Using Charm Tools
 
