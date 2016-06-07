@@ -75,7 +75,7 @@ include future additions to the feature.
 ### `juju run-action`
 
 Trigger an action. This command takes the unit as an argument and returns an ID
-for the action. The ID can used with `juju show-action-output <ID>` or `juju
+for the action. The ID can be used with `juju show-action-output <ID>` or `juju
 show-action-status <ID>.
 
 If an action requires parameters, these can be passed directly. For example, we
