@@ -164,7 +164,7 @@ Then we can deploy mariadb and the new charm:
 
 ```bash
 juju deploy mariadb
-juju deploy local:trusty/vanilla
+juju deploy $JUJU_REPOSITORY/trusty/vanilla --series trusty
 juju add-relation mariadb vanilla
 juju expose vanilla
 ```
