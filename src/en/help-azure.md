@@ -54,7 +54,18 @@ azure login
 You will be prompted to visit a website to enter the provided code. It will
 therefore be easier to perform this on a graphical desktop.
 
-Values will need to be found for the following parameters:
+### Registering azure services
+
+Juju requires certain services to be active for your account. This can 
+be done with the Azure CLI tool:
+
+```
+azure provider register Microsoft.Compute
+azure provider register Microsoft.Network
+azure provider register Microsoft.Storage
+```
+
+To enter credentials, values will need to be found for the following parameters:
 
  - subscription-id
  - application-password
