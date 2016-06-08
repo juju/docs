@@ -6,7 +6,7 @@ Title: Exposing applications
 By design, Juju operates a very secure environment for deploying your 
 applications.
 Even if you have deployed applications, they won't be publicly available unless
-you explicitly make them so. To allow public access to applicationss, the
+you explicitly make them so. To allow public access to applications, the
 appropriate changes must be made to the cloud provider firewall settings. As
 the procedure for doing this varies depending on your cloud, Juju helpfully
 abstracts this into a single command, `juju expose <applicationname>`.
