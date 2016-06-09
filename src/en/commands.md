@@ -24,7 +24,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -70,7 +70,7 @@ Click on the expander to see details for each command.
 
    A cloud definition file has the following YAML format:
 
-         clouds:
+   clouds:
 
            mycloud:
 
@@ -126,7 +126,7 @@ Click on the expander to see details for each command.
    The user is prompted to add credentials interactively if a YAML-formatted
    credentials file is not specified. Here is a sample credentials file:
 
-         credentials:
+   credentials:
 
            aws:
 
@@ -203,7 +203,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n  (= 1)_
 
@@ -263,7 +263,11 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [remove-machine](#remove-machine)
+   [juju help constraints](#juju help constraints)
+
+   [juju help placement](#juju help placement)
+
+   [juju help remove-machine](#juju help remove-machine)
 
    **Aliases:**
 
@@ -292,7 +296,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n  (= 1)_
 
@@ -352,11 +356,85 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [remove-machine](#remove-machine)
+   [juju help constraints](#juju help constraints)
+
+   [juju help placement](#juju help placement)
+
+   [juju help remove-machine](#juju help remove-machine)
 
    **Aliases:**
 
    _add-machines_
+
+
+ 
+
+^# add-model
+
+   **Usage:** ` juju add-model [options] <name> [--config key=[value] ...] [--credential <cloud>:<credential>]`
+
+   **Summary:**
+
+   Add a model within the Juju Model Server
+
+   **Options:**
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--config  (= )_
+
+   Specify a controller config file, or one or more controller configuration options (--config config.yaml [--config k=v ...])
+
+   _--credential (= "")_
+
+   The name of the cloud and credentials the new model uses to create cloud resources
+
+   _--owner (= "")_
+
+   The owner of the new model if not the current user
+
+   
+   **Details:**
+
+
+   This command will add another model within the current Juju
+   Controller. The provider has to match, and the model config must
+   specify all the required configuration values for the provider.
+
+   If configuration values are passed by both extra command line
+   arguments and the --config option, the command line args take
+   priority.
+
+   If adding a model in a controller for which you are not the
+   administrator, the cloud credentials and authorized ssh keys must
+   be specified. The credentials are specified using the argument
+   --credential <cloud>:<credential>. The authorized ssh keys are
+   specified using a --config argument, either authorized=keys=value
+   or via a config yaml file.
+
+          
+   
+   Any credentials used must be for a cloud with the same provider
+   type as the controller. Controller administrators do not have to
+   specify credentials or ssh keys; by default, the credentials and
+   keys used to bootstrap the controller are used if no others are
+   specified.
+
+
+   **Examples:**
+
+
+          juju add-model new-model
+          juju add-model new-model --config aws-creds.yaml --config image-stream=daily
+          
+          juju add-model new-model --credential aws:mysekrets --config authorized-keys="ssh-rsa ..."
+
+
+   **See also:**
+
+   [juju help grant](#juju help grant)
 
 
  
@@ -373,7 +451,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
 
  
@@ -390,7 +468,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -415,7 +493,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -473,7 +551,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -521,7 +599,13 @@ Click on the expander to see details for each command.
 
 ^# add-storage
 
-   **Usage:** ` juju add-storage [options] <unit name> <storage directive> ...`
+   **Usage:** ` juju add-storage [options] 
+<unit name> <storage directive> ...
+    where storage directive is 
+        <charm storage name>=<storage constraints> 
+    or
+        <charm storage name>
+`
 
    **Summary:**
 
@@ -531,7 +615,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -598,7 +682,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -636,7 +720,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n, --num-units  (= 1)_
 
@@ -706,7 +790,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n, --num-units  (= 1)_
 
@@ -890,7 +974,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -923,7 +1007,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -1005,7 +1089,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -1167,8 +1251,10 @@ Click on the expander to see details for each command.
 
              # How long to wait for a connection to the controller
              bootstrap-timeout: 600 # default: 10 minutes
-             # How long to wait between connection attempts to a controller
-             address.
+             # How long to wait between connection attempts to a controller 
+   
+   address.
+
              bootstrap-retry-delay: 5 # default: 5 seconds
              # How often to refresh controller addresses from the API server.
              bootstrap-addresses-delay: 10 # default: 10 seconds
@@ -1194,7 +1280,7 @@ Click on the expander to see details for each command.
 
    [add-credentials](#add-credentials)
 
-   [create-model](#create-model)
+   [add-model](#add-model)
 
    [set-constraints](#set-constraints)
 
@@ -1225,7 +1311,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -1348,7 +1434,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -1381,7 +1467,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-download  (= false)_
 
@@ -1438,76 +1524,6 @@ Click on the expander to see details for each command.
 
  
 
-^# create-model
-
-   **Usage:** ` juju create-model [options] <name> [--config key=[value] ...] [--credential <cloud>:<credential>]`
-
-   **Summary:**
-
-   create an model within the Juju Model Server
-
-   **Options:**
-
-   _-c, --controller (= "")_
-
-   Controller to operate in
-
-   _--config  (= )_
-
-   specify a controller config file, or one or more controller configuration options (--config config.yaml [--config k=v ...])
-
-   _--credential (= "")_
-
-   the name of the cloud and credentials the new model uses to create cloud resources
-
-   _--owner (= "")_
-
-   the owner of the new model if not the current user
-
-   
-   **Details:**
-
-
-   This command will create another model within the current Juju
-   Controller. The provider has to match, and the model config must
-   specify all the required configuration values for the provider.
-
-   If configuration values are passed by both extra command line
-   arguments and the --config option, the command line args take
-   priority.
-
-   If creating a model in a controller for which you are not the
-   administrator, the cloud credentials and authorized ssh keys must
-   be specified. The credentials are specified using the argument
-   --credential <cloud>:<credential>. The authorized ssh keys are
-   specified using a --config argument, either authorized=keys=value
-   or via a config yaml file.
-
-          
-   
-   Any credentials used must be for a cloud with the same provider
-   type as the controller. Controller administrators do not have to
-   specify credentials or ssh keys; by default, the credentials and
-   keys used to bootstrap the controller are used if no others are
-   specified.
-
-
-   **Examples:**
-
-
-          juju create-model new-model
-          juju create-model new-model --config aws-creds.yaml --config image-stream=daily
-          
-          juju create-model new-model --credential aws:mysekrets --config authorized-keys="ssh-rsa ..."
-
-
-   **See also:**
-
-   [juju help model share](#juju help model share)
-
-
- 
-
 ^# create-storage-pool
 
    **Usage:** ` juju create-storage-pool [options] <name> <provider> [<key>=<value> [<key>=<value>...]]`
@@ -1520,7 +1536,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -1576,7 +1592,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--proxy  (= false)_
 
@@ -1632,7 +1648,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n, --lines  (= 10)_
 
@@ -1724,7 +1740,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n  (= 0)_
 
@@ -1776,7 +1792,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n, --num-units  (= 1)_
 
@@ -2007,7 +2023,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2061,7 +2077,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2102,7 +2118,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2182,7 +2198,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2217,7 +2233,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n  (= 0)_
 
@@ -2319,7 +2335,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2358,7 +2374,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -2412,7 +2428,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -2466,7 +2482,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -2524,7 +2540,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -2574,7 +2590,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -2682,7 +2698,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-browser  (= false)_
 
@@ -2750,7 +2766,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2806,7 +2822,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2898,7 +2914,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -2995,7 +3011,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -3066,7 +3082,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3225,7 +3241,7 @@ Details:
    **Details:**
 
 
-   Credentials are used with `juju bootstrap`  and `juju create-model`.
+   Credentials are used with `juju bootstrap`  and `juju add-model`.
 
    An arbitrary "credential name" is used to represent credentials, which are 
    added either via `juju add-credential` or `juju autoload-credentials`.
@@ -3282,7 +3298,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3339,7 +3355,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3437,7 +3453,7 @@ Details:
 
    **See also:**
 
-   [reate-model](#reate-model)
+   [dd-model](#dd-model)
 
    [share-model](#share-model)
 
@@ -3462,7 +3478,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3540,7 +3556,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3578,7 +3594,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3621,7 +3637,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3665,7 +3681,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -3718,7 +3734,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -3775,7 +3791,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3825,7 +3841,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--name  (= )_
 
@@ -3895,7 +3911,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4078,7 +4094,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4135,7 +4151,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4192,7 +4208,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4235,9 +4251,9 @@ Details:
 
    The user will be prompted for a password, which, once set, causes the 
    registration string to be voided. In order to start using Juju the user 
-   can now either create a model or wait for a model to be shared with them.
+   can now either add a model or wait for a model to be shared with them.
    Some machine providers will require the user to be in possession of 
-   certain credentials in order to create a model.
+   certain credentials in order to add a model.
 
 
    **Examples:**
@@ -4301,7 +4317,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4333,7 +4349,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--series (= "")_
 
@@ -4415,7 +4431,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4458,7 +4474,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4497,7 +4513,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4551,7 +4567,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4592,7 +4608,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4640,7 +4656,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4688,7 +4704,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4723,7 +4739,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-r, --retry  (= false)_
 
@@ -4752,7 +4768,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4802,7 +4818,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--upload-tools  (= false)_
 
@@ -4842,7 +4858,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
 
  
@@ -4914,7 +4930,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--machine  (= )_
 
@@ -4988,7 +5004,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -5085,7 +5101,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--proxy  (= false)_
 
@@ -5196,7 +5212,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--to-default  (= false)_
 
@@ -5260,7 +5276,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--to-default  (= false)_
 
@@ -5320,7 +5336,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5450,7 +5466,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5480,7 +5496,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5521,7 +5537,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5568,7 +5584,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5605,7 +5621,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -5647,7 +5663,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--name (= "")_
 
@@ -5679,7 +5695,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5707,7 +5723,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -5882,7 +5898,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -5934,7 +5950,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -5986,7 +6002,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6017,7 +6033,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6098,7 +6114,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6200,7 +6216,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6240,7 +6256,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--proxy  (= false)_
 
@@ -6304,7 +6320,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6357,7 +6373,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6410,7 +6426,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6487,7 +6503,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n  (= 20)_
 
@@ -6552,7 +6568,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6602,7 +6618,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6713,7 +6729,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--public  (= false)_
 
@@ -6760,7 +6776,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6848,7 +6864,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6885,7 +6901,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6928,7 +6944,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -7000,7 +7016,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--path (= "")_
 
@@ -7100,7 +7116,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -7137,7 +7153,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--reset-previous-upgrade  (= false)_
 
@@ -7217,7 +7233,7 @@ Details:
 
    _-m, --model (= "")_
 
-   Model to operate in
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
