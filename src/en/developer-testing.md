@@ -193,7 +193,7 @@ python3 tests/01-deployment
 your modified test, with breakpoints, against an already deployed
 charm.)
 
-The Deployer class in amulet also has a .log method, which can be
+The Deployment class in amulet also has a .log attribute, which can be
 useful for diagnosing problems after the tests have run. In the
 example tests above, you might invoke it with a line like the
 following:
