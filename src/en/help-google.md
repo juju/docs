@@ -103,9 +103,9 @@ For the current example, say the file is called `Juju-GCE-f33a6cdbd8e3.json`
 
 `~/.local/share/juju/Juju-GCE-f33a6cdbd8e3.json`
 
-Or, you may place this information into a file at '~/.config/gcloud/application_default_credentials.json',
-or '%APPDATA%/gcloud/application_default_credentials.json' on Windows. It
-is also valid to set an environment variable 'GOOGLE_APPLICATION_CREDENTIALS'
+Or, you may place this information into a file at `~/.config/gcloud/application_default_credentials.json`,
+or `%APPDATA%/gcloud/application_default_credentials.json` on Windows. It
+is also valid to set an environment variable `GOOGLE_APPLICATION_CREDENTIALS`
 containing the credential information.
 
 ## Credentials

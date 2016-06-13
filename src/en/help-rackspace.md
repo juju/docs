@@ -53,6 +53,7 @@ These can easily be imported into Juju. Run the command:
 ```bash
 juju autoload-credentials
 ```
+
 This will scan known locations and environment variables for cloud credentials
 and ask which ones to use/what name to store them under.
 
@@ -73,9 +74,15 @@ need to set the default one to use with `juju set-default-credential`.
 
 ### 3. Create and use a `~/.novarc` file
 
-Place the AWS information in a '~/.novarc' or similarly named file
+Place the OpenStack information in a '~/.novarc' or similarly named file
 containing the environment variables and assigned values. See the official
 [OpenStack](http://docs.openstack.org/icehouse/install-guide/install/apt/content/cli_openrc.html) documentation.
+
+These can easily be imported into Juju. Run the command:
+  
+```bash
+juju autoload-credentials
+```
 
 ## Configuration
 
