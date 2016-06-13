@@ -33,7 +33,8 @@ These can easily be set by either:
 
 If you already use your AWS account with other tools, you may find that the 
 environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are 
-already set.
+already set. Note that the the additional fallback environment variables
+`AWS_ACCESS_KEY` and `AWS_SECRET_KEY` are also supported.
 
 These can easily be imported into Juju. Run the command:
   
@@ -58,7 +59,7 @@ will be prompted to "Download Key File" which by default is named rootkey.csv.
 Open this file to get the **access-key** and **secret-key**.
 
 ![Amazon Access Credentials page showing key values](./media/getting_started-aws_keys.png)
-.
+
 Armed with these values, you can then use the interactive command line tool to 
 add them to Juju:
   
@@ -66,7 +67,14 @@ add them to Juju:
 juju add-credential aws
 ```
 
+### 3. Create and use a YAML file
 
+Place the AWS information in a `~/.aws/credentials` file, or
+`%USERPROFILE%/.aws/credentials` on Windows. The file will contain YAML
+formatted information.
+
+See [Cloud credentials](./credentials.html) for more about adding
+credentials from a YAML file.
 
 ## Bootstrap
 

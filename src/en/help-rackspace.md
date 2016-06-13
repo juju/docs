@@ -38,7 +38,28 @@ following information from your Rackspace account:
  - **`tenant-name`** This is the Rackspace account number. You can view it in 
     the cloud control panel in the top-right corner (under your username).
 
-You can now run the interactive command:
+ - **`region`** This is the Rackspace region, such as 'dfw', 'lon', or 'syd'.
+
+To add these credentials for Juju to use, select one of these options:
+  
+### 1. Using environment variables
+
+You can set the following variables: `OS_USERNAME`, `OS_PASSWORD`,
+`OS_AUTH_URL`, `OS_REGION_NAME`, `OS_TENANT_NAME`, `OS_ACCESS_KEY`, and
+`OS_SECRET_KEY`.
+
+These can easily be imported into Juju. Run the command:
+  
+```bash
+juju autoload-credentials
+```
+
+This will scan known locations and environment variables for cloud credentials
+and ask which ones to use/what name to store them under.
+
+### 2. Manually adding credentials
+
+Run the interactive command:
   
 ```bash
 juju add-credential rackspace
@@ -50,6 +71,18 @@ Which will ask for a credential name, and the authentication type. Enter
 !!! Note: If you add more than one credential for this cloud, you will also
 need to set the default one to use with `juju set-default-credential`.
 
+
+### 3. Create and use a `~/.novarc` file
+
+Place the OpenStack information in a '~/.novarc' or similarly named file
+containing the environment variables and assigned values. See the official
+[OpenStack](http://docs.openstack.org/icehouse/install-guide/install/apt/content/cli_openrc.html) documentation.
+
+These can easily be imported into Juju. Run the command:
+  
+```bash
+juju autoload-credentials
+```
 
 ## Configuration
 

@@ -93,16 +93,51 @@ notice if they change in future.
 
 ### Adding credentials from a YAML file.
 
-You can also specify a YAML format file for the credentials. This  
-file would be similar to:
+You can also specify a YAML format file for the credentials. This
+file would be similar to, but shorter than this extensive sample, which
+we will call mycreds.yaml:
 
 ```yaml
 credentials:
-  aws:
-    bob:
-      auth-type: access-key
-      access-key: AHJHKUWK7HIW
-      secret-key: 21f8cbb668263a1223755b5f15c48a
+      aws:
+        default-credential: peter
+        default-region: us-west-2
+        peter:
+          auth-type: access-key
+          access-key: AKIAIH7SUFMBP455BSQ
+          secret-key: HEg5Y1DuGabiLt72LyCLkKnOw+NZkgszh3qIZbWv
+        paul:
+          auth-type: access-key
+          access-key: KAZHUKJHE33P455BSQB
+          secret-key: WXg6S5Y1DvwuGt72LwzLKnItt+GRwlkn668sXHqq
+      homemaas:
+        peter:
+          auth-type: oauth1
+          maas-oauth: 5weWAsjhe9lnaLKHERNSlke320ah9naldIHnrelks
+      homestack:
+        default-region: region-a
+        peter:
+          auth-type: userpass
+          password: UberPassK3yz
+          tenant-name: appserver
+          username: peter
+      google:
+        peter:
+          auth-type: jsonfile
+          file: ~/.config/gcloud/application_default_credentials.json
+      azure:
+        peter:
+          auth-type: userpass
+          application-id: niftyapp
+          subscription-id: 31fb132e-e774-49dd-adbb-d6a4e966c583
+          application-password: UberPassK3yz
+      joyent:
+        peter:
+          auth-type: userpass
+          sdc-user: admingal
+          sdc-key-id: 2048 00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff
+          private-key: key (or private-key-path, like `~/.ssh/id_rsa.pub`)
+          algorithm: "rsa-sha256"
 ```
 
 A source file like the above can be added to Juju's list of credentials with 
@@ -111,6 +146,10 @@ the command:
 ```bash
 juju add-credential aws -f mycreds.yaml
 ```
+
+This sample includes all of the default cloud options plus a couple of
+special cloud options, MAAS and an OpenStack cloud called `homestack` in
+the sample. See [Clouds](./clouds.html).
 
 ## Managing credentials
 
