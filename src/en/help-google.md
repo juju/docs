@@ -96,11 +96,17 @@ regenerated (although a new one can easily be created).
 Place this file where the Juju client can find it. This may or may not be on
 the computer you downloaded the file to. We recommend storing this file in the 
 default Juju directory, to ensure that it is with your other Juju files in 
-whatever system backups you perform. 
+whatever system backups you perform.
+
 For the current example, say the file is called `Juju-GCE-f33a6cdbd8e3.json`
 (based on our project name of 'Juju-GCE'), on Ubuntu we would store it here:
 
 `~/.local/share/juju/Juju-GCE-f33a6cdbd8e3.json`
+
+Or, you may place this information into a file at '~/.config/gcloud/application_default_credentials.json',
+or '%APPDATA%/gcloud/application_default_credentials.json' on Windows. It
+is also valid to set an environment variable 'GOOGLE_APPLICATION_CREDENTIALS'
+containing the credential information.
 
 ## Credentials
 
