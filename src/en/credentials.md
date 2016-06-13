@@ -170,11 +170,30 @@ google  wayne
 The asterisk '*' denotes the default credential, which will be used for the
 named cloud unless another is specified.
 
+For YAML output that includes detailed credential information, including
+secrets like access keys and passwords:
+
+```bash
+juju list-credentials --format yaml --show-secrets
+```
+
+The YAML output will be similar to our 'mycreds.yaml' sample above.
+
 You can set the default credential:
 
 ```bash
 juju set-default-credential aws carol
 ```
+
+To replace or update an existing credential, edit or create a file, such as
+our 'mycreds.yaml' example above, then run:
+
+```bash
+juju add-credential aws -f mycreds.yaml --replace
+```
+
+This will overwrite existing credential information, so make sure all current
+credentials are contained in the file, not just the new or changed one.
 
 If a credential is no longer required, it can be removed:
 
