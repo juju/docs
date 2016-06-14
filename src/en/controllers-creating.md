@@ -60,3 +60,13 @@ more details about constraints, see [Constraints](./reference-constraints.html).
 ```bash
 juju bootstrap --constraints="mem=4G" lxd-xenial lxd
 ```
+
+## Create a controller using a non-default region
+
+The [Clouds](./clouds.html) page details listing available clouds and
+how the list denotes default regions for each. To specify a different
+region during controller creation, use:
+
+```bash
+juju bootstrap mycontroller aws/us-west-2
+```
