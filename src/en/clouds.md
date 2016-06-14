@@ -41,10 +41,7 @@ This lists the cloud name (which you will use to specify the cloud you want to
 use), its type (the API used to control it) and the known regions for the cloud.
 The default region for a cloud is shown first in the list-clouds output, so
 in the above, `us-east-1` is the default region for an aws cloud. To specify
-a different region during controller creation, use:
-```bash
-juju bootstrap mycontroller aws/us-west-2
-```
+a different region, see [Creating a controller](./controllers-creating.html).
 
 Set the default region for a cloud with:
 ```bash
