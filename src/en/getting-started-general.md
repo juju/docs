@@ -75,10 +75,8 @@ azure-china  azure       chinaeast, chinanorth
 cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
 google       gce         us-east1, us-central1, europe-west1, asia-east1
 joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
-lxd          lxd         localhost
-maas         maas        
-manual       manual      
 rackspace    rackspace   dfw, ord, iad, lon, syd, hkg
+localhost    lxd         localhost
 ```
 
 Juju already knows how to talk to these cloud providers, but it can also work 
@@ -183,8 +181,9 @@ other instances you create there.
 To do this, we use the `bootstrap` command:
   
 ```bash
-juju bootstrap <controller-name>  <cloud>
+juju bootstrap <controller-name> <cloud>
 ```
+
 So, assuming we are using the cloud 'aws', we should run:
   
 ```bash
@@ -208,6 +207,7 @@ model. How about a Mediawiki site?
 ```bash
 juju deploy mediawiki-single
 ```
+
 This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
 of services, in this case the 'Mediawiki' service, and a database to run it 
 with. Juju will install both these services and add a relation between them - 
@@ -220,6 +220,7 @@ the command:
 ```bash
 juju status
 ```
+
 When the services have been installed the output to the above command will look
 something like this:
 

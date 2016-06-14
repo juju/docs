@@ -1,6 +1,7 @@
 Title: Getting started with Juju 2.0
 TODO: Mediawiki status needs new screenshot when status has been updated in Juju
 
+
 # Getting started with Juju 2.0
 
 The instructions here will get you up and running and deliver the best-possible
@@ -24,7 +25,7 @@ Run the following commands to install the required software:
 
 ```no-highlight
 sudo apt update
-sudo apt install juju-2.0 zfsutils-linux
+sudo apt install juju zfsutils-linux
 ```
 
 ## Initialise LXD
@@ -36,6 +37,7 @@ session. You can confirm your user is part of this group by running the command:
 ```bash
 groups
 ```
+
 This should indicate the user is a member of the lxd group, amongst others (your
 groups may vary from these):
 
@@ -77,7 +79,7 @@ device and subnet. Except in the case the subnet may clash with existing
 networks, it is okay to accept the defaults on all dialogues (though it is not
 required to configure IPv6 networking).
 
-^# Walkthrough of network configuration
+^# Walkthrough of network configuration  
 
    In order for networking to be established between containers and Juju, you 
    need to set up a bridge device.
@@ -127,7 +129,8 @@ required to configure IPv6 networking).
    
    !["step 10"](./media/juju-lxd-config010.png)
    
-Now LXD is configured to create containers for Juju.
+LXD is now configured to work with Juju.
+
 
 ## Create a controller
 
@@ -136,7 +139,7 @@ command is used to create one. For use with our LXD "cloud", we
 will make a controller called 'lxd-test':
 
 ```bash
-juju bootstrap lxd-test lxd
+juju bootstrap lxd-test localhost
 ```
 
 This may take a few minutes as LXD must download an image for Xenial. A cache
@@ -153,8 +156,8 @@ This will return a list of the controllers known to Juju, which at the moment is
 the one we just created:
   
 ```no-highlight
-CONTROLLER       MODEL    USER         SERVER
-local.lxd-test*  default  admin@local  10.0.3.124:17070
+CONTROLLER        MODEL    USER         CLOUD/REGION
+local.lxd-test*   default  admin@local  localhost/localhost
 ```
 
 Notice that the prefix 'local.' is added to the controller name we specified.
@@ -187,6 +190,7 @@ model. How about a Mediawiki site?
 ```bash
 juju deploy wiki-simple
 ```
+
 This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
 of applications, in this case 'Mediawiki', and a database to run it 
 with. Juju will install both applications and add a relation between them - 
@@ -199,6 +203,7 @@ the command:
 ```bash
 juju status
 ```
+
 When the applications have been installed, the output to the above command will
 look something like this:
 
