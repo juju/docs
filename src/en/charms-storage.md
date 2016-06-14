@@ -5,8 +5,8 @@ TODO: LXC/local caveat needs editing or removing
 
 # Using Juju Storage
 
-Many services require access to a storage resource of some form. Juju charms can
-declare what storage requirements they have, and these can be allocated when
+Many applications require access to a storage resource of some form. Juju charms
+can declare what storage requirements they have, and these can be allocated when
 the charm is deployed. Charms may declare several types of storage requirement
 (e.g. for persistent storage and an additional cache) so that resources can be
 allocated at a more granular level.
@@ -63,10 +63,10 @@ tempy:
 
 #### Placement
 
-If the storage provider supports dynamically adding storage to a machine, then a
-service/unit deployed with storage may be placed on an existing machine. Not all
-providers support dynamic storage; for example, MAAS provides an interface to
-physical hardware.
+If the storage provider supports dynamically adding storage to a machine, then 
+an application/unit deployed with storage may be placed on an existing machine.
+Not all providers support dynamic storage; for example, MAAS provides an
+interface to physical hardware.
 
 ### Provider support
 
@@ -94,7 +94,8 @@ providers, described below.
 
 #### EC2/EBS (ebs)
 
-The EC2/EBS provider currently supports the following pool configuration attributes:
+The EC2/EBS provider currently supports the following pool configuration
+attributes:
 
 - volume-type
 
@@ -167,8 +168,8 @@ configuration.
 ### Deploying with storage constraints
 
 A charm which requires storage will have the default storage (unit filesystem)
-allocated for it automatically. Constraints can be used, when deploying a
-service, to override the default requirements.
+allocated for it automatically. Constraints can be used, when deploying an
+application, to override the default requirements.
 
 The constraints can specify the type/pool, size and count, of the storage
 required. At least one of the constraints must be specified, but otherwise they
@@ -282,7 +283,7 @@ pg-ssd/0      data/3 /srv/data attached false
 
 - For LXC (local provider or not), you must currently set
   ["allow-lxc-loop-mounts"](./config-general.html#alphabetical-list-of-general-configuration-values)
-  to "true" for the lxc provider to work. With the default AppArmor profile,
+  to "true" for LXC to work. With the default AppArmor profile,
   LXC does not permit containers to mount loop devices. By setting
   `allow-lxc-loop-mounts=true`, you are explicitly enabling this, and access
   to all loop devices on the host.

@@ -3,18 +3,16 @@ Title: Constraints
 # Constraints
 
 Constraints allow you to choose the hardware (or virtual hardware)
-to which your services will be deployed, e.g. by specifying the amount of RAM
-you want them to have. This is particularly useful for making sure that the 
-service is deployed somewhere it can actually run efficiently, or that it is 
-connected to the right network.
-
-Constraints may be set for models and services, with service constraints
-taking precedence. Changes to constraints do not affect any units which have 
-already been placed on machines.
+to which your applications will be deployed, e.g. by specifying the amount of 
+RAM you want them to have. This is particularly useful for making sure that the
+application is deployed somewhere it can actually run efficiently, or that it is
+connected to the right network. Constraints may be set for models and
+applications, with application constraints taking precedence. Changes to
+constraints do not affect any units which have already been placed on machines.
 
 For more granularity, it is also possible to add a machine with specific 
 constraints (`juju add-machine`) and then specify that machine when deploying 
-services ([see the documentation on `juju deploy`](./charms-deploying.html)).
+applications ([see the documentation on `juju deploy`](./charms-deploying.html)).
 
 ## What constraints can be used?
 
@@ -26,8 +24,8 @@ understand an "instancetype" constraint, but MAAS will not.
 The most useful constraints for Juju in general are:
   
   - **mem** : This indicates the minimum number of megabytes of RAM that must 
-  be available to a service unit. An optional suffix of M/G/T/P indicates the 
-  value is mega-/giga-/tera-/peta- bytes.
+  be available to an application unit. An optional suffix of M/G/T/P indicates
+  the value is mega-/giga-/tera-/peta- bytes.
 
   - **cpu-cores** :  How many cpu-cores the host machine should have. This is a
   crude indicator of system performance.
@@ -35,10 +33,10 @@ The most useful constraints for Juju in general are:
   - **spaces** : Target a particular network space, or avoid one (not supported
   all clouds).
   
-  - **arch** : Short for 'architecture', indicates the processor type a service 
-  must run on. One of amd64, arm, i386, arm64, or ppc64el.
+  - **arch** : Short for 'architecture', indicates the processor type an
+  application must run on. One of amd64, arm, i386, arm64, or ppc64el.
   
-With these you can make sure a service has the resources it needs to run 
+With these you can make sure an application has the resources it needs to run 
 properly.
 
 Constraints can be used with commands that support the '--constraints' option. 
@@ -47,7 +45,7 @@ constraints that are worth mentioning first.
 
 In the following examples, we will be using the `juju deploy` command, as this
 is the simplest and most frequent case for using constraints. So, to deploy the
-'mariadb' service to a machine with 4 gigabytes of memory or more:
+'mariadb' application to a machine with 4 gigabytes of memory or more:
   
 ```bash
 juju deploy mariadb --constraints mem=4G
@@ -66,9 +64,9 @@ juju deploy mariadb --constraints "mem=4G cpu-cores=2"
 ```
 
 To ignore any constraints which may have been previously set, you can assign a 
-'null' value. If the service or model constraints for the 'mariadb' charm have 
-already been set to 8 cpu-cores for example, you can ignore that constraint at 
-deploy time with:
+'null' value. If the application or model constraints for the 'mariadb' charm
+have already been set to 8 cpu-cores for example, you can ignore that constraint
+at deploy time with:
   
 ```bash
 juju deploy mariadb --constraints mem=4G cpu-cores= 
@@ -88,7 +86,7 @@ A controller is created using the `bootstrap` command, which accepts a
 controller with constraints, the same constraints apply to each subsequent 
 machine created, so setting constraints on the controller is the same as making
 global constraints. These can of course be overriden by constraints at the
-model, service or machine level as detailed below.
+model, application or machine level as detailed below.
 
 Example:
   
@@ -120,12 +118,12 @@ null:
 juju set-model-constraints mem=
 ```
 
-Model-related constraints can also be overridden at the service and machine
+Model-related constraints can also be overridden at the application and machine
 level.
 
-## Setting constraints for a service
+## Setting constraints for an application
 
-Usually, constraints for a service are set at deploy time, by passing the 
+Usually, constraints for an application are set at deploy time, by passing the 
 required parameters using the deploy command:
   
 ```bash
@@ -133,13 +131,13 @@ juju deploy mariadb cpu-cores=4
 ```
 
 Subsequently, you can set constraints for the any additional units added to the 
-service by running:
+application by running:
   
 ```bash
 juju set-constraints mariadb cpu-cores=2
 ```
 
-The constraints work on a named-service as well. So the following also works
+The constraints work on a named-application as well. So the following also works
 as expected:
   
 ```bash
@@ -167,7 +165,7 @@ juju add-machine --constraints spaces=storage,db
 ```
 
 Will provision a machine that is connected to both the 'storage' and 'db' 
-network spaces. You can subsequently deploy services to this machine using
+network spaces. You can subsequently deploy applications to this machine using
 the '--to' placement switch - 
 [see the documentation on deploying charms](./charms-deploy.html)
 

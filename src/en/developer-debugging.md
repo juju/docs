@@ -64,7 +64,7 @@ whether it's to debug a failed hook or to write and test new hook code.
 in a space-delimited list) or no hook names, causing all hooks to be debugged:  
 
 ```bash
-juju debug-hooks <service/unit> [hook-name hook-name2 ...]
+juju debug-hooks <application/unit> [hook-name hook-name2 ...]
 ```
 
 So for example, imagine you are deploying the `mysql` charm and you want to only
