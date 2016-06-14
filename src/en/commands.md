@@ -2728,14 +2728,6 @@ Click on the expander to see details for each command.
 
    show help on a command or other topic
 
-Details:
-
-   **See also:**
-
-   [opics](#opics)
-
-
- 
 
 ^# help-tool
 
