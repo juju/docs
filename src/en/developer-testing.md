@@ -1,4 +1,4 @@
-Title: Writing charm tests  
+Title: Writing charm tests
 
 # Writing Charm Tests
 
@@ -75,18 +75,28 @@ charms should pass `charm proof` with Information messages only.
 Warning or Error messages indicate a problem in the charm and the automated
 tests will fail the on the `charm proof` step.
 
-## Amulet
+## The Amulet Test Library
 
 While you can write tests in Bash or other languages, the
 [Amulet library](./tools-amulet.html) makes it easy to write tests in Python
 and is recommended.
 
-## BundleTester
+## Executing Tests via BundleTester
 
 The charm test runner is a tool called
 [`bundletester`](https://github.com/juju-solutions/bundletester). The
 `bundletester` tool is used to find, fetch, and run tests on charms and
 [bundles](./charms-bundles.html).
+
+You should execute bundletester against a built charm. In order to
+test the vanilla charm that you built in [Getting
+Started](./developer-getting-started.html), you would do the
+following:
+
+```
+charm build
+bundletester -t $JUJU_REPOSITORY/trusty/vanilla
+```
 
 ### tests.yaml
 
@@ -96,7 +106,7 @@ when not provided default values will be used.
 
 Read the
 [bundletester `README.md`](https://github.com/juju-solutions/bundletester)
-file or more information on the options included in the  
+file or more information on the options included in the
 [`tests.yaml`](https://github.com/juju-solutions/bundletester#testsyaml)
 file.
 
@@ -161,4 +171,33 @@ class TestDeployment(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+```
+
+### Debugging Your Tests
+
+If you're running tests with bundletester, debugging the tests
+themselves can be a little tricky. Setting breakpoints will simply
+make the test hang, as bundletester runs the tests in a separate
+process.
+
+You can run the tests directly, however. Let's say that you named the
+test in the example above "01-deployment". You could run it like so:
+
+```
+build charm
+cd $JUJU_REPOSITORY/trusty/vanilla
+python3 tests/01-deployment
+```
+
+(Note that you'd need to run your setup script manually first, or run
+your modified test, with breakpoints, against an already deployed
+charm.)
+
+The Deployment class in amulet also has a .log attribute, which can be
+useful for diagnosing problems after the tests have run. In the
+example tests above, you might invoke it with a line like the
+following:
+
+```
+    self.deployment.log.debug("Some debug message here.")
 ```
