@@ -35,20 +35,27 @@ more recent than the default binary. This is done when some features may not
 yet be compiled in to the agent for the Ubuntu release being installed. Note
 that Juju will default to the latest LTS (see `distro-info --lts` command).
 
+The '--config' option allows you to pass configuration values during
+bootstrap as arguments. If you do this, the values you use take precedence
+over any default settings.
 
 ```bash
 juju bootstrap --upload-tools --config default-series=trusty \
 	lxd-trusty lxd
 ```
 
-## Create a Rackspace controller
+## Create a Rackspace controller using a daily image
 
 The example uses a previously defined configuration file called 
 config-rackspace.yaml. Many clouds are available, see [Clouds](./clouds.html).
+Note that values passed using '--config' as above will take precedence
+over values included in a file. This is important if you use both a config
+file and state one or more config values while bootstrapping.
 
 ```bash
 juju bootstrap \
 	--upload-tools --config=~/config-rackspace.yaml \
+	--config image-stream=daily
 	controller-rackspace rackspace
 ```
 
