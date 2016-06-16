@@ -133,7 +133,7 @@ LXD is now configured to work with Juju.
 
 !!! Note: LXD adds iptables rules to enable traffic to the subnet/bridge it
 created. If you subsequently add/change firewall settings (e.g. `ufw`), you
-should ensure that these rules still work for Juju to function properly.
+should ensure that these rules still allow Juju to communicate with LXD.
 
 
 ## Create a controller
