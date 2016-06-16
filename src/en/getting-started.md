@@ -131,12 +131,18 @@ required to configure IPv6 networking).
    
 LXD is now configured to work with Juju.
 
+!!! Note: LXD adds iptables rules to enable traffic to the subnet/bridge it
+created. If you subsequently add/change firewall settings (e.g. `ufw`), you
+should ensure that these rules still work for Juju to function properly.
+
 
 ## Create a controller
 
 Juju needs a controller instance to manage your models and the `juju bootstrap`
-command is used to create one. For use with our LXD "cloud", we
-will make a controller called 'lxd-test':
+command is used to create one. This command expects a name (for referencing this 
+controller) and a cloud to use. The LXD 'cloud' is known as 'localhost' to Juju.
+
+For our LXD localhost cloud, we will make a controller called 'lxd-test':
 
 ```bash
 juju bootstrap lxd-test localhost
