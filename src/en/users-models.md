@@ -74,7 +74,7 @@ juju revoke bob mymodel
 Create user 'ben' and grant him read access to model 'mymodel':
 
 ```bash
-juju add-user --models=mymodel --acl=read jon
+juju add-user --models=mymodel --acl=read ben
 ```
 
 Naturally, the model in the above example needs to already exist.
