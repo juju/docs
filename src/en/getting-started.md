@@ -168,7 +168,7 @@ local.lxd-test*   default  admin@local  localhost/localhost
 
 Notice that the prefix 'local.' is added to the controller name we specified.
 
-A newly-created controller has two models: The 'controller' model,
+A newly-created controller has two models: The 'admin' model,
 which should be used only by Juju for internal management, and a 'default'
 model, which is ready for actual use.
 
