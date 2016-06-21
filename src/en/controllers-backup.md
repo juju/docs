@@ -61,19 +61,17 @@ want!
 ## The Juju controller
 
 Juju provides commands for recovering a controller in case of failure. The
-current state is held within the 'admin' model. Therefore, all backup commands
-need to operate within that model, either by using the '--model admin' argument
-with each command, or by ensuring you're within the 'admin' model prior to
-using a backup command (i.e.`juju switch admin`). In addition, if there are
-mulitple cloud environments, and thus multiple controllers, ensure you are
-operating on the proper controller.
-
-The backup commands allow you to create, restore and manage backup files 
-containing the controller configuration, keys, and environment data. If the 
-controller or its host machine later fails, you can recreate the controller
-from the backup file. For environments with high availability enabled, 
-see [the relevant section below](#ha-(high-availability)).
-
+current state is held within the 'controller' model. Therefore, all backup 
+commands need to operate within that model, either by using the 
+'--model controller' argument with each command, or by ensuring you're within
+the 'controller' model prior to using a backup command
+(i.e.`juju switch controller`). In addition, if there are mulitple cloud
+environments, and thus multiple controllers, ensure you are operating on the
+proper controller. The backup commands allow you to create, restore and manage
+backup files containing the controller configuration, keys, and environment
+data. If the controller or its host machine later fails, you can recreate the
+controller from the backup file. For environments with high availability
+enabled, see [the relevant section below](#ha-(high-availability)). 
 
 ### Creating a backup file
 
@@ -95,8 +93,8 @@ argument, but this won't change the name of the backup on the server.
 Examples:
 
 ```bash
-juju create-backup -m admin
-juju switch admin; juju create-backup
+juju create-backup -m controller
+juju switch controller; juju create-backup
 juju create-backup --filename backup.tar.gz
 ```
 Note that creating a backup may take a long time.

@@ -11,8 +11,9 @@ This section is about understanding models with multiple users.
 
 When an administrator adds a model, by default, the cloud credentials used
 throughout the model will be those that the admin used to create the controller
-and the SSH keys copied across the model will be those of the admin model. The
-administrator can override these defaults with the appropriate command options.
+and the SSH keys copied across the model will be those of the controller model.
+The administrator can override these defaults with the appropriate command
+options.
 
 The model creator becomes, by default, the model owner. However, the creation
 process does allow for owner designation.
@@ -52,14 +53,15 @@ juju grant bob mymodel
 
 !!! Note: The default ACL is read-only.
 
-Make user 'jim' an administrator by granting him write access to model 'admin':
+Make user 'jim' an administrator by granting him write access to model 
+'controller':
 
 ```bash
-juju grant --acl=write jim admin
+juju grant --acl=write jim controller
 ```
 
-To revoke write access from user 'jim' for model 'admin' (leaving the user with
-read-only access):
+To revoke write access from user 'jim' for model 'controller' (leaving the user
+with read-only access):
 
 ```bash
 juju revoke --acl=write jim mymodel

@@ -78,9 +78,9 @@ See more examples of [Creating a controller](./controllers-creating.html).
 ## Next steps
 
 Typically, workload services are deployed on additional models (i.e. other
-than the initial 'admin' model). There is a 'default' model created when
-a controller is created but we recommend creatiing specially-named ones
-instead. See [Adding a model](./models-adding.html).
+than the initial 'controller' model). A model named 'default' is added to the 
+controller when it is created for this reason. You can also add additional
+models - see [Adding a model](./models-adding.html).
 
 
 ## LXD and images

@@ -15,11 +15,10 @@ environment. Although it is a special node, it is nonetheless a machine that
 gets created by Juju (during the "bootstrap" stage) and, in that sense, is
 similar to other Juju machines.
 
-During controller creation two *models* are also created, the 'admin' model and
-the 'default' model. The primary purpose of the 'admin' model is to run and
-manage the Juju API server and the underlying database. Once the 'admin' model
-has been created you can add multiple models within that environment. See
-[Models](./models.html).
+During controller creation two *models* are also created, the 'controller' model
+and the 'default' model. The primary purpose of the 'controller' model is to
+run and manage the Juju API server and the underlying database. Additional
+models may be created by the user - see [Models](./models.html).
 
 When a controller is intended to be used by multiple people, it is recommended
 that Juju's [multi-user functionality](./users.html) be leveraged.
