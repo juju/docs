@@ -1,4 +1,4 @@
-Title: Constraints  
+Title: Constraints
 
 # Constraints
 
@@ -167,5 +167,5 @@ juju add-machine --constraints spaces=storage,db
 Will provision a machine that is connected to both the 'storage' and 'db' 
 network spaces. You can subsequently deploy applications to this machine using
 the '--to' placement switch - 
-[see the documentation on deploying charms](./charms-deploy.html)
+[see the documentation on deploying charms](./charms-deploying.html)
 
