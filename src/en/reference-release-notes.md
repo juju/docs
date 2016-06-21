@@ -1,4 +1,4 @@
-Title: Juju Release Notes  
+Title: Juju Release Notes
 
 # Release Notes History
 
@@ -185,10 +185,6 @@ The versions covered here are:
     * Juju can't find daily image streams from cloud-
       images.ubuntu.com/daily
       Lp 1513982
-
-    * Rsyslog certificate fails when using ipv6/4 dual stack with
-      prefer-ipv6: true
-      Lp 1478943
 
     * Improper address:port joining
       Lp 1518128

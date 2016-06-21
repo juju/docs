@@ -1,4 +1,4 @@
-Title: General configuration options  
+Title: General configuration options
 TODO: Check accuracy of key table
       Confirm 'all' harvest mode state. Seems it should be "'Dead' or
 	'Unknown'" OR "a combination of modes 'destroyed' and 'unknown'".
@@ -92,9 +92,8 @@ lxc-clone-aufs | bool | false |  | Whether the LXC provisioner should create an 
 lxc-default-mtu | int |  |  | The MTU setting to use for network interfaces in LXC containers
 name | string |  |  | The name of the current model
 no-proxy | string |  |  | List of domain addresses not to be proxied (comma-separated)
-prefer-ipv6 | bool | false |  | Whether to prefer IPv6 over IPv4 addresses for API endpoints and machines
 provisioner-harvest-mode | string | destroyed | all/none/unknown/destroyed | What to do with unknown machines. See [harvesting section](#juju-lifecycle-and-harvesting)
-proxy-ssh | bool |  |  | Whether SSH commands should be proxied through the API server
+proxy-ssh | bool | false |  | Whether SSH commands should be proxied through the API server
 resource-tags | string | none | | Space-separated list of key=value pairs used to apply as tags on supported cloud models
 rsyslog-ca-cert | string |  |  | The certificate of the CA that signed the rsyslog certificate, in PEM format
 rsyslog-ca-key | string |  |  | The private key of the CA that signed the rsyslog certificate, in PEM format
