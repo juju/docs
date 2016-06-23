@@ -333,15 +333,6 @@ The versions covered here are:
   association of a "device", that requires an IP address, with a parent machine
   managed by MAAS. There is a view in the MAAS UI showing all devices.
 
-  With the "address-allocation" feature flag enabled, Juju will register LXC and
-  KVM containers as devices on MAAS 1.8+. They are visible in the MAAS UI. If
-  the environment is forcibly shut down, the IP addresses allocated to the
-  containers will be released by MAAS.
-
-  You can enable "address-allocation" is new Juju environments like so:
-
-      JUJU_DEV_FEATURE_FLAGS=address-allocation juju bootstrap
-
 
   ### Storage support for GCE and Azure providers
 
@@ -1713,25 +1704,17 @@ The versions covered here are:
   to run the install hook; complete any queued or in-flight operation; or
   resolve a hook or upgrade error.
 
-
-  ### Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
-
-  The Juju AWS and MAAS providers now support starting LXC containers. The
-  MAAS providers also supports networking on KVM. Containers and Virtual
-  Machines will be given statically allocated private IP addresses from
-  the same subnet as their host machine. For example on MAAS you can now:
-
-  ```bash
-  juju deploy wordpress --to lxc:0
-  juju add-unit mysql --to kvm:1
-  ```
-
-  This experimental feature can be enabled when the environment is
-  bootstrapped like so:
-
-  ```no-highlight
-  JUJU_DEV_FEATURE_FLAGS="address-allocation" juju bootstrap
-  ```
+ ### Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
+ 
+ The Juju AWS and MAAS providers now support starting LXC containers. The
+ MAAS provider also supports networking on KVM. Containers and Virtual
+ Machines will be given statically allocated private IP addresses from
+ the same subnet as their host machine. For example on MAAS you can now:
+ 
+```bash
+ juju deploy wordpress --to lxc:0
+ juju add-unit mysql --to kvm:1
+ ```
    
   Known limitations: 
 
