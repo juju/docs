@@ -1703,6 +1703,18 @@ The versions covered here are:
   leader-settings-changed as soon as possible, delaying only doing so only
   to run the install hook; complete any queued or in-flight operation; or
   resolve a hook or upgrade error.
+
+ ### Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
+ 
+ The Juju AWS and MAAS providers now support starting LXC containers. The
+ MAAS providers also supports networking on KVM. Containers and Virtual
+ Machines will be given statically allocated private IP addresses from
+ the same subnet as their host machine. For example on MAAS you can now:
+ 
+```bash
+ juju deploy wordpress --to lxc:0
+ juju add-unit mysql --to kvm:1
+ ```
    
   Known limitations: 
 
