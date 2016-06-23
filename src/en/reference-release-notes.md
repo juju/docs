@@ -1707,7 +1707,7 @@ The versions covered here are:
  ### Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
  
  The Juju AWS and MAAS providers now support starting LXC containers. The
- MAAS providers also supports networking on KVM. Containers and Virtual
+ MAAS provider also supports networking on KVM. Containers and Virtual
  Machines will be given statically allocated private IP addresses from
  the same subnet as their host machine. For example on MAAS you can now:
  
