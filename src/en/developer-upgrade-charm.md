@@ -2,18 +2,18 @@ Title: Upgrading a charm
 
 # Upgrade Charm
 
-A service's charm can be changed at runtime with the `upgrade-charm` command. By
-default, it changes to the latest available version of the same charm; if
-`--revision` is specified, it changes to that revision of the same charm; and if
-`--switch` is specified it changes to any arbitrary charm, inferred from the
-argument in the same way as in `juju deploy`.
+A application's charm can be changed at runtime with the `upgrade-charm`
+command. By default, it changes to the latest available version of the same
+charm; if `--revision` is specified, it changes to that revision of the
+same charm; and if `--switch` is specified it changes to any arbitrary charm,
+inferred from the argument in the same way as in `juju deploy`.
 
 For a charm to replace another, though, there is a minimum standard of
 compatibility, which applies regardless of the particular change. That is:
 
   - a subordinate charm must be replaced by a subordinate charm, and a principal
     charm must be replaced by a principal charm.
-  - every runtime relation used by the service must exist in both charms.
+  - every runtime relation used by the application must exist in both charms.
   - charm relations that are defined, but not in use at runtime, may be removed
     freely.
   - in particular, it's not possible to remove a peer relation by upgrading,
@@ -25,9 +25,10 @@ original charm that share a name and type are preserved; any incompatible
 settings are removed; and any new settings take defaults as though freshly
 deployed.
 
-When a service has been upgraded but a particular unit has not, the unit will
-continue to see the configuration settings from before conversion; these
-settings will not be affected by subsequent changes to the service's settings.
+When an application has been upgraded but a particular unit has not, the unit
+will continue to see the configuration settings from before conversion; these
+settings will not be affected by subsequent changes to the application's
+settings.
 
 ## Forced charm upgrades
 

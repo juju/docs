@@ -3,9 +3,9 @@ Title: Working with units
 # Using Units
 
 Each node that Juju manages is referred to as a "unit". Generally speaking,
-when using Juju you interact with the services at the service level. There are
-times when working directly with units is useful though, particularly for
-debugging purposes. Juju provides a few different commands to make this
+when using Juju you interact with the applications at the application level. 
+There are times when working directly with units is useful though, particularly
+for debugging purposes. Juju provides a few different commands to make this
 easier.
 
 
@@ -69,9 +69,9 @@ For more information, run the `juju help scp` command.
 ## The juju run command
 
 The `juju run` command can be used by devops or scripts to inspect or do work
-on services, units, or machines. Commands for services or units are executed in
-a hook context. Charm authors can use the run command to develop and debug
-scripts that run in hooks.
+on applications, units, or machines. Commands for applications or units are
+executed in a hook context. Charm authors can use the run command to develop 
+and debug scripts that run in hooks.
 
 For example, to run uname on every instance:
 
@@ -83,13 +83,13 @@ Or to run uptime on some instances:
 
 ```bash
 juju run "uptime" --machine=2
-juju run "uptime" --service=mysql
+juju run "uptime" --application=mysql
 ```
 
-!!! Note: When using `juju run` with the `--service` option, keep in mind that
-whichever command you pass will run on *every unit* of that service.
+!!! Note: When using `juju run` with the `--application` option, keep in mind
+that whichever command you pass will run on *every unit* of that application.
 
-When used in combination with certain services you can script certain tasks.
+When used in combination with certain applications you can script certain tasks.
 For instance, in the 'hadoop' charm you can use `juju run` to initiate a
 terasort:
 
