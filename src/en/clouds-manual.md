@@ -11,7 +11,7 @@ Whatever the case, as long as Juju can log into these machines they can be used
 as part of a Juju cloud. It won't be _quite_ the same as using a standard cloud
 - without the ability to create new instances when they are desired, you will
 be missing out on some of the Juju magic. You can still deploy and manage 
-services though, with a bit of extra effort.
+applications though, with a bit of extra effort.
 
 ## Prerequisites for using a manual cloud:
 
@@ -38,14 +38,14 @@ Note that it is also possible to use the other common bootstrap parameters here
 ## Adding machines to the cloud
 
 The `bootstrap` command creates the controller and initial models that Juju
-uses. Deploying services will require additional machines to be made available
-though. The more conventional Juju cloud types can create machines
+uses. Deploying applications will require additional machines to be made 
+available though. The more conventional Juju cloud types can create machines
 automatically, but in the case of a manual cloud you will have to specify these
 resources.
 
 This is done by using the `add-machine` command in Juju. This will install the 
 default series on a given resource, and prepare it for
-deploying services.
+deploying applications.
 
 For example, if you have a machine with the IP address 192.168.1.129, you could 
 add it to your manual cloud with the command:
@@ -70,8 +70,8 @@ juju status
 ## Deploying 
 
 Usually Juju will create machines as it needs them. By default, using a charm
-to deploy a service will automatically create a machine first and then 
-deploy the new service. 
+to deploy an application will automatically create a machine first and then 
+deploy the new application. 
 
 With a manual cloud, you need to create your machines in advance, so Juju will
 need to know which of the machines you wish to target when you deploy a charm

@@ -6,20 +6,20 @@ Title: Ensuring High Availability (HA) for deployed services
 
 ## Distribution groups
 Juju works with OpenStack, Amazon EC2 and Azure providers to ensure that in
-the event of an IaaS outage, not all units of a service will go down at the
+the event of an IaaS outage, not all units of an application will go down at the
 same time.
 
-Each deployed service is considered a "distribution group", and so are state
+Each deployed application is considered a "distribution group", and so are state
 servers.  Every time a unit is added to a distribution group, Juju will work to
 ensure that the its members are spread out to ensure high availability.  As
-long as the charm and the charm's service are well written, you can rest
+long as the charm and the charm's application are well written, you can rest
 assured that IaaS downtime will not affect your application.
 
-Commands you already use for scaling now ensure your services are always
+Commands you already use for scaling now ensure your applications are always
 available. e.g.
 
 ```bash
-juju deploy -n 10 <service>
+juju deploy -n 10 <application>
 ```
 
 The way this works depends on whether Juju uses Availability Zones or
@@ -48,9 +48,9 @@ juju add-machine zone=us-east-1c
 ## Azure Availability Sets
 
 Juju supports Availability Sets on Microsoft's Azure.  As long as at least two
-units are deployed, Azure guarantees 99.95% availability of the service
+units are deployed, Azure guarantees 99.95% availability of the application
 overall.  Exposed ports are automatically load-balanced across all units within
-the service.  Using availability sets disables manual placement and the
+the application.  Using availability sets disables manual placement and the
 "add-machine" command.
 
 In Juju 1.20 and later, new Azure environments use availability sets by
