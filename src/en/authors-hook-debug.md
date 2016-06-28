@@ -1,4 +1,4 @@
-Title: Debugging Juju charm hooks   
+Title: Debugging Juju charm hooks
 
 # Debugging hooks
 
@@ -27,7 +27,7 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 ```
 
-**Note:** It is possible and often desirable to run debug-hooks on more than
+!!! Note: It is possible and often desirable to run debug-hooks on more than
 one unit at a time. You should open a new terminal window for each.
 
 
@@ -71,9 +71,9 @@ queue until you exit your current window. See the  special considerations below.
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
 
-**Note:** To allow Juju to continue processing events normally, you **must**
-exit the hook execution window with the `exit` command, otherwise all further
-events on that unit will be paused indefinitely.
+!!! Note: To allow Juju to continue processing events normally, you **must**
+exit the hook execution with a zero return code (using the `exit` command),
+otherwise all further events on that unit may be paused indefinitely.
 
 The queue can be halted by exiting with an `exit 1` command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending
@@ -92,8 +92,10 @@ after the unit comes up, making it difficult to start a debug-hooks session in
 time to intercept them. If you're having difficulties, you can temporarily
 return an error code from your `install` hook (e.g. add an `exit 1` at the end
 of it), and start your session only when the unit reports an [error status
-](./authors-hook-errors.html). You should then run `juju resolved --retry` for
-the affected unit, and go back to the debug-hooks session to interact.
+](./authors-hook-errors.html). Juju version 2.0 and up will automatically retry
+the hooks in error. Earlier versions of Juju can be manually retried by issuing
+the command `juju resolved --retry unit-name\#` for the affected unit, and go
+back to the debug-hooks session to interact with the Juju environment. 
 
 
 ## Special considerations

@@ -53,5 +53,8 @@ sometimes lead to hook failures. Connect to that unit, see what is wrong, and
 retry with:
 
 ```bash
-juju resolved --retry
+juju resolved --retry unit-name/#
 ```
+
+Where unit-name is replaced with the name of the unit, and # is replaced with
+the unit number you wish to restart.

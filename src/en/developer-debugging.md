@@ -74,14 +74,18 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 ```
 
-Additionally, if your hook is already in an error state, you can tell Juju to
-retry the hook after running `juju debug-hooks`:
+Additionally, if your hook is already in an error state, you can enter in an
+interactive hook context using the `juju debug-hooks` command. Juju version 2.0
+and greater will automatically retry the hooks in error state. Earlier versions
+of Juju can be manually retried by issuing the command
+`juju resolved --retry unit-name\#` for the affected unit, and go
+back to the debug-hooks session to interact with the Juju environment.
 
 ```bash
 juju resolved mysql/0 --retry
 ```
 
-**Note:** It is possible and often desirable to run debug-hooks on more than
+!!! Note: It is possible and often desirable to run debug-hooks on more than
 one unit at a time. You should open a new terminal window for each.
 
 ## Running a debug session
@@ -127,7 +131,7 @@ queue until you exit your current window. See the special considerations below.
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
 
-**Note:** To allow Juju to continue processing events normally, you **must**
+!!! Note: To allow Juju to continue processing events normally, you **must**
 exit the hook execution window with the `exit` command, otherwise all further
 events on that unit will be paused indefinitely.
 
