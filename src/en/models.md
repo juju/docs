@@ -83,6 +83,11 @@ Common model management tasks are summarized below.
    
    `juju switch [<controller>|<model>|<controller>:<model>]`
    
+   Running the command with no arguments will return the currently active 
+   controller and model:
+     
+         juju switch
+   
    For complete explanation and syntax, see the
    [command reference page](./commands.html#switch) or the `juju help switch`
    command.
