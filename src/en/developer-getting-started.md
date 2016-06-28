@@ -119,6 +119,11 @@ mkdir -p $LAYER_PATH $INTERFACE_PATH
 cd $JUJU_REPOSITORY/layers
 ```
 
+!!! Note: Exporting the environment variables in this way only sets the
+variables for the current terminal. If you wish to make these changes persist,
+add the same export statements to a resource file that are evaluated when you
+create a new console such as ~/.bashrc depending on your environment.
+
 Once in the layers directory clone the example charm layer - layer-vanilla:
 
 ```bash
