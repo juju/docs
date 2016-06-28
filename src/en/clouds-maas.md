@@ -64,13 +64,23 @@ local:devmaas   maas
 local:prodmaas  maas
 ```
 
-After adding credentials for a MAAS:
+Next, add your MAAS credentials:
 
 ```bash
 juju add-credential prodmaas
 ```
 
-...you can create a Juju controller with the bootstrap command:
+When prompted for "maas-oauth", you should paste your MAAS API key. Your API
+key can be found in the Account/User Preferences page in the MAAS web
+interface, or by using the MAAS CLI:
+
+```bash
+sudo maas-region apikey --username=<user>
+```
+
+Note: Juju does not echo this key back to the screen.
+
+Now you can create a Juju controller with the bootstrap command:
  
 ```bash
 juju bootstrap prodmaas-controller prodmaas
