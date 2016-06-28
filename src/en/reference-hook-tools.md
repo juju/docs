@@ -296,6 +296,28 @@ open-port 80/tcp
 open-port 1234/udp
 ```
 
+## payload-status-set
+
+`payload-status-set` is used to update the current status of a registered payload.
+The `class` and `id` provided must match a payload that
+has been previously registered with juju using [payload-register](#payload-register). The status must be one of the following:
+
+- starting
+- started
+- stopping
+- stopped
+
+python:
+```python
+from charmhelpers.core.hookenv import payload_status_set
+
+payload_status_set('monitor', '0fcgaba', 'stopping')
+```
+
+bash:
+```shell
+payload-status-set monitor abcd13asa32c starting
+```
 
 ## payload-register
 
@@ -306,11 +328,20 @@ provided when "register" is run.
 The payload class must correspond to one of the payloads defined in
 the charm's metadata.yaml.
 
+metadata.yaml:    
+```yaml
+payloads:
+    monitoring:
+        type: docker
+    kvm-guest:
+        type: kvm
+```
+
 python:  
 ```python
-from subprocess import check_call
+from charmhelpers.core.hookenv import payload_register
 
-check_call(["payload-register", "monitoring", "docker", "0fcgaba"])
+payload_register('monitoring', 'docker', '0fcgaba')
 ```
 bash:  
 ```bash
@@ -327,9 +358,9 @@ payload-register.
 
 python:  
 ```python
-from subprocess import check_call
+from charmhelpers.core.hookenv import payload_unregister
 
-check_call(["payload-unregister", "monitoring", "0fcgaba"])
+payload_unregister('monitoring', '0fcgaba')
 ```
 bash:  
 ```bash
