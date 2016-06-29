@@ -155,8 +155,8 @@ class HttpProvides(RelationBase):
         # Signify that the relationship is now available to our principal layer(s)
         self.set_state('{relation_name}.available')
 
-    @hook('{provides:http}-relation-{broken,departed}')
-    def broken(self):
+    @hook('{provides:http}-relation-{departed}')
+    def departed(self):
         # Remove the state that our relationship is now available to our principal layer(s)
         self.remove_state('{relation_name}.available')
 
@@ -170,6 +170,11 @@ class HttpProvides(RelationBase):
         }
         self.set_remote(**relation_info)
 ```
+
+!!! Note: You may notice we do not decorate for the -broken hook event. This
+is intentional.  It will only actually cause problems if you use set_state
+in the context of a relationship being broken, but it doesn't work like you'd
+expect so it's better to avoid it entirely
 
 #### Implementing the provides side
 
@@ -214,8 +219,8 @@ class HttpRequires(RelationBase):
             # it is part of the set of available units
             conv.set_state('{relation_name}.available')
 
-    @hook('{requires:http}-relation-{departed,broken}')
-    def broken(self):
+    @hook('{requires:http}-relation-{departed}')
+    def departed(self):
         conv = self.conversation()
         conv.remove_state('{relation_name}.available')
 
