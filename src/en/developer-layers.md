@@ -166,6 +166,6 @@ The
 [Getting started guide](https://jujucharms.com/docs/devel/developer-getting-started#assemble-the-layers)
 contains steps on how to build a layer into a charm.
 
-**Note**: You must have the
+!!! Note: You must have the
 [Charm Tools](https://jujucharms.com/docs/devel/developer-getting-started#charm-tools)
 software installed to use the `charm build` command.
