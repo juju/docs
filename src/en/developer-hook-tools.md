@@ -239,7 +239,7 @@ $clusterLeaderAddress = Get-LeaderData "cluster-leader-address"
 
 ## leader-set
 
-`leader-set` immediately writes the  key/value pairs to the state server,
+`leader-set` immediately writes the  key/value pairs to the controller,
 which will then inform non-leader units of the change. It will fail if called
 without arguments, or if called by a unit that is not currently service leader.
 
