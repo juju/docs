@@ -39,16 +39,20 @@ are not sufficient on their own to be considered a charm; they likely can’t be
 built into a deployable charm, and if they can, they’re unlikely to do anything
 useful.
 
-The most basic example is just that,
-[layer-basic](http://github.com/juju-solutions/layer-basic). It provides nothing
-more than the minimum needed to effectively use layered charms:
-[charms.reactive](https://pythonhosted.org/charms.reactive/),
-[charmhelpers](https://pythonhosted.org/charmhelpers/), and the skeleton hook
-implementations that call into the reactive framework. However, the most useful
-base layers are actually a type of runtime layer. For example,
+The basic layer provides the minimum needed to use the
+[charms.reactive](https://pythonhosted.org/charms.reactive/) framework. The
+[layer-basic](http://github.com/juju-solutions/layer-basic) provides:  
+* Wheelhouse support for management of python dependencies.
+* Hook decorators so the code can react to Juju events.
+* Logic decorators for bash and python code (@when, @when_not, @when_any, etc).
+* A python library named [charmhelpers](https://pythonhosted.org/charmhelpers/)
+  to make writing charm code easier
+
+The most useful base layers are actually a type of runtime layer. For example,
 [layer-apache-php](https://github.com/johnsca/apache-php) provides Apache2 and
 mod-php, as well as mechanisms for fetching and installing a PHP project within
-that runtime.
+that runtime. Other layers can build off the runtime layers to avoid code
+duplication and separate concerns.
 
 Base layers can be written in any language, but must at a minimum provide the
 reactive framework that glues layers together, which is written in Python. This
@@ -151,7 +155,17 @@ function deploy_middleware(){
 
 ## Writing a layer
 
-The Getting Started guide example illustrates charming the layer-vanilla, which
-is an excellent example for how to write your own layer.
+The [Writing a layer by example](developer-layer-example.html) illustrates how
+to write you own layer. The
+[layer-vanilla](https://github.com/juju-solutions/layer-vanilla) is an
+excellent example of how to write a layer for a PHP application.
 
-[Layer Example](developer-layer-example.html)
+## Building a layer into a charm
+
+The
+[Getting started guide](https://jujucharms.com/docs/devel/developer-getting-started#assemble-the-layers)
+contains steps on how to build a layer into a charm.
+
+!!! Note: You must have the
+[Charm Tools](https://jujucharms.com/docs/devel/developer-getting-started#charm-tools)
+software installed to use the `charm build` command.
