@@ -4,7 +4,7 @@ Title: Glossary
 
 **Bootstrap** - Initialize a Juju environment so that services may be deployed.
 Bootstrapping an environment will provision a new machine in the environment
-and run the Juju state server on that machine (also called the bootstrap node).
+and run the Juju controller (also called the bootstrap node).
 
 **Bundle** - A set of Juju charms, their configuration, and corresponding relations
 that can be deployed in a single step. Bundles are defined in the YAML format.
