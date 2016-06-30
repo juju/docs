@@ -111,16 +111,16 @@ Modern applications are typically composed of many applications - databases,
 front-ends, big data stores, logging systems, key value stores…
 service-oriented architecture has become the norm. Each application will be
 defined by a single charm. To describe the whole application you need to
-describe the set of charms and their relationships - what is connected to what
-- and we use a bundle for that.
+describe the set of charms and their relationships - what is connected to
+what - and we use a bundle for that.
 
 For instance, a content-management system bundle could specify a database and
 a content management server, together with key-value stores and front-end
-load-balancing systems. Each of those applications is described by a charm; the
+load-balancing systems. Each of those applications are described by a charm; the
 bundle describes the set of charms, their configuration, and the relationships
 between them. This allows teams to share not only the core primitive for each
 application, but also enables sharing higher-level models of several
-applications. It allows you to replicate a complex application models in a
+applications. It allows you to replicate complex application models in a
 cloud just by dropping the same bundle onto your Juju GUI.
 
 Bundles can also be deployed in-memory, which allows your developers to spin
