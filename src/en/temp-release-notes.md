@@ -3,7 +3,6 @@
 A new development release of Juju, juju 2.0-beta11, is now available.
 This release replaces version 2.0-beta10.
 
-
 ## What's New in Beta11
 
 * Config can now be associated with clouds in clouds.yaml
@@ -914,9 +913,60 @@ clouds:
 
 ### Juju Log Forwarding
 
+Log forwarding is a bare bones implementation which is undergoing ongoing development work to improve the user experience. It should be considered only as a proof of concept. When enabled, log messages for all hosted models in a controller are forwarded to a syslog server. Currently, all required config to activate the feature needs to be provided at bootstrap via a config.yaml file. 
+
+$ juju bootstrap <controllername> <cloud> --config logconfig.yaml
+
+The contents of the yaml file should currently be as follows:
+
+syslog-host: <host>:<port>
+syslog-ca-cert: |
+  -----BEGIN CERTIFICATE-----
+  <cert-contents>
+  -----END CERTIFICATE-----
+syslog-client-cert: |
+  -----BEGIN CERTIFICATE-----
+  <cert-contents>
+  -----END CERTIFICATE-----
+syslog-client-key: |
+  -----BEGIN PRIVATE KEY-----
+  <cert-contents>
+  -----END PRIVATE KEY-----
+
+#### Wire Format
+Syslog messages will be sent using the RFC 5424 message format.  We make use of the structured data facility defined in the more recent RFC.
+
+Log Messages:
+The facility code will be 1 (user level message). Severity will be mapped as follows:
+Juju ERROR = Error (3)
+Juju WARNING = Warning (4)
+Juju INFO = Informational (6)
+Juju DEBUG = Debug (7)
+Juju TRACE = Debug (7)
+
+Messages will use structured data to record relevant environment and user action parameters. Key pair definitions will be:
+
+SDID: origin
+enterpriseId: 28978 (Canonical, Ltd.)
+software: jujud
+swVersion: <the Juju version of the running agent>
+
+SDID: model@28978
+controller-uuid: <the uuid of the controller from which the message originates>
+model-uuid: <the uuid of the model from which the message originates>
+
+SDID: log@28978
+source: <the name of the source filename from which the message originates>:<the source line number>
+module: <the name of the source “module”>
+#### Example log (error) message
+
+<11>1 2016-02-28T09:57:10.804642398-05:00 172.12.3.1 juju - - [origin enterpriseId="28978" software="jujud" "2.0.0"] [model@28978 controller-uuid="deadbeef" model-uuid="deadbeef"] [log@28978 source-file="provider/ec2/storage.go" source-line="60"] Could not initialise machine block storage
+
 ### Audit Logging
 
-In its initial implementation, audit logging is on by default.  The audit log will be in /var/log/juju/audit.log for each controller.
+In its initial implementation, audit logging is on by default.  The audit log will be in /var/log/juju/audit.log for each controller machine.  If running in an HA environment, the audit.log files on each controller machine must be collated to get a complete log.  Future releases will provide a utility to merge the logs, akin to debug-log.
+
+Since users may interact with Juju from multiple sources (CLI, GUI, deployer, etc.), audit log entries record the API calls made, rather than only reporting CLI commands run. Only those API calls originating from authenticated users calling the external API are logged.
 
 ### Known issues
 
@@ -932,6 +982,7 @@ In its initial implementation, audit logging is on by default.  The audit log wi
   * Credentials files containing Joyent credentials must be updated to
     work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
     Storage")
+
 
 
 # Resolved issues
