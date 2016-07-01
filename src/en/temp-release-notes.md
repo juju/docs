@@ -1,28 +1,15 @@
 # Juju 2.0-beta11
 
 A new development release of Juju, juju 2.0-beta11, is now available.
-This release replaces version 2.0-beta8.
-
-
-## Getting Juju
-
-Juju 2.0-beta11 is available for Yakkety and backported to earlier
-series in the following PPA:
-
-    https://launchpad.net/~juju/+archive/devel
-
-Windows, Centos, and OS X users will find installers at:
-
-    https://launchpad.net/juju-core/+milestone/2.0-beta11
-
-Upgrading 1.x environments to 2.0-beta11 is not yet supported. Once 2.x is
-proven we will provide an upgrade path from 1.25
+This release replaces version 2.0-beta10.
 
 
 ## What's New in Beta11
 
 * Config can now be associated with clouds in clouds.yaml
-* Experimental Features:
+* Consistent wire protocol for the Juju API. For more details, see:   
+  https://lists.ubuntu.com/archives/juju-dev/2016-June/005715.html
+* Initial support for:
     * Juju log forwarding
     * Audit logging
 
@@ -924,6 +911,11 @@ clouds:
     config:
       bootstrap-timeout: 900
       set-numa-control-policy: true
+
+### Juju Log forwarding
+
+### 
+
 
 ### Known issues
 
