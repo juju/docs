@@ -76,13 +76,8 @@ agent-stream: proposed
 
 ## Development
 
-<<<<<<< HEAD
 2.0-beta11 is currently in development for testing.
 The previous development release was 2.0-beta10.
-=======
-2.0-beta8 is currently in development for testing.
-The previous development release was 2.0-beta7.
->>>>>>> parent of 24a56d1... Release 2.0-beta9 is the current devel release.
 
 Development releases provide new features that are being stablised.
 These releases are *not* suitable for production environments. Upgrading
@@ -97,7 +92,6 @@ sudo apt-get install juju</pre>
 {: .instruction }
 
 Centos
-<<<<<<< HEAD
 : [juju-2.0-beta11-centos7.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta11/+download/juju-2.0-beta11-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta11/+download/juju-2.0-beta11-centos7.tar.gz/+md5))
 {: .instruction }
 
@@ -107,15 +101,4 @@ OS X
 
 Windows
 : [juju-setup-2.0-beta11.exe](https://launchpad.net/juju-core/trunk/2.0-beta11/+download/juju-setup-2.0-beta11.exe) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta11/+download/juju-setup-2.0-beta11.exe/+md5))
-=======
-: [juju-2.0-beta8-centos7.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta8/+download/juju-2.0-beta8-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta8/+download/juju-2.0-beta8-centos7.tar.gz/+md5))
-{: .instruction }
-
-OS X
-: [juju-2.0-beta8-osx.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta8/+download/juju-2.0-beta8-osx.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta8/+download/juju-2.0-beta8-osx.tar.gz/+md5))
-{: .instruction }
-
-Windows
-: [juju-setup-2.0-beta8.exe](https://launchpad.net/juju-core/trunk/2.0-beta8/+download/juju-setup-2.0-beta8.exe) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta8/+download/juju-setup-2.0-beta8.exe/+md5))
->>>>>>> parent of 24a56d1... Release 2.0-beta9 is the current devel release.
 {: .instruction }

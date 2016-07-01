@@ -173,7 +173,7 @@ please [see this guide to credentials][credentials])
 
 # 4. Bootstrap
 
-Before you can start using Juju to spin up services in a cloud, it needs to 
+Before you can start using Juju to spin up applications in a cloud, it needs to 
 create its own instance to act as a controller. The controller is your Juju
 agent in the cloud, receiving and processing commands and communicating with any
 other instances you create there.
@@ -200,7 +200,7 @@ plenty of feedback in your shell.
 
 # 5. Testing 
 
-Juju is now ready to deploy any services from the hundreds included in the
+Juju is now ready to deploy any applications from the hundreds included in the
 [juju charm store](https://jujucharms.com). It is a good idea to test your new 
 model. How about a Mediawiki site?
 
@@ -209,10 +209,10 @@ juju deploy mediawiki-single
 ```
 
 This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
-of services, in this case the 'Mediawiki' service, and a database to run it 
-with. Juju will install both these services and add a relation between them - 
-this is part of the magic of Juju: it isn't just about deploying services, Juju 
-also knows how to connect them together.
+of applications, in this case 'Mediawiki', and a database to run it 
+with. Juju will install both these applications and add a relation between them - 
+this is part of the magic of Juju: it isn't just about deploying applications,
+Juju  also knows how to connect them together.
 
 Installing shouldn't take long. You can check on how far Juju has got by running
 the command:
@@ -221,8 +221,8 @@ the command:
 juju status
 ```
 
-When the services have been installed the output to the above command will look
-something like this:
+When the applications have been installed the output to the above command will
+look something like this:
 
 ![juju status](./media/juju-mediawiki-status.png)
 
@@ -230,7 +230,7 @@ There is quite a lot of information there but the important parts for now are
 the [Services] section, which show that Mediawiki and MySQL are installed, and
 the [Units] section, which crucially shows the IP addresses allocated to them.
 
-By default, Juju is secure - you won't be able to connect to any services 
+By default, Juju is secure - you won't be able to connect to any applications 
 unless they are specifically exposed. This adjusts the relevant firewall 
 controls (on any cloud, not just LXD) to allow external access. To make
 our Mediawiki visible, we run the command:
@@ -239,15 +239,15 @@ our Mediawiki visible, we run the command:
 juju expose mediawiki
 ```
 
-From the status output, we can see that the Mediawiki service is running on 
+From the status output, we can see that the Mediawiki application is running on 
 10.0.3.60 (your IP may vary). If we open up Firefox now and point it at that 
 address, you should see the site running.
 
 !["mediawiki site"](./media/juju-mediawiki-site.png)
 
-Congratulations, you have just deployed a service with Juju!
+Congratulations, you have just deployed an application with Juju!
 
-!!! Note: To remove all the services in the model you just created, it is 
+!!! Note: To remove all the applications in the model you just created, it is 
 often quickest to destroy the model with the command 'juju destroy-model default` 
 and then create a new model.
 
@@ -259,8 +259,8 @@ can do with it!
 
 We suggest you take the time to read the following:
   
-  - [Juju concepts][concepts] - This page explains the terminology used throughout this 
-    documentation and describes what Juju can do 
+  - [Juju concepts][concepts] - This page explains the terminology used 
+    throughout this documentation and describes what Juju can do 
   - [Clouds][clouds] goes into detail about configuring clouds, including the 
     'local' cloud, which is great for lightning fast testing and development.
   - [Charms/Services][charms] - find out how to construct complicated workloads 

@@ -12,21 +12,21 @@ duplicated across controllers.
 Juju users are not related in any way to the localhost system users; they are
 purely Juju constructs.
 
-A *controller administrator* is a user who has access to the given controller's
-'admin' model. This Juju user is called 'admin' and is set up as part of the
+A *controller administrator* is a user who has access to the controller model. 
+This Juju user is called 'admin' and is set up as part of the
 controller creation step. Practically, this set of users is comprised of the
 controller creator and any user the creator/initial_admin has granted write
-access to the 'admin' model. Thus, there is no overarching "Juju administrator"
-since multiple controllers, and therefore multiple administrators, are
-possible.
+access to the 'controller' model. There is no overarching 
+"Juju administrator" since multiple controllers, and therefore multiple
+administrators, are possible.
 
 A *model owner* is the model creator or a user who has been designated as such
 during the model creation process.
 
-A *regular user* is one who is neither an administrator nor a model owner. Such a
-user requires access to a model in order to do anything at the Juju level. Note
-that although deemed "regular", such a user is far from ordinary since they can
-marshal the vast resources of the backing cloud and deploy complex
+A *regular user* is one who is neither an administrator nor a model owner. Such
+a user requires access to a model in order to do anything at the Juju level.
+Note that although deemed "regular", such a user is far from ordinary since they
+can marshal the vast resources of the backing cloud and deploy complex
 applications.
 
 

@@ -25,12 +25,12 @@
                 <li><a href="charms-destroy.html">Removing applications &amp; Units</a></li>
                 <li><a href="charms-service-groups.html">Groups of applications</a></li>
                 <li><a href="charms-ha.html">Charm high availability</a></li>
-                <li><a href="charms-bundles.html">Using bundles</a></li>
                 <li><a href="charms-working-with-units.html">Working with Units</a></li>
                 <li><a href="actions.html">Working with Actions</a></li>
                 <li><a href="charms-storage.html">Using storage</a></li>
             </ul>
         </li>
+        <li><a href="charms-bundles.html">Charm bundles</a></li>
         <li class="section"><a class="header" href="users.html">Users</a>
             <ul class="sub">
                 <li><a href="users-auth.html">Authentication</a></li>

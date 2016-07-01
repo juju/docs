@@ -1,6 +1,6 @@
-Title: Introducing Juju 2.0  
-TODO: Add extra changes as required  
-      Test upgrade instructions  
+Title: Introducing Juju 2.0
+TODO: Add extra changes as required
+      Test upgrade instructions
 
 # Introducing Juju 2.0
 
@@ -17,7 +17,7 @@ You can also review the [complete release notes here](./temp-release-notes.md).
 practically every command has changed! Really! Significant work has been done to
 make the commands more consistent, logical and easy to understand. For example, 
 instead of ```juju authorised-keys add <xxxx>``` you will now use the command
-   ```juju add-ssh-key <xxxx>```    
+   ```juju add-ssh-key <xxxx>```
    It reads better, is more straightforward, and 
 works really well with tab completion! The documentation has been updated to
 include all these new commands, so you can check relevant pages for guides to
@@ -43,13 +43,6 @@ models. You can find out more about setting up
 ## MAAS 2.0
 
 Juju supports MAAS 2.0, but at the moment, both MAAS and JUJU are in beta.
-
-To enable support for MAAS 2.0 in juju 2.0, you currently need to set an
-environment variable:
-
-```bash
-export JUJU_DEV_FEATURE_FLAGS=maas2
-```
 
 
 ## Upgrading from earlier versions

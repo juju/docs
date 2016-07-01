@@ -1,6 +1,6 @@
 Title: Getting started developing charms  
 
-# Getting Started Developing Charms
+# Getting Started developing charms
 
 The developer guide is for anyone wanting to write bits of code that we call
 charms. This guide introduces some new concepts that, once learned, can help
@@ -17,14 +17,10 @@ wish to configure the local provider such as LXC.
 
 ## Test your Juju setup
 You will want to make sure everything is running properly before writing code.
-Bootstrapping an environment is a good way to tell if the environment is
-configured correctly.
-
-For more information on these steps, read these pages and be sure to come back
-to continue the development journey.
-* [Installing Juju](./getting-started.html#installation)
-* [Configure the local environment](./config-local.html)
-* [Test your Juju setup](./getting-started.html#testing-your-setup)
+Bootstrapping a controller is a good way to tell if Juju is
+configured correctly. Please follow the steps at the
+['Getting Started' page in the user guide](./getting-started.html)
+to make sure you have a working local environment before procedding.
 
 This guide also uses the [Vanilla PHP Forum software](http://vanillaforums.org)
 as our example application for getting started charming, as it's a great example
@@ -118,6 +114,11 @@ mkdir -p $LAYER_PATH $INTERFACE_PATH
 
 cd $JUJU_REPOSITORY/layers
 ```
+
+!!! Note: Exporting the environment variables in this way only sets the
+variables for the current terminal. If you wish to make these changes persist,
+add the same export statements to a resource file that are evaluated when you
+create a new console such as ~/.bashrc depending on your environment.
 
 Once in the layers directory clone the example charm layer - layer-vanilla:
 

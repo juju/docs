@@ -1,18 +1,18 @@
-Title: Service configuration  
+Title: Application configuration  
 
-# Service Configuration
+# Application Configuration
 
-When deploying a service, the charm you use will often support or even require
-specific configuration options to be set.
+When deploying an application, the charm you use will often support or even
+require specific configuration options to be set.
 
 Juju provides tools to help manage these options and respond to changes over
-the lifetime of the service deployment. These options apply to the entire
-service, as opposed to only a specific unit or relation. The configuration can
-be modified by an administrator at deployment time or after the services are
-operational.
+the lifetime of the application deployment. These options apply to the entire
+application, as opposed to only a specific unit or relation. The configuration
+can be modified by an administrator at deployment time or after the applications
+are operational.
 
 
-## Discovering service configuration options
+## Discovering application configuration options
 
 Each charm will have its own set of options and possible values. You can
 discover these in several ways:
@@ -22,9 +22,9 @@ discover these in several ways:
   - By examining the **config.yaml** file in the charm itself.
 
 
-## Configuring a service at deployment
+## Configuring an application at deployment
 
-It is possible to set configuration values when deploying a service by
+It is possible to set configuration values when deploying an application by
 providing a [yaml-formatted][yaml] file containing configuration values.
 
 For example, upon investigation we discover that the Mediawiki charm allows us
@@ -38,7 +38,7 @@ mediawiki:
   admins: admin:admin
 ```
 
-We can then use this configuration when we deploy the service:
+We can then use this configuration when we deploy the application:
 
 ```bash
 juju deploy --config myconfig.yaml mediawiki
@@ -46,16 +46,16 @@ juju deploy --config myconfig.yaml mediawiki
 
 !!! WARNING: If the yaml configuration file cannot be read or contains some
 syntax errors or invalid options, you will receive an error message to this
-effect. However, **the service will still be deployed **. 
+effect. However, **the application will still be deployed **. 
 
 
-## Configuring a service which is already deployed
+## Configuring an application which is already deployed
 
-It is possible to set or change configuration of a service which is already
-deployed.
+It is possible to set or change configuration of an application which is
+already deployed.
 
 Before you set any of these options, you may want to check what current options
-are already set, using the `juju get-config <service>` command. For example:
+are already set, using the `juju get-config <application>` command. For example:
 
 ```bash
 juju get-config mediawiki
@@ -65,7 +65,7 @@ Should return something like this:
 
 ```no-highlight
 charm: mediawiki
-service: mediawiki
+application: mediawiki
 settings:
   admins:
     default: true
@@ -98,14 +98,14 @@ settings:
     value: false
 ```
 
-You can set the options using the `juju set-config <service>`, specifying
+You can set the options using the `juju set-config <application>`, specifying
 multiple space-separated key=value pairs if necessary:
 
 ```bash
 juju set-config mediawiki skin=monoblock name='Juju Wiki' 
 ```
 It is also possible to set the configuration options from a YAML file after
-the service has been deployed:
+the application has been deployed:
   
 ```bash
 juju set-config --config=m.yaml mediawiki
@@ -114,7 +114,7 @@ juju set-config --config=m.yaml mediawiki
   
 Setting an option back to its default value is achieved by using the 
 `set-config` command, but with the `--to-default` switch, followed by the 
-service and a space separated list of the values to return to the default
+application and a space separated list of the values to return to the default
 setting:
 
 ```bash

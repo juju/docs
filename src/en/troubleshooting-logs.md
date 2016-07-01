@@ -57,14 +57,14 @@ The `juju debug-log` command shows the consolidated logs of all Juju agents
 to change models. Alternatively, a model can be chosen with the '-m' option.
 The default model is the current model.
 
-The 'admin' model captures logs related to internal management (controller
+The 'controller' model captures logs related to internal management (controller
 activity) such as adding machines and services to the database. Whereas a
 hosted model will provide logs concerning activities that take place post-
 provisioning.
 
 Due to the above, when deploying a service, it is normal for there to be an
 absence of logging in the hosted model since logging first takes place in the
-'admin' model.
+'controller' model.
 
 The output is a fixed number of existing log lines (number specified by
 possible options; the default is 10) and a stream of newly appended messages.
@@ -196,7 +196,7 @@ the consolidated model messages used by `juju debug-log` (its contents get sent
 to the database):
 
 ```bash
-juju ssh -m admin 0 ls -lh /var/log/juju
+juju ssh -m controller 0 ls -lh /var/log/juju
 ```
 
 Output:
@@ -206,7 +206,7 @@ Output:
 -rw------- 1 syslog syslog  85K Apr 28 17:03 machine-0.log
 ```
 
-Notice that the admin model was chosen with `juju ssh`. Also, a combination of
+Notice that the controller model was chosen with `juju ssh`. Also, a combination of
 commands `juju list-controllers` and `juju list-machines` yielded that the
 controller here has a machine id of '0' (typical).
 

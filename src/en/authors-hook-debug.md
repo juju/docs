@@ -1,4 +1,4 @@
-Title: Debugging Juju charm hooks   
+Title: Debugging Juju charm hooks
 
 # Debugging hooks
 
@@ -6,9 +6,6 @@ Not everything works first time, and sometimes even when it does work, things
 don't happen quite as you expected. That's why Juju includes two tools to help
 you debug charm hooks: The `juju debug-hooks` command and the `juju debug-log`
 command.
-
-The [dhx debugging plugin](./authors-hook-debug-dhx.html) is also available.
-
 
 ##  The 'debug-hooks' command
 
@@ -27,9 +24,12 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 ```
 
-**Note:** It is possible and often desirable to run debug-hooks on more than
+!!! Note: It is possible and often desirable to run debug-hooks on more than
 one unit at a time. You should open a new terminal window for each.
 
+For developers who use the debug-hooks environment often there is the
+[dhx debugging plugin](./authors-hook-debug-dhx.html) which allows some
+additional customisation and convenience while debugging hooks.
 
 ## Running a debug session
 
@@ -71,9 +71,9 @@ queue until you exit your current window. See the  special considerations below.
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
 
-**Note:** To allow Juju to continue processing events normally, you **must**
-exit the hook execution window with the `exit` command, otherwise all further
-events on that unit will be paused indefinitely.
+!!! Note: To allow Juju to continue processing events normally, you **must**
+exit the hook execution with a zero return code (using the `exit` command),
+otherwise all further events on that unit may be blocked indefinitely.
 
 The queue can be halted by exiting with an `exit 1` command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending
@@ -85,6 +85,20 @@ You can finish your debugging session by closing all windows in the tmux
 session. Make sure to exit appropriately from all hook windows before
 terminating.
 
+### Retrying failed hooks
+
+Prior to version 2.0, hooks returning an error will block until the user
+takes an action to retry them manually, by issuing the command `juju resolved
+--retry unit-name/#` for the affected unit. Juju version 2.0 and up will
+automatically retry hooks in error periodically. However, the `juju resolved
+--retry` command may still be used to retry the hook immediately. After
+retrying, go back to the debug-hooks session to interact with he Juju
+environment.
+
+```bash
+juju resolved --retry mysql/0
+```
+
 ## Debugging early hooks
 
 The `install`, `config-changed`, and `start` hooks often execute quite soon
@@ -92,9 +106,7 @@ after the unit comes up, making it difficult to start a debug-hooks session in
 time to intercept them. If you're having difficulties, you can temporarily
 return an error code from your `install` hook (e.g. add an `exit 1` at the end
 of it), and start your session only when the unit reports an [error status
-](./authors-hook-errors.html). You should then run `juju resolved --retry` for
-the affected unit, and go back to the debug-hooks session to interact.
-
+](./authors-hook-errors.html).
 
 ## Special considerations
 
@@ -105,7 +117,6 @@ but you should be aware that multiple debug-hooks sessions for units assigned to
 the same machine will block one another, and that you can't control relative
 execution order directly (other than by erroring out of hooks you don't want to
 run yet, and retrying them later).
-
 
 ## The 'debug-log' command
 

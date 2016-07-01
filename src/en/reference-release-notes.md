@@ -1,4 +1,4 @@
-Title: Juju Release Notes  
+Title: Juju Release Notes
 
 # Release Notes History
 
@@ -186,10 +186,6 @@ The versions covered here are:
       images.ubuntu.com/daily
       Lp 1513982
 
-    * Rsyslog certificate fails when using ipv6/4 dual stack with
-      prefer-ipv6: true
-      Lp 1478943
-
     * Improper address:port joining
       Lp 1518128
 
@@ -336,15 +332,6 @@ The versions covered here are:
   MAAS 1.8 introduced a new feature called "devices". This allows the
   association of a "device", that requires an IP address, with a parent machine
   managed by MAAS. There is a view in the MAAS UI showing all devices.
-
-  With the "address-allocation" feature flag enabled, Juju will register LXC and
-  KVM containers as devices on MAAS 1.8+. They are visible in the MAAS UI. If
-  the environment is forcibly shut down, the IP addresses allocated to the
-  containers will be released by MAAS.
-
-  You can enable "address-allocation" is new Juju environments like so:
-
-      JUJU_DEV_FEATURE_FLAGS=address-allocation juju bootstrap
 
 
   ### Storage support for GCE and Azure providers
@@ -1716,26 +1703,6 @@ The versions covered here are:
   leader-settings-changed as soon as possible, delaying only doing so only
   to run the install hook; complete any queued or in-flight operation; or
   resolve a hook or upgrade error.
-
-
-  ### Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
-
-  The Juju AWS and MAAS providers now support starting LXC containers. The
-  MAAS providers also supports networking on KVM. Containers and Virtual
-  Machines will be given statically allocated private IP addresses from
-  the same subnet as their host machine. For example on MAAS you can now:
-
-  ```bash
-  juju deploy wordpress --to lxc:0
-  juju add-unit mysql --to kvm:1
-  ```
-
-  This experimental feature can be enabled when the environment is
-  bootstrapped like so:
-
-  ```no-highlight
-  JUJU_DEV_FEATURE_FLAGS="address-allocation" juju bootstrap
-  ```
    
   Known limitations: 
 

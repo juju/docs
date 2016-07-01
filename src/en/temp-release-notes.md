@@ -912,10 +912,11 @@ clouds:
       bootstrap-timeout: 900
       set-numa-control-policy: true
 
-### Juju Log forwarding
+### Juju Log Forwarding
 
-### 
+### Audit Logging
 
+In its initial implementation, audit logging is on by default.  The audit log will be in /var/log/juju/audit.log for each controller.
 
 ### Known issues
 
@@ -931,3 +932,58 @@ clouds:
   * Credentials files containing Joyent credentials must be updated to
     work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
     Storage")
+
+
+# Resolved issues
+
+  * Ha recovery fails in azure
+    Lp 1593299
+
+  * Cannot bootstrap in gce using jsonfile in credentials
+    Lp 1593761
+
+  * Juju beta9 does not support "lxc" notation in bundles
+    Lp 1593838
+
+  * Lxd container invalid parent device name
+    Lp 1594580
+
+  * Openstack invalid port range 0:0
+    Lp 1595278
+
+  * Configstore lock should use flock where possible
+    Lp 1467331
+
+  * Uniter-hook-execution error prevents  "resolve" unit.
+    Lp 1486712
+
+  * Bootstrap reports oath1 not supported with maas 2.0
+    Lp 1593566
+
+  * Maas provider bridge script on trusty does not handle lacp bonds
+    Lp 1594855
+
+  * Help text for juju login needs improving
+    Lp 1567951
+
+  * Help text for juju remove-unit needs improving
+    Lp 1567963
+
+  * Help text for juju sync-tools needs improving
+    Lp 1568090
+
+  * Juju status should show controller and model names
+    Lp 1571792
+
+  * Juju 2.0: default bootstrap-timeout insufficient for physical
+    machines
+    Lp 1576003
+
+  * Inconsistent capitalization in juju command help
+    Lp 1594232
+
+  * Juju possibly confuses account with credential in add-model
+    Lp 1594335
+
+  * Please alias 'relate' to 'add-relation'
+    Lp 1594875
