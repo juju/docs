@@ -74,16 +74,14 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 ```
 
-Additionally, if your hook is already in an error state, you can enter in an
-interactive hook context using the `juju debug-hooks` command. Juju version 2.0
-and greater will automatically retry the hooks in error state. Earlier versions
-of Juju can be manually retried by issuing the command
-`juju resolved --retry unit-name\#` for the affected unit, and go
-back to the debug-hooks session to interact with the Juju environment.
-
-```bash
-juju resolved mysql/0 --retry
-```
+Additionally, if your hook is already in an error state, you can enter into an
+interactive hook context using the `juju debug-hooks` command. The session is
+interactive because Juju will block allowing you to run the hooks manually to
+check the return code or edit hook files before running the next hook. To
+reach the hook context Juju must retry the failed hook. You can retry a hook in
+error by issuing the `juju resolved --retry` command. See the  [Retrying failed
+hooks](#retrying-failed-hooks) section for more information about how to retry
+hooks.
 
 !!! Note: It is possible and often desirable to run debug-hooks on more than
 one unit at a time. You should open a new terminal window for each.
@@ -145,6 +143,20 @@ You can finish your debugging session by closing all windows in the tmux
 session. Make sure to exit appropriately from all hook windows before
 terminating.
 
+## Retrying failed hooks
+
+Prior to version 2.0, hooks returning an error will block until the user
+takes an action to retry them manually, by issuing the command `juju resolved
+--retry unit-name/#` for the affected unit. Juju version 2.0 and up will
+automatically retry hooks in error periodically. However, the `juju resolved
+--retry` command may still be used to retry the hook immediately. After
+retrying, go back to the debug-hooks session to interact with he Juju
+environment.
+
+```bash
+juju resolved --retry mysql/0
+```
+
 ## Debugging early hooks
 
 The `install`, `config-changed`, and `start` hooks often execute quite soon
@@ -152,9 +164,8 @@ after the unit comes up, making it difficult to start a debug-hooks session in
 time to intercept them. If you're having difficulties, you can temporarily
 return an error code from your `install` hook (e.g. add an `exit 1` at the end
 of it), and start your session only when the unit reports an [error status
-](./authors-hook-errors.html). You should then run `juju resolved --retry` for
-the affected unit, and go back to the debug-hooks session to interact.
-
+](./authors-hook-errors.html). Use a debug-hooks session to interact with the
+environment and run the hook again.
 
 ## Special considerations
 
