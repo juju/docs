@@ -2,10 +2,10 @@ Title: Event Cycle
 
 # Event Cycle
 
- Taking a broad look at multiple services, there are several common events that
-each service goes through: install, configure, start, upgrade, and stop. To
-orchestrate services, Juju drives these events that a charm can respond to with
-executable files called hooks. Juju executes the specific hook for the
+Taking a broad look at multiple applications, there are several common events
+that each application goes through: install, configure, start, upgrade, and
+stop. To model applications, Juju drives these events that a charm can respond
+to with executable files called hooks. Juju executes the specific hook for the
 appropriate event.
 
 There are several core lifecycle hooks that can be implemented by any charm:  
@@ -74,15 +74,15 @@ related node, two additional events will be triggered. The first event
 other unit, to allow operations such as backup, or to allow graceful
 terminations of connections. The second event `[name]-relation-broken` is run
 when the relation no longer exists, where a charm might remove a system from a
-configuration and restart the service if necessary.
+configuration and restart a process if necessary.
 
 1. database-relation-departed
 1. database-relation-broken
 
 # Leader Events by example
 
-Software with many distributed services may require a notion of a “leader”, or a
-single service as the organizer of the other services. Such services often have
+Software with many distributed nodes may require a notion of a “leader”, or a
+single node as the organizer of the other nodes. Such applications often have
 “leader elections” or come to a “quorum” to determine the leader among
 themselves. The leadership hooks allow Juju to determine one leader and creates
 an event if the leader is ever destroyed or otherwise displaced.
@@ -95,8 +95,8 @@ documentation](./authors-charm-leadership.html).
 
 # Storage Events by example
 
-Many services require access to storage resources. Juju has events related to
-storage for the charm to respond to. There are two events related to storage,
+Many applications require access to storage resources. Juju has events related
+to storage for the charm to respond to. There are two events related to storage,
 so the charm can react storage is attached and when it is detached.
 
 1. [name]-storage-attached

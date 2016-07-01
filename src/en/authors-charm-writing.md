@@ -19,7 +19,7 @@ Vanilla forum software](http://vanillaforums.org/)
 
 As we are writing a charm, it makes sense to create it in a local charm
 repository (see how to deploy from a local repository
-[here](./charms-deploying.html)) to make it easy to test in your Juju 
+[here](./charms-deploying.html)) to make it easy to test in your Juju
 environment.
 
 Go to your home directory (or wherever is appropriate and make the appropriate
@@ -63,18 +63,18 @@ Here is a quick example README file for our Vanilla charm:
 
 ```no-highlight
  # Overview
- Vanilla is a powerful open source web-based forum. This charm will deploy 
- the forum software and connect it to a running MySQL database. This charm 
+ Vanilla is a powerful open source web-based forum. This charm will deploy
+ the forum software and connect it to a running MySQL database. This charm
  will install the Vanilla files in /var/www/vanilla/
  # Installation
- To deploy this charm you will need at a minimum: a cloud environment,
+ To deploy this charm you will need at a minimum: a cloud provider,
  working Juju installation and a successful bootstrap. Once bootstrapped,
  deploy the MySQL charm and then this Vanilla charm:
      juju deploy mysql
      juju deploy vanilla
  Add a relation between the two of them:
      juju add-relation mysql vanilla
- And finally expose the Vanilla service:
+ And finally expose the Vanilla application:
      juju expose vanilla
 ```
 Obviously, you can include any useful info you wish.
@@ -100,7 +100,7 @@ description: |
 tags: social
 ```
 
-The summary should be a brief description of the service being deployed, whereas
+The summary should be a brief description of the application being deployed, whereas
 the description can go into more detail.
 
 The next value to define is the tag. This is primarily for organising the
@@ -140,29 +140,28 @@ tags:
    - ecommerce
 ```
 
-Next we need to explain which services are actually provided by this service.
-This is done using an indent for each service provided, followed by a
-description of the interface. The interface name is important as it can be used
-elsewhere in the environment to relate back to this charm, e.g. when writing
-hooks.
+Next we need to define which relations are actually provided or required by
+this application. This is done by listing the relation type (provides,
+requires, or peers), the name of the relation, followed by the interface type,
+indenting each level.
 
-Our Vanilla charm is a web-based service which exposes a simple HTTP interface:
+Our Vanilla charm is a web-based application which "provides" a simple HTTP
+interface:
 
 ```yaml
-
 provides:
   website:
     interface: http
 ```
 
-The name given here is important as it will be used in hooks that we write
-later, and the interface name will be used by other charms which may want to
-relate to this one.
+The relation name given here (website) is important as it will be used to name
+the relation hooks that we write later. Juju uses the interface name to
+determine the other charms in the model which can be related to this one.
 
-Similarly we also need to provide a "requires" section. In this case we need a
-database. Checking out the metadata of the charm for MySQL we can see that it
-provides this via the interface name "mysql", so we can use this name in our
-metadata.
+Similarly we also need to provide a "requires" section. In this case vanilla
+needs a connection to a database. Checking out the metadata of the charm for
+MySQL we can see that it provides this via the interface name "mysql", so we
+can use this name in our metadata.
 
 The final file should look like this:
 
@@ -185,7 +184,7 @@ requires:
 
 For some charms you will want a "peers" section also. This follows the same
 format, and its used for optional connections, such as you might use for
-interconnecting services in a cluster
+interconnecting applications in a cluster
 
 ## Writing hooks
 
@@ -196,14 +195,14 @@ execute on your deployed environment (e.g. Ubuntu Server).
 
 For our charm, the hooks we will need to create are:
 
-  - start - for when the service needs to be started.
+  - start - for when the application needs to be started.
   - stop - for stopping it again.
   - install - for actually fetching and installing the Vanilla code.
-  - database-relation-changed - this will run when we connect (or re-connect, 
-    or disconnect) our service to the MySQL database. This hook will need to 
+  - database-relation-changed - this will run when we connect (or re-connect,
+    or disconnect) our application to the MySQL database. This hook will need to
     manage this connection.
-  - website-relation-joined - this will run when/if a service connects to our 
-    charm.
+  - website-relation-joined - this will run when/if a application connects to
+    our charm.
 
 So first up we should create the hooks directory, and start creating our first
 hook:
@@ -247,8 +246,8 @@ chmod +x start
 ```
 
 With the easy bit out of the way, how about the install hook? This needs to
-install any dependencies, fetch the actual software and do any other config and
-service jobs that need to happen. Here is an example for our vanilla charm:
+install any dependencies, fetch the actual software and do any other
+application specific configuration. Here is an example for our vanilla charm:
 
 ```bash
 #!/bin/bash
@@ -290,7 +289,7 @@ EOF
 a2dissite 000-default
 a2ensite vanilla
 service apache2 reload
-status-set blocked "Waiting for active database connection" 
+status-set blocked "Waiting for active database connection"
 ```
 
 We aren't going to go for a line-by-line explanation of that, but there are a
@@ -298,25 +297,25 @@ few things worth noting
 
 Firstly, note the use of the -y option of the apt-get command. this assumes a
 'yes' answer to any questions and removes any manual install options (e.g.
-services that run config dialogs when they install).
+packages that have configuration dialogs when they install).
 
 In our script, we are fetching the tarball of the Vanilla software. In these
 cases, it is obviously always better to point to a specific, permanent link to a
 version of the software.
 
-Also, you will notice that we have used the `juju-log` command and the 
+Also, you will notice that we have used the `juju-log` command and the
 `status-set` command. These are helper commands for Juju hooks (known as
 "Hook tools") and you will find them covered in more detail
 in the ["how hooks are run" page](authors-hook-environment.html).
 
 The `status-set` command is used to update the status and message displayed by
-Juju when users run the `juju status` command to see what is going on in the 
-environment. There are a number of pre-defined statuses explained in more 
+Juju when users run the `juju status` command to see what is going on in the
+environment. There are a number of pre-defined statuses explained in more
 detail [status reference page](reference-status.html). It is a good idea
 to think about updating the status when significant events occur which have an
-effect on the operation of the service.
+effect on the operation of the application.
 
-The `juju-log` command basically spits messages out into the Juju log, which is 
+The `juju-log` command basically spits messages out into the Juju log, which is
 very useful for testing and debugging. We will cover that in more detail later
 in this walk through.
 
@@ -354,13 +353,13 @@ status-set active
 open-port 80
 ```
 
-You will notice that this script uses the backticked command relation-get. This
-is another Juju Hook tool, which in this case fetches the named values from 
-the corresponding hook on the service we are connecting to. Usually there will
-be some indication of what these values are, but you can always inspect the
-corresponding hooks to find out. In this case we know that when connected, the 
-'mysql' charm will create a database and generate random values for things like a
-username and password.
+You will notice that this script uses the backticked command **relation-get**.
+This is another Juju Hook tool, which in this case fetches the named values from
+the corresponding hook on the charm we are connecting to. Usually there will be
+some indication of what these values are, but you can always inspect the
+corresponding hooks to find out. In this case we know that when connected, the
+'mysql' charm will create a database and generate random values for things like
+a username and password.
 
 Interfaces in general are determined by the consensus of the charms which use
 them. There is a lot [more information on decoding interfaces here](./authors-
@@ -373,10 +372,11 @@ checks one value to see if it exists - if not the corresponding charm hasn't set
 the values yet.
 
 When it has the values we can use these to modify the config file for Vanilla in
-the relevant place, and finally open the port to make the service active.
+the relevant place, and finally open the port to make the application
+accessible.
 
-The final hook we need to write is for other services which may want to consume
-Vanilla, `website-relation-joined`.
+The final hook we need to write is `website-relation-joined` for other
+applications which may want to connect to Vanilla via the website relation:  
 
 ```bash
 #!/bin/sh
@@ -384,14 +384,14 @@ relation-set hostname=`unit-get private-address` port=80
 ```
 
 Here we can see the other end of the information sharing - in this case
-relation-set exposes the given values to the connecting charm. In this case one
-of the commands is backticked, as unit-get is another helper command, in this
-case one which returns the requested value from the machine the charm is running
-on, specifically here it's IP address.
+**relation-set** exposes the given values to the connecting charm. In this case
+one of the commands is backticked, as **unit-get** is another helper command,
+in this case one which returns the requested value from the machine the charm
+is running on, specifically here it is the private IP address.
 
 So, any connecting charm will be able to ask for the values `hostname` and
-`port`. Remember, once you have finished writing your hooks make sure you `chmod
-+x` them.
+`port`. Remember, once you have finished writing your hooks make sure they are
+all executable by using the `chmod +x` command.
 
 For our simplistic charm, that is all the hooks we need for the moment, so now
 we can test it out!
@@ -437,7 +437,7 @@ juju debug-log
 
 This starts a process to tail the Juju log file and show us just exactly what is
 happening. It won't do much to begin with, but you should see messages appearing
-when we start to deploy our charm. See 
+when we start to deploy our charm. See
 [Viewing logs](./troubleshooting-logs.html#the-debug-log-command) for more details.
 
 Following our own recipe, in another terminal we should now do the following
@@ -470,8 +470,8 @@ With the charm working properly, you may consider everything a job well done. If
 your charm is really great and you want to share it, particularly on the charm
 store, then there are a couple of things you ought to add.
 
-1. Create a file called 'copyright' and place whatever license information you 
+1. Create a file called 'copyright' and place whatever license information you
    require in there.
-1. Add a beautiful icon 
+1. Add a beautiful icon
    ([there is a guide to making one here](./authors-charm-icon.html)) so others
    can recognise it in the charm store!

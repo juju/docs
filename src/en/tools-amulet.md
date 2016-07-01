@@ -3,13 +3,13 @@ Title: Amulet
 # Amulet, a Juju test library
 
 Amulet is a Python library for deploying, manipulating, and testing Juju
-workloads (collections of related services).
+workloads (collections of related applications).
 
 With Amulet you can:
 
-* Deploy, relate, configure, and scale services imperatively
+* Deploy, relate, configure, and scale applications imperatively
 * Deploy a preconfigured workload using a bundle file
-* Execute service actions and inspect the results
+* Execute application actions and inspect the results
 * Run arbitrary commands against deployed units and inspect the results.
 
 ## Getting Started

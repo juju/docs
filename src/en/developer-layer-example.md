@@ -42,7 +42,7 @@ cd $LAYER_PATH/vanilla
 !!! Note: Exporting the environment variables in this way only sets the
 variables for the current terminal. If you wish to make these changes persist,
 add the same export statements to a resource file that are evaluated when you
-create a new console such as ~/.bashrc depending on your environment.
+create a new console such as ~/.bashrc depending on your shell.
 
 ### Determine a base layer and additional relations
 

@@ -99,14 +99,15 @@ files for that unit (in `/var/log/juju/`).
 When the first hook event is queued for a hook that is in the list of those to
 be debugged:
 
-  - a new window will be attached to the tmux session.
-  - the bottom left of the status bar will change to indicate the current hook
+  - A new window will be attached to the tmux session.
+  - The bottom left of the status bar will change to indicate the current hook
 that has been trapped.
-  - the prompt will change to indicate the hook related to the window (e.g.
+  - The prompt will change to indicate the hook related to the window (e.g.
 `mysql/0:db-relation-joined %`)
-  - the shell will be running in the standard [hook
-environment](./authors-hook-environment.html).
-  - additionally, `$JUJU_HOOK_NAME` is set appropriately.
+  - The shell will be running in the standard [hook
+context](./authors-hook-environment.html).
+  - Additionally, the environment variable`$JUJU_HOOK_NAME` is set
+appropriately.
   ![Image showing tmux debug hooks session](./media/authors-hook-debug-1.png)
 
 To proceed, you should **manually execute the hook**, or perform whatever other

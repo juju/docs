@@ -2,15 +2,15 @@ Title: Writing charms using resources
 
 # Writing charms that use resources
 
-Many applications require binary resources to complete the install process. 
-While it is possible for a charm to download this software from package 
-repositories or other locations, some charms may be deployed in network 
-restricted environments that do not allow access to all areas of the Internet.
-It may also be desirable to more strictly control what specific resources are 
-deployed.
+Many applications require binary resources to complete the install process.
+While it is possible for a charm to download this software from package
+repositories or other locations, some charms may be deployed in data centers
+with restrictive firewalls that do not allow access to all areas of the
+Internet. It may also be desirable to more strictly control what specific
+resources are  deployed.
 
 Starting with Juju 2.0, users can upload resources to the controller
-or the Juju Charm Store from where they are accessible to charms. 
+or the Juju Charm Store from where they are accessible to charms.
 
 # How it works
 
@@ -26,15 +26,15 @@ resources:
     filename: software.zip
     description: "One line description that is useful when operators need to push it."
 ```
-The `filename` is what Juju will name the file locally when it is downloaded. 
-Juju will check the extension on the file being uploaded and will prevent 
+The `filename` is what Juju will name the file locally when it is downloaded.
+Juju will check the extension on the file being uploaded and will prevent
 files with different extensions from being uploaded.
 
 # Managing resources
 
 Resources can be uploaded to a local Juju controller, where only charms from
-that controller can access the resources, or to the Juju Charm Store where 
-access is controlled by permissions assigned to the charms to which the 
+that controller can access the resources, or to the Juju Charm Store where
+access is controlled by permissions assigned to the charms to which the
 resources are attached.
 
 ## Listing resources
@@ -84,7 +84,7 @@ juju attach charm-name resource-name=filepath
 ```
 
 If you attach a resource to a running charm the `upgrade-charm` hook is run.
-This gives charm authors the ability to handle new resources appropriately. 
+This gives charm authors the ability to handle new resources appropriately.
 
 ### juju deploy
 
@@ -117,7 +117,7 @@ file for a named resource.
 
 If `resource-get` has not been run for the named resource previously, then the
 resource is downloaded from the controller at the revision associated with the
-unit's application. That file is stored in the unit's local cache. If 
+unit's application. That file is stored in the unit's local cache. If
 `resource-get` *has* been run before then each subsequent run synchronizes the
 resource with the controller. This ensures that the revision of the unit-local
 copy of the resource matches the revision of the resource associated with the

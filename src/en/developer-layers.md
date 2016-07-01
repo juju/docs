@@ -13,10 +13,10 @@ and tightly focused as possible?
 Enter the concept of building charms from layers. Layers let you build on the
 work of other charmers, whether that work is in the form of other charms that
 you can extend and modify, interfaces that are already built for you and know
-how to communicate with a remote service and let you know when that service is
-ready and what it provides for you, or partial base layers that make managing
-dependencies much easier. And it does this in a consistent, repeatable, and
-audit-able way.
+how to communicate with a remote application and let you know when that
+application is ready and what it provides for you, or partial base layers that
+make managing dependencies much easier. And it does this in a consistent,
+repeatable, and audit-able way.
 
 # What are layers?
 
@@ -62,8 +62,8 @@ can be done trivially by building the base layer off of layer-basic.
 
 Interface layers are perhaps the most misunderstood type of layer, and are
 responsible for the communication that transpires over a relation between two
-services. This type of layer encapsulates a single “interface protocol” and is
-generally written and maintained by the author of the primary charm that
+applications. This type of layer encapsulates a single “interface protocol” and
+is generally written and maintained by the author of the primary charm that
 provides that interface. However, it does cover both sides (provides and
 requires) of the relation and turns the two-way key-value store that are Juju
 relations under-the-hood into a full-fledged API for interacting with charms
@@ -106,7 +106,7 @@ for the layer, or related layers to subscribe to these states and take action
 only when appropriate. Consider the example illustrated in the [Getting
 Started]() guide. `apache.available` is set from the apache-php layer. Any
 layers built on top of the apache-php layer can subscribe to this state with a
-`@when` decorator to take action only after the Apache service has been started.
+`@when` decorator to take action only after the Apache application has been started.
 subsequently the `@when_not` decorator has also been made to assist guarding
 against running code when a state has been set, which lends itself nicely to
 idempotent behavior.

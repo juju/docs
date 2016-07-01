@@ -2,15 +2,15 @@ Title: How to become a Juju charm author
 
 # Becoming a charm author
 
-Juju makes deploying cloud services spectacularly easy. One of the key
+Juju makes deploying cloud applications spectacularly easy. One of the key
 components of the Juju ecosystem that makes this possible is the wealth of
 quality, reliable charms enabling users to quickly and reliably deploy all
 sorts of software, from simple web-based forums to a complete OpenStack
 install.
 
-There are however times when the particular service you want to use
+There are however times when the particular application you want to use
 doesn't have a charm available - maybe it is your own project? Or perhaps
-the existing charm for a service doesn't work in precisely the way you want.
+the existing charm for a application doesn't work in precisely the way you want.
 Whatever your reasons for writing a charm, this section of the documentation
 will guide you through the process.
 

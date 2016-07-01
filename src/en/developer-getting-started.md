@@ -11,16 +11,16 @@ To develop charms you will need the Juju client installed. The Juju client is
 available for Linux, Windows and Mac OS.
 
 ## Configure Juju
-Juju needs to be configured before it can orchestrate an environment. Juju
-defaults to an Amazon EC2 environment, but for testing and development you may
-wish to configure the local provider such as LXC.
+Juju needs to be configured before it can model, configure or manage
+applications. Juju defaults to an Amazon EC2 provider, but for testing and
+development you may wish to configure the local provider such as LXD.
 
 ## Test your Juju setup
 You will want to make sure everything is running properly before writing code.
 Bootstrapping a controller is a good way to tell if Juju is
 configured correctly. Please follow the steps at the
 ['Getting Started' page in the user guide](./getting-started.html)
-to make sure you have a working local environment before procedding.
+to make sure you have a working local model before proceeding.
 
 This guide also uses the [Vanilla PHP Forum software](http://vanillaforums.org)
 as our example application for getting started charming, as it's a great example
@@ -62,25 +62,25 @@ tools available on the web. Google Draw, DIA, Gliffy, or Draw.io, just to name a
 few.
 
 The visual representation of your charm deployment will help to solidify the
-configuration, deployment, and management of your service. Take the following
-example:
+configuration, deployment, and management of your application. Take the
+following example:
 
 ![Charm Design Diagram](./media/vanilla-planning.png)
 
 Looking at this diagram we see the Vanilla charm with two units. The Vanilla
-service requires a relationship to a database using the “mysql” interface. The
-MariaDB charm implements the mysql interface, which fulfills the db relation and
-is already in [the charm store](https://jujucharms.com/mariadb).
+application requires a relationship to a database using the “mysql” interface.
+The MariaDB charm implements the mysql interface, which fulfills the db relation
+and is already in [the charm store](https://jujucharms.com/mariadb).
 
 ## Writing your Charm
 
 The fastest way to write a new charm is to build off of existing layers. This
-allows you to create code that is very focused for the service you are trying
-to implement.
+allows you to create code that is very focused for the application you are
+trying to implement.
 
 Layers let you build on the work of other charmers, whether that work is in the
 form of other charms that you can extend and modify, interfaces that communicate
-with remote services, or partial base layers that make managing dependencies
+with remote applications, or partial base layers that make managing dependencies
 much easier. And it does this in a consistent, repeatable, and incremental way.
 
 The available layers and interfaces can be found at
@@ -118,7 +118,7 @@ cd $JUJU_REPOSITORY/layers
 !!! Note: Exporting the environment variables in this way only sets the
 variables for the current terminal. If you wish to make these changes persist,
 add the same export statements to a resource file that are evaluated when you
-create a new console such as ~/.bashrc depending on your environment.
+create a new console such as ~/.bashrc depending on your shell.
 
 Once in the layers directory clone the example charm layer - layer-vanilla:
 
@@ -174,10 +174,10 @@ juju expose vanilla
 
 Because Juju is a large complex system, not unlike a Linux software
 distribution, there is a need to test the charms themselves and how they
-interact with one another. All new charms require tests that verify the service
-installs, configures, scales and relates as intended. The tests should be
-self-contained, installing all the required packages so the tests can be run
-automatically with a tool called
+interact with one another. All new charms require tests that verify the
+application installs, configures, scales and relates as intended. The tests
+should be self-contained, installing all the required packages so the tests can
+be run automatically with a tool called
 [`bundletester`](https://github.com/juju-solutions/bundletester). Similar to
 hooks the tests should be executable files in a `tests/` directory of the charm.
 While you can write tests in Bash or other languages, the [Amulet

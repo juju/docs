@@ -17,7 +17,7 @@ on how people are using Juju.
 
 - Check out the [Juju cheat sheet](https://github.com/juju/cheatsheet)
 - Check out the [Juju plugins](https://github.com/juju/plugins)
-- if you run under "local" environment and your LXC machine get unexpected
+- if you run under "local" provider and your LXC machine get unexpected
   network errors try
   [disabling IPv6](http://askubuntu.com/questions/440649/how-to-disable-ipv6-in-ubuntu-14-04)
   on the main host.
@@ -60,17 +60,17 @@ the devops community.
 
 Tips for production usage:
 
-  - Provide an overview of the service in the README and metadata.
+  - Provide an overview of the application in the README and metadata.
   - Use packaged software (i.e. Debian packages) where possible, and "backport"
     any packages needed outside of the archives from whatever PPA you have them
     to an internal accessible repository.
-  - Do not duplicate any service components for which there are pre-existing
+  - Do not duplicate any application components for which there are pre-existing
     charms.
   - Follow the coding guidelines for charms (see below).
   - Assemble code for your application outside of the Charm.
-  - Create a `/srv/${external-service-name}/${instance-type}/${service-name}`
+  - Create a `/srv/${external-application-name}/${instance-type}/${application-name}`
     directory for the code itself, and
-    `/srv/${external-service-name}/{${instance-type}-logs,scripts,etc,var}` as
+    `/srv/${external-application-name}/{${instance-type}-logs,scripts,etc,var}` as
     needed.
   - Ensure the owner of the code isn't the same user than runs the code
   - Create monitoring checks for your application.
@@ -81,12 +81,12 @@ Tips for production usage:
     developers, and in what format?
   - Some organizations use proxies, do not assume that every port is available,
     consider using common ports like 80/443 to ensure your charm can run in as
-    many environments as possible. For added flexibility we recommend exposing
+    many providers as possible. For added flexibility we recommend exposing
     port configuration in the charm as a config option.
   - The configuration should not be 
     [immutable](http://en.wikipedia.org/wiki/Immutable_object). 
     This means that the charm should react to all configuration options as they
-    are changed throughout the lifecycle of that service. Immutable
+    are changed throughout the lifecycle of that application. Immutable
     configuration breaks the user experience, and should only be used to prevent
     data loss. If a user deploys a charm and later sets the configuration values
     the user would expect the charm to react to those changes accordingly.

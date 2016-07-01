@@ -10,9 +10,9 @@ thereby cause changes to the world.
 Whenever a hook-worthy event takes place, the unit agent first checks whether
 that hook is being [debugged](./authors-hook-debug.html), and if so hands over
 control to the user. Otherwise, it tries to find a hook with precisely the right
-name. If the hook doesn't exist, the agent continues without complaint; if it
-does, it is invoked without arguments in a specific
-[environment](./authors-hook-environment.html), and its output is written to
+name. If the hook doesn't exist, the agent continues without complaint; if the
+hook does exist, it is invoked without arguments in a specific
+[hook context](./authors-hook-environment.html), and its output is written to
 the unit agent's log. If it returns a non-zero exit code, the agent enters an
 [error state](./authors-hook-errors.html) and awaits user intervention.
 
@@ -57,9 +57,11 @@ one-time setup operations only.
 
   - immediately after "install"
   - immediately after "upgrade-charm"
-  - at least once when the unit agent is restarted (but, if the unit is in an [error state](./authors-hook-errors.html), it won't be run until after the error state is cleared).
+  - at least once when the unit agent is restarted (but, if the unit is in an
+[error state](./authors-hook-errors.html), it won't be run until after the
+error state is cleared).
   - after changing charm configuration using a command line interface
-  
+
 It cannot assume that the software has already been started; it should not start
 stopped software, but should (if appropriate) restart running software to take
 configuration changes into account.
@@ -184,21 +186,36 @@ runtime relations in play with the same name, and that they're independent: one
 
 If you follow the [tutorial](./authors-charm-writing.html), you'll get a good
 sense of the basics. To fill out your knowledge, you'll want to study the hook
-[environment and tools](./authors-hook-environment.html), and to experiment with
+[context and tools](./authors-hook-environment.html), and to experiment with
 [debug-hooks](./authors-hook-debug.html).
 
 Independent of the nuts and bolts, though, good hooks display a number of useful
 high-level properties:
 
-  - They are _idempotent_: that is to say that there should be no observable difference between running a hook once, and running it N times in a row. If this property does not hold, you are likely to be making your own life unnecessarily difficult: apart from anything else, the average user's most likely first response to a failed hook will be to try to run it again (if they don't just skip it).
-  - They are _easy to read_ and understand. It's tempting to write a single file that does everything, and which just calls different functions internally depending on the value of `argv[0]`, and to symlink that one file for every hook; but such structures quickly become unwieldy.
-The time taken to write a library, separate from the hooks, is very likely to be
-well spent: it lets you write single hooks that are clear and focused, and
-insulates the maintainer from irrelevant details.
+  - They are _idempotent_: that is to say that there should be no observable
+difference between running a hook once, and running it N times in a row. If
+this property does not hold, you are likely to be making your own life
+unnecessarily difficult: apart from anything else, the average user's most
+likely first response to a failed hook will be to try to run it again
+(if they don't just skip it).
+  - They are _easy to read_ and understand. It's tempting to write a single
+file that does everything, and which just calls different functions internally
+depending on the value of `argv[0]`, and to symlink that one file for every
+hook; but such structures quickly become unwieldy. The time taken to write a
+library, separate from the hooks, is very likely to be well spent: it lets you
+write single hooks that are clear and focused, and insulates the maintainer
+from irrelevant details.
 
-  - Where possible, they reuse [common code](https://launchpad.net/charm-tools) already written to ease or solve common use cases.
-  - They do not return [errors](./authors-hook-errors.html) unless there is a good reason to believe that they cannot be resolved without user intervention. Doing so is an admission of defeat: a user who sees your charm returning an error state is unlikely to have the specific expertise necessary to resolve it. If you have to return an error, please be sure to at least write any context you can to the log before you do so.
-  - They write only _very_ sparingly to the [charm directory](./authors-charm-components.html).
+  - Where possible, they reuse [common code](https://launchpad.net/charm-tools)
+already written to ease or solve common use cases.
+  - They do not return [errors](./authors-hook-errors.html) unless there is a
+good reason to believe that they cannot be resolved without user intervention.
+Doing so is an admission of defeat: a user who sees your charm returning an
+error state is unlikely to have the specific expertise necessary to resolve it.
+If you have to return an error, please be sure to at least write any context
+you can to the log before you do so.
+  - They write only _very_ sparingly to the
+[charm directory](./authors-charm-components.html).  
 
 We recommend you also familiarise yourself with the [best practices](./authors-
 charm-best-practice.html) and, if you plan to distribute your charm, the [charm

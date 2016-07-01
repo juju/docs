@@ -2,7 +2,7 @@ Title: Juju actions
 
 # Juju Actions
 
-Juju charms can describe *actions* that users can take on deployed services.
+Juju charms can describe *actions* that users can take on deployed applications.
 
 Actions are scripts that can be triggered on a unit via the CLI or the [Juju
 GUI](controllers-gui.html). Parameters for an action are passed as a map,
@@ -19,7 +19,7 @@ The following commands are specified for dealing with actions:
 `juju show-action-output` - show output of an action by ID  
 `juju show-action-status` - show status of all actions filtered by optional ID  
 
-## Action commands 
+## Action commands
 
 ### `juju list-actions`
 
@@ -32,7 +32,7 @@ supports with the following command:
 juju list-actions git
 ```
 
-You should see something similar to this: 
+You should see something similar to this:
 
 ```bash
 add-repo: Create a git repository.
@@ -139,7 +139,7 @@ This will output the status of the action, shown here as 'completed':
 
 ```bash
 actions:
-- id :3a7cc626-4c4c-4f00-820f-f881b79586d1 
+- id :3a7cc626-4c4c-4f00-820f-f881b79586d1
   status: completed
   unit: git/0
 ```
