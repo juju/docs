@@ -1,33 +1,16 @@
-# Juju 2.0-beta10
+# Juju 2.0-beta11
 
-A new development release of Juju, juju 2.0-beta10, is now available.
-This release replaces version 2.0-beta9.
+A new development release of Juju, juju 2.0-beta11, is now available.
+This release replaces version 2.0-beta10.
 
+## What's New in Beta11
 
-## Getting Juju
-
-Juju 2.0-beta10 is available for Yakkety and backported to earlier
-series in the following PPA:
-
-    https://launchpad.net/~juju/+archive/devel
-
-Windows, Centos, and OS X users will find installers at:
-
-    https://launchpad.net/juju-core/+milestone/2.0-beta10
-
-Upgrading 1.x environments to 2.0-beta10 is not yet supported. Once 2.x is
-proven we will provide an upgrade path from 1.25
-
-
-## What's New in Beta10
-
-* Improved handling of LACP bonds
-* Continued usability enhancements
-  * Users can now use `juju relate` to add a relation between applications
-  * Additional `juju status` enhancements
-* Bundles requesting legacy 'lxc' type will automatically get new 'lxd' 
-  containers
-
+* Config can now be associated with clouds in clouds.yaml
+* Consistent wire protocol for the Juju API. For more details, see:   
+  https://lists.ubuntu.com/archives/juju-dev/2016-June/005715.html
+* Initial support for:
+    * Juju log forwarding
+    * Audit logging
 
 ## Notable Changes
 
@@ -58,6 +41,9 @@ proven we will provide an upgrade path from 1.25
 * Automatic Retries of Failed Hooks
 * Enhancements to juju run
 * SSH Host Key Checking
+* Config can be included in clouds.yaml
+* Juju log forwarding
+* Audit logging
 * Known Issues
 
 
@@ -191,7 +177,7 @@ The main new commands of note are:
     juju grant
     Juju revoke
     juju list-shares
-    juju use-model
+    juju use-model 
     juju list-users
     juju switch-user
 
@@ -268,7 +254,7 @@ https://jujucharms.com/docs/devel/controllers
 https://jujucharms.com/docs/devel/models
 
 
-#### LXD, Manual, and MAAS Providers
+#### LXD, Manual, and MAAS Providers 
 
 To bootstrap models using the LXD, manual, and MAAS providers, see the special clouds section of: https://jujucharms.com/docs/devel/clouds
 
@@ -356,7 +342,7 @@ key-id, manta-url
 ### Native Support for Charm Bundles
 
 The Juju 'deploy' command can now deploy a bundle. A bundle is a
-collection of charms that together create an entire system. The
+collection of charms that together create an entire system. The 
 Juju Quickstart or Deployer plugins are no longer needed to deploy
 a bundle of charms. See: https://jujucharms.com/docs/devel/charms-bundles
 
@@ -416,15 +402,15 @@ to utilize a cloud provider.
 
 LXD has been made available in Trusty backports, but needs manual
 dependency resolution:
-
+        
     sudo apt-get --target-release trusty-backports install lxd
-
+        
 Before using a locally running LXD after installing it, either through
 Juju or the LXD CLI ("lxc"), you must either log out and back in or run
 this command:
-
+        
     newgrp lxd
-
+               
 See: https://linuxcontainers.org/lxd/getting-started-cli/
 
 
@@ -464,7 +450,7 @@ allocating more machines than there are public IP addresses.
 
 A new provider has been added that supports hosting a Juju model in
 Rackspace Public Cloud. As Rackspace Cloud is based on OpenStack,
-most of the features and configuration options for those two
+most of the features and configuration options for those two 
 providers are identical.
 
 
@@ -473,7 +459,7 @@ providers are identical.
 While bootstrapping, you can now specify constraints for the bootstrap
 machine independently of the application constraints:
 
-    juju bootstrap --constraints <application-constraints>
+    juju bootstrap --constraints <application-constraints> 
         --bootstrap-constraints <bootstrap-machine-constraints>
 
 You can also specify the series of the bootstrap machine:
@@ -627,7 +613,7 @@ address to use for a given unit.
 There is currently a mandatory '--primary-address' argument to 'network-
 get', which guarantees a single IP address to be returned.
 
-Example (within a charm hook):
+Example (within a charm hook): 
 
     relation-ids cluster
     url:2
@@ -693,14 +679,14 @@ Three new commands have been introduced:
 1.  juju list-resources
 
     usage: juju list-resources [options] application-or-unit
-
+    
     This command shows the resources required by and those in use by an
     existing application or unit in your model.
 
 2.  juju push-resource
 
     usage: juju push-resource [options] application name=file
-
+    
     This command uploads a file from your local disk to the juju
     controller to be used as a resource for a application.
 
@@ -915,6 +901,72 @@ The SSH host keys of Juju managed machines are now tracked and are verified by t
 
 The host key checks can be disabled using the new --no-host-key-checks option for Juju’s SSH related commands. Routine use of this option is strongly discouraged.
 
+### Config can be included in clouds.yaml
+The cloud definitions in the clouds.yaml file can contain a config section which contains configuration attributes which will be used for all models hosted by the controller.
+
+clouds:
+  home-maas:
+    type: maas
+    config:
+      bootstrap-timeout: 900
+      set-numa-control-policy: true
+
+### Juju Log Forwarding
+
+Log forwarding is a bare bones implementation which is undergoing ongoing development work to improve the user experience. It should be considered only as a proof of concept. When enabled, log messages for all hosted models in a controller are forwarded to a syslog server. Currently, all required config to activate the feature needs to be provided at bootstrap via a config.yaml file. 
+
+$ juju bootstrap <controllername> <cloud> --config logconfig.yaml
+
+The contents of the yaml file should currently be as follows:
+
+syslog-host: <host>:<port>
+syslog-ca-cert: |
+  -----BEGIN CERTIFICATE-----
+  <cert-contents>
+  -----END CERTIFICATE-----
+syslog-client-cert: |
+  -----BEGIN CERTIFICATE-----
+  <cert-contents>
+  -----END CERTIFICATE-----
+syslog-client-key: |
+  -----BEGIN PRIVATE KEY-----
+  <cert-contents>
+  -----END PRIVATE KEY-----
+
+#### Wire Format
+Syslog messages will be sent using the RFC 5424 message format.  We make use of the structured data facility defined in the more recent RFC.
+
+Log Messages:
+The facility code will be 1 (user level message). Severity will be mapped as follows:
+Juju ERROR = Error (3)
+Juju WARNING = Warning (4)
+Juju INFO = Informational (6)
+Juju DEBUG = Debug (7)
+Juju TRACE = Debug (7)
+
+Messages will use structured data to record relevant environment and user action parameters. Key pair definitions will be:
+
+SDID: origin
+enterpriseId: 28978 (Canonical, Ltd.)
+software: jujud
+swVersion: <the Juju version of the running agent>
+
+SDID: model@28978
+controller-uuid: <the uuid of the controller from which the message originates>
+model-uuid: <the uuid of the model from which the message originates>
+
+SDID: log@28978
+source: <the name of the source filename from which the message originates>:<the source line number>
+module: <the name of the source “module”>
+#### Example log (error) message
+
+<11>1 2016-02-28T09:57:10.804642398-05:00 172.12.3.1 juju - - [origin enterpriseId="28978" software="jujud" "2.0.0"] [model@28978 controller-uuid="deadbeef" model-uuid="deadbeef"] [log@28978 source-file="provider/ec2/storage.go" source-line="60"] Could not initialise machine block storage
+
+### Audit Logging
+
+In its initial implementation, audit logging is on by default.  The audit log will be in /var/log/juju/audit.log for each controller machine.  If running in an HA environment, the audit.log files on each controller machine must be collated to get a complete log.  Future releases will provide a utility to merge the logs, akin to debug-log.
+
+Since users may interact with Juju from multiple sources (CLI, GUI, deployer, etc.), audit log entries record the API calls made, rather than only reporting CLI commands run. Only those API calls originating from authenticated users calling the external API are logged.
 
 ### Known issues
 
@@ -922,14 +974,15 @@ The host key checks can be disabled using the new --no-host-key-checks option fo
     Lp 1547665
   * Cannot deploy a dense openstack bundle with native deploy
     Lp 1555808
-  * LXD containers /etc/network/interfaces as generated by Juju gets
-    overwritten by LXD container start
-    Lp 1566801
+  * Cannot get status after restore is denied
+    Lp 1595686
+  * [aws] adding a machine post-bootstrap on the controller model closes of
+    api port in controller security group
+    Lp 1598164
   * Credentials files containing Joyent credentials must be updated to
-    work with beta3 and later (See "Joyent Provider No Longer Uses Manta
+    work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
     Storage")
-  * In some configurations, juju never achieves HA on maas 1.9 with trusty
-    Lp 1596066
+
 
 
 # Resolved issues
