@@ -1,32 +1,30 @@
-# Juju 2.0-beta9
+# Juju 2.0-beta11
 
-A new development release of Juju, juju 2.0-beta9, is now available.
+A new development release of Juju, juju 2.0-beta11, is now available.
 This release replaces version 2.0-beta8.
 
 
 ## Getting Juju
 
-Juju 2.0-beta9 is available for Yakkety and backported to earlier
+Juju 2.0-beta11 is available for Yakkety and backported to earlier
 series in the following PPA:
 
     https://launchpad.net/~juju/+archive/devel
 
 Windows, Centos, and OS X users will find installers at:
 
-    https://launchpad.net/juju-core/+milestone/2.0-beta9
+    https://launchpad.net/juju-core/+milestone/2.0-beta11
 
-Upgrading 1.x environments to 2.0-beta9 is not yet supported. Once 2.x is
+Upgrading 1.x environments to 2.0-beta11 is not yet supported. Once 2.x is
 proven we will provide an upgrade path from 1.25
 
 
-## What's New in Beta9
+## What's New in Beta11
 
-* “Services” are now known as “Applications”
-* New `juju unregister` command for cleaning up local references to controllers
-  Usage: juju unregister <controller>
-* Removal of support for legacy lxc containers in favor of lxd
-* `juju status` has been enhanced for ease of reading
-
+* Config can now be associated with clouds in clouds.yaml
+* Experimental Features:
+    * Juju log forwarding
+    * Audit logging
 
 ## Notable Changes
 
@@ -57,6 +55,9 @@ proven we will provide an upgrade path from 1.25
 * Automatic Retries of Failed Hooks
 * Enhancements to juju run
 * SSH Host Key Checking
+* Config can be included in clouds.yaml
+* Juju log forwarding
+* Audit logging
 * Known Issues
 
 
@@ -190,7 +191,7 @@ The main new commands of note are:
     juju grant
     Juju revoke
     juju list-shares
-    juju use-model
+    juju use-model 
     juju list-users
     juju switch-user
 
@@ -267,7 +268,7 @@ https://jujucharms.com/docs/devel/controllers
 https://jujucharms.com/docs/devel/models
 
 
-#### LXD, Manual, and MAAS Providers
+#### LXD, Manual, and MAAS Providers 
 
 To bootstrap models using the LXD, manual, and MAAS providers, see the special clouds section of: https://jujucharms.com/docs/devel/clouds
 
@@ -355,7 +356,7 @@ key-id, manta-url
 ### Native Support for Charm Bundles
 
 The Juju 'deploy' command can now deploy a bundle. A bundle is a
-collection of charms that together create an entire system. The
+collection of charms that together create an entire system. The 
 Juju Quickstart or Deployer plugins are no longer needed to deploy
 a bundle of charms. See: https://jujucharms.com/docs/devel/charms-bundles
 
@@ -415,15 +416,15 @@ to utilize a cloud provider.
 
 LXD has been made available in Trusty backports, but needs manual
 dependency resolution:
-
+        
     sudo apt-get --target-release trusty-backports install lxd
-
+        
 Before using a locally running LXD after installing it, either through
 Juju or the LXD CLI ("lxc"), you must either log out and back in or run
 this command:
-
+        
     newgrp lxd
-
+               
 See: https://linuxcontainers.org/lxd/getting-started-cli/
 
 
@@ -463,7 +464,7 @@ allocating more machines than there are public IP addresses.
 
 A new provider has been added that supports hosting a Juju model in
 Rackspace Public Cloud. As Rackspace Cloud is based on OpenStack,
-most of the features and configuration options for those two
+most of the features and configuration options for those two 
 providers are identical.
 
 
@@ -472,7 +473,7 @@ providers are identical.
 While bootstrapping, you can now specify constraints for the bootstrap
 machine independently of the application constraints:
 
-    juju bootstrap --constraints <application-constraints>
+    juju bootstrap --constraints <application-constraints> 
         --bootstrap-constraints <bootstrap-machine-constraints>
 
 You can also specify the series of the bootstrap machine:
@@ -626,7 +627,7 @@ address to use for a given unit.
 There is currently a mandatory '--primary-address' argument to 'network-
 get', which guarantees a single IP address to be returned.
 
-Example (within a charm hook):
+Example (within a charm hook): 
 
     relation-ids cluster
     url:2
@@ -692,14 +693,14 @@ Three new commands have been introduced:
 1.  juju list-resources
 
     usage: juju list-resources [options] application-or-unit
-
+    
     This command shows the resources required by and those in use by an
     existing application or unit in your model.
 
 2.  juju push-resource
 
     usage: juju push-resource [options] application name=file
-
+    
     This command uploads a file from your local disk to the juju
     controller to be used as a resource for a application.
 
@@ -914,115 +915,27 @@ The SSH host keys of Juju managed machines are now tracked and are verified by t
 
 The host key checks can be disabled using the new --no-host-key-checks option for Juju’s SSH related commands. Routine use of this option is strongly discouraged.
 
+### Config can be included in clouds.yaml
+The cloud definitions in the clouds.yaml file can contain a config section which contains configuration attributes which will be used for all models hosted by the controller.
+
+clouds:
+  home-maas:
+    type: maas
+    config:
+      bootstrap-timeout: 900
+      set-numa-control-policy: true
+
 ### Known issues
 
   * Juju 2.0 no longer supports KVM for local provider
     Lp 1547665
   * Cannot deploy a dense openstack bundle with native deploy
     Lp 1555808
-  * LXD containers /etc/network/interfaces as generated by Juju gets
-    overwritten by LXD container start
-    Lp 1566801
-  * HA recovery fails in azure
-    Lp 1593299
+  * Cannot get status after restore is denied
+    Lp 1595686
+  * [aws] adding a machine post-bootstrap on the controller model closes of
+    api port in controller security group
+    Lp 1598164
   * Credentials files containing Joyent credentials must be updated to
-    work with beta3 and later (See "Joyent Provider No Longer Uses Manta
+    work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
     Storage")
-
-
-
-# Resolved issues
-
-  * Machine agent failed to register ip addresses, borks agent
-    Lp 1537585
-
-  * 2.0 beta6: only able to access lxd containers (on maas deployed
-    host) from the maas network
-    Lp 1576674
-
-  * Cannot run upgrade-juju as upload-tools refers to "admin" model
-    post the s/admin/controller/ change
-    Lp 1586298
-
-  * Maas bridge script needs to reside in /var/tmp on precise
-    Lp 1587788
-
-  * Commands should prompt you to "juju login" if your password has
-    expired
-    Lp 1589748
-
-  * Juju deploy --to lxd does not create base machine
-    Lp 1590960
-
-  * Goroutine panic launching container on xenial
-    Lp 1592210
-
-  * Rename of status-set --service flag to --application breaks charms
-    Lp 1592733
-
-  * Manual: bootstrapping fails with "creating hosted model: model
-    already exists"
-    Lp 1593033
-
-  * Juju gui cannot create new models
-    Lp 1593042
-
-  * Include complete information in client.charminfo api call
-    Lp 1593188
-
-  * Storage: error message for unknown storage is terrible
-    Lp 1504637
-
-  * Provide a way to clean up dead controllers / models from
-    cache.yaml
-    Lp 1553059
-
-  * Bootstrapping gce lies about the availability zone of the
-    controller
-    Lp 1577614
-
-  * Functional-container-networking-lxd fails with invalid parent
-    device name
-    Lp 1581627
-
-  * Juju instance names could be more compact
-    Lp 1581893
-
-  * Status-history panics with badly formatted names
-    Lp 1583412
-
-  * List-* commands should be aliases for what they're listing
-    Lp 1585005
-
-  * Juju agree should tell the user what to do next
-    Lp 1588559
-
-  * Model name validation error doesn't specify model name
-    Lp 1590095
-
-  * Maas 1.9.3 + juju 1.25.5 - on the juju controller node eth0 and
-    juju-br0 interfaces have the same ip address at the same time
-    Lp 1590689
-
-  * Juju status with default tabular format or juju list-machines does
-    not show containers and can hide errors
-    Lp 1571545
-
-  * Juju register not clear that you're creating a new password
-    Lp 1576318
-
-  * Help for juju run-action refers to commands that don't exist
-    Lp 1588095
-
-  * Juju status with no controllers offers up juju switch
-    Lp 1589061
-
-  * Alias a 'foos' to list-foos
-    Lp 1589066
-
-  * List-actions should produce tabular output
-    Lp 1590205
-
-  * Juju list-controllers --format=yaml displays controller that
-    cannot be addressed.
-    Lp 1588924
