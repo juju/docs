@@ -99,14 +99,13 @@ Understanding the purpose of the charm is crucial for both those that are
 reviewing as well as for those that may want to deploy the charm. We recommend
 the charm's README have the following information:
 
-1. What is the service?
-1. What configuration options does it provide as well as suggested
-usage noting defaults.
-1. What files does it retrieve from the Internet
-1. Instructions on how to deploy the service and scale it out.
-1. How the charm should be used in relation to configuration options
-and relations.
-1. Caveats
+1. What is the application the charm provides?
+1. What configuration options does the charm provide? As well as suggested
+usage of configuration noting defaults.
+1. What files does the charm retrieve from the Internet?
+1. Instructions on how to deploy the charm and scale it out.
+1. How the charm should be related to other charms.
+1. Caveats or known limitations of the charm.
 1. Support including contact and upstream project information.
 
 Make note of sections of the README that need improvement or are missing.
@@ -140,23 +139,29 @@ watch out for in the charms code:
 
 ## Charm Deployment, Configuration, and Testing
 
-If a charm has tests (you can determine if it does by checking for a "tests"
-folder), run the command below and verify the charm that way:
+In an effort to improve quality charms should have tests, that can be run by an
+automated testing process (no manual intervention needed). Check for a
+"tests" directory. Run these tests by issuing the following command in the
+charm directory:  
 
 ```bash
 juju test -v --set-e
 ```
 
-If a charm does not have tests, you will need to manually deploy it.
+Go to the [testing page](./developer-testing.html) for more information about
+how to run the testing tools.
+
+If a charm does not have tests, note it in the review and deploy the charm
+manually following the README document.
 
 ### Deployment
 
 We are going to cover some basic elements to deploying the charm you are
-reviewing.  For a more in-depth look at deploying charms, go to the
+reviewing. For a more in-depth look at deploying charms, go to the
 [Charms Deploying](charms-deploying.html) page.
 
 While using the README as a reference, deploy the charm using the command
-below on your local environment.
+below on your local model.
 
 ```bash
 juju deploy --repository=../../ local:precise/charm-name
@@ -174,8 +179,8 @@ tested for, like `trusty`.
 
 If the local deployment is successful, continue to the configuration section.
 
-!!! Note: If you have access to other cloud environments (like EC2), we
-appreciate testing the deployment on those environments as well.
+!!! Note: If you have access to other cloud providers (like EC2), we
+appreciate testing the deployment on those models as well.
 
 ### Configuration and Relations
 
@@ -208,16 +213,17 @@ juju ssh charm-name/0
 ```
 
 Use `top` or `ps` to show if the charm's process is running. Some
-services status would also be available with `sudo service name status`
+service's status would also be available with `sudo service name status`
 (example: `sudo service apache2 status`).
 
 !!! Note: If the charm itself is not a process, but relies on another
-process/application (eg. nginx or apache2), be sure to check those services are
+process/application (eg. nginx or apache2), be sure to check those processes are
 running. A good example of this would be Wordpress needing apache2 or nginx).
 
-If the charm's configuration options are written to the service's configuration
-files, check that file for the values you set earlier. Check the hooks to see
-which ones are written to configuration files (if applicable at all).
+If the charm's configuration options are written to the application's
+configuration files, check that file for the values you set earlier. Check the
+hooks to see which ones are written to configuration files (if applicable at
+all).
 
 
 ## Gathering / Submitting Your Results

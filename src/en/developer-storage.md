@@ -3,7 +3,7 @@ Title: Writing charms using storage
 # Writing charms that use storage
 
 The storage feature can be implemented in any charm running on Juju version
-1.25 or later. For services that can take advantage of block storage or other
+1.25 or later. For applications that can take advantage of block storage or other
 types of storage there are two additional storage hooks for the code to react
 to storage changes.
 
@@ -62,7 +62,7 @@ The definition above indicates that the charm may have anywhere from zero to ten
 block devices allocated to the 'disks' store. The formats supported by "range"
 are: m (a fixed number), m-n (an explicit range), and m- (a minimum number).
 
-Unless a number is explicitly specified during deployment, units of the service
+Unless a number is explicitly specified during deployment, units of the application
 will be allocated the minimum number of storage instances specified in the charm
 metadata. It is then possible to add instances (up to the maximum) by using the
 `juju storage add` command, or using the `storage-add` hook tool.
@@ -128,21 +128,21 @@ charm, described below
 #### Persistent storage / detachment / reattachment
 
 Some providers have the option to detach storage from the lifespan of the
-instance(s) which created/used it. This means that even after services have been
-removed, the storage and its contents still exist in your cloud, which may be
-useful for backup, recovery or transport purposes.
+instance(s) which created/used it. This means that even after applications have
+been removed, the storage and its contents still exist in your cloud, which may
+be useful for backup, recovery or transport purposes.
 
 For now, storage is always bound to a machine or unit, depending on how it is
 created. In the future, we will provide an interface for unbinding storage from
-the machine or unit, so that it is destroyed only when the environment is
+the machine or unit, so that it is destroyed only when the model is
 destroyed. This will make it possible to detach/reattach storage as desired.
 
 #### Shared storage
 
 Some providers, typically network filesystems, permit attaching storage to
 multiple machines. We intend to support multiple attachment within Juju. Shared
-storage will be assigned to a service, and each unit of the service will attach
-to the same shared storage instance.
+storage will be assigned to a application, and each unit of the application will
+attach to the same shared storage instance.
 
 ### More information
 

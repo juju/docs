@@ -12,23 +12,23 @@ The intention of charm tests is to assert that the charm works well on the
 intended platform and performs the expected configuration steps. Examples of
 things to test in each charm is:
 
-- After install, expose, and adding of required relations, the service is
+- After install, expose, and adding of required relations, the application is
   running correctly (such as listening on the intended ports).
 - Adding, removing, and re-adding a relation should work without error.
 - Setting configuration values should result in a change reflected in the
-  service's operation or configuration.
+  application's operation or configuration.
 
 ## Where to put tests
 
 The charm directory should contain a sub-directory named 'tests'. This
 directory will be scanned by a test runner for executable files. The executable
-files will be run in lexical order by the test runner, with a Juju environment.
-The tests can make the following assumptions:
+files will be run in lexical order by the test runner, with a default Juju
+model. The tests can make the following assumptions:
 
 - A minimal install of the release of Ubuntu which the charm is targeted at
   will be available.
 - A version of Juju is installed and available in the system path.
-- A Juju environment with no services deployed inside it is already
+- A Juju model with no applications deployed inside it is already
   bootstrapped, and will be the default for command line usage.
 - The CWD is the `tests` directory off the charm root.
 - Full access to other public charms will be available to build a solution of
@@ -50,12 +50,12 @@ interaction. The test code must install or package the files required to test
 the charm. The test runner will find and execute each test within that
 directory and produce a report.
 
-If tests exit with services still in the environment, the test runner may clean
-them up, whether by destroying the environment or destroying the services
+If tests exit with applications still in the model, the test runner may clean
+them up, whether by destroying the model or destroying the applications
 explicitly, and the machines may be terminated as well. For this reason tests
-should not make assumptions on machine numbers or other factors in the
-environment that could be reset. Any artifacts needed from the test machines
-should be retrieved and displayed before the test exits.
+should not make assumptions on machine or unit numbers or other factors in the
+model that could be reset. Any artifacts needed from the test machines should
+be retrieved and displayed before the test exits.
 
 ### Exit codes
 
@@ -63,7 +63,7 @@ Upon exit, the test's exit code will be evaluated to mean the following:
 
 - 0: Test passed
 - 1: Failed test
-- 100: Test is skipped because of incomplete environment
+- 100: Test is skipped because of a timeout or incomplete setup
 
 ## charm proof
 

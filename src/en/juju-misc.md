@@ -1,4 +1,4 @@
-Title: Management tasks; Miscellaneous 
+Title: Management tasks; Miscellaneous
 
 # Miscellaneous management tasks
 
@@ -55,7 +55,7 @@ existing environment using `juju set-env`. The configuration options are:
 - no-proxy
 
 Each protocol-specific option accepts a URL. The `no-proxy` option is a list of
-host names and addresses that services can directly connect to. For example:
+host names and addresses that applications can directly connect to. For example:
 
 ```yaml
 http-proxy: http://proxy.example.com:9000

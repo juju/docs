@@ -64,7 +64,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
   - Deployment testing
     - Scale test: Production deployment test with multiple units and recommended
         config.
-    - Smoke test: Bare minimum to have the service working
+    - Smoke test: Bare minimum to have the application working
 - Must not use anything infrastructure-provider specific (i.e. querying EC2
     metadata service) or symlinks. Must be self contained within a charm unless
    the charm is a proxy for an existing cloud service, eg. `ec2-elb` charm.
@@ -91,8 +91,8 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
 - Must be under a [Free license](http://opensource.org/osd).
 - Must have a well documented and valid `README.md`.
   - Fill out the relevant sections as provided by `charm add readme`.
-  - Must describe the service.
-  - Must describe how it interacts with other services, if applicable.
+  - Must describe the application.
+  - Must describe how it interacts with other applications, if applicable.
   - Must document the interfaces.
   - Must show how to deploy the charm.
   - Must define external dependencies, if applicable.
@@ -110,7 +110,7 @@ Not following these guidelines will result in a WARNING (W:) in `charm test`:
 
 Not following these guidelines will result in an ERROR (E:) in `charm test`:
 
-- Must not run any network services using default passwords.
+- Must not run any network applications using default passwords.
 - Must verify and validate any external payload
   - Known and understood packaging systems that verify packages like apt,
       pip, and yum are ok.
@@ -124,7 +124,7 @@ Not following these guidelines will result in a WARNING (W:) in `charm test`:
     the distribution:
   - [AppArmor](https://help.ubuntu.com/lts/serverguide/apparmor.html) for Ubuntu.
   - [SELinux](https://wiki.centos.org/HowTos/SELinux) for CentOS systems.
-- Should avoid running services as root.
+- Should avoid running applications as root.
 
 ## Other
 

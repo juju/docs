@@ -317,9 +317,9 @@ def configure_website_port(http):
 ## Now write your own compose and reactive charm
 
 The [layer-docker charm](https://github.com/juju-solutions/layer-docker) was
-designed to be a base layer for other charms that want to run Docker
-containers. By using the reactive framework the charms that you write can be
-very small and concentrate on the service or services that your charm provides.
-Use the compose workflow and reactive framework to create a new charm with your
-Docker image very similar to the [layer-docker-nginx](#layer-docker-nginx)
-charm.
+designed to be a base layer for other charms that want to run Docker style
+application containers. By using the reactive framework the charms that you
+write can be very small and concentrate on the application or applications that
+your charm provides. Use the compose workflow and reactive framework to create a
+new charm with your Docker image very similar to the
+[layer-docker-nginx](#layer-docker-nginx) charm.
