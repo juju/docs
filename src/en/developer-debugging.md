@@ -157,6 +157,32 @@ environment.
 juju resolved --retry mysql/0
 ```
 
+## Debugging Reactive
+
+Reactive charms can set states. It may be helpful to see these states for
+debugging purposes. You can view or set the states in a debug-hooks session with the
+`charms.reactive` command.
+
+### View States
+
+```shell
+$ charms.reactive -p get_states
+
+{
+ 'etcd.installed': None,
+ 'etcd.leader.configured': None,
+ 'etcd.package.adjusted': None,
+ 'etcd.ssl.placed': None,
+ 'leadership.is_leader': None,
+ }
+```
+
+### Set States
+
+```shell
+$ charms.reactive set_state cache.cleared
+```
+
 ## Debugging early hooks
 
 The `install`, `config-changed`, and `start` hooks often execute quite soon
