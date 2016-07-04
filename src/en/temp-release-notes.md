@@ -913,7 +913,10 @@ clouds:
 
 ### Juju Log Forwarding
 
-Log forwarding is a bare bones implementation which is undergoing ongoing development work to improve the user experience. It should be considered only as a proof of concept. When enabled, log messages for all hosted models in a controller are forwarded to a syslog server. Currently, all required config to activate the feature needs to be provided at bootstrap via a config.yaml file. 
+Log forwarding is a bare bones implementation which is undergoing ongoing development work to improve the user experience. It should be considered only as a proof of concept. As it is an initial implementation, there are a few known issues:
+https://bugs.launchpad.net/juju-core/+bugs?field.tag=log-forwarding
+
+When enabled, log messages for all hosted models in a controller are forwarded to a syslog server. Currently, all required config to activate the feature needs to be provided at bootstrap via a config.yaml file. 
 
 $ juju bootstrap <controllername> <cloud> --config logconfig.yaml
 
