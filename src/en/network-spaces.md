@@ -93,7 +93,7 @@ For more information regarding constraints in general, see "juju help constraint
 
 ## Example
 
-Let's model the following deployment in Juju on AWS:
+Let's model the following deployment in Juju:
 
 - DMZ space (with 2 subnets, one in each zone), hosting 2
   units of the haproxy service, which is exposed and provides
@@ -102,25 +102,22 @@ Let's model the following deployment in Juju on AWS:
   units of mediawiki, accessible only via haproxy (not exposed).
 - Database (again, 2 subnets, one per zone), hosting 2 units of
   mysql, providing the database backend for mediawiki.
-- We also assume the used AWS account has a default VPC for the
-  chosen region (in the example we're using eu-central-1 region).
 
-First, we need to create additional subnets within the default VPC,
-using the AWS Web Console, and enable the "automatic public IP address"
-attribute on each subnet:
+First, we need to create additional subnets using MAAS, and enable
+the "automatic public IP address" attribute on each subnet:
 
-- 172.31.50.0/24, in zone "eu-central-1a" (for space "database")
-- 172.31.51.0/24, in zone "eu-central-1b" (for space "database")
-- 172.31.100.0/24, in zone "eu-central-1a" (for space "cms")
-- 172.31.110.0/24, in zone "eu-central-1b" (for space "cms")
+- 172.31.50.0/24, for space "database"
+- 172.31.51.0/24, for space "database"
+- 172.31.100.0/24, for space "cms"
+- 172.31.110.0/24, for space "cms"
 
-We also assume the default VPC already has 2 default subnets (one per
+We also assume MAAS already has 2 default subnets (one per
 zone), configured like this:
 
-- 172.31.0.0/20, in zone "eu-central-1a" (we'll use it for the "dmz" space)
-- 172.31.16.0/20, in zone "eu-central-1b"(also for the "dmz" space)
+- 172.31.0.0/20, for the "dmz" space
+- 172.31.16.0/20, for the "dmz" space
 
-Once the default VPC has those subnets, we can bootstrap as usual:
+Once MAAS has those subnets, we can bootstrap as usual:
 
 ```bash
 $ juju bootstrap
@@ -163,5 +160,4 @@ of which services and units run in which spaces/subnets.
 
 Please note, Juju supports the described syntax but currently ignores
 all but the first allowed space in the list. This behavior will change
-in a future release. Also, only the EC2 provider supports spaces as
-described, with support for MaaS and OpenStack coming soon.
+in a future release.
