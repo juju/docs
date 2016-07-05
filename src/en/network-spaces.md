@@ -1,4 +1,4 @@
-Title: How to configure more complex networks using spaces  
+Title: How to configure more complex networks using spaces
 
 # How to configure more complex networks using spaces
 
@@ -6,8 +6,7 @@ Juju provides a set of features allowing the users to have better and
 finer-grained control over the networking aspects of the environment
 and service deployments in particular. Not all cloud providers support
 these enhanced networking features yet, in fact they are currently
-supported on AWS only. Support for MAAS and OpenStack is planed and
-will be available in future releases of Juju.
+supported on MAAS only.
 
 Juju network spaces (or just "spaces") represent sets of disjoint
 subnets available for running cloud instances, which may span one
