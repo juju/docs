@@ -136,7 +136,7 @@ extra-bindings:
 
 Endpoint names are strings and must not match existing relation names from
 the Provides, Requires, or Peers metadata sections. The values beside each
-endpoint name must be left out (i.e. "foo": <anything> is invalid).
+endpoint name must be left out (i.e. "foo": &lt;anything&gt; is invalid).
 
 Other available fields are:
 
