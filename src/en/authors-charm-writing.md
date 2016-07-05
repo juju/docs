@@ -332,10 +332,10 @@ Let's take a stab at the 'database-relation-changed' hook:
 ```bash
 #!/bin/bash
 set -e # If any command fails, stop execution of the hook with that error
-db_user=`relation-get user`
-db_db=`relation-get database`
-db_pass=`relation-get password`
-db_host=`relation-get private-address`
+db_user=$(relation-get user)
+db_db=$(relation-get database)
+db_pass=$(relation-get password)
+db_host=$(relation-get private-address)
 if [ -z "$db_db" ]; then
   juju-log "No database information sent yet. Silently exiting"
   exit 0
@@ -348,12 +348,13 @@ cat <<EOF > $vanilla_config
 \$Configuration['Database']['User'] = '$db_user';
 \$Configuration['Database']['Password'] = '$db_pass';
 EOF
+chmod -R 777 /var/www/vanilla/conf
 juju-log "Make the application port available, now that we know we have a site to expose"
 status-set active
 open-port 80
 ```
 
-You will notice that this script uses the backticked command **relation-get**.
+You will notice that this script uses the command **relation-get**.
 This is another Juju Hook tool, which in this case fetches the named values from
 the corresponding hook on the charm we are connecting to. Usually there will be
 some indication of what these values are, but you can always inspect the
