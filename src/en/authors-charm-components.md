@@ -30,7 +30,7 @@ The following files will be treated specially, if present:
    in order to ensure that the service works properly. Every executable file on
    this directory will be executed by `juju test` and the Continous Interation
    (CI) tools.
-   [See more on charm tests.](./authors-testing.html)
+   [See more on charm tests.](./developer-testing.html)
  - `actions.yaml` specifies charm actions and their schemas, and must be defined
    if `/actions` is used.
    [See here for more on creating charm actions.](./authors-charm-actions.html)
