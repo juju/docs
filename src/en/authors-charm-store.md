@@ -36,7 +36,7 @@ following information:
  - `Two-factor auth` - If enabled, enter two-factor authentication (2FA)
 information. Otherwise <kbd>Return</kbd> for None
 
-Also note, if on Launchpad your group memberships change, you'll need to
+Also note, if your group memberships change on Launchpad, you'll need to
 log out and log in via a browser to the
 [Charmstore](https://jujucharms.com) before those membership changes are
 recognized.
