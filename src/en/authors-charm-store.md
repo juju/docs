@@ -1,4 +1,4 @@
-Title: The Juju charm store  
+Title: The Juju charm store
 
 # The Juju Charm Store
 
@@ -160,7 +160,7 @@ following `charm whoami` output:
 
 ```
 User: kirk
-Group membership: charm-examples 
+Group membership: charm-examples
 ```
 
 User `kirk` can perform the following operations:
