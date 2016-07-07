@@ -19,7 +19,12 @@ In order to interact with the charm store you will need the latest
 [Ubuntu SSO account](https://login.ubuntu.com/+login), and you must have
 logged in to [Launchpad](https://launchpad.net/+login) at least once.
 
-## Login to the store
+## Log in to the store
+
+It is required that you first log in to the
+[Charmstore](https://jujucharms.com) before you attempt to log in via `charm
+login`. After logging in via your browser, you can use the `charm`
+command-line tool.
 
 Most charm commands require authentication in order to operate. You can
 log in or log out of the store at any time by issuing `charm login` or
@@ -30,6 +35,11 @@ following information:
  - `Password` - Ubuntu SSO password
  - `Two-factor auth` - If enabled, enter two-factor authentication (2FA)
 information. Otherwise <kbd>Return</kbd> for None
+
+Also note, if on Launchpad your group memberships change, you'll need to
+log out and log in via a browser to the
+[Charmstore](https://jujucharms.com) before those membership changes are
+recognized.
 
 ## Entities explained
 
