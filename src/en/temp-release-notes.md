@@ -6,7 +6,7 @@ This release replaces version 2.0-beta10.
 ## What's New in Beta11
 
 * Config can now be associated with clouds in clouds.yaml
-* Consistent wire protocol for the Juju API. For more details, see:   
+* Consistent wire protocol for the Juju API. For more details, see:
   https://lists.ubuntu.com/archives/juju-dev/2016-June/005715.html
 * Initial support for:
     * Juju log forwarding
@@ -745,7 +745,7 @@ state of the machine as it transitions from allocating to deploying to
 deployed. For containers it also provides extra information about the
 container being created.
 
-    juju status --format yaml
+    juju status --format=yaml
 
         model: admin
         machines:

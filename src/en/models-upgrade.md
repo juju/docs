@@ -1,4 +1,4 @@
-Title: Upgrading Juju software  
+Title: Upgrading Juju software
 
 
 # Upgrading Juju software
@@ -74,7 +74,7 @@ juju upgrade-juju --version 2.0.3
 Track the progress with:
 
 ```bash
-watch -n3 "juju status --format tabular"
+watch -n3 "juju status --format=tabular"
 ```
 
 For complete syntax, see the
