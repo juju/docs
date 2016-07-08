@@ -1,4 +1,4 @@
-Title: Deploying node.js apps with Juju  
+Title: Deploying node.js apps with Juju
 
 #  Using Juju to Deploy your Node.js Application
 
