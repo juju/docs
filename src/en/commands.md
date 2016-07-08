@@ -10,11 +10,11 @@ Click on the expander to see details for each command.
 
 ^# actions
 
-   **Usage:** ` juju list-actions [options] <service name>`
+   **Usage:** ` juju actions [options] <application name>`
 
    **Summary:**
 
-   list actions defined for a service
+   List actions defined for a service.
 
    **Options:**
 
@@ -32,20 +32,20 @@ Click on the expander to see details for each command.
 
    _--schema  (= false)_
 
-   display the full action schema
+   Display the full action schema
 
    
    **Details:**
 
 
-   List the actions available to run on the target service, with a short
+   List the actions available to run on the target application, with a short
    description.  To show the full schema for the actions, use --schema.
 
    For more information, see also the 'run-ation' command, which executes actions.
 
    **Aliases:**
 
-   _actions_
+   _list-actions_
 
 
  
@@ -96,7 +96,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [list-clouds](#list-clouds)
+   [clouds](#clouds)
 
 
  
@@ -172,7 +172,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [list-credentials](#list-credentials)
+   [credentials](#credentials)
 
    [remove-credential](#remove-credential)
 
@@ -189,17 +189,17 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   start a new, empty machine and optionally a container, or add a container to a machine
+   Start a new, empty machine and optionally a container, or add a container to a machine.
 
    **Options:**
 
    _--constraints  (= )_
 
-   additional machine constraints
+   Additional machine constraints
 
    _--disks  (= )_
 
-   constraints for disks to attach to the machine
+   Constraints for disks to attach to the machine
 
    _-m, --model (= "")_
 
@@ -211,7 +211,7 @@ Click on the expander to see details for each command.
 
    _--series (= "")_
 
-   the charm series
+   The charm series
 
    
    **Details:**
@@ -229,12 +229,12 @@ Click on the expander to see details for each command.
    will interpret these constraints in order to decide what kind of machine
    to allocate.
 
-   If a container type is specified (e.g. "lxc"), then add machine will
+   If a container type is specified (e.g. "lxd"), then add machine will
    allocate a container of that type on a new provider-specific machine. It is
    also possible to add containers to existing machines using the format
    <container type>:<machine number>. Constraints cannot be combined with
    deploying a container to an existing machine. The currently supported
-   container types are: lxc, lxd, kvm.
+   container types are: lxd, kvm.
 
    Manual provisioning is the process of installing Juju on an existing machine
    and bringing it under Juju's management; currently this requires that the
@@ -252,9 +252,9 @@ Click on the expander to see details for each command.
 
          juju add-machine                      (starts a new machine)
          juju add-machine -n 2                 (starts 2 new machines)
-         juju add-machine lxc                  (starts a new machine with an lxc container)
-         juju add-machine lxc -n 2             (starts 2 new machines with an lxc container)
-         juju add-machine lxc:4                (starts a new lxc container on machine 4)
+         juju add-machine lxd                  (starts a new machine with an lxd container)
+         juju add-machine lxd -n 2             (starts 2 new machines with an lxd container)
+         juju add-machine lxd:4                (starts a new lxd container on machine 4)
          juju add-machine --constraints mem=8G (starts a machine with at least 8GB RAM)
          juju add-machine ssh:user@10.10.0.3   (manually provisions a machine with ssh)
          juju add-machine zone=us-east-1a      (start a machine in zone us-east-1a on AWS)
@@ -263,11 +263,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [juju help constraints](#juju help constraints)
-
-   [juju help placement](#juju help placement)
-
-   [juju help remove-machine](#juju help remove-machine)
+   [juju remove-machine](#juju remove-machine)
 
    **Aliases:**
 
@@ -282,17 +278,17 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   start a new, empty machine and optionally a container, or add a container to a machine
+   Start a new, empty machine and optionally a container, or add a container to a machine.
 
    **Options:**
 
    _--constraints  (= )_
 
-   additional machine constraints
+   Additional machine constraints
 
    _--disks  (= )_
 
-   constraints for disks to attach to the machine
+   Constraints for disks to attach to the machine
 
    _-m, --model (= "")_
 
@@ -304,7 +300,7 @@ Click on the expander to see details for each command.
 
    _--series (= "")_
 
-   the charm series
+   The charm series
 
    
    **Details:**
@@ -322,12 +318,12 @@ Click on the expander to see details for each command.
    will interpret these constraints in order to decide what kind of machine
    to allocate.
 
-   If a container type is specified (e.g. "lxc"), then add machine will
+   If a container type is specified (e.g. "lxd"), then add machine will
    allocate a container of that type on a new provider-specific machine. It is
    also possible to add containers to existing machines using the format
    <container type>:<machine number>. Constraints cannot be combined with
    deploying a container to an existing machine. The currently supported
-   container types are: lxc, lxd, kvm.
+   container types are: lxd, kvm.
 
    Manual provisioning is the process of installing Juju on an existing machine
    and bringing it under Juju's management; currently this requires that the
@@ -345,9 +341,9 @@ Click on the expander to see details for each command.
 
          juju add-machine                      (starts a new machine)
          juju add-machine -n 2                 (starts 2 new machines)
-         juju add-machine lxc                  (starts a new machine with an lxc container)
-         juju add-machine lxc -n 2             (starts 2 new machines with an lxc container)
-         juju add-machine lxc:4                (starts a new lxc container on machine 4)
+         juju add-machine lxd                  (starts a new machine with an lxd container)
+         juju add-machine lxd -n 2             (starts 2 new machines with an lxd container)
+         juju add-machine lxd:4                (starts a new lxd container on machine 4)
          juju add-machine --constraints mem=8G (starts a machine with at least 8GB RAM)
          juju add-machine ssh:user@10.10.0.3   (manually provisions a machine with ssh)
          juju add-machine zone=us-east-1a      (start a machine in zone us-east-1a on AWS)
@@ -356,11 +352,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [juju help constraints](#juju help constraints)
-
-   [juju help placement](#juju help placement)
-
-   [juju help remove-machine](#juju help remove-machine)
+   [juju remove-machine](#juju remove-machine)
 
    **Aliases:**
 
@@ -371,11 +363,11 @@ Click on the expander to see details for each command.
 
 ^# add-model
 
-   **Usage:** ` juju add-model [options] <name> [--config key=[value] ...] [--credential <cloud>:<credential>]`
+   **Usage:** ` juju add-model [options] <model name>`
 
    **Summary:**
 
-   Add a model within the Juju Model Server
+   Adds a hosted model.
 
    **Options:**
 
@@ -385,73 +377,64 @@ Click on the expander to see details for each command.
 
    _--config  (= )_
 
-   Specify a controller config file, or one or more controller configuration options (--config config.yaml [--config k=v ...])
+   Path to YAML model configuration file or individual options (--config config.yaml [--config key=value ...])
 
    _--credential (= "")_
 
-   The name of the cloud and credentials the new model uses to create cloud resources
+   Credential used to add the model
 
    _--owner (= "")_
 
    The owner of the new model if not the current user
 
+   _--region (= "")_
+
+   Cloud region to add the model to
+
    
    **Details:**
 
 
-   This command will add another model within the current Juju
-   Controller. The provider has to match, and the model config must
-   specify all the required configuration values for the provider.
+   Adding a model is typically done in order to run a specific workload. The
+   model is of the same cloud type as the controller and is managed by that
+   controller. By default, the controller is the current controller. The
+   credentials used to add the model are the ones used to create any future
+   resources within the model (`juju deploy`, `juju add-unit`).
 
-   If configuration values are passed by both extra command line
-   arguments and the --config option, the command line args take
-   priority.
-
-   If adding a model in a controller for which you are not the
-   administrator, the cloud credentials and authorized ssh keys must
-   be specified. The credentials are specified using the argument
-   --credential <cloud>:<credential>. The authorized ssh keys are
-   specified using a --config argument, either authorized=keys=value
-   or via a config yaml file.
-
-          
-   
-   Any credentials used must be for a cloud with the same provider
-   type as the controller. Controller administrators do not have to
-   specify credentials or ssh keys; by default, the credentials and
-   keys used to bootstrap the controller are used if no others are
-   specified.
+   Model names can be duplicated across controllers but must be unique for
+   any given controller. Model names may only contain lowercase letters,
+   digits and hyphens, and may not start with a hyphen.
 
 
    **Examples:**
 
 
-          juju add-model new-model
-          juju add-model new-model --config aws-creds.yaml --config image-stream=daily
-          
-          juju add-model new-model --credential aws:mysekrets --config authorized-keys="ssh-rsa ..."
+          juju add-model mymodel
+          juju add-model mymodel --config my-config.yaml --config image-stream=daily
+          juju add-model mymodel --credential credential_name --config authorized-keys="ssh-rsa ..."
+          juju add-model mymodel --region us-east-1
 
-
-   **See also:**
-
-   [juju help grant](#juju help grant)
 
 
  
 
 ^# add-relation
 
-   **Usage:** ` juju add-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]`
+   **Usage:** ` juju add-relation [options] <application1>[:<relation name1>] <application2>[:<relation name2>]`
 
    **Summary:**
 
-   add a relation between two services
+   Add a relation between two applications.
 
    **Options:**
 
    _-m, --model (= "")_
 
    Model to operate in. Accepts [<controller name>:]<model name>
+
+   **Aliases:**
+
+   _relate_
 
 
  
@@ -526,7 +509,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [list-ssh-key](#list-ssh-key)
+   [ssh-keys](#ssh-keys)
 
    [remove-ssh-key](#remove-ssh-key)
 
@@ -584,7 +567,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [list-ssh-key](#list-ssh-key)
+   [ssh-keys](#ssh-keys)
 
    [remove-ssh-key](#remove-ssh-key)
 
@@ -599,11 +582,17 @@ Click on the expander to see details for each command.
 
 ^# add-storage
 
-   **Usage:** ` juju add-storage [options] <unit name> <storage directive> ...
+   **Usage:** ` juju add-storage [options] 
+<unit name> <storage directive> ...
+    where storage directive is 
+        <charm storage name>=<storage constraints> 
+    or
+        <charm storage name>
+`
 
    **Summary:**
 
-   adds unit storage dynamically
+   Adds unit storage dynamically.
 
    **Options:**
 
@@ -643,23 +632,24 @@ Click on the expander to see details for each command.
    Model default values will be used for all ommitted constraint values.
 
    There is no need to comma-separate ommitted constraints. 
-   Example:
 
-             Add 3 ebs storage instances for "data" storage to unit u/0:
+   **Examples:**
 
-               juju add-storage u/0 data=ebs,1024,3 
-             or
-               juju add-storage u/0 data=ebs,3
-             or
-               juju add-storage u/0 data=ebs,,3 
-             
-             
-             Add 1 storage instances for "data" storage to unit u/0 
-             using default model provider pool:
 
-               juju add-storage u/0 data=1 
-             or
-               juju add-storage u/0 data
+          # Add 3 ebs storage instances for "data" storage to unit u/0:
+            juju add-storage u/0 data=ebs,1024,3 
+          or
+            juju add-storage u/0 data=ebs,3
+          or
+            juju add-storage u/0 data=ebs,,3 
+          
+          
+          # Add 1 storage instances for "data" storage to unit u/0
+          # using default model provider pool:
+            juju add-storage u/0 data=1 
+          or
+            juju add-storage u/0 data
+
 
 
  
@@ -670,7 +660,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   add an existing subnet to Juju
+   Add an existing subnet to Juju.
 
    **Options:**
 
@@ -704,11 +694,11 @@ Click on the expander to see details for each command.
 
 ^# add-unit
 
-   **Usage:** ` juju add-unit [options] <service name>`
+   **Usage:** ` juju add-unit [options] <application name>`
 
    **Summary:**
 
-   Adds one or more units to a deployed service.
+   Adds one or more units to a deployed application.
 
    **Options:**
 
@@ -728,15 +718,14 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Adding units to an existing service is a way to scale out that service. 
+   Adding units to an existing application is a way to scale out that application. 
    Many charms will seamlessly support horizontal scaling, others may need an
-   additional service to facilitate load-balancing (check the individual 
+   additional application to facilitate load-balancing (check the individual 
    charm documentation).
 
-   This command is applied to services that have already been deployed.
-
-   By default, services are deployed to newly provisioned machines in
-   accordance with any service or model constraints. Alternatively, this 
+   This command is applied to applications that have already been deployed.
+   By default, applications are deployed to newly provisioned machines in
+   accordance with any application or model constraints. Alternatively, this 
    command also supports the placement directive ("--to") for targeting
    specific machines or containers, which will bypass any existing
    constraints.
@@ -752,13 +741,13 @@ Click on the expander to see details for each command.
 
           juju add-unit mysql --to 23
 
-   Create a new LXC container on machine 7 and add one unit of mysql:
+   Create a new LXD container on machine 7 and add one unit of mysql:
 
-          juju add-unit mysql --to lxc:7
+          juju add-unit mysql --to lxd:7
 
-   Add a unit of mariadb to LXC container number 3 on machine 24:
+   Add a unit of mariadb to LXD container number 3 on machine 24:
 
-          juju add-unit mariadb --to 24/lxc/3
+          juju add-unit mariadb --to 24/lxd/3
 
 
    **See also:**
@@ -774,11 +763,11 @@ Click on the expander to see details for each command.
 
 ^# add-units
 
-   **Usage:** ` juju add-unit [options] <service name>`
+   **Usage:** ` juju add-unit [options] <application name>`
 
    **Summary:**
 
-   Adds one or more units to a deployed service.
+   Adds one or more units to a deployed application.
 
    **Options:**
 
@@ -798,15 +787,14 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Adding units to an existing service is a way to scale out that service. 
+   Adding units to an existing application is a way to scale out that application. 
    Many charms will seamlessly support horizontal scaling, others may need an
-   additional service to facilitate load-balancing (check the individual 
+   additional application to facilitate load-balancing (check the individual 
    charm documentation).
 
-   This command is applied to services that have already been deployed.
-
-   By default, services are deployed to newly provisioned machines in
-   accordance with any service or model constraints. Alternatively, this 
+   This command is applied to applications that have already been deployed.
+   By default, applications are deployed to newly provisioned machines in
+   accordance with any application or model constraints. Alternatively, this 
    command also supports the placement directive ("--to") for targeting
    specific machines or containers, which will bypass any existing
    constraints.
@@ -822,13 +810,13 @@ Click on the expander to see details for each command.
 
           juju add-unit mysql --to 23
 
-   Create a new LXC container on machine 7 and add one unit of mysql:
+   Create a new LXD container on machine 7 and add one unit of mysql:
 
-          juju add-unit mysql --to lxc:7
+          juju add-unit mysql --to lxd:7
 
-   Add a unit of mariadb to LXC container number 3 on machine 24:
+   Add a unit of mariadb to LXD container number 3 on machine 24:
 
-          juju add-unit mariadb --to 24/lxc/3
+          juju add-unit mariadb --to 24/lxd/3
 
 
    **See also:**
@@ -868,23 +856,19 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   This allows the user to register with the controller and use the 
-   optionally shared model.
+   A `juju register`command will be printed, which must be executed by the
+   user to complete the registration process. The user's details are stored
+   within the shared model, and will be removed when the model is destroyed.
+   Some machine providers will require the user to be in possession of certain
+   credentials in order to create a model.
 
-   A `juju register`command will be printed, which
-   must be executed by the user to complete the registration process.  The
-   user's details are stored within the shared model, and will be removed
-   when the model is destroyed.
-
-   Some machine providers will require the user 
-   to be in possession of certain credentials in order to create a model.
 
    **Examples:**
 
 
           juju add-user bob
-          juju add-user --share mymodel bob
           juju add-user --controller mycontroller bob
+          juju add-user --models=mymodel --acl=read bob
 
 
    **See also:**
@@ -893,11 +877,9 @@ Click on the expander to see details for each command.
 
    [grant](#grant)
 
+   [users](#users)
+
    [show-user](#show-user)
-
-   [list-users](#list-users)
-
-   [switch-user](#switch-user)
 
    [disable-user](#disable-user)
 
@@ -914,7 +896,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   agree to terms
+   Agree to terms.
 
    **Options:**
 
@@ -928,7 +910,7 @@ Click on the expander to see details for each command.
 
    _--yes  (= false)_
 
-   agree to terms non interactively
+   Agree to terms non interactively
 
    
    **Details:**
@@ -944,25 +926,57 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-       juju agree somePlan/1
-           Displays terms for somePlan revision 1 and prompts for agreement.
-       juju agree somePlan/1 otherPlan/2
-           Displays the terms for revision 1 of somePlan, revision 2 of otherPlan,
-           and prompts for agreement.
-       juju agree somePlan/1 otherPlan/2 --yes
-           Agrees to the terms without prompting.
+          # Displays terms for somePlan revision 1 and prompts for agreement.
+          juju agree somePlan/1
+          # Displays the terms for revision 1 of somePlan, revision 2 of otherPlan,
+          # and prompts for agreement.
+          juju agree somePlan/1 otherPlan/2
+          # Agrees to the terms without prompting.
+          juju agree somePlan/1 otherPlan/2 --yes
 
+
+
+ 
+
+^# agreements
+
+   **Usage:** ` juju agreements [options]`
+
+   **Summary:**
+
+   List user's agreements.
+
+   **Options:**
+
+   _--format  (= json)_
+
+   Specify output format (json|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   List terms the user has agreed to.
+
+
+   **Aliases:**
+
+   _list-agreements_
 
 
  
 
 ^# allocate
 
-   **Usage:** ` juju allocate [options]`
+   **Usage:** ` juju allocate [options] <budget>:<value> <application> [<application2> ...]`
 
    **Summary:**
 
-   allocate budget to services
+   Allocate budget to applications.
 
    **Options:**
 
@@ -970,32 +984,41 @@ Click on the expander to see details for each command.
 
    Model to operate in. Accepts [<controller name>:]<model name>
 
+   _--model-uuid (= "")_
+
+   Model UUID of allocation
+
    
    **Details:**
 
 
-   Allocate budget for the specified services, replacing any prior allocations
-   made for the specified services.
+   Allocate budget for the specified applications, replacing any prior allocations
+   made for the specified applications.
 
-   Usage:
 
-          juju allocate <budget>:<value> <service> [<service2> ...]
-   
-   Example:
+   **Examples:**
 
+
+          # Assigns application "db" to an allocation on budget "somebudget" with
+          # the limit "42".
           juju allocate somebudget:42 db
-              Assigns service "db" to an allocation on budget "somebudget" with the limit "42".
+          # Application names assume the current selected model, unless otherwise
+          # specified with:
+          juju allocate -m [<controller name:]<model name> ...
+          # Models may also be referenced by UUID when necessary:
+           juju allocate --model-uuid <uuid> ...
+
 
 
  
 
 ^# attach
 
-   **Usage:** ` juju attach [options] service name=file`
+   **Usage:** ` juju attach [options] application name=file`
 
    **Summary:**
 
-   upload a file as a resource for a service
+   upload a file as a resource for an application
 
    **Options:**
 
@@ -1008,7 +1031,7 @@ Click on the expander to see details for each command.
 
 
    This command uploads a file from your local disk to the juju controller to be
-   used as a resource for a service.
+   used as a resource for an application.
 
 
 
@@ -1020,7 +1043,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   looks for cloud credentials and caches those for use by Juju when bootstrapping
+   Looks for cloud credentials and caches those for use by Juju when bootstrapping.
 
 
    
@@ -1031,7 +1054,7 @@ Click on the expander to see details for each command.
    allows the user to interactively save these into the Juju credentials store to make these
    available when bootstrapping new controllers and creating new models.
 
-   The resulting credentials may be viewed with juju list-credentials.
+   The resulting credentials may be viewed with `juju credentials`.
 
    The clouds for which credentials may be autoloaded are:
 
@@ -1064,7 +1087,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [juju list-credentials](#juju list-credentials)
+   [juju credentials](#juju credentials)
 
    [juju add-credential](#juju add-credential)
 
@@ -1073,11 +1096,11 @@ Click on the expander to see details for each command.
 
 ^# backups
 
-   **Usage:** ` juju list-backups [options]`
+   **Usage:** ` juju backups [options]`
 
    **Summary:**
 
-   get all metadata
+   Displays information about all backups.
 
    **Options:**
 
@@ -1089,12 +1112,12 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   list-backups provides the metadata associated with all backups.
+   backups provides the metadata associated with all backups.
 
 
    **Aliases:**
 
-   _backups_
+   _list-backups_
 
 
  
@@ -1105,7 +1128,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   list and enable model blocks
+   List and enable model blocks.
 
    **Options:**
 
@@ -1133,11 +1156,49 @@ Click on the expander to see details for each command.
    
    commands:
 
-             all-changes   - block operations that could change Juju model
-             destroy-model - block an operation that would destroy Juju model
+             all-changes   - Block operations that could change Juju model.
+             destroy-model - Block an operation that would destroy Juju model.
              help          - show help on a command or other topic
-             list          - list juju blocks
-             remove-object - block an operation that would remove an object
+             list          - List Juju blocks.
+
+             remove-object - Block an operation that would remove an object.
+
+
+ 
+
+^# blocks
+
+   **Usage:** ` juju blocks [options]`
+
+   **Summary:**
+
+   List all blocks within the controller.
+
+   **Options:**
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   List all blocks for models within the specified controller
+
+   **Aliases:**
+
+   _list-all-blocks,_
+
+   _list-blocks_
 
 
  
@@ -1167,6 +1228,10 @@ Click on the expander to see details for each command.
    _--bootstrap-series (= "")_
 
    Specify the series of the bootstrap machine
+
+   _--clouds  (= false)_
+
+   Print the available clouds which can be used to bootstrap a Juju environment
 
    _--config  (= )_
 
@@ -1200,6 +1265,10 @@ Click on the expander to see details for each command.
 
    Do not install the Juju GUI in the controller when bootstrapping
 
+   _--regions (= "")_
+
+   Print the available regions for the specified cloud
+
    _--to (= "")_
 
    Placement directive indicating an instance to bootstrap
@@ -1212,13 +1281,18 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Initialization consists of creating an 'admin' model and provisioning a 
-   machine to act as controller.
+   Used without arguments, bootstrap will step you through the process of 
+   initializing a Juju cloud environment. Initialization consists of creating
+   a 'controller' model and provisioning a machine to act as controller.
 
+   We recommend you call your controller ‘username-region’ e.g. ‘fred-us-west-1’
+   See --clouds for a list of clouds and credentials.
+
+   See --regions <cloud> for a list of available regions for a given cloud.
    Credentials are set beforehand and are distinct from any other 
    configuration (see `juju add-credential`).
 
-   The 'admin' model typically does not run workloads. It should remain
+   The 'controller' model typically does not run workloads. It should remain
    pristine to run and manage Juju's own infrastructure for the corresponding
    cloud. Additional (hosted) models should be created with `juju create-
    model` for workload purposes.
@@ -1240,7 +1314,7 @@ Click on the expander to see details for each command.
    used with the MAAS provider ('--to <host>.maas').
 
    You can change the default timeout and retry delays used during the 
-   bootstrap by changing the following settings in your configuration file
+   bootstrap by changing the following settings in your configuration
    (all values represent number of seconds):
 
              # How long to wait for a connection to the controller
@@ -1252,6 +1326,7 @@ Click on the expander to see details for each command.
              bootstrap-retry-delay: 5 # default: 5 seconds
              # How often to refresh controller addresses from the API server.
              bootstrap-addresses-delay: 10 # default: 10 seconds
+             
    
    Private clouds may need to specify their own custom image metadata and
    tools/agent. Use '--metadata-source' whose value is a local directory.
@@ -1264,10 +1339,13 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju bootstrap mycontroller google
-          juju bootstrap --config=~/config-rs.yaml mycontroller rackspace
-          juju bootstrap --config agent-version=1.25.3 mycontroller aws
-          juju bootstrap --config bootstrap-timeout=1200 mycontroller azure
+          juju bootstrap
+          juju bootstrap --clouds
+          juju bootstrap --regions aws
+          juju bootstrap joe-us-east1 google
+          juju bootstrap --config=~/config-rs.yaml joe-syd rackspace
+          juju bootstrap --config agent-version=1.25.3 joe-us-east-1 aws
+          juju bootstrap --config bootstrap-timeout=1200 joe-eastus azure
 
 
    **See also:**
@@ -1281,19 +1359,57 @@ Click on the expander to see details for each command.
 
  
 
-^# cached-images
+^# budgets
 
-   **Usage:** ` juju list-cached-images [options]`
+   **Usage:** ` juju budgets [options]`
 
    **Summary:**
 
-   shows cached os images
+   List budgets.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   List the available budgets.
+
+
+   **Examples:**
+
+
+          juju budgets
+
+
+   **Aliases:**
+
+   _list-budgets_
+
+
+ 
+
+^# cached-images
+
+   **Usage:** ` juju cached-images [options]`
+
+   **Summary:**
+
+   Shows cached os images.
 
    **Options:**
 
    _--arch (= "")_
 
-   the architecture of the image to list eg amd64
+   The architecture of the image to list eg amd64
 
    _--format  (= yaml)_
 
@@ -1301,7 +1417,7 @@ Click on the expander to see details for each command.
 
    _--kind (= "")_
 
-   the image kind to list eg lxd
+   The image kind to list eg lxd
 
    _-m, --model (= "")_
 
@@ -1313,7 +1429,7 @@ Click on the expander to see details for each command.
 
    _--series (= "")_
 
-   the series of the image to list eg xenial
+   The series of the image to list eg xenial
 
    
    **Details:**
@@ -1334,16 +1450,16 @@ Click on the expander to see details for each command.
 
 
         # List all cached images.
-        juju list-cache-images
+        juju cached-images
         # List cached images for xenial.
-        juju list-cache-images --series xenial 
+        juju cached-images --series xenial
         # List all cached lxd images for xenial amd64.
-        juju list-cache-images --kind lxd --series xenial --arch amd64
+        juju cached-images --kind lxd --series xenial --arch amd64
 
 
    **Aliases:**
 
-   _cached-images_
+   _list-cached-images_
 
 
  
@@ -1354,7 +1470,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   changes the password for a user
+   Changes the password for a Juju user.
 
    **Options:**
 
@@ -1366,18 +1482,23 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Change the password for the user you are currently logged in as;
-   or as an admin, change the password for another user.
+   The user is, by default, the current user. The latter can be confirmed with
+   the `juju show-user` command.
+
+   A controller administrator can change the password for another user (on
+   that controller).
 
 
    **Examples:**
 
 
-        # Change the password for the user you are logged in as.
-        juju change-user-password
-        # Change the password for bob.
-        juju change-user-password bob
+          juju change-user-password
+          juju change-user-password bob
 
+
+   **See also:**
+
+   [dd-user](#dd-user)
 
 
  
@@ -1388,7 +1509,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   interact with charms
+   Interact with charms.
 
    **Options:**
 
@@ -1410,19 +1531,73 @@ Click on the expander to see details for each command.
    commands:
 
              help           - show help on a command or other topic
-             list-resources - display the resources for a charm in the charm store
-             resources      - alias for 'list-resources'
+             list-resources - Alias for 'resources'.
+
+             resources      - display the resources for a charm in the charm store
+
+
+ 
+
+^# clouds
+
+   **Usage:** ` juju clouds [options]`
+
+   **Summary:**
+
+   Lists all clouds available to Juju.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   Provided information includes 'cloud' (as understood by Juju), cloud
+   'type', and cloud 'regions'.
+
+   The listing will consist of public clouds and any custom clouds made
+   available through the `juju add-cloud` command. The former can be updated
+   via the `juju update-cloud` command.
+
+   By default, the tabular format is used.
+
+
+   **Examples:**
+
+
+          juju clouds
+
+
+   **See also:**
+
+   [how-cloud](#how-cloud)
+
+   [update-clouds](#update-clouds)
+
+   [add-cloud](#add-cloud)
+
+   **Aliases:**
+
+   _list-clouds_
 
 
  
 
 ^# collect-metrics
 
-   **Usage:** ` juju collect-metrics [options] [service or unit]`
+   **Usage:** ` juju collect-metrics [options] [application or unit]`
 
    **Summary:**
 
-   collect metrics on the given unit/service
+   Collect metrics on the given unit/application.
 
    **Options:**
 
@@ -1434,13 +1609,56 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   collect-metrics
-   trigger metrics collection
-   Collect metrics infinitely waits for the command to finish.
+   Trigger metrics collection
+   This command waits for the metric collection to finish before returning.
+   You may abort this command and it will continue to run asynchronously.
+   Results may be checked by 'juju action status'.
 
-   However if you cancel the command while waiting, you can still
-   look for the results under 'juju action status'.
 
+
+ 
+
+^# controllers
+
+   **Usage:** ` juju controllers [options]`
+
+   **Summary:**
+
+   Lists all controllers.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   The output format may be selected with the '--format' option. In the
+   default tabular output, the current controller is marked with an asterisk.
+
+   **Examples:**
+
+
+          juju controllers
+          juju controllers --format json --output ~/tmp/controllers.json
+
+
+   **See also:**
+
+   [models](#models)
+
+   [show-controller](#show-controller)
+
+   **Aliases:**
+
+   _list-controllers_
 
 
  
@@ -1451,13 +1669,13 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   create a backup
+   Create a backup.
 
    **Options:**
 
    _--filename (= "juju-backup-<date>-<time>.tar.gz")_
 
-   download to this file
+   Download to this file
 
    _-m, --model (= "")_
 
@@ -1465,7 +1683,7 @@ Click on the expander to see details for each command.
 
    _--no-download  (= false)_
 
-   do not download the archive
+   Do not download the archive
 
    
    **Details:**
@@ -1500,7 +1718,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   create a new budget
+   Create a new budget.
 
 
    
@@ -1509,10 +1727,12 @@ Click on the expander to see details for each command.
 
    Create a new budget with monthly limit.
 
-   Example:
 
+   **Examples:**
+
+
+          # Creates a budget named 'qa' with a limit of 42.
           juju create-budget qa 42
-              Creates a budget named 'qa' with a limit of 42.
 
 
 
@@ -1524,7 +1744,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   create storage pool
+   Create or define a storage pool.
 
    **Options:**
 
@@ -1536,12 +1756,10 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Create or define a storage pool.
-
    Pools are a mechanism for administrators to define sources of storage that
-   they will use to satisfy service storage requirements.
+   they will use to satisfy application storage requirements.
 
-   A single pool might be used for storage from units of many different services -
+   A single pool might be used for storage from units of many different applications -
    it is a resource from which different stores may be drawn.
 
    A pool describes provider-specific parameters for creating storage,
@@ -1554,22 +1772,81 @@ Click on the expander to see details for each command.
    Creating pools there maps provider specific settings
    into named resources that can be used during deployment.
 
-   Pools defined at the model level are easily reused across services.
+   Pools defined at the model level are easily reused across applications.
+   Pool creation requires a pool name, the provider type and attributes for
+   configuration as space-separated pairs, e.g. tags, size, path, etc.
 
-   options:
 
-             -m, --model (= "")
-                 juju model to operate in
-             -o, --output (= "")
-                 specify an output file
-             <name>
-                 pool name
-             <provider type>
-                 pool provider type
-             <key>=<value> (<key>=<value> ...)
-                 pool configuration attributes as space-separated pairs, 
-                 for e.g. tags, size, path, etc...
 
+ 
+
+^# credentials
+
+   **Usage:** ` juju credentials [options] [<cloud name>]`
+
+   **Summary:**
+
+   Lists credentials for a cloud.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   _--show-secrets  (= false)_
+
+   Show secrets
+
+   
+   **Details:**
+
+
+   Credentials are used with `juju bootstrap`  and `juju add-model`.
+
+   An arbitrary "credential name" is used to represent credentials, which are 
+   added either via `juju add-credential` or `juju autoload-credentials`.
+   Note that there can be multiple sets of credentials and thus multiple 
+   names.
+
+   Actual authentication material is exposed with the '--show-secrets' 
+   option.
+
+   A controller and subsequently created models can be created with a 
+   different set of credentials but any action taken within the model (e.g.:
+   `juju deploy`; `juju add-unit`) applies the set used to create the model. 
+   Recall that when a controller is created a 'default' model is also 
+   created.
+
+   Credentials denoted with an asterisk '*' are currently set as the default
+   for the given cloud.
+
+
+   **Examples:**
+
+
+          juju credentials
+          juju credentials aws
+          juju credentials --format yaml --show-secrets
+
+
+   **See also:**
+
+   [add-credential](#add-credential)
+
+   [remove-credential](#remove-credential)
+
+   [set-default-credential](#set-default-credential)
+
+   [autoload-credentials](#autoload-credentials)
+
+   **Aliases:**
+
+   _list-credentials_
 
 
  
@@ -1580,13 +1857,17 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   launch a tmux session to debug a hook
+   Launch a tmux session to debug a hook.
 
    **Options:**
 
    _-m, --model (= "")_
 
    Model to operate in. Accepts [<controller name>:]<model name>
+
+   _--no-host-key-checks  (= false)_
+
+   Skip host key checking (INSECURE)
 
    _--proxy  (= false)_
 
@@ -1600,7 +1881,10 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Interactively debug a hook remotely on a service unit.
+   Interactively debug a hook remotely on an application unit.
+
+   See the "juju help ssh" for information about SSH related options
+   accepted by the debug-hooks command.
 
 
 
@@ -1660,34 +1944,43 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   This command accesses all logged Juju activity on a per-model basis. By
-   default, the model is the current model.
+   This command provides access to all logged Juju activity on a per-model
+   basis. By default, the logs for the currently select model are shown.
 
-   A log line is written in this format:
+   Each log line is emitted in this format:
 
-   <entity> <timestamp> <log-level> <module>:<line-no> <message>
-   The "entity" is the source of the message: a machine or unit. Both are
-   obtained in the output to `juju status`.
+           <entity> <timestamp> <log-level> <module>:<line-no> <message>
+   
+   The "entity" is the source of the message: a machine or unit. The names for
+   machines and units can be seen in the output of `juju status`.
 
    The '--include' and '--exclude' options filter by entity. A unit entity is
-   identified by prefixing 'unit-' to its corresponding unit name and
-   replacing the slash with a dash. A machine entity is identified by
-   prefixing 'machine-' to its corresponding machine id.
+   identified by prefixing 'unit-' to its corresponding unit name and replacing
+   the slash with a dash. A machine entity is identified by prefixing 'machine-'
+   to its corresponding machine id.
 
    The '--include-module' and '--exclude-module' options filter by (dotted)
-   logging module name, which can be truncated.
+   logging module name. The module name can be truncated such that all loggers
+   with the prefix will match.
 
-   A combination of machine and unit filtering uses a logical OR whereas a
-   combination of module and machine/unit filtering uses a logical AND.
+   The filtering options combine as follows:
 
-   Log levels are cumulative; each lower level (more verbose) contains the
-   preceding higher level (less verbose).
+   * All --include options are logically ORed together.
+
+   * All --exclude options are logically ORed together.
+
+   * All --include-module options are logically ORed together.
+
+   * All --exclude-module options are logically ORed together.
+
+   * The combined --include, --exclude, --include-module and --exclude-module
+           selections are logically ANDed to form the complete filter.
 
 
    **Examples:**
 
-   Exclude all machine 0 messages; show a maximum of 100 lines; and continue
-   to append filtered messages:
+   Exclude all machine 0 messages; show a maximum of 100 lines; and continue to
+   append filtered messages:
 
           juju debug-log --exclude machine-0 --lines 100
 
@@ -1700,13 +1993,24 @@ Click on the expander to see details for each command.
 
           juju debug-log -T --replay --include unit-apache2-3 --include machine-1
 
-   Include all juju.worker.uniter logging module messages that are also unit
-   wordpress/0 messages and continue to append filtered messages:
+   Show all juju.worker.uniter logging module messages that are also unit
+   wordpress/0 messages, and then show any new log messages which match the
+   filter:
 
-          juju debug-log --replay --include-module juju.worker.uniter --include \
-              unit-wordpress-0
+          juju debug-log --replay 
+              --include-module juju.worker.uniter \
+              --include unit-wordpress-0
 
-   To see all WARNING and ERROR messages:
+   Show all messages from the juju.worker.uniter module, except those sent from
+   machine-3 or machine-4, and then stop:
+
+          juju debug-log --replay --no-tail
+              --include-module juju.worker.uniter \
+              --exclude machine-3 \
+              --exclude machine-4 
+
+   To see all WARNING and ERROR messages and then continue showing any
+   new WARNING and ERROR messages as they are logged:
 
           juju debug-log --replay --level WARNING
 
@@ -1715,22 +2019,24 @@ Click on the expander to see details for each command.
 
    [status](#status)
 
+   [ssh](#ssh)
+
 
  
 
 ^# debug-metrics
 
-   **Usage:** ` juju debug-metrics [options] [service or unit]`
+   **Usage:** ` juju debug-metrics [options] [application or unit]`
 
    **Summary:**
 
-   retrieve metrics collected by the given unit/service
+   Retrieve metrics collected by the given unit/application.
 
    **Options:**
 
    _--json  (= false)_
 
-   output metrics as json
+   Output metrics as json
 
    _-m, --model (= "")_
 
@@ -1738,31 +2044,30 @@ Click on the expander to see details for each command.
 
    _-n  (= 0)_
 
-   number of metrics to retrieve
+   Number of metrics to retrieve
 
    
    **Details:**
 
 
-   debug-metrics
-   display recently collected metrics and exit
+   Display recently collected metrics and exit
 
 
  
 
 ^# deploy
 
-   **Usage:** ` juju deploy [options] <charm or bundle> [<service name>]`
+   **Usage:** ` juju deploy [options] <charm or bundle> [<application name>]`
 
    **Summary:**
 
-   deploy a new service or bundle
+   Deploy a new application or bundle.
 
    **Options:**
 
    _--bind (= "")_
 
-   Configure service endpoint bindings to spaces
+   Configure application endpoint bindings to spaces
 
    _--budget (= "personal:0")_
 
@@ -1770,19 +2075,19 @@ Click on the expander to see details for each command.
 
    _--channel (= "")_
 
-   channel to use when getting the charm or bundle from the charm store
+   Channel to use when getting the charm or bundle from the charm store
 
    _--config  (= )_
 
-   path to yaml-formatted service config
+   Path to yaml-formatted application config
 
    _--constraints  (= )_
 
-   set service constraints
+   Set application constraints
 
    _--force  (= false)_
 
-   allow a charm to be deployed to a machine running an unsupported series
+   Allow a charm to be deployed to a machine running an unsupported series
 
    _-m, --model (= "")_
 
@@ -1790,7 +2095,7 @@ Click on the expander to see details for each command.
 
    _-n, --num-units  (= 1)_
 
-   number of service units to deploy for principal charms
+   Number of application units to deploy for principal charms
 
    _--plan (= "")_
 
@@ -1798,15 +2103,15 @@ Click on the expander to see details for each command.
 
    _--resource  (= )_
 
-   resource to be uploaded to the controller
+   Resource to be uploaded to the controller
 
    _--series (= "")_
 
-   the series on which to deploy
+   The series on which to deploy
 
    _--storage  (= )_
 
-   charm storage constraints
+   Charm storage constraints
 
    _--to (= "")_
 
@@ -1851,10 +2156,9 @@ Click on the expander to see details for each command.
 
            juju deploy /path/to/bundle/openstack/bundle.yaml
    
-   <service name>, if omitted, will be derived from <charm name>.
-
+   <application name>, if omitted, will be derived from <charm name>.
    Constraints can be specified when using deploy by specifying the --constraints
-   flag.  When used with deploy, service-specific constraints are set so that later
+   flag.  When used with deploy, application-specific constraints are set so that later
    machines provisioned with add-unit will use the same constraints (unless changed
    by set-constraints).
 
@@ -1867,45 +2171,28 @@ Click on the expander to see details for each command.
    Where bar and baz are resources named in the metadata for the foo charm.
    Charms can be deployed to a specific machine using the --to argument.
 
-   If the destination is an LXC container the default is to use lxc-clone
-   to create the container where possible. For Ubuntu deployments, lxc-clone
-   is supported for the trusty OS series and later. A 'template' container is
-   created with the name
-           juju-<series>-template
-   
-   where <series> is the OS series, for example 'juju-trusty-template'.
-   You can override the use of clone by changing the provider configuration:
-           lxc-clone: false
-   
    In more complex scenarios, Juju's network spaces are used to partition the cloud
    networking layer into sets of subnets. Instances hosting units inside the
    same space can communicate with each other without any firewalls. Traffic
    crossing space boundaries could be subject to firewall and access restrictions.
    Using spaces as deployment targets, rather than their individual subnets allows
    Juju to perform automatic distribution of units across availability zones to
-   support high availability for services. Spaces help isolate services and their
+   support high availability for applications. Spaces help isolate applications and their
    units, both for security purposes and to manage both traffic segregation and
    congestion.
 
-   When deploying a service or adding machines, the "spaces" constraint can be
+   When deploying an application or adding machines, the "spaces" constraint can be
    used to define a comma-delimited list of required and forbidden spaces
    (the latter prefixed with "^", similar to the "tags" constraint).
 
-   If you have the main container directory mounted on a btrfs partition,
-   then the clone will be using btrfs snapshots to create the containers.
-   This means that clones use up much less disk space.  If you do not have btrfs,
-   lxc will attempt to use aufs (an overlay type filesystem). You can
-   explicitly ask Juju to create full containers and not overlays by specifying
-   the following in the provider configuration:
-
-           lxc-clone-aufs: false
 
    **Examples:**
 
 
          juju deploy mysql --to 23       (deploy to machine 23)
-         juju deploy mysql --to 24/lxc/3 (deploy to lxc container 3 on host machine 24)
-         juju deploy mysql --to lxc:25   (deploy to a new lxc container on host machine 25)
+         juju deploy mysql --to 24/lxd/3 (deploy to lxd container 3 on host machine 24)
+         juju deploy mysql --to lxd:25   (deploy to a new lxd container on host machine 25)
+         juju deploy mysql --to lxd      (deploy to a new lxd container on a new machine)
          juju deploy mysql -n 5 --constraints mem=8G
          (deploy 5 instances of mysql with at least 8 GB of RAM each)
          juju deploy haproxy -n 2 --constraints spaces=dmz,^cms,^database
@@ -1922,6 +2209,47 @@ Click on the expander to see details for each command.
    [juju help set-constraints](#juju help set-constraints)
 
    [juju help get-constraints](#juju help get-constraints)
+
+
+ 
+
+^# destroy-application
+
+   **Usage:** ` juju remove-application [options] <application>`
+
+   **Summary:**
+
+   Remove an application from the model.
+
+   **Options:**
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   
+   **Details:**
+
+
+   Removing an application will terminate any relations that application has, remove
+   all units of the application, and in the case that this leaves machines with
+   no running applications, Juju will also remove the machine. For this reason,
+   you should retrieve any logs or data required from applications and units 
+   before removing them. Removing units which are co-located with units of
+   other charms or a Juju controller will not result in the removal of the
+   machine.
+
+
+   **Examples:**
+
+
+          juju remove-application hadoop
+          juju remove-application -m test-model mariadb
+
+
+   **Aliases:**
+
+   _destroy-application_
 
 
  
@@ -2007,11 +2335,11 @@ Click on the expander to see details for each command.
 
 ^# destroy-relation
 
-   **Usage:** ` juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]`
+   **Usage:** ` juju remove-relation [options] <application1>[:<relation name1>] <application2>[:<relation name2>]`
 
    **Summary:**
 
-   Removes an existing relation between two services.
+   Removes an existing relation between two applications.
 
    **Options:**
 
@@ -2023,13 +2351,13 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   An existing relation between the two specified services will be removed. 
-   This should not result in either of the services entering an error state,
-   but may result in either or both of the services being unable to continue
+   An existing relation between the two specified applications will be removed. 
+   This should not result in either of the applications entering an error state,
+   but may result in either or both of the applications being unable to continue
    normal operation. In the case that there is more than one relation between
-   two services it is necessary to specify which is to be removed (see
+   two applications it is necessary to specify which is to be removed (see
    examples). Relations will automatically be removed when using the`juju
-   remove-service` command.
+   remove-application` command.
 
 
    **Examples:**
@@ -2050,52 +2378,11 @@ Click on the expander to see details for each command.
 
    [add-relation](#add-relation)
 
-   [remove-service](#remove-service)
+   [remove-application](#remove-application)
 
    **Aliases:**
 
    _destroy-relation_
-
-
- 
-
-^# destroy-service
-
-   **Usage:** ` juju remove-service [options] <service>`
-
-   **Summary:**
-
-   Remove a service from the model.
-
-   **Options:**
-
-   _-m, --model (= "")_
-
-   Model to operate in. Accepts [<controller name>:]<model name>
-
-   
-   **Details:**
-
-
-   Removing a service will terminate any relations that service has, remove
-   all units of the service, and in the case that this leaves machines with
-   no running services, Juju will also remove the machine. For this reason,
-   you should retrieve any logs or data required from services and units 
-   before removing them. Removing units which are co-located with units of
-   other charms or a Juju controller will not result in the removal of the
-   machine.
-
-
-   **Examples:**
-
-
-          juju remove-service hadoop
-          juju remove-service -m test-model mariadb
-
-
-   **Aliases:**
-
-   _destroy-service_
 
 
  
@@ -2106,7 +2393,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   remove service units from the model
+   Remove application units from the model.
 
    **Options:**
 
@@ -2118,15 +2405,29 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Remove service units from the model.
+   Remove application units from the model.
 
-   If this is the only unit running, the machine on which
-   the unit is hosted will also be destroyed, if possible.
+   Units of a service are numbered in sequence upon creation. For example, the
+   fourth unit of wordpress will be designated "wordpress/3". These identifiers
+   can be supplied in a space delimited list to remove unwanted units from the
+   model.
 
-   The machine will be destroyed if:
+   Juju will also remove the machine if the removed unit was the only unit left
+   on that machine (including units in containers).
 
-   - it is not a controller
-   - it is not hosting any Juju managed containers
+   Removing all units of a service is not equivalent to removing the service
+   itself; for that, the `juju remove-service` command is used.
+
+
+   **Examples:**
+
+
+          juju remove-unit wordpress/2 wordpress/3 wordpress/4
+
+
+   **See also:**
+
+   [emove-service](#emove-service)
 
    **Aliases:**
 
@@ -2156,7 +2457,7 @@ Click on the expander to see details for each command.
    A disabled Juju user is one that cannot log in to any controller.
 
    This command has no affect on models that the disabled user may have
-   created and/or shared nor any services associated with that user.
+   created and/or shared nor any applications associated with that user.
 
 
    **Examples:**
@@ -2167,9 +2468,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [enable-user](#enable-user)
+   [users](#users)
 
-   [list-users](#list-users)
+   [enable-user](#enable-user)
 
    [login](#login)
 
@@ -2182,13 +2483,13 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   get an archive file
+   Get an archive file.
 
    **Options:**
 
    _--filename (= "")_
 
-   download target
+   Download target
 
    _-m, --model (= "")_
 
@@ -2213,13 +2514,13 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   ensure that sufficient controllers exist to provide redundancy
+   Ensure that sufficient controllers exist to provide redundancy.
 
    **Options:**
 
    _--constraints  (= )_
 
-   additional machine constraints
+   Additional machine constraints
 
    _--format  (= simple)_
 
@@ -2231,7 +2532,7 @@ Click on the expander to see details for each command.
 
    _-n  (= 0)_
 
-   number of controllers to make available
+   Number of controllers to make available
 
    _-o, --output (= "")_
 
@@ -2239,17 +2540,17 @@ Click on the expander to see details for each command.
 
    _--series (= "")_
 
-   the charm series
+   The charm series
 
    _--to (= "")_
 
-   the machine(s) to become controllers, bypasses constraints
+   The machine(s) to become controllers, bypasses constraints
 
    
    **Details:**
 
 
-   To ensure availability of deployed services, the Juju infrastructure
+   To ensure availability of deployed applications, the Juju infrastructure
    must itself be highly available.  enable-ha must be called
    to ensure that the specified number of controllers are made available.
    An odd number of controllers is required.
@@ -2258,22 +2559,22 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-       juju enable-ha
-           Ensure that the controller is still in highly available mode. If
-           there is only 1 controller running, this will ensure there
-           are 3 running. If you have previously requested more than 3,
-           then that number will be ensured.
-       juju enable-ha -n 5 --series=trusty
-           Ensure that 5 controllers are available, with newly created
-           controller machines having the "trusty" series.
-       juju enable-ha -n 7 --constraints mem=8G
-           Ensure that 7 controllers are available, with newly created
-           controller machines having the default series, and at least
-           8GB RAM.
-       juju enable-ha -n 7 --to server1,server2 --constraints mem=8G
-           Ensure that 7 controllers are available, with machines server1 and
-           server2 used first, and if necessary, newly created controller
-           machines having the default series, and at least 8GB RAM.
+          # Ensure that the controller is still in highly available mode. If
+          # there is only 1 controller running, this will ensure there
+          # are 3 running. If you have previously requested more than 3,
+          # then that number will be ensured.
+          juju enable-ha
+          # Ensure that 5 controllers are available, with newly created
+          # controller machines having the "trusty" series.
+          juju enable-ha -n 5 --series=trusty
+          # Ensure that 7 controllers are available, with newly created
+          # controller machines having the default series, and at least
+          # 8GB RAM.
+          juju enable-ha -n 7 --constraints mem=8G
+          # Ensure that 7 controllers are available, with machines server1 and
+          # server2 used first, and if necessary, newly created controller
+          # machines having the default series, and at least 8GB RAM.
+          juju enable-ha -n 7 --to server1,server2 --constraints mem=8G
 
 
 
@@ -2308,9 +2609,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [disable-user](#disable-user)
+   [users](#users)
 
-   [list-users](#list-users)
+   [disable-user](#disable-user)
 
    [login](#login)
 
@@ -2319,11 +2620,11 @@ Click on the expander to see details for each command.
 
 ^# expose
 
-   **Usage:** ` juju expose [options] <service name>`
+   **Usage:** ` juju expose [options] <application name>`
 
    **Summary:**
 
-   Makes a service publicly available over the network.
+   Makes an application publicly available over the network.
 
    **Options:**
 
@@ -2336,7 +2637,7 @@ Click on the expander to see details for each command.
 
 
    Adjusts the firewall rules and any relevant security mechanisms of the
-   cloud to allow public access to the service.
+   cloud to allow public access to the application.
 
 
    **Examples:**
@@ -2354,11 +2655,11 @@ Click on the expander to see details for each command.
 
 ^# get-config
 
-   **Usage:** ` juju get-config [options] <service name>`
+   **Usage:** ` juju get-config [options] <application name>`
 
    **Summary:**
 
-   Displays configuration settings for a deployed service.
+   Displays configuration settings for a deployed application.
 
    **Options:**
 
@@ -2378,10 +2679,10 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Output includes the name of the charm used to deploy the service and a
-   listing of the service-specific configuration settings.
+   Output includes the name of the charm used to deploy the application and a
+   listing of the application-specific configuration settings.
 
-   See `juju status` for service names.
+   See `juju status` for application names.
 
 
    **Examples:**
@@ -2408,11 +2709,11 @@ Click on the expander to see details for each command.
 
 ^# get-configs
 
-   **Usage:** ` juju get-config [options] <service name>`
+   **Usage:** ` juju get-config [options] <application name>`
 
    **Summary:**
 
-   Displays configuration settings for a deployed service.
+   Displays configuration settings for a deployed application.
 
    **Options:**
 
@@ -2432,10 +2733,10 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Output includes the name of the charm used to deploy the service and a
-   listing of the service-specific configuration settings.
+   Output includes the name of the charm used to deploy the application and a
+   listing of the application-specific configuration settings.
 
-   See `juju status` for service names.
+   See `juju status` for application names.
 
 
    **Examples:**
@@ -2462,11 +2763,11 @@ Click on the expander to see details for each command.
 
 ^# get-constraints
 
-   **Usage:** ` juju get-constraints [options] <service>`
+   **Usage:** ` juju get-constraints [options] <application>`
 
    **Summary:**
 
-   Displays machine constraints for a service.
+   Displays machine constraints for an application.
 
    **Options:**
 
@@ -2486,15 +2787,15 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Shows machine constraints that have been set for a service with `juju set-
+   Shows machine constraints that have been set for an application with `juju set-
    constraints`.
 
    By default, the model is the current model.
 
-   Service constraints are combined with model constraints, set with `juju 
+   Application constraints are combined with model constraints, set with `juju 
    set-model-constraints`, for commands (such as 'deploy') that provision
-   machines for services. Where model and service constraints overlap, the
-   service constraints take precedence.
+   machines for applications. Where model and application constraints overlap, the
+   application constraints take precedence.
 
    Constraints for a specific model can be viewed with `juju get-model-
    constraints`.
@@ -2518,6 +2819,51 @@ Click on the expander to see details for each command.
 
  
 
+^# get-controller-config
+
+   **Usage:** ` juju get-controller-config [options] [<attribute key>]`
+
+   **Summary:**
+
+   Displays configuration settings for a controller.
+
+   **Options:**
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--format  (= smart)_
+
+   Specify output format (json|smart|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   By default, all configuration (keys and values) for the controller are
+   displayed if a key is not specified.
+
+
+   **Examples:**
+
+
+          juju get-controller-config
+          juju get-controller-config api-port
+          juju get-controller-config -c mycontroller
+
+
+   **See also:**
+
+   [ontrollers](#ontrollers)
+
+
+ 
+
 ^# get-model-config
 
    **Usage:** ` juju get-model-config [options] [<model key>]`
@@ -2528,9 +2874,9 @@ Click on the expander to see details for each command.
 
    **Options:**
 
-   _--format  (= smart)_
+   _--format  (= tabular)_
 
-   Specify output format (json|smart|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
@@ -2559,7 +2905,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [ist-models](#ist-models)
+   [odels](#odels)
 
    [set-model-config](#set-model-config)
 
@@ -2598,12 +2944,12 @@ Click on the expander to see details for each command.
    `juju set-model-constraints.`
    By default, the model is the current model.
 
-   Model constraints are combined with constraints set on a service
+   Model constraints are combined with constraints set on an application
    with `juju set-constraints` for commands (such as 'deploy') that provision
-   machines for services. Where model and service constraints overlap, the
-   service constraints take precedence.
+   machines for applications. Where model and application constraints overlap, the
+   application constraints take precedence.
 
-   Constraints for a specific service can be viewed with `juju get-constraints`.
+   Constraints for a specific application can be viewed with `juju get-constraints`.
 
    **Examples:**
 
@@ -2614,7 +2960,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [ist-models](#ist-models)
+   [odels](#odels)
 
    [set-model-constraints](#set-model-constraints)
 
@@ -2649,11 +2995,12 @@ Click on the expander to see details for each command.
 
    By default, the controller is the current controller.
 
-   Model access can also be granted at user-addition time with the `juju add-
-   user` command.
+   Model access can also be granted at user-addition time with the
+   `juju add-user` command.
 
-   Users with read access are limited in what they can do with models: `juju 
-   list-models`, `juju list-machines`, and `juju status`.
+   Users with read access are limited in what they can do with models:
+
+   `juju models`, `juju machines`, and `juju status`.
 
 
    **Examples:**
@@ -2686,7 +3033,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   open the Juju GUI in the default browser
+   Open the Juju GUI in the default browser.
 
    **Options:**
 
@@ -2696,11 +3043,11 @@ Click on the expander to see details for each command.
 
    _--no-browser  (= false)_
 
-   do not try to open the web browser, just print the Juju GUI URL
+   Do not try to open the web browser, just print the Juju GUI URL
 
    _--show-credentials  (= false)_
 
-   show admin credentials to use for logging into the Juju GUI
+   Show admin credentials to use for logging into the Juju GUI
 
    
    **Details:**
@@ -2728,6 +3075,14 @@ Click on the expander to see details for each command.
 
    show help on a command or other topic
 
+Details:
+
+   **See also:**
+
+   [opics](#opics)
+
+
+ 
 
 ^# help-tool
 
@@ -2735,7 +3090,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   show help on a juju charm tool
+   Show help on a Juju charm tool.
 
 
  
@@ -2760,12 +3115,12 @@ Click on the expander to see details for each command.
 
    Juju can add SSH keys to its cache from reliable public sources (currently
    Launchpad and GitHub), allowing those users SSH access to Juju machines.
-   The user identity supplied is the username on the respective service given
-   by 'lp:' or 'gh:'.
+   The user identity supplied is the username on the respective service given by
+   'lp:' or 'gh:'.
 
    If the user has multiple keys on the service, all the keys will be added.
-   Once the keys are imported, they can be viewed with the `juju list-ssh-
-   keys` command, where comments will indicate which ones were imported in
+   Once the keys are imported, they can be viewed with the `juju ssh-keys`
+   command, where comments will indicate which ones were imported in
    this way.
 
    An alternative to this command is the more manual `juju add-ssh-key`.
@@ -2787,7 +3142,7 @@ Click on the expander to see details for each command.
 
    [add-ssh-key](#add-ssh-key)
 
-   [list-ssh-keys](#list-ssh-keys)
+   [ssh-keys](#ssh-keys)
 
    **Aliases:**
 
@@ -2816,12 +3171,12 @@ Click on the expander to see details for each command.
 
    Juju can add SSH keys to its cache from reliable public sources (currently
    Launchpad and GitHub), allowing those users SSH access to Juju machines.
-   The user identity supplied is the username on the respective service given
-   by 'lp:' or 'gh:'.
+   The user identity supplied is the username on the respective service given by
+   'lp:' or 'gh:'.
 
    If the user has multiple keys on the service, all the keys will be added.
-   Once the keys are imported, they can be viewed with the `juju list-ssh-
-   keys` command, where comments will indicate which ones were imported in
+   Once the keys are imported, they can be viewed with the `juju ssh-keys`
+   command, where comments will indicate which ones were imported in
    this way.
 
    An alternative to this command is the more manual `juju add-ssh-key`.
@@ -2843,7 +3198,7 @@ Click on the expander to see details for each command.
 
    [add-ssh-key](#add-ssh-key)
 
-   [list-ssh-keys](#list-ssh-keys)
+   [ssh-keys](#ssh-keys)
 
    **Aliases:**
 
@@ -2858,13 +3213,13 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   forcibly terminate all machines and other associated resources for a juju controller
+   Forcibly terminate all machines and other associated resources for a Juju controller.
 
    **Options:**
 
    _-y, --yes  (= false)_
 
-   do not ask for confirmation
+   Do not ask for confirmation
 
    
    **Details:**
@@ -2886,11 +3241,11 @@ Click on the expander to see details for each command.
 
 ^# list-actions
 
-   **Usage:** ` juju list-actions [options] <service name>`
+   **Usage:** ` juju actions [options] <application name>`
 
    **Summary:**
 
-   list actions defined for a service
+   List actions defined for a service.
 
    **Options:**
 
@@ -2908,31 +3263,31 @@ Click on the expander to see details for each command.
 
    _--schema  (= false)_
 
-   display the full action schema
+   Display the full action schema
 
    
    **Details:**
 
 
-   List the actions available to run on the target service, with a short
+   List the actions available to run on the target application, with a short
    description.  To show the full schema for the actions, use --schema.
 
    For more information, see also the 'run-ation' command, which executes actions.
 
    **Aliases:**
 
-   _actions_
+   _list-actions_
 
 
  
 
 ^# list-agreements
 
-   **Usage:** ` juju list-agreements [options]`
+   **Usage:** ` juju agreements [options]`
 
    **Summary:**
 
-   list user's agreements
+   List user's agreements.
 
    **Options:**
 
@@ -2948,19 +3303,23 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   list-agreements is used to list terms the user has agreed to.
+   List terms the user has agreed to.
 
+
+   **Aliases:**
+
+   _list-agreements_
 
 
  
 
 ^# list-all-blocks
 
-   **Usage:** ` juju list-all-blocks [options]`
+   **Usage:** ` juju blocks [options]`
 
    **Summary:**
 
-   list all blocks within the controller
+   List all blocks within the controller.
 
    **Options:**
 
@@ -2982,16 +3341,22 @@ Click on the expander to see details for each command.
 
    List all blocks for models within the specified controller
 
+   **Aliases:**
+
+   _list-all-blocks,_
+
+   _list-blocks_
+
 
  
 
 ^# list-backups
 
-   **Usage:** ` juju list-backups [options]`
+   **Usage:** ` juju backups [options]`
 
    **Summary:**
 
-   get all metadata
+   Displays information about all backups.
 
    **Options:**
 
@@ -3003,23 +3368,60 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   list-backups provides the metadata associated with all backups.
+   backups provides the metadata associated with all backups.
 
 
    **Aliases:**
 
-   _backups_
+   _list-backups_
+
+
+ 
+
+^# list-blocks
+
+   **Usage:** ` juju blocks [options]`
+
+   **Summary:**
+
+   List all blocks within the controller.
+
+   **Options:**
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   List all blocks for models within the specified controller
+
+   **Aliases:**
+
+   _list-all-blocks,_
+
+   _list-blocks_
 
 
  
 
 ^# list-budgets
 
-   **Usage:** ` juju list-budgets [options]`
+   **Usage:** ` juju budgets [options]`
 
    **Summary:**
 
-   list budgets
+   List budgets.
 
    **Options:**
 
@@ -3037,26 +3439,33 @@ Click on the expander to see details for each command.
 
    List the available budgets.
 
-   Example:
 
-          juju list-budgets
+   **Examples:**
+
+
+          juju budgets
+
+
+   **Aliases:**
+
+   _list-budgets_
 
 
  
 
 ^# list-cached-images
 
-   **Usage:** ` juju list-cached-images [options]`
+   **Usage:** ` juju cached-images [options]`
 
    **Summary:**
 
-   shows cached os images
+   Shows cached os images.
 
    **Options:**
 
    _--arch (= "")_
 
-   the architecture of the image to list eg amd64
+   The architecture of the image to list eg amd64
 
    _--format  (= yaml)_
 
@@ -3064,7 +3473,7 @@ Click on the expander to see details for each command.
 
    _--kind (= "")_
 
-   the image kind to list eg lxd
+   The image kind to list eg lxd
 
    _-m, --model (= "")_
 
@@ -3076,7 +3485,7 @@ Click on the expander to see details for each command.
 
    _--series (= "")_
 
-   the series of the image to list eg xenial
+   The series of the image to list eg xenial
 
    
    **Details:**
@@ -3097,23 +3506,23 @@ Click on the expander to see details for each command.
 
 
         # List all cached images.
-        juju list-cache-images
+        juju cached-images
         # List cached images for xenial.
-        juju list-cache-images --series xenial 
+        juju cached-images --series xenial
         # List all cached lxd images for xenial amd64.
-        juju list-cache-images --kind lxd --series xenial --arch amd64
+        juju cached-images --kind lxd --series xenial --arch amd64
 
 
    **Aliases:**
 
-   _cached-images_
+   _list-cached-images_
 
 
  
 
 ^# list-clouds
 
-   **Usage:** ` juju list-clouds [options]`
+   **Usage:** ` juju clouds [options]`
 
    **Summary:**
 
@@ -3146,7 +3555,7 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-clouds
+          juju clouds
 
 
    **See also:**
@@ -3157,12 +3566,16 @@ Click on the expander to see details for each command.
 
    [add-cloud](#add-cloud)
 
+   **Aliases:**
+
+   _list-clouds_
+
 
  
 
 ^# list-controllers
 
-   **Usage:** ` juju list-controllers [options]`
+   **Usage:** ` juju controllers [options]`
 
    **Summary:**
 
@@ -3188,22 +3601,26 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-controllers
-          juju list-controllers --format json --output ~/tmp/controllers.json
+          juju controllers
+          juju controllers --format json --output ~/tmp/controllers.json
 
 
    **See also:**
 
-   [list-models](#list-models)
+   [models](#models)
 
    [show-controller](#show-controller)
+
+   **Aliases:**
+
+   _list-controllers_
 
 
  
 
 ^# list-credentials
 
-   **Usage:** ` juju list-credentials [options] [<cloud name>]`
+   **Usage:** ` juju credentials [options] [<cloud name>]`
 
    **Summary:**
 
@@ -3250,9 +3667,9 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-credentials
-          juju list-credentials aws
-          juju list-credentials --format yaml --show-secrets
+          juju credentials
+          juju credentials aws
+          juju credentials --format yaml --show-secrets
 
 
    **See also:**
@@ -3265,12 +3682,16 @@ Click on the expander to see details for each command.
 
    [autoload-credentials](#autoload-credentials)
 
+   **Aliases:**
+
+   _list-credentials_
+
 
  
 
 ^# list-machine
 
-   **Usage:** ` juju list-machines [options]`
+   **Usage:** ` juju machines [options]`
 
    **Summary:**
 
@@ -3307,7 +3728,7 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-           juju list-machines
+           juju machines
 
 
    **See also:**
@@ -3316,7 +3737,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-   _machines,_
+   _list-machines,_
 
    _machine,_
 
@@ -3327,7 +3748,7 @@ Click on the expander to see details for each command.
 
 ^# list-machines
 
-   **Usage:** ` juju list-machines [options]`
+   **Usage:** ` juju machines [options]`
 
    **Summary:**
 
@@ -3364,7 +3785,7 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-           juju list-machines
+           juju machines
 
 
    **See also:**
@@ -3373,7 +3794,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-   _machines,_
+   _list-machines,_
 
    _machine,_
 
@@ -3384,7 +3805,7 @@ Click on the expander to see details for each command.
 
 ^# list-models
 
-   **Usage:** ` juju list-models [options]`
+   **Usage:** ` juju models [options]`
 
    **Summary:**
 
@@ -3433,8 +3854,8 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-models
-          juju list-models --user bob
+          juju models
+          juju models --user bob
 
 
    **See also:**
@@ -3445,12 +3866,16 @@ Click on the expander to see details for each command.
 
    [unshare-model](#unshare-model)
 
+   **Aliases:**
+
+   _list-models_
+
 
  
 
 ^# list-payloads
 
-   **Usage:** ` juju list-payloads [options] [pattern ...]`
+   **Usage:** ` juju payloads [options] [pattern ...]`
 
    **Summary:**
 
@@ -3488,16 +3913,20 @@ Click on the expander to see details for each command.
    - payload tag
    - payload status
 
+   **Aliases:**
+
+   _list-payloads_
+
 
  
 
 ^# list-plans
 
-   **Usage:** ` juju list-plans [options]`
+   **Usage:** ` juju plans [options]`
 
    **Summary:**
 
-   list plans
+   List plans.
 
    **Options:**
 
@@ -3515,16 +3944,23 @@ Click on the expander to see details for each command.
 
    List plans available for the specified charm.
 
-   Example:
 
-          juju list-plans cs:webapp
+   **Examples:**
+
+
+          juju plans cs:webapp
+
+
+   **Aliases:**
+
+   _list-plans_
 
 
  
 
 ^# list-resources
 
-   **Usage:** ` juju list-resources [options] service-or-unit`
+   **Usage:** ` juju resources [options] application-or-unit`
 
    **Summary:**
 
@@ -3553,20 +3989,20 @@ Click on the expander to see details for each command.
 
 
    This command shows the resources required by and those in use by an existing
-   service or unit in your model.  When run for a service, it will also show any
+   application or unit in your model.  When run for an application, it will also show any
    updates available for resources from the charmstore.
 
 
    **Aliases:**
 
-   _resources_
+   _list-resources_
 
 
  
 
 ^# list-shares
 
-   **Usage:** ` juju list-shares [options]`
+   **Usage:** ` juju shares [options]`
 
    **Summary:**
 
@@ -3596,20 +4032,24 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-shares
-          juju list-shares -m mymodel
+          juju shares
+          juju shares -m mymodel
 
 
    **See also:**
 
    [grant](#grant)
 
+   **Aliases:**
+
+   _list-shares_
+
 
  
 
 ^# list-spaces
 
-   **Usage:** ` juju list-spaces [options] [--short] [--format yaml|json] [--output <path>]`
+   **Usage:** ` juju spaces [options] [--short] [--format yaml|json] [--output <path>]`
 
    **Summary:**
 
@@ -3646,14 +4086,14 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-   _spaces_
+   _list-spaces_
 
 
  
 
 ^# list-ssh-key
 
-   **Usage:** ` juju list-ssh-keys [options]`
+   **Usage:** ` juju ssh-keys [options]`
 
    **Summary:**
 
@@ -3686,18 +4126,18 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-ssh-keys
+          juju ssh-keys
 
    To examine the full key, use the '--full' option:
 
-          juju list-keys -m jujutest --full
+          juju ssh-keys -m jujutest --full
 
 
    **Aliases:**
 
-   _ssh-key,_
+   _list-ssh-keys,_
 
-   _ssh-keys,_
+   _ssh-key,_
 
    _list-ssh-key_
 
@@ -3706,7 +4146,7 @@ Click on the expander to see details for each command.
 
 ^# list-ssh-keys
 
-   **Usage:** ` juju list-ssh-keys [options]`
+   **Usage:** ` juju ssh-keys [options]`
 
    **Summary:**
 
@@ -3739,18 +4179,18 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-ssh-keys
+          juju ssh-keys
 
    To examine the full key, use the '--full' option:
 
-          juju list-keys -m jujutest --full
+          juju ssh-keys -m jujutest --full
 
 
    **Aliases:**
 
-   _ssh-key,_
+   _list-ssh-keys,_
 
-   _ssh-keys,_
+   _ssh-key,_
 
    _list-ssh-key_
 
@@ -3759,17 +4199,17 @@ Click on the expander to see details for each command.
 
 ^# list-storage
 
-   **Usage:** ` juju list-storage [options] <machineID> ...`
+   **Usage:** ` juju storage [options] <machineID> ...`
 
    **Summary:**
 
-   lists storage details
+   Lists storage details.
 
    **Options:**
 
    _--filesystem  (= false)_
 
-   list filesystem storage
+   List filesystem storage
 
    _--format  (= tabular)_
 
@@ -3785,7 +4225,7 @@ Click on the expander to see details for each command.
 
    _--volume  (= false)_
 
-   list volume storage
+   List volume storage
 
    
    **Details:**
@@ -3793,31 +4233,21 @@ Click on the expander to see details for each command.
 
    List information about storage instances.
 
-   options:
-
-   -m, --model (= "")
-            juju model to operate in
-   
-   -o, --output (= "")
-            specify an output file
-   
-   --format (= tabular)
-            specify output format (json|tabular|yaml)
 
    **Aliases:**
 
-   _storage_
+   _list-storage_
 
 
  
 
 ^# list-storage-pools
 
-   **Usage:** ` juju list-storage-pools [options]`
+   **Usage:** ` juju storage-pools [options]`
 
    **Summary:**
 
-   list storage pools
+   List storage pools.
 
    **Options:**
 
@@ -3831,7 +4261,7 @@ Click on the expander to see details for each command.
 
    _--name  (= )_
 
-   only show pools with these names
+   Only show pools with these names
 
    _-o, --output (= "")_
 
@@ -3839,13 +4269,11 @@ Click on the expander to see details for each command.
 
    _--provider  (= )_
 
-   only show pools of these provider types
+   Only show pools of these provider types
 
    
    **Details:**
 
-
-   Lists storage pools.
 
    The user can filter on pool type, name.
 
@@ -3861,33 +4289,21 @@ Click on the expander to see details for each command.
 
    Valid pool types are pool types that are registered for Juju model.
 
-   options:
 
-   -m, --model (= "")
-            juju model to operate in
-   
-   -o, --output (= "")
-            specify an output file
-   
-   --format (= yaml)
-            specify output format (json|tabular|yaml)
-   
-   --provider
-            pool provider type
-   
-   --name
-            pool name
+   **Aliases:**
+
+   _list-storage-pools_
 
 
  
 
 ^# list-subnets
 
-   **Usage:** ` juju list-subnets [options] [--space <name>] [--zone <name>] [--format yaml|json] [--output <path>]`
+   **Usage:** ` juju subnets [options] [--space <name>] [--zone <name>] [--format yaml|json] [--output <path>]`
 
    **Summary:**
 
-   list subnets known to Juju
+   List subnets known to Juju.
 
    **Options:**
 
@@ -3905,11 +4321,11 @@ Click on the expander to see details for each command.
 
    _--space (= "")_
 
-   filter results by space name
+   Filter results by space name
 
    _--zone (= "")_
 
-   filter results by zone name
+   Filter results by zone name
 
    
    **Details:**
@@ -3926,14 +4342,14 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-   _subnets_
+   _list-subnets_
 
 
  
 
 ^# list-users
 
-   **Usage:** ` juju list-users [options]`
+   **Usage:** ` juju users [options]`
 
    **Summary:**
 
@@ -3971,7 +4387,7 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-users
+          juju users
 
 
    **See also:**
@@ -3986,6 +4402,10 @@ Click on the expander to see details for each command.
 
    [enable-user](#enable-user)
 
+   **Aliases:**
+
+   _list-users_
+
 
  
 
@@ -3995,7 +4415,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   logs in to the controller
+   Logs a user in to a controller.
 
    **Options:**
 
@@ -4007,23 +4427,24 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Log in to the controller.
-
-   After logging in successfully, the client system will
-   be updated such that any previously recorded password
-   will be removed from disk, and a temporary, time-limited
-   credential written in its place. Once the credential
-   expires, you will be prompted to run "juju login" again.
+   After login, a token ("macaroon") will become active. It has an expiration
+   time of 24 hours. Upon expiration, no further Juju commands can be issued
+   and the user will be prompted to log in again.
 
 
    **Examples:**
 
 
-        # Log in as the current user for the controller.
-        juju login
-        # Log in as the user "bob".
-        juju login bob
+          juju login bob
 
+
+   **See also:**
+
+   [nable-user](#nable-user)
+
+   [disable-user](#disable-user)
+
+   [logout](#logout)
 
 
  
@@ -4034,7 +4455,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   logs out of the controller
+   Logs a Juju user out of a controller.
 
    **Options:**
 
@@ -4044,29 +4465,43 @@ Click on the expander to see details for each command.
 
    _--force  (= false)_
 
-   force logout when a locally recorded password is detected
+   Force logout when a locally recorded password is detected
 
    
    **Details:**
 
 
-   Log out of the controller.
+   If another client has logged in as the same user, they will remain logged
+   in. This command only affects the local client.
 
-   This command will remove the user credentials for the current
-   or specified controller from the client system. This command
-   will fail if you have not previously logged in with a password;
-   you can override this behavior by passing --force.
+   The command will fail if the user has not yet set a password
+   (`juju change-user-password`). This scenario is only possible after 
+   `juju bootstrap`since `juju register` sets a password. The
+   failing behaviour can be overridden with the '--force' option.
 
-   If another client has logged in as the same user, they will
-   remain logged in. This command only affects the local client.
+   If the same user is logged in with another client system, that user session
+   will not be affected by this command; it only affects the local client.
+   By default, the controller is the current controller.
 
+
+   **Examples:**
+
+
+          juju logout
+
+
+   **See also:**
+
+   [juju change-user-password](#juju change-user-password)
+
+   [juju login](#juju login)
 
 
  
 
 ^# machine
 
-   **Usage:** ` juju list-machines [options]`
+   **Usage:** ` juju machines [options]`
 
    **Summary:**
 
@@ -4103,7 +4538,7 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-           juju list-machines
+           juju machines
 
 
    **See also:**
@@ -4112,7 +4547,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-   _machines,_
+   _list-machines,_
 
    _machine,_
 
@@ -4123,7 +4558,7 @@ Click on the expander to see details for each command.
 
 ^# machines
 
-   **Usage:** ` juju list-machines [options]`
+   **Usage:** ` juju machines [options]`
 
    **Summary:**
 
@@ -4160,7 +4595,7 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-           juju list-machines
+           juju machines
 
 
    **See also:**
@@ -4169,11 +4604,166 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-   _machines,_
+   _list-machines,_
 
    _machine,_
 
    _list-machine_
+
+
+ 
+
+^# models
+
+   **Usage:** ` juju models [options]`
+
+   **Summary:**
+
+   Lists models a user can access on a controller.
+
+   **Options:**
+
+   _--all  (= false)_
+
+   Lists all models, regardless of user accessibility (administrative users only)
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--exact-time  (= false)_
+
+   Use full timestamps
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   _--user (= "")_
+
+   The user to list models for (administrative users only)
+
+   _--uuid  (= false)_
+
+   Display UUID for models
+
+   
+   **Details:**
+
+
+   The models listed here are either models you have created yourself, or
+   models which have been shared with you. Default values for user and
+   controller are, respectively, the current user and the current controller.
+   The active model is denoted by an asterisk.
+
+
+   **Examples:**
+
+
+          juju models
+          juju models --user bob
+
+
+   **See also:**
+
+   [dd-model](#dd-model)
+
+   [share-model](#share-model)
+
+   [unshare-model](#unshare-model)
+
+   **Aliases:**
+
+   _list-models_
+
+
+ 
+
+^# payloads
+
+   **Usage:** ` juju payloads [options] [pattern ...]`
+
+   **Summary:**
+
+   display status information about known payloads
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   This command will report on the runtime state of defined payloads.
+
+   When one or more pattern is given, Juju will limit the results to only
+   those payloads which match *any* of the provided patterns. Each pattern
+   will be checked against the following info in Juju:
+
+   - unit name
+   - machine id
+   - payload type
+   - payload class
+   - payload id
+   - payload tag
+   - payload status
+
+   **Aliases:**
+
+   _list-payloads_
+
+
+ 
+
+^# plans
+
+   **Usage:** ` juju plans [options]`
+
+   **Summary:**
+
+   List plans.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|smart|summary|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   List plans available for the specified charm.
+
+
+   **Examples:**
+
+
+          juju plans cs:webapp
+
+
+   **Aliases:**
+
+   _list-plans_
 
 
  
@@ -4184,13 +4774,13 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   publish charm to the store
+   Publish charm to the store.
 
    **Options:**
 
    _--from (= ".")_
 
-   path for charm to be published
+   Path for charm to be published
 
    _-m, --model (= "")_
 
@@ -4258,13 +4848,34 @@ Click on the expander to see details for each command.
 
  
 
+^# relate
+
+   **Usage:** ` juju add-relation [options] <application1>[:<relation name1>] <application2>[:<relation name2>]`
+
+   **Summary:**
+
+   Add a relation between two applications.
+
+   **Options:**
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   **Aliases:**
+
+   _relate_
+
+
+ 
+
 ^# remove-all-blocks
 
    **Usage:** ` juju remove-all-blocks [options]`
 
    **Summary:**
 
-   remove all blocks in the Juju controller
+   Remove all blocks in the Juju controller.
 
    **Options:**
 
@@ -4284,9 +4895,50 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [juju help block](#juju help block)
+   [juju block](#juju block)
 
-   [juju help unblock](#juju help unblock)
+   [juju unblock](#juju unblock)
+
+
+ 
+
+^# remove-application
+
+   **Usage:** ` juju remove-application [options] <application>`
+
+   **Summary:**
+
+   Remove an application from the model.
+
+   **Options:**
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   
+   **Details:**
+
+
+   Removing an application will terminate any relations that application has, remove
+   all units of the application, and in the case that this leaves machines with
+   no running applications, Juju will also remove the machine. For this reason,
+   you should retrieve any logs or data required from applications and units 
+   before removing them. Removing units which are co-located with units of
+   other charms or a Juju controller will not result in the removal of the
+   machine.
+
+
+   **Examples:**
+
+
+          juju remove-application hadoop
+          juju remove-application -m test-model mariadb
+
+
+   **Aliases:**
+
+   _destroy-application_
 
 
  
@@ -4297,7 +4949,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   delete a backup
+   Remove the spcified backup from remote storage.
 
    **Options:**
 
@@ -4321,17 +4973,17 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   remove cached os images
+   Remove cached OS images.
 
    **Options:**
 
    _--arch (= "")_
 
-   the architecture of the image to remove eg amd64
+   The architecture of the image to remove eg amd64
 
    _--kind (= "")_
 
-   the image kind to remove eg lxd
+   The image kind to remove eg lxd
 
    _-m, --model (= "")_
 
@@ -4339,7 +4991,7 @@ Click on the expander to see details for each command.
 
    _--series (= "")_
 
-   the series of the image to remove eg xenial
+   The series of the image to remove eg xenial
 
    
    **Details:**
@@ -4363,6 +5015,37 @@ Click on the expander to see details for each command.
 
  
 
+^# remove-cloud
+
+   **Usage:** ` juju remove-cloud <cloud name>`
+
+   **Summary:**
+
+   Removes a user-defined cloud from Juju.
+
+
+   
+   **Details:**
+
+
+   Remove a named, user-defined cloud from Juju.
+
+
+   **Examples:**
+
+
+          juju remove-cloud mycloud
+
+
+   **See also:**
+
+   [add-cloud](#add-cloud)
+
+   [list-clouds](#list-clouds)
+
+
+ 
+
 ^# remove-credential
 
    **Usage:** ` juju remove-credential <cloud name> <credential name>`
@@ -4379,7 +5062,7 @@ Click on the expander to see details for each command.
    The credentials to be removed are specified by a "credential name".
 
    Credential names, and optionally the corresponding authentication
-   material, can be listed with `juju list-credentials`.
+   material, can be listed with `juju credentials`.
 
 
    **Examples:**
@@ -4390,9 +5073,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [add-credential](#add-credential)
+   [credentials](#credentials)
 
-   [list-credentials](#list-credentials)
+   [add-credential](#add-credential)
 
    [set-default-credential](#set-default-credential)
 
@@ -4403,17 +5086,17 @@ Click on the expander to see details for each command.
 
 ^# remove-machine
 
-   **Usage:** ` juju remove-machine [options] <machineID[s]> ...`
+   **Usage:** ` juju remove-machine [options] <machine number> ...`
 
    **Summary:**
 
-   remove machines from the model
+   Removes one or more machines from a model.
 
    **Options:**
 
    _--force  (= false)_
 
-   completely remove machine and all dependencies
+   Completely remove a machine and all its dependencies
 
    _-m, --model (= "")_
 
@@ -4423,19 +5106,30 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Machines that are responsible for the model cannot be removed. Machines
-   running units or containers can only be removed with the --force flag; doing
-   so will also remove all those units and containers without giving them any
-   opportunity to shut down cleanly.
+   Machines are specified by their numbers, which may be retrieved from the
+   output of `juju status`.
+
+   Machines responsible for the model cannot be removed.
+
+   Machines running units or containers can be removed using the '--force'
+   option; this will also remove those units and containers without giving
+   them an opportunity to shut down cleanly.
 
 
    **Examples:**
 
-   	# Remove machine number 5 which has no running units or containers
-   	$ juju remove-machine 5
-   	# Remove machine 6 and any running units or containers
-   	$ juju remove-machine 6 --force
+   Remove machine number 5 which has no running units or containers:
 
+          juju remove-machine 5
+
+   Remove machine 6 and any running units or containers:
+
+          juju remove-machine 6 --force
+
+
+   **See also:**
+
+   [add-machine](#add-machine)
 
    **Aliases:**
 
@@ -4446,17 +5140,17 @@ Click on the expander to see details for each command.
 
 ^# remove-machines
 
-   **Usage:** ` juju remove-machine [options] <machineID[s]> ...`
+   **Usage:** ` juju remove-machine [options] <machine number> ...`
 
    **Summary:**
 
-   remove machines from the model
+   Removes one or more machines from a model.
 
    **Options:**
 
    _--force  (= false)_
 
-   completely remove machine and all dependencies
+   Completely remove a machine and all its dependencies
 
    _-m, --model (= "")_
 
@@ -4466,19 +5160,30 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Machines that are responsible for the model cannot be removed. Machines
-   running units or containers can only be removed with the --force flag; doing
-   so will also remove all those units and containers without giving them any
-   opportunity to shut down cleanly.
+   Machines are specified by their numbers, which may be retrieved from the
+   output of `juju status`.
+
+   Machines responsible for the model cannot be removed.
+
+   Machines running units or containers can be removed using the '--force'
+   option; this will also remove those units and containers without giving
+   them an opportunity to shut down cleanly.
 
 
    **Examples:**
 
-   	# Remove machine number 5 which has no running units or containers
-   	$ juju remove-machine 5
-   	# Remove machine 6 and any running units or containers
-   	$ juju remove-machine 6 --force
+   Remove machine number 5 which has no running units or containers:
 
+          juju remove-machine 5
+
+   Remove machine 6 and any running units or containers:
+
+          juju remove-machine 6 --force
+
+
+   **See also:**
+
+   [add-machine](#add-machine)
 
    **Aliases:**
 
@@ -4489,11 +5194,11 @@ Click on the expander to see details for each command.
 
 ^# remove-relation
 
-   **Usage:** ` juju remove-relation [options] <service1>[:<relation name1>] <service2>[:<relation name2>]`
+   **Usage:** ` juju remove-relation [options] <application1>[:<relation name1>] <application2>[:<relation name2>]`
 
    **Summary:**
 
-   Removes an existing relation between two services.
+   Removes an existing relation between two applications.
 
    **Options:**
 
@@ -4505,13 +5210,13 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   An existing relation between the two specified services will be removed. 
-   This should not result in either of the services entering an error state,
-   but may result in either or both of the services being unable to continue
+   An existing relation between the two specified applications will be removed. 
+   This should not result in either of the applications entering an error state,
+   but may result in either or both of the applications being unable to continue
    normal operation. In the case that there is more than one relation between
-   two services it is necessary to specify which is to be removed (see
+   two applications it is necessary to specify which is to be removed (see
    examples). Relations will automatically be removed when using the`juju
-   remove-service` command.
+   remove-application` command.
 
 
    **Examples:**
@@ -4532,52 +5237,11 @@ Click on the expander to see details for each command.
 
    [add-relation](#add-relation)
 
-   [remove-service](#remove-service)
+   [remove-application](#remove-application)
 
    **Aliases:**
 
    _destroy-relation_
-
-
- 
-
-^# remove-service
-
-   **Usage:** ` juju remove-service [options] <service>`
-
-   **Summary:**
-
-   Remove a service from the model.
-
-   **Options:**
-
-   _-m, --model (= "")_
-
-   Model to operate in. Accepts [<controller name>:]<model name>
-
-   
-   **Details:**
-
-
-   Removing a service will terminate any relations that service has, remove
-   all units of the service, and in the case that this leaves machines with
-   no running services, Juju will also remove the machine. For this reason,
-   you should retrieve any logs or data required from services and units 
-   before removing them. Removing units which are co-located with units of
-   other charms or a Juju controller will not result in the removal of the
-   machine.
-
-
-   **Examples:**
-
-
-          juju remove-service hadoop
-          juju remove-service -m test-model mariadb
-
-
-   **Aliases:**
-
-   _destroy-service_
 
 
  
@@ -4617,7 +5281,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [list-ssh-key](#list-ssh-key)
+   [ssh-keys](#ssh-keys)
 
    [add-ssh-key](#add-ssh-key)
 
@@ -4665,7 +5329,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [list-ssh-key](#list-ssh-key)
+   [ssh-keys](#ssh-keys)
 
    [add-ssh-key](#add-ssh-key)
 
@@ -4684,7 +5348,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   remove service units from the model
+   Remove application units from the model.
 
    **Options:**
 
@@ -4696,15 +5360,29 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Remove service units from the model.
+   Remove application units from the model.
 
-   If this is the only unit running, the machine on which
-   the unit is hosted will also be destroyed, if possible.
+   Units of a service are numbered in sequence upon creation. For example, the
+   fourth unit of wordpress will be designated "wordpress/3". These identifiers
+   can be supplied in a space delimited list to remove unwanted units from the
+   model.
 
-   The machine will be destroyed if:
+   Juju will also remove the machine if the removed unit was the only unit left
+   on that machine (including units in containers).
 
-   - it is not a controller
-   - it is not hosting any Juju managed containers
+   Removing all units of a service is not equivalent to removing the service
+   itself; for that, the `juju remove-service` command is used.
+
+
+   **Examples:**
+
+
+          juju remove-unit wordpress/2 wordpress/3 wordpress/4
+
+
+   **See also:**
+
+   [emove-service](#emove-service)
 
    **Aliases:**
 
@@ -4719,7 +5397,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   marks unit errors resolved
+   Marks unit errors resolved.
 
    **Options:**
 
@@ -4729,14 +5407,14 @@ Click on the expander to see details for each command.
 
    _-r, --retry  (= false)_
 
-   re-execute failed hooks
+   Re-execute failed hooks
 
 
  
 
 ^# resources
 
-   **Usage:** ` juju list-resources [options] service-or-unit`
+   **Usage:** ` juju resources [options] application-or-unit`
 
    **Summary:**
 
@@ -4765,13 +5443,13 @@ Click on the expander to see details for each command.
 
 
    This command shows the resources required by and those in use by an existing
-   service or unit in your model.  When run for a service, it will also show any
+   application or unit in your model.  When run for an application, it will also show any
    updates available for resources from the charmstore.
 
 
    **Aliases:**
 
-   _resources_
+   _list-resources_
 
 
  
@@ -4782,13 +5460,13 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   restore from a backup archive to a new controller
+   Restore from a backup archive to a new controller.
 
    **Options:**
 
    _-b  (= false)_
 
-   bootstrap a new state machine
+   Bootstrap a new state machine
 
    _--constraints  (= )_
 
@@ -4796,11 +5474,11 @@ Click on the expander to see details for each command.
 
    _--file (= "")_
 
-   provide a file to be used as the backup.
+   Provide a file to be used as the backup.
 
    _--id (= "")_
 
-   provide the name of the backup to be restored.
+   Provide the name of the backup to be restored
 
    _-m, --model (= "")_
 
@@ -4808,7 +5486,7 @@ Click on the expander to see details for each command.
 
    _--upload-tools  (= false)_
 
-   upload tools if bootstraping a new machine.
+   Upload tools if bootstraping a new machine
 
    
    **Details:**
@@ -4838,7 +5516,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   retries provisioning for failed machines
+   Retries provisioning for failed machines.
 
    **Options:**
 
@@ -4902,13 +5580,17 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   run the commands on the remote targets specified
+   Run the commands on the remote targets specified.
 
    **Options:**
 
    _--all  (= false)_
 
-   run the commands on all the machines
+   Run the commands on all the machines
+
+   _--application  (= )_
+
+   One or more application names
 
    _--format  (= smart)_
 
@@ -4920,23 +5602,19 @@ Click on the expander to see details for each command.
 
    _--machine  (= )_
 
-   one or more machine ids
+   One or more machine ids
 
    _-o, --output (= "")_
 
    Specify an output file
 
-   _--service  (= )_
-
-   one or more service names
-
    _--timeout  (= 5m0s)_
 
-   how long to wait before the remote command is considered to have failed
+   How long to wait before the remote command is considered to have failed
 
    _--unit  (= )_
 
-   one or more unit ids
+   One or more unit ids
 
    
    **Details:**
@@ -4944,24 +5622,24 @@ Click on the expander to see details for each command.
 
    Run the commands on the specified targets.
 
-   Targets are specified using either machine ids, service names or unit
+   Targets are specified using either machine ids, application names or unit
    names.  At least one target specifier is needed.
 
-   Multiple values can be set for --machine, --service, and --unit by using
+   Multiple values can be set for --machine, --application, and --unit by using
    comma separated values.
 
    If the target is a machine, the command is run as the "ubuntu" user on
    the remote machine.
 
-   If the target is a service, the command is run on all units for that
-   service. For example, if there was a service "mysql" and that service
+   If the target is an application, the command is run on all units for that
+   application. For example, if there was an application "mysql" and that application
    had two units, "mysql/0" and "mysql/1", then
-           --service mysql
+           --application mysql
    
    is equivalent to
            --unit mysql/0,mysql/1
    
-   Commands run for services or units are executed in a 'hook context' for
+   Commands run for applications or units are executed in a 'hook context' for
    the unit.
 
    --all is provided as a simple way to run the command on all the machines
@@ -4980,7 +5658,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   queue an action for execution
+   Queue an action for execution.
 
    **Options:**
 
@@ -4998,20 +5676,24 @@ Click on the expander to see details for each command.
 
    _--params  (= )_
 
-   path to yaml-formatted params file
+   Path to yaml-formatted params file
 
    _--string-args  (= false)_
 
-   use raw string values of CLI args
+   Use raw string values of CLI args
 
    
    **Details:**
 
 
    Queue an Action for execution on a given unit, with a given set of params.
-   Displays the ID of the Action for use with 'juju kill', 'juju status', etc.
-   Params are validated according to the charm for the unit's service.  The 
-   valid params can be seen using "juju action defined <service> --schema".
+   The Action ID is returned for use with 'juju show-action-output <ID>' or
+   'juju show-action-status <ID>'.
+
+          
+   
+   Params are validated according to the charm for the unit's application.  The 
+   valid params can be seen using "juju action defined <application> --schema".
    Params may be in a yaml file which is passed with the --params flag, or they
    may be specified by a key.key.key...=value format (see examples below.)
    Params given in the CLI invocation will be parsed as YAML unless the
@@ -5077,7 +5759,7 @@ Click on the expander to see details for each command.
 
 ^# scp
 
-   **Usage:** ` juju scp [options] <file> [<user>@]<target>:[<path>]`
+   **Usage:** ` juju scp [options] <source> <destination>`
 
    **Summary:**
 
@@ -5088,6 +5770,10 @@ Click on the expander to see details for each command.
    _-m, --model (= "")_
 
    Model to operate in. Accepts [<controller name>:]<model name>
+
+   _--no-host-key-checks  (= false)_
+
+   Skip host key checking (INSECURE)
 
    _--proxy  (= false)_
 
@@ -5101,26 +5787,24 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   The usage is for transferring files from the client to a Juju machine. To
-   do the reverse:
+   The source or destination arguments may either be a local path or a remote
+   location. The syntax for a remote location is:
 
-   juju scp [options] [<user>@]<target>:<file> <path>
-   and use quotes when multiple files are involved.
+             [<user>@]<target>:[<path>]
+   
+   If the user is not specified, "ubuntu" is used. If <path> is not specified, it
+   defaults to the home directory of the remote user account.
 
-   The machine is identified by the <target> argument which is either a 'unit
-   name' or a 'machine id'. Both are obtained in the output from `juju 
-   status`: unit name in the [Units] section and machine id in the [Machines]
-   section.
+   The <target> may be either a 'unit name' or a 'machine id'. These can be
+   obtained from the output of "juju status".
 
-   If 'user' is specified then the connection is made to that user account;
-   otherwise, the 'ubuntu' account is used.
+   Options specific to scp can be provided after a "--". Refer to the scp(1) man
+   page for an explanation of those options. The "-r" option to recursively copy a
+   directory is particularly useful.
 
-   'file' can be single or multiple files or directories. For directories,
-   you must use the scp option of '-r'.
-
-   Options specific to scp can be inserted between 'scp' and '[options]' with
-   '-- <scp-options>'. Refer to the scp(1) man page for an explanation of
-   those options.
+   The SSH host keys of the target are verified. The --no-host-key-checks option
+   can be used to disable these checks. Use of this option is not recommended as
+   it opens up the possibility of a man-in-the-middle attack.
 
 
    **Examples:**
@@ -5130,18 +5814,18 @@ Click on the expander to see details for each command.
 
           juju scp 2:/var/log/syslog .
 
-   Copy directory /var/log/mongodb, recursively, from a mongodb unit
-   to the client's local directory remote-logs:
+   Recursively copy the /var/log/mongodb directory from a mongodb unit to the
+   client's local remote-logs directory:
 
           juju scp -- -r mongodb/0:/var/log/mongodb/ remote-logs
 
-   Copy file foo.txt, in verbose mode, from the client's current working
-   directory to an apache2 unit of model "mymodel":
+   Copy foo.txt from the client's current working directory to an apache2 unit of
+   model "prod". Proxy the SSH connection through the controller and turn on scp
+   compression:
 
-          juju scp -- -v -m mymodel foo.txt apache2/1:
+          juju scp -m prod --proxy -- -C foo.txt apache2/1:
 
-   Copy multiple files from the client's current working directory to machine
-   2:
+   Copy multiple files from the client's current working directory to machine 2:
 
           juju scp file1 file2 2:
 
@@ -5149,6 +5833,11 @@ Click on the expander to see details for each command.
    current working directory:
 
           juju scp bob@3:'file1 file2' .
+
+   Copy file.dat from machine 0 to the machine hosting unit foo/0 (-3
+   causes the transfer to be made via the client):
+
+          juju scp -- -3 0:file.dat foo/0:
 
 
    **See also:**
@@ -5160,11 +5849,11 @@ Click on the expander to see details for each command.
 
 ^# set-budget
 
-   **Usage:** ` juju set-budget`
+   **Usage:** ` juju set-budget <budget name> <value>`
 
    **Summary:**
 
-   set the budget limit
+   Set the budget limit.
 
 
    
@@ -5173,10 +5862,12 @@ Click on the expander to see details for each command.
 
    Set the monthly budget limit.
 
-   Example:
 
+   **Examples:**
+
+
+          # Sets the monthly limit for budget named 'personal' to 96.
           juju set-budget personal 96
-              Sets the monthly limit for budget named 'personal' to 96.
 
 
 
@@ -5184,17 +5875,17 @@ Click on the expander to see details for each command.
 
 ^# set-config
 
-   **Usage:** ` juju set-config [options] <service name> <service key>=<value> ...`
+   **Usage:** ` juju set-config [options] <application name> <application key>=<value> ...`
 
    **Summary:**
 
-   Sets configuration options for a service.
+   Sets configuration options for an application.
 
    **Options:**
 
    _--config  (= )_
 
-   path to yaml-formatted service config
+   path to yaml-formatted application config
 
    _-m, --model (= "")_
 
@@ -5202,14 +5893,14 @@ Click on the expander to see details for each command.
 
    _--to-default  (= false)_
 
-   set service option values to default
+   set application option values to default
 
    
    **Details:**
 
 
    Charms may, and frequently do, expose a number of configuration settings
-   for a service to the user. These can be set at deploy time, but may be set
+   for an application to the user. These can be set at deploy time, but may be set
    at any time by using the `juju set-config` command. The actual options
    vary per charm (you can check the charm documentation, or use `juju get-
    config` to check which options may be set).
@@ -5221,7 +5912,7 @@ Click on the expander to see details for each command.
    Values may be any UTF-8 encoded string. UTF-8 is accepted on the command
    line and in referenced files.
 
-   See `juju status` for service names.
+   See `juju status` for application names.
 
 
    **Examples:**
@@ -5248,17 +5939,17 @@ Click on the expander to see details for each command.
 
 ^# set-configs
 
-   **Usage:** ` juju set-config [options] <service name> <service key>=<value> ...`
+   **Usage:** ` juju set-config [options] <application name> <application key>=<value> ...`
 
    **Summary:**
 
-   Sets configuration options for a service.
+   Sets configuration options for an application.
 
    **Options:**
 
    _--config  (= )_
 
-   path to yaml-formatted service config
+   path to yaml-formatted application config
 
    _-m, --model (= "")_
 
@@ -5266,14 +5957,14 @@ Click on the expander to see details for each command.
 
    _--to-default  (= false)_
 
-   set service option values to default
+   set application option values to default
 
    
    **Details:**
 
 
    Charms may, and frequently do, expose a number of configuration settings
-   for a service to the user. These can be set at deploy time, but may be set
+   for an application to the user. These can be set at deploy time, but may be set
    at any time by using the `juju set-config` command. The actual options
    vary per charm (you can check the charm documentation, or use `juju get-
    config` to check which options may be set).
@@ -5285,7 +5976,7 @@ Click on the expander to see details for each command.
    Values may be any UTF-8 encoded string. UTF-8 is accepted on the command
    line and in referenced files.
 
-   See `juju status` for service names.
+   See `juju status` for application names.
 
 
    **Examples:**
@@ -5312,11 +6003,11 @@ Click on the expander to see details for each command.
 
 ^# set-constraints
 
-   **Usage:** ` juju set-constraints [options] <service> <constraint>=<value> ...`
+   **Usage:** ` juju set-constraints [options] <application> <constraint>=<value> ...`
 
    **Summary:**
 
-   Sets machine constraints for a service.
+   Sets machine constraints for an application.
 
    **Options:**
 
@@ -5328,21 +6019,21 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Sets constraints for a service, which are used for all new machines 
-   provisioned for that service. They can be viewed with `juju get-
+   Sets constraints for an application, which are used for all new machines 
+   provisioned for that application. They can be viewed with `juju get-
    constraints`.
 
    By default, the model is the current model.
 
-   Service constraints are combined with model constraints, set with `juju 
+   Application constraints are combined with model constraints, set with `juju 
    set-model-constraints`, for commands (such as 'juju deploy') that 
-   provision machines for services. Where model and service constraints
-   overlap, the service constraints take precedence.
+   provision machines for applications. Where model and application constraints
+   overlap, the application constraints take precedence.
 
    Constraints for a specific model can be viewed with `juju get-model-
    constraints`.
 
-   This command requires that the service to have at least one unit. To apply 
+   This command requires that the application to have at least one unit. To apply 
    constraints to
    the first unit set them at the model level or pass them as an argument
    when deploying.
@@ -5382,7 +6073,7 @@ Click on the expander to see details for each command.
    The default credentials are specified with a "credential name". A 
    credential name is created during the process of adding credentials either 
    via `juju add-credential` or `juju autoload-credentials`. Credential names 
-   can be listed with `juju list-credentials`.
+   can be listed with `juju credentials`.
 
    Default credentials avoid the need to specify a particular set of 
    credentials when more than one are available for a given cloud.
@@ -5396,11 +6087,11 @@ Click on the expander to see details for each command.
 
    **See also:**
 
+   [credentials](#credentials)
+
    [add-credential](#add-credential)
 
    [remove-credential](#remove-credential)
-
-   [list-credentials](#list-credentials)
 
    [autoload-credentials](#autoload-credentials)
 
@@ -5438,11 +6129,11 @@ Click on the expander to see details for each command.
 
 ^# set-meter-status
 
-   **Usage:** ` juju set-meter-status [options] [service or unit] status`
+   **Usage:** ` juju set-meter-status [options] [application or unit] status`
 
    **Summary:**
 
-   sets the meter status on a service or unit
+   Sets the meter status on an application or unit.
 
    **Options:**
 
@@ -5458,13 +6149,17 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Set meter status on the given service or unit. This command is used to test the meter-status-changed hook for charms in development.
+   Set meter status on the given application or unit. This command is used
+   to test the meter-status-changed hook for charms in development.
+
 
    **Examples:**
 
 
-        juju set-meter-status myapp RED # Set Red meter status on all units of myapp
-        juju set-meter-status myapp/0 AMBER --info "my message" # Set AMBER meter status with "my message" as info on unit myapp/0
+          # Set Red meter status on all units of myapp
+          juju set-meter-status myapp RED
+          # Set AMBER meter status with "my message" as info on unit myapp/0
+          juju set-meter-status myapp/0 AMBER --info "my message"
 
 
 
@@ -5502,7 +6197,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [ist-models](#ist-models)
+   [odels](#odels)
 
    [get-model-config](#get-model-config)
 
@@ -5531,12 +6226,12 @@ Click on the expander to see details for each command.
 
    Sets machine constraints on the model that can be viewed with
    `juju get-model-constraints`.  By default, the model is the current model.
-   Model constraints are combined with constraints set for a service with
+   Model constraints are combined with constraints set for an application with
    `juju set-constraints` for commands (such as 'deploy') that provision
-   machines for services. Where model and service constraints overlap, the
-   service constraints take precedence.
+   machines for applications. Where model and application constraints overlap, the
+   application constraints take precedence.
 
-   Constraints for a specific service can be viewed with `juju get-constraints`.
+   Constraints for a specific application can be viewed with `juju get-constraints`.
 
    **Examples:**
 
@@ -5547,7 +6242,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [ist-models](#ist-models)
+   [odels](#odels)
 
    [get-model-constraints](#get-model-constraints)
 
@@ -5560,11 +6255,11 @@ Click on the expander to see details for each command.
 
 ^# set-plan
 
-   **Usage:** ` juju set-plan [options] <service name> <plan>`
+   **Usage:** ` juju set-plan [options] <application name> <plan>`
 
    **Summary:**
 
-   set the plan for a service
+   Set the plan for an application.
 
    **Options:**
 
@@ -5576,17 +6271,64 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Set the plan for the deployed service, effective immediately.
+   Set the plan for the deployed application, effective immediately.
 
-   The specified plan name must be a valid plan that is offered for this particular charm. Use "juju list-plans <charm>" for more information.
-   	
-   Usage:
+   The specified plan name must be a valid plan that is offered for this
+   particular charm. Use "juju list-plans <charm>" for more information.
 
-          juju set-plan [options] <service name> <plan name>
-   
-   Example:
+
+   **Examples:**
+
 
           juju set-plan myapp example/uptime
+
+
+
+ 
+
+^# shares
+
+   **Usage:** ` juju shares [options]`
+
+   **Summary:**
+
+   Shows all users with access to a model for the current controller.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   By default, the model is the current model.
+
+
+   **Examples:**
+
+
+          juju shares
+          juju shares -m mymodel
+
+
+   **See also:**
+
+   [grant](#grant)
+
+   **Aliases:**
+
+   _list-shares_
 
 
  
@@ -5597,7 +6339,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   show results of an action by ID
+   Show results of an action by ID.
 
    **Options:**
 
@@ -5615,7 +6357,7 @@ Click on the expander to see details for each command.
 
    _--wait (= "-1s")_
 
-   wait for results
+   Wait for results
 
    
    **Details:**
@@ -5639,7 +6381,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   show results of all actions filtered by optional ID prefix
+   Show results of all actions filtered by optional ID prefix.
 
    **Options:**
 
@@ -5653,7 +6395,7 @@ Click on the expander to see details for each command.
 
    _--name (= "")_
 
-   an action name
+   Action name
 
    _-o, --output (= "")_
 
@@ -5675,7 +6417,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   get metadata
+   Show metadata for the specified backup.
 
    **Options:**
 
@@ -5695,11 +6437,11 @@ Click on the expander to see details for each command.
 
 ^# show-budget
 
-   **Usage:** ` juju show-budget [options]`
+   **Usage:** ` juju show-budget [options] <budget>`
 
    **Summary:**
 
-   show budget usage
+   Show details about a budget.
 
    **Options:**
 
@@ -5721,9 +6463,12 @@ Click on the expander to see details for each command.
 
    Display budget usage information.
 
-   Example:
+
+   **Examples:**
+
 
           juju show-budget personal
+
 
 
  
@@ -5763,7 +6508,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [ist-clouds](#ist-clouds)
+   [louds](#louds)
 
    [update-clouds](#update-clouds)
 
@@ -5810,7 +6555,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [list-controllers](#list-controllers)
+   [controllers](#controllers)
 
    **Aliases:**
 
@@ -5859,7 +6604,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [list-controllers](#list-controllers)
+   [controllers](#controllers)
 
    **Aliases:**
 
@@ -5874,7 +6619,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   show a machines status
+   Show a machine's status.
 
    **Options:**
 
@@ -5898,20 +6643,19 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Show a specified machine on a model:
+   Show a specified machine on a model.  Default format is in yaml,
+   other formats can be specified with the "--format" option.
 
-   juju show-machine <machineID> ...
+   Available formats are yaml, tabular, and json
 
-   For example:
+   **Examples:**
 
-   juju show-machine 0
-   or for multiple machines
-   (the following will display status for machines 1, 2 & 3):
 
-   juju show-machine 1 2 3
-   Default format is in yaml, other formats can be specified
-   with the "--format" option.  Available formats are yaml,
-   tabular, and json
+          # Display status for machine 0
+          juju show-machine 0
+          # Display status for machines 1, 2 & 3
+          juju show-machine 1 2 3
+
 
    **Aliases:**
 
@@ -5926,7 +6670,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   show a machines status
+   Show a machine's status.
 
    **Options:**
 
@@ -5950,20 +6694,19 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Show a specified machine on a model:
+   Show a specified machine on a model.  Default format is in yaml,
+   other formats can be specified with the "--format" option.
 
-   juju show-machine <machineID> ...
+   Available formats are yaml, tabular, and json
 
-   For example:
+   **Examples:**
 
-   juju show-machine 0
-   or for multiple machines
-   (the following will display status for machines 1, 2 & 3):
 
-   juju show-machine 1 2 3
-   Default format is in yaml, other formats can be specified
-   with the "--format" option.  Available formats are yaml,
-   tabular, and json
+          # Display status for machine 0
+          juju show-machine 0
+          # Display status for machines 1, 2 & 3
+          juju show-machine 1 2 3
+
 
    **Aliases:**
 
@@ -5978,7 +6721,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   shows information about the current or specified model
+   Shows information about the current or specified model.
 
    **Options:**
 
@@ -6009,7 +6752,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   Displays the current status of Juju, services, and units.
+   Displays the current status of Juju, applications, and units.
 
    **Options:**
 
@@ -6033,11 +6776,11 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   By default (without argument), the status of Juju and all services and all
+   By default (without argument), the status of Juju and all applications and all
    units will be displayed. 
-   Service or unit names may be used as output filters (the '*' can be used
+   Application or unit names may be used as output filters (the '*' can be used
    as a wildcard character).  
-   In addition to matched services and units, related machines, services, and
+   In addition to matched applications and units, related machines, applications, and
    units will also be displayed. If a subordinate unit is matched, then its
    principal unit will be displayed. If a principal unit is matched, then all
    of its subordinates will be displayed. 
@@ -6055,17 +6798,16 @@ Click on the expander to see details for each command.
 
                     - UNITS: total #, and # in each state.
 
-                    - SERVICES: total #, and # exposed of each service.
-
+                    - APPLICATIONS: total #, and # exposed of each application.
    
    - tabular (default): Displays information in a tabular format in these sections:
                     - Machines: ID, STATE, DNS, INS-ID, SERIES, AZ
-                    - Services: NAME, EXPOSED, CHARM
+                    - Applications: NAME, EXPOSED, CHARM
                     - Units: ID, STATE, VERSION, MACHINE, PORTS, PUBLIC-ADDRESS
                       - Also displays subordinate units.
 
    
-   - yaml: Displays information on machines, services, and units in yaml format.
+   - yaml: Displays information on machines, applications, and units in yaml format.
    Note: AZ above is the cloud region's availability zone.
 
 
@@ -6086,11 +6828,11 @@ Click on the expander to see details for each command.
 
 ^# show-storage
 
-   **Usage:** ` juju show-storage [options]`
+   **Usage:** ` juju show-storage [options] <storage ID> [...]`
 
    **Summary:**
 
-   shows storage instance
+   Shows storage instance information.
 
    **Options:**
 
@@ -6115,18 +6857,6 @@ Click on the expander to see details for each command.
    Storage instances to display are specified by storage ids.
 
    * note use of positional arguments
-   options:
-
-   -m, --model (= "")
-            juju model to operate in
-   
-   -o, --output (= "")
-            specify an output file
-   
-   --format (= yaml)
-            specify output format (json|yaml)
-   
-   [space separated storage ids]
 
 
  
@@ -6181,14 +6911,14 @@ Click on the expander to see details for each command.
 
    [register](#register)
 
-   [list-users](#list-users)
+   [users](#users)
 
 
  
 
 ^# spaces
 
-   **Usage:** ` juju list-spaces [options] [--short] [--format yaml|json] [--output <path>]`
+   **Usage:** ` juju spaces [options] [--short] [--format yaml|json] [--output <path>]`
 
    **Summary:**
 
@@ -6225,7 +6955,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-   _spaces_
+   _list-spaces_
 
 
  
@@ -6244,6 +6974,10 @@ Click on the expander to see details for each command.
 
    Model to operate in. Accepts [<controller name>:]<model name>
 
+   _--no-host-key-checks  (= false)_
+
+   Skip host key checking (INSECURE)
+
    _--proxy  (= false)_
 
    Proxy through the API server
@@ -6257,12 +6991,16 @@ Click on the expander to see details for each command.
 
 
    The machine is identified by the <target> argument which is either a 'unit
-   name' or a 'machine id'. Both are obtained in the output to `juju status`.
-   If 'user' is specified then the connection is made to that user account;
+   name' or a 'machine id'. Both are obtained in the output to "juju status". If
+   'user' is specified then the connection is made to that user account;
    otherwise, the default 'ubuntu' account, created by Juju, is used.
 
-   The optional command is executed on the remote machine. Any output is sent
-   back to the user. Screen-based programs require the default of '--pty=true'.
+   The optional command is executed on the remote machine. Any output is sent back
+   to the user. Screen-based programs require the default of '--pty=true'.
+   The SSH host keys of the target are verified. The --no-host-key-checks option
+   can be used to disable these checks. Use of this option is not recommended as
+   it opens up the possibility of a man-in-the-middle attack.
+
 
    **Examples:**
 
@@ -6292,7 +7030,7 @@ Click on the expander to see details for each command.
 
 ^# ssh-key
 
-   **Usage:** ` juju list-ssh-keys [options]`
+   **Usage:** ` juju ssh-keys [options]`
 
    **Summary:**
 
@@ -6325,18 +7063,18 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-ssh-keys
+          juju ssh-keys
 
    To examine the full key, use the '--full' option:
 
-          juju list-keys -m jujutest --full
+          juju ssh-keys -m jujutest --full
 
 
    **Aliases:**
 
-   _ssh-key,_
+   _list-ssh-keys,_
 
-   _ssh-keys,_
+   _ssh-key,_
 
    _list-ssh-key_
 
@@ -6345,7 +7083,7 @@ Click on the expander to see details for each command.
 
 ^# ssh-keys
 
-   **Usage:** ` juju list-ssh-keys [options]`
+   **Usage:** ` juju ssh-keys [options]`
 
    **Summary:**
 
@@ -6378,18 +7116,18 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-          juju list-ssh-keys
+          juju ssh-keys
 
    To examine the full key, use the '--full' option:
 
-          juju list-keys -m jujutest --full
+          juju ssh-keys -m jujutest --full
 
 
    **Aliases:**
 
-   _ssh-key,_
+   _list-ssh-keys,_
 
-   _ssh-keys,_
+   _ssh-key,_
 
    _list-ssh-key_
 
@@ -6402,7 +7140,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   Displays the current status of Juju, services, and units.
+   Displays the current status of Juju, applications, and units.
 
    **Options:**
 
@@ -6426,11 +7164,11 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   By default (without argument), the status of Juju and all services and all
+   By default (without argument), the status of Juju and all applications and all
    units will be displayed. 
-   Service or unit names may be used as output filters (the '*' can be used
+   Application or unit names may be used as output filters (the '*' can be used
    as a wildcard character).  
-   In addition to matched services and units, related machines, services, and
+   In addition to matched applications and units, related machines, applications, and
    units will also be displayed. If a subordinate unit is matched, then its
    principal unit will be displayed. If a principal unit is matched, then all
    of its subordinates will be displayed. 
@@ -6448,17 +7186,16 @@ Click on the expander to see details for each command.
 
                     - UNITS: total #, and # in each state.
 
-                    - SERVICES: total #, and # exposed of each service.
-
+                    - APPLICATIONS: total #, and # exposed of each application.
    
    - tabular (default): Displays information in a tabular format in these sections:
                     - Machines: ID, STATE, DNS, INS-ID, SERIES, AZ
-                    - Services: NAME, EXPOSED, CHARM
+                    - Applications: NAME, EXPOSED, CHARM
                     - Units: ID, STATE, VERSION, MACHINE, PORTS, PUBLIC-ADDRESS
                       - Also displays subordinate units.
 
    
-   - yaml: Displays information on machines, services, and units in yaml format.
+   - yaml: Displays information on machines, applications, and units in yaml format.
    Note: AZ above is the cloud region's availability zone.
 
 
@@ -6479,29 +7216,37 @@ Click on the expander to see details for each command.
 
 ^# status-history
 
-   **Usage:** ` juju status-history [options] [-n N] [--type T] [--utc] <entity name>`
+   **Usage:** ` juju status-history [options] <entity name>`
 
    **Summary:**
 
-   output past statuses for the passed entity
+   Output past statuses for the specified entity.
 
    **Options:**
+
+   _--date (= "")_
+
+   Returns logs for any date after the passed one, the expected date format is YYYY-MM-DD (cannot be combined with -n or --days)
+
+   _--days  (= 0)_
+
+   Returns the logs for the past <days> days (cannot be combined with -n or --date)
 
    _-m, --model (= "")_
 
    Model to operate in. Accepts [<controller name>:]<model name>
 
-   _-n  (= 20)_
+   _-n  (= 0)_
 
-   size of logs backlog.
+   Returns the last N logs (cannot be combined with --days or --date)
 
    _--type (= "unit")_
 
-   type of statuses to be displayed [agent|workload|combined|machine|machineInstance|container|containerinstance].
+   Type of statuses to be displayed [agent|workload|combined|machine|machineInstance|container|containerinstance]
 
    _--utc  (= false)_
 
-   display time as UTC in RFC3339 format
+   Display time as UTC in RFC3339 format
 
    
    **Details:**
@@ -6536,17 +7281,17 @@ Click on the expander to see details for each command.
 
 ^# storage
 
-   **Usage:** ` juju list-storage [options] <machineID> ...`
+   **Usage:** ` juju storage [options] <machineID> ...`
 
    **Summary:**
 
-   lists storage details
+   Lists storage details.
 
    **Options:**
 
    _--filesystem  (= false)_
 
-   list filesystem storage
+   List filesystem storage
 
    _--format  (= tabular)_
 
@@ -6562,7 +7307,7 @@ Click on the expander to see details for each command.
 
    _--volume  (= false)_
 
-   list volume storage
+   List volume storage
 
    
    **Details:**
@@ -6570,31 +7315,77 @@ Click on the expander to see details for each command.
 
    List information about storage instances.
 
-   options:
-
-   -m, --model (= "")
-            juju model to operate in
-   
-   -o, --output (= "")
-            specify an output file
-   
-   --format (= tabular)
-            specify output format (json|tabular|yaml)
 
    **Aliases:**
 
-   _storage_
+   _list-storage_
+
+
+ 
+
+^# storage-pools
+
+   **Usage:** ` juju storage-pools [options]`
+
+   **Summary:**
+
+   List storage pools.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _--name  (= )_
+
+   Only show pools with these names
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   _--provider  (= )_
+
+   Only show pools of these provider types
+
+   
+   **Details:**
+
+
+   The user can filter on pool type, name.
+
+   If no filter is specified, all current pools are listed.
+
+   If at least 1 name and type is specified, only pools that match both a name
+   AND a type from criteria are listed.
+
+   If only names are specified, only mentioned pools will be listed.
+
+   If only types are specified, all pools of the specified types will be listed.
+   Both pool types and names must be valid.
+
+   Valid pool types are pool types that are registered for Juju model.
+
+
+   **Aliases:**
+
+   _list-storage-pools_
 
 
  
 
 ^# subnets
 
-   **Usage:** ` juju list-subnets [options] [--space <name>] [--zone <name>] [--format yaml|json] [--output <path>]`
+   **Usage:** ` juju subnets [options] [--space <name>] [--zone <name>] [--format yaml|json] [--output <path>]`
 
    **Summary:**
 
-   list subnets known to Juju
+   List subnets known to Juju.
 
    **Options:**
 
@@ -6612,11 +7403,11 @@ Click on the expander to see details for each command.
 
    _--space (= "")_
 
-   filter results by space name
+   Filter results by space name
 
    _--zone (= "")_
 
-   filter results by zone name
+   Filter results by zone name
 
    
    **Details:**
@@ -6633,7 +7424,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-   _subnets_
+   _list-subnets_
 
 
  
@@ -6657,7 +7448,7 @@ Click on the expander to see details for each command.
    you get is the active model for that controller. If you want a different
    model then you must switch using controller:model notation or switch to 
    the controller and then to the model. 
-   The `juju list-models` command can be used to determine the active model
+   The `juju models` command can be used to determine the active model
    (of any controller). An asterisk denotes it.
 
 
@@ -6672,9 +7463,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [list-controllers](#list-controllers)
+   [controllers](#controllers)
 
-   [list-models](#list-models)
+   [models](#models)
 
    [show-controller](#show-controller)
 
@@ -6687,31 +7478,33 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   copy tools from the official tool store into a local model
+   Copy tools from the official tool store into a local model.
 
    **Options:**
 
    _--all  (= false)_
 
-   copy all versions, not just the latest
+   Copy all versions, not just the latest
 
    _--destination (= "")_
 
-   local destination directory
+   Local destination directory
+
+   DEPRECATED: use --local-dir instead
 
    _--dev  (= false)_
 
-   consider development versions as well as released ones
+   Consider development versions as well as released ones
 
    DEPRECATED: use --stream instead
 
    _--dry-run  (= false)_
 
-   don't copy, just print what would be copied
+   Don't copy, just print what would be copied
 
    _--local-dir (= "")_
 
-   local destination directory
+   Local destination directory
 
    _-m, --model (= "")_
 
@@ -6719,33 +7512,47 @@ Click on the expander to see details for each command.
 
    _--public  (= false)_
 
-   tools are for a public cloud, so generate mirrors information
+   Tools are for a public cloud, so generate mirrors information
 
    _--source (= "")_
 
-   local source directory
+   Local source directory
 
    _--stream (= "")_
 
-   simplestreams stream for which to sync metadata
+   Simplestreams stream for which to sync metadata
 
    _--version (= "")_
 
-   copy a specific major[.minor] version
+   Copy a specific major[.minor] version
 
    
    **Details:**
 
 
-   This copies the Juju tools tarball from the official tools store (located
-   at https://streams.canonical.com/juju) into your model.
+   This copies the Juju agent software from the official tools store (located
+   at https://streams.canonical.com/juju) into a model. It is generally done
+   when the model is without Internet access.
 
-   This is generally done when you want Juju to be able to run without having to
-   access the Internet. Alternatively you can specify a local directory as source.
-   Sometimes this is because the model does not have public access,
-   and sometimes you just want to avoid having to access data outside of
-   the local cloud.
+   Instead of the above site, a local directory can be specified as source.
+   The online store will, of course, need to be contacted at some point to get
+   the software.
 
+
+   **Examples:**
+
+
+          # Download the software (version auto-selected) to the model:
+          juju sync-tools --debug
+          # Download a specific version of the software locally:
+          juju sync-tools --debug --version 2.0 --local-dir=/home/ubuntu/sync-tools
+          # Get locally available software to the model:
+          juju sync-tools --debug --source=/home/ubuntu/sync-tools
+
+
+   **See also:**
+
+   [juju upgrade-juju](#juju upgrade-juju)
 
 
  
@@ -6756,7 +7563,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   unblock an operation that would alter a running model
+   Unblock an operation that would alter a running model.
 
    **Options:**
 
@@ -6785,7 +7592,7 @@ Click on the expander to see details for each command.
              destroy-model
              remove-machine
              remove-relation
-             remove-service
+             remove-application
              remove-unit
    
    all-changes includes all alteration commands
@@ -6801,7 +7608,7 @@ Click on the expander to see details for each command.
              expose
              remove-machine
              remove-relation
-             remove-service
+             remove-application
              remove-unit
              resolved
              retry-provisioning
@@ -6823,28 +7630,28 @@ Click on the expander to see details for each command.
    **Examples:**
 
 
-         To allow the model to be destroyed:
-         juju unblock destroy-model
-         To allow the machines, services, units and relations to be removed:
-         juju unblock remove-object
-         To allow changes to the model:
-         juju unblock all-changes
+          # To allow the model to be destroyed:
+          juju unblock destroy-model
+          # To allow the machines, applications, units and relations to be removed:
+          juju unblock remove-object
+          # To allow changes to the model:
+          juju unblock all-changes
 
 
    **See also:**
 
-   [juju help block](#juju help block)
+   [juju block](#juju block)
 
 
  
 
 ^# unexpose
 
-   **Usage:** ` juju unexpose [options] <service name>`
+   **Usage:** ` juju unexpose [options] <application name>`
 
    **Summary:**
 
-   Removes public availability over the network for a service.
+   Removes public availability over the network for an application.
 
    **Options:**
 
@@ -6857,9 +7664,9 @@ Click on the expander to see details for each command.
 
 
    Adjusts the firewall rules and any relevant security mechanisms of the
-   cloud to deny public access to the service.
+   cloud to deny public access to the application.
 
-   A service is unexposed by default when it gets created.
+   An application is unexposed by default when it gets created.
 
 
    **Examples:**
@@ -6871,6 +7678,44 @@ Click on the expander to see details for each command.
    **See also:**
 
    [expose](#expose)
+
+
+ 
+
+^# unregister
+
+   **Usage:** ` juju unregister [options] <controller name>`
+
+   **Summary:**
+
+   Unregisters a Juju controller
+
+   **Options:**
+
+   _-y, --yes  (= false)_
+
+   Do not prompt for confirmation
+
+   
+   **Details:**
+
+
+   Removes local connection information for the specified controller.
+
+   This command does not destroy the controller.  In order to regain
+   access to an unregistered controller, it will need to be added
+   again using the juju register command.
+
+
+   **Examples:**
+
+
+          juju unregister my-controller
+
+
+   **See also:**
+
+   [juju register](#juju register)
 
 
  
@@ -6920,11 +7765,11 @@ Click on the expander to see details for each command.
 
 ^# update-allocation
 
-   **Usage:** ` juju update-allocation [options]`
+   **Usage:** ` juju update-allocation [options] <application> <value>`
 
    **Summary:**
 
-   update an allocation
+   Update an allocation.
 
    **Options:**
 
@@ -6936,12 +7781,14 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Updates an existing allocation on a service.
+   Updates an existing allocation on an application.
 
-   Example:
 
+   **Examples:**
+
+
+          # Sets the allocation for the wordpress application to 10.
           juju update-allocation wordpress 10
-              Sets the allocation for the wordpress service to 10.
 
 
 
@@ -6973,32 +7820,32 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [ist-clouds](#ist-clouds)
+   [louds](#louds)
 
 
  
 
 ^# upgrade-charm
 
-   **Usage:** ` juju upgrade-charm [options] <service>`
+   **Usage:** ` juju upgrade-charm [options] <application>`
 
    **Summary:**
 
-   upgrade a service's charm
+   Upgrade an application's charm.
 
    **Options:**
 
    _--channel (= "")_
 
-   channel to use when getting the charm or bundle from the charm store
+   Channel to use when getting the charm or bundle from the charm store
 
    _--force-series  (= false)_
 
-   upgrade even if series of deployed services are not supported by the new charm
+   Upgrade even if series of deployed applications are not supported by the new charm
 
    _--force-units  (= false)_
 
-   upgrade all units immediately, even if in error state
+   Upgrade all units immediately, even if in error state
 
    _-m, --model (= "")_
 
@@ -7006,25 +7853,25 @@ Click on the expander to see details for each command.
 
    _--path (= "")_
 
-   upgrade to a charm located at path
+   Upgrade to a charm located at path
 
    _--resource  (= )_
 
-   resource to be uploaded to the controller
+   Resource to be uploaded to the controller
 
    _--revision  (= -1)_
 
-   explicit revision of current charm
+   Explicit revision of current charm
 
    _--switch (= "")_
 
-   crossgrade to a different charm
+   Crossgrade to a different charm
 
    
    **Details:**
 
 
-   When no flags are set, the service's charm will be upgraded to the latest
+   When no flags are set, the application's charm will be upgraded to the latest
    revision available in the repository from which it was originally deployed. An
    explicit revision can be chosen with the --revision flag.
 
@@ -7049,7 +7896,7 @@ Click on the expander to see details for each command.
            juju upgrade-charm foo --resource bar=/some/file.tgz --resource baz=./docs/cfg.xml
    
    Where bar and baz are resources named in the metadata for the foo charm.
-   If the new version of a charm does not explicitly support the service's series, the
+   If the new version of a charm does not explicitly support the application's series, the
    upgrade is disallowed unless the --force-series flag is used. This option should be
    used with caution since using a charm on a machine running an unsupported series may
    cause unexpected behavior.
@@ -7061,7 +7908,7 @@ Click on the expander to see details for each command.
    Please note that --switch is dangerous, because juju only has limited
    information with which to determine compatibility; the operation will succeed,
    regardless of potential havoc, so long as the following conditions hold:
-   - The new charm must declare all relations that the service is currently
+   - The new charm must declare all relations that the application is currently
    participating in.
 
    - All config settings shared by the old and new charms must
@@ -7092,13 +7939,13 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   upgrade to a new Juju GUI version
+   Upgrade to a new Juju GUI version.
 
    **Options:**
 
    _--list  (= false)_
 
-   list available Juju GUI release versions without upgrading
+   List available Juju GUI release versions without upgrading
 
    _-m, --model (= "")_
 
@@ -7213,7 +8060,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   store a backup archive file remotely in juju
+   Store a backup archive file remotely in Juju.
 
    **Options:**
 
@@ -7227,6 +8074,68 @@ Click on the expander to see details for each command.
 
    upload-backup sends a backup archive file to remote storage.
 
+
+
+ 
+
+^# users
+
+   **Usage:** ` juju users [options]`
+
+   **Summary:**
+
+   Lists Juju users allowed to connect to a controller.
+
+   **Options:**
+
+   _--all  (= false)_
+
+   Include disabled users
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--exact-time  (= false)_
+
+   Use full timestamp for connection times
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   By default, the tabular format is used.
+
+
+   **Examples:**
+
+
+          juju users
+
+
+   **See also:**
+
+   [add-user](#add-user)
+
+   [register](#register)
+
+   [show-user](#show-user)
+
+   [disable-user](#disable-user)
+
+   [enable-user](#enable-user)
+
+   **Aliases:**
+
+   _list-users_
 
 
  
