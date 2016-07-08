@@ -58,7 +58,7 @@ hooks (containing the majority of the code) can be overwritten.
 
 [`charm layers`](reference-hook-tools.html#charm-layers)
 is the first step to understanding the charm artifacts we've built. If you have
-an ANSII-compliant terminal, you have a color coded map available to you
+an ANSI-compliant terminal, you have a color coded map available to you
 listing all the available files in the charm, color coordinated with its origin
 layer.
 

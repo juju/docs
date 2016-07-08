@@ -11,7 +11,7 @@ credentials in subsequent commands.
 
 Currently, Juju can use one of three ways to get your credentials for a cloud:
 
- - Entering credentials interactively on the command-line
+ - Entering credentials interactively on the command line
  - Scanning existing credentials (e.g. environment variables, .novarc files)
  - Importing a user-provided [YAML-formatted][yaml] file.
  
@@ -32,7 +32,7 @@ particular cloud, you should find these pages on specific clouds helpful:
   [Rackspace][rackspace]
 
 
-### Adding credentials via the commandline
+### Adding credentials via the command line
 
 You can add credentials by running the command:
 
@@ -67,7 +67,7 @@ the `--credential` option.
 
 ### Scanning existing credentials
 
-Some cloud providers (e.g. AWS, Openstack) have commandline tools which rely on 
+Some cloud providers (e.g. AWS, Openstack) have command line tools which rely on 
 environment variables being used to store credentials. If these are in use on 
 your system already, or you choose to define them 
 ([there is extra info here][env]), Juju can import them.

@@ -1,29 +1,29 @@
-Title: Juju actions  
+Title: Juju actions
 
 # Juju Actions
 
 Juju charms can describe *actions* that users can take on deployed applications.
 
-Actions are scripts that can be triggered on a unit via the CLI or the [Juju
-GUI](controllers-gui.html). Parameters for an action are passed as a map,
-either defined in a YAML file or given through the UI, and are validated
+Actions are scripts that can be triggered on a unit via the command line or
+the [Juju GUI](controllers-gui.html). Parameters for an action are passed as
+a map, either defined in a YAML file or given through the UI, and are validated
 against the schema defined in actions.yaml. See
 [Actions for the charm author](authors-charm-actions.html) for more
 information.
 
 The following commands are specified for dealing with actions:
 
-`juju actions` - alias for list-actions  
-`juju list actions` - list actions defined for a service  
-`juju run-action` - queue an action for execution  
-`juju show-action-output` - show output of an action by ID  
-`juju show-action-status` - show status of all actions filtered by optional ID  
+`juju actions` - alias for list-actions
+`juju list actions` - list actions defined for a service
+`juju run-action` - queue an action for execution
+`juju show-action-output` - show output of an action by ID
+`juju show-action-status` - show status of all actions filtered by optional ID
 
 ## Action commands
 
 ### `juju list-actions`
 
-List the actions defined for a service.  
+List the actions defined for a service.
 
 For example, with the 'git' charm deployed, you can see which actions it
 supports with the following command:

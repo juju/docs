@@ -1,4 +1,4 @@
-Title: Using and Creating Bundles  
+Title: Using and Creating Bundles
 Todo: Check more complex bundles after the release of 2.0
 
 # Using and Creating Bundles
@@ -80,7 +80,7 @@ may want to review the applications, connections and various configuration
 options before clicking on 'Commit changes' and 'Deploy' to activate your 
 bundle.
 
-### Local deploy via command-line
+### Local deploy via command line
 
 After exporting a bundle from the GUI, you can also `deploy` the saved bundle
 from the command line: 
@@ -89,7 +89,7 @@ from the command line:
 juju deploy bundle.yaml
 ```
 Unlike when you import and deploy a bundle with the Juju GUI, running `juju
-deploy` on the command-line will not attempt to rename a new application if an
+deploy` on the command line will not attempt to rename a new application if an
 application with the same name already exists.
 
 From the command line, you can also check for errors in a bundle before
@@ -100,7 +100,7 @@ testing purposes). You can then check for possible errors with the
 following command:
 
 ```bash
-charm proof directory-of-bundle/    
+charm proof directory-of-bundle/
 ```
 Note that if no directory is given, the command defaults to the current 
 directory.
