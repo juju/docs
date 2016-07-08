@@ -27,8 +27,8 @@ juju update-clouds
 ## Credentials
 
 In order to access Azure, you will need to add some credentials for Juju to use.
-The Azure CLI tool is used to both gather information and to perform necessary 
-actions.
+The Azure command line interface (CLI) tool is used to both gather information
+and to perform necessary actions.
 
 ```bash
 sudo apt-get install -y nodejs-legacy npm

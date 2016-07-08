@@ -24,7 +24,7 @@ logged in to [Launchpad](https://launchpad.net/+login) at least once.
 It is required that you first log in to the
 [Charmstore](https://jujucharms.com) before you attempt to log in via `charm
 login`. After logging in via your browser, you can use the `charm`
-command-line tool.
+command line tool.
 
 Most charm commands require authentication in order to operate. You can
 log in or log out of the store at any time by issuing `charm login` or

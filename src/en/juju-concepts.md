@@ -4,11 +4,11 @@ Title: Juju concepts
 
 ## The Juju client
 
-The Juju client is CLI software that is used to manage Juju, whether as an 
-administrator or as a regular user. It is installed, via an APT package 
-('juju'), onto your personal workstation. This software manages your 
-connection to Juju controllers in the cloud, and is used to issue
-commands to deploy and manage applications.
+The Juju client is command line interface (CLI) software that is used to
+manage Juju, whether as an administrator or as a regular user. It is 
+installed, via an APT package ('juju'), onto your personal workstation. 
+This software manages your connection to Juju controllers in the cloud, 
+and is used to issue commands to deploy and manage applications.
 
 ## Clouds
 
