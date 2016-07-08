@@ -582,13 +582,7 @@ Click on the expander to see details for each command.
 
 ^# add-storage
 
-   **Usage:** ` juju add-storage [options] 
-<unit name> <storage directive> ...
-    where storage directive is 
-        <charm storage name>=<storage constraints> 
-    or
-        <charm storage name>
-`
+   **Usage:** ` juju add-storage [options] <unit name> <storage directive> ...`
 
    **Summary:**
 
@@ -3073,9 +3067,8 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   show help on a command or other topic
+   Show help on a command or other topic.
 
-Details:
 
    **See also:**
 
