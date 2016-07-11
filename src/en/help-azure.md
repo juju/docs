@@ -59,8 +59,8 @@ therefore be easier to perform this on a graphical desktop.
 
 ### Registering azure services
 
-Juju requires certain services to be active for your account. Use these 
-to register using the Azure CLI tool:
+Juju requires certain services to be active for your account. Enter these 
+commands to register using the Azure CLI tool:
 
 ```
 azure provider register Microsoft.Compute
