@@ -130,7 +130,7 @@ APP_ID=f6ab7cbd-5029-43ef-85e3-5c4442a00ba8
 Use the APP_ID to create an Active Directory (Kerberos) server principal:
 
 ```bash
-azure ad sp create $APP_ID
+azure ad sp create -a $APP_ID
 ```
 
 Note its object ID, the **OBJ_ID**:
