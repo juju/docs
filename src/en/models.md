@@ -62,6 +62,19 @@ Common model management tasks are summarized below.
    stipulated.
 
    This is a complex subject. See [Model configuration](./models-config.html).
+
+
+
+^# Set constraints for a model
+
+   Charm constraints can be managed at the model level. This will affect all
+   charms used in the model unless overridden by constraints set at the
+   application level. Constraints are used to select minimum requirements for any
+   future machines Juju may create. For instance, a constraint may be set so that
+   machines have a minimum amount of disk space on their root drive.
+
+   This is a complex subject. See
+   [Constraints](./charms-constraints.html#setting-constraints-for-a-model).
    
 
 

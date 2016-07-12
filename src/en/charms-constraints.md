@@ -1,5 +1,6 @@
 Title: Constraints
 
+
 # Constraints
 
 Constraints allow you to choose the hardware (or virtual hardware)
@@ -13,6 +14,7 @@ constraints do not affect any units which have already been placed on machines.
 For more granularity, it is also possible to add a machine with specific 
 constraints (`juju add-machine`) and then specify that machine when deploying 
 applications ([see the documentation on `juju deploy`](./charms-deploying.html)).
+
 
 ## What constraints can be used?
 
@@ -74,7 +76,7 @@ juju deploy mariadb --constraints mem=4G cpu-cores=
 
 In the event that a constraint cannot be met, the unit will not be deployed.
 
-!!!Note: Constraints work on an "or better" basis: If you ask for 4 CPUs, you 
+!!! Note: Constraints work on an "or better" basis: If you ask for 4 CPUs, you 
 may get 8, but you won't get 2
 
 
@@ -121,6 +123,7 @@ juju set-model-constraints mem=
 Model-related constraints can also be overridden at the application and machine
 level.
 
+
 ## Setting constraints for an application
 
 Usually, constraints for an application are set at deploy time, by passing the 
@@ -153,6 +156,7 @@ juju get-constraints mariadb
 juju get-constraints database1
 ```
 
+
 ## Adding a machine with constraints
 
 The `juju add-machine` command also accepts the '--constraints' flag, which can
@@ -168,4 +172,3 @@ Will provision a machine that is connected to both the 'storage' and 'db'
 network spaces. You can subsequently deploy applications to this machine using
 the '--to' placement switch - 
 [see the documentation on deploying charms](./charms-deploying.html)
-
