@@ -81,13 +81,13 @@ the actual ID that corresponds to the variable.
 
 ### `subscription-id`
 
-List your account and get the subscription ID, the **SUB_ID**:
+List your account. Note the subscription ID, the **SUB_ID**.
 
 ```bash
 azure account list
 ```
 
-Sample output:
+**SUB_ID** will appear on a line like this:
 
 ```no-highlight
 info:    Executing command account list
@@ -97,7 +97,8 @@ data:    Free Trial  f717c8c1-8e5e-4d38-be7f-ed1e1c879e18  true     Enabled
 info:    account list command OK
 ```
 
-In this sample,
+In the output of this command, the **SUB_ID** is not labeled as such. In our
+sample it was next to last line, so:
 
 ```bash
 SUB_ID=f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
@@ -187,8 +188,16 @@ You can now run the interactive command:
 juju add-credential azure
 ```
 
-Which will ask for a credential name, which you determine for yourself, and
-then the values discovered above.
+Which will ask for an arbitrary credential name, which you choose for yourself.
+This will be how you remember and refer to this Azure credential in Juju. The
+command will also request the values discovered above, which we referred to as:
+
+```bash
+APP_ID
+SUB_ID
+TENANT_ID
+APP_PASSWORD
+```
 
 !!! Note: If you add more than one credential, you will also need to set the
 default one to use with `juju set-default-credential`
