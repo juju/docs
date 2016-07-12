@@ -9,7 +9,15 @@
         <li><a href="getting-started-general.html">Install &amp; Configure</a></li>
         <li class="section"><a class="header" href="clouds.html">Clouds</a>
             <ul class="sub">
-                <li><a href="credentials.html">Credentials</a></li>
+                <li><a href="credentials.html">Cloud credentials</a></li>
+                <li><a href="help-aws.html">Amazon AWS</a></li>
+                <li><a href="help-azure.html">Microsoft Azure</a></li>
+                <li><a href="help-google.html">Google GCE</a></li>
+                <li><a href="help-joyent.html">Joyent</a></li>
+                <li><a href="clouds-LXD.html">LXD</a></li>
+                <li><a href="clouds-maas.html">MAAS</a></li>
+                <li><a href="clouds-manual.html">Manual</a></li>
+                <li><a href="help-rackspace.html">Rackspace</a></li>
             </ul>
         </li>
         <li><a href="controllers.html">Controllers</a></li>
