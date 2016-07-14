@@ -586,6 +586,7 @@ called "bindings", defining the map of endpoint names to space names.
 
 Example bundle.yaml excerpt:
 
+```yaml
     mysql:
         charm: cs:trusty/mysql-53
         num_units: 1
@@ -593,6 +594,7 @@ Example bundle.yaml excerpt:
         bindings:
             server: database
             cluster: internal
+```
 
 Deploying a bundle including a section like in the example above, is
 equivalent to running:
