@@ -54,6 +54,7 @@
                 <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                 <li><a href="juju-centos.html">CentOS support</a></li>
                 <li><a href="network-spaces.html">Network spaces</a></li>
+                <li><a href="juju-plugins.html">Juju plugins</a></li>
                 <li><a href="juju-misc.html">Miscellaneous</a></li>
             </ul>
         </li>
