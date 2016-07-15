@@ -31,7 +31,7 @@ juju metadata generate
 
 ### Switches, flags and arguments
 
-There is potential confusion when a plugin accepts a swith or flag; Juju needs
+There is potential confusion when a plugin accepts a switch or flag; Juju needs
 to be able to differentiate between options intended for Juju and ones intended
 for the plugin. In this case any options for the plugin should be preceeded by 
 ' -- '. For example:
