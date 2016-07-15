@@ -68,6 +68,7 @@ apt-https-proxy              | string |          |                          | Th
 apt-mirror                   | string |          |                          | The APT mirror for the model
 authorized-keys              | string |          |                          | Any authorized SSH public keys for the model, as found in a ~/.ssh/authorized_keys file
 authorized-keys-path         | string |          |                          | Path to file containing SSH authorized keys
+automatically-retry-hooks    | bool   | true     |                          | Set policy on retying failed hooks. See [addition info below](#retrying-failed-hooks).
 block-all-changes            | bool   |          |                          | Whether all changes to the model will be prevented
 block-destroy-model          | bool   |          |                          | Whether the model will be prevented from destruction
 block-remove-object          | bool   |          |                          | Whether remove operations (machine, service, unit or relation) will be prevented
@@ -170,6 +171,27 @@ enable-os-upgrade: false
 You may also want to just update the package list to ensure a charm has the
 latest software available to it by disabling upgrades but enabling updates.
 
+### Retrying failed hooks
+
+Prior to version 2.0, hooks returning an error would block until the user
+ran a command to retry them manually:
+`juju resolved --retry unit-name/#`
+  
+From version 2.0, Juju will automatically retry hooks periodically - there is 
+an exponential backoff, so hooks will be retried after 5, 10, 20, 40 seconds up
+to a period of 5 minutes, and then every 5 minutes. The logic behind this is
+that some hook errors are caused by timing issues or the temporary 
+unavailability of other services - automatic retry enables the Juju model to 
+heal itself without troubling the user.
+
+However, in some circumstances, such as debugging charms, this behaviour can be
+distracting and unwelcome. For this reason, it is possible to set the 
+`automatically-retry-hooks` option to 'false' to disable this behaviour. In this
+case, users will have to manually retry any hook which fails, using the command
+above, as with earlier versions of Juju.
+
+!!! Note: Even with the automatic retry enabled, it is still possible to use
+the  `juju resolved --retry unit-name/#` command to retry manually.
 
 ### Juju lifecycle and harvesting
 
