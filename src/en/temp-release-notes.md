@@ -1,16 +1,16 @@
-# Juju 2.0-beta11
+# Juju 2.0-beta12
 
-A new development release of Juju, juju 2.0-beta11, is now available.
-This release replaces version 2.0-beta10.
+A new development release of Juju, juju 2.0-beta12, is now available.
+This release replaces version 2.0-beta11.
 
-## What's New in Beta11
+## What's New in Beta12
 
-* Config can now be associated with clouds in clouds.yaml
-* Consistent wire protocol for the Juju API. For more details, see:
-  https://lists.ubuntu.com/archives/juju-dev/2016-June/005715.html
-* Initial support for:
-    * Juju log forwarding
-    * Audit logging
+* New charm hook command: a new command application-version-set allows charmers to set the version of their running workloads (See application-version-set for details)
+* Model based ACLs: access is now more granular allowing read, write, and admin access (see ‘Model Permissions’ for details)
+* 36 bug fixes including:
+* Leveraging cached resources lp1598113
+* mgo package update that retries upserts that fail with ‘duplicate key error’ lp1593828
+* Prevent controller from being stuck in an infinite loop during teardown lp1591387
 
 ## Notable Changes
 
@@ -44,6 +44,8 @@ This release replaces version 2.0-beta10.
 * Config can be included in clouds.yaml
 * Juju log forwarding
 * Audit logging
+* Model permissions
+* New hook command: application-version-set
 * Known Issues
 
 
@@ -177,7 +179,7 @@ The main new commands of note are:
     juju grant
     Juju revoke
     juju list-shares
-    juju use-model 
+    juju use-model
     juju list-users
     juju switch-user
 
@@ -254,7 +256,7 @@ https://jujucharms.com/docs/devel/controllers
 https://jujucharms.com/docs/devel/models
 
 
-#### LXD, Manual, and MAAS Providers 
+#### LXD, Manual, and MAAS Providers
 
 To bootstrap models using the LXD, manual, and MAAS providers, see the special clouds section of: https://jujucharms.com/docs/devel/clouds
 
@@ -342,7 +344,7 @@ key-id, manta-url
 ### Native Support for Charm Bundles
 
 The Juju 'deploy' command can now deploy a bundle. A bundle is a
-collection of charms that together create an entire system. The 
+collection of charms that together create an entire system. The
 Juju Quickstart or Deployer plugins are no longer needed to deploy
 a bundle of charms. See: https://jujucharms.com/docs/devel/charms-bundles
 
@@ -402,15 +404,15 @@ to utilize a cloud provider.
 
 LXD has been made available in Trusty backports, but needs manual
 dependency resolution:
-        
+
     sudo apt-get --target-release trusty-backports install lxd
-        
+
 Before using a locally running LXD after installing it, either through
 Juju or the LXD CLI ("lxc"), you must either log out and back in or run
 this command:
-        
+
     newgrp lxd
-               
+
 See: https://linuxcontainers.org/lxd/getting-started-cli/
 
 
@@ -450,7 +452,7 @@ allocating more machines than there are public IP addresses.
 
 A new provider has been added that supports hosting a Juju model in
 Rackspace Public Cloud. As Rackspace Cloud is based on OpenStack,
-most of the features and configuration options for those two 
+most of the features and configuration options for those two
 providers are identical.
 
 
@@ -459,7 +461,7 @@ providers are identical.
 While bootstrapping, you can now specify constraints for the bootstrap
 machine independently of the application constraints:
 
-    juju bootstrap --constraints <application-constraints> 
+    juju bootstrap --constraints <application-constraints>
         --bootstrap-constraints <bootstrap-machine-constraints>
 
 You can also specify the series of the bootstrap machine:
@@ -585,8 +587,7 @@ when deploying individual charms. The bundle YAML can include a section
 called "bindings", defining the map of endpoint names to space names.
 
 Example bundle.yaml excerpt:
-
-```yaml
+    ...
     mysql:
         charm: cs:trusty/mysql-53
         num_units: 1
@@ -594,7 +595,7 @@ Example bundle.yaml excerpt:
         bindings:
             server: database
             cluster: internal
-```
+    ...
 
 Deploying a bundle including a section like in the example above, is
 equivalent to running:
@@ -614,7 +615,7 @@ address to use for a given unit.
 There is currently a mandatory '--primary-address' argument to 'network-
 get', which guarantees a single IP address to be returned.
 
-Example (within a charm hook): 
+Example (within a charm hook):
 
     relation-ids cluster
     url:2
@@ -680,14 +681,14 @@ Three new commands have been introduced:
 1.  juju list-resources
 
     usage: juju list-resources [options] application-or-unit
-    
+
     This command shows the resources required by and those in use by an
     existing application or unit in your model.
 
 2.  juju push-resource
 
     usage: juju push-resource [options] application name=file
-    
+
     This command uploads a file from your local disk to the juju
     controller to be used as a resource for a application.
 
@@ -746,7 +747,7 @@ state of the machine as it transitions from allocating to deploying to
 deployed. For containers it also provides extra information about the
 container being created.
 
-    juju status --format=yaml
+    juju status --format yaml
 
         model: admin
         machines:
@@ -914,12 +915,10 @@ clouds:
 
 ### Juju Log Forwarding
 
-Log forwarding is a bare bones implementation which is undergoing ongoing development work to improve the user experience. It should be considered only as a proof of concept. As it is an initial implementation, there are a few known issues:
-https://bugs.launchpad.net/juju-core/+bugs?field.tag=log-forwarding
+When enabled, log messages for all hosted models in a controller are forwarded to a syslog server over a secure TLS connection. The easiest way to configure the feature is to provide a config.yaml file at bootstrap.
 
-When enabled, log messages for all hosted models in a controller are forwarded to a syslog server. Currently, all required config to activate the feature needs to be provided at bootstrap via a config.yaml file. 
-
-$ juju bootstrap <controllername> <cloud> --config logconfig.yaml
+$ juju bootstrap <controllername> <cloud>
+    --config logforward-enabled=true --config logconfig.yaml
 
 The contents of the yaml file should currently be as follows:
 
@@ -936,6 +935,8 @@ syslog-client-key: |
   -----BEGIN PRIVATE KEY-----
   <cert-contents>
   -----END PRIVATE KEY-----
+
+The feature can be toggled on or off by setting the logforward-enabled attribute. When enabled, a maximum of 100 previous log lines will be forwarded
 
 #### Wire Format
 Syslog messages will be sent using the RFC 5424 message format.  We make use of the structured data facility defined in the more recent RFC.
@@ -972,6 +973,28 @@ In its initial implementation, audit logging is on by default.  The audit log wi
 
 Since users may interact with Juju from multiple sources (CLI, GUI, deployer, etc.), audit log entries record the API calls made, rather than only reporting CLI commands run. Only those API calls originating from authenticated users calling the external API are logged.
 
+### Model permissions
+
+Three level of permissions are now available for users on models.
+A user can be given one of three level of permissions on each one of the models in a controller.
+The permissions for a model are:
+  * Read: The user can login to the model and obtain status and information about it.
+  * Write: The user can deploy/delete services and add relations into a model.
+  * Admin: The user has full control over the model except for controller level actions such as deletion. Model owners can delete their own models.
+
+### application-version-set
+
+Charm authors may trigger this command from any hook to output what version of the application is running. This could be a package version, for instance postgres version 9.5. It could also be a build number or version control revision identifier, for instance git sha 6fb7ba68. The version details will then be displayed in "juju status" output with the application details.
+
+Example (within a charm hook):
+
+    $ application-version-set 9.5.3
+
+Then application status will show:
+
+APP         VERSION  STATUS  EXPOSED  ORIGIN  CHARM       REV  OS
+postgresql  9.5.3    active  false    local   postgresql  0    ubuntu
+
 ### Known issues
 
   * Juju 2.0 no longer supports KVM for local provider
@@ -984,9 +1007,8 @@ Since users may interact with Juju from multiple sources (CLI, GUI, deployer, et
     api port in controller security group
     Lp 1598164
   * Credentials files containing Joyent credentials must be updated to
-    work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
+    work with beta3 and later (See "Joyent Provider No Longer Uses Manta
     Storage")
-
 
 
 # Resolved issues
