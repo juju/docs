@@ -1,4 +1,4 @@
-Title: Juju Release Notes  
+Title: Juju Release Notes
 
 # Release Notes History
 
@@ -6,6 +6,104 @@ This section details all the available release notes for the stable series of
 `juju-core`.
 
 The versions covered here are:
+
+^# juju-core 1.25.5
+
+  A stable release of Juju, juju-core 1.25.5, is now available.
+  This release replaces version 1.25.3
+
+
+  ## Getting Juju
+
+  juju-core 1.25.5 is available for Xenial and backported to earlier
+  series in the following PPA:
+
+      https://launchpad.net/~juju/+archive/stable
+
+  Windows, Centos, and OS X users will find installers at:
+
+      https://launchpad.net/juju-core/+milestone/1.25.5
+
+
+  ## Notable Changes
+
+  This releases addresses stability and performance issues.
+
+
+  ## Resolved issues
+
+    * Jujud offers poodle vulnerable sslv3 on 17070
+      Lp 1536269
+
+    * Leadership dependency failures in ci deploy tests
+      Lp 1539656
+
+    * Upgrade 1.24.7 -> 1.25.3 fails
+      Lp 1546100
+
+    * Destroyed leader, new leader not elected.
+      Lp 1511659
+
+    * New ec2 korea region
+      Lp 1530957
+
+    * Maas bridge script handles vlan nics incorrectly
+      Lp 1532167
+
+    * 1.25.0: bootstrap failure - warning discarding api open error: eof
+      Lp 1538303
+
+    * Bootstrap node does not use the proxy to fetch tools from
+      streams.c.c
+      Lp 1515289
+
+    * Payload/persistence intermittent failure
+      Lp 1519061
+
+    * 1.25.3 can't bootstrap xenial environments
+      Lp 1550306
+
+    * Enable daily image stream in juju local provider
+      Lp 1554073
+
+    * Juju's maas bridge script is echoed to the console by cloud-init
+      during bootstrap
+      Lp 1536587
+
+    * Cookies file locked for too long
+      Lp 1534643
+
+    * 1.25.4: units attempt to go through the proxy to download charm
+      from state server
+      Lp 1556207
+
+    * Xenial juju 1.25.3 unable to deploy to lxc containers
+      Lp 1557345
+
+    * Provider/maas bridge script is not idempotent
+      Lp 1553915
+
+    * Unable to bootstrap lxd provider on s390x
+      Lp 1554675
+
+    * Gce invalid volume id destroying environment
+      Lp 1556293
+
+    * Juju_availability_zone not set in maas
+      Lp 1559099
+
+    * Handle multi-series charms in 1.25
+      Lp 1563607
+
+    * Apt-mirror is not used in containers with maas provider
+      Lp 1560391
+
+    * Proxy updater fails with "permission denied"
+      Lp 1564694
+
+    * Can-upgrade-to suggests a downgrade
+      Lp 1319890
+
 
 ^# juju-core 1.25.3
 
@@ -87,10 +185,6 @@ The versions covered here are:
     * Juju can't find daily image streams from cloud-
       images.ubuntu.com/daily
       Lp 1513982
-
-    * Rsyslog certificate fails when using ipv6/4 dual stack with
-      prefer-ipv6: true
-      Lp 1478943
 
     * Improper address:port joining
       Lp 1518128
@@ -238,15 +332,6 @@ The versions covered here are:
   MAAS 1.8 introduced a new feature called "devices". This allows the
   association of a "device", that requires an IP address, with a parent machine
   managed by MAAS. There is a view in the MAAS UI showing all devices.
-
-  With the "address-allocation" feature flag enabled, Juju will register LXC and
-  KVM containers as devices on MAAS 1.8+. They are visible in the MAAS UI. If
-  the environment is forcibly shut down, the IP addresses allocated to the
-  containers will be released by MAAS.
-
-  You can enable "address-allocation" is new Juju environments like so:
-
-      JUJU_DEV_FEATURE_FLAGS=address-allocation juju bootstrap
 
 
   ### Storage support for GCE and Azure providers
@@ -1618,26 +1703,6 @@ The versions covered here are:
   leader-settings-changed as soon as possible, delaying only doing so only
   to run the install hook; complete any queued or in-flight operation; or
   resolve a hook or upgrade error.
-
-
-  ### Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
-
-  The Juju AWS and MAAS providers now support starting LXC containers. The
-  MAAS providers also supports networking on KVM. Containers and Virtual
-  Machines will be given statically allocated private IP addresses from
-  the same subnet as their host machine. For example on MAAS you can now:
-
-  ```bash
-  juju deploy wordpress --to lxc:0
-  juju add-unit mysql --to kvm:1
-  ```
-
-  This experimental feature can be enabled when the environment is
-  bootstrapped like so:
-
-  ```no-highlight
-  JUJU_DEV_FEATURE_FLAGS="address-allocation" juju bootstrap
-  ```
    
   Known limitations: 
 
