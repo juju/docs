@@ -4,8 +4,6 @@ TODO: Mediawiki status needs new screenshot when status has been updated in Juju
 
 # Getting started with Juju 2.0
 
-!!! WARNING: Juju 2.0 is still in beta, as are these instructions. We would love you to try Juju 2.0, but we don't yet recommend it for a production environment.
-
 The instructions here will get you up and running and deliver the best-possible
 experience. At the moment, that means using the very latest release of 
 Ubuntu, [16.04LTS (Xenial)](http://www.ubuntu.com/download/).
