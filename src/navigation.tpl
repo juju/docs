@@ -6,7 +6,6 @@
                     <ul class="sub">
                       <li><a href="config-aws.html">Amazon Web Service</a></li>
                       <li><a href="config-azure.html">Windows Azure</a></li>
-                      <li><a href="config-digitalocean.html">DigitalOcean</a></li>
                       <li><a href="config-gce.html">Google Compute Engine</a></li>
                       <li><a href="config-hpcloud.html">HP Public Cloud</a></li>
                       <li><a href="config-joyent.html">Joyent</a></li>

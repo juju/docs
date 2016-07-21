@@ -174,7 +174,7 @@ A successful bootstrap will result in the controller being visible in the
 
 # Additional notes
 
-See [General configuration options](https://jujucharms.com/docs/stable/config-general)
+See [General configuration options][config]
 for additional and advanced customization of your environment.
 
 
@@ -197,3 +197,5 @@ gcloud init
 For further information on the gcloud tool:
 
 https://cloud.google.com/sdk/gcloud/
+
+[config]: ./config-general

@@ -179,5 +179,7 @@ machines in a service-specific Availability Set. Read the
 [Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
 availability sets affect uptime guarantees.
 
-See [General configuration options](https://jujucharms.com/docs/stable/config-general)
+See [General configuration options][config]
 for additional and advanced customization of your environment.
+
+[config]: ./config-general
