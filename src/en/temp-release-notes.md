@@ -3,14 +3,12 @@
 A new development release of Juju, juju 2.0-beta12, is now available.
 This release replaces version 2.0-beta11.
 
-## What's New in Beta12
+## What's New in Beta13
 
-* New charm hook command: a new command application-version-set allows charmers to set the version of their running workloads (See application-version-set for details)
-* Model based ACLs: access is now more granular allowing read, write, and admin access (see ‘Model Permissions’ for details)
-* 36 bug fixes including:
-* Leveraging cached resources lp1598113
-* mgo package update that retries upserts that fail with ‘duplicate key error’ lp1593828
-* Prevent controller from being stuck in an infinite loop during teardown lp1591387
+* Ensure that openstack clouds that are configured to support multi-hypervisor images can deploy workloads to a desired hypervisor lp1600054
+* When removing documents for a destroyed model, juju no longer attempts to do this in a single transaction lp1579010
+* Print a more user friendly error message when an api request is made and a model uuid is not found lp1602034
+* Updated fix for ‘duplicate key error’ lp1593828, lp1604644
 
 ## Notable Changes
 
@@ -994,6 +992,7 @@ Then application status will show:
 
 APP         VERSION  STATUS  EXPOSED  ORIGIN  CHARM       REV  OS
 postgresql  9.5.3    active  false    local   postgresql  0    ubuntu
+
 
 ### Known issues
 
