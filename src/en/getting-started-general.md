@@ -1,8 +1,9 @@
-Title: Getting started with Juju  
+Title: Getting started with Juju
 TODO: Testing section needs rewrite
       Commands are as spec, but not implemented yet
       Headings need looking at!
       Links need to be reverified when supporting pages are written
+      Remove PPA info when Juju2 lands a stable release in main repo
 
 !!! Note: These instructions are currently transitional. They will become the
 standard instructions for the stable 2.0 release, but as not all features of
@@ -102,7 +103,7 @@ Juju currently uses three possible ways to get your credentials for a cloud:
 - Reading its own credentials.yaml file
 - Passing the values on the command line when bootstrapping
 
-^# Using environment variables  
+^# Using environment variables
 
    Some cloud providers (e.g. AWS, Openstack) have command line tools which rely on environment variables being used to store credentials. If these are in use on your system already, or you choose to define them ([there is extra info here][env]), Juju will use them too.
 
