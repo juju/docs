@@ -11,7 +11,7 @@ current stable release to manage cloud deployments.
 
 ## Stable
 
-The current stable version of Juju is 1.25.5.
+The current stable version of Juju is 1.25.6.
 
 Stable juju is suitable for everyday production use.
 
@@ -26,15 +26,15 @@ OS X Homebrew
 {: .instruction }
 
 Centos
-: [juju-1.25.5-centos7.tar.gz](https://launchpad.net/juju-core/1.25/1.25.5/+download/juju-1.25.5-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/1.25/1.25.5/+download/juju-1.25.5-centos7.tar.gz/+md5))
+: [juju-1.25.6-centos7.tar.gz](https://launchpad.net/juju-core/1.25/1.25.6/+download/juju-1.25.6-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/1.25/1.25.6/+download/juju-1.25.6-centos7.tar.gz/+md5))
 {: .instruction }
 
 OS X
-: [juju-1.25.5-osx.tar.gz](https://launchpad.net/juju-core/1.25/1.25.5/+download/juju-1.25.5-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.25/1.25.5/+download/juju-1.25.5-osx.tar.gz/+md5))
+: [juju-1.25.6-osx.tar.gz](https://launchpad.net/juju-core/1.25/1.25.6/+download/juju-1.25.6-osx.tar.gz) ([md5](https://launchpad.net/juju-core/1.25/1.25.6/+download/juju-1.25.6-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-1.25.5-signed.exe](https://launchpad.net/juju-core/1.25/1.25.5/+download/juju-setup-1.25.5-signed.exe) ([md5](https://launchpad.net/juju-core/1.25/1.25.5/+download/juju-setup-1.25.5-signed.exe/+md5))
+: [juju-setup-1.25.6-signed.exe](https://launchpad.net/juju-core/1.25/1.25.6/+download/juju-setup-1.25.6-signed.exe) ([md5](https://launchpad.net/juju-core/1.25/1.25.6/+download/juju-setup-1.25.6-signed.exe/+md5))
 {: .instruction }
 
 
@@ -76,8 +76,8 @@ agent-stream: proposed
 
 ## Development
 
-2.0-beta13 is currently in development for testing.
-The previous development release was 2.0-beta12.
+2.0-beta14 is currently in development for testing.
+The previous development release was 2.0-beta13.
 
 Development releases provide new features that are being stablised.
 These releases are *not* suitable for production environments. Upgrading
@@ -92,13 +92,13 @@ sudo apt-get install juju</pre>
 {: .instruction }
 
 Centos
-: [juju-2.0-beta13-centos7.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta13/+download/juju-2.0-beta13-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta13/+download/juju-2.0-beta13-centos7.tar.gz/+md5))
+: [juju-2.0-beta14-centos7.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta14/+download/juju-2.0-beta14-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta14/+download/juju-2.0-beta14-centos7.tar.gz/+md5))
 {: .instruction }
 
 OS X
-: [juju-2.0-beta13-osx.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta13/+download/juju-2.0-beta13-osx.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta13/+download/juju-2.0-beta13-osx.tar.gz/+md5))
+: [juju-2.0-beta14-osx.tar.gz](https://launchpad.net/juju-core/trunk/2.0-beta14/+download/juju-2.0-beta14-osx.tar.gz) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta14/+download/juju-2.0-beta14-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-2.0-beta13.exe](https://launchpad.net/juju-core/trunk/2.0-beta13/+download/juju-setup-2.0-beta13.exe) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta13/+download/juju-setup-2.0-beta13.exe/+md5))
+: [juju-setup-2.0-beta14.exe](https://launchpad.net/juju-core/trunk/2.0-beta14/+download/juju-setup-2.0-beta14.exe) ([md5](https://launchpad.net/juju-core/trunk/2.0-beta14/+download/juju-setup-2.0-beta14.exe/+md5))
 {: .instruction }
