@@ -23,7 +23,14 @@
                 <li><a href="help-rackspace.html">Rackspace</a></li>
             </ul>
         </li>
-        <li><a href="controllers.html">Controllers</a></li>
+        <li class="section><a href="controllers.html">Controllers</a>
+            <ul class="sub">
+                <li><a href="controllers-creating.html">Create/Bootstrap</a></li>
+                <li><a href="controllers-gui.html">Juju GUI</a></li>
+                <li><a href="controllers-ha.html">High Availability</a></li>
+                <li><a href="controllers-backup.html">Backups</a></li>
+            </ul>
+        </li>
         <li><a href="models.html">Models</a></li>
         <li class="section"><a class="header" href="charms.html">Charms & applications</a>
             <ul class="sub">
