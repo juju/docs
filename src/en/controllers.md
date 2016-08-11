@@ -28,7 +28,7 @@ models. Juju provides [multi-user functionality](./users.html) for this purpose.
 
 ## Controller management
 
-Common controller management tasks are summarized below.
+Common tasks are summarized below.
 
 
 ^# Create a controller
@@ -42,17 +42,6 @@ Common controller management tasks are summarized below.
    For complete explanation, syntax and examples see the
    [command reference page](./commands.html#bootstrap) or the `juju help
    bootstrap` command.
-
-
-
-^# Implement HA (high availability)
-
-   High availability in Juju provides resilience to the services offered by a
-   Juju controller. To be clear, Juju HA does not affect any other Juju machines,
-   and thus any workload services, associated with the controller's models.
-
-   This is a complex subject. See [Juju HA](./controllers-ha.html).
-
 
 
 ^# List controllers
@@ -111,7 +100,16 @@ Common controller management tasks are summarized below.
    kill-controller` command.
 
 
+^# Use the Juju GUI
+   
+   Each Juju controller creates a web-driven GUI as an alternative method of
+   management. The GUI is capable of deploying, scaling and monitoring
+   applications, as well as more advanced operations.
+   
+   More details on the GUI can be found in the [Juju GUI section][gui].
+   
 
+   
 ^# Back up a controller
    
    Juju allows one to create, restore and manage backup files containing the
@@ -122,14 +120,17 @@ Common controller management tasks are summarized below.
 
    Note: coverage of client backups are included in the above resource.
 
+   
+ 
+ 
+^# Implement HA (high availability)
 
+   Each Juju controller can be made 'Highly Available' to add resilience to the
+   operations of the controller itself. This topic is covered in more detail in
+   the [Juju HA][ha] documentation.
+   HA for the applications deployed is a matter for the charms, and is covered
+   in a separate topic,[charm HA][charm-ha].
 
-^# Use the controller GUI
-   
-   The Juju GUI is a frontend for managing controllers (and their models).
-   
-   This topic is treated in [Juju GUI](./controllers-gui.html).
-   
    
 
 ^# Restricting command usage
@@ -141,9 +142,7 @@ Common controller management tasks are summarized below.
    This topic is treated in
    [Restricting changes to the running Juju environment](./juju-block.html).
 
-<!--
-The above should really be
-[Users and models](./users-models.html#block-user-commands).
-Even though these block commands appear to operate across controllers and
-not models.
--->
+
+[gui]: ./controllers-gui.html
+[ha]: ./controllers-ha.html
+[charm-ha]: ./charms-ha
