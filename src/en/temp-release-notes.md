@@ -116,10 +116,10 @@ Juju commands have moved to a flat command structure instead of nested command s
 | juju subnet add                       | juju add-subnet *** |
 | juju ensure-availability              | juju enable-ha *** |
 
-* the behaviour of destroy-environment/destroy-model has changed, see
-https://jujucharms.com/docs/devel/controllers
-** these commands existed but are now the recommended approach
-*** this is an alias, but will be the primary command going forward
+    * the behaviour of destroy-environment/destroy-model has changed, see
+    https://jujucharms.com/docs/devel/controllers
+    ** these commands existed but are now the recommended approach
+    *** this is an alias, but will be the primary command going forward
 
 These extra commands were previously under the "jes" developer feature
 flag but are now available out of the box:
