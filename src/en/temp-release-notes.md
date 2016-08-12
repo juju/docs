@@ -1,30 +1,22 @@
-# Juju 2.0-beta12
+# Juju 2.0-beta15
 
-A new development release of Juju, juju 2.0-beta14, is now available.
-This release replaces version 2.0-beta13.
+A new development release of Juju, juju 2.0-beta15, is now available.
+This release replaces version 2.0-beta14.
 
 
-## What's New in Beta14
+## What's New in beta15
 
-* New model config capability allows managing custom configuration on
-  models much easier. See “Shared Model Config” in the release notes.
-* First baby step to an interactive bootstrap experience. Look for
-  more on this in future betas.
-* Ensure that openstack clouds that are configured to support
-  Multi-hypervisors. Juju can deploy workloads to the desired
-  hypervisor.
-  Lp 1600054
-* Juju will detect LXD default profile's bridge name and use it.
-  Lp 1575676
-* Added support for the remove-user command.
-  Lp 1570096
-* Improve the scalability when destroying large models.
-  Lp 1579010
-* Print a more user friendly error message when an api request is made
-  and a model uuid is not found
-  Lp 1602034
-* Updated fix for 'duplicate key error'
-  Lp 1593828, Lp 1604644
+This releases addresses stability and performance issues including 29 bugs
+from b14 last week. Some notable ones include:
+
+* lxd containers not using configured proxy for downloading images
+  LP 1594720 https://bugs.launchpad.net/juju-core/+bug/1594720
+* juju2 beta11 unable to parse PORT during a maas bootstrap
+  LP 1599972 https://bugs.launchpad.net/juju-core/+bug/1599972
+* LXD no longer activates all interfaces on initial deploy when using MAAS2rc3 and JUJU Beta13
+  LP 1608105 https://bugs.launchpad.net/juju-core/+bug/1608105
+* It is not possible to refer to multiple models with the same name from the CLI
+  LP 1597720 https://bugs.launchpad.net/juju-core/+bug/1597720
 
 
 ## Notable Changes
@@ -60,7 +52,7 @@ This release replaces version 2.0-beta13.
 * Juju log forwarding
 * Audit logging
 * Model permissions
-* application-version-set
+* New hook command: application-version-set
 * Shared Model Config
 * Known Issues
 
@@ -77,70 +69,72 @@ The "state-server" from Juju 1.x becomes a "controller" in 2.0.
 
 Juju commands have moved to a flat command structure instead of nested command structure:
 
-    1.25 command                          2.0-beta2 command
+| 1.25 command                          | 2.0-beta command |
+| --- | --- |
+| juju environment destroy              | juju destroy-model * *** |
+| juju environment get                  | juju get-model-config *** |
+| juju environment get-constraints      | juju get-model-constraints ** |
+| juju environment retry-provisioning   | juju retry-provisioning |
+| juju environment set                  | juju set-model-config *** |
+| juju environment set-constraints      | juju set-model-constraints ** |
+| juju environment share                | juju share-model *** |
+| juju environment unset                | juju unset-model ** *** |
+| juju environment unshare              | juju unshare-model *** |
+| juju environment users                | juju list-shares |
+| juju user add                         | juju add-user |
+| juju user change-password             | juju change-user-password |
+| juju user credentials                 | juju get-user-credentials |
+| juju user disable                     | juju disable-user |
+| juju user enable                      | juju enable-user |
+| juju user info                        | juju show-user |
+| juju user list                        | juju list-users |
+| juju machine add                      | juju add-machine ** |
+| juju machine remove                   | juju remove-machine ** |
+| <new in 2.0>                          | juju list-machines |
+| <new in 2.0>                          | juju show-machines |
+| juju authorised-keys add              | juju add-ssh-key |
+| juju authorised-keys list             | juju list-ssh-keys |
+| juju authorised-keys delete           | juju remove-ssh-key |
+| juju authorised-keys import           | juju import-ssh-key |
+| juju get                              | juju get-config |
+| juju set                              | juju set-config |
+| juju get-constraints                  | juju get-model-constraints |
+| juju set-constraints                  | juju set-model-constraints |
+| juju get-constraints <application>    | juju get-constraints |
+| juju set-constraints <application>    | juju set-constraints |
+| juju backups create                   | juju create-backup *** |
+| juju backups restore                  | juju restore-backup *** |
+| juju action do                        | juju run-action *** |
+| juju action defined                   | juju list-actions *** |
+| juju action fetch                     | juju show-action-output *** |
+| juju action status                    | juju show-action-status *** |
+| juju storage list                     | juju list-storage *** |
+| juju storage show                     | juju show-storage *** |
+| juju storage add                      | juju add-storage *** |
+| juju space create                     | juju add-space *** |
+| juju space list                       | juju list-spaces *** |
+| juju subnet add                       | juju add-subnet *** |
+| juju ensure-availability              | juju enable-ha *** |
 
-    juju environment destroy              juju destroy-model * ***
-    juju environment get                  juju get-model-config ***
-    juju environment get-constraints      juju get-model-constraints **
-    juju environment retry-provisioning   juju retry-provisioning
-    juju environment set                  juju set-model-config ***
-    juju environment set-constraints      juju set-model-constraints **
-    juju environment share                juju share-model ***
-    juju environment unset                juju unset-model ** ***
-    juju environment unshare              juju unshare-model ***
-    juju environment users                juju list-shares
-    juju user add                         juju add-user
-    juju user change-password             juju change-user-password
-    juju user credentials                 juju get-user-credentials
-    juju user disable                     juju disable-user
-    juju user enable                      juju enable-user
-    juju user info                        juju show-user
-    juju user list                        juju list-users
-    juju machine add                      juju add-machine **
-    juju machine remove                   juju remove-machine **
-    <new in 2.0>                          juju list-machines
-    <new in 2.0>                          juju show-machines
-    juju authorised-keys add              juju add-ssh-key
-    juju authorised-keys list             juju list-ssh-keys
-    juju authorised-keys delete           juju remove-ssh-key
-    juju authorised-keys import           juju import-ssh-key
-    juju get                              juju get-config
-    juju set                              juju set-config
-    juju get-constraints                  juju get-model-constraints
-    juju set-constraints                  juju set-model-constraints
-    juju get-constraints <application>    juju get-constraints
-    juju set-constraints <application>    juju set-constraints
-    juju backups create                   juju create-backup ***
-    juju backups restore                  juju restore-backup ***
-    juju action do                        juju run-action ***
-    juju action defined                   juju list-actions ***
-    juju action fetch                     juju show-action-output ***
-    juju action status                    juju show-action-status ***
-    juju storage list                     juju list-storage ***
-    juju storage show                     juju show-storage ***
-    juju storage add                      juju add-storage ***
-    juju space create                     juju add-space ***
-    juju space list                       juju list-spaces ***
-    juju subnet add                       juju add-subnet ***
-    juju ensure-availability              juju enable-ha ***
-
-    * the behaviour of destroy-environment/destroy-model has changed, see
-      https://jujucharms.com/docs/devel/controllers
-    ** these commands existed but are now the recommended approach
-    *** this is an alias, but will be the primary command going forward
+* the behaviour of destroy-environment/destroy-model has changed, see
+https://jujucharms.com/docs/devel/controllers
+** these commands existed but are now the recommended approach
+*** this is an alias, but will be the primary command going forward
 
 These extra commands were previously under the "jes" developer feature
 flag but are now available out of the box:
 
-    juju system create-environment         juju add-model
-    juju system destroy                    juju destroy-controller
-    juju system environments               juju list-models
-    juju system kill                       juju kill-controller
-    juju system list                       juju list-controllers
-    juju system list-blocks                juju list-all-blocks
-    juju system login                      juju login
-    juju system remove-blocks              juju remove-all-blocks
-    juju system use-environment            juju use-model
+| 1.25 command                         | 2.0-beta command |
+| --- | --- |
+| juju system create-environment       | juju add-model |
+| juju system destroy                  | destroy-controller |
+| juju system environments             | juju list-models |
+| juju system kill                     | juju kill-controller |
+| juju system list                     | juju list-controllers |
+| juju system list-blocks              | juju list-all-blocks |
+| juju system login                    | juju login |
+| juju system remove-blocks            | juju remove-all-blocks |
+| juju system use-environment          | juju use-model |
 
 In general:
 * listing things should start with 'list-'
@@ -195,7 +189,7 @@ The main new commands of note are:
     juju grant
     Juju revoke
     juju list-shares
-    juju use-model
+    juju use-model 
     juju list-users
     juju switch-user
 
@@ -272,7 +266,7 @@ https://jujucharms.com/docs/devel/controllers
 https://jujucharms.com/docs/devel/models
 
 
-#### LXD, Manual, and MAAS Providers
+#### LXD, Manual, and MAAS Providers 
 
 To bootstrap models using the LXD, manual, and MAAS providers, see the special clouds section of: https://jujucharms.com/docs/devel/clouds
 
@@ -348,7 +342,6 @@ https://jujucharms.com/docs/devel/users-auth
 https://jujucharms.com/docs/devel/users-creating
 https://jujucharms.com/docs/devel/users-manage
 
-
 ### Joyent Provider No Longer Uses Manta Storage
 
 The use of Joyent Manta Storage is no longer necessary and has been
@@ -361,7 +354,7 @@ key-id, manta-url
 ### Native Support for Charm Bundles
 
 The Juju 'deploy' command can now deploy a bundle. A bundle is a
-collection of charms that together create an entire system. The
+collection of charms that together create an entire system. The 
 Juju Quickstart or Deployer plugins are no longer needed to deploy
 a bundle of charms. See: https://jujucharms.com/docs/devel/charms-bundles
 
@@ -417,20 +410,19 @@ your local model more like a traditional Juju model. Because
 of this, you can test things like Juju high-availability without needing
 to utilize a cloud provider.
 
-
 #### Setting up LXD on older series
 
 LXD has been made available in Trusty backports, but needs manual
 dependency resolution:
-
+        
     sudo apt-get --target-release trusty-backports install lxd
-
+        
 Before using a locally running LXD after installing it, either through
 Juju or the LXD CLI ("lxc"), you must either log out and back in or run
 this command:
-
+        
     newgrp lxd
-
+               
 See: https://linuxcontainers.org/lxd/getting-started-cli/
 
 
@@ -470,7 +462,7 @@ allocating more machines than there are public IP addresses.
 
 A new provider has been added that supports hosting a Juju model in
 Rackspace Public Cloud. As Rackspace Cloud is based on OpenStack,
-most of the features and configuration options for those two
+most of the features and configuration options for those two 
 providers are identical.
 
 
@@ -479,7 +471,7 @@ providers are identical.
 While bootstrapping, you can now specify constraints for the bootstrap
 machine independently of the application constraints:
 
-    juju bootstrap --constraints <application-constraints>
+    juju bootstrap --constraints <application-constraints> 
         --bootstrap-constraints <bootstrap-machine-constraints>
 
 You can also specify the series of the bootstrap machine:
@@ -627,16 +619,13 @@ endpoints explicitly.
 
 #### New Hook Command: network-get
 
-When deploying an application with endpoint bindings specified, charm authors
-can use the new "network-get" hook command to determine which address to
-advertise for a given endpoint. This approach will eventually replace "unit-get
-private-address" as well as various other ways to get the address to use for a
-given unit.
+When deploying an application with endpoint bindings specified, charm authors can use the new "network-get" hook command to determine which address to advertise for a given endpoint. This approach will eventually replace "unit-get private-address" as well as various other ways to get the
+address to use for a given unit.
 
 There is currently a mandatory '--primary-address' argument to 'network-
 get', which guarantees a single IP address to be returned.
 
-Example (within a charm hook):
+Example (within a charm hook): 
 
     relation-ids cluster
     url:2
@@ -702,14 +691,14 @@ Three new commands have been introduced:
 1.  juju list-resources
 
     usage: juju list-resources [options] application-or-unit
-
+    
     This command shows the resources required by and those in use by an
     existing application or unit in your model.
 
 2.  juju push-resource
 
     usage: juju push-resource [options] application name=file
-
+    
     This command uploads a file from your local disk to the juju
     controller to be used as a resource for a application.
 
@@ -904,47 +893,28 @@ juju. This currently happens with an exponential backoff with a factor of 2 star
 A model config flag `automatically-retry-hooks` is now available that
 will toggle this behavior. It affects all the units running in the same model. By default the flag is true and that is the recommended value for regular deployments. It is toggleable mainly for debugging purposes.
 
-
 ### Enhancements to juju run
 
 Starting from 2.0 juju run will work by queueing actions using the name
 'Juju-run'.  The command line API has not changed.
 
 A few things to note:
-* Juju run is now supported on windows machines. The commands will be executed
-  through powershell.
-* Any actions named 'juju-run' defined in the charm will **not** work anymore.
-  The charm build tool will forbid any actions starting with 'juju-' to be
-  defined, similar to relations.
-* Because the commands are now actions statistics related to queue times,
-  execution times, etc. can be gathered.
-* The specified timeout is only taken into account when actually executing the
-  action and does **not** account for delays that might come from the action
-  waiting to be executed.
+* Juju run is now supported on windows machines. The commands will be executed through powershell.
+* Any actions named 'juju-run' defined in the charm will **not** work anymore. The charm build tool will forbid any actions starting with 'juju-' to be defined, similar to relations.
+* Because the commands are now actions statistics related to queue times, execution times, etc. can be gathered.
+* The specified timeout is only taken into account when actually executing the action and does **not** account for delays that might come from the action waiting to be executed.
 * `show-action-status` will also list actions queued by `juju-run`
-* To avoid flooding a new flag has been created for `show-action-status`.
-  You can now use `--name <action-name>` to only get the actions corresponding
-  to a particular name.
+* To avoid flooding a new flag has been created for `show-action-status`.  You can now use `--name <action-name>` to only get the actions corresponding to a particular name.
 * `show-action-output` can be used to get more information on a
-  particular command.
+particular command.
 
 ### SSH Host Key Checking
+The SSH host keys of Juju managed machines are now tracked and are verified by the juju ssh, scp and debug-hooks commands. This ensures that SSH connections established by these commands are actually made to the intended hosts, removing the possibility of man-in-the-middle attacks.
 
-The SSH host keys of Juju managed machines are now tracked and are verified by
-the juju ssh, scp and debug-hooks commands. This ensures that SSH connections
-established by these commands are actually made to the intended hosts, removing
-the possibility of man-in-the-middle attacks.
-
-The host key checks can be disabled using the new --no-host-key-checks option
-for Juju's SSH related commands. Routine use of this option is strongly
-discouraged.
-
+The host key checks can be disabled using the new --no-host-key-checks option for Juju’s SSH related commands. Routine use of this option is strongly discouraged.
 
 ### Config can be included in clouds.yaml
-
-The cloud definitions in the clouds.yaml file can contain a config section which
-contains configuration attributes which will be used for all models hosted by
-the controller.
+The cloud definitions in the clouds.yaml file can contain a config section which contains configuration attributes which will be used for all models hosted by the controller.
 
 clouds:
   home-maas:
@@ -955,12 +925,10 @@ clouds:
 
 ### Juju Log Forwarding
 
-When enabled, log messages for all hosted models in a controller are forwarded
-to a syslog server over a secure TLS connection. The easiest way to configure
-the feature is to provide a config.yaml file at bootstrap.
+When enabled, log messages for all hosted models in a controller are forwarded to a syslog server over a secure TLS connection. The easiest way to configure the feature is to provide a config.yaml file at bootstrap. 
 
-    juju bootstrap <controllername> <cloud>
-    --config logforward-enabled=true --config logconfig.yaml
+$ juju bootstrap <controllername> <cloud>
+	--config logforward-enabled=true --config logconfig.yaml
 
 The contents of the yaml file should currently be as follows:
 
@@ -978,27 +946,20 @@ syslog-client-key: |
   <cert-contents>
   -----END PRIVATE KEY-----
 
-The feature can be toggled on or off by setting the logforward-enabled
-attribute. When enabled, a maximum of 100 previous log lines will be forwarded
-
+The feature can be toggled on or off by setting the logforward-enabled attribute. When enabled, a maximum of 100 previous log lines will be forwarded 
 
 #### Wire Format
-
-Syslog messages will be sent using the RFC 5424 message format.  We make use of
-the structured data facility defined in the more recent RFC.
+Syslog messages will be sent using the RFC 5424 message format.  We make use of the structured data facility defined in the more recent RFC.
 
 Log Messages:
-The facility code will be 1 (user level message). Severity will be
-mapped as follows:
+The facility code will be 1 (user level message). Severity will be mapped as follows:
+Juju ERROR = Error (3)
+Juju WARNING = Warning (4)
+Juju INFO = Informational (6)
+Juju DEBUG = Debug (7)
+Juju TRACE = Debug (7)
 
-    Juju ERROR = Error (3)
-    Juju WARNING = Warning (4)
-    Juju INFO = Informational (6)
-    Juju DEBUG = Debug (7)
-    Juju TRACE = Debug (7)
-
-Messages will use structured data to record relevant environment and user action
-parameters. Key pair definitions will be:
+Messages will use structured data to record relevant environment and user action parameters. Key pair definitions will be:
 
 SDID: origin
 enterpriseId: 28978 (Canonical, Ltd.)
@@ -1012,58 +973,37 @@ model-uuid: <the uuid of the model from which the message originates>
 SDID: log@28978
 source: <the name of the source filename from which the message originates>:<the source line number>
 module: <the name of the source “module”>
-
-
 #### Example log (error) message
 
-    <11>1 2016-02-28T09:57:10.804642398-05:00 172.12.3.1 juju - - [origin enterpriseId="28978" software="jujud" "2.0.0"] [model@28978 controller-uuid="deadbeef" model-uuid="deadbeef"] [log@28978 source-file="provider/ec2/storage.go" source-line="60"] Could not initialise machine block storage
-
+<11>1 2016-02-28T09:57:10.804642398-05:00 172.12.3.1 juju - - [origin enterpriseId="28978" software="jujud" "2.0.0"] [model@28978 controller-uuid="deadbeef" model-uuid="deadbeef"] [log@28978 source-file="provider/ec2/storage.go" source-line="60"] Could not initialise machine block storage
 
 ### Audit Logging
 
-In its initial implementation, audit logging is on by default.  The audit log
-will be in /var/log/juju/audit.log for each controller machine.  If running in
-an HA environment, the audit.log files on each controller machine must be
-collated to get a complete log.  Future releases will provide a utility to merge
-the logs, akin to debug-log.
+In its initial implementation, audit logging is on by default.  The audit log will be in /var/log/juju/audit.log for each controller machine.  If running in an HA environment, the audit.log files on each controller machine must be collated to get a complete log.  Future releases will provide a utility to merge the logs, akin to debug-log.
 
-Since users may interact with Juju from multiple sources (CLI, GUI, deployer,
-etc.), audit log entries record the API calls made, rather than only reporting
-CLI commands run. Only those API calls originating from authenticated users
-calling the external API are logged.
-
+Since users may interact with Juju from multiple sources (CLI, GUI, deployer, etc.), audit log entries record the API calls made, rather than only reporting CLI commands run. Only those API calls originating from authenticated users calling the external API are logged.
 
 ### Model permissions
 
-Three level of permissions are now available for users on models. A user can be
-given one of three level of permissions on each one of the models in a
-controller.
-
+Three level of permissions are now available for users on models.
+A user can be given one of three level of permissions on each one of the models in a controller.
 The permissions for a model are:
-  * Read: The user can login to the model and obtain status and information
-    about it.
+  * Read: The user can login to the model and obtain status and information about it.
   * Write: The user can deploy/delete services and add relations into a model.
-  * Admin: The user has full control over the model except for controller
-    level actions such as deletion. Model owners can delete their own models.
-
+  * Admin: The user has full control over the model except for controller level actions such as deletion. Model owners can delete their own models.
 
 ### application-version-set
 
-Charm authors may trigger this command from any hook to output what version of
-the application is running. This could be a package version, for instance
-postgres version 9.5. It could also be a build number or version control
-revision identifier, for instance git sha 6fb7ba68. The version details will
-then be displayed in "juju status" output with the application details.
+Charm authors may trigger this command from any hook to output what version of the application is running. This could be a package version, for instance postgres version 9.5. It could also be a build number or version control revision identifier, for instance git sha 6fb7ba68. The version details will then be displayed in "juju status" output with the application details.
 
-Example (within a charm hook):
-
-    application-version-set 9.5.3
+Example (within a charm hook): 
+   
+    $ application-version-set 9.5.3
 
 Then application status will show:
 
 APP         VERSION  STATUS  EXPOSED  ORIGIN  CHARM       REV  OS
 postgresql  9.5.3    active  false    local   postgresql  0    ubuntu
-
 
 ### Shared Model Config
 
@@ -1088,20 +1028,19 @@ The management of hosted model configuration has been improved in several ways:
 
 There are 3 sources of model attribute values:
   1. default - hard coded into Juju
-  2. controller - shared by all models created on controllers within an HA
-     environment
+  2. controller - shared by all models created on controllers within an HA environment
   3. model - set by the user
 
 An example juju model-config output:
 
     ATTRIBUTE                   FROM        VALUE
-    agent-metadata-url          default
+    agent-metadata-url          default      
     agent-stream                default     released
     agent-version               model       2.0-beta14.4
-    apt-ftp-proxy               default
-    apt-http-proxy              default
-    apt-https-proxy             default
-    apt-mirror                  default
+    apt-ftp-proxy               default      
+    apt-http-proxy              default      
+    apt-https-proxy             default      
+    apt-mirror                  default      
     automatically-retry-hooks   default     True
     default-series              default     xenial
     development                 default     False
@@ -1110,10 +1049,10 @@ An example juju model-config output:
     enable-os-upgrade           default     True
     firewall-mode               default     instance
     ftp-proxy                   controller  http://local
-    http-proxy                  default
-    https-proxy                 default
+    http-proxy                  default      
+    https-proxy                 default      
     ignore-machine-addresses    default     False
-    image-metadata-url          default
+    image-metadata-url          default      
     image-stream                default     released
     logforward-enabled          default     False
     logging-config              model       <root>=INFO;unit=DEBUG
@@ -1135,18 +1074,14 @@ Points of note are that:
   - the FROM value is calculated dynamically so that if a default value
     changes to match the model, the output is adjusted accordingly
 
-The behaviour of juju unset-model-config has changed. Previously, any unset
-attribute would revert to the empty value. Now, the value will revert to the
-closest inherited value. In the case above:
-
+The behaviour of juju unset-model-config has changed. Previously, any unset attribute would revert to the empty value. Now, the value will revert to the closest inherited value. In the case above:
   - ftp-proxy has inherited the controller value http://local
   - juju set-model-config ftp-proxy=http://another will set a new "model"
     value for this attribute
   - juju unset-model-config ftp-proxy will revert to the controller value
     http://local
 
-For this release, shared controller config attributes are specified in the
-clouds.yaml file.
+For this release, shared controller config attributes are specified in the clouds.yaml file.
 
     clouds:
      lxdtest:
@@ -1156,9 +1091,7 @@ clouds.yaml file.
          set-numa-control-policy: true
          ftp-proxy: http://local
 
-These cannot be changed once set. The next Juju beta will include new
-functionality to:
-
+These cannot be changed once set. The next Juju beta will include new functionality to:
   - set and unset shared controller attributes
   - display the values of shared attributes used when creating models, and
     where those attributes are defined (default or controller)
@@ -1172,12 +1105,11 @@ functionality to:
     Lp 1547665
   * Cannot deploy a dense openstack bundle with native deploy
     Lp 1555808
-  * grant-revoke: reenabled users missing from list-users
-    Lp 1609494
-  * backup-restore failed creating collection EOF
-    Lp 1605653
-  * Juju 2.0-beta12 userdata execution fails on Windows
-    Lp 1604474
+  * Cannot get status after restore is denied
+    Lp 1595686
+  * [aws] adding a machine post-bootstrap on the controller model closes of
+    api port in controller security group
+    Lp 1598164
   * Credentials files containing Joyent credentials must be updated to
-    work with beta3 and later (See "Joyent Provider No Longer Uses Manta
+    work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
     Storage")
