@@ -90,8 +90,8 @@ Juju commands have moved to a flat command structure instead of nested command s
 | juju user list                        | juju list-users |
 | juju machine add                      | juju add-machine ** |
 | juju machine remove                   | juju remove-machine ** |
-| <new in 2.0>                          | juju list-machines |
-| <new in 2.0>                          | juju show-machines |
+| \<new in 2.0\>                        | juju list-machines |
+| \<new in 2.0\>                        | juju show-machines |
 | juju authorised-keys add              | juju add-ssh-key |
 | juju authorised-keys list             | juju list-ssh-keys |
 | juju authorised-keys delete           | juju remove-ssh-key |
@@ -116,10 +116,10 @@ Juju commands have moved to a flat command structure instead of nested command s
 | juju subnet add                       | juju add-subnet *** |
 | juju ensure-availability              | juju enable-ha *** |
 
-* the behaviour of destroy-environment/destroy-model has changed, see
+\* the behaviour of destroy-environment/destroy-model has changed, see
 https://jujucharms.com/docs/devel/controllers
-** these commands existed but are now the recommended approach
-*** this is an alias, but will be the primary command going forward
+\*\* these commands existed but are now the recommended approach
+\*\*\* this is an alias, but will be the primary command going forward
 
 These extra commands were previously under the "jes" developer feature
 flag but are now available out of the box:
