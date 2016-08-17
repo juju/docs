@@ -23,7 +23,7 @@
                 <li><a href="help-rackspace.html">Rackspace</a></li>
             </ul>
         </li>
-        <li class="section"><a href="controllers.html">Controllers</a>
+        <li class="section"><a class="header" href="controllers.html">Controllers</a>
             <ul class="sub">
                 <li><a href="controllers-creating.html">Create/Bootstrap</a></li>
                 <li><a href="controllers-gui.html">Juju GUI</a></li>
