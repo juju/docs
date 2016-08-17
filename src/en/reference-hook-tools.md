@@ -1,4 +1,4 @@
-Title: Hook tools  
+Title: Hook tools
 
 # Hook tools
 
@@ -13,7 +13,7 @@ available within ‘hook context’.
 on your client with `juju help-tool {command}`. Or for more detailed help on
 individual commands run the command with the -h flag.
 
-!!! Note:  Many of the tools produce text based output, and those that do accept
+!!! Note: Many of the tools produce text based output, and those that do accept
 a `--format` flag which can be set to json or yaml as desired.
 
 ## action-fail
@@ -24,13 +24,13 @@ problem with the action. For more information about where you might use this
 command, read more about [Juju Actions](actions.html) or
 [how to write Juju Actions](developer-actions.html).
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import action_fail
 
 action_fail(‘Unable to contact remote service’)
 ```
-bash:  
+bash:
 ```bash
 action-fail ‘unable to contact remote service’
 ```
@@ -43,13 +43,13 @@ as YAML. If multiple keys are passed, `action-get` will recurse into the param
 map as needed. Read more about [Juju Actions](actions.html) or
 [how to write Juju Actions](developer-actions.html).
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import action_get
 
 timeout = action_get(‘timeout’)
 ```
-bash:  
+bash:
 ```bash
 TIMEOUT=$(action-get timeout)
 ```
@@ -62,13 +62,13 @@ TIMEOUT=$(action-get timeout)
 completion of the Action. Keys must start and end with lowercase alphanumeric,
 and contain only lowercase alphanumeric, hyphens and periods.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import action_set
 
 action_set('com.juju.result', 'we are the champions')
 ```
-bash:  
+bash:
 ```bash
 action-set com.juju.result 'we are the champions'
 ```
@@ -79,14 +79,14 @@ action-set com.juju.result 'we are the champions'
 `close-port` ensures a port or range is not accessible from the public
 interface.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import close_port
 
 # Close a single port
 close_port(80, protocol="UDP")
 ```
-bash:  
+bash:
 ```bash
 # Close single port
 close-port 80
@@ -105,7 +105,7 @@ all defined config settings including nil values (for those without defaults).
 If called with a single argument, it returns the value of that config key.
 Missing config keys are reported as nulls, and do not return an error.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import config
 
@@ -114,7 +114,7 @@ cfg =config()
 # Get the value for the "interval" key.
 interval = cfg.get(‘interval’)
 ```
-bash:  
+bash:
 ```bash
 INTERVAL=$(config-get interval)
 
@@ -129,14 +129,14 @@ the unit is currently leader and can be guaranteed to remain so for 30
 seconds. Output can be expressed as `--format json` or `--format yaml` if
 desired.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import is_leader
 
 if is_leader():
     # Do something a leader would do
 ```
-bash:  
+bash:
 ```bash
 LEADER=$(is-leader)
 if [ "${LEADER}" == "True" ]; then
@@ -150,13 +150,13 @@ fi
 `juju-log` writes messages directly to the unit's log file. Valid
 levels are: INFO, WARN, ERROR, DEBUG
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import juju_log
 
 juju_log('Something has transpired', 'INFO')
 ```
-bash:  
+bash:
 ```bash
 juju-log -l 'WARN' Something has transpired
 ```
@@ -180,13 +180,13 @@ behavior in all situations.
 
 `juju-reboot` is not supported when running actions.
 
-python:  
+python:
 ```python
 from subprocess import check_call
 
 check_call(["juju-reboot", "--now"])
 ```
-bash:  
+bash:
 ```bash
 # immediately reboot
 juju-reboot --now
@@ -203,13 +203,13 @@ juju-reboot
 from the leader settings. If no key is given, or if the key is "-", all keys
 and values will be printed.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import leader_get
 
 address = leader_get('cluster-leader-address')
 ```
-bash:  
+bash:
 ```bash
 ADDRESSS=$(leader-get cluster-leader-address)
 ```
@@ -236,13 +236,13 @@ install hook.
 It is strongly recommended that leader settings are always written as a
 self-consistent group `leader-set one=one two=two three=three`.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import leader_set
 
 leader_set('cluster-leader-address', "10.0.0.123")
 ```
-bash:  
+bash:
 ```bash
 leader-set cluster-leader-address=10.0.0.123
 ```
@@ -260,13 +260,13 @@ charms co-hosted on the same machine
 exiting the current hook), and therefore `opened-ports` will not return any
 values for pending `open-port` operations run from within the same hook.
 
-python:  
+python:
 ```python
 from subprocess import check_output
 
 range = check_output(["opened-ports"])
 ```
-bash:  
+bash:
 ```bash
 opened-ports
 ```
@@ -283,13 +283,13 @@ single port or range of ports with an optional protocol, which may be `udp` or
 a somewhat delayed effect even if it is. This operation is transactional, so
 changes will not be made unless the hook exits successfully.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import open_port
 
 open_port(80, protocol='TCP')
 ```
-bash:  
+bash:
 ```bash
 open-port 80/tcp
 
@@ -328,7 +328,7 @@ provided when "register" is run.
 The payload class must correspond to one of the payloads defined in
 the charm's metadata.yaml.
 
-metadata.yaml:    
+metadata.yaml:
 ```yaml
 payloads:
     monitoring:
@@ -337,13 +337,13 @@ payloads:
         type: kvm
 ```
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import payload_register
 
 payload_register('monitoring', 'docker', '0fcgaba')
 ```
-bash:  
+bash:
 ```bash
 payload-register monitoring docker 0fcgaba
 ```
@@ -356,13 +356,13 @@ that a payload has been manually stopped. The `class` and `id` provided
 must match a payload that has been previously registered with Juju using
 payload-register.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import payload_unregister
 
 payload_unregister('monitoring', '0fcgaba')
 ```
-bash:  
+bash:
 ```bash
 payload-unregister monitoring 0fcgaba
 ```
@@ -440,13 +440,13 @@ defaults to the name of the current relation. The output is useful as input
 to the `relation-list`, `relation-get`, and `relation-set` commands to read
 or write other relation values.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import relation_ids
 
 relation_ids('database')
 ```
-bash:  
+bash:
 ```bash
 relation-ids database
 ```
@@ -459,7 +459,7 @@ identifier. If not running in a relation hook context, `-r` needs to be
 specified with a relation identifier similar to the`relation-get` and
 `relation-set` commands.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import relation_list
 from charmhelpers.core.hookenv import relation_id
@@ -467,7 +467,7 @@ from charmhelpers.core.hookenv import relation_id
 # List the units on a relation for the given relation id.
 related_units = relation_list(relation_id())
 ```
-bash:  
+bash:
 ```bash
 relation-list 9
 
@@ -506,13 +506,13 @@ There is no way to write settings for any unit other than the local unit.
 However, any hook on the local unit can write settings for any relation which
 the local unit is participating in.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import relation_set
 
 relation_set({'port': 80, 'tuning': 'default'})
 ```
-bash:  
+bash:
 ```bash
 relation-set port=80 tuning=default
 
@@ -527,19 +527,24 @@ the current workload status. Without arguments, it just prints the workload
 status value e.g. 'maintenance'. With `--include-data` specified, it prints
 YAML which contains the status value plus any data associated with the status.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import status_get
 
 charm_status = status_get()
 ```
-bash:  
+bash:
 ```bash
 status-get
 
 status-get --include-data
 ```
 
+Use `--service` to get the overall status for the service to which the unit
+belongs if the unit is the leader, for example:
+```bash
+juju run --unit ubuntu/0 'status-get --service
+```
 
 ## status-set
 
@@ -595,13 +600,13 @@ the hook which crashed. For example “Crashed installing the software” for an
 install hook crash, or “Crash establishing database link” for a crash in a
 relationship hook.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import status_set
 
 status_set('blocked', 'Unable to continue until related to a database')
 ```
-bash:  
+bash:
 ```bash
 status-set maintenance "installing software"
 status-set maintenance "formatting storage space, time left: 120s"
@@ -612,6 +617,11 @@ status-set blocked "Need a database relation"
 status-set blocked "Storage full"
 ```
 
+Use `--service` to set the overall status for the service to which the unit
+belongs if the unit is the leader, for example:
+```bash
+juju run --unit ubuntu/0 'status-set --service
+```
 
 ## storage-add
 
@@ -620,13 +630,13 @@ name of the storage (as defined in the charm metadata), and optionally the
 number of storage instances to add; by default it will add a single storage
 instance of the name.
 
-python:  
+python:
 ```python
 from subprocess import check_call
 
 check_call(["storage-add", "database-storage=1"])
 ```
-bash:  
+bash:
 ```bash
 storage-add database-storage=1
 ```
@@ -644,7 +654,7 @@ storage-get should be used to identify the storage location during
 storage-attached and storage-detaching hooks. The exception to this is when the
 charm specifies a static location for singleton stores.
 
-python:  
+python:
 ```python
 from subprocess import check_call
 
@@ -664,13 +674,13 @@ storage-get -s data/0
 unit. The storage instance identifiers returned from `storage-list` may be
 passed through to the `storage-get` command using the -s flag.
 
-python:  
+python:
 ```python
 from subprocess import check_output
 
 storage = check_output(["storage-list"])
 ```
-bash:  
+bash:
 ```bash
 storage-list
 ```
@@ -682,13 +692,13 @@ storage-list
 argument, which must be `private-address` or `public-address`. It is not
 affected by context.
 
-python:  
+python:
 ```python
 from charmhelpers.core.hookenv import unit_get
 
 address = unit_get('public-address')
 ```
-bash:  
+bash:
 ```bash
 unit-get public-address
 ```
