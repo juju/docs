@@ -520,6 +520,31 @@ relation-set -r server:3 username=jim password=12345
 ```
 
 
+## resource-get
+
+`resource-get` fetches a resource from the Juju controller or the Juju Charm
+store. The command returns a local path to the file for a named resource.
+
+If `resource-get` has not been run for the named resource previously, then the
+resource is downloaded from the controller at the revision associated with the
+unit's application. That file is stored in the unit's local cache. If
+`resource-get` *has* been run before then each subsequent run synchronizes the
+resource with the controller. This ensures that the revision of the unit-local
+copy of the resource matches the revision of the resource associated with the
+unit's application.
+
+The path provided by `resource-get` references the up-to-date file for the
+resource. Note that the resource may get updated on the controller for the
+service at any time, meaning the cached copy *may* be out of date at any time
+after `resource-get` is called. Consequently, the command should be run at
+every point where it is critical for the resource be up to date.
+
+```sh
+# resource-get software
+/var/lib/juju/agents/unit-resources-example-0/resources/software/software.zip
+```
+
+
 ## status-get
 
 `status-get` allows charms to query what is recorded in Juju as
