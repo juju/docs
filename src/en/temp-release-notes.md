@@ -71,7 +71,7 @@ The "state-server" from Juju 1.x becomes a "controller" in 2.0.
 
 Juju commands have moved to a flat command structure instead of nested command structure:
 
-    1.25 command                          2.0-beta2 command
+    1.25 command                          2.0-beta command
 
     juju environment destroy              juju destroy-model * ***
     juju environment get                  juju get-model-config ***
