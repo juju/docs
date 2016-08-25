@@ -41,7 +41,7 @@ restrictive configuration language, you're probably "Doing It Wrong".
 
 Your charm should operate correctly with no explicit configuration settings. The
 first time someone uses your charm, they're likely to run `juju deploy
-yourcharm` and see what happens; if it doesn't work out of the box ont the first
+yourcharm` and see what happens; if it doesn't work out of the box on the first
 go, many potential users won't give it a second try.
 
 ## Sample config.yaml files
