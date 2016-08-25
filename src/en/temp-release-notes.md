@@ -819,8 +819,8 @@ relevant sub-commands:
 
 For more information on the new support for channels in the Charm Store
 and how they work, please see our
-[documentation](https://jujucharms.com/docs/devel/authors-charm-store
-#entities-explained) on the subject.
+[documentation](https://jujucharms.com/docs/devel/authors-charm-store#entities-explained)
+on the subject.
 
 
 ### Keystone 3 support in Openstack.
