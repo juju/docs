@@ -1,7 +1,6 @@
-Title: Using storage with Juju charms  
-TODO: LXC/local caveat needs editing or removing  
-      Commands need updating for 2.0  
-      Storage commands need more examples/usage  
+Title: Using storage with Juju charms
+TODO: LXC/local caveat needs editing or removing
+      Storage commands need more examples/usage
 
 # Using Juju Storage
 
@@ -12,22 +11,21 @@ the charm is deployed. Charms may declare several types of storage requirement
 allocated at a more granular level.
 
 Juju has the [`juju storage`](./commands.html#storage) command and
-subcommands to create and manage storage resources.  All commands and
+subcommands to create and manage storage resources. All commands and
 subcommands accept the “--help” flag for usage and help information.
 
 ```bash
 juju storage --help
-juju storage add
-juju storage list
-juju storage pool list
-juju storage pool create
-juju storage volume list
+juju add-storage
+juju show-storage
+juju create-storage-pool
+juju storage-pools
 ```
 
 ## Deploying a charm with storage requirements
 
 For this document, we will use a charm which has been modified to support
-storage:  
+storage:
 [https://code.launchpad.net/~axwalk/charms/trusty/postgresql/trunk](https://code.launchpad.net/~axwalk/charms/trusty/postgresql/trunk).
 
 ### Preparing storage
@@ -41,12 +39,12 @@ a desire to be more specific, use the `juju storage pool create` subcommand to
 create storage.
 
 ```bash
-juju storage pool create loopy loop size=100M
-juju storage pool create rooty rootfs size=100M
-juju storage pool create tempy tmpfs size=100M
+juju create-storage-pool loopy loop size=100M
+juju create-storage-pool rooty rootfs size=100M
+juju create-storage-pool tempy tmpfs size=100M
 ```
 ```no-highlight
-juju storage pool list
+juju storage-pools
 loopy:
   provider: loop
   attrs:
@@ -224,7 +222,7 @@ juju deploy cs:~axwalk/postgresql --storage data=ebs-ssd
 ```
 
 We can also merely specify the size, in which case Juju will use the default
-pool for the selected environment.  E.g.:
+pool for the selected environment. E.g.:
 
 ```bash
 juju deploy cs:~axwalk/postgresql --storage data=10G
@@ -235,7 +233,7 @@ Which, on the EC2 provider, will create a 10
 
 Charms may declare multiple types of storage, in which case they may all be
 specified using the constraint, or some or all can be omitted to accept the
-default values:  
+default values:
 
 ```bash
 juju deploy cs:~axwalk/postgresql --storage data=ebs,10G cache=ebs-ssd
@@ -248,7 +246,7 @@ You can find the branch at
 [cs:~axwalk/postgresql](https://code.launchpad.net/~axwalk/charms/trusty/postgresql/trunk).
 
 Here is how you can go about using the storage feature. Start by deploying a
-charm that defines a storage unit.  
+charm that defines a storage unit.
 
 ```no-highlight
 juju deploy cs:~axwalk/postgresql pg-rootfs
@@ -258,7 +256,7 @@ juju deploy cs:~axwalk/postgresql --storage data=ebs-ssd,10G pg-ssd
 juju storage pool create ebs-iops ebs volume-type=provisioned-iops iops=300
 juju deploy cs:~axwalk/postgresql --storage data=ebs-iops,10G pg-iops
 sleep $SOME_TIME
-juju storage list
+juju storage
 ```
 
 Output:  
