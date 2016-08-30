@@ -201,3 +201,74 @@ following:
 ```
     self.deployment.log.debug("Some debug message here.")
 ```
+
+## Unit testing a layered charm
+
+Amulet is a mature tool for deploying and testing a charm in a test environment.
+
+For layered charms, it is often desirable to be able to run some tests before the charm has been built, however. For example, you may wish to run unit tests as you write your code. Waiting for the charm to build so that amulet can run tests on it would introduce unnecessary delays into the unit testing cycle. What follows are some best practices for writing unit tests for a layered charm.
+
+#### Create a separate tox ini file
+
+You will usually want to create a second .ini file for tox, along with a separate requirements file, so that requirements for your unit tests don't clobber the requirements for Amulet tests. You might call this file `tox_unit.ini`, and put the following inside of it:
+
+```
+[tox]
+skipsdist=True
+envlist = py34, py35
+skip_missing_interpreters = True
+
+[testenv]
+commands = nosetests -v --nocapture tests/unit
+deps =
+    -r{toxinidir}/unit_test_requirements.txt
+    -r{toxinidir}/wheelhouse.txt
+
+setenv =
+    PYTHONPATH={toxinidir}/reactive:{toxinidir}/lib
+
+```
+
+#### Put library functions into packaged Python libraries.
+
+If you import objects from a Python module that exists in another layer, Python will raise an ImportError when you execute your unit tests. Building the charm will fix this ImportError, but will slow down your unit testing cycle.
+
+Layer authors can help you get around this issue by putting their library functions in a Python library that can be built and installed via the usual Python package management tools. You can add the library to your unit testing requirements.
+
+This isn't always practical, however. This brings us to the next step:
+
+### When importing modules from a layer, structure your imports so that you can monkey patch
+
+Let's say that you want to use the very useful "options" object in the base layer. If you import it as follows, you will get an import error that it very hard to work around:
+
+```
+from charms.layer import options
+
+class MyClass(object):
+    def __init__(self):
+        self.options = options
+
+```
+
+If you instead import it like so, you can use libraries like Python's mock library to monkey patch the import out when you run your tests:
+
+```
+from charms import layer
+
+class MyClass(object):
+    def __init__(self):
+        self.options = layer.options
+
+```
+
+Here's an example of a test that uses the mock (note that we pass create=True -- this is important!):
+
+```
+
+    @mock.patch('mycharm.layer.options', create=True)
+    def test_my_class(self, mock_options):
+        ...
+
+```
+
+If your charm does not have a lib/charms/layer directory, you'll still wind up with an ImportError that can be hard to work around. In this case, we recommend creating that directory, and dropping a blank file called `<your charm name>.py` into it. This isn't ideal, but it will save you some trouble when writing your tests.
