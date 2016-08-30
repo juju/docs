@@ -208,7 +208,7 @@ Amulet is a mature tool for deploying and testing a charm in a test environment.
 
 For layered charms, it is often desirable to be able to run some tests before the charm has been built, however. For example, you may wish to run unit tests as you write your code. Waiting for the charm to build so that amulet can run tests on it would introduce unnecessary delays into the unit testing cycle. What follows are some best practices for writing unit tests for a layered charm.
 
-#### Create a separate tox ini file
+### Create a separate tox ini file
 
 You will usually want to create a second .ini file for tox, along with a separate requirements file, so that requirements for your unit tests don't clobber the requirements for Amulet tests. You might call this file `tox_unit.ini`, and put the following inside of it:
 
@@ -221,15 +221,15 @@ skip_missing_interpreters = True
 [testenv]
 commands = nosetests -v --nocapture tests/unit
 deps =
-    -r{toxinidir}/unit_test_requirements.txt
+    -r{toxinidir}/tests/unit/requirements.txt
     -r{toxinidir}/wheelhouse.txt
 
 setenv =
-    PYTHONPATH={toxinidir}/reactive:{toxinidir}/lib
+    PYTHONPATH={toxinidir}/lib
 
 ```
 
-#### Put library functions into packaged Python libraries.
+### Put library functions into packaged Python libraries.
 
 If you import objects from a Python module that exists in another layer, Python will raise an ImportError when you execute your unit tests. Building the charm will fix this ImportError, but will slow down your unit testing cycle.
 
