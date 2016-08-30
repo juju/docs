@@ -1,4 +1,4 @@
-Title: Charm hooks  
+Title: Charm hooks
 
 # Charm hooks
 
@@ -19,37 +19,17 @@ the unit agent's log. If it returns a non-zero exit code, the agent enters an
 The agent will also enter an error state if the unit agent process is aborted
 during hook execution.
 
-There are two types of hooks, described in more detail in the following
-sections.
+There are multiple types of hooks, each described in more detail in the
+following sections.
 
 !!! Note: None of the unit or relation hooks are required; if you don't
 implement a hook, it just doesn't get run. When a hook event occurs, Juju will
 look for the corresponding hook file to execute, but if it finds none, will
 continue running without generating an error.
 
-## Unit hooks
+## Core lifecycle hooks
 
-There are 5 "unit hooks" with predefined names that can be implemented by any
-charm:
-
-  - install
-  - config-changed
-  - start
-  - upgrade-charm
-  - stop
-
-For every relation defined by a charm, an additional 4 "relation hooks" can be
-implemented, named after the charm relation:
-
-  - [name]-relation-joined
-  - [name]-relation-changed
-  - [name]-relation-departed
-  - [name]-relation-broken
-
-### install
-
-`install` runs just once, before any other hook. It should be used to perform
-one-time setup operations only.
+These run during the normal charm lifecycle.
 
 ### config-changed
 
@@ -58,13 +38,38 @@ one-time setup operations only.
   - immediately after "install"
   - immediately after "upgrade-charm"
   - at least once when the unit agent is restarted (but, if the unit is in an
-[error state](./authors-hook-errors.html), it won't be run until after the
-error state is cleared).
-  - after changing charm configuration using a command line interface
+    [error state](./authors-hook-errors.html), it won't be run until after the
+    error state is cleared).
+  - after changing charm configuration using the GUI or command line interface
 
 It cannot assume that the software has already been started; it should not start
 stopped software, but should (if appropriate) restart running software to take
 configuration changes into account.
+
+### install
+
+`install` is run at the beginning of a charm lifecycle. The hook should be used
+to perform one-time setup operations, such as installing prerequisite software
+that will not change with configuration changes. Like all hooks this must be
+idempotent because there are scenarios where this hook can be run more than
+once.
+
+### leader-elected
+
+`leader-elected` is run at least once to signify that Juju decided this unit is
+the leader. Authors can use this hook to take action if their protocols for
+leadership, consensus, raft, or quorum require one unit to assert leadership.
+If the election process is done internally to the service, other code should be
+used to signal the leader to Juju. For more information read the [charm
+leadership document](./authors-charm-leadership.html).
+
+### leader-settings-changed
+
+`leader-settings-changed` runs when the leader has set values for the other
+units to respond to. Much like (config-changed)[#config-changed) but for the
+leaders to send values to other units. Follower units can implement this hook
+and take action when the leader sets values. For more information read the
+[charm leadership document](./authors-charm-leadership.html).
 
 ### start
 
@@ -72,21 +77,6 @@ configuration changes into account.
 used to ensure the charm's software is running. Note that the charm's software
 should be configured so as to persist through reboots without further
 intervention on juju's part.
-
-### upgrade-charm
-
-`upgrade-charm` runs immediately after any [upgrade](./authors-charm-
-upgrades.html) operation that does _not_ itself interrupt an existing [error
-state](./authors-hook-errors.html). It should be used to reconcile local state
-written by some other version of the charm into whatever form it needs to take
-to be manipulated by the current version.
-
-While the forced upgrade functionality is intended as a developer tool, and is
-not generally suitable for end users, it's somewhat optimistic to depend on the
-functionality never being abused. In light of this, if you need to run an
-`upgrade-charm` hook before your other hooks will work correctly, it may be wise
-to preface all your other hooks with a quick call to your (idempotent)
-`upgrade-charm`.
 
 ### stop
 
@@ -100,6 +90,28 @@ implement the following logic:
 - Stop the service
 - Remove any files/configuration created during the service lifecycle
 - Prepare any backup(s) of the service that are required for restore purposes.
+
+### upgrade-charm
+
+`upgrade-charm` runs immediately after any
+[upgrade](./developer-upgrade-charm.html) operation that does _not_ itself
+interrupt an existing [error state](./authors-hook-errors.html). It should be
+used to reconcile local state written by some other version of the charm into
+whatever form it needs to take to be manipulated by the current version.
+
+While the forced upgrade functionality is intended as a developer tool, and is
+not generally suitable for end users, it's somewhat optimistic to depend on the
+functionality never being abused. In light of this, if you need to run an
+`upgrade-charm` hook before your other hooks will work correctly, it may be wise
+to preface all your other hooks with a quick call to your (idempotent)
+`upgrade-charm`.
+
+### update-status
+
+`update-status` provides constant feedback to the user about the status of the
+service the charm is modeling. The charm is run by Juju at regular intervals,
+and gives authors an opportunity to run code that gets the “health” of the
+service or services.
 
 ## Relation hooks
 
@@ -124,7 +136,7 @@ least three hooks for every remote unit it becomes aware of in that relation.
 
 ### [name]-relation-joined
 
-`[name]-relation-joined` is run once only, when that remote unit is first
+`[name]-relation-joined` is run only when that remote unit is first
 observed by the unit. It should be used to `relation-set` any local unit
 settings that can be determined using no more than the name of the joining unit
 and the remote `private-address` setting, which is always available when the
@@ -182,6 +194,29 @@ And, again, it's important to internalise the fact that there may be multiple
 runtime relations in play with the same name, and that they're independent: one
 `-broken` hook does not mean that _every_ such relation is broken.
 
+## Storage Charm Hooks
+
+Juju can provide a variety of storage to charms. The charms can define several
+different types of storage that are allocated from Juju. To read more
+information, see the [storage document](./developer-storage.html)
+
+### [name]-storage-attached
+
+`[name]-storage-attached` allows the charm to run code when storage has been
+added. The storage-attached hooks will be run before the install hook, so that
+the installation routine may use the storage. The name prefix of this hook will
+depend on the storage key [defined in the
+metadata.yaml](./developer-storage.html#adding-storage) file.
+
+### [name]-storage-detaching
+
+`[name]-storage-detaching` allows the charm to run code before storage is
+removed. The storage-detaching hooks will be run before storage is detached,
+and always before the stop hook is run, to allow the charm to gracefully release
+resources before they are removed and before the unit terminates. The name
+prefix of the hook will depend on the storage key [defined in the
+`metadata.yaml`](./developer-storage.html#adding-storage) file.
+
 ## Writing hooks
 
 If you follow the [tutorial](./authors-charm-writing.html), you'll get a good
@@ -215,7 +250,7 @@ error state is unlikely to have the specific expertise necessary to resolve it.
 If you have to return an error, please be sure to at least write any context
 you can to the log before you do so.
   - They write only _very_ sparingly to the
-[charm directory](./authors-charm-components.html).  
+[charm directory](./authors-charm-components.html).
 
 We recommend you also familiarise yourself with the [best practices](./authors-
 charm-best-practice.html) and, if you plan to distribute your charm, the [charm
