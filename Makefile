@@ -25,10 +25,14 @@ spell:
 spell-commands:
 	spell -b src/en/commands.md | sort | uniq
 
-check-links:
+check-links-build:
+	linkchecker htmldocs/en
+
+check-links-production:
 	linkchecker \
 	  --ignore-url=^https://jujucharms.com/docs/1.25 \
 	  --ignore-url=^https://jujucharms.com/docs/2.0 \
 	  --ignore-url=https://jujucharms.com/docs/stable \
 	  https://jujucharms.com/docs/devel/getting-started
-.PHONY: build clean multi serve spell spell-commands sysdeps
+
+.PHONY: build check-links-build check-links-production clean multi serve spell spell-commands sysdeps
