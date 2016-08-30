@@ -43,7 +43,7 @@ The basic layer provides the minimum needed to use the
 [charms.reactive](https://pythonhosted.org/charms.reactive/) framework. The
 [layer-basic](http://github.com/juju-solutions/layer-basic) provides:  
 * Wheelhouse support for management of python dependencies.
-* Hook decorators so the code can react to Juju events.
+* Hook decorators so the code can react to Juju Hooks.
 * Logic decorators for bash and python code (@when, @when_not, @when_any, etc).
 * A python library named [charmhelpers](https://pythonhosted.org/charmhelpers/)
   to make writing charm code easier
@@ -101,15 +101,15 @@ them in Bash.
 
 ## States
 
-States are synthetic events that are defined by the layers author. States allow
-for the layer, or related layers to subscribe to these states and take action
-only when appropriate. Consider the example illustrated in the [Getting
-Started]() guide. `apache.available` is set from the apache-php layer. Any
-layers built on top of the apache-php layer can subscribe to this state with a
-`@when` decorator to take action only after the Apache application has been started.
-subsequently the `@when_not` decorator has also been made to assist guarding
-against running code when a state has been set, which lends itself nicely to
-idempotent behavior.
+States are arbitrarily named flags that are defined by the layers author and
+evaluated during juju hooks. States allow for the layer, or related layers to
+subscribe to these states and take action only when appropriate. Consider the
+example illustrated in the [Getting Started]() guide. `apache.available` is set
+from the apache-php layer. Any layers built on top of the apache-php layer can
+subscribe to this state with a `@when` decorator to take action only after the
+Apache application has been started. Subsequently, the `@when_not` decorator
+has also been made to assist guarding against running code when a state has
+been set, which lends itself nicely to idempotent behavior.
 
 When charming a runtime layer, it's important to think through the states you
 will be setting, and to expose a good level of states so that complimentary
