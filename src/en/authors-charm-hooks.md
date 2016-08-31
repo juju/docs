@@ -27,6 +27,12 @@ just doesn't get run. When a hook event occurs, Juju will look for the
 corresponding hook file to execute, but if it finds none, will continue
 running without generating an error.
 
+All the hooks must be written to be
+[idempotent](https://en.wikipedia.org/wiki/Idempotence), meaning that there
+should be no difference from running the hook once from running it multiple
+times. This property is important because hooks can be run multiple times by
+the Juju system in ways that might be difficult to predict.
+
 ## Core lifecycle hooks
 
 These run during the normal charm lifecycle.
@@ -50,9 +56,7 @@ configuration changes into account.
 
 `install` is run at the beginning of a charm lifecycle. The hook should be used
 to perform one-time setup operations, such as installing prerequisite software
-that will not change with configuration changes. Like all hooks this must be
-idempotent because there are scenarios where this hook can be run more than
-once.
+that will not change with configuration changes.
 
 ### leader-elected
 
