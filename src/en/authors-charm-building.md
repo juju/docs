@@ -231,8 +231,8 @@ charm build
 ```
 
 Build will take all of the layers, looking first in your local LAYER_PATH and
-then querying interfaces.juju.solutions, and create a new charm into
-`$JUJU_REPOSITORY/trusty/vanilla`:
+then querying [interfaces.juju.solutions][], and
+create a new charm into `$JUJU_REPOSITORY/trusty/vanilla`:
 
 ```
 build: Composing into /home/user/charms
