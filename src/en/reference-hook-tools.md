@@ -248,6 +248,17 @@ leader-set cluster-leader-address=10.0.0.123
 ```
 
 
+## network-get
+`network-get` returns the network config for a given binding name. The only
+supported flag currently is --primary-address, which is required and returns
+the IP address the local unit should advertise to its peers as its endpoint.
+
+bash:
+```bash
+network-get options <binding-name> --primary-address
+```
+
+
 ## opened-ports
 
 `opened-ports` lists all ports or ranges opened by the **unit**. The
