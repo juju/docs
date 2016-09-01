@@ -20,6 +20,7 @@
                 <li><a href="clouds-LXD.html">LXD</a></li>
                 <li><a href="clouds-maas.html">MAAS</a></li>
                 <li><a href="clouds-manual.html">Manual</a></li>
+                <li><a href="help-openstack.html">OpenStack</a></li>
                 <li><a href="help-rackspace.html">Rackspace</a></li>
             </ul>
         </li>

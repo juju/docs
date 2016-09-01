@@ -109,7 +109,7 @@ and whether it's designed for deployment as a
   - if the charm is subordinate, it must contain at least one `requires`
     relation with container scope.
 
-`resources` allows you to add a blob that your charm can utilize.
+`resources` allows you to add blobs that your charm can utilize.
 
 ```yaml
 resources:

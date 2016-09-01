@@ -1,23 +1,25 @@
-# Juju 2.0-beta15
+# Juju 2.0-beta16
 
-A new development release of Juju, juju 2.0-beta15, is now available.
-This release replaces version 2.0-beta14.
+A new development release of Juju, juju 2.0-beta16, is now available.
+This release replaces version 2.0-beta15.
 
-
-## What's New in beta15
-
-This releases addresses stability and performance issues including 29 bugs
-from b14 last week. Some notable ones include:
-
-* lxd containers not using configured proxy for downloading images
-  LP 1594720 https://bugs.launchpad.net/juju-core/+bug/1594720
-* juju2 beta11 unable to parse PORT during a maas bootstrap
-  LP 1599972 https://bugs.launchpad.net/juju-core/+bug/1599972
-* LXD no longer activates all interfaces on initial deploy when using MAAS2rc3 and JUJU Beta13
-  LP 1608105 https://bugs.launchpad.net/juju-core/+bug/1608105
-* It is not possible to refer to multiple models with the same name from the CLI
-  LP 1597720 https://bugs.launchpad.net/juju-core/+bug/1597720
-
+## What's New in Beta16
+* debug-log usability changes
+ - only tails by default when running in a terminal
+    --no-tail can be used to not tail from a terminal
+    --tail can be used for force tailing when not on a terminal
+  - time output now defaults to local time (--utc flag added to show times in utc)
+  - filename and line number no longer shown by default (--location flag added to include location in the output)
+ - dates no longer shown by default (--date flag added to include dates in output)
+ --ms flag added to show timestamps to millisecond precision
+ - severity levels and location now shown in color in the terminal
+ --color option to force ansi color codes to pass to 'less -R'
+* controllers models, and users commands now show current controller and model respectively using color as well as the asterix
+* removal of smart formatter for CLI commands. Where 'smart' used to be the default, now it is 'yaml'.
+* controllers, models, and users commands now print the access level users have against each model/controller
+* juju whoami command prints the current controller/model/logged in user details
+* fix for LXD image aliases so that the images auto update (when bootstrapping a new LXD cloud, images will be downloaded again the first time, even if existing ones exist)
+* new controller and model permissions
 
 ## Notable Changes
 
@@ -51,7 +53,7 @@ from b14 last week. Some notable ones include:
 * Config can be included in clouds.yaml
 * Juju log forwarding
 * Audit logging
-* Model permissions
+* Controller and Model permissions
 * New hook command: application-version-set
 * Shared Model Config
 * Known Issues
@@ -983,7 +985,7 @@ In its initial implementation, audit logging is on by default.  The audit log wi
 
 Since users may interact with Juju from multiple sources (CLI, GUI, deployer, etc.), audit log entries record the API calls made, rather than only reporting CLI commands run. Only those API calls originating from authenticated users calling the external API are logged.
 
-### Model permissions
+### Controller and Model permissions
 
 Three level of permissions are now available for users on models.
 A user can be given one of three level of permissions on each one of the models in a controller.
@@ -991,6 +993,13 @@ The permissions for a model are:
   * Read: The user can login to the model and obtain status and information about it.
   * Write: The user can deploy/delete services and add relations into a model.
   * Admin: The user has full control over the model except for controller level actions such as deletion. Model owners can delete their own models.
+
+Three different levels have also been added for users on controllers.
+
+A user can be given one of the three following permissions in a controller, these permissions will affect aspects of the controller.
+  * Login: Allows the user to login into the controller.
+  * AddModel: Allows the user to create new models and the permissions of login.
+  * SuperUser: Allows the user full control over the model, this is the permission the controller creator has.
 
 ### application-version-set
 
@@ -1027,7 +1036,7 @@ The management of hosted model configuration has been improved in several ways:
     available using juju get-controller-config
 
 There are 3 sources of model attribute values:
-  1. default - hard coded into Juju
+  1. default - hard coded into Juju or the cloud provider
   2. controller - shared by all models created on controllers within an HA environment
   3. model - set by the user
 

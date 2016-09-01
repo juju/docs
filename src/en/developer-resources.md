@@ -12,6 +12,13 @@ resources are  deployed.
 Starting with Juju 2.0, users can upload resources to the controller
 or the Juju Charm Store from where they are accessible to charms.
 
+Use discrete files for resources. E.g. if your charm requires a software
+package and a dependency, then use two resources, one for the software package
+and one for the dependency. Do not group resources. Keep them discrete. Juju
+optimizes distribution of resources. If resources are grouped into one file
+(resource) then they are larger and must be updated everywhere when they are
+updated.
+
 # How it works
 
 ## Developing a charm with resources
