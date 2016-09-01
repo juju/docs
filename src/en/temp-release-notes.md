@@ -1,25 +1,13 @@
-# Juju 2.0-beta16
+# Juju 2.0-beta17
 
-A new development release of Juju, juju 2.0-beta16, is now available.
-This release replaces version 2.0-beta15.
+A new development release of Juju, juju 2.0-beta17, is now available.
+This release replaces version 2.0-beta16.
 
-## What's New in Beta16
-* debug-log usability changes
- - only tails by default when running in a terminal
-    --no-tail can be used to not tail from a terminal
-    --tail can be used for force tailing when not on a terminal
-  - time output now defaults to local time (--utc flag added to show times in utc)
-  - filename and line number no longer shown by default (--location flag added to include location in the output)
- - dates no longer shown by default (--date flag added to include dates in output)
- --ms flag added to show timestamps to millisecond precision
- - severity levels and location now shown in color in the terminal
- --color option to force ansi color codes to pass to 'less -R'
-* controllers models, and users commands now show current controller and model respectively using color as well as the asterix
-* removal of smart formatter for CLI commands. Where 'smart' used to be the default, now it is 'yaml'.
-* controllers, models, and users commands now print the access level users have against each model/controller
-* juju whoami command prints the current controller/model/logged in user details
-* fix for LXD image aliases so that the images auto update (when bootstrapping a new LXD cloud, images will be downloaded again the first time, even if existing ones exist)
-* new controller and model permissions
+## What's New in Beta17
+* add-model now takes region name as an optional positional argument,
+  to be consistent with bootstrap. The --region flag has been removed.
+* show-controller now includes the agent version
+* show-controllers has been removed as an alias to show-controller
 
 ## Notable Changes
 
