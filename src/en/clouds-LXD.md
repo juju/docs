@@ -1,12 +1,10 @@
-Title: Juju LXD local provider  
-TODO: 
-
+Title: Juju LXD local provider
 
 # Configuring for LXD
 
 Here we provide an overview for the creation of a controller for LXD
-(see [Controllers](./controllers.html)). If your objective is instead
-to create a LXD model please see [Adding a model](./models-adding.html).
+(see [Controllers][bootstrap]). If your objective is instead
+to create a LXD model please see [Adding a model][models-add].
 
 Unlike other providers, with LXD, Juju does not need to be supplied with any
 information regarding configuration or credentials. This makes it extremely
@@ -80,7 +78,7 @@ See more examples of [Creating a controller](./controllers-creating.html).
 Typically, workload applications are deployed on additional models (i.e. other
 than the initial 'controller' model). A model named 'default' is added to the 
 controller when it is created for this reason. You can also add additional
-models - see [Adding a model](./models-adding.html).
+models - see [Adding a model][models-add].
 
 
 ## LXD and images
@@ -116,7 +114,7 @@ Image cache expiration and image synchronization mechanisms are built-in.
 LXD itself logs to `/var/log/lxd/lxd.log` and Juju machines created via the
 LXD local provider log to `/var/log/lxd/juju-{uuid}-machine-{#}`. However,
 the standard way to view logs is with the `juju debug-log` command. See
-[Viewing logs](./troubleshooting-logs.html) for more details.
+[Viewing logs][logs] for more details.
 
 <!---
 Including this table is confusing and not really appropriate for Juju docs.
@@ -154,8 +152,13 @@ above, are given below.
 Although not Juju-related, see `lxc --help` for more on LXD client usage and
 `lxd --help` for assistance with the daemon. See upstream documentation for
 how to
-[configure the lxd daemon and containers](https://github.com/lxc/lxd/blob/master/doc/configuration.md)
+[configure the lxd daemon and containers][lxd-upstream]
 .
 
-See [General configuration options](https://jujucharms.com/docs/stable/config-general)
-for additional and advanced customization of your environment.
+For additional configuration of LXD controllers, please see the [Controllers 
+documentation].
+
+[bootstrap]: ./controllers-creating
+[lxd-upstream]: https://github.com/lxc/lxd/blob/master/doc/configuration.md
+[logs]: ./troubleshooting-logs.html
+[models-add]: ./models-adding.html

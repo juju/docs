@@ -280,7 +280,7 @@ pg-ssd/0      data/3 /srv/data attached false
   storage after upgrade.
 
 - For LXC (local provider or not), you must currently set
-  ["allow-lxc-loop-mounts"](./config-general.html#alphabetical-list-of-general-configuration-values)
+  ["allow-lxc-loop-mounts"][model-config]
   to "true" for LXC to work. With the default AppArmor profile,
   LXC does not permit containers to mount loop devices. By setting
   `allow-lxc-loop-mounts=true`, you are explicitly enabling this, and access
@@ -291,3 +291,5 @@ pg-ssd/0      data/3 /srv/data attached false
 If you are interested in more information on how to create a charm that uses
 the storage feature read
 [writing charms that use storage](./developer-storage.html).
+
+[model-config]: ./models-config#list-of-model-keys
