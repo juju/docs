@@ -97,11 +97,11 @@ or
 {: .instruction }
 
 Centos
-: [juju-2.0-beta17-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-2.0-beta17-centos7.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-2.0-beta17-centos7.tar.gz/+md5))
+: [juju-core_2.0-beta17-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-core_2.0-beta17.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-core_2.0-beta17.tar.gz/+md5))
 {: .instruction }
 
 OS X
-: [juju-2.0-beta17-osx.tar.gz](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-2.0-beta17-osx.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-2.0-beta17-osx.tar.gz/+md5))
+: [juju-core_2.0-beta17-osx.tar.gz](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-2.0-beta17-osx.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-2.0-beta17-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
