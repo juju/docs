@@ -215,6 +215,10 @@ A successful bootstrap will result in the controller being visible in the
 ![bootstrap machine 0 in Azure portal](media/azure_portal-machine_0.png)
 
 
+!!! Note: By default new Azure accounts are limited to 10 cores. You may
+need to file a support ticket with Azure to raise this limit for your 
+account if you are deploying many or large applications.
+
 ## Compatibility with older versions of Juju
 
 Juju 2.x support for Azure is backwards compatible with older versions of Juju
