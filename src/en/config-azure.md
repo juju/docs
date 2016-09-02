@@ -171,7 +171,7 @@ under 'Virtual Machines' in the left pane:
 
 ![bootstrap machine 0 in Azure portal](media/config-azure-stable_machine_0.png)
 
-+!!! Note: By default new Azure accounts are limited to 10 cores. You may
+!!! Note: By default new Azure accounts are limited to 10 cores. You may
  +need to file a support ticket with Azure to raise this limit for your 
  +account if you are deploying many or large applications.
  
