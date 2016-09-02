@@ -58,6 +58,21 @@ If you have a version less than 1:2.2.4-0ubuntu1 make sure you have either the
 ppa:juju/stable added to your system. `sudo apt-get update` then install juju-
 local package. Before retrying, make sure you run `juju destroy-environment`
 
+## Can't list images
+
+If you are using the `lxc` commands to view local LXC containers, you must run 
+the commands as root, and use the lxc1 versions of commands. For example:
+
+```bash
+sudo lxc-ls
+```
+
+For later versions of LXC/LXD (as ship with 16.04), you should use the LXD
+style commands:
+
+```bash
+lxc list
+```
 
 ## No machines start
 
