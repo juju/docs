@@ -76,8 +76,8 @@ agent-stream: proposed
 
 ## Development
 
-2.0-beta16 is currently in development for testing.
-The previous development release was 2.0-beta15.
+2.0-beta17 is currently in development for testing.
+The previous development release was 2.0-beta16.
 
 Development releases provide new features that are being stablised.
 These releases are *not* suitable for production environments. Upgrading
@@ -97,13 +97,13 @@ or
 {: .instruction }
 
 Centos
-: [juju-2.0-beta16-centos7.tar.gz](https://launchpad.net/juju-core/2.0/2.0-beta16/+download/juju-2.0-beta16-centos7.tar.gz) ([md5](https://launchpad.net/juju-core/2.0/2.0-beta16/+download/juju-2.0-beta16-centos7.tar.gz/+md5))
+: [juju-core_2.0-beta17-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-core_2.0-beta17.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-core_2.0-beta17.tar.gz/+md5))
 {: .instruction }
 
 OS X
-: [juju-2.0-beta16-osx.tar.gz](https://launchpad.net/juju-core/2.0/2.0-beta16/+download/juju-2.0-beta16-osx.tar.gz) ([md5](https://launchpad.net/juju-core/2.0/2.0-beta16/+download/juju-2.0-beta16-osx.tar.gz/+md5))
+: [juju-core_2.0-beta17-osx.tar.gz](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-2.0-beta17-osx.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-2.0-beta17-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-2.0-beta16.exe](https://launchpad.net/juju-core/2.0/2.0-beta16/+download/juju-setup-2.0-beta16.exe) ([md5](https://launchpad.net/juju-core/2.0/2.0-beta16/+download/juju-setup-2.0-beta16.exe/+md5))
+: [juju-setup-2.0-beta17.exe](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-setup-2.0-beta17.exe) ([md5](https://launchpad.net/juju/2.0/2.0-beta17/+download/juju-setup-2.0-beta17.exe/+md5))
 {: .instruction }

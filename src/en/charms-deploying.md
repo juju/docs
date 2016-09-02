@@ -1,15 +1,7 @@
 Title: Deploying applications 
-TODO: First section spent defining charms. This should all be placed in charms.md and
-	linked to from here. As of this writing, that page does not cover local charms.
-      This page is too long and should be broken up (or apply the fabled TOC).
-      PRIORITY: Review 'channel support'. See https://goo.gl/IKzRsD .
-      Add 'centos' and 'windows' stuff to series talk
-      See whether it is still possible to download all charms (marco ignored me
-        on irc)
+TODO: Add 'centos' and 'windows' stuff to series talk
       Downloading charms is shabby. See https://git.io/vwNLI . I therefore
         ommitted the "feature" of specifying a download dir
-      Review specifying 'default-series' key at model level in conjunction with
-        deploying local and non-local charms. I detected flakiness.
       Review whether Juju should go to the store when pointing to a local dir
         with non-existant charm. It did not for me but the old version of this
         doc said it should.
@@ -101,10 +93,10 @@ currently deployed charm. The following rules apply:
 - If a channel revision is older, downgrade the deployed charm to that revision
 - If a channel revision is newer, upgrade the deployed charm to that revision
 
-Below we specify a channel with the `charm-upgrade` command:
+Channels can be specified with the `charm-upgrade` command. For example:
 
 ```bash
-juju charm-upgrade mysql --channel channel_name
+juju charm-upgrade mysql --channel edge
 ```
 
 
@@ -121,7 +113,7 @@ juju deploy ~/charms/vsftpd --series trusty
 Local charms may not have a specific declared series (charms fetched from the 
 store always have an implied series). You do not have to specify the series 
 if the charm contains a series declaration, or if you have specified a 
-default series in the model configuraion. For example:
+default series in the model configuration. For example:
 
 ```bash
 juju set-model-config -m mymodel default-series=trusty

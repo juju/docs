@@ -83,20 +83,6 @@ This restriction level gets applied in this way:
 juju block all-changes
 ```
 
-## Adding restrictions via environments.yaml
-
-You have the option of setting restriction levels via environments.yaml instead
-of using the 'block' command.
-
-The three (Boolean) parameters corresponding to the three levels are:
-
-- block-destroy-environment
-- block-remove-object
-- block-all-changes
-
-See the full
-[list of configuration parameters](config-general.html#alphabetical-list-of-general-configuration-values).
-
 
 ## Removing restrictions
 
