@@ -41,6 +41,7 @@ The juju quickstart tool can be installed on Ubuntu versions newer than 14.04 by
 running the following command:
 
 ```bash
+sudo add-apt-repository ppa:juju/stable
 sudo apt-get install juju-quickstart
 ```
 
