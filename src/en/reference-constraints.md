@@ -1,16 +1,16 @@
-Title: Juju constraints  
+Title: Juju constraints
 
 # Constraints
 
-Constraints constrain the possible instances that may be started by juju
+Constraints set limits on the possible instances that may be started by juju
 commands. They are usually passed as a flag to commands that provision a
 new machine (such as bootstrap, deploy, and add-machine). See [using
 constraints](charms-constraints.html) for how to specify these in a
 deployment.
 
 Each constraint defines a minimum acceptable value for a characteristic of a
-machine.  Juju will provision the least expensive machine that fulfils all the
-constraints specified.  Note that these values are the minimum, and the actual
+machine. Juju will provision the least expensive machine that fulfils all the
+constraints specified. Note that these values are the minimum, and the actual
 machine used may exceed these specifications if one that exactly matches does
 not exist.
 
@@ -19,14 +19,14 @@ environment, no machine will be provisioned, and an error will be printed in the
 machine's entry in juju status.
 
 Constraint defaults can be set on an environment or on specific services by
-using the set-constraints command (see juju help set-constraints).  Constraints
+using the set-constraints command (see juju help set-constraints). Constraints
 set on the environment or on a service can be viewed by using the get-
-constraints command.  In addition, you can specify constraints when executing a
+constraints command. In addition, you can specify constraints when executing a
 command by using the --constraints flag (for commands that support it).
 
 Constraints specified on the environment and service will be combined to
 determine the full list of constraints on the machine(s) to be provisioned by
-the command.  Service-specific constraints will override environment-specific
+the command. Application-specific constraints will override environment-specific
 constraints, which override the juju default constraints.
 
 Constraints are specified as key value pairs separated by an equals sign, with
@@ -48,7 +48,7 @@ multiple constraints delimited by a space.
     left blank to indicate no preference, or one of `none` for
     uncontainerised or `lxc``.
 
-- cpu-cores
+- cores
 
     Minimum number of effective CPU cores that must be available to a
     service unit.
@@ -69,7 +69,7 @@ multiple constraints delimited by a space.
     deployment in some cases. 
     
     **Note:**  When compatibility between clouds is desired, use
-    corresponding values for `cpu-cores`, `mem`, and `root-disk`
+    corresponding values for `cores`, `mem`, and `root-disk`
     instead.
 
 - mem
@@ -83,7 +83,7 @@ multiple constraints delimited by a space.
     Comma-delimited list of networks that must be available to the
     machine. Networks that must not be available to the machine are
     prefixed with a "^". For example. "db,^dmz".
-    Currently only supported by MaaS.
+    Currently only supported by MAAS.
 
 - root-disk
 
@@ -95,11 +95,11 @@ multiple constraints delimited by a space.
 - tags
 
     Comma-delimited tags assigned to the machine. Currently only
-    supported by MaaS.
+    supported by MAAS.
 
 - spaces
 
-    Spaces constraint allows specifying a list of Juju network space names a unit
+    Permits specifying a list of Juju network space names that a unit
     or machine needs access to. Both positive and negative (prefixed with "^")
     spaces can be in the list, separated by commas.
 
@@ -109,33 +109,56 @@ multiple constraints delimited by a space.
     EC2 is the only provider supporting spaces constraints. Support for other
     providers is planned for future releases.
 
-## Legacy constraints
+- virt-type
 
-In pre-1.0 juju some additional or differently named constraints were
-also supported, these need to be migrated when upgrading.
+    Specifies the type of virtualization to be used, such as `kvm`.
 
-- cpu
 
-    Number of CPU cores for most providers, but equivalent to an Amazon
-    ECU on AWS. Use `cpu-cores` instead.
+## Provider differences
 
-- ec2-zone
+Different providers support different constraints and sometimes different
+values for these constraints. Sometimes, different providers also dictate
+constraints that would conflict with other providers and cannot be used
+in combination. Use this list to help you understand the differing needs.
 
-    EC2 availability zone that a service unit must be deployed into. No
-    equivalent implemented as of juju 1.12, follow [bug
-    1183831](https://bugs.launchpad.net/juju-core/+bug/1183831).
+###Azure Provider:
+- Unsupported: [cpu-power, tags, virt-type]
+- Valid values: arch=[amd64]; instance-type=[defined on the cloud]
+- Conflicting constraints: [instance-type] vs [mem, cpu-cores, arch]
 
-- maas-name
+###Cloudsigma (currently behind development flag):
+- Unsupported: [container, instance-type, tags, virt-type]
 
-    Specific MAAS machine name that a service unit must be deployed on.
-    Use `maas-tags` instead by preference.
+###EC2 Provider:
+- Unsupported: [tags, virt-type]
+- Valid values: instance-type=[defined on the cloud]
+- Conflicting constraints: [instance-type] vs [mem, cpu-cores, cpu-power]
 
-- maas-tags
+###GCE Provider:
+- Unsupported: [tags, virt-type]
+- Valid values: instance-type=[defined on the cloud]; container=kvm
+- Conflicting constraints: [instance-type] vs [arch, cpu-cores, cpu-power, mem, container]
 
-    List of tags a MAAS machine must have for a service unit to be
-    deployed on. See "tags" above.
+###Joyent Provider:
+- Unsupported: [cpu-power, tags, virt-type]
+- Valid values: instance-type=[defined on the cloud]
 
-- os-scheduler-hints
+###LXD Provider:
+- Unsupported: [cpu-cores, cpu-power, instance-type, tags, virt-type]
+- Valid values: arch=[host arch]
 
-    Experimental constraint exposing Openstack-specific scheduler hints
-    features. Do not use.
+###MAAS Provider:
+- Unsupported: [cpu-power, instance-type, virt-type]
+- Valid values: arch=[defined on the cloud]
+
+###Manual Provider:
+- Unsupported: [cpu-power, instance-type, tags, virt-type]
+- Valid values: arhc=[for controller - host arch; for other machine - arch from machine hardware]
+
+###Openstack Provider:
+- Unsupported: [tags, cpu-power]
+- Valid values: instance-type=[defined on the cloud]; virt-type=[kvm,lxd]
+- Conflicting constraints: [instance-type] vs [mem, root-disk, cpu-cores]
+
+###VSphere Provider:
+- Unsupported: [tags, virt-type]
