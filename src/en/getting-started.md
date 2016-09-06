@@ -151,6 +151,10 @@ juju bootstrap lxd-test localhost
 This may take a few minutes as LXD must download an image for Xenial. A cache
 will be used for subsequent containers.
 
+!!! Note: Currently there is an issue with image names and aliases. If you get 
+a message about a missing image, please see 
+https://bugs.launchpad.net/juju/+bug/1619971
+
 Once the process has completed you can check that the controller has been
 created:
 
