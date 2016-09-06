@@ -100,6 +100,73 @@ juju charm-upgrade mysql --channel edge
 ```
 
 
+## Deploying a multi-series charm
+
+Charms can be created that support more than one release of a given operating
+system distro, such as the multiple Ubuntu releases shown below. It is not
+possible to create a charm to support multiple distros, such as one charm for
+both Ubuntu and CentOS. Supported series are added to the charm metadata like
+this:
+
+```
+name: mycharm
+summary: "Great software"
+description: It works
+maintainer: Some One <some.one@example.com>
+categories:
+   - databases
+series:
+   - trusty
+   - xenial
+provides:
+   db:
+     interface: pgsql
+requires:
+   syslog:
+     interface: syslog
+```
+
+The default series for the charm is the first one listed. So, in this example,
+to deploy `mycharm` on `trusty`, all you need is:
+
+```bash
+juju deploy mycharm
+```
+
+You can specify a different series using the `--series` flag:
+
+```bash
+juju deploy mycharm --series xenial
+```
+
+You can force the charm to deploy using an unsupported series using the
+`--force` flag:
+
+```bash
+juju deploy mycharm --series yakkety --force
+```
+
+Here is a more complete example showing a new machine being added that uses
+a different series than is supported by our `mycharm` example and then forcing
+the charm to install:
+
+```bash
+juju add-machine --series yakkety
+Machine 1 added.
+juju deploy mycharm --to 1 --force
+```
+
+It may be required to use `--force` when upgrading charms. For example, in a
+case where an application is initially deployed using a charm that supports
+`precise` and `trusty`. If a new version of the charm is published that only
+supports `trusty` and `xenial` then it will be allowed to upgrade applications
+deployed on `precise`, but only using `--force-series`, like this:
+
+```bash
+juju upgrade-charm mycharm --force-series
+```
+
+
 ## Deploying from a local charm
 
 To deploy applications using local charms, you may specify the path to the charm
