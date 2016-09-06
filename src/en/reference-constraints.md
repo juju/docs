@@ -1,8 +1,10 @@
 Title: Juju constraints
 
+TODO: Consider removing Legacy section
+
 # Constraints
 
-Constraints set limits on the possible instances that may be started by juju
+Constraints set limits on the possible instances that may be started by Juju
 commands. They are usually passed as a flag to commands that provision a
 new machine (such as bootstrap, deploy, and add-machine). See [using
 constraints](charms-constraints.html) for how to specify these in a
@@ -19,10 +21,10 @@ environment, no machine will be provisioned, and an error will be printed in the
 machine's entry in juju status.
 
 Constraint defaults can be set on an environment or on specific services by
-using the set-constraints command (see juju help set-constraints). Constraints
+using the set-constraints command (see `juju help set-constraints`). Constraints
 set on the environment or on a service can be viewed by using the get-
 constraints command. In addition, you can specify constraints when executing a
-command by using the --constraints flag (for commands that support it).
+command by using the `--constraints` flag (for commands that support it).
 
 Constraints specified on the environment and service will be combined to
 determine the full list of constraints on the machine(s) to be provisioned by
@@ -114,11 +116,11 @@ multiple constraints delimited by a space.
     Specifies the type of virtualization to be used, such as `kvm`.
 
 
-## Provider differences
+## Cloud differences
 
-Different providers support different constraints and sometimes different
-values for these constraints. Sometimes, different providers also dictate
-constraints that would conflict with other providers and cannot be used
+Different clouds support different constraints and sometimes different
+values for these constraints. Sometimes, different clouds also dictate
+constraints that would conflict with other clouds and cannot be used
 in combination. Use this list to help you understand the differing needs.
 
 ###Azure Provider:
@@ -162,3 +164,36 @@ in combination. Use this list to help you understand the differing needs.
 
 ###VSphere Provider:
 - Unsupported: [tags, virt-type]
+
+
+
+## Legacy constraints
+
+In pre-1.0 juju some additional or differently named constraints were
+also supported, these need to be migrated when upgrading.
+
+- cpu
+
+    Number of CPU cores for most providers, but equivalent to an Amazon
+    ECU on AWS. Use `cores` instead of `cpu` or `cpu-cores`.
+
+- ec2-zone
+
+    EC2 availability zone that a service unit must be deployed into. No
+    equivalent implemented as of juju 1.12, follow [bug
+    1183831](https://bugs.launchpad.net/juju-core/+bug/1183831).
+
+- maas-name
+
+    Specific MAAS machine name that a service unit must be deployed on.
+    Use `maas-tags` instead by preference.
+
+- maas-tags
+
+    List of tags a MAAS machine must have for a service unit to be
+    deployed on. See "tags" above.
+
+- os-scheduler-hints
+
+    Experimental constraint exposing Openstack-specific scheduler hints
+    features. Do not use.
