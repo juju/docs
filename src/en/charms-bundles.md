@@ -151,7 +151,7 @@ machines:
 
 ```
 
-## Service constraints in a bundle
+## Setting constraints in a bundle
 
 To make your bundle as reusable as possible, it's common to set minimum
 constraints against a charmed application, much like you would when deploying 
