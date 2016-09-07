@@ -1,6 +1,6 @@
 Title: Juju constraints
 
-TODO: Consider removing Legacy section
+TODO: Consider removing or editing Legacy section
 
 # Constraints
 
@@ -79,13 +79,6 @@ multiple constraints delimited by a space.
     Minimum number of megabytes of RAM that must be available to a
     service unit. An optional suffix of M/G/T/P indicates the value is
     mega-/giga-/tera-/peta- bytes.
-
-- networks
-
-    Comma-delimited list of networks that must be available to the
-    machine. Networks that must not be available to the machine are
-    prefixed with a "^". For example. "db,^dmz".
-    Currently only supported by MAAS.
 
 - root-disk
 
@@ -169,7 +162,7 @@ in combination. Use this list to help you understand the differing needs.
 
 ## Legacy constraints
 
-In pre-1.0 juju some additional or differently named constraints were
+In earlier Juju releases some additional or differently named constraints were
 also supported, these need to be migrated when upgrading.
 
 - cpu
@@ -192,6 +185,13 @@ also supported, these need to be migrated when upgrading.
 
     List of tags a MAAS machine must have for a service unit to be
     deployed on. See "tags" above.
+
+- networks
+
+    Comma-delimited list of networks that must be available to the
+    machine. Networks that must not be available to the machine are
+    prefixed with a "^". For example. "db,^dmz".
+    This was only supported by MAAS.
 
 - os-scheduler-hints
 
