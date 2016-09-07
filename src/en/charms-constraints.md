@@ -20,8 +20,8 @@ applications ([see the documentation on `juju deploy`](./charms-deploying.html))
 
 There is a full list of the constraints used 
 [in the reference section](reference-constraints.html). Be aware that some of 
-these are specific to the type of cloud you are using. For example, AWS may
-understand an "instancetype" constraint, but MAAS will not. 
+these are specific to the type of cloud you are using. For example, one may
+understand an "instance-type" constraint, but another may not. 
 
 The most useful constraints for Juju in general are:
   
@@ -29,7 +29,7 @@ The most useful constraints for Juju in general are:
   be available to an application unit. An optional suffix of M/G/T/P indicates
   the value is mega-/giga-/tera-/peta- bytes.
 
-  - **cpu-cores** :  How many cpu-cores the host machine should have. This is a
+  - **cores** :  How many cpu cores the host machine should have. This is a
   crude indicator of system performance.
     
   - **spaces** : Target a particular network space, or avoid one (not supported
@@ -56,13 +56,13 @@ juju deploy mariadb --constraints mem=4G
 To further ensure that it also has at least 2 CPU cores:
   
 ```bash
-juju deploy mariadb --constraints mem=4G cpu-cores=2
+juju deploy mariadb --constraints mem=4G cores=2
 ```
 
-or
+or, if you prefer to enclose all contraints in quotes:
 
 ```bash
-juju deploy mariadb --constraints "mem=4G cpu-cores=2"
+juju deploy mariadb --constraints "mem=4G cores=2"
 ```
 
 To ignore any constraints which may have been previously set, you can assign a 
@@ -71,7 +71,7 @@ have already been set to 8 cpu-cores for example, you can ignore that constraint
 at deploy time with:
   
 ```bash
-juju deploy mariadb --constraints mem=4G cpu-cores= 
+juju deploy mariadb --constraints mem=4G cores= 
 ```
 
 In the event that a constraint cannot be met, the unit will not be deployed.
@@ -130,14 +130,14 @@ Usually, constraints for an application are set at deploy time, by passing the
 required parameters using the deploy command:
   
 ```bash
-juju deploy mariadb cpu-cores=4
+juju deploy mariadb cores=4
 ```
 
 Subsequently, you can set constraints for the any additional units added to the 
 application by running:
   
 ```bash
-juju set-constraints mariadb cpu-cores=2
+juju set-constraints mariadb cores=2
 ```
 
 The constraints work on a named-application as well. So the following also works
