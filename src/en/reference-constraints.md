@@ -61,7 +61,7 @@ multiple constraints delimited by a space.
     2007-era Xeon" as reflected by 1 Amazon ECU. 
     
     **Note:**  Not all providers support this constraint, use
-    `cpu-cores` for portability.
+    `cores` for portability.
 
 - instance-type
 
