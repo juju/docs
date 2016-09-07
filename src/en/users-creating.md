@@ -89,5 +89,5 @@ to determine the current user (as well as the current controller and model):
 juju whoami
 ```
 
-The command `juju show-user` can also be used to get information on the current
-user.
+The command `juju show-user` can also be used to get the current user, in
+addition to other information on the user.
