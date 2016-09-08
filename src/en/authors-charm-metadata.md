@@ -119,7 +119,7 @@ resources:
     description: example resource
 ```
 
-`payloads` allows you to register payloads such as LXC, KVM, and docker with
+`payloads` allows you to register payloads such as LXD, KVM, and docker with
 Juju. This lets the operator better understand the purpose and function of these
 payloads on a given machine.
 
@@ -132,7 +132,7 @@ payloads:
 ```
 
 `extra-bindings` represents an extra bindable endpoint that is not a relation.
-These are useful whenyou want to have Juju provide distinct addresses for an
+These are useful when you want to have Juju provide distinct addresses for an
 application on one or more spaces. For example, adding this section to a YAML
 file for an application called "foo":
 
@@ -149,7 +149,7 @@ different network interface and address for each binding, using this:
 juju deploy ~/path/to/charm/foo --bind "cluster=admin-api public=public-api internal-api"
 ```
 
-And running `juju network-get cluster --primary-address` will return only the
+And running `network-get cluster --primary-address` will return only the
 address coming from the "admin-api" space.
 
 

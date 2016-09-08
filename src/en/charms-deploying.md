@@ -286,12 +286,11 @@ clean machine.
 You can configure more complex networks using [spaces](./network-spaces.html). This
 also permits the use of `--bind` to specify which network space individual
 charm endpoints should use. When you bind, the endpoint(s) of the charm will
-have IP addresses from subnets that are part of the specified space.
+have IP addresses from subnets that are part of the specified space. Create
+your space first before deploying a charm that attempts to use it.
 
 When `--bind` is not used, all endpoints will use the host machine's preferred
 private address, which you can see using `unit-get private-address`.
-
-Create your space before deploying a charm that attempts to use it.
 
 To deploy mysql while binding the "db" endpoint to an address that is part
 of the "database" space:

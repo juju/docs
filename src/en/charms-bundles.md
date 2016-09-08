@@ -181,7 +181,7 @@ Much like application constraints, it requires adding the placement key `to` in
 the application definition.
 Where supported by the cloud provider, it is also possible to isolate charms
 by including the container format in the placement directive. Some clouds
-support LXC.
+support LXD.
 
 For example:
 
@@ -189,25 +189,25 @@ For example:
 mysql:
   charm: "cs:precise/mysql-27"
   num_units: 1
-  to: lxc:wordpress/0
+  to: lxd:wordpress/0
   annotations:
       "gui-x": "139"
       "gui-y": "168"
 ```
 
-which will install the MySQL application into an LXC container on the same
+which will install the MySQL application into an LXD container on the same
 machine as the wordpress/0 unit. Or:
 
 ```yaml
 mysql:
   charm: "cs:precise/mysql-27"
   num_units: 1
-  to: lxc:1
+  to: lxd:1
   annotations:
       "gui-x": "139"
       "gui-y": "168"
 ```
-which will install the MySQL application into an LXC container on machine '1'.
+which will install the MySQL application into an LXD container on machine '1'.
 
 ## Machine specifications in a bundle
 
@@ -233,12 +233,12 @@ add a section to the bundle's YAML file called `bindings`. For example:
 ```
 ...
 mysql:
-charm: cs:xenial/mysql-53
-num_units: 1
-constraints: mem=4G
-bindings:
-server: database
-cluster: internal
+  charm: cs:xenial/mysql-53
+  num_units: 1
+  constraints: mem=4G
+  bindings:
+    server: database
+    cluster: internal
 ...
 ```
 
