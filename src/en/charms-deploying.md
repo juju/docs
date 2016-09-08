@@ -281,6 +281,45 @@ are supplied, then the remaining units will be assigned as normal to a new,
 clean machine.
 
 
+## Deploying with binding
+
+You can configure more complex networks using [spaces](./network-spaces.html). This
+also permits the use of `--bind` to specify which network space individual
+charm endpoints should use. When you bind, the endpoint(s) of the charm will
+have IP addresses from subnets that are part of the specified space. Create
+your space first before deploying a charm that attempts to use it.
+
+When `--bind` is not used, all endpoints will use the host machine's preferred
+private address, which you can see using `unit-get private-address`.
+
+To deploy mysql while binding the "db" endpoint to an address that is part
+of the "database" space:
+
+```bash
+juju deploy mysql --bind db=database
+```
+
+To deploy wordpress while binding all endpoints of wordpress to the
+"internal-apps" space:
+
+```bash
+juju deploy wordpress --bind internal-apps
+```
+
+To deploy haproxy while binding "url" to "public" and all other endpoints to
+"internal":
+
+```bash
+juju deploy haproxy --bind "url=public internal"
+```
+
+To use binding with bundles, see the related section in
+[Using and creating bundles](./charms-bundles.html).
+
+To learn about `extra-bindings`, which provide a way to declare an extra
+bindable endpoint that is not a relation, see [Charm metadata](./charm-metadata.html).
+
+
 ## Juju retry-provisioning
 
 You can use the `retry-provisioning` command in cases where deploying 

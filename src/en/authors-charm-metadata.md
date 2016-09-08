@@ -1,4 +1,4 @@
-Title: Charm metadata  
+Title: Charm metadata
 
 # Charm metadata
 
@@ -26,7 +26,7 @@ Here's a valid metadata file:
     description: |
       MongoDB is a high-performance, open source, schema-free document- oriented
       data store that's easy to deploy, manage and use. It's network accessible,
-      written in C++ and offers the following features:  
+      written in C++ and offers the following features:
       - Collection oriented storage
       - easy storage of object-style data
       - Full index support, including on inner objects
@@ -119,7 +119,7 @@ resources:
     description: example resource
 ```
 
-`payloads` allows you to register payloads such as LXC, KVM, and docker with
+`payloads` allows you to register payloads such as LXD, KVM, and docker with
 Juju. This lets the operator better understand the purpose and function of these
 payloads on a given machine.
 
@@ -132,12 +132,26 @@ payloads:
 ```
 
 `extra-bindings` represents an extra bindable endpoint that is not a relation.
+These are useful when you want to have Juju provide distinct addresses for an
+application on one or more spaces. For example, adding this section to a YAML
+file for an application called "foo":
 
 ```yaml
 extra-bindings:
-  endpoint1:
-  endpoint2:
+  cluster:
+  public:
 ```
+Will permit you to deploy the charm using `--bind` to deploy on units that have
+access to the "admin-api", "public-api", and "internal-api" spaces with a'
+different network interface and address for each binding, using this:
+
+```bash
+juju deploy ~/path/to/charm/foo --bind "cluster=admin-api public=public-api internal-api"
+```
+
+And running `network-get cluster --primary-address` will return only the
+address coming from the "admin-api" space.
+
 
 Endpoint names are strings and must not match existing relation names from
 the Provides, Requires, or Peers metadata sections. The values beside each
