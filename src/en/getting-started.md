@@ -69,9 +69,10 @@ iii) refrain from listening over the network, and iv) trigger the setup of a
 bridge network (required for Juju).
 
 Pressing Enter will accept the default answer (provided in square
-brackets). Only one answer in the below example uses non-default values.
+brackets). Only one answer in the below example uses a non-default value.
  
-!!! Note: Make sure the pool size you specify is actually available on your system.
+!!! Note: Make sure there is sufficient free space on your host to accomodate
+the requested pool size.
 
 ```no-highlight
 Name of the storage backend to use (dir or zfs) [default=zfs]: 
@@ -129,7 +130,7 @@ answers. In particular, IPv6 networking is not required (the last question).
    !["step 8"](./media/juju-lxd-config008.png)
    
    Finally for IPv4, enable Network Address Translation to allow the
-   contianers to communicate with the outside world.
+   containers to communicate with the outside world.
    
    !["step 9"](./media/juju-lxd-config009.png)
    
@@ -142,7 +143,7 @@ LXD is now configured to work with Juju.
 
 !!! Note: LXD adds iptables (firewall) rules to allow traffic to the
 subnet/bridge it created. If you subsequently add/change firewall settings
-(e.g. with `ufw`), ensure that these rules have not interfered with Juju's
+(e.g. with `ufw`), ensure that such changes have not interfered with Juju's
 ability to communicate with LXD.
 
 
