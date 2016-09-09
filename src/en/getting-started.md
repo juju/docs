@@ -1,5 +1,5 @@
 Title: Getting started with Juju 2.0
-TODO: Mediawiki status needs new screenshot when status has been updated in Juju
+TODO:  Bug check, LP#1619971
 
 
 # Getting started with Juju 2.0
@@ -231,7 +231,7 @@ look something like this:
 
 ![juju status](./media/juju-status-wiki-simple.png)
 
-There is lots of juicy information there! The important parts for now are
+There is a lot of useful information there! The important parts for now are
 the APP section, which shows that Mediawiki (shortened to 'wiki') and MySQL are
 installed, and the UNIT section, which shows the IP addresses allocated to
 each. These addresses correspond to the subnet we created for LXD earlier on.
