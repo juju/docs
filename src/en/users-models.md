@@ -80,3 +80,10 @@ juju add-user --models=mymodel --acl=read ben
 ```
 
 Naturally, the model in the above example needs to already exist.
+
+!!! Note: Each user has control over naming the models they own. This means
+it is possible for two users, `jane` and `claire`, to each have a model with
+the same name, `foo`. This could cause difficulty when `claire` needs to access
+`jane`'s model. Because of this, it is possible to refer to models
+using `<owner>/<model>` in place of just the model name. For example, `claire`
+can get the status of the model using `juju status -m jane/foo`.
