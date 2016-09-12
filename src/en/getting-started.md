@@ -177,8 +177,10 @@ This will return a list of the controllers known to Juju, which at the moment is
 the one we just created:
   
 ```no-highlight
-CONTROLLER  MODEL    USER         CLOUD/REGION
-lxd-test*   default  admin@local  localhost/localhost
+CONTROLLER  MODEL    USER         ACCESS+    CLOUD/REGION         MODELS+ MACHINES+  VERSION+
+lxd-test*   default  admin@local  superuser  localhost/localhost        2 	  1  2.0-beta18  
+
++ these are the last known values, run with --refresh to see the latest information.
 ```
 
 A newly-created controller has two models: The 'controller' model, which should
@@ -229,7 +231,7 @@ juju status
 When the applications have been installed, the output to the above command will
 look something like this:
 
-![juju status](./media/juju-status-wiki-simple.png)
+![juju status](./media/juju-mediawiki-status.png)
 
 There is a lot of useful information there! The important parts for now are
 the APP section, which shows that Mediawiki (shortened to 'wiki') and MySQL are
@@ -245,7 +247,7 @@ down by default so there is nothing for Juju to unblock/expose.
 The IP address we're interested in is 10.255.47.112. Point your browser at that
 address to see the site:
 
-!["mediawiki site"](./media/site-wiki-simple.png)
+!["mediawiki site"](./media/juju-mediawiki-site.png)
 
 Congratulations, you have just deployed an application with Juju!
 
