@@ -40,9 +40,9 @@ models leaner and faster and also brings benefits to placing containers within
 models. You can find out more about setting up 
 [LXD for Juju here][lxd].
 
-## MAAS 2.0
+## Juju and MAAS
 
-Juju supports MAAS 2.0, but at the moment, both MAAS and JUJU are in beta.
+Juju supports MAAS 1.9 and 2.0.
 
 
 ## Upgrading from earlier versions
