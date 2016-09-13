@@ -6,8 +6,7 @@ TODO:  Bug check, LP#1619971
 
 These instructions will get you up and running and deliver the best-possible
 experience with Juju. At the moment, that means using the latest release of
-Ubuntu: [16.04 LTS (Xenial)][Xenial-download]. Either the Server or the Desktop
-edition will suffice.
+Ubuntu: [16.04 LTS (Xenial)][Xenial-download]. 
 
 See the [general Getting Started page][getting-started-general] if you're using
 something other than Xenial.
@@ -27,6 +26,8 @@ Apart from Juju, the following technologies will be used:
 
 Begin by installing the required software:
 
+*TBD add the PPA so that we don't hit the cache image and other known issues due to the outdated beta in Xenial until it's updated*
+
 ```no-highlight
 sudo apt update
 sudo apt install juju zfsutils-linux
@@ -35,20 +36,17 @@ sudo apt install juju zfsutils-linux
 ## Groups and LXD initialisation 
 
 Firstly, in order to use LXD, your user must be a member of the `lxd` group.
-This should already be the case but you can confirm this by running the
+This should already be the case but you can confirm this by running the `groups` command.
 command:
-
-```bash
-groups
-```
 
 Sample output is provided below:
 
 ```no-highlight
+$ groups
 lxd adm cdrom sudo dip plugdev lpadmin sambashare ubuntu
 ```
 
-Your groups may vary, but if `lxd` is absent you should refresh group
+If `lxd` is absent you should refresh group
 membership with:
 
 ```bash
@@ -64,7 +62,7 @@ sudo lxd init
 ```
 
 You will be asked several questions. In the example below, LXD will i) create a
-32GB ZFS pool, ii) refrain from putting the pool on a separate block device,
+ZFS pool, ii) refrain from putting the pool on a separate block device,
 iii) refrain from listening over the network, and iv) trigger the setup of a
 bridge network (required for Juju).
 
@@ -143,9 +141,8 @@ LXD is now configured to work with Juju.
 
 !!! Note: LXD adds iptables (firewall) rules to allow traffic to the
 subnet/bridge it created. If you subsequently add/change firewall settings
-(e.g. with `ufw`), ensure that such changes have not interfered with Juju's
-ability to communicate with LXD.
-
+(e.g. with `ufw`), ensure that such changes have not interfered the containers ability to
+communicate across the network.
 
 ## Create a controller
 
@@ -162,9 +159,6 @@ juju bootstrap lxd-test localhost
 This may take a few minutes as LXD must download an image for Xenial. A cache
 will be used for subsequent containers.
 
-!!! Note: Currently there is an issue with image names and aliases. If you get 
-a message about a missing image, please see 
-https://bugs.launchpad.net/juju/+bug/1619971
 
 Once the process has completed you can check that the controller has been
 created:
@@ -185,7 +179,7 @@ lxd-test*   default  admin@local  superuser  localhost/localhost        2 	  1  
 
 A newly-created controller has two models: The 'controller' model, which should
 be used only by Juju for internal management, and a 'default' model, which is
-ready for actual use.
+ready for use.
 
 The following command shows the currently active controller, model, and user:
 
@@ -221,8 +215,7 @@ with. Juju will install both applications and add a relation between them -
 this is part of the magic of Juju: it isn't just about deploying software, Juju 
 also knows how to connect it all together.
 
-Installing shouldn't take long. You can check on how far Juju has got by running
-the command:
+You can check on how far Juju has got by running the command:
  
 ```bash
 juju status
@@ -264,7 +257,7 @@ things you can do with it!
 We suggest you take the time to read the following:
 
 - [Clouds][clouds] goes into detail about configuring other clouds, including
-  the public clouds like Azure, AWS, Google Compute Engine and Rackspace.
+  the public clouds like Azure, AWS and Google Compute Engine.
 - [Models][models] - Learn how to create, destroy and manage models.
 - [Charms & Applications][charms] - find out how to construct complicated 
   workloads in next to no time.
