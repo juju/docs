@@ -60,9 +60,15 @@ The value $IMAGE_ID will apply to the image ID of the image for the
 particular series you are specifying and $OS_SERIES will be the
 series name ("trusty", "xenial", etc.).
 
-
+We can now use Juju to generate the metadata:
 
 juju metadata generate-image -d ~/simplestreams -i $IMAGE_ID -s $OS_SERIES -r $REGION -u http://$KEYSTONE_IP:5000/v2.0/
+
+substituting in the appropriate values:
+
+  - **$IMAGE_ID** - The image ID we are creating metadata for.
+  - **$OS_SERIES** - The appropriate series this image relates to (e.g. Xenial)
+  - **$REGION** - The region name of the cloud.
 
 Note:
 
@@ -77,14 +83,6 @@ the image ID that matches that series.
 ls ~/simplestreams/*/streams/*
 
 You should see .json files for the images.
-
-Summary:
-
-In this exercise, you used the juju command to generate simplestreams metadata for
-
-the cloud images.
-
-(End of Exercise)
 
 14| 2 Upload Simplestreams Metadata into Swift
 
@@ -184,9 +182,6 @@ swift stat simplestreams
 
 You should see the Read ACL listed now.
 
-132
-
-Install and Configure an Ubuntu OpenStack Cloud
 
 Summary:
 
@@ -259,25 +254,7 @@ Install and Configure an Ubuntu OpenStack Cloud
 Summary:
 
 In this exercise, you used the swift command to create a new container and then
-
 uploaded the Simplestreams metadata into the container. Lastly you added a Read
-
 ACL to the container to make it publicly accessible.
 
-(End of Exercise)
 
-134
-
-Install and Configure an Ubuntu OpenStack Cloud
-
-135
-
-Install and Configure an Ubuntu OpenStack Cloud
-
-14| 4 Configure Juju to Use OpenStack as a Provider
-
-Description:
-
-In this exercise, you configure Juju to manage a project in the OpenStack cloud.
-
-You will need the SWIFT_URL value that was set in a previous exercise.
