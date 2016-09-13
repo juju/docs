@@ -6,7 +6,7 @@ TODO: Needs a rewrite
 
 ## Distribution groups
 
-Juju works with your cloud provider to ensure that, in the event of an IaaS
+Juju works with your cloud to ensure that, in the event of an IaaS
 outage, not all units of an application will go down at the same time,
 maximising your application's availability. 
 
@@ -26,7 +26,7 @@ available. e.g.
 juju deploy -n 10 <application>
 ```
 The way this works depends on whether Juju uses 'availability zones' or
-'availability sets' for that provider.
+'availability sets'. 
 
 ## Availability Zones
 
@@ -38,7 +38,7 @@ Juju supports such zones on Google Compute Engine, VMware vSphere, Amazon's
 EC2, OpenStack-based clouds (Havana or newer) and
 [MAAS](http://maas.io/docs/installconfig-zones). See the
 [Clouds](./clouds.html) section of the documentation for more details on these
-and other provider-specific settings.
+and other cloud-specific settings.
 
 If you do not specify a zone explicitly, Juju will automatically and uniformly
 distribute units across the available zones within the region. This can be
