@@ -156,9 +156,10 @@ how to
 .
 
 For additional configuration of LXD controllers, please see the [Controllers 
-documentation].
+documentation][controllers].
 
 [bootstrap]: ./controllers-creating
 [lxd-upstream]: https://github.com/lxc/lxd/blob/master/doc/configuration.md
 [logs]: ./troubleshooting-logs.html
 [models-add]: ./models-adding.html
+[controllers]: ./controllers.html
