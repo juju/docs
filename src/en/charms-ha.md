@@ -11,10 +11,10 @@ outage, not all units of an application will go down at the same time,
 maximising your application's availability. 
 
 Each deployed application is considered a 'distribution group'. Every time a
-unit is added to a distribution group, Juju will work to ensure that units are
-spread out to ensure high availability. As long as the charm and
-the charm's application are well written, you can rest assured that IaaS
-downtime will not affect your application.
+unit is added to a distribution group, Juju will spread out units to best
+ensure high availability. As long as the charm and the charm's application are
+well written, you can rest assured that IaaS downtime will not affect your
+application.
 
 !!! Note: see [High Availability](./controllers-ha.html) for details on
 enabling high availability for the controller.
