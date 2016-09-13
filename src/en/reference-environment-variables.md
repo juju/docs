@@ -240,6 +240,8 @@ JUJU_UNIT_NAME=vanilla/0
 
 # Internal Use only
 
+These exist for developmental purposes only.
+
 #### JUJU_DUMMY_DELAY
 #### JUJU_NOTEST_MONGOJS
 #### JUJU_AVAILABILITY_ZONE
