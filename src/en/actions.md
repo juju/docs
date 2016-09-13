@@ -13,11 +13,11 @@ information.
 
 The following commands are specified for dealing with actions:
 
-`juju actions` - alias for list-actions
-`juju list actions` - list actions defined for a service
-`juju run-action` - queue an action for execution
-`juju show-action-output` - show output of an action by ID
-`juju show-action-status` - show status of all actions filtered by optional ID
+- `juju actions` - alias for list-actions
+- `juju list actions` - list actions defined for a service
+- `juju run-action` - queue an action for execution
+- `juju show-action-output` - show output of an action by ID
+- `juju show-action-status` - show status of all actions filtered by optional ID
 
 ## Action commands
 
