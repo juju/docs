@@ -63,7 +63,7 @@ environments.yaml like so:
 ```yaml
   availability-sets-enabled: false
 ```
-!!! Note: By disabling availability sets , you will lose Azure's SLA
+!!! Note: By disabling availability sets, you will lose Azure's SLA
 guarantees. 
 
 
