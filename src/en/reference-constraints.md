@@ -58,7 +58,7 @@ multiple constraints delimited by a space.
 
     Minimum amount of abstract CPU power that must be available to a
     service unit, where 100 units is roughly equivalent to "a single
-    2007-era Xeon" as reflected by 1 Amazon ECU. 
+    2007-era Xeon" as reflected by 1 Amazon vCPU. 
     
     **Note:**  Not all providers support this constraint, use
     `cores` for portability.
@@ -167,7 +167,7 @@ also supported, these need to be migrated when upgrading.
 - cpu
 
     Number of CPU cores for most providers, but equivalent to an Amazon
-    ECU on AWS. Use `cores` instead of `cpu` or `cpu-cores`.
+    vCPU on AWS. Use `cores` instead of `cpu` or `cpu-cores`.
 
 - ec2-zone
 
