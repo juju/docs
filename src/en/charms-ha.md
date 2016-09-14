@@ -56,19 +56,18 @@ overall.  Exposed ports are automatically load-balanced across all units within
 the application.  Using availability sets disables manual placement and the
 "add-machine" command.
 
-New Azure environments use availability sets by default. To disable
-this behaviour, the 'availability-sets-enabled' option must be set in
-environments.yaml like so:
+New Azure environments use availability sets by default. This behaviour can be
+disabled only when bootstrapping the cloud by adding
+'availability-sets-enabled=false' as a configuration option:
 
 ```yaml
-  availability-sets-enabled: false
+juju bootstrap --config availability-sets-enabled=false mycloud azure
 ```
 !!! Note: By disabling availability sets, you will lose Azure's SLA
 guarantees. 
 
-
 Once an environment has been bootstrapped, you cannot change whether it uses
-availability sets.  You would have to tear it down and create a new
+availability sets. You would have to tear it down and create a new
 environment.
 
 Availability sets work differently from zones, but serve the same basic
