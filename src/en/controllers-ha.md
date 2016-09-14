@@ -1,14 +1,13 @@
 Title: Juju High Availability  
 TODO: Remove citation of HA logging bug when fixed (section: 'HA and logging')
-      Review opening paragraph of HA
-
 
 # High availability
 
-Juju high availability (HA) implies the presence of 3 or more (up to 7)
-controllers (per cloud) one of which is the *master*. Automatic failover occurs
-should the master lose connectivity.
-
+To ensure the high availability of deployed applications, the Juju controller
+must itself be highly available. This is accomplished by activating 'highly
+available' mode. With this mode enabled, multiple redundant controllers are
+instantiated while the single active controller is defined as the *master*.
+Automatic failover occurs should the master lose connectivity.
 
 ## Juju HA and MongoDB
 
@@ -30,14 +29,14 @@ Juju HA is activated and modified with the `juju enable-ha` command.
 As will be shown in the next section, it is also used to recover from failed
 controllers.
 
-When activating HA, by default, this command sets the number of state
-servers in the environment to 3. The optional `-n` switch can modify this 
+When activating HA, by default, this command sets the level of controller
+redundancy in the environment to 3. The optional `-n` switch can modify this
 number.
 
-When modifying HA, the `-n` switch can be used to increase the number of state
-servers. The only way to decrease is to create a backup of your environment
-and then restore the backup to a new environment, which starts with a single
-controller. You can then increase to the desired number.
+When modifying HA, the `-n` switch can be used to increase the number of
+redundant controllers. The only way to decrease is to create a backup of your
+environment and then restore the backup to a new environment, which starts with
+a single controller. You can then increase to the desired number.
 
 Whenever you run enable-ha, the command will report the changes it
 intends to make, which will shortly be implemented.
