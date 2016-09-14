@@ -24,6 +24,7 @@ Both the above are provided with Ubuntu 16.04LTS.
 Run the following commands to install the required software:
 
 ```no-highlight
+sudo apt-add-repository -y ppa:juju/devel
 sudo apt update
 sudo apt install juju zfsutils-linux
 ```
