@@ -147,7 +147,7 @@ in combination. Use this list to help you understand the differing needs.
 
 ###Manual Provider:
 - Unsupported: [cpu-power, instance-type, tags, virt-type]
-- Valid values: arhc=[for controller - host arch; for other machine - arch from machine hardware]
+- Valid values: arch=[for controller - host arch; for other machine - arch from machine hardware]
 
 ###Openstack Provider:
 - Unsupported: [tags, cpu-power]
