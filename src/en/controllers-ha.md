@@ -5,10 +5,9 @@ TODO: Remove citation of HA logging bug when fixed (section: 'HA and logging')
 
 To ensure the high availability of deployed applications, the Juju controller
 must itself be highly available. This is accomplished by activating 'highly
-available' mode which ensures 3 or more (up to 7) controllers (per cloud) are
-available, one of which is the *master*.  Automatic failover occurs should the
-master lose connectivity.
-
+available' mode. With this mode enabled, multiple redundant controllers are
+instantiated while the single active controller is defined as the *master*.
+Automatic failover occurs should the master lose connectivity.
 
 ## Juju HA and MongoDB
 
