@@ -151,7 +151,7 @@ machines:
 
 ```
 
-## Service constraints in a bundle
+## Setting constraints in a bundle
 
 To make your bundle as reusable as possible, it's common to set minimum
 constraints against a charmed application, much like you would when deploying 
@@ -181,7 +181,7 @@ Much like application constraints, it requires adding the placement key `to` in
 the application definition.
 Where supported by the cloud provider, it is also possible to isolate charms
 by including the container format in the placement directive. Some clouds
-support LXC.
+support LXD.
 
 For example:
 
@@ -189,25 +189,25 @@ For example:
 mysql:
   charm: "cs:precise/mysql-27"
   num_units: 1
-  to: lxc:wordpress/0
+  to: lxd:wordpress/0
   annotations:
       "gui-x": "139"
       "gui-y": "168"
 ```
 
-which will install the MySQL application into an LXC container on the same
+which will install the MySQL application into an LXD container on the same
 machine as the wordpress/0 unit. Or:
 
 ```yaml
 mysql:
   charm: "cs:precise/mysql-27"
   num_units: 1
-  to: lxc:1
+  to: lxd:1
   annotations:
       "gui-x": "139"
       "gui-y": "168"
 ```
-which will install the MySQL application into an LXC container on machine '1'.
+which will install the MySQL application into an LXD container on machine '1'.
 
 ## Machine specifications in a bundle
 
@@ -222,6 +222,35 @@ as the juju deployer will fail if a placement specification refers to a machine
 other than "0", which is used to represent the bootstrap node.  Leaving the
 machine specification out of your bundle tells Juju to place units on new
 machines if no placement directives are given.
+
+## Binding endpoints of applications within a bundle
+
+You can configure more complex networks using [spaces](./network-spaces.html)
+and deploy charms with binding, as described in [Deploying applications](./charms-deploying.html).
+Bindings can also be specified for applications within a bundle. To do so,
+add a section to the bundle's YAML file called `bindings`. For example:
+
+```
+...
+mysql:
+  charm: cs:xenial/mysql-53
+  num_units: 1
+  constraints: mem=4G
+  bindings:
+    server: database
+    cluster: internal
+...
+```
+
+This is the equivalent of deploying with:
+
+```bash
+juju deploy mysql --bind "server=database cluster=internal"
+```
+
+It is not currently possible to declare a default space in the bundle for all
+application endpoints. The workaround is to list all endpoints explicitly.
+
 
 ## Sharing your Bundle with the Community
 

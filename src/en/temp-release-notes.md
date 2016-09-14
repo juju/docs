@@ -3,11 +3,25 @@
 A new development release of Juju, juju 2.0-beta17, is now available.
 This release replaces version 2.0-beta16.
 
-## What's New in Beta17
-* add-model now takes region name as an optional positional argument,
-  to be consistent with bootstrap. The --region flag has been removed.
-* show-controller now includes the agent version
-* show-controllers has been removed as an alias to show-controller
+## What's New in Beta18
+
+* juju model-defaults command(s) have been collapsed to one command
+* juju model-config command(s) have been collapsed to one command
+* juju list-controllers displays model count, machine count, and
+  HA status
+* juju show-controllers contains more detailed information about
+  controller machines (instance id, HA status)
+* juju list-models displays machine count and core count
+* "juju login" now supports external users. If you have identity-url
+  configured, you must now explicitly specify a user name on the
+  command line to log in as a local user
+* When a login expires for local users, you will now be automatically
+  prompted, rather than getting an error back telling you to
+  run "juju login"
+* Macaroons for local users are now stored in the cookie jar, as with
+  external users. There is a known issue with logout (#1621375) which
+  will be addressed in beta19.
+
 
 ## Notable Changes
 
@@ -1002,16 +1016,53 @@ Then application status will show:
 APP         VERSION  STATUS  EXPOSED  ORIGIN  CHARM       REV  OS
 postgresql  9.5.3    active  false    local   postgresql  0    ubuntu
 
+### Model Config
+
+The syntax used to get and set model configuration values has changed.
+
+
+#### Examples
+
+Retrieve the full set of configuration for "application" and display it in YAML form.
+
+    juju config --format=yaml application
+
+    key: foo
+    Key2: bar
+
+Set the configuration for key to value and key2 to value2.
+
+    juju config application key=value key2=value2
+
+Retrieve just the value for a single key.
+
+    juju config application key
+
+    value
+
+Reset the value of key and key2 to the default value as defined by the charm.
+
+    juju config application --reset key,key2
+
+Configuration can also take a model identifier to allow you to
+set/retrieve the value from a model that is not your current default,
+and you can set and reset values on the same request, but you cannot
+retrieve a value and set or reset a value at the same time.
+
+    juju config -m controller:model application key=foo --reset key2
+
+
 ### Shared Model Config
 
 New/changed commands relevant to this feature:
+
   - juju model-config
-  - juju set-model-config
-  - juju unset-model-config
   - juju get-controller-config
   - juju show-model
 
-The management of hosted model configuration has been improved in several ways:
+The management of hosted model configuration has been improved in
+several ways:
+
   - shared config can be defined which will be used for all new models
     unless overridden by the user, either at model creation time using
     --config arguments or using juju set-model-config later
@@ -1023,10 +1074,12 @@ The management of hosted model configuration has been improved in several ways:
   - controller specific details like api port, certificates etc are now
     available using juju get-controller-config
 
-There are 3 sources of model attribute values:
+There are 4 sources of model attribute values:
+
   1. default - hard coded into Juju or the cloud provider
   2. controller - shared by all models created on controllers within an HA environment
-  3. model - set by the user
+  3. region - shared by all models running in a given cloud region
+  4. model - set by the user
 
 An example juju model-config output:
 
@@ -1062,6 +1115,7 @@ An example juju model-config output:
     test-mode                   default     False
 
 Points of note are that:
+
   - all model attributes are shown, enabling the user to see what values
     are available to be set
   - when a new model is created, the values are forked at that time so
@@ -1071,14 +1125,18 @@ Points of note are that:
   - the FROM value is calculated dynamically so that if a default value
     changes to match the model, the output is adjusted accordingly
 
-The behaviour of juju unset-model-config has changed. Previously, any unset attribute would revert to the empty value. Now, the value will revert to the closest inherited value. In the case above:
+The behaviour of juju model-config --reset has changed. Previously, any
+reset attribute would revert to the empty value. Now, the value will
+revert to the closest inherited value. In the case above:
+
   - ftp-proxy has inherited the controller value http://local
   - juju set-model-config ftp-proxy=http://another will set a new "model"
     value for this attribute
   - juju unset-model-config ftp-proxy will revert to the controller value
     http://local
 
-For this release, shared controller config attributes are specified in the clouds.yaml file.
+For this release, shared controller config attributes are specified in
+the clouds.yaml file.
 
     clouds:
      lxdtest:
@@ -1089,11 +1147,42 @@ For this release, shared controller config attributes are specified in the cloud
          ftp-proxy: http://local
 
 These cannot be changed once set. The next Juju beta will include new functionality to:
+
   - set and unset shared controller attributes
-  - display the values of shared attributes used when creating models, and
+  - display the values of shared aattributes used when creating models, and
     where those attributes are defined (default or controller)
   - allow shared attributes to be specified for each cloud region instead
     of just the controller
+
+
+#### Examples
+
+Retrieve the full set of configuration defaults and display it in YAML form.
+
+    juju model-defaults --format=yaml
+
+    agent-metadata-url:
+      default: ""
+    agent-stream:
+      default: released
+    apt-ftp-proxy:
+      default: ""
+    ...
+
+Set the default configuration value for all models in the controller for
+key to value and key2 to value2.
+
+    juju model-defaults key=value key2=value2
+
+Retrieve just the value for a single key.
+
+    juju model-defaults key
+
+    value
+
+Reset the value of key and key2 to the next closest default value.
+
+    juju model-defaults --reset key,key2
 
 
 ### Known issues
@@ -1102,11 +1191,6 @@ These cannot be changed once set. The next Juju beta will include new functional
     Lp 1547665
   * Cannot deploy a dense openstack bundle with native deploy
     Lp 1555808
-  * Cannot get status after restore is denied
-    Lp 1595686
-  * [aws] adding a machine post-bootstrap on the controller model closes of
-    api port in controller security group
-    Lp 1598164
   * Credentials files containing Joyent credentials must be updated to
     work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
     Storage")
