@@ -60,7 +60,7 @@ New Azure environments use availability sets by default. This behaviour can be
 disabled only when bootstrapping the cloud by adding
 'availability-sets-enabled=false' as a configuration option:
 
-```yaml
+```bash
 juju bootstrap --config availability-sets-enabled=false mycloud azure
 ```
 !!! Note: By disabling availability sets, you will lose Azure's SLA
