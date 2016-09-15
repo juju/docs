@@ -23,8 +23,9 @@ this simplestreams metadata and configure OpenStack to use them.
 ## Requirements
 
  - python-openstackclient
+ - python-swiftclient
 
-### 
+### Generating the metadata
 
 To begin, create a directory to hold the generted metadata
 
@@ -62,154 +63,85 @@ series name ("trusty", "xenial", etc.).
 
 We can now use Juju to generate the metadata:
 
+``` no-highlight
 juju metadata generate-image -d ~/simplestreams -i $IMAGE_ID -s $OS_SERIES -r $REGION -u http://$KEYSTONE_IP:5000/v2.0/
+```
 
 substituting in the appropriate values:
 
   - **$IMAGE_ID** - The image ID we are creating metadata for.
-  - **$OS_SERIES** - The appropriate series this image relates to (e.g. Xenial)
+  - **$OS_SERIES** - The appropriate series this image relates to (e.g. Xenial).
   - **$REGION** - The region name of the cloud.
-
-Note:
+  - **$KEYSTONE_IP** - The address of the cloud's keystone server.
 
 If you have images for multiple series of Ubuntu, run this command again for
-
-each series substituting OS_SERIES with the series name and IMAGE_ID with
-
+each series substituting **$OS_SERIES** with the series name and **$IMAGE_ID** with
 the image ID that matches that series.
 
-2. Enter the following command to view the metadata files:
+To verify that the correct metadata files have been generated, you may run:
 
+```bash
 ls ~/simplestreams/*/streams/*
+```
 
 You should see .json files for the images.
 
-14| 2 Upload Simplestreams Metadata into Swift
+### Upload the Simplestreams Metadata to Swift
 
-Description:
-
-In this exercise, you upload the Simplestreams metadata as objects into Swift.
-
-Note: You should have generated the Simplestreams metadata in the
-
-~/simplestreams directory before performing this exercise.
-
-Task 1: Upload the Simplestreams Metadata to Swift
-
-1. If it the python-swiftclient package is not already installed, enter the following
-
-command to install it:
-
-sudo apt-get install -y python-swiftclient
-
-2. Enter the following command to source in the nova.rc file:
-
-. ~/nova.rc
-
-Note:
-
-We need to source in the nova.rc file rather the then project specific .rc file
-
-because we will be uploading the Simplestreams metadata to the Admin project
-
-131
-
-Install and Configure an Ubuntu OpenStack Cloud
-
-and then make it publicly accessible. This way it is available to all tenants in the
-
-private cloud.
-
-3. Enter the following command to create a new container for the Simplestreams
-
+Enter the following command to create a new container for the Simplestreams
 metadata:
 
+```bash
 openstack container create simplestreams
+```
 
-4. Enter the following command to display the newly created container
+You can verify the container has been created by running:
 
+```bash
 openstack container list
+```
 
-You should see the new container listed
+Enter the following command to view the status of the container:
 
-5. Enter the following command to view the status of the container:
-
+```
 openstack container show simplestreams
+```
 
-Notice the Objects: line. You should see that the container does not contain any
-
+Notice the `Objects:` line. You should see that the container does not contain any
 objects.
 
-6. Enter the following commands to upload the Simplestreams metadata to the
+To upload the Simplestreams metadata to the container:
 
-container:
-
+```bash
 cd ~/simplestreams
-
 swift upload simplestreams *
+```
 
-7. Enter the following command to view the status of the container:
+Check the status of the container:
 
+
+```
 swift stat simplestreams
+```
 
-Notice the Objects: line again. You should see that the container now contains objects
+Notice the `Objects:` line again. You should see that the container now contains objects
+Currently, there are no Read or Write ACLs. This is essentially a private container.
 
-8. Enter the following command to list the objects in the container:
-
-swift list simplestreams
-
-You should see the files listed.
-
-Task 2: Set ACLs on a Container
-
-1. Enter the following command to display information about the Simplestreams
-
-container:
-
-swift stat simplestreams
-
-Notice that there are no Read or Write ACLs. This is essentially a private container.
-
-2. Enter the following command to add a Read ACL that will make the container publicly
-
+Enter the following command to add a Read ACL that will make the container publicly
 accessible:
 
+```
 swift post simplestreams --read-acl .r:*
+```
 
-3. Enter the following command to display information about the container again:
+### Create a simplestream service
 
-swift stat simplestreams
-
-You should see the Read ACL listed now.
-
-
-Summary:
-
-In this exercise, you used the swift command to create a new container and then
-
-uploaded the Simplestreams metadata into the container. Lastly you added a Read
-
-ACL to the container to make it publicly accessible.
-
-(End of Exercise)
-
-14| 3 Create Simplestreams Service and Endpoint
-
-Description:
-
-In this exercise, you upload the create a simplestreams service in the Keystone
-
-service registry and then register an endpoint for the service.
-
-Task 1: Create Simplestreams Service
-
-1. Enter the following command to create a new service in the Keystone service catalog
-
+Enter the following command to create a new service in the Keystone service catalog
 for simplestreams:
 
-openstack service create --name product-stream \
-
---description “Product Simple Stream” product-streams
+```bash
+openstack service create --name product-stream --description “Product Simple Stream” product-streams
+```
 
 Task 2: Register an Endpoint with the Simplestreams Service
 
