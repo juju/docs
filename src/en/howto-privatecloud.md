@@ -103,7 +103,7 @@ openstack container list
 
 Enter the following command to view the status of the container:
 
-```
+```bash
 openstack container show simplestreams
 ```
 
@@ -120,7 +120,7 @@ swift upload simplestreams *
 Check the status of the container:
 
 
-```
+```bash
 swift stat simplestreams
 ```
 
@@ -130,7 +130,7 @@ Currently, there are no Read or Write ACLs. This is essentially a private contai
 Enter the following command to add a Read ACL that will make the container publicly
 accessible:
 
-```
+```bash
 swift post simplestreams --read-acl .r:*
 ```
 
@@ -143,50 +143,33 @@ for simplestreams:
 openstack service create --name product-stream --description “Product Simple Stream” product-streams
 ```
 
-Task 2: Register an Endpoint with the Simplestreams Service
+We also need to  register an endpoint with the Simplestreams service.
+Enter the following command to determine the project ID for the admin user:
 
-1. Enter the following command to determine the project ID for the admin user:
-
+```bash
 openstack user show admin -f value -c project_id
+```
 
 This value will be used to replace the string $(tenant_id)s when we construct the Swift
-
 URL in a future step.
 
-2. Enter the following command to determine the URL in Swift for the Simplestreams
+Enter the following command to determine the URL in Swift for the Simplestreams objects:
 
-objects:
-
+```bash
 openstack endpoint show object-store
+```
 
 Notice the URL for the Object Store. Replace the string $(tenant_id)s with the project
+ID obtained in the previous step. We will refer to this modified URL as the '`SWIFT_URL`'.
 
-ID obtained in the previous step. We will refer to this modified URL as the
-
-SWIFT_URL
-
-3. Enter the following command to register the endpoint with the Simplestreams
-
+Enter the following command to register the endpoint with the Simplestreams
 service:
 
-openstack endpoint create \
+```bash
+openstack endpoint create --region RegionOne --publicurl SWIFT_URL/simplestreams/images \
+   --internalurl SWIFT_URL/simplestreams/images \
+   --publicurl SWIFT_URL/simplestreams/images product-streams
+```
 
---region RegionOne \
-
-133
-
-Install and Configure an Ubuntu OpenStack Cloud
-
---publicurl SWIFT_URL/simplestreams/images \
-
---internalurl SWIFT_URL/simplestreams/images \
-
---publicurl SWIFT_URL/simplestreams/images product-streams
-
-Summary:
-
-In this exercise, you used the swift command to create a new container and then
-uploaded the Simplestreams metadata into the container. Lastly you added a Read
-ACL to the container to make it publicly accessible.
 
 
