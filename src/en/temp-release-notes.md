@@ -1,7 +1,7 @@
-# Juju 2.0-beta17
+# Juju 2.0-beta18
 
-A new development release of Juju, juju 2.0-beta17, is now available.
-This release replaces version 2.0-beta16.
+A new development release of Juju, juju 2.0-beta18, is now available.
+This release replaces version 2.0-beta17.
 
 ## What's New in Beta18
 
