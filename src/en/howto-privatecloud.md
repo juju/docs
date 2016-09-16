@@ -166,9 +166,9 @@ Enter the following command to register the endpoint with the Simplestreams
 service:
 
 ```bash
-openstack endpoint create --region RegionOne --publicurl SWIFT_URL/simplestreams/images \
-   --internalurl SWIFT_URL/simplestreams/images \
-   --publicurl SWIFT_URL/simplestreams/images product-streams
+openstack endpoint create --region $REGION --publicurl $SWIFT_URL/simplestreams/images \
+   --internalurl $SWIFT_URL/simplestreams/images \
+   --publicurl $SWIFT_URL/simplestreams/images product-streams
 ```
 
 
