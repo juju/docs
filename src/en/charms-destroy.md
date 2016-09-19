@@ -1,11 +1,12 @@
-Title: Removing applications, units and machines in Juju  
+Title: Removing applications, units, and machines in Juju
 
 
-# Removing applications, units and environments
+# Removing applications, units, and machines
 
 Juju can sanely and efficiently remove something when you no longer need it.
-This section looks at how to remove applications, units and environments. To 
-remove a model see the [models documentation][models].
+This section looks at how to remove applications, units, and machines. To 
+remove a model see the [models documentation](./models.html). To remove a controller,
+see the [controllers documentation](./controllers.html).
 
 
 ## Removing an application
@@ -19,7 +20,8 @@ juju remove-application <application-name>
 !!! Note: Removing an application which has active relations with another
 running application will terminate that relation. Charms are written
 to handle this, but be aware that the other application may no 
-longer work as expected.
+longer work as expected. To remove relations between deployed applications,
+see [Charm relations](charms-relations.html#removing-relations).
 
 This is the order of events for removing an application:
 
@@ -79,12 +81,6 @@ error: no machines were destroyed: machine 3 has unit "mysql/0" assigned
 ```
 
 
-## Removing relations
-
-To remove relations between deployed applications, see
-[Charm relations](charms-relations.html#removing-relations).
-
-
 ## Caveats
 
 These are caveats which you may encounter while removing items.
@@ -107,6 +103,3 @@ There may be errors on other units caused by the breaking of relations that
 occur when removing a unit or application. Therefore also verify that the
 associated units are not in an error state and apply the above command to them
 if they are.
-
-
-[models]: ./models-destroying.html
