@@ -5,8 +5,8 @@ Title: Removing applications, units, and machines in Juju
 
 Juju can sanely and efficiently remove something when you no longer need it.
 This section looks at how to remove applications, units, and machines. To 
-remove a model see the [models documentation](./models.html). To remove a controller,
-see the [controllers documentation](./controllers.html).
+remove a model see the [models documentation][models]. To remove a controller,
+see the [controllers documentation][controllers].
 
 
 ## Removing an application
@@ -21,7 +21,7 @@ juju remove-application <application-name>
 running application will terminate that relation. Charms are written
 to handle this, but be aware that the other application may no 
 longer work as expected. To remove relations between deployed applications,
-see [Charm relations](charms-relations.html#removing-relations).
+see [Charm relations][charmrelations].
 
 This is the order of events for removing an application:
 
@@ -103,3 +103,7 @@ There may be errors on other units caused by the breaking of relations that
 occur when removing a unit or application. Therefore also verify that the
 associated units are not in an error state and apply the above command to them
 if they are.
+
+[charmrelations]: ./charms-relations.html#removing-relations
+[controllers]: ./controllers.html
+[models]: ./models.html
