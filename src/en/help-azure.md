@@ -124,7 +124,7 @@ Additionally, if you selected `userpass', you will also need:
 
  - tenant-id
 
-!! Note: The 'userpass' authentication type is being deprecated and will be
+!!! Note: The 'userpass' authentication type is being deprecated and will be
 remove soon.
 
 In the sections below, we will assign each of these a variable name.  When you
@@ -275,6 +275,8 @@ SUB_ID
 TENANT_ID # Only required when 'userpass' is the authentication method.
 APP_PASSWORD
 ```
+
+You can now [create the controller](#create-controller).
 
 !!! Note: If you add more than one credential, you will also need to set the
 default one to use with `juju set-default-credential`
