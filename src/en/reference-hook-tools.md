@@ -540,10 +540,10 @@ status-get
 status-get --include-data
 ```
 
-Use `--service` to get the overall status for the service to which the unit
-belongs if the unit is the leader, for example:
+Use `--application` to get the overall status for the application to which
+the unit belongs if the unit is the leader, for example:
 ```bash
-juju run --unit ubuntu/0 'status-get --service
+juju run --unit ubuntu/0 'status-get --application
 ```
 
 ## status-set
