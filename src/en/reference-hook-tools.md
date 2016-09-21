@@ -617,10 +617,10 @@ status-set blocked "Need a database relation"
 status-set blocked "Storage full"
 ```
 
-Use `--service` to set the overall status for the service to which the unit
-belongs if the unit is the leader, for example:
+Use `--application` to set the overall status for the application to which
+the unit belongs if the unit is the leader, for example:
 ```bash
-juju run --unit ubuntu/0 'status-set --service
+juju run --unit ubuntu/0 'status-set --application
 ```
 
 ## storage-add
