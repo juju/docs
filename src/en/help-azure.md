@@ -34,17 +34,29 @@ page.
 
 ![Azure SubscriptionBlade page showing subscription id](./media/getting_started-azure_subsid.png)
 
-Credentials can now be added interactively by running the command:
+Credentials can now be added by running the command:
 
 ```bash
 juju add-credential azure
 ```
+The first question will ask for an arbitrary credential name, which you choose
+for yourself.  This will be how you remember and refer to this Azure credential
+in Juju. The second question will ask you to select an 'Auth Type' from the
+following list:
 
-You will first be asked for a name of your choosing to give to this credential,
-followed by an option to select an 'Auth Type'. The `*` after 'interactive'
-indicates this is the default option, and you can either type 'interactive'
-manually, or simply press 'Enter' to continue. 
+```bash
+interactive*
+service-principal-secret
+userpass
+```
 
+The `*` after 'interactive' indicates this is the default option, and you can
+either type 'interactive' manually, or simply press 'Enter' to continue. 
+
+!!! Note: The 'interactive' option is far quicker and easier than manually adding
+credentials via either the 'service-principal-secret' or 'userpass'
+options, but instructions for these are covered in the 
+[Manually adding credentials](#manually-adding-credentials) section.
 
 You will then be asked for your Azure subscription id.  After entering this, you'll
 be notified that Juju is initiating its interactive authentication followed by
@@ -94,24 +106,31 @@ in the [Azure portal][azureportal].
 
 ![Juju environment in Azure portal](media/azure_portal-environment.png)
 
-
 !!! Note: By default new Azure accounts are limited to 10 cores. You may
 need to file a support ticket with Azure to raise this limit for your 
 account if you are deploying many or large applications.
 
-## Compatibility with older versions of Juju
-
-Juju 2.x support for Azure is backwards compatible with older versions of Juju
-but supports several additional features, in particular, support for unit 
-placement (i.e. units can be deployed to specific existing machines). In lieu
-of this, the old default behaviour is used: units of an application will be 
-allocated to machines in an application-specific Availability Set. Read the
-[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
-availability sets affect uptime guarantees.
-
 ## Manually adding credentials
 
-In order to access Azure, you will need to add some credentials for Juju to use.
+Selecting either the `service-principal-secret` or `userpass` authentication
+options when running `juju add-credential azure` will require you to configure
+and retrieve specific details from your Azure cloud: 
+
+ - application-id
+ - subscription-id
+ - application-password
+
+Additionally, if you selected `userpass', you will also need:
+
+ - tenant-id
+
+!! Note: The 'userpass' authentication type is being deprecated and will be
+remove soon.
+
+In the sections below, we will assign each of these a variable name.  When you
+enter them into the command, replace the variable name we give with the actual
+ID that corresponds to the variable.
+
 The Azure command line interface (CLI) tool is used to both gather information
 and to perform necessary actions.
 
@@ -142,27 +161,6 @@ azure login
 You will be prompted to visit a website to enter the provided code. It will
 therefore be easier to perform this on a graphical desktop.
 
-### Registering azure services
-
-Juju requires certain services to be active for your account. Enter these 
-commands to register using the Azure CLI tool:
-
-```
-azure provider register Microsoft.Compute
-azure provider register Microsoft.Network
-azure provider register Microsoft.Storage
-```
-
-To enter credentials, values will need to be found for the following parameters:
-
- - subscription-id
- - application-password
- - application-id
- - tenant-id
-
-!!! Note: In the sections below, we will assign each of these a variable name.
-When you enter them into the command, replace the variable name we give with
-the actual ID that corresponds to the variable.
 
 ### `subscription-id`
 
@@ -267,25 +265,29 @@ azure login \
         --tenant "$TENANT_ID"
 ```
 
-You can now run the interactive command:
-  
-```bash
-juju add-credential azure
-```
-
-Which will ask for an arbitrary credential name, which you choose for yourself.
-This will be how you remember and refer to this Azure credential in Juju. The
-command will also request the values discovered above, which we referred to as:
+You can now run the interactive `juju add-credential azure` command. As before, select
+either `service-principal-secret` or `userpass` as the Auth Type, and supply the
+following details, discovered above, when asked:
 
 ```bash
 APP_ID
 SUB_ID
-TENANT_ID
+TENANT_ID # Only required when 'userpass' is the authentication method.
 APP_PASSWORD
 ```
 
 !!! Note: If you add more than one credential, you will also need to set the
 default one to use with `juju set-default-credential`
+
+## Compatibility with older versions of Juju
+
+Juju 2.x support for Azure is backwards compatible with older versions of Juju
+but supports several additional features, in particular, support for unit 
+placement (i.e. units can be deployed to specific existing machines). In lieu
+of this, the old default behaviour is used: units of an application will be 
+allocated to machines in an application-specific Availability Set. Read the
+[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
+availability sets affect uptime guarantees.
 
 [subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
 [azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
