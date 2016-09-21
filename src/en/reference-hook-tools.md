@@ -484,6 +484,13 @@ status-get
 status-get --include-data
 ```
 
+Use `--service` to get the overall status for the application to which the
+unit belongs if the unit is the leader, for example:
+
+```no-highlight
+juju run --unit ubuntu/0 'status-get --service
+```
+
 
 ### status-set
 
@@ -551,6 +558,14 @@ status-set active "Storage 95% full"
 status-set blocked "Need a database relation"
 status-set blocked "Storage full"
 ```
+
+Use `--service` to get the overall status for the application to which the
+unit belongs if the unit is the leader, for example:
+
+```no-highlight
+juju run --unit ubuntu/0 'status-get --service
+```
+
 
 ### unit-get
 
