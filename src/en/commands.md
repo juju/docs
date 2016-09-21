@@ -28,7 +28,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -211,7 +211,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-n  (= 1)_
 
@@ -365,7 +365,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    **Aliases:**
 
@@ -390,7 +390,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -419,7 +419,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -477,7 +477,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -549,7 +549,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -587,7 +587,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-n, --num-units  (= 1)_
 
@@ -801,7 +801,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--model-uuid (= "")_
 
@@ -847,7 +847,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -938,7 +938,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -1183,7 +1183,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -1373,7 +1373,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -1412,7 +1412,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -1529,7 +1529,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--no-download  (= false)_
 
@@ -1609,7 +1609,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -1726,7 +1726,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--no-host-key-checks  (= false)_
 
@@ -1801,7 +1801,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--ms  (= false)_
 
@@ -1955,7 +1955,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-n, --num-units  (= 1)_
 
@@ -2139,7 +2139,7 @@ Click on the expander to see details for each command.
 
 ^# destroy-model
 
-   **Usage:** ` juju destroy-model [options] [<controller name>:]<model name>`
+   **Usage:** ` juju destroy-model [options] `[<controller name>:]<model name>``
 
    **Summary:**
 
@@ -2196,7 +2196,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -2349,7 +2349,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -2445,7 +2445,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -2476,7 +2476,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -2623,7 +2623,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-n  (= 0)_
 
@@ -2727,7 +2727,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -2770,7 +2770,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -2881,7 +2881,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -3007,7 +3007,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--no-browser  (= false)_
 
@@ -3077,7 +3077,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -3178,7 +3178,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -3256,7 +3256,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -3342,7 +3342,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -3586,7 +3586,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -3686,7 +3686,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -3817,7 +3817,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -3914,7 +3914,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -3956,7 +3956,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -4004,7 +4004,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -4061,7 +4061,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -4105,7 +4105,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--name  (= )_
 
@@ -4165,7 +4165,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -4383,7 +4383,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -4444,7 +4444,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -4480,7 +4480,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -4671,7 +4671,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -4806,7 +4806,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    **Aliases:**
 
@@ -4831,7 +4831,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -4872,7 +4872,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -4908,7 +4908,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--series (= "")_
 
@@ -5025,7 +5025,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -5075,7 +5075,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -5129,7 +5129,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -5177,7 +5177,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -5285,7 +5285,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--no-retry  (= false)_
 
@@ -5318,7 +5318,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -5376,7 +5376,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -5416,7 +5416,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
 
  
@@ -5500,7 +5500,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--machine  (= )_
 
@@ -5575,7 +5575,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -5681,7 +5681,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--no-host-key-checks  (= false)_
 
@@ -5806,7 +5806,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -5940,7 +5940,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -5978,7 +5978,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -6029,7 +6029,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -6070,7 +6070,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -6116,7 +6116,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--name (= "")_
 
@@ -6152,7 +6152,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -6184,7 +6184,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -6321,7 +6321,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -6407,7 +6407,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -6508,7 +6508,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-n  (= 0)_
 
@@ -6573,7 +6573,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -6667,7 +6667,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -6711,7 +6711,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--no-host-key-checks  (= false)_
 
@@ -6787,7 +6787,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -6844,7 +6844,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -6945,7 +6945,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -6989,7 +6989,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--name  (= )_
 
@@ -7049,7 +7049,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-o, --output (= "")_
 
@@ -7171,7 +7171,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--public  (= false)_
 
@@ -7236,7 +7236,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -7318,7 +7318,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
@@ -7396,7 +7396,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--path (= "")_
 
@@ -7545,7 +7545,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _--reset-previous-upgrade  (= false)_
 
@@ -7625,7 +7625,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    
    **Details:**
