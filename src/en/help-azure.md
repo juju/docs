@@ -26,6 +26,91 @@ juju update-clouds
 
 ## Credentials
 
+Using Juju's interactive authentication, importing Azure credentials into Juju
+is now a simple process. The only information you'll need is your Azure subscription
+id, which can be found by signing in to Azure and going to the
+'[SubscriptionBlade][subscriptionblade]'
+page.
+
+![Azure SubscriptionBlade page showing subscription id](./media/getting_started-azure_subsid.png)
+
+Credentials can now be added interactively by running the command:
+
+```bash
+juju add-credential azure
+```
+
+You will first be asked for a name of your choosing to give to this credential,
+followed by an option to select an 'Auth Type'. The `*` after 'interactive'
+indicates this is the default option, and you can either type 'interactive'
+manually, or simply press 'Enter' to continue. 
+
+
+You will then be asked for your Azure subscription id.  After entering this, you'll
+be notified that Juju is initiating its interactive authentication followed by
+a request to use a web browser to follow a [link][azuredeviceauth] and enter an
+authentication code:
+
+```bash
+To sign in, use a web browser to open the page
+https://login.windows.net/common/oauth2/deviceauth. Enter the code
+D5RM8DE4J to authenticate.
+```
+
+Following the link will open a page that displays 'Device Login' and an empty
+text entry field for Juju's authentication code. After entering the code,
+you'll see Juju CLI identified as the application publisher and you should
+click continue.
+
+You'll next be asked to accept the following permissions needed
+by the Juju CLI:
+
+- Sign you in and read your profile
+- Read and write directory data
+- Access your organization's directory
+- Access Azure Service Management as you (preview)
+
+After accepting these permissions, you can close the browser and your Juju
+session will automatically complete with output similar to the following:
+
+```bash
+Authenticated as "Graham a5a231c2-defd-4e87-a48d-efba12225b75".
+Creating/updating service principal.
+Assigning Owner role to service principal.
+Credentials added for cloud azure.
+```
+
+You can now start using Juju with your Azure cloud.
+
+## Create controller
+
+
+```bash
+juju bootstrap mycloud azure
+```
+
+A successful bootstrap will result in the controller being visible in the
+[Azure portal][azureportal]
+
+![Juju environment in Azure portal](media/azure_portal-machine_0.png)
+
+
+!!! Note: By default new Azure accounts are limited to 10 cores. You may
+need to file a support ticket with Azure to raise this limit for your 
+account if you are deploying many or large applications.
+
+## Compatibility with older versions of Juju
+
+Juju 2.x support for Azure is backwards compatible with older versions of Juju
+but supports several additional features, in particular, support for unit 
+placement (i.e. units can be deployed to specific existing machines). In lieu
+of this, the old default behaviour is used: units of an application will be 
+allocated to machines in an application-specific Availability Set. Read the
+[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
+availability sets affect uptime guarantees.
+
+## Manually adding credentials
+
 In order to access Azure, you will need to add some credentials for Juju to use.
 The Azure command line interface (CLI) tool is used to both gather information
 and to perform necessary actions.
@@ -202,31 +287,6 @@ APP_PASSWORD
 !!! Note: If you add more than one credential, you will also need to set the
 default one to use with `juju set-default-credential`
 
-## Create controller
-
-
-```bash
-juju bootstrap mycloud azure
-```
-
-A successful bootstrap will result in the controller being visible in the
-[Azure portal](http://portal.azure.com):
-
-![bootstrap machine 0 in Azure portal](media/azure_portal-machine_0.png)
-
-
-!!! Note: By default new Azure accounts are limited to 10 cores. You may
-need to file a support ticket with Azure to raise this limit for your 
-account if you are deploying many or large applications.
-
-## Compatibility with older versions of Juju
-
-Juju 2.x support for Azure is backwards compatible with older versions of Juju
-but supports several additional features, in particular, support for unit 
-placement (i.e. units can be deployed to specific existing machines). In lieu
-of this, the old default behaviour is used: units of an application will be 
-allocated to machines in an application-specific Availability Set. Read the
-[Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
-availability sets affect uptime guarantees.
-
-
+[subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
+[azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
+[azureportal]: http://portal.azure.com
