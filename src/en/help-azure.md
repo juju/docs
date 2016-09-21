@@ -89,10 +89,10 @@ You can now start using Juju with your Azure cloud.
 juju bootstrap mycloud azure
 ```
 
-A successful bootstrap will result in the controller being visible in the
-[Azure portal][azureportal]
+A successful bootstrap will result in the controller environment being visible
+in the [Azure portal][azureportal].
 
-![Juju environment in Azure portal](media/azure_portal-machine_0.png)
+![Juju environment in Azure portal](media/azure_portal-environment.png)
 
 
 !!! Note: By default new Azure accounts are limited to 10 cores. You may
