@@ -3,24 +3,25 @@
 A new development release of Juju, juju 2.0-beta18, is now available.
 This release replaces version 2.0-beta17.
 
-## What's New in Beta18
+## What's New in RC1
 
-* juju model-defaults command(s) have been collapsed to one command
-* juju model-config command(s) have been collapsed to one command
-* juju list-controllers displays model count, machine count, and
-  HA status
-* juju show-controllers contains more detailed information about
-  controller machines (instance id, HA status)
-* juju list-models displays machine count and core count
-* "juju login" now supports external users. If you have identity-url
-  configured, you must now explicitly specify a user name on the
-  command line to log in as a local user
-* When a login expires for local users, you will now be automatically
-  prompted, rather than getting an error back telling you to
-  run "juju login"
-* Macaroons for local users are now stored in the cookie jar, as with
-  external users. There is a known issue with logout (#1621375) which
-  will be addressed in beta19.
+* The Juju client now works on any Linux flavour. When bootstrapping
+  with local tools, it's now possible to create a controller of any
+  supported Linux series regardless of the Linux flavour the client
+  is running on.
+* juju resolved command retries failed hooks by default:
+  juju resolved <unit> // marks unit errors resolved and retries failed hooks
+  juju resolved --no-retry <unit> //marks unit errors resolved w/o retrying hooks
+* MAAS 2.0 Juju provider has been updated to use MAAS API 2.0's owner
+  data for instance tagging.
+* networking fixes for containers in MAAS 2.0 when the parent device is
+  unconfigured. (#1566791)
+* Azure provider performance has been enhanced, utilising Azure Resource
+  Manager templates, and improved parallelisation.
+* Azure provider now supports an "interactive" auth-type, making it much
+  easier to set up credentials for bootstrapping. The "userpass"
+  auth-type has been deprecated, and replaced with
+  "service-principal-secret".
 
 
 ## Notable Changes

@@ -61,6 +61,11 @@ verbose. For example:
 juju set-environment logging-config "juju=DEBUG; unit=WARNING"
 ```
 
+#### JUJU_MODEL
+
+Used to specify the current Juju model to use. This is overriden if the model 
+is specified on the commandline using `-m MODEL`
+
 #### JUJU_DEV_FEATURE_FLAGS
 
 This setting takes effect on an environment only at bootstrap time. Unstable
