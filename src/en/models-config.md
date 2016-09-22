@@ -21,33 +21,38 @@ provided below. Notable examples are provided at the end.
 You can display the current model settings by running the command:
 
 ```bash
-juju get-model-config
+juju model-config
 ```
 
 This will include all the currently set key values - whether they were set
 by you, inherited as a default value or dynamically set by Juju. 
 
-A key's value may be set for the current model using the `set-model-config`
-command:
+A key's value may be set for the current model using the same command:
 
 ```bash
-juju set-model-config noproxy=jujucharms.com
+juju model-config noproxy=jujucharms.com
 ```
 
 It is also possible to specify a list of key-value pairs:
   
 ```bash
-juju set-model-config test-mode=true enable-os-upgrade=false
+juju model-config test-mode=true enable-os-upgrade=false
 ```
 
 !!! Note: Juju does not currently check that the provided key is a valid
 setting, so make sure you spell it correctly.
 
-To return a value to the default setting the `unset-model-config` command is
-used, specifying the key names:
+To return a value to the default setting the `--reset` flag is used,
+specifying the key names:
   
 ```bash
-juju unset-model-config test-mode
+juju model-config --reset test-mode
+```
+
+To view the default settings and keys, use:
+
+```bash
+juju model-defaults
 ```
 
 
@@ -117,7 +122,7 @@ the services they deploy. It is possible to set a specific mirror for the APT
 packages to use, by setting 'apt-mirror':
 
 ```bash
-juju set-model-config apt-mirror=http://archive.ubuntu.com/ubuntu/
+juju model-config apt-mirror=http://archive.ubuntu.com/ubuntu/
 ```
 
 It is also possible to set this to a local mirror if desired.
@@ -125,7 +130,7 @@ It is also possible to set this to a local mirror if desired.
 You may also run:
 
 ```bash
-juju unset-model-config apt-mirror
+juju model-config --reset apt-mirror
 ```
 
 to restore the default behaviour in a running model.
@@ -227,5 +232,5 @@ The default mode is **destroyed**.
 Below, the harvest mode key for the current model is set to 'none':
 
 ```bash
-juju set-model-config provisioner-harvest-mode=none
+juju model-config provisioner-harvest-mode=none
 ```
