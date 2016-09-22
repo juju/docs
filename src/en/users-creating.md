@@ -76,10 +76,11 @@ the current Juju user session:
 juju logout
 ```
 
-And to log back in, either on the same client system or not:
+And to log back in, either on the same client system or not, using the same
+user we added earlier:
 
 ```bash
-juju login
+juju login jon
 ```
 
 Once a user logs in they become the current user. The following is a quick way
