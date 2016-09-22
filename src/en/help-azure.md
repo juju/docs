@@ -27,7 +27,7 @@ juju update-clouds
 ## Credentials
 
 Using Juju's interactive authentication, importing Azure credentials into Juju
-is now a simple process. The only information you'll need is your Azure subscription
+is a simple process. The only information you'll need is your Azure subscription
 id, which can be found by signing in to Azure and going to the
 '[SubscriptionBlade][subscriptionblade]'
 page.
@@ -60,7 +60,7 @@ options, but instructions for these are covered in the
 
 You will then be asked for your Azure subscription id.  After entering this, you'll
 be notified that Juju is initiating its interactive authentication followed by
-a request to use a web browser to follow a [link][azuredeviceauth] and enter an
+a request to use a web browser to follow [link][azuredeviceauth] and enter an
 authentication code:
 
 ```bash
@@ -125,7 +125,7 @@ Additionally, if you selected `userpass', you will also need:
  - tenant-id
 
 !!! Note: The 'userpass' authentication type is being deprecated and will be
-remove soon.
+removed soon.
 
 In the sections below, we will assign each of these a variable name.  When you
 enter them into the command, replace the variable name we give with the actual
