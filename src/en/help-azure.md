@@ -26,7 +26,111 @@ juju update-clouds
 
 ## Credentials
 
-In order to access Azure, you will need to add some credentials for Juju to use.
+Using Juju's interactive authentication, importing Azure credentials into Juju
+is a simple process. The only information you'll need is your Azure subscription
+id, which can be found by signing in to Azure and going to the
+'[SubscriptionBlade][subscriptionblade]'
+page.
+
+![Azure SubscriptionBlade page showing subscription id](./media/getting_started-azure_subsid.png)
+
+Credentials can now be added by running the command:
+
+```bash
+juju add-credential azure
+```
+The first question will ask for an arbitrary credential name, which you choose
+for yourself.  This will be how you remember and refer to this Azure credential
+in Juju. The second question will ask you to select an 'Auth Type' from the
+following list:
+
+```bash
+interactive*
+service-principal-secret
+userpass
+```
+
+The `*` after 'interactive' indicates this is the default option, and you can
+either type 'interactive' manually, or simply press 'Enter' to continue. 
+
+!!! Note: The 'interactive' option is far quicker and easier than manually adding
+credentials via either the 'service-principal-secret' or 'userpass'
+options, but instructions for these are covered in the 
+[Manually adding credentials](#manually-adding-credentials) section.
+
+You will then be asked for your Azure subscription id.  After entering this, you'll
+be notified that Juju is initiating its interactive authentication followed by
+a request to use a web browser to follow [link][azuredeviceauth] and enter an
+authentication code:
+
+```bash
+To sign in, use a web browser to open the page
+https://login.windows.net/common/oauth2/deviceauth. Enter the code
+D5RM8DE4J to authenticate.
+```
+
+Following the link will open a page that displays 'Device Login' and an empty
+text entry field for Juju's authentication code. After entering the code,
+you'll see Juju CLI identified as the application publisher and you should
+click continue.
+
+You'll next be asked to accept the following permissions needed
+by the Juju CLI:
+
+- Sign you in and read your profile
+- Read and write directory data
+- Access your organization's directory
+- Access Azure Service Management as you (preview)
+
+After accepting these permissions, you can close the browser and your Juju
+session will automatically complete with output similar to the following:
+
+```bash
+Authenticated as "Graham a5a231c2-defd-4e87-a48d-efba12225b75".
+Creating/updating service principal.
+Assigning Owner role to service principal.
+Credentials added for cloud azure.
+```
+
+You can now start using Juju with your Azure cloud.
+
+## Create controller
+
+
+```bash
+juju bootstrap mycloud azure
+```
+
+A successful bootstrap will result in the controller environment being visible
+in the [Azure portal][azureportal].
+
+![Juju environment in Azure portal](media/azure_portal-environment.png)
+
+!!! Note: By default new Azure accounts are limited to 10 cores. You may
+need to file a support ticket with Azure to raise this limit for your 
+account if you are deploying many or large applications.
+
+## Manually adding credentials
+
+Selecting either the `service-principal-secret` or `userpass` authentication
+options when running `juju add-credential azure` will require you to configure
+and retrieve specific details from your Azure cloud: 
+
+ - application-id
+ - subscription-id
+ - application-password
+
+Additionally, if you selected `userpass', you will also need:
+
+ - tenant-id
+
+!!! Note: The 'userpass' authentication type is being deprecated and will be
+removed soon.
+
+In the sections below, we will assign each of these a variable name.  When you
+enter them into the command, replace the variable name we give with the actual
+ID that corresponds to the variable.
+
 The Azure command line interface (CLI) tool is used to both gather information
 and to perform necessary actions.
 
@@ -57,27 +161,6 @@ azure login
 You will be prompted to visit a website to enter the provided code. It will
 therefore be easier to perform this on a graphical desktop.
 
-### Registering azure services
-
-Juju requires certain services to be active for your account. Enter these 
-commands to register using the Azure CLI tool:
-
-```
-azure provider register Microsoft.Compute
-azure provider register Microsoft.Network
-azure provider register Microsoft.Storage
-```
-
-To enter credentials, values will need to be found for the following parameters:
-
- - subscription-id
- - application-password
- - application-id
- - tenant-id
-
-!!! Note: In the sections below, we will assign each of these a variable name.
-When you enter them into the command, replace the variable name we give with
-the actual ID that corresponds to the variable.
 
 ### `subscription-id`
 
@@ -182,42 +265,21 @@ azure login \
         --tenant "$TENANT_ID"
 ```
 
-You can now run the interactive command:
-  
-```bash
-juju add-credential azure
-```
-
-Which will ask for an arbitrary credential name, which you choose for yourself.
-This will be how you remember and refer to this Azure credential in Juju. The
-command will also request the values discovered above, which we referred to as:
+You can now run the interactive `juju add-credential azure` command. As before, select
+either `service-principal-secret` or `userpass` as the Auth Type, and supply the
+following details, discovered above, when asked:
 
 ```bash
 APP_ID
 SUB_ID
-TENANT_ID
+TENANT_ID # Only required when 'userpass' is the authentication method.
 APP_PASSWORD
 ```
 
+You can now [create the controller](#create-controller).
+
 !!! Note: If you add more than one credential, you will also need to set the
 default one to use with `juju set-default-credential`
-
-## Create controller
-
-
-```bash
-juju bootstrap mycloud azure
-```
-
-A successful bootstrap will result in the controller being visible in the
-[Azure portal](http://portal.azure.com):
-
-![bootstrap machine 0 in Azure portal](media/azure_portal-machine_0.png)
-
-
-!!! Note: By default new Azure accounts are limited to 10 cores. You may
-need to file a support ticket with Azure to raise this limit for your 
-account if you are deploying many or large applications.
 
 ## Compatibility with older versions of Juju
 
@@ -229,4 +291,6 @@ allocated to machines in an application-specific Availability Set. Read the
 [Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
 availability sets affect uptime guarantees.
 
-
+[subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
+[azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
+[azureportal]: http://portal.azure.com
