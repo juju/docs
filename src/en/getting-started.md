@@ -1,6 +1,4 @@
 Title: Getting started with Juju 2.0
-TODO:  Bug check, LP#1619971
-
 
 # Getting started with Juju 2.0
 
@@ -219,8 +217,9 @@ each. These addresses correspond to the subnet we created for LXD earlier on.
 By default, Juju is secure - you won't be able to connect to any applications
 on a public cloud unless they are specifically exposed using the 
 `juju expose <application>` command. This adjusts the relevant firewall 
-controls of the cloud to allow external access. Traffic to LXD is not locked 
-down by default, so for this example there is no need to perform this step.
+controls of the cloud to allow external access. However, traffic to LXD is not 
+locked down by default, so for this example there is no need to perform this
+step.
 
 From the status output, we can see that the IP address for the MediaWiki
 site we have created is 10.78.0.239. Open a browser and enter that address 
