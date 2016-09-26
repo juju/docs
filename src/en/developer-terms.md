@@ -20,11 +20,72 @@ order to deploy.
 
 ## Creating terms
 
-At the moment, terms can only be created by charm store administrators.
-Charm developers should send an email to juju@lists.ubuntu.com with:
-- the id of the term in the format of "vendor-app", such as "lorem-ipsum".
-- the full text of the terms to display to the user, appended to the body
-of the email.
+As a charm developer, you may push and release terms owned by a group of which
+you are a member. Groups are mapped onto Launchpad teams.
+
+### Pushing terms
+
+To push an initial or updated revision of a term, use `charm push-term`.
+
+```bash
+charm push-term terms.txt my-group/my-terms
+```
+
+This displays the assigned ID for the created term revision.
+
+```no-highlight
+my-group/my-terms/1
+```
+
+This pushes, or uploads, the contents in the local file `terms.txt` to the term
+`my-group/my-terms`. Because this is a new term, revision 1 is created.
+
+### Testing unreleased terms
+
+As a member of `my-group`, you can `juju agree` to your own
+unreleased term:
+
+```bash
+juju agree my-group/my-terms/1
+```
+
+However, until this revision is released, the term cannot be agreed to by
+non-owners.
+
+The term contents and metadata may also be viewed with `charm show-term`.
+
+```bash
+charm show-term my-group/my-terms/1
+```
+
+Which returns output like this:
+
+```yaml
+id: my-group/my-terms/1
+owner: my-group
+name: my-terms
+revision: 1
+createdon: 2016-04-20T13:28:54Z
+published: false
+content: |
+  Your terms here...
+```
+
+### Releasing terms
+
+Use `charm release-term` to release a term revision for general availability.
+Note that until a term revision is released, non-owners will be unable to agree
+to it. If your charm requires agreement to an unreleased revision, or any
+revision of a new, never-before-released term, users will not be able to agree
+to it, and will be unable to deploy the charm.
+
+When releasing, the revision to be released must be given:
+
+```bash
+charm release-term my-group/my-terms/1
+```
+
+## Requiring agreement to terms in your charm
 
 In order to make a charm require terms, the `terms` key has been introduced to
 the charm's `metadata.yaml`. For example:
@@ -35,13 +96,13 @@ summary: "That's a dummy charm with terms."
 description: |
     This is a longer description which
     potentially contains multiple lines.
-terms: ["lorem-ipsum"]
+terms: ["my-group/my-terms"]
 ```
 
 The `terms` key can include multiple terms to be required. It can also require
-specific versions of a term, i.e., `lorem-ipsum/2` would reference the second
-version of the `lorem-ipsum` term. Omitting the version will require the latest
-version.
+specific versions of a term, i.e., `my-group/my-terms/2` would reference the
+second version of the `my-group/my-terms` term. Omitting the version will
+require the latest version.
 
 ## Listing terms
 
@@ -52,30 +113,47 @@ installed via [charm-tools](./tools-charm-tools.html), while users interact
 with `juju`.
 
 `charm terms` shows the terms that you have created, and which charms they
-are associated with:
+are associated with.
 
 ```bash
-$ charm terms
-TERM         	CHARM
-lorem-ipsum/1	cs:trusty/terms-example-0
+charm terms
 ```
 
-You can also view the terms associated with a specific charm:
+This produces a listing of your terms.
+
+```no-highlight
+TERM         		CHARM
+my-group/my-terms/1	cs:trusty/terms-example-0
+```
+
+You can also view the terms associated with a specific charm.
+
 ```bash
-$ charm show cs:trusty/terms-example-0 terms
+charm show cs:trusty/terms-example-0 terms
+```
+
+This displays a subset of charm metadata; the terms required by the charm:
+
+```yaml
 terms:
-- lorem-ipsum/1
+- my-group/my-terms/1
 ```
 
-A user can view the list of terms they've agreed to via the
-`juju list-agreements` command:
+A user can view the list of terms they've agreed to with
+`juju list-agreements`.
 
 ```bash
 $ juju list-agreements
+```
+
+The output displays each term revision the user has agreed to:
+
+```json
 [
     {
         "user": "aisrael",
-        "term": "lorem-ipsum",
+        "owner": "my-group",
+        "term": "my-terms",
         "revision": 1,
         "created-on": "2016-04-20T21:01:24.84Z"
     }
