@@ -73,6 +73,19 @@ bash:
 action-set com.juju.result 'we are the champions'
 ```
 
+## add-metric
+Records a measurement which will be forwarded to the Juju controller. The same
+metric may not be collected twice in the same command.
+
+bash:
+```bash
+add-metric metric1=value1 [metric2=value2 …]
+```
+
+In Juju 2.0, `add-metric` may only be executed from the
+[`collect-metrics`](./reference-charm-hooks.html#collect-metrics) hook. Future
+releases of Juju may allow it in other contexts.
+
 
 ## close-port
 
