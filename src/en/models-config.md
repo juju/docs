@@ -65,22 +65,11 @@ The table below lists all the model keys which may be assigned a value.
 agent-metadata-url           | string |          |                          | URL of private stream
 agent-stream                 | string | released | released/devel/proposed  | Version of Juju to use for deploy/upgrades
 agent-version                | string |          |                          | The desired Juju agent version to use
-allow-lxc-loop-mounts        | bool   | false    |                          | whether loop devices are allowed to be mounted inside lxc containers
-api-port                     | int    | 17070    |                          | The TCP port for the API servers to listen on
 apt-ftp-proxy                | string |          |                          | The APT FTP proxy for the model
 apt-http-proxy               | string |          |                          | The APT HTTP proxy for the model
 apt-https-proxy              | string |          |                          | The APT HTTPS proxy for the model
 apt-mirror                   | string |          |                          | The APT mirror for the model
-authorized-keys              | string |          |                          | Any authorized SSH public keys for the model, as found in a ~/.ssh/authorized_keys file
-authorized-keys-path         | string |          |                          | Path to file containing SSH authorized keys
 automatically-retry-hooks    | bool   | true     |                          | Set policy on retying failed hooks. See [addition info below](#retrying-failed-hooks).
-block-all-changes            | bool   |          |                          | Whether all changes to the model will be prevented
-block-destroy-model          | bool   |          |                          | Whether the model will be prevented from destruction
-block-remove-object          | bool   |          |                          | Whether remove operations (machine, service, unit or relation) will be prevented
-ca-cert                      | string |          |                          | The certificate of the CA that signed the state server certificate, in PEM format
-ca-cert-path                 | string |          |                          | Path to file containing CA certificate
-ca-private-key               | string |          |                          | The private key of the CA that signed the state server certificate, in PEM format
-ca-private-key-path          | string |          |                          | Path to file containing CA private key
 default-series               | string |          | valid series name, e.g. 'xenial' | The default series of Ubuntu to use for deploying charms
 development                  | bool   | false    |                          | Whether the model is in development mode
 disable-network-management   | bool   | false    |                          | Whether to give network control to the provider instead of Juju controlling configuration. This can only be used with MAAS models and should otherwise be set to false(default) unless you want to take over network control from Juju because you have unique and well-defined needs. Setting this to 'true' with MAAS gives you the same behavior with containers as you already have with other providers: one machine-local address on a single network interface, bridged to the default bridge.
@@ -90,27 +79,18 @@ firewall-mode                | string | instance | instance/global/none     | Th
 ftp-proxy                    | string |          | url                      | The FTP proxy value to configure on instances, in the FTP_PROXY environment variable
 http-proxy                   | string |          | url                      | The HTTP proxy value to configure on instances, in the HTTP_PROXY environment variable
 https-proxy                  | string |          | url                      | The HTTPS proxy value to configure on instances, in the HTTPS_PROXY environment variable
+ignore-machine-addresses     | bool   | false    |                          | When true, the machine worker will not look up or discover any machine addresses
 image-metadata-url           | string |          | url                      | The URL at which the metadata used to locate OS image ids is located
 image-stream                 | string |          |                          | The simplestreams stream used to identify which image ids to search when starting an instance
+logforward-enabled           | bool   | false    |                          | Whether the log forward function is enabled
 logging-config               | string |          |                          | The configuration string to use when configuring Juju agent logging (see [this link](http://godoc.org/github.com/juju/loggo#ParseConfigurationString) for details)
-lxc-clone                    | bool   |          |                          | Whether to use lxc-clone to create new LXC containers
-lxc-clone-aufs               | bool   | false    |                          | Whether the LXC provisioner should create an LXC clone using AUFS if available
-lxc-default-mtu              | int    |          |                          | The MTU setting to use for network interfaces in LXC containers
-name                         | string |          |                          | The name of the current model
 no-proxy                     | string |          |                          | List of domain addresses not to be proxied (comma-separated)
 provisioner-harvest-mode     | string | destroyed| all/none/unknown/destroyed | What to do with unknown machines. See [harvesting section](#juju-lifecycle-and-harvesting)
 proxy-ssh                    | bool   | false    |                          | Whether SSH commands should be proxied through the API server
 resource-tags                | string | none     |                          | Space-separated list of key=value pairs used to apply as tags on supported cloud models
-rsyslog-ca-cert              | string |          |                          | The certificate of the CA that signed the rsyslog certificate, in PEM format
-rsyslog-ca-key               | string |          |                          | The private key of the CA that signed the rsyslog certificate, in PEM format
-set-numa-control-policy      | bool   | false    |                          | Tune Juju state-server to work with NUMA if present
 ssl-hostname-verification    | bool   | true     |                          | Whether SSL hostname verification is enabled 
-state-port                   | int    | 37017    |                          | Port for the API server to listen on
-storage-default-block-source | string |          |                          | The default block storage source for the model
-syslog-port                  | int    | 6514     |                          | Port for the syslog UDP/TCP listener to listen on
 test-mode                    | bool   | false    |                          | Whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store
-type                         | string |          | any of the supported provider types | Type of model, e.g. local, ec2
-uuid                         | string |          |                          | The UUID of the model
+transmit-vendor-metrics      | bool   | true     |                          | Whether the controller will send metrics collected from this model for use in anonymized aggregate analytics
 
 Some of these keys deserve further explanation. These are explored below.
 
