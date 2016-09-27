@@ -115,7 +115,7 @@ into environments that can be seamlessly managed, deployed and scaled.
 
 For example, different models can be deployed to different regions. You can see
 which regions your cloud supports with the `juju show-cloud google` command,
-and create a new model hosted `europe-west1` with the following:
+and create a new model hosted on `europe-west1` with the following:
 
 ```bash
 juju add-model gce-test europe-west1 
@@ -125,14 +125,14 @@ juju add-model gce-test europe-west1
 
 Applications themselves are deployed either as 'charms' or as 'bundles'. Charms
 are singular applications, such as [Haproxy][charmhaproxy] or
-[PostgreSQL][charmpsql], whereas 'bundles' are a curated collection of charms and
+[PostgreSQL][charmpsql], whereas bundles are a curated collection of charms and
 their relationships. Bundles are ideal for deploying [OpenStack][bundleopenstack], for instance,
 or [Kubernetes][bundlekubernetes]. 
 
 It's also possible to [write your own charms][diycharm] and deploy locally, or
 publish via the [Charm Store][charmstore].
 
-Deploying a 'charm' is as simple as searching for your required application on
+Deploying a charm is as simple as searching for your required application on
 the [Charm Store][charmstore], and using the 'juju' command to grab and deploy it
 automatically:
 
