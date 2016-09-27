@@ -1,15 +1,19 @@
 Title: Create a Google Compute Engine controller
-TODO:  Remove default model?
-       Image for Juju GUI
+TODO:  Still WIP: needs refinement and further details
+       Decide on a better example than Django
+       Remove default model?
+       Create a new model from the GUI
+       Image for Juju GUI with Haproxy
        Image for GCE Dashboard with resources
+       Check whether 'juju gui --with-credentials' will be a thing
 
 # Create a Google Compute Engine controller
 
 Juju is unrivalled in its ability to model and deploy dependable cloud
 distributed applications. To prove this, we're going to use Juju to deploy one
-such application - XXXX - with Google Compute Engine (GCE) in less than 20
+such application - Django - with Google Compute Engine (GCE) in less than 10
 minutes.  But you could just as easily use Amazon AWS or Microsoft Azure, and
-just as easily deploy Kubernetes (LINK), XX or even OpenStack(LINK). It's the
+just as easily deploy Kubernetes, Cassandra or even OpenStack. It's the
 magic of Juju that's making it happen.
 
 ## Step 1: Installation
@@ -77,8 +81,6 @@ Pushing Juju onto your new cloud is as simple as typing:
 ```bash
 juju bootstrap mycloud google
 ```
-
-
 This should only take a few minutes. You could use this time to brush up on
 some [Juju terminology][jujuterms]. 
 
@@ -181,15 +183,34 @@ peer      haproxy   haproxy   peer
 
 ## Step 8: Use Juju's GUI
 
+Juju includes a beautiful web interface. This allows you to perform almost all
+the same functions as the CLI, only without RSI. To launch the web interface in
+your default browser, type the following and use the output username and
+password to connect to the GUI via your browser:
 
+```bash
+juju gui --show-credentials
+```
+Not only does the web interface show you the current state of your applications
+and their relationships, it allows you to manage your models, resources and
+machines, and deploy both charms and bundles. 
 
-Skip the default model this time, go to add-model (xxx workload)
-Deploy that workload
-Launch the GUI to monitor the progress and visually see what’s up (with the
---with-credentials option)
-Create another model from the GUI
-Deploy a charm
-EOL ?
+For more details on how to use Juju's web interface, take a look at [our
+overview][jujugui].
+
+## Step 9: Deploy Django from the GUI
+
+We're now in a position to deploy Django. From the GUI, this really is as simple as
+clicking on the link to the store and searching for Django. It will appear as a
+bundle, which means it includes Django alongside PostgreSQL and Gunicorn. Click
+on 'Add to canvas' to import the bundle into your model, click on 'Commit
+changes' to review what's about to happen and finally 'Deploy'.  
+
+Monitor the GUI as the applications are deployed to GCE and when each
+application's colour changes to green, you're all set.
+
+Congratulations - you've just modelled deployed your own scaleable cloud
+application.
 
 
 [helpaws]: https://jujucharms.com/docs/stable/help-aws
@@ -204,3 +225,4 @@ EOL ?
 [bundlekubernetes]: https://jujucharms.com/canonical-kubernetes/
 [charmstore]: https://jujucharms.com/store
 [diycharm]: https://jujucharms.com/docs/2.0/developer-getting-started
+[jujugui]: https://jujucharms.com/docs/stable/controllers-gui
