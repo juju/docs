@@ -171,5 +171,15 @@ openstack endpoint create --region $REGION --publicurl $SWIFT_URL/simplestreams/
    --publicurl $SWIFT_URL/simplestreams/images product-streams
 ```
 
+### Bootstrap with Juju
 
+Now the simplestream service is registered and running you can create a controller on
+this cloud with the `juju bootstrap` command. The 
+
+```bash
+juju bootstrap <controller name>  <cloud> --config tools-metadata-url=xxx.xxx.xx.xx
+```
+
+The metadata-url specified with the config option should point to the endpoint 
+you created in the previous step.
 
