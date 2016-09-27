@@ -14,14 +14,14 @@ distributed applications. To prove this, we're going to use Juju to deploy one
 such application - Django - with Google Compute Engine (GCE) in less than 10
 minutes.  But you could just as easily use Amazon AWS or Microsoft Azure, and
 just as easily deploy Kubernetes, Cassandra or even OpenStack. It's the
-magic of Juju that's making it happen.
+magic of Juju that makes it happen.
 
 ## Step 1: Installation
 First, install Juju 2. If you're running Ubuntu 16.04 LTS (Xenial), this is as
 simple as entering `sudo apt install juju` into the terminal. 
 
 ## Step 2: Pick a cloud
-Type `juju list-clouds` and you'll output very similar to the following:
+Type `juju list-clouds` and you'll see output very similar to the following:
 
 ```bash
 CLOUD        TYPE        REGIONS
@@ -45,11 +45,11 @@ configure over the next couple of steps. But you could just as easily use
 
 ## Step 3: Download GCE credentials
 
-All you need to get started with Juju is a JSON-formatted credentials file for
-a new Compute Engine API-enabled project. Either sign up for a free 60 day/$300
-trial [Google Compute Engine trial][gcetrial], or login to your [GCE
-dashboard][gcedashboard] and see [Create a Project][gcenewproject] for further
-help if needed. 
+All you need to get started with GCE and Juju is a JSON-formatted credentials
+file for a new Compute Engine API-enabled project. Either sign up for a [free
+60 day/$300 trial][gcetrial], or connect to your [GCE dashboard][gcedashboard].
+If needed, see our GCE [Create a Project][gcenewproject] documentation for
+further help. 
 
 ## Step 4: Add credentials
 
@@ -58,9 +58,7 @@ Copy the credentials file somewhere sensible, such as
 `juju add-credential google`. You'll first be asked for an arbitrary name for
 you to identify the credentials with, followed by a prompt asking for 'Auth
 Type'. Press return to select the default `jsonfile*` type and then enter the
-absolute path to the credentials file.
-
-Your 'add-credential' session should look like the following:
+absolute path to the credentials file:
 
 ```bash
 Enter credential name: juju-demo
@@ -85,7 +83,7 @@ This should only take a few minutes. You could use this time to brush up on
 some [Juju terminology][jujuterms]. 
 
 When complete, Juju will have instantiated a new controller and created a
-default model with output should be similar to the following: 
+default model with output similar to the following: 
 
 ```bash
 Creating Juju controller "mycloud" on google/us-east1
@@ -111,30 +109,13 @@ Initial model "default" added.
 ```
 ## Step 6: Create a model
 
-Before deploying an application, we're first going to create a new model.
+Before deploying an application, we're going to first create a new model.
 Models are used by Juju group applications, resources and their relationships
 into environments that can be seamlessly managed, deployed and scaled. 
 
 For example, different models can be deployed to different regions. You can see
-which regions your cloud supports with the `juju show-cloud google` command.
-This show output similar to the following:
-
-```bash
-defined: public
-type: gce
-auth-types: [jsonfile, oauth2]
-regions:
-  us-east1:
-    endpoint: https://www.googleapis.com
-  us-central1:
-    endpoint: https://www.googleapis.com
-  europe-west1:
-    endpoint: https://www.googleapis.com
-  asia-east1:
-    endpoint: https://www.googleapis.com
-```
-
-You could create a new model hosted `europe-west1` with the following command:
+which regions your cloud supports with the `juju show-cloud google` command,
+and create a new model hosted `europe-west1` with the following:
 
 ```bash
 juju add-model gce-test europe-west1 
@@ -159,9 +140,9 @@ automatically:
 juju deploy haproxy
 
 ```
-You can check of on the state of any deployment, model or controller with the
-'juju status' command. If query the status directly after deploying 'haproxy',
-for instance, you'll see output similar to the following:
+You can check on the state of any deployment, model or controller with the
+'juju status' command. If you query the status directly after deploying
+'haproxy', for instance, you'll something similar to this:
 
 ```bash
 MODEL     CONTROLLER  CLOUD/REGION         VERSION
@@ -211,7 +192,6 @@ application's colour changes to green, you're all set.
 
 Congratulations - you've just modelled deployed your own scaleable cloud
 application.
-
 
 [helpaws]: https://jujucharms.com/docs/stable/help-aws
 [helpazure]: https://jujucharms.com/docs/stable/help-azure
