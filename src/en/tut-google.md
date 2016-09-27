@@ -110,7 +110,7 @@ Initial model "default" added.
 ## Step 6: Create a model
 
 Before deploying an application, we're going to first create a new model.
-Models are used by Juju group applications, resources and their relationships
+Models are used by Juju to group applications, resources and their relationships
 into environments that can be seamlessly managed, deployed and scaled. 
 
 For example, different models can be deployed to different regions. You can see
@@ -190,7 +190,7 @@ changes' to review what's about to happen and finally 'Deploy'.
 Monitor the GUI as the applications are deployed to GCE and when each
 application's colour changes to green, you're all set.
 
-Congratulations - you've just modelled deployed your own scalable cloud
+Congratulations - you've just modelled and deployed your own scalable cloud
 application.
 
 [helpaws]: https://jujucharms.com/docs/stable/help-aws
