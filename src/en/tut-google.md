@@ -190,7 +190,7 @@ changes' to review what's about to happen and finally 'Deploy'.
 Monitor the GUI as the applications are deployed to GCE and when each
 application's colour changes to green, you're all set.
 
-Congratulations - you've just modelled deployed your own scaleable cloud
+Congratulations - you've just modelled deployed your own scalable cloud
 application.
 
 [helpaws]: https://jujucharms.com/docs/stable/help-aws
