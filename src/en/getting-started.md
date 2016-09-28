@@ -1,13 +1,10 @@
 Title: Getting started with Juju 2.0
-TODO:  Bug check, LP#1619971
-
 
 # Getting started with Juju 2.0
 
 These instructions will get you up and running and deliver the best-possible
 experience with Juju. At the moment, that means using the latest release of
-Ubuntu: [16.04 LTS (Xenial)][Xenial-download]. Either the Server or the Desktop
-edition will suffice.
+Ubuntu: [16.04 LTS (Xenial)][Xenial-download].
 
 See the [general Getting Started page][getting-started-general] if you're using
 something other than Xenial.
@@ -15,12 +12,7 @@ something other than Xenial.
 Apart from Juju, the following technologies will be used:
    
 - [LXD][LXD-upstream]: a hypervisor for LXC, providing fast, secure containers.
-- [ZFS][ZFS-wiki]: a highly performant and feature-rich filesystem and logical volume manager.
-
-[Xenial-download]: http://www.ubuntu.com/download/ "Xenial download"
-[getting-started-general]: ./getting-started-general.html "general Getting Started"
-[LXD-upstream]: https://linuxcontainers.org/lxd/ "LXD upstream"
-[ZFS-wiki]: https://wiki.ubuntu.com/ZFS "ZFS Ubuntu wiki"
+- [ZFS][ZFS-wiki]: a highly efficient and feature-rich filesystem and logical volume manager.
 
 
 ## Install the software
@@ -43,12 +35,6 @@ command:
 groups
 ```
 
-Sample output is provided below:
-
-```no-highlight
-lxd adm cdrom sudo dip plugdev lpadmin sambashare ubuntu
-```
-
 Your groups may vary, but if `lxd` is absent you should refresh group
 membership with:
 
@@ -64,23 +50,16 @@ process, enter:
 sudo lxd init
 ```
 
-You will be asked several questions. In the example below, LXD will i) create a
-32GB ZFS pool, ii) refrain from putting the pool on a separate block device,
-iii) refrain from listening over the network, and iv) trigger the setup of a
-bridge network (required for Juju).
-
-Pressing Enter will accept the default answer (provided in square
-brackets). Only one answer in the below example uses a non-default value.
- 
-!!! Note: Make sure there is sufficient free space on your host to accomodate
-the requested pool size.
+You will be asked several questions to configure LXD for use. Pressing Enter
+will accept the default answer (provided in square brackets). Only one answer
+in the below example uses a non-default value.
 
 ```no-highlight
 Name of the storage backend to use (dir or zfs) [default=zfs]: 
 Create a new ZFS pool (yes/no) [default=yes]? 
 Name of the new ZFS pool [default=lxd]:
 Would you like to use an existing block device (yes/no) [default=no]? 
-Size in GB of the new loop device (1GB minimum) [default=10GB]: 32
+Size in GB of the new loop device (1GB minimum) [default=10GB]: 20
 Would you like LXD to be available over the network (yes/no) [default=no]? 
 Do you want to configure the LXD bridge (yes/no) [default=yes]?
 ```
@@ -88,7 +67,7 @@ Do you want to configure the LXD bridge (yes/no) [default=yes]?
 The bridge network will then be configured via a second round of questions.
 Except in the case where the randomly chosen subnet may conflict with an
 existing one in your local environment, it is fine to accept all the default
-answers. In particular, IPv6 networking is not required (the last question).
+answers. IPv6 networking (the last question) is not required for Juju.
 
 ^# Walkthrough of network configuration  
 
@@ -179,7 +158,7 @@ the one we just created:
   
 ```no-highlight
 CONTROLLER  MODEL    USER         ACCESS+    CLOUD/REGION         MODELS+ MACHINES+  VERSION+
-lxd-test*   default  admin@local  superuser  localhost/localhost        2 	  1  2.0-beta18  
+lxd-test*   default  admin@local  superuser  localhost/localhost        2 	  1       2.0  
 
 + these are the last known values, run with --refresh to see the latest information.
 ```
@@ -194,7 +173,7 @@ The following command shows the currently active controller, model, and user:
 juju whoami
 ```
 
-Our example provides this output:
+In our example, the output should look like this:
 
 ```no-highlight
 Controller:  lxd-test
@@ -202,22 +181,18 @@ Model:       default
 User:        admin@local
 ```
 
-!!! Note: In the output we see that user 'admin' is a local user. Future
-functionality may include remotely authenticated users.
-
-
 ## Deploy
 
 Juju is now ready to deploy applications from among the hundreds included in
 the [Juju charm store][charm store]. It is a good idea to test your new model.
-How about a Mediawiki site?
+How about a MediaWiki site?
 
 ```bash
 juju deploy wiki-simple
 ```
 
 This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
-of applications, in this case 'Mediawiki', and a database to run it 
+of applications, in this case 'MediaWiki', and a database to run it 
 with. Juju will install both applications and add a relation between them - 
 this is part of the magic of Juju: it isn't just about deploying software, Juju 
 also knows how to connect it all together.
@@ -235,18 +210,20 @@ look something like this:
 ![juju status](./media/juju-mediawiki-status.png)
 
 There is a lot of useful information there! The important parts for now are
-the APP section, which shows that Mediawiki (shortened to 'wiki') and MySQL are
+the APP section, which shows that MediaWiki (shortened to 'wiki') and MySQL are
 installed, and the UNIT section, which shows the IP addresses allocated to
 each. These addresses correspond to the subnet we created for LXD earlier on.
 
-Regarding security, applications running on a public cloud are not accessible
-until a change is made on that cloud's firewall. Juju will do this for you via
-the `juju expose <application>` command (here, our application is 'wiki'). Yet
-we are not using a public cloud in this example and LXD traffic is not locked
-down by default so there is nothing for Juju to unblock/expose.
+By default, Juju is secure - you won't be able to connect to any applications
+on a public cloud unless they are specifically exposed using the 
+`juju expose <application>` command. This adjusts the relevant firewall 
+controls of the cloud to allow external access. However, traffic to LXD is not 
+locked down by default, so for this example there is no need to perform this
+step.
 
-The IP address we're interested in is 10.255.47.112. Point your browser at that
-address to see the site:
+From the status output, we can see that the IP address for the MediaWiki
+site we have created is 10.78.0.239. Open a browser and enter that address 
+to see the site.
 
 !["mediawiki site"](./media/juju-mediawiki-site.png)
 
@@ -278,3 +255,7 @@ We suggest you take the time to read the following:
 [concepts]: ./juju-concepts.html "Juju concepts"
 [charms]: ./charms.html
 [models]: ./models.html
+[Xenial-download]: http://www.ubuntu.com/download/ "Xenial download"
+[getting-started-general]: ./getting-started-general.html "general Getting Started"
+[LXD-upstream]: https://linuxcontainers.org/lxd/ "LXD upstream"
+[ZFS-wiki]: https://wiki.ubuntu.com/ZFS "ZFS Ubuntu wiki"
