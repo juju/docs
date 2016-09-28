@@ -2,8 +2,6 @@ Title: Create a Google Compute Engine controller
 TODO:  Still WIP: needs refinement and further details
        Decide on a better example than Django
        Remove default model?
-       Create a new model from the GUI
-       Image for Juju GUI with Haproxy
        Image for GCE Dashboard with resources
        Check whether 'juju gui --with-credentials' will be a thing
 
@@ -39,7 +37,7 @@ us-west-1
 rackspace    rackspace   dfw, ord, iad, lon, syd, hkg
 localhost    lxd         localhost
 ```
-As mentioned, we're going with Google's Cloud Engine (gce), which we'll
+As mentioned, we're going with Google's Cloud Engine, which we'll
 configure over the next couple of steps. But you could just as easily use
 [Amazon AWS][helpaws] or [Microsoft Azure][helpazure]. 
 
@@ -166,32 +164,57 @@ peer      haproxy   haproxy   peer
 
 Juju includes a beautiful web interface. This allows you to perform almost all
 the same functions as the CLI, only without RSI. To launch the web interface in
-your default browser, type the following and use the output username and
-password to connect to the GUI via your browser:
+your default browser, type the following:
 
 ```bash
 juju gui --show-credentials
 ```
-Not only does the web interface show you the current state of your applications
-and their relationships, it allows you to manage your models, resources and
+Then use the output username and password to connect to the GUI via your browser:
+
+![Juju GUI login](media/tut-gce-gui_login.png)
+
+
+After logging in, you'll see the Juju GUI overview for the current model. Not
+only does the web interface show you the current state of your applications and
+their relationships, it allows you to manage your models, resources and
 machines, and deploy both charms and bundles. 
+
+For example, you can use the GUI to switch between the two models currently
+running on your controller - the default one we left empty and the new one we
+created for Haproxy. Look for the drop-down menu to the right of the user
+profile (which currently says 'admin@local'). In this drop-down list you should
+find both 'default' and 'gce-test' models, and selecting one will switch the
+current model.
+
+![Juju GUI model switching menu](media/tut-gce-gui_model.png)
+
+To create a new model from the GUI, click on 'Manage' from the drop-down model
+list. This will open a more detailed list of the current models. A new model
+can now be created by clicking on the 'New' button at the top of the list,
+entering a name for the new model, and clicking submit. Click on 'Manage' for
+this model to return to the main view.
 
 For more details on how to use Juju's web interface, take a look at [our
 overview][jujugui].
 
 ## Step 9: Deploy Django from the GUI
 
-We're now in a position to deploy Django. From the GUI, this really is as simple as
-clicking on the link to the store and searching for Django. It will appear as a
-bundle, which means it includes Django alongside PostgreSQL and Gunicorn. Click
-on 'Add to canvas' to import the bundle into your model, click on 'Commit
-changes' to review what's about to happen and finally 'Deploy'.  
+With the blank canvas of a new model created, we're now in a position to deploy
+Django.
+
+From the GUI, this really is as simple as clicking on the link to the store and
+searching for Django. It will appear as a bundle, which means it includes
+Django alongside PostgreSQL and Gunicorn. Click on 'Add to canvas' to import
+the bundle into your model, click on 'Commit changes' to review what's about to
+happen and finally 'Deploy'.  
 
 Monitor the GUI as the applications are deployed to GCE and when each
 application's colour changes to green, you're all set.
 
 Congratulations - you've just modelled and deployed your own scalable cloud
 application.
+
+![Juju GUI model of Django bundle](media/tut-gce-gui_django.png)
 
 [helpaws]: https://jujucharms.com/docs/stable/help-aws
 [helpazure]: https://jujucharms.com/docs/stable/help-azure
