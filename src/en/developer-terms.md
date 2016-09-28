@@ -143,7 +143,7 @@ A user can view the list of terms they've agreed to with
 `juju list-agreements`.
 
 ```bash
-$ juju list-agreements
+juju list-agreements
 ```
 
 The output displays each term revision the user has agreed to:
