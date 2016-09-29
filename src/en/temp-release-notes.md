@@ -1140,11 +1140,6 @@ $ juju model-defaults --reset key,key2
     Lp 1547665
   * Cannot deploy a dense openstack bundle with native deploy
     Lp 1555808
-  * Cannot get status after restore is denied
-    Lp 1595686
-  * [aws] adding a machine post-bootstrap on the controller model closes of
-    api port in controller security group
-    Lp 1598164
   * Credentials files containing Joyent credentials must be updated to
     work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
     Storage")
