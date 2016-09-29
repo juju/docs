@@ -1,28 +1,14 @@
-# Juju 2.0-beta18
+# Juju 2.0-rc2
 
-A new development release of Juju, juju 2.0-beta18, is now available.
-This release replaces version 2.0-beta17.
+A new development release of Juju, juju 2.0-rc2, is now available.
+This release replaces version 2.0-rc1.
 
-## What's New in RC1
-
-* The Juju client now works on any Linux flavour. When bootstrapping
-  with local tools, it's now possible to create a controller of any
-  supported Linux series regardless of the Linux flavour the client
-  is running on.
-* juju resolved command retries failed hooks by default:
-  juju resolved <unit> // marks unit errors resolved and retries failed hooks
-  juju resolved --no-retry <unit> //marks unit errors resolved w/o retrying hooks
-* MAAS 2.0 Juju provider has been updated to use MAAS API 2.0's owner
-  data for instance tagging.
-* networking fixes for containers in MAAS 2.0 when the parent device is
-  unconfigured. (#1566791)
-* Azure provider performance has been enhanced, utilising Azure Resource
-  Manager templates, and improved parallelisation.
-* Azure provider now supports an "interactive" auth-type, making it much
-  easier to set up credentials for bootstrapping. The "userpass"
-  auth-type has been deprecated, and replaced with
-  "service-principal-secret".
-
+## What's New in RC2
+* The upgrade-charm command now has --config and --storage flags, so you can atomically update application config and storage constraints at the same time as upgrading the charm. This means you can now upgrade charms with additional required storage (https://bugs.launchpad.net/juju/+bug/1504658)
+* get-controller-config has been renamed to controller-config to be consistent with the rest of the config commands.
+* Juju no longer auto creates bridges for interfaces in MAAS that are unconfigured.
+* kill-controller now as a --timeout flag that allows the user to set the time to wait before direct destruction.
+* Rackspace cloud now works out of the box with updated add-credential and streams use.
 
 ## Notable Changes
 
@@ -74,72 +60,70 @@ The "state-server" from Juju 1.x becomes a "controller" in 2.0.
 
 Juju commands have moved to a flat command structure instead of nested command structure:
 
-| 1.25 command                          | 2.0-beta command |
-| --- | --- |
-| juju environment destroy              | juju destroy-model * *** |
-| juju environment get                  | juju get-model-config *** |
-| juju environment get-constraints      | juju get-model-constraints ** |
-| juju environment retry-provisioning   | juju retry-provisioning |
-| juju environment set                  | juju set-model-config *** |
-| juju environment set-constraints      | juju set-model-constraints ** |
-| juju environment share                | juju share-model *** |
-| juju environment unset                | juju unset-model ** *** |
-| juju environment unshare              | juju unshare-model *** |
-| juju environment users                | juju list-shares |
-| juju user add                         | juju add-user |
-| juju user change-password             | juju change-user-password |
-| juju user credentials                 | juju get-user-credentials |
-| juju user disable                     | juju disable-user |
-| juju user enable                      | juju enable-user |
-| juju user info                        | juju show-user |
-| juju user list                        | juju list-users |
-| juju machine add                      | juju add-machine ** |
-| juju machine remove                   | juju remove-machine ** |
-| \<new in 2.0\>                        | juju list-machines |
-| \<new in 2.0\>                        | juju show-machines |
-| juju authorised-keys add              | juju add-ssh-key |
-| juju authorised-keys list             | juju list-ssh-keys |
-| juju authorised-keys delete           | juju remove-ssh-key |
-| juju authorised-keys import           | juju import-ssh-key |
-| juju get                              | juju get-config |
-| juju set                              | juju set-config |
-| juju get-constraints                  | juju get-model-constraints |
-| juju set-constraints                  | juju set-model-constraints |
-| juju get-constraints <application>    | juju get-constraints |
-| juju set-constraints <application>    | juju set-constraints |
-| juju backups create                   | juju create-backup *** |
-| juju backups restore                  | juju restore-backup *** |
-| juju action do                        | juju run-action *** |
-| juju action defined                   | juju list-actions *** |
-| juju action fetch                     | juju show-action-output *** |
-| juju action status                    | juju show-action-status *** |
-| juju storage list                     | juju list-storage *** |
-| juju storage show                     | juju show-storage *** |
-| juju storage add                      | juju add-storage *** |
-| juju space create                     | juju add-space *** |
-| juju space list                       | juju list-spaces *** |
-| juju subnet add                       | juju add-subnet *** |
-| juju ensure-availability              | juju enable-ha *** |
+    1.25 command                          2.0-beta command
 
-\* the behaviour of destroy-environment/destroy-model has changed, see
-https://jujucharms.com/docs/devel/controllers
-\*\* these commands existed but are now the recommended approach
-\*\*\* this is an alias, but will be the primary command going forward
+    juju environment destroy              juju destroy-model * ***
+    juju environment get                  juju get-model-config ***
+    juju environment get-constraints      juju get-model-constraints **
+    juju environment retry-provisioning   juju retry-provisioning
+    juju environment set                  juju set-model-config ***
+    juju environment set-constraints      juju set-model-constraints **
+    juju environment share                juju share-model ***
+    juju environment unset                juju unset-model ** ***
+    juju environment unshare              juju unshare-model ***
+    juju environment users                juju list-shares
+    juju user add                         juju add-user
+    juju user change-password             juju change-user-password
+    juju user credentials                 juju get-user-credentials
+    juju user disable                     juju disable-user
+    juju user enable                      juju enable-user
+    juju user info                        juju show-user
+    juju user list                        juju list-users
+    juju machine add                      juju add-machine **
+    juju machine remove                   juju remove-machine **
+    <new in 2.0>                          juju list-machines
+    <new in 2.0>                          juju show-machines
+    juju authorised-keys add              juju add-ssh-key
+    juju authorised-keys list             juju list-ssh-keys
+    juju authorised-keys delete           juju remove-ssh-key
+    juju authorised-keys import           juju import-ssh-key
+    juju get                              juju config
+    juju set                              juju config
+    juju get-constraints                  juju get-model-constraints
+    juju set-constraints                  juju set-model-constraints
+    juju get-constraints <application>    juju get-constraints
+    juju set-constraints <application>    juju set-constraints
+    juju backups create                   juju create-backup ***
+    juju backups restore                  juju restore-backup ***
+    juju action do                        juju run-action ***
+    juju action defined                   juju list-actions ***
+    juju action fetch                     juju show-action-output ***
+    juju action status                    juju show-action-status ***
+    juju storage list                     juju list-storage ***
+    juju storage show                     juju show-storage ***
+    juju storage add                      juju add-storage ***
+    juju space create                     juju add-space ***
+    juju space list                       juju list-spaces ***
+    juju subnet add                       juju add-subnet ***
+    juju ensure-availability              juju enable-ha ***
+
+    * the behaviour of destroy-environment/destroy-model has changed, see
+      https://jujucharms.com/docs/devel/controllers
+    ** these commands existed but are now the recommended approach
+    *** this is an alias, but will be the primary command going forward
 
 These extra commands were previously under the "jes" developer feature
 flag but are now available out of the box:
 
-| 1.25 command                         | 2.0-beta command |
-| --- | --- |
-| juju system create-environment       | juju add-model |
-| juju system destroy                  | destroy-controller |
-| juju system environments             | juju list-models |
-| juju system kill                     | juju kill-controller |
-| juju system list                     | juju list-controllers |
-| juju system list-blocks              | juju list-all-blocks |
-| juju system login                    | juju login |
-| juju system remove-blocks            | juju remove-all-blocks |
-| juju system use-environment          | juju use-model |
+    juju system create-environment         juju add-model
+    juju system destroy                    juju destroy-controller
+    juju system environments               juju list-models
+    juju system kill                       juju kill-controller
+    juju system list                       juju list-controllers
+    juju system list-blocks                juju list-all-blocks
+    juju system login                      juju login
+    juju system remove-blocks              juju remove-all-blocks
+    juju system use-environment            juju use-model
 
 In general:
 * listing things should start with 'list-'
@@ -461,6 +445,8 @@ In the initial release of this provider, each machine will be allocated
 a public IP address. In a future release, we will only allocate public
 IP addresses to machines that have exposed applications, to enable
 allocating more machines than there are public IP addresses.
+
+To add credentials for Azure, run the command “juju add-credential azure”. You will be prompted to enter your subscription ID, which you can find in the Azure portal (https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade). You will then be prompted to open a URL to authenticate with Azure, and authorise Juju to create credentials on your behalf.
 
 
 ### New Support for Rackspace
@@ -824,8 +810,8 @@ relevant sub-commands:
 
 For more information on the new support for channels in the Charm Store
 and how they work, please see our
-[documentation](https://jujucharms.com/docs/devel/authors-charm-store#entities-explained)
-on the subject.
+[documentation](https://jujucharms.com/docs/devel/authors-charm-store
+#entities-explained) on the subject.
 
 
 ### Keystone 3 support in Openstack.
@@ -933,7 +919,7 @@ clouds:
 When enabled, log messages for all hosted models in a controller are forwarded to a syslog server over a secure TLS connection. The easiest way to configure the feature is to provide a config.yaml file at bootstrap. 
 
 $ juju bootstrap <controllername> <cloud>
-	--config logforward-enabled=true --config logconfig.yaml
+    --config logforward-enabled=true --config logconfig.yaml
 
 The contents of the yaml file should currently be as follows:
 
@@ -1021,49 +1007,30 @@ postgresql  9.5.3    active  false    local   postgresql  0    ubuntu
 
 The syntax used to get and set model configuration values has changed.
 
-
 #### Examples
 
 Retrieve the full set of configuration for "application" and display it in YAML form.
-
-    juju config --format=yaml application
-
-    key: foo
-    Key2: bar
-
+$ juju config --format=yaml application
+key: foo
+Key2: bar
 Set the configuration for key to value and key2 to value2.
-
-    juju config application key=value key2=value2
-
+$ juju config application key=value key2=value2
 Retrieve just the value for a single key.
-
-    juju config application key
-
-    value
-
+$ juju config application key
+value
 Reset the value of key and key2 to the default value as defined by the charm.
-
-    juju config application --reset key,key2
-
-Configuration can also take a model identifier to allow you to
-set/retrieve the value from a model that is not your current default,
-and you can set and reset values on the same request, but you cannot
-retrieve a value and set or reset a value at the same time.
-
-    juju config -m controller:model application key=foo --reset key2
-
+$ juju config application --reset key,key2
+Configuration can also take a model identifier to allow you to set/retrieve the value from a model that is not your current default, and you can set and reset values on the same request, but you cannot retrieve a value and set or reset a value at the same time.
+    $ juju config -m controller:model application key=foo --reset key2
 
 ### Shared Model Config
 
 New/changed commands relevant to this feature:
-
   - juju model-config
   - juju get-controller-config
   - juju show-model
 
-The management of hosted model configuration has been improved in
-several ways:
-
+The management of hosted model configuration has been improved in several ways:
   - shared config can be defined which will be used for all new models
     unless overridden by the user, either at model creation time using
     --config arguments or using juju set-model-config later
@@ -1076,7 +1043,6 @@ several ways:
     available using juju get-controller-config
 
 There are 4 sources of model attribute values:
-
   1. default - hard coded into Juju or the cloud provider
   2. controller - shared by all models created on controllers within an HA environment
   3. region - shared by all models running in a given cloud region
@@ -1116,7 +1082,6 @@ An example juju model-config output:
     test-mode                   default     False
 
 Points of note are that:
-
   - all model attributes are shown, enabling the user to see what values
     are available to be set
   - when a new model is created, the values are forked at that time so
@@ -1126,18 +1091,14 @@ Points of note are that:
   - the FROM value is calculated dynamically so that if a default value
     changes to match the model, the output is adjusted accordingly
 
-The behaviour of juju model-config --reset has changed. Previously, any
-reset attribute would revert to the empty value. Now, the value will
-revert to the closest inherited value. In the case above:
-
+The behaviour of juju model-config --reset has changed. Previously, any reset attribute would revert to the empty value. Now, the value will revert to the closest inherited value. In the case above:
   - ftp-proxy has inherited the controller value http://local
   - juju set-model-config ftp-proxy=http://another will set a new "model"
     value for this attribute
   - juju unset-model-config ftp-proxy will revert to the controller value
     http://local
 
-For this release, shared controller config attributes are specified in
-the clouds.yaml file.
+For this release, shared controller config attributes are specified in the clouds.yaml file.
 
     clouds:
      lxdtest:
@@ -1148,42 +1109,29 @@ the clouds.yaml file.
          ftp-proxy: http://local
 
 These cannot be changed once set. The next Juju beta will include new functionality to:
-
   - set and unset shared controller attributes
-  - display the values of shared aattributes used when creating models, and
+  - display the values of shared attributes used when creating models, and
     where those attributes are defined (default or controller)
   - allow shared attributes to be specified for each cloud region instead
     of just the controller
 
-
 #### Examples
-
 Retrieve the full set of configuration defaults and display it in YAML form.
-
-    juju model-defaults --format=yaml
-
-    agent-metadata-url:
-      default: ""
-    agent-stream:
-      default: released
-    apt-ftp-proxy:
-      default: ""
-    ...
-
-Set the default configuration value for all models in the controller for
-key to value and key2 to value2.
-
-    juju model-defaults key=value key2=value2
-
+$ juju model-defaults --format=yaml
+agent-metadata-url:
+  default: ""
+agent-stream:
+  default: released
+apt-ftp-proxy:
+  default: ""
+...
+Set the default configuration value for all models in the controller for key to value and key2 to value2.
+$ juju model-defaults key=value key2=value2
 Retrieve just the value for a single key.
-
-    juju model-defaults key
-
-    value
-
+$ juju model-defaults key
+value
 Reset the value of key and key2 to the next closest default value.
-
-    juju model-defaults --reset key,key2
+$ juju model-defaults --reset key,key2
 
 
 ### Known issues
@@ -1192,6 +1140,11 @@ Reset the value of key and key2 to the next closest default value.
     Lp 1547665
   * Cannot deploy a dense openstack bundle with native deploy
     Lp 1555808
+  * Cannot get status after restore is denied
+    Lp 1595686
+  * [aws] adding a machine post-bootstrap on the controller model closes of
+    api port in controller security group
+    Lp 1598164
   * Credentials files containing Joyent credentials must be updated to
     work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
     Storage")
