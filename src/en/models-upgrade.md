@@ -68,7 +68,7 @@ juju upgrade-juju
 Upgrade the model by specifying the version:
 
 ```bash
-juju upgrade-juju --version 2.0.3
+juju upgrade-juju --agent-version 2.0.3
 ```
 
 Track the progress with:
