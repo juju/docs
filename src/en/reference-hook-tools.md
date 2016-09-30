@@ -76,6 +76,7 @@ action-set com.juju.result 'we are the champions'
 
 
 ## add-metric
+
 Records a measurement which will be forwarded to the Juju controller. The same
 metric may not be collected twice in the same command.
 
@@ -90,19 +91,24 @@ releases of Juju may allow it in other contexts.
 
 
 ## application-version-set
-Usage: application-version-set <new-version>
 
-Summary:
-specify which version of the application is deployed
+Specify which version of the application is deployed.
 
-Details:
-application-version-set tells Juju which version of the application
-software is running. This could be a package version number or some
-other useful identifier, such as a Git hash, that indicates the
-version of the deployed software. (It shouldn't be confused with the
-charm revision.) The version set will be displayed in "juju status"
-output for the application.
+python:
+```python
+from charmhelpers.core.hookenv import application_version_set
 
+@hook('update-status')
+def update_application_version():
+    application_version_set('1.1.10')
+```
+
+```bash
+@hook 'update-status'
+function update_status() {
+    application-version-set 1.1.10
+}
+```
 
 
 ## close-port
