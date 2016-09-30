@@ -16,6 +16,7 @@ individual commands run the command with the -h flag.
 !!! Note: Many of the tools produce text based output, and those that do accept
 a `--format` flag which can be set to json or yaml as desired.
 
+
 ## action-fail
 
 `action-fail` sets the action's fail state with a given error message. Using
@@ -85,6 +86,42 @@ add-metric metric1=value1 [metric2=value2 …]
 In Juju 2.0, `add-metric` may only be executed from the
 [`collect-metrics`](./reference-charm-hooks.html#collect-metrics) hook. Future
 releases of Juju may allow it in other contexts.
+
+
+## add-metric
+
+Records a measurement which will be forwarded to the Juju controller. The same
+metric may not be collected twice in the same command.
+
+bash:
+```bash
+add-metric metric1=value1 [metric2=value2 …]
+```
+
+In Juju 2.0, `add-metric` may only be executed from the
+[`collect-metrics`](./reference-charm-hooks.html#collect-metrics) hook. Future
+releases of Juju may allow it in other contexts.
+
+
+## application-version-set
+
+Specify which version of the application is deployed.
+
+python:
+```python
+from charmhelpers.core.hookenv import application_version_set
+
+@hook('update-status')
+def update_application_version():
+    application_version_set('1.1.10')
+```
+
+```bash
+@hook 'update-status'
+function update_status() {
+    application-version-set 1.1.10
+}
+```
 
 
 ## close-port
@@ -272,30 +309,6 @@ network-get options <binding-name> --primary-address
 ```
 
 
-## opened-ports
-
-`opened-ports` lists all ports or ranges opened by the **unit**. The
-opened-ports hook tool lists all the ports currently opened **by the running
-charm**. It does not, at the moment, include ports which may be opened by other
-charms co-hosted on the same machine
-[lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770).
-
-!!! Note: opening ports is transactional (i.e. will take place on successfully
-exiting the current hook), and therefore `opened-ports` will not return any
-values for pending `open-port` operations run from within the same hook.
-
-python:
-```python
-from subprocess import check_output
-
-range = check_output(["opened-ports"])
-```
-bash:
-```bash
-opened-ports
-```
-
-
 ## open-port
 
 `open-port` registers a port or range to open on the public-interface. On public
@@ -320,6 +333,31 @@ open-port 80/tcp
 open-port 1234/udp
 ```
 
+
+## opened-ports
+
+`opened-ports` lists all ports or ranges opened by the **unit**. The
+opened-ports hook tool lists all the ports currently opened **by the running
+charm**. It does not, at the moment, include ports which may be opened by other
+charms co-hosted on the same machine
+[lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770).
+
+!!! Note: opening ports is transactional (i.e. will take place on successfully
+exiting the current hook), and therefore `opened-ports` will not return any
+values for pending `open-port` operations run from within the same hook.
+
+python:
+```python
+from subprocess import check_output
+
+range = check_output(["opened-ports"])
+```
+bash:
+```bash
+opened-ports
+```
+
+
 ## payload-status-set
 
 `payload-status-set` is used to update the current status of a registered payload.
@@ -342,6 +380,7 @@ bash:
 ```shell
 payload-status-set monitor abcd13asa32c starting
 ```
+
 
 ## payload-register
 
@@ -594,6 +633,7 @@ the unit belongs if the unit is the leader, for example:
 ```bash
 juju run --unit ubuntu/0 'status-get --application
 ```
+
 
 ## status-set
 
