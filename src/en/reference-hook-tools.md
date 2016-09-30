@@ -103,6 +103,7 @@ def update_application_version():
     application_version_set('1.1.10')
 ```
 
+bash:
 ```bash
 @hook 'update-status'
 function update_status() {
