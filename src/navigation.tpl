@@ -47,6 +47,7 @@
                 <li><a href="charms-working-with-units.html">Working with Units</a></li>
                 <li><a href="actions.html">Working with Actions</a></li>
                 <li><a href="charms-storage.html">Using storage</a></li>
+                <li><a href="charms-metrics.html">Viewing utilization with metrics</a></li>
             </ul>
         </li>
         <li><a href="charms-bundles.html">Charm bundles</a></li>
@@ -111,6 +112,7 @@
             </ul>
         </li>
         <li><a href="developer-terms.html">Juju Terms</a></li>
+        <li><a href="developer-metrics.html">Juju Metrics</a></li>
         <li><a href="developer-resources.html">Juju Resources</a></li>
         <li class="section"><a class="header" href="developer-leadership.html">Implementing Leadership</a>
             <ul class="sub">
