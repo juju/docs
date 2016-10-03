@@ -37,17 +37,17 @@ different owners/users, and are billed separately.".
 
 Create a project now. If you have already used GCE your existing projects will
 be listed in the pull-down menu with one being selected as your currently
-active project (here 'Juju-GCE'). The dialog is found at the top-right corner:
+active project (here 'My First Project'). The dialog is found near the
+top-right corner:
 
 ![create_gce_project_dropdown](./media/config-gce-new_project_dropdown.png)
 
-Enter some details. If you have already created a project in the past you
-will not see the extra two questions shown below:
+Enter a project name (here 'My Juju-GCE Project'):
 
 ![create_gce_project_details](./media/config-gce-first_project_create.png)
 
-The *project id* (used later) will be generated automatically. Use the 'Edit'
-button to change it.
+The *project id* (used later) will be generated automatically. Click 'Edit'
+to change it.
 
 
 ## Google Compute Engine API
@@ -58,22 +58,27 @@ method" has been set up. By following the below steps you will discover whether
 you need to set up billing or not.
 
 At the top-left of the web UI there is an icon representing 'Product &
-services'. It is denoted by this icon:
+services'. It is denoted by this icon, next to the 'Google Cloud Platform'
+title:
 
 ![Product & services icon](./media/config-gce-product_services_icon.png)
 
 Click through and select 'API Manager'. By default you will be on the 'Overview'
-screen, it will show:
+screen, it will show this across the top:
 
 ![API Manager screen](./media/config-gce-api_manager.png)
 
-Select 'Compute Engine API' to get:
+Click '+Enable API':
+
+![Enable API](./media/config-gce-enable-api.png)
+
+From the list of available APIs, select 'Compute Engine API':
 
 ![Compute Engine API](./media/config-gce-api_manager_compute_enabled.png)
 
-The API is already enabled if the button displays 'Disable API'. If the button
-shows 'Enable API', clicking it may prompt you to set up a billing method (if
-not already done).
+On the top of the page that opens, click 'Enable'. If the API is already
+enabled, this will display 'Disable'. Clicking it may prompt you to set up a
+billing method (if not already done).
 
 
 ## GCE project credentials file
@@ -83,7 +88,7 @@ communicate with your GCE project. This is obtained by downloading a file from
 the UI.
 
 Return to the 'API Manager' and choose the 'Credentials' screen. By default you
-will be within the 'Credentials' tab. Click the 'New credentials' button and
+will be within the 'Credentials' tab. Click the 'Create credentials' button and
 choose 'Service account key' from the 3 options available:
 
 ![Create credentials dialog #1](./media/config-gce-api_manager_create_credentials-1.png)
@@ -99,10 +104,10 @@ regenerated (although a new one can easily be created).
 
 Place this file where the Juju client can find it. This may or may not be on
 the computer you downloaded the file to. We recommend the `~/.juju` directory.
-For the current example, the file is called `Juju-GCE-f33a6cdbd8e3.json` (based
+For the current example, the file is called `My-Juju-GCE-Project-f33a6cdbd8e3.json` (based
 on our project name of 'Juju-GCE'. Let it be put here:
 
-`/home/ubuntu/.juju/Juju-GCE-f33a6cdbd8e3.json`
+`/home/ubuntu/.juju/My-Juju-GCE-f33a6cdbd8e3.json`
 
 !!! Warning: Due to
 [LP #1533790](https://bugs.launchpad.net/juju-core/+bug/1533790) make a copy of
