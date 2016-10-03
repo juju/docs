@@ -68,11 +68,8 @@ screen, it will show this across the top:
 
 ![API Manager screen](./media/config-gce-api_manager.png)
 
-Click '+Enable API':
-
-![Enable API](./media/config-gce-enable-api.png)
-
-From the list of available APIs, select 'Compute Engine API':
+Click '+Enable API' and then from the list of available APIs you are shown,
+select 'Compute Engine API':
 
 ![Compute Engine API](./media/config-gce-api_manager_compute_enabled.png)
 
