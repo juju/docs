@@ -1,6 +1,6 @@
 Title: Juju Metrics
 
-# Why does Juju collect metrics?
+# Application metrics
 
 Knowing an application's configuration isn’t enough to effectively operate and
 manage it. Consider that a well-designed application will have as few
