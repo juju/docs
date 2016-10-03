@@ -190,3 +190,18 @@ and always before the stop hook is run, to allow the charm to gracefully release
 resources before they are removed and before the unit terminates. The name
 prefix of the hook will depend on the storage key [defined in the
 `metadata.yaml`](./developer-storage.html#adding-storage) file.
+
+## Metric Hooks
+
+### collect-metrics
+
+Juju executes the collect-metrics hook every five minutes for the lifetime of
+the unit. Use the [`add-metric`](./reference-hook-tools.html#add-metric) hook tool in `collect-metrics` to add measurements
+to Juju.
+
+Because it may run concurrently with lifecycle charm hooks, `collect-metrics`
+executes in a more restricted environment where many hook tools (such as
+`config-get`) are not available. If access to charm configuration or other
+items is absolutely required, `charmhelpers.core.unitdata.kv` may be used to
+pass information into the `collect-metrics` hook context.
+

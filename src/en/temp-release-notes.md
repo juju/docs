@@ -1,27 +1,14 @@
-# Juju 2.0-beta18
+# Juju 2.0-rc2
 
-A new development release of Juju, juju 2.0-beta18, is now available.
-This release replaces version 2.0-beta17.
+A new development release of Juju, juju 2.0-rc2, is now available.
+This release replaces version 2.0-rc1.
 
-## What's New in RC1
-
-* The Juju client now works on any Linux flavour. When bootstrapping
-  with local tools, it's now possible to create a controller of any
-  supported Linux series regardless of the Linux flavour the client
-  is running on.
-* juju resolved command retries failed hooks by default:
-  juju resolved <unit> // marks unit errors resolved and retries failed hooks
-  juju resolved --no-retry <unit> //marks unit errors resolved w/o retrying hooks
-* MAAS 2.0 Juju provider has been updated to use MAAS API 2.0's owner
-  data for instance tagging.
-* networking fixes for containers in MAAS 2.0 when the parent device is
-  unconfigured. (#1566791)
-* Azure provider performance has been enhanced, utilising Azure Resource
-  Manager templates, and improved parallelisation.
-* Azure provider now supports an "interactive" auth-type, making it much
-  easier to set up credentials for bootstrapping. The "userpass"
-  auth-type has been deprecated, and replaced with
-  "service-principal-secret".
+## What's New in RC2
+* The upgrade-charm command now has --config and --storage flags, so you can atomically update application config and storage constraints at the same time as upgrading the charm. This means you can now upgrade charms with additional required storage (https://bugs.launchpad.net/juju/+bug/1504658)
+* get-controller-config has been renamed to controller-config to be consistent with the rest of the config commands.
+* Juju no longer auto creates bridges for interfaces in MAAS that are unconfigured.
+* kill-controller now as a --timeout flag that allows the user to set the time to wait before direct destruction.
+* Rackspace cloud now works out of the box with updated add-credential and streams use.
 
 
 ## Notable Changes
@@ -461,6 +448,12 @@ In the initial release of this provider, each machine will be allocated
 a public IP address. In a future release, we will only allocate public
 IP addresses to machines that have exposed applications, to enable
 allocating more machines than there are public IP addresses.
+
+To add credentials for Azure, run the command “juju add-credential azure”. 
+You will be prompted to enter your subscription ID, which you can find 
+in the Azure portal (https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade). 
+You will then be prompted to open a URL to authenticate with Azure, and 
+authorise Juju to create credentials on your behalf.
 
 
 ### New Support for Rackspace
