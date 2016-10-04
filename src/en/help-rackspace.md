@@ -49,7 +49,7 @@ juju add-credential rackspace
 ```
 
 The first question will ask for an arbitrary credential name, which you choose
-for yourself.  This will be how you remember and refer to this Rackspace
+for yourself. This will be how you remember and refer to this Rackspace
 credential in Juju. The second question will ask you to select an 'Auth Type',
 with the options being either `access-key` or `userpass`. 
 
