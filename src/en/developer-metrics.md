@@ -89,6 +89,50 @@ charm directory (`charmhelpers.core.hookenv.charm_dir`). The command must write
 only the metric value to standard output, and terminate with exit code 0 in
 order for the measurement to be to be counted valid.
 
+Continuing with the metrics example above, a charm that relates to a PostgreSQL
+database probably stores its "users" and "tokens" in database tables. These can
+be counted with a simple SQL query. `scripts/count_users.py` in such a charm
+might read as:
+
+```python
+#!/usr/bin/env python3
+
+# Python packages will have been installed by the charm.
+import configparser
+import psycopg2
+
+
+if __name__ == '__main__':
+    # Read the application's configuration file, which will have been written
+    # by the charm's relation hooks.
+    with open('/opt/sso-auth/config.ini') as f:
+        config_str = f.read()
+    config = configparser.ConfigParser(strict=False)
+    config.read_string(config_str)
+
+    # Build a database connection string from configuration.
+    dbname = config['database']['NAME']
+    user = config['database']['USER']
+    password = config['database']['PASSWD']
+    hostport = config['database']['HOST']
+    host, port = hostport.split(':')
+    conn_str = 'dbname=%s user=%s password=%s host=%s port=%s' % (
+        dbname, user, password, host, port)
+    conn = psycopg2.connect(conn_str)
+    try:
+        cur = conn.cursor()
+        try:
+            # For sake of example, let's say we don't want to include the
+            # default admin user account in the count.
+            cur.execute("SELECT COUNT(1) FROM users WHERE name != 'admin';")
+            row, = cur.fetchone()
+            print(row)  # Print the measurement to standard output, for Juju
+        finally:
+            cur.close()
+    finally:
+        conn.close()
+```
+
 Note that this command will not have access to the normal lifecycle hook
 environment. Refer to the
 [`collect-metrics`](./reference-charm-hooks.html#collect-metrics) documentation
