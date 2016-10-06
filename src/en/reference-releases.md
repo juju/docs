@@ -76,8 +76,8 @@ agent-stream: proposed
 
 ## Development
 
-2.0-rc2 is currently in development for testing.
-The previous development release was 2.0-rc1.
+2.0-rc3 is currently in development for testing.
+The previous development release was 2.0-rc2.
 
 Development releases provide new features that are being stablised.
 These releases are *not* suitable for production environments. Upgrading
@@ -97,13 +97,13 @@ or
 {: .instruction }
 
 Centos
-: [juju-core_2.0-rc2-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0-rc2/+download/juju-core_2.0-rc2.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-rc2/+download/juju-core_2.0-rc2.tar.gz/+md5))
+: [juju-core_2.0-rc3-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-core_2.0-rc3.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-core_2.0-rc3.tar.gz/+md5))
 {: .instruction }
 
 OS X
-: [juju-core_2.0-rc2-osx.tar.gz](https://launchpad.net/juju/2.0/2.0-rc2/+download/juju-2.0-rc2-osx.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-rc2/+download/juju-2.0-rc2-osx.tar.gz/+md5))
+: [juju-core_2.0-rc3-osx.tar.gz](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-2.0-rc3-osx.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-2.0-rc3-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows
-: [juju-setup-2.0-rc2.exe](https://launchpad.net/juju/2.0/2.0-rc2/+download/juju-setup-2.0-rc2.exe) ([md5](https://launchpad.net/juju/2.0/2.0-rc2/+download/juju-setup-2.0-rc2.exe/+md5))
+: [juju-setup-2.0-rc3.exe](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-setup-2.0-rc3.exe) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-setup-2.0-rc3.exe/+md5))
 {: .instruction }
