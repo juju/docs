@@ -1,6 +1,6 @@
 Title: Juju LXD local provider
 
-# Using LXD as a cloud provider 
+# Using LXD as a cloud 
 
 LXD provides a fast, powerful, self-contained and largely configuration-free 
 way to experiment with Juju. Using lightweight LXC containers as instances,
