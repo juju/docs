@@ -1,5 +1,5 @@
 Title: Using a VMware vSphere cloud
-
+TODO: Test vSphere
 
 # Using a VMware vSphere Cloud
 
@@ -10,12 +10,15 @@ Juju doesn't have baked-in knowledge of your specific vSphere cloud, but it
 does know how such clouds work. We just need to provide some information to add
 it to the list of known clouds. 
 
-!!! Note: vSphere support in the current version of Juju is provisional. You
-need to set JUJU_DEV_FEATURE_FLAGS="vsphere-provider" within you shell to
-enable it.
-
 ## Adding a vSphere cloud
 
+vSphere support in the current version of Juju is provisional. You
+need to set JUJU_DEV_FEATURE_FLAGS="vsphere-provider" within your shell to
+enable it:
+
+```bash
+export JUJU_DEV_FEATURE_FLAGS="vsphere-provider"
+```
 To make Juju aware of your vSphere installation, you will need to define it
 within a YAML file containing the following values:
 
@@ -23,28 +26,28 @@ within a YAML file containing the following values:
   - **endpoint**: the IP address of the VMware server
   - **region name**: a named region for each data centre
 
-With a **cloudname** of `myvscloud`, an **endpoint** of `178.18.42.10`  and a
-single data centre called `dc0`, a basic configuration would look something
-like this :
+With a **cloudname** of `myvscloud`, an **endpoint** of `178.18.42.10` and a
+single data centre called `dc0`, a basic configuration would look similar to
+this:
 
 ```yaml
 clouds:
  myvscloud:
   type: vsphere
   auth-types: [userpass]
-  endpoint: 10.245.0.131
+  endpoint: 178.18.42.10
   regions:
    dc0: {}
 ```
 
-To add this cloud definition to Juju, enter the following:
+To add the above cloud definition to Juju, enter the following:
 
 ```bash
 juju add-cloud myvscloud <YAML file>
 ```
 
-To check whether your vSphere installation has been added correctly, look for
-the following in the output from `juju list-clouds`:
+You can check whether your vSphere installation has been added correctly by
+looking for the following in the output from `juju list-clouds`:
 
 ```bash
 CLOUD           TYPE        REGIONS
@@ -62,18 +65,16 @@ above example:
 ```bash
 juju add-credential myvscloud
 ```
-You will be asked for an arbitrary name for this credential, which you
-choose for yourself, followed by the username and password for your VMware
-installation. 
+The process now becomes interactive. You will first be asked for an arbitrary
+name for this credential, which you choose for yourself, followed by the
+username and password for your VMware installation. 
 
-With credentials added, you can now 
+With credentials added, you can now start using Juju with your vSphere cloud:
 
-
- 
 ```bash
 juju bootstrap myvscloud vsphere
 ```
 
-!!! Note: The provider downloads a cloud image *to the juju client machine*,
-and then uploads it to VMware. If you're far away from VMware (like, say, in
-Australia), that will take a long time.
+!!! Note: Juju's vSphere provider downloads a cloud image to the Juju client machine
+and then uploads it to your cloud. If you're far away from VMware, this may
+take some time.
