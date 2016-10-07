@@ -616,10 +616,9 @@ status-get
 status-get --include-data
 ```
 
-Use `--application` to get the overall status for the application to which
-the unit belongs if the unit is the leader, for example:
+Use `--application` to get the overall status for the application, as set by the leader:
 ```bash
-juju run --unit ubuntu/0 'status-get --application
+status-get --application
 ```
 
 
@@ -633,7 +632,7 @@ This hook tool takes 2 arguments. The first is the status to report, which can
 be one of the following:
 
 - `maintenance` (the unit is not currently providing a service, but expects to
-  be soon, E.g. when first installing)
+  be soon, e.g. when first installing)
 - `blocked` (the unit cannot continue without user input)
 - `waiting` (the unit itself is not in error and requires no intervention,
   but it is not currently in service as it depends on some external factor,
@@ -656,7 +655,7 @@ representing Juju services (e.g. the Juju GUI) should check occasionally
 and be told the current status message.
 
 Spamming the status with many changes per second is therefore rather redundant
-(and might be throttled by the state server). Nevertheless, a thoughtful charm
+(and might be throttled by the controller). Nevertheless, a thoughtful charm
 will provide appropriate and timely feedback for human users, with estimated
 times of completion of long-running status changes.
 
@@ -694,10 +693,18 @@ status-set blocked "Need a database relation"
 status-set blocked "Storage full"
 ```
 
-Use `--application` to set the overall status for the application to which
-the unit belongs if the unit is the leader, for example:
+The unit which is the leader is responsible for setting the overall status of
+the application by using the `--application` option. It should aggregate the
+status of other units for the application.
 ```bash
-juju run --unit ubuntu/0 'status-set --application
+status-set maintenance "Upgrading software"
+status-set --application maintenance "Down until one unit has completed the upgrade."
+```
+
+Non-leader units which attempt to use `--application` will receive an error
+```bash
+status-set --application maintenance "I'm not the leader."
+error: this unit is not the leader
 ```
 
 ## storage-add
