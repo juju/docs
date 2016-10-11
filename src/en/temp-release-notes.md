@@ -1,14 +1,26 @@
-# Juju 2.0-rc2
+# Juju 2.0-rc3
 
-A new development release of Juju, juju 2.0-rc2, is now available.
-This release replaces version 2.0-rc1.
+A new development release of Juju, juju 2.0-rc3, is now available.
+This release replaces version 2.0-rc2.
 
-## What's New in RC2
-* The upgrade-charm command now has --config and --storage flags, so you can atomically update application config and storage constraints at the same time as upgrading the charm. This means you can now upgrade charms with additional required storage (https://bugs.launchpad.net/juju/+bug/1504658)
-* get-controller-config has been renamed to controller-config to be consistent with the rest of the config commands.
-* Juju no longer auto creates bridges for interfaces in MAAS that are unconfigured.
-* kill-controller now as a --timeout flag that allows the user to set the time to wait before direct destruction.
-* Rackspace cloud now works out of the box with updated add-credential and streams use.
+
+## What's New in RC3
+
+* For an AWS VPC account juju will create a t2.medium for controller
+  instances by default now. Non-controller instances are unchanged for
+  now, and remain m3.medium by default. Controller instance root disk
+  now defaults to 32GiB, but can be overridden with constraints.
+* Shorten the hostnames we apply to instances created by the OpenStack
+  provider.
+    Example old hostname:
+    juju-fd943864-df2e-4da1-8e7d-5116a87d4e7c-machine-14
+
+    Example new hostname:
+    Juju-df7591-controller-0
+* Added support for LXD 2.3 apis
+* New update-credential command
+* Added --model-default option to the bootstrap
+* LXD containers now have proper hostnames set
 
 
 ## Notable Changes

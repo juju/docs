@@ -1,30 +1,16 @@
 Title: Juju LXD local provider
 
-# Configuring for LXD
+# Using LXD as a cloud 
 
-Here we provide an overview for the creation of a controller for LXD
-(see [Controllers][bootstrap]). If your objective is instead
-to create a LXD model please see [Adding a model][models-add].
-
-Unlike other providers, with LXD, Juju does not need to be supplied with any
-information regarding configuration or credentials. This makes it extremely
-easy to start using LXD with Juju.
-
-!!! Note: Do not confuse command `lxc` with the binary shipped with traditional
-LXC. All the latter's binaries are of the form `lxc-<subcommand>`. The `lxc`
-binary actually comes from the `lxd-client` package.
+LXD provides a fast, powerful, self-contained and largely configuration-free 
+way to experiment with Juju. Using lightweight LXC containers as instances,
+even a moderately powerful laptop can create useful models, or serve as
+a development platform for your own charms.
 
 
 ## Prerequisites
 
-LXD currently works only on Ubuntu 15.10 (Wily) and Ubuntu 16.04 (Xenial).
-
-For 15.10, use a PPA to get the latest software:
-
-```bash
-sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
-sudo apt update
-```
+Juju's support for LXD currently works only with Ubuntu 16.04 (Xenial).
 
 Install LXD:
 
@@ -32,10 +18,6 @@ Install LXD:
 sudo apt install lxd
 newgrp lxd
 ```
-
-!!! Note: On 16.04, especially if you have Juju 2.0 installed, LXD may already
-be installed.
-
 
 ## Alternate backing file-system
 
@@ -54,7 +36,7 @@ Above we allocated 32GB of space to a sparse file. Consider using a fast block
 device if available.
 
 
-## Create controller
+## Create a controller (bootstrap)
 
 It is time to create the controller for LXD. Below, we call it 'lxd-xenial':
 
@@ -70,18 +52,21 @@ lxc list
 
 ![bootstrap machine 0 in LXC CLI](./media/config-lxd_cli-machine_0.png)
 
-See more examples of [Creating a controller](./controllers-creating.html).
+See more examples of [Creating a controller][bootstrap].
 
 
 ## Next steps
 
-Typically, workload applications are deployed on additional models (i.e. other
-than the initial 'controller' model). A model named 'default' is added to the 
-controller when it is created for this reason. You can also add additional
-models - see [Adding a model][models-add].
+A controller is created with two models - the 'controller' model which 
+should be reserved for Juju's operations, and a model named 'default' 
+for deploying user workloads. 
 
+ - [More information on models][models]
+ - [Using Charms to deploy applications][charms]
 
-## LXD and images
+## Additional information about LXD
+
+### LXD and images
 
 LXD is image based: all LXD containers come from images and any LXD daemon
 instance (also called a "remote") can serve images. When LXD is installed a
@@ -109,7 +94,7 @@ Cached images can be seen with `lxc image list`:
 Image cache expiration and image synchronization mechanisms are built-in.
 
 
-## Logs
+### Logs
 
 LXD itself logs to `/var/log/lxd/lxd.log` and Juju machines created via the
 LXD local provider log to `/var/log/lxd/juju-{uuid}-machine-{#}`. However,
@@ -147,7 +132,7 @@ above, are given below.
 -->
 
 
-## Additional notes
+### Notes
 
 Although not Juju-related, see `lxc --help` for more on LXD client usage and
 `lxd --help` for assistance with the daemon. See upstream documentation for
@@ -158,7 +143,9 @@ how to
 For additional configuration of LXD controllers, please see the [Controllers 
 documentation][controllers].
 
-[bootstrap]: ./controllers-creating
+[models]: ./models.html
+[charms]: ./charms.html
+[bootstrap]: ./controllers-creating.html
 [lxd-upstream]: https://github.com/lxc/lxd/blob/master/doc/configuration.md
 [logs]: ./troubleshooting-logs.html
 [models-add]: ./models-adding.html
