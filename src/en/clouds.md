@@ -151,12 +151,8 @@ google         gce         us-east1, us-central1, europe-west1, asia-east1
 joyent         joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
 lxd            lxd         localhost
 rackspace      rackspace   DFW, ORD, IAD, LON, SYD, HKG
-local:mystack  openstack   dev1
+mystack  openstack   dev1
 ```
-
-The 'local:' prefix indicates that this is a cloud you have added yourself. 
-
-
 [credentials]: ./credentials.html "Juju documentation > Credentials"
 [LXD-site]: http://www.ubuntu.com/cloud/lxd "LXD"
 [juju-lxd]: ./clouds-LXD.html "Juju documentation > LXD"
