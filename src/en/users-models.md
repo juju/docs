@@ -32,7 +32,7 @@ Add model 'mymodel' and designate user 'tron' as the owner:
 juju add-model --owner=tron mymodel
 ```
 
-See [Adding a model](./models-adding.html) for details on adding models.
+See [Adding a model][addmodel] for details on adding models.
 
 
 ## Models and user access
@@ -41,7 +41,7 @@ Model access can be granted, by an administrator, to a regular user in
 read-only or write modes (ACL). Once a user has access to a model, he can apply
 commands to it. Which commands become available depend upon their assigned ACL.
 
-See [Users](./users.html#regular-users) for details on available commands.
+See [Users][regularusers] for details on available commands.
 
 Examples:
 
@@ -59,6 +59,13 @@ Make user 'jim' an administrator by granting him write access to model
 ```bash
 juju grant --acl=write jim controller
 ```
+
+!!! Note: Each user has control over naming the models they own. This means
+it is possible for two users, `jane` and `claire`, to each have a model with
+the same name, `foo`. This could cause difficulty when `claire` needs to access
+`jane`'s model. Because of this, it is possible to refer to models
+using `<owner>/<model>` in place of just the model name. For example, `claire`
+can get the status of the model using `juju status -m jane/foo`.
 
 To revoke write access from user 'jim' for model 'controller' (leaving the user
 with read-only access):
@@ -81,9 +88,11 @@ juju add-user --models=mymodel --acl=read ben
 
 Naturally, the model in the above example needs to already exist.
 
-!!! Note: Each user has control over naming the models they own. This means
-it is possible for two users, `jane` and `claire`, to each have a model with
-the same name, `foo`. This could cause difficulty when `claire` needs to access
-`jane`'s model. Because of this, it is possible to refer to models
-using `<owner>/<model>` in place of just the model name. For example, `claire`
-can get the status of the model using `juju status -m jane/foo`.
+!!! Note: The admin user has credentials stored in the controller and will
+be able to perform functions on any model. However, a regular user who has
+been given 'add-model' permissions may need to specify which credential to
+use when logging in to a model for the first time. To specify a credential,
+run 'juju add-credential'.
+
+[addmodel]: ./models-adding.html
+[regularusers]: ./users.html#regular-users
