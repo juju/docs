@@ -1,6 +1,6 @@
-Title: Getting started with Juju 2.0
+Title: Getting started with Juju
 
-# Getting started with Juju 2.0
+# Getting started with Juju 
 
 These instructions will get you up and running and deliver the best-possible
 experience with Juju. At the moment, that means using the latest release of
@@ -20,7 +20,6 @@ Apart from Juju, the following technologies will be used:
 Begin by installing the required software:
 
 ```no-highlight
-sudo apt-add-repository -y ppa:juju/devel
 sudo apt update
 sudo apt install juju zfsutils-linux
 ```
@@ -142,10 +141,6 @@ juju bootstrap lxd-test localhost
 This may take a few minutes as LXD must download an image for Xenial. A cache
 will be used for subsequent containers.
 
-!!! Note: Currently there is an issue with image names and aliases. If you get 
-a message about a missing image, please see 
-https://bugs.launchpad.net/juju/+bug/1619971
-
 Once the process has completed you can check that the controller has been
 created:
 
@@ -239,15 +234,10 @@ often quickest to destroy the model with the command
 Now that you have a Juju-powered cloud, it is time to explore the amazing
 things you can do with it! 
 
-We suggest you take the time to read the following:
+We suggest you continue your journey by discovering 
+[how to add controllers for additional clouds][tut-cloud]
 
-- [Clouds][clouds] goes into detail about configuring other clouds, including
-  the public clouds like Azure, AWS, Google Compute Engine and Rackspace.
-- [Models][models] - Learn how to create, destroy and manage models.
-- [Charms & Applications][charms] - find out how to construct complicated 
-  workloads in next to no time.
-
-
+[tut-cloud]: ./tut-google.html
 [clouds]: ./clouds.html  "Configuring Juju Clouds"
 [charm store]: https://jujucharms.com "Juju Charm Store"
 [releases]: reference-releases.html 
