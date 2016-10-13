@@ -102,10 +102,10 @@ be named using the non-default region, specifically naming it `aws-us-west-2`:
 juju bootstrap aws/us-west-2
 ```
 
-## Changing timeout and retry delays
+## Change timeout and retry delays
 
-You can change the default timeout and retry delays used during the
-bootstrap by changing the following settings in your configuration:
+You can change the default timeout and retry delays used by Juju 
+by setting the following keys in your configuration:
 
 | Key                        | Default (seconds) | Purpose |
 |:---------------------------|-------------------|:---------|
