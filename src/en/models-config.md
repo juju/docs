@@ -3,6 +3,7 @@ TODO: Check accuracy of key table
       Confirm 'all' harvest mode state. Seems it should be "'Dead' or
 	'Unknown'" OR "a combination of modes 'destroyed' and 'unknown'".
       Make the table more space-efficient. Damn it's bulbous.
+      Provide an example of using model-defaults to set a per-region attribute.
 
 
 # Configuring models
@@ -49,12 +50,29 @@ specifying the key names:
 juju model-config --reset test-mode
 ```
 
-To view the default settings and keys, use:
+After deployment, the `model-defaults` command allows a user to display the
+configuration values for a model as well as set and unset those values for use
+with any new models. These values can even be specified for each cloud region
+instead of just the controller.
+
+To set a value for `ftp-proxy`, for instance, you would enter the following:
+
+```bash
+juju model-defaults ftp-proxy=10.0.0.1:8000
+```
+
+To see both the default values and what they've been changed to, you
+would use:
 
 ```bash
 juju model-defaults
 ```
+These values can also be passed to a new controller for use with the default
+model it creates. To do this, use the `--config` argument with bootstrap:
 
+```bash
+juju bootstrap --config image-stream=daily lxd lxd-daily
+```
 
 ## List of model keys
 
