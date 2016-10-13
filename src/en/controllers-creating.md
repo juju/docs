@@ -108,7 +108,7 @@ You can change the default timeout and retry delays used by Juju
 by setting the following keys in your configuration:
 
 | Key                        | Default (seconds) | Purpose |
-|:---------------------------|-------------------|:---------|
+|:---------------------------|:------------------|:---------|
 bootstrap-timeout            | 600    | How long to wait for a connection to the controller
 bootstrap-retry-delay        | 5      | How long to wait between connection attempts to a controller
 bootstrap-address-delay      | 10     | How often to refresh controller addresses from the API server
