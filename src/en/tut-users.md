@@ -1,5 +1,6 @@
 Title: Sharing Clouds
-
+TODO:  change screenshot username from degville to newuser
+       add link to a table showing permissions for each type of user
 
 # Sharing Clouds
 
