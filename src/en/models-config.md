@@ -55,6 +55,13 @@ To view the default settings and keys, use:
 juju model-defaults
 ```
 
+These values can also be passed to a new controller for use
+with the default model it creates. To do this, use the `--config` argument with
+bootstrap:
+
+```bash
+juju bootstrap --config image-stream=daily lxd lxd-daily
+```
 
 ## List of model keys
 
