@@ -1,4 +1,4 @@
-Title: Create a Google Compute Engine controller
+Title: Creating additional controllers
 TODO:  Still WIP: needs refinement and further details
        Decide on a better example than Django
        Remove default model?
@@ -15,8 +15,8 @@ just as easily deploy Kubernetes, Cassandra or even OpenStack. It's the
 magic of Juju that makes it happen.
 
 ## Step 1: Installation
-First, install Juju 2. If you're running Ubuntu 16.04 LTS (Xenial), this is as
-simple as entering `sudo apt install juju` into the terminal. 
+First, install Juju 2, if you have not done so already. See 
+[the first use page here][first]. 
 
 ## Step 2: Pick a cloud
 Type `juju list-clouds` and you'll see output very similar to the following:
@@ -39,7 +39,8 @@ localhost    lxd         localhost
 ```
 As mentioned, we're going with Google's Cloud Engine, which we'll
 configure over the next couple of steps. But you could just as easily use
-[Amazon AWS][helpaws] or [Microsoft Azure][helpazure]. 
+[Amazon AWS][helpaws] or [Microsoft Azure][helpazure], or any of the listed
+clouds you have credentials for. 
 
 ## Step 3: Download GCE credentials
 
@@ -53,8 +54,8 @@ further help.
 
 Copy the credentials file somewhere sensible, such as
 '~/.local/share/juju/gcejuju.json,' and initiate the import process by typing
-`juju add-credential google`. You'll first be asked for an arbitrary name for
-you to identify the credentials with, followed by a prompt asking for 'Auth
+`juju add-credential google`. You'll first be asked for an arbitrary name 
+to identify the credentials with, followed by a prompt asking for 'Auth
 Type'. Press return to select the default `jsonfile*` type and then enter the
 absolute path to the credentials file:
 
@@ -75,7 +76,7 @@ You can now start using Juju with your GCE cloud.
 Pushing Juju onto your new cloud is as simple as typing:
 
 ```bash
-juju bootstrap mycloud google
+juju bootstrap google mycloud
 ```
 This should only take a few minutes. You could use this time to brush up on
 some [Juju terminology][jujuterms]. 
