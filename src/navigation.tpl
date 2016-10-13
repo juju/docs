@@ -10,7 +10,7 @@
             </ul>
         </li>
         <li><a href="tut-google.html">Controllers and Models</a></li>
-        <li><a href="tut-user.html">Sharing and Users</a></li>
+        <li><a href="tut-users.html">Sharing and Users</a></li>
         </ul>
     </li>
     <li class="section"><h4 class="header toggle-target">User Guide</h4>
