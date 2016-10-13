@@ -12,6 +12,15 @@ cloud:
 See `juju help bootstrap` for details on this command or see the
 [command reference page](./commands.html#juju-bootstrap).
 
+The `<controller name>` is optional. If one is not supplied, then a name is
+assigned based on the cloud and region.
+
+```bash
+juju bootstrap aws/us-east-1
+```
+
+This creates a new controller called `aws-us-east-1` in that cloud and region.
+
 
 ## Notes
 
@@ -68,6 +77,13 @@ more details about constraints, see [Constraints](./reference-constraints.html).
 juju bootstrap --constraints="mem=4G" lxd lxd-xenial
 ```
 
+If you omit the optional controller name here, the new controller will be
+named using the name of the cloud, `lxd`:
+
+```bash
+juju bootstrap --constraints="mem=4G" lxd
+```
+
 ## Create a controller using a non-default region
 
 The [Clouds](./clouds.html) page details listing available clouds and
@@ -76,4 +92,12 @@ region during controller creation, use:
 
 ```bash
 juju bootstrap aws/us-west-2 mycontroller
+```
+
+This is an instance where using the default controller name could be especially
+handy, as omitting the `mycontroller` name will cause your new controller to
+be named using the non-default region, specifically naming it `aws-us-west-2`:
+
+```bash
+juju bootstrap aws/us-west-2
 ```
