@@ -4,13 +4,13 @@
 <!-- SECTION -->
     <li class="section"><h4 class="header toggle-target">Get Started</h4>
         <ul>
-        <li class="section"><a class="header" href="getting-started.html">Getting Started</a>
+        <li class="section"><a class="header" href="getting-started.html">First use!</a>
             <ul class="sub">
                 <li><a href="getting-started-general.html">Install for non-16.04</a></li>
             </ul>
         </li>
-        <li><a href="tut-google.html">Getting Started: Models</a></li>
-        <li><a href="tut-user.html">Getting Started: Users</a></li>
+        <li><a href="tut-google.html">Controllers and Models</a></li>
+        <li><a href="tut-user.html">Sharing and Users</a></li>
         </ul>
     </li>
     <li class="section"><h4 class="header toggle-target">User Guide</h4>
@@ -208,7 +208,7 @@
         <li><a href="reference-release-notes.html">Release notes</a></li>
         <li><a href="reference-status.html">Status values</a></li>
         <li><a href="reference-numbering.html">Machine/unit numbering</a></li>
-        <li><a href="glossary.html">Glossary</a></li>
+        <li><a href="juju-concepts.html">Glossary/Concepts</a></li>
         <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
     </ul>
    </li>
