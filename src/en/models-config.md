@@ -53,7 +53,7 @@ juju model-config --reset test-mode
 After deployment, the `model-defaults` command allows a user to display the
 configuration values for a model as well as set and unset those values for use
 with any new models. These values can even be specified for each cloud region
-instead of just the controller
+instead of just the controller.
 
 To set a value for `ftp-proxy`, for instance, you would enter the following:
 
