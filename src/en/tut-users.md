@@ -170,8 +170,8 @@ With access revoked, the admin can now safely remove the model:
 juju destroy-model dev
 ```
 
-[helpaws]: help-aws
-[helpgce]: help-google
-[helpazure]: help-azure
-[listclouds]: clouds
+[helpaws]: ./help-aws "Conffiguring Juju for Amazon AWS"
+[helpgce]: ./help-google "Configuring Juju for GCE"
+[helpazure]: ./help-azure "Configuring Juju for Azure"
+[listclouds]: ./clouds "Configuring Juju Clouds"
 [cankub]: https://jujucharms.com/canonical-kubernetes/
