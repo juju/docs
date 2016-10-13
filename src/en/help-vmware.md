@@ -72,7 +72,7 @@ username and password for your VMware installation.
 With credentials added, you can now start using Juju with your vSphere cloud:
 
 ```bash
-juju bootstrap myvscloud vsphere
+juju bootstrap vsphere myvscloud
 ```
 
 !!! Note: Juju's vSphere provider downloads a cloud image to the Juju client machine

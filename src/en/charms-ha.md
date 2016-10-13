@@ -1,4 +1,4 @@
-Title: Ensuring High Availability (HA) for deployed services  
+Title: Ensuring High Availability (HA) for deployed services
 TODO: Needs a rewrite
 
 # Service High Availability (HA)
@@ -61,7 +61,7 @@ disabled only when bootstrapping the cloud by adding
 'availability-sets-enabled=false' as a configuration option:
 
 ```bash
-juju bootstrap --config availability-sets-enabled=false mycloud azure
+juju bootstrap --config availability-sets-enabled=false azure mycloud
 ```
 !!! Note: By disabling availability sets, you will lose Azure's SLA
 guarantees. 

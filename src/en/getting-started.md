@@ -136,7 +136,7 @@ controller) and a cloud to use. The LXD 'cloud' is known as 'localhost' to Juju.
 For our LXD localhost cloud, we will create a controller called 'lxd-test':
 
 ```bash
-juju bootstrap lxd-test localhost
+juju bootstrap localhost lxd-test
 ```
 
 This may take a few minutes as LXD must download an image for Xenial. A cache
@@ -158,7 +158,7 @@ the one we just created:
   
 ```no-highlight
 CONTROLLER  MODEL    USER         ACCESS+    CLOUD/REGION         MODELS+ MACHINES+  VERSION+
-lxd-test*   default  admin@local  superuser  localhost/localhost        2 	  1       2.0  
+lxd-test*   default  admin@local  superuser  localhost/localhost        2 	  1       2.0
 
 + these are the last known values, run with --refresh to see the latest information.
 ```

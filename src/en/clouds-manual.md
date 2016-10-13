@@ -29,7 +29,7 @@ clouds, except in this case, after the cloud type you should supply the network
 address of the machine you wish to use as the controller:
 
 ```bash
-juju bootstrap mycloud manual/192.168.1.128
+juju bootstrap manual/192.168.1.128 mycloud
 ```
 
 Note that it is also possible to use the other common bootstrap parameters here
