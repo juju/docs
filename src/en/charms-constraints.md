@@ -95,7 +95,7 @@ Example:
 Creating a new AWS controller to use a particular amount of memory:
   
 ```bash
-juju bootstrap mycloud aws --constraints mem=4G
+juju bootstrap aws mycloud --constraints mem=4G
 ```
 
 ## Setting constraints for a model

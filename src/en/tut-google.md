@@ -76,7 +76,7 @@ You can now start using Juju with your GCE cloud.
 Pushing Juju onto your new cloud is as simple as typing:
 
 ```bash
-juju bootstrap mycloud google
+juju bootstrap google mycloud
 ```
 This should only take a few minutes. You could use this time to brush up on
 some [Juju terminology][jujuterms]. 

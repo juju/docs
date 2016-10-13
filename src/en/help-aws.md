@@ -81,7 +81,7 @@ credentials from a YAML file.
 To create the controller for AWS, you then need to run:
 
 ```bash
-juju bootstrap mycloud aws
+juju bootstrap aws mycloud
 ```
 
 That's it!

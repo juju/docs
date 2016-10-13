@@ -20,7 +20,7 @@ password once the controller is created. They must do so if multiple Juju users
 will be using the same system user account:
 
 ```bash
-juju bootstrap mycontroller aws
+juju bootstrap aws mycontroller
 juju change-user-password
 ```
 

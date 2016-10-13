@@ -182,13 +182,13 @@ other instances you create there.
 To do this, we use the `bootstrap` command:
 
 ```bash
-juju bootstrap <controller-name> <cloud>
+juju bootstrap <cloud> <controller-name>
 ```
 
 So, assuming we are using the cloud 'aws', we should run:
 
 ```bash
-juju bootstrap test aws
+juju bootstrap aws test
 ```
 
 This bootstrap process may take a few minutes to complete as it creates a new
