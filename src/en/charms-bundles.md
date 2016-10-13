@@ -174,42 +174,7 @@ mysql:
       "gui-y": "168"
 ```
 
-## Bundle placement directives
-
-You can co-locate applications using the placement directive key in the bundle.
-Much like application constraints, it requires adding the placement key `to` in 
-the application definition.
-Where supported by the cloud provider, it is also possible to isolate charms
-by including the container format in the placement directive. Some clouds
-support LXD.
-
-For example:
-
-```yaml
-mysql:
-  charm: "cs:precise/mysql-27"
-  num_units: 1
-  to: lxd:wordpress/0
-  annotations:
-      "gui-x": "139"
-      "gui-y": "168"
-```
-
-which will install the MySQL application into an LXD container on the same
-machine as the wordpress/0 unit. Or:
-
-```yaml
-mysql:
-  charm: "cs:precise/mysql-27"
-  num_units: 1
-  to: lxd:1
-  annotations:
-      "gui-x": "139"
-      "gui-y": "168"
-```
-which will install the MySQL application into an LXD container on machine '1'.
-
-## Machine specifications in a bundle
+## Machine specifications and bundle placement directives
 
 Bundles may optionally include a machine specification, which allows you to set
 up specific machines and then to place units of your applications on those machines
@@ -217,11 +182,66 @@ however you wish.  A machine specification is a YAML object with named machines
 (integers are always used for names).  These machines are objects with three
 possible fields: `series`, `constraints`, and `annotations`.
 
-Note that the machine spec is optional.  If it is not included, solutions such
-as the juju deployer will fail if a placement specification refers to a machine
-other than "0", which is used to represent the bootstrap node.  Leaving the
-machine specification out of your bundle tells Juju to place units on new
-machines if no placement directives are given.
+Note that the machine specification is optional.  Leaving the machine spec out
+of your bundle tells Juju to place units on new machines if no placement
+directives are given.
+
+With machines specified, you can place and co-locate applications onto specific
+machines using the placement key `to` in the application definition. For example:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to:
+    - "0"
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+machines:
+  "0":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+```
+
+which will install the MySQL application on machine 0. You may also specify
+multiple machines for placing multiple units of an application. For example:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 2
+  to:
+    - "0"
+    - "1"
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+machines:
+  "0":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+  "1":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=4 cpu-power=500 mem=4096 root-disk=8192"
+```
+
+which will install one unit of the MySQL application on machine 0 and the other
+on machine 1. Where supported by the cloud provider, it is also possible to
+isolate charms by including the container format in the placement directive.
+Some clouds support LXD. For example:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to:
+    - "lxd:1"
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
+which will install the MySQL application into an LXD container on machine '1'.
 
 ## Binding endpoints of applications within a bundle
 
