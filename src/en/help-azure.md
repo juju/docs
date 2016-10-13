@@ -98,7 +98,7 @@ You can now start using Juju with your Azure cloud.
 
 
 ```bash
-juju bootstrap mycloud azure
+juju bootstrap azure mycloud
 ```
 
 A successful bootstrap will result in the controller environment being visible

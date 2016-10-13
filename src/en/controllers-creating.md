@@ -7,7 +7,7 @@ TODO: Review again soon (created: March 2016)
 Use the `juju bootstrap` command to create a controller (and model) for a given
 cloud:
 
-`juju bootstrap [options] <controller name> <cloud name>`
+`juju bootstrap [options] <cloud name> <controller name>`
 
 See `juju help bootstrap` for details on this command or see the
 [command reference page](./commands.html#juju-bootstrap).
@@ -25,7 +25,7 @@ specifically. For our example, we name the controller lxd-xenial and instruct
 it to use the local lxd cloud.
 
 ```bash
-juju bootstrap lxd-xenial lxd
+juju bootstrap lxd lxd-xenial
 ```
 
 ## Create an LXD Trusty controller using more recent tools
@@ -41,7 +41,7 @@ over any default settings.
 
 ```bash
 juju bootstrap --upload-tools --config default-series=trusty \
-	lxd-trusty lxd
+	lxd lxd-trusty
 ```
 
 ## Create a Rackspace controller using a daily image
@@ -56,7 +56,7 @@ file and state one or more config values while bootstrapping.
 juju bootstrap \
 	--upload-tools --config=~/config-rackspace.yaml \
 	--config image-stream=daily
-	controller-rackspace rackspace
+	rackspace controller-rackspace
 ```
 
 ## Create a controller with constraints
@@ -65,7 +65,7 @@ This example provides 4G of RAM to the local lxd controller we create. For
 more details about constraints, see [Constraints](./reference-constraints.html).
 
 ```bash
-juju bootstrap --constraints="mem=4G" lxd-xenial lxd
+juju bootstrap --constraints="mem=4G" lxd lxd-xenial
 ```
 
 ## Create a controller using a non-default region
@@ -75,5 +75,5 @@ how the list denotes default regions for each. To specify a different
 region during controller creation, use:
 
 ```bash
-juju bootstrap mycontroller aws/us-west-2
+juju bootstrap aws/us-west-2 mycontroller
 ```

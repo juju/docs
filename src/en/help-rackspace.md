@@ -63,7 +63,7 @@ You can now start using Juju with your Rackspace cloud.
 To create the controller, run the following command:
 
 ```bash
-juju bootstrap mycloud rackspace
+juju bootstrap rackspace mycloud
 ```
 
 This will create a new controller called 'mycloud' with the configuration 

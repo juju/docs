@@ -41,7 +41,7 @@ device if available.
 It is time to create the controller for LXD. Below, we call it 'lxd-xenial':
 
 ```bash
-juju bootstrap lxd-test lxd
+juju bootstrap lxd lxd-test
 ```
 
 This will result in the controller being visible with the LXC client:

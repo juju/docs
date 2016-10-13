@@ -219,7 +219,7 @@ enough memory for other applications to run. The `--to` option is used to
 specify a machine:
 
 ```bash
-juju bootstrap --constraints="mem=4G" lxd-controller lxd
+juju bootstrap --constraints="mem=4G" lxd lxd-controller
 juju deploy mysql
 juju deploy --to 0 rabbitmq-server
 ```

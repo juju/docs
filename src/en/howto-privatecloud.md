@@ -1,4 +1,4 @@
-Title: Setting up private clouds with Simplestreams  
+Title: Setting up private clouds with Simplestreams
 
 #  Set up a Private OpenStack Cloud using Simplestreams
 
@@ -177,7 +177,7 @@ Now the simplestream service is registered and running you can create a controll
 this cloud with the `juju bootstrap` command. The 
 
 ```bash
-juju bootstrap <controller name>  <cloud> --config tools-metadata-url=xxx.xxx.xx.xx
+juju bootstrap <cloud> <controller name> --config tools-metadata-url=xxx.xxx.xx.xx
 ```
 
 The metadata-url specified with the config option should point to the endpoint 
