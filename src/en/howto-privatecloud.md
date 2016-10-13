@@ -183,3 +183,12 @@ juju bootstrap <cloud> <controller name> --config tools-metadata-url=xxx.xxx.xx.
 The metadata-url specified with the config option should point to the endpoint 
 you created in the previous step.
 
+If there are multiple possible networks available to the cloud, it is also necessary to 
+specify the network label or UUID for Juju to use:
+
+```bash 
+juju bootstrap openstack
+--config image-metadata-url=http://xxx.xxx.xxx.xxx/simplestream/images/
+--config network=d54a6557-e114-4e26-98b8-55c814fb938a
+```
+
