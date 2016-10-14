@@ -230,22 +230,19 @@ and deploy charms with binding, as described in [Deploying applications](./charm
 Bindings can also be specified for applications within a bundle. To do so,
 add a section to the bundle's YAML file called `bindings`. For example:
 
-```
-...
+```yaml
 mysql:
-  charm: cs:xenial/mysql-53
+  charm: "cs:precise/mysql-27"
   num_units: 1
-  constraints: mem=4G
   bindings:
     server: database
     cluster: internal
-...
 ```
 
 This is the equivalent of deploying with:
 
 ```bash
-juju deploy mysql --bind "server=database cluster=internal"
+juju deploy cs:precise/mysql-27 --bind "server=database cluster=internal"
 ```
 
 It is not currently possible to declare a default space in the bundle for all
