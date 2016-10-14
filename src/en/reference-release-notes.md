@@ -27,7 +27,7 @@ The versions covered here are:
 
   An overview of these features is discussed below - for full 
   documentation, please visit our docs online at:
-  https://jujucharms.com/docs/2.0/
+  [https://jujucharms.com/docs/2.0/](https://jujucharms.com/docs/2.0/) 
 
   ### Integrated GUI
 
@@ -68,7 +68,7 @@ The versions covered here are:
   locally using secure local containers. Use our getting-started guide
   to setup LXD and start modeling your operations. 
 
-  https://jujucharms.com/docs/2.0/getting-started
+  [https://jujucharms.com/docs/2.0/getting-started](https://jujucharms.com/docs/2.0/getting-started) 
 
   #### Public clouds
 
@@ -100,7 +100,7 @@ The versions covered here are:
   The newly downloaded cloud information will be used next time a
   Juju controller is bootstrapped.
 
-  See: https://jujucharms.com/docs/2.0/clouds
+  See: [https://jujucharms.com/docs/2.0/clouds](https://jujucharms.com/docs/2.0/clouds) 
 
 
   #### Credential management
@@ -111,7 +111,7 @@ The versions covered here are:
 
         juju add-credential aws
 
-  See: https://jujucharms.com/docs/2.0/credentials
+  See: [https://jujucharms.com/docs/2.0/credentials](https://jujucharms.com/docs/2.0/credentials) 
 
 
   #### Manual, MAAS, and OpenStack clouds
@@ -129,7 +129,7 @@ The versions covered here are:
 
         juju bootstrap homestack
 
-  For more details see https://jujucharms.com/docs/2.0/clouds
+  For more details see [https://jujucharms.com/docs/2.0/clouds](https://jujucharms.com/docs/2.0/clouds) 
 
 
   #### Bootstrap constraints and series
@@ -336,8 +336,8 @@ The versions covered here are:
 
   To learn about managing controllers and models, see:
 
-  https://jujucharms.com/docs/2.0/controllers
-  https://jujucharms.com/docs/2.0/models
+  [https://jujucharms.com/docs/2.0/controllers](https://jujucharms.com/docs/2.0/controllers) 
+  [https://jujucharms.com/docs/2.0/models](https://jujucharms.com/docs/2.0/models) 
 
 
   #### Juju GUI in the controller
@@ -345,7 +345,7 @@ The versions covered here are:
   The Juju GUI is now included in every Juju controller after
   bootstrapping, eliminating the need to deploy a Juju GUI charm. 
 
-  See: https://jujucharms.com/docs/controllers-gui
+  See: [https://jujucharms.com/docs/controllers-gui](https://jujucharms.com/docs/controllers-gui) 
 
 
   #### Creating new models
@@ -388,7 +388,7 @@ The versions covered here are:
         juju grant jo admin staging-cms 
 
   Additional command support revoking permissions and disabling users. To learn more, see:
-  https://jujucharms.com/docs/2.0/users
+  [https://jujucharms.com/docs/2.0/users](https://jujucharms.com/docs/2.0/users) 
 
 
   ### Controller and model permissions
@@ -416,7 +416,7 @@ The versions covered here are:
   collection of charms, configuration, and other characteristics that can
   be deployed in a consistent manner. 
 
-  See: https://jujucharms.com/docs/2.0/charms-bundles
+  See: [https://jujucharms.com/docs/2.0/charms-bundles](https://jujucharms.com/docs/2.0/charms-bundles) 
 
 
   #### Multi-series charms
@@ -446,7 +446,7 @@ The versions covered here are:
 
         juju deploy ./dev/juju/magic-charm --series yakkety
 
-  See: https://jujucharms.com/docs/2.0/charms-deploying
+  See: [https://jujucharms.com/docs/2.0/charms-deploying](https://jujucharms.com/docs/2.0/charms-deploying) 
 
   Any directory structure can be used, including simply pulling the
   charm source from a version control system, hacking on the code, and
@@ -644,7 +644,7 @@ The versions covered here are:
   #### LXD provider
 
   The new LXD provider is the best way to use Juju locally. 
-  See: https://jujucharms.com/docs/2.0/clouds-LXD
+  See: [https://jujucharms.com/docs/2.0/clouds-LXD](https://jujucharms.com/docs/2.0/clouds-LXD) 
 
   The controller is no longer your host machine; a LXD
   container is created instead. This keeps your host machine clean 
@@ -667,7 +667,7 @@ The versions covered here are:
           
         newgrp lxd
                 
-  See: https://linuxcontainers.org/lxd/getting-started-cli/
+  See: [https://linuxcontainers.org/lxd/getting-started-cli/](https://linuxcontainers.org/lxd/getting-started-cli/) 
 
 
   #### LXD Container Support
@@ -694,7 +694,7 @@ The versions covered here are:
   To add credentials for Azure, run the command `juju add-credential azure`.
   Select the default interactive mode and you will be prompted to enter your
   subscription ID. You can find your subscription ID in the Azure portal
-  (https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
+  ([https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade) ).
   You will then be prompted to open a URL to authenticate with Azure,
   and authorise Juju to create credentials on your behalf.
 
@@ -972,7 +972,7 @@ The versions covered here are:
   | juju ensure-availability             | juju enable-ha
 
   * the behaviour of destroy-environment/destroy-model has changed, see
-        https://jujucharms.com/docs/2.0/controllers
+        [https://jujucharms.com/docs/2.0/controllers](https://jujucharms.com/docs/2.0/controllers) 
 
 
   These extra commands were previously under the "jes" developer feature
