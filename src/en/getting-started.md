@@ -20,6 +20,7 @@ Apart from Juju, the following technologies will be used:
 Begin by installing the required software:
 
 ```no-highlight
+sudo add-apt-repository ppa:juju/stable
 sudo apt update
 sudo apt install juju zfsutils-linux
 ```
