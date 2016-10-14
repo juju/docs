@@ -5,14 +5,6 @@ TODO: Testing section needs rewrite
       Links need to be reverified when supporting pages are written
       Remove PPA info when Juju2 lands a stable release in main repo
 
-!!! Note: These instructions are currently transitional. They will become the
-standard instructions for the stable 2.0 release, but as not all features of
-that release are fully finalised, some parts may change. If you are currently
-using a pre-release version of Juju, please also refer to the release notes
-for caveats and install information. There are many broken links etc, this is
-all work in progress
-
-
 # Getting started with Juju
 
 Before you start on your Juju adventure, please make sure you have the
@@ -27,35 +19,29 @@ The rest of this page will guide you through installing the software, accessing
 your cloud and deploying a test workload.
 
 
-# 1. Install Juju
+## 1. Install Juju
 
 Juju is currently available for Ubuntu, CentOS, MacOSX and Windows.
 
-## Ubuntu
+### Ubuntu
 
-To install Juju, you simply need to grab the latest juju2 package from the
+To install Juju, you simply need to grab the 'juju' package from the
 PPA:
 
 ```bash
-sudo add-apt-repository ppa:juju/devel
+sudo add-apt-repository ppa:juju/stable
 sudo apt update
 sudo apt install juju
 ```
-
-!!! Note: the above currently installs the 'devel' version of Juju, for
-pre-release testing of Juju 2.0.
-
-Using this PPA resource gurantees you will always have access to the very latest
+Using the stable PPA resource guarantees you will always have access to the very latest
 stable version of Juju.
 
-
-## CentOS, MacOSX, Windows
+### CentOS, MacOSX, Windows
 
 See [the releases page](reference-releases.html) for instructions on how to
 install the versions currently available.
 
-
-# 2. Choose a cloud
+## 2. Choose a cloud
 
 Juju maintains knowledge about supported public clouds and their regions. To see
 the list of clouds Juju currently knows about, simply enter:
@@ -67,17 +53,17 @@ Which should return a list like this:
 
 <!--CLOUD LIST -->
 ```no-highlight
-CLOUD        TYPE        REGIONS
-aws          ec2         us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2 ...
-aws-china    ec2         cn-north-1
-aws-gov      ec2         us-gov-west-1
-azure        azure       centralus, eastus, eastus2, northcentralus, southcentralus, westus, northeurope ...
-azure-china  azure       chinaeast, chinanorth
-cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
-google       gce         us-east1, us-central1, europe-west1, asia-east1
-joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
-rackspace    rackspace   dfw, ord, iad, lon, syd, hkg
-localhost    lxd         localhost
+Cloud        Regions  Default        Type        Description
+aws               11  us-east-1      ec2         Amazon Web Services
+aws-china          1  cn-north-1     ec2         Amazon China
+aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
+azure             18  centralus      azure       Microsoft Azure
+azure-china        2  chinaeast      azure       Microsoft Azure China
+cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
+google             4  us-east1       gce         Google Cloud Platform
+joyent             6  eu-ams-1       joyent      Joyent Cloud
+rackspace          6  dfw            rackspace   Rackspace Cloud
+localhost          1  localhost      lxd         LXD Container Hypervisor
 ```
 
 Juju already knows how to talk to these cloud providers, but it can also work
@@ -91,11 +77,7 @@ please [read the instructions on managing clouds][clouds].
 If you have an account with a listed cloud, you don't need to configure anything,
 Juju just needs your credentials for accessing the cloud.
 
-!!! Note: alpha/beta versions require some extra configuration for streams,
-see the release notes!
-
-
-# 3. Enter your credentials
+## 3. Enter your credentials
 
 Juju currently uses three possible ways to get your credentials for a cloud:
 
@@ -105,7 +87,7 @@ Juju currently uses three possible ways to get your credentials for a cloud:
 
 ^# Using environment variables
 
-   Some cloud providers (e.g. AWS, Openstack) have command line tools which rely on environment variables being used to store credentials. If these are in use on your system already, or you choose to define them ([there is extra info here][env]), Juju will use them too.
+   Some cloud providers (e.g. AWS, Openstack) have command line tools which rely on environment variables being used to store credentials. If these are in use on your system already, or you choose to define them, Juju will use them too.
 
    For example, AWS uses the following environment variables (among others):
 
@@ -172,7 +154,7 @@ named cloud unless another is specified.
 please [see this guide to credentials][credentials])
 
 
-# 4. Bootstrap
+## 4. Bootstrap
 
 Before you can start using Juju to spin up applications in a cloud, it needs to
 create its own instance to act as a controller. The controller is your Juju
@@ -195,11 +177,7 @@ This bootstrap process may take a few minutes to complete as it creates a new
 instance in the cloud and fetches the software it requires, but you should see
 plenty of feedback in your shell.
 
-!!! Note: If there any errors in the bootstrap process, take a look at our
-[FAQ][faq] for possible solutions!
-
-
-# 5. Testing
+## 5. Testing
 
 Juju is now ready to deploy any applications from the hundreds included in the
 [juju charm store](https://jujucharms.com). It is a good idea to test your new
@@ -228,8 +206,8 @@ look something like this:
 ![juju status](./media/juju-mediawiki-status.png)
 
 There is quite a lot of information there but the important parts for now are
-the [Services] section, which show that Mediawiki and MySQL are installed, and
-the [Units] section, which crucially shows the IP addresses allocated to them.
+the [APP] section, which show that Mediawiki and MySQL are installed, and
+the [UNIT] section, which crucially shows the IP addresses allocated to them.
 
 By default, Juju is secure - you won't be able to connect to any applications
 unless they are specifically exposed. This adjusts the relevant firewall
@@ -241,7 +219,7 @@ juju expose mediawiki
 ```
 
 From the status output, we can see that the Mediawiki application is running on
-10.0.3.60 (your IP may vary). If we open up Firefox now and point it at that
+10.78.0.239 (your IP may vary). If we open up Firefox now and point it at that
 address, you should see the site running.
 
 !["mediawiki site"](./media/juju-mediawiki-site.png)
@@ -252,27 +230,19 @@ Congratulations, you have just deployed an application with Juju!
 often quickest to destroy the model with the command 'juju destroy-model default`
 and then create a new model.
 
+## Next Steps
 
-# Next Steps
+Now that you have a Juju-powered cloud, it is time to explore the amazing
+things you can do with it!
 
-Now you have a Juju-powered cloud, it is time to explore the amazing things you
-can do with it!
-
-We suggest you take the time to read the following:
-
-  - [Juju concepts][concepts] - This page explains the terminology used
-    throughout this documentation and describes what Juju can do
-  - [Clouds][clouds] goes into detail about configuring clouds, including the
-    'local' cloud, which is great for lightning fast testing and development.
-  - [Charms/Services][charms] - find out how to construct complicated workloads
-    in next to no time.
+We suggest you continue your journey by discovering
+[how to add controllers for additional clouds][tut-cloud]
 
 
-[clouds]: ./clouds.html  "Configuring Juju Clouds"
 [charm store]: https://jujucharms.com "Juju Charm Store"
 [releases]: reference-releases.html
 [keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
 [concepts]: ./juju-concepts.html "Juju concepts"
-[charms]: ./charms-intro.html
+[charms]: ./developer-getting-started.html
 [credentials]: ./credentials.html
-[faq]: ./getting-started-faq.html
+[tut-cloud]: ./tut-google.html
