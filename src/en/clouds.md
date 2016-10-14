@@ -38,9 +38,34 @@ localhost          1  localhost      lxd         LXD Container Hypervisor
 ```
 
 This lists the cloud name (which you will use to specify the cloud you want to 
-use), its type (the API used to control it) and the known regions for the cloud.
-The default region for a cloud is shown first in the list-clouds output, so
-in the above, `us-east-1` is the default region for an aws cloud. To specify
+use), its type (the API used to control it) and the default region for each
+cloud, so in the above, `us-east-1` is the default region for an aws cloud.
+
+To see which regions Juju currently knows about for a specific cloud, you can
+run the command, replacing `aws` with any of the clouds returned in the previous
+command:
+  
+```bash
+juju list-regions aws
+```
+
+This will return a list like this:
+  
+```no-highlight
+us-east-1
+us-west-1
+us-west-2
+eu-west-1
+eu-central-1
+ap-south-1
+ap-southeast-1
+ap-southeast-2
+ap-northeast-1
+ap-northeast-2
+sa-east-1
+```
+
+This lists all of the regions available to you for the named cloud. To specify
 a different region, see [Creating a controller](./controllers-creating.html).
 
 Set the default region for a cloud with:
