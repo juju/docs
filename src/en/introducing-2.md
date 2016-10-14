@@ -6,12 +6,12 @@ TODO: Add extra changes as required
 
 If you are familiar with Juju, you are no doubt excited to get started with the
 wealth of powerful new features introduced in the new 2.0 release (and if you 
-haven't tried Juju before, see [this introduction](./about-juju.html) ). But 
+haven't tried Juju before, see [this introduction][aboutjuju]). But 
 what are the new features? What has changed? 
 This page will give you an overview of the significant changes that you really
 need to know about before you do anything else, followed by a short guide to 
 upgrading your existing Juju client and deployments to the very latest version.
-You can also review the [complete release notes here](./temp-release-notes.md).
+You can also review the [complete release notes here][releasenotes].
 
  - **Commands:** Probably the most immediate change you will come across is that
 practically every command has changed! Really! Significant work has been done to
@@ -21,8 +21,8 @@ instead of ```juju authorised-keys add <xxxx>``` you will now use the command
    It reads better, is more straightforward, and 
 works really well with tab completion! The documentation has been updated to
 include all these new commands, so you can check relevant pages for guides to
-the new commands, or browse through the [reference guide](./commands.html).
-There is also a handy [crib sheet](./command-changes.html) to show you the new
+the new commands, or browse through the [reference guide][referenceguide].
+There is also a handy [crib sheet][commandchanges] to show you the new
 versions of old commands.
 
  - **Terminology:** You are probably used to thinking of Juju in terms of the 
@@ -31,7 +31,7 @@ documentation talks about "Controllers" and "models" instead. Why? Part of this
 is to do with the way Juju organises itself - now multiple models (environments)
 can be driven from one controller (state-server). This means that for a given
 cloud you only need one controller, but can drive several models. You should 
-also check through the [documentation about users][users]
+also check through our [tutorial about sharing clouds with users][users]
 to understand how these models can be shared.
 
   - **Providers:** As well as updates to the Azure provider and the new 
@@ -42,8 +42,7 @@ models. You can find out more about setting up
 
 ## Juju and MAAS
 
-Juju supports MAAS 1.9 and 2.0.
-
+Juju supports MAAS 1.9, 2.0 and 2.1.
 
 ## Upgrading from earlier versions
 
@@ -55,5 +54,8 @@ available
 
 
 [lxd]: ./clouds-LXD.html
-[users]: ./users.html
-
+[users]: ./tut-users.html
+[aboutjuju]: ./about-juju.html
+[releasenotes]: ./reference-release-notes.html
+[referenceguide]: ./commands.html
+[commandchanges]: ./command-changes.html
