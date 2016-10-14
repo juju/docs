@@ -608,12 +608,13 @@ The versions covered here are:
   syntax for the '--bind' argument is a whitespace-separated list of
   endpoint and space names, separated by "=".
 
-  When '--bind' is not specified, all endpoints will use the same
+  When `--bind` is not specified, all endpoints will use the same
   address, which is the host machine's preferred private address, as
-  returned by "unit-get private-address". This is backwards-compatible behaviour.
+  returned by "unit-get private-address".
+  This is backwards-compatible behaviour.
 
   Additionally, an application-default space can be specified by omitting
-  the `<endpoint>=` prefix before the space name. This space will
+  the `<endpoint>=` prefix before the space name. This space will
   be used for binding all endpoints that are not explicitly specified.
 
   Examples:
@@ -690,7 +691,7 @@ The versions covered here are:
   deployed. As before, units of an application will be allocated to machines
   in a application-specific Availability Set if no machine is specified.
 
-  To add credentials for Azure, run the command `juju add-credential azure`.
+  To add credentials for Azure, run the command `juju add-credential azure`.
   Select the default interactive mode and you will be prompted to enter your
   subscription ID. You can find your subscription ID in the Azure portal
   (https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
@@ -926,51 +927,51 @@ The versions covered here are:
 
   Juju commands have moved to a flat command structure instead of nested command structure:
 
-     | 1.25 command                         | 2.0 command                   |
-     |--------------------------------------|-------------------------------|
-     | juju environment destroy             |juju destroy-model *            
-     | juju environment get                 | juju model-config
-     | juju environment get-constraints     | juju get-model-constraints 
-     | juju environment retry-provisioning  | juju retry-provisioning
-     | juju environment set                 | juju model-config 
-     | juju environment set-constraints     | juju set-model-constraints
-     | juju environment share               | juju grant 
-     | juju environment unset               | juju model-config
-     | juju environment unshare             | juju revoke
-     | juju environment users               | juju list-users
-     | juju user add                        | juju add-user
-     | juju user change-password            | juju change-user-password
-     | juju user disable                    | juju disable-user
-     | juju user enable                     | juju enable-user
-     | juju user info                       | juju show-user
-     | juju user list                       | juju list-users
-     | juju machine add                     | juju add-machine 
-     | juju machine remove                  | juju remove-machine 
-     | juju authorised-keys add             | juju add-ssh-key
-     | juju authorised-keys list            | juju list-ssh-keys
-     | juju authorised-keys delete          | juju remove-ssh-key
-     | juju authorised-keys import          | juju import-ssh-key
-     | juju get                             | juju config
-     | juju set                             | juju config
-     | juju get-constraints                 | juju get-model-constraints
-     | juju set-constraints                 | juju set-model-constraints
-     | juju get-constraints <application>   | juju get-constraints
-     | juju set-constraints <application>   | juju set-constraints
-     | juju backups create                  | juju create-backup 
-     | juju backups restore                 | juju restore-backup 
-     | juju action do                       | juju run-action 
-     | juju action defined                  | juju list-actions 
-     | juju action fetch                    | juju show-action-output 
-     | juju action status                   | juju show-action-status 
-     | juju storage list                    | juju list-storage 
-     | juju storage show                    | juju show-storage 
-     | juju storage add                     | juju add-storage 
-     | juju space create                    | juju add-space 
-     | juju space list                      | juju list-spaces 
-     | juju subnet add                      | juju add-subnet 
-     | juju ensure-availability             | juju enable-ha
+  | 1.25 command                         | 2.0 command                   |
+  |--------------------------------------|-------------------------------|
+  | juju environment destroy             |juju destroy-model *            
+  | juju environment get                 | juju model-config
+  | juju environment get-constraints     | juju get-model-constraints 
+  | juju environment retry-provisioning  | juju retry-provisioning
+  | juju environment set                 | juju model-config 
+  | juju environment set-constraints     | juju set-model-constraints
+  | juju environment share               | juju grant 
+  | juju environment unset               | juju model-config
+  | juju environment unshare             | juju revoke
+  | juju environment users               | juju list-users
+  | juju user add                        | juju add-user
+  | juju user change-password            | juju change-user-password
+  | juju user disable                    | juju disable-user
+  | juju user enable                     | juju enable-user
+  | juju user info                       | juju show-user
+  | juju user list                       | juju list-users
+  | juju machine add                     | juju add-machine 
+  | juju machine remove                  | juju remove-machine 
+  | juju authorised-keys add             | juju add-ssh-key
+  | juju authorised-keys list            | juju list-ssh-keys
+  | juju authorised-keys delete          | juju remove-ssh-key
+  | juju authorised-keys import          | juju import-ssh-key
+  | juju get                             | juju config
+  | juju set                             | juju config
+  | juju get-constraints                 | juju get-model-constraints
+  | juju set-constraints                 | juju set-model-constraints
+  | juju get-constraints <application>   | juju get-constraints
+  | juju set-constraints <application>   | juju set-constraints
+  | juju backups create                  | juju create-backup 
+  | juju backups restore                 | juju restore-backup 
+  | juju action do                       | juju run-action 
+  | juju action defined                  | juju list-actions 
+  | juju action fetch                    | juju show-action-output 
+  | juju action status                   | juju show-action-status 
+  | juju storage list                    | juju list-storage 
+  | juju storage show                    | juju show-storage 
+  | juju storage add                     | juju add-storage 
+  | juju space create                    | juju add-space 
+  | juju space list                      | juju list-spaces 
+  | juju subnet add                      | juju add-subnet 
+  | juju ensure-availability             | juju enable-ha
 
-      * the behaviour of destroy-environment/destroy-model has changed, see
+  * the behaviour of destroy-environment/destroy-model has changed, see
         https://jujucharms.com/docs/2.0/controllers
 
 
@@ -991,10 +992,12 @@ The versions covered here are:
 
   In general:
   
-      * commands which list multiple things should start with 'list-' and there will be an alias for the plural noun in the command, for example ‘list-controllers’ is an alias for ‘controllers’
-      * commands which look at an individual thing will start with 'show-'
-      * commands which start with 'remove-' are used for things that can be easily recreated
-      * commands which start with 'destroy-' are used only for controllers and models.
+    * commands which list multiple things should start with `list-` and there
+      will be an alias for the plural noun in the command, for 
+      example ‘list-controllers’ is an alias for ‘controllers’.
+    * commands which look at an individual thing will start with `show-`.
+    * commands which start with 'remove-' are used for things that can be easily recreated.
+    * commands which start with 'destroy-' are used only for controllers and models.
 
   ### Known issues
 
