@@ -14,7 +14,8 @@ The versions covered here are:
 
   ## Notable Changes
 
-  Juju 2.0 is a fundamental step forward from the previous 1.x series, introducing significant new features and capabilities, including:
+  Juju 2.0 is a fundamental step forward from the previous 1.x series,
+  introducing significant new features and capabilities, including:
 
     * Integrated GUI
     * Better cloud management
@@ -24,7 +25,8 @@ The versions covered here are:
     * More efficient Controller/Model arrangement 
     * More intuitive CLI experience
 
-  An overview of these features is discussed below - for full documentation, please visit our docs online at:
+  An overview of these features is discussed below - for full 
+  documentation, please visit our docs online at:
   https://jujucharms.com/docs/2.0/
 
   ### Integrated GUI
@@ -33,30 +35,38 @@ The versions covered here are:
 
         juju gui --show-credentials
 
-  It will open the GUI in your browser and output your credentials to the console for logging in. When a new version of the GUI is released to upgrade:
+  It will open the GUI in your browser and output your credentials to
+  the console for logging in. When a new version of the GUI is released to upgrade:
 
         juju upgrade-gui
 
   ### Juju 2.0 is co-installable with Juju 1.25
 
-  The directory where Juju stores its working data has changed to follow the XDG directory specification. By default, the Juju data directory is located at ~/.local/share/juju. You may override this by setting the JUJU_DATA environment variable.
+  The directory where Juju stores its working data has changed to
+  follow the XDG directory specification. By default, the Juju data
+  directory is located at ~/.local/share/juju. You may override this
+  by setting the JUJU_DATA environment variable.
 
   Juju 2.0's data is not compatible with Juju 1.x.
-  Do not set `JUJU_DATA` to the old `JUJU_HOME` (~/.juju).
+  **Do not** set `JUJU_DATA` to the old `JUJU_HOME` (~/.juju).
 
   ### New bootstrap and cloud management experience
 
   This release introduces a new way of bootstrapping and managing clouds
   and credentials that involves less editing of files and makes Juju work
-  out of the box with major public clouds like AWS, Azure, Google, Rackspace, Joyent, and Cloudsigma.
+  out of the box with major public clouds like AWS, Azure, Google,
+  Rackspace, Joyent, and Cloudsigma.
 
-  Clouds and credentials are managed separately making it easier to utilize different credentials for a single cloud.
+  Clouds and credentials are managed separately making it easier to
+  use different credentials for a single cloud.
 
   See: https://jujucharms.com/docs/2.0/controllers-creating
 
   #### LXD cloud support
 
-  Using the LXD cloud is the fastest way to get started with Juju locally using secure local containers. Use our getting-started guide to setup LXD and start modeling your operations. 
+  Using the LXD cloud is the fastest way to get started with Juju
+  locally using secure local containers. Use our getting-started guide
+  to setup LXD and start modeling your operations. 
 
   https://jujucharms.com/docs/2.0/getting-started
 
@@ -66,33 +76,38 @@ The versions covered here are:
 
         juju list-clouds
 
-  Cloud        Regions  Default        Type        Description
-  aws               11  us-east-1      ec2         Amazon Web Services
-  aws-china          1  cn-north-1     ec2         Amazon China
-  aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
-  azure             18  centralus      azure       Microsoft Azure
-  azure-china        2  chinaeast      azure       Microsoft Azure China
-  cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
-  google             4  us-east1       gce         Google Cloud Platform
-  joyent             6  eu-ams-1       joyent      Joyent Cloud
-  rackspace          6  dfw            rackspace   Rackspace Cloud
-  localhost          1  localhost      lxd         LXD Container Hypervisor
+      Cloud        Regions  Default        Type        Description
+      aws               11  us-east-1      ec2         Amazon Web Services
+      aws-china          1  cn-north-1     ec2         Amazon China
+      aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
+      azure             18  centralus      azure       Microsoft Azure
+      azure-china        2  chinaeast      azure       Microsoft Azure China
+      cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
+      google             4  us-east1       gce         Google Cloud Platform
+      joyent             6  eu-ams-1       joyent      Joyent Cloud
+      rackspace          6  dfw            rackspace   Rackspace Cloud
+      localhost          1  localhost      lxd         LXD Container Hypervisor
 
 
   ##### update-clouds command
 
-  Canonical will publish new public cloud data to reflect new regions or changed endpoints in the list of public clouds supported by Juju. To update your Juju environment, use this:
+  Canonical will publish new public cloud data to reflect new
+  regions or changed endpoints in the list of public clouds supported
+  by Juju. To update your Juju environment, use this:
 
         juju update-clouds
 
-  The newly downloaded cloud information will be used next time a Juju controller is bootstrapped.
+  The newly downloaded cloud information will be used next time a
+  Juju controller is bootstrapped.
 
   See: https://jujucharms.com/docs/2.0/clouds
 
 
   #### Credential management
 
-  To access your cloud, Juju must be able to authenticate to it. Credentials are defined per cloud. Juju can guide you through adding a new credential like so: 
+  To access your cloud, Juju must be able to authenticate to it.
+  Credentials are defined per cloud. Juju can guide you through
+  adding a new credential like so: 
 
         juju add-credential aws
 
@@ -131,7 +146,9 @@ The versions covered here are:
 
   #### Model configuration at bootstrap
 
-  When bootstrapping, it is sometimes necessary to pass in configuration values. You may specify config values as bootstrap arguments or via a file:
+  When bootstrapping, it is sometimes necessary to pass in
+  configuration values. You may specify config values as bootstrap
+  arguments or via a file:
 
         juju bootstrap aws --config image-stream=daily
 
@@ -147,7 +164,9 @@ The versions covered here are:
 
   ### Shared model config
 
-  Configuration can now be shared between models. The three separate commands (get-model-config, set-model-config, and unset-model-config) have been collapsed into a single command. 
+  Configuration can now be shared between models. The three separate
+  commands (get-model-config, set-model-config, and unset-model-config)
+  have been collapsed into a single command. 
 
   New/changed commands relevant to this feature:
     - juju model-config
@@ -176,7 +195,8 @@ The versions covered here are:
 
   ##### Model config command examples
   
-  When bootstrapping, it is sometimes necessary to pass in configuration values. You may specify config values as bootstrap arguments or via a file:
+  When bootstrapping, it is sometimes necessary to pass in configuration
+  values. You may specify config values as bootstrap arguments or via a file:
 
         juju bootstrap aws --config image-stream=daily
 
@@ -207,7 +227,9 @@ The versions covered here are:
     - the FROM value is calculated dynamically so that if a default value
       changes to match the model, the output is adjusted accordingly
 
-  The behaviour of juju model-config --reset has changed. Previously, any reset attribute would revert to the empty value. Now, the value will revert to the closest inherited value.
+  The behaviour of juju model-config --reset has changed. Previously,
+  any reset attribute would revert to the empty value. Now, the
+  value will revert to the closest inherited value.
 
   #### Model defaults
 
@@ -229,55 +251,78 @@ The versions covered here are:
       they exist) instead of just the controller.
 
   ##### Model default command examples
+  
   Retrieve the full set of configuration defaults (some content elided for brevity).
-  juju model-defaults
-  Attribute                   Default           Controller
-  agent-metadata-url          ""                -
-  agent-stream                released          -
-  apt-ftp-proxy               ""                -
-  ...
-  logging-config              ""                <root>=TRACE
-  no-proxy                    ""                https://local
-    us-east-1                 foobar            -
-    us-west-1                 https://foo-west  -
-  provisioner-harvest-mode    destroyed         -
-  proxy-ssh                   false             -
-  resource-tags               ""                -
-  ...
+  
+      juju model-defaults
+  
+      Attribute                   Default           Controller
+      agent-metadata-url          ""                -
+      agent-stream                released          -
+      apt-ftp-proxy               ""                -
+      ...
+      logging-config              ""                <root>=TRACE
+      no-proxy                    ""                https://local
+      us-east-1                 foobar            -
+      us-west-1                 https://foo-west  -
+      provisioner-harvest-mode    destroyed         -
+      proxy-ssh                   false             -
+      resource-tags               ""                -
+      ...
+      
   Set the default configuration value for all models in the controller for key to value and key2 to value2.
-  juju model-defaults key=value key2=value2
-  Retrieve just the value for a single key.
-  juju model-defaults key
-  ATTRIBUTE    DEFAULT           CONTROLLER
-  key          ""                shrubbery
-    us-east-1  value             -
-    us-west-1  foobaz            -
-  Retrieve just the value for a single region.
-  juju model-defaults us-east-1
-  ATTRIBUTE    DEFAULT           CONTROLLER
-  key          ""                shrubbery
-    us-east-1  value             -
-  Reset the value of key and key2 to the next closest default value.
-  juju model-defaults --reset key,key2
+  
+      juju model-defaults key=value key2=value2
+  
+  Retrieve just the value for a single key:
+  
+      juju model-defaults key
+  
+      ATTRIBUTE    DEFAULT           CONTROLLER
+      key          ""                shrubbery
+      us-east-1  value             -
+      us-west-1  foobaz            -
+  
+  Retrieve just the value for a single region:
+
+      juju model-defaults us-east-1
+ 
+      ATTRIBUTE    DEFAULT           CONTROLLER
+      key          ""                shrubbery
+      us-east-1  value             -
+  
+  Reset the value of key and key2 to the next closest default value:
+
+      juju model-defaults --reset key,key2
+  
   As with model-config values can be reset and set in one command.
-          juju model-defaults --reset key key2=value2
+
+      juju model-defaults --reset key key2=value2
 
   ### Juju controllers
-  A Juju controller provides the HTTP API to Juju and handles all of the state information for each model running.
+  
+  A Juju controller provides the HTTP API to Juju and handles 
+  all of the state information for each model running.
 
-  A controller is created by the “juju bootstrap” command. A single Juju controller can now manage many Juju models, meaning less resources are needed for Juju's management infrastructure than with Juju 1.x, and new models can be created instantly.
+  A controller is created by the “juju bootstrap” command. A single
+  Juju controller can now manage many Juju models, meaning less
+  resources are needed for Juju's management infrastructure than
+  with Juju 1.x, and new models can be created instantly.
 
-  Controllers have a name. By default, Juju will name the controller after the cloud and region on which it is running:
+  Controllers have a name. By default, Juju will name the controller
+  after the cloud and region on which it is running:
 
-  juju bootstrap aws
-  Creating Juju controller "aws-us-east-1" on aws/us-east-1
-  …
+      juju bootstrap aws
+      
+      Creating Juju controller "aws-us-east-1" on aws/us-east-1
+      …
 
   It is also possible to give the controller a name:
 
-  juju bootstrap aws prod
-  Creating Juju controller "prod" on aws/us-east-1
-  …
+      juju bootstrap aws prod
+   
+      Creating Juju controller "prod" on aws/us-east-1
+      …
 
   The relevant controller and model commands are:
 
@@ -289,9 +334,6 @@ The versions covered here are:
         juju destroy-model
         juju destroy-controller
 
-  See also:
-        juju help controllers
-
   To learn about managing controllers and models, see:
 
   https://jujucharms.com/docs/2.0/controllers
@@ -300,7 +342,8 @@ The versions covered here are:
 
   #### Juju GUI in the controller
 
-  The Juju GUI is now included in every Juju controller after bootstrapping, eliminating the need to deploy a Juju GUI charm. 
+  The Juju GUI is now included in every Juju controller after
+  bootstrapping, eliminating the need to deploy a Juju GUI charm. 
 
   See: https://jujucharms.com/docs/controllers-gui
 
@@ -328,9 +371,11 @@ The versions covered here are:
 
   #### Sharing models
 
-  It is now possible to give other people access to models. Users may be granted read, write, or admin access to a model.
+  It is now possible to give other people access to models. Users may be granted
+  read, write, or admin access to a model.
 
-  To grant access to a new user they need to be added first using the `add-user` command:
+  To grant access to a new user they need to be added first
+  using the `add-user` command:
 
         juju add-user jo 
 
@@ -349,6 +394,7 @@ The versions covered here are:
   ### Controller and model permissions
 
   A user can be given one of three permission levels on each model in a controller:
+  
     * read: The user can log in to the model and obtain status and information about it.
     * write: The user can deploy/delete services and add relations in a model.
     * admin: The user has full control over the model except for controller level actions such as deletion. Model owners can delete their own models.
@@ -365,33 +411,44 @@ The versions covered here are:
   #### Native support for charm bundles
 
   The Juju 'deploy' command is used to deploy a bundle. A bundle is a
-  collection of charms, configuration, and other characteristics that can be deployed in a consistent manner. 
+  collection of charms, configuration, and other characteristics that can
+  be deployed in a consistent manner. 
 
   See: https://jujucharms.com/docs/2.0/charms-bundles
 
 
   #### Multi-series charms
 
-  Charms may now declare that they support more than one operating system series. Previously a separate version of a charm was required for each series. To specify the series to use when deploying a charm, use the ‘--series’ flag:
+  Charms may now declare that they support more than one operating
+  system series. Previously a separate version of a charm was required
+  for each series. To specify the series to use when deploying a charm,
+  use the ‘--series’ flag:
 
         juju deploy mysql --series trusty
 
-  If '--series' is not specified the default is used. The default series for a multi-series charm is the first one specified in the charm metadata. If the specified series is not supported by the charm the deploy will abort with an error, unless '--force' is used.
+  If '--series' is not specified the default is used. The default series
+  for a multi-series charm is the first one specified in the charm metadata.
+  If the specified series is not supported by the charm the deploy will abort
+  with an error, unless '--force' is used.
 
 
   #### Improved local charm deployment
 
   Local charms and bundles can be deployed directly from their source
-  directory. This feature makes it convenient to hack on a charm and just deploy it. The feature is also necessary to develop local charms
+  directory. This feature makes it convenient to hack on a charm and
+  just deploy it. The feature is also necessary to develop local charms
   supporting multiple series. 
 
-  For example, to deploy a development copy of magic-charm from a local repo, targeting the yakkety series:
+  For example, to deploy a development copy of magic-charm from a local
+  repo, targeting the yakkety series:
 
         juju deploy ./dev/juju/magic-charm --series yakkety
 
   See: https://jujucharms.com/docs/2.0/charms-deploying
 
-  Any directory structure can be used, including simply pulling the charm source from a version control system, hacking on the code, and deploying directly from the local repo.
+  Any directory structure can be used, including simply pulling the
+  charm source from a version control system, hacking on the code, and
+  deploying directly from the local repo.
 
 
   #### Resources
