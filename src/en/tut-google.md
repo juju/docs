@@ -137,7 +137,6 @@ automatically:
 
 ```bash
 juju deploy haproxy
-
 ```
 You can check on the state of any deployment, model or controller with the
 'juju status' command. If you query the status directly after deploying
@@ -151,8 +150,7 @@ APP      VERSION  STATUS   SCALE  CHARM    STORE       REV  OS      NOTES
 haproxy           waiting    0/1  haproxy  jujucharms   37  ubuntu
 
 UNIT       WORKLOAD  AGENT       MACHINE  PUBLIC-ADDRESS  PORTS  MESSAGE
-haproxy/0  waiting   allocating  0                               waiting for
-machine
+haproxy/0  waiting   allocating  0                               waiting for machine
 
 MACHINE  STATE    DNS  INS-ID   SERIES  AZ
 0        pending       pending  xenial
@@ -217,16 +215,23 @@ application.
 
 ![Juju GUI model of Django bundle](media/tut-gce-gui_django.png)
 
-[helpaws]: https://jujucharms.com/docs/stable/help-aws
-[helpazure]: https://jujucharms.com/docs/stable/help-azure
+## Next Steps
+
+Now you can see how Juju makes it easy to model workloads, you are sure
+to want to share. Find out how easy it is to 
+[add users to your Juju controllers and models][tutuser].
+
+[helpaws]: ./help-aws.html
+[helpazure]: ./help-azure.html
 [gcetrial]: https://console.cloud.google.com/freetrial
 [gcedashboard]: https://console.cloud.google.com
-[gcenewproject]: https://jujucharms.com/docs/stable/help-google#create-a-project 
-[jujuterms]: https://jujucharms.com/docs/stable/glossary
+[gcenewproject]: ./help-google.html#create-a-project 
+[jujuterms]: ./glossary.html
 [charmhaproxy]: https://jujucharms.com/haproxy/37
-[charmpsql]:https://jujucharms.com/postgresql/105
+[charmpsql]: https://jujucharms.com/postgresql/105
 [bundleopenstack]: https://jujucharms.com/openstack-base/
 [bundlekubernetes]: https://jujucharms.com/canonical-kubernetes/
 [charmstore]: https://jujucharms.com/store
-[diycharm]: https://jujucharms.com/docs/2.0/developer-getting-started
-[jujugui]: https://jujucharms.com/docs/stable/controllers-gui
+[diycharm]: ./developer-getting-started.html
+[jujugui]: ./controllers-gui.html
+[tutuser]: ./tut-users.html
