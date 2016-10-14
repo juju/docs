@@ -21,7 +21,7 @@ The versions covered here are:
     * Multi-user support
     * Baked-in knowledge of public clouds
     * Uses LXD for fast and efficient local experience 
-    * More efficient Controller/Model  
+    * More efficient Controller/Model arrangement 
     * More intuitive CLI experience
 
   An overview of these features is discussed below - for full documentation, please visit our docs online at:
