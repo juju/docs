@@ -19,11 +19,11 @@ The rest of this page will guide you through installing the software, accessing
 your cloud and deploying a test workload.
 
 
-# 1. Install Juju
+## 1. Install Juju
 
 Juju is currently available for Ubuntu, CentOS, MacOSX and Windows.
 
-## Ubuntu
+### Ubuntu
 
 To install Juju, you simply need to grab the 'juju' package from the
 PPA:
@@ -36,12 +36,12 @@ sudo apt install juju
 Using the stable PPA resource guarantees you will always have access to the very latest
 stable version of Juju.
 
-## CentOS, MacOSX, Windows
+### CentOS, MacOSX, Windows
 
 See [the releases page](reference-releases.html) for instructions on how to
 install the versions currently available.
 
-# 2. Choose a cloud
+## 2. Choose a cloud
 
 Juju maintains knowledge about supported public clouds and their regions. To see
 the list of clouds Juju currently knows about, simply enter:
@@ -77,7 +77,7 @@ please [read the instructions on managing clouds][clouds].
 If you have an account with a listed cloud, you don't need to configure anything,
 Juju just needs your credentials for accessing the cloud.
 
-# 3. Enter your credentials
+## 3. Enter your credentials
 
 Juju currently uses three possible ways to get your credentials for a cloud:
 
@@ -154,7 +154,7 @@ named cloud unless another is specified.
 please [see this guide to credentials][credentials])
 
 
-# 4. Bootstrap
+## 4. Bootstrap
 
 Before you can start using Juju to spin up applications in a cloud, it needs to
 create its own instance to act as a controller. The controller is your Juju
@@ -177,7 +177,7 @@ This bootstrap process may take a few minutes to complete as it creates a new
 instance in the cloud and fetches the software it requires, but you should see
 plenty of feedback in your shell.
 
-# 5. Testing
+## 5. Testing
 
 Juju is now ready to deploy any applications from the hundreds included in the
 [juju charm store](https://jujucharms.com). It is a good idea to test your new
@@ -230,26 +230,19 @@ Congratulations, you have just deployed an application with Juju!
 often quickest to destroy the model with the command 'juju destroy-model default`
 and then create a new model.
 
+## Next Steps
 
-# Next Steps
+Now that you have a Juju-powered cloud, it is time to explore the amazing
+things you can do with it!
 
-Now you have a Juju-powered cloud, it is time to explore the amazing things you
-can do with it!
-
-We suggest you take the time to read the following:
-
-  - [Juju concepts][concepts] - This page explains the terminology used
-    throughout this documentation and describes what Juju can do
-  - [Clouds][clouds] goes into detail about configuring clouds, including the
-    'local' cloud, which is great for lightning fast testing and development.
-  - [Charms/Services][charms] - find out how to construct complicated workloads
-    in next to no time.
+We suggest you continue your journey by discovering
+[how to add controllers for additional clouds][tut-cloud]
 
 
-[clouds]: ./clouds.html  "Configuring Juju Clouds"
 [charm store]: https://jujucharms.com "Juju Charm Store"
 [releases]: reference-releases.html
 [keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
 [concepts]: ./juju-concepts.html "Juju concepts"
 [charms]: ./developer-getting-started.html
 [credentials]: ./credentials.html
+[tut-cloud]: ./tut-google.html
