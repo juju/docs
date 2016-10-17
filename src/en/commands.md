@@ -463,7 +463,7 @@ Click on the expander to see details for each command.
 
 ^# add-storage
 
-   **Usage:** ` juju add-storage [options] <unit name> <storage directive> ...`
+   **Usage:** ` juju add-storage [options] <unit name> <storage directive>`
 
    **Summary:**
 
@@ -662,7 +662,7 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   A `juju register`command will be printed, which must be executed by the
+   A `juju register` command will be printed, which must be executed by the
    user to complete the registration process. The user's details are stored
    within the shared model, and will be removed when the model is destroyed.
    Some machine providers will require the user to be in possession of certain
@@ -747,8 +747,6 @@ Click on the expander to see details for each command.
 
 
 
- 
-
 ^# agreements
 
    **Usage:** ` juju agreements [options]`
@@ -772,7 +770,7 @@ Click on the expander to see details for each command.
    Specify an output file
 
    
-   **Details:**
+  **Details:**
 
 
    List terms the user has agreed to.
@@ -829,8 +827,6 @@ Click on the expander to see details for each command.
 
 
 
- 
-
 ^# attach
 
    **Usage:** ` juju attach [options] application name=file`
@@ -855,14 +851,11 @@ Click on the expander to see details for each command.
 
    This command uploads a file from your local disk to the juju controller to be
    used as a resource for an application.
-
-
-
- 
+   
 
 ^# autoload-credentials
 
-   **Usage:** ` juju autoload-credentials`
+   **Usage:** `juju autoload-credentials`
 
    **Summary:**
 
@@ -881,28 +874,29 @@ Click on the expander to see details for each command.
    including the locations searched.
 
    EC2
-           Credentials and regions:
-
-             1. On Linux, $HOME/.aws/credentials and $HOME/.aws/config
-             2. Environment variables AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+   Credentials and regions:
+ 
+   1. On Linux, &#36;HOME/.aws/credentials and &#36;HOME/.aws/config
+   2. Environment variables AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
    
    GCE
-           Credentials:
+   Credentials:
 
-             1. A JSON file whose path is specified by the
-                GOOGLE_APPLICATION_CREDENTIALS environment variable
-             2. On Linux, $HOME/.config/gcloud/application_default_credentials.json
-                Default region is specified by the CLOUDSDK_COMPUTE_REGION environment
-                variable.
+   1. A JSON file whose path is specified by the
+   GOOGLE_APPLICATION_CREDENTIALS environment variable
 
-             3. On Windows, %APPDATA%gcloud\application_default_credentials.json
+   2. On Linux, &#36;HOME/.config/gcloud/application_default_credentials.json
+   Default region is specified by the CLOUDSDK_COMPUTE_REGION environment
+   variable.
+
+   3. On Windows, &#37;APPDATA&#37;&#92;gcloud&#92;application_default_credentials.json
    
    OpenStack
-           Credentials:
+   Credentials:
 
-             1. On Linux, $HOME/.novarc
-             2. Environment variables OS_USERNAME, OS_PASSWORD, OS_TENANT_NAME,
-                OS_DOMAIN_NAME
+   1. On Linux, &#36;HOME/.novarc
+   2. Environment variables OS_USERNAME, OS_PASSWORD, OS_TENANT_NAME,
+   OS_DOMAIN_NAME
    
    Example:
 
@@ -920,7 +914,7 @@ Click on the expander to see details for each command.
    [add-credential](#add-credential)
 
 
- 
+
 
 ^# backups
 
@@ -956,7 +950,7 @@ Click on the expander to see details for each command.
 
 ^# bootstrap
 
-   **Usage:** ` juju bootstrap [options] <controller name> <cloud name>[/region]`
+   **Usage:** ` juju bootstrap [options] [<cloud name>[/region] [<controller name>]]`
 
    **Summary:**
 
@@ -1019,6 +1013,14 @@ Click on the expander to see details for each command.
    _--metadata-source (= "")_
 
    Local path to use as tools and/or metadata source
+
+   _--model-default  (= )_
+
+   Specify a configuration file, or one or more configuration
+
+   options to be set for all models, unless otherwise specified
+
+   (--config config.yaml [--config key=value ...])
 
    _--no-gui  (= false)_
 
@@ -1096,10 +1098,12 @@ Click on the expander to see details for each command.
           juju bootstrap
           juju bootstrap --clouds
           juju bootstrap --regions aws
-          juju bootstrap joe-us-east1 google
-          juju bootstrap --config=~/config-rs.yaml joe-syd rackspace
-          juju bootstrap --config agent-version=1.25.3 joe-us-east-1 aws
-          juju bootstrap --config bootstrap-timeout=1200 joe-eastus azure
+          juju bootstrap aws
+          juju bootstrap aws/us-east-1
+          juju bootstrap google joe-us-east1
+          juju bootstrap --config=~/config-rs.yaml rackspace joe-syd
+          juju bootstrap --config agent-version=1.25.3 aws joe-us-east-1
+          juju bootstrap --config bootstrap-timeout=1200 azure joe-eastus
 
 
    **See also:**
@@ -1346,6 +1350,8 @@ Click on the expander to see details for each command.
 
    [add-cloud](#add-cloud)
 
+   [regions](#regions)
+
    [show-cloud](#show-cloud)
 
    [update-clouds](#update-clouds)
@@ -1390,7 +1396,7 @@ Click on the expander to see details for each command.
 
 ^# config
 
-   **Usage:** ` juju config [options] <application name> [[--reset] <attribute-key>][=<value>] ...]`
+   **Usage:** ` juju config [options] <application name> [--reset <key[,key]>] [<attribute-key>][=<value>] ...]`
 
    **Summary:**
 
@@ -1418,9 +1424,9 @@ Click on the expander to see details for each command.
 
    Specify an output file
 
-   _--reset  (= false)_
+   _--reset  (= )_
 
-   Reset the provided keys to be empty
+   Reset the provided comma delimited keys
 
    
    **Details:**
@@ -1441,9 +1447,8 @@ Click on the expander to see details for each command.
           juju config apache2
           juju config --format=json apache2
           juju config mysql dataset-size
-          juju config mysql --reset dataset-size backup_dir
+          juju config mysql --reset dataset-size,backup_dir
           juju config apache2 --file path/to/config.yaml
-          juju config mysql dataset-size=80% backup_dir=/vol1/mysql/backups
           juju config apache2 --model mymodel --file /home/ubuntu/mysql.yaml
 
 
@@ -1452,6 +1457,55 @@ Click on the expander to see details for each command.
    [deploy](#deploy)
 
    [status](#status)
+
+
+ 
+
+^# controller-config
+
+   **Usage:** ` juju controller-config [options] [<attribute key>]`
+
+   **Summary:**
+
+   Displays configuration settings for a controller.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--format  (= yaml)_
+
+   Specify output format (json|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   By default, all configuration (keys and values) for the controller are
+   displayed if a key is not specified.
+
+
+   **Examples:**
+
+
+          juju controller-config
+          juju controller-config api-port
+          juju controller-config -c mycontroller
+
+
+   **See also:**
+
+   [controllers](#controllers)
 
 
  
@@ -2139,7 +2193,7 @@ Click on the expander to see details for each command.
 
 ^# destroy-model
 
-   **Usage:** ` juju destroy-model [options] `[<controller name>:]<model name>``
+   **Usage:** ` juju destroy-model [options] [<controller name>:]<model name>`
 
    **Summary:**
 
@@ -2613,6 +2667,10 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
    _--constraints (= "")_
 
    Additional machine constraints
@@ -2620,10 +2678,6 @@ Click on the expander to see details for each command.
    _--format  (= simple)_
 
    Specify output format (json|simple|yaml)
-
-   _-m, --model (= "")_
-
-   Model to operate in. Accepts `[<controller name>:]<model name>`
 
    _-n  (= 0)_
 
@@ -2642,8 +2696,10 @@ Click on the expander to see details for each command.
 
 
    To ensure availability of deployed applications, the Juju infrastructure
-   must itself be highly available.  enable-ha must be called
-   to ensure that the specified number of controllers are made available.
+   must itself be highly available. The enable-ha command will ensure
+   that the specified number of controller machines are used to make up the
+   controller.
+
    An odd number of controllers is required.
 
 
@@ -2812,55 +2868,6 @@ Click on the expander to see details for each command.
 
  
 
-^# get-controller-config
-
-   **Usage:** ` juju get-controller-config [options] [<attribute key>]`
-
-   **Summary:**
-
-   Displays configuration settings for a controller.
-
-   **Options:**
-
-   _-B, --no-browser-login  (= false)_
-
-   Do not use web browser for authentication
-
-   _-c, --controller (= "")_
-
-   Controller to operate in
-
-   _--format  (= yaml)_
-
-   Specify output format (json|yaml)
-
-   _-o, --output (= "")_
-
-   Specify an output file
-
-   
-   **Details:**
-
-
-   By default, all configuration (keys and values) for the controller are
-   displayed if a key is not specified.
-
-
-   **Examples:**
-
-
-          juju get-controller-config
-          juju get-controller-config api-port
-          juju get-controller-config -c mycontroller
-
-
-   **See also:**
-
-   [controllers](#controllers)
-
-
- 
-
 ^# get-model-constraints
 
    **Usage:** ` juju get-model-constraints [options]`
@@ -2965,9 +2972,9 @@ Click on the expander to see details for each command.
 
           juju grant sam read model1 model2
 
-   Grant user 'maria' 'addmodel' access to the controller:
+   Grant user 'maria' 'add-model' access to the controller:
 
-          juju grant maria addmodel
+          juju grant maria add-model
 
    Valid access levels for models are:
 
@@ -2978,7 +2985,7 @@ Click on the expander to see details for each command.
    Valid access levels for controllers are:
 
           login
-          addmodel
+          add-model
           superuser
 
 
@@ -3041,11 +3048,13 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   Show help on a command or other topic
+   show help on a command or other topic
 
-   Details:
+  
 
+   **See also:**
 
+   [opics](#opics)
 
 
  
@@ -3104,8 +3113,7 @@ Click on the expander to see details for each command.
           juju import-ssh-key gh:phamilton
 
    Multiple identities may be specified in a space delimited list:
-
-          juju import-ssh-key rheinlein lp:iasmiov gh:hharrison
+   juju import-ssh-key gh:rheinlein lp:iasmiov gh:hharrison
 
 
    **See also:**
@@ -3115,7 +3123,6 @@ Click on the expander to see details for each command.
    [ssh-keys](#ssh-keys)
 
 
- 
 
 ^# kill-controller
 
@@ -3130,6 +3137,10 @@ Click on the expander to see details for each command.
    _-B, --no-browser-login  (= false)_
 
    Do not use web browser for authentication
+
+   _-t, --timeout  (= 5m0s)_
+
+   Timeout before direct destruction
 
    _-y, --yes  (= false)_
 
@@ -3148,6 +3159,11 @@ Click on the expander to see details for each command.
    including machines within hosted models, these machines will not be destroyed
    and will never be reconnected to the Juju controller being destroyed.
 
+   The normal process of killing the controller will involve watching the hosted
+   models as they are brought down in a controlled manner. If for some reason the
+   models do not stop cleanly, there is a default five minute timeout. If no change
+   in the model state occurs for the duration of this timeout, the command will
+   stop watching and destroy the models directly through the cloud provider.
 
    **See also:**
 
@@ -3426,6 +3442,8 @@ Click on the expander to see details for each command.
    **See also:**
 
    [add-cloud](#add-cloud)
+
+   [regions](#regions)
 
    [show-cloud](#show-cloud)
 
@@ -3890,6 +3908,49 @@ Click on the expander to see details for each command.
 
  
 
+^# list-regions
+
+   **Usage:** ` juju regions [options] <cloud>`
+
+   **Summary:**
+
+   Lists regions for a given cloud.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   Details:
+
+   **Examples:**
+
+
+          juju regions aws
+
+
+   **See also:**
+
+   [add-cloud](#add-cloud)
+
+   [clouds](#clouds)
+
+   [show-cloud](#show-cloud)
+
+   [update-clouds](#update-clouds)
+
+   **Aliases:**
+
+   _list-regions_
+
+
+ 
+
 ^# list-resources
 
    **Usage:** ` juju resources [options] application-or-unit`
@@ -3950,9 +4011,9 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
-   _--format  (= yaml)_
+   _--format  (= tabular)_
 
-   Specify output format (json|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
@@ -4205,7 +4266,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   Lists Juju users allowed to connect to a controller.
+   Lists Juju users allowed to connect to a controller or model.
 
    **Options:**
 
@@ -4233,13 +4294,19 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   By default, the tabular format is used.
-
+   When used without a model name argument, users relevant to a controller are printed.
+   When used with a model name, users relevant to the specified model are printed.
 
    **Examples:**
 
 
+          Print the users relevant to the current controller: 
           juju users
+          
+          Print the users relevant to the controller "another":
+          juju users -c another
+          Print the users relevant to the model "mymodel":
+          juju users mymodel
 
 
    **See also:**
@@ -4486,9 +4553,9 @@ Click on the expander to see details for each command.
 
    Specify an output file
 
-   _--reset  (= false)_
+   _--reset  (= )_
 
-   Reset the provided keys to be empty
+   Reset the provided comma delimited keys
 
    
    **Details:**
@@ -4519,7 +4586,7 @@ Click on the expander to see details for each command.
 
 ^# model-defaults
 
-   **Usage:** ` juju model-defaults [options] [<model-key>[<=value>] ...]`
+   **Usage:** ` juju model-defaults [options] [[<cloud/>]<region> ]<model-key>[<=value>] ...]`
 
    **Summary:**
 
@@ -4543,9 +4610,9 @@ Click on the expander to see details for each command.
 
    Specify an output file
 
-   _--reset  (= false)_
+   _--reset  (= )_
 
-   Reset the provided keys to be empty
+   Reset the provided comma delimited keys
 
    
    **Details:**
@@ -4562,10 +4629,16 @@ Click on the expander to see details for each command.
 
           juju model-defaults
           juju model-defaults http-proxy
+          juju model-defaults aws/us-east-1 http-proxy
+          juju model-defaults us-east-1 http-proxy
           juju model-defaults -m mymodel type
           juju model-defaults ftp-proxy=10.0.0.1:8000
+          juju model-defaults aws/us-east-1 ftp-proxy=10.0.0.1:8000
+          juju model-defaults us-east-1 ftp-proxy=10.0.0.1:8000
           juju model-defaults -m othercontroller:mymodel default-series=yakkety test-mode=false
           juju model-defaults --reset default-series test-mode
+          juju model-defaults aws/us-east-1 --reset http-proxy
+          juju model-defaults us-east-1 --reset http-proxy
 
 
    **See also:**
@@ -4744,13 +4817,56 @@ Click on the expander to see details for each command.
 
  
 
-^# register
+^# regions
 
-   **Usage:** ` juju register [options] <string>`
+   **Usage:** ` juju regions [options] <cloud>`
 
    **Summary:**
 
-   Registers a Juju user to a controller.
+   Lists regions for a given cloud.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   Details:
+
+   **Examples:**
+
+
+          juju regions aws
+
+
+   **See also:**
+
+   [add-cloud](#add-cloud)
+
+   [clouds](#clouds)
+
+   [show-cloud](#show-cloud)
+
+   [update-clouds](#update-clouds)
+
+   **Aliases:**
+
+   _list-regions_
+
+
+ 
+
+^# register
+
+   **Usage:** ` juju register [options] <registration string>|<controller host name>`
+
+   **Summary:**
+
+   Registers a controller.
 
    **Options:**
 
@@ -4762,21 +4878,30 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Connects to a controller and completes the user registration process that began
-   with the `juju add-user` command. The latter prints out the 'string' that is
-   referred to in Usage.
+   The register command adds details of a controller to the local system.
+   This is done either by completing the user registration process that
+   began with the 'juju add-user' command, or by providing the DNS host
+   name of a public controller.
 
-   The user will be prompted for a password, which, once set, causes the
-   registration string to be voided. In order to start using Juju the user can now
-   either add a model or wait for a model to be shared with them.  Some machine
-   providers will require the user to be in possession of certain credentials in
-   order to add a model.
+   To complete the user registration process, you should have been provided
+   with a base64-encoded blob of data (the output of 'juju add-user')
+   which can be copied and pasted as the <string> argument to 'register'.
+   You will be prompted for a password, which, once set, causes the
+   registration string to be voided. In order to start using Juju the user
+   can now either add a model or wait for a model to be shared with them.
+   Some machine providers will require the user to be in possession of
+   certain credentials in order to add a model.
+
+   When adding a controller at a public address, authentication via some
+   external third party (for example Ubuntu SSO) will be required, usually
+   by using a web browser.
 
 
    **Examples:**
 
 
           juju register MFATA3JvZDAnExMxMDQuMTU0LjQyLjQ0OjE3MDcwExAxMC4xMjguMC4yOjE3MDcwBCBEFCaXerhNImkKKabuX5ULWf2Bp4AzPNJEbXVWgraLrAA=
+          juju register public-controller.example.com
 
 
    **See also:**
@@ -5460,9 +5585,9 @@ Click on the expander to see details for each command.
 
           juju revoke sam write model1 model2
 
-   Revoke 'addmodel' acces from user 'maria' to the controller:
+   Revoke 'add-model' access from user 'maria' to the controller:
 
-          juju revoke maria addmodel
+          juju revoke maria add-model
 
 
    **See also:**
@@ -6445,11 +6570,11 @@ Click on the expander to see details for each command.
    - summary: Displays the subnet(s) and port(s) the model utilises. Also displays
                aggregate information about:
 
-               - MACHINES: total #, and # in each state.
+               - Machines: total #, and # in each state.
 
-               - UNITS: total #, and # in each state.
+               - Units: total #, and # in each state.
 
-               - APPLICATIONS: total #, and # exposed of each application.
+               - Applications: total #, and # exposed of each application.
    
    - yaml: Displays information about the model, machines, applications, and units
                in structured YAML format.
@@ -6661,9 +6786,9 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
-   _--format  (= yaml)_
+   _--format  (= tabular)_
 
-   Specify output format (json|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
@@ -6882,11 +7007,11 @@ Click on the expander to see details for each command.
    - summary: Displays the subnet(s) and port(s) the model utilises. Also displays
                aggregate information about:
 
-               - MACHINES: total #, and # in each state.
+               - Machines: total #, and # in each state.
 
-               - UNITS: total #, and # in each state.
+               - Units: total #, and # in each state.
 
-               - APPLICATIONS: total #, and # exposed of each application.
+               - Applications: total #, and # exposed of each application.
    
    - yaml: Displays information about the model, machines, applications, and units
                in structured YAML format.
@@ -7368,6 +7493,54 @@ Click on the expander to see details for each command.
 
  
 
+^# update-credential
+
+   **Usage:** ` juju update-credential [options] <cloud-name> <credential-name>`
+
+   **Summary:**
+
+   Updates a credential for a cloud.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--cloud (= "")_
+
+   Cloud for which to update the credential
+
+   _--credential (= "")_
+
+   Name of credential to update
+
+   
+   **Details:**
+
+
+   Updates a named credential for a cloud.
+
+
+   **Examples:**
+
+
+          juju update-credential aws mysecrets
+
+
+   **See also:**
+
+   [add-credential](#add-credential)
+
+   [credentials](#credentials)
+
+
+ 
+
 ^# upgrade-charm
 
    **Usage:** ` juju upgrade-charm [options] <application>`
@@ -7385,6 +7558,10 @@ Click on the expander to see details for each command.
    _--channel (= "")_
 
    Channel to use when getting the charm or bundle from the charm store
+
+   _--config  (= )_
+
+   Path to yaml-formatted application config
 
    _--force-series  (= false)_
 
@@ -7409,6 +7586,10 @@ Click on the expander to see details for each command.
    _--revision  (= -1)_
 
    Explicit revision of current charm
+
+   _--storage  (= )_
+
+   Charm storage constraints
 
    _--switch (= "")_
 
@@ -7443,6 +7624,18 @@ Click on the expander to see details for each command.
            juju upgrade-charm foo --resource bar=/some/file.tgz --resource baz=./docs/cfg.xml
    
    Where bar and baz are resources named in the metadata for the foo charm.
+   Storage constraints may be added or updated at upgrade time by specifying
+   the --storage flag, with the same format as specified in "juju deploy".
+   If new required storage is added by the new charm revision, then you must
+   specify constraints or the defaults will be applied.
+
+           juju upgrade-charm foo --storage cache=ssd,10G
+   
+   Charm settings may be added or updated at upgrade time by specifying the
+   --config flag, pointing to a YAML-encoded application config file.
+
+           juju upgrade-charm foo --config config.yaml
+   
    If the new version of a charm does not explicitly support the application's series, the
    upgrade is disallowed unless the --force-series flag is used. This option should be
    used with caution since using a charm on a machine running an unsupported series may
@@ -7535,6 +7728,10 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
+   _--agent-version (= "")_
+
+   Upgrade to specific version
+
    _--build-agent  (= false)_
 
    Build a local version of the agent binary; for development use only
@@ -7551,10 +7748,6 @@ Click on the expander to see details for each command.
 
    Clear the previous (incomplete) upgrade status (use with care)
 
-   _--version (= "")_
-
-   Upgrade to specific version
-
    _-y, --yes  (= false)_
 
    Answer 'yes' to confirmation prompts
@@ -7567,11 +7760,11 @@ Click on the expander to see details for each command.
    upgrades that software across an entire model, which is, by default, the
    current model.
 
-   A model's agent version can be shown with `juju get-model-config agent-
+   A model's agent version can be shown with `juju model-config agent-
    version`.
 
    A version is denoted by: major.minor.patch
-   The upgrade candidate will be auto-selected if '--version' is not
+   The upgrade candidate will be auto-selected if '--agent-version' is not
    specified:
 
           - If the server major version matches the client major version, the
@@ -7598,7 +7791,7 @@ Click on the expander to see details for each command.
 
 
           juju upgrade-juju --dry-run
-          juju upgrade-juju --version 2.0.1
+          juju upgrade-juju --agent-version 2.0.1
           
 
 
@@ -7643,7 +7836,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   Lists Juju users allowed to connect to a controller.
+   Lists Juju users allowed to connect to a controller or model.
 
    **Options:**
 
@@ -7671,13 +7864,19 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   By default, the tabular format is used.
-
+   When used without a model name argument, users relevant to a controller are printed.
+   When used with a model name, users relevant to the specified model are printed.
 
    **Examples:**
 
 
+          Print the users relevant to the current controller: 
           juju users
+          
+          Print the users relevant to the controller "another":
+          juju users -c another
+          Print the users relevant to the model "mymodel":
+          juju users mymodel
 
 
    **See also:**
@@ -7765,7 +7964,3 @@ Click on the expander to see details for each command.
    [models](#models)
 
    [users](#users)
-
-
- 
-
