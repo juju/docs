@@ -27,15 +27,15 @@ sudo add-apt-repository ppa:juju/stable
 sudo apt update
 sudo apt install juju
 ```
-CentOS
+CentOS:
 : [juju-2.0.0-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz/+md5))
 {: .instruction }
 
-OS X
+OS X:
 : [juju-2.0.0-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-osx.tar.gz/+md5))
 {: .instruction }
 
-Windows
+Windows:
 : [juju-setup-2.0.0.exe](https://launchpad.net/juju/2.0/2.0.0/+download/juju-setup-2.0.0.exe)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-setup-2.0.0.exe/+md5))
 {: .instruction }
 
@@ -57,15 +57,15 @@ sudo apt update
 sudo apt install juju
 ```
 
-CentOS
+CentOS:
 : [juju-2.0.0-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz/+md5))
 {: .instruction }
 
-OS X
+OS X:
 : [juju-2.0.0-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-osx.tar.gz/+md5))
 {: .instruction }
 
-Windows
+Windows:
 : [juju-setup-2.0.0.exe](https://launchpad.net/juju/2.0/2.0.0/+download/juju-setup-2.0.0.exe)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-setup-2.0.0.exe/+md5))
 {: .instruction }
 
@@ -101,15 +101,15 @@ or
 snap install juju --beta --devmode
 ```
 
-CentOS
+CentOS:
 : [juju-core_2.0-rc3-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-core_2.0-rc3.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-core_2.0-rc3.tar.gz/+md5))
 {: .instruction }
 
-OS X
+OS X:
 : [juju-core_2.0-rc3-osx.tar.gz](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-2.0-rc3-osx.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-2.0-rc3-osx.tar.gz/+md5))
 {: .instruction }
 
-Windows
+Windows:
 : [juju-setup-2.0-rc3.exe](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-setup-2.0-rc3.exe) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-setup-2.0-rc3.exe/+md5))
 {: .instruction }
 
