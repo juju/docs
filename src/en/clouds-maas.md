@@ -83,7 +83,7 @@ Note: Juju does not echo this key back to the screen.
 Now you can create a Juju controller with the bootstrap command:
  
 ```bash
-juju bootstrap prodmaas prodmaas-controller
+juju bootstrap prodmaas-controller prodmaas
 ```
 
 Above, the Juju controller was called 'prodmaas-controller'.
