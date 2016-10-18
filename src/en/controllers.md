@@ -35,7 +35,7 @@ Common tasks are summarized below.
    
    Use the `juju bootstrap` command to create a controller.
 
-   `juju bootstrap [options] [filter pattern ...]`
+         juju bootstrap [options] [filter pattern ...]
    
    For examples see [Creating a controller](./controllers-creating.html).
 
