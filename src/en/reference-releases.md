@@ -4,8 +4,10 @@ Title: Juju releases
 # Get the Latest Juju
 
 Juju is available for Ubuntu (and Debian-based OSes), CentOS, Microsoft Windows
-and Apple OS X. There can be 3 concurrent releases representing the stability
-of Juju's feature set: stable, proposed and development. 
+and Apple OS X. 
+
+There can be 3 concurrent releases representing the stability of Juju's feature
+set: stable, proposed and development. 
 
 Currently, with the recent release of Juju 2.0, all three channels contain the same
 version of Juju.
@@ -19,25 +21,12 @@ The current stable version of Juju is 2.0.0.
 
 Stable juju is suitable for everyday production use.
 
-Ubuntu
+To install from Ubuntu:
 ```bash
 sudo add-apt-repository ppa:juju/stable
 sudo apt update
 sudo apt install juju
 ```
-or
-
-```bash
-snap install juju --devmode --beta
-```
-
-
-OS X Homebrew
-
-```bash
-brew install juju
-```
-
 CentOS
 : [juju-2.0.0-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz/+md5))
 {: .instruction }
@@ -60,7 +49,7 @@ evaluation. They contain bug fixes and recently stabilised features. They
 require evaluation from the community to verify no regressions are present. A
 proposed version will not be promoted to stable if a regression is reported.
 
-Ubuntu
+To install from Ubuntu:
 
 ```bash
 sudo add-apt-repository ppa:juju/proposed
@@ -99,7 +88,7 @@ from stable releases to development releases is not supported. You can
 upgrade test environments to development releases to test new features
 and fixes.
 
-Ubuntu
+To install from Ubuntu:
 
 ```bash
 sudo add-apt-repository ppa:juju/devel
@@ -123,3 +112,4 @@ OS X
 Windows
 : [juju-setup-2.0-rc3.exe](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-setup-2.0-rc3.exe) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-setup-2.0-rc3.exe/+md5))
 {: .instruction }
+
