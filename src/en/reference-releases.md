@@ -92,8 +92,8 @@ To install from Ubuntu:
 
 ```bash
 sudo add-apt-repository ppa:juju/devel
-sudo apt-get update
-sudo apt-get install juju
+sudo apt update
+sudo apt install juju
 ```
 or
 
