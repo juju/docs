@@ -43,6 +43,13 @@ juju model-config test-mode=true enable-os-upgrade=false
 !!! Note: Juju does not currently check that the provided key is a valid
 setting, so make sure you spell it correctly.
 
+To set values for all models in a specific controller region, state the
+region in the command:
+
+```bash
+juju model-config us-east-1 test-mode=true enable-os-upgrade=false
+```
+
 To return a value to the default setting the `--reset` flag is used,
 specifying the key names:
   
@@ -67,6 +74,7 @@ would use:
 ```bash
 juju model-defaults
 ```
+
 These values can also be passed to a new controller for use with the default
 model it creates. To do this, use the `--config` argument with bootstrap:
 
