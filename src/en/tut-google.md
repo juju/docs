@@ -144,19 +144,19 @@ You can check on the state of any deployment, model or controller with the
 'haproxy', for instance, you'll something similar to this:
 
 ```bash
-MODEL     CONTROLLER  CLOUD/REGION         VERSION
-gce-test  mycloud     google/europe-west1  2.0-rc1
+Model     Controller  Cloud/Region         Version
+gce-test  usertest    google/europe-west1  2.0-rc3
 
-APP      VERSION  STATUS   SCALE  CHARM    STORE       REV  OS      NOTES
+App      Version  Status   Scale  Charm    Store       Rev  OS      Notes
 haproxy           waiting    0/1  haproxy  jujucharms   37  ubuntu
 
-UNIT       WORKLOAD  AGENT       MACHINE  PUBLIC-ADDRESS  PORTS  MESSAGE
+Unit       Workload  Agent       Machine  Public address  Ports  Message
 haproxy/0  waiting   allocating  0                               waiting for machine
 
-MACHINE  STATE    DNS  INS-ID   SERIES  AZ
+Machine  State    DNS  Inst id  Series  AZ
 0        pending       pending  xenial
 
-RELATION  PROVIDES  CONSUMES  TYPE
+Relation  Provides  Consumes  Type
 peer      haproxy   haproxy   peer
 ```
 
