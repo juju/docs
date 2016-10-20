@@ -153,10 +153,10 @@ This will return a list of the controllers known to Juju, which at the moment is
 the one we just created:
   
 ```no-highlight
-CONTROLLER  MODEL    USER         ACCESS+    CLOUD/REGION         MODELS+ MACHINES+  VERSION+
-lxd-test*   default  admin@local  superuser  localhost/localhost        2 	  1       2.0
+Use --refresh to see the latest information.
 
-+ these are the last known values, run with --refresh to see the latest information.
+Controller  Model    User   Access     Cloud/Region         Models  Machines HA  Version
+lxd-test*   default  admin  superuser  localhost/localhost       2         1 none  2.0.0
 ```
 
 A newly-created controller has two models: The 'controller' model, which should
@@ -174,7 +174,7 @@ In our example, the output should look like this:
 ```no-highlight
 Controller:  lxd-test
 Model:       default
-User:        admin@local
+User:        admin
 ```
 
 ## Deploy
@@ -184,7 +184,7 @@ the [Juju charm store][charm store]. It is a good idea to test your new model.
 How about a MediaWiki site?
 
 ```bash
-juju deploy wiki-simple
+juju deploy cs:bundle/mediawiki-single
 ```
 
 This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
@@ -218,7 +218,7 @@ locked down by default, so for this example there is no need to perform this
 step.
 
 From the status output, we can see that the IP address for the MediaWiki
-site we have created is 10.78.0.239. Open a browser and enter that address 
+site we have created is 10.154.173.2 Open a browser and enter that address 
 to see the site.
 
 !["mediawiki site"](./media/juju-mediawiki-site.png)
