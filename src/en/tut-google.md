@@ -14,11 +14,11 @@ minutes.  But you could just as easily use Amazon AWS or Microsoft Azure, and
 just as easily deploy Kubernetes, Cassandra or even OpenStack. It's the
 magic of Juju that makes it happen.
 
-## Step 1: Installation
+## Installation
 First, install Juju 2, if you have not done so already. See 
 [the first use page here][first]. 
 
-## Step 2: Pick a cloud
+## Pick a cloud
 Type `juju list-clouds` and you'll see output very similar to the following:
 
 ```bash
@@ -42,7 +42,7 @@ configure over the next couple of steps. But you could just as easily use
 [Amazon AWS][helpaws] or [Microsoft Azure][helpazure], or any of the listed
 clouds you have credentials for. 
 
-## Step 3: Download GCE credentials
+## Download GCE credentials
 
 All you need to get started with GCE and Juju is a JSON-formatted credentials
 file for a new Compute Engine API-enabled project. Either sign up for a [free
@@ -50,7 +50,7 @@ file for a new Compute Engine API-enabled project. Either sign up for a [free
 If needed, see our GCE [Create a Project][gcenewproject] documentation for
 further help. 
 
-## Step 4: Add credentials
+## Add credentials
 
 Copy the credentials file somewhere sensible, such as
 '~/.local/share/juju/gcejuju.json,' and initiate the import process by typing
@@ -71,7 +71,7 @@ Credentials added for cloud google.
 ```
 You can now start using Juju with your GCE cloud.
 
-## Step 5: Bootstrap Juju
+## Bootstrap Juju
 
 Pushing Juju onto your new cloud is as simple as typing:
 
@@ -106,7 +106,7 @@ Bootstrap complete, "mycloud" controller now available.
 Controller machines are in the "controller" model.
 Initial model "default" added.
 ```
-## Step 6: Create a model
+## Create a model
 
 Before deploying an application, we're going to first create a new model.
 Models are used by Juju to group applications, resources and their relationships
@@ -120,7 +120,7 @@ and create a new model hosted on `europe-west1` with the following:
 juju add-model gce-test europe-west1 
 ```
 
-## Step 7: Deploy an application
+## Deploy an application
 
 Applications themselves are deployed either as 'charms' or as 'bundles'. Charms
 are singular applications, such as [Haproxy][charmhaproxy] or
@@ -159,7 +159,7 @@ RELATION  PROVIDES  CONSUMES  TYPE
 peer      haproxy   haproxy   peer
 ```
 
-## Step 8: Use Juju's GUI
+## Use Juju's GUI
 
 Juju includes a beautiful web interface. This allows you to perform almost all
 the same functions as the CLI, only without RSI. To launch the web interface in
@@ -196,7 +196,7 @@ this model to return to the main view.
 For more details on how to use Juju's web interface, take a look at [our
 overview][jujugui].
 
-## Step 9: Deploy Django from the GUI
+## Deploy Django from the GUI
 
 With the blank canvas of a new model created, we're now in a position to deploy
 Django.
