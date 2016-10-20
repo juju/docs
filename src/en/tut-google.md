@@ -14,35 +14,36 @@ minutes.  But you could just as easily use Amazon AWS or Microsoft Azure, and
 just as easily deploy Kubernetes, Cassandra or even OpenStack. It's the
 magic of Juju that makes it happen.
 
-## Step 1: Installation
+!!! Note: If you already have a controller configured, such as the LXD controller created
+in the '[Getting started with Juju][first]' page, this new controller will be
+seamlessly added alongside. 
+
+## Installation
 First, install Juju 2, if you have not done so already. See 
 [the first use page here][first]. 
 
-## Step 2: Pick a cloud
+## Pick a cloud
 Type `juju list-clouds` and you'll see output very similar to the following:
 
 ```bash
-CLOUD        TYPE        REGIONS
-aws          ec2         us-east-1, us-west-1, us-west-2, eu-west-1,
-eu-central-1, ap-southeast-1, ap-southeast-2 ...
-aws-china    ec2         cn-north-1
-aws-gov      ec2         us-gov-west-1
-azure        azure       centralus, eastus, eastus2, northcentralus,
-southcentralus, westus, northeurope ...
-azure-china  azure       chinaeast, chinanorth
-cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
-google       gce         us-east1, us-central1, europe-west1, asia-east1
-joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3,
-us-west-1
-rackspace    rackspace   dfw, ord, iad, lon, syd, hkg
-localhost    lxd         localhost
+Cloud        Regions  Default        Type        Description
+aws               11  us-east-1      ec2         Amazon Web Services
+aws-china          1  cn-north-1     ec2         Amazon China
+aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
+azure             18  centralus      azure       Microsoft Azure
+azure-china        2  chinaeast      azure       Microsoft Azure China
+cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
+google             4  us-east1       gce         Google Cloud Platform
+joyent             6  eu-ams-1       joyent      Joyent Cloud
+rackspace          6  dfw            rackspace   Rackspace Cloud
+localhost          1  localhost      lxd         LXD Container Hypervisor
 ```
 As mentioned, we're going with Google's Cloud Engine, which we'll
 configure over the next couple of steps. But you could just as easily use
 [Amazon AWS][helpaws] or [Microsoft Azure][helpazure], or any of the listed
 clouds you have credentials for. 
 
-## Step 3: Download GCE credentials
+## Download GCE credentials
 
 All you need to get started with GCE and Juju is a JSON-formatted credentials
 file for a new Compute Engine API-enabled project. Either sign up for a [free
@@ -50,7 +51,7 @@ file for a new Compute Engine API-enabled project. Either sign up for a [free
 If needed, see our GCE [Create a Project][gcenewproject] documentation for
 further help. 
 
-## Step 4: Add credentials
+## Add credentials
 
 Copy the credentials file somewhere sensible, such as
 '~/.local/share/juju/gcejuju.json,' and initiate the import process by typing
@@ -71,7 +72,7 @@ Credentials added for cloud google.
 ```
 You can now start using Juju with your GCE cloud.
 
-## Step 5: Bootstrap Juju
+## Bootstrap Juju
 
 Pushing Juju onto your new cloud is as simple as typing:
 
@@ -106,7 +107,7 @@ Bootstrap complete, "mycloud" controller now available.
 Controller machines are in the "controller" model.
 Initial model "default" added.
 ```
-## Step 6: Create a model
+## Create a model
 
 Before deploying an application, we're going to first create a new model.
 Models are used by Juju to group applications, resources and their relationships
@@ -120,7 +121,7 @@ and create a new model hosted on `europe-west1` with the following:
 juju add-model gce-test europe-west1 
 ```
 
-## Step 7: Deploy an application
+## Deploy an application
 
 Applications themselves are deployed either as 'charms' or as 'bundles'. Charms
 are singular applications, such as [Haproxy][charmhaproxy] or
@@ -143,23 +144,23 @@ You can check on the state of any deployment, model or controller with the
 'haproxy', for instance, you'll something similar to this:
 
 ```bash
-MODEL     CONTROLLER  CLOUD/REGION         VERSION
-gce-test  mycloud     google/europe-west1  2.0-rc1
+Model     Controller  Cloud/Region         Version
+gce-test  usertest    google/europe-west1  2.0-rc3
 
-APP      VERSION  STATUS   SCALE  CHARM    STORE       REV  OS      NOTES
+App      Version  Status   Scale  Charm    Store       Rev  OS      Notes
 haproxy           waiting    0/1  haproxy  jujucharms   37  ubuntu
 
-UNIT       WORKLOAD  AGENT       MACHINE  PUBLIC-ADDRESS  PORTS  MESSAGE
+Unit       Workload  Agent       Machine  Public address  Ports  Message
 haproxy/0  waiting   allocating  0                               waiting for machine
 
-MACHINE  STATE    DNS  INS-ID   SERIES  AZ
+Machine  State    DNS  Inst id  Series  AZ
 0        pending       pending  xenial
 
-RELATION  PROVIDES  CONSUMES  TYPE
+Relation  Provides  Consumes  Type
 peer      haproxy   haproxy   peer
 ```
 
-## Step 8: Use Juju's GUI
+## Use Juju's GUI
 
 Juju includes a beautiful web interface. This allows you to perform almost all
 the same functions as the CLI, only without RSI. To launch the web interface in
@@ -196,7 +197,7 @@ this model to return to the main view.
 For more details on how to use Juju's web interface, take a look at [our
 overview][jujugui].
 
-## Step 9: Deploy Django from the GUI
+## Deploy Django from the GUI
 
 With the blank canvas of a new model created, we're now in a position to deploy
 Django.
@@ -221,6 +222,7 @@ Now you can see how Juju makes it easy to model workloads, you are sure
 to want to share. Find out how easy it is to 
 [add users to your Juju controllers and models][tutuser].
 
+[first]: ./getting-started.html
 [helpaws]: ./help-aws.html
 [helpazure]: ./help-azure.html
 [gcetrial]: https://console.cloud.google.com/freetrial
