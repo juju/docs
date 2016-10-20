@@ -1,4 +1,4 @@
-Title: Application configuration  
+Title: Application configuration
 
 # Application Configuration
 
@@ -98,27 +98,25 @@ settings:
     value: false
 ```
 
-You can set the options using the `juju set-config <application>`, specifying
+You can set the options using `juju config <application>`, specifying
 multiple space-separated key=value pairs if necessary:
 
 ```bash
-juju set-config mediawiki skin=monoblock name='Juju Wiki' 
+juju config mediawiki skin=monoblock name='Juju Wiki' 
 ```
 It is also possible to set the configuration options from a YAML file after
 the application has been deployed:
   
 ```bash
-juju set-config --config=m.yaml mediawiki
+juju config mediawiki --file path/to/myconfig.yaml
 ```
-
   
-Setting an option back to its default value is achieved by using the 
-`set-config` command, but with the `--to-default` switch, followed by the 
-application and a space separated list of the values to return to the default
-setting:
+Setting an option back to its default value is achieved by using the same
+command, with the `--reset` switch, followed by a comma-separated list of the
+values to return to the default setting:
 
 ```bash
-juju set-config --to-default mediawiki admins name
+juju config mediawiki --reset admins,name
 ```
 
 
