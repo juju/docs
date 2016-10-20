@@ -14,6 +14,10 @@ minutes.  But you could just as easily use Amazon AWS or Microsoft Azure, and
 just as easily deploy Kubernetes, Cassandra or even OpenStack. It's the
 magic of Juju that makes it happen.
 
+!!! Note: If you already have a controller configured, such as the LXD controller created
+in the '[Getting started with Juju][first]' page, this new controller will be
+seamlessly added alongside. 
+
 ## Installation
 First, install Juju 2, if you have not done so already. See 
 [the first use page here][first]. 
