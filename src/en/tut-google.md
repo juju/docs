@@ -221,6 +221,7 @@ Now you can see how Juju makes it easy to model workloads, you are sure
 to want to share. Find out how easy it is to 
 [add users to your Juju controllers and models][tutuser].
 
+[first]: ./getting-started.html
 [helpaws]: ./help-aws.html
 [helpazure]: ./help-azure.html
 [gcetrial]: https://console.cloud.google.com/freetrial
