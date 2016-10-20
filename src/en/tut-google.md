@@ -26,20 +26,17 @@ First, install Juju 2, if you have not done so already. See
 Type `juju list-clouds` and you'll see output very similar to the following:
 
 ```bash
-CLOUD        TYPE        REGIONS
-aws          ec2         us-east-1, us-west-1, us-west-2, eu-west-1,
-eu-central-1, ap-southeast-1, ap-southeast-2 ...
-aws-china    ec2         cn-north-1
-aws-gov      ec2         us-gov-west-1
-azure        azure       centralus, eastus, eastus2, northcentralus,
-southcentralus, westus, northeurope ...
-azure-china  azure       chinaeast, chinanorth
-cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
-google       gce         us-east1, us-central1, europe-west1, asia-east1
-joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3,
-us-west-1
-rackspace    rackspace   dfw, ord, iad, lon, syd, hkg
-localhost    lxd         localhost
+Cloud        Regions  Default        Type        Description
+aws               11  us-east-1      ec2         Amazon Web Services
+aws-china          1  cn-north-1     ec2         Amazon China
+aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
+azure             18  centralus      azure       Microsoft Azure
+azure-china        2  chinaeast      azure       Microsoft Azure China
+cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
+google             4  us-east1       gce         Google Cloud Platform
+joyent             6  eu-ams-1       joyent      Joyent Cloud
+rackspace          6  dfw            rackspace   Rackspace Cloud
+localhost          1  localhost      lxd         LXD Container Hypervisor
 ```
 As mentioned, we're going with Google's Cloud Engine, which we'll
 configure over the next couple of steps. But you could just as easily use
