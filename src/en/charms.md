@@ -263,7 +263,7 @@ state it was in before we deployed the MediaWiki charm, you can create one
 with:
 
 ```bash
-juju create-model default
+juju add-model default
 ```
 
 For more information on the subjects we've covered in this walkthough, see our 
