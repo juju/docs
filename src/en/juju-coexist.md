@@ -110,14 +110,14 @@ add this install location to your environment path.
 By default, a new installation will upgrade any previous installation. If you
 wish to install two versions alongside one another, such as versions 1.25 and
 2.0, you will need to install the first package without specifying an
-environment path so that the second installation won't automatically overwrite
-the first. You can then specify a different install location for the second
-installation, and either manually rename and add the binaries to your Windows
-environment path, or run each executable directly from their respective
-directories.
+environment path. This will stop the second installation automatically
+overwriting the first. You can then specify a different install location for
+the second installation and either manually rename and add the binaries to
+your Windows environment path, or run each executable directly from their
+respective directories.
 
-Juju can be uninstalled from the 'Add or remove programs' pane, just like any
-other Windows application.
+Juju can be uninstalled from the Windows 'Add or remove programs' system pane,
+just like any other Windows application.
 
 ## MacOS
 
