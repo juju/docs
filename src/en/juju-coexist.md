@@ -80,7 +80,7 @@ directories or unfortunate things will happen.
 
 ## Other Linux 
 
-The CentOS download [here][centos] includes the binaries for Juju which 
+The CentOS download [here][refreleases] includes the binaries for Juju which 
 should also work on other flavours of Linux. As these tarballs simply 
 contain an executable binary, you can place them wherever you wish, renaming
 them if required.
@@ -100,10 +100,40 @@ use of the Juju binary.
 
 ## Windows
 
-Information to follow
+The latest Windows version of Juju can be downloaded from [here][refreleases].
+
+Unlike Linux and OS X binary releases, the Microsoft Windows version of Juju is
+bundled within an executable installer. Running this will walk you through a
+GPL licence agreement, a request for an install location and the opportunity to
+add this install location to your environment path. 
+
+By default, a new installation will upgrade any previous installation. If you
+wish to install two versions alongside one another, such as versions 1.25 and
+2.0, you will need to install the first package without specifying an
+environment path. This will stop the second installation automatically
+overwriting the first. You can then specify a different install location for
+the second installation and either manually rename and add the binaries to
+your Windows environment path, or run each executable directly from their
+respective directories.
+
+Juju can be uninstalled from the Windows 'Add or remove programs' system pane,
+just like any other Windows application.
 
 ## MacOS
 
-Information to follow
+The Apple OS X download, available [here][refreleases], includes the binaries
+for Juju.  These will work work with any recent version of Mac OS X, including
+10.9 (Mavericks), 10.10 (Yosemite), 10.11 (El Capitan) and 10.12 (Sierra).
 
-[centos]: ./reference-releases.html#stable
+As the download tarball contains executable binaries, you can place them
+wherever you wish within your user's shell path (such as `/usr/bin`), renaming
+them or their parent folders if required. Renaming is particularly useful if
+you want to install two versions of Juju alongside one another, such as
+versions 1.25 and 2.0, as the binary files within each archive have identical
+names. 
+
+Unfortunately, OS X doesn't currently support a system similar to
+'update-alternatives' (see above), which means you'll need to manually update
+and name the files differently when installing and using multiple versions.
+
+[refreleases]: ./reference-releases.html#stable
