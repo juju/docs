@@ -60,7 +60,7 @@ You can replicate the experience for Ubuntu 16.04 by using the
 the binary to call when issuing the `juju` command, and to add a
 `juju-1` command for the 1.x series:
 
-```
+```bash
 update-alternatives --install /usr/bin/juju juju /usr/lib/juju-2.0/bin/juju 1
 update-alternatives --install /usr/bin/juju-1 juju-1 /usr/lib/juju-1.25.6/bin/juju 0
 update-alternatives --config juju
