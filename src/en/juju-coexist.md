@@ -2,8 +2,7 @@ Title: Running multiple versions of Juju
 TODO: Update when upgrade path is available
       Add information for MacOS
       Add information for Windows
-      Add information for Other Linux OSes
-
+      
 # Running multiple versions of Juju
 
 You may wish to use the new 2.x series of Juju releases for new projects, 
@@ -81,7 +80,23 @@ directories or unfortunate things will happen.
 
 ## Other Linux 
 
-Information to follow
+The CentOS download [here][centos] includes the binaries for Juju which 
+should also work on other flavours of Linux. As these tarballs simply 
+contain an executable binary, you can place them wherever you wish, renaming
+them if required.
+
+It is recommended to install them in `/usr/lib/juju-1.25/bin/` and 
+`/usr/lib/juju-2.0/bin`. After which you can also use `ùpdate-alternatives`
+to configure which one to use:
+
+```
+update-alternatives --install /usr/bin/juju juju /usr/lib/juju-2.0/bin/juju 1
+update-alternatives --install /usr/bin/juju juju /usr/lib/juju-1.25/bin/juju 0
+update-alternatives --config juju
+```
+
+The same data directories as noted above for Ubuntu are created on first
+use of the Juju binary.
 
 ## Windows
 
@@ -90,3 +105,5 @@ Information to follow
 ## MacOS
 
 Information to follow
+
+[centos]: ./reference-releases.html#stable
