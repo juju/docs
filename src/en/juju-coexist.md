@@ -16,7 +16,27 @@ below:
 
 ## Ubuntu 16.04LTS (Xenial) and later releases
 
-It is possible to install 
+Running 
+
+```bash
+apt install juju
+```
+
+...will install the latest Juju 2.x. If you also want to run the legacy
+1.x series, you may install that separately:
+
+```bash
+àpt install juju-1.25
+```
+**OR**, if you wish to run Juju 1.x as the 'primary' Juju (i.e. the version
+the `juju` command points to by default, you can install it as the default:
+
+```bash
+apt install juju-1-default
+```
+
+(Juju 2.x will be available by running the `juju-2.0` command).
+
 
 
 ### Data directories
