@@ -29,7 +29,7 @@ apt install juju
 àpt install juju-1.25
 ```
 **OR**, if you wish to run Juju 1.x as the 'primary' Juju (i.e. the version
-the `juju` command points to by default, you can install it as the default:
+the `juju` command points to by default), you can install this package:
 
 ```bash
 apt install juju-1-default
