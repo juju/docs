@@ -1,5 +1,8 @@
 Title: Running multiple versions of Juju
 TODO: Update when upgrade path is available
+      Add information for MacOS
+      Add information for Windows
+      Add information for Other Linux OSes
 
 # Running multiple versions of Juju
 
