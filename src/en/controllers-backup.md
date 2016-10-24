@@ -43,7 +43,7 @@ Juju uses to connect to running environments. Anybody who has access to this
 backup will be able to connect to and use your controllers/models, so a 
 further step of encrypting this backup file may be advisable.
  
-### Restoring ~/.juju 
+### Restoring ~/.local/share/juju
 
 For Ubuntu, restoring your Juju client settings is a simple matter of
 extracting the archive you created above.
