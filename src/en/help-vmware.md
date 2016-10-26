@@ -49,11 +49,13 @@ juju add-cloud myvscloud <YAML file>
 You can check whether your vSphere installation has been added correctly by
 looking for the following in the output from `juju list-clouds`:
 
-```bash
-CLOUD           TYPE        REGIONS
-aws             ec2         us-east1, us-west1, us-west2
+<!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
+<!-- JUJUCOMMAND: juju list-clouds -->
+```no-highlight
+Cloud        Regions  Default        Type        Description
+aws               11  us-east-1      ec2         Amazon Web Services
 ...
-myvscloud    vsphere     dc0
+myvscloud          1  dc0            vsphere
 ```
 
 ## Adding credentials
