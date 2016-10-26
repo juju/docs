@@ -170,8 +170,8 @@ mysql:
     - mem=2G
     - cpu-cores=4
   annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+    "gui-x": "139"
+    "gui-y": "168"
 ```
 
 ## Setting charm configurations options in a bundle
@@ -193,8 +193,8 @@ mysql:
   options:
     flavor: percona
   annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+    "gui-x": "139"
+    "gui-y": "168"
 ```
 
 ## Bundle placement directives
@@ -214,8 +214,8 @@ mysql:
   num_units: 1
   to: lxd:wordpress/0
   annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+    "gui-x": "139"
+    "gui-y": "168"
 ```
 
 which will install the MySQL application into an LXD container on the same
@@ -227,8 +227,8 @@ mysql:
   num_units: 1
   to: lxd:1
   annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+    "gui-x": "139"
+    "gui-y": "168"
 ```
 which will install the MySQL application into an LXD container on machine '1'.
 
