@@ -180,7 +180,7 @@ When deploying an application, the charm you use will often support or even
 require specific configuration options to be set. These options can be set in
 a bundle as a simple key addition to the application definition, using the
 configuration key/value pair.
-[See the documentation on application configuration](./charms-config.html#discovering-application-configuration-options)
+[See the documentation on application configuration][discover-config-options-docs]
 to discover which options are available for the different charms.
 
 For example, to set the flavor of the MySQL charm to Percona in a bundle, the
@@ -288,3 +288,4 @@ Freenode) who can assist. You can also use the
 [store-docs]: ./authors-charm-store.html
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
 [constraints-docs]: ./charms-constraints.html
+[discover-config-options-docs]: ./charms-config.html#discovering-application-configuration-options
