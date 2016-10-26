@@ -161,8 +161,10 @@ juju list-credentials
 
 ...which will return a list of the known credentials. For example:
 
+<!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
+<!-- JUJUCOMMAND: juju list-credentials -->
 ```no-highlight
-CLOUD   CREDENTIALS
+Cloud      Credentials
 aws     bob*, carol
 google  wayne
 ```
