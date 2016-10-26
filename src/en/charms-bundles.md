@@ -180,8 +180,8 @@ When deploying an application, the charm you use will often support or even
 require specific configuration options to be set. These options can be set in
 a bundle as a simple key addition to the application definition, using the
 configuration key/value pair.
-[See the documentation on application configuration](charms-config.html#discovering-application-configuration-options)
-on how to discover which options are available for the different charms.
+[See the documentation on application configuration](./charms-config.html#discovering-application-configuration-options)
+to discover which options are available for the different charms.
 
 For example, to set the flavor of the MySQL charm to Percona in a bundle, the
 bundle file would have an additional `options` field with specific value:
