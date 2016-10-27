@@ -3,13 +3,13 @@ Title: Exposing applications
 
 # Exposing applications
 
-By design, Juju operates a very secure environment for deploying your 
-applications.
-Even if you have deployed applications, they won't be publicly available unless
-you explicitly make them so. To allow public access to applications, the
-appropriate changes must be made to the cloud provider firewall settings. As
-the procedure for doing this varies depending on your cloud, Juju helpfully
-abstracts this into a single command, `juju expose <applicationname>`.
+By design, Juju operates a very secure environment for deploying your
+applications. Even if you have deployed applications, they won't be publicly
+available unless you explicitly make them so. To allow public access to
+applications, the appropriate changes must be made to the cloud provider
+firewall settings. As the procedure for doing this varies depending on your
+cloud, Juju helpfully abstracts this into a single command, `juju expose
+<applicationname>`.
 
 For example, you may have deployed a WordPress application using the relevant
 charm. Once deployed, the application still cannot be accessed by the public,
@@ -30,33 +30,33 @@ juju status
 
 This will return a status report like this:
 
-```yaml
-juju status
-[Applications]
-NAME       STATUS  EXPOSED CHARM                
-mariadb    unknown false   cs:trusty/mariadb-2  
-wordpress  unknown true    cs:trusty/wordpress-4
+<!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
+<!-- JUJUCOMMAND: juju status -->
+```no-highlight
+Model    Controller  Cloud/Region     Version
+default  mycloud     google/us-east1  2.0.0
 
-[Relations]
-APPLICATION1    APPLICATION2      RELATION     TYPE   
-mariadb         mariadb       cluster      peer   
-mariadb         wordpress     db           regular
-mariadb         wordpress     db           regular
-wordpress       wordpress     loadbalancer peer   
+App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
+mariadb    10.1.18  active       1  mariadb    jujucharms    6  ubuntu
+wordpress           unknown      1  wordpress  jujucharms    4  ubuntu  exposed
 
-[Units]    
-ID          WORKLOAD-STATE AGENT-STATE VERSION    MACHINE PORTS  PUBLIC-ADDRESS MESSAGE
-mariadb/0   unknown        idle        2.0-alpha2 2              54.224.143.151        
-wordpress/0 unknown        idle        2.0-alpha2 1       80/tcp 54.145.6.196          
+Unit          Workload  Agent  Machine  Public address   Ports   Message
+mariadb/0*    active    idle   1        104.196.223.128          ready
+wordpress/0*  unknown   idle   0        104.196.177.186  80/tcp
 
-[Machines]
-ID         STATE   DNS            INS-ID     SERIES AZ        
-1          started 54.145.6.196   i-0a9c888f trusty us-east-1b
-2          started 54.224.143.151 i-9626540e trusty us-east-1c 
+Machine  State    DNS              Inst id        Series  AZ
+0        started  104.196.177.186  juju-e41c31-0  trusty  us-east1-b
+1        started  104.196.223.128  juju-e41c31-1  trusty  us-east1-c
+
+Relation      Provides   Consumes   Type
+cluster       mariadb    mariadb    peer
+db            mariadb    wordpress  regular
+loadbalancer  wordpress  wordpress  peer
 ```
 
-As you can see here under [Applications], the `EXPOSED:` status is listed as 
-true, and the application is running and available to users.
+As you can see in the above example, the `wordpress` app is marked as 'exposed'
+in the Notes column, meaning that the application is running and available to
+users via its public address of 104.196.177.186.
 
 **Note:** Exposing the application does not change any DNS or other settings 
 which may be necessary to get your application running as you expect.
