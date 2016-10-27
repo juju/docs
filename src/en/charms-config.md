@@ -58,7 +58,7 @@ Before you set any of these options, you may want to check what current options
 are already set, using the `juju get-config <application>` command. For example:
 
 ```bash
-juju get-config mediawiki
+juju config mediawiki
 ```
 
 Should return something like this:
