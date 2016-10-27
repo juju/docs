@@ -93,10 +93,10 @@ currently deployed charm. The following rules apply:
 - If a channel revision is older, downgrade the deployed charm to that revision
 - If a channel revision is newer, upgrade the deployed charm to that revision
 
-Channels can be specified with the `charm-upgrade` command. For example:
+Channels can be specified with the `upgrade-charm` command. For example:
 
 ```bash
-juju charm-upgrade mysql --channel edge
+juju upgrade-charm mysql --channel edge
 ```
 
 
@@ -183,7 +183,7 @@ if the charm contains a series declaration, or if you have specified a
 default series in the model configuration. For example:
 
 ```bash
-juju set-model-config -m mymodel default-series=trusty
+juju model-config -m mymodel default-series=trusty
 ```
 
 See [Configuring models](./models-config.html) for more details on model level
