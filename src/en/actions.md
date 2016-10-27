@@ -34,23 +34,27 @@ juju list-actions git
 
 You should see something similar to this:
 
-```bash
-add-repo: Create a git repository.
-add-repo-user: Give a user permissions to access a repository.
-add-user: Create a new user.
-get-repo: Return the repository's path.
-list-repo-users: List all users who have access to a repository.
-list-repos: List existing git repositories.
-list-user-repos: List all the repositories a user has access to.
-list-users: List all users.
-remove-repo: Remove a git repository.
-remove-repo-user: Revoke a user's permissions to access a repository.
-remove-user: Remove a user.
+<!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
+<!-- JUJUCOMMAND: juju list-actions git -->
+```no-highlight
+Action            Description
+add-repo          Create a git repository.
+add-repo-user     Give a user permissions to access a repository.
+add-user          Create a new user.
+get-repo          Return the repository's path.
+list-repo-users   List all users who have access to a repository.
+list-repos        List existing git repositories.
+list-user-repos   List all the repositories a user has access to.
+list-users        List all users.
+remove-repo       Remove a git repository.
+remove-repo-user  Revoke a user's permissions to access a repository.
+remove-user       Remove a user.
 ```
-
 To show the full schema for all the actions on a service, append the `--schema`
-argument to the `list-actions` command. For example, here's the beginning of
-the output from `juju list-actions git --schema`:
+argument to the `list-actions` command. 
+
+For example, here's the beginning of the output from `juju list-actions git
+--schema --format yaml`:
 
 ```bash
 add-repo:
@@ -117,16 +121,19 @@ we'd enter the following:
 juju show-action-output 3a7cc626-4c4c-4f00-820f-f881b79586d10
 ```
 This will return something like the following:
-```bash
+
+<!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
+<!-- JUJUCOMMAND: juju show-action-output 4cb5c96d-77de-4870-8462-8e4de5b22852
+-->
+```no-highlight
 results:
   dir: /var/git/myproject.git
 status: completed
 timing:
-  completed: 2016-05-10 09:43:40 +0000 UTC
-  enqueued: 2016-05-10 09:43:36 +0000 UTC
-  started: 2016-05-10 09:43:39 +0000 UTC
+  completed: 2016-10-27 13:46:12 +0000 UTC
+  enqueued: 2016-10-27 13:46:11 +0000 UTC
+  started: 2016-10-27 13:46:11 +0000 UTC
 ```
-
 ### `juju show-action-status`
 
 Query the status of an action. For example, We could check on the progress of git's
@@ -137,9 +144,13 @@ juju show-action-status 3a7cc626-4c4c-4f00-820f-f881b79586d1
 ```
 This will output the status of the action, shown here as 'completed':
 
-```bash
+<!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
+<!-- JUJUCOMMAND: juju show-action-status 4cb5c96d-77de-4870-8462-8e4de5b22852
+-->
+```no-highlight
 actions:
-- id :3a7cc626-4c4c-4f00-820f-f881b79586d1
+- id: 3a7cc626-4c4c-4f00-820f-f881b79586d1
   status: completed
   unit: git/0
 ```
+
