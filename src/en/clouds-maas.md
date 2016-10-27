@@ -20,11 +20,11 @@ clouds:
       type: maas
       auth-types: [oauth1]
       endpoint: http://devmaas/MAAS
-   testmass:
+   testmaas:
       type: maas
       auth-types: [oauth1]
       endpoint: http://172.18.42.10/MAAS
-   prodmass:
+   prodmaas:
       type: maas
       auth-types: [oauth1]
       endpoint: http://prodmaas/MAAS

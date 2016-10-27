@@ -107,11 +107,17 @@ If the user lists the models available to them, they should now see the
 
 ```bash
 juju list-models
-CONTROLLER: shared
-
-MODEL      	OWNER    	STATUS 	ACCESS  LAST CONNECTION
-admin/staging  admin@local  available  read	never connected
 ```
+
+<!-- JUJUVERSION: 2.0.0-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju list-models -->
+```no-highlight
+Controller: shared
+
+Model          Owner  Status     Access  Last connection
+admin/staging  admin  available  read    never connected
+```
+
 They will need to manually switch to this to make it active:
 
 ```bash
