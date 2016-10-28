@@ -165,7 +165,7 @@ Having added a new cloud, if you re-run the `juju list-clouds` command, you
 should see something like this:
 
 ```no-highlight
-loud        Regions  Default        Type        Description
+Cloud        Regions  Default        Type        Description
 aws               11  us-east-1      ec2         Amazon Web Services
 aws-china          1  cn-north-1     ec2         Amazon China
 aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)

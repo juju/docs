@@ -50,10 +50,15 @@ This will result in the controller being visible with the LXC client:
 lxc list
 ```
 
-![bootstrap machine 0 in LXC CLI](./media/config-lxd_cli-machine_0.png)
+```no-highlight
++---------------+---------+-----------------------+------+------------+-----------+
+|     NAME      |  STATE  |         IPV4          | IPV6 |    TYPE    | SNAPSHOTS |
++---------------+---------+-----------------------+------+------------+-----------+
+| juju-669cb0-0 | RUNNING | 10.154.173.181 (eth0) |      | PERSISTENT | 0         |
++---------------+---------+-----------------------+------+------------+-----------+
+```
 
 See more examples of [Creating a controller][bootstrap].
-
 
 ## Next steps
 
@@ -88,6 +93,7 @@ Juju pulls official cloud images from the 'ubuntu' remote
 (http://cloud-images.ubuntu.com) and creates the necessary alias. Any
 subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
 Cached images can be seen with `lxc image list`:
+
 
 ![lxc image list after importing](./media/image_list-imported_image-reduced70.png)
 
