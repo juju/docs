@@ -17,7 +17,7 @@ release to manage cloud deployments.
 
 ## Stable
 
-The current stable version of Juju is 2.0.1.
+The current stable version of Juju is 2.0.0.
 
 Stable juju is suitable for everyday production use.
 
@@ -28,21 +28,21 @@ sudo apt update
 sudo apt install juju
 ```
 CentOS:
-: [juju-2.0.1-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.1/+download/juju-2.0.1-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.1/+download/juju-2.0.1-centos7.tar.gz/+md5))
+: [juju-2.0.0-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz/+md5))
 {: .instruction }
 
 OS X:
-: [juju-2.0.1-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.1/+download/juju-2.0.1-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.1/+download/juju-2.0.1-osx.tar.gz/+md5))
+: [juju-2.0.0-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows:
-: [juju-setup-2.0.1.exe](https://launchpad.net/juju/2.0/2.0.1/+download/juju-setup-2.0.1.exe)([md5](https://launchpad.net/juju/2.0/2.0.1/+download/juju-setup-2.0.1.exe/+md5))
+: [juju-setup-2.0.0.exe](https://launchpad.net/juju/2.0/2.0.0/+download/juju-setup-2.0.0.exe)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-setup-2.0.0.exe/+md5))
 {: .instruction }
 
 
 ## Proposed
 
-Current proposed version is 2.0.1, which is the same as stable (above).
+Current proposed version is 2.0.0, which is the same as stable (above).
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stabilised features. They
@@ -58,15 +58,15 @@ sudo apt install juju
 ```
 
 CentOS:
-: [juju-2.0.1-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.1/+download/juju-2.0.1-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.1/+download/juju-2.0.1-centos7.tar.gz/+md5))
+: [juju-2.0.0-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-centos7.tar.gz/+md5))
 {: .instruction }
 
 OS X:
-: [juju-2.0.1-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.1/+download/juju-2.0.1-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.1/+download/juju-2.0.1-osx.tar.gz/+md5))
+: [juju-2.0.0-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-2.0.0-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows:
-: [juju-setup-2.0.1.exe](https://launchpad.net/juju/2.0/2.0.1/+download/juju-setup-2.0.1.exe)([md5](https://launchpad.net/juju/2.0/2.0.1/+download/juju-setup-2.0.1.exe/+md5))
+: [juju-setup-2.0.0.exe](https://launchpad.net/juju/2.0/2.0.0/+download/juju-setup-2.0.0.exe)([md5](https://launchpad.net/juju/2.0/2.0.0/+download/juju-setup-2.0.0.exe/+md5))
 {: .instruction }
 
 If you wish to test applications deployed to mixed OSes and architectures, you
@@ -78,7 +78,7 @@ juju bootstrap cloud/region my-controller --config agent-stream=proposed
 
 ## Development
 
-Current development version is 2.0.1, which is the same as proposed and stable (above).
+Current development version is 2.0.0, which is the same as proposed and stable (above).
 
 The previous development release was 2.0-rc3.
 
