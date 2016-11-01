@@ -232,6 +232,7 @@ logging-config | string |  |  | The configuration string to use when configuring
 lxc-clone | bool |  |  | Whether to use lxc-clone to create new LXC containers
 lxc-clone-aufs | bool | false |  | Whether the LXC provisioner should create an LXC clone using AUFS if available
 lxc-default-mtu | int |  |  | The MTU setting to use for network interfaces in LXC containers
+metadata-source | string |  |  | The local directory source for both tools and images metadata, when using a local directory with a private cloud instead of a URL. If using a URL, use 'image-metadata-url'.
 name | string |  |  | The name of the current environment
 no-proxy | string |  |  | List of domain addresses not to be proxied (comma-separated)
 prefer-ipv6 | bool | false |  | Whether to prefer IPv6 over IPv4 addresses for API endpoints and machines
