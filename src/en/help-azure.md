@@ -54,7 +54,7 @@ either type 'interactive' manually, or simply press 'Enter' to continue.
 
 !!! Note: The 'interactive' option is far quicker and easier than manually
 adding credentials via the 'service-principal-secret' option, but instructions
-for these are covered in the [Manually adding
+for this are covered in the [Manually adding
 credentials](#manually-adding-credentials) section.
 
 You will then be asked for your Azure subscription id.  After entering this, you'll
