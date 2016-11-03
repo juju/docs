@@ -42,21 +42,20 @@ juju add-credential azure
 The first question will ask for an arbitrary credential name, which you choose
 for yourself.  This will be how you remember and refer to this Azure credential
 in Juju. The second question will ask you to select an 'Auth Type' from the
-following list:
+following two options:
 
 ```bash
 interactive*
 service-principal-secret
-userpass
 ```
 
 The `*` after 'interactive' indicates this is the default option, and you can
 either type 'interactive' manually, or simply press 'Enter' to continue. 
 
-!!! Note: The 'interactive' option is far quicker and easier than manually adding
-credentials via either the 'service-principal-secret' or 'userpass'
-options, but instructions for these are covered in the 
-[Manually adding credentials](#manually-adding-credentials) section.
+!!! Note: The 'interactive' option is far quicker and easier than manually
+adding credentials via the 'service-principal-secret' option, but instructions
+for these are covered in the [Manually adding
+credentials](#manually-adding-credentials) section.
 
 You will then be asked for your Azure subscription id.  After entering this, you'll
 be notified that Juju is initiating its interactive authentication followed by
@@ -112,20 +111,13 @@ account if you are deploying many or large applications.
 
 ## Manually adding credentials
 
-Selecting either the `service-principal-secret` or `userpass` authentication
-options when running `juju add-credential azure` will require you to configure
-and retrieve specific details from your Azure cloud: 
+Selecting the `service-principal-secret` authentication option when running
+`juju add-credential azure` will require you to configure and retrieve specific
+details from your Azure cloud: 
 
  - application-id
  - subscription-id
  - application-password
-
-Additionally, if you selected `userpass', you will also need:
-
- - tenant-id
-
-!!! Note: The 'userpass' authentication type is being deprecated and will be
-removed soon.
 
 In the sections below, we will assign each of these a variable name.  When you
 enter them into the command, replace the variable name we give with the actual
@@ -265,14 +257,13 @@ azure login \
         --tenant "$TENANT_ID"
 ```
 
-You can now run the interactive `juju add-credential azure` command. As before, select
-either `service-principal-secret` or `userpass` as the Auth Type, and supply the
-following details, discovered above, when asked:
+You can now run the interactive `juju add-credential azure` command. Select
+`service-principal-secret` as the Auth Type, and supply the following details,
+discovered above, when asked:
 
 ```bash
 APP_ID
 SUB_ID
-TENANT_ID # Only required when 'userpass' is the authentication method.
 APP_PASSWORD
 ```
 
