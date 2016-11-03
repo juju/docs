@@ -146,8 +146,8 @@ which will return a list of the known credentials. For example:
 <!-- JUJUCOMMAND: juju list-credentials -->
 ```no-highlight
 Cloud      Credentials
-aws     bob*, carol
-google  wayne
+aws        bob*, carol
+google     wayne
 ```
 The asterisk '*' denotes the default credential, which will be used for the
 named cloud unless another is specified.
