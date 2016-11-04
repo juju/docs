@@ -18,19 +18,28 @@ Examples:
 To disable the user 'mike':
 
 ```bash
-juju disable mike
+juju disable-user mike
 ```
 
 To re-enable the user 'mike':
 
 ```bash
-juju enable mike
+juju enable-user mike
 ```
 
 Disabled users do not show up in the output to `juju list-users` unless the
-'--all' option is used.
+'--all' option is used:
 
+<!-- JUJUVERSION: 2.0.1-genericlinux-amd64 -->
+<!-- JUJUCOMMAND: juju list-users --all -->
 
+```no-highlight
+Controller: cstack
+
+Name    Display name  Access     Date created    Last connection
+admin*  admin         superuser  2016-10-12    just now
+mike                  login      17 minutes ago  never connected (disabled)
+```
 ## Changing user passwords
 
 An administrator can change the password of any user associated with the
