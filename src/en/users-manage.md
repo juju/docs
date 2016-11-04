@@ -37,7 +37,7 @@ Disabled users do not show up in the output to `juju list-users` unless the
 Controller: cstack
 
 Name    Display name  Access     Date created    Last connection
-admin*  admin         superuser  2016-10-12    just now
+admin*  admin         superuser  2016-10-12      just now
 mike                  login      17 minutes ago  never connected (disabled)
 ```
 ## Changing user passwords
