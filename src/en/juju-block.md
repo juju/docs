@@ -61,7 +61,7 @@ juju disabled-commands
 !!! Warning: In some cases, the disable command will only take effect after the
 user has logged out of Juju and logged back in again.
 
-## Command within each enable or disable group
+## Commands within each enable or disable group
 
 | destroy-model      | remove-object      | all                  |
 |--------------------|--------------------|----------------------|
