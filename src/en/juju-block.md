@@ -1,107 +1,113 @@
-Title: Using Juju block to prevent accidental changes  
+Title: Restricting changes to the running Juju environment
 
-# Restricting changes to the running Juju environment
+# Restricting changes to running models
 
-Changes to a running Juju environment can be restricted in order to prevent accidental
-changes.
+Deployed models can be protected from unintentional changes by disabling
+commands that can alter a model.
 
-There are three accumulative levels of restrictions that can be applied:
+This is accomplished through the use of the `disable-command` command with one
+of three progressively restrictive command groups:
 
-- destroy-environment
+- destroy-model
 - remove-object
-- all-changes
+- all
 
-These are applied and removed with the 'block' and 'unblock' commands.
+By disabling the `destroy-model` group, for instance, the user loses the ability
+to destroy both the model and its controller. Specifying the `remove-object`
+group adds to these restrictions by disabling the removal of machines,
+relations, applications and units. The `all` group disables the complete set of
+commands that can change the configuration of a model.
 
+To give the user some feedback on why a command might be disabled, an optional
+message argument can be passed as part of the disable command.
 
-## Understanding and applying restrictions
-
-### destroy-environment
-
-This level blocks just the 'destroy-environment' command. You can therefore
-prevent an environment from being destroyed like this:
-
-```bash
-juju block destroy-environment
-```
-
-### remove-object
-
-This level includes the 'destroy-environment' level and adds more restrictions.
-In total, it prevents the following commands from being run:
-
-- destroy-environment
-- remove-machine
-- remove-relation
-- remove-service
-- remove-unit
-
-This restriction level gets applied in this way:
+For example, the following could be used to prevent execution of both the
+`destroy-model` and `destroy-controller` commands:
 
 ```bash
-juju block remove-object
+juju disable-command destroy-model "Check with SA before destruction."
 ```
 
-### all-changes
+If a user now attempts to destroy a protected model, they'd encounter an error
+similar to the following:
 
-This level includes the 'remove-object' level and adds more restrictions. In
-total, it prevents the following commands from being run:
+```no-highlight
+Destroying model
+ERROR cannot destroy model: Check with SA before destruction.
 
-- add-machine
-- add-relation
-- add-unit
-- authorised-keys add
-- authorised-keys delete
-- authorised-keys import
-- deploy
-- destroy-environment
-- ensure-availability
-- expose
-- resolved
-- remove-machine
-- remove-relation
-- remove-service
-- remove-unit
-- retry-provisioning
-- run
-- set
-- set-constraints
-- set-env
-- unexpose
-- unset
-- unset-env
-- upgrade-charm
-- upgrade-juju
-- user add
-- user change-password
-- user disable
-- user enable
+destroy-model operation has been disabled for the current model.
+To enable the command run
 
-This restriction level gets applied in this way:
+    juju enable-command destroy-model
+```
+
+## Re-enabling a command
+
+The reverse of `disable-command` is `enable-command.` This can be used with
+the corresponding group to restore a user's access to that group's commands: 
 
 ```bash
-juju block all-changes
+juju enable-command destroy-model
 ```
+  
+By default, these actions are performed against the currently selected
+controller and model, but specific models can be targeted by using the
+additional '-m' or '--model' argument.
 
-
-## Removing restrictions
-
-When a change is being blocked that you are certain you need to make, you can
-remove the block using the 'unblock' command.
-
-For example, to permit the 'remove-relation' command currently blocked by the
-'remove-object' restriction level, run:
+If you need to list which commands have been disabled, use `disabled-commands`:
 
 ```bash
-juju unblock remove-object
-```
+juju disabled-commands
+``` 
 
-Typically you would restore the block after having made the change.
+This will output will list any group that's currently disabled:
+
+<!-- JUJUVERSION: 2.0.1-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju disabled-commands -->
+```no-highlight
+Disabled commands  Message
+all
+```
+!!! Warning: In some cases, the disable command will only take effect after the
+user has logged out of Juju and logged back in again.
+
+## Commands within each enable and disable group
+
+| destroy-model      | remove-object      | all                  |
+|--------------------|--------------------|----------------------|
+| destroy-controller | destroy-controller | add-relation         |
+| destroy-model      | destroy-model      | add-unit             |
+|                    | destroy-machine    | add-ssh-key          |
+|                    | remove-machine     | add-user             |
+|                    | remove-relation    | change-user-password |
+|                    | remove-application | deploy               |
+|                    | remove-unit        | disable-user         |
+|                    |                    | destroy-controller   |
+|                    |                    | destroy-model        |
+|                    |                    | enable-ha            |
+|                    |                    | enable-user          |
+|                    |                    | expose               |
+|                    |                    | import-ssh-key       |
+|                    |                    | remove-application   |
+|                    |                    | remove-machine       |
+|                    |                    | remove-relation      |
+|                    |                    | remove-ssh-key       |
+|                    |                    | remove-unit          | 
+|                    |                    | resolved             |
+|                    |                    | retry-provisioning   |
+|                    |                    | run                  |
+|                    |                    | set-config           |
+|                    |                    | set-constraints      | 
+|                    |                    | set-model-config     |
+|                    |                    | sync-tools           |
+|                    |                    | unexpose             |
+|                    |                    | unset-config         |
+|                    |                    | unset-model-config   |
+|                    |                    | upgrade-charm        |
+|                    |                    | upgrade-juju         |
 
 !!! Note: The '--force' option recognized by some Juju commands bypasses any
 restriction level that would otherwise apply. If your policy is to use
 restrictions then the immediate use of the '--force' option should not be part
 of your workflow. If you must use it, do so after having first run the Juju
 command without it to ensure you are aware of any possible restrictions.
-
-For more information run ```juju help block``` and ```juju help unblock```.

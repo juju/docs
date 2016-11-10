@@ -70,7 +70,7 @@
         </li>
         <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
             <ul class="sub">
-                <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
+                <li><a href="juju-block.html">Disable Juju commands</a></li>
                 <li><a href="juju-centos.html">CentOS support</a></li>
                 <li><a href="network-spaces.html">Network spaces</a></li>
                 <li><a href="juju-plugins.html">Juju plugins</a></li>
