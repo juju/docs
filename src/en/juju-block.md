@@ -60,7 +60,7 @@ If you need to list which commands have been disabled, use `disabled-commands`:
 juju disabled-commands
 ``` 
 
-This will output a message containing any group that's currently disabled:
+This will output will list any group that's currently disabled:
 
 <!-- JUJUVERSION: 2.0.1-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju disabled-commands -->
@@ -71,7 +71,7 @@ all
 !!! Warning: In some cases, the disable command will only take effect after the
 user has logged out of Juju and logged back in again.
 
-## Commands within each enable or disable group
+## Commands within each enable and disable group
 
 | destroy-model      | remove-object      | all                  |
 |--------------------|--------------------|----------------------|
