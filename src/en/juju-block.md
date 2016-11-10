@@ -37,6 +37,8 @@ ERROR cannot destroy model: Check with SA before destruction.
 
 destroy-model operation has been disabled for the current model.
 To enable the command run
+
+    juju enable-command destroy-model
 ```
 
 ## Re-enabling a command
