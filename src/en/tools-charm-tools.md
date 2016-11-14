@@ -9,16 +9,16 @@ manage charms.
 The source project can be found at
 [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools).
 
-## Ubuntu
-To install the latest Charm Tools, you simply need to grab the latest charm-
-tools package from this PPA:
+## Ubuntu 16.04 LTS (Xenial) and later releases
+
+Install the charm snap:
 
 ```bash
-sudo add-apt-repository ppa:juju/stable
-sudo apt-get update && sudo apt-get install charm-tools
+sudo snap install charm
 ```
 
 ## Mac OSX
+
 Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
 running the latest version of Homebrew before proceeding.
 
