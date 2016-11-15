@@ -17,7 +17,7 @@ are operational.
 Each charm will have its own set of options and possible values. You can
 discover these in several ways:
 
-  - By running the `juju get-config` command.
+  - By running the `juju config` command.
   - By viewing the charm in the [charm store](https://jujucharms.com).
   - By examining the **config.yaml** file in the charm itself.
 
@@ -46,7 +46,7 @@ juju deploy --config myconfig.yaml mediawiki
 
 !!! WARNING: If the yaml configuration file cannot be read or contains some
 syntax errors or invalid options, you will receive an error message to this
-effect. However, **the application will still be deployed **. 
+effect. However, **the application will still be deployed **.
 
 
 ## Configuring an application which is already deployed
@@ -55,10 +55,10 @@ It is possible to set or change configuration of an application which is
 already deployed.
 
 Before you set any of these options, you may want to check what current options
-are already set, using the `juju get-config <application>` command. For example:
+are already set, using the `juju config <application>` command. For example:
 
 ```bash
-juju get-config mediawiki
+juju config mediawiki
 ```
 
 Should return something like this:
@@ -102,15 +102,15 @@ You can set the options using `juju config <application>`, specifying
 multiple space-separated key=value pairs if necessary:
 
 ```bash
-juju config mediawiki skin=monoblock name='Juju Wiki' 
+juju config mediawiki skin=monoblock name='Juju Wiki'
 ```
 It is also possible to set the configuration options from a YAML file after
 the application has been deployed:
-  
+
 ```bash
 juju config mediawiki --file path/to/myconfig.yaml
 ```
-  
+
 Setting an option back to its default value is achieved by using the same
 command, with the `--reset` switch, followed by a comma-separated list of the
 values to return to the default setting:

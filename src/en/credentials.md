@@ -44,11 +44,11 @@ according to the cloud you are using, but will typically look something like
 this:
 
 ```no-highlight
-juju add-credential aws 
-credential name: carol
-select auth-type [userpass, oauth, etc]: userpass
-enter username: cjones
-enter password: *******
+Enter credential name: carol
+Using auth-type "access-key".
+Enter access-key: *******
+Enter secret-key: *******
+Credentials added for cloud aws.
 ```
 
 Once you have supplied all the information, the credentials will be added.
