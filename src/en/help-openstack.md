@@ -60,7 +60,9 @@ juju add-cloud mystack mystack-config.yaml
 
 Once the cloud has been added, it will appear on the list of known clouds 
 output by the `juju list-clouds` command. Note that the cloud name will be 
-prefixed with 'local:' to indicate that it is a locally added cloud.
+highlighted to indicate that it is a locally added cloud.
+
+!["juju list-cloud with locally added cloud"](./media/list-clouds-local.png)
 
 ## Adding credentials
 
