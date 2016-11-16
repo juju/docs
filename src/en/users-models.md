@@ -85,7 +85,7 @@ of access are used to manage access to Juju's controllers:
 
 The `grant` syntax for controller access is the same as model
 access, only without the need to specify a model. With no controller specified,
-the current model will be assumed the target:
+the current controller will be assumed the target:
 
 ```bash
 juju grant jim add-model
