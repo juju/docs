@@ -45,7 +45,7 @@ access to any model.
 - `write`: a user can both view the state of a model and make any changes
   required, though they can't create, backup or destroy models.
 
-To give 'bob' to read-only accessto the model 'mymodel', for example, the
+To give 'bob' read-only access to the model 'mymodel', for example, the
 administrator would enter the following:
 
 ```bash
