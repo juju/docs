@@ -73,7 +73,7 @@ A controller is a special kind of model that acts as the management node for
 each cloud environment. Properly managed access to any controller is critical
 to the security and stability of your cloud and all its models. 
 
-In addition to the three levels of user access for models, three further levels
+In addition to the two levels of user access for models, three further levels
 of access are used to manage access to Juju's controllers:
 
 - `login`: the standard access level for any user, enabling them
