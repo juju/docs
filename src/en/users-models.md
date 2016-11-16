@@ -122,11 +122,11 @@ use the following:
 juju revoke jim add-model
 ```
 
-After a `revoke` command has been issued, a user's access will revert to 
-the next lower access level. With the above example, user 'jim' would now
-have 'login' access to the controller. This also means that if a user has write
-access to a model, the following command would revoke both read and write
-access:
+After a `revoke` command has been issued, a user's access will reduce to the
+next lower access level. With the above example, user 'jim' would have have
+'add-model' access reduced to 'login' access on the controller. This also means
+that if a user has write access to a model, the following command would revoke
+both read and write access:
 
 ```bash
 juju revoke bob read mymodel
