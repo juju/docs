@@ -78,10 +78,7 @@
         </li>
         <li class="section"><a class="header" href="howto.html">How to...</a>
             <ul class="sub">
-                <li><a href="howto-node.html">Deploy a Node.js app</a></li>
-                <li><a href="howto-rails.html">Test and deploy on Rails</a></li>
                 <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
-                <li><a href="howto-drupal-iis.html">Deploy Drupal Windows charm</a></li>
             </ul>
         </li>
         <li><a href="troubleshooting.html">Troubleshooting</a></li>
