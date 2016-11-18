@@ -15,6 +15,7 @@ version of Juju.
 Unless you are testing new features and fixes, choose the current stable
 release to manage cloud deployments.
 
+
 ## Stable
 
 The current stable version of Juju is 2.0.1.
@@ -78,9 +79,7 @@ juju bootstrap cloud/region my-controller --config agent-stream=proposed
 
 ## Development
 
-Current development version is 2.0.1, which is the same as proposed and stable (above).
-
-The previous development release was 2.0-rc3.
+Current development version is 2.1-beta1.
 
 Development releases provide new features that are being stabilised.
 These releases are *not* suitable for production environments. Upgrading
@@ -102,14 +101,14 @@ snap install juju --beta --devmode
 ```
 
 CentOS:
-: [juju-core_2.0-rc3-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-core_2.0-rc3.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-core_2.0-rc3.tar.gz/+md5))
+: [juju-core_2.1-beta1-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1-beta1/+download/juju-core_2.1-beta1.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta1/+download/juju-core_2.1-beta1.tar.gz/+md5))
 {: .instruction }
 
 OS X:
-: [juju-core_2.0-rc3-osx.tar.gz](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-2.0-rc3-osx.tar.gz) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-2.0-rc3-osx.tar.gz/+md5))
+: [juju-core_2.1-beta1-osx.tar.gz](https://launchpad.net/juju/2.1/2.1-beta1/+download/juju-2.1-beta1-osx.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta1/+download/juju-2.1-beta1-osx.tar.gz/+md5))
 {: .instruction }
 
 Windows:
-: [juju-setup-2.0-rc3.exe](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-setup-2.0-rc3.exe) ([md5](https://launchpad.net/juju/2.0/2.0-rc3/+download/juju-setup-2.0-rc3.exe/+md5))
+: [juju-setup-2.1-beta1.exe](https://launchpad.net/juju/2.1/2.1-beta1/+download/juju-setup-2.1-beta1.exe) ([md5](https://launchpad.net/juju/2.1/2.1-beta1/+download/juju-setup-2.1-beta1.exe/+md5))
 {: .instruction }
 
