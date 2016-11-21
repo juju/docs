@@ -238,7 +238,7 @@ Now that you have a Juju-powered cloud, it is time to explore the amazing
 things you can do with it! 
 
 We suggest you continue your journey by discovering 
-[how to add controllers for additional clouds][tut-cloud]
+[how to add controllers for additional clouds][tut-cloud].
 
 [long-term-support]: https://wiki.ubuntu.com/LTS "Long Term Support"
 [tut-cloud]: ./tut-google.html
