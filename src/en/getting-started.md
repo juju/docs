@@ -4,7 +4,7 @@ Title: Getting started with Juju
 
 These instructions will get you up and running and deliver the best-possible
 experience with Juju. At the moment, that means using the latest release of
-Ubuntu: [16.04 LTS (Xenial)][Xenial-download].
+Ubuntu with '[Long Term Support][long-term-support]' (LTS): [16.04 LTS (Xenial)][Xenial-download].
 
 See the [general Getting Started page][getting-started-general] if you're using
 something other than Xenial.
@@ -20,8 +20,7 @@ Apart from Juju, the following technologies will be used:
 Begin by installing the required software:
 
 ```no-highlight
-sudo add-apt-repository ppa:juju/stable
-sudo apt update
+sudo add-apt-repository -u ppa:juju/stable
 sudo apt install juju zfsutils-linux
 ```
 
@@ -35,8 +34,8 @@ command:
 groups
 ```
 
-Your groups may vary, but if `lxd` is absent you should refresh group
-membership with:
+Your groups may vary, but if `lxd` is absent you can add yourself to the `lxd`
+group with:
 
 ```bash
 newgrp lxd
@@ -51,8 +50,8 @@ sudo lxd init
 ```
 
 You will be asked several questions to configure LXD for use. Pressing Enter
-will accept the default answer (provided in square brackets). Only one answer
-in the below example uses a non-default value.
+will accept the default answer (provided in square brackets). Only one answer,
+the size of the loop device in the below example, uses a non-default value.
 
 ```no-highlight
 Name of the storage backend to use (dir or zfs) [default=zfs]: 
@@ -97,11 +96,11 @@ answers. IPv6 networking (the last question) is not required for Juju.
    
    !["step 5"](./media/juju-lxd-config005.png)
    
-   You can now specify the start address for DHCP...
+   You can now specify the start of the DHCP address range...
    
    !["step 6"](./media/juju-lxd-config006.png)
    
-   And the end address...
+   And the end address of the range...
    
    !["step 7"](./media/juju-lxd-config007.png)
    
@@ -109,7 +108,7 @@ answers. IPv6 networking (the last question) is not required for Juju.
    
    !["step 8"](./media/juju-lxd-config008.png)
    
-   Finally for IPv4, enable Network Address Translation to allow the
+   Finally for IPv4, enable Network Address Translation (NAT) to allow the
    containers to communicate with the outside world.
    
    !["step 9"](./media/juju-lxd-config009.png)
@@ -126,12 +125,15 @@ subnet/bridge it created. If you subsequently add/change firewall settings
 (e.g. with `ufw`), ensure that such changes have not interfered with Juju's
 ability to communicate with LXD.
 
-
 ## Create a controller
 
-Juju needs a controller instance to manage your models and the `juju bootstrap`
-command is used to create one. This command expects a name (for referencing this 
-controller) and a cloud to use. The LXD 'cloud' is known as 'localhost' to Juju.
+Before you can start deploying applications, Juju needs to bootstrap a
+controller for the LXD configuration we just created. The controller manages
+the environment and the models you create to host the applications.
+
+The `juju bootstrap` command is used to create the controller, and the command
+expects a name (for referencing this controller) and a cloud to use. The LXD
+'cloud' is known as 'localhost' to Juju.
 
 For our LXD localhost cloud, we will create a controller called 'lxd-test':
 
@@ -146,14 +148,14 @@ Once the process has completed you can check that the controller has been
 created:
 
 ```bash
-juju list-controllers 
+juju controllers 
 ```
 
 This will return a list of the controllers known to Juju, which at the moment is
 the one we just created:
   
 ```no-highlight
-Use --refresh to see the latest information.
+Use --refresh flag with this command to see the latest information.
 
 Controller  Model    User   Access     Cloud/Region         Models  Machines HA  Version
 lxd-test*   default  admin  superuser  localhost/localhost       2         1 none  2.0.0
@@ -177,7 +179,7 @@ Model:       default
 User:        admin
 ```
 
-## Deploy
+## Deploy applications
 
 Juju is now ready to deploy applications from among the hundreds included in
 the [Juju charm store][charm store]. It is a good idea to test your new model.
@@ -200,22 +202,22 @@ the command:
 juju status
 ```
 
-When the applications have been installed, the output to the above command will
+When the applications have been installed, the output of the above command will
 look something like this:
 
 ![juju status](./media/juju-mediawiki-status.png)
 
 There is a lot of useful information there! The important parts for now are
-the APP section, which shows that MediaWiki (shortened to 'wiki') and MySQL are
-installed, and the UNIT section, which shows the IP addresses allocated to
-each. These addresses correspond to the subnet we created for LXD earlier on.
+the 'App' section, which shows that MediaWiki and MySQL are installed, and the
+'Unit' section, which shows the IP addresses allocated to each. These addresses
+correspond to the subnet we created for LXD earlier on.
 
-By default, Juju is secure - you won't be able to connect to any applications
-on a public cloud unless they are specifically exposed using the 
-`juju expose <application>` command. This adjusts the relevant firewall 
-controls of the cloud to allow external access. However, traffic to LXD is not 
-locked down by default, so for this example there is no need to perform this
-step.
+When Juju is run on a public cloud, it defaults to being secure - you won't be
+able to connect to any applications on a public cloud unless they are
+specifically exposed using the `juju expose <application>` command. This
+adjusts the relevant firewall controls of the cloud to allow external access.
+However, traffic to our local LXD environment is not locked down by default, so
+for this example there is no need to perform this step.
 
 From the status output, we can see that the IP address for the MediaWiki
 site we have created is 10.154.173.2 Open a browser and enter that address 
@@ -238,6 +240,7 @@ things you can do with it!
 We suggest you continue your journey by discovering 
 [how to add controllers for additional clouds][tut-cloud]
 
+[long-term-support]: https://wiki.ubuntu.com/LTS "Long Term Support"
 [tut-cloud]: ./tut-google.html
 [clouds]: ./clouds.html  "Configuring Juju Clouds"
 [charm store]: https://jujucharms.com "Juju Charm Store"
