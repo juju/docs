@@ -128,10 +128,10 @@ ability to communicate with LXD.
 ## Create a controller
 
 Before you can start deploying applications, Juju needs to bootstrap a
-controller for the LXD configuration we just created. The controller manages
-the environment and the models you create to host the applications.
+controller for the LXD configuration we created. The controller manages
+both the environment and the models you create to host the applications.
 
-The `juju bootstrap` command is used to create the controller, and the command
+The `juju bootstrap` command is used to create the controller. The command
 expects a name (for referencing this controller) and a cloud to use. The LXD
 'cloud' is known as 'localhost' to Juju.
 
