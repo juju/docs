@@ -7,6 +7,46 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^#juju-core 1.25.8
+
+  A new supported stable release of Juju, 1.25.8, is here!
+
+
+  ## Notable Changes
+
+  * Added support for new AWS regions: ap-south-1 and us-east-2
+
+  * Fixed issue allowing you to re-provision a machine with
+    manual provider
+    https://bugs.launchpad.net/juju/+bug/1418139
+
+  * Improved charm garbage collection
+    https://bugs.launchpad.net/juju-core/+bug/1626304
+
+  * HA Agents connectivity fixes;
+    https://bugs.launchpad.net/juju/+bug/1510651
+    https://bugs.launchpad.net/juju/+bug/1597830
+
+  * Corrected Backup and Restore failures;
+    https://bugs.launchpad.net/juju/+bug/1457575
+    https://bugs.launchpad.net/juju/+bug/1544796
+
+  * Support for MacOS Sierra
+    https://bugs.launchpad.net/juju/+bug/1638560
+
+
+  ## How do I get it?
+
+  If you are running Ubuntu, you can get it from the juju proposed ppa:
+
+      sudo add-apt-repository ppa:juju/1.25
+      sudo apt-get update; sudo apt-get install juju-core
+
+  Windows, Centos, and MacOS users can get a corresponding installer at:
+
+      https://launchpad.net/juju-core/+milestone/1.25.8
+
+
 ^# juju-core 1.25.5
 
   A stable release of Juju, juju-core 1.25.5, is now available.
