@@ -23,6 +23,10 @@ order to deploy.
 As a charm developer, you may push and release terms owned by a group of which
 you are a member. Groups are mapped onto Launchpad teams.
 
+### Install latest charm-tools
+
+To use terms you will need at least v2.2 of [charm tools](./tools-charm-tools.html).
+
 ### Pushing terms
 
 To push an initial or updated revision of a term, use `charm push-term`.
