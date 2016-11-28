@@ -11,7 +11,7 @@ and thus lighten the development workload on everyone.
 
 - Start your review by saying "Thanks", no matter what the outcome of the review is going to be.
 - If you recognise somebody you've worked with on IRC, thank them.
-- Run juju charm proof first. If there are serious problems with the charm based on the output of proof feel free to just stop the review there and tell them. You shouldn't promulgate a charm that has anything that’s a “WARNING” or more severe.
+- Run charm proof first. If there are serious problems with the charm based on the output of proof feel free to just stop the review there and tell them. You shouldn't promulgate a charm that has anything that’s a “WARNING” or more severe.
 - If the merge proposal or patch requires more work, encourage the contributor to join #juju and discuss the solution there.
 - Follow [these instructions](http://wiki.bazaar.canonical.com/PatchPilot) as well as you can.
 - If this is your first time patch piloting, you may feel more comfortable being a co-pilot your first few runs. Find a pilot in your timezone and reschedule your time to coincide with theirs.
