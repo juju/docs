@@ -404,7 +404,7 @@ Another part of the Charm Tools plugin is a useful lint-like tool which will
 check for errors in the files of your charm. Run it like this:
 
 ```bash
-juju charm proof [CHARM_DIRECTORY]
+charm proof [CHARM_DIRECTORY]
 ```
 
 The output classifies messages as:
