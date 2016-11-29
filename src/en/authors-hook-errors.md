@@ -31,7 +31,7 @@ response to either `juju resolved` or `juju upgrade-charm --force`.
     [environment](./authors-hook-environment.html) to be more recent and correct
     than anything it may have previously have recorded in the local
     [charm directory](./authors-charm-components.html).
-  - `juju resolved --retry` reverts the charm directory's contents to whatever
+  - `juju resolved` reverts the charm directory's contents to whatever
     they were at the start of the failed hook, and runs the hook again exactly as
     before. This, in combination with the [debug-hooks](./authors-hook-debug.html)
     command, is your main entry point for investigating an error in detail. If the

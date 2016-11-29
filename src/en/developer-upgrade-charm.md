@@ -44,8 +44,8 @@ charm accepts a `--force` flag: a forced charm upgrade will upgrade even units
 that are currently in an [error](./authors-hook-errors.html) state, at the cost
 of skipping the `upgrade-charm` hook for those units.
 
-This is useful for charm authors who want to push a new version of a failed hook
-(they can `upgrade-charm --force` and then `resolved --retry` to run it
+This is useful for charm authors who want to push a new version of a failed
+hook (they can `upgrade-charm --force` and then `resolved` to run it
 immediately without otherwise disturbing the system); but it's potentially
 dangerous if abused. We recommend that use of the feature be restricted to charm
 authors while developing their own charms, and that it's not sensible to devote
