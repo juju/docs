@@ -90,7 +90,8 @@ terminating.
 Prior to version 2.0, hooks returning an error will block until the user
 takes an action to retry them manually, by issuing the command `juju resolved
 --retry unit-name/#` for the affected unit. Juju version 2.0 and up will
-automatically retry hooks in error periodically. However, the `juju resolved` command (now without `--retry`) may still be used to retry the hook
+automatically retry hooks in error periodically. However, the `juju resolved`
+command (now without `--retry`) may still be used to retry the hook
 immediately. After retrying, go back to the debug-hooks session to interact
 with he Juju environment.
 
