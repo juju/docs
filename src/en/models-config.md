@@ -227,7 +227,7 @@ juju model-config provisioner-harvest-mode=none
 
 Prior to version 2.0, hooks returning an error would block until the user
 ran a command to retry them manually:
-`juju resolved --retry unit-name/#`
+`juju resolved unit-name/#`
   
 From version 2.0, Juju will automatically retry hooks periodically - there is 
 an exponential backoff, so hooks will be retried after 5, 10, 20, 40 seconds up
@@ -243,7 +243,7 @@ case, users will have to manually retry any hook which fails, using the command
 above, as with earlier versions of Juju.
 
 !!! Note: Even with the automatic retry enabled, it is still possible to use
-the  `juju resolved --retry unit-name/#` command to retry manually.
+the  `juju resolved unit-name/#` command to retry manually.
 
 
 ### Versions and streams
