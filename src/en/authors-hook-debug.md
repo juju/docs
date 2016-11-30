@@ -93,7 +93,7 @@ takes an action to retry them manually, by issuing the command `juju resolved
 automatically retry hooks in error periodically. However, the `juju resolved`
 command (now without `--retry`) may still be used to retry the hook
 immediately. After retrying, go back to the debug-hooks session to interact
-with he Juju environment.
+with the Juju environment.
 
 ```bash
 juju resolved mysql/0

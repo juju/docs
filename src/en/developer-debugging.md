@@ -148,8 +148,8 @@ terminating.
 
 Prior to version 2.0, hooks returning an error will block until the user
 takes an action to retry them manually, by issuing the command `juju resolved
-unit-name/#` for the affected unit. After issuing the retry command, go back
-to the debug-hooks session to interact with the Juju environment.
+unit-name/#` for the affected unit. After issuing the resolved command, go
+back to the debug-hooks session to interact with the Juju environment.
 
 ```bash
 juju resolved mysql/0
