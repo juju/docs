@@ -10,6 +10,48 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
+
+^# juju 2.0.2
+
+  ## Notable changes
+
+    * This releases addresses stability and performance issues.
+
+  ## Resolved issues
+
+    * Cinder fails with badrequest... "invalid input for field/attribute
+      device" Lp 1636648
+    * Juju 2.0.1 is not able to bootstrap with nova Lp 1638304
+    * [1.9] multiple negative spaces constraints given and rejected by
+      maas Lp 1636969
+    * Maas machine selected with space in violation of constraint Lp 1636919
+    * Openstack provider: if use-floating-ip=true, uses incorrect
+      compute api endpoint to determine available floating ips Lp 1638704
+    * Restore fails on some openstacks like prodstack Lp 1557726
+
+  For the full list of bugs addressed, see: [https://launchpad.net/juju/+milestone/2.0.2](https://launchpad.net/juju/+milestone/2.0.2).
+
+
+^# juju 2.0.1
+
+  ## Notable changes
+
+    * Support new AWS region us-east-2
+    * Correct OSX Sierra support
+    * Update list-models output to show cloud/region vs owner
+    * Update model-migrations with support for endpoints, cloud credentials
+
+  ## Resolved issues
+
+    * Vsphere improvements Lp 1623136 and Lp 1629452
+    * `use-floating-ip` is not honored from clouds.yaml config Lp 1614239 
+    * `bootstrap-timeout` ignored in --config Lp 1619808 
+    * `juju show-machines` should show all addresses a machine has Lp 1602840 
+    * Juju 2.0 uses random IP for 'PUBLIC-ADDRESS' with MAAS 2.0 Lp 1616098 
+
+  For the full list of bugs addressed, see: [https://launchpad.net/juju/+milestone/2.0.1](https://launchpad.net/juju/+milestone/2.0.1).
+
+
 ^# juju 2.0.0
 
   ## Notable Changes
