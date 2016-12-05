@@ -203,8 +203,8 @@ The author could publish foo-9 to either the stable or development channel
 as follows, showing the commands for stable and development respectively:
 
 ```
-charm publish cs:~kirk/foo-9
-charm publish cs:~kirk/foo-9 --channel development
+charm release cs:~kirk/foo-9
+charm release cs:~kirk/foo-9 --channel development
 ```
 
 After running both commands, revision 9 exists in both the stable channel

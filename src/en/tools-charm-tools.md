@@ -282,9 +282,9 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
 ^# publish
 
-      charm publish [options] <charm or bundle id> [--channel <channel>]
+      charm release [options] <charm or bundle id> [--channel <channel>]
 
-  The publish command publishes a charm or bundle in the charm store.
+  The release command publishes a charm or bundle in the charm store.
   Publishing is the action of assigning one channel to a specific charm
   or bundle revision (revision need to be specified), so that it can be shared
   with other users and also referenced without specifying the revision.
@@ -292,19 +292,19 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   Two channels are supported: "stable" and "development"; the "stable" channel is
   used by default.
 
-      charm publish ~lars/xenial/wordpress
+      charm release ~lars/xenial/wordpress
 
   To select another channel, use the `--channel` option, for instance:
 
-      charm publish ~lars/xenial/wordpress --channel stable
-      charm publish xenial/django-42 -c development --resource website-3 --resource data-2
+      charm release ~lars/xenial/wordpress --channel stable
+      charm release xenial/django-42 -c development --resource website-3 --resource data-2
 
   If your charm uses resources, you must specify what revision of each resource
   will be published along with the charm, using the --resource flag (one per
   resource). Note that resource info is embedded in bundles, so you cannot use
   this flag with bundles.
 
-      charm publish xenial/django-42 --resource website-3 --resource data-2
+      charm release xenial/django-42 --resource website-3 --resource data-2
 
 ^# pull
 
