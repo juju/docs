@@ -106,6 +106,19 @@ Common model management tasks are summarized below.
    command.
    
 
+^# Migrate models
+
+   Use the `juju migrate` command to move a model from one controller to
+   another. This is useful for load balancing when a controller is too busy, or
+   as a way to upgrade a model's controller to a newer Juju version.
+
+   `juju migrate [options] <model name> <target controller name>`
+
+   For complete explanation and syntax, see the
+   [command reference page](./commands.html#migrate) or the `juju help migrate`
+   command.
+   
+   
 
 ^# Provide SSH access
    
