@@ -3,7 +3,7 @@ Title: The Juju charm store
 # The Juju Charm Store
 
 Juju includes a charm store where charms and bundles can be uploaded,
-published, and optionally shared with other users.
+released (published), and optionally shared with other users.
 
 The charm store is broken down into two main sections: Recommended and
 Community. Recommended charms have been vetted and reviewed by a Juju
@@ -45,8 +45,8 @@ recognized.
 
 When a charm or bundle, referred to as entity from this point forward, is
 pushed for the first time to the store, the entity is named version 0 in
-the unpublished channel. Every revision of an entity lives in the
-unpublished channel. Subsequent pushes of different content to the store
+the unreleased (unpublished) channel. Every revision of an entity lives in
+the unreleased channel. Subsequent pushes of different content to the store
 will automatically increment this number. So if an entity is changed and
 pushed 4 times, the revision history would look like this:
 
@@ -55,11 +55,11 @@ entity: 0---1---2---3
 ```
 
 Channels group entity revisions into named streams. There are currently two
-published channels: stable and development. Each channel also tracks
-history of revisions. When a revision is published to a channel, that
+released channels: stable and development. Each channel also tracks
+history of revisions. When a revision is released to a channel, that
 channel pointer is changed and the history for the channel is updated.
 
-Building on the previous example, when a user published revision 2 to the
+Building on the previous example, when a user released revision 2 to the
 stable channel, the history would look like this:
 
 ```
@@ -68,7 +68,7 @@ stable channel, the history would look like this:
 entity: 0---1---2---3
 ```
 
-If, then, revision 3 is published to the development channel the history
+If, then, revision 3 is released to the development channel the history
 would look like this:
 
 ```
@@ -79,7 +79,7 @@ entity: 0---1---2---3
                       development (3)
 ```
 
-During this time, more revisions can be pushed to the default, unpublished
+During this time, more revisions can be pushed to the default, unreleased
 channel. This represents general development iterations. As iterations are
 pushed during development, the stable and development channels are not
 updated.
@@ -93,9 +93,9 @@ entity: 0---1---2---3---4---5---6
                       development (3)
 ```
 
-The author can, at any time, publish a revision to a channel. Revisions
+The author can, at any time, release a revision to a channel. Revisions
 can also exist in the same channel at the same time. For example, the
-author chooses to publish revision 3 to the stable channel without
+author chooses to release revision 3 to the stable channel without
 updating the development channel:
 
 ```
@@ -108,13 +108,13 @@ entity: 0---1---2---3---4---5---6
 
 In doing so, the stable channel is updated to point to revision 3 and
 revision 3 is added to the channel history. The author can continue to
-push and publish. Since revisions are a constant stream there are
+push and release. Since revisions are a constant stream there are
 scenarios where the stable channel may be pointed to a higher revision
 even though development revision is actually newer.
 
 In the following example revision 8 is development, a bug is found in the
 latest stable revision (5) so a hot fix is applied and pushed as 9.
-That revision is then published to the stable channel, like this:
+That revision is then released to the stable channel, like this:
 
 ```
                                               stable (9, 5, 3, 2)
@@ -124,9 +124,9 @@ entity: 0---1---2---3---4---5---6---7---8---9
                                           development (8, 3)
 ```
 
-While authors can publish older versions to the channels it is not
-encouraged. For example, an author could mistakenly publish revision 10 to
-the stable channel and not development, then the author could re-publish
+While authors can release older versions to the channels it is not
+encouraged. For example, an author could mistakenly release revision 10 to
+the stable channel and not development, then the author could re-release
 revision 9 to stable:
 
 ```
@@ -183,13 +183,13 @@ charm push . ~charm-examples/charm-name
 charm push . cs:~charm-examples/charm-name
 ```
 
-Push will always increment the charm version in the unpublished channel.
+Push will always increment the charm version in the unreleased channel.
 
-## Publishing to channels
+## Releasing to channels
 
-The charm store supports two published channels: development and stable.
-Revisions are associated with channels by using the publish charm command.
-Publish is executed against an existing revision and places that revision
+The charm store supports two released channels: development and stable.
+Revisions are associated with channels by using the release charm command.
+Release is executed against an existing revision and places that revision
 as the channel pointer.
 
 Given the following example:
@@ -199,7 +199,7 @@ $ charm push . foo
 cs:~kirk/foo-9
 ```
 
-The author could publish foo-9 to either the stable or development channel
+The author could release foo-9 to either the stable or development channel
 as follows, showing the commands for stable and development respectively:
 
 ```
@@ -212,7 +212,7 @@ and the development channel.
 
 ## Sharing charms and bundles
 
-All channels (unpublished, development, and stable) have read and write
+All channels (unreleased, development, and stable) have read and write
 ACLs. By default, only the owner of the entity exists in these ACLs.
 
 To update the ACL for an entity you must grant users an ACL to the channel

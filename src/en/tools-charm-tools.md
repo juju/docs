@@ -280,12 +280,12 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   charm store review policy. The charm store itself will not accept a push that
   has an error.
 
-^# publish
+^# release
 
       charm release [options] <charm or bundle id> [--channel <channel>]
 
-  The release command publishes a charm or bundle in the charm store.
-  Publishing is the action of assigning one channel to a specific charm
+  The release command releases a charm or bundle in the charm store.
+  Releasing is the action of assigning one channel to a specific charm
   or bundle revision (revision need to be specified), so that it can be shared
   with other users and also referenced without specifying the revision.
 
@@ -300,7 +300,7 @@ independent help pages, accessible using either the `-h` or `--help` flags.
       charm release xenial/django-42 -c development --resource website-3 --resource data-2
 
   If your charm uses resources, you must specify what revision of each resource
-  will be published along with the charm, using the --resource flag (one per
+  will be released along with the charm, using the --resource flag (one per
   resource). Note that resource info is embedded in bundles, so you cannot use
   this flag with bundles.
 
@@ -385,8 +385,8 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   If the id is not specified, the current logged-in charm store user name is
   used, and the charm or bundle name is taken from the provided directory name.
 
-  The pushed charm or bundle is unpublished and therefore usually only available
-  to a restricted set of users. See the publish command for info on how to make
+  The pushed charm or bundle is unreleased and therefore usually only available
+  to a restricted set of users. See the release command for info on how to make
   charms and bundles available to others.
 
       	charm push .
