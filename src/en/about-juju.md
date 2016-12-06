@@ -183,7 +183,7 @@ charms:
 
 ## Are charms open source? Under what license?
 
-Charms can be published under whatever license the author prefers, there are
+Charms can be released under whatever license the author prefers, there are
 charms under just about every kind of license out there today. In many cases,
 charms follow the license of the applications that they deploy, but this is
 not a requirement. There are open source charms that deploy proprietary

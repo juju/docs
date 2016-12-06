@@ -327,7 +327,7 @@ application endpoints. The workaround is to list all endpoints explicitly.
 
 ## Sharing your Bundle with the Community
 
-After you have tested and deployed your bundle you need to publish it to share
+After you have tested and deployed your bundle you need to release it to share
 it with people, this is covered in the
 [charm store documentation][store-docs]. 
 
