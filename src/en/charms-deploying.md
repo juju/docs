@@ -158,7 +158,7 @@ juju deploy mycharm --to 1 --force
 
 It may be required to use `--force` when upgrading charms. For example, in a
 case where an application is initially deployed using a charm that supports
-`precise` and `trusty`. If a new version of the charm is published that only
+`precise` and `trusty`. If a new version of the charm is released that only
 supports `trusty` and `xenial` then it will be allowed to upgrade applications
 deployed on `precise`, but only using `--force-series`, like this:
 

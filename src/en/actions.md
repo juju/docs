@@ -4,12 +4,10 @@ Title: Juju actions
 
 Juju charms can describe *actions* that users can take on deployed applications.
 
-Actions are scripts that can be triggered on a unit via the command line or
-the [Juju GUI](controllers-gui.html). Parameters for an action are passed as
-a map, either defined in a YAML file or given through the UI, and are validated
-against the schema defined in actions.yaml. See
-[Actions for the charm author](authors-charm-actions.html) for more
-information.
+Actions are scripts that can be triggered on a unit via the command line.
+Parameters for an action are passed as a map, either defined in a YAML file
+or given through the UI, and are validated against the schema defined in
+actions.yaml. See [Actions for the charm author](authors-charm-actions.html) for more information.
 
 The following commands are specified for dealing with actions:
 

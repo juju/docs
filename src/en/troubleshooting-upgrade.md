@@ -51,7 +51,7 @@ The restart of an agent, due to invoking `upgrade-juju` or by manual means (as
 above) may cause a hook for that particular unit/machine to be called. That can
 sometimes lead to hook failures. Connect to that unit using the
 `juju debug-hooks` command, see what is wrong, and retry the hook using the
-`juju resolved --retry` command:
+`juju resolved` command:
 
 ```bash
 juju debug-hooks etcd/2
@@ -60,7 +60,7 @@ juju debug-hooks etcd/2
 In a different terminal retry the failed hook.
 
 ```bash
-juju resolved --retry etcd/2
+juju resolved etcd/2
 ```
 
 See [Debugging Juju charm hooks](./developer-debugging.html) for more

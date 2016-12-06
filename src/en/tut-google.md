@@ -130,7 +130,7 @@ their relationships. Bundles are ideal for deploying [OpenStack][bundleopenstack
 or [Kubernetes][bundlekubernetes]. 
 
 It's also possible to [write your own charms][diycharm] and deploy locally, or
-publish via the [Charm Store][charmstore].
+release via the [Charm Store][charmstore].
 
 Deploying a charm is as simple as searching for your required application on
 the [Charm Store][charmstore], and using the 'juju' command to grab and deploy it
