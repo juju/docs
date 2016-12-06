@@ -54,9 +54,9 @@ pushed 4 times, the revision history would look like this:
 entity: 0---1---2---3
 ```
 
-Channels group entity revisions into named streams. There are currently two
-released channels: stable and development. Each channel also tracks
-history of revisions. When a revision is released to a channel, that
+Channels group entity revisions into named streams. There are currently four
+released channels: edge, beta, candidate, and stable. Each channel also
+tracks history of revisions. When a revision is released to a channel, that
 channel pointer is changed and the history for the channel is updated.
 
 Building on the previous example, when a user released revision 2 to the
@@ -68,7 +68,7 @@ stable channel, the history would look like this:
 entity: 0---1---2---3
 ```
 
-If, then, revision 3 is released to the development channel the history
+If, then, revision 3 is released to the edge channel the history
 would look like this:
 
 ```
@@ -76,12 +76,12 @@ would look like this:
                  /
 entity: 0---1---2---3
                      \
-                      development (3)
+                      edge (3)
 ```
 
 During this time, more revisions can be pushed to the default, unreleased
 channel. This represents general development iterations. As iterations are
-pushed during development, the stable and development channels are not
+pushed during development, the stable and other channels are not
 updated.
 
 
@@ -90,29 +90,29 @@ updated.
                  /
 entity: 0---1---2---3---4---5---6
                      \
-                      development (3)
+                      edge (3)
 ```
 
 The author can, at any time, release a revision to a channel. Revisions
 can also exist in the same channel at the same time. For example, the
 author chooses to release revision 3 to the stable channel without
-updating the development channel:
+updating the edge channel:
 
 ```
                       stable (3, 2)
                      /
 entity: 0---1---2---3---4---5---6
                      \
-                      development (3)
+                      edge (3)
 ```
 
 In doing so, the stable channel is updated to point to revision 3 and
 revision 3 is added to the channel history. The author can continue to
 push and release. Since revisions are a constant stream there are
 scenarios where the stable channel may be pointed to a higher revision
-even though development revision is actually newer.
+even though edge revision is actually newer.
 
-In the following example revision 8 is development, a bug is found in the
+In the following example revision 8 is edge, a bug is found in the
 latest stable revision (5) so a hot fix is applied and pushed as 9.
 That revision is then released to the stable channel, like this:
 
@@ -121,12 +121,12 @@ That revision is then released to the stable channel, like this:
                                              /
 entity: 0---1---2---3---4---5---6---7---8---9
                                          \
-                                          development (8, 3)
+                                          edge (8, 3)
 ```
 
 While authors can release older versions to the channels it is not
 encouraged. For example, an author could mistakenly release revision 10 to
-the stable channel and not development, then the author could re-release
+the stable channel and not edge, then the author could re-release
 revision 9 to stable:
 
 ```
@@ -134,7 +134,7 @@ revision 9 to stable:
                                              /
 entity: 0---1---2---3---4---5---6---7---8---9---10
                                          \
-                                          development (8, 3)
+                                          edge (8, 3)
 ```
 
 If a user managed to deploy that first mistaken revision during the time
@@ -187,10 +187,10 @@ Push will always increment the charm version in the unreleased channel.
 
 ## Releasing to channels
 
-The charm store supports two released channels: development and stable.
-Revisions are associated with channels by using the release charm command.
-Release is executed against an existing revision and places that revision
-as the channel pointer.
+The charm store supports four released channels: edge, beta, candidate, and
+stable. Revisions are associated with channels by using the release charm
+command. Release is executed against an existing revision and places that
+revision as the channel pointer.
 
 Given the following example:
 
@@ -199,21 +199,21 @@ $ charm push . foo
 cs:~kirk/foo-9
 ```
 
-The author could release foo-9 to either the stable or development channel
-as follows, showing the commands for stable and development respectively:
+The author could release foo-9 to either the stable or edge channel
+as follows, showing the commands for stable and edge respectively:
 
 ```
 charm release cs:~kirk/foo-9
-charm release cs:~kirk/foo-9 --channel development
+charm release cs:~kirk/foo-9 --channel edge
 ```
 
 After running both commands, revision 9 exists in both the stable channel
-and the development channel.
+and the edge channel.
 
 ## Sharing charms and bundles
 
-All channels (unreleased, development, and stable) have read and write
-ACLs. By default, only the owner of the entity exists in these ACLs.
+All channels have read and write ACLs. By default, only the owner of the
+entity exists in these ACLs.
 
 To update the ACL for an entity you must grant users an ACL to the channel
 you want them to access. By default, if you do not supply an entity when
@@ -225,11 +225,11 @@ stable channel of the cs:~kirk/foo entity.
 charm grant cs:~kirk/foo james
 ```
 
-If, instead you wanted to give write access to the development channel
-to lars, you would issue the following command:
+If, instead you wanted to give write access to the edge channel to lars, you
+would issue the following command:
 
 ```
-charm grant cs:~kirk/foo --channel development --acl write lars
+charm grant cs:~kirk/foo --channel edge --acl write lars
 ```
 
 Finally, to make the entity available for all to consume, there is a
