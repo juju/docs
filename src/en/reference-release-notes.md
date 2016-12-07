@@ -624,7 +624,7 @@ The versions covered here are:
       relation-ids cluster
       url:2
 
-      network-get -r url:2 --primary-address
+      network-get url:2 --primary-address
       10.20.30.23
 
   (assuming the application was deployed with e.g. --bind url=internal, and
