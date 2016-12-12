@@ -60,7 +60,7 @@ Migration started with ID "d1924666-1b00-4805-89b5-5ed5a6744426:0"
 ```
 
 You can monitor the migration progress from the output of the `juju status`
-command run against the source model. You may even want to use a command such
+command run against the source model. You may want to use a command such
 as `watch` to automatically refresh the status output, rather than manually
 running status each time:
 
