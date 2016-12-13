@@ -140,6 +140,10 @@ controller like this:
 juju grant everyone@external addmodel
 ```
 
+Sharing controller information must be done directly between the controller
+owner and the external user, such as via email, and manually adding the
+controller information to the local `$HOME/.local/share/juju/controllers.yaml`.
+
 The external user will log in from their machine with `juju login`. They will
 be directed to the URL for the external identity provider so that they may
 log in there and then will be granted access to the controller.
@@ -151,10 +155,6 @@ by this user will use these credentials.
 ```bash
 juju add-model test --credential gce
 ```
-
-Sharing controller information must be done directly between the controller
-owner and the external user, such as via email, and manually adding the
-controller information to the local `$HOME/.local/share/juju/controllers.yaml`.
 
 ## Revoke access rights
 
