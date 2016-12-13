@@ -7,6 +7,32 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
+^juju-core 1.25.9
+
+  A new supported stable release of Juju, 1.25.9, is here!
+
+
+  ## Notable Changes
+
+  * Juju did not correctly remove OpenStack security groups
+    https://bugs.launchpad.net/bugs/1625624
+
+  * Corrected a memory leak that caused instability
+    https://bugs.launchpad.net/bugs/1645729
+
+
+  ## How do I get it?
+
+  If you are running Ubuntu, you can get it from the juju proposed ppa:
+
+      sudo add-apt-repository ppa:juju/1.25
+      sudo apt-get update; sudo apt-get install juju-core
+
+  Windows, Centos, and MacOS users can get a corresponding installer at:
+
+      https://launchpad.net/juju-core/+milestone/1.25.9
+
+
 ^#juju-core 1.25.8
 
   A new supported stable release of Juju, 1.25.8, is here!
