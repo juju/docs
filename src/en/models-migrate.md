@@ -18,8 +18,8 @@ controller needs to be upgraded without losing access to its applications. The
 secondary controller can be local to the original controller, or running on a
 different cloud environment. 
 
-!!! Note: Only hosted models can be migrated. The special model running the
-controller can not be migrated.
+!!! Note: Only hosted models can be migrated. The controller can not be
+migrated.
 
 ## Usage
 
