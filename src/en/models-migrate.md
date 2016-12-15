@@ -15,8 +15,8 @@ applications to continue unhindered.
 
 Migration is useful if the original controller reaches capacity, or if a
 controller needs to be upgraded without losing access to its applications. The
-secondary controller can be local to the original controller, or running on a
-different cloud environment. 
+secondary controller needs to be locally accessible to the source controller,
+rather than running on a different cloud environment. 
 
 !!! Note: Only hosted models can be migrated. The controller can not be
 migrated.
