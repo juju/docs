@@ -2,9 +2,9 @@ Title: What is Juju?
 
 # What is Juju?
 
-Juju is a state-of-the-art, open source, universal model for service oriented
-architecture and application oriented deployments. Juju allows you to deploy,
-configure, manage, maintain, and scale cloud applications quickly and
+Juju is a state-of-the-art, open source, universal modelling tool for service
+oriented architectures and application oriented deployments. Juju allows you to
+deploy, configure, manage, maintain, and scale cloud applications quickly and
 efficiently on public clouds, as well as on physical servers, OpenStack, and
 containers. You can use Juju from the command line or through its beautiful
 GUI.
