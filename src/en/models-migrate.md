@@ -74,7 +74,7 @@ as `watch` to automatically refresh the status output, rather than manually
 running status each time:
 
 ```bash
-watch -n1 juju status
+watch --color -n 1 juju status --color
 ```
 
 In the status output, a 'Notes' column will be appended to the model overview
