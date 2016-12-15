@@ -13,10 +13,19 @@ controller to another. The same configuration of machines, units and their
 relationships will be replicated on a secondary controller, allowing your
 applications to continue unhindered. 
 
-Migration is useful if the original controller reaches capacity, or if a
-controller needs to be upgraded without losing access to its applications. The
-secondary controller needs to be locally accessible to the source controller,
-rather than running on a different cloud environment. 
+Migration is brilliant when updating Juju because you can migrate a model to a
+different controller, update the original controller, and migrate the model
+back without risking your deployment. 
+
+But it's also useful for load balancing. A controller might have reached
+capacity running 10 different models, for example. You can now take the most
+intensive of those models and migrate them to a new controller, reducing the
+load without affecting your applications. 
+
+For migration to work, the secondary controller needs to be running on the same
+cloud substrate as the source controller. Migration doesn't work across
+different regions or VPCs without direct connectivity to the source controller,
+and migration doesn't currently work across different cloud environments. 
 
 !!! Note: Only hosted models can be migrated. The controller can not be
 migrated.
