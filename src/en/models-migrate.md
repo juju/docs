@@ -20,10 +20,13 @@ hosting multiple models reaches capacity, for example, you can now move the
 most intensive models to a new controller, reducing load without affecting your
 applications.
 
-For migration to work, the destination controller needs to be running on the
-same cloud substrate as the source controller. Migration doesn't work across
-different regions or VPCs without direct connectivity to the source controller,
-and migration doesn't currently work across different cloud environments. 
+For migration to work:
+
+  - The source and destination controllers need to be in the same cloud environments. 
+  - The destination controller needs to be running on the same cloud substrate
+    as the source controller.
+  - Destination controllers on different regions or VPCs need direct
+    connectivity to the source controller.
 
 !!! Note: Only hosted models can be migrated. The controller itself can not be
 migrated.
@@ -81,12 +84,12 @@ at the top of the output. This new column will step through the following
 'migrating' states during the process:
 
 1. starting
-2. exporting model
-3. importing model into target controller
-4. uploading model binaries into target controller
-5. validating, waiting for agents to report back
-6. successful, transferring logs to target controller (0 sent)
-7. successful, removing model from source controller
+1. exporting model
+1. importing model into target controller
+1. uploading model binaries into target controller
+1. validating, waiting for agents to report back
+1. successful, transferring logs to target controller (0 sent)
+1. successful, removing model from source controller
 
 If the migration fails at any point, the model will be safely reinstated on its
 original controller in the same state it was in before the migration process
