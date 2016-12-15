@@ -1,5 +1,6 @@
 Title: Migrating models
-TODO: How are subnet and end point bindings handled?
+TODO: Needs adding to navigation
+      How are subnet and end point bindings handled?
       Check and add migration resources for different controllers
 
 
