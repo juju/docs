@@ -22,7 +22,7 @@ applications.
 
 For migration to work:
 
-  - The source and destination controllers need to be in the same cloud environments. 
+  - The source and destination controllers need to be in the same cloud environment. 
   - The destination controller needs to be running on the same cloud substrate
     as the source controller.
   - Destination controllers on different regions or VPCs need direct
