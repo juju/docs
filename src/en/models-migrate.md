@@ -1,8 +1,5 @@
 Title: Migrating models
-TODO: Needs adding to navigation
-      What are the rules for model migration across clouds?
-      How are subnet and end point bindings handled?
-      What kind of user access is needed on source/dest controllers?
+TODO: How are subnet and end point bindings handled?
       Check and add migration resources for different controllers
 
 
@@ -13,32 +10,33 @@ controller to another. The same configuration of machines, units and their
 relationships will be replicated on a secondary controller, allowing your
 applications to continue unhindered. 
 
-Migration is brilliant when updating Juju because you can migrate a model to a
-different controller, update the original controller, and migrate the model
-back without risking your deployment. 
+Migration is brilliant when updating Juju because you can first migrate a model
+to a different controller, update the original controller, then migrate and
+update the original model back without risking your deployment. 
 
-But it's also useful for load balancing. A controller might have reached
-capacity running 10 different models, for example. You can now take the most
-intensive of those models and migrate them to a new controller, reducing the
-load without affecting your applications. 
+But migration is equally useful for load balancing. If a controller that's
+hosting multiple models reaches capacity, for example, you can now move the
+most intensive models to a new controller, reducing load without affecting your
+applications.
 
-For migration to work, the secondary controller needs to be running on the same
-cloud substrate as the source controller. Migration doesn't work across
+For migration to work, the destination controller needs to be running on the
+same cloud substrate as the source controller. Migration doesn't work across
 different regions or VPCs without direct connectivity to the source controller,
 and migration doesn't currently work across different cloud environments. 
 
-!!! Note: Only hosted models can be migrated. The controller can not be
+!!! Note: Only hosted models can be migrated. The controller itself can not be
 migrated.
 
 ## Usage
 
-In order to start a migration, the target controller must be in the Juju
-client's local configuration cache. See the '[clouds][clouds]' documentation 
-for details on how to do this.
+To start a migration, the target controller must be in the Juju client's local
+configuration cache. See the '[clouds][clouds]' documentation for details on
+how to do this.
 
-Before initiating a migration, make sure the model isn't in a transitional
-state such as deploying new applications or resources. You can check with the
-`juju status <model>` command. 
+Although migration will pause a model's state and queue events until the model
+become reactivated, it's worth checking the model isn't deploying new
+applications or resources before migrating. You can check with the `juju status
+<model>` command. 
 
 While the migration process itself is robust, we'd also highly recommend
 creating a backup of your source controller before performing a migration. 
@@ -77,8 +75,8 @@ running status each time:
 watch --color -n 1 juju status --color
 ```
 
-In the status output, a 'Notes' column will be appended to the model overview
-line at the top of the output. This new column will step through the following
+In the status output, a 'Notes' column is appended to the model overview line
+at the top of the output. This new column will step through the following
 'migrating' states during the process:
 
 1. starting
@@ -89,7 +87,7 @@ line at the top of the output. This new column will step through the following
 6. successful, transferring logs to target controller (0 sent)
 7. successful, removing model from source controller
 
-If the migration does fail at any point, the model will be returned to its
+If the migration fails at any point, the model will be safely reinstated on its
 original controller in the same state it was in before the migration process
 was started.
 
