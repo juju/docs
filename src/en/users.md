@@ -39,11 +39,11 @@ users are also included.
 Actions available to a system user:
 
 - Access general help (`juju help`)
-- List supported cloud types (`juju list-clouds`)
+- List supported cloud types (`juju clouds`)
 - Show details on each cloud type (`juju show-cloud`)
 - Register with a controller (`juju register`)
 - Add credentials (`juju add-credential` and `juju autoload-credentials`)
-- List cloud credentials (`juju list-credentials`)
+- List cloud credentials (`juju credentials`)
 - Create controllers (`juju bootstrap`)
 
 Once a system user has created a controller they are provided automatically, at
@@ -74,7 +74,7 @@ the context of their controller):
 
 ### Model owners
 A model owner has the power to list users who have access to the model they own
-(`juju list-users mymodel`).
+(`juju users mymodel`).
 
 ### Regular users
 The ability of a regular user depends on the model access rights (read-only or
@@ -82,8 +82,8 @@ write) they have been given.
 
 For read-only access, the user can do the following:
 
-- List models (`juju list-models`)
-- List machines (`juju list-machines`)
+- List models (`juju models`)
+- List machines (`juju machines`)
 - Show the status (`juju status`)
 
 For write access, the user can begin with the following major commands:

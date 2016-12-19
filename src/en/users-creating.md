@@ -19,9 +19,9 @@ the network and has Juju installed.
 At this stage, the user is registered to a controller and is allowed to perform
 the following additional actions (in the context of the controller):
 
-- List controllers (`juju list-controllers`)
+- List controllers (`juju controllers`)
 - Show controller details (`juju show-controller`)
-- List enabled controller users (`juju list-users`)
+- List enabled controller users (`juju users`)
 - Show details for controller users (`juju show-user`)
 
 To do anything further the user must wait to be granted access to a model by

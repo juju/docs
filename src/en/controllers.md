@@ -46,10 +46,10 @@ Common tasks are summarized below.
 
 ^# List controllers
    
-   Use the `juju list-controllers` command to list all controllers knowable by
+   Use the `juju controllers` command to list all controllers knowable by
    the current system user.
 
-         juju list-controllers [options] 
+         juju controllers [options] 
    
    The currently active controller is indicated in the list with an asterisk('*').
    

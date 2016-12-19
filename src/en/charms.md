@@ -244,7 +244,7 @@ we've used to host our applications. If this is a fresh Juju installation, you
 will have been operating within the 'default' model that's automatically
 generated when you bootstrap the environment. You can check which models you
 have available, along with which one is active, marked by the * symbol, 
-with the `juju list-models` command. Your output should be similar to the 
+with the `juju models` command. Your output should be similar to the 
 following:
 
 ```bash
