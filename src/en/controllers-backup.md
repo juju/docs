@@ -106,15 +106,15 @@ whatever client you can connect from, and fetch previous backups if the
 originally downloaded file has gone astray. You can use the following commands
 to manage and restore your backups:
 
-### juju list-backups    
+### juju backups    
 
-usage: `juju list-backups [-m | --model]`
+usage: `juju backups [-m | --model]`
 
 The `list-backups` command will display the names of all the backups currently 
 available on the controller. 
 
 ```bash
-juju list-backups
+juju backups
 ```
 The output will look something like the following:
 

@@ -65,8 +65,8 @@ The user is automatically logged in to the controller upon registration and
 enjoys model access that may have been granted. Commands to try:
 
 ```bash
-juju list-controllers
-juju list-models
+juju controllers
+juju models
 ```
 
 ### Password change

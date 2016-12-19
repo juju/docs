@@ -45,9 +45,9 @@ Common model management tasks are summarized below.
 
 ^# List models
 
-   Use the `juju list-models` command to list all models for a controller:
+   Use the `juju models` command to list all models for a controller:
    
-   `juju list-models [options]`
+   `juju models [options]`
    
    For complete explanation and syntax, see the
    [command reference page](./commands.html#list-models) or the `juju help
@@ -135,10 +135,10 @@ Common model management tasks are summarized below.
 
 ^# List SSH access keys
    
-   Use the `juju list-ssh-keys` command to list SSH keys currently permitting
+   Use the `juju ssh-keys` command to list SSH keys currently permitting
    access to all machines, present and future, in a model:
    
-   `juju list-ssh-keys [options]`
+   `juju ssh-keys [options]`
    
    For complete explanation and syntax, see the
    [command reference page](./commands.html#list-ssh-keys) or the `juju help

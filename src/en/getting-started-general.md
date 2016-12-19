@@ -47,7 +47,7 @@ Juju maintains knowledge about supported public clouds and their regions. To see
 the list of clouds Juju currently knows about, simply enter:
 
 ```bash
-juju list-clouds
+juju clouds
 ```
 Which should return a list like this:
 
@@ -138,12 +138,12 @@ Juju currently uses three possible ways to get your credentials for a cloud:
 You can check what credentials are stored by Juju by running the command:
 
 ```bash
-juju list-credentials
+juju credentials
 ```
 which will return a list of the known credentials. For example:
 
 <!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
-<!-- JUJUCOMMAND: juju list-credentials -->
+<!-- JUJUCOMMAND: juju credentials -->
 ```no-highlight
 Cloud      Credentials
 aws        bob*, carol

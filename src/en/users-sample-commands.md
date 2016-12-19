@@ -6,7 +6,7 @@ Title: Juju sample commands
 This section seeks to clarify the meaning of the output to some commands and
 how other commands can alter that output.
 
-Consider the following output to `juju list-controllers` on some given system:
+Consider the following output to `juju controllers` on some given system:
 
 ```no-highlight
 CONTROLLER         MODEL        USER         SERVER
@@ -38,7 +38,7 @@ controller. Before doing so, we list users to ensure 'sam' is the actual user
 and switch to his controller:
 
 ```bash
-juju list-users
+juju users
 juju switch lxd-sam
 juju login sam
 ```
@@ -66,7 +66,7 @@ first.
 After login, it is a good idea for the user to list the models available to him:
 
 ```bash
-juju list-models
+juju models
 ```
 
 Also, if the model is granted after user registration it may not show up upon
