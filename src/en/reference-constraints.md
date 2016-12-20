@@ -88,8 +88,10 @@ multiple constraints delimited by a space.
 
 - tags
 
-    Comma-delimited tags assigned to the machine. Currently only
-    supported by MAAS.
+    Comma-delimited positive and negative (prefixed with "^") tags assigned to
+    the machine. Currently only supported by MAAS.
+
+    Example: tags=virtual,^dualnic
 
 - spaces
 
