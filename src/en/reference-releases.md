@@ -29,14 +29,28 @@ CentOS:
 : [juju-2.0.2-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-centos7.tar.gz/+md5))
 {: .instruction }
 
-OS X:
-: [juju-2.0.2-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz/+md5))
-{: .instruction }
-
 Windows:
 : [juju-setup-2.0.2.exe](https://launchpad.net/juju/2.0/2.0.2/+download/juju-setup-2.0.2.exe)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-setup-2.0.2.exe/+md5))
 {: .instruction }
 
+OS X:
+
+The easiest way to install Juju on OS X is with the [`brew`][brew] package
+manager. With `brew` installed, simply enter the following into a terminal:
+
+```bash
+brew install juju
+```
+If you previously installed Juju with `brew`, the package can be updated with
+the following:
+
+```bash
+brew upgrade juju
+```
+
+Alternatively, you can manually install Juju from the following archive:
+: [juju-2.0.2-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz/+md5))
+{: .instruction }
 
 ## Proposed
 
@@ -59,12 +73,12 @@ CentOS:
 : [juju-2.0.2-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-centos7.tar.gz/+md5))
 {: .instruction }
 
-OS X:
-: [juju-2.0.2-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz/+md5))
-{: .instruction }
-
 Windows:
 : [juju-setup-2.0.2.exe](https://launchpad.net/juju/2.0/2.0.2/+download/juju-setup-2.0.2.exe)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-setup-2.0.2.exe/+md5))
+{: .instruction }
+
+OS X:
+: [juju-2.0.2-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz/+md5))
 {: .instruction }
 
 If you wish to test applications deployed to mixed OSes and architectures, you
@@ -101,11 +115,12 @@ CentOS:
 : [juju-core_2.1-beta3-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1-beta3/+download/juju-core_2.1-beta3.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta3/+download/juju-core_2.1-beta3.tar.gz/+md5))
 {: .instruction }
 
-OS X:
-: [juju-core_2.1-beta3-osx.tar.gz](https://launchpad.net/juju/2.1/2.1-beta3/+download/juju-2.1-beta3-osx.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta3/+download/juju-2.1-beta3-osx.tar.gz/+md5))
-{: .instruction }
-
 Windows:
 : [juju-setup-2.1-beta3.exe](https://launchpad.net/juju/2.1/2.1-beta3/+download/juju-setup-2.1-beta3.exe) ([md5](https://launchpad.net/juju/2.1/2.1-beta3/+download/juju-setup-2.1-beta3.exe/+md5))
 {: .instruction }
 
+OS X:
+: [juju-core_2.1-beta3-osx.tar.gz](https://launchpad.net/juju/2.1/2.1-beta3/+download/juju-2.1-beta3-osx.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta3/+download/juju-2.1-beta3-osx.tar.gz/+md5))
+{: .instruction }
+
+[brew]: http://brew.sh/
