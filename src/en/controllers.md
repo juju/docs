@@ -54,8 +54,8 @@ Common tasks are summarized below.
    The currently active controller is indicated in the list with an asterisk('*').
    
    For complete explanation, syntax and examples see the
-   [command reference page](./commands.html#list-controllers) or the `juju help
-   list-controllers ` command.
+   [command reference page](./commands.html#controllers) or the `juju help
+   controllers` command.
 
 
 
