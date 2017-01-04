@@ -40,8 +40,8 @@ See [Adding a model][addmodel] for details on adding models.
 An administrator can use the `grant` command to grant a user either read or write
 access to any model. 
 
-- `read`: a user can view the state of a model with the `list-models`,
-  `list-machines` and `status` commands.
+- `read`: a user can view the state of a model with the `models`,
+  `machines` and `status` commands.
 - `write`: a user can both view the state of a model and make any changes
   required, though they can't create, backup or destroy models.
 
