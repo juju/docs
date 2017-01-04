@@ -65,7 +65,7 @@ MD4TA2ppbTAVExMxMC4xOTUuMTAuMTMwOjE3MDcwBCDENImZEDvYcWLU1USgaUJQXhWR98JNLWcbS0-M
 ## Logins and logouts
 
 On any given client system, each controller that shows up with `juju
-list-controllers` accepts a single login; a logout is necessary before logging
+controllers` accepts a single login; a logout is necessary before logging
 in to the same controller. Note that a logout of a user on one client does not
 affect the same user session possibly underway on a separate client.
 
