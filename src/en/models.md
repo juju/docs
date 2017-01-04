@@ -50,8 +50,8 @@ Common model management tasks are summarized below.
    `juju models [options]`
    
    For complete explanation and syntax, see the
-   [command reference page](./commands.html#list-models) or the `juju help
-   list-models` command.
+   [command reference page](./commands.html#models) or the `juju help
+   models` command.
 
 
 
@@ -141,8 +141,8 @@ Common model management tasks are summarized below.
    `juju ssh-keys [options]`
    
    For complete explanation and syntax, see the
-   [command reference page](./commands.html#list-ssh-keys) or the `juju help
-   list-ssh-keys` command.
+   [command reference page](./commands.html#ssh-keys) or the `juju help
+   ssh-keys` command.
    
 
 
