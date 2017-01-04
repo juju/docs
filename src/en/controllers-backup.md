@@ -110,7 +110,7 @@ to manage and restore your backups:
 
 usage: `juju backups [-m | --model]`
 
-The `list-backups` command will display the names of all the backups currently 
+The `backups` command will display the names of all the backups currently 
 available on the controller. 
 
 ```bash
@@ -137,7 +137,7 @@ usage: `juju download-backup  [--filename=FILENAME] [-m | --model] <ID>`
 
 The `download-backup` command will fetch the backup specified from the 
 environment and download it for local storage. The `<ID>` is the identifier for 
-the backup, as shown in the output of the `create-backup` and `list-backups` 
+the backup, as shown in the output of the `create-backup` and `backups` 
 commands. If the `--filename` argument is used, the backup is downloaded to 
 the current directory using the name from the argument.
 
