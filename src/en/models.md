@@ -114,7 +114,7 @@ Common model management tasks are summarized below.
 
    `juju migrate [options] <model name> <target controller name>`
 
-   For a complete explanation, see [migrating models](./model-migrate.html),
+   For a complete explanation, see [migrating models](./models-migrate.html),
    the [command reference page](./commands.html#migrate) or the `juju help
    migrate` command.
    
