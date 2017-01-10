@@ -115,7 +115,12 @@ jim                   add-model  2016-11-14    58 minutes ago
 ### Controller access for external users
 
 It is possible to give a user access to a controller without creating a local
-account for them. To do this, these criteria must first be met:
+account for them. Linking the controller to the external identity manager in
+this way provides the benefit of convenience, as the authentication system
+used may also be used for other systems. This reduces the number of login
+credentials that users must remember across multiple systems.
+
+To do this, these criteria must first be met:
 
 - The user must already have an account on an external identity manager,
   such as the Ubuntu SSO
