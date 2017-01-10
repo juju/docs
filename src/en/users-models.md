@@ -133,6 +133,9 @@ On the controller, you grant Frances access to add models using:
 juju grant frances@external addmodel
 ```
 
+!!!Note: the '@external' is required as it indicates where the credential
+comes from, as opposed to '@local'.
+
 You can allow anyone with an Ubuntu SSO account to create models on this
 controller like this:
 
@@ -142,7 +145,8 @@ juju grant everyone@external addmodel
 
 Sharing controller information must be done directly between the controller
 owner and the external user, such as via email, and manually adding the
-controller information to the local `$HOME/.local/share/juju/controllers.yaml`.
+controller information to the local user's `$HOME/.local/share/juju/controllers.yaml`
+in Ubuntu and other Linux distributions and the similar location in other OSes.
 
 The external user will log in from their machine with `juju login`. They will
 be directed to the URL for the external identity provider so that they may
@@ -155,6 +159,8 @@ by this user will use these credentials.
 ```bash
 juju add-model test --credential gce
 ```
+
+To learn more about credentials, see [credentials].
 
 ## Revoke access rights
 
@@ -183,4 +189,5 @@ use when logging in to a model for the first time. To specify a credential,
 run 'juju add-credential'.
 
 [addmodel]: ./models-adding.html
+[credentials]: ./credentials.html
 [regularusers]: ./users.html#regular-users
