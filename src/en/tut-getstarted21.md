@@ -9,12 +9,12 @@ thanks to two new and significant features:
 
 - add other clouds interactively: Juju already has baked-in support for many
   public clouds, including [Amazon AWS][aws], [Google GCE][gce] and Microsoft
-  Azure[azure]. But with Juju 2.1, additional clouds such as MAAS, OpenStack and
-  vSphere, can be added by simply typing `juju add-cloud` and answering a few
-  questions.
+  [Azure][azure]. But with Juju 2.1, additional clouds such as [MAAS][maas],
+  [OpenStack][openstack] and [vSphere][vsphere], can be added by simply typing
+  `juju add-cloud` and answering a few questions.
 - model migration: it's now possible to move live models from one controller to
   another, allowing for load balancing and maintenance without losing access to
-  your applications. 
+your applications. 
 
 ## Interactive add-cloud
 
@@ -124,6 +124,9 @@ from one controller to another. This may be necessary if a controller reaches
 capacity, or to move a model while backing up the data on the original
 controller.
 
+!!! Note: for details on where models can be migrated to, see the [migrate][migrate]
+documentation.
+
 To continue the previous example, we need to create a secondary controller to
 act as the destination.  As we're going to move the 'default' model that was
 created automatically when we bootstrapped the original controller, we'll need
@@ -149,12 +152,15 @@ that's all there is to it.
 ## Next Steps
 
 For further details, see the [add-cloud][addcloud] and [migrate][migrate]
-command documentation and the Juju 2.1 [release notes][rnotes].
+documentation and the Juju 2.1 [release notes][rnotes].
 
 [first]: ./getting-started.html
 [aws]: ./help-aws.html
 [gce]: ./help-google.html
 [azure]: ./help-azure.html
+[maas]: ./clouds-maas.html
+[openstack]: ./help-openstack.html
+[vsphere]: ./help-vmware.html
 [charmstore]: https://jujucharms.com/store
 [esstore]: https://jujucharms.com/elasticsearch-cluster
 [addcloud]:
