@@ -112,6 +112,56 @@ bob                   login      1 hour ago    58 minutes ago
 jim                   add-model  2016-11-14    58 minutes ago
 ```
 
+### Controller access for external users
+
+It is possible to give a user access to a controller without creating a local
+account for them. To do this, these criteria must first be met:
+
+- The user must already have an account on an external identity manager,
+  such as the Ubuntu SSO
+- The controller must have been created (bootstrapped) using the identity
+  configuration option, like here where we use the URL for the Ubuntu SSO
+  and Juju: `--config identity-url=https://api.jujucharms.com/identity`
+- The user must first log in to http://jujucharms.com at least once before
+  attempting to log in to Juju as an external user
+- The user must install Juju on the machine from which they will access the
+  controller
+
+On the controller, you grant Frances access to add models using:
+
+```bash
+juju grant frances@external addmodel
+```
+
+!!!Note: the '@external' is required as it indicates where the credential
+comes from, as opposed to '@local'.
+
+You can allow anyone with an Ubuntu SSO account to create models on this
+controller like this:
+
+```bash
+juju grant everyone@external addmodel
+```
+
+Sharing controller information must be done directly between the controller
+owner and the external user, such as via email, and manually adding the
+controller information to the local user's `$HOME/.local/share/juju/controllers.yaml`
+in Ubuntu and other Linux distributions and the similar location in other OSes.
+
+The external user will log in from their machine with `juju login`. They will
+be directed to the URL for the external identity provider so that they may
+log in there and then will be granted access to the controller.
+
+For the external user to create models from the controller, they must have
+credentials for that provider, for example, GCE or AWS. Any models created
+by this user will use these credentials.
+
+```bash
+juju add-model test --credential gce
+```
+
+To learn more about credentials, see [credentials].
+
 ## Revoke access rights
 
 The 'revoke' command is used to remove a user's access to either a model or a
@@ -139,4 +189,5 @@ use when logging in to a model for the first time. To specify a credential,
 run 'juju add-credential'.
 
 [addmodel]: ./models-adding.html
+[credentials]: ./credentials.html
 [regularusers]: ./users.html#regular-users
