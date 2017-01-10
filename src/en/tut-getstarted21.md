@@ -117,7 +117,7 @@ juju deploy cs:bundle/elasticsearch-cluster-17
 After a few moments, `juju status` will report both applications are active,
 giving us a fully operational Elasticsearch deployment. 
 
-## Migrate application
+## Migrate an application
 
 The new migration feature in Juju 2.1 allows you to painlessly move any model
 from one controller to another. This may be necessary if a controller reaches
