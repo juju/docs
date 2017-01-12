@@ -42,7 +42,7 @@ configuration cache. See the '[clouds][clouds]' documentation for details on
 how to do this.
 
 While the migration process itself is robust, thanks to extensive checks before
-and during the process, we'd still recommend creating a backup of your source
+and during the process, we still recommend creating a backup of your source
 controller before performing a migration. 
 
 To create a backup that's both stored on the controller and downloaded
