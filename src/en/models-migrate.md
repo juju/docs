@@ -15,12 +15,12 @@ Migration is useful when upgrading a controller, for load balancing, and for
 providing additional flexibility.
 
 When upgrading a controller, you can bootstrap a new controller running a newer
-version of Juju, and then migrate each model across one at a time. This is
-safer than upgrading a controller whilst its running many applications. 
+version of Juju and then migrate each model across one at a time. This is
+safer than upgrading a controller while its running many applications. 
 
-Migration is equally useful for load balancing. If a controller that's
-hosting multiple models reaches capacity you can now move the busiest models to
-a new controller, reducing load without affecting your applications.
+Migration is equally useful for load balancing. If a controller hosting
+multiple models reaches capacity, you can now move the busiest models to a new
+controller, reducing load without affecting your applications.
 
 For migration to work:
 
@@ -29,8 +29,8 @@ For migration to work:
     as the source controller.
   - Destination controllers on different regions or VPCs need direct
     connectivity to the source controller.
-  - The destination controller needs to be running the same or newer Juju
-    version as the source controller.
+  - The version of Juju running on the destination controller needs to be the
+    same or newer than the version on the source controller.
 
 !!! Note: Only hosted models can be migrated. A controller model can not be
 migrated.
@@ -41,9 +41,9 @@ To start a migration, the target controller must be in the Juju client's local
 configuration cache. See the '[clouds][clouds]' documentation for details on
 how to do this.
 
-While the migration process itself is robust, performing extensive checks
-before and during the process, we'd still recommend creating a backup of your
-source controller before performing a migration. 
+While the migration process itself is robust, thanks to extensive checks before
+and during the process, we'd still recommend creating a backup of your source
+controller before performing a migration. 
 
 To create a backup that's both stored on the controller and downloaded
 locally, type the following:
@@ -80,16 +80,16 @@ watch --color -n 1 juju status --color
 ```
 
 In the status output, a 'Notes' column is appended to the model overview line
-at the top of the output. This new column will step through various migration
-states, from 'starting' to 'successful' while the migration is in progress.
+at the top of the output. The migration will step through various states, from
+'starting' to 'successful', while the migration is in progress.
 
-The 'status' section in the output of the `juju show-model` command also
+The 'status' section in the output from the `juju show-model` command also
 includes details on the current or most recently run migration. It adds extra
 information too, such as the migration start time, and is a good place to start
 if you need to determine why a migration has failed. 
 
-The 'status' section of `show-model` will look similar to the following after
-starting a migration:
+This section will look similar to the following after starting a
+migration:
 
 ```no-highlight
   status:
@@ -112,7 +112,7 @@ When complete, the model will no longer exist on the source controller, and the
 model, all its applications, machines and units will be running on the
 secondary controller. 
 
-Use `juju switch` to select the model in the destination controller:
+Use `juju switch` to select the migrated model in the destination controller:
 
 ```bash
 juju switch <target controller>:<model>
