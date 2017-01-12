@@ -97,7 +97,7 @@ which to work. This involves creating three directories -- `layers`,
 
 The `layers` directory contains the source code of the layered charm covered in
 our examples. The `interfaces` directory is where you'd place any
-[interface-layers](./developer-layers-interfaces.md) you may wish to write, and the
+interface-layers you may wish to write, and the
 `charms` directory holds the assembled, ready to deploy charm.
 
 ```bash
