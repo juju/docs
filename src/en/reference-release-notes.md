@@ -116,7 +116,7 @@ The versions covered here are:
 
   To see what clouds are available, use:
 
-        juju list-clouds
+        juju clouds
 
       Cloud        Regions  Default        Type        Description
       aws               11  us-east-1      ec2         Amazon Web Services
@@ -369,8 +369,8 @@ The versions covered here are:
   The relevant controller and model commands are:
 
         juju bootstrap
-        juju list-controllers
-        juju list-models
+        juju controllers
+        juju models
         juju switch
         juju add-model
         juju destroy-model
@@ -520,7 +520,7 @@ The versions covered here are:
   existing application or unit in your model:
 
 
-        juju list-resources
+        juju resources
 
   To upload a file from your local disk to the Juju controller
   to be used as a resource for a application.
@@ -980,17 +980,17 @@ The versions covered here are:
   | juju environment share               | juju grant 
   | juju environment unset               | juju model-config
   | juju environment unshare             | juju revoke
-  | juju environment users               | juju list-users
+  | juju environment users               | juju users
   | juju user add                        | juju add-user
   | juju user change-password            | juju change-user-password
   | juju user disable                    | juju disable-user
   | juju user enable                     | juju enable-user
   | juju user info                       | juju show-user
-  | juju user list                       | juju list-users
+  | juju user list                       | juju users
   | juju machine add                     | juju add-machine 
   | juju machine remove                  | juju remove-machine 
   | juju authorised-keys add             | juju add-ssh-key
-  | juju authorised-keys list            | juju list-ssh-keys
+  | juju authorised-keys list            | juju ssh-keys
   | juju authorised-keys delete          | juju remove-ssh-key
   | juju authorised-keys import          | juju import-ssh-key
   | juju get                             | juju config
@@ -1002,14 +1002,14 @@ The versions covered here are:
   | juju backups create                  | juju create-backup 
   | juju backups restore                 | juju restore-backup 
   | juju action do                       | juju run-action 
-  | juju action defined                  | juju list-actions 
+  | juju action defined                  | juju actions 
   | juju action fetch                    | juju show-action-output 
   | juju action status                   | juju show-action-status 
-  | juju storage list                    | juju list-storage 
+  | juju storage list                    | juju storage 
   | juju storage show                    | juju show-storage 
   | juju storage add                     | juju add-storage 
   | juju space create                    | juju add-space 
-  | juju space list                      | juju list-spaces 
+  | juju space list                      | juju spaces 
   | juju subnet add                      | juju add-subnet 
   | juju ensure-availability             | juju enable-ha
 
@@ -1024,12 +1024,12 @@ The versions covered here are:
   |--------------------------------|-----------------------------|
   | juju system create-environment | juju add-model              |
   | juju system destroy            | juju destroy-controller     |
-  | juju system environments       | juju list-models            |
+  | juju system environments       | juju models            |
   | juju system kill               | juju kill-controller        |
-  | juju system list               | juju list-controllers       |
+  | juju system list               | juju controllers       |
   | juju system login              | juju login                  |
   | juju system remove-blocks      | juju enable-commands        |
-  | juju system list-blocks        | juju list-disabled-commands |
+  | juju system list-blocks        | juju disabled-commands |
 
 
   In general:

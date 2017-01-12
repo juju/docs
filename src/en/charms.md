@@ -244,7 +244,7 @@ we've used to host our applications. If this is a fresh Juju installation, you
 will have been operating within the 'default' model that's automatically
 generated when you bootstrap the environment. You can check which models you
 have available, along with which one is active, marked by the * symbol, 
-with the `juju list-models` command. Your output should be similar to the 
+with the `juju models` command. Your output should be similar to the 
 following:
 
 ```bash
@@ -257,7 +257,7 @@ To remove the default model, type `juju destroy-model default` and enter 'Y' to
 accept the warning that this step will destroy all machines, applications,
 data and other resources associated with the default model. A few moments
 later, depending on the complexity of your model, you should find it no longer
-listed in the output of the `list-models` command. 
+listed in the output of the `models` command. 
 
 If you want to start again with a clean default model, restoring Juju to the
 state it was in before we deployed the MediaWiki charm, you can create one 

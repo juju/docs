@@ -55,10 +55,10 @@ juju add-cloud myvscloud <YAML file>
 ```
 
 You can check whether your vSphere installation has been added correctly by
-looking for the following in the output from `juju list-clouds`:
+looking for the following in the output from `juju clouds`:
 
 <!-- JUJUVERSION: 2.0.1-trusty-amd64 -->
-<!-- JUJUCOMMAND: juju list-clouds -->
+<!-- JUJUCOMMAND: juju clouds -->
 ```no-highlight
 Cloud        Regions  Default        Type        Description
 aws               11  us-east-1      ec2         Amazon Web Services

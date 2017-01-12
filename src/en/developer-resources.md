@@ -46,19 +46,19 @@ resources are attached.
 
 ## Listing resources
 
-### juju list-resources
+### juju resources
 
 Users can list the resources that are currently available on the Juju
-controller by using the `juju list-resources` command. The command shows
+controller by using the `juju resources` command. The command shows
 resources for a service or a unit.
 
 ```sh
-$ juju list-resources resources-example
+$ juju resources resources-example
 [Service]
 RESOURCE SUPPLIED BY REVISION
 software admin@local 2016-25-05T18:37
 
-$ juju list-resources resources-example/0
+$ juju resources resources-example/0
 [Unit]
 RESOURCE REVISION
 software 2016-25-05T18:37

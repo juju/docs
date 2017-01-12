@@ -23,7 +23,7 @@ First, install Juju 2, if you have not done so already. See
 [the first use page here][first]. 
 
 ## Pick a cloud
-Type `juju list-clouds` and you'll see output very similar to the following:
+Type `juju clouds` and you'll see output very similar to the following:
 
 ```bash
 Cloud        Regions  Default        Type        Description

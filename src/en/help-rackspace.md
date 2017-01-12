@@ -7,7 +7,7 @@ is no need to provide a specific configuration for it, it 'just works'. Rackspac
 will appear in the list of known clouds when you issue the command:
   
 ```bash
-juju list-clouds
+juju clouds
 ```
 And you can see more specific information (e.g. the supported regions and
 authentication types) by running:

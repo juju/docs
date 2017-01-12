@@ -207,7 +207,7 @@ Output:
 ```
 
 Notice that the controller model was chosen with `juju ssh`. Also, a combination of
-commands `juju list-controllers` and `juju list-machines` yielded that the
+commands `juju controllers` and `juju machines` yielded that the
 controller here has a machine id of '0' (typical).
 
 !!! Note: in a [High availability](./controllers-ha.html) scenario, file `logsink.log`

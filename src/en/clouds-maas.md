@@ -50,14 +50,14 @@ This will add both the 'prodmaas' and 'devmaas' clouds, which you can confirm
 by running:
  
 ```bash
-juju list-clouds
+juju clouds
 ```
 
 This will list the newly added clouds, preceded with the prefix 'local:' which
 denotes that these are local clouds added by the user:
 
 <!-- JUJUVERSION: 2.0.0-xenial-amd64 -->
-<!-- JUJUCOMMAND: juju list-clouds -->
+<!-- JUJUCOMMAND: juju clouds -->
 ```no-highlight
 Cloud        Regions  Default        Type        Description
 aws               11  us-east-1      ec2         Amazon Web Services

@@ -6163,7 +6163,7 @@ Click on the expander to see details for each command.
    Set the plan for the deployed application, effective immediately.
 
    The specified plan name must be a valid plan that is offered for this
-   particular charm. Use "juju list-plans <charm>" for more information.
+   particular charm. Use "juju plans <charm>" for more information.
 
 
    **Examples:**
