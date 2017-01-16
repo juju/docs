@@ -115,10 +115,14 @@ jim                   add-model  2016-11-14    58 minutes ago
 ### Controller access for external users
 
 It is possible to give a user access to a controller without creating a local
-account for them. To do this, these criteria must first be met:
+account for them. Linking the controller to the external identity manager, such
+as the Ubuntu SSO, in this way provides the benefit of convenience, as the
+authentication system used may also be used for other systems. This reduces
+the number of login credentials that users must remember across multiple systems.
 
-- The user must already have an account on an external identity manager,
-  such as the Ubuntu SSO
+To do this, these criteria must first be met:
+
+- The user must already have an account on an external identity manager
 - The controller must have been created (bootstrapped) using the identity
   configuration option, like here where we use the URL for the Ubuntu SSO
   and Juju: `--config identity-url=https://api.jujucharms.com/identity`
