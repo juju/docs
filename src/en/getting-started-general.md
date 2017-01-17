@@ -25,12 +25,24 @@ Juju is currently available for Ubuntu, CentOS, MacOSX and Windows.
 
 ### Ubuntu
 
-To install Juju, you simply need to grab the 'juju' package from the
-PPA:
+To install Juju on Ubuntu 16.04 LTS (xenial), you simply need to grab the
+'juju' package from the PPA:
 
 ```bash
 sudo add-apt-repository ppa:juju/stable
 sudo apt update
+sudo apt install juju
+```
+Using the stable PPA resource guarantees you will always have access to the very latest
+stable version of Juju.
+
+To install Juju on Ubuntu 14.04 LTS (trusty), you have one additional step, to
+install LXD from the backports repository:
+
+```bash
+sudo add-apt-repository ppa:juju/stable
+sudo apt update
+sudo apt install -t trusty-backports lxd
 sudo apt install juju
 ```
 Using the stable PPA resource guarantees you will always have access to the very latest
