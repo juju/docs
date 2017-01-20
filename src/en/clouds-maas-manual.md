@@ -2,13 +2,12 @@ Title: Manually adding MAAS clouds
 
 # Manually adding MAAS clouds
 
-MAAS clouds may be registeres with juju using the interactive
-`add-cloud` command. If you wish to define these clouds in a YAML
-configuration file instead, this is also possible. The YAML file
-describing a MAAS cloud is straightforward - all
-that varies is the endpoint and the name, since they use the same
-authentication method. For example, below is the file maas-clouds.yaml:
- 
+MAAS clouds may be registered with Juju using the interactive
+`add-cloud` command. It is also possible to define these clouds using
+a YAML file containing a straightforward description. All that varies
+is the endpoint and the name, since they use the same authentication
+method. Here is an example:
+
 ```yaml
 clouds:
    devmaas:
@@ -25,8 +24,9 @@ clouds:
       endpoint: http://prodmaas/MAAS
 ```
 
-This defines three MAAS (region) controllers. To add a MAAS cloud from this
-definition to Juju run the command in the form:
+This example YAML defines three MAAS (region) controllers. 
+To add a MAAS cloud from this definition to Juju,
+run the command in the form:
  
 ```bash
 juju add-cloud <cloudname> <YAML file>
