@@ -3,71 +3,43 @@ Title: Using MAAS with Juju
 
 # Using a MAAS cloud
 
-Juju works closely with [MAAS](https://maas.io) to deliver the same experience 
+Juju works closely with [MAAS][maas-site] to deliver the same experience 
 on bare metal that you would get using any other cloud.
 
+## Registering a MAAS cloud with Juju
 
-## Defining MAAS clouds
+Using the Juju `add-cloud` command, it is easy to add your MAAS clouds to 
+Juju's list of known clouds. The command is interactive, and will ask for
+a name and the endpoint to use. A sample session is shown below.
 
-For each MAAS you may have, you will need to define it so it may become a
-member of Juju's known clouds. This is done with the help of a YAML file. All
-that varies is the endpoint and the name, since they use the same
-authentication method. For example, below is the file maas-clouds.yaml:
- 
-```yaml
-clouds:
-   devmaas:
-      type: maas
-      auth-types: [oauth1]
-      endpoint: http://devmaas/MAAS
-   testmaas:
-      type: maas
-      auth-types: [oauth1]
-      endpoint: http://172.18.42.10/MAAS
-   prodmaas:
-      type: maas
-      auth-types: [oauth1]
-      endpoint: http://prodmaas/MAAS
-```
-
-This defines three MAAS (region) controllers. To add a MAAS cloud from this
-definition to Juju run the command in the form:
- 
-```bash
-juju add-cloud <cloudname> <YAML file>
-```
-
-To add two MAAS clouds from the above example we would run:
+Running...
 
 ```bash
-juju add-cloud devmaas maas-clouds.yaml
-juju add-cloud prodmaas maas-clouds.yaml
+juju add-cloud
+```
+...will enter the interactive mode. Enter the desired values to continue.
+
+```
+Cloud Types
+ maas
+ manual
+ openstack
+ vsphere
+
+Select cloud type: maas
+
+Enter a name for your maas cloud: mainmaas
+
+Enter the API endpoint url: http://maas.example.org:5240/MAAS/api/2.0
+
+Cloud "mainmaas" successfully added
+You may bootstrap with 'juju bootstrap mainmaas'
 ```
 
-Where the supplied cloud names refer to those in the YAML file.
+Before you bootstrap this cloud, it is necessary to add the relevant
+credentials, as explained below.
 
-This will add both the 'prodmaas' and 'devmaas' clouds, which you can confirm
-by running:
- 
-```bash
-juju list-clouds
-```
-
-This will list the newly added clouds, preceded with the prefix 'local:' which
-denotes that these are local clouds added by the user:
-
-<!-- JUJUVERSION: 2.0.0-xenial-amd64 -->
-<!-- JUJUCOMMAND: juju list-clouds -->
-```no-highlight
-Cloud        Regions  Default        Type        Description
-aws               11  us-east-1      ec2         Amazon Web Services
-...
-devmaas            0                 maas        Metal As A Service
-prodmaas           0                 maas        Metal As A Service
-testmaas           0                 maas        Metal As A Service
-```
-
-Next, add your MAAS credentials:
+## Adding your MAAS credentials
 
 ```bash
 juju add-credential prodmaas
@@ -81,7 +53,7 @@ interface, or by using the MAAS CLI:
 sudo maas-region apikey --username=<user>
 ```
 
-Note: Juju does not echo this key back to the screen.
+**Note:** Juju does not echo this key back to the screen.
 
 Now you can create a Juju controller with the bootstrap command:
  
@@ -90,3 +62,13 @@ juju bootstrap prodmaas prodmaas-controller
 ```
 
 Above, the Juju controller was called 'prodmaas-controller'.
+
+## Manually defining MAAS clouds
+
+If for any reason you would rather define all your MAAS clouds in a 
+single YAML configuration file, Juju can also import cloud definitions.
+For more details on this, see the 
+[documentation on manually adding MAAS clouds][maas-manual]
+
+[maas-site]: https://maas.io
+[maas-manual]: ./clouds-maas-manual

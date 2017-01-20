@@ -8,61 +8,59 @@ information to add it to the list of known clouds.
 
 ## Adding an OpenStack Cloud
 
-There are cases where the cloud you want to use is not on Juju's list of known 
-clouds. In this case it is possible to create a [YAML][yaml] formatted file 
-with the information Juju requires and import this new definition. The file 
-should follow this general format:
-  
-```yaml
-clouds:
-  <cloud_name>:
-    type: <type_of_cloud>
-    auth-types: <[access-key, oauth, userpass]>
-    regions:
-      <region-name>:
-        endpoint: <https://xxx.yyy.zzz:35574/v3.0/>
-```
-with the relevant values substituted in for the parts indicated
-(within '<' '>').
+Using the Juju `add-cloud` command, it is easy to add your OpenStack clouds to 
+Juju's list of known clouds. The command is interactive, and will ask for
+a name,endpoint,authorisation method(s) and regions to use. A sample session
+is shown below.
 
-For example, a typical OpenStack cloud on the local network you want to call 
-'mystack' would appear something like this:
-
-  
-```yaml
-clouds:
-    mystack:
-      type: openstack
-      auth-types: [access-key, userpass]
-      regions:
-        dev1:
-          endpoint: https://openstack.example.com:35574/v3.0/
-```
-
-In this case the authentication url is at 
-https://openstack.example.com:35574/v3.0/, it has a region called 'dev1' and 
-the cloud accepts either access-key or username/password authentication 
-methods.
-
-With the configuration file saved, you can add this cloud to Juju with the 
-`add-cloud` command:
+Running...
 
 ```bash
-juju add-cloud <cloud-name> <config-file.yaml>
+juju add-cloud
+```
+...will enter the interactive mode. Enter the desired values to continue.
+
+```
+Cloud Types
+ maas
+ manual
+ openstack
+ vsphere
+ 
+Select cloud type: openstack
+  
+Enter a name for your openstack cloud: devstack
+   
+Enter the API endpoint url for the cloud: https://openstack.example.com:35574/v3.0/
+
+Auth Types
+ access-key
+ userpass
+
+Select one or more auth types separated by commas: access-key,userpass
+ 
+Enter region name: dev1
+   
+Enter the API endpoint url for the region: https://openstack-dev.example.com:35574/v3.0/
+  
+Enter another region? (Y/n): n
+
+Cloud "devstack" successfully added
+You may bootstrap with 'juju bootstrap homestack'
 ```
 
-The cloud name you supply here **must** match the name given in the YAML file, 
-so for example:
-
-```bash
-juju add-cloud mystack mystack-config.yaml
-```
+Note that it is possible to choose more than one authorisation method - just 
+separate the values with commas.
 
 Once the cloud has been added, it will appear on the list of known clouds 
 output by the `juju list-clouds` command. Note that the cloud name will be 
 highlighted to indicate that it is a locally added cloud.
 
 !["juju list-cloud with locally added cloud"](./media/list-clouds-local.png)
+
+It is also possible to define OpenStack clouds in a YAML formatted configuration
+file and register them with Juju. Please see the 
+[documentation for manually adding Openstack clouds][manual-openstack] for details.
 
 ## Adding credentials
 
@@ -94,5 +92,6 @@ relevant images for Juju to use. This is covered in the section on
 [private clouds][simplestreams].
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[simplestreams]: ./howto-privatecloud.html
-[credentials]: ./credentials.html
+[simplestreams]: ./howto-privatecloud
+[credentials]: ./credentials
+[manual-openstack]: ./clouds-openstack-manual
