@@ -28,6 +28,7 @@ Cloud Types
 
 Select cloud type: maas
 
+
 Enter a name for your maas cloud: mainmaas
 
 Enter the API endpoint url: http://maas.example.org:5240/MAAS/api/2.0
@@ -36,13 +37,30 @@ Cloud "mainmaas" successfully added
 You may bootstrap with 'juju bootstrap mainmaas'
 ```
 
+This will add both the 'mainmaas' cloud, which you can confirm
+by running:
+ 
+```bash
+juju clouds
+```
+
+This will list the newly added clouds, preceded with the prefix 'local:' which
+denotes that these are local clouds added by the user:
+
+```no-highlight
+Cloud        Regions  Default        Type        Description
+aws               11  us-east-1      ec2         Amazon Web Services
+...
+mainmaas            0                 maas        Metal As A Service
+```
+
 Before you bootstrap this cloud, it is necessary to add the relevant
 credentials, as explained below.
 
 ## Adding your MAAS credentials
 
 ```bash
-juju add-credential prodmaas
+juju add-credential mainmaas
 ```
 
 When prompted for "maas-oauth", you should paste your MAAS API key. Your API
@@ -58,10 +76,10 @@ sudo maas-region apikey --username=<user>
 Now you can create a Juju controller with the bootstrap command:
  
 ```bash
-juju bootstrap prodmaas prodmaas-controller
+juju bootstrap mainmaas mainmaas-controller
 ```
 
-Above, the Juju controller was called 'prodmaas-controller'.
+Above, the Juju controller was called 'mainmaas-controller'.
 
 ## Manually defining MAAS clouds
 

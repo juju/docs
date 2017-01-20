@@ -144,10 +144,10 @@ terms:
 ```
 
 A user can view the list of terms they've agreed to with
-`juju list-agreements`.
+`juju agreements`.
 
 ```bash
-juju list-agreements
+juju agreements
 ```
 
 The output displays each term revision the user has agreed to:

@@ -45,13 +45,13 @@ Common model management tasks are summarized below.
 
 ^# List models
 
-   Use the `juju list-models` command to list all models for a controller:
+   Use the `juju models` command to list all models for a controller:
    
-   `juju list-models [options]`
+   `juju models [options]`
    
    For complete explanation and syntax, see the
-   [command reference page](./commands.html#list-models) or the `juju help
-   list-models` command.
+   [command reference page](./commands.html#models) or the `juju help
+   models` command.
 
 
 
@@ -106,6 +106,19 @@ Common model management tasks are summarized below.
    command.
    
 
+^# Migrate models
+
+   Use the `juju migrate` command to move a model from one controller to
+   another. This is useful for load balancing when a controller is too busy, or
+   as a way to upgrade a model's controller to a newer Juju version.
+
+   `juju migrate [options] <model name> <target controller name>`
+
+   For a complete explanation, see [migrating models](./models-migrate.html),
+   the [command reference page](./commands.html#migrate) or the `juju help
+   migrate` command.
+   
+   
 
 ^# Provide SSH access
    
@@ -122,14 +135,14 @@ Common model management tasks are summarized below.
 
 ^# List SSH access keys
    
-   Use the `juju list-ssh-keys` command to list SSH keys currently permitting
+   Use the `juju ssh-keys` command to list SSH keys currently permitting
    access to all machines, present and future, in a model:
    
-   `juju list-ssh-keys [options]`
+   `juju ssh-keys [options]`
    
    For complete explanation and syntax, see the
-   [command reference page](./commands.html#list-ssh-keys) or the `juju help
-   list-ssh-keys` command.
+   [command reference page](./commands.html#ssh-keys) or the `juju help
+   ssh-keys` command.
    
 
 

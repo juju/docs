@@ -156,13 +156,13 @@ the sample. See [Clouds](./clouds.html).
 You can check what credentials are stored by Juju by running the command:
 
 ```bash
-juju list-credentials
+juju credentials
 ```
 
 ...which will return a list of the known credentials. For example:
 
 <!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
-<!-- JUJUCOMMAND: juju list-credentials -->
+<!-- JUJUCOMMAND: juju credentials -->
 ```no-highlight
 Cloud      Credentials
 aws     bob*, carol
@@ -176,7 +176,7 @@ For YAML output that includes detailed credential information, including
 secrets like access keys and passwords:
 
 ```bash
-juju list-credentials --format yaml --show-secrets
+juju credentials --format yaml --show-secrets
 ```
 
 The YAML output will be similar to our 'mycreds.yaml' sample above.

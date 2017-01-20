@@ -19,9 +19,9 @@ the network and has Juju installed.
 At this stage, the user is registered to a controller and is allowed to perform
 the following additional actions (in the context of the controller):
 
-- List controllers (`juju list-controllers`)
+- List controllers (`juju controllers`)
 - Show controller details (`juju show-controller`)
-- List enabled controller users (`juju list-users`)
+- List enabled controller users (`juju users`)
 - Show details for controller users (`juju show-user`)
 
 To do anything further the user must wait to be granted access to a model by
@@ -65,7 +65,7 @@ MD4TA2ppbTAVExMxMC4xOTUuMTAuMTMwOjE3MDcwBCDENImZEDvYcWLU1USgaUJQXhWR98JNLWcbS0-M
 ## Logins and logouts
 
 On any given client system, each controller that shows up with `juju
-list-controllers` accepts a single login; a logout is necessary before logging
+controllers` accepts a single login; a logout is necessary before logging
 in to the same controller. Note that a logout of a user on one client does not
 affect the same user session possibly underway on a separate client.
 

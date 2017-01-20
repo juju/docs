@@ -106,11 +106,11 @@ If the user lists the models available to them, they should now see the
 ‘staging’ model created previously:
 
 ```bash
-juju list-models
+juju models
 ```
 
 <!-- JUJUVERSION: 2.0.0-xenial-amd64 -->
-<!-- JUJUCOMMAND: juju list-models -->
+<!-- JUJUCOMMAND: juju models -->
 ```no-highlight
 Controller: shared
 

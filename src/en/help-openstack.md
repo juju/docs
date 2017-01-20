@@ -53,10 +53,10 @@ Note that it is possible to choose more than one authorisation method - just
 separate the values with commas.
 
 Once the cloud has been added, it will appear on the list of known clouds 
-output by the `juju list-clouds` command. Note that the cloud name will be 
+output by the `juju clouds` command. Note that the cloud name will be 
 highlighted to indicate that it is a locally added cloud.
 
-!["juju list-cloud with locally added cloud"](./media/list-clouds-local.png)
+!["juju cloud with locally added cloud"](./media/list-clouds-local.png)
 
 It is also possible to define OpenStack clouds in a YAML formatted configuration
 file and register them with Juju. Please see the 

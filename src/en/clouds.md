@@ -18,7 +18,7 @@ simply specify the cloud you wish to use, supply Juju with some
 To see which clouds Juju currently knows about, you can run the command:
   
 ```bash
-juju list-clouds
+juju clouds
 ```
 
 This will return a list like this:
@@ -46,7 +46,7 @@ run the command, replacing `aws` with any of the clouds returned in the previous
 command:
   
 ```bash
-juju list-regions aws
+juju regions aws
 ```
 
 This will return a list like this:
@@ -296,7 +296,7 @@ juju add-cloud mystack mystack.yaml
 Note that the name you give your cloud MUST match the value given inside the 
 YAML file you created.
 
-Having added a new cloud, if you re-run the `juju list-clouds` command, you 
+Having added a new cloud, if you re-run the `juju clouds` command, you 
 should see something like this:
 
 ```no-highlight

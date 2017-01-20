@@ -375,7 +375,7 @@ The versions covered here are:
 
   From the Juju command line you can view your payloads like this:
 
-        juju list-payloads <filter>
+        juju payloads <filter>
 
   For more information run:
 

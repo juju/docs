@@ -11,7 +11,7 @@ level.
 
 An administrator can sever user communication from a user to the controller
 they manage by disabling them. The effect is immediate. To get a list of
-potential users to disable the `juju list-users` command can first be used.
+potential users to disable the `juju users` command can first be used.
 
 Examples:
 
@@ -27,11 +27,11 @@ To re-enable the user 'mike':
 juju enable-user mike
 ```
 
-Disabled users do not show up in the output to `juju list-users` unless the
+Disabled users do not show up in the output to `juju users` unless the
 '--all' option is used:
 
 <!-- JUJUVERSION: 2.0.1-genericlinux-amd64 -->
-<!-- JUJUCOMMAND: juju list-users --all -->
+<!-- JUJUCOMMAND: juju users --all -->
 
 ```no-highlight
 Controller: cstack

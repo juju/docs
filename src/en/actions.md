@@ -11,15 +11,15 @@ actions.yaml. See [Actions for the charm author](authors-charm-actions.html) for
 
 The following commands are specified for dealing with actions:
 
-- `juju actions` - alias for list-actions
-- `juju list actions` - list actions defined for a service
+- `juju actions` - list actions defined for a service
+- `juju list actions` - alias for `actions`
 - `juju run-action` - queue an action for execution
 - `juju show-action-output` - show output of an action by ID
 - `juju show-action-status` - show status of all actions filtered by optional ID
 
 ## Action commands
 
-### `juju list-actions`
+### `juju actions`
 
 List the actions defined for a service.
 
@@ -27,13 +27,13 @@ For example, with the 'git' charm deployed, you can see which actions it
 supports with the following command:
 
 ```bash
-juju list-actions git
+juju actions git
 ```
 
 You should see something similar to this:
 
 <!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
-<!-- JUJUCOMMAND: juju list-actions git -->
+<!-- JUJUCOMMAND: juju actions git -->
 ```no-highlight
 Action            Description
 add-repo          Create a git repository.
@@ -49,9 +49,9 @@ remove-repo-user  Revoke a user's permissions to access a repository.
 remove-user       Remove a user.
 ```
 To show the full schema for all the actions on a service, append the `--schema`
-argument to the `list-actions` command. 
+argument to the `actions` command. 
 
-For example, here's the beginning of the output from `juju list-actions git
+For example, here's the beginning of the output from `juju actions git
 --schema --format yaml`:
 
 ```bash
