@@ -6,7 +6,8 @@ Title: Setting up private clouds with Simplestreams
 ## Overview
 
 When Juju bootstraps a cloud, it needs two critical pieces of information:
-  1. The uuid of the image to use when starting new compute instances.
+
+  1. The UUID of the image to use when starting new compute instances.
   1. The URL from which to download the correct version of a tools tarball.
 
 This necessary information is stored in a json metadata format
@@ -27,7 +28,7 @@ this Simplestreams metadata and configure OpenStack to use them.
 
 ### Generating the metadata
 
-To begin, create a directory to hold the generted metadata
+To begin, create a directory to hold the generted metadata:
 
 ```bash
 mkdir -p ~/simplestreams/images
@@ -76,7 +77,7 @@ e9df831d-9632-4e06-bd21-d047e4c5ef4e xenial active
 6911e505-3610-4f42-b339-994cfe373174 trusty active
 ```
 Take a note of the image IDs for the images you want added to Simplestreams.
-These ill be used in the next step.
+These will be used in the next step.
 
 !!! Note: If you have images for multiple different series of Ubuntu, make sure
 you keep track of which series name matches which image ID.  The value
@@ -190,8 +191,8 @@ the container publicly accessible:
 ```bash
 swift post simplestreams --read-acl .r:*
 ```
-If you run the `stat` command again, you will now see `.r:*` adjacent to the 'Read
-ACL' field.
+If you run the `swift stat simplestreams` command again, you will now see
+`.r:*` adjacent to the 'Read ACL' field.
 
 ### Create a Simplestream service
 
@@ -201,18 +202,6 @@ for Simplestreams:
 ```bash
 openstack service create --name product-stream --description "Product Simple Stream" product-streams
 ```
-
-We also need to  register an endpoint with the Simplestreams service.
-
-To do this, first enter the following command to determine the project ID for
-the admin user:
-
-```bash
-openstack user show admin -f value -c project_id
-```
-
-This value will be used to replace the string $(tenant_id)s when we construct the Swift
-URL in a future step.
 
 Next, enter the following command to determine the URL in Swift for the Simplestreams objects:
 
@@ -239,7 +228,7 @@ The output from the previous command will be similar to the following:
 ```
 
 The URL for the Object Store is listed against the `internalurl` field above
-and we refer to this as $SWIFT_URL in the following commands.
+and we refer to this as **$SWIFT_URL** in the following commands.
 
 Enter the following command to register the endpoint with the Simplestreams
 service:
@@ -257,9 +246,6 @@ this cloud with the `juju bootstrap` command.
 ```bash
 juju bootstrap <cloud> <controller name> --config tools-metadata-url=$SWIFT_URL
 ```
-
-The metadata-url specified with the config option should point to the endpoint 
-you created in the previous step.
 
 If there are multiple possible networks available to the cloud, it is also necessary to 
 specify the network label or UUID for Juju to use. Both the network label and
