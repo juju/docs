@@ -122,7 +122,142 @@ clouds: MAAS, LXD and Manual.
 ## Specifying additional clouds
 
 There are cases (an OpenStack cloud is a common one) where the cloud you want to 
-use is not on Juju's list of known clouds. In this case it is possible to create
+use is not on Juju's list of known clouds. Juju usually only needs a small 
+amount of information to be able to use these clouds too, so the fastest way to
+get them recognised is to use the `add-cloud` command in its interactive mode.
+This will ask a series of questions based on the type of cloud you are trying
+to add. Currently Juju can add MAAS, OpenStack, vSphere and manual clouds in this 
+way - each is detailed below (click on the triangle or name to expand the 
+relevant section). You can also generate a YAML file
+
+^# MAAS
+
+   To add a MAAS cloud, Juju only needs to know the name you wish to call it, and 
+   the API endpoint used to connect to it. A sample session looks like this:
+       
+       juju add-cloud
+  
+       Cloud Types
+        maas
+        manual
+        openstack
+        vsphere
+
+       Select cloud type: maas
+
+       Enter a name for your maas cloud: mainmaas
+
+       Enter the API endpoint url: http://maas.example.org:5240/MAAS/api/2.0
+
+      Cloud "mainmaas" successfully added
+      You may bootstrap with 'juju bootstrap mainmaas'
+
+   Once completed, you should also remember to add a credential for this cloud before 
+   bootstrapping. See the [documentation on credentials][credentials] for more help.
+
+^# Manual
+
+   To add a 'manual' cloud, Juju only needs to know the name you wish to call it, and 
+   the network address used to connect to it. A sample session looks like this:
+       
+       juju add-cloud
+  
+       Cloud Types
+        maas
+        manual
+        openstack
+        vsphere
+
+       Select cloud type: maas
+
+       Enter a name for your maas cloud: mainmaas
+
+       Enter the API endpoint url: http://maas.example.org:5240/MAAS/api/2.0
+
+      Cloud "mainmaas" successfully added
+      You may bootstrap with 'juju bootstrap mainmaas'
+
+   Once completed, you should also remember to add a credential for this cloud before 
+   bootstrapping. See the [documentation on credentials][credentials] for more help.
+
+^# OpenStack
+
+   To add an OpenStack cloud, Juju needs to know the endpoints to connect to, the 
+   authorisation type to use and any region information. A sample session is shown
+   below:
+   
+       juju add-cloud
+       
+       Cloud Types
+        maas
+        manual
+        openstack
+        vsphere
+       
+       Select cloud type: openstack
+       
+       Enter a name for your openstack cloud: devstack
+       
+       Enter the API endpoint url for the cloud: https://openstack.example.com:35574/v3.0/
+       
+       Auth Types
+        access-key
+        userpass
+       
+       Select one or more auth types separated by commas: access-key,userpass
+       
+       Enter region name: dev1
+       
+       Enter the API endpoint url for the region: https://openstack-dev.example.com:35574/v3.0/
+       
+       Enter another region? (Y/n): n
+       
+       Cloud "devstack" successfully added
+       You may bootstrap with 'juju bootstrap homestack'
+       
+   Note that it is possible to choose more than one authorisation method - just 
+   separate the values with commas.
+
+   Once completed, you should also remember to add a credential for this cloud before 
+   bootstrapping. See the [documentation on credentials][credentials] for more help.
+   
+^# vSphere
+
+   To add a cloud based on VMWare's vSphere, Juju needs to know how to connect to it
+   and what to call the cloud.  :
+       
+       juju add-cloud
+       Cloud Types
+         maas
+         manual
+         openstack
+         vsphere
+       
+       Select cloud type: vsphere
+       Enter a name for your vsphere cloud: vs1
+       
+       Enter the API endpoint url for the cloud: 178.18.42.10
+       
+       Enter region name: dc0
+       
+       Enter another region? (Y/n): y
+       
+       Enter region name: dc1
+       
+       Enter another region? (Y/n): n
+       
+       Cloud "vs1" successfully added
+       You may bootstrap with 'juju bootstrap vs1'
+
+   The `èndpoint address` in this case is the IP address of the vSphere server. In this case
+   we have also specified multiple regions (data centres in vSphere terminology).
+
+   Once completed, you should also remember to add a credential for this cloud before 
+   bootstrapping. See the [documentation on credentials][credentials] for more help.
+
+## Manually specifying additional clouds
+
+In this case it is possible to create
 a [YAML][yaml] formatted file with the information Juju requires and import this
 new definition. The file should follow this general format:
   
