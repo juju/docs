@@ -144,7 +144,7 @@ Output will look similar to the following:
 +--------------+---------------+
 ```
 
-Notice the `ojects_count` line. You should see that the container does not contain any
+Notice the `objects_count` line. You should see that the container does not contain any
 objects.
 
 To upload the Simplestreams metadata to the container, enter the following:
