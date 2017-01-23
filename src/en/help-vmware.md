@@ -12,13 +12,6 @@ it to the list of known clouds.
 
 ## Adding a vSphere cloud
 
-vSphere support in the current version of Juju is provisional. You need to set
-the environmental variable JUJU_DEV_FEATURE_FLAGS="vsphere-provider" within
-your shell to enable it:
-
-```bash
-export JUJU_DEV_FEATURE_FLAGS="vsphere-provider"
-```
 To make Juju aware of your vSphere installation, you will need to define it
 within a YAML file containing the following values:
 
