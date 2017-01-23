@@ -28,7 +28,7 @@ this Simplestreams metadata and configure OpenStack to use them.
 
 ### Generating the metadata
 
-To begin, create a directory to hold the generted metadata:
+To begin, create a directory to hold the generated metadata:
 
 ```bash
 mkdir -p ~/simplestreams/images
