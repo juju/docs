@@ -271,13 +271,24 @@ pg-rootfs/0   data/0 /srv/data attached false
 pg-ssd/0      data/3 /srv/data attached false
 ```
 
-### Known limitations
+### Upgrading with storage constraints
 
-- It is not currently possible to upgrade a charm if it adds required storage,
-  as there is no way to specify the storage constraints at upgrade time. Until
-  such support is added, it is only possible to upgrade a charm from having no
-  storage to having optional storage (i.e. minimum count of 0), and adding the
-  storage after upgrade.
+When updating a charm with the [upgrade-charm][upgrade-charm] command,
+default storage constraints will be preserved unless new constraints have been
+added to the updated charm. 
+
+For example, if an update to the PostgreSQL charm adds a requirement for
+pgdata and pgdata doesn't currently exist, the update will automatically
+create a rootfs pgdata storage instance for each unit. 
+
+As with the `deploy` command, constraints can be specified when updating
+by adding the '--storage' argument:
+
+```bash
+juju upgrade-charm postgresql --storage pgdata=10G
+```
+
+### Known limitations
 
 - For LXC (local provider or not), you must currently set
   ["allow-lxc-loop-mounts"][model-config]
@@ -292,4 +303,5 @@ If you are interested in more information on how to create a charm that uses
 the storage feature read
 [writing charms that use storage](./developer-storage.html).
 
-[model-config]: ./models-config#list-of-model-keys
+[model-config]: ./models-config.html#list-of-model-keys
+[upgrade-charm]: ./commands.html#upgrade-charm

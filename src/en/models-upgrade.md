@@ -45,7 +45,7 @@ Overview:
   latter's cache cannot satisfy the request the controller will attempt a
   download from the internet.
 - Backups are recommended prior to upgrading the server software. See
-  [Backup and restore](./juju-backup-restore.html).
+  [Backup and restore](./controllers-backup.html).
 
 See [Notes on upgrading Juju software](./models-upgrade-notes.html)
 for upgrading details, including what to do when the controller lacks internet
