@@ -154,7 +154,6 @@
         <li class="section"><a class="header" href="developer-howto.html">How to...</a>
             <ul class="sub">
                 <li><a href="howto-charm-with-docker.html">Charm with Docker</a></li>
-                <li><a href="howto-vagrant-workflow.html">Work with Vagrant</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
