@@ -1,4 +1,4 @@
-Title: Charm store policy  
+Title: Charm store policy
 
 # Charm store policy
 
@@ -29,7 +29,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
         satisfies this due to the apt and yum sources including cryptographic
         signing information.
     - Third party repositories must be listed as a configuration option that
-        can be overridden by the user and not hard coded in the charm itself. 
+        can be overridden by the user and not hard coded in the charm itself.
     - Launchpad PPAs are acceptable as the `add-apt-repository` command
         retrieves the keys securely.
     - Other third party repositories are acceptable if the signing key is
@@ -46,7 +46,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
 Not following these guidelines will result in a WARNING (W:) in `charm test`:
 
 - Should be built using [charm layers](authors-charm-building.html).
-- Should be delivered using Juju Resources by default. 
+- Should be delivered using Juju Resources by default.
 
 ## Testing and quality guidelines
 
@@ -98,7 +98,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
   - Must define external dependencies, if applicable.
 
   <hr>
-  
+
 Not following these guidelines will result in a WARNING (W:) in `charm test`:
 
 - Should link to a recommend production usage bundle and recommended
@@ -117,7 +117,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
   - `wget | sh` style is not ok.
 
   <hr>
-  
+
 Not following these guidelines will result in a WARNING (W:) in `charm test`:
 
 - Should make use of whatever Mandatory Access Control system is provided by
@@ -144,8 +144,9 @@ policy, and thus is removed from the recommended status in the Juju Charm Store.
 
 This file is an [important component](authors-charm-components.html) of a charm.
 
-Check out the [MySQL metadata.yaml](https://bazaar.launchpad.net/~charmers/charm
-s/precise/mysql/trunk/view/head:/metadata.yaml) as an example.
+Check out the [MySQL metadata.yaml]
+(https://bazaar.launchpad.net/~charmers/charms/precise/mysql/trunk/view/head:/metadata.yaml) 
+as an example.
 
 ## config.yaml
 

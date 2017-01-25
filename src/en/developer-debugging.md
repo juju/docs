@@ -1,4 +1,4 @@
-Title: Debugging Juju charm hooks  
+Title: Debugging Juju charm hooks
 
 # Debugging hooks
 
@@ -61,7 +61,7 @@ executes in. The `juju debug-hooks` command allows you to do exactly that,
 whether it's to debug a failed hook or to write and test new hook code.
 
 `juju debug-hooks` accepts a unit and an optional list of hooks to debug (which must be named individually
-in a space-delimited list) or no hook names, causing all hooks to be debugged:  
+in a space-delimited list) or no hook names, causing all hooks to be debugged:
 
 ```bash
 juju debug-hooks <application/unit> [hook-name hook-name2 ...]
@@ -155,11 +155,11 @@ back to the debug-hooks session to interact with the Juju environment.
 juju resolved mysql/0
 ```
 
-Starting with Juju version 2.0 hooks returning errors will be automatically 
+Starting with Juju version 2.0 hooks returning errors will be automatically
 retried periodically. However, the `juju resolved` command may still be
-used to retry the hook immediately. See the 
-[General configuration options](./models-config#retrying-failed-hooks)
-for more information on the automatic retry feature and how to disable this 
+used to retry the hook immediately. See the
+[General configuration options](./models-config.html#retrying-failed-hooks)
+for more information on the automatic retry feature and how to disable this
 behaviour.
 
 ## Debugging Reactive

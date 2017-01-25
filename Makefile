@@ -25,7 +25,7 @@ spell:
 spell-commands:
 	spell -b src/en/commands.md | sort | uniq
 
-check-links-build:
+check-links-build: clean build
 	linkchecker htmldocs/en
 
 check-links-production:

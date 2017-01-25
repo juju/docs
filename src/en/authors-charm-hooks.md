@@ -129,8 +129,8 @@ services. Units of a single client service will surely want to connect to, and
 use, the same database; but if units of another client service were to use that
 same database, the consequences could be catastrophic for all concerned.
 
-If juju respected the `limit` field in relation [metadata](./authors-charm-
-metadata.html), it would be possible to work around this, but it's not a high-
+If juju respected the `limit` field in relation [metadata](./authors-charm-metadata.html),
+it would be possible to work around this, but it's not a high-
 priority [bug](https://bugs.launchpad.net/bugs/1089297): most provider services
 _should_ be able to handle multiple requirers anyway; and most requirers will
 only be connected to one provider anyway.
@@ -256,6 +256,6 @@ you can to the log before you do so.
   - They write only _very_ sparingly to the
 [charm directory](./authors-charm-components.html).
 
-We recommend you also familiarise yourself with the [best practices](./authors-
-charm-best-practice.html) and, if you plan to distribute your charm, the [charm
+We recommend you also familiarise yourself with the [best practices]
+(./authors-charm-best-practice.html) and, if you plan to distribute your charm, the [charm
 store policy](./authors-charm-policy.html).

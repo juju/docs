@@ -1,5 +1,5 @@
 Title: Scaling applications
-TODO: Check final note still relevant for 2.0 release  
+TODO: Check final note still relevant for 2.0 release
 
 # Scaling applications
 
@@ -33,7 +33,7 @@ The command options are:
 
 ## Scaling behind a Load Balancer
 
-Usually you just can't add more units to an application and have it magically 
+Usually you just can't add more units to an application and have it magically
 cale - you need to use a load balancer. In this case you can just deploy a
 proxy in front of your units; let's deploy a load balanced MediaWiki:
 
@@ -47,7 +47,7 @@ juju expose haproxy
 ```
 
 The haproxy charm configures and installs an
-HAProxy ([http://haproxy.1wt.eu/](http://haproxy.1wt.eu/)) application, the 
+HAProxy ([http://haproxy.1wt.eu/](http://haproxy.1wt.eu/)) application, the
 widely used TCP/HTTP load balancer. When you add a relation between the
 MediaWiki instance and HAProxy, it will be configured to load balance requests
 to that application. Note that this means the web traffic should be directed to
@@ -127,14 +127,14 @@ juju add-unit mysql --to 23
 ```
 ...adds a unit to machine 23,
 
-```bash 
-juju add-unit mysql --to 24/lxc/3 
+```bash
+juju add-unit mysql --to 24/lxc/3
 ```
 ...adds a unit to lxc container 3 on host machine 24.
 
-It is worth noting that not all applications will happily co-exist and it is much 
+It is worth noting that not all applications will happily co-exist and it is much
 safer to create a new container when co-locating:
-  
+
 ```bash
 juju add-unit mysql --to lxc:25
 ```
@@ -183,7 +183,7 @@ remove multiple units in the same command:
 juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5
 ```
 !!! Note: the unit numbers may not necessarily be sequential, see the
-[notes on machine/unit numbering](./reference-numbering)
+[notes on machine/unit numbering](./reference-numbering.html)
 
 
 The `remove-unit` command can be run to remove running units safely. The
@@ -191,14 +191,14 @@ running applications should automatically adjust to the change. If the machine
 the removed unit was running on is not being used as a controller, or hosting
 other Juju managed containers, it will be destroyed automatically.
 
-!!! Note: If a machine has no running units, controllers or containers, and 
+!!! Note: If a machine has no running units, controllers or containers, and
 hasn't been removed automatically, it can be removed with the `remove-machine`
 command. For example, to remove machine 1 that the unit `mediawiki/1` was
-housed on, use the command: 
-    
+housed on, use the command:
+
 ```bash
 juju remove-machine 1
 ```
 
 For more information on removing applications, please see the section on
-[destroying applications](charms-destroy.html).
+[destroying applications](./charms-destroy.html).

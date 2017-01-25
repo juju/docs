@@ -1,4 +1,4 @@
-Title: Charm tools  
+Title: Charm tools
 
 The 'Charm Tools' Juju Plugin is a collection of commands enabling users
 and charm authors to create, search, fetch, update, and
@@ -33,8 +33,8 @@ Charm Tools is available for, and tested on, Microsoft Windows 7 and 8. While
 the installer may work on previous versions of Windows there is no guarantee.
 
 To install, first download the Charm Tools installer from
-[launchpad](https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-
-tools_1.2.9.exe). Once downloaded, execute the installer and follow the on-
+[launchpad](https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-tools_1.2.9.exe).
+Once downloaded, execute the installer and follow the on-
 screen prompts. After installation you can access Charm Tools via the
 `charm` command from either the command line or PowerShell.
 

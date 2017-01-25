@@ -1,8 +1,8 @@
 Title: Juju LXD local provider
 
-# Using LXD as a cloud 
+# Using LXD as a cloud
 
-LXD provides a fast, powerful, self-contained and largely configuration-free 
+LXD provides a fast, powerful, self-contained and largely configuration-free
 way to experiment with Juju. Using lightweight LXC containers as instances,
 even a moderately powerful laptop can create useful models, or serve as
 a development platform for your own charms.
@@ -62,9 +62,9 @@ See more examples of [Creating a controller][bootstrap].
 
 ## Next steps
 
-A controller is created with two models - the 'controller' model which 
-should be reserved for Juju's operations, and a model named 'default' 
-for deploying user workloads. 
+A controller is created with two models - the 'controller' model which
+should be reserved for Juju's operations, and a model named 'default'
+for deploying user workloads.
 
  - [More information on models][models]
  - [Using Charms to deploy applications][charms]
@@ -146,7 +146,7 @@ how to
 [configure the lxd daemon and containers][lxd-upstream]
 .
 
-For additional configuration of LXD controllers, please see the [Controllers 
+For additional configuration of LXD controllers, please see the [Controllers
 documentation][controllers].
 
 [models]: ./models.html

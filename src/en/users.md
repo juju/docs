@@ -12,11 +12,11 @@ duplicated across controllers.
 Juju users are not related in any way to the localhost system users; they are
 purely Juju constructs.
 
-A *controller administrator* is a user who has access to the controller model. 
+A *controller administrator* is a user who has access to the controller model.
 This Juju user is called 'admin' and is set up as part of the
 controller creation step. Practically, this set of users is comprised of the
 controller creator and any user the creator/initial_admin has granted write
-access to the 'controller' model. There is no overarching 
+access to the 'controller' model. There is no overarching
 "Juju administrator" since multiple controllers, and therefore multiple
 administrators, are possible.
 
@@ -94,7 +94,7 @@ For write access, the user can begin with the following major commands:
 Further reading:
 
 - A walkthrough of typical commands is provided in
-  [Workflow scenarios](./users-workflows#basic_setup_and_single_user.html).
+  [Workflow scenarios](./users-workflows.html#basic_setup_and_single_user.html).
 - Other write commands are listed on the
   [command reference page](./commands.html).
 - An explanation of how users gain access to models is provided in

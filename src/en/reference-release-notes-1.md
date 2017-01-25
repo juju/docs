@@ -2,7 +2,7 @@ Title: Juju Release Notes
 
 # Release Notes History for 1.x series
 
-This section details all the available release notes for the 
+This section details all the available release notes for the
 1.x stable series of Juju
 
 The versions covered here are:
@@ -939,7 +939,7 @@ The versions covered here are:
   status-get --service
 
   set the status of the service:
-  status-set --service <maintenance | blocked | waiting | active> "message" 
+  status-set --service <maintenance | blocked | waiting | active> "message"
 
   The 'juju status' command includes the 'workload-status' and
   'service-status' in the report. for example:
@@ -985,9 +985,9 @@ The versions covered here are:
       export JUJU_CLI_VERSION=2
       juju status
 
-      NAME       STATUS  EXPOSED CHARM                      
-      mysql      unknown false   local:trusty/mysql-326     
-      wordpress  blocked false   local:trusty/wordpress-93  
+      NAME       STATUS  EXPOSED CHARM
+      mysql      unknown false   local:trusty/mysql-326
+      wordpress  blocked false   local:trusty/wordpress-93
 
   The legacy status values are omitted from output. You can use the
   '--yaml' option to see status in the Juju 1.x layout.
@@ -1470,7 +1470,7 @@ The versions covered here are:
     * New Style Restore
     * Improved Proxy Support for Restrictive Networks
     * New Charm Actions
-    * New blocks and Messages. 
+    * New blocks and Messages.
     * Experimental: Service Leader Elections
     * Experimental: Addressable LXC Containers and KVM Instances on AWS and MAAS
 
@@ -1529,30 +1529,30 @@ The versions covered here are:
   does so with the proper authentication scope.
 
   For more information please refer to
-  
+
   https://developers.google.com/accounts/docs/OAuth2ServiceAccount#creatinganaccount
-  
+
   and
-  
+
   https://developers.google.com/accounts/docs/OAuth2#serviceaccount
-  
+
 
   If the project's service account has any permissions problems go to the
   following page to fix them:
 
   https://console.developers.google.com/project/<project-id>/permissions
-  
+
   (remember to insert the *project id*)
 
   The GCE API should already be activated for the project. It it isn't,
   go to the following URL in your console:
- 
+
   https://console.developers.google.com/project/<project-name>/apiui/api
 
   (insert the *project name*)
 
   Also see step 2 on
-  
+
   https://cloud.google.com/compute/docs/api/how-tos/authorization.
 
   The following config options in your environments.yaml file are
@@ -1639,7 +1639,7 @@ The versions covered here are:
   the API and the unit level:
 
   https://jujucharms.com/docs/1.20/authors-charm-actions
-  
+
 
   CLI Actions are sub-commands of the 'juju action' command. For more
   details on their usage, 'juju action help' has examples and further
@@ -1703,13 +1703,13 @@ The versions covered here are:
   leader-settings-changed as soon as possible, delaying only doing so only
   to run the install hook; complete any queued or in-flight operation; or
   resolve a hook or upgrade error.
-   
-  Known limitations: 
+
+  Known limitations:
 
     * Amazon limits the number of addresses the containers an instance can
-      have based on its size. 
-    * Statically allocated addresses are not released on container shutdown. 
-    * Container addressability does not survive a host reboot. 
+      have based on its size.
+    * Statically allocated addresses are not released on container shutdown.
+    * Container addressability does not survive a host reboot.
     * No public IP address is added on AWS, and we don’t yet support
       dynamic port mapping -- so you can not yet expose containerized
       services on Amazon.
@@ -1803,7 +1803,7 @@ The versions covered here are:
       https://launchpad.net/~juju/+archive/1.22
 
   Windows and OS X users will find installers at:
- 
+
       https://launchpad.net/juju-core/+milestone/1.22.8
 
   ## Notable Changes
@@ -1934,10 +1934,10 @@ The versions covered here are:
   ## Notable Changes
 
   This releases addresses stability and performance issues.
-  
-  
+
+
   ### Vivid local-provider limitations
-  
+
   Juju 1.22.x on Vivid is suitable for creating and maintaining Juju
   environments in public and private clouds, including MAAS.
   Local-provider support for Vivid's default systemd installation will
@@ -1961,7 +1961,7 @@ The versions covered here are:
 
   https://launchpad.net/~juju/+archive/stable
 
-  And will appear in the release shortly thereafter. 
+  And will appear in the release shortly thereafter.
 
 
   ## Resolved issues
@@ -2400,12 +2400,12 @@ The versions covered here are:
   series in the following PPA:
 
   https://launchpad.net/~juju/+archive/stable
-  
+
   Windows and OS X users will find installers at:
-  
+
   https://launchpad.net/juju-core/+milestone/1.21.3
-  
-  
+
+
   ## Notable Changes
 
   This releases addresses stability and performance issues.
@@ -2708,7 +2708,7 @@ The versions covered here are:
   ### Choosing the nodes used to ensure high availability
 
   Just as ```juju bootstrap``` supports the ability to specify a particular
-  node using "--to" placement directives, so too can 
+  node using "--to" placement directives, so too can
   ```juju ensure-availability``` specify a comma separated list of machines to use
   for any newly required state servers. For example:
 
@@ -2764,7 +2764,7 @@ The versions covered here are:
   their own password.
 
   The user commands are grouped under the ```juju user``` command:
- 
+
   ```bash
   juju user
   usage: juju user <command> ...
@@ -3611,7 +3611,7 @@ The versions covered here are:
   * LXC template fails to stop
     Lp 1348386
 
-  * Distribution tarball has licensing problems that prevent 
+  * Distribution tarball has licensing problems that prevent
     redistribution
     Lp 1341589
 
@@ -3626,7 +3626,7 @@ The versions covered here are:
 
   juju-core 1.20.1 is available for utopic and backported to earlier
   series in the following PPA:
-  
+
   https://launchpad.net/~juju/+archive/stable
 
   ## Noteworthy
@@ -3813,7 +3813,7 @@ The versions covered here are:
   juju bootstrap --to zone=us-east-1b
   juju add-machine zone=us-east-1c
   ```
-  
+
   If you don't specify a zone explicitly, Juju will automatically and
   uniformly distribute units across the available zones within the region.
   Assuming the charm and the charm's service are well written, you can
@@ -3824,7 +3824,7 @@ The versions covered here are:
   ```bash
   juju deploy -n 10 <service>
   ```
-  
+
   When adding machines without an AZ explicitly specified, or when adding
   units to a service, the ec2 and openstack providers will now
   automatically spread instances across all available AZs in the region.
@@ -3852,11 +3852,11 @@ The versions covered here are:
   default. To revert to the previous behaviour, the
   'availability-sets-enabled' option must be set in environments.yaml like
   so:
-  
+
   ```yaml
   availability-sets-enabled: false
   ```
-  
+
   Placement is disabled when 'availability-sets-enabled' is true. The
   option cannot be disabled after the environment is bootstrapped.
 
@@ -3918,13 +3918,13 @@ The versions covered here are:
   message displayed. The module name is dotted. You can specify all or
   some of a module name to include or exclude messages from the log. This
   example progressively excludes more content from the logs
- 
+
   ```bash
   juju debug-log --exclude-module juju.state.apiserver
   juju debug-log --exclude-module juju.state
   juju debug-log --exclude-module juju
   ```
-  
+
   The 'include-module' and 'exclude-module' options can be used multiple
   times to select the modules you are interested in. For example, you can
   see the juju.cmd and juju.worker messages like this:
@@ -4098,7 +4098,7 @@ The versions covered here are:
   advised.
 
   ###Resolved issues
-  
+
   * juju sync-tools destroys the environment when given an invalid source Lp 1316869
   * Local provider behaves poorly when juju-mongodb is not installed
   on trusty Lp 1301538
@@ -4116,12 +4116,12 @@ The versions covered here are:
   juju-core 1.18.2 is available in trusty and backported to earlier
   series in the following PPA
     https://launchpad.net/~juju/+archive/stable
-  
+
   If you use the local provider, be sure to install the juju-local package
   if it is not already installed. Juju's local requirements have changed.
   Upgrading local juju environments without the juju-local package is not
   advised.
-  
+
 
   ###Resolved issues
 
@@ -4222,8 +4222,7 @@ The versions covered here are:
   ### Getting Juju
 
   juju-core 1.18.0 is available in trusty and backported to earlier series in
-  the following PPA [https://launchpad.net/~juju/+archive/stable](https://launch
-  pad.net/%7Ejuju/+archive/stable)
+  the following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
 
   If you use the local provider, be sure to install the juju-local package if it
   is not already installed. Juju’s local requirements have changed. Upgrading
@@ -4602,8 +4601,7 @@ The versions covered here are:
   ### Getting Juju
 
   juju-core 1.16.4 is available in trusty and backported to earlier series in
-  the following PPA [https://launchpad.net/~juju/+archive/stable](https://launch
-  pad.net/%7Ejuju/+archive/stable)
+  the following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
 
   ### Resolved issues
 
@@ -4620,8 +4618,7 @@ The versions covered here are:
   ### Getting Juju
 
   juju-core 1.16.3 is available in trusty and backported to earlier series in
-  the following PPA [https://launchpad.net/~juju/+archive/stable](https://launch
-  pad.net/%7Ejuju/+archive/stable)
+  the following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
 
 
   ### Resolved issues
@@ -4637,8 +4634,7 @@ The versions covered here are:
   ### Getting Juju
 
   juju-core 1.16.2 is available in trusty and backported to earlier series in
-  the following PPA [https://launchpad.net/~juju/+archive/stable](https://launch
-  pad.net/%7Ejuju/+archive/stable)
+  the following PPA [https://launchpad.net/~juju/+archive/stable](https://launchpad.net/%7Ejuju/+archive/stable)
 
 
   ### Resolved issues
