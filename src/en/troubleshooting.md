@@ -7,7 +7,6 @@ This section is dedicated to the troubleshooting of Juju when things go wrong.
 Make sure you have [Juju installed](./getting-started.html#installation) and
 configured correctly.
 
-- [Troubleshooting Juju itself](./troubleshooting-juju.html) - `Coming soon!`
 - [Juju logs](./troubleshooting-logs.html)
 - [Troubleshooting model upgrades](./troubleshooting-upgrade.html) - help for
 upgrading Juju across a model.
