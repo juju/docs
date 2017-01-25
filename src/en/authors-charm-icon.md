@@ -40,7 +40,7 @@ first place, then fear not, because we have an easy step-by-step guide for you.
 Before you start you will need:
 
   - A vector graphic editor. We strongly recommend the cross-platform and most excellent [ Inkscape ](http://www.inkscape.org) for all your vector graphic needs.
-  - The template file, [ which you can download from this link ](../media/icon.svg)
+  - The template file, [ which you can download from this link ](./media/icon.svg)
   - An existing logo you can import, or the ability to draw one in Inkscape
 
 Once you have those, fire up Inkscape and we can begin!

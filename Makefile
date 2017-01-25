@@ -35,4 +35,12 @@ check-links-production:
 	  --ignore-url=https://jujucharms.com/docs/stable \
 	  https://jujucharms.com/docs/devel/getting-started
 
+check-links-localhost:
+	linkchecker \
+	  --ignore-url=^http://localhost:6543/docs/devel \
+	  --ignore-url=^http://localhost:6543/docs/1.25 \
+	  --ignore-url=^http://localhost:6543/docs/2.0 \
+	  --ignore-url=http://localhost:6543/docs/stable \
+	  http://localhost:6543/docs/fix-404/getting-started
+
 .PHONY: build check-links-build check-links-production clean multi serve spell spell-commands sysdeps
