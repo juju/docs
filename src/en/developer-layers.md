@@ -163,9 +163,9 @@ excellent example of how to write a layer for a PHP application.
 ## Building a layer into a charm
 
 The
-[Getting started guide](developer-getting-started#assemble-the-layers)
+[Getting started guide](./developer-getting-started.html#assemble-the-layers)
 contains steps on how to build a layer into a charm.
 
 !!! Note: You must have the
-[Charm Tools](developer-getting-started#charm-tools)
+[Charm Tools](./developer-getting-started.html#charm-tools)
 software installed to use the `charm build` command.

@@ -3,12 +3,12 @@ Title: Using MAAS with Juju
 
 # Using a MAAS cloud
 
-Juju works closely with [MAAS][maas-site] to deliver the same experience 
+Juju works closely with [MAAS][maas-site] to deliver the same experience
 on bare metal that you would get using any other cloud.
 
 ## Registering a MAAS cloud with Juju
 
-Using the Juju `add-cloud` command, it is easy to add your MAAS clouds to 
+Using the Juju `add-cloud` command, it is easy to add your MAAS clouds to
 Juju's list of known clouds. The command is interactive, and will ask for
 a name and the endpoint to use. A sample session is shown below.
 
@@ -39,7 +39,7 @@ You may bootstrap with 'juju bootstrap mainmaas'
 
 This will add both the 'mainmaas' cloud, which you can confirm
 by running:
- 
+
 ```bash
 juju clouds
 ```
@@ -74,7 +74,7 @@ sudo maas-region apikey --username=<user>
 **Note:** Juju does not echo this key back to the screen.
 
 Now you can create a Juju controller with the bootstrap command:
- 
+
 ```bash
 juju bootstrap mainmaas mainmaas-controller
 ```
@@ -83,10 +83,10 @@ Above, the Juju controller was called 'mainmaas-controller'.
 
 ## Manually defining MAAS clouds
 
-If for any reason you would rather define all your MAAS clouds in a 
+If for any reason you would rather define all your MAAS clouds in a
 single YAML configuration file, Juju can also import cloud definitions.
-For more details on this, see the 
+For more details on this, see the
 [documentation on manually adding MAAS clouds][maas-manual]
 
 [maas-site]: https://maas.io
-[maas-manual]: ./clouds-maas-manual
+[maas-manual]: ./clouds-maas-manual.html

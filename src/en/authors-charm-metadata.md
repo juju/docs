@@ -83,7 +83,7 @@ compatible with. This is useful when the code uses features introduced in a
 specific version of Juju. When supplied this value is the lowest version of
 Juju controller that will run the charm.
 
-[Storage](./developer-storage.md) can also be declared in a charm's metadata,
+[Storage](./developer-storage.html) can also be declared in a charm's metadata,
 as such:
 
 ```yaml

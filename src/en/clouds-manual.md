@@ -2,15 +2,15 @@ Title: Adding a manual cloud
 
 # Using a "Manual" cloud
 
-Juju caters for the 
-case where you may not be able to access a more traditional cloud in a 
-straightforward way; maybe you can't create additional instances, or perhaps 
+Juju caters for the
+case where you may not be able to access a more traditional cloud in a
+straightforward way; maybe you can't create additional instances, or perhaps
 your cloud is really a collection of disparate hardware.
 
-Whatever the case, as long as Juju can log into these machines they can be used 
+Whatever the case, as long as Juju can log into these machines they can be used
 as part of a Juju cloud. It won't be _quite_ the same as using a standard cloud
 - without the ability to create new instances when they are desired, you will
-be missing out on some of the Juju magic. You can still deploy and manage 
+be missing out on some of the Juju magic. You can still deploy and manage
 applications though, with a bit of extra effort.
 
 ## Prerequisites for using a manual cloud:
@@ -23,9 +23,9 @@ applications though, with a bit of extra effort.
 
 ## Bootstrapping the cloud
 
-As with other clouds, Juju needs to create a controller to manage models and 
-other instances in the cloud. Bootstrapping is the same as for 'regular' 
-clouds, except in this case, after the cloud type you should supply the network 
+As with other clouds, Juju needs to create a controller to manage models and
+other instances in the cloud. Bootstrapping is the same as for 'regular'
+clouds, except in this case, after the cloud type you should supply the network
 address of the machine you wish to use as the controller:
 
 ```bash
@@ -38,16 +38,16 @@ Note that it is also possible to use the other common bootstrap parameters here
 ## Adding machines to the cloud
 
 The `bootstrap` command creates the controller and initial models that Juju
-uses. Deploying applications will require additional machines to be made 
+uses. Deploying applications will require additional machines to be made
 available though. The more conventional Juju cloud types can create machines
 automatically, but in the case of a manual cloud you will have to specify these
 resources.
 
-This is done by using the `add-machine` command in Juju. This will install the 
+This is done by using the `add-machine` command in Juju. This will install the
 default series on a given resource, and prepare it for
 deploying applications.
 
-For example, if you have a machine with the IP address 192.168.1.129, you could 
+For example, if you have a machine with the IP address 192.168.1.129, you could
 add it to your manual cloud with the command:
 
 ```bash
@@ -60,24 +60,24 @@ sudo privileges on the remote machine, you will be asked for the password once
 again as the installer initialises.
 
 The process should not take too long, and you will see messages on the screen as
-the various stages progress. Once the command has returned, you can check 
+the various stages progress. Once the command has returned, you can check
 the machine is available by running:
 
 ```bash
 juju status
 ```
 
-## Deploying 
+## Deploying
 
 Usually Juju will create machines as it needs them. By default, using a charm
-to deploy an application will automatically create a machine first and then 
-deploy the new application. 
+to deploy an application will automatically create a machine first and then
+deploy the new application.
 
 With a manual cloud, you need to create your machines in advance, so Juju will
 need to know which of the machines you wish to target when you deploy a charm
 (or scale out). This can be done with the use of the
-[placement directives][placement]: you need to use the 
-'--to' option to specify the destination, which is either a machine or a 
+[placement directives][placement]: you need to use the
+'--to' option to specify the destination, which is either a machine or a
 container on a machine:
 
 ```bash
@@ -89,7 +89,7 @@ juju deploy wordpress --to 0
 
 There are some additional things to note when using the Manual provider:
 
- - Machines are known to the model Juju is using. If you destroy the model and 
+ - Machines are known to the model Juju is using. If you destroy the model and
    create a new one, you will have to add the machines again to the new model.
  - To improve performance, consider running a local APT proxy (see also
    [configuring a model][models-config]).
@@ -97,5 +97,5 @@ There are some additional things to note when using the Manual provider:
 
 
 [models-config]: ./models-config.html
-[placement]: ./charms-deploying#deploying-to-specific-machines-and-containers
+[placement]: ./charms-deploying.html#deploying-to-specific-machines-and-containers
 [commands]: ./commands.html

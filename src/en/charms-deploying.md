@@ -317,7 +317,7 @@ To use binding with bundles, see the related section in
 [Using and creating bundles](./charms-bundles.html).
 
 To learn about `extra-bindings`, which provide a way to declare an extra
-bindable endpoint that is not a relation, see [Charm metadata](./charm-metadata.html).
+bindable endpoint that is not a relation, see [Charm metadata](./authors-charm-metadata.html).
 
 
 ## Juju retry-provisioning
