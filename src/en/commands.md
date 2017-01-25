@@ -28,7 +28,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -211,7 +211,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n  (= 1)_
 
@@ -264,7 +264,7 @@ Click on the expander to see details for each command.
          juju add-machine lxd -n 2             (starts 2 new machines with an lxd container)
          juju add-machine lxd:4                (starts a new lxd container on machine 4)
          juju add-machine --constraints mem=8G (starts a machine with at least 8GB RAM)
-         juju add-machine ssh:user@10.10.0.3   (manually provisions a machine with ssh)
+         juju add-machine ssh:user@10.10.0.3   (manually provisions machine with ssh)
          juju add-machine zone=us-east-1a      (start a machine in zone us-east-1a on AWS)
          juju add-machine maas2.name           (acquire machine maas2.name on MAAS)
 
@@ -312,20 +312,32 @@ Click on the expander to see details for each command.
 
    Adding a model is typically done in order to run a specific workload.
 
-   To add a model, you must at a minimum specify a model name. You may
-   also supply model-specific configuration, a credential, and which
-   cloud/region to deploy the model to. The cloud/region and credentials
+   To add a model, you must specify a model name. Model names can be duplicated 
+   across controllers but must be unique per user for any given controller. 
+   In other words, Alice and Bob can each have their own model called "secret" but 
+   Alice can have only one model called "secret" in a controller.
+
+   Model names may only contain lowercase letters, digits and hyphens, and 
+   may not start with a hyphen.
+
+   To add a model, Juju requires a credential:
+
+             * if you have a default (or just one) credential defined at client
+              (i.e. in credentials.yaml), then juju will use that;
+             * if you have no default (and multiple) credentials defined at the client, 
+              then you must specify one using --credential;
+             * as the admin user you can omit the credential, 
+              and the credential used to bootstrap will be used.
+
+   
+   To add a credential for add-model, use one of the "juju add-credential" or 
+   "juju autoload-credentials" commands. These will add credentials 
+   to the Juju client, which "juju add-model" will upload to the controller 
+   as necessary.
+
+   You may also supply model-specific configuration as well as a
+   cloud/region to which this model will be deployed. The cloud/region and credentials
    are the ones used to create any future resources within the model.
-
-   Model names can be duplicated across controllers but must be unique for
-   any given controller. Model names may only contain lowercase letters,
-   digits and hyphens, and may not start with a hyphen.
-
-   Credential names are specified either in the form "credential-name", or
-   "credential-owner/credential-name". There is currently no way to acquire
-   access to another user's credentials, so the only valid value for
-   credential-owner is your own user name. This may change in a future
-   release.
 
    If no cloud/region is specified, then the model will be deployed to
    the same cloud/region as the controller model. If a region is specified
@@ -351,11 +363,11 @@ Click on the expander to see details for each command.
 
 ^# add-relation
 
-   **Usage:** ` juju add-relation [options] <application1>[:<relation name1>] <application2>[:<relation name2>]`
+   **Usage:** ` juju add-relation [options] <application1>[:<endpoint name1>] <application2>[:<endpoint name2>]`
 
    **Summary:**
 
-   Add a relation between two applications.
+   Add a relation between two application endpoints.
 
    **Options:**
 
@@ -365,7 +377,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    **Aliases:**
 
@@ -390,7 +402,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -419,7 +431,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -463,7 +475,7 @@ Click on the expander to see details for each command.
 
 ^# add-storage
 
-   **Usage:** ` juju add-storage [options] <unit name> <storage directive>`
+   **Usage:** ` juju add-storage [options] <unit name> <charm storage name>[=<storage constraints>]`
 
    **Summary:**
 
@@ -477,7 +489,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -549,7 +561,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -587,7 +599,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n, --num-units  (= 1)_
 
@@ -711,14 +723,6 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
-   _--format  (= json)_
-
-   Specify output format (json|yaml)
-
-   _-o, --output (= "")_
-
-   Specify an output file
-
    _--yes  (= false)_
 
    Agree to terms non interactively
@@ -747,6 +751,8 @@ Click on the expander to see details for each command.
 
 
 
+ 
+
 ^# agreements
 
    **Usage:** ` juju agreements [options]`
@@ -770,7 +776,7 @@ Click on the expander to see details for each command.
    Specify an output file
 
    
-  **Details:**
+   **Details:**
 
 
    List terms the user has agreed to.
@@ -799,7 +805,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--model-uuid (= "")_
 
@@ -827,6 +833,8 @@ Click on the expander to see details for each command.
 
 
 
+ 
+
 ^# attach
 
    **Usage:** ` juju attach [options] application name=file`
@@ -843,7 +851,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -851,11 +859,14 @@ Click on the expander to see details for each command.
 
    This command uploads a file from your local disk to the juju controller to be
    used as a resource for an application.
-   
+
+
+
+ 
 
 ^# autoload-credentials
 
-   **Usage:** `juju autoload-credentials`
+   **Usage:** ` juju autoload-credentials`
 
    **Summary:**
 
@@ -874,29 +885,28 @@ Click on the expander to see details for each command.
    including the locations searched.
 
    EC2
-   Credentials and regions:
- 
-   1. On Linux, &#36;HOME/.aws/credentials and &#36;HOME/.aws/config
-   2. Environment variables AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+           Credentials and regions:
+
+             1. On Linux, $HOME/.aws/credentials and $HOME/.aws/config
+             2. Environment variables AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
    
    GCE
-   Credentials:
+           Credentials:
 
-   1. A JSON file whose path is specified by the
-   GOOGLE_APPLICATION_CREDENTIALS environment variable
+             1. A JSON file whose path is specified by the
+                GOOGLE_APPLICATION_CREDENTIALS environment variable
+             2. On Linux, $HOME/.config/gcloud/application_default_credentials.json
+                Default region is specified by the CLOUDSDK_COMPUTE_REGION environment
+                variable.
 
-   2. On Linux, &#36;HOME/.config/gcloud/application_default_credentials.json
-   Default region is specified by the CLOUDSDK_COMPUTE_REGION environment
-   variable.
-
-   3. On Windows, &#37;APPDATA&#37;&#92;gcloud&#92;application_default_credentials.json
+             3. On Windows, APPDATA/gcloud/application_default_credentials.json
    
    OpenStack
-   Credentials:
+           Credentials:
 
-   1. On Linux, &#36;HOME/.novarc
-   2. Environment variables OS_USERNAME, OS_PASSWORD, OS_TENANT_NAME,
-   OS_DOMAIN_NAME
+             1. On Linux, $HOME/.novarc
+             2. Environment variables OS_USERNAME, OS_PASSWORD, OS_TENANT_NAME,
+                OS_DOMAIN_NAME
    
    Example:
 
@@ -914,7 +924,7 @@ Click on the expander to see details for each command.
    [add-credential](#add-credential)
 
 
-
+ 
 
 ^# backups
 
@@ -932,7 +942,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -1187,7 +1197,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -1379,7 +1389,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -1418,7 +1428,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -1449,6 +1459,7 @@ Click on the expander to see details for each command.
           juju config mysql dataset-size
           juju config mysql --reset dataset-size,backup_dir
           juju config apache2 --file path/to/config.yaml
+          juju config mysql dataset-size=80% backup_dir=/vol1/mysql/backups
           juju config apache2 --model mymodel --file /home/ubuntu/mysql.yaml
 
 
@@ -1583,7 +1594,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-download  (= false)_
 
@@ -1663,7 +1674,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -1780,7 +1791,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-host-key-checks  (= false)_
 
@@ -1855,7 +1866,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--ms  (= false)_
 
@@ -2009,7 +2020,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n, --num-units  (= 1)_
 
@@ -2250,7 +2261,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2403,7 +2414,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -2499,7 +2510,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2530,7 +2541,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2783,7 +2794,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2826,7 +2837,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -2888,7 +2899,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -2957,6 +2968,17 @@ Click on the expander to see details for each command.
 
    `juju models`, `juju machines`, and `juju status`.
 
+   Valid access levels for models are:
+
+             read
+             write
+             admin
+   
+   Valid access levels for controllers are:
+
+             login
+             add-model
+             superuser
 
    **Examples:**
 
@@ -2975,18 +2997,6 @@ Click on the expander to see details for each command.
    Grant user 'maria' 'add-model' access to the controller:
 
           juju grant maria add-model
-
-   Valid access levels for models are:
-
-          read
-          write
-          admin
-
-   Valid access levels for controllers are:
-
-          login
-          add-model
-          superuser
 
 
    **See also:**
@@ -3014,7 +3024,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-browser  (= false)_
 
@@ -3050,13 +3060,6 @@ Click on the expander to see details for each command.
 
    show help on a command or other topic
 
-  
-
-   **See also:**
-
-   [opics](#opics)
-
-
  
 
 ^# help-tool
@@ -3086,7 +3089,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -3123,6 +3126,7 @@ Click on the expander to see details for each command.
    [ssh-keys](#ssh-keys)
 
 
+ 
 
 ^# kill-controller
 
@@ -3194,7 +3198,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3272,7 +3276,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -3358,7 +3362,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3604,7 +3608,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3704,7 +3708,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3835,7 +3839,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -3975,7 +3979,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4017,7 +4021,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4065,7 +4069,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4122,7 +4126,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4166,7 +4170,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--name  (= )_
 
@@ -4226,7 +4230,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4450,7 +4454,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4511,7 +4515,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4523,6 +4527,62 @@ Click on the expander to see details for each command.
 
    Display recently collected metrics.
 
+
+
+ 
+
+^# migrate
+
+   **Usage:** ` juju migrate [options] <model-name> <target-controller-name>`
+
+   **Summary:**
+
+   Migrate a hosted model to another controller.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   
+   **Details:**
+
+
+   migrate begins the migration of a model from its current controller to
+   a new controller. This is useful for load balancing when a controller
+   is too busy, or as a way to upgrade a model's controller to a newer
+   Juju version. Once complete, the model's machine and and unit agents
+   will be connected to the new controller. The model will no longer be
+   available at the source controller.
+
+   Note that only hosted models can be migrated. Controller models can
+   not be migrated.
+
+   If the migration fails for some reason, the model be returned to its
+   original state with the model being managed by the original
+   controller.
+
+   In order to start a migration, the target controller must be in the
+   juju client's local configuration cache. See the juju "login" command
+   for details of how to do this.
+
+   This command only starts a model migration - it does not wait for its
+   completion. The progress of a migration can be tracked using the
+   "status" command and by consulting the logs.
+
+
+   **See also:**
+
+   [login](#login)
+
+   [controllers](#controllers)
+
+   [status](#status)
 
 
  
@@ -4547,7 +4607,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4744,7 +4804,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -4917,11 +4977,11 @@ Click on the expander to see details for each command.
 
 ^# relate
 
-   **Usage:** ` juju add-relation [options] <application1>[:<relation name1>] <application2>[:<relation name2>]`
+   **Usage:** ` juju add-relation [options] <application1>[:<endpoint name1>] <application2>[:<endpoint name2>]`
 
    **Summary:**
 
-   Add a relation between two applications.
+   Add a relation between two application endpoints.
 
    **Options:**
 
@@ -4931,7 +4991,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    **Aliases:**
 
@@ -4956,7 +5016,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4997,7 +5057,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5033,7 +5093,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--series (= "")_
 
@@ -5150,7 +5210,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5200,7 +5260,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5254,7 +5314,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5302,7 +5362,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5410,7 +5470,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-retry  (= false)_
 
@@ -5443,7 +5503,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -5501,7 +5561,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5541,7 +5601,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
 
  
@@ -5625,7 +5685,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--machine  (= )_
 
@@ -5700,7 +5760,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -5806,7 +5866,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-host-key-checks  (= false)_
 
@@ -5931,7 +5991,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6065,7 +6125,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6103,7 +6163,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6154,7 +6214,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6163,7 +6223,7 @@ Click on the expander to see details for each command.
    Set the plan for the deployed application, effective immediately.
 
    The specified plan name must be a valid plan that is offered for this
-   particular charm. Use "juju plans <charm>" for more information.
+   particular charm. Use "juju list-plans <charm>" for more information.
 
 
    **Examples:**
@@ -6195,7 +6255,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6241,7 +6301,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--name (= "")_
 
@@ -6277,7 +6337,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6309,7 +6369,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6446,7 +6506,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6532,7 +6592,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6633,7 +6693,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n  (= 0)_
 
@@ -6698,7 +6758,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6792,7 +6852,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -6836,7 +6896,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-host-key-checks  (= false)_
 
@@ -6912,7 +6972,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6969,7 +7029,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -7070,7 +7130,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -7114,7 +7174,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--name  (= )_
 
@@ -7174,7 +7234,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
@@ -7296,7 +7356,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--public  (= false)_
 
@@ -7361,7 +7421,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -7443,7 +7503,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -7511,10 +7571,6 @@ Click on the expander to see details for each command.
 
    Controller to operate in
 
-   _--cloud (= "")_
-
-   Cloud for which to update the credential
-
    _--credential (= "")_
 
    Name of credential to update
@@ -7573,7 +7629,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--path (= "")_
 
@@ -7742,7 +7798,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--reset-previous-upgrade  (= false)_
 
@@ -7818,7 +7874,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts `[<controller name>:]<model name>`
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -7964,3 +8020,7 @@ Click on the expander to see details for each command.
    [models](#models)
 
    [users](#users)
+
+
+ 
+
