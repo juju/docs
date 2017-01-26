@@ -99,9 +99,9 @@ issues between Python 2 and 3.
 #### Reactive
 
 Another software paradigm is
-[reactive programming](https://en.wikipedia.org/wiki/Reactive_programming). Do
-something when the state or conditions are correct. Juju offers the
-[charms.reactive](http://pythonhosted.org/charms.reactive/) package to allow
+[reactive programming][reactive]. Do
+something when the state or conditions indicate. Juju offers the
+[charms.reactive][charmsreactive] package to allow
 charms to be written in the reactive paradigm. In charms.reactive code
 execution is controlled by boolean logic. You can define when the conditions
 are right, run this code, or when something is not set, run different code or
@@ -215,3 +215,6 @@ the recommended section of the Juju Charm Store. Charms in the recommended
 section must follow Charm Store policy and best practices for charms. These
 recommended charms have a shorter namespace on the Charm Store website, and are
 listed higher in search results on <http://jujucharms.com>
+
+[reactive]: https://en.wikipedia.org/wiki/Reactive_programming
+[charmsreactive]: http://pythonhosted.org/charms.reactive/
