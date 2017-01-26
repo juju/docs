@@ -141,14 +141,16 @@ charm build
 ```
 
 Build will take all of the layers and interfaces included by your charm, either
-from your local LAYER_PATH and INTERFACE_PATH directories or automatically
+from your local `LAYER_PATH` and `INTERFACE_PATH` directories or automatically
 downloaded from [interfaces.juju.solutions](http://interfaces.juju.solutions/)
-and create a new charm into $JUJU_REPOSITORY/trusty/vanilla:
+and create a new charm in `$JUJU_REPOSITORY/trusty/vanilla`:
 
-    build: Composing into /home/user/charms
-    build: Processing layer: layer:basic
-    build: Processing layer: layer:apache-php
-    build: Processing layer: .
+```
+build: Composing into /home/user/charms
+build: Processing layer: layer:basic
+build: Processing layer: layer:apache-php
+build: Processing layer: .
+```
 
 ![Charm layer diagram](./media/vanilla-layers.png)
 
@@ -178,14 +180,14 @@ interact with one another. All new charms require tests that verify the
 application installs, configures, scales and relates as intended. The tests
 should be self-contained, installing all the required packages so the tests can
 be run automatically with a tool called
-[`bundletester`](https://github.com/juju-solutions/bundletester). Similar to
+[`bundletester`][bundletester]. Similar to
 hooks the tests should be executable files in a `tests/` directory of the charm.
-While you can write tests in Bash or other languages, the [Amulet
-library](./tools-amulet.html) is highly suggested and makes it easy to write
+While you can write tests in Bash or other languages, it is reccommended to
+use the [Amulet library][amulet], which makes it easy to write charm
 tests in Python.
 
 For more information about writing tests please refer to the
-[charm testing guide](./developer-testing.html).
+[charm testing guide documentation][charm testing].
 
 ## Submitting your charm for review
 
@@ -195,3 +197,9 @@ the recommended section of the Juju Charm Store. Charms in the recommended
 section must follow Charm Store policy and best practices for charms. These
 recommended charms have a shorter namespace on the Charm Store website, and are
 listed higher in search results on <http://jujucharms.com>
+
+
+
+[amulet]: ./tools-amulet.html
+[bundletester]: https://github.com/juju-solutions/bundletester
+[charm testing]: (./developer-testing.html)
