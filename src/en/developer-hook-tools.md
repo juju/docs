@@ -294,8 +294,7 @@ from charmhelpers.core.hookenv import open_port
 open_port(80, protocol='TCP')
 
 # Open a range of ports
-for port in range(1000, 2000):
-    open_port(port, protocol='UDP')
+open_port("1000-2000", protocol='UDP')
 ```
 bash:  
 ```bash
