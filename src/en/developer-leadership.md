@@ -98,7 +98,9 @@ on users of `leader-set`.
 
 ### How do I...
 
-### ...share one-shot configuration among units?
+Click on the expander to see details for each command.
+
+^# ...share one-shot configuration among units?
 
 Assuming your own implementations of `create_settings` and `valid_settings`, you
 can use the two pseudo-python snippets below:
@@ -128,7 +130,7 @@ can use the two pseudo-python snippets below:
     exiting without error, to wait for the `leader-settings-changed` which
     should arrive soon).
 
-### ...share varying configuration among units?
+^# ...share varying configuration among units?
 
 You should be able to use the exact same constructs as above, in the same way;
 you just might want to call `set_shared_settings` in a few more places. If you
@@ -142,7 +144,7 @@ use the output of `status-get --application` to determine up-to-date membership,
 and wait for the set of acknowledged units in the peer relation to match that
 list.
 
-### ...guarantee that a long-lived process runs on just one unit at once?
+^# ...guarantee that a long-lived process runs on just one unit at once?
 
 The `hacluster` charm used in our OpenStack deploys will set up corosync and
 pacemaker, and may well be relevant to your needs; if that's not a good fit,
@@ -167,7 +169,7 @@ primitives. As a charm author, this is unlikely to be the best use of your time
 -- extending the `hacluster` charm to cover your use case is likely to be more
 efficient.
 
-### ...render it likely that a long-lived process runs on one unit at a time?
+^# ...render it likely that a long-lived process runs on one unit at a time?
 
 !!! Note: this approach is not reliable. It may be good enough for some
 workloads, but don't use it unless you understand the forces in play and the
