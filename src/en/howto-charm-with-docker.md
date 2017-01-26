@@ -49,7 +49,7 @@ root charm directory.
 The docker layer makes use of the
 [Charm Layers](authors-charm-building.html)
 concept building off the base charm and creating its own layer of added
-functionality,
+functionality.
 
 ### Start with Docker, and build your own
 

@@ -94,6 +94,26 @@ The reactive framework used with layered charms runs under Python 3, so you'll
 want to be aware of [compatibility](http://python-future.org/compatible_idioms.html)
 issues between Python 2 and 3.
 
+### Reactive and layered charms
+
+#### Reactive
+
+Another software paradigm is
+[reactive programming][reactive]. Do
+something when the state or conditions indicate. Juju offers the
+[charms.reactive][charmsreactive] package to allow
+charms to be written in the reactive paradigm. In charms.reactive code
+execution is controlled by boolean logic. You can define when the conditions
+are right, run this code, or when something is not set, run different code or
+do nothing at all.
+
+#### Layers
+
+The idea of charm layers is to combine objects or data into more complex objects
+or data. When applied to Charms, layers allow you to extend or build off
+other charms to make more complex or useful charms. The `layer.yaml` file in
+the root directory of the charm controls what layer(s) will be imported.
+
 ### Creating a new layer
 
 First off, you require a [local charm repository](./charms-deploying.html) in
@@ -195,3 +215,6 @@ the recommended section of the Juju Charm Store. Charms in the recommended
 section must follow Charm Store policy and best practices for charms. These
 recommended charms have a shorter namespace on the Charm Store website, and are
 listed higher in search results on <http://jujucharms.com>
+
+[reactive]: https://en.wikipedia.org/wiki/Reactive_programming
+[charmsreactive]: http://pythonhosted.org/charms.reactive/
