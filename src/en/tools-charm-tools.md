@@ -289,15 +289,19 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   or bundle revision (revision need to be specified), so that it can be shared
   with other users and also referenced without specifying the revision.
 
-  Two channels are supported: "stable" and "development"; the "stable" channel is
-  used by default.
+  Multiple release channels are supported. The channels are:
+
+ - **stable**: (default) This is the latest, tested, working stable version of the charm.
+ - **candidate**: A release candidate. There is high confidence this will work fine, but there may be minor bugs.
+ - **beta**: A beta testing milestone release.
+ - **edge**: The very latest version - expect bugs!
 
       charm release ~lars/xenial/wordpress
 
   To select another channel, use the `--channel` option, for instance:
 
       charm release ~lars/xenial/wordpress --channel stable
-      charm release xenial/django-42 -c development --resource website-3 --resource data-2
+      charm release xenial/django-42 -c beta --resource website-3 --resource data-2
 
   If your charm uses resources, you must specify what revision of each resource
   will be released along with the charm, using the --resource flag (one per
