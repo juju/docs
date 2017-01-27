@@ -98,7 +98,7 @@ on users of `leader-set`.
 
 ### How do I...
 
-Click on the expander to see details for each command.
+Click on the expander to see details for each.
 
 ^# ...share one-shot configuration among units?
   
