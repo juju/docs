@@ -1,28 +1,22 @@
 Title: Getting started developing charms  
 
-# Getting Started developing charms
+# Getting Started with developing charms
 
 The developer guide is for anyone wanting to write bits of code that we call
 charms. This guide introduces some new concepts that, once learned, can help
 you make some very powerful and reusable code components in the Juju ecosystem.
 
-## Install Juju
-To develop charms you will need the Juju client installed. The Juju client is
-available for Linux, Windows and Mac OS.
+## Requirements
 
-## Configure Juju
-Juju needs to be configured before it can model, configure or manage
-applications. Juju defaults to an Amazon EC2 provider, but for testing and
-development you may wish to configure the local provider such as LXD.
+  - To develop charms you will need the Juju client installed. The Juju client is
+available for Linux, Windows and Mac OS
 
-## Test your Juju setup
-You will want to make sure everything is running properly before writing code.
-Bootstrapping a controller is a good way to tell if Juju is
-configured correctly. Please follow the steps at the
-['Getting Started' page in the user guide](./getting-started.html)
-to make sure you have a working local model before proceeding.
+  - Juju needs to be configured before it can model, configure or manage
+applications. For testing and development you may wish to configure LXD
 
-This guide also uses the [Vanilla PHP Forum software](http://vanillaforums.org)
+  - Test your Juju setup
+
+  - This guide also uses the [Vanilla PHP Forum software][vanilla]
 as our example application for getting started charming, as it's a great example
 of a typical three factor application consisting of a Database, a PHP web
 application served over HTTP.
@@ -30,9 +24,10 @@ application served over HTTP.
 ## Install libraries and tools
 
 ### Charm Tools
-We have created tools to make writing charms easier. Developers should [install
-the Charm Tools](./tools-charm-tools.html) software. Charm Tools are command line
-utilities that make it easy to create, build, fetch and find common charm errors.
+We have created tools to make writing charms easier. Developers should 
+[install the Charm Tools](./tools-charm-tools.html) software. Charm Tools are 
+command line utilities that make it easy to create, build, fetch and find
+common charm errors.
 
 ```bash
 sudo apt-get install charm-tools
@@ -96,7 +91,7 @@ issues between Python 2 and 3.
 
 ### Creating a new layer
 
-First off, you require a [local charm repository](./charms-deploying.html) in
+First off, you require a [local charm repository][charms-local] in
 which to work. This involves creating three directories -- `layers`,
 `interfaces`, and `charms` -- and setting some environment variables.
 
@@ -142,7 +137,7 @@ charm build
 
 Build will take all of the layers and interfaces included by your charm, either
 from your local `LAYER_PATH` and `INTERFACE_PATH` directories or automatically
-downloaded from [interfaces.juju.solutions](http://interfaces.juju.solutions/)
+downloaded from the [interfaces.juju.solutions][interfaces]
 and create a new charm in `$JUJU_REPOSITORY/trusty/vanilla`:
 
 ```
@@ -198,8 +193,9 @@ section must follow Charm Store policy and best practices for charms. These
 recommended charms have a shorter namespace on the Charm Store website, and are
 listed higher in search results on <http://jujucharms.com>
 
-
-
-[amulet]: ./tools-amulet.html
-[bundletester]: https://github.com/juju-solutions/bundletester
-[charm testing]: (./developer-testing.html)
+[vanilla]:         http://vanillaforums.org
+[charms-local]:    ./charms-deploying.html#deploying-from-a-local-charm
+[amulet]:          ./tools-amulet.html
+[bundletester]:    https://github.com/juju-solutions/bundletester
+[charm testing]:   ./developer-testing.html
+[interfaces]:      http://interfaces.juju.solutions/
