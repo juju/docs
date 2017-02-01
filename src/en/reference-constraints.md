@@ -88,16 +88,19 @@ multiple constraints delimited by a space.
 
 - tags
 
-    Comma-delimited positive and negative (prefixed with "^") tags assigned to
-    the machine. Currently only supported by MAAS.
+    Comma-delimited tags assigned to the machine. Tags can be positive, 
+    denoting an attribute of the machine, or negative (prefixed with "^"),
+    to denote something that the machine does not have. Currently only
+    supported by MAAS.
 
     Example: tags=virtual,^dualnic
 
 - spaces
 
-    Permits specifying a list of Juju network space names that a unit
-    or machine needs access to. Both positive and negative (prefixed with "^")
-    spaces can be in the list, separated by commas.
+    Permits specifying a comma-delimited list of Juju network space names
+    that a unit or machine needs access to. Space names can be positive,
+    listing an attribute of the space, or negative (prefixed with "^"),
+    listing something the space does not have, separated by commas.
 
     Example: spaces=storage,db,^logging,^public (meaning, select machines connected
     to the storage and db spaces, but NOT to logging or public spaces).
