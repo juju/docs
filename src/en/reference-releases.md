@@ -90,7 +90,7 @@ juju bootstrap cloud/region my-controller --config agent-stream=proposed
 
 ## Development
 
-Current development version is 2.1-beta4.
+Current development version is 2.1-beta5.
 
 Development releases provide new features that are being stabilised.
 These releases are *not* suitable for production environments. Upgrading
@@ -112,15 +112,15 @@ snap install juju --beta --devmode
 ```
 
 CentOS:
-: [juju-core_2.1-beta4-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-core_2.1-beta4.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-core_2.1-beta4.tar.gz/+md5))
+: [juju-core_2.1-beta5-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-core_2.1-beta5.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-core_2.1-beta5.tar.gz/+md5))
 {: .instruction }
 
 Windows:
-: [juju-setup-2.1-beta4.exe](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-setup-2.1-beta4.exe) ([md5](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-setup-2.1-beta4.exe/+md5))
+: [juju-setup-2.1-beta5.exe](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-setup-2.1-beta5.exe) ([md5](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-setup-2.1-beta5.exe/+md5))
 {: .instruction }
 
 OS X:
-: [juju-core_2.1-beta4-osx.tar.gz](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-2.1-beta4-osx.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-2.1-beta4-osx.tar.gz/+md5))
+: [juju-core_2.1-beta5-osx.tar.gz](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-2.1-beta5-osx.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-2.1-beta5-osx.tar.gz/+md5))
 {: .instruction }
 
 [brew]: http://brew.sh/
