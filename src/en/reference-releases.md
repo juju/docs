@@ -112,7 +112,7 @@ snap install juju --beta --devmode
 ```
 
 CentOS:
-: [juju-core_2.1-beta5-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-core_2.1-beta5.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-core_2.1-beta5.tar.gz/+md5))
+: [juju-core_2.1-beta5-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-2.1-beta5-centos7.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-2.1-beta5-centos7.tar.gz))
 {: .instruction }
 
 Windows:
