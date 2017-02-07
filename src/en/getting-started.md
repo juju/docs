@@ -21,7 +21,7 @@ Begin by installing the required software:
 
 ```no-highlight
 sudo add-apt-repository -u ppa:juju/stable
-sudo apt install juju zfsutils-linux
+sudo apt install juju lxd zfsutils-linux
 ```
 
 ## Groups and LXD initialisation 
