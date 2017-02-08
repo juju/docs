@@ -119,9 +119,14 @@ resources:
     description: example resource
 ```
 
-`payloads` allows you to register payloads such as LXD, KVM, and docker with
-Juju. This lets the operator better understand the purpose and function of these
-payloads on a given machine.
+## Payloads
+
+You can use the `payloads` section of metadata.yaml to help the user of a charm
+better understand the purpose of payloads such as LXC, KVM and docker. This is
+especially useful in large and complex deployments.
+
+Payloads are defined by creating a class for the payload, such as `monitoring`
+or `kvm- guest`, and then assigning a type:
 
 ```yaml
 payloads:
@@ -130,6 +135,18 @@ payloads:
     kvm-guest:
         type: kvm
 ```
+
+Payloads can be viewed using [juju list-payloads][list-payloads] and managed from
+the charm hook using the following commands:
+
+- payload-register
+- payload-unregister
+- payload-status-set
+
+See the [Hook tools documentation][hook-payloads] for further details on these
+payload commands. 
+
+## Extra-bindings
 
 `extra-bindings` represents an extra bindable endpoint that is not a relation.
 These are useful when you want to have Juju provide distinct addresses for an
@@ -165,3 +182,6 @@ Other available fields are:
 
 Other field names should be considered to be reserved; please don't use any not
 listed above to avoid issues with future versions of Juju.
+
+[hook-payloads]:./reference-hook-tools.html#payload-status-set
+[list-payloads]:./commands.html#list-payloads
