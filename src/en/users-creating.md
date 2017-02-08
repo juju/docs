@@ -53,8 +53,9 @@ MD4TA2ppbTAVExMxMC4xOTUuMTAuMTMwOjE3MDcwBCDENImZEDvYcWLU1USgaUJQXhWR98JNLWcbS0-M
 grant access.
 ```
 
-The instructions are followed. The user is registered typically on another
-client system:
+Send the command to Jon. The registration string contained in the command you
+send encodes the addresses of the controller. All Jon must do is enter the
+command on a client system with Juju installed and with internet access:
 
 ```bash
 juju register
