@@ -55,7 +55,8 @@ grant access.
 
 Send the command to Jon. The registration string contained in the command you
 send encodes the addresses of the controller. All Jon must do is enter the
-command on a client system with Juju installed and with internet access:
+command on a client system with Juju installed and that is able to access the
+target controller's network:
 
 ```bash
 juju register
