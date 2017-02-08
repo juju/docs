@@ -41,10 +41,10 @@ store the controller’s CA certificate in a file for Prometheus to verify the
 server’s certificate against:
 
 ```
-$ juju controller-config ca-cert > /path/to/juju-ca.crt
+juju controller-config ca-cert > /path/to/juju-ca.crt
 ```
 
-!!! Note: in 2.1-beta5 controller-config would print out the string in YAML
+!!! Note: in 2.1-beta5 `controller-config` will print out the string in YAML
 format, which will include a YAML multi-line prefix. For 2.1-beta5 you have
 to remove the YAML formatting, as described in [this Launchpad bug][https://bugs.launchpad.net/juju/+bug/1661506].
 
