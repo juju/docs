@@ -83,6 +83,8 @@ compatible with. This is useful when the code uses features introduced in a
 specific version of Juju. When supplied this value is the lowest version of
 Juju controller that will run the charm.
 
+## Storage
+
 [Storage](./developer-storage.html) can also be declared in a charm's metadata,
 as such:
 
@@ -108,6 +110,8 @@ and whether it's designed for deployment as a
     will participate in.
   - if the charm is subordinate, it must contain at least one `requires`
     relation with container scope.
+
+## Resources
 
 `resources` allows you to add blobs that your charm can utilize.
 
@@ -168,7 +172,6 @@ juju deploy ~/path/to/charm/foo --bind "cluster=admin-api public=public-api inte
 
 And running `network-get cluster --primary-address` will return only the
 address coming from the "admin-api" space.
-
 
 Endpoint names are strings and must not match existing relation names from
 the Provides, Requires, or Peers metadata sections. The values beside each
