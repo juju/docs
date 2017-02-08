@@ -9,13 +9,17 @@ configuration, even determining which unit is the leader in a cluster. The
 listed hook-tools are available in any hook running on the unit, and are only
 available within ‘hook context’.
 
+Additionally, the `payload-status-set`, `payload-register` and
+`payload-unregister` commands, also listed below, can be used to manage your
+charm's payloads. Please see [payloads in Charm metadata][payloads] for further
+details on how to use payloads within your charms. 
+
+Many of the tools produce text based output, and those that do accept
+a `--format` flag which can be set to json or yaml as desired.
+
 !!! Note: You can view a detailed listing of what each command listed below does
 on your client with `juju help-tool {command}`. Or for more detailed help on
 individual commands run the command with the -h flag.
-
-!!! Note: Many of the tools produce text based output, and those that do accept
-a `--format` flag which can be set to json or yaml as desired.
-
 
 ## action-fail
 
@@ -844,3 +848,4 @@ powershell:
 Import-Module CharmHelpers
 Get-JujuUnit -Attr "public-address"
 ```
+[payloads]:./authors-charm-metadata.html#payloads
