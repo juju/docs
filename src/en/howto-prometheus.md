@@ -2,18 +2,15 @@ Title: Configure metrics gathering with Prometheus
 
 #  Configure metrics gathering with Prometheus
 
-
 ## Overview
 
-While it is possible to [write charms that collect metrics][developer-metrics], some
-will want the power and options available from a full monitoring solution. For
-convenience, starting with Juju 2.1 each Juju controller provides an HTTPS
-endpoint to expose [Prometheus][prometheus] metrics. To feed these metrics into
-Prometheus, you must add a new scrape target to your already installed and
-running Prometheus instance. For this use case, the only constraint on where
-Prometheus is running is that Prometheus must be able to contact the Juju
-controller's API server address/port.
-
+While it is possible to [write charms that collect metrics][developer-metrics] about
+charms, it is also possible to collect metrics about Juju itself. Starting with
+Juju 2.1 each Juju controller provides an HTTPS endpoint to expose [Prometheus][prometheus]
+metrics. To feed these metrics into Prometheus, you must add a new scrape
+target to your already installed and running Prometheus instance. For this use
+case, the only constraint on where Prometheus is running is that Prometheus
+must be able to contact the Juju controller's API server address/port.
 
 The Juju controller's metrics endpoint requires authorisation, so create a
 user and password for Prometheus to use:
@@ -43,10 +40,6 @@ server’s certificate against:
 ```
 juju controller-config ca-cert > /path/to/juju-ca.crt
 ```
-
-!!! Note: in 2.1-beta5 `controller-config` will print out the string in YAML
-format, which will include a YAML multi-line prefix. For 2.1-beta5 you have
-to remove the YAML formatting, as described in [this Launchpad bug][https://bugs.launchpad.net/juju/+bug/1661506].
 
 To add a scrape target to Prometheus, add the following to `prometheus.yaml`:
 
