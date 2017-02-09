@@ -1,51 +1,31 @@
 Title: Getting started developing charms  
 
-# Getting Started with developing charms
+# Getting Started with charm development
 
-The developer guide is for anyone wanting to write bits of code that we call
-charms. This guide introduces some new concepts that, once learned, can help
-you make some very powerful and reusable code components in the Juju ecosystem.
+This guide is for anyone wanting to creating code that we call
+_charms_; the part that does the work of installing and managing 
+applications in a Juju model. Many charms exist in the 
+[Juju store][store] already, but if your favourite application
+isn't covered or you would like to make your own spin on an existing
+charm, you will discover all the tools and information you need here.
 
 ## Requirements
 
-  - To develop charms you will need the Juju client installed. The Juju client is
-available for Linux, Windows and Mac OS
+  - **A Juju controller**: If you have not used Juju before, it's 
+  a good idea to [start here][getting-started].
+  - **Python 3.x**: it is possible to develop charms using other languages, 
+  but this guide focusses on Python-based development.
+  - **Charm Tools**: Command line utilities to make it easy to create,
+  build, fetch and test charms. [See the Charm Tools page][charm-tools]
+  for installation instructions.
+  - **Charm Helpers**: [Charm Helpers][charm-helpers] is a Python library
+  that provides an extensive collection of functions for developers to
+  reuse. Many common charm patterns are encapsulated in functions of this
+  library, so it is also worth reading the 
+  [Charm Helpers documentation][charm-helper-docs].
+  - This guide also uses the [Vanilla PHP Forum software][vanilla] as an 
+  example.
 
-  - Juju needs to be configured before it can model, configure or manage
-applications. For testing and development you may wish to configure LXD
-
-  - Test your Juju setup
-
-  - This guide also uses the [Vanilla PHP Forum software][vanilla]
-as our example application for getting started charming, as it's a great example
-of a typical three factor application consisting of a Database, a PHP web
-application served over HTTP.
-
-## Install libraries and tools
-
-### Charm Tools
-We have created tools to make writing charms easier. Developers should 
-[install the Charm Tools](./tools-charm-tools.html) software. Charm Tools are 
-command line utilities that make it easy to create, build, fetch and find
-common charm errors.
-
-```bash
-sudo apt-get install charm-tools
-charm help
-```
-
-### Charm Helpers
-[Charm Helpers](./tools-charm-helpers.html) is a Python library that provides
-an extensive collection of functions for developers to reuse. Spending time
-reading the [Charm Helpers documentation](http://pythonhosted.org/charmhelpers/)
-would be well spent because several common charm patterns are encapsulated in
-functions in this library.
-
-```python
-from charmhelpers.core import hookenv
-config = hookenv.config()
-value = config.get('key')
-```
 
 ## Designing your charm
 
@@ -83,11 +63,9 @@ The available layers and interfaces can be found at
 layer provides charm helpers python library and the reactive framework that
 makes layers possible.
 
-### Python 3
-
-The reactive framework used with layered charms runs under Python 3, so you'll
-want to be aware of [compatibility](http://python-future.org/compatible_idioms.html)
-issues between Python 2 and 3.
+!!! Note: The reactive framework used with layered charms runs under 
+**Python 3.x**, so you'll want to be aware of 
+[compatibility][python-compatibility] issues between Python 2 and 3.
 
 ### Creating a new layer
 
@@ -97,8 +75,9 @@ which to work. This involves creating three directories -- `layers`,
 
 The `layers` directory contains the source code of the layered charm covered in
 our examples. The `interfaces` directory is where you'd place any
-[interface-layers](./developer-layers-interfaces.html) you may wish to write, and the
-`charms` directory holds the assembled, ready to deploy charm.
+[interface layers][interface-layers]
+you may wish to write, and the `charms` directory holds the assembled,
+ready to deploy charm.
 
 ```bash
 export JUJU_REPOSITORY=$HOME/charms
@@ -193,9 +172,13 @@ section must follow Charm Store policy and best practices for charms. These
 recommended charms have a shorter namespace on the Charm Store website, and are
 listed higher in search results on <http://jujucharms.com>
 
-[vanilla]:         http://vanillaforums.org
-[charms-local]:    ./charms-deploying.html#deploying-from-a-local-charm
-[amulet]:          ./tools-amulet.html
-[bundletester]:    https://github.com/juju-solutions/bundletester
-[charm testing]:   ./developer-testing.html
-[interfaces]:      http://interfaces.juju.solutions/
+[charm-helpers]:      ./tools-charm-helpers.html
+[charm-helper-docs]:  http://pythonhosted.org/charmhelpers/
+[interface-layers]:   ./developer-layers-interfaces.html) 
+[vanilla]:            http://vanillaforums.org
+[charms-local]:       ./charms-deploying.html#deploying-from-a-local-charm
+[amulet]:             ./tools-amulet.html
+[bundletester]:       https://github.com/juju-solutions/bundletester
+[charm testing]:      ./developer-testing.html
+[interfaces]:         http://interfaces.juju.solutions/
+[python-compatibility]: http://python-future.org/compatible_idioms.html
