@@ -10,7 +10,7 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
-^ juju 2.0.3
+^# juju 2.0.3
 
   ## What's new?
 
