@@ -109,6 +109,29 @@ with the following command:
 juju run-action git/0 remove-repo --params=params.yaml sure=yes
 ```
 
+If you have an action that requires multiple lines, use YAML quoting to make
+sure the whitespace is not collapsed into one line, like in this example where
+`foo` is an action and the parameter `bar` is defined in the example 
+`actions.yaml`, shown just after the example:
+
+```bash
+juju run-action unit/0 foo bar="'firstline
+secondline
+thirdline
+fourthline'"
+```
+
+*Example actions.yaml:*
+```yaml
+#!/usr/bin/python3
+
+from subprocess import call
+import sys
+with open("/tmp/out", mode='w') as out:
+  call(['action-get','bar'],stdout=out)
+sys.exit(0)
+```
+
 ### `juju show-action-output`
 
 Shows the results returned from an action with the given ID. To
