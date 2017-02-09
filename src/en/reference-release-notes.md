@@ -10,6 +10,41 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
+^ juju 2.0.3
+
+  ## What's new?
+
+  This releases addresses stability and performance issues.
+
+  ## How do I get it?
+
+  If you are running Ubuntu, you can get it from the juju stable ppa:
+
+      sudo add-apt-repository ppa:juju/stable
+      sudo apt-get update; sudo apt-get install juju
+
+  Windows, Centos, and MacOS users can get a corresponding installer at:
+
+      https://launchpad.net/juju/+milestone/2.0.3
+
+  ## Resolved issues
+
+    * Improvements to Juju's CPU and memory performance, and overall
+  responsiveness.
+      Lp 1645729, Lp 1635311, Lp 1651291, Lp 1660087, Lp 1632362, Lp 1639577,
+      Lp 1645917
+
+    * Required packages are upgraded with Juju agent upgrades.
+      Lp 1637079
+
+    * Better cleanup of resources in OpenStack and manual providers.
+      Lp 1642295, Lp 1625624
+
+    * Commands in interactive ssh from windows clients are properly passed.
+      Lp 1468752
+
+    See https://launchpad.net/juju/+milestone/2.0.3 for more details.
+
 
 ^# juju 2.0.2
 
