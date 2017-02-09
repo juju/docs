@@ -288,13 +288,13 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   Releasing is the action of assigning one channel to a specific charm
   or bundle revision (revision need to be specified), so that it can be shared
   with other users and also referenced without specifying the revision.
-
+  
   Multiple release channels are supported. The channels are:
-
- - **stable**: (default) This is the latest, tested, working stable version of the charm.
- - **candidate**: A release candidate. There is high confidence this will work fine, but there may be minor bugs.
- - **beta**: A beta testing milestone release.
- - **edge**: The very latest version - expect bugs!
+  
+   - **stable**: (default) This is the latest, tested, working stable version of the charm.
+   - **candidate**: A release candidate. There is high confidence this will work fine, but there may be minor bugs.
+   - **beta**: A beta testing milestone release.
+   - **edge**: The very latest version - expect bugs!
 
       charm release ~lars/xenial/wordpress
 
