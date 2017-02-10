@@ -111,7 +111,7 @@ charm build
 
 Build will take all of the layers and interfaces included by your charm, either
 from your local `LAYER_PATH` and `INTERFACE_PATH` directories or automatically
-downloaded from the [interfaces.juju.solutions][interfaces]
+downloaded from the [interfaces.juju.solutions][interfaces] website
 and create a new charm in `$JUJU_REPOSITORY/trusty/vanilla`:
 
 ```
@@ -160,9 +160,10 @@ For more information about writing tests please refer to the
 
 ## Submitting your charm for review
 
-Once the charm is complete you can [submit the charm for
-review](./charm-review-process.html) where, if accepted, would be included in
-the recommended section of the Juju Charm Store. Charms in the recommended
+Once the charm is complete you can 
+[submit the charm for review][charm-review].
+If it passes, it will appear in the recommended section of the 
+Juju Charm Store (reviews may take some time to complete). Charms in the recommended
 section must follow Charm Store policy and best practices for charms. These
 recommended charms have a shorter namespace on the Charm Store website, and are
 listed higher in search results on [https://jujucharms.com][store]
@@ -177,4 +178,4 @@ listed higher in search results on [https://jujucharms.com][store]
 [bundletester]:       https://github.com/juju-solutions/bundletester
 [charm testing]:      ./developer-testing.html
 [interfaces]:         http://interfaces.juju.solutions/
-[python-compatibility]: http://python-future.org/compatible_idioms.html
+[charm-review]: ./charm-review-process.html
