@@ -173,7 +173,7 @@ listed higher in search results on [https://jujucharms.com][store]
 [charm-tools]:        ./tools-charm-tools.html
 [charm-helpers]:      ./tools-charm-helpers.html
 [charm-helper-docs]:  http://pythonhosted.org/charmhelpers/
-[interface-layers]:   ./developer-layers-interfaces.html) 
+[interface-layers]:   ./developer-layers-interfaces.html 
 [vanilla]:            http://vanillaforums.org
 [charms-local]:       ./charms-deploying.html#deploying-from-a-local-charm
 [amulet]:             ./tools-amulet.html
