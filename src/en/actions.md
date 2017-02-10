@@ -102,11 +102,37 @@ override the parameters within the file by providing them directly.
 repo: myproject
 sure: no
 ```
-With the above example `params.yaml` file, we could remove the `myproject` git repository
-with the following command:
+With the above example `params.yaml` file, we could remove the `myproject` git
+repository with the following command:
 
 ```bash
 juju run-action git/0 remove-repo --params=params.yaml sure=yes
+```
+
+If you have an action that requires multiple lines, use YAML quoting to make
+sure the whitespace is not collapsed into one line, like in this example where
+`foo` is an action and the parameter `bar` is defined in the `actions.yaml` file
+shown just after the example:
+
+```bash
+juju run-action unit/0 foo bar="'firstline
+secondline
+thirdline
+fourthline'"
+```
+
+YAML quoting uses both single ' and double " quotes to surround the part that
+should not be moved to one line.
+
+*Example actions.yaml:*
+```yaml
+#!/usr/bin/python3
+
+from subprocess import call
+import sys
+with open("/tmp/out", mode='w') as out:
+  call(['action-get','bar'],stdout=out)
+sys.exit(0)
 ```
 
 ### `juju show-action-output`
