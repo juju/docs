@@ -31,7 +31,7 @@ Select cloud type: maas
 
 Enter a name for your maas cloud: mainmaas
 
-Enter the API endpoint url: http://maas.example.org:5240/MAAS/api/2.0
+Enter the API endpoint url: http://maas.example.org:5240/MAAS
 
 Cloud "mainmaas" successfully added
 You may bootstrap with 'juju bootstrap mainmaas'

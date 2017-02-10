@@ -83,6 +83,8 @@ compatible with. This is useful when the code uses features introduced in a
 specific version of Juju. When supplied this value is the lowest version of
 Juju controller that will run the charm.
 
+## Storage
+
 [Storage](./developer-storage.html) can also be declared in a charm's metadata,
 as such:
 
@@ -109,6 +111,8 @@ and whether it's designed for deployment as a
   - if the charm is subordinate, it must contain at least one `requires`
     relation with container scope.
 
+## Resources
+
 `resources` allows you to add blobs that your charm can utilize.
 
 ```yaml
@@ -119,9 +123,14 @@ resources:
     description: example resource
 ```
 
-`payloads` allows you to register payloads such as LXD, KVM, and docker with
-Juju. This lets the operator better understand the purpose and function of these
-payloads on a given machine.
+## Payloads
+
+You can use the `payloads` section of metadata.yaml to help the user of a charm
+better understand the purpose of payloads such as LXC, KVM and docker. This is
+especially useful in large and complex deployments.
+
+Payloads are defined by creating a class for the payload, such as `monitoring`
+or `kvm- guest`, and then assigning a type:
 
 ```yaml
 payloads:
@@ -130,6 +139,18 @@ payloads:
     kvm-guest:
         type: kvm
 ```
+
+Payloads can be viewed using [juju list-payloads][list-payloads] and managed from
+the charm hook using the following commands:
+
+- payload-register
+- payload-unregister
+- payload-status-set
+
+See the [Hook tools documentation][hook-payloads] for further details on these
+payload commands. 
+
+## Extra-bindings
 
 `extra-bindings` represents an extra bindable endpoint that is not a relation.
 These are useful when you want to have Juju provide distinct addresses for an
@@ -152,7 +173,6 @@ juju deploy ~/path/to/charm/foo --bind "cluster=admin-api public=public-api inte
 And running `network-get cluster --primary-address` will return only the
 address coming from the "admin-api" space.
 
-
 Endpoint names are strings and must not match existing relation names from
 the Provides, Requires, or Peers metadata sections. The values beside each
 endpoint name must be left out (i.e. "foo": &lt;anything&gt; is invalid).
@@ -165,3 +185,6 @@ Other available fields are:
 
 Other field names should be considered to be reserved; please don't use any not
 listed above to avoid issues with future versions of Juju.
+
+[hook-payloads]:./reference-hook-tools.html#payload-status-set
+[list-payloads]:./commands.html#list-payloads

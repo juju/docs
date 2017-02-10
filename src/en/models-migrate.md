@@ -32,8 +32,7 @@ For migration to work:
   - The version of Juju running on the destination controller needs to be the
     same or newer than the version on the source controller.
 
-!!! Note: Only hosted models can be migrated. A controller model can not be
-migrated.
+!!! Note: A controller model can not be migrated.
 
 ## Usage
 

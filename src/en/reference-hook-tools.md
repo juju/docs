@@ -9,13 +9,17 @@ configuration, even determining which unit is the leader in a cluster. The
 listed hook-tools are available in any hook running on the unit, and are only
 available within ‘hook context’.
 
+Additionally, the `payload-status-set`, `payload-register` and
+`payload-unregister` commands, also listed below, can be used to manage your
+charm's payloads. Please see [payloads in Charm metadata][payloads] for further
+details on how to use payloads within your charms. 
+
+Many of the tools produce text based output, and those that do accept
+a `--format` flag which can be set to json or yaml as desired.
+
 !!! Note: You can view a detailed listing of what each command listed below does
 on your client with `juju help-tool {command}`. Or for more detailed help on
 individual commands run the command with the -h flag.
-
-!!! Note: Many of the tools produce text based output, and those that do accept
-a `--format` flag which can be set to json or yaml as desired.
-
 
 ## action-fail
 
@@ -132,6 +136,15 @@ close-port 80
 close-port 9000-9999/udp
 ```
 
+powershell:  
+```powershell
+Import-Module CharmHelpers
+# Close a single port
+Close-JujuPort "80/TCP"
+# Close a range of ports
+Close-JujuPort "1000-2000/UDP"
+```
+
 
 ## config-get
 
@@ -158,7 +171,11 @@ INTERVAL=$(config-get interval)
 
 config-get --all
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+$interval = Get-JujuCharmConfig "interval"
+```
 
 ## is-leader
 
@@ -181,6 +198,13 @@ if [ "${LEADER}" == "True" ]; then
   # Do something a leader would do
 fi
 ```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+if (Is-Leader) {
+    # Do something a leader would do
+}
+```
 
 
 ## juju-log
@@ -198,7 +222,14 @@ bash:
 ```bash
 juju-log -l 'WARN' Something has transpired
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+# Basic logging
+Write-JujuLog "Something has transpired"
+# Logs the message and throws an error, stopping the script
+Write-JujuError "Something has transpired. Throwing an error..."
+```
 
 ## juju-reboot
 
@@ -232,7 +263,12 @@ juju-reboot --now
 # Reboot after current hook exits
 juju-reboot
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+# immediately reboot
+ExitFrom-JujuHook -WithReboot
+```
 
 ## leader-get
 
@@ -251,7 +287,11 @@ bash:
 ```bash
 ADDRESSS=$(leader-get cluster-leader-address)
 ```
-
+powershell:  
+```powershell
+Import-Module CharmHelpers
+$clusterLeaderAddress = Get-LeaderData "cluster-leader-address"
+```
 
 ## leader-set
 
@@ -283,6 +323,11 @@ leader_set('cluster-leader-address', "10.0.0.123")
 bash:
 ```bash
 leader-set cluster-leader-address=10.0.0.123
+```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Set-LeaderData @{"cluster-leader-address"="10.0.0.123"}
 ```
 
 
@@ -319,6 +364,9 @@ bash:
 open-port 80/tcp
 
 open-port 1234/udp
+
+# Open a range of ports
+open-port 1000-2000/udp
 ```
 
 
@@ -501,6 +549,11 @@ bash:
 ```bash
 relation-ids database
 ```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Get-JujuRelationIds -RelType "database"
+```
 
 
 ## relation-list
@@ -521,8 +574,12 @@ related_units = relation_list(relation_id())
 bash:
 ```bash
 relation-list 9
+```
 
-relation-list -r website:2
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Get-JujuRelatedUnits -RelId (Get-JujuRelationId)
 ```
 
 
@@ -786,3 +843,9 @@ bash:
 ```bash
 unit-get public-address
 ```
+powershell:  
+```powershell
+Import-Module CharmHelpers
+Get-JujuUnit -Attr "public-address"
+```
+[payloads]:./authors-charm-metadata.html#payloads

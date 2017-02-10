@@ -4,7 +4,7 @@ Title: Juju releases
 # Get the Latest Juju
 
 Juju is available for Ubuntu (and Debian-based OSes), CentOS, Microsoft Windows
-and Apple OS X. 
+and Apple MacOS. 
 
 There can be 3 concurrent releases representing the stability of Juju's feature
 set: stable, proposed and development. 
@@ -15,7 +15,7 @@ release to manage cloud deployments.
 
 ## Stable
 
-The current stable version of Juju is 2.0.2.
+The current stable version of Juju is 2.0.3.
 
 Stable juju is suitable for everyday production use.
 
@@ -26,16 +26,16 @@ sudo apt update
 sudo apt install juju
 ```
 CentOS:
-: [juju-2.0.2-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-centos7.tar.gz/+md5))
+: [juju-2.0.3-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.3/+download/juju-2.0.3-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.3/+download/juju-2.0.3-centos7.tar.gz/+md5))
 {: .instruction }
 
 Windows:
-: [juju-setup-2.0.2.exe](https://launchpad.net/juju/2.0/2.0.2/+download/juju-setup-2.0.2.exe)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-setup-2.0.2.exe/+md5))
+: [juju-setup-2.0.3.exe](https://launchpad.net/juju/2.0/2.0.3/+download/juju-setup-2.0.3.exe)([md5](https://launchpad.net/juju/2.0/2.0.3/+download/juju-setup-2.0.3.exe/+md5))
 {: .instruction }
 
-OS X:
+MacOS:
 
-The easiest way to install Juju on OS X is with the [`brew`][brew] package
+The easiest way to install Juju on MacOS is with the [`brew`][brew] package
 manager. With `brew` installed, simply enter the following into a terminal:
 
 ```bash
@@ -49,12 +49,12 @@ brew upgrade juju
 ```
 
 Alternatively, you can manually install Juju from the following archive:
-: [juju-2.0.2-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz/+md5))
+: [juju-2.0.3-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.3/+download/juju-2.0.3-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.3/+download/juju-2.0.3-osx.tar.gz/+md5))
 {: .instruction }
 
 ## Proposed
 
-Current proposed version is 2.0.2, which is the same as stable (above).
+Current proposed version is 2.0.3, which is the same as stable (above).
 
 Proposed releases may be promoted to stable releases after a period of
 evaluation. They contain bug fixes and recently stabilised features. They
@@ -70,15 +70,15 @@ sudo apt install juju
 ```
 
 CentOS:
-: [juju-2.0.2-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-centos7.tar.gz/+md5))
+: [juju-2.0.3-centos7.tar.gz](https://launchpad.net/juju/2.0/2.0.3/+download/juju-2.0.3-centos7.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.3/+download/juju-2.0.3-centos7.tar.gz/+md5))
 {: .instruction }
 
 Windows:
-: [juju-setup-2.0.2.exe](https://launchpad.net/juju/2.0/2.0.2/+download/juju-setup-2.0.2.exe)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-setup-2.0.2.exe/+md5))
+: [juju-setup-2.0.3.exe](https://launchpad.net/juju/2.0/2.0.3/+download/juju-setup-2.0.3.exe)([md5](https://launchpad.net/juju/2.0/2.0.3/+download/juju-setup-2.0.3.exe/+md5))
 {: .instruction }
 
-OS X:
-: [juju-2.0.2-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.2/+download/juju-2.0.2-osx.tar.gz/+md5))
+MacOS:
+: [juju-2.0.3-osx.tar.gz](https://launchpad.net/juju/2.0/2.0.3/+download/juju-2.0.3-osx.tar.gz)([md5](https://launchpad.net/juju/2.0/2.0.3/+download/juju-2.0.3-osx.tar.gz/+md5))
 {: .instruction }
 
 If you wish to test applications deployed to mixed OSes and architectures, you
@@ -90,7 +90,7 @@ juju bootstrap cloud/region my-controller --config agent-stream=proposed
 
 ## Development
 
-Current development version is 2.1-beta4.
+Current development version is 2.1-beta5.
 
 Development releases provide new features that are being stabilised.
 These releases are *not* suitable for production environments. Upgrading
@@ -112,15 +112,15 @@ snap install juju --beta --devmode
 ```
 
 CentOS:
-: [juju-core_2.1-beta4-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-core_2.1-beta4.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-core_2.1-beta4.tar.gz/+md5))
+: [juju-core_2.1-beta5-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-2.1-beta5-centos7.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-2.1-beta5-centos7.tar.gz))
 {: .instruction }
 
 Windows:
-: [juju-setup-2.1-beta4.exe](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-setup-2.1-beta4.exe) ([md5](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-setup-2.1-beta4.exe/+md5))
+: [juju-setup-2.1-beta5.exe](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-setup-2.1-beta5.exe) ([md5](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-setup-2.1-beta5.exe/+md5))
 {: .instruction }
 
-OS X:
-: [juju-core_2.1-beta4-osx.tar.gz](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-2.1-beta4-osx.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta4/+download/juju-2.1-beta4-osx.tar.gz/+md5))
+MacOS:
+: [juju-core_2.1-beta5-osx.tar.gz](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-2.1-beta5-osx.tar.gz) ([md5](https://launchpad.net/juju/2.1/2.1-beta5/+download/juju-2.1-beta5-osx.tar.gz/+md5))
 {: .instruction }
 
 [brew]: http://brew.sh/
