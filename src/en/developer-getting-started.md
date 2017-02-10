@@ -169,6 +169,8 @@ recommended charms have a shorter namespace on the Charm Store website, and are
 listed higher in search results on [https://jujucharms.com][store]
 
 [store]:              https://jujucharms.com/
+[getting-started]:    ./getting-started.html 
+[charm-tools]:        ./tools-charm-tools.html
 [charm-helpers]:      ./tools-charm-helpers.html
 [charm-helper-docs]:  http://pythonhosted.org/charmhelpers/
 [interface-layers]:   ./developer-layers-interfaces.html) 
