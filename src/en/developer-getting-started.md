@@ -2,8 +2,8 @@ Title: Getting started developing charms
 
 # Getting Started with charm development
 
-This guide is for anyone wanting to creating code that we call
-_charms_; the part that does the work of installing and managing 
+This guide is for anyone wanting to creating the code that we call
+ a _charm_; the part that does the work of installing and managing 
 applications in a Juju model. Many charms exist in the 
 [Juju store][store] already, but if your favourite application
 isn't covered or you would like to make your own spin on an existing
@@ -32,11 +32,9 @@ charm, you will discover all the tools and information you need here.
 In order to begin writing a charm, you should have a good plan of how it’s
 going to be implemented, what configuration options you wish to expose to anyone
 deploying the charm, and what dependent charms (if any) it will be related to.
-It’s encouraged to diagram this out, using any of the freely available mockup
-tools available on the web. Google Draw, DIA, Gliffy, or Draw.io, just to name a
-few.
+It’s a good idea to start with a diagram.
 
-The visual representation of your charm deployment will help to solidify the
+This visual representation of your charm deployment will help to solidify the
 configuration, deployment, and management of your application. Take the
 following example:
 
@@ -59,13 +57,10 @@ with remote applications, or partial base layers that make managing dependencies
 much easier. And it does this in a consistent, repeatable, and incremental way.
 
 The available layers and interfaces can be found at
-[interfaces.juju.solutions](http://interfaces.juju.solutions/). The `basic`
-layer provides charm helpers python library and the reactive framework that
+[interfaces.juju.solutions][interfaces]. The `basic`
+layer provides charm helpers Python library and the reactive framework that
 makes layers possible.
 
-!!! Note: The reactive framework used with layered charms runs under 
-**Python 3.x**, so you'll want to be aware of 
-[compatibility][python-compatibility] issues between Python 2 and 3.
 
 ### Creating a new layer
 
@@ -170,8 +165,9 @@ review](./charm-review-process.html) where, if accepted, would be included in
 the recommended section of the Juju Charm Store. Charms in the recommended
 section must follow Charm Store policy and best practices for charms. These
 recommended charms have a shorter namespace on the Charm Store website, and are
-listed higher in search results on <http://jujucharms.com>
+listed higher in search results on [https://jujucharms.com][store]
 
+[store]:              https://jujucharms.com/
 [charm-helpers]:      ./tools-charm-helpers.html
 [charm-helper-docs]:  http://pythonhosted.org/charmhelpers/
 [interface-layers]:   ./developer-layers-interfaces.html) 
