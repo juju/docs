@@ -14,7 +14,7 @@ charm, you will discover all the tools and information you need here.
   - **A Juju controller**: If you have not used Juju before, it's 
   a good idea to [start here][getting-started].
   - **Python 3.x**: it is possible to develop charms using other languages, 
-  but this guide focusses on Python-based development.
+  but this guide focuses on Python-based development.
   - **Charm Tools**: Command line utilities to make it easy to create,
   build, fetch and test charms. [See the Charm Tools page][charm-tools]
   for installation instructions.
@@ -129,10 +129,11 @@ within the layer directory, this is as simple as:
 charm build
 ```
 
-Build will take all of the layers and interfaces included by your charm, either
-from your local `LAYER_PATH` and `INTERFACE_PATH` directories or automatically
-downloaded from the [interfaces.juju.solutions][interfaces] website
-and create a new charm in `$JUJU_REPOSITORY/trusty/vanilla`:
+Build will take all of the layers and interfaces included by your charm, 
+either from your local `LAYER_PATH` and `INTERFACE_PATH` directories or
+automatically downloaded from the 
+[interfaces.juju.solutions][interfaces] website and create a new charm
+in `$JUJU_REPOSITORY/trusty/vanilla`:
 
 ```
 build: Composing into /home/user/charms
@@ -167,11 +168,11 @@ Because Juju is a large complex system, not unlike a Linux software
 distribution, there is a need to test the charms themselves and how they
 interact with one another. All new charms require tests that verify the
 application installs, configures, scales and relates as intended. The tests
-should be self-contained, installing all the required packages so the tests can
-be run automatically with a tool called
-[`bundletester`][bundletester]. Similar to
-hooks the tests should be executable files in a `tests/` directory of the charm.
-While you can write tests in Bash or other languages, it is reccommended to
+should be self-contained, installing all the required packages so the tests 
+can be run automatically with a tool called
+[`bundletester`][bundletester]. Similar to hooks the tests should be
+executable files in a `tests/` directory of the charm.
+While you can write tests in Bash or other languages, it is recommended to
 use the [Amulet library][amulet], which makes it easy to write charm
 tests in Python.
 
@@ -183,10 +184,11 @@ For more information about writing tests please refer to the
 Once the charm is complete you can 
 [submit the charm for review][charm-review].
 If it passes, it will appear in the recommended section of the 
-Juju Charm Store (reviews may take some time to complete). Charms in the recommended
-section must follow Charm Store policy and best practices for charms. These
-recommended charms have a shorter namespace on the Charm Store website, and are
-listed higher in search results on [https://jujucharms.com][store].
+Juju Charm Store (reviews may take some time to complete). Charms in the 
+recommended section must follow Charm Store policy and best practices for
+charms. These recommended charms have a shorter namespace on the 
+Charm Store website, and are listed higher in search results on 
+[https://jujucharms.com][store].
 
 [store]:              https://jujucharms.com/
 [getting-started]:    ./getting-started.html 
