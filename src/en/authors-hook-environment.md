@@ -1,4 +1,4 @@
-Title: The hook environment, hook tools and how hooks are run  
+Title: The hook environment, hook tools and how hooks are run
 
 # How hooks are run
 
@@ -46,7 +46,7 @@ In addition, every relation hook makes available relation-specific variables:
   - The `$JUJU_RELATION_ID` variable holds an opaque relation identifier, used
   to distinguish between multiple relations with the same name. It is vitally
   important, because it's the only reasonable way of telling the difference
-  between (say) a database service's many independent clients.
+  between (say) a database application's many independent clients.
 
 ...and, if that relation hook is not a 
 [-broken](authors-charm-hooks.html#[name]-relation-broken) hook:
@@ -156,7 +156,7 @@ foo.example.com
 
 ### config-get
 
-`config-get` returns information about the service configuration (as defined by
+`config-get` returns information about the application configuration (as defined by
 the charm). If called without arguments, it returns a dictionary containing all
 config settings that are either explicitly set, or which have a non-nil default
 value. If the `--all` flag is passed, it returns a dictionary containing all
@@ -325,7 +325,7 @@ relation-set deprecated-or-unused=
 ```
 
 `relation-set` is the single tool at your disposal for communicating your own
-configuration to units of related services. At least by convention, the charm
+configuration to units of related applications. At least by convention, the charm
 that `provides` an interface is likely to set values, and a charm that
 `requires` that interface will read them; but there's nothing forcing this.
 Whatever information you need to propagate for the remote charm to work must be
@@ -333,7 +333,7 @@ propagated via relation-set, with the single exception of the `private-address`
 key, which is always set before the unit joins.
 
 You may wish to overwrite the `private-address` setting, for example if you're
-writing a charm that serves as a proxy for some external service; but you 
+writing a charm that serves as a proxy for some external application; but you 
 should in general avoid _removing_ that key, because most charms expect that
 value to exist unconditionally.
 
@@ -417,10 +417,10 @@ the lifetime of the relation.
 
 !!! Note: `relation-get` currently has a
 [bug](https://bugs.launchpad.net/juju-core/+bug/1223339)
-that allows units of the same service to see each other's
+that allows units of the same application to see each other's
 settings outside of a peer relation. Depending on this behaviour inadvisable: if
-you need to share settings between units of the same service, always use a peer
-relation to do so, or you may be seriously inconvenienced when
+you need to share settings between units of the same application, always use a
+peer relation to do so, or you may be seriously inconvenienced when
 the hole is closed without notice.
 
 ### relation-list
@@ -454,7 +454,7 @@ relation-list -r website:2
 
 ### relation-ids
 
-`relation-ids` outputs a list of the related **services** with a relation 
+`relation-ids` outputs a list of the related **applications** with a relation 
 name. Accepts a single argument (relation-name) which, in a relation hook, 
 defaults to the name of the current relation. The output is useful as input 
 to the `relation-list`, `relation-get`, and `relation-set` commands to read 
@@ -494,12 +494,12 @@ the `status-set` hook tool.
 This hook tool takes 2 arguments. The first is the status to report, which can 
 be one of the following:
 
-  - maintenance (the unit is not currently providing a service, but expects to 
-    be soon, E.g. when first installing)
+  - maintenance (the unit is not currently providing a application, but expects
+    to be soon, E.g. when first installing)
   - blocked (the unit cannot continue without user input)
   - waiting (the unit itself is not in error and requires no intervention, 
     but it is not currently in service as it depends on some external factor, 
-    e.g. a service to which it is related is not running)
+    e.g. an application to which it is related is not running)
   - active (This unit believes it is correctly offering all the services it is
     primarily installed to provide)
 
@@ -514,7 +514,7 @@ can contain any useful information.
 This status message provides valuable feedback to the user about what is
 happening. Changes in the status message are not broadcast to peers and
 counterpart units - they are for the benefit of humans only, so tools
-representing Juju services (e.g. the Juju GUI) should check occasionally 
+representing Juju applications (e.g. the Juju GUI) should check occasionally 
 and be told the current status message.
 
 Spamming the status with many changes per second would not be welcome

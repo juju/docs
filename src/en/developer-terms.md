@@ -167,8 +167,8 @@ The output displays each term revision the user has agreed to:
 ## Upgrading terms
 
 Deployed charms will run under the terms they were installed with. If the terms
-have been revised, running `juju upgrade-charm <service>` will require the user
-to accept the new terms before the upgrade will run.
+have been revised, running `juju upgrade-charm <application>` will require the
+user to accept the new terms before the upgrade will run.
 
 
 # Caveats

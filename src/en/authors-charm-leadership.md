@@ -2,12 +2,12 @@ Title: Implementing leadership in Juju charms
 
 # Leadership for the Charm author
 
-Leadership provides a mechanism whereby multiple units of a service can make
-use of a single, shared, authoritative source for charm-driven configuration
+Leadership provides a mechanism whereby multiple units of an application can
+make use of a single, shared, authoritative source for charm-driven configuration
 settings.
 
-Every service deployed by juju is guaranteed to have at most one leader at any
-time. This is true independent of what the charm author does; whether or not
+Every application deployed by juju is guaranteed to have at most one leader at
+any time. This is true independent of what the charm author does; whether or not
 you implement the hooks or use the tools, the unit agents will each seek to
 acquire leadership, and maintain it while they have it or wait for the current
 leader to drop out.
@@ -48,14 +48,14 @@ unprepossessing race scenarios.
     to verify continued leadership past lease expiry time, it would start to
     return false.
 
-Every service deployed by juju also has access to a pseudo-relation over which
-leader settings can be communicated with the following tools:
+Every application deployed by juju also has access to a pseudo-relation over
+which leader settings can be communicated with the following tools:
 
   * `leader-set` acts much like `relation-set`, in that it lets you write string
     key/value pairs (in which an empty value removes the key), but with the
     following differences:
 
-      * there's only one leader-settings bucket per service (not one per unit)
+      * there's only one leader-settings bucket per applicaiton (not one per unit)
       * only the leader can write to the bucket
       * only minions are informed of changes to the bucket
       * changes are propagated instantly, bypassing the sandbox
@@ -129,10 +129,11 @@ need additional synchronisation, you can use a peer relation to communicate
 minions' acknowledgements back to the leader.
 
 !!! Note: peer relation membership is not guaranteed to match current reality
-at any given time. To be resilient in the face of your service scaling at the
-same time as you (say) rebalance your service, your leader code will need to
-use the output of `status-get --service` to determine up-to-date membership,
-and wait for the set of acked units in the peer relation to match that list.
+at any given time. To be resilient in the face of your application scaling at
+the same time as you (say) rebalance your application, your leader code will
+need to use the output of `status-get --application` to determine up-to-date
+membership, and wait for the set of acked units in the peer relation to match
+that list.
 
 ### ...guarantee that a long-lived process runs on just one unit at once?
 
