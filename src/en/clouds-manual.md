@@ -15,7 +15,7 @@ applications though, with a bit of extra effort.
 
 ## Prerequisites for using a manual cloud:
 
-  - You will need at least two machines (see [Notes](#using-one-machine))
+  - You will need at least two machines
   - The machines must already have Ubuntu or CentOS installed
   - They must be running SSH ([see notes below for CentOS](#additional-centos-notes))
   - You will need a login with sudo privileges on all machines
