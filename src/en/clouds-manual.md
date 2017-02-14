@@ -15,9 +15,9 @@ applications though, with a bit of extra effort.
 
 ## Prerequisites for using a manual cloud:
 
-  - You will need at least two machines
-  - The machines must already have Ubuntu installed
-  - They must be running SSH
+  - You will need at least two machines (see [Notes](#using-one-machine))
+  - The machines must already have Ubuntu or CentOS installed
+  - They must be running SSH ([see notes below for CentOS](#additional-centos-notes))
   - You will need a login with sudo privileges on all machines
   - All machines must be able to communicate with each other over the network
 
@@ -94,7 +94,35 @@ There are some additional things to note when using the Manual provider:
  - To improve performance, consider running a local APT proxy (see also
    [configuring a model][models-config]).
 
+## Additional CentOS notes
 
+By default, CentOS doesn't install SSH, which is required for Juju to access 
+the machine. In order to prepare a CentOS system to be used as a manual cloud,
+you will also need to install OpenSSH. 
+
+Run the following commands as the root user on the target CentOS system:
+
+```bash
+yum install sudo openssh-server redhat-lsb-core
+systemctl start sshd
+mkdir .ssh
+chmod 700 .ssh
+```
+
+Now from the machine where the Juju client will be used, run the following 
+command to copy a public SSH key to the CentOS system:
+
+
+```
+scp ~/.ssh/id_rsa.pub  root@192.168.1.129:.ssh/authorized_keys
+```
+...substituting the IP address for your CentOS machine in the above.
+
+It is now possible to use the [`add-machine`](#adding-machines-to-the-cloud)
+or [`bootstrap`](#bootstrapping-the-cloud) commands from Juju.
+
+!!! Note: Also check that there is a root password set for the CentOS machine 
+to avoid prompts to set one which may hinder automated SSH operations.
 
 [models-config]: ./models-config.html
 [placement]: ./charms-deploying.html#deploying-to-specific-machines-and-containers
