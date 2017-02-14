@@ -2,12 +2,12 @@ Title: Implementing leadership in Juju charms
 
 # Leadership for the Charm author
 
-Leadership provides a mechanism whereby multiple units of a service can make
-use of a single, shared, authoritative source for charm-driven configuration
+Leadership provides a mechanism whereby multiple units of an application can
+make use of a single, shared, authoritative source for charm-driven configuration
 settings.
 
-Every service deployed by juju is guaranteed to have at most one leader at any
-time. This is true independent of what the charm author does; whether or not
+Every application deployed by Juju is guaranteed to have at most one leader at
+any time. This is true independent of what the charm author does; whether or not
 you implement the hooks or use the tools, the unit agents will each seek to
 acquire leadership, and maintain it while they have it or wait for the current
 leader to drop out.
@@ -24,7 +24,7 @@ should implement the following hooks:
     some other unit writes leader settings).
 
 No particular guarantees can be made regarding the timeliness of the
-`leader-settings-changed` hook; it's always possible for the juju agent itself
+`leader-settings-changed` hook; it's always possible for the Juju agent itself
 to be taken out of commission at the wrong moment and not restarted for a long
 time.
 
@@ -48,14 +48,14 @@ unprepossessing race scenarios.
     to verify continued leadership past lease expiry time, it would start to
     return false.
 
-Every service deployed by juju also has access to a pseudo-relation over which
-leader settings can be communicated with the following tools:
+Every application deployed by Juju also has access to a pseudo-relation over
+which leader settings can be communicated with the following tools:
 
   * `leader-set` acts much like `relation-set`, in that it lets you write string
     key/value pairs (in which an empty value removes the key), but with the
     following differences:
 
-      * there's only one leader-settings bucket per service (not one per unit)
+      * there's only one leader-settings bucket per application (not one per unit)
       * only the leader can write to the bucket
       * only minions are informed of changes to the bucket
       * changes are propagated instantly, bypassing the sandbox
@@ -129,10 +129,11 @@ need additional synchronisation, you can use a peer relation to communicate
 minions' acknowledgements back to the leader.
 
 !!! Note: peer relation membership is not guaranteed to match current reality
-at any given time. To be resilient in the face of your service scaling at the
-same time as you (say) rebalance your service, your leader code will need to
-use the output of `status-get --service` to determine up-to-date membership,
-and wait for the set of acked units in the peer relation to match that list.
+at any given time. To be resilient in the face of your application scaling at
+the same time as you (say) rebalance your application, your leader code will
+need to use the output of `status-get --application` to determine up-to-date
+membership, and wait for the set of acked units in the peer relation to match
+that list.
 
 ### ...guarantee that a long-lived process runs on just one unit at once?
 
@@ -144,12 +145,12 @@ Juju's leadership concept is, by choice, relatively fine-grained, to ensure
 timely handover of agent-level responsibilities. That's why `is-leader` success
 guarantees only 30s of leadership; but it's no fun running a separate watchdog
 process to `juju-run is-leader` every 30s and kill your process when that stops
-working (apart from anything else, your juju-run could be blocked by other
+working (apart from anything else, your `juju-run` could be blocked by other
 operations, so you can't guarantee a run every 30s anyway).
 
 And we don't plan to allow coarser-grained leadership requests. This is because
 if one unit could declare itself leader for a day (or even an hour) a failed
-leader will leave other parts of juju blocked for that length of time, and we're
+leader will leave other parts of Juju blocked for that length of time, and we're
 not willing to take on that cost; the 30-60s handover delay is bad enough
 already.
 
@@ -168,20 +169,10 @@ If you start your long-lived process in `leader-elected`, and stop it in
 `leader-settings-changed`, this will *usually* do what you want, but is
 vulnerable to a number of failure modes -- both because hook execution may be
 blocked until after the leadership lease has actually expired, *and* because
-total juju failure could also cause the hook not to run (but leave the workload
+total Juju failure could also cause the hook not to run (but leave the workload
 untouched).
 
 In the future, we may implement a `leader-deposed` hook, that can run with
 *stronger* timeliness guarantees; but even if we do, it's a fundamentally
 unreliable approach. Seriously, if you possibly can, go with the charmed-up
 `hacluster` solution.
-
-
-
-
-
-
-
-
-
-
