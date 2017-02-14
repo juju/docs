@@ -105,8 +105,8 @@ Run the following commands as the root user on the target CentOS system:
 ```bash
 yum install sudo openssh-server redhat-lsb-core
 systemctl start sshd
-mkdir .ssh
-chmod 700 .ssh
+mkdir ~/.ssh
+chmod 700 ~/.ssh
 ```
 
 Now from the machine where the Juju client will be used, run the following 
