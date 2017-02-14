@@ -122,7 +122,7 @@ It is now possible to use the [`add-machine`](#adding-machines-to-the-cloud)
 or [`bootstrap`](#bootstrapping-the-cloud) commands from Juju.
 
 !!! Note: Also check that there is a root password set for the CentOS machine 
-to avoid prompts to set one which may hinder automated SSH operations.
+to avoid prompts which may hinder automated SSH operations.
 
 [models-config]: ./models-config.html
 [placement]: ./charms-deploying.html#deploying-to-specific-machines-and-containers
