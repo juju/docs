@@ -1,8 +1,8 @@
-Title: What's new in Juju 2.1
+Title: What's new in 2.1
 TODO: add changes in output to model and show-machine
 
 
-# What's new in Juju 2.1
+# What's new in 2.1
 
 Juju 2.1 makes creating and managing cloud deployments even easier. This is
 thanks to two new and significant features:
