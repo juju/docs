@@ -11,6 +11,14 @@ controller using the `juju add-model` command:
 juju add-model [options] <model name>
 ```
 
+Model names can be the same when hosted on different controllers, but they must
+be unique when hosted on a single controller. For example, two users could both
+have a model called 'secret', but each user could only host one model names
+'secret' on a single controller. 
+
+Model names may only contain lowercase letters, digits and hyphens, and may not
+start with a hyphen.
+
 See `juju help add-model` for details on this command or see the
 [command reference page][commands].
 
