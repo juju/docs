@@ -55,7 +55,7 @@ We're now asked for the API endpoint URL. For our MAAS system, this is
 url by making sure it's visible to the client. After verifying the url, the
 configuration will be created as shown here:
 
-```no-hlightlight
+```no-hightlight
 Enter the API endpoint url: https://192.168.122.143:5240/MAAS
 
 Cloud "newmaas" successfully added
@@ -163,6 +163,6 @@ documentation and the Juju 2.1 [release notes][rnotes].
 [vsphere]: ./help-vmware.html
 [charmstore]: https://jujucharms.com/store
 [esstore]: https://jujucharms.com/elasticsearch-cluster
-[addcloud]:
+[addcloud]: ./commands.html#add-cloud
 [migrate]: ./models-migrate.html
-[rnotes]: 
+[rnotes]: ./reference-release-notes.html#juju_2.1.0
