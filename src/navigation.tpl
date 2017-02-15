@@ -1,6 +1,7 @@
  <ul>
     <li><a href="about-juju.html">About Juju</a></li>
     <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
+    <li><a href="whats-new.html">What's new in 2.1</a></li>
 <!-- SECTION -->
     <li class="section"><h4 class="header toggle-target">Get Started</h4>
         <ul>
