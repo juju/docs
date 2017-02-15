@@ -290,12 +290,8 @@ juju upgrade-charm postgresql --storage pgdata=10G
 
 ### Known limitations
 
-- For LXC (local provider or not), you must currently set
-  ["allow-lxc-loop-mounts"][model-config]
-  to "true" for LXC to work. With the default AppArmor profile,
-  LXC does not permit containers to mount loop devices. By setting
-  `allow-lxc-loop-mounts=true`, you are explicitly enabling this, and access
-  to all loop devices on the host.
+- Currently LXD (localhost) does not support mounting loopback devices 
+  for storage.
 
 ### More information
 
