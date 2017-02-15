@@ -2,7 +2,7 @@ Title: Adding a model
 
 # Adding a model
 
-A Juju [controller][controller] can host multiple models to accomodate
+A Juju [controller][controller] can host multiple models to accommodate
 different workloads or use cases. When a controller is created, it creates
 an initial model called 'default', but more models can be added to the
 controller using the `juju add-model` command:
