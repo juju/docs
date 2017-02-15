@@ -14,7 +14,11 @@ thanks to two new and significant features:
   `juju add-cloud` and answering a few questions.
 - model migration: it's now possible to move live models from one controller to
   another, allowing for load balancing and maintenance without losing access to
-your applications. 
+  your applications. 
+
+We're going to step through these new features in more detail below. If you're
+new to Juju, we recommend taking a look at our [Getting started][first] guide
+first.
 
 ## Interactive add-cloud
 
