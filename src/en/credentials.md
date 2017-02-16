@@ -9,7 +9,7 @@ to refer to those credentials in subsequent commands.
 
 !!! Note: LXD deployments are a special case. Accessed locally, they don't need
 additional credentials. Accessed remotely, they need a certificate
-credential. See Using [LXD as a cloud][lxd] for further details. 
+credential. See [Using LXD as a cloud][lxd] for further details. 
 
 Juju selects credentials according to how many credentials are defined. If you
 have only one credential, or if a credentials is labelled 'default', this
