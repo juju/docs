@@ -175,7 +175,7 @@ aws     bob*, carol
 google  wayne
 ```
 
-The asterisk ''' denotes the default credential, which will be used for the
+The asterisk '*' denotes the default credential, which will be used for the
 named cloud unless another is specified.
 
 For YAML output that includes detailed credential information, including
