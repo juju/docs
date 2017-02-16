@@ -2,12 +2,19 @@ Title: Juju credentials
 
 # Cloud credentials
 
-In order to access your cloud (with the exception of [LXD][lxd]), Juju will
-need to know how to authenticate itself. We use the term “credentials” to 
-describe the tokens or keys or secrets used - a set of credentials 
-is represented by a _credential name_ that is used to refer to those 
-credentials in subsequent commands.
+In order to access your cloud, Juju will need to know how to authenticate
+itself. We use the term “credentials” to describe the tokens or keys or secrets
+used - a set of credentials is represented by a _credential name_ that is used
+to refer to those credentials in subsequent commands.
 
+!!! Note: LXD deployments are a special case. Accessed locally, they don't need
+additional credentials. Accessed remotely, they need a certificate
+credential. See Using [LXD as a cloud][lxd] for further details. 
+
+Juju selects credentials according to how many credentials are defined. If you
+have only one credential, or if a credentials is labelled 'default', this
+credential will be used by Juju. When multiple credentials are defined, with no
+default, a credential name must be specified with the `--credential` argument.
 
 Currently, Juju can use one of three ways to get your credentials for a cloud:
 
@@ -15,7 +22,6 @@ Currently, Juju can use one of three ways to get your credentials for a cloud:
  - Scanning existing credentials (e.g. environment variables, .novarc files)
  - Importing a user-provided [YAML-formatted][yaml] file.
  
-
 These methods are explained in more detail below.
 
 If you are having difficulty determining the credentials needed for your 
@@ -169,7 +175,7 @@ aws     bob*, carol
 google  wayne
 ```
 
-The asterisk '*' denotes the default credential, which will be used for the
+The asterisk ''' denotes the default credential, which will be used for the
 named cloud unless another is specified.
 
 For YAML output that includes detailed credential information, including
@@ -202,14 +208,9 @@ If a credential is no longer required, it can be removed:
 ```bash
 juju remove-credential aws bob
 ```
- 
-
-
-
-
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[lxd]: ./clouds-LXD.html
+[lxd]: ./clouds-LXD.html#remote_user_credentials
 [aws]: ./help-aws.html
 [azure]: ./help-azure.html
 [gce]: ./help-google.html
