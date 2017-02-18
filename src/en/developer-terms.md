@@ -21,7 +21,8 @@ order to deploy.
 ## Creating terms
 
 As a charm developer, you may push and release terms owned by a group of which
-you are a member. Groups are mapped onto Launchpad teams.
+you are a member. Groups are mapped onto Launchpad teams, so you will need to
+[join](https://help.launchpad.net/Teams/Joining) or [create a team](https://help.launchpad.net/Teams/CreatingAndRunning) in Launchpad.
 
 ### Install latest charm-tools
 
@@ -32,17 +33,17 @@ To use terms you will need at least v2.2 of [charm tools](./tools-charm-tools.ht
 To push an initial or updated revision of a term, use `charm push-term`.
 
 ```bash
-charm push-term terms.txt my-group/my-terms
+charm push-term term.txt my-group/my-term
 ```
 
 This displays the assigned ID for the created term revision.
 
 ```no-highlight
-my-group/my-terms/1
+my-group/my-term/1
 ```
 
 This pushes, or uploads, the contents in the local file `terms.txt` to the term
-`my-group/my-terms`. Because this is a new term, revision 1 is created.
+`my-group/my-term`. Because this is a new term, revision 1 is created.
 
 ### Testing unreleased terms
 
@@ -50,7 +51,7 @@ As a member of `my-group`, you can `juju agree` to your own
 unreleased term:
 
 ```bash
-juju agree my-group/my-terms/1
+juju agree my-group/my-term/1
 ```
 
 However, until this revision is released, the term cannot be agreed to by
@@ -59,15 +60,15 @@ non-owners.
 The term contents and metadata may also be viewed with `charm show-term`.
 
 ```bash
-charm show-term my-group/my-terms/1
+charm show-term my-group/my-term/1
 ```
 
 Which returns output like this:
 
 ```yaml
-id: my-group/my-terms/1
+id: my-group/my-term/1
 owner: my-group
-name: my-terms
+name: my-term
 revision: 1
 createdon: 2016-04-20T13:28:54Z
 published: false
@@ -86,7 +87,7 @@ to it, and will be unable to deploy the charm.
 When releasing, the revision to be released must be given:
 
 ```bash
-charm release-term my-group/my-terms/1
+charm release-term my-group/my-term/1
 ```
 
 ## Requiring agreement to terms in your charm
@@ -100,12 +101,12 @@ summary: "That's a dummy charm with terms."
 description: |
     This is a longer description which
     potentially contains multiple lines.
-terms: ["my-group/my-terms"]
+terms: ["my-group/my-term"]
 ```
 
 The `terms` key can include multiple terms to be required. It can also require
-specific versions of a term, i.e., `my-group/my-terms/2` would reference the
-second version of the `my-group/my-terms` term. Omitting the version will
+specific versions of a term, i.e., `my-group/my-term/2` would reference the
+second version of the `my-group/my-term` term. Omitting the version will
 require the latest version.
 
 ## Listing terms
@@ -127,7 +128,7 @@ This produces a listing of your terms.
 
 ```no-highlight
 TERM         		CHARM
-my-group/my-terms/1	cs:trusty/terms-example-0
+my-group/my-term/1	cs:trusty/terms-example-0
 ```
 
 You can also view the terms associated with a specific charm.
@@ -140,7 +141,7 @@ This displays a subset of charm metadata; the terms required by the charm:
 
 ```yaml
 terms:
-- my-group/my-terms/1
+- my-group/my-term/1
 ```
 
 A user can view the list of terms they've agreed to with
@@ -157,7 +158,7 @@ The output displays each term revision the user has agreed to:
     {
         "user": "aisrael",
         "owner": "my-group",
-        "term": "my-terms",
+        "term": "my-term",
         "revision": 1,
         "created-on": "2016-04-20T21:01:24.84Z"
     }
