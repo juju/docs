@@ -538,7 +538,7 @@ kibana/2
 ```
 
 In this example, only one unit was returned in the output, `kibana/2` because
-the kibana application only has one unit. If more than one unit existed, all
+the Kibana application only has one unit. If more than one unit existed, all
 would be listed in the output.
 
 You can use this output with `relation-get` to find the relation data for each
@@ -548,7 +548,7 @@ unit, like this:
 juju run --unit haproxy/0 'relation-get -r reverseproxy:115 - kibana/2'
 ```
 
-This returns the data that the kibana charm in our example is sending to the
+This returns the data that the Kibana charm in our example is sending to the
 haproxy charm when creating the relation:
 
 ```bash
