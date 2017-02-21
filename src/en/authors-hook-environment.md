@@ -62,6 +62,25 @@ charm only. Finally, in all cases:
     tools to work: juju _does_ pay attention to them, but you should treat
     them as opaque and avoid messing with them.
 
+!!! Note: `juju run` runs commands in a Juju context and sets a value for 
+`$JUJU_CONTEXT_ID` each time it is used. This is what enables you to run hook
+tools.
+
+So, if you use `juju run` on a system with a unit `haproxy/0`, like this:
+
+```bash
+juju run --unit haproxy/0 'echo $JUJU_CONTEXT_ID'
+```
+
+A different output will be returned each time you run it, because each
+`juju run` establishes a different context. The output format will be similar,
+but the context ID will change to indicate the new context created for that
+`juju run`.
+
+```bash
+haproxy/0-juju-run-9100131373820979914
+```
+
 Finally, if you're [debugging](./authors-hook-debug.html), you'll also have
 access to:
 
@@ -90,6 +109,10 @@ the current remote unit is set as the default.
 
 To use relation hooks effectively, you should spend time making sure you 
 understand the [relation model](./authors-relations-in-depth.html).
+
+!!! Note: remember that all commands that produce output accept `--format json`
+and `--format yaml`, and you may consider it smarter to use those for clarity's 
+sake than to depend on the default `smart` format.
 
 ### juju-log
 
@@ -472,7 +495,7 @@ server:7
 server:9
 ```
 
-To show all relation identifiers with a different name pass it as an argument -
+To show all relation identifiers with a different name pass it as an argument,
 for example:
 
 ```no-highlight
@@ -480,10 +503,59 @@ relation-ids reverseproxy
     reverseproxy:3
 ```
 
-Note again that all commands that produce output accept `--format json` and
-`--format yaml`, and you may consider it smarter to use those for clarity's 
-sake than to depend on the default `smart` format.
+To use `juju run` with `relation-ids` to see all the reverse proxy relations
+for an haproxy unit, for example, use:
 
+```bash
+juju run --unit haproxy/0 'relation-ids reverseproxy'reverseproxy:110
+```
+
+Which returns output like this:
+
+```bash
+reverseproxy:111
+reverseproxy:112
+reverseproxy:113
+reverseproxy:114
+reverseproxy:115
+reverseproxy:116
+reverseproxy:117
+reverseproxy:118
+reverseproxy:119
+```
+
+You can use this output with `relation-list` to see the units for a given
+relation-id, like this:
+
+```bash
+juju run --unit haproxy/0 'relation-list -r reverseproxy:115'
+```
+
+Which will return the unit(s) for the given ID, like this:
+
+```bash
+kibana/2
+```
+
+In this example, only one unit was returned in the output, `kibana/2` because
+the Kibana application only has one unit. If more than one unit existed, all
+would be listed in the output.
+
+You can use this output with `relation-get` to find the relation data for each
+unit, like this:
+
+```bash
+juju run --unit haproxy/0 'relation-get -r reverseproxy:115 - kibana/2'
+```
+
+This returns the data that the Kibana charm in our example is sending to the
+haproxy charm when creating the relation:
+
+```bash
+host: 10.142.0.7
+port: "80"
+private-address: 10.142.0.7
+```
 
 ### status-set
 
