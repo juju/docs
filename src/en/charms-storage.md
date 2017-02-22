@@ -288,7 +288,7 @@ by adding the '--storage' argument:
 juju upgrade-charm postgresql --storage pgdata=10G
 ```
 
-### Known limitations
+### LXD loop devices
 
 LXD (localhost) does not officially support mounting loopback devices for
 storage. However, with some configuration you can make this work.
