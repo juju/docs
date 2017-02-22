@@ -288,10 +288,55 @@ by adding the '--storage' argument:
 juju upgrade-charm postgresql --storage pgdata=10G
 ```
 
-### Known limitations
+### LXD loop devices
 
-- Currently LXD (localhost) does not support mounting loopback devices 
-  for storage.
+LXD (localhost) does not officially support mounting loopback devices for
+storage. However, with some configuration you can make this work.
+
+Each container uses the default profile, but also uses a model-specific profile
+with the name juju-<model-name>. Editing a profile will affect all of the
+containers using it, so you can add loop devices to all LXD containers by
+editing the default profile, or you can scope it to a model.
+
+To add loop devices to your container, add loop device entries to the default
+or model-specific profile, like this:
+
+
+```bash
+...
+devices:
+  loop-control:
+    major: "10"
+    minor: "237"
+    path: /dev/loop-control
+    type: unix-char
+  loop0:
+    major: "7"
+    minor: "0"
+    path: /dev/loop0
+    type: unix-block
+  loop1:
+    major: "7"
+    minor: "1"
+    path: /dev/loop1
+    type: unix-block
+...
+  loop9:
+    major: "7"
+    minor: "9"
+    path: /dev/loop9
+    type: unix-block
+```
+
+The above is enough to expose the loop devices into the container, and for the
+container to acquire one of them using "losetup". It is not yet enough to enable
+the container to mount filesystems on the loop devices. For that, the simplest
+thing to do is to make the container privileged by adding:
+
+```
+config:
+  security.privileged: "true"
+```
 
 ### More information
 
