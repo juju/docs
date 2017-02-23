@@ -328,8 +328,11 @@ release of Juju 2.1 might have assumed that a container has access to all of
 the same spaces as the host machine and may no longer deploy cleanly with Juju.
 
 These bundles will need to be updated to be more specific about the
-bindings required. This allows the operator to specify exactly which charm
-defined endpoints should end up in specific places:
+bindings required, allowing the operator to specify exactly which charm
+defined endpoints should end up in specific places.
+
+The following `deploy` command connects charm endpoints to specific spaces and
+includes a default option for any interfaces not specified:
 
 ```bash
 juju deploy mysql --bind "db:db-space db-admin:admin-space default-space"
