@@ -332,14 +332,14 @@ bindings required, allowing the operator to specify exactly which charm
 defined endpoints should end up in specific places.
 
 The following `deploy` command connects charm endpoints to specific spaces and
-includes a default option for any interfaces not specified:
+includes a default space, `default-space`, for any interfaces not specified:
 
 ```bash
 juju deploy mysql --bind "db:db-space db-admin:admin-space default-space"
 ```
 
 Using the `binding` section in the bundle's YAML file, the above deploy
-commands can be mirrored in bundle format with the following:
+command can be mirrored in bundle format with the following:
 
 ```yaml
 mysql:
