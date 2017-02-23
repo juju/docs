@@ -314,8 +314,8 @@ juju deploy --bind "db:db-space db-admin:admin-space default-space" mysql
 For information on building bundles with bindings, see [Using and Creating
 Bundles][creatingbundles].
 
-Alternatively, both the `add-machine` and `deploy` commands allow the
-specification of a spaces constraint using the `--constraints` argument:
+Both the `add-machine` and `deploy` commands allow the specification of a
+spaces constraint using the `--constraints` argument:
 
 ```bash
 juju add-machine --constraints spaces=db-space
