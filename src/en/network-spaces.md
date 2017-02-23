@@ -24,10 +24,10 @@ a few simple considerations when using spaces:
 !!! Note: Advanced networking features, such as 'spaces`, are currently only
 supported by MAAS.
 
-Having multiple subnets spanning different zones within the same space
-enables Juju to perform automatic distribution of units of a service across
-zones inside the same space. This allows for high-availability and the
-spreading of instances evenly across subnets and zones.
+Having multiple subnets spanning different zones within the same space enables
+Juju to perform automatic distribution of an application's units across zones
+inside the same space. This allows for high-availability and the spreading of
+instances evenly across subnets and zones.
 
 As an example, consider a model divided into three segments with
 distinct security requirements:
@@ -36,7 +36,7 @@ distinct security requirements:
   access to the CMS application behind it.
 - The "cms" space for content-management applications accessible via the "dmz"
   space only.
- -The "database" space for backend database services, which should be accessible
+- The "database" space for backend database services, which should be accessible
   only by the applications.
 
 HAProxy is deployed inside the "dmz" space, it is accessible from the Internet
@@ -152,7 +152,7 @@ zone), configured like this:
 Once MAAS has those subnets, we can bootstrap as usual:
 
 ```bash
-$ juju bootstrap
+juju bootstrap
 ```
 
 After that, we can create the 3 spaces and add the subnets we
@@ -187,8 +187,5 @@ Once all the units are up, you will be able to get the public
 IP address of one of the haproxy units (from `juju status`), and
 open it in a browser, seeing the mediawiki page.
 
-In an upcoming release, Juju will provide much better visibility
-of which services and units run in which spaces/subnets.
-
 [createbundles]: ./charms-bundles.html#binding_endpoints_of_applications_within_a_bundle
-[deployspaces]: ./charms-deploying.md#deploying_to_spaces
+[deployspaces]: ./charms-deploying.html#deploying-to-spaces
