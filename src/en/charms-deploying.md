@@ -337,7 +337,8 @@ or dmz spaces.
 For more information regarding constraints in general, see "juju help
 constraints" and to learn about `extra-bindings`, which provide a way to
 declare an extra bindable endpoint that is not a relation, see [Charm
-metadata](./authors-charm-metadata.html).
+metadata][metadata].
+
 
 ## Juju retry-provisioning
 
@@ -450,3 +451,4 @@ charm pull vsftpd
 
 [spaces]: ./network-spaces.html
 [creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
+[metadata]: ./authors-charm-metadata.html
