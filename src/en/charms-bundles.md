@@ -325,7 +325,7 @@ Prior to Juju 2.1, all deployed machines were regarded as potential hosts for
 containers, and as a result, all network interfaces connected to those
 machines were bridged by default. Subsequently, bundles created before the
 release of Juju 2.1 might have assumed that a container has access to all of
-the same spaces as the host machine and will no longer deploy cleanly. 
+the same spaces as the host machine and may no longer deploy cleanly with Juju.
 
 These bundles will need to be updated to be more specific about the
 bindings required. This allows the operator to specify exactly which charm
