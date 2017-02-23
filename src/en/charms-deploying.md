@@ -281,43 +281,63 @@ are supplied, then the remaining units will be assigned as normal to a new,
 clean machine.
 
 
-## Deploying with binding
+## Deploying to spaces
 
-You can configure more complex networks using [spaces](./network-spaces.html). This
-also permits the use of `--bind` to specify which network space individual
-charm endpoints should use. When you bind, the endpoint(s) of the charm will
-have IP addresses from subnets that are part of the specified space. Create
-your space first before deploying a charm that attempts to use it.
+More complex networks can be configured using spaces. Spaces group one or more
+routable subnets with common ingress and egress rules to give the operator much
+better and finer-grained control over all networking aspects of a model and its
+application deployments.
 
-When `--bind` is not used, all endpoints will use the host machine's preferred
-private address, which you can see using `unit-get private-address`.
+See the [How to configure more complex networks using spaces][spaces] for
+details on creating and listing spaces.
 
-To deploy mysql while binding the "db" endpoint to an address that is part
-of the "database" space:
+When deploying a charm or a bundle, you can specify a space using the `--bind`
+argument following the `juju deploy` command.
 
-```bash
-juju deploy mysql --bind db=database
-```
-
-To deploy wordpress while binding all endpoints of wordpress to the
-"internal-apps" space:
+When deploying an application to a target with multiple spaces, the operator
+must specify which space to use because ambiguous bindings will result in a
+provisioning failure. For example, the following will deploy the 'mysql'
+application to the 'db-space' space:
 
 ```bash
-juju deploy wordpress --bind internal-apps
+juju deploy mysql --bind db-space
 ```
 
-To deploy haproxy while binding "url" to "public" and all other endpoints to
-"internal":
+For finer control, the `--bind` argument can also be used to specify how
+specific charm-defined endpoints are connected to specific spaces, including a
+default option for any interfaces not specified:
 
 ```bash
-juju deploy haproxy --bind "url=public internal"
+juju deploy --bind "db:db-space db-admin:admin-space default-space" mysql
 ```
 
-To use binding with bundles, see the related section in
-[Using and creating bundles](./charms-bundles.html).
+For information on building bundles with bindings, see [Using and Creating
+Bundles][creatingbundles].
 
-To learn about `extra-bindings`, which provide a way to declare an extra
-bindable endpoint that is not a relation, see [Charm metadata](./authors-charm-metadata.html).
+Both the `add-machine` and `deploy` commands allow the specification of a
+spaces constraint using the `--constraints` argument:
+
+```bash
+juju add-machine --constraints spaces=db-space
+```
+
+The spaces constraint allows you to select an instance for the new machine or
+unit, connected to one or more existing spaces. Both positive and negative
+entries are accepted, the latter prefixed by "^", in a comma-delimited list.
+For example, given the following:
+
+```
+--constraints spaces=db-space,^storage,^dmz,internal
+```
+
+Juju will provision instances connected to (with IP addresses on) one of the
+subnets of both db-space and internal spaces, and NOT connected to either the storage
+or dmz spaces.
+
+See [Constraints][constraints] for more general information regarding
+constraints. To learn about `extra-bindings`, which provide a way to declare
+an extra bindable endpoint that is not a relation, see [Charm
+metadata][metadata].
 
 
 ## Juju retry-provisioning
@@ -428,3 +448,8 @@ cd ~/charms
 charm pull nfs
 charm pull vsftpd
 ```
+
+[spaces]: ./network-spaces.html
+[creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
+[metadata]: ./authors-charm-metadata.html
+[constraints]: ./charms-constraints.html
