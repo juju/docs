@@ -62,7 +62,7 @@ juju add-space [options] <name> [<CIDR1> <CIDR2> ...]
 ```
 
 The CIDR subnet arguments are optional, but the following command adds a space
-called 'db-space` with a single subnet, 192.168.123.0/24, as a member:
+called `db-space` with a single subnet, 192.168.123.0/24, as a member:
 
 ```bash
 juju add-space db-space 192.168.123.0/24
