@@ -1,4 +1,6 @@
 Title: Juju LXD local provider
+TODO: add details on remote access
+      possible reorganisation or splitting of the doc required
 
 # Using LXD as a cloud
 
@@ -99,6 +101,43 @@ Cached images can be seen with `lxc image list`:
 
 Image cache expiration and image synchronization mechanisms are built-in.
 
+### Remote user credentials
+
+When working with remote users on different machines (see [Creating
+users][users] for details on adding users, registering them and granting them
+permissions), LXD-hosted controllers need to generate a specific certificate
+credential which is shared with the remote machine. 
+
+To do this, first run `juju autoload-credentials` on the LXD host. This
+will generate output similar to the following:
+
+```bash
+Looking for cloud and credential information locally...
+
+1. LXD credential "localhost" (new)
+Select a credential to save by number, or type Q to quit:
+```
+
+Select the LXD credential (`1` in the above example) and you will be asked for
+the name of a cloud to link to this credential. Enter 'localhost' to specify
+the local LXD deployment. When the prompt re-appears, type 'q' to quit. The new
+certificate credential will have been created.
+
+To export this certificate credential to a file called
+`localhost-credentials.yaml`, type the following:
+
+```bash
+juju credentials localhost --format=yaml > localhost-credentials.yaml
+```
+
+The output file now needs to be moved to the machine and account that requires
+access to the local LXD deployment. With this file on the remote machine, the
+certificate credential can be imported with the following command:
+
+```bash
+juju add-credential localhost -f localhost-credentials.yaml
+```
+See [Cloud credentials][credentials] for more details on how credentials are used. 
 
 ### Logs
 
@@ -156,3 +195,4 @@ documentation][controllers].
 [logs]: ./troubleshooting-logs.html
 [models-add]: ./models-adding.html
 [controllers]: ./controllers.html
+[credentials]: ./credentials.html

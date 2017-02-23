@@ -79,6 +79,7 @@
         </li>
         <li class="section"><a class="header" href="howto.html">How to...</a>
             <ul class="sub">
+                <li><a href="howto-prometheus.html">Configure metrics gathering with Prometheus</a></li>
                 <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
             </ul>
         </li>
