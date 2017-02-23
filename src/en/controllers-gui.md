@@ -49,8 +49,9 @@ After opening the Juju GUI URL, you are greeted with the login window, where
 you will have to provide the credentials to access the model. These
 credentials can be copied from the output of `juju gui`. 
 
-If you'd rather not have your login credentials displayed with the `juju gui`
-command, they can be suppressed by adding the `--hide-credential` argument. 
+If you'd rather not have your login credentials displayed in the output of
+`juju gui`, they can be suppressed by adding the `--hide-credential`
+argument. 
 
 ## Monitoring
 
