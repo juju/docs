@@ -321,9 +321,39 @@ This is the equivalent of deploying with:
 juju deploy cs:precise/mysql-27 --bind "server=database cluster=internal"
 ```
 
+Prior to Juju 2.1, all deployed machines were regarded as potential hosts for
+containers, and as a result, all network interfaces connected to those machines
+were bridged by default. Consequently, bundles created before the release of
+Juju 2.1 might assume that a container has access to all of the same spaces as
+the host machine and may no longer deploy cleanly with more recent versions of
+Juju.
+
+These bundles will need to be updated to be more specific about the
+bindings required, allowing the operator to specify exactly which charm-defined
+endpoints should end up in specific places.
+
+The following `deploy` command connects charm endpoints to specific spaces and
+includes a default space, `default-space`, for any interfaces not specified:
+
+```bash
+juju deploy mysql --bind "db:db-space db-admin:admin-space default-space"
+```
+
+Using the `binding` section in the bundle's YAML file, the above deploy
+command can be mirrored in bundle format with the following:
+
+```yaml
+mysql:
+   charm: "cs:mysql"
+   num_units: 1
+   bindings:
+     "": default-space
+     db: db-space
+     db-admin: admin-space
+```
+
 It is not currently possible to declare a default space in the bundle for all
 application endpoints. The workaround is to list all endpoints explicitly.
-
 
 ## Sharing your Bundle with the Community
 
