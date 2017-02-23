@@ -85,7 +85,7 @@ The versions covered here are:
 
   There is more information on model migration in the Juju documentation
   online at 
-  <https://jujucharms.com/docs/models-migrate>
+  [https://jujucharms.com/docs/2.1/models-migrate](https://jujucharms.com/docs/2.1/./models-migrate)
 
 
   ### Interactive `add-cloud`
@@ -117,7 +117,7 @@ The versions covered here are:
 
   A more detailed walkthrough of the process is published in the online
   Juju documentation here:
-  <https://jujucharms.com/docs/clouds#specifying-additional-clouds>
+  [https://jujucharms.com/docs/2.1/clouds#specifying-additional-clouds](https://jujucharms.com/docs/2.1/./clouds#specifying-additional-clouds)
 
 
   ### Networking changes
@@ -176,13 +176,13 @@ The versions covered here are:
 
   There is more information on binding to spaces in the online Juju
   documentation
-  <https://jujucharms.com/docs/charms-deploying#deploying-with-binding>
+  [https://jujucharms.com/docs/2.1/charms-deploying#deploying-with-binding](https://jujucharms.com/docs/2.1/./charms-deploying#deploying-with-binding)
 
   Defining spaces within Juju is covered in the documentation here:
-  <https://jujucharms.com/docs/network-spaces>
+  [https://jujucharms.com/docs/2.1/network-spaces](https://jujucharms.com/docs/2.1/./network-spaces)
 
   Information on adding bindings to charm bundles is also documented online:
-  <https://jujucharms.com/docs/charms-bundles#binding-endpoints-of-applications-within-a-bundle>
+  [https://jujucharms.com/docs/2.1/charms-bundles#binding-endpoints-of-applications-within-a-bundle](https://jujucharms.com/docs/2.1/./charms-bundles#binding-endpoints-of-applications-within-a-bundle)
 
   These changes and the rationale behind them were originally posted to
   the juju-dev mailing list. If you require further background or have
@@ -260,7 +260,7 @@ The versions covered here are:
 
   A more detailed walkthrough of the process is published in the online
   Juju documentation here:
-  <https://jujucharms.com/docs/howto-prometheus>
+  [https://jujucharms.com/docs/2.1/howto-prometheus](https://jujucharms.com/docs/2.1/./howto-prometheus)
 
 
   ### [juju] Changes to the GUI
@@ -295,7 +295,7 @@ The versions covered here are:
 
   There is more information on using the built-in GUI in the online
   documentation at:
-  <https://jujucharms.com/docs/master/controllers-gui>
+  [https://jujucharms.com/docs/2.1/controllers-gui](https://jujucharms.com/docs/2.1/./controllers-gui)
 
 
   ### [juju] Improved Openstack keystone v3 authentication
@@ -477,7 +477,7 @@ The versions covered here are:
 
   An overview of these features is discussed below - for full 
   documentation, please visit our docs online at:
-  [https://jujucharms.com/docs/2.0/](https://jujucharms.com/docs/2.0/) 
+  [https://jujucharms.com/docs/2.0/](https://jujucharms.com/docs/2.0/./) 
 
   ### Integrated GUI
 
@@ -518,7 +518,7 @@ The versions covered here are:
   locally using secure local containers. Use our getting-started guide
   to setup LXD and start modeling your operations. 
 
-  [https://jujucharms.com/docs/2.0/getting-started](https://jujucharms.com/docs/2.0/getting-started) 
+  [https://jujucharms.com/docs/2.0/getting-started](https://jujucharms.com/docs/2.0/./getting-started) 
 
   #### Public clouds
 
@@ -550,7 +550,7 @@ The versions covered here are:
   The newly downloaded cloud information will be used next time a
   Juju controller is bootstrapped.
 
-  See: [https://jujucharms.com/docs/2.0/clouds](https://jujucharms.com/docs/2.0/clouds) 
+  See: [https://jujucharms.com/docs/2.0/clouds](https://jujucharms.com/docs/2.0/./clouds) 
 
 
   #### Credential management
@@ -561,7 +561,7 @@ The versions covered here are:
 
         juju add-credential aws
 
-  See: [https://jujucharms.com/docs/2.0/credentials](https://jujucharms.com/docs/2.0/credentials) 
+  See: [https://jujucharms.com/docs/2.0/credentials](https://jujucharms.com/docs/2.0/./credentials) 
 
 
   #### Manual, MAAS, and OpenStack clouds
@@ -579,7 +579,7 @@ The versions covered here are:
 
         juju bootstrap homestack
 
-  For more details see [https://jujucharms.com/docs/2.0/clouds](https://jujucharms.com/docs/2.0/clouds) 
+  For more details see [https://jujucharms.com/docs/2.0/clouds](https://jujucharms.com/docs/2.0/./clouds) 
 
 
   #### Bootstrap constraints and series
@@ -786,8 +786,8 @@ The versions covered here are:
 
   To learn about managing controllers and models, see:
 
-  [https://jujucharms.com/docs/2.0/controllers](https://jujucharms.com/docs/2.0/controllers) 
-  [https://jujucharms.com/docs/2.0/models](https://jujucharms.com/docs/2.0/models) 
+  [https://jujucharms.com/docs/2.0/controllers](https://jujucharms.com/docs/2.0/./controllers) 
+  [https://jujucharms.com/docs/2.0/models](https://jujucharms.com/docs/2.0/./models) 
 
 
   #### Juju GUI in the controller
@@ -795,7 +795,7 @@ The versions covered here are:
   The Juju GUI is now included in every Juju controller after
   bootstrapping, eliminating the need to deploy a Juju GUI charm. 
 
-  See: [https://jujucharms.com/docs/controllers-gui](https://jujucharms.com/docs/controllers-gui) 
+  See: [https://jujucharms.com/docs/controllers-gui](https://jujucharms.com/docs/2.0/./controllers-gui) 
 
 
   #### Creating new models
@@ -838,7 +838,7 @@ The versions covered here are:
         juju grant jo admin staging-cms 
 
   Additional command support revoking permissions and disabling users. To learn more, see:
-  [https://jujucharms.com/docs/2.0/users](https://jujucharms.com/docs/2.0/users) 
+  [https://jujucharms.com/docs/2.0/users](https://jujucharms.com/docs/2.0/./users) 
 
 
   ### Controller and model permissions
@@ -866,7 +866,7 @@ The versions covered here are:
   collection of charms, configuration, and other characteristics that can
   be deployed in a consistent manner. 
 
-  See: [https://jujucharms.com/docs/2.0/charms-bundles](https://jujucharms.com/docs/2.0/charms-bundles) 
+  See: [https://jujucharms.com/docs/2.0/charms-bundles](https://jujucharms.com/docs/2.0/./charms-bundles) 
 
 
   #### Multi-series charms
@@ -896,7 +896,7 @@ The versions covered here are:
 
         juju deploy ./dev/juju/magic-charm --series yakkety
 
-  See: [https://jujucharms.com/docs/2.0/charms-deploying](https://jujucharms.com/docs/2.0/charms-deploying) 
+  See: [https://jujucharms.com/docs/2.0/charms-deploying](https://jujucharms.com/docs/2.0/./charms-deploying) 
 
   Any directory structure can be used, including simply pulling the
   charm source from a version control system, hacking on the code, and
@@ -990,7 +990,7 @@ The versions covered here are:
 
   For more information on the new support for channels in the Charm Store
   and how they work, please see our 
-  [documentation](https://jujucharms.com/docs/2.0/authors-charm-store#entities-explained)
+  [documentation](https://jujucharms.com/docs/2.0/./authors-charm-store#entities-explained)
   on the subject.
 
   #### extra-bindings Support for charms metadata
@@ -1094,7 +1094,7 @@ The versions covered here are:
   #### LXD provider
 
   The new LXD provider is the best way to use Juju locally. 
-  See: [https://jujucharms.com/docs/2.0/clouds-LXD](https://jujucharms.com/docs/2.0/clouds-LXD) 
+  See: [https://jujucharms.com/docs/2.0/clouds-LXD](https://jujucharms.com/docs/2.0/./clouds-LXD) 
 
   The controller is no longer your host machine; a LXD
   container is created instead. This keeps your host machine clean 
@@ -1422,7 +1422,7 @@ The versions covered here are:
   | juju ensure-availability             | juju enable-ha
 
   * the behaviour of destroy-environment/destroy-model has changed, see
-        [https://jujucharms.com/docs/2.0/controllers](https://jujucharms.com/docs/2.0/controllers) 
+        [https://jujucharms.com/docs/2.0/controllers](https://jujucharms.com/docs/2.0/./controllers) 
 
 
   These extra commands were previously under the "jes" developer feature
