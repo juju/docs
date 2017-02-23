@@ -109,7 +109,8 @@ subnets:
 
 For details on how to deploy applications to specific spaces, and how to bind
 specific charm-defined endpoints to specific spaces, see [Deploying to
-spaces][deployspaces].
+spaces][deployspaces]. To create bundles with specific bindings, see [Using and
+Creating Bundles][createbundles].
 
 ### Bridges
 
@@ -187,5 +188,5 @@ Once all the units are up, you will be able to get the public
 IP address of one of the haproxy units (from `juju status`), and
 open it in a browser, seeing the mediawiki page.
 
-[createbundles]: ./charms-bundles.html#binding_endpoints_of_applications_within_a_bundle
+[createbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [deployspaces]: ./charms-deploying.html#deploying-to-spaces
