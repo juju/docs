@@ -10,6 +10,379 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
+^# Juju 2.1.0
+
+  ## What's new in 2.1.0
+
+  - Model migration
+  - Interactive `add-cloud`
+  - Networking changes
+  - Conjure-up 
+  - LXD credential changes
+  - Changes to the GUI
+  - Instrumentation of Juju via Prometheus endpoints
+  - Improved OpenStack keystone v3 authentication
+  - New cloud-regions supported
+  - Additional improvements
+
+
+  ### Model migration
+
+  Model migration allows you to easily move a live model from one
+  controller to another. The same configuration of machines, units and
+  their relationships will be replicated on a secondary controller, while
+  your applications continue uninterrupted.
+
+  Migration is a useful alternative to upgrading a controller in place,
+  and for moving models off a busy controller. When upgrading a
+  controller, you can bootstrap a new controller running a newer version
+  of Juju and then migrate each model across one at a time. This is safer
+  than upgrading a controller while it is running many applications.
+
+  Currently there are some restrictions:
+
+    - The source and destination controllers need to be in the same cloud
+      environment.
+    - The destination controller needs to be running on the same cloud
+      substrate as the source controller.
+    - Destination controllers on different regions or VPCs need direct
+      connectivity to the source controller.
+    - The version of Juju running on the destination controller needs to
+      be the same or newer than the version on the source controller. 
+    - The controller model cannot be migrated.
+
+  To migrate a model on the current controller to a model on another
+  controller, you simply name the model as the first argument followed by
+  the target controller (a model with the same name cannot already exist
+  on the target controller):
+
+      juju migrate <model-name> <target-controller-name>
+
+  This will initiate the migration with output similar to the following:
+
+      Migration started with ID "d1924666-1b00-4805-89b5-5ed5a6744426:0"
+
+  You can monitor the migration progress from the output of the juju
+  status command run against the source model. The juju show-model command
+  also shows migration progress.
+
+  If the migration fails at any point, the model will be reactivated on
+  the original controller in the same state it was in before the migration
+  process was started. The duration of a migration will depend on the
+  complexity of the model, the resources it uses and the capabilities of
+  the hosted environment. Most migrations will take minutes, and even
+  large deployments are unlikely to take hours.
+
+  When complete, the model will no longer exist on the source controller,
+  and the model, all its applications, machines and units will be running
+  from the target controller.
+
+  Use `juju switch` to select the migrated model in the destination
+  controller:
+
+      juju switch <target controller>:<model>
+      juju status
+
+  There is more information on model migration in the Juju documentation
+  online at 
+  <https://jujucharms.com/docs/2.1/models-migrate>
+
+
+  ### Interactive `add-cloud`
+
+  With previous versions of Juju, the `add-cloud` command would need to be
+  fed a specifically formatted YAML file if your cloud of choice wasn't
+  directly supported by Juju. You can still do this, but from version 2.1,
+  you can also step through a simple interactive process that will create
+  a working configuration for you.
+
+  Typing `juju add-cloud` starts the process and produces the following
+  output:
+
+      Cloud Types
+        maas
+        manual
+        openstack
+        vsphere
+      
+      Select cloud type:
+
+  Simply answer the three or four questions for your new cloud and Juju
+  will do the rest. The next step is to add credentials for this new
+  cloud, which can be done with the similarly interactive command:
+
+      juju add-credentials
+
+  Again, follow the prompts to add the requested information.
+
+  A more detailed walkthrough of the process is published in the online
+  Juju documentation here:
+  <https://jujucharms.com/docs/2.1/clouds#specifying-additional-clouds>
+
+
+  ### Networking changes
+
+  A number of changes have been introduced to make the use of networks,
+  particularly networking of containers, more efficient and consistent in
+  Juju.
+
+  Juju models networks using the primitive of "spaces". A space is made up
+  of one or more routable subnets with common ingress and egress rules.
+  The operator can model this topology in such a way that applications
+  have the required network connectivity without generating network IP
+  maps of overwhelming complexity that are not portable.
+
+  The default behaviour in Juju 2.0 was that all machines might host
+  containers and so all interfaces were bridged by default, even if a
+  container was never placed on the machine. If a container was placed on
+  the machine all of the network devices of that machine were made
+  available to each container. This led to issues where the operator
+  wanted a much cleaner model where the containers only had access to
+  networks that the model required. Starting from Juju 2.1 this will no
+  longer be true. Juju will only create the bridges which are necessary
+  for a container to operate in the model.
+
+  The changes in 2.1 require operators to be more specific about what
+  network space a charm should operate in (this is particularly relevant
+  to charms deployed to containers on Juju machines) when more than one
+  space is available on the machine. Defining what spaces the container is
+  required to operate in is is already supported by the '--bind' option of
+  the deploy command, which can be used to specify that of the charm
+  should operate within the same space, e.g.:
+
+      juju deploy mysql --bind db-space
+
+  ...or, you can specify which charm defined endpoints should end up in
+  specific spaces:
+
+      juju deploy mysql --bind "db:db-space db-admin:admin-space default-space"
+
+  ...which also includes a default option for any other interfaces not
+  specified.
+
+  These changes potentially impact on currently published bundles. Bundles
+  that might have assumed that a container has access to all of the same
+  spaces as the host machine will no longer deploy cleanly. They need to
+  be updated to be more specific about the bindings required. The above
+  deploy commands can be mirrored in bundle format like so:
+
+      mysql:
+         charm: "cs:mysql"
+         num_units: 1
+         bindings:
+           “”: default-space
+           db: db-space
+           db-admin: admin-space
+
+  There is more information on binding to spaces in the online Juju
+  documentation
+  <https://jujucharms.com/docs/2.1/charms-deploying#deploying-with-binding>
+
+  Defining spaces within Juju is covered in the documentation here:
+  <https://jujucharms.com/docs/2,1/network-spaces>
+
+  Information on adding bindings to charm bundles is also documented online:
+  <https://jujucharms.com/docs/2.1/charms-bundles#binding-endpoints-of-applications-within-a-bundle>
+
+  These changes and the rationale behind them were originally posted to
+  the juju-dev mailing list. If you require further background or have
+  questions or concerns, please add to the discussion on the mailing list.
+  The original post is here:
+  <https://lists.ubuntu.com/archives/juju-dev/2017-February/006313.html>
+
+
+  ### Conjure-up
+
+  Conjure-up, the big-software deployment tool that leverages Juju, has
+  seen some major improvements in-line with Juju development. A new
+  `conjure-down` command can be used to easily teardown models, and
+  there's support for Canonical Kubernetes 1.5.2 and Kubernetes 1.5.2,
+  which can be deployed to the local LXD provider. Several ‘big-data’
+  spells have been added - see them with ‘conjure-up bigdata’-  and
+  there’s a new ‘Architect’ button which allows editing machine placement,
+  including allocation to a MAAS machine.
+
+  For more details, take a look at the updated Conjure-up user guide:
+  <http://conjure-up.io/docs/en/users/>
+
+
+  ### [juju] LXD credentials
+
+  Juju now support credentials to access controllers on remote LXD hosts.
+  If you are just bootstrapping and adding models on your laptop there is
+  no change in workflow, but there is a change if you want to add models
+  from another machine.
+
+  Users are now expected to have a "certificate" credential for creating
+  LXD models. If you are on the LXD host, bootstrap and add-model will
+  both auto-generate a credential as needed, assuming you have access to
+  the LXD Unix socket.
+
+  When working with remote users on different machines, LXD-hosted
+  controllers need to to manually import the certificate credential from
+  the host machine.
+
+  To do this, first run juju autoload-credentials on the LXD host. This
+  will generate output similar to the following:
+
+      Looking for cloud and credential information locally...
+
+      1. LXD credential "localhost" (new)
+      Select a credential to save by number, or type Q to quit:
+
+  Select the LXD credential (1 in the above example) and you will be asked
+  for the name of a cloud to link to this credential. Enter "localhost" to
+  specify the local LXD deployment. When the prompt re-appears, type "q"
+  to quit. The new certificate credential will have been created.
+
+  To export this certificate credential to a file called
+  localhost-credentials.yaml,
+  type the following:
+
+      juju credentials localhost --format=yaml > localhost-credentials.yaml
+
+  The output file now needs to be moved to the machine and account that
+  requires access to the local LXD deployment. With this file on the
+  remote machine, the certificate credential can be imported with the
+  following command:
+
+      juju add-credential localhost -f localhost-credentials.yaml
+
+
+  ### [juju] Instrumentation of Juju via Prometheus endpoints
+
+  Starting with Juju 2.1 each Juju controller provides an HTTPS endpoint
+  to expose Prometheus metrics. To feed these metrics into Prometheus, you
+  must add a new scrape target to your already installed and running
+  Prometheus instance. For this use case, the only constraint on where
+  Prometheus is running is that Prometheus must be able to contact the
+  Juju controller's API server address/port.
+
+  A more detailed walkthrough of the process is published in the online
+  Juju documentation here:
+  <https://jujucharms.com/docs/2.1/howto-prometheus>
+
+
+  ### [juju] Changes to the GUI
+
+  The `juju gui` command has changed to improve the user experience. By
+  default this command now uses the old 'no-browser' behaviour (i.e. it
+  doesn't automatically open the URL in your default web browser) and also
+  displays the login credential. There is a new --hide-credential option
+  not to show the credential.
+
+  The --no-browser option is supported but deprecated (it is effectively a
+  no-op). To bring up a browser, use the --browser option. For example, to
+  output the URL and credential, run:
+
+      juju gui
+
+  To print the Juju GUI URL only:
+
+      juju gui --hide-credential
+
+  To open the Juju GUI in the default browser and show admin credential
+  used to log into it:
+
+      juju gui --browser
+
+  Juju now supports the new model path based URLs; these replace the URLs
+  containing the model UUID. So if you know the owner and name of a model,
+  you can easily point a browser to the following location to access the
+  GUI for that model:
+
+      https://<controller-ip>:17070/gui/u/<owner>/<modelname>/
+
+  There is more information on using the built-in GUI in the online
+  documentation at:
+  <https://jujucharms.com/docs/master/controllers-gui>
+
+
+  ### [juju] Improved Openstack keystone v3 authentication
+
+  Juju now supports authentication for project and domain scopes. The
+  following environment variables or ~/.novarc attributes are supported:
+
+  - OS_DOMAIN_NAME
+    domain name of the requested domain level authorisation scope
+  - OS_USER_DOMAIN_NAME
+    domain name of the user
+  - OS_PROJECT_DOMAIN_NAME
+    domain name of the requested project level authorisation scope
+  - OS_DEFAULT_DOMAIN_NAME
+    common domain name of the user and project
+
+  The Juju autoload-credentials command may be used to import credential
+  attributes from either environment variables or ~/.novarc into the Juju
+  credential store.
+
+  See the online Openstack documentation here:
+  <https://developer.openstack.org/api-ref/identity/v3/>
+
+
+  ### [juju] New cloud-regions supported
+
+  Juju supports two more Google region and six more Azure regions:
+  - google/us-west1
+  - google/asia-northeast1
+  - azure/canadacentral
+  - azure/canadaeast
+  - azure/uksouth
+  - azure/ukwest
+  - azure/westcentralus
+  - azure/westus2
+
+
+  ### [juju] Additional improvements
+
+  - Manual cloud provisioning now supports CentOS machines
+  - Deployments to LXD containers on Xenial use the more performant
+    directory backend https://bugs.launchpad.net/juju/+bug/1648513
+  - Constraints placed on KVM containers in bundles are honoured
+  - Juju SSH improvements for the Windows platform
+  - Memory usage improvements
+  - Openstack Provider has been updated to support Neutron networking apis
+  - New APIs for querying instance types and characteristics available on
+    clouds 
+  - vSphere provider improvements
+  - Model config now supports an "extra-info" field for holding additional
+    metadata
+  - Stricter rules for validating charm metadata field names to conform to
+    data storage requirements. Charm metadata fields can not contain dots
+  - Openstack Provider has been updated to support Neutron networking apis
+  - New APIs for querying instance types and characteristics available on
+    clouds 
+
+
+  ## Resolved Issues
+
+  - [Juju] KVM containers race with LXD containers and hooks Lp 1664437
+  - [Juju] juju2 eating CPU, units in error Lp 1635311
+  - [Juju] kill-controller removes machines from migrated model Lp 1648063
+  - [Juju] Memory/goroutine leaks Lp 1516669
+  - [Juju] memory leak when adding many applications Lp 1653558
+  - [Juju] lxd client raw response 'sync' is too noisy Lp 1656243
+  - [Conjure-up] headless conjure-up kubernetes-core fails, while GUI does
+    work bug Gh 676
+  - [Conjure-up] conjure-up isn't properly handling a failed bootstrap
+    bug Gh 641
+  - [Conjure-up] Conjure-up uses double the deployed hardware when
+    deploying openstack-base and kubernetes-core bug maas 2.0
+    test-track Gh 553
+
+  Check the milestones for a detailed breakdown of Juju and conjure-up
+  bugs corrected.
+
+      https://github.com/conjure-up/conjure-up/milestone/14?closed=1
+      https://launchpad.net/juju/+milestone/2.1-rc2 
+      https://launchpad.net/juju/+milestone/2.1-rc1
+      https://launchpad.net/juju/+milestone/2.1-beta5 
+      https://launchpad.net/juju/+milestone/2.1-beta4
+      https://launchpad.net/juju/+milestone/2.1-beta3 
+      https://launchpad.net/juju/+milestone/2.1-beta2 
+      https://launchpad.net/juju/+milestone/2.1-beta1
+
+
 ^# juju 2.0.3
 
   ## What's new?
