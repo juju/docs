@@ -288,24 +288,24 @@ routable subnets with common ingress and egress rules to give the operator much
 better and finer-grained control over all networking aspects of a model and its
 application deployments.
 
-See the [How to configure more complex networks using spaces][spaces] for more
+See the [How to configure more complex networks using spaces][spaces] for
 details on creating and listing spaces.
 
-When deploying a charm or a bundle, you can explicitly specify a space using
-the `--bind` argument following the `juju deploy` command.
+When deploying a charm or a bundle, you can specify a space using the `--bind`
+argument following the `juju deploy` command.
 
-When deploying an application to a target with multiple spaces, for instance,
-the operator must specify which space to use as ambiguous bindings will result
-in a provisioning failure. The following, for example, will deploy the 'mysql'
+When deploying an application to a target with multiple spaces, the operator
+must specify which space to use as ambiguous bindings will result in a
+provisioning failure. The following, for example, will deploy the 'mysql'
 application to the 'db-space' space:
 
 ```bash
 juju deploy mysql --bind db-space
 ```
 
-For finer control, the `--bind` argument can be used to specify how specific
-charm-defined endpoints are connected to specific spaces, including a default
-option for any interfaces not specified:
+For finer control, the `--bind` argument can also be used to specify how
+specific charm-defined endpoints are connected to specific spaces, including a
+default option for any interfaces not specified:
 
 ```bash
 juju deploy --bind "db:db-space db-admin:admin-space default-space" mysql
@@ -449,3 +449,4 @@ charm pull vsftpd
 ```
 
 [spaces]: ./network-spaces.html
+[creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
