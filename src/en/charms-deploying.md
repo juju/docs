@@ -295,7 +295,7 @@ When deploying a charm or a bundle, you can specify a space using the `--bind`
 argument following the `juju deploy` command.
 
 When deploying an application to a target with multiple spaces, the operator
-must specify which space to use as ambiguous bindings will result in a
+must specify which space to use - ambiguous bindings will result in a
 provisioning failure. The following, for example, will deploy the 'mysql'
 application to the 'db-space' space:
 
