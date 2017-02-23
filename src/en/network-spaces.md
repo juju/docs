@@ -129,6 +129,9 @@ option for any interfaces not specified:
 juju deploy --bind "db:db-space db-admin:admin-space default-space" mysql
 ```
 
+For information on building bundles with bindings, see [Using and Creating
+Bundles][creatingbundles].
+
 Alternatively, both the `add-machine` and `deploy` commands allow the
 specification of a spaces constraint using the `--constraints` argument:
 
@@ -229,4 +232,4 @@ open it in a browser, seeing the mediawiki page.
 In an upcoming release, Juju will provide much better visibility
 of which services and units run in which spaces/subnets.
 
-
+[createbundles]: ./charms-bundles.html#binding_endpoints_of_applications_within_a_bundle
