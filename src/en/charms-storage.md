@@ -1,6 +1,4 @@
 Title: Using storage with Juju charms
-TODO: LXC/local caveat needs editing or removing
-      Storage commands need more examples/usage
 
 # Using Juju Storage
 
@@ -126,13 +124,13 @@ OpenStack defaults to using Cinder for additional specified storage,
 so it is possible to use cinder storage like this:
 
 ```bash
-juju deploy cs:~axwalk/postgresql --storage data=10G
+juju deploy postgresql --storage pgdata=10G
 ```
 
 which will create a 10G Cinder volume. Or if you wish to be more specific:
 
 ```bash
-juju deploy cs:~axwalk/postgresql --storage data=cinder,10G
+juju deploy postgresql --storage pgdata=cinder,10G
 ```
 
 will achieve the same result.
@@ -187,19 +185,19 @@ For example, to deploy the postgresql service and have it use the unit’s local
 filesystem for 10 gibibytes of storage for its ‘data’ storage requirement:
 
 ```bash
-juju deploy cs:~axwalk/postgresql --storage data=rootfs,10G
+juju deploy postgresql --storage pgdata=rootfs,10G
 ```
 
 We can also deploy using a local loop device
 
 ```bash
-juju deploy cs:~axwalk/postgresql --storage data=loop,5G
+juju deploy postgresql --storage pgdata=loop,5G
 ```
 
 If the size is omitted...
 
 ```bash
-juju deploy cs:~axwalk/postgresql --storage data=rootfs
+juju deploy postgresql --storage pgdata=rootfs
 ```
 
 Juju will use a default size of 1GiB, unless the charm itself has specified a
@@ -210,7 +208,7 @@ types may be used in addition to ‘loop’ and ‘rootfs’. For example, on us
 Amazon’s EC2 provider, we can make use of the default ‘ebs’ storage pool
 
 ```bash
-juju deploy cs:~axwalk/postgresql --storage data=ebs,10G
+juju deploy postgresql --storage pgdata=ebs,10G
 ```
 
 Cloud providers may support more than one type of storage. For example, in the
@@ -218,14 +216,14 @@ case of EC2, we can also make use of the ebd-ssd pool, which is SSD-based
 storage, and hence faster and better for some storage requirements.
 
 ```bash
-juju deploy cs:~axwalk/postgresql --storage data=ebs-ssd
+juju deploy postgresql --storage pgdata=ebs-ssd
 ```
 
 We can also merely specify the size, in which case Juju will use the default
 pool for the selected environment. E.g.:
 
 ```bash
-juju deploy cs:~axwalk/postgresql --storage data=10G
+juju deploy postgresql --storage pgdata=10G
 ```
 
 Which, on the EC2 provider, will create a 10
@@ -236,39 +234,7 @@ specified using the constraint, or some or all can be omitted to accept the
 default values:
 
 ```bash
-juju deploy cs:~axwalk/postgresql --storage data=ebs,10G cache=ebs-ssd
-```
-
-### Deployment Example
-
-There is a modified version of the PostgreSQL charm using the storage feature.
-You can find the branch at
-[cs:~axwalk/postgresql](https://code.launchpad.net/~axwalk/charms/trusty/postgresql/trunk).
-
-Here is how you can go about using the storage feature. Start by deploying a
-charm that defines a storage unit.
-
-```no-highlight
-juju deploy cs:~axwalk/postgresql pg-rootfs
-juju deploy cs:~axwalk/postgresql --storage data=loop,1G pg-loop
-juju deploy cs:~axwalk/postgresql --storage data=ebs,10G pg-magnetic
-juju deploy cs:~axwalk/postgresql --storage data=ebs-ssd,10G pg-ssd
-juju storage pool create ebs-iops ebs volume-type=provisioned-iops iops=300
-juju deploy cs:~axwalk/postgresql --storage data=ebs-iops,10G pg-iops
-sleep $SOME_TIME
-juju storage
-```
-
-Output:  
-
-```no-highlight
-[Storage]
-UNIT          ID     LOCATION  STATUS   PERSISTENT
-pg-iops/0     data/4           pending  false
-pg-loop/0     data/1 /srv/data attached false
-pg-magnetic/0 data/2 /srv/data attached false
-pg-rootfs/0   data/0 /srv/data attached false
-pg-ssd/0      data/3 /srv/data attached false
+juju deploy postgresql --storage pgdata=ebs,10G cache=ebs-ssd
 ```
 
 ### Upgrading with storage constraints
