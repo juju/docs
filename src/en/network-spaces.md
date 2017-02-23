@@ -107,51 +107,9 @@ subnets:
     - default
 ```
 
-## Binding models to spaces
-
-When deploying a charm or a bundle, you can explicitly specify a space using
-the `--bind` argument following the `juju deploy` command. 
-
-When deploying an application to a target with multiple spaces, the operator
-must specify which space to use as ambiguous bindings will result in a
-provisioning failure. The following, for example, will deploy the 'mysql'
-application to the 'db-space' space:
-
-```bash
-juju deploy mysql --bind db-space
-```
-
-For finer control, the `--bind` argument can be used to specify how specific
-charm-defined endpoints are connected to specific spaces, including a default
-option for any interfaces not specified:
-
-```bash
-juju deploy --bind "db:db-space db-admin:admin-space default-space" mysql
-```
-
-For information on building bundles with bindings, see [Using and Creating
-Bundles][creatingbundles].
-
-Alternatively, both the `add-machine` and `deploy` commands allow the
-specification of a spaces constraint using the `--constraints` argument:
-
-```bash
-juju add-machine --constraints spaces=db-space
-```
-
-The spaces constraint allows you to select an instance for the new machine or unit,
-connected to one or more existing spaces. Both positive and negative entries are
-accepted, the latter prefixed by "^", in a comma-delimited list. For example, 
-given the following:
-
-```
---constraints spaces=db-space,^storage,^dmz,internal
-```
-
-Juju will provision instances connected to (with IP addresses on) one of the subnets
-of both db-space and internal spaces, and NOT connected to either the storage or dmz spaces.
-
-For more information regarding constraints in general, see "juju help constraints".
+For details on how to deploy applications to specific spaces, and how to bind
+specific charm-defined endpoints to specific spaces, see [Deploying to
+spaces][deployspaces].
 
 ### Bridges
 
@@ -233,3 +191,4 @@ In an upcoming release, Juju will provide much better visibility
 of which services and units run in which spaces/subnets.
 
 [createbundles]: ./charms-bundles.html#binding_endpoints_of_applications_within_a_bundle
+[deployspaces]: ./charms-deploying.md#deploying_to_spaces
