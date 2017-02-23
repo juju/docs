@@ -3,7 +3,6 @@ TODO:  Still WIP: needs refinement and further details
        Decide on a better example than Django
        Remove default model?
        Image for GCE Dashboard with resources
-       Check whether 'juju gui --with-credentials' will be a thing
 
 # Create a Google Compute Engine controller
 
@@ -167,7 +166,7 @@ the same functions as the CLI, only without RSI. To launch the web interface in
 your default browser, type the following:
 
 ```bash
-juju gui --show-credentials
+juju gui --browser
 ```
 Then use the output username and password to connect to the GUI via your browser:
 
