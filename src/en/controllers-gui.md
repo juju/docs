@@ -1,4 +1,5 @@
 Title: The Juju GUI
+TODO: some screenshots show 'services' rather than 'applications'
 
 # The Juju GUI
 
@@ -21,34 +22,35 @@ bootstrapping, thus eliminating the need to additionally deploy the Juju GUI
 charm. As it's part of the controller, it won't appear as a normally deployed 
 application.
 
-To open Juju GUI in your default browser, use the following command:
+To view the URL and login credentials for Juju GUI, use the following command:
 
 ```bash
 juju gui
 ```
 
-If no default browser is available or configured, the output of this command 
-will include a URL that can be used by any web browser with access to your 
-controller:
+This will produce output similar to the following:
 
 ```no-highlight
-Opening the Juju GUI in your browser.
-If it does not open, open this URL:
-https://10.175.11.52:17070/gui/65c422e3-3c32-4155-8b49-f428a888e6dc/
+GUI 2.3.0 for model "admin/default" is enabled at:
+  https://10.55.60.10:17070/gui/eb49fea6-6543-4238-81cf-9fc2ff2e692d/
+Your login credential is:
+  username: admin
+  password: 1d191f0ef257a3fc3af6be0814f6f1b0
 ```
+
+If you don't want to copy and paste the URL manually, typing `juju gui
+--browser` will open the link in your default browser automatically.
 
 !!! Note: If you are deploying behind a firewall, make sure to check out the 
 charm's [README](https://jujucharms.com/juju-gui/) for more information on 
 getting the GUI up and running and talking to your environment
 
-You are greeted with the login window, where you will have to provide the 
-credentials to access the model. If you want to output your credentials in the 
-terminal for easier copy/paste into the login window, run the following 
-command:
+After opening the Juju GUI URL, you are greeted with the login window, where
+you will have to provide the credentials to access the model. These
+credentials can be copied from the output of `juju gui`. 
 
-```bash
-juju gui --show-credentials 
-```
+If you'd rather not have your login credentials displayed with the `juju gui`
+command, they can be suppressed by adding the `--hide-credential` argument. 
 
 ## Monitoring
 
@@ -82,13 +84,12 @@ Charm Store, allowing you to deploy hundreds of different applications to your
 environment, or even to a sandbox environment, which you can then export to use
 later.
 
-Clicking on the 'Store' button will give you access to all the available 
-charms. Selecting an individual charm will provide further details about the 
-charm, including
-a general overview, its relations, which files it includes and any recent 
-updates. From here, you can add the charm to your environment by clicking 'Add 
-to canvas' which
-will then give you the option to configure and deploy a new application.
+Clicking on the 'Store' button will give you access to all the available
+charms. Selecting an individual charm will provide further details about the
+charm, including a general overview, its relations, which files it includes and
+any recent updates. From here, you can add the charm to your environment by
+clicking 'Add to canvas' which will then give you the option to configure and
+deploy a new application.
 
 ![](./media/gui2_management-charmstore.png)
 
