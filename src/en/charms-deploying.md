@@ -283,7 +283,7 @@ clean machine.
 
 ## Deploying to spaces
 
-More complex networks can be configured using spaces.  Spaces group one or more
+More complex networks can be configured using spaces. Spaces group one or more
 routable subnets with common ingress and egress rules to give the operator much
 better and finer-grained control over all networking aspects of a model and its
 application deployments.
@@ -295,8 +295,8 @@ When deploying a charm or a bundle, you can specify a space using the `--bind`
 argument following the `juju deploy` command.
 
 When deploying an application to a target with multiple spaces, the operator
-must specify which space to use - ambiguous bindings will result in a
-provisioning failure. The following, for example, will deploy the 'mysql'
+must specify which space to use because ambiguous bindings will result in a
+provisioning failure. For example, the following will deploy the 'mysql'
 application to the 'db-space' space:
 
 ```bash
@@ -334,9 +334,9 @@ Juju will provision instances connected to (with IP addresses on) one of the
 subnets of both db-space and internal spaces, and NOT connected to either the storage
 or dmz spaces.
 
-For more information regarding constraints in general, see "juju help
-constraints" and to learn about `extra-bindings`, which provide a way to
-declare an extra bindable endpoint that is not a relation, see [Charm
+See [Constraints][contraints] for more general information regarding
+constraints. To learn about `extra-bindings`, which provide a way to declare
+an extra bindable endpoint that is not a relation, see [Charm
 metadata][metadata].
 
 
@@ -452,3 +452,4 @@ charm pull vsftpd
 [spaces]: ./network-spaces.html
 [creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [metadata]: ./authors-charm-metadata.html
+[contraints]: ./charms-constraints.html

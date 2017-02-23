@@ -1,5 +1,6 @@
 Title: How to configure more complex networks using spaces
 TODO: Could do with a re-write and further simplification
+      Diagrams needed
 
 # How to configure more complex networks using spaces
 
@@ -10,9 +11,9 @@ without generating complex network IP maps that are not portable. This gives
 the operator much better and finer-grained control over all networking aspects
 of a model and its application deployments. 
 
-Spaces represent sets of disjoint subnets that are available for running cloud
-instances that may span one or more availability zones ("zones") and there are
-a few simple considerations when using spaces:
+Spaces represent sets of subnets that are available for running cloud instances
+that may span one or more availability zones ("zones"). There are a few simple
+considerations when using spaces:
 
 - Any given subnet can be part of one and only one space.
 - All subnets within a space are considered "equal" in terms of access control,
