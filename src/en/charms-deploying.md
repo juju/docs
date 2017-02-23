@@ -334,7 +334,7 @@ Juju will provision instances connected to (with IP addresses on) one of the
 subnets of both db-space and internal spaces, and NOT connected to either the storage
 or dmz spaces.
 
-See [Constraints][contraints] for more general information regarding
+See [Constraints][constraints] for more general information regarding
 constraints. To learn about `extra-bindings`, which provide a way to declare
 an extra bindable endpoint that is not a relation, see [Charm
 metadata][metadata].
@@ -452,4 +452,4 @@ charm pull vsftpd
 [spaces]: ./network-spaces.html
 [creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [metadata]: ./authors-charm-metadata.html
-[contraints]: ./charms-constraints.html
+[constraints]: ./charms-constraints.html
