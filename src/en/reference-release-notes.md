@@ -85,7 +85,7 @@ The versions covered here are:
 
   There is more information on model migration in the Juju documentation
   online at 
-  <https://jujucharms.com/docs/2.1/models-migrate>
+  <https://jujucharms.com/docs/models-migrate>
 
 
   ### Interactive `add-cloud`
@@ -117,7 +117,7 @@ The versions covered here are:
 
   A more detailed walkthrough of the process is published in the online
   Juju documentation here:
-  <https://jujucharms.com/docs/2.1/clouds#specifying-additional-clouds>
+  <https://jujucharms.com/docs/clouds#specifying-additional-clouds>
 
 
   ### Networking changes
@@ -176,13 +176,13 @@ The versions covered here are:
 
   There is more information on binding to spaces in the online Juju
   documentation
-  <https://jujucharms.com/docs/2.1/charms-deploying#deploying-with-binding>
+  <https://jujucharms.com/docs/charms-deploying#deploying-with-binding>
 
   Defining spaces within Juju is covered in the documentation here:
-  <https://jujucharms.com/docs/2,1/network-spaces>
+  <https://jujucharms.com/docs/network-spaces>
 
   Information on adding bindings to charm bundles is also documented online:
-  <https://jujucharms.com/docs/2.1/charms-bundles#binding-endpoints-of-applications-within-a-bundle>
+  <https://jujucharms.com/docs/charms-bundles#binding-endpoints-of-applications-within-a-bundle>
 
   These changes and the rationale behind them were originally posted to
   the juju-dev mailing list. If you require further background or have
@@ -260,7 +260,7 @@ The versions covered here are:
 
   A more detailed walkthrough of the process is published in the online
   Juju documentation here:
-  <https://jujucharms.com/docs/2.1/howto-prometheus>
+  <https://jujucharms.com/docs/howto-prometheus>
 
 
   ### [juju] Changes to the GUI
