@@ -18,6 +18,7 @@ juju add-storage
 juju show-storage
 juju create-storage-pool
 juju storage-pools
+juju remove-storage
 ```
 
 ## Deploying a charm with storage requirements
@@ -302,6 +303,15 @@ thing to do is to make the container privileged by adding:
 ```
 config:
   security.privileged: "true"
+```
+
+### Remove storage
+
+Specify one or more unit storage, volume, or filesystem IDs, which can be found
+in the output of `juju storage`, like this:
+
+```bash
+juju remove-storage pgdata/0
 ```
 
 ### More information
