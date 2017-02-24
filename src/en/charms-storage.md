@@ -15,7 +15,7 @@ subcommands accept the “--help” flag for usage and help information.
 ```bash
 juju storage --help
 juju add-storage
-juju show-storage
+juju storage
 juju create-storage-pool
 juju storage-pools
 juju remove-storage
@@ -238,6 +238,40 @@ default values:
 juju deploy postgresql --storage pgdata=ebs,10G cache=ebs-ssd
 ```
 
+### Remove storage
+
+Specify one or more unit storage, volume, or filesystem IDs, which can be found
+in the output of `juju storage`, shown here:
+
+```bash
+[Storage]
+Unit          Id        Location     Status    Message
+postgresql/0  pgdata/0  /srv/pgdata  attached 
+```
+
+To remove this storage by specifying the unit storage instance, use:
+
+```bash
+juju remove-storage pgdata/0
+```
+
+This will also remove the associated volume and filesystem. You can reference
+just the volume or the filesystem using the IDs when removing storage. To
+eliminate confusion over which is being referred to, you must add either
+`volume-` or `filesystem-` to the IDs, as shown here:
+
+```bash
+juju remove-storage volume-0
+juju remove-storage filesystem-0
+```
+
+If you have and want to remove the storage from multiple volumes or filesystems
+at the same time, you can refer to more than one in the command, like this:
+
+```bash
+juju remove-storage filesystem-2/3
+```
+
 ### Upgrading with storage constraints
 
 When updating a charm with the [upgrade-charm][upgrade-charm] command,
@@ -303,15 +337,6 @@ thing to do is to make the container privileged by adding:
 ```
 config:
   security.privileged: "true"
-```
-
-### Remove storage
-
-Specify one or more unit storage, volume, or filesystem IDs, which can be found
-in the output of `juju storage`, like this:
-
-```bash
-juju remove-storage pgdata/0
 ```
 
 ### More information
