@@ -240,16 +240,14 @@ juju deploy postgresql --storage pgdata=ebs,10G cache=ebs-ssd
 
 ### Remove storage
 
-If you remove a unit that has storage, the storage is removed with the unit.
-
-The long term plan is to enable storage to be managed separately from units
-for types of storage that can be persistent, such as EBS volumes. This will
-enable the storage to be reused by new units. We have not fully implemented
-this ability. One of the first steps in managing the storage life cycle
-separately is allowing you to remove existing storage, which you can do today.
+Future versions of Juju will manage storage entirely separately from units.
+This will enable types of storage which can persist (e.g. EBS volumes) to be
+re-used by new units or workloads. This is not fully implemented in the current
+version of Juju, but one of the first steps is to be able to remove storage,
+which is currently possible.
 
 When you remove the storage attached to a running charm, `remove-storage` will
-run the storage-detaching hook, detach the storage from the machine, and remove
+run the [storage-detaching hook][storagedetatching], detach the storage from the machine, and remove
 the storage from the model, destroying the cloud storage resources in the
 process.
 
@@ -284,6 +282,8 @@ at the same time, you can refer to more than one in the command, like this:
 ```bash
 juju remove-storage filesystem-2/3
 ```
+
+If you remove a unit that has storage, the storage is removed with the unit.
 
 ### Upgrading with storage constraints
 
@@ -359,4 +359,5 @@ the storage feature read
 [writing charms that use storage](./developer-storage.html).
 
 [model-config]: ./models-config.html#list-of-model-keys
+[storagedetatching]: ./reference-charm-hooks#[name]-storage-detatching
 [upgrade-charm]: ./commands.html#upgrade-charm
