@@ -240,8 +240,21 @@ juju deploy postgresql --storage pgdata=ebs,10G cache=ebs-ssd
 
 ### Remove storage
 
-Specify one or more unit storage, volume, or filesystem IDs, which can be found
-in the output of `juju storage`, shown here:
+If you remove a unit that has storage, the storage is removed with the unit.
+
+The long term plan is to enable storage to be managed separately from units,
+for types of storage that can be persistent, such as EBS volumes, enabling the
+storage can be reused by new units. We have not fully implemented this ability.
+One of the first steps in managing the storage life cycle separately is
+allowing you to remove existing storage, which you can do today.
+
+When you remove the storage attached to a running charm, `remove-storage` will
+run the storage-detaching hook, detach the storage from the machine, and remove
+the storage from the model, destroying the cloud storage resources in the
+process.
+
+To remove existing storage, you must specify one or more unit storage, volume, or
+filesystem IDs; these can be found in the output of `juju storage`, shown here:
 
 ```bash
 [Storage]
