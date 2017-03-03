@@ -10,6 +10,78 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
+^ Juju 2.1.1
+
+  ## What's new in 2.1.1
+
+  - Networking improvements
+  - [conjure-up] Spells support side-loading bundles. This helps spells
+    authors who are writing spells for particular software but want to 
+    offer variations. For example, there are OpenStack bundles that 
+    support both KVM and LXD, or Telemetry additions. Side-loading will 
+    help with spells that need to provide those various bundle 
+    configurations.
+  - [conjure-up] More LXD improvements in addition to support for the
+     recently released LXD 2.10.
+
+
+  ### Networking improvements
+
+  - containers now respect static routes from MAAS. The static routes
+    defined for the subnets that the containers are in should should be
+    set for the containers as well.
+  - 'lxdbr0' subnet selection has changed from a simple incremental search
+    to randomized selection across 10.0.X. It also now properly handles
+    when an active subnet spans more than just a /24.
+  - better handling of http_proxy and no_proxy when interacting with LXD
+  - errors while trying to set up networking for containers are properly
+    reported as provisioning errors, instead of falling back to 'lxdbr0'.
+    This mostly impacts MAAS deployments where they would end up with
+    containers that were not addressable, and the actual failure was
+    buried in log files.
+
+
+  ## Resolved Issues
+
+  Check the milestones for a detailed breakdown of Juju and conjure-up
+  bugs corrected.
+
+      https://github.com/conjure-up/conjure-up/milestone/18?closed=1
+      https://launchpad.net/juju/+milestone/2.1.1
+
+
+  ## How do I get it?
+
+  If you are running Ubuntu, you can get Juju from the juju stable ppa:
+
+     sudo add-apt-repository ppa:juju/stable; sudo apt-get update
+
+     sudo apt-get install juju
+
+  Or install Juju from the snap store:
+
+     snap install juju --classic
+
+  Install conjure-up from the snap store:
+
+     snap install conjure-up --classic
+
+  If you are on Trusty, you'll need to run a few extra commands:
+
+     sudo apt-get install snapd
+     sudo groupadd lxd && sudo usermod -a -G lxd $USER
+     sudo reboot
+
+  Now you can install snaps, including conjure-up, as normal:
+
+     snap install conjure-up --classic
+
+  Windows, CentOS, and MacOS users can get a corresponding Juju
+  installer at:
+
+     https://launchpad.net/juju/+milestone/2.1.1
+
+
 ^# Juju 2.1.0
 
   ## What's new in 2.1.0
