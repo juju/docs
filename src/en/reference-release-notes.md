@@ -7,7 +7,33 @@ This section details all the available release notes for the stable series of
 
 The versions covered here are:
 
-^juju-core 1.25.9
+^#juju-core 1.25.10
+
+  A new supported stable release of Juju, 1.25.10, is here!
+
+
+  ## Notable Changes
+
+  * Jujud and mongodb ram and cpu spikes
+    https://bugs.launchpad.net/juju/+bug/1587644
+
+  * Log sending between 1.25.X series
+    https://bugs.launchpad.net/juju-core/+bug/1654528
+
+
+  ## How do I get it?
+
+  If you are running Ubuntu, you can get it from the juju proposed ppa:
+
+      sudo add-apt-repository ppa:juju/1.25
+      sudo apt-get update; sudo apt-get install juju-core
+
+  Windows, Centos, and MacOS users can get a corresponding installer at:
+
+      https://launchpad.net/juju-core/+milestone/1.25.10
+
+
+^#juju-core 1.25.9
 
   A new supported stable release of Juju, 1.25.9, is here!
 
