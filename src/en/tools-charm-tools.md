@@ -14,7 +14,7 @@ The source project can be found at
 Install the charm snap:
 
 ```bash
-sudo snap install charm
+sudo snap install charm --classic
 ```
 
 ## Mac OSX
