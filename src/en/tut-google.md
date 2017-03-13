@@ -1,6 +1,5 @@
 Title: Creating additional controllers
 TODO:  Still WIP: needs refinement and further details
-       Decide on a better example than Django
        Remove default model?
        Image for GCE Dashboard with resources
 
@@ -8,14 +7,14 @@ TODO:  Still WIP: needs refinement and further details
 
 Juju is unrivalled in its ability to model and deploy dependable cloud
 distributed applications. To prove this, we're going to use Juju to deploy one
-such application - Django - with Google Compute Engine (GCE) in less than 10
-minutes.  But you could just as easily use Amazon AWS or Microsoft Azure, and
-just as easily deploy Kubernetes, Cassandra or even OpenStack. It's the
-magic of Juju that makes it happen.
+such application - [MediaWiki][mediawiki] - with Google Compute Engine (GCE) in
+less than 10 minutes.  But you could just as easily use Amazon AWS or Microsoft
+Azure, and just as easily deploy Kubernetes, Cassandra or even OpenStack. It's
+the magic of Juju that makes it happen.
 
-!!! Note: If you already have a controller configured, such as the LXD controller created
-in the '[Getting started with Juju][first]' page, this new controller will be
-seamlessly added alongside. 
+!!! Note: If you already have a controller configured, such as the LXD
+controller created in the '[Getting started with Juju][first]' page, this new
+controller will be seamlessly added alongside. 
 
 ## Installation
 First, install Juju 2, if you have not done so already. See 
@@ -26,13 +25,13 @@ Type `juju clouds` and you'll see output very similar to the following:
 
 ```bash
 Cloud        Regions  Default        Type        Description
-aws               11  us-east-1      ec2         Amazon Web Services
+aws               14  us-east-1      ec2         Amazon Web Services
 aws-china          1  cn-north-1     ec2         Amazon China
 aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
-azure             18  centralus      azure       Microsoft Azure
+azure             24  centralus      azure       Microsoft Azure
 azure-china        2  chinaeast      azure       Microsoft Azure China
 cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
-google             4  us-east1       gce         Google Cloud Platform
+google             6  us-east1       gce         Google Cloud Platform
 joyent             6  eu-ams-1       joyent      Joyent Cloud
 rackspace          6  dfw            rackspace   Rackspace Cloud
 localhost          1  localhost      lxd         LXD Container Hypervisor
@@ -46,7 +45,7 @@ clouds you have credentials for.
 
 All you need to get started with GCE and Juju is a JSON-formatted credentials
 file for a new Compute Engine API-enabled project. Either sign up for a [free
-60 day/$300 trial][gcetrial], or connect to your [GCE dashboard][gcedashboard].
+ trial][gcetrial], or connect to your [GCE dashboard][gcedashboard].
 If needed, see our GCE [Create a Project][gcenewproject] documentation for
 further help. 
 
@@ -86,18 +85,18 @@ default model with output similar to the following:
 
 ```bash
 Creating Juju controller "mycloud" on google/us-east1
-Looking for packaged Juju agent version 2.0-rc1 for amd64
+Looking for packaged Juju agent version 2.1.1 for amd64
 Launching controller instance(s) on google/us-east1...
- - juju-a3d331-0
-Fetching Juju GUI 2.1.10
+ - juju-ea6a48-0 (arch=amd64 mem=3.5G cores=4)
+Fetching Juju GUI 2.4.3
 Waiting for address
-Attempting to connect to 104.196.179.170:22
+Attempting to connect to 104.196.168.186:22
 Attempting to connect to 10.142.0.2:22
 Logging to /var/log/cloud-init-output.log on the bootstrap machine
 Running apt-get update
 Running apt-get upgrade
 Installing curl, cpu-checker, bridge-utils, cloud-utils, tmux
-Fetching Juju agent version 2.0-rc1 for amd64
+Fetching Juju agent version 2.1.1 for amd64
 Installing Juju machine agent
 Starting Juju machine agent (service jujud-machine-0)
 Bootstrap agent now started
@@ -144,13 +143,14 @@ You can check on the state of any deployment, model or controller with the
 
 ```bash
 Model     Controller  Cloud/Region         Version
-gce-test  usertest    google/europe-west1  2.0-rc3
+gce0test  mycloud     google/europe-west1  2.1.1
 
 App      Version  Status   Scale  Charm    Store       Rev  OS      Notes
-haproxy           waiting    0/1  haproxy  jujucharms   37  ubuntu
+haproxy           waiting    0/1  haproxy  jujucharms   40  ubuntu
 
 Unit       Workload  Agent       Machine  Public address  Ports  Message
-haproxy/0  waiting   allocating  0                               waiting for machine
+haproxy/0  waiting   allocating  0                               waiting for
+machine
 
 Machine  State    DNS  Inst id  Series  AZ
 0        pending       pending  xenial
@@ -170,7 +170,7 @@ juju gui --browser
 ```
 Then use the output username and password to connect to the GUI via your browser:
 
-![Juju GUI login](media/tut-gce-gui_login.png)
+![Juju GUI login](media/tut-gce-gui_login21.png)
 
 
 After logging in, you'll see the Juju GUI overview for the current model. Not
@@ -181,39 +181,42 @@ machines, and deploy both charms and bundles.
 For example, you can use the GUI to switch between the two models currently
 running on your controller - the default one we left empty and the new one we
 created for Haproxy. Look for the drop-down menu to the right of the user
-profile (which currently says 'admin@local'). In this drop-down list you should
+profile (which currently says 'admin'). In this drop-down list you should
 find both 'default' and 'gce-test' models, and selecting one will switch the
 current model.
 
-![Juju GUI model switching menu](media/tut-gce-gui_model.png)
+![Juju GUI model switching menu](media/tut-gce-gui_model21.png)
 
-To create a new model from the GUI, click on 'Manage' from the drop-down model
+To create a new model from the GUI, click on 'Profile' from the drop-down model
 list. This will open a more detailed list of the current models. A new model
-can now be created by clicking on the 'New' button at the top of the list,
-entering a name for the new model, and clicking submit. Click on 'Manage' for
-this model to return to the main view.
+can now be created by clicking on the 'Create New' button at the top of the
+list, entering a name for the new model, and clicking submit. Click on 'Manage'
+for this model to return to the main view.
 
 For more details on how to use Juju's web interface, take a look at [our
 overview][jujugui].
 
-## Deploy Django from the GUI
+## Deploy MediaWiki from the GUI
 
 With the blank canvas of a new model created, we're now in a position to deploy
-Django.
+[MediaWiki][mediawiki].
 
 From the GUI, this really is as simple as clicking on the link to the store and
-searching for Django. It will appear as a bundle, which means it includes
-Django alongside PostgreSQL and Gunicorn. Click on 'Add to canvas' to import
-the bundle into your model, click on 'Commit changes' to review what's about to
+searching for `mediawiki`. There are currently two results returned,
+`MediaWiki` and 'MediaWiki Single'. The first result is MediaWiki on its own,
+while the second result is a bundle which also contains MySQL and the required
+pre-configured relationships to make MediaWiki work without any further
+configuration. Select the bundle then click on 'Add to [MODEL NAME]' to import
+the bundle into your model. Click on 'Commit changes' to review what's about to
 happen and finally 'Deploy'.  
 
 Monitor the GUI as the applications are deployed to GCE and when each
-application's colour changes to green, you're all set.
+application's colour changes from orange to grey, you're all set.
 
 Congratulations - you've just modelled and deployed your own scalable cloud
 application.
 
-![Juju GUI model of Django bundle](media/tut-gce-gui_django.png)
+![Juju GUI model of MediaWiki bundle](media/tut-gce-gui_mediawiki.png)
 
 ## Next Steps
 
@@ -236,3 +239,4 @@ to want to share. Find out how easy it is to
 [diycharm]: ./developer-getting-started.html
 [jujugui]: ./controllers-gui.html
 [tutuser]: ./tut-users.html
+[mediawiki]: https://www.mediawiki.org/wiki/MediaWiki
