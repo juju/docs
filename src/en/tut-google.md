@@ -7,10 +7,10 @@ TODO:  Still WIP: needs refinement and further details
 
 Juju is unrivalled in its ability to model and deploy dependable cloud
 distributed applications. To prove this, we're going to use Juju to deploy one
-such application - Django - with Google Compute Engine (GCE) in less than 10
-minutes.  But you could just as easily use Amazon AWS or Microsoft Azure, and
-just as easily deploy Kubernetes, Cassandra or even OpenStack. It's the
-magic of Juju that makes it happen.
+such application - [MediaWiki][mediawiki] - with Google Compute Engine (GCE) in
+less than 10 minutes.  But you could just as easily use Amazon AWS or Microsoft
+Azure, and just as easily deploy Kubernetes, Cassandra or even OpenStack. It's
+the magic of Juju that makes it happen.
 
 !!! Note: If you already have a controller configured, such as the LXD
 controller created in the '[Getting started with Juju][first]' page, this new
