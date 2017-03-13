@@ -211,7 +211,7 @@ the bundle into your model. Click on 'Commit changes' to review what's about to
 happen and finally 'Deploy'.  
 
 Monitor the GUI as the applications are deployed to GCE and when each
-application's colour changes from orange to green, you're all set.
+application's colour changes from orange to grey, you're all set.
 
 Congratulations - you've just modelled and deployed your own scalable cloud
 application.
