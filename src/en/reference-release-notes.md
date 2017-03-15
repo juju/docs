@@ -10,6 +10,59 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
+^ Juju 2.1.2
+
+  ## What's new in 2.1.2
+
+  - [conjure-up] headless installs now support cloud regions
+  - [conjure-up] improved error handling
+  - [juju] Handle 'Node with this Hostname already exists' errors when
+    provisioning containers. LP:#1670873
+  - [juju] Fix 'interface bindings cannot have empty names' LP:#1671489
+  - [juju] Fix 'upgrade-charm broken after using default binding' 
+    LP:#1671428
+
+
+  ## Resolved Issues
+
+  Check the milestones for a detailed breakdown of Juju and conjure-up
+  bugs corrected.
+
+    https://github.com/conjure-up/conjure-up/milestone/20?closed=1
+    https://launchpad.net/juju/+milestone/2.1.2
+
+
+  ## How do I get it?
+
+  If you are running Ubuntu, you can get Juju from the juju stable ppa:
+
+    sudo add-apt-repository ppa:juju/stable; sudo apt-get update
+    sudo apt-get install juju
+
+  Or install Juju from the snap store:
+
+    snap install juju --classic
+
+  Install conjure-up from the snap store:
+
+    snap install conjure-up --classic
+
+  If you are on Trusty, you'll need to run a few extra commands:
+
+    sudo apt-get install snapd
+    sudo groupadd lxd && sudo usermod -a -G lxd $USER
+    sudo reboot
+
+  Now you can install snaps, including conjure-up, as normal:
+
+    snap install conjure-up --classic
+
+  Windows, CentOS, and MacOS users can get a corresponding Juju
+  installer at:
+
+    https://launchpad.net/juju/+milestone/2.1.2
+
+
 ^ Juju 2.1.1
 
   ## What's new in 2.1.1
