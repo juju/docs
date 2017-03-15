@@ -251,8 +251,8 @@ run the [storage-detaching hook][storagedetatching], detach the storage from the
 the storage from the model, destroying the cloud storage resources in the
 process.
 
-To remove existing storage, you must specify one or more unit storage, volume, or
-filesystem IDs; these can be found in the output of `juju storage`, shown here:
+To remove existing storage, you must specify one or more storage IDs; these
+can be found in the output of `juju storage`, shown here:
 
 ```bash
 [Storage]
@@ -266,21 +266,11 @@ To remove this storage by specifying the unit storage instance, use:
 juju remove-storage pgdata/0
 ```
 
-This will also remove the associated volume and filesystem. You can reference
-just the volume or the filesystem using the IDs when removing storage. To
-eliminate confusion over which is being referred to, you must add either
-`volume-` or `filesystem-` to the IDs, as shown here:
+If you have and want to remove multiple storage instances at the same time,
+you can refer to more than one in the command, like this:
 
 ```bash
-juju remove-storage volume-0
-juju remove-storage filesystem-0
-```
-
-If you have and want to remove the storage from multiple volumes or filesystems
-at the same time, you can refer to more than one in the command, like this:
-
-```bash
-juju remove-storage filesystem-2/3
+juju remove-storage pgdata/0 pgdata/1
 ```
 
 If you remove a unit that has storage, the storage is removed with the unit.
