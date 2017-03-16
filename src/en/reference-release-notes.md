@@ -10,7 +10,7 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
-^ Juju 2.1.2
+^# Juju 2.1.2
 
   ## What's new in 2.1.2
 
@@ -63,7 +63,7 @@ The versions covered here are:
     https://launchpad.net/juju/+milestone/2.1.2
 
 
-^ Juju 2.1.1
+^# Juju 2.1.1
 
   ## What's new in 2.1.1
 
