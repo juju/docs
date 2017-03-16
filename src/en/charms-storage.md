@@ -256,11 +256,11 @@ can be found in the output of `juju storage`, shown here:
 
 ```bash
 [Storage]
-Unit          Id        Location     Status    Message
-postgresql/0  pgdata/0  /srv/pgdata  attached 
+Unit          Id        Type        Pool  Provider id                                       Size   Status    Message
+postgresql/0  pgdata/0  filesystem  gce   us-east1-b--78e14381-d247-48d7-8273-c3c951a079d9  10GiB  attached
 ```
 
-To remove this storage by specifying the unit storage instance, use:
+To remove this storage, use:
 
 ```bash
 juju remove-storage pgdata/0
@@ -274,6 +274,8 @@ juju remove-storage pgdata/0 pgdata/1
 ```
 
 If you remove a unit that has storage, the storage is removed with the unit.
+Future versions of Juju will cause the storage to be detached but remain in
+the model.
 
 ### Upgrading with storage constraints
 
