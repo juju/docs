@@ -43,7 +43,13 @@ If you don't want to copy and paste the URL manually, typing `juju gui
 
 !!! Note: If you are deploying behind a firewall, make sure to check out the 
 charm's [README](https://jujucharms.com/juju-gui/) for more information on 
-getting the GUI up and running and talking to your environment
+getting the GUI up and running and talking to your environment.
+
+Your browser will give you an error message when you open the URL warning that
+the site certificate should not be trusted. This is because Juju is generating
+a self-signed SSL certificate rather than one from a certificate authority (CA).
+Depending on your browser, choose to manually proceed or add an exception to
+continue past the browser's error page.
 
 After opening the Juju GUI URL, you are greeted with the login window, where
 you will have to provide the credentials to access the model. These
