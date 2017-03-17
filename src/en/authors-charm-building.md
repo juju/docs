@@ -227,7 +227,7 @@ Now that the layer is done, let's build it together and deploy the final
 charm.  From within the layer directory, this is as simple as:
 
 ```bash
-charm build
+charm build .
 ```
 
 Build will take all of the layers, looking first in your local LAYER_PATH and
