@@ -81,6 +81,7 @@ rewarding. See [Using JAAS from the command line][jaascli] for more information.
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
 [aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
+[credentials]: ./credentials.html
 [gce]: ./help-google.html "Using the Google Compute Engine public cloud"
 [jaascli]: ./jaas-cli.html "Using JAAS from the command line"
 [jaaslogin]: https://jujucharms.com/login "JAAS login page"
