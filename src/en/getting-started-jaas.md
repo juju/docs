@@ -36,7 +36,7 @@ pop-up blockers that may be running and try again.
 
 ## Create and deploy a model
 
-Press the green + button on the page to add a charm or bundle to your model.
+Press the green + button on the page to start building your model.
 
 ![juju_jaas_main](./media/juju_jaas_main.png)
 
