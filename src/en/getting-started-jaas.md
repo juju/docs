@@ -6,7 +6,7 @@ Juju as a Service (JAAS) is the fastest and easiest way to model and deploy
 your cloud-based applications. When you use JAAS, Canonical manages the Juju
 infrastructure. This frees you to concentrate on your software and solutions.
 With JAAS you can deploy, configure, and operate your applications on public
-clouds like [Amazon AWeb Services][aws], [Google Compute Engine][gce], and
+clouds like [Amazon Web Services][aws], [Google Compute Engine][gce], and
 [Microsoft Azure][azure].
 
 ## Create an Ubuntu single sign on account
@@ -72,7 +72,7 @@ Click the share button.
 
 Enter the username and set the permissions for the new user.
 
-![juju_jaas_share_screen](./media/juju_jaas_share_button.png)
+![juju_jaas_share_screen](./media/juju_jaas_share_screen.png)
 
 ## Next steps
 
