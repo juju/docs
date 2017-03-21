@@ -20,7 +20,7 @@ juju register jimm.jujucharms.com
 If you are using Juju 2.2, use:
 	
 ```bash
-juju login JAAS
+juju login jaas
 ```
 
 ## View your models
