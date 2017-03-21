@@ -2,11 +2,12 @@ Title: Getting started with Juju as a Service
 
 # Getting started with Juju as a Service
 
-Juju as a Service (JAAS) is the fastest and easiest way to quickly get started
-modeling and deploying your cloud-based applications. When you use JAAS,
-Canonical manages the Juju infrastructure. This frees you to concentrate on
-your software and solutions. With JAAS you can deploy, configure, and operate
-your applications on AWS, GCE, and Azure.
+Juju as a Service (JAAS) is the fastest and easiest way to model and deploy
+your cloud-based applications. When you use JAAS, Canonical manages the Juju
+infrastructure. This frees you to concentrate on your software and solutions.
+With JAAS you can deploy, configure, and operate your applications on public
+clouds like [Amazon AWeb Services][aws], [Google Compute Engine][gce], and
+[Microsoft Azure][azure].
 
 ## Create an Ubuntu single sign on account
 
@@ -16,94 +17,54 @@ when registering which is the username that will be used by JAAS.
 
 ## Obtain cloud credentials
 
-In order for JAAS to deploy your workload on the cloud of your choice, you must
-enter credentials for each cloud you would like to use.
+JAAS supports the following public clouds:
+* [Amazon Web Services (AWS)][aws]
+* [Google Compute Engine (GCE)][gce]
+* [Microsoft Azure][azure]
 
 We recommend that you use each public cloud's identity and access management
 (IAM) tool to generate a new set of credentials exclusively for use with JAAS.
 See [Cloud credentials][credentials] for more information. 
 
-## Use JAAS from the web GUI
+## Log in to JAAS
 
-It is easiest to do the initial steps using the web. Open the [JAAS login page][jaaslogin]
-to begin.
+Open the [JAAS login page][jaaslogin] to begin.
 
 Log in to JAAS using your Ubuntu SSO account. This will open a second tab in
 your web browser to log you in. If the tab does not open, check and disable any
 pop-up blockers that may be running and try again.
 
-Press the green + button on the page to design and deploy your model. Press
-Deploy Changes when you are ready.
+## Create and deploy a model
+
+Press the green + button on the page to add a charm or bundle to your model.
 
 ![juju_jaas_main](./media/juju_jaas_main.png)
 
-The last step in the deployment requires and will request your credentials for
-the public cloud you want to use, so prepare these beforehand and have them
-ready.
+You will be shown a list of available charms and bundles with a description of
+each. Select a charm or bundle to learn more about it and decide whether to
+use it.
 
-## Use JAAS from the CLI
+![juju_jaas_charms_bundles](./media/juju_jaas_charms_bundles.png)
 
-To use JAAS from the CLI requires a few additional steps.
+When you have found a charm or bundle that you want to add to your model, press
+Add to model.
 
-### Install Juju
+![juju_jaas_add_charm](./media/juju_jaas_add_charm.png)
 
-Follow [these instructions][installjuju] to install Juju on your local machine.
+Once all charms and bundles that you want to use are added, press Deploy Changes.
 
-### Register or login to JAAS from Juju
+![juju_jaas_deploy](./media/juju_jaas_deploy.png)
 
-If you are using Juju 2.1, add the JAAS controller with:
+Adjust your model name, if you desire, then choose a public cloud to deploy to.
+Enter your cloud credentials. Scroll down and click Deploy.
 
-```bash
-juju register jimm.jujucharms.com
-```
-
-If you are using Juju 2.2, use:
-	
-```bash
-juju login JAAS
-```
-
-### View your models
-
-If you added a model using the GUI, you can see it in the CLI, like this:
-
-```bash
-juju models
-```
-
-### Create a new model
-
-If you have not yet entered credentials for the public cloud of your choice
-into JAAS, enter one now with the `add-credential` command, which will walk
-you through entering the pertinent credential data for the cloud you specify,
-as in this example which uses the GCE cloud.
-
-```bash
-juju add-credential google
-```
-
-See [Cloud credentials][credentials] for more information.
-
-To add a new model from the CLI, use:
-
-```bash
-juju add-model mygce google
-```
-
-To deploy kubernetes-core, use:
-
-```bash
-juju deploy kubernetes-core
-```
-
-View the new model in the JAAS web UI by logging in to [https://jujucharms.com][https://jujucharms.com].
+![juju_jaas_choose_cloud](./media/juju_jaas_choose_cloud.png)
 
 ## Collaborate
 
-To share your model with another JAAS user you have two options. Share via the
-web GUI or via the CLI.
-
-### Share via the web GUI
+To share your model with another JAAS user you can share the standard Juju way,
+as described in [Users and models][users], or you can share directly from the
+JAAS GUI, like this.
 
 Click the share button.
 
@@ -113,15 +74,15 @@ Enter the username and set the permissions for the new user.
 
 ![juju_jaas_share_screen](./media/juju_jaas_share_button.png)
 
-### Share via the CLI
+## Next steps
 
-Change the username and cloud as appropriate and enter:
+Most users find the flexibility and power of using JAAS and Juju from the CLI
+rewarding. See [Using JAAS from the command line][jaascli] for more information.
 
-```bash
-juju grant uros@external read testmodel
-```
-
-[ubuntuSSO]: https://login.ubuntu.com/ "Ubuntu single sign on"
-[credentials]: ./credentials.html
+[azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
+[aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
+[gce]: ./help-google.html "Using the Google Compute Engine public cloud"
+[jaascli]: ./jaas-cli.html "Using JAAS from the command line"
 [jaaslogin]: https://jujucharms.com/login "JAAS login page"
-[installjuju]: ./getting-started-general.html
+[ubuntuSSO]: https://login.ubuntu.com/ "Ubuntu single sign on"
+[users]: ./users-models.html "Users and models"
