@@ -56,7 +56,7 @@ To deploy kubernetes-core, use:
 juju deploy kubernetes-core
 ```
 
-View the new model in the JAAS web UI by logging in to [https://jujucharms.com][https://jujucharms.com].
+View the new model in the JAAS web UI by logging in to [https://jujucharms.com](https://jujucharms.com).
 
 [credentials]: ./credentials.html
 [installjuju]: ./getting-started-general.html
