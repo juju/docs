@@ -67,6 +67,9 @@ add them to Juju:
 juju add-credential aws
 ```
 
+Alternately, you can also use this credential with [Juju as a Service][jaas] and
+create and deploy your model using its GUI.
+
 ### 3. Create and use a YAML file
 
 Place the AWS information in a `~/.aws/credentials` file, or
@@ -101,4 +104,5 @@ Features supported by Juju-owned instances running within AWS:
 
 [aws]: http://console.aws.amazon.com
 [constraints]:./reference-constraints.html
+[jaas]: ./getting-started-jaas.html "Getting Started with Juju as a Service"
 [tagging]: ./config-tagging.html
