@@ -27,7 +27,12 @@ JAAS supports the following public clouds:
 
 We recommend that you use each public cloud's identity and access management
 (IAM) tool to generate a new set of credentials exclusively for use with JAAS.
-See [Cloud credentials][credentials] for more information. 
+See [Cloud credentials][credentials] for more information, along with the
+following links for your specific cloud.
+
+ * [AWS][awscreds]
+ * [GCE][gcecreds]
+ * [Azure][azurecreds]
 
 ## Log in to JAAS
 
@@ -83,9 +88,12 @@ Most users find the flexibility and power of using JAAS and Juju from the CLI
 rewarding. See [Using JAAS from the command line][jaascli] for more information.
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
+[azurecreds]: ./help-azure#credentials "Help with Azure credentials"
 [aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
+[awscreds]: ./help-aws#credentials "Help with AWS credentials"
 [credentials]: ./credentials.html
 [gce]: ./help-google.html "Using the Google Compute Engine public cloud"
+[gcecreds]: ./help-google#download-credentials "Help with GCE credentials"
 [jaascli]: ./jaas-cli.html "Using JAAS from the command line"
 [jaaslogin]: https://jujucharms.com/login "JAAS login page"
 [ubuntuSSO]: https://login.ubuntu.com/ "Ubuntu single sign on"
