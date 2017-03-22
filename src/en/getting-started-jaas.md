@@ -9,18 +9,21 @@ With JAAS you can deploy, configure, and operate your applications on public
 clouds like [Amazon Web Services][aws], [Google Compute Engine][gce], and
 [Microsoft Azure][azure].
 
-## Create an Ubuntu single sign on account
+## Create an Ubuntu Single Sign On account
 
-JAAS uses [Ubuntu single sign on][ubuntuSSO] (SSO) for identity management. If you don’t
-already have an Ubuntu SSO account, create one. You will provide a username
-when registering which is the username that will be used by JAAS.
+JAAS uses [Ubuntu Single Sign On][ubuntuSSO] (SSO) for identity management. 
+If you don’t already have an Ubuntu SSO account, create one. The username
+you provide here is the one that will be used by JAAS.
+
+![juju-ubuntu-one.png](./media/jaas-ubuntu-one.png)
 
 ## Obtain cloud credentials
 
 JAAS supports the following public clouds:
-* [Amazon Web Services (AWS)][aws]
-* [Google Compute Engine (GCE)][gce]
-* [Microsoft Azure][azure]
+
+ * [Amazon Web Services (AWS)][aws]
+ * [Google Compute Engine (GCE)][gce]
+ * [Microsoft Azure][azure]
 
 We recommend that you use each public cloud's identity and access management
 (IAM) tool to generate a new set of credentials exclusively for use with JAAS.
@@ -87,3 +90,5 @@ rewarding. See [Using JAAS from the command line][jaascli] for more information.
 [jaaslogin]: https://jujucharms.com/login "JAAS login page"
 [ubuntuSSO]: https://login.ubuntu.com/ "Ubuntu single sign on"
 [users]: ./users-models.html "Users and models"
+
+
