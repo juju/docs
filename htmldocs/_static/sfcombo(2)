@@ -1,0 +1,4 @@
+/* app/navigation-min.js */
+
+YUI.add('storefront-navigation',function(Y){var ns=Y.namespace('storefront');ns.mobileMenu=function(){var header=Y.one('#nav.nav-primary');function setNavState(hash){if(hash==='#nav'){header.addClass('nav-open');}else{header.removeClass('nav-open');}}
+setNavState(window.location.hash);window.addEventListener('hashchange',function(){setNavState(window.location.hash);});};},'0.1.0',{requires:[]});
