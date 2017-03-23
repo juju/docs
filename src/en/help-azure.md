@@ -269,6 +269,9 @@ APP_PASSWORD
 
 You can now [create the controller](#create-controller).
 
+Alternately, you can also use this credential with [Juju as a Service][jaas] and
+create and deploy your model using its GUI.
+
 !!! Note: If you add more than one credential, you will also need to set the
 default one to use with `juju set-default-credential`
 
@@ -285,3 +288,4 @@ availability sets affect uptime guarantees.
 [subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
 [azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
 [azureportal]: http://portal.azure.com
+[jaas]: ./getting-started-jaas.html "Getting Started with Juju as a Service"
