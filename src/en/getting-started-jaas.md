@@ -82,14 +82,27 @@ use it.
 
 ![juju_jaas_charms_bundles](./media/jaas-search.png)
 
-When you have found a charm or bundle that you want to add to your model, press
-Add to model.
+Find a charm or bundle that you want to add to your model.
 
-![juju_jaas_add_charm](./media/juju_jaas_add_charm.png)
+<table width="500" border-width="0px" cellpadding="5">
 
-Once all charms and bundles that you want to use are added, press Deploy Changes.
+<tr>
 
-![juju_jaas_deploy](./media/juju_jaas_deploy.png)
+<td align="center" valign="center" border-width="0px" >
+<img src="./media/jaas-select-bundle.png" alt="description here" />
+<br />
+Press the green button to add it to your model.
+</td>
+
+<td align="center" valign="center" border-width="0px">
+<img src="./media/jaas-deploy-changes.png" alt="description here" />
+<br />
+Press the blue button to deploy the changes.
+</td>
+
+</tr>
+
+</table>
 
 Adjust your model name, if you desire, then choose a public cloud to deploy to.
 Enter your cloud credentials. Scroll down and click Deploy.
