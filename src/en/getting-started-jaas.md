@@ -42,17 +42,45 @@ Log in to JAAS using your Ubuntu SSO account. This will open a second tab in
 your web browser to log you in. If the tab does not open, check and disable any
 pop-up blockers that may be running and try again.
 
+<style>
+table th, table td {
+    background: #f7f7f7;
+    border: 0px solid;
+    padding: 15px 10px;
+}
+</style>
+
+<table width="500" border-width="0px" cellpadding="5">
+
+<tr>
+
+<td align="center" valign="center" border-width="0px" >
+<img src="./media/jaas-empty.png" alt="description here" />
+<br />
+Press the green button to get started...
+</td>
+
+<td align="center" valign="center" border-width="0px">
+<img src="./media/jaas-start.png" alt="description here" />
+<br />
+... and reveal your (currently empty) canvas.
+</td>
+
+</tr>
+
+</table>
+
+
 ## Create and deploy a model
 
 Press the green + button on the page to start building your model.
-
-![juju_jaas_main](./media/juju_jaas_main.png)
 
 You will be shown a list of available charms and bundles with a description of
 each. Select a charm or bundle to learn more about it and decide whether to
 use it.
 
-![juju_jaas_charms_bundles](./media/juju_jaas_charms_bundles.png)
+
+![juju_jaas_charms_bundles](./media/jaas-search.png)
 
 When you have found a charm or bundle that you want to add to your model, press
 Add to model.
