@@ -128,7 +128,7 @@ Use `juju --version` to double check your version of Juju.
 
 ## View your models
 
-Now that you're signed in to JAAS we can list your models running in any of the
+Now that you're signed in to JAAS you can list your models running in any of the
 supported clouds with:
 
 ```bash
