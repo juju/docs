@@ -6,7 +6,7 @@ Juju as a Service (JAAS) is the fastest and easiest way to model and deploy
 your cloud-based applications. When you use JAAS, Canonical manages the Juju
 infrastructure. This frees you to concentrate on your software and solutions.
 With JAAS you can deploy, configure, and operate your applications on the
-largest public clouds [Amazon Web Services][aws], [Google Compute Engine][gce],
+largest public clouds: [Amazon Web Services][aws], [Google Compute Engine][gce],
 and [Microsoft Azure][azure].
 
 
@@ -90,20 +90,20 @@ Press the blue button to deploy the changes.
 
 </table>
 
-Adjust your model name, and choose a public cloud to deploy to.
+Adjust your model name and choose a public cloud to deploy to.
 Enter your cloud credentials. Scroll down and click Deploy.
 
 ![juju_jaas_choose_cloud](./media/juju_jaas_choose_cloud.png)
 
 
-Your model is now being deployed for you. Now let's wire up the command line
-so that we can see this model and operate against it.
+Your model is now being deployed for you. Now you can fire up the command line
+to see this model and operate against it.
 
 
 ## Accessing JAAS from the command line
 
-To use JAAS from the CLI requires that you install Juju on a local machine and
-connect that Juju install with your JAAS account.
+To use JAAS from the CLI requires that you install Juju and connect to your
+JAAS account.
 
 ## Install Juju
 
@@ -128,7 +128,7 @@ Use `juju --version` to double check your version of Juju.
 
 ## View your models
 
-Now that we're signed in to JAAS we can list our models running in any of the
+Now that you're signed in to JAAS we can list your models running in any of the
 supported clouds with:
 
 ```bash
