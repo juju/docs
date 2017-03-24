@@ -152,9 +152,9 @@ owner and the external user, such as via email, and manually adding the
 controller information to the local user's `$HOME/.local/share/juju/controllers.yaml`
 in Ubuntu and other Linux distributions and the similar location in other OSes.
 
-The external user will log in from their machine with `juju login`. They will
-be directed to the URL for the external identity provider so that they may
-log in there and then will be granted access to the controller.
+The external user will log in from their machine with `juju login -u <username>`.
+They will be directed to the URL for the external identity provider so that
+they may log in there and then will be granted access to the controller.
 
 For the external user to create models from the controller, they must have
 credentials for that provider, for example, GCE or AWS. Any models created

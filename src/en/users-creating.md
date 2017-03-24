@@ -82,7 +82,7 @@ And to log back in, either on the same client system or not, using the same
 user we added earlier:
 
 ```bash
-juju login jon
+juju login -u jon
 ```
 
 Once a user logs in they become the current user. The following is a quick way
