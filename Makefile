@@ -1,3 +1,6 @@
+PY := .venv/bin/python
+PIP := .venv/bin/pip
+
 build:
 	tools/mdbuild.py
 
@@ -11,6 +14,12 @@ serve:
 
 todo:
 	tools/mdbuild.py --todo
+
+.venv: .venv/bin/python
+.venv/bin/python:
+	virtualenv -p python3 .venv
+	$(PIP) install html2text Markdown mdx-anchors-away mdx-callouts mdx-foldouts linkchecker
+
 sysdeps:
 	sudo apt-get install python-html2text python3-markdown python-pip python3-pip git spell ispell ibritish python3-setuptools
 	sudo pip3 install mdx-anchors-away mdx-callouts mdx-foldouts
