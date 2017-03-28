@@ -2,7 +2,7 @@ Title: Using JAAS from the command line
 
 # Using JAAS from the command line
 
-The Juju controller you already have unning in JAAS can also be used
+The Juju controller you already have running in JAAS can also be used
 from the command line, giving you powerful, fast access to 
 perform common operations. In order to use the command line, you will 
 first need to install the Juju client software on your machine.
