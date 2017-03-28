@@ -146,8 +146,8 @@ use a pre-existing project from the same menu.
 
 Navigate to the API manager's [credentials page][gcecredentials] using the menu
 in the top left of the dashboard and use the `Create credentials` drop-down
-menu to select `Service account key`. Change the service account to `Compute
-Engine default service account` and the 'Key type' to `JSON`, then click
+menu to select `Service account key`. Change the service account to 
+`Compute Engine default service account` and the 'Key type' to `JSON`, then click
 `Create`. This will generate and automatically download your credentials.
 
 Back in JAAS, enter a name for this new project, we'd recommend using the same
