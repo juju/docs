@@ -35,7 +35,7 @@ table th, table td {
 <td align="center" valign="center" border-width="0px" >
 <img src="./media/jaas-empty.png" alt="description here" />
 <br />
-Press the green `Start building` button to get started...
+Press the green Start building button to get started...
 </td>
 
 <td align="center" valign="center" border-width="0px">
@@ -57,9 +57,6 @@ You will be shown a list of available charms and bundles with a description of
 each. Select a [charm][charms] or [bundle][bundles] to learn more about it and decide whether
 to use it.
 
-
-![juju_jaas_charms_bundles](./media/jaas-search.png)
-
 Find a charm or bundle that you want to add to your model.
 
 <table width="500" border-width="0px" cellpadding="5">
@@ -69,13 +66,13 @@ Find a charm or bundle that you want to add to your model.
 <td align="center" valign="center" border-width="0px" >
 <img src="./media/jaas-select-bundle.png" alt="description here" />
 <br />
-Press the green `Add to model` button to add it to your model.
+Press the green Add to model button to add it to your model.
 </td>
 
 <td align="center" valign="center" border-width="0px">
 <img src="./media/jaas-deploy-changes.png" alt="description here" />
 <br />
-Press the blue `Deploy changes` button to deploy the changes.
+Press the blue Deploy changes button to deploy the changes.
 </td>
 
 </tr>
@@ -127,28 +124,7 @@ Click on `Deploy` to send your application model to the cloud.
     automatically if your GCE account has a billing method set up. See our [GCE
     documentation][gce] for further details.
 
-## Next steps
-
-### Collaborate
-
-To share your model with another JAAS user you can share the standard Juju way,
-as described in [Users and models][users], or you can share directly from the
-JAAS GUI, like this.
-
-Click the share button.
-
-![juju_jaas_top_panel](./media/juju_jaas_share_button.png)
-
-Enter the username and set the permissions for the new user.
-
-![juju_jaas_share_screen](./media/juju_jaas_share_screen.png)
-
-### Learn the CLI
-
-Most users find the flexibility and power of using JAAS and Juju from the CLI
-rewarding. See [Using JAAS from the command line][jaascli] for more information.
-
-### Destroy a model
+## Destroy a model
 
 When you are done and want to destroy the model you created, click on your
 username at the top left of the page to list all your models.
@@ -166,7 +142,7 @@ Click the model name to select the model you want to manage from the list.
 <td align="center" valign="center" border-width="0px">
 <img src="./media/jaas-destroy-model.png" alt="description here" />
 <br />
-From the options that are revealed, click `Destroy model`.
+From the options that are revealed, click Destroy model.
 </td>
 
 </tr>
@@ -175,6 +151,25 @@ From the options that are revealed, click `Destroy model`.
 
 Log in to your cloud provider's dashboard to confirm the machines created for
 your model were terminated.
+
+## Collaborate
+
+To share your model with another JAAS user you can share the standard Juju way,
+as described in [Users and models][users], or you can share directly from the
+JAAS GUI, like this.
+
+Click the share button.
+
+![juju_jaas_top_panel](./media/juju_jaas_share_button.png)
+
+Enter the username and set the permissions for the new user.
+
+![juju_jaas_share_screen](./media/juju_jaas_share_screen.png)
+
+## Next steps
+
+Most users find the flexibility and power of using JAAS and Juju from the CLI
+rewarding. See [Using JAAS from the command line][jaascli] for more information.
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
 [azurecreds]: ./help-azure#credentials "Help with Azure credentials"
