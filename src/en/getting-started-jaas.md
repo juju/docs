@@ -210,14 +210,11 @@ Most users find the flexibility and power of using JAAS and Juju from the CLI
 rewarding. See [Using JAAS from the command line][jaascli] for more information.
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
-[azurecreds]: ./help-azure#credentials "Help with Azure credentials"
 [aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
-[awscreds]: ./help-aws.html#credentials "Help with AWS credentials"
 [bundles]: ./charms-bundles.html "Introduction to bundles"
 [charms]: ./charms.html "Introduction to charms"
 [credentials]: ./credentials.html
 [gce]: ./help-google.html "Using the Google Compute Engine public cloud"
-[gcecreds]: ./help-google#download-credentials "Help with GCE credentials"
 [jaascli]: ./jaas-cli.html "Using JAAS from the command line"
 [jaaslogin]: https://jujucharms.com/login "JAAS login page"
 [models]: ./models.html "Introduction to Juju models"
