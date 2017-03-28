@@ -10,25 +10,9 @@ When you use JAAS, Canonical manages the Juju infrastructure. This frees you
 to concentrate on your software and solutions. With JAAS you can deploy,
 configure, and operate your applications on the largest public clouds:
 [Amazon Web Services][aws], [Google Compute Engine][gce], and [Microsoft Azure][azure].
+
 All you will need is access to your public cloud credentials and an Ubuntu
 Single Sign On account.
-
-## Prepare your cloud credentials
-
-JAAS supports the following public clouds:
-
- * [Amazon Web Services (AWS)][aws]
- * [Google Compute Engine (GCE)][gce]
- * [Microsoft Azure][azure]
-
-We recommend that you use each public cloud's identity and access management
-(IAM) tool to generate a new set of credentials exclusively for use with JAAS.
-See [Cloud credentials][credentials] for more information, along with the
-following links for your specific cloud.
-
- * [AWS][awscreds]
- * [GCE][gcecreds]
- * [Azure][azurecreds]
 
 ## Log in to JAAS
 
@@ -100,9 +84,48 @@ Press the blue `Deploy changes` button to deploy the changes.
 
 After you press `Deploy changes` you can adjust your model name and choose a
 public cloud to deploy to. When you select a cloud, you will see where to enter
-your cloud credentials. Enter them then scroll down and click Deploy.
+your cloud credentials.
 
 ![juju_jaas_choose_cloud](./media/juju_jaas_choose_cloud.png)
+
+## Prepare your cloud credentials
+
+We recommend that you use each public cloud's identity and access management
+(IAM) tool to generate a new set of credentials exclusively for use with JAAS.
+
+See [Cloud credentials][credentials] for more information, along with the
+following links for your specific cloud.
+
+ * [AWS][awscreds]
+ * [GCE][gcecreds]
+ * [Azure][azurecreds]
+
+We briefly cover retrieving and entering your GCE credentials below.
+
+### Google Cloud Platform credentials
+
+To get the credentials for Google Cloud Platform, first sign in to your [GCE
+dashboard][gcedashboard]. We recommend creating a new project for JAAS using
+the pull-down menu in the dashboard's top bar, but you could also select and
+use a pre-existing project from the same menu.
+
+Navigate to the API manager's [credentials page][gcecredentials] using the menu
+in the top left of the dashboard and use the `Create credentials` drop-down
+menu to select `Service account key`. Change the service account to `Compute
+Engine default service account` and the 'Key type' to `JSON`, then click
+`Create`. This will generate and automatically download your credentials.
+
+Back in JAAS, enter a name for this new project, we'd recommend using the same
+name as the project in GCE, and simply import your credentials by clicking on
+the large `Upload Google Compute Engine .json auth-file` button. Point the
+file requester at the downloaded credentials file and click the green 
+`Add cloud credential` to complete the process.
+
+Click on `Deploy` to send your application model to the cloud.
+
+!!! Note: An enabled Compute Engine API is needed by JAAS. The API is enabled
+    automatically if your GCE account has a billing method set up. See our [GCE
+    documentation][gce] for further details.
 
 ## Next steps
 
@@ -167,5 +190,5 @@ your model were terminated.
 [models]: ./models.html "Introduction to Juju models"
 [ubuntuSSO]: https://login.ubuntu.com/ "Ubuntu single sign on"
 [users]: ./users-models.html "Users and models"
-
-
+[gcedashboard]: https://console.cloud.google.com
+[gcecredentials]: https://console.developers.google.com/apis/credentials
