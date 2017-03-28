@@ -93,9 +93,47 @@ We recommend that you use each public cloud's identity and access management
 See [Cloud credentials][credentials] for more information, along with the
 following links for your specific cloud.
 
- * [AWS][awscreds]
- * [GCE][gcecreds]
- * [Azure][azurecreds]
+<table width="500" border-width="0px" cellpadding="5">
+
+<tr>
+
+<td align="center" valign="center" border-width="0px" >
+<a href="./help-aws.html#credentials">
+<img src="./media/logo-aws.png" alt="AWS" />
+</a>
+</td>
+
+<td align="center" valign="center" border-width="0px" >
+<a href="./help-azure.html#credentials">
+<img src="./media/logo-azure.png" alt="Azure" />
+</a>
+</td>
+
+
+<td align="center" valign="center" border-width="0px">
+<a href="./help-google.html#download-credentials">
+<img src="./media/logo-gcp.png" alt="GCP" />
+</a>
+</td>
+</tr>
+
+<!-- COMMENTED OUT AS PROBABLY NOT NEEDED
+
+<tr>
+<td align="center" valign="center" border-width="0px">
+Amazon Web Services
+</td>
+<td align="center" valign="center" border-width="0px">
+Microsoft Azure
+</td>
+<td align="center" valign="center" border-width="0px">
+Google Cloud Platform
+</td>
+</tr>
+
+-->
+
+</table>
 
 We briefly cover retrieving and entering your GCE credentials below.
 
@@ -172,14 +210,11 @@ Most users find the flexibility and power of using JAAS and Juju from the CLI
 rewarding. See [Using JAAS from the command line][jaascli] for more information.
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
-[azurecreds]: ./help-azure#credentials "Help with Azure credentials"
 [aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
-[awscreds]: ./help-aws#credentials "Help with AWS credentials"
 [bundles]: ./charms-bundles.html "Introduction to bundles"
 [charms]: ./charms.html "Introduction to charms"
 [credentials]: ./credentials.html
 [gce]: ./help-google.html "Using the Google Compute Engine public cloud"
-[gcecreds]: ./help-google#download-credentials "Help with GCE credentials"
 [jaascli]: ./jaas-cli.html "Using JAAS from the command line"
 [jaaslogin]: https://jujucharms.com/login "JAAS login page"
 [models]: ./models.html "Introduction to Juju models"
