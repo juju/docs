@@ -51,7 +51,7 @@ table th, table td {
 <td align="center" valign="center" border-width="0px" >
 <img src="./media/jaas-empty.png" alt="description here" />
 <br />
-Press the green "Start building" button to get started...
+Press the green `Start building` button to get started...
 </td>
 
 <td align="center" valign="center" border-width="0px">
@@ -85,20 +85,20 @@ Find a charm or bundle that you want to add to your model.
 <td align="center" valign="center" border-width="0px" >
 <img src="./media/jaas-select-bundle.png" alt="description here" />
 <br />
-Press the green "Add to model" button to add it to your model.
+Press the green `Add to model` button to add it to your model.
 </td>
 
 <td align="center" valign="center" border-width="0px">
 <img src="./media/jaas-deploy-changes.png" alt="description here" />
 <br />
-Press the blue "Deploy changes" button to deploy the changes.
+Press the blue `Deploy changes` button to deploy the changes.
 </td>
 
 </tr>
 
 </table>
 
-After you press "Deploy changes" you can adjust your model name and choose a
+After you press `Deploy changes` you can adjust your model name and choose a
 public cloud to deploy to. When you select a cloud, you will see where to enter
 your cloud credentials. Enter them then scroll down and click Deploy.
 
@@ -127,9 +127,8 @@ rewarding. See [Using JAAS from the command line][jaascli] for more information.
 
 ### Destroy a model
 
-When you are done and want to destroy the model you created, click your name.
-
-![juju_jaas_top_panel_name](./media/jaas-username.png)
+When you are done and want to destroy the model you created, click on your
+username at the top left of the page to list all your models.
 
 <table width="500" border-width="0px" cellpadding="5">
 
@@ -144,7 +143,7 @@ Click the model name to select the model you want to manage from the list.
 <td align="center" valign="center" border-width="0px">
 <img src="./media/jaas-destroy-model.png" alt="description here" />
 <br />
-From the options that are revealed, click Destroy model.
+From the options that are revealed, click `Destroy model`.
 </td>
 
 </tr>
