@@ -100,7 +100,7 @@ following links for your specific cloud.
  * [GCE][gcecreds]
  * [Azure][azurecreds]
 
-We briefly cover retrieving your GCE credentials below.
+We briefly cover retrieving and entering your GCE credentials below.
 
 ### Google Cloud Platform credentials
 
