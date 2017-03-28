@@ -104,7 +104,9 @@ your cloud credentials. Enter them then scroll down and click Deploy.
 
 ![juju_jaas_choose_cloud](./media/juju_jaas_choose_cloud.png)
 
-## Collaborate
+## Next steps
+
+### Collaborate
 
 To share your model with another JAAS user you can share the standard Juju way,
 as described in [Users and models][users], or you can share directly from the
@@ -118,10 +120,39 @@ Enter the username and set the permissions for the new user.
 
 ![juju_jaas_share_screen](./media/juju_jaas_share_screen.png)
 
-## Next steps
+### Learn the CLI
 
 Most users find the flexibility and power of using JAAS and Juju from the CLI
 rewarding. See [Using JAAS from the command line][jaascli] for more information.
+
+### Destroy a model
+
+When you are done and want to destroy the model you created, click your name.
+
+![juju_jaas_top_panel_name](./media/jaas-username.png)
+
+<table width="500" border-width="0px" cellpadding="5">
+
+<tr>
+
+<td align="center" valign="center" border-width="0px" >
+<img src="./media/jaas-model-list.png" alt="description here" />
+<br />
+Click the model name to select the model you want to manage from the list.
+</td>
+
+<td align="center" valign="center" border-width="0px">
+<img src="./media/jaas-destroy-model.png" alt="description here" />
+<br />
+From the options that are revealed, click Destroy model.
+</td>
+
+</tr>
+
+</table>
+
+Log in to your cloud provider's dashboard to confirm the machines created for
+your model were terminated.
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
 [azurecreds]: ./help-azure#credentials "Help with Azure credentials"
