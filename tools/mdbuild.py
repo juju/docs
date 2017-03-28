@@ -59,7 +59,7 @@ def getoutfile(filename, outpath):
 
 def navchange(data):
     # Remove the html to have clean url and use h4 instead.
-    data = data.replace(".html", "").replace("h1", "h4")
+    data = data.replace("h1", "h4")
     data = data.replace("no-margin", "")
     # Remove unnessessary header class.
     data = data.replace("class=\"header\"", "")
