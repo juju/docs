@@ -57,10 +57,10 @@ to the local directory remote-logs:
 juju scp -r mongodb/0:/var/log/mongodb/ remote-logs/
 ```
 
-Copy a local file to the second apache2 unit of the environment "testing":
+Copy a local file to the second apache2 unit in the model "testing":
 
 ```bash
-juju scp -e testing foo.txt apache2/1:
+juju scp -m testing foo.txt apache2/1:
 ```
 
 For more information, run the `juju help scp` command.
