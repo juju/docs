@@ -52,8 +52,10 @@ details  {
 
    A Windows installer is available for Juju. 
 
-   Please see the [releases page][releases] for a link to the latest 
-   version.
+   [juju-setup-2.1.2.exe](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe/+md5))
+   
+   Please see the [releases page][releases] for other  
+   versions.
 
 ^# For MacOSX
 
@@ -213,3 +215,4 @@ exactly what it's capable of.
 [kubernetes]: https://jujucharms.com/canonical-kubernetes/bundle/21
 [jujudocs]: ./clouds.html
 [ubuntusso]: https://login.ubuntu.com/
+[releases]: ./reference-releases.html
