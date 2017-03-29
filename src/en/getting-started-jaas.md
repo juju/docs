@@ -34,13 +34,13 @@ table th, table td {
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-empty.png" alt="description here" />
+<img src="./media/jaas-login-1.png" alt="Login to JAAS" />
 <br />
 Press the green Start building button to get started...
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-start.png" alt="description here" />
+<img src="./media/jaas-login-2.png" alt="Login to JAAS" />
 <br />
 ... and reveal your (currently empty) canvas.
 </td>
@@ -66,13 +66,13 @@ to your model by pressing the 'Add' button...
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-select-bundle.png" alt="description here" />
+<img src="./media/jaas-kubernetes.png" alt="Canonical kubernetes bundle" />
 <br />
 Press the green Add to model button to add it to your model.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-deploy-changes.png" alt="description here" />
+<img src="./media/jaas-deploy-changes.png" alt="deploying changes in JAAS" />
 <br />
 Press the blue Deploy changes button to deploy the changes.
 </td>
@@ -85,7 +85,7 @@ After you press `Deploy changes` you can adjust your model name and choose a
 public cloud to deploy to. When you select a cloud, you will see where to enter
 your cloud credentials.
 
-![juju_jaas_choose_cloud](./media/juju_jaas_choose_cloud.png)
+![jaas-choose-cloud](./media/jaas-choose-cloud.png)
 
 ## Prepare your cloud credentials
 
@@ -177,15 +177,15 @@ related to each other and configurations are being applied.
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/placeholder.png" alt="description here" />
+<img src="./media/jaas-deploy-1.png" alt="description here" />
 <br />
-Deploying a bundle can take a few minutes
+Deploying a bundle can take a few minutes...
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/placeholder.png" alt="description here" />
+<img src="./media/jaas-deploy-2.png" alt="description here" />
 <br />
-When complete, the application icons will turn green
+When complete, the application icons will turn grey.
 </td>
 
 </tr>
@@ -195,8 +195,8 @@ When complete, the application icons will turn green
 
 
 As the applications change from pending to operational, the colours in the 
-model view will change to green to show that everything is working as
-expected.
+model view will change to grey and the pending notices in the inspector on the 
+left will disappear, to show that everything is working as expected.
 
 
     
