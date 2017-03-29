@@ -197,7 +197,7 @@ collection of deployable operational expertise via the
 functions and facilities of Juju itself.
 
 We'd recommend next stepping through the [Juju documentation][jujudocs] to see
-exactly what they're capable of.
+exactly what it's capable of.
 
 
 [credentials]: ./credentials.html
