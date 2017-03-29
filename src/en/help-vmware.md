@@ -5,6 +5,7 @@ TODO: Test vSphere
 
 In order to use the vSphere provider you will need to have an existing
 vSphere installation which supports VMware's Hardware Version 8 or better.
+The vSphere installation will also need access to a DNS for Juju to function.
 
 Juju doesn't have baked-in knowledge of your specific vSphere cloud, but it
 does know how such clouds work. We just need to provide some information to add
