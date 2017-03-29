@@ -203,23 +203,23 @@ left will disappear, to show that everything is working as expected.
 
 To share your model with another JAAS user you can share the standard Juju way,
 as described in [Users and models][users], or you can share directly from the
-JAAS GUI, like this.
+JAAS GUI, like this:
 
 
 <table width="500" border-width="0px" cellpadding="5">
 
 <tr>
 
-<td align="center" valign="center" border-width="0px" >
-<img src="./media/placeholder.png" alt="description here" />
+<td>
+<img src="./media/jaas-share-1.png" alt="description here" />
 <br />
-Click the share button
+Click the share button...
 </td>
 
-<td align="center" valign="center" border-width="0px">
-<img src="./media/placeholder.png" alt="description here" />
+<td>
+<img src="./media/jaas-share-2.png" alt="description here" />
 <br />
-Enter the username and permissions for the new user
+Enter the username and permissions for the new user.
 </td>
 
 </tr>
@@ -233,25 +233,25 @@ Enter the username and permissions for the new user
 When you are done and want to destroy the model you created, click on your
 username at the top left of the page to list all your models.
 
-<table width="500" border-width="0px" cellpadding="5">
+Click on a model name to select a particular model for more details.
 
-<tr>
-
-<td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-model-list.png" alt="description here" />
-<br />
-Click the model name to select the model you want to manage from the list
-</td>
-
-<td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-destroy-model.png" alt="description here" />
-<br />
-From the options that are revealed, click "Destroy model" - you will be asked to confirm this step
-</td>
-
-</tr>
-
+<table>
+  <tr>
+    <td>
+      <img src="./media/jaas-destroy-1.png" alt="description here" />
+      <br />
+      Click on the "Destroy model" button...
+    </td>
+    <td>
+      <img src="./media/jaas-destroy-2.png" alt="description here" />
+      <br />
+      You will be asked to confirm this step.
+    </td>
+  </tr>
 </table>
+
+Destroying a model is not instantaneous - the images are shut down and released
+in a controlled way - but it shouldn't take more than a minute or two.
 
 Log in to your cloud provider's dashboard to confirm the machines created for
 your model were terminated.
