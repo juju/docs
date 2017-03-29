@@ -64,7 +64,7 @@ Press the green Start building button to get started...
 </table>
 
 
-## Create and deploy a model
+## Create a model
 
 Press the green + button on the page to start building your [model][models].
 
@@ -259,8 +259,12 @@ your model were terminated.
 
 ## Next steps
 
-Most users find the flexibility and power of using JAAS and Juju from the CLI
-rewarding. See [Using JAAS from the command line][jaascli] for more information.
+Congratulations! you have now deployed a complex workload in the cloud without 
+ever leaving your browser!
+
+There are many ways to use JAAS solely from the web interface, but many users
+are more comfortable with the command line. You should check out how to 
+[install the Juju client software and use JAAS from the command line][jaascli].
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
 [aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
