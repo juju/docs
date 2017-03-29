@@ -8,9 +8,9 @@
         <li class="section"><a class="header" href="getting-started.html">First use!</a>
             <ul class="sub">
                 <li><a href="getting-started-general.html">Install for non-16.04</a></li>
-                <li><a href="getting-started-jaas.html">Juju as a Service (JAAS)</a></li>
             </ul>
         </li>
+        <li><a href="getting-started-jaas.html">Juju as a Service (JAAS)</a></li>
         <li><a href="tut-google.html">Controllers and Models</a></li>
         <li><a href="tut-users.html">Sharing and Users</a></li>
         </ul>
