@@ -27,6 +27,20 @@ table th, table td {
     border: 0px solid;
     padding: 15px 10px;
 }
+
+table.logos {
+    background: #f7f7f7;
+    border: 0px solid;
+    padding: 4px 4px;
+}
+
+table.logos th, table.logos td{
+    align="center";
+    valign="center";
+    border: 8px;
+    border-style: solid;
+    border-color: #ffffff;
+  }
 </style>
 
 <table width="500" border-width="0px" cellpadding="5">
@@ -95,45 +109,29 @@ We recommend that you use each public cloud's identity and access management
 See [Cloud credentials][credentials] for more information, along with the
 following links for your specific cloud.
 
-<table width="500" border-width="0px" cellpadding="5">
+<table class="logos">
 
 <tr>
 
-<td align="center" valign="center" border-width="0px" >
+<td>
 <a href="./help-aws.html#credentials">
 <img src="./media/logo-aws.png" alt="AWS" />
 </a>
 </td>
 
-<td align="center" valign="center" border-width="0px" >
+<td>
 <a href="./help-azure.html#credentials">
 <img src="./media/logo-azure.png" alt="Azure" />
 </a>
 </td>
 
 
-<td align="center" valign="center" border-width="0px">
+<td>
 <a href="./help-google.html#download-credentials">
 <img src="./media/logo-gcp.png" alt="GCP" />
 </a>
 </td>
 </tr>
-
-<!-- COMMENTED OUT AS PROBABLY NOT NEEDED
-
-<tr>
-<td align="center" valign="center" border-width="0px">
-Amazon Web Services
-</td>
-<td align="center" valign="center" border-width="0px">
-Microsoft Azure
-</td>
-<td align="center" valign="center" border-width="0px">
-Google Cloud Platform
-</td>
-</tr>
-
--->
 
 </table>
 
