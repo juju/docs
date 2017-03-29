@@ -99,8 +99,8 @@ deployed are now accessible from the command line.
 
 ## View your models
 
-If you previously added one or more models using the GUI, you can view them in
-the CLI with the following command: 
+If you previously added one or more models using the web interface, you can
+view them in the CLI with the following command: 
 
 ```bash
 juju models
@@ -132,15 +132,15 @@ model name and the cloud you wish to use:
 juju add-model newmodelname aws
 ```
 
-You can also specify a region for the new model, such as `aws/us-east-1`. Use the
-`juju regions` command, followed by your cloud name to get a list of supported
-regions for your cloud. 
+You can also specify a region for the new model, such as `aws/us-east-1`. Use
+the `juju regions` command, followed by your cloud's name, to get a list of
+supported regions for your cloud. 
 
 ## Deploy
 
 The [Charm store][charmstore] is the default repository for [charms][charms]
-and [bundles][bundles]. From [Kibana][kibana] to [OpenStack][openstack], it's
-JAAS and Juju that handles the complexity. 
+and [bundles][bundles]. Whether you deploy [Kibana][kibana] or
+[OpenStack][openstack], it's JAAS and Juju that handle the complexity. 
 
 To deploy the [Canonical Kubernetes][kubernetes] bundle, for example, type the
 following:
@@ -152,15 +152,15 @@ juju deploy canonical-kubernetes
 The output from the above command will show each component of the Kubernetes
 bundle being deployed to your cloud. The `juju status` command will give a more
 comprehensive overview, showing each application as it steps through
-deployment, allocation and execution, finally turning applications green when
-all interrelated components are in place and linked to one another. 
+deployment, allocation and execution. Finally, each applications will turn
+green when all interrelated components are in place and linked to one another. 
 
 Kubernetes is now ready for action!
 
 ## Destroy a model
 
 When you've finished with a deployment, the `destroy-model` command will remove it from
-JAAS and free any resources being used by the cloud.
+JAAS and free any resources being used by your cloud.
 
 To remove the model hosting Kubernetes, type the following:
 
@@ -168,9 +168,9 @@ To remove the model hosting Kubernetes, type the following:
 juju destroy-model newmodelname
 ```
 
-After confirming the action, the model will be removed completely, making it no
-longer accessible from either the command line or the web interface. As with
-the web interface, the process isn't instantaneous but should take only a
+After confirming the action, the model will be removed completely, making the
+model and its resources no longer accessible from either the command line or
+the web interface. The process isn't instantaneous but should take only a
 couple of minutes.
 
 Log in to your cloud provider's dashboard to confirm the machines created for
@@ -185,7 +185,7 @@ use the `unregister` command with the controller name as an argument:
 juju unregister myjaas
 ```
 
-This command doesn't remove your models or applications, all of which can still
+This command doesn't remove any other models or applications, all of which can still
 be accessed either via the web interface or by registering your account again
 on the command line.
 
@@ -193,9 +193,11 @@ on the command line.
 
 With JAAS and Juju on the command line, you now have access to a vast
 collection of deployable operational expertise via the 
-[Charm store][charmstore]. But you also have access to the function and
-facilities of Juju itself. We'd recommend next stepping through the
-[Juju documentation][jujudocs] to see exactly what it's capable of.
+[Charm store][charmstore]. But you also have access to the comprehensive set of
+functions and facilities of Juju itself.
+
+We'd recommend next stepping through the [Juju documentation][jujudocs] to see
+exactly what they're capable of.
 
 
 [credentials]: ./credentials.html
