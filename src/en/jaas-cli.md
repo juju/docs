@@ -79,33 +79,137 @@ details  {
 
 
 
-## Register or login to JAAS from Juju
+## Register or login to JAAS
+
+To authorise JAAS from the command line, enter the following command:
 
 ```bash
 juju register jimm.jujucharms.com
 ```
 
+This command will open a new window in your default web browser and use
+[Ubuntu SSO][ubuntusso] to authorise your account. If the browser doesn't open,
+you can manually copy and paste the unique authorisation URL from the command
+output.
+
+After successful authentication, you will be asked to enter a descriptive name
+for the JAAS controller, giving you access to the same controller used by the
+JAAS web interface. This means any models or applications you have already
+deployed are now accessible from the command line. 
 
 ## View your models
 
-If you added a model using the GUI, you can see it in the CLI, like this:
+If you previously added one or more models using the web interface, you can
+view them in the CLI with the following command: 
 
 ```bash
 juju models
 ```
 
-## Create a new model
+If you have more than one model, you will need to switch focus to one of these
+before you can perform any actions:
+
+```bash
+juju switch mymodel
+```
+
+You can check on the status of the currently active model, showing any
+applications currently deployed, with the following command:
+
+```bash
+juju status
+```
+## Create and deploy a model
 
 If you have not yet entered credentials for the public cloud of your choice
-into JAAS, enter one now with the `add-credential` command. See [Cloud credentials][credentials]
-for more information.
+into JAAS, enter one now with the `add-credential` command. See 
+[Cloud credentials][credentials] for more information.
 
-To add a new model and perform model-related tasks from the CLI, see [Models][models].
+To create a new model, use the [add-model][addmodel] command and specify both a
+model name and the cloud you wish to use:
 
-View the new model in the JAAS web UI by logging in to [https://jujucharms.com](https://jujucharms.com).
+```bash
+juju add-model newmodelname aws
+```
+
+You can also specify a region for the new model, such as `aws/us-east-1`. Use
+the `juju regions` command, followed by your cloud's name, to get a list of
+supported regions for your cloud. 
+
+## Deploy
+
+The [Charm store][charmstore] is the default repository for [charms][charms]
+and [bundles][bundles]. Whether you deploy [Kibana][kibana] or
+[OpenStack][openstack], it's JAAS and Juju that handle the complexity. 
+
+To deploy the [Canonical Kubernetes][kubernetes] bundle, for example, type the
+following:
+
+```bash
+juju deploy canonical-kubernetes
+```
+
+The output from the above command will show each component of the Kubernetes
+bundle being deployed to your cloud. The `juju status` command will give a more
+comprehensive overview, showing each application as it steps through
+deployment, allocation and execution. Finally, each applications will turn
+green when all interrelated components are in place and linked to one another. 
+
+Kubernetes is now ready for action!
+
+## Destroy a model
+
+When you've finished with a deployment, the `destroy-model` command will remove it from
+JAAS and free any resources being used by your cloud.
+
+To remove the model hosting Kubernetes, type the following:
+
+```bash
+juju destroy-model newmodelname
+```
+
+After confirming the action, the model will be removed completely, making the
+model and its resources no longer accessible from either the command line or
+the web interface. The process isn't instantaneous but should take only a
+couple of minutes.
+
+Log in to your cloud provider's dashboard to confirm the machines created for
+your model were terminated.
+
+## Logout of JAAS
+
+To remove the local authorization that links your Ubuntu SSO account with JAAS,
+use the `unregister` command with the controller name as an argument:
+
+```bash
+juju unregister myjaas
+```
+
+This command doesn't remove any other models or applications, all of which can still
+be accessed either via the web interface or by registering your account again
+on the command line.
+
+## Next steps
+
+With JAAS and Juju on the command line, you now have access to a vast
+collection of deployable operational expertise via the 
+[Charm store][charmstore]. But you also have access to the comprehensive set of
+functions and facilities of Juju itself.
+
+We'd recommend next stepping through the [Juju documentation][jujudocs] to see
+exactly what it's capable of.
+
 
 [credentials]: ./credentials.html
 [installjuju]: ./getting-started-general.html
 [models]: ./models.html
+[addmodel]: ./models-adding.html
 [snapcraft]: https://snapcraft.io/docs/core/install
-[releases]: ./releases.md
+[charmstore]: https://jujucharms.com
+[kibana]: https://jujucharms.com/kibana
+[openstack]: https://jujucharms.com/q/openstack/?type=bundle
+[charms]: ./charms.html
+[bundles]: ./charms-bundles.html
+[kubernetes]: https://jujucharms.com/canonical-kubernetes/bundle/21
+[jujudocs]: ./clouds.html
+[ubuntusso]: https://login.ubuntu.com/
