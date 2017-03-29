@@ -179,13 +179,13 @@ related to each other and configurations are being applied.
 <td align="center" valign="center" border-width="0px" >
 <img src="./media/jaas-deploy-1.png" alt="description here" />
 <br />
-Deploying a bundle can take a few minutes
+Deploying a bundle can take a few minutes...
 </td>
 
 <td align="center" valign="center" border-width="0px">
 <img src="./media/jaas-deploy-2.png" alt="description here" />
 <br />
-When complete, the application icons will turn grey
+When complete, the application icons will turn grey.
 </td>
 
 </tr>
