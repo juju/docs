@@ -272,3 +272,53 @@ Here's an example of a test that uses the mock (note that we pass create=True --
 ```
 
 If your charm does not have a lib/charms/layer directory, you'll still wind up with an ImportError that can be hard to work around. In this case, we recommend creating that directory, and dropping a blank file called `<your charm name>.py` into it. This isn't ideal, but it will save you some trouble when writing your tests.
+
+<a name="matrix"></a>
+## Testing with Juju-Matrix
+
+juju-matrix is a new testing tool for charm authors. It doesn't completely replace the older methods of writing tests, but it eliminates the need to write a lot of boilerplate tests, and it is growing into a sophisticated tool that allows charm authors to validate that their software will operate will at scale, in ways that are difficult to do with the existing testing setup.
+
+juju-matrix will run a basic deploy test for you, eliminating the need to write a custom deploy test for your bundle. It also works with [conjure-up spells](http://conjure-up.io/), so if you need to do custom things to get your bundle to deploy, you can specify those things in a spell, and rely on juju-matrix to validate that the spell successfully deploys.
+
+For more complex tests, you can write custom juju-matrix plugins and tests. juju-matrix will also run an end_to_end test automatically if one exists (see below).
+
+### Installation
+
+To install juju-matrix, simply run:
+
+```
+    sudo snap install --classic --edge juju-matrix
+```
+
+### Running Tests
+
+To run a juju-matrix test on a bundle:
+
+* Pull the bundle that you want to test to a local directory, either via `charm pull`, or by checking out a source tree.
+* From within the bundle directory, run
+```
+juju-matrix
+```
+* This will run a default suite of tests against your bundle, including that basic deploy test.
+
+If you wish to test a conjure-up spell instead of a vanilla bundle, make sure that you have conjure up installed, then run juju-matrix from within a local checkout of the spell. juju-matrix will automatically detect that you are using a spell, and deploy it using conjure-up's headless mode.
+
+### Chaos
+
+By default, juju-matrix will also run a "chaos" test, which is similar in concept to Netflix's Chaos Monkey. juju-matrix will deploy the bundle, then perform various actions, such as adding units, removing machines, and simulating juju agent crashes. It will then check to see if the bundle remains in a healthy state.
+
+If you specify and "end_to_end" test, juju-matrix will run its chaos while using the end_to_end test to generate traffic inside of your bundle.
+
+Note that chaos will usually break simple bundles that have no provisions for offering "high availability". The wiki-simple bundle, for example, only has one database unit and one web server unit, so it will fail if either of these go down. Since these bundles are not necessarily wrong -- just not configured to be highly available -- juju-matrix will not generate a test failure if the chaos run leaves your bundle into a bad state.
+
+If you do wish to verify that your bundle stays healthy in the face of chaos, you can add a "matrix" section to your tests.yaml, and include "ha: True" in that section. This marks your bundle as "high availability", and any failures during the chaos run will cause juju-matrix to exit with a non-zero exit code, indicating a test failure.
+
+### End-to-End testing with juju-matrix
+
+If you have a test file named `end_to_end` in your bundle's tests directory, juju-matrix will automatically find it and run it, while executing chaos actions against your bundle. This is useful for testing how your bundle might behave while under load, and under adverse conditions.
+
+### Custom juju-matrix tests
+
+You can also write custom juju-matrix tests. A juju-matrix test is simply a yaml file that specifies which juju-matrix "tasks" to run, when. There is a plugin system for writing your own custom tasks. Take a look at [matrix.yaml](https://github.com/juju-solutions/matrix/blob/master/matrix/matrix.yaml) in the juju-matrix source, and also at the .matrix files in the [tests directory](https://github.com/juju-solutions/matrix/tree/master/tests) of the same for examples.
+
+More information about writing custom tests and plugins can be found in the [juju-matrix README](https://github.com/juju-solutions/matrix/blob/master/README.md).
