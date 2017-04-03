@@ -9,7 +9,7 @@ first need to install the Juju client software on your machine.
 
 ## Install Juju
 
-Juju is available for various types of Linux, MacOSX, and Windows. 
+Juju is available for various types of Linux, macOS, and Windows. 
 Click on the sections below for the relevant instructions.
 
 
@@ -57,9 +57,9 @@ details  {
    Please see the [releases page][releases] for other  
    versions.
 
-^# For MacOSX
+^# For macOS
 
-   The easiest way to install Juju on MacOS is with the brew package 
+   The easiest way to install Juju on macOS is with the brew package 
    manager. With brew installed, simply enter the following into a 
    terminal:
 
