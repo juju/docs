@@ -24,26 +24,13 @@ juju controller-config
 This will include all the currently set key values - whether they were set
 by you, inherited as a default value or dynamically set by Juju. 
 
-A key's value may be set for the current model using the same command:
+Once a controller is bootstrapped, all the controller config settings are
+read-only and may not be changed.
+
+To set a key's value ...
 
 ```bash
-juju controller-config auditing-enabled=true
-```
-
-It is also possible to specify a list of key-value pairs:
-  
-```bash
-juju controller-config auditing-enabled=true set-numa-control-policy=false
-```
-
-!!! Note: Juju does not currently check that the provided key is a valid
-setting, so make sure you spell it correctly.
-
-To return a value to the default setting the `--reset` flag is used,
-specifying the key names:
-  
-```bash
-juju controller-config --reset auditing-enabled
+...
 ```
 
 ## List of controller keys
