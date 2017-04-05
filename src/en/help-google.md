@@ -125,4 +125,8 @@ The command will interactively prompt you for information about the credentials
 being added. For the authentication type, choose 'json' and then give the full
 path to the file downloaded.
 
+Alternately, you can also use this credential with [Juju as a Service][jaas] and
+create and deploy your model using its GUI.
+
 [gce-docs]: https://console.cloud.google.com/start "GCE Getting Started"
+[jaas]: ./getting-started-jaas.html "Getting Started with Juju as a Service"

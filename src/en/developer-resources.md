@@ -108,11 +108,19 @@ charm-name charm.
 ### charm attach
 
 The `charm attach` command uploads a file to the Juju Charm Store as a new
-resource for the charm. You must specify the fully qualified charm name, including
-the version. e.g. ~you/mycharm-0 instead of just ~you/mycharm.
+resource for the charm. The default channel is the stable channel. You must
+specify the fully qualified charm name, including
+the version. e.g. ~you/mycharm-0 instead of just ~you/mycharm when using the
+stable channel.
 
 ```sh
 charm attach ~mbruzek/trusty/consul-0 software=./consul_0.6.4_linux_amd64.zip
+```
+
+A revision number is not required when using another channel.
+
+```sh
+charm attach ~mbruzek/trusty/consul-0 software=./consul_0.6.4_linux_amd64.zip -c unpublished
 ```
 
 # Using resources in a charm

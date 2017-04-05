@@ -88,6 +88,8 @@ juju run "uptime" --application=mysql
 
 !!! Note: When using `juju run` with the `--application` option, keep in mind
 that whichever command you pass will run on *every unit* of that application.
+When using `juju run` with the `--machine` option, the command is run as the
+`root` user on the remote machine.
 
 When used in combination with certain applications you can script certain tasks.
 For instance, in the 'hadoop' charm you can use `juju run` to initiate a

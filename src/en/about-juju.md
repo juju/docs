@@ -139,7 +139,7 @@ deployed right alongside Linux applications (albeit in different machines!) in
 the same large-scale application model. If you need to integrate
 Active Directory on Windows with Hadoop on Linux, this is the way to do it.
 
-The Juju client can run on Linux, Windows, or OSX. And of course, once you
+The Juju client can run on Linux, Windows, or macOS. And of course, once you
 have the Juju GUI up, all you need is a web browser to manage your environment
 and deploy more software, or scale up your existing applications.
 

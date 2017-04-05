@@ -57,7 +57,37 @@ def getoutfile(filename, outpath):
     base = os.path.splitext(base)[0] + '.html'
     return os.path.join(outpath, base)
 
-
+def navchange(data):
+    # Remove the html to have clean url and use h4 instead.
+    data = data.replace("h1", "h4")
+    data = data.replace("no-margin", "")
+    # Remove unnessessary header class.
+    data = data.replace("class=\"header\"", "")
+    # Add toggle element to sub lists.
+    data = data.replace(
+        "<ul class=\"sub\"",
+        "<i class=\"sub-toggle-target\"></i><ul class=\"sub\""
+    )
+    # Add a JavaScript click event on the toggle elements.
+    data = data.replace(
+        "toggle-target\"",
+        "toggle-target\" onClick=\"this.classList.toggle('is-expanded')\""
+    )
+    # Reveal all menus
+    data = data.replace(
+        "header toggle-target",
+        "header toggle-target is-expanded"
+    )
+    # Add selected condition statement to links
+    data = re.sub('(href="([^"]+)")', addSelectConditional, data)
+    return data
+  
+def addSelectConditional(matchobj):
+    url = matchobj.group(0).replace('href=', '').replace('"', '')
+    html = ('{{% if (doc_name == "{0}") %}} class="is-selected"'
+            '{{% endif %}} href="{0}"')
+    return html.format(url)
+  
 def main():
     global doc_template
     global doc_nav
@@ -69,6 +99,7 @@ def main():
     t = codecs.open(
         os.path.join(args.source, 'navigation.tpl'), encoding='utf-8')
     doc_nav = t.read()
+    doc_nav = navchange(doc_nav)
     t.close()
     mdparser = markdown.Markdown(extensions=extlist)
     if (args.file):

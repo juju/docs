@@ -40,7 +40,7 @@ and switch to his controller:
 ```bash
 juju users
 juju switch lxd-sam
-juju login sam
+juju login -u sam
 ```
 
 The output becomes:
