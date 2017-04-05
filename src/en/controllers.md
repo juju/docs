@@ -73,6 +73,16 @@ Common tasks are summarized below.
 
 
 
+^# Configure a controller
+
+   There are several settings which can be adjusted from their defaults, such
+   as whether the controller will record auditing information. Configuration
+   must happen as the controller is bootstrapped.
+
+   This topic is covered in more depth in the [configuring controllers section](./controllers-config.html).
+
+
+
 ^# Remove a controller
 
    Use the `juju destroy-controller` command to remove a controller.
