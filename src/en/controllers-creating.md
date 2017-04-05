@@ -120,3 +120,7 @@ from 10 minutes to 15, enter the value in seconds:
 juju bootstrap --config bootstrap-timeout=900 lxd lxd-faraway
 ```
 
+To learn more about configuration options available at bootstrap time, see
+[Configuring controllers][controlconfig].
+
+[controlconfig]: ./controllers-config.html "Configuring Juju controllers"
