@@ -79,7 +79,7 @@ Common tasks are summarized below.
    as whether the controller will record auditing information. Configuration
    must happen as the controller is bootstrapped.
 
-   This is a complex subject. See [Configuring controllers](./controllers-config.html).
+   This topic is covered in more depth in the [configuring controllers section](./controllers-config.html).
 
 
 
