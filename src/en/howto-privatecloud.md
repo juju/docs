@@ -244,7 +244,7 @@ Now the Simplestream service is registered and running you can create a controll
 this cloud with the `juju bootstrap` command. 
 
 ```bash
-juju bootstrap <cloud> <controller name> --config image-metadata-url=$SWIFT_URL
+juju bootstrap <cloud> <controller name> --config tools-metadata-url=$SWIFT_URL
 ```
 
 If there are multiple possible networks available to the cloud, it is also necessary to 
@@ -260,6 +260,6 @@ option when bootstrapping a new controller:
 
 
 ```bash 
-juju bootstrap openstack --config image-metadata-url=$SWIFT_URL --config network=<network id>
+juju bootstrap openstack --config tools-metadata-url=$SWIFT_URL --config network=<network id>
 ```
 

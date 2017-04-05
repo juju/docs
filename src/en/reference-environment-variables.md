@@ -58,7 +58,7 @@ running environment you can change the logging options to be more or less
 verbose. For example:
 
 ```
-juju model-config logging-config="juju=DEBUG; unit=WARNING"
+juju set-environment logging-config "juju=DEBUG; unit=WARNING"
 ```
 
 #### JUJU_MODEL

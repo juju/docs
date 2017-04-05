@@ -15,10 +15,9 @@ subcommands accept the “--help” flag for usage and help information.
 ```bash
 juju storage --help
 juju add-storage
-juju storage
+juju show-storage
 juju create-storage-pool
 juju storage-pools
-juju remove-storage
 ```
 
 ## Deploying a charm with storage requirements
@@ -238,45 +237,6 @@ default values:
 juju deploy postgresql --storage pgdata=ebs,10G cache=ebs-ssd
 ```
 
-### Remove storage
-
-Future versions of Juju will manage storage entirely separately from units.
-This will enable types of storage which can persist (e.g. EBS volumes) to be
-re-used by new units or workloads. This is not fully implemented in the current
-version of Juju, but one of the first steps is to be able to remove storage,
-which is currently possible.
-
-When you remove the storage attached to a running charm, `remove-storage` will
-run the [storage-detaching hook][storagedetatching], detach the storage from the machine, and remove
-the storage from the model, destroying the cloud storage resources in the
-process.
-
-To remove existing storage, you must specify one or more storage IDs; these
-can be found in the output of `juju storage`, shown here:
-
-```bash
-[Storage]
-Unit          Id        Type        Pool  Provider id                                       Size   Status    Message
-postgresql/0  pgdata/0  filesystem  gce   us-east1-b--78e14381-d247-48d7-8273-c3c951a079d9  10GiB  attached
-```
-
-To remove this storage, use:
-
-```bash
-juju remove-storage pgdata/0
-```
-
-If you have and want to remove multiple storage instances at the same time,
-you can refer to more than one in the command, like this:
-
-```bash
-juju remove-storage pgdata/0 pgdata/1
-```
-
-If you remove a unit that has storage, the storage is removed with the unit.
-Future versions of Juju will cause the storage to be detached but remain in
-the model.
-
 ### Upgrading with storage constraints
 
 When updating a charm with the [upgrade-charm][upgrade-charm] command,
@@ -351,5 +311,4 @@ the storage feature read
 [writing charms that use storage](./developer-storage.html).
 
 [model-config]: ./models-config.html#list-of-model-keys
-[storagedetatching]: ./reference-charm-hooks#[name]-storage-detatching
 [upgrade-charm]: ./commands.html#upgrade-charm

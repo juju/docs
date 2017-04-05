@@ -14,10 +14,10 @@ The source project can be found at
 Install the charm snap:
 
 ```bash
-sudo snap install charm --classic
+sudo snap install charm
 ```
 
-## macOS
+## Mac OSX
 
 Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
 running the latest version of Homebrew before proceeding.
