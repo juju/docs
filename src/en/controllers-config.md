@@ -10,7 +10,7 @@ the database and keeps track of all the models in that environment.
 
 Controller configuration consists of a collection of keys and their respective
 values. An explanation of how to both view and set these key:value pairs is
-provided below. Notable examples are provided at the end.
+provided below.
 
 
 ## Getting and setting values
