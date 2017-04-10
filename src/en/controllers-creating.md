@@ -102,6 +102,17 @@ be named using the non-default region, specifically naming it `aws-us-west-2`:
 juju bootstrap aws/us-west-2
 ```
 
+## Create a controller using a different MongoDB profile
+
+MongoDB has two memory profile settings available, `default` and `low`. The
+first setting is the profile shipped by default with MongoDB. The second is a
+more conservative memory profile that uses less memory. To select which one
+your controller uses when it is created, use:
+
+```bash
+juju bootstrap --config mongo-memory-profile=low
+```
+
 ## Change timeout and retry delays
 
 You can change the default timeout and retry delays used by Juju 
