@@ -109,58 +109,11 @@ We recommend that you use each public cloud's identity and access management
 See [Cloud credentials][credentials] for more information, along with the
 following links for your specific cloud.
 
-<table class="logos">
+[Amazon Web Services](./help-aws.html#credentials)
 
-<tr>
+[Microsoft Azure](./help-azure.html#credentials)
 
-<td>
-<a href="./help-aws.html#credentials">
-<img src="./media/logo-aws.png" alt="AWS" />
-</a>
-</td>
-
-<td>
-<a href="./help-azure.html#credentials">
-<img src="./media/logo-azure.png" alt="Azure" />
-</a>
-</td>
-
-
-<td>
-<a href="./help-google.html#download-credentials">
-<img src="./media/logo-gcp.png" alt="GCP" />
-</a>
-</td>
-</tr>
-
-</table>
-
-We briefly cover retrieving and entering your GCE credentials below.
-
-### Google Cloud Platform credentials
-
-To get the credentials for Google Cloud Platform, first sign in to your [GCE
-dashboard][gcedashboard]. We recommend creating a new project for JAAS using
-the pull-down menu in the dashboard's top bar, but you could also select and
-use a pre-existing project from the same menu.
-
-Navigate to the API manager's [credentials page][gcecredentials] using the menu
-in the top left of the dashboard and use the `Create credentials` drop-down
-menu to select `Service account key`. Change the service account to 
-`Compute Engine default service account` and the 'Key type' to `JSON`, then click
-`Create`. This will generate and automatically download your credentials.
-
-Back in JAAS, enter a name for this new project, we'd recommend using the same
-name as the project in GCE, and simply import your credentials by clicking on
-the large `Upload Google Compute Engine .json auth-file` button. Point the
-file requester at the downloaded credentials file and click the green 
-`Add cloud credential` to complete the process.
-
-
-!!! Note: An enabled Compute Engine API is needed by JAAS. The API is enabled
-    automatically if your GCE account has a billing method set up. See our [GCE
-    documentation][gce] for further details.
-
+[Google Compute Engine](./help-google.html#download-credentials)
 
 ## Deploy
 
