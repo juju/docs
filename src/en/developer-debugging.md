@@ -86,6 +86,21 @@ hooks.
 !!! Note: It is possible and often desirable to run debug-hooks on more than
 one unit at a time. You should open a new terminal window for each.
 
+To debug actions, you use the same command, like this:
+
+```bash
+juju debug-hooks <service/unit> [action-name action-name2 ...]
+```
+
+For example, if you want to check the `add-repo` action of a the `git` charm,
+use:
+
+```bash
+juju debug-hooks git/0 add-repo
+```
+
+Learn more about actions in [Juju actions][actions].
+
 ## Running a debug session
 
 When you run the debug-hooks command, Juju creates a slightly customised `tmux`
@@ -291,3 +306,5 @@ hand. Here are some of the ones you may find useful:
 
 You can get more info on tmux and its commands at the [relevant Ubuntu manpage
 entry.](http://manpages.ubuntu.com/manpages/trusty/man1/tmux.1.html)
+
+[actions]: ./actions.html "Juju actions"

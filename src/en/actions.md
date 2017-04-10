@@ -178,3 +178,21 @@ actions:
   unit: git/0
 ```
 
+### Debugging actions
+
+To debug actions, use the `debug-hooks` command, like this:
+ +
+ +```bash
+ +juju debug-hooks <service/unit> [action-name action-name2 ...]
+ +```
+ +
+ +For example, if you want to check the `add-repo` action of a the `git` charm,
+ +use:
+ +
+ +```bash
+ +juju debug-hooks git/0 add-repo
+ +```
+ +
+ +Learn more about debugging Juju charms in [Debugging hooks][devdebug].
+
+[devdebug]: ./developer-debugging.html
