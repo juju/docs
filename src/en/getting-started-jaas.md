@@ -18,8 +18,8 @@ Single Sign On account.
 
 Open the [JAAS login page][jaaslogin] to begin.
 
-JAAS uses your [Ubuntu Single Sign On][ubuntuSSO] account for authentication - if you 
-don't yet have an SSO account you can sign up for one here (it's easy and free). 
+JAAS uses your [Ubuntu Single Sign On][ubuntuSSO] account for authentication - if you
+don't yet have an SSO account you can sign up for one here (it's easy and free).
 
 <style>
 table th, table td {
@@ -66,9 +66,11 @@ Press the green Start building button to get started...
 
 ## Create a model
 
-Press the green + button on the page to start building your [model][models].
+This empty canvas is where you can define your [model][models], by adding and
+ relating applications from the Charm Store. Press the '+' symbol in the
+  middle of the canvas to start.
 
-You will be shown a list of available charms and bundles with a description of
+You will see a list of available charms and bundles with a description of
 each. Select a [charm][charms] or [bundle][bundles] to learn more about it.
 
 When you have selected a charm or bundle (hint: to see how easy JAAS makes
@@ -96,8 +98,8 @@ Press the blue Deploy changes button to deploy the changes.
 </table>
 
 After you press `Deploy changes` you can adjust your model name and choose a
-public cloud to deploy to. When you select a cloud, you will see where to enter
-your cloud credentials.
+public cloud to deploy to. When you select a cloud, you will be guided through
+ the process of entering credentials for it.
 
 ![jaas-choose-cloud](./media/jaas-choose-cloud.png)
 
@@ -119,8 +121,8 @@ following links for your specific cloud.
 
 Click on `Deploy` to send your application model to the cloud.
 
-Deploying may actually take a few minutes - in this period, instances are being 
-created in the cloud, software is being installed, applications are being 
+Deploying may actually take a few minutes - in this period, instances are being
+created in the cloud, software is being installed, applications are being
 related to each other and configurations are being applied.
 
 <table width="500" border-width="0px" cellpadding="5">
@@ -145,41 +147,9 @@ When complete, the application icons will turn grey.
 
 
 
-As the applications change from pending to operational, the colours in the 
-model view will change to grey and the pending notices in the inspector on the 
+As the applications change from pending to operational, the colours in the
+model view will change to grey and the pending notices in the inspector on the
 left will disappear, to show that everything is working as expected.
-
-
-    
-
-## Collaborate
-
-To share your model with another JAAS user you can share the standard Juju way,
-as described in [Users and models][users], or you can share directly from the
-JAAS GUI, like this:
-
-
-<table width="500" border-width="0px" cellpadding="5">
-
-<tr>
-
-<td>
-<img src="./media/jaas-share-1.png" alt="description here" />
-<br />
-Click the share button...
-</td>
-
-<td>
-<img src="./media/jaas-share-2.png" alt="description here" />
-<br />
-Enter the username and permissions for the new user.
-</td>
-
-</tr>
-
-</table>
-
-
     
 ## Destroy a model
 
@@ -212,11 +182,11 @@ your model were terminated.
 
 ## Next steps
 
-Congratulations! you have now deployed a complex workload in the cloud without 
+Congratulations! you have now deployed a complex workload in the cloud without
 ever leaving your browser!
 
 There are many ways to use JAAS solely from the web interface, but many users
-are more comfortable with the command line. You should check out how to 
+are more comfortable with the command line. You should check out how to
 [install the Juju client software and use JAAS from the command line][jaascli].
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
