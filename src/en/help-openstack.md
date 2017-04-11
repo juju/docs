@@ -20,6 +20,10 @@ juju add-cloud
 ```
 ...will enter the interactive mode. Enter the desired values to continue.
 
+!!! Note:
+To use the authentication from OpenStack, find the URL in your novarc the
+`AUTH_URL` value and use `userpass` as the authentication type.
+
 ```
 Cloud Types
  maas
