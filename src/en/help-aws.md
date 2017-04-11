@@ -101,7 +101,7 @@ Features supported by Juju-owned instances running within AWS:
 - Juju deploys to what Amazon refers to as *m3.medium* instances by default. you
   can specify different instance types by using [constraints][constraints].
 
-- You can add a new model to a specific virtual private cloud (VPC) from the
+- You can create a new model in a specific virtual private cloud (VPC) from the
   command line using the `vpc-id`: `juju add-model --config vpc-id=<id>`.
   
 
