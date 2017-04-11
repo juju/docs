@@ -21,6 +21,8 @@ Open the [JAAS login page][jaaslogin] to begin.
 JAAS uses your [Ubuntu Single Sign On][ubuntuSSO] account for authentication - if you
 don't yet have an SSO account you can sign up for one here (it's easy and free).
 
+## Create a Model
+
 <style>
 table th, table td {
     background: #f7f7f7;
@@ -64,8 +66,6 @@ Press the green Start building button to get started...
 </table>
 
 
-## Create a model
-
 This empty canvas is where you can define your [model][models], by adding and
  relating applications from the Charm Store. Press the '+' symbol in the
   middle of the canvas to start.
@@ -100,8 +100,6 @@ Press the blue Deploy changes button to deploy the changes.
 After you press `Deploy changes` you can adjust your model name and choose a
 public cloud to deploy to. When you select a cloud, you will be guided through
  the process of entering credentials for it.
-
-![jaas-choose-cloud](./media/jaas-choose-cloud.png)
 
 ## Prepare your cloud credentials
 
@@ -150,7 +148,7 @@ When complete, the application icons will turn grey.
 As the applications change from pending to operational, the colours in the
 model view will change to grey and the pending notices in the inspector on the
 left will disappear, to show that everything is working as expected.
-    
+
 ## Destroy a model
 
 When you are done and want to destroy the model you created, click on your
