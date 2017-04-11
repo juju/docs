@@ -10,8 +10,9 @@ information to add it to the list of known clouds.
 
 Using the Juju `add-cloud` command, it is easy to add your OpenStack clouds to
 Juju's list of known clouds. The command is interactive, and will ask for
-a name,endpoint,authorisation method(s) and regions to use. A sample session
-is shown below.
+a name,endpoint,authorisation method(s) and regions to use. (If you are unsure
+about endpoints and regions, they will be listed in the .novarc file, if you
+have one for your OpenStack.) A sample session is shown below.
 
 Running...
 
