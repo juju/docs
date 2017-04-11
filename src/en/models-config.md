@@ -120,6 +120,7 @@ resource-tags                | string | none     |                          | A 
 ssl-hostname-verification    | bool   | true     |                          | Set whether SSL hostname verification is enabled 
 test-mode                    | bool   | false    |                          | Set whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store
 transmit-vendor-metrics      | bool   | true     |                          | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics
+vpc-id                       | string |          |                          | The virtual private cloud (VPC) ID for use when configuring a new model to be deployed to a specific VPC during `add-model`
 
 
 ### Apt mirror
