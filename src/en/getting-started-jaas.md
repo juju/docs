@@ -149,34 +149,8 @@ As the applications change from pending to operational, the colours in the
 model view will change to grey and the pending notices in the inspector on the
 left will disappear, to show that everything is working as expected.
 
-## Destroy a model
-
-When you are done and want to destroy the model you created, click on your
-username at the top left of the page to list all your models.
-
-Click on a model name to select a particular model for more details.
-
-<table>
-  <tr>
-    <td>
-      <img src="./media/jaas-destroy-1.png" alt="description here" />
-      <br />
-      Click on the "Destroy model" button...
-    </td>
-    <td>
-      <img src="./media/jaas-destroy-2.png" alt="description here" />
-      <br />
-      You will be asked to confirm this step.
-    </td>
-  </tr>
-</table>
-
-Destroying a model is not instantaneous - the images are shut down and released
-in a controlled way - but it shouldn't take more than a minute or two.
-
-Log in to your cloud provider's dashboard to confirm the machines created for
-your model were terminated.
-
+!!! Tip: You can check and manage existing models through the JAAS GUI by
+clicking on your username
 
 ## Next steps
 
