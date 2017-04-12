@@ -149,6 +149,9 @@ As the applications change from pending to operational, the colours in the
 model view will change to grey and the pending notices in the inspector on the
 left will disappear, to show that everything is working as expected.
 
+!!! Tip: You can check and manage existing models through the JAAS GUI by
+clicking on your username
+
 ## Next steps
 
 Congratulations! you have now deployed a complex workload in the cloud without
