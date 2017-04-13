@@ -281,10 +281,12 @@ the running resources.
 Congratulations! You have now deployed a complex workload in the cloud without
 hours of looking up config options or wrestling with install scripts!
 
-To continue learning about ways in which Juju can help you
-There are many ways to use JAAS solely from the web interface, but many users
-are more comfortable with the command line. You should check out how to
-[install the Juju client software and use JAAS from the command line][jaascli].
+To discover more about what Juju can do for you, we suggest some of the
+following pages of documentation
+
+ - [Share your model with other users][share]
+ - [Learn more about charms and bundles][learn]
+ - [Find out how to customise and manage models][customise]
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
 [aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
@@ -299,3 +301,6 @@ are more comfortable with the command line. You should check out how to
 [users]: ./users-models.html "Users and models"
 [gcedashboard]: https://console.cloud.google.com
 [gcecredentials]: https://console.developers.google.com/apis/credentials
+[share]: ./tut-users.html
+[learn]: ./charms.html
+[customise]: ./models.html
