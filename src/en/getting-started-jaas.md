@@ -304,3 +304,5 @@ following pages of documentation
 [share]: ./tut-users.html
 [learn]: ./charms.html
 [customise]: ./models.html
+[snapcraft]: https://snapcraft.io
+
