@@ -99,7 +99,7 @@ Press the blue Deploy changes button to deploy the changes.
 
 After you press `Deploy changes` you can adjust your model name and choose a
 public cloud to deploy to. When you select a cloud, you will be guided through
- the process of entering credentials for it.
+the process of entering credentials for it.
 
 ## Prepare your cloud credentials
 
@@ -186,7 +186,7 @@ details  {
          sudo snap refresh juju
 
    It is possible to install other versions, including beta releases of
-   Juju via a snap package. See the [releases] page for more information.
+   Juju via a snap package. See the [releases page][releases] for more information.
 
 
 ^# From the Ubuntu PPA
@@ -230,54 +230,56 @@ details  {
    version.
 
 
-   ## Register or login to JAAS
+## Register or login to JAAS
 
-   To authorise JAAS from the command line, enter the following command:
+To authorise JAAS from the command line, enter the following command:
 
-   ```bash
-   juju register jimm.jujucharms.com
-   ```
+```bash
+juju register jimm.jujucharms.com
+```
 
-   This command will open a new window in your default web browser and use
-   [Ubuntu SSO][ubuntusso] to authorise your account. If the browser doesn't open,
-   you can manually copy and paste the unique authorisation URL from the command
-   output.
+This command will open a new window in your default web browser and use
+[Ubuntu SSO][ubuntusso] to authorise your account. If the browser doesn't open,
+you can manually copy and paste the unique authorisation URL from the command
+output.
 
-   After successful authentication, you will be asked to enter a descriptive name
-   for the JAAS controller, giving you access to the same controller used by the
-   JAAS web interface. This means any models or applications you have already
-   deployed are now accessible from the command line.
+After successful authentication, you will be asked to enter a descriptive name
+for the JAAS controller, giving you access to the same controller used by the
+JAAS web interface. This means any models or applications you have already
+deployed are now accessible from the command line.
 
 ## View your models
 
-   If you previously added one or more models using the web interface, you can
-   view them in the CLI with the following command:
+If you previously added one or more models using the web interface, you can
+view them in the CLI with the following command:
 
-   ```bash
-   juju models
-   ```
+```bash
+juju models
+```
 
-   If you have more than one model, you will need to switch focus to one of these
-   before you can perform any actions:
+If you have more than one model, you will need to switch focus to one of these
+before you can perform any actions:
 
-   ```bash
-   juju switch mymodel
-   ```
+```bash
+juju switch mymodel
+```
+
 ## Remove models
 
 The model you created earlier is running in your selected cloud. If you want
- to permanently remove it, you can use the JAAS GUI, or run the command:
+to permanently remove it, you can use the JAAS GUI, or run the command:
 
-```
+```bash
 juju destroy-model  mymodel
 ```
+
 This process may take a few minutes to complete, as Juju releases
 the running resources.
 
 ## Next steps
 
 Congratulations! You have now deployed a complex workload in the cloud without
- hours of looking up config options or wrestling with install scripts!
+hours of looking up config options or wrestling with install scripts!
 
 To continue learning about ways in which Juju can help you
 There are many ways to use JAAS solely from the web interface, but many users
