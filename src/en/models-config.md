@@ -266,3 +266,19 @@ Juju by setting:
 ```yaml
 agent-stream: devel
 ```
+
+The `agent-version` option selects a specific client version to be used, with
+some constraints. It is used as a parameter during bootstrap and permits you
+to tell Juju to bootstrap a new controller using the same major and minor
+version already in use, but with a different patch number. For example, Juju
+uses the major.minor.patch numbering scheme, so Juju 2.1.3 means major version
+2, minor version 1, and patch version 3. On a system with this release of Juju
+installed, you can bootstrap a controller on aws using a different patch release,
+like this:
+
+```bash
+juju bootstrap aws aws --agent-version='2.1.2'
+```
+
+You cannot bootstrap a controller on this system using Juju 1.x, Juju 2.2, and
+so on. Only different patch numbers may be used with `agent-version`
