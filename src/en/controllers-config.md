@@ -54,6 +54,8 @@ ca-cert                      | string |          |                          | Th
 controller-uuid              | string |          |                          | The key for the UUID of the controller
 identity-public-key          | string |          |                          | Sets the public key of the identity manager
 identity-url                 | string |          |                          | Sets the URL of the identity manager
+max-logs-age                 | string |          | 72h, etc.                | Sets the maximum age for log entries before they are pruned, in human-readable time format
+max-logs-size                | string |          | 400M, 5G, etc.           | Sets the maximum size for the log collection, in human-readable memory format
 mongo-memory-profile         | string | low      | low/default              | Sets whether MongoDB uses the least possible memory or the default MongoDB memory profile
 set-numa-control-policy      | bool   | false    | false/true               | Sets whether numactl is preferred for running processes with a specific NUMA (Non-Uniform Memory Architecture) scheduling or memory placement policy for multiprocessor systems where memory is divided into multiple memory nodes
 state-port                   | integer | 37017   |                          | The port to use for mongo connections
