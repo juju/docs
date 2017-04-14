@@ -244,8 +244,8 @@ you can manually copy and paste the unique authorisation URL from the command
 output.
 
 After successful authentication, you will be asked to enter a descriptive name
-for the JAAS controller. This means you can operate your models or
-applications in JAAS from the command line.
+for the JAAS controller. Now you can operate your models or applications in
+JAAS from the command line.
 
 ## View your models
 
