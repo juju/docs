@@ -4,21 +4,21 @@ Title: Getting started with Juju as a Service
 
 Juju as a Service (JAAS) is the fastest and easiest way to model and deploy
 your cloud-based applications. You can deploy Kubernetes to GCE in 10 minutes
-or get OpenStack running in Azure in 15 minutes, all from your web browser.
+and build a Hadoop with Spark solution in Azure, all from your web browser.
 
 When you use JAAS, Canonical manages the Juju infrastructure. This frees you
-to concentrate on your software and solutions. With JAAS you can deploy,
-configure, and operate your applications on the largest public clouds:
+to concentrate on your applications. With JAAS you can deploy, configure, and
+operate your applications on the largest public clouds:
 [Amazon Web Services][aws], [Google Compute Engine][gce], and [Microsoft Azure][azure].
 
 All you will need is access to your public cloud credentials and an Ubuntu
-Single Sign On account.
+Single Sign On (SSO) account.
 
 ## Log in to JAAS
 
 Open the [JAAS login page][jaaslogin] to begin.
 
-JAAS uses your [Ubuntu Single Sign On][ubuntuSSO] account for authentication - if you
+JAAS uses your [Ubuntu SSO][ubuntuSSO] account for authentication - if you
 don't yet have an SSO account you can sign up for one here (it's easy and free).
 
 ## Create a Model
@@ -66,16 +66,16 @@ Press the green Start building button to get started...
 </table>
 
 
-This empty canvas is where you can define your [model][models], by adding and
- relating applications from the Charm Store. Press the '+' symbol in the
-  middle of the canvas to start.
+This empty canvas is where you build your [model][models] by adding and
+relating applications from the Charm Store. Press the green '+' symbol in the
+middle of the canvas to start finding applications in the Charm Store.
 
 You will see a list of available charms and bundles with a description of
 each. Select a [charm][charms] or [bundle][bundles] to learn more about it.
 
 When you have selected a charm or bundle (hint: to see how easy JAAS makes
 complex deployments, try the Canonical Kubernetes bundle!) it can be added
-to your model by pressing the 'Add' button...
+to your model by pressing the 'Add to model' button...
 
 <table width="500" border-width="0px" cellpadding="5">
 
@@ -98,7 +98,7 @@ Press the blue Deploy changes button to deploy the changes.
 </table>
 
 After you press `Deploy changes` you can adjust your model name and choose a
-public cloud to deploy to. When you select a cloud, you will be guided through
+cloud. When you select a cloud, you will be guided through
 the process of entering credentials for it.
 
 ## Prepare your cloud credentials
@@ -117,11 +117,11 @@ following links for your specific cloud.
 
 ## Deploy
 
-Click on `Deploy` to send your application model to the cloud.
+Click on `Deploy` to make your model a reality in the cloud.
 
-Deploying may actually take a few minutes - in this period, instances are being
+Deploying takes a few minutes - in this period, instances are being
 created in the cloud, software is being installed, applications are being
-related to each other and configurations are being applied.
+related to each other and configuration is being applied.
 
 <table width="500" border-width="0px" cellpadding="5">
 
@@ -145,19 +145,19 @@ When complete, the application icons will turn grey.
 
 
 
-As the applications change from pending to operational, the colours in the
-model view will change to grey and the pending notices in the inspector on the
-left will disappear, to show that everything is working as expected.
+As the applications become operational, the colours in the model view will
+change to grey and the pending notices in the inspector on the left will
+disappear, to show that everything is working as expected.
 
 !!! Tip: You can check and manage existing models through the JAAS GUI by
 clicking on your username
 
 ## Use the command line
 
-The Juju controller you already have running in JAAS can also be used
-from the command line, giving you powerful, fast access to
-perform common operations. In order to use the command line, you will
-first need to install the Juju client software on your machine.
+JAAS can also can also be used from the command line. Models you've created in
+the GUI are also able to be operated against via the CLI and vice versa. In
+order to use the command line, you will first need to install the Juju client
+software on your machine.
 
 Juju is available for various types of Linux, macOS, and Windows.
 Click on the sections below for the relevant instructions.
@@ -232,7 +232,7 @@ details  {
 
 ## Register or login to JAAS
 
-To authorise JAAS from the command line, enter the following command:
+To connect to JAAS from the command line, enter the following command:
 
 ```bash
 juju register jimm.jujucharms.com
@@ -244,9 +244,8 @@ you can manually copy and paste the unique authorisation URL from the command
 output.
 
 After successful authentication, you will be asked to enter a descriptive name
-for the JAAS controller, giving you access to the same controller used by the
-JAAS web interface. This means any models or applications you have already
-deployed are now accessible from the command line.
+for the JAAS controller. This means any models or applications you have
+already deployed are now accessible from the command line.
 
 ## View your models
 
@@ -270,7 +269,7 @@ The model you created earlier is running in your selected cloud. If you want
 to permanently remove it, you can use the JAAS GUI, or run the command:
 
 ```bash
-juju destroy-model  mymodel
+juju destroy-model mymodel
 ```
 
 This process may take a few minutes to complete, as Juju releases
