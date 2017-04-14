@@ -66,7 +66,7 @@ Press the green Start building button to get started...
 </table>
 
 
-This empty canvas is where you build your [model][models] by adding and
+This empty canvas is where you construct your [model][models] by adding and
 relating applications from the Charm Store. Press the green '+' symbol in the
 middle of the canvas to start finding applications in the Charm Store.
 
@@ -117,7 +117,7 @@ following links for your specific cloud.
 
 ## Deploy
 
-Click on `Deploy` to make your model a reality in the cloud.
+Click on `Deploy` to build your model in the selected cloud.
 
 Deploying takes a few minutes - in this period, instances are being
 created in the cloud, software is being installed, applications are being
@@ -154,10 +154,10 @@ clicking on your username
 
 ## Use the command line
 
-JAAS can also can also be used from the command line. Models you've created in
-the GUI are also able to be operated against via the CLI and vice versa. In
-order to use the command line, you will first need to install the Juju client
-software on your machine.
+JAAS can also be used from the command line. Models you've created in the GUI
+are also able to be operated against via the CLI and vice versa. In order to
+use the command line, you will first need to install the Juju client software
+on your machine.
 
 Juju is available for various types of Linux, macOS, and Windows.
 Click on the sections below for the relevant instructions.
@@ -244,8 +244,8 @@ you can manually copy and paste the unique authorisation URL from the command
 output.
 
 After successful authentication, you will be asked to enter a descriptive name
-for the JAAS controller. This means any models or applications you have
-already deployed are now accessible from the command line.
+for the JAAS controller. This means you can operate your models or
+applications in JAAS from the command line.
 
 ## View your models
 
