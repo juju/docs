@@ -10,9 +10,9 @@ TODO: Testing section needs rewrite
 Before you start on your Juju adventure, please make sure you have the
 following:
 
-- An Ubuntu, CentOS, MacOSX, or Windows machine to install the client on.
+- An Ubuntu, CentOS, macOS, or Windows machine to install the client on.
 - Credentials to access a cloud (e.g. AWS, GCE, OpenStack...)
-- An SSH key-pair. On Linux and Mac OSX: `ssh-keygen -t rsa -b 2048` On Windows:
+- An SSH key-pair. On Linux and macOS: `ssh-keygen -t rsa -b 2048` On Windows:
   See the [Windows instructions for SSH and PuTTY][keygen].
 
 The rest of this page will guide you through installing the software, accessing
@@ -21,7 +21,7 @@ your cloud and deploying a test workload.
 
 ## 1. Install Juju
 
-Juju is currently available for Ubuntu, CentOS, MacOSX and Windows.
+Juju is currently available for Ubuntu, CentOS, macOS and Windows.
 
 ### Ubuntu
 
@@ -48,7 +48,7 @@ sudo apt install juju
 Using the stable PPA resource guarantees you will always have access to the very latest
 stable version of Juju.
 
-### CentOS, MacOSX, Windows
+### CentOS, macOS, Windows
 
 See [the releases page](reference-releases.html) for instructions on how to
 install the versions currently available.

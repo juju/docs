@@ -17,7 +17,7 @@ Install the charm snap:
 sudo snap install charm
 ```
 
-## Mac OSX
+## macOS
 
 Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
 running the latest version of Homebrew before proceeding.
