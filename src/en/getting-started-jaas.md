@@ -304,4 +304,5 @@ following pages of documentation
 [learn]: ./charms.html
 [customise]: ./models.html
 [snapcraft]: https://snapcraft.io
+[releases]: ./reference-releases.html
 
