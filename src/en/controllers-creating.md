@@ -1,5 +1,5 @@
 Title: Creating a Juju Controller
-TODO: Review again soon (created: March 2016)
+TODO: Add better examples
 
 
 # Creating a controller
@@ -21,11 +21,8 @@ juju bootstrap aws/us-east-1
 
 This creates a new controller called `aws-us-east-1` in that cloud and region.
 
-
-## Notes
-
-Bootstrap has many options. Some commonly used options are described here with
-examples.
+Bootstrap has many options. Some of the more commonly used ones are detailed
+here. 
 
 ## Create an LXD Xenial controller
 
@@ -37,34 +34,29 @@ it to use the local lxd cloud.
 juju bootstrap lxd lxd-xenial
 ```
 
-## Create an LXD Trusty controller using more recent tools
+## Create an LXD Trusty controller 
 
-The '--upload-tools' option is used to make agent software available that is
-more recent than the default binary. This is done when some features may not
-yet be compiled in to the agent for the Ubuntu release being installed. Note
-that Juju will default to the latest LTS (see `distro-info --lts` command).
 
-The '--config' option allows you to pass configuration values during
-bootstrap as arguments. If you do this, the values you use take precedence
-over any default settings.
+The '--bootstrap-series' option allows you to specify a particular series 
+to use for the controller
 
 ```bash
-juju bootstrap --upload-tools --config default-series=trusty \
-	lxd lxd-trusty
+juju bootstrap --bootstrap-series=trusty lxd lxd-trusty
 ```
 
 ## Create a Rackspace controller using a daily image
 
 The example uses a previously defined configuration file called 
-config-rackspace.yaml. Many clouds are available, see [Clouds](./clouds.html).
-Note that values passed using '--config' as above will take precedence
+config-rackspace.yaml. 
+
+Note that values passed using '--config' will take precedence
 over values included in a file. This is important if you use both a config
 file and state one or more config values while bootstrapping.
 
 ```bash
 juju bootstrap \
-	--upload-tools --config=~/config-rackspace.yaml \
-	--config image-stream=daily
+	--config=~/config-rackspace.yaml   \
+	--config image-stream=daily        \
 	rackspace controller-rackspace
 ```
 
