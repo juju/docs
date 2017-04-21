@@ -2,7 +2,7 @@ Title: Machine and unit numbering
 
 # Machine and Unit numbering
 
-Within an environment Juju keeps track of sequences for machines and units.
+Within a model Juju keeps track of sequences for machines and units.
 (Prior to 1.25 just machines). This means that for the life of a model,
 the number associated with a machine will only ever increase. For example:
 
