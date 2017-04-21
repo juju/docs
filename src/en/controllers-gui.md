@@ -85,7 +85,7 @@ components of your project work together.
 
 ## Building
 
-Another use for the GUI is building and managing an model in an intuitive
+Another use for the GUI is building and managing a model in an intuitive
 and graphical interface. The GUI gives you access to all of the charms in the
 Charm Store, allowing you to deploy hundreds of different applications to your
 environment, or even to a sandbox environment, which you can then export to use
