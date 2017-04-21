@@ -1,5 +1,5 @@
 Title: Scaling applications
-TODO: Check final note still relevant for 2.0 release
+TODO: Check examples
 
 # Scaling applications
 
@@ -22,19 +22,21 @@ juju add-unit [options] <application-name>
 The command options are:
 
 ```no-highlight
-#juju environment to operate in
--e, --environment <environment_name>
-# number of application units to add
--n, --num-units [integer]
-# the machine or container to deploy the unit in, bypasses constraints
---to <machine>
+Options:
+-m, --model (= "")
+    Model to operate in. Accepts [<controller name>:]<model name>
+-n, --num-units  (= 1)
+    Number of units to add
+--to (= "")
+    The machine and/or container to deploy the unit in (bypasses constraints)
+
 ```
 
 
 ## Scaling behind a Load Balancer
 
-Usually you just can't add more units to an application and have it magically
-cale - you need to use a load balancer. In this case you can just deploy a
+In many cases you just can't add more units to an application and have it magically
+scale - you need to use a load balancer. In this case you can just deploy a
 proxy in front of your units; let's deploy a load balanced MediaWiki:
 
 ```bash
@@ -97,7 +99,7 @@ juju add-unit wordpress
 
 This will cause a new instance to be run and configured to work alongside the
 currently running one. Behind the scenes, Juju is adding an instance to the
-environment (also called a 'machine') and provisioning the specified application
+model and provisioning the specified application
 onto that instance/machine.
 
 Now suppose your MySQL application needs hyperscale, you can use the `-n` or

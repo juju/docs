@@ -12,8 +12,8 @@ The GUI is a JavaScript and HTML web application that is encapsulated in its
 own charm. Once installed, the GUI will talk with Juju over a websocket to 
 provide a real-time interface with the applications installed, the units that 
 comprise them, and the machines available. Additionally, the GUI can talk with 
-the charm store in order to search, browse,
-and deploy charms to your environment.
+the charm store in order to search, browse, and deploy charms to your
+environment.
 
 # Using the GUI
 
@@ -85,7 +85,7 @@ components of your project work together.
 
 ## Building
 
-Another use for the GUI is building and managing an environment in an intuitive
+Another use for the GUI is building and managing a model in an intuitive
 and graphical interface. The GUI gives you access to all of the charms in the
 Charm Store, allowing you to deploy hundreds of different applications to your
 environment, or even to a sandbox environment, which you can then export to use
@@ -187,7 +187,7 @@ be able to make changes to the environment through the GUI. This is good for a
 monitoring type scenario.
 
 !!! Note: read-only mode in the GUI simply prevents actions taken within the 
-GUI from being sent to the Juju environment, and is _not_ additional security 
+GUI from being sent to Juju, and is _not_ additional security 
 against the Juju API.
 
 
