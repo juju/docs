@@ -6,14 +6,13 @@ TODO: Test Oracle
 
 !!! Note:
 	Oracle Compute support is currently in [Juju 2.2 beta3][jujubeta] and
-        is experimental. There may be bugs. Work is continuing on improving the user
-        experience.
+        is experimental.
 
 To start using Juju with the [Oracle Compute Cloud][compute], some initial set up steps
 are required:
 
-1. Associate Ubuntu or Windows images from the marketplace with your Oracle account.
-   (this is an Oracle legal requirement).
+1. Associate Ubuntu or Windows images from the Marketplace with your Oracle
+   account. This is an Oracle legal requirement.
 
 1. If not using a paid account, use `juju add-cloud` to set up the region and
    endpoint details for Juju to use.  Set up credentials using `juju
@@ -21,10 +20,10 @@ are required:
 
 1. Set up credentials using `juju add-credentials`.
 
-These steps - outlined below - will be refined as we work with Oracle to
-improve the user experience.
+These steps - outlined below - will be refined by both the Juju and Oracle
+teams to improve the user experience.
 
-Juju and Oracle can be used with either a free Oracle trial account, or a paid
+The following can be used with either a free Oracle trial account, or a paid
 account.
 
 ## Associate images
@@ -40,7 +39,7 @@ The currently available Ubuntu images are:
 | precise  | Ubuntu.12.04-LTS.amd64.20170417  |
 | trusty   | Ubuntu.14.04-LTS.amd64.20170405  |
 | xenial   | Ubuntu.16.04-LTS.amd64.20170330  |
-| zesty	   | Ubuntu.17.04.amd64.20170412.1    |
+| zesty    | Ubuntu.17.04.amd64.20170412.1    |
 
 Windows images are also available for Windows Server 2008 and 2012.
 
@@ -48,14 +47,14 @@ Windows images are also available for Windows Server 2008 and 2012.
         Do not attempt to associate a `yakkety` image with your account. Only use
         one of the images listed above.
 
-### Steps to associate images:
+### Steps to associate images
 
 Sign in to [https://cloud.oracle.com/home][cloudoracle] with your credentials.
 You will need to know your Data Center and Identity Domain.
 
 1. If you're not on the *Dashboard*, click the `Dashboard` button.
 1. From the Dashboard, click on the green `Create Instance` button.
-1. Select `Compute` from the pop-up windows; you'll come to the Compute screen.
+1. Select `Compute` from the pop-up window; you'll come to the Compute screen.
 1. Select `Marketplace` from the list on the left of your screen.
 1. Search for Ubuntu and click `Select` on an image matching one of those listed above.
 1. Accept the terms of use in the 'Install Marketplace Image' pop-up and click `Install`.
@@ -136,8 +135,8 @@ juju deploy ...
 
 ## Storage
 
-Juju includes support for Oracle block storage volumes. The storage pool name
-to use is `oracle`:
+Juju includes optional support for Oracle block storage volumes. The storage
+pool name to use is `oracle`:
 
 ```bash
 juju deploy postgresql --storage data=oracle,10G
