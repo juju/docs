@@ -210,6 +210,7 @@
         <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
     </ul>
    </li>
+<li><a href="contact-us.html">Contact us</a></li>
 <li><a href="contributing.html">Help improve these docs</a></li>
 <li><a href="https://github.com/juju/docs/issues/new">Report a docs issue</a></li>
 </ul>
