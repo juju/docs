@@ -3,7 +3,7 @@ Title: Contact Us
 # Contact us
 
 We'd love to hear about how you're using Juju, whether it's at the smallest of
-scales or the largest. Our team are always approachable and can usually be found
+scales or the largest. Our team is always approachable and can usually be found
 in the following locations:
 
 - Our [YouTube channel][youtube] hosts the *Juju Show* and event-specific
