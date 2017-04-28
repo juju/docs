@@ -91,36 +91,38 @@ below the table.
 
 | Key                        | Type   | Default  | Valid values             | Purpose |
 |:---------------------------|--------|----------|--------------------------|:---------|
-agent-metadata-url           | string |          |                          | The URL of the private stream
+agent-metadata-url           | string |          |                          | The URL of the private stream.
 agent-stream                 | string | released | released/devel/proposed  | The version of Juju to use for deploy/upgrades. See [additional info below](#versions-and-streams).
 agent-version                | string |          |                          | The desired Juju agent version to use. See [additional info below](#versions-and-streams).
-apt-ftp-proxy                | string |          |                          | The APT FTP proxy for the model
-apt-http-proxy               | string |          |                          | The APT HTTP proxy for the model
-apt-https-proxy              | string |          |                          | The APT HTTPS proxy for the model
+apt-ftp-proxy                | string |          |                          | The APT FTP proxy for the model.
+apt-http-proxy               | string |          |                          | The APT HTTP proxy for the model.
+apt-https-proxy              | string |          |                          | The APT HTTPS proxy for the model.
 apt-mirror                   | string |          |                          | The APT mirror for the model. See [additional info below](#apt-mirror).
 automatically-retry-hooks    | bool   | true     |                          | Set the policy on retying failed hooks. See [additional info below](#retrying-failed-hooks).
-default-series               | string |          | valid series name, e.g. 'xenial' | The default series of Ubuntu to use for deploying charms
-development                  | bool   | false    |                          | Set whether the model is in development mode
+default-series               | string |          | valid series name, e.g. 'xenial' | The default series of Ubuntu to use for deploying charms.
+development                  | bool   | false    |                          | Set whether the model is in development mode.
 disable-network-management   | bool   | false    |                          | Set whether to give network control to the provider instead of Juju controlling configuration. See [additional info below](#disable-network-management).
 enable-os-refresh-update     | bool   | true     |                          | Set whether newly provisioned instances should run their respective OS's update capability. See [additional info below](#apt-updates-and-upgrades-with-faster-machine-provisioning).
 enable-os-upgrade            | bool   | true     |                          | Set whether newly provisioned instances should run their respective OS's upgrade capability. See [additional info below](#apt-updates-and-upgrades-with-faster-machine-provisioning).
 firewall-mode                | string | instance | instance/global/none     | The mode to use for network firewalling. See [additional info below](#firewall-mode).
-ftp-proxy                    | string |          | url                      | The FTP proxy value to configure on instances, in the FTP_PROXY environment variable
-http-proxy                   | string |          | url                      | The HTTP proxy value to configure on instances, in the HTTP_PROXY environment variable
-https-proxy                  | string |          | url                      | The HTTPS proxy value to configure on instances, in the HTTPS_PROXY environment variable
-ignore-machine-addresses     | bool   | false    |                          | When true, the machine worker will not look up or discover any machine addresses
-image-metadata-url           | string |          | url                      | The URL at which the metadata used to locate OS image ids is located
-image-stream                 | string |          |                          | The simplestreams stream used to identify which image ids to search when starting an instance
-logforward-enabled           | bool   | false    |                          | Set whether the log forward function is enabled
-logging-config               | string |          |                          | The configuration string to use when configuring Juju agent logging (see [this link](http://godoc.org/github.com/juju/loggo#ParseConfigurationString) for details)
-no-proxy                     | string |          |                          | List of domain addresses not to be proxied (comma-separated)
+ftp-proxy                    | string |          | url                      | The FTP proxy value to configure on instances, in the FTP_PROXY environment variable.
+http-proxy                   | string |          | url                      | The HTTP proxy value to configure on instances, in the HTTP_PROXY environment variable.
+https-proxy                  | string |          | url                      | The HTTPS proxy value to configure on instances, in the HTTPS_PROXY environment variable.
+ignore-machine-addresses     | bool   | false    |                          | When true, the machine worker will not look up or discover any machine addresses.
+image-metadata-url           | string |          | url                      | The URL at which the metadata used to locate OS image ids is located.
+image-stream                 | string |          |                          | The simplestreams stream used to identify which image ids to search when starting an instance.
+logforward-enabled           | bool   | false    |                          | Set whether the log forward function is enabled.
+logging-config               | string |          |                          | The configuration string to use when configuring Juju agent logging (see [this link](http://godoc.org/github.com/juju/loggo#ParseConfigurationString) for details).
+max-status-history-age       | string |          | 72h, etc.                | The maximum age for status history entries before they are pruned, in a human-readable time format.
+max-status-history-size      | string |          | 400M, 5G, etc.           | The maximum size for the status history collection, in human-readable memory format.
+no-proxy                     | string |          |                          | List of domain addresses not to be proxied (comma-separated).
 provisioner-harvest-mode     | string | destroyed| all/none/unknown/destroyed | Set what to do with unknown machines. See [additional info below](#juju-lifecycle-and-harvesting).
-proxy-ssh                    | bool   | false    |                          | Set whether SSH commands should be proxied through the API server
-resource-tags                | string | none     |                          | A space-separated list of key=value pairs used to apply as tags on supported cloud models
-ssl-hostname-verification    | bool   | true     |                          | Set whether SSL hostname verification is enabled 
-test-mode                    | bool   | false    |                          | Set whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store
-transmit-vendor-metrics      | bool   | true     |                          | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics
-vpc-id                       | string |          |                          | The virtual private cloud (VPC) ID for use when configuring a new model to be deployed to a specific VPC during `add-model`
+proxy-ssh                    | bool   | false    |                          | Set whether SSH commands should be proxied through the API server.
+resource-tags                | string | none     |                          | A space-separated list of key=value pairs used to apply as tags on supported cloud models.
+ssl-hostname-verification    | bool   | true     |                          | Set whether SSL hostname verification is enabled.
+test-mode                    | bool   | false    |                          | Set whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store.
+transmit-vendor-metrics      | bool   | true     |                          | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics.
+vpc-id                       | string |          |                          | The virtual private cloud (VPC) ID for use when configuring a new model to be deployed to a specific VPC during `add-model`.
 
 
 ### Apt mirror
