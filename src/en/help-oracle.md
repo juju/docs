@@ -28,9 +28,9 @@ account.
 
 ## Associate images
 
-For each Ubuntu series on which Juju is to run workloads, the relevant image
-needs to be selected from the Marketplace and associated with your account. You
-also need to agree to Oracle’s Terms and Conditions.
+For each Ubuntu series used by Juju, the relevant image needs to be selected
+from the Marketplace and associated with your account. You also need to agree
+to Oracle’s Terms and Conditions.
 
 The currently available Ubuntu images are:
 
