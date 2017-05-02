@@ -17,12 +17,19 @@ release to manage cloud deployments.
 
 The current stable version of Juju is 2.1.2.
 
-Stable juju is suitable for everyday production use.
+Stable Juju is suitable for everyday production use.
 
-To install from Ubuntu:
+The easiest way to install Juju from Ubuntu is from a [snap][snappy]:
+
 ```bash
-sudo add-apt-repository ppa:juju/stable
-sudo apt update
+sudo snap install juju --classic
+```
+
+You can also install Juju by adding the following PPA and installing the
+package with `apt`:
+
+```bash
+sudo add-apt-repository --update ppa:juju/stable
 sudo apt install juju
 ```
 CentOS:
@@ -108,7 +115,7 @@ sudo apt install juju
 or
 
 ```bash
-snap install juju --beta
+sudo snap install juju --beta --classic
 ```
 
 CentOS:
@@ -130,3 +137,6 @@ manager. With `brew` installed, simply enter the following into a terminal:
 ```bash
 brew install --devel juju
 ```
+
+<!-- LINKS -->
+[snappy]: https://snapcraft.io/
