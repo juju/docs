@@ -1,4 +1,5 @@
 Title: Juju releases
+TODO: Test other distros with snap install
 
 
 # Get the Latest Juju
@@ -7,7 +8,7 @@ Juju is available for Ubuntu (and Debian-based OSes), CentOS, Microsoft Windows
 and Apple MacOS. 
 
 There can be 3 concurrent releases representing the stability of Juju's feature
-set: stable, proposed and development. 
+set: [stable](#stable), [proposed](#proposed) and [development](#development). 
 
 Unless you are testing new features and fixes, choose the current stable
 release to manage cloud deployments.
@@ -19,14 +20,13 @@ The current stable version of Juju is 2.1.2.
 
 Stable Juju is suitable for everyday production use.
 
-The easiest way to install Juju from Ubuntu is from a [snap][snappy]:
+On Ubuntu, the easiest way to install Juju is from a [*snap*][snappy]:
 
 ```bash
 sudo snap install juju --classic
 ```
 
-You can also install Juju by adding the following PPA and installing the
-package with `apt`:
+You can also install Juju using `apt` by adding the following PPA:
 
 ```bash
 sudo add-apt-repository --update ppa:juju/stable
@@ -71,8 +71,7 @@ proposed version will not be promoted to stable if a regression is reported.
 To install from Ubuntu:
 
 ```bash
-sudo add-apt-repository ppa:juju/proposed
-sudo apt update
+sudo add-apt-repository --update ppa:juju/proposed
 sudo apt install juju
 ```
 
@@ -105,17 +104,18 @@ from stable releases to development releases is not supported. You can
 upgrade test environments to development releases to test new features
 and fixes.
 
-To install from Ubuntu:
-
-```bash
-sudo add-apt-repository ppa:juju/devel
-sudo apt update
-sudo apt install juju
-```
-or
+On Ubuntu, the easiest way to install the development release of Juju is from a
+[*snap*][snappy]:
 
 ```bash
 sudo snap install juju --beta --classic
+```
+
+You can also install the development release using `apt` by adding the following PPA:
+
+```bash
+sudo add-apt-repository --update ppa:juju/devel
+sudo apt install juju
 ```
 
 CentOS:
@@ -130,7 +130,6 @@ MacOS:
 : [juju-core_2.2-beta3-osx.tar.gz](https://launchpad.net/juju/2.2/2.2-beta3/+download/juju-2.2-beta3-osx.tar.gz) ([md5](https://launchpad.net/juju/2.2/2.2-beta3/+download/juju-2.2-beta3-osx.tar.gz/+md5))
 {: .instruction }
 
-[brew]: http://brew.sh/
 The easiest way to install Juju on MacOS is with the [`brew`][brew] package
 manager. With `brew` installed, simply enter the following into a terminal:
 
@@ -140,3 +139,4 @@ brew install --devel juju
 
 <!-- LINKS -->
 [snappy]: https://snapcraft.io/
+[brew]: http://brew.sh/
