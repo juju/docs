@@ -163,7 +163,8 @@ the command line, you will first need to install the Juju client software on
 your machine.
 
 Juju is available for various types of Linux, macOS, and Windows.
-Click on the sections below for the relevant instructions.
+Click on the sections below for the relevant instructions or visit the
+[install instructions][install] for a thorough run down of your options.
 
 
 <style>
@@ -309,6 +310,7 @@ following pages of documentation
 [users]: ./users-models.html "Users and models"
 [gcedashboard]: https://console.cloud.google.com
 [gcecredentials]: https://console.developers.google.com/apis/credentials
+[instal]: ./install-juju.html
 [tut-lxd]: ./tut-lxd.html
 [tut-google]: ./tut-google.html
 [share]: ./tut-users.html
