@@ -507,12 +507,13 @@ To use `juju run` with `relation-ids` to see all the reverse proxy relations
 for an haproxy unit, for example, use:
 
 ```bash
-juju run --unit haproxy/0 'relation-ids reverseproxy'reverseproxy:110
+juju run --unit haproxy/0 'relation-ids reverseproxy'
 ```
 
 Which returns output like this:
 
 ```bash
+reverseproxy:110
 reverseproxy:111
 reverseproxy:112
 reverseproxy:113
