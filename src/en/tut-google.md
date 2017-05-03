@@ -14,11 +14,11 @@ the magic of Juju that makes it happen.
 
 !!! Note: If you already have a controller configured, such as the LXD
 controller created in the '[Getting started with Juju][first]' page, this new
-controller will be seamlessly added alongside. 
+controller will be seamlessly added alongside.
 
 ## Installation
-First, install Juju 2, if you have not done so already. See 
-[the first use page here][first]. 
+First, install Juju 2, if you have not done so already. See
+[the install docs][install].
 
 ## Pick a cloud
 Type `juju clouds` and you'll see output very similar to the following:
@@ -39,7 +39,7 @@ localhost          1  localhost      lxd         LXD Container Hypervisor
 As mentioned, we're going with Google's Cloud Engine, which we'll
 configure over the next couple of steps. But you could just as easily use
 [Amazon AWS][helpaws] or [Microsoft Azure][helpazure], or any of the listed
-clouds you have credentials for. 
+clouds you have credentials for.
 
 ## Download GCE credentials
 
@@ -47,13 +47,13 @@ All you need to get started with GCE and Juju is a JSON-formatted credentials
 file for a new Compute Engine API-enabled project. Either sign up for a [free
  trial][gcetrial], or connect to your [GCE dashboard][gcedashboard].
 If needed, see our GCE [Create a Project][gcenewproject] documentation for
-further help. 
+further help.
 
 ## Add credentials
 
 Copy the credentials file somewhere sensible, such as
 '~/.local/share/juju/gcejuju.json,' and initiate the import process by typing
-`juju add-credential google`. You'll first be asked for an arbitrary name 
+`juju add-credential google`. You'll first be asked for an arbitrary name
 to identify the credentials with, followed by a prompt asking for 'Auth
 Type'. Press return to select the default `jsonfile*` type and then enter the
 absolute path to the credentials file:
@@ -78,10 +78,10 @@ Pushing Juju onto your new cloud is as simple as typing:
 juju bootstrap google mycloud
 ```
 This should only take a few minutes. You could use this time to brush up on
-some [Juju terminology][jujuterms]. 
+some [Juju terminology][jujuterms].
 
 When complete, Juju will have instantiated a new controller and created a
-default model with output similar to the following: 
+default model with output similar to the following:
 
 ```bash
 Creating Juju controller "mycloud" on google/us-east1
@@ -109,14 +109,14 @@ Initial model "default" added.
 
 Before deploying an application, we're going to first create a new model.
 Models are used by Juju to group applications, resources and their relationships
-into environments that can be seamlessly managed, deployed and scaled. 
+into environments that can be seamlessly managed, deployed and scaled.
 
 For example, different models can be deployed to different regions. You can see
 which regions your cloud supports with the `juju show-cloud google` command,
 and create a new model hosted on `europe-west1` with the following:
 
 ```bash
-juju add-model gce-test europe-west1 
+juju add-model gce-test europe-west1
 ```
 
 ## Deploy an application
@@ -125,7 +125,7 @@ Applications themselves are deployed either as 'charms' or as 'bundles'. Charms
 are singular applications, such as [Haproxy][charmhaproxy] or
 [PostgreSQL][charmpsql], whereas bundles are a curated collection of charms and
 their relationships. Bundles are ideal for deploying [OpenStack][bundleopenstack], for instance,
-or [Kubernetes][bundlekubernetes]. 
+or [Kubernetes][bundlekubernetes].
 
 It's also possible to [write your own charms][diycharm] and deploy locally, or
 release via the [Charm Store][charmstore].
@@ -176,7 +176,7 @@ Then use the output username and password to connect to the GUI via your browser
 After logging in, you'll see the Juju GUI overview for the current model. Not
 only does the web interface show you the current state of your applications and
 their relationships, it allows you to manage your models, resources and
-machines, and deploy both charms and bundles. 
+machines, and deploy both charms and bundles.
 
 For example, you can use the GUI to switch between the two models currently
 running on your controller - the default one we left empty and the new one we
@@ -208,7 +208,7 @@ while the second result is a bundle which also contains MySQL and the required
 pre-configured relationships to make MediaWiki work without any further
 configuration. Select the bundle then click on 'Add to [MODEL NAME]' to import
 the bundle into your model. Click on 'Commit changes' to review what's about to
-happen and finally 'Deploy'.  
+happen and finally 'Deploy'.
 
 Monitor the GUI as the applications are deployed to GCE and when each
 application's colour changes from orange to grey, you're all set.
@@ -221,7 +221,7 @@ application.
 ## Next Steps
 
 Now you can see how Juju makes it easy to model workloads, you are sure
-to want to share. Find out how easy it is to 
+to want to share. Find out how easy it is to
 [add users to your Juju controllers and models][tutuser].
 
 [first]: ./getting-started.html
@@ -229,7 +229,8 @@ to want to share. Find out how easy it is to
 [helpazure]: ./help-azure.html
 [gcetrial]: https://console.cloud.google.com/freetrial
 [gcedashboard]: https://console.cloud.google.com
-[gcenewproject]: ./help-google.html#create-a-project 
+[gcenewproject]: ./help-google.html#create-a-project
+[instal]: ./install-juju.html
 [jujuterms]: ./glossary.html
 [charmhaproxy]: https://jujucharms.com/haproxy/37
 [charmpsql]: https://jujucharms.com/postgresql/105
