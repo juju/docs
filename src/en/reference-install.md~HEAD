@@ -69,7 +69,7 @@ A Windows installer is available for Juju.
 ### Centos and other Linuxes
 
 
-Spans enable installing the the Juju client on an array of Linux
+Snaps enable installing the the Juju client on an array of Linux
 distributions. Note that the `--classic` flag is not supported on many of them
 and so you'll need to use `--devmode` instead.
 
@@ -92,15 +92,15 @@ CentOS:
 The Juju team regularly puts out alpha, beta, and RC releases during a
 development cycle. We encourage users to please test these versions out with
 their workloads and use cases and [file bugs][bugs] if you hit any issues.
-Remember that while in development feedback on usability and missing
+Remember that while in development, feedback on usability and missing
 functionality is very important so don't just file bugs for things that go
 wrong, but also for things that have an opportunity to be "more right".
 
 
-## Ubuntu
+### Ubuntu
 
 It is possible to install other versions, including beta releases of
-Juju via a snap package. See the [install page][install] for more information.
+Juju via a snap package.
 
 You can update to the non-stable channels of Juju releases by using the snap
 command.
@@ -116,7 +116,7 @@ Or you can get a daily build using the edge channel.
 ```
 
 
-## macOS
+### macOS
 
 On macOS you can get development Juju from the [brew package manager][brew].
 The development releases are put under the `--devel` flag in brew.
@@ -131,7 +131,7 @@ Or you can use the binary built for macOS:
 
 
 
-## Windows
+### Windows
 
 The latest windows .exe can be downloaded from the Juju download page [https://launchpad.net/juju/+download](https://launchpad.net/juju/+download)
 
@@ -141,7 +141,7 @@ The latest is version 2.2-beta3 located at:
 
 
 
-# Building from source
+## Building from source
 
 Check out the [Contributing][contributing] documentation in the codebase to walk through
 building Juju from source.

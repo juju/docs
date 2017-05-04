@@ -167,6 +167,7 @@ Juju is available for various types of Linux, macOS, and Windows.
 Click on the sections below for the relevant instructions or visit the
 [install instructions][install] for a thorough run down of your options.
 
+
 Get started quickly by picking your OS from below:
 
 <style>

@@ -2,33 +2,33 @@ Title: Getting started with Juju and LXD
 
 # Getting started with Juju and LXD
 
-[LXD][lxd-upstream] with machine containers gives you the cloud experience
-locally. You can use this local cloud to build the same models with Juju that
-you can build on other public and private clouds. Using LXD as a method to
-test, verify, and replicate complex software deployments is a powerful tool
-that every Juju user needs. These instructions will get you up and running and
-deliver the best-possible experience with Juju. At the moment, that means
-using the latest release of Ubuntu with
-'[Long Term Support][long-term-support]' (LTS):
-[16.04 LTS (Xenial)][Xenial-download].
+[LXD](lxd-upstream) provides an amazing experience using machine containers to be able to
+create the same models that are created with Juju on other public and private
+clouds. Using LXD as a method to test, verify, and replicate complex software
+deployments is a powerful tool that every Juju user needs. These instructions
+will get you up and running and deliver the best-possible experience with
+Juju. At the moment, that means using the latest release of Ubuntu with '[Long
+Term Support][long-term-support]' (LTS): [16.04 LTS
+                                          (Xenial)][Xenial-download].
 
-Your system will need the following:
+Our system will need the following:
 
-- [LXD][lxd-upstream]: a hypervisor for LXC, providing fast, secure containers.
+- [LXD][LXD-upstream]: a hypervisor for LXC, providing fast, secure containers.
 - [ZFS][ZFS-wiki]: a highly efficient and feature-rich filesystem and logical volume manager.
 
 
 ## Install the software
 
 Begin by installing the required software. You'll need Juju and LXD on the
-machine.
+machine. This means that using LXD is not supported on the breadth of Juju
+supported operating systems.
 
-For more options in installing Juju see the [Juju install docs][install].
+For more options in installing Juju see the [install docs][install].
 
-For LXD you can use:
 
 ```bash
-sudo apt install lxd zfsutils-linux
+sudo snap install --classic juju
+sudo apt install juju lxd zfsutils-linux
 ```
 
 ## Groups and LXD initialisation

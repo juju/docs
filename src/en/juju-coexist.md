@@ -80,7 +80,7 @@ directories or unfortunate things will happen.
 
 ## Other Linux 
 
-The CentOS download [here][install] includes the binaries for Juju which 
+The CentOS download [here][install] includes the binaries for Juju which
 should also work on other flavours of Linux. As these tarballs simply 
 contain an executable binary, you can place them wherever you wish, renaming
 them if required.
