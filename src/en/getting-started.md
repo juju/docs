@@ -166,6 +166,7 @@ Juju is available for various types of Linux, macOS, and Windows.
 Click on the sections below for the relevant instructions or visit the
 [install instructions][install] for a thorough run down of your options.
 
+To most quickly get started pick your OS from below.
 
 <style>
 details  {
@@ -190,7 +191,7 @@ details  {
          sudo snap refresh juju
 
    It is possible to install other versions, including beta releases of
-   Juju via a snap package. See the [releases page][releases] for more information.
+   Juju via a snap package. See the [install][install] for more information.
 
 
 ^# From the Ubuntu PPA
@@ -208,7 +209,7 @@ details  {
 
    [juju-setup-2.1.2.exe](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe/+md5))
 
-   Please see the [releases page][releases] for other
+   Please see the [install docs][install] for other
    versions.
 
 ^# For macOS
@@ -224,13 +225,13 @@ details  {
 
        brew upgrade juju
 
-   For alternative installation methods, see the [releases page][releases].
+   For alternative installation methods, see the [install docs][install].
 
 ^# For CentOS
 
    A pre-compiled binary is available for CentOS.
 
-   Please see the [releases page][releases] for a link to the latest
+   Please see the [install docs][install] for a link to the latest
    version.
 
 
@@ -310,14 +311,13 @@ following pages of documentation
 [users]: ./users-models.html "Users and models"
 [gcedashboard]: https://console.cloud.google.com
 [gcecredentials]: https://console.developers.google.com/apis/credentials
-[instal]: ./install-juju.html
+[install]: ./reference-install.html
 [tut-lxd]: ./tut-lxd.html
 [tut-google]: ./tut-google.html
 [share]: ./tut-users.html
 [learn]: ./charms.html
 [customise]: ./models.html
 [snapcraft]: https://snapcraft.io
-[releases]: ./reference-releases.html
 [aws-creds]: ./help-aws.html#credentials
 [azure-creds]: ./help-azure.html#credentials
 [gce-creds]: ./help-google.html#download-credentials

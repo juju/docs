@@ -80,7 +80,7 @@ directories or unfortunate things will happen.
 
 ## Other Linux 
 
-The CentOS download [here][refreleases] includes the binaries for Juju which 
+The CentOS download [here][install] includes the binaries for Juju which
 should also work on other flavours of Linux. As these tarballs simply 
 contain an executable binary, you can place them wherever you wish, renaming
 them if required.
@@ -100,7 +100,7 @@ use of the Juju binary.
 
 ## Windows
 
-The latest Windows version of Juju can be downloaded from [here][refreleases].
+The latest Windows version of Juju can be downloaded from [here][install].
 
 Unlike Linux and OS X binary releases, the Microsoft Windows version of Juju is
 bundled within an executable installer. Running this will walk you through a
@@ -121,7 +121,7 @@ just like any other Windows application.
 
 ## MacOS
 
-The Apple OS X download, available [here][refreleases], includes the binaries
+The Apple OS X download, available [here][install], includes the binaries
 for Juju.  These will work work with any recent version of Mac OS X, including
 10.9 (Mavericks), 10.10 (Yosemite), 10.11 (El Capitan) and 10.12 (Sierra).
 
@@ -136,4 +136,4 @@ Unfortunately, OS X doesn't currently support a system similar to
 'update-alternatives' (see above), which means you'll need to manually update
 and name the files differently when installing and using multiple versions.
 
-[refreleases]: ./reference-releases.html#stable
+[install]: ./reference-install.html#stable

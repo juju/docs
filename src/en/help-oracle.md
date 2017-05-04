@@ -230,6 +230,7 @@ being visible in the `Instances` page of the Oracle Compute dashboard:
 
 <!-- LINKS -->
 [compute]: https://cloud.oracle.com/en_US/compute
-[jujubeta]: ./reference-releases.html#development
+[jujubeta]: ./reference-install.html
+[cloudoracle]: https://cloud.oracle.com/home
 [getstarted]: ./getting-started-jaas.html
 [spaces]: ./network-spaces.html
