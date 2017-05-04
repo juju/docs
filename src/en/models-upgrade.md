@@ -34,7 +34,7 @@ sudo snap refresh juju
 ```
 
 For more installation information and what versions are available, see
-[the releases page](reference-releases.html).
+[the install page](reference-install.html).
  
 
 ## Upgrading the model software

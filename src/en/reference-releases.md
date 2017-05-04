@@ -1,17 +1,11 @@
-Title: Juju releases
+Title: Installing Juju
 TODO: Test other distros with snap install
 
 
 # Get the Latest Juju
 
-Juju is available for Ubuntu (and Debian-based OSes), CentOS, Microsoft Windows
-and Apple MacOS. 
-
-There can be 3 concurrent releases representing the stability of Juju's feature
-set: [stable](#stable), [proposed](#proposed) and [development](#development). 
-
-Unless you are testing new features and fixes, choose the current stable
-release to manage cloud deployments.
+Juju is available as a client on many platforms and distributions. Find your
+platform below and get started with Juju!
 
 
 ## Stable
@@ -32,6 +26,12 @@ You can also install Juju using `apt` by adding the following PPA:
 sudo add-apt-repository --update ppa:juju/stable
 sudo apt install juju
 ```
+
+macOS:
+
+The easiest way to install Juju on macOS is with the [`brew`][brew] package
+manager. With `brew` installed, simply enter the following into a terminal:
+
 CentOS:
 : [juju-2.1.2-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-centos7.tar.gz)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-centos7.tar.gz/+md5))
 {: .instruction }
@@ -40,10 +40,6 @@ Windows:
 : [juju-setup-2.1.2.exe](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe/+md5))
 {: .instruction }
 
-MacOS:
-
-The easiest way to install Juju on MacOS is with the [`brew`][brew] package
-manager. With `brew` installed, simply enter the following into a terminal:
 
 ```bash
 brew install juju
@@ -59,7 +55,8 @@ Alternatively, you can manually install Juju from the following archive:
 : [juju-2.1.2-osx.tar.gz](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-osx.tar.gz)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-osx.tar.gz/+md5))
 {: .instruction }
 
-## Proposed
+## Getting development releases
+
 
 Current proposed version is 2.1.2, which is the same as stable (above).
 
@@ -83,7 +80,7 @@ Windows:
 : [juju-setup-2.1.2.exe](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe/+md5))
 {: .instruction }
 
-MacOS:
+macOS:
 : [juju-2.1.2-osx.tar.gz](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-osx.tar.gz)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-osx.tar.gz/+md5))
 {: .instruction }
 
@@ -126,11 +123,11 @@ Windows:
 : [juju-setup-2.2-beta3.exe](https://launchpad.net/juju/2.2/2.2-beta3/+download/juju-setup-2.2-beta3.exe) ([md5](https://launchpad.net/juju/2.2/2.2-beta3/+download/juju-setup-2.2-beta3.exe/+md5))
 {: .instruction }
 
-MacOS:
+macOS:
 : [juju-core_2.2-beta3-osx.tar.gz](https://launchpad.net/juju/2.2/2.2-beta3/+download/juju-2.2-beta3-osx.tar.gz) ([md5](https://launchpad.net/juju/2.2/2.2-beta3/+download/juju-2.2-beta3-osx.tar.gz/+md5))
 {: .instruction }
 
-The easiest way to install Juju on MacOS is with the [`brew`][brew] package
+The easiest way to install Juju on macOS is with the [`brew`][brew] package
 manager. With `brew` installed, simply enter the following into a terminal:
 
 ```bash
