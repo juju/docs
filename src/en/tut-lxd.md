@@ -11,11 +11,6 @@ Juju. At the moment, that means using the latest release of Ubuntu with '[Long
 Term Support][long-term-support]' (LTS): [16.04 LTS
                                           (Xenial)][Xenial-download].
 
-[WANT TO REPLICATE THE OS INSTALL DOCS LIKE JAAS PAGE HERE] (or link to it at
-least)
-See the [general Getting Started page][getting-started-general] if you're using
-something other than Xenial.
-
 Our system will need the following:
 
 - [LXD][LXD-upstream]: a hypervisor for LXC, providing fast, secure containers.
@@ -24,11 +19,15 @@ Our system will need the following:
 
 ## Install the software
 
-Begin by installing the required software:
+Begin by installing the required software. You'll need Juju and LXD on the
+machine. This means that using LXD is not supported on the breadth of Juju
+supported operating systems.
 
-[ We want to provide a consistent install story...]
-```no-highlight
-sudo add-apt-repository --update ppa:juju/stable
+For more options in installing Juju see the [install docs][install].
+
+
+```bash
+sudo snap install --classic juju
 sudo apt install juju lxd zfsutils-linux
 ```
 
@@ -249,17 +248,17 @@ We suggest you continue your journey by discovering:
  - [Add controllers for additional clouds][tut-cloud].
  - [Share your model with other users][share]
 
-[long-term-support]: https://wiki.ubuntu.com/LTS "Long Term Support"
-[tut-cloud]: ./tut-google.html
-[clouds]: ./clouds.html  "Configuring Juju Clouds"
-[charm store]: https://jujucharms.com "Juju Charm Store"
-[releases]: reference-releases.html
-[keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
-[concepts]: ./juju-concepts.html "Juju concepts"
-[charms]: ./charms.html
-[models]: ./models.html
-[Xenial-download]: http://www.ubuntu.com/download/ "Xenial download"
-[getting-started-general]: ./getting-started-general.html "general Getting Started"
 [LXD-upstream]: https://linuxcontainers.org/lxd/ "LXD upstream"
+[Xenial-download]: http://www.ubuntu.com/download/ "Xenial download"
 [ZFS-wiki]: https://wiki.ubuntu.com/ZFS "ZFS Ubuntu wiki"
+[charm store]: https://jujucharms.com "Juju Charm Store"
+[charms]: ./charms.html
+[clouds]: ./clouds.html  "Configuring Juju Clouds"
+[concepts]: ./juju-concepts.html "Juju concepts"
+[install]: ./reference-install.html
+[keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
+[long-term-support]: https://wiki.ubuntu.com/LTS "Long Term Support"
+[models]: ./models.html
+[releases]: reference-releases.html
 [share]: ./tut-users.html
+[tut-cloud]: ./tut-google.html

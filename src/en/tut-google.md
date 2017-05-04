@@ -230,7 +230,7 @@ to want to share. Find out how easy it is to
 [gcetrial]: https://console.cloud.google.com/freetrial
 [gcedashboard]: https://console.cloud.google.com
 [gcenewproject]: ./help-google.html#create-a-project
-[instal]: ./install-juju.html
+[instal]: ./reference-install.html
 [jujuterms]: ./glossary.html
 [charmhaproxy]: https://jujucharms.com/haproxy/37
 [charmpsql]: https://jujucharms.com/postgresql/105
