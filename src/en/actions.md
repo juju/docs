@@ -12,7 +12,7 @@ actions.yaml. See [Actions for the charm author](authors-charm-actions.html) for
 The following commands are specified for dealing with actions:
 
 - `juju actions` - list actions defined for a service
-- `juju list actions` - alias for `actions`
+- `juju list-actions` - alias for `actions`
 - `juju run-action` - queue an action for execution
 - `juju show-action-output` - show output of an action by ID
 - `juju show-action-status` - show status of all actions filtered by optional ID
