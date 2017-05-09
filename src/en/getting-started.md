@@ -7,8 +7,7 @@ deployment and operating of applications. Juju works through a controller that
 will process all of the events that occur. These instructions will walk you
 through using the hosted Juju as a Service (JAAS) controller and requires you
 to have public cloud credentials ready. If you'd prefer to test it out
-locally, we've got a tutorial on setting up a [LXD based controller over
-here][tut-lxd].
+locally, see our [Getting started with Juju and LXD][tut-lxd].
 
 
 JAAS supports deploying, configuring, and operating your applications on the
@@ -78,9 +77,11 @@ finding applications in the Charm Store.
 You will see a list of available charms and bundles with a description of
 each. Select a [charm][charms] or [bundle][bundles] to learn more about it.
 
-When you have selected a charm or bundle (hint: to see how easy JAAS makes
-complex deployments, try the Canonical Kubernetes bundle!) it can be added
-to your model by pressing the 'Add to model' button...
+When you have selected a charm or bundle it can be added to your model by
+pressing the 'Add to model' button...
+
+Hint: see how easy JAAS makes complex deployments, try the [Canonical
+Kubernetes bundle][k8]
 
 <table width="500" border-width="0px" cellpadding="5">
 
@@ -157,16 +158,16 @@ clicking on your username
 
 ## Use the command line
 
-Juju can also be used from the command line. Models you've created in JAAS are
-also able to be operated against via the CLI and vice versa. In order to use
-the command line, you will first need to install the Juju client software on
-your machine.
+Juju can also be used from the command line. Models you've created with the
+JAAS website can also able to be operated via the normal Juju command line. In
+order to use the command line, you will first need to install the Juju client
+software on your machine.
 
 Juju is available for various types of Linux, macOS, and Windows.
 Click on the sections below for the relevant instructions or visit the
 [install instructions][install] for a thorough run down of your options.
 
-To most quickly get started pick your OS from below.
+Get started quickly by picking your OS from below:
 
 <style>
 details  {
@@ -182,7 +183,7 @@ details  {
 
          sudo snap install juju --classic
 
-   You can check which version of Juju you have installed with
+   You can check which version of Juju you have installed with:
 
          sudo snap list juju
 
@@ -237,7 +238,8 @@ details  {
 
 ## Register or login to JAAS
 
-To connect to JAAS from the command line you'll need to login. Enter the following command:
+To connect to JAAS from the command line you'll need to login to the JAAS
+controller. Enter the following command:
 
 ```bash
 juju register jimm.jujucharms.com
@@ -251,7 +253,8 @@ output.
 After successful authentication, you will be asked to enter a descriptive name
 for the JAAS controller (we suggest JAAS). Now you can operate your models or
 applications in JAAS from the command line. You can see a list of all of your
-controllers using the cli command:
+controllers using the command line command:
+
 
 ```bash
 juju controllers
@@ -290,7 +293,7 @@ Congratulations! You have now deployed a complex workload in the cloud without
 hours of looking up config options or wrestling with install scripts!
 
 To discover more about what Juju can do for you, we suggest some of the
-following pages of documentation
+following pages of documentation:
 
  - [Creating your own cloud controller][tut-google]
  - [Creating models locally with LXD][tut-lxd]
@@ -301,6 +304,7 @@ following pages of documentation
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
 [aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
 [bundles]: ./charms-bundles.html "Introduction to bundles"
+[k8]: https://jujucharms.com/canonical-kubernetes/
 [charms]: ./charms.html "Introduction to charms"
 [credentials]: ./credentials.html
 [gce]: ./help-google.html "Using the Google Compute Engine public cloud"
