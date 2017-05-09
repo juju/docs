@@ -179,7 +179,7 @@ We now need to add a new network to use this exchange. Select the `IP Networks`
 page from the menu on the left and click on `Create IP Network` to open the new
 network details panel. 
 
-![Add an IP Network](../media/oracle_create-ip-network.png)
+![Add an IP Network](./media/oracle_create-ip-network.png)
 
 Enter a name, a CIDR formatted address for the `IP Address Prefix`, and an
 optional description with one or more tags. Use the `IP Exchange` drop-down
