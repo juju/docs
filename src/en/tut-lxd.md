@@ -21,14 +21,13 @@ Your system will need the following:
 ## Install the software
 
 Begin by installing the required software. You'll need Juju and LXD on the
-machine. This means that using LXD is not supported on the breadth of Juju
-supported operating systems.
+machine.
 
-For more options in installing Juju see the [install docs][install].
+For more options in installing Juju see the [Juju install docs][install].
 
+For LXD you can use:
 
 ```bash
-sudo snap install --classic juju
 sudo apt install lxd zfsutils-linux
 ```
 
@@ -240,8 +239,9 @@ often quickest to destroy the model with the command
 
 ## Next Steps
 
-Now that you have a Juju-powered cloud, it is time to explore the amazing
-things you can do with it!
+Now that you have configured Juju to work with a local LXD cloud, you can
+develop, test, and experiment with applications with speed, ease, and without
+additional public cloud costs.
 
 We suggest you continue your journey by discovering:
 
