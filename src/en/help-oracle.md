@@ -53,7 +53,7 @@ left and entering `Ubuntu` into the search field that appears.
 The search will return any official Ubuntu images, visible with the Ubuntu
 logo, alongside other Ubuntu-associated images. 
 
-It's possible to use any of the following images with Juju:
+It's currently possible to use any of the following images with Juju:
 
 | Version          | Arch   | Series  |
 |------------------| -------|---------|
@@ -62,7 +62,7 @@ It's possible to use any of the following images with Juju:
 | Ubuntu 16.04-LTS | amd64  | Xenial  |
 | Ubuntu 17.04     | amd64  | Zesty   |
 
-!!! Note: 
+!!! Warning: 
 	Currently, Oracle's Ubuntu 16.10 (Yakkety Yak) image shouldn't be
         associated with your Juju/Oracle Compute deployment.
 
