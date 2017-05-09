@@ -27,7 +27,7 @@ details  {
 
          sudo snap install juju --classic
 
-   You can check which version of Juju you have installed with
+   You can check which version of Juju you have installed with:
 
          sudo snap list juju
 
