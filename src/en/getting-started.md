@@ -159,14 +159,13 @@ clicking on your username
 ## Use the command line
 
 Juju can also be used from the command line. Models you've created with the
-JAAS website can also be operated via the normal Juju command line. In order
-to use the command line, you will first need to install the Juju client
+JAAS website can also able to be operated via the normal Juju command line. In
+order to use the command line, you will first need to install the Juju client
 software on your machine.
 
 Juju is available for various types of Linux, macOS, and Windows.
 Click on the sections below for the relevant instructions or visit the
 [install instructions][install] for a thorough run down of your options.
-
 
 Get started quickly by picking your OS from below:
 
@@ -254,7 +253,7 @@ output.
 After successful authentication, you will be asked to enter a descriptive name
 for the JAAS controller (we suggest JAAS). Now you can operate your models or
 applications in JAAS from the command line. You can see a list of all of your
-controllers using the command:
+controllers using the command line command:
 
 
 ```bash
