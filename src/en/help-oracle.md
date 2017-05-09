@@ -1,5 +1,4 @@
 Title: Using the Oracle Compute Provider
-TODO: Add to navigation
 
 # Using the Oracle Compute Provider
 
