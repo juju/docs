@@ -36,7 +36,7 @@ the following:
 After signing in, you'll see the default top level of Oracle's domain
 dashboard.
 
-![Empty Oracle dashboard](../media/oracle_empty-dashboard.png)
+![Empty Oracle dashboard](./media/oracle_empty-dashboard.png)
 
 Click on the large `Create Instance` tile and select `Compute` from the list of
 services that appear. 
@@ -48,7 +48,7 @@ domain before cancelling the remainder of Oracle's cloud deployment.
 Ubuntu images can be found by clicking on 'Marketplace' from the menu on the
 left and entering `Ubuntu` into the search field that appears. 
 
-![Ubuntu image search](../media/oracle_create-instance-ubuntu.png) 
+![Ubuntu image search](./media/oracle_create-instance-ubuntu.png) 
 
 The search will return any official Ubuntu images, visible with the Ubuntu
 logo, alongside other Ubuntu-associated images. 
@@ -80,7 +80,7 @@ When complete, associated images will be listed when you select 'Private
 Images' from the menu on the left, as well as from the Compute console by
 selecting the 'Images' tab: 
 
-![Private image in Oracle Compute dashboard](../media/oracle_create-instance-private.png)
+![Private image in Oracle Compute dashboard](./media/oracle_create-instance-private.png)
 
 ## Add cloud
 
@@ -127,7 +127,7 @@ and Container), click on the menu icon to the right of Compute and select
 In the `Additional Information` view that appears, the REST endpoint field is
 the value Juju needs for the endpoint URL:
 
-![Endpoint URL](../media/oracle_myservices-endpoint.png)
+![Endpoint URL](./media/oracle_myservices-endpoint.png)
 
 ## Credentials
 
@@ -179,7 +179,7 @@ We now need to add a new network to use this exchange. Select the `IP Networks`
 page from the menu on the left and click on `Create IP Network` to open the new
 network details panel. 
 
-![Add an IP Network](../media/oracle_create-ip-network.png)
+![Add an IP Network](./media/oracle_create-ip-network.png)
 
 Enter a name, a CIDR formatted address for the `IP Address Prefix`, and an
 optional description with one or more tags. Use the `IP Exchange` drop-down
@@ -226,7 +226,7 @@ You can now start deploying Juju charms and bundles to your Oracle cloud.
 A successful bootstrap and deployment will result in the controller environment
 being visible in the `Instances` page of the Oracle Compute dashboard:
 
-![Oracle dashboard showing Juju](../media/oracle_bootstrap-instances.png)
+![Oracle dashboard showing Juju](./media/oracle_bootstrap-instances.png)
 
 <!-- LINKS -->
 [compute]: https://cloud.oracle.com/en_US/compute
