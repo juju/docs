@@ -28,9 +28,9 @@
                 <li><a href="clouds-maas.html">MAAS</a></li>
                 <li><a href="clouds-manual.html">Manual</a></li>
                 <li><a href="help-openstack.html">OpenStack</a></li>
+                <li><a href="help-oracle.html">Oracle Compute</a></li>
                 <li><a href="help-rackspace.html">Rackspace</a></li>
                 <li><a href="help-vmware.html">VMware vSphere</a></li>
-
             </ul>
         </li>
         <li class="section"><a class="header" href="controllers.html">Controllers</a>
