@@ -21,14 +21,13 @@ Your system will need the following:
 ## Install the software
 
 Begin by installing the required software. You'll need Juju and LXD on the
-machine. This means that using LXD is not supported on the breadth of Juju
-supported operating systems.
+machine.
 
-For more options in installing Juju see the [install docs][install].
+For more options in installing Juju see the [Juju install docs][install].
 
+For LXD you can use:
 
 ```bash
-sudo snap install --classic juju
 sudo apt install lxd zfsutils-linux
 ```
 
