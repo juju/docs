@@ -129,4 +129,4 @@ Alternately, you can also use this credential with [Juju as a Service][jaas] and
 create and deploy your model using its GUI.
 
 [gce-docs]: https://console.cloud.google.com/start "GCE Getting Started"
-[jaas]: ./getting-started-jaas.html "Getting Started with Juju as a Service"
+[jaas]: ./getting-started.html "Getting Started with Juju as a Service"
