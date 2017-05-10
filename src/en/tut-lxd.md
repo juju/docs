@@ -259,6 +259,5 @@ We suggest you continue your journey by discovering:
 [keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
 [long-term-support]: https://wiki.ubuntu.com/LTS "Long Term Support"
 [models]: ./models.html
-[releases]: reference-releases.html
 [share]: ./tut-users.html
 [tut-cloud]: ./tut-google.html
