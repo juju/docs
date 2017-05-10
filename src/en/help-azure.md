@@ -288,4 +288,4 @@ availability sets affect uptime guarantees.
 [subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
 [azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
 [azureportal]: http://portal.azure.com
-[jaas]: ./getting-started-jaas.html "Getting Started with Juju as a Service"
+[jaas]: ./getting-started.html "Getting Started with Juju as a Service"
