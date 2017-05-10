@@ -1,16 +1,10 @@
  <ul>
     <li><a href="about-juju.html">About Juju</a></li>
-    <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
-    <li><a href="whats-new.html">What's new in 2.1</a></li>
 <!-- SECTION -->
-    <li class="section"><h4 class="header toggle-target">Get Started</h4>
+    <li class="section"><h4 class="header toggle-target">Quick Guides</h4>
         <ul>
-        <li class="section"><a class="header" href="getting-started.html">First use!</a>
-            <ul class="sub">
-                <li><a href="getting-started-general.html">Install for non-16.04</a></li>
-            </ul>
-        </li>
-        <li><a href="getting-started-jaas.html">Juju as a Service (JAAS)</a></li>
+        <li class="section"><a class="header" href="getting-started.html">First use!</a></li>
+        <li><a href="tut-lxd.html">Local Juju with LXD cloud</a></li>
         <li><a href="tut-google.html">Controllers and Models</a></li>
         <li><a href="tut-users.html">Sharing and Users</a></li>
         </ul>
@@ -195,6 +189,9 @@
 <!-- SECTION -->
     <li class="section"><h4 class="header toggle-target">Reference</h4>
         <ul>
+        <li><a href="reference-install.html">Install Juju</a></li>
+        <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
+        <li><a href="whats-new.html">What's new in 2.1</a></li>
         <li><a href="commands.html">Juju commands</a></li>
         <li><a href="reference-constraints.html">Juju constraints</a></li>
         <li><a href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
@@ -202,7 +199,6 @@
         <li><a href="reference-hook-tools.html">Juju Hook Tools</a></li>
         <li><a href="reference-layer-yaml.html">Layer.yaml</a></li>
         <li><a href="http://godoc.org/github.com/juju/juju/api">API docs</a></li>
-        <li><a href="reference-releases.html">Releases</a></li>
         <li><a href="reference-release-notes.html">Release notes</a></li>
         <li><a href="reference-status.html">Status values</a></li>
         <li><a href="reference-numbering.html">Machine/unit numbering</a></li>

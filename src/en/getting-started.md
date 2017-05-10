@@ -7,7 +7,7 @@ deployment and operating of applications. Juju works through a controller that
 will process all of the events that occur. These instructions will walk you
 through using the hosted Juju as a Service (JAAS) controller and requires you
 to have public cloud credentials ready. If you'd prefer to test it out
-locally, see our [Getting started with Juju and LXD][tut-lxd].
+locally, see the [Getting started with Juju and LXD][tut-lxd] guide.
 
 
 JAAS supports deploying, configuring, and operating your applications on the
