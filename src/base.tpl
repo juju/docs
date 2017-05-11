@@ -347,4 +347,3 @@ YUI().use('storefront-docs-menu', 'storefront-utils', function(Y) {
 heap.load=function(e,d){window.heap.appid=e;window.heap.config=d=d||{};var a=d.forceSSL||"https:"===document.location.protocol,b=document.createElement("script");b.type="text/javascript";b.async=!0;b.src=(a?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);for(var b=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},a=["clearEventProperties","identify","setEventProperties",
 "track","unsetEventProperty"],c=0;c<a.length;c++)heap[a[c]]=b(a[c])};heap.load("3280028620");</script>
 </body></html>
->>>>>>> 63ae2af... Rename service to application everything-else
