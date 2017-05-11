@@ -2,7 +2,7 @@ Title: Charm hooks
 
 # Charm hooks
 
-A service unit's direct action is entirely defined by its charm's hooks. Hooks
+An application's unit's direct action is entirely defined by its charm's hooks. Hooks
 are executable files in a charm's `hooks` directory; hooks with particular names
 (see below) will be invoked by the juju unit agent at particular times, and
 thereby cause changes to the world.
@@ -63,9 +63,9 @@ that will not change with configuration changes.
 `leader-elected` is run at least once to signify that Juju decided this unit is
 the leader. Authors can use this hook to take action if their protocols for
 leadership, consensus, raft, or quorum require one unit to assert leadership.
-If the election process is done internally to the service, other code should be
-used to signal the leader to Juju. For more information read the [charm
-leadership document](./authors-charm-leadership.html).
+If the election process is done internally to the application, other code
+should be used to signal the leader to Juju. For more information read the
+[charm leadership document](./authors-charm-leadership.html).
 
 ### leader-settings-changed
 
@@ -88,12 +88,12 @@ intervention on juju's part.
 should be used to ensure that the charm's software is not running, and will not
 start again on reboot.
 
-This hook is called when a service removal is requested by the client. It should
+This hook is called when a application removal is requested by the client. It should
 implement the following logic:
 
-- Stop the service
-- Remove any files/configuration created during the service lifecycle
-- Prepare any backup(s) of the service that are required for restore purposes.
+- Stop the application
+- Remove any files/configuration created during the application lifecycle
+- Prepare any backup(s) of the application that are required for restore purposes.
 
 ### upgrade-charm
 
@@ -113,9 +113,9 @@ to preface all your other hooks with a quick call to your (idempotent)
 ### update-status
 
 `update-status` provides constant feedback to the user about the status of the
-service the charm is modeling. The charm is run by Juju at regular intervals,
-and gives authors an opportunity to run code that gets the “health” of the
-service or services.
+application the charm is modeling. The charm is run by Juju at regular
+intervals, and gives authors an opportunity to run code that gets the “health”
+of the application.
 
 ## Relation hooks
 
@@ -124,16 +124,17 @@ they've been stopped. Within that time window, the unit may participate in
 several different relations at a time, _including_ multiple relations with the
 same name.
 
-To illustrate, consider a database service that will be used by multiple client
-services. Units of a single client service will surely want to connect to, and
-use, the same database; but if units of another client service were to use that
-same database, the consequences could be catastrophic for all concerned.
+To illustrate, consider a database application that will be used by multiple
+client applications. Units of a single client application will surely want to
+connect to, and use, the same database; but if units of another client
+application were to use that same database, the consequences could be
+catastrophic for all concerned.
 
 If juju respected the `limit` field in relation [metadata](./authors-charm-metadata.html),
 it would be possible to work around this, but it's not a high-
-priority [bug](https://bugs.launchpad.net/bugs/1089297): most provider services
-_should_ be able to handle multiple requirers anyway; and most requirers will
-only be connected to one provider anyway.
+priority [bug](https://bugs.launchpad.net/bugs/1089297): most provider
+applications _should_ be able to handle multiple requirers anyway; and most
+requirers will only be connected to one provider anyway.
 
 When a unit running a given charm participates in a given relation, it runs at
 least three hooks for every remote unit it becomes aware of in that relation.

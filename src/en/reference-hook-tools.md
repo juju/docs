@@ -148,7 +148,7 @@ Close-JujuPort "1000-2000/UDP"
 
 ## config-get
 
-`config-get` returns information about the service configuration (as defined by
+`config-get` returns information about the application configuration (as defined by
 `config.yaml`). If called without arguments, it returns a dictionary containing
 all config settings that are either explicitly set, or which have a non-nil
 default value. If the `--all` flag is passed, it returns a dictionary containing
@@ -297,12 +297,12 @@ $clusterLeaderAddress = Get-LeaderData "cluster-leader-address"
 
 `leader-set` immediately writes the key/value pairs to the Juju controller,
 which will then inform non-leader units of the change. It will fail if called
-without arguments, or if called by a unit that is not currently service leader.
+without arguments, or if called by a unit that is not currently application leader.
 
 `leader-set` lets you write string key=value pairs, but with the following
 differences:
 
-- there's only one leader-settings bucket per service (not one per unit)
+- there's only one leader-settings bucket per application (not one per unit)
 - only the leader can write to the bucket
 - only minions are informed of changes to the bucket
 - changes are propagated instantly
@@ -345,11 +345,11 @@ network-get options <binding-name> --primary-address
 ## open-port
 
 `open-port` registers a port or range to open on the public-interface. On public
-clouds the port will only be open while the service is exposed. It accepts a
+clouds the port will only be open while the application is exposed. It accepts a
 single port or range of ports with an optional protocol, which may be `udp` or
 `tcp`, where `tcp` is the default.
 
-`open-port` will not have any effect if the service is not exposed, and may have
+`open-port` will not have any effect if the application is not exposed, and may have
 a somewhat delayed effect even if it is. This operation is transactional, so
 changes will not be made unless the hook exits successfully.
 
@@ -533,7 +533,7 @@ bash:
 
 ## relation-ids
 
-`relation-ids` outputs a list of the related **services** with a relation
+`relation-ids` outputs a list of the related **applications** with a relation
 name. Accepts a single argument (relation-name) which, in a relation hook,
 defaults to the name of the current relation. The output is useful as input
 to the `relation-list`, `relation-get`, and `relation-set` commands to read
@@ -591,7 +591,7 @@ argument is not inspected, and is stored directly as a string. Setting an empty
 string causes the setting to be removed.
 
 `relation-set` is the tool for communicating information between
-units of related services. By convention the charm that `provides` an
+units of related applications. By convention the charm that `provides` an
 interface is likely to set values, and a charm that `requires` that interface
 will read values; but there is nothing enforcing this. Whatever information you
 need to propagate for the remote charm to work must be propagated via
@@ -600,7 +600,7 @@ always set before the unit joins.
 
 For some charms you may wish to overwrite the `private-address` setting, for
 example if you're writing a charm that serves as a proxy for some external
-service. It is rarely a good idea to _remove_ that key though, as most charms
+application. It is rarely a good idea to _remove_ that key though, as most charms
 expect that value to exist unconditionally and may fail if it is not
 present.
 
@@ -643,7 +643,7 @@ unit's application.
 
 The path provided by `resource-get` references the up-to-date file for the
 resource. Note that the resource may get updated on the controller for the
-service at any time, meaning the cached copy *may* be out of date at any time
+application at any time, meaning the cached copy *may* be out of date at any time
 after `resource-get` is called. Consequently, the command should be run at
 every point where it is critical for the resource be up to date.
 
@@ -693,7 +693,7 @@ be one of the following:
 - `blocked` (the unit cannot continue without user input)
 - `waiting` (the unit itself is not in error and requires no intervention,
   but it is not currently in service as it depends on some external factor,
-  e.g. a service to which it is related is not running)
+  e.g. an application to which it is related is not running)
 - `active` (This unit believes it is correctly offering all the services it is
   primarily installed to provide)
 
@@ -708,7 +708,7 @@ can contain any useful information.
 This status message provides valuable feedback to the user about what is
 happening. Changes in the status message are not broadcast to peers and
 counterpart units - they are for the benefit of humans only, so tools
-representing Juju services (e.g. the Juju GUI) should check occasionally
+representing Juju applications (e.g. the Juju GUI) should check occasionally
 and be told the current status message.
 
 Spamming the status with many changes per second is therefore rather redundant

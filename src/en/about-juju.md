@@ -2,12 +2,11 @@ Title: What is Juju?
 
 # What is Juju?
 
-Juju is a state-of-the-art, open source, universal modelling tool for service
-oriented architectures and application oriented deployments. Juju allows you to
-deploy, configure, manage, maintain, and scale cloud applications quickly and
-efficiently on public clouds, as well as on physical servers, OpenStack, and
-containers. You can use Juju from the command line or through its beautiful
-GUI.
+Juju is a state-of-the-art, open source modelling tool for operating software
+in the cloud. Juju allows you to deploy, configure, manage, maintain, and
+scale cloud applications quickly and efficiently on public clouds, as well as
+on physical servers, OpenStack, and containers. You can use Juju from the
+command line or through its beautiful GUI.
 
 ## What is application modelling?
 
@@ -41,11 +40,12 @@ in seconds, on any cloud or server or virtual machine.
 ## Can I use Juju with Puppet or Chef or Ansible?
 
 Yes! Puppet, Chef, and Ansible are great tools for writing configuration
-files. Juju works a layer above that by focusing on the service the
-application delivers, regardless of the machine on which it runs. So the Juju
-charm for an application includes (amongst other things) all the logic for
-writing configuration files for that application - that logic itself can be
-written in whatever language or tool the author of the charm prefers.
+files. Juju works a layer above that by focusing on the long term operations
+required to keep that software running over time, regardless of the machine on
+which it runs. So the Juju charm for an application includes (amongst other
+things) all the logic for writing configuration files for that
+application - that logic itself can be written in whatever language or tool
+the author of the charm prefers.
 
 It is common for people to start creating a charm by bringing together
 Puppet or Chef or other scripts which they currently use to automate the

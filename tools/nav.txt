@@ -38,15 +38,15 @@
 +models.html@Models
 --models-adding.html@Adding
 --models-configuring.html@Additional configuration
-+charms.html@Charms & Services
---charms-deploying.html@Deploying Services
++charms.html@Charms & Applications
+--charms-deploying.html@Deploying Applications
 --charms-constraints.html@Using constraints
---charms-config.html@Service configuration
---charms-relations.html@Service Relations
---charms-exposing.html@Exposing Services
---charms-scaling.html@Scaling Services
---charms-destroy.html@Removing Services &amp; Units
---charms-service-groups.html@Groups of Services
+--charms-config.html@Application configuration
+--charms-relations.html@Application Relations
+--charms-exposing.html@Exposing Applications
+--charms-scaling.html@Scaling Applications
+--charms-destroy.html@Removing Applications &amp; Units
+--charms-service-groups.html@Groups of Applications
 --charms-ha.html@Charm high availability
 --charms-bundles.html@Using bundles
 --charms-working-with-units.html@Working with Units
@@ -117,7 +117,7 @@
 --authors-hook-errors.html@Hook Errors
 --authors-hook-debug.html@Hook Debugging
 --authors-hook-debug-dhx.html@Hook Debugging with DHX
---authors-subordinate-services.html@Subordinate services
+--authors-subordinate-applications.html@Subordinate applications
 --authors-implicit-relations.html@Implicit Relations
 --authors-testing.html@Charm Testing
 --authors-charm-building.html@Building a Charm from Layers

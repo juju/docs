@@ -19,13 +19,13 @@ If a constraint is defined that cannot be fulfilled by any machine in the
 environment, no machine will be provisioned, and an error will be printed in the
 machine's entry in juju status.
 
-Constraint defaults can be set on an environment or on specific services by
+Constraint defaults can be set on an environment or on specific applications by
 using the set-constraints command (see `juju help set-constraints`). Constraints
-set on the environment or on a service can be viewed by using the get-
+set on the environment or on a application can be viewed by using the get-
 constraints command. In addition, you can specify constraints when executing a
 command by using the `--constraints` flag (for commands that support it).
 
-Constraints specified on the environment and service will be combined to
+Constraints specified on the environment and application will be combined to
 determine the full list of constraints on the machine(s) to be provisioned by
 the command. Application-specific constraints will override environment-specific
 constraints, which override the juju default constraints.
@@ -39,25 +39,25 @@ multiple constraints delimited by a space.
 
 - arch
 
-    Short name of architecture that a service must run on. Can be left
+    Short name of architecture that a application must run on. Can be left
     blank to indicate any architecture is acceptable, or one of `amd64`,
     `arm`, `i386`, `arm64`, or `ppc64`.
 
 - container
 
-    Name of container type that a service unit must run inside. Can be
+    Name of container type that a application unit must run inside. Can be
     left blank to indicate no preference, or one of `none` for
     uncontainerised or `lxc``.
 
 - cores
 
     Minimum number of effective CPU cores that must be available to a
-    service unit.
+    application unit.
 
 - cpu-power
 
     Minimum amount of abstract CPU power that must be available to a
-    service unit, where 100 units is roughly equivalent to "a single
+    application unit, where 100 units is roughly equivalent to "a single
     2007-era Xeon" as reflected by 1 Amazon vCPU. 
     
     **Note:**  Not all providers support this constraint, use
@@ -65,7 +65,7 @@ multiple constraints delimited by a space.
 
 - instance-type
 
-    Cloud-specific instance-type name that a service used must be
+    Cloud-specific instance-type name that a application used must be
     deployed on. Valid values vary by provider, and individual
     deployment in some cases. 
     
@@ -76,15 +76,15 @@ multiple constraints delimited by a space.
 - mem
 
     Minimum number of megabytes of RAM that must be available to a
-    service unit. An optional suffix of M/G/T/P indicates the value is
+    application unit. An optional suffix of M/G/T/P indicates the value is
     mega-/giga-/tera-/peta- bytes.
 
 - root-disk
 
-    Minimum amount of of disk space on the root drive on each service
-    unit. The value is megabytes unless an optional suffix of M/G/T/P
-    is used per the `mem` constraint. Additional storage that may be
-    attached separately does not count towards this value.
+    Minimum amount of of disk space on the root drive on each application
+    unit. The value is megabytes unless an optional suffix of M/G/T/P is used
+    per the `mem` constraint. Additional storage that may be attached
+    separately does not count towards this value.
 
 - tags
 
@@ -176,18 +176,18 @@ also supported, these need to be migrated when upgrading.
 
 - ec2-zone
 
-    EC2 availability zone that a service unit must be deployed into. No
+    EC2 availability zone that a application unit must be deployed into. No
     equivalent implemented as of juju 1.12, follow [bug
     1183831](https://bugs.launchpad.net/juju-core/+bug/1183831).
 
 - maas-name
 
-    Specific MAAS machine name that a service unit must be deployed on.
+    Specific MAAS machine name that a application unit must be deployed on.
     Use `maas-tags` instead by preference.
 
 - maas-tags
 
-    List of tags a MAAS machine must have for a service unit to be
+    List of tags a MAAS machine must have for a application unit to be
     deployed on. See "tags" above.
 
 - networks

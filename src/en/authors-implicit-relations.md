@@ -30,7 +30,7 @@ remote unit in a relation through its `juju-info` relation
 
 ## Relationship resolution
 
-`rsyslog` is a [_subordinate charm_](./authors-subordinate-services.html) and
+`rsyslog` is a [_subordinate charm_](./authors-subordinate-applications.html) and
 requires a valid `scope: container` relationship in order to deploy. It can take
 advantage of optional support from the principal charm but in the event that the
 principal charm doesn't provide this support it will still require a
