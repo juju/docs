@@ -121,7 +121,7 @@ application with a relation between the two:
 
 ```yaml
 series: xenial
-services:
+applications:
   wordpress:
     charm: "cs:trusty/wordpress-2"
     num_units: 1
