@@ -2,7 +2,7 @@ Title: Charm hooks
 
 # Charm hooks
 
-An application's unit's direct action is entirely defined by its charm's hooks. Hooks
+An application unit's direct action is entirely defined by its charm's hooks. Hooks
 are executable files in a charm's `hooks` directory; hooks with particular names
 (see below) will be invoked by the juju unit agent at particular times, and
 thereby cause changes to the world.
@@ -88,8 +88,8 @@ intervention on juju's part.
 should be used to ensure that the charm's software is not running, and will not
 start again on reboot.
 
-This hook is called when a application removal is requested by the client. It should
-implement the following logic:
+This hook is called when an application removal is requested by the client. It
+should implement the following logic:
 
 - Stop the application
 - Remove any files/configuration created during the application lifecycle
