@@ -1,6 +1,6 @@
-Title: Service configuration  
+Title: Application configuration  
 
-# Service configuration
+# Application configuration
 
 ## Introduction
 
@@ -8,13 +8,14 @@ A [Charm](./charms.html) often will require access to specific options or
 configuration. Charms allow for the manipulation of the various configuration
 options which the charm author has chosen to expose. juju provides tools to
 help manage these options and respond to changes in these options over the
-lifetime of the service deployment. These options apply to the entire service,
-as opposed to only a specific unit or relation. Configuration is modified by
-an administrator at deployment time or over the lifetime of the services.
+lifetime of the application deployment. These options apply to the entire
+application, as opposed to only a specific unit or relation. Configuration is
+modified by an administrator at deployment time or over the lifetime of the
+applications.
 
-As an example a wordpress service may expose a 'blog-title' option. This option
+As an example a wordpress application may expose a 'blog-title' option. This option
 would control the title of the blog being published. Changes to this option
-would be applied to all units implementing this service through the invocation
+would be applied to all units implementing this application through the invocation
 of a hook on each of them.
 
 ## Using configuration options
@@ -22,11 +23,11 @@ of a hook on each of them.
 Configuration options are manipulated using a command line interface. juju
 provide a set command to aid the administrator in changing values.
 
-    juju set <service name> option=value [option=value]
+    juju set <application name> option=value [option=value]
 
 This command allows changing options at runtime and takes one or more
-name/value pairs which will be set into the service options. Configuration
-options which are set together are delivered to the services for handling
+name/value pairs which will be set into the application options. Configuration
+options which are set together are delivered to the applications for handling
 together. E.g. if you are changing a username and a password, changing them
 individually may yield bad results since the username will temporarily be set
 with an incorrect password.
@@ -42,12 +43,12 @@ option, as follows:
     juju deploy [--config local.yaml] wordpress myblog
     juju deploy [--config local.yaml] postgres
 
-The service name is looked up inside the YAML file to allow for related service
-configuration options to be collected into a single file for the purposes of
-deployment and passed repeated to each juju deploy invocation.
+The application name is looked up inside the YAML file to allow for related
+application configuration options to be collected into a single file for the
+purposes of deployment and passed repeated to each juju deploy invocation.
 
 Below is an example local.yaml containing options which would be used during
-deployment of a service named myblog.
+deployment of an application named myblog.
 
     myblog:
        blog-roll: ['http://foobar.com', 'http://testing.com']
@@ -60,9 +61,9 @@ deployment of a service named myblog.
 ## Creating charms
 
 Charm authors create a config.yaml file which resides in the charm's top-level
-directory. The configuration options supported by a service are defined within
-its respective charm. juju will only allow the manipulation of options which
-were explicitly defined as supported.
+directory. The configuration options supported by an application are defined
+within its respective charm. juju will only allow the manipulation of options
+which were explicitly defined as supported.
 
 The specification of possible configuration values is intentionally minimal,
 but still evolving. Currently the charm define a list of names which they
@@ -88,11 +89,12 @@ To access these configuration options from a hook we provide the following:
 
     config-get [option name]
 
-config-get returns all the configuration options for a service as JSON data
+config-get returns all the configuration options for an application as JSON data
 when no option name is specified. If an option name is specified the value of
 that option is output according to the normal rules and obeying the --output
-and --format arguments. Hooks implicitly know the service they are executing
-for and config-get always gets values from the service of the hook.
+and --format arguments. Hooks implicitly know the application they are
+executing for and config-get always gets values from the application of the
+hook.
 
 Changes to options (see previous section) trigger the charm's config-changed
 hook. The config-changed hook is guaranteed to run after any changes are made
@@ -125,5 +127,5 @@ simply invoke the config-changed hook.
 Hooks normally attempt to provide a consistent view of the shared state of the
 system and the handling of config options within hooks (config-changed and the
 relation hooks) is no different. The first access to the configuration data of
-a service will retain a cached copy of the service options. Cached data will
-be used for the duration of the hook invocation.
+an application will retain a cached copy of the application options. Cached
+data will be used for the duration of the hook invocation.

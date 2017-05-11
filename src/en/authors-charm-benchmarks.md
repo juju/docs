@@ -1,4 +1,4 @@
-Title: Benchmarking Juju services  
+Title: Benchmarking Juju applications  
 
 # Overview
 
@@ -17,18 +17,18 @@ most out of your computing dollar.
 There are three ways to execute benchmarks in Juju and the nature of the
 benchmark will determine which method to use:
 
-1. [Integrated into a service charm](#integrated-into-a-service-charm)
-    - Use this if you bundle benchmarking as part of your service, or if the
+1. [Integrated into a charm](#integrated-into-a-charm)
+    - Use this if you bundle benchmarking as part of your application, or if the
       benchmark suite for your application runs on the same machine.
 2. [Load generation charm](#load-generation-charm)
     - Use this if your charm requires software to be run externally across a
-      network to benchmark the service.
+      network to benchmark the application.
 3. [Subordinate load generation charm](#subordinate-load-generation-charm)
     - Use this for general-purpose benchmarks applied against a variety of
-      services.
+      applications.
 
 
-## Integrated into a Service Charm
+## Integrated into a Charm
 
 With this method, we add a *benchmark-enabled* action to a charm.
 
@@ -45,7 +45,7 @@ we're exposing and what parameter(s) it takes:
 
 ```yaml
 load-gen:
-  description: Generate load against the service
+  description: Generate load against the application
   params:
     size:
       type: number
@@ -94,7 +94,7 @@ A good example of a load generation charm is the
 
 ## Subordinate load generation charm
 
-[Subordinate charms](authors-subordinate-services.html) are installed to the
+[Subordinate charms](authors-subordinate-applications.html) are installed to the
 machine they are related to. This can be useful when you have a benchmark that
 functions against multiple types of charms.
 

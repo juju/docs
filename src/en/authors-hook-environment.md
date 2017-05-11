@@ -225,19 +225,19 @@ doesn't exist or has not been set returns nothing and raises no errors.
 ### open-port
 
 `open-port` marks a port or range of ports on the local system as appropriate to
-open, if and when the service is exposed to the outside world. It accepts a
+open, if and when the application is exposed to the outside world. It accepts a
 single port or range of ports with an optional protocol, which may be `udp` or
 `tcp`, where `tcp` is the default.
 
 Examples:
 
-Open 80/tcp if and when the service is exposed:
+Open 80/tcp if and when the application is exposed:
 
 ```no-highlight
 open-port 80
 ```
 
-Open 1234/udp if and when the service is exposed:
+Open 1234/udp if and when the application is exposed:
 
 ```no-highlight
 open-port 1234/udp
@@ -249,7 +249,7 @@ Open the range 8000 to 8080:
 open 8000-8080/tcp
 ```
 
-`open-port` will not have any effect if the service is not exposed, and may have
+`open-port` will not have any effect if the application is not exposed, and may have
 a somewhat delayed effect even if it is. This operation is transactional, so 
 changes will certainly not be made unless the hook exits successfully.
 
@@ -263,7 +263,7 @@ compatibility purposes, but it doesn't produce any output.
 
 ### close-port
 
-`close-port` unmarks a local system port. If the service is not exposed, it has
+`close-port` unmarks a local system port. If the application is not exposed, it has
 no effect; otherwise the port is marked for imminent closure. It accepts the
 same flags and arguments as `open-port`.
 
@@ -572,7 +572,7 @@ be one of the following:
   - waiting (the unit itself is not in error and requires no intervention, 
     but it is not currently in service as it depends on some external factor, 
     e.g. an application to which it is related is not running)
-  - active (This unit believes it is correctly offering all the services it is
+  - active (This unit believes it is correctly offering all the software it is
     primarily installed to provide)
 
 For more extensive explanations of these statuses, and other possible status

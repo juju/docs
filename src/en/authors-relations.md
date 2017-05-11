@@ -2,9 +2,10 @@ Title: Implementing Relations in Juju charms
 
 # What is a relation?
 
-Relationships in Juju are a loosely typed definition of how services should
-interact with one another. The definition of a relationship is handled through
-an interface, and does not restrict the user to a traditional RFC approach.
+Relationships in Juju are a loosely typed definition of how applications
+should interact with one another. The definition of a relationship is handled
+through an interface, and does not restrict the user to a traditional RFC
+approach.
 
 As previously stated, relationships are 'loosely typed' - which means there is
 no de-facto specification for:
@@ -17,8 +18,8 @@ set the same settings as do all the other charms with the same role for the
 interface; and you should only expect to be able to read those settings set by
 the other charms with the counterpart role.
 
-Juju decides which services can be related based on the interface names only.
-They have to match.
+Juju decides which applications can be related based on the interface names
+only. They have to match.
 
 ## Relation Composition
 
@@ -49,10 +50,10 @@ provides:
     interface: http
 ```
 
-Put together, these files indicate that a relation can be made between services.
-The mongodb charm `provides` a relation named `database` with the `mongodb`
-interface, and the my-node-app charm `requires` a relation named `database` with
-the `mongodb` interface.
+Put together, these files indicate that a relation can be made between
+applications. The mongodb charm `provides` a relation named `database` with
+the `mongodb` interface, and the my-node-app charm `requires` a relation named
+`database` with the `mongodb` interface.
 
 The my-node-app charm also `provides` a relation named `website` with the `http`
 interface, but that's irrelevant to the mongodb charm. (But an haproxy charm
@@ -79,8 +80,8 @@ relation hooks.
 ### Peers
 
 Charms can declare relations under `peers` which causes each unit of a
-single service to respond to the other units in the same service. A peer
-relation is defined in exactly the same way as any other relation.
+single application to respond to the other units in the same application. A
+peer relation is defined in exactly the same way as any other relation.
 
 Looking at the MongoDB peering relationship, we see the charm defines
 `replica-set` as the relationship, with the interface `mongodb-replica-set`
@@ -92,9 +93,9 @@ peers:
 ```
 
 As outlined in the relationship - peering relationships are particularly useful
-when your service supports clustering. Think about the implications of services
-such as MongoDB, PostgreSQL, and ElasticSearch where clusters must exchange
-information amongst one another to perform proper clustering.
+when your application supports clustering. Think about the implications of
+applications such as MongoDB, PostgreSQL, and ElasticSearch where clusters
+must exchange information amongst one another to perform proper clustering.
 
 
 ## Configuring relations
@@ -109,7 +110,7 @@ controls the set of remote units that are reported to the unit as members of
 the relation: container-scoped relations are restricted to reporting details
 of a single principal unit to a single subordinate, and vice versa, while
 global relations consider all possible remote units.
-[Subordinate](./authors-subordinate-services.html) charms are only valid if they
+[Subordinate](./authors-subordinate-applications.html) charms are only valid if they
 have at least one `requires` relation with `container` scope.
 
 - `limit` is ignored by Juju, but if present should be a positive integer N
@@ -137,25 +138,27 @@ requires:
 ```
 
 ...to indicate that it can integrate with memcached if it's available, but that
-it can't be expected to do anything useful without a MongoDB service available.
+it can't be expected to do anything useful without a MongoDB application available.
 
 
 ## Relationship Execution in Charms
 
-When services are related, Juju decides which hooks to call within each charm
-based on this local relation name. When WordPress is related to MySQL, the
-"database-relation-joined, database-relation-changed, etc" hooks are called on
-the WordPress end. Corresponding hooks will be called on the 'mysql' charm "db-
-relation-joined, db-relation-changed" (based on the 'mysql' relation names).
+When applications are related, Juju decides which hooks to call within each
+charm based on this local relation name. When WordPress is related to MySQL,
+the "database-relation-joined, database-relation-changed, etc" hooks are
+called on the WordPress end. Corresponding hooks will be called on the 'mysql'
+charm "db- relation-joined, db-relation-changed" (based on the 'mysql'
+relation names).
 
 
 # Authoring Charm Interfaces
 
-Relations are basically a bidirectional channel of communication between services.
-They're not actually talking directly, the agents communicate via the state
-server, but it helps to think of it as direct communication between the
-services. Relation hooks can call tools such as `relation-get` and `relation-
-set` to pass information back and forth between the service endpoints.
+Relations are basically a bidirectional channel of communication between
+applications. They're not actually talking directly, the agents communicate
+via the state server, but it helps to think of it as direct communication
+between the applications. Relation hooks can call tools such as `relation-get`
+and `relation- set` to pass information back and forth between the application
+endpoints.
 
 ### Pseudo Relationship Talk
 
@@ -163,7 +166,7 @@ For example, `wordpress` and `mysql` might have a conversation like the followin
 
 ```no-highlight
 wordpress:
-  I'm here and my service name is "wordpress"
+  I'm here and my application name is "wordpress"
 mysql:
   I'm here, let me create a db for you
   your database/schema name is "wordpress"
@@ -178,7 +181,7 @@ mysql:
 ```
 
 We'll go over some more detailed versions of this, but this is the high-level
-conversation that occurs between two services when they are related in a
+conversation that occurs between two applications when they are related in a
 relation implementing the `mysql` interface.
 
 At first glance, it would appear that the _interface_ called `mysql` might be
@@ -189,7 +192,6 @@ Something like:
 interface:
   name: mysql
   variables_set:
-    - service_name
     - database_host
     - database_port
     - database_name
@@ -199,8 +201,9 @@ interface:
 ```
 
 but really, that's not complete. In fact, it's not even enough information to
-implement hooks for a new service that needs to talk to MySQL. The timing and
-sequencing are critical components of this conversation! They can't be left out.
+implement hooks for a new application that needs to talk to MySQL. The timing
+and sequencing are critical components of this conversation! They can't be
+left out.
 
 So let's dig a little deeper into this interface. Consider only the `relation-
 joined` and `relation-changed` hooks for now. The remaining `broken` and
@@ -243,7 +246,7 @@ database-relation-changed
   bounce wordpress
 # mysql
 db-relation-joined
-  relation-get service-name
+  relation-get application-name
   create db, creds
   relation-set db, creds, host/port
 database-relation-changed
