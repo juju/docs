@@ -2,13 +2,12 @@ Title: Getting started with Juju
 
 # Getting started with Juju
 
-Juju works across public clouds, private clouds, and locally with LXD based
-deployment and operating of applications. Juju works through a controller that
-will process all of the events that occur. These instructions will walk you
-through using the hosted Juju as a Service (JAAS) controller and requires you
-to have public cloud credentials ready. If you'd prefer to test it out
-locally, see the [Getting started with Juju and LXD][tut-lxd] guide.
-
+Juju works across public clouds, private clouds, and locally with LXD-based
+deployments. Juju works through a controller that will process all of the
+events that occur. These instructions will walk you through using the hosted
+Juju as a Service (JAAS) controller and requires you to have public cloud
+credentials ready. If you'd prefer to test it out locally, see the [Getting
+started with Juju and LXD][tut-lxd] guide.
 
 JAAS supports deploying, configuring, and operating your applications on the
 largest public clouds: [Amazon Web Services][aws], [Google Compute
@@ -71,8 +70,8 @@ Press the green Start building button to get started...
 
 
 You build your [model][models] by adding and relating applications from the
-Charm Store. Press the green '+' symbol in the middle of the UI to start
-finding applications in the Charm Store.
+[Charm Store][charmstore]. Press the green '+' symbol in the middle of the UI
+to start finding applications in the Charm Store.
 
 You will see a list of available charms and bundles with a description of
 each. Select a [charm][charms] or [bundle][bundles] to learn more about it.
@@ -80,7 +79,7 @@ each. Select a [charm][charms] or [bundle][bundles] to learn more about it.
 When you have selected a charm or bundle it can be added to your model by
 pressing the 'Add to model' button...
 
-Hint: see how easy JAAS makes complex deployments, try the [Canonical
+Hint: to see how easy JAAS makes complex deployments, try the [Canonical
 Kubernetes bundle][k8]
 
 <table width="500" border-width="0px" cellpadding="5">
@@ -114,9 +113,11 @@ We recommend that you use each public cloud's identity and access management
 (IAM) tool to generate a new set of credentials exclusively for use with JAAS.
 
 See [Cloud credentials][credentials] for more information, along with the
-following links for your specific cloud.
+following links for your specific cloud:
 
-[Amazon Web Services][aws-creds] [Microsoft Azure][azure-creds] [Google Compute Engine][gce-creds]
+- [Amazon Web Services][aws-creds]
+- [Microsoft Azure][azure-creds]
+- [Google Compute Engine][gce-creds].
 
 ## Deploy
 
@@ -149,8 +150,8 @@ When complete, the application icons will turn grey.
 
 
 As the applications become operational, the colours in the model view will
-change to grey to indicate an idle state and the pending notices in the
-inspector on the left will disappear, to show that everything is working as
+change to grey to indicate an idle state, and the pending notices in the
+inspector on the left will disappear to show that everything is working as
 expected.
 
 !!! Tip: You can check and manage existing models through the JAAS GUI by
@@ -269,7 +270,7 @@ You view the list of your models on the controller with the command:
 juju models
 ```
 
-You can switch focus between your models at any time.
+You can switch focus between your models at any time:
 
 ```bash
 juju switch mymodel
@@ -292,8 +293,8 @@ the running resources back to the cloud.
 Congratulations! You have now deployed a complex workload in the cloud without
 hours of looking up config options or wrestling with install scripts!
 
-To discover more about what Juju can do for you, we suggest some of the
-following pages of documentation:
+To discover more about what Juju can do for you, we suggest taking a look at
+some of the following pages of documentation:
 
  - [Creating your own cloud controller][tut-google]
  - [Creating models locally with LXD][tut-lxd]
@@ -325,3 +326,4 @@ following pages of documentation:
 [aws-creds]: ./help-aws.html#credentials
 [azure-creds]: ./help-azure.html#credentials
 [gce-creds]: ./help-google.html#download-credentials
+[charmstore]: https://jujucharms.com/store
