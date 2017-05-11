@@ -1,7 +1,7 @@
-Title: Ensuring High Availability (HA) for deployed services
+Title: Ensuring High Availability (HA) for deployed applications
 TODO: Needs a rewrite
 
-# Service High Availability (HA)
+# Applications High Availability (HA)
 
 
 ## Distribution groups
