@@ -9,7 +9,7 @@ TODO: Check accuracy of key table
 # Configuring models
 
 A model influences all the machines that Juju creates within it and, in turn, the
-services that get deployed onto those machines. It is therefore a very powerful
+applications that get deployed onto those machines. It is therefore a very powerful
 feature to be able to configure at the model level.
 
 Model configuration consists of a collection of keys and their respective
@@ -127,7 +127,7 @@ transmit-vendor-metrics      | bool   | true     |                          | Se
 
 The APT packaging system is used to install and upgrade software on machines
 provisioned in the model, and many charms also use APT to install software for
-the services they deploy. It is possible to set a specific mirror for the APT
+the applications they deploy. It is possible to set a specific mirror for the APT
 packages to use, by setting 'apt-mirror':
 
 ```bash
@@ -149,8 +149,8 @@ to restore the default behaviour in a running model.
 
 When Juju provisions a machine, its default behaviour is to upgrade existing
 packages to their latest version. If your OS images are fresh and/or your
-deployed services do not require the latest package versions, you can disable
-upgrades in order to provision machines faster.
+deployed applications do not require the latest package versions, you can
+disable upgrades in order to provision machines faster.
 
 Two Boolean configuration options are available to disable APT updates and
 upgrades: `enable-os-refresh-update` (apt-get update) and `enable-os-upgrade`
@@ -234,8 +234,8 @@ From version 2.0, Juju will automatically retry hooks periodically - there is
 an exponential backoff, so hooks will be retried after 5, 10, 20, 40 seconds up
 to a period of 5 minutes, and then every 5 minutes. The logic behind this is
 that some hook errors are caused by timing issues or the temporary 
-unavailability of other services - automatic retry enables the Juju model to 
-heal itself without troubling the user.
+unavailability of other applications - automatic retry enables the Juju model
+to heal itself without troubling the user.
 
 However, in some circumstances, such as debugging charms, this behaviour can be
 distracting and unwelcome. For this reason, it is possible to set the 

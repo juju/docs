@@ -79,8 +79,9 @@ combo load -->
 <meta name="twitter:creator" content="@ubuntucloud">
 <meta name="twitter:domain" content="jujucharms.com">
 <meta name="twitter:title" content="Documentation - Juju">
-<meta name="twitter:description" content="Learn about the using Juju through the Juju GUI or CLI and see how it makes creating, configuring, deploying and managing services in the cloud simple.">
-<meta name="twitter:image" content="http://jujucharms.com/static/img/juju-twitter.png">
+<meta name="twitter:description" content="Learn about the using Juju through the Juju GUI or CLI and see how it makes creating, configuring, deploying and operating software in the cloud simple.">
+<meta name="twitter:image" content="https://jujucharms.com/static/img/juju-twitter.png">
+
 
 
 </head>
@@ -275,3 +276,74 @@ combo load -->
     </div>
 </footer>
 </div>
+
+<script>
+    var isOperaMini = (navigator.userAgent.indexOf('Opera Mini') > -1);
+    if(isOperaMini) {
+        var root = document.documentElement;
+        root.className += " opera-mini";
+    }
+</script>
+
+<script>
+YUI().use('storefront-cookie', 'storefront-utils',
+          function (Y) {
+    Y.on('domready', function() {
+        var inSession = false;
+        var cookie = new Y.storefront.CookiePolicy();
+        var utils = Y.storefront.utils;
+        var notification = Y.one('.login-notification');
+        var loginLink = Y.one('.js-menu-login');
+        if (loginLink && notification) {
+          loginLink.on('mouseenter', function () {
+            notification.addClass('is-shown');
+          });
+          loginLink.on('mouseleave', function () {
+            notification.removeClass('is-shown');
+          });
+        }
+        cookie.render();
+        utils.svgFallback(Y.one('#main-content'));
+        utils.setupSearch();
+    });
+});
+</script>
+
+
+<script type="text/template" id="cookie-warning-template">
+    <div class="cookie-policy">
+        <div class="inner-wrapper">
+            <a href="?cp=close" class="link-cta">Close</a>
+            <p>We use cookies to improve your experience. By your continued use of this site you accept such use. To change your settings please <a href="http://www.ubuntu.com/legal/terms-and-policies/privacy-policy#cookies">see our policy</a>.</p>
+        </div>
+    </div>
+</script>
+
+
+<script>
+YUI().use('storefront-docs-menu', 'storefront-utils', function(Y) {
+    // Y.storefront.docsMenu.setup('.jujudocs-menu', 'ul > .section', 'getting-started');
+    Y.storefront.utils.detailsFallback();
+});
+
+</script>
+
+
+<script type="application/javascript">
+  YUI().use('node', 'storefront-navigation', function (Y) {
+    Y.storefront.mobileMenu();
+  });
+</script>
+
+<!-- {version: ['1.0.4', '']} -->
+
+
+
+<script type="text/javascript" id="">(function(){function b(){!1===c&&(c=!0,Munchkin.init("066-EOV-335"))}var c=!1,a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="//munchkin.marketo.net/munchkin.js";a.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||b()};a.onload=b;document.getElementsByTagName("head")[0].appendChild(a)})();</script>
+
+<script type="text/javascript" id="">setTimeout(function(){var a=document.createElement("script"),b=document.getElementsByTagName("script")[0];a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0011/8875.js?"+Math.floor((new Date).getTime()/36E5);a.async=!0;a.type="text/javascript";b.parentNode.insertBefore(a,b)},1);</script>
+
+<script type="text/javascript" id="">window.heap=window.heap||[];
+heap.load=function(e,d){window.heap.appid=e;window.heap.config=d=d||{};var a=d.forceSSL||"https:"===document.location.protocol,b=document.createElement("script");b.type="text/javascript";b.async=!0;b.src=(a?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);for(var b=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},a=["clearEventProperties","identify","setEventProperties",
+"track","unsetEventProperty"],c=0;c<a.length;c++)heap[a[c]]=b(a[c])};heap.load("3280028620");</script>
+</body></html>

@@ -162,7 +162,8 @@
                 <li><a href="authors-hook-errors.html">Hook Errors</a></li>
                 <li><a href="authors-hook-debug.html">Hook Debugging</a></li>
                 <li><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
-                <li><a href="authors-subordinate-services.html">Subordinate services</a></li>
+                <li><a
+                    href="authors-subordinate-applications.html">Subordinate applications</a></li>
                 <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
                 <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
             </ul>

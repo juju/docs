@@ -33,12 +33,12 @@ instances evenly across subnets and zones.
 As an example, consider a model divided into three segments with
 distinct security requirements:
 
-- The "dmz" space for publicly-accessible services (e.g. HAProxy) providing
+- The "dmz" space for publicly-accessible applications (e.g. HAProxy) providing
   access to the CMS application behind it.
 - The "cms" space for content-management applications accessible via the "dmz"
   space only.
-- The "database" space for backend database services, which should be accessible
-  only by the applications.
+- The "database" space for backend database applications, which should be
+  accessible only by the applications.
 
 HAProxy is deployed inside the "dmz" space, it is accessible from the Internet
 and proxies HTTP requests to one or more Joomla units in the "cms" space.
@@ -173,7 +173,7 @@ juju add-subnet 172.31.100.0/24 cms
 juju add-subnet 172.31.110.0/24 cms
 ```
 
-Now we can deploy the services into their respective spaces,
+Now we can deploy the applications into their respective spaces,
 relate them and expose haproxy:
 
 ```bash
