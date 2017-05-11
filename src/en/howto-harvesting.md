@@ -2,17 +2,16 @@ Title: Juju and machine utilization
 
 # Juju and Utilized Machines
 
-Juju can manage the entire life cycle of a service. When deploying a
-Charm, Juju will start and provision machines. Likewise, when
-expanding capacity for services, Juju can automatically utilize your
-provider's elastic computing capabilities and add more machines with
-the services provisioned.
+Juju can manage the entire life cycle of an application. When deploying a
+Charm, Juju will start and provision machines. Likewise, when expanding
+capacity for applications, Juju can automatically utilize your provider's
+elastic computing capabilities and add more machines with the applications
+provisioned.
 
-Should you ever need to destroy machines or services, Juju can help
-with that too. Juju keeps a model of what it thinks the environment
-looks like, and based on that model, can harvest machines which it
-deems are no longer required. This can help keep your costs low, and
-keep you out of web consoles.
+Should you ever need to destroy machines or applications, Juju can help with
+that too. Juju keeps a model of what it thinks the environment looks like, and
+based on that model, can harvest machines which it deems are no longer
+required. This can help keep your costs low, and keep you out of web consoles.
 
 So how does harvesting in Juju work?
 
