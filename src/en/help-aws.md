@@ -104,5 +104,5 @@ Features supported by Juju-owned instances running within AWS:
 
 [aws]: http://console.aws.amazon.com
 [constraints]:./reference-constraints.html
-[jaas]: ./getting-started-jaas.html "Getting Started with Juju as a Service"
+[jaas]: ./getting-started.html "Getting Started with Juju as a Service"
 [tagging]: ./config-tagging.html

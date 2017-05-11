@@ -3,7 +3,7 @@ Title: Juju support for CentOS7
 # Juju and CentOS
 Juju 1.24.0 has initial support for CentOS as a deployment OS (the Juju client
 software is already supported on CentOS - see the 
-[Releases](./reference-releases.html) page). This is experimental and has a 
+[Install Documentation](./reference-install.html) page). This is experimental and has a
 number of known issues. However, most of thefunctionality of Juju is there and
 ready to be used and tested. 
 CentOS should be deployable on any cloud that supports `cloud-init` in it's
