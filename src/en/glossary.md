@@ -2,17 +2,18 @@ Title: Glossary
 
 # Glossary of terms
 
-**Bootstrap** - Initialize a Juju environment so that services may be deployed.
-Bootstrapping an environment will provision a new machine in the environment
-and run the Juju controller (also called the bootstrap node).
+**Bootstrap** - Initialize a Juju environment so that applications may be
+deployed.  Bootstrapping an environment will provision a new machine in the
+environment and run the Juju controller (also called the bootstrap node).
 
 **Bundle** - A set of Juju charms, their configuration, and corresponding relations
 that can be deployed in a single step. Bundles are defined in the YAML format.
 
-**Charm** - The definition of a service, including its metadata, dependencies
-with other services, required packages, and application management logic. It is
-the layer that integrates an external application component like PostgreSQL or
-WordPress, traditionally available via APT, into Juju.
+**Charm** - The definition of an application, including its metadata,
+dependencies with other applications, required packages, and application
+management logic. It is the layer that integrates an external application
+component like PostgreSQL or WordPress, traditionally available via APT,
+into Juju.
 
 **Charm URL** - A resource locator for a charm, with the following format and
 restrictions:
@@ -37,9 +38,9 @@ restrictions:
   - `revision`, if specified, points to a specific revision of the charm
   pointed to by the rest of the URL. It must be a non-negative integer.
 
-**Endpoint** - The combination of a service name and a relation name.
+**Endpoint** - The combination of a application name and a relation name.
 
-**Environment** - A configured location where services can be deployed. An
+**Environment** - A configured location where applications can be deployed. An
 environment typically has a name, which can usually be omitted when there's a
 single environment configured, or when a default is explicitly defined.
 Depending on the type of environment, it may have to be bootstrapped before
@@ -48,58 +49,58 @@ configuration is defined in the [environments.yaml](getting-started.html#configu
 file.
 
 **Machine Agent** - Software which runs inside each machine that is part of an
-environment, and is able to handle the needs of deploying and managing service
-units in this machine.
+environment, and is able to handle the needs of deploying and managing
+application units in this machine.
 
 **Provisioning Agent** - Software responsible for automatically allocating and
 terminating machines in an environment, as necessary for the requested
 configuration.
 
-**Relation** - The way in which Juju enables services to communicate with each
-other, and the way in which the topology of services is assembled. The charm
-defines which relations it offers to other services (provides), and what kind
-of relations it can make with other services (requires).
+**Relation** - The way in which Juju enables applications to communicate with each
+other, and the way in which the topology of applications is assembled. The charm
+defines which relations it offers to other applications (provides), and what kind
+of relations it can make with other applications (requires).
 
 In many cases, the establishment of a relation will result into an actual TCP
-connection being created between the service units, but that's not necessarily
-the case. Relations may also be established to inform services of configuration
-parameters, to request monitoring information, or any other details which the
-charm author has chosen to make available.
+connection being created between the application units, but that's not
+necessarily the case. Relations may also be established to inform applications
+of configuration parameters, to request monitoring information, or any other
+details which the charm author has chosen to make available.
 
 **Repository** - A location where multiple charms are stored. Repositories may
 be as simple as a directory structure on a local disk, or as complex as a rich
 smart server supporting remote searching and so on.
 
-**Service** - Juju operates in terms of services. A Juju service is any
-application (or set of applications) that is integrated into the framework as
-an individual component which should generally be joined with other components
-to perform a more complex task.
+**Application** - Juju operates in terms of applications. A Juju application
+is any application (or set of applications) that is integrated into the
+framework as an individual component which should generally be joined with
+other components to perform a more complex task.
 
-As an example, WordPress could be deployed as a service and, to perform its
-tasks properly, might communicate with a database service and a load balancer
-service.
+As an example, WordPress could be deployed as an application and, to perform
+its tasks properly, might communicate with a database and load
+balancer applications.
 
-**Service Configuration** - There are many different settings in a Juju
-deployment, but the term `Service Configuration` refers to the settings which a
-user can define to customize the behaviour of a service.
+**Application Configuration** - There are many different settings in a Juju
+deployment, but the term `Application Configuration` refers to the settings which a
+user can define to customize the behaviour of an application.
 
-The behaviour of a service when its service configuration changes is entirely
-defined by its charm.
+The behaviour of an application when its application configuration changes is
+entirely defined by its charm.
 
-**Service Unit** - A running instance of a given Juju service. Simple services
-may be deployed with a single service unit, but it is possible for an
-individual service to have multiple service units running in independent
-machines. All service units for a given service will share the same charm, the
-same relations, and the same user-provided configuration.
+**Application Unit** - A running instance of a given Juju Application. Simple
+applications may be deployed with a single unit, but it is possible for an
+individual application to have multiple units running in independent machines.
+All units for a given application will share the same charm, the same
+relations, and the same user-provided configuration.
 
-For instance, one may deploy a single MongoDB service, and specify that it
+For instance, one may deploy a single MongoDB application, and specify that it
 should run 3 units, so that the replica set is resilient to failures.
 Internally, even though the replica set shares the same user-provided
 configuration, each unit may be performing different roles within the replica
 set, as defined by the charm.
 
-**Service Unit Agent** - Software which manages the entire lifecycle of a
-single service unit.
+**Application Unit Agent** - Software which manages the entire lifecycle of a
+single application unit.
 
 **Subnet** - A broadcast address range identified by a CIDR like 10.1.2.0/24,
 or 2001:db8::/32.

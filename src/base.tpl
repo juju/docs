@@ -79,7 +79,7 @@ combo load -->
 <meta name="twitter:creator" content="@ubuntucloud">
 <meta name="twitter:domain" content="jujucharms.com">
 <meta name="twitter:title" content="Documentation - Juju">
-<meta name="twitter:description" content="Learn about the using Juju through the Juju GUI or CLI and see how it makes creating, configuring, deploying and managing services in the cloud simple.">
+<meta name="twitter:description" content="Learn about the using Juju through the Juju GUI or CLI and see how it makes creating, configuring, deploying and operating software in the cloud simple.">
 <meta name="twitter:image" content="https://jujucharms.com/static/img/juju-twitter.png">
 
 
