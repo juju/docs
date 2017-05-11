@@ -113,7 +113,7 @@ We recommend that you use each public cloud's identity and access management
 (IAM) tool to generate a new set of credentials exclusively for use with JAAS.
 
 See [Cloud credentials][credentials] for more information, along with the
-following links for your specific cloud.
+following links for your specific cloud:
 
 - [Amazon Web Services][aws-creds]
 - [Microsoft Azure][azure-creds]
