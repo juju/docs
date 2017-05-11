@@ -2,16 +2,17 @@ Title: Implicit relations
 
 # Implicit relations
 
-Implicit relations allow for interested services to gather lifecycle-oriented
-events and data about other services without expecting or requiring any
-modifications on the part of the author of the other service's charm.
+Implicit relations allow for interested applications to gather
+lifecycle-oriented events and data about other applications without expecting or
+requiring any modifications on the part of the author of the other application's
+charm.
 
 Implicit relationships are named in the reserved juju-* namespace. Both the
 relation name and interface names provided by Juju are prefixed with `juju-`.
 Charms attempting to provide new relationships in this namespace will trigger an
 error.
 
-Juju currently provides one implicit relationship to all deployed services:
+Juju currently provides one implicit relationship to all deployed applications:
 
 `juju-info`, if specified would look like:
 
@@ -30,7 +31,7 @@ remote unit in a relation through its `juju-info` relation
 
 ## Relationship resolution
 
-`rsyslog` is a [_subordinate charm_](./authors-subordinate-services.html) and
+`rsyslog` is a [_subordinate charm_](./authors-subordinate-applications.html) and
 requires a valid `scope: container` relationship in order to deploy. It can take
 advantage of optional support from the principal charm but in the event that the
 principal charm doesn't provide this support it will still require a
