@@ -75,7 +75,7 @@ background.
 
 As we said at the beginning, we are going to scale up this application to cope 
 with a lot of traffic. To do that we will use a common TCP/HTTP load balancing 
-service, HAProxy, so we should also deploy a charm for that now:
+application, HAProxy, so we should also deploy a charm for that now:
 
 ```bash
 juju deploy haproxy
@@ -134,8 +134,8 @@ The other relation we need to add is between MediaWiki and the HAProxy
 application.
 
 HAProxy will provide loadbalancing for traffic to MediaWiki, but it 
-needs to know where the various MediaWiki services are on the the network. At 
-this stage there is only one, but that will change shortly.
+needs to know where the various MediaWiki applications are on the the network.
+At this stage there is only one, but that will change shortly.
 
 ```bash
 juju add-relation haproxy mediawiki
@@ -148,7 +148,7 @@ mediawiki site is 'live'.
 
 By default, Juju is very secure. Juju itself, and the applications it deploys 
 can see the other applications in your cloud, but nothing and nobody else can. 
-This isn't much use for a web service we want users to connect to, but Juju can
+This isn't much use for a web application we want users to connect to, but Juju can
 easily make these applications public. With its understanding of the underlying 
 cloud, Juju can make whatever firewall changes are necessary to expose these
 applications to the wider world:

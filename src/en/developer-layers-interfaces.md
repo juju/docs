@@ -4,12 +4,12 @@ Title: Interface layers
 
 Interface layers are perhaps the most misunderstood type of layer, and are
 responsible for the communication that transpires over a relation between two
-services. This type of layer encapsulates a single “interface protocol” and is
-generally written and maintained by the author of the primary charm that
-provides that interface. However, it does cover both sides (provides and
-requires) of the relation and turns the two-way key-value store that are Juju
-relations under-the-hood into a full-fledged API for interacting with charms
-supporting that interface.
+applications. This type of layer encapsulates a single “interface protocol”
+and is generally written and maintained by the author of the primary charm
+that provides that interface. However, it does cover both sides (provides and
+requires) of the relation and turns the two-way key-value store that
+are Juju relations under-the-hood into a full-fledged API for interacting with
+charms supporting that interface.
 
 It is important to note that interface layers **do not** actually implement
 either side of the relation. Instead, they are solely responsible for the
@@ -24,7 +24,7 @@ API.
 
 When writing an interface, there is a small amount of pre-planning into what
 that interface should look like in terms of the communication between
-services/unit(s) participating in the relationship.
+applications/unit(s) participating in the relationship.
 
 Common questions to answer:
 
@@ -32,8 +32,8 @@ Common questions to answer:
 
 - What data is being sent on the wire?
 
-- Are we sending data that is essentially static to any service connecting over
-this interface?
+- Are we sending data that is essentially static to any application connecting
+over this interface?
 
 - How should this data be made available to the requirer?
 
@@ -46,16 +46,17 @@ this interface?
 
 When writing an interface, there is also the concept of a communication scope.
 There are three distinct flavors of scoping for a conversation. At times there
-will be fairly static information being transmitted between services - and this
+will be fairly static information being transmitted between applications - and this
 is a prime candidate for a [GLOBAL](#global) scope. If the information varies
-from service to service but remains the same for each unit of the service, you
-will want to investigate [SERVICE](#service) level conversations. The final, and
-default communication scope is [UNIT](#unit) level conversations, where each
-unit in a service group gets its own conversation with the provider.
+from app to app but remains the same for each unit of the application, you
+will want to investigate [SERVICE](#service) level conversations. The
+final, and default communication scope is [UNIT](#unit) level conversations,
+where each unit in a application group gets its own conversation with the
+provider.
 
 #### GLOBAL
 
-All connected services and units for this relation will share a single
+All connected applications and units for this relation will share a single
 conversation. The same data will be broadcast to every remote unit, and
 retrieved data will be aggregated across all remote units and is expected to
 either eventually agree or be set by a single leader.
@@ -65,12 +66,12 @@ class MyRelationClient(RelationBase):
   scope = Scopes.GLOBAL
 ```
 
-#### Service
+#### Application
 
-Each connected service for this relation will have its own conversation. The
-same data will be broadcast to every unit of each service’s conversation, and
-data from all units of each service will be aggregated and is expected to either
-eventually agree or be set by a single leader.
+Each connected application for this relation will have its own conversation. The
+same data will be broadcast to every unit of each application’s conversation, and
+data from all units of each application will be aggregated and is expected to
+either eventually agree or be set by a single leader.
 
 ```python
 class MyRelationClient(RelationBase):
@@ -82,7 +83,7 @@ class MyRelationClient(RelationBase):
 Each connected unit for this relation will have its own conversation. This is
 the default scope. Each unit’s data will be retrieved individually, but note
 that due to how Juju works, the same data is still broadcast to all units of a
-single service.
+single application.
 
 ```python
 class MyRelationClient(RelationBase):
