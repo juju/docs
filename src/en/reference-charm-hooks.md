@@ -43,9 +43,9 @@ once.
 `leader-elected` is run at least once to signify that Juju decided this unit is
 the leader. Authors can use this hook to take action if their protocols for
 leadership, consensus, raft, or quorum require one unit to assert leadership.
-If the election process is done internally to the service, other code should be
-used to signal the leader to Juju. For more information read the [charm
-leadership document](./authors-charm-leadership.html).
+If the election process is done internally to the application, other code
+should be used to signal the leader to Juju. For more information read the
+[charm leadership document](./authors-charm-leadership.html).
 
 ### leader-settings-changed
 
