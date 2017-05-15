@@ -87,22 +87,22 @@ selecting the 'Images' tab:
 To add your Oracle cloud to Juju, type `juju add-cloud`. 
 
 The interactive `add-cloud` process will start by first asking for the cloud
-type. Enter `oracle-compute`:
+type. Enter `oracle`:
 
 ```no-highlight
 Cloud Types
   maas
   manual
   openstack
-  oracle-compute
+  oracle
   vsphere
 
-Select cloud type: oracle-compute
+Select cloud type: oracle
 ```
 You will then be asked to name your cloud, followed by an endpoint:
 
 ```no-highlight
-Enter a name for your oracle-compute cloud: myoracle
+Enter a name for your oracle cloud: myoracle
 Enter the API endpoint url for the cloud: https://compute.uscom-central-1.oraclecloud.com/
 Cloud "myoracle" successfully added
 ```
