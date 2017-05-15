@@ -24,17 +24,18 @@ juju clouds
 This will return a list like this:
   
 ```no-highlight
-Cloud        Regions  Default        Type        Description
-aws               11  us-east-1      ec2         Amazon Web Services
-aws-china          1  cn-north-1     ec2         Amazon China
-aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
-azure             18  centralus      azure       Microsoft Azure
-azure-china        2  chinaeast      azure       Microsoft Azure China
-cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
-google             4  us-east1       gce         Google Cloud Platform
-joyent             6  eu-ams-1       joyent      Joyent Cloud
-rackspace          6  dfw            rackspace   Rackspace Cloud
-localhost          1  localhost      lxd         LXD Container Hypervisor
+Cloud        Regions  Default          Type            Description
+aws               14  us-east-1        ec2             Amazon Web Services
+aws-china          1  cn-north-1       ec2             Amazon China
+aws-gov            1  us-gov-west-1    ec2             Amazon (USA Government)
+azure             24  centralus        azure           Microsoft Azure
+azure-china        2  chinaeast        azure           Microsoft Azure China
+cloudsigma         5  hnl              cloudsigma      CloudSigma Cloud
+google             7  us-east1         gce             Google Cloud Platform
+joyent             6  eu-ams-1         joyent          Joyent Cloud
+oracle             5  uscom-central-1  oracle
+rackspace          6  dfw              rackspace       Rackspace Cloud
+localhost          1  localhost        lxd             LXD Container Hypervisor
 ```
 
 This lists the cloud name (which you will use to specify the cloud you want to 
@@ -53,9 +54,12 @@ This will return a list like this:
   
 ```no-highlight
 us-east-1
+us-east-2
 us-west-1
 us-west-2
+ca-central-1
 eu-west-1
+eu-west-2
 eu-central-1
 ap-south-1
 ap-southeast-1
@@ -112,7 +116,7 @@ clouds: MAAS, LXD and Manual.
   resource. There is more information on MAAS at the [MAAS website][maas-site], 
   and detailed [instructions on using MAAS with Juju here][juju-maas].
   
-  - **Manual:** There may be occassions where you can bring up machines for Juju
+  - **Manual:** There may be occasions where you can bring up machines for Juju
   to use which aren't part of a recognised public cloud or do not support other
   protocols used by Juju. As long as you have SSH access to these machines, you
   can get part of the Juju magic and deploy applications. See 
@@ -126,9 +130,9 @@ use is not on Juju's list of known clouds. Juju usually only needs a small
 amount of information to be able to use these clouds too, so the fastest way to
 get them recognised is to use the `add-cloud` command in its interactive mode.
 This will ask a series of questions based on the type of cloud you are trying
-to add. Currently Juju can add MAAS, OpenStack, vSphere and manual clouds in this 
-way - each is detailed below (click on the triangle or name to expand the 
-relevant section). You can also generate a YAML file
+to add. Currently Juju can add MAAS, OpenStack, Oracle, vSphere and manual
+clouds in this way - each is detailed below (click on the triangle or name to
+expand the relevant section). You can also generate a YAML file
 
 ^# MAAS
 
@@ -141,6 +145,7 @@ relevant section). You can also generate a YAML file
         maas
         manual
         openstack
+        oracle-compute
         vsphere
 
        Select cloud type: maas
@@ -166,6 +171,7 @@ relevant section). You can also generate a YAML file
         maas
         manual
         openstack
+        oracle-compute
         vsphere
 
        Select cloud type: maas
@@ -192,6 +198,7 @@ relevant section). You can also generate a YAML file
         maas
         manual
         openstack
+        oracle-compute
         vsphere
        
        Select cloud type: openstack
@@ -220,7 +227,36 @@ relevant section). You can also generate a YAML file
 
    Once completed, you should also remember to add a credential for this cloud before 
    bootstrapping. See the [documentation on credentials][credentials] for more help.
-   
+
+^# Oracle
+
+   To add a cloud based on Oracle's Compute, you first need to
+   [import one or more Ubuntu images][oracleimages] from the Oracle dashboard. Juju then needs to
+   know how to connect to Oracle and what to call the cloud.   :
+       
+       juju add-cloud
+
+       Cloud Types
+        maas
+        manual
+        openstack
+        oracle-compute
+        vsphere
+       
+       Select cloud type: oracle-compute
+       Enter a name for your vsphere cloud: oc
+       
+       Enter the API endpoint url for the cloud: https://api-z41.compute.em3.oraclecloud.com/
+
+       Cloud "oracle" successfully added
+       You may bootstrap with 'juju bootstrap oracle'
+
+   The `endpoint address` in this case is the REST endpoint of the Compute
+   domain. 
+
+   Once completed, you should also remember to add a credential for this cloud before 
+   bootstrapping. See the [documentation on credentials][credentials] for more help.
+
 ^# vSphere
 
    To add a cloud based on VMWare's vSphere, Juju needs to know how to connect to it
@@ -231,6 +267,7 @@ relevant section). You can also generate a YAML file
          maas
          manual
          openstack
+         oracle-compute
          vsphere
        
        Select cloud type: vsphere
@@ -249,7 +286,7 @@ relevant section). You can also generate a YAML file
        Cloud "vs1" successfully added
        You may bootstrap with 'juju bootstrap vs1'
 
-   The `èndpoint address` in this case is the IP address of the vSphere server. In this case
+   The `endpoint address` in this case is the IP address of the vSphere server. In this case
    we have also specified multiple regions (data centres in vSphere terminology).
 
    Once completed, you should also remember to add a credential for this cloud before 
@@ -300,18 +337,21 @@ Having added a new cloud, if you re-run the `juju clouds` command, you
 should see something like this:
 
 ```no-highlight
-Cloud        Regions  Default        Type        Description
-aws               11  us-east-1      ec2         Amazon Web Services
-aws-china          1  cn-north-1     ec2         Amazon China
-aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
-azure             18  centralus      azure       Microsoft Azure
-azure-china        2  chinaeast      azure       Microsoft Azure China
-cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
-google             4  us-east1       gce         Google Cloud Platform
-joyent             6  eu-ams-1       joyent      Joyent Cloud
-rackspace          6  dfw            rackspace   Rackspace Cloud
-localhost          1  localhost      lxd         LXD Container Hypervisor
-mystack            1  dev1           openstack   Openstack Cloud
+Cloud        Regions  Default          Type            Description
+aws               14  us-east-1        ec2             Amazon Web Services
+aws-china          1  cn-north-1       ec2             Amazon China
+aws-gov            1  us-gov-west-1    ec2             Amazon (USA Government)
+azure             24  centralus        azure           Microsoft Azure
+azure-china        2  chinaeast        azure           Microsoft Azure China
+cloudsigma         5  hnl              cloudsigma      CloudSigma Cloud
+google             7  us-east1         gce             Google Cloud Platform
+joyent             6  eu-ams-1         joyent          Joyent Cloud
+oracle             5  uscom-central-1  oracle
+rackspace          6  dfw              rackspace       Rackspace Cloud
+localhost          1  localhost        lxd             LXD Container Hypervisor
+oc1                0                   oracle-compute  Oracle Compute Cloud Service
+devstack           1  dev1             openstack       Openstack Cloud
+vs1                1  dc1              vsphere
 ```
 [credentials]: ./credentials.html "Juju documentation > Credentials"
 [LXD-site]: http://www.ubuntu.com/cloud/lxd "LXD"
@@ -320,3 +360,4 @@ mystack            1  dev1           openstack   Openstack Cloud
 [juju-maas]: ./clouds-maas.html "Juju documentation > MAAS"
 [juju-manual]: ./clouds-manual.html "Juju documentation > Manual cloud"
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
+[oracleimages]: ./help-oracle.html#images

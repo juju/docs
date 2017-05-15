@@ -1,6 +1,6 @@
-Title: Using the Oracle Compute Provider
+Title: Using the Oracle Provider
 
-# Using the Oracle Compute Provider
+# Using the Oracle Provider
 
 Juju has built-in support for [Oracle's Compute service][compute]. However, the
 following few steps are required before Juju can bootstrap Oracle's Compute
@@ -18,9 +18,9 @@ We'll step through each of these requirements below, before using Juju to
 launch a test deployment on Oracle's Compute. 
 
 !!! Note:
-	Oracle Compute support is currently in [Juju 2.2 beta3][jujubeta] and
-        is experimental. Both the Juju and Oracle teams are working to improve
-        the user experience.
+	Oracle support is currently in the latest [Juju 2.2 beta][jujubeta]
+	release and is experimental. Both the Juju and Oracle teams are working
+	to improve the user experience.
 
 ## Images
 
@@ -103,8 +103,7 @@ You will then be asked to name your cloud, followed by an endpoint:
 
 ```no-highlight
 Enter a name for your oracle-compute cloud: myoracle
-Enter the API endpoint url for the cloud:
-https://compute.uscom-central-1.oraclecloud.com/
+Enter the API endpoint url for the cloud: https://compute.uscom-central-1.oraclecloud.com/
 Cloud "myoracle" successfully added
 ```
 
@@ -151,7 +150,7 @@ You will be asked for each detail in turn.
 Enter credential name: mynewcredential
 Using auth-type "userpass".
 Enter username: javier
-Enter password:
+Enter password: ********
 Enter identity-domain: a476989
 Credentials added for cloud myoracle.
 ```
