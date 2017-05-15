@@ -230,17 +230,18 @@ expand the relevant section). You can also generate a YAML file
 
 ^# Oracle
 
-   To add a cloud based on Oracle's Compute, you will first need to
-   [associate Ubuntu images][oracleimages] within the Oracle dashboard. Juju then needs to
+   To add a cloud based on Oracle's Compute, you first need to
+   [import one or more Ubuntu images][oracleimages] from the Oracle dashboard. Juju then needs to
    know how to connect to Oracle and what to call the cloud.   :
        
        juju add-cloud
+
        Cloud Types
-       maas
-       manual
-       openstack
-       oracle-compute
-       vsphere
+        maas
+        manual
+        openstack
+        oracle-compute
+        vsphere
        
        Select cloud type: oracle-compute
        Enter a name for your vsphere cloud: oc
@@ -359,4 +360,4 @@ vs1                1  dc1              vsphere
 [juju-maas]: ./clouds-maas.html "Juju documentation > MAAS"
 [juju-manual]: ./clouds-manual.html "Juju documentation > Manual cloud"
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[oracleimages]: ./help-oracle#images
+[oracleimages]: ./help-oracle.html#images
