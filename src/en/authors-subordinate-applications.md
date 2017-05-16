@@ -162,9 +162,3 @@ only between the principal unit and the subordinate unit . A subordinate unit
 may still have standard relations established with any unit in its environment
 as usual.
 
-## Caveats
-
-The current model of subordinates doesn't include support for removing
-subordinate units from their principal service apart from removing the principal
-service itself. This limitation stems from the current policy around service
-shutdown and the invocation of stop hooks.
