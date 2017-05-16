@@ -70,8 +70,8 @@ creation.
 Enter a name for your user and set `Programmatic access` as the AWS access type
 before clicking "Next: Permissions" to continue. 
 
-On the next page you can create a group which by default will contain your new
-user. Give the group a name and enable `AdministratorAccess`, or adequate
+On the next page you can create a group which, by default, will contain your
+new user. Give the group a name and enable `AdministratorAccess`, or adequate
 access that corresponds to your requirements and security policies. 
 
 ![Amazon IAM group creation](./media/getting_started-aws_groups.png)
