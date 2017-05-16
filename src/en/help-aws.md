@@ -50,7 +50,7 @@ Amazon recommends the use of [IAM][iam] (Identity and Access Management) to
 control access to AWS services and resources. IAM enables you to create users
 and groups with specific access rights and permissions, much like users and
 groups within a Unix-like environment. This is in contrast to the AWS-wide
-access that comes with using root and secret keys.
+access that comes with using root-level secret keys.
 
 To create both a user and a group for use with Juju, click on your name from
 the AWS Management Console at [http://console.aws.amazon.com][aws] and select
