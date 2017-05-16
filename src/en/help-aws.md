@@ -46,19 +46,44 @@ and ask which ones to use/what name to store them under.
 
 ### 2. Manually adding credentials
 
-You can retrieve the values for the Access key and Secret Key easily from your 
-AWS Management Console at
-[http://console.aws.amazon.com][aws]. Click on your
-name in the top-right and then the "Security Credentials" link from the drop
-down menu.
+Amazon recommends the use of [IAM][iam] (Identity and Access Management) to
+control access to AWS services and resources. IAM enables you to create users
+and groups with specific access rights and permissions, much like users and
+groups within a Unix-like environment. This is in contrast to the AWS-wide
+access that comes with using root-level secret keys.
+
+To create both a user and a group for use with Juju, click on your name from
+the AWS Management Console at [http://console.aws.amazon.com][aws] and select
+"My Security Credentials" from the drop-down menu.
 
 ![Amazon accounts page with Security Creds](./media/getting_started-aws_security.png)
 
-Under the "Access Keys" heading click the "Create New Root Key" button. You
-will be prompted to "Download Key File" which by default is named rootkey.csv.
-Open this file to get the **access-key** and **secret-key**.
+Unless already disabled, a warning will appear, notifying you that any
+generated account credentials will provide unlimited access to your AWS
+resources.
 
-![Amazon Access Credentials page showing key values](./media/getting_started-aws_keys.png)
+Click on "Get Started with IAM Users" and click "Add user" to initiate user
+creation.
+
+![Amazon IAM set user details](./media/getting_started-aws_newuser.png)
+
+Enter a name for your user and set `Programmatic access` as the AWS access type
+before clicking "Next: Permissions" to continue. 
+
+On the next page you can create a group which, by default, will contain your
+new user. Give the group a name and enable `AdministratorAccess`, or adequate
+access that corresponds to your requirements and security policies. 
+
+![Amazon IAM group creation](./media/getting_started-aws_groups.png)
+
+Click the "Create group" button and you'll see an overview of both the new
+user and the group details. Click "Create user" to accept these details.
+
+The next page will declare user creation a success and include both the 
+`Access key ID` and the `Secret access key` for your new user, as well as the
+option to download these details as an CSV.
+
+![Amazon Access Credentials page showing key values](./media/getting_started-aws_credentials-csv.png)
 
 Armed with these values, you can then use the interactive command line tool to 
 add them to Juju:
@@ -106,6 +131,7 @@ Features supported by Juju-owned instances running within AWS:
   
 
 [aws]: http://console.aws.amazon.com
+[iam]: https://aws.amazon.com/iam/
 [constraints]:./reference-constraints.html
 [jaas]: ./getting-started.html "Getting Started with Juju as a Service"
 [tagging]: ./config-tagging.html
