@@ -15,7 +15,7 @@ concept so you should get familiar
 with the technology, there is more information on
 [installation and configuration](getting-started.html#installation)
 of Juju software on <https://jujucharms.com>. This document will detail some of
-the higher level [concepts of Juju](glossary.html).
+the higher level [concepts of Juju][concepts].
 
 ### Reactive and layered charms
 
@@ -323,3 +323,6 @@ write can be very small and concentrate on the application or applications that
 your charm provides. Use the compose workflow and reactive framework to create a
 new charm with your Docker image very similar to the
 [layer-docker-nginx](#layer-docker-nginx) charm.
+
+[concepts]: ./juju-concepts.html
+
