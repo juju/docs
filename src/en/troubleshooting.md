@@ -45,7 +45,7 @@ machines:
       message: running
       since: 18 May 2017 13:34:23-04:00
     series: xenial
-    hardware: arch=amd64 cores=1 cpu-power=350 mem=3840M root-disk=8192M availability-zone=eu-west-1a
+    harGdware: arch=amd64 cores=1 cpu-power=350 mem=3840M root-disk=8192M availability-zone=eu-west-1a
 applications:
   mysql:
     charm: cs:mysql-57
@@ -171,6 +171,36 @@ It aggregates logs across the models in a way that allows for seeing
 everything going on as well as diving into the details with advanced filtering
 techniques. See [this Juju logs](./troubleshooting-logs.html) page for
 additional details about the logs Juju keeps.
+
+
+### Increase the logging level
+
+At times it's necessary to increase the logging level to help diagnose an
+issue. You can find out the current logging level by checking the
+model-config.
+
+```
+juju model-config logging-config
+<root>=WARNING; unit=INFO
+```
+
+
+You can increase the logging level to DEBUG and all the way to TRACE by
+setting the model-config property.
+
+Increase the logging level:
+
+```
+juju model-config logging-config="<root>=DEBUG;unit=TRACE"
+```
+
+Once the issue is diagnosed or the logging information is collected make sure
+to reset the logging levels so that you're not collecting massive amounts of
+data over a long period of time unnecessarily.
+
+```
+juju model-config logging-config="<root>=WARNING;unit=INFO"
+```
 
 
 ## Additional troubleshooting topics
