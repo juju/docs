@@ -66,7 +66,7 @@ From the GUI, you can easily export and re-import the current model as a local
 bundle, encapsulating your applications and connections into a single file. To
 do this, click on the 'Export' button alongside your username and model name,
 or use the keyboard shortcut “shift-d”.  This results in the creation of a file
-called `<model-name>-<year>-<month>-<date>.YAML` that your browser will
+called `<model-name>-<year>-<month>-<date>.yaml` that your browser will
 typically prompt you to save or open.
 
 ![Export button in the Juju GU](media/juju2_gui_bundles_export.png)
@@ -87,7 +87,7 @@ After exporting a bundle from the GUI, you can also `deploy` the saved bundle
 from the command line: 
 
 ```bash
-juju deploy bundle.YAML
+juju deploy bundle.yaml
 ```
 Unlike when you import and deploy a bundle with the Juju GUI, running `juju
 deploy` on the command line will not attempt to rename a new application if an
@@ -120,7 +120,7 @@ deployments.
 As an example, here is a bundle file with a MySQL application and a Wordpress
 application with a relation between the two: 
 
-```YAML
+```yaml
 series: xenial
 description: "A simple Wordpress deployment."
 applications:
@@ -163,7 +163,7 @@ definition, using the proper constraint key/value pair as outlined in the
 For example, to add memory and CPU constraints to a charm in a bundle, the
 bundle file would have an additional `constraints` field with specific values:
 
-```YAML
+```yaml
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -187,7 +187,7 @@ to discover which options are available for the different charms.
 For example, to set the flavor of the MySQL charm to Percona in a bundle, the
 bundle file would have an additional `options` field with specific value:
 
-```YAML
+```yaml
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -208,7 +208,7 @@ directive. Some clouds support LXD.
 
 For example:
 
-```YAML
+```yaml
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -232,7 +232,7 @@ wordpress/0  waiting   allocating  0        10.1.110.193           waiting for m
 Alternatively, to install the MySQL application into an LXD container on
 machine '1', use the following syntax:
 
-```YAML
+```yaml
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -257,7 +257,7 @@ tells Juju to place units on new machines if no placement directives are given.
 With machines specified, you can place and co-locate applications onto specific
 machines using the placement key to in the application definition. For example:
 
-```YAML
+```yaml
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -274,7 +274,7 @@ machines:
 which will install the MySQL application on machine 0. You may also specify multiple
 machines for placing multiple units of an application. For example:
 
-```YAML
+```yaml
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 2
@@ -311,7 +311,7 @@ and deploy charms with binding, as described in [Deploying applications](./charm
 Bindings can also be specified for applications within a bundle. To do so,
 add a section to the bundle's YAML file called `bindings`. For example:
 
-```YAML
+```yaml
   mysql:
     charm: "cs:trusty/mysql-57"
     num_units: 1
@@ -351,7 +351,7 @@ juju deploy mysql --bind "db:db-space db-admin:admin-space default-space"
 Using the `binding` section in the bundle's YAML file, the above deploy
 command can be mirrored in bundle format with the following:
 
-```YAML
+```yaml
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
