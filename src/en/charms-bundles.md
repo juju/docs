@@ -26,8 +26,8 @@ juju deploy wiki-simple
 
 You can get the name of a bundle from the 
 [Juju Charm Store][store], just as you would a charm.
-Unlike charms, bundles embed more than a single application, and you can
-see icons representing each separate application alongside a bundle's name. This
+Unlike charms, bundles embed more than a single application, and you can see
+icons representing each separate application alongside a bundle's name. This
 gives you a quick overview of a bundle's complexity and potential resource
 requirements.
 
@@ -39,7 +39,7 @@ formatted `bundle` command, including the correct Charm Store URL for the
 bundle, which you can also run to deploy your chosen bundle:
 
 ```bash
-juju deploy cs:bundle/wiki-simple-0
+juju deploy cs:bundle/wiki-simple-4
 ```
 
 ## Adding bundles with the GUI
@@ -63,22 +63,23 @@ changes' to remove the bundle before it's activated.
 ### Exporting and Importing bundles with the GUI
 
 From the GUI, you can easily export and re-import the current model as a local
-bundle, encapsulating your applications and connections into a single file. To 
-do this, click on the 'Export' button, or use the keyboard shortcut “shift-d”.
-This results in the creation of a file called `bundle.yaml` that your browser
-will typically prompt you to save or open.
+bundle, encapsulating your applications and connections into a single file. To
+do this, click on the 'Export' button alongside your username and model name,
+or use the keyboard shortcut “shift-d”.  This results in the creation of a file
+called `<model-name>-<year>-<month>-<date>.yaml` that your browser will
+typically prompt you to save or open.
 
 ![Export button in the Juju GU](media/juju2_gui_bundles_export.png)
 
-You can import a saved bundle by either dragging `bundle.yaml` onto your
-browser canvas, or using the 'Import' button. After clicking 'Import' your
+You can import a saved bundle by either dragging the exported yaml file onto
+your browser canvas, or using the 'Import' button. After clicking 'Import' your
 browser will prompt you to select a bundle file.
 
-After a file has been added, the GUI will briefly report `ChangeSet process`
-followed by `ChangeSet complete`. As with adding bundles from the store, you
-may want to review the applications, connections and various configuration 
-options before clicking on 'Commit changes' and 'Deploy' to activate your 
-bundle.
+After a file has been added, the GUI will briefly report `ChangeSet process
+started` followed by `ChangeSet import complete`. As with adding bundles from
+the store, you may want to review the applications, connections and various
+configuration options before clicking on 'Commit changes' and 'Deploy' to
+activate your bundle.
 
 ### Local deploy via command line
 
@@ -94,15 +95,14 @@ application with the same name already exists.
 
 From the command line, you can also check for errors in a bundle before
 deploying it. Bundles downloaded from the Juju store need to be unzipped into
-their own directory, and your own `bundle.yaml` files will need to be
-accompanied by a `README.md` text file (although this file can be empty for
-testing purposes). You can then check for possible errors with the
-following command:
+their own directory, and your own yaml files will need to be accompanied by a
+`README.md` text file (although this file can be empty for testing purposes).
+You can then check for possible errors with the following command:
 
 ```bash
 charm proof directory-of-bundle/
 ```
-Note that if no directory is given, the command defaults to the current 
+Note that if no directory is given, the command defaults to the current
 directory.
 
 If no errors are detected, there will be no output from `charm proof` and you
@@ -114,16 +114,18 @@ A bundle is a set of applications with a specific configuration and their
 corresponding relations that can be deployed together in a single step.
 Instead of deploying a single application, they can be used to deploy an entire
 workload, with working relations and configuration. The use of bundles allows
-for easy repeatability and for sharing of complex, multi-application deployments.
+for easy repeatability and for sharing of complex, multi-application
+deployments.
 
 As an example, here is a bundle file with a MySQL application and a Wordpress
 application with a relation between the two: 
 
 ```yaml
 series: xenial
+description: "A simple Wordpress deployment."
 applications:
   wordpress:
-    charm: "cs:trusty/wordpress-2"
+    charm: "cs:trusty/wordpress-5"
     num_units: 1
     annotations:
       "gui-x": "339.5"
@@ -131,7 +133,7 @@ applications:
     to:
       - "0"
   mysql:
-    charm: "cs:trusty/mysql-26"
+    charm: "cs:trusty/mysql-57"
     num_units: 1
     annotations:
       "gui-x": "79.5"
@@ -148,13 +150,12 @@ machines:
   "1":
     series: trusty
     constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
-
 ```
 
 ## Setting constraints in a bundle
 
 To make your bundle as reusable as possible, it's common to set minimum
-constraints against a charmed application, much like you would when deploying 
+constraints against a charmed application, much like you would when deploying
 charms from the command line. This is a simple key addition to the application
 definition, using the proper constraint key/value pair as outlined in the
 ['constraints' documentation][constraints-docs].
@@ -164,11 +165,11 @@ bundle file would have an additional `constraints` field with specific values:
 
 ```yaml
 mysql:
-  charm: "cs:precise/mysql-27"
+  charm: "cs:trusty/mysql-57"
   num_units: 1
   constraints:
-    - mem=2G
-    - cpu-cores=4
+    mem=2G
+    cpu-cores=4
   annotations:
     "gui-x": "139"
     "gui-y": "168"
@@ -188,10 +189,10 @@ bundle file would have an additional `options` field with specific value:
 
 ```yaml
 mysql:
-  charm: "cs:precise/mysql-27"
+  charm: "cs:trusty/mysql-57"
   num_units: 1
   options:
-    flavor: percona
+    flavor : percona
   annotations:
     "gui-x": "139"
     "gui-y": "168"
@@ -200,45 +201,55 @@ mysql:
 ## Bundle placement directives
 
 You can co-locate applications using the placement directive key in the bundle.
-Much like application constraints, it requires adding the placement key `to` in 
-the application definition.
-Where supported by the cloud provider, it is also possible to isolate charms
-by including the container format in the placement directive. Some clouds
-support LXD.
+Much like application constraints, it requires adding the placement key `to` in
+the application definition.  Where supported by the cloud provider, it is also
+possible to isolate charms by including the container format in the placement
+directive. Some clouds support LXD.
 
 For example:
 
 ```yaml
 mysql:
-  charm: "cs:precise/mysql-27"
+  charm: "cs:trusty/mysql-57"
   num_units: 1
-  to: lxd:wordpress/0
+  to:
+  - lxd:wordpress/0
   annotations:
     "gui-x": "139"
     "gui-y": "168"
 ```
 
 which will install the MySQL application into an LXD container on the same
-machine as the wordpress/0 unit. Or:
+machine as the wordpress/0 unit. You can check the output from `juju status` to
+see where each application has been deployed:
+
+```no-highlight
+Unit         Workload  Agent       Machine  Public address  Ports  Message
+mysql/0      waiting   allocating  0/lxd/0                         waiting for machine
+wordpress/0  waiting   allocating  0        10.1.110.193           waiting for machine
+```
+
+Alternatively, to install the MySQL application into an LXD container on
+machine '1', use the following syntax:
 
 ```yaml
 mysql:
-  charm: "cs:precise/mysql-27"
+  charm: "cs:trusty/mysql-57"
   num_units: 1
-  to: lxd:1
+  to:
+  - lxd:1
   annotations:
     "gui-x": "139"
     "gui-y": "168"
 ```
-which will install the MySQL application into an LXD container on machine '1'.
 
 ## Machine specifications in a bundle
 
 Bundles may optionally include a machine specification, which allows you to set
-up specific machines and then to place units of your applications on those machines
-however you wish.  A machine specification is a YAML object with named machines
-(integers are always used for names).  These machines are objects with three
-possible fields: `series`, `constraints`, and `annotations`.
+up specific machines and then to place units of your applications on those
+machines however you wish.  A machine specification is a YAML object with named
+machines (integers are always used for names).  These machines are objects with
+three possible fields: `series`, `constraints`, and `annotations`.
 
 Note that the machine spec is optional. Leaving the machine spec out of your bundle
 tells Juju to place units on new machines if no placement directives are given.
@@ -248,13 +259,13 @@ machines using the placement key to in the application definition. For example:
 
 ```yaml
 mysql:
-  charm: "cs:precise/mysql-27"
+  charm: "cs:trusty/mysql-57"
   num_units: 1
   to:
-    - "0"
+    - "0
   annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+    "gui-x": "139"
+    "gui-y": "168"
 machines:
   "0":
     series: trusty
@@ -265,14 +276,14 @@ machines for placing multiple units of an application. For example:
 
 ```yaml
 mysql:
-  charm: "cs:precise/mysql-27"
+  charm: "cs:trusty/mysql-57"
   num_units: 2
   to:
     - "0"
     - "1"
   annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+    "gui-x": "139"
+    "gui-y": "168"
 machines:
   "0":
     series: trusty
@@ -282,22 +293,16 @@ machines:
     constraints: "arch=amd64 cpu-cores=4 cpu-power=500 mem=4096 root-disk=8192"
 ```
 which will install one unit of the MySQL application on machine 0 and the other on
-machine 1. Where supported by the cloud provider, it is also possible to isolate charms
-by including the container format in the placement directive. Some clouds support LXD.
-For example:
+machine 1. 
 
-```yaml
-mysql:
-  charm: "cs:precise/mysql-27"
-  num_units: 1
-  to:
-    - "lxd:1"
-  annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+The output from `juju status` will show this deployment as follows:
+
+```no-highlight
+Unit         Workload  Agent       Machine  Public address  Ports  Message
+mysql/0      waiting   allocating  0                               waiting for machine
+mysql/1      waiting   allocating  1                               waiting for machine
+wordpress/0  waiting   allocating  1                               waiting for machine
 ```
-
-which will install the MySQL application into an LXD container on machine '1'.
 
 ## Binding endpoints of applications within a bundle
 
@@ -307,19 +312,23 @@ Bindings can also be specified for applications within a bundle. To do so,
 add a section to the bundle's YAML file called `bindings`. For example:
 
 ```yaml
-mysql:
-  charm: "cs:precise/mysql-27"
-  num_units: 1
-  bindings:
-    server: database
-    cluster: internal
+  mysql:
+    charm: "cs:trusty/mysql-57"
+    num_units: 1
+    bindings:
+      shared-db: database
+      cluster: internal
 ```
 
 This is the equivalent of deploying with:
 
 ```bash
-juju deploy cs:precise/mysql-27 --bind "server=database cluster=internal"
+juju deploy cs:trusty/mysql-57 --bind "shared-db=database cluster=internal"
 ```
+
+!!! Note:
+    Spaces must be configured in the underlying cloud before attempting to use
+    them.
 
 Prior to Juju 2.1, all deployed machines were regarded as potential hosts for
 containers, and as a result, all network interfaces connected to those machines
@@ -344,12 +353,12 @@ command can be mirrored in bundle format with the following:
 
 ```yaml
 mysql:
-   charm: "cs:mysql"
-   num_units: 1
-   bindings:
-     "": default-space
-     db: db-space
-     db-admin: admin-space
+  charm: "cs:trusty/mysql-57"
+  num_units: 1
+  bindings:
+    "": default-space
+    db: db-space
+    db-admin: admin-space
 ```
 
 It is not currently possible to declare a default space in the bundle for all
@@ -366,6 +375,9 @@ speak to a human, there are patch pilots in the Juju IRC channel (#juju on
 Freenode) who can assist. You can also use the
 [Juju mailing list][juju-list].
 
+!!! Note:
+    Make sure you've added a brief explanation of your bundle within the
+    `description` field of your bundle's yaml file. 
 
 [store]: https://jujucharms.com/q/?type=bundle
 [store-docs]: ./authors-charm-store.html
