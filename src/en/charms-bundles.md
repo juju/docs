@@ -376,8 +376,8 @@ Freenode) who can assist. You can also use the
 [Juju mailing list][juju-list].
 
 !!! Note:
-    Make sure you've added a brief explanation of your bundle within the
-    `description` field of your bundle's yaml file. 
+    Make sure you've added a brief explanation of what your bundle does within
+    the `description` field of your bundle's yaml file. 
 
 [store]: https://jujucharms.com/q/?type=bundle
 [store-docs]: ./authors-charm-store.html
