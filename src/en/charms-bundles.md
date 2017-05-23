@@ -66,12 +66,12 @@ From the GUI, you can easily export and re-import the current model as a local
 bundle, encapsulating your applications and connections into a single file. To
 do this, click on the 'Export' button alongside your username and model name,
 or use the keyboard shortcut “shift-d”.  This results in the creation of a file
-called `<model-name>-<year>-<month>-<date>.yaml` that your browser will
+called `<model-name>-<year>-<month>-<date>.YAML` that your browser will
 typically prompt you to save or open.
 
 ![Export button in the Juju GU](media/juju2_gui_bundles_export.png)
 
-You can import a saved bundle by either dragging the exported yaml file onto
+You can import a saved bundle by either dragging the exported YAML file onto
 your browser canvas, or using the 'Import' button. After clicking 'Import' your
 browser will prompt you to select a bundle file.
 
@@ -87,7 +87,7 @@ After exporting a bundle from the GUI, you can also `deploy` the saved bundle
 from the command line: 
 
 ```bash
-juju deploy bundle.yaml
+juju deploy bundle.YAML
 ```
 Unlike when you import and deploy a bundle with the Juju GUI, running `juju
 deploy` on the command line will not attempt to rename a new application if an
@@ -95,7 +95,7 @@ application with the same name already exists.
 
 From the command line, you can also check for errors in a bundle before
 deploying it. Bundles downloaded from the Juju store need to be unzipped into
-their own directory, and your own yaml files will need to be accompanied by a
+their own directory, and your own YAML files will need to be accompanied by a
 `README.md` text file (although this file can be empty for testing purposes).
 You can then check for possible errors with the following command:
 
@@ -120,7 +120,7 @@ deployments.
 As an example, here is a bundle file with a MySQL application and a Wordpress
 application with a relation between the two: 
 
-```yaml
+```YAML
 series: xenial
 description: "A simple Wordpress deployment."
 applications:
@@ -163,7 +163,7 @@ definition, using the proper constraint key/value pair as outlined in the
 For example, to add memory and CPU constraints to a charm in a bundle, the
 bundle file would have an additional `constraints` field with specific values:
 
-```yaml
+```YAML
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -187,7 +187,7 @@ to discover which options are available for the different charms.
 For example, to set the flavor of the MySQL charm to Percona in a bundle, the
 bundle file would have an additional `options` field with specific value:
 
-```yaml
+```YAML
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -208,7 +208,7 @@ directive. Some clouds support LXD.
 
 For example:
 
-```yaml
+```YAML
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -232,7 +232,7 @@ wordpress/0  waiting   allocating  0        10.1.110.193           waiting for m
 Alternatively, to install the MySQL application into an LXD container on
 machine '1', use the following syntax:
 
-```yaml
+```YAML
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -257,7 +257,7 @@ tells Juju to place units on new machines if no placement directives are given.
 With machines specified, you can place and co-locate applications onto specific
 machines using the placement key to in the application definition. For example:
 
-```yaml
+```YAML
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -274,7 +274,7 @@ machines:
 which will install the MySQL application on machine 0. You may also specify multiple
 machines for placing multiple units of an application. For example:
 
-```yaml
+```YAML
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 2
@@ -311,7 +311,7 @@ and deploy charms with binding, as described in [Deploying applications](./charm
 Bindings can also be specified for applications within a bundle. To do so,
 add a section to the bundle's YAML file called `bindings`. For example:
 
-```yaml
+```YAML
   mysql:
     charm: "cs:trusty/mysql-57"
     num_units: 1
@@ -351,7 +351,7 @@ juju deploy mysql --bind "db:db-space db-admin:admin-space default-space"
 Using the `binding` section in the bundle's YAML file, the above deploy
 command can be mirrored in bundle format with the following:
 
-```yaml
+```YAML
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
@@ -377,7 +377,7 @@ Freenode) who can assist. You can also use the
 
 !!! Note:
     Make sure you've added a brief explanation of what your bundle does within
-    the `description` field of your bundle's yaml file. 
+    the `description` field of your bundle's YAML file. 
 
 [store]: https://jujucharms.com/q/?type=bundle
 [store-docs]: ./authors-charm-store.html
