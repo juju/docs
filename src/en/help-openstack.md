@@ -1,6 +1,6 @@
 Title: OpenStack clouds
 
-# OpenStack Clouds
+# OpenStack clouds
 
 Although Juju doesn't have baked-in knowledge of *your* OpenStack cloud, it
 does know how such clouds work in general. We just need to provide some
