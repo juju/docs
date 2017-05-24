@@ -3,8 +3,8 @@ TODO: Test vSphere
 
 # Using a VMware vSphere cloud
 
-In order to use the vSphere cloud you will need to have an existing vSphere
-installation which supports VMware's Hardware Version 8 or better.  The vSphere
+In order to use a vSphere cloud you will need to have an existing vSphere
+installation which supports VMware's Hardware Version 8 or better. The vSphere
 installation will also need access to a DNS for Juju to function.
 
 Juju doesn't have baked-in knowledge of your specific vSphere cloud, but it
