@@ -1,10 +1,10 @@
-Title: Using the Oracle Provider
+Title: Using the Oracle cloud
 
-# Using the Oracle Provider
+# Using the Oracle public cloud
 
 Juju has built-in support for [Oracle's Compute service][compute]. However, the
 following few steps are required before Juju can bootstrap Oracle's Compute
-provider:
+cloud:
 
 1. Associate Oracle's Ubuntu images with your Compute service. Juju uses these
    for deployment.
