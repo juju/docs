@@ -1,7 +1,7 @@
 Title: Juju troubleshooting
 
 
-# Troubleshooting Juju
+# Troubleshooting
 
 We know that even in the best of times things go wrong. Here we help you dive
 into what's going on and chase down those details you need when things don't
@@ -18,13 +18,18 @@ important information that Juju is providing.
 `juju status` supports specifying an application to be shown. In this way,
 `juju status mysql` will only show the status information relevant to that
 application. The default output of `juju status` is a nice tabular format.
-However, sometimes there's additional details in the machine readable output.
+However, sometimes there are additional details in the machine readable output.
 You can see this at any time by passing the flag `--format=yaml` to any status
-command in Juju.
+command in Juju:
 
 ```bash
-
 juju status mysql --format=yaml
+
+```
+
+...will result in the output that looks like:
+
+```yaml
 model:
   name: documentation-demo
   controller: jaas
@@ -45,7 +50,7 @@ machines:
       message: running
       since: 18 May 2017 13:34:23-04:00
     series: xenial
-    harGdware: arch=amd64 cores=1 cpu-power=350 mem=3840M root-disk=8192M availability-zone=eu-west-1a
+    hardware: arch=amd64 cores=1 cpu-power=350 mem=3840M root-disk=8192M availability-zone=eu-west-1a
 applications:
   mysql:
     charm: cs:mysql-57
@@ -76,26 +81,28 @@ applications:
 
 ```
 
-Here we're given a lot more details as to the state of things regarding the
-MySQL unit we've deployed. This includes status, timestamps, additional
-networking information, etc. When filing bugs and requesting help it's almost
-always better to use the YAML format so that everyone has additional insight
-into what's going on.
+Here we're given a lot more detail as to the state of things regarding the
+MySQL unit. This includes status, timestamps, additional networking
+information, etc. When filing bugs and requesting help it's almost always
+better to use the YAML format so that everyone has additional insight into
+what's going on.
 
 
 ### Beyond Juju status
 
-Juju status is a summary of what's going on. It cannot provide the full
-details all the time. Often Juju status will help provide you a hint that you
-can chase with a more specific command. One of the most important commands is
-`juju show-machine` where an application failing to deploy might be due to the
-machine never getting assigned for Juju's use.
+Juju status is juju a summary of what's going on. It cannot provide all of the
+details all the time. Often Juju status will help provide users a hint that
+they are able to chase down additional details with a more specific command.
+One of the most important commands is `juju show-machine` where an application
+failing to deploy might be due to the machine never getting assigned for
+Juju's use. Explore the CLI for other useful commands that will provide more
+details in different troubleshooting conditions.
 
 
 For example, if I deploy active-directory into a cloud that does not have
 Windows images available I might get an error showing:
 
-```
+```bash
 Unit                Workload  Agent       Machine  Public address  Ports  Message
 active-directory/0  waiting   allocating  1                               waiting for machine
 ```
@@ -103,7 +110,7 @@ active-directory/0  waiting   allocating  1                               waitin
 However, if I want additional details I can run `juju show-machine 1` to see
 the details about the machine that this unit is meant to be running on.
 
-```
+```yaml
 model: documentation-demo
 machines:
   "1":
@@ -121,20 +128,20 @@ machines:
 
 Here we are given much more clear details as to what Juju is looking for. Make
 sure to leverage the `show-` commands to dive deeper into what's going on.
-juju show-model and show-controller can often provide useful information when
-file bug reports or requesting assistance.
+juju `show-model` and `show-controller` can often provide useful information when
+filing bug reports or requesting assistance.
 
 Make sure to look beyond the default information in `juju status`.
 
 
-### Leveraging --debug
+### Using the --debug option
 
-Most commands support a `--debug` option that can be used to get a much more
-specific idea as to what's going on. This is especially true of commands such
+Most commands support a `--debug` option that can be used to gain additional
+insight as to what's going on. This is especially true of commands such
 as `juju bootstrap`.
 
 Compare the sample output of `juju deploy --debug`. It includes all of the
-urls that Juju is attempting to reach. These might be of vital important if
+URLs that Juju is attempting to reach. These might be of vital importance if
 you're behind a proxy or firewall at work.
 
 
@@ -160,9 +167,13 @@ you're behind a proxy or firewall at work.
 13:48:45 INFO  cmd deploy.go:1001 Deploying charm "cs:trusty/kibana-15".
 13:48:46 DEBUG juju.api monitor.go:35 RPC connection died
 13:48:46 INFO  cmd supercommand.go:465 command finished
-
 ```
 
+In the above log output we can see that there are calls to the IP addresses of
+the controller as well as to the charmstore to retrieve details about the
+charm that the user is attempting to deploy. If a user is behind any sort of
+proxy or egress firewall Juju will need to be able to reach these endpoints to
+be successful.
 
 ### Collecting the logs
 
@@ -176,17 +187,20 @@ additional details about the logs Juju keeps.
 ### Increase the logging level
 
 At times it's necessary to increase the logging level to help diagnose an
-issue. You can find out the current logging level by checking the
-model-config.
+issue. You can verify the current logging level with the `model-config`
+comamnd.
 
 ```
 juju model-config logging-config
 <root>=WARNING; unit=INFO
 ```
 
-
-You can increase the logging level to DEBUG and all the way to TRACE by
-setting the model-config property.
+Users can increase the logging level for additional details. The logging
+levels in order from most verbose to least verbose are TRACE, DEBUG, INFO,
+WARNING, and ERROR. When diagnosing an issue or gathering information for
+filing a bug it's often useful to increase the log verbosity by moving to
+DEBUG or TRACE levels. Users can increase the logging level to DEBUG and all
+the way to TRACE by setting the model-config property.
 
 Increase the logging level:
 

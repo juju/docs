@@ -1,4 +1,4 @@
-Title: Juju troubleshooting specific clouds
+Title: Cloud specific Juju troubleshooting
 
 
 # Cloud specific issues
@@ -8,14 +8,16 @@ Title: Juju troubleshooting specific clouds
 
 ### juju add-credential
 
-The YAML needed to add a credential works with a credential file from another
-system. This means it's expecting a format that includes a root key of
-"credentials:". Often, users pass around a single credential and don't include
-the root key.
+juju add-credential supports adding a credential with a YAML file. The YAML
+format is the same that's used to store the credentials on a user's
+filesystem. This means that it allows for more than one credential to be
+located in the file. However, you can only add one at a time. This often
+throws folks that manually create the new credential file. The format must
+include a root key of "credentials:".
 
-For example, a azure.yaml file like so will fail.
+For example, the following 'azure.yaml' file will fail.
 
-```
+```yaml
 azure:
   rickscreds:
       auth-type: service-principal-secret
@@ -25,9 +27,9 @@ azure:
       tenant-id: 12345
 ```
 
-Once the root key is added it will succeed.
+Once the root key is added it will succeed:
 
-```
+```yaml
 credentials:
     azure:
       rickstuff:
@@ -55,3 +57,9 @@ credentials:
 
 
 ## Google Compute Engine
+
+
+## Oracle
+
+
+## Manual
