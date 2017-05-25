@@ -106,13 +106,13 @@ You can update to the non-stable channels of Juju releases by using the snap
 command.
 
 ```bash
-   snap install <snap> --beta
+   sudo snap install juju --beta --classic
 ```
 
 Or you can get a daily build using the edge channel.
 
 ```bash
-   snap install <snap> --edge
+   sudo snap install juju --edge --classic
 ```
 
 
