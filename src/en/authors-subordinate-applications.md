@@ -164,9 +164,10 @@ as usual.
 
 ## Caveats
 
-When a subordinate is related to a single principal application, the subordinate
-may be removed by removing the principal-subordinate relation. When related to
-multiple principal applications, the subordinate may only be removed by removing
-the principal unit.
+When a subordinate is related to a single principal application, the
+subordinate may be removed by removing the principal-subordinate
+relation. This will remove all of the subordinate units from the
+principal application's containers. (There's no way to only remove one
+of the subordinate units.)
 
 
