@@ -39,6 +39,7 @@ our charm quickly and easily:
 ```bash
 juju charm create vanilla
 ```
+!!! Note: In some versions, the previous command should be executed as `charm create vanilla`
 
 This not only creates the directory structure, it also populates it with
 template files for you to edit. Your directory will now look like this:
@@ -188,8 +189,8 @@ interconnecting applications in a cluster
 
 ## Writing hooks
 
-As you will know from your thorough reading of the [charm components](./authors-
-charm-components.html), the hooks are the important scripts that actually do
+As you will know from your thorough reading of the [charm components](./authors-charm-components.html),
+the hooks are the important scripts that actually do
 things. You can write hooks in whatever language you can reasonably expect to
 execute on your deployed environment (e.g. Ubuntu Server).
 
@@ -363,8 +364,8 @@ corresponding hooks to find out. In this case we know that when connected, the
 a username and password.
 
 Interfaces in general are determined by the consensus of the charms which use
-them. There is a lot [more information on decoding interfaces here](./authors-
-charm-interfaces.html). Some of the major interfaces are being documented to
+them. There is a lot [more information on decoding interfaces here](./authors-relations.html).
+Some of the major interfaces are being documented to
 make it easier to use them, and fortunately, mysql is one of them - [You can
 find a description of the mysql interface here](./interface-mysql.html).
 
@@ -403,7 +404,7 @@ Another part of the Charm Tools plugin is a useful lint-like tool which will
 check for errors in the files of your charm. Run it like this:
 
 ```bash
-juju charm proof [CHARM_DIRECTORY]
+charm proof [CHARM_DIRECTORY]
 ```
 
 The output classifies messages as:

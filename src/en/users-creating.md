@@ -76,15 +76,19 @@ the current Juju user session:
 juju logout
 ```
 
-And to log back in, either on the same client system or not:
+And to log back in, either on the same client system or not, using the same
+user we added earlier:
 
 ```bash
-juju login
+juju login jon
 ```
 
 Once a user logs in they become the current user. The following is a quick way
-to determine the current user:
+to determine the current user (as well as the current controller and model):
 
 ```bash
-juju show-user
+juju whoami
 ```
+
+The command `juju show-user` can also be used to get the current user, in
+addition to other information on the user.

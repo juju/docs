@@ -1,15 +1,20 @@
  <ul>
+    <li><a href="about-juju.html">About Juju</a></li>
+    <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
 <!-- SECTION -->
-    <li class="section"><h4 class="header toggle-target">User Guide</h4>
+    <li class="section"><h4 class="header toggle-target">Get Started</h4>
         <ul>
-        <li><a href="about-juju.html">About Juju</a></li>
-        <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
-        <li class="section"><a class="header" href="getting-started.html">Getting Started</a>
+        <li class="section"><a class="header" href="getting-started.html">First use!</a>
             <ul class="sub">
                 <li><a href="getting-started-general.html">Install for non-16.04</a></li>
             </ul>
         </li>
-        <li><a href="juju-concepts.html">Juju concepts</a></li>
+        <li><a href="tut-google.html">Controllers and Models</a></li>
+        <li><a href="tut-users.html">Sharing and Users</a></li>
+        </ul>
+    </li>
+    <li class="section"><h4 class="header toggle-target">User Guide</h4>
+        <ul>
         <li class="section"><a class="header" href="clouds.html">Clouds</a>
             <ul class="sub">
                 <li><a href="credentials.html">Cloud credentials</a></li>
@@ -20,7 +25,10 @@
                 <li><a href="clouds-LXD.html">LXD</a></li>
                 <li><a href="clouds-maas.html">MAAS</a></li>
                 <li><a href="clouds-manual.html">Manual</a></li>
+                <li><a href="help-openstack.html">OpenStack</a></li>
                 <li><a href="help-rackspace.html">Rackspace</a></li>
+                <li><a href="help-vmware.html">VMware vSphere</a></li>
+
             </ul>
         </li>
         <li class="section"><a class="header" href="controllers.html">Controllers</a>
@@ -46,6 +54,7 @@
                 <li><a href="charms-working-with-units.html">Working with Units</a></li>
                 <li><a href="actions.html">Working with Actions</a></li>
                 <li><a href="charms-storage.html">Using storage</a></li>
+                <li><a href="charms-metrics.html">Viewing utilization with metrics</a></li>
             </ul>
         </li>
         <li><a href="charms-bundles.html">Charm bundles</a></li>
@@ -61,20 +70,15 @@
         </li>
         <li class="section"><a class="header" href="juju-managing.html">Managing Juju</a>
             <ul class="sub">
-                <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
+                <li><a href="juju-block.html">Disable Juju commands</a></li>
                 <li><a href="juju-centos.html">CentOS support</a></li>
                 <li><a href="network-spaces.html">Network spaces</a></li>
                 <li><a href="juju-plugins.html">Juju plugins</a></li>
-                <li><a href="juju-misc.html">Miscellaneous</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="howto.html">How to...</a>
             <ul class="sub">
-                <li><a href="howto-node.html">Deploy a Node.js app</a></li>
-                <li><a href="howto-rails.html">Test and deploy on Rails</a></li>
                 <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
-                <li><a href="howto-vagrant-workflow.html">Vagrant Workflow</a></li>
-                <li><a href="howto-drupal-iis.html">Deploy Drupal Windows charm</a></li>
             </ul>
         </li>
         <li><a href="troubleshooting.html">Troubleshooting</a></li>
@@ -111,6 +115,7 @@
             </ul>
         </li>
         <li><a href="developer-terms.html">Juju Terms</a></li>
+        <li><a href="developer-metrics.html">Juju Metrics</a></li>
         <li><a href="developer-resources.html">Juju Resources</a></li>
         <li class="section"><a class="header" href="developer-leadership.html">Implementing Leadership</a>
             <ul class="sub">
@@ -199,7 +204,7 @@
         <li><a href="reference-release-notes.html">Release notes</a></li>
         <li><a href="reference-status.html">Status values</a></li>
         <li><a href="reference-numbering.html">Machine/unit numbering</a></li>
-        <li><a href="glossary.html">Glossary</a></li>
+        <li><a href="juju-concepts.html">Glossary/Concepts</a></li>
         <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
     </ul>
    </li>

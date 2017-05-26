@@ -90,25 +90,24 @@ juju status
 ...you should see something like this:
 
 ```no-highlight
-[Applications] 
-NAME       STATUS      EXPOSED CHARM                 
-haproxy    maintenance false   cs:trusty/haproxy-18  
-mariadb    maintenance false   cs:trusty/mariadb-2   
-mediawiki  maintenance false   cs:trusty/mediawiki-5 
-[Relations] 
-APPLICATION1    APPLICATION2 RELATION TYPE 
-haproxy         haproxy      peer     peer 
-mariadb         mariadb      cluster  peer 
-[Units]     
-ID          WORKLOAD-STATUS JUJU-STATUS VERSION   MACHINE PORTS PUBLIC-ADDRESS MESSAGE                                    
-haproxy/0   maintenance     executing   2.0        2             10.0.3.177     installing charm software               
-mariadb/0   maintenance     executing   2.0        1             10.0.3.158     (config-changed) installing charm software 
-mediawiki/0 maintenance     executing   2.0        0             10.0.3.105     (install) installing charm software        
-[Machines] 
-ID         STATE   DNS        INS-ID                                              SERIES AZ 
-0          started 10.0.3.105 juju-8f5c4f24-0d90-4441-8870-072420559f08-machine-0 trusty    
-1          started 10.0.3.158 juju-8f5c4f24-0d90-4441-8870-072420559f08-machine-1 trusty    
-2          started 10.0.3.177 juju-8f5c4f24-0d90-4441-8870-072420559f08-machine-2 trusty 
+App        Version  Status       Scale  Charm      Store       Rev  OS      Notes
+haproxy             maintenance      1  haproxy    jujucharms   37  ubuntu  
+mariadb             maintenance      1  mariadb    jujucharms    6  ubuntu  
+mediawiki           maintenance      1  mediawiki  jujucharms    5  ubuntu  
+
+Unit          Workload     Agent      Machine  Public address  Ports  Message
+haproxy/0*    maintenance  executing  2        10.0.8.85              (install) installing charm software
+mariadb/0*    maintenance  executing  1        10.0.8.136             (config-changed) installing charm software
+mediawiki/0*  maintenance  executing  0        10.0.8.118             (install) installing charm software
+
+Machine  State    DNS         Inst id        Series  AZ
+0        started  10.0.8.118  juju-26f0f1-0  trusty  
+1        started  10.0.8.136  juju-26f0f1-1  trusty  
+2        started  10.0.8.85   juju-26f0f1-2  xenial  
+
+Relation  Provides  Consumes  Type
+peer      haproxy   haproxy   peer
+cluster   mariadb   mariadb   peer
 ```
 
 ### Adding relations
@@ -164,7 +163,8 @@ check this by first getting the IP address of HAProxy from the output of
 
 
 ```bash
-haproxy/0   unknown         idle        2.0       80/tcp 10.175.11.250   
+Unit        Workload  Agent  Machine  Public address  Ports   Message
+haproxy/0*  unknown   idle   2        10.0.8.85       80/tcp  
 ```
 
 Use the IP address, 10.175.11.250 in the example above, within a web 
@@ -200,12 +200,13 @@ output of the `juju status mediawiki` command:
 
 
 ```no-highlight
-mediawiki/0 unknown         idle        2.0 0       80/tcp 10.175.11.252          
-mediawiki/1 unknown         idle        2.0 3       80/tcp 10.175.11.244          
-mediawiki/2 unknown         idle        2.0 4       80/tcp 10.175.11.31           
-mediawiki/3 unknown         idle        2.0 5       80/tcp 10.175.11.62           
-mediawiki/4 unknown         idle        2.0 6       80/tcp 10.175.11.63           
-mediawiki/5 unknown         idle        2.0 7       80/tcp 10.175.11.65 
+Unit          Workload  Agent  Machine  Public address  Ports   Message
+mediawiki/0*  unknown   idle   0        10.0.8.118      80/tcp  
+mediawiki/1   unknown   idle   3        10.0.8.146      80/tcp  
+mediawiki/2   unknown   idle   4        10.0.8.124      80/tcp  
+mediawiki/3   unknown   idle   5        10.0.8.49       80/tcp  
+mediawiki/4   unknown   idle   6        10.0.8.81       80/tcp  
+mediawiki/5   unknown   idle   7        10.0.8.97       80/tcp  
 ```
 
 To scale back our deployment, use the `remove-unit` command followed by the 
@@ -247,9 +248,9 @@ with the `juju list-models` command. Your output should be similar to the
 following:
 
 ```bash
-NAME      OWNER        STATUS     LAST CONNECTION
-admin     admin@local  available  3 hours ago
-default*  admin@local  available  7 minutes ago
+Model       Owner  Status     Machines  Cores  Access  Last connection
+controller  admin  available         1      -  admin   just now
+default*    admin  available         2      -  admin   just now
 ```
 
 To remove the default model, type `juju destroy-model default` and enter 'Y' to 
@@ -263,7 +264,7 @@ state it was in before we deployed the MediaWiki charm, you can create one
 with:
 
 ```bash
-juju create-model default
+juju add-model default
 ```
 
 For more information on the subjects we've covered in this walkthough, see our 

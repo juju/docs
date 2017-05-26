@@ -24,23 +24,48 @@ juju list-clouds
 This will return a list like this:
   
 ```no-highlight
-CLOUD        TYPE        REGIONS
-aws          ec2         us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2 ...
-aws-china    ec2         cn-north-1
-aws-gov      ec2         us-gov-west-1
-azure        azure       centralus, eastus, eastus2, northcentralus, southcentralus, westus, northeurope ...
-azure-china  azure       chinaeast, chinanorth
-cloudsigma   cloudsigma  hnl, mia, sjc, wdc, zrh
-google       gce         us-east1, us-central1, europe-west1, asia-east1
-joyent       joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
-lxd          lxd         localhost
-rackspace    rackspace   DFW, ORD, IAD, LON, SYD, HKG
+Cloud        Regions  Default        Type        Description
+aws               11  us-east-1      ec2         Amazon Web Services
+aws-china          1  cn-north-1     ec2         Amazon China
+aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
+azure             18  centralus      azure       Microsoft Azure
+azure-china        2  chinaeast      azure       Microsoft Azure China
+cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
+google             4  us-east1       gce         Google Cloud Platform
+joyent             6  eu-ams-1       joyent      Joyent Cloud
+rackspace          6  dfw            rackspace   Rackspace Cloud
+localhost          1  localhost      lxd         LXD Container Hypervisor
 ```
 
 This lists the cloud name (which you will use to specify the cloud you want to 
-use), its type (the API used to control it) and the known regions for the cloud.
-The default region for a cloud is shown first in the list-clouds output, so
-in the above, `us-east-1` is the default region for an aws cloud. To specify
+use), its type (the API used to control it) and the default region for each
+cloud, so in the above, `us-east-1` is the default region for an aws cloud.
+
+To see which regions Juju currently knows about for a specific cloud, you can
+run the command, replacing `aws` with any of the clouds returned in the previous
+command:
+  
+```bash
+juju list-regions aws
+```
+
+This will return a list like this:
+  
+```no-highlight
+us-east-1
+us-west-1
+us-west-2
+eu-west-1
+eu-central-1
+ap-south-1
+ap-southeast-1
+ap-southeast-2
+ap-northeast-1
+ap-northeast-2
+sa-east-1
+```
+
+This lists all of the regions available to you for the named cloud. To specify
 a different region, see [Creating a controller](./controllers-creating.html).
 
 Set the default region for a cloud with:
@@ -140,23 +165,19 @@ Having added a new cloud, if you re-run the `juju list-clouds` command, you
 should see something like this:
 
 ```no-highlight
-CLOUD          TYPE        REGIONS
-aws            ec2         us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2 ...
-aws-china      ec2         cn-north-1
-aws-gov        ec2         us-gov-west-1
-azure          azure       centralus, eastus, eastus2, northcentralus, southcentralus, westus, northeurope ...
-azure-china    azure       chinaeast, chinanorth
-cloudsigma     cloudsigma  hnl, mia, sjc, wdc, zrh
-google         gce         us-east1, us-central1, europe-west1, asia-east1
-joyent         joyent      eu-ams-1, us-sw-1, us-east-1, us-east-2, us-east-3, us-west-1
-lxd            lxd         localhost
-rackspace      rackspace   DFW, ORD, IAD, LON, SYD, HKG
-local:mystack  openstack   dev1
+Cloud        Regions  Default        Type        Description
+aws               11  us-east-1      ec2         Amazon Web Services
+aws-china          1  cn-north-1     ec2         Amazon China
+aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
+azure             18  centralus      azure       Microsoft Azure
+azure-china        2  chinaeast      azure       Microsoft Azure China
+cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
+google             4  us-east1       gce         Google Cloud Platform
+joyent             6  eu-ams-1       joyent      Joyent Cloud
+rackspace          6  dfw            rackspace   Rackspace Cloud
+localhost          1  localhost      lxd         LXD Container Hypervisor
+mystack            1  dev1           openstack   Openstack Cloud
 ```
-
-The 'local:' prefix indicates that this is a cloud you have added yourself. 
-
-
 [credentials]: ./credentials.html "Juju documentation > Credentials"
 [LXD-site]: http://www.ubuntu.com/cloud/lxd "LXD"
 [juju-lxd]: ./clouds-LXD.html "Juju documentation > LXD"

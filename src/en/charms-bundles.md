@@ -151,7 +151,7 @@ machines:
 
 ```
 
-## Service constraints in a bundle
+## Setting constraints in a bundle
 
 To make your bundle as reusable as possible, it's common to set minimum
 constraints against a charmed application, much like you would when deploying 
@@ -170,8 +170,31 @@ mysql:
     - mem=2G
     - cpu-cores=4
   annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+    "gui-x": "139"
+    "gui-y": "168"
+```
+
+## Setting charm configurations options in a bundle
+
+When deploying an application, the charm you use will often support or even
+require specific configuration options to be set. These options can be set in
+a bundle as a simple key addition to the application definition, using the
+configuration key/value pair.
+[See the documentation on application configuration][discover-config-options-docs]
+to discover which options are available for the different charms.
+
+For example, to set the flavor of the MySQL charm to Percona in a bundle, the
+bundle file would have an additional `options` field with specific value:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  options:
+    flavor: percona
+  annotations:
+    "gui-x": "139"
+    "gui-y": "168"
 ```
 
 ## Bundle placement directives
@@ -181,7 +204,7 @@ Much like application constraints, it requires adding the placement key `to` in
 the application definition.
 Where supported by the cloud provider, it is also possible to isolate charms
 by including the container format in the placement directive. Some clouds
-support LXC.
+support LXD.
 
 For example:
 
@@ -189,25 +212,25 @@ For example:
 mysql:
   charm: "cs:precise/mysql-27"
   num_units: 1
-  to: lxc:wordpress/0
+  to: lxd:wordpress/0
   annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+    "gui-x": "139"
+    "gui-y": "168"
 ```
 
-which will install the MySQL application into an LXC container on the same
+which will install the MySQL application into an LXD container on the same
 machine as the wordpress/0 unit. Or:
 
 ```yaml
 mysql:
   charm: "cs:precise/mysql-27"
   num_units: 1
-  to: lxc:1
+  to: lxd:1
   annotations:
-      "gui-x": "139"
-      "gui-y": "168"
+    "gui-x": "139"
+    "gui-y": "168"
 ```
-which will install the MySQL application into an LXC container on machine '1'.
+which will install the MySQL application into an LXD container on machine '1'.
 
 ## Machine specifications in a bundle
 
@@ -217,15 +240,94 @@ however you wish.  A machine specification is a YAML object with named machines
 (integers are always used for names).  These machines are objects with three
 possible fields: `series`, `constraints`, and `annotations`.
 
-Note that the machine spec is optional.  If it is not included, solutions such
-as the juju deployer will fail if a placement specification refers to a machine
-other than "0", which is used to represent the bootstrap node.  Leaving the
-machine specification out of your bundle tells Juju to place units on new
-machines if no placement directives are given.
+Note that the machine spec is optional. Leaving the machine spec out of your bundle
+tells Juju to place units on new machines if no placement directives are given.
+
+With machines specified, you can place and co-locate applications onto specific
+machines using the placement key to in the application definition. For example:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to:
+    - "0"
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+machines:
+  "0":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+```
+which will install the MySQL application on machine 0. You may also specify multiple
+machines for placing multiple units of an application. For example:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 2
+  to:
+    - "0"
+    - "1"
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+machines:
+  "0":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+  "1":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=4 cpu-power=500 mem=4096 root-disk=8192"
+```
+which will install one unit of the MySQL application on machine 0 and the other on
+machine 1. Where supported by the cloud provider, it is also possible to isolate charms
+by including the container format in the placement directive. Some clouds support LXD.
+For example:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  to:
+    - "lxd:1"
+  annotations:
+      "gui-x": "139"
+      "gui-y": "168"
+```
+
+which will install the MySQL application into an LXD container on machine '1'.
+
+## Binding endpoints of applications within a bundle
+
+You can configure more complex networks using [spaces](./network-spaces.html)
+and deploy charms with binding, as described in [Deploying applications](./charms-deploying.html).
+Bindings can also be specified for applications within a bundle. To do so,
+add a section to the bundle's YAML file called `bindings`. For example:
+
+```yaml
+mysql:
+  charm: "cs:precise/mysql-27"
+  num_units: 1
+  bindings:
+    server: database
+    cluster: internal
+```
+
+This is the equivalent of deploying with:
+
+```bash
+juju deploy cs:precise/mysql-27 --bind "server=database cluster=internal"
+```
+
+It is not currently possible to declare a default space in the bundle for all
+application endpoints. The workaround is to list all endpoints explicitly.
+
 
 ## Sharing your Bundle with the Community
 
-After you have tested and deployed your bundle you need to publish it to share
+After you have tested and deployed your bundle you need to release it to share
 it with people, this is covered in the
 [charm store documentation][store-docs]. 
 
@@ -239,3 +341,4 @@ Freenode) who can assist. You can also use the
 [store-docs]: ./authors-charm-store.html
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
 [constraints-docs]: ./charms-constraints.html
+[discover-config-options-docs]: ./charms-config.html#discovering-application-configuration-options

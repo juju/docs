@@ -1,4 +1,4 @@
-Title: How to become a Juju charm author  
+Title: How to become a Juju charm author
 
 # Becoming a charm author
 
@@ -18,7 +18,7 @@ You might want to start by looking at
 [what makes a charm](authors-charm-components.html), which breaks down and
 explains the different components that go into making a charm. Or you may
 want to dive right in with the 
-[walkthrough for writing an example charm](authors-charm-writing.html).
+[walkthrough for writing an example charm](developer-getting-started.html).
 
 Because charms are language agnostic, there are many paths to writing a charm. 
 [Charm Helpers](tools-charm-helpers.html) is a good place to start if

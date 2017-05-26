@@ -103,18 +103,19 @@ on users of `leader-set`.
 Assuming your own implementations of `create_settings` and `valid_settings`, you
 can use the two pseudo-python snippets below:
 
+```python
     def set_shared_settings():
         if is_leader():
-            if !valid_settings(leader_get()):
+            if not valid_settings(leader_get()):
                 settings = create_settings()
                 leader_set(settings)
 
     def get_shared_settings():
         settings = leader_get()
-        if !valid_settings(settings):
+        if not valid_settings(settings):
              raise WaitingForLeader()
         return settings
-
+```
 ...which can be used as follows:
 
   * `set_shared_settings` must be called in `leader-elected`, and may be called

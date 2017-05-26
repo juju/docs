@@ -19,7 +19,7 @@ administrator. See [Controllers](./controllers.html) for information on
 controllers.
 
 ```bash
-juju bootstrap lxd-controller-1 lxd
+juju bootstrap lxd lxd-controller-1
 ```
 
 ### Administrator password creation

@@ -27,7 +27,9 @@ juju update-clouds
 ## Preparing your GCE cloud for use by Juju
 
 Although Juju knows how GCE works, there are some tasks you must perform 
-manually in the GCE dashboard to prepare your account to work with Juju.
+manually in the GCE dashboard to prepare your account to work with Juju. We
+give an overview of the steps here. For greater detail, see the GCE site and
+the official [GCE documentation][gce-docs].
 
 ### Create a project
 
@@ -63,11 +65,8 @@ screen, it will show this across the top:
 
 ![API Manager screen](./media/config-gce-api_manager.png)
 
-Click '+Enable API':
-
-![Enable API](./media/config-gce-enable-api.png)
-
-From the list of available APIs, select 'Compute Engine API':
+Click '+Enable API' and then from the list of available APIs you are shown,
+select 'Compute Engine API':
 
 ![Compute Engine API](./media/config-gce-api_manager_compute_enabled.png)
 
@@ -125,3 +124,5 @@ juju add-credential google
 The command will interactively prompt you for information about the credentials
 being added. For the authentication type, choose 'json' and then give the full
 path to the file downloaded.
+
+[gce-docs]: https://console.cloud.google.com/start "GCE Getting Started"

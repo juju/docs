@@ -20,11 +20,17 @@ upgrading this model software.
 ## Upgrading the client software
 
 The client software is managed by the OS package management system. With Ubuntu
-this is APT. To upgrade the client, therefore, it is a matter of:
+this is usually APT. To upgrade the client, therefore, it is a matter of:
 
 ```bash
 sudo apt-get update
 sudo apt-get install juju
+```
+
+If you have installed Juju via the snap package:
+
+```bash
+sudo snap refresh juju
 ```
 
 For more installation information and what versions are available, see
@@ -38,6 +44,7 @@ run on each machine Juju creates, including controllers.
 
 Overview:
 
+- Upgrades must be applied to the controller model first
 - An upgrade is applied to agents running on all machines across a model.
 - During the upgrade, an algorithm will select a version to upgrade to if a
   version is not specified.
@@ -45,7 +52,7 @@ Overview:
   latter's cache cannot satisfy the request the controller will attempt a
   download from the internet.
 - Backups are recommended prior to upgrading the server software. See
-  [Backup and restore](./juju-backup-restore.html).
+  [Backup and restore](./controllers-backup.html).
 
 See [Notes on upgrading Juju software](./models-upgrade-notes.html)
 for upgrading details, including what to do when the controller lacks internet
@@ -59,7 +66,14 @@ order (`juju status`).
 
 Examples:
 
-Upgrade the model by allowing the version to be auto-selected:
+Upgrade the controller model for the current controller (this must be done before 
+other models on the controller can be upgraded) with the newest version available:
+
+```bash
+juju upgrade-juju -m controller
+```
+
+Upgrade the current model by allowing the version to be auto-selected:
 
 ```bash
 juju upgrade-juju
@@ -68,7 +82,7 @@ juju upgrade-juju
 Upgrade the model by specifying the version:
 
 ```bash
-juju upgrade-juju --version 2.0.3
+juju upgrade-juju --agent-version 2.0.3
 ```
 
 Track the progress with:

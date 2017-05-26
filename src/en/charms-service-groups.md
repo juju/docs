@@ -105,7 +105,7 @@ These application groups can be managed independently by Juju for upgrades and
 configuration
 
 ```bash
-juju set hadoop-slave-B some_param=new_value
+juju set-config hadoop-slave-B some_param=new_value
 ```
 
 This technique can potentially be a way for Juju to manage rolling upgrades for

@@ -1,4 +1,4 @@
-Title: Charm hooks reference  
+Title: Charm hooks reference
 
 # Charm hooks reference
 
@@ -40,12 +40,12 @@ once.
 
 ### leader-elected
 
-`leader-elected` run at least once to signify that Juju decided this unit is
+`leader-elected` is run at least once to signify that Juju decided this unit is
 the leader. Authors can use this hook to take action if their protocols for
 leadership, consensus, raft, or quorum require one unit to assert leadership.
 If the election process is done internally to the service, other code should be
 used to signal the leader to Juju. For more information read the [charm
-leadership document](./authors-charm-leadership.html).  
+leadership document](./authors-charm-leadership.html).
 
 ### leader-settings-changed
 
@@ -53,7 +53,7 @@ leadership document](./authors-charm-leadership.html).
 units to respond to. Much like (config-changed)[#config-changed) but for the
 leaders to send values to other units. Follower units can implement this hook
 and take action when the leader sets values. For more information read the
-[charm leadership document](./authors-charm-leadership.html).  
+[charm leadership document](./authors-charm-leadership.html).
 
 ### start
 
@@ -95,7 +95,7 @@ to preface all your other hooks with a quick call to your (idempotent)
 `update-status` provides constant feedback to the user about the status of the
 service the charm is modeling. The charm is run by Juju at regular intervals,
 and gives authors an opportunity to run code that gets the “health” of the
-service or services.  
+service or services.
 
 ## Relation hooks
 
@@ -169,7 +169,7 @@ runtime relations in play with the same name, and that they're independent: one
 
 ## Storage Charm Hooks
 
-Juju can provides a variety of storage to charms. The charms can define several
+Juju can provide a variety of storage to charms. The charms can define several
 different types of storage that are allocated from Juju. To read more
 information, see the [storage
 document](./developer-storage.html)
@@ -190,3 +190,18 @@ and always before the stop hook is run, to allow the charm to gracefully release
 resources before they are removed and before the unit terminates. The name
 prefix of the hook will depend on the storage key [defined in the
 `metadata.yaml`](./developer-storage.html#adding-storage) file.
+
+## Metric Hooks
+
+### collect-metrics
+
+Juju executes the collect-metrics hook every five minutes for the lifetime of
+the unit. Use the [`add-metric`](./reference-hook-tools.html#add-metric) hook tool in `collect-metrics` to add measurements
+to Juju.
+
+Because it may run concurrently with lifecycle charm hooks, `collect-metrics`
+executes in a more restricted environment where many hook tools (such as
+`config-get`) are not available. If access to charm configuration or other
+items is absolutely required, `charmhelpers.core.unitdata.kv` may be used to
+pass information into the `collect-metrics` hook context.
+

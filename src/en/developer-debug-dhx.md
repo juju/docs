@@ -136,7 +136,7 @@ The most common reason why you need to start a debug-hooks session is because a
 hook failed and you want to figure out why. Once you are in the debug-hooks
 session, you want to restart the failed hook and start debugging it.
 
-Instead of manually running `juju resolved --retry $unit`, you can just add the
+Instead of manually running `juju resolved $unit`, you can just add the
 `--retry` (or just `-r`) option to DHX:
 
 ```bash

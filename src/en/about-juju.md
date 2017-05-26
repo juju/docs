@@ -2,9 +2,9 @@ Title: What is Juju?
 
 # What is Juju?
 
-Juju is a state-of-the-art, open source, universal model for service oriented
-architecture and application oriented deployments. Juju allows you to deploy,
-configure, manage, maintain, and scale cloud applications quickly and
+Juju is a state-of-the-art, open source, universal modelling tool for service
+oriented architectures and application oriented deployments. Juju allows you to
+deploy, configure, manage, maintain, and scale cloud applications quickly and
 efficiently on public clouds, as well as on physical servers, OpenStack, and
 containers. You can use Juju from the command line or through its beautiful
 GUI.
@@ -183,7 +183,7 @@ charms:
 
 ## Are charms open source? Under what license?
 
-Charms can be published under whatever license the author prefers, there are
+Charms can be released under whatever license the author prefers, there are
 charms under just about every kind of license out there today. In many cases,
 charms follow the license of the applications that they deploy, but this is
 not a requirement. There are open source charms that deploy proprietary

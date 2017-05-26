@@ -20,11 +20,11 @@ clouds:
       type: maas
       auth-types: [oauth1]
       endpoint: http://devmaas/MAAS
-   testmass:
+   testmaas:
       type: maas
       auth-types: [oauth1]
       endpoint: http://172.18.42.10/MAAS
-   prodmass:
+   prodmaas:
       type: maas
       auth-types: [oauth1]
       endpoint: http://prodmaas/MAAS
@@ -56,12 +56,15 @@ juju list-clouds
 This will list the newly added clouds, preceded with the prefix 'local:' which
 denotes that these are local clouds added by the user:
 
-```no-higlight
-CLOUD           TYPE        REGIONS
-aws             ec2         us-east1, us-west1, us-west2
+<!-- JUJUVERSION: 2.0.0-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju list-clouds -->
+```no-highlight
+Cloud        Regions  Default        Type        Description
+aws               11  us-east-1      ec2         Amazon Web Services
 ...
-local:devmaas   maas
-local:prodmaas  maas
+devmaas            0                 maas        Metal As A Service
+prodmaas           0                 maas        Metal As A Service
+testmaas           0                 maas        Metal As A Service
 ```
 
 Next, add your MAAS credentials:
@@ -83,7 +86,7 @@ Note: Juju does not echo this key back to the screen.
 Now you can create a Juju controller with the bootstrap command:
  
 ```bash
-juju bootstrap prodmaas-controller prodmaas
+juju bootstrap prodmaas prodmaas-controller
 ```
 
 Above, the Juju controller was called 'prodmaas-controller'.

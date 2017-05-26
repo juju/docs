@@ -79,7 +79,7 @@ interactive hook context using the `juju debug-hooks` command. The session is
 interactive because Juju will block allowing you to run the hooks manually to
 check the return code or edit hook files before running the next hook. To
 reach the hook context Juju must retry the failed hook. You can retry a hook in
-error by issuing the `juju resolved --retry` command. See the  [Retrying failed
+error by issuing the `juju resolved` command. See the  [Retrying failed
 hooks](#retrying-failed-hooks) section for more information about how to retry
 hooks.
 
@@ -148,15 +148,15 @@ terminating.
 
 Prior to version 2.0, hooks returning an error will block until the user
 takes an action to retry them manually, by issuing the command `juju resolved
---retry unit-name/#` for the affected unit. After issuing the retry command,
-go back to the debug-hooks session to interact with the Juju environment.
+unit-name/#` for the affected unit. After issuing the resolved command, go
+back to the debug-hooks session to interact with the Juju environment.
 
 ```bash
-juju resolved --retry mysql/0
+juju resolved mysql/0
 ```
 
 Starting with Juju version 2.0 hooks returning errors will be automatically 
-retried periodically. However, the `juju resolved --retry` command may still be
+retried periodically. However, the `juju resolved` command may still be
 used to retry the hook immediately. See the 
 [General configuration options](./models-config#retrying-failed-hooks)
 for more information on the automatic retry feature and how to disable this 

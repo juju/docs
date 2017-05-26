@@ -74,7 +74,7 @@ the context of their controller):
 
 ### Model owners
 A model owner has the power to list users who have access to the model they own
-(`juju list-shares`).
+(`juju list-users mymodel`).
 
 ### Regular users
 The ability of a regular user depends on the model access rights (read-only or

@@ -279,15 +279,13 @@ pg-ssd/0      data/3 /srv/data attached false
   storage to having optional storage (i.e. minimum count of 0), and adding the
   storage after upgrade.
 
-- For LXC (local provider or not), you must currently set
-  ["allow-lxc-loop-mounts"](./config-general.html#alphabetical-list-of-general-configuration-values)
-  to "true" for LXC to work. With the default AppArmor profile,
-  LXC does not permit containers to mount loop devices. By setting
-  `allow-lxc-loop-mounts=true`, you are explicitly enabling this, and access
-  to all loop devices on the host.
+- Currently LXD (localhost) does not support mounting loopback devices 
+  for storage.
 
 ### More information
 
 If you are interested in more information on how to create a charm that uses
 the storage feature read
 [writing charms that use storage](./developer-storage.html).
+
+[model-config]: ./models-config#list-of-model-keys

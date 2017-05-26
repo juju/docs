@@ -12,6 +12,13 @@ resources are  deployed.
 Starting with Juju 2.0, users can upload resources to the controller
 or the Juju Charm Store from where they are accessible to charms.
 
+Use discrete files for resources. E.g. if your charm requires a software
+package and a dependency, then use two resources, one for the software package
+and one for the dependency. Do not group resources. Keep them discrete. Juju
+optimizes distribution of resources. If resources are grouped into one file
+(resource) then they are larger and must be updated everywhere when they are
+updated.
+
 # How it works
 
 ## Developing a charm with resources
@@ -101,10 +108,11 @@ charm-name charm.
 ### charm attach
 
 The `charm attach` command uploads a file to the Juju Charm Store as a new
-resource for the charm.
+resource for the charm. You must specify the fully qualified charm name, including
+the version. e.g. ~you/mycharm-0 instead of just ~you/mycharm.
 
 ```sh
-charm attach ~mbruzek/trusty/consul software=./consul_0.6.4_linux_amd64.zip
+charm attach ~mbruzek/trusty/consul-0 software=./consul_0.6.4_linux_amd64.zip
 ```
 
 # Using resources in a charm

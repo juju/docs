@@ -160,9 +160,9 @@ levels are: INFO, WARN, ERROR, DEBUG
 
 python:  
 ```python
-from charmhelpers.core.hookenv import juju_log
+from charmhelpers.core.hookenv import log
 
-juju_log('Something has transpired', 'INFO')
+log('Something has transpired', 'INFO')
 ```
 bash:  
 ```bash
