@@ -10,6 +10,50 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
+^# juju 2.0.4
+
+  ## Resolved Issues
+
+  Fixes vulnerability CVE-2017-9232:
+
+  Privilege escalation vulnerability when executing `juju-run` on the cloud
+  instances, not to be confused with the `juju run` CLI command.
+   
+  See the following for further details:
+
+  - https://bugs.launchpad.net/juju/+bug/1682411
+  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9232
+   
+  This vulnerability affects all currently distributed versions of Juju (1.25.x,
+  2.0.x and 2.1.x).
+   
+  ## How to know if you need to update
+   
+  We’ve put together a helpful Python script that will loop through your
+  controllers and then output the version of each model on the controller. It
+  requires Python 2.7 or higher.
+   
+  `curl -L https://goo.gl/59gxnz | python`
+   
+  ## How do I update? I’m on...
+   
+  **JAAS**  
+  JAAS has been updated to the new 2.1.3 release. Users with models in JAAS do
+  not need to perform any upgrade steps to their models that are running in JAAS.
+   
+  **Juju 2.2-betaX**  
+  Users of the 2.2-beta releases need to temporarily update to using the edge
+  channel. Users will need to use this until Juju 2.2-rc1 is released in the
+  coming days. You can easily switch your snap install client by using the
+  following:
+   
+  `snap refresh juju --edge --classic`
+   
+  Once you’ve completed this step you’ll need to run through the normal upgrade
+  steps on your models, as explained in the documentation: 
+   
+  https://jujucharms.com/docs/models-upgrade#the-upgrade-juju-command
+  
 
 ^# juju 2.0.2
 
