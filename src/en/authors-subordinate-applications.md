@@ -1,23 +1,23 @@
-Title: Subordinate services  
+Title: Subordinate applications  
 
-# Subordinate services
+# Subordinate applications
 
-Services are composed of one or more service units. A service unit runs the
-service's software and is the smallest entity managed by Juju. Service units
+Applications are composed of one or more application units. An application unit runs the
+application's software and is the smallest entity managed by Juju. Application units
 are typically run in an isolated container on a machine with no knowledge or
-access to other services deployed onto the same machine. Subordinate services
-allows for units of different services to be deployed into the same container
+access to other applications deployed onto the same machine. Subordinate applications
+allows for units of different applications to be deployed into the same container
 and to have knowledge of each other.
 
 ## Why use a subordinate?
 
-Services such as logging, monitoring, backups and some types of storage often
-require some access to the runtime of the service they wish to operate on.
-Under the current modeling of services it is only possible to relate services
-to other services with an explicit interface pairing. Requiring a specified
-relation implies that every charm author need be aware of any and all services
-a deployment might wish to depend on, even if the other service can operate
-without any explicit cooperation. For example a logging service may only
+Applications such as logging, monitoring, backups and some types of storage often
+require some access to the runtime of the application they wish to operate on.
+Under the current modeling of applications it is only possible to relate applications
+to other applications with an explicit interface pairing. Requiring a specified
+relation implies that every charm author need be aware of any and all applications
+a deployment might wish to depend on, even if the other application can operate
+without any explicit cooperation. For example a logging application may only
 require access to the container level logging directory to function.
 
 The following changes are designed to address these issues and allow a class
@@ -26,11 +26,11 @@ taking advantage of the existing relationship machinery.
 
 ## Terms
 
-**Principal service**: A traditional service or charm in whose container
-subordinate services will execute.
+**Principal application**: A traditional application or charm in whose container
+subordinate applications will execute.
 
-**Subordinate service/charm**: A service designed for and deployed to the
-running container of another service unit.
+**Subordinate application/charm**: An application designed for and deployed to the
+running container of another application unit.
 
 **Container relation**: A scope:container relationship. While modeled
 identically to traditional, scope: global, relationships, juju only implements
@@ -38,24 +38,24 @@ the relationship between the units belonging to the same container.
 
 ## Relations
 
-When a traditional relation is added between two services, all the service units
-for the first service will receive relation events about all service units for
-the second service. Subordinate services have a very tight relationship with
-their principal service, so it makes sense to be able to restrict that
+When a traditional relation is added between two applications, all the application units
+for the first application will receive relation events about all application units for
+the second application. Subordinate applications have a very tight relationship with
+their principal application, so it makes sense to be able to restrict that
 communication in some cases so that they only receive events about each other.
 That's precisely what happens when a relation is tagged as being a scoped to the
 container. See [Relations lifecycle](./authors-relations-in-depth.html).
 
 Container relations exist because they simplify responsibilities for the
-subordinate service charm author who would otherwise always have to filter units
+subordinate application charm author who would otherwise always have to filter units
 of their relation before finding the unit they can operate on.
 
-If a subordinate service needs to communicate with all units of the principal
-service, it can still establish a traditional (non-container) relationship to
+If a subordinate application needs to communicate with all units of the principal
+application, it can still establish a traditional (non-container) relationship to
 it.
 
-In order to deploy a subordinate service a scope: container relationship is
-required. Even when the principal services' charm author doesn't provide an
+In order to deploy a subordinate application a scope: container relationship is
+required. Even when the principal applications' charm author doesn't provide an
 explicit relationship for the subordinate to join, using an 
 [_implicit relation_](authors-implicit-relations.html) with scope: container 
 will satisfy this constraint.
@@ -63,22 +63,22 @@ will satisfy this constraint.
 ## Addressability
 
 No special changes are made for the purpose of naming or addressing subordinate
-units. If a subordinate logging service is deployed with a single unit of
+units. If a subordinate logging application is deployed with a single unit of
 wordpress we would expect the logging unit to be addressable as logging/0, if
-this service were then related to a mysql service with a single unit we'd expect
+this application were then related to a mysql application with a single unit we'd expect
 logging/1 to be deployed in its container. Subordinate units inherit the
-public/private address of the principal service. The container of the principal
+public/private address of the principal application. The container of the principal
 defines the network setup.
 
 ## Declaring subordinate charms
 
 When a charm author wishes to indicate their charm should operate as a
-subordinate service only a small change to the subordinate charm's metadata is
+subordinate application only a small change to the subordinate charm's metadata is
 required. Adding subordinate: true as a top-level attribute indicates the charm
 is intended only to deploy in an existing container. Subordinate charms should
 then declare a required interface with scope: container in the relation
-definition of the charms metadata. Subordinate services may still declare
-traditional relations to any service. The deployment is delayed until a
+definition of the charms metadata. Subordinate applications may still declare
+traditional relations to any application. The deployment is delayed until a
 container relation is added.
 
 subordinate: false charms (the default) may still declare relations as scope:
@@ -97,17 +97,17 @@ The example below shows adding a container relation to a charm.
 ## Status of subordinates
 
 The status output contains details about subordinate units under the status of
-the principal service unit that it is sharing the container with. The
+the principal application unit that it is sharing the container with. The
 subordinate unit's output matches the formatting of existing unit entries but
 omits machine, public-address and subordinates (which are all the same as the
 principal unit).
 
-The subordinate service is listed in the top level services dictionary in an
-abbreviated form. The subordinate-to: [] list is added to the service which
-contains the names of all services this service is subordinate to.
+The subordinate application is listed in the top level applications dictionary in an
+abbreviated form. The subordinate-to: [] list is added to the application which
+contains the names of all applications this application is subordinate to.
 
 ```yaml
-    services:
+    applications:
       rsyslog:
         charm: cs:precise/rsyslog-0
         exposed: false
@@ -147,7 +147,7 @@ juju deploy wordpress
 juju add-relation mysql wordpress
 ```
 
-Now we'll create a subordinate rsyslog service:
+Now we'll create a subordinate rsyslog application:
 
 ```bash
 juju deploy rsyslog
@@ -155,18 +155,19 @@ juju add-relation rsyslog mysql
 juju add-relation rsyslog wordpress
 ```
 
-This will create a rsyslog service unit inside each of the containers holding
-the mysql and wordpress units. The rsyslog service has a standard client-server
+This will create a rsyslog application unit inside each of the containers holding
+the mysql and wordpress units. The rsyslog application has a standard client-server
 relation to both wordpress and mysql but these new relationships are implemented
-only between the principal unit and the subordinate unit . A subordinate unit
+only between the principal unit and the subordinate unit. A subordinate unit
 may still have standard relations established with any unit in its environment
 as usual.
 
 ## Caveats
 
-When a subordinate is related to a single principal application, the subordinate
-may be removed by removing the principal-subordinate relation. When related to
-multiple principal applications, the subordinate may only be removed by removing
-the principal unit.
+When a subordinate is related to a single principal application, the
+subordinate may be removed by removing the principal-subordinate
+relation. This will remove all of the subordinate units from the
+principal application's containers. (There's no way to only remove one
+of the subordinate units.)
 
 
