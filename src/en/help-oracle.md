@@ -9,8 +9,10 @@ cloud:
 1. Associate Oracle's Ubuntu images with your Compute service. Juju uses these
    for deployment.
 
-1. Add the Oracle cloud to Juju. Endpoint details may need to be retrieved from
-   the Oracle Compute *Dashboard*.
+1. For trial accounts, add the Oracle cloud to Juju. Endpoint details may need 
+   to be retrieved from the Oracle Compute *Dashboard*.
+   Juju already knows about endpoints for paid accounts so this step is only
+   necessary if using a trial account.
 
 1. Add authentication credentials for the specific Compute service to Juju.
 
@@ -84,7 +86,7 @@ selecting the 'Images' tab:
 
 ## Add cloud
 
-To add your Oracle cloud to Juju, type `juju add-cloud`. 
+When using a trial account, to add your Oracle cloud to Juju, type `juju add-cloud`. 
 
 The interactive `add-cloud` process will start by first asking for the cloud
 type. Enter `oracle-compute`:
