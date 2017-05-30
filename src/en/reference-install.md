@@ -5,9 +5,9 @@ Title: Installing Juju
 Juju is available as a client on many platforms and distributions. Find your
 platform below and get started with Juju.
 
-## Version 2.1.2
+## Version 2.1.3
 
-The current stable version of Juju is 2.1.2 and is recommended for everyday
+The current stable version of Juju is 2.1.3 and is recommended for everyday
 production use.
 
 
@@ -54,7 +54,7 @@ updated with the following:
 
 
 Alternatively, you can manually install Juju from the following archive:
-: [juju-2.1.2-osx.tar.gz](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-osx.tar.gz)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-osx.tar.gz/+md5))
+: [juju-2.1.3-osx.tar.gz](https://launchpad.net/juju/2.1/2.1.3/+download/juju-2.1.3-osx.tar.gz)([md5](https://launchpad.net/juju/2.1/2.1.3/+download/juju-2.1.3-osx.tar.gz/+md5))
 {: .instruction }
 
 
@@ -63,7 +63,7 @@ Alternatively, you can manually install Juju from the following archive:
 
 A Windows installer is available for Juju.
 
-[juju-setup-2.1.2.exe](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe/+md5))
+[juju-setup-2.1.3.exe](https://launchpad.net/juju/2.1/2.1.3/+download/juju-setup-2.1.3.exe)([md5](https://launchpad.net/juju/2.1/2.1.3/+download/juju-setup-2.1.3.exe/+md5))
 
 
 ### Centos and other Linuxes
@@ -81,7 +81,7 @@ can install Juju with:
 ```
 
 CentOS:
-: [juju-2.1.2-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-centos7.tar.gz)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-2.1.2-centos7.tar.gz/+md5))
+: [juju-2.1.3-centos7.tar.gz](https://launchpad.net/juju/2.1/2.1.3/+download/juju-2.1.3-centos7.tar.gz)([md5](https://launchpad.net/juju/2.1/2.1.3/+download/juju-2.1.3-centos7.tar.gz/+md5))
 {: .instruction }
 
 
