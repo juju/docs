@@ -209,7 +209,7 @@ details  {
 
    A Windows installer is available for Juju.
 
-   [juju-setup-2.1.2.exe](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe)([md5](https://launchpad.net/juju/2.1/2.1.2/+download/juju-setup-2.1.2.exe/+md5))
+   [juju-setup-2.1.3.exe](https://launchpad.net/juju/2.1/2.1.3/+download/juju-setup-2.1.3.exe)([md5](https://launchpad.net/juju/2.1/2.1.3/+download/juju-setup-2.1.3.exe/+md5))
 
    Please see the [install docs][install] for other
    versions.
