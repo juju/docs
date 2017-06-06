@@ -145,7 +145,7 @@ expand the relevant section). You can also generate a YAML file
         maas
         manual
         openstack
-        oracle-compute
+        oracle
         vsphere
 
        Select cloud type: maas
@@ -171,7 +171,7 @@ expand the relevant section). You can also generate a YAML file
         maas
         manual
         openstack
-        oracle-compute
+        oracle
         vsphere
 
        Select cloud type: maas
@@ -198,7 +198,7 @@ expand the relevant section). You can also generate a YAML file
         maas
         manual
         openstack
-        oracle-compute
+        oracle
         vsphere
        
        Select cloud type: openstack
@@ -240,11 +240,11 @@ expand the relevant section). You can also generate a YAML file
         maas
         manual
         openstack
-        oracle-compute
+        oracle
         vsphere
        
-       Select cloud type: oracle-compute
-       Enter a name for your vsphere cloud: oc
+       Select cloud type: oracle
+       Enter a name for your oracle cloud: oc
        
        Enter the API endpoint url for the cloud: https://api-z41.compute.em3.oraclecloud.com/
 
@@ -267,7 +267,7 @@ expand the relevant section). You can also generate a YAML file
          maas
          manual
          openstack
-         oracle-compute
+         oracle
          vsphere
        
        Select cloud type: vsphere
@@ -349,7 +349,7 @@ joyent             6  eu-ams-1         joyent          Joyent Cloud
 oracle             5  uscom-central-1  oracle
 rackspace          6  dfw              rackspace       Rackspace Cloud
 localhost          1  localhost        lxd             LXD Container Hypervisor
-oc1                0                   oracle-compute  Oracle Compute Cloud Service
+oc1                0                   oracle          Oracle Compute Cloud Service
 devstack           1  dev1             openstack       Openstack Cloud
 vs1                1  dc1              vsphere
 ```
