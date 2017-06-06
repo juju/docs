@@ -24,18 +24,18 @@ juju clouds
 This will return a list like this:
   
 ```no-highlight
-Cloud        Regions  Default          Type            Description
-aws               14  us-east-1        ec2             Amazon Web Services
-aws-china          1  cn-north-1       ec2             Amazon China
-aws-gov            1  us-gov-west-1    ec2             Amazon (USA Government)
-azure             24  centralus        azure           Microsoft Azure
-azure-china        2  chinaeast        azure           Microsoft Azure China
-cloudsigma         5  hnl              cloudsigma      CloudSigma Cloud
-google             7  us-east1         gce             Google Cloud Platform
-joyent             6  eu-ams-1         joyent          Joyent Cloud
-oracle             5  uscom-central-1  oracle
-rackspace          6  dfw              rackspace       Rackspace Cloud
-localhost          1  localhost        lxd             LXD Container Hypervisor
+Cloud        Regions  Default          Type        Description
+aws               14  us-east-1        ec2         Amazon Web Services
+aws-china          1  cn-north-1       ec2         Amazon China
+aws-gov            1  us-gov-west-1    ec2         Amazon (USA Government)
+azure             24  centralus        azure       Microsoft Azure
+azure-china        2  chinaeast        azure       Microsoft Azure China
+cloudsigma         5  hnl              cloudsigma  CloudSigma Cloud
+google             7  us-east1         gce         Google Cloud Platform
+joyent             6  eu-ams-1         joyent      Joyent Cloud
+oracle             5  uscom-central-1  oracle      Oracle Cloud
+rackspace          6  dfw              rackspace   Rackspace Cloud
+localhost          1  localhost        lxd         LXD Container Hypervisor
 ```
 
 This lists the cloud name (which you will use to specify the cloud you want to 
