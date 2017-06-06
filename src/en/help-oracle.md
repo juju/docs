@@ -20,9 +20,9 @@ We'll step through each of these requirements below, before using Juju to
 launch a test deployment on Oracle's Compute. 
 
 !!! Note:
-	Oracle support is currently in the latest [Juju 2.2 beta][jujubeta]
-	release and is experimental. Both the Juju and Oracle teams are working
-	to improve the user experience.
+	Oracle support is currently in the latest [Juju 2.2 release
+        candidate][jujubeta] and is experimental. Both the Juju and Oracle
+        teams are working to improve the user experience.
 
 ## Images
 
@@ -231,7 +231,7 @@ being visible in the `Instances` page of the Oracle Compute dashboard:
 
 <!-- LINKS -->
 [compute]: https://cloud.oracle.com/en_US/compute
-[jujubeta]: ./reference-install.html
+[jujubeta]: ./reference-install.html#getting-development-releases
 [cloudoracle]: https://cloud.oracle.com/home
 [getstarted]: ./getting-started-jaas.html
 [spaces]: ./network-spaces.html
