@@ -33,10 +33,11 @@ azure-china        2  chinaeast        azure       Microsoft Azure China
 cloudsigma         5  hnl              cloudsigma  CloudSigma Cloud
 google             7  us-east1         gce         Google Cloud Platform
 joyent             6  eu-ams-1         joyent      Joyent Cloud
-oracle             5  uscom-central-1  oracle
+oracle             5  uscom-central-1  oracle      Oracle Cloud
 rackspace          6  dfw              rackspace   Rackspace Cloud
 localhost          1  localhost        lxd         LXD Container Hypervisor
 ```
+
 As mentioned, we're going with Google's Cloud Engine, which we'll
 configure over the next couple of steps. But you could just as easily use
 [Amazon AWS][helpaws] or [Microsoft Azure][helpazure], or any of the listed
