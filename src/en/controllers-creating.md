@@ -123,7 +123,24 @@ from 10 minutes to 15, enter the value in seconds:
 juju bootstrap --config bootstrap-timeout=900 lxd lxd-faraway
 ```
 
+
 To learn more about configuration options available at bootstrap time, see
 [Configuring controllers][controlconfig].
+
+
+## Changing the current model/controller
+
+By default, when Juju bootstraps a new controller, it will also 'switch' to that controller
+and the default model created with it. Any subsequent Juju commands which do not specify a
+controller/model will be assumed to apply to this model.
+
+In some cases (e.g. when scripting Juju) this may not be desirable. It is possible to add 
+a `--no-switch` option to the bootstrap command to prevent the new controller from being
+automatically selected. For example:
+
+```bash
+juju bootstrap localhost lxd-new --no-switch
+```
+
 
 [controlconfig]: ./controllers-config.html "Configuring Juju controllers"
