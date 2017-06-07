@@ -45,6 +45,39 @@ specifying an existing credential ('mysecret'):
 juju add-model rackspace-prod --credential mysecret
 ```
 
+By default, Juju will automatically select the newly created model. 
+Subsequent commands (unless using the `-m` switch to 
+choose a specific model) will operate on this model. This can be confirmed
+by running the `juju switch` command with no arguments. So, for example,
+after the above command, running:
+
+```bash
+juju switch
+```
+
+...will return output like this:
+
+```bash
+rackspace:admin/rackspace-prod
+```
+
+In some cases (e.g. when scripting), this behaviour may be undesirable. In
+this case, you can add `--no-switch` to the command to keep the current model 
+selected:
+
+```bash
+juju add-model rackspace-dev --no-switch
+juju switch
+```
+
+...will still return:
+
+```bash
+rackspace:admin/rackspace-prod
+```
+
+
+ 
 
 
 
