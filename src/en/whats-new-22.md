@@ -15,6 +15,7 @@ and easier, thanks to several new and significant features:
 We're going to look at these new features in more detail below. If you're new
 to Juju, we recommend taking a look at our [Getting started][first] guide
 first.
+
 ## Cloud updates
 
 ### Oracle cloud
@@ -23,8 +24,8 @@ Oracle's public cloud, [Oracle Compute][compute], becomes our latest cloud
 addition.
 
 Prior to deployment, you will need to associate Oracle's Ubuntu images within
-the dashboard of your Compute service as Juju uses these with its own
-deployments. 
+the dashboard of your Oracle Compute service because Juju uses these with its
+own deployments. 
 
 This can be done easily by signing in to Oracle's domain dashboard, creating a
 new `Compute` instance, selecting `Marketplace` and searching for 'ubuntu':
@@ -42,7 +43,7 @@ You now need to simply add credentials and bootstrap.
     [Oracle documentation][helporacle] for help on the process.
 
 Using Juju's interactive authentication, importing Oracle credentials into Juju
-is a simple process. You will just need the following information:
+is an easy process. You will just need the following information:
 
 - **Username**: usually the email address for your Oracle account.
 - **Password**: the password for this specific Compute domain.
@@ -91,9 +92,9 @@ documentation to get started.
 Juju now handles transactions more efficiently and has better support for
 longer running controllers.
 
-Logs are compressed when rotated, separated by model and can be pruned to a
-specific age and size, configured through the controller - see our [Controller
-documentation][logs] for more details. 
+Logs are compressed when rotated, separated by model, and can be pruned to a
+specific age and size. These options are configured through the controller -
+see our [Controller documentation][logs] for more details. 
 
 ## Next Steps
 
