@@ -49,7 +49,7 @@ locally, type the following:
 
 ```bash
 juju switch controller
-juju create backup
+juju create-backup
 ```
 See '[Backing Up and Restoring Juju][backup]' if you need further details.
 
