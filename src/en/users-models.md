@@ -60,12 +60,13 @@ juju grant jim write mymodel
 ```
 See [Users][regularusers] for details on available commands.
 
-!!! Note: Each user has control over naming the models they own. This means
-it is possible for two users, `jane` and `claire`, to each have a model with
-the same name, `foo`. This could cause difficulty when `claire` needs to access
-`jane`'s model. Because of this, it is possible to refer to models
-using `<owner>/<model>` in place of just the model name. For example, `claire`
-can get the status of the model using `juju status -m jane/foo`.
+!!! Note: 
+    Each user has control over naming the models they own. This means it is
+    possible for two users, `jane` and `claire`, to each have a model with the same
+    name, `foo`. This could cause difficulty when `claire` needs to access `jane`'s
+    model. Because of this, it is possible to refer to models using
+    `<owner>/<model>` in place of just the model name. For example, `claire` can
+    get the status of the model using `juju status -m jane/foo`.
 
 ## Controller access
 
@@ -137,8 +138,9 @@ On the controller, you grant Frances access to add models using:
 juju grant frances@external addmodel
 ```
 
-!!!Note: the '@external' is required as it indicates where the credential
-comes from, as opposed to '@local'.
+!!! Note: 
+    The '@external' is required as it indicates where the credential
+    comes from, as opposed to '@local'.
 
 You can allow anyone with an Ubuntu SSO account to create models on this
 controller like this:
@@ -166,6 +168,23 @@ juju add-model test --credential gce
 
 To learn more about credentials, see [credentials].
 
+## Public controllers
+
+The `juju login` command can also be used to access a public controller, using
+either the name or the host name of the controller as a parameter:
+
+```bash 
+juju login jaas
+```
+
+The above command will add the 'jaas' public controller to the list of
+controllers you can use, caching its details in the locally stored
+`controllers.yaml` file. 
+
+Public controllers will normally use an external identity provider.
+[JAAS][jaas], as used above, uses [Ubuntu SSO][sso], which means you should 
+register with [https://jujucharms.com/login](https://jujucharms.com/login).
+
 ## Revoke access rights
 
 The 'revoke' command is used to remove a user's access to either a model or a
@@ -186,12 +205,17 @@ both read and write access:
 juju revoke bob read mymodel
 ```
 
-!!! Note: The admin user has credentials stored in the controller and will
-be able to perform functions on any model. However, a regular user who has
-been given 'add-model' permissions may need to specify which credential to
-use when logging in to a model for the first time. To specify a credential,
-run 'juju add-credential'.
+!!! Note:
+    The admin user has credentials stored in the controller and will be able to
+    perform functions on any model. However, a regular user who has been given
+    'add-model' permissions may need to specify which credential to use when
+    logging in to a model for the first time. To specify a credential, run 'juju
+    add-credential'.
+
 
 [addmodel]: ./models-adding.html
 [credentials]: ./credentials.html
 [regularusers]: ./users.html#regular-users
+[jaas]: https://jujucharms.com/jaas
+[sso]: https://login.ubuntu.com/
+
