@@ -171,7 +171,7 @@ To learn more about credentials, see [credentials].
 ## Public controllers
 
 The `juju login` command can also be used to access a public controller, using
-either the name or the hostname of the controller as a parameter:
+either the name or the host name of the controller as a parameter:
 
 ```bash 
 juju login jaas
