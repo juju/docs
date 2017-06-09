@@ -1,172 +1,112 @@
-Title: What's new in 2.1
-TODO: add changes in output to model and show-machine
+Title: What's new in 2.2
+TODO: Needs KVM details?
+      Needs new networking details?
 
+# What's new in 2.2
 
-# What's new in 2.1
+This release of Juju 2.2 makes creating and managing cloud deployments faster
+and easier, thanks to several new and significant features:
 
-Juju 2.1 makes creating and managing cloud deployments even easier. This is
-thanks to two new and significant features:
+- Cloud updates: new support for Oracle's public cloud and big improvements to
+  VMware's vSphere.
+- Performance: greatly enhanced memory and storage consumption, helping Juju run
+  more efficiently for longer.
 
-- add other clouds interactively: Juju already has baked-in support for many
-  public clouds, including [Amazon AWS][aws], [Google GCE][gce] and Microsoft
-  [Azure][azure]. But with Juju 2.1, additional clouds such as [MAAS][maas],
-  [OpenStack][openstack] and [vSphere][vsphere], can be added by simply typing
-  `juju add-cloud` and answering a few questions.
-- model migration: it's now possible to move live models from one controller to
-  another, allowing for load balancing and maintenance without losing access to
-  your applications. 
-
-We're going to step through these new features in more detail below. If you're
-new to Juju, we recommend taking a look at our [Getting started][first] guide
+We're going to look at these new features in more detail below. If you're new
+to Juju, we recommend taking a look at our [Getting started][first] guide
 first.
 
-## Interactive add-cloud
+## Cloud updates
 
-With previous versions of Juju, the 'add-cloud' command would need to be fed a
-specifically formatted yaml file if your cloud of choice wasn't directly
-supported by Juju. You can still do this, but from version 2.1, you can also
-step through a simple interactive process that will create a working
-configuration for you. 
+### Oracle cloud
 
-In the following example, we're going to configure Juju to add a locally
-accessible MAAS installation by answering 3 simple questions.
+Oracle's public cloud, [Oracle Compute][compute], becomes our latest cloud
+addition.
 
-Typing `juju add-cloud` starts the process and produces the following output:
+Prior to deployment, you will need to associate Oracle's Ubuntu images within
+the dashboard of your Oracle Compute service because Juju uses these with its
+own deployments. 
 
-```no-highlight
-Cloud Types
-  maas
-  manual
-  openstack
-  vsphere
+This can be done easily by signing in to Oracle's domain dashboard, creating a
+new `Compute` instance, selecting `Marketplace` and searching for 'ubuntu':
 
-Select cloud type:
-```
+![Ubuntu image search](./media/oracle_create-instance-ubuntu.png)
 
-For this example, typing 'maas' will select our chosen cloud type. 
+Select the images you want, Ubuntu 16.04 and Ubuntu 14.04 are good choices, and
+head back to Juju.
 
-!!! Note: for a cloud that supports multiple regions, 'add-cloud' will walk you
-entering the endpoints for each region.
+You now need to simply add credentials and bootstrap. 
 
-The next question will ask for a name to give to this new cloud:
+!!! Note:
+    If you're using an Oracle cloud trial account, you will need to enter your
+    endpoint details manually using `juju add-cloud`. See our 
+    [Oracle documentation][helporacle] for help on the process.
 
-```no-highlight
-Enter a name for your maas cloud: newmaas
-```
+Using Juju's interactive authentication, importing Oracle credentials into Juju
+is an easy process. You will just need the following information:
 
-We're now asked for the API endpoint URL. For our MAAS system, this is
-`https://192.168.122.143:5240/MAAS`. Juju will check the validity of the API
-url by making sure it's visible to the client. After verifying the url, the
-configuration will be created as shown here:
+- **Username**: usually the email address for your Oracle account.
+- **Password**: the password for this specific Compute domain.
+- **Identity domain**: the ID for the domain, e.g. `a476989`.
 
-```no-hightlight
-Enter the API endpoint url: https://192.168.122.143:5240/MAAS
-
-Cloud "newmaas" successfully added
-You may bootstrap with 'juju bootstrap newmaas'
-```
-
-### Add credentials
-
-Juju now has all the connection details it needs. The next step
-is to add user access credentials, a process that's similarly interactive:
+To add these details, type `juju add-credential <credential-name> <cloud-name>`:
 
 ```bash
-juju add-credential newmaas
+juju add-credential oracle
 ```
 
-Juju will ask two further details:
+You will be asked for each detail in turn.
 
 ```no-highlight
-Enter credential name: newmaascreds
-Using auth-type "oauth1".
-Enter maas-oauth:  ****************
-Credentials added for cloud add-cloud-maas.
+Enter credential name: mynewcredential
+Using auth-type "userpass".
+Enter username: javier
+Enter password: ********
+Enter identity-domain: a476989
+Credentials added for cloud oracle.
 ```
 
-### Bootstrap the cloud
-
-Juju can bow bootstrap our new cloud, a process that can
-be initiated by typing the following:
+You have now added everything needed to bootstrap your new Oracle Compute cloud
+with Juju:
 
 ```bash
-juju bootstrap
+juju boostrap oracle
 ```
 
-The above command will list available clouds, including the freshly added
-'newmaas'. This is typed to launch the new cloud:
+You can now start deploying Juju [charms and bundles][charms] to your Oracle cloud.
 
-```no-highlight
-Select a cloud [localhost]: newmaas
+See our [Using the Oracle public cloud][helporacle] documentation for further help.
 
-Enter a name for the Controller [newmaasc]: 
+### VMware vSphere
 
-Creating Juju controller "newmaasc" on newmaas
-Looking for packaged Juju agent version 2.1-beta4 for amd64
-Launching controller instance(s) on add-cloud-maas...
- - kh4k4a (arch=amd64 mem=4G cores=1)  
-Fetching Juju GUI 2.2.7
-```
-## Deploy an application
+Our [vSphere][vmwarevsphere] support has been much improved. It now requires
+very little configuration prior to bootstrap and performs much better than with
+previous versions of Juju.
 
-We can now easily deploy any application from the [Juju charm
-store][charmstore]. For this example, we're going to deploy an [Elasticsearch
-cluster][esstore], which combines both Elasticsearch and Kibana in a single
-scaleable bundle:
+Additionally, to help with vSphere machine management, machines are now
+organised into folders on your cloud. See our [vSphere][helpvmware]
+documentation to get started.
+ 
+## Performance 
 
-```bash
-juju deploy cs:bundle/elasticsearch-cluster-17
-```
+Juju now handles transactions more efficiently and has better support for
+longer running controllers.
 
-After a few moments, `juju status` will report both applications are active,
-giving us a fully operational Elasticsearch deployment. 
-
-## Migrate an application
-
-The new migration feature in Juju 2.1 allows you to painlessly move any model
-from one controller to another. This may be necessary if a controller reaches
-capacity, or to move a model while backing up the data on the original
-controller.
-
-!!! Note: for details on where models can be migrated to, see the [migrate][migrate]
-documentation.
-
-To continue the previous example, we need to create a secondary controller to
-act as the destination.  As we're going to move the 'default' model that was
-created automatically when we bootstrapped the original controller, we'll need
-to bootstrap the new controller with a different name for the default model:
-
-```bash
-juju bootstrap lxd newcontroller --default-model newmodel
-```
-
-Starting the migration is now as easy as switching back to the original
-controller and specifying both the model and the destination controller with
-the `migrate` command:
-
-```
-juju switch newmaasc
-juju migrate default newcontroller
-```
-
-The 'Notes' column in the output from `juju status` can be used to follow
-progress. However, small migrations like this will complete in seconds. And
-that's all there is to it. 
+Logs are compressed when rotated, separated by model, and can be pruned to a
+specific age and size. These options are configured through the controller -
+see our [Controller documentation][logs] for more details. 
 
 ## Next Steps
 
-For further details, see the [add-cloud][addcloud] and [migrate][migrate]
-documentation and the Juju 2.1 [release notes][rnotes].
+For further details, see the [Controller documentation][logs], the 
+[Oracle compute][helporacle] documentation and the Juju 2.2 [release
+notes][rnotes].
 
 [first]: ./getting-started.html
-[aws]: ./help-aws.html
-[gce]: ./help-google.html
-[azure]: ./help-azure.html
-[maas]: ./clouds-maas.html
-[openstack]: ./help-openstack.html
-[vsphere]: ./help-vmware.html
+[logs]: ./controllers-config.html
+[vmwarevsphere]: http://www.vmware.com/products/vsphere.html
+[helpvmware]: ./help-vmware.html
+[compute]: https://cloud.oracle.com/en_US/compute
 [charmstore]: https://jujucharms.com/store
-[esstore]: https://jujucharms.com/elasticsearch-cluster
-[addcloud]: ./commands.html#add-cloud
-[migrate]: ./models-migrate.html
-[rnotes]: ./reference-release-notes.html#juju_2.1.0
+[helporacle]: ./help-oracle.html
+[rnotes]: ./reference-release-notes.html#juju_2.2.0
