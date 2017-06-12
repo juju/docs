@@ -77,8 +77,8 @@ include future additions to the feature.
 ### `juju run-action`
 
 Trigger an action. This command takes the unit as an argument and returns an ID
-for the action. The ID can be used with `juju show-action-output <ID>` or `juju
-show-action-status <ID>.
+for the action. The ID can be used with `juju show-action-output <ID>` or 
+`juju show-action-status <ID>`.
 
 If an action requires parameters, these can be passed directly. For example, we
 could create a new 'git' repository by triggering the 'add-repo' action and
@@ -94,6 +94,55 @@ This will return the ID for the new action:
 Action queued with id: 3a7cc626-4c4c-4f00-820f-f881b79586d10
 ```
 
+When running short-lived actions from the command line, it is more convenient to
+add the `--wait` option to this command. This causes the Juju client to wait for
+the action to run, and then return the results and other information in YAML
+format.
+
+For example, running the command:
+
+```bash
+juju run-action git/0 list-repo --wait
+```
+
+Will return something like:
+
+```bash
+action-id: 09563275-87bc-4224-81ef-8282ad7e9d63
+results:
+  docs1: /var/git/docs1.git
+  myproject: /var/git/myproject.git
+status: completed
+timing:
+  completed: 2017-06-18 11:20:10 +0000 UTC
+  enqueued: 2017-06-18 11:20:07 +0000 UTC
+  started: 2017-06-18 11:20:10 +0000 UTC
+```
+
+This avoids having to run a separate command to see the results of the action 
+(although you can still run `show-action-output` using the action-id that 
+was returned). 
+
+For actions which may take longer to return, it is also possible to specify a 
+'timeout' value, expressed in hours(h), minutes(m), seconds(s), milliseceonds(ms)
+or nanoseconds(ns). In this case, if the action has completed before the 
+specified period is up, it will return the results as before. If the action has
+not completed, the command will simply return the id and status, enabling the
+user to continue issuing commands. E.g.:
+
+```bash
+juju run-action git/0 list-repo --wait=10ns
+```
+Ten nanoseconds isn't much time to get anything done, so in this case the output
+will be similar to:
+
+```bash
+action-id: 10fb05d9-d220-4a07-825e-a1258b1a868b
+status: pending
+timing:
+  enqueued: 2017-06-18 11:27:15 +0000 UTC
+```
+
 You can also set parameters indirectly via a YAML file, although you can
 override the parameters within the file by providing them directly.
 
@@ -106,7 +155,7 @@ With the above example `params.yaml` file, we could remove the `myproject` git
 repository with the following command:
 
 ```bash
-juju run-action git/0 remove-repo --params=params.yaml sure=yes
+juju run-action git/0 remove-repo --wait --params=params.yaml sure=yes
 ```
 
 If you have an action that requires multiple lines, use YAML quoting to make
@@ -154,9 +203,9 @@ results:
   dir: /var/git/myproject.git
 status: completed
 timing:
-  completed: 2016-10-27 13:46:12 +0000 UTC
-  enqueued: 2016-10-27 13:46:11 +0000 UTC
-  started: 2016-10-27 13:46:11 +0000 UTC
+  completed: 2018-06-18 13:46:12 +0000 UTC
+  enqueued: 2018-06-18 13:46:11 +0000 UTC
+  started: 2018-06-18 13:46:11 +0000 UTC
 ```
 ### `juju show-action-status`
 
