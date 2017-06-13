@@ -55,7 +55,7 @@ table.logos th, table.logos td{
 <td align="center" valign="center" border-width="0px" >
 <img src="./media/jaas-login-1.png" alt="Login to JAAS" />
 <br />
-Press the green Start building button to get started...
+Press the green 'Start building' button to get started...
 </td>
 
 <td align="center" valign="center" border-width="0px">
@@ -89,14 +89,13 @@ Kubernetes bundle][k8]
 <td align="center" valign="center" border-width="0px" >
 <img src="./media/jaas-kubernetes.png" alt="Canonical kubernetes bundle" />
 <br />
-Press the green Add to model button to select the solution.
+Press the green 'Add to model' button to select the solution.
 </td>
 
 <td align="center" valign="center" border-width="0px">
 <img src="./media/jaas-deploy-changes.png" alt="deploying changes in JAAS" />
 <br />
-Press the blue Deploy changes button to proceed with the changes you've made
-with your model.
+Press the blue 'Deploy changes' button to proceed.
 </td>
 
 </tr>
