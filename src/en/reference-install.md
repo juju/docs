@@ -126,7 +126,7 @@ The development releases are put under the `--devel` flag in brew.
 ```
 
 Or you can use the binary built for macOS:
-: [juju-core_2.2-rc1-osx.tar.gz](https://launchpad.net/juju/2.2/2.2-rc1/+download/juju-2.2-rc1-osx.tar.gz) ([md5](https://launchpad.net/juju/2.2/2.2-rc1/+download/juju-2.2-rc1-osx.tar.gz/+md5))
+: [juju-core_2.2-rc3-osx.tar.gz](https://launchpad.net/juju/2.2/2.2-rc3/+download/juju-2.2-rc3-osx.tar.gz) ([md5](https://launchpad.net/juju/2.2/2.2-rc3/+download/juju-2.2-rc3-osx.tar.gz/+md5))
 {: .instruction }
 
 
@@ -135,8 +135,8 @@ Or you can use the binary built for macOS:
 
 The latest windows .exe can be downloaded from the Juju download page [https://launchpad.net/juju/+download](https://launchpad.net/juju/+download)
 
-The latest is version 2.2-rc1 located at:
-: [juju-setup-2.2-rc1.exe](https://launchpad.net/juju/2.2/2.2-rc1/+download/juju-setup-2.2-rc1.exe) ([md5](https://launchpad.net/juju/2.2/2.2-rc1/+download/juju-setup-2.2-rc1.exe/+md5))
+The latest is version 2.2-rc3 located at:
+: [juju-setup-2.2-rc3.exe](https://launchpad.net/juju/2.2/2.2-rc3/+download/juju-setup-2.2-rc3.exe) ([md5](https://launchpad.net/juju/2.2/2.2-rc3/+download/juju-setup-2.2-rc3.exe/+md5))
 {: .instruction }
 
 
