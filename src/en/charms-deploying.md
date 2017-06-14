@@ -339,6 +339,12 @@ constraints. To learn about `extra-bindings`, which provide a way to declare
 an extra bindable endpoint that is not a relation, see [Charm
 metadata][metadata].
 
+!!! Note: When a new model is added, it can take several seconds for all the 
+available spaces to be available. If you try to immediately deploy to a 
+specific space, the operation may fail. This is a known issue which is 
+being [tracked in Launchpad here][bug#1662264].
+
+
 
 ## Juju retry-provisioning
 
@@ -453,3 +459,4 @@ charm pull vsftpd
 [creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [metadata]: ./authors-charm-metadata.html
 [constraints]: ./charms-constraints.html
+[bug#1662264]: https://bugs.launchpad.net/juju/+bug/1662264
