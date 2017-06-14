@@ -342,7 +342,7 @@ metadata][metadata].
 !!! Note: When a new model is added, it can take several seconds for all the 
 available spaces to be available. If you try to immediately deploy to a 
 specific space, the operation may fail. This is a known issue which is 
-being [tracked in Launchpad here][bug#166226].
+being [tracked in Launchpad here][bug#1662264].
 
 
 
