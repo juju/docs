@@ -89,8 +89,8 @@ functionality is very important so don't just file bugs for things that go
 wrong, but also for things that have an opportunity to be "more right".
 
 !!! Note:
-    The current beta version of Juju is the same as the stable version, but
-    this will change as development progresses towards the next release.
+    The current beta version of Juju is the same as the stable version. This
+    will change as development progresses towards the next release.
 
 ### Ubuntu
 
