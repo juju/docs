@@ -470,12 +470,7 @@ Click on the expander to see details for each command.
 ^# add-storage
 
    **Usage:** ` juju add-storage [options] 
-<unit name> <storage directive> ...
-    where storage directive is 
-        <charm storage name>=<storage constraints> 
-    or
-        <charm storage name>
-`
+   <unit name> <charm storage name> | <charm storage name>=<storage constraints> ... `
 
    **Summary:**
 
@@ -857,7 +852,7 @@ Click on the expander to see details for each command.
                 Default region is specified by the CLOUDSDK_COMPUTE_REGION environment
                 variable.
 
-             3. On Windows, %APPDATA%\gcloud\application_default_credentials.json
+             3. On Windows, APPDATA/gcloud/application_default_credentials.json
    
    OpenStack
            Credentials:
@@ -1439,7 +1434,7 @@ Click on the expander to see details for each command.
           juju config mysql dataset-size
           juju config mysql --reset dataset-size,backup_dir
           juju config apache2 --file path/to/config.yaml
-          juju config mysql dataset-size=80% backup_dir=/vol1/mysql/backups
+          juju config mysql dataset-size=80 backup_dir=/vol1/mysql/backups
           juju config apache2 --model mymodel --file /home/ubuntu/mysql.yaml
 
 
