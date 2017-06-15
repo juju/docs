@@ -20,23 +20,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= default)_
 
-      Specify output format (default|json|tabular|yaml)
+   Specify output format (default|json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--schema  (= false)_
 
-      Display the full action schema
+   Display the full action schema
 
    
    **Details:**
@@ -49,7 +49,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-actions`
+   `list-actions`
 
 
 
@@ -65,11 +65,11 @@ Click on the expander to see details for each command.
 
    _-f (= "")_
 
-      The path to a cloud definition file
+   The path to a cloud definition file
 
    _--replace  (= false)_
 
-      Overwrite any existing cloud information
+   Overwrite any existing cloud information
 
    
    **Details:**
@@ -102,7 +102,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `clouds`
+   [clouds](#clouds)  
 
 
 
@@ -118,11 +118,11 @@ Click on the expander to see details for each command.
 
    _-f (= "")_
 
-      The YAML file containing credentials to add
+   The YAML file containing credentials to add
 
    _--replace  (= false)_
 
-      Overwrite existing credential information
+   Overwrite existing credential information
 
    
    **Details:**
@@ -176,13 +176,10 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `credentials`
-
-      `remove-credential`
-
-      `set-default-credential`
-
-      `autoload-credentials`
+   [credentials](#credentials) , 
+   [remove-credential](#remove-credential) , 
+   [set-default-credential](#set-default-credential) , 
+   [autoload-credentials](#autoload-credentials)  
 
 
 
@@ -198,27 +195,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--constraints (= "")_
 
-      Additional machine constraints
+   Additional machine constraints
 
    _--disks  (= )_
 
-      Constraints for disks to attach to the machine
+   Constraints for disks to attach to the machine
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n  (= 1)_
 
-      The number of machines to add
+   The number of machines to add
 
    _--series (= "")_
 
-      The charm series
+   The charm series
 
    
    **Details:**
@@ -269,7 +266,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `remove-machine`
+   [remove-machine](#remove-machine)  
 
 
 
@@ -285,27 +282,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--config  (= )_
 
-      Path to YAML model configuration file or individual options (--config config.yaml [--config key=value ...])
+   Path to YAML model configuration file or individual options (--config config.yaml [--config key=value ...])
 
    _--credential (= "")_
 
-      Credential used to add the model
+   Credential used to add the model
 
    _--no-switch  (= false)_
 
-      Do not switch to the newly created controller
+   Do not switch to the newly created controller
 
    _--owner (= "")_
 
-      The owner of the new model if not the current user
+   The owner of the new model if not the current user
 
    
    **Details:**
@@ -372,15 +369,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    **Aliases:**
 
-      `relate`
+   `relate`
 
 
 
@@ -396,11 +393,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -424,11 +421,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -459,18 +456,15 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `ssh-keys`
-
-      `remove-ssh-key`
-
-      `import-ssh-key`
+   [ssh-keys](#ssh-keys) , 
+   [remove-ssh-key](#remove-ssh-key) , 
+   [import-ssh-key](#import-ssh-key)  
 
 
 
 ^# add-storage
 
-   **Usage:** ` juju add-storage [options] 
-   <unit name> <charm storage name> | <charm storage name>=<storage constraints> ... `
+    **Usage:** ` juju add-storage [options] <unit name> <charm storage name> | <charm storage name>=<storage constraints> ... `
 
    **Summary:**
 
@@ -480,11 +474,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -550,11 +544,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -591,15 +585,15 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n, --num-units  (= 1)_
 
-      Number of units to add
+   Number of units to add
 
    _--to (= "")_
 
-      The machine and/or container to deploy the unit in (bypasses constraints)
+   The machine and/or container to deploy the unit in (bypasses constraints)
 
    
    **Details:**
@@ -645,7 +639,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `remove-unit`
+   [remove-unit](#remove-unit)  
 
 
 
@@ -661,11 +655,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    
    **Details:**
@@ -686,21 +680,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `register`
-
-      `grant`
-
-      `users`
-
-      `show-user`
-
-      `disable-user`
-
-      `enable-user`
-
-      `change-user-password`
-
-      `remove-user`
+   [register](#register) , 
+   [grant](#grant) , 
+   [users](#users) , 
+   [show-user](#show-user) , 
+   [disable-user](#disable-user) , 
+   [enable-user](#enable-user) , 
+   [change-user-password](#change-user-password) , 
+   [remove-user](#remove-user)  
 
 
 
@@ -716,15 +703,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--yes  (= false)_
 
-      Agree to terms non interactively
+   Agree to terms non interactively
 
    
    **Details:**
@@ -762,19 +749,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -785,7 +772,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-agreements`
+   `list-agreements`
 
 
 
@@ -801,11 +788,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -852,7 +839,7 @@ Click on the expander to see details for each command.
                 Default region is specified by the CLOUDSDK_COMPUTE_REGION environment
                 variable.
 
-             3. On Windows, APPDATA/gcloud/application_default_credentials.json
+             3. On Windows, %APPDATA%\\gcloud\\application_default_credentials.json
    
    OpenStack
            Credentials:
@@ -868,13 +855,10 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `list-credentials`
-
-      `remove-credential`
-
-      `set-default-credential`
-
-      `add-credential`
+   [list-credentials](#list-credentials) , 
+   [remove-credential](#remove-credential) , 
+   [set-default-credential](#set-default-credential) , 
+   [add-credential](#add-credential)  
 
 
 
@@ -890,11 +874,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -905,7 +889,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-backups`
+   `list-backups`
 
 
 
@@ -921,83 +905,83 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--agent-version (= "")_
 
-      Version of tools to use for Juju agents
+   Version of tools to use for Juju agents
 
    _--auto-upgrade  (= false)_
 
-      Upgrade to the latest patch release tools on first bootstrap
+   Upgrade to the latest patch release tools on first bootstrap
 
    _--bootstrap-constraints (= "")_
 
-      Specify bootstrap machine constraints
+   Specify bootstrap machine constraints
 
    _--bootstrap-series (= "")_
 
-      Specify the series of the bootstrap machine
+   Specify the series of the bootstrap machine
 
    _--build-agent  (= false)_
 
-      Build local version of agent binary before bootstrapping
+   Build local version of agent binary before bootstrapping
 
    _--clouds  (= false)_
 
-      Print the available clouds which can be used to bootstrap a Juju environment
+   Print the available clouds which can be used to bootstrap a Juju environment
 
    _--config  (= )_
 
-      Specify a controller configuration file, or one or more configuration
+   Specify a controller configuration file, or one or more configuration
 
-      options
+   options
 
-      (--config config.yaml [--config key=value ...])
+   (--config config.yaml [--config key=value ...])
 
    _--constraints (= "")_
 
-      Set model constraints
+   Set model constraints
 
    _--credential (= "")_
 
-      Credentials to use when bootstrapping
+   Credentials to use when bootstrapping
 
    _-d, --default-model (= "default")_
 
-      Name of the default hosted model for the controller
+   Name of the default hosted model for the controller
 
    _--keep-broken  (= false)_
 
-      Do not destroy the model if bootstrap fails
+   Do not destroy the model if bootstrap fails
 
    _--metadata-source (= "")_
 
-      Local path to use as tools and/or metadata source
+   Local path to use as tools and/or metadata source
 
    _--model-default  (= )_
 
-      Specify a configuration file, or one or more configuration
+   Specify a configuration file, or one or more configuration
 
-      options to be set for all models, unless otherwise specified
+   options to be set for all models, unless otherwise specified
 
-      (--config config.yaml [--config key=value ...])
+   (--config config.yaml [--config key=value ...])
 
    _--no-gui  (= false)_
 
-      Do not install the Juju GUI in the controller when bootstrapping
+   Do not install the Juju GUI in the controller when bootstrapping
 
    _--no-switch  (= false)_
 
-      Do not switch to the newly created controller
+   Do not switch to the newly created controller
 
    _--regions (= "")_
 
-      Print the available regions for the specified cloud
+   Print the available regions for the specified cloud
 
    _--to (= "")_
 
-      Placement directive indicating an instance to bootstrap
+   Placement directive indicating an instance to bootstrap
 
    
    **Details:**
@@ -1072,11 +1056,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-credentials`
-
-      `add-model`
-
-      `set-constraints`
+   [add-credentials](#add-credentials) , 
+   [add-model](#add-model) , 
+   [set-constraints](#set-constraints)  
 
 
 
@@ -1092,15 +1074,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--model-uuid (= "")_
 
-      Model uuid to set budget for.
+   Model uuid to set budget for.
 
    
    **Details:**
@@ -1129,31 +1111,31 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--arch (= "")_
 
-      The architecture of the image to list eg amd64
+   The architecture of the image to list eg amd64
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _--kind (= "")_
 
-      The image kind to list eg lxd
+   The image kind to list eg lxd
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--series (= "")_
 
-      The series of the image to list eg xenial
+   The series of the image to list eg xenial
 
    
    **Details:**
@@ -1182,7 +1164,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-cached-images`
+   `list-cached-images`
 
 
 
@@ -1198,19 +1180,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -1233,11 +1215,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    
    **Details:**
@@ -1258,7 +1240,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-user`
+   [add-user](#add-user)  
 
 
 
@@ -1274,11 +1256,11 @@ Click on the expander to see details for each command.
 
    _--description  (= false)_
 
-      
+   
 
    _-h, --help  (= false)_
 
-      Show help on a command or other topic.
+   Show help on a command or other topic.
 
    
    **Details:**
@@ -1309,11 +1291,11 @@ Click on the expander to see details for each command.
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -1336,17 +1318,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-cloud`
-
-      `regions`
-
-      `show-cloud`
-
-      `update-clouds`
+   [add-cloud](#add-cloud) , 
+   [regions](#regions) , 
+   [show-cloud](#show-cloud) , 
+   [update-clouds](#update-clouds)  
 
    **Aliases:**
 
-      `list-clouds`
+   `list-clouds`
 
 
 
@@ -1362,11 +1341,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -1392,27 +1371,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--file  (= )_
 
-      path to yaml-formatted application config
+   path to yaml-formatted application config
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--reset  (= )_
 
-      Reset the provided comma delimited keys
+   Reset the provided comma delimited keys
 
    
    **Details:**
@@ -1434,15 +1413,14 @@ Click on the expander to see details for each command.
           juju config mysql dataset-size
           juju config mysql --reset dataset-size,backup_dir
           juju config apache2 --file path/to/config.yaml
-          juju config mysql dataset-size=80 backup_dir=/vol1/mysql/backups
+          juju config mysql dataset-size=80% backup_dir=/vol1/mysql/backups
           juju config apache2 --model mymodel --file /home/ubuntu/mysql.yaml
 
 
    **See also:**
 
-      `deploy`
-
-      `status`
+   [deploy](#deploy) , 
+   [status](#status)  
 
 
 
@@ -1458,19 +1436,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -1489,7 +1467,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `controllers`
+   [controllers](#controllers)  
 
 
 
@@ -1505,19 +1483,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--refresh  (= false)_
 
-      Connect to each controller to download the latest details
+   Connect to each controller to download the latest details
 
    
    **Details:**
@@ -1534,13 +1512,12 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `models`
-
-      `show-controller`
+   [models](#models) , 
+   [show-controller](#show-controller)  
 
    **Aliases:**
 
-      `list-controllers`
+   `list-controllers`
 
 
 
@@ -1556,19 +1533,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--filename (= "juju-backup-<date>-<time>.tar.gz")_
 
-      Download to this file
+   Download to this file
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-download  (= false)_
 
-      Do not download the archive
+   Do not download the archive
 
    
    **Details:**
@@ -1608,11 +1585,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -1653,11 +1630,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    
    **Details:**
@@ -1686,15 +1663,15 @@ Click on the expander to see details for each command.
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--show-secrets  (= false)_
 
-      Show secrets
+   Show secrets
 
    
    **Details:**
@@ -1729,17 +1706,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-credential`
-
-      `remove-credential`
-
-      `set-default-credential`
-
-      `autoload-credentials`
+   [add-credential](#add-credential) , 
+   [remove-credential](#remove-credential) , 
+   [set-default-credential](#set-default-credential) , 
+   [autoload-credentials](#autoload-credentials)  
 
    **Aliases:**
 
-      `list-credentials`
+   `list-credentials`
 
 
 
@@ -1755,23 +1729,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-host-key-checks  (= false)_
 
-      Skip host key checking (INSECURE)
+   Skip host key checking (INSECURE)
 
    _--proxy  (= false)_
 
-      Proxy through the API server
+   Proxy through the API server
 
    _--pty  (= true)_
 
-      Enable pseudo-tty allocation
+   Enable pseudo-tty allocation
 
    
    **Details:**
@@ -1797,71 +1771,71 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--color  (= false)_
 
-      Force use of ANSI color codes
+   Force use of ANSI color codes
 
    _--date  (= false)_
 
-      Show dates as well as times
+   Show dates as well as times
 
    _--exclude-module  (= )_
 
-      Do not show log messages for these logging modules
+   Do not show log messages for these logging modules
 
    _-i, --include  (= )_
 
-      Only show log messages for these entities
+   Only show log messages for these entities
 
    _--include-module  (= )_
 
-      Only show log messages for these logging modules
+   Only show log messages for these logging modules
 
    _-l, --level (= "")_
 
-      Log level to show, one of [TRACE, DEBUG, INFO, WARNING, ERROR]
+   Log level to show, one of [TRACE, DEBUG, INFO, WARNING, ERROR]
 
    _--limit  (= 0)_
 
-      Exit once this many of the most recent (possibly filtered) lines are shown
+   Exit once this many of the most recent (possibly filtered) lines are shown
 
    _--location  (= false)_
 
-      Show filename and line numbers
+   Show filename and line numbers
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--ms  (= false)_
 
-      Show times to millisecond precision
+   Show times to millisecond precision
 
    _-n, --lines  (= 10)_
 
-      Show this many of the most recent (possibly filtered) lines, and continue to append
+   Show this many of the most recent (possibly filtered) lines, and continue to append
 
    _--no-tail  (= false)_
 
-      Stop after returning existing log messages
+   Stop after returning existing log messages
 
    _--replay  (= false)_
 
-      Show the entire (possibly filtered) log and continue to append
+   Show the entire (possibly filtered) log and continue to append
 
    _--tail  (= false)_
 
-      Wait for new logs
+   Wait for new logs
 
    _--utc  (= false)_
 
-      Show times in UTC
+   Show times in UTC
 
    _-x, --exclude  (= )_
 
-      Do not show log messages for these entities
+   Do not show log messages for these entities
 
    
    **Details:**
@@ -1929,9 +1903,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `status`
-
-      `ssh`
+   [status](#status) , 
+   [ssh](#ssh)  
 
 
 
@@ -1947,59 +1920,59 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--bind (= "")_
 
-      Configure application endpoint bindings to spaces
+   Configure application endpoint bindings to spaces
 
    _--channel (= "")_
 
-      Channel to use when getting the charm or bundle from the charm store
+   Channel to use when getting the charm or bundle from the charm store
 
    _--config  (= )_
 
-      Path to yaml-formatted application config
+   Path to yaml-formatted application config
 
    _--constraints (= "")_
 
-      Set application constraints
+   Set application constraints
 
    _--force  (= false)_
 
-      Allow a charm to be deployed to a machine running an unsupported series
+   Allow a charm to be deployed to a machine running an unsupported series
 
    _--increase-budget  (= 0)_
 
-      increase model budget allocation by this amount
+   increase model budget allocation by this amount
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n, --num-units  (= 1)_
 
-      Number of application units to deploy for principal charms
+   Number of application units to deploy for principal charms
 
    _--plan (= "")_
 
-      plan to deploy charm under
+   plan to deploy charm under
 
    _--resource  (= )_
 
-      Resource to be uploaded to the controller
+   Resource to be uploaded to the controller
 
    _--series (= "")_
 
-      The series on which to deploy
+   The series on which to deploy
 
    _--storage  (= )_
 
-      Charm storage constraints
+   Charm storage constraints
 
    _--to (= "")_
 
-      The machine and/or container to deploy the unit in (bypasses constraints)
+   The machine and/or container to deploy the unit in (bypasses constraints)
 
    
    **Details:**
@@ -2098,19 +2071,13 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `spaces`
-
-      `constraints`
-
-      `add-unit`
-
-      `set-config`
-
-      `get-config`
-
-      `set-constraints`
-
-      `get-constraints`
+   [spaces](#spaces) , 
+   [constraints](#constraints) , 
+   [add-unit](#add-unit) , 
+   [set-config](#set-config) , 
+   [get-config](#get-config) , 
+   [set-constraints](#set-constraints) , 
+   [get-constraints](#get-constraints)  
 
 
 
@@ -2126,15 +2093,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--destroy-all-models  (= false)_
 
-      Destroy all hosted models in the controller
+   Destroy all hosted models in the controller
 
    _-y, --yes  (= false)_
 
-      Do not ask for confirmation
+   Do not ask for confirmation
 
    
    **Details:**
@@ -2152,9 +2119,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `kill-controller`
-
-      `unregister`
+   [kill-controller](#kill-controller) , 
+   [unregister](#unregister)  
 
 
 
@@ -2170,11 +2136,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-y, --yes  (= false)_
 
-      Do not prompt for confirmation
+   Do not prompt for confirmation
 
    
    **Details:**
@@ -2195,7 +2161,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `destroy-controller`
+   [destroy-controller](#destroy-controller)  
 
 
 
@@ -2211,11 +2177,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2291,9 +2257,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `disabled-commands`
-
-      `enable-command`
+   [disabled-commands](#disabled-commands) , 
+   [enable-command](#enable-command)  
 
 
 
@@ -2309,11 +2274,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    
    **Details:**
@@ -2332,11 +2297,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `users`
-
-      `enable-user`
-
-      `login`
+   [users](#users) , 
+   [enable-user](#enable-user) , 
+   [login](#login)  
 
 
 
@@ -2352,23 +2315,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--all  (= false)_
 
-      Lists for all models (administrative users only)
+   Lists for all models (administrative users only)
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -2429,13 +2392,12 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `disable-command`
-
-      `enable-command`
+   [disable-command](#disable-command) , 
+   [enable-command](#enable-command)  
 
    **Aliases:**
 
-      `list-disabled-commands`
+   `list-disabled-commands`
 
 
 
@@ -2451,15 +2413,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--filename (= "")_
 
-      Download target
+   Download target
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2485,11 +2447,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2565,9 +2527,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `disable-command`
-
-      `disabled-commands`
+   [disable-command](#disable-command) , 
+   [disabled-commands](#disabled-commands)  
 
 
 
@@ -2583,11 +2544,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    
    **Details:**
@@ -2601,11 +2562,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `disable-command`
-
-      `disabled-commands`
-
-      `enable-command`
+   [disable-command](#disable-command) , 
+   [disabled-commands](#disabled-commands) , 
+   [enable-command](#enable-command)  
 
 
 
@@ -2621,31 +2580,31 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--constraints (= "")_
 
-      Additional machine constraints
+   Additional machine constraints
 
    _--format  (= simple)_
 
-      Specify output format (json|simple|yaml)
+   Specify output format (json|simple|yaml)
 
    _-n  (= 0)_
 
-      Number of controllers to make available
+   Number of controllers to make available
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--to (= "")_
 
-      The machine(s) to become controllers, bypasses constraints
+   The machine(s) to become controllers, bypasses constraints
 
    
    **Details:**
@@ -2691,11 +2650,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    
    **Details:**
@@ -2711,11 +2670,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `users`
-
-      `disable-user`
-
-      `login`
+   [users](#users) , 
+   [disable-user](#disable-user) , 
+   [login](#login)  
 
 
 
@@ -2731,11 +2688,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -2752,7 +2709,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `unexpose`
+   [unexpose](#unexpose)  
 
 
 
@@ -2768,19 +2725,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= constraints)_
 
-      Specify output format (constraints|json|yaml)
+   Specify output format (constraints|json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -2808,11 +2765,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `set-constraints`
-
-      `get-model-constraints`
-
-      `set-model-constraints`
+   [set-constraints](#set-constraints) , 
+   [get-model-constraints](#get-model-constraints) , 
+   [set-model-constraints](#set-model-constraints)  
 
 
 
@@ -2828,19 +2783,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= constraints)_
 
-      Specify output format (constraints|json|yaml)
+   Specify output format (constraints|json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -2865,13 +2820,10 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `models`
-
-      `get-constraints`
-
-      `set-constraints`
-
-      `set-model-constraints`
+   [models](#models) , 
+   [get-constraints](#get-constraints) , 
+   [set-constraints](#set-constraints) , 
+   [set-model-constraints](#set-model-constraints)  
 
 
 
@@ -2887,11 +2839,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    
    **Details:**
@@ -2934,9 +2886,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `revoke`
-
-      `add-user`
+   [revoke](#revoke) , 
+   [add-user](#add-user)  
 
 
 
@@ -2952,27 +2903,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--browser  (= false)_
 
-      Open the web browser, instead of just printing the Juju GUI URL
+   Open the web browser, instead of just printing the Juju GUI URL
 
    _--hide-credential  (= false)_
 
-      Do not show admin credential to use for logging into the Juju GUI
+   Do not show admin credential to use for logging into the Juju GUI
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-browser  (= true)_
 
-      DEPRECATED. --no-browser is now the default. Use --browser to open the web browser
+   DEPRECATED. --no-browser is now the default. Use --browser to open the web browser
 
    _--show-credentials  (= true)_
 
-      DEPRECATED. Show admin credential to use for logging into the Juju GUI
+   DEPRECATED. Show admin credential to use for logging into the Juju GUI
 
    
    **Details:**
@@ -3030,11 +2981,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -3064,9 +3015,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-ssh-key`
-
-      `ssh-keys`
+   [add-ssh-key](#add-ssh-key) , 
+   [ssh-keys](#ssh-keys)  
 
 
 
@@ -3082,15 +3032,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-t, --timeout  (= 5m0s)_
 
-      Timeout before direct destruction
+   Timeout before direct destruction
 
    _-y, --yes  (= false)_
 
-      Do not ask for confirmation
+   Do not ask for confirmation
 
    
    **Details:**
@@ -3113,9 +3063,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `destroy-controller`
-
-      `unregister`
+   [destroy-controller](#destroy-controller) , 
+   [unregister](#unregister)  
 
 
 
@@ -3131,23 +3080,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= default)_
 
-      Specify output format (default|json|tabular|yaml)
+   Specify output format (default|json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--schema  (= false)_
 
-      Display the full action schema
+   Display the full action schema
 
    
    **Details:**
@@ -3160,7 +3109,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-actions`
+   `list-actions`
 
 
 
@@ -3176,19 +3125,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -3199,7 +3148,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-agreements`
+   `list-agreements`
 
 
 
@@ -3215,11 +3164,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -3230,7 +3179,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-backups`
+   `list-backups`
 
 
 
@@ -3246,31 +3195,31 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--arch (= "")_
 
-      The architecture of the image to list eg amd64
+   The architecture of the image to list eg amd64
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _--kind (= "")_
 
-      The image kind to list eg lxd
+   The image kind to list eg lxd
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--series (= "")_
 
-      The series of the image to list eg xenial
+   The series of the image to list eg xenial
 
    
    **Details:**
@@ -3299,7 +3248,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-cached-images`
+   `list-cached-images`
 
 
 
@@ -3315,11 +3264,11 @@ Click on the expander to see details for each command.
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -3342,17 +3291,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-cloud`
-
-      `regions`
-
-      `show-cloud`
-
-      `update-clouds`
+   [add-cloud](#add-cloud) , 
+   [regions](#regions) , 
+   [show-cloud](#show-cloud) , 
+   [update-clouds](#update-clouds)  
 
    **Aliases:**
 
-      `list-clouds`
+   `list-clouds`
 
 
 
@@ -3368,19 +3314,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--refresh  (= false)_
 
-      Connect to each controller to download the latest details
+   Connect to each controller to download the latest details
 
    
    **Details:**
@@ -3397,13 +3343,12 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `models`
-
-      `show-controller`
+   [models](#models) , 
+   [show-controller](#show-controller)  
 
    **Aliases:**
 
-      `list-controllers`
+   `list-controllers`
 
 
 
@@ -3419,15 +3364,15 @@ Click on the expander to see details for each command.
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--show-secrets  (= false)_
 
-      Show secrets
+   Show secrets
 
    
    **Details:**
@@ -3462,17 +3407,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-credential`
-
-      `remove-credential`
-
-      `set-default-credential`
-
-      `autoload-credentials`
+   [add-credential](#add-credential) , 
+   [remove-credential](#remove-credential) , 
+   [set-default-credential](#set-default-credential) , 
+   [autoload-credentials](#autoload-credentials)  
 
    **Aliases:**
 
-      `list-credentials`
+   `list-credentials`
 
 
 
@@ -3488,23 +3430,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--all  (= false)_
 
-      Lists for all models (administrative users only)
+   Lists for all models (administrative users only)
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -3565,13 +3507,12 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `disable-command`
-
-      `enable-command`
+   [disable-command](#disable-command) , 
+   [enable-command](#enable-command)  
 
    **Aliases:**
 
-      `list-disabled-commands`
+   `list-disabled-commands`
 
 
 
@@ -3587,27 +3528,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--color  (= false)_
 
-      Force use of ANSI color codes
+   Force use of ANSI color codes
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--utc  (= false)_
 
-      Display time as UTC in RFC3339 format
+   Display time as UTC in RFC3339 format
 
    
    **Details:**
@@ -3626,11 +3567,11 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `status`
+   [status](#status)  
 
    **Aliases:**
 
-      `list-machines`
+   `list-machines`
 
 
 
@@ -3646,35 +3587,35 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--all  (= false)_
 
-      Lists all models, regardless of user accessibility (administrative users only)
+   Lists all models, regardless of user accessibility (administrative users only)
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--exact-time  (= false)_
 
-      Use full timestamps
+   Use full timestamps
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--user (= "")_
 
-      The user to list models for (administrative users only)
+   The user to list models for (administrative users only)
 
    _--uuid  (= false)_
 
-      Display UUID for models
+   Display UUID for models
 
    
    **Details:**
@@ -3694,15 +3635,13 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-model`
-
-      `share-model`
-
-      `unshare-model`
+   [add-model](#add-model) , 
+   [share-model](#share-model) , 
+   [unshare-model](#unshare-model)  
 
    **Aliases:**
 
-      `list-models`
+   `list-models`
 
 
 
@@ -3718,19 +3657,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -3752,7 +3691,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-payloads`
+   `list-payloads`
 
 
 
@@ -3768,19 +3707,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--format  (= tabular)_
 
-      Specify output format (json|smart|summary|tabular|yaml)
+   Specify output format (json|smart|summary|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -3796,7 +3735,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-plans`
+   `list-plans`
 
 
 
@@ -3812,13 +3751,13 @@ Click on the expander to see details for each command.
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
-      Details:
+   Details:
 
    **Examples:**
 
@@ -3827,17 +3766,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-cloud`
-
-      `clouds`
-
-      `show-cloud`
-
-      `update-clouds`
+   [add-cloud](#add-cloud) , 
+   [clouds](#clouds) , 
+   [show-cloud](#show-cloud) , 
+   [update-clouds](#update-clouds)  
 
    **Aliases:**
 
-      `list-regions`
+   `list-regions`
 
 
 
@@ -3853,23 +3789,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--details  (= false)_
 
-      show detailed information about resources used by each unit.
+   show detailed information about resources used by each unit.
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -3882,7 +3818,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-resources`
+   `list-resources`
 
 
 
@@ -3898,23 +3834,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--short  (= false)_
 
-      only display spaces.
+   only display spaces.
 
    
    **Details:**
@@ -3929,7 +3865,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-spaces`
+   `list-spaces`
 
 
 
@@ -3945,15 +3881,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--full  (= false)_
 
-      Show full key instead of just the fingerprint
+   Show full key instead of just the fingerprint
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -3978,7 +3914,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-ssh-keys`
+   `list-ssh-keys`
 
 
 
@@ -3994,27 +3930,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--filesystem  (= false)_
 
-      List filesystem storage
+   List filesystem storage
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--volume  (= false)_
 
-      List volume storage
+   List volume storage
 
    
    **Details:**
@@ -4025,7 +3961,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-storage`
+   `list-storage`
 
 
 
@@ -4041,27 +3977,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--name  (= )_
 
-      Only show pools with these names
+   Only show pools with these names
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--provider  (= )_
 
-      Only show pools of these provider types
+   Only show pools of these provider types
 
    
    **Details:**
@@ -4084,7 +4020,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-storage-pools`
+   `list-storage-pools`
 
 
 
@@ -4100,27 +4036,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--space (= "")_
 
-      Filter results by space name
+   Filter results by space name
 
    _--zone (= "")_
 
-      Filter results by zone name
+   Filter results by zone name
 
    
    **Details:**
@@ -4137,7 +4073,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-subnets`
+   `list-subnets`
 
 
 
@@ -4153,23 +4089,23 @@ Click on the expander to see details for each command.
 
    _--all  (= false)_
 
-      Include disabled users
+   Include disabled users
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--exact-time  (= false)_
 
-      Use full timestamp for connection times
+   Use full timestamp for connection times
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -4191,19 +4127,15 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-user`
-
-      `register`
-
-      `show-user`
-
-      `disable-user`
-
-      `enable-user`
+   [add-user](#add-user) , 
+   [register](#register) , 
+   [show-user](#show-user) , 
+   [disable-user](#disable-user) , 
+   [enable-user](#enable-user)  
 
    **Aliases:**
 
-      `list-users`
+   `list-users`
 
 
 
@@ -4219,19 +4151,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular)
+   Specify output format (json|tabular)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -4247,7 +4179,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-wallets`
+   `list-wallets`
 
 
 
@@ -4263,15 +4195,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _-u, --user (= "")_
 
-      log in as this local user
+   log in as this local user
 
    
    **Details:**
@@ -4317,15 +4249,11 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `disable-user`
-
-      `enable-user`
-
-      `logout`
-
-      `register`
-
-      `unregister`
+   [disable-user](#disable-user) , 
+   [enable-user](#enable-user) , 
+   [logout](#logout) , 
+   [register](#register) , 
+   [unregister](#unregister)  
 
 
 
@@ -4341,15 +4269,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--force  (= false)_
 
-      Force logout when a locally recorded password is detected
+   Force logout when a locally recorded password is detected
 
    
    **Details:**
@@ -4375,9 +4303,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `change-user-password`
-
-      `login`
+   [change-user-password](#change-user-password) , 
+   [login](#login)  
 
 
 
@@ -4393,27 +4320,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--color  (= false)_
 
-      Force use of ANSI color codes
+   Force use of ANSI color codes
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--utc  (= false)_
 
-      Display time as UTC in RFC3339 format
+   Display time as UTC in RFC3339 format
 
    
    **Details:**
@@ -4432,11 +4359,11 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `status`
+   [status](#status)  
 
    **Aliases:**
 
-      `list-machines`
+   `list-machines`
 
 
 
@@ -4452,23 +4379,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--all  (= false)_
 
-      retrieve metrics collected by all units in the model
+   retrieve metrics collected by all units in the model
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -4491,7 +4418,7 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    
    **Details:**
@@ -4522,11 +4449,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `login`
-
-      `controllers`
-
-      `status`
+   [login](#login) , 
+   [controllers](#controllers) , 
+   [status](#status)  
 
 
 
@@ -4542,23 +4467,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--reset  (= )_
 
-      Reset the provided comma delimited keys
+   Reset the provided comma delimited keys
 
    
    **Details:**
@@ -4580,9 +4505,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `models`
-
-      `model-defaults`
+   [models](#models) , 
+   [model-defaults](#model-defaults)  
 
 
 
@@ -4598,23 +4522,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--reset  (= )_
 
-      Reset the provided comma delimited keys
+   Reset the provided comma delimited keys
 
    
    **Details:**
@@ -4644,9 +4568,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `models`
-
-      `model-config`
+   [models](#models) , 
+   [model-config](#model-config)  
 
 
 
@@ -4662,35 +4585,35 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--all  (= false)_
 
-      Lists all models, regardless of user accessibility (administrative users only)
+   Lists all models, regardless of user accessibility (administrative users only)
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--exact-time  (= false)_
 
-      Use full timestamps
+   Use full timestamps
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--user (= "")_
 
-      The user to list models for (administrative users only)
+   The user to list models for (administrative users only)
 
    _--uuid  (= false)_
 
-      Display UUID for models
+   Display UUID for models
 
    
    **Details:**
@@ -4710,15 +4633,13 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-model`
-
-      `share-model`
-
-      `unshare-model`
+   [add-model](#add-model) , 
+   [share-model](#share-model) , 
+   [unshare-model](#unshare-model)  
 
    **Aliases:**
 
-      `list-models`
+   `list-models`
 
 
 
@@ -4734,19 +4655,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -4768,7 +4689,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-payloads`
+   `list-payloads`
 
 
 
@@ -4784,19 +4705,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--format  (= tabular)_
 
-      Specify output format (json|smart|summary|tabular|yaml)
+   Specify output format (json|smart|summary|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -4812,7 +4733,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-plans`
+   `list-plans`
 
 
 
@@ -4828,13 +4749,13 @@ Click on the expander to see details for each command.
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
-      Details:
+   Details:
 
    **Examples:**
 
@@ -4843,17 +4764,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-cloud`
-
-      `clouds`
-
-      `show-cloud`
-
-      `update-clouds`
+   [add-cloud](#add-cloud) , 
+   [clouds](#clouds) , 
+   [show-cloud](#show-cloud) , 
+   [update-clouds](#update-clouds)  
 
    **Aliases:**
 
-      `list-regions`
+   `list-regions`
 
 
 
@@ -4869,7 +4787,7 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    
    **Details:**
@@ -4902,11 +4820,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-user`
-
-      `change-user-password`
-
-      `unregister`
+   [add-user](#add-user) , 
+   [change-user-password](#change-user-password) , 
+   [unregister](#unregister)  
 
 
 
@@ -4922,15 +4838,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    **Aliases:**
 
-      `relate`
+   `relate`
 
 
 
@@ -4946,11 +4862,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -4972,11 +4888,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5011,11 +4927,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5038,23 +4954,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--arch (= "")_
 
-      The architecture of the image to remove eg amd64
+   The architecture of the image to remove eg amd64
 
    _--kind (= "")_
 
-      The image kind to remove eg lxd
+   The image kind to remove eg lxd
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--series (= "")_
 
-      The series of the image to remove eg xenial
+   The series of the image to remove eg xenial
 
    
    **Details:**
@@ -5099,9 +5015,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-cloud`
-
-      `list-clouds`
+   [add-cloud](#add-cloud) , 
+   [list-clouds](#list-clouds)  
 
 
 
@@ -5131,13 +5046,10 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `credentials`
-
-      `add-credential`
-
-      `set-default-credential`
-
-      `autoload-credentials`
+   [credentials](#credentials) , 
+   [add-credential](#add-credential) , 
+   [set-default-credential](#set-default-credential) , 
+   [autoload-credentials](#autoload-credentials)  
 
 
 
@@ -5153,15 +5065,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--force  (= false)_
 
-      Completely remove a machine and all its dependencies
+   Completely remove a machine and all its dependencies
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5187,7 +5099,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-machine`
+   [add-machine](#add-machine)  
 
 
 
@@ -5203,11 +5115,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5235,9 +5147,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-relation`
-
-      `remove-application`
+   [add-relation](#add-relation) , 
+   [remove-application](#remove-application)  
 
 
 
@@ -5253,11 +5164,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5279,11 +5190,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `ssh-keys`
-
-      `add-ssh-key`
-
-      `import-ssh-key`
+   [ssh-keys](#ssh-keys) , 
+   [add-ssh-key](#add-ssh-key) , 
+   [import-ssh-key](#import-ssh-key)  
 
 
 
@@ -5299,11 +5208,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5332,11 +5241,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5364,7 +5273,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `remove-application`
+   [remove-application](#remove-application)  
 
 
 
@@ -5380,15 +5289,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _-y, --yes  (= false)_
 
-      Confirm deletion of the user
+   Confirm deletion of the user
 
    
    **Details:**
@@ -5407,21 +5316,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `unregister`
-
-      `revoke`
-
-      `show-user`
-
-      `list-users`
-
-      `switch-user`
-
-      `disable-user`
-
-      `enable-user`
-
-      `change-user-password`
+   [unregister](#unregister) , 
+   [revoke](#revoke) , 
+   [show-user](#show-user) , 
+   [list-users](#list-users) , 
+   [switch-user](#switch-user) , 
+   [disable-user](#disable-user) , 
+   [enable-user](#enable-user) , 
+   [change-user-password](#change-user-password)  
 
 
 
@@ -5437,15 +5339,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-retry  (= false)_
 
-      Do not re-execute failed hooks on the unit
+   Do not re-execute failed hooks on the unit
 
 
 
@@ -5461,23 +5363,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--details  (= false)_
 
-      show detailed information about resources used by each unit.
+   show detailed information about resources used by each unit.
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -5490,7 +5392,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-resources`
+   `list-resources`
 
 
 
@@ -5506,31 +5408,31 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-b  (= false)_
 
-      Bootstrap a new state machine
+   Bootstrap a new state machine
 
    _--build-agent  (= false)_
 
-      Build binary agent if bootstraping a new machine
+   Build binary agent if bootstraping a new machine
 
    _--constraints (= "")_
 
-      set model constraints
+   set model constraints
 
    _--file (= "")_
 
-      Provide a file to be used as the backup.
+   Provide a file to be used as the backup.
 
    _--id (= "")_
 
-      Provide the name of the backup to be restored
+   Provide the name of the backup to be restored
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5565,11 +5467,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
 
 
@@ -5585,11 +5487,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    
    **Details:**
@@ -5614,7 +5516,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `grant`
+   [grant](#grant)  
 
 
 
@@ -5630,39 +5532,39 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--all  (= false)_
 
-      Run the commands on all the machines
+   Run the commands on all the machines
 
    _--application  (= )_
 
-      One or more application names
+   One or more application names
 
    _--format  (= default)_
 
-      Specify output format (default|json|yaml)
+   Specify output format (default|json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--machine  (= )_
 
-      One or more machine ids
+   One or more machine ids
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--timeout  (= 5m0s)_
 
-      How long to wait before the remote command is considered to have failed
+   How long to wait before the remote command is considered to have failed
 
    _--unit  (= )_
 
-      One or more unit ids
+   One or more unit ids
 
    
    **Details:**
@@ -5717,31 +5619,31 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--params  (= )_
 
-      Path to yaml-formatted params file
+   Path to yaml-formatted params file
 
    _--string-args  (= false)_
 
-      Use raw string values of CLI args
+   Use raw string values of CLI args
 
    _--wait  (= )_
 
-      Wait for results, with optional timeout
+   Wait for results, with optional timeout
 
    
    **Details:**
@@ -5830,23 +5732,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-host-key-checks  (= false)_
 
-      Skip host key checking (INSECURE)
+   Skip host key checking (INSECURE)
 
    _--proxy  (= false)_
 
-      Proxy through the API server
+   Proxy through the API server
 
    _--pty  (= true)_
 
-      Enable pseudo-tty allocation
+   Enable pseudo-tty allocation
 
    
    **Details:**
@@ -5896,7 +5798,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `ssh`
+   [ssh](#ssh)  
 
 
 
@@ -5912,11 +5814,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -5950,11 +5852,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `get-constraints`
-
-      `get-model-constraints`
-
-      `set-model-constraints`
+   [get-constraints](#get-constraints) , 
+   [get-model-constraints](#get-model-constraints) , 
+   [set-model-constraints](#set-model-constraints)  
 
 
 
@@ -5987,13 +5887,10 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `credentials`
-
-      `add-credential`
-
-      `remove-credential`
-
-      `autoload-credentials`
+   [credentials](#credentials) , 
+   [add-credential](#add-credential) , 
+   [remove-credential](#remove-credential) , 
+   [autoload-credentials](#autoload-credentials)  
 
 
 
@@ -6020,7 +5917,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-credential`
+   [add-credential](#add-credential)  
 
 
 
@@ -6036,15 +5933,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--info (= "")_
 
-      Set the meter status info to this string
+   Set the meter status info to this string
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6076,11 +5973,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6103,13 +6000,10 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `models`
-
-      `get-model-constraints`
-
-      `get-constraints`
-
-      `set-constraints`
+   [models](#models) , 
+   [get-model-constraints](#get-model-constraints) , 
+   [get-constraints](#get-constraints) , 
+   [set-constraints](#set-constraints)  
 
 
 
@@ -6125,11 +6019,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6160,11 +6054,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    
    **Details:**
@@ -6193,23 +6087,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--wait (= "-1s")_
 
-      Wait for results
+   Wait for results
 
    
    **Details:**
@@ -6238,23 +6132,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--name (= "")_
 
-      Action name
+   Action name
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -6277,11 +6171,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6304,11 +6198,11 @@ Click on the expander to see details for each command.
 
    _--format  (= yaml)_
 
-      Specify output format (yaml)
+   Specify output format (yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -6326,9 +6220,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `clouds`
-
-      `update-clouds`
+   [clouds](#clouds) , 
+   [update-clouds](#update-clouds)  
 
 
 
@@ -6344,19 +6237,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--show-password  (= false)_
 
-      Show password for logged in user
+   Show password for logged in user
 
    
    **Details:**
@@ -6375,7 +6268,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `controllers`
+   [controllers](#controllers)  
 
 
 
@@ -6391,27 +6284,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--color  (= false)_
 
-      Force use of ANSI color codes
+   Force use of ANSI color codes
 
    _--format  (= yaml)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--utc  (= false)_
 
-      Display time as UTC in RFC3339 format
+   Display time as UTC in RFC3339 format
 
    
    **Details:**
@@ -6444,15 +6337,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -6474,27 +6367,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--color  (= false)_
 
-      Force use of ANSI color codes
+   Force use of ANSI color codes
 
    _--format  (= tabular)_
 
-      Specify output format (json|line|oneline|short|summary|tabular|yaml)
+   Specify output format (json|line|oneline|short|summary|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--utc  (= false)_
 
-      Display time as UTC in RFC3339 format
+   Display time as UTC in RFC3339 format
 
    
    **Details:**
@@ -6547,17 +6440,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `machines`
-
-      `show-model`
-
-      `show-status-log`
-
-      `storage`
+   [machines](#machines) , 
+   [show-model](#show-model) , 
+   [show-status-log](#show-status-log) , 
+   [storage](#storage)  
 
    **Aliases:**
 
-      `status`
+   `status`
 
 
 
@@ -6573,35 +6463,35 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--days  (= 0)_
 
-      Returns the logs for the past <days> days (cannot be combined with -n or --date)
+   Returns the logs for the past <days> days (cannot be combined with -n or --date)
 
    _--from-date (= "")_
 
-      Returns logs for any date after the passed one, the expected date format is YYYY-MM-DD (cannot be combined with -n or --days)
+   Returns logs for any date after the passed one, the expected date format is YYYY-MM-DD (cannot be combined with -n or --days)
 
    _--include-status-updates  (= false)_
 
-      Inlcude update status hook messages in the returned logs
+   Inlcude update status hook messages in the returned logs
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-n  (= 0)_
 
-      Returns the last N logs (cannot be combined with --days or --date)
+   Returns the last N logs (cannot be combined with --days or --date)
 
    _--type (= "unit")_
 
-      Type of statuses to be displayed [agent|workload|combined|machine|machineInstance|container|containerinstance]
+   Type of statuses to be displayed [agent|workload|combined|machine|machineInstance|container|containerinstance]
 
    _--utc  (= false)_
 
-      Display time as UTC in RFC3339 format
+   Display time as UTC in RFC3339 format
 
    
    **Details:**
@@ -6645,19 +6535,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -6683,19 +6573,19 @@ Click on the expander to see details for each command.
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--exact-time  (= false)_
 
-      Use full timestamp for connection times
+   Use full timestamp for connection times
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -6716,11 +6606,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-user`
-
-      `register`
-
-      `users`
+   [add-user](#add-user) , 
+   [register](#register) , 
+   [users](#users)  
 
 
 
@@ -6736,19 +6624,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular)
+   Specify output format (json|tabular)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -6776,23 +6664,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--budget (= "")_
 
-      the maximum spend for the model
+   the maximum spend for the model
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -6822,23 +6710,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--short  (= false)_
 
-      only display spaces.
+   only display spaces.
 
    
    **Details:**
@@ -6853,7 +6741,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-spaces`
+   `list-spaces`
 
 
 
@@ -6869,23 +6757,23 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--no-host-key-checks  (= false)_
 
-      Skip host key checking (INSECURE)
+   Skip host key checking (INSECURE)
 
    _--proxy  (= false)_
 
-      Proxy through the API server
+   Proxy through the API server
 
    _--pty  (= true)_
 
-      Enable pseudo-tty allocation
+   Enable pseudo-tty allocation
 
    
    **Details:**
@@ -6917,7 +6805,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `scp`
+   [scp](#scp)  
 
 
 
@@ -6933,15 +6821,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--full  (= false)_
 
-      Show full key instead of just the fingerprint
+   Show full key instead of just the fingerprint
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -6966,7 +6854,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-ssh-keys`
+   `list-ssh-keys`
 
 
 
@@ -6982,27 +6870,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--color  (= false)_
 
-      Force use of ANSI color codes
+   Force use of ANSI color codes
 
    _--format  (= tabular)_
 
-      Specify output format (json|line|oneline|short|summary|tabular|yaml)
+   Specify output format (json|line|oneline|short|summary|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--utc  (= false)_
 
-      Display time as UTC in RFC3339 format
+   Display time as UTC in RFC3339 format
 
    
    **Details:**
@@ -7055,17 +6943,14 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `machines`
-
-      `show-model`
-
-      `show-status-log`
-
-      `storage`
+   [machines](#machines) , 
+   [show-model](#show-model) , 
+   [show-status-log](#show-status-log) , 
+   [storage](#storage)  
 
    **Aliases:**
 
-      `status`
+   `status`
 
 
 
@@ -7081,27 +6966,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--filesystem  (= false)_
 
-      List filesystem storage
+   List filesystem storage
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--volume  (= false)_
 
-      List volume storage
+   List volume storage
 
    
    **Details:**
@@ -7112,7 +6997,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-storage`
+   `list-storage`
 
 
 
@@ -7128,27 +7013,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--name  (= )_
 
-      Only show pools with these names
+   Only show pools with these names
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--provider  (= )_
 
-      Only show pools of these provider types
+   Only show pools of these provider types
 
    
    **Details:**
@@ -7171,7 +7056,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-storage-pools`
+   `list-storage-pools`
 
 
 
@@ -7187,27 +7072,27 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= yaml)_
 
-      Specify output format (json|yaml)
+   Specify output format (json|yaml)
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    _--space (= "")_
 
-      Filter results by space name
+   Filter results by space name
 
    _--zone (= "")_
 
-      Filter results by zone name
+   Filter results by zone name
 
    
    **Details:**
@@ -7224,7 +7109,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-subnets`
+   `list-subnets`
 
 
 
@@ -7240,7 +7125,7 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    
    **Details:**
@@ -7266,11 +7151,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `controllers`
-
-      `models`
-
-      `show-controller`
+   [controllers](#controllers) , 
+   [models](#models) , 
+   [show-controller](#show-controller)  
 
 
 
@@ -7286,51 +7169,51 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--all  (= false)_
 
-      Copy all versions, not just the latest
+   Copy all versions, not just the latest
 
    _--destination (= "")_
 
-      Local destination directory
+   Local destination directory
 
-      DEPRECATED: use --local-dir instead
+   DEPRECATED: use --local-dir instead
 
    _--dev  (= false)_
 
-      Consider development versions as well as released ones
+   Consider development versions as well as released ones
 
-      DEPRECATED: use --stream instead
+   DEPRECATED: use --stream instead
 
    _--dry-run  (= false)_
 
-      Don't copy, just print what would be copied
+   Don't copy, just print what would be copied
 
    _--local-dir (= "")_
 
-      Local destination directory
+   Local destination directory
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--public  (= false)_
 
-      Tools are for a public cloud, so generate mirrors information
+   Tools are for a public cloud, so generate mirrors information
 
    _--source (= "")_
 
-      Local source directory
+   Local source directory
 
    _--stream (= "")_
 
-      Simplestreams stream for which to sync metadata
+   Simplestreams stream for which to sync metadata
 
    _--version (= "")_
 
-      Copy a specific major[.minor] version
+   Copy a specific major[.minor] version
 
    
    **Details:**
@@ -7357,7 +7240,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `upgrade-juju`
+   [upgrade-juju](#upgrade-juju)  
 
 
 
@@ -7373,11 +7256,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -7396,7 +7279,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `expose`
+   [expose](#expose)  
 
 
 
@@ -7412,7 +7295,7 @@ Click on the expander to see details for each command.
 
    _-y, --yes  (= false)_
 
-      Do not prompt for confirmation
+   Do not prompt for confirmation
 
    
    **Details:**
@@ -7431,11 +7314,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `destroy-controller`
-
-      `kill-controller`
-
-      `register`
+   [destroy-controller](#destroy-controller) , 
+   [kill-controller](#kill-controller) , 
+   [register](#register)  
 
 
 
@@ -7464,7 +7345,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `clouds`
+   [clouds](#clouds)  
 
 
 
@@ -7480,15 +7361,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--credential (= "")_
 
-      Name of credential to update
+   Name of credential to update
 
    
    **Details:**
@@ -7504,9 +7385,8 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-credential`
-
-      `credentials`
+   [add-credential](#add-credential) , 
+   [credentials](#credentials)  
 
 
 
@@ -7522,47 +7402,47 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--channel (= "")_
 
-      Channel to use when getting the charm or bundle from the charm store
+   Channel to use when getting the charm or bundle from the charm store
 
    _--config  (= )_
 
-      Path to yaml-formatted application config
+   Path to yaml-formatted application config
 
    _--force-series  (= false)_
 
-      Upgrade even if series of deployed applications are not supported by the new charm
+   Upgrade even if series of deployed applications are not supported by the new charm
 
    _--force-units  (= false)_
 
-      Upgrade all units immediately, even if in error state
+   Upgrade all units immediately, even if in error state
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--path (= "")_
 
-      Upgrade to a charm located at path
+   Upgrade to a charm located at path
 
    _--resource  (= )_
 
-      Resource to be uploaded to the controller
+   Resource to be uploaded to the controller
 
    _--revision  (= -1)_
 
-      Explicit revision of current charm
+   Explicit revision of current charm
 
    _--storage  (= )_
 
-      Charm storage constraints
+   Charm storage constraints
 
    _--switch (= "")_
 
-      Crossgrade to a different charm
+   Crossgrade to a different charm
 
    
    **Details:**
@@ -7653,15 +7533,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--list  (= false)_
 
-      List available Juju GUI release versions without upgrading
+   List available Juju GUI release versions without upgrading
 
    
    **Details:**
@@ -7693,31 +7573,31 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--agent-version (= "")_
 
-      Upgrade to specific version
+   Upgrade to specific version
 
    _--build-agent  (= false)_
 
-      Build a local version of the agent binary; for development use only
+   Build a local version of the agent binary; for development use only
 
    _--dry-run  (= false)_
 
-      Don't change anything, just report what would be changed
+   Don't change anything, just report what would be changed
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    _--reset-previous-upgrade  (= false)_
 
-      Clear the previous (incomplete) upgrade status (use with care)
+   Clear the previous (incomplete) upgrade status (use with care)
 
    _-y, --yes  (= false)_
 
-      Answer 'yes' to confirmation prompts
+   Answer 'yes' to confirmation prompts
 
    
    **Details:**
@@ -7763,7 +7643,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `sync-tools`
+   [sync-tools](#sync-tools)  
 
 
 
@@ -7779,11 +7659,11 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-m, --model (= "")_
 
-      Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [<controller name>:]<model name>
 
    
    **Details:**
@@ -7806,23 +7686,23 @@ Click on the expander to see details for each command.
 
    _--all  (= false)_
 
-      Include disabled users
+   Include disabled users
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--exact-time  (= false)_
 
-      Use full timestamp for connection times
+   Use full timestamp for connection times
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -7844,19 +7724,15 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `add-user`
-
-      `register`
-
-      `show-user`
-
-      `disable-user`
-
-      `enable-user`
+   [add-user](#add-user) , 
+   [register](#register) , 
+   [show-user](#show-user) , 
+   [disable-user](#disable-user) , 
+   [enable-user](#enable-user)  
 
    **Aliases:**
 
-      `list-users`
+   `list-users`
 
 
 
@@ -7872,11 +7748,11 @@ Click on the expander to see details for each command.
 
    _--format  (= smart)_
 
-      Specify output format (json|smart|yaml)
+   Specify output format (json|smart|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
 
 
@@ -7892,19 +7768,19 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _-c, --controller (= "")_
 
-      Controller to operate in
+   Controller to operate in
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular)
+   Specify output format (json|tabular)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -7920,7 +7796,7 @@ Click on the expander to see details for each command.
 
    **Aliases:**
 
-      `list-wallets`
+   `list-wallets`
 
 
 
@@ -7936,15 +7812,15 @@ Click on the expander to see details for each command.
 
    _-B, --no-browser-login  (= false)_
 
-      Do not use web browser for authentication
+   Do not use web browser for authentication
 
    _--format  (= tabular)_
 
-      Specify output format (json|tabular|yaml)
+   Specify output format (json|tabular|yaml)
 
    _-o, --output (= "")_
 
-      Specify an output file
+   Specify an output file
 
    
    **Details:**
@@ -7959,15 +7835,11 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-      `controllers`
-
-      `login`
-
-      `logout`
-
-      `models`
-
-      `users`
+   [controllers](#controllers) , 
+   [login](#login) , 
+   [logout](#logout) , 
+   [models](#models) , 
+   [users](#users)  
 
 
 
