@@ -6,9 +6,74 @@ This section details all the available release notes for the
 2.x stable series of Juju 
 (notes for [earlier releases are available here](./reference-release-notes-1.html) ).
 
+The versions covered here are: 
 
 
-The versions covered here are:
+^# Juju 2.1.3 
+  
+  This release fixes a privilege escalation vulnerability when executing 
+  `juju-run` on the cloud instances, not to be confused with the 
+  'juju run' CLI command.
+  
+  See the following for further details on the vulnerability:
+  https://bugs.launchpad.net/juju/+bug/1682411
+  CVE-2017-9232 http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9232
+  
+  This vulnerability affects all currently distributed versions of 
+  Juju (1.25.x, 2.0.x and 2.1.x).
+  
+  ## How to know if you need to update
+  
+  We’ve put together a helpful Python script that will loop through your
+  controllers and then output the version of each model on the controller.
+  It requires Python 2.7 or higher.
+  
+        curl -L https://goo.gl/59gxnz | python
+  
+  ## How do I update? I’m on…
+
+  
+  ### JAAS
+  JAAS has been updated to the new 2.1.3 release. Users with models in
+  JAAS do not need to perform any upgrade steps to their models that
+  are running in JAAS.
+  
+  ### Juju 2.2-betaX
+  Users of the 2.2-beta releases need to temporarily update to using 
+  the edge channel. Users will need to use this until Juju 2.2-rc1 
+  is released in the coming days. You can easily switch your snap install
+  client by using the following:
+  
+        snap refresh juju --edge --classic
+  
+  Once you’ve completed this step you’ll need to run through the normal upgrade 
+  steps on your models, as explained 
+  [in the documentation](./models-upgrade#the-upgrade-juju-command)
+  
+  Note for non-snap beta users: we suggest you do not run controllers with 
+  the 2.2 beta releases. We suggest you move to the edge channel of the 
+  snap releases or to wait and redeploy when 2.2 RC1 is released. 
+  
+  ### Juju 2.1.x
+
+  You can follow the current upgrade documentation to upgrade. Make sure that
+  you update your controller model as well as each model on that controller.
+  
+  https://jujucharms.com/docs/2.1/models-upgrade
+  
+  
+  ## Questions/Concerns
+
+  
+  If you have any questions please don’t hesitate to reach out to the team via:
+  
+  the #juju Freenode IRC channel
+  the juju mailing list https://lists.ubuntu.com/mailman/listinfo/juju
+  
+  We encourage everyone to let us know how you're using Juju.
+  
+  Join us at regular Juju shows -
+  subscribe to our Youtube channel https://youtube.com/jujucharms
 
 ^# Juju 2.1.3
 
