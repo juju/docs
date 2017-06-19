@@ -8,7 +8,137 @@ This section details all the available release notes for the
 
 
 
+
 The versions covered here are:
+
+^# Juju 2.2.0
+
+  This release greatly enhances memory and CPU utilization at scale, improves
+  the modelling of networks, and adds support for KVM containers on arm64.
+  Additionally, there is now outline support for Oracle Compute, and vSphere
+  clouds are now easier to deploy.
+  
+  conjure-up now supports Juju as a Service (JAAS), macOS clients, Oracle
+  and vSphere clouds, and repeatable spell deployments.
+  
+  ## How can I get it?
+  
+  The best way to get your hands on this release of Juju and conjure-up is to
+  install them via snap packages (see https://snapcraft.io/ for more info on snaps).
+  
+          snap install juju --classic 
+          snap install conjure-up --classic 
+  
+  Other packages are available for a variety of platforms. Please see the
+  online documentation at https://jujucharms.com/docs/stable/reference-install.
+  Those subscribed to a snap channel should be automatically upgraded.
+  If you’re using the ppa/homebrew, you should see an upgrade available.
+  
+  For highlights of this release, please see the documentation at
+  [https://jujucharms.com/docs/2.2/whats-new](./whats-new).
+  Further details are below.
+  
+  ## Upgrading
+  
+  Changes introduced in 2.2.0 mean that you should also upgrade any
+  controllers and hosted models after installing the new client software.
+  Please see the documentation at 
+  [https://jujucharms.com/docs/2.2/models-upgrade](./models-upgrade#upgrading-the-model-software)
+  for more information.
+  
+
+  ## New and Improved
+  
+  * Users can now deploy workloads to Centos7 machines on Azure.
+  * vSphere Juju users with vCenter 5.5 and vCenter 6.0 can now bootstrap
+  successfully and deploy workloads as well as have machines organised into
+  folders. 
+  * Juju now has initial support for Oracle Cloud, https://jujucharms.com/docs/2.2/help-oracle.
+  * Users of Azure can now benefit from better credential management
+  support, we’ve eliminated the need to manually discover subscription ID
+  in order to add an Azure credential. All you need is to have Azure CLI
+  installed and regular Juju credential management commands will “Just Work”. 
+  * Juju login command now accepts the name or hostname of a public controller
+  as a parameter. Passing a user to log in as has been moved to an option
+  rather than a positional parameter.
+  * Behavior for a Juju bootstrap argument ‘-metadata-source’ has changed.
+  In addition to specifying a parent directory that contains “tools” and
+  “images” subdirectories with metadata, this argument can now also point
+  directly to one of these subdirectories if only one type of custom metadata
+  is required. (lp:1696555)
+  * Actions that require ‘sudo’ can now be used in conjure-up steps.
+  * conjure-up now uses libjuju as its api client.
+  * conjure-up can now deploy from release channels, e.g. 'beta'.
+  * There's a new bootstrap configuration option, max-txn-log-size, that can
+  be used to configure the size of the capped transaction log used internally
+  by Juju. Larger deployments needed to be able to tune this setting; we
+  don't recommend setting this option without careful consideration.
+  * General Juju log pruning policy can now be configured to specify maximum
+  log entry age and log collection size, https://jujucharms.com/docs/2.2/controllers-config.
+  * Juju status history pruning policy can also be configured to specify
+  maximum status entry age and status collection size,
+  https://jujucharms.com/docs/2.2/models-config.
+  * The  'status --format=yaml' and 'show-machine' commands now show more
+  detailed information about individual machines' network configuration.
+  * Added support for AWS ‘ap-northeast-2’ region, and GCE ‘us-west1’,
+  ‘asia-northeast1’ regions.
+  * Actions have received some polish and can now be canceled, and showing a
+  previously run action will include the name of the action along with the
+  results.
+  * Rotated Juju log files are now also compressed.
+  * Updates to MAAS spaces and subnets can be made available to a Juju model
+  using the new ‘reload-spaces’ command.
+  * ‘unit-get private-address’ now uses the default binding for an application.
+  * Juju models have always been internally identified by their owner and
+  their short name. These full names have not been exposed well to the user
+  but are now part of juju models and show-model command output.
+  
+  ## Fixes
+  
+  * Juju more reliably determines whether to connect to the MAASv2 or MAASv1
+  API based on MAAS endpoint URL as well as the response received from MAAS.
+  * Juju is now built with Go version 1.8 to take advantage of performance
+  improvements.
+  * Juju users will no longer be missing their firewall rules when adding
+  a new machine on Azure.
+  * Juju models with storage can now be cleanly destroyed.
+  * Juju is now resilient to a MITM attack as SSH Keys of the bootstrap host
+  are now verified before bootstrap (lp:1579593).
+  * Root escalation vulnerability in ‘juju-run’ has been fixed (lp:1682411). 
+  * Juju’s agent presence data is now aggressively pruned, reducing
+  controller disk space usage and avoiding associated performance issues.
+  * MAAS 2.x block storage now works with physical disks, when MAAS reports
+  the WWN unique identifier. (lp:1677001). 
+  * Automatic bridge names are now properly limited to 15 characters in
+  Juju (lp:1672327).
+  * Juju subordinate units are now removed as expected when their principal
+  is removed (lp:1686696 and lp:1655486)
+  
+  You can check the milestones for a detailed breakdown of the Juju and
+  conjure-up bugs we have fixed:
+  
+  https://launchpad.net/juju/+milestone/2.2.0
+  https://github.com/conjure-up/conjure-up/milestone/19?closed=1
+  
+  ## Known issues
+  
+  * Juju 2.1 agents can fail if configuration for the units is large enough
+  to cause responses to be chunked. https://bugs.launchpad.net/juju/2.1/+bug/1697936
+  * Restarting controller during an HA upgrade will cause it to not upgrade.
+  https://bugs.launchpad.net/juju/+bug/1697956 
+  
+  ## Feedback Appreciated!
+  
+  We encourage everyone to let us know how you're using Juju.
+  
+  Join us at regular Juju shows - subscribe to our Youtube channel
+  https://youtube.com/jujucharms
+  
+  Send us a message on Twitter using #jujucharms, join us at #juju on freenode,
+  and subscribe to the mailing list at juju@lists.ubuntu.com.
+  
+  https://jujucharms.com/docs/stable/contact-us
+
 
 ^# Juju 2.1.3
 
