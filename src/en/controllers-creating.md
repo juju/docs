@@ -125,7 +125,7 @@ juju bootstrap --config bootstrap-timeout=900 lxd lxd-faraway
 
 
 To learn more about configuration options available at bootstrap time, see
-[Configuring controllers][controlconfig].
+[Configuring controllers][controlconfig] and [Configuring models][modelconfig].
 
 
 ## Changing the current model/controller
@@ -144,3 +144,4 @@ juju bootstrap localhost lxd-new --no-switch
 
 
 [controlconfig]: ./controllers-config.html "Configuring Juju controllers"
+[modelconfig]: ./models-config.html "Configuring Juju models"
