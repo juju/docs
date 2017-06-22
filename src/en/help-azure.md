@@ -2,16 +2,12 @@ Title: Help with Azure clouds
 
 # Using the Microsoft Azure public cloud
 
-Juju already has knowledge of the Azure cloud, so unlike previous versions there
-is no need to provide a specific configuration for it, it 'just works'. Azure
-will appear in the list of known clouds when you issue the command:
-  
-```bash
-juju clouds
-```
-And you can see more specific information (e.g. the supported regions) by 
-running:
-  
+Juju already has knowledge of the Azure cloud, which means adding your Azure
+account to Juju is quick and easy.
+
+You can see more specific information on Juju's Azure support (e.g.  the
+supported regions) by running:
+
 ```bash
 juju show-cloud azure
 ```
@@ -26,13 +22,49 @@ juju update-clouds
 
 ## Credentials
 
-Using Juju's interactive authentication, importing Azure credentials into Juju
-is a simple process. The only information you'll need is your Azure subscription
-id, which can be found by signing in to Azure and going to the
-'[SubscriptionBlade][subscriptionblade]'
-page.
+Before you can use Azure with Juju, you will need to import your Azure
+account credentials into Juju. Retrieving those credentials is easy, thanks to
+Microsoft's new [Azure Cloud Shell][azureshell].
 
-![Azure SubscriptionBlade page showing subscription id](./media/getting_started-azure_subsid.png)
+This can be installed using *[snap][snapcraft]*:
+
+```bash
+sudo snap install azure-cli --classic --edge
+```
+
+With 'azure-cli' installed, you can login to your Azure account with the
+following command:
+
+```bash
+az login
+```
+
+The above command will prompt you to open a browser with a specific URL and
+enter a provided authentication code.
+
+After entering the code and pressing continue, you will be asked to select the
+Microsoft account you'd like associated with the Azure Cloud Shell. 
+
+Back on the command line, the output from `azr login` will have concluded by
+displaying the credentials for your Azure account. They should look similar to
+the following:
+
+```yaml
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "34090127e8-e693-4be8-b906-c7a859149486",
+    "isDefault": true,
+    "name": "Pay-As-You-Go",
+    "state": "Enabled",
+    "tenantId": "0f7348364-f42f-4c78-94c9-e3d01c2bc5af",
+    "user": {
+      "name": "javierlarin72@gmail.com",
+      "type": "user"
+    }
+  }
+]
+```
 
 Credentials can now be added by running the command:
 
@@ -44,57 +76,30 @@ for yourself.  This will be how you remember and refer to this Azure credential
 in Juju. The second question will ask you to select an 'Auth Type' from the
 following two options:
 
-```bash
-interactive*
+```np-highlight
+interactive
 service-principal-secret
 ```
 
-The `*` after 'interactive' indicates this is the default option, and you can
-either type 'interactive' manually, or simply press 'Enter' to continue. 
+The default option is `interactive` and you can either type 'interactive' or
+press 'Enter' to continue. 
 
-!!! Note: The 'interactive' option is far quicker and easier than manually
-adding credentials via the 'service-principal-secret' option, but instructions
-for this are covered in the [Manually adding
-credentials](#manually-adding-credentials) section.
+!!! Note: 
+    The 'interactive' option is far quicker and easier than manually adding
+    credentials via the 'service-principal-secret' option, but instructions for
+    this are covered in the [Manually adding credentials](#manually-adding-credentials)
+    section.
 
-You will then be asked for your Azure subscription id.  After entering this, you'll
-be notified that Juju is initiating its interactive authentication followed by
-a request to use a web browser to follow [link][azuredeviceauth] and enter an
-authentication code:
+Finally, you will be asked for your Azure subscription id. Just press enter to
+use the default subscription. Juju will use the authenticated Azure Cloud Shell
+to gather the credentials automatically.
 
-```bash
-To sign in, use a web browser to open the page
-https://login.windows.net/common/oauth2/deviceauth. Enter the code
-D5RM8DE4J to authenticate.
-```
-
-Following the link will open a page that displays 'Device Login' and an empty
-text entry field for Juju's authentication code. After entering the code,
-you'll see Juju CLI identified as the application publisher and you should
-click continue.
-
-You'll next be asked to accept the following permissions needed
-by the Juju CLI:
-
-- Sign you in and read your profile
-- Read and write directory data
-- Access your organization's directory
-- Access Azure Service Management as you (preview)
-
-After accepting these permissions, you can close the browser and your Juju
-session will automatically complete with output similar to the following:
-
-```bash
-Authenticated as "Graham a5a231c2-defd-4e87-a48d-efba12225b75".
-Creating/updating service principal.
-Assigning Owner role to service principal.
-Credentials added for cloud azure.
-```
+If you want to check that the credentials were successfully added, use the
+`juju credentials` command. You will see your Azure credentials listed.
 
 You can now start using Juju with your Azure cloud.
 
 ## Create controller
-
 
 ```bash
 juju bootstrap azure mycloud
@@ -285,7 +290,10 @@ allocated to machines in an application-specific Availability Set. Read the
 [Azure SLA](https://azure.microsoft.com/en-gb/support/legal/sla/) to learn how
 availability sets affect uptime guarantees.
 
+<!-- LINKS -->
 [subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
 [azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
 [azureportal]: http://portal.azure.com
 [jaas]: ./getting-started.html "Getting Started with Juju as a Service"
+[azureshell]: https://azure.microsoft.com/en-us/features/cloud-shell/
+[snapcraft]: https://snapcraft.io/
