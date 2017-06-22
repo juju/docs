@@ -76,7 +76,7 @@ for yourself.  This will be how you remember and refer to this Azure credential
 in Juju. The second question will ask you to select an 'Auth Type' from the
 following two options:
 
-```np-highlight
+```no-highlight
 interactive
 service-principal-secret
 ```
