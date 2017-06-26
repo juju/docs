@@ -9,16 +9,15 @@ TODO: Add 'centos' and 'windows' stuff to series talk
 
 # Deploying applications
 
-The fundamental point of Juju is that you can use it to deploy applications through
-the use of charms (the magic bits of code that make things just work). These
-charms can exist in the [Charm Store](https://jujucharms.com/store) or on the
-file system (previously downloaded from the store or written locally).
+The fundamental point of Juju is that you can use it to deploy applications
+through the use of charms (the magic bits of code that make things just work).
+These charms can exist in the [Charm Store](https://jujucharms.com/store) or on
+the file system (previously downloaded from the store or written locally).
 
 Charms use the concept of *series* analogous as to how Juju does with Ubuntu
-series ('trusty', 'xenial', etc). For the most part, this is transparent as
+series ('Trusty', 'Xenial', etc). For the most part, this is transparent as
 Juju will use the most relevant charm to ensure things "just work". This makes
 deploying applications with Juju fun and easy.
-
 
 ## Deploying from the charm store
 
@@ -32,9 +31,10 @@ juju deploy mysql
 This will create a machine and use the latest online MySQL charm (for your
 default series) to deploy a MySQL application.
 
-!!! Note: The default series can be configured at a model level (see
-[Configuring models](./models-config.html)). In the absence of this setting,
-the default is to use the series specified by the charm.
+!!! Note: 
+    The default series can be configured at a model level, see
+    [Configuring models][models] for further details. In the absence of this setting, the
+    default is to use the series specified by the charm.
 
 Assuming that the Xenial series charm exists and was used above, an equivalent
 command is:
@@ -45,8 +45,9 @@ juju deploy cs:xenial/mysql
 
 Where 'cs' denotes the charm store.
 
-!!! Note: A used charm gets cached on the controller's database to minimize
-network traffic for subsequent uses.
+!!! Note:
+    A used charm gets cached on the controller's database to minimize network
+    traffic for subsequent uses.
 
 ### Channels
 
@@ -59,7 +60,8 @@ latest features, or be part of a beta test; others may want to only install the
 most reliable software. The channels are:
 
  - **stable**: (default) This is the latest, tested, working stable version of the charm.
- - **candidate**: A release candidate. There is high confidence this will work fine, but there may be minor bugs.
+ - **candidate**: A release candidate. There is high confidence this will work
+   fine, but there may be minor bugs.
  - **beta**: A beta testing milestone release.
  - **edge**: The very latest version - expect bugs!
 
@@ -76,13 +78,12 @@ when using the `deploy` command:
 juju deploy mysql --channel <channel_name>
 ```
 
-In the case of there being no version of the charm specified for that
-channel, Juju will fall back to the next 'most stable'; e.g. if you were to
-specify the 'beta' channel, but no charm version is set for that channel, Juju
-will try to deploy from the 'candidate' channel instead, and so on. This means
-that whenever you specify a channel, you will always end up with something that
-best approximates your choice if it is not available.
-
+In the case of there being no version of the charm specified for that channel,
+Juju will fall back to the next 'most stable'; e.g. if you were to specify the
+'beta' channel, but no charm version is set for that channel, Juju will try to
+deploy from the 'candidate' channel instead, and so on. This means that
+whenever you specify a channel, you will always end up with something that best
+approximates your choice if it is not available.
 
 #### Charm upgrades
 
@@ -90,15 +91,15 @@ Because the pointer can fluctuate among revisions it is possible that during a
 charm upgrade the channel revision is different than the revision of a
 currently deployed charm. The following rules apply:
 
-- If a channel revision is older, downgrade the deployed charm to that revision
-- If a channel revision is newer, upgrade the deployed charm to that revision
+- If a channel revision is older, downgrade the deployed charm to that
+  revision.
+- If a channel revision is newer, upgrade the deployed charm to that revision.
 
 Channels can be specified with the `upgrade-charm` command. For example:
 
 ```bash
 juju upgrade-charm mysql --channel edge
 ```
-
 
 ## Deploying a multi-series charm
 
@@ -165,7 +166,6 @@ deployed on `precise`, but only using `--force-series`, like this:
 ```bash
 juju upgrade-charm mycharm --force-series
 ```
-
 
 ## Deploying from a local charm
 
@@ -280,7 +280,6 @@ Any extra placement directives are ignored. If not enough placement directives
 are supplied, then the remaining units will be assigned as normal to a new,
 clean machine.
 
-
 ## Deploying to spaces
 
 More complex networks can be configured using spaces. Spaces group one or more
@@ -308,7 +307,7 @@ specific charm-defined endpoints are connected to specific spaces, including a
 default option for any interfaces not specified:
 
 ```bash
-juju deploy --bind "db:db-space db-admin:admin-space default-space" mysql
+juju deploy --bind "default-space db=db-space db-admin=admin-space" mysql
 ```
 
 For information on building bundles with bindings, see [Using and Creating
@@ -331,20 +330,12 @@ For example, given the following:
 ```
 
 Juju will provision instances connected to (with IP addresses on) one of the
-subnets of both db-space and internal spaces, and NOT connected to either the storage
-or dmz spaces.
+subnets of both db-space and internal spaces, and NOT connected to either the
+storage or dmz spaces.
 
 See [Constraints][constraints] for more general information regarding
-constraints. To learn about `extra-bindings`, which provide a way to declare
-an extra bindable endpoint that is not a relation, see [Charm
-metadata][metadata].
-
-!!! Note: When a new model is added, it can take several seconds for all the 
-available spaces to be available. If you try to immediately deploy to a 
-specific space, the operation may fail. This is a known issue which is 
-being [tracked in Launchpad here][bug#1662264].
-
-
+constraints. To learn about `extra-bindings`, which provide a way to declare an
+extra bindable endpoint that is not a relation, see [Charm metadata][metadata].
 
 ## Juju retry-provisioning
 
@@ -360,12 +351,11 @@ exceeded' error. You can ask Juju to retry:
 juju retry-provisioning 3 27 57
 ```
 
-
 ## Considerations
 
-Although we are working to have each application co-locatable without the danger
-of conflicting configuration files and network configurations this work is not
-yet complete.
+Although we are working to have each application co-locatable without the
+danger of conflicting configuration files and network configurations this work
+is not yet complete.
 
 While the `add-unit` command supports the `--to` option, you can elect not use
 `--to` when doing an "add-unit" to scale out the application on its own node.
@@ -377,12 +367,12 @@ juju add-unit rabbitmq-server
 This will allow you to save money when you need it by using `--to`, but also
 horizontally scale out on dedicated machines when you need to.
 
-
 ## Selecting and enabling networks
 
 Use the `networks` option to specify application-specific network requirements.
 The `networks` option takes a comma-delimited list of Juju-specific network
 names.
+
 Juju will enable the networks on the machines that host application units. This
 is different from the network constraint which selects a machine that matches
 the networks, but does not configure the machine to use them. For example, this
@@ -392,7 +382,6 @@ and enables them:
 ```bash
 juju deploy --networks db,monitor mysql
 ```
-
 
 ## Addendum: local charms
 
@@ -405,10 +394,11 @@ official Charm Store. Such cases include:
 - The charms may not exist online. They are newly-written charms.
 - The charms may exist online but they have been customized locally.
 
-!!! Note: Although this method will ensure that the charms themselves are
-available on systems without outside internet access, there is no guarantee
-that a charm will work in a disconnected state. Some charms will attempt to pull
-code from sources on the internet such as GitHub.
+!!! Note: 
+    Although this method will ensure that the charms themselves are
+    available on systems without outside internet access, there is no guarantee
+    that a charm will work in a disconnected state. Some charms will attempt to pull
+    code from sources on the internet such as GitHub.
 
 ### Using Charm Tools
 
@@ -455,6 +445,9 @@ charm pull nfs
 charm pull vsftpd
 ```
 
+<!-- LINKS -->
+
+[models]: ./models-config.html
 [spaces]: ./network-spaces.html
 [creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [metadata]: ./authors-charm-metadata.html
