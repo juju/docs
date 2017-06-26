@@ -452,4 +452,3 @@ charm pull vsftpd
 [creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [metadata]: ./authors-charm-metadata.html
 [constraints]: ./charms-constraints.html
-[bug#1662264]: https://bugs.launchpad.net/juju/+bug/1662264
