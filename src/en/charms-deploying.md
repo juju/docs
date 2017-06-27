@@ -371,23 +371,6 @@ juju add-unit rabbitmq-server
 This will allow you to save money when you need it by using `--to`, but also
 horizontally scale out on dedicated machines when you need to.
 
-
-## Selecting and enabling networks
-
-Use the `networks` option to specify application-specific network requirements.
-The `networks` option takes a comma-delimited list of Juju-specific network
-names.
-Juju will enable the networks on the machines that host application units. This
-is different from the network constraint which selects a machine that matches
-the networks, but does not configure the machine to use them. For example, this
-commands deploys an application to a machine on the "db" and "monitor" networks
-and enables them:
-
-```bash
-juju deploy --networks db,monitor mysql
-```
-
-
 ## Addendum: local charms
 
 This is further explanation of offline/local charms.
