@@ -31,7 +31,7 @@ by you, inherited as a default value or dynamically set by Juju.
 A key's value may be set for the current model using the same command:
 
 ```bash
-juju model-config noproxy=jujucharms.com
+juju model-config no-proxy=jujucharms.com
 ```
 
 It is also possible to specify a list of key-value pairs:
@@ -113,7 +113,7 @@ ignore-machine-addresses     | bool   | false    |                          | Wh
 image-metadata-url           | string |          | url                      | The URL at which the metadata used to locate OS image ids is located
 image-stream                 | string |          |                          | The simplestreams stream used to identify which image ids to search when starting an instance
 logforward-enabled           | bool   | false    |                          | Set whether the log forward function is enabled
-logging-config               | string |          |                          | The configuration string to use when configuring Juju agent logging (see [this link](http://godoc.org/github.com/juju/loggo#ParseConfigurationString) for details)
+logging-config               | string |          |                          | The configuration string to use when configuring Juju agent logging (see [this link](https://godoc.org/github.com/juju/loggo#ParseConfigString) for details)
 no-proxy                     | string |          |                          | List of domain addresses not to be proxied (comma-separated)
 provisioner-harvest-mode     | string | destroyed| all/none/unknown/destroyed | Set what to do with unknown machines. See [additional info below](#juju-lifecycle-and-harvesting).
 proxy-ssh                    | bool   | false    |                          | Set whether SSH commands should be proxied through the API server
@@ -266,3 +266,19 @@ Juju by setting:
 ```yaml
 agent-stream: devel
 ```
+
+The `agent-version` option selects a specific client version to be used, with
+some constraints. It is used as a parameter during bootstrap and permits you to
+tell Juju to bootstrap a new controller using the same major and minor version
+already in use, but with a different patch number. For example, Juju uses the
+major.minor.patch numbering scheme, so Juju 2.1.3 means major version 2, minor
+version 1, and patch version 3. On a system with this release of Juju
+installed, you can bootstrap a controller on AWS using a different patch
+release, like this:
+
+```bash
+juju bootstrap aws aws --agent-version='2.1.2'
+```
+
+You cannot bootstrap a controller on this system using Juju 1.x, Juju 2.2, and
+so on. Only different patch numbers may be used with `agent-version`.
