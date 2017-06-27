@@ -8,14 +8,13 @@ TODO: Check accuracy of key table
 
 # Configuring models
 
-A model influences all the machines that Juju creates within it and, in turn, the
-applications that get deployed onto those machines. It is therefore a very powerful
-feature to be able to configure at the model level.
+A model influences all the machines that Juju creates within it and, in turn,
+the applications that get deployed onto those machines. It is therefore a very
+powerful feature to be able to configure at the model level.
 
 Model configuration consists of a collection of keys and their respective
 values. An explanation of how to both view and set these key:value pairs is
 provided below. Notable examples are provided at the end.
-
 
 ## Getting and setting values
 
@@ -25,13 +24,13 @@ You can display the current model settings by running the command:
 juju model-config
 ```
 
-This will include all the currently set key values - whether they were set
-by you, inherited as a default value or dynamically set by Juju. 
+This will include all the currently set key values - whether they were set by
+you, inherited as a default value or dynamically set by Juju. 
 
 A key's value may be set for the current model using the same command:
 
 ```bash
-juju model-config noproxy=jujucharms.com
+juju model-config no-proxy=jujucharms.com
 ```
 
 It is also possible to specify a list of key-value pairs:
@@ -40,8 +39,9 @@ It is also possible to specify a list of key-value pairs:
 juju model-config test-mode=true enable-os-upgrade=false
 ```
 
-!!! Note: Juju does not currently check that the provided key is a valid
-setting, so make sure you spell it correctly.
+!!! Note: 
+    Juju does not currently check that the provided key is a valid setting, so
+    make sure you spell it correctly.
 
 To return a value to the default setting the `--reset` flag is used,
 specifying the key names:
@@ -113,7 +113,7 @@ ignore-machine-addresses     | bool   | false    |                          | Wh
 image-metadata-url           | string |          | url                      | The URL at which the metadata used to locate OS image ids is located.
 image-stream                 | string |          |                          | The simplestreams stream used to identify which image ids to search when starting an instance.
 logforward-enabled           | bool   | false    |                          | Set whether the log forward function is enabled.
-logging-config               | string |          |                          | The configuration string to use when configuring Juju agent logging (see [this link](http://godoc.org/github.com/juju/loggo#ParseConfigurationString) for details).
+logging-config               | string |          |                          | The configuration string to use when configuring Juju agent logging (see [this link](https://godoc.org/github.com/juju/loggo#ParseConfigString) for details).
 max-status-history-age       | string |          | 72h, etc.                | The maximum age for status history entries before they are pruned, in a human-readable time format.
 max-status-history-size      | string |          | 400M, 5G, etc.           | The maximum size for the status history collection, in human-readable memory format.
 no-proxy                     | string |          |                          | List of domain addresses not to be proxied (comma-separated).
@@ -130,8 +130,8 @@ vpc-id                       | string |          |                          | Th
 
 The APT packaging system is used to install and upgrade software on machines
 provisioned in the model, and many charms also use APT to install software for
-the applications they deploy. It is possible to set a specific mirror for the APT
-packages to use, by setting 'apt-mirror':
+the applications they deploy. It is possible to set a specific mirror for the
+APT packages to use, by setting 'apt-mirror':
 
 ```bash
 juju model-config apt-mirror=http://archive.ubuntu.com/ubuntu/
@@ -171,23 +171,22 @@ latest software available to it by disabling upgrades but enabling updates.
 ### Disable network management
 
 This can only be used with MAAS models and should otherwise be set to
-false(default) unless you want to take over network control from Juju because
-you have unique and well-defined needs. Setting this to 'true' with MAAS gives
-you the same behavior with containers as you already have with other
-providers: one machine-local address on a single network interface, bridged
-to the default bridge.
+'false' (default) unless you want to take over network control from Juju
+because you have unique and well-defined needs. Setting this to 'true' with
+MAAS gives you the same behaviour with containers as you already have with
+other providers: one machine-local address on a single network interface,
+bridged to the default bridge.
 
 
 ### Firewall mode
 
 Modes available include:
-- **instance:** Requests the use of an individual firewall per instance
+- **instance:** Requests the use of an individual firewall per instance.
 - **global:** Uses a single firewall for all instances (access for a network
-  port is enabled to one instance if any instance requires that port)
+  port is enabled to one instance if any instance requires that port).
 - **none:** Requests that no firewalling should be performed inside the model,
   which is useful for clouds without support for either global or per instance
-  security groups
-
+  security groups.
 
 ### Juju lifecycle and harvesting
 
@@ -226,17 +225,19 @@ Below, the harvest mode key for the current model is set to 'none':
 juju model-config provisioner-harvest-mode=none
 ```
 
-
 ### Retrying failed hooks
 
 Prior to version 2.0, hooks returning an error would block until the user
 ran a command to retry them manually:
-`juju resolved unit-name/#`
-  
-From version 2.0, Juju will automatically retry hooks periodically - there is 
+
+```bash
+juju resolved unit-name/#
+```  
+
+From version 2.0, Juju will automatically retry hooks periodically - there is
 an exponential backoff, so hooks will be retried after 5, 10, 20, 40 seconds up
 to a period of 5 minutes, and then every 5 minutes. The logic behind this is
-that some hook errors are caused by timing issues or the temporary 
+that some hook errors are caused by timing issues or the temporary
 unavailability of other applications - automatic retry enables the Juju model
 to heal itself without troubling the user.
 
@@ -246,8 +247,9 @@ distracting and unwelcome. For this reason, it is possible to set the
 case, users will have to manually retry any hook which fails, using the command
 above, as with earlier versions of Juju.
 
-!!! Note: Even with the automatic retry enabled, it is still possible to use
-the  `juju resolved unit-name/#` command to retry manually.
+!!! Note:
+    Even with the automatic retry enabled, it is still possible to use the
+    `juju resolved unit-name/#` command to retry manually.
 
 
 ### Versions and streams
@@ -271,13 +273,13 @@ agent-stream: devel
 ```
 
 The `agent-version` option selects a specific client version to be used, with
-some constraints. It is used as a parameter during bootstrap and permits you
-to tell Juju to bootstrap a new controller using the same major and minor
-version already in use, but with a different patch number. For example, Juju
-uses the major.minor.patch numbering scheme, so Juju 2.1.3 means major version
-2, minor version 1, and patch version 3. On a system with this release of Juju
-installed, you can bootstrap a controller on aws using a different patch release,
-like this:
+some constraints. It is used as a parameter during bootstrap and permits you to
+tell Juju to bootstrap a new controller using the same major and minor version
+already in use, but with a different patch number. For example, Juju uses the
+major.minor.patch numbering scheme, so Juju 2.1.3 means major version 2, minor
+version 1, and patch version 3. On a system with this release of Juju
+installed, you can bootstrap a controller on AWS using a different patch
+release, like this:
 
 ```bash
 juju bootstrap aws aws --agent-version='2.1.2'
