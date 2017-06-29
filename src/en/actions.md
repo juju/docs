@@ -227,21 +227,27 @@ actions:
   unit: git/0
 ```
 
+There are 5 different values for the status of an action:
+
+- **pending**; the default status when an action is first queued.
+- **running**; the action is currently running.
+- **completed**; the action ran to completion as intended.
+- **failed**; the action did not complete successfully.
+- **cancelled**; the action was cancelled before being run.
+
 ### Debugging actions
 
 To debug actions, use the `debug-hooks` command, like this:
- +
- +```bash
- +juju debug-hooks <service/unit> [action-name action-name2 ...]
- +```
- +
- +For example, if you want to check the `add-repo` action of a the `git` charm,
- +use:
- +
- +```bash
- +juju debug-hooks git/0 add-repo
- +```
- +
- +Learn more about debugging Juju charms in [Debugging hooks][devdebug].
+ 
+```bash
+juju debug-hooks <service/unit> [action-name action-name2 ...]
+```
+ 
+For example, if you want to check the `add-repo` action of a the `git` charm,
+use:
+ 
+```bash juju debug-hooks git/0 add-repo ```
+ 
+Learn more about debugging Juju charms in [Debugging hooks][devdebug].
 
 [devdebug]: ./developer-debugging.html
