@@ -306,6 +306,5 @@ Alternatively, if your issue is not addressed here, get in touch via our
 [charmstore]: https://jujucharms.com/
 [logs]: ./troubleshooting-logs.html
 [upgrade]: ./troubleshooting-upgrade.html
-[tools]: ./troubleshooting-tools.html
 [clouds]: ./troubleshooting-clouds.html
 [contactus]: ./contact-us.html
