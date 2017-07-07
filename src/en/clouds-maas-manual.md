@@ -24,9 +24,8 @@ clouds:
       endpoint: http://prodmaas/MAAS
 ```
 
-This example YAML defines three MAAS (region) controllers. 
-To add a MAAS cloud from this definition to Juju,
-run the command in the form:
+This example YAML defines three MAAS (region) controllers. To add a MAAS cloud
+from this definition to Juju, run the command in the form:
  
 ```bash
 juju add-cloud <cloudname> <YAML file>
@@ -64,4 +63,4 @@ testmaas           0                 maas        Metal As A Service
 It is necessary to add credentials for these clouds before bootstrapping them.
 See the [Documentation on MAAS credentials here][maas-credentials].
 
-[maas-credentials]: ./clouds-maas.html#adding-your-maas-credentials
+[maas-credentials]: ./clouds-maas.html#credentials
