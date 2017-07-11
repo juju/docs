@@ -2,91 +2,70 @@ Title: Using the Oracle cloud
 
 # Using the Oracle public cloud
 
-Juju has built-in support for [Oracle's Compute service][compute]. However, the
-following few steps are required before Juju can bootstrap Oracle's Compute
-cloud:
+Juju has built-in support for [Oracle Compute][oracle-compute], Oracle's public
+cloud. This means that there is no need to *add* the Oracle cloud to Juju. An
+exception to this are Oracle Compute *trial* accounts. Both types of accounts,
+paid and trial, are covered here.
 
-1. Associate Oracle's Ubuntu images with your Compute service. Juju uses these
-   for deployment.
+!!! Warning:
+    Support for Oracle Compute is only available via the [juju 2.2 dev
+    release][jujubeta] and is therefore not yet recommended for production use.
 
-1. For trial accounts, add the Oracle cloud to Juju. Endpoint details may need 
-   to be retrieved from the Oracle Compute *Dashboard*.
-   Juju already knows about endpoints for paid accounts so this step is only
-   necessary if using a trial account.
+The email you received upon signing up for Oracle Compute contains information
+you will need to get going. Look for:
 
-1. Add authentication credentials for the specific Compute service to Juju.
+- 'My Services URL'
+- 'Identity domain'
 
-We'll step through each of these requirements below, before using Juju to
-launch a test deployment on Oracle's Compute. 
+## Ubuntu images
 
-!!! Note:
-	Oracle support is currently in the latest [Juju 2.2 release
-        candidate][jujubeta] and is experimental. Both the Juju and Oracle
-        teams are working to improve the user experience.
+You will need to make Ubuntu images available in your Oracle Compute account in
+order for Juju to be able to create Ubuntu-based machines. This is a
+requirement.
 
-## Images
+Navigate to 'My Services URL' and log in. Click on the 'Create instance' box
+and then 'Create' a Compute service:
 
-Juju needs access to Ubuntu images that have been associated with your Oracle
-Compute deployment. 
+![Create Compute service](./media/oracle_empty-dashboard-2.png)
 
-To do this, first sign in to your Oracle cloud domain. The URL for this will
-depend on the cloud's geographical location. In EMEA, for example, the URL is
-the following:
+!!! Recall:
+    We are doing this to associate images with your 'identity domain'. We will
+    not be creating an instance here.
 
-[https://myservices.emea.oraclecloud.com](https://myservices.emea.oraclecloud.com).
+Click on 'Marketplace' on the resulting page (left menu), enter 'ubuntu' into
+the search field, and hit Enter:
 
-After signing in, you'll see the default top level of Oracle's domain
-dashboard.
+![Search Ubuntu images](./media/oracle_create-instance-ubuntu-2.png) 
 
-![Empty Oracle dashboard](./media/oracle_empty-dashboard.png)
-
-Click on the large `Create Instance` tile and select `Compute` from the list of
-services that appear. 
-
-You are now looking at the first step in Oracle's Compute cloud deployment
-process. We'll be using this step to associate images with this specific cloud
-domain before cancelling the remainder of Oracle's cloud deployment. 
-
-Ubuntu images can be found by clicking on 'Marketplace' from the menu on the
-left and entering `Ubuntu` into the search field that appears. 
-
-![Ubuntu image search](./media/oracle_create-instance-ubuntu.png) 
-
-The search will return any official Ubuntu images, visible with the Ubuntu
-logo, alongside other Ubuntu-associated images. 
-
-It's currently possible to use any of the following images with Juju:
+Juju works best with specific Ubuntu images however. These Juju-compatible
+images are listed here:
 
 | Version          | Arch   | Series  |
 |------------------| -------|---------|
-| Ubuntu 12.04-LTS | amd64  | Precise |
-| Ubuntu 14.04-LTS | amd64  | Trusty  |
-| Ubuntu 16.04-LTS | amd64  | Xenial  |
+| Ubuntu 12.04 LTS | amd64  | Precise |
+| Ubuntu 14.04 LTS | amd64  | Trusty  |
+| Ubuntu 16.04 LTS | amd64  | Xenial  |
 | Ubuntu 17.04     | amd64  | Zesty   |
 
-!!! Warning: 
-	Currently, Oracle's Ubuntu 16.10 (Yakkety Yak) image shouldn't be
-        associated with your Juju/Oracle Compute deployment.
+Since Juju uses charms to install applications, the Ubuntu series you need are
+those that the charms were written for. If unsure, it is recommended to add the
+two most recent LTS releases.
 
-To associate an image, click `Select` at the bottom of the image tile and
-accept Oracle's terms and conditions for associating a Marketplace image with
-your cloud (this needs to be done separately for each image).
+!!! Note:
+    At time of writing, Trusty and Xenial are the two most recent Ubuntu
+    LTS releases.
 
-We'd recommend adding at least the Xenial and Trusty images to your cloud, as
-these are used by the majority of Juju deployments. The series you need to
-associate will depend on the specific charms you use. While images are being
-added, a small `Instance Creation` pane will appear which turns green when the
-process is complete. This typically takes a few seconds.
- 
-When complete, associated images will be listed when you select 'Private
-Images' from the menu on the left, as well as from the Compute console by
-selecting the 'Images' tab: 
+Go ahead and select a compatible image from among the official Ubuntu images
+(orange Ubuntu logo), accept Oracle's terms and conditions, and click
+'Install'. Repeat the process for each desired image. These installed images
+will end up under 'Private Images' in the menu on the left:
 
-![Private image in Oracle Compute dashboard](./media/oracle_create-instance-private.png)
+![List private images](./media/oracle_create-instance-private-2.png)
 
 ## Add cloud
 
-When using a trial account, to add your Oracle cloud to Juju, type `juju add-cloud`. 
+**If using a trial account**, you will need to add your Oracle cloud to Juju
+with the interactive `juju add-cloud` command. 
 
 The interactive `add-cloud` process will start by first asking for the cloud
 type. Enter `oracle`:
@@ -229,8 +208,10 @@ being visible in the `Instances` page of the Oracle Compute dashboard:
 
 ![Oracle dashboard showing Juju](./media/oracle_bootstrap-instances.png)
 
+
 <!-- LINKS -->
-[compute]: https://cloud.oracle.com/en_US/compute
+
+[oracle-compute]: https://cloud.oracle.com/en_US/compute
 [jujubeta]: ./reference-install.html#getting-development-releases
 [cloudoracle]: https://cloud.oracle.com/home
 [getstarted]: ./getting-started-jaas.html
