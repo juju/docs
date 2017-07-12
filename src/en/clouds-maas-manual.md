@@ -63,4 +63,4 @@ testmaas           0                 maas        Metal As A Service
 It is necessary to add credentials for these clouds before bootstrapping them.
 See the [Documentation on MAAS credentials here][maas-credentials].
 
-[maas-credentials]: ./clouds-maas.html#credentials
+[maas-credentials]: ./clouds-maas.html#add-credentials

@@ -6,7 +6,7 @@ Title: Using MAAS with Juju
 Juju works closely with [MAAS][maas-site] to deliver the same experience
 on bare metal that you would get by using any other cloud.
 
-## Register a MAAS cloud with Juju
+## Add a MAAS cloud
 
 Use the interactive `add-cloud` command to add your MAAS to Juju's list of
 clouds:
@@ -57,7 +57,7 @@ maas-cloud         0                   maas        Metal As A Service
 ### Manually defining MAAS clouds
 
 Alternatively, it is possible to manually define a single or multiple MAAS
-clouds with a file and then add a cloud by referring to such a file (still with
+clouds with a file and add a cloud by referring to such a file (still with
 `juju add-cloud`).  See [Manually adding MAAS clouds][maas-manual] for details.
 
 ## Add credentials
@@ -81,8 +81,8 @@ Enter maas-oauth:
 Credentials added for cloud maas-cloud.
 ```
 
-We've called the new credential 'maas-cloud-creds' and used a MAAS user's API
-key in the place of 'maas-oauth'.
+We've called the new credential 'maas-cloud-creds'. When prompted for
+'maas-oauth', you should paste your MAAS API key.
 
 !!! Note:
     The API key will not be echoed back to the screen.
@@ -99,14 +99,16 @@ Where $PROFILE is to be replaced by the MAAS username.
 
 ## Create the Juju controller
 
-You are now ready to create a Juju controller (this will utilize a node in the
-MAAS):
+You are now ready to create a Juju controller:
 
 ```bash
 juju bootstrap maas-cloud maas-cloud-controller
 ```
 
 Above, the name given to the new controller was 'maas-cloud-controller'.
+MAAS will allocate a node from its pool to run the controller on. If you want
+to make sure a specific node is used for this, use constraints (see
+[Create a controller with constraints][create-a-controller-with-constraints]).
 
 
 <!-- LINKS -->
@@ -115,3 +117,4 @@ Above, the name given to the new controller was 'maas-cloud-controller'.
 [maas-cli]: https://docs.ubuntu.com/maas/2.2/en/manage-cli
 [maas-api]: https://docs.ubuntu.com/maas/2.2/en/manage-account#api-key
 [maas-manual]: ./clouds-maas-manual.html
+[create-a-controller-with-constraints]: ./controllers-creating.html#create-a-controller-with-constraints
