@@ -110,6 +110,12 @@ MAAS will allocate a node from its pool to run the controller on. If you want
 to make sure a specific node is used for this, use constraints (see
 [Create a controller with constraints][create-a-controller-with-constraints]).
 
+## Next steps
+
+You can now start deploying Juju charms and/or bundles to your MAAS cloud.
+Continue with Juju by visiting the [Models][models] and
+[Introduction to Juju Charms][charms] pages.
+
 
 <!-- LINKS -->
 
@@ -118,3 +124,5 @@ to make sure a specific node is used for this, use constraints (see
 [maas-api]: https://docs.ubuntu.com/maas/2.2/en/manage-account#api-key
 [maas-manual]: ./clouds-maas-manual.html
 [create-a-controller-with-constraints]: ./controllers-creating.html#create-a-controller-with-constraints
+[models]: ./models.html
+[charms]: ./charms.html
