@@ -3,8 +3,8 @@ Title: Using the Oracle cloud
 # Using the Oracle public cloud
 
 Juju has built-in support for [Oracle Compute][oracle-compute], Oracle's public
-cloud. This means that there is no need to *add* the Oracle cloud to Juju. An
-exception to this are Oracle Compute *trial* accounts. Both types of accounts,
+cloud. This means that there is no need to add the Oracle cloud to Juju. An
+exception to this are Oracle Compute trial accounts. Both types of accounts,
 paid and trial, are covered here.
 
 !!! Warning:
@@ -46,8 +46,7 @@ the search field, and hit Enter:
 
 ![Search Ubuntu images](./media/oracle_create-instance-ubuntu-2.png) 
 
-Juju works best with specific Ubuntu images however. These Juju-compatible
-images are listed here:
+From the point of view of Juju, compatible images are listed below:
 
 | Version          | Arch   | Series  |
 |------------------| -------|---------|
@@ -80,7 +79,7 @@ The resulting page will look similar to this:
 
 ![REST endpoint](./media/oracle_myservices-endpoint-2.png)
 
-There may be multiple endpoints. Choose the one beginning with `compute.`.
+There may be multiple endpoints. Choose the one beginning with `https://compute.`.
 
 You are now ready to use the interactive `add-cloud` command:
 
@@ -164,54 +163,50 @@ We've called the new credential 'maas-cloud-creds' and entered values for
     The password will not be echoed back to the screen.
 
 
-## Networks and spaces
+## Juju networks and spaces
 
-An optional step allows you to easily associate Oracle Compute IP networks and
-exchanges with Juju's networks and spaces.
+You can optionally link Oracle Compute IP networks and IP exchanges with Juju's
+networks and spaces.
 
-To do this, sign in to your Oracle cloud domain, select the Compute service
-you're using for Juju, and open its service console. 
+To do this:
 
-From the Compute dashboard that appears, switch to the `Network` tab and select
-`IP Exchanges` from the menu on the left.
+1. Navigate to 'My Services URL'.
+1. Open the left menu (top-left icon) and select 'Compute'.
+1. From the 'Network' tab select 'IP Exchanges' from the menu on the left.
+1. Click on the 'Create IP Exchange' button and enter a name for the exchange,
+   and optionally, a description and one or more tags.
 
-Click on the `Create IP Exchange` button. In the pane that appears, enter a
-name for the exchange, and optionally, a description and one or more tags.
+![Create an IP exchange](./media/oracle_create-ip-exchange-2.png)
 
-The new exchange will now be listed. 
+Now create a network to use this exchange by selecting 'IP Networks' from the
+menu and clicking on 'Create IP Network':
 
-We now need to add a new network to use this exchange. Select the `IP Networks`
-page from the menu on the left and click on `Create IP Network` to open the new
-network details panel. 
+![Create an IP network](./media/oracle_create-ip-network-2.png)
 
-![Add an IP Network](./media/oracle_create-ip-network.png)
+Enter a name, a CIDR formatted address for the 'IP Address Prefix', and an
+optional description with one or more tags. Use the 'IP Exchange' drop-down
+menu to select the exchange created previously and click on 'Create'. 
 
-Enter a name, a CIDR formatted address for the `IP Address Prefix`, and an
-optional description with one or more tags. Use the `IP Exchange` drop-down
-menu to select the exchange created previously and click on `Create`. 
-
-A few moments later, the new network will be listed.
-
-When you next bootstrap Juju with Oracle Compute, you'll be able to use these
+When you next create a Juju controller (see below), you'll be able to use these
 new subnets and spaces. For example, typing `juju subnets` will show output
 similar to the following:
 
 ```no-highlight
 subnets:
-  10.0.123.0/24:
+  192.168.0.0/16:
     type: ipv4
-    provider-id: /Compute-a476989/juju-network
+    provider-id: /Compute-a498151/peter.gargamel@example.com/oracle-cloud-ip-network
     status: in-use
-    space: juju-exchange
+    space: oracle-cloud-ip-exchange
     zones:
     - default
 ```
 
-Typing `juju spaces` will list the Oracle IP exchange:
+Typing `juju spaces` will list the exchange:
 
 ```no-highlight
-Space          Subnets
-juju-exchange  10.0.123.0/24
+Space                     Subnets
+oracle-cloud-ip-exchange  192.168.0.0/16
 ```
 
 See [How to configure more complex networks using spaces][spaces] for further
