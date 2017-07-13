@@ -8,6 +8,61 @@ This section details all the available release notes for the
 
 The versions covered here are: 
 
+^# Juju 2.2.2
+
+This release fixes some bugs that missed the cut for 2.2.1. Notable inclusions are:
+* juju debug-log will no longer stop prematurely
+* missing credentials will no longer stop upgrades
+* reduced log spam in multiplaces
+* agents will no longer falsely report as lost 
+* relationships between subordinate charms will now work
+
+For a list of all bugs fixed in this release, see https://launchpad.net/juju/+milestone/2.2.2
+
+## New and Improved
+
+### vSphere Datastore selection
+To select a specific datastore when bootstrapping a vSphere environment, use the "datastore" model config attribute, eg
+
+$ juju bootstrap vsphere --config datastore=<name-of-accessible-datastore>
+
+
+## How can I get it?
+
+The best way to get your hands on this release of Juju is to install it as a snap package (see https://snapcraft.io/ for more info on snaps).
+
+         snap install juju --classic 
+
+Other packages are available for a variety of platforms. Please see the online documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew, you should see an upgrade available.
+
+For highlights of this release, please see the documentation at
+https://jujucharms.com/docs/2.2/whats-new.
+
+^# Juju 2.2.1
+
+This release further enhances the performance improvements delivered in 2.2.0, as well as fixing some bugs that missed the cut for 2.2.0. Notable inclusions are:
+* frequent database writes (for logging and agent pings) are batched to significantly reduce database I/O
+* cleanup of log noise to make observing true errors much easier
+* status history is now pruned whereas before a bug prevented that from happening leading to unbounded growth
+* update-status interval configurable (this value must be set when bootstrapping or performing add-model via the --config option; any changes after that are not noticed until a Juju restart)
+* debug-log include/exclude arguments now more user friendly (as for commands like juju ssh, you now specify machine/unit names instead of tags; "rabbitmq-server/0" instead of "unit-rabbitmq-server-0".
+
+conjure-up remains at version 2.2.0 but the snap has been updated to bundle this new Juju 2.2.1 version.
+
+## How can I get it?
+
+The best way to get your hands on this release of Juju and conjure-up is to install them via snap packages (see https://snapcraft.io/ for more info on snaps).
+
+         snap install juju --classic 
+         snap install conjure-up --classic 
+
+Other packages are available for a variety of platforms. Please see the online documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew, you should see an upgrade available.
+
+For highlights of this release, please see the documentation at
+https://jujucharms.com/docs/2.2/whats-new. Further details are below.
+
+https://launchpad.net/juju/+milestone/2.2.1
+
 
 ^# Juju 2.2.0
 
