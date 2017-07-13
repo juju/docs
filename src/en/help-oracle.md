@@ -12,16 +12,17 @@ paid and trial, are covered here.
     release][jujubeta] and is therefore not yet recommended for production use.
 
 The email you received upon signing up for Oracle Compute contains vital
-information you will need:
+information you will need to complete the instructions presented here. Look
+for:
 
 - 'My Services URL'
 - 'Identity domain'
-- 'My Account URL' (for trial accounts)
+- 'My Account URL'
 - 'Username' (your email address)
 - 'Password' (temporary)
 
-On first login you will be prompted to change the temporary password to arrive
-at your final password.
+Upon first login (using either of the above URLs) you will be prompted to
+change the temporary password to arrive at your final password.
 
 ## Ubuntu images
 
@@ -46,7 +47,8 @@ the search field, and hit Enter:
 
 ![Search Ubuntu images](./media/oracle_create-instance-ubuntu-2.png) 
 
-From the point of view of Juju, compatible images are listed below:
+From the point of view of Juju, some images should not be used.
+Juju-compatible images are listed below:
 
 | Version          | Arch   | Series  |
 |------------------| -------|---------|
@@ -63,10 +65,10 @@ two most recent LTS releases.
     At time of writing, Trusty and Xenial are the two most recent Ubuntu
     LTS releases.
 
-Go ahead and select a compatible image from among the official Ubuntu images
-(orange Ubuntu logo), accept Oracle's terms and conditions, and click
-'Install'. Repeat the process for each desired image. These installed images
-will end up under 'Private Images' in the menu on the left:
+Select a compatible image from among the official Ubuntu images (orange Ubuntu
+logo), accept Oracle's terms and conditions, and click 'Install'. Repeat the
+process for each desired image. These installed images will end up under
+'Private Images' in the menu on the left:
 
 ![List private images](./media/oracle_create-instance-private-2.png)
 
@@ -79,7 +81,7 @@ The resulting page will look similar to this:
 
 ![REST endpoint](./media/oracle_myservices-endpoint-2.png)
 
-There may be multiple endpoints. Choose the one beginning with `https://compute.`.
+There may be multiple endpoints. Choose the one beginning with `https://compute`.
 
 You are now ready to use the interactive `add-cloud` command:
 
@@ -214,14 +216,14 @@ details on networks and spaces.
 
 ## Create the Juju controller
 
-You are now ready to create a Juju controller (this will create an instance in
-your Oracle Compute account):
+You are now ready to create a Juju controller:
 
 ```bash
 juju bootstrap oracle-cloud oracle-cloud-controller
 ```
 
 Above, the name given to the new controller was 'oracle-cloud-controller'.
+Oracle Compute will create an instance to run the controller on.
 
 Once created, you can view the controller as an Oracle Compute instance by
 navigating to 'My Services URL', opening the left menu (top-left icon), and
@@ -229,6 +231,12 @@ selecting 'Compute'. The controller should be visible under the 'Instances'
 tab:
 
 ![List controller instance](./media/oracle_bootstrap-instances-2.png)
+
+Oracle Compute has the notion of *sites* (like availability zone or region).
+You may need to change your site to see your new controller. This is done in
+the top-right corner:
+
+![Oracle Compute sites](./media/oracle_bootstrap-instances-sites.png)
 
 ## Next steps
 
