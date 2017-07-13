@@ -54,6 +54,9 @@ Cloud        Regions  Default          Type        Description
 maas-cloud         0                   maas        Metal As A Service
 ```
 
+You will need to add credentials for this cloud before bootstrapping it
+(creating a controller).
+
 ### Manually defining MAAS clouds
 
 Alternatively, it is possible to manually define a single or multiple MAAS
