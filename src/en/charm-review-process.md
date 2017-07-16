@@ -164,19 +164,9 @@ While using the README as a reference, deploy the charm using the command
 below on your local model.
 
 ```bash
-juju deploy --repository=../../ local:precise/charm-name
-```
-
-Alternatively, you can set JUJU_REPOSITORY and deploy like the following:
-
-```bash
 export JUJU_REPOSITORY=/tmp
-juju deploy local:precise/charm-name
+juju deploy $JUJU_REPOSITORY/charm-name
 ```
-
-!!! Note: Remember to swap out `precise` for the series the charm is being
-tested for, like `trusty`.
-
 If the local deployment is successful, continue to the configuration section.
 
 !!! Note: If you have access to other cloud providers (like EC2), we
