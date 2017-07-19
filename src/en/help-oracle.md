@@ -4,12 +4,22 @@ Title: Using the Oracle cloud
 
 Juju has built-in support for [Oracle Compute][oracle-compute], Oracle's public
 cloud. This means that there is no need to add the Oracle cloud to Juju. An
-exception to this are Oracle Compute trial accounts. Both types of accounts,
-paid and trial, are covered here.
+exception to this is if you have an Oracle Compute trial account. Both types of
+accounts, paid and trial, are covered here.
 
 !!! Warning:
-    Support for Oracle Compute is only available via the [juju 2.2 dev
-    release][jujubeta] and is therefore not yet recommended for production use.
+    Support for Oracle Compute is new (since Juju 2.2) and some sub-optimal
+    traits may still be observed.
+
+This page will cover the following steps:
+
+1. Associate Oracle's Ubuntu images with your Compute service. Juju needs these
+   to be able to deploy Ubuntu-based applications.
+1. For trial accounts, add the Oracle cloud to Juju.
+1. Add credentials to Juju so it can make use of your Oracle Compute account.
+1. Create the Juju controller
+
+## Information gathering
 
 The email you received upon signing up for Oracle Compute contains vital
 information you will need to complete the instructions presented here. Look
@@ -57,6 +67,9 @@ Juju-compatible images are listed below:
 | Ubuntu 16.04 LTS | amd64  | Xenial  |
 | Ubuntu 17.04     | amd64  | Zesty   |
 
+!!! Warning:
+    In particular, Ubuntu 16.10 (Yakkety) should not be used with Juju.
+
 Since Juju uses charms to install applications, the Ubuntu series you need are
 those that the charms were written for. If unsure, it is recommended to add the
 two most recent LTS releases.
@@ -72,7 +85,7 @@ process for each desired image. These installed images will end up under
 
 ![List private images](./media/oracle_create-instance-private-2.png)
 
-## Add cloud (trial accounts)
+## Trial accounts
 
 As mentioned, you will need to add your Oracle cloud to Juju if you're using a
 trial account. This requires a 'REST Endpoint'. To get this, navigate to 'My
@@ -135,21 +148,21 @@ is tied to your trial account.
 
 ## Add credentials
 
-Use the interactive `add-credential` command to add your credentials to the new
-cloud:
+Use the interactive `add-credential` command to add your credentials to your
+cloud. Below, we add credentials to the trial account cloud:
 
 ```bash
 juju add-credential oracle-cloud
 ```
 
-Example user session:
+Here is a resulting example user session:
 
 ```no-highlight
 Enter credential name: oracle-cloud-creds
 
 Using auth-type "userpass".
 
-Enter username: peter.gargamel@example.com
+Enter username: javier@example.com
 
 Enter password:
 
@@ -158,7 +171,7 @@ Enter identity-domain: a498151
 Credentials added for cloud oracle-cloud.
 ```
 
-We've called the new credential 'maas-cloud-creds' and entered values for
+We've called the new credential 'oracle-cloud-creds' and entered values for
 'Username', 'Password', and 'Identity domain'.
 
 !!! Note:
@@ -197,7 +210,7 @@ similar to the following:
 subnets:
   192.168.0.0/16:
     type: ipv4
-    provider-id: /Compute-a498151/peter.gargamel@example.com/oracle-cloud-ip-network
+    provider-id: /Compute-a498151/javier@example.com/oracle-cloud-ip-network
     status: in-use
     space: oracle-cloud-ip-exchange
     zones:
@@ -217,6 +230,8 @@ details on networks and spaces.
 ## Create the Juju controller
 
 You are now ready to create a Juju controller:
+
+Below, we continue with the trial account cloud:
 
 ```bash
 juju bootstrap oracle-cloud oracle-cloud-controller
