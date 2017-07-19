@@ -11,100 +11,106 @@ allocated at a more granular level.
 Juju has storage-related commands for creating, destroying, listing, and managing
 attachments to application units.
 
-[`add-storage`](./commands.html#add-storage)
+[`add-storage`][commands-add-storage]
 : Adds unit storage dynamically.
 
-[`attach-storage`](./commands.html#attach-storage)
+[`attach-storage`][commands-attach-storage]
 : Attaches existing storage to a unit.
 
-[`create-storage-pool`](./commands.html#create-storage-pool)
-: Create or define a storage pool.
+[`create-storage-pool`][commands-create-storage-pool]
+: Creates or defines a storage pool.
 
-[`detach-storage`](./commands.html#detach-storage)
-: Detaches storage from units.
+[`detach-storage`][commands-detach-storage]
+: Detaches storage from a unit.
 
-[`show-storage`](./commands.html#show-storage)
-: Shows the details of a single, specified storage instance.
+[`show-storage`][commands-show-storage]
+: Shows the details of a specific storage instance.
 
-[`storage`](./commands.html#storage) (also 'list-storage')
+[`storage`][commands-storage]
 : Lists details of all storage instances in the model.
 
-[`storage-pools`](./commands.html#storage-pools) (also 'list-storage-pools')
-: List storage pools.
+[`storage-pools`][commands-storage-pools]
+: Lists storage pools.
 
-[`remove-storage`](./commands.html#remove-storage)
+[`remove-storage`][commands-remove-storage]
 : Removes storage from the model.
 
-## Deploying a charm with storage requirements
+## Deploying a charm with storage options
 
-For this document, our examples will focus on the [PostgreSQL charm](https://jujucharms.com/postgresql/)
-which uses the Juju Storage feature to store the database contents separately from
-the root filesystem.
+The advanced storage features of Juju naturally depend upon charms that have
+storage options. This document will focus on the
+[PostgreSQL charm][postgresql-charm] which uses these features to store the
+database contents separately from the root filesystem.
 
-### Deploying with storage constraints
+### Storage constraints
 
-When deploying a charm with additional storage requirements, you can control
-several properties of how the storage will be allocated:
+Several properties are used to dictate how storage will be allocated:
 
-- the "pool" from which to allocate the storage; pools are described below,
-  but for now you can think of them as the class of storage, such as magnetic
-  or SSD;
-- the number of volumes/filesystems to allocate;
-- the size of each volume/filesystem.
+- 'pool': class of storage (e.g. magnetic or SSD)
+- 'size': size of each volume/filesystem
+- 'count': number of volumes/filesystems to allocate
 
-When deploying the application, you control these properties by specifying
-"storage constraints" via the `--storage` flag of [`juju deploy`](./commands.html#deploy).
-If you specify no storage constraints at all, then Juju will place the storage
-on the root filesystem.
+These properties are specified as constraints via the `juju deploy` command's
+`--storage` flag:
 
 ```bash
-juju deploy <charm> --storage <label>=<pool>,<size>,count
+juju deploy <charm> --storage <label>=<pool>,<size>,<count>
 ```
 
-If you specify some constraints, but not others, then Juju will select defaults
-for the others:
+Notes:
 
-- if unspecified, the number of storage instances will be the minimum
-  number required by the charm, or 1 if the storage is optional;
-- if unspecified, the size of the storage will be taken from the charm's
-  minimum storage size, or 1GiB if the charm does not specify a minimum.
-- if unspecified, the default pool for the model/cloud provider will
-  be used. e.g. "ebs" for AWS, "cinder" for OpenStack.
+- `label` is a string taken from the charm itself.
+- `--storage` may be specified multiple times, to support multiple labels.
+
+If at least one constraint is specified the following defaults come into
+effect:
+
+- 'pool' = the default pool of the given cloud (e.g. 'ebs' for AWS, 'cinder'
+  for OpenStack) or model
+- 'size' = taken from the charm's minimum storage size, or 1GiB if the charm
+  does not specify a minimum
+- 'count' = the minimum number required by the charm, or '1' if the storage is
+  optional
+
+In the absence of any storage constraints, Juju will place the storage on
+the root filesystem.
+
+### Examples
+
+Deploy PostgreSQL with one instance (count) of 100GiB, via the charm's 'pgdata'
+storage label, using the cloud's (or model's) default storage pool:
 
 ```bash
-# Deploy one instance of 100GiB for postgresql's pgdata storage,
-# using the model/cloud provider's default storage pool. For AWS,
-# this means using the "ebs" storage pool.
 juju deploy postgresql --storage pgdata=100G
+```
 
-# Deploy one instance of 100GiB for postgresql's pgdata storage,
-# using the "ebs-ssd" storage pool. This allows you to take
-# advantage of cloud-specific storage options.
+Deploy PostgreSQL with one instance (count) of 100GiB, via the charm's 'pgdata'
+storage label, using the "ebs-ssd" storage pool:
+
+```bash
 juju deploy postgresql --storage pgdata=100G,ebs-ssd
 ```
 
-The `--storage` flag may be specified multiple times, to support
-specifying constraints for multiple stores. For example, the [Ceph OSD](https://jujucharms.com/ceph-osd/)
-charm supports two stores: osd-devices, and osd-journals. You can
-specify constraints for these separately:
+Deploy Ceph OSD with 3x100GiB volumes per unit for data storage, and 1x10GiB
+per unit for journaling:
 
 ```bash
-# Deploy Ceph OSD, with 3x100GiB volumes per unit for
-# data storage, and 1x10G per unit for journaling.
 juju deploy ceph-osd --storage osd-devices=3,100G --storage osd-journals=10G
 ```
 
+See the [Ceph OSD charm][ceph-charm]) used above.
+
 ### Storage pools
 
-You can list the storage pools available for use with the `juju storage-pools`
-command. This will list the predefined storage pools, and any custom ones that
-you create using the `juju create-storage-pool` command.
+Use the `juju storage-pools` command to list the predefined storage pools, and
+any custom ones that may have been created with the `juju create-storage-pool`
+command:
 
 ```bash
 juju storage-pools
 ```
 
-When run in a new AWS model, this produces the following output:
+Here is sample output for a newly-added AWS model:
 
 ```no-highlight
 Name     Provider  Attrs
@@ -115,13 +121,12 @@ rootfs   rootfs
 tmpfs    tmpfs     
 ```
 
-These are just the pre-defined storage pools. Depending on the storage provider,
-you can create additional, custom, storage pools. For example, the "ebs"
-storage provider supports several configuration attributes: "volume-type"
-(volume type, i.e. magnetic, ssd, or provisioned-iops; "encrypted" (whether
-or not disk encryption should be used); and "iops" (IOPS per GiB). For example,
-you can create a storage pool that allocates provisioned IOPS volumes, with
-a ratio of 30 IOPS per GiB:
+Depending on the storage provider, custom storage pools can be created. For
+example, the 'ebs' storage provider supports several configuration attributes:
+
+- 'volume-type': volume type (i.e. magnetic, ssd, or provisioned-iops)
+- 'encrypted': enable/disable disk encryption
+- 'iops': IOPS per GiB
 
 ```bash
 juju create-storage-pool iops ebs volume-type=provisioned-iops iops=30
@@ -407,6 +412,20 @@ config:
 ## More information
 
 If you are interested in more information on how to create a charm that uses
-the storage feature read
-[writing charms that use storage](./developer-storage.html).
+the storage feature read [Writing charms that use storage][developer-storage].
 
+
+<!-- LINKS -->
+
+[commands-add-storage]: ./commands.html#add-storage
+[commands-attach-storage]: ./commands.html#attach-storage
+[commands-create-storage-pool]: ./commands.html#create-storage-pool
+[commands-detach-storage]: ./commands.html#detach-storage
+[commands-show-storage]: ./commands.html#show-storage
+[commands-storage]: ./commands.html#storage
+[commands-storage-pools]: ./commands.html#storage-pools
+[commands-remove-storage]: ./commands.html#remove-storage
+
+[postgresql-charm]: https://jujucharms.com/postgresql
+[ceph-charm]: https://jujucharms.com/ceph-osd
+[developer-storage]: ./developer-storage.html
