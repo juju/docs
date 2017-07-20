@@ -16,8 +16,9 @@ ensure high availability. As long as the charm and the charm's application are
 well written, you can rest assured that IaaS downtime will not affect your
 application.
 
-!!! Note: see [High Availability][ha] for details on enabling high availability
-for the controller.
+!!! Note:
+    See [High Availability][ha] for details on enabling high availability
+    for the controller.
 
 Commands you already use for scaling now ensure your applications are always
 available. e.g.
