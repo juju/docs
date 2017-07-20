@@ -16,8 +16,8 @@ ensure high availability. As long as the charm and the charm's application are
 well written, you can rest assured that IaaS downtime will not affect your
 application.
 
-!!! Note: see [High Availability](./controllers-ha.html) for details on
-enabling high availability for the controller.
+!!! Note: see [High Availability][ha] for details on enabling high availability
+for the controller.
 
 Commands you already use for scaling now ensure your applications are always
 available. e.g.
@@ -35,10 +35,9 @@ across a region. A new instance, for example, will be allocated the zone
 with the fewest members of its distribution group.
 
 Juju supports such zones on Google Compute Engine, VMware vSphere, Amazon's
-EC2, OpenStack-based clouds (Havana or newer) and
-[MAAS](http://maas.io/docs/installconfig-zones). See the
-[Clouds](./clouds.html) section of the documentation for more details on these
-and other cloud-specific settings.
+EC2, OpenStack-based clouds (Havana or newer) and [MAAS][maaszones]. See the
+[Clouds][jujuclouds] section of the documentation for more details on these and
+other cloud-specific settings.
 
 If you do not specify a zone explicitly, Juju will automatically and uniformly
 distribute units across the available zones within the region. This can be
@@ -75,3 +74,8 @@ purpose.  With zones, Juju directly ensures each unit of a distribution group
 is placed into a different zone.  With sets, Juju places each unit of a
 distribution group into the same set, and Azure will then try to ensure that
 not all units in the set will become unavailable at the same time.
+
+<!-- LINKS -->
+[ha]: ./controllers-ha.html
+[maaszones]: http://maas.io/docs/installconfig-zones
+[jujuclouds]: ./clouds.html
