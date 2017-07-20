@@ -2,14 +2,20 @@ Title: Using storage with Juju charms
 
 # Using Juju Storage
 
-Many applications require access to a storage resource of some form. Juju charms
-can declare what storage requirements they have, and these can be allocated when
-the charm is deployed. Charms may declare several types of storage requirement
-(e.g. for persistent storage and an additional cache) so that resources can be
-allocated at a more granular level.
+Certain applications can benefit from advanced storage configurations and if a
+charm exists for such an application Juju can declare such requirements during
+deploy time.
 
-Juju has storage-related commands for creating, destroying, listing, and managing
-attachments to application units.
+The level of sophistication is limited by the charm; a charm may support
+multiple storage options (e.g.  persistent storage, additional cache). All this
+allows the user to allocate resources at a granular level with the goal of
+optimizing the application's functioning.
+
+## Storage management
+
+Outside of application deployment, Juju also has a wide array of storage
+management abilities. Related commands are listed below, along with a brief
+description of each.
 
 [`add-storage`][commands-add-storage]
 : Adds unit storage dynamically.
@@ -44,11 +50,11 @@ database contents separately from the root filesystem.
 
 ### Storage constraints
 
-Several properties are used to dictate how storage will be allocated:
+Several properties are used to dictate how storage is allocated:
 
-- 'pool': class of storage (e.g. magnetic or SSD)
+- 'pool': class of storage (e.g. magnetic, SSD)
 - 'size': size of each volume/filesystem
-- 'count': number of volumes/filesystems to allocate
+- 'count': number of volumes/filesystems
 
 These properties are specified as constraints via the `juju deploy` command's
 `--storage` flag:
@@ -59,7 +65,8 @@ juju deploy <charm> --storage <label>=<pool>,<size>,<count>
 
 Notes:
 
-- `label` is a string taken from the charm itself.
+- `label` is a string taken from the charm itself. It encapsulates a specific
+  storage option/feature.
 - `--storage` may be specified multiple times, to support multiple labels.
 
 If at least one constraint is specified the following defaults come into
@@ -72,8 +79,8 @@ effect:
 - 'count' = the minimum number required by the charm, or '1' if the storage is
   optional
 
-In the absence of any storage constraints, Juju will place the storage on
-the root filesystem.
+In the absence of any storage constraints, the storage will be on the root
+filesystem.
 
 ### Examples
 
@@ -98,13 +105,13 @@ per unit for journaling:
 juju deploy ceph-osd --storage osd-devices=3,100G --storage osd-journals=10G
 ```
 
-See the [Ceph OSD charm][ceph-charm]) used above.
+See the [Ceph OSD charm][ceph-charm] used above.
 
 ### Storage pools
 
-Use the `juju storage-pools` command to list the predefined storage pools, and
-any custom ones that may have been created with the `juju create-storage-pool`
-command:
+Use the `juju storage-pools` command to list the predefined storage pools as
+well as any custom ones that may have been created with the `juju
+create-storage-pool` command:
 
 ```bash
 juju storage-pools
@@ -128,134 +135,151 @@ example, the 'ebs' storage provider supports several configuration attributes:
 - 'encrypted': enable/disable disk encryption
 - 'iops': IOPS per GiB
 
+For example, here we provision a 3000 IOPS volume (100GiB x 30IOPS/GiB) by
+first creating a custom storage pool and then using it with PostgreSQL:
+
 ```bash
 juju create-storage-pool iops ebs volume-type=provisioned-iops iops=30
-```
-
-Using this, you can provision a 3000 IOPS volume (100GiB x 30IOPS/GiB):
-
-```bash
 juju deploy postgresql --storage pgdata=iops,100G
 ```
 
 ### Dynamic storage
 
-Most storage can be dynamically added to and removed from a machine. For example,
-EBS volumes can be dynamically created and attached to an existing EC2 instance,
-so long as they are in the same availability zone. For dynamic storage, you can
-use the dynamic storage management commands:
+Most storage can be dynamically added to, and removed from, a machine. For
+example, EBS volumes can be created and attached to EC2 instances, as long as
+they are in the same availability zone.
 
-- add-storage, to allocate additional storage instances to a unit;
-- attach-storage, to attach existing storage to a unit;
-- detach-storage, to detach storage from a unit;
-- remove-storage, to remove storage from the model.
-
-Some other storage, such as MAAS's disks, cannot be dynamically added or removed.
-In the case of MAAS disks, they are physically part of the same machine; they are
-&mdash; at least to Juju &mdash; inseparable. For these types of storage, you can
-only request the storage at deployment time; and then it will be removed along with
-the machine, when the machine is removed from the model.
+Some types of storage, however, cannot be dynamically managed. For instance,
+Juju cannot disassociate MAAS disks from their respective MAAS nodes. These
+types of static storage can only be requested at deployment time and will
+be removed when the machine is removed from the model.
 
 When deploying an application or unit that requires storage, using machine
 placement (i.e. `--to`) requires that the assigned storage be dynamic. Juju will
 return an error if you try to deploy a unit to an existing machine, while also
 attempting to allocate static storage.
 
-Providers may also impose certain restrictions when attaching storage. For
-example, as described above, attaching an EBS volume to an EC2 instance requires
-that they be within the same availability zone. If you try to use `juju attach-storage`
-to attach an EBS volume to a unit whose machine lies within a different
-availability zone, Juju will return an error.
+Cloud providers may also impose certain restrictions when attaching storage.
+For example, as described above, attaching an EBS volume to an EC2 instance
+requires that they both reside within the same availability zone. If this is
+not the case, Juju will return an error.
 
 #### Adding and detaching storage
 
 Assuming the storage provider supports it, storage can be dynamically added to
-a unit using `juju add-storage`:
+a unit using `juju add-storage`.
+
+For example, to create a 100GiB EBS volume and attach it to unit 'postgresql/0'
+as its pgdata storage:
 
 ```bash
-# Create a new 100GiB EBS volume, and attach it to postgresql/0 as its pgdata
-# storage.
 juju add-storage postgresql/0 pgdata=ebs,100G
 ```
 
-Juju will take care creating the storage so that it will be attachable to the
-unit's machine; for example, in AWS, the EBS volume will be created in the same
-availability zone as the instance.
+Juju will ensure the storage is allowed to attach to the unit's machine. In the
+above example, the EBS volume was created in the same availability zone as the
+instance (a requirement).
 
-Charms can specify a maximum number of storage instances, e.g. postgresql can
-have at most one instance of pgdata. If you try to add more than the charm
-allows, Juju will return an error.
+Charms can specify a maximum number of storage instances. In the case of the
+postgresql charm, a maximum of one is allowed for 'pgdata'. If an attempt is
+made to exceed it, Juju will return an error.
 
-Dynamic storage can be detached from units dynamically, using the
-`juju detach-storage` command mentioned above:
+Dynamic storage can be detached from units using `juju detach-storage`.
+
+For example, to detach storage 'pgdata/0' from unit 'postgresql/0':
 
 ```bash
-# Detach the storage pgdata/0 from the unit postgresql/0.
 juju detach-storage postgresql/0 pgdata/0
 ```
 
-Charms can define a minimum, as well as maximum number, of storage instances.
-As mentioned, the postgresql charm specifies a minimum of zero, and maximum
-of one, for pgdata. Other charms may require exactly one, or an arbitrary
-range. In any case, if detaching storage from a unit would bring the total
-number of storage instances below the minimum, Juju will return an error.
+Charms can also define a minimum number of storage instances. The postgresql
+charm specifies a minimum of zero for 'pgdata' whereas another charm may specify
+a different number. In any case, if detaching storage from a unit would bring
+the total number of storage instances below the minimum, Juju will return an
+error.
 
 #### Persistence
 
-Detaching storage from a unit does not destroy the storage. When you remove
-a unit from the model, and the unit has dynamic storage attached, Juju will
-detach the storage but leave it in the model. This enables the storage to be
-attached to another unit using `juju attach-storage`, or to a new unit using
-the `--attach-storage` flag of `juju deploy` or `juju add-unit`:
+Detaching storage from a unit does not destroy the storage. When a unit is
+removed from the model, and the unit has dynamic storage attached, Juju will
+detach the storage but leave it intact at the model level. This enables the
+storage to be re-attached to another unit using `juju attach-storage`, or to a
+new unit using the `--attach-storage` flag of `juju deploy` or `juju add-unit`:
+
+Detached storage can be destroyed and removed from the model using `juju remove-storage`.
+
+##### Examples
+
+Attach existing storage 'pgdata/0' to existing unit 'postgresql/1':
 
 ```bash
-# Attach the existing storage pgdata/0 to the existing unit postgresql/1.
 juju attach-storage postgresql/1 pgdata/0
+```
 
-# Deploy the postgresql charm, attaching the existing storage pgdata/0 to
-# the new unit. The "--attach-storage" and "-n" flags cannot be used together.
+Deploy the postgresql charm, attaching existing storage 'pgdata/0' to the new
+unit:
+
+```bash
 juju deploy postgresql --attach-storage pgdata/0
+```
 
-# Add a new unit of the postgresql application, attaching the existing storage
-# pgdata/0 to the new unit. The "--attach-storage" and "-n" flags cannot be
-# used together.
+!!! Note:
+    The `--attach-storage` and `-n` flags cannot be used together.
+
+Add a new unit of the postgresql application, attaching existing storage
+'pgdata/0' to the new unit:
+
+```bash
 juju add-unit postgresql --attach-storage pgdata/0
 ```
 
-Alternatively, detached storage can be destroyed and removed from the model using
-`juju remove-storage`:
+Destroy already detached storage 'pgdate/0' (remove it from the model):
 
 ```bash
 juju remove-storage pgdata/0
 ```
 
-Storage is currently tied to a single model, which means it is not currently
-possible to reuse storage from one model or controller in another. When you
-destroy the model, or controller, the storage will be destroyed. Support for
-releasing storage from a model, and enlisting it into another, is planned for
-a future release.
+If an attempt is made to remove storage that is currently in use (it is
+attached) Juju will refuse to comply and will emit a warning:
 
-### Upgrading applications with new storage
+```no-highlight
+failed to remove pgdata/0: cannot destroy storage "pgdata/0": storage is
+attached
 
-When updating a charm with the [juju upgrade-charm](./commands.html#upgrade-charm)
+Use the --force flag to remove attached storage, or use
+"juju detach-storage" to explicitly detach the storage
+before removing
+```
+
+### Cross-model storage
+
+Storage management is currently restricted to a single model, which means it is
+not possible to reuse storage from one model/controller in another. Also, when
+a model/controller is removed, all associated storage will be destroyed.
+Support for releasing storage from a model, and enlisting it into another, is
+planned for a future release.
+
+### Upgrading charms
+
+When upgrading a charm with the [juju upgrade-charm][commands-upgrade-charm]
 command, the existing storage constraints specified at deployment time will be
-preserved. It is possible to change the storage constraints and define
-new ones by passing the `--storage` flag to `juju upgrade-charm`. This may
-be necessary when upgrading to a revision of a charm that introduces
-new, required, storage.
+preserved.
 
-For example, if the pgdata storage did not exist in revision 1 of the postgresql
-charm, and were introduced in revision 2: when upgrading from revision 1 to
-revision 2, you could inform Juju of how to allocate the new storage by specifying
-the storage constraints to `juju upgrade-charm`:
+It is also possible to change the storage constraints and define new ones by
+passing the `--storage` flag to `juju upgrade-charm`. For example, if the
+'pgdata' storage option did not exist in revision 1 of the postgresql charm,
+but was introduced in revision 2, when upgrading (from 1 to 2) you could do:
 
 ```bash
 juju upgrade-charm postgresql --storage pgdata=10G
 ```
 
-If you were to run `juju upgrade-charm` without specifying the constraints,
-rootfs would be used as described in the section on deploying with storage
-constraints.
+If such a constraint was not provided, 'rootfs' would be used as described in the
+section on deploying with storage constraints.
+
+!!! Warning:
+    Specifying new constraints may be necessary when upgrading to a revision of
+    a charm that introduces new, required, storage options.
 
 ## Storage Providers
 
@@ -425,6 +449,7 @@ the storage feature read [Writing charms that use storage][developer-storage].
 [commands-storage]: ./commands.html#storage
 [commands-storage-pools]: ./commands.html#storage-pools
 [commands-remove-storage]: ./commands.html#remove-storage
+[commands-upgrade-charm]: ./commands.html#upgrade-charm
 
 [postgresql-charm]: https://jujucharms.com/postgresql
 [ceph-charm]: https://jujucharms.com/ceph-osd
