@@ -78,5 +78,5 @@ not all units in the set will become unavailable at the same time.
 
 <!-- LINKS -->
 [ha]: ./controllers-ha.html
-[maaszones]: http://maas.io/docs/installconfig-zones
+[maaszones]: https://docs.ubuntu.com/maas/2.2/en/manage-zones
 [jujuclouds]: ./clouds.html
