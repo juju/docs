@@ -92,17 +92,17 @@ juju deploy postgresql --storage pgdata=100G
 ```
 
 Deploy PostgreSQL with one instance (count) of 100GiB, via the charm's 'pgdata'
-storage label, using the "ebs-ssd" storage pool:
+storage label, using the 'ebs-ssd' storage pool:
 
 ```bash
-juju deploy postgresql --storage pgdata=100G,ebs-ssd
+juju deploy postgresql --storage pgdata=ebs-ssd,100G
 ```
 
 Deploy Ceph OSD with 3x100GiB volumes per unit for data storage, and 1x10GiB
 per unit for journaling:
 
 ```bash
-juju deploy ceph-osd --storage osd-devices=3,100G --storage osd-journals=10G
+juju deploy ceph-osd --storage osd-devices=100G,3 --storage osd-journals=10G
 ```
 
 See the [Ceph OSD charm][ceph-charm] used above.
@@ -381,10 +381,10 @@ provider currently supports a single pool configuration attribute:
     Volume type, a value of 'default' or 'latency'. Use 'latency' for
     low-latency, high IOPS requirements, and 'default' otherwise.
 
-For convenience, the Oracle provider registers two predefined pools:
-
-- 'oracle' (volume type is 'default')
-- 'oracle-latency' (volume type is 'latency').
+    For convenience, the Oracle provider registers two predefined pools:
+    
+    - 'oracle' (volume type is 'default')
+    - 'oracle-latency' (volume type is 'latency').
 
 #### Loop devices and LXD
 
