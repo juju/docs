@@ -7,7 +7,7 @@ charm exists for such an application Juju can declare such requirements during
 deploy time.
 
 The level of sophistication is limited by the charm; a charm may support
-multiple storage options (e.g.  persistent storage, additional cache). All this
+multiple storage options (e.g. persistent storage, additional cache). All this
 allows the user to allocate resources at a granular level with the goal of
 optimizing the application's functioning.
 
