@@ -239,17 +239,8 @@ Destroy already detached storage 'pgdate/0' (remove it from the model):
 juju remove-storage pgdata/0
 ```
 
-If an attempt is made to remove storage that is currently in use (it is
-attached) Juju will refuse to comply and will emit a warning:
-
-```no-highlight
-failed to remove pgdata/0: cannot destroy storage "pgdata/0": storage is
-attached
-
-Use the --force flag to remove attached storage, or use
-"juju detach-storage" to explicitly detach the storage
-before removing
-```
+If an attempt is made to remove storage that is currently in use (i.e. it is
+attached) Juju will return an error.
 
 ### Cross-model storage
 
@@ -283,69 +274,80 @@ section on deploying with storage constraints.
 
 ## Storage Providers
 
-### Common storage providers
+### Generic storage providers
 
 There are several cloud-independent storage providers, which are available
 to all types of models:
 
-- [loop](https://en.wikipedia.org/wiki/Loop_device)
+- [loop][generic-storage-loop]
 
-    block-type, creates a file on the unit's root filesystem, associates
+    Block-type, creates a file on the unit's root filesystem, associates
     a loop device with it. The loop device is provided to the charm.
 
-- [rootfs](https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt)
+- [rootfs][generic-storage-rootfs]
 
-    filesystem-type, creates a sub-directory on the unit's root filesystem
+    Filesystem-type, creates a sub-directory on the unit's root filesystem
     for the unit/charm to use.
 
-- [tmpfs](https://en.wikipedia.org/wiki/Tmpfs)
+- [tmpfs][generic-storage-tmpfs]
 
-    filesystem-type, creates a temporary file storage facility that appears as
+    Filesystem-type, creates a temporary file storage facility that appears as
     a mounted file system but is stored in volatile memory.
 
 Loop devices require extra configuration to be used within LXD. For that,
-please refer to [Loop devices and LXD](#loop-devices-and-lxd).
+please refer to [Loop devices and LXD][anchor__loop-devices-and-lxd] (below).
 
 ### AWS/EBS (ebs)
 
-AWS models have access to the "ebs" storage provider. The EBS storage provider
-currently supports the following pool configuration attributes:
+AWS-based models have access to the 'ebs' storage provider. The EBS storage
+provider supports the following pool attributes:
 
 - **volume-type**
 
-    specifies the EBS volume type to create. You can use either the EBS volume
-    type names, or synonyms defined by Juju (in parentheses): gp2 (ssd), io1
-    (provisioned-iops), standard (magnetic). By default, magnetic/standard
-    volumes will be created. An 'ebs-ssd' pool is created in all EC2
-    environments, which defaults the volume type to ssd/gp2 instead.
+    Specifies the EBS volume type to create. You can use either the EBS volume
+    type names, or synonyms defined by Juju (in parentheses):
+
+    - standard (magnetic)
+    - gp2 (ssd)
+    - io1 (provisioned-iops)
+
+    By default, magnetic/standard volumes will be created.
 
 - **iops**
 
-    the number of IOPS for provisioned-iops volume types. There are
-    restrictions on minimum and maximum IOPS, as a ratio of the size of
-    volumes; see [Provisioned IOPS (SSD) Volumes](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops) for more information.
+    The number of IOPS for provisioned-iops volume types. There are
+    restrictions on minimum and maximum IOPS, as a ratio of the size of volumes.
+    See [Provisioned IOPS (SSD) Volumes][aws-iops-ssd-volumes] for more
+    information.
 
 - **encrypted**
 
-    true|false, indicating whether or not to encrypt volumes created by the pool.
+    Boolean (true|false); indicates whether created volumes are encrypted.
 
-For convenience, the AWS provider registers two predefined pools:
-"ebs" (magnetic volumes), and "ebs-ssd" (SSD volumes).
+Recall that pool 'ebs-ssd' is provided for all EC2 environments. This is the
+easiest way to get SSD-based volumes; the pool defaults the volume type to
+ssd/gp2. The alternate way would be to create a new pool with a
+'volume-type' of 'ssd'. For example:
 
-For information regarding EBS volume types, see 
-[the EBS documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
+```bash
+juju create-storage-pool myssd-pool ebs volume-type=ssd
+juju deploy postgresql --storage pgdata=myssd-pool,16G
+```
+
+For detailed information regarding EBS volume types, see the
+[AWS EBS documentation][aws-ebs-volume-types].
 
 ### OpenStack/Cinder (cinder)
 
-OpenStack models have access to the "cinder" storage provider. The Cinder
+OpenStack-based models have access to the 'cinder' storage provider. The Cinder
 provider does not currently have any specific configuration options.
 
 ### MAAS (maas)
 
-MAAS 1.8+ contains support for discovering information about machines' disks,
+MAAS has support for discovering information about machine disks,
 and an API for acquiring nodes with specified disk parameters. Juju's MAAS
-provider has an integrated "maas" storage provider. This storage provider is
-static-only; it is only possible to deploy charms using "maas" storage to a
+provider has an integrated 'maas' storage provider. This storage provider is
+static-only; it is only possible to deploy charms using 'maas' storage to a
 new machine in MAAS, and not to an existing machine, as described in the
 section on dynamic storage.
 
@@ -353,35 +355,36 @@ The MAAS provider currently has a single configuration attribute:
 
 - **tags**
 
-    a comma-separated list of tags to match on the disks in MAAS. For example,
-    you might tag some disks as "fast"; you can then create a storage pool in
+    A comma-separated list of tags to match on the disks in MAAS. For example,
+    you might tag some disks as 'fast'; you can then create a storage pool in
     Juju that will draw from the disks with those tags.
 
 ### Microsoft Azure (azure)
 
-Azure models have access to the "azure" storage provider. The Azure storage
-provider does not currently have any storage configuration.
+Azure-based models have access to the 'azure' storage provider. The Azure
+provider does not currently have any specific configuration options.
 
 The Microsoft Azure provider does not currently have any storage configuration.
 
 ### Google Compute Engine (gce)
 
-Google models have access to the "gce" storage provider. The GCE storage
-provider does not currently have any storage configuration.
+Google-based models have access to the 'gce' storage provider. The GCE provider
+does not currently have any specific configuration options.
 
 ### Oracle Compute Cloud (oracle)
 
-Oracle models have access to the "oracle" storage provider. The Oracle storage
+Oracle-based models have access to the 'oracle' storage provider. The Oracle
 provider currently supports a single pool configuration attribute:
 
 - **volume-type**
 
-    default|latency, the volume type. Use "latency" for low-latency, high IOPS
-    requirements, and "default" otherwise.
+    Volume type, a value of 'default' or 'latency'. Use 'latency' for
+    low-latency, high IOPS requirements, and 'default' otherwise.
 
 For convenience, the Oracle provider registers two predefined pools:
-"oracle" (using the default volume type), and "oracle-latency"
-(using the latency volume type).
+
+- 'oracle' (volume type is 'default')
+- 'oracle-latency' (volume type is 'latency').
 
 #### Loop devices and LXD
 
@@ -389,7 +392,7 @@ LXD (localhost) does not officially support attaching loopback devices for
 storage out of the box. However, with some configuration you can make this
 work.
 
-Each container uses the "default" LXD profile, but also uses a model-specific
+Each container uses the 'default' LXD profile, but also uses a model-specific
 profile with the name juju-<model-name>. Editing a profile will affect all of
 the containers using it, so you can add loop devices to all LXD containers by
 editing the default profile, or you can scope it to a model.
@@ -424,19 +427,19 @@ devices:
 ```
 
 The above is enough to expose the loop devices into the container, and for the
-container to acquire one of them using "losetup". It is not yet enough to enable
-the container to mount filesystems on the loop devices. For that, the simplest
-thing to do is to make the container privileged by adding:
+container to acquire one of them using `losetup`, but it is not sufficient to
+enable the container to mount filesystems on the loop devices. One way to
+achieve that is to make the container privileged by adding:
 
 ```yaml
 config:
   security.privileged: "true"
 ```
 
-## More information
+## Writing charms
 
-If you are interested in more information on how to create a charm that uses
-the storage feature read [Writing charms that use storage][developer-storage].
+For guidance on how to create a charm that uses these storage features see
+[Writing charms that use storage][developer-storage].
 
 
 <!-- LINKS -->
@@ -451,6 +454,12 @@ the storage feature read [Writing charms that use storage][developer-storage].
 [commands-remove-storage]: ./commands.html#remove-storage
 [commands-upgrade-charm]: ./commands.html#upgrade-charm
 
+[generic-storage-loop]: https://en.wikipedia.org/wiki/Loop_device
+[generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
+[generic-storage-tmpfs]: https://en.wikipedia.org/wiki/Tmpfs
+[anchor__loop-devices-and-lxd]: #loop-devices-and-lxd
 [postgresql-charm]: https://jujucharms.com/postgresql
 [ceph-charm]: https://jujucharms.com/ceph-osd
 [developer-storage]: ./developer-storage.html
+[aws-iops-ssd-volumes]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops
+[aws-ebs-volume-types]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
