@@ -166,8 +166,8 @@ not the case, Juju will return an error.
 
 #### Adding and detaching storage
 
-Assuming the storage provider supports it, storage can be dynamically added to
-a unit using `juju add-storage`.
+Assuming the storage provider supports it, storage can be created and
+dynamically attached to a unit using `juju add-storage`.
 
 For example, to create a 100GiB EBS volume and attach it to unit 'postgresql/0'
 as its pgdata storage:
