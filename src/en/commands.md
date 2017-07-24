@@ -464,13 +464,16 @@ Click on the expander to see details for each command.
 
 ^# add-storage
 
-   **Usage:** ` juju add-storage [options] 
-<unit name> <storage directive> ...
-    where storage directive is 
-        <charm storage name>=<storage constraints> 
+
+   **Usage:** ` juju add-storage [options] <unit name> <storage directive> ...`
+
+    Where `storage directive` is 
+
+        <charm storage name>=<storage constraints>
+
     or
+
         <charm storage name>
-`
 
    **Summary:**
 

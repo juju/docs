@@ -99,7 +99,7 @@ juju deploy postgresql --storage pgdata=ebs-ssd,100G
 ```
 
 Deploy Ceph OSD with 3x100GiB volumes per unit for data storage, and 1x10GiB
-per unit for journaling:
+per unit for journalling:
 
 ```bash
 juju deploy ceph-osd --storage osd-devices=100G,3 --storage osd-journals=10G
