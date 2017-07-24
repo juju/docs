@@ -2,109 +2,122 @@ Title: Using storage with Juju charms
 
 # Using Juju Storage
 
-Many applications require access to a storage resource of some form. Juju charms
-can declare what storage requirements they have, and these can be allocated when
-the charm is deployed. Charms may declare several types of storage requirement
-(e.g. for persistent storage and an additional cache) so that resources can be
-allocated at a more granular level.
+Certain applications can benefit from advanced storage configurations and if a
+charm exists for such an application Juju can declare such requirements during
+deploy time.
 
-Juju has storage-related commands for creating, destroying, listing, and managing
-attachments to application units.
+The level of sophistication is limited by the charm; a charm may support
+multiple storage options (e.g. persistent storage, additional cache). All this
+allows the user to allocate resources at a granular level with the goal of
+optimizing the application's functioning.
 
-[`add-storage`](./commands.html#add-storage)
+## Storage management
+
+Outside of application deployment, Juju also has a wide array of storage
+management abilities. Related commands are listed below, along with a brief
+description of each.
+
+[`add-storage`][commands-add-storage]
 : Adds unit storage dynamically.
 
-[`attach-storage`](./commands.html#attach-storage)
+[`attach-storage`][commands-attach-storage]
 : Attaches existing storage to a unit.
 
-[`create-storage-pool`](./commands.html#create-storage-pool)
-: Create or define a storage pool.
+[`create-storage-pool`][commands-create-storage-pool]
+: Creates or defines a storage pool.
 
-[`detach-storage`](./commands.html#detach-storage)
-: Detaches storage from units.
+[`detach-storage`][commands-detach-storage]
+: Detaches storage from a unit.
 
-[`show-storage`](./commands.html#show-storage)
-: Shows the details of a single, specified storage instance.
+[`show-storage`][commands-show-storage]
+: Shows the details of a specific storage instance.
 
-[`storage`](./commands.html#storage) (also 'list-storage')
+[`storage`][commands-storage]
 : Lists details of all storage instances in the model.
 
-[`storage-pools`](./commands.html#storage-pools) (also 'list-storage-pools')
-: List storage pools.
+[`storage-pools`][commands-storage-pools]
+: Lists storage pools.
 
-[`remove-storage`](./commands.html#remove-storage)
+[`remove-storage`][commands-remove-storage]
 : Removes storage from the model.
 
-## Deploying a charm with storage requirements
+## Deploying a charm with storage options
 
-For this document, our examples will focus on the [PostgreSQL charm](https://jujucharms.com/postgresql/)
-which uses the Juju Storage feature to store the database contents separately from
-the root filesystem.
+The advanced storage features of Juju naturally depend upon charms that have
+storage options. This document will focus on the
+[PostgreSQL charm][postgresql-charm] which uses these features to store the
+database contents separately from the root filesystem.
 
-### Deploying with storage constraints
+### Storage constraints
 
-When deploying a charm with additional storage requirements, you can control
-several properties of how the storage will be allocated:
+Several properties are used to dictate how storage is allocated:
 
-- the "pool" from which to allocate the storage; pools are described below,
-  but for now you can think of them as the class of storage, such as magnetic
-  or SSD;
-- the number of volumes/filesystems to allocate;
-- the size of each volume/filesystem.
+- 'pool': class of storage (e.g. magnetic, SSD)
+- 'size': size of each volume/filesystem
+- 'count': number of volumes/filesystems
 
-When deploying the application, you control these properties by specifying
-"storage constraints" via the `--storage` flag of [`juju deploy`](./commands.html#deploy).
-If you specify no storage constraints at all, then Juju will place the storage
-on the root filesystem.
+These properties are specified as constraints via the `juju deploy` command's
+`--storage` flag:
 
 ```bash
-juju deploy <charm> --storage <label>=<pool>,<size>,count
+juju deploy <charm> --storage <label>=<pool>,<size>,<count>
 ```
 
-If you specify some constraints, but not others, then Juju will select defaults
-for the others:
+Notes:
 
-- if unspecified, the number of storage instances will be the minimum
-  number required by the charm, or 1 if the storage is optional;
-- if unspecified, the size of the storage will be taken from the charm's
-  minimum storage size, or 1GiB if the charm does not specify a minimum.
-- if unspecified, the default pool for the model/cloud provider will
-  be used. e.g. "ebs" for AWS, "cinder" for OpenStack.
+- `label` is a string taken from the charm itself. It encapsulates a specific
+  storage option/feature.
+- `--storage` may be specified multiple times, to support multiple labels.
+
+If at least one constraint is specified the following defaults come into
+effect:
+
+- 'pool' = the default pool of the given cloud (e.g. 'ebs' for AWS, 'cinder'
+  for OpenStack) or model
+- 'size' = taken from the charm's minimum storage size, or 1GiB if the charm
+  does not specify a minimum
+- 'count' = the minimum number required by the charm, or '1' if the storage is
+  optional
+
+In the absence of any storage constraints, the storage will be on the root
+filesystem.
+
+### Examples
+
+Deploy PostgreSQL with one instance (count) of 100GiB, via the charm's 'pgdata'
+storage label, using the cloud's (or model's) default storage pool:
 
 ```bash
-# Deploy one instance of 100GiB for postgresql's pgdata storage,
-# using the model/cloud provider's default storage pool. For AWS,
-# this means using the "ebs" storage pool.
 juju deploy postgresql --storage pgdata=100G
-
-# Deploy one instance of 100GiB for postgresql's pgdata storage,
-# using the "ebs-ssd" storage pool. This allows you to take
-# advantage of cloud-specific storage options.
-juju deploy postgresql --storage pgdata=100G,ebs-ssd
 ```
 
-The `--storage` flag may be specified multiple times, to support
-specifying constraints for multiple stores. For example, the [Ceph OSD](https://jujucharms.com/ceph-osd/)
-charm supports two stores: osd-devices, and osd-journals. You can
-specify constraints for these separately:
+Deploy PostgreSQL with one instance (count) of 100GiB, via the charm's 'pgdata'
+storage label, using the 'ebs-ssd' storage pool:
 
 ```bash
-# Deploy Ceph OSD, with 3x100GiB volumes per unit for
-# data storage, and 1x10G per unit for journaling.
-juju deploy ceph-osd --storage osd-devices=3,100G --storage osd-journals=10G
+juju deploy postgresql --storage pgdata=ebs-ssd,100G
 ```
+
+Deploy Ceph OSD with 3x100GiB volumes per unit for data storage, and 1x10GiB
+per unit for journalling:
+
+```bash
+juju deploy ceph-osd --storage osd-devices=100G,3 --storage osd-journals=10G
+```
+
+See the [Ceph OSD charm][ceph-charm] used above.
 
 ### Storage pools
 
-You can list the storage pools available for use with the `juju storage-pools`
-command. This will list the predefined storage pools, and any custom ones that
-you create using the `juju create-storage-pool` command.
+Use the `juju storage-pools` command to list the predefined storage pools as
+well as any custom ones that may have been created with the `juju
+create-storage-pool` command:
 
 ```bash
 juju storage-pools
 ```
 
-When run in a new AWS model, this produces the following output:
+Here is sample output for a newly-added AWS model:
 
 ```no-highlight
 Name     Provider  Attrs
@@ -115,208 +128,226 @@ rootfs   rootfs
 tmpfs    tmpfs     
 ```
 
-These are just the pre-defined storage pools. Depending on the storage provider,
-you can create additional, custom, storage pools. For example, the "ebs"
-storage provider supports several configuration attributes: "volume-type"
-(volume type, i.e. magnetic, ssd, or provisioned-iops; "encrypted" (whether
-or not disk encryption should be used); and "iops" (IOPS per GiB). For example,
-you can create a storage pool that allocates provisioned IOPS volumes, with
-a ratio of 30 IOPS per GiB:
+Depending on the storage provider, custom storage pools can be created. For
+example, the 'ebs' storage provider supports several configuration attributes:
+
+- 'volume-type': volume type (i.e. magnetic, ssd, or provisioned-iops)
+- 'encrypted': enable/disable disk encryption
+- 'iops': IOPS per GiB
+
+For example, here we provision a 3000 IOPS volume (100GiB x 30IOPS/GiB) by
+first creating a custom storage pool and then using it with PostgreSQL:
 
 ```bash
 juju create-storage-pool iops ebs volume-type=provisioned-iops iops=30
-```
-
-Using this, you can provision a 3000 IOPS volume (100GiB x 30IOPS/GiB):
-
-```bash
 juju deploy postgresql --storage pgdata=iops,100G
 ```
 
 ### Dynamic storage
 
-Most storage can be dynamically added to and removed from a machine. For example,
-EBS volumes can be dynamically created and attached to an existing EC2 instance,
-so long as they are in the same availability zone. For dynamic storage, you can
-use the dynamic storage management commands:
+Most storage can be dynamically added to, and removed from, a machine. For
+example, EBS volumes can be created and attached to EC2 instances, as long as
+they are in the same availability zone.
 
-- add-storage, to allocate additional storage instances to a unit;
-- attach-storage, to attach existing storage to a unit;
-- detach-storage, to detach storage from a unit;
-- remove-storage, to remove storage from the model.
-
-Some other storage, such as MAAS's disks, cannot be dynamically added or removed.
-In the case of MAAS disks, they are physically part of the same machine; they are
-&mdash; at least to Juju &mdash; inseparable. For these types of storage, you can
-only request the storage at deployment time; and then it will be removed along with
-the machine, when the machine is removed from the model.
+Some types of storage, however, cannot be dynamically managed. For instance,
+Juju cannot disassociate MAAS disks from their respective MAAS nodes. These
+types of static storage can only be requested at deployment time and will
+be removed when the machine is removed from the model.
 
 When deploying an application or unit that requires storage, using machine
 placement (i.e. `--to`) requires that the assigned storage be dynamic. Juju will
 return an error if you try to deploy a unit to an existing machine, while also
 attempting to allocate static storage.
 
-Providers may also impose certain restrictions when attaching storage. For
-example, as described above, attaching an EBS volume to an EC2 instance requires
-that they be within the same availability zone. If you try to use `juju attach-storage`
-to attach an EBS volume to a unit whose machine lies within a different
-availability zone, Juju will return an error.
+Cloud providers may also impose certain restrictions when attaching storage.
+For example, as described above, attaching an EBS volume to an EC2 instance
+requires that they both reside within the same availability zone. If this is
+not the case, Juju will return an error.
 
 #### Adding and detaching storage
 
-Assuming the storage provider supports it, storage can be dynamically added to
-a unit using `juju add-storage`:
+Assuming the storage provider supports it, storage can be created and
+dynamically attached to a unit using `juju add-storage`.
+
+For example, to create a 100GiB EBS volume and attach it to unit 'postgresql/0'
+as its pgdata storage:
 
 ```bash
-# Create a new 100GiB EBS volume, and attach it to postgresql/0 as its pgdata
-# storage.
 juju add-storage postgresql/0 pgdata=ebs,100G
 ```
 
-Juju will take care creating the storage so that it will be attachable to the
-unit's machine; for example, in AWS, the EBS volume will be created in the same
-availability zone as the instance.
+Juju will ensure the storage is allowed to attach to the unit's machine. In the
+above example, the EBS volume was created in the same availability zone as the
+instance (a requirement).
 
-Charms can specify a maximum number of storage instances, e.g. postgresql can
-have at most one instance of pgdata. If you try to add more than the charm
-allows, Juju will return an error.
+Charms can specify a maximum number of storage instances. In the case of the
+postgresql charm, a maximum of one is allowed for 'pgdata'. If an attempt is
+made to exceed it, Juju will return an error.
 
-Dynamic storage can be detached from units dynamically, using the
-`juju detach-storage` command mentioned above:
+Dynamic storage can be detached from units using `juju detach-storage`.
+
+For example, to detach storage 'pgdata/0' from unit 'postgresql/0':
 
 ```bash
-# Detach the storage pgdata/0 from the unit postgresql/0.
 juju detach-storage postgresql/0 pgdata/0
 ```
 
-Charms can define a minimum, as well as maximum number, of storage instances.
-As mentioned, the postgresql charm specifies a minimum of zero, and maximum
-of one, for pgdata. Other charms may require exactly one, or an arbitrary
-range. In any case, if detaching storage from a unit would bring the total
-number of storage instances below the minimum, Juju will return an error.
+Charms can also define a minimum number of storage instances. The postgresql
+charm specifies a minimum of zero for 'pgdata' whereas another charm may specify
+a different number. In any case, if detaching storage from a unit would bring
+the total number of storage instances below the minimum, Juju will return an
+error.
 
 #### Persistence
 
-Detaching storage from a unit does not destroy the storage. When you remove
-a unit from the model, and the unit has dynamic storage attached, Juju will
-detach the storage but leave it in the model. This enables the storage to be
-attached to another unit using `juju attach-storage`, or to a new unit using
-the `--attach-storage` flag of `juju deploy` or `juju add-unit`:
+Detaching storage from a unit does not destroy the storage. When a unit is
+removed from the model, and the unit has dynamic storage attached, Juju will
+detach the storage but leave it intact at the model level. This enables the
+storage to be re-attached to another unit using `juju attach-storage`, or to a
+new unit using the `--attach-storage` flag of `juju deploy` or `juju add-unit`:
+
+Detached storage can be destroyed and removed from the model using `juju remove-storage`.
+
+##### Examples
+
+Attach existing storage 'pgdata/0' to existing unit 'postgresql/1':
 
 ```bash
-# Attach the existing storage pgdata/0 to the existing unit postgresql/1.
 juju attach-storage postgresql/1 pgdata/0
+```
 
-# Deploy the postgresql charm, attaching the existing storage pgdata/0 to
-# the new unit. The "--attach-storage" and "-n" flags cannot be used together.
+Deploy the postgresql charm, attaching existing storage 'pgdata/0' to the new
+unit:
+
+```bash
 juju deploy postgresql --attach-storage pgdata/0
+```
 
-# Add a new unit of the postgresql application, attaching the existing storage
-# pgdata/0 to the new unit. The "--attach-storage" and "-n" flags cannot be
-# used together.
+!!! Note:
+    The `--attach-storage` and `-n` flags cannot be used together.
+
+Add a new unit of the postgresql application, attaching existing storage
+'pgdata/0' to the new unit:
+
+```bash
 juju add-unit postgresql --attach-storage pgdata/0
 ```
 
-Alternatively, detached storage can be destroyed and removed from the model using
-`juju remove-storage`:
+Destroy already detached storage 'pgdate/0' (remove it from the model):
 
 ```bash
 juju remove-storage pgdata/0
 ```
 
-Storage is currently tied to a single model, which means it is not currently
-possible to reuse storage from one model or controller in another. When you
-destroy the model, or controller, the storage will be destroyed. Support for
-releasing storage from a model, and enlisting it into another, is planned for
-a future release.
+If an attempt is made to remove storage that is currently in use (i.e. it is
+attached) Juju will return an error.
 
-### Upgrading applications with new storage
+### Cross-model storage
 
-When updating a charm with the [juju upgrade-charm](./commands.html#upgrade-charm)
+Storage management is currently restricted to a single model, which means it is
+not possible to reuse storage from one model/controller in another. Also, when
+a model/controller is removed, all associated storage will be destroyed.
+Support for releasing storage from a model, and enlisting it into another, is
+planned for a future release.
+
+### Upgrading charms
+
+When upgrading a charm with the [juju upgrade-charm][commands-upgrade-charm]
 command, the existing storage constraints specified at deployment time will be
-preserved. It is possible to change the storage constraints and define
-new ones by passing the `--storage` flag to `juju upgrade-charm`. This may
-be necessary when upgrading to a revision of a charm that introduces
-new, required, storage.
+preserved.
 
-For example, if the pgdata storage did not exist in revision 1 of the postgresql
-charm, and were introduced in revision 2: when upgrading from revision 1 to
-revision 2, you could inform Juju of how to allocate the new storage by specifying
-the storage constraints to `juju upgrade-charm`:
+It is also possible to change the storage constraints and define new ones by
+passing the `--storage` flag to `juju upgrade-charm`. For example, if the
+'pgdata' storage option did not exist in revision 1 of the postgresql charm,
+but was introduced in revision 2, when upgrading (from 1 to 2) you could do:
 
 ```bash
 juju upgrade-charm postgresql --storage pgdata=10G
 ```
 
-If you were to run `juju upgrade-charm` without specifying the constraints,
-rootfs would be used as described in the section on deploying with storage
-constraints.
+If such a constraint was not provided, 'rootfs' would be used as described in the
+section on deploying with storage constraints.
+
+!!! Warning:
+    Specifying new constraints may be necessary when upgrading to a revision of
+    a charm that introduces new, required, storage options.
 
 ## Storage Providers
 
-### Common storage providers
+### Generic storage providers
 
 There are several cloud-independent storage providers, which are available
 to all types of models:
 
-- [loop](https://en.wikipedia.org/wiki/Loop_device)
+- [loop][generic-storage-loop]
 
-    block-type, creates a file on the unit's root filesystem, associates
+    Block-type, creates a file on the unit's root filesystem, associates
     a loop device with it. The loop device is provided to the charm.
 
-- [rootfs](https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt)
+- [rootfs][generic-storage-rootfs]
 
-    filesystem-type, creates a sub-directory on the unit's root filesystem
+    Filesystem-type, creates a sub-directory on the unit's root filesystem
     for the unit/charm to use.
 
-- [tmpfs](https://en.wikipedia.org/wiki/Tmpfs)
+- [tmpfs][generic-storage-tmpfs]
 
-    filesystem-type, creates a temporary file storage facility that appears as
+    Filesystem-type, creates a temporary file storage facility that appears as
     a mounted file system but is stored in volatile memory.
 
 Loop devices require extra configuration to be used within LXD. For that,
-please refer to [Loop devices and LXD](#loop-devices-and-lxd).
+please refer to [Loop devices and LXD][anchor__loop-devices-and-lxd] (below).
 
 ### AWS/EBS (ebs)
 
-AWS models have access to the "ebs" storage provider. The EBS storage provider
-currently supports the following pool configuration attributes:
+AWS-based models have access to the 'ebs' storage provider. The EBS storage
+provider supports the following pool attributes:
 
 - **volume-type**
 
-    specifies the EBS volume type to create. You can use either the EBS volume
-    type names, or synonyms defined by Juju (in parentheses): gp2 (ssd), io1
-    (provisioned-iops), standard (magnetic). By default, magnetic/standard
-    volumes will be created. An 'ebs-ssd' pool is created in all EC2
-    environments, which defaults the volume type to ssd/gp2 instead.
+    Specifies the EBS volume type to create. You can use either the EBS volume
+    type names, or synonyms defined by Juju (in parentheses):
+
+    - standard (magnetic)
+    - gp2 (ssd)
+    - io1 (provisioned-iops)
+
+    By default, magnetic/standard volumes will be created.
 
 - **iops**
 
-    the number of IOPS for provisioned-iops volume types. There are
-    restrictions on minimum and maximum IOPS, as a ratio of the size of
-    volumes; see [Provisioned IOPS (SSD) Volumes](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops) for more information.
+    The number of IOPS for provisioned-iops volume types. There are
+    restrictions on minimum and maximum IOPS, as a ratio of the size of volumes.
+    See [Provisioned IOPS (SSD) Volumes][aws-iops-ssd-volumes] for more
+    information.
 
 - **encrypted**
 
-    true|false, indicating whether or not to encrypt volumes created by the pool.
+    Boolean (true|false); indicates whether created volumes are encrypted.
 
-For convenience, the AWS provider registers two predefined pools:
-"ebs" (magnetic volumes), and "ebs-ssd" (SSD volumes).
+Recall that pool 'ebs-ssd' is provided for all EC2 environments. This is the
+easiest way to get SSD-based volumes; the pool defaults the volume type to
+ssd/gp2. The alternate way would be to create a new pool with a
+'volume-type' of 'ssd'. For example:
 
-For information regarding EBS volume types, see 
-[the EBS documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
+```bash
+juju create-storage-pool myssd-pool ebs volume-type=ssd
+juju deploy postgresql --storage pgdata=myssd-pool,16G
+```
+
+For detailed information regarding EBS volume types, see the
+[AWS EBS documentation][aws-ebs-volume-types].
 
 ### OpenStack/Cinder (cinder)
 
-OpenStack models have access to the "cinder" storage provider. The Cinder
+OpenStack-based models have access to the 'cinder' storage provider. The Cinder
 provider does not currently have any specific configuration options.
 
 ### MAAS (maas)
 
-MAAS 1.8+ contains support for discovering information about machines' disks,
+MAAS has support for discovering information about machine disks,
 and an API for acquiring nodes with specified disk parameters. Juju's MAAS
-provider has an integrated "maas" storage provider. This storage provider is
-static-only; it is only possible to deploy charms using "maas" storage to a
+provider has an integrated 'maas' storage provider. This storage provider is
+static-only; it is only possible to deploy charms using 'maas' storage to a
 new machine in MAAS, and not to an existing machine, as described in the
 section on dynamic storage.
 
@@ -324,35 +355,36 @@ The MAAS provider currently has a single configuration attribute:
 
 - **tags**
 
-    a comma-separated list of tags to match on the disks in MAAS. For example,
-    you might tag some disks as "fast"; you can then create a storage pool in
+    A comma-separated list of tags to match on the disks in MAAS. For example,
+    you might tag some disks as 'fast'; you can then create a storage pool in
     Juju that will draw from the disks with those tags.
 
 ### Microsoft Azure (azure)
 
-Azure models have access to the "azure" storage provider. The Azure storage
-provider does not currently have any storage configuration.
+Azure-based models have access to the 'azure' storage provider. The Azure
+provider does not currently have any specific configuration options.
 
 The Microsoft Azure provider does not currently have any storage configuration.
 
 ### Google Compute Engine (gce)
 
-Google models have access to the "gce" storage provider. The GCE storage
-provider does not currently have any storage configuration.
+Google-based models have access to the 'gce' storage provider. The GCE provider
+does not currently have any specific configuration options.
 
 ### Oracle Compute Cloud (oracle)
 
-Oracle models have access to the "oracle" storage provider. The Oracle storage
+Oracle-based models have access to the 'oracle' storage provider. The Oracle
 provider currently supports a single pool configuration attribute:
 
 - **volume-type**
 
-    default|latency, the volume type. Use "latency" for low-latency, high IOPS
-    requirements, and "default" otherwise.
+    Volume type, a value of 'default' or 'latency'. Use 'latency' for
+    low-latency, high IOPS requirements, and 'default' otherwise.
 
-For convenience, the Oracle provider registers two predefined pools:
-"oracle" (using the default volume type), and "oracle-latency"
-(using the latency volume type).
+    For convenience, the Oracle provider registers two predefined pools:
+    
+    - 'oracle' (volume type is 'default')
+    - 'oracle-latency' (volume type is 'latency').
 
 #### Loop devices and LXD
 
@@ -360,7 +392,7 @@ LXD (localhost) does not officially support attaching loopback devices for
 storage out of the box. However, with some configuration you can make this
 work.
 
-Each container uses the "default" LXD profile, but also uses a model-specific
+Each container uses the 'default' LXD profile, but also uses a model-specific
 profile with the name juju-<model-name>. Editing a profile will affect all of
 the containers using it, so you can add loop devices to all LXD containers by
 editing the default profile, or you can scope it to a model.
@@ -395,18 +427,39 @@ devices:
 ```
 
 The above is enough to expose the loop devices into the container, and for the
-container to acquire one of them using "losetup". It is not yet enough to enable
-the container to mount filesystems on the loop devices. For that, the simplest
-thing to do is to make the container privileged by adding:
+container to acquire one of them using `losetup`, but it is not sufficient to
+enable the container to mount filesystems on the loop devices. One way to
+achieve that is to make the container privileged by adding:
 
 ```yaml
 config:
   security.privileged: "true"
 ```
 
-## More information
+## Writing charms
 
-If you are interested in more information on how to create a charm that uses
-the storage feature read
-[writing charms that use storage](./developer-storage.html).
+For guidance on how to create a charm that uses these storage features see
+[Writing charms that use storage][developer-storage].
 
+
+<!-- LINKS -->
+
+[commands-add-storage]: ./commands.html#add-storage
+[commands-attach-storage]: ./commands.html#attach-storage
+[commands-create-storage-pool]: ./commands.html#create-storage-pool
+[commands-detach-storage]: ./commands.html#detach-storage
+[commands-show-storage]: ./commands.html#show-storage
+[commands-storage]: ./commands.html#storage
+[commands-storage-pools]: ./commands.html#storage-pools
+[commands-remove-storage]: ./commands.html#remove-storage
+[commands-upgrade-charm]: ./commands.html#upgrade-charm
+
+[generic-storage-loop]: https://en.wikipedia.org/wiki/Loop_device
+[generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
+[generic-storage-tmpfs]: https://en.wikipedia.org/wiki/Tmpfs
+[anchor__loop-devices-and-lxd]: #loop-devices-and-lxd
+[postgresql-charm]: https://jujucharms.com/postgresql
+[ceph-charm]: https://jujucharms.com/ceph-osd
+[developer-storage]: ./developer-storage.html
+[aws-iops-ssd-volumes]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops
+[aws-ebs-volume-types]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
