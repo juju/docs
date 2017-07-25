@@ -94,7 +94,8 @@ The resulting page will look similar to this:
 
 ![REST endpoint](./media/oracle_myservices-endpoint-2.png)
 
-There may be multiple endpoints. Choose the one beginning with `https://compute`.
+There may be multiple endpoints. In that case, trial and error may be needed
+below (hint: the endpoint domain should be resolvable using DNS).
 
 You are now ready to use the interactive `add-cloud` command:
 
@@ -162,7 +163,7 @@ Enter credential name: oracle-cloud-creds
 
 Using auth-type "userpass".
 
-Enter username: javier@example.com
+Enter username: javierlarin72@gmail.com
 
 Enter password:
 
