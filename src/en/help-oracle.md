@@ -31,8 +31,8 @@ for:
 - 'Username' (your email address)
 - 'Password' (temporary)
 
-Upon first login (using either of the above URLs) you will be prompted to
-change the temporary password to arrive at your final password.
+Upon first login (to 'My Services URL') you will be prompted to change the
+temporary password to arrive at your final password.
 
 ## Ubuntu images
 
