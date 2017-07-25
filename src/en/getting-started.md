@@ -74,7 +74,7 @@ Press the green 'Start building' button to get started...
 
 You build your [model][models] by adding and relating applications from the
 [Charm Store][charmstore]. Press the green '+' symbol in the middle of the web
-UI to search for applications in the Store.
+UI to search for applications in the Charm Store.
 
 You will see a list of available charms and bundles with a description of
 each. Select a [charm][charms] or [bundle][bundles] to learn more about it.
@@ -199,7 +199,7 @@ details  {
    Juju via a snap package. See the [install][install] for more information.
 
 
-^# For Ubuntu
+^# From the Ubuntu PPA
 
    A PPA resource is available containing the latest stable version of
    Juju. To install:
