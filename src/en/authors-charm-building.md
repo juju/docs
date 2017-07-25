@@ -245,7 +245,7 @@ Then we can deploy mysql and our new charm as usual:
 
 ```bash
 juju deploy mysql
-juju deploy local:trusty/vanilla
+juju deploy $JUJU_REPOSITORY/trusty/vanilla
 juju add-relation mysql vanilla
 juju expose vanilla
 ```

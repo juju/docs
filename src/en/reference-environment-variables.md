@@ -35,19 +35,16 @@ where Juju kept configuration and other data.
 JUJU_HOME=~/.juju
 ```
 
-#### JUJU_REPOSITORY
+#### JUJU_REPOSITORY (Deprecated)
 
-This allows you to set the repository that Juju looks for charms in. This can
-also be done by passing `--repository=/path/to/charms` when running the command
+For versions prior to 2.0 allowed you to set a repository that Juju looked for
+charms in. It was also possible to use `--repository=/path/to/charms` when running
+the command
+
 `juju deploy`.
 
-For example, if you are running juju in a Vagrant virtual machine, you could
-set `JUJU_REPOSITORY` to your shared folder:
-
-```
-export JUJU_REPOSITORY=/vagrant
-juju deploy local:series/charm
-```
+Both the environment variable and the command line option are no longer functional
+in 2.x versions.
 
 #### JUJU_LOGGING_CONFIG
 
