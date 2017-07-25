@@ -298,7 +298,7 @@ Click on the expander to see details for each command.
 
    _--no-switch  (= false)_
 
-   Do not switch to the newly created controller
+   Do not switch to the newly created model
 
    _--owner (= "")_
 
@@ -464,7 +464,16 @@ Click on the expander to see details for each command.
 
 ^# add-storage
 
-    **Usage:** ` juju add-storage [options] <unit name> <charm storage name> | <charm storage name>=<storage constraints> ... `
+
+   **Usage:** ` juju add-storage [options] <unit name> <storage directive> ...`
+
+    Where `storage directive` is 
+
+        <charm storage name>=<storage constraints>
+
+    or
+
+        <charm storage name>
 
    **Summary:**
 
@@ -582,6 +591,10 @@ Click on the expander to see details for each command.
    Adds one or more units to a deployed application.
 
    **Options:**
+
+   _--attach-storage  (= )_
+
+   Existing storage to attach to the deployed unit
 
    _-m, --model (= "")_
 
@@ -804,6 +817,39 @@ Click on the expander to see details for each command.
 
 
 
+^# attach-storage
+
+   **Usage:** ` juju attach-storage [options] <unit> <storage> [<storage> ...]`
+
+   **Summary:**
+
+   Attaches existing storage to a unit.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   
+   **Details:**
+
+
+   Attach existing storage to a unit. Specify a unit
+   and one or more storage IDs to attach to it.
+
+
+   **Examples:**
+
+          juju attach-storage postgresql/1 pgdata/0
+
+
+
+
 ^# autoload-credentials
 
    **Usage:** ` juju autoload-credentials`
@@ -839,7 +885,7 @@ Click on the expander to see details for each command.
                 Default region is specified by the CLOUDSDK_COMPUTE_REGION environment
                 variable.
 
-             3. On Windows, %APPDATA%\\gcloud\\application_default_credentials.json
+             3. On Windows, %APPDATA%\\gcloud\application_default_credentials.json
    
    OpenStack
            Credentials:
@@ -1019,6 +1065,11 @@ Click on the expander to see details for each command.
    dictates what machine to use for the controller. This would typically be
    used with the MAAS provider ('--to <host>.maas').
 
+   Available keys for use with --config can be found here:
+
+             https://jujucharms.com/docs/stable/controllers-config
+             https://jujucharms.com/docs/stable/models-config
+   
    You can change the default timeout and retry delays used during the
    bootstrap by changing the following settings in your configuration
    (all values represent number of seconds):
@@ -1058,7 +1109,10 @@ Click on the expander to see details for each command.
 
    [add-credentials](#add-credentials) , 
    [add-model](#add-model) , 
-   [set-constraints](#set-constraints)  
+   [controller-config](#controller-config) , 
+   [model-config](#model-config) , 
+   [set-constraints](#set-constraints) , 
+   [show-cloud](#show-cloud)  
 
 
 
@@ -1457,6 +1511,10 @@ Click on the expander to see details for each command.
    By default, all configuration (keys and values) for the controller are
    displayed if a key is not specified.
 
+   The controller configuration is set during bootstrap, available keys
+   and values can be found here:
+
+           https://jujucharms.com/docs/stable/controllers-config
 
    **Examples:**
 
@@ -1467,7 +1525,9 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [controllers](#controllers)  
+   [controllers](#controllers) , 
+   [model-config](#model-config) , 
+   [show-cloud](#show-cloud)  
 
 
 
@@ -1851,10 +1911,8 @@ Click on the expander to see details for each command.
    The "entity" is the source of the message: a machine or unit. The names for
    machines and units can be seen in the output of `juju status`.
 
-   The '--include' and '--exclude' options filter by entity. A unit entity is
-   identified by prefixing 'unit-' to its corresponding unit name and replacing
-   the slash with a dash. A machine entity is identified by prefixing 'machine-'
-   to its corresponding machine id.
+   The '--include' and '--exclude' options filter by entity. The entity can be
+   a machine, unit, or application.
 
    The '--include-module' and '--exclude-module' options filter by (dotted)
    logging module name. The module name can be truncated such that all loggers
@@ -1921,6 +1979,10 @@ Click on the expander to see details for each command.
    _-B, --no-browser-login  (= false)_
 
    Do not use web browser for authentication
+
+   _--attach-storage  (= )_
+
+   Existing storage to attach to the deployed unit
 
    _--bind (= "")_
 
@@ -2016,22 +2078,25 @@ Click on the expander to see details for each command.
            juju deploy /path/to/bundle/openstack/bundle.yaml
    
    If an 'application name' is not provided, the application name used is the
-   'charm or bundle' name.
+   'charm or bundle' name.  A user-supplied 'application name' must consist only of
+   lower-case letters (a-z), numbers (0-9), and single hyphens (-).  The name must
+   begin with a letter and not have a group of all numbers follow a hyphen.
 
+   **Examples:**
+
+        Valid:   myappname, custom-app, app2-scat-23skidoo
+        Invalid: myAppName, custom--app, app2-scat-23, areacode-555-info
    Constraints can be specified by specifying the '--constraints' option. If the
    application is later scaled out with `juju add-unit`, provisioned machines
    will use the same constraints (unless changed by `juju set-constraints`).
    Resources may be uploaded by specifying the '--resource' option followed by a
    name=filepath pair. This option may be repeated more than once to upload more
    than one resource.
-
-           juju deploy foo --resource bar=/some/file.tgz --resource baz=./docs/cfg.xml
-   
+        juju deploy foo --resource bar=/some/file.tgz --resource baz=./docs/cfg.xml
    Where 'bar' and 'baz' are resources named in the metadata for the 'foo' charm.
    When using a placement directive to deploy to an existing machine or container
    ('--to' option), the `juju status` command should be used for guidance. A few
    placement directives are provider-dependent (e.g.: 'zone').
-
    In more complex scenarios, Juju's network spaces are used to partition the
    cloud networking layer into sets of subnets. Instances hosting units inside the
    same space can communicate with each other without any firewalls. Traffic
@@ -2041,14 +2106,10 @@ Click on the expander to see details for each command.
    to support high availability for applications. Spaces help isolate applications
    and their units, both for security purposes and to manage both traffic
    segregation and congestion.
-
    When deploying an application or adding machines, the 'spaces' constraint can
    be used to define a comma-delimited list of required and forbidden spaces (the
    latter prefixed with "^", similar to the 'tags' constraint).
-
-
-   **Examples:**
-
+   Examples:
           juju deploy mysql               (deploy to a new machine)
           juju deploy mysql --to 23       (deploy to preexisting machine 23)
           juju deploy mysql --to lxd      (deploy to a new LXD container on a new machine)
@@ -2072,10 +2133,8 @@ Click on the expander to see details for each command.
    **See also:**
 
    [spaces](#spaces) , 
-   [constraints](#constraints) , 
+   [config](#config) , 
    [add-unit](#add-unit) , 
-   [set-config](#set-config) , 
-   [get-config](#get-config) , 
    [set-constraints](#set-constraints) , 
    [get-constraints](#get-constraints)  
 
@@ -2162,6 +2221,40 @@ Click on the expander to see details for each command.
    **See also:**
 
    [destroy-controller](#destroy-controller)  
+
+
+
+^# detach-storage
+
+   **Usage:** ` juju detach-storage [options] <storage> [<storage> ...]`
+
+   **Summary:**
+
+   Detaches storage from units.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   
+   **Details:**
+
+
+   Detaches storage from units. Specify one or more unit/application storage IDs,
+   as output by "juju storage". The storage will remain in the model until it is
+   removed by an operator.
+
+
+   **Examples:**
+
+          juju detach-storage pgdata/0
+
 
 
 
@@ -2966,6 +3059,59 @@ Click on the expander to see details for each command.
    **Summary:**
 
    Show help on a Juju charm tool.
+
+
+
+^# import-filesystem
+
+   **Usage:** ` juju import-filesystem [options] 
+<storage-provider|pool> <filesystem|volume-id> <storage-name>
+`
+
+   **Summary:**
+
+   Imports a filesystem into the model.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   
+   **Details:**
+
+
+   Import an existing filesystem into the model. This will lead to the model
+   taking ownership of the storage, so you must take care not to import storage
+   that is in use by another Juju model.
+
+   To import a filesystem, you must specify three things:
+
+          - the storage pool, which identifies the storage provider
+            which manages the storage; and with which the storage
+            will be associated
+          - the storage provider ID for the filesystem, or
+            volume that backs the filesystem
+          - the storage name to assign to the filesystem,
+            corresponding to the storage name used by a charm
+   
+   Once a filesystem is imported, Juju will create an associated storage
+   instance using the given storage name.
+
+
+   **Examples:**
+
+          # Import an existing filesystem backed by an EBS volume,
+          # and assign it the "pgdata" storage name. Juju will
+          # associate a storage instance ID like "pgdata/0" with
+          # the volume and filesystem contained within.
+          juju import-filesystem ebs vol-123456 pgdata
+
 
 
 
@@ -4494,19 +4640,271 @@ Click on the expander to see details for each command.
 
    Supplying one key name returns only the value for the key. Supplying key=value
    will set the supplied key to the supplied value, this can be repeated for
-   multiple keys.
+   multiple keys. You can also specify a yaml file containing key values.
+   The following keys are available:
 
-   Examples
-             juju model-config default-series
-             juju model-config -m mycontroller:mymodel
-             juju model-config ftp-proxy=10.0.0.1:8000
-             juju model-config -m othercontroller:mymodel default-series=yakkety test-mode=false
-             juju model-config --reset default-series test-mode
+   agent-metadata-url:
+
+           type: string
+           description: URL of private stream
+   
+   agent-stream:
+
+           type: string
+           description: Version of Juju to use for deploy/upgrades.
+
+   
+   apt-ftp-proxy:
+
+           type: string
+           description: The APT FTP proxy for the model
+   
+   apt-http-proxy:
+
+           type: string
+           description: The APT HTTP proxy for the model
+   
+   apt-https-proxy:
+
+           type: string
+           description: The APT HTTPS proxy for the model
+   
+   apt-mirror:
+
+           type: string
+           description: The APT mirror for the model
+   
+   apt-no-proxy:
+
+           type: string
+           description: List of domain addresses not to be proxied for APT (comma-separated)
+   
+   authorized-keys:
+
+           type: string
+           description: Any authorized SSH public keys for the model, as found in a ~/.ssh/authorized_keys
+             file
+   
+   automatically-retry-hooks:
+
+           type: bool
+           description: Determines whether the uniter should automatically retry failed hooks
+   
+   default-series:
+
+           type: string
+           description: The default series of Ubuntu to use for deploying charms
+   
+   development:
+
+           type: bool
+           description: Whether the model is in development mode
+   
+   disable-network-management:
+
+           type: bool
+           description: Whether the provider should control networks (on MAAS models, set to
+             true for MAAS to control networks
+   
+   egress-cidrs:
+
+           type: string
+           description: Source address(es) for traffic originating from this model
+   
+   enable-os-refresh-update:
+
+           type: bool
+           description: Whether newly provisioned instances should run their respective OS's
+             update capability.
+
+   
+   enable-os-upgrade:
+
+           type: bool
+           description: Whether newly provisioned instances should run their respective OS's
+             upgrade capability.
+
+   
+   extra-info:
+
+           type: string
+           description: Arbitrary user specified string data that is stored against the model.
+   
+   firewall-mode:
+
+           type: string
+           description: |-
+             The mode to use for network firewalling.
+
+             'instance' requests the use of an individual firewall per instance.
+             'global' uses a single firewall for all instances (access
+             for a network port is enabled to one instance if any instance requires
+             that port).
+
+             'none' requests that no firewalling should be performed
+             inside the model. It's useful for clouds without support for either
+             global or per instance security groups.
+
+   
+   ftp-proxy:
+
+           type: string
+           description: The FTP proxy value to configure on instances, in the FTP_PROXY environment
+             variable
+   
+   http-proxy:
+
+           type: string
+           description: The HTTP proxy value to configure on instances, in the HTTP_PROXY environment
+             variable
+   
+   https-proxy:
+
+           type: string
+           description: The HTTPS proxy value to configure on instances, in the HTTPS_PROXY
+             environment variable
+   
+   ignore-machine-addresses:
+
+           type: bool
+           description: Whether the machine worker should discover machine addresses on startup
+   
+   image-metadata-url:
+
+           type: string
+           description: The URL at which the metadata used to locate OS image ids is located
+   
+   image-stream:
+
+           type: string
+           description: The simplestreams stream used to identify which image ids to search
+             when starting an instance.
+
+   
+   logforward-enabled:
+
+           type: bool
+           description: Whether syslog forwarding is enabled.
+
+   
+   logging-config:
+
+           type: string
+           description: The configuration string to use when configuring Juju agent logging
+             (see http://godoc.org/github.com/juju/loggo#ParseConfigurationString for details)
+   
+   max-status-history-age:
+
+           type: string
+           description: The maximum age for status history entries before they are pruned,
+             in human-readable time format
+   
+   max-status-history-size:
+
+           type: string
+           description: The maximum size for the status history collection, in human-readable
+             memory format
+   
+   net-bond-reconfigure-delay:
+
+           type: int
+           description: The amount of time in seconds to sleep between ifdown and ifup when
+             bridging
+   
+   no-proxy:
+
+           type: string
+           description: List of domain addresses not to be proxied (comma-separated)
+   
+   provisioner-harvest-mode:
+
+           type: string
+           description: What to do with unknown machines. See https://jujucharms.com/docs/stable/config-general#juju-lifecycle-and-harvesting
+             (default destroyed)
+   
+   proxy-ssh:
+
+           type: bool
+           description: Whether SSH commands should be proxied through the API server
+   
+   resource-tags:
+
+           type: attrs
+           description: resource tags
+   
+   ssl-hostname-verification:
+
+           type: bool
+           description: Whether SSL hostname verification is enabled (default true)
+   
+   storage-default-block-source:
+
+           type: string
+           description: The default block storage source for the model
+   
+   syslog-ca-cert:
+
+           type: string
+           description: The certificate of the CA that signed the syslog server certificate,
+             in PEM format.
+
+   
+   syslog-client-cert:
+
+           type: string
+           description: The syslog client certificate in PEM format.
+
+   
+   syslog-client-key:
+
+           type: string
+           description: The syslog client key in PEM format.
+
+   
+   syslog-host:
+
+           type: string
+           description: The hostname:port of the syslog server.
+
+   
+   test-mode:
+
+           type: bool
+           description: |-
+             Whether the model is intended for testing.
+
+             If true, accessing the charm store does not affect statistical
+             data of the store. (default false)
+   
+   transmit-vendor-metrics:
+
+           type: bool
+           description: Determines whether metrics declared by charms deployed into this model
+             are sent for anonymized aggregate analytics
+   
+   update-status-hook-interval:
+
+           type: string
+           description: How often to run the charm update-status hook, in human-readable time
+             format (default 5m, range 1-60m)
+
+   **Examples:**
+
+          juju model-config default-series
+          juju model-config -m mycontroller:mymodel
+          juju model-config ftp-proxy=10.0.0.1:8000
+          juju model-config ftp-proxy=10.0.0.1:8000 path/to/file.yaml
+          juju model-config path/to/file.yaml
+          juju model-config -m othercontroller:mymodel default-series=yakkety test-mode=false
+          juju model-config --reset default-series test-mode
+
 
    **See also:**
 
    [models](#models) , 
-   [model-defaults](#model-defaults)  
+   [model-defaults](#model-defaults) , 
+   [show-cloud](#show-cloud) , 
+   [controller-config](#controller-config)  
 
 
 
@@ -4547,6 +4945,8 @@ Click on the expander to see details for each command.
    By default, all default configuration (keys and values) are
    displayed if a key is not specified. Supplying key=value will set the
    supplied key to the supplied value. This can be repeated for multiple keys.
+   You can also specify a yaml file containing key values.
+
    By default, the model is the current model.
 
 
@@ -4560,6 +4960,8 @@ Click on the expander to see details for each command.
           juju model-defaults ftp-proxy=10.0.0.1:8000
           juju model-defaults aws/us-east-1 ftp-proxy=10.0.0.1:8000
           juju model-defaults us-east-1 ftp-proxy=10.0.0.1:8000
+          juju model-defaults us-east-1 ftp-proxy=10.0.0.1:8000 path/to/file.yaml
+          juju model-defaults us-east-1 path/to/file.yaml    
           juju model-defaults -m othercontroller:mymodel default-series=yakkety test-mode=false
           juju model-defaults --reset default-series test-mode
           juju model-defaults aws/us-east-1 --reset http-proxy
@@ -5210,9 +5612,17 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
+   _--force  (= false)_
+
+   Remove storage even if it is currently attached
+
    _-m, --model (= "")_
 
    Model to operate in. Accepts [<controller name>:]<model name>
+
+   _--no-destroy  (= false)_
+
+   Remove the storage without destroying it
 
    
    **Details:**
@@ -5221,10 +5631,20 @@ Click on the expander to see details for each command.
    Removes storage from the model. Specify one or more
    storage IDs, as output by "juju storage".
 
+   By default, remove-storage will fail if the storage
+   is attached to any units. To override this behaviour,
+   you can use "juju remove-storage --force".
+
 
    **Examples:**
 
+          # Remove the detached storage pgdata/0.
           juju remove-storage pgdata/0
+          # Remove the possibly attached storage pgdata/0.
+          juju remove-storage --force pgdata/0
+          # Remove the storage pgdata/0, without destroying
+          # the corresponding cloud storage.
+          juju remove-storage --no-destroy pgdata/0
 
 
 
@@ -6200,6 +6620,10 @@ Click on the expander to see details for each command.
 
    Specify output format (yaml)
 
+   _--include-config  (= false)_
+
+   Print available config option details specific to the specified cloud
+
    _-o, --output (= "")_
 
    Specify an output file
@@ -6209,7 +6633,11 @@ Click on the expander to see details for each command.
 
 
    Provided information includes 'defined' (public, built-in), 'type',
-   'auth-type', 'regions', and 'endpoints'.
+   'auth-type', 'regions', 'endpoints', and cloud specific configuration
+   options.
+
+   If ‘--include-config’ is used, additional configuration (key, type, and
+   description) specific to the cloud are displayed if available.
 
 
    **Examples:**
@@ -7115,7 +7543,7 @@ Click on the expander to see details for each command.
 
 ^# switch
 
-   **Usage:** ` juju switch [options] [<controller>|<model>|<controller>:<model>]`
+   **Usage:** ` juju switch [options] [<controller>|<model>|<controller>:|:<model>|<controller>:<model>]`
 
    **Summary:**
 
@@ -7133,10 +7561,11 @@ Click on the expander to see details for each command.
 
    When used without an argument, the command shows the current controller 
    and its active model. 
-   When switching by controller name alone, the model
-   you get is the active model for that controller. If you want a different
-   model then you must switch using controller:model notation or switch to 
-   the controller and then to the model. 
+   When a single argument without a colon is provided juju first looks for a
+   controller by that name and switches to it, and if it's not found it tries
+   to switch to a model within current controller. mycontroller: switches to
+   default model in mycontroller, :mymodel switches to mymodel in current
+   controller and mycontroller:mymodel switches to mymodel on mycontroller.
    The `juju models` command can be used to determine the active model
    (of any controller). An asterisk denotes it.
 
@@ -7147,6 +7576,8 @@ Click on the expander to see details for each command.
           juju switch mymodel
           juju switch mycontroller
           juju switch mycontroller:mymodel
+          juju switch mycontroller:
+          juju switch :mymodel
 
 
    **See also:**
