@@ -2,94 +2,108 @@ Title: Using the Oracle cloud
 
 # Using the Oracle public cloud
 
-Juju has built-in support for [Oracle's Compute service][compute]. However, the
-following few steps are required before Juju can bootstrap Oracle's Compute
-cloud:
+Juju has built-in support for [Oracle Compute][oracle-compute], Oracle's public
+cloud. This means that there is no need to add the Oracle cloud to Juju. An
+exception to this is if you have an Oracle Compute trial account. Both types of
+accounts, paid and trial, are covered here.
 
-1. Associate Oracle's Ubuntu images with your Compute service. Juju uses these
-   for deployment.
+!!! Warning:
+    Support for Oracle Compute is new (since Juju 2.2) and some sub-optimal
+    traits may still be observed.
 
-1. For trial accounts, add the Oracle cloud to Juju. Endpoint details may need 
-   to be retrieved from the Oracle Compute *Dashboard*.
-   Juju already knows about endpoints for paid accounts so this step is only
-   necessary if using a trial account.
+This page will cover the following steps:
 
-1. Add authentication credentials for the specific Compute service to Juju.
+1. Associate Oracle's Ubuntu images with your Compute service. Juju needs these
+   to be able to deploy Ubuntu-based applications.
+1. For trial accounts, add the Oracle cloud to Juju.
+1. Add credentials to Juju so it can make use of your Oracle Compute account.
+1. Create the Juju controller
 
-We'll step through each of these requirements below, before using Juju to
-launch a test deployment on Oracle's Compute. 
+## Information gathering
 
-!!! Note:
-	Oracle support is currently in the latest [Juju 2.2 release
-        candidate][jujubeta] and is experimental. Both the Juju and Oracle
-        teams are working to improve the user experience.
+The email you received upon signing up for Oracle Compute contains vital
+information you will need to complete the instructions presented here. Look
+for:
 
-## Images
+- 'My Services URL'
+- 'Identity domain'
+- 'My Account URL'
+- 'Username' (your email address)
+- 'Password' (temporary)
 
-Juju needs access to Ubuntu images that have been associated with your Oracle
-Compute deployment. 
+Upon first login (to 'My Services URL') you will be prompted to change the
+temporary password to arrive at your final password.
 
-To do this, first sign in to your Oracle cloud domain. The URL for this will
-depend on the cloud's geographical location. In EMEA, for example, the URL is
-the following:
+## Ubuntu images
 
-[https://myservices.emea.oraclecloud.com](https://myservices.emea.oraclecloud.com).
+You will need to make Ubuntu images available in your Oracle Compute account in
+order for Juju to be able to create Ubuntu-based machines. This is a
+requirement.
 
-After signing in, you'll see the default top level of Oracle's domain
-dashboard.
+Proceed as follows:
 
-![Empty Oracle dashboard](./media/oracle_empty-dashboard.png)
+1. Navigate to 'My Services URL' and log in.
+1. Select your 'Identity Domain' in the top-right corner.
+1. Click on the 'Create instance' box and then 'Create' a Compute service.
 
-Click on the large `Create Instance` tile and select `Compute` from the list of
-services that appear. 
+![Create Compute service](./media/oracle_empty-dashboard-2.png)
 
-You are now looking at the first step in Oracle's Compute cloud deployment
-process. We'll be using this step to associate images with this specific cloud
-domain before cancelling the remainder of Oracle's cloud deployment. 
+!!! Recall:
+    We are doing this to associate images with your 'identity domain'. We will
+    not be creating an instance here.
 
-Ubuntu images can be found by clicking on 'Marketplace' from the menu on the
-left and entering `Ubuntu` into the search field that appears. 
+Click on 'Marketplace' on the resulting page (left menu), enter 'ubuntu' into
+the search field, and hit Enter:
 
-![Ubuntu image search](./media/oracle_create-instance-ubuntu.png) 
+![Search Ubuntu images](./media/oracle_create-instance-ubuntu-2.png) 
 
-The search will return any official Ubuntu images, visible with the Ubuntu
-logo, alongside other Ubuntu-associated images. 
-
-It's currently possible to use any of the following images with Juju:
+From the point of view of Juju, some images should not be used.
+Juju-compatible images are listed below:
 
 | Version          | Arch   | Series  |
 |------------------| -------|---------|
-| Ubuntu 12.04-LTS | amd64  | Precise |
-| Ubuntu 14.04-LTS | amd64  | Trusty  |
-| Ubuntu 16.04-LTS | amd64  | Xenial  |
+| Ubuntu 12.04 LTS | amd64  | Precise |
+| Ubuntu 14.04 LTS | amd64  | Trusty  |
+| Ubuntu 16.04 LTS | amd64  | Xenial  |
 | Ubuntu 17.04     | amd64  | Zesty   |
 
-!!! Warning: 
-	Currently, Oracle's Ubuntu 16.10 (Yakkety Yak) image shouldn't be
-        associated with your Juju/Oracle Compute deployment.
+!!! Warning:
+    In particular, Ubuntu 16.10 (Yakkety) should not be used with Juju.
 
-To associate an image, click `Select` at the bottom of the image tile and
-accept Oracle's terms and conditions for associating a Marketplace image with
-your cloud (this needs to be done separately for each image).
+Since Juju uses charms to install applications, the Ubuntu series you need are
+those that the charms were written for. If unsure, it is recommended to add the
+two most recent LTS releases.
 
-We'd recommend adding at least the Xenial and Trusty images to your cloud, as
-these are used by the majority of Juju deployments. The series you need to
-associate will depend on the specific charms you use. While images are being
-added, a small `Instance Creation` pane will appear which turns green when the
-process is complete. This typically takes a few seconds.
- 
-When complete, associated images will be listed when you select 'Private
-Images' from the menu on the left, as well as from the Compute console by
-selecting the 'Images' tab: 
+!!! Note:
+    At time of writing, Trusty and Xenial are the two most recent Ubuntu
+    LTS releases.
 
-![Private image in Oracle Compute dashboard](./media/oracle_create-instance-private.png)
+Select a compatible image from among the official Ubuntu images (orange Ubuntu
+logo), accept Oracle's terms and conditions, and click 'Install'. Repeat the
+process for each desired image. These installed images will end up under
+'Private Images' in the menu on the left:
 
-## Add cloud
+![List private images](./media/oracle_create-instance-private-2.png)
 
-When using a trial account, to add your Oracle cloud to Juju, type `juju add-cloud`. 
+## Trial accounts
 
-The interactive `add-cloud` process will start by first asking for the cloud
-type. Enter `oracle`:
+As mentioned, you will need to add your Oracle cloud to Juju if you're using a
+trial account. This requires a 'REST Endpoint'. To get this, navigate to 'My
+Account URL', scroll down to 'Oracle Compute Cloud Service', and click on it.
+The resulting page will look similar to this:
+
+![REST endpoint](./media/oracle_myservices-endpoint-2.png)
+
+There may be multiple endpoints. In that case, trial and error may be needed
+below (hint: the endpoint domain should be resolvable using DNS).
+
+You are now ready to use the interactive `add-cloud` command:
+
+```bash
+juju add-cloud
+```
+
+Example user session:
 
 ```no-highlight
 Cloud Types
@@ -100,138 +114,159 @@ Cloud Types
   vsphere
 
 Select cloud type: oracle
+
+Enter a name for your oracle cloud: oracle-cloud
+
+Enter the API endpoint url for the cloud:
+https://compute.uscom-central-1.oraclecloud.com/
+
+Cloud "oracle-cloud" successfully added
+You may bootstrap with 'juju bootstrap oracle-cloud'
 ```
-You will then be asked to name your cloud, followed by an endpoint:
 
-```no-highlight
-Enter a name for your oracle cloud: myoracle
-Enter the API endpoint url for the cloud: https://compute.uscom-central-1.oraclecloud.com/
-Cloud "myoracle" successfully added
-```
+We've called the new cloud 'oracle-cloud' and used an endpoint of
+'https://compute.uscom-central-1.oraclecloud.com/'.
 
-If you're using a paid Oracle account, `uscom-central-1` is currently the only
-supported region that works with Juju out of the box. 
-
-For trial accounts and other regions, the endpoint needs to be retrieved from
-Oracle's Compute dashboard. 
-
-To retrieve the endpoint, sign in to your Oracle cloud domain and click on the
-Compute tile for your domain. 
-
-Alternatively, if the Compute domain tile isn't visible, use the drop-down menu
-in the top left of the dashboard to select `Cloud Account`, select the
-`Subscriptions` tab and from the 'Subscriptions Type' drop-down menu, select
-IaaS. From the list of  subscriptions that appear (Storage, Compute, Ravello
-and Container), click on the menu icon to the right of Compute and select 
-`View Details`.
-
-In the `Additional Information` view that appears, the REST endpoint field is
-the value Juju needs for the endpoint URL:
-
-![Endpoint URL](./media/oracle_myservices-endpoint.png)
-
-## Credentials
-
-Using Juju's interactive authentication, importing Oracle credentials into Juju
-is a simple process. You will just need the following information:
-
-- **Username**: usually the email address for your Oracle account.
-- **Password**: the password for this specific Compute domain.
-- **Identity domain**: the ID for the domain, e.g. `a476989`.
-
-To add these details, type `juju add-credential <credential-name>
-<cloud-name>`: 
+Now confirm the successful addition of the cloud:
 
 ```bash
-juju add-credential myoracle
+juju clouds
 ```
 
-You will be asked for each detail in turn.
+Here is a partial output:
 
 ```no-highlight
-Enter credential name: mynewcredential
-Using auth-type "userpass".
-Enter username: javier
-Enter password: ********
-Enter identity-domain: a476989
-Credentials added for cloud myoracle.
+Cloud            Regions  Default          Type        Description
+.
+.
+.
+oracle                 5  uscom-central-1  oracle      Oracle Compute Cloud Service
+oracle-cloud           0                   oracle      Oracle Compute Cloud Service
 ```
 
-You have now added everything needed to bootstrap your new Oracle Compute cloud
-with Juju.
+Cloud 'oracle' is for the built-in (for pay) service and cloud 'oracle-cloud'
+is tied to your trial account.
 
-## Networks and spaces
+## Add credentials
 
-An optional step allows you to easily associate Oracle Compute IP networks and
-exchanges with Juju's networks and spaces.
+Use the interactive `add-credential` command to add your credentials to your
+cloud. Below, we add credentials to the trial account cloud:
 
-To do this, sign in to your Oracle cloud domain, select the Compute service
-you're using for Juju, and open its service console. 
+```bash
+juju add-credential oracle-cloud
+```
 
-From the Compute dashboard that appears, switch to the `Network` tab and select
-`IP Exchanges` from the menu on the left.
+Here is a resulting example user session:
 
-Click on the `Create IP Exchange` button. In the pane that appears, enter a
-name for the exchange, and optionally, a description and one or more tags.
+```no-highlight
+Enter credential name: oracle-cloud-creds
 
-The new exchange will now be listed. 
+Using auth-type "userpass".
 
-We now need to add a new network to use this exchange. Select the `IP Networks`
-page from the menu on the left and click on `Create IP Network` to open the new
-network details panel. 
+Enter username: javierlarin72@gmail.com
 
-![Add an IP Network](./media/oracle_create-ip-network.png)
+Enter password:
 
-Enter a name, a CIDR formatted address for the `IP Address Prefix`, and an
-optional description with one or more tags. Use the `IP Exchange` drop-down
-menu to select the exchange created previously and click on `Create`. 
+Enter identity-domain: a498151
 
-A few moments later, the new network will be listed.
+Credentials added for cloud oracle-cloud.
+```
 
-When you next bootstrap Juju with Oracle Compute, you'll be able to use these
+We've called the new credential 'oracle-cloud-creds' and entered values for
+'Username', 'Password', and 'Identity domain'.
+
+!!! Note:
+    The password will not be echoed back to the screen.
+
+
+## Juju networks and spaces
+
+You can optionally link Oracle Compute IP networks and IP exchanges with Juju's
+networks and spaces.
+
+To do this:
+
+1. Navigate to 'My Services URL'.
+1. Open the left menu (top-left icon) and select 'Compute'.
+1. From the 'Network' tab select 'IP Exchanges' from the menu on the left.
+1. Click on the 'Create IP Exchange' button and enter a name for the exchange,
+   and optionally, a description and one or more tags.
+
+![Create an IP exchange](./media/oracle_create-ip-exchange-2.png)
+
+Now create a network to use this exchange by selecting 'IP Networks' from the
+menu and clicking on 'Create IP Network':
+
+![Create an IP network](./media/oracle_create-ip-network-2.png)
+
+Enter a name, a CIDR formatted address for the 'IP Address Prefix', and an
+optional description with one or more tags. Use the 'IP Exchange' drop-down
+menu to select the exchange created previously and click on 'Create'. 
+
+When you next create a Juju controller (see below), you'll be able to use these
 new subnets and spaces. For example, typing `juju subnets` will show output
 similar to the following:
 
 ```no-highlight
 subnets:
-  10.0.123.0/24:
+  192.168.0.0/16:
     type: ipv4
-    provider-id: /Compute-a476989/juju-network
+    provider-id: /Compute-a498151/javier@example.com/oracle-cloud-ip-network
     status: in-use
-    space: juju-exchange
+    space: oracle-cloud-ip-exchange
     zones:
     - default
 ```
 
-Typing `juju spaces` will list the Oracle IP exchange:
+Typing `juju spaces` will list the exchange:
 
 ```no-highlight
-Space          Subnets
-juju-exchange  10.0.123.0/24
+Space                     Subnets
+oracle-cloud-ip-exchange  192.168.0.0/16
 ```
 
 See [How to configure more complex networks using spaces][spaces] for further
 details on networks and spaces. 
 
-## Create controller
+## Create the Juju controller
 
-To bootstrap your Oracle Compute cloud, use the `juju bootstrap` command with
-your cloud name:
+You are now ready to create a Juju controller:
+
+Below, we continue with the trial account cloud:
 
 ```bash
-juju boostrap myoracle
+juju bootstrap oracle-cloud oracle-cloud-controller
 ```
 
-You can now start deploying Juju charms and bundles to your Oracle cloud.
+Above, the name given to the new controller was 'oracle-cloud-controller'.
+Oracle Compute will create an instance to run the controller on.
 
-A successful bootstrap and deployment will result in the controller environment
-being visible in the `Instances` page of the Oracle Compute dashboard:
+Once created, you can view the controller as an Oracle Compute instance by
+navigating to 'My Services URL', opening the left menu (top-left icon), and
+selecting 'Compute'. The controller should be visible under the 'Instances'
+tab:
 
-![Oracle dashboard showing Juju](./media/oracle_bootstrap-instances.png)
+![List controller instance](./media/oracle_bootstrap-instances-2.png)
+
+Oracle Compute has the notion of *sites* (like availability zone or region).
+You may need to change your site to see your new controller. This is done in
+the top-right corner:
+
+![Oracle Compute sites](./media/oracle_bootstrap-instances-sites.png)
+
+## Next steps
+
+You can now start deploying Juju charms and/or bundles to your Oracle cloud.
+Continue with Juju by visiting the [Models][models] and
+[Introduction to Juju Charms][charms] pages.
+
 
 <!-- LINKS -->
-[compute]: https://cloud.oracle.com/en_US/compute
+
+[oracle-compute]: https://cloud.oracle.com/en_US/compute
 [jujubeta]: ./reference-install.html#getting-development-releases
 [cloudoracle]: https://cloud.oracle.com/home
 [getstarted]: ./getting-started-jaas.html
 [spaces]: ./network-spaces.html
+[models]: ./models.html
+[charms]: ./charms.html
