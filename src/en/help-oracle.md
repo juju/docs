@@ -211,7 +211,7 @@ similar to the following:
 subnets:
   192.168.0.0/16:
     type: ipv4
-    provider-id: /Compute-a498151/javier@example.com/oracle-cloud-ip-network
+    provider-id: /Compute-a498151/javierlarin72@gmail.com/oracle-cloud-ip-network
     status: in-use
     space: oracle-cloud-ip-exchange
     zones:
