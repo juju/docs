@@ -24,102 +24,91 @@ relations that can be used across models.
 Here, we'll provide an example of offering a centrally operated MySQL to other
 company employees.
 
+## Enable CMR
+
 First, enable CMR via a feature flag:
 
 ```bash
 export JUJU_DEV_FEATURE_FLAGS=cross-model
 ```
 
-Next, create a controller. This sample controller/model will be based on AWS.
+## Create a controller
+
+Next, create a controller. Here, the controller (and its model) will be based
+on AWS:
 
 ```bash
-juju bootstrap aws crossing-models
+juju add-credentials aws
+juju bootstrap aws aws-cross-controller
 ```
+
+See ' ' and ' ' for details.
+
+## Add the cross relations model and application
+
+Add the cross relations model and application in the usual way. Here we've
+decided to include some constraints: 
 
 ```bash
-juju add-model prod-db
-juju deploy mysql --constraints "mem=16G root-disk=1T"
+juju add-model cross-model
+juju deploy mysql --constraints "mem=16G root-disk=512G"
 ```
 
-Now let’s offer that MySQL service to other models.
+The output to `juju status` should look similar to:
+
+```no-highlight
+```
+
+Now make the MySQL service, and only this service, available to other models
+with the `juju offer` command:
 
 ```bash
 juju offer mysql:db
 ```
 
+The output will include the shared service's endpoint:
+
+```no-highlight
 mysqlservice Application "mysql" endpoints [db] available at
 "admin/prod-db.mysqlservice"
+```
 
-We’ve offered to other models the db endpoint that
-the MySQL application provides. The only bit of our entire prod-db model that’s
-exposed to other folks is the endpoint we’ve selected to provide.
+Where the endpoint is `admin/prod-db.mysqlservice`.
 
-Also note that there’s a URL generated to reference this endpoint. We can ask
-Juju to tell us about offers that are available for use:
+Note that a model's endpoints can be queried with the `juju find-endpoints`
+command:
 
 ```bash
 juju find-endpoints
 ```
 
-Sample output:
+In this example, the output would like like:
 
 ```no-highlight
 URL                         Access  Interfaces
 admin/prod-db.mysqlservice  admin   mysql:db
 ```
 
-We’ll now set up a blog for the engineering team using Wordpress which leverages a
-MySQL db back end. Let’s set up the blog model and give them a user account for
-managing it.
+## Add the consumer model and application
+
+Add a consumer model and application. The application in this example will
+require a MySQL database and will use the one in the shared (CMR) model. The
+chosen application here is WordPress.
 
 ```bash
-juju add-model engineering-blog
-juju add-user engineering-folks
-juju grant engineering-folks write engineering-blog
-```
-
-Now they’ve got their own model for managing their blog. If they’d like, they can
-set up caching, load balancing, etc. However, we’ll let them know to use our
-database where we’ll manage db backups, scaling, and monitoring.
-
-```bash
+juju add-model consumer-model-1
 juju deploy wordpress
 juju expose wordpress
 juju relate wordpress:db admin/prod-db.mysqlservice
 ```
 
-This now sets up some interesting things in the status output:
-
-```bash
-juju status
-```
-
-Sample output:
+The output to `juju status` for this model should look something like:
 
 ```no-highlight
-Model              Controller       Cloud/Region
-Version  SLA engineering-blog   crossing-models  aws/us-east-1  2.2.1 unsupported
-
-SAAS name     Status   Store  URL mysqlservice  unknown  local
-admin/prod-db.mysqlservice
-
-App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
-wordpress           active      1  wordpress  jujucharms    5  ubuntu
-
-Unit          Workload  Agent  Machine  Public address  Ports   Message
-wordpress/0*  active    idle   0        54.237.120.126  80/tcp
-
-Machine  State    DNS             Inst id              Series  AZ
-Message 0        started  54.237.120.126  i-0cd638e443cb8441b  trusty us-east-1a  running
-
-Relation      Provides      Consumes   Type db            mysqlservice
-wordpress  regular loadbalancer  wordpress     wordpress  peer
 ```
 
-Notice the new section above App called SAAS. What we’ve done is provided a
-SAAS-like offering of a MySQL service to users. The end users can see they're
-leveraging the offered service. On top of that the relation is noted down in
-the Relation section. With that our blog is up and running. 
+Notice how the remote MySQL application shows up as a SAAS object (Software as
+a Service). The relation is also noted down in the Relation section.
 
 We can repeat the same process for a team wiki using Mediawiki which will also
 use a MySQL database backend. While setting it up notice how the Mediawiki unit
@@ -152,19 +141,45 @@ mediawiki  1.19.14  active      1  mediawiki  jujucharms    9  ubuntu ...
 Relation  Provides   Consumes      Type db        mediawiki  mysqlservice regular
 ```
 
-We can prove things are working by actually checking out the databases
-in our MySQL instance:
+## Verification
+
+It should be possible to verify that the remote application has responded to
+the cross model relation by creating the necessary bits. In this example, we
+begin by switching to the CMR model and connecting to the mysql unit via SSH:
 
 ```bash
-juju switch prod-db
-juju ssh mysql/0
+juju switch cross-model
+juju ssh mysql/1
 ```
+
+We now log in to MySQL and list its databases:
+
+```bash
+mysql -u root --password=$(sudo cat /var/lib/mysql/mysql.passwd)
+mysql> show databases;
+```
+
+The output should look similar to:
 
 ```no-highlight
-mysql> show databases;
-....
++-----------------------------------------+
+| Database                                |
++-----------------------------------------+
+| information_schema                      |
+| mysql                                   |
+| performance_schema                      |
+| remote-61d57d41768646a1827d90efa675462d |
+| remote-eec7726f8a5540a2830a48348860f340 |
+| sys                                     |
++-----------------------------------------+
+6 rows in set (0.00 sec)
 ```
 
-There we go. Two remote-xxxx databases for each of our models that are using
-our shared service. This is going to make operating our infrastructure at scale
-so much better!
+From the output we can see the databases (`remote-`) that correspond to
+each of the models:
+
+
+<!-- LINKS -->
+
+[commands-offer]: ./commands.html#offer
+[commands-find-endpoints]: ./commands.html#find-endpoints
