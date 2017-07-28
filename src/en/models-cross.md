@@ -10,6 +10,12 @@ How to determine a unit's interface (e.g. mysql:db)?
 
 Need to add links from other pages.
 
+Also 'show-endpoints' and 'offers' (admin sees more).
+
+Multi CMR controllers are now allowed it seems.
+
+See wallyworld
+
 -->
 
 # Cross Model Relations
