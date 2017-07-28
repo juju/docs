@@ -3064,9 +3064,7 @@ Click on the expander to see details for each command.
 
 ^# import-filesystem
 
-   **Usage:** ` juju import-filesystem [options] 
-<storage-provider|pool> <filesystem|volume-id> <storage-name>
-`
+   **Usage:** ` juju import-filesystem [options] <storage-provider|pool> <filesystem|volume-id> <storage-name>`
 
    **Summary:**
 
