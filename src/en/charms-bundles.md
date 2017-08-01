@@ -364,6 +364,55 @@ mysql:
 It is not currently possible to declare a default space in the bundle for all
 application endpoints. The workaround is to list all endpoints explicitly.
 
+## Bundles and Charm Resources
+
+Charms can define [resources][charm-resources-docs]; bundles can be used to
+constrain those resources to specific revisions or to specify local paths to
+those resources. For example, the following charm's metadata.yaml file specifies
+a resource:
+
+```yaml
+name: example-charm
+summary: "example charm."
+description: This is an example charm.
+resources:
+  example:
+    type: file
+    filename: example.zip
+    description: "This charm needs example.zip to operate"
+```
+
+If this charm were to be used as part of a bundle, it might be desirable to
+specify a revision that is specific to the bundle. Revisions are specified in
+the bundle's YAML file in the corresponding "applications" section.
+
+```yaml
+applications:
+  example-charm:
+   charm: "cs:example-charm"
+   series: trusty
+   resources:
+     example: 1
+```
+
+The `example-charm` charm specifies that it requires a resource called `example`
+to operate; the bundle's "applications" section shown above specifies that its
+bundle requires, from the charm store, revision 1 of that resource.
+
+The resources section can also specify a local path to a resource:
+
+```yaml
+applications:
+  example-charm:
+   charm: "cs:example-charm"
+   series: trusty
+   resources:
+     example: "./example.zip"
+```
+
+Local paths to resources can be useful in network restricted environments where
+a Juju controller can not contact the charm store, for example.
+
 ## Sharing your Bundle with the Community
 
 After you have tested and deployed your bundle you need to release it to share
@@ -384,3 +433,4 @@ Freenode) who can assist. You can also use the
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
 [constraints-docs]: ./charms-constraints.html
 [discover-config-options-docs]: ./charms-config.html#discovering-application-configuration-options
+[charm-resources-docs]: ./developer-resources.html
