@@ -1,4 +1,5 @@
 Title: Installing Ceph
+TODO:  Revise Juju agent versions (e.g. 2.3-alpha1.1)
 
 # Installing Ceph
 
@@ -94,15 +95,16 @@ ceph-osd/2  osd-devices/7   block  ebs   vol-0e0b54e0b70bb8ebd  32GiB   attached
 ceph-osd/2  osd-journals/8  block  ebs   vol-07de85abbdd395e1b  8.0GiB  attached 
 ```
 
-Here we see the two OSDs and one journal per OSD system, for a total of nine
-volumes.
+Here we see each Ceph OSD unit has two OSD volumes and one journal volume, for
+a total of nine volumes.
 
 This Ceph cluster is used as a basis for some examples provided in
 [Using Juju Storage][charms-storage].
 
 ## Ceph Object Gateway
 
-To allow clouds such as OpenStack and Amazon to access the Ceph cluster learn
+A common use case is to allow Ceph to become a back-end for popular cloud APIs
+such as Cinder (OpenStack) and S3 (Amazon). learn
 about the [Ceph Object Gateway][upstream-ceph-object-gateway] (RADOS gateway).
 To add a Ceph Object Gateway, formerly known as a 'RADOS gateway':
 

@@ -1,11 +1,12 @@
 Title: Using Juju Storage
 TODO:  bug tracking: https://pad.lv/1708212
+       Revise Note 'not possible to add storage' after reviewing command `import-filesystem`
 
 # Using Juju Storage
 
 Certain applications can benefit from advanced storage configurations and if a
-charm exists for such an application Juju can declare such requirements during
-deploy time.
+charm exists for such an application Juju can declare such requirements both
+at deploy time and during the lifetime of the application.
 
 The level of sophistication is limited by the charm; a charm may support
 multiple storage options (e.g. persistent storage, additional cache). All this
@@ -32,10 +33,10 @@ description of each.
 : Creates or defines a storage pool.
 
 [`detach-storage`][commands-detach-storage]
-: Detaches a storage instance from a unit.
+: Detaches a storage instance from a unit. Storage is preserved.
 
 [`remove-storage`][commands-remove-storage]
-: Removes a storage instance from a model.
+: Removes a storage instance from a model. Storage is destroyed.
 
 [`show-storage`][commands-show-storage]
 : Shows details of a storage instance.
@@ -50,7 +51,7 @@ description of each.
 
 Several properties are used to dictate how storage is allocated:
 
-- 'pool': class of storage (e.g. magnetic, SSD)
+- 'pool': class of storage
 - 'size': size of each volume
 - 'count': number of volumes
 
@@ -93,8 +94,8 @@ filesystem.
 juju add-storage <unit> <label>[=<pool>,<size>,<count>]
 ```
 
-As with `juju add-unit` the storage parameters used are taken from the `juju
-deploy` command corresponding to the unit.
+As with `juju add-unit` the storage parameters used are taken from the `juju deploy`
+command corresponding to the unit.
 
 ### Examples
 
@@ -221,7 +222,7 @@ As we saw, detaching storage does not destroy the storage. In addition, when a
 unit is removed from a model, and the unit has dynamic storage attached, the
 storage will be detached and left intact. This allows detached storage to be
 re-attached to an existing unit using `juju attach-storage`, or to a new unit
-using the `--attach-storage` flag of `juju deploy` or `juju add-unit`:
+using the `--attach-storage` flag of `juju deploy` or `juju add-unit`.
 
 Storage is destroyed (removed from the model) by first detaching it and then
 using `juju remove-storage`.
@@ -259,7 +260,7 @@ juju remove-storage osd-devices/3
 ```
 
 To upgrade the OSD journal of Ceph unit 'ceph-osd/0' from magnetic to solid
-state (SSD) and remove the uneeded original journal 'osd-journals/0':
+state (SSD) and dispose of the unneeded original journal 'osd-journals/0':
 
 ```bash
 juju add-storage ceph-osd/0 osd-journals=ebs-ssd,8G,1
@@ -357,7 +358,7 @@ ssd/gp2. The alternate way would be to create a new pool with a
 
 ```bash
 juju create-storage-pool myssd-pool ebs volume-type=ssd
-juju deploy postgresql --storage pgdata=myssd-pool,512G
+juju deploy postgresql --storage pgdata=myssd-pool,32G
 ```
 
 For detailed information regarding EBS volume types, see the
