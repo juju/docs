@@ -79,8 +79,8 @@ If at least one constraint is specified the following defaults come into
 effect:
 
 - 'pool' = the default pool (see above)
-- 'size' = taken from the charm's minimum storage size, or 1GiB if the charm
-  does not specify a minimum
+- 'size' = determined from the charm's minimum storage size, or 1GiB if the
+  charm does not specify a minimum
 - 'count' = the minimum number required by the charm, or '1' if the storage is
   optional
 
@@ -93,8 +93,8 @@ filesystem.
 juju add-storage <unit> <label>[=<pool>,<size>,<count>]
 ```
 
-As with `juju add-unit` the parameters used are taken from the `juju deploy`
-command corresponding to the unit.
+As with `juju add-unit` the storage parameters used are taken from the `juju
+deploy` command corresponding to the unit.
 
 ### Examples
 
@@ -105,7 +105,7 @@ storage label, using the default storage pool:
 juju deploy postgresql --storage pgdata=100G
 ```
 
-A more explicit, but equivalent, command is:
+Assuming an AWS model, a more explicit, but equivalent, command is:
 
 ```bash
 juju deploy postgresql --storage pgdata=ebs,100G,1
@@ -174,12 +174,9 @@ not the case, Juju will return an error.
 
 ### Adding and detaching storage
 
-Assuming the storage provider supports it, storage can be created and
-attached to a unit using `juju add-storage`.
-
-Juju will ensure the storage is allowed to attach to the unit's machine. In the
-above example, the EBS volume was created in the same availability zone as the
-instance (a requirement).
+Assuming the storage provider supports it, storage can be created and attached
+to a unit using `juju add-storage`. Juju will ensure the storage is allowed to
+attach to the unit's machine.
 
 !!! Note:
     Currently, it is not possible to add storage to the model without also
@@ -205,6 +202,9 @@ storage:
 ```bash
 juju add-storage ceph-osd/0 osd-devices=ebs,32G,1
 ```
+
+Above, the volume was created in the same availability zone as the instance (a
+requirement).
 
 To detach OSD device 'osd-devices/2' from a Ceph unit:
 
