@@ -101,21 +101,6 @@ a total of nine volumes.
 This Ceph cluster is used as a basis for some examples provided in
 [Using Juju Storage][charms-storage].
 
-## Ceph Object Gateway
-
-A common use case is to allow Ceph to become a back-end for popular cloud APIs
-such as Cinder (OpenStack) and S3 (Amazon). learn
-about the [Ceph Object Gateway][upstream-ceph-object-gateway] (RADOS gateway).
-To add a Ceph Object Gateway, formerly known as a 'RADOS gateway':
-
-```bash
-juju deploy ceph-radosgw
-juju add-relation ceph-radosgw ceph-mon
-```
-
-Some manual configuration is necessary to complete the gateway install - see
-[Configuring Ceph Object Gateway][upstream-ceph-object-gateway-configuring]. 
-
 
 <!-- LINKS -->
 
