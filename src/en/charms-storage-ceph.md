@@ -106,5 +106,3 @@ This Ceph cluster is used as a basis for some examples provided in
 
 [charms-storage]: ./charms-storage.html
 [upstream-ceph-documentation]: http://docs.ceph.com/docs
-[upstream-ceph-object-gateway]: http://docs.ceph.com/docs/master/radosgw/
-[upstream-ceph-object-gateway-configuring]: http://docs.ceph.com/docs/jewel/radosgw/config/
