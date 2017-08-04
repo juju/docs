@@ -128,6 +128,10 @@ rootfs   rootfs
 tmpfs    tmpfs     
 ```
 
+!!! Note:
+    The name given to a default storage pool will often be the same as the
+    name of the storage pool upon which it is based.
+
 Depending on the storage provider, custom storage pools can be created. For
 example, the 'ebs' storage provider supports several configuration attributes:
 
@@ -266,13 +270,14 @@ juju upgrade-charm postgresql --storage pgdata=10G
 ```
 
 If such a constraint was not provided, 'rootfs' would be used as described in the
+
 section on deploying with storage constraints.
 
 !!! Warning:
     Specifying new constraints may be necessary when upgrading to a revision of
     a charm that introduces new, required, storage options.
 
-## Storage Providers
+## Storage providers
 
 ### Generic storage providers
 
@@ -386,7 +391,48 @@ provider currently supports a single pool configuration attribute:
     - 'oracle' (volume type is 'default')
     - 'oracle-latency' (volume type is 'latency').
 
-#### Loop devices and LXD
+### LXD (lxd)
+
+LXD-based models have access to the 'lxd' storage provider. The LXD provider
+does not currently have any specific configuration options.
+
+Every LXD-based model comes with two LXD-specific pools: 'lxd' and 'lxd-zfs'.
+This can be seen in the output to the `juju storage-pools` command:
+
+```no-highlight
+juju storage-pools
+Name     Provider  Attrs
+loop     loop      
+lxd      lxd       
+lxd-zfs  lxd       driver=zfs lxd-pool=juju-zfs zfs.pool_name=juju-lxd
+rootfs   rootfs    
+tmpfs    tmpfs
+```
+
+Each Juju storage pool using the 'lxd' storage provider creates a
+correspondingly-named LXD storage pool that will house that actual Juju
+machines. The above two LXD-specific pools will therefore yield output to the
+`lxc storage list` command similar to the below:
+
+```no-highlight
++----------+--------+---------------------------------+---------+
+|   NAME   | DRIVER |             SOURCE              | USED BY |
++----------+--------+---------------------------------+---------+
+| juju-zfs | zfs    | /var/lib/lxd/disks/juju-zfs.img | 0       |
++----------+--------+---------------------------------+---------+
+| lxd      | zfs    | /var/lib/lxd/disks/lxd.img      | 7       |
++----------+--------+---------------------------------+---------+
+```
+
+To deploy an application, refer to the pool as usual. Here we deploy PostgreSQL
+using the 'lxd' Juju storage pool, which, in turn, uses the 'lxd' LXD storage
+pool:
+
+```bash
+juju deploy postgresql --storage pgdata=lxd,8G
+```
+
+#### Loop devices
 
 LXD (localhost) does not officially support attaching loopback devices for
 storage out of the box. However, with some configuration you can make this
