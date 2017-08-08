@@ -424,16 +424,16 @@ LXD-based models have access to the 'lxd' storage provider. The LXD provider
 does not currently have any specific configuration options.
 
 !!! Note:
-    LXD on all supported versions of Ubuntu provide the 'lxd' storage provider
-    feature with the exception of Ubuntu 16.04 LTS (Xenial). With Xenial,
-    either the 'backports' repository (`sudo apt install -y lxd/xenial-backports`)
-    or a PPA (`sudo apt-add-repository -yu ppa:ubuntu-lxc/lxd-stable; sudo apt
-    install -y lxd`) will be required.
+    To get an LXD version on either Ubuntu 14.04 LTS (Trusty) or Ubuntu 16.04
+    LTS (Xenial) that has the 'lxd' storage provider feature the
+    [LXD PPA][ppa-lxd] (`sudo apt-add-repository -yu ppa:ubuntu-lxc/lxd-stable;
+    sudo apt install -y lxd`) will be required.
 
 Every LXD-based model comes with a minimum of one LXD-specific Juju storage
 pool called 'lxd'. If ZFS and/or BTRFS are present when the controller is
-created then 'lxd-zfs' and 'lxd-btrfs' will also be available. The following
-output to the `juju storage-pools` command shows all three LXD-specific pools:
+created then pools 'lxd-zfs' and/or 'lxd-btrfs' will also be available. The
+following output to the `juju storage-pools` command shows all three
+Juju LXD-specific pools:
 
 ```no-highlight
 Name       Provider  Attrs
@@ -445,24 +445,37 @@ rootfs     rootfs
 tmpfs      tmpfs
 ```
 
-For each Juju storage pool using the 'lxd' storage provider there is an
-automatically created, and correspondingly-named, LXD storage pool that will
-house that actual storage volumes. The above three LXD-specific Juju pools will
-therefore be associated with the below LXD pools, visible via the `lxc storage list`
-command:
+As can be inferred from the above output, for each Juju storage pool based on
+the 'lxd' storage provider there is a LXD storage pool that gets created.
+It is these LXD pools will house that actual storage volumes.
+
+The LXD storage pool corresponding to the Juju 'lxd' storage pool doesn't get
+created until the 'lxd' pool is used for the first time (typically via the
+`juju deploy` command) and is called simply 'juju'.
+
+The command `lxc storage list` is used to list LXD storage pools. A full
+"contingent" of LXD non-customized storage pools would like like this:
 
 ```no-highlight
-+----------+--------+---------------------------------+---------+
-|   NAME   | DRIVER |             SOURCE              | USED BY |
-+----------+--------+---------------------------------+---------+
-| juju-zfs | zfs    | /var/lib/lxd/disks/juju-zfs.img | 0       |
-+----------+--------+---------------------------------+---------+
-| lxd      | zfs    | /var/lib/lxd/disks/lxd.img      | 7       |
-+----------+--------+---------------------------------+---------+
++------------+-------------+--------+------------------------------------+---------+
+|    NAME    | DESCRIPTION | DRIVER |               SOURCE               | USED BY |
++------------+-------------+--------+------------------------------------+---------+
+| default    |             | dir    | /var/lib/lxd/storage-pools/default | 1       |
++------------+-------------+--------+------------------------------------+---------+
+| juju       |             | dir    | /var/lib/lxd/storage-pools/juju    | 0       |
++------------+-------------+--------+------------------------------------+---------+
+| juju-btrfs |             | btrfs  | /var/lib/lxd/disks/juju-btrfs.img  | 0       |
++------------+-------------+--------+------------------------------------+---------+
+| juju-zfs   |             | zfs    | /var/lib/lxd/disks/juju-zfs.img    | 0       |
++------------+-------------+--------+------------------------------------+---------+
 ```
 
+To be clear, the three Juju-related pools above are for storing *volumes* that
+Juju applications can use. The fourth 'default' pool is the standard LXD
+storage pool where the actual *containers* (operating systems) live.
+
 To deploy an application, refer to the pool as usual. Here we deploy PostgreSQL
-using the 'lxd' Juju storage pool, which, in turn, uses the 'lxd' LXD storage
+using the 'lxd' Juju storage pool, which, in turn, uses the 'juju' LXD storage
 pool:
 
 ```bash
@@ -553,5 +566,6 @@ For guidance on how to create a charm that uses these storage features see
 [aws-iops-ssd-volumes]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops
 [aws-ebs-volume-types]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
 [wikipedia-iops]: https://en.wikipedia.org/wiki/IOPS
+[ppa-lxd]: https://launchpad.net/~ubuntu-lxc/+archive/ubuntu/lxd-stable
 
 [anchor__storage-providers]: #storage-providers
