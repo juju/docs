@@ -17,7 +17,7 @@ to the [PostgreSQL charm][charm-store-postgresql] and the
 The Ceph examples used here are based on the Ceph cluster described in the
 document [Installing Ceph][charms-storage-ceph].
 
-## Storage management
+## Storage management commands
 
 Outside of application deployment, Juju also has a wide array of storage
 management abilities. Related commands are listed below, along with a brief
@@ -73,10 +73,10 @@ juju deploy <charm> [--storage <label>=<pool>,<size>,<count>]
 Notes:
 
 - `label` is a string taken from the charm itself. It encapsulates a specific
-  storage option/feature.
+  storage option/feature. Sometimes called a *store*.
 - `--storage` may be specified multiple times, to support multiple labels.
 
-If at least one constraint is specified the following defaults come into
+If at least one constraint is specified the following default values come into
 effect:
 
 - 'pool' = the default pool (see above)
@@ -85,7 +85,7 @@ effect:
 - 'count' = the minimum number required by the charm, or '1' if the storage is
   optional
 
-In the absence of any storage constraints, the storage will be on the root
+In the absence of any storage constraints, the storage will be put on the root
 filesystem.
 
 ### juju add-storage
@@ -115,8 +115,8 @@ juju deploy postgresql --storage pgdata=ebs,100G,1
 ## Storage pools
 
 Use the `juju storage-pools` command to list the predefined storage pools as
-well as any custom ones that may have been created with the `juju create-storage-pool`
-command:
+well as any custom ones that may have been created with the
+`juju create-storage-pool` command:
 
 ```bash
 juju storage-pools
@@ -158,24 +158,21 @@ See [IOPS][wikipedia-iops] (Wikipedia) for background information.
 
 ## Dynamic storage
 
-Most storage can be dynamically added to, and removed from, a unit. For
-instance, EBS volumes can be created and attached to EC2 instances, as long as
-they are in the same availability zone.
+Most storage can be dynamically added to, and removed from, a unit. Some types
+of storage, however, cannot be dynamically managed. For instance, Juju cannot
+disassociate MAAS disks from their respective MAAS nodes. These types of static
+storage can only be requested at deployment time and will be removed when the
+machine is removed from the model.
 
-Some types of storage, however, cannot be dynamically managed. For instance,
-Juju cannot disassociate MAAS disks from their respective MAAS nodes. These
-types of static storage can only be requested at deployment time and will
-be removed when the machine is removed from the model.
+Certain cloud providers may also impose certain restrictions when attaching
+storage. For example, attaching an EBS volume to an EC2 instance requires that
+they both reside within the same availability zone. If this is not the case,
+Juju will return an error.
 
 When deploying an application or unit that requires storage, using machine
 placement (i.e. `--to`) requires that the assigned storage be dynamic. Juju will
 return an error if you try to deploy a unit to an existing machine, while also
 attempting to allocate static storage.
-
-Cloud providers may also impose certain restrictions when attaching storage.
-For example, as described above, attaching an EBS volume to an EC2 instance
-requires that they both reside within the same availability zone. If this is
-not the case, Juju will return an error.
 
 ### Adding and detaching storage
 
@@ -234,6 +231,10 @@ using `juju remove-storage`.
 If an attempt is made to either attach or remove storage that is currently in
 use (i.e. it is attached to a unit) Juju will return an error.
 
+Finally, a model cannot be destroyed while storage volumes remain without
+providing a special option (`--destroy-storage`). Naturally, this applies to
+the removal of controllers as well.
+
 #### Examples
 
 To attach existing storage 'osd-devices/7' to existing unit 'ceph-osd/1':
@@ -272,6 +273,13 @@ juju detach-storage osd-journals/0
 juju remove-storage osd-journals/0
 ```
  
+To destroy a controller (and its models) along with all existing storage
+volumes:
+
+```bash
+juju destroy-controller lxd-controller --destroy-all-models --destroy-storage
+```
+
 ### Cross-model storage
 
 Storage management is currently restricted to a single model, which means it is
@@ -296,7 +304,6 @@ juju upgrade-charm postgresql --storage pgdata=10G
 ```
 
 If such a constraint was not provided, 'rootfs' would be used as described in the
-
 section on deploying with storage constraints.
 
 !!! Warning:
