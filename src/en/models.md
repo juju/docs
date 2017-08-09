@@ -1,7 +1,5 @@
 Title: Juju models
-TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the
-      access and secret keys need to be provided." I tested ec2 and did not
-      need to do this. OpenStack?
+TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the access and secret keys need to be provided." I tested ec2 and did not need to do this. OpenStack?
 
 
 # Juju models
@@ -13,10 +11,10 @@ provisioned along with it. These initial models are named 'controller' and
 intended for general workloads. The 'default' model, however, is ready for
 immediate use. Models can be added easily at any time.
 
-
 ## Model management
 
 Common model management tasks are summarized below.
+
 
 
 ^# View status

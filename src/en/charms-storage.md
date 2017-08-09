@@ -1,5 +1,7 @@
 Title: Using Juju Storage
 TODO:  bug tracking: https://pad.lv/1708212
+       bug tracking: https://pad.lv/1709507
+       bug tracking: https://pad.lv/1709508
        Revise Note 'not possible to add storage' after reviewing command `import-filesystem`
 
 # Using Juju Storage
@@ -232,8 +234,8 @@ If an attempt is made to either attach or remove storage that is currently in
 use (i.e. it is attached to a unit) Juju will return an error.
 
 Finally, a model cannot be destroyed while storage volumes remain without
-providing a special option (`--destroy-storage`). Naturally, this applies to
-the removal of controllers as well.
+passing a special option (`--destroy-storage`). Naturally, this applies to
+the removal of a controller as well.
 
 #### Examples
 
@@ -303,8 +305,9 @@ but was introduced in revision 2, when upgrading (from 1 to 2) you could do:
 juju upgrade-charm postgresql --storage pgdata=10G
 ```
 
-If such a constraint was not provided, 'rootfs' would be used as described in the
-section on deploying with storage constraints.
+If such a constraint was not provided, 'rootfs' would be used (as described in
+the section on deploying with
+[storage constraints][anchor__storage-constraints-juju-deploy]).
 
 !!! Warning:
     Specifying new constraints may be necessary when upgrading to a revision of
@@ -433,14 +436,15 @@ does not currently have any specific configuration options.
 !!! Note:
     To get an LXD version on either Ubuntu 14.04 LTS (Trusty) or Ubuntu 16.04
     LTS (Xenial) that has the 'lxd' storage provider feature the
-    [LXD PPA][ppa-lxd] (`sudo apt-add-repository -yu ppa:ubuntu-lxc/lxd-stable;
-    sudo apt install -y lxd`) will be required.
+    [LXD PPA][ppa-lxd] (
+    `sudo apt-add-repository -yu ppa:ubuntu-lxc/lxd-stable; sudo apt install -y lxd`
+    ) will be required.
 
 Every LXD-based model comes with a minimum of one LXD-specific Juju storage
 pool called 'lxd'. If ZFS and/or BTRFS are present when the controller is
 created then pools 'lxd-zfs' and/or 'lxd-btrfs' will also be available. The
-following output to the `juju storage-pools` command shows all three
-Juju LXD-specific pools:
+following output to the `juju storage-pools` command shows all three Juju
+LXD-specific pools:
 
 ```no-highlight
 Name       Provider  Attrs
@@ -453,15 +457,15 @@ tmpfs      tmpfs
 ```
 
 As can be inferred from the above output, for each Juju storage pool based on
-the 'lxd' storage provider there is a LXD storage pool that gets created.
-It is these LXD pools will house that actual storage volumes.
+the 'lxd' storage provider there is a LXD storage pool that gets created. It
+is these LXD pools that will house the actual volumes.
 
-The LXD storage pool corresponding to the Juju 'lxd' storage pool doesn't get
-created until the 'lxd' pool is used for the first time (typically via the
-`juju deploy` command) and is called simply 'juju'.
+The LXD pool corresponding to the Juju 'lxd' pool doesn't get created until the
+latter is used for the first time (typically via the `juju deploy` command). It
+is called simply 'juju'.
 
 The command `lxc storage list` is used to list LXD storage pools. A full
-"contingent" of LXD non-customized storage pools would like like this:
+"contingent" of LXD non-custom storage pools would like like this:
 
 ```no-highlight
 +------------+-------------+--------+------------------------------------+---------+
@@ -566,6 +570,7 @@ For guidance on how to create a charm that uses these storage features see
 [generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
 [generic-storage-tmpfs]: https://en.wikipedia.org/wiki/Tmpfs
 [anchor__loop-devices-and-lxd]: #loop-devices-and-lxd
+[anchor__storage-constraints-juju-deploy]: #juju-deploy
 [charm-store-postgresql]: https://jujucharms.com/postgresql
 [charm-store-ceph-osd]: https://jujucharms.com/ceph-osd
 [ceph-charm]: https://jujucharms.com/ceph-osd
