@@ -137,7 +137,7 @@ tmpfs    tmpfs
 
 !!! Note:
     The name given to a default storage pool will often be the same as the
-    name of the storage pool upon which it is based.
+    name of the storage provider upon which it is based.
 
 Depending on the storage provider (see [below][anchor__storage-providers]),
 custom storage pools can be created. In the case of AWS, the 'ebs' storage
@@ -166,10 +166,10 @@ disassociate MAAS disks from their respective MAAS nodes. These types of static
 storage can only be requested at deployment time and will be removed when the
 machine is removed from the model.
 
-Certain cloud providers may also impose certain restrictions when attaching
-storage. For example, attaching an EBS volume to an EC2 instance requires that
-they both reside within the same availability zone. If this is not the case,
-Juju will return an error.
+Certain cloud providers may also impose restrictions when attaching storage.
+For example, attaching an EBS volume to an EC2 instance requires that they both
+reside within the same availability zone. If this is not the case, Juju will
+return an error.
 
 When deploying an application or unit that requires storage, using machine
 placement (i.e. `--to`) requires that the assigned storage be dynamic. Juju will
@@ -234,7 +234,8 @@ If an attempt is made to either attach or remove storage that is currently in
 use (i.e. it is attached to a unit) Juju will return an error.
 
 Finally, a model cannot be destroyed while storage volumes remain without
-passing a special option (`--destroy-storage`). Naturally, this applies to
+passing a special option (`--release-storage` to detach all volumes and
+`--destroy-storage` to remove all volumes). Naturally, this applies to
 the removal of a controller as well.
 
 #### Examples
@@ -280,6 +281,12 @@ volumes:
 
 ```bash
 juju destroy-controller lxd-controller --destroy-all-models --destroy-storage
+```
+ 
+To destroy a model while keeping intact all existing storage volumes:
+
+```bash
+juju destroy-model default --release-storage
 ```
 
 ### Cross-model storage
@@ -434,11 +441,9 @@ LXD-based models have access to the 'lxd' storage provider. The LXD provider
 does not currently have any specific configuration options.
 
 !!! Note:
-    To get an LXD version on either Ubuntu 14.04 LTS (Trusty) or Ubuntu 16.04
-    LTS (Xenial) that has the 'lxd' storage provider feature the
-    [LXD PPA][ppa-lxd] (
-    `sudo apt-add-repository -yu ppa:ubuntu-lxc/lxd-stable; sudo apt install -y lxd`
-    ) will be required.
+    To get an LXD version (at least 2.16) on either Ubuntu 14.04 LTS (Trusty)
+    or Ubuntu 16.04 LTS (Xenial) that has the 'lxd' storage provider feature
+    the [LXD:stable PPA][ppa-lxd] will be required.
 
 Every LXD-based model comes with a minimum of one LXD-specific Juju storage
 pool called 'lxd'. If ZFS and/or BTRFS are present when the controller is
