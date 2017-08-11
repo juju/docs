@@ -1,4 +1,5 @@
 Title: Help with Azure clouds
+TODO: Update azure-cli to use snap when stable (checked 10 Aug 2017)
 
 # Using the Microsoft Azure public cloud
 
@@ -26,44 +27,53 @@ Before you can use Azure with Juju, you will need to import your Azure
 account credentials into Juju. Retrieving those credentials is easy, thanks to
 Microsoft's new [Azure Cloud Shell][azureshell].
 
-This can be installed using *[snap][snapcraft]*:
+Azure Cloud Shell can be installed using *[npm][npminfo]*. Enter the following
+command to install npm if it isn't already on your system:
 
 ```bash
-sudo snap install azure-cli --classic --edge
+sudo apt install -y nodejs-legacy npm
+```
+
+The following command will install Azure Cloud Shell with *npm*:
+
+```bash
+sudo npm install -g azure-cli
 ```
 
 With 'azure-cli' installed, you can login to your Azure account with the
 following command:
 
 ```bash
-az login
+azure login
 ```
-
 The above command will prompt you to open a browser with a specific URL and
 enter a provided authentication code.
 
 After entering the code and pressing continue, you will be asked to select the
 Microsoft account you'd like associated with the Azure Cloud Shell. 
 
-Back on the command line, the output from `azr login` will have concluded by
-displaying the credentials for your Azure account. They should look similar to
-the following:
+!!! Note:
+    For further details on the Azure CLI, see [Microsoft's
+    documentation][azurecommands].
+
+Back on the command line, the output from `azure login` will have concluded by
+displaying `info:    login command OK`. Typing `azure account show` will now
+output the credentials for your account, and you will need to make a note of
+the *ID* value:
 
 ```yaml
-[
-  {
-    "cloudName": "AzureCloud",
-    "id": "34090127e8-e693-4be8-b906-c7a859149486",
-    "isDefault": true,
-    "name": "Pay-As-You-Go",
-    "state": "Enabled",
-    "tenantId": "0f7348364-f42f-4c78-94c9-e3d01c2bc5af",
-    "user": {
-      "name": "javierlarin72@gmail.com",
-      "type": "user"
-    }
-  }
-]
+info:    Executing command account show
+data:    Name                        : Pay-As-You-Go
+data:    ID                          : 43456246-e693-4236-2636-224624659486
+data:    State                       : Enabled
+data:    Tenant ID                   : 0f242469-f23f-4c78-2365-2362362653af
+data:    Is Default                  : true
+data:    Environment                 : AzureCloud
+data:    Has Certificate             : No
+data:    Has Access Token            : Yes
+data:    User name                   : javierlarin72@gmail.com
+data:
+info:    account show command OK
 ```
 
 Credentials can now be added by running the command:
@@ -90,9 +100,18 @@ press 'Enter' to continue.
     this are covered in the [Manually adding credentials](#manually-adding-credentials)
     section.
 
-Finally, you will be asked for your Azure subscription id. Just press enter to
-use the default subscription. Juju will use the authenticated Azure Cloud Shell
-to gather the credentials automatically.
+Finally, you will be asked for your Azure subscription id. Enter the value
+alongside *ID* in the output from `azure account show` command, as shown above. You
+will then be asked to step through the browser authentication process again to
+validate **Juju CLI** against your Azure cloud. 
+
+Once the authentication is successful, you will see output similar to the
+following:
+
+```bash
+Authenticated as "Javier fdgsfdrgdf-fexd-4e87-a48d-ef3534699215b76".
+Credentials added for cloud azure.
+```
 
 If you want to check that the credentials were successfully added, use the
 `juju credentials` command. You will see your Azure credentials listed.
@@ -110,9 +129,10 @@ in the [Azure portal][azureportal].
 
 ![Juju environment in Azure portal](media/azure_portal-environment.png)
 
-!!! Note: By default new Azure accounts are limited to 10 cores. You may
-need to file a support ticket with Azure to raise this limit for your 
-account if you are deploying many or large applications.
+!!! Note:
+    By default new Azure accounts are limited to 10 cores. You may
+    need to file a support ticket with Azure to raise this limit for your 
+    account if you are deploying many or large applications.
 
 ## Manually adding credentials
 
@@ -128,36 +148,10 @@ In the sections below, we will assign each of these a variable name.  When you
 enter them into the command, replace the variable name we give with the actual
 ID that corresponds to the variable.
 
-The Azure command line interface (CLI) tool is used to both gather information
-and to perform necessary actions.
-
-```bash
-sudo apt-get install -y nodejs-legacy npm
-sudo npm install -g azure-cli
-```
-
-The Azure CLI tool gets installed here:
-
-```bash
-ls -lh /usr/local/bin/azure
-lrwxrwxrwx 1 root root 39 Jan 18 22:58 /usr/local/bin/azure -> ../lib/node_modules/azure-cli/bin/azure
-```
-
-Confirm the tool is installed correctly by viewing its online help.
-
-```bash
-azure help
-```
-
-Put Azure in *Azure Resource Manager* mode and log in:
-```bash
-azure config mode arm
-azure login
-```
-
-You will be prompted to visit a website to enter the provided code. It will
-therefore be easier to perform this on a graphical desktop.
-
+!!! Note:
+    Make sure you have the Azure CLI installed and that you've used `azure login`
+    to authorize the session. See **[Credentials][credentials]** above for more
+    details.
 
 ### `subscription-id`
 
@@ -171,9 +165,9 @@ azure account list
 
 ```no-highlight
 info:    Executing command account list
-data:    Name        Id                                    Current  State
-data:    ----------  ------------------------------------  -------  -------
-data:    Free Trial  f717c8c1-8e5e-4d38-be7f-ed1e1c879e18  true     Enabled
+data:    Name           Id                                    Current  State
+data:    -------------  ------------------------------------  -------  -------
+data:    Pay-As-You-Go  f717c8c1-8e5e-4d38-be7f-ed1e1c879e18  true     Enabled
 info:    account list command OK
 ```
 
@@ -193,50 +187,39 @@ sample,
 APP_PASSWORD=some_password
 ```
 
-Create an Azure Active Directory (AAD) application:
+Now create an Active Directory (Kerberos) server principal:
 
 ```bash
-azure ad app create \
-        --name "ubuntu.example.com" \
-        --home-page "http://ubuntu.example.com" \
-        --identifier-uris "http://ubuntu.example.com" \
-        --password $APP_PASSWORD
+azure ad sp create --name "ubuntu.example.com" --password $APP_PASSWORD
 ```
 
-The options `--name`, `--home-page`, and `--identifier-uris` are arbitrary but
-you should use values that make sense for your environment.
+The `--name` option is arbitrary but you should use a value that make sense for
+your environment. The command output will be similar to the following:
 
-In the output of this command, note the application ID, the **APP_ID**.
-In our sample it was on a line like this:
+```no-highlight
+info:    Executing command ad sp create
++ Creating application ubuntu.example.com
++ Creating service principal for application  e03f5baa-b63c-4a75-a52e-5ed55d9343ef
+data:    Object Id:               8ff5e077-c5c2-40ec-abd8-ba9d4c288c17
+data:    Display Name:            ubuntu.example.com
+data:    Service Principal Names:
+data:                             e03f5baa-b63c-4a75-a52e-5ed55d9343ef
+data:                             http://ubuntu.example.com
+info:    ad sp create command OK
+```
+
+Make a note of the value that follows *Creating service principal for
+application*, as this is the **APP_ID**. Also make a note of `Object ID`, which
+we'll refer to as **OBJ_ID**
+
+Now grant permissions to the principal with the following command:
 
 ```bash
-data:    AppId:    f6ab7cbd-5029-43ef-85e3-5c4442a00ba8
+azure role assignment create --objectId $OBJ_ID -o Owner
 ```
 
-Use the APP_ID to create an Active Directory (Kerberos) server principal:
-
-!!! Note: Replace our variable here with the actual value you learned above.
-Do this throughout the rest of this page when you see variables listed.
-
-```bash
-azure ad sp create -a $APP_ID
-```
-
-Note its object ID, the **OBJ_ID**. In our sample it was on a line like this:
-
-```bash
-data:    ObjectId:    aab17f6f-6b9a-43ae-8d6d-2ff889aa8941
-```
-
-Now grant permissions to the principal (OBJ_ID) associated with your
-subscription (SUB_ID):
-
-```bash
-azure role assignment create \
-        --objectId $OBJ_ID \
-        -o Owner \
-        -c /subscriptions/$SUB_ID/
-```
+The above command will successfully conclude with 'role assignment create
+command OK'.
 
 ### `tenant-id`
 
@@ -245,11 +228,10 @@ Get the tenant id, the **TENANT_ID**:
 ```bash
 azure account show
 ```
-
 In our sample it was on a line like this:
 
 ```bash
-data:    Tenant ID:    daff614b-725e-4b9a-bc57-7763017c1cfb
+data:    Tenant ID                   : 0fb95fd9-f42f-4c78-94c9-e3d01c2bc5af
 ```
 
 You can test by logging in using the application principal as your identity:
@@ -277,8 +259,9 @@ You can now [create the controller](#create-controller).
 Alternately, you can also use this credential with [Juju as a Service][jaas] and
 create and deploy your model using its GUI.
 
-!!! Note: If you add more than one credential, you will also need to set the
-default one to use with `juju set-default-credential`
+!!! Note:
+    If you add more than one credential, you will also need to set the
+    default one to use with `juju set-default-credential`
 
 ## Compatibility with older versions of Juju
 
@@ -291,9 +274,12 @@ allocated to machines in an application-specific Availability Set. Read the
 availability sets affect uptime guarantees.
 
 <!-- LINKS -->
+[credentials]: ./help-azure.html#credentials
 [subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
 [azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
 [azureportal]: http://portal.azure.com
 [jaas]: ./getting-started.html "Getting Started with Juju as a Service"
 [azureshell]: https://azure.microsoft.com/en-us/features/cloud-shell/
 [snapcraft]: https://snapcraft.io/
+[npminfo]: https://docs.npmjs.com/getting-started/what-is-npm
+[azurecommands]: https://docs.microsoft.com/en-us/azure/virtual-machines/azure-cli-arm-commands
