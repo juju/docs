@@ -25,16 +25,16 @@ juju update-clouds
 
 Before you can use Azure with Juju, you will need to import your Azure
 account credentials into Juju. Retrieving those credentials is easy, thanks to
-Microsoft's new [Azure Cloud Shell][azureshell].
+Microsoft's new [Azure CLI][azurecli].
 
-Azure Cloud Shell can be installed using *[npm][npminfo]*. Enter the following
+Azure CLI can be installed using *[npm][npminfo]*. Enter the following
 command to install npm if it isn't already on your system:
 
 ```bash
 sudo apt install -y nodejs-legacy npm
 ```
 
-The following command will install Azure Cloud Shell with *npm*:
+The following command will install Azure CLI with *npm*:
 
 ```bash
 sudo npm install -g azure-cli
@@ -50,7 +50,7 @@ The above command will prompt you to open a browser with a specific URL and
 enter a provided authentication code.
 
 After entering the code and pressing continue, you will be asked to select the
-Microsoft account you'd like associated with the Azure Cloud Shell. 
+Microsoft account you'd like associated with the Azure CLI. 
 
 !!! Note:
     For further details on the Azure CLI, see [Microsoft's
@@ -279,7 +279,7 @@ availability sets affect uptime guarantees.
 [azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
 [azureportal]: http://portal.azure.com
 [jaas]: ./getting-started.html "Getting Started with Juju as a Service"
-[azureshell]: https://azure.microsoft.com/en-us/features/cloud-shell/
+[azurecli]: https://azure.microsoft.com/en-us/features/cloud-shell/
 [snapcraft]: https://snapcraft.io/
 [npminfo]: https://docs.npmjs.com/getting-started/what-is-npm
 [azurecommands]: https://docs.microsoft.com/en-us/azure/virtual-machines/azure-cli-arm-commands
