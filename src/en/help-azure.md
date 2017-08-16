@@ -20,31 +20,30 @@ running:
 ```bash
 juju update-clouds
 ```
-
 ## Credentials
 
 Before you can use Azure with Juju, you will need to import your Azure
-account credentials into Juju. Retrieving those credentials is easy, thanks to
-Microsoft's new [Azure CLI][azurecli].
+account credentials into Juju and retrieving those credentials is easy, thanks
+to Microsoft's [Azure CLI 2.0][azurecli].
 
-Azure CLI can be installed using *[npm][npminfo]*. Enter the following
-command to install npm if it isn't already on your system:
-
-```bash
-sudo apt install -y nodejs-legacy npm
-```
-
-The following command will install Azure CLI with *npm*:
+Ubuntu/Linux users can install Azure CLI 2.x with the following command:
 
 ```bash
-sudo npm install -g azure-cli
+curl -L https://aka.ms/InstallAzureCli | bash
 ```
 
-With 'azure-cli' installed, you can login to your Azure account with the
+Accept the default options when asked for install locations and allow the
+installer to update your $PATH. Finally, run `exec -l $SHELL` to restart your
+shell. Typing `az --version` will show you now have Azure CLI 2.x installed.
+
+For instructions that cover installing Azure CLI on Microsoft Windows and Apple
+macOS, see Microsoft's [Install Azure CLI 2.0][azuretwoinstall] documentation.
+
+With Azure CLI installed, you can login to your Azure account by entering the
 following command:
 
 ```bash
-azure login
+az login
 ```
 The above command will prompt you to open a browser with a specific URL and
 enter a provided authentication code.
@@ -52,64 +51,57 @@ enter a provided authentication code.
 After entering the code and pressing continue, you will be asked to select the
 Microsoft account you'd like associated with the Azure CLI. 
 
-!!! Note:
-    For further details on the Azure CLI, see [Microsoft's
-    documentation][azurecommands].
-
-Back on the command line, the output from `azure login` will have concluded by
-displaying `info:    login command OK`. Typing `azure account show` will now
-output the credentials for your account, and you will need to make a note of
-the *ID* value:
+Back on the command line, the output from `az login` will have concluded by
+displaying the credentials for your account: 
 
 ```yaml
-info:    Executing command account show
-data:    Name                        : Pay-As-You-Go
-data:    ID                          : 43456246-e693-4236-2636-224624659486
-data:    State                       : Enabled
-data:    Tenant ID                   : 0f242469-f23f-4c78-2365-2362362653af
-data:    Is Default                  : true
-data:    Environment                 : AzureCloud
-data:    Has Certificate             : No
-data:    Has Access Token            : Yes
-data:    User name                   : javierlarin72@gmail.com
-data:
-info:    account show command OK
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "f717c8c1-8e5e-4d38-be7f-ed1e1c879e18",
+    "isDefault": true,
+    "name": "Pay-As-You-Go",
+    "state": "Enabled",
+    "tenantId": "0fb95fd9-f42f-4c78-94c9-e3d01c2bc5af",
+    "user": {
+      "name": "javierlarin72@gmail.com",
+      "type": "user"
+    }
+  }
+]
 ```
 
-Credentials can now be added by running the command:
+Your Azure credentials can now be added to Juju by running the command:
 
 ```bash
 juju add-credential azure
 ```
-The first question will ask for an arbitrary credential name, which you choose
+
+You will first be asked for an arbitrary credential name, which you choose
 for yourself.  This will be how you remember and refer to this Azure credential
 in Juju. The second question will ask you to select an 'Auth Type' from the
 following two options:
 
-```no-highlight
-interactive
-service-principal-secret
-```
+- interactive
+- service-principal-secret
 
 The default option is `interactive` and you can either type 'interactive' or
 press 'Enter' to continue. 
 
-!!! Note: 
-    The 'interactive' option is far quicker and easier than manually adding
-    credentials via the 'service-principal-secret' option, but instructions for
-    this are covered in the [Manually adding credentials](#manually-adding-credentials)
-    section.
+The 'interactive' option is far quicker and easier than manually adding
+credentials via the 'service-principal-secret' option, but instructions for
+this are covered in the [Manually adding
+credentials](#manually-adding-credentials) section below. Follow this manual
+process if the 'interactive' option fails, or you want to configure automated
+testing in a new environment.
 
-Finally, you will be asked for your Azure subscription id. Enter the value
-alongside *ID* in the output from `azure account show` command, as shown above. You
-will then be asked to step through the browser authentication process again to
-validate **Juju CLI** against your Azure cloud. 
+You then will be asked for your Azure subscription id (***id*** from the
+`az login` credentials output, as shown above). Entering this is optional, as your Azure
+credentials will be automatically retrieved by Juju by pressing enter. 
 
-Once the authentication is successful, you will see output similar to the
-following:
+Once the authentication is successful, you will see the following:
 
-```bash
-Authenticated as "Javier fdgsfdrgdf-fexd-4e87-a48d-ef3534699215b76".
+```no-highlight
 Credentials added for cloud azure.
 ```
 
@@ -136,6 +128,10 @@ in the [Azure portal][azureportal].
 
 ## Manually adding credentials
 
+The manual option is useful if Juju fails to automatically gather your
+credentials, or if you want to automate the process within a testing
+environment.
+
 Selecting the `service-principal-secret` authentication option when running
 `juju add-credential azure` will require you to configure and retrieve specific
 details from your Azure cloud: 
@@ -149,7 +145,7 @@ enter them into the command, replace the variable name we give with the actual
 ID that corresponds to the variable.
 
 !!! Note:
-    Make sure you have the Azure CLI installed and that you've used `azure login`
+    Make sure you have the Azure CLI installed and that you've used `az login`
     to authorize the session. See **[Credentials][credentials]** above for more
     details.
 
@@ -158,21 +154,29 @@ ID that corresponds to the variable.
 List your account. Note the subscription ID, the **SUB_ID**.
 
 ```bash
-azure account list
+az account list
 ```
 
-**SUB_ID** will appear on a line like this:
+**SUB_ID** will appear on the line labelled **id**:
 
-```no-highlight
-info:    Executing command account list
-data:    Name           Id                                    Current  State
-data:    -------------  ------------------------------------  -------  -------
-data:    Pay-As-You-Go  f717c8c1-8e5e-4d38-be7f-ed1e1c879e18  true     Enabled
-info:    account list command OK
+```yaml
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "f717c8c1-8e5e-4d38-be7f-ed1e1c879e18",
+    "isDefault": true,
+    "name": "Pay-As-You-Go",
+    "state": "Enabled",
+    "tenantId": "0fb95fd9-f42f-4c78-94c9-e3d01c2bc5af",
+    "user": {
+      "name": "javierlarin72@gmail.com",
+      "type": "user"
+    }
+  }
+]
 ```
 
-In the output of this command, the **SUB_ID** is not labeled as such. In our
-sample it was next to last line, so:
+In our sample, **SUB_ID** is the second line line, so:
 
 ```bash
 SUB_ID=f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
@@ -180,8 +184,7 @@ SUB_ID=f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
 
 ### `application-password` and  `application-id`
 
-Create a password for the application to use, the **APP_PASSWORD**. In our
-sample,
+Create a password for the application to use. In our sample:
 
 ```bash
 APP_PASSWORD=some_password
@@ -190,68 +193,104 @@ APP_PASSWORD=some_password
 Now create an Active Directory (Kerberos) server principal:
 
 ```bash
-azure ad sp create --name "ubuntu.example.com" --password $APP_PASSWORD
+az ad sp create-for-rbac --name "ubuntu.example.com" --password $APP_PASSWORD
 ```
 
-The `--name` option is arbitrary but you should use a value that make sense for
-your environment. The command output will be similar to the following:
+The `--name` option is arbitrary but you should use a unique value that makes
+sense for your environment. The command output will be similar to the
+following:
 
-```no-highlight
-info:    Executing command ad sp create
-+ Creating application ubuntu.example.com
-+ Creating service principal for application  e03f5baa-b63c-4a75-a52e-5ed55d9343ef
-data:    Object Id:               8ff5e077-c5c2-40ec-abd8-ba9d4c288c17
-data:    Display Name:            ubuntu.example.com
-data:    Service Principal Names:
-data:                             e03f5baa-b63c-4a75-a52e-5ed55d9343ef
-data:                             http://ubuntu.example.com
-info:    ad sp create command OK
+```yaml
+{
+  "appId": "01dfe0e9-f088-4d00-9fcf-2129de64d5d3",
+  "displayName": "ubuntu.example.com",
+  "name": "http://ubuntu.example.com",
+  "password": "$APP_PASSWORD",
+  "tenant": "0fb95fd9-f42f-4c78-94c9-e3d01c2bc5af"
+}
 ```
 
-Make a note of the value that follows *Creating service principal for
-application*, as this is the **APP_ID**. Also make a note of `Object ID`, which
-we'll refer to as **OBJ_ID**
+We'll be using the value that follows **appId** as **APP_ID** and **tenant** as
+**TENANT_ID** (used later). Also make a note of `Object ID`, which we'll refer
+to as **OBJ_ID**
 
-Now grant permissions to the principal with the following command:
+Now grant permissions to the principal with the following command, replacing
+the value after `--assignee` with the **appId** output from the previous
+command:
 
 ```bash
-azure role assignment create --objectId $OBJ_ID -o Owner
+az role assignment create --assignee 01dfe0e9-f088-4d00-9fcf-2129de64d5d3 --role Owner
+```
+The above command outputs a glut of information:
+
+```yaml
+{
+  "id":
+"/subscriptions/49d8c50b-e693-4be8-b906-c7a859149486/providers/Microsoft.Authorization/roleAssignments/2ca6dd92-6985-48ce-ad21-16b6d11313cf",
+  "name": "2ca63292-6325-48ce-ad21-16b6d32313cf",
+  "properties": {
+    "principalId": "5d2384b6-6782-4cf0-9532-001ca3291097",
+    "roleDefinitionId":
+"/subscriptions/32d8c32b-e693-32e8-b326-c7a859149486/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    "scope": "/subscriptions/49d8c50b-e693-4be8-b906-c7a859149486"
+  },
+  "type": "Microsoft.Authorization/roleAssignments"
+}
 ```
 
-The above command will successfully conclude with 'role assignment create
-command OK'.
-
-### `tenant-id`
-
-Get the tenant id, the **TENANT_ID**:
+You can now test these values by logging in using the application principal as
+your identity:
 
 ```bash
-azure account show
-```
-In our sample it was on a line like this:
-
-```bash
-data:    Tenant ID                   : 0fb95fd9-f42f-4c78-94c9-e3d01c2bc5af
-```
-
-You can test by logging in using the application principal as your identity:
-
-```bash
-azure login \
-        -u "$APP_ID" \
+az login --service-principal \
+        -u "$APP_NAME" \
         -p "$APP_PASSWORD" \
-        --service-principal \
         --tenant "$TENANT_ID"
+```
+
+Command output will look similar to the following:
+
+```yaml
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "49d8c50b-e693-4be8-b906-c7a859149486",
+    "isDefault": true,
+    "name": "Pay-As-You-Go",
+    "state": "Enabled",
+    "tenantId": "0fb95fd9-f42f-4c78-94c9-e3d01c2bc5af",
+    "user": {
+      "name": "http://ubuntu2.example.com",
+      "type": "servicePrincipal"
+    }
+  }
+]
 ```
 
 You can now run the interactive `juju add-credential azure` command. Select
 `service-principal-secret` as the Auth Type, and supply the following details,
 discovered above, when asked:
 
-```bash
-APP_ID
-SUB_ID
-APP_PASSWORD
+- **APP_ID**
+- **SUB_ID**
+- **APP_PASSWORD**
+
+A typical `add-credential` step-through will look similar to the following:
+
+```no-highlight
+Enter credential name: az-manual
+
+Auth Types
+  interactive
+  service-principal-secret
+
+Select auth type [interactive]: service-principal-secret
+
+Enter application-id: http://ubuntu.example.com
+Enter subscription-id: 49d8c50b-e693-4be8-b906-c7a859149486
+Enter application-password: $APP_PASSWORD
+
+Credentials added for cloud azure.
 ```
 
 You can now [create the controller](#create-controller).
@@ -279,7 +318,8 @@ availability sets affect uptime guarantees.
 [azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
 [azureportal]: http://portal.azure.com
 [jaas]: ./getting-started.html "Getting Started with Juju as a Service"
-[azurecli]: https://azure.microsoft.com/en-us/features/cloud-shell/
+[azurecli]: https://docs.microsoft.com/en-us/cli/azure/overview 
 [snapcraft]: https://snapcraft.io/
 [npminfo]: https://docs.npmjs.com/getting-started/what-is-npm
-[azurecommands]: https://docs.microsoft.com/en-us/azure/virtual-machines/azure-cli-arm-commands
+[azuretwo]: https://github.com/Azure/azure-cli
+[azuretwoinstall]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
