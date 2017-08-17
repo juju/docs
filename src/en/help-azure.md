@@ -190,10 +190,11 @@ Create a password for the application to use. In our sample:
 APP_PASSWORD=some_password
 ```
 
-Now create an Active Directory (Kerberos) server principal:
+Now create an Active Directory (Kerberos) server principal and grant the
+required resource permissions by assigning a role of ***Owner***:
 
 ```bash
-az ad sp create-for-rbac --name "ubuntu.example.com" --password $APP_PASSWORD
+az ad sp create-for-rbac --name "ubuntu.example.com" --password $APP_PASSWORD --role Owner
 ```
 
 The `--name` option is arbitrary but you should use a unique value that makes
@@ -211,32 +212,7 @@ following:
 ```
 
 We'll be using the value that follows **appId** as **APP_ID** and **tenant** as
-**TENANT_ID** (used later). Also make a note of `Object ID`, which we'll refer
-to as **OBJ_ID**
-
-Now grant permissions to the principal with the following command, replacing
-the value after `--assignee` with the **appId** output from the previous
-command:
-
-```bash
-az role assignment create --assignee 01dfe0e9-f088-4d00-9fcf-2129de64d5d3 --role Owner
-```
-The above command outputs a glut of information:
-
-```yaml
-{
-  "id":
-"/subscriptions/49d8c50b-e693-4be8-b906-c7a859149486/providers/Microsoft.Authorization/roleAssignments/2ca6dd92-6985-48ce-ad21-16b6d11313cf",
-  "name": "2ca63292-6325-48ce-ad21-16b6d32313cf",
-  "properties": {
-    "principalId": "5d2384b6-6782-4cf0-9532-001ca3291097",
-    "roleDefinitionId":
-"/subscriptions/32d8c32b-e693-32e8-b326-c7a859149486/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
-    "scope": "/subscriptions/49d8c50b-e693-4be8-b906-c7a859149486"
-  },
-  "type": "Microsoft.Authorization/roleAssignments"
-}
-```
+**TENANT_ID**. 
 
 You can now test these values by logging in using the application principal as
 your identity:
