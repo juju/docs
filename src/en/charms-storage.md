@@ -37,6 +37,9 @@ description of each.
 [`detach-storage`][commands-detach-storage]
 : Detaches a storage instance from a unit. Storage is preserved.
 
+[`import-filesystem`][commands-import-filesystem]
+: Imports a filesystem into a model.
+
 [`remove-storage`][commands-remove-storage]
 : Removes a storage instance from a model. Storage is destroyed.
 
@@ -182,10 +185,6 @@ Assuming the storage provider supports it, storage can be created and attached
 to a unit using `juju add-storage`. Juju will ensure the storage is allowed to
 attach to the unit's machine.
 
-!!! Note:
-    Currently, it is not possible to add storage to the model without also
-    attaching it to a unit.
-
 Charms can specify a maximum number of storage instances. In the case of the
 charm 'postgresql', a maximum of one is allowed for 'pgdata'. If an attempt is
 made to exceed it, Juju will return an error.
@@ -197,6 +196,10 @@ charm specifies a minimum of zero for 'pgdata' whereas another charm may specify
 a different number. In any case, if detaching storage from a unit would bring
 the total number of storage instances below the minimum, Juju will return an
 error.
+
+It is not possible to add storage to a model without also attaching it to a
+unit. However, with the `juju import-filesystem` command, it is possible to add
+storage to a model that has been previously released from a removed model.
 
 #### Examples
 
@@ -288,6 +291,17 @@ To destroy a model while keeping intact all existing storage volumes:
 ```bash
 juju destroy-model default --release-storage
 ```
+
+Assuming the above model was LXD-based, create a new model and import the
+released storage volume into it, giving it a storage name of 'pgdata':
+
+```bash
+juju add-model default
+juju import-filesystem lxd juju:juju-7a544c-filesystem-0 pgdata
+```
+
+Above, the volume ID is given by the backing LXD pool ('juju') and the volume
+name (seen with `lxc storage volume list juju`).
 
 ### Cross-model storage
 
@@ -437,13 +451,24 @@ provider currently supports a single pool configuration attribute:
 
 ### LXD (lxd)
 
-LXD-based models have access to the 'lxd' storage provider. The LXD provider
-does not currently have any specific configuration options.
-
 !!! Note:
     To get an LXD version (at least 2.16) on either Ubuntu 14.04 LTS (Trusty)
     or Ubuntu 16.04 LTS (Xenial) that has the 'lxd' storage provider feature
     the [LXD:stable PPA][ppa-lxd] will be required.
+
+LXD-based models have access to the 'lxd' storage provider. The LXD provider
+has two configuration options:
+
+- **driver**
+
+    This is the LXD storage driver (e.g. zfs, btrfs, lvm, ceph).
+
+- **lxd-pool**
+
+    The name to give to the corresponding storage pool in LXD.
+
+Any other parameters will be passed along to LXD (e.g. zfs.pool_name). See
+upstream [LXD storage configuration][upstream-lxd-storage-configuration].
 
 Every LXD-based model comes with a minimum of one LXD-specific Juju storage
 pool called 'lxd'. If ZFS and/or BTRFS are present when the controller is
@@ -563,6 +588,7 @@ For guidance on how to create a charm that uses these storage features see
 [commands-attach-storage]: ./commands.html#attach-storage
 [commands-create-storage-pool]: ./commands.html#create-storage-pool
 [commands-detach-storage]: ./commands.html#detach-storage
+[commands-import-filesystem]: ./commands.html#import-filesystem
 [commands-show-storage]: ./commands.html#show-storage
 [commands-storage]: ./commands.html#storage
 [commands-storage-pools]: ./commands.html#storage-pools
@@ -574,8 +600,6 @@ For guidance on how to create a charm that uses these storage features see
 [generic-storage-loop]: https://en.wikipedia.org/wiki/Loop_device
 [generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
 [generic-storage-tmpfs]: https://en.wikipedia.org/wiki/Tmpfs
-[anchor__loop-devices-and-lxd]: #loop-devices-and-lxd
-[anchor__storage-constraints-juju-deploy]: #juju-deploy
 [charm-store-postgresql]: https://jujucharms.com/postgresql
 [charm-store-ceph-osd]: https://jujucharms.com/ceph-osd
 [ceph-charm]: https://jujucharms.com/ceph-osd
@@ -584,5 +608,8 @@ For guidance on how to create a charm that uses these storage features see
 [aws-ebs-volume-types]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
 [wikipedia-iops]: https://en.wikipedia.org/wiki/IOPS
 [ppa-lxd]: https://launchpad.net/~ubuntu-lxc/+archive/ubuntu/lxd-stable
+[upstream-lxd-storage-configuration]: https://github.com/lxc/lxd/blob/master/doc/storage.md
 
+[anchor__loop-devices-and-lxd]: #loop-devices-and-lxd
+[anchor__storage-constraints-juju-deploy]: #juju-deploy
 [anchor__storage-providers]: #storage-providers
