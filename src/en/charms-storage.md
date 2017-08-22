@@ -291,7 +291,7 @@ To destroy a model while keeping intact all existing storage volumes:
 juju destroy-model default --release-storage
 ```
 
-Assuming the above model was LXD-based, create a new model and import the
+Assuming the above model was LXD-based, to create a new model and import the
 released storage volume into it, giving it a storage name of 'pgdata':
 
 ```bash
