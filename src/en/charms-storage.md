@@ -198,8 +198,8 @@ the total number of storage instances below the minimum, Juju will return an
 error.
 
 It is not possible to add storage to a model without also attaching it to a
-unit. However, with the `juju import-filesystem` command, it is possible to add
-storage to a model that has been previously released from a removed model.
+unit. However, with the `juju import-filesystem` command, you can add storage
+to a model that has been previously released from a removed model.
 
 #### Examples
 
@@ -300,8 +300,11 @@ juju add-model default
 juju import-filesystem lxd juju:juju-7a544c-filesystem-0 pgdata
 ```
 
-Above, the volume ID is given by the backing LXD pool ('juju') and the volume
-name (seen with `lxc storage volume list juju`).
+The determination of the volume ID is dependent upon cloud type. Above, the
+volume ID is given by the backing LXD pool ('juju' in this case) and the volume
+name (obtained with `lxc storage volume list <lxd-pool>`). The LXD storage
+provider and associated LXD pools are described in detail
+[below][anchor__storage-providers-lxd].
 
 ### Cross-model storage
 
@@ -467,8 +470,9 @@ has two configuration options:
 
     The name to give to the corresponding storage pool in LXD.
 
-Any other parameters will be passed along to LXD (e.g. zfs.pool_name). See
-upstream [LXD storage configuration][upstream-lxd-storage-configuration].
+Any other parameters will be passed to LXD (e.g. zfs.pool_name). See upstream
+[LXD storage configuration][upstream-lxd-storage-configuration] for LXD storage
+parameters.
 
 Every LXD-based model comes with a minimum of one LXD-specific Juju storage
 pool called 'lxd'. If ZFS and/or BTRFS are present when the controller is
@@ -613,3 +617,4 @@ For guidance on how to create a charm that uses these storage features see
 [anchor__loop-devices-and-lxd]: #loop-devices-and-lxd
 [anchor__storage-constraints-juju-deploy]: #juju-deploy
 [anchor__storage-providers]: #storage-providers
+[anchor__storage-providers-lxd]: #lxd-(lxd)
