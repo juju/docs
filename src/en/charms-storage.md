@@ -2,7 +2,6 @@ Title: Using Juju Storage
 TODO:  bug tracking: https://pad.lv/1708212
        bug tracking: https://pad.lv/1709507
        bug tracking: https://pad.lv/1709508
-       Revise Note 'not possible to add storage' after reviewing command `import-filesystem`
 
 # Using Juju Storage
 
@@ -197,7 +196,7 @@ a different number. In any case, if detaching storage from a unit would bring
 the total number of storage instances below the minimum, Juju will return an
 error.
 
-It is not possible to add storage to a model without also attaching it to a
+It is not possible to add new storage to a model without also attaching it to a
 unit. However, with the `juju import-filesystem` command, you can add storage
 to a model that has been previously released from a removed model.
 
