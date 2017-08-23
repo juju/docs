@@ -103,7 +103,7 @@ format.
 For example, running the command:
 
 ```bash
-juju run-action git/0 list-repo --wait
+juju run-action git/0 list-repos --wait
 ```
 
 Will return something like:
@@ -147,7 +147,7 @@ timing:
 You can also set parameters indirectly via a YAML file, although you can
 override the parameters within the file by providing them directly.
 
-*Example params.yml:*
+*Example params.yaml:*
 ```yaml
 repo: myproject
 sure: no
