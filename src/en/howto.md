@@ -9,6 +9,7 @@ together to do something useful. Prepare to get things done!
 
 - [Configure metrics gathering with Prometheus](./howto-prometheus.html)
 - [Set up a private cloud with Simplestreams](./howto-privatecloud.html)
+- [Change an application's series (prior to 2.3)](./howto-applicationupdateseries.html)
 
 Got an idea for something to add here? Check out [how to contribute to the
 docs](contributing.html)
