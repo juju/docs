@@ -1,4 +1,7 @@
 Title: Getting started with Juju and LXD
+TODO:  Warning: Ubuntu release versions hardcoded
+       General review required (exact commands and their output especially)
+       Subnet in the walkthrough and the example/screenshots do not correspond
 
 # Getting started with Juju and LXD
 
@@ -6,16 +9,17 @@ Title: Getting started with Juju and LXD
 locally. You can use this local cloud to build the same models with Juju that
 you can build on other public and private clouds. Using LXD as a method to
 test, verify, and replicate complex software deployments is a powerful tool
-that every Juju user needs. These instructions will get you up and running and
-deliver the best-possible experience with Juju. At the moment, that means
-using the latest release of Ubuntu with
-'[Long Term Support][long-term-support]' (LTS):
-[16.04 LTS (Xenial)][Xenial-download].
+that every Juju user needs. These instructions will deliver the best-possible
+experience with Juju. At the moment, that means using
+[Ubuntu 16.04 LTS][Xenial-download] (Xenial). See
+[Long Term Support][long-term-support] for more information on Ubuntu LTS
+releases.
 
 Your system will need the following:
 
 - [LXD][lxd-upstream]: a hypervisor for LXC, providing fast, secure containers.
-- [ZFS][ZFS-wiki]: a highly efficient and feature-rich filesystem and logical volume manager.
+- [ZFS][ZFS-wiki]: a highly efficient and feature-rich filesystem and logical
+  volume manager.
 
 
 ## Install the software
@@ -40,8 +44,8 @@ should already be the case but you can confirm this by running the command:
 groups
 ```
 
-Your groups may vary, but if `lxd` is absent you can add yourself to the `lxd`
-group with:
+Your groups may vary, but if `lxd` is absent you can update your group
+membership group with:
 
 ```bash
 newgrp lxd
@@ -125,10 +129,12 @@ answers. IPv6 networking (the last question) is not required for Juju.
 
 LXD is now configured to work with Juju.
 
-!!! Note: LXD adds iptables (firewall) rules to allow traffic to the
-subnet/bridge it created. If you subsequently add/change firewall settings
-(e.g. with `ufw`), ensure that such changes have not interfered with Juju's
-ability to communicate with LXD.
+!!! Note:
+    LXD adds iptables (firewall) rules to allow traffic to the
+    subnet/bridge it created. If you subsequently add/change firewall settings
+    (e.g. with `ufw`), ensure that such changes have not interfered with Juju's
+    ability to communicate with LXD. Juju requires inbound traffic for TCP port
+    8443 from the LXD subnet.
 
 ## Create a controller
 
@@ -140,10 +146,10 @@ The `juju bootstrap` command is used to create the controller. The command
 expects a name (for referencing this controller) and a cloud to use. The LXD
 'cloud' is known as 'localhost' to Juju.
 
-For our localhost cloud, we will create a controller called 'lxd-test':
+For our localhost cloud, we will create a controller called 'lxd-controller':
 
 ```bash
-juju bootstrap localhost lxd-test
+juju bootstrap lxd lxd-controller
 ```
 
 This may take a few minutes as LXD must download an image for Xenial. A cache
@@ -157,18 +163,16 @@ juju controllers
 ```
 
 This will return a list of the controllers known to Juju. You can see our
-'lxd-test' controller listed.
+'lxd-controller' listed.
 
 ```no-highlight
-Use --refresh flag with this command to see the latest information.
-
-Controller  Model    User   Access     Cloud/Region         Models  Machines HA  Version
-lxd-test*   default  admin  superuser  localhost/localhost       2         1 none  2.0.0
+Controller       Model    User   Access     Cloud/Region         Models Machines    HA  Version
+lxd-controller*  default  admin  superuser  localhost/localhost       2        1  none  2.2.2
 ```
 
 A newly-created controller has two models: The 'controller' model, which should
 be used only for internal Juju management, and a 'default' model, which is
-ready for actual use. The controller model can only be destroyed by destroying
+ready for actual use. The controller model can only be removed by destroying
 the controller itself.
 
 The following command shows the currently active controller, model, and user:
@@ -180,19 +184,19 @@ juju whoami
 In our example, the output should look like this:
 
 ```no-highlight
-Controller:  lxd-test
+Controller:  lxd-controller
 Model:       default
 User:        admin
 ```
 
 ## Deploy applications
 
-Juju is now ready to deploy applications from among the hundreds included in
+You are now ready to deploy applications from among the hundreds included in
 the [Juju charm store][charm store]. It is a good idea to test your new model.
-How about an MediaWiki site?
+How about a MediaWiki site?
 
 ```bash
-juju deploy cs:bundle/mediawiki-single
+juju deploy cs:bundle/wiki-simple
 ```
 
 This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
@@ -202,8 +206,8 @@ model between them, configures the wiki to use the newly created database
 instance. This is part of the magic of Juju: it isn't just about deploying
 software, Juju also knows how applications coordinate together.
 
-Installing shouldn't take long. You can check on how far Juju has got by running
-the command:
+Installing shouldn't take long. You can check on how far Juju has got by
+running the command:
 
 ```bash
 juju status
@@ -212,23 +216,18 @@ juju status
 When the applications have been installed, the output of the above command will
 look something like this:
 
-![juju status](./media/juju-mediawiki-status.png)
+![juju status](./media/tut-lxd-wiki-simple-status.png)
 
 There is a lot of useful information there! The important parts for now are
 the 'App' section, which shows that MediaWiki and MySQL are installed, and the
 'Unit' section, which shows the IP addresses allocated to each. These addresses
 correspond to the subnet we created for LXD earlier on.
 
-Juju models which applications have firewalls that allow external access on
-clouds that support firewall controls. You can update the model by using the
-`juju expose <application>` command. In our case we would want to
-`juju expose mediawiki`.
-
 From the status output, we can see that the IP address for the MediaWiki
-site we have created is 10.154.173.2 Open a browser and enter that address
+site we have created is 10.248.243.81. Point your browser to that address
 to see the site.
 
-!["mediawiki site"](./media/juju-mediawiki-site.png)
+![juju status](./media/tut-lxd-wiki-simple-browser.png)
 
 Congratulations, you have just deployed an application with Juju!
 
