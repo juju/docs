@@ -22,7 +22,7 @@ the magic of Juju that makes it happen.
 
 ## Installation
 
-First, install Juju 2, if you have not done so already. See
+First, install Juju, if you have not done so already. See
 [the install docs][install].
 
 ## Pick a cloud
@@ -221,7 +221,7 @@ to want to share. Find out how easy it is to
 [gcetrial]: https://console.cloud.google.com/freetrial
 [gcedashboard]: https://console.cloud.google.com
 [gcenewproject]: ./help-google.html#create-a-project
-[instal]: ./reference-install.html
+[install]: ./reference-install.html
 [jujuterms]: ./juju-concepts.html
 [charmhaproxy]: https://jujucharms.com/haproxy/37
 [charmpsql]: https://jujucharms.com/postgresql/105
