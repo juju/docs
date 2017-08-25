@@ -2,6 +2,7 @@ Title: Getting started with Juju and LXD
 TODO:  Warning: Ubuntu release versions hardcoded
        General review required (exact commands and their output especially)
        Subnet in the walkthrough and the example/screenshots do not correspond
+       Some command output is CLI and some is via Desktop terminal
 
 # Getting started with Juju and LXD
 
@@ -224,16 +225,17 @@ the 'App' section, which shows that MediaWiki and MySQL are installed, and the
 correspond to the subnet we created for LXD earlier on.
 
 From the status output, we can see that the IP address for the MediaWiki
-site we have created is 10.248.243.81. Point your browser to that address
+site we have created is 10.248.243.94. Point your browser to that address
 to see the site.
 
 ![juju status](./media/tut-lxd-wiki-simple-browser.png)
 
 Congratulations, you have just deployed an application with Juju!
 
-!!! Note: To remove all the applications in the model you just created, it is
-often quickest to destroy the model with the command
-`juju destroy-model default` and then [create a new model][models].
+!!! Note:
+    The easiest way to remove all the applications in a model and start afresh
+    is to destroy the model (`juju destroy-model`) and then create a new one
+    (`juju add-model`).
 
 
 ## Next Steps
@@ -257,6 +259,5 @@ We suggest you continue your journey by discovering:
 [install]: ./reference-install.html
 [keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
 [long-term-support]: https://wiki.ubuntu.com/LTS "Long Term Support"
-[models]: ./models.html
 [share]: ./tut-users.html
 [tut-cloud]: ./tut-google.html
