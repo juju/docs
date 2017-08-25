@@ -2,6 +2,9 @@ Title: Creating additional controllers
 TODO:  Still WIP: needs refinement and further details
        Remove default model?
        Image for GCE Dashboard with resources
+       Image commented out due to inconsistent behaviour
+       This tutorial is top-heavy with GUI stuff. Consider a GUI tutorial
+       Menu entry and page title do not correspond well
 
 # Create a Google Compute Engine controller
 
@@ -12,15 +15,18 @@ less than 10 minutes.  But you could just as easily use Amazon AWS or Microsoft
 Azure, and just as easily deploy Kubernetes, Cassandra or even OpenStack. It's
 the magic of Juju that makes it happen.
 
-!!! Note: If you already have a controller configured, such as the LXD
-controller created in the '[Getting started with Juju][first]' page, this new
-controller will be seamlessly added alongside.
+!!! Note:
+    If you already have a controller configured, such as the LXD
+    controller created in the '[Getting started with Juju][first]' page, this new
+    controller will be seamlessly added alongside.
 
 ## Installation
+
 First, install Juju 2, if you have not done so already. See
 [the install docs][install].
 
 ## Pick a cloud
+
 Type `juju clouds` and you'll see output very similar to the following:
 
 ```bash
@@ -28,12 +34,12 @@ Cloud        Regions  Default          Type        Description
 aws               14  us-east-1        ec2         Amazon Web Services
 aws-china          1  cn-north-1       ec2         Amazon China
 aws-gov            1  us-gov-west-1    ec2         Amazon (USA Government)
-azure             24  centralus        azure       Microsoft Azure
+azure             26  centralus        azure       Microsoft Azure
 azure-china        2  chinaeast        azure       Microsoft Azure China
 cloudsigma         5  hnl              cloudsigma  CloudSigma Cloud
-google             7  us-east1         gce         Google Cloud Platform
+google             8  us-east1         gce         Google Cloud Platform
 joyent             6  eu-ams-1         joyent      Joyent Cloud
-oracle             5  uscom-central-1  oracle      Oracle Cloud
+oracle             5  uscom-central-1  oracle      Oracle Compute Cloud Service
 rackspace          6  dfw              rackspace   Rackspace Cloud
 localhost          1  localhost        lxd         LXD Container Hypervisor
 ```
@@ -46,8 +52,8 @@ clouds you have credentials for.
 ## Download GCE credentials
 
 All you need to get started with GCE and Juju is a JSON-formatted credentials
-file for a new Compute Engine API-enabled project. Either sign up for a [free
- trial][gcetrial], or connect to your [GCE dashboard][gcedashboard].
+file for a new Compute Engine API-enabled project. Either sign up for a
+[free trial][gcetrial], or connect to your [GCE dashboard][gcedashboard].
 If needed, see our GCE [Create a Project][gcenewproject] documentation for
 further help.
 
@@ -70,6 +76,7 @@ Select auth-type:
 Enter file: /home/graham/.local/share/juju/gcejuju.json
 Credentials added for cloud google.
 ```
+
 You can now start using Juju with your GCE cloud.
 
 ## Bootstrap Juju
@@ -77,36 +84,12 @@ You can now start using Juju with your GCE cloud.
 Pushing Juju onto your new cloud is as simple as typing:
 
 ```bash
-juju bootstrap google mycloud
+juju bootstrap google google-controller
 ```
+
 This should only take a few minutes. You could use this time to brush up on
 some [Juju terminology][jujuterms].
 
-When complete, Juju will have instantiated a new controller and created a
-default model with output similar to the following:
-
-```bash
-Creating Juju controller "mycloud" on google/us-east1
-Looking for packaged Juju agent version 2.1.1 for amd64
-Launching controller instance(s) on google/us-east1...
- - juju-ea6a48-0 (arch=amd64 mem=3.5G cores=4)
-Fetching Juju GUI 2.4.3
-Waiting for address
-Attempting to connect to 104.196.168.186:22
-Attempting to connect to 10.142.0.2:22
-Logging to /var/log/cloud-init-output.log on the bootstrap machine
-Running apt-get update
-Running apt-get upgrade
-Installing curl, cpu-checker, bridge-utils, cloud-utils, tmux
-Fetching Juju agent version 2.1.1 for amd64
-Installing Juju machine agent
-Starting Juju machine agent (service jujud-machine-0)
-Bootstrap agent now started
-Contacting Juju controller at 10.142.0.2 to verify accessibility...
-Bootstrap complete, "mycloud" controller now available.
-Controller machines are in the "controller" model.
-Initial model "default" added.
-```
 ## Create a model
 
 Before deploying an application, we're going to first create a new model.
@@ -115,10 +98,10 @@ into environments that can be seamlessly managed, deployed and scaled.
 
 For example, different models can be deployed to different regions. You can see
 which regions your cloud supports with the `juju show-cloud google` command,
-and create a new model hosted on `europe-west1` with the following:
+and create a new model hosted on `us-east1` with the following:
 
 ```bash
-juju add-model gce-test europe-west1
+juju add-model default us-east1
 ```
 
 ## Deploy an application
@@ -126,8 +109,8 @@ juju add-model gce-test europe-west1
 Applications themselves are deployed either as 'charms' or as 'bundles'. Charms
 are singular applications, such as [Haproxy][charmhaproxy] or
 [PostgreSQL][charmpsql], whereas bundles are a curated collection of charms and
-their relationships. Bundles are ideal for deploying [OpenStack][bundleopenstack], for instance,
-or [Kubernetes][bundlekubernetes].
+their relationships. Bundles are ideal for deploying
+[OpenStack][bundleopenstack], for instance, or [Kubernetes][bundlekubernetes].
 
 It's also possible to [write your own charms][diycharm] and deploy locally, or
 release via the [Charm Store][charmstore].
@@ -139,23 +122,25 @@ automatically:
 ```bash
 juju deploy haproxy
 ```
+
 You can check on the state of any deployment, model or controller with the
 'juju status' command. If you query the status directly after deploying
 'haproxy', for instance, you'll something similar to this:
 
+<!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju status -->
 ```bash
-Model     Controller  Cloud/Region         Version
-gce0test  mycloud     google/europe-west1  2.1.1
+Model    Controller         Cloud/Region     Version  SLA
+default  google-controller  google/us-east1  2.2.2    unsupported
 
 App      Version  Status   Scale  Charm    Store       Rev  OS      Notes
-haproxy           waiting    0/1  haproxy  jujucharms   40  ubuntu
+haproxy           waiting    0/1  haproxy  jujucharms   41  ubuntu
 
 Unit       Workload  Agent       Machine  Public address  Ports  Message
-haproxy/0  waiting   allocating  0                               waiting for
-machine
+haproxy/0  waiting   allocating  0        35.185.84.188          waiting for machine
 
-Machine  State    DNS  Inst id  Series  AZ
-0        pending       pending  xenial
+Machine  State    DNS            Inst id        Series  AZ          Message
+0        pending  35.185.84.188  juju-8e884f-0  xenial  us-east1-b  RUNNING
 
 Relation  Provides  Consumes  Type
 peer      haproxy   haproxy   peer
@@ -170,10 +155,11 @@ your default browser, type the following:
 ```bash
 juju gui --browser
 ```
-Then use the output username and password to connect to the GUI via your browser:
 
-![Juju GUI login](media/tut-gce-gui_login21.png)
+Then use the output username and password to connect to the GUI via your
+browser:
 
+![Juju GUI login](media/tut-gce-gui_login280.png)
 
 After logging in, you'll see the Juju GUI overview for the current model. Not
 only does the web interface show you the current state of your applications and
@@ -187,7 +173,10 @@ profile (which currently says 'admin'). In this drop-down list you should
 find both 'default' and 'gce-test' models, and selecting one will switch the
 current model.
 
+<!-- REMOVED DUE TO INCONSISTENT BEHAVIOUR WITH JUJU 2.2.2
+No app/model are visible in the GUI
 ![Juju GUI model switching menu](media/tut-gce-gui_model21.png)
+ -->
 
 To create a new model from the GUI, click on 'Profile' from the drop-down model
 list. This will open a more detailed list of the current models. A new model
