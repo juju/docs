@@ -125,10 +125,11 @@ answers. IPv6 networking (the last question) is not required for Juju.
 
 LXD is now configured to work with Juju.
 
-!!! Note: LXD adds iptables (firewall) rules to allow traffic to the
-subnet/bridge it created. If you subsequently add/change firewall settings
-(e.g. with `ufw`), ensure that such changes have not interfered with Juju's
-ability to communicate with LXD.
+!!! Note:
+    LXD adds iptables (firewall) rules to allow traffic to the subnet/bridge it
+    created. If you subsequently add/change firewall settings (e.g. with ufw),
+    ensure that such changes have not interfered with Juju's ability to communicate
+    with LXD. Juju requires inbound traffic for TCP port 8443 from the LXD subnet.
 
 ## Create a controller
 
