@@ -1,4 +1,5 @@
 Title: Upgrading a charm  
+TODO:  Completely devoid of CLI examples. Kindly add
 
 # Upgrade Charm
 
@@ -23,7 +24,9 @@ No other factor is used in determining compatibility: configuration settings in
 particular are converted completely naively, such that any settings from the
 original charm that share a name and type are preserved; any incompatible
 settings are removed; and any new settings take defaults as though freshly
-deployed.
+deployed. Settings may be added or updated by specifying the `--config` flag,
+pointing to a YAML-encoded application config file (see
+[Application configuration][charms-config] for details).
 
 When an application has been upgraded but a particular unit has not, the unit
 will continue to see the configuration settings from before conversion; these
@@ -76,3 +79,8 @@ bear, but it's important to know you're taking it on.
 If you encounter a charm upgrade error, you can run `git status` in the charm
 directory to see what the problem is, and use the knowledge thus gleaned to fix
 the charm and try to upgrade again.
+
+
+<!-- LINKS -->
+
+[charms-config]: ./charms-config.html
