@@ -1,5 +1,5 @@
 Title: Juju constraints
-TODO: Consider removing or editing Legacy section
+TODO:  Consider removing or editing Legacy section
 
 # Constraints
 
