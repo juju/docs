@@ -91,6 +91,7 @@
                 <li><a href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
                 <li><a href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
                 <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
+                <li><a href="developer-getting-started.html#having-your-charm-reviewed">Having your charm reviewed</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="developer-event-cycle.html">Event Cycle</a>
