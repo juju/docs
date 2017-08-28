@@ -111,6 +111,7 @@
                 <li><a href="developer-layers-interfaces.html#writing-an-interface-layer">Writing an Interface</a></li>
             </ul>
         </li>
+        <li><a href="developer-upgrade-charm.html">Upgrading</a></li>
         <li><a href="developer-terms.html">Juju Terms</a></li>
         <li><a href="developer-metrics.html">Juju Metrics</a></li>
         <li><a href="developer-resources.html">Juju Resources</a></li>
