@@ -1,13 +1,13 @@
 Title: Upgrading a charm  
 TODO:  Completely devoid of CLI examples. Kindly add
 
-# Upgrade Charm
+# Upgrade a Charm
 
-A application's charm can be changed at runtime with the `upgrade-charm`
-command. By default, it changes to the latest available version of the same
-charm; if `--revision` is specified, it changes to that revision of the
-same charm; and if `--switch` is specified it changes to any arbitrary charm,
-inferred from the argument in the same way as in `juju deploy`.
+A charm can be changed at runtime with the `upgrade-charm` command. By default,
+it changes to the latest available version of the same charm; if `--revision`
+is specified, it changes to that revision of the same charm; and if `--switch`
+is specified it changes to any arbitrary charm, inferred from the argument in
+the same way as in `juju deploy`.
 
 For a charm to replace another, though, there is a minimum standard of
 compatibility, which applies regardless of the particular change. That is:
