@@ -26,7 +26,8 @@ original charm that share a name and type are preserved; any incompatible
 settings are removed; and any new settings take defaults as though freshly
 deployed. Settings may be added or updated by specifying the `--config` flag,
 pointing to a YAML-encoded application config file (see
-[Application configuration][charms-config] for details).
+[Application configuration][charms-config] for general information on
+configuring a charm).
 
 When an application has been upgraded but a particular unit has not, the unit
 will continue to see the configuration settings from before conversion; these
