@@ -179,12 +179,18 @@ endpoint name must be left out (i.e. "foo": &lt;anything&gt; is invalid).
 
 Other available fields are:
 
-  - `series` is a list of versions of Ubuntu this charm is compatible with.
+  - `series` is a list of series that the charm supports.
+     - It can include code names of Ubuntu releases such as 'trusty' or
+       'xenial'.
+     - It can also include code names for non-Ubuntu series such as 'centos7'.
   - `terms` lists the terms the user must agree to before using the charm.
   - `min-juju-version` the minimum version of Juju this charm is compatible with.
 
 Other field names should be considered to be reserved; please don't use any not
 listed above to avoid issues with future versions of Juju.
+
+
+<!-- LINKS -->
 
 [hook-payloads]:./reference-hook-tools.html#payload-status-set
 [list-payloads]:./commands.html#list-payloads
