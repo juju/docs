@@ -33,8 +33,8 @@ This will return a status report similar to:
 <!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
 ```no-highlight
-Model    Controller         Cloud/Region     Version  SLA
-staging  google-controller  google/us-east1  2.2.2    unsupported
+Model    Controller  Cloud/Region     Version  SLA
+default  gce-test    google/us-east1  2.2.2    unsupported
 
 App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
 mariadb    10.1.26  active      1  mariadb    jujucharms    7  ubuntu
