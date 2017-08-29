@@ -45,8 +45,7 @@ should already be the case but you can confirm this by running the command:
 groups
 ```
 
-Your groups may vary, but if `lxd` is absent you can update your group
-membership group with:
+Your groups may vary, but if `lxd` is absent you can refresh your groups with:
 
 ```bash
 newgrp lxd
@@ -147,10 +146,10 @@ The `juju bootstrap` command is used to create the controller. The command
 expects a name (for referencing this controller) and a cloud to use. The LXD
 'cloud' is known as 'localhost' to Juju.
 
-For our localhost cloud, we will create a controller called 'lxd-controller':
+For our localhost cloud, we will create a controller called 'lxd-test':
 
 ```bash
-juju bootstrap lxd lxd-controller
+juju bootstrap localhost lxd-test
 ```
 
 This may take a few minutes as LXD must download an image for Xenial. A cache
@@ -164,11 +163,11 @@ juju controllers
 ```
 
 This will return a list of the controllers known to Juju. You can see our
-'lxd-controller' listed.
+'lxd-test' listed.
 
 ```no-highlight
-Controller       Model    User   Access     Cloud/Region         Models Machines    HA  Version
-lxd-controller*  default  admin  superuser  localhost/localhost       2        1  none  2.2.2
+Controller  Model    User   Access     Cloud/Region         Models Machines    HA  Version
+lxd-test*   default  admin  superuser  localhost/localhost       2        1  none  2.2.2
 ```
 
 A newly-created controller has two models: The 'controller' model, which should
@@ -185,7 +184,7 @@ juju whoami
 In our example, the output should look like this:
 
 ```no-highlight
-Controller:  lxd-controller
+Controller:  lxd-test
 Model:       default
 User:        admin
 ```
