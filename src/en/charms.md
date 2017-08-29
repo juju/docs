@@ -44,15 +44,18 @@ you should gain an understanding of:
  - Removing applications
  - Destroying your model
 
-!!! Note:
-    This walkthrough assumes you have already installed Juju, connected 
-    to a cloud and created a model. The 'default' model is created automatically 
-    when you bootstrap your environment. If you have not yet done these things, 
-    please see the [Getting Started page][started] first.
+!!! Important:
+    These instructions assume that you have already added credentials for
+    your cloud. If you have not yet done this, please see
+    [Cloud credentials][credentials] first. You can also learn about clouds
+    on the central [Clouds][clouds] page.
 
-For this walkthrough we are going to set up a simple MediaWiki site, then 
-prepare it for high traffic, before scaling it back and finally removing it 
-altogether.
+A 'default' model is created automatically when you create a controller and
+it's the model that will be used here. The controller used here is named
+'gce-test' and is based on the [Google Compute Engine][clouds-gce].
+
+We are going to set up a simple MediaWiki site, then prepare it for high
+traffic, before scaling it back and finally removing it altogether.
 
 ### Deploying the charms
 
@@ -95,8 +98,8 @@ juju status
 <!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
 ```no-highlight
-Model  Controller         Cloud/Region     Version  SLA
-prod   google-controller  google/us-east1  2.2.2    unsupported
+Model      Controller        Cloud/Region     Version  SLA
+default    gce-test	     google/us-east1  2.2.2    unsupported
 
 App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
 haproxy             unknown      1  haproxy    jujucharms   41  ubuntu
@@ -171,8 +174,8 @@ the stack:
 <!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
 ```no-highlight
-Model  Controller         Cloud/Region     Version  SLA
-prod   google-controller  google/us-east1  2.2.2    unsupported
+Model      Controller        Cloud/Region     Version  SLA
+default    gce-test	     google/us-east1  2.2.2    unsupported
 
 App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
 haproxy             unknown      1  haproxy    jujucharms   41  ubuntu  exposed
@@ -274,35 +277,34 @@ with the `juju models` command. Your output should be similar to the
 following:
 
 ```bash
-Controller: google-controller
+Controller: gce-test
 
 Model       Cloud/Region     Status     Machines  Cores  Access  Last
 connection
 controller  google/us-east1  available         1      4  admin   just now
-default     google/us-east1  available         1      1  admin   1 hour ago
-prod*       google/us-east1  available         2      2  admin   55 seconds ago
+default*    google/us-east1  available         2      2  admin   55 seconds ago
 ```
 
-To remove the 'prod' model we've been using for the MediaWiki deployment, type
-`juju destroy-model prod` and enter 'Y' to accept the warning that this step
-will destroy all machines, applications, data and other resources associated
-with that model. A few moments later you should find it no longer listed in the
+To remove the 'default' model we've been using for the MediaWiki deployment,
+type `juju destroy-model default` and accept the warning that this step will
+destroy all machines, applications, data and other resources associated with
+that model. A few moments later you should find it no longer listed in the
 output of the `juju models` command. 
 
 If you want to start again with a clean model, restoring Juju to the state it
-was in before we deployed the MediaWiki charm, you can re-create the 'prod'
-model with:
+was in before we deployed the MediaWiki charm, you can re-create the 'default'
+model with: `juju add-model default`.
 
-```bash
-juju add-model prod
-```
+For more information on the subjects we've covered here, see our documentation
+on **[deploying charms][deploy]**, **[charm relations][relations]** and
+**[scaling deployed applications][scaling]**.
 
-For more information on the subjects we've covered in this walkthough, see our 
-documentation on **[deploying charms][deploy]**, **[charm relations][relations]** 
-and **[scaling deployed applications][scaling]**.
 
+<!-- LINKS -->
 
 [deploy]: ./charms-deploying.html
 [relations]: ./charms-relations.html
 [scaling]: ./charms-scaling.html
-[started]: ./getting-started.html
+[credentials]: ./credentials.html
+[clouds]: ./clouds.html
+[clouds-gce]: ./help-google.html
