@@ -115,7 +115,10 @@ payloads:
 
 Other available fields are:
 
-  - `series` is a list of versions of Ubuntu this charm is compatible with.
+  - `series` is a list of series that the charm supports.
+     - It can include code names of Ubuntu releases such as 'trusty' or
+       'xenial'.
+     - It can also include code names for non-Ubuntu series such as 'centos7'.
 
 Other field names should be considered to be reserved; please don't use any not
 listed above to avoid issues with future versions of Juju.
