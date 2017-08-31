@@ -23,7 +23,7 @@ considerations when using spaces:
   of different spaces.
 
 !!! Note: Advanced networking features, such as 'spaces`, are currently only
-supported by MAAS.
+supported by MAAS and EC2 providers.
 
 Having multiple subnets spanning different zones within the same space enables
 Juju to perform automatic distribution of an application's units across zones
