@@ -2,27 +2,33 @@ Title: How to configure more complex networks using spaces
 
 # How to configure more complex networks using spaces
 
-Juju provides a set of features allowing the users to have better and
-finer-grained control over the networking aspects of the environment
-and service deployments in particular. Not all cloud providers support
-these enhanced networking features yet, in fact they are currently
-supported on MAAS only.
+Juju models networks using "spaces". A space is made up of one or more routable
+subnets with common ingress and egress rules. The Juju operator can model this
+topology in such a way that applications gain the required network connectivity
+without generating complex network IP maps that are not portable. This gives
+the operator much better and finer-grained control over all networking aspects
+of a model and its application deployments. 
 
-Juju network spaces (or just "spaces") represent sets of disjoint
-subnets available for running cloud instances, which may span one
-or more availability zones ("zones"). Any given subnet can be part of
-one and only one space. All subnets within a space are considered "equal"
-in terms of access control, firewall rules, and routing. Communication
-between spaces on the other hand (e.g. between instances started in
-subnets part of different spaces) will be subject to access restrictions
-and isolation.
+Spaces represent sets of subnets that are available for running cloud instances
+that may span one or more availability zones ("zones"). There are a few simple
+considerations when using spaces:
 
-Having multiple subnets spanning different zones within the same space
-allows Juju to perform automatic distribution of units of a service
-across zones inside the same space. This allows for high-availability
-for services and spreading the instances evenly across subnets and zones.
+- Any given subnet can be part of one and only one space.
+- All subnets within a space are considered "equal" in terms of access control,
+  firewall rules, and routing.
+- Communication between spaces will be subject to access restrictions and
+  isolation, such as between instances running within subnets which are members
+  of different spaces.
 
-As an example, consider an environment divided into three segments with
+!!! Note: Advanced networking features, such as 'spaces`, are currently only
+supported by MAAS and EC2 providers.
+
+Having multiple subnets spanning different zones within the same space enables
+Juju to perform automatic distribution of an application's units across zones
+inside the same space. This allows for high-availability and the spreading of
+instances evenly across subnets and zones.
+
+As an example, consider a model divided into three segments with
 distinct security requirements:
 
 - The "dmz" space for publicly-accessible services (e.g. HAProxy) providing
