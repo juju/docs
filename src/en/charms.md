@@ -6,6 +6,7 @@ TODO: Add images
 	support
       3. however, to have things 'just work', don't bother specifying anything and the
 	charm will decide which OS/version to use
+      Should probably link to charms-exposing.md instead of repeating
 
 
 # Introduction to Juju Charms
@@ -43,14 +44,18 @@ you should gain an understanding of:
  - Removing applications
  - Destroying your model
 
-!!! Note: this walkthrough assumes you have already installed Juju, connected 
-to a cloud and created a model. The 'default' model is created automatically 
-when you bootstrap your environment. If you have not yet done these things, 
-please see the [Getting Started page][started] first.
+!!! Important:
+    These instructions assume that you have already added credentials for
+    your cloud. If you have not yet done this, please see
+    [Cloud credentials][credentials] first. You can also learn about clouds
+    on the central [Clouds][clouds] page.
 
-For this walkthrough we are going to set up a simple MediaWiki site, then 
-prepare it for high traffic, before scaling it back and finally removing it 
-altogether.
+A 'default' model is created automatically when you create a controller and
+it's the model that will be used here. The controller used here is named
+'gce-test' and is based on the [Google Compute Engine][clouds-gce].
+
+We are going to set up a simple MediaWiki site, then prepare it for high
+traffic, before scaling it back and finally removing it altogether.
 
 ### Deploying the charms
 
@@ -68,6 +73,7 @@ use MariaDB:
 ```bash
 juju deploy mariadb
 ```
+
 It may take a few minutes for Juju to actually fetch these charms from the store,
 create new machines to put them on and install them, but as soon as the command
 returns we are free to do other things, while Juju continues working in the 
@@ -81,7 +87,7 @@ application, HAProxy, so we should also deploy a charm for that now:
 juju deploy haproxy
 ```
 
-If you check what you model currently contains by running...
+After a while if you check what your model currently contains by running...
 
 ```bash
 juju status
@@ -89,21 +95,26 @@ juju status
 
 ...you should see something like this:
 
+<!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju status -->
 ```no-highlight
-App        Version  Status       Scale  Charm      Store       Rev  OS      Notes
-haproxy             maintenance      1  haproxy    jujucharms   37  ubuntu  
-mariadb             maintenance      1  mariadb    jujucharms    6  ubuntu  
-mediawiki           maintenance      1  mediawiki  jujucharms    5  ubuntu  
+Model      Controller        Cloud/Region     Version  SLA
+default    gce-test	     google/us-east1  2.2.2    unsupported
 
-Unit          Workload     Agent      Machine  Public address  Ports  Message
-haproxy/0*    maintenance  executing  2        10.0.8.85              (install) installing charm software
-mariadb/0*    maintenance  executing  1        10.0.8.136             (config-changed) installing charm software
-mediawiki/0*  maintenance  executing  0        10.0.8.118             (install) installing charm software
+App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
+haproxy             unknown      1  haproxy    jujucharms   41  ubuntu
+mariadb    10.1.26  active       1  mariadb    jujucharms    7  ubuntu
+mediawiki  1.19.14  blocked      1  mediawiki  jujucharms   19  ubuntu
 
-Machine  State    DNS         Inst id        Series  AZ
-0        started  10.0.8.118  juju-26f0f1-0  trusty  
-1        started  10.0.8.136  juju-26f0f1-1  trusty  
-2        started  10.0.8.85   juju-26f0f1-2  xenial  
+Unit          Workload  Agent  Machine  Public address  Ports  Message
+haproxy/0*    unknown   idle   2        35.196.126.59
+mariadb/0*    active    idle   1        35.196.71.88           ready
+mediawiki/0*  blocked   idle   0        35.190.175.12          Database required
+
+Machine  State    DNS            Inst id        Series  AZ          Message
+0        started  35.190.175.12  juju-f46c20-0  trusty  us-east1-b  RUNNING
+1        started  35.196.71.88   juju-f46c20-1  trusty  us-east1-c  RUNNING
+2        started  35.196.126.59  juju-f46c20-2  xenial  us-east1-d  RUNNING
 
 Relation  Provides  Consumes  Type
 peer      haproxy   haproxy   peer
@@ -133,16 +144,16 @@ credentials it needs to be able to access this database.
 The other relation we need to add is between MediaWiki and the HAProxy 
 application.
 
-HAProxy will provide loadbalancing for traffic to MediaWiki, but it 
-needs to know where the various MediaWiki applications are on the the network.
-At this stage there is only one, but that will change shortly.
+HAProxy will provide loadbalancing for traffic to MediaWiki, but it needs to
+know where the various MediaWiki applications are on the network. At this
+stage there is only one, but that will change shortly.
 
 ```bash
 juju add-relation haproxy mediawiki
 ```
 
 Now that the relations are set up, there is one more thing to do before the 
-mediawiki site is 'live'. 
+MediaWiki site is "live". 
 
 ### Exposing the site
 
@@ -157,21 +168,42 @@ applications to the wider world:
 juju expose haproxy
 ```
 
-Our example MediaWiki site is now exposed via HAProxy. You can
-check this by first getting the IP address of HAProxy from the output of
-`juju status haproxy` (beneath the 'Units' section):
+The below final output to `juju status` represents a successful deployment of
+the stack:
 
+<!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju status -->
+```no-highlight
+Model      Controller        Cloud/Region     Version  SLA
+default    gce-test	     google/us-east1  2.2.2    unsupported
 
-```bash
-Unit        Workload  Agent  Machine  Public address  Ports   Message
-haproxy/0*  unknown   idle   2        10.0.8.85       80/tcp  
+App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
+haproxy             unknown      1  haproxy    jujucharms   41  ubuntu  exposed
+mariadb    10.1.26  active       1  mariadb    jujucharms    7  ubuntu
+mediawiki  1.19.14  active       1  mediawiki  jujucharms   19  ubuntu
+
+Unit          Workload  Agent  Machine  Public address  Ports   Message
+haproxy/0*    unknown   idle   2        35.196.126.59   80/tcp
+mariadb/0*    active    idle   1        35.196.71.88            ready
+mediawiki/0*  active    idle   0        35.190.175.12   80/tcp  Ready
+
+Machine  State    DNS            Inst id        Series  AZ          Message
+0        started  35.190.175.12  juju-f46c20-0  trusty  us-east1-b  RUNNING
+1        started  35.196.71.88   juju-f46c20-1  trusty  us-east1-c  RUNNING
+2        started  35.196.126.59  juju-f46c20-2  xenial  us-east1-d  RUNNING
+
+Relation  Provides  Consumes   Type
+peer      haproxy   haproxy    peer
+website   haproxy   mediawiki  regular
+cluster   mariadb   mariadb    peer
+db        mariadb   mediawiki  regular
 ```
 
-Use the IP address, 10.175.11.250 in the example above, within a web 
-browser running on your client machine.  With everything working correctly, 
-MediaWiki's main page will appear, containing the message 'MediaWiki has been 
-successfully  installed'.
-
+Our MediaWiki site is now exposed via HAProxy. You can check this by pointing
+your browser to the IP address of HAProxy visible in the above output. In this
+example, it is 35.196.126.59. A confirmation will be in the form of MediaWiki's
+main page appearing, containing the message 'MediaWiki has been successfully
+installed'.
 
 ### Scaling up
 
@@ -198,28 +230,26 @@ although you need to specify which specific units to remove. We currently have
 a total of 6 units assigned to MediaWiki, for example, as can be seen in the
 output of the `juju status mediawiki` command:
 
-
 ```no-highlight
 Unit          Workload  Agent  Machine  Public address  Ports   Message
-mediawiki/0*  unknown   idle   0        10.0.8.118      80/tcp  
-mediawiki/1   unknown   idle   3        10.0.8.146      80/tcp  
-mediawiki/2   unknown   idle   4        10.0.8.124      80/tcp  
-mediawiki/3   unknown   idle   5        10.0.8.49       80/tcp  
-mediawiki/4   unknown   idle   6        10.0.8.81       80/tcp  
-mediawiki/5   unknown   idle   7        10.0.8.97       80/tcp  
+mediawiki/0*  active    idle   0        35.190.175.12   80/tcp  Ready
+mediawiki/1   active    idle   3        35.185.91.8     80/tcp  Ready
+mediawiki/2   active    idle   4        35.196.24.142   80/tcp  Ready
+mediawiki/3   active    idle   5        35.196.131.227  80/tcp  Ready
+mediawiki/4   active    idle   6        35.196.249.183  80/tcp  Ready
+mediawiki/5   active    idle   7        35.196.109.180  80/tcp  Ready
 ```
 
 To scale back our deployment, use the `remove-unit` command followed by the 
 unit ID of each unit you'd like to remove:
 
-
 ```bash
 juju remove-unit mediawiki/3 mediawiki/4 mediawiki/5
 ```
 
-A hidden part of the above process is that the machines the units were
-running on will be destroyed automatically if the machine is not a 
-controller and not hosting other Juju managed containers.
+A hidden part of the above process is that the machines the units were running
+on will be destroyed automatically if the machine is not a controller and not
+hosting other Juju managed containers.
 
 
 ### Removing applications
@@ -228,14 +258,13 @@ If you no longer require MediaWiki, you can remove the entire application, along
 with all the units and machines used to operate the application, with a single
 command:
 
-
 ```bash
 juju remove-application mediawiki
 ```
 
 When the removal has completed, you should see no trace of 'mediawiki' in the
-output of `juju status`, nor any of the units and machines that
-were used to run the application.
+output of `juju status`, nor any of the units and machines that were used to
+run the application.
 
 ### Destroying the model
 
@@ -248,31 +277,34 @@ with the `juju models` command. Your output should be similar to the
 following:
 
 ```bash
-Model       Owner  Status     Machines  Cores  Access  Last connection
-controller  admin  available         1      -  admin   just now
-default*    admin  available         2      -  admin   just now
+Controller: gce-test
+
+Model       Cloud/Region     Status     Machines  Cores  Access  Last
+connection
+controller  google/us-east1  available         1      4  admin   just now
+default*    google/us-east1  available         2      2  admin   55 seconds ago
 ```
 
-To remove the default model, type `juju destroy-model default` and enter 'Y' to 
-accept the warning that this step will destroy all machines, applications,
-data and other resources associated with the default model. A few moments
-later, depending on the complexity of your model, you should find it no longer
-listed in the output of the `models` command. 
+To remove the 'default' model we've been using for the MediaWiki deployment,
+type `juju destroy-model default` and accept the warning that this step will
+destroy all machines, applications, data and other resources associated with
+that model. A few moments later you should find it no longer listed in the
+output of the `juju models` command. 
 
-If you want to start again with a clean default model, restoring Juju to the
-state it was in before we deployed the MediaWiki charm, you can create one 
-with:
+If you want to start again with a clean model, restoring Juju to the state it
+was in before we deployed the MediaWiki charm, you can re-create the 'default'
+model with: `juju add-model default`.
 
-```bash
-juju add-model default
-```
+For more information on the subjects we've covered here, see our documentation
+on **[deploying charms][deploy]**, **[charm relations][relations]** and
+**[scaling deployed applications][scaling]**.
 
-For more information on the subjects we've covered in this walkthough, see our 
-documentation on **[deploying charms][deploy]**, **[charm relations][relations]** 
-and **[scaling deployed applications][scaling]**.
 
+<!-- LINKS -->
 
 [deploy]: ./charms-deploying.html
 [relations]: ./charms-relations.html
 [scaling]: ./charms-scaling.html
-[started]: ./getting-started.html
+[credentials]: ./credentials.html
+[clouds]: ./clouds.html
+[clouds-gce]: ./help-google.html
