@@ -224,7 +224,7 @@ the 'App' section, which shows that MediaWiki and MySQL are installed, and the
 correspond to the subnet we created for LXD earlier on.
 
 From the status output, we can see that the IP address for the MediaWiki
-site we have created is 10.248.243.94. Point your browser to that address
+site we have created is 10.248.243.29. Point your browser to that address
 to see the site.
 
 ![juju status](./media/tut-lxd-wiki-simple-browser.png)
