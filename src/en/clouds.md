@@ -1,17 +1,18 @@
-Title: Juju clouds
-TODO: Needs to explain available auth types for clouds
+Title: Clouds
+TODO:  Needs to explain available auth types for clouds
   
 # Clouds
 
-Juju ships with the ability to seamlessly use a number of public clouds
-(including Amazon Web Services, Azure, Google Compute Engine, Joyent and
-Rackspace) to deploy workloads, as well as private clouds (e.g.
-OpenStack) which you configure.
+Juju has built-in support for all major public clouds such as AWS (Amazon),
+Azure (Microsoft), and GCE (Google), as well as for others. This means that no
+preliminary work is needed to "teach" Juju about your chosen cloud. You simply
+provide Juju with your cloud credentials and start deploying applications.
+Private clouds like MAAS and OpenStack also work very well but naturally
+require some extra configuration on your part.
 
-The knowledge to run these public clouds is 'baked-in', so for the majority
-of use-cases there is no additional configuration to be done - you can
-simply specify the cloud you wish to use, supply Juju with some
-[credentials][credentials] and start deploying applications.
+This page contains general information about using clouds with Juju. To start
+immediately with your chosen cloud you can go directly to
+[Cloud credentials][credentials].
 
 ## Listing available clouds
 
@@ -73,11 +74,13 @@ This lists all of the regions available to you for the named cloud. To specify
 a different region, see [Creating a controller](./controllers-creating.html).
 
 Set the default region for a cloud with:
+
 ```bash
 juju set-default-region aws eu-central-1
 ```
 
 If you want more detail about a particular cloud, use:
+
 ```bash
 juju show-cloud azure
 ```
@@ -96,13 +99,9 @@ will fetch the latest information on supported public clouds. It is a good idea
 to run this periodically, or if you are sure there are additional regions/clouds 
 Juju supports which are not currently listed.
 
-!!! Note: Juju can work with any OpenStack cloud, see the notes below for
-[specifying additional clouds](#specifying-additional-clouds)
-
 ### Special clouds
 
-There are three special types of
-clouds: MAAS, LXD and Manual.
+There are three special types of clouds: MAAS, LXD and Manual.
 
   - **LXD:** This is the cloud you want to use if you are testing Juju or 
   developing your own Juju charms - it is incredibly fast! 
@@ -225,14 +224,19 @@ expand the relevant section). You can also generate a YAML file
    Note that it is possible to choose more than one authorisation method - just 
    separate the values with commas.
 
-   Once completed, you should also remember to add a credential for this cloud before 
-   bootstrapping. See the [documentation on credentials][credentials] for more help.
+   Once completed, you should also remember to add a credential for this cloud
+   before bootstrapping. See the [documentation on credentials][credentials] for
+   more help.
 
 ^# Oracle
 
-   To add a cloud based on Oracle's Compute, you first need to
-   [import one or more Ubuntu images][oracleimages] from the Oracle dashboard. Juju then needs to
-   know how to connect to Oracle and what to call the cloud.   :
+   You should only need to do this if you're using an Oracle trial account as
+   the regular (paid) Oracle cloud is built-in, see
+   [Oracle Compute][clouds-oracle] for both types of accounts.
+
+   To add a cloud based on Oracle Compute, you first need to
+   [import one or more Ubuntu images][oracleimages] from the Oracle dashboard.
+   Juju then needs to know how to connect to Oracle and what to call the cloud:
        
        juju add-cloud
 
@@ -351,6 +355,9 @@ rackspace          6  dfw              rackspace   Rackspace Cloud
 localhost          1  localhost        lxd         LXD Container Hypervisor
 mystack            1  dev1             openstack   Openstack Cloud
 ```
+
+<!-- LINKS -->
+
 [credentials]: ./credentials.html "Juju documentation > Credentials"
 [LXD-site]: http://www.ubuntu.com/cloud/lxd "LXD"
 [juju-lxd]: ./clouds-LXD.html "Juju documentation > LXD"
@@ -358,4 +365,5 @@ mystack            1  dev1             openstack   Openstack Cloud
 [juju-maas]: ./clouds-maas.html "Juju documentation > MAAS"
 [juju-manual]: ./clouds-manual.html "Juju documentation > Manual cloud"
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
+[clouds-oracle]: ./help-oracle.html
 [oracleimages]: ./help-oracle.html#images

@@ -1,42 +1,47 @@
 Title: Juju credentials
+TODO:  Investigate: shouldn't `model-config` have a default-credential setting?
 
 # Cloud credentials
 
 In order to access your cloud, Juju will need to know how to authenticate
-itself. We use the term “credentials” to describe the tokens or keys or secrets
+itself. We use the term *credentials* to describe the tokens or keys or secrets
 used - a set of credentials is represented by a _credential name_ that is used
 to refer to those credentials in subsequent commands.
 
-!!! Note: LXD deployments are a special case. Accessed locally, they don't need
-additional credentials. Accessed remotely, they need a certificate
-credential. See [Using LXD as a cloud][lxd] for further details. 
+!!! Important:
+    This page assumes that you have already created a controller for your
+    cloud (`juju bootstrap` command). If this is not the case, please see
+    [Creating a controller][controllers-creating] first.
 
-Juju selects credentials according to how many credentials are defined. If you
-have only one credential, or if a credentials is labelled 'default', this
-credential will be used by Juju. When multiple credentials are defined, with no
-default, a credential name must be specified with the `--credential` argument.
+Juju selects a credential according to how many credentials are defined. If you
+have only one credential, or if a credential is labelled 'default', then this
+is the credential that will be used by Juju. When multiple credentials are
+defined, with no default, a credential name must be specified at the model
+level.
 
-Currently, Juju can use one of three ways to get your credentials for a cloud:
+Juju can import your cloud credentials in one of three ways:
 
- - Entering credentials interactively on the command line
- - Scanning existing credentials (e.g. environment variables, .novarc files)
- - Importing a user-provided [YAML-formatted][yaml] file.
+- Accepting credentials provided interactively by the user on the command line
+- Scanning for existing credentials (e.g. environment variables, "rc" files)
+- Reading a user-provided [YAML-formatted][yaml] file
  
-These methods are explained in more detail below.
+Each of these methods are explained below, but if you are still having
+difficulty you can get extra help by selecting your cloud from among this list:
 
-If you are having difficulty determining the credentials needed for your 
-particular cloud, you should find these pages on specific clouds helpful: 
+[Amazon AWS][aws] |
+[Microsoft Azure][azure] |
+[Google GCE][gce] |
+[Joyent][joyent] |
+[MAAS][clouds-maas] |
+[OpenStack][clouds-openstack] |
+[VMware vSphere][clouds-vmware] |
+[Oracle Compute][clouds-oracle] |
+[Rackspace][rackspace]
 
-  [Amazon Web Services][aws]
-  
-  [Microsoft Azure][azure]
-  
-  [Google Compute Engine][gce]
-  
-  [Joyent][joyent]
-  
-  [Rackspace][rackspace]
-
+!!! Note:
+    LXD deployments are a special case. Accessed locally, they do not require
+    credentials. Accessed remotely, they need a *certificate credential*. See
+    [Using LXD as a cloud][lxd] for further details. 
 
 ### Adding credentials via the command line
 
@@ -45,6 +50,7 @@ You can add credentials by running the command:
 ```bash
 juju add-credential <cloud>
 ```
+
 Juju will then ask for the information it needs. This may vary 
 according to the cloud you are using, but will typically look something like
 this:
@@ -68,7 +74,7 @@ juju set-default-credential <cloud> <credential>
 
 Setting a default credential means this will be used by the bootstrap 
 command when creating a controller, without having to specify it with
-the `--credential` option.
+the `--credential` option in the `juju add-model` command.
 
 
 ### Scanning existing credentials
@@ -97,7 +103,7 @@ This will will ask you whether to store each set of credentials
 it finds. Note that this is a 'snapshot' of those stored values - Juju will not 
 notice if they change in future.
 
-### Adding credentials from a YAML file.
+### Adding credentials from a YAML file
 
 You can also specify a YAML format file for the credentials. This
 file would be similar to, but shorter than this extensive sample, which
@@ -216,3 +222,8 @@ juju remove-credential aws bob
 [gce]: ./help-google.html
 [joyent]: ./help-joyent.html
 [rackspace]: ./help-rackspace.html
+[clouds-maas]: ./clouds-maas.html
+[clouds-oracle]: ./help-oracle.html
+[clouds-openstack]: ./help-openstack.html
+[clouds-vmware]: ./help-vmware.html
+[controllers-creating]: ./controllers-creating.html
