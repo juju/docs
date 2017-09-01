@@ -179,7 +179,7 @@ tests in Python.
 For more information about writing tests please refer to the
 [charm testing guide documentation][charm testing].
 
-## Submitting your charm for review
+## Having your charm reviewed
 
 Once the charm is complete you can 
 [submit the charm for review][charm-review].
@@ -189,6 +189,9 @@ recommended section must follow Charm Store policy and best practices for
 charms. These recommended charms have a shorter namespace on the 
 Charm Store website, and are listed higher in search results on 
 [https://jujucharms.com][store].
+
+
+<!-- LINKS -->
 
 [store]:              https://jujucharms.com/
 [getting-started]:    ./getting-started.html 
@@ -205,4 +208,3 @@ Charm Store website, and are listed higher in search results on
 [charm-review]: ./charm-review-process.html
 [reactive]: https://en.wikipedia.org/wiki/Reactive_programming
 [charmsreactive]: http://pythonhosted.org/charms.reactive/
-
