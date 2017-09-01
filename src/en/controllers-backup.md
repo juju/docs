@@ -1,5 +1,5 @@
 Title: Back up and restore Juju  
-TODO:  Actual backup restore command needs to be tested
+TODO:  Critical: Review required
   
   
 # Backing Up and Restoring Juju
