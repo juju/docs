@@ -101,7 +101,7 @@ which regions your cloud supports with the `juju show-cloud google` command,
 and create a new model hosted on `us-east1` with the following:
 
 ```bash
-juju add-model default us-east1
+juju add-model gce-test us-east1
 ```
 
 ## Deploy an application
@@ -130,8 +130,8 @@ You can check on the state of any deployment, model or controller with the
 <!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
 ```bash
-Model    Controller  Cloud/Region     Version  SLA
-default  mycloud     google/us-east1  2.2.2    unsupported
+Model     Controller  Cloud/Region     Version  SLA
+gce-test  mycloud     google/us-east1  2.2.2    unsupported
 
 App      Version  Status   Scale  Charm    Store       Rev  OS      Notes
 haproxy           waiting    0/1  haproxy  jujucharms   41  ubuntu
