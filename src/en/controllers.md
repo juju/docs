@@ -1,14 +1,13 @@
-Title: Juju Controllers
+Title: Controllers
 TODO:  Figure out the 'block command' situation (including CLI help
          text). See 'Restricting command usage' section. The old page lives on.
        Need examples for each command.
-       .
 
 
 # Controllers
 
 A Juju *controller* is the management node of a Juju cloud environment. In
-particluar, it houses the database and keeps track of all the models in that
+particular, it houses the database and keeps track of all the models in that
 environment. Although it is a special node, it is a machine that
 gets created by Juju (during the "bootstrap" stage) and, in that sense, is
 similar to other Juju machines.
@@ -24,6 +23,9 @@ along with it.
 
 In some circumstances you may wish to share a controller or one of its associated
 models. Juju provides [multi-user functionality](./users.html) for this purpose.
+
+The minimum resources required for a local controller are 2GiB of memory and 1
+vCPU.
 
 
 ## Controller management
