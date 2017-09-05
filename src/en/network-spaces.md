@@ -22,8 +22,8 @@ considerations when using spaces:
   isolation, such as between instances running within subnets which are members
   of different spaces.
 
-!!! Note: Advanced networking features, such as 'spaces`, are currently only
-supported by MAAS and EC2 providers.
+!!! Note:
+    Network spaces are currently only supported by the MAAS and EC2 providers.
 
 Having multiple subnets spanning different zones within the same space enables
 Juju to perform automatic distribution of an application's units across zones
