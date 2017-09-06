@@ -60,7 +60,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
   - Relations
     - Validate all relations that the charm provides and requires
   - Configuration
-    - `set-config`, `unset-config`, and `re-set` must be tested as a minimum
+    - `config` and `re-set` must be tested as a minimum
   - Deployment testing
     - Scale test: Production deployment test with multiple units and recommended
         config.
