@@ -35,11 +35,12 @@ resource-tags: key1=value1 [key2=value2 ...]
 ```
 
 Alternatively, you can change the tags allocated to new machines in a 
-bootstrapped environment by using the 'juju set-model-config' command
+bootstrapped environment by using the `juju model-config` command
 
 ```bash
-juju set-model-config resource-tags="origin=v2 owner=Canonical"
+juju model-config resource-tags="origin=v2 owner=Canonical"
 ```
+
 ![user tagged instances in Amazon](./media/config-tagging-user.png)
 
 You can change the tags again by simply running the above command again with
