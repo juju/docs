@@ -64,7 +64,7 @@ juju config mediawiki
 Should return something like this:
 
 ```no-highlight
-application: wiki
+application: mediawiki
 charm: mediawiki
 settings:
   admins:
