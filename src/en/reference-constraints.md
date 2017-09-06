@@ -105,8 +105,8 @@ multiple constraints delimited by a space.
     Example: spaces=storage,db,^logging,^public (meaning, select machines connected
     to the storage and db spaces, but NOT to logging or public spaces).
 
-    EC2 and MAAS are the only providers supporting spaces constraints. Support for other
-    providers is planned for future releases.
+    EC2 and MAAS are the only providers that support the spaces constraint.
+    Support in other providers is planned for future releases.
 
 - virt-type
 
