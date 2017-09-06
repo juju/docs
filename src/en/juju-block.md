@@ -96,13 +96,11 @@ user has logged out of Juju and logged back in again.
 |                    |                    | resolved             |
 |                    |                    | retry-provisioning   |
 |                    |                    | run                  |
-|                    |                    | set-config           |
+|                    |                    | config               |
 |                    |                    | set-constraints      | 
-|                    |                    | set-model-config     |
+|                    |                    | model-config         |
 |                    |                    | sync-tools           |
 |                    |                    | unexpose             |
-|                    |                    | unset-config         |
-|                    |                    | unset-model-config   |
 |                    |                    | upgrade-charm        |
 |                    |                    | upgrade-juju         |
 
