@@ -7,6 +7,7 @@ TODO: Add 'centos' and 'windows' stuff to series talk
         doc said it should.
       Needs explanation of resources (esp. in the local/offline charms sections).
       Review required. Channnels especially
+      This page is too long. It should contain just basic stuff and link to sub-pages.
 
 # Deploying applications
 
