@@ -1,28 +1,57 @@
 Title: Upgrading applications
+TODO:  the intermingling of software version, revision numbers, and channels is
+complicated and should be contained within the same page as much as possible
 
 # Upgrading applications
 
-An application is upgraded by upgrading its corresponding charm. Since a charm
-is always associated with a *channel* and a charm's version can fluctuate
-within that channel the following rules apply:
+An application is upgraded with the `upgrade-charm` command, where the upgrade
+candidate is known as the *revision*. The default channel is naturally the
+channel of the currently deployed charm.
 
-- If the channel has a version **newer** than the deployed version then the latter
-  is **upgraded** to the former.
-- If the channel has a version **older** than the deployed version then the latter
-  is **downgraded** to the former.
+!!! Note:
+    It is possible, though unlikely, that the revision is **older** than that
+    of the deployed application. In this case, the application will actually be
+    **downgraded** (to the revision).
 
-Channels can be specified with the `upgrade-charm` command. For example:
+The notion of a *channel* is related to revision numbers. See
+[Deploying applications][deploy-charm_channels] for an overview of channels.
+
+The [Charm developer guide][dev-upgrade-charm] provides low-level details on
+the mechanics of charm upgrades.
+
+You can query for charm information, such as channels and revisions, with the
+`charm` utility, which is available via the Charm Tools software. See the
+[Charm Tools][charm-tools] page for guidance.
+
+## Examples
+
+To upgrade WordPress based on the current channel:
+
+```bash
+juju upgrade-charm wordpress
+```
+
+To upgrade MySQL based on the 'edge' channel:
 
 ```bash
 juju upgrade-charm mysql --channel edge
 ```
 
-See [Deploying applications][deploy-charm_channels] for an overview of channels
-and the [Charm developer guide][dev-upgrade-charm] for even more details on the
-mechanics of charm upgrades.
+To upgrade Apache using a local updated charm:
+
+```bash
+juju upgrade-charm apache2 --path ~/charms/new-git
+```
+
+To upgrade Git to a specific revision number:
+
+```bash
+juju upgrade-charm git --revision 2
+```
 
 
 <!-- LINKS -->
 
+[charm-tools]: ./tools-charm-tools.html
 [dev-upgrade-charm]: ./developer-upgrade-charm.html
 [deploy-charm_channels]: ./charms-deploying.html#channels
