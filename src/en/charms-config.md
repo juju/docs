@@ -64,38 +64,44 @@ juju config mediawiki
 Should return something like this:
 
 ```no-highlight
-charm: mediawiki
 application: mediawiki
+charm: mediawiki
 settings:
   admins:
-    default: true
     description: Admin users to create, user:pass
+    is_default: true
     type: string
-    value: null
+    value: ""
   debug:
-    default: true
     description: turn on debugging features of mediawiki
+    is_default: true
     type: boolean
     value: false
   logo:
-    default: true
     description: URL to fetch logo from
+    is_default: true
     type: string
-    value: null
+    value: ""
   name:
-    default: true
     description: The name, or Title of the Wiki
+    is_default: true
     type: string
     value: Please set name of wiki
+  server_address:
+    description: The server url to set "$wgServer". Useful for reverse proxies
+    is_default: true
+    type: string
+    value: ""
   skin:
-    default: true
     description: skin for the Wiki
+    is_default: true
     type: string
     value: vector
   use_suffix:
     description: If we should put '/mediawiki' suffix on the url
+    is_default: true
     type: boolean
-    value: false
+    value: true
 ```
 
 You can set the options using `juju config <application>`, specifying
