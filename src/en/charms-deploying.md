@@ -7,6 +7,7 @@ TODO: Add 'centos' and 'windows' stuff to series talk
         doc said it should.
       Needs explanation of resources (esp. in the local/offline charms sections).
       Review required. Channnels especially
+      This page is too long. It should contain just basic stuff and link to sub-pages.
 
 # Deploying applications
 
@@ -397,15 +398,3 @@ cd ~/charms
 charm pull nfs
 charm pull vsftpd
 ```
-<<<<<<< HEAD
-=======
-
-<!-- LINKS -->
-
-[models]: ./models-config.html
-[spaces]: ./network-spaces.html
-[creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
-[metadata]: ./authors-charm-metadata.html
-[constraints]: ./charms-constraints.html
-[charms-upgrading]: ./charms-upgrading.html
->>>>>>> 485102a5... add new upgrade charm page to user guide
