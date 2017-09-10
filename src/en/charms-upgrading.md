@@ -1,6 +1,4 @@
 Title: Upgrading applications
-TODO:  the intermingling of software version, revision numbers, and channels is
-complicated and should be contained within the same page as much as possible
 
 # Upgrading applications
 
