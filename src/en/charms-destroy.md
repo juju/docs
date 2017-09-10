@@ -67,19 +67,22 @@ See section 'Caveats' below for how to manage units in a dying state.
 
 ## Removing machines
 
-Machines (instances) can be removed like this:
+Juju machines can be removed like this:
 
 ```bash
 juju remove-machine <number>
 ```
 
-However, it is not possible to remove an instance which is currently allocated
-to an application. If attempted, this message will be emitted:
+However, it is not possible to remove a machine which is currently allocated
+to a unit. If attempted, this message will be emitted:
 
 ```no-highlight
 error: no machines were destroyed: machine 3 has unit "mysql/0" assigned
 ```
 
+By default, when a Juju machine is removed, the backing system, typically a
+cloud instance, is also destroyed. The `--keep-instance` option overrides this;
+it allows the instance to be left running.
 
 ## Caveats
 
