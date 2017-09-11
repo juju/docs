@@ -109,10 +109,11 @@ export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
 mkdir -p $LAYER_PATH $INTERFACE_PATH
 ```
 
-!!! Note: Exporting the environment variables in this way only sets the
-variables for the current terminal. If you wish to make these changes persist,
-add the same export statements to a resource file that are evaluated when you
-create a new console such as `~/.bashrc` depending on your shell.
+!!! Note: 
+    Exporting the environment variables in this way only sets the
+    variables for the current terminal. If you wish to make these changes persist,
+    add the same export statements to a resource file that are evaluated when you
+    create a new console such as `~/.bashrc` depending on your shell.
 
 The export of `INTERFACE_PATH` is an environment variable which tells the
 `charm build` process where to scan for local interfaces not found in the
@@ -172,10 +173,11 @@ class HttpProvides(RelationBase):
         self.set_remote(**relation_info)
 ```
 
-!!! Note: You may notice we do not decorate for the -broken hook event. This
-is intentional.  It will only actually cause problems if you use set_state
-in the context of a relationship being broken, but it doesn't work like you'd
-expect so it's better to avoid it entirely
+!!! Note: 
+    You may notice we do not decorate for the -broken hook event. This
+    is intentional.  It will only actually cause problems if you use set_state
+    in the context of a relationship being broken, but it doesn't work like you'd
+    expect so it's better to avoid it entirely
 
 #### Implementing the provides side
 

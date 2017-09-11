@@ -17,11 +17,12 @@ Once an application is no longer required it can be removed with:
 juju remove-application <application-name>
 ```
 
-!!! Note: Removing an application which has active relations with another
-running application will terminate that relation. Charms are written
-to handle this, but be aware that the other application may no 
-longer work as expected. To remove relations between deployed applications,
-see [Charm relations][charmrelations].
+!!! Note: 
+    Removing an application which has active relations with another
+    running application will terminate that relation. Charms are written
+    to handle this, but be aware that the other application may no 
+    longer work as expected. To remove relations between deployed applications,
+    see [Charm relations][charmrelations].
 
 This is the order of events for removing an application:
 

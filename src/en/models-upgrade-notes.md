@@ -82,8 +82,9 @@ state server:
 juju sync-tools --version 2.03 --debug
 ```
 
-!!! Note: the `sync-tools --version` command only accepts `major[.minor]`
-("e.g. use '2.03' not '2.03.1').
+!!! Note: 
+    The `sync-tools --version` command only accepts `major[.minor]`
+    ("e.g. use '2.03' not '2.03.1').
 
 For complete syntax, see the [command reference page](./commands.html#sync-tools)
 or by running `juju help sync-tools`.

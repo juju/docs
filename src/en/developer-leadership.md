@@ -138,12 +138,13 @@ Click on the expander to see details for each.
   If you need additional synchronisation, you can use a peer relation to
   communicate minion's acknowledgements back to the leader.
   
-  !!! Note: peer relation membership is not guaranteed to match current reality
-  at any given time. To be resilient in the face of your application scaling at
-  the same time as you rebalance your application, your leader code will need
-  to use the output of `status-get --application` to determine up-to-date
-  membership, and wait for the set of acknowledged units in the peer relation
-  to match that list.
+  !!! Note: 
+      Peer relation membership is not guaranteed to match current reality
+      at any given time. To be resilient in the face of your application scaling at
+      the same time as you rebalance your application, your leader code will need
+      to use the output of `status-get --application` to determine up-to-date
+      membership, and wait for the set of acknowledged units in the peer relation
+      to match that list.
 
 ^# ...guarantee that a long-lived process runs on just one unit at once?
   
@@ -172,9 +173,10 @@ Click on the expander to see details for each.
 
 ^# ...run a long-lived process on one unit at a time?
   
-  !!! Note: this approach is not reliable. It may be good enough for some
-  workloads, but don't use it unless you understand the forces in play and the
-  worst possible consequences for your users...
+  !!! Note: 
+      This approach is not reliable. It may be good enough for some
+      workloads, but don't use it unless you understand the forces in play and the
+      worst possible consequences for your users...
   
   If you start your long-lived process in `leader-elected`, and stop it in
   `leader-settings-changed`, this will *usually* do what you want, but is
