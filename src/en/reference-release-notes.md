@@ -23,13 +23,16 @@ The versions covered here are:
     encode the contents of the file so it can be used as a string value. The
     referenced file can include the path to the file. The file location is relative
     to the bundle file location.
-    e.g.
-          applications:
-           my-app:
-              charm: some-charm
-              options:
-                  config: include-file://my-config.yaml
-                  cert: include-base64://my-cert.crt
+
+    For example:
+
+  <pre><code class="language-yaml">applications:
+        my-app:
+          charm: some-charm
+          options:
+            config: include-file://my-config.yaml
+            cert: include-base64://my-cert.crt
+  </code></pre><br/>
 
   -  There is a new option for deploying bundles: `--bundle-config`. This
      configuration file needs to be a YAML file, and currently only supports
