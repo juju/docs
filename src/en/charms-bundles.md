@@ -1,5 +1,5 @@
 Title: Using and Creating Bundles
-Todo: Check more complex bundles after the release of 2.0
+TODO:  Check more complex bundles after the release of 2.0
 
 # Using and Creating Bundles
 
@@ -196,6 +196,20 @@ mysql:
   annotations:
     "gui-x": "139"
     "gui-y": "168"
+```
+
+Values for options and annotations can also be read from a file. For binary
+files, such as binary certificates, there is an option to base64-encode the
+contents. A file location can be expressed with an absolute or relative (to the
+bundle file) path. For example:
+
+```yaml
+applications:
+    my-app:
+        charm: some-charm
+        options:
+            config: include-file://my-config.yaml
+            cert: include-base64://my-cert.crt
 ```
 
 ## Bundle placement directives
