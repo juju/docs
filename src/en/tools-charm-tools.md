@@ -2,18 +2,17 @@ Title: Charm tools
 TODO:  The top header should be "Charm Tools"
        Review required
 
-The 'Charm Tools' Juju Plugin is a collection of commands enabling users
-and charm authors to create, search, fetch, update, and
-manage charms.
+The 'Charm Tools' Juju Plugin is a collection of commands enabling users and
+charm authors to create, search, fetch, update, and manage charms.
 
 # Installation
 
 The source project can be found at
 [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools).
 
-## Ubuntu 16.04 LTS (Xenial) and later releases
+## Ubuntu
 
-Install the charm snap:
+Install the `charm` snap:
 
 ```bash
 sudo snap install charm
