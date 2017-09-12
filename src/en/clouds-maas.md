@@ -5,7 +5,7 @@ Title: Using MAAS with Juju
 
 Juju works closely with [MAAS][maas-site] to deliver the same experience
 on bare metal that you would get by using any other cloud. Note that the 
-Juju 2.x software is compatible with both the 1.x and 2.x series of MAAS.
+Juju 2.x series is compatible with both the 1.x and 2.x series of MAAS.
 
 ## Add a MAAS cloud
 
