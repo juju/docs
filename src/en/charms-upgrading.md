@@ -33,7 +33,7 @@ This is considered a dangerous operation since Juju has only limited
 information with which to determine compatibility. The operation will succeed
 so long as the following conditions are met:
 
-- The new charm must declare all relations that the application is currently
+- The new charm must support all relations that the application is currently
   participating in.
 - Each configuration setting shared by the original and new charm must be of
   the same type.
