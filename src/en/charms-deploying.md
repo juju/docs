@@ -6,6 +6,8 @@ TODO: Add 'centos' and 'windows' stuff to series talk
         with non-existant charm. It did not for me but the old version of this
         doc said it should.
       Needs explanation of resources (esp. in the local/offline charms sections).
+      Review required. Channnels especially
+      This page is too long. It should contain just basic stuff and link to sub-pages.
 
 # Deploying applications
 
@@ -83,22 +85,8 @@ will try to deploy from the 'candidate' channel instead, and so on. This means
 that whenever you specify a channel, you will always end up with something that
 best approximates your choice if it is not available.
 
-
-#### Charm upgrades
-
-Because the pointer can fluctuate among revisions it is possible that during a
-charm upgrade the channel revision is different than the revision of a
-currently deployed charm. The following rules apply:
-
-- If a channel revision is older, downgrade the deployed charm to that revision
-- If a channel revision is newer, upgrade the deployed charm to that revision
-
-Channels can be specified with the `upgrade-charm` command. For example:
-
-```bash
-juju upgrade-charm mysql --channel edge
-```
-
+See [Upgrading applications](./charms-upgrading.html) for how charm upgrades
+work.
 
 ## Deploying a multi-series charm
 
