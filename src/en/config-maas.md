@@ -10,6 +10,11 @@ individually, MAAS turns your bare metal into an elastic cloud-like resource.
 Specifically, MAAS allows for services to be deployed to bare metal via Juju.
 For more information about MAAS, see [maas.ubuntu.com](http://maas.ubuntu.com).
 
+!!! Note:
+    This version of Juju (1.25.x), is only compatible with versions of MAAS up
+    to and including 1.9. To support later versions of MAAS, please upgrade 
+    Juju to a more recent version.
+
 To enable Juju to work with MAAS, you should start by generating a generic
 configuration file using the command:
 
