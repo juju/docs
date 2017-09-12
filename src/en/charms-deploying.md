@@ -85,7 +85,8 @@ will try to deploy from the 'candidate' channel instead, and so on. This means
 that whenever you specify a channel, you will always end up with something that
 best approximates your choice if it is not available.
 
-See [Upgrading applications][charms-upgrading] for how charm upgrades work.
+See [Upgrading applications](./charms-upgrading.html) for how charm upgrades
+work.
 
 ## Deploying a multi-series charm
 
