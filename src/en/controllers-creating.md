@@ -1,5 +1,6 @@
 Title: Creating a Juju Controller
-TODO: Add better examples
+TODO:  Critical: review required
+       Add better examples
 
 
 # Creating a controller
@@ -60,7 +61,20 @@ juju bootstrap \
 	rackspace controller-rackspace
 ```
 
-## Create a controller with constraints
+## Controller constraints
+
+Constraints can be specified that affect just the controller by using the
+`--bootstrap-constraints` option.
+
+Below, 
+
+```bash
+juju bootstrap --bootstrap-constraints="mem=4G" lxd lxd-xenial
+```
+
+
+
+## Model constraints
 
 This example provides 4G of RAM to the local lxd controller we create. For
 more details about constraints, see [Constraints](./reference-constraints.html).
