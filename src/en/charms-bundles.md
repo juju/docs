@@ -212,6 +212,37 @@ applications:
             cert: include-base64://my-cert.crt
 ```
 
+Furthermore, the `--bundle-config` option can be used when you want to use a
+standard bundle but keep model-specific configuration in a separate file.  Any
+values specified for an application in the file override those values defined
+in the bundle, with the exception of the map type values, where the maps are
+merged with preference given to the bundle-config file. The file can make use
+of the `include-file://` and `include-base64://` directives mentioned above for
+local bundles (for options and annotation values). A file location can be
+expressed with an absolute or relative (to the bundle-config file) path. For
+example:
+
+```bash
+juju deploy wiki-simple --bundle-config ~/model-a/wiki-simple.yaml
+```
+
+Where the contents of `~/model-a/wiki-simple.yaml` could look like:
+
+```yaml
+applications:
+  wiki:
+    options:
+      name: "The model-a wiki"
+  mysql:
+    options:
+      "dataset-size": "768M"
+      "rbd-name": mysql-model-a
+```
+
+!!! Note:
+    The bundle-config file currently only supports 'applications' as a top
+    level key.
+
 ## Bundle placement directives
 
 You can co-locate applications using the placement directive key in the bundle.
