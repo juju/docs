@@ -1,4 +1,6 @@
 Title: Charm tools
+TODO:  The top header should be "Charm Tools"
+       Review required
 
 The 'Charm Tools' Juju Plugin is a collection of commands enabling users
 and charm authors to create, search, fetch, update, and
