@@ -26,15 +26,19 @@ Now install the tools via the `charm` snap:
 sudo snap install charm
 ```
 
-You may need to reboot your computer if you get either of the following errors
-when you try to invoke the `charm` command:
+### Issues
+
+These are some possible issues you might be confronted with on Ubuntu 14.04
+LTS when you try to invoke the `charm` command.
+
+Log out of your Ubuntu user session (and log back in) if you see the following:
 
 ```no-highlight
 The program 'charm' is currently not installed. You can install it by typing:
 sudo apt-get install charm-tools
 ```
 
-Or
+Reboot your computer if you get the below error:
 
 ```no-highlight
 cannot perform readlinkat() on the mount namespace file descriptor of the init
