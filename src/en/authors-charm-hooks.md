@@ -22,10 +22,11 @@ during hook execution.
 There are multiple types of hooks, each described in more detail in the
 following sections.
 
-!!! Note: None of the hooks are required; if you don't implement a hook, it
-just doesn't get run. When a hook event occurs, Juju will look for the
-corresponding hook file to execute, but if it finds none, will continue
-running without generating an error.
+!!! Note: 
+    None of the hooks are required; if you don't implement a hook, it
+    just doesn't get run. When a hook event occurs, Juju will look for the
+    corresponding hook file to execute, but if it finds none, will continue
+    running without generating an error.
 
 All the hooks must be written to be
 [idempotent](https://en.wikipedia.org/wiki/Idempotence), meaning that there

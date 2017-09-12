@@ -22,7 +22,8 @@ than the charm, under the circumstances explained below:
 | unknown     |yellow         | A unit-agent has finished calling install, config-changed, and start, but the charm has not called status-set yet. Rather than guess as to whether the application is working, Juju will set its status to "unknown". A unit is also marked as “unknown” when the unit agent fails for some reason eg loss of connectivity.|
 |terminated |none, CLI-only | This unit used to exist, we have a record of it (perhaps because of storage allocated for it that was flagged to survive it). Nonetheless, it is now gone.|
 
-!!! Note: * The `colour in gui` is included for information at this point, until
-this feature is fully supported in the Juju GUI
+!!! Note: 
+    * The `colour in gui` is included for information at this point, until
+    this feature is fully supported in the Juju GUI
 
  

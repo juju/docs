@@ -24,9 +24,10 @@ Every implemented action must include:
  - the executable's name as a top-level key in a YAML map in the `actions.yaml`
    file.
 
-!!! Note: action names must start and end with lowercase alphanumeric
-characters, and only contain lowercase alphanumeric characters, the hyphen "-"
-or full stop"." characters.
+!!! Note: 
+    Action names must start and end with lowercase alphanumeric
+    characters, and only contain lowercase alphanumeric characters, the hyphen "-"
+    or full stop"." characters.
 
 Here is a sample partial layout of a charm's root directory that shows actions
 called 'pause', 'resume', and 'snapshot':

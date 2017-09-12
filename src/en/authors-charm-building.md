@@ -32,10 +32,11 @@ mkdir -p $JUJU_REPOSITORY/{layers,trusty}
 cd $JUJU_REPOSITORY/layers
 ```
 
-!!! Note: Exporting the environment variable in this way only sets the
-variable for the current terminal. If you wish to make these changes persist,
-add the same export statement to a resource file that are evaluated when you
-create a new console such as ~/.bashrc depending on your environment.
+!!! Note: 
+    Exporting the environment variable in this way only sets the
+    variable for the current terminal. If you wish to make these changes persist,
+    add the same export statement to a resource file that are evaluated when you
+    create a new console such as ~/.bashrc depending on your environment.
 
 Then create a directory for your layer:
 

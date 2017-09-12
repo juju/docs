@@ -147,7 +147,8 @@ machine in the entire log:
 juju debug-log --replay --include unit-mysql-0 --include machine-1
 ```
 
-!!! Note: The unit can also be written 'mysql/0' (as shown by `juju status`).
+!!! Note: 
+    The unit can also be written 'mysql/0' (as shown by `juju status`).
 
 To see all WARNING and ERROR messages in the entire log:
 
@@ -210,6 +211,7 @@ Notice that the controller model was chosen with `juju ssh`. Also, a combination
 commands `juju controllers` and `juju machines` yielded that the
 controller here has a machine id of '0' (typical).
 
-!!! Note: in a [High availability](./controllers-ha.html) scenario, file `logsink.log`
-is not guaranteed to contain all messages since agents have a choice of several
-controllers to send their logs to.
+!!! Note: 
+    In a [High availability](./controllers-ha.html) scenario, file `logsink.log`
+    is not guaranteed to contain all messages since agents have a choice of several
+    controllers to send their logs to.

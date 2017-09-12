@@ -24,8 +24,9 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 ```
 
-!!! Note: It is possible and often desirable to run debug-hooks on more than
-one unit at a time. You should open a new terminal window for each.
+!!! Note: 
+    It is possible and often desirable to run debug-hooks on more than
+    one unit at a time. You should open a new terminal window for each.
 
 For developers who use the debug-hooks environment often there is the
 [dhx debugging plugin](./authors-hook-debug-dhx.html) which allows some
@@ -86,9 +87,10 @@ queue until you exit your current window. See the  special considerations below.
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
 
-!!! Note: To allow Juju to continue processing events normally, you **must**
-exit the hook execution with a zero return code (using the `exit` command),
-otherwise all further events on that unit may be blocked indefinitely.
+!!! Note: 
+    To allow Juju to continue processing events normally, you **must**
+    exit the hook execution with a zero return code (using the `exit` command),
+    otherwise all further events on that unit may be blocked indefinitely.
 
 The queue can be halted by exiting with an `exit 1` command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending

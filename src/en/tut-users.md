@@ -167,8 +167,9 @@ juju revoke newuser write dev
 juju disable-user newuser
 ```
 
-!!! Note: a user can revoke write access for themselves and effectively lock
-themselves out of being able to modify a model.
+!!! Note: 
+    A user can revoke write access for themselves and effectively lock
+    themselves out of being able to modify a model.
 
 With access revoked, the admin can now safely remove the model:
 
