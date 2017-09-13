@@ -73,8 +73,12 @@ or pre-release features are enabled only when the feature flag is enabled prior
 to bootstrapping the environment.
 
 ```
-JUJU_DEV_FEATURE_FLAGS=storage,network-spaces juju bootstrap
+JUJU_DEV_FEATURE_FLAGS=<flag1,flag2> juju bootstrap
 ```
+
+!!! Warning:
+    Unforeseen and detrimental results can occur by enabling developmental
+    features. Do not do so on production systems.
 
 #### JUJU_STARTUP_LOGGING_CONFIG
 
