@@ -1,6 +1,5 @@
 Title: Creating a Juju Controller
-TODO:  Critical: review required
-       Improve examples
+TODO:  Improve examples
        Hardcoded: Ubuntu code names
 
 
