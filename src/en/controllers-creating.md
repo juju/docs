@@ -1,6 +1,7 @@
 Title: Creating a Juju Controller
 TODO:  Critical: review required
        Add better examples
+       Hardcoded: Ubuntu code names
 
 
 # Creating a controller
@@ -25,18 +26,24 @@ This creates a new controller called `aws-us-east-1` in that cloud and region.
 Bootstrap has many options. Some of the more commonly used ones are detailed
 here. 
 
+If you omit the controller name here, the controller will be given a
+named using the name of the cloud, `lxd`:
+
+```bash
+juju bootstrap localhost
+```
+
 ## Create an LXD Xenial controller
 
 Because Xenial is the current LTS release, we do not have to mention it
 specifically. For our example, we name the controller lxd-xenial and instruct
-it to use the local lxd cloud.
+it to use the 'localhost' cloud (LXD). 
 
 ```bash
-juju bootstrap lxd lxd-xenial
+juju bootstrap localhost lxd-xenial
 ```
 
 ## Create an LXD Trusty controller 
-
 
 The '--bootstrap-series' option allows you to specify a particular series 
 to use for the controller
@@ -61,33 +68,30 @@ juju bootstrap \
 	rackspace controller-rackspace
 ```
 
-## Controller constraints
-
-Constraints can be specified that affect just the controller by using the
-`--bootstrap-constraints` option.
-
-Below, 
-
-```bash
-juju bootstrap --bootstrap-constraints="mem=4G" lxd lxd-xenial
-```
-
-
-
 ## Model constraints
 
-This example provides 4G of RAM to the local lxd controller we create. For
+Model constraints are used to set minimum specifications for all machines in
+the model. These constraints are set during the creation of the controller but
+can also be set by configuring the model directly. They can also be overridden
+in various ways.
+
+For
 more details about constraints, see [Constraints](./reference-constraints.html).
 
 ```bash
 juju bootstrap --constraints="mem=4G" lxd lxd-xenial
 ```
 
-If you omit the optional controller name here, the new controller will be
-named using the name of the cloud, `lxd`:
+## Controller constraints
+
+Constraints can also be specified that affect solely the controller by using
+the `--bootstrap-constraints` option. The eligible values are identical to
+those available as model constraints (explained above).
+
+This example demands at least 4G of RAM for the LXD controller:
 
 ```bash
-juju bootstrap --constraints="mem=4G" lxd
+juju bootstrap --bootstrap-constraints="mem=4G" localhost lxd-xenial
 ```
 
 ## Create a controller using a non-default region
