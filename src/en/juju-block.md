@@ -68,8 +68,9 @@ This will output will list any group that's currently disabled:
 Disabled commands  Message
 all
 ```
-!!! Warning: In some cases, the disable command will only take effect after the
-user has logged out of Juju and logged back in again.
+!!! Warning: 
+    In some cases, the disable command will only take effect after the
+    user has logged out of Juju and logged back in again.
 
 ## Commands within each enable and disable group
 
@@ -104,8 +105,9 @@ user has logged out of Juju and logged back in again.
 |                    |                    | upgrade-charm        |
 |                    |                    | upgrade-juju         |
 
-!!! Note: The '--force' option recognized by some Juju commands bypasses any
-restriction level that would otherwise apply. If your policy is to use
-restrictions then the immediate use of the '--force' option should not be part
-of your workflow. If you must use it, do so after having first run the Juju
-command without it to ensure you are aware of any possible restrictions.
+!!! Note: 
+    The '--force' option recognized by some Juju commands bypasses any
+    restriction level that would otherwise apply. If your policy is to use
+    restrictions then the immediate use of the '--force' option should not be part
+    of your workflow. If you must use it, do so after having first run the Juju
+    command without it to ensure you are aware of any possible restrictions.

@@ -44,9 +44,10 @@ We can then use this configuration when we deploy the application:
 juju deploy --config myconfig.yaml mediawiki
 ```
 
-!!! WARNING: If the yaml configuration file cannot be read or contains some
-syntax errors or invalid options, you will receive an error message to this
-effect. However, **the application will still be deployed **.
+!!! WARNING: 
+    If the YAML configuration file cannot be read or contains some
+    syntax errors or invalid options, you will receive an error message to this
+    effect. However, **the application will still be deployed **.
 
 
 ## Configuring an application which is already deployed

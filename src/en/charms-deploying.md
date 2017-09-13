@@ -6,6 +6,8 @@ TODO: Add 'centos' and 'windows' stuff to series talk
         with non-existant charm. It did not for me but the old version of this
         doc said it should.
       Needs explanation of resources (esp. in the local/offline charms sections).
+      Review required. Channnels especially
+      This page is too long. It should contain just basic stuff and link to sub-pages.
 
 # Deploying applications
 
@@ -33,8 +35,8 @@ default series) to deploy a MySQL application.
 
 !!! Note: 
     The default series can be configured at a model level, see
-    [Configuring models][models] for further details. In the absence of this setting, the
-    default is to use the series specified by the charm.
+    [Configuring models][models] for further details. In the absence of this
+    setting, the default is to use the series specified by the charm.
 
 Assuming that the Xenial series charm exists and was used above, an equivalent
 command is:
@@ -85,21 +87,7 @@ deploy from the 'candidate' channel instead, and so on. This means that
 whenever you specify a channel, you will always end up with something that best
 approximates your choice if it is not available.
 
-#### Charm upgrades
-
-Because the pointer can fluctuate among revisions it is possible that during a
-charm upgrade the channel revision is different than the revision of a
-currently deployed charm. The following rules apply:
-
-- If a channel revision is older, downgrade the deployed charm to that
-  revision.
-- If a channel revision is newer, upgrade the deployed charm to that revision.
-
-Channels can be specified with the `upgrade-charm` command. For example:
-
-```bash
-juju upgrade-charm mysql --channel edge
-```
+See [Upgrading applications][charms-upgrading] for how charm upgrades work.
 
 ## Deploying a multi-series charm
 
@@ -310,8 +298,8 @@ default option for any interfaces not specified:
 juju deploy --bind "default-space db=db-space db-admin=admin-space" mysql
 ```
 
-For information on building bundles with bindings, see [Using and Creating
-Bundles][creatingbundles].
+For information on building bundles with bindings, see
+[Using and Creating Bundles][creatingbundles].
 
 Both the `add-machine` and `deploy` commands allow the specification of a
 spaces constraint using the `--constraints` argument:
@@ -379,55 +367,17 @@ official Charm Store. Such cases include:
 - The charms may exist online but they have been customized locally.
 
 !!! Note: 
-    Although this method will ensure that the charms themselves are
-    available on systems without outside internet access, there is no guarantee
-    that a charm will work in a disconnected state. Some charms will attempt to pull
-    code from sources on the internet such as GitHub.
+    Although this method will ensure that the charms themselves are available
+    on systems without outside internet access, there is no guarantee that a charm
+    will work in a disconnected state. Some charms will attempt to pull code from
+    sources on the internet such as GitHub.
 
-### Using Charm Tools
+### Charm Tools
 
-Charm Tools is a set of tools that can be useful when using locally stored
-charms.
+Charm Tools is add-on software that is useful for interacting with local
+charms. See [Charm Tools][charm-tools] for information on installation and
+usage.
 
-See [Charm Tools](./tools-charm-tools.html) for more information.
-
-#### Installation
-
-Users of Ubuntu 14.04 (Trusty) will need to first add a PPA:
-
-```bash
-sudo add-apt-repository ppa:juju/stable
-sudo apt update
-```
-
-Install the software:
-
-```bash
-sudo apt install charm-tools
-```
-
-#### Usage
-
-Charm commands are called with `charm <subcommand>`.
-
-The command `charm-help` is used to view the available subcommands. Each
-subcommand has its own help page, which is accessible by adding either the `-h`
-or `--help` option:
-
-```bash
-charm add --help
-```
-
-When downloading charms, they end up in a directory with the same name as the
-charm. It is therefore a good idea to work from a central directory. For
-example, to download the MySQL and the WordPress charms:
-
-```bash
-mkdir ~/charms
-cd ~/charms
-charm pull nfs
-charm pull vsftpd
-```
 
 <!-- LINKS -->
 
@@ -436,3 +386,5 @@ charm pull vsftpd
 [creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [metadata]: ./authors-charm-metadata.html
 [constraints]: ./charms-constraints.html
+[charms-upgrading]: ./charms-upgrading.html
+[charm-tools]: ./tools-charm-tools.html

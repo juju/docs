@@ -63,8 +63,9 @@ disabled only when bootstrapping the cloud by adding
 ```bash
 juju bootstrap --config availability-sets-enabled=false azure mycloud
 ```
-!!! Note: By disabling availability sets, you will lose Azure's SLA
-guarantees. 
+!!! Note: 
+    By disabling availability sets, you will lose Azure's SLA
+    guarantees. 
 
 Once an environment has been bootstrapped, you cannot change whether it uses
 availability sets. You would have to tear it down and create a new

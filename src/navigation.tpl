@@ -45,6 +45,7 @@
                 <li><a href="charms-relations.html">Application Relations</a></li>
                 <li><a href="charms-exposing.html">Exposing applications</a></li>
                 <li><a href="charms-scaling.html">Scaling applications</a></li>
+                <li><a href="charms-upgrading.html">Upgrading applications</a></li>
                 <li><a href="charms-destroy.html">Removing applications &amp; Units</a></li>
                 <li><a href="charms-service-groups.html">Groups of applications</a></li>
                 <li><a href="charms-ha.html">Charm high availability</a></li>

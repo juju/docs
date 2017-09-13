@@ -50,9 +50,10 @@ access control rules. In this case, instances in "dmz" can only communicate
 with instances in "apps", which in turn are the only ones allowed to access
 instances in "database".
 
-!!! Note: Juju does not yet enforce these security restrictions. Having spaces
-and subnets available makes it possible to implement restrictions and access
-control in a future release.
+!!! Note: 
+    Juju does not yet enforce these security restrictions. Having spaces
+    and subnets available makes it possible to implement restrictions and access
+    control in a future release.
 
 ## Adding and listing spaces and subnets
 

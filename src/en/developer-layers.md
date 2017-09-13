@@ -166,6 +166,7 @@ The
 [Getting started guide](./developer-getting-started.html#assemble-the-layers)
 contains steps on how to build a layer into a charm.
 
-!!! Note: You must have the
-[Charm Tools](./developer-getting-started.html#charm-tools)
-software installed to use the `charm build` command.
+!!! Note: 
+    You must have the
+    [Charm Tools](./developer-getting-started.html#charm-tools)
+    software installed to use the `charm build` command.
