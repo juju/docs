@@ -10,12 +10,39 @@ The source project can be found at
 [https://launchpad.net/charm-tools](https://launchpad.net/charm-tools).
 
 ## Ubuntu
-To install the latest Charm Tools, you simply need to grab the latest charm-
-tools package from this PPA:
+
+Install the Charm Tools via a snap.
+
+On Ubuntu 14.04 LTS (Trusty) `snapd` is not installed by default. You can
+install it in this way:
 
 ```bash
-sudo add-apt-repository ppa:juju/stable
-sudo apt-get update && sudo apt-get install charm-tools
+sudo apt install snapd
+```
+
+Now install the tools via the `charm` snap:
+
+```bash
+sudo snap install charm
+```
+
+### Issues
+
+These are some possible issues you might be confronted with on Ubuntu 14.04
+LTS when you try to invoke the `charm` command.
+
+Log out of your Ubuntu user session (and log back in) if you see the following:
+
+```no-highlight
+The program 'charm' is currently not installed. You can install it by typing:
+sudo apt-get install charm-tools
+```
+
+Reboot your computer if you get the below error:
+
+```no-highlight
+cannot perform readlinkat() on the mount namespace file descriptor of the init
+process: Permission denied
 ```
 
 ## Mac OSX
