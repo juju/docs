@@ -1,4 +1,5 @@
 Title: Installing Juju
+TODO:  Review required
 
 # Getting the latest Juju
 
