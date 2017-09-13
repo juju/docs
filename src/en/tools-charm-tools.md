@@ -18,6 +18,12 @@ Install the `charm` snap:
 sudo snap install charm
 ```
 
+## Other Linuxes
+
+You can install Charm Tools on other Linux distributions using a snap too. See
+the upstream [Snaps documentation][snap-install] for getting snapd onto your
+Linux.
+
 ## macOS
 
 Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
@@ -533,3 +539,8 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
   The whoami command prints the current Juju user name and list of groups
   of which the user is a member.
+
+
+<!-- LINKS -->
+
+[snap-install]: https://snapcraft.io/docs/core/install
