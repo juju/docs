@@ -325,6 +325,11 @@ See [Constraints][constraints] for more general information regarding
 constraints. To learn about `extra-bindings`, which provide a way to declare an
 extra bindable endpoint that is not a relation, see [Charm metadata][metadata].
 
+!!! Note:
+    Juju's knowledge of the available spaces on the underlying cloud may lag
+    behind recent changes. To force Juju to re-examine the spaces it can use,
+    you should run the command `juju reload-spaces`.  
+
 ## Juju retry-provisioning
 
 You can use the `retry-provisioning` command in cases where deploying
