@@ -1,4 +1,5 @@
 Title: Constraints
+TODO:  Review required. In particular, the top section is too wordy.
 
 # Constraints
 
