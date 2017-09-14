@@ -19,34 +19,37 @@ assigned based on the cloud and region.
 To learn about configuration options available at bootstrap time, see
 [Configuring controllers][controlconfig] and [Configuring models][modelconfig].
 
-## Model constraints
+## Constraints
 
-Model constraints are set during the creation of the controller and are used to
-set minimum specifications for all machines in the models managed by the
-controller. They are set via the `--constraints` option
+Constraints may be set during the creation of the controller and are used to
+set minimum specifications for Juju machines. Constraints that apply to all
+machines in the models managed by the controller, but excluding the controller
+itself, are known as **model constraints**. These are set via the
+`--constraints` option. Constraints that apply to solely the controller are
+known as **controller constraints** and are set by using the
+`--bootstrap-constraints` option. The same values can be used by either type.
 
-For example, below, all machines in the LXD controller's models will have at
+For more details on constraints, see [Constraints][constraints].
+
+## Examples
+
+### Set minimum specifications for all machines in a controller's models
+
+Below, all machines in the LXD controller's models will have at
 least 4GiB of memory:
 
 ```bash
 juju bootstrap --constraints="mem=4G" localhost
 ```
 
-For more details on constraints, see [Constraints][constraints].
+### Set minimum specifications for a new controller
 
-## Controller constraints
-
-Constraints can also affect solely the controller by using the
-`--bootstrap-constraints` option. The eligible values are identical to those
-available as model constraints (explained above).
-
-This example shows how to request at least 4GiB of memory for a LXD controller:
+This example shows how to request at least 4GiB of memory and two CPUs for a
+AWS controller:
 
 ```bash
-juju bootstrap --bootstrap-constraints="mem=4G" localhost
+juju bootstrap --bootstrap-constraints="mem=4G cores=2" aws
 ```
-
-## Other examples
 
 ### Create a controller of a specific series
 
