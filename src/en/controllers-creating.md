@@ -1,5 +1,6 @@
 Title: Creating a Juju Controller
-TODO: Review again soon (created: March 2016)
+TODO:  Improve examples
+       Hardcoded: Ubuntu code names
 
 
 # Creating a controller
@@ -7,105 +8,119 @@ TODO: Review again soon (created: March 2016)
 Use the `juju bootstrap` command to create a controller (and model) for a given
 cloud:
 
-`juju bootstrap [options] <cloud name> <controller name>`
+`juju bootstrap [options] <cloud name> [<controller name>]`
 
 See `juju help bootstrap` for details on this command or see the
-[command reference page](./commands.html#juju-bootstrap).
+[Juju command reference][commands] page.
 
 The `<controller name>` is optional. If one is not supplied, then a name is
 assigned based on the cloud and region.
 
-```bash
-juju bootstrap aws/us-east-1
-```
+To learn about configuration options available at bootstrap time, see
+[Configuring controllers][controlconfig] and [Configuring models][modelconfig].
 
-This creates a new controller called `aws-us-east-1` in that cloud and region.
+## Constraints
 
+Constraints may be set during the creation of the controller and are used to
+set minimum specifications for Juju machines. Constraints that apply to all
+machines in the models managed by the controller, but excluding the controller
+itself, are known as **model constraints**. These are set via the
+`--constraints` option. Constraints that apply to solely the controller are
+known as **controller constraints** and are set by using the
+`--bootstrap-constraints` option. The same values can be used by either type.
 
-## Notes
+For more details on constraints, see [Constraints][constraints].
 
-Bootstrap has many options. Some commonly used options are described here with
-examples.
+## Examples
 
-## Create an LXD Xenial controller
+### Set minimum specifications for all machines in a controller's models
 
-Because Xenial is the current LTS release, we do not have to mention it
-specifically. For our example, we name the controller lxd-xenial and instruct
-it to use the local lxd cloud.
-
-```bash
-juju bootstrap lxd lxd-xenial
-```
-
-## Create an LXD Trusty controller using more recent tools
-
-The '--upload-tools' option is used to make agent software available that is
-more recent than the default binary. This is done when some features may not
-yet be compiled in to the agent for the Ubuntu release being installed. Note
-that Juju will default to the latest LTS (see `distro-info --lts` command).
-
-The '--config' option allows you to pass configuration values during
-bootstrap as arguments. If you do this, the values you use take precedence
-over any default settings.
+Below, all machines in the LXD controller's models will have at
+least 4GiB of memory:
 
 ```bash
-juju bootstrap --upload-tools --config default-series=trusty \
-	lxd lxd-trusty
+juju bootstrap --constraints="mem=4G" localhost
 ```
 
-## Create a Rackspace controller using a daily image
+### Set minimum specifications for a new controller
+
+This example shows how to request at least 4GiB of memory and two CPUs for a
+AWS controller:
+
+```bash
+juju bootstrap --bootstrap-constraints="mem=4G cores=2" aws
+```
+
+### Create a controller of a specific series
+
+The controller will run the latest LTS Ubuntu release by default. At the time
+of writing, Xenial will be selected.
+
+For our example, we name the resulting LXD controller 'lxd-xenial' to reflect
+that:
+
+```bash
+juju bootstrap localhost lxd-xenial
+```
+
+To select a different series the `--bootstrap-series` option is used.
+
+Below, a google (GCE) controller based on Ubuntu 14.04 LTS (Trusty) is
+requested (and is given the name 'gce-trusty'):
+
+```bash
+juju bootstrap --bootstrap-series=trusty google gce-trusty
+```
+
+### Create a Rackspace controller using a daily image
 
 The example uses a previously defined configuration file called 
-config-rackspace.yaml. Many clouds are available, see [Clouds](./clouds.html).
-Note that values passed using '--config' as above will take precedence
+config-rackspace.yaml. 
+
+Note that values passed using '--config' will take precedence
 over values included in a file. This is important if you use both a config
 file and state one or more config values while bootstrapping.
 
 ```bash
 juju bootstrap \
-	--upload-tools --config=~/config-rackspace.yaml \
-	--config image-stream=daily
+	--config=~/config-rackspace.yaml   \
+	--config image-stream=daily        \
 	rackspace controller-rackspace
 ```
 
-## Create a controller with constraints
+### Create a controller using a non-default region
 
-This example provides 4G of RAM to the local lxd controller we create. For
-more details about constraints, see [Constraints](./reference-constraints.html).
-
-```bash
-juju bootstrap --constraints="mem=4G" lxd lxd-xenial
-```
-
-If you omit the optional controller name here, the new controller will be
-named using the name of the cloud, `lxd`:
-
-```bash
-juju bootstrap --constraints="mem=4G" lxd
-```
-
-## Create a controller using a non-default region
-
-The [Clouds](./clouds.html) page details listing available clouds and
-how the list denotes default regions for each. To specify a different
-region during controller creation, use:
+The [Clouds][clouds] page details listing available clouds and how the list
+denotes default regions for each. To specify a different region during
+controller creation, use:
 
 ```bash
 juju bootstrap aws/us-west-2 mycontroller
 ```
 
 This is an instance where using the default controller name could be especially
-handy, as omitting the `mycontroller` name will cause your new controller to
-be named using the non-default region, specifically naming it `aws-us-west-2`:
+handy, as omitting the `mycontroller` name will cause your new controller to be
+named using the non-default region, specifically naming it `aws-us-west-2`:
 
 ```bash
 juju bootstrap aws/us-west-2
 ```
 
-## Change timeout and retry delays
+### Create a controller using a different MongoDB profile
 
-You can change the default timeout and retry delays used by Juju 
-by setting the following keys in your configuration:
+MongoDB has two memory profile settings available, 'default' and 'low'. The
+first setting is the profile shipped by default with MongoDB. The second is a
+more conservative memory profile that uses less memory. To select which one
+your controller uses when it is created, use:
+
+```bash
+juju bootstrap --config mongo-memory-profile=low
+```
+
+### Change timeout and retry delays
+
+You can change the default timeout and retry delays used by Juju by setting the
+following keys in your configuration:
 
 | Key                        | Default (seconds) | Purpose |
 |:---------------------------|:------------------|:---------|
@@ -117,10 +132,29 @@ For example, to increase the timeout between the client and the controller
 from 10 minutes to 15, enter the value in seconds:
 
 ```bash
-juju bootstrap --config bootstrap-timeout=900 lxd lxd-faraway
+juju bootstrap --config bootstrap-timeout=900 localhost lxd-faraway
 ```
 
-To learn more about configuration options available at bootstrap time, see
-[Configuring controllers][controlconfig].
+### Changing the current model/controller
 
+By default, when Juju bootstraps a new controller, it will also 'switch' to
+that controller and the default model created with it. Any subsequent Juju
+commands which do not specify a controller/model will be assumed to apply to
+this model.
+
+In some cases (e.g. when scripting Juju) this may not be desirable. It is
+possible to add a `--no-switch` option to the bootstrap command to prevent the
+new controller from being automatically selected. For example:
+
+```bash
+juju bootstrap --no-switch localhost lxd-new
+```
+
+
+<!-- LINKS -->
+
+[clouds]: ./clouds.html
+[constraints]: ./charms-constraints.html
+[commands]: ./commands.html#juju-bootstrap
 [controlconfig]: ./controllers-config.html "Configuring Juju controllers"
+[modelconfig]: ./models-config.html "Configuring Juju models"
