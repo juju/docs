@@ -8,6 +8,36 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
+^# Juju 2.2.4
+
+  ## New and Improved
+
+  - This release is primarily a bug fix release which addresses some issues
+    that missed the cutoff for the previous 2.2.3 release or were discovered
+    in 2.2.3
+  - A notable fix is for model migration:
+    model migration would previously fail if the model had subordinate
+    applications that were related to multiple principals. This is now fixed.
+
+  For a list of all bugs fixed in this release, see:
+  https://launchpad.net/juju/+milestone/2.2.4
+
+
+  ## How can I get it?
+
+  The best way to get your hands on this release of Juju is to install it as
+  a snap package (see https://snapcraft.io for more info on snaps).
+
+         snap install juju --classic
+
+  Other packages are available for a variety of platforms. Please see the online
+  documentation at https://jujucharms.com/docs/stable/reference-install Those
+  subscribed to a snap channel should be automatically upgraded. If you’re using
+  the ppa/homebrew, you should see an upgrade available.
+
+  For highlights of this release, please see the documentation at
+  https://jujucharms.com/docs/2.2/whats-new
+
 ^# Juju 2.2.3
 
   ## New and Improved
@@ -111,7 +141,7 @@ The versions covered here are:
     - Cleanup of log noise to make observing true errors much easier
     - Status history is now pruned whereas before a bug prevented that from
       happening leading to unbounded growth
-    - update-status interval configurable (this value must be set when 
+    - update-status interval configurable (this value must be set when
       bootstrapping or performing add-model via the --config option; any changes
       after that are not noticed until a Juju restart)
     - debug-log include/exclude arguments now more user friendly (as for

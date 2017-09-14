@@ -6,9 +6,9 @@ TODO:  Review required
 Juju is available as a client on many platforms and distributions. Find your
 platform below and get started with Juju.
 
-## Version 2.2.3
+## Version 2.2.4
 
-The current stable version of Juju is 2.2.3 and is recommended for everyday
+The current stable version of Juju is 2.2.4 and is recommended for everyday
 production use.
 
 
@@ -52,13 +52,13 @@ updated with the following:
 ```
 
 Alternatively, you can manually install Juju from the following archive:
-: [juju-2.2.3-osx.tar.gz](https://launchpad.net/juju/2.2/2.2.3/+download/juju-2.2.3-osx.tar.gz)([md5](https://launchpad.net/juju/2.2/2.2.3/+download/juju-2.2.3-osx.tar.gz/+md5))
+: [juju-2.2.4-osx.tar.gz](https://launchpad.net/juju/2.2/2.2.4/+download/juju-2.2.4-osx.tar.gz)([md5](https://launchpad.net/juju/2.2/2.2.4/+download/juju-2.2.4-osx.tar.gz/+md5))
 {: .instruction }
 
 ### Windows
 
 A Windows installer is available for Juju and can be found here:
-: [juju-setup-2.2.3.exe](https://launchpad.net/juju/2.2/2.2.3/+download/juju-setup-2.2.3.exe)([md5](https://launchpad.net/juju/2.2/2.2.3/+download/juju-setup-2.2.3.exe/+md5))
+: [juju-setup-2.2.4.exe](https://launchpad.net/juju/2.2/2.2.4/+download/juju-setup-2.2.4.exe)([md5](https://launchpad.net/juju/2.2/2.2.4/+download/juju-setup-2.2.4.exe/+md5))
 {: .instruction }
 
 ### Centos and other Linuxes
@@ -74,10 +74,10 @@ can install Juju with:
  sudo snap install juju --classic
 ```
 
-Alternatively, the latest manual install package for Centos is 2.2.3, which
+Alternatively, the latest manual install package for Centos is 2.2.4, which
 can be installed from the following archive:
 
-: [juju-2.2.3-centos7.tar.gz](https://launchpad.net/juju/2.2/2.2.3/+download/juju-2.2.3-centos7.tar.gz)([md5](https://launchpad.net/juju/2.2/2.2.3/+download/juju-2.2.3-centos7.tar.gz/+md5))
+: [juju-2.2.4-centos7.tar.gz](https://launchpad.net/juju/2.2/2.2.4/+download/juju-2.2.4-centos7.tar.gz)([md5](https://launchpad.net/juju/2.2/2.2.4/+download/juju-2.2.4-centos7.tar.gz/+md5))
 {: .instruction }
 
 ## Getting development releases
@@ -121,13 +121,13 @@ The development releases are put under the `--devel` flag in brew.
 ```
 
 Or you can use the binary built for macOS:
-: [juju-2.2.3-osx.tar.gz](https://launchpad.net/juju/2.2/2.2.3/+download/juju-2.2.3-osx.tar.gz)([md5](https://launchpad.net/juju/2.2/2.2.3/+download/juju-2.2.3-osx.tar.gz/+md5))
+: [juju-2.2.4-osx.tar.gz](https://launchpad.net/juju/2.2/2.2.4/+download/juju-2.2.4-osx.tar.gz)([md5](https://launchpad.net/juju/2.2/2.2.4/+download/juju-2.2.4-osx.tar.gz/+md5))
 {: .instruction }
 
 ### Windows
 
-The latest is version 2.2.3 located at:
-: [juju-setup-2.2.3.exe](https://launchpad.net/juju/2.2/2.2.3/+download/juju-setup-2.2.3.exe)([md5](https://launchpad.net/juju/2.2/2.2.3/+download/juju-setup-2.2.3.exe/+md5))
+The latest is version 2.2.4 located at:
+: [juju-setup-2.2.4.exe](https://launchpad.net/juju/2.2/2.2.4/+download/juju-setup-2.2.4.exe)([md5](https://launchpad.net/juju/2.2/2.2.4/+download/juju-setup-2.2.4.exe/+md5))
 {: .instruction }
 
 ## Building from source
