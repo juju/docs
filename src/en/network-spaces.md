@@ -25,6 +25,12 @@ considerations when using spaces:
 !!! Note:
     Network spaces are currently only supported by the MAAS and EC2 providers.
 
+
+!!! Note:
+    Juju's knowledge of the available spaces on the underlying cloud may lag
+    behind recent changes. To force Juju to re-examine the spaces it can use,
+    you should run the command `juju reload-spaces`.  
+
 Having multiple subnets spanning different zones within the same space enables
 Juju to perform automatic distribution of an application's units across zones
 inside the same space. This allows for high-availability and the spreading of

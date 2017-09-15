@@ -168,3 +168,9 @@ Will provision a machine that is connected to both the 'storage' and 'db'
 network spaces. You can subsequently deploy applications to this machine using
 the '--to' placement switch - 
 [see the documentation on deploying charms](./charms-deploying.html)
+
+
+!!! Note:
+    Juju's knowledge of the available spaces on the underlying cloud may lag
+    behind recent changes. To force Juju to re-examine the spaces it can use,
+    you should run the command `juju reload-spaces`.  
