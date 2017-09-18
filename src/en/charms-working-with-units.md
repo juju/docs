@@ -63,6 +63,12 @@ Copy a local file to the second apache2 unit in the model "testing":
 juju scp -m testing foo.txt apache2/1:
 ```
 
+!!! Note:
+    Juju cannot transfer files between two remote units because it uses public
+    key authentication exclusively and the native (OpenSSH) `scp` command disables
+    agent forwarding by default. Either the destination or the source must be local
+    (Juju client).
+
 For more information, run the `juju help scp` command.
 
 
