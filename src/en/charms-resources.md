@@ -1,5 +1,5 @@
 Title: Resources
-TODO:  Improve examples
+TODO:  Critical: Improve examples
 
 # Juju Resources
 
@@ -26,7 +26,7 @@ to have been deployed in order to run the command. A controller is also not
 strictly required but may be necessary in the case of private charms where
 credentials need to be added for authentication.
 
-Example:
+For example, to show the resources of the postgresql charm:
 
 ```bash
 juju charm-resources postgresql
@@ -47,7 +47,7 @@ its units and are discoverable with the `resources` command. In contrast to the
 well as deployed charm. An application gains resources via the
 `attach-resource` command.
 
-Example:
+For example, to show the resources of the postgresql application:
 
 ```bash
 juju resources postgresql
@@ -61,26 +61,12 @@ Resource  Supplied by  Revision
 wal-e     charmstore   0
 ```
 
-Example (with the `--details` option):
-
-```bash
-juju resources svc --details
-```
-
-Sample output:
-
-```no-highlight
-[Units]
-Unit  Resource  Revision  Expected
-0     wal-e     -         0
-```
-
 ## Unit resources
 
 These are the resources that an individual unit (of an application) is
 currently using.
 
-Example:
+For example, to list the resources of unit 'postgresql/0':
 
 ```bash
 juju resources postgresql/0
