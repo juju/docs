@@ -319,23 +319,24 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
       charm pull mysql
 
-  Will download the MySQL charm to a mysql directory within your current path.
+  Will download the mysql charm files to directory `mysql` within your current
+  path.
 
-      charm pull wordpress ~/charms/
+      charm pull wordpress ~/wordpress-charm
 
-  Will download the WordPress charm to `~/charms/wordpress`
+  Will download the wordpress charm files to `~/wordpress-charm`
 
-      charm pull trusty/wordpress
+      charm pull trusty/wordpress-trusty
 
-  Will fetch the trusty version of the wordpress charm into the directory
-  "wordpress" in the current directory.
+  Will copy the Trusty version of the wordpress charm (files) into directory
+  `wordpress-trusty` under the current directory.
 
   To select a channel, use the `--channel` option, for instance:
 
       charm pull wordpress --channel development
 
   Note that `charm pull` only pulls down a copy of the charm that is in the
-  store, it should not be used when you want to hack on a charm, for that you
+  store. It should not be used when you want to hack on a charm, for that you
   should use `charm pull-source`.
 
 
