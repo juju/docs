@@ -1,16 +1,21 @@
 Title: Resources
+TODO:  Improve examples
 
-# Resources
+# Juju Resources
 
-A *resource* is additional content/files that a charm needs in order to run.
+A Juju *resource* is additional content/files that a charm needs in order to
+run.
 
-Juju has 3 levels of understanding for what a resource is:
+There are three ways to examine resources:
 
  1. Charm resources
  1. Application resources
  1. Unit resources
 
-Each of these will be looked at below.
+Each of these will be explained below.
+
+Also see [Developer resources][developer-resources] in the Charm developer
+guide.
 
 ## Charm resources
 
@@ -24,15 +29,14 @@ credentials need to be added for authentication.
 Example:
 
 ```bash
-juju charm-resources cs:a-charm
+juju charm-resources postgresql
 ```
 
 Sample output:
 
 ```no-highlight
 Resource  Revision
-music     1
-website   2
+wal-e     0
 ```
 
 ## Application resources
@@ -46,7 +50,7 @@ well as deployed charm. An application gains resources via the
 Example:
 
 ```bash
-juju resources svc
+juju resources postgresql
 ```
 
 Sample output:
@@ -54,17 +58,10 @@ Sample output:
 ```no-highlight
 [Service]
 Resource  Supplied by  Revision
-openjdk   charmstore   7
-rsc1234   charmstore   15
-website   upload       -
-website2  Bill User    2012-12-12T12:12
-
-[Updates Available]
-Resource  Revision
-openjdk   10
+wal-e     charmstore   0
 ```
 
-Example:
+Example (with the `--details` option):
 
 ```bash
 juju resources svc --details
@@ -74,13 +71,8 @@ Sample output:
 
 ```no-highlight
 [Units]
-Unit  Resource  Revision          Expected
-5     alpha     10                15
-5     beta      2012-12-12T12:12  2012-12-12T12:12
-5     charlie   2011-11-11T11:11  2012-12-12T12:12 (fetching: 2%)
-10    alpha     10                15 (fetching: 15%)
-10    beta      -                 2012-12-12T12:12
-10    charlie   2011-11-11T11:11  2012-12-12T12:12 (fetching: 9%)
+Unit  Resource  Revision  Expected
+0     wal-e     -         0
 ```
 
 ## Unit resources
@@ -91,14 +83,19 @@ currently using.
 Example:
 
 ```bash
-juju resources svc/0
+juju resources postgresql/0
 ```
 
 Sample output:
 
 ```no-highlight
-[Unit]
-Resource  Revision
-rsc1234   15
-website2  2012-12-12T12:12
+No resources to display.
 ```
+
+Above we see the case where there is an absence of active resources at the unit
+level.
+
+
+<!-- LINKS -->
+
+[developer-resources]: developer-resources.html

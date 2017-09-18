@@ -51,6 +51,7 @@
                 <li><a href="charms-ha.html">Charm high availability</a></li>
                 <li><a href="charms-working-with-units.html">Working with Units</a></li>
                 <li><a href="actions.html">Working with Actions</a></li>
+                <li><a href="charms-resources.html">Working with Resources</a></li>
                 <li><a href="charms-storage.html">Using storage</a></li>
                 <li><a href="charms-metrics.html">Viewing utilization with metrics</a></li>
             </ul>

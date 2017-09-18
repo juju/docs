@@ -1,6 +1,6 @@
 Title: Resources | Developer guide
 
-# Resources (Developer)
+# Developer resources
 
 Many applications require binary resources to complete the install process.
 While it is possible for a charm to download this software from package
@@ -17,7 +17,7 @@ package and a dependency, then use one resource for each. Juju optimizes
 distribution of resources. If resources are grouped into one file (resource)
 then they are larger and must be updated everywhere when they are updated.
 
-Also see [Resources][charms-resources] in the User guide for an end-user
+Also see [Juju resources][charms-resources] in the User guide for an end-user
 perspective.
 
 ## Developing a charm with resources
