@@ -1,13 +1,11 @@
 Title: Deploying applications
 TODO: Add 'centos' and 'windows' stuff to series talk
-      Downloading charms is shabby. See https://git.io/vwNLI . I therefore
-        ommitted the "feature" of specifying a download dir
       Review whether Juju should go to the store when pointing to a local dir
         with non-existant charm. It did not for me but the old version of this
         doc said it should.
-      Needs explanation of resources (esp. in the local/offline charms sections).
       Review required. Channnels especially
       This page is too long. It should contain just basic stuff and link to sub-pages.
+      Hardcoded: Ubuntu codenames
 
 # Deploying applications
 
@@ -74,7 +72,6 @@ version.
 
 By default you will get the 'stable' channel, but you can specify a channel
 when using the `deploy` command:
-
 
 ```bash
 juju deploy mysql --channel <channel_name>
