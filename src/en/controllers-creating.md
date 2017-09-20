@@ -150,6 +150,23 @@ new controller from being automatically selected. For example:
 juju bootstrap --no-switch localhost lxd-new
 ```
 
+### Configuring/enabling a remote syslog server
+
+Create an Azure controller and configure for log forwarding:
+
+```bash
+juju bootstrap azure --config logconfig.yaml
+```
+
+To enable forwarding on all the controller's models by default:
+
+```bash
+juju bootstrap azure --config logforward-enabled=true --config logconfig.yaml
+```
+
+See [Remote logging][troubleshooting-logs-remote] for a more thorough treatment
+of log forwarding.
+
 
 <!-- LINKS -->
 
@@ -158,3 +175,4 @@ juju bootstrap --no-switch localhost lxd-new
 [commands]: ./commands.html#juju-bootstrap
 [controlconfig]: ./controllers-config.html "Configuring Juju controllers"
 [modelconfig]: ./models-config.html "Configuring Juju models"
+[troubleshooting-logs-remote]: ./troubleshooting-logs-remote.html
