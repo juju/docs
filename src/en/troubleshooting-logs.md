@@ -195,8 +195,7 @@ Output:
 -rw------- 1 syslog syslog 345K Apr 28 16:58 unit-nfs2-0.log
 ```
 
-There are two extra log files on each controller: `logsink.log` and
-`audit.log`:
+There is one extra log file on each controller: `logsink.log`:
 
 ```bash
 juju ssh -m controller 0 ls -lh /var/log/juju
@@ -209,8 +208,8 @@ Output:
 -rw------- 1 syslog syslog  85K Apr 28 17:03 machine-0.log
 ```
 
-File `logsink.log` contains logs for all models. Its contents get sent to the
-database.
+File `logsink.log` contains logs for all models managed by the controller. Its
+contents get sent to the database.
 
 !!! Note: 
     In a [High availability][controllers-ha] scenario, `logsink.log` is not
