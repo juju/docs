@@ -209,13 +209,14 @@ Output:
 ```
 
 File `logsink.log` contains logs for all models managed by the controller. Its
-contents get sent to the database.
+contents get sent to the database where it is consumed by the `debug-log`
+command.
 
 !!! Note: 
     In a [High availability][controllers-ha] scenario, `logsink.log` is not
     guaranteed to contain all messages since agents have a choice of several
     controllers to send their logs to. The `debug-log` command should be used
-    for accessing consolidated data.
+    for accessing consolidated data across all controllers.
 
 
 <!-- LINKS -->
