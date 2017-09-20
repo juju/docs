@@ -1,6 +1,6 @@
 Title: Remote logging
 TODO:  Strongly consider adding a sub-page (rsyslog TLS tutorial)
-       Need to state whether client-side auth is a requirement
+       Need to state whether server-side and/or client-side auth is a requirement
 
 
 # Remote logging

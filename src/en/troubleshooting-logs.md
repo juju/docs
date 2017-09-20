@@ -205,22 +205,18 @@ juju ssh -m controller 0 ls -lh /var/log/juju
 Output:
 
 ```no-highlight
--rw------- 1 syslog syslog    0 Apr 28 17:04 audit.log
 -rw------- 1 syslog syslog 2.3M Apr 28 17:05 logsink.log
 -rw------- 1 syslog syslog  85K Apr 28 17:03 machine-0.log
 ```
 
-- `logsink.log` contains logs for all models (its contents get sent to the
-  database).
-- `audit.log` contains the API calls of authenticated users.
+File `logsink.log` contains logs for all models. Its contents get sent to the
+database.
 
 !!! Note: 
-    In a [High availability][controllers-ha] scenario, `audit.log` and
-    `logsink.log` are not guaranteed to contain all messages since agents have a
-    choice of several controllers to send their logs to. For `audit.log`, the
-    collation of files across controllers may be required to access all
-    information (a future release may address this). For `logsink.log`, the
-    `debug-log` command should be used to access consolidated data.
+    In a [High availability][controllers-ha] scenario, `logsink.log` is not
+    guaranteed to contain all messages since agents have a choice of several
+    controllers to send their logs to. The `debug-log` command should be used
+    for accessing consolidated data.
 
 
 <!-- LINKS -->
