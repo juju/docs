@@ -12,6 +12,9 @@ is provided here.
 See [Juju high availability](./controllers-ha.html#ha-and-logging) when viewing logs
 in an HA context.
 
+See [Remote logging][troubleshooting-logs-remote] for instructions on setting
+up a remote logging server for Juju.
+
 
 ## Juju agents
 
@@ -147,7 +150,8 @@ machine in the entire log:
 juju debug-log --replay --include unit-mysql-0 --include machine-1
 ```
 
-!!! Note: The unit can also be written 'mysql/0' (as shown by `juju status`).
+!!! Note: 
+    The unit can also be written 'mysql/0' (as shown by `juju status`).
 
 To see all WARNING and ERROR messages in the entire log:
 
@@ -191,9 +195,7 @@ Output:
 -rw------- 1 syslog syslog 345K Apr 28 16:58 unit-nfs2-0.log
 ```
 
-There is a special log file on each controller (`logsink.log`) that is used for
-the consolidated model messages used by `juju debug-log` (its contents get sent
-to the database):
+There is one extra log file on each controller: `logsink.log`:
 
 ```bash
 juju ssh -m controller 0 ls -lh /var/log/juju
@@ -206,10 +208,18 @@ Output:
 -rw------- 1 syslog syslog  85K Apr 28 17:03 machine-0.log
 ```
 
-Notice that the controller model was chosen with `juju ssh`. Also, a combination of
-commands `juju controllers` and `juju machines` yielded that the
-controller here has a machine id of '0' (typical).
+File `logsink.log` contains logs for all models managed by the controller. Its
+contents get sent to the database where it is consumed by the `debug-log`
+command.
 
-!!! Note: in a [High availability](./controllers-ha.html) scenario, file `logsink.log`
-is not guaranteed to contain all messages since agents have a choice of several
-controllers to send their logs to.
+!!! Note: 
+    In a [High availability][controllers-ha] scenario, `logsink.log` is not
+    guaranteed to contain all messages since agents have a choice of several
+    controllers to send their logs to. The `debug-log` command should be used
+    for accessing consolidated data across all controllers.
+
+
+<!-- LINKS -->
+
+[troubleshooting-logs-remote]: ./troubleshooting-logs-remote.html
+[controllers-ha]: ./controllers-ha.html 
