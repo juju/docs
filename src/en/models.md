@@ -109,14 +109,18 @@ Common model management tasks are summarized below.
 
 ^# Provide SSH access
    
-   Use the `juju add-ssh-key` command to provide SSH access to all machines,
-   present and future, in a model:
+   Use the `juju add-ssh-key` and `juju import-ssh-key` commands to provide SSH
+   access to all machines, present and future, in a model:
    
    `juju add-ssh-key <ssh-key>`
+
+   OR
+
+   `juju import-ssh-key <lp|gh>:<user identity>`
    
    For complete explanation and syntax, see the
-   [command reference page](./commands.html#add-ssh-key) or the `juju help
-   add-ssh-key` command.
+   [command reference page](./commands.html#add-ssh-key) or the
+   `juju help add-ssh-key` or the `juju help import-ssh-key` commands.
    
 
 
