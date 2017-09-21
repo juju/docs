@@ -44,8 +44,7 @@ wal-e     0
 These are resources that a deployed application is currently using across all
 its units and are discoverable with the `resources` command. In contrast to the
 `charm-resources` command, this command needs a controller (that it queries) as
-well as deployed charm. An application gains resources via the
-`attach-resource` command.
+well as deployed charm.
 
 For example, to show the resources of the postgresql application:
 
@@ -59,6 +58,23 @@ Sample output:
 [Service]
 Resource  Supplied by  Revision
 wal-e     charmstore   0
+```
+
+An application gains resources, typically by a charm developer, via the
+`attach-resource` command:
+
+```bash
+juju attach-resource postgresql wal-e=/home/ubuntu/resources/wal-e-upgrade.snap
+```
+
+Where the charm's `metadata.yaml` file contains the following stanza:
+
+```no-highlight
+"resources":
+  "wal-e":
+    "type": "file"
+    "filename": "wal-e.snap"
+    "description": "WAL-E Snap Package"
 ```
 
 ## Unit resources
