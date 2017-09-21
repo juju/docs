@@ -1,6 +1,6 @@
-Title: Resources | Developer guide
+Title: Using resources | Developer guide
 
-# Developer resources
+# Using resources
 
 Many applications require binary resources to complete the install process.
 While it is possible for a charm to download this software from package
