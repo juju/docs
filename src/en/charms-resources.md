@@ -3,8 +3,8 @@ TODO:  Critical: Improve examples
 
 # Juju Resources
 
-A Juju *resource* is additional content/files that a charm needs in order to
-run.
+A Juju *resource* is additional content/files that a charm can make use of or
+may require in order to run.
 
 There are three ways to examine resources:
 
@@ -44,7 +44,7 @@ wal-e     0
 These are resources that a deployed application is currently using across all
 its units and are discoverable with the `resources` command. In contrast to the
 `charm-resources` command, this command needs a controller (that it queries) as
-well as deployed charm.
+well as a deployed charm.
 
 For example, to show the resources of the postgresql application:
 
