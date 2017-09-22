@@ -21,12 +21,11 @@ as [before][writing], but using layers.
 
 ## Preparation
 
-First off, building charms requires [Charm Tools][], as well as a [local charm
-repository][deploying] in which to work.  So, if you haven't set those up yet,
-use the previous links to do so.  For example:
+First off, building charms requires [Charm Tools][], as well as a
+[local charm repository][deploying] in which to work. So, if you haven't set
+those up yet, use the previous links to do so. For example:
 
 ```bash
-sudo apt-get install charm-tools
 export JUJU_REPOSITORY=$HOME/charms
 mkdir -p $JUJU_REPOSITORY/{layers,trusty}
 cd $JUJU_REPOSITORY/layers
