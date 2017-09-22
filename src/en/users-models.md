@@ -43,8 +43,8 @@ or 'admin' access to any model.
 - `read`: A user can view the state of a model with the `models`,
   `machines` and `status` commands.
 - `write`: In addition to 'read' abilities, a user can modify/configure models.
-- `admin`: In addition to 'write' abilities, a user can backup/destroy models
-  and connect to machines via SSH.
+- `admin`: In addition to 'write' abilities, a user can backup models and
+  connect to machines via the `juju ssh` command.
 
 To give 'bob' read-only access to the model 'mymodel', for example, the
 administrator would enter the following:
