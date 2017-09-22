@@ -45,7 +45,29 @@ juju charm create vanilla
 This not only creates the directory structure, it also populates it with
 template files for you to edit. Your directory will now look like this:
 
-![directory tree](./media/author-charm-writing-01.png)
+<!--
+name:      charm
+tracking:    stable
+installed:   2.2 (17) 102MB -
+refreshed:   2017-07-31 18:40:23 +0000 UTC
+-->
+![directory tree](./media/author-charm-writing-02.png)
+
+<!--
+```no-highlight
+.
+├── config.yaml
+├── icon.svg
+├── layer.yaml
+├── metadata.yaml
+├── reactive
+│   └── vanilla.py
+├── README.ex
+└── tests
+    ├── 00-setup
+    └── 10-deploy
+```
+-->
 
 ## Create the README file
 
