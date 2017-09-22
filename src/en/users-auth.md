@@ -43,9 +43,15 @@ SSH access is managed on a per-model basis. That is, if a public key is added
 to a model then that key is placed on all machines (present and future) in that
 model.
 
+Each Juju machine provides a user account named 'ubuntu' and it is to this
+account that public keys are added when using the Juju SSH commands (
+`juju add-ssh-key` and `juju import-ssh-key`). Because this user is effectively
+the 'root' user (passwordless sudo privileges), the granting of SSH access must
+be done with due consideration.
+
 ### Native ssh
 
-When using the native (OpenSSH) `ssh` command, if one's public key has been
+When using the native (OpenSSH) `ssh` client, if one's public key has been
 installed into a model, then, as expected, a connection to the 'ubuntu' user
 account can be made. All that is needed is the corresponding keypair and
 adequate network connectivity. 
@@ -62,7 +68,7 @@ However, when using the `juju ssh` command, Juju's own user rights system
 imposes a second degree of security that will permit access solely from a Juju
 user, and only one with sufficient permissions. How this works depends on
 whether the user is an admin or a non-admin. See [Juju users][users] for a
-breakdown of different user types.
+breakdown of the different user types.
 
 For example, to connect to a machine with an id of '0':
 
@@ -72,14 +78,16 @@ juju ssh 0
 
 #### Admin user
 
-When a controller is created a passphraseless SSH keypair will be generated and
-placed under `~/.local/share/juju/ssh`. The public key (`juju_id_rsa.pub`) will
-be installed in the 'ubuntu' account on every machine created within every
-model belonging to this controller. If there is an existing private key named
-`~/.ssh/id_rsa` then it will also be placed on every machine.
+When a controller is created (see
+[Creating a controller][controllers-creating]) a passphraseless SSH keypair
+will be generated and placed under `~/.local/share/juju/ssh`. The public key
+(`juju_id_rsa.pub`) will be installed in the 'ubuntu' account on every machine
+created within every model belonging to this controller. During creation, if
+there is an existing public key named `~/.ssh/id_rsa.pub` then it will also be
+placed on every machine.
 
-As long as the controller administrator has access to the above keys he/she can
-connect to any machine with the `juju ssh` command.
+As long as the controller administrator has access to either of the above keys
+he/she can connect to any machine with the `juju ssh` command.
 
 #### Regular user
 
