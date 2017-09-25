@@ -19,32 +19,10 @@ improvements.
 For this example, we will create a charm for the same [Vanilla forum software][]
 as [before][writing], but using layers.
 
-## Preparation
+### Charm Tools
 
-First off, building charms requires [Charm Tools][], as well as a [local charm
-repository][deploying] in which to work.  So, if you haven't set those up yet,
-use the previous links to do so.  For example:
-
-```bash
-sudo apt-get install charm-tools
-export JUJU_REPOSITORY=$HOME/charms
-mkdir -p $JUJU_REPOSITORY/{layers,trusty}
-cd $JUJU_REPOSITORY/layers
-```
-
-!!! Note: 
-    Exporting the environment variable in this way only sets the
-    variable for the current terminal. If you wish to make these changes persist,
-    add the same export statement to a resource file that are evaluated when you
-    create a new console such as ~/.bashrc depending on your environment.
-
-Then create a directory for your layer:
-
-```bash
-mkdir vanilla
-cd vanilla
-```
-
+Charm Tools is add-on software that is necessary for charm building. See
+[Charm Tools][charm-tools] for information on installation and usage.
 
 ## Determine a base layer and additional relations
 
@@ -255,7 +233,6 @@ juju expose vanilla
 [writing]: ./authors-charm-writing.html
 [charm-helpers]: https://pypi.python.org/pypi/charmhelpers/
 [Vanilla forum software]: http://vanillaforums.org/
-[Charm Tools]: ./tools-charm-tools.html
 [deploying]: ./charms-deploying.html
 [apache-php5]: https://github.com/johnsca/apache-php
 [http interface]: https://code.launchpad.net/~bcsaller/charms/+source/http/+git/http
@@ -265,3 +242,4 @@ juju expose vanilla
 [repo]: https://github.com/johnsca/layered-vanilla
 [interfaces.juju.solutions]: http://interfaces.juju.solutions/
 [discovery and dispatch rules]: http://pythonhosted.org/charms.reactive/#discovery-and-dispatch-of-reactive-handlers
+[charm-tools]: ./tools-charm-tools.html
