@@ -299,10 +299,11 @@ juju add-model default
 juju import-filesystem lxd juju:juju-7a544c-filesystem-0 pgdata
 ```
 
-The determination of the volume ID is dependent upon cloud type. Above, the
-volume ID is given by the backing LXD pool ('juju' in this case) and the volume
-name (obtained with `lxc storage volume list <lxd-pool>`). The LXD storage
-provider and associated LXD pools are described in detail
+The determination of the provider ID (`juju:juju-7a544c-filesystem-0`) is
+dependent upon cloud type. Above, it is given by the backing LXD pool and the
+volume name (obtained with `lxc storage volume list <lxd-pool>`), all separated
+by a `:`. A provider ID from another cloud may look entirely different. The LXD
+storage provider and associated LXD pools are described in detail
 [below][anchor__storage-providers-lxd].
 
 ### Cross-model storage
