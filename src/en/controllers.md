@@ -24,9 +24,14 @@ along with it.
 In some circumstances you may wish to share a controller or one of its associated
 models. Juju provides [multi-user functionality](./users.html) for this purpose.
 
+## Minimum requirements
+
 The minimum resources required for a local controller are 2GiB of memory and 1
 vCPU.
 
+For LXD-based controllers, those resources will need to be increased according
+to the projected workload. Disk space is an important factor to consider for a
+localhost (LXD) cloud, due to boot images and containers.
 
 ## Controller management
 
