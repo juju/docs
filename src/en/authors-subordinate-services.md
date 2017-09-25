@@ -94,49 +94,6 @@ The example below shows adding a container relation to a charm.
         scope: container
 ```
 
-## Status of subordinates
-
-The status output contains details about subordinate units under the status of
-the principal service unit that it is sharing the container with. The
-subordinate unit's output matches the formatting of existing unit entries but
-omits machine, public-address and subordinates (which are all the same as the
-principal unit).
-
-The subordinate service is listed in the top level services dictionary in an
-abbreviated form. The subordinate-to: [] list is added to the service which
-contains the names of all services this service is subordinate to.
-
-```yaml
-    services:
-      rsyslog:
-        charm: cs:precise/rsyslog-0
-        exposed: false
-        relations:
-          rsyslog-directory:
-          - wordpress
-        subordinate-to:
-        - wordpress
-      wordpress:
-        charm: cs:precise/wordpress-13
-        exposed: true
-        relations:
-          rsyslog-directory:
-          - rsyslog
-        units:
-          wordpress/0:
-            agent-state: started
-            agent-version: 1.14.1.1
-            machine: "3"
-            open-ports:
-            - 80/tcp
-            public-address: 10.0.3.11
-            subordinates:
-              rsyslog/0:
-                agent-state: started
-                agent-version: 1.14.1.1
-                public-address: 10.0.3.11
-```
-
 ## Usage
 
 Assume the following deployment:
@@ -147,20 +104,53 @@ juju deploy wordpress
 juju add-relation mysql wordpress
 ```
 
-Now we'll create a subordinate rsyslog service:
+Now we'll request a subordinate rsyslog-forwarder application:
 
 ```bash
-juju deploy rsyslog
-juju add-relation rsyslog mysql
-juju add-relation rsyslog wordpress
+juju deploy rsyslog-forwarder
+juju add-relation rsyslog-forwarder mysql
+juju add-relation rsyslog-forwarder wordpress
 ```
 
-This will create a rsyslog service unit inside each of the containers holding
-the mysql and wordpress units. The rsyslog service has a standard client-server
-relation to both wordpress and mysql but these new relationships are implemented
-only between the principal unit and the subordinate unit . A subordinate unit
-may still have standard relations established with any unit in its environment
-as usual.
+This will create a rsyslog-forwarder application unit inside each of the
+containers holding the mysql and wordpress units. The rsyslog-forwarder
+application has a standard client-server relation to both wordpress and mysql
+but these new relationships are implemented only between the principal unit and
+the subordinate unit. A subordinate unit may still have standard relations
+established with any unit in its environment as usual.
+
+## Status of subordinates
+
+The status output contains details about subordinate units under the status of
+the principal application unit that it is sharing the container with. The
+subordinate unit's output matches the formatting of existing unit entries but
+omits machine, public-address and subordinates (which are all the same as the
+principal unit).
+
+Below is shown two excerpts from the output to `juju status --format yaml`
+after the 'wordpress' charm and the 'rsyslog-forwarder' subordinate charm were
+deployed and a relation added between the two.
+
+Firstly, the **rsyslog-forwarder** application will show to what application it
+is a subordinate of:
+
+```yaml
+applications:
+  rsyslog-forwarder:
+    subordinate-to:
+    - wordpress
+```
+
+Secondly, in the units sub-section to the **wordpress** application the
+subordinate unit will be listed:
+
+```yaml
+applications:
+  wordpress:
+    units:
+        subordinates:
+          rsyslog-forwarder/0:
+```
 
 ## Caveats
 
