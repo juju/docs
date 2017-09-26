@@ -117,7 +117,7 @@ containers holding the mysql and wordpress units. The rsyslog-forwarder
 application has a standard client-server relation to both wordpress and mysql
 but these new relationships are implemented only between the principal unit and
 the subordinate unit. A subordinate unit may still have standard relations
-established with any unit in its environment as usual.
+established with any unit as usual.
 
 ## Status of subordinates
 
@@ -127,9 +127,10 @@ subordinate unit's output matches the formatting of existing unit entries but
 omits machine, public-address and subordinates (which are all the same as the
 principal unit).
 
-Below is shown two excerpts from the output to `juju status --format yaml`
-after the 'wordpress' charm and the 'rsyslog-forwarder' subordinate charm were
-deployed and a relation added between the two.
+Shown below are two partial excerpts from the output to command
+`juju status --format yaml` after the 'wordpress' charm and the
+'rsyslog-forwarder' subordinate charm were deployed and a relation added
+between the two.
 
 Firstly, the **rsyslog-forwarder** application will show to what application it
 is a subordinate of:
