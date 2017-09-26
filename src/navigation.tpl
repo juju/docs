@@ -202,7 +202,8 @@
         <li><a href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
         <li><a href="reference-environment-variables.html">Juju environment variables</a></li>
         <li><a href="reference-hook-tools.html">Juju Hook Tools</a></li>
-        <li><a href="reference-layer-yaml.html">Layer.yaml</a></li>
+        <li><a href="reference-layer-yaml.html">layer.yaml</a></li>
+        <li><a href="authors-charm-metadata.html">metadata.yaml</a></li>
         <li><a href="http://godoc.org/github.com/juju/juju/api">API docs</a></li>
         <li><a href="reference-release-notes.html">Release notes</a></li>
         <li><a href="reference-status.html">Status values</a></li>
