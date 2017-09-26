@@ -49,26 +49,27 @@ account that public keys are added when using the Juju SSH commands (
 the 'root' user (passwordless sudo privileges), the granting of SSH access must
 be done with due consideration.
 
-### Native ssh
+It is possible to connect to a Juju machine in one of two ways:
 
-When using the native (OpenSSH) `ssh` client, if one's public key has been
-installed into a model, then, as expected, a connection to the 'ubuntu' user
-account can be made. All that is needed is the corresponding keypair and
-adequate network connectivity. 
+- Via Juju, using the `juju ssh` command
+- Direct access, using a standard SSH client (e.g `PuTTY` on Windows or `ssh`
+  [OpenSSH] on Linux)
 
-For example, to connect to a machine with an IP address of 10.149.29.143:
+Connecting via Juju involves a second degree of security, as explained below.
 
-```bash
-ssh ubuntu@10.149.29.143
-```
+Regardless of the method used to connect, a public SSH key must be added to the
+model. In the case of direct access, it remains possible for a key to be added
+to an individual machine using standard methods (manually copying a key to the
+`authorized_keys` file or by way of a command such as `ssh-import-id` for
+Debian-based Linux distributions such as Ubuntu).
 
 ### Juju ssh
  
-However, when using the `juju ssh` command, Juju's own user rights system
-imposes a second degree of security that will permit access solely from a Juju
-user, and only one with sufficient permissions. How this works depends on
-whether the user is an admin or a non-admin. See [Juju users][users] for a
-breakdown of the different user types.
+When using the `juju ssh` command, Juju's own user rights system imposes an
+extra degree of security by permitting access solely from a Juju user, and only
+one with sufficient permissions. How this works depends on whether the user is
+an admin or a non-admin. See [Juju users][users] for a breakdown of the
+different user types.
 
 For example, to connect to a machine with an id of '0':
 
@@ -93,6 +94,7 @@ he/she can connect to any machine with the `juju ssh` command.
 
 In order for a regular Juju user to connect with `juju ssh` the user must:
 
+- be created (`juju add-user`)
 - be registered (`juju register`)
 - be logged in (`juju login`)
 - have 'admin' rights to the model (`juju grant`)
@@ -103,6 +105,19 @@ In order for a regular Juju user to connect with `juju ssh` the user must:
 
 See [Users and models][models-users] for information on managing user
 permissions.
+
+### Direct SSH access
+
+When using a standard SSH client  if one's public key has been installed into a model, then, as
+expected, a connection to the 'ubuntu' user account can be made. All that is
+needed is the corresponding keypair and adequate network connectivity. 
+
+For example, to connect to a machine with an IP address of 10.149.29.143 with
+the OpenSSH client:
+
+```bash
+ssh ubuntu@10.149.29.143
+```
 
 
 <!-- LINKS -->
