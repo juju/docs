@@ -50,30 +50,20 @@ the Windows Control Panel
 
 # Usage
 
-Charm Tools comes packaged as a stand alone tool and provides the `charm` command.
-There are several tools available within charm tools itself. At any time you can
-run `charm` to view the available subcommands and all subcommands have
-independent help pages, accessible using either the `-h` or `--help` flags.
+All the functionality provided by the Charm Tools is accessed via the `charm`
+command and a sub-command argument. Omitting the argument will give a listing
+of all sub-commands. To view an individual help page for each sub-command run
+`charm help <sub-command>`.
+
+Click the triangle to reveal a summary of a sub-command.
 
 ^# add
 
       charm add [-h] [--description] [-b] [--debug] {tests,readme,icon}
 
-  Add is a generator function which can be used to extend a charm depending on
-  the subcommand issued:
+  Extends a charm depending on the options chosen:
 
-  ### icon
-
-  `icon` will create an `icon.svg` in the `CHARM_DIRECTORY`. This icon is
-  a template and should be customised by the charm author (see
-  [Charm Icons documentation](authors-charm-icon.html)).
-
-  ### readme
-
-  `readme` will create a `README.ex` in the `CHARM_DIRECTORY` from the template
-  charm.
-
-  ### tests
+  #### tests
 
   `tests` will create a tests directory for a charm and generate an example test
   using the Amulet framework. This command will ingest relation data from the
@@ -81,23 +71,52 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   charms to the interfaces listed. This is merely an example to start with and
   will need to be modified.
 
+  #### readme
+
+  `readme` will create a `README.ex` in the `CHARM_DIRECTORY` from the template
+  charm.
+
+  #### icon
+
+  `icon` will create an `icon.svg` in the `CHARM_DIRECTORY`. This icon is
+  a template and should be customised by the charm author (see
+  [Charm Icons documentation](authors-charm-icon.html)).
+
+
 ^# attach
 
       charm attach [options] <charm id> <resource=<file>
 
-  The attach command uploads a file as a new resource for a charm.
+  Uploads a file as a new resource for a charm.
 
-      charm attach ~james/xenial/wordpress website-data ./foo.zip
+      charm attach ~user/trusty/wordpress-0 website-data=./foo.zip
+
+  A revision number is only required when using the stable channel, which is
+  the default channel.
+
+      charm attach ~user/mycharm mydata=./blah -c unpublished
+
+
+^# build
+
+      charm build [-h] [-l LOG_LEVEL] [-f] [-o OUTPUT_DIR] [-s SERIES]
+	    [--hide-metrics] [--interface-service INTERFACE_SERVICE]
+       	    [--no-local-layers] [-n NAME] [-r] [--description]
+       	    [charm]
+
+  Builds a charm from layers and interfaces.
+
 
 ^# create
 
+      charm create [-h] [-t TEMPLATE] [-a] [-v] [--description] charmname [charmhome]
 
-      charm create [-h] [-t TEMPLATE] [-a] [-v] <charmname> [charmhome]
+  Creates a new charm.
 
-  The `create` command will produce a new boilerplate charm. Replace `<charmname>`
-  with the name of your new charm. A directory called `<charmname>` will be created
-  in the `[charmhome]` directory, or your current directory if no `[charmhome]`
-  directory is provided.
+  The will produce a new boilerplate charm. Replace `<charmname>` with the
+  name of your new charm. A directory called `<charmname>`, and any necessary
+  sub-directories and files, will be created in the `[charmhome]` directory, or
+  your current directory if no `[charmhome]` directory is provided.
 
   By default, your new charm is created using the Python template. Use the
   `-t TEMPLATE` option to create a charm using a different template, e.g.:
@@ -110,287 +129,183 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   user input. To suppress prompts and accept all defaults instead, use the
   `-a` or `--accept-defaults` option.
 
-  ### Create Options
-
-    - `-h`, `--help`: Show help.
-    - `-t`, `--template`: Designate the template to use when creating the charm.
-    - `-a`, `--accept-defaults`: If the chosen template prompts for user
-      input, suppress all prompts and accept the defaults instead.
-    - `-v`, `--verbose`: Show debug output.
-
-  ### Bash Example
-
-      charm create -t bash my-charm
-
-  will create the following charm structure:
-
-        my-charm
-        ├── config.yaml
-        ├── hooks
-        │   ├── config-changed
-        │   ├── install
-        │   ├── relation-name-relation-broken
-        │   ├── relation-name-relation-changed
-        │   ├── relation-name-relation-departed
-        │   ├── relation-name-relation-joined
-        │   ├── start
-        │   ├── stop
-        │   └── upgrade-charm
-        ├── icon.svg
-        ├── metadata.yaml
-        ├── README.ex
-        └── revision
-
-
-  ### Python Example
-
-      charm create -t python-basic my-charm
-
-  will create the following structure:
-
-        my-charm/
-        ├── charm-helpers.yaml
-        ├── config.yaml
-        ├── hooks
-            │   ├── config-changed
-            │   ├── install
-            │   ├── start
-            │   ├── stop
-            │   └── upgrade-charm
-            ├── icon.svg
-            ├── lib
-            │   └── charmhelpers
-            │       ├── core
-            │       │   ├── decorators.py
-            │       │   ├── files.py
-            │       │   ├── fstab.py
-            │       │   ├── hookenv.py
-            │       │   ├── host.py
-            │       │   ├── hugepage.py
-            │       │   ├── __init__.py
-            │       │   ├── kernel.py
-            │       │   ├── services
-            │       │   │   ├── base.py
-            │       │   │   ├── helpers.py
-            │       │   │   └── __init__.py
-            │       │   ├── strutils.py
-            │       │   ├── sysctl.py
-            │       │   ├── templating.py
-            │       │   └── unitdata.py
-            │       └── __init__.py
-            ├── metadata.yaml
-            ├── README.ex
-            ├── revision
-            ├── scripts
-            │   └── charm_helpers_sync.py
-            └── tests
-                ├── 00-setup
-                └── 10-deploy
 
 ^# grant
 
-      grant [options] <charm or bundle id> [--channel <channel>] [--acl (read|write)] [--set] [,,...]
+      charm grant [options] <charm or bundle id> [--channel <channel>] [--acl (read|write)] [--set] [,,...]
 
-  Grant charm or bundle permissions in the Charm Store. When charms are pushed
-  they default to only being shown to you, in order for other people to see
-  your charm, you need to explicitly grant them permissions.
+  Extends permissions for the given charm or bundle to the given users.
 
-  The grant command extends permissions for the given charm or bundle to the
-  given users.
-
-      charm grant ~kirk/wordpress james
+      charm grant ~johndoe/wordpress fred
 
   The command accepts many users (comma-separated list) or everyone.
 
-  The `--acl` parameter accepts "read" and "write" values. By default "read"
-  permissions are granted.
+  The --acl parameter accepts "read" and "write" values. By default "read"
+  permissions are granted:
 
-      charm grant ~kirk/wordpress --acl write james
+      charm grant ~johndoe/wordpress --acl write fred
 
-  The `--set` parameters is used to overwrite any existing ACLs for the charm or
-  bundle.
+  The --set parameter is used to overwrite any existing ACLs:
 
-      charm grant ~kirk/wordpress --acl write --set james,robert
+      charm grant ~johndoe/wordpress --acl write --set fred,bob
 
-  To select a channel, use the `--channel` option, for instance:
+  To select a channel, use the --channel option:
 
-      charm grant ~kirk/wordpress --channel development --acl write --set james,robert
+      charm grant ~johndoe/wordpress --channel stable --acl write --set fred,bob
+
 
 ^# help
 
-      charm help [topic]
+      charm help [command]
 
-  show help on a command or other topic. Running `charm` with no arguments will
-  also show topics.
+  Shows help on a command.
+
+  Running just `charm` (with no arguments) will display the list of available
+  commands.
+
 
 ^# layers
 
-      charm-layers [-h] [-r] [-l LOG_LEVEL] [--description] [charm]
+      charm layers [-h] [-r] [-l LOG_LEVEL] [--description] [charm]
 
-  Inspect the layers of a built charm. The output is colour coded. Each of the
-  results in the layers section is assigned a unique colour that corresponds to
-  each file that is part of that layer.
+  Inspects the layers of a built charm.
+
 
 ^# list
-      charm list [-h|--help] [-u <username>]
 
-  list charms for a given user name.
+      charm list [options]
+
+  Lists the charms under a given user name, by default yours.
 
       charm list -u lars
 
   When no arguments are given it returns a list of charms that the currently
   logged in user has pushed.
 
-       charm list
+      charm list
+
 
 ^# list-resources
 
       charm list-resources [options] <charm>
 
-  This command will report the resources for a charm in the charm store.
+  Displays the resources for a charm in the Charm Store.
 
-  <charm> can be a charm URL, or an unambiguously condensed form of
-  it. So the following forms will be accepted:
+  The charm can be expressed as a charm URL, or an unambiguously condensed form
+  of it. So the following forms will be accepted:
 
-      charm list-resources cs:xenial/mysql
-      charm list-resources mysql
-      charm list-resources trusty/mysql
-
-      charm list-resources cs:~kirk/xenial/mysql
-      charm list-resources cs:~kirk/mysql
-
-  Where the series is not supplied, the series from your local host is used.
+  For cs:trusty/mysql :  
+    mysql  
+    trusty/mysql  
+  
+  For cs:~user/trusty/mysql :  
+    cs:~user/mysql
+  
+  When the series is not supplied, the series from your local host is used.
   Thus the above examples imply that the local series is trusty.
+
 
 ^# login
 
-  The login command uses Ubuntu SSO to obtain security credentials for the charm
-  store. Note that the charm command will prompt you if you need to login to the
-  store before any operation that requires authentication, so you don't usually
-  need to run this command stand-alone.
+      charm login
+
+  Logs the user in to the Charm Store using Ubuntu SSO.
+
 
 ^# logout
 
-  The logout command removes all security credentials for the charm store.
+      charm logout
 
-^# proof
-
-      charm proof CHARM_DIRECTORY
-
-  Proof is designed to perform a "lint" against a charm or bundle's structure
-  to validate if it conforms to what the Charm Store will accept. `proof` will
-  provide output at varying levels of severity. `I` is informational - these
-  are things a charm could do but don't currently. `W` is a warning - these are
-  items that violate charm store policy or have an adverse affect on tools in
-  the Juju ecosystem. `E` is an error - these are items that are major and will
-  result in a broken charm. Any charm with a Warning or Error will not pass
-  charm store review policy. The charm store itself will not accept a push that
-  has an error.
-
-^# release
-
-      charm release [options] <charm or bundle id> [--channel <channel>]
-
-  The release command releases a charm or bundle in the charm store.
-  Releasing is the action of assigning one channel to a specific charm
-  or bundle revision (revision need to be specified), so that it can be shared
-  with other users and also referenced without specifying the revision.
-  
-  Multiple release channels are supported. The channels are:
-  
-   - **stable**: (default) This is the latest, tested, working stable version of the charm.
-   - **candidate**: A release candidate. There is high confidence this will work fine, but there may be minor bugs.
-   - **beta**: A beta testing milestone release.
-   - **edge**: The very latest version - expect bugs!
-
-      charm release ~lars/xenial/wordpress
-
-  To select another channel, use the `--channel` option, for instance:
-
-      charm release ~lars/xenial/wordpress --channel stable
-      charm release xenial/django-42 -c beta --resource website-3 --resource data-2
-
-  If your charm uses resources, you must specify what revision of each resource
-  will be released along with the charm, using the --resource flag (one per
-  resource). Note that resource info is embedded in bundles, so you cannot use
-  this flag with bundles.
-
-      charm release xenial/django-42 --resource website-3 --resource data-2
-
-^# pull
-
-      charm pull [options] <charm or bundle id> [--channel <channel>] [<directory>]
-
-  If you want to grab one of the charm store charms or bundles, use the `get`
-  command specifying the `CHARM_NAME` you want to copy and provide an optional
-  `CHARMS_DIRECTORY`. Otherwise the current directory will be used
-
-  For example:
-
-      charm pull mysql
-
-  Will download the mysql charm files to directory `mysql` within your current
-  path.
-
-      charm pull wordpress ~/wordpress-charm
-
-  Will download the wordpress charm files to `~/wordpress-charm`
-
-      charm pull trusty/wordpress-trusty
-
-  Will copy the Trusty version of the wordpress charm (files) into directory
-  `wordpress-trusty` under the current directory.
-
-  To select a channel, use the `--channel` option, for instance:
-
-      charm pull wordpress --channel development
-
-  Note that `charm pull` only pulls down a copy of the charm that is in the
-  store. It should not be used when you want to hack on a charm, for that you
-  should use `charm pull-source`.
+  Logs the user out of the Charm Store.
 
 
 ^# pull-source
 
       charm pull-source [-h] [-v] [--description] item [dir]
 
-  Download the source code for a charm, layer, or interface.
-
+  Downloads the source code for a charm, layer, or interface.
+  
   The item to download can be specified using any of the following forms:
-
-   - [cs:]charm
-   - [cs:]series/charm
-   - [cs:]~user/charm
-   - [cs:]~user/series/charm
-   - layer:layer-name
-   - interface:interface-name
-
-  If the item is a layered charm, and the top layer of the charm has a repository
-  key in `layer.yaml`, the top layer repository will be cloned. Otherwise, the charm
+  
+  - [cs:]charm
+  - [cs:]series/charm
+  - [cs:]~user/charm
+  - [cs:]~user/series/charm
+  - layer:layer-name
+  - interface:interface-name
+  
+  If the item is a layered charm, and the top layer of the charm has a repo
+  key in layer.yaml, the top layer repo will be cloned. Otherwise, the charm
   archive will be downloaded and extracted from the charm store.
-
-  If a download directory is not specified, the following environment vars
+  
+  If a download directory is not specified, the following environment variables
   will be used to determine the download location:
-
-   - For charms, `$JUJU_REPOSITORY`
-   - For layers, `$LAYER_PATH`
-   - For interfaces, `$INTERFACE_PATH`
-
-  If a download location can not be determined from environment variables,
-  the current working directory will be used.
-
+  
+  - For charms, $JUJU_REPOSITORY
+  - For layers, $LAYER_PATH
+  - For interfaces, $INTERFACE_PATH
+  
+  If a download location can not be determined from environment variables, the
+  current working directory will be used.
+  
   The download is aborted if the destination directory already exists.
 
-  positional arguments:
-    item           Name of the charm, layer, or interface to download.
-    dir            Directory in which to place the downloaded source.
+
+^# proof
+
+      charm proof [-h] [--description] [-b] [--debug] [charm_name]
+
+  Performs static analysis on a charm or bundle.
+
+
+^# release
+
+      charm release [options] <charm or bundle id> [--channel <channel>]
+
+  Publishes a charm or bundle to the charm store. Releasing is the action of
+  assigning one channel to a specific charm or bundle revision (revision needs
+  to be specified), so that it can be shared with other users and also referenced
+  without specifying the revision. Four channels are supported, in order of
+  stability: "stable", "candidate", "beta", and "edge"; the "stable" channel is
+  the default.
+
+      charm release ~bob/trusty/wordpress
+
+  To select another channel, use the --channel option:
+
+      charm release ~bob/trusty/wordpress --channel beta
+      charm release wily/django-42 -c edge --resource website-3 --resource data-2
+
+  If your charm uses resources, you must specify what revision of each resource
+  will be published along with the charm, using the --resource flag (one per
+  resource). Note that resource info is embedded in bundles, so you cannot use
+  this flag with bundles.
+
+      charm release wily/django-42 --resource website-3 --resource data-2
+
+
+^# pull
+
+      charm pull [options] <charm or bundle id> [--channel <channel>] [<directory>]
+
+  Downloads a copy of a charm or bundle from the charm store into a local
+  directory. If the directory is unspecified, the directory will be named after
+  the charm or bundle.
+
+  To download the wordpress charm into directory 'wordpress' in the current directory:
+
+      charm pull trusty/wordpress
+
+  To select a channel, use the --channel option:
+
+      charm pull wordpress --channel edge
+
 
 ^# push
 
       charm push [options] <directory> [<charm or bundle id>]
 
-  The push command uploads a charm or bundle from the local directory
-  to the charm store.
+  Uploads a charm or bundle from the local directory to the charm store.
 
   The charm or bundle id must not specify a revision: the revision will be
   chosen by the charm store to be one more than any existing revision.
@@ -401,22 +316,44 @@ independent help pages, accessible using either the `-h` or `--help` flags.
   to a restricted set of users. See the release command for info on how to make
   charms and bundles available to others.
 
-      	charm push .
-      	charm push /path/to/wordpress wordpress
-      	charm push . cs:~lars/trusty/wordpress
+      charm push .
+      charm push /path/to/wordpress wordpress
+      charm push . cs:~lars/trusty/wordpress
 
   Resources may be uploaded at the same time by specifying the --resource flag.
   Following the resource flag should be a name=filepath pair. This flag may be
   repeated more than once to upload more than one resource.
 
-        charm push . --resource website=~/some/file.tgz --resource config=./docs/cfg.xml
+      charm push . --resource website=~/some/file.tgz --resource config=./docs/cfg.xml
+
+
+^# push-term
+
+      charm push-term [options] <filename> <term id>
+
+  Creates a new Terms and Conditions document (revision).
+
+  For example, to create a new terms document with the content from file
+  `text.txt` and the name 'enterprise-plan' and returns the revision of the
+  created document:
+
+      charm push-term text.txt user/enterprise-plan
+
+
+^# release-term
+
+      charm release-term [options] <term id>
+
+  Releases the given terms document. For instance:
+
+      charm release-term me/my-terms
+
 
 ^# revoke
 
       charm revoke [options] <charm or bundle id> [--channel <channel>] [--acl (read|write)] [,,...]
 
-  The revoke command restricts permissions for the given charm or bundle to the
-  given users.
+  Restricts permissions for the given charm or bundle to the given users.
 
       charm revoke ~kirk/wordpress james
 
@@ -429,14 +366,14 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
   To select a channel, use the `--channel` option, for instance:
 
-      charm revoke ~kirk/wordpress --channel development --acl write james,robert
+      charm revoke ~kirk/wordpress --channel beta --acl write james,robert
+
 
 ^# set
 
       charm set [options] <charm or bundle id> [--channel <channel>] name=value [name=value]
 
-  The set command updates the extra-info, home page or bugs URL for the given charm or
-  bundle.
+  Updates the extra-info, home page or bugs URL for the given charm or bundle.
 
       charm set wordpress bugs-url=https://bugspageforwordpress.none
       charm set wordpress homepage=https://homepageforwordpress.none
@@ -447,99 +384,69 @@ independent help pages, accessible using either the `-h` or `--help` flags.
 
   To select a channel, use the `--channel` option, for instance:
 
-      charm set wordpress someinfo=somevalue --channel development
+      charm set wordpress someinfo=somevalue --channel edge
+
 
 ^# show
 
       charm show [options] <charm or bundle id> [--channel <channel>] [--list] [field1 ...]
 
-  The show command prints information about a charm
-  or bundle. By default, all known metadata is printed.
+  Prints information about a charm or bundle. By default, only a summary is
+  printed. You can specify --all to get all known metadata.
 
       charm show trusty/wordpress
 
   To select a channel, use the `--channel` option, for instance:
 
-      charm show wordpress --channel development
+      charm show wordpress --channel edge
 
   To specify metadata for one or more specific channels:
 
-      charm show wordpress charm-metadata charm-config
+      charm show wordpress charm-metadata charm-config --channel stable
 
-  To get a list of metadata available:
+  To get a list of available metadata types:
 
       charm show --list
+
+
+^# show-term
+
+      charm show-term [options] <term id>
+
+  Shows the given terms document. For instance:
+
+  To show revision 1 of the enterprise-plan terms:
+
+      show-term enterprise-plan/1
+
+  To show the latest revision of the enterprise plan terms:
+
+      show-term enterprise-plan
+
 
 ^# terms
 
       charm terms [options]
 
-  Charms can require users to accept terms before deployment. This is useful for
-  software that needs a EULA. The terms command lists the terms owned by this
-  user and the charms that require these terms to be agreed to.
+  Lists the terms owned by the user and the charms that require these terms to
+  be agreed to.
 
-^# test
+  Charms can require users to accept terms before deployment. This is useful
+  for software that needs a EULA.
 
-      charm test [-h] [--description] [--timeout TIMEOUT] [--isolate JUJU_ENV]
-                       [-o LOGDIR] [--setup-timeout SETUP_TIMEOUT] [--fail-on-skip]
-                       [--on-timeout {fail,skip,pass}] [--set-e] [-v] [-q]
-                       [-p PRESERVE_ENVIRONMENT_VARIABLES] [-e JUJU_ENV]
-                       [--upload-tools] [--constraints CONSTRAINTS]
-                       [TEST [TEST ...]]
-
-  Executes charm functional tests. It should always be run from inside the
-  charm's directory.
-
-  Given the following example charm layout:
-  .
-  ├── config.yaml
-  ├── copyright
-  ├── hooks
-  │   └── ...
-  ├── icon.svg
-  ├── metadata.yaml
-  ├── README.md
-  └── tests
-      ├── 00-tool_setup
-      ├── 01-standard
-      ├── 02-at_scale
-      └── 03-different_database
-
-  Run all tests for current charm
-
-      charm test
-
-  Run one or more tests
-
-    charm test 01-standard 03-different_database
-
-  output:
-
-  Each unit test will return an output in the form or either:
-
-      RESULT   : SYM
-
-      or
-
-      RESULT   : SYM (SYM)
-
-  Where SYM is a Symbol representing PASS: ✔, FAIL: ✘, SKIP: ↷, or TIMEOUT: ⌛
-  In the event a status is rewritten by either the `--fail-on-skip` flag or the
-  `--on-timeout` flag the original status will be displayed in () next to the
-  computed status.
 
 ^# version
 
-      charm version
+      charm version [-h] [--description] [-b] [--debug]
 
-  Display tooling versioning information.
+  Displays tooling version information
+
 
 ^# whoami
 
-      charm-version [-h] [--description] [-b] [--debug]
+      charm whoami [options]
 
-  The whoami command prints the current Juju user name and list of groups
-  of which the user is a member.
+  Displays JAAS user id and group membership.
 
 
 <!-- LINKS -->
