@@ -7,6 +7,8 @@ TODO: Add images
       3. however, to have things 'just work', don't bother specifying anything and the
 	charm will decide which OS/version to use
       Should probably link to charms-exposing.md instead of repeating
+      The Scaling back section should just reference charms-scaling.html
+      The Removing applications section should just reference charms-destroy.html
 
 
 # Introduction to Juju Charms

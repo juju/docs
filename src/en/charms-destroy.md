@@ -1,4 +1,5 @@
 Title: Removing applications, units, and machines in Juju
+TODO:  Critical: review required (e.g. "state server")
 
 
 # Removing applications, units, and machines
@@ -44,6 +45,10 @@ application is listed as dying, but also reports an error state, then the
 removed application will not go away. See the 'Caveats' section below for how 
 to manage applications stuck in a dying state.
 
+If dynamic storage is in use, the storage will, by default, be detached and
+left alive in the model. However, the `--destroy-storage` option can be used to
+instruct Juju to destroy the storage once detached. See
+[Using Juju Storage][charms-storage] for details on dynamic storage.
 
 ## Removing units
 
@@ -64,6 +69,9 @@ machine was created manually with `juju add machine`, the machine will also be
 removed.
 
 See section 'Caveats' below for how to manage units in a dying state.
+
+The `--destroy-storage` option is available for this command as it is for the
+`remove-application` command above.
 
 
 ## Removing machines
@@ -108,6 +116,10 @@ occur when removing a unit or application. Therefore also verify that the
 associated units are not in an error state and apply the above command to them
 if they are.
 
+
+<!-- LINKS-->
+
 [charmrelations]: ./charms-relations.html#removing-relations
 [controllers]: ./controllers.html
 [models]: ./models.html
+[charms-storage]: ./charms-storage.html
