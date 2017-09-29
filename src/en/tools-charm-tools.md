@@ -2,12 +2,12 @@ Title: Charm tools
 
 # Charm Tools
 
-The Charm Tools is a collection of commands that assist with charm management.
-In particular, they allow charm authors to create charms.
+The Charm Tools package is a collection of commands that assist with charm
+management. In particular, it allows charm authors to create charms.
 
 # Installation
 
-The Charm Tools can be installed on various platforms with the use of
+Charm Tools can be installed on various platforms with the use of
 [Snaps][snaps]. The name of the snap is called `charm`.
 
 ## Ubuntu
@@ -25,9 +25,8 @@ To install on other Linux distributions see the upstream
 
 ## Non-Linux platforms
 
-It is feasible to install the Tools on non-Linux platforms such as macOS and
-Windows. Please [open an issue][charm-tools-issue] if you would like to see
-this happen.
+There are no recent builds of Charm Tools for other operating systems. Check
+the [Charm Tools project][charm-tools] for further information.
 
 
 <!--
@@ -465,4 +464,4 @@ Click the triangle to reveal a summary of a sub-command.
 
 [snaps]: https://docs.snapcraft.io/snaps/
 [snaps-install]: https://snapcraft.io/docs/core/install
-[charm-tools-issue]: https://github.com/juju/charmstore-client/issues/new
+[charm-tools]: https://launchpad.net/charm-tools
