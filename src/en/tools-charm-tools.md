@@ -247,7 +247,7 @@ Click the triangle to reveal a summary of a sub-command.
   
   If the item is a layered charm, and the top layer of the charm has a repo
   key in layer.yaml, the top layer repo will be cloned. Otherwise, the charm
-  archive will be downloaded and extracted from the charm store.
+  archive will be downloaded and extracted from the Charm Store.
   
   If a download directory is not specified, the following environment variables
   will be used to determine the download location:
@@ -266,11 +266,11 @@ Click the triangle to reveal a summary of a sub-command.
 
       charm push [options] <directory> [<charm or bundle id>]
 
-  Uploads a charm or bundle from the local directory to the charm store.
+  Uploads a charm or bundle from the local directory to the Charm Store.
 
   The charm or bundle id must not specify a revision: the revision will be
-  chosen by the charm store to be one more than any existing revision.
-  If the id is not specified, the current logged-in charm store user name is
+  chosen by the Charm Store to be one more than any existing revision.
+  If the id is not specified, the current logged-in Charm Store user name is
   used, and the charm or bundle name is taken from the provided directory name.
 
   The pushed charm or bundle is unreleased and therefore usually only available
@@ -294,9 +294,8 @@ Click the triangle to reveal a summary of a sub-command.
 
   Creates a new Terms and Conditions document (revision).
 
-  For example, to create a new terms document with the content from file
-  `text.txt` and the name 'enterprise-plan' and returns the revision of the
-  created document:
+  For example, to create a new terms document called 'enterprise-plan', whose
+  contents is from file `text.txt`, and return the revision of the new document:
 
       charm push-term text.txt user/enterprise-plan
 
