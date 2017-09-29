@@ -37,13 +37,14 @@ See [Adding a model][addmodel] for details on adding models.
 
 ## Models and user access
 
-An administrator can use the `grant` command to grant a user either read or write
-access to any model. 
+An administrator can use the `grant` command to grant a user 'read', 'write',
+or 'admin' access to any model. 
 
-- `read`: a user can view the state of a model with the `models`,
+- `read`: A user can view the state of a model with the `models`,
   `machines` and `status` commands.
-- `write`: a user can both view the state of a model and make any changes
-  required, though they can't create, backup or destroy models.
+- `write`: In addition to 'read' abilities, a user can modify/configure models.
+- `admin`: In addition to 'write' abilities, a user can backup models and
+  connect to machines via the `juju ssh` command.
 
 To give 'bob' read-only access to the model 'mymodel', for example, the
 administrator would enter the following:
