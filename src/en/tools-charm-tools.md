@@ -1,24 +1,39 @@
 Title: Charm tools
-TODO:  The top header should be "Charm Tools"
-       Review required
 
-The 'Charm Tools' Juju Plugin is a collection of commands enabling users and
-charm authors to create, search, fetch, update, and manage charms.
+# Charm Tools
+
+The Charm Tools package is a collection of commands that assist with charm
+management. In particular, it allows charm authors to create charms.
 
 # Installation
 
-The source project can be found at
-[https://launchpad.net/charm-tools](https://launchpad.net/charm-tools).
+Charm Tools can be installed on various platforms with the use of
+[Snaps][snaps]. The name of the snap is called `charm`.
 
 ## Ubuntu
 
-Install the `charm` snap:
+To install the Charm Tools on Ubuntu:
 
 ```bash
 sudo snap install charm
 ```
 
-## Mac OSX
+## Other Linuxes
+
+To install on other Linux distributions see the upstream
+[Snaps documentation][snaps-install].
+
+## Non-Linux platforms
+
+There are no recent builds of Charm Tools for other operating systems. Check
+the [Charm Tools project][charm-tools] for further information.
+
+
+<!--
+
+REMOVING THESE PLATFORMS UNTIL THEIR BUILDS ARE UPDATED.
+
+## macOS
 
 Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
 running the latest version of Homebrew before proceeding.
@@ -34,13 +49,16 @@ Charm Tools is available for, and tested on, Microsoft Windows 7 and 8. While
 the installer may work on previous versions of Windows there is no guarantee.
 
 To install, first download the Charm Tools installer from
-[launchpad](https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-
-tools_1.2.9.exe). Once downloaded, execute the installer and follow the on-
+[launchpad](https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-tools_1.2.9.exe).
+Once downloaded, execute the installer and follow the on-
 screen prompts. After installation you can access Charm Tools via the
 `charm` command from either the command line or PowerShell.
 
 To uninstall, please remove Charm Tools from the Add/Remove Software section of
 the Windows Control Panel
+
+-->
+
 
 # Usage
 
@@ -213,11 +231,18 @@ Click the triangle to reveal a summary of a sub-command.
   Logs the user out of the Charm Store.
 
 
+^# proof
+
+      charm proof [-h] [--description] [-b] [--debug] [charm_name]
+
+  Performs static analysis on a charm or bundle.
+
+
 ^# pull
 
       charm pull [options] <charm or bundle id> [--channel <channel>] [<directory>]
 
-  Downloads a copy of a charm or bundle from the charm store into a local
+  Downloads a copy of a charm or bundle from the Charm Store into a local
   directory. If the directory is unspecified, the directory will be named after
   the charm or bundle.
 
@@ -300,18 +325,11 @@ Click the triangle to reveal a summary of a sub-command.
       charm push-term text.txt user/enterprise-plan
 
 
-^# proof
-
-      charm proof [-h] [--description] [-b] [--debug] [charm_name]
-
-  Performs static analysis on a charm or bundle.
-
-
 ^# release
 
       charm release [options] <charm or bundle id> [--channel <channel>]
 
-  Publishes a charm or bundle to the charm store. Releasing is the action of
+  Publishes a charm or bundle to the Charm Store. Releasing is the action of
   assigning one channel to a specific charm or bundle revision (revision needs
   to be specified), so that it can be shared with other users and also referenced
   without specifying the revision. Four channels are supported, in order of
@@ -440,3 +458,10 @@ Click the triangle to reveal a summary of a sub-command.
       charm whoami [options]
 
   Displays JAAS user id and group membership.
+
+
+<!-- LINKS -->
+
+[snaps]: https://docs.snapcraft.io/snaps/
+[snaps-install]: https://snapcraft.io/docs/core/install
+[charm-tools]: https://launchpad.net/charm-tools
