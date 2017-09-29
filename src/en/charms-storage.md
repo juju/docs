@@ -427,10 +427,16 @@ The MAAS provider currently has a single configuration attribute:
 
 ### Microsoft Azure (azure)
 
-Azure-based models have access to the 'azure' storage provider. The Azure
-provider does not currently have any specific configuration options.
+Azure-based models have access to the 'azure' storage provider.
 
-The Microsoft Azure provider does not currently have any storage configuration.
+The 'azure' storage provider has an 'account-type' configuration option that
+accepts one of two values: 'Standard_LRS' and 'Premium_LRS'. These are,
+respectively, associated with defined Juju pools 'azure' and 'azure-premium'.
+
+Newly-created models configured in this way use "Azure Managed Disks". See
+[Azure Managed Disks Overview][microsoft-managed-disks] for information on what
+this entails (in particular, what the difference is between standard and
+premium disk types).
 
 ### Google Compute Engine (gce)
 
@@ -613,6 +619,7 @@ For guidance on how to create a charm that uses these storage features see
 [wikipedia-iops]: https://en.wikipedia.org/wiki/IOPS
 [ppa-lxd]: https://launchpad.net/~ubuntu-lxc/+archive/ubuntu/lxd-stable
 [upstream-lxd-storage-configuration]: https://github.com/lxc/lxd/blob/master/doc/storage.md
+[microsoft-managed-disks]: https://docs.microsoft.com/en-us/azure/virtual-machines/windows/managed-disks-overview
 
 [anchor__loop-devices-and-lxd]: #loop-devices-and-lxd
 [anchor__storage-constraints-juju-deploy]: #juju-deploy
