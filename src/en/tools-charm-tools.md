@@ -1,18 +1,22 @@
 Title: Charm tools
-TODO:  The top header should be "Charm Tools"
-       Review required
 
-The 'Charm Tools' Juju Plugin is a collection of commands enabling users and
-charm authors to create, search, fetch, update, and manage charms.
+# Charm Tools
+
+The Charm Tools package is a collection of commands that assist with charm
+management. In particular, it allows charm authors to create charms.
 
 # Installation
 
-The source project can be found at
-[https://launchpad.net/charm-tools](https://launchpad.net/charm-tools).
+Charm Tools can be installed on various platforms with the use of
+[Snaps][snaps]. The name of the snap is called `charm`.
 
 ## Ubuntu
 
-Install the Charm Tools via a snap.
+To install the Charm Tools on Ubuntu:
+
+```bash
+sudo snap install charm
+```
 
 On Ubuntu 14.04 LTS (Trusty) `snapd` is not installed by default. You can
 install it in this way:
@@ -21,36 +25,20 @@ install it in this way:
 sudo apt install snapd
 ```
 
-Now install the tools via the `charm` snap:
-
-```bash
-sudo snap install charm
-```
-
-### Issues
-
-These are some possible issues you might be confronted with on Ubuntu 14.04
-LTS when you try to invoke the `charm` command.
-
-Log out of your Ubuntu user session (and log back in) if you see the following:
-
-```no-highlight
-The program 'charm' is currently not installed. You can install it by typing:
-sudo apt-get install charm-tools
-```
-
-Reboot your computer if you get the below error:
-
-```no-highlight
-cannot perform readlinkat() on the mount namespace file descriptor of the init
-process: Permission denied
-```
-
 ## Other Linuxes
 
-You can install Charm Tools on other Linux distributions using a snap too. See
-the upstream [Snaps documentation][snap-install] for getting snapd onto your
-Linux.
+To install on other Linux distributions see the upstream
+[Snaps documentation][snaps-install].
+
+## Non-Linux platforms
+
+There are no recent builds of Charm Tools for other operating systems. Check
+the [Charm Tools project][charm-tools] for further information.
+
+
+<!--
+
+REMOVING THESE PLATFORMS UNTIL THEIR BUILDS ARE UPDATED.
 
 ## macOS
 
@@ -75,6 +63,9 @@ screen prompts. After installation you can access Charm Tools via the
 
 To uninstall, please remove Charm Tools from the Add/Remove Software section of
 the Windows Control Panel
+
+-->
+
 
 # Usage
 
@@ -247,6 +238,13 @@ Click the triangle to reveal a summary of a sub-command.
   Logs the user out of the Charm Store.
 
 
+^# proof
+
+      charm proof [-h] [--description] [-b] [--debug] [charm_name]
+
+  Performs static analysis on a charm or bundle.
+
+
 ^# pull
 
       charm pull [options] <charm or bundle id> [--channel <channel>] [<directory>]
@@ -332,13 +330,6 @@ Click the triangle to reveal a summary of a sub-command.
   contents is from file `text.txt`, and return the revision of the new document:
 
       charm push-term text.txt user/enterprise-plan
-
-
-^# proof
-
-      charm proof [-h] [--description] [-b] [--debug] [charm_name]
-
-  Performs static analysis on a charm or bundle.
 
 
 ^# release
@@ -466,7 +457,7 @@ Click the triangle to reveal a summary of a sub-command.
 
       charm version [-h] [--description] [-b] [--debug]
 
-  Displays tooling version information
+  Displays tooling version information.
 
 
 ^# whoami
@@ -478,4 +469,6 @@ Click the triangle to reveal a summary of a sub-command.
 
 <!-- LINKS -->
 
-[snap-install]: https://snapcraft.io/docs/core/install
+[snaps]: https://docs.snapcraft.io/snaps/
+[snaps-install]: https://snapcraft.io/docs/core/install
+[charm-tools]: https://launchpad.net/charm-tools
