@@ -1,22 +1,37 @@
 Title: Charm tools
-TODO:  The top header should be "Charm Tools"
-       Review required
 
-The 'Charm Tools' Juju Plugin is a collection of commands enabling users and
-charm authors to create, search, fetch, update, and manage charms.
+# Charm Tools
+
+The Charm Tools package is a collection of commands that assist with charm
+management. In particular, it allows charm authors to create charms.
 
 # Installation
 
-The source project can be found at
-[https://launchpad.net/charm-tools](https://launchpad.net/charm-tools).
+Charm Tools can be installed on various platforms with the use of
+[Snaps][snaps]. The name of the snap is called `charm`.
 
 ## Ubuntu
 
-Install the `charm` snap:
+To install the Charm Tools on Ubuntu:
 
 ```bash
 sudo snap install charm
 ```
+
+## Other Linuxes
+
+To install on other Linux distributions see the upstream
+[Snaps documentation][snaps-install].
+
+## Non-Linux platforms
+
+There are no recent builds of Charm Tools for other operating systems. Check
+the [Charm Tools project][charm-tools] for further information.
+
+
+<!--
+
+REMOVING THESE PLATFORMS UNTIL THEIR BUILDS ARE UPDATED.
 
 ## macOS
 
@@ -41,6 +56,9 @@ screen prompts. After installation you can access Charm Tools via the
 
 To uninstall, please remove Charm Tools from the Add/Remove Software section of
 the Windows Control Panel
+
+-->
+
 
 # Usage
 
@@ -213,6 +231,30 @@ Click the triangle to reveal a summary of a sub-command.
   Logs the user out of the Charm Store.
 
 
+^# proof
+
+      charm proof [-h] [--description] [-b] [--debug] [charm_name]
+
+  Performs static analysis on a charm or bundle.
+
+
+^# pull
+
+      charm pull [options] <charm or bundle id> [--channel <channel>] [<directory>]
+
+  Downloads a copy of a charm or bundle from the Charm Store into a local
+  directory. If the directory is unspecified, the directory will be named after
+  the charm or bundle.
+
+  To download the wordpress charm into directory 'wordpress' in the current directory:
+
+      charm pull trusty/wordpress
+
+  To select a channel, use the --channel option:
+
+      charm pull wordpress --channel edge
+
+
 ^# pull-source
 
       charm pull-source [-h] [-v] [--description] item [dir]
@@ -230,7 +272,7 @@ Click the triangle to reveal a summary of a sub-command.
   
   If the item is a layered charm, and the top layer of the charm has a repo
   key in layer.yaml, the top layer repo will be cloned. Otherwise, the charm
-  archive will be downloaded and extracted from the charm store.
+  archive will be downloaded and extracted from the Charm Store.
   
   If a download directory is not specified, the following environment variables
   will be used to determine the download location:
@@ -245,65 +287,15 @@ Click the triangle to reveal a summary of a sub-command.
   The download is aborted if the destination directory already exists.
 
 
-^# proof
-
-      charm proof [-h] [--description] [-b] [--debug] [charm_name]
-
-  Performs static analysis on a charm or bundle.
-
-
-^# release
-
-      charm release [options] <charm or bundle id> [--channel <channel>]
-
-  Publishes a charm or bundle to the charm store. Releasing is the action of
-  assigning one channel to a specific charm or bundle revision (revision needs
-  to be specified), so that it can be shared with other users and also referenced
-  without specifying the revision. Four channels are supported, in order of
-  stability: "stable", "candidate", "beta", and "edge"; the "stable" channel is
-  the default.
-
-      charm release ~bob/trusty/wordpress
-
-  To select another channel, use the --channel option:
-
-      charm release ~bob/trusty/wordpress --channel beta
-      charm release wily/django-42 -c edge --resource website-3 --resource data-2
-
-  If your charm uses resources, you must specify what revision of each resource
-  will be published along with the charm, using the --resource flag (one per
-  resource). Note that resource info is embedded in bundles, so you cannot use
-  this flag with bundles.
-
-      charm release wily/django-42 --resource website-3 --resource data-2
-
-
-^# pull
-
-      charm pull [options] <charm or bundle id> [--channel <channel>] [<directory>]
-
-  Downloads a copy of a charm or bundle from the charm store into a local
-  directory. If the directory is unspecified, the directory will be named after
-  the charm or bundle.
-
-  To download the wordpress charm into directory 'wordpress' in the current directory:
-
-      charm pull trusty/wordpress
-
-  To select a channel, use the --channel option:
-
-      charm pull wordpress --channel edge
-
-
 ^# push
 
       charm push [options] <directory> [<charm or bundle id>]
 
-  Uploads a charm or bundle from the local directory to the charm store.
+  Uploads a charm or bundle from the local directory to the Charm Store.
 
   The charm or bundle id must not specify a revision: the revision will be
-  chosen by the charm store to be one more than any existing revision.
-  If the id is not specified, the current logged-in charm store user name is
+  chosen by the Charm Store to be one more than any existing revision.
+  If the id is not specified, the current logged-in Charm Store user name is
   used, and the charm or bundle name is taken from the provided directory name.
 
   The pushed charm or bundle is unreleased and therefore usually only available
@@ -327,11 +319,36 @@ Click the triangle to reveal a summary of a sub-command.
 
   Creates a new Terms and Conditions document (revision).
 
-  For example, to create a new terms document with the content from file
-  `text.txt` and the name 'enterprise-plan' and returns the revision of the
-  created document:
+  For example, to create a new terms document called 'enterprise-plan', whose
+  contents is from file `text.txt`, and return the revision of the new document:
 
       charm push-term text.txt user/enterprise-plan
+
+
+^# release
+
+      charm release [options] <charm or bundle id> [--channel <channel>]
+
+  Publishes a charm or bundle to the Charm Store. Releasing is the action of
+  assigning one channel to a specific charm or bundle revision (revision needs
+  to be specified), so that it can be shared with other users and also referenced
+  without specifying the revision. Four channels are supported, in order of
+  stability: "stable", "candidate", "beta", and "edge"; the "stable" channel is
+  the default.
+
+      charm release ~bob/trusty/wordpress
+
+  To select another channel, use the --channel option:
+
+      charm release ~bob/trusty/wordpress --channel beta
+      charm release wily/django-42 -c edge --resource website-3 --resource data-2
+
+  If your charm uses resources, you must specify what revision of each resource
+  will be published along with the charm, using the --resource flag (one per
+  resource). Note that resource info is embedded in bundles, so you cannot use
+  this flag with bundles.
+
+      charm release wily/django-42 --resource website-3 --resource data-2
 
 
 ^# release-term
@@ -433,7 +450,7 @@ Click the triangle to reveal a summary of a sub-command.
 
       charm version [-h] [--description] [-b] [--debug]
 
-  Displays tooling version information.
+  Displays tooling version information
 
 
 ^# whoami
@@ -441,3 +458,10 @@ Click the triangle to reveal a summary of a sub-command.
       charm whoami [options]
 
   Displays JAAS user id and group membership.
+
+
+<!-- LINKS -->
+
+[snaps]: https://docs.snapcraft.io/snaps/
+[snaps-install]: https://snapcraft.io/docs/core/install
+[charm-tools]: https://launchpad.net/charm-tools
