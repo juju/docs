@@ -40,48 +40,90 @@ See [Cloud credentials][credentials] for more on this topic.
 ## SSH access
 
 SSH access is managed on a per-model basis. That is, if a public key is added
-to a model by an admin then that key is placed on all machines in that model,
-as well as on any subsequently-created machines. This is done with commands
-`juju add-ssh-key`, `juju import-ssh-key`, and `juju remove-ssh-key`, which
-refer to keys owned by ordinary people (non-Juju users). However, Juju's own
-user rights system imposes a second degree of security that only allows
-access from a Juju user with the correct model permissions. Additionally,
-connections can only be made via the `juju ssh` command.
+to a model then that key is placed on all machines (present and future) in that
+model.
 
-### Controller admins
+Each Juju machine provides a user account named 'ubuntu' and it is to this
+account that public keys are added when using the Juju SSH commands (
+`juju add-ssh-key` and `juju import-ssh-key`). Because this user is effectively
+the 'root' user (passwordless sudo privileges), the granting of SSH access must
+be done with due consideration.
 
-The controller admin is the system (e.g. Ubuntu) user that performed the
-initial controller-creation step.
+It is possible to connect to a Juju machine in one of two ways:
 
-By default, a controller admin will be able to connect to any machine. When a
-controller is created a passphraseless SSH keypair will be created and placed
-under `~/.local/share/juju/ssh`:
+- Via Juju, using the `juju ssh` command
+- Direct access, using a standard SSH client (e.g `PuTTY` on Windows or `ssh`
+  [OpenSSH] on Linux)
 
-```no-highlight
--rw------- 1 ubuntu ubuntu 1675 Sep 21 21:58 juju_id_rsa
--rw------- 1 ubuntu ubuntu  397 Sep 21 21:58 juju_id_rsa.pub 
+Connecting via Juju involves a second degree of security, as explained below.
+
+Regardless of the method used to connect, a public SSH key must be added to the
+model. In the case of direct access, it remains possible for a key to be added
+to an individual machine using standard methods (manually copying a key to the
+`authorized_keys` file or by way of a command such as `ssh-import-id` for
+Debian-based Linux distributions such as Ubuntu).
+
+### Juju ssh
+ 
+When using the `juju ssh` command, Juju's own user rights system imposes an
+extra degree of security by permitting access solely from a Juju user, and only
+one with sufficient permissions. How this works depends on whether the user is
+an admin or a non-admin. See [Juju users][users] for a breakdown of the
+different user types.
+
+For example, to connect to a machine with an id of '0':
+
+```bash
+juju ssh 0
 ```
 
-The public key (`juju_id_rsa.pub`) will be placed on every machine created
-within every model belonging to this controller. If there is an existing
-private key named `~/.ssh/id_rsa` then it will also be placed on every machine.
+#### Admin user
 
-### Non-admin users
+When a controller is created (see
+[Creating a controller][controllers-creating]) a passphraseless SSH keypair
+will be generated and placed under `~/.local/share/juju/ssh`. The public key
+(`juju_id_rsa.pub`) will be installed in the 'ubuntu' account on every machine
+created within every model belonging to this controller. During creation, if
+there is an existing public key named `~/.ssh/id_rsa.pub` then it will also be
+placed on every machine.
 
-For SSH connections to work for a non-admin Juju user, the user must:
+As long as the controller administrator has access to either of the above keys
+he/she can connect to any machine with the `juju ssh` command.
 
+#### Regular user
+
+In order for a regular Juju user to connect with `juju ssh` the user must:
+
+- be created (`juju add-user`)
 - be registered (`juju register`)
 - be logged in (`juju login`)
 - have 'admin' rights to the model (`juju grant`)
-- ensure their private key is named `id_rsa` (or use the `ssh-agent` utility)
+- have their public key added to the model by an admin (`juju add-ssh-key` or
+  `juju import-ssh-key`)
+- must be in possession of their private key and ensure it is named `id_rsa`
+  (or use `ssh-agent`)
 
-See [Users and models][models-users] for more information on managing
-user permissions.
+See [Users and models][models-users] for information on managing user
+permissions.
+
+### Direct SSH access
+
+When using a standard SSH client  if one's public key has been installed into a model, then, as
+expected, a connection to the 'ubuntu' user account can be made. All that is
+needed is the corresponding keypair and adequate network connectivity. 
+
+For example, to connect to a machine with an IP address of 10.149.29.143 with
+the OpenSSH client:
+
+```bash
+ssh ubuntu@10.149.29.143
+```
 
 
 <!-- LINKS -->
 
 [controllers-creating]: ./controllers-creating.html
 [credentials]: ./credentials.html
+[users]: ./users.html
 [models]: ./models.html
 [models-users]: ./users-models.html
