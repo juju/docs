@@ -15,6 +15,16 @@ Use header tags so we can link to these variables individually.
 These variables are available on the juju client in order to change its default
 behavior.
 
+#### GOCOOKIES
+
+The default location of the Go cookies file is `~/.go-cookies`. This
+variable can change that.
+
+Example:
+
+```no-highlight
+GOCOOKIES=/var/lib/landscape/juju-homes/1/.go-cookies
+```
 
 #### JUJU_DATA
 
