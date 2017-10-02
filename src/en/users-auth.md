@@ -1,6 +1,5 @@
 Title: Users and authentication
 TODO:  Stuff on user-created models (ssh key and credentials)
-       bug tracking: https://pad.lv/1718775
 
 
 # Users and authentication
@@ -100,17 +99,29 @@ In order for a regular Juju user to connect with `juju ssh` the user must:
 - have 'admin' rights to the model (`juju grant`)
 - have their public key added to the model by an admin (`juju add-ssh-key` or
   `juju import-ssh-key`)
-- must be in possession of their private key and ensure it is named `id_rsa`
-  (or use `ssh-agent`)
+- be in possession of the corresponding private key
 
 See [Users and models][models-users] for information on managing user
 permissions.
 
+In terms of the private key, the easiest way to ensure it is used is to have it
+stored as `~/.ssh/id_rsa`. Otherwise, you can do one of two things:
+
+ 1. Use `ssh-agent`
+ 1. Specify the key manually
+
+The second option above, applied to the previous example, will look like this:
+
+```bash
+juju ssh 0 -i ~/.ssh/my-private-key
+```
+
 ### Direct SSH access
 
-When using a standard SSH client  if one's public key has been installed into a model, then, as
-expected, a connection to the 'ubuntu' user account can be made. All that is
-needed is the corresponding keypair and adequate network connectivity. 
+When using a standard SSH client if one's public key has been installed into a
+model, then, as expected, a connection to the 'ubuntu' user account can be
+made. All that is needed is the corresponding keypair and adequate network
+connectivity. 
 
 For example, to connect to a machine with an IP address of 10.149.29.143 with
 the OpenSSH client:
