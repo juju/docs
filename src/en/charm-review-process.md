@@ -1,9 +1,9 @@
-Title: Charm review process  
+Title: Charm Review Process
 
 # Charm Review Process
 
-Reviewing a Juju Charm is a process that can easily be broken down into
-the following parts:
+Reviewing a Juju Charm is a process that can easily be broken down into the
+following parts:
 
 1. Identifying what to review
 1. Setting up a branch of the charm

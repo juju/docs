@@ -22,8 +22,7 @@ and thus lighten the development workload on everyone.
 - You're not obliged to deal with all the open patches. We appreciate what you do do.
 - You can prioritize whichever you think best achieves the goal of helping
   people enjoy getting things done in Juju. That might be the newest ones,
-neglected patches, easy patches, or those from new contributors. The [Review
-Queue](http://review.juju.solutions) sorts by age.
+neglected patches, easy patches, or those from new contributors.
 - If you are unfamiliar with the package, make sure you review everything you can, it's not necessarily your job to merge/promulgate it. If, after you did your review, you can get the contributor in touch with somebody who knows the codebase better, you already helped out a lot.
 - Consider blogging about a particularly nice contribution. This will not only make the contributor feel valued, but also inspire others with a good example of great work.
 - Encourage contributors to apply for ~charmers if you think they're ready.
@@ -38,8 +37,6 @@ You can see the currently pending requests at:
 
 - [https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers](https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers)
 - [https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&field.component=3&field.component=4](https://bugs.launchpad.net/charms/+bugs?field.subscriber=charmers&field.component=3&field.component=4)
-- The [Review Queue](http://review.juju.solutions/) at
-<http://review.juju.solutions/> 
 
 ### Updating the store with new Charms
 
