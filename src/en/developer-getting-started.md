@@ -185,13 +185,47 @@ library](./tools-amulet.html) is highly suggested and makes it easy to write
 tests in Python.
 
 For more information about writing tests please refer to the
-[charm testing guide](./developer-testing.html).
+[charm testing guide documentation][charm testing].
 
-## Submitting your charm for review
+## Publishing your charm
 
-Once the charm is complete you can [submit the charm for
-review](./charm-review-process.html) where, if accepted, would be included in
-the recommended section of the Juju Charm Store. Charms in the recommended
-section must follow Charm Store policy and best practices for charms. These
-recommended charms have a shorter namespace on the Charm Store website, and are
-listed higher in search results on <http://jujucharms.com>
+When you are done writing your charm and you want to make it available to
+others you will need to make a *promulgation request*. This is informally done
+via the [Juju users mailing list][mailing-list-juju].
+
+The '#juju' IRC channel on Freenode and the above mailing list remain excellent
+resources for questions and comments regarding charm development and charm
+promulgation.
+
+### Promulgation notes
+
+- The [Charm promulgation][charm-promulgation] page contains information on what
+  happens once the request is made.
+
+- It is the responsibility of the charm author (and maintainer) to test
+  their charm to ensure it is of good quality and is secure.
+
+- Promulgation to the top level namespace of the Charm Store does not imply
+  an endorsement by Canonical.
+
+- Charm authors are encouraged to use their personal or group namespace.
+
+
+<!-- LINKS -->
+
+[charm-store]: https://jujucharms.com/
+[getting-started]:    ./getting-started.html 
+[charm-tools]:        ./tools-charm-tools.html
+[charm-helpers]:      ./tools-charm-helpers.html
+[charm-helper-docs]:  http://pythonhosted.org/charmhelpers/
+[interface-layers]:   ./developer-layers-interfaces.html 
+[vanilla]:            http://vanillaforums.org
+[charms-local]:       ./charms-deploying.html#deploying-from-a-local-charm
+[amulet]:             ./tools-amulet.html
+[bundletester]:       https://github.com/juju-solutions/bundletester
+[charm testing]:      ./developer-testing.html
+[interfaces]:         http://interfaces.juju.solutions/
+[charm-promulgation]: ./charm-promulgation.html
+[reactive]: https://en.wikipedia.org/wiki/Reactive_programming
+[charmsreactive]: http://pythonhosted.org/charms.reactive/
+[mailing-list-juju]: https://lists.ubuntu.com/mailman/listinfo/juju
