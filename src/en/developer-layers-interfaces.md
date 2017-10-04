@@ -1,24 +1,59 @@
-Title: Interface layers  
+Title: Interface layers
 
 # Interface layers
 
-Interface layers are perhaps the most misunderstood type of layer, and are
-responsible for the communication that transpires over a relation between two
-applications. This type of layer encapsulates a single “interface protocol”
-and is generally written and maintained by the author of the primary charm
-that provides that interface. However, it does cover both sides (provides and
-requires) of the relation and turns the two-way key-value store that
-are Juju relations under-the-hood into a full-fledged API for interacting with
-charms supporting that interface.
+Interface layers are responsible for the communication that transpires over a
+relation between two applications. This type of layer encapsulates a single
+"interface protocol" and is generally written and maintained by the author of
+the primary charm that provides that interface. However, it does cover both
+sides (provides and requires) of the relation and turns the two-way key-value
+store that are Juju relations under-the-hood into a full-fledged API for
+interacting with charms supporting that interface.
 
 It is important to note that interface layers **do not** actually implement
 either side of the relation. Instead, they are solely responsible for the
 **communication** that goes on over the relation, relying on charms on either
 end to decide what to do with the results of that communication.
 
-Interface layers currently must be written in Python and extend the ReactiveBase
-class, though they can then be __used__ by any language using the built-in CLI
+Interface layers currently must be written in Python and extend the [Endpoint]
+class, though they can then be *used* by any language using the built-in CLI
 API.
+
+[Endpoint]: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations.html#charms.reactive.altrelations.Endpoint
+
+## Terminology
+
+Historically, the term "relation" has been used ambiguously when discussing
+Juju, charms, and applications deployed with Juju using charms.  To make things
+more clear and consistent, we use the following terms:
+
+  * "charm" This is the set of code that encapsulates the operational knowledge
+    that manages the life-cycle of an application when deployed.
+
+  * "application" This is a deployed instance of a charm.  It is hosted on a
+    machine, VM, or container, it has a copy of the charm code, and it is
+    managed by a Juju controller.
+
+  * "interface" This is the protocol used by the charm(s) running on two
+    applications to communicate over a relation established between them.
+    This protocol is what interface layers codify.
+
+  * "endpoint" This is the name that a charm uses as a connection point at which
+    a relation can be made between two deployed applications.  An endpoint is
+    defined in a charm's `metadata.yaml` and specify a name, a type (one of
+    `requires`, `provides`, or `peers`), and an interface that relations
+    established at the endpoint will use.
+
+  * "relation" This is an established connection between endpoints of two
+    applications.  Relations have a relation ID that is tracked by the Juju
+    controller and relation data associated with each unit of each application
+    involved in the relation.  Relations can only be established between
+    endpoints that specify the same interface, and a given endpoint can only
+    have one relation to a specific application. However, a given application
+    can be related to an application any number of times on different
+    endpoints, as long as they specify the same interface, and even to itself
+    if it has two endpoints of the same interface (or if the endpoint is of the
+    type `peers`).
 
 ## Design considerations
 
@@ -37,60 +72,26 @@ over this interface?
 
 - How should this data be made available to the requirer?
 
-- What states should this interface raise on the provider?
+- What flags should this interface set on the provider?
 
-- What states (if any) should this interface raise on the requirer?
+- What flags should this interface set on the requirer?
 
+For the last couple of considerations, it's important to note that the
+`Endpoint` base class will automatically manage a few flags that are common to
+all interfaces:
 
-## Communication scopes
+  * `endpoint.{relation_name}.joined` Set whenever any remote unit joins
+  * `endpoint.{relation_name}.changed` Set whenever any relation data changes
+  * `endpoint.{relation_name}.changed.{field}` Set for each field that changes
+  * `endpoint.{relation_name}.departed` Set whenever any remote unit leaves
 
-When writing an interface, there is also the concept of a communication scope.
-There are three distinct flavors of scoping for a conversation. At times there
-will be fairly static information being transmitted between applications - and this
-is a prime candidate for a [GLOBAL](#global) scope. If the information varies
-from app to app but remains the same for each unit of the application, you
-will want to investigate [SERVICE](#service) level conversations. The
-final, and default communication scope is [UNIT](#unit) level conversations,
-where each unit in a application group gets its own conversation with the
-provider.
+These are mainly intended to be used by the interface layer itself, but can be
+documented as part of the official API that the interface layer exposes.
+Additionally, the `joined` flag will be automatically cleared when there are no
+remote units remaining on any relation, but neither of the other flags will be
+automatically cleared.
 
-#### GLOBAL
-
-All connected applications and units for this relation will share a single
-conversation. The same data will be broadcast to every remote unit, and
-retrieved data will be aggregated across all remote units and is expected to
-either eventually agree or be set by a single leader.
-
-```python
-class MyRelationClient(RelationBase):
-  scope = Scopes.GLOBAL
-```
-
-#### Application
-
-Each connected application for this relation will have its own conversation. The
-same data will be broadcast to every unit of each application’s conversation, and
-data from all units of each application will be aggregated and is expected to
-either eventually agree or be set by a single leader.
-
-```python
-class MyRelationClient(RelationBase):
-  scope = Scopes.SERVICE
-```
-
-#### Unit
-
-Each connected unit for this relation will have its own conversation. This is
-the default scope. Each unit’s data will be retrieved individually, but note
-that due to how Juju works, the same data is still broadcast to all units of a
-single application.
-
-```python
-class MyRelationClient(RelationBase):
-  scope = scopes.UNIT
-```
-
-## Writing an interface-layer
+## Creating an interface layer
 
 First off, you require a [local charm repository](./charms-deploying.html) in
 which to work. This involves creating three directories -- `layers`,
@@ -109,7 +110,7 @@ export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
 mkdir -p $LAYER_PATH $INTERFACE_PATH
 ```
 
-!!! Note: 
+!!! Note:
     Exporting the environment variables in this way only sets the
     variables for the current terminal. If you wish to make these changes persist,
     add the same export statements to a resource file that are evaluated when you
@@ -117,7 +118,7 @@ mkdir -p $LAYER_PATH $INTERFACE_PATH
 
 The export of `INTERFACE_PATH` is an environment variable which tells the
 `charm build` process where to scan for local interfaces not found in the
-[layer registry](http://interfaces.juju.solutions).
+[layer registry](https://github.com/juju/layer-index/).
 
 With our interface repository created, we can now create our new interface.
 
@@ -142,42 +143,27 @@ We're now ready to implement the provider interface in `provides.py`.
 
 ```python
 from charmhelpers.core import hookenv
-from charms.reactive import hook
-from charms.reactive import RelationBase
-from charms.reactive import scopes
+from charms.reactive import set_flag, clear_flag
+from charms.reactive import Endpoint
 
 
-class HttpProvides(RelationBase):
-    # Every unit connecting will get the same information
-    scope = scopes.GLOBAL
+class HttpProvides(Endpoint):
+    def configure(self, port, hostname=None):
+        """
+        Configure the HTTP relation by providing a port and optional hostname.
 
-    # Use some template magic to declare our relation(s)
-    @hook('{provides:http}-relation-{joined,changed}')
-    def changed(self):
-        # Signify that the relationship is now available to our principal layer(s)
-        self.set_state('{relation_name}.available')
-
-    @hook('{provides:http}-relation-{departed}')
-    def departed(self):
-        # Remove the state that our relationship is now available to our principal layer(s)
-        self.remove_state('{relation_name}.available')
-
-    # call this method when passed into methods decorated with
-    # @when('{relation}.available')
-    # to configure the relation data
-    def configure(self, port):
-        relation_info = {
-            'hostname': hookenv.unit_get('private-address'),
-            'port': port,
-        }
-        self.set_remote(**relation_info)
+        If no hostname is provided, the unit's private-address is used.
+        """
+        for relation in self.relations:
+            relation.send['hostname'] = hostname or hookenv.unit_get('private_address')
+            relation.send['port'] = port
 ```
 
-!!! Note: 
-    You may notice we do not decorate for the -broken hook event. This
-    is intentional.  It will only actually cause problems if you use set_state
-    in the context of a relationship being broken, but it doesn't work like you'd
-    expect so it's better to avoid it entirely
+!!! Note: You can only "send" data at the relation level. Remember, a relation
+has data associated with each unit in the relation; "sending" data is really
+just setting the local unit's data on the relation. If you need to provide data
+specific to each remote unit, you can use [`send_json`][] to send structured
+data using a dict keyed by the remote unit names.
 
 #### Implementing the provides side
 
@@ -195,9 +181,11 @@ And in the reactive class, we will receive the RelationBase object, and invoke
 the configure method:
 
 ```python
-@when('website.available')
-def configure_website(website):
-  website.configure(80)
+from charms.reactive import context
+
+@when('endpoint.website.joined')
+def configure_website():
+    context.endpoints.website.configure(80)
 ```
 
 
@@ -206,62 +194,67 @@ def configure_website(website):
 We're now ready to implement the requirer interface in `requires.py`
 
 ```python
-from charms.reactive import hook
-from charms.reactive import RelationBase
-from charms.reactive import scopes
+from charms.reactive import when_any, when_not
+from charms.reactive import set_flag, clear_flag
+from charms.reactive import Endpoint
 
 
-class HttpRequires(RelationBase):
-    scope = scopes.UNIT
+class HttpRequires(Endpoint):
+    @when_any('endpoint.{relation_name}.changed.hostname',
+              'endpoint.{relation_name}.changed.port')
+    def new_website(self):
+        # Detect changes to the hostname or port field on any remote unit
+        # and translate that into the new-website flag. Then, clear the
+        # changed field flags so that we can detect further changes.
+        set_flag(self.flag('endpoint.{relation_name}.new-website'))
+        clear_flag(self.flag('endpoint.{relation_name}.changed.hostname'))
+        clear_flag(self.flag('endpoint.{relation_name}.changed.port'))
 
-    @hook('{requires:http}-relation-{joined,changed}')
-    def changed(self):
-        conv = self.conversation()
-        if conv.get_remote('port'):
-            # this unit's conversation has a port, so
-            # it is part of the set of available units
-            conv.set_state('{relation_name}.available')
+    @when_not('endpoint.{relation_name}.joined')
+    def broken(self):
+        clear_flag(self.flag('endpoint.{relation_name}.new-website'))
 
-    @hook('{requires:http}-relation-{departed}')
-    def departed(self):
-        conv = self.conversation()
-        conv.remove_state('{relation_name}.available')
-
-    def services(self):
+    def websites(self):
         """
-        Returns a list of available HTTP services and their associated hosts
-        and ports.
-        The return value is a list of dicts of the following form::
+        Get the list of websites that were provided.
+
+        Returns a list of dicts, where each dict contains the hostname (address)
+        and the port (as a string) that the website is listening on, as well as
+        the relation ID and remote unit name that provided the site.
+
+        For example::
             [
                 {
-                    'service_name': name_of_service,
-                    'hosts': [
-                        {
-                            'hostname': address_of_host,
-                            'port': port_for_host,
-                        },
-                        # ...
-                    ],
+                    'hostname': '10.1.1.1',
+                    'port': '80',
+                    'relation_id': 'reverseproxy:1',
+                    'unit_name': 'myblog/0',
                 },
-                # ...
             ]
         """
-        services = {}
-        for conv in self.conversations():
-            service_name = conv.scope.split('/')[0]
-            service = services.setdefault(service_name, {
-                'service_name': service_name,
-                'hosts': [],
-            })
-            host = conv.get_remote('hostname') or conv.get_remote('private-address')
-            port = conv.get_remote('port')
-            if host and port:
-                service['hosts'].append({
-                    'hostname': host,
+        websites = []
+        for relation in self.relations:
+            for unit in relation.units:
+                hostname = unit.received['hostname']
+                port = unit.received['port']
+                if not (hostname and port):
+                    continue
+                website.append({
+                    'hostname': hostname,
                     'port': port,
+                    'relation_id': relation.relation_id,
+                    'unit_name': unit.unit_name,
                 })
-        return [s for s in services.values() if s['hosts']]
+        return websites
 ```
+
+!!! Note: Although this is obviously a very simple example, it is important for
+your interface layer to provide an API like this and not give the charms direct
+access to the `Relation` and `RelatedUnit` objects in those collections. This
+ensures proper encapsulation of the underlying interface data protocol; it
+means that you can update your interface layer to handle changes in things like
+the encoding or key names in a backwards compatible way without requiring all
+charms that use the interface to know about or implement that logic.
 
 #### Implementing the requires side
 
@@ -279,17 +272,16 @@ requires:
 And in our reactive file, we implement it as so:
 
 ```python
-from charms.reactive.helpers import data_changed
+from charms.reactive import when
+from charms.reactive import clear_flag
+from charms.reactive import context
 
-@when('reverseproxy.available')
-def update_reverse_proxy_config(reverseproxy):
-    services = reverseproxy.services()
-    if not data_changed('reverseproxy.services', services):
-        return
-    for service in services:
-        for host in service['hosts']:
-            hookenv.log('{} has a unit {}:{}'.format(
-                service['service_name'],
-                host['hostname'],
-                host['port']))
+
+@when('endpoint.reverseproxy.new-website')
+def update_reverse_proxy_config():
+    for website in context.endpoints.reverseproxy.websites():
+        hookenv.log('New website: {}:{}'.format(
+            website['hostname'],
+            website['port']))
+    clear_flag('endpoint.reverseproxy.new-website')
 ```
