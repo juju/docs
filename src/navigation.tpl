@@ -113,6 +113,7 @@
                   <li><a href="tools-charm-tools.html">Charm Tools</a></li>
                   <li><a href="tools-charm-helpers.html">Charm Helpers</a></li>
                   <li><a href="tools-amulet.html">Amulet</a></li>
+                  <li><a href="tools-mojo.html">Mojo</a></li>
                 </ul>
               </li>
               <li class="section"><h4 class="header toggle-target">Reference</h4>
