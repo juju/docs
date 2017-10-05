@@ -119,6 +119,7 @@
         <li><a href="developer-terms.html">Juju Terms</a></li>
         <li><a href="developer-metrics.html">Juju Metrics</a></li>
         <li><a href="developer-resources.html">Juju Resources</a></li>
+        <li><a href="developer-network-primitives.html">Network Primitives</a></li>
         <li class="section"><a class="header" href="developer-leadership.html">Implementing Leadership</a>
             <ul class="sub">
                 <li><a href="developer-leadership.html#leadership-hooks">Leadership Hooks</a></li>
