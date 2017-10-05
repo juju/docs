@@ -1,4 +1,5 @@
 Title: Removing applications, units, and machines in Juju
+TODO:  Critical: review required (e.g. "state server")
 
 
 # Removing applications, units, and machines
@@ -17,11 +18,12 @@ Once an application is no longer required it can be removed with:
 juju remove-application <application-name>
 ```
 
-!!! Note: Removing an application which has active relations with another
-running application will terminate that relation. Charms are written
-to handle this, but be aware that the other application may no 
-longer work as expected. To remove relations between deployed applications,
-see [Charm relations][charmrelations].
+!!! Note: 
+    Removing an application which has active relations with another
+    running application will terminate that relation. Charms are written
+    to handle this, but be aware that the other application may no 
+    longer work as expected. To remove relations between deployed applications,
+    see [Charm relations][charmrelations].
 
 This is the order of events for removing an application:
 
@@ -43,6 +45,10 @@ application is listed as dying, but also reports an error state, then the
 removed application will not go away. See the 'Caveats' section below for how 
 to manage applications stuck in a dying state.
 
+If dynamic storage is in use, the storage will, by default, be detached and
+left alive in the model. However, the `--destroy-storage` option can be used to
+instruct Juju to destroy the storage once detached. See
+[Using Juju Storage][charms-storage] for details on dynamic storage.
 
 ## Removing units
 
@@ -64,22 +70,28 @@ removed.
 
 See section 'Caveats' below for how to manage units in a dying state.
 
+The `--destroy-storage` option is available for this command as it is for the
+`remove-application` command above.
+
 
 ## Removing machines
 
-Machines (instances) can be removed like this:
+Juju machines can be removed like this:
 
 ```bash
 juju remove-machine <number>
 ```
 
-However, it is not possible to remove an instance which is currently allocated
-to an application. If attempted, this message will be emitted:
+However, it is not possible to remove a machine which is currently allocated
+to a unit. If attempted, this message will be emitted:
 
 ```no-highlight
 error: no machines were destroyed: machine 3 has unit "mysql/0" assigned
 ```
 
+By default, when a Juju machine is removed, the backing system, typically a
+cloud instance, is also destroyed. The `--keep-instance` option overrides this;
+it allows the instance to be left running.
 
 ## Caveats
 
@@ -104,6 +116,10 @@ occur when removing a unit or application. Therefore also verify that the
 associated units are not in an error state and apply the above command to them
 if they are.
 
+
+<!-- LINKS-->
+
 [charmrelations]: ./charms-relations.html#removing-relations
 [controllers]: ./controllers.html
 [models]: ./models.html
+[charms-storage]: ./charms-storage.html

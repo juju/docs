@@ -59,7 +59,8 @@ To further ensure that it also has at least 2 CPU cores:
 juju deploy mariadb --constraints "mem=4G cores=2"
 ```
 
-!!! Note: When setting more than one constraint you will need to utilize quotes.
+!!! Note: 
+    When setting more than one constraint you will need to utilize quotes.
 
 To ignore any constraints which may have been previously set, you can assign a 
 'null' value. If the application or model constraints for the 'mariadb' charm
@@ -72,8 +73,9 @@ juju deploy mariadb --constraints "mem=4G cores="
 
 In the event that a constraint cannot be met, the unit will not be deployed.
 
-!!! Note: Constraints work on an "or better" basis: If you ask for 4 CPUs, you 
-may get 8, but you won't get 2
+!!! Note: 
+    Constraints work on an "or better" basis: If you ask for 4 CPUs, you 
+    may get 8, but you won't get 2
 
 
     
@@ -168,3 +170,9 @@ Will provision a machine that is connected to both the 'storage' and 'db'
 network spaces. You can subsequently deploy applications to this machine using
 the '--to' placement switch - 
 [see the documentation on deploying charms](./charms-deploying.html)
+
+
+!!! Note:
+    Juju's knowledge of the available spaces on the underlying cloud may lag
+    behind recent changes. To force Juju to re-examine the spaces it can use,
+    you should run the command `juju reload-spaces`.  

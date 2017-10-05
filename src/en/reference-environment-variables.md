@@ -15,6 +15,16 @@ Use header tags so we can link to these variables individually.
 These variables are available on the juju client in order to change its default
 behavior.
 
+#### GOCOOKIES
+
+The default location of the Go cookies file is `~/.go-cookies`. This
+variable can change that.
+
+Example:
+
+```no-highlight
+GOCOOKIES=/var/lib/landscape/juju-homes/1/.go-cookies
+```
 
 #### JUJU_DATA
 
@@ -70,8 +80,12 @@ or pre-release features are enabled only when the feature flag is enabled prior
 to bootstrapping the environment.
 
 ```
-JUJU_DEV_FEATURE_FLAGS=storage,network-spaces juju bootstrap
+JUJU_DEV_FEATURE_FLAGS=<flag1,flag2> juju bootstrap
 ```
+
+!!! Warning:
+    Unforeseen and detrimental results can occur by enabling developmental
+    features. Do not do so on production systems.
 
 #### JUJU_STARTUP_LOGGING_CONFIG
 

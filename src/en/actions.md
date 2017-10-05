@@ -77,9 +77,9 @@ add-repo:
 
 ### `juju run-action`
 
-Trigger an action. This command takes the unit as an argument and returns an ID
-for the action. The ID can be used with `juju show-action-output <ID>` or 
-`juju show-action-status <ID>`.
+Trigger an action. This command takes a unit (or multiple units) as an argument
+and returns an ID for the action. The ID can be used with `juju
+show-action-output <ID>` or `juju show-action-status <ID>`.
 
 If an action requires parameters, these can be passed directly. For example, we
 could create a new 'git' repository by triggering the 'add-repo' action and
@@ -95,6 +95,13 @@ This will return the ID for the new action:
 Action queued with id: 3a7cc626-4c4c-4f00-820f-f881b79586d10
 ```
 
+As mentioned, this command can be applied to more than one unit (of the same
+application). So if there were two git units you can also do:
+
+```bash
+juju run-action git/0 git/1 add-repo repo=myproject
+```
+
 When running short-lived actions from the command line, it is more convenient to
 add the `--wait` option to this command. This causes the Juju client to wait for
 the action to run, and then return the results and other information in YAML
@@ -103,7 +110,7 @@ format.
 For example, running the command:
 
 ```bash
-juju run-action git/0 list-repo --wait
+juju run-action git/0 list-repos --wait
 ```
 
 Will return something like:
@@ -132,7 +139,7 @@ not completed, the command will simply return the id and status, enabling the
 user to continue issuing commands. E.g.:
 
 ```bash
-juju run-action git/0 list-repo --wait=10ns
+juju run-action git/0 list-repos --wait=10ns
 ```
 Ten nanoseconds isn't much time to get anything done, so in this case the output
 will be similar to:
@@ -147,7 +154,7 @@ timing:
 You can also set parameters indirectly via a YAML file, although you can
 override the parameters within the file by providing them directly.
 
-*Example params.yml:*
+*Example params.yaml:*
 ```yaml
 repo: myproject
 sure: no

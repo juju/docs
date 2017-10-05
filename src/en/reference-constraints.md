@@ -1,5 +1,5 @@
-Title: Juju constraints
-TODO: Consider removing or editing Legacy section
+Title: Constraints
+TODO:  Review required. In particular, the top section is too wordy.
 
 # Constraints
 
@@ -105,8 +105,8 @@ multiple constraints delimited by a space.
     Example: spaces=storage,db,^logging,^public (meaning, select machines connected
     to the storage and db spaces, but NOT to logging or public spaces).
 
-    EC2 is the only provider supporting spaces constraints. Support for other
-    providers is planned for future releases.
+    EC2 and MAAS are the only providers that support the spaces constraint.
+    Support in other providers is planned for future releases.
 
 - virt-type
 
@@ -161,43 +161,3 @@ in combination. Use this list to help you understand the differing needs.
 
 ###VSphere Provider:
 - Unsupported: [tags, virt-type]
-
-
-
-## Legacy constraints
-
-In earlier Juju releases some additional or differently named constraints were
-also supported, these need to be migrated when upgrading.
-
-- cpu
-
-    Number of CPU cores for most providers, but equivalent to an Amazon
-    vCPU on AWS. Use `cores` instead of `cpu` or `cpu-cores`.
-
-- ec2-zone
-
-    EC2 availability zone that an application unit must be deployed into. No
-    equivalent implemented as of juju 1.12, follow [bug
-    1183831](https://bugs.launchpad.net/juju-core/+bug/1183831).
-
-- maas-name
-
-    Specific MAAS machine name that an application unit must be deployed on.
-    Use `maas-tags` instead by preference.
-
-- maas-tags
-
-    List of tags a MAAS machine must have for an application unit to be
-    deployed on. See "tags" above.
-
-- networks
-
-    Comma-delimited list of networks that must be available to the
-    machine. Networks that must not be available to the machine are
-    prefixed with a "^". For example. "db,^dmz".
-    This was only supported by MAAS.
-
-- os-scheduler-hints
-
-    Experimental constraint exposing Openstack-specific scheduler hints
-    features. Do not use.

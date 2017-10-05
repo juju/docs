@@ -17,9 +17,10 @@ details on how to use payloads within your charms.
 Many of the tools produce text based output, and those that do accept
 a `--format` flag which can be set to json or yaml as desired.
 
-!!! Note: You can view a detailed listing of what each command listed below does
-on your client with `juju help-tool {command}`. Or for more detailed help on
-individual commands run the command with the -h flag.
+!!! Note: 
+    You can view a detailed listing of what each command listed below does
+    on your client with `juju help-tool {command}`. Or for more detailed help on
+    individual commands run the command with the -h flag.
 
 ## action-fail
 
@@ -378,9 +379,10 @@ charm**. It does not, at the moment, include ports which may be opened by other
 charms co-hosted on the same machine
 [lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770).
 
-!!! Note: opening ports is transactional (i.e. will take place on successfully
-exiting the current hook), and therefore `opened-ports` will not return any
-values for pending `open-port` operations run from within the same hook.
+!!! Note: 
+    Opening ports is transactional (i.e. will take place on successfully
+    exiting the current hook), and therefore `opened-ports` will not return any
+    values for pending `open-port` operations run from within the same hook.
 
 python:
 ```python
@@ -832,6 +834,10 @@ storage-list
 `unit-get` returns information about the local **unit**. It accepts a single
 argument, which must be `private-address` or `public-address`. It is not
 affected by context.
+
+Note that if a unit has been deployed with `--bind space` then the address 
+returned from `unit-get private-address` will get the address from this
+space, not the 'default' space.
 
 python:
 ```python

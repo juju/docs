@@ -1,5 +1,5 @@
 Title: Using and Creating Bundles
-Todo: Check more complex bundles after the release of 2.0
+TODO:  Check more complex bundles after the release of 2.0
 
 # Using and Creating Bundles
 
@@ -198,6 +198,51 @@ mysql:
     "gui-y": "168"
 ```
 
+Values for options and annotations can also be read from a file. For binary
+files, such as binary certificates, there is an option to base64-encode the
+contents. A file location can be expressed with an absolute or relative (to the
+bundle file) path. For example:
+
+```yaml
+applications:
+    my-app:
+        charm: some-charm
+        options:
+            config: include-file://my-config.yaml
+            cert: include-base64://my-cert.crt
+```
+
+Furthermore, the `--bundle-config` option can be used when you want to use a
+standard bundle but keep model-specific configuration in a separate file.  Any
+values specified for an application in the file override those values defined
+in the bundle, with the exception of the map type values, where the maps are
+merged with preference given to the bundle-config file. The file can make use
+of the `include-file://` and `include-base64://` directives mentioned above for
+local bundles (for options and annotation values). A file location can be
+expressed with an absolute or relative (to the bundle-config file) path. For
+example:
+
+```bash
+juju deploy wiki-simple --bundle-config ~/model-a/wiki-simple.yaml
+```
+
+Where the contents of `~/model-a/wiki-simple.yaml` could look like:
+
+```yaml
+applications:
+  wiki:
+    options:
+      name: "The model-a wiki"
+  mysql:
+    options:
+      "dataset-size": "768M"
+      "rbd-name": mysql-model-a
+```
+
+!!! Note:
+    The bundle-config file currently only supports 'applications' as a top
+    level key.
+
 ## Bundle placement directives
 
 You can co-locate applications using the placement directive key in the bundle.
@@ -364,6 +409,55 @@ mysql:
 It is not currently possible to declare a default space in the bundle for all
 application endpoints. The workaround is to list all endpoints explicitly.
 
+## Bundles and Charm Resources
+
+Charms can define [resources][charm-resources-docs]; bundles can be used to
+constrain those resources to specific revisions or to specify local paths to
+those resources. For example, the following charm's metadata.yaml file specifies
+a resource:
+
+```yaml
+name: example-charm
+summary: "example charm."
+description: This is an example charm.
+resources:
+  example:
+    type: file
+    filename: example.zip
+    description: "This charm needs example.zip to operate"
+```
+
+If this charm were to be used as part of a bundle, it might be desirable to
+specify a revision that is specific to the bundle. Revisions are specified in
+the bundle's YAML file in the corresponding "applications" section.
+
+```yaml
+applications:
+  example-charm:
+   charm: "cs:example-charm"
+   series: trusty
+   resources:
+     example: 1
+```
+
+The `example-charm` charm specifies that it requires a resource called `example`
+to operate; the bundle's "applications" section shown above specifies that its
+bundle requires, from the charm store, revision 1 of that resource.
+
+The resources section can also specify a local path to a resource:
+
+```yaml
+applications:
+  example-charm:
+   charm: "cs:example-charm"
+   series: trusty
+   resources:
+     example: "./example.zip"
+```
+
+Local paths to resources can be useful in network restricted environments where
+a Juju controller can not contact the charm store, for example.
+
 ## Sharing your Bundle with the Community
 
 After you have tested and deployed your bundle you need to release it to share
@@ -384,3 +478,4 @@ Freenode) who can assist. You can also use the
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
 [constraints-docs]: ./charms-constraints.html
 [discover-config-options-docs]: ./charms-config.html#discovering-application-configuration-options
+[charm-resources-docs]: ./developer-resources.html

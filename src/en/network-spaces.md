@@ -22,8 +22,14 @@ considerations when using spaces:
   isolation, such as between instances running within subnets which are members
   of different spaces.
 
-!!! Note: Advanced networking features, such as 'spaces`, are currently only
-supported by MAAS.
+!!! Note:
+    Network spaces are currently only supported by the MAAS and EC2 providers.
+
+
+!!! Note:
+    Juju's knowledge of the available spaces on the underlying cloud may lag
+    behind recent changes. To force Juju to re-examine the spaces it can use,
+    you should run the command `juju reload-spaces`.  
 
 Having multiple subnets spanning different zones within the same space enables
 Juju to perform automatic distribution of an application's units across zones
@@ -50,9 +56,10 @@ access control rules. In this case, instances in "dmz" can only communicate
 with instances in "apps", which in turn are the only ones allowed to access
 instances in "database".
 
-!!! Note: Juju does not yet enforce these security restrictions. Having spaces
-and subnets available makes it possible to implement restrictions and access
-control in a future release.
+!!! Note: 
+    Juju does not yet enforce these security restrictions. Having spaces
+    and subnets available makes it possible to implement restrictions and access
+    control in a future release.
 
 ## Adding and listing spaces and subnets
 

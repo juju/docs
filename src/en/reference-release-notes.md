@@ -2,66 +2,172 @@ Title: Juju Release Notes
 
 # Release Notes History
 
-This section details all the available release notes for the 
-2.x stable series of Juju 
+This section details all the available release notes for the
+2.x stable series of Juju
 (notes for [earlier releases are available here](./reference-release-notes-1.html) ).
 
-The versions covered here are: 
+The versions covered here are:
+
+^# Juju 2.2.4
+
+  ## New and Improved
+
+  - This release is primarily a bug fix release which addresses some issues
+    that missed the cutoff for the previous 2.2.3 release or were discovered
+    in 2.2.3
+  - A notable fix is for model migration:
+    model migration would previously fail if the model had subordinate
+    applications that were related to multiple principals. This is now fixed.
+
+  For a list of all bugs fixed in this release, see:
+  https://launchpad.net/juju/+milestone/2.2.4
+
+
+  ## How can I get it?
+
+  The best way to get your hands on this release of Juju is to install it as
+  a snap package (see https://snapcraft.io for more info on snaps).
+
+         snap install juju --classic
+
+  Other packages are available for a variety of platforms. Please see the online
+  documentation at https://jujucharms.com/docs/stable/reference-install Those
+  subscribed to a snap channel should be automatically upgraded. If you’re using
+  the ppa/homebrew, you should see an upgrade available.
+
+  For highlights of this release, please see the documentation at
+  https://jujucharms.com/docs/2.2/whats-new
+
+^# Juju 2.2.3
+
+  ## New and Improved
+
+  - The remove-machine command has a --keep-instance flag which allows the cloud
+    instance to be left running when the machine is removed from the Juju model
+  - Bundles can now reference local resources by specifying a relative path (as
+    can already be done for local charms).
+  - Values in local bundles for options and annotations can now specify a file to
+    be read for the specified value. This is to support charm options where the
+    value is some structured content, such as a configuration file. For binary
+    external files, such as binary certificates, there is an option to base64
+    encode the contents of the file so it can be used as a string value. The
+    referenced file can include the path to the file. The file location is relative
+    to the bundle file location.
+
+    For example:
+
+  <pre><code class="language-yaml">applications:
+        my-app:
+          charm: some-charm
+          options:
+            config: include-file://my-config.yaml
+            cert: include-base64://my-cert.crt
+  </code></pre><br/>
+
+  -  There is a new option for deploying bundles: `--bundle-config`. This
+     configuration file needs to be a YAML file, and currently only supports
+     applications as a top level key. The format of the applications is the same
+     as applications section in the bundle. Any values specified for an
+     application in the bundle-config file override those values defined in the
+     bundle, with the exception of the map type values, where the maps are merged
+     with preference given to the bundle-config. The purpose of this to allow the
+     use of a common bundle definition, and have model specific configuration kept
+     in a separate file. Option and annotation values specified in the bundle-config
+     file can also use the include-file:// and include-base64:// directives
+     mentioned above for local bundles. Paths specified are relative to the
+     bundle-config file.
+
+  For a list of all bugs fixed in this release, see https://launchpad.net/juju/+milestone/2.2.3
+
+
+  ## How can I get it?
+
+  The best way to get your hands on this release of Juju is to install it as
+  a snap package (see https://snapcraft.io/ for more info on snaps).
+
+         snap install juju --classic
+
+  Other packages are available for a variety of platforms. Please see the online
+  documentation at https://jujucharms.com/docs/stable/reference-install. Those
+  subscribed to a snap channel should be automatically upgraded. If you’re using
+  the ppa/homebrew, you should see an upgrade available.
+
+  For highlights of this release, please see the documentation at
+  https://jujucharms.com/docs/2.2/whats-new.
 
 ^# Juju 2.2.2
 
-This release fixes some bugs that missed the cut for 2.2.1. Notable inclusions are:
-* juju debug-log will no longer stop prematurely
-* missing credentials will no longer stop upgrades
-* reduced log spam in multiplaces
-* agents will no longer falsely report as lost 
-* relationships between subordinate charms will now work
+  This release fixes some bugs that missed the cut for 2.2.1. Notable inclusions are:
 
-For a list of all bugs fixed in this release, see https://launchpad.net/juju/+milestone/2.2.2
+    - `juju debug-log` will no longer stop prematurely
+    - Missing credentials will no longer stop upgrades
+    - Reduced log spam in multiplaces
+    - Agents will no longer falsely report as lost
+    - Relations between subordinate charms will now work
 
-## New and Improved
+  For a list of all bugs fixed in this release, see https://launchpad.net/juju/+milestone/2.2.2
 
-### vSphere Datastore selection
-To select a specific datastore when bootstrapping a vSphere environment, use the "datastore" model config attribute, eg
+  ## New and Improved
 
-$ juju bootstrap vsphere --config datastore=<name-of-accessible-datastore>
+  ### vSphere Datastore selection
+  To select a specific datastore when bootstrapping a vSphere environment, use the "datastore"
+  model config attribute, eg
+
+        juju bootstrap vsphere --config datastore=<name-of-accessible-datastore>
 
 
-## How can I get it?
+  ## How can I get it?
 
-The best way to get your hands on this release of Juju is to install it as a snap package (see https://snapcraft.io/ for more info on snaps).
+  The best way to get your hands on this release of Juju is to install it as a snap
+  package (see https://snapcraft.io/ for more info on snaps).
 
-         snap install juju --classic 
+         snap install juju --classic
 
-Other packages are available for a variety of platforms. Please see the online documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew, you should see an upgrade available.
+  Other packages are available for a variety of platforms. Please see the online
+  documentation at https://jujucharms.com/docs/stable/reference-install. Those
+  subscribed to a snap channel should be automatically upgraded. If you’re using
+  the ppa/homebrew, you should see an upgrade available.
 
-For highlights of this release, please see the documentation at
-https://jujucharms.com/docs/2.2/whats-new.
+  For highlights of this release, please see the documentation at
+  https://jujucharms.com/docs/2.2/whats-new.
 
 ^# Juju 2.2.1
 
-This release further enhances the performance improvements delivered in 2.2.0, as well as fixing some bugs that missed the cut for 2.2.0. Notable inclusions are:
-* frequent database writes (for logging and agent pings) are batched to significantly reduce database I/O
-* cleanup of log noise to make observing true errors much easier
-* status history is now pruned whereas before a bug prevented that from happening leading to unbounded growth
-* update-status interval configurable (this value must be set when bootstrapping or performing add-model via the --config option; any changes after that are not noticed until a Juju restart)
-* debug-log include/exclude arguments now more user friendly (as for commands like juju ssh, you now specify machine/unit names instead of tags; "rabbitmq-server/0" instead of "unit-rabbitmq-server-0".
+  This release further enhances the performance improvements delivered in 2.2.0,
+  as well as fixing some bugs that missed the cut for 2.2.0. Notable inclusions are:
 
-conjure-up remains at version 2.2.0 but the snap has been updated to bundle this new Juju 2.2.1 version.
+    - Frequent database writes (for logging and agent pings) are batched to
+      significantly reduce database I/O
+    - Cleanup of log noise to make observing true errors much easier
+    - Status history is now pruned whereas before a bug prevented that from
+      happening leading to unbounded growth
+    - update-status interval configurable (this value must be set when
+      bootstrapping or performing add-model via the --config option; any changes
+      after that are not noticed until a Juju restart)
+    - debug-log include/exclude arguments now more user friendly (as for
+      commands like juju ssh, you now specify machine/unit names instead of
+      tags; "rabbitmq-server/0" instead of "unit-rabbitmq-server-0".
 
-## How can I get it?
+  conjure-up remains at version 2.2.0 but the snap has been updated to include
+  this new Juju 2.2.1 version.
 
-The best way to get your hands on this release of Juju and conjure-up is to install them via snap packages (see https://snapcraft.io/ for more info on snaps).
+  ## How can I get it?
 
-         snap install juju --classic 
-         snap install conjure-up --classic 
+  The best way to get your hands on this release of Juju and conjure-up is to install them via
+  snap packages (see https://snapcraft.io/ for more info on snaps).
 
-Other packages are available for a variety of platforms. Please see the online documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew, you should see an upgrade available.
+         snap install juju --classic
+         snap install conjure-up --classic
 
-For highlights of this release, please see the documentation at
-https://jujucharms.com/docs/2.2/whats-new. Further details are below.
+  Other packages are available for a variety of platforms. Please see the online
+  documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed
+  to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew,
+  you should see an upgrade available.
 
-https://launchpad.net/juju/+milestone/2.2.1
+  For highlights of this release, please see the documentation at
+  https://jujucharms.com/docs/2.2/whats-new. Further details are below.
+
+  https://launchpad.net/juju/+milestone/2.2.1
 
 
 ^# Juju 2.2.0
@@ -70,47 +176,47 @@ https://launchpad.net/juju/+milestone/2.2.1
   the modelling of networks, and adds support for KVM containers on arm64.
   Additionally, there is now outline support for Oracle Compute, and vSphere
   clouds are now easier to deploy.
-  
+
   conjure-up now supports Juju as a Service (JAAS), macOS clients, Oracle
   and vSphere clouds, and repeatable spell deployments.
-  
+
   ## How can I get it?
-  
+
   The best way to get your hands on this release of Juju and conjure-up is to
   install them via snap packages (see https://snapcraft.io/ for more info on snaps).
-  
-          snap install juju --classic 
-          snap install conjure-up --classic 
-  
+
+          snap install juju --classic
+          snap install conjure-up --classic
+
   Other packages are available for a variety of platforms. Please see the
   online documentation at https://jujucharms.com/docs/stable/reference-install.
   Those subscribed to a snap channel should be automatically upgraded.
   If you’re using the ppa/homebrew, you should see an upgrade available.
-  
+
   For highlights of this release, please see the documentation at
   [https://jujucharms.com/docs/2.2/whats-new](./whats-new).
   Further details are below.
-  
+
   ## Upgrading
-  
+
   Changes introduced in 2.2.0 mean that you should also upgrade any
   controllers and hosted models after installing the new client software.
-  Please see the documentation at 
+  Please see the documentation at
   [https://jujucharms.com/docs/2.2/models-upgrade](./models-upgrade#upgrading-the-model-software)
   for more information.
-  
+
 
   ## New and Improved
-  
+
   * Users can now deploy workloads to Centos7 machines on Azure.
   * vSphere Juju users with vCenter 5.5 and vCenter 6.0 can now bootstrap
   successfully and deploy workloads as well as have machines organised into
-  folders. 
+  folders.
   * Juju now has initial support for Oracle Cloud, https://jujucharms.com/docs/2.2/help-oracle.
   * Users of Azure can now benefit from better credential management
   support, we’ve eliminated the need to manually discover subscription ID
   in order to add an Azure credential. All you need is to have Azure CLI
-  installed and regular Juju credential management commands will “Just Work”. 
+  installed and regular Juju credential management commands will “Just Work”.
   * Juju login command now accepts the name or hostname of a public controller
   as a parameter. Passing a user to log in as has been moved to an option
   rather than a positional parameter.
@@ -145,9 +251,9 @@ https://launchpad.net/juju/+milestone/2.2.1
   * Juju models have always been internally identified by their owner and
   their short name. These full names have not been exposed well to the user
   but are now part of juju models and show-model command output.
-  
+
   ## Fixes
-  
+
   * Juju more reliably determines whether to connect to the MAASv2 or MAASv1
   API based on MAAS endpoint URL as well as the response received from MAAS.
   * Juju is now built with Go version 1.8 to take advantage of performance
@@ -157,105 +263,105 @@ https://launchpad.net/juju/+milestone/2.2.1
   * Juju models with storage can now be cleanly destroyed.
   * Juju is now resilient to a MITM attack as SSH Keys of the bootstrap host
   are now verified before bootstrap (lp:1579593).
-  * Root escalation vulnerability in ‘juju-run’ has been fixed (lp:1682411). 
+  * Root escalation vulnerability in ‘juju-run’ has been fixed (lp:1682411).
   * Juju’s agent presence data is now aggressively pruned, reducing
   controller disk space usage and avoiding associated performance issues.
   * MAAS 2.x block storage now works with physical disks, when MAAS reports
-  the WWN unique identifier. (lp:1677001). 
+  the WWN unique identifier. (lp:1677001).
   * Automatic bridge names are now properly limited to 15 characters in
   Juju (lp:1672327).
   * Juju subordinate units are now removed as expected when their principal
   is removed (lp:1686696 and lp:1655486)
-  
+
   You can check the milestones for a detailed breakdown of the Juju and
   conjure-up bugs we have fixed:
-  
+
   https://launchpad.net/juju/+milestone/2.2.0
   https://github.com/conjure-up/conjure-up/milestone/19?closed=1
-  
+
   ## Known issues
-  
+
   * Juju 2.1 agents can fail if configuration for the units is large enough
   to cause responses to be chunked. https://bugs.launchpad.net/juju/2.1/+bug/1697936
   * Restarting controller during an HA upgrade will cause it to not upgrade.
-  https://bugs.launchpad.net/juju/+bug/1697956 
-  
+  https://bugs.launchpad.net/juju/+bug/1697956
+
   ## Feedback Appreciated!
-  
+
   We encourage everyone to let us know how you're using Juju.
-  
+
   Join us at regular Juju shows - subscribe to our Youtube channel
   https://youtube.com/jujucharms
-  
+
   Send us a message on Twitter using #jujucharms, join us at #juju on freenode,
   and subscribe to the mailing list at juju@lists.ubuntu.com.
-  
+
   https://jujucharms.com/docs/stable/contact-us
 
 
-^# Juju 2.1.3 
-  
-  This release fixes a privilege escalation vulnerability when executing 
-  `juju-run` on the cloud instances, not to be confused with the 
+^# Juju 2.1.3
+
+  This release fixes a privilege escalation vulnerability when executing
+  `juju-run` on the cloud instances, not to be confused with the
   'juju run' CLI command.
-  
+
   See the following for further details on the vulnerability:
   https://bugs.launchpad.net/juju/+bug/1682411
   CVE-2017-9232 http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9232
-  
-  This vulnerability affects all currently distributed versions of 
+
+  This vulnerability affects all currently distributed versions of
   Juju (1.25.x, 2.0.x and 2.1.x).
-  
+
   ## How to know if you need to update
-  
+
   We’ve put together a helpful Python script that will loop through your
   controllers and then output the version of each model on the controller.
   It requires Python 2.7 or higher.
-  
+
         curl -L https://goo.gl/59gxnz | python
-  
+
   ## How do I update? I’m on…
 
-  
+
   ### JAAS
   JAAS has been updated to the new 2.1.3 release. Users with models in
   JAAS do not need to perform any upgrade steps to their models that
   are running in JAAS.
-  
+
   ### Juju 2.2-betaX
-  Users of the 2.2-beta releases need to temporarily update to using 
-  the edge channel. Users will need to use this until Juju 2.2-rc1 
+  Users of the 2.2-beta releases need to temporarily update to using
+  the edge channel. Users will need to use this until Juju 2.2-rc1
   is released in the coming days. You can easily switch your snap install
   client by using the following:
-  
+
         snap refresh juju --edge --classic
-  
-  Once you’ve completed this step you’ll need to run through the normal upgrade 
-  steps on your models, as explained 
+
+  Once you’ve completed this step you’ll need to run through the normal upgrade
+  steps on your models, as explained
   [in the documentation](./models-upgrade#the-upgrade-juju-command)
-  
-  Note for non-snap beta users: we suggest you do not run controllers with 
-  the 2.2 beta releases. We suggest you move to the edge channel of the 
-  snap releases or to wait and redeploy when 2.2 RC1 is released. 
-  
+
+  Note for non-snap beta users: we suggest you do not run controllers with
+  the 2.2 beta releases. We suggest you move to the edge channel of the
+  snap releases or to wait and redeploy when 2.2 RC1 is released.
+
   ### Juju 2.1.x
 
   You can follow the current upgrade documentation to upgrade. Make sure that
   you update your controller model as well as each model on that controller.
-  
+
   https://jujucharms.com/docs/2.1/models-upgrade
-  
-  
+
+
   ## Questions/Concerns
 
-  
+
   If you have any questions please don’t hesitate to reach out to the team via:
-  
+
   the #juju Freenode IRC channel
   the juju mailing list https://lists.ubuntu.com/mailman/listinfo/juju
-  
+
   We encourage everyone to let us know how you're using Juju.
-  
+
   Join us at regular Juju shows -
   subscribe to our Youtube channel https://youtube.com/jujucharms
 
@@ -268,7 +374,7 @@ https://launchpad.net/juju/+milestone/2.2.1
   - [juju] Handle 'Node with this Hostname already exists' errors when
     provisioning containers. LP:#1670873
   - [juju] Fix 'interface bindings cannot have empty names' LP:#1671489
-  - [juju] Fix 'upgrade-charm broken after using default binding' 
+  - [juju] Fix 'upgrade-charm broken after using default binding'
     LP:#1671428
 
 
@@ -318,10 +424,10 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   - Networking improvements
   - [conjure-up] Spells support side-loading bundles. This helps spells
-    authors who are writing spells for particular software but want to 
-    offer variations. For example, there are OpenStack bundles that 
-    support both KVM and LXD, or Telemetry additions. Side-loading will 
-    help with spells that need to provide those various bundle 
+    authors who are writing spells for particular software but want to
+    offer variations. For example, there are OpenStack bundles that
+    support both KVM and LXD, or Telemetry additions. Side-loading will
+    help with spells that need to provide those various bundle
     configurations.
   - [conjure-up] More LXD improvements in addition to support for the
      recently released LXD 2.10.
@@ -391,7 +497,7 @@ https://launchpad.net/juju/+milestone/2.2.1
   - Model migration
   - Interactive `add-cloud`
   - Networking changes
-  - Conjure-up 
+  - Conjure-up
   - LXD credential changes
   - Changes to the GUI
   - Instrumentation of Juju via Prometheus endpoints
@@ -422,7 +528,7 @@ https://launchpad.net/juju/+milestone/2.2.1
     - Destination controllers on different regions or VPCs need direct
       connectivity to the source controller.
     - The version of Juju running on the destination controller needs to
-      be the same or newer than the version on the source controller. 
+      be the same or newer than the version on the source controller.
     - The controller model cannot be migrated.
 
   To migrate a model on the current controller to a model on another
@@ -458,7 +564,7 @@ https://launchpad.net/juju/+milestone/2.2.1
       juju status
 
   There is more information on model migration in the Juju documentation
-  online at 
+  online at
   [https://jujucharms.com/docs/2.1/models-migrate](./models-migrate.html)
 
 
@@ -478,7 +584,7 @@ https://launchpad.net/juju/+milestone/2.2.1
         manual
         openstack
         vsphere
-      
+
       Select cloud type:
 
   Simply answer the three or four questions for your new cloud and Juju
@@ -717,7 +823,7 @@ https://launchpad.net/juju/+milestone/2.2.1
   - Memory usage improvements
   - Openstack Provider has been updated to support Neutron networking apis
   - New APIs for querying instance types and characteristics available on
-    clouds 
+    clouds
   - vSphere provider improvements
   - Model config now supports an "extra-info" field for holding additional
     metadata
@@ -725,7 +831,7 @@ https://launchpad.net/juju/+milestone/2.2.1
     data storage requirements. Charm metadata fields can not contain dots
   - Openstack Provider has been updated to support Neutron networking apis
   - New APIs for querying instance types and characteristics available on
-    clouds 
+    clouds
 
 
   ## Resolved Issues
@@ -748,12 +854,12 @@ https://launchpad.net/juju/+milestone/2.2.1
   bugs corrected.
 
       https://github.com/conjure-up/conjure-up/milestone/14?closed=1
-      https://launchpad.net/juju/+milestone/2.1-rc2 
+      https://launchpad.net/juju/+milestone/2.1-rc2
       https://launchpad.net/juju/+milestone/2.1-rc1
-      https://launchpad.net/juju/+milestone/2.1-beta5 
+      https://launchpad.net/juju/+milestone/2.1-beta5
       https://launchpad.net/juju/+milestone/2.1-beta4
-      https://launchpad.net/juju/+milestone/2.1-beta3 
-      https://launchpad.net/juju/+milestone/2.1-beta2 
+      https://launchpad.net/juju/+milestone/2.1-beta3
+      https://launchpad.net/juju/+milestone/2.1-beta2
       https://launchpad.net/juju/+milestone/2.1-beta1
 
 
@@ -826,10 +932,10 @@ https://launchpad.net/juju/+milestone/2.2.1
   ## Resolved issues
 
     * Vsphere improvements Lp 1623136 and Lp 1629452
-    * `use-floating-ip` is not honored from clouds.yaml config Lp 1614239 
-    * `bootstrap-timeout` ignored in --config Lp 1619808 
-    * `juju show-machines` should show all addresses a machine has Lp 1602840 
-    * Juju 2.0 uses random IP for 'PUBLIC-ADDRESS' with MAAS 2.0 Lp 1616098 
+    * `use-floating-ip` is not honored from clouds.yaml config Lp 1614239
+    * `bootstrap-timeout` ignored in --config Lp 1619808
+    * `juju show-machines` should show all addresses a machine has Lp 1602840
+    * Juju 2.0 uses random IP for 'PUBLIC-ADDRESS' with MAAS 2.0 Lp 1616098
 
   For the full list of bugs addressed, see: [https://launchpad.net/juju/+milestone/2.0.1](https://launchpad.net/juju/+milestone/2.0.1).
 
@@ -845,13 +951,13 @@ https://launchpad.net/juju/+milestone/2.2.1
     * Better cloud management
     * Multi-user support
     * Baked-in knowledge of public clouds
-    * Uses LXD for fast and efficient local experience 
-    * More efficient Controller/Model arrangement 
+    * Uses LXD for fast and efficient local experience
+    * More efficient Controller/Model arrangement
     * More intuitive CLI experience
 
-  An overview of these features is discussed below - for full 
+  An overview of these features is discussed below - for full
   documentation, please visit our docs online at:
-  [https://jujucharms.com/docs](https://jujucharms.com/docs/) 
+  [https://jujucharms.com/docs](https://jujucharms.com/docs/)
 
   ### Integrated GUI
 
@@ -890,9 +996,9 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   Using the LXD cloud is the fastest way to get started with Juju
   locally using secure local containers. Use our getting-started guide
-  to setup LXD and start modeling your operations. 
+  to setup LXD and start modeling your operations.
 
-  [https://jujucharms.com/docs/2.0/getting-started](./getting-started.html) 
+  [https://jujucharms.com/docs/2.0/getting-started](./getting-started.html)
 
   #### Public clouds
 
@@ -924,18 +1030,18 @@ https://launchpad.net/juju/+milestone/2.2.1
   The newly downloaded cloud information will be used next time a
   Juju controller is bootstrapped.
 
-  See: [https://jujucharms.com/docs/2.0/clouds](./clouds.html) 
+  See: [https://jujucharms.com/docs/2.0/clouds](./clouds.html)
 
 
   #### Credential management
 
   To access your cloud, Juju must be able to authenticate to it.
   Credentials are defined per cloud. Juju can guide you through
-  adding a new credential like so: 
+  adding a new credential like so:
 
         juju add-credential aws
 
-  See: [https://jujucharms.com/docs/2.0/credentials](./credentials.html) 
+  See: [https://jujucharms.com/docs/2.0/credentials](./credentials.html)
 
 
   #### Manual, MAAS, and OpenStack clouds
@@ -953,7 +1059,7 @@ https://launchpad.net/juju/+milestone/2.2.1
 
         juju bootstrap homestack
 
-  For more details see [https://jujucharms.com/docs/2.0/clouds](./clouds.html) 
+  For more details see [https://jujucharms.com/docs/2.0/clouds](./clouds.html)
 
 
   #### Bootstrap constraints and series
@@ -990,7 +1096,7 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   Configuration can now be shared between models. The three separate
   commands (get-model-config, set-model-config, and unset-model-config)
-  have been collapsed into a single command. 
+  have been collapsed into a single command.
 
   New/changed commands relevant to this feature:
     - juju model-config
@@ -1005,8 +1111,8 @@ https://launchpad.net/juju/+milestone/2.2.1
     - output of juju model-config includes the origin of each attribute
       value ("default", "controller", "region", or "model")
     - output of juju model config only shows configuration relevant to
-      controlling the behaviour of a model; 
-    - other data, e.g. model name, UUID, cloud type etc are shown using 
+      controlling the behaviour of a model;
+    - other data, e.g. model name, UUID, cloud type etc are shown using
       juju show-model
     - controller specific details like api port, certificates etc are now
       available using juju controller-config
@@ -1018,7 +1124,7 @@ https://launchpad.net/juju/+milestone/2.2.1
     4. model - set by the user
 
   ##### Model config command examples
-  
+
   When bootstrapping, it is sometimes necessary to pass in configuration
   values. You may specify config values as bootstrap arguments or via a file:
 
@@ -1041,7 +1147,7 @@ https://launchpad.net/juju/+milestone/2.2.1
   agent-version                 model    2.0.0
   apt-ftp-proxy                 default  ""
   ...
-      
+
   Points of note are that:
     - all model attributes are shown, enabling the user to see what values
       are available to be set
@@ -1075,11 +1181,11 @@ https://launchpad.net/juju/+milestone/2.2.1
       they exist) instead of just the controller.
 
   ##### Model default command examples
-  
+
   Retrieve the full set of configuration defaults (some content elided for brevity).
-  
+
       juju model-defaults
-  
+
       Attribute                   Default           Controller
       agent-metadata-url          ""                -
       agent-stream                released          -
@@ -1093,39 +1199,39 @@ https://launchpad.net/juju/+milestone/2.2.1
       proxy-ssh                   false             -
       resource-tags               ""                -
       ...
-      
+
   Set the default configuration value for all models in the controller for key to value and key2 to value2.
-  
+
       juju model-defaults key=value key2=value2
-  
+
   Retrieve just the value for a single key:
-  
+
       juju model-defaults key
-  
+
       ATTRIBUTE    DEFAULT           CONTROLLER
       key          ""                shrubbery
       us-east-1  value             -
       us-west-1  foobaz            -
-  
+
   Retrieve just the value for a single region:
 
       juju model-defaults us-east-1
- 
+
       ATTRIBUTE    DEFAULT           CONTROLLER
       key          ""                shrubbery
       us-east-1  value             -
-  
+
   Reset the value of key and key2 to the next closest default value:
 
       juju model-defaults --reset key,key2
-  
+
   As with model-config values can be reset and set in one command.
 
       juju model-defaults --reset key key2=value2
 
   ### Juju controllers
-  
-  A Juju controller provides the HTTP API to Juju and handles 
+
+  A Juju controller provides the HTTP API to Juju and handles
   all of the state information for each model running.
 
   A controller is created by the “juju bootstrap” command. A single
@@ -1137,14 +1243,14 @@ https://launchpad.net/juju/+milestone/2.2.1
   after the cloud and region on which it is running:
 
       juju bootstrap aws
-      
+
       Creating Juju controller "aws-us-east-1" on aws/us-east-1
       …
 
   It is also possible to give the controller a name:
 
       juju bootstrap aws prod
-   
+
       Creating Juju controller "prod" on aws/us-east-1
       …
 
@@ -1160,16 +1266,16 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   To learn about managing controllers and models, see:
 
-  [https://jujucharms.com/docs/2.0/controllers](./controllers.html) 
-  [https://jujucharms.com/docs/2.0/models](./models.html) 
+  [https://jujucharms.com/docs/2.0/controllers](./controllers.html)
+  [https://jujucharms.com/docs/2.0/models](./models.html)
 
 
   #### Juju GUI in the controller
 
   The Juju GUI is now included in every Juju controller after
-  bootstrapping, eliminating the need to deploy a Juju GUI charm. 
+  bootstrapping, eliminating the need to deploy a Juju GUI charm.
 
-  See: [https://jujucharms.com/docs/controllers-gui](./controllers-gui.html) 
+  See: [https://jujucharms.com/docs/controllers-gui](./controllers-gui.html)
 
 
   #### Creating new models
@@ -1201,7 +1307,7 @@ https://launchpad.net/juju/+milestone/2.2.1
   To grant access to a new user they need to be added first
   using the `add-user` command:
 
-        juju add-user jo 
+        juju add-user jo
 
   Grant tracy access to production-cms.
 
@@ -1209,28 +1315,28 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   Grant jo admin admin access on staging-cms.
 
-        juju grant jo admin staging-cms 
+        juju grant jo admin staging-cms
 
   Additional command support revoking permissions and disabling users. To learn more, see:
-  [https://jujucharms.com/docs/2.0/users](./users.html) 
+  [https://jujucharms.com/docs/2.0/users](./users.html)
 
 
   ### Controller and model permissions
 
   A user can be given one of three permission levels on each model in a controller:
-  
+
     * read: The user can log in to the model and obtain status and information about it.
     * write: The user can deploy/delete services and add relations in a model.
-    * admin: The user has full control over the model except for controller level 
+    * admin: The user has full control over the model except for controller level
     actions such as deletion. Model owners can delete their own models.
 
   Three permission levels have also been added for users on controllers:
 
     * login: Allows the user to log in to the controller.
     * add-model: Allows the user to create new models.
-    * superuser: Allows the user full control over the model 
+    * superuser: Allows the user full control over the model
     (this permission is granted automatically to the creator of a model).
-    
+
 
   ### Improvements in charms and bundles
 
@@ -1238,9 +1344,9 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   The Juju 'deploy' command is used to deploy a bundle. A bundle is a
   collection of charms, configuration, and other characteristics that can
-  be deployed in a consistent manner. 
+  be deployed in a consistent manner.
 
-  See: [https://jujucharms.com/docs/2.0/charms-bundles](./charms-bundles.html) 
+  See: [https://jujucharms.com/docs/2.0/charms-bundles](./charms-bundles.html)
 
 
   #### Multi-series charms
@@ -1263,14 +1369,14 @@ https://launchpad.net/juju/+milestone/2.2.1
   Local charms and bundles can be deployed directly from their source
   directory. This feature makes it convenient to hack on a charm and
   just deploy it. The feature is also necessary to develop local charms
-  supporting multiple series. 
+  supporting multiple series.
 
   For example, to deploy a development copy of magic-charm from a local
   repo, targeting the yakkety series:
 
         juju deploy ./dev/juju/magic-charm --series yakkety
 
-  See: [https://jujucharms.com/docs/2.0/charms-deploying](./charms-deploying.html) 
+  See: [https://jujucharms.com/docs/2.0/charms-deploying](./charms-deploying.html)
 
   Any directory structure can be used, including simply pulling the
   charm source from a version control system, hacking on the code, and
@@ -1342,11 +1448,11 @@ https://launchpad.net/juju/+milestone/2.2.1
   what version of the application is running. This could be a package
   version, for instance postgres version 9.5. It could also be a
   build number or version control revision identifier, for instance
-  "git sha 6fb7ba68". The version details will then be displayed in juju status 
+  "git sha 6fb7ba68". The version details will then be displayed in juju status
   output with the application details.
 
-  Example (within a charm hook): 
-    
+  Example (within a charm hook):
+
         application-version-set 9.5.3
 
   Then application status will show:
@@ -1363,7 +1469,7 @@ https://launchpad.net/juju/+milestone/2.2.1
         juju upgrade-charm
 
   For more information on the new support for channels in the Charm Store
-  and how they work, please see our 
+  and how they work, please see our
   [documentation](./authors-charm-store.html#entities-explained)
   on the subject.
 
@@ -1401,7 +1507,7 @@ https://launchpad.net/juju/+milestone/2.2.1
   There is currently a mandatory '--primary-address' argument to 'network-
   get', which guarantees a single IP address to be returned.
 
-  Example (within a charm hook): 
+  Example (within a charm hook):
 
       relation-ids cluster
       url:2
@@ -1467,12 +1573,12 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   #### LXD provider
 
-  The new LXD provider is the best way to use Juju locally. 
-  See: [https://jujucharms.com/docs/2.0/clouds-LXD](./clouds-LXD.html) 
+  The new LXD provider is the best way to use Juju locally.
+  See: [https://jujucharms.com/docs/2.0/clouds-LXD](./clouds-LXD.html)
 
   The controller is no longer your host machine; a LXD
-  container is created instead. This keeps your host machine clean 
-  and allows you to utilize your local controler more like a Juju 
+  container is created instead. This keeps your host machine clean
+  and allows you to utilize your local controler more like a Juju
   controller running in any other cloud. This also means you can test
   features like Juju’s  high-availability controllers without needing
   to use a cloud provider.
@@ -1482,16 +1588,16 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   LXD has been made available in Trusty backports, but needs manual
   dependency resolution:
-          
+
         sudo apt-get --target-release trusty-backports install lxd
 
   Before using a locally running LXD after installing it, either through
   Juju or the LXD CLI ("lxc"), you must either log out and back in or run
   this command:
-          
+
         newgrp lxd
-                
-  See: [https://linuxcontainers.org/lxd/getting-started-cli/](https://linuxcontainers.org/lxd/getting-started-cli/) 
+
+  See: [https://linuxcontainers.org/lxd/getting-started-cli/](https://linuxcontainers.org/lxd/getting-started-cli/)
 
 
   #### LXD Container Support
@@ -1623,7 +1729,7 @@ https://launchpad.net/juju/+milestone/2.2.1
   A model configuration flag, `automatically-retry-hooks`, is now
   available that will toggle this behaviour. It affects all the units
   running in the same model. By default the flag is true and that
-  is the recommended value for regular deployments. 
+  is the recommended value for regular deployments.
 
   #### SSH host key checking
 
@@ -1654,7 +1760,7 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   When enabled, log messages for all hosted models in a controller
   are forwarded to a syslog server over a secure TLS connection.
-  The easiest way to configure the feature is to provide a 
+  The easiest way to configure the feature is to provide a
   config.yaml file at bootstrap:
 
         juju bootstrap <cloud>
@@ -1679,7 +1785,7 @@ https://launchpad.net/juju/+milestone/2.2.1
   The feature can be toggled by setting the logforward-enabled
   attribute. When enabled, a maximum of 100 previous log lines
   will be forwarded.
-  
+
   ##### Example syslog message
 
       <11>1 2016-02-28T09:57:10.804642398-05:00 172.12.3.1 juju - - [origin enterpriseId="28978" software="jujud" "2.0.0"] [model@28978 controller-uuid="deadbeef" model-uuid="deadbeef"] [log@28978 source-file="provider/ec2/storage.go" source-line="60"] Could not initialise machine block storage
@@ -1705,7 +1811,7 @@ https://launchpad.net/juju/+milestone/2.2.1
   The command line API has not changed.
 
   A few notes:
-  
+
     * `juju run` is now supported on Windows. The commands are executed through PowerShell.
     * Any actions named `juju-run` defined in the charm will **not** work anymore. The charm build tool will forbid any actions starting with 'juju-' to be defined, similar to relations.
     * Because the commands are now actions, statistics related to queue times, execution times, etc. can be gathered.
@@ -1718,7 +1824,7 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   #### API login with macaroons
 
-  Juju 2.0 supports an alternate API login method based on macaroons. 
+  Juju 2.0 supports an alternate API login method based on macaroons.
 
   #### Experimental address-allocation feature flag is no longer supported
 
@@ -1733,7 +1839,7 @@ https://launchpad.net/juju/+milestone/2.2.1
 
   #### Mongo 3.2 support
 
-  Juju now uses mongo 3.2 for its database with the new Wired Tiger 
+  Juju now uses mongo 3.2 for its database with the new Wired Tiger
   storage engine enabled. This is initially only supported for 16.04 (Xenial).
   Trusty and Wily will be supported soon.
 
@@ -1755,11 +1861,11 @@ https://launchpad.net/juju/+milestone/2.2.1
   |--------------------------------------|-------------------------------|
   | juju environment destroy             |juju destroy-model *            
   | juju environment get                 | juju model-config
-  | juju environment get-constraints     | juju get-model-constraints 
+  | juju environment get-constraints     | juju get-model-constraints
   | juju environment retry-provisioning  | juju retry-provisioning
-  | juju environment set                 | juju model-config 
+  | juju environment set                 | juju model-config
   | juju environment set-constraints     | juju set-model-constraints
-  | juju environment share               | juju grant 
+  | juju environment share               | juju grant
   | juju environment unset               | juju model-config
   | juju environment unshare             | juju revoke
   | juju environment users               | juju users
@@ -1769,8 +1875,8 @@ https://launchpad.net/juju/+milestone/2.2.1
   | juju user enable                     | juju enable-user
   | juju user info                       | juju show-user
   | juju user list                       | juju users
-  | juju machine add                     | juju add-machine 
-  | juju machine remove                  | juju remove-machine 
+  | juju machine add                     | juju add-machine
+  | juju machine remove                  | juju remove-machine
   | juju authorised-keys add             | juju add-ssh-key
   | juju authorised-keys list            | juju ssh-keys
   | juju authorised-keys delete          | juju remove-ssh-key
@@ -1781,27 +1887,27 @@ https://launchpad.net/juju/+milestone/2.2.1
   | juju set-constraints                 | juju set-model-constraints
   | juju get-constraints <application>   | juju get-constraints
   | juju set-constraints <application>   | juju set-constraints
-  | juju backups create                  | juju create-backup 
-  | juju backups restore                 | juju restore-backup 
-  | juju action do                       | juju run-action 
-  | juju action defined                  | juju actions 
-  | juju action fetch                    | juju show-action-output 
-  | juju action status                   | juju show-action-status 
-  | juju storage list                    | juju storage 
-  | juju storage show                    | juju show-storage 
-  | juju storage add                     | juju add-storage 
-  | juju space create                    | juju add-space 
-  | juju space list                      | juju spaces 
-  | juju subnet add                      | juju add-subnet 
+  | juju backups create                  | juju create-backup
+  | juju backups restore                 | juju restore-backup
+  | juju action do                       | juju run-action
+  | juju action defined                  | juju actions
+  | juju action fetch                    | juju show-action-output
+  | juju action status                   | juju show-action-status
+  | juju storage list                    | juju storage
+  | juju storage show                    | juju show-storage
+  | juju storage add                     | juju add-storage
+  | juju space create                    | juju add-space
+  | juju space list                      | juju spaces
+  | juju subnet add                      | juju add-subnet
   | juju ensure-availability             | juju enable-ha
 
   * the behaviour of destroy-environment/destroy-model has changed, see
-        [https://jujucharms.com/docs/2.0/controllers](./controllers.html) 
+        [https://jujucharms.com/docs/2.0/controllers](./controllers.html)
 
 
   These extra commands were previously under the "jes" developer feature
   flag but are now available out of the box:
-  
+
   | 1.25 command                   | 2.0 command                 |
   |--------------------------------|-----------------------------|
   | juju system create-environment | juju add-model              |
@@ -1815,9 +1921,9 @@ https://launchpad.net/juju/+milestone/2.2.1
 
 
   In general:
-  
+
     * commands which list multiple things should start with `list-` and there
-      will be an alias for the plural noun in the command, for 
+      will be an alias for the plural noun in the command, for
       example ‘list-controllers’ is an alias for ‘controllers’.
     * commands which look at an individual thing will start with `show-`.
     * commands which start with 'remove-' are used for things that can be easily recreated.
@@ -1832,4 +1938,3 @@ https://launchpad.net/juju/+milestone/2.2.1
     * Credentials files containing Joyent credentials must be updated to
       work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
       Storage")
-

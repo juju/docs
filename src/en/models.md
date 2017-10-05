@@ -1,7 +1,5 @@
 Title: Juju models
-TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the
-      access and secret keys need to be provided." I tested ec2 and did not
-      need to do this. OpenStack?
+TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the access and secret keys need to be provided." I tested ec2 and did not need to do this. OpenStack?
 
 
 # Juju models
@@ -13,10 +11,10 @@ provisioned along with it. These initial models are named 'controller' and
 intended for general workloads. The 'default' model, however, is ready for
 immediate use. Models can be added easily at any time.
 
-
 ## Model management
 
 Common model management tasks are summarized below.
+
 
 
 ^# View status
@@ -122,14 +120,18 @@ Common model management tasks are summarized below.
 
 ^# Provide SSH access
    
-   Use the `juju add-ssh-key` command to provide SSH access to all machines,
-   present and future, in a model:
+   Use the `juju add-ssh-key` and `juju import-ssh-key` commands to provide SSH
+   access to all machines, present and future, in a model:
    
    `juju add-ssh-key <ssh-key>`
+
+   OR
+
+   `juju import-ssh-key <lp|gh>:<user identity>`
    
    For complete explanation and syntax, see the
-   [command reference page](./commands.html#add-ssh-key) or the `juju help
-   add-ssh-key` command.
+   [command reference page](./commands.html#add-ssh-key) or the
+   `juju help add-ssh-key` or the `juju help import-ssh-key` commands.
    
 
 

@@ -45,11 +45,13 @@
                 <li><a href="charms-relations.html">Application Relations</a></li>
                 <li><a href="charms-exposing.html">Exposing applications</a></li>
                 <li><a href="charms-scaling.html">Scaling applications</a></li>
+                <li><a href="charms-upgrading.html">Upgrading applications</a></li>
                 <li><a href="charms-destroy.html">Removing applications &amp; Units</a></li>
                 <li><a href="charms-service-groups.html">Groups of applications</a></li>
                 <li><a href="charms-ha.html">Charm high availability</a></li>
                 <li><a href="charms-working-with-units.html">Working with Units</a></li>
                 <li><a href="actions.html">Working with Actions</a></li>
+                <li><a href="charms-resources.html">Working with Resources</a></li>
                 <li><a href="charms-storage.html">Using storage</a></li>
                 <li><a href="charms-metrics.html">Viewing utilization with metrics</a></li>
             </ul>
@@ -91,6 +93,7 @@
                 <li><a href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
                 <li><a href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
                 <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
+                <li><a href="developer-getting-started.html#having-your-charm-reviewed">Having your charm reviewed</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="developer-event-cycle.html">Event Cycle</a>
@@ -112,6 +115,7 @@
                 <li><a href="developer-layers-interfaces.html#writing-an-interface-layer">Writing an Interface</a></li>
             </ul>
         </li>
+        <li><a href="developer-upgrade-charm.html">Upgrading</a></li>
         <li><a href="developer-terms.html">Juju Terms</a></li>
         <li><a href="developer-metrics.html">Juju Metrics</a></li>
         <li><a href="developer-resources.html">Juju Resources</a></li>
@@ -186,6 +190,7 @@
         <li><a href="tools-charm-tools.html">Charm Tools</a></li>
         <li><a href="tools-charm-helpers.html">Charm Helpers</a></li>
         <li><a href="tools-amulet.html">Amulet</a></li>
+        <li><a href="tools-mojo.html">Mojo</a></li>
     </ul>
     </li>
 <!-- SECTION -->
@@ -199,6 +204,7 @@
         <li><a href="reference-environment-variables.html">Juju environment variables</a></li>
         <li><a href="reference-hook-tools.html">Juju Hook Tools</a></li>
         <li><a href="reference-layer-yaml.html">Layer.yaml</a></li>
+        <li><a href="authors-charm-metadata.html">metadata.yaml</a></li>
         <li><a href="http://godoc.org/github.com/juju/juju/api">API docs</a></li>
         <li><a href="reference-release-notes.html">Release notes</a></li>
         <li><a href="reference-status.html">Status values</a></li>

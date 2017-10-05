@@ -83,8 +83,9 @@ error by issuing the `juju resolved` command. See the  [Retrying failed
 hooks](#retrying-failed-hooks) section for more information about how to retry
 hooks.
 
-!!! Note: It is possible and often desirable to run debug-hooks on more than
-one unit at a time. You should open a new terminal window for each.
+!!! Note: 
+    It is possible and often desirable to run debug-hooks on more than
+    one unit at a time. You should open a new terminal window for each.
 
 To debug actions, you use the same command, like this:
 
@@ -145,9 +146,10 @@ queue until you exit your current window. See the special considerations below.
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
 
-!!! Note: To allow Juju to continue processing events normally, you **must**
-exit the hook execution window with the `exit` command, otherwise all further
-events on that unit will be paused indefinitely.
+!!! Note: 
+    To allow Juju to continue processing events normally, you **must**
+    exit the hook execution window with the `exit` command, otherwise all further
+    events on that unit will be paused indefinitely.
 
 The queue can be halted by exiting with an `exit 1` command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending

@@ -1,5 +1,5 @@
 Title: Back up and restore Juju  
-TODO:  Actual backup restore command needs to be tested
+TODO:  Critical: Review required
   
   
 # Backing Up and Restoring Juju
@@ -18,10 +18,11 @@ be able to connect to a running instance. In order to also save any additional
 configuration files (such as the files used by running models) it is usually 
 best to simply back up the entire Juju directory (`~/.local/share/juju`).
 
-!!! Note: On Windows systems, the Juju directory is in a different place
- (usually `C:\Users\<username>\AppData\Roaming\Juju`. Also, although `tar` is 
-available for Windows, you may prefer to use a more Windows-centric backup 
-application.
+!!! Note: 
+    On Windows systems, the Juju directory is in a different place
+    (usually `C:\Users\<username>\AppData\Roaming\Juju`. Also, although `tar` is 
+    available for Windows, you may prefer to use a more Windows-centric backup 
+    application.
 
 ### A simple backup of the Juju client directory
 
@@ -38,10 +39,11 @@ tar -cpzf juju-client-$(date "+%Y%m%d-%H%M%S").tar.gz .local/share/juju
 This command datestamps the created file for easy identification. You may, of
 course, call it what you wish. 
 
-!!! Note: As mentioned previously, the files in this backup include the keys 
-Juju uses to connect to running environments. Anybody who has access to this 
-backup will be able to connect to and use your controllers/models, so a 
-further step of encrypting this backup file may be advisable.
+!!! Note: 
+    As mentioned previously, the files in this backup include the keys 
+    Juju uses to connect to running environments. Anybody who has access to this 
+    backup will be able to connect to and use your controllers/models, so a 
+    further step of encrypting this backup file may be advisable.
  
 ### Restoring ~/.local/share/juju
 
@@ -53,9 +55,10 @@ cd ~
 tar xzf juju-yymmdd-hhmmss.tar.gz 
 ```
 
-!!! Note: This command will extract the contents of the archive and overwrite 
-any existing files in the Juju directory. Please be sure that this is what you 
-want!
+!!! Note: 
+    This command will extract the contents of the archive and overwrite 
+    any existing files in the Juju directory. Please be sure that this is what you 
+    want!
 
 
 ## The Juju controller
@@ -247,9 +250,10 @@ also determine the correct date and time for when the backup was
 started/completed. It's this date and time that's used to name the backup on 
 the controller.
 
-!!! Note: The filename you use to store local backups does not matter, but the 
-uploaded file is expected to be a gzipped tar file (e.g. a `.tgz` or `.tar.gz` 
-file)
+!!! Note: 
+    The filename you use to store local backups does not matter, but the 
+    uploaded file is expected to be a gzipped tar file (e.g. a `.tgz` or `.tar.gz` 
+    file)
 
 ### Restoring from a backup
 
@@ -357,8 +361,9 @@ your environment.
 For performing a `restore-backup`, the only check performed by the utility is 
 to make sure that the initial controller is not up. 
 
-!!! WARNING: If your Juju environment still contains an existing controller, 
-restoring a backup will overwrite its data or remove them.
+!!! WARNING: 
+    If your Juju environment still contains an existing controller, 
+    restoring a backup will overwrite its data or remove them.
 
 To restore an initial bootstrap environment, the procedure is the same as for 
 non-HA environments:

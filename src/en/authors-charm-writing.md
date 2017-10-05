@@ -9,8 +9,9 @@ favourite code editor (no arguments please) and get charming!
 
 Although it is possible to create a charm without using anything other than a
 text editor, we are also going to make use of the very excellent time saving
-plugin for Juju, Charm Tools. [ Find out how to get and install charm tools here
-](tools-charm-tools.html). Then hurry back.
+plugin for Juju, Charm Tools.
+
+[Install the Charm Tools](tools-charm-tools.html) now. Then hurry back.
 
 For this example, we are imagining that we want to create a charm for [the
 Vanilla forum software](http://vanillaforums.org/)
@@ -37,14 +38,35 @@ Using the charm tools plugin, we can create the directory structure we need for
 our charm quickly and easily:
 
 ```bash
-juju charm create vanilla
+charm create vanilla
 ```
-!!! Note: In some versions, the previous command should be executed as `charm create vanilla`
 
 This not only creates the directory structure, it also populates it with
 template files for you to edit. Your directory will now look like this:
 
-![directory tree](./media/author-charm-writing-01.png)
+<!--
+name:      charm
+tracking:    stable
+installed:   2.2 (17) 102MB -
+refreshed:   2017-07-31 18:40:23 +0000 UTC
+-->
+![directory tree](./media/author-charm-writing-02.png)
+
+<!--
+```no-highlight
+.
+├── config.yaml
+├── icon.svg
+├── layer.yaml
+├── metadata.yaml
+├── reactive
+│   └── vanilla.py
+├── README.ex
+└── tests
+    ├── 00-setup
+    └── 10-deploy
+```
+-->
 
 ## Create the README file
 
