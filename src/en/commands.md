@@ -1661,9 +1661,9 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-          $ juju consume othermodel.mysql
-          $ juju consume owner/othermodel.mysql
-          $ juju consume anothercontroller:owner/othermodel.mysql
+          juju consume othermodel.mysql
+          juju consume owner/othermodel.mysql
+          juju consume anothercontroller:owner/othermodel.mysql
 
 
    **See also:**
@@ -1818,6 +1818,7 @@ Click on the expander to see details for each command.
    available.
 
    Therefore, you should use the --download or --filename options, or use:
+
              juju download-backups
    
    to get a local copy of the backup archive.
@@ -3081,12 +3082,12 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-         $ juju find-offers
-         $ juju find-offers mycontroller:
-         $ juju find-offers fred/prod
-         $ juju find-offers --interface mysql
-         $ juju find-offers --url fred/prod.db2
-         $ juju find-offers --offer db2
+         juju find-offers
+         juju find-offers mycontroller:
+         juju find-offers fred/prod
+         juju find-offers --interface mysql
+         juju find-offers --url fred/prod.db2
+         juju find-offers --offer db2
          
 
 
@@ -3365,14 +3366,21 @@ Click on the expander to see details for each command.
 
 
    Print the Juju GUI URL and show admin credential to use to log into it:
-   	juju gui
+
+        juju gui
+
    Print the Juju GUI URL only:
 
-   	juju gui --hide-credential
+        juju gui --hide-credential
+
    Open the Juju GUI in the default browser and show admin credential to use to log into it:
-   	juju gui --browser
+
+        juju gui --browser
+
    Open the Juju GUI in the default browser without printing the login credential:
-   	juju gui --hide-credential --browser
+
+        juju gui --hide-credential --browser
+
    An error is returned if the Juju GUI is not available in the controller.
 
 
@@ -3531,12 +3539,12 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Forcibly destroy the specified controller.  If the API server is accessible,
+   Forcibly destroy the specified controller. If the API server is accessible,
    this command will attempt to destroy the controller model and all hosted models
    and their resources.
 
    If the API server is unreachable, the machines of the controller model will be
-   destroyed through the cloud provisioner.  If there are additional machines,
+   destroyed through the cloud provisioner. If there are additional machines,
    including machines within hosted models, these machines will not be destroyed
    and will never be reconnected to the Juju controller being destroyed.
 
@@ -3588,7 +3596,7 @@ Click on the expander to see details for each command.
 
 
    List the actions available to run on the target application, with a short
-   description.  To show the full schema for the actions, use --schema.
+   description. To show the full schema for the actions, use --schema.
 
    For more information, see also the 'run-action' command, which executes actions.
 
@@ -4290,13 +4298,13 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-          $ juju offers
-          $ juju offers -m model
-          $ juju offers --interface db2
-          $ juju offers --application mysql
-          $ juju offers --connected-user fred
-          $ juju offers --allowed-consumer mary
-          $ juju offers hosted-mysql
+          juju offers
+          juju offers -m model
+          juju offers --interface db2
+          juju offers --application mysql
+          juju offers --connected-user fred
+          juju offers --allowed-consumer mary
+          juju offers hosted-mysql
 
 
    **See also:**
@@ -5691,10 +5699,10 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-   $ juju offer mysql:db
-   $ juju offer mymodel.mysql:db
-   $ juju offer db2:db hosted-db2
-   $ juju offer db2:db,log hosted-db2
+   juju offer mysql:db
+   juju offer mymodel.mysql:db
+   juju offer db2:db hosted-db2
+   juju offer db2:db,log hosted-db2
 
 
    **See also:**
@@ -5766,13 +5774,13 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-          $ juju offers
-          $ juju offers -m model
-          $ juju offers --interface db2
-          $ juju offers --application mysql
-          $ juju offers --connected-user fred
-          $ juju offers --allowed-consumer mary
-          $ juju offers hosted-mysql
+         juju offers
+         juju offers -m model
+         juju offers --interface db2
+         juju offers --application mysql
+         juju offers --connected-user fred
+         juju offers --allowed-consumer mary
+         juju offers hosted-mysql
 
 
    **See also:**
@@ -6013,13 +6021,13 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-          $ juju add-relation wordpress mysql
+          juju add-relation wordpress mysql
               where "wordpress" and "mysql" will be internally expanded to "wordpress:db" and "mysql:server" respectively
-          $ juju add-relation wordpress someone/prod.mysql
-              where "wordpress" will be internally expanded to "wordpress:db"
-          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16
+          juju add-relation wordpress someone/prod.mysql
+             where "wordpress" will be internally expanded to "wordpress:db"
+          juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16
           
-          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16,10.0.0.0/8
+          juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16,10.0.0.0/8
 
 
    **Aliases:**
@@ -7746,8 +7754,8 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-         $ juju show-offer fred/prod.db2
-         $ juju show-offer anothercontroller:fred/prod.db2
+         juju show-offer fred/prod.db2
+         juju show-offer anothercontroller:fred/prod.db2
 
 
    **See also:**
