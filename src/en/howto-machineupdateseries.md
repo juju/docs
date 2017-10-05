@@ -1,26 +1,26 @@
 Title: Change a machine's series (prior to 2.3)
 
-#  Update juju's understanding of a machine's series (prior to 2.3)
+#  Update Juju's understanding of a machine's series (prior to 2.3)
 
 ## Overview
 
-If you want to let juju know that you've upgraded the series on an existing
-machine, and using juju 2.3 or later, you can run the command:
+If you want to let Juju know that you've upgraded the series on an existing
+machine, and you are using Juju 2.3 or later, you can run the command:
 `juju update-series <machine> <series>` 
 
 The update-series command will update the series saved for the given machine,
 as well as any units on that machine.  When a unit's series is updated, the
 config-changed hook will be triggered for that unit.
 
-Here we'll cover the manual step on how to do this prior to juju 2.3. Not
+Here we'll cover the manual step on how to do this prior to Juju 2.3. Not
 covered is how to trigger the config-changed hook.
 
 !!! Note: 
-    Charms may have to be upgraded to take advantage series change.
+    Charms may have to be upgraded to take advantage of the series change.
 
 ## Prerequisites
 
-1. Upgrade the juju machine to the series (version) you require.
+1. Upgrade the Juju machine to the series (version) you require.
 
 2. Check that the current revision of the charm(s) in use for on the machine
 supports the series you wish to use in the future.  This can be checked in the
@@ -34,7 +34,7 @@ Juju Charm Store.
 
 ## Update
 
-Start by switching to the juju controller where the changes will happen.
+Start by switching to the Juju controller where the changes will happen.
 
 ```bash
 juju switch localhost-test:admin/default
@@ -47,6 +47,8 @@ the machine name, and ``xenial`` is the series.
 ```bash
 mongo-update-mach-series.sh -m testing -a 0 -s xenial
 ```
+Should produce output like this:
+
 ```no-highlight
 MongoDB shell version: 3.2.12
 connecting to: 127.0.0.1:37017/juju
@@ -58,8 +60,9 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 Connection to 10.0.28.234 closed.
 ```
 
-Verify by running checking the status of the machine.  Output of
+Verify the update by checking the status of the machine.  Output of
 `juju status -m testing 0` will look similar to:
+
 ```no-highlight
 ...
 Machine  State    DNS            Inst id        Series  AZ  Message
