@@ -7,28 +7,30 @@ Title: Change an application's series (prior to 2.3)
 When deploying an application with Juju you can specify the series it
 will use, or use the default series for the model. Prior to Juju 2.3,
 any units which are subsequently added to the application always use
-the series specified at deployment
+the series specified at deployment.
 
-With version 2.3 or later it's possible let juju know you'd like to add
+With version 2.3 or later it's possible let Juju know you'd like to add
 units with a different series moving forward by running the command:
 `juju update-series <application> <series>`
 
-Here we'll cover the manual steps on how to do this with earlier versions of the software.
+Here we'll cover the manual steps on how to do this with earlier versions
+of the software.
 
 ## Prerequisites
 
-  1. Check that the current charm revision in use for the application supports the
-  series you wish to use in the future.  This checked on in the Juju Charm Store.
+  1. Check that the current charm revision in use for the application 
+  supports the series you wish to use in the future.  This can be checked in
+  the [Juju Charm Store][charm-store].
 
-  2. Name of the application.
+  1. Name of the application.
 
-  3. Name of the model where the application lives.
+  1. Name of the model where the application lives.
 
-  4. Admin privilages to the controller where the model lives.
+  1. Admin privilages to the controller where the model lives.
 
 ## Update
 
-Start by switching to the juju controller where the changes will happen using
+Start by switching to the Juju controller where the changes will happen using
 `juju switch`.
 
 Next, the database on the controller will need to be modified.  You'll need to
@@ -40,6 +42,9 @@ An example script can be found [here][appendix].
 ```bash
 mongo-update-app-series.sh -m default -a ghost -s xenial
 ```
+...should update the application `ghost` on the model `default` to the xenial series.
+You will see some output similar to the following:
+
 ```no-highlight
 MongoDB shell version: 3.2.12
 connecting to: 127.0.0.1:37017/juju
@@ -48,8 +53,9 @@ connecting to: 127.0.0.1:37017/juju
 Connection to 10.106.28.244 closed.
 ```
 
-Verify by checking the status of the application, getting the output in
-yaml format.  Output from: `juju status ghost --format yaml` will look similar to:
+Verify the update by checking the status of the application, getting the output in
+YAML format.  Output from: `juju status ghost --format yaml` will look similar to:
+
 ```yaml
 ...
 applications:
@@ -115,3 +121,4 @@ EOF
 juju ssh -m $cntlr_model $machine "$cmds"  2>&1
 ```
 [appendix]:#appendix:-example-script-to-update-juju-database
+[charm-store]: https://jujucharms.com
