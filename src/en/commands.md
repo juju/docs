@@ -367,13 +367,48 @@ Click on the expander to see details for each command.
 
    **Options:**
 
-   _-B, --no-browser-login  (= false)_
-
-   Do not use web browser for authentication
-
    _-m, --model (= "")_
 
    Model to operate in. Accepts [<controller name>:]<model name>
+
+   _--via (= "")_
+
+   for cross model relations, specify the egress subnets for outbound traffic
+
+   
+   **Details:**
+
+
+   Add a relation between 2 local application endpoints or a local endpoint and a remote application endpoint.
+   Adding a relation between two remote application endpoints is not supported.
+   Application endpoints can be identified either by:
+
+             <application name>[:<relation name>]
+                 where application name supplied without relation will be internally expanded to be well-formed
+   
+   or
+             <model name>.<application name>[:<relation name>]
+                 where the application is hosted in another model owned by the current user, in the same controller
+   
+   or
+             <user name>/<model name>.<application name>[:<relation name>]
+                 where user/model is another model in the same controller
+   
+   For a cross model relation, if the consuming side is behind a firewall and/or NAT is used for outbound traffic,
+   it is possible to use the --via option to inform the offering side the source of traffic so that any required
+   firewall ports may be opened.
+
+
+   **Examples:**
+
+          $ juju add-relation wordpress mysql
+              where "wordpress" and "mysql" will be internally expanded to "wordpress:db" and "mysql:server" respectively
+          $ juju add-relation wordpress someone/prod.mysql
+              where "wordpress" will be internally expanded to "wordpress:db"
+          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16
+          
+          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16,10.0.0.0/8
+
 
    **Aliases:**
 
@@ -464,16 +499,7 @@ Click on the expander to see details for each command.
 
 ^# add-storage
 
-
-   **Usage:** ` juju add-storage [options] <unit name> <storage directive> ...`
-
-    Where `storage directive` is 
-
-        <charm storage name>=<storage constraints>
-
-    or
-
-        <charm storage name>
+   **Usage:** ` juju add-storage [options] <unit name> <charm storage name>=<storage constraints> | <charm storage name> `
 
    **Summary:**
 
@@ -630,23 +656,40 @@ Click on the expander to see details for each command.
    **Examples:**
 
    Add five units of wordpress on five new machines:
+
           juju add-unit wordpress -n 5
+
    Add a unit of mysql to machine 23 (which already exists):
+
           juju add-unit mysql --to 23
+   
    Add two units of mysql to machines 3 and 4:
+
          juju add-unit mysql -n 2 --to 3,4
+
    Add three units of mysql to machine 7:
+
           juju add-unit mysql -n 3 --to 7,7,7
+
    Add three units of mysql, one to machine 3 and the others to new
    machines:
+
           juju add-unit mysql -n 3 --to 7
+
    Add a unit into a new LXD container on machine 7:
+
           juju add-unit mysql --to lxd:7
+
    Add two units into two new LXD containers on machine 7:
+
           juju add-unit mysql -n 2 --to lxd:7,lxd:7
+
    Add a unit of mariadb to LXD container number 3 on machine 24:
+
           juju add-unit mariadb --to 24/lxd/3
+
    Add a unit of mariadb to LXD container on a new machine:
+
           juju add-unit mariadb --to lxd
 
 
@@ -678,9 +721,12 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   A `juju register` command will be printed, which must be executed by the
-   user to complete the registration process. The user's details are stored
-   within the shared model, and will be removed when the model is destroyed.
+   The user's details are stored within the controller and
+   will be removed when the controller is destroyed.
+
+   A user unique registration string will be printed. This registration string 
+   must be used by the newly added user as supplied to 
+   complete the registration process. 
    Some machine providers will require the user to be in possession of certain
    credentials in order to create a model.
 
@@ -791,7 +837,7 @@ Click on the expander to see details for each command.
 
 ^# attach
 
-   **Usage:** ` juju attach [options] application name=file`
+   **Usage:** ` juju attach-resource [options] application name=file`
 
    **Summary:**
 
@@ -814,6 +860,42 @@ Click on the expander to see details for each command.
    This command uploads a file from your local disk to the juju controller to be
    used as a resource for an application.
 
+
+   **Aliases:**
+
+   `attach`
+
+
+
+^# attach-resource
+
+   **Usage:** ` juju attach-resource [options] application name=file`
+
+   **Summary:**
+
+   Upload a file as a resource for an application.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   
+   **Details:**
+
+
+   This command uploads a file from your local disk to the juju controller to be
+   used as a resource for an application.
+
+
+   **Aliases:**
+
+   `attach`
 
 
 
@@ -885,7 +967,7 @@ Click on the expander to see details for each command.
                 Default region is specified by the CLOUDSDK_COMPUTE_REGION environment
                 variable.
 
-             3. On Windows, %APPDATA%\\gcloud\application_default_credentials.json
+             3. On Windows, %APPDATA%\\gcloud\\application_default_credentials.json
    
    OpenStack
            Credentials:
@@ -1086,11 +1168,18 @@ Click on the expander to see details for each command.
    
    Private clouds may need to specify their own custom image metadata and
    tools/agent. Use '--metadata-source' whose value is a local directory.
-   The value of '--agent-version' will become the default tools version to
-   use in all models for this controller. The full binary version is accepted
-   (e.g.: 2.0.1-xenial-amd64) but only the numeric version (e.g.: 2.0.1) is
-   used. Otherwise, by default, the version used is that of the client.
+   By default, the Juju version of the agent binary that is downloaded and 
+   installed on all models for the new controller will be the same as that 
+   of the Juju client used to perform the bootstrap.
 
+   However, a user can specify a different agent version via '--agent-version' 
+   option to bootstrap command. Juju will use this version for models' agents 
+   as long as the client's version is from the same Juju release series.
+
+   In other words, a 2.2.1 client can bootstrap any 2.2.x agents but cannot
+   bootstrap any 2.0.x or 2.1.x agents.
+
+   The agent version can be specified a simple numeric version, e.g. 2.2.4.
 
    **Examples:**
 
@@ -1101,7 +1190,7 @@ Click on the expander to see details for each command.
           juju bootstrap aws/us-east-1
           juju bootstrap google joe-us-east1
           juju bootstrap --config=~/config-rs.yaml rackspace joe-syd
-          juju bootstrap --config agent-version=1.25.3 aws joe-us-east-1
+          juju bootstrap --agent-version=2.2.4 aws joe-us-east-1
           juju bootstrap --config bootstrap-timeout=1200 azure joe-eastus
 
 
@@ -1267,13 +1356,13 @@ Click on the expander to see details for each command.
 
    **Options:**
 
-   _-B, --no-browser-login  (= false)_
-
-   Do not use web browser for authentication
-
    _-c, --controller (= "")_
 
    Controller to operate in
+
+   _--reset  (= false)_
+
+   Reset user password
 
    
    **Details:**
@@ -1282,19 +1371,28 @@ Click on the expander to see details for each command.
    The user is, by default, the current user. The latter can be confirmed with
    the `juju show-user` command.
 
-   A controller administrator can change the password for another user (on
-   that controller).
+   A controller administrator can change the password for another user 
+   on the specified controller. If no controller is specified, 
+   the current controller will be used.
 
+   A controller administrator can also reset the password for another user.
+   This will invalidate any password or registration string 
+   that was previously issued, and issue a new registration string to be used with
+   `juju register`.  
 
    **Examples:**
 
           juju change-user-password
           juju change-user-password bob
+          juju change-user-password bob --reset
+          juju change-user-password -c another-known-controller
+          juju change-user-password bob --controller another-known-controller
 
 
    **See also:**
 
-   [add-user](#add-user)  
+   [add-user](#add-user) , 
+   [register](#register)  
 
 
 
@@ -1304,7 +1402,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   Interact with charms.
+   DEPRECATED: Interact with charms.
 
    **Options:**
 
@@ -1320,6 +1418,7 @@ Click on the expander to see details for each command.
    **Details:**
 
 
+   This command is DEPRECATED since Juju 2.3.x, please use 'juju charm-resources' instead.
    "juju charm" is the the juju CLI equivalent of the "charm" command used
    by charm authors, though only applicable functionality is mirrored.
 
@@ -1329,7 +1428,61 @@ Click on the expander to see details for each command.
 
              list-resources - Alias for 'resources'.
 
-             resources      - Display the resources for a charm in the charm store.
+             resources      - DEPRECATED: Display the resources for a charm in the charm store.
+
+
+
+^# charm-resources
+
+   **Usage:** ` juju charm-resources [options] <charm>`
+
+   **Summary:**
+
+   Display the resources for a charm in the charm store.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _--channel (= "stable")_
+
+   the charmstore channel of the charm
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   This command will report the resources for a charm in the charm store.
+   <charm> can be a charm URL, or an unambiguously condensed form of it,
+   just like the deploy command. So the following forms will be accepted:
+   For cs:trusty/mysql
+           mysql
+           trusty/mysql
+   
+   For cs:~user/trusty/mysql
+           cs:~user/mysql
+   
+   Where the series is not supplied, the series from your local host is used.
+   Thus the above examples imply that the local series is trusty.
+
+
+   **Aliases:**
+
+   `list-charm-resources`
 
 
 
@@ -1475,6 +1628,48 @@ Click on the expander to see details for each command.
 
    [deploy](#deploy) , 
    [status](#status)  
+
+
+
+^# consume
+
+   **Usage:** ` juju consume [options] <remote offer path> [<local application name>]`
+
+   **Summary:**
+
+   Add a remote offer to the model.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   
+   **Details:**
+
+
+   Adds a remote offer to the model. Relations can be created later using "juju relate".
+   The remote offer is identified by providing a path to the offer:
+
+             [<model owner>/]<model name>.<application name>
+                 for an application in another model in this controller (if owner isn't specified it's assumed to be the logged-in user)
+
+   **Examples:**
+
+          $ juju consume othermodel.mysql
+          $ juju consume owner/othermodel.mysql
+          $ juju consume anothercontroller:owner/othermodel.mysql
+
+
+   **See also:**
+
+   [add-relation](#add-relation) , 
+   [offer](#offer)  
 
 
 
@@ -1988,6 +2183,10 @@ Click on the expander to see details for each command.
 
    Configure application endpoint bindings to spaces
 
+   _--bundle-config (= "")_
+
+   Config override values for a bundle
+
    _--channel (= "")_
 
    Channel to use when getting the charm or bundle from the charm store
@@ -2132,11 +2331,11 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [spaces](#spaces) , 
-   [config](#config) , 
    [add-unit](#add-unit) , 
+   [config](#config) , 
    [set-constraints](#set-constraints) , 
-   [get-constraints](#get-constraints)  
+   [get-constraints](#get-constraints) , 
+   [spaces](#spaces)  
 
 
 
@@ -2158,6 +2357,14 @@ Click on the expander to see details for each command.
 
    Destroy all hosted models in the controller
 
+   _--destroy-storage  (= false)_
+
+   Destroy all storage instances managed by the controller
+
+   _--release-storage  (= false)_
+
+   Release all storage instances from management of the controller, without destroying them
+
    _-y, --yes  (= false)_
 
    Do not ask for confirmation
@@ -2170,10 +2377,23 @@ Click on the expander to see details for each command.
    controller will first need to be destroyed, either in advance, or by
    specifying `--destroy-all-models`.
 
+   If there is persistent storage in any of the models managed by the
+   controller, then you must choose to either destroy or release the
+   storage, using `--destroy-storage` or `--release-storage` respectively.
 
    **Examples:**
 
+          # Destroy the controller and all hosted models. If there is
+          # persistent storage remaining in any of the models, then
+          # this will prompt you to choose to either destroy or release
+          # the storage.
           juju destroy-controller --destroy-all-models mycontroller
+          # Destroy the controller and all hosted models, destroying
+          # any remaining persistent storage.
+          juju destroy-controller --destroy-all-models --destroy-storage
+          # Destroy the controller and all hosted models, releasing
+          # any remaining persistent storage from Juju's control.
+          juju destroy-controller --destroy-all-models --release-storage
 
 
    **See also:**
@@ -2197,6 +2417,14 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
+   _--destroy-storage  (= false)_
+
+   Destroy all storage instances in the model
+
+   _--release-storage  (= false)_
+
+   Release all storage instances from the model, and management of the controller, without destroying them
+
    _-y, --yes  (= false)_
 
    Do not prompt for confirmation
@@ -2211,11 +2439,17 @@ Click on the expander to see details for each command.
    confirmation (unless overridden with the '-y' option) before taking any
    action.
 
+   If there is persistent storage in any of the models managed by the
+   controller, then you must choose to either destroy or release the
+   storage, using --destroy-storage or --release-storage respectively.
+
 
    **Examples:**
 
           juju destroy-model test
           juju destroy-model -y mymodel
+          juju destroy-model -y mymodel --destroy-storage
+          juju destroy-model -y mymodel --release-storage
 
 
    **See also:**
@@ -2310,6 +2544,7 @@ Click on the expander to see details for each command.
              add-ssh-key
              add-user
              change-user-password
+             config
              deploy
              disable-user
              destroy-controller
@@ -2318,6 +2553,7 @@ Click on the expander to see details for each command.
              enable-user
              expose
              import-ssh-key
+             model-config
              remove-application
              remove-machine
              remove-relation
@@ -2326,13 +2562,9 @@ Click on the expander to see details for each command.
              resolved
              retry-provisioning
              run
-             set-config
              set-constraints
-             set-model-config
              sync-tools
              unexpose
-             unset-config
-             unset-model-config
              upgrade-charm
              upgrade-juju
    
@@ -2455,6 +2687,7 @@ Click on the expander to see details for each command.
              add-ssh-key
              add-user
              change-user-password
+             config
              deploy
              disable-user
              destroy-controller
@@ -2463,6 +2696,7 @@ Click on the expander to see details for each command.
              enable-user
              expose
              import-ssh-key
+             model-config
              remove-application
              remove-machine
              remove-relation
@@ -2471,13 +2705,9 @@ Click on the expander to see details for each command.
              resolved
              retry-provisioning
              run
-             set-config
              set-constraints
-             set-model-config
              sync-tools
              unexpose
-             unset-config
-             unset-model-config
              upgrade-charm
              upgrade-juju
    
@@ -2580,6 +2810,7 @@ Click on the expander to see details for each command.
              add-ssh-key
              add-user
              change-user-password
+             config
              deploy
              disable-user
              destroy-controller
@@ -2588,6 +2819,7 @@ Click on the expander to see details for each command.
              enable-user
              expose
              import-ssh-key
+             model-config
              remove-application
              remove-machine
              remove-relation
@@ -2596,13 +2828,9 @@ Click on the expander to see details for each command.
              resolved
              retry-provisioning
              run
-             set-config
              set-constraints
-             set-model-config
              sync-tools
              unexpose
-             unset-config
-             unset-model-config
              upgrade-charm
              upgrade-juju
    
@@ -2806,6 +3034,114 @@ Click on the expander to see details for each command.
 
 
 
+^# find-offers
+
+   **Usage:** ` juju find-offers [options]`
+
+   **Summary:**
+
+   Find offered application endpoints.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _--interface (= "")_
+
+   return results matching the interface name
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   _--offer (= "")_
+
+   return results matching the offer name
+
+   _--url (= "")_
+
+   return results matching the offer URL
+
+   
+   **Details:**
+
+
+   Find which offered application endpoints are available to the current user.
+   This command is aimed for a user who wants to discover what endpoints are available to them.
+
+   **Examples:**
+
+         $ juju find-offers
+         $ juju find-offers mycontroller:
+         $ juju find-offers fred/prod
+         $ juju find-offers --interface mysql
+         $ juju find-offers --url fred/prod.db2
+         $ juju find-offers --offer db2
+         
+
+
+   **See also:**
+
+   [show-offer](#show-offer)  
+
+
+
+^# firewall-rules
+
+   **Usage:** ` juju list-firewall-rules [options]`
+
+   **Summary:**
+
+   Prints the firewall rules.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   Lists the firewall rules which control ingress to well known services
+   within a Juju model.
+
+
+   **Examples:**
+
+          juju list-firewall-rules
+          juju firewall-rules
+
+
+   **See also:**
+
+   [set-firewall-rule](#set-firewall-rule)  
+
+   **Aliases:**
+
+   `firewall-rules`
+
+
+
 ^# get-constraints
 
    **Usage:** ` juju get-constraints [options] <application>`
@@ -2922,11 +3258,11 @@ Click on the expander to see details for each command.
 
 ^# grant
 
-   **Usage:** ` juju grant [options] <user name> <permission> [<model name> ...]`
+   **Usage:** ` juju grant [options] <user name> <permission> [<model name> ... | <offer url> ...]`
 
    **Summary:**
 
-   Grants access level to a Juju user for a model or controller.
+   Grants access level to a Juju user for a model, controller, or application offer.
 
    **Options:**
 
@@ -2975,6 +3311,12 @@ Click on the expander to see details for each command.
           juju grant sam read model1 model2
    Grant user 'maria' 'add-model' access to the controller:
           juju grant maria add-model
+   Grant user 'joe' 'read' access to application offer 'fred/prod.hosted-mysql':
+          juju grant joe read fred/prod.hosted-mysql
+   Grant user 'jim' 'consume' access to application offer 'fred/prod.hosted-mysql':
+          juju grant jim consume fred/prod.hosted-mysql
+   Grant user 'sam' 'read' access to application offers 'fred/prod.hosted-mysql' and 'mary/test.hosted-mysql':
+          juju grant sam read fred/prod.hosted-mysql mary/test.hosted-mysql
 
 
    **See also:**
@@ -3064,7 +3406,7 @@ Click on the expander to see details for each command.
 
 ^# import-filesystem
 
-   **Usage:** ` juju import-filesystem [options] <storage-provider|pool> <filesystem|volume-id> <storage-name>`
+   **Usage:** ` juju import-filesystem [options] <storage-provider> <provider-id> <storage-name>`
 
    **Summary:**
 
@@ -3090,13 +3432,12 @@ Click on the expander to see details for each command.
 
    To import a filesystem, you must specify three things:
 
-          - the storage pool, which identifies the storage provider
-            which manages the storage; and with which the storage
-            will be associated
-          - the storage provider ID for the filesystem, or
-            volume that backs the filesystem
-          - the storage name to assign to the filesystem,
-            corresponding to the storage name used by a charm
+    - the storage provider which manages the storage, and with
+      which the storage will be associated
+    - the storage provider ID for the filesystem, or
+      volume that backs the filesystem
+    - the storage name to assign to the filesystem,
+      corresponding to the storage name used by a charm
    
    Once a filesystem is imported, Juju will create an associated storage
    instance using the given storage name.
@@ -3396,6 +3737,60 @@ Click on the expander to see details for each command.
 
 
 
+^# list-charm-resources
+
+   **Usage:** ` juju charm-resources [options] <charm>`
+
+   **Summary:**
+
+   Display the resources for a charm in the charm store.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _--channel (= "stable")_
+
+   the charmstore channel of the charm
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   This command will report the resources for a charm in the charm store.
+   <charm> can be a charm URL, or an unambiguously condensed form of it,
+   just like the deploy command. So the following forms will be accepted:
+   For cs:trusty/mysql
+           mysql
+           trusty/mysql
+   
+   For cs:~user/trusty/mysql
+           cs:~user/mysql
+   
+   Where the series is not supplied, the series from your local host is used.
+   Thus the above examples imply that the local series is trusty.
+
+
+   **Aliases:**
+
+   `list-charm-resources`
+
+
+
 ^# list-clouds
 
    **Usage:** ` juju clouds [options]`
@@ -3621,6 +4016,7 @@ Click on the expander to see details for each command.
              add-ssh-key
              add-user
              change-user-password
+             config
              deploy
              disable-user
              destroy-controller
@@ -3629,6 +4025,7 @@ Click on the expander to see details for each command.
              enable-user
              expose
              import-ssh-key
+             model-config
              remove-application
              remove-machine
              remove-relation
@@ -3637,13 +4034,9 @@ Click on the expander to see details for each command.
              resolved
              retry-provisioning
              run
-             set-config
              set-constraints
-             set-model-config
              sync-tools
              unexpose
-             unset-config
-             unset-model-config
              upgrade-charm
              upgrade-juju
    
@@ -3657,6 +4050,52 @@ Click on the expander to see details for each command.
    **Aliases:**
 
    `list-disabled-commands`
+
+
+
+^# list-firewall-rules
+
+   **Usage:** ` juju list-firewall-rules [options]`
+
+   **Summary:**
+
+   Prints the firewall rules.
+
+   **Options:**
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   Lists the firewall rules which control ingress to well known services
+   within a Juju model.
+
+
+   **Examples:**
+
+          juju list-firewall-rules
+          juju firewall-rules
+
+
+   **See also:**
+
+   [set-firewall-rule](#set-firewall-rule)  
+
+   **Aliases:**
+
+   `firewall-rules`
 
 
 
@@ -3786,6 +4225,88 @@ Click on the expander to see details for each command.
    **Aliases:**
 
    `list-models`
+
+
+
+^# list-offers
+
+   **Usage:** ` juju offers [options] [<offer-name>]`
+
+   **Summary:**
+
+   Lists shared endpoints.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _--allowed-consumer (= "")_
+
+   return results where the user is allowed to consume the offer
+
+   _--application (= "")_
+
+   return results matching the application
+
+   _--connected-user (= "")_
+
+   return results where the user has a connection to the offer
+
+   _--format  (= tabular)_
+
+   Specify output format (json|summary|tabular|yaml)
+
+   _--interface (= "")_
+
+   return results matching the interface name
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   List information about applications' endpoints that have been shared and who is connected.
+   The default tabular output shows each user connected (relating to) the offer, and the 
+   relation id of the relation. If no relations have been made, no rows are printed.
+   The summary output shows one row per offer, with a count of active/total relations.
+   The YAML output shows additional information about the source of connections, including
+   the source model UUID.
+
+   The output can be filtered by:
+
+          - interface: the interface name of the endpoint
+          - application: the name of the offered application
+          - connected user: the name of a user who has a relation to the offer
+          - allowed consumer: the name of a user allowed to consume the offer
+
+   **Examples:**
+
+          $ juju offers
+          $ juju offers -m model
+          $ juju offers --interface db2
+          $ juju offers --application mysql
+          $ juju offers --connected-user fred
+          $ juju offers --allowed-consumer mary
+          $ juju offers hosted-mysql
+
+
+   **See also:**
+
+   [find-offers](#find-offers) , 
+   [show-offer](#show-offer)  
+
+   **Aliases:**
+
+   `list-offers`
 
 
 
@@ -4688,6 +5209,11 @@ Click on the expander to see details for each command.
            type: bool
            description: Determines whether the uniter should automatically retry failed hooks
    
+   container-networking-method:
+
+           type: string
+           description: Method of container networking setup - one of fan, provider, local
+   
    default-series:
 
            type: string
@@ -4704,7 +5230,7 @@ Click on the expander to see details for each command.
            description: Whether the provider should control networks (on MAAS models, set to
              true for MAAS to control networks
    
-   egress-cidrs:
+   egress-subnets:
 
            type: string
            description: Source address(es) for traffic originating from this model
@@ -4727,6 +5253,11 @@ Click on the expander to see details for each command.
 
            type: string
            description: Arbitrary user specified string data that is stored against the model.
+   
+   fan-config:
+
+           type: string
+           description: Configuration for fan networking for this model
    
    firewall-mode:
 
@@ -4790,6 +5321,18 @@ Click on the expander to see details for each command.
            type: string
            description: The configuration string to use when configuring Juju agent logging
              (see http://godoc.org/github.com/juju/loggo#ParseConfigurationString for details)
+   
+   max-action-results-age:
+
+           type: string
+           description: The maximum age for action entries before they are pruned, in human-readable
+             time format
+   
+   max-action-results-size:
+
+           type: string
+           description: The maximum size for the action collection, in human-readable memory
+             format
    
    max-status-history-age:
 
@@ -4906,6 +5449,77 @@ Click on the expander to see details for each command.
 
 
 
+^# model-default
+
+   **Usage:** ` juju model-defaults [options] [[<cloud/>]<region> ]<model-key>[<=value>] ...]`
+
+   **Summary:**
+
+   Displays or sets default configuration settings for a model.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   _--reset  (= )_
+
+   Reset the provided comma delimited keys
+
+   
+   **Details:**
+
+
+   By default, all default configuration (keys and values) are
+   displayed if a key is not specified. Supplying key=value will set the
+   supplied key to the supplied value. This can be repeated for multiple keys.
+   You can also specify a yaml file containing key values.
+
+   By default, the model is the current model.
+
+
+   **Examples:**
+
+          juju model-defaults
+          juju model-defaults http-proxy
+          juju model-defaults aws/us-east-1 http-proxy
+          juju model-defaults us-east-1 http-proxy
+          juju model-defaults -m mymodel type
+          juju model-defaults ftp-proxy=10.0.0.1:8000
+          juju model-defaults aws/us-east-1 ftp-proxy=10.0.0.1:8000
+          juju model-defaults us-east-1 ftp-proxy=10.0.0.1:8000
+          juju model-defaults us-east-1 ftp-proxy=10.0.0.1:8000 path/to/file.yaml
+          juju model-defaults us-east-1 path/to/file.yaml    
+          juju model-defaults -m othercontroller:mymodel default-series=yakkety test-mode=false
+          juju model-defaults --reset default-series test-mode
+          juju model-defaults aws/us-east-1 --reset http-proxy
+          juju model-defaults us-east-1 --reset http-proxy
+
+
+   **See also:**
+
+   [models](#models) , 
+   [model-config](#model-config)  
+
+   **Aliases:**
+
+   `model-default`
+
+
+
 ^# model-defaults
 
    **Usage:** ` juju model-defaults [options] [[<cloud/>]<region> ]<model-key>[<=value>] ...]`
@@ -4970,6 +5584,10 @@ Click on the expander to see details for each command.
 
    [models](#models) , 
    [model-config](#model-config)  
+
+   **Aliases:**
+
+   `model-default`
 
 
 
@@ -5040,6 +5658,131 @@ Click on the expander to see details for each command.
    **Aliases:**
 
    `list-models`
+
+
+
+^# offer
+
+   **Usage:** ` juju offer [options] [model-name.]<application-name>:<endpoint-name>[,...] [offer-name]`
+
+   **Summary:**
+
+   Offer application endpoints for use in other models.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   
+   **Details:**
+
+
+   Deployed application endpoints are offered for use by consumers.
+
+   By default, the offer is named after the application, unless
+   an offer name is explicitly specified.
+
+
+   **Examples:**
+
+   $ juju offer mysql:db
+   $ juju offer mymodel.mysql:db
+   $ juju offer db2:db hosted-db2
+   $ juju offer db2:db,log hosted-db2
+
+
+   **See also:**
+
+   [consume](#consume) , 
+   [relate](#relate)  
+
+
+
+^# offers
+
+   **Usage:** ` juju offers [options] [<offer-name>]`
+
+   **Summary:**
+
+   Lists shared endpoints.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _--allowed-consumer (= "")_
+
+   return results where the user is allowed to consume the offer
+
+   _--application (= "")_
+
+   return results matching the application
+
+   _--connected-user (= "")_
+
+   return results where the user has a connection to the offer
+
+   _--format  (= tabular)_
+
+   Specify output format (json|summary|tabular|yaml)
+
+   _--interface (= "")_
+
+   return results matching the interface name
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   List information about applications' endpoints that have been shared and who is connected.
+   The default tabular output shows each user connected (relating to) the offer, and the 
+   relation id of the relation. If no relations have been made, no rows are printed.
+   The summary output shows one row per offer, with a count of active/total relations.
+   The YAML output shows additional information about the source of connections, including
+   the source model UUID.
+
+   The output can be filtered by:
+
+          - interface: the interface name of the endpoint
+          - application: the name of the offered application
+          - connected user: the name of a user who has a relation to the offer
+          - allowed consumer: the name of a user allowed to consume the offer
+
+   **Examples:**
+
+          $ juju offers
+          $ juju offers -m model
+          $ juju offers --interface db2
+          $ juju offers --application mysql
+          $ juju offers --connected-user fred
+          $ juju offers --allowed-consumer mary
+          $ juju offers hosted-mysql
+
+
+   **See also:**
+
+   [find-offers](#find-offers) , 
+   [show-offer](#show-offer)  
+
+   **Aliases:**
+
+   `list-offers`
 
 
 
@@ -5236,13 +5979,48 @@ Click on the expander to see details for each command.
 
    **Options:**
 
-   _-B, --no-browser-login  (= false)_
-
-   Do not use web browser for authentication
-
    _-m, --model (= "")_
 
    Model to operate in. Accepts [<controller name>:]<model name>
+
+   _--via (= "")_
+
+   for cross model relations, specify the egress subnets for outbound traffic
+
+   
+   **Details:**
+
+
+   Add a relation between 2 local application endpoints or a local endpoint and a remote application endpoint.
+   Adding a relation between two remote application endpoints is not supported.
+   Application endpoints can be identified either by:
+
+             <application name>[:<relation name>]
+                 where application name supplied without relation will be internally expanded to be well-formed
+   
+   or
+             <model name>.<application name>[:<relation name>]
+                 where the application is hosted in another model owned by the current user, in the same controller
+   
+   or
+             <user name>/<model name>.<application name>[:<relation name>]
+                 where user/model is another model in the same controller
+   
+   For a cross model relation, if the consuming side is behind a firewall and/or NAT is used for outbound traffic,
+   it is possible to use the --via option to inform the offering side the source of traffic so that any required
+   firewall ports may be opened.
+
+
+   **Examples:**
+
+          $ juju add-relation wordpress mysql
+              where "wordpress" and "mysql" will be internally expanded to "wordpress:db" and "mysql:server" respectively
+          $ juju add-relation wordpress someone/prod.mysql
+              where "wordpress" will be internally expanded to "wordpress:db"
+          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16
+          
+          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16,10.0.0.0/8
+
 
    **Aliases:**
 
@@ -5289,6 +6067,10 @@ Click on the expander to see details for each command.
    _-B, --no-browser-login  (= false)_
 
    Do not use web browser for authentication
+
+   _--destroy-storage  (= false)_
+
+   Destroy storage attached to application units
 
    _-m, --model (= "")_
 
@@ -5471,6 +6253,10 @@ Click on the expander to see details for each command.
 
    Completely remove a machine and all its dependencies
 
+   _--keep-instance  (= false)_
+
+   Do not stop the running cloud instance
+
    _-m, --model (= "")_
 
    Model to operate in. Accepts [<controller name>:]<model name>
@@ -5495,6 +6281,10 @@ Click on the expander to see details for each command.
           juju remove-machine 5
    Remove machine 6 and any running units or containers:
           juju remove-machine 6 --force
+          
+   Remove machine 7 from the Juju model but do not stop 
+   the corresponding cloud instance:
+          juju remove-machine 7 --keep-instance
 
 
    **See also:**
@@ -5503,9 +6293,46 @@ Click on the expander to see details for each command.
 
 
 
+^# remove-offer
+
+   **Usage:** ` juju remove-offer [options] <offer-url> ...`
+
+   **Summary:**
+
+   Removes one or more offers specified by their URL.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   
+   **Details:**
+
+
+   Remove one or more application offers.
+
+
+   **Examples:**
+
+          juju remove-offer prod.model/hosted-mysql
+
+
+   **See also:**
+
+   [find-offers](#find-offers) , 
+   [offer](#offer)  
+
+
+
 ^# remove-relation
 
-   **Usage:** ` juju remove-relation [options] <application1>[:<relation name1>] <application2>[:<relation name2>]`
+   **Usage:** ` juju remove-relation [options] <application1>[:<relation name1>] <application2>[:<relation name2>] | <relation-id>`
 
    **Summary:**
 
@@ -5533,10 +6360,17 @@ Click on the expander to see details for each command.
    examples). Relations will automatically be removed when using the`juju
    remove-application` command.
 
+   The relation is specified using the relation endpoint names, eg
+           mysql wordpress, or
+           mediawiki:db mariadb:db
+   
+   It is also possible to specify the relation ID, if known. This is useful to
+   terminate a relation originating from a different model, where only the ID is known. 
 
    **Examples:**
 
           juju remove-relation mysql wordpress
+          juju remove-relation 4
    In the case of multiple relations, the relation name should be specified
    at least once - the following examples will all have the same effect:
           juju remove-relation mediawiki:db mariadb:db
@@ -5660,6 +6494,10 @@ Click on the expander to see details for each command.
    _-B, --no-browser-login  (= false)_
 
    Do not use web browser for authentication
+
+   _--destroy-storage  (= false)_
+
+   Destroy storage attached to the unit
 
    _-m, --model (= "")_
 
@@ -5873,6 +6711,48 @@ Click on the expander to see details for each command.
 
 
 
+^# resume-relation
+
+   **Usage:** ` juju resume-relation [options] <relation-id>[,<relation-id>]`
+
+   **Summary:**
+
+   Resumes a suspended relation to an application offer.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   
+   **Details:**
+
+
+   A relation between an application in another model and an offer in this model will be resumed. 
+   The relation-joined and relation-changed hooks will be run for the relation, and the relation
+   status will be set to joined. The relation is specified using its id.
+
+
+   **Examples:**
+
+          juju resume-relation 123
+          juju resume-relation 123 456
+
+
+   **See also:**
+
+   [add-relation](#add-relation) , 
+   [offers](#offers) , 
+   [remove-relation](#remove-relation) , 
+   [suspend-relation](#suspend-relation)  
+
+
+
 ^# retry-provisioning
 
    **Usage:** ` juju retry-provisioning [options] <machine> [...]`
@@ -5895,11 +6775,11 @@ Click on the expander to see details for each command.
 
 ^# revoke
 
-   **Usage:** ` juju revoke [options] <user> <permission> [<model name> ...]`
+   **Usage:** ` juju revoke [options] <user name> <permission> [<model name> ... | <offer url> ...]`
 
    **Summary:**
 
-   Revokes access from a Juju user for a model or controller.
+   Revokes access from a Juju user for a model, controller, or application offer.
 
    **Options:**
 
@@ -5930,6 +6810,10 @@ Click on the expander to see details for each command.
           juju revoke sam write model1 model2
    Revoke 'add-model' access from user 'maria' to the controller:
           juju revoke maria add-model
+   Revoke 'read' (and 'write') access from user 'joe' for application offer 'fred/prod.hosted-mysql':
+          juju revoke joe read fred/prod.hosted-mysql
+   Revoke 'consume' access from user 'sam' for models 'fred/prod.hosted-mysql' and 'mary/test.hosted-mysql':
+          juju revoke sam consume fred/prod.hosted-mysql mary/test.hosted-mysql
 
 
    **See also:**
@@ -6027,7 +6911,7 @@ Click on the expander to see details for each command.
 
 ^# run-action
 
-   **Usage:** ` juju run-action [options] <unit> <action name> [key.key.key...=value]`
+   **Usage:** ` juju run-action [options] <unit> [<unit> ...] <action name> [key.key.key...=value]`
 
    **Summary:**
 
@@ -6336,6 +7220,51 @@ Click on the expander to see details for each command.
    **See also:**
 
    [add-credential](#add-credential)  
+
+
+
+^# set-firewall-rule
+
+   **Usage:** ` juju set-firewall-rule [options] <service-name>, --whitelist <cidr>[,<cidr>...]`
+
+   **Summary:**
+
+   Sets a firewall rule.
+
+   **Options:**
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _--whitelist (= "")_
+
+   list of subnets to whitelist
+
+   
+   **Details:**
+
+
+   Firewall rules control ingress to a well known services
+   within a Juju model. A rule consists of the service name
+   and a whitelist of allowed ingress subnets.
+
+   The currently supported services are:
+
+          -ssh
+          -juju-controller
+          -juju-application-offer
+
+   **Examples:**
+
+          juju set-firewall-rule ssh --whitelist 192.168.1.0/16
+          juju set-firewall-rule juju-controller --whitelist 192.168.1.0/16
+          juju set-firewall-rule juju-application-offer --whitelist 192.168.1.0/16
+
+
+   **See also:**
+
+   [list-firewall-rules](#list-firewall-rules)  
 
 
 
@@ -6781,6 +7710,52 @@ Click on the expander to see details for each command.
 
 
 
+^# show-offer
+
+   **Usage:** ` juju show-offer [options]`
+
+   **Summary:**
+
+   Shows offered applications' endpoints details.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--format  (= tabular)_
+
+   Specify output format (json|tabular|yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   
+   **Details:**
+
+
+   Show extended information about an offered application.
+
+   This command is aimed for a user who wants to see more detail about what’s offered behind a particular URL.
+
+   **Examples:**
+
+         $ juju show-offer fred/prod.db2
+         $ juju show-offer anothercontroller:fred/prod.db2
+
+
+   **See also:**
+
+   [find-offers](#find-offers)  
+
+
+
 ^# show-status
 
    **Usage:** ` juju show-status [options] [filter pattern ...]`
@@ -7173,7 +8148,7 @@ Click on the expander to see details for each command.
 
 ^# ssh
 
-   **Usage:** ` juju ssh [options] <[user@]target> [command]`
+   **Usage:** ` juju ssh [options] <[user@]target> [openssh options] [command]`
 
    **Summary:**
 
@@ -7216,6 +8191,12 @@ Click on the expander to see details for each command.
    can be used to disable these checks. Use of this option is not recommended as
    it opens up the possibility of a man-in-the-middle attack.
 
+   The default identity known to Juju and used by this command is ~/.ssh/id_rsa
+   Options can be passed to the local OpenSSH client (ssh) on platforms 
+   where it is available. This is done by inserting them between the target and 
+   a possible remote command. Refer to the ssh man page for an explanation 
+   of those options.
+
 
    **Examples:**
 
@@ -7227,6 +8208,8 @@ Click on the expander to see details for each command.
           juju ssh mysql/0
    Connect to a jenkins unit as user jenkins:
           juju ssh jenkins@jenkins/0
+   Connect to a mysql unit with an identity not known to juju (ssh option -i):
+          juju ssh mysql/0 -i ~/.ssh/my_private_key echo hello
 
 
    **See also:**
@@ -7539,6 +8522,52 @@ Click on the expander to see details for each command.
 
 
 
+^# suspend-relation
+
+   **Usage:** ` juju suspend-relation [options] <relation-id>[ <relation-id>...]`
+
+   **Summary:**
+
+   Suspends a relation to an application offer.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   _--message (= "")_
+
+   reason for suspension
+
+   
+   **Details:**
+
+
+   A relation between an application in another model and an offer in this model will be suspended. 
+   The relation-departed and relation-broken hooks will be run for the relation, and the relation
+   status will be set to suspended. The relation is specified using its id.
+
+   **Examples:**
+
+          juju suspend-relation 123
+          juju suspend-relation 123 --message "reason for suspending"
+          juju suspend-relation 123 456 --message "reason for suspending"
+
+
+   **See also:**
+
+   [add-relation](#add-relation) , 
+   [offers](#offers) , 
+   [remove-relation](#remove-relation) , 
+   [resume-relation](#resume-relation)  
+
+
+
 ^# switch
 
    **Usage:** ` juju switch [options] [<controller>|<model>|<controller>:|:<model>|<controller>:<model>]`
@@ -7784,7 +8813,7 @@ Click on the expander to see details for each command.
 
    **Summary:**
 
-   Updates a credential for a cloud.
+   Updates a controller credential for a cloud.
 
    **Options:**
 
@@ -7804,8 +8833,22 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Updates a named credential for a cloud.
+   Cloud credentials for controller are used for model operations and manipulations.
+   Since it is common to have long-running models, it is also common to 
+   have these cloud credentials become invalid during models' lifetime.
 
+   When this happens, a user must update the cloud credential that 
+   a model was created with to the new and valid details on controller.
+
+   This command allows to update an existing, already-stored, named,
+   cloud-specific controller credential.
+
+   NOTE: 
+   This is the only command that will allow you to manipulate cloud
+   credential for a controller. 
+   All other credential related commands, such as 
+   `add-credential`, `remove-credential` and  `credentials`
+   deal with credentials stored locally on the client not on the controller.
 
    **Examples:**
 
@@ -7816,6 +8859,62 @@ Click on the expander to see details for each command.
 
    [add-credential](#add-credential) , 
    [credentials](#credentials)  
+
+
+
+^# update-series
+
+   **Usage:** ` juju update-series [options] [<application>|<machine>] <series>`
+
+   **Summary:**
+
+   Update an application or machine's series.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _--force  (= false)_
+
+   Update even if the series is not supported by the charm and/or related subordinate charms.
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [<controller name>:]<model name>
+
+   
+   **Details:**
+
+
+   When no flags are set, an application or machines series value with be updated
+   within juju.
+
+   The update is disallowed unless the --force flag is used if the requested
+   series is not explicitly supported by the application's charm and all
+   subordinates, as well as any other charms which may be deployed to the same
+   machine.
+
+   In the case of updating a machine's series, the --force option should be used
+   with caution since using a charm on a machine running an unsupported series may
+   cause unexpected behavior. Alternately, if the requested series supported in
+   later revisions of the charm, upgrade-charm can run beforehand.
+
+
+   **Examples:**
+
+   	juju update-series <application> <series>
+   	juju update-series <application> <series> --force
+   	juju update-series <machine> <series>
+   	juju update-series <machine> <series> --force
+
+
+   **See also:**
+
+   [machines](#machines) , 
+   [status](#status) , 
+   [upgrade-charm](#upgrade-charm)  
 
 
 
