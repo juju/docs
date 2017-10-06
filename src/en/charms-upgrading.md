@@ -21,6 +21,22 @@ You can query for charm information, such as channels and revisions, with the
 `charm` utility, which is available via the Charm Tools software. See the
 [Charm Tools][charm-tools] page for guidance.
 
+## Upgrade mechanics
+
+Here is a summary of how charm upgrades work.
+
+The agent (running on each unit of the application being upgraded) unpacks the
+new version of the charm to a staging directory next to the original charm. It
+then points itself to the newly unpacked charm and deletes the old one, after
+which the expected hooks are fired using the newly unpacked charm code.
+
+The original charm continues to run until the new charm is successfully
+downloaded and unpacked. Only then does the original one stop running and the
+new one begin to run (by executing the `install` and `upgrade-charm` hooks).
+
+To be clear, the logic of the upgrade itself is contained within the charm.
+Juju simply unpacks the new charm and fires the hooks. 
+
 ## Crossgrading an application
 
 Crossgrading an application refers to upgrading an application by switching out
