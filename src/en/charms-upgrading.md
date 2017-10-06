@@ -31,10 +31,12 @@ then points itself to the newly unpacked charm and deletes the old one, after
 which the expected hooks are fired using the newly unpacked charm code.
 
 The original charm files are not overwritten. The original charm continues to
-run if anything goes wrong with the retrieval or unpacking of the new charm.
+run until the new charm is successfully downloaded and unpacked in a separate
+directory. Only then does the original one stop running and the new one begin
+to run (by executing the `install` and `upgrade-charm` hooks).
 
 To be clear, the logic of the upgrade itself is contained within the charm.
-Juju simply unpacks the new charm as noted and fires the hooks. 
+Juju simply unpacks the new charm and fires the hooks. 
 
 ## Crossgrading an application
 
