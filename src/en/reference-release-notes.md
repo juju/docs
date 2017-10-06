@@ -22,17 +22,17 @@ A new "container-networking-method" model config attribute is introduced with 3 
 The default is to use "provider" if supported. Otherwise, if FAN is configured use that, else "local".
 On AWS, FAN works out of the box. For other clouds, a new fan-config model option needs to be used, eg
 
-  `$ juju model-config fan-config="<underlay1>=<overlay1> <underlay2>=<overlay2>"`
+    juju model-config fan-config="<underlay1>=<overlay1> <underlay2>=<overlay2>
 
 ### Update application series
 
 It's now possible to update the underlying OS series associated with an already deployed application.
 
-  `$ juju update-series <application> <series>`
+    juju update-series <application> <series>
 
 will ensure that any new units deployed will now use the requested series.
 
-  `$ juju update-series <machine> <series>`
+    juju update-series <machine> <series>
 
 will inform the charms already deployed to the machine that the OS series has been changed and they should re-configure accordingly. This requires charm support and for the underlying OS to be upgraded manually beforehand. 
 
@@ -91,6 +91,19 @@ The best way to get your hands on this release of Juju is to install it as a sna
          snap install juju --beta --classic 
 
 Other packages are available for a variety of platforms. Please see the online documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew, you should see an upgrade available.
+
+
+## Feedback Appreciated!
+
+We encourage everyone to let us know how you're using Juju. Send us a
+message on Twitter using #jujucharms, join us at #juju on freenode, and 
+subscribe to the mailing list at juju@lists.ubuntu.com.
+
+
+## More information
+
+To learn more about juju please visit https://jujucharms.com.
+
 
 ^# Juju 2.2.4
 
