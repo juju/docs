@@ -1,5 +1,5 @@
 Title: Cross Model Relations
-TODO:  Removed "consume but do not relate" (somewhere else maybe)
+TODO:  Critical: Put back and continue the example scenarios
 
 <!--
 
@@ -65,9 +65,11 @@ The commands related specifically to this subject are:
 See [Models][models] and [Managing relations][charms-relations] for beginner
 information on those topics.
 
+<!--
 This page presents the **concepts** behind cross model relations as well as
 two example **scenarios** that aim to reinforce those concepts through
 practical usage.
+-->
 
 ## Concepts
 
@@ -77,8 +79,8 @@ minimum. See the above CLI help text for full syntax and more examples.
 ### Offers and endpoints
 
 The idea of an *offer* is key to understanding CMR. Nevertheless, it is quite
-easy to grasp. An offer is simply a service that is making itself available to
-a consumer application.
+easy to grasp. An offer is simply an application that is making itself
+available to a consumer application.
 
 An *endpoint* is at either end of the server:client connection. There is
 therefore what is known as a *provides* endpoint (for the service end) and a
@@ -96,10 +98,10 @@ single URL.
 ### Managing offers
 
 An offer can be removed providing a relation has not been made to it.
-Similarly, if an application is being offered it cannot be deleted until the
-offer is removed.
+Similarly, if an application is being offered it cannot be deleted until all
+its offers are removed.
 
-Managing who can partake in an offer is controlled by three access levels:
+Managing ACL for offers is done with these three access levels:
 
 - read (a user can see the offer when searching)
 - consume (a user can relate an application to the offer)
@@ -122,7 +124,10 @@ their model and establish a relation to the offer by way of its URL.
 The controller part of the URL is optional if the other model resides in
 the same controller.
 
-`juju relate <application>:<application endpoint> <offer url><offer endpoint>`
+`juju relate <application> <offer url>`
+
+Specifying endpoints for the application and the offer is analogous to normal
+relations. They can be added but are often unnecessary.
 
 When an offer is related to, a proxy application is made in the consuming
 model, named after the offer.
@@ -155,7 +160,7 @@ consuming application is hosted.
 In this case, the relate `--via` option is used to inform the offering side so
 that the correct firewall rules can be set up.
 
-`juju relate <application>:<application endpoint> <offer url><offer endpoint> --via <cidr subnet>`
+`juju relate <application> <offer url> --via <cidr subnet>`
 
 The `--via` value is a comma separated list of subnets in CIDR notation. This
 includes the /32 case where a single NATed IP address is used for egress.
@@ -172,12 +177,12 @@ via an arbitrary subnet. To allow control over what ingress can be applied to
 the offering model, an administrator can set up allowed ingress subnets by
 creating a firewall rule.
 
-`juju set-firewall-rule <service name> --whitelist <cidr subnet>`
+`juju set-firewall-rule juju-application-offer --whitelist <cidr subnet>`
 
-Where 'service name' specifies the firewall rule applied to any offer in the
-current model. If a consumer attempts to create a relation with requested
-ingress outside the bounds of the whitelist subnet, the relation will fail and
-be marked as an error.
+Where 'juju-application-offer' denotes the firewall rule to apply to any offer
+in the current model. If a consumer attempts to create a relation with
+requested ingress outside the bounds of the whitelist subnet, the relation will
+fail.
 
 If the firewall rule is changed, it does not (currently) affect existing
 relations. Only new relations will be rejected if the changed firewall rules
@@ -230,6 +235,8 @@ Removing a relation on the offering side will trigger a removal on the
 consuming side. A relation can also be removed from the consuming side, as well
 as the application proxy, resulting in all relations being removed.
 
+<!--
+
 ## Example scenarios
 
 The following CMR scenarios will be examined:
@@ -240,6 +247,8 @@ The following CMR scenarios will be examined:
 - [Scenario #2](./models-cmr-scene-2.html)  
   A MediaWiki deployment, based within **multiple** controllers, used by a
   **non-admin** user, and consumed by a **single** model.
+
+-->
 
 
 <!-- LINKS -->
