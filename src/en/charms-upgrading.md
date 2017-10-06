@@ -30,10 +30,9 @@ new version of the charm to a staging directory next to the original charm. It
 then points itself to the newly unpacked charm and deletes the old one, after
 which the expected hooks are fired using the newly unpacked charm code.
 
-The original charm files are not overwritten. The original charm continues to
-run until the new charm is successfully downloaded and unpacked in a separate
-directory. Only then does the original one stop running and the new one begin
-to run (by executing the `install` and `upgrade-charm` hooks).
+The original charm continues to run until the new charm is successfully
+downloaded and unpacked. Only then does the original one stop running and the
+new one begin to run (by executing the `install` and `upgrade-charm` hooks).
 
 To be clear, the logic of the upgrade itself is contained within the charm.
 Juju simply unpacks the new charm and fires the hooks. 
