@@ -2,8 +2,8 @@ Title:Creating icons for charms
 
 # Creating icons for charms
 
-In order to make your charm recognizable in the Charm Store, it is best
-practice to add a unique and recognizable icon for it. This isn't as hard as it
+In order to make your charm recognisable in the Charm Store, it is best
+practice to add a unique and recognisable icon for it. This isn't as hard as it
 may seem, as this step by step guide will demonstrate.
 
 ## Icon specifications
@@ -47,7 +47,7 @@ color.
 
 ## Draw something
 
-Draw your shape within the circle If you already have a vector logo, you can
+Draw your shape within the circle. If you already have a vector logo, you can
 import it and scale it within the guides. Inkscape also has plenty of drawing
 tools for creating complex images.
 
