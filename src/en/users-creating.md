@@ -82,6 +82,9 @@ Ask the user to run:
      juju register MFsTBHBsb3AwKRMSNTQuODIuMTM0LjY2OjE3MDcwExMxMC4xNTAuOTAuMTc4OjE3MDcwBCAE0XRp7xXV9AMRpK9L89nWn-jtXn7qalK47AtVQhXPQhMGMjJ0ZXN0
 ``` 
 
+The previous token will now be invalid, and the user should register with
+the new token.
+
 ## Logins and logouts
 
 On any given client system, each controller that shows up with 
