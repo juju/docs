@@ -40,7 +40,7 @@ built into a deployable charm, and if they can, they’re unlikely to do anythin
 useful.
 
 The basic layer provides the minimum needed to use the
-[charms.reactive](https://pythonhosted.org/charms.reactive/) framework. The
+[charms.reactive](https://charmsreactive.readthedocs.io/) framework. The
 [layer-basic](http://github.com/juju-solutions/layer-basic) provides:  
 * Wheelhouse support for management of python dependencies.
 * Hook decorators so the code can react to Juju Hooks.
@@ -166,7 +166,7 @@ The
 [Getting started guide](./developer-getting-started.html#assemble-the-layers)
 contains steps on how to build a layer into a charm.
 
-!!! Note: 
+!!! Note:
     You must have the
     [Charm Tools](./developer-getting-started.html#charm-tools)
     software installed to use the `charm build` command.

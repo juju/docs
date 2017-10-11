@@ -39,7 +39,7 @@ mkdir -p $LAYER_PATH $LAYER_PATH/vanilla
 cd $LAYER_PATH/vanilla
 ```
 
-!!! Note: 
+!!! Note:
     Exporting the environment variables in this way only sets the
     variables for the current terminal. If you wish to make these changes persist,
     add the same export statements to a resource file that are evaluated when you
@@ -111,7 +111,7 @@ block under sites (in this case vanilla).
 ### Implementing your layer
 
 The apache-php layer and mysql interface use
-[charms.reactive](http://pythonhosted.org/charms.reactive/) to coordinate with
+[charms.reactive](https://charmsreactive.readthedocs.io/) to coordinate with
 your layer. This makes it easy to coordinate the state of multiple layers,
 relations, configuration options, etc. Code for reactive handlers should live
 under a `reactive/` directory in your charm layer. In our case, we'll use
