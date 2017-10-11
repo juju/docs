@@ -40,11 +40,23 @@ Name    Display name  Access     Date created    Last connection
 admin*  admin         superuser  2016-10-12      just now
 mike                  login      17 minutes ago  never connected (disabled)
 ```
+
 ## Changing user passwords
 
-An administrator can change the password of any user associated with the
-controller they manage. For example:
+The local user is prompted to set a password when registering the controller.
+This password can subsequently be changed either by the user or by the admin
+user of the controller. For the user, it is simply a matter of running:
 
 ```bash
-juju change-user-password john
+juju change-user-password
 ```
+
+The admin user must also supply the name of the user account whose password
+is to be changed:
+
+```bash
+juju change-user-password mike
+```
+
+Then simply follow the prompts to enter and confirm a new password.
+
