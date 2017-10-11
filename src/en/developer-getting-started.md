@@ -3,17 +3,17 @@ Title: Getting started developing charms
 # Getting Started with charm development
 
 This guide is for anyone wanting to creating the code that we call
- a _charm_; the part that does the work of installing and managing 
-applications in a Juju model. Many charms exist in the 
-[Juju store][store] already, but if your favourite application
+ a _charm_; the part that does the work of installing and managing
+applications in a Juju model. Many charms exist in the
+[Juju Charm Store][charm-store] already, but if your favourite application
 isn't covered or you would like to make your own spin on an existing
 charm, you will discover all the tools and information you need here.
 
 ## Requirements
 
-  - **A Juju controller**: If you have not used Juju before, it's 
+  - **A Juju controller**: If you have not used Juju before, it's
   a good idea to [start here][getting-started].
-  - **Python 3.x**: it is possible to develop charms using other languages, 
+  - **Python 3.x**: it is possible to develop charms using other languages,
   but this guide focuses on Python-based development.
   - **Charm Tools**: Command line utilities to make it easy to create,
   build, fetch and test charms. [See the Charm Tools page][charm-tools]
@@ -21,9 +21,9 @@ charm, you will discover all the tools and information you need here.
   - **Charm Helpers**: [Charm Helpers][charm-helpers] is a Python library
   that provides an extensive collection of functions for developers to
   reuse. Many common charm patterns are encapsulated in functions of this
-  library, so it is also worth reading the 
+  library, so it is also worth reading the
   [Charm Helpers documentation][charm-helper-docs].
-  - This guide also uses the [Vanilla PHP Forum software][vanilla] as an 
+  - This guide also uses the [Vanilla PHP Forum software][vanilla] as an
   example.
 
 
@@ -66,8 +66,7 @@ makes layers possible.
 
 #### Reactive
 
-Another software paradigm is
-[reactive programming][reactive]. Do
+Another software paradigm is [reactive programming][reactive]. Do
 something when the state or conditions indicate. Juju offers the
 [charms.reactive][charmsreactive] package to allow
 charms to be written in the reactive paradigm. In charms.reactive code
@@ -104,10 +103,12 @@ mkdir -p $LAYER_PATH $INTERFACE_PATH
 cd $JUJU_REPOSITORY/layers
 ```
 
-!!! Note: Exporting the environment variables in this way only sets the
-variables for the current terminal. If you wish to make these changes persist,
-add the same export statements to a resource file that are evaluated when you
-create a new console such as ~/.bashrc depending on your shell.
+
+!!! Note:
+    Exporting the environment variables in this way only sets the
+    variables for the current terminal. If you wish to make these changes persist,
+    add the same export statements to a resource file that are evaluated when you
+    create a new console such as ~/.bashrc depending on your shell.
 
 Once in the layers directory clone the example charm layer - layer-vanilla:
 
@@ -129,9 +130,9 @@ within the layer directory, this is as simple as:
 charm build
 ```
 
-Build will take all of the layers and interfaces included by your charm, 
+Build will take all of the layers and interfaces included by your charm,
 either from your local `LAYER_PATH` and `INTERFACE_PATH` directories or
-automatically downloaded from the 
+automatically downloaded from the
 [interfaces.juju.solutions][interfaces] website and create a new charm
 in `$JUJU_REPOSITORY/trusty/vanilla`:
 
@@ -168,7 +169,7 @@ Because Juju is a large complex system, not unlike a Linux software
 distribution, there is a need to test the charms themselves and how they
 interact with one another. All new charms require tests that verify the
 application installs, configures, scales and relates as intended. The tests
-should be self-contained, installing all the required packages so the tests 
+should be self-contained, installing all the required packages so the tests
 can be run automatically with a tool called
 [`bundletester`][bundletester]. Similar to hooks the tests should be
 executable files in a `tests/` directory of the charm.
@@ -203,6 +204,7 @@ promulgation.
 - Charm authors are encouraged to use their personal or group namespace.
 
 
+
 <!-- LINKS -->
 
 [charm-store]: https://jujucharms.com/
@@ -210,7 +212,7 @@ promulgation.
 [charm-tools]:        ./tools-charm-tools.html
 [charm-helpers]:      ./tools-charm-helpers.html
 [charm-helper-docs]:  http://pythonhosted.org/charmhelpers/
-[interface-layers]:   ./developer-layers-interfaces.html 
+[interface-layers]:   ./developer-layers-interfaces.html
 [vanilla]:            http://vanillaforums.org
 [charms-local]:       ./charms-deploying.html#deploying-from-a-local-charm
 [amulet]:             ./tools-amulet.html
@@ -219,5 +221,5 @@ promulgation.
 [interfaces]:         http://interfaces.juju.solutions/
 [charm-promulgation]: ./charm-promulgation.html
 [reactive]: https://en.wikipedia.org/wiki/Reactive_programming
-[charmsreactive]: http://pythonhosted.org/charms.reactive/
 [mailing-list-juju]: https://lists.ubuntu.com/mailman/listinfo/juju
+[charmsreactive]: https://charmsreactive.readthedocs.io/

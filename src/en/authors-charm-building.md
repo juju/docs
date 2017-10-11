@@ -237,9 +237,9 @@ juju expose vanilla
 [apache-php5]: https://github.com/johnsca/apache-php
 [http interface]: https://code.launchpad.net/~bcsaller/charms/+source/http/+git/http
 [mysql interface]: https://github.com/johnsca/juju-relation-mysql
-[charms.reactive]: http://pythonhosted.org/charms.reactive/
-[reactive-bash]: http://pythonhosted.org/charms.reactive/#non-python-reactive-handlers
+[charms.reactive]: https://charmsreactive.readthedocs.io/
+[reactive-bash]: https://charmsreactive.readthedocs.io/#non-python-reactive-handlers
 [repo]: https://github.com/johnsca/layered-vanilla
 [interfaces.juju.solutions]: http://interfaces.juju.solutions/
-[discovery and dispatch rules]: http://pythonhosted.org/charms.reactive/#discovery-and-dispatch-of-reactive-handlers
+[discovery and dispatch rules]: https://charmsreactive.readthedocs.io/#discovery-and-dispatch-of-reactive-handlers
 [charm-tools]: ./tools-charm-tools.html

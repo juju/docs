@@ -24,7 +24,7 @@ the higher level [concepts of Juju][concepts].
 Another software paradigm is
 [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming). Do
 something when the state or conditions are correct. Juju offers the
-[charms.reactive](http://pythonhosted.org/charms.reactive/) package to allow
+[charms.reactive](https://charmsreactive.readthedocs.io/) package to allow
 charms to be written in the reactive paradigm. In charms.reactive code
 execution is controlled by boolean logic. You can define when the conditions
 are right, run this code, or when something is not set, run different code or
@@ -40,7 +40,7 @@ the root directory of the charm controls what layer(s) will be imported.
 #### Reactive Charms
 
 The docker charm makes use of the
-[charms.reactive](http://pythonhosted.org/charms.reactive/) python framework.
+[charms.reactive](https://charmsreactive.readthedocs.io/) python framework.
 The code for the docker layer can be found in the `reactive/` folder in the
 root charm directory.
 
@@ -78,13 +78,13 @@ a load balancer charm.
 
 # Charm authoring using reactive paradigm
 
-The [charms.reactive](http://pythonhosted.org/charms.reactive/) is a python
+The [charms.reactive](https://charmsreactive.readthedocs.io/) is a python
 module to bring the
 [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming)
 pattern to Juju charms. We call this "reactive" because code can be executed
 when certain conditions exist, as if the code is reacting to those conditions.
 For the most complete information on charms.reactive go to
-<http://pythonhosted.org/charms.reactive/>
+<https://charmsreactive.readthedocs.io/>
 
 
 ## The Big Picture Decomposed
@@ -189,7 +189,7 @@ to determine if the port has changed and the container needs to be recycled.
 ## Reactive functions
 The `nginx.py` file contains several functions that make use of the reactive
 framework. The `@when` and `@when_not` are
-[charms.reactive decorators](http://pythonhosted.org/charms.reactive/charms.reactive.decorators.html).
+[charms.reactive decorators](https://charmsreactive.readthedocs.io/en/stable/charms.reactive.decorators.html).
 The decorated functions are only run if the conditions match the current state.
 The functions described here are specific to the nginx workload, but the
 concepts can be extended to the other Docker worklodas to write your own charm
@@ -325,4 +325,3 @@ new charm with your Docker image very similar to the
 [layer-docker-nginx](#layer-docker-nginx) charm.
 
 [concepts]: ./juju-concepts.html
-
