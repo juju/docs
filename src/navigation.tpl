@@ -175,7 +175,6 @@
             <ul class="sub">
                 <li><a href="authors-charm-store.html#submitting-a-new-charm">Submit a charm</a></li>
                 <li><a href="authors-charm-policy.html">Charm store policy</a></li>
-                <li><a href="charm-review-process.html">Charm review process</a></li>
                 <li><a href="authors-charm-best-practice.html">Best practices</a></li>
                 <li><a href="authors-charm-icon.html">Charm Icons</a></li>
             </ul>
