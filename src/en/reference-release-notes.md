@@ -8,6 +8,103 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
+^# Juju 2.3-beta1
+
+## New and Improved
+
+### FAN networking in containers (initial support)
+
+A new "container-networking-method" model config attribute is introduced with 3 possible values: "local", "fan", "provider".
+* local = use local bridge lxdbr0
+* provider = containers get their IP address from the cloud via DHCP
+* fan = use FAN
+
+The default is to use "provider" if supported. Otherwise, if FAN is configured use that, else "local".
+On AWS, FAN works out of the box. For other clouds, a new fan-config model option needs to be used, eg
+
+    juju model-config fan-config="<underlay1>=<overlay1> <underlay2>=<overlay2>
+
+### Update application series
+
+It's now possible to update the underlying OS series associated with an already deployed application.
+
+    juju update-series <application> <series>
+
+will ensure that any new units deployed will now use the requested series.
+
+    juju update-series <machine> <series>
+
+will inform the charms already deployed to the machine that the OS series has been changed and they should re-configure accordingly. This requires charm support and for the underlying OS to be upgraded manually beforehand. 
+
+For more detail, see the documentation https://jujucharms.com/docs/devel/howto-updateseries
+
+### Cross model relations
+
+This feature allows workloads to be deployed and related across models, and even across controllers. Note that some charms such as postgresql, prometheus (and others) need to be updated to be cross model compatible - this work is underway.
+
+For more detail, see the beta documentation https://jujucharms.com/docs/devel/models-cmr/
+
+*Note: this cross model relations documentaion is also still in beta and is incomplete.*
+
+### LXD storage provider
+
+Juju storage is now supported by the LXD local cloud. The available storage options include:
+- lxd (default, directory based)
+- btrfs
+- zfs
+
+For more detail, see the documentation https://jujucharms.com/docs/devel/charms-storage#lxd-(lxd) 
+
+### Persistent storage management
+
+Storage can be detached and reattached from/to units without losing the data on that storage. The supported scenarios include:
+- explicit detach / attach while the units are still active
+- retain storage when a unit or application is destroyed
+- retain storage when a model is destroyed
+- deploy a charm using previously detached storage
+
+The default behaviour now is to retain storage, unless destroy has explicitly been requested when running the command.
+
+Storage which is retained can then be reattached to a different unit. Filesystem storage can be imported into a different model, from where it can be attached to units in that model, or used when deploying a new charm.
+
+For more detail, see the documentation https://jujucharms.com/docs/devel/charms-storage
+
+
+## Fixes
+
+For a list of all bugs fixed in this release, see https://launchpad.net/juju/+milestone/2.3-beta1
+
+Some important fixes include:
+
+* can't bootstrap openstack if nova and neutron AZs differ
+https://bugs.launchpad.net/juju/+bug/1689683
+* cache vSphere images in datastore to avoid repeated downloads
+https://bugs.launchpad.net/juju/+bug/1711019
+* juju run-action can be run on multiple units
+https://bugs.launchpad.net/juju/+bug/1667213
+
+
+## How can I get it?
+
+The best way to get your hands on this release of Juju is to install it as a snap package (see https://snapcraft.io/ for more info on snaps).
+
+         snap install juju --beta --classic 
+
+Other packages are available for a variety of platforms. Please see the online documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew, you should see an upgrade available.
+
+
+## Feedback Appreciated!
+
+We encourage everyone to let us know how you're using Juju. Send us a
+message on Twitter using #jujucharms, join us at #juju on freenode, and 
+subscribe to the mailing list at juju@lists.ubuntu.com.
+
+
+## More information
+
+To learn more about juju please visit https://jujucharms.com.
+
+
 ^# Juju 2.2.4
 
   ## New and Improved

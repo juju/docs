@@ -93,7 +93,7 @@
                 <li><a href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
                 <li><a href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
                 <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
-                <li><a href="developer-getting-started.html#having-your-charm-reviewed">Having your charm reviewed</a></li>
+                <li><a href="developer-getting-started.html#publishing-your-charm">Publishing your charm</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="developer-event-cycle.html">Event Cycle</a>
@@ -119,6 +119,7 @@
         <li><a href="developer-terms.html">Juju Terms</a></li>
         <li><a href="developer-metrics.html">Juju Metrics</a></li>
         <li><a href="developer-resources.html">Juju Resources</a></li>
+        <li><a href="developer-network-primitives.html">Network Primitives</a></li>
         <li class="section"><a class="header" href="developer-leadership.html">Implementing Leadership</a>
             <ul class="sub">
                 <li><a href="developer-leadership.html#leadership-hooks">Leadership Hooks</a></li>

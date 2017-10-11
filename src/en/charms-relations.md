@@ -106,3 +106,13 @@ is necessary to specify the interface at least once:
 ```bash
 juju remove-relation mediawiki mysql:db
 ```
+
+## Cross model relations
+
+Relations can also work across models, even across multiple controllers. See
+[Cross model relations][models-cmr] for more information.
+
+
+<!-- LINKS -->
+
+[models-cmr]: ./models-cmr.html

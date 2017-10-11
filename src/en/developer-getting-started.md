@@ -5,7 +5,7 @@ Title: Getting started developing charms
 This guide is for anyone wanting to creating the code that we call
  a _charm_; the part that does the work of installing and managing
 applications in a Juju model. Many charms exist in the
-[Juju store][store] already, but if your favourite application
+[Juju Charm Store][charm store] already, but if your favourite application
 isn't covered or you would like to make your own spin on an existing
 charm, you will discover all the tools and information you need here.
 
@@ -43,7 +43,7 @@ following example:
 Looking at this diagram we see the Vanilla charm with two units. The Vanilla
 application requires a relationship to a database using the “mysql” interface.
 The MariaDB charm implements the mysql interface, which fulfills the db relation
-and is already in [the charm store](https://jujucharms.com/mariadb).
+and is already in [the Charm Store][mariadb].
 
 ## Writing your Charm
 
@@ -118,8 +118,8 @@ cd layer-vanilla
 ```
 
 If you'd like to write your own layer, or simply learn more about how
-layers are implemented, see [How to Write a
-Layer](./developer-layer-example.html).
+layers are implemented, see 
+[How to Write a Layer](./developer-layer-example.html).
 
 ### Assemble the layers
 
@@ -180,22 +180,36 @@ tests in Python.
 For more information about writing tests please refer to the
 [charm testing guide documentation][charm testing].
 
-## Having your charm reviewed
+## Publishing your charm
 
-Once the charm is complete you can
-[submit the charm for review][charm-review].
-If it passes, it will appear in the recommended section of the
-Juju Charm Store (reviews may take some time to complete). Charms in the
-recommended section must follow Charm Store policy and best practices for
-charms. These recommended charms have a shorter namespace on the
-Charm Store website, and are listed higher in search results on
-[https://jujucharms.com][store].
+
+When you are done writing your charm and you want to make it available to
+others you will need to make a *promulgation request*. This is informally done
+via the [Juju users mailing list][mailing-list-juju].
+
+The '#juju' IRC channel on Freenode and the above mailing list remain excellent
+resources for questions and comments regarding charm development and charm
+promulgation.
+
+### Promulgation notes
+
+- The [Charm promulgation][charm-promulgation] page contains information on what
+  happens once the request is made.
+
+- It is the responsibility of the charm author (and maintainer) to test
+  their charm to ensure it is of good quality and is secure.
+
+- Promulgation to the top level namespace of the Charm Store does not imply
+  an endorsement by Canonical.
+
+- Charm authors are encouraged to use their personal or group namespace.
+
 
 
 <!-- LINKS -->
 
-[store]:              https://jujucharms.com/
-[getting-started]:    ./getting-started.html
+[charm-store]: https://jujucharms.com/
+[getting-started]:    ./getting-started.html 
 [charm-tools]:        ./tools-charm-tools.html
 [charm-helpers]:      ./tools-charm-helpers.html
 [charm-helper-docs]:  http://pythonhosted.org/charmhelpers/
@@ -206,6 +220,9 @@ Charm Store website, and are listed higher in search results on
 [bundletester]:       https://github.com/juju-solutions/bundletester
 [charm testing]:      ./developer-testing.html
 [interfaces]:         http://interfaces.juju.solutions/
-[charm-review]: ./charm-review-process.html
+[charm-promulgation]: ./charm-promulgation.html
 [reactive]: https://en.wikipedia.org/wiki/Reactive_programming
 [charmsreactive]: https://charmsreactive.readthedocs.io/
+[mailing-list-juju]: https://lists.ubuntu.com/mailman/listinfo/juju
+[mariadb]: https://jujucharms.com/mariadb
+
