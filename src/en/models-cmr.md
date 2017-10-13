@@ -1,9 +1,6 @@
 Title: Cross Model Relations
-TODO:  Critical: Put back and continue the example scenarios
 
 <!--
-
-Commands 'find-endpoints' and 'offer' are not yet available in commands.md.
 
 Introduced terms "shared model" and "consumer model".
 
@@ -12,10 +9,6 @@ How to determine a unit's interface (e.g. mysql:db)?
 Need to add links from other pages.
 
 Also 'show-endpoints' and 'offers' (admin sees more).
-
-Multi CMR controllers are now allowed it seems.
-
-See wallyworld
 
 -->
 
@@ -65,11 +58,9 @@ The commands related specifically to this subject are:
 See [Models][models] and [Managing relations][charms-relations] for beginner
 information on those topics.
 
-<!--
 This page presents the **concepts** behind cross model relations as well as
 two example **scenarios** that aim to reinforce those concepts through
 practical usage.
--->
 
 ## Concepts
 
@@ -82,18 +73,31 @@ The idea of an *offer* is key to understanding CMR. Nevertheless, it is quite
 easy to grasp. An offer is simply an application that is making itself
 available to a consumer application.
 
-An *endpoint* is at either end of the server:client connection. There is
-therefore what is known as a *provides* endpoint (for the service end) and a
-*requires* endpoint (for the client end). The latter can also be called a
+An *endpoint* is at either end of the server/client connection and is tacked
+on to qualify the offer:
+
+`offer_name:endpoint`
+
+An offer endpoint can be thought of as being analogous to an application
+endpoint. An offer also stems from an application endpoint. Here is how an
+offer is created:
+
+`juju offer <application>:<application endpoint>`
+
+<!--
+
+There is therefore what is known as a *provides* endpoint (for the service end)
+and a *requires* endpoint (for the client end). The latter can also be called a
 *target* endpoint.
 
-An offer consists of one (or more) endpoints for a given application and
-is expressed as a URL. It is of the form:
+-->
 
-`controller:user/model.offername`
+Although an offer may have multiple endpoints it is always expressed as a
+single URL:
 
-To be clear, even if an offer has multiple endpoints, it is identified by a
-single URL.
+`[<controller>:]<user>/<model.offer_name>`
+
+If the 'controller' portion is omitted the current controller is assumed.
 
 ### Managing offers
 
@@ -117,7 +121,7 @@ that offer to be suspended. If the consume access is granted anew, each relation
 will need to be individually resumed. Suspending and resuming relations are
 explained in more detail later.
 
-## Relating to offers
+### Relating to offers
 
 If a user has consume access to an offer, they can deploy an application in
 their model and establish a relation to the offer by way of its URL.
@@ -151,7 +155,7 @@ Offers which have been consumed show up in status under the SAAS block.
 
 -->
 
-## Relations and firewalls
+### Relations and firewalls
 
 The (intended) consumer application may be deployed behind a NAT firewall, such
 that traffic egresses through a different address/network to that on which the
@@ -170,7 +174,7 @@ cross model relations use those subnets without the need of the `--via` option.
 
 `juju model-config egress-subnets=<cidr subnet>`
 
-## Restricting ingress to the offering model
+### Restricting ingress to the offering model
 
 As we have seen, it's possible for a consuming application to ask for ingress
 via an arbitrary subnet. To allow control over what ingress can be applied to
@@ -211,50 +215,48 @@ juju-application-offer  103.37.0.0/16
     cutover applies is cloud specific.
 -->
 
-## Suspending and resuming relations
+### Suspending and resuming relations
 
-Individual relations to an offer may be temporarily suspended, causing the
-consuming application to no longer have access to the offer.
+A relation to an offer may be temporarily suspended, causing the consuming
+application to no longer have access to the offer:
 
-Relations are suspended by specifying (space separated) ids. Command
-`juju list-offers` will expose these relation ids.
+`juju suspend-relation <id1>`
 
-`juju suspend-relation <id1 [id2 ...]>`
+A suspended relation is resumed by an admin on the offering side:
 
-Suspended relations are resumed by an admin on the offering side:
+`juju resume-relation <id1>`
 
-`juju resume-relation <id1 [id2 ...]>`
+!!! Note:
+    Command `juju list-offers` lists the relation ids.
 
-## Removing relations
+### Removing relations
 
 To remove a relation entirely:
 
-`juju remove-relation <id1 [id2 ...]>`
+`juju remove-relation <id1>`
 
 Removing a relation on the offering side will trigger a removal on the
 consuming side. A relation can also be removed from the consuming side, as well
 as the application proxy, resulting in all relations being removed.
 
-<!--
-
 ## Example scenarios
 
 The following CMR scenarios will be examined:
 
-- [Scenario #1](./models-cmr-scene-1.html)  
+- [Scenario #1][scenario-1]  
   A MediaWiki deployment, based within the **same** controller, used by the
   **admin** user, but consumed by **multiple** models.
-- [Scenario #2](./models-cmr-scene-2.html)  
+- [Scenario #2][scenario-2]  
   A MediaWiki deployment, based within **multiple** controllers, used by a
   **non-admin** user, and consumed by a **single** model.
-
--->
 
 
 <!-- LINKS -->
 
 [models]: ./models.html
 [charms-relations]: ./charms-relations.html
+[scenario-1]: ./models-cmr-scene-1.html
+[scenario-2]: ./models-cmr-scene-2.html
 
 [commands-consume]: ./commands.html#consume
 [commands-find-offers]: ./commands.html#find-offers

@@ -2,6 +2,9 @@ Title: CMR scenario #2
 
 # CMR scenario #2
 
+This page refers to [Cross model relations][models-cmr]. See that page for
+background information.
+
 In this example, we *supply* a CMR infrastructure "out of the box" with a few
 nimble commands and then proceed to query, poke, analyse, and finally extend it
 by exploring multi-user functionality and firewall concerns.
@@ -168,7 +171,7 @@ ianaws  admin/default.mysql  admin   MySQL is a fast, stable and true multi-user
                                      The ma...                                                           
 ```
 
-For more details, including which users can access the offer, the the YAML
+For more details, including which users can access the offer, the YAML
 format.
 
 ```bash
@@ -222,7 +225,7 @@ ian    admin/default.mysql-admin   admin   mysql-root:db-admin, mysql:db
 ian    admin/default.postgresql    admin   pgsql:db
 ```
 
-As with the list-offers command, the YAMl output will show extra information,
+As with the list-offers command, the YAML output will show extra information,
 including users who can access the offer (if an admin makes the query).
 
 ```bash
@@ -285,9 +288,9 @@ juju relate mediawiki:db ian:admin/default.mysql --via 69.32.56.0/8
 The --via value is a comma separated list of subnets in CIDR notation. This
 includes the /32 case where a single NATed IP address is used for egress.
 
-It's also possible to set up egress subnets as a model config value so that all
-cross model relations use those subnets without needing to use the --via
-option.
+It's also possible to set up egress subnets as a model configuration value so
+that all cross model relations use those subnets without needing to use the
+`--via` option.
 
 ```bash
 juju model-config egress-subnets=69.32.56.0/8
@@ -345,3 +348,8 @@ A specific offer:
 ```bash
 juju offers mysql
 ```
+
+
+<!-- LINKS -->
+
+[models-cmr]: ./models-cmr.html

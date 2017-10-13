@@ -1,4 +1,5 @@
 Title: Managing relationships  
+TODO:  Critical: review required
 
 # Managing relationships
 
@@ -53,14 +54,21 @@ error: ambiguous relation: "mediawiki mysql" could refer to
   "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 ```
 
-The solution is to specify the nature of the relation using the
-relation interface identifier. In this case, we want MySQL to provide the 
-backend database for mediawiki ('db' relation), so this is what we need to 
-enter:
+The solution is to be explicit with the ambiguous *interface*, where the latter
+has a format of `<application>:<application endpoint>`. In this case, the
+*endpoint* is 'db' for both but only the mediawiki interface is ambiguous, so
+this is what we can do:
 
 ```bash
 juju add-relation mediawiki:db mysql
 ```
+
+!!! Note:
+    An application endpoint can be discovered by looking at the metadata of the
+    corresponding charm. This can be done by examining the charm on the
+    [Charm Store][charm-store] or by querying the Store with the
+    [Charm Tools][charm-tools] (using a command like
+    `charm show <application> charm-metadata`).
 
 We can check the output from `juju status` to make sure the correct relationship
 has been established:
@@ -116,3 +124,5 @@ Relations can also work across models, even across multiple controllers. See
 <!-- LINKS -->
 
 [models-cmr]: ./models-cmr.html
+[charm-tools]: ./tools-charm-tools.html
+[charm-store]:  https://jujucharms.com
