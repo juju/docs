@@ -58,7 +58,7 @@ Alternatively, you can manually install Juju from the following archive:
 ### Windows
 
 A Windows installer is available for Juju and can be found here:
-: [juju-setup-2.2.4.exe](https://launchpad.net/juju/2.2/2.2.4/+download/juju-setup-2.2.4.exe)([md5](https://launchpad.net/juju/2.2/2.2.4/+download/juju-setup-2.2.4.exe/+md5))
+: [juju-setup-2.2.4-signed.exe](https://launchpad.net/juju/2.2/2.2.4/+download/juju-setup-2.2.4-signed.exe)([md5](https://launchpad.net/juju/2.2/2.2.4/+download/juju-setup-2.2.4-signed.exe/+md5))
 {: .instruction }
 
 ### Centos and other Linuxes
