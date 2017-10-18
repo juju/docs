@@ -41,12 +41,14 @@ Here we'll apply it to the model 'cmr-model-1' in the 'lxd-cmr-1' controller:
 juju status -m lxd-cmr-1:cmr-model-1
 ```
 
+Output:
+
 ```no-highlight
 Model        Controller  Cloud/Region         Version      SLA
 cmr-model-1  lxd-cmr-1   localhost/localhost  2.3-beta2.1  unsupported
 
 App    Version  Status  Scale  Charm  Store       Rev  OS      Notes
-mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu  
+mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
 mysql/0*  active    idle   0        10.87.144.223   3306/tcp  Ready
@@ -78,6 +80,8 @@ The 'summary' format provides information very similar to that gained via the
 juju list-offers --format summary
 ```
 
+Output:
+
 ```no-highlight
 Offer  Application  Charm        Connected  Store      URL                      Endpoint  Interface  Role
 mysql  mysql        cs:mysql-58  1/1        lxd-cmr-1  admin/cmr-model-1.mysql  db        mysql      provider
@@ -90,6 +94,8 @@ required to allow traffic from the consuming model:
 ```bash
 juju list-offers -m lxd-cmr-1:cmr-model-1 --format yaml
 ```
+
+Output:
 
 ```no-highlight
 mysql:
@@ -126,17 +132,20 @@ offer from the consuming model:
 juju list-offers -m lxd-cmr-1:cmr-model-1
 ```
 
+Output:
+
 ```no-highlight
 Offer  User   Relation id  Status  Endpoint  Interface  Role      Ingress subnets
 mysql  admin  1            joined  db        mysql      provider  10.87.144.189/32
 ```
 
 !!! Note:
-This command can also filter what offers are included in the result. Note that,
-for brevity, the scenario model is not specified in the below examples.
+    This command can also filter what offers are included in the result. Note
+    that, for brevity, the scenario model is not specified in the below
+    examples.
 
 To list all offers for a given application:
- 
+
 ```bash
 juju list-offers --application mysql
 ```
@@ -156,7 +165,7 @@ juju list-offers --connected-user <user name>
 To list all offers for a given user who can consume the offer:
 
 ```bash
-juju list-offers --format summary --allowed-consumer <user name> 
+juju list-offers --format summary --allowed-consumer <user name>
 ```
 
 The above command is best run with '--format summary' as the intent is to see,
@@ -177,12 +186,14 @@ The `juju show-offer` command gives details about a specific offer:
 juju show-offer lxd-cmr-1:admin/cmr-model-1.mysql
 ```
 
+Output:
+
 ```no-highlight
 Store      URL                      Access  Description                                    Endpoint  Interface  Role
 lxd-cmr-1  admin/cmr-model-1.mysql  admin   MySQL is a fast, stable and true multi-user,   db        mysql      provider
-                                            multi-threaded SQL database server. SQL                             
-                                            (Structured Query Language) is the most                             
-                                            popular database query language in the world.                       
+                                            multi-threaded SQL database server. SQL
+                                            (Structured Query Language) is the most
+                                            popular database query language in the world.
                                             The ma...
 ```
 
@@ -191,11 +202,7 @@ portion (`lxd-cmr-1`) can be omitted if the current controller contains the
 offer.
 
 For more details, including which users can access the offer, use the 'yaml'
-format:
-
-```bash
-juju show-offer lxd-cmr-1:admin/cmr-model-1.mysql --format yaml
-```
+format.
 
 A non-admin user with read/consume access can also view an offer's details, but
 they won't see user ACL information.
@@ -207,33 +214,36 @@ Offers can be searched based on various criteria:
  - URL (or part thereof)
  - offer name
  - model name
- - interface
+ - interface name
 
-The results will show information about the offer, including the access level
-the user making the query has on each offer.
+The results will show information about the offer, including the ACL
+permissions (of the user making the query).
 
-To find all offers on a specified controller:
-
-```bash
-juju find-offers ian:
-```
-
-```no-highlight
-Store  URL                         Access  Interfaces
-ian    admin/default.hosted-mysql  admin   mysql:db
-ian    admin/default.mysql-admin   admin   mysql-root:db-admin, mysql:db
-ian    admin/default.postgresql    admin   pgsql:db
-```
-
-As with the list-offers command, the YAML output will show extra information,
-including users who can access the offer (if an admin makes the query).
+To find all offers on controller `lxd-cmr-1`:
 
 ```bash
-juju find-offers --offer hosted-mysql --format yaml
+juju find-offers lxd-cmr-1:
 ```
 
+Output:
+
 ```no-highlight
-ian:admin/default.hosted-mysql:
+Store      URL                      Access  Interfaces
+lxd-cmr-1  admin/cmr-model-1.mysql  admin   mysql:db
+```
+
+The 'yaml' format will display extra information, including users who can
+access the offer (if an admin is making the query). Below we show this, in
+addition to searching by offer name:
+
+```bash
+juju find-offers lxd-cmr-1: --offer mysql --format yaml
+```
+
+Output:
+
+```no-highlight
+lxd-cmr-1:admin/cmr-model-1.mysql:
   access: admin
   endpoints:
     db:
@@ -247,45 +257,28 @@ ian:admin/default.hosted-mysql:
       access: read
 ```
 
-To find offers in a specified model:
+To find offers in model `cmr-model-1` on controller `lxd-cmr-1`:
 
 ```bash
-juju find-offers admin/default
-juju find-offers ian:admin/default
-```
-
-To find offers with a specified interface on the current controller:
-
-```bash
-juju find-offers --interface mysql
-```
-
-To find offers with a specified interface on a specific controller:
-
-```bash
-juju find-offers --interface mysql ian:
-```
-
-To find offers with "sql" in the name:
-
-```bash
-juju find-offers --offer sql ian:
+juju find-offers lxd-cmr-1:admin/cmr-model-1
 ```
 
 ## Relating to offers from behind a firewall
 
-Sometimes, the consuming application is deployed behind a firewall where NAT is
-used, such that traffic egresses via a different address/network to that on
-which the consuming application is hosted.
+When the consuming model is behind a NAT firewall its traffic will typically
+exit (egress) that firewall with a modified address/network. In this case, the
+`--via` option can be used with the `juju relate` command to ensure that the
+traffic can return successfully to the consuming application. This option
+provides the offering model the information it needs to create the necessary
+firewall rules.
 
-In this case, the relate --via option is used to inform the offering side so
-that the correct firewall rules can be set up.
+For example,
 
 ```bash
 juju relate mediawiki:db ian:admin/default.mysql --via 69.32.56.0/8
 ```
 
-The --via value is a comma separated list of subnets in CIDR notation. This
+The `--via` value is a comma separated list of subnets in CIDR notation. This
 includes the /32 case where a single NATed IP address is used for egress.
 
 It's also possible to set up egress subnets as a model configuration value so
@@ -336,7 +329,7 @@ juju offers --connected-user fred
 All offers for a given user who can consume the offer:
 
 ```bash
-juju offers --format summary --allowed-consumer mary 
+juju offers --format summary --allowed-consumer mary
 ```
 
 The above command is best run with --format summary as the intent is to see,
