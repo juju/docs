@@ -34,6 +34,9 @@ juju add-model cmr-model
 juju deploy mysql --constraints "cores=4 mem=16G root-disk=1T"
 ```
 
+!!! Note:
+    The created model is optional. The 'default' model could have been used.
+
 The output to `juju status` will eventually look similar to:
 
 ```no-highlight
@@ -184,11 +187,8 @@ Relation provider  Requirer      Interface  Type     Message
 mysql:db           mediawiki:db  mysql      regular
 ```
 
-As expected, this is very similar to the output we saw with model
-'wordpress-model'.
-
-The new output for model 'cmr-model' is also not surprising. There are now two
-connections to the original offer:
+The new `juju status` output for model 'cmr-model' is not surprising. There are
+now *two* connections to the original offer:
 
 ```no-highlight
 .
@@ -196,6 +196,16 @@ connections to the original offer:
 .
 Offer  Application  Charm  Rev  Connected  Endpoint  Interface  Role
 mysql  mysql        mysql  58   2/2        db        mysql      provider
+```
+
+```bash
+juju offers -m cmr-model
+```
+
+```no-highlight
+Offer  User   Relation id  Status  Endpoint  Interface  Role      Ingress subnets
+mysql  admin  1            joined  db        mysql      provider  54.198.91.120/32
+       admin  2            joined  db        mysql      provider  54.80.49.62/32
 ```
 
 ## Verification

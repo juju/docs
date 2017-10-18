@@ -1,4 +1,5 @@
 Title: CMR scenario #2
+TODO:  Update 'juju status' output to show release versions
 
 # CMR scenario #2
 
@@ -17,87 +18,99 @@ controllers, used by a non-admin user, and consumed by a single model.
 The infrastructure is built in this way:
 
 ```bash
-juju bootstrap localhost ctrl1
+juju bootstrap localhost lxd-cmr-1
+juju add-model cmr-model-1
 juju deploy mysql
 juju offer mysql:db
-juju bootstrap localhost ctrl2
+juju bootstrap localhost lxd-cmr-2
+juju add-model cmr-model-2
 juju deploy mediawiki
-juju relate mediawiki:db ctrl1:admin/default.mysql
+juju relate mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql
 ```
 
-### Viewing offers summary
+!!! Note:
+    The created models are optional. The 'default' model in each controller
+    could have been used.
 
-Offer summary information shows up in status.
+## juju status
+
+The `juju status` command provides a summary of what offers have been made.
+Here we'll apply it to the model 'cmr-model-1' in the 'lxd-cmr-1' controller:
 
 ```bash
-juju status
+juju status -m lxd-cmr-1:cmr-model-1
 ```
 
 ```no-highlight
-Model    Controller  Cloud/Region   Version       SLA
-default  ianaws      aws/us-east-1  2.3-alpha1.1  unsupported
+Model        Controller  Cloud/Region         Version      SLA
+cmr-model-1  lxd-cmr-1   localhost/localhost  2.3-beta2.1  unsupported
 
 App    Version  Status  Scale  Charm  Store       Rev  OS      Notes
-mysql  5.5.57   active      1  mysql  jujucharms   57  ubuntu  
+mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu  
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
-mysql/1*  active    idle   1        54.237.63.211   3306/tcp  Ready
+mysql/0*  active    idle   0        10.87.144.223   3306/tcp  Ready
 
-Machine  State    DNS            Inst id              Series  AZ Message
-1        started  54.237.63.211  i-0e819d97de8943e38  trusty  us-east-1b running
+Machine  State    DNS            Inst id        Series  AZ  Message
+0        started  10.87.144.223  juju-22a641-0  xenial      Running
 
 Offer  Application  Charm  Rev  Connected  Endpoint  Interface  Role
-mysql  mysql        mysql  57   1/1        db        mysql      provider
+mysql  mysql        mysql  58   1/1        db        mysql      provider
 
 Relation provider  Requirer       Interface  Type  Message
-mysql:cluster      mysql:cluster  mysql-ha   peer  
+mysql:cluster      mysql:cluster  mysql-ha   peer
 ```
 
-The connected counts show the number of active connections to the offer and the
-total number of connections including those suspended.
+In the 'Offer' section, the 'Connected' column shows the number of active
+connections to the offer and the total number of connections/relations
+(including those suspended).
 
-### Viewing offers and any connections
+## juju list-offers
 
-There's also a list-offers command. The summary format shows the same
-information as in status.
+The `juju list-offers` command (alias `juju offers`) shows similar information.
+However, it also allows for several formats, each of which displays different
+kinds of information.
+
+The 'summary' format provides information very similar to that gained via the
+`juju status` command (it adds the offer URL):
 
 ```bash
-juju offers --format summary
+juju list-offers --format summary
 ```
 
 ```no-highlight
-Offer  Application  Charm        Connected  Store   URL 		 Endpoint  Interface  Role
-mysql  mysql        cs:mysql-57  1/1        ianaws  admin/default.mysql  db  	   mysql      provider
+Offer  Application  Charm        Connected  Store      URL                      Endpoint  Interface  Role
+mysql  mysql        cs:mysql-58  1/1        lxd-cmr-1  admin/cmr-model-1.mysql  db        mysql      provider
 ```
 
-The YAML format shows additional information, such as who is allowed to access
-the offer (see managing offer access) and what ingress subnets are required to
-allow traffic from the consuming model.
+The 'yaml' format shows additional information, such as who is allowed to
+access the offer (see managing offer access) and what ingress subnets are
+required to allow traffic from the consuming model:
 
 ```bash
-juju offers --format yaml
+juju list-offers -m lxd-cmr-1:cmr-model-1 --format yaml
 ```
 
 ```no-highlight
 mysql:
   application: mysql
-  store: ianaws
-  charm: cs:mysql-57
-  offer-url: admin/default.mysql
+  store: lxd-cmr-1
+  charm: cs:mysql-58
+  offer-url: admin/cmr-model-1.mysql
   endpoints:
     db:
       interface: mysql
       role: provider
   connections:
-  - source-model-uuid: b9d3db4c-49c9-4802-8269-a9b03216fc34
+  - source-model-uuid: e0aaf3d9-0547-4ec3-8106-75615e48a419
     username: admin
-    relation-id: 2
+    relation-id: 1
     endpoint: db
     status:
       current: joined
-      since: 1 hour ago
+      since: 4 hours ago
     ingress-subnets:
-    - 69.193.151.51/32
+    - 10.87.144.189/32
   users:
     admin:
       display-name: admin
@@ -106,111 +119,98 @@ mysql:
       access: read
 ```
 
-The tabular format (the default) shows each relation (connection) to the offer
-from a consuming model.
+The 'tabular' format (the default) shows each relation (connection) to the
+offer from the consuming model:
 
 ```bash
-juju offers
+juju list-offers -m lxd-cmr-1:cmr-model-1
 ```
 
 ```no-highlight
 Offer  User   Relation id  Status  Endpoint  Interface  Role      Ingress subnets
-mysql  admin  2            joined  db        mysql      provider  69.193.151.51/32
+mysql  admin  1            joined  db        mysql      provider  10.87.144.189/32
 ```
 
-The list offers command can filter the offers included in the result.
+!!! Note:
+This command can also filter what offers are included in the result. Note that,
+for brevity, the scenario model is not specified in the below examples.
 
-All offers for a given application:
+To list all offers for a given application:
+ 
+```bash
+juju list-offers --application mysql
+```
+
+To list all offers for a given interface:
 
 ```bash
-juju offers --application mysql
+juju list-offers --interface mysql
 ```
 
-All offers for a given interface:
+To list all offers for a given user who has created a relation to the offer:
 
 ```bash
-juju offers --interface mysql
+juju list-offers --connected-user <user name>
 ```
 
-All offers for a given user who has related to the offer:
+To list all offers for a given user who can consume the offer:
 
 ```bash
-juju offers --connected-user fred
+juju list-offers --format summary --allowed-consumer <user name> 
 ```
 
-All offers for a given user who can consume the offer:
-
-```bash
-juju offers --format summary --allowed-consumer mary 
-```
-
-The above command is best run with --format summary as the intent is to see,
+The above command is best run with '--format summary' as the intent is to see,
 for a given user, what offers they might relate to, regardless of whether there
 are existing relations (which is what the tabular view shows).
 
-A specific offer:
+To list a specific offer:
 
 ```bash
-juju offers mysql
+juju list-offers mysql
 ```
 
-### Viewing offers details
+## juju show-offer
 
-The show-offer command gives details about a given offer.
+The `juju show-offer` command gives details about a specific offer:
 
 ```bash
-juju show-offer default.mysql
+juju show-offer lxd-cmr-1:admin/cmr-model-1.mysql
 ```
 
 ```no-highlight
-Store   URL                  Access  Description 				   Endpoint  Interface  Role
-ianaws  admin/default.mysql  admin   MySQL is a fast, stable and true multi-user,  db        mysql      provider
-                                     multi-threaded SQL database server. SQL                             
-                                     (Structured Query Language) is the most                             
-                                     popular database query language in the world.                       
-                                     The ma...                                                           
+Store      URL                      Access  Description                                    Endpoint  Interface  Role
+lxd-cmr-1  admin/cmr-model-1.mysql  admin   MySQL is a fast, stable and true multi-user,   db        mysql      provider
+                                            multi-threaded SQL database server. SQL                             
+                                            (Structured Query Language) is the most                             
+                                            popular database query language in the world.                       
+                                            The ma...
 ```
 
-For more details, including which users can access the offer, the YAML
-format.
+Notice how this command takes the offer URL as the argument. The controller
+portion (`lxd-cmr-1`) can be omitted if the current controller contains the
+offer.
+
+For more details, including which users can access the offer, use the 'yaml'
+format:
 
 ```bash
-juju show-offer default.mysql --format yaml
-```
-
-```no-highlight
-ianaws:admin/default.mysql:
-  description: |
-    MySQL is a fast, stable and true multi-user, multi-threaded SQL database
-    server. SQL (Structured Query Language) is the most popular database query
-    language in the world. The main goals of MySQL are speed, robustness and
-    ease of use.
-  access: admin
-  endpoints:
-    db:
-      interface: mysql
-      role: provider
-  users:
-    admin:
-      display-name: admin
-      access: admin
-    everyone@external:
-      access: read
+juju show-offer lxd-cmr-1:admin/cmr-model-1.mysql --format yaml
 ```
 
 A non-admin user with read/consume access can also view an offer's details, but
-they won't see the information for users with access.
+they won't see user ACL information.
 
-## Finding offers to use
+## juju find-offers
 
 Offers can be searched based on various criteria:
-URL (or part thereof)
-offer name
-model name
-interface
 
-The results will show information about the offer, including the level of
-access the user making the query has on each offer.
+ - URL (or part thereof)
+ - offer name
+ - model name
+ - interface
+
+The results will show information about the offer, including the access level
+the user making the query has on each offer.
 
 To find all offers on a specified controller:
 
@@ -272,7 +272,7 @@ To find offers with "sql" in the name:
 juju find-offers --offer sql ian:
 ```
 
-### Relating to offers from behind a firewall
+## Relating to offers from behind a firewall
 
 Sometimes, the consuming application is deployed behind a firewall where NAT is
 used, such that traffic egresses via a different address/network to that on
