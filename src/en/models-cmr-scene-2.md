@@ -275,71 +275,18 @@ firewall rules.
 For example,
 
 ```bash
-juju relate mediawiki:db ian:admin/default.mysql --via 69.32.56.0/8
+juju relate mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql --via 69.32.56.0/8
 ```
 
 The `--via` value is a comma separated list of subnets in CIDR notation. This
 includes the /32 case where a single NATed IP address is used for egress.
 
 It's also possible to set up egress subnets as a model configuration value so
-that all cross model relations use those subnets without needing to use the
+that all cross model relations use those subnets without the need of the
 `--via` option.
 
 ```bash
 juju model-config egress-subnets=69.32.56.0/8
-```
-
-## Inspecting relations to an offer
-
-The offers command is used to see all connections to one more offers.
-
-```bash
-juju offers mysql
-```
-
-```no-highlight
-Offer  User   Relation id  Status  Endpoint  Interface  Role      Ingress subnets
-mysql  admin  2            joined  db        mysql      provider  69.193.151.51/32
-```
-
-The (default) tabular view shows the connected user and ingress subnets in user
-with that connection. Use the YAML output to see extra detail such as the UUID
-of the consuming model.
-
-The list offers command can filter the offers included in the result.
-
-All offers for a given application:
-
-```bash
-juju offers --application mysql
-```
-
-All offers for a given interface:
-
-```bash
-juju offers --interface mysql
-```
-
-All offers for a given user who has related to the offer:
-
-```bash
-juju offers --connected-user fred
-```
-
-All offers for a given user who can consume the offer:
-
-```bash
-juju offers --format summary --allowed-consumer mary
-```
-
-The above command is best run with --format summary as the intent is to see,
-for a given user, what offers they might relate to, regardless of whether there
-are existing relations (which is what the tabular view shows).
-
-A specific offer:
-
-```bash
-juju offers mysql
 ```
 
 
