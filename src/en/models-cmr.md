@@ -6,6 +6,9 @@ Introduced terms "shared model" and "consumer model".
 
 Need to add links from other pages.
 
+Mention as use case models based in different clouds. Consider another scenario
+like this.
+
 -->
 
 # Cross Model Relations
@@ -22,7 +25,7 @@ tasks such as service monitoring, block storage, and database backends.
 The commands related specifically to this subject are:
 
 [`consume`][commands-consume]
-: Adds a remote offer to a model.
+: Adds a remote offer to a model without relating to it.
 
 [`find-offers`][commands-find-offers]
 : Finds offered application endpoints.
@@ -63,22 +66,26 @@ practical usage.
 In this section command syntax may be simplified to keep complexity to a
 minimum. See the above CLI help text for full syntax and more examples.
 
-### Offers and endpoints
+### Terminology
 
-The idea of an *offer* is key to understanding CMR. Nevertheless, it is quite
-easy to grasp. An offer is simply an application that is making itself
-available to a consumer application.
+An *offer* is an application that an administrator makes available to
+applications residing in remote models. The model in which the offer resides is
+known as the *offering* model.
 
-An *endpoint* is at either end of the server/client connection and is tacked
-on to qualify the offer:
+The application (and model) that utilizes the offer is called the *consuming*
+application (and model).
 
-`offer_name:endpoint`
+Like traditional Juju applications,
 
-An offer endpoint can be thought of as being analogous to an application
-endpoint. An offer also stems from an application endpoint. Here is how an
-offer is created:
+ - an offer has one or more *endpoints* that denote the features available for
+   that offer.
+ - a fully-qualified offer endpoint includes the associated offer name:
 
-`juju offer <application>:<application endpoint>`
+    `<offer name>:<offer endpoint>`
+
+ - a reference to an offer endpoint will often omit the 'offer name' if the
+   context presupposes it.
+ - an endpoint has an *interface* that satisfies a particular protocol.
 
 <!--
 
@@ -88,8 +95,14 @@ and a *requires* endpoint (for the client end). The latter can also be called a
 
 -->
 
-Although an offer may have multiple endpoints it is always expressed as a
-single URL:
+### Creating offers
+
+An offer stems from an application endpoint. This is how an offer is created:
+
+`juju offer <application>:<application endpoint>`
+
+Although an offer may have multiple (offer) endpoints it is always expressed as
+a single URL:
 
 `[<controller>:]<user>/<model.offer_name>`
 
@@ -113,9 +126,9 @@ These are applied similarly to how standard model access is applied, via the
 `juju grant|revoke <user> <access level> <offer url>`
 
 Revoking a user's consume access will result in all relations for that user to
-that offer to be suspended. If the consume access is granted anew, each relation
-will need to be individually resumed. Suspending and resuming relations are
-explained in more detail later.
+that offer to be suspended. If the consume access is granted anew, each
+relation will need to be individually resumed. Suspending and resuming
+relations are explained in more detail later.
 
 ### Relating to offers
 
@@ -124,10 +137,12 @@ their model and establish a relation to the offer by way of its URL.
 The controller part of the URL is optional if the other model resides in
 the same controller.
 
-`juju relate <application> <offer url>`
+`juju relate <application>[:<application endpoint>] <offer url>[:<offer endpoint>]`
 
-Specifying endpoints for the application and the offer is analogous to normal
-relations. They can be added but are often unnecessary.
+Specifying the endpoint for the application and the offer is analogous to
+normal relations. They can be added but are often unnecessary:
+
+`juju relate <application> <offer url>`
 
 When an offer is related to, a proxy application is made in the consuming
 model, named after the offer.
@@ -136,26 +151,21 @@ Note that the relations block in status shows any relevant status information
 about the relation to the offer in the Message field. This includes any error
 information due to rejected ingress, or if the relation is suspended etc.
 
-<!--
+An offer can be consumed without relating to it. This workflow sets up the
+proxy application in the consuming model and creates a user-defined alias for
+the offer. This latter is what's used to relate to. Having an offer alias can
+avoid a namespsce conflict with a pre-existing application.
 
-It's possible to consume an offer without relating to it. This creates the
-proxy application in the consuming model, which can then be related to
-afterwards. Doing it this way enables an alias to be used for the offer, if
-there's a need to avoid conflicts with an existing application already deployed
-to the consuming model.
+`juju consume <offer url> <offer alias>`
+`juju relate <application> <offer alias>`
 
-juju consume admin/default.mysql mysql-alias
-juju relate mediawiki:db mysql-alias
-
-Offers which have been consumed show up in status under the SAAS block.
-
--->
+Offers which have been consumed show up in `juju status` in the SAAS section.
 
 ### Relations and firewalls
 
 The (intended) consumer application may be deployed behind a NAT firewall, such
-that traffic egresses through a different address/network to that on which the
-consuming application is hosted.
+that traffic exits (egresses) its network with a different address/network
+assigned.
 
 In this case, the relate `--via` option is used to inform the offering side so
 that the correct firewall rules can be set up.
@@ -165,28 +175,27 @@ that the correct firewall rules can be set up.
 The `--via` value is a comma separated list of subnets in CIDR notation. This
 includes the /32 case where a single NATed IP address is used for egress.
 
-It's possible to set up egress subnets as a model config value so that all
-cross model relations use those subnets without the need of the `--via` option.
+It's possible to set up egress subnets as a model configuration value so that
+all cross model relations use those subnets without the need of the `--via`
+option.
 
 `juju model-config egress-subnets=<cidr subnet>`
 
-### Restricting ingress to the offering model
+The above command is applied to the **consuming** model.
 
-As we have seen, it's possible for a consuming application to ask for ingress
-via an arbitrary subnet. To allow control over what ingress can be applied to
-the offering model, an administrator can set up allowed ingress subnets by
-creating a firewall rule.
+However, an administrator can control what incoming traffic (ingress) is
+allowed to contact the offering model by whitelisting subnets:
 
 `juju set-firewall-rule juju-application-offer --whitelist <cidr subnet>`
 
-Where 'juju-application-offer' denotes the firewall rule to apply to any offer
-in the current model. If a consumer attempts to create a relation with
-requested ingress outside the bounds of the whitelist subnet, the relation will
-fail.
+Where 'juju-application-offer' is a well-known string that denotes the firewall
+rule to apply to any offer in the current model.
 
-If the firewall rule is changed, it does not (currently) affect existing
-relations. Only new relations will be rejected if the changed firewall rules
-preclude the requested ingress.
+The above command is applied to the **offering** model.
+
+!!! Important:
+    The `juju set-firewall-rule` command only affects subsequently created
+    relations, not existing ones.
 
 <!--
 To see what ingress is currently in use by relations to an offer, use the
