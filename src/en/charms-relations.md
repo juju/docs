@@ -55,13 +55,13 @@ error: ambiguous relation: "mediawiki mysql" could refer to
 ```
 
 The solution is to be explicit when referring to an *endpoint*, where the
-latter has a format of `<application>:<application endpoint>`. In this case,
-the application endpoint is 'db' for both applications but because only the
-mediawiki endpoint is ambiguous (according to the error message), it is not
-necessary to mention the mysql endpoint:
+latter has a format of `<application>:<application endpoint>`. In this case, it
+is 'db' for both applications. However, it is not necessary to specify the
+mysql endpoint because only the mediawiki endpoint is ambiguous (according to
+the error message). Therefore, the command becomes:
 
 ```bash
-juju add-relation mediawiki:db mysql
+juju add-relation mysql mediawiki:db
 ```
 
 !!! Note:
