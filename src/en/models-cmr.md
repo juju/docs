@@ -1,13 +1,9 @@
 Title: Cross Model Relations
+TODO:  Consider adding scenario #3: different cloud types
 
 <!--
 
-Introduced terms "shared model" and "consumer model".
-
 Need to add links from other pages.
-
-Mention as use case models based in different clouds. Consider another scenario
-like this.
 
 -->
 
@@ -20,7 +16,8 @@ clouds.
 
 CMR addresses the case where one may wish to centralize services within one
 model and share them with disparate models. One can imagine models dedicated to
-tasks such as service monitoring, block storage, and database backends.
+tasks such as service monitoring, block storage, and database backends. Another
+use case would be when you are simply using different cloud types.
 
 The commands related specifically to this subject are:
 
@@ -163,28 +160,22 @@ Offers which have been consumed show up in `juju status` in the SAAS section.
 
 ### Relations and firewalls
 
-The (intended) consumer application may be deployed behind a NAT firewall, such
-that traffic exits (egresses) its network with a different address/network
-assigned.
-
-In this case, the relate `--via` option is used to inform the offering side so
-that the correct firewall rules can be set up.
+When the consuming model is behind a NAT firewall its traffic will typically
+exit (egress) that firewall with a modified address/network. In this case, the
+`--via` option can be used with the `juju relate` command to request the
+firewall on the offering side to allow this traffic. This option specifies the
+NATed address (or network) in CIDR notation:
 
 `juju relate <application> <offer url> --via <cidr subnet>`
 
-The `--via` value is a comma separated list of subnets in CIDR notation. This
-includes the /32 case where a single NATed IP address is used for egress.
-
-It's possible to set up egress subnets as a model configuration value so that
-all cross model relations use those subnets without the need of the `--via`
-option.
+It's possible to set this up in advance at the model level in this way:
 
 `juju model-config egress-subnets=<cidr subnet>`
 
-The above command is applied to the **consuming** model.
+To be clear, the above command is applied to the **consuming** model.
 
-However, an administrator can control what incoming traffic (ingress) is
-allowed to contact the offering model by whitelisting subnets:
+However, an administrator can control what incoming traffic is allowed to
+contact the offering model by whitelisting subnets:
 
 `juju set-firewall-rule juju-application-offer --whitelist <cidr subnet>`
 

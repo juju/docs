@@ -88,8 +88,8 @@ mysql  mysql        cs:mysql-58  1/1        lxd-cmr-1  admin/cmr-model-1.mysql  
 ```
 
 The 'yaml' format shows additional information, such as who is allowed to
-access the offer (see managing offer access) and what ingress subnets are
-required to allow traffic from the consuming model:
+access the offer and what ingress subnets are required to allow traffic from
+the consuming model:
 
 ```bash
 juju list-offers -m lxd-cmr-1:cmr-model-1 --format yaml
@@ -265,28 +265,13 @@ juju find-offers lxd-cmr-1:admin/cmr-model-1
 
 ## Relating to offers from behind a firewall
 
-When the consuming model is behind a NAT firewall its traffic will typically
-exit (egress) that firewall with a modified address/network. In this case, the
-`--via` option can be used with the `juju relate` command to ensure that the
-traffic can return successfully to the consuming application. This option
-provides the offering model the information it needs to create the necessary
-firewall rules.
+Let the consuming model in this scenario be protected by a firewall that NATs
+all outgoing traffic to the single IPv4 address of 69.32.56.10/32.
 
-For example,
+Now request to the offering side to allow this address to contact the offer:
 
 ```bash
-juju relate mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql --via 69.32.56.0/8
-```
-
-The `--via` value is a comma separated list of subnets in CIDR notation. This
-includes the /32 case where a single NATed IP address is used for egress.
-
-It's also possible to set up egress subnets as a model configuration value so
-that all cross model relations use those subnets without the need of the
-`--via` option.
-
-```bash
-juju model-config egress-subnets=69.32.56.0/8
+juju relate mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql --via 69.32.56.10/32
 ```
 
 
