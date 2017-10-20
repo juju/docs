@@ -1,5 +1,6 @@
 Title: Cross Model Relations
-TODO:  Consider adding scenario #3: different cloud types
+TODO:  Add scenario #3: different cloud types
+       Add commands to a scenario: grant|revoke, suspend|resume
 
 <!--
 

@@ -274,6 +274,15 @@ Now request to the offering side to allow this address to contact the offer:
 juju relate mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql --via 69.32.56.10/32
 ```
 
+This will work providing the offering side did not previously set up a
+whitelist of addresses (or subnets) that *does not* include the above address.
+That is, it *will* work out if this had been done:
+
+```bash
+juju set-firewall-rule juju-application-offer --whitelist 69.32.56.10/8
+```
+
+
 
 <!-- LINKS -->
 
