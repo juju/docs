@@ -34,7 +34,7 @@ will ensure that any new units deployed will now use the requested series.
 
     juju update-series <machine> <series>
 
-will inform the charms already deployed to the machine that the OS series has been changed and they should re-configure accordingly. This requires charm support and for the underlying OS to be upgraded manually beforehand. 
+will inform the charms already deployed to the machine that the OS series has been changed and they should re-configure accordingly. This requires charm support and for the underlying OS to be upgraded manually beforehand.
 
 For more detail, see the documentation https://jujucharms.com/docs/devel/howto-updateseries
 
@@ -53,7 +53,7 @@ Juju storage is now supported by the LXD local cloud. The available storage opti
 - btrfs
 - zfs
 
-For more detail, see the documentation https://jujucharms.com/docs/devel/charms-storage#lxd-(lxd) 
+For more detail, see the documentation https://jujucharms.com/docs/devel/charms-storage#lxd-(lxd)
 
 ### Persistent storage management
 
@@ -88,7 +88,7 @@ https://bugs.launchpad.net/juju/+bug/1667213
 
 The best way to get your hands on this release of Juju is to install it as a snap package (see https://snapcraft.io/ for more info on snaps).
 
-         snap install juju --beta --classic 
+         snap install juju --beta --classic
 
 Other packages are available for a variety of platforms. Please see the online documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew, you should see an upgrade available.
 
@@ -96,7 +96,7 @@ Other packages are available for a variety of platforms. Please see the online d
 ## Feedback Appreciated!
 
 We encourage everyone to let us know how you're using Juju. Send us a
-message on Twitter using #jujucharms, join us at #juju on freenode, and 
+message on Twitter using #jujucharms, join us at #juju on freenode, and
 subscribe to the mailing list at juju@lists.ubuntu.com.
 
 
@@ -104,6 +104,32 @@ subscribe to the mailing list at juju@lists.ubuntu.com.
 
 To learn more about juju please visit https://jujucharms.com.
 
+
+^# Juju 2.2.5
+
+  ## New and Improved
+
+  - This release is a bug fix release which addresses some issues that missed
+    the cutoff for previous 2.2.4 release or were discovered in 2.2.4.
+
+  For a list of all bugs fixed in this release, see:
+  https://launchpad.net/juju/+milestone/2.2.5
+
+
+  ## How can I get it?
+
+  The best way to get your hands on this release of Juju is to install it as
+  a snap package (see https://snapcraft.io for more info on snaps).
+
+         snap install juju --classic
+
+  Other packages are available for a variety of platforms. Please see the online
+  documentation at https://jujucharms.com/docs/stable/reference-install Those
+  subscribed to a snap channel should be automatically upgraded. If you’re using
+  the ppa/homebrew, you should see an upgrade available.
+
+  For highlights of this release, please see the documentation at
+  https://jujucharms.com/docs/2.2/whats-new
 
 ^# Juju 2.2.4
 
