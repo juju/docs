@@ -54,10 +54,11 @@ error: ambiguous relation: "mediawiki mysql" could refer to
   "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 ```
 
-The solution is to be explicit with the ambiguous *endpoint*, where the latter
-has a format of `<application>:<application endpoint>`. In this case, the
-application endpoint is 'db' for both but only the mediawiki interface is ambiguous, so
-this is what we can do:
+The solution is to be explicit when referring to an *endpoint*, where the
+latter has a format of `<application>:<application endpoint>`. In this case,
+the application endpoint is 'db' for both applications but because only the
+mediawiki endpoint is ambiguous (according to the error message), it is not
+necessary to mention the mysql endpoint:
 
 ```bash
 juju add-relation mediawiki:db mysql
