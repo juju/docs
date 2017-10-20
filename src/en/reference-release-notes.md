@@ -8,6 +8,33 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
+
+^# Juju 2.2.5
+
+  ## New and Improved
+
+  - This release is a bug fix release which addresses some issues that missed
+    the cutoff for previous 2.2.4 release or were discovered in 2.2.4.
+
+  For a list of all bugs fixed in this release, see:
+  https://launchpad.net/juju/+milestone/2.2.5
+
+
+  ## How can I get it?
+
+  The best way to get your hands on this release of Juju is to install it as
+  a snap package (see https://snapcraft.io for more info on snaps).
+
+         snap install juju --classic
+
+  Other packages are available for a variety of platforms. Please see the online
+  documentation at https://jujucharms.com/docs/stable/reference-install Those
+  subscribed to a snap channel should be automatically upgraded. If you’re using
+  the ppa/homebrew, you should see an upgrade available.
+
+  For highlights of this release, please see the documentation at
+  https://jujucharms.com/docs/2.2/whats-new
+
 ^# Juju 2.2.4
 
   ## New and Improved
