@@ -1,4 +1,4 @@
-Title: Managing relationships  
+Title: Managing relationships
 TODO:  Critical: review required
 
 # Managing relationships
@@ -50,13 +50,13 @@ For example, in the case of specifying a database for the Mediawiki charm.
 
 ```bash
 juju add-relation mediawiki mysql
-error: ambiguous relation: "mediawiki mysql" could refer to 
+error: ambiguous relation: "mediawiki mysql" could refer to
   "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 ```
 
-The solution is to be explicit with the ambiguous *interface*, where the latter
+The solution is to be explicit with the ambiguous *endpoint*, where the latter
 has a format of `<application>:<application endpoint>`. In this case, the
-*endpoint* is 'db' for both but only the mediawiki interface is ambiguous, so
+application endpoint is 'db' for both but only the mediawiki interface is ambiguous, so
 this is what we can do:
 
 ```bash
@@ -110,7 +110,7 @@ juju remove-relation mediawiki mysql
 
 In cases where there is more than one relation between the two applications, it
 is necessary to specify the interface at least once:
-  
+
 ```bash
 juju remove-relation mediawiki mysql:db
 ```
