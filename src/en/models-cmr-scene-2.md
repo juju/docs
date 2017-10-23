@@ -25,7 +25,7 @@ juju offer mysql:db
 juju bootstrap localhost lxd-cmr-2
 juju add-model cmr-model-2
 juju deploy mediawiki
-juju relate mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql
+juju add-relation mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql
 ```
 
 !!! Note:
@@ -271,7 +271,7 @@ all outgoing traffic to the single IPv4 address of 69.32.56.10/32.
 Now request to the offering side to allow this address to contact the offer:
 
 ```bash
-juju relate mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql --via 69.32.56.10/32
+juju add-relation mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql --via 69.32.56.10/32
 ```
 
 This will work providing the offering side did not previously set up a

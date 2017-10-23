@@ -44,7 +44,7 @@ Model      Controller  Cloud/Region   Version      SLA
 cmr-model  aws-cmr     aws/us-east-1  2.3-beta2.1  unsupported
 
 App    Version  Status  Scale  Charm  Store       Rev  OS      Notes
-mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu  
+mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
 mysql/0*  active    idle   0        54.81.205.47    3306/tcp  Ready
@@ -93,13 +93,13 @@ aws-cmr  admin/cmr-model.mysql  admin   mysql:db
 Add a consumer model and application. The application in this example will
 require a MySQL database and the objective is that it will use the one in the
 shared (CMR) model. The application we've chosen here is WordPress and we'll
-refer to the MySQL offer URL in the `juju relate` command:
+refer to the MySQL offer URL in the `juju add-relation` command:
 
 ```bash
 juju add-model wordpress-model
 juju deploy wordpress
 juju expose wordpress
-juju relate wordpress:db admin/cmr-model.mysql
+juju add-relation wordpress:db admin/cmr-model.mysql
 ```
 
 The last command has made use of a *cross model relation*.
@@ -118,13 +118,13 @@ App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
 wordpress           active      1  wordpress  jujucharms    5  ubuntu  exposed
 
 Unit          Workload  Agent  Machine  Public address  Ports   Message
-wordpress/0*  active    idle   0        54.198.91.120   80/tcp  
+wordpress/0*  active    idle   0        54.198.91.120   80/tcp
 
 Machine  State    DNS            Inst id              Series  AZ          Message
 0        started  54.198.91.120  i-00332775f5f83d886  trusty  us-east-1a  running
 
 Relation provider       Requirer                Interface     Type     Message
-mysql:db                wordpress:db            mysql         regular  
+mysql:db                wordpress:db            mysql         regular
 wordpress:loadbalancer  wordpress:loadbalancer  reversenginx  peer
 ```
 
@@ -162,7 +162,7 @@ chosen now is MediaWiki.
 juju add-model mediawiki-model
 juju deploy mediawiki
 juju expose mediawiki
-juju relate mediawiki:db admin/cmr-model.mysql
+juju add-relation mediawiki:db admin/cmr-model.mysql
 ```
 
 The output to `juju status` for this model will eventually become:
