@@ -8,7 +8,7 @@ background information.
 
 In this example, we *supply* a CMR infrastructure "out of the box" with a few
 nimble commands and then proceed to query, poke, analyse, and finally extend it
-by exploring multi-user functionality and firewall concerns.
+by addressing firewall concerns.
 
 This scenario describes a MediaWiki deployment, based upon multiple (LXD)
 controllers, used by a non-admin user, and consumed by a single model.
@@ -67,9 +67,9 @@ In the 'Offer' section, the 'Connected' column shows the number of active
 connections to the offer and the total number of connections/relations
 (including those suspended).
 
-## juju list-offers
+## juju offers
 
-The `juju list-offers` command (alias `juju offers`) shows similar information.
+The `juju offers` command (alias `juju list-offers`) shows similar information.
 However, it also allows for several formats, each of which displays different
 kinds of information.
 
@@ -77,7 +77,7 @@ The 'summary' format provides information very similar to that gained via the
 `juju status` command (it adds the offer URL):
 
 ```bash
-juju list-offers --format summary
+juju offers --format summary
 ```
 
 Output:
@@ -92,7 +92,7 @@ access the offer and what ingress subnets are required to allow traffic from
 the consuming model:
 
 ```bash
-juju list-offers -m lxd-cmr-1:cmr-model-1 --format yaml
+juju offers -m lxd-cmr-1:cmr-model-1 --format yaml
 ```
 
 Output:
@@ -129,7 +129,7 @@ The 'tabular' format (the default) shows each relation (connection) to the
 offer from the consuming model:
 
 ```bash
-juju list-offers -m lxd-cmr-1:cmr-model-1
+juju offers -m lxd-cmr-1:cmr-model-1
 ```
 
 Output:
@@ -147,25 +147,25 @@ mysql  admin  1            joined  db        mysql      provider  10.87.144.189/
 To list all offers for a given application:
 
 ```bash
-juju list-offers --application mysql
+juju offers --application mysql
 ```
 
 To list all offers for a given interface:
 
 ```bash
-juju list-offers --interface mysql
+juju offers --interface mysql
 ```
 
 To list all offers for a given user who has created a relation to the offer:
 
 ```bash
-juju list-offers --connected-user <user name>
+juju offers --connected-user <user name>
 ```
 
 To list all offers for a given user who can consume the offer:
 
 ```bash
-juju list-offers --format summary --allowed-consumer <user name>
+juju offers --format summary --allowed-consumer <user name>
 ```
 
 The above command is best run with '--format summary' as the intent is to see,
@@ -175,7 +175,7 @@ are existing relations (which is what the tabular view shows).
 To list a specific offer:
 
 ```bash
-juju list-offers mysql
+juju offers mysql
 ```
 
 ## juju show-offer
@@ -260,7 +260,7 @@ lxd-cmr-1:admin/cmr-model-1.mysql:
 To find offers in model `cmr-model-1` on controller `lxd-cmr-1`:
 
 ```bash
-juju find-offers lxd-cmr-1:admin/cmr-model-1
+juju find-offers lxd-cmr-1:cmr-model-1
 ```
 
 ## Relating to offers from behind a firewall
@@ -268,18 +268,17 @@ juju find-offers lxd-cmr-1:admin/cmr-model-1
 Let the consuming model in this scenario be protected by a firewall that NATs
 all outgoing traffic to the single IPv4 address of 69.32.56.10/32.
 
-Now request to the offering side to allow this address to contact the offer:
+Here, the admin on the offering side decided to create a whitelist consisting
+of a range of addresses known to cover the consuming side:
+
+```bash
+juju set-firewall-rule juju-application-offer --whitelist 69.32.0.0/16
+```
+
+Now request to have the single NAT address contact the offer:
 
 ```bash
 juju add-relation mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql --via 69.32.56.10/32
-```
-
-This will work providing the offering side did not previously set up a
-whitelist of addresses (or subnets) that *does not* include the above address.
-That is, it *will* work if this had been done:
-
-```bash
-juju set-firewall-rule juju-application-offer --whitelist 69.32.56.0/8
 ```
 
 

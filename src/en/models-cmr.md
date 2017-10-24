@@ -1,6 +1,7 @@
 Title: Cross Model Relations
 TODO:  Add scenario #3: different cloud types
-       Add commands to a scenario: grant|revoke, suspend|resume
+       Add commands to a scenario: grant|revoke, suspend|resume, remove-offer
+       Bug tracking: https://pad.lv/1726945
 
 <!--
 
@@ -23,34 +24,34 @@ use case would be when you are simply using different cloud types.
 The commands related specifically to this subject are:
 
 [`consume`][commands-consume]
-: Adds a remote offer to a model without relating to it.
+: Links an offer to a model. Does not relate to it.
 
 [`find-offers`][commands-find-offers]
-: Finds offered application endpoints.
+: Finds URLs and endpoints of available offers.
 
 [`list-firewall-rules`][commands-list-firewall-rules]
-: Prints the firewall rules.
-
-[`list-offers`][commands-list-offers]
-: Lists shared endpoints.
+: Lists the firewall rules.
 
 [`offer`][commands-offer]
-: Offers application endpoints for use in other models.
+: Creates an offer.
+
+[`offers`][commands-offers]
+: Lists connected (related to) offers.
 
 [`remove-offer`][commands-remove-offer]
-: Removes one or more offers.
+: Removes an offer.
 
 [`resume-relation`][commands-resume-relation]
-: Resumes a suspended relation to an application offer.
+: Resumes a suspended relation to an offer.
 
 [`set-firewall-rule`][commands-set-firewall-rule]
 : Sets a firewall rule.
 
 [`show-offer`][commands-show-offer]
-: Shows offered applications' endpoints details.
+: Shows details of connected (related to) offers.
 
 [`suspend-relation`][commands-suspend-relation]
-: Suspends a relation to an application offer.
+: Suspends a relation to an offer.
 
 See [Models][models] and [Managing relations][charms-relations] for beginner
 information on those topics.
@@ -58,6 +59,9 @@ information on those topics.
 This page presents the **concepts** behind cross model relations as well as
 two example **scenarios** that aim to reinforce those concepts through
 practical usage.
+
+!!! Note:
+    The functionality of CMR is not exposed in the GUI at this time.
 
 ## Concepts
 
@@ -135,12 +139,12 @@ their model and establish a relation to the offer by way of its URL.
 The controller part of the URL is optional if the other model resides in
 the same controller.
 
-`juju relate <application>[:<application endpoint>] <offer url>[:<offer endpoint>]`
+`juju add-relation <application>[:<application endpoint>] <offer url>[:<offer endpoint>]`
 
 Specifying the endpoint for the application and the offer is analogous to
 normal relations. They can be added but are often unnecessary:
 
-`juju relate <application> <offer url>`
+`juju add-relation <application> <offer url>`
 
 When an offer is related to, a proxy application is made in the consuming
 model, named after the offer.
@@ -151,11 +155,11 @@ information due to rejected ingress, or if the relation is suspended etc.
 
 An offer can be consumed without relating to it. This workflow sets up the
 proxy application in the consuming model and creates a user-defined alias for
-the offer. This latter is what's used to relate to. Having an offer alias can
-avoid a namespsce conflict with a pre-existing application.
+the offer. This latter is what's used to subsequently relate to. Having an
+offer alias can avoid a namespace conflict with a pre-existing application.
 
-`juju consume <offer url> <offer alias>`
-`juju relate <application> <offer alias>`
+`juju consume <offer url> <offer alias>`  
+`juju add-relation <application> <offer alias>`
 
 Offers which have been consumed show up in `juju status` in the SAAS section.
 
@@ -167,7 +171,7 @@ exit (egress) that firewall with a modified address/network. In this case, the
 firewall on the offering side to allow this traffic. This option specifies the
 NATed address (or network) in CIDR notation:
 
-`juju relate <application> <offer url> --via <cidr subnet>`
+`juju add-relation <application> <offer url> --via <cidr subnet>`
 
 It's possible to set this up in advance at the model level in this way:
 
@@ -191,7 +195,7 @@ The above command is applied to the **offering** model.
 
 <!--
 To see what ingress is currently in use by relations to an offer, use the
-list-offers command (below).
+offers command (below).
 
 To see what firewall rules have currently been defined, use the list
 firewall-rules command.
@@ -224,7 +228,7 @@ A suspended relation is resumed by an admin on the offering side:
 `juju resume-relation <id1>`
 
 !!! Note:
-    Command `juju list-offers` lists the relation ids.
+    Command `juju offers` provides the relation ids.
 
 ### Removing relations
 
@@ -258,7 +262,7 @@ The following CMR scenarios will be examined:
 [commands-consume]: ./commands.html#consume
 [commands-find-offers]: ./commands.html#find-offers
 [commands-list-firewall-rules]: ./commands.html#list-firewall-rules
-[commands-list-offers]: ./commands.html#list-offers
+[commands-offers]: ./commands.html#offers
 [commands-offer]: ./commands.html#offer
 [commands-remove-offer]: ./commands.html#remove-offer
 [commands-resume-relation]: ./commands.html#resume-relation
