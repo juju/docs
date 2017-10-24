@@ -244,10 +244,10 @@ as the application proxy, resulting in all relations being removed.
 
 The following CMR scenarios will be examined:
 
-- [Scenario #1][scenario-1]
+- [Scenario #1][scenario-1]  
   A MediaWiki deployment, based within the **same** controller, used by the
   **admin** user, but consumed by **multiple** models.
-- [Scenario #2][scenario-2]
+- [Scenario #2][scenario-2]  
   A MediaWiki deployment, based within **multiple** controllers, used by a
   **non-admin** user, and consumed by a **single** model.
 
