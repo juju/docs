@@ -28,10 +28,6 @@ juju deploy mediawiki
 juju add-relation mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql
 ```
 
-!!! Note:
-    The created models are optional. The 'default' model in each controller
-    could have been used.
-
 ## juju status
 
 The `juju status` command provides a summary of what offers have been made.
