@@ -3,12 +3,6 @@ TODO:  Add scenario #3: different cloud types
        Add commands to a scenario: grant|revoke, suspend|resume, remove-offer
        Bug tracking: https://pad.lv/1726945
 
-<!--
-
-Need to add links from other pages.
-
--->
-
 # Cross Model Relations
 
 Cross Model Relations (CMR) allow applications in different models to be
@@ -48,7 +42,7 @@ The commands related specifically to this subject are:
 : Sets a firewall rule.
 
 [`show-offer`][commands-show-offer]
-: Shows details of connected (related to) offers.
+: Shows details for a connected (related to) offer.
 
 [`suspend-relation`][commands-suspend-relation]
 : Suspends a relation to an offer.
