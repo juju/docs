@@ -10,32 +10,20 @@ In this example, we *build* a simple CMR infrastructure in step by step
 fashion, explaining each step along the way. A method of verifying the
 deployment is provided at the end.
 
-This scenario describes a MediaWiki deployment, based within the same (LXD)
+This scenario describes a MediaWiki deployment, based within the same
 controller; used by the admin user, and consumed by multiple models.
 
-## Create a controller
+The controller is called 'aws-cmr' and the model name is 'cmr-model'.
 
-Create a controller, called 'aws-cmr' here. In this example, the controller
-(and its models) will use the AWS public cloud:
+## Deploy the application
 
-```bash
-juju add-credential aws
-juju bootstrap aws aws-cmr
-```
-
-## Add the shared model and application
-
-Add the shared CMR model and application in the usual way. Extra resources have
-been requested via constraints, since this shared MySQL should be capable of
-servicing several remote applications.
+Deploy the application in the usual way. Extra resources have been requested
+via constraints, since this shared MySQL should be capable of servicing several
+remote applications.
 
 ```bash
-juju add-model cmr-model
 juju deploy mysql --constraints "cores=4 mem=16G root-disk=1T"
 ```
-
-!!! Note:
-    The created model is optional. The 'default' model could have been used.
 
 The output to `juju status` will eventually look similar to:
 

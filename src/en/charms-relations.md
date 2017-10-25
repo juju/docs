@@ -49,10 +49,21 @@ In some cases, there may be ambiguity about how the applications should connect.
 For example, in the case of specifying a database for the Mediawiki charm.
 
 ```bash
-juju add-relation mediawiki mysql
+juju add-relation mysql mediawiki 
 error: ambiguous relation: "mediawiki mysql" could refer to
   "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 ```
+
+The solution is to specify the nature of the relation using the
+relation interface identifier. In this case, we want MySQL to provide the 
+backend database for mediawiki ('db' relation), so this is what we need to 
+enter:
+
+```bash
+juju add-relation mysql mediawiki:db
+```
+
+<!-- REMOVED FROM PR 2248, TO BE REVIEWED LATER
 
 The solution is to be explicit when referring to an *endpoint*, where the
 latter has a format of `<application>:<application endpoint>`. In this case, it
@@ -70,6 +81,8 @@ juju add-relation mysql mediawiki:db
     [Charm Store][charm-store] or by querying the Store with the
     [Charm Tools][charm-tools] (using a command like
     `charm show <application> charm-metadata`).
+
+-->
 
 We can check the output from `juju status` to make sure the correct relationship
 has been established:

@@ -24,7 +24,7 @@ use case would be when you are simply using different cloud types.
 The commands related specifically to this subject are:
 
 [`consume`][commands-consume]
-: Links an offer to a model. Does not relate to it.
+: Accepts an offer to a model but does not relate to it.
 
 [`find-offers`][commands-find-offers]
 : Finds URLs and endpoints of available offers.
