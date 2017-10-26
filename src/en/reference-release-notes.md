@@ -105,6 +105,32 @@ subscribe to the mailing list at juju@lists.ubuntu.com.
 To learn more about juju please visit https://jujucharms.com.
 
 
+^# Juju 2.2.6
+
+  ## New and Improved
+
+  - This release fixed a critical issue (LP #1727355) which resulted juju being
+    unable to bootstrap unless a supported series was explicitly specified.
+
+  For a list of all bugs fixed in this release, see:
+  https://launchpad.net/juju/+milestone/2.2.6
+
+
+  ## How can I get it?
+
+  The best way to get your hands on this release of Juju is to install it as
+  a snap package (see https://snapcraft.io for more info on snaps).
+
+         snap install juju --classic
+
+  Other packages are available for a variety of platforms. Please see the online
+  documentation at https://jujucharms.com/docs/stable/reference-install Those
+  subscribed to a snap channel should be automatically upgraded. If you’re using
+  the ppa/homebrew, you should see an upgrade available.
+
+  For highlights of this release, please see the documentation at
+  https://jujucharms.com/docs/2.2/whats-new
+
 ^# Juju 2.2.5
 
   ## New and Improved
