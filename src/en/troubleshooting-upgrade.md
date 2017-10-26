@@ -1,4 +1,5 @@
 Title: Juju troubleshooting - environment upgrade  
+TODO:  Review required (some things: 'environment')
 
 
 # Troubleshooting environment upgrades
@@ -65,3 +66,14 @@ juju resolved etcd/2
 
 See [Debugging Juju charm hooks](./developer-debugging.html) for more
 information.
+
+
+## Case #3 - An agent is too old
+
+When an agent, for some reason, is not running the same version as other agents
+in the model the upgrade process may abort. To overcome this you may consider
+to force the upgrade by ignoring the agent version check:
+
+```bash
+juju upgrade-juju --ignore-agent-versions
+```
