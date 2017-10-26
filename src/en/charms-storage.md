@@ -405,8 +405,10 @@ For detailed information regarding EBS volume types, see the
 
 ### OpenStack/Cinder (cinder)
 
-OpenStack-based models have access to the 'cinder' storage provider. The Cinder
-provider does not currently have any specific configuration options.
+OpenStack-based models have access to the 'cinder' storage provider.
+
+The 'cinder' storage provider has a 'volume-type' configuration option whose
+value is the name of any volume type registered with Cinder.
 
 ### MAAS (maas)
 
