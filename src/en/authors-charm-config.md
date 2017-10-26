@@ -1,4 +1,6 @@
 Title: Creating config.yaml and configuring charms  
+TODO:  Move the methods of injecting options during deploy time into another
+         file and then link
 
 # Charm configuration
 
@@ -23,8 +25,10 @@ the option is not compliant with Charm Store policy.
 
 Some options may require values but depending on the nature of the charm it may
 not be feasible to provide a default value. The author should list any such
-options in the `description` field. The user can specify a value by pointing to
-a separate yaml file using the `--config` option of the `juju deploy` command.
+options in the `description` field. The user can specify a value by using the
+`--config` option (of the `juju deploy` command) by pointing to a separate YAML
+file or by stating the key/value pair directly (e.g.
+`juju deploy --config key=value <charm>`).
 
 A null default value is accepted for any option type (providing a non-null
 value is not mandatory). The following formats are valid:
