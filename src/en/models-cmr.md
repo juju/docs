@@ -1,23 +1,7 @@
 Title: Cross Model Relations
-TODO:  Critical: Put back and continue the example scenarios
-
-<!--
-
-Commands 'find-endpoints' and 'offer' are not yet available in commands.md.
-
-Introduced terms "shared model" and "consumer model".
-
-How to determine a unit's interface (e.g. mysql:db)?
-
-Need to add links from other pages.
-
-Also 'show-endpoints' and 'offers' (admin sees more).
-
-Multi CMR controllers are now allowed it seems.
-
-See wallyworld
-
--->
+TODO:  Add scenario #3: different cloud types
+       Add commands to a scenario: grant|revoke, suspend|resume, remove-offer
+       Bug tracking: https://pad.lv/1726945
 
 # Cross Model Relations
 
@@ -28,72 +12,97 @@ clouds.
 
 CMR addresses the case where one may wish to centralize services within one
 model and share them with disparate models. One can imagine models dedicated to
-tasks such as service monitoring, block storage, and database backends.
+tasks such as service monitoring, block storage, and database backends. Another
+use case would be when you are simply using different cloud types.
 
 The commands related specifically to this subject are:
 
 [`consume`][commands-consume]
-: Adds a remote offer to a model.
+: Accepts an offer to a model but does not relate to it.
 
 [`find-offers`][commands-find-offers]
-: Finds offered application endpoints.
+: Finds URLs and endpoints of available offers.
 
 [`list-firewall-rules`][commands-list-firewall-rules]
-: Prints the firewall rules.
-
-[`list-offers`][commands-list-offers]
-: Lists shared endpoints.
+: Lists the firewall rules.
 
 [`offer`][commands-offer]
-: Offers application endpoints for use in other models.
+: Creates an offer.
+
+[`offers`][commands-offers]
+: Lists connected (related to) offers.
 
 [`remove-offer`][commands-remove-offer]
-: Removes one or more offers.
+: Removes an offer.
 
 [`resume-relation`][commands-resume-relation]
-: Resumes a suspended relation to an application offer.
+: Resumes a suspended relation to an offer.
 
 [`set-firewall-rule`][commands-set-firewall-rule]
 : Sets a firewall rule.
 
 [`show-offer`][commands-show-offer]
-: Shows offered applications' endpoints details.
+: Shows details for a connected (related to) offer.
 
 [`suspend-relation`][commands-suspend-relation]
-: Suspends a relation to an application offer.
+: Suspends a relation to an offer.
 
 See [Models][models] and [Managing relations][charms-relations] for beginner
 information on those topics.
 
-<!--
 This page presents the **concepts** behind cross model relations as well as
 two example **scenarios** that aim to reinforce those concepts through
 practical usage.
--->
+
+!!! Note:
+    The functionality of CMR is not exposed in the GUI at this time.
 
 ## Concepts
 
 In this section command syntax may be simplified to keep complexity to a
 minimum. See the above CLI help text for full syntax and more examples.
 
-### Offers and endpoints
+### Terminology
 
-The idea of an *offer* is key to understanding CMR. Nevertheless, it is quite
-easy to grasp. An offer is simply an application that is making itself
-available to a consumer application.
+An *offer* is an application that an administrator makes available to
+applications residing in remote models. The model in which the offer resides is
+known as the *offering* model.
 
-An *endpoint* is at either end of the server:client connection. There is
-therefore what is known as a *provides* endpoint (for the service end) and a
-*requires* endpoint (for the client end). The latter can also be called a
+The application (and model) that utilizes the offer is called the *consuming*
+application (and model).
+
+Like traditional Juju applications,
+
+ - an offer has one or more *endpoints* that denote the features available for
+   that offer.
+ - a fully-qualified offer endpoint includes the associated offer name:
+
+    `<offer name>:<offer endpoint>`
+
+ - a reference to an offer endpoint will often omit the 'offer name' if the
+   context presupposes it.
+ - an endpoint has an *interface* that satisfies a particular protocol.
+
+<!--
+
+There is therefore what is known as a *provides* endpoint (for the service end)
+and a *requires* endpoint (for the client end). The latter can also be called a
 *target* endpoint.
 
-An offer consists of one (or more) endpoints for a given application and
-is expressed as a URL. It is of the form:
+-->
 
-`controller:user/model.offername`
+### Creating offers
 
-To be clear, even if an offer has multiple endpoints, it is identified by a
-single URL.
+An offer stems from an application endpoint. This is how an offer is created:
+
+`juju offer <application>:<application endpoint>`
+
+Although an offer may have multiple (offer) endpoints it is always expressed as
+a single URL:
+
+`[<controller>:]<user>/<model.offer_name>`
+
+If the 'controller' portion is omitted the current controller is assumed.
 
 ### Managing offers
 
@@ -113,21 +122,23 @@ These are applied similarly to how standard model access is applied, via the
 `juju grant|revoke <user> <access level> <offer url>`
 
 Revoking a user's consume access will result in all relations for that user to
-that offer to be suspended. If the consume access is granted anew, each relation
-will need to be individually resumed. Suspending and resuming relations are
-explained in more detail later.
+that offer to be suspended. If the consume access is granted anew, each
+relation will need to be individually resumed. Suspending and resuming
+relations are explained in more detail later.
 
-## Relating to offers
+### Relating to offers
 
 If a user has consume access to an offer, they can deploy an application in
 their model and establish a relation to the offer by way of its URL.
 The controller part of the URL is optional if the other model resides in
 the same controller.
 
-`juju relate <application> <offer url>`
+`juju add-relation <application>[:<application endpoint>] <offer url>[:<offer endpoint>]`
 
-Specifying endpoints for the application and the offer is analogous to normal
-relations. They can be added but are often unnecessary.
+Specifying the endpoint for the application and the offer is analogous to
+normal relations. They can be added but are often unnecessary:
+
+`juju add-relation <application> <offer url>`
 
 When an offer is related to, a proxy application is made in the consuming
 model, named after the offer.
@@ -136,61 +147,49 @@ Note that the relations block in status shows any relevant status information
 about the relation to the offer in the Message field. This includes any error
 information due to rejected ingress, or if the relation is suspended etc.
 
-<!--
+An offer can be consumed without relating to it. This workflow sets up the
+proxy application in the consuming model and creates a user-defined alias for
+the offer. This latter is what's used to subsequently relate to. Having an
+offer alias can avoid a namespace conflict with a pre-existing application.
 
-It's possible to consume an offer without relating to it. This creates the
-proxy application in the consuming model, which can then be related to
-afterwards. Doing it this way enables an alias to be used for the offer, if
-there's a need to avoid conflicts with an existing application already deployed
-to the consuming model.
+`juju consume <offer url> <offer alias>`  
+`juju add-relation <application> <offer alias>`
 
-juju consume admin/default.mysql mysql-alias
-juju relate mediawiki:db mysql-alias
+Offers which have been consumed show up in `juju status` in the SAAS section.
 
-Offers which have been consumed show up in status under the SAAS block.
+### Relations and firewalls
 
--->
+When the consuming model is behind a NAT firewall its traffic will typically
+exit (egress) that firewall with a modified address/network. In this case, the
+`--via` option can be used with the `juju relate` command to request the
+firewall on the offering side to allow this traffic. This option specifies the
+NATed address (or network) in CIDR notation:
 
-## Relations and firewalls
+`juju add-relation <application> <offer url> --via <cidr subnet>`
 
-The (intended) consumer application may be deployed behind a NAT firewall, such
-that traffic egresses through a different address/network to that on which the
-consuming application is hosted.
-
-In this case, the relate `--via` option is used to inform the offering side so
-that the correct firewall rules can be set up.
-
-`juju relate <application> <offer url> --via <cidr subnet>`
-
-The `--via` value is a comma separated list of subnets in CIDR notation. This
-includes the /32 case where a single NATed IP address is used for egress.
-
-It's possible to set up egress subnets as a model config value so that all
-cross model relations use those subnets without the need of the `--via` option.
+It's possible to set this up in advance at the model level in this way:
 
 `juju model-config egress-subnets=<cidr subnet>`
 
-## Restricting ingress to the offering model
+To be clear, the above command is applied to the **consuming** model.
 
-As we have seen, it's possible for a consuming application to ask for ingress
-via an arbitrary subnet. To allow control over what ingress can be applied to
-the offering model, an administrator can set up allowed ingress subnets by
-creating a firewall rule.
+However, an administrator can control what incoming traffic is allowed to
+contact the offering model by whitelisting subnets:
 
 `juju set-firewall-rule juju-application-offer --whitelist <cidr subnet>`
 
-Where 'juju-application-offer' denotes the firewall rule to apply to any offer
-in the current model. If a consumer attempts to create a relation with
-requested ingress outside the bounds of the whitelist subnet, the relation will
-fail.
+Where 'juju-application-offer' is a well-known string that denotes the firewall
+rule to apply to any offer in the current model.
 
-If the firewall rule is changed, it does not (currently) affect existing
-relations. Only new relations will be rejected if the changed firewall rules
-preclude the requested ingress.
+The above command is applied to the **offering** model.
+
+!!! Important:
+    The `juju set-firewall-rule` command only affects subsequently created
+    relations, not existing ones.
 
 <!--
 To see what ingress is currently in use by relations to an offer, use the
-list-offers command (below).
+offers command (below).
 
 To see what firewall rules have currently been defined, use the list
 firewall-rules command.
@@ -211,55 +210,53 @@ juju-application-offer  103.37.0.0/16
     cutover applies is cloud specific.
 -->
 
-## Suspending and resuming relations
+### Suspending and resuming relations
 
-Individual relations to an offer may be temporarily suspended, causing the
-consuming application to no longer have access to the offer.
+A relation to an offer may be temporarily suspended, causing the consuming
+application to no longer have access to the offer:
 
-Relations are suspended by specifying (space separated) ids. Command
-`juju list-offers` will expose these relation ids.
+`juju suspend-relation <id1>`
 
-`juju suspend-relation <id1 [id2 ...]>`
+A suspended relation is resumed by an admin on the offering side:
 
-Suspended relations are resumed by an admin on the offering side:
+`juju resume-relation <id1>`
 
-`juju resume-relation <id1 [id2 ...]>`
+!!! Note:
+    Command `juju offers` provides the relation ids.
 
-## Removing relations
+### Removing relations
 
 To remove a relation entirely:
 
-`juju remove-relation <id1 [id2 ...]>`
+`juju remove-relation <id1>`
 
 Removing a relation on the offering side will trigger a removal on the
 consuming side. A relation can also be removed from the consuming side, as well
 as the application proxy, resulting in all relations being removed.
 
-<!--
-
 ## Example scenarios
 
 The following CMR scenarios will be examined:
 
-- [Scenario #1](./models-cmr-scene-1.html)  
+- [Scenario #1][scenario-1]  
   A MediaWiki deployment, based within the **same** controller, used by the
   **admin** user, but consumed by **multiple** models.
-- [Scenario #2](./models-cmr-scene-2.html)  
+- [Scenario #2][scenario-2]  
   A MediaWiki deployment, based within **multiple** controllers, used by a
   **non-admin** user, and consumed by a **single** model.
-
--->
 
 
 <!-- LINKS -->
 
 [models]: ./models.html
 [charms-relations]: ./charms-relations.html
+[scenario-1]: ./models-cmr-scene-1.html
+[scenario-2]: ./models-cmr-scene-2.html
 
 [commands-consume]: ./commands.html#consume
 [commands-find-offers]: ./commands.html#find-offers
 [commands-list-firewall-rules]: ./commands.html#list-firewall-rules
-[commands-list-offers]: ./commands.html#list-offers
+[commands-offers]: ./commands.html#offers
 [commands-offer]: ./commands.html#offer
 [commands-remove-offer]: ./commands.html#remove-offer
 [commands-resume-relation]: ./commands.html#resume-relation

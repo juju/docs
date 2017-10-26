@@ -1,4 +1,5 @@
-Title: Managing relationships  
+Title: Managing relationships
+TODO:  Critical: review required
 
 # Managing relationships
 
@@ -48,8 +49,8 @@ In some cases, there may be ambiguity about how the applications should connect.
 For example, in the case of specifying a database for the Mediawiki charm.
 
 ```bash
-juju add-relation mediawiki mysql
-error: ambiguous relation: "mediawiki mysql" could refer to 
+juju add-relation mysql mediawiki 
+error: ambiguous relation: "mediawiki mysql" could refer to
   "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 ```
 
@@ -59,8 +60,29 @@ backend database for mediawiki ('db' relation), so this is what we need to
 enter:
 
 ```bash
-juju add-relation mediawiki:db mysql
+juju add-relation mysql mediawiki:db
 ```
+
+<!-- REMOVED FROM PR 2248, TO BE REVIEWED LATER
+
+The solution is to be explicit when referring to an *endpoint*, where the
+latter has a format of `<application>:<application endpoint>`. In this case, it
+is 'db' for both applications. However, it is not necessary to specify the
+mysql endpoint because only the mediawiki endpoint is ambiguous (according to
+the error message). Therefore, the command becomes:
+
+```bash
+juju add-relation mysql mediawiki:db
+```
+
+!!! Note:
+    An application endpoint can be discovered by looking at the metadata of the
+    corresponding charm. This can be done by examining the charm on the
+    [Charm Store][charm-store] or by querying the Store with the
+    [Charm Tools][charm-tools] (using a command like
+    `charm show <application> charm-metadata`).
+
+-->
 
 We can check the output from `juju status` to make sure the correct relationship
 has been established:
@@ -102,7 +124,7 @@ juju remove-relation mediawiki mysql
 
 In cases where there is more than one relation between the two applications, it
 is necessary to specify the interface at least once:
-  
+
 ```bash
 juju remove-relation mediawiki mysql:db
 ```
@@ -116,3 +138,5 @@ Relations can also work across models, even across multiple controllers. See
 <!-- LINKS -->
 
 [models-cmr]: ./models-cmr.html
+[charm-tools]: ./tools-charm-tools.html
+[charm-store]:  https://jujucharms.com

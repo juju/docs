@@ -1,83 +1,79 @@
 Title: CMR scenario #1
+TODO:  Update 'juju status' output to show release versions
 
 # CMR scenario #1
+
+This page refers to [Cross model relations][models-cmr]. See that page for
+background information.
 
 In this example, we *build* a simple CMR infrastructure in step by step
 fashion, explaining each step along the way. A method of verifying the
 deployment is provided at the end.
 
-This scenario describes a MediaWiki deployment, based within the same (LXD)
+This scenario describes a MediaWiki deployment, based within the same
 controller; used by the admin user, and consumed by multiple models.
 
-## Create a controller
+The controller is called 'aws-cmr' and the model name is 'cmr-model'.
 
-Create a controller. Here, the controller (and its model) will use the AWS
-public cloud:
+## Deploy the application
 
-```bash
-juju add-credentials aws
-juju bootstrap aws aws-cmr-controller
-```
-
-## Add the shared model and application
-
-Add the shared CMR model and application in the usual way. Extra resources have
-been requested via constraints, since this shared MySQL should be capable of
-servicing several remote applications.
+Deploy the application in the usual way. Extra resources have been requested
+via constraints, since this shared MySQL should be capable of servicing several
+remote applications.
 
 ```bash
-juju add-model cmr-model
-juju deploy mysql --constraints "mem=16G root-disk=1T"
+juju deploy mysql --constraints "cores=4 mem=16G root-disk=1T"
 ```
 
-The output to `juju status` should eventually look similar to:
+The output to `juju status` will eventually look similar to:
 
 ```no-highlight
-Model      Controller          Cloud/Region   Version       SLA
-cmr-model  aws-cmr-controller  aws/us-east-1  2.3-alpha1.1  unsupported
+Model      Controller  Cloud/Region   Version      SLA
+cmr-model  aws-cmr     aws/us-east-1  2.3-beta2.1  unsupported
 
 App    Version  Status  Scale  Charm  Store       Rev  OS      Notes
-mysql  5.7.19   active      1  mysql  jujucharms   57  ubuntu
+mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
-mysql/0*  active    idle   0        23.20.241.57    3306/tcp  Ready
+mysql/0*  active    idle   0        54.81.205.47    3306/tcp  Ready
 
 Machine  State    DNS           Inst id              Series  AZ          Message
-0        started  23.20.241.57  i-065bddb4cf8843540  xenial  us-east-1a  running
+0        started  54.81.205.47  i-0f9f15e276ec3b5c2  xenial  us-east-1a  running
 
-Relation  Provides  Consumes  Type
-cluster   mysql     mysql     peer
+Relation provider  Requirer       Interface  Type  Message
+mysql:cluster      mysql:cluster  mysql-ha   peer
 ```
 
-Now make this MySQL service, and only this service, available to other models
-by referring to interface 'mysql:db' with the `juju offer` command:
+Now make the mysql application, and only that application, available to other
+models by referring to interface 'mysql:db' with the `juju offer` command:
 
 ```bash
 juju offer mysql:db
 ```
 
-The output will include the shared service's endpoint:
+!!! Note:
+    See [Managing relations][charms-relations] for how to determine the
+    interface used in the `juju offer` command.
 
-<!-- Below output is wrong! -->
+The output will include the shared application's endpoint:
 
 ```no-highlight
-Application "mysql" endpoints [db] available at "admin/cmr-model."
+Application "mysql" endpoints [db] available at "admin/cmr-model.mysql"
 ```
 
-Where the endpoint is `admin/cmr-model.mysql`.
+Where the offer URL is `admin/cmr-model.mysql`.
 
-Note that a model's endpoints can be queried with the `juju find-endpoints`
-command:
+All available offer endpoints (per model) can be listed like so:
 
 ```bash
-juju find-endpoints
+juju find-offers
 ```
 
-In this example, the output would like like:
+In this example, the output is:
 
 ```no-highlight
-Store               URL                    Access  Interfaces
-aws-cmr-controller  admin/cmr-model.mysql  admin   mysql:db
+Store    URL                    Access  Interfaces
+aws-cmr  admin/cmr-model.mysql  admin   mysql:db
 ```
 
 ## Add a first consumer model and application
@@ -85,44 +81,51 @@ aws-cmr-controller  admin/cmr-model.mysql  admin   mysql:db
 Add a consumer model and application. The application in this example will
 require a MySQL database and the objective is that it will use the one in the
 shared (CMR) model. The application we've chosen here is WordPress and we'll
-refer to the mysql unit's endpoint in the `juju relate` command:
+refer to the MySQL offer URL in the `juju add-relation` command:
 
 ```bash
 juju add-model wordpress-model
 juju deploy wordpress
 juju expose wordpress
-juju relate wordpress:db admin/cmr-model.mysql
+juju add-relation wordpress:db admin/cmr-model.mysql
 ```
+
+The last command has made use of a *cross model relation*.
 
 The output to `juju status` for this model will eventually settle down to look
 very much like:
 
 ```no-highlight
-Model            Controller          Cloud/Region   Version       SLA
-wordpress-model  aws-cmr-controller  aws/us-east-1  2.3-alpha1.1  unsupported
+Model            Controller  Cloud/Region   Version      SLA
+wordpress-model  aws-cmr     aws/us-east-1  2.3-beta2.1  unsupported
 
-SAAS   Status   Store               URL
-mysql  unknown  aws-cmr-controller  admin/cmr-model.mysql
+SAAS   Status   Store    URL
+mysql  unknown  aws-cmr  admin/cmr-model.mysql
 
 App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
 wordpress           active      1  wordpress  jujucharms    5  ubuntu  exposed
 
 Unit          Workload  Agent  Machine  Public address  Ports   Message
-wordpress/0*  active    idle   0        54.196.30.61    80/tcp
+wordpress/0*  active    idle   0        54.198.91.120   80/tcp
 
-Machine  State    DNS           Inst id              Series  AZ          Message
-0        started  54.196.30.61  i-0ce70d25f1d08500c  trusty  us-east-1a  running
+Machine  State    DNS            Inst id              Series  AZ          Message
+0        started  54.198.91.120  i-00332775f5f83d886  trusty  us-east-1a  running
 
-Relation      Provides   Consumes   Type
-db            mysql      wordpress  regular
-loadbalancer  wordpress  wordpress  peer
+Relation provider       Requirer                Interface     Type     Message
+mysql:db                wordpress:db            mysql         regular
+wordpress:loadbalancer  wordpress:loadbalancer  reversenginx  peer
 ```
 
 Notice how the remote MySQL application shows up as a SAAS object. The
-relation is also included in the Relation section.
+relation is also described:
 
-Looking at the `juju status` of the CMR model we see a new entry in the
-Relation section that corresponds to the consuming model relation:
+```no-highlight
+Relation provider       Requirer                Interface     Type     Message
+mysql:db                wordpress:db            mysql         regular
+```
+
+Applying the `juju status` command to the CMR model we see that the offer is
+now connected:
 
 ```bash
 juju status -m cmr-model
@@ -134,13 +137,9 @@ Output:
 .
 .
 .
-Relation  Provides  Consumes                                 Type
-cluster   mysql     mysql                                    peer
-db        mysql     remote-19001893317b486080b99f806797d51f  regular
+Offer  Application  Charm  Rev  Connected  Endpoint  Interface  Role
+mysql  mysql        mysql  58   1/1        db        mysql      provider
 ```
-
-In the above, 'remote-19001893317b486080b99f806797d51f' is the actual name of
-a database that got created. We'll make use of this information later on.
 
 ## Add a second consumer model and application
 
@@ -151,54 +150,57 @@ chosen now is MediaWiki.
 juju add-model mediawiki-model
 juju deploy mediawiki
 juju expose mediawiki
-juju relate mediawiki:db admin/cmr-model.mysql
+juju add-relation mediawiki:db admin/cmr-model.mysql
 ```
 
 The output to `juju status` for this model will eventually become:
 
 ```no-highlight
-Model            Controller          Cloud/Region   Version       SLA
-mediawiki-model  aws-cmr-controller  aws/us-east-1  2.3-alpha1.1  unsupported
+Model            Controller  Cloud/Region   Version      SLA
+mediawiki-model  aws-cmr     aws/us-east-1  2.3-beta2.1  unsupported
 
-SAAS   Status   Store               URL
-mysql  unknown  aws-cmr-controller  admin/cmr-model.mysql
+SAAS   Status   Store    URL
+mysql  unknown  aws-cmr  admin/cmr-model.mysql
 
 App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
 mediawiki  1.19.14  active      1  mediawiki  jujucharms   19  ubuntu  exposed
 
 Unit          Workload  Agent  Machine  Public address  Ports   Message
-mediawiki/0*  active    idle   0        54.224.30.3     80/tcp  Ready
+mediawiki/0*  active    idle   0        54.80.49.62     80/tcp  Ready
 
 Machine  State    DNS          Inst id              Series  AZ          Message
-0        started  54.224.30.3  i-04a4f1613a4224aa0  trusty  us-east-1a  running
+0        started  54.80.49.62  i-0b7530071c6242c19  trusty  us-east-1a  running
 
-Relation  Provides   Consumes  Type
-db        mediawiki  mysql     regular
+Relation provider  Requirer      Interface  Type     Message
+mysql:db           mediawiki:db  mysql      regular
 ```
 
-As expected, this is very similar to the output we saw with model
-'wordpress-model'.
-
-The new output for model 'cmr-model' is also not surprising:
+The new `juju status` output for model 'cmr-model' is not surprising. There are
+now *two* connections to the original offer:
 
 ```no-highlight
 .
 .
 .
-Relation  Provides  Consumes                                 Type
-cluster   mysql     mysql                                    peer
-db        mysql     remote-19001893317b486080b99f806797d51f  regular
-db        mysql     remote-640e658f832c4d1682abb9228823e6d6  regular
+Offer  Application  Charm  Rev  Connected  Endpoint  Interface  Role
+mysql  mysql        mysql  58   2/2        db        mysql      provider
 ```
 
-Clearly, a second database ('remote-640e658f832c4d1682abb9228823e6d6') is now
-present.
+```bash
+juju offers -m cmr-model
+```
+
+```no-highlight
+Offer  User   Relation id  Status  Endpoint  Interface  Role      Ingress subnets
+mysql  admin  1            joined  db        mysql      provider  54.198.91.120/32
+       admin  2            joined  db        mysql      provider  54.80.49.62/32
+```
 
 ## Verification
 
-Verify that the remote application has responded to the cross model relation by
-creating/preparing the necessary resources. In this example, we log in to the
-mysql unit via SSH, connect to MySQL, and list its databases:
+Verify that the remote application has responded to the two cross model
+relations by creating/preparing the necessary resources. In this example, we
+log in to the mysql unit via SSH, connect to MySQL, and list its databases:
 
 ```bash
 juju ssh -m cmr-model mysql/0
@@ -215,11 +217,18 @@ The output should look similar to:
 | information_schema                      |
 | mysql                                   |
 | performance_schema                      |
-| remote-19001893317b486080b99f806797d51f |
-| remote-640e658f832c4d1682abb9228823e6d6 |
+| remote-9414c94f21db456d822045bb216c3b33 |
+| remote-9cc8d09e87674e3487442a64751eb386 |
 | sys                                     |
 +-----------------------------------------+
 6 rows in set (0.00 sec)
 ```
 
-From the output we can see evidence of the two databases that got created.
+From the output we can see evidence of two databases that got created, one for
+each consumer application.
+
+
+<!-- LINKS -->
+
+[models-cmr]: ./models-cmr.html
+[charms-relations]: ./charms-relations.html
