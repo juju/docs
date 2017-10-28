@@ -52,6 +52,9 @@ Changes to deploy bundle:
 - add unit wiki/0 to new machine 1
 ```
 
+!!! Note:
+    The `dry-run` option only works with bundles.
+
 You can get the name of a bundle from the [Juju Charm Store][store], just as
 you would a charm.  Unlike charms, bundles embed more than a single
 application, and you can see icons representing each separate application
