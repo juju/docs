@@ -131,7 +131,7 @@ deployments. For instance, the author may want to check the status of some
 element of the services such as a Docker container.
 
 Payloads are defined in the `payloads` section of `metadata.yaml` by assigning
-a class and type. Classes refer to simply the name of the payload and the type
+a class and type. A class defines the name of the payload and the type
 describes the nature of the payload. Both are author-defined and are not
 validated by Juju.
 
