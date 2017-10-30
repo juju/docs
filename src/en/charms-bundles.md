@@ -1,5 +1,8 @@
 Title: Using and Creating Bundles
 TODO:  Check more complex bundles after the release of 2.0
+       Review required
+       Refactor (e.g. advanced usage/information should go in a sub-page)
+       Refactor (e.g. using vs creating)
 
 # Using and Creating Bundles
 
@@ -23,6 +26,34 @@ syntax:
 ```bash
 juju deploy wiki-simple
 ```
+
+To get a summary of the deployment steps (without actually deploying) a *dry
+run* can be performed:
+
+```bash
+juju deploy --dry-run wiki-simple
+```
+
+Sample output:
+
+```no-highlight
+Located bundle "cs:bundle/wiki-simple-4"
+Resolving charm: cs:trusty/mysql-55
+Resolving charm: cs:trusty/mediawiki-5
+Changes to deploy bundle:
+- upload charm cs:mysql-55 for series trusty
+- deploy application mysql on trusty using cs:mysql-55
+- set annotations for mysql
+- upload charm cs:trusty/mediawiki-5 for series trusty
+- deploy application wiki on trusty using cs:trusty/mediawiki-5
+- set annotations for wiki
+- add relation wiki:db - mysql:db
+- add unit mysql/0 to new machine 0
+- add unit wiki/0 to new machine 1
+```
+
+!!! Note:
+    The `dry-run` option only works with bundles.
 
 You can get the name of a bundle from the [Juju Charm Store][store], just as
 you would a charm.  Unlike charms, bundles embed more than a single
