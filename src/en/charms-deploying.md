@@ -181,20 +181,14 @@ configuration.
 See [Addendum: local charms](#addendum:-local-charms) below for further
 explanation of local charms and how they can be managed.
 
-
-## Deploying with a configuration file
+## Configuring at deployment time
 
 Deployed applications usually start with a sane default configuration. However,
-for some applications it is desirable (and quicker) to configure them at
-deployment time. This can be done by creating a YAML format file of
-configuration values and using the `--config=` switch:
+for some applications it may be desirable (and quicker) to configure them at
+deployment time. This can be done whether a charm is deployed from the Charm
+Store or from a local charm.
 
-```bash
-juju deploy mysql --config=myconfig.yaml
-```
-
-See [application configuration](./charms-config.html) for more on this.
-
+See [Application configuration](./charms-config.html) for more on this.
 
 ## Deploying to specific machines and containers
 
