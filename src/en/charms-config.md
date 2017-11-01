@@ -11,7 +11,6 @@ application, as opposed to only a specific unit or relation. The configuration
 can be modified by an administrator at deployment time or after the applications
 are operational.
 
-
 ## Discovering application configuration options
 
 Each charm will have its own set of options and possible values. You can
@@ -21,34 +20,52 @@ discover these in several ways:
   - By viewing the charm in the [charm store](https://jujucharms.com).
   - By examining the **config.yaml** file in the charm itself.
 
+## Configuring an application at deployment time
 
-## Configuring an application at deployment
+Configuration values for an application can be set during deployment in several
+ways:
 
-It is possible to set configuration values when deploying an application by
-providing a [yaml-formatted][yaml] file containing configuration values.
+ - by using a [yaml-formatted][yaml] file
+ - by passing options/values directly on the command line
+ - a combination of the above
+ 
+All these methods use the `--config=` switch.
 
 For example, upon investigation we discover that the Mediawiki charm allows us
-to set values for the name of the wiki and the 'skin' to use. We can put these
-inside a configuration file.
+to set values for the 'name' of the wiki and the 'skin' to use. We can put
+these inside a configuration file.
 
 ```yaml
 mediawiki:
   name: Juju Wiki
   skin: monobook
-  admins: admin:admin
 ```
 
-We can then use this configuration when we deploy the application:
+Assuming the file is called `myconfig.yaml`, the application can be deployed
+and configured in this way:
 
 ```bash
 juju deploy --config myconfig.yaml mediawiki
 ```
 
-!!! WARNING: 
-    If the YAML configuration file cannot be read or contains some
-    syntax errors or invalid options, you will receive an error message to this
-    effect. However, **the application will still be deployed **.
+!!! Warning:
+    If the configuration file cannot be read or contains syntax errors or
+    invalid options, an error message will be printed to this effect. However,
+    **the application will still be deployed **.
 
+To pass the options directly:
+
+```bash
+juju deploy --config name='Juju Wiki' --config skin='monobook'
+```
+
+A combination can also be used. If a duplication arises, the last-mentioned
+value gets used. For instance, below, the wiki will be assigned the name of
+'Juju Wiki':
+
+```bash
+juju deploy --config name='Juju Wookie' --config myconfig.yaml
+```
 
 ## Configuring an application which is already deployed
 
