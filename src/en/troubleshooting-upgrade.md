@@ -1,5 +1,6 @@
 Title: Juju troubleshooting - environment upgrade  
 TODO:  Review required (some things: 'environment')
+       flag '--ignore-agent-versions' is only available in 2.2.6+. there is a more manual command ('juju-force-upgrade') that may become available that older controllers can use
 
 
 # Troubleshooting environment upgrades
@@ -70,10 +71,20 @@ information.
 
 ## Case #3 - An agent is too old
 
-When an agent, for some reason, is not running the same version as other agents
-in the model the upgrade process may abort. To overcome this you may consider
-to force the upgrade by ignoring the agent version check:
+When an agent is running agent software that is more than 1 patch point behind
+the targeted upgrade version the upgrade process will abort.
+
+One very common reason for "agent version skew" is that during a previous
+upgrade the agent could not be contacted and, therefore, was not upgraded along
+with the rest of the agents.
+
+To overcome this situation you may force the upgrade by ignoring the agent
+version check:
 
 ```bash
 juju upgrade-juju --ignore-agent-versions
 ```
+
+!!! Note:
+    The flag `--ignore-agent-versions` is only available starting with Juju
+    2.2.6.
