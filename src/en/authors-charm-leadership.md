@@ -97,6 +97,7 @@ leader settings can be communicated with the following tools:
 Assuming your own implementations of `create_settings` and `valid_settings`, you
 can use the two pseudopython snippets below:
 
+```python
     def set_shared_settings():
         if is_leader():
             if !valid_settings(leader_get()):
@@ -108,7 +109,7 @@ can use the two pseudopython snippets below:
         if !valid_settings(settings):
              raise WaitingForLeader()
         return settings
-
+```
 ...which can be used as follows:
 
   * `set_shared_settings` must be called in `leader-elected`, and may be called
