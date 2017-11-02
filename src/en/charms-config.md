@@ -9,7 +9,7 @@ service, as opposed to only a specific unit or relation. The configuration can
 be modified by an administrator at deployment time or after the services are
 operational.
 
-## Discovering application configuration options
+## Discovering service configuration options
 
 Each charm will have its own set of options and possible values. You can
 discover these in several ways:
@@ -18,9 +18,9 @@ discover these in several ways:
   - By viewing the charm in the [charm store.](https://jujucharms.com)
   - By examining the **config.yaml** file in the charm itself.
 
-## Configuring an application at deployment time
+## Configuring a service at deployment time
 
-Configuration values for an application can be set during deployment in several
+Configuration values for a service can be set during deployment in several
 ways:
 
  - by using a [yaml-formatted][yaml] file
@@ -39,8 +39,8 @@ mediawiki:
   skin: monobook
 ```
 
-Assuming the file is called `myconfig.yaml`, the application can be deployed
-and configured in this way:
+Assuming the file is called `myconfig.yaml`, the service can be deployed and
+configured in this way:
 
 ```bash
 juju deploy --config myconfig.yaml mediawiki
@@ -49,7 +49,7 @@ juju deploy --config myconfig.yaml mediawiki
 !!! Warning:
     If the configuration file cannot be read or contains syntax errors or
     invalid options, an error message will be printed to this effect. However,
-    **the application will still be deployed **.
+    **the service will still be deployed **.
 
 To pass the options directly:
 

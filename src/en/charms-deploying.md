@@ -87,29 +87,25 @@ The default-series can also be added to any bootstrapped environment with the
 juju set-env "default-series=trusty"
 ```
 
-**Note:** Specifying a local repository makes Juju look there **first**, but if the relevant charm is not found in that repository, it will fall back to fetching it from the charm store. If you wish to check where a charm was installed from, it is listed in the `juju status` output.
+!!! Note:
+    Specifying a local repository makes Juju look there **first**, but if
+    the relevant charm is not found in that repository, it will fall back to
+    fetching it from the charm store. If you wish to check where a charm was
+    installed from, it is listed in the `juju status` output.
 
-
-# Deploying with a configuration file
+# Configuring at deployment time
 
 Deployed services usually start with a sane default configuration. However, for
-some services it is desireable (and quicker) to configure them at deployment
-time. This can be done by creating a YAML format file of configuration values
-and using the `--config=` switch:
+some services it may be desirable (and quicker) to configure them at deployment
+time. This can be done whether a charm is deployed from the Charm Store or from
+a local charm. See [Application configuration](./charms-config.html) for more
+on this.
 
-```bash
-juju deploy mysql --config=myconfig.yaml
-```
-
-<<<<<<< HEAD
-There is more information on this, and other ways to configure services in the
-[documentation for configuring services](./charms-config.html).
-
-!!! Note: After Juju resolves a charm and its dependencies, it bundles them and deploys
-them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache).
-This allows the same charm to be deployed to multiple machines repeatably and
-with minimal network transfers.
-
+!!! Note:
+    After Juju resolves a charm and its dependencies, it bundles them and deploys
+    them to a machine provider charm cache/repository (e.g. ~/.juju/charmcache).
+    This allows the same charm to be deployed to multiple machines repeatably and
+    with minimal network transfers.
 
 # Deploying to specific machines and containers
 
@@ -117,26 +113,12 @@ Juju has native support for specifying which machine a charm should be deployed
 to. This is useful for a few reasons. The most obvious reason is to save money
 when deploying to a public cloud. Instead of having one machine per unit we can
 consolidate services.
-=======
-See [Configuring models](./models-config.html) for more details on model level
-configuration.
 
-See [Addendum: local charms](#addendum:-local-charms) below for further
-explanation of local charms and how they can be managed.
-
-## Configuring at deployment time
-
-Deployed applications usually start with a sane default configuration. However,
-for some applications it may be desirable (and quicker) to configure them at
-deployment time. This can be done whether a charm is deployed from the Charm
-Store or from a local charm.
-
-See [Application configuration](./charms-config.html) for more on this.
->>>>>>> 5304d6ff... add and reorganise
-
-!!! Note: The 'local provider' is a special case, where machine 0 is effectively
-the host. You can still colocate services on other created machines, but not 
-on machine 0, so the following example will not work with the local provider
+!!! Note:
+    The 'local provider' is a special case, where machine 0 is effectively
+    the host. You can still colocate services on other created machines, but not 
+    on machine 0, so the following example will not work with the local
+    provider.
 
 In this example we use the `--constraints` flag to fire up a bootstrap node with
 4G of RAM so we can deploy other services to it by using the `--to` command:
