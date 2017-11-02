@@ -64,7 +64,9 @@ is growing. This charm is designed to be a base for other docker based charms.
 This can be achieved by creating a new charm directory, and placing the following
 directives in your `layer.yaml`
 
-    includes: ['layer:docker']
+```yaml
+includes: ['layer:docker']
+```
 
 When you run `charm build` the resulting charm will contain all of the logic
 to install and upgrade docker. Freeing you to focus on delivering your application
@@ -105,7 +107,7 @@ charms. This document will focus on the reactive parts of the layer-docker
 charm. You can read more about layers in the
 +[building a charm with layers documentation](authors-charm-building.html).
 
-```
+```no-highlight
 ├── composer.yaml
 ├── metadata.yaml
 ├── reactive
@@ -167,7 +169,7 @@ can be found on github.
 Inside the reactive directory of the layer-docker-nginx charm is a file
 `nginx.py` that contains all the code for this charm.
 
-```
+```no-highlight
 ├── assets
 │   ├── index.html
 │   └── jujuanddocker.png
@@ -201,6 +203,7 @@ configuring Docker. The `install_nginx` function is decorated with
 `@when('docker.available')` meaning that the code will run after Docker is
 installed and configured. The install_nginx function sets the state
 "nginx.available" when it is complete.
+
 ```python
 @when('docker.available')
 def install_nginx():
@@ -226,6 +229,7 @@ the run_container function is executed. The `@when_not` decorator indicates
 the state that must not be active for this function to run. Since the
 run_container function sets the "nginx.started" state this ensures the
 container is not started over and over again.
+
 ```python
 @when('nginx.available', 'docker.available')
 @when_not('nginx.started')
@@ -265,6 +269,7 @@ indication to stop the container in which case it will set the "nginx.stopped"
 state. The decorator `@when_not('nginx.stopped')` protects this function from
 being called repeatedly. Note the `reactive.remove_state('nginx.stop')` and
 `reactive.set_state('nginx.stopped')`calls to assert a stopped state.
+
 ```python
 @when('nginx.stop', 'docker.available')
 @when_not('nginx.stopped')
