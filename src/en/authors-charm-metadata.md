@@ -14,8 +14,6 @@ the following fields:
   It will also appear in the juju GUI.
   - `tags` is a descriptive tag that is used to sort the charm in the store.
 
-
-
 Here's a valid metadata file:
 
 ```yaml
@@ -101,18 +99,6 @@ and whether it's designed for deployment as a
   - if the charm is subordinate, it must contain at least one `requires`
     relation with container scope.
 
-`payloads` allows you to register payloads such as LXC, KVM, and docker with
-Juju. This lets the operator better understand the purpose and function of these
-payloads on a given machine.
-
-```yaml
-payloads:
-    monitoring:
-        type: docker
-    kvm-guest:
-        type: kvm
-```
-
 Other available fields are:
 
   - `series` is a list of series that the charm supports.
@@ -122,3 +108,40 @@ Other available fields are:
 
 Other field names should be considered to be reserved; please don't use any not
 listed above to avoid issues with future versions of Juju.
+
+## Payloads
+
+Payloads provide a means for the charm author to get information from a
+deployed charm. This is especially useful in large and complex deployments. For
+instance, the author may want to check the status of some element of the
+deployment such as a Docker container.
+
+Payloads are defined in the `payloads` section of `metadata.yaml` by assigning
+a class and type. Classes refer to simply the name of the payload and the type
+describes the nature of the payload. Both are author-defined and are not
+validated by Juju.
+
+The most common types of payload are based on Docker, KVM, and LXD.
+
+As an example, below the following class/type pairs are defined:
+'monitoring/docker', 'kvm- guest/kvm', and 'lxd-container/lxd':
+
+```yaml
+payloads:
+    monitoring:
+        type: docker
+    kvm-guest:
+        type: kvm
+    lxd-container:
+        type: lxd
+```
+
+Payloads can be viewed using [juju list-payloads][list-payloads] and managed
+from the charm hook using the following commands:
+
+- payload-register
+- payload-unregister
+- payload-status-set
+
+See the [Hook tools documentation][hook-payloads] for further details on these
+payload commands. 
