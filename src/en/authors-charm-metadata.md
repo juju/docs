@@ -125,10 +125,10 @@ resources:
 
 ## Payloads
 
-Payloads provide a means for the charm author to get information out of the
-services deployed by a charm. This is especially useful in large and complex
-deployments. For instance, the author may want to check the status of some
-element of the services such as a Docker container.
+Payloads provide a means for the charm author to get information from a
+deployed charm. This is especially useful in large and complex deployments. For
+instance, the author may want to check the status of some element of the
+deployment such as a Docker container.
 
 Payloads are defined in the `payloads` section of `metadata.yaml` by assigning
 a class and type. A class defines the name of the payload and the type
@@ -137,7 +137,7 @@ validated by Juju.
 
 The most common types of payload are based on Docker, KVM, and LXD.
 
-As an example, below the following class/type pairs are defined:
+As an example, below, the following class/type pairs are defined:
 'monitoring/docker', 'kvm- guest/kvm', and 'lxd-container/lxd':
 
 ```yaml
