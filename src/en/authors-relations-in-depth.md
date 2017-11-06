@@ -81,11 +81,12 @@ marked for termination. In either case, it follows the same sequence:
   - `depart` from its scope in the relation.
 
 So what's the difference between relation-departed and relation-broken? Think
-of relation-departed as the "saying goodbye" event. Relation settings can still
-be read (with relation-get) and can even still be set (with relation-set). Once
-relation-broken fires, the relation no longer exists. This is a good spot to do
-any final cleanup, if necessary. Both relation-departed and relation-broken
-will always fire, regardless of how the relation is terminated.
+of relation-departed as the "saying goodbye" event. While in the latter state,
+relation settings can still be read (with relation-get) and a relation can even
+still be set (with relation-set). Once relation-broken fires, however, the
+relation no longer exists. This is a good spot to do any final cleanup, if
+necessary. Both relation-departed and relation-broken will always fire,
+regardless of how the relation is terminated.
 
 The unit's eventual departure from its scope will in turn be detected by units
 of the related service (if they have not already inferred its imminent departure
