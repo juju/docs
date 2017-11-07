@@ -1,7 +1,5 @@
 Title: Juju troubleshooting - environment upgrade  
 TODO:  Review required (some things: 'environment')
-       flag '--ignore-agent-versions' is only available in 2.2.6+. there is a more manual command ('juju-force-upgrade') that may become available that older controllers can use
-
 
 # Troubleshooting environment upgrades
 
