@@ -1,5 +1,5 @@
 Title: Juju troubleshooting - environment upgrade  
-
+TODO:  Review required (some things: 'environment')
 
 # Troubleshooting environment upgrades
 
@@ -65,3 +65,32 @@ juju resolved etcd/2
 
 See [Debugging Juju charm hooks](./developer-debugging.html) for more
 information.
+
+
+## Case #3 - An agent is too old
+
+When the running agent software that is more than 1 patch point behind the
+targeted upgrade version the upgrade process will abort.
+
+One very common reason for "agent version skew" is that during a previous
+upgrade the agent could not be contacted and, therefore, was not upgraded along
+with the rest of the agents.
+
+For example, the following error message will be printed when attempting to
+upgrade from 2.2.1 to 2.2.2 when an agent is still running, say, 2.2.0:
+
+```no-highlight
+ERROR some agents have not upgraded to the current model version 2.2.1:
+machine-0, unit-ubuntu-0
+```
+
+To overcome this situation you may force the upgrade by ignoring the agent
+version check:
+
+```bash
+juju upgrade-juju --ignore-agent-versions
+```
+
+!!! Note:
+    The flag `--ignore-agent-versions` is only available starting with Juju
+    2.2.6.
