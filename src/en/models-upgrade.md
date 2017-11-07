@@ -1,4 +1,5 @@
 Title: Upgrading Juju software
+TODO:  Review required (some things: apt-get, no more --upload-tools)
 
 # Upgrading Juju software
 
@@ -43,7 +44,7 @@ run on each machine Juju creates, including controllers.
 
 Overview:
 
-- Upgrades must be applied to the controller model first
+- Upgrades must be applied to the controller model first.
 - An upgrade is applied to agents running on all machines across a model.
 - During the upgrade, an algorithm will select a version to upgrade to if a
   version is not specified.
