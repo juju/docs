@@ -42,12 +42,6 @@ multiple constraints delimited by a space.
     blank to indicate any architecture is acceptable, or one of `amd64`,
     `arm`, `i386`, `arm64`, or `ppc64`.
 
-- container
-
-    Name of container type that an application unit must run inside. Can be
-    left blank to indicate no preference, or one of `none` for
-    uncontainerised or `lxc``.
-
 - cores
 
     Minimum number of effective CPU cores that must be available to an
@@ -125,7 +119,7 @@ in combination. Use this list to help you understand the differing needs.
 - Conflicting constraints: [instance-type] vs [mem, cpu-cores, arch]
 
 ###Cloudsigma (currently behind development flag):
-- Unsupported: [container, instance-type, tags, virt-type]
+- Unsupported: [instance-type, tags, virt-type]
 
 ###EC2 Provider:
 - Unsupported: [tags, virt-type]
@@ -134,8 +128,8 @@ in combination. Use this list to help you understand the differing needs.
 
 ###GCE Provider:
 - Unsupported: [tags, virt-type]
-- Valid values: instance-type=[defined on the cloud]; container=kvm
-- Conflicting constraints: [instance-type] vs [arch, cpu-cores, cpu-power, mem, container]
+- Valid values: instance-type=[defined on the cloud]
+- Conflicting constraints: [instance-type] vs [arch, cpu-cores, cpu-power, mem]
 
 ###Joyent Provider:
 - Unsupported: [cpu-power, tags, virt-type]
