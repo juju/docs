@@ -33,7 +33,7 @@ response to either `juju resolved` or `juju upgrade-charm --force`.
     [charm directory](./authors-charm-components.html).
   - `juju resolved` reverts the charm directory's contents to whatever
     they were at the start of the failed hook, and runs the hook again exactly as
-    before. This, in combination with the [debug-hooks](./authors-hook-debug.html)
+    before. This, in combination with the [debug-hooks](./developer-debugging.html)
     command, is your main entry point for investigating an error in detail. If the
     hook fails again when retried, it will set an error as before and wait again
     for user resolution.

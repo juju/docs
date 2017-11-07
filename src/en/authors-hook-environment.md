@@ -32,12 +32,12 @@ The following variables are always available.
   - The `$CHARM_DIR` variable is the path to the charm directory.
   - The `$PATH` variable is prefixed with the path to the hook tools directory.
   - The `$JUJU_UNIT_NAME` variable holds the name of the unit.
-  - The `$JUJU_API_ADDRESSES` variable holds a space-separated list of API 
+  - The `$JUJU_API_ADDRESSES` variable holds a space-separated list of API
     server addresses.
   - The `$JUJU_AVAILABILITY_ZONE` variable holds the current availability zone
-    the charm is running in (not all cloud providers support Availability 
+    the charm is running in (not all cloud providers support Availability
     Zones).
-   
+
 In addition, every relation hook makes available relation-specific variables:
 
   - The `$JUJU_RELATION` variable holds the relation name. This information
@@ -48,7 +48,7 @@ In addition, every relation hook makes available relation-specific variables:
   important, because it's the only reasonable way of telling the difference
   between (say) a database application's many independent clients.
 
-...and, if that relation hook is not a 
+...and, if that relation hook is not a
 [-broken](authors-charm-hooks.html#[name]-relation-broken) hook:
 
   - The `$JUJU_REMOTE_UNIT` variable holds the name of the unit which is
@@ -62,7 +62,7 @@ charm only. Finally, in all cases:
     tools to work: juju _does_ pay attention to them, but you should treat
     them as opaque and avoid messing with them.
 
-!!! Note: 
+!!! Note:
     `juju run` runs commands in a Juju context and sets a value for
     `$JUJU_CONTEXT_ID` each time it is used. This is what enables you to run hook
     tools.
@@ -82,7 +82,7 @@ but the context ID will change to indicate the new context created for that
 haproxy/0-juju-run-9100131373820979914
 ```
 
-Finally, if you're [debugging](./authors-hook-debug.html), you'll also have
+Finally, if you're [debugging](./developer-debugging.html), you'll also have
 access to:
 
   - The `$JUJU_HOOK_NAME` variable, which will be set to the current hook name.
@@ -104,22 +104,22 @@ Tools which do not produce output also accept the `--format` flag, but ignore
 it, for compatibility reasons.
 
 The various "relation-" tools infer context from the hook where possible. If
-they're running in a relation hook, the current relation identifier is set as 
-the default; and if they're running in a -joined, -changed, or -broken hook, 
+they're running in a relation hook, the current relation identifier is set as
+the default; and if they're running in a -joined, -changed, or -broken hook,
 the current remote unit is set as the default.
 
-To use relation hooks effectively, you should spend time making sure you 
+To use relation hooks effectively, you should spend time making sure you
 understand the [relation model](./authors-relations-in-depth.html).
 
-!!! Note: 
+!!! Note:
     Remember that all commands that produce output accept `--format json`
-    and `--format yaml`, and you may consider it smarter to use those for clarity's 
+    and `--format yaml`, and you may consider it smarter to use those for clarity's
     sake than to depend on the default `smart` format.
 
 ### juju-log
 
 `juju-log` writes its arguments directly to the unit's log file. All hook
-output is currently logged anyway, though this may not always be the case - If 
+output is currently logged anyway, though this may not always be the case - If
 it's important, please `juju-log` it.
 
 ```bash
@@ -131,12 +131,12 @@ This tool accepts a `--debug` flag which causes the message to be logged at
 
 ### juju-reboot [--now]
 
-There are several cases where a charm needs to reboot a machine, such as 
+There are several cases where a charm needs to reboot a machine, such as
 after a kernel upgrade, or to upgrade the entire system. The charm may not
 be able to complete the hook until the machine is rebooted.
 
 The juju-reboot command allows charm authors to schedule a reboot from inside
-a charm hook. The reboot will only happen if the hook completes without error. 
+a charm hook. The reboot will only happen if the hook completes without error.
 You can schedule a reboot like so:
 
 ```bash
@@ -144,11 +144,11 @@ juju-reboot
 ```
 
 The `--now` option can be passed to block hook execution. in this case the
-`juju-reboot` command will hang until the unit agent stops the hook and 
-re-queues it for the next run. This will allow you to create multi-step 
+`juju-reboot` command will hang until the unit agent stops the hook and
+re-queues it for the next run. This will allow you to create multi-step
 install hooks.
 
-Charm authors must wrap calls to juju-reboot to ensure it is actually 
+Charm authors must wrap calls to juju-reboot to ensure it is actually
 necessary, otherwise the charm risks entering a reboot loop. The preferred
 work-flow is to check if the feature/charm is in the desired state, and
 reboot when needed. This bash example assumes that "$FEATURE_IS_INSTALLED"
@@ -163,7 +163,7 @@ then
 fi
 ```
 
-The `juju-reboot` command can be called from any hook. It can also be 
+The `juju-reboot` command can be called from any hook. It can also be
 called using the `juju run` command.
 
 ### unit-get
@@ -221,7 +221,7 @@ config-get [key-with-no-default]
 config-get [missing-key]
 ```
 
-!!! Note: 
+!!! Note:
     The above two examples are not misprints - asking for a value which
     doesn't exist or has not been set returns nothing and raises no errors.
 
@@ -253,14 +253,14 @@ open 8000-8080/tcp
 ```
 
 `open-port` will not have any effect if the application is not exposed, and may have
-a somewhat delayed effect even if it is. This operation is transactional, so 
+a somewhat delayed effect even if it is. This operation is transactional, so
 changes will certainly not be made unless the hook exits successfully.
 
-Juju also tracks ports opened across the machine and will not allow conflicts - 
-if another charm has already opened the port 
+Juju also tracks ports opened across the machine and will not allow conflicts -
+if another charm has already opened the port
 (**or one or more ports in a range**) you have specified,
-your request will be ignored. 
- 
+your request will be ignored.
+
 This command accepts and ignores `--format` for
 compatibility purposes, but it doesn't produce any output.
 
@@ -292,10 +292,10 @@ close-port 80-100
 
 ### opened-ports
 
-The opened-ports hook tool lists all the ports currently opened 
+The opened-ports hook tool lists all the ports currently opened
 **by the running charm**. It does not, at the moment, include ports which may
 be opened by other charms co-hosted on the same machine
-[lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770). 
+[lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770).
 
 The command returns a list of one port or range of ports per line, with the port
 number followed by the protocol (tcp or udp).
@@ -307,24 +307,24 @@ For example, running `opened-ports` may return:
 81/tcp
 ```
 
-!!! Note: 
-    Opening ports is transactional (i.e. will take place on successfully 
+!!! Note:
+    Opening ports is transactional (i.e. will take place on successfully
     exiting the current hook), and therefore `opened-ports` will not return any
-    values for pending `open-port` operations run from within the same hook. 
+    values for pending `open-port` operations run from within the same hook.
 
 
 ### relation-set
 
 `relation-set` writes the local unit's settings for some relation. It accepts
-any number of `key=value` strings, and an optional `-r` argument, which 
-defaults to the current relation identifier. If it's not running in a relation 
-hook, `-r` needs to be specified. The `value` part of an argument is not 
-inspected, and is stored directly as a string. Setting an empty string causes 
+any number of `key=value` strings, and an optional `-r` argument, which
+defaults to the current relation identifier. If it's not running in a relation
+hook, `-r` needs to be specified. The `value` part of an argument is not
+inspected, and is stored directly as a string. Setting an empty string causes
 the setting to be removed.
 
 Examples:
 
-Setting a pair of values for the local unit in the default relation identifier 
+Setting a pair of values for the local unit in the default relation identifier
 which is stored in the environment variable `JUJU_RELATION_ID`:
 
 ```bash
@@ -360,7 +360,7 @@ propagated via relation-set, with the single exception of the `private-address`
 key, which is always set before the unit joins.
 
 You may wish to overwrite the `private-address` setting, for example if you're
-writing a charm that serves as a proxy for some external application; but you 
+writing a charm that serves as a proxy for some external application; but you
 should in general avoid _removing_ that key, because most charms expect that
 value to exist unconditionally.
 
@@ -374,15 +374,15 @@ is participating in.
 
 ### relation-get
 
-`relation-get` reads the settings of the local unit, or of any remote unit, 
-in a given relation (set with `-r`, defaulting to the current relation 
-identifier, as in `relation-set`). The first argument specifies the settings 
-key, and the second the remote unit, which may be omitted if a default is 
+`relation-get` reads the settings of the local unit, or of any remote unit,
+in a given relation (set with `-r`, defaulting to the current relation
+identifier, as in `relation-set`). The first argument specifies the settings
+key, and the second the remote unit, which may be omitted if a default is
 available (that is, when running a relation hook other than -broken).
 
 If the first argument is omitted, a dictionary of all current keys and values
-will be printed; all values are always plain strings without any 
-interpretation. If you need to specify a remote unit but want to see all 
+will be printed; all values are always plain strings without any
+interpretation. If you need to specify a remote unit but want to see all
 settings, use `-` for the first argument.
 
 The environment variable `JUJU_REMOTE_UNIT` stores the default remote unit:
@@ -403,7 +403,7 @@ relation-get
 To get a specific setting from the default remote unit in the default relation
 you would instead use:
 
-    
+
 ```no-highlight
 relation-get username
  jim
@@ -427,7 +427,7 @@ necessarily _accurate_, in that you will always see settings that:
     local changes from `relation-set` will be seen correctly.
 
 You should never depend upon the presence of any given key in `relation-get`
-output. Processing that depends on specific values (other than `private-address`) 
+output. Processing that depends on specific values (other than `private-address`)
 should be restricted to [-changed](authors-charm-hooks.html#[name]-relation-changed)
 hooks for the relevant unit, and the absence
 of a remote unit's value should never be treated as an
@@ -442,7 +442,7 @@ sufficient to complete all configuration that depends on remote unit settings.
 Settings for remote units already known to have departed remain accessible for
 the lifetime of the relation.
 
-!!! Note: 
+!!! Note:
     `relation-get` currently has a
     [bug](https://bugs.launchpad.net/juju-core/+bug/1223339)
     that allows units of the same application to see each other's
@@ -453,10 +453,10 @@ the lifetime of the relation.
 
 ### relation-list
 
-`relation-list` outputs a list of all the related **units** for a relation 
-identifier. If not running in a relation hook context, `-r` needs to be 
-specified with a relation identifier similar to the`relation-get` and 
-`relation-set` commands. 
+`relation-list` outputs a list of all the related **units** for a relation
+identifier. If not running in a relation hook context, `-r` needs to be
+specified with a relation identifier similar to the`relation-get` and
+`relation-set` commands.
 
 Examples:
 
@@ -482,15 +482,15 @@ relation-list -r website:2
 
 ### relation-ids
 
-`relation-ids` outputs a list of the related **applications** with a relation 
-name. Accepts a single argument (relation-name) which, in a relation hook, 
-defaults to the name of the current relation. The output is useful as input 
-to the `relation-list`, `relation-get`, and `relation-set` commands to read 
+`relation-ids` outputs a list of the related **applications** with a relation
+name. Accepts a single argument (relation-name) which, in a relation hook,
+defaults to the name of the current relation. The output is useful as input
+to the `relation-list`, `relation-get`, and `relation-set` commands to read
 or write other relation values.
 
 Examples:
 
-The current relation name is stored in the environment variable 
+The current relation name is stored in the environment variable
 `JUJU_RELATION`. All "server" relation identifiers can be shown with:
 
 ```no-highlight
@@ -565,18 +565,18 @@ private-address: 10.142.0.7
 
 ### status-set
 
-Introduced in version 1.24 of Juju, a new status mechanism allows Juju and its 
-charms to more accurately reflect their current status. This places the 
+Introduced in version 1.24 of Juju, a new status mechanism allows Juju and its
+charms to more accurately reflect their current status. This places the
 responsibility on the charm to know its status, and set it accordingly using
 the `status-set` hook tool.
-This hook tool takes 2 arguments. The first is the status to report, which can 
+This hook tool takes 2 arguments. The first is the status to report, which can
 be one of the following:
 
   - maintenance (the unit is not currently providing a application, but expects
     to be soon, E.g. when first installing)
   - blocked (the unit cannot continue without user input)
-  - waiting (the unit itself is not in error and requires no intervention, 
-    but it is not currently in service as it depends on some external factor, 
+  - waiting (the unit itself is not in error and requires no intervention,
+    but it is not currently in service as it depends on some external factor,
     e.g. an application to which it is related is not running)
   - active (This unit believes it is correctly offering all the software it is
     primarily installed to provide)
@@ -587,12 +587,12 @@ values which may be set by Juju itself,
 
 The second argument is a user-facing message, which will be displayed to any
 users viewing the status, and will also be visible in the status history. This
-can contain any useful information. 
+can contain any useful information.
 
 This status message provides valuable feedback to the user about what is
 happening. Changes in the status message are not broadcast to peers and
 counterpart units - they are for the benefit of humans only, so tools
-representing Juju applications (e.g. the Juju GUI) should check occasionally 
+representing Juju applications (e.g. the Juju GUI) should check occasionally
 and be told the current status message.
 
 Spamming the status with many changes per second would not be welcome
@@ -623,7 +623,7 @@ Examples:
 status-set maintenance "installing software"
 status-set maintenance "formatting storage space, time left: 120s"
 status-set waiting "waiting for database"
-status-set active 
+status-set active
 status-set active "Storage 95% full"
 status-set blocked "Need a database relation"
 status-set blocked "Storage full"
@@ -631,7 +631,7 @@ status-set blocked "Storage full"
 
 ### status-get
 
-The `status-get` hook tool allows a charm to query what is recorded in Juju as 
+The `status-get` hook tool allows a charm to query what is recorded in Juju as
 the current workload status. Without arguments, it just prints the workload
 status value e.g. 'maintenance'. With `--include-data` specified, it prints
 YAML which contains the status value plus any data associated with the status.
@@ -642,7 +642,3 @@ Examples:
 status-get
 status-get --include-data
 ```
-
-
-
-
