@@ -83,8 +83,9 @@ error by issuing the `juju resolved` command. See the  [Retrying failed
 hooks](#retrying-failed-hooks) section for more information about how to retry
 hooks.
 
-!!! Note: It is possible and often desirable to run debug-hooks on more than
-one unit at a time. You should open a new terminal window for each.
+!!! Note:
+    It is possible and often desirable to run debug-hooks on more than
+    one unit at a time. You should open a new terminal window for each.
 
 To debug actions, you use the same command, like this:
 
@@ -145,9 +146,10 @@ queue until you exit your current window. See the special considerations below.
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
 
-!!! Note: To allow Juju to continue processing events normally, you **must**
-exit the hook execution window with the `exit` command, otherwise all further
-events on that unit will be paused indefinitely.
+!!! Note:
+    To allow Juju to continue processing events normally, you **must**
+    exit the hook execution window with the `exit` command, otherwise all further
+    events on that unit will be paused indefinitely.
 
 The queue can be halted by exiting with an `exit 1` command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending
@@ -177,16 +179,20 @@ used to retry the hook immediately. See the
 for more information on the automatic retry feature and how to disable this
 behaviour.
 
-## Debugging Reactive
+## Debugging reactive Charms
 
-Reactive charms can set states. It may be helpful to see these states for
-debugging purposes. You can view or set the states in a debug-hooks session with the
-`charms.reactive` command.
+Debugging a reactive Charm is similar to debugging a regular charm: you use `juju debug-hooks` to get into the hook context and you start the reactive framework by executing the hook file in the `hooks/` directory. That hook will start the reactive framework and [run your handlers based on which flags are set](https://charmsreactive.readthedocs.io/en/latest/dispatch.html). Note that the reactive framework **resets all flags to their original value when a handler crashes.** Changes to flags happen immediately, but they are only persisted at the end of a complete and successful run of the reactive framework. All unpersisted changes are discarded when a hook crashes. This is the case because a Juju hook is transactional: all changes such as open ports are discarded when the hook fails.
 
-### View States
+*Tip: If essential hooks such as `install` and `config-changed` are not in the `hooks` directory of your Charm, you forgot to include `layer:basic` in your `layer.yaml` file.*
+
+### charms.reactive command
+
+charms.reactive has a commandline tool that can help you debugging Charms. You can use it to view, set and clear flags in a debug-hooks session. *Charms built with older versions of the reactive framework might require you to use `state` instead of `flag`.*
+
+**Show flags**
 
 ```shell
-$ charms.reactive -p get_states
+$ charms.reactive -p get_flags
 
 {
  'etcd.installed': None,
@@ -197,11 +203,14 @@ $ charms.reactive -p get_states
  }
 ```
 
-### Set States
+*Note that all flag changes are reset when a handler crashes so this command will only show you the initial values at the start of the hook.*
+
+**Set flags**
 
 ```shell
-$ charms.reactive set_state cache.cleared
+$ charms.reactive set_flag cache.cleared
 ```
+
 
 ## Debugging early hooks
 
