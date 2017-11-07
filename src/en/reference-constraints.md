@@ -40,12 +40,6 @@ multiple constraints delimited by a space.
     blank to indicate any architecture is acceptable, or one of `amd64`,
     `arm`, `i386`, `arm64`, or `ppc64`.
 
-- container
-
-    Name of container type that a service unit must run inside. Can be
-    left blank to indicate no preference, or one of `none` for
-    uncontainerised, `lxc`, or `kvm`.
-
 - cpu-cores
 
     Minimum number of effective CPU cores that must be available to a
