@@ -136,9 +136,15 @@ Offer  User   Relation id  Status  Endpoint  Interface  Role      Ingress subnet
 mysql  admin  2            joined  db        mysql      provider  69.193.151.51/32
 ```
 
-On the AWS mysql model, the relation id is '2' for the mediawiki relation.
+On the AWS mysql model, the relation id is 'db:2', or simply just '2', for the mediawiki relation.
 
 Let's get address information for a local unit:
+
+```bash
+juju run --unit mysql/1 "network-get --format yaml db -r db:2"
+```
+
+The endpoint prefix to relation id is optional, so this works as well:
 
 ```bash
 juju run --unit mysql/1 "network-get --format yaml db -r 2"
@@ -161,7 +167,7 @@ Note that the ingress address is now set to the public address, since for this
 relation ingress will be from an external source:
 
 ```bash
-juju run --unit mysql/1 "network-get --format yaml db -r 2 --ingress-address"
+juju run --unit mysql/1 "network-get --format yaml db -r db:2 --ingress-address"
 ```
 
 Output:
@@ -177,7 +183,7 @@ relation context, we can use `relation-list` to get the remote unit (for this
 example there is only one):
 
 ```bash
-juju run --unit mysql/1 "relation-get -r 2 egress-subnets \`relation-list -r 2\`"
+juju run --unit mysql/1 "relation-get -r db:2 egress-subnets \`relation-list -r db:2\`"
 ```
 
 Output:
@@ -192,7 +198,7 @@ a local LXD cloud isn't supported in this case, but the example illustrates how
 a charm can get the ingress address of the remote unit:
 
 ```bash
-juju run --unit mysql/1 "relation-get -r 2 ingress-address \`relation-list -r 2\`"
+juju run --unit mysql/1 "relation-get -r db:2 ingress-address \`relation-list -r db:2\`"
 ```
 
 Output:
