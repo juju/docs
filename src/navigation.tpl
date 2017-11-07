@@ -164,8 +164,6 @@
                 <li><a href="authors-relations.html">Implementing relations</a></li>
                 <li><a href="authors-charm-leadership.html">Charm leadership</a></li>
                 <li><a href="authors-hook-errors.html">Hook Errors</a></li>
-                <li><a href="authors-hook-debug.html">Hook Debugging</a></li>
-                <li><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
                 <li><a
                     href="authors-subordinate-applications.html">Subordinate applications</a></li>
                 <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
