@@ -1,6 +1,6 @@
 Title: Cross Model Relations
 TODO:  Add scenario #3: different cloud types
-       Add commands to a scenario: grant|revoke, suspend|resume, remove-offer
+       Add commands to a scenario: grant|revoke, suspend|resume, remove-offer, consume|remove-saas
        Bug tracking: https://pad.lv/1726945
 
 # Cross Model Relations
@@ -34,6 +34,9 @@ The commands related specifically to this subject are:
 
 [`remove-offer`][commands-remove-offer]
 : Removes an offer.
+
+[`remove-saas`][commands-remove-saas]
+: Removes a SAAS object created with the `juju consume` command.
 
 [`resume-relation`][commands-resume-relation]
 : Resumes a suspended relation to an offer.
@@ -156,6 +159,9 @@ offer alias can avoid a namespace conflict with a pre-existing application.
 `juju add-relation <application> <offer alias>`
 
 Offers which have been consumed show up in `juju status` in the SAAS section.
+Such an object can be removed in the consuming model with:
+
+`juju remove-saas <offer alias>`
 
 ### Relations and firewalls
 
@@ -259,6 +265,7 @@ The following CMR scenarios will be examined:
 [commands-offers]: ./commands.html#offers
 [commands-offer]: ./commands.html#offer
 [commands-remove-offer]: ./commands.html#remove-offer
+[commands-remove-saas]: ./commands.html#remove-saas
 [commands-resume-relation]: ./commands.html#resume-relation
 [commands-set-firewall-rule]: ./commands.html#set-firewall-rule
 [commands-show-offer]: ./commands.html#show-offer
