@@ -2,8 +2,8 @@ Title: FAN container networking
 
 # FAN container networking
 
-FAN networking addresses an important issue resulting from the proliferation
-of container usage: the need to manage the IP address space that results in
+FAN networking addresses an important issue caused by the proliferation of
+container usage: the need to manage the IP address space that results in
 network connectivity among containers running on separate hosts.
 
 Juju integrates with the FAN to provide network connectivity between deployed
