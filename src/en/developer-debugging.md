@@ -1,4 +1,4 @@
-Title: Debugging Juju charm hooks  
+Title: Debugging Juju charm hooks
 
 # Debugging hooks
 
@@ -61,7 +61,7 @@ executes in. The `juju debug-hooks` command allows you to do exactly that,
 whether it's to debug a failed hook or to write and test new hook code.
 
 `juju debug-hooks` accepts a unit and an optional list of hooks to debug (which must be named individually
-in a space-delimited list) or no hook names, causing all hooks to be debugged:  
+in a space-delimited list) or no hook names, causing all hooks to be debugged:
 
 ```bash
 juju debug-hooks <application/unit> [hook-name hook-name2 ...]
@@ -93,7 +93,7 @@ To debug actions, you use the same command, like this:
 juju debug-hooks <service/unit> [action-name action-name2 ...]
 ```
 
-For example, if you want to check the `add-repo` action of the `git` charm,
+For example, if you want to check the `add-repo` action of a the `git` charm,
 use:
 
 ```bash
@@ -124,7 +124,7 @@ that has been trapped.
 context](./authors-hook-environment.html).
   - Additionally, the environment variable`$JUJU_HOOK_NAME` is set
 appropriately.
-  ![Image showing tmux debug hooks session](./media/authors-hook-debug-1.png)
+  ![Image showing tmux debug hooks session](./media/developer-debugging-1.png)
 
 To proceed, you should **manually execute the hook**, or perform whatever other
 actions you want. At any time during a debug-hooks window 1 session you can run
@@ -172,11 +172,11 @@ back to the debug-hooks session to interact with the Juju environment.
 juju resolved mysql/0
 ```
 
-Starting with Juju version 2.0 hooks returning errors will be automatically 
+Starting with Juju version 2.0 hooks returning errors will be automatically
 retried periodically. However, the `juju resolved` command may still be
-used to retry the hook immediately. See the 
-[General configuration options](./models-config#retrying-failed-hooks)
-for more information on the automatic retry feature and how to disable this 
+used to retry the hook immediately. See the
+[General configuration options](./models-config.html#retrying-failed-hooks)
+for more information on the automatic retry feature and how to disable this
 behaviour.
 
 ## Debugging reactive Charms
@@ -315,3 +315,5 @@ hand. Here are some of the ones you may find useful:
 
 You can get more info on tmux and its commands at the [relevant Ubuntu manpage
 entry.](http://manpages.ubuntu.com/manpages/trusty/man1/tmux.1.html)
+
+[actions]: ./actions.html "Juju actions"

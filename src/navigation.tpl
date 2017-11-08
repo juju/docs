@@ -1,14 +1,11 @@
  <ul>
     <li><a href="about-juju.html">About Juju</a></li>
-    <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
 <!-- SECTION -->
-    <li class="section"><h4 class="header toggle-target">Get Started</h4>
+    <li class="section"><h4 class="header toggle-target">Quick Guides</h4>
         <ul>
-        <li class="section"><a class="header" href="getting-started.html">First use!</a>
-            <ul class="sub">
-                <li><a href="getting-started-general.html">Install for non-16.04</a></li>
-            </ul>
-        </li>
+        <li class="section"><a class="header" href="getting-started.html">Get started</a></li>
+        <li><a href="whats-new.html">What's new in 2.2</a></li>
+        <li><a href="tut-lxd.html">Local Juju with LXD cloud</a></li>
         <li><a href="tut-google.html">Controllers and Models</a></li>
         <li><a href="tut-users.html">Sharing and Users</a></li>
         </ul>
@@ -26,9 +23,9 @@
                 <li><a href="clouds-maas.html">MAAS</a></li>
                 <li><a href="clouds-manual.html">Manual</a></li>
                 <li><a href="help-openstack.html">OpenStack</a></li>
+                <li><a href="help-oracle.html">Oracle Compute</a></li>
                 <li><a href="help-rackspace.html">Rackspace</a></li>
                 <li><a href="help-vmware.html">VMware vSphere</a></li>
-
             </ul>
         </li>
         <li class="section"><a class="header" href="controllers.html">Controllers</a>
@@ -54,6 +51,7 @@
                 <li><a href="charms-ha.html">Charm high availability</a></li>
                 <li><a href="charms-working-with-units.html">Working with Units</a></li>
                 <li><a href="actions.html">Working with Actions</a></li>
+                <li><a href="charms-resources.html">Working with Resources</a></li>
                 <li><a href="charms-storage.html">Using storage</a></li>
                 <li><a href="charms-metrics.html">Viewing utilization with metrics</a></li>
             </ul>
@@ -79,6 +77,7 @@
         </li>
         <li class="section"><a class="header" href="howto.html">How to...</a>
             <ul class="sub">
+                <li><a href="howto-prometheus.html">Configure metrics gathering with Prometheus</a></li>
                 <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
             </ul>
         </li>
@@ -120,6 +119,7 @@
         <li><a href="developer-terms.html">Juju Terms</a></li>
         <li><a href="developer-metrics.html">Juju Metrics</a></li>
         <li><a href="developer-resources.html">Juju Resources</a></li>
+        <li><a href="developer-network-primitives.html">Network Primitives</a></li>
         <li class="section"><a class="header" href="developer-leadership.html">Implementing Leadership</a>
             <ul class="sub">
                 <li><a href="developer-leadership.html#leadership-hooks">Leadership Hooks</a></li>
@@ -157,7 +157,6 @@
         <li class="section"><a class="header" href="developer-howto.html">How to...</a>
             <ul class="sub">
                 <li><a href="howto-charm-with-docker.html">Charm with Docker</a></li>
-                <li><a href="howto-vagrant-workflow.html">Work with Vagrant</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="authors-intro.html">Charm Authors</a>
@@ -167,9 +166,8 @@
                 <li><a href="authors-relations.html">Implementing relations</a></li>
                 <li><a href="authors-charm-leadership.html">Charm leadership</a></li>
                 <li><a href="authors-hook-errors.html">Hook Errors</a></li>
-                <li><a href="authors-hook-debug.html">Hook Debugging</a></li>
-                <li><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
-                <li><a href="authors-subordinate-services.html">Subordinate services</a></li>
+                <li><a
+                    href="authors-subordinate-applications.html">Subordinate applications</a></li>
                 <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
                 <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
             </ul>
@@ -196,6 +194,8 @@
 <!-- SECTION -->
     <li class="section"><h4 class="header toggle-target">Reference</h4>
         <ul>
+        <li><a href="reference-install.html">Install Juju</a></li>
+        <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
         <li><a href="commands.html">Juju commands</a></li>
         <li><a href="reference-constraints.html">Juju constraints</a></li>
         <li><a href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
@@ -204,7 +204,6 @@
         <li><a href="reference-layer-yaml.html">Layer.yaml</a></li>
         <li><a href="authors-charm-metadata.html">metadata.yaml</a></li>
         <li><a href="http://godoc.org/github.com/juju/juju/api">API docs</a></li>
-        <li><a href="reference-releases.html">Releases</a></li>
         <li><a href="reference-release-notes.html">Release notes</a></li>
         <li><a href="reference-status.html">Status values</a></li>
         <li><a href="reference-numbering.html">Machine/unit numbering</a></li>
@@ -212,6 +211,7 @@
         <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
     </ul>
    </li>
+<li><a href="contact-us.html">Contact us</a></li>
 <li><a href="contributing.html">Help improve these docs</a></li>
 <li><a href="https://github.com/juju/docs/issues/new">Report a docs issue</a></li>
 </ul>
