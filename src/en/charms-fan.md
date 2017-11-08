@@ -6,8 +6,10 @@ FAN networking addresses an important issue caused by the proliferation of
 container usage: the need to manage the IP address space that results in
 network connectivity among containers running on separate hosts.
 
-Juju integrates with the FAN to provide network connectivity between deployed
-container-based applications that was hitherto not possible.
+Juju integrates with the FAN to provide network connectivity between containers
+that was hitherto not possible. The most common use case for Juju users is the
+seamless interaction between deployed applications running within LXD
+containers on separate Juju machines.
 
 Further reading on generic (non-Juju) FAN networking:
 
