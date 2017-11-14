@@ -28,9 +28,6 @@ information below.
 The `network-get` hook tool is used to get networking information about the
 local unit.
 
-For 2.2 and earlier, we only supported `network-get --primary-address`. This
-syntax is now deprecated.
-
 `network-get` is relation aware. As with other hook tools, it is either run in
 a relation context or accepts a relation id passed using the `-r` switch. It
 may also be run outside of a relation context, in which case only the binding
