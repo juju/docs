@@ -845,7 +845,7 @@ returned from `unit-get private-address` will get the address from this
 space, not the 'default' space.
 
 !!! Warning:
-    The call of `unit-get` in a networking context is depracated and should
+    The call of `unit-get` in a networking context is deprecated and should
     no longer be used. It is replaced by the `network-get` hook tool. See
     [Network primitives][dev-network-primitives] for details.
 
