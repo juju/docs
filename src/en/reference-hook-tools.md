@@ -337,7 +337,7 @@ Set-LeaderData @{"cluster-leader-address"="10.0.0.123"}
 
 `network-get` discovers important network related information.
 
-By default it lists the 3 pieces of address information:
+By default it lists three pieces of address information:
 
 - binding address(es)
 - ingress address(es)
