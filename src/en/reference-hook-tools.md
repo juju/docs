@@ -1,4 +1,5 @@
 Title: Hook tools
+TODO:  rationalize with authors-hook-environment.md and authors-charm-writing.md
 
 # Hook tools
 
@@ -333,14 +334,18 @@ Set-LeaderData @{"cluster-leader-address"="10.0.0.123"}
 
 
 ## network-get
-`network-get` returns the network config for a given binding name. The only
-supported flag currently is --primary-address, which is required and returns
-the IP address the local unit should advertise to its peers as its endpoint.
 
-bash:
-```bash
-network-get options <binding-name> --primary-address
-```
+`network-get` discovers important network related information.
+
+By default it lists three pieces of address information:
+
+- binding address(es)
+- ingress address(es)
+- egress subnets
+
+Flags may be used to request only a specific address value.
+
+See [Network primitives][dev-network-primitives] for in-depth coverage.
 
 
 ## open-port
@@ -839,6 +844,11 @@ Note that if a unit has been deployed with `--bind space` then the address
 returned from `unit-get private-address` will get the address from this
 space, not the 'default' space.
 
+!!! Warning:
+    The call of `unit-get` in a networking context is deprecated and should
+    no longer be used. It is replaced by the `network-get` hook tool. See
+    [Network primitives][dev-network-primitives] for details.
+
 python:
 ```python
 from charmhelpers.core.hookenv import unit_get
@@ -855,3 +865,4 @@ Import-Module CharmHelpers
 Get-JujuUnit -Attr "public-address"
 ```
 [payloads]:./authors-charm-metadata.html#payloads
+[dev-network-primitives]: ./developer-network-primitives.html
