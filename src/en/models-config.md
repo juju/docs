@@ -106,7 +106,7 @@ disable-network-management   | bool   | false    |                            | 
 enable-os-refresh-update     | bool   | true     |                            | Set whether newly provisioned instances should run their respective OS's update capability. See [additional info below](#apt-updates-and-upgrades-with-faster-machine-provisioning).
 enable-os-upgrade            | bool   | true     |                            | Set whether newly provisioned instances should run their respective OS's upgrade capability. See [additional info below](#apt-updates-and-upgrades-with-faster-machine-provisioning).
 extra-info                   | string |          |                            | This is a string to store any user-desired additional metadata.
-fan-config                   | string |          | overlay_CIDR=underlay_CIDR | The FAN networking overlay and underlay subnets in CIDR notation.
+fan-config                   | string |          | overlay_CIDR=underlay_CIDR | The FAN overlay and underlay networks in CIDR notation.
 firewall-mode                | string | instance | instance/global/none       | The mode to use for network firewalling. See [additional info below](#firewall-mode).
 ftp-proxy                    | string |          | url                        | The FTP proxy value to configure on instances, in the FTP_PROXY environment variable.
 http-proxy                   | string |          | url                        | The HTTP proxy value to configure on instances, in the HTTP_PROXY environment variable.
