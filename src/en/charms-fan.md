@@ -37,14 +37,42 @@ Further reading on generic (non-Juju) FAN networking:
 
 Juju manages FAN networking at the model level (see
 [Configuring models][models-config]) and is enabled via the
-`container-networking-method` configuration option.
+`container-networking-method` configuration option. This option can take on the
+following values:
 
-The essential parameter for FAN itself, irrespective of Juju, is the mapping of
-the underlay network to the overlay network. The `fan-config` model option is
-used to specify this.
+ - provider : ?
+ - local : ?
+ - fan : FAN networking
+
+Once FAN is enabled, by setting the above option to 'fan', all that is needed
+is to map the underlay network to the overlay network. The `fan-config` model
+option is used for this. Its value has the following syntax:
+
+  `<underlay-network>=<overlay-network>`
+
+To confirm that a model is properly configured for FAN networking use the
+following command:
+
+```bash
+juju model-config | egrep 'fan-config|container-networking-method'
+```
+
+The output should be similar to this:
+
+```no-highlight
+container-networking-method   model    fan
+fan-config                    model    10.0.0.0/16=252.0.0.0/8
+```
+
+In this example, the underlay network is 10.0.0.0/16 and the overlay network is
+252.0.0.0/8.
 
 ## Cloud provider requirements
 
+## Using Juju with FAN networking
+
+For an example of using Juju with FAN networking see
+[Using AWS with FAN networking][fan-example-aws].
 
 
 
@@ -63,4 +91,5 @@ used to specify this.
 [fan-ubuntu-insights]: https://insights.ubuntu.com/2015/06/22/container-to-container-networking-the-bits-have-hit-the-fan/
 [fan-lxd-config-options]: https://github.com/lxc/lxd/blob/master/doc/networks.md
 [fan-fanctl-man-page]: http://manpages.ubuntu.com/cgi-bin/search.py?q=fanctl
+[fan-example-aws]: ./charms-fan-aws.html
 [models-config]: ./models-config.html
