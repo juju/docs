@@ -9,7 +9,7 @@ installation will also need access to a DNS for Juju to function.
 
 Juju doesn't have baked-in knowledge of your specific vSphere cloud, but it
 does know how such clouds work. We just need to provide some information to add
-it to the list of known clouds. 
+it to the list of known clouds.
 
 ## Adding a vSphere cloud
 
@@ -70,7 +70,9 @@ juju add-credential myvscloud
 ```
 The process now becomes interactive. You will first be asked for an arbitrary
 name for this credential, which you choose for yourself, followed by the
-username and password for your VMware installation. 
+username and password for your VMware installation.
+
+## Bootstrapping
 
 With credentials added, you can now start using Juju with your vSphere cloud:
 
@@ -78,10 +80,38 @@ With credentials added, you can now start using Juju with your vSphere cloud:
 juju bootstrap myvscloud myvscontroller
 ```
 
-!!! Note: 
+There are three VMware-specific options you can use to specify the network and
+datatore to use.
+
+- **`primary-network`**: The primary network that VMs will be connected to. If
+  this is not specified, the first accessible network will be used.
+- **`external-network`**: The name of an additional "external" network to which
+  the VM should be connected. The IP from this network will be used as the
+  `public-address` of the VM's.
+- **`datastore`**: Datastore is the name of the datastore in which to create
+  the VM. If this is not specified, the first accessible datastore will be used.
+
+You can specify these options during bootstrap:
+
+```bash
+juju bootstrap myvscloud myvscontroller --config primary-network=PRIMARY_NET --config external-network=EXTERNAL_NET --config datastore=NFSSTORE
+```
+
+!!! Note:
+    When you specify these options in the bootstrap command, they will only
+    apply to the `controller` and `default` model. Use
+    [`model-defaults`](https://jujucharms.com/docs/2.2/models-config) if you
+    want all new models to use those options.
+
+To learn about configuration options available at bootstrap time, see
+[Configuring controllers][controlconfig] and [Configuring models][modelconfig].
+See the [Constraints reference](reference-constraints#vsphere-provider:) for
+more info on which constrains are supported on VMware.
+
+!!! Note:
     When bootstrapping Juju with vSphere, Juju downloads a cloud image to
-    the Juju client machine and then uploads it to your cloud. If you're far away
-    from VMware, this may take some time.
+    the Juju client machine and then uploads it to your cloud. If you're far
+    away from the cluster, this may take some time.
 
 ## Troubleshooting
 
@@ -95,7 +125,7 @@ on your topology:
 If your topology has a cluster without a host, Juju will see this as an
 Availability Zone and may fail silently. To solve this, either make sure the
 host is within the cluster, or be specific about placement. Ideally, you should
-always be explicit with placement while using this version of Juju. 
+always be explicit with placement while using this version of Juju.
 
 You can be specific about placement by using the following syntax:
 
