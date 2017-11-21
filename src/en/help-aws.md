@@ -123,12 +123,21 @@ Features supported by Juju-owned instances running within AWS:
   created instances. See [Instance naming and tagging][tagging] for
   more information.
 
-- Juju deploys to what Amazon refers to as *m3.medium* instances by default. you
-  can specify different instance types by using [constraints][constraints].
+- The AWS instance type that Juju will use by default is *m3.medium*. A
+  different type can be selected in this way:
+  `juju add-machine --constraints 'instance-type=t2.small'`. See
+  [Constraints][constraints] for more information.
 
-- You can create a new model in a specific virtual private cloud (VPC) from the
-  command line using the `vpc-id`: `juju add-model --config vpc-id=<id>`.
+- A controller (and its models) can be placed in a specific *virtual private
+  cloud* (VPC) by specifying the VPC ID (obtained from the AWS web UI) during
+  the controller-creation process: `juju boootstrap --config vpc-id=<id> aws`
+
+- A new model can also be placed in a VPC even if the controller is not:
+  `juju add-model --config vpc-id=<id>`
   
+
+
+<!-- LINKS -->
 
 [aws]: http://console.aws.amazon.com
 [iam]: https://aws.amazon.com/iam/

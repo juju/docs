@@ -1,4 +1,5 @@
 Title: Juju and FAN networking
+TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1733354 (remove constraints Note if no longer required)
 
 # Juju and FAN networking
 
@@ -132,17 +133,9 @@ default, when creating regular EC2 instances.
     original VPC may be deficient). See
     [Creating an AWS VPC for use with FAN networking][fan-example-aws-vpc].
 
-#### Specifying a VPC
-
 Whether you created a secondary VPC out of necessity or because you prefer to
-use a Juju-dedicated VPC you will need to tell Juju to use it. This is done
-by specifying the VPC ID during the controller-creation process. For example:
-
-```bash
-juju boootstrap --config vpc-id=vpc-6aae2f12 aws
-```
-
-The VPC ID is obtained from the AWS web interface.
+use a Juju-dedicated VPC you will need to tell Juju to use it. See
+[AWS specific features][anchor__aws-specific-features] for how to do this.
 
 #### Deploying
 
@@ -157,6 +150,32 @@ juju deploy wordpress --to lxd:1
 juju add-relation mysql wordpress
 ```
 
+!!! Note:
+    Some VPCs may not be able to fulfill the request for the default AWS
+    instance type of 'm3.medium'. In this case, a constraint can be used:
+    `juju add-machine -n 2 --constraints 'instance-type=t2.medium'`.
+
+A partial output to `juju status` is:
+
+```no-highlight
+Unit          Workload  Agent      Machine  Public address  Ports     Message
+mysql/0*      active    idle       0/lxd/0  252.0.82.239    3306/tcp  Ready
+wordpress/0*  active    executing  1/lxd/0  252.0.169.174   80/tcp
+```
+
+We can confirm WordPress is listening, and thus in communication with MySQL,
+with:
+
+```bash
+juju ssh 0 exec nc -vz 252.0.169.174 80
+```
+
+If successful, you should see output similar to:
+
+```no-highlight
+Connection to 252.0.169.174 80 port [tcp/http] succeeded!
+```
+
 
 <!-- LINKS -->
 
@@ -166,3 +185,4 @@ juju add-relation mysql wordpress
 [fan-fanctl-man-page]: http://manpages.ubuntu.com/cgi-bin/search.py?q=fanctl
 [fan-aws-vpc]: ./charms-fan-aws-vpc.html
 [models-config]: ./models-config.html
+[anchor__aws-specific-features]: ./help-aws.html#aws-specific-features
