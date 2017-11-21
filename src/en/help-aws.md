@@ -123,10 +123,11 @@ Features supported by Juju-owned instances running within AWS:
   created instances. See [Instance naming and tagging][tagging] for
   more information.
 
-- The AWS instance type that Juju will use by default is *m3.medium*. A
-  different type can be selected in this way:
-  `juju add-machine --constraints 'instance-type=t2.small'`. See
-  [Constraints][constraints] for more information.
+- Juju's default AWS instance type is *m3.medium*. A different type can be
+  selected via a constraint:
+  `juju add-machine --constraints 'instance-type=t2.medium'`. For more
+  information see [Constraints][constraints]. You can also view the list of
+  [Amazon EC2 instance types][aws-instance-types].
 
 - A controller (and its models) can be placed in a specific *virtual private
   cloud* (VPC) by specifying the VPC ID (obtained from the AWS web UI) during
@@ -144,3 +145,4 @@ Features supported by Juju-owned instances running within AWS:
 [constraints]:./reference-constraints.html
 [jaas]: ./getting-started.html "Getting Started with Juju as a Service"
 [tagging]: ./config-tagging.html
+[aws-instance-types]: https://aws.amazon.com/ec2/instance-types/

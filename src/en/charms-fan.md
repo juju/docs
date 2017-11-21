@@ -1,5 +1,7 @@
 Title: Juju and FAN networking
 TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1733354 (remove constraints Note if no longer required)
+       hardcoded: default AWS instance type of 'm3.medium'
+       consider a third example: manually configure the FAN with Azure
 
 # Juju and FAN networking
 
@@ -36,18 +38,18 @@ Further reading on generic (non-Juju) FAN networking:
 
 ## Juju model FAN configuration
 
-Juju manages FAN networking at the model level (see
-[Configuring models][models-config]) and is enabled via the
+Juju manages FAN networking at the model level and is enabled via the
 `container-networking-method` configuration option. This option can take on the
 following values:
 
- - provider : ?
- - local : ?
- - fan : FAN networking
+ - local : standard LXD; addressing based on the LXD bridge (e.g. lxdbr0)
+ - provider : addressing based on host bridge; works only with providers with
+   built-in container addressing support (e.g. MAAS with LXD)
+ - fan : FAN networking; works with any provider, in principle
 
 Once FAN is enabled, by setting the above option to 'fan', all that is needed
 is to map the underlay network to the overlay network. The `fan-config` model
-option is used for this. Its value has the following syntax:
+option is used for this and has the following format:
 
   `<underlay-network>=<overlay-network>`
 
@@ -68,11 +70,23 @@ fan-config                    model    10.0.0.0/16=252.0.0.0/8
 In this example, the underlay network is 10.0.0.0/16 and the overlay network is
 252.0.0.0/8.
 
+See [Configuring models][models-config] for how to set model options.
+
 ## Cloud provider requirements
 
-Juju autoconfigures FAN networking in both an AWS/VPC context and a GCE
-context. All that is needed is a controller, which does not need any special
-FAN options passed during its creation.
+Juju autoconfigures FAN networking for both the AWS and GCE clouds. All that
+is needed is a controller, which does not need any special FAN options passed
+during its creation.
+
+In principle, all public cloud types can utilize the FAN. Yet due to the myriad
+ways a cloud may configure their subnets your mileage may vary. At the very
+least, if you are using a cloud other than AWS or GCE, manual configuration at
+the Juju level will be needed (the above model options). Adjustments at the
+cloud level can also be expected. For guidance, the auto-configured clouds both
+start with a /16 address space. Juju then maps it onto an /8.
+
+Note that [MAAS][maas-upstream] has LXD addressing built-in so there is no
+point in applying the FAN in such a context.
 
 ## Examples
 
@@ -130,14 +144,13 @@ default, when creating regular EC2 instances.
 
 !!! Note:
     You may need to create a new VPC if you are using an old AWS account (the
-    original VPC may be deficient). See
-    [Creating an AWS VPC for use with FAN networking][fan-example-aws-vpc].
+    original VPC may be deficient). Some may simply prefer to have a
+    Juju-dedicated VPC. See [Creating an AWS VPC][fan-aws-vpc] for
+    instructions.
 
-Whether you created a secondary VPC out of necessity or because you prefer to
-use a Juju-dedicated VPC you will need to tell Juju to use it. See
+Whether you created a secondary VPC out of necessity or preference you will
+need to inform Juju about it. See
 [AWS specific features][anchor__aws-specific-features] for how to do this.
-
-#### Deploying
 
 Here, FAN networking will be leveraged by deploying and relating applications
 that are running in different LXD containers, where the containers are housed
@@ -151,9 +164,9 @@ juju add-relation mysql wordpress
 ```
 
 !!! Note:
-    Some VPCs may not be able to fulfill the request for the default AWS
-    instance type of 'm3.medium'. In this case, a constraint can be used:
-    `juju add-machine -n 2 --constraints 'instance-type=t2.medium'`.
+    A VPC may fail to provide the default AWS instance type of 'm3.medium'. See
+    [AWS specific features][anchor__aws-specific-features] for how to request
+    an alternative.
 
 A partial output to `juju status` is:
 
@@ -163,14 +176,14 @@ mysql/0*      active    idle       0/lxd/0  252.0.82.239    3306/tcp  Ready
 wordpress/0*  active    executing  1/lxd/0  252.0.169.174   80/tcp
 ```
 
-We can confirm WordPress is listening, and thus in communication with MySQL,
+We can confirm that the MySQL container can contact the WordPress container
 with:
 
 ```bash
-juju ssh 0 exec nc -vz 252.0.169.174 80
+juju ssh mysql/0 exec nc -vz 252.0.169.174 80
 ```
 
-If successful, you should see output similar to:
+This example test was successful by yielding the following output:
 
 ```no-highlight
 Connection to 252.0.169.174 80 port [tcp/http] succeeded!
@@ -179,6 +192,7 @@ Connection to 252.0.169.174 80 port [tcp/http] succeeded!
 
 <!-- LINKS -->
 
+[maas-upstream]: https://maas.io/
 [fan-ubuntu-wiki]: https://wiki.ubuntu.com/FanNetworking
 [fan-ubuntu-insights]: https://insights.ubuntu.com/2015/06/22/container-to-container-networking-the-bits-have-hit-the-fan/
 [fan-lxd-config-options]: https://github.com/lxc/lxd/blob/master/doc/networks.md
