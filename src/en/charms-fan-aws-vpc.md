@@ -5,6 +5,10 @@ Title: Creating an AWS VPC
 This is in connection with [Juju and FAN networking][charms-fan] where an AWS
 user may wish to create an additional VPC (virtual private network).
 
+Note that only older AWS accounts will actually require a new VPC in order for
+Juju to autoconfigure the FAN. Recent AWS accounts are furnished with a VPC
+which will work out-of-the-box.
+
 The procedure covered here refers to the AWS web interface. Presumably it is
 possible to do the same via the AWS API.
 

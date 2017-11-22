@@ -17,8 +17,8 @@ separate Juju machines.
 ## FAN overview
 
 The FAN is a mapping between a smaller IPv4 address space (e.g. a /16 network)
-and a larger one (e.g. a /8 network) where **subnets** from the larger one (the
-*underlay* network) are assigned to **addresses** on the smaller one (the
+and a larger one (e.g. a /8 network) where **subnets** from the smaller one (the
+*underlay* network) are assigned to **addresses** on the larger one (the
 *overlay* network). Connectivity between containers on the larger network is
 enabled in a simple and efficient manner.
 
@@ -38,39 +38,44 @@ Further reading on generic (non-Juju) FAN networking:
 
 ## Juju model FAN configuration
 
-Juju manages FAN networking at the model level and is enabled via the
-`container-networking-method` configuration option. This option can take on the
-following values:
+Juju manages FAN networking at the model level, with the relevant configuration
+options being `fan-config` and `container-networking-method`.
+
+First, configure the FAN via `fan-config`. This option can assume a
+space-separated list of `<underlay-network>=<overlay-network>`. This option
+maps the underlay network to the overlay network.
+
+```bash
+juju model-config fan-config=10.0.0.0/16=252.0.0.0/8
+```
+
+Then, enable the FAN with the `container-networking-method` option. It can take
+on the following values:
 
  - local : standard LXD; addressing based on the LXD bridge (e.g. lxdbr0)
  - provider : addressing based on host bridge; works only with providers with
    built-in container addressing support (e.g. MAAS with LXD)
  - fan : FAN networking; works with any provider, in principle
 
-Once FAN is enabled, by setting the above option to 'fan', all that is needed
-is to map the underlay network to the overlay network. The `fan-config` model
-option is used for this and has the following format:
+```bash
+juju model-config container-networking-method=fan
+```
 
-  `<underlay-network>=<overlay-network>`
-
-To confirm that a model is properly configured for FAN networking use the
-following command:
+To confirm that a model is properly configured use the following command:
 
 ```bash
 juju model-config | egrep 'fan-config|container-networking-method'
 ```
 
-The output should be similar to this:
+This example will produce the following output:
 
 ```no-highlight
 container-networking-method   model    fan
 fan-config                    model    10.0.0.0/16=252.0.0.0/8
 ```
 
-In this example, the underlay network is 10.0.0.0/16 and the overlay network is
-252.0.0.0/8.
-
-See [Configuring models][models-config] for how to set model options.
+See [Configuring models][models-config] for more details on setting model
+options.
 
 ## Cloud provider requirements
 
