@@ -158,28 +158,8 @@ juju upgrade-charm mycharm --force-series
 
 ## Deploying from a local charm
 
-To deploy applications using local charms, you may specify the path to the charm
-directory.
-For example, to deploy vsftpd from a local filesystem:
-
-```bash
-juju deploy ~/charms/vsftpd --series trusty
-```
-
-Local charms may not have a specific declared series (charms fetched from the
-store always have an implied series). You do not have to specify the series
-if the charm contains a series declaration, or if you have specified a
-default series in the model configuration. For example:
-
-```bash
-juju model-config -m mymodel default-series=trusty
-```
-
-See [Configuring models](./models-config.html) for more details on model level
-configuration.
-
-See [Addendum: local charms](#addendum:-local-charms) below for further
-explanation of local charms and how they can be managed.
+It is possible to deploy applications using local charms. See
+[Deploying charms offline][charms-offline] for further guidance.
 
 ## Configuring at deployment time
 
@@ -335,29 +315,6 @@ juju add-unit rabbitmq-server
 This will allow you to save money when you need it by using `--to`, but also
 horizontally scale out on dedicated machines when you need to.
 
-## Addendum: local charms
-
-This is further explanation of offline/local charms.
-
-There are times when it may not be possible to use the charms located in the
-official Charm Store. Such cases include:
-
-- The backing cloud may be private and not have internet access.
-- The charms may not exist online. They are newly-written charms.
-- The charms may exist online but they have been customized locally.
-
-!!! Note: 
-    Although this method will ensure that the charms themselves are available
-    on systems without outside internet access, there is no guarantee that a charm
-    will work in a disconnected state. Some charms will attempt to pull code from
-    sources on the internet such as GitHub.
-
-### Charm Tools
-
-Charm Tools is add-on software that is useful for interacting with local
-charms. See [Charm Tools][charm-tools] for information on installation and
-usage.
-
 
 <!-- LINKS -->
 
@@ -367,4 +324,4 @@ usage.
 [metadata]: ./authors-charm-metadata.html
 [constraints]: ./charms-constraints.html
 [charms-upgrading]: ./charms-upgrading.html
-[charm-tools]: ./tools-charm-tools.html
+[charms-offline]: ./charms-offline.html
