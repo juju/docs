@@ -1,47 +1,47 @@
-Title: Juju and FAN networking
+Title: Juju and Fan networking
 TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1733354 (remove constraints Note if no longer required)
        hardcoded: default AWS instance type of 'm3.medium'
-       consider a third example: manually configure the FAN with Azure
+       consider a third example: manually configure the Fan with Azure
 
-# Juju and FAN networking
+# Juju and Fan networking
 
-FAN networking addresses a need raised by the proliferation of container usage
+Fan networking addresses a need raised by the proliferation of container usage
 in an IPv4 context: the ability to manage the address space such that network
 connectivity among containers running on separate hosts is achieved.
 
-Juju integrates with the FAN to provide network connectivity between containers
+Juju integrates with the Fan to provide network connectivity between containers
 that was hitherto not possible. The typical use case is the seamless
 interaction between deployed applications running within LXD containers on
 separate Juju machines.
 
-## FAN overview
+## Fan overview
 
-The FAN is a mapping between a smaller IPv4 address space (e.g. a /16 network)
+The Fan is a mapping between a smaller IPv4 address space (e.g. a /16 network)
 and a larger one (e.g. a /8 network) where **subnets** from the smaller one (the
 *underlay* network) are assigned to **addresses** on the larger one (the
 *overlay* network). Connectivity between containers on the larger network is
 enabled in a simple and efficient manner.
 
 In the case of the above networks (/16 underlay and /8 overlay), each host
-address on the underlay "provides" 253 addresses on the overlay. FAN networking
+address on the underlay "provides" 253 addresses on the overlay. Fan networking
 can thus be considered a form of "address expansion".
 
-Further reading on generic (non-Juju) FAN networking:
+Further reading on generic (non-Juju) Fan networking:
 
- - [FAN networking][fan-ubuntu-wiki] : general user documentation
+ - [Fan networking][fan-ubuntu-wiki] : general user documentation
  - [Container-to-Container Networking][fan-ubuntu-insights] : a less technical
    overview
- - [LXD network configuration][fan-lxd-config-options] : FAN configuration
+ - [LXD network configuration][fan-lxd-config-options] : Fan configuration
    options at the LXD level
  - [`fanctl` man page][fan-fanctl-man-page] : configuration information at the
    operating system level
 
-## Juju model FAN configuration
+## Juju model Fan configuration
 
-Juju manages FAN networking at the model level, with the relevant configuration
+Juju manages Fan networking at the model level, with the relevant configuration
 options being `fan-config` and `container-networking-method`.
 
-First, configure the FAN via `fan-config`. This option can assume a
+First, configure the Fan via `fan-config`. This option can assume a
 space-separated list of `<underlay-network>=<overlay-network>`. This option
 maps the underlay network to the overlay network.
 
@@ -49,13 +49,13 @@ maps the underlay network to the overlay network.
 juju model-config fan-config=10.0.0.0/16=252.0.0.0/8
 ```
 
-Then, enable the FAN with the `container-networking-method` option. It can take
+Then, enable the Fan with the `container-networking-method` option. It can take
 on the following values:
 
  - local : standard LXD; addressing based on the LXD bridge (e.g. lxdbr0)
  - provider : addressing based on host bridge; works only with providers with
    built-in container addressing support (e.g. MAAS with LXD)
- - fan : FAN networking; works with any provider, in principle
+ - fan : Fan networking; works with any provider, in principle
 
 ```bash
 juju model-config container-networking-method=fan
@@ -79,11 +79,11 @@ options.
 
 ## Cloud provider requirements
 
-Juju autoconfigures FAN networking for both the AWS and GCE clouds. All that
-is needed is a controller, which does not need any special FAN options passed
+Juju autoconfigures Fan networking for both the AWS and GCE clouds. All that
+is needed is a controller, which does not need any special Fan options passed
 during its creation.
 
-In principle, all public cloud types can utilize the FAN. Yet due to the myriad
+In principle, all public cloud types can utilize the Fan. Yet due to the myriad
 ways a cloud may configure their subnets your mileage may vary. At the very
 least, if you are using a cloud other than AWS or GCE, manual configuration at
 the Juju level will be needed (the above model options). Adjustments at the
@@ -91,19 +91,19 @@ cloud level can also be expected. For guidance, the auto-configured clouds both
 start with a /16 address space. Juju then maps it onto an /8.
 
 Note that [MAAS][maas-upstream] has LXD addressing built-in so there is no
-point in applying the FAN in such a context.
+point in applying the Fan in such a context.
 
 ## Examples
 
 Two examples are provided. Each will use a different cloud:
 
- - Rudimentary confirmation of the FAN using a GCE cloud
- - Deploying applications with the FAN using an AWS cloud
+ - Rudimentary confirmation of the Fan using a GCE cloud
+ - Deploying applications with the Fan using an AWS cloud
 
-### Rudimentary confirmation of the FAN using a GCE cloud
+### Rudimentary confirmation of the Fan using a GCE cloud
 
-FAN networking works out-of-the-box with GCE. We'll use a GCE cloud to perform
-a rudimentary confirmation that the FAN is in working order by creating two
+Fan networking works out-of-the-box with GCE. We'll use a GCE cloud to perform
+a rudimentary confirmation that the Fan is in working order by creating two
 machines with a LXD container on each. A network test will then be performed
 between the two containers to confirm connectivity.
 
@@ -123,7 +123,7 @@ After a while, we see the following output to command
 1/lxd/0  started  252.0.78.212    juju-477cfe-1-lxd-0  xenial  us-east1-c Container started
 ```
 
-So these two containers should be able to contact one another if the FAN is up:
+So these two containers should be able to contact one another if the Fan is up:
 
 ```bash
 juju ssh -m default 0 sudo lxc exec juju-477cfe-0-lxd-0 '/usr/bin/tracepath 252.0.78.212'
@@ -141,9 +141,9 @@ Connection to 35.196.138.253 closed.
 
 Good work.
 
-### Deploying applications with the FAN using an AWS cloud
+### Deploying applications with the Fan using an AWS cloud
 
-To use FAN networking with AWS a *virtual private cloud* (VPC) is required.
+To use Fan networking with AWS a *virtual private cloud* (VPC) is required.
 Fortunately, a working VPC is provided with every AWS account and is used, by
 default, when creating regular EC2 instances.  
 
@@ -157,7 +157,7 @@ Whether you created a secondary VPC out of necessity or preference you will
 need to inform Juju about it. See
 [AWS specific features][anchor__aws-specific-features] for how to do this.
 
-Here, FAN networking will be leveraged by deploying and relating applications
+Here, Fan networking will be leveraged by deploying and relating applications
 that are running in different LXD containers, where the containers are housed
 on separate machines.
 
