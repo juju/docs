@@ -24,18 +24,29 @@ This top-level document links to sub-pages that cover the following topics:
  - Configuring Juju for offline usage
  - Deploying charms offline
  - Distributing snaps internally
+ - Using the localhost cloud (LXD) offline
 
 ## Offline mode strategies (proxies and mirrors)
 
-
+This section will offer guidance at the system administrator level by
+describing what resources/protocols are required by various types of Juju
+deployments. In addition, software suggestions for achieving the
+corresponding services are offered. See
+[Offline mode strategies][charms-offline-strategies].
 
 ## Configuring Juju for offline usage
 
-
+Juju needs to be configured in order for its various parts (client, controller,
+machines) to know how to request the resources necessary for various actions
+(controller creation, machine creation, charm deployments, etc.) to be
+successful. This section will show how this is done via the CLI. See
+[Configuring Juju for offline usage][charms-offline-config].
 
 ## Deploying charms offline
 
-[Deploying charms offline][charms-offline]
+Once the auxiliary services have been set up and Juju has been configured to
+use those services Juju charms can be deployed. This section describes how this
+is done. See [Deploying charms offline][charms-offline-deploying].
 
 ## Distributing snaps internally
 
@@ -43,11 +54,18 @@ The exemplar snap for Juju users is [Charm Tools][tools-charm-tools] but the
 guidance provided here can be applied to any snap. See 
 [Distributing snaps internally][snaps-offline].
 
+## Using the localhost cloud (LXD) offline
+
+Here, an example of an offline Juju installation is provided through the use
+of the localhost cloud (LXD). Go to
+[Using the localhost cloud (LXD) offline][charms-offline-lxd].
+
 
 <!-- LINKS -->
 
-[charms-offline]: ./charms-offline.html
+[charms-offline-deploying]: ./charms-offline-deploying.html
 [tools-charm-tools]: ./tools-charm-tools.html
 [snaps-offline]: ./snaps-offline.html
 [charms-offline-strategies]: ./charms-offline-strategies.html
 [charms-offline-config]: ./charms-offline-config.html
+[charms-offline-lxd]: ./charms-offline-lxd.html
