@@ -158,7 +158,7 @@ juju upgrade-charm mycharm --force-series
 ## Deploying from a local charm
 
 It is possible to deploy applications using local charms. See
-[Deploying charms offline][charms-offline] for further guidance.
+[Deploying charms offline][charms-offline-deploying] for further guidance.
 
 ## Configuring at deployment time
 
@@ -343,4 +343,4 @@ horizontally scale out on dedicated machines when you need to.
 [metadata]: ./authors-charm-metadata.html
 [constraints]: ./charms-constraints.html
 [charms-upgrading]: ./charms-upgrading.html
-[charms-offline]: ./charms-offline.html
+[charms-offline-deploying]: ./charms-offline-deploying.html
