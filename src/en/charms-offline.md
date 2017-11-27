@@ -28,8 +28,8 @@ as:
 For the situation when the charms are not already available locally, the steps
 described here involve both the installation of the Charm Tools software and
 the download of charms from the [Charm Store][charm-store]. These tasks are to
-be performed on an internet-connected system (e.g. an admin laptop) prior to
-being migrated to the internet-deprived network.
+be performed on an internet-connected system prior to being migrated to the
+internet-deprived network.
 
 ### Installation and overview
 
