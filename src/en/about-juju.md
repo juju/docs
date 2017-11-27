@@ -30,7 +30,7 @@ Application-specific knowledge such as dependencies, scale-out practices,
 operational events like backups and updates, and integration options with
 other pieces of software are encapsulated in Juju's 'charms'. This knowledge
 can then be shared between team members, reused everywhere from laptops to
-virtual machines and cloud, and shared with other organisations.
+virtual machines and cloud, and shared with other organizations.
 
 The charm defines everything you all collaboratively know about deploying that
 particular application brilliantly. All you have to do is use any available
