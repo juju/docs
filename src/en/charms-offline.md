@@ -9,13 +9,14 @@ For the purposes here, a network is considered offline if the systems on that
 network have been deliberately deprived of access to any outside network, the
 internet in particular. This is typically done for security reasons.
 
-Some select systems, however, may be provided internet access in order to act
-as intermediaries for necessary services. In a Juju context, such services
-would commonly provide access to:
+Such a network can also be called a *proxy-restricted environment* since,
+typically, access is allowed to a few internet-enabled systems that act as
+intermediaries (proxies) for necessary services. In a Juju context, such
+services would commonly provide access to:
 
  - charms
- - HTTP-based resources
  - APT packages
+ - Various HTTP-based resources
  - snaps
 
 This top-level document links to sub-pages that cover the following topics:
@@ -30,9 +31,8 @@ This top-level document links to sub-pages that cover the following topics:
 
 This section will offer guidance at the system administrator level by
 describing what resources/protocols are required by various types of Juju
-deployments. In addition, software suggestions for achieving the
-corresponding services are offered. See
-[Offline mode strategies][charms-offline-strategies].
+deployments. In addition, software suggestions for achieving the corresponding
+services are offered. See [Offline mode strategies][charms-offline-strategies].
 
 ## Configuring Juju for offline usage
 
