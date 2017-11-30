@@ -5,27 +5,62 @@ Title: Offline mode strategies
 This is in connection with the [Working offline][charms-offline] page. See
 that resource for background information.
 
-This page offers suggestions on how to achieve the following services in order
-for Juju to live happily in an internet-deprived environment:
+This page provides an overview of various types of services that can be
+implemented in order for Juju to live happily in an internet-deprived
+environment. Common tools that can be used to achieve such services are also
+listed.
 
- - HTTP/S proxies
- - APT caching proxies
- - internal APT repositories and mirrors
+The services of concern here are:
 
-## HTTP/S proxies
-## APT caching proxies
+ - HTTP/S proxy
+ - APT proxy
+ - APT repository mirror
 
-An APT caching proxy satisfies a client's package request and if it does not
-have the package in its store, it downloads it (and adds it to its store). Some
-common implementations include:
+## HTTP/S proxy
+
+The purpose of a forward HTTP/S proxy is to act as an intermediary for a client
+making any HTTP or HTTPS request. For our purposes, the client is a Juju
+machine.
+
+Most such proxies include a *caching* ability. That is, the proxy will store
+the resulting data locally so that any subsequent request can be quickly
+satisfied.
+
+The de-facto forward proxy solution on Ubuntu is [`squid`][upstream-squid].
+
+## APT proxy
+
+An HTTP/S proxy may not accept HTTP/S requests for APT packages. The idea of an
+APT proxy is identical to that of an HTTP/S proxy except that it applies
+specifically to APT package requests.
+
+Some common implementations include:
 
  - [`APT-cacher`][upstream-apt-cacher]
  - [`Apt-Cacher NG`][upstream-apt-cacher-ng]
  - [`squid`][upstream-squid]
  - [`squid-deb-proxy`][upstream-squid-deb-proxy] (based on squid)
 
-## Internal APT repositories and mirrors
+## APT repository mirror
 
+Instead of proxying client requests to an internet-based repository it is
+possible to maintain the repository internally. That is, you can have a copy or
+*mirror* of a Ubuntu package repository. This option has a large storage
+requirement and the initial setup/download time is considerable. Regular mirror
+synchronization is also needed.
+
+Here are some popular mirroring solutions:
+
+ - [`apt-mirror`][upstream-apt-mirror]
+ - [`debmirror`][upstream-debmirror]
+ - [`aptly`][upstream-aptly]
+
+A web server is required to respond to the actual client requests. These are
+the most common ones:
+
+ - [`Apache`][upstream-apache]
+ - [`nginx`][upstream-nginx]
+ - [`lighttpd`][upstream-lighttpd]
 
 
 <!-- LINKS -->
@@ -34,4 +69,10 @@ common implementations include:
 [upstream-apt-cacher]: https://help.ubuntu.com/community/Apt-Cacher-Server
 [upstream-apt-cacher-ng]: https://www.unix-ag.uni-kl.de/~bloch/acng/
 [upstream-squid]: http://www.squid-cache.org/
+[upstream-nginx]: https://www.nginx.com/resources/wiki/
+[upstream-apache]: https://www.apache.org/
+[upstream-lighttpd]: https://www.lighttpd.net/
+[upstream-apt-mirror]: https://apt-mirror.github.io/
+[upstream-debmirror]: http://manpages.ubuntu.com/cgi-bin/search.py?q=debmirror
+[upstream-aptly]: https://www.aptly.info/
 [upstream-squid-deb-proxy]: https://launchpad.net/squid-deb-proxy
