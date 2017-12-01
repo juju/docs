@@ -1,4 +1,5 @@
 Title: Offline mode strategies
+TODO:  docs needed: explanation of an agent (and link from 'agent mirror'). see models-upgrade.md
 
 # Offline mode strategies
 
@@ -15,6 +16,8 @@ The services of concern here are:
  - HTTP/S proxy
  - APT proxy
  - APT repository mirror
+ - Juju agent mirror
+ - Cloud image mirror
 
 ## HTTP/S proxy
 
@@ -55,12 +58,26 @@ Here are some popular mirroring solutions:
  - [`debmirror`][upstream-debmirror]
  - [`aptly`][upstream-aptly]
 
-A web server is required to respond to the actual client requests. These are
-the most common ones:
+### HTTP/S server
+
+For any sort of mirror, an HTTP/S server (i.e. a web server) will be required
+to respond to the actual client requests. These are the most common ones:
 
  - [`Apache`][upstream-apache]
  - [`nginx`][upstream-nginx]
  - [`lighttpd`][upstream-lighttpd]
+
+## Juju agent mirror
+
+An agent that gets installed (due to a new machine or unit) is proxied through
+the controller. If the latter cannot satisfy the request via its cache it will
+download it from the [official agent site][upstream-agents], and then pass it
+on to the requesting machine. It is possible, however, to set up an agent
+mirror so the remote site is not solicited by the controller. Simply download
+the agents and configure one of the aforementioned web servers accordingly. As
+with any type of mirror, regular updates are normally scheduled.
+
+## Cloud image mirror
 
 
 <!-- LINKS -->
@@ -76,3 +93,4 @@ the most common ones:
 [upstream-debmirror]: http://manpages.ubuntu.com/cgi-bin/search.py?q=debmirror
 [upstream-aptly]: https://www.aptly.info/
 [upstream-squid-deb-proxy]: https://launchpad.net/squid-deb-proxy
+[upstream-agents]: https://streams.canonical.com/juju/tools/agent/

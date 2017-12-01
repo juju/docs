@@ -27,13 +27,14 @@ This top-level document links to sub-pages that cover the following topics:
  - Distributing snaps internally
  - Using the localhost cloud (LXD) offline
 
-## Offline mode strategies (proxies and mirrors)
+## Offline mode strategies
 
 This section will offer guidance at the system administrator level by
 describing what resources/protocols are required by various types of Juju
 deployments. In addition, suggestions for achieving the corresponding services
-are offered by means of HTTP/S proxies, APT proxies, and APT repository
-mirrors. See [Offline mode strategies][charms-offline-strategies].
+are offered by means of HTTP/S proxying, APT proxying, and repository
+mirroring, Juju agent mirroring, and cloud image mirroring. See
+[Offline mode strategies][charms-offline-strategies].
 
 ## Configuring Juju for offline usage
 
