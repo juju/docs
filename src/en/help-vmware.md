@@ -81,7 +81,7 @@ juju bootstrap myvscloud myvscontroller
 ```
 
 There are three VMware-specific options you can use to specify the network and
-datatore to use.
+datastore to use.
 
 - **`primary-network`**: The primary network that VMs will be connected to. If
   this is not specified, the first accessible network will be used.
@@ -100,12 +100,12 @@ juju bootstrap myvscloud myvscontroller --config primary-network=PRIMARY_NET --c
 !!! Note:
     When you specify these options in the bootstrap command, they will only
     apply to the `controller` and `default` model. Use
-    [`model-defaults`](https://jujucharms.com/docs/2.2/models-config) if you
+    [`model-defaults`](./models-config.html) if you
     want all new models to use those options.
 
 To learn about configuration options available at bootstrap time, see
-[Configuring controllers][controlconfig] and [Configuring models][modelconfig].
-See the [Constraints reference](reference-constraints#vsphere-provider:) for
+[Configuring controllers](./controllers-config.html) and [Configuring models](./models-config.html).
+See the [Constraints reference](./reference-constraints.html#vsphere-provider:) for
 more info on which constrains are supported on VMware.
 
 !!! Note:
