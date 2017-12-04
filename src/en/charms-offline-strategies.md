@@ -50,7 +50,7 @@ Instead of proxying client requests to an internet-based repository it is
 possible to maintain the repository internally. That is, you can have a copy or
 *mirror* of a Ubuntu package repository. This option has a large storage
 requirement and the initial setup/download time is considerable. Regular mirror
-synchronization is also needed.
+synchronization will also be needed.
 
 Here are some popular mirroring solutions:
 
@@ -69,15 +69,18 @@ to respond to the actual client requests. These are the most common ones:
 
 ## Juju agent mirror
 
-An agent that gets installed (due to a new machine or unit) is proxied through
-the controller. If the latter cannot satisfy the request via its cache it will
-download it from the [official agent site][upstream-agents], and then pass it
-on to the requesting machine. It is possible, however, to set up an agent
-mirror so the remote site is not solicited by the controller. Simply download
-the agents and configure one of the aforementioned web servers accordingly. As
-with any type of mirror, regular updates are normally scheduled.
+An agent that gets installed onto a Juju machine is proxied through the
+controller. If the latter cannot satisfy the request via its cache it will
+download the agent from the [official agent site][upstream-agents], and then
+pass it on to the machine. It is possible, however, to set up an agent mirror
+so the remote site is not solicited by the controller. Download the latest few
+agents and configure one of the aforementioned web servers accordingly.
+Updates to the mirrored agents will be needed as new versions of Juju itself
+become available.
 
 ## Cloud image mirror
+
+[official cloud images][upstream-images]
 
 
 <!-- LINKS -->
@@ -94,3 +97,4 @@ with any type of mirror, regular updates are normally scheduled.
 [upstream-aptly]: https://www.aptly.info/
 [upstream-squid-deb-proxy]: https://launchpad.net/squid-deb-proxy
 [upstream-agents]: https://streams.canonical.com/juju/tools/agent/
+[upstream-images]: http://cloud-images.ubuntu.com/
