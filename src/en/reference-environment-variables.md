@@ -47,14 +47,12 @@ JUJU_HOME=~/.juju
 
 #### JUJU_REPOSITORY (Deprecated)
 
-For versions prior to 2.0 allowed you to set a repository that Juju looked for
-charms in. It was also possible to use `--repository=/path/to/charms` when running
-the command
+For versions prior to 2.0, this variable set a local charms directory that Juju
+would search when deploying an application. The equivalent
+`--repository=/path/to/charms` switch (with `juju deploy`) was also available.
 
-`juju deploy`.
-
-Both the environment variable and the command line option are no longer functional
-in 2.x versions.
+Both the environment variable and the switch are no longer functional in 2.x
+versions.
 
 #### JUJU_LOGGING_CONFIG
 
