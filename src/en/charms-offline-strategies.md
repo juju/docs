@@ -78,9 +78,12 @@ agents and configure one of the aforementioned web servers accordingly.
 Updates to the mirrored agents will be needed as new versions of Juju itself
 become available.
 
-## Cloud image mirror
+## Cloud images mirror
 
-[official cloud images][upstream-images]
+A mirror can be made of the [official cloud images][upstream-cloud-images].
+This will primarily be useful for a localhost cloud (LXD) but a local OpenStack
+installation can also make use of such a mirror if LXD containers are put on
+its instances.
 
 
 <!-- LINKS -->
@@ -97,4 +100,4 @@ become available.
 [upstream-aptly]: https://www.aptly.info/
 [upstream-squid-deb-proxy]: https://launchpad.net/squid-deb-proxy
 [upstream-agents]: https://streams.canonical.com/juju/tools/agent/
-[upstream-images]: http://cloud-images.ubuntu.com/
+[upstream-cloud-images]: http://cloud-images.ubuntu.com/
