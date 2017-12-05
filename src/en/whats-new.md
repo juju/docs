@@ -6,8 +6,8 @@ The major new features in this release are summarised below. If you're new to
 Juju, begin by going through our [Getting started][getting-started] guide
 first.
 
-For more details on the new features in Juju 2.3 see the
-[2.3 release notes][anchor__release-notes-2.3.0].
+For details on these features, and other improvements not listed here, see
+the [2.3 release notes][anchor__release-notes-2.3.0].
 
 ## Persistent storage
 
@@ -31,6 +31,16 @@ possible. Applied to Juju, this allows for the seamless interaction between
 deployed applications running within LXD containers on separate Juju machines.
 Read [Juju and Fan networking][charms-fan] for more on this exciting topic.
 
+## Improvements to bundles
+
+You can now recycle existing machines instead of having new ones created. It is
+also possible to map specific machines to machines configured in the bundle.
+
+A bundle declaration can be placed on top of a base bundle to override elements
+of the latter. These are bonafide bundle files, called "overlay bundles", that
+can do anything a normal bundle can do. They can also remove applications from
+the base bundle. See [Overlay bundles][anchor__overlay-bundles].
+
 
 <!-- LINKS -->
 
@@ -39,3 +49,4 @@ Read [Juju and Fan networking][charms-fan] for more on this exciting topic.
 [models-cmr]: https://jujucharms.com/docs/stable/models-cmr
 [charms-fan]: https://jujucharms.com/docs/stable/charms-fan
 [anchor__release-notes-2.3.0]: ./reference-release-notes.html#juju_2.3.0
+[anchor__overlay-bundles]: ./charms-bundles.html#overlay-bundles
