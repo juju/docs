@@ -373,6 +373,24 @@ mysql/1      waiting   allocating  1                               waiting for m
 wordpress/0  waiting   allocating  1                               waiting for machine
 ```
 
+### Recycling machines
+
+To have a bundle use a model's existing machines, as opposed to creating new
+machines, the `--map-machines=existing` option is used. In addition, to specify
+particular machines for the mapping, comma-separated values of the form
+'bundle-id=existing-id' can be passed where the bundle-id and the existing-id
+refer to top level machine IDs.
+
+For example, consider a bundle whose YAML file is configured with machines 1,
+2, 3, and 4, and a model containing machines 1, 2, 3, 4, and 5. The following
+deployment would use existing machines 1 and 2 for bundle machines 1
+and 2 but use existing machine 4 for bundle machine 3 and existing
+machine 5 for bundle machine 4:
+
+```bash
+juju deploy some-bundle --map-machines=existing,3=4,4=5
+```
+
 ## Binding endpoints of applications within a bundle
 
 You can configure more complex networks using [spaces](./network-spaces.html)
