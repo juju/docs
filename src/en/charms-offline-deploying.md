@@ -2,9 +2,12 @@ Title: Deploying Charms Offline
 
 # Deploying charms offline
 
+This page is concerned with using Juju charms offline. See the
+[Working offline][charms-offline] page for background information.
+
 Clouds that do not enjoy a connection to the internet can nonetheless make use
 of Juju charms provided that local copies of the charms are prepared in
-advance. Examples of common offline clouds are LXD, MAAS, and OpenStack.
+advance.
 
 These instructions are concerned strictly with how to obtain local copies of
 Juju charms. In particular, they do not take into account:
@@ -104,6 +107,7 @@ postgresql  9.5.10   active      1  postgresql  jujucharms  164  ubuntu
 
 <!-- LINKS -->
 
+[charms-offline]: ./charms-offline.html
 [charm-store]: https://jujucharms.com
 [charm-tools]: ./tools-charm-tools.html
 [charms-deploying]: ./charms-deploying.html

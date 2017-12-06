@@ -19,6 +19,8 @@ services would commonly provide access to:
  - Various HTTP-based resources
  - snaps
 
+Examples of common offline clouds are LXD, MAAS, and OpenStack.
+
 This top-level document links to sub-pages that cover the following topics:
 
  - Offline mode strategies (proxies and mirrors)
