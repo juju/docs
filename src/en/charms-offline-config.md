@@ -2,13 +2,23 @@ Title: Configuring Juju for offline usage
 
 # Configuring Juju for offline usage
 
-This page makes use of information presented in the
-[Offline mode strategies][charms-offline-strategies] document.
+*This page makes use of information presented in the
+[Offline mode strategies][charms-offline-strategies] document. Please see that
+page for a full understanding.*
 
-Juju honours various proxy settings There are 2 places to configure proxies
-when bootstrapping juju.
+There are three Juju entities to take into account when configuring Juju in a
+network-restricted environment. Each one of these may require specific
+treatment depending on the backing cloud type and in what manner the local
+network is restricted. These are:
 
-The bootstrap unit itself may need proxy information to retrieve various
+ - client
+ - controller
+ - non-controller model
+
+--model-default
+--config
+
+The controller itself may need proxy information to retrieve various
 packages. This is configured with --config options during bootstrap.
 
 Models may also need this proxy information if charms deployed in those models
@@ -16,20 +26,24 @@ require external network access (for example, access to pypi to install
 requisite pip packages). This is configured with --model-default options during
 bootstrap.
 
-Consider an environment where all network traffic must go
-through an http://squid.internal:3128 proxy. We plan to deploy charms locally
-with LXD, so we need to ensure all inter-container traffic is not proxied. This
-can be achieved as follows:
+## Using the localhost cloud (LXD) offline
 
-## no proxy for localhost, our eth0 ip address, and our lxd subnet
+Begin by defining the HTTP and HTTPS proxies. In this example they happen to be
+the same:
 
 ```bash
-export no_proxy=`echo localhost 10.245.67.130 10.44.139.{1..255} | sed 's/ /,/g'`
 export http_proxy=http://squid.internal:3128
 export https_proxy=http://squid.internal:3128
 ```
 
-Now bootstrap with the appropriate proxy configuration:
+Next, we employ a slightly ingenious method to define the destinations that
+must *not* use the above proxies:
+
+```bash
+export no_proxy=`echo localhost 10.245.67.130 10.44.139.{1..255} | sed 's/ /,/g'`
+```
+
+Finally, apply these settings during the controller-creation process:
 
 ```bash
 juju bootstrap \
@@ -42,6 +56,7 @@ juju bootstrap \
 localhost lxd
 ```
 
+## no proxy for localhost, our eth0 ip address, and our lxd subnet
 https://bugs.launchpad.net/juju/+bug/1730617
 
 <!-- LINKS -->

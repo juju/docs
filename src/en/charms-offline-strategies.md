@@ -31,6 +31,24 @@ satisfied.
 
 The de-facto forward proxy solution on Ubuntu is [`squid`][upstream-squid].
 
+Let the HTTP proxy and the HTTPS proxy be given by $HTTP_PROXY and $HTTPS_PROXY
+respectively. Note that these values are often the same.
+
+### No HTTP/S proxy
+
+When an HTTP/S proxy is configured there may be destinations that should be
+excluded from using it. Such destinations are set with the `no_proxy`
+variable.
+
+In general, all instances within a cloud should be able to communicate directly
+with one another. It may, or it may not, be necessary to express this via the
+`no_proxy` variable. This is because it is limited to the HTTP and HTTPS
+protocols, which may not apply in every case. Nevertheless, it is often done
+out of simplicity.
+
+The localhost system and its local IP address are also typically included in
+this set of destinations.
+
 ## APT proxy
 
 An HTTP/S proxy may not accept HTTP/S requests for APT packages. The idea of an

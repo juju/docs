@@ -2,8 +2,8 @@ Title: Deploying Charms Offline
 
 # Deploying charms offline
 
-This page is concerned with using Juju charms offline. See the
-[Working offline][charms-offline] page for background information.
+*This page is concerned with using Juju charms offline. See the
+[Working offline][charms-offline] page for background information.*
 
 Clouds that do not enjoy a connection to the internet can nonetheless make use
 of Juju charms provided that local copies of the charms are prepared in
