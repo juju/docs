@@ -23,7 +23,7 @@ Examples of common offline clouds are LXD, MAAS, and OpenStack.
 
 This top-level document links to sub-pages that cover the following topics:
 
- - Offline mode strategies (proxies and mirrors)
+ - Offline mode strategies
  - Configuring Juju for offline usage
  - Deploying charms offline
  - Distributing snaps internally

@@ -14,6 +14,7 @@ listed.
 The services of concern here are:
 
  - HTTP/S proxy
+ - FTP proxy
  - APT proxy
  - APT repository mirror
  - Juju agent mirror
@@ -31,29 +32,38 @@ satisfied.
 
 The de-facto forward proxy solution on Ubuntu is [`squid`][upstream-squid].
 
-Let the HTTP proxy and the HTTPS proxy be given by $HTTP_PROXY and $HTTPS_PROXY
-respectively. Note that these values are often the same.
+Juju uses variables `http-proxy` and `https-proxy` to denote these proxies.
 
 ### No HTTP/S proxy
 
 When an HTTP/S proxy is configured there may be destinations that should be
-excluded from using it. Such destinations are set with the `no_proxy`
-variable.
+excluded from using it.
+
+Juju uses variable `no-proxy` to represent these destinations.
 
 In general, all instances within a cloud should be able to communicate directly
 with one another. It may, or it may not, be necessary to express this via the
-`no_proxy` variable. This is because it is limited to the HTTP and HTTPS
-protocols, which may not apply in every case. Nevertheless, it is often done
-out of simplicity.
+`no-proxy` variable. This is because the latter is limited to the HTTP and
+HTTPS protocols, which may not apply in every case. Nevertheless, it is often
+done out of simplicity.
 
 The localhost system and its local IP address are also typically included in
-this set of destinations.
+this set of destinations. ??????? addresses or names
+
+## FTP proxy
+
+?????????????????????????????????????????
+
+Juju uses the `ftp-proxy` variable for this type of proxy.
 
 ## APT proxy
 
-An HTTP/S proxy may not accept HTTP/S requests for APT packages. The idea of an
-APT proxy is identical to that of an HTTP/S proxy except that it applies
+An HTTP/S or FTP proxy may not accept requests for APT packages. The idea of an
+APT proxy is identical to that of an HTTP/S or FTP proxy except that it applies
 specifically to APT package requests.
+
+Juju uses the `apt-ftp-proxy`, `apt-http-proxy`, and `apt-https-proxy`
+variables to set these proxies.
 
 Some common implementations include:
 
