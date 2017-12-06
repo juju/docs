@@ -3,6 +3,7 @@ TODO:  Check more complex bundles after the release of 2.0
        Review required
        Refactor (e.g. advanced usage/information should go in a sub-page)
        Refactor (e.g. using vs creating)
+       Add example portraying bundle overlay
 
 # Using and Creating Bundles
 
