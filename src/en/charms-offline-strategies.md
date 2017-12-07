@@ -62,8 +62,8 @@ An HTTP/S or FTP proxy may not accept requests for APT packages. The idea of an
 APT proxy is identical to that of an HTTP/S or FTP proxy except that it applies
 specifically to APT package requests.
 
-Juju uses the `apt-ftp-proxy`, `apt-http-proxy`, and `apt-https-proxy`
-variables to set these proxies.
+Juju uses variables `apt-ftp-proxy`, `apt-http-proxy`, and `apt-https-proxy`
+to set these proxies.
 
 Some common implementations include:
 

@@ -22,8 +22,12 @@ its machines become thereby configured.
 
 ????????? refer to models-config.md
 
---model-default
---config
+## Configuration methods
+
+During the creation of the controller:
+
+`--config` : sets options only for models 'controller' and 'default'
+`--model-default` : sets options for all models (present and future)
 
 ## Network criteria
 
@@ -69,14 +73,14 @@ export https_proxy=http://squid.internal:3128
 Next, we employ a slightly ingenious method to define the destinations that
 must *not* use the above proxies:
 
+```bash
+export no_proxy=$(echo 127.0.0.1 10.245.67.130 10.44.139.{1..255} | sed 's/ /,/g')
+```
+
 set the proxy for both the controller you are about to create, and for the
 client that you are running. You're also likely to need to set 'no-proxy' to
 appropriate values so that you can still contact things like the LXD agent
 running on your host machine.
-
-```bash
-export no_proxy=`echo localhost 10.245.67.130 10.44.139.{1..255} | sed 's/ /,/g'`
-```
 
 ?????? where X.Y is the IP address that was assigned to your LXD bridge. 
 
