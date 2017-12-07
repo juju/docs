@@ -1,112 +1,52 @@
-Title: What's new in 2.2
-TODO: Needs KVM details?
-      Needs new networking details?
+Title: What's new in 2.3
 
-# What's new in 2.2
+# What's new in 2.3
 
-This release of Juju 2.2 makes creating and managing cloud deployments faster
-and easier, thanks to several new and significant features:
-
-- Cloud updates: new support for Oracle's public cloud and big improvements to
-  VMware's vSphere.
-- Performance: greatly enhanced memory and storage consumption, helping Juju run
-  more efficiently for longer.
-
-We're going to look at these new features in more detail below. If you're new
-to Juju, we recommend taking a look at our [Getting started][first] guide
+The major new features in this release are summarised below. If you're new to
+Juju, begin by going through our [Getting started][getting-started] guide
 first.
 
-## Cloud updates
+For details on these features, and other improvements not listed here, see
+the [2.3 release notes][anchor__release-notes-2.3.0].
 
-### Oracle cloud
+## Persistent storage
 
-Oracle's public cloud, [Oracle Compute][compute], becomes our latest cloud
-addition.
+Persistent storage enables operators to manage the life-cycle of storage
+independently of Juju machines. See [Using Juju storage][charms-storage] for a
+complete breakdown of how persistent storage, also called *dynamic storage*,
+fits in with legacy Juju storage.
 
-Prior to deployment, you will need to associate Oracle's Ubuntu images within
-the dashboard of your Oracle Compute service because Juju uses these with its
-own deployments. 
+## Cross model relations
 
-This can be done easily by signing in to Oracle's domain dashboard, creating a
-new `Compute` instance, selecting `Marketplace` and searching for 'ubuntu':
+Cross model relations make centralised management of multiple models a reality
+by allowing applications in separate models to form relations between one
+another. This feature also works across multiple controllers. See 
+[Cross model relations][models-cmr] for more information and examples.
 
-![Ubuntu image search](./media/oracle_create-instance-ubuntu.png)
+## Fan networking support
 
-Select the images you want, Ubuntu 16.04 and Ubuntu 14.04 are good choices, and
-head back to Juju.
+Fan networking leads to the reconfiguration of an IPv4 address space such that
+network connectivity among containers running on separate hosts becomes
+possible. Applied to Juju, this allows for the seamless interaction between
+deployed applications running within LXD containers on separate Juju machines.
+Read [Juju and Fan networking][charms-fan] for more on this exciting topic.
 
-You now need to simply add credentials and bootstrap. 
+## Improvements to bundles
 
-!!! Note:
-    If you're using an Oracle cloud trial account, you will need to enter your
-    endpoint details manually using `juju add-cloud`. See our 
-    [Oracle documentation][helporacle] for help on the process.
+You can now recycle existing machines instead of having new ones created. It is
+also possible to map specific machines to machines configured in the bundle.
 
-Using Juju's interactive authentication, importing Oracle credentials into Juju
-is an easy process. You will just need the following information:
+A bundle declaration can be placed on top of a base bundle to override elements
+of the latter. These are bonafide bundle files, called "overlay bundles", that
+can do anything a normal bundle can do. They can also remove applications from
+the base bundle. See [Overlay bundles][anchor__overlay-bundles].
 
-- **Username**: usually the email address for your Oracle account.
-- **Password**: the password for this specific Compute domain.
-- **Identity domain**: the ID for the domain, e.g. `a476989`.
 
-To add these details, type `juju add-credential <credential-name> <cloud-name>`:
+<!-- LINKS -->
 
-```bash
-juju add-credential oracle
-```
-
-You will be asked for each detail in turn.
-
-```no-highlight
-Enter credential name: mynewcredential
-Using auth-type "userpass".
-Enter username: javier
-Enter password: ********
-Enter identity-domain: a476989
-Credentials added for cloud oracle.
-```
-
-You have now added everything needed to bootstrap your new Oracle Compute cloud
-with Juju:
-
-```bash
-juju boostrap oracle
-```
-
-You can now start deploying Juju [charms and bundles][charms] to your Oracle cloud.
-
-See our [Using the Oracle public cloud][helporacle] documentation for further help.
-
-### VMware vSphere
-
-Our [vSphere][vmwarevsphere] support has been much improved. It now requires
-very little configuration prior to bootstrap and performs much better than with
-previous versions of Juju.
-
-Additionally, to help with vSphere machine management, machines are now
-organised into folders on your cloud. See our [vSphere][helpvmware]
-documentation to get started.
- 
-## Performance 
-
-Juju now handles transactions more efficiently and has better support for
-longer running controllers.
-
-Logs are compressed when rotated, separated by model, and can be pruned to a
-specific age and size. These options are configured through the controller -
-see our [Controller documentation][logs] for more details. 
-
-## Next Steps
-
-For further details, see the [Controller documentation][logs], the 
-[Oracle compute][helporacle] documentation and the Juju 2.2 [release
-notes][rnotes].
-
-[first]: ./getting-started.html
-[logs]: ./controllers-config.html
-[vmwarevsphere]: http://www.vmware.com/products/vsphere.html
-[helpvmware]: ./help-vmware.html
-[compute]: https://cloud.oracle.com/en_US/compute
-[charmstore]: https://jujucharms.com/store
-[helporacle]: ./help-oracle.html
-[rnotes]: ./reference-release-notes.html#juju_2.2.0
+[getting-started]: https://jujucharms.com/docs/devel/getting-started
+[charms-storage]: https://jujucharms.com/docs/stable/charms-storage
+[models-cmr]: https://jujucharms.com/docs/stable/models-cmr
+[charms-fan]: https://jujucharms.com/docs/stable/charms-fan
+[anchor__release-notes-2.3.0]: ./reference-release-notes.html#juju_2.3.0
+[anchor__overlay-bundles]: ./charms-bundles.html#overlay-bundles

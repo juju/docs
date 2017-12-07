@@ -4,7 +4,7 @@
     <li class="section"><h4 class="header toggle-target">Quick Guides</h4>
         <ul>
         <li class="section"><a class="header" href="getting-started.html">Get started</a></li>
-        <li><a href="whats-new.html">What's new in 2.2</a></li>
+        <li><a href="whats-new.html">What's new in 2.3</a></li>
         <li><a href="tut-lxd.html">Local Juju with LXD cloud</a></li>
         <li><a href="tut-google.html">Controllers and Models</a></li>
         <li><a href="tut-users.html">Sharing and Users</a></li>
