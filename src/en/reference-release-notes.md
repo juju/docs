@@ -8,101 +8,124 @@ This section details all the available release notes for the
 
 The versions covered here are:
 
-^# Juju 2.3-beta1
+^# Juju 2.3.0
 
-## New and Improved
+  The Juju team are extremely pleased to announce the release of Juju 2.3. Juju
+  is now more versatile, more efficient, and more configurable than ever.
+   
+  Cross Model Relations deliver a new way of organising your software stack.
+  Deploy a database in one model and connect it to an application running
+  another, even one running on a different controller, or even a different
+  cloud.
+   
+  For containers at scale, Juju now integrates Canonical's Fan overlay network
+  system. This allows containers to map network traffic to any other container
+  on the fan network without distributed databases, consensus protocols, or any
+  extra overhead.
+  
+  Juju's support for bundles has made it possible to quickly deploy connected
+  sets of applications for some time now, but no two use cases are the same.
+  That's why we have introduced the concept of an 'overlay' bundle - now you
+  can easily add your own configuration and tweaks to a bundle at deploy time.
+  See below for links to more information on this and other key features.
+  
+  ## How can I get it?
+  
+  The best way to get your hands on this release of Juju is to install it via
+  snap packages (see https://snapcraft.io/ for more info on snaps).
+  
+         snap install juju --classic
+  
+  Other packages are available for a variety of platforms. Please see the
+  online documentation at https://jujucharms.com/docs/2.3/reference-install.
+  Those subscribed to a snap channel should be automatically upgraded. If
+  you’re using the PPA or Homebrew, you should see an upgrade available.
+  
+  For highlights of this release, please see the documentation at
+  [https://jujucharms.com/docs/2.3/whats-new](./whats-new). Further details are
+  below.
+  
+  ## New
+  
+  * Cross Model Relations:  
+    - see https://jujucharms.com/docs/2.3/models-cmr
+  
+  * Persistent Storage:  
+    - see https://jujucharms.com/docs/2.3/charms-storage
+  
+  * FAN:  
+    - see https://jujucharms.com/docs/2.3/charms-fan
+  
+  * Bundle deployments:  
+    - Changed flags for deploying bundles to existing machines  
+    - Bundle deploy flag --bundle-config replaced with --overlay  
+    - Deploying bundles now supports --dry-run  
+    - Deploying bundles can now target existing machines  
+  
+  * Update Application Series:  
+    - see https://jujucharms.com/docs/2.3/howto-updateseries 
+  
+  * Parallelization of the Machine Provisioner:  
+      - Groups of machines will now be provisioned in parallel reducing deployment
+    time, especially on large bundles.
+  
+  * open_port and close_port hook tools now support ICMP  
+      - The open_port and close_port hook tools now support opening firewall
+    access for ICMP. The syntax is: open_port icmp
+  
+  * LXD Storage Provider:  
+    - see https://jujucharms.com/docs/2.3/charms-storage#lxd-(lxd)
+  
+  ## Fixes
+  
+  * Listing of Juju models is more efficient and can now handle more models
+    gracefully
+  * Leadership coordinations is no longer tied to local time which avoids
+    problems with clock skew and reduces overall load on the database 
+  * Models are now more reliably destroyed and several fixes to avoid negative
+    impacts while they are being removed
+  
+  You can check the milestones for a detailed breakdown of the Juju bugs we have fixed:
+  
+  https://launchpad.net/juju/+milestone/2.3.0  
+  https://launchpad.net/juju/+milestone/2.3-rc2  
+  https://launchpad.net/juju/+milestone/2.3-rc1  
+  https://launchpad.net/juju/+milestone/2.3-beta3  
+  https://launchpad.net/juju/+milestone/2.3-beta2  
+  https://launchpad.net/juju/+milestone/2.3-beta1  
+  
+  ## Known issues
+  
+  These issues are targeted to be addressed in the upcoming 2.3.1 release.
+  
+  * Firewall issues on VMware vSphere  
+    https://bugs.launchpad.net/juju/+bug/1732665
+  
+  * LXD broken on VMware  
+    https://bugs.launchpad.net/juju/+bug/1733882
+  
+  * Can't deploy bundle with map-machines=existing and subordinates  
+    https://bugs.launchpad.net/juju/+bug/1736592
 
-### FAN networking in containers (initial support)
+  * load spike on controller following remove-application  
+    https://bugs.launchpad.net/juju/+bug/1733708
+  
+  ## Feedback Appreciated!
+  
+  We encourage everyone to let us know how you're using Juju.
+  
+  Join us at regular Juju shows - subscribe to our
+  [YouTube channel](https://youtube.com/jujucharms).
+   
+  Send us a message on Twitter using #jujucharms, join us at #juju on Freenode,
+  and subscribe to the mailing list at juju@lists.ubuntu.com .
+  
+  https://jujucharms.com/docs/2.3/contact-us
+  
+  ## More information
+  
+  To learn more about Juju please visit https://jujucharms.com .
 
-A new "container-networking-method" model config attribute is introduced with 3 possible values: "local", "fan", "provider".
-* local = use local bridge lxdbr0
-* provider = containers get their IP address from the cloud via DHCP
-* fan = use FAN
-
-The default is to use "provider" if supported. Otherwise, if FAN is configured use that, else "local".
-On AWS, FAN works out of the box. For other clouds, a new fan-config model option needs to be used, eg
-
-    juju model-config fan-config="<underlay1>=<overlay1> <underlay2>=<overlay2>
-
-### Update application series
-
-It's now possible to update the underlying OS series associated with an already deployed application.
-
-    juju update-series <application> <series>
-
-will ensure that any new units deployed will now use the requested series.
-
-    juju update-series <machine> <series>
-
-will inform the charms already deployed to the machine that the OS series has been changed and they should re-configure accordingly. This requires charm support and for the underlying OS to be upgraded manually beforehand.
-
-For more detail, see the documentation https://jujucharms.com/docs/devel/howto-updateseries
-
-### Cross model relations
-
-This feature allows workloads to be deployed and related across models, and even across controllers. Note that some charms such as postgresql, prometheus (and others) need to be updated to be cross model compatible - this work is underway.
-
-For more detail, see the beta documentation https://jujucharms.com/docs/devel/models-cmr/
-
-*Note: this cross model relations documentaion is also still in beta and is incomplete.*
-
-### LXD storage provider
-
-Juju storage is now supported by the LXD local cloud. The available storage options include:
-- lxd (default, directory based)
-- btrfs
-- zfs
-
-For more detail, see the documentation https://jujucharms.com/docs/devel/charms-storage#lxd-(lxd)
-
-### Persistent storage management
-
-Storage can be detached and reattached from/to units without losing the data on that storage. The supported scenarios include:
-- explicit detach / attach while the units are still active
-- retain storage when a unit or application is destroyed
-- retain storage when a model is destroyed
-- deploy a charm using previously detached storage
-
-The default behaviour now is to retain storage, unless destroy has explicitly been requested when running the command.
-
-Storage which is retained can then be reattached to a different unit. Filesystem storage can be imported into a different model, from where it can be attached to units in that model, or used when deploying a new charm.
-
-For more detail, see the documentation https://jujucharms.com/docs/devel/charms-storage
-
-
-## Fixes
-
-For a list of all bugs fixed in this release, see https://launchpad.net/juju/+milestone/2.3-beta1
-
-Some important fixes include:
-
-* can't bootstrap openstack if nova and neutron AZs differ
-https://bugs.launchpad.net/juju/+bug/1689683
-* cache vSphere images in datastore to avoid repeated downloads
-https://bugs.launchpad.net/juju/+bug/1711019
-* juju run-action can be run on multiple units
-https://bugs.launchpad.net/juju/+bug/1667213
-
-
-## How can I get it?
-
-The best way to get your hands on this release of Juju is to install it as a snap package (see https://snapcraft.io/ for more info on snaps).
-
-         snap install juju --beta --classic
-
-Other packages are available for a variety of platforms. Please see the online documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew, you should see an upgrade available.
-
-
-## Feedback Appreciated!
-
-We encourage everyone to let us know how you're using Juju. Send us a
-message on Twitter using #jujucharms, join us at #juju on freenode, and
-subscribe to the mailing list at juju@lists.ubuntu.com.
-
-
-## More information
-
-To learn more about juju please visit https://jujucharms.com.
 
 
 ^# Juju 2.2.6
