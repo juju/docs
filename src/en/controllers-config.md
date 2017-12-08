@@ -1,6 +1,6 @@
 Title: General configuration options
 TODO: Check accuracy of key table
-      error: table's default value keys do not show up with above command (e.g. all bootstrap-*)
+      error: table's default value keys do not show up with controller-config (e.g. bootstrap-)
       "dynamically set by Juju" could use some explaination
 
 
