@@ -1,9 +1,6 @@
 Title: General configuration options
 TODO: Check accuracy of key table
-      Make the table more space-efficient. Damn it's bulbous.
-      error: controller-config shows config for a controller, not a model
       error: table's default value keys do not show up with above command (e.g. all bootstrap-*)
-      error: --config configures the 'default' and 'controller' models
       "dynamically set by Juju" could use some explaination
 
 
@@ -16,9 +13,9 @@ Controller configuration consists of a collection of keys and their respective
 values. An explanation of how to both view and set these key:value pairs is
 provided below.
 
-## Listing configuration
+## Getting values
 
-A controller's configuration can be listed by running this command:
+A controller's configuration key values can be listed by running this command:
 
 ```bash
 juju controller-config
@@ -28,22 +25,23 @@ The key-value pairs that are shown will include those that were set during
 controller creation (see below), inherited as a default value (see table), or
 dynamically set by Juju. 
 
-## Setting configuration
+## Setting values
 
 To set a key's value use the `--config` option during the controller creation
 process (see [Creating a controller][controllers-creating]). For example, to
 create and configure a cloud named 'lxd':
 
 ```bash
-juju bootstrap --config bootstrap-timeout=500 lxd
+juju bootstrap --config bootstrap-timeout=700 lxd
 ```
 
 Once a controller is created, all its settings become immutable.
 
-Note that the `--config` option may also be used to configure the 'controller'
-and 'default' **models**. Juju recognizes the nature of the key and applies it
-accordingly. See [Configuring models][models-config] for more information on
-how models get configured.
+!!! Note:
+    The `--config` option may also be used to configure the 'default' model.
+    In addition, the `model-default` option can usually always be used in place
+    of the `--config` option. See [Configuring models][models-config] for more
+    information on how models get configured and how these two options differ.
 
 ## List of controller keys
 
