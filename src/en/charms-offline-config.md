@@ -22,22 +22,59 @@ its machines become thereby configured.
 
 ????????? refer to models-config.md
 
+
+The following environment variables are available to the shell:
+
+ - `ftp-proxy`
+ - `apt-ftp-proxy`
+ - `apt-http-proxy`
+ - `apt-https-proxy`
+
 ## Configuration methods
 
-During the creation of the controller:
+The **client** is made aware of proxy settings via the shell that it is running
+under (e.g. Bash). This is done by exporting the relevant environment
+variables:
+
+ - `http_proxy`
+ - `https_proxy`
+ - `no_proxy`
+
+The **controller** is a Juju machine that consumes proxy settings via 
+During the creation of the controller :
 
 `--config` : sets options only for models 'controller' and 'default'
 `--model-default` : sets options for all models (present and future)
 
+Read [Configuring models][models-config] for details on how a model can be
+configured.
+
+## Juju resources
+
+http://cloud-images.ubuntu.com
+https://streams.canonical.com
+http://archive.ubuntu.com
+
 ## Network criteria
 
+Here we set out what actual network connectivity is required for the different
+stages of setting up a cloud environment with Juju.
+
+### Controller creation
+
+When creating a controller the client is
+responsible for setting up a new machine within the backing cloud.
+Thus the client needs access to both. Once the new machine has been provisioned, it is only the *controller*
+(and the LXD agent) that needs access to those locations. Once a controller is
+properly bootstrapped, from then the *client* needs access to the controller's
+API (for 'lxd' this should likely not be via a proxy).
+
 For bootstrap, we need access to the cloud provider (in the case of LXD this is
-your LXD agent running on the lxd bridge).
-We'll also likely need access to https://streams.canonical.com unless you're
-planning on using a local jujud agent binary. (Typically we download it from
-streams.canonical.com to be sure we can get updates and support more than just
-one architecture or series.) We also use streams in order to map OS series into
-images for the cloud.
+your LXD daemon listening on the LXD bridge). We'll also likely need access to
+https://streams.canonical.com unless you're planning on using a local jujud
+agent binary. (Typically we download it from streams.canonical.com to be sure
+we can get updates and support more than just one architecture or series.) We
+also use streams in order to map OS series into images for the cloud.
 
 We'll also likely need access to archive.ubuntu.com and security.ubuntu.com, in
 order to ensure your packages are up-to-date. We also need access to packages
@@ -104,3 +141,4 @@ https://bugs.launchpad.net/juju/+bug/1730617
 
 [charms-offline-deploying]: ./charms-offline-deploying.html
 [charms-offline-strategies]: ./charms-offline-strategies.html
+[models-config]: ./models-config.html
