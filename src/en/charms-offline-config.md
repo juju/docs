@@ -13,22 +13,11 @@ network is restricted. These are:
 
  - client
  - controller
- - non-controller model
+ - non-controller machines
 
-Where 'client' is the Juju client from whence the `juju` commands are invoked;
-the 'controller' is the Juju controller; and the 'non-controller model' is the
-model housing the workload Juju machines. By configuring the latter model, all
-its machines become thereby configured.
-
-????????? refer to models-config.md
-
-
-The following environment variables are available to the shell:
-
- - `ftp-proxy`
- - `apt-ftp-proxy`
- - `apt-http-proxy`
- - `apt-https-proxy`
+Where the client is the Juju client from whence `juju` commands are invoked;
+the controller is the Juju controller; and the non-controller machines are the
+workload Juju machines.
 
 ## Configuration methods
 
@@ -40,25 +29,59 @@ variables:
  - `https_proxy`
  - `no_proxy`
 
-The **controller** is a Juju machine that consumes proxy settings via 
-During the creation of the controller :
+The **controller** is a Juju machine that typically consumes proxy settings 
+during its creation.
 
-`--config` : sets options only for models 'controller' and 'default'
-`--model-default` : sets options for all models (present and future)
+The **non-controller machines** are configured for proxies indirectly via their
+model. This can be done during controller creation but it can equally be done
+post-creation using standard model configuration methods.
+
+Juju has the following offline-related model configuration options at its
+disposal:
+
+ - `apt-ftp-proxy`
+ - `apt-http-proxy`
+ - `apt-https-proxy`
+ - `apt-mirror`
+ - `ftp-proxy`
+ - `http-proxy`
+ - `https-proxy`
 
 Read [Configuring models][models-config] for details on how a model can be
 configured.
 
 ## Juju resources
 
-http://cloud-images.ubuntu.com
-https://streams.canonical.com
-http://archive.ubuntu.com
+Here is a lit of internet-based resources that Juju should have access to,
+whether via a proxy or a local resource.
+
+ - [http://cloud-images.ubuntu.com](http://cloud-images.ubuntu.com)  
+   The official Ubuntu cloud images site.
+
+ - [https://streams.canonical.com](https://streams.canonical.com)  
+   This is where Juju's agents are downloaded from. It is also used to map Juju
+   series to cloud images.
+   
+ - [http://archive.ubuntu.com](http://archive.ubuntu.com)  
+   The official Ubuntu package archive. 
+
+ - [https://jujucharms.com](https://jujucharms.com)  
+   The official Charm Store. The **client** will need access in order to deploy
+   charms. Otherwise, local charms will be required (see
+   [Deploying charms offline][charms-offline-deploying]).
+
+ - Charm-specific sites  
+   Some charms may require access to auxiliary sites to pull down resources
+   (e.g.  [https://ppa.launchpad.net](https://ppa.launchpad.net) and
+   [https://github.com](https://github.com)).
 
 ## Network criteria
 
 Here we set out what actual network connectivity is required for the different
 stages of setting up a cloud environment with Juju.
+
+A special case arises when the localhost cloud (LXD) is
+employed. In such a context, the controller 
 
 ### Controller creation
 
@@ -84,11 +107,6 @@ And you can also set up alternative locations to download agent binaries
 (agent-metadata-url). And you may want a different location to find images for
 your cloud (image-metadata-url).
 
-For some charms that you deploy you may need access to more sites
-(ppa.launchpad.net, github.com, etc.), that is very application specific.
-You'll also need access to jujucharms.com if you want to use store charms
-rather than local charms.
-
 The controller itself may need proxy information to retrieve various
 packages. This is configured with --config options during bootstrap.
 
@@ -111,7 +129,7 @@ Next, we employ a slightly ingenious method to define the destinations that
 must *not* use the above proxies:
 
 ```bash
-export no_proxy=$(echo 127.0.0.1 10.245.67.130 10.44.139.{1..255} | sed 's/ /,/g')
+export no_proxy=$(echo localhost 127.0.0.1 10.245.67.130 10.44.139.{1..255} | sed 's/ /,/g')
 ```
 
 set the proxy for both the controller you are about to create, and for the
@@ -125,9 +143,6 @@ Finally, apply these settings during the controller-creation process:
 
 ```bash
 juju bootstrap \
---config http-proxy=$http_proxy \
---config https-proxy=$https_proxy \
---config no-proxy=$no_proxy \
 --model-default http-proxy=$http_proxy \
 --model-default https-proxy=$https_proxy \
 --model-default no-proxy=$no_proxy \
