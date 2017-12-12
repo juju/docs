@@ -10,7 +10,7 @@ for how to install Juju on your chosen platform.
 ## Version 2.3.1
 
 The most recent stable version of Juju is 2.3.1. This is the version we
-recommend for production use.
+recommend for production use. See the [Release Notes][release-notes-2].
 
 ### Ubuntu
 
@@ -134,6 +134,7 @@ instructions on how to build Juju from source.
 
 <!-- LINKS -->
 
+[release-notes-2]: ./reference-release-notes.html
 [homebrew]: https://brew.sh/
 [contributing]: https://github.com/juju/juju/blob/develop/CONTRIBUTING.md
 [snapcraft]: https://snapcraft.io
