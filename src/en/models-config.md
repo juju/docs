@@ -2,7 +2,6 @@ Title: General configuration options
 TODO: Check accuracy of key table
       Confirm 'all' harvest mode state. Seems it should be "'Dead' or
 	'Unknown'" OR "a combination of modes 'destroyed' and 'unknown'".
-      Make the table more space-efficient. Damn it's bulbous.
       Provide an example of using model-defaults to set a per-region attribute.
 
 
@@ -79,8 +78,9 @@ juju model-defaults us-east-1 test-mode=true enable-os-upgrade=false
 
 Model settings can also be made when creating a new controller via either the
 `--config` or `--model-default` options. The difference being that `--config`
-affects the 'controller' and 'default' models and `--model-default` affects
-**all** models, including any future ones. Below we use the `--config` option:
+affects just the 'controller' and 'default' models while `--model-default`
+affects **all** models, including any future ones. Below we use the `--config`
+option:
 
 ```bash
 juju bootstrap --config image-stream=daily lxd lxd-daily
@@ -88,6 +88,11 @@ juju bootstrap --config image-stream=daily lxd lxd-daily
 
 See [Creating a controller][controllers-creating] for in-depth coverage on how
 to create a controller.
+
+Note that these defaults can be overridden, on a per-model basis, during the
+invocation of the `add-model` command (option `--config`) as well as by
+resetting specific options to their original defaults through the use of the
+`model-config` command (option `--reset`).
 
 ## List of model keys
 
