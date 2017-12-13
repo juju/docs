@@ -56,13 +56,21 @@ Here is a lit of internet-based resources that Juju should have access to,
 whether via a proxy or a local resource.
 
  - cloud provider  
-   The backing cloud. Required for the **client**.
+   The **client** requires access to the backing cloud in order to create a
+   controller. Most public clouds have a RESTful API that operates over TCP
+   port 443. A special case is the localhost cloud, in which the client talks
+   to the local LXD daemon.
+
  - [http://cloud-images.ubuntu.com](http://cloud-images.ubuntu.com)  
-   Official Ubuntu cloud images.
+   Official Ubuntu cloud images. Required for the **client** when using the
+   localhost cloud.
 
  - [https://streams.canonical.com](https://streams.canonical.com)  
-   Where Juju agents are downloaded from. Also used to map Juju series to cloud
-   images.
+     - Where Juju agents are stored online. It is therefore required by the
+       **controller** in order to pass agents to the machines.  
+     
+     - Used to map Juju series to cloud images. The exception is the MAAS
+       cloud, which maintains its own registry of images.
    
  - [http://archive.ubuntu.com](http://archive.ubuntu.com)  
    The Ubuntu package archive. Required for every Juju machine, including the
@@ -89,14 +97,15 @@ whether via a proxy or a local resource.
 
 resource                                       | client | controller | machines
 ---------------------------------------------- | ------ | ---------- | --------
+cloud provider                                 | X      |            |
 [http://cloud-images.ubuntu.com][cloud-images] | X [1]  | X          | X [4]
-[https://streams.canonical.com][streams]       | X [2]  | X          |  
+[https://streams.canonical.com][streams]       | X      | X          |  
 [http://archive.ubuntu.com][ubuntu-archive]    |        | X          | X
 [http://security.ubuntu.com][security-archive] |        | X          | X
 [https://jujucharms.com][charm-store]          | X [3]  | X          |  
 charm-specific resources                       |        |            | X
 
-[1,2]: Required for localhost cloud only.
+[1]: Required for localhost cloud only.
 
 [3]: Not needed if the `--no-gui` option is used with the `juju bootstrap`
 command. See [The Juju GUI][controllers-gui].
