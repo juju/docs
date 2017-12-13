@@ -13,11 +13,11 @@ network is restricted. These are:
 
  - client
  - controller
- - non-controller machines
+ - machines
 
-Where the client is the Juju client from whence `juju` commands are invoked;
-the controller is the Juju controller; and the non-controller machines are the
-workload Juju machines.
+Where the *client* is the Juju client from whence `juju` commands are invoked;
+the *controller* is the Juju machine acting as controller; and the *machines*
+are the Juju machines that get created during charm deployment.
 
 ## Configuration methods
 
@@ -32,9 +32,9 @@ variables:
 The **controller** is a Juju machine that typically consumes proxy settings 
 during its creation.
 
-The **non-controller machines** are configured for proxies indirectly via their
-model. This can be done during controller creation but it can equally be done
-post-creation using standard model configuration methods.
+The **machines** are configured for proxies indirectly via their model. This
+can be done during controller creation but it can equally be done post-creation
+using standard model configuration methods.
 
 Juju has the following offline-related model configuration options at its
 disposal:
@@ -55,26 +55,58 @@ configured.
 Here is a lit of internet-based resources that Juju should have access to,
 whether via a proxy or a local resource.
 
+ - cloud provider  
+   The backing cloud. Required for the **client**.
  - [http://cloud-images.ubuntu.com](http://cloud-images.ubuntu.com)  
-   The official Ubuntu cloud images site.
+   Official Ubuntu cloud images.
 
  - [https://streams.canonical.com](https://streams.canonical.com)  
-   This is where Juju's agents are downloaded from. It is also used to map Juju
-   series to cloud images.
+   Where Juju agents are downloaded from. Also used to map Juju series to cloud
+   images.
    
  - [http://archive.ubuntu.com](http://archive.ubuntu.com)  
-   The official Ubuntu package archive. 
+   The Ubuntu package archive. Required for every Juju machine, including the
+   controller. Used for package management (e.g. updates). Charms deployed on
+   the machines typically call for packages to install.
+   
+ - [http://security.ubuntu.com](http://security.ubuntu.com)  
+   Ubuntu security package updates. Recommended for every Juju machine. All
+   security updates eventually end up in the Ubuntu package archive ('-updates'
+   pocket).
 
  - [https://jujucharms.com](https://jujucharms.com)  
-   The official Charm Store. The **client** will need access in order to deploy
-   charms. Otherwise, local charms will be required (see
+   The Charm Store. Required for the **controller** so that charms can be
+   deployed on the machines. The **client** *may* require access if the
+   [juju-gui charm][charm-store-juju-gui] is deployed on the controller (the
+   default behaviour). Otherwise, local charms will be required (see
    [Deploying charms offline][charms-offline-deploying]).
 
- - Charm-specific sites  
-   Some charms may require access to auxiliary sites to pull down resources
-   (e.g.  [https://ppa.launchpad.net](https://ppa.launchpad.net) and
-   [https://github.com](https://github.com)).
+ - charm-specific resources  
+   Some charms require auxiliary site support (for pulling down resources).
+   Popular sites include [https://ppa.launchpad.net][launchpad-ppa] and
+   [https://github.com][github]. Therefore, the **machines** *may* need access
+   to these.
 
+resource                                       | client | controller | machines
+---------------------------------------------- | ------ | ---------- | --------
+[http://cloud-images.ubuntu.com][cloud-images] | X [1]  | X          | X [4]
+[https://streams.canonical.com][streams]       | X [2]  | X          |  
+[http://archive.ubuntu.com][ubuntu-archive]    |        | X          | X
+[http://security.ubuntu.com][security-archive] |        | X          | X
+[https://jujucharms.com][charm-store]          | X [3]  | X          |  
+charm-specific resources                       |        |            | X
+
+[1,2]: Required for localhost cloud only.
+
+[3]: Not needed if the `--no-gui` option is used with the `juju bootstrap`
+command. See [The Juju GUI][controllers-gui].
+
+[4]: Required if the machine will host LXD containers.
+
+!!! Note:
+    The above table does not take into account the packaging needs of the Juju
+    client host system (e.g. package updates).
+    
 ## Network criteria
 
 Here we set out what actual network connectivity is required for the different
@@ -157,3 +189,12 @@ https://bugs.launchpad.net/juju/+bug/1730617
 [charms-offline-deploying]: ./charms-offline-deploying.html
 [charms-offline-strategies]: ./charms-offline-strategies.html
 [models-config]: ./models-config.html
+[cloud-images]: http://cloud-images.ubuntu.com
+[streams]: https://streams.canonical.com
+[ubuntu-archive]: http://archive.ubuntu.com
+[security-archive]: http://security.ubuntu.com
+[charm-store]: https://jujucharms.com
+[charm-store-juju-gui]: https://jujucharms.com/u/juju-gui/juju-gui
+[controllers-gui]:  controllers-gui.html
+[github]: https://github.com
+[launchpad-ppa]: https://ppa.launchpad.net
