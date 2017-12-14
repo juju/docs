@@ -1,6 +1,7 @@
 Title: General configuration options
 TODO: Check accuracy of key table
-      Make the table more space-efficient. Damn it's bulbous.
+      error: table's default value keys do not show up with controller-config (e.g. bootstrap-)
+      "dynamically set by Juju" could use some explaination
 
 
 # Configuring controllers
@@ -12,33 +13,39 @@ Controller configuration consists of a collection of keys and their respective
 values. An explanation of how to both view and set these key:value pairs is
 provided below.
 
+## Getting values
 
-## Getting and setting values
-
-You can display the current model settings by running the command:
+A controller's configuration key values can be listed by running this command:
 
 ```bash
 juju controller-config
 ```
 
-This will include all the currently set key values - whether they were set
-by you, inherited as a default value or dynamically set by Juju. 
+The key-value pairs that are shown will include those that were set during
+controller creation (see below), inherited as a default value (see table), or
+dynamically set by Juju. 
 
-Once a controller is bootstrapped, all the controller config settings are
-read-only and may not be changed.
+## Setting values
 
-To set a key's value use the `--config` option during [bootstrap][bootstrap], like in this
-example which uses a cloud named `lxd`:
+To set a key's value use the `--config` option during the controller creation
+process (see [Creating a controller][controllers-creating]). For example, to
+create and configure a cloud named 'lxd':
 
 ```bash
-juju bootstrap --config allow-model-access=true lxd
+juju bootstrap --config bootstrap-timeout=700 lxd
 ```
+
+Once a controller is created, all its settings become immutable.
+
+!!! Note:
+    The `--config` option may also be used to configure the 'default' model.
+    In addition, the `model-default` option can usually always be used in place
+    of the `--config` option. See [Configuring models][models-config] for more
+    information on how models get configured and how these two options differ.
 
 ## List of controller keys
 
-The table below lists all the controller keys which may be assigned a value. Some
-of these keys deserve further explanation. These are explored in the sections
-below the table.
+This table lists all the controller keys which may be assigned a value.
 
 | Key                        | Type   | Default  | Valid values             | Purpose |
 |:---------------------------|--------|----------|--------------------------|:---------|
@@ -61,4 +68,8 @@ mongo-memory-profile         | string | low      | low/default              | Se
 set-numa-control-policy      | bool   | false    | false/true               | Sets whether numactl is preferred for running processes with a specific NUMA (Non-Uniform Memory Architecture) scheduling or memory placement policy for multiprocessor systems where memory is divided into multiple memory nodes
 state-port                   | integer | 37017   |                          | The port to use for mongo connections
 
-[bootstrap]: ./controllers-creating "Create a Juju controller"
+
+<!-- LINKS -->
+
+[controllers-creating]: ./controllers-creating.html "Creating a controller"
+[models-config]: ./models-config.html "Configuring models"

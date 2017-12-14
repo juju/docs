@@ -2,7 +2,6 @@ Title: General configuration options
 TODO: Check accuracy of key table
       Confirm 'all' harvest mode state. Seems it should be "'Dead' or
 	'Unknown'" OR "a combination of modes 'destroyed' and 'unknown'".
-      Make the table more space-efficient. Damn it's bulbous.
       Provide an example of using model-defaults to set a per-region attribute.
 
 
@@ -43,19 +42,20 @@ juju model-config test-mode=true enable-os-upgrade=false
     Juju does not currently check that the provided key is a valid setting, so
     make sure you spell it correctly.
 
-To return a value to the default setting the `--reset` flag is used,
-specifying the key names:
+To return a value to the default setting the `--reset` flag is used, along
+with the key name:
   
 ```bash
 juju model-config --reset test-mode
 ```
 
 After deployment, the `model-defaults` command allows a user to display the
-configuration values for a model as well as set and unset those values for use
-with any new models. These values can even be specified for each cloud region
+configuration values for a model as well as set default values that all **new**
+models will use. These values can even be specified for each cloud region
 instead of just the controller.
 
-To set a value for `ftp-proxy`, for instance, you would enter the following:
+To set a default value for 'ftp-proxy', for instance, you would enter the
+following:
 
 ```bash
 juju model-defaults ftp-proxy=10.0.0.1:8000
@@ -68,7 +68,7 @@ would use:
 juju model-defaults
 ```
 
-To set default values for all models in a specific controller region, state
+To set default values for all new models in a specific controller region, state
 the region in the command, shown here using the same example settings as our
 previous `model-config` key-value pairs example above:
 
@@ -76,12 +76,23 @@ previous `model-config` key-value pairs example above:
 juju model-defaults us-east-1 test-mode=true enable-os-upgrade=false
 ```
 
-These values can also be passed to a new controller for use with the default
-model it creates. To do this, use the `--config` argument with bootstrap:
+Model settings can also be made when creating a new controller via either the
+`--config` or `--model-default` options. The difference being that `--config`
+affects just the 'controller' and 'default' models while `--model-default`
+affects **all** models, including any future ones. Below we use the `--config`
+option:
 
 ```bash
 juju bootstrap --config image-stream=daily lxd lxd-daily
 ```
+
+See [Creating a controller][controllers-creating] for in-depth coverage on how
+to create a controller.
+
+Note that these defaults can be overridden, on a per-model basis, during the
+invocation of the `add-model` command (option `--config`) as well as by
+resetting specific options to their original defaults through the use of the
+`model-config` command (option `--reset`).
 
 ## List of model keys
 
@@ -286,4 +297,9 @@ juju bootstrap aws aws --agent-version='2.1.2'
 ```
 
 You cannot bootstrap a controller on this system using Juju 1.x, Juju 2.2, and
-so on. Only different patch numbers may be used with `agent-version`
+so on. Only different patch numbers may be used with `agent-version`.
+
+
+<!-- LINKS -->
+
+[controllers-creating]: ./controllers-creating.html
