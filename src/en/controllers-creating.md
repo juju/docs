@@ -5,8 +5,8 @@ TODO:  Improve examples
 
 # Creating a controller
 
-Use the `juju bootstrap` command to create a controller (and model) for a given
-cloud:
+Use the `juju bootstrap` command to create a controller (and 'default' model)
+for a given cloud:
 
 `juju bootstrap [options] <cloud name> [<controller name>]`
 
