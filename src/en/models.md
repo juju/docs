@@ -185,14 +185,3 @@ Common model management tasks are summarized below.
    to the Juju software package installed on a client system.
 
    This is a complex subject. See [Juju upgrades](./models-upgrade.html).
-
-
-
-^# Cross model relations
-   
-   Traditionally, when adding a relation between two applications (see
-   [Charm relations](./charms-relations.html)) the applications reside within
-   the same model and controller. It is possible, however, to break out of this
-   paradigm by employing *cross model relations*.
-
-   This is a complex subject. See [Cross model relations](./models-cmr.html).

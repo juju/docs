@@ -39,11 +39,11 @@ Common tasks are summarized below.
 
 
 ^# Create a controller
-   
+
    Use the `juju bootstrap` command to create a controller.
 
          juju bootstrap [options] [filter pattern ...]
-   
+
    For examples see [Creating a controller](./controllers-creating.html).
 
    For complete explanation, syntax and examples see the
@@ -52,44 +52,54 @@ Common tasks are summarized below.
 
 
 ^# List controllers
-   
-   Use the `juju list-controllers` command to list all controllers knowable by
+
+   Use the `juju controllers` command to list all controllers knowable by
    the current system user.
 
-         juju list-controllers [options] 
-   
+         juju controllers [options]
+
    The currently active controller is indicated in the list with an asterisk('*').
-   
+
    For complete explanation, syntax and examples see the
-   [command reference page](./commands.html#list-controllers) or the `juju help
-   list-controllers ` command.
+   [command reference page](./commands.html#controllers) or the `juju help
+   controllers` command.
 
 
 
 ^# Show controller details
-   
+
    Use the `juju show-controller` command to show details for a controller.
    Information includes UUID, API endpoints, certificates, and bootstrap
    configuarion.
 
          juju show-controller [options]
-   
+
    For complete explanation, syntax and examples see the
    [command reference page](./commands.html#show-controller) or the `juju help
    show-controller` command.
 
 
 
+^# Configure a controller
+
+   There are several settings which can be adjusted from their defaults, such
+   as whether the controller will record auditing information. Configuration
+   must happen as the controller is bootstrapped.
+
+   This topic is covered in more depth in the [configuring controllers section](./controllers-config.html).
+
+
+
 ^# Remove a controller
-   
+
    Use the `juju destroy-controller` command to remove a controller.
 
          juju destroy-controller [options]
-   
+
    For complete explanation, syntax and examples see the
    [command reference page](./commands.html#destroy-controller) or the `juju help
    destroy-controller` command.
-   
+
    Use the `juju kill-controller` command as a last resort if the controller is
    not accessible for some reason.
 
@@ -99,26 +109,26 @@ Common tasks are summarized below.
    provider tools/console. This command will first attempt to mimic the behaviour
    of the `juju destroy-controller` command and failover to the more drastic
    behaviour if that attempt fails.
-   
+
          juju kill-controller [options]
-   
+
    For complete explanation, syntax and examples see the
    [command reference page](./commands.html#kill-controller) or the `juju help
    kill-controller` command.
 
 
 ^# Use the Juju GUI
-   
+
    Each Juju controller creates a web-driven GUI as an alternative method of
    management. The GUI is capable of deploying, scaling and monitoring
    applications, as well as more advanced operations.
-   
-   More details on the GUI can be found in the [Juju GUI section][gui].
-   
 
-   
+   More details on the GUI can be found in the [Juju GUI section][gui].
+
+
+
 ^# Back up a controller
-   
+
    Juju allows one to create, restore and manage backup files containing the
    controller configuration/metadata. If the controller or its host machine
    fails, it is possible to recreate the controller from the backup.
@@ -127,9 +137,9 @@ Common tasks are summarized below.
 
    Note: coverage of client backups are included in the above resource.
 
-   
- 
- 
+
+
+
 ^# Implement HA (high availability)
 
    Each Juju controller can be made 'Highly Available' to add resilience to the
@@ -138,10 +148,10 @@ Common tasks are summarized below.
    HA for the applications deployed is a matter for the charms, and is covered
    in a separate topic,[charm HA][charm-ha].
 
-   
+
 
 ^# Restricting command usage
-   
+
    A controller administrator is responsible for granting permissions to
    users registered with a controller. This can be done by restricting what
    sorts of changes a user can make across the controller's models.
@@ -152,4 +162,4 @@ Common tasks are summarized below.
 
 [gui]: ./controllers-gui.html
 [ha]: ./controllers-ha.html
-[charm-ha]: ./charms-ha
+[charm-ha]: ./charms-ha.html
