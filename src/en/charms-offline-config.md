@@ -1,4 +1,5 @@
 Title: Configuring Juju for offline usage
+TODO:  for localhost cloud and controller being on the same host as the client, it's possible to use LXD remotely. worth mentioning?
 
 # Configuring Juju for offline usage
 
@@ -18,6 +19,102 @@ network is restricted. These are:
 Where the *client* is the Juju client from whence `juju` commands are invoked;
 the *controller* is the Juju machine acting as controller; and the *machines*
 are the Juju machines that get created during charm deployment.
+
+## Network criteria
+
+Here we examine what network access is needed to various internet-based
+resources for the aforementioned three entities in order to satisfy base
+requirements as well as requirements arising from local implementation
+decisions.
+
+The general workflow is explained thusly: the client is responsible for
+creating the controller and manages the controller via the latter's API. The
+controller, in turn, is responsible for accessing and passing all needed
+resources to the machines. Any exceptions to this design are explained.
+
+### Internet-based resources
+
+ - **cloud provider**  
+   The **client** requires access to the backing cloud in order to create a
+   controller. Most public clouds have a RESTful API that operates over TCP
+   port 443. A special case is the localhost cloud, in which the client talks
+   to the local LXD daemon.
+
+ - [**http://cloud-images.ubuntu.com**](http://cloud-images.ubuntu.com)  
+   Official Ubuntu cloud images.  
+   
+     - Required when using the localhost cloud, by
+       the **client** in order to create a controller and by the **controller**
+       when creating further machines.
+       
+     - The **machines** require access if they will themselves be hosting LXD
+       containers.
+
+ - [**https://streams.canonical.com**](https://streams.canonical.com)  
+
+     - Where Juju agents are stored online. It is therefore required by the
+       **controller** in order to pass agents to the machines.  
+     
+     - Used to map Juju series to cloud images. Required by the **client** for
+       all cloud providers. The exception is the MAAS cloud, which maintains
+       its own registry of images.
+   
+ - [**http://archive.ubuntu.com**](http://archive.ubuntu.com)  
+   The Ubuntu package archive. Required by the **controller** and the
+   **machines**. Used for providing software needed to set up the controller
+   (e.g. `juju-mongodb`) as well as package management (e.g. updates). In
+   addition, charms deployed on the machines typically call for packages to be
+   installed.
+   
+ - [**http://security.ubuntu.com**](http://security.ubuntu.com)  
+   Ubuntu security package updates. Recommended for the **controller** and
+   the **machines**. All security updates eventually end up in the Ubuntu
+   package archive via the '-updates' pocket.
+
+ - [**https://jujucharms.com**](https://jujucharms.com)  
+   The Charm Store. Required by the **controller** so that charms can be
+   deployed on the machines. The **client** only requires access if the
+   [juju-gui charm][charm-store-juju-gui] is deployed on the controller (the
+   default behaviour).  
+   
+    Otherwise, local charms will be required (see
+   [Deploying charms offline][charms-offline-deploying]).
+
+ - **charm-specific resources**  
+   Some charms require auxiliary site support (for pulling down resources).
+   Popular sites include [https://ppa.launchpad.net][launchpad-ppa] and
+   [https://github.com][github]. Therefore, the **machines** *may* need access
+   to these.
+
+The following table summarizes the above information. An **X** designates
+either a hard requirement or a requirement based on local factors (see the
+footnotes). Remember that when using the localhost cloud, the controller
+resides on the same host as the client, in the form of a LXD container.
+
+resource                                       | client | controller | machines
+---------------------------------------------- | ------ | ---------- | --------
+cloud provider                                 | X      |            |
+[http://cloud-images.ubuntu.com][cloud-images] | X [1]  | X [4]      | X [5]
+[https://streams.canonical.com][streams]       | X [2]  | X          |  
+[http://archive.ubuntu.com][ubuntu-archive]    |        | X          | X
+[http://security.ubuntu.com][security-archive] |        | X          | X
+[https://jujucharms.com][charm-store]          | X [3]  | X          |  
+charm-specific resources                       |        |            | X
+
+[1]: Required for the localhost cloud only.
+
+[2]: Not needed for the MAAS cloud provider.
+
+[3]: Not needed if the `--no-gui` option is used with the `juju bootstrap`
+command. See [The Juju GUI][controllers-gui].
+
+[4]: Required for the localhost cloud only.
+
+[5]: Required if the machines will host LXD containers.
+
+!!! Note:
+    The above table does not take into account the packaging needs (e.g.
+    package updates) of the client host system.
 
 ## Configuration methods
 
@@ -49,100 +146,15 @@ disposal:
 
 Read [Configuring models][models-config] for details on how a model can be
 configured.
-
-## Juju resources
-
-Here is a lit of internet-based resources that Juju should have access to,
-whether via a proxy or a local resource.
-
- - cloud provider  
-   The **client** requires access to the backing cloud in order to create a
-   controller. Most public clouds have a RESTful API that operates over TCP
-   port 443. A special case is the localhost cloud, in which the client talks
-   to the local LXD daemon.
-
- - [http://cloud-images.ubuntu.com](http://cloud-images.ubuntu.com)  
-   Official Ubuntu cloud images. Required for the **client** when using the
-   localhost cloud.
-
- - [https://streams.canonical.com](https://streams.canonical.com)  
-     - Where Juju agents are stored online. It is therefore required by the
-       **controller** in order to pass agents to the machines.  
-     
-     - Used to map Juju series to cloud images. The exception is the MAAS
-       cloud, which maintains its own registry of images.
-   
- - [http://archive.ubuntu.com](http://archive.ubuntu.com)  
-   The Ubuntu package archive. Required for every Juju machine, including the
-   controller. Used for package management (e.g. updates). Charms deployed on
-   the machines typically call for packages to install.
-   
- - [http://security.ubuntu.com](http://security.ubuntu.com)  
-   Ubuntu security package updates. Recommended for every Juju machine. All
-   security updates eventually end up in the Ubuntu package archive ('-updates'
-   pocket).
-
- - [https://jujucharms.com](https://jujucharms.com)  
-   The Charm Store. Required for the **controller** so that charms can be
-   deployed on the machines. The **client** *may* require access if the
-   [juju-gui charm][charm-store-juju-gui] is deployed on the controller (the
-   default behaviour). Otherwise, local charms will be required (see
-   [Deploying charms offline][charms-offline-deploying]).
-
- - charm-specific resources  
-   Some charms require auxiliary site support (for pulling down resources).
-   Popular sites include [https://ppa.launchpad.net][launchpad-ppa] and
-   [https://github.com][github]. Therefore, the **machines** *may* need access
-   to these.
-
-resource                                       | client | controller | machines
----------------------------------------------- | ------ | ---------- | --------
-cloud provider                                 | X      |            |
-[http://cloud-images.ubuntu.com][cloud-images] | X [1]  | X          | X [4]
-[https://streams.canonical.com][streams]       | X      | X          |  
-[http://archive.ubuntu.com][ubuntu-archive]    |        | X          | X
-[http://security.ubuntu.com][security-archive] |        | X          | X
-[https://jujucharms.com][charm-store]          | X [3]  | X          |  
-charm-specific resources                       |        |            | X
-
-[1]: Required for localhost cloud only.
-
-[3]: Not needed if the `--no-gui` option is used with the `juju bootstrap`
-command. See [The Juju GUI][controllers-gui].
-
-[4]: Required if the machine will host LXD containers.
-
-!!! Note:
-    The above table does not take into account the packaging needs of the Juju
-    client host system (e.g. package updates).
-    
-## Network criteria
-
-Here we set out what actual network connectivity is required for the different
-stages of setting up a cloud environment with Juju.
-
-A special case arises when the localhost cloud (LXD) is
-employed. In such a context, the controller 
-
 ### Controller creation
 
-When creating a controller the client is
-responsible for setting up a new machine within the backing cloud.
-Thus the client needs access to both. Once the new machine has been provisioned, it is only the *controller*
-(and the LXD agent) that needs access to those locations. Once a controller is
-properly bootstrapped, from then the *client* needs access to the controller's
-API (for 'lxd' this should likely not be via a proxy).
+When creating a controller the client is responsible for setting up a new
+machine within the backing cloud. Thus the client needs access to both. Once
+the new machine has been provisioned, it is only the *controller* (and the LXD
+agent) that needs access to those locations. Once a controller is properly
+bootstrapped, from then the *client* needs access to the controller's API (for
+'lxd' this should likely not be via a proxy).
 
-For bootstrap, we need access to the cloud provider (in the case of LXD this is
-your LXD daemon listening on the LXD bridge). We'll also likely need access to
-https://streams.canonical.com unless you're planning on using a local jujud
-agent binary. (Typically we download it from streams.canonical.com to be sure
-we can get updates and support more than just one architecture or series.) We
-also use streams in order to map OS series into images for the cloud.
-
-We'll also likely need access to archive.ubuntu.com and security.ubuntu.com, in
-order to ensure your packages are up-to-date. We also need access to packages
-like juju-mongodb3.2 on the bootstrapped machine.
 If you have a different archive to use, its possible to set apt mirrors, etc.
 And you can also set up alternative locations to download agent binaries
 (agent-metadata-url). And you may want a different location to find images for

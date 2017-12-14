@@ -10,7 +10,7 @@ network have been deliberately deprived of access to any outside network, the
 internet in particular. This is typically done for security reasons.
 
 Such a network can also be called a *proxy-restricted environment* since,
-typically, access is allowed to a few internet-enabled systems that act as
+normally, access is allowed to a few internet-enabled systems that act as
 intermediaries (proxies) for necessary services. In a Juju context, such
 services would commonly provide access to:
 
@@ -21,13 +21,9 @@ services would commonly provide access to:
 
 Examples of common offline clouds are LXD, MAAS, and OpenStack.
 
-This top-level document links to sub-pages that cover the following topics:
-
- - Offline mode strategies
- - Configuring Juju for offline usage
- - Deploying charms offline
- - Distributing snaps internally
- - Using the localhost cloud (LXD) offline
+This subject is broken up into several sub-topics, each with its own page. They
+all assume Juju has been installed on a system dedicated to the management of
+the offline environment.
 
 ## Offline mode strategies
 

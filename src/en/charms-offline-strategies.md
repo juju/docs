@@ -3,8 +3,8 @@ TODO:  docs needed: explanation of an agent (and link from 'agent mirror'). see 
 
 # Offline mode strategies
 
-This is in connection with the [Working offline][charms-offline] page. See
-that resource for background information.
+*This is in connection with the [Working offline][charms-offline] page. See
+that resource for background information.*
 
 This page provides an overview of various types of services that can be
 implemented in order for Juju to live happily in an internet-deprived
