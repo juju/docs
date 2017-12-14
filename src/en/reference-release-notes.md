@@ -2,11 +2,20 @@ Title: Juju Release Notes
 
 # Release Notes History
 
-This section details all the available release notes for the
-2.x stable series of Juju
-(notes for [earlier releases are available here](./reference-release-notes-1.html) ).
+This page details all available release notes for the
+2.x series of Juju. The release notes for the 1.x series are available
+[here](./reference-release-notes-1.html).
 
-The versions covered here are:
+^# Juju 2.3.1
+
+  A new release of Juju is here, 2.3.1. This is primarily a bug fix release
+  which addresses this critical upgrade issue:
+
+  [LP 1737107](https://bugs.launchpad.net/juju/+bug/1737107)
+
+  Note, you may see a spurious message similar to
+  `CRITICAL ********** SetModelAgentVersion: 2.3.1 false` while upgrading. This
+  can be safely ignored and isn't present in 2.3.
 
 ^# Juju 2.3.0
 
