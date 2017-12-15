@@ -2,11 +2,139 @@ Title: Juju Release Notes
 
 # Release Notes History
 
-This section details all the available release notes for the
-2.x stable series of Juju
-(notes for [earlier releases are available here](./reference-release-notes-1.html) ).
+This page details all available release notes for the 2.x series of Juju. The
+release notes for the 1.x series are available
+[here](./reference-release-notes-1.html).
 
-The versions covered here are:
+^# Juju 2.3.1
+
+  A new release of Juju is here, 2.3.1. This is primarily a bug fix release
+  which addresses this critical upgrade issue:
+
+  [LP 1737107](https://bugs.launchpad.net/juju/+bug/1737107)
+
+  Note, you may see a spurious message similar to
+  `CRITICAL ********** SetModelAgentVersion: 2.3.1 false` while upgrading. This
+  can be safely ignored and isn't present in 2.3.
+
+^# Juju 2.3.0
+
+  The Juju team are extremely pleased to announce the release of Juju 2.3. Juju
+  is now more versatile, more efficient, and more configurable than ever.
+   
+  Cross Model Relations deliver a new way of organising your software stack.
+  Deploy a database in one model and connect it to an application running
+  another, even one running on a different controller, or even a different
+  cloud.
+   
+  For containers at scale, Juju now integrates Canonical's Fan overlay network
+  system. This allows containers to map network traffic to any other container
+  on the fan network without distributed databases, consensus protocols, or any
+  extra overhead.
+  
+  Juju's support for bundles has made it possible to quickly deploy connected
+  sets of applications for some time now, but no two use cases are the same.
+  That's why we have introduced the concept of an 'overlay' bundle - now you
+  can easily add your own configuration and tweaks to a bundle at deploy time.
+  See below for links to more information on this and other key features.
+  
+  ## How can I get it?
+  
+  The best way to get your hands on this release of Juju is to install it via
+  snap packages (see https://snapcraft.io/ for more info on snaps).
+  
+         snap install juju --classic
+  
+  Other packages are available for a variety of platforms. Please see the
+  online documentation at https://jujucharms.com/docs/2.3/reference-install.
+  Those subscribed to a snap channel should be automatically upgraded. If
+  you’re using the PPA or Homebrew, you should see an upgrade available.
+  
+  For highlights of this release, please see the documentation at
+  [https://jujucharms.com/docs/2.3/whats-new](./whats-new). Further details are
+  below.
+  
+  ## New
+  
+  * Cross Model Relations:  
+    - see https://jujucharms.com/docs/2.3/models-cmr
+  
+  * Persistent Storage:  
+    - see https://jujucharms.com/docs/2.3/charms-storage
+  
+  * FAN:  
+    - see https://jujucharms.com/docs/2.3/charms-fan
+  
+  * Bundle deployments:  
+    - Changed flags for deploying bundles to existing machines  
+    - Bundle deploy flag --bundle-config replaced with --overlay  
+    - Deploying bundles now supports --dry-run  
+    - Deploying bundles can now target existing machines  
+  
+  * Update Application Series:  
+    - see https://jujucharms.com/docs/2.3/howto-updateseries 
+  
+  * Parallelization of the Machine Provisioner:  
+      - Groups of machines will now be provisioned in parallel reducing deployment
+    time, especially on large bundles.
+  
+  * open_port and close_port hook tools now support ICMP  
+      - The open_port and close_port hook tools now support opening firewall
+    access for ICMP. The syntax is: open_port icmp
+  
+  * LXD Storage Provider:  
+    - see https://jujucharms.com/docs/2.3/charms-storage#lxd-(lxd)
+  
+  ## Fixes
+  
+  * Listing of Juju models is more efficient and can now handle more models
+    gracefully
+  * Leadership coordinations is no longer tied to local time which avoids
+    problems with clock skew and reduces overall load on the database 
+  * Models are now more reliably destroyed and several fixes to avoid negative
+    impacts while they are being removed
+  
+  You can check the milestones for a detailed breakdown of the Juju bugs we have fixed:
+  
+  https://launchpad.net/juju/+milestone/2.3.0  
+  https://launchpad.net/juju/+milestone/2.3-rc2  
+  https://launchpad.net/juju/+milestone/2.3-rc1  
+  https://launchpad.net/juju/+milestone/2.3-beta3  
+  https://launchpad.net/juju/+milestone/2.3-beta2  
+  https://launchpad.net/juju/+milestone/2.3-beta1  
+  
+  ## Known issues
+  
+  These issues are targeted to be addressed in the upcoming 2.3.1 release.
+  
+  * Firewall issues on VMware vSphere  
+    https://bugs.launchpad.net/juju/+bug/1732665
+  
+  * LXD broken on VMware  
+    https://bugs.launchpad.net/juju/+bug/1733882
+  
+  * Can't deploy bundle with map-machines=existing and subordinates  
+    https://bugs.launchpad.net/juju/+bug/1736592
+
+  * load spike on controller following remove-application  
+    https://bugs.launchpad.net/juju/+bug/1733708
+  
+  ## Feedback Appreciated!
+  
+  We encourage everyone to let us know how you're using Juju.
+  
+  Join us at regular Juju shows - subscribe to our
+  [YouTube channel](https://youtube.com/jujucharms).
+   
+  Send us a message on Twitter using #jujucharms, join us at #juju on Freenode,
+  and subscribe to the mailing list at juju@lists.ubuntu.com .
+  
+  https://jujucharms.com/docs/2.3/contact-us
+  
+  ## More information
+  
+  To learn more about Juju please visit https://jujucharms.com .
+
 
 
 ^# Juju 2.2.6
@@ -916,7 +1044,52 @@ The versions covered here are:
       https://launchpad.net/juju/+milestone/2.1-beta1
 
 
-^# juju 2.0.3
+^# Juju 2.0.4
+
+  ## Resolved Issues
+
+  Fixes vulnerability CVE-2017-9232:
+
+  Privilege escalation vulnerability when executing `juju-run` on the cloud
+  instances, not to be confused with the `juju run` CLI command.
+   
+  See the following for further details:
+
+  - https://bugs.launchpad.net/juju/+bug/1682411
+  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9232
+   
+  This vulnerability affects all currently distributed versions of Juju (1.25.x,
+  2.0.x and 2.1.x).
+   
+  ## How to know if you need to update
+   
+  We’ve put together a helpful Python script that will loop through your
+  controllers and then output the version of each model on the controller. It
+  requires Python 2.7 or higher.
+   
+  `curl -L https://goo.gl/59gxnz | python`
+   
+  ## How do I update? I’m on...
+   
+  **JAAS**  
+  JAAS has been updated to the new 2.1.3 release. Users with models in JAAS do
+  not need to perform any upgrade steps to their models that are running in JAAS.
+   
+  **Juju 2.2-betaX**  
+  Users of the 2.2-beta releases need to temporarily update to using the edge
+  channel. Users will need to use this until Juju 2.2-rc1 is released in the
+  coming days. You can easily switch your snap install client by using the
+  following:
+   
+  `snap refresh juju --edge --classic`
+   
+  Once you’ve completed this step you’ll need to run through the normal upgrade
+  steps on your models, as explained in the documentation: 
+   
+  https://jujucharms.com/docs/models-upgrade#the-upgrade-juju-command
+  
+
+^# Juju 2.0.3
 
   ## What's new?
 
@@ -952,7 +1125,7 @@ The versions covered here are:
     See https://launchpad.net/juju/+milestone/2.0.3 for more details.
 
 
-^# juju 2.0.2
+^# Juju 2.0.2
 
   ## Notable changes
 
@@ -973,7 +1146,7 @@ The versions covered here are:
   For the full list of bugs addressed, see: [https://launchpad.net/juju/+milestone/2.0.2](https://launchpad.net/juju/+milestone/2.0.2).
 
 
-^# juju 2.0.1
+^# Juju 2.0.1
 
   ## Notable changes
 
@@ -993,7 +1166,7 @@ The versions covered here are:
   For the full list of bugs addressed, see: [https://launchpad.net/juju/+milestone/2.0.1](https://launchpad.net/juju/+milestone/2.0.1).
 
 
-^# juju 2.0.0
+^# Juju 2.0.0
 
   ## Notable Changes
 
