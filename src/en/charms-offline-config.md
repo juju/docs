@@ -20,17 +20,47 @@ Where the *client* is the Juju client from whence `juju` commands are invoked;
 the *controller* is the Juju machine acting as controller; and the *machines*
 are the Juju machines that get created during charm deployment.
 
+These entities interact in the following way: the client is responsible for
+creating the controller, and then manages the controller via the latter's API.
+The controller, in turn, is responsible for accessing and passing all needed
+resources to the machines. There are a few exceptions to this rule.
+
+## Offline configuration methods
+
+The **client** is made aware of proxy settings via the shell that it is running
+under (e.g. Bash). This is done by exporting the relevant environment
+variables:
+
+ - `http_proxy`
+ - `https_proxy`
+ - `no_proxy`
+
+The **controller** is a Juju machine that typically consumes proxy settings 
+during its creation.
+
+The **machines** are configured for proxies indirectly via their model. This
+can be done during controller creation but it can equally be done post-creation
+using standard model configuration methods. Juju has the following
+offline-related model configuration options at its disposal:
+
+ - `apt-ftp-proxy`
+ - `apt-http-proxy`
+ - `apt-https-proxy`
+ - `apt-mirror`
+ - `ftp-proxy`
+ - `http-proxy`
+ - `https-proxy`
+
+Read [Configuring models][models-config] for details on how a model can be
+configured.
+
 ## Network criteria
 
 Here we examine what network access is needed to various internet-based
 resources for the aforementioned three entities in order to satisfy base
 requirements as well as requirements arising from local implementation
-decisions.
-
-The general workflow is explained thusly: the client is responsible for
-creating the controller and manages the controller via the latter's API. The
-controller, in turn, is responsible for accessing and passing all needed
-resources to the machines. Any exceptions to this design are explained.
+decisions. Each resource includes the method to overcome a lack of connectivity
+in an offline environment.
 
 ### Internet-based resources
 
@@ -40,17 +70,17 @@ resources to the machines. Any exceptions to this design are explained.
    port 443. A special case is the localhost cloud, in which the client talks
    to the local LXD daemon.
 
- - [**http://cloud-images.ubuntu.com**](http://cloud-images.ubuntu.com)  
+ - [**http://cloud-images.ubuntu.com**][cloud-images]  
    Official Ubuntu cloud images.  
    
-     - Required when using the localhost cloud, by
-       the **client** in order to create a controller and by the **controller**
-       when creating further machines.
-       
+     - Required when using the localhost cloud, by the **client** in order to
+       create a controller and by the **controller** when creating further
+       machines.
+
      - The **machines** require access if they will themselves be hosting LXD
        containers.
 
- - [**https://streams.canonical.com**](https://streams.canonical.com)  
+ - [**https://streams.canonical.com**][streams]
 
      - Where Juju agents are stored online. It is therefore required by the
        **controller** in order to pass agents to the machines.  
@@ -59,27 +89,24 @@ resources to the machines. Any exceptions to this design are explained.
        all cloud providers. The exception is the MAAS cloud, which maintains
        its own registry of images.
    
- - [**http://archive.ubuntu.com**](http://archive.ubuntu.com)  
+ - [**http://archive.ubuntu.com**][ubuntu-archive]  
    The Ubuntu package archive. Required by the **controller** and the
    **machines**. Used for providing software needed to set up the controller
    (e.g. `juju-mongodb`) as well as package management (e.g. updates). In
    addition, charms deployed on the machines typically call for packages to be
    installed.
    
- - [**http://security.ubuntu.com**](http://security.ubuntu.com)  
+ - [**http://security.ubuntu.com**][security-archive]  
    Ubuntu security package updates. Recommended for the **controller** and
    the **machines**. All security updates eventually end up in the Ubuntu
    package archive via the '-updates' pocket.
 
- - [**https://jujucharms.com**](https://jujucharms.com)  
+ - [**https://jujucharms.com**][charm-store]  
    The Charm Store. Required by the **controller** so that charms can be
    deployed on the machines. The **client** only requires access if the
    [juju-gui charm][charm-store-juju-gui] is deployed on the controller (the
    default behaviour).  
    
-    Otherwise, local charms will be required (see
-   [Deploying charms offline][charms-offline-deploying]).
-
  - **charm-specific resources**  
    Some charms require auxiliary site support (for pulling down resources).
    Popular sites include [https://ppa.launchpad.net][launchpad-ppa] and
@@ -116,44 +143,9 @@ command. See [The Juju GUI][controllers-gui].
     The above table does not take into account the packaging needs (e.g.
     package updates) of the client host system.
 
-## Configuration methods
-
-The **client** is made aware of proxy settings via the shell that it is running
-under (e.g. Bash). This is done by exporting the relevant environment
-variables:
-
- - `http_proxy`
- - `https_proxy`
- - `no_proxy`
-
-The **controller** is a Juju machine that typically consumes proxy settings 
-during its creation.
-
-The **machines** are configured for proxies indirectly via their model. This
-can be done during controller creation but it can equally be done post-creation
-using standard model configuration methods.
-
-Juju has the following offline-related model configuration options at its
-disposal:
-
- - `apt-ftp-proxy`
- - `apt-http-proxy`
- - `apt-https-proxy`
- - `apt-mirror`
- - `ftp-proxy`
- - `http-proxy`
- - `https-proxy`
-
-Read [Configuring models][models-config] for details on how a model can be
-configured.
 ### Controller creation
-
-When creating a controller the client is responsible for setting up a new
-machine within the backing cloud. Thus the client needs access to both. Once
-the new machine has been provisioned, it is only the *controller* (and the LXD
-agent) that needs access to those locations. Once a controller is properly
-bootstrapped, from then the *client* needs access to the controller's API (for
-'lxd' this should likely not be via a proxy).
+Once a controller is properly bootstrapped, from then the *client* needs access
+to the controller's API (for 'lxd' this should likely not be via a proxy).
 
 If you have a different archive to use, its possible to set apt mirrors, etc.
 And you can also set up alternative locations to download agent binaries
@@ -167,6 +159,9 @@ Models may also need this proxy information if charms deployed in those models
 require external network access (for example, access to pypi to install
 requisite pip packages). This is configured with --model-default options during
 bootstrap.
+
+If restricted, local charms will be required (see
+[Deploying charms offline][charms-offline-deploying]).
 
 ## Using the localhost cloud (LXD) offline
 
@@ -219,3 +214,5 @@ https://bugs.launchpad.net/juju/+bug/1730617
 [controllers-gui]:  controllers-gui.html
 [github]: https://github.com
 [launchpad-ppa]: https://ppa.launchpad.net
+[anchor__http/s-proxy]: ./charms-offline-strategies.html#http/s-proxy
+[anchor__cloud-images-mirror]: ./charms-offline-strategies.html#cloud-images-mirror
