@@ -2,11 +2,20 @@ Title: Juju Release Notes
 
 # Release Notes History
 
-This section details all the available release notes for the
-2.x stable series of Juju
-(notes for [earlier releases are available here](./reference-release-notes-1.html) ).
+This page details all available release notes for the 2.x series of Juju. The
+release notes for the 1.x series are available
+[here](./reference-release-notes-1.html).
 
-The versions covered here are:
+^# Juju 2.3.1
+
+  A new release of Juju is here, 2.3.1. This is primarily a bug fix release
+  which addresses this critical upgrade issue:
+
+  [LP 1737107](https://bugs.launchpad.net/juju/+bug/1737107)
+
+  Note, you may see a spurious message similar to
+  `CRITICAL ********** SetModelAgentVersion: 2.3.1 false` while upgrading. This
+  can be safely ignored and isn't present in 2.3.
 
 ^# Juju 2.3.0
 
@@ -1035,7 +1044,52 @@ The versions covered here are:
       https://launchpad.net/juju/+milestone/2.1-beta1
 
 
-^# juju 2.0.3
+^# Juju 2.0.4
+
+  ## Resolved Issues
+
+  Fixes vulnerability CVE-2017-9232:
+
+  Privilege escalation vulnerability when executing `juju-run` on the cloud
+  instances, not to be confused with the `juju run` CLI command.
+   
+  See the following for further details:
+
+  - https://bugs.launchpad.net/juju/+bug/1682411
+  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9232
+   
+  This vulnerability affects all currently distributed versions of Juju (1.25.x,
+  2.0.x and 2.1.x).
+   
+  ## How to know if you need to update
+   
+  We’ve put together a helpful Python script that will loop through your
+  controllers and then output the version of each model on the controller. It
+  requires Python 2.7 or higher.
+   
+  `curl -L https://goo.gl/59gxnz | python`
+   
+  ## How do I update? I’m on...
+   
+  **JAAS**  
+  JAAS has been updated to the new 2.1.3 release. Users with models in JAAS do
+  not need to perform any upgrade steps to their models that are running in JAAS.
+   
+  **Juju 2.2-betaX**  
+  Users of the 2.2-beta releases need to temporarily update to using the edge
+  channel. Users will need to use this until Juju 2.2-rc1 is released in the
+  coming days. You can easily switch your snap install client by using the
+  following:
+   
+  `snap refresh juju --edge --classic`
+   
+  Once you’ve completed this step you’ll need to run through the normal upgrade
+  steps on your models, as explained in the documentation: 
+   
+  https://jujucharms.com/docs/models-upgrade#the-upgrade-juju-command
+  
+
+^# Juju 2.0.3
 
   ## What's new?
 
@@ -1071,7 +1125,7 @@ The versions covered here are:
     See https://launchpad.net/juju/+milestone/2.0.3 for more details.
 
 
-^# juju 2.0.2
+^# Juju 2.0.2
 
   ## Notable changes
 
@@ -1092,7 +1146,7 @@ The versions covered here are:
   For the full list of bugs addressed, see: [https://launchpad.net/juju/+milestone/2.0.2](https://launchpad.net/juju/+milestone/2.0.2).
 
 
-^# juju 2.0.1
+^# Juju 2.0.1
 
   ## Notable changes
 
@@ -1112,7 +1166,7 @@ The versions covered here are:
   For the full list of bugs addressed, see: [https://launchpad.net/juju/+milestone/2.0.1](https://launchpad.net/juju/+milestone/2.0.1).
 
 
-^# juju 2.0.0
+^# Juju 2.0.0
 
   ## Notable Changes
 
