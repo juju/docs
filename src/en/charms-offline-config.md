@@ -23,7 +23,11 @@ are the Juju machines that get created during charm deployment.
 These entities interact in the following way: the client is responsible for
 creating the controller, and then manages the controller via the latter's API.
 The controller, in turn, is responsible for accessing and passing all needed
-resources to the machines. There are a few exceptions to this rule.
+resources to the machines.
+
+There are a few exceptions to the above rule. When creating a controller the
+client needs to both access and then transfer both the juju-gui charm and the
+Juju agent to the controller.
 
 ## Offline configuration methods
 
@@ -35,13 +39,20 @@ variables:
  - `https_proxy`
  - `no_proxy`
 
-The **controller** is a Juju machine that typically consumes proxy settings 
-during its creation.
+Set one by using the `export` shell built-in command. For instance, assuming
+the value of the HTTP proxy is given by $PROXY_HTTP you would do this:
 
-The **machines** are configured for proxies indirectly via their model. This
-can be done during controller creation but it can equally be done post-creation
-using standard model configuration methods. Juju has the following
-offline-related model configuration options at its disposal:
+```bash
+export http_proxy=$PROXY_HTTP
+```
+
+Every Juju machine, the **controller** and the **machines**, is configured at
+the model level therefore both these entities can be configured together. This
+information is passed during the controller creation process since the
+controller needs to download Ubuntu packages in order to provision itself.
+
+Juju has the following offline-related model configuration options at its
+disposal:
 
  - `apt-ftp-proxy`
  - `apt-http-proxy`
@@ -50,6 +61,18 @@ offline-related model configuration options at its disposal:
  - `ftp-proxy`
  - `http-proxy`
  - `https-proxy`
+
+The method for configuring models while using the `bootstrap` command is done
+by passing either the `--config` option or the `--model-default` option. The
+latter is a better choice since it applies to all existing and future models
+whereas `--config` affects only the 'controller' and 'default' models.
+
+For instance, to create an AWS-based controller where all we need to specify is
+an APT mirror whose URL is given by $MIRROR_APT you would do:
+
+```bash
+juju bootstrap --model-default apt-mirror=$MIRROR_APT aws
+```
 
 Read [Configuring models][models-config] for details on how a model can be
 configured.
@@ -83,7 +106,8 @@ in an offline environment.
  - [**https://streams.canonical.com**][streams]
 
      - Where Juju agents are stored online. It is therefore required by the
-       **controller** in order to pass agents to the machines.  
+       **client** to pass an agent to the newly-created controller and later by
+       the **controller** itself in order to pass agents to the machines.  
      
      - Used to map Juju series to cloud images. Required by the **client** for
        all cloud providers. The exception is the MAAS cloud, which maintains
@@ -121,23 +145,21 @@ resides on the same host as the client, in the form of a LXD container.
 resource                                       | client | controller | machines
 ---------------------------------------------- | ------ | ---------- | --------
 cloud provider                                 | X      |            |
-[http://cloud-images.ubuntu.com][cloud-images] | X [1]  | X [4]      | X [5]
-[https://streams.canonical.com][streams]       | X [2]  | X          |  
+[http://cloud-images.ubuntu.com][cloud-images] | X [1]  | X [3]      | X [4]
+[https://streams.canonical.com][streams]       | X      | X          |  
 [http://archive.ubuntu.com][ubuntu-archive]    |        | X          | X
 [http://security.ubuntu.com][security-archive] |        | X          | X
-[https://jujucharms.com][charm-store]          | X [3]  | X          |  
+[https://jujucharms.com][charm-store]          | X [2]  | X          |  
 charm-specific resources                       |        |            | X
 
 [1]: Required for the localhost cloud only.
 
-[2]: Not needed for the MAAS cloud provider.
-
-[3]: Not needed if the `--no-gui` option is used with the `juju bootstrap`
+[2]: Not needed if the `--no-gui` option is used with the `juju bootstrap`
 command. See [The Juju GUI][controllers-gui].
 
-[4]: Required for the localhost cloud only.
+[3]: Required for the localhost cloud only.
 
-[5]: Required if the machines will host LXD containers.
+[4]: Required if the machines will host LXD containers.
 
 !!! Note:
     The above table does not take into account the packaging needs (e.g.
