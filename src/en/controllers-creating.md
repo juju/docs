@@ -29,22 +29,22 @@ itself, are known as **model constraints**. These are set via the
 known as **controller constraints** and are set by using the
 `--bootstrap-constraints` option. The same values can be used by either type.
 
-For more details on constraints, see [Constraints][constraints].
+For general information on constraints, see [Constraints][constraints].
 
 ## Examples
 
-### Set minimum specifications for all machines in a controller's models
+### Set default model constraints for a given controller
 
-Below, all machines in the LXD controller's models will have at
-least 4GiB of memory:
+Below, all machines in the LXD controller's models will have at least 4GiB of
+memory:
 
 ```bash
 juju bootstrap --constraints="mem=4G" localhost
 ```
 
-### Set minimum specifications for a new controller
+### Set controller constraints for a new controller
 
-This example shows how to request at least 4GiB of memory and two CPUs for a
+This example shows how to request at least 4GiB of memory and two CPUs for an
 AWS controller:
 
 ```bash
