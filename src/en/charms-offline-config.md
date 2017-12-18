@@ -29,61 +29,12 @@ There are a few exceptions to the above rule. When creating a controller the
 client needs to both access and then transfer both the juju-gui charm and the
 Juju agent to the controller.
 
-## Offline configuration methods
-
-The **client** is made aware of proxy settings via the shell that it is running
-under (e.g. Bash). This is done by exporting the relevant environment
-variables:
-
- - `http_proxy`
- - `https_proxy`
- - `no_proxy`
-
-Set one by using the `export` shell built-in command. For instance, assuming
-the value of the HTTP proxy is given by $PROXY_HTTP you would do this:
-
-```bash
-export http_proxy=$PROXY_HTTP
-```
-
-Every Juju machine, the **controller** and the **machines**, is configured at
-the model level therefore both these entities can be configured together. This
-information is passed during the controller creation process since the
-controller needs to download Ubuntu packages in order to provision itself.
-
-Juju has the following offline-related model configuration options at its
-disposal:
-
- - `apt-ftp-proxy`
- - `apt-http-proxy`
- - `apt-https-proxy`
- - `apt-mirror`
- - `ftp-proxy`
- - `http-proxy`
- - `https-proxy`
-
-The method for configuring models while using the `bootstrap` command is done
-by passing either the `--config` option or the `--model-default` option. The
-latter is a better choice since it applies to all existing and future models
-whereas `--config` affects only the 'controller' and 'default' models.
-
-For instance, to create an AWS-based controller where all we need to specify is
-an APT mirror whose URL is given by $MIRROR_APT you would do:
-
-```bash
-juju bootstrap --model-default apt-mirror=$MIRROR_APT aws
-```
-
-Read [Configuring models][models-config] for details on how a model can be
-configured.
-
 ## Network criteria
 
 Here we examine what network access is needed to various internet-based
 resources for the aforementioned three entities in order to satisfy base
 requirements as well as requirements arising from local implementation
-decisions. Each resource includes the method to overcome a lack of connectivity
-in an offline environment.
+decisions.
 
 ### Internet-based resources
 
@@ -106,24 +57,28 @@ in an offline environment.
  - [**https://streams.canonical.com**][streams]
 
      - Where Juju agents are stored online. It is therefore required by the
-       **client** to pass an agent to the newly-created controller and later by
-       the **controller** itself in order to pass agents to the machines.  
+       **client** in order to pass an agent to the newly-created controller and
+       then later required by the **controller** itself in order to pass agents
+       to any subsequently-created machines.  
      
      - Used to map Juju series to cloud images. Required by the **client** for
        all cloud providers. The exception is the MAAS cloud, which maintains
        its own registry of images.
    
  - [**http://archive.ubuntu.com**][ubuntu-archive]  
-   The Ubuntu package archive. Required by the **controller** and the
-   **machines**. Used for providing software needed to set up the controller
-   (e.g. `juju-mongodb`) as well as package management (e.g. updates). In
-   addition, charms deployed on the machines typically call for packages to be
-   installed.
+   The Ubuntu package archive.  
+   
+   Required by the **controller** and the **machines**. Used for providing
+   software needed to set up the controller (e.g. `juju-mongodb`) as well as
+   package management (e.g. updates). In addition, charms deployed on the
+   machines typically call for packages to be installed.
    
  - [**http://security.ubuntu.com**][security-archive]  
-   Ubuntu security package updates. Recommended for the **controller** and
-   the **machines**. All security updates eventually end up in the Ubuntu
-   package archive via the '-updates' pocket.
+   Ubuntu security package updates.  
+   
+   Recommended for the **controller** and the **machines**. Note that all
+   security updates eventually end up in the Ubuntu package archive via the
+   '-updates' pocket.
 
  - [**https://jujucharms.com**][charm-store]  
    The Charm Store. Required by the **controller** so that charms can be
@@ -165,22 +120,72 @@ command. See [The Juju GUI][controllers-gui].
     The above table does not take into account the packaging needs (e.g.
     package updates) of the client host system.
 
-### Controller creation
-Once a controller is properly bootstrapped, from then the *client* needs access
-to the controller's API (for 'lxd' this should likely not be via a proxy).
+## Offline configuration methods
 
-If you have a different archive to use, its possible to set apt mirrors, etc.
-And you can also set up alternative locations to download agent binaries
-(agent-metadata-url). And you may want a different location to find images for
-your cloud (image-metadata-url).
+Any unsatisfied network criteria for your specific environment will need to be
+overcome by a combination of new local services and the appropriate Juju
+configuration changes.
 
-The controller itself may need proxy information to retrieve various
-packages. This is configured with --config options during bootstrap.
+The **client** is made aware of proxy settings via the shell that it is running
+under (e.g. Bash). This is done by exporting the relevant environment
+variables:
 
-Models may also need this proxy information if charms deployed in those models
-require external network access (for example, access to pypi to install
-requisite pip packages). This is configured with --model-default options during
-bootstrap.
+ - `http_proxy`
+ - `https_proxy`
+ - `no_proxy`
+
+Both the **controller** and the **machines** are configured at the model level,
+therefore both these entities can be configured together. Keep in mind,
+however, that the controller is configured via the 'controller' model and the
+machines are configured via whatever model that will eventually contain them.
+This information is passed during the controller creation process since the
+controller needs to download Ubuntu packages in order to provision itself.
+Read [Configuring models][models-config] for details on how a model can be
+configured.
+
+Juju has the following offline-related model configuration settings at its
+disposal:
+
+ - `agent-metadata-url`
+ - `apt-ftp-proxy`
+ - `apt-http-proxy`
+ - `apt-https-proxy`
+ - `apt-mirror`
+ - `ftp-proxy`
+ - `http-proxy`
+ - `https-proxy`
+ - `image-metadata-url`
+
+The method for configuring models while using the `bootstrap` command is done
+with either the `--config` option or the `--model-default` option. The latter
+is a more powerful choice since it applies to all existing and future models
+whereas `--config` only affects the 'controller' and 'default' models.
+
+### Examples
+
+To set an HTTP proxy for the **client**, whose URL is given by $PROXY_HTTP:
+
+```bash
+export http_proxy=$PROXY_HTTP
+```
+
+To configure all models to use an APT mirror, whose URL is given by
+$MIRROR_APT, while creating an AWS-based controller:
+
+```bash
+juju bootstrap --model-default apt-mirror=$MIRROR_APT aws
+```
+
+To have all models of a localhost cloud use local resources for both Juju agent
+binaries and cloud images, whose URLs are given by $LOCAL_AGENTS and
+$LOCAL_IMAGES, respectively:
+
+```bash
+juju bootstrap \
+    --model-default agent-metadata-url=$LOCAL_AGENTS \
+    --model-default image-metadata-url=$LOCAL_IMAGES \
+    localhost
+```
 
 If restricted, local charms will be required (see
 [Deploying charms offline][charms-offline-deploying]).
@@ -191,8 +196,10 @@ Begin by defining the HTTP and HTTPS proxies. In this example they happen to be
 the same:
 
 ```bash
-export http_proxy=http://squid.internal:3128
-export https_proxy=http://squid.internal:3128
+PROXY_HTTP=http://squid.internal:3128
+PROXY_HTTPS=http://squid.internal:3128
+export http_proxy=$PROXY_HTTP
+export https_proxy=$PROXY_HTTP
 ```
 
 Next, we employ a slightly ingenious method to define the destinations that
@@ -213,9 +220,9 @@ Finally, apply these settings during the controller-creation process:
 
 ```bash
 juju bootstrap \
---model-default http-proxy=$http_proxy \
---model-default https-proxy=$https_proxy \
---model-default no-proxy=$no_proxy \
+--model-default http-proxy=$PROXY_HTTP \
+--model-default https-proxy=$PROXY_HTTPS \
+--model-default no-proxy=$PROXY_NO \
 localhost lxd
 ```
 
