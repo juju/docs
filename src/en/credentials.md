@@ -127,7 +127,7 @@ credentials:
           file: ~/.config/gcloud/application_default_credentials.json
       azure:
         peter:
-          auth-type: userpass
+          auth-type: service-principal-secret
           application-id: niftyapp
           subscription-id: 31fb132e-e774-49dd-adbb-d6a4e966c583
           application-password: UberPassK3yz
