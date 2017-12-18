@@ -54,7 +54,7 @@ The exemplar snap for Juju users is [Charm Tools][tools-charm-tools] but the
 guidance provided here can be applied to any snap. See 
 [Distributing snaps internally][snaps-offline].
 
-## Using the localhost cloud (LXD) offline
+## Using the localhost cloud offline
 
 Here, an example of an offline Juju installation is provided through the use
 of the localhost cloud (LXD). Go to
