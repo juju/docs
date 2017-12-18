@@ -58,7 +58,7 @@ guidance provided here can be applied to any snap. See
 
 Here, an example of an offline Juju installation is provided through the use
 of the localhost cloud (LXD). Go to
-[Using the localhost cloud (LXD) offline][charms-offline-lxd].
+[Using the localhost cloud offline][charms-offline-lxd].
 
 
 <!-- LINKS -->
