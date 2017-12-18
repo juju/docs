@@ -18,7 +18,7 @@ network is restricted. These are:
 
 Where the *client* is the Juju client from whence `juju` commands are invoked;
 the *controller* is the Juju machine acting as controller; and the *machines*
-are the Juju machines that get created during charm deployment.
+are the Juju workload machines that get created during charm deployment.
 
 These entities interact in the following way: the client is responsible for
 creating the controller, and then manages the controller via the latter's API.
@@ -26,7 +26,7 @@ The controller, in turn, is responsible for accessing and passing all needed
 resources to the machines.
 
 There are a few exceptions to the above rule. When creating a controller the
-client needs to both access and then transfer both the juju-gui charm and the
+client needs to both access and then transfer both the 'juju-gui' charm and the
 Juju agent to the controller.
 
 ## Network criteria
@@ -35,6 +35,11 @@ Here we examine what network access is needed to various internet-based
 resources for the aforementioned three entities in order to satisfy base
 requirements as well as requirements arising from local implementation
 decisions.
+
+Any unsatisfied network criteria will need to be overcome by a combination of
+new local services (see [Offline mode strategies][charms-offline-strategies])
+and the appropriate Juju configuration changes (covered
+[below][anchor__offline-configuration-methods]).
 
 ### Internet-based resources
 
@@ -68,7 +73,7 @@ decisions.
  - [**http://archive.ubuntu.com**][ubuntu-archive]  
    The Ubuntu package archive.  
    
-   Required by the **controller** and the **machines**. Used for providing
+    Required by the **controller** and the **machines**. Used for providing
    software needed to set up the controller (e.g. `juju-mongodb`) as well as
    package management (e.g. updates). In addition, charms deployed on the
    machines typically call for packages to be installed.
@@ -76,7 +81,7 @@ decisions.
  - [**http://security.ubuntu.com**][security-archive]  
    Ubuntu security package updates.  
    
-   Recommended for the **controller** and the **machines**. Note that all
+    Recommended for the **controller** and the **machines**. Note that all
    security updates eventually end up in the Ubuntu package archive via the
    '-updates' pocket.
 
@@ -85,6 +90,9 @@ decisions.
    deployed on the machines. The **client** only requires access if the
    [juju-gui charm][charm-store-juju-gui] is deployed on the controller (the
    default behaviour).  
+   
+    See [Deploying charms offline][charms-offline-deploying] for how to manage
+   charms locally.  
    
  - **charm-specific resources**  
    Some charms require auxiliary site support (for pulling down resources).
@@ -122,10 +130,6 @@ command. See [The Juju GUI][controllers-gui].
 
 ## Offline configuration methods
 
-Any unsatisfied network criteria for your specific environment will need to be
-overcome by a combination of new local services and the appropriate Juju
-configuration changes.
-
 The **client** is made aware of proxy settings via the shell that it is running
 under (e.g. Bash). This is done by exporting the relevant environment
 variables:
@@ -140,8 +144,6 @@ however, that the controller is configured via the 'controller' model and the
 machines are configured via whatever model that will eventually contain them.
 This information is passed during the controller creation process since the
 controller needs to download Ubuntu packages in order to provision itself.
-Read [Configuring models][models-config] for details on how a model can be
-configured.
 
 Juju has the following offline-related model configuration settings at its
 disposal:
@@ -160,6 +162,9 @@ The method for configuring models while using the `bootstrap` command is done
 with either the `--config` option or the `--model-default` option. The latter
 is a more powerful choice since it applies to all existing and future models
 whereas `--config` only affects the 'controller' and 'default' models.
+
+Read [Configuring models][models-config] for details on how a model can be
+configured.
 
 ### Examples
 
@@ -187,10 +192,7 @@ juju bootstrap \
     localhost
 ```
 
-If restricted, local charms will be required (see
-[Deploying charms offline][charms-offline-deploying]).
-
-## Using the localhost cloud (LXD) offline
+## Using the localhost cloud offline
 
 Begin by defining the HTTP and HTTPS proxies. In this example they happen to be
 the same:
@@ -198,25 +200,29 @@ the same:
 ```bash
 PROXY_HTTP=http://squid.internal:3128
 PROXY_HTTPS=http://squid.internal:3128
-export http_proxy=$PROXY_HTTP
-export https_proxy=$PROXY_HTTP
 ```
 
-Next, we employ a slightly ingenious method to define the destinations that
-must *not* use the above proxies:
+Now we employ a slightly ingenious method to define the 'no proxy' settings in
+order to prevent some destinations from using the proxies (see
+[No proxy and the localhost cloud][anchor__no-proxy-and-the-localhost-cloud]):
 
 ```bash
-export no_proxy=$(echo localhost 127.0.0.1 10.245.67.130 10.44.139.{1..255} | sed 's/ /,/g')
+PROXY_NO=$(echo localhost 127.0.0.1 10.245.67.130 10.44.139.{1..255} | sed 's/ /,/g')
 ```
 
-set the proxy for both the controller you are about to create, and for the
-client that you are running. You're also likely to need to set 'no-proxy' to
-appropriate values so that you can still contact things like the LXD agent
-running on your host machine.
+Besides those related to the local system, you will need to change these values
+according to your specific setup.
 
-?????? where X.Y is the IP address that was assigned to your LXD bridge. 
+Configure the client to use these three setting:
 
-Finally, apply these settings during the controller-creation process:
+```bash
+export http_proxy=$PROXY_HTTP
+export https_proxy=$PROXY_HTTP
+export no_proxy=$PROXY_NO
+```
+
+Finally, apply these settings to all Juju models during the controller-creation
+process:
 
 ```bash
 juju bootstrap \
@@ -226,8 +232,6 @@ juju bootstrap \
 localhost lxd
 ```
 
-## no proxy for localhost, our eth0 ip address, and our lxd subnet
-https://bugs.launchpad.net/juju/+bug/1730617
 
 <!-- LINKS -->
 
@@ -243,5 +247,8 @@ https://bugs.launchpad.net/juju/+bug/1730617
 [controllers-gui]:  controllers-gui.html
 [github]: https://github.com
 [launchpad-ppa]: https://ppa.launchpad.net
+
 [anchor__http/s-proxy]: ./charms-offline-strategies.html#http/s-proxy
 [anchor__cloud-images-mirror]: ./charms-offline-strategies.html#cloud-images-mirror
+[anchor__offline-configuration-methods]: #offline-configuration-methods
+[anchor__no-proxy-and-the-localhost-cloud]: ./charms-offline-strategies.html#no-proxy-and-the-localhost-cloud

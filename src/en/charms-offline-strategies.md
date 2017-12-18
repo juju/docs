@@ -14,9 +14,9 @@ listed.
 The services of concern here are:
 
  - HTTP/S proxy
- - FTP proxy
  - APT proxy
- - APT repository mirror
+ - FTP proxy
+ - APT mirror
  - Juju agent mirror
  - Cloud image mirror
 
@@ -47,14 +47,20 @@ with one another. It may, or it may not, be necessary to express this via the
 HTTPS protocols, which may not apply in every case. Nevertheless, it is often
 done out of simplicity.
 
-The localhost system and its local IP address are also typically included in
-this set of destinations. ??????? addresses or names
+#### No proxy and the localhost cloud
 
-## FTP proxy
+This "no proxy" idea is often used extensively with the localhost cloud at both
+the (shell) environment level and at the Juju level. The purpose being to
+ensure the client can connect with the local controller and that the local
+machines can inter-communicate, all without going through a proxy.
 
-?????????????????????????????????????????
+Hosts to exclude from the proxy include:
 
-Juju uses the `ftp-proxy` variable for this type of proxy.
+ - localhost/127.0.0.1 (standard 'no proxy' settings)
+ - the address assigned to the regular Ethernet device
+ - the address assigned to the host's LXD bridge (to talk to the controller via
+   its API)
+ - the entire subnet dedicated to the particular LXD installation
 
 ## APT proxy
 
@@ -72,7 +78,11 @@ Some common implementations include:
  - [`squid`][upstream-squid]
  - [`squid-deb-proxy`][upstream-squid-deb-proxy] (based on squid)
 
-## APT repository mirror
+## FTP proxy
+
+An FTP proxy. Juju uses the `ftp-proxy` variable for this type of proxy.
+
+## APT mirror
 
 Instead of proxying client requests to an internet-based repository it is
 possible to maintain the repository internally. That is, you can have a copy or

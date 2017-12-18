@@ -6,8 +6,10 @@ Title: Deploying Charms Offline
 [Working offline][charms-offline] page for background information.*
 
 Clouds that do not enjoy a connection to the internet can nonetheless make use
-of Juju charms provided that local copies of the charms are prepared in
-advance.
+of Juju charms provided that the **client** prepares in advance local copies of
+the charms. The client has the ability to point to a local charm during
+deployment. This passes the charm on to the controller. Recall that, by
+default, the **controller** manages the access and distribution of charms.
 
 These instructions are concerned strictly with how to obtain local copies of
 Juju charms. In particular, they do not take into account:
