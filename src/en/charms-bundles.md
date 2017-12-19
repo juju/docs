@@ -3,6 +3,7 @@ TODO:  Check more complex bundles after the release of 2.0
        Review required
        Refactor (e.g. advanced usage/information should go in a sub-page)
        Refactor (e.g. using vs creating)
+       Add example portraying bundle overlay
 
 # Using and Creating Bundles
 
@@ -243,36 +244,28 @@ applications:
             cert: include-base64://my-cert.crt
 ```
 
-Furthermore, the `--bundle-config` option can be used when you want to use a
-standard bundle but keep model-specific configuration in a separate file.  Any
-values specified for an application in the file override those values defined
-in the bundle, with the exception of the map type values, where the maps are
-merged with preference given to the bundle-config file. The file can make use
-of the `include-file://` and `include-base64://` directives mentioned above for
-local bundles (for options and annotation values). A file location can be
-expressed with an absolute or relative (to the bundle-config file) path. For
-example:
+## Overlay bundles
+
+The `--overlay` option can be used when you want to use a standard bundle but
+keep model-specific configuration in a separate file. The overlay files
+constitute bundles in their own right. The "overlay bundle" can specify new
+applications, change values, and also specify the removal of an application in
+the base bundle.
+
+An application is removed from the base bundle by defining the application name
+in the application section, but omitting any values. Removing an application
+also removes all the relations for that application.
+
+If a machines section is specified in an overlay bundle it replaces the
+corresponding section of the base bundle. No merging of machine information is
+attempted. Multiple overlay bundles can be specified and they are processed in
+the order they appear on the command line.
+
+For example:
 
 ```bash
-juju deploy wiki-simple --bundle-config ~/model-a/wiki-simple.yaml
+juju deploy wiki-simple --overlay ~/model-a/wiki-simple.yaml
 ```
-
-Where the contents of `~/model-a/wiki-simple.yaml` could look like:
-
-```yaml
-applications:
-  wiki:
-    options:
-      name: "The model-a wiki"
-  mysql:
-    options:
-      "dataset-size": "768M"
-      "rbd-name": mysql-model-a
-```
-
-!!! Note:
-    The bundle-config file currently only supports 'applications' as a top
-    level key.
 
 ## Bundle placement directives
 
@@ -378,6 +371,24 @@ Unit         Workload  Agent       Machine  Public address  Ports  Message
 mysql/0      waiting   allocating  0                               waiting for machine
 mysql/1      waiting   allocating  1                               waiting for machine
 wordpress/0  waiting   allocating  1                               waiting for machine
+```
+
+### Recycling machines
+
+To have a bundle use a model's existing machines, as opposed to creating new
+machines, the `--map-machines=existing` option is used. In addition, to specify
+particular machines for the mapping, comma-separated values of the form
+'bundle-id=existing-id' can be passed where the bundle-id and the existing-id
+refer to top level machine IDs.
+
+For example, consider a bundle whose YAML file is configured with machines 1,
+2, 3, and 4, and a model containing machines 1, 2, 3, 4, and 5. The following
+deployment would use existing machines 1 and 2 for bundle machines 1
+and 2 but use existing machine 4 for bundle machine 3 and existing
+machine 5 for bundle machine 4:
+
+```bash
+juju deploy some-bundle --map-machines=existing,3=4,4=5
 ```
 
 ## Binding endpoints of applications within a bundle
