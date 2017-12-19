@@ -32,14 +32,14 @@ satisfied.
 
 The de-facto forward proxy solution on Ubuntu is [`squid`][upstream-squid].
 
-Juju uses variables `http-proxy` and `https-proxy` to denote these proxies.
+Juju uses options `http-proxy` and `https-proxy` to denote these proxies.
 
 ### No HTTP/S proxy
 
 When an HTTP/S proxy is configured there may be destinations that should be
 excluded from using it.
 
-Juju uses variable `no-proxy` to represent these destinations.
+Juju uses option `no-proxy` to represent these destinations.
 
 In general, all instances within a cloud should be able to communicate directly
 with one another. It may, or it may not, be necessary to express this via the
@@ -56,7 +56,7 @@ machines can inter-communicate, all without going through a proxy.
 
 Hosts to exclude from the proxy include:
 
- - localhost/127.0.0.1 (standard 'no proxy' settings)
+ - localhost & 127.0.0.1 (standard 'no proxy' settings)
  - the address assigned to the regular Ethernet device
  - the address assigned to the host's LXD bridge (to talk to the controller via
    its API)
@@ -64,12 +64,9 @@ Hosts to exclude from the proxy include:
 
 ## APT proxy
 
-An HTTP/S or FTP proxy may not accept requests for APT packages. The idea of an
-APT proxy is identical to that of an HTTP/S or FTP proxy except that it applies
-specifically to APT package requests.
-
-Juju uses variables `apt-ftp-proxy`, `apt-http-proxy`, and `apt-https-proxy`
-to set these proxies.
+An HTTP/S or FTP proxy may not be configured to accept requests for APT
+packages. An APT proxy is identical to that of an HTTP/S or FTP proxy except
+that it applies specifically to APT package requests.
 
 Some common implementations include:
 
@@ -78,9 +75,13 @@ Some common implementations include:
  - [`squid`][upstream-squid]
  - [`squid-deb-proxy`][upstream-squid-deb-proxy] (based on squid)
 
+Juju uses options `apt-ftp-proxy`, `apt-http-proxy`, and `apt-https-proxy` to
+set these proxies, depending on the protocol involved (i.e. FTP, HTTP, or
+HTTPS).
+
 ## FTP proxy
 
-An FTP proxy. Juju uses the `ftp-proxy` variable for this type of proxy.
+A standard FTP proxy. Juju uses the `ftp-proxy` option for this type of proxy.
 
 ## APT mirror
 
@@ -95,6 +96,8 @@ Here are some popular mirroring solutions:
  - [`apt-mirror`][upstream-apt-mirror]
  - [`debmirror`][upstream-debmirror]
  - [`aptly`][upstream-aptly]
+
+Juju uses the `apt-mirror` option for this.
 
 ### HTTP/S server
 
