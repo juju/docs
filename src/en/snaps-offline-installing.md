@@ -1,9 +1,25 @@
-Title: Distributing snaps internally
+Title: Installing snaps offline
 
-# Distributing snaps internally
+# Installing snaps offline
 
 *This is in connection with the [Working offline][charms-offline] page. See
 that resource for background information.*
+
+In order to install snaps on a proxy-restricted network the `snapd` daemon will
+need to be made aware of what proxy to use. To pass environment variables to
+snapd edit the `/etc/environment` file and restart the daemon:
+
+```bash
+sudo systemctl restart snapd
+```
+
+You should then be able to install snaps.
+
+## Distributing snaps internally
+
+If setting a proxy is not a viable option then you may opt to keep snaps on a
+privileged system (i.e. one that does have internet connectivity) and share
+them across your network.
 
 There is no special mechanism for distributing snaps internally. Simply
 download the desired snaps and share.

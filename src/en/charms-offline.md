@@ -48,11 +48,11 @@ Once the auxiliary services have been set up and Juju has been configured to
 use those services Juju charms can be deployed. This section describes how this
 is done. See [Deploying charms offline][charms-offline-deploying].
 
-## Distributing snaps internally
+## Installing snaps offline
 
 The exemplar snap for Juju users is [Charm Tools][tools-charm-tools] but the
 guidance provided here can be applied to any snap. See 
-[Distributing snaps internally][snaps-offline].
+[Installing snaps offline][snaps-offline-installing].
 
 ## Using the localhost cloud offline
 
@@ -65,7 +65,7 @@ of the localhost cloud (LXD). Go to
 
 [charms-offline-deploying]: ./charms-offline-deploying.html
 [tools-charm-tools]: ./tools-charm-tools.html
-[snaps-offline]: ./snaps-offline.html
+[snaps-offline-installing]: ./snaps-offline-installing.html
 [charms-offline-strategies]: ./charms-offline-strategies.html
 [charms-offline-config]: ./charms-offline-config.html
 [charms-offline-lxd]: ./charms-offline-lxd.html
