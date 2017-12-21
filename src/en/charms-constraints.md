@@ -75,26 +75,23 @@ In the event that a constraint cannot be met, the unit will not be deployed.
 
 !!! Note: 
     Constraints work on an "or better" basis: If you ask for 4 CPUs, you 
-    may get 8, but you won't get 2
-
-
+    may get 8, but you won't get 2.
     
-## Using constraints when creating a controller
+## Setting constraints for a controller
 
-A controller is created using the `bootstrap` command, which accepts a 
-'--constraints' switch to specify which machine to use. When you create the
-controller with constraints, the same constraints apply to each subsequent 
-machine created, so setting constraints on the controller is the same as making
-global constraints. These can of course be overriden by constraints at the
-model, application or machine level as detailed below.
+Constraints can be applied to a controller during its creation
+(`juju bootstrap` command) by using the `--bootstrap-constraints` option. See
+[Creating a controller][controllers-creating] for details and examples.
 
-Example:
-  
-Creating a new AWS controller to use a particular amount of memory:
-  
-```bash
-juju bootstrap aws mycloud --constraints mem=4G
-```
+## Setting default model constraints
+
+Default model constraints can be set during the controller-creation process by
+using the `--constraints` option (with the `juju bootstrap` command). See
+[Creating a controller][controllers-creating] for more information on how to do
+this.
+
+Default model constraints can be overridden for specific models, applications,
+or machines, as detailed below.
 
 ## Setting constraints for a model
 
@@ -111,8 +108,8 @@ least 4 gigabytes of memory. You can check the current constraints with:
 juju get-model-constraints
 ```
 
-As with similar commands, you can 'unset' the constraint by setting its value to
-null:
+As with similar commands, you can 'unset' the constraint by setting its value
+to null:
   
 ```bash
 juju set-model-constraints mem=
@@ -120,7 +117,6 @@ juju set-model-constraints mem=
 
 Model-related constraints can also be overridden at the application and machine
 level.
-
 
 ## Setting constraints for an application
 
@@ -176,3 +172,8 @@ the '--to' placement switch -
     Juju's knowledge of the available spaces on the underlying cloud may lag
     behind recent changes. To force Juju to re-examine the spaces it can use,
     you should run the command `juju reload-spaces`.  
+
+
+<!-- LINKS -->
+
+[controllers-creating]: ./controllers-creating.html
