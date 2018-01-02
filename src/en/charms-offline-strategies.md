@@ -117,7 +117,8 @@ pass it on to the machine. It is possible, however, to set up an agent mirror
 so the remote site is not solicited by the controller. Download the latest few
 agents and configure one of the aforementioned web servers accordingly.
 Updates to the mirrored agents will be needed as new versions of Juju itself
-become available.
+become available. Another approach is to have the client download agents and
+use the `juju sync-agent-binaries` command to push them to a model.
 
 ## Cloud images mirror
 
