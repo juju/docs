@@ -9,6 +9,8 @@ TODO: Add images
       Should probably link to charms-exposing.md instead of repeating
       The Scaling back section should just reference charms-scaling.html
       The Removing applications section should just reference charms-destroy.html
+      This looks like a journey/walkthrough. Consider making a real one and modifying this page
+      Removing mediawiki gives the sense that we're back to square one but mariadb and haproxy are left dangling
 
 
 # Introduction to Juju Charms
@@ -97,30 +99,30 @@ juju status
 
 ...you should see something like this:
 
-<!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
+<!-- JUJUVERSION: 2.3.1-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
 ```no-highlight
-Model      Controller        Cloud/Region     Version  SLA
-default    gce-test	     google/us-east1  2.2.2    unsupported
+Model    Controller  Cloud/Region     Version  SLA
+default  gce-test    google/us-east1  2.3.1    unsupported
 
 App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
-haproxy             unknown      1  haproxy    jujucharms   41  ubuntu
-mariadb    10.1.26  active       1  mariadb    jujucharms    7  ubuntu
-mediawiki  1.19.14  blocked      1  mediawiki  jujucharms   19  ubuntu
+haproxy             unknown      1  haproxy    jujucharms   41  ubuntu  
+mariadb    10.1.30  active       1  mariadb    jujucharms    7  ubuntu  
+mediawiki  1.19.14  blocked      1  mediawiki  jujucharms   19  ubuntu  
 
 Unit          Workload  Agent  Machine  Public address  Ports  Message
-haproxy/0*    unknown   idle   2        35.196.126.59
-mariadb/0*    active    idle   1        35.196.71.88           ready
-mediawiki/0*  blocked   idle   0        35.190.175.12          Database required
+haproxy/1*    unknown   idle   5        35.227.115.170         
+mariadb/1*    active    idle   4        35.227.122.71          ready
+mediawiki/0*  blocked   idle   3        35.196.20.204          Database required
 
-Machine  State    DNS            Inst id        Series  AZ          Message
-0        started  35.190.175.12  juju-f46c20-0  trusty  us-east1-b  RUNNING
-1        started  35.196.71.88   juju-f46c20-1  trusty  us-east1-c  RUNNING
-2        started  35.196.126.59  juju-f46c20-2  xenial  us-east1-d  RUNNING
+Machine  State    DNS             Inst id        Series  AZ          Message
+3        started  35.196.20.204   juju-5b2986-3  trusty  us-east1-b  RUNNING
+4        started  35.227.122.71   juju-5b2986-4  trusty  us-east1-c  RUNNING
+5        started  35.227.115.170  juju-5b2986-5  xenial  us-east1-d  RUNNING
 
-Relation  Provides  Consumes  Type
-peer      haproxy   haproxy   peer
-cluster   mariadb   mariadb   peer
+Relation provider  Requirer         Interface     Type  Message
+haproxy:peer       haproxy:peer     haproxy-peer  peer  
+mariadb:cluster    mariadb:cluster  mysql-ha      peer
 ```
 
 ### Adding relations
@@ -173,26 +175,32 @@ juju expose haproxy
 The below final output to `juju status` represents a successful deployment of
 the stack:
 
-<!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
+<!-- JUJUVERSION: 2.3.1-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
 ```no-highlight
-Model      Controller        Cloud/Region     Version  SLA
-default    gce-test	     google/us-east1  2.2.2    unsupported
+Model    Controller  Cloud/Region     Version  SLA
+default  gce-test    google/us-east1  2.3.1    unsupported
 
 App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
 haproxy             unknown      1  haproxy    jujucharms   41  ubuntu  exposed
-mariadb    10.1.26  active       1  mariadb    jujucharms    7  ubuntu
-mediawiki  1.19.14  active       1  mediawiki  jujucharms   19  ubuntu
+mariadb    10.1.30  active       1  mariadb    jujucharms    7  ubuntu  
+mediawiki  1.19.14  active       1  mediawiki  jujucharms   19  ubuntu  
 
 Unit          Workload  Agent  Machine  Public address  Ports   Message
-haproxy/0*    unknown   idle   2        35.196.126.59   80/tcp
-mariadb/0*    active    idle   1        35.196.71.88            ready
-mediawiki/0*  active    idle   0        35.190.175.12   80/tcp  Ready
+haproxy/1*    unknown   idle   5        35.227.115.170  80/tcp  
+mariadb/1*    active    idle   4        35.227.122.71           ready
+mediawiki/0*  active    idle   3        35.196.20.204   80/tcp  Ready
 
-Machine  State    DNS            Inst id        Series  AZ          Message
-0        started  35.190.175.12  juju-f46c20-0  trusty  us-east1-b  RUNNING
-1        started  35.196.71.88   juju-f46c20-1  trusty  us-east1-c  RUNNING
-2        started  35.196.126.59  juju-f46c20-2  xenial  us-east1-d  RUNNING
+Machine  State    DNS             Inst id        Series  AZ          Message
+3        started  35.196.20.204   juju-5b2986-3  trusty  us-east1-b  RUNNING
+4        started  35.227.122.71   juju-5b2986-4  trusty  us-east1-c  RUNNING
+5        started  35.227.115.170  juju-5b2986-5  xenial  us-east1-d  RUNNING
+
+Relation provider  Requirer              Interface     Type     Message
+haproxy:peer       haproxy:peer          haproxy-peer  peer     
+mariadb:cluster    mariadb:cluster       mysql-ha      peer     
+mariadb:db         mediawiki:db          mysql         regular  
+mediawiki:website  haproxy:reverseproxy  http          regular
 
 Relation  Provides  Consumes   Type
 peer      haproxy   haproxy    peer
@@ -224,7 +232,6 @@ the load balancing is being performed by HAProxy, which is distributing any
 incoming connections to your cluster of MediaWiki machines, and the complexity
 of these added connections is being handled automatically by Juju. 
 
-
 ### Scaling back
 
 Reducing the scale of a deployment is almost as simple as increasing the scale,
@@ -233,13 +240,13 @@ a total of 6 units assigned to MediaWiki, for example, as can be seen in the
 output of the `juju status mediawiki` command:
 
 ```no-highlight
-Unit          Workload  Agent  Machine  Public address  Ports   Message
-mediawiki/0*  active    idle   0        35.190.175.12   80/tcp  Ready
-mediawiki/1   active    idle   3        35.185.91.8     80/tcp  Ready
-mediawiki/2   active    idle   4        35.196.24.142   80/tcp  Ready
-mediawiki/3   active    idle   5        35.196.131.227  80/tcp  Ready
-mediawiki/4   active    idle   6        35.196.249.183  80/tcp  Ready
-mediawiki/5   active    idle   7        35.196.109.180  80/tcp  Ready
+Unit          Workload  Agent  Machine  Public address   Ports   Message
+mediawiki/0*  active    idle   3        35.196.20.204    80/tcp  Ready
+mediawiki/1   active    idle   6        104.196.108.215  80/tcp  Ready
+mediawiki/2   active    idle   7        35.227.77.231    80/tcp  Ready
+mediawiki/3   active    idle   8        35.196.146.3     80/tcp  Ready
+mediawiki/4   active    idle   9        35.196.59.200    80/tcp  Ready
+mediawiki/5   active    idle   10       35.196.179.191   80/tcp  Ready
 ```
 
 To scale back our deployment, use the `remove-unit` command followed by the 
@@ -270,7 +277,7 @@ run the application.
 
 ### Destroying the model
 
-Finally, to complete this brief walkthough, we're going to remove the model
+Finally, to complete this brief walkthrough, we're going to remove the model
 we've used to host our applications. If this is a fresh Juju installation, you
 will have been operating within the 'default' model that's automatically
 generated when you bootstrap the environment. You can check which models you
@@ -281,10 +288,9 @@ following:
 ```bash
 Controller: gce-test
 
-Model       Cloud/Region     Status     Machines  Cores  Access  Last
-connection
+Model       Cloud/Region     Status     Machines  Cores  Access  Last connection
 controller  google/us-east1  available         1      4  admin   just now
-default*    google/us-east1  available         2      2  admin   55 seconds ago
+default*    google/us-east1  available         2      2  admin   4 minutes ago
 ```
 
 To remove the 'default' model we've been using for the MediaWiki deployment,

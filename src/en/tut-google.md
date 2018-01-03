@@ -37,7 +37,7 @@ aws-gov            1  us-gov-west-1    ec2         Amazon (USA Government)
 azure             26  centralus        azure       Microsoft Azure
 azure-china        2  chinaeast        azure       Microsoft Azure China
 cloudsigma         5  hnl              cloudsigma  CloudSigma Cloud
-google             8  us-east1         gce         Google Cloud Platform
+google             9  us-east1         gce         Google Cloud Platform
 joyent             6  eu-ams-1         joyent      Joyent Cloud
 oracle             5  uscom-central-1  oracle      Oracle Compute Cloud Service
 rackspace          6  dfw              rackspace   Rackspace Cloud
@@ -127,23 +127,23 @@ You can check on the state of any deployment, model or controller with the
 'juju status' command. If you query the status directly after deploying
 'haproxy', for instance, you'll something similar to this:
 
-<!-- JUJUVERSION: 2.2.2-xenial-amd64 -->
+<!-- JUJUVERSION: 2.3.1-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
 ```bash
 Model     Controller  Cloud/Region     Version  SLA
-gce-test  mycloud     google/us-east1  2.2.2    unsupported
+gce-test  mycloud     google/us-east1  2.3.1    unsupported
 
 App      Version  Status   Scale  Charm    Store       Rev  OS      Notes
-haproxy           waiting    0/1  haproxy  jujucharms   41  ubuntu
+haproxy           unknown      1  haproxy  jujucharms   41  ubuntu  
 
-Unit       Workload  Agent       Machine  Public address  Ports  Message
-haproxy/0  waiting   allocating  0        35.185.84.188          waiting for machine
+Unit        Workload  Agent  Machine  Public address  Ports  Message
+haproxy/0*  unknown   idle   2        35.196.255.193         
 
-Machine  State    DNS            Inst id        Series  AZ          Message
-0        pending  35.185.84.188  juju-8e884f-0  xenial  us-east1-b  RUNNING
+Machine  State    DNS             Inst id        Series  AZ          Message
+2        started  35.196.255.193  juju-5b2986-2  xenial  us-east1-b  RUNNING
 
-Relation  Provides  Consumes  Type
-peer      haproxy   haproxy   peer
+Relation provider  Requirer      Interface     Type  Message
+haproxy:peer       haproxy:peer  haproxy-peer  peer
 ```
 
 ## Use Juju's GUI
@@ -184,8 +184,8 @@ can now be created by clicking on the 'Create New' button at the top of the
 list, entering a name for the new model, and clicking submit. Click on 'Manage'
 for this model to return to the main view.
 
-For more details on how to use Juju's web interface, take a look at [our
-overview][jujugui].
+For more details on how to use Juju's web interface, take a look at
+[our overview][jujugui].
 
 ## Deploy MediaWiki from the GUI
 
