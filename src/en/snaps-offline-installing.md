@@ -7,7 +7,16 @@ that resource for background information.*
 
 In order to install snaps on a proxy-restricted network the `snapd` daemon will
 need to be made aware of what proxy to use. To pass environment variables to
-snapd edit the `/etc/environment` file and restart the daemon:
+snapd edit the `/etc/environment` file
+
+For example, to set an HTTP proxy, whose URL is given by $PROXY_HTTP (e.g.
+http://squid.internal:3128), the above file would contain:
+
+```no-highlight
+http_proxy=$PROXY_HTTP
+```
+
+The daemon will need to be restarted for this change to take effect:
 
 ```bash
 sudo systemctl restart snapd

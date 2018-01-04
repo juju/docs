@@ -21,8 +21,8 @@ the *controller* is the Juju machine acting as controller; and the *machines*
 are the Juju workload machines that get created during charm deployment.
 
 These entities interact in the following way: the client is responsible for
-creating the controller, and then manages the controller via the latter's API.
-The controller, in turn, is responsible for accessing and passing all needed
+creating the controller and then manages the controller through its API. The
+controller, in turn, is responsible for accessing and passing all needed
 resources to the machines.
 
 There are a few exceptions to the above rule. When creating a controller the

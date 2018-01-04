@@ -87,7 +87,7 @@ A standard FTP proxy. Juju uses the `ftp-proxy` option for this type of proxy.
 
 Instead of proxying client requests to an internet-based repository it is
 possible to maintain the repository internally. That is, you can have a copy or
-*mirror* of a Ubuntu package repository. This option has a large storage
+*mirror* of an Ubuntu package repository. This option has a large storage
 requirement and the initial setup/download time is considerable. Regular mirror
 synchronization will also be needed.
 
