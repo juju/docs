@@ -84,32 +84,32 @@ juju add-relation mysql mediawiki:db
 
 -->
 
-We can check the output from `juju status` to make sure the correct relationship
-has been established:
+We can check the output from `juju status` to make sure the correct
+relationship has been established:
 
-<!-- JUJUVERSION: 2.0.0-xenial-amd64 -->
+<!-- JUJUVERSION: 2.3.1-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
 ```no-highlight
-Model    Controller  Cloud/Region         Version
-default  lxd-test    localhost/localhost  2.0.0
+Model    Controller  Cloud/Region         Version  SLA
+default  lxd         localhost/localhost  2.3.1    unsupported
 
-App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
-mediawiki           unknown      1  mediawiki  jujucharms    5  ubuntu
-mysql               unknown      1  mysql      jujucharms   55  ubuntu
+App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
+mediawiki  1.19.14  active      1  mediawiki  jujucharms   19  ubuntu  
+mysql      5.7.20   active      1  mysql      jujucharms   58  ubuntu  
 
-Unit          Workload  Agent      Machine  Public address  Ports     Message
-mediawiki/0*  unknown   executing  0        10.154.173.35   80/tcp
-mysql/0*      unknown   idle       1        10.154.173.232  3306/tcp
+Unit          Workload  Agent  Machine  Public address  Ports     Message
+mediawiki/0*  active    idle   2        10.55.126.152   80/tcp    Ready
+mysql/0*      active    idle   1        10.55.126.253   3306/tcp  Ready
 
-Machine  State    DNS             Inst id        Series  AZ
-0        started  10.154.173.35   juju-4a3f2a-0  trusty
-1        started  10.154.173.232  juju-4a3f2a-1  trusty
+Machine  State    DNS            Inst id        Series  AZ  Message
+1        started  10.55.126.253  juju-d4f415-1  xenial      Running
+2        started  10.55.126.152  juju-d4f415-2  trusty      Running
 
-Relation  Provides   Consumes  Type
-db        mediawiki  mysql     regular
-cluster   mysql      mysql     peer
-
+Relation provider  Requirer       Interface  Type     Message
+mysql:cluster      mysql:cluster  mysql-ha   peer     
+mysql:db           mediawiki:db   mysql      regular
 ```
+
 The final section of the status output shows all current established relations.
 
 ## Removing relations
