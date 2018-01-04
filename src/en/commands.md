@@ -3,8 +3,8 @@ Title: Juju commands and usage
 # Juju Command reference
 
 You can get a list of Juju commands by entering `juju help commands` on the
-command line. These commands are also listed here, with usage and examples.
-Click on the expander triangle to see details of each command. 
+command line. These commands are also listed below, along with usage and
+examples. Click on the expander triangle to see the details of a command. 
 
 ^# actions
 
