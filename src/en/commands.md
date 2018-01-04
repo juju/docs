@@ -1,12 +1,10 @@
-Title:Juju commands and usage
+Title: Juju commands and usage
 
 # Juju Command reference
 
-You can get a list of the currently used commands by entering
-```juju help commands``` from the commandline. The currently understood commands
-are listed here, with usage and examples.
-
-Click on the expander to see details for each command. 
+You can get a list of Juju commands by entering `juju help commands` on the
+command line. These commands are also listed below, along with usage and
+examples. Click on the expander triangle to see the details of a command. 
 
 ^# actions
 
@@ -28,7 +26,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -207,7 +205,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-n  (= 1)_
 
@@ -369,7 +367,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--via (= "")_
 
@@ -432,7 +430,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -460,7 +458,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -499,7 +497,7 @@ Click on the expander to see details for each command.
 
 ^# add-storage
 
-   **Usage:** ` juju add-storage [options] <unit name> <charm storage name>=<storage constraints> | <charm storage name> `
+    **Usage:** ` juju add-storage [options] <unit name> <charm storage name>[=<storage constraints>] ... `
 
    **Summary:**
 
@@ -513,7 +511,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -583,7 +581,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -624,7 +622,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-n, --num-units  (= 1)_
 
@@ -656,40 +654,23 @@ Click on the expander to see details for each command.
    **Examples:**
 
    Add five units of wordpress on five new machines:
-
           juju add-unit wordpress -n 5
-
    Add a unit of mysql to machine 23 (which already exists):
-
           juju add-unit mysql --to 23
-   
    Add two units of mysql to machines 3 and 4:
-
          juju add-unit mysql -n 2 --to 3,4
-
    Add three units of mysql to machine 7:
-
           juju add-unit mysql -n 3 --to 7,7,7
-
    Add three units of mysql, one to machine 3 and the others to new
    machines:
-
           juju add-unit mysql -n 3 --to 7
-
    Add a unit into a new LXD container on machine 7:
-
           juju add-unit mysql --to lxd:7
-
    Add two units into two new LXD containers on machine 7:
-
           juju add-unit mysql -n 2 --to lxd:7,lxd:7
-
    Add a unit of mariadb to LXD container number 3 on machine 24:
-
           juju add-unit mariadb --to 24/lxd/3
-
    Add a unit of mariadb to LXD container on a new machine:
-
           juju add-unit mariadb --to lxd
 
 
@@ -826,8 +807,15 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   List terms the user has agreed to.
+   Charms may require a user to accept its terms in order for it to be deployed.
+   In other words, some applications may only be installed if a user agrees to 
+   accept some terms defined by the charm. 
+   This command lists the terms that the user has agreed to.
 
+
+   **See also:**
+
+   [agree](#agree)  
 
    **Aliases:**
 
@@ -851,7 +839,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -883,7 +871,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -915,7 +903,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -1006,7 +994,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -1037,11 +1025,11 @@ Click on the expander to see details for each command.
 
    _--agent-version (= "")_
 
-   Version of tools to use for Juju agents
+   Version of agent binaries to use for Juju agents
 
    _--auto-upgrade  (= false)_
 
-   Upgrade to the latest patch release tools on first bootstrap
+   After bootstrap, upgrade to the latest patch release
 
    _--bootstrap-constraints (= "")_
 
@@ -1085,7 +1073,7 @@ Click on the expander to see details for each command.
 
    _--metadata-source (= "")_
 
-   Local path to use as tools and/or metadata source
+   Local path to use as agent and/or image metadata source
 
    _--model-default  (= )_
 
@@ -1093,7 +1081,7 @@ Click on the expander to see details for each command.
 
    options to be set for all models, unless otherwise specified
 
-   (--config config.yaml [--config key=value ...])
+   (--model-default config.yaml [--model-default key=value ...])
 
    _--no-gui  (= false)_
 
@@ -1221,7 +1209,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--model-uuid (= "")_
 
@@ -1270,7 +1258,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -1331,7 +1319,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -1456,7 +1444,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -1552,7 +1540,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -1590,7 +1578,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -1647,7 +1635,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -1661,9 +1649,9 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-          juju consume othermodel.mysql
-          juju consume owner/othermodel.mysql
-          juju consume anothercontroller:owner/othermodel.mysql
+          $ juju consume othermodel.mysql
+          $ juju consume owner/othermodel.mysql
+          $ juju consume anothercontroller:owner/othermodel.mysql
 
 
    **See also:**
@@ -1790,13 +1778,13 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
-   _--filename (= "juju-backup-<date>-<time>.tar.gz")_
+   _--filename (= "juju-backup-&lt;date>-&lt;time>.tar.gz")_
 
    Download to this file
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--no-download  (= false)_
 
@@ -1806,26 +1794,17 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   create-backup requests that juju create a backup of its state and print the
+   create-backup requests that Juju creates a backup of its state and prints the
    backup's unique ID.  You may provide a note to associate with the backup.
-   The backup archive and associated metadata are stored remotely by juju.
-   The --download option may be used without the --filename option.  In
-   that case, the backup archive will be stored in the current working
-   directory with a name matching juju-backup-<date>-<time>.tar.gz.
+   The backup archive and associated metadata are stored remotely by Juju, but
+   will also be copied locally unless --no-download is supplied. To access the
+   remote backups, see 'juju download-backup'.
 
-   WARNING: Remotely stored backups will be lost when the model is
-   destroyed.  Furthermore, the remotely backup is not guaranteed to be
-   available.
 
-   Therefore, you should use the --download or --filename options, or use:
+   **See also:**
 
-             juju download-backups
-   
-   to get a local copy of the backup archive.
-
-   This local copy can then be used to restore an model even if that
-   model was already destroyed or is otherwise unavailable.
-
+   [backups](#backups) , 
+   [download-backup](#download-backup)  
 
 
 
@@ -1845,7 +1824,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -1975,11 +1954,11 @@ Click on the expander to see details for each command.
 
 ^# debug-hooks
 
-   **Usage:** ` juju debug-hooks [options] <unit name> [hook names]`
+   **Usage:** ` juju debug-hooks [options] <unit name> [hook or action names]`
 
    **Summary:**
 
-   Launch a tmux session to debug a hook.
+   Launch a tmux session to debug hooks and/or actions.
 
    **Options:**
 
@@ -1989,7 +1968,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--no-host-key-checks  (= false)_
 
@@ -2007,7 +1986,7 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Interactively debug a hook remotely on an application unit.
+   Interactively debug hooks or actions remotely on an application unit.
 
    See the "juju help ssh" for information about SSH related options
    accepted by the debug-hooks command.
@@ -2063,7 +2042,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--ms  (= false)_
 
@@ -2184,21 +2163,21 @@ Click on the expander to see details for each command.
 
    Configure application endpoint bindings to spaces
 
-   _--bundle-config (= "")_
-
-   Config override values for a bundle
-
    _--channel (= "")_
 
    Channel to use when getting the charm or bundle from the charm store
 
    _--config  (= )_
 
-   Path to yaml-formatted application config
+   Either a path to yaml-formatted application config file or a key=value pair
 
    _--constraints (= "")_
 
    Set application constraints
+
+   _--dry-run  (= false)_
+
+   Just show what the bundle deploy would do
 
    _--force  (= false)_
 
@@ -2210,11 +2189,19 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
+
+   _--map-machines (= "")_
+
+   Specify the existing machines to use for bundle deployments
 
    _-n, --num-units  (= 1)_
 
    Number of application units to deploy for principal charms
+
+   _--overlay  (= )_
+
+   Bundles to overlay on the primary bundle, applied in order
 
    _--plan (= "")_
 
@@ -2289,6 +2276,36 @@ Click on the expander to see details for each command.
    Constraints can be specified by specifying the '--constraints' option. If the
    application is later scaled out with `juju add-unit`, provisioned machines
    will use the same constraints (unless changed by `juju set-constraints`).
+   Application configuration values can be specified using '--config' option. This
+   option accepts either a path to a yaml-formatted file or a key=value pair. 
+   Configuration file provided should be in format
+   <charm name>:
+   	<option name>: <option value>
+   	...
+   For example, to deploying 'mediawiki' with the configuration file 'mycfg.yaml'
+   that contains:
+   mediawiki:
+   	name: my media wiki
+   	admins: me:pwdOne
+   	debug: true
+   use
+        juju deploy mediawiki --config mycfg.yaml
+   To specify key=value pair to set an application option value, use:
+       
+        juju deploy mediawiki --config name='my media wiki'
+         
+   When specifying more than one option value, use:
+        juju deploy mediawiki --config name='my media wiki' --config debug=true
+   Care must be taken when specifying more than one configuration via 
+   '--config' option - any later values will override those specified earlier.
+   For example, when calling
+        juju deploy mediawiki --config name='my media wiki' --config mycfg.yaml
+        
+   if mycfg.yaml contained a value for 'name', it will be used in preference 
+   to the earlier 'my media wiki' value.
+   The same applies to single value options. For example, when calling
+        juju deploy mediawiki --config name='a media wiki' --config name='my wiki'
+   the value 'my wiki' will be used for the option 'name'.
    Resources may be uploaded by specifying the '--resource' option followed by a
    name=filepath pair. This option may be repeated more than once to upload more
    than one resource.
@@ -2309,6 +2326,19 @@ Click on the expander to see details for each command.
    When deploying an application or adding machines, the 'spaces' constraint can
    be used to define a comma-delimited list of required and forbidden spaces (the
    latter prefixed with "^", similar to the 'tags' constraint).
+   When deploying bundles, machines specified in the bundle are added to the
+   model as new machines. In order to use the existing machines in the model
+   rather than create new machines, the option --map-machines=existing can be
+   used. To specify particular machines for the mapping, multiple comma separated
+   values of the form "bundle-id=existing-id" can be passed where the bundle-id
+   and the existing-id refer to top level machine IDs. For example, if there was
+   a bundle that specified machines 1, 2, and 3, and the model had machines 1, 2,
+   3 and 4, the following deployment of the bundle would use machines 1 and 2 in
+   the model for machines 1 and 2 in the bundle and use machine 4 in the model
+   for the bundle machine 3.
+        juju deploy some-bundle --map-machines existing,3=4
+   Only top level machines can be mapped in this way, just as only top level
+   machines can be defined in the machines section of the bundle.
    Examples:
           juju deploy mysql               (deploy to a new machine)
           juju deploy mysql --to 23       (deploy to preexisting machine 23)
@@ -2475,7 +2505,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -2509,7 +2539,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -2564,7 +2594,7 @@ Click on the expander to see details for each command.
              retry-provisioning
              run
              set-constraints
-             sync-tools
+             sync-agents
              unexpose
              upgrade-charm
              upgrade-juju
@@ -2653,7 +2683,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -2707,7 +2737,7 @@ Click on the expander to see details for each command.
              retry-provisioning
              run
              set-constraints
-             sync-tools
+             sync-agents
              unexpose
              upgrade-charm
              upgrade-juju
@@ -2745,7 +2775,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -2775,7 +2805,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -2830,7 +2860,7 @@ Click on the expander to see details for each command.
              retry-provisioning
              run
              set-constraints
-             sync-tools
+             sync-agents
              unexpose
              upgrade-charm
              upgrade-juju
@@ -3014,7 +3044,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -3082,12 +3112,12 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-         juju find-offers
-         juju find-offers mycontroller:
-         juju find-offers fred/prod
-         juju find-offers --interface mysql
-         juju find-offers --url fred/prod.db2
-         juju find-offers --offer db2
+         $ juju find-offers
+         $ juju find-offers mycontroller:
+         $ juju find-offers fred/prod
+         $ juju find-offers --interface mysql
+         $ juju find-offers --url fred/prod.db2
+         $ juju find-offers --offer db2
          
 
 
@@ -3113,7 +3143,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -3163,7 +3193,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -3221,7 +3251,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -3351,7 +3381,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--no-browser  (= true)_
 
@@ -3366,21 +3396,14 @@ Click on the expander to see details for each command.
 
 
    Print the Juju GUI URL and show admin credential to use to log into it:
-
-        juju gui
-
+   	juju gui
    Print the Juju GUI URL only:
 
-        juju gui --hide-credential
-
+   	juju gui --hide-credential
    Open the Juju GUI in the default browser and show admin credential to use to log into it:
-
-        juju gui --browser
-
+   	juju gui --browser
    Open the Juju GUI in the default browser without printing the login credential:
-
-        juju gui --hide-credential --browser
-
+   	juju gui --hide-credential --browser
    An error is returned if the Juju GUI is not available in the controller.
 
 
@@ -3404,11 +3427,172 @@ Click on the expander to see details for each command.
 
 ^# help-tool
 
-   **Usage:** ` juju help-tool [tool]`
+   **Usage:** ` juju hook-tool [tool]`
 
    **Summary:**
 
-   Show help on a Juju charm tool.
+   Show help on a Juju charm hook tool.
+
+
+   
+   **Details:**
+
+
+   Juju charms can access a series of built-in helpers called 'hook-tools'. 
+   These are useful for the charm to be able to inspect its running environment.
+   Currently available charm hook tools are:
+
+             action-fail              set action fail status with message
+             action-get               get action parameters
+             action-set               set action results
+             add-metric               add metrics
+             application-version-set  specify which version of the application is deployed
+             close-port               ensure a port or range is always closed
+             config-get               print application configuration
+             is-leader                print application leadership status
+             juju-log                 write a message to the juju log
+             juju-reboot              Reboot the host machine
+             leader-get               print application leadership settings
+             leader-set               write application leadership settings
+             network-get              get network config
+             open-port                register a port or range to open
+             opened-ports             lists all ports or ranges opened by the unit
+             relation-get             get relation settings
+             relation-ids             list all relation ids with the given relation name
+             relation-list            list relation units
+             relation-set             set relation settings
+             status-get               print status information
+             status-set               set status information
+             storage-add              add storage instances
+             storage-get              print information for storage instance with specified id
+             storage-list             list storage attached to the unit
+             unit-get                 print public-address or private-address
+
+   **Examples:**
+
+          For help on a specific tool, supply the name of that tool, for example:
+              juju hook-tool unit-get
+
+
+   **Aliases:**
+
+   `help-tool,`
+
+   `hook-tools`
+
+
+
+^# hook-tool
+
+   **Usage:** ` juju hook-tool [tool]`
+
+   **Summary:**
+
+   Show help on a Juju charm hook tool.
+
+
+   
+   **Details:**
+
+
+   Juju charms can access a series of built-in helpers called 'hook-tools'. 
+   These are useful for the charm to be able to inspect its running environment.
+   Currently available charm hook tools are:
+
+             action-fail              set action fail status with message
+             action-get               get action parameters
+             action-set               set action results
+             add-metric               add metrics
+             application-version-set  specify which version of the application is deployed
+             close-port               ensure a port or range is always closed
+             config-get               print application configuration
+             is-leader                print application leadership status
+             juju-log                 write a message to the juju log
+             juju-reboot              Reboot the host machine
+             leader-get               print application leadership settings
+             leader-set               write application leadership settings
+             network-get              get network config
+             open-port                register a port or range to open
+             opened-ports             lists all ports or ranges opened by the unit
+             relation-get             get relation settings
+             relation-ids             list all relation ids with the given relation name
+             relation-list            list relation units
+             relation-set             set relation settings
+             status-get               print status information
+             status-set               set status information
+             storage-add              add storage instances
+             storage-get              print information for storage instance with specified id
+             storage-list             list storage attached to the unit
+             unit-get                 print public-address or private-address
+
+   **Examples:**
+
+          For help on a specific tool, supply the name of that tool, for example:
+              juju hook-tool unit-get
+
+
+   **Aliases:**
+
+   `help-tool,`
+
+   `hook-tools`
+
+
+
+^# hook-tools
+
+   **Usage:** ` juju hook-tool [tool]`
+
+   **Summary:**
+
+   Show help on a Juju charm hook tool.
+
+
+   
+   **Details:**
+
+
+   Juju charms can access a series of built-in helpers called 'hook-tools'. 
+   These are useful for the charm to be able to inspect its running environment.
+   Currently available charm hook tools are:
+
+             action-fail              set action fail status with message
+             action-get               get action parameters
+             action-set               set action results
+             add-metric               add metrics
+             application-version-set  specify which version of the application is deployed
+             close-port               ensure a port or range is always closed
+             config-get               print application configuration
+             is-leader                print application leadership status
+             juju-log                 write a message to the juju log
+             juju-reboot              Reboot the host machine
+             leader-get               print application leadership settings
+             leader-set               write application leadership settings
+             network-get              get network config
+             open-port                register a port or range to open
+             opened-ports             lists all ports or ranges opened by the unit
+             relation-get             get relation settings
+             relation-ids             list all relation ids with the given relation name
+             relation-list            list relation units
+             relation-set             set relation settings
+             status-get               print status information
+             status-set               set status information
+             storage-add              add storage instances
+             storage-get              print information for storage instance with specified id
+             storage-list             list storage attached to the unit
+             unit-get                 print public-address or private-address
+
+   **Examples:**
+
+          For help on a specific tool, supply the name of that tool, for example:
+              juju hook-tool unit-get
+
+
+   **Aliases:**
+
+   `help-tool,`
+
+   `hook-tools`
 
 
 
@@ -3428,7 +3612,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -3440,12 +3624,12 @@ Click on the expander to see details for each command.
 
    To import a filesystem, you must specify three things:
 
-    - the storage provider which manages the storage, and with
-      which the storage will be associated
-    - the storage provider ID for the filesystem, or
-      volume that backs the filesystem
-    - the storage name to assign to the filesystem,
-      corresponding to the storage name used by a charm
+          - the storage provider which manages the storage, and with
+            which the storage will be associated
+          - the storage provider ID for the filesystem, or
+            volume that backs the filesystem
+          - the storage name to assign to the filesystem,
+            corresponding to the storage name used by a charm
    
    Once a filesystem is imported, Juju will create an associated storage
    instance using the given storage name.
@@ -3478,7 +3662,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -3539,12 +3723,12 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Forcibly destroy the specified controller. If the API server is accessible,
+   Forcibly destroy the specified controller.  If the API server is accessible,
    this command will attempt to destroy the controller model and all hosted models
    and their resources.
 
    If the API server is unreachable, the machines of the controller model will be
-   destroyed through the cloud provisioner. If there are additional machines,
+   destroyed through the cloud provisioner.  If there are additional machines,
    including machines within hosted models, these machines will not be destroyed
    and will never be reconnected to the Juju controller being destroyed.
 
@@ -3581,7 +3765,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -3596,7 +3780,7 @@ Click on the expander to see details for each command.
 
 
    List the actions available to run on the target application, with a short
-   description. To show the full schema for the actions, use --schema.
+   description.  To show the full schema for the actions, use --schema.
 
    For more information, see also the 'run-action' command, which executes actions.
 
@@ -3636,8 +3820,15 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   List terms the user has agreed to.
+   Charms may require a user to accept its terms in order for it to be deployed.
+   In other words, some applications may only be installed if a user agrees to 
+   accept some terms defined by the charm. 
+   This command lists the terms that the user has agreed to.
 
+
+   **See also:**
+
+   [agree](#agree)  
 
    **Aliases:**
 
@@ -3661,7 +3852,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -3704,7 +3895,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -3769,7 +3960,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -3989,7 +4180,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -4043,7 +4234,7 @@ Click on the expander to see details for each command.
              retry-provisioning
              run
              set-constraints
-             sync-tools
+             sync-agents
              unexpose
              upgrade-charm
              upgrade-juju
@@ -4077,7 +4268,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -4131,7 +4322,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -4250,6 +4441,10 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
+   _--active-only  (= false)_
+
+   only return results where the offer is in use
+
    _--allowed-consumer (= "")_
 
    return results where the user is allowed to consume the offer
@@ -4272,7 +4467,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -4284,7 +4479,8 @@ Click on the expander to see details for each command.
 
    List information about applications' endpoints that have been shared and who is connected.
    The default tabular output shows each user connected (relating to) the offer, and the 
-   relation id of the relation. If no relations have been made, no rows are printed.
+   relation id of the relation.
+
    The summary output shows one row per offer, with a count of active/total relations.
    The YAML output shows additional information about the source of connections, including
    the source model UUID.
@@ -4295,16 +4491,18 @@ Click on the expander to see details for each command.
           - application: the name of the offered application
           - connected user: the name of a user who has a relation to the offer
           - allowed consumer: the name of a user allowed to consume the offer
+          - active only: only show offers which are in use (are related to)
 
    **Examples:**
 
-          juju offers
-          juju offers -m model
-          juju offers --interface db2
-          juju offers --application mysql
-          juju offers --connected-user fred
-          juju offers --allowed-consumer mary
-          juju offers hosted-mysql
+          $ juju offers
+          $ juju offers -m model
+          $ juju offers --interface db2
+          $ juju offers --application mysql
+          $ juju offers --connected-user fred
+          $ juju offers --allowed-consumer mary
+          $ juju offers hosted-mysql
+          $ juju offers hosted-mysql --active-only
 
 
    **See also:**
@@ -4338,7 +4536,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -4452,7 +4650,7 @@ Click on the expander to see details for each command.
 
 ^# list-resources
 
-   **Usage:** ` juju resources [options] application-or-unit`
+   **Usage:** ` juju resources [options] <application or unit>`
 
    **Summary:**
 
@@ -4474,7 +4672,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -4515,7 +4713,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -4562,7 +4760,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -4615,7 +4813,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -4658,7 +4856,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--name  (= )_
 
@@ -4717,7 +4915,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -5005,7 +5203,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -5064,7 +5262,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -5148,7 +5346,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -5216,6 +5414,12 @@ Click on the expander to see details for each command.
 
            type: bool
            description: Determines whether the uniter should automatically retry failed hooks
+   
+   cloudinit-userdata:
+
+           type: string
+           description: Cloud-init user-data (in yaml format) to be added to userdata for new
+             machines created in this model
    
    container-networking-method:
 
@@ -5390,6 +5594,11 @@ Click on the expander to see details for each command.
 
            type: string
            description: The default block storage source for the model
+   
+   storage-default-filesystem-source:
+
+           type: string
+           description: The default filesystem storage source for the model
    
    syslog-ca-cert:
 
@@ -5699,10 +5908,10 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-   juju offer mysql:db
-   juju offer mymodel.mysql:db
-   juju offer db2:db hosted-db2
-   juju offer db2:db,log hosted-db2
+   $ juju offer mysql:db
+   $ juju offer mymodel.mysql:db
+   $ juju offer db2:db hosted-db2
+   $ juju offer db2:db,log hosted-db2
 
 
    **See also:**
@@ -5726,6 +5935,10 @@ Click on the expander to see details for each command.
 
    Do not use web browser for authentication
 
+   _--active-only  (= false)_
+
+   only return results where the offer is in use
+
    _--allowed-consumer (= "")_
 
    return results where the user is allowed to consume the offer
@@ -5748,7 +5961,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -5760,7 +5973,8 @@ Click on the expander to see details for each command.
 
    List information about applications' endpoints that have been shared and who is connected.
    The default tabular output shows each user connected (relating to) the offer, and the 
-   relation id of the relation. If no relations have been made, no rows are printed.
+   relation id of the relation.
+
    The summary output shows one row per offer, with a count of active/total relations.
    The YAML output shows additional information about the source of connections, including
    the source model UUID.
@@ -5771,16 +5985,18 @@ Click on the expander to see details for each command.
           - application: the name of the offered application
           - connected user: the name of a user who has a relation to the offer
           - allowed consumer: the name of a user allowed to consume the offer
+          - active only: only show offers which are in use (are related to)
 
    **Examples:**
 
-         juju offers
-         juju offers -m model
-         juju offers --interface db2
-         juju offers --application mysql
-         juju offers --connected-user fred
-         juju offers --allowed-consumer mary
-         juju offers hosted-mysql
+          $ juju offers
+          $ juju offers -m model
+          $ juju offers --interface db2
+          $ juju offers --application mysql
+          $ juju offers --connected-user fred
+          $ juju offers --allowed-consumer mary
+          $ juju offers hosted-mysql
+          $ juju offers hosted-mysql --active-only
 
 
    **See also:**
@@ -5814,7 +6030,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -5989,7 +6205,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--via (= "")_
 
@@ -6021,13 +6237,13 @@ Click on the expander to see details for each command.
 
    **Examples:**
 
-          juju add-relation wordpress mysql
+          $ juju add-relation wordpress mysql
               where "wordpress" and "mysql" will be internally expanded to "wordpress:db" and "mysql:server" respectively
-          juju add-relation wordpress someone/prod.mysql
-             where "wordpress" will be internally expanded to "wordpress:db"
-          juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16
+          $ juju add-relation wordpress someone/prod.mysql
+              where "wordpress" will be internally expanded to "wordpress:db"
+          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16
           
-          juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16,10.0.0.0/8
+          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16,10.0.0.0/8
 
 
    **Aliases:**
@@ -6052,7 +6268,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -6082,7 +6298,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -6121,7 +6337,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -6156,7 +6372,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--series (= "")_
 
@@ -6207,6 +6423,45 @@ Click on the expander to see details for each command.
 
    [add-cloud](#add-cloud) , 
    [list-clouds](#list-clouds)  
+
+
+
+^# remove-consumed-application
+
+   **Usage:** ` juju remove-saas [options] <saas-application-name> [<saas-application-name>...]`
+
+   **Summary:**
+
+   Remove consumed applications (SAAS) from the model.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
+
+   
+   **Details:**
+
+
+   Removing a consumed (SAAS) application will terminate any relations that
+   application has, potentially leaving any related local applications
+   in a non-functional state.
+
+
+   **Examples:**
+
+          juju remove-saas hosted-mysql
+          juju remove-saas -m test-model hosted-mariadb
+
+
+   **Aliases:**
+
+   `remove-consumed-application`
 
 
 
@@ -6267,7 +6522,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -6354,7 +6609,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -6394,6 +6649,45 @@ Click on the expander to see details for each command.
 
 
 
+^# remove-saas
+
+   **Usage:** ` juju remove-saas [options] <saas-application-name> [<saas-application-name>...]`
+
+   **Summary:**
+
+   Remove consumed applications (SAAS) from the model.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
+
+   
+   **Details:**
+
+
+   Removing a consumed (SAAS) application will terminate any relations that
+   application has, potentially leaving any related local applications
+   in a non-functional state.
+
+
+   **Examples:**
+
+          juju remove-saas hosted-mysql
+          juju remove-saas -m test-model hosted-mariadb
+
+
+   **Aliases:**
+
+   `remove-consumed-application`
+
+
+
 ^# remove-ssh-key
 
    **Usage:** ` juju remove-ssh-key [options] <ssh key id> ...`
@@ -6410,7 +6704,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -6458,7 +6752,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--no-destroy  (= false)_
 
@@ -6509,7 +6803,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -6591,6 +6885,34 @@ Click on the expander to see details for each command.
 
 
 
+^# resolve
+
+   **Usage:** ` juju resolved [options] <unit>`
+
+   **Summary:**
+
+   Marks unit errors resolved and re-executes failed hooks.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
+
+   _--no-retry  (= false)_
+
+   Do not re-execute failed hooks on the unit
+
+   **Aliases:**
+
+   `resolve`
+
+
+
 ^# resolved
 
    **Usage:** ` juju resolved [options] <unit>`
@@ -6607,17 +6929,21 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--no-retry  (= false)_
 
    Do not re-execute failed hooks on the unit
 
+   **Aliases:**
+
+   `resolve`
+
 
 
 ^# resources
 
-   **Usage:** ` juju resources [options] application-or-unit`
+   **Usage:** ` juju resources [options] <application or unit>`
 
    **Summary:**
 
@@ -6639,7 +6965,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -6696,7 +7022,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -6735,7 +7061,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -6777,7 +7103,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
 
 
@@ -6858,7 +7184,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--machine  (= )_
 
@@ -6937,7 +7263,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -7046,7 +7372,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--no-host-key-checks  (= false)_
 
@@ -7128,7 +7454,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -7243,7 +7569,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--whitelist (= "")_
 
@@ -7296,7 +7622,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -7332,7 +7658,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -7378,7 +7704,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -7450,7 +7776,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -7495,7 +7821,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--name (= "")_
 
@@ -7530,7 +7856,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -7659,7 +7985,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -7720,11 +8046,11 @@ Click on the expander to see details for each command.
 
 ^# show-offer
 
-   **Usage:** ` juju show-offer [options]`
+   **Usage:** ` juju show-offer [options] [<controller>:]<offer url>`
 
    **Summary:**
 
-   Shows offered applications' endpoints details.
+   Shows extended information about the offered application.
 
    **Options:**
 
@@ -7748,14 +8074,25 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   Show extended information about an offered application.
+   This command is intended to enable users to learn more about the
+   application offered from a particular URL. In addition to the URL of
+   the offer, extra information is provided from the readme file of the
+   charm being offered.
 
-   This command is aimed for a user who wants to see more detail about what’s offered behind a particular URL.
 
    **Examples:**
 
-         juju show-offer fred/prod.db2
-         juju show-offer anothercontroller:fred/prod.db2
+   To show the extended information for the application 'prod' offered
+   from the model 'default' on the same Juju controller:
+           juju show-offer default.prod
+   The supplied URL can also include a username where offers require them. 
+   This will be given as part of the URL retrieved from the
+   'juju find-offers' command. To show information for the application
+   'prod' from the model 'default' from the user 'admin':
+          juju show-offer admin/default.prod
+   To show the information regarding the application 'prod' offered from
+   the model 'default' on an accessible controller named 'controller':
+          juju show-offer controller:default.prod
 
 
    **See also:**
@@ -7788,7 +8125,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -7876,7 +8213,7 @@ Click on the expander to see details for each command.
 
    _--days  (= 0)_
 
-   Returns the logs for the past <days> days (cannot be combined with -n or --date)
+   Returns the logs for the past &lt;days> days (cannot be combined with -n or --date)
 
    _--from-date (= "")_
 
@@ -7888,7 +8225,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-n  (= 0)_
 
@@ -7896,7 +8233,7 @@ Click on the expander to see details for each command.
 
    _--type (= "unit")_
 
-   Type of statuses to be displayed [agent|workload|combined|machine|machineInstance|container|containerinstance]
+   Type of statuses to be displayed [container|juju-container|juju-machine|juju-unit|machine|unit|workload]
 
    _--utc  (= false)_
 
@@ -7913,18 +8250,13 @@ Click on the expander to see details for each command.
 
    -type supports:
 
-             juju-unit: will show statuses for the unit's juju agent.
-
-             workload: will show statuses for the unit's workload.
-
-             unit: will show workload and juju agent combined for the specified unit.
-             juju-machine: will show statuses for machine's juju agent.
-
-             machine: will show statuses for machines.
-
-             juju-container: will show statuses for the container's juju agent.
-             container: will show statuses for containers.
-
+             container:  statuses from the agent that is managing containers
+             juju-container:  statuses from the containers only and not their host machines
+             juju-machine:  status of the agent that is managing a machine
+             juju-unit:  statuses from the agent that is managing a unit
+             machine:  statuses that occur due to provisioning of a machine
+             unit:  statuses for specified unit and its workload
+             workload:  statuses for unit's workload
           and sorted by time of occurrence.
 
           The default is unit.
@@ -7952,7 +8284,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -7964,9 +8296,10 @@ Click on the expander to see details for each command.
 
    Show extended information about storage instances.
 
-   Storage instances to display are specified by storage ids.
+   Storage instances to display are specified by storage ids. 
+   Storage ids are positional arguments to the command and do not need to be comma
+   separated when more than one id is desired.
 
-   * note use of positional arguments
 
 
 
@@ -8085,7 +8418,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -8127,7 +8460,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -8170,7 +8503,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--no-host-key-checks  (= false)_
 
@@ -8246,7 +8579,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -8299,7 +8632,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -8395,7 +8728,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -8438,7 +8771,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--name  (= )_
 
@@ -8497,7 +8830,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _-o, --output (= "")_
 
@@ -8546,7 +8879,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--message (= "")_
 
@@ -8623,13 +8956,13 @@ Click on the expander to see details for each command.
 
 
 
-^# sync-tools
+^# sync-agent-binaries
 
-   **Usage:** ` juju sync-tools [options]`
+   **Usage:** ` juju sync-agent-binaries [options]`
 
    **Summary:**
 
-   Copy tools from the official tool store into a local model.
+   Copy agent binaries from the official agent store into a local model.
 
    **Options:**
 
@@ -8663,7 +8996,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--public  (= false)_
 
@@ -8685,9 +9018,9 @@ Click on the expander to see details for each command.
    **Details:**
 
 
-   This copies the Juju agent software from the official tools store (located
-   at https://streams.canonical.com/juju) into a model. It is generally done
-   when the model is without Internet access.
+   This copies the Juju agent software from the official agent binaries store 
+   (located at https://streams.canonical.com/juju) into a model. 
+   It is generally done when the model is without Internet access.
 
    Instead of the above site, a local directory can be specified as source.
    The online store will, of course, need to be contacted at some point to get
@@ -8697,16 +9030,111 @@ Click on the expander to see details for each command.
    **Examples:**
 
           # Download the software (version auto-selected) to the model:
-          juju sync-tools --debug
+          juju sync-agent-binaries --debug
           # Download a specific version of the software locally:
-          juju sync-tools --debug --version 2.0 --local-dir=/home/ubuntu/sync-tools
+          juju sync-agent-binaries --debug --version 2.0 --local-dir=/home/ubuntu/sync-agent-binaries
           # Get locally available software to the model:
-          juju sync-tools --debug --source=/home/ubuntu/sync-tools
+          juju sync-agent-binaries --debug --source=/home/ubuntu/sync-agent-binaries
 
 
    **See also:**
 
    [upgrade-juju](#upgrade-juju)  
+
+   **Aliases:**
+
+   `sync-tools`
+
+
+
+^# sync-tools
+
+   **Usage:** ` juju sync-agent-binaries [options]`
+
+   **Summary:**
+
+   Copy agent binaries from the official agent store into a local model.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _--all  (= false)_
+
+   Copy all versions, not just the latest
+
+   _--destination (= "")_
+
+   Local destination directory
+
+   DEPRECATED: use --local-dir instead
+
+   _--dev  (= false)_
+
+   Consider development versions as well as released ones
+
+   DEPRECATED: use --stream instead
+
+   _--dry-run  (= false)_
+
+   Don't copy, just print what would be copied
+
+   _--local-dir (= "")_
+
+   Local destination directory
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
+
+   _--public  (= false)_
+
+   Tools are for a public cloud, so generate mirrors information
+
+   _--source (= "")_
+
+   Local source directory
+
+   _--stream (= "")_
+
+   Simplestreams stream for which to sync metadata
+
+   _--version (= "")_
+
+   Copy a specific major[.minor] version
+
+   
+   **Details:**
+
+
+   This copies the Juju agent software from the official agent binaries store 
+   (located at https://streams.canonical.com/juju) into a model. 
+   It is generally done when the model is without Internet access.
+
+   Instead of the above site, a local directory can be specified as source.
+   The online store will, of course, need to be contacted at some point to get
+   the software.
+
+
+   **Examples:**
+
+          # Download the software (version auto-selected) to the model:
+          juju sync-agent-binaries --debug
+          # Download a specific version of the software locally:
+          juju sync-agent-binaries --debug --version 2.0 --local-dir=/home/ubuntu/sync-agent-binaries
+          # Get locally available software to the model:
+          juju sync-agent-binaries --debug --source=/home/ubuntu/sync-agent-binaries
+
+
+   **See also:**
+
+   [upgrade-juju](#upgrade-juju)  
+
+   **Aliases:**
+
+   `sync-tools`
 
 
 
@@ -8726,7 +9154,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -8890,7 +9318,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
@@ -8958,7 +9386,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--path (= "")_
 
@@ -9123,9 +9551,13 @@ Click on the expander to see details for each command.
 
    Don't change anything, just report what would be changed
 
+   _--ignore-agent-versions  (= false)_
+
+   Don't check if all agents have already reached the current version
+
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--reset-previous-upgrade  (= false)_
 
@@ -9159,7 +9591,7 @@ Click on the expander to see details for each command.
 
    
    If the controller is without internet access, the client must first supply
-   the software to the controller's cache via the `juju sync-tools` command.
+   the software to the controller's cache via the `juju sync-agent-binaries` command.
    The command will abort if an upgrade is in progress. It will also abort if
    a previous upgrade was not fully completed (e.g.: if one of the
    controllers in a high availability model failed to upgrade).
@@ -9179,7 +9611,7 @@ Click on the expander to see details for each command.
 
    **See also:**
 
-   [sync-tools](#sync-tools)  
+   [sync-agent-binaries](#sync-agent-binaries)  
 
 
 
@@ -9199,7 +9631,7 @@ Click on the expander to see details for each command.
 
    _-m, --model (= "")_
 
-   Model to operate in. Accepts [<controller name>:]<model name>
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    
    **Details:**
