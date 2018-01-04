@@ -2,11 +2,9 @@ Title: Juju commands and usage
 
 # Juju Command reference
 
-You can get a list of the currently used commands by entering
-`juju help commands` from the command line. The currently understood commands
-are listed here, with usage and examples.
-
-Click on the expander triangle to see the details for each command. 
+You can get a list of Juju commands by entering `juju help commands` on the
+command line. These commands are also listed here, with usage and examples.
+Click on the expander triangle to see details of each command. 
 
 ^# actions
 
