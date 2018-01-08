@@ -29,6 +29,9 @@ There are a few exceptions to the above rule. When creating a controller the
 client needs to both access and then transfer both the 'juju-gui' charm and the
 Juju agent to the controller.
 
+Recall that a Juju agent (`jujud`) runs on each machine (and unit) and acts as
+an intermediary between the machine/unit and the controller.
+
 ## Network criteria
 
 Here we examine what network access is needed to various internet-based

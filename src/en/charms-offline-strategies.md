@@ -117,15 +117,38 @@ pass it on to the machine. It is possible, however, to set up an agent mirror
 so the remote site is not solicited by the controller. Download the latest few
 agents and configure one of the aforementioned web servers accordingly.
 Updates to the mirrored agents will be needed as new versions of Juju itself
-become available. Another approach is to have the client download agents and
-use the `juju sync-agent-binaries` command to push them to a model.
+become available.
+
+Agent downloads can be performed manually from the above site where, for
+example, the file `juju-2.3.1-ubuntu-amd64.tgz` is the 2.3.1 agent for all
+Ubuntu releases for the AMD64 architecture.
+
+Downloads can also be made with the `juju sync-agent-binaries` command. Note
+that this method results in a larger download as only the major and minor
+version numbers can be specified (e.g. 2.3 and not 2.3.1) and all architectures
+are retrieved. Additionally, there will be a file for every Ubuntu release even
+though they are all identical (e.g. `juju-2.3.1-xenial-amd64.tgz` ==
+`juju-2.3.1-bionic-amd64.tgz`). Each one of these files is approximately 27 MiB
+in size.
+
+Below, all 2.3 agents are retrieved and placed into a local directory:
+
+```bash
+mkdir -p /home/ubuntu/tmp/agents
+juju sync-agent-binaries --version 2.3 --local-dir=/home/ubuntu/tmp/agents-2.3
+```
+
+!!! Note:
+    Once the agents are downloaded, the `juju sync-agent-binaries` command can
+    also be used to push them to a model, thereby foregoing the need for a
+    mirror.
 
 ## Cloud images mirror
 
-A mirror can be made of the [official cloud images][upstream-cloud-images].
-This will primarily be useful for a localhost cloud (LXD) but a local OpenStack
-installation can also make use of such a mirror if LXD containers are put on
-its instances.
+A mirror can be made of the [official cloud images][upstream-cloud-images]
+(`http://cloud-images.ubuntu.com`). This will primarily be useful for a
+localhost cloud (LXD) but a local OpenStack installation can also make use of
+such a mirror if LXD containers are put on its instances.
 
 
 <!-- LINKS -->
