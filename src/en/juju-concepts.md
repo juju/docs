@@ -16,7 +16,9 @@ and is used to issue commands to deploy and manage applications.
 The Juju agent is software that runs on every Juju machine. There is a *machine
 agent* that operates at the machine level and a *unit agent* that works at the
 application unit level. Thus there are typically at least two agents running on
-each machine (one for the machine and one for a deployed application/charm).
+each regular (non-controller) machine: one for the machine and one for a
+deployed application/charm. The controller normally has a single machine agent
+running.
 
 A machine agent manages its respective unit agents as well as any containers
 that may be requested on that machine. In particular, it is the machine agent
