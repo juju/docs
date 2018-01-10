@@ -1,4 +1,5 @@
 Title: Juju concepts
+TODO:  Review required
 
 # Juju concepts
 
@@ -9,6 +10,25 @@ manage Juju, whether as an administrator or as a regular user. It is
 installed, via an APT package ('juju'), onto your personal workstation. 
 This software manages your connection to Juju controllers in the cloud, 
 and is used to issue commands to deploy and manage applications.
+
+## Juju agent
+
+The Juju agent is software that runs on every Juju machine. There is a *machine
+agent* that operates at the machine level and a *unit agent* that works at the
+application unit level. Thus there are typically at least two agents running on
+each regular (non-controller) machine: one for the machine and one for a
+deployed application/charm. The controller normally has a single machine agent
+running.
+
+A machine agent manages its respective unit agents as well as any containers
+that may be requested on that machine. In particular, it is the machine agent
+that creates the unit agent. The unit agents are responsible for all charm
+related tasks.
+
+In general, all agents track state changes, respond to those changes, and pass
+updated information back to the controller. A model's status (`juju status`
+command) is built up from the communication between a controller and all the
+agents running in that model.
 
 ## Clouds
 
