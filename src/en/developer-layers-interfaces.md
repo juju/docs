@@ -177,7 +177,7 @@ from charms.reactive import set_flag, clear_flag
 from charms.reactive import Endpoint
 
 
-class HttpProvides(EndpointInterface):
+class HttpProvides(Endpoint):
     def publish_info(self, port, hostname=None):
         """
         Publish the port and hostname of the website over the relationship so
@@ -245,7 +245,7 @@ from charms.reactive import set_flag, clear_flag
 from charms.reactive import Endpoint
 
 
-class HttpRequires(EndpointInterface):
+class HttpRequires(Endpoint):
     # {endpoint_name} will be filled in by the reactive framework. This is the
     # name of the endpoint as defined in `metadata.yaml`
     @when_any('endpoint.{endpoint_name}.changed.hostname',
@@ -254,13 +254,13 @@ class HttpRequires(EndpointInterface):
         # Detect changes to the hostname or port field on any remote unit
         # and translate that into the new-website flag. Then, clear the
         # changed field flags so that we can detect further changes.
-        set_flag(self.flag('endpoint.{endpoint_name}.new-website'))
-        clear_flag(self.flag('endpoint.{endpoint_name}.changed.hostname'))
-        clear_flag(self.flag('endpoint.{endpoint_name}.changed.port'))
+        set_flag(self.expand_name('endpoint.{endpoint_name}.new-website'))
+        clear_flag(self.expand_name('endpoint.{endpoint_name}.changed.hostname'))
+        clear_flag(self.expand_name('endpoint.{endpoint_name}.changed.port'))
 
     @when_not('endpoint.{endpoint_name}.joined')
     def broken(self):
-        clear_flag(self.flag('endpoint.{endpoint_name}.new-website'))
+        clear_flag(self.expand_name('endpoint.{endpoint_name}.new-website'))
 
     def websites(self):
         """
@@ -284,7 +284,7 @@ class HttpRequires(EndpointInterface):
         websites = []
         #
         # Multiple relations can connect to the same endpoint. All relations
-        # of the same endpoint will be handled by the same EndpointInterface
+        # of the same endpoint will be handled by the same Endpoint
         # class.
         #
         # Loop over all units of all relations connected to this enpoint,
