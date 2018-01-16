@@ -3,7 +3,7 @@ Title: Writing layer example
 # Writing a layer by example
 
 In this document, we will be writing a charm layer that installs and
-configures [the Vanilla forum software][].
+configures the [Vanilla forum software][].
 
 > Vanilla is an open source, themeable, pluggable, and multi-lingual forum
 > software, which enables communities to host a forum for discussion topics
@@ -16,20 +16,20 @@ configures [the Vanilla forum software][].
 
 ## Prepare your workspace
 
-Building off of [`$JUJU_REPOSITORY`](reference-environment-variables.html#juju_repository),
+Building off of [`$JUJU_REPOSITORY`][JUJU_REPOSITORY],
 we want to add two more environment variables to your session. We recommend
 adding these into your shell configuration file so that they are always
 available.
 
 ### LAYER_PATH
 
-First off, you require a [local charm repository](./charms-deploying.html) in
+First off, you require a [local charm repository][charms-deploying] in
 which to work. This involves creating three directories -- `layers`,
 `interfaces`, and `charms` -- and setting some environment variables.
 
 The `layers` directory contains the source code of the layered charm covered in
 our examples. The `interfaces` directory is where you'd place any
-[interface-layers](./developer-layers-interfaces.html) you may wish to write, and the
+[interface-layers][interface-layers] you may wish to write, and the
 `charms` directory holds the assembled, ready to deploy charm.
 
 ```bash
@@ -216,6 +216,8 @@ The final directory structure looks like this:
 
 ![directory tree](./media/author-charm-composing-01.png)
 
+Check out the [repo][] for the complete charm layer.
+
 It's worth noting that there is a file for each layer in the `reactive`
 directory.  This allows the handlers for each layer to remain separate and
 not conflict.  All handlers from each of those files will be discovered and
@@ -250,15 +252,16 @@ juju add-relation mysql vanilla
 juju expose vanilla
 ```
 
-[writing]: ./authors-charm-writing.html
-[charm-helpers]: https://pypi.python.org/pypi/charmhelpers/
-[Vanilla forum software]: http://vanillaforums.org/
-[deploying]: ./charms-deploying.html
+[http interface]: https://github.com/juju-solutions/interface-http
+[Vanilla forum software]: https://vanillaforums.org/
 [apache-php5]: https://github.com/johnsca/apache-php
 [mysql interface]: https://github.com/johnsca/juju-relation-mysql
 [charms.reactive]: https://charmsreactive.readthedocs.io/
-[reactive-bash]: https://charmsreactive.readthedocs.io/#non-python-reactive-handlers
+[reactive-bash]: https://charmsreactive.readthedocs.io/en/latest/bash-reactive.html
 [repo]: https://github.com/johnsca/layered-vanilla
-[interfaces.juju.solutions]: http://interfaces.juju.solutions/
+[interfaces.juju.solutions]: https://interfaces.juju.solutions/
 [discovery and dispatch rules]: https://charmsreactive.readthedocs.io/#discovery-and-dispatch-of-reactive-handlers
 [charm-tools]: ./tools-charm-tools.html
+[JUJU_REPOSITORY]: ./reference-environment-variables.html#juju_repository
+[charms-deploying]: ./charms-deploying.html
+[interface-layers]: ./developer-layers-interfaces.html

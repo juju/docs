@@ -171,11 +171,11 @@ so the charm can react storage is attached and when it is detached.
 1. [name]-storage-attached
 1. [name]-storage-detached
 
-There is more information about the 
+There is more information about the
 [storage feature in the Juju documentation](./charms-storage.html).
 
-While these concepts are important to understand how Juju works, 
-[creating a charm in the reactive framework](./authors-charm-building.html)
+While these concepts are important to understand how Juju works,
+[creating a charm in the reactive framework](./developer-layers.html)
 reduces the need to interact directly with the event model. We will preserve
 the install and config-changed hook(s) in most layers. The relation hooks
 are generated when using an interface layer, during the `charm build` process.
