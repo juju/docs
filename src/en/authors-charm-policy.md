@@ -45,7 +45,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
 
 Not following these guidelines will result in a WARNING (W:) in `charm test`:
 
-- Should be built using [charm layers](authors-charm-building.html).
+- Should be built using [charm layers](developer-layers.html).
 - Should be delivered using Juju Resources by default.
 
 ## Testing and quality guidelines
@@ -146,7 +146,7 @@ policy, and thus is removed from the recommended status in the Juju Charm Store.
 This file is an [important component](authors-charm-components.html) of a charm.
 
 Check out the [MySQL metadata.yaml]
-(https://bazaar.launchpad.net/~charmers/charms/precise/mysql/trunk/view/head:/metadata.yaml) 
+(https://bazaar.launchpad.net/~charmers/charms/precise/mysql/trunk/view/head:/metadata.yaml)
 as an example.
 
 ## config.yaml
