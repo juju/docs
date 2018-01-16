@@ -65,20 +65,18 @@ represent the distilled DevOps knowledge of experts. Charms make it easy to
 reliably and repeatedly deploy applications, then scale up as required with
 minimal effort.
 
-## Relations
+The simplest charm scenario is when one is deployed (by the Juju client) with
+the `juju deploy` command without any options to qualify the request. By
+default, a new instance will be created in the backing cloud and the
+application will be installed within it:
 
-Few applications are designed to be run in isolation. Juju charms also contain 
-the knowledge of how to connect applications together using common interfaces 
-they share. For example, WordPress supports an 'http' interface (for serving the 
-website) and a 'db' interface (for the database which stores the content of
-the site). Any other service which can support these interfaces (e.g haproxy for
-the website and MySQL for the database) can connect to the WordPress charm in 
-a meaningful way.
+![machine][img__charms]
+[img__charms]: ../media/juju-charms.png
 
 ## Bundles
 
 A bundle is a ready-to-run collection of applications which have been modelled
-to  work together - this can include particular configurations and relations
+to work together - this can include particular configurations and relations
 between the software to be deployed. For example, a WordPress bundle may include
 the Wordpress charm, the MySQL charm, and the relation between them. When
 deployed, the software is set up and relations are made as per the bundle's 
@@ -99,21 +97,66 @@ to conserve resources) or possibly no units at all: a machine can be created
 independently of applications, though usually this is with the intention of 
 eventually running an application on it!
 
+Represented below is a very standard Juju machine. It has a single deployed
+charm:
+
+![machine][img__machine]
+[img__machine]: ../media/juju-machine.png
+
+Here we have a machine with a deployed charm in addition to a charm deployed on
+a LXD container within that machine:
+
+![machine-lxd][img__machine-lxd]
+[img__machine-lxd]: ../media/juju-machine-lxd.png
+
 ## Units/Applications
 
-A unit is a running instance of a given Juju application. Simple applications 
+A unit is a running instance of a given Juju application. Simple applications
 may be deployed with a single application unit, but it is possible for an
 individual application to have multiple units running in independent machines.
-All units for a given application will share the same charm, the same 
+All units for a given application will share the same charm, the same
 relations, and the same user-provided configuration.
 
-For instance, one may deploy a single MongoDB application, and specify that it 
-should run 3 units, so that the replica set is resilient to failures. 
-Internally, even though the replica set shares the same user-provided 
-configuration, each unit may be performing different roles within the replica 
-set, as defined by the charm.
+For instance, one may deploy a single MongoDB application, and specify that it
+should run three units (with one machine per unit), so that the replica set is
+resilient to failures. Internally, even though the replica set shares the same
+user-provided configuration, each unit may be performing different roles within
+the replica set, as defined by the charm.
+
+The following diagram represents the scenario described above. For simplicity,
+the agents have been omitted:
+
+![units][img__units]
+[img__units]: ../media/juju-machine-units.png
+
+## Relations
+
+The above section described the possibility of running several instances of the
+same application. In general, however, few applications are designed to be run
+in isolation and charms contain the knowledge of how to connect different
+applications together. These inter-application connections are called
+*relations* and they are formed by connecting *interfaces* of the same type.
+
+For example, WordPress supports, among others, an 'http' interface (for serving
+the website) and a 'db' interface (for the database which stores the content of
+the site). Any other application which supports these interface types can
+connect to the WordPress charm in a meaningful way.
+
+Below we see WordPress with relations set up between both MySQL and Apache (a
+potential relation is shown with HAProxy):
+
+![relations][img__relations]
+[img__relations]: ../media/juju-relations.png
+
+Some of the above application units show unused interfaces. It is the overall
+purpose of the installation which will dictate what interfaces get used. Some
+relation types are required by the main charm (WordPress here) while some
+relation types are optional. A charm's `metadata.yaml` file will expose such
+details. See [Managing relations][charms-relations] for more details on
+relations.
 
 [maas]: https://maas.io "Metal as a Service"
 [bundles]: ./charms-bundles.html
 [lxd]: http://www.ubuntu.com/cloud/lxd
 [charmstore]: https://jujucharms.com/store
+[charms-relations]: ./charms-relations.html 
