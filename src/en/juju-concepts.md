@@ -11,6 +11,19 @@ installed, via an APT package ('juju'), onto your personal workstation.
 This software manages your connection to Juju controllers in the cloud, 
 and is used to issue commands to deploy and manage applications.
 
+![machine][img__client-2]
+[img__client-2]: ../media/juju-client-2.png
+
+In the case of the localhost cloud (LXD), the cloud is housed within the same
+system as the Juju client:
+
+![machine][img__client-3]
+[img__client-3]: ../media/juju-client-3.png
+
+!!! Note:
+    Compatibility with a remote/networked LXD daemon is not implemented at this
+    time.
+
 ## Juju agent
 
 The Juju agent is software that runs on every Juju machine. There is a *machine
