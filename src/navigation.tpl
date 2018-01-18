@@ -53,6 +53,7 @@
                 <li><a href="actions.html">Working with Actions</a></li>
                 <li><a href="charms-storage.html">Using storage</a></li>
                 <li><a href="charms-metrics.html">Viewing utilization with metrics</a></li>
+                <li><a href="charms-offline.html">Working offline</a></li>
             </ul>
         </li>
         <li><a href="charms-bundles.html">Charm bundles</a></li>
