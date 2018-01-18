@@ -20,8 +20,8 @@ system as the Juju client:
 ![machine][img__client-3]
 [img__client-3]: ../media/juju-client-3.png
 
-Although LXD itself can function over the network, Juju does not support this
-feature.
+Although LXD itself can operate over the network, Juju does not support this.
+The client *must* be local to the LXD containers.
 
 ## Juju agent
 
@@ -63,9 +63,14 @@ multiple models.
 
 ## Models
 
-A model is the space within which you can deploy applications. A controller can 
-manage several models, and the models themselves can even be shared amongst
-multiple users.
+A model is associated with a single controller and is the space within which
+applications are deployed. A controller can have an indefinite number of models
+and each model can have an indefinite number of machines (and thus
+applications). Models themselves can be shared amongst multiple users.
+
+The controller model is the management model and is intended to contain a
+single machine, the actual controller. All other models are considered regular
+and are used to run workloads.
 
 ![machine][img__models]
 [img__models]: ../media/juju-models.png
