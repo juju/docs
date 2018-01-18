@@ -138,7 +138,7 @@ test-mode                    | bool   | false    |                            | 
 transmit-vendor-metrics      | bool   | true     |                            | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics.
 vpc-id                       | string |          |                            | The virtual private cloud (VPC) ID for use when configuring a new model to be deployed to a specific VPC during `add-model`.
 
-### Apt mirror
+### APT mirror
 
 The APT packaging system is used to install and upgrade software on machines
 provisioned in the model, and many charms also use APT to install software for
@@ -149,16 +149,15 @@ APT packages to use, by setting 'apt-mirror':
 juju model-config apt-mirror=http://archive.ubuntu.com/ubuntu/
 ```
 
-It is also possible to set this to a local mirror if desired.
-
-You may also run:
+To restore the default behaviour you would run:
 
 ```bash
 juju model-config --reset apt-mirror
 ```
 
-to restore the default behaviour in a running model.
-
+The `apt-mirror` option is often used to point to a local mirror. The
+[Working offline][charms-offline] page covers mirrors, proxies, and other
+aspects related to network-restricted environments.
 
 ### APT updates and upgrades with faster machine provisioning
 
@@ -303,4 +302,5 @@ so on. Only different patch numbers may be used with `agent-version`.
 
 <!-- LINKS -->
 
+[charms-offline]: ./charms-offline.html
 [controllers-creating]: ./controllers-creating.html
