@@ -20,9 +20,8 @@ system as the Juju client:
 ![machine][img__client-3]
 [img__client-3]: ../media/juju-client-3.png
 
-!!! Note:
-    Compatibility with a remote/networked LXD daemon is not implemented at this
-    time.
+Although LXD itself can function over the network, Juju does not support this
+feature.
 
 ## Juju agent
 
@@ -67,6 +66,9 @@ multiple models.
 A model is the space within which you can deploy applications. A controller can 
 manage several models, and the models themselves can even be shared amongst
 multiple users.
+
+![machine][img__models]
+[img__models]: ../media/juju-models.png
 
 ## Charms
 
