@@ -171,7 +171,6 @@
                 <li><a
                     href="authors-subordinate-applications.html">Subordinate applications</a></li>
                 <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
-                <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="authors-charm-store.html">The Juju Charm Store</a>
