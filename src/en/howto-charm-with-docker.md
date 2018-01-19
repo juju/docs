@@ -1,4 +1,4 @@
-Title: Using Docker in charms  
+Title: Using Docker in charms
 
 # Charming with Docker
 
@@ -47,7 +47,7 @@ root charm directory.
 #### Building Charms
 
 The docker layer makes use of the
-[Charm Layers](authors-charm-building.html)
+[Charm Layers](developer-layers.html)
 concept building off the base charm and creating its own layer of added
 functionality.
 
@@ -105,7 +105,7 @@ An example of a charm using the reactive pattern is the
 It also uses the compose workflow and can serve as the base for other Docker
 charms. This document will focus on the reactive parts of the layer-docker
 charm. You can read more about layers in the
-+[building a charm with layers documentation](authors-charm-building.html).
++[building a charm with layers documentation](developer-layers.html).
 
 ```no-highlight
 ├── composer.yaml
