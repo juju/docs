@@ -1,4 +1,4 @@
-Title: Charm Layer.yaml Reference  
+Title: Charm Layer.yaml Reference
 
 # Layer.yaml
 
@@ -39,21 +39,45 @@ options:
 
 ## Yaml Modifications
 
-Config and metadata take optional lists of keys to remove from `config.yaml`
+`config` and `metadata` take optional lists of keys to remove from `config.yaml`
 and `metadata.yaml` when generating their data. This allows for charms to,
 for example, narrow what they expose to clients.
 
 ```yaml
-Keys:
-  includes: ["layer:basic", "interface:mysql"]
-  config:
-    deletes:
-        - key names
-  metadata:
-    deletes:
-        - key names
+includes: ["layer:basic", "interface:mysql"]
+config:
+  deletes:
+      - key names
+metadata:
+  deletes:
+      - key names
 ```
 
+## Ignoring files
+
+If a layer contains files that you do not want included in the built charm, use
+`ignore` and `exclude` to achieve this. These use the same format as `.gitignore`
+and `.bzrignore` files.
+
+- `ignore` is a list of files or directories to ignore from a lower layer. In
+  the example below, all `tests` directories from `layer:basic` and `layer:apt`
+  will not be included in the built charm. However, `tests` directories from
+  this layer and higher layers will still be included, using the same compositing
+  rules as normal.
+- `exclude` is a list of files or directories to exclude from this layer.  In
+  the example below, the `unit_tests` directory and the `README.md` file from
+  this layer will not be included in the built charm. However, any `unit_tests`
+  directory or `README.md` file in either a lower or higher level layer will be
+  included, using the same compositing rules as normal.
+
+```yaml
+includes: ["layer:basic", "layer:apt"]
+ignore:
+    - tests
+exclude:
+    - unit_tests
+    - README.md
+```
 
 ## Custom Tactics
 
