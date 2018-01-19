@@ -464,4 +464,4 @@ Click the triangle to reveal a summary of a sub-command.
 
 [snaps]: https://docs.snapcraft.io/snaps/
 [snaps-install]: https://snapcraft.io/docs/core/install
-[charm-tools]: https://launchpad.net/charm-tools
+[charm-tools]: https://github.com/juju/charm-tools
