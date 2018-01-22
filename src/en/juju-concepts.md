@@ -1,5 +1,4 @@
 Title: Juju concepts
-TODO:  Review required
 
 # Juju concepts
 
@@ -12,13 +11,11 @@ This software manages your connection to Juju controllers in the cloud,
 and is used to issue commands to deploy and manage applications.
 
 ![machine][img__client-2]
-[img__client-2]: ../media/juju-client-2.png
 
 In the case of the localhost cloud (LXD), the cloud is housed within the same
 system as the Juju client:
 
 ![machine][img__client-3]
-[img__client-3]: ../media/juju-client-3.png
 
 Although LXD itself can operate over the network, Juju does not support this.
 The client *must* be local to the LXD containers.
@@ -73,7 +70,6 @@ single machine, the actual controller. All other models are considered regular
 and are used to run workloads.
 
 ![machine][img__models]
-[img__models]: ../media/juju-models.png
 
 ## Charms
 
@@ -91,7 +87,6 @@ default, a new instance will be created in the backing cloud and the
 application will be installed within it:
 
 ![machine][img__charms]
-[img__charms]: ../media/juju-charms.png
 
 ## Bundles
 
@@ -121,13 +116,11 @@ Represented below is a very standard Juju machine. It has a single deployed
 charm:
 
 ![machine][img__machine]
-[img__machine]: ../media/juju-machine.png
 
 Here we have a machine with a deployed charm in addition to a charm deployed on
 a LXD container within that machine:
 
 ![machine-lxd][img__machine-lxd]
-[img__machine-lxd]: ../media/juju-machine-lxd.png
 
 ## Units/Applications
 
@@ -147,7 +140,6 @@ The following diagram represents the scenario described above. For simplicity,
 the agents have been omitted:
 
 ![units][img__units]
-[img__units]: ../media/juju-machine-units.png
 
 ## Relations
 
@@ -166,7 +158,6 @@ Below we see WordPress with relations set up between both MySQL and Apache (a
 potential relation is shown with HAProxy):
 
 ![relations][img__relations]
-[img__relations]: ../media/juju-relations.png
 
 Some of the above application units show unused interfaces. It is the overall
 purpose of the installation which will dictate what interfaces get used. Some
@@ -175,8 +166,20 @@ relation types are optional. A charm's `metadata.yaml` file will expose such
 details. See [Managing relations][charms-relations] for more details on
 relations.
 
+
+<!-- LINKS -->
+
 [maas]: https://maas.io "Metal as a Service"
 [bundles]: ./charms-bundles.html
 [lxd]: http://www.ubuntu.com/cloud/lxd
 [charmstore]: https://jujucharms.com/store
 [charms-relations]: ./charms-relations.html 
+
+[img__relations]: ./media/juju-relations.png
+[img__units]: ./media/juju-machine-units.png
+[img__machine-lxd]: ./media/juju-machine-lxd.png
+[img__machine]: ./media/juju-machine.png
+[img__charms]: ./media/juju-charms.png
+[img__models]: ./media/juju-models.png
+[img__client-2]: ./media/juju-client-2.png
+[img__client-3]: ./media/juju-client-3.png
