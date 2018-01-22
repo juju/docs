@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="juju-machine-units.svg"
+   inkscape:export-filename="/home/peter/hosts/zubir/git/pmatulis_juju-docs/htmldocs/media/juju-machine-units.png"
+   inkscape:export-xdpi="91.849998"
+   inkscape:export-ydpi="91.849998">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient8510"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#007aa6;stop-opacity:1;"
+         offset="0"
+         id="stop8512" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.8962646"
+     inkscape:cx="372.04724"
+     inkscape:cy="845.79038"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1033"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid8546" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 185.52218,130.3622 112.47782,0"
+       id="path13755"
+       inkscape:connector-curvature="0" />
+    <path
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 393.52218,130.3622 112.47782,0"
+       id="path13755-3"
+       inkscape:connector-curvature="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="26.177177"
+       y="34.753242"
+       id="text8548-7-0-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan8550-5-9-0"
+         x="26.177177"
+         y="34.753242"
+         style="font-weight:bold">machine 1</tspan></text>
+    <g
+       id="g13676"
+       transform="translate(140,-172)" />
+    <rect
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#808080;fill-opacity:0.12156863;fill-rule:nonzero;stroke:#808080;stroke-width:3.2349999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
+       id="rect13652"
+       width="180"
+       height="140"
+       x="23.522186"
+       y="41.436813"
+       rx="8.0483904" />
+    <rect
+       rx="8.2962503"
+       y="97.141113"
+       x="90.469223"
+       height="62.110134"
+       width="94.799683"
+       id="rect4140-3-6-6-1"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#00bbff;fill-opacity:0.18436453;fill-rule:nonzero;stroke:#007aa6;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;display:inline;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="96.177185"
+       y="110.75323"
+       id="text8548-3-1-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="96.177185"
+         y="110.75323"
+         id="tspan8608-7-3">mongodb</tspan><tspan
+         sodipodi:role="line"
+         x="96.177185"
+         y="125.75323"
+         id="tspan15159">unit</tspan></text>
+    <g
+       id="g13688-6"
+       transform="translate(-146,-81.999999)">
+      <rect
+         rx="8.0483904"
+         y="123.43681"
+         x="377.52219"
+         height="140"
+         width="180"
+         id="rect13652-9"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#808080;fill-opacity:0.12156863;fill-rule:nonzero;stroke:#808080;stroke-width:3.2349999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate" />
+      <rect
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#00bbff;fill-opacity:0.18436453;fill-rule:nonzero;stroke:#007aa6;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
+         id="rect4140-3-6-6-1-3"
+         width="94.799683"
+         height="62.110134"
+         x="234.46922"
+         y="269.14111"
+         rx="8.2962503"
+         transform="translate(210,-90)" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text8548-3-1-0-7"
+         y="192.75323"
+         x="450.17719"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;display:inline;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="192.75323"
+           x="450.17719"
+           id="tspan8550-56-8-6-4"
+           sodipodi:role="line">mongodb</tspan><tspan
+           id="tspan8608-7-3-5"
+           y="207.75323"
+           x="450.17719"
+           sodipodi:role="line">unit</tspan></text>
+    </g>
+    <g
+       id="g13688-6-2"
+       transform="translate(60,-81.999999)">
+      <rect
+         rx="8.0483904"
+         y="123.43681"
+         x="377.52219"
+         height="140"
+         width="180"
+         id="rect13652-9-5"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#808080;fill-opacity:0.12156863;fill-rule:nonzero;stroke:#808080;stroke-width:3.2349999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate" />
+      <rect
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#00bbff;fill-opacity:0.18436453;fill-rule:nonzero;stroke:#007aa6;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
+         id="rect4140-3-6-6-1-3-4"
+         width="94.799683"
+         height="62.110134"
+         x="234.46922"
+         y="269.14111"
+         rx="8.2962503"
+         transform="translate(210,-90)" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text8548-3-1-0-7-7"
+         y="192.75323"
+         x="450.17719"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;display:inline;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="192.75323"
+           x="450.17719"
+           id="tspan8550-56-8-6-4-4"
+           sodipodi:role="line">mongodb</tspan><tspan
+           id="tspan8608-7-3-5-4"
+           y="207.75323"
+           x="450.17719"
+           sodipodi:role="line">unit</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="234.17717"
+       y="34.753204"
+       id="text8548-7-0-5-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan8550-5-9-0-7"
+         x="234.17717"
+         y="34.753204"
+         style="font-weight:bold">machine 2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="440.17719"
+       y="34.753204"
+       id="text8548-7-0-5-0-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan8550-5-9-0-7-6"
+         x="440.17719"
+         y="34.753204"
+         style="font-weight:bold">machine 3</tspan></text>
+  </g>
+</svg>
