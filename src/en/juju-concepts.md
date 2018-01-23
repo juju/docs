@@ -8,9 +8,9 @@ To Juju, a *cloud* (or backing cloud) is a resource which provides machines
 (instances), and possibly storage, in order for application units to be
 deployed upon them. This includes public clouds such as Amazon Web Services,
 Google Compute Engine, and Microsoft Azure as well as private OpenStack-based
-clouds. Juju can also make use of environment which are not clouds per se, but
-which Juju can treat as a cloud. [MAAS][maas] and [LXD][lxd] fit into this
-latter category.
+clouds. Juju can also make use of environments which are not clouds per se, but
+which Juju can nonetheless treat as a cloud. [MAAS][maas] and [LXD][lxd] fit
+into this last category.
 
 See [Clouds][clouds] to learn more.
 
