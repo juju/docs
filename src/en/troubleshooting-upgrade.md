@@ -94,3 +94,21 @@ juju upgrade-juju --ignore-agent-versions
 !!! Note:
     The flag `--ignore-agent-versions` is only available starting with Juju
     2.2.6.
+
+
+## Case #4 - Recovering from an upgrade failure
+
+If an attempted upgrade results in failure it may prove difficult to return to
+a working setup. The first remediation plan is to remove the controller with
+the `juju destroy-controller` or `juju kill-controller` commands. If this is
+insufficient one way forward is to unregister the controller, add the
+respective cloud, and then create a new controller. Doing this will not remove
+the original controller so there will remnants of it in the database. This
+method should therefore be used as a last resort. Here are the relevant
+commands:
+
+```bash
+juju unregister <controller>
+juju add-cloud --replace <cloud>
+juju bootstrap <cloud>
+```
