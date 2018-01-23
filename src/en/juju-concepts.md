@@ -1,6 +1,6 @@
-Title: Juju concepts
+Title: Concepts and terms
 
-# Juju concepts
+# Concepts and terms
 
 ## Cloud
 
