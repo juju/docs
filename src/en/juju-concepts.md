@@ -178,6 +178,7 @@ relations.
 [charms-bundles]: ./charms-bundles.html
 [charms-relations]: ./charms-relations.html 
 [clouds]: ./clouds.html
+[controllers]: ./controllers.html
 [models]: ./models.html
 
 [img__relations]: ./media/juju-relations.png
