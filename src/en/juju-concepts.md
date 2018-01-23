@@ -4,7 +4,8 @@ Title: Concepts and terms
 
 ## Cloud
 
-To Juju, a *cloud* (or backing cloud) is a resource which provides machines
+To Juju, a *cloud* (or backing cloud) is a
+resource which provides machines
 (instances), and possibly storage, in order for application units to be
 deployed upon them. This includes public clouds such as Amazon Web Services,
 Google Compute Engine, and Microsoft Azure as well as private OpenStack-based
