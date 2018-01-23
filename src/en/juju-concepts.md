@@ -2,7 +2,7 @@ Title: Juju concepts
 
 # Juju concepts
 
-## Clouds
+## Cloud
 
 To Juju, a *cloud* (or backing cloud) is a resource which provides machines
 (instances), and possibly storage, in order for application units to be
@@ -43,7 +43,7 @@ system as the Juju client:
 Although LXD itself can operate over the network, Juju does not support this.
 The client *must* be local to the LXD containers.
 
-## Models
+## Model
 
 A *model* is associated with a single controller and is the space within which
 application units are deployed. A controller can have an indefinite number of
@@ -58,9 +58,9 @@ and are used to run workloads.
 
 See [Juju models][models] for more information.
 
-## Juju agent
+## Agent
 
-The *agent* is software that runs on every Juju machine. There is a *machine
+A Juju *agent* is software that runs on every Juju machine. There is a *machine
 agent* that operates at the machine level and a *unit agent* that works at the
 application unit level. Thus there are typically at least two agents running on
 each regular (non-controller) machine: one for the machine and one for a
@@ -77,7 +77,7 @@ updated information back to the controller. A model's status (`juju status`
 command) is built up from the communication between a controller and all the
 agents running in that model.
 
-## Charms
+## Charm
 
 A Juju *charm* contains all the instructions necessary for deploying and
 configuring application units. Charms are publicly available in the online
@@ -94,10 +94,10 @@ installed within it:
 
 To learn more about charms see [Introduction to Juju Charms][charms].
 
-## Bundles
+## Bundle
 
-A *bundle* is a collection of charms which have been carefully combined and
-configured in order to automate a multi-charm solution. For example, a
+A Juju *bundle* is a collection of charms which have been carefully combined
+and configured in order to automate a multi-charm solution. For example, a
 WordPress bundle may include the 'wordpress' charm, the 'mysql' charm, and the
 relation between them. The operations are transparent to Juju and so the
 deployment can continue to be managed by Juju as if everything was performed
@@ -126,11 +126,11 @@ a LXD container within that machine:
 
 ## Units and applications
 
-A *unit* (or application unit) is deployed software. Simple applications may be
-deployed with a single application unit, but it is possible for an individual
-application to have multiple units running in different machines. All units
-for a given application will share the same charm, the same relations, and the
-same user-provided configuration.
+A Juju *unit* (or application unit) is deployed software. Simple applications
+may be deployed with a single application unit, but it is possible for an
+individual application to have multiple units running in different machines.
+All units for a given application will share the same charm, the same
+relations, and the same user-provided configuration.
 
 For example, one may deploy a single MongoDB application, and specify that it
 should run three units (with one machine per unit), so that the replica set is
@@ -143,7 +143,7 @@ the agents have been omitted:
 
 ![units][img__units]
 
-## Relations
+## Relation
 
 The above section described the possibility of running several instances of the
 same application. In general, however, few applications are designed to be run
