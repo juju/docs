@@ -124,7 +124,7 @@ a LXD container within that machine:
 
 ![machine-lxd][img__machine-lxd]
 
-## Units and applications
+## Unit and application
 
 A Juju *unit* (or application unit) is deployed software. Simple applications
 may be deployed with a single application unit, but it is possible for an
