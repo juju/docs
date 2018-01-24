@@ -94,3 +94,18 @@ juju upgrade-juju --ignore-agent-versions
 !!! Note:
     The flag `--ignore-agent-versions` is only available starting with Juju
     2.2.6.
+
+
+## Case #4 - Dealing with an upgrade failure
+
+If an attempted upgrade results in failure it may prove difficult to return to
+a working setup and you may be compelled to start anew. Doing so will make the
+old controller completely inert and you should consider it a data loss
+situation.
+
+Begin by removing the controller with the `juju destroy-controller` or
+`juju kill-controller` commands. If this is insufficient you may need to ask
+Juju to simply "forget" about the controller. This is done with the
+`juju unregister` command.
+
+Once the above is completed, a new controller can then be created.
