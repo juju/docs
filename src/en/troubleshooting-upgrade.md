@@ -96,19 +96,16 @@ juju upgrade-juju --ignore-agent-versions
     2.2.6.
 
 
-## Case #4 - Recovering from an upgrade failure
+## Case #4 - Dealing with an upgrade failure
 
 If an attempted upgrade results in failure it may prove difficult to return to
-a working setup. The first remediation plan is to remove the controller with
-the `juju destroy-controller` or `juju kill-controller` commands. If this is
-insufficient one way forward is to unregister the controller, add the
-respective cloud, and then create a new controller. Doing this will not remove
-the original controller so there will remnants of it in the database. This
-method should therefore be used as a last resort. Here are the relevant
-commands:
+a working setup and you may be compelled to start anew. Doing so will make the
+old controller completely inert and you should consider it a data loss
+situation.
 
-```bash
-juju unregister <controller>
-juju add-cloud --replace <cloud>
-juju bootstrap <cloud>
-```
+Begin by removing the controller with the `juju destroy-controller` or
+`juju kill-controller` commands. If this is insufficient you may need to ask
+Juju to simply "forget" about the controller. This is done with the
+`juju unregister` command.
+
+Once the above is completed, a new controller can then be created.
