@@ -103,8 +103,11 @@ below the table.
 | Key                        | Type   | Default  | Valid values             | Purpose |
 |:---------------------------|--------|----------|--------------------------|:---------|
 agent-metadata-url           | string |          |                          | The URL of the private stream.
-agent-stream                 | string | released | released/devel/proposed  | The version of Juju to use for deploy/upgrades. See [additional info below](#versions-and-streams).
-agent-version                | string |          |                          | The desired Juju agent version to use. See [additional info below](#versions-and-streams).
+agent-stream                 | string | released | released/devel/proposed  |
+The version of Juju to use for deploy/upgrades. See [additional info
+below](#agent-versions-and-streams).
+agent-version                | string |          |                          |
+The desired Juju agent version to use. See [additional info below](#agent-versions-and-streams).
 apt-ftp-proxy                | string |          |                          | The APT FTP proxy for the model.
 apt-http-proxy               | string |          |                          | The APT HTTP proxy for the model.
 apt-https-proxy              | string |          |                          | The APT HTTPS proxy for the model.
@@ -261,12 +264,19 @@ above, as with earlier versions of Juju.
     Even with the automatic retry enabled, it is still possible to use the
     `juju resolved unit-name/#` command to retry manually.
 
+### Image streams
 
-### Versions and streams
+Juju, by default, uses the slow-changing 'released' images when provisioning
+machines. However, the `image-stream` option can be set to 'daily' to use more
+up-to-date images, thus shortening the time it takes to perform APT package
+upgrades.
 
-The `agent-stream` option selects the versions of Juju which a model can deploy
-and upgrade to. This defaults to 'released', indicating that only the latest
-stable versions of Juju should be used, which is the recommended setting.
+### Agent versions and streams
+
+The `agent-stream` option specifies the "stream" to use when a Juju agent is to
+be installed or upgraded. This setting reflects the general stability of the
+software and defaults to 'released', indicating that only the latest stable
+version is to be used.
 
 To run the upcoming stable release (before it has passed the normal QA process)
 you can set:
@@ -275,28 +285,24 @@ you can set:
 agent-stream: proposed
 ```
 
-Alternatively, for testing purposes, you can use the latest unstable version of
-Juju by setting:
+For testing purposes, you can use the latest unstable version by setting:
 
 ```yaml
 agent-stream: devel
 ```
 
-The `agent-version` option selects a specific client version to be used, with
-some constraints. It is used as a parameter during bootstrap and permits you to
-tell Juju to bootstrap a new controller using the same major and minor version
-already in use, but with a different patch number. For example, Juju uses the
-major.minor.patch numbering scheme, so Juju 2.1.3 means major version 2, minor
-version 1, and patch version 3. On a system with this release of Juju
-installed, you can bootstrap a controller on AWS using a different patch
-release, like this:
+The `agent-version` option specifies a "patch version" for the agent that is to
+be installed on a new controller relative to the Juju client's current
+major.minor version (Juju uses a major.minor.patch numbering scheme).
+
+For example, Juju 2.3.2 means major version 2, minor version 3, and patch
+version 2. On a client system with this release of Juju installed, the machine
+agent's version for a newly-created controller would be the same. To specify a
+patch version of 1 (instead of 2), the following would be run:
 
 ```bash
-juju bootstrap aws aws --agent-version='2.1.2'
+juju bootstrap aws aws --agent-version='2.3.1'
 ```
-
-You cannot bootstrap a controller on this system using Juju 1.x, Juju 2.2, and
-so on. Only different patch numbers may be used with `agent-version`.
 
 
 <!-- LINKS -->
