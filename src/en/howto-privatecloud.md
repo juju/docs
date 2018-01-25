@@ -74,6 +74,12 @@ substituting in the appropriate values:
   - **$REGION** - The region name of the cloud.
   - **$KEYSTONE_IP** - The address of the cloud's keystone server.
 
+!!! Note:
+    You can also specify, via the `--stream` option, an image stream (see
+    [Image streams][anchor__image-streams]) that is not 'released' (i.e.
+    'daily'). However, doing so will require you to specify this stream
+    explicitly when using this metadata to create any subsequent controllers.
+
 If you have images for multiple series of Ubuntu, run this command again for
 each series substituting **$OS_SERIES** with the series name and **$IMAGE_ID** with
 the image ID that matches that series.
@@ -192,3 +198,16 @@ juju bootstrap openstack
 --config network=d54a6557-e114-4e26-98b8-55c814fb938a
 ```
 
+!!! Note:
+    An image stream will need to be explicitly stated, via the 'image-stream'
+    model config option, if a non-default image stream was chosen during the
+    metadata-creation step above.
+
+See [Creating a controller][controllers-creating] for details on creating a
+controller.
+
+
+<!-- LINKS -->
+
+[anchor__image-streams]: ./models-config.html#image-streams
+[controllers-creating]: ./controllers-creating.html
