@@ -103,28 +103,26 @@ below the table.
 | Key                        | Type   | Default  | Valid values               | Purpose  |
 |:---------------------------|--------|----------|----------------------------|:---------|
 agent-metadata-url           | string |          |                            | The URL of the private stream.
-agent-stream                 | string | released | released/devel/proposed    | The version of Juju to use for deploy/upgrades. See [additional info below](#versions-and-streams).
-agent-version                | string |          |                            | The desired Juju agent version to use. See [additional info below](#versions-and-streams).
+agent-stream                 | string | released | released/devel/proposed    | The stream to use for deploy/upgrades of agents. See [additional info below](#agent-versions-and-streams).
+agent-version                | string |          |                            | The patch number to use for agents. See [additional info below](#agent-versions-and-streams).
 apt-ftp-proxy                | string |          |                            | The APT FTP proxy for the model.
 apt-http-proxy               | string |          |                            | The APT HTTP proxy for the model.
 apt-https-proxy              | string |          |                            | The APT HTTPS proxy for the model.
 apt-mirror                   | string |          |                            | The APT mirror for the model. See [additional info below](#apt-mirror).
 automatically-retry-hooks    | bool   | true     |                            | Set the policy on retying failed hooks. See [additional info below](#retrying-failed-hooks).
-container-networking-method  | string |          | local/provider/fan         | The FAN networking mode to use. Default values can be provider-specific.
 default-series               | string |          | valid series name, e.g. 'xenial' | The default series of Ubuntu to use for deploying charms.
 development                  | bool   | false    |                            | Set whether the model is in development mode.
 disable-network-management   | bool   | false    |                            | Set whether to give network control to the provider instead of Juju controlling configuration. See [additional info below](#disable-network-management).
 enable-os-refresh-update     | bool   | true     |                            | Set whether newly provisioned instances should run their respective OS's update capability. See [additional info below](#apt-updates-and-upgrades-with-faster-machine-provisioning).
 enable-os-upgrade            | bool   | true     |                            | Set whether newly provisioned instances should run their respective OS's upgrade capability. See [additional info below](#apt-updates-and-upgrades-with-faster-machine-provisioning).
 extra-info                   | string |          |                            | This is a string to store any user-desired additional metadata.
-fan-config                   | string |          | overlay_CIDR=underlay_CIDR | The FAN overlay and underlay networks in CIDR notation (space-separated).
 firewall-mode                | string | instance | instance/global/none       | The mode to use for network firewalling. See [additional info below](#firewall-mode).
 ftp-proxy                    | string |          | url                        | The FTP proxy value to configure on instances, in the FTP_PROXY environment variable.
 http-proxy                   | string |          | url                        | The HTTP proxy value to configure on instances, in the HTTP_PROXY environment variable.
 https-proxy                  | string |          | url                        | The HTTPS proxy value to configure on instances, in the HTTPS_PROXY environment variable.
 ignore-machine-addresses     | bool   | false    |                            | When true, the machine worker will not look up or discover any machine addresses.
 image-metadata-url           | string |          | url                        | The URL at which the metadata used to locate OS image ids is located.
-image-stream                 | string |          |                            | The simplestreams stream used to identify which image ids to search when starting an instance.
+image-stream                 | string |          |                            | The simplestreams stream used to identify which image ids to search when starting an instance. See [additional info below](#image-streams).
 logforward-enabled           | bool   | false    |                            | Set whether the log forward function is enabled.
 logging-config               | string |          |                            | The configuration string to use when configuring Juju agent logging (see [this link](https://godoc.org/github.com/juju/loggo#ParseConfigString) for details).
 max-status-history-age       | string |          | 72h, etc.                  | The maximum age for status history entries before they are pruned, in a human-readable time format.
@@ -262,12 +260,19 @@ above, as with earlier versions of Juju.
     Even with the automatic retry enabled, it is still possible to use the
     `juju resolved unit-name/#` command to retry manually.
 
+### Image streams
 
-### Versions and streams
+Juju, by default, uses the slow-changing 'released' images when provisioning
+machines. However, the `image-stream` option can be set to 'daily' to use more
+up-to-date images, thus shortening the time it takes to perform APT package
+upgrades.
 
-The `agent-stream` option selects the versions of Juju which a model can deploy
-and upgrade to. This defaults to 'released', indicating that only the latest
-stable versions of Juju should be used, which is the recommended setting.
+### Agent versions and streams
+
+The `agent-stream` option specifies the "stream" to use when a Juju agent is to
+be installed or upgraded. This setting reflects the general stability of the
+software and defaults to 'released', indicating that only the latest stable
+version is to be used.
 
 To run the upcoming stable release (before it has passed the normal QA process)
 you can set:
@@ -276,28 +281,24 @@ you can set:
 agent-stream: proposed
 ```
 
-Alternatively, for testing purposes, you can use the latest unstable version of
-Juju by setting:
+For testing purposes, you can use the latest unstable version by setting:
 
 ```yaml
 agent-stream: devel
 ```
 
-The `agent-version` option selects a specific client version to be used, with
-some constraints. It is used as a parameter during bootstrap and permits you to
-tell Juju to bootstrap a new controller using the same major and minor version
-already in use, but with a different patch number. For example, Juju uses the
-major.minor.patch numbering scheme, so Juju 2.1.3 means major version 2, minor
-version 1, and patch version 3. On a system with this release of Juju
-installed, you can bootstrap a controller on AWS using a different patch
-release, like this:
+The `agent-version` option specifies a "patch version" for the agent that is to
+be installed on a new controller relative to the Juju client's current
+major.minor version (Juju uses a major.minor.patch numbering scheme).
+
+For example, Juju 2.3.2 means major version 2, minor version 3, and patch
+version 2. On a client system with this release of Juju installed, the machine
+agent's version for a newly-created controller would be the same. To specify a
+patch version of 1 (instead of 2), the following would be run:
 
 ```bash
-juju bootstrap aws aws --agent-version='2.1.2'
+juju bootstrap aws aws --agent-version='2.3.1'
 ```
-
-You cannot bootstrap a controller on this system using Juju 1.x, Juju 2.2, and
-so on. Only different patch numbers may be used with `agent-version`.
 
 
 <!-- LINKS -->
