@@ -103,9 +103,8 @@ below the table.
 | Key                        | Type   | Default  | Valid values               | Purpose  |
 |:---------------------------|--------|----------|----------------------------|:---------|
 agent-metadata-url           | string |          |                            | The URL of the private stream.
-agent-stream                 | string | released | released/devel/proposed    |
-The version of Juju to use for deploy/upgrades. See [additional info below](#agent-versions-and-streams).
-agent-version                | string |          |                            | The desired Juju agent version to use. See [additional info below](#versions-and-streams).
+agent-stream                 | string | released | released/devel/proposed    | The stream to use for deploy/upgrades of agents. See [additional info below](#agent-versions-and-streams).
+agent-version                | string |          |                            | The patch number to use for agents. See [additional info below](#agent-versions-and-streams).
 apt-ftp-proxy                | string |          |                            | The APT FTP proxy for the model.
 apt-http-proxy               | string |          |                            | The APT HTTP proxy for the model.
 apt-https-proxy              | string |          |                            | The APT HTTPS proxy for the model.
@@ -125,7 +124,7 @@ http-proxy                   | string |          | url                        | 
 https-proxy                  | string |          | url                        | The HTTPS proxy value to configure on instances, in the HTTPS_PROXY environment variable.
 ignore-machine-addresses     | bool   | false    |                            | When true, the machine worker will not look up or discover any machine addresses.
 image-metadata-url           | string |          | url                        | The URL at which the metadata used to locate OS image ids is located.
-image-stream                 | string |          |                            | The simplestreams stream used to identify which image ids to search when starting an instance.
+image-stream                 | string |          |                            | The simplestreams stream used to identify which image ids to search when starting an instance. See [additional info below](#image-streams).
 logforward-enabled           | bool   | false    |                            | Set whether the log forward function is enabled.
 logging-config               | string |          |                            | The configuration string to use when configuring Juju agent logging (see [this link](https://godoc.org/github.com/juju/loggo#ParseConfigString) for details).
 max-status-history-age       | string |          | 72h, etc.                  | The maximum age for status history entries before they are pruned, in a human-readable time format.
