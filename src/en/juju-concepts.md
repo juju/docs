@@ -26,24 +26,6 @@ multiple models and users.
 
 For more information see [Controllers][controllers].
 
-## Client
-
-The Juju *client* is command line interface (CLI) software that is used to
-manage Juju, whether as an administrator or as a regular user. It is installed
-onto one's personal workstation. This software connects to Juju controllers and
-is used to issue commands that deploy and manage application units running on
-cloud instances.
-
-![machine][img__client-2]
-
-In the case of the localhost cloud (LXD), the cloud is housed within the same
-system as the Juju client:
-
-![machine][img__client-3]
-
-Although LXD itself can operate over the network, Juju does not support this.
-The client *must* be local to the LXD containers.
-
 ## Model
 
 A *model* is associated with a single controller and is the space within which
@@ -58,25 +40,6 @@ and are used to run workloads.
 ![machine][img__models]
 
 See [Juju models][models] for more information.
-
-## Agent
-
-A Juju *agent* is software that runs on every Juju machine. There is a *machine
-agent* that operates at the machine level and a *unit agent* that works at the
-application unit level. Thus there are typically at least two agents running on
-each regular (non-controller) machine: one for the machine and one for a
-deployed application/charm. The controller normally has a single machine agent
-running.
-
-A machine agent manages its respective unit agents as well as any containers
-that may be requested on that machine. In particular, it is the machine agent
-that creates the unit agent. The unit agents are responsible for all charm
-related tasks.
-
-In general, all agents track state changes, respond to those changes, and pass
-updated information back to the controller. A model's status (`juju status`
-command) is built up from the communication between a controller and all the
-agents running in that model.
 
 ## Charm
 
@@ -168,6 +131,43 @@ relation types are required by the main charm ('wordpress' here) while some
 relation types are optional. A charm's `metadata.yaml` file will expose such
 details. See [Managing relations][charms-relations] for more details on
 relations.
+
+## Client
+
+The Juju *client* is command line interface (CLI) software that is used to
+manage Juju, whether as an administrator or as a regular user. It is installed
+onto one's personal workstation. This software connects to Juju controllers and
+is used to issue commands that deploy and manage application units running on
+cloud instances.
+
+![machine][img__client-2]
+
+In the case of the localhost cloud (LXD), the cloud is housed within the same
+system as the Juju client:
+
+![machine][img__client-3]
+
+Although LXD itself can operate over the network, Juju does not support this.
+The client *must* be local to the LXD containers.
+
+## Agent
+
+A Juju *agent* is software that runs on every Juju machine. There is a *machine
+agent* that operates at the machine level and a *unit agent* that works at the
+application unit level. Thus there are typically at least two agents running on
+each regular (non-controller) machine: one for the machine and one for a
+deployed application/charm. The controller normally has a single machine agent
+running.
+
+A machine agent manages its respective unit agents as well as any containers
+that may be requested on that machine. In particular, it is the machine agent
+that creates the unit agent. The unit agents are responsible for all charm
+related tasks.
+
+In general, all agents track state changes, respond to those changes, and pass
+updated information back to the controller. A model's status (`juju status`
+command) is built up from the communication between a controller and all the
+agents running in that model.
 
 
 <!-- LINKS -->
