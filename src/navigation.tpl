@@ -125,7 +125,7 @@
             <ul class="sub">
                 <li><a href="developer-leadership.html#leadership-hooks">Leadership Hooks</a></li>
                 <li><a href="developer-leadership.html#leadership-tools">Leadership Tools</a></li>
-                <li><a href="developer-leadership.html#leadership-howtos">Leadership Howtos</a></li>
+                <li><a href="developer-leadership-howtos.html">Leadership Howtos</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="developer-actions.html">Implementing Actions</a>
