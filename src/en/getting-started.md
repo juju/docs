@@ -239,13 +239,13 @@ details  {
    version.
 
 
-## Register or login to JAAS
+## Log in to JAAS
 
 To connect to JAAS from the command line you'll need to log in to the JAAS
 controller. Enter the following command:
 
 ```bash
-juju register jimm.jujucharms.com
+juju login jaas
 ```
 
 This command will open a new window in your default web browser and use
