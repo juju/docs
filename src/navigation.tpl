@@ -12,6 +12,7 @@
     </li>
     <li class="section"><h4 class="header toggle-target">User Guide</h4>
         <ul>
+	<li><a href="juju-concepts.html">Concepts and terms</a></li>
         <li class="section"><a class="header" href="clouds.html">Clouds</a>
             <ul class="sub">
                 <li><a href="credentials.html">Cloud credentials</a></li>
@@ -215,7 +216,6 @@
         <li><a href="reference-release-notes.html">Release notes</a></li>
         <li><a href="reference-status.html">Status values</a></li>
         <li><a href="reference-numbering.html">Machine/unit numbering</a></li>
-        <li><a href="juju-concepts.html">Glossary/Concepts</a></li>
         <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
     </ul>
    </li>
