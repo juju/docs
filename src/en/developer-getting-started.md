@@ -225,4 +225,5 @@ promulgation.
 [charm-promulgation]: ./charm-promulgation.html
 [reactive]: https://en.wikipedia.org/wiki/Reactive_programming
 [mailing-list-juju]: https://lists.ubuntu.com/mailman/listinfo/juju
+[charmsreactive]: https://charmsreactive.readthedocs.io/
 [upstream-openstack-charms]: https://docs.openstack.org/charm-guide/
