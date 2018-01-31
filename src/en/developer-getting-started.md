@@ -9,6 +9,9 @@ applications in a Juju model. Many charms exist in the
 isn't covered or you would like to make your own spin on an existing
 charm, you will discover all the tools and information you need here.
 
+For an example of a community-driven charm development project see the
+[OpenStack Charm Guide][upstream-openstack-charms].
+
 ## Requirements
 
   - **A Juju controller**: If you have not used Juju before, it's
@@ -222,4 +225,4 @@ promulgation.
 [charm-promulgation]: ./charm-promulgation.html
 [reactive]: https://en.wikipedia.org/wiki/Reactive_programming
 [mailing-list-juju]: https://lists.ubuntu.com/mailman/listinfo/juju
-[charmsreactive]: https://charmsreactive.readthedocs.io/
+[upstream-openstack-charms]: https://docs.openstack.org/charm-guide/
