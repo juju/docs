@@ -138,6 +138,11 @@ credentials:
           sdc-key-id: 2048 00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff
           private-key: key (or private-key-path, like `~/.ssh/id_rsa.pub`)
           algorithm: "rsa-sha256"
+      vsphere:
+        ashley:
+          auth-type: userpass
+          password: passw0rd
+          user: administrator@xyz.com
 ```
 
 A source file like the above can be added to Juju's list of credentials with 
