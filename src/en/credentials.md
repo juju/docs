@@ -151,7 +151,7 @@ credentials:
           private-key: key (or private-key-path, like `~/.ssh/id_rsa.pub`)
           algorithm: "rsa-sha256"
       vsphere:
-        john:
+        ashley:
           auth-type: userpass
           password: passw0rd
           user: administrator@xyz.com
