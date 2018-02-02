@@ -59,8 +59,8 @@ bootstrap-retry-delay        | integer | 5       |                          | Ho
 bootstrap-address-delay      | integer | 10      |                          | How often in seconds to refresh controller addresses from the API server
 ca-cert                      | string |          |                          | The certificate of the CA that signed the controller's CA certificate, in PEM format
 controller-uuid              | string |          |                          | The key for the UUID of the controller
-identity-public-key          | string |          |                          | Sets the public key of the identity manager
-identity-url                 | string |          |                          | Sets the URL of the identity manager
+identity-public-key          | string |          |                          | Sets the public key of the identity manager. Feature not yet implemented.
+identity-url                 | string |          |                          | Sets the URL of the identity manager. Feature not yet implemented.
 max-logs-age                 | string | 72h      | 72h, etc.                | Sets the maximum age for log entries before they are pruned, in human-readable time format
 max-logs-size                | string | 4G       | 400M, 5G, etc.           | Sets the maximum size for the log collection, in human-readable memory format
 max-txn-log-size             | string | 10M      | 100M, 1G, etc.           | Sets the maximum size for the capped txn log collection, in human-readable memory format
