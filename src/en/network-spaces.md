@@ -1,8 +1,8 @@
-Title: How to configure more complex networks using spaces
-TODO: Could do with a re-write and further simplification
+Title: Network Spaces
+TODO: Critical: Review needed
       Diagrams needed
 
-# How to configure more complex networks using spaces
+# Network Spaces
 
 Juju models networks using "spaces". A space is made up of one or more routable
 subnets with common ingress and egress rules. The Juju operator can model this
@@ -16,20 +16,10 @@ that may span one or more availability zones ("zones"). There are a few simple
 considerations when using spaces:
 
 - Any given subnet can be part of one and only one space.
-- All subnets within a space are considered "equal" in terms of access control,
-  firewall rules, and routing.
-- Communication between spaces will be subject to access restrictions and
-  isolation, such as between instances running within subnets which are members
-  of different spaces.
+- All subnets within a space are considered "equal" in terms of routing.
 
 !!! Note:
     Network spaces are currently only supported by the MAAS and EC2 providers.
-
-
-!!! Note:
-    Juju's knowledge of the available spaces on the underlying cloud may lag
-    behind recent changes. To force Juju to re-examine the spaces it can use,
-    you should run the command `juju reload-spaces`.  
 
 Having multiple subnets spanning different zones within the same space enables
 Juju to perform automatic distribution of an application's units across zones
@@ -47,18 +37,15 @@ distinct security requirements:
   accessible only by the applications.
 
 HAProxy is deployed inside the "dmz" space, it is accessible from the Internet
-and proxies HTTP requests to one or more Joomla units in the "cms" space.
-The backend MySQL for Joomla is running in the "database" space. All subnets
-within the "cms" and "database" spaces provide no access from outside the
-environment for security reasons. Using spaces for deployments like this allows
-Juju to have the necessary information about how to configure the firewall and
-access control rules. In this case, instances in "dmz" can only communicate
-with instances in "apps", which in turn are the only ones allowed to access
-instances in "database".
+and proxies HTTP requests to one or more Joomla units in the "cms" space. The
+backend MySQL for Joomla is running in the "database" space. All subnets within
+the "cms" and "database" spaces provide no access from outside the environment
+for security reasons.
 
-!!! Note: Juju does not yet enforce these security restrictions. Having spaces
-and subnets available makes it possible to implement restrictions and access
-control in a future release.
+!!! Note: 
+    Future development will implement isolation among spaces via firewall
+    and/or access control rules. This measns that only network traffic required
+    for the applications to function will be allowed between spaces.
 
 ## Adding and listing spaces and subnets
 
@@ -131,6 +118,29 @@ Juju now creates bridges for containers *only* when Juju knows the spaces an
 application may require, and the container's bridge for that application will
 only connect to the required network interfaces. 
 
+### MAAS and spaces
+
+MAAS has a native knowledge of spaces. Within MAAS, spaces can be created,
+configured, and destroyed. This allows Juju to leverage MAAS spaces without
+having to manage them. However, this also means that Juju needs to "pull" such
+information from MAAS. The command `juju reload-spaces` is used to refresh
+Juju's knowledge of MAAS spaces. It works on a per-model basis. 
+
+## Using spaces
+
+Once all desired spaces have been added and/or configured they are called upon
+when adding a machine or deploying an application. There are two methods that
+can be used for doing this: via a binding or constraint.
+
+A binding operates at the software level and is a more fine-grained request. It
+associates an application endpoint with a subnet.
+
+A space constraint, like any other constraint, operates at the machine level.
+It requests that certain network connections be made available to the Juju
+machine. When a constraint is used, all application endpoints get associated
+with the space. For more general information on constraints, see the
+[Constraints][charms-constraints] page.
+
 ## Spaces and subnets example
 
 Let's model the following deployment in Juju:
@@ -197,3 +207,4 @@ open it in a browser, seeing the mediawiki page.
 
 [createbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [deployspaces]: ./charms-deploying.html#deploying-to-spaces
+[charms-constraints]: ./charms-constraints.html
