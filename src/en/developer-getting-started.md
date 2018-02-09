@@ -166,6 +166,33 @@ juju add-relation mariadb vanilla
 juju expose vanilla
 ```
 
+## Add GUI user notes
+
+Optionally leave some notes for those users who will deploy the charm from the
+Juju GUI. This consists of including a Markdown-formatted file called
+`getstarted.md` at the root of the charm's directory. Once the charm (or
+bundle) is deployed, the file will be rendered and displayed to the user.
+
+The file should include the user's next steps. Here is a guideline for what to
+include:
+
+ - State prerequisites for various application features.
+ - Include instructions for achieving a working application at a rudimentary
+   level.
+ - Provide links for further reading.
+
+As for style, here are some pointers:
+
+ - Keep in mind that the user is reading this information from the GUI, so
+   write accordingly.
+ - Do not over-complicate. This is a small beginners' guide.
+ - Use available Markdown formatting features such as section headers, lists,
+   and code blocks. See this [Markdown help][askubuntu-markdown].
+   
+Finally, here is an example of a `getstarted.md` file:
+
+[https://api.jujucharms.com/charmstore/v5/~rharding/grafana-4/archive/getstarted.md][getstartedmd-link]
+
 ## Testing your Charm
 
 Because Juju is a large complex system, not unlike a Linux software
@@ -227,3 +254,5 @@ promulgation.
 [mailing-list-juju]: https://lists.ubuntu.com/mailman/listinfo/juju
 [charmsreactive]: https://charmsreactive.readthedocs.io/
 [upstream-openstack-charms]: https://docs.openstack.org/charm-guide/
+[askubuntu-markdown]: https://askubuntu.com/editing-help
+[getstartedmd-link]: https://api.jujucharms.com/charmstore/v5/~rharding/grafana-4/archive/getstarted.md
