@@ -243,6 +243,7 @@ filtering techniques, just as you might with any log file.
 
 See [Juju log][logs] documentation for additional details on the logs Juju
 keeps and how best to access the information they contain.
+[Audit logging][troubleshooting-logs-audit] is also available.
 
 ### Increase the logging level
 
@@ -305,6 +306,7 @@ Alternatively, if your issue is not addressed here, get in touch via our
 [modelsupgrade]: ./models-upgrade.html "Upgrading Juju software"
 [charmstore]: https://jujucharms.com/
 [logs]: ./troubleshooting-logs.html
+[troubleshooting-logs-audit]: ./troubleshooting-logs-audit.html
 [upgrade]: ./troubleshooting-upgrade.html
 [tools]: ./troubleshooting-tools.html
 [clouds]: ./troubleshooting-clouds.html

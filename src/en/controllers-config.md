@@ -1,7 +1,8 @@
 Title: General configuration options
-TODO: Check accuracy of key table
-      error: table's default value keys do not show up with controller-config (e.g. bootstrap-)
+TODO: Check accuracy of key table (https://github.com/juju/juju/blob/ec89c99e51fa83cd1a2cb5e5f24e73d5b096de20/controller/config.go#L29)
+      error: table's default value keys do not show up with controller-config (e.g. bootstrap-). See above note.
       "dynamically set by Juju" could use some explaination
+      ReadOnlyMethods updated from https://github.com/juju/juju/blob/2.3/apiserver/observer/auditfilter.go#L130
 
 
 # Configuring controllers
@@ -35,7 +36,8 @@ create and configure a cloud named 'lxd':
 juju bootstrap --config bootstrap-timeout=700 lxd
 ```
 
-Once a controller is created, all its settings become immutable.
+In general, once a controller is created, all its settings become immutable. An
+exception to this rule are the five keys related to audit logging.
 
 !!! Note:
     The `--config` option may also be used to configure the 'default' model.
@@ -47,10 +49,14 @@ Once a controller is created, all its settings become immutable.
 
 This table lists all the controller keys which may be assigned a value.
 
-| Key                        | Type   | Default  | Valid values             | Purpose |
-|:---------------------------|--------|----------|--------------------------|:---------|
-api-port                     | integer | 17070   |                          | The port to use for connecting to the API
-auditing-enabled             | bool   | false    | false/true               | Sets whether the controller will record auditing information
+| Key                        | Type    | Default  | Valid values             | Purpose |
+|:---------------------------|---------|----------|--------------------------|:---------|
+api-port                     | integer | 17070    |                          | The port to use for connecting to the API
+auditing-enabled             | bool    | false    | false/true               | Sets whether audit logging is enabled.
+audit-log-capture-args       | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods.
+audit-log-exclude-methods    | string  | ReadOnlyMethods |                   | What information to exclude from the audit log. See [additional info][excluding-information-from-the-audit-log].
+audit-log-max-backups        | integer | 10       |                          | The maximum number of backup audit log files to keep.
+audit-log-max-size           | integer | 300      |                          | The maximum size for an audit log file (units: MiB).
 autocert-dns-name            | string |          |                          | Sets the DNS name of the controller. If a client connects to this name, an official certificate will be automatically requested. Connecting to any other host name will use the usual self-generated certificate.
 autocert-url                 | string |          |                          | Sets the URL used to obtain official TLS certificates when a client connects to the API. By default, certificates are obtained from LetsEncrypt. A good value for testing is "https://acme-staging.api.letsencrypt.org/directory".
 allow-model-access           | bool   |          | false/true               | Sets whether the controller will allow users to connect to models they have been authorized for even when they don't have any access rights to the controller itself.
@@ -68,8 +74,74 @@ mongo-memory-profile         | string | low      | low/default              | Se
 set-numa-control-policy      | bool   | false    | false/true               | Sets whether numactl is preferred for running processes with a specific NUMA (Non-Uniform Memory Architecture) scheduling or memory placement policy for multiprocessor systems where memory is divided into multiple memory nodes
 state-port                   | integer | 37017   |                          | The port to use for mongo connections
 
+### Excluding information from the audit log
+
+!!! Important:
+    Only those conversations containing *all* excluded methods will be
+    omitted.
+
+As the above table shows, the default value of key 'audit-log-exclude-methods'
+is 'ReadOnlyMethods'. As the name suggests, this key represents all read-only
+events. Hence, by default, only events involving a change (a write) will appear
+in the audit log.
+
+Click the triangle below to reveal a listing of API methods denoted by this key
+value. 
+
+^# ReadOnlyMethods 
+
+  ```
+  Action.Actions
+  Action.ApplicationsCharmsActions
+  Action.FindActionsByNames
+  Action.FindActionTagsByPrefix
+  Application.GetConstraints
+  ApplicationOffers.ApplicationOffers
+  Backups.Info
+  Client.FullStatus
+  Client.GetModelConstraints
+  Client.StatusHistory
+  Controller.AllModels
+  Controller.ControllerConfig
+  Controller.GetControllerAccess
+  Controller.ModelConfig
+  Controller.ModelStatus
+  MetricsDebug.GetMetrics
+  ModelConfig.ModelGet
+  ModelManager.ModelInfo
+  ModelManager.ModelDefaults
+  Pinger.Ping
+  UserManager.UserInfo
+  Action.ListAll
+  Action.ListPending
+  Action.ListRunning
+  Action.ListComplete
+  ApplicationOffers.ListApplicationOffers
+  Backups.List
+  Block.List
+  Charms.List
+  Controller.ListBlockedModels
+  FirewallRules.ListFirewallRules
+  ImageManager.ListImages
+  ImageMetadata.List
+  KeyManager.ListKeys
+  ModelManager.ListModels
+  ModelManager.ListModelSummaries
+  Payloads.List
+  PayloadsHookContext.List
+  Resources.ListResources
+  ResourcesHookContext.ListResources
+  Spaces.ListSpaces
+  Storage.ListStorageDetails
+  Storage.ListPools
+  Storage.ListVolumes
+  Storage.ListFilesystems
+  Subnets.ListSubnets
+  ```
+
 
 <!-- LINKS -->
 
 [controllers-creating]: ./controllers-creating.html "Creating a controller"
 [models-config]: ./models-config.html "Configuring models"
+[excluding-information-from-the-audit-log]: ./troubleshooting-logs-audit.html#excluding-information-from-the-audit-log
