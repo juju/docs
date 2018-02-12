@@ -12,12 +12,16 @@ See [Juju log][logs] documentation to learn about standard Juju logging.
 The audit log filename is `/var/log/juju/audit.log` and contains records which
 are either:
 
- - a Conversation, which corresponds to a top-level CLI command
- - a Request (a call to an API method)
- - a ResponseErrors, which has details of any errors from calling the method
+ - a *Conversation*, which corresponds to a top-level CLI command
+ - a *Request* (a call to an API method)
+ - a *ResponseErrors*, which has details of any errors from calling the method
+
+When employing log filtering (see
+[Excluding information from the audit log][excluding-information-from-the-audit-log])
+only those Conversations containing *all* excluded methods will be omitted.
 
 
 <!-- LINKS -->
 
 [logs]: ./troubleshooting-logs.html
-
+[excluding-information-from-the-audit-log]: ./controllers-config.html#excluding-information-from-the-audit-log

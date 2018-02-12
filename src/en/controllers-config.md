@@ -36,9 +36,13 @@ create and configure a cloud named 'lxd':
 juju bootstrap --config bootstrap-timeout=700 lxd
 ```
 
-In general, once a controller is created, all its settings become immutable. An
-exception to this rule are the five keys related to audit logging.
+In general, once a controller is created, all its settings become immutable.
+Exceptions to this rule are three of the keys related to audit logging:
 
+ - auditing-enabled
+ - audit-log-capture-args
+ - audit-log-exclude-methods
+ 
 !!! Note:
     The `--config` option may also be used to configure the 'default' model.
     In addition, the `model-default` option can usually always be used in place
@@ -52,9 +56,9 @@ This table lists all the controller keys which may be assigned a value.
 | Key                        | Type    | Default  | Valid values             | Purpose |
 |:---------------------------|---------|----------|--------------------------|:---------|
 api-port                     | integer | 17070    |                          | The port to use for connecting to the API
-auditing-enabled             | bool    | false    | false/true               | Sets whether audit logging is enabled.
-audit-log-capture-args       | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods.
-audit-log-exclude-methods    | string  | ReadOnlyMethods |                   | What information to exclude from the audit log. See [additional info][excluding-information-from-the-audit-log].
+auditing-enabled             | bool    | false    | false/true               | Sets whether audit logging is enabled. Can be toggled for an existing controller.
+audit-log-capture-args       | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods. Can be toggled for an existing controller.  
+audit-log-exclude-methods    | string  | ReadOnlyMethods |                   | What information to exclude from the audit log. Can be set for an existing controller. See [additional info][anchor__excluding-information-from-the-audit-log].
 audit-log-max-backups        | integer | 10       |                          | The maximum number of backup audit log files to keep.
 audit-log-max-size           | integer | 300      |                          | The maximum size for an audit log file (units: MiB).
 autocert-dns-name            | string |          |                          | Sets the DNS name of the controller. If a client connects to this name, an official certificate will be automatically requested. Connecting to any other host name will use the usual self-generated certificate.
@@ -76,17 +80,25 @@ state-port                   | integer | 37017   |                          | Th
 
 ### Excluding information from the audit log
 
-!!! Important:
-    Only those conversations containing *all* excluded methods will be
-    omitted.
+See [Audit logging][troubleshooting-logs-audit] for background information on
+this topic.
 
-As the above table shows, the default value of key 'audit-log-exclude-methods'
-is 'ReadOnlyMethods'. As the name suggests, this key represents all read-only
-events. Hence, by default, only events involving a change (a write) will appear
-in the audit log.
+Information can be filtered out of the audit log to prevent its file(s) from
+growing without bounds and making it difficult to read. This is done via the
+`audit-log-exclude-methods` key above, which refers to API calls/methods. The
+recommended approach is to view the log and make a list of those calls
+deemed undesirable. There is no definitive API call list available in this
+documentation.
 
-Click the triangle below to reveal a listing of API methods denoted by this key
-value. 
+As the above table shows, the default value of key `audit-log-exclude-methods`
+is the special value of 'ReadOnlyMethods'. As the name suggests, this
+represents all read-only events. Hence, by default, only events involving a
+change (a write) will appear in the audit log.
+
+An example value for this key is: `ReadOnlyMethods,????`.
+
+Click the triangle below to reveal a listing of API methods denoted by the
+key value of 'ReadOnlyMethods'. 
 
 ^# ReadOnlyMethods 
 
@@ -139,9 +151,9 @@ value.
   Subnets.ListSubnets
   ```
 
-
 <!-- LINKS -->
 
 [controllers-creating]: ./controllers-creating.html "Creating a controller"
 [models-config]: ./models-config.html "Configuring models"
-[excluding-information-from-the-audit-log]: ./troubleshooting-logs-audit.html#excluding-information-from-the-audit-log
+[anchor__excluding-information-from-the-audit-log]: #excluding-information-from-the-audit-log
+[troubleshooting-logs-audit]: troubleshooting-logs-audit.html
