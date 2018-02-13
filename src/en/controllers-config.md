@@ -58,7 +58,7 @@ This table lists all the controller keys which may be assigned a value.
 api-port                     | integer | 17070    |                          | The port to use for connecting to the API
 auditing-enabled             | bool    | false    | false/true               | Sets whether audit logging is enabled. Can be toggled for an existing controller.
 audit-log-capture-args       | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods. Can be toggled for an existing controller.  
-audit-log-exclude-methods    | string  | ReadOnlyMethods |                   | What information to exclude from the audit log. Can be set for an existing controller. See [additional info][anchor__excluding-information-from-the-audit-log].
+audit-log-exclude-methods    | string  | ReadOnlyMethods | [Some.Method,...] | What information to exclude from the audit log. Can be set for an existing controller. See [additional info][anchor__excluding-information-from-the-audit-log].
 audit-log-max-backups        | integer | 10       |                          | The maximum number of backup audit log files to keep.
 audit-log-max-size           | integer | 300      |                          | The maximum size for an audit log file (units: MiB).
 autocert-dns-name            | string |          |                          | Sets the DNS name of the controller. If a client connects to this name, an official certificate will be automatically requested. Connecting to any other host name will use the usual self-generated certificate.
@@ -83,29 +83,30 @@ state-port                   | integer | 37017   |                          | Th
 See [Audit logging][troubleshooting-logs-audit] for background information on
 this topic.
 
-Information can be filtered out of the audit log to prevent its file(s) from
-growing without bounds and making it difficult to read. This is done via the
+Excluding information from the audit log is done via the
 `audit-log-exclude-methods` key above, which refers to API calls/methods. The
-recommended approach is to view the log and make a list of those calls
-deemed undesirable. There is no definitive API call list available in this
-documentation.
+recommended approach for configuring the filter is to view the log and make a
+list of those calls deemed undesirable. There is no definitive API call list
+available in this documentation.
 
-As the above table shows, the default value of key `audit-log-exclude-methods`
-is the special value of 'ReadOnlyMethods'. As the name suggests, this
-represents all read-only events. Hence, by default, only events involving a
-change (a write) will appear in the audit log.
+The default value of key `audit-log-exclude-methods` is the special value of
+'ReadOnlyMethods'. As the name suggests, this represents all read-only events.
 
-An example value for this key is: `[ReadOnlyMethods,Pinger.Ping]` where a log
-message intended for removal (by including 'Pinger.Ping' as a value) contains
-the following text:
+An example value for this key is: `[Pinger.Ping]` where a log message intended
+for removal (by including 'Pinger.Ping' as a value) contains the following
+text:
 
 ```no-highlight
 "request-id":4428,"when":"2018-02-12T20:03:45Z","facade":"Pinger","method":"Ping","version":1}}
 ```
 
-Only those Conversations containing *all* excluded methods will be omitted.
+!!! Important:
+    Only those Conversations whose methods have *all* been excluded will be
+    omitted. For instance, assuming a default filter of 'ReadOnlyMethods', if a
+    Conversation contains several read-only events and a single write event
+    then all these events will appear in the log.
 
-Click the triangle below to reveal a listing of API methods denoted by the
+Click the triangle below to reveal a listing of API methods designated by the
 key value of 'ReadOnlyMethods'. 
 
 ^# ReadOnlyMethods 
