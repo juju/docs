@@ -110,6 +110,13 @@ If you want to check that the credentials were successfully added, use the
 
 You can now start using Juju with your Azure cloud.
 
+### Dealing with expired Azure credentials
+
+Credentials on the Azure cloud have been reported to expire (possibly after 1
+year's time). If a previously working setup suddenly behaves as if incorrect
+credentials are being used then you may need to update the credentials on the
+controller. See [Updating credentials][updating-credentials] for guidance.
+
 ## Create controller
 
 ```bash
@@ -146,7 +153,7 @@ ID that corresponds to the variable.
 
 !!! Note:
     Make sure you have the Azure CLI installed and that you've used `az login`
-    to authorize the session. See **[Credentials][credentials]** above for more
+    to authorize the session. See **[Credentials][anchor__credentials]** above for more
     details.
 
 ### `subscription-id`
@@ -289,7 +296,8 @@ allocated to machines in an application-specific Availability Set. Read the
 availability sets affect uptime guarantees.
 
 <!-- LINKS -->
-[credentials]: ./help-azure.html#credentials
+[anchor__credentials]: ./help-azure.html#credentials
+[updating-credentials]: ./credentials.html#updating-credentials
 [subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
 [azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
 [azureportal]: http://portal.azure.com
