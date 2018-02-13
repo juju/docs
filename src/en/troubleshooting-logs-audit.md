@@ -2,9 +2,9 @@ Title: Audit logging
 
 # Audit logging
 
-Juju audit logging provides a chronological account of all events. These logs
-are captured on the controller that was involved in the transmission of
-associated commands affecting the Juju client, any Juju machine, and the
+Juju audit logging provides a chronological account of all events by capturing
+invoked user commands. These logs reside on the controller involved in the
+transmission of commands affecting the Juju client, Juju machines, and the
 controller itself.
 
 See [Juju log][logs] documentation to learn about standard Juju logging.
