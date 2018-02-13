@@ -95,7 +95,15 @@ is the special value of 'ReadOnlyMethods'. As the name suggests, this
 represents all read-only events. Hence, by default, only events involving a
 change (a write) will appear in the audit log.
 
-An example value for this key is: `ReadOnlyMethods,????`.
+An example value for this key is: `[ReadOnlyMethods,Pinger.Ping]` where a log
+message intended for removal (by including 'Pinger.Ping' as a value) contains
+the following text:
+
+```no-highlight
+"request-id":4428,"when":"2018-02-12T20:03:45Z","facade":"Pinger","method":"Ping","version":1}}
+```
+
+Only those Conversations containing *all* excluded methods will be omitted.
 
 Click the triangle below to reveal a listing of API methods denoted by the
 key value of 'ReadOnlyMethods'. 
