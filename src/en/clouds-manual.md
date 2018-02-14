@@ -136,3 +136,4 @@ or [`bootstrap`](#bootstrapping-the-cloud) commands from Juju.
 [models-config]: ./models-config.html
 [placement]: ./charms-deploying.html#deploying-to-specific-machines-and-containers
 [commands]: ./commands.html
+[clouds__specifying-additional-clouds]: ./clouds.html#specifying-additional-clouds
