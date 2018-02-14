@@ -197,6 +197,9 @@ expand the relevant section). You can also generate a YAML file.
       Cloud "mycloud" successfully added
       You may bootstrap with 'juju bootstrap mycloud'
 
+   A Juju-added credential is not required. The ability for Juju to make an SSH
+   connection is all that's needed.
+
 ^# OpenStack
 
    To add an OpenStack cloud, Juju needs to know the endpoints to connect to, the 
