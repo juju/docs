@@ -8,11 +8,6 @@ itself. We use the term *credentials* to describe the tokens or keys or secrets
 used - a set of credentials is represented by a _credential name_ that is used
 to refer to those credentials in subsequent commands.
 
-!!! Important:
-    This page assumes that you have already created a controller for your
-    cloud (`juju bootstrap` command). If this is not the case, please see
-    [Creating a controller][controllers-creating] first.
-
 Juju selects a credential according to how many credentials are defined. If you
 have only one credential, or if a credential is labelled 'default', then this
 is the credential that will be used by Juju. When multiple credentials are
@@ -231,4 +226,3 @@ juju remove-credential aws bob
 [clouds-oracle]: ./help-oracle.html
 [clouds-openstack]: ./help-openstack.html
 [clouds-vmware]: ./help-vmware.html
-[controllers-creating]: ./controllers-creating.html
