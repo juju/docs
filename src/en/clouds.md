@@ -162,6 +162,11 @@ expand the relevant section). You can also generate a YAML file.
    Once completed, you should also remember to add a credential for this cloud before 
    bootstrapping. See the [documentation on credentials][credentials] for more help.
 
+   <!-- STORE THIS WORDING FOR AN UPCOMING REVIEW - USE IT FOR ALL CLOUDS
+   You must now add a credential for this cloud prior to creating a controller
+   (`juju bootstrap`). See the [Credentials][credentials] page for details.
+   -->
+   
 ^# Manual
 
    To add a Manual cloud, Juju needs to know the name you wish to call it, the
@@ -191,9 +196,6 @@ expand the relevant section). You can also generate a YAML file.
       
       Cloud "mycloud" successfully added
       You may bootstrap with 'juju bootstrap mycloud'
-
-   You must now add a credential for this cloud prior to creating a controller
-   (`juju bootstrap`). See the [Credentials][credentials] page for details.
 
 ^# OpenStack
 
