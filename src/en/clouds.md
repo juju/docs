@@ -1,6 +1,8 @@
 Title: Clouds
 TODO:  Needs to explain available auth types for clouds
-       Review required, check command outputs
+       Critical: Review required
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1749583
   
 # Clouds
 
@@ -162,15 +164,13 @@ expand the relevant section). You can also generate a YAML file.
 
 ^# Manual
 
-   To add a 'manual' cloud, Juju needs to know the name you wish to call it,
-   the IP address (or hostname) used to connect to it, and what remote user
-   account to connect to (over SSH). This last is done by prepending 'user@' to
-   the address/hostname.
+   To add a Manual cloud, Juju needs to know the name you wish to call it, the
+   IP address (or hostname) used to connect to it, and what remote user account
+   to connect to (over SSH). This last is done by prepending 'user@' to the
+   address/hostname.
    
-   In regards to SSH, the user running the Juju client is expected to already
-   be able to connect to the remote host. In particular, an SSH keypair should
-   be available to the user and the corresponding public key should reside in
-   the remote user account.
+   In terms of SSH, the user running the Juju client is expected to already be
+   able to connect to the remote host (either by password or public key).
    
    A sample session looks like this:
 
@@ -192,8 +192,8 @@ expand the relevant section). You can also generate a YAML file.
       Cloud "mycloud" successfully added
       You may bootstrap with 'juju bootstrap mycloud'
 
-   Once completed, you should also remember to add a credential for this cloud before 
-   bootstrapping. See the [documentation on credentials][credentials] for more help.
+   You must now add a credential for this cloud prior to creating a controller
+   (`juju bootstrap`). See the [Credentials][credentials] page for details.
 
 ^# OpenStack
 
