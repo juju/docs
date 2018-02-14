@@ -135,3 +135,4 @@ to avoid prompts which may hinder automated SSH operations.
 [models-config]: ./models-config.html
 [placement]: ./charms-deploying.html#deploying-to-specific-machines-and-containers
 [commands]: ./commands.html
+[clouds__specifying-additional-clouds]: ./clouds.html#specifying-additional-clouds
