@@ -200,13 +200,20 @@ You can set the default credential for a cloud:
 juju set-default-credential aws carol
 ```
 
-If only one credential name exists, it will become the effective default
-credential.
+Notes:
 
-### Replacing local credentials
+ - This affects operations that require a newly-input credential (e.g.
+   `juju add-model`). In particular, it does not change what is currently in
+   use (on a controller).
+ - If only one credential name exists, it will become the effective default
+   credential.
 
-To replace an existing credential locally, edit or create a file, such as
-our 'mycreds.yaml' example above, and run:
+### Updating local credentials
+
+To update an existing credential locally use the `add-credential` command with
+the `--replace` option.
+
+Here we decided to use the file 'mycreds.yaml' from a previous example:
 
 ```bash
 juju add-credential aws -f mycreds.yaml --replace
@@ -215,11 +222,11 @@ juju add-credential aws -f mycreds.yaml --replace
 This will overwrite existing credential information, so make sure all current
 credentials are contained in the file, not just the new or changed one.
 
-Replacing credentials in this way does not update credentials currently in use
-(on an existing controller/cloud). See next section for that. The
+Updating credentials in this way does not update credentials currently in use
+(on an existing controller/cloud). See the next section for that. The
 `add-credential` command is always "pre-bootstrap" in nature.
 
-### Updating credentials
+### Updating remote credentials
 
 To update credentials currently in use (i.e. cached on the controller) the
 `update-credential` command is used. The requirements for using this command,
@@ -247,7 +254,7 @@ juju update-credential google joe
     is unknown. This restriction will be removed in an upcoming release of
     Juju.
 
-####  Updating credentials with a different Juju user
+####  Updating remote credentials using a different Juju user
 
 If you are unable to ascertain the original Juju username then you will need
 to use a different one. This implies adding a new credential name, copying over
@@ -290,9 +297,10 @@ Credentials:
       subscription-id: bar
 ```
 
-### Removing credentials
+### Removing local credentials
 
-If a credential is no longer required, it can be removed:
+If a local credential (i.e. not cached on a controller) is no longer required,
+it can be removed:
 
 ```bash
 juju remove-credential aws bob

@@ -147,7 +147,7 @@ You can now start using Juju with your Azure cloud.
 Credentials on the Azure cloud have been reported to expire. If a previously
 working setup suddenly behaves as if incorrect credentials are being used then
 you may need to update the credentials on the controller. See
-[Updating credentials][updating-credentials] for guidance.
+[Updating remote credentials][updating-remote-credentials] for guidance.
 
 ## Create controller
 
@@ -330,7 +330,7 @@ availability sets affect uptime guarantees.
 
 <!-- LINKS -->
 [anchor__credentials]: ./help-azure.html#credentials
-[updating-credentials]: ./credentials.html#updating-credentials
+[updating-remote-credentials]: ./credentials.html#updating-remote-credentials
 [subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
 [azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
 [azureportal]: http://portal.azure.com
