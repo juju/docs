@@ -144,10 +144,10 @@ You can now start using Juju with your Azure cloud.
 
 ### Dealing with expired Azure credentials
 
-Credentials on the Azure cloud have been reported to expire (possibly after 1
-year's time). If a previously working setup suddenly behaves as if incorrect
-credentials are being used then you may need to update the credentials on the
-controller. See [Updating credentials][updating-credentials] for guidance.
+Credentials on the Azure cloud have been reported to expire. If a previously
+working setup suddenly behaves as if incorrect credentials are being used then
+you may need to update the credentials on the controller. See
+[Updating credentials][updating-credentials] for guidance.
 
 ## Create controller
 

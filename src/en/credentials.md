@@ -1,6 +1,6 @@
 Title: Juju credentials
 TODO:  Investigate: shouldn't `model-config` have a default-credential setting?
-       Dig into how `add-credential --replace` and `update-credential` differ
+       Juju 2.4 review: credentials UX rework
 
 # Cloud credentials
 
@@ -221,24 +221,38 @@ Replacing credentials in this way does not update credentials currently in use
 
 ### Updating credentials
 
-To update credentials currently in use the change must be made to the cached
-credentials that reside on the controller. 
+To update credentials currently in use (i.e. cached on the controller) the
+`update-credential` command is used. The requirements for using this command,
+as compared to the initial `juju bootstrap` (or `juju add-model`) command, are:
+
+ - same cloud name
+ - same Juju username (logged in)
+ - same credential name
+
+The update is a two-step process. First change the credentials locally with the
+`add-credential` command (in conjunction with the `--replace` option) and then
+upload those credentials to the controller.
+
+Below, we log in with the correct Juju username (e.g. 'admin'), change the
+contents of the credential called 'joe', and then update them on a Google cloud
+controller:
 
 ```bash
+juju add-credential --replace joe
 juju update-credential google joe
 ```
 
-The `update-credential` command is always "post-bootstrap" in nature.
+!!! Warning:
+    It is not possible to update the credentials if the initial credential name
+    is unknown. This restriction will be removed in an upcoming release of
+    Juju.
 
-<!--
-Since credentials are always stored in the system user account, within whose
-shell the Juju client is running, ???????????????
--->
+####  Updating credentials with a different Juju user
 
-If the above does not work for some reason you may need to manually replace the
-remote credentials. This is done by adding a new credential name, copying
-over any authentication material into the old credential name, and finally
-updating the credentials. Below we demonstrate this for the Azure cloud:
+If you are unable to ascertain the original Juju username then you will need
+to use a different one. This implies adding a new credential name, copying over
+any authentication material into the old credential name, and finally updating
+the credentials. Below we demonstrate this for the Azure cloud:
 
 Add a new temporary credential name (like 'new-credential-name') and gather all
 credential sets (new and old):
@@ -258,12 +272,12 @@ juju add-credential azure -f azure-creds.yaml --replace
 juju update-credential azure old-credential-name
 ```
 
-To be clear, file `azure-creds.yaml` should like similar to:
+To be clear, the file `azure-creds.yaml` (used with `add-credential`) should
+look similar to:
 
 ```no-highlight
 Credentials:
   azure:
-    default-credential: prodstack-azure
     new-credential-name:
       auth-type: service-principal-secret
       application-id: foo1
@@ -275,7 +289,6 @@ Credentials:
       application-password: foo2
       subscription-id: bar
 ```
-
 
 ### Removing credentials
 
