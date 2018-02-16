@@ -251,11 +251,12 @@ The update is a two-step process. First change the credentials locally with the
 `add-credential` command (in conjunction with the `--replace` option) and then
 upload those credentials to the controller.
 
-Below, we log in with the correct Juju username (e.g. 'admin'), change the
-contents of the credential called 'joe', and then update them on a Google cloud
-controller:
+Below, we explicitly log in with the correct Juju username ('admin'), change
+the contents of the credential called 'joe', and then update them on a Google
+cloud controller:
 
 ```bash
+juju login -u admin
 juju add-credential --replace joe
 juju update-credential google joe
 ```
