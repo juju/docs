@@ -1,6 +1,11 @@
 Title: Network Spaces
 TODO: Critical: Review needed
+      First section appears to introduce spaces repeatedly
+      First section should not contain an example
       Diagrams needed
+      Verify second example
+      Include example of using binding/endpoint method
+      Bug tracking: https://bugs.launchpad.net/juju/+bug/1747998
 
 # Network Spaces
 
@@ -106,6 +111,19 @@ specific charm-defined endpoints to specific spaces, see [Deploying to
 spaces][deployspaces]. To create bundles with specific bindings, see [Using and
 Creating Bundles][createbundles].
 
+### MAAS and spaces
+
+MAAS has a native knowledge of spaces. Within MAAS, spaces can be created,
+configured, and destroyed. This allows Juju to leverage MAAS spaces without the
+need to add/remove spaces and subnets. However, this also means that Juju needs
+to "pull" such information from MAAS. This is done by default upon
+controller-creation. The command `juju reload-spaces` is used to refresh Juju's
+knowledge of MAAS spaces and works on a per-model basis. 
+
+!!! Note:
+    The `juju reload-spaces` command does not currently pull in all
+    information. This is being worked upon. See [LP #1747998][LP-1747998].
+
 ### Bridges
 
 Prior to Juju 2.1, all deployed machines were regarded as potential hosts for
@@ -117,14 +135,6 @@ devices were made available to each container.
 Juju now creates bridges for containers *only* when Juju knows the spaces an
 application may require, and the container's bridge for that application will
 only connect to the required network interfaces. 
-
-### MAAS and spaces
-
-MAAS has a native knowledge of spaces. Within MAAS, spaces can be created,
-configured, and destroyed. This allows Juju to leverage MAAS spaces without
-having to manage them. However, this also means that Juju needs to "pull" such
-information from MAAS. The command `juju reload-spaces` is used to refresh
-Juju's knowledge of MAAS spaces. It works on a per-model basis. 
 
 ## Using spaces
 
@@ -143,7 +153,7 @@ with the space. For more general information on constraints, see the
 
 ## Spaces and subnets example
 
-Let's model the following deployment in Juju:
+Let's model the following deployment in Juju using a MAAS-backed cloud:
 
 - DMZ space (with 2 subnets, one in each zone), hosting 2
   units of the haproxy application, which is exposed and provides
@@ -153,44 +163,27 @@ Let's model the following deployment in Juju:
 - Database (again, 2 subnets, one per zone), hosting 2 units of
   mysql, providing the database backend for mediawiki.
 
-First, we need to create additional subnets using MAAS, and enable
-the "automatic public IP address" attribute on each subnet:
+First, ensure MAAS has the necessary subnets, which have the "automatic public
+IP address" attribute enabled on each:
 
 - 172.31.50.0/24, for space "database"
 - 172.31.51.0/24, for space "database"
 - 172.31.100.0/24, for space "cms"
 - 172.31.110.0/24, for space "cms"
-
-We also assume MAAS already has 2 default subnets (one per
-zone), configured like this:
-
 - 172.31.0.0/20, for the "dmz" space
 - 172.31.16.0/20, for the "dmz" space
 
-Once MAAS has those subnets, we can bootstrap as usual:
+Second, add the MAAS cloud to Juju. See [Using a MAAS cloud][clouds-maas] for
+guidance.
+
+Third, create the Juju controller, assuming a cloud name of 'maas-cloud':
 
 ```bash
-juju bootstrap
+juju bootstrap maas-cloud
 ```
 
-After that, we can create the 3 spaces and add the subnets we
-created to each one. These steps will be automated, and the subnet
-creation will be possible directly from Juju in a future release.
-
-```bash
-juju add-space dmz
-juju add-space cms
-juju add-space database
-juju add-subnet 172.31.0.0/20 dmz
-juju add-subnet 172.31.16.0/20 dmz
-juju add-subnet 172.31.50.0/24 database
-juju add-subnet 172.31.51.0/24 database
-juju add-subnet 172.31.100.0/24 cms
-juju add-subnet 172.31.110.0/24 cms
-```
-
-Now we can deploy the applications into their respective spaces,
-relate them and expose haproxy:
+Finally, deploy the applications into their respective spaces (here we use the
+constraints method), relate them, and expose haproxy:
 
 ```bash
 juju deploy haproxy -n 2 --constraints spaces=dmz
@@ -208,3 +201,5 @@ open it in a browser, seeing the mediawiki page.
 [createbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [deployspaces]: ./charms-deploying.html#deploying-to-spaces
 [charms-constraints]: ./charms-constraints.html
+[clouds-maas]: ./clouds-maas.html
+[LP-1747998]: https://bugs.launchpad.net/juju/+bug/1747998
