@@ -1,6 +1,6 @@
 Title: Juju credentials
 TODO:  Investigate: shouldn't `model-config` have a default-credential setting?
-       Dig into how `add-credential --replace` and `update-credential` differ
+       Juju 2.4 review: credentials UX rework
 
 # Cloud credentials
 
@@ -8,11 +8,6 @@ In order to access your cloud, Juju will need to know how to authenticate
 itself. We use the term *credentials* to describe the tokens or keys or secrets
 used - a set of credentials is represented by a _credential name_ that is used
 to refer to those credentials in subsequent commands.
-
-!!! Important:
-    This page assumes that you have already created a controller for your
-    cloud (`juju bootstrap` command). If this is not the case, please see
-    [Creating a controller][controllers-creating] first.
 
 Juju selects a credential according to how many credentials are defined. If you
 have only one credential, or if a credential is labelled 'default', then this
@@ -171,6 +166,10 @@ the sample. See [Clouds](./clouds.html).
 
 ## Managing credentials
 
+There are several management tasks that can be done related to credentials.
+
+### Listing credentials
+
 You can check what credentials are stored by Juju by running the command:
 
 ```bash
@@ -199,14 +198,28 @@ juju credentials --format yaml --show-secrets
 
 The YAML output will be similar to our 'mycreds.yaml' sample above.
 
+### Setting default credentials
+
 You can set the default credential for a cloud:
 
 ```bash
 juju set-default-credential aws carol
 ```
 
-To replace an existing credential locally, edit or create a file, such as
-our 'mycreds.yaml' example above, and run:
+Notes:
+
+ - This affects operations that require a newly-input credential (e.g.
+   `juju add-model`). In particular, it does not change what is currently in
+   use (on a controller).
+ - If only one credential name exists, it will become the effective default
+   credential.
+
+### Updating local credentials
+
+To update an existing credential locally use the `add-credential` command with
+the `--replace` option.
+
+Here we decided to use the file 'mycreds.yaml' from a previous example:
 
 ```bash
 juju add-credential aws -f mycreds.yaml --replace
@@ -215,7 +228,86 @@ juju add-credential aws -f mycreds.yaml --replace
 This will overwrite existing credential information, so make sure all current
 credentials are contained in the file, not just the new or changed one.
 
-If a credential is no longer required, it can be removed:
+Updating credentials in this way does not update credentials currently in use
+(on an existing controller/cloud). See the next section for that. The
+`add-credential` command is always "pre-bootstrap" in nature.
+
+### Updating remote credentials
+
+To update credentials currently in use (i.e. cached on the controller) the
+`update-credential` command is used. The requirements for using this command,
+as compared to the initial `juju bootstrap` (or `juju add-model`) command, are:
+
+ - same cloud name
+ - same Juju username (logged in)
+ - same credential name
+
+The update is a two-step process. First change the credentials locally with the
+`add-credential` command (in conjunction with the `--replace` option) and then
+upload those credentials to the controller.
+
+Below, we explicitly log in with the correct Juju username ('admin'), change
+the contents of the credential called 'joe', and then update them on a Google
+cloud controller:
+
+```bash
+juju login -u admin
+juju add-credential --replace joe
+juju update-credential google joe
+```
+
+!!! Warning:
+    It is not possible to update the credentials if the initial credential name
+    is unknown. This restriction will be removed in an upcoming release of
+    Juju.
+
+####  Updating remote credentials using a different Juju user
+
+If you are unable to ascertain the original Juju username then you will need
+to use a different one. This implies adding a new credential name, copying over
+any authentication material into the old credential name, and finally updating
+the credentials. Below we demonstrate this for the Azure cloud:
+
+Add a new temporary credential name (like 'new-credential-name') and gather all
+credential sets (new and old):
+
+```bash
+juju add-credential azure
+juju credentials azure --format yaml --show-secrets > azure-creds.yaml
+```
+
+Copy the values of `application-id` and `application-password` from the new set
+to the old set.
+
+Then replace the local credentials and upload them to the controller:
+
+```bash
+juju add-credential azure -f azure-creds.yaml --replace
+juju update-credential azure old-credential-name
+```
+
+To be clear, the file `azure-creds.yaml` (used with `add-credential`) should
+look similar to:
+
+```no-highlight
+Credentials:
+  azure:
+    new-credential-name:
+      auth-type: service-principal-secret
+      application-id: foo1
+      application-password: foo2
+      subscription-id: bar
+    old-credential-name:
+      auth-type: service-principal-secret
+      application-id: foo1
+      application-password: foo2
+      subscription-id: bar
+```
+
+### Removing local credentials
+
+If a local credential (i.e. not cached on a controller) is no longer required,
+it can be removed:
 
 ```bash
 juju remove-credential aws bob
@@ -233,4 +325,3 @@ juju remove-credential aws bob
 [clouds-oracle]: ./help-oracle.html
 [clouds-openstack]: ./help-openstack.html
 [clouds-vmware]: ./help-vmware.html
-[controllers-creating]: ./controllers-creating.html

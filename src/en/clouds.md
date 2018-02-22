@@ -1,5 +1,8 @@
 Title: Clouds
 TODO:  Needs to explain available auth types for clouds
+       Critical: Review required
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1749583
   
 # Clouds
 
@@ -131,7 +134,7 @@ get them recognised is to use the `add-cloud` command in its interactive mode.
 This will ask a series of questions based on the type of cloud you are trying
 to add. Currently Juju can add MAAS, OpenStack, Oracle, vSphere and manual
 clouds in this way - each is detailed below (click on the triangle or name to
-expand the relevant section). You can also generate a YAML file
+expand the relevant section). You can also generate a YAML file.
 
 ^# MAAS
 
@@ -159,31 +162,43 @@ expand the relevant section). You can also generate a YAML file
    Once completed, you should also remember to add a credential for this cloud before 
    bootstrapping. See the [documentation on credentials][credentials] for more help.
 
+   <!-- STORE THIS WORDING FOR AN UPCOMING REVIEW - USE IT FOR ALL CLOUDS
+   You must now add a credential for this cloud prior to creating a controller
+   (`juju bootstrap`). See the [Credentials][credentials] page for details.
+   -->
+   
 ^# Manual
 
-   To add a 'manual' cloud, Juju only needs to know the name you wish to call it, and 
-   the network address used to connect to it. A sample session looks like this:
-       
+   To add a Manual cloud, Juju needs to know the name you wish to call it, the
+   IP address (or hostname) used to connect to it, and what remote user account
+   to connect to (over SSH). This last is done by prepending 'user@' to the
+   address/hostname.
+   
+   In terms of SSH, the user running the Juju client is expected to already be
+   able to connect to the remote host (either by password or public key).
+   
+   A sample session looks like this:
+
        juju add-cloud
-  
+
        Cloud Types
         maas
         manual
         openstack
         oracle
         vsphere
+      
+      Select cloud type: manual
+      
+      Enter a name for your manual cloud: mycloud
+      
+      Enter the controller's hostname or IP address: noah@10.143.211.93
+      
+      Cloud "mycloud" successfully added
+      You may bootstrap with 'juju bootstrap mycloud'
 
-       Select cloud type: maas
-
-       Enter a name for your maas cloud: mainmaas
-
-       Enter the API endpoint url: http://maas.example.org:5240/MAAS/api/2.0
-
-      Cloud "mainmaas" successfully added
-      You may bootstrap with 'juju bootstrap mainmaas'
-
-   Once completed, you should also remember to add a credential for this cloud before 
-   bootstrapping. See the [documentation on credentials][credentials] for more help.
+   A Juju-added credential is not required. The ability for Juju to make an SSH
+   connection is all that's needed.
 
 ^# OpenStack
 

@@ -127,10 +127,12 @@ necessary.
 On trusty the files will be in /etc/init: `/etc/init/jujud-machine-1.conf`
 
 Make directories for new systemd config files 
-`sudo mkdir -p /var/lib/juju/init/jujud-machine-1`
+```bash
+sudo mkdir -p /var/lib/juju/init/jujud-machine-1
+```
 
-Create exec.sh and jujud service files for the juju machine agent
-/var/lib/juju/init/jujud-machine-1/exec.sh:
+Create exec-start.sh and jujud service files for the juju machine agent
+`/var/lib/juju/init/jujud-machine-1/exec-start.sh`:
 ```no-highlight
 #!/usr/bin/env bash
 
@@ -163,15 +165,25 @@ TimeoutSec=300
 WantedBy=multi-user.target
 ```
 
-Change permissions on exec.sh file: `sudo chmod 755 /var/lib/juju/init/jujud-machine-1/exec-start.sh`
+Change permissions on exec-start.sh file: 
+```bash
+sudo chmod 755 /var/lib/juju/init/jujud-machine-1/exec-start.sh
+```
 
 Create a symbolic link from jujud-machine-1.service to /etc/systemd/system:
-`sudo ln -s /var/lib/juju/init/jujud-machine-1/jujud-machine-1.service /etc/systemd/system/`
+```bash
+sudo ln -s /var/lib/juju/init/jujud-machine-1/jujud-machine-1.service /etc/systemd/system/
+```
 
 Configure to the machine service to restart at boot:
-`sudo ln -s /var/lib/juju/init/jujud-machine-1/jujud-machine-1.service /etc/systemd/system/multi-user.target.wants/jujud-machine-1.service`
+```bash
+sudo ln -s /var/lib/juju/init/jujud-machine-1/jujud-machine-1.service /etc/systemd/system/multi-user.target.wants/jujud-machine-1.service
+```
 
-And restart the service: `sudo systemctl start jujud-machine-1.service`
+And restart the service: 
+```bash
+sudo systemctl start jujud-machine-1.service
+```
 
 Once started the juju machine agent will write the systemd files for the juju
 unit agents and start them.
@@ -179,13 +191,16 @@ unit agents and start them.
 #### Last step
 
 Let juju know what series the machines are currently using. If you are using
-verion 2.3 or later: `juju update-series 1 xenial`
+verion 2.3 or later: 
+```bash
+juju update-series 1 xenial
+```
 
 If you are using a version prior to 2.3 follow the instructions for
 [updating an machine's series][mach-update].
 
 [migrate]: ./models-migrate.html
-[app-update]: <add link to 2.2/howto-applicationupdateseries.html>
-[mach-update]: <add link to 2.2/howto-machineupdateseries.html>
+[app-update]: https://jujucharms.com/docs/2.2/howto-applicationupdateseries
+[mach-update]: https://jujucharms.com/docs/2.2/howto-machineupdateseries
 [upgrade]: https://help.ubuntu.com/lts/serverguide/installing-upgrading.html
 [systemd]: https://wiki.ubuntu.com/SystemdForUpstartUsers
