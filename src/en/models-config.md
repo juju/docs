@@ -194,6 +194,7 @@ bridged to the default bridge.
 ### Firewall mode
 
 Modes available include:
+
 - **instance:** Requests the use of an individual firewall per instance.
 - **global:** Uses a single firewall for all instances (access for a network
   port is enabled to one instance if any instance requires that port).
