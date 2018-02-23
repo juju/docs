@@ -7,16 +7,29 @@ Windows. Development releases are also available for testing. All binary
 releases for all supported platforms are available on Launchpad. Please read on
 for how to install Juju on your chosen platform.
 
-## Version 2.3.1
+## Version 2.3.3
 
-The most recent stable version of Juju is 2.3.1. This is the version we
+The most recent stable version of Juju is 2.3.3. This is the version we
 recommend for production use. See the [Release Notes][release-notes-2].
 
 ### Ubuntu
 
-Since Ubuntu 16.04 LTS (Xenial) the recommended way to install Juju is with
-snaps. The latest stable Juju release can be installed with the following
-command:
+Since Ubuntu 14.04 LTS (Trusty) the recommended way to install Juju is with
+snaps. 
+
+**Ubuntu 14.04 LTS**  
+On Ubuntu 14.04 LTS, ensure that `snapd` is available prior to installing Juju:
+
+```bash
+sudo apt install snapd
+```
+
+!!! Note:
+    A reboot will be needed after having installed `snapd` on Trusty since a
+    new kernel (4.4.0 series) will be installed as a dependency.
+
+**Install Juju**  
+Juju can be installed with the following command.
 
 ```bash
 sudo snap install juju --classic
@@ -38,13 +51,13 @@ sudo snap refresh juju
 
 See the [Snapcraft documentation][snapcraft] for more information on snaps. 
 
-Note: You can still use a PPA to get the stable version:
+Note that you can still use a PPA to get the stable version:
 
 ```bash
 sudo add-apt-repository -yu ppa:juju/stable
 sudo apt install juju
 ```
-    
+
 ### CentOS and other Linuxes
 
 Juju can be installed on various Linux distributions via snaps. On Ubuntu 
