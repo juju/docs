@@ -24,8 +24,7 @@ to several other, non-local, ones (named 'ubuntu', 'ubuntu-daily', and
 'images').
 
 An image is identified by its fingerprint (SHA-256 hash), and can be tagged
-with multiple aliases. Juju looks for images with aliases in the format
-ubuntu-&lt;codename&gt;, for instance 'ubuntu-trusty' or 'ubuntu-xenial'.
+with multiple aliases.
 
 For any image-related command, an image is specified by its alias or by its
 fingerprint. Both are shown in image lists. An image's filename is its *full
@@ -35,9 +34,16 @@ type of fingerprint can be used to refer to images.
 Juju pulls official cloud images from the 'ubuntu' remote
 (http://cloud-images.ubuntu.com) and creates the necessary alias. Any
 subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
+
 Cached images can be seen with `lxc image list`:
 
-![lxc image list after importing](./media/image_list-imported_image-reduced70.png)
+```no-highlight
++-------------------+--------------+--------+---------------------------------------------+--------+----------+------------------------------+
+|       ALIAS       | FINGERPRINT  | PUBLIC |                 DESCRIPTION                 |  ARCH  |   SIZE   |         UPLOAD DATE          |
++-------------------+--------------+--------+---------------------------------------------+--------+----------+------------------------------+
+| juju/xenial/amd64 | b5f3a547289f | no     | ubuntu 16.04 LTS amd64 (release) (20180222) | x86_64 | 156.20MB | Feb 23, 2018 at 1:17am (UTC) |
++-------------------+--------------+--------+---------------------------------------------+--------+----------+------------------------------+
+```
 
 Image cache expiration and image synchronization mechanisms are built-in.
 
@@ -86,7 +92,7 @@ used.
 LXD itself logs to `/var/log/lxd/lxd.log` and Juju machines created via the
 LXD local provider log to `/var/log/lxd/juju-{uuid}-machine-{#}`. However,
 the standard way to view logs is with the `juju debug-log` command. See
-[Viewing logs][logs] for more details.
+[Juju logs][logs] for more details.
 
 ## Useful LXD client commands
 
@@ -124,3 +130,5 @@ assistance with the daemon. See upstream documentation for
 
 [clouds-lxd]: ./clouds-LXD.html
 [lxd-upstream]: https://github.com/lxc/lxd/blob/master/doc/configuration.md
+[logs]: ./troubleshooting-logs.html
+[credentials]: ./credentials.html
