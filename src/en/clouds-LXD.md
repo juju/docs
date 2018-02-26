@@ -12,28 +12,42 @@ or serve as a platform to develop your own charms.
 Both LXD and Juju will be needed on the host system.
 
 LXD is installed by default on all stable Ubuntu releases with the exception of
-Ubuntu 14.04 LTS. On all other releases it is installed as an APT package.
-However, it is recommended to manage LXD via snaps as this is now the best
-supported method for LXD. Doing so on Ubuntu 16.04 LTS (and greater) will
-entail the removal of the APT package.
+Ubuntu 14.04 LTS. However, it is recommended to manage LXD via snaps as this
+is now the best supported method for LXD. Doing so on Ubuntu 16.04 LTS (and
+greater) will entail the removal of the APT package.
 
-For instructions on installing Juju, see [Getting the latest Juju][install].
-Then follow the instructions below for installing LXD, based on your chosen
-Ubuntu release.
+Begin by installing Juju (see [Installing Juju][install]). Then follow the
+instructions below for installing LXD based on your chosen Ubuntu release.
 
 ### Ubuntu 14.04 LTS
 
-On Ubuntu 14.04 LTS (Trusty), ensure that `snapd` is installed prior to
-installing `lxd`.
+On Ubuntu 14.04 LTS (Trusty), ensure that `snapd` is installed:
 
 ```bash
 sudo apt install snapd
+```
+
+Also, if your system is not currently running at least the 4.4.0 kernel (that
+`snapd` causes to be installed as a dependency on Trusty; use the `uname -r`
+command to check) it will require a reboot:
+
+```bash
+sudo reboot
+```
+
+Finally, install LXD:
+
+```bash
 sudo snap install lxd
 ```
 
-!!! Note:
-    A reboot will be needed after having installed `snapd` on Trusty since a
-    new kernel (4.4.0 series) will be installed as a dependency.
+Add your current system user to the `lxd` group and refresh group membership.
+Here we assume a user of 'ubuntu':
+
+```bash
+sudo adduser ubuntu lxd
+newgrp lxd
+```
 
 ### Ubuntu 16.04 LTS and greater
 
@@ -54,8 +68,8 @@ sudo snap install lxd
 
 ## Alternate backing file-system
 
-LXD can optionally use an alternative file-system for containers. ZFS is
-recommended for the best experience:
+LXD can use various file-systems for its containers. Below we show how to
+implement ZFS, as it provides the best experience.
 
 !!! Note:
     ZFS is not supported on Ubuntu 14.04 LTS.
@@ -70,8 +84,13 @@ sudo zpool create lxd /var/lib/zfs/lxd.img
 sudo lxd init --auto --storage-backend zfs --storage-pool lxd
 ```
 
-Above we allocated 32GB of space to a sparse file. Consider using a fast block
-device if available.
+Above we allocated 32GB of space to a sparse file.
+
+Notes:
+
+ - If possible, put `/var/lib/zfs` on a fast storage device (e.g. SSD).
+ - The installed ZFS utilities can be used to query the pool (e.g.
+   `sudo zpool list -v lxd`).
 
 ## Create a controller
 
@@ -82,34 +101,42 @@ we call it 'lxd':
 juju bootstrap localhost lxd
 ```
 
+View the new controller machine like this:
+
+```bash
+juju machines -m controller
+```
+
+This example yields the following output:
+
+```no-highlight
+Machine  State    DNS            Inst id        Series  AZ  Message
+0        started  10.103.91.114  juju-b14348-0  xenial      Running
+```
+
 The controller's underlying container can be listed with the LXD client:
 
 ```bash
 lxc list
 ```
 
-Sample output:
+Output:
 
 ```no-highlight
-+---------------+---------+-----------------------+------+------------+-----------+
-|     NAME      |  STATE  |         IPV4          | IPV6 |    TYPE    | SNAPSHOTS |
-+---------------+---------+-----------------------+------+------------+-----------+
-| juju-669cb0-0 | RUNNING | 10.154.173.181 (eth0) |      | PERSISTENT | 0         |
-+---------------+---------+-----------------------+------+------------+-----------+
+---------------+---------+----------------------+------+------------+-----------+
+|     NAME      |  STATE  |         IPV4         | IPV6 |    TYPE    | SNAPSHOTS |
++---------------+---------+----------------------+------+------------+-----------+
+| juju-b14348-0 | RUNNING | 10.103.91.114 (eth0) |      | PERSISTENT | 0         |
++---------------+---------+----------------------+------+------------+-----------+
 ```
 
-See more examples of [Creating a controller][controllers-creating].
+See more examples of [Creating a controller][controllers-creating] with the
+localhost cloud.
 
 ## Additional LXD resources
 
 [Additional LXD resources][clouds-lxd-resources] provides more LXD-specific
-information:
-
- - LXD and images
- - Remote LXD user credentials
- - LXD logs
- - Useful LXD client commands 
- - Further LXD help and reading
+information.
 
 ## Next steps
 
@@ -130,7 +157,6 @@ See these pages for ideas on what to do next:
 [charms]: ./charms.html
 [controllers]: ./controllers.html
 [controllers-creating]: ./controllers-creating.html
-[logs]: ./troubleshooting-logs.html
 [models-add]: ./models-adding.html
 [credentials]: ./credentials.html
 [clouds-lxd-resources]: ./clouds-lxd-resources.html

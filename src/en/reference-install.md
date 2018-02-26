@@ -1,11 +1,11 @@
 Title: Installing Juju
 
-# Getting the latest Juju
+# Installing Juju
 
-Juju is available on Ubuntu, various other Linux distributions, macOS, and
-Windows. Development releases are also available for testing. All binary
-releases for all supported platforms are available on Launchpad. Please read on
-for how to install Juju on your chosen platform.
+Stable versions of Juju are available on Ubuntu, various other Linux
+distributions, macOS, and Windows. Development releases are also available for
+testing. Read on for how to install a stable or development version of Juju on
+your chosen platform.
 
 ## Version 2.3.3
 
@@ -15,10 +15,11 @@ recommend for production use. See the [Release Notes][release-notes-2].
 ### Ubuntu
 
 Since Ubuntu 14.04 LTS (Trusty) the recommended way to install Juju is with
-snaps. 
+snaps. Nevertheless, the PPA install method is still supported and is mentioned
+lower down.
 
-**Ubuntu 14.04 LTS**  
-On Ubuntu 14.04 LTS, ensure that `snapd` is available prior to installing Juju:
+On Ubuntu 16.04 LTS (and greater) `snapd` is installed by default. If you're
+using Ubuntu 14.04 LTS you will need to install it prior to installing Juju:
 
 ```bash
 sudo apt install snapd
@@ -28,8 +29,7 @@ sudo apt install snapd
     A reboot will be needed after having installed `snapd` on Trusty since a
     new kernel (4.4.0 series) will be installed as a dependency.
 
-**Install Juju**  
-Juju can be installed with the following command.
+Juju can be installed with the following command:
 
 ```bash
 sudo snap install juju --classic
@@ -51,7 +51,9 @@ sudo snap refresh juju
 
 See the [Snapcraft documentation][snapcraft] for more information on snaps. 
 
-Note that you can still use a PPA to get the stable version:
+#### Using a PPA
+
+To install the most recent stable version using a PPA:
 
 ```bash
 sudo add-apt-repository -yu ppa:juju/stable
@@ -77,7 +79,7 @@ sudo snap install juju --classic
 For CentOS, you can download Juju from the following archive and install it
 manually:
 
-[**juju-2.3.1-centos7.tar.gz**][juju-centos-2.3.1] ([md5][juju-centos-2.3.1-md5])
+[**juju-2.3.3-centos7.tar.gz**][juju-centos-2.3.3] ([md5][juju-centos-2.3.3-md5])
 
 ### macOS
 
@@ -98,9 +100,9 @@ brew upgrade juju
 
 A Windows installer is available for Juju and can be found here:
 
-[**juju-setup-2.3.1-signed.exe**][juju-win-2.3.1-signed] ([md5][juju-win-2.3.1-signed-md5])
+[**juju-setup-2.3.3-signed.exe**][juju-win-2.3.3-signed] ([md5][juju-win-2.3.3-signed-md5])
 
-## Getting development releases
+## Development releases
 
 Development releases (alpha, beta, rc) are regularly published and we encourage
 users to test these versions with real workloads and use cases. We kindly ask
@@ -109,8 +111,8 @@ usability and missing functionality is also very important to us.
 
 ### Using snaps
 
-See [above][anchor__centos-and-other-linuxes] for how to get started with snaps
-if you're running a non-Ubuntu Linux distro.
+See [above][centos-and-other-linuxes] for how to get started with snaps if
+you're running a non-Ubuntu Linux distro.
 
 To install a development release using snaps, instead of the 'stable' channel,
 use the 'beta' channel:
@@ -133,6 +135,17 @@ sudo snap install juju --edge --classic
 sudo snap refresh juju --beta
 ```
 
+### Using a PPA
+
+To install the development version using a PPA:
+
+```bash
+sudo add-apt-repository -yu ppa:juju/devel
+sudo apt install juju
+```
+
+Leading edge builds are only available with snaps (via the 'edge' channel).
+
 ### Other platforms
 
 All development release binaries are published on
@@ -153,10 +166,9 @@ instructions on how to build Juju from source.
 [snapcraft]: https://snapcraft.io
 [snapd-install]: https://snapcraft.io/docs/core/install
 [juju-new-bug]: https://bugs.launchpad.net/juju/+filebug
-[juju-win-2.3.1-signed]: https://launchpad.net/juju/2.3/2.3.1/+download/juju-setup-2.3.1-signed.exe
-[juju-win-2.3.1-signed-md5]: https://launchpad.net/juju/2.3/2.3.1/+download/juju-setup-2.3.1-signed.exe/+md5
-[juju-centos-2.3.1]: https://launchpad.net/juju/2.3/2.3.1/+download/juju-2.3.1-centos7.tar.gz
-[juju-centos-2.3.1-md5]: https://launchpad.net/juju/2.3/2.3.1/+download/juju-2.3.1-centos7.tar.gz/+md5
+[juju-win-2.3.3-signed]: https://launchpad.net/juju/2.3/2.3.3/+download/juju-setup-2.3.3-signed.exe
+[juju-win-2.3.3-signed-md5]: https://launchpad.net/juju/2.3/2.3.3/+download/juju-setup-2.3.3-signed.exe/+md5
+[juju-centos-2.3.3]: https://launchpad.net/juju/2.3/2.3.3/+download/juju-2.3.3-centos7.tar.gz
+[juju-centos-2.3.3-md5]: https://launchpad.net/juju/2.3/2.3.3/+download/juju-2.3.3-centos7.tar.gz/+md5
 [juju-launchpad-binaries]: https://launchpad.net/juju/+series
-
-[anchor__centos-and-other-linuxes]: #centos-and-other-linuxes
+[centos-and-other-linuxes]: #centos-and-other-linuxes
