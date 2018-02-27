@@ -12,6 +12,7 @@ The topics presented here are:
  - Remote LXD user credentials
  - LXD logs
  - Useful LXD client commands 
+ - LXD initialisation
  - Further LXD help and reading
 
 ## LXD and images
