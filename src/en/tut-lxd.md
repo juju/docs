@@ -22,30 +22,41 @@ Your system will need the following:
 - [ZFS][ZFS-wiki]: a highly efficient and feature-rich filesystem and logical
   volume manager.
 
-
 ## Install the software
 
-Begin by installing the required software. You'll need Juju and LXD on the
-machine.
+Juju, LXD, and ZFS are required on the machine.
 
-For more options in installing Juju see the [Juju install docs][install].
+For Juju, see the [Installing Juju][install] page.
 
-For LXD you can use:
+Install the rest of the software in this way:
 
 ```bash
 sudo apt install lxd zfsutils-linux
 ```
 
+!!! Note:
+    Some types of Ubuntu installations come with LXD pre-installed.
+
 ## Groups and LXD initialisation
 
-In order to use LXD, your user must be a member of the `lxd` group.  This
-should already be the case but you can confirm this by running the command:
+In order to use LXD, your system user must be a member of the `lxd` group. If
+LXD was pre-installed and your user is the initial user then this should
+already be the case, but you can confirm this by running the command:
 
 ```bash
 groups
 ```
 
-Your groups may vary, but if `lxd` is absent you can refresh your groups with:
+Your groups may vary, but if `lxd` is absent you will need to get the user
+(here user 'ubuntu') added to the group:
+
+```bash
+sudo adduser ubuntu lxd
+```
+
+Once that user logs in they should be good to go. If the user in question is
+the one issuing the above command (i.e. the admin user is 'ubuntu') then that
+user need just refresh their groups with:
 
 ```bash
 newgrp lxd
