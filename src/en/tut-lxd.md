@@ -6,49 +6,59 @@ TODO:  Warning: Ubuntu release versions hardcoded
 
 # Getting started with Juju and LXD
 
-[LXD][lxd-upstream] with machine containers gives you the cloud experience
-locally. You can use this local cloud to build the same models with Juju that
-you can build on other public and private clouds. Using LXD as a method to
-test, verify, and replicate complex software deployments is a powerful tool
-that every Juju user needs. These instructions will deliver the best-possible
-experience with Juju. At the moment, that means using
-[Ubuntu 16.04 LTS][Xenial-download] (Xenial). See
-[Long Term Support][long-term-support] for more information on Ubuntu LTS
-releases.
+This guide will get you started quickly with Juju by setting up everything you
+need on a single [Ubuntu 16.04 LTS][Xenial-download] (Xenial) system. It does
+so by having Juju machines based on fast and secure containers, by way of
+[LXD][lxd-upstream].
 
-Your system will need the following:
+Using LXD with Juju provides an experience very similar, if not identical, to
+any other Juju backing-cloud, including the large public clouds such as AWS.
 
-- [LXD][lxd-upstream]: a hypervisor for LXC, providing fast, secure containers.
-- [ZFS][ZFS-wiki]: a highly efficient and feature-rich filesystem and logical
-  volume manager.
+Finally, because it is very easy to set up and uses minimal resources, a Juju &
+LXD combination is an efficient way to develop, test, and replicate software
+deployments. LXD is an essential tool for every Juju operator.
+
+These instructions will deliver the best-possible experience with Juju. They
+will have you use a recent version of LXD as well as a modern filesystem upon
+which to run the containers: [ZFS][ZFS-wiki].
 
 ## Install the software
 
-Juju, LXD, and ZFS are required on the machine.
-
-For Juju, see the [Installing Juju][install] page.
-
-Install the rest of the software in this way:
+**Juju** is installed, as a snap, with the following command:
 
 ```bash
-sudo apt install lxd zfsutils-linux
+sudo snap install juju --classic
+```
+
+**LXD** should come from the 'xenial-backports' repository. This will ensure a
+recent (and supported) version is used:
+
+```bash
+sudo apt install -t xenial-backports lxd 
 ```
 
 !!! Note:
-    Some types of Ubuntu installations come with LXD pre-installed.
+    Installing LXD in this way will update LXD if it is already present on your
+    system.
 
-## Groups and LXD initialisation
+**ZFS** is installed like so:
 
-In order to use LXD, your system user must be a member of the `lxd` group. If
-LXD was pre-installed and your user is the initial user then this should
-already be the case, but you can confirm this by running the command:
+```bash
+sudo apt install zfsutils-linux
+```
+
+## Groups
+
+In order to use LXD, the system user that will act as the Juju operator must be
+a member of the 'lxd' group. This may already be the case, but you can confirm
+this by running the command:
 
 ```bash
 groups
 ```
 
-Your groups may vary, but if `lxd` is absent you will need to get the user
-(here user 'ubuntu') added to the group:
+If 'lxd' is absent from the group listing you will need to get the user (here
+user 'ubuntu') added to the group:
 
 ```bash
 sudo adduser ubuntu lxd
@@ -62,7 +72,14 @@ user need just refresh their groups with:
 newgrp lxd
 ```
 
-Secondly, LXD includes an interactive initialisation which includes setting up
+LXD automatically configures a random subnet for the containers to use. In the
+event that it conflicts with an existing subnet some intervention will be
+required on your part. See [LXD initialisation][lxd-initialisation] for
+guidance.
+
+## LXD initialisation
+
+LXD includes an interactive initialisation which includes setting up
 a ZFS pool and appropriate networking for your LXD containers. To start this
 process, enter:
 
@@ -137,8 +154,6 @@ answers. IPv6 networking (the last question) is not required for Juju.
    necessary for Juju.
 
    !["step 10"](./media/juju-lxd-config010.png)
-
-LXD is now configured to work with Juju.
 
 !!! Note:
     LXD adds iptables (firewall) rules to allow traffic to the
@@ -247,7 +262,6 @@ Congratulations, you have just deployed an application with Juju!
     is to destroy the model (`juju destroy-model`) and then create a new one
     (`juju add-model`).
 
-
 ## Next Steps
 
 Now that you have configured Juju to work with a local LXD cloud, you can
@@ -259,6 +273,9 @@ We suggest you continue your journey by discovering:
  - [Add controllers for additional clouds][tut-cloud].
  - [Share your model with other users][share]
 
+
+ <!-- LINKS -->
+
 [LXD-upstream]: https://linuxcontainers.org/lxd/ "LXD upstream"
 [Xenial-download]: http://www.ubuntu.com/download/ "Xenial download"
 [ZFS-wiki]: https://wiki.ubuntu.com/ZFS "ZFS Ubuntu wiki"
@@ -266,8 +283,8 @@ We suggest you continue your journey by discovering:
 [charms]: ./charms.html
 [clouds]: ./clouds.html  "Configuring Juju Clouds"
 [concepts]: ./juju-concepts.html "Juju concepts"
-[install]: ./reference-install.html
 [keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
 [long-term-support]: https://wiki.ubuntu.com/LTS "Long Term Support"
 [share]: ./tut-users.html
 [tut-cloud]: ./tut-google.html
+[lxd-initialisation]: ./clouds-lxd-resources.html#lxd-initialisation
