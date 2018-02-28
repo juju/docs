@@ -1,6 +1,7 @@
 Title: Getting started with Juju and LXD
 TODO:  Warning: Ubuntu release versions hardcoded
-       Subnet in the walkthrough and the example/screenshots do not correspond
+       Remove 10 uneeded image files in master (juju-lxd-config*.png)
+       Remove 1 uneeded image file in master (tut-lxd-wiki-simple-status.png)
 
 # Getting started with Juju and LXD
 
@@ -17,8 +18,8 @@ LXD combination is an efficient way to develop, test, and replicate software
 deployments. LXD has become an essential tool for every Juju operator.
 
 These instructions will deliver the best-possible experience with Juju. They
-will have you use a recent version of LXD as well as a modern filesystem upon
-which to run the containers: [ZFS][ZFS-wiki].
+will have you use the most recent stable version of LXD as well as a modern
+filesystem upon which to run the containers: [ZFS][ZFS-wiki].
 
 ## Install the software
 
@@ -68,11 +69,10 @@ they will be good to go.
 
 ## LXD initialisation
 
-LXD comes with an interactive initialisation (consisting of 7 questions) that
-will both set up ZFS and offer to configure what subnet the containers should
-use. Choosing to auto-configure networking is a safe choice as a subnet will be
-intelligently chosen such that it will not conflict with an existing local
-one.
+LXD comes with an interactive initialisation that will both set up ZFS and
+offer to configure what subnet the containers should use. Choosing to
+auto-configure networking is a safe choice as a subnet will be intelligently
+chosen such that it will not conflict with an existing local one.
 
 Begin the process by entering:
 
@@ -99,7 +99,9 @@ What IPv4 address should be used (CIDR subnet notation, "auto" or "none") [defau
 What IPv6 address should be used (CIDR subnet notation, "auto" or "none") [default=auto]? none
 ```
 
-The (IPv4) subnet can be viewed with:
+LXD is now configured to work with Juju.
+
+The (IPv4) subnet can be derived from the bridge's address:
 
 ```bash
 lxc network get lxdbr0 ipv4.address
@@ -110,6 +112,8 @@ Our example gives:
 ```no-highlight
 10.145.230.1/24
 ```
+
+So the subnet address is **10.145.230.0/24**.
 
 !!! Note:
     LXD adds iptables (firewall) rules to allow traffic to the subnet/bridge it
@@ -173,19 +177,19 @@ User:        admin
 ## Deploy applications
 
 You are now ready to deploy applications from among the hundreds included in
-the [Juju charm store][charm store]. It is a good idea to test your new model.
+the Juju [Charm Store][charm-store]. It is a good idea to test your new model.
 How about a MediaWiki site?
 
 ```bash
-juju deploy cs:bundle/wiki-simple
+juju deploy wiki-simple
 ```
 
-This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
-of applications, in this case 'MediaWiki', and a database to run it
-with. Juju will install both applications and leveraging the relation in the
-model between them, configures the wiki to use the newly created database
-instance. This is part of the magic of Juju: it isn't just about deploying
-software, Juju also knows how applications coordinate together.
+This will fetch a *bundle* from the Charm Store. A bundle is a pre-packaged set
+of applications, in this case 'MediaWiki', and a database to run it with. Juju
+will install both applications and leveraging the relation in the model between
+them, configures the wiki to use the newly created database instance. This is
+part of the magic of Juju: it isn't just about deploying software, Juju also
+knows how applications coordinate together.
 
 Installing shouldn't take long. You can check on how far Juju has got by
 running the command:
@@ -197,18 +201,36 @@ juju status
 When the applications have been installed, the output of the above command will
 look something like this:
 
-![juju status](./media/tut-lxd-wiki-simple-status.png)
+```no-highlight
+[200~Model    Controller  Cloud/Region         Version  SLA
+default  lxd-test    localhost/localhost  2.3.4    unsupported
 
-There is a lot of useful information there! The important parts for now are
-the 'App' section, which shows that MediaWiki and MySQL are installed, and the
+App    Version  Status   Scale  Charm      Store       Rev  OS      Notes
+mysql           unknown      1  mysql      jujucharms   55  ubuntu  
+wiki            unknown      1  mediawiki  jujucharms    5  ubuntu  
+
+Unit      Workload  Agent  Machine  Public address  Ports     Message
+mysql/0*  unknown   idle   0        10.145.230.70   3306/tcp  
+wiki/0*   unknown   idle   1        10.145.230.132  80/tcp    
+
+Machine  State    DNS             Inst id        Series  AZ  Message
+0        started  10.145.230.70   juju-220ad6-0  trusty      Running
+1        started  10.145.230.132  juju-220ad6-1  trusty      Running
+
+Relation provider  Requirer       Interface  Type     Message
+mysql:cluster      mysql:cluster  mysql-ha   peer     
+Mysql:db           wiki:db        mysql      regular
+```
+
+There is a lot of useful information there! The important parts for now are the
+'App' section, which shows that MediaWiki and MySQL are installed, and the
 'Unit' section, which shows the IP addresses allocated to each. These addresses
-correspond to the subnet we created for LXD earlier on.
+correspond to the subnet that was created for LXD earlier on.
 
-From the status output, we can see that the IP address for the MediaWiki
-site we have created is 10.248.243.29. Point your browser to that address
-to see the site.
+From the above output, we can see that the IP address for the MediaWiki site is
+10.145.230.132. Point your browser to that address to see the site.
 
-![juju status](./media/tut-lxd-wiki-simple-browser.png)
+![wiki in browser](./media/tut-lxd-wiki-simple-browser-2.png)
 
 Congratulations, you have just deployed an application with Juju!
 
@@ -221,20 +243,20 @@ Congratulations, you have just deployed an application with Juju!
 
 Now that you have configured Juju to work with a local LXD cloud, you can
 develop, test, and experiment with applications with speed, ease, and without
-additional public cloud costs.
+incurring public cloud costs.
 
 We suggest you continue your journey by discovering:
 
- - [Add controllers for additional clouds][tut-cloud].
+ - [Add controllers for additional clouds][tut-cloud]
  - [Share your model with other users][share]
 
 
- <!-- LINKS -->
+<!-- LINKS -->
 
 [LXD-upstream]: https://linuxcontainers.org/lxd/ "LXD upstream"
 [Xenial-download]: http://www.ubuntu.com/download/ "Xenial download"
 [ZFS-wiki]: https://wiki.ubuntu.com/ZFS "ZFS Ubuntu wiki"
-[charm store]: https://jujucharms.com "Juju Charm Store"
+[charm-store]: https://jujucharms.com "Juju Charm Store"
 [charms]: ./charms.html
 [clouds]: ./clouds.html  "Configuring Juju Clouds"
 [concepts]: ./juju-concepts.html "Juju concepts"
