@@ -1,8 +1,6 @@
 Title: Getting started with Juju and LXD
 TODO:  Warning: Ubuntu release versions hardcoded
-       General review required (exact commands and their output especially)
        Subnet in the walkthrough and the example/screenshots do not correspond
-       Some command output is CLI and some is via Desktop terminal
 
 # Getting started with Juju and LXD
 
@@ -16,7 +14,7 @@ any other Juju backing-cloud, including the large public clouds such as AWS.
 
 Finally, because it is very easy to set up and uses minimal resources, a Juju &
 LXD combination is an efficient way to develop, test, and replicate software
-deployments. LXD is an essential tool for every Juju operator.
+deployments. LXD has become an essential tool for every Juju operator.
 
 These instructions will deliver the best-possible experience with Juju. They
 will have you use a recent version of LXD as well as a modern filesystem upon
@@ -47,132 +45,89 @@ sudo apt install -t xenial-backports lxd
 sudo apt install zfsutils-linux
 ```
 
-## Groups
+## User group
 
 In order to use LXD, the system user that will act as the Juju operator must be
-a member of the 'lxd' group. This may already be the case, but you can confirm
-this by running the command:
+a member of the 'lxd' user group. This may already be the case, but you can
+confirm this by running the command:
 
 ```bash
 groups
 ```
 
-If 'lxd' is absent from the group listing you will need to get the user (here
-user 'ubuntu') added to the group:
-
-```bash
-sudo adduser ubuntu lxd
-```
-
-Once that user logs in they should be good to go. If the user in question is
-the one issuing the above command (i.e. the admin user is 'ubuntu') then that
-user need just refresh their groups with:
+If 'lxd' is absent from the group listing you will likely just need to refresh
+the current user's group memberships with:
 
 ```bash
 newgrp lxd
 ```
 
-LXD automatically configures a random subnet for the containers to use. In the
-event that it conflicts with an existing subnet some intervention will be
-required on your part. See [LXD initialisation][lxd-initialisation] for
-guidance.
+If the intended Juju operator is not the current user then add the correct user
+to the 'lxd' group (e.g. `sudo adduser john lxd`) and the next time they log in
+they will be good to go.
 
 ## LXD initialisation
 
-LXD includes an interactive initialisation which includes setting up
-a ZFS pool and appropriate networking for your LXD containers. To start this
-process, enter:
+LXD comes with an interactive initialisation (consisting of 7 questions) that
+will both set up ZFS and offer to configure what subnet the containers should
+use. Choosing to auto-configure networking is a safe choice as a subnet will be
+intelligently chosen such that it will not conflict with an existing local
+one.
+
+Begin the process by entering:
 
 ```bash
 sudo lxd init
 ```
 
-You will be asked several questions to configure LXD for use. Pressing Enter
-will accept the default answer (provided in square brackets).
+The answers below are what were used to write this guide. Note that pressing
+Enter (a null answer below) will accept the default answer (provided in square
+brackets).
 
 ```no-highlight
-Name of the storage backend to use (dir or zfs) [default=zfs]:
-Create a new ZFS pool (yes/no) [default=yes]?
-Name of the new ZFS pool [default=lxd]:
-Would you like to use an existing block device (yes/no) [default=no]?
-Size in GB of the new loop device (1GB minimum) [default=10GB]: 20
-Would you like LXD to be available over the network (yes/no) [default=no]?
-Do you want to configure the LXD bridge (yes/no) [default=yes]?
+Do you want to configure a new storage pool (yes/no) [default=yes]? 
+Name of the new storage pool [default=default]: lxd
+Name of the storage backend to use (dir, btrfs, lvm, zfs) [default=zfs]: 
+Create a new ZFS pool (yes/no) [default=yes]? 
+Would you like to use an existing block device (yes/no) [default=no]? 
+Size in GB of the new loop device (1GB minimum) [default=15GB]: 20
+Would you like LXD to be available over the network (yes/no) [default=no]? 
+Would you like stale cached images to be updated automatically (yes/no) [default=yes]? 
+Would you like to create a new network bridge (yes/no) [default=yes]?
+What should the new bridge be called [default=lxdbr0]?
+What IPv4 address should be used (CIDR subnet notation, "auto" or "none") [default=auto]?
+What IPv6 address should be used (CIDR subnet notation, "auto" or "none") [default=auto]? none
 ```
 
-The bridge network will then be configured via a second round of questions.
-Except in the case where the randomly chosen subnet may conflict with an
-existing one in your local environment, it is fine to accept all the default
-answers. IPv6 networking (the last question) is not required for Juju.
+The (IPv4) subnet can be viewed with:
 
-^# Walkthrough of network configuration
+```bash
+lxc network get lxdbr0 ipv4.address
+```
 
-   In order for networking to be established between containers and Juju, you
-   need to set up a bridge device.
+Our example gives:
 
-   !["step 1"](./media/juju-lxd-config001.png)
-
-   The default name for the bridge device is `lxdbr0`. This name _must_ be used
-   for Juju to be able to connect to the containers.
-
-   !["step 2"](./media/juju-lxd-config002.png)
-
-   Juju will expect an IPv4 network space for the containers, so you should
-   enable this.
-
-   !["step 3"](./media/juju-lxd-config003.png)
-
-   The default address is chosen randomly in the 10.x.x.x space. You do not
-   need to change this unless it conflicts with another subnet you know is on
-   your network.
-
-   !["step 4"](./media/juju-lxd-config004.png)
-
-   You need to enter a [CIDR](https://tools.ietf.org/html/rfc4632) mask value.
-   The default of 24 gives you a possible 254 addresses for the subnet.
-
-   !["step 5"](./media/juju-lxd-config005.png)
-
-   You can now specify the start of the DHCP address range...
-
-   !["step 6"](./media/juju-lxd-config006.png)
-
-   And the end address of the range...
-
-   !["step 7"](./media/juju-lxd-config007.png)
-
-   You can also specify the total number of DHCP clients to accept.
-
-   !["step 8"](./media/juju-lxd-config008.png)
-
-   Finally for IPv4, enable Network Address Translation (NAT) to allow the
-   containers to communicate with the outside world.
-
-   !["step 9"](./media/juju-lxd-config009.png)
-
-   You can continue to set up a similar IPv6 bridge device, but this is not
-   necessary for Juju.
-
-   !["step 10"](./media/juju-lxd-config010.png)
+```no-highlight
+10.145.230.1/24
+```
 
 !!! Note:
-    LXD adds iptables (firewall) rules to allow traffic to the
-    subnet/bridge it created. If you subsequently add/change firewall settings
-    (e.g. with `ufw`), ensure that such changes have not interfered with Juju's
-    ability to communicate with LXD. Juju requires inbound traffic for TCP port
-    8443 from the LXD subnet.
+    LXD adds iptables (firewall) rules to allow traffic to the subnet/bridge it
+    created. If you subsequently add/change firewall settings (e.g. with
+    `ufw`), ensure that such changes have not interfered with Juju's ability to
+    communicate with LXD. Juju requires inbound traffic for TCP port 8443 from
+    the LXD subnet.
 
 ## Create a controller
 
-Before you can start deploying applications, Juju needs to create a
-controller. The controller manages both the state and events for your models
-that host the applications.
+A controller is needed before you can start deploying applications. The
+controller manages both the state and events for your models that host the
+applications.
 
-The `juju bootstrap` command is used to create the controller. The command
-expects a name (for referencing this controller) and a cloud to use. The LXD
-'cloud' is known as 'localhost' to Juju.
-
-For our localhost cloud, we will create a controller called 'lxd-test':
+Create a controller with the `juju bootstrap` command by supplying the cloud
+type and, optionally, a controller name. The LXD cloud type is known as
+'localhost' and we'll give our controller the name of 'lxd-test'. The command
+therefore becomes:
 
 ```bash
 juju bootstrap localhost lxd-test
@@ -189,11 +144,11 @@ juju controllers
 ```
 
 This will return a list of the controllers known to Juju. You can see our
-'lxd-test' listed.
+'lxd-test' listed:
 
 ```no-highlight
-Controller  Model    User   Access     Cloud/Region         Models Machines    HA  Version
-lxd-test*   default  admin  superuser  localhost/localhost       2        1  none  2.2.2
+Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
+lxd-test*   default  admin  superuser  localhost/localhost       2         1  none  2.3.4
 ```
 
 A newly-created controller has two models: The 'controller' model, which should
@@ -207,7 +162,7 @@ The following command shows the currently active controller, model, and user:
 juju whoami
 ```
 
-In our example, the output should look like this:
+Our example gives the following output:
 
 ```no-highlight
 Controller:  lxd-test
