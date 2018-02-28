@@ -1,4 +1,5 @@
 Title: Using LXD as a cloud
+TODO:  Add notes on running deb & snap LXD simultaneously. the snap has command 'lxd.migrate' that migrates deb-related containers to the snap way of life and *removes* the deb parts
 
 # Using LXD as a cloud
 
@@ -57,12 +58,12 @@ installed by default on these releases.
 
 !!! Warning:
     Only replace the LXD APT package with the LXD snap if you are not currently
-    using LXD. Using both simulatenously may be possible but is not supported.
+    using LXD. Using both simulatenously is possible but not recommended.
 
 To replace the APT package with the snap:
 
 ```bash
-sudo apt purge lxd
+sudo apt purge lxd lxd-client
 sudo snap install lxd
 ```
 
