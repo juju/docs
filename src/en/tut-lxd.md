@@ -266,4 +266,3 @@ We suggest you continue your journey by discovering:
 [long-term-support]: https://wiki.ubuntu.com/LTS "Long Term Support"
 [share]: ./tut-users.html
 [tut-cloud]: ./tut-google.html
-[lxd-initialisation]: ./clouds-lxd-resources.html#lxd-initialisation
