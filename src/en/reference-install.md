@@ -8,9 +8,9 @@ distributions, macOS, and Windows. Development releases are also available for
 testing. Read on for how to install a stable or development version of Juju on
 your chosen platform.
 
-## Version 2.3.3
+## Version 2.3.4
 
-The most recent stable version of Juju is 2.3.3. This is the version we
+The most recent stable version of Juju is 2.3.4. This is the version we
 recommend for production use. See the [Release Notes][release-notes-2].
 
 ### Ubuntu
