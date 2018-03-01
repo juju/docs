@@ -1,5 +1,7 @@
 Title: Using LXD as a cloud
-TODO:  Add notes on running deb & snap LXD simultaneously. the snap has command 'lxd.migrate' that migrates deb-related containers to the snap way of life and *removes* the deb parts
+TODO:  Warning: Ubuntu release versions hardcoded
+       Warning: Troubleshoot Trusty; bootstrap only works with the lxd snap
+       (and only if it is installed w/o the lxd deb being installed first)
 
 # Using LXD as a cloud
 
@@ -8,63 +10,77 @@ with Juju. It is also very quick to set up. With lightweight containers acting
 as Juju machines, even a moderately powerful laptop can create useful models,
 or serve as a platform to develop your own charms.
 
+A tutorial is available on this same topic: [Getting started with Juju and LXD][tut-lxd].
+
 ## Software prerequisites
 
 Both LXD and Juju will be needed on the host system.
 
 LXD is installed by default on all stable Ubuntu releases with the exception of
-Ubuntu 14.04 LTS. However, it is recommended to manage LXD via snaps as this
-is now the best supported method for LXD. Doing so on Ubuntu 16.04 LTS (and
-greater) will entail the removal of the APT package.
+Ubuntu 14.04 LTS. Also note that it is possible to install LXD as a snap. See
+[Using the LXD snap][lxd-snap] for how to do this.
 
-Begin by installing Juju (see [Installing Juju][install]). Then follow the
-instructions below for installing LXD based on your chosen Ubuntu release.
+Install Juju now, using [Installing Juju][install].
+
+Then follow the instructions below for installing LXD based on your chosen
+Ubuntu release.
 
 ### Ubuntu 14.04 LTS
 
-On Ubuntu 14.04 LTS (Trusty), ensure that `snapd` is installed:
+On Trusty, install LXD from the 'trusty-backports' pocket. This will ensure a
+recent (and supported) version is used:
 
 ```bash
-sudo apt install snapd
+sudo apt install -t trusty-backports lxd
 ```
 
-Also, if your system is not currently running at least the 4.4.0 kernel (that
-`snapd` causes to be installed as a dependency on Trusty; use the `uname -r`
-command to check) it will require a reboot:
+!!! Note:
+    It's been reported that the snap install works significantly better on
+    Trusty than what's available in the Ubuntu archive.
+
+### Ubuntu 16.04 LTS
+
+On Xenial, install LXD from the 'xenial-backports' pocket. This will ensure a
+recent (and supported) version is used:
 
 ```bash
-sudo reboot
+sudo apt install -t xenial-backports lxd 
 ```
 
-Finally, install LXD:
+!!! Note:
+    Installing LXD in this way will update LXD if it is already present on your
+    system.
+
+### Ubuntu 16.10 and greater
+
+On these releases, install LXD in the usual way:
 
 ```bash
-sudo snap install lxd
+sudo apt install lxd
 ```
 
-Add your current system user to the `lxd` group and refresh group membership.
-Here we assume a user of 'ubuntu':
+## User group
+
+In order to use LXD, the system user that will act as the Juju operator must be
+a member of the 'lxd' user group. Ensure that this is the case (below we assume
+this user is 'john'):
 
 ```bash
-sudo adduser ubuntu lxd
+sudo adduser john lxd
+```
+
+The user will be in the 'lxd' group when they next log in. If the intended Juju
+operator is the current user all that's needed is a group membership refresh:
+
+```bash
 newgrp lxd
 ```
 
-### Ubuntu 16.04 LTS and greater
-
-As mentioned, if using Ubuntu 16.04 LTS (and greater) it is recommended that
-you replace the LXD APT package with the LXD snap. Note that `snapd` should be
-installed by default on these releases.
-
-!!! Warning:
-    Only replace the LXD APT package with the LXD snap if you are not currently
-    using LXD. Using both simulatenously is possible but not recommended.
-
-To replace the APT package with the snap:
+You can confirm the active group membership for the current user by running the
+command:
 
 ```bash
-sudo apt purge lxd lxd-client
-sudo snap install lxd
+groups
 ```
 
 ## Alternate backing file-system
@@ -136,7 +152,7 @@ localhost cloud.
 
 ## Additional LXD resources
 
-[Additional LXD resources][clouds-lxd-resources] provides more LXD-specific
+[Additional LXD resources][lxd-resources] provides more LXD-specific
 information.
 
 ## Next steps
@@ -153,6 +169,7 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
+[tut-lxd]: ./tut-lxd.html
 [install]: ./reference-install.html
 [models]: ./models.html
 [charms]: ./charms.html
@@ -160,4 +177,5 @@ See these pages for ideas on what to do next:
 [controllers-creating]: ./controllers-creating.html
 [models-add]: ./models-adding.html
 [credentials]: ./credentials.html
-[clouds-lxd-resources]: ./clouds-lxd-resources.html
+[lxd-resources]: ./clouds-lxd-resources.html
+[lxd-snap]: ./clouds-lxd-resources.html#using-the-lxd-snap
