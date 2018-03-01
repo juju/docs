@@ -10,11 +10,10 @@ need on a single [Ubuntu 16.04 LTS][Xenial-download] (Xenial) system. It does
 so by having Juju machines based on fast and secure containers, by way of
 [LXD][lxd-upstream].
 
-Using LXD with Juju provides an experience very similar, if not identical, to
-any other Juju backing-cloud, including the large public clouds such as AWS.
-
-Finally, because it is very easy to set up and uses minimal resources, a Juju &
-LXD combination is an efficient way to develop, test, and replicate software
+Using LXD with Juju provides an experience very similar to any other Juju
+backing-cloud, including the large public clouds such as AWS. In addition,
+because it is very easy to set up and uses minimal resources, a Juju & LXD
+combination is an efficient way to develop, test, and replicate software
 deployments. LXD has become an essential tool for every Juju operator.
 
 These instructions will deliver the best-possible experience with Juju. They
@@ -29,8 +28,8 @@ filesystem upon which to run the containers: [ZFS][ZFS-wiki].
 sudo snap install juju --classic
 ```
 
-**LXD** should come from the 'xenial-backports' repository. This will ensure a
-recent (and supported) version is used:
+**LXD** should come from the 'xenial-backports' repository to ensure a recent
+(and supported) version is used:
 
 ```bash
 sudo apt install -t xenial-backports lxd 
@@ -49,23 +48,26 @@ sudo apt install zfsutils-linux
 ## User group
 
 In order to use LXD, the system user that will act as the Juju operator must be
-a member of the 'lxd' user group. This may already be the case, but you can
-confirm this by running the command:
+a member of the 'lxd' user group. Ensure that this is the case (below we assume
+this user is 'john'):
 
 ```bash
-groups
+sudo adduser john lxd
 ```
 
-If 'lxd' is absent from the group listing you will likely just need to refresh
-the current user's group memberships with:
+The user will be in the 'lxd' group when they next log in. If the intended Juju
+operator is the current user all that's needed is a group membership refresh:
 
 ```bash
 newgrp lxd
 ```
 
-If the intended Juju operator is not the current user then add the correct user
-to the 'lxd' group (e.g. `sudo adduser john lxd`) and the next time they log in
-they will be good to go.
+You can confirm the active group membership for the current user by running the
+command:
+
+```bash
+groups
+```
 
 ## LXD initialisation
 

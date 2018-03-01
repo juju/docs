@@ -1,4 +1,5 @@
 Title: Installing Juju
+TODO:  Warning: Ubuntu release versions hardcoded
 
 # Installing Juju
 

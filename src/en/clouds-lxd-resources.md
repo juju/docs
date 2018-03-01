@@ -1,5 +1,6 @@
 Title: Additional LXD resources
-TODO:  Add details on remote access
+TODO:  Warning: Ubuntu release versions hardcoded
+       Review section: Remote LXD user credentials
 
 # Additional LXD resources
 
@@ -12,7 +13,7 @@ The topics presented here are:
  - Remote LXD user credentials
  - LXD logs
  - Useful LXD client commands 
- - LXD initialisation
+ - Using the LXD snap
  - Further LXD help and reading
 
 ## LXD and images
@@ -119,6 +120,135 @@ covered above, are given below.
 `lxc stop <container>`				| stops container
 `lxc image alias delete <alias>`		| deletes image alias
 `lxc image alias create <alias> <fingerprint>`	| creates image alias
+
+## Using the LXD snap
+
+The LXD project will soon be moving from the APT installation method (Debian
+package) to installing via a snap. Some users may want to opt in early,
+*before* building their infrastructure, as moving to the snap entails a
+migration of containers. The LXD snap is very well tested (as is the included
+migration tool).
+
+First ensure that `snapd` is installed:
+
+```bash
+sudo apt install snapd
+```
+
+!!! Important:
+    On Ubuntu 14.04 LTS (Trusty), installing `snapd` will bring in a new kernel
+    (4.4.0 series) as a dependency. You will then **need to reboot**.
+    Attempting to install a snap without doing so will result in failure.
+
+Now install the LXD snap:
+
+```bash
+sudo snap install lxd
+```
+
+If LXD is already installed via APT **and there are no existing containers**
+under the current installation then simply remove the software:
+
+```bash
+sudo apt purge lxd lxd-client
+```
+
+If containers do exist under the old system the `lxd.migrate` utility should be
+used to migrate them to the new system. Once the migration is complete, you
+will be prompted to remove the old software automatically.
+
+Start the migration tool by running:
+
+```bash
+sudo lxd.migrate
+```
+
+As an example, LXD 2.21 was installed from the snap but the old system (Xenial
+running LXD 2.21 from the 'xenial-backports' pocket) has the following
+containers :
+
+ - Juju controller
+ - Random Xenial container
+ - Random Artful container
+
+Here is the generated output:
+
+```no-highlight
+=> Connecting to source server
+=> Connecting to destination server
+=> Running sanity checks
+
+=== Source server
+LXD version: 2.21
+LXD PID: 4839
+Resources:
+  Containers: 3
+  Images: 2
+  Networks: 1
+  Storage pools: 2
+
+=== Destination server
+LXD version: 2.21
+LXD PID: 10153
+Resources:
+  Containers: 0
+  Images: 0
+  Networks: 0
+  Storage pools: 0
+
+The migration process will shut down all your containers then move your data to the destination LXD.
+Once the data is moved, the destination LXD will start and apply any needed updates.
+And finally your containers will be brought back to their previous state, completing the migration.
+
+Are you ready to proceed (yes/no) [default=no]? yes
+=> Shutting down the source LXD
+=> Stopping the source LXD units
+=> Stopping the destination LXD unit
+=> Unmounting source LXD paths
+=> Unmounting destination LXD paths
+=> Wiping destination LXD clean
+=> Moving the data
+=> Moving the database
+=> Backing up the database
+=> Opening the database
+=> Updating the storage backends
+=> Starting the destination LXD
+=> Waiting for LXD to come online
+
+=== Destination server
+LXD version: 2.21
+LXD PID: 12514
+Resources:
+  Containers: 3
+  Images: 2
+  Networks: 1
+  Storage pools: 2
+
+The migration is now complete and your containers should be back online.
+Do you want to uninstall the old LXD (yes/no) [default=no]? yes
+
+All done. You may need to close your current shell and open a new one to have the "lxc" command work.
+```
+
+The containers are running and the snap-installed client recognizes them:
+
+```bash
+/snap/bin/lxc list
+```
+
+Output:
+
+```no-highlight
++---------------+---------+--------------------+------+------------+-----------+
+|     NAME      |  STATE  |        IPV4        | IPV6 |    TYPE    | SNAPSHOTS |
++---------------+---------+--------------------+------+------------+-----------+
+| juju-1fbdc5-0 | RUNNING | 10.79.40.75 (eth0) |      | PERSISTENT | 0         |
++---------------+---------+--------------------+------+------------+-----------+
+| Xenial        | RUNNING | 10.79.40.12 (eth0) |      | PERSISTENT | 0         |
++---------------+---------+--------------------+------+------------+-----------+
+| Artful        | RUNNING | 10.79.40.8 (eth0)  |      | PERSISTENT | 0         |
++---------------+---------+--------------------+------+------------+-----------+
+```
 
 ## Further help and reading
 
