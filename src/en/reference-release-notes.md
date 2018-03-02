@@ -45,7 +45,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   [LP 1746265](https://bugs.launchpad.net/juju/+bug/1746265) juju-upgrade from 2.2.9 to 2.3.2 fails with state changing too quickly  
   [LP 1747048](https://bugs.launchpad.net/juju/+bug/1747048) vsphere bootstrap: go panic comparing uncomparable type map[string]interface {}  
-  [LP 1745321](https://bugs.launchpad.net/juju/+bug/1745321) removed model can cause allmodelwatcher to die permanently
+  [LP 1745231](https://bugs.launchpad.net/juju/+bug/1745231) removed model can cause allmodelwatcher to die permanently
 
   If you were affected by any of the bugs fixed in this release, your feedback is
   appreciated. Please contact the juju team using the communication channels
