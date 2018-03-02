@@ -3,8 +3,101 @@ Title: Juju Release Notes
 # Release Notes History
 
 This page details all available release notes for the 2.x series of Juju. The
-release notes for the 1.x series are available
-[here](./reference-release-notes-1.html).
+release notes for the 1.x series are available [here][release-notes-1].
+
+^# Juju 2.3.4
+
+  Juju 2.3.4 has arrived. This is primarily a bug fix release.
+  
+  ## Critical bugs fixed
+  
+  Among the bugs fixed, one was considered critical. 
+  
+  [LP 1748275](https://bugs.launchpad.net/juju/+bug/1748275) Juju HA fails due to demotion of Machine 0
+  
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju
+  
+  The easiest way to get Juju is using the snap package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback Appreciated
+  
+  We encourage everyone to let us know how you're using Juju. Send us a
+  message on Twitter using #jujucharms, join us at #juju on freenode IRC, and
+  subscribe to the mailing list at juju@lists.ubuntu.com.
+  
+  ## More information
+  
+  To learn more about Juju please visit https://jujucharms.com.
+
+^# Juju 2.3.3
+
+  Juju 2.3.3 has arrived. This is primarily a bug fix release.
+  
+  ## Critical bugs fixed
+  
+  Among the bugs fixed three were considered critical. 
+  
+  [LP 1746265](https://bugs.launchpad.net/juju/+bug/1746265) juju-upgrade from 2.2.9 to 2.3.2 fails with state changing too quickly  
+  [LP 1747048](https://bugs.launchpad.net/juju/+bug/1747048) vsphere bootstrap: go panic comparing uncomparable type map[string]interface {}  
+  [LP 1745321](https://bugs.launchpad.net/juju/+bug/1745321) removed model can cause allmodelwatcher to die permanently
+
+  If you were affected by any of the bugs fixed in this release, your feedback is
+  appreciated. Please contact the juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get juju
+  
+  The easiest way to get juju is using the snap package.
+
+	  snap install juju --classic
+
+  ## Feedback Appreciated
+
+  We encourage everyone to let us know how you're using Juju. Send us a
+  message on Twitter using #jujucharms, join us at #juju on freenode,
+  and
+  subscribe to the mailing list at juju@lists.ubuntu.com.
+
+  ## More information
+
+  To learn more about juju please visit https://jujucharms.com.
+
+^# Juju 2.3.2
+  
+  Juju 2.3.2 has arrived. This is primarily a bug fix release.
+  
+  ## Critical bugs fixed
+  
+  Among the bugs fixed two were considered critical. 
+  
+  [LP 1737058](https://bugs.launchpad.net/juju/+bug/1737058) `network-get` fails to find valid configs   
+  [LP 1738728](https://bugs.launchpad.net/juju/+bug/1738728) Can’t run `juju run` after upgrading
+  
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get juju
+  
+  The easiest way to get juju is using the snap package.
+  
+  	  snap install juju --classic
+  
+  ## Feedback Appreciated
+  
+  We encourage everyone to let us know how you're using Juju. Send us a
+  message on Twitter using #jujucharms, join us at #juju on freenode, and
+  subscribe to the mailing list at juju@lists.ubuntu.com.
+
+  ## More information
+
+  To learn more about juju please visit https://jujucharms.com.
 
 ^# Juju 2.3.1
 
@@ -2164,3 +2257,8 @@ release notes for the 1.x series are available
     * Credentials files containing Joyent credentials must be updated to
       work with beta3 and later (See "Joyent Provider No Longer Uses Manta   
       Storage")
+
+
+<!-- LINKS -->
+
+[release-notes-1]: ./reference-release-notes-1.html
