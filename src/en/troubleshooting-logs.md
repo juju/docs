@@ -12,9 +12,9 @@ is provided here.
 See [Juju high availability](./controllers-ha.html#ha-and-logging) when viewing logs
 in an HA context.
 
-See [Remote logging][troubleshooting-logs-remote] for instructions on setting
-up a remote logging server for Juju.
-
+The following advanced logging topics are also available separately:
+[Remote logging][troubleshooting-logs-remote] and
+[Audit logging][troubleshooting-logs-audit].
 
 ## Juju agents
 
@@ -221,5 +221,6 @@ command.
 
 <!-- LINKS -->
 
-[troubleshooting-logs-remote]: ./troubleshooting-logs-remote.html
 [controllers-ha]: ./controllers-ha.html 
+[troubleshooting-logs-remote]: ./troubleshooting-logs-remote.html
+[troubleshooting-logs-audit]: ./troubleshooting-logs-audit.html
