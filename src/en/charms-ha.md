@@ -76,7 +76,9 @@ is placed into a different zone.  With sets, Juju places each unit of a
 distribution group into the same set, and Azure will then try to ensure that
 not all units in the set will become unavailable at the same time.
 
+
 <!-- LINKS -->
+
 [ha]: ./controllers-ha.html
-[maaszones]: https://docs.ubuntu.com/maas/2.2/en/manage-zones
+[maaszones]: https://docs.ubuntu.com/maas/en/manage-zones
 [jujuclouds]: ./clouds.html
