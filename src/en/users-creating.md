@@ -13,7 +13,7 @@ for themselves. The controller name needs to be unique within the context of
 the local (operating system) user account. The user's password is stored on the
 controller.
 
-!!! Note: 
+!!! Note:
     A "client system" is a computer, such as an Ubuntu system, that is on
     the network and has Juju installed.
 
@@ -26,9 +26,9 @@ the following additional actions (in the context of the controller):
  - Show details for controller users (`juju show-user`)
 
 To do anything further the user must wait to be granted access to a model by
-the administrator. See [Users and models](./users-models.html).
+the administrator. See [Users and models](../users-models.html).
 
-!!! Note: 
+!!! Note:
     User registration (and any other Juju operations that involves
     communication between a client system and a controller) necessitates the client
     be able to contact the controller over the network on TCP port 17070. In
@@ -82,14 +82,14 @@ This should generate output like this:
 Password for "jon" has been reset.
 Ask the user to run:
      juju register MFsTBHBsb3AwKRMSNTQuODIuMTM0LjY2OjE3MDcwExMxMC4xNTAuOTAuMTc4OjE3MDcwBCAE0XRp7xXV9AMRpK9L89nWn-jtXn7qalK47AtVQhXPQhMGMjJ0ZXN0
-``` 
+```
 
 The previous token will now be invalid, and the user should register with
 the new token.
 
 ## Logins and logouts
 
-On any given client system, each controller that shows up with 
+On any given client system, each controller that shows up with
 `juju controllers` accepts a single login; a logout is necessary before
 logging in to the same controller. Note that a logout of a user on one client
 does not affect the same user session possibly underway on a separate client.

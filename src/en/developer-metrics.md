@@ -31,7 +31,7 @@ framework.
 ## Add layer:metrics
 
 Add `layer:metrics` to the charm’s `layer.yaml`. This layer provides the
-[`collect-metrics`](./reference-charm-hooks.html#collect-metrics) hook, and allows metric collection to be defined completely by
+[`collect-metrics`](../reference-charm-hooks.html#collect-metrics) hook, and allows metric collection to be defined completely by
 `metrics.yaml`.
 
 ## Add metrics.yaml
@@ -135,5 +135,5 @@ if __name__ == '__main__':
 
 Note that this command will not have access to the normal lifecycle hook
 environment. Refer to the
-[`collect-metrics`](./reference-charm-hooks.html#collect-metrics) documentation
+[`collect-metrics`](../reference-charm-hooks.html#collect-metrics) documentation
 for more information.

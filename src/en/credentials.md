@@ -20,7 +20,7 @@ Juju can import your cloud credentials in one of three ways:
 - Accepting credentials provided interactively by the user on the command line
 - Scanning for existing credentials (e.g. environment variables, "rc" files)
 - Reading a user-provided [YAML-formatted][yaml] file
- 
+
 Each of these methods are explained below, but if you are still having
 difficulty you can get extra help by selecting your cloud from among this list:
 
@@ -37,7 +37,7 @@ difficulty you can get extra help by selecting your cloud from among this list:
 !!! Note:
     LXD deployments are a special case. Accessed locally, they do not require
     credentials. Accessed remotely, they need a *certificate credential*. See
-    [Using LXD as a cloud][lxd] for further details. 
+    [Using LXD as a cloud][lxd] for further details.
 
 ### Adding credentials via the command line
 
@@ -47,7 +47,7 @@ You can add credentials by running the command:
 juju add-credential <cloud>
 ```
 
-Juju will then ask for the information it needs. This may vary 
+Juju will then ask for the information it needs. This may vary
 according to the cloud you are using, but will typically look something like
 this:
 
@@ -61,23 +61,23 @@ Credentials added for cloud aws.
 
 Once you have supplied all the information, the credentials will be added.
 
-At present, you will need to manually set one to be the default, if you 
+At present, you will need to manually set one to be the default, if you
 have more than one for a cloud:
 
 ```bash
 juju set-default-credential <cloud> <credential>
 ```
 
-Setting a default credential means this will be used by the bootstrap 
+Setting a default credential means this will be used by the bootstrap
 command when creating a controller, without having to specify it with
 the `--credential` option in the `juju add-model` command.
 
 
 ### Scanning existing credentials
 
-Some cloud providers (e.g. AWS, OpenStack) have command line tools which rely on 
-environment variables being used to store credentials. If these are in use on 
-your system already, or you choose to define them 
+Some cloud providers (e.g. AWS, OpenStack) have command line tools which rely on
+environment variables being used to store credentials. If these are in use on
+your system already, or you choose to define them
 ([there is extra info here][env]), Juju can import them.
 
 For example, AWS uses the following environment variables (among others):
@@ -96,7 +96,7 @@ juju autoload-credentials
 ```
 
 This will will ask you whether to store each set of credentials
-it finds. Note that this is a 'snapshot' of those stored values - Juju will not 
+it finds. Note that this is a 'snapshot' of those stored values - Juju will not
 notice if they change in future.
 
 ### Adding credentials from a YAML file
@@ -153,7 +153,7 @@ credentials:
           user: administrator@xyz.com
 ```
 
-A source file like the above can be added to Juju's list of credentials with 
+A source file like the above can be added to Juju's list of credentials with
 the command:
 
 ```bash
@@ -162,7 +162,7 @@ juju add-credential aws -f mycreds.yaml
 
 This sample includes all of the default cloud options plus a couple of
 special cloud options, MAAS and an OpenStack cloud called `homestack` in
-the sample. See [Clouds](./clouds.html).
+the sample. See [Clouds](../clouds.html).
 
 ## Managing credentials
 

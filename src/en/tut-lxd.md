@@ -32,7 +32,7 @@ sudo snap install juju --classic
 (and supported) version is used:
 
 ```bash
-sudo apt install -t xenial-backports lxd 
+sudo apt install -t xenial-backports lxd
 ```
 
 !!! Note:
@@ -87,14 +87,14 @@ Enter (a null answer below) will accept the default answer (provided in square
 brackets).
 
 ```no-highlight
-Do you want to configure a new storage pool (yes/no) [default=yes]? 
+Do you want to configure a new storage pool (yes/no) [default=yes]?
 Name of the new storage pool [default=default]: lxd
-Name of the storage backend to use (dir, btrfs, lvm, zfs) [default=zfs]: 
-Create a new ZFS pool (yes/no) [default=yes]? 
-Would you like to use an existing block device (yes/no) [default=no]? 
+Name of the storage backend to use (dir, btrfs, lvm, zfs) [default=zfs]:
+Create a new ZFS pool (yes/no) [default=yes]?
+Would you like to use an existing block device (yes/no) [default=no]?
 Size in GB of the new loop device (1GB minimum) [default=15GB]: 20
-Would you like LXD to be available over the network (yes/no) [default=no]? 
-Would you like stale cached images to be updated automatically (yes/no) [default=yes]? 
+Would you like LXD to be available over the network (yes/no) [default=no]?
+Would you like stale cached images to be updated automatically (yes/no) [default=yes]?
 Would you like to create a new network bridge (yes/no) [default=yes]?
 What should the new bridge be called [default=lxdbr0]?
 What IPv4 address should be used (CIDR subnet notation, "auto" or "none") [default=auto]?
@@ -208,19 +208,19 @@ look something like this:
 default  lxd-test    localhost/localhost  2.3.4    unsupported
 
 App    Version  Status   Scale  Charm      Store       Rev  OS      Notes
-mysql           unknown      1  mysql      jujucharms   55  ubuntu  
-wiki            unknown      1  mediawiki  jujucharms    5  ubuntu  
+mysql           unknown      1  mysql      jujucharms   55  ubuntu
+wiki            unknown      1  mediawiki  jujucharms    5  ubuntu
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
-mysql/0*  unknown   idle   0        10.145.230.70   3306/tcp  
-wiki/0*   unknown   idle   1        10.145.230.132  80/tcp    
+mysql/0*  unknown   idle   0        10.145.230.70   3306/tcp
+wiki/0*   unknown   idle   1        10.145.230.132  80/tcp
 
 Machine  State    DNS             Inst id        Series  AZ  Message
 0        started  10.145.230.70   juju-220ad6-0  trusty      Running
 1        started  10.145.230.132  juju-220ad6-1  trusty      Running
 
 Relation provider  Requirer       Interface  Type     Message
-mysql:cluster      mysql:cluster  mysql-ha   peer     
+mysql:cluster      mysql:cluster  mysql-ha   peer
 Mysql:db           wiki:db        mysql      regular
 ```
 

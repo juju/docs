@@ -1,4 +1,4 @@
-Title: Creating icons for charms  
+Title: Creating icons for charms
 
 # Creating icons for charms
 
@@ -26,7 +26,7 @@ first place, then fear not, because we have an easy step-by-step guide for you.
 Before you start you will need:
 
   - A vector graphic editor. We strongly recommend the cross-platform and most excellent [ Inkscape ](http://www.inkscape.org) for all your vector graphic needs.
-  - [The template file.](./media/icon.svg) (right-click > Save link as...)
+  - [The template file.](../media/icon.svg) (right-click > Save link as...)
   - An existing logo you can import, or the ability to draw one in Inkscape.
 
 Once you have those, fire up Inkscape and we can begin!
@@ -36,14 +36,14 @@ Once you have those, fire up Inkscape and we can begin!
 From Inkscape load the **icon.svg** file. Select the Layer called "Background Circle",
 either from the drop down at the bottom, or from the layer dialog.
 
-![Step one](./media/author-charm-icons-1.png)
+![Step one](../media/author-charm-icons-1.png)
 
 ## Add colour
 
 Select **Object** and then **Fill and Stroke** from the menu to adjust the
 color.
 
-![Step two](./media/author-charm-icons-2.png)
+![Step two](../media/author-charm-icons-2.png)
 
 ## Draw something
 
@@ -54,7 +54,7 @@ tools for creating complex images.
 If you import a bitmap image to use, be sure to convert it into a vector file
 and delete the bitmap.
 
-![Step four](./media/author-charm-icons-3.png)
+![Step four](../media/author-charm-icons-3.png)
 
 *Cloud icon: "Cloud by unlimicon from the Noun Project" [CC BY]*
 

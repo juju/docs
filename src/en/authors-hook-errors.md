@@ -1,4 +1,4 @@
-Title: Dealing with errors encountered by charm hooks  
+Title: Dealing with errors encountered by charm hooks
 
 # Hook errors
 
@@ -28,12 +28,12 @@ response to either `juju resolved` or `juju upgrade-charm --force-units`.
   - `juju resolved` causes the unit to unblock itself and continue as though the
     hook had completed successfully. The ideal charm will be aware of this
     possibility and will therefore trust information from its
-    [environment](./authors-hook-environment.html) to be more recent and correct
+    [environment](../authors-hook-environment.html) to be more recent and correct
     than anything it may have previously have recorded in the local
-    [charm directory](./authors-charm-components.html).
+    [charm directory](../authors-charm-components.html).
   - `juju resolved` reverts the charm directory's contents to whatever
     they were at the start of the failed hook, and runs the hook again exactly as
-    before. This, in combination with the [debug-hooks](./developer-debugging.html)
+    before. This, in combination with the [debug-hooks](../developer-debugging.html)
     command, is your main entry point for investigating an error in detail. If the
     hook fails again when retried, it will set an error as before and wait again
     for user resolution.
@@ -51,7 +51,7 @@ again be treated as inaccessible.
 ## Charm upgrade errors
 
 Finally, there's another reason a unit might set an error status: a [charm
-upgrade](./developer-upgrade-charm.html) conflict, which should never happen
+upgrade](../developer-upgrade-charm.html) conflict, which should never happen
 except during development.
 
 They can be resolved either by forcing an upgrade to a different charm version,

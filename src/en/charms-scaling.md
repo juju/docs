@@ -184,9 +184,9 @@ remove multiple units in the same command:
 ```bash
 juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5
 ```
-!!! Note: 
+!!! Note:
     The unit numbers may not necessarily be sequential, see the
-    [notes on machine/unit numbering](./reference-numbering.html)
+    [notes on machine/unit numbering](../reference-numbering.html)
 
 
 The `remove-unit` command can be run to remove running units safely. The
@@ -194,7 +194,7 @@ running applications should automatically adjust to the change. If the machine
 the removed unit was running on is not being used as a controller, or hosting
 other Juju managed containers, it will be destroyed automatically.
 
-!!! Note: 
+!!! Note:
     If a machine has no running units, controllers or containers, and
     hasn't been removed automatically, it can be removed with the `remove-machine`
     command. For example, to remove machine 1 that the unit `mediawiki/1` was
@@ -205,4 +205,4 @@ juju remove-machine 1
 ```
 
 For more information on removing applications, please see the section on
-[destroying applications](./charms-destroy.html).
+[destroying applications](../charms-destroy.html).

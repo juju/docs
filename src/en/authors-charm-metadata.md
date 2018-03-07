@@ -76,7 +76,7 @@ following fields as well, for categorization and display in the GUI:
 In almost all cases, only one tag will be appropriate. The categories help
 keep the Charm Store organised.
 
-![Juju Charm Store metadata Listing](./media/authors-metadata-display.png)
+![Juju Charm Store metadata Listing](../media/authors-metadata-display.png)
 
 - `min-juju-version` Charms can declare the minimum Juju version the code is
 compatible with. This is useful when the code uses features introduced in a
@@ -85,7 +85,7 @@ Juju controller that will run the charm.
 
 ## Storage
 
-[Storage](./developer-storage.html) can also be declared in a charm's metadata,
+[Storage](../developer-storage.html) can also be declared in a charm's metadata,
 as such:
 
 ```yaml
@@ -100,9 +100,9 @@ storage:
 ```
 
 A metadata file defines the charm's
-[relations](./authors-relations.html),
+[relations](../authors-relations.html),
 and whether it's designed for deployment as a
-[subordinate service](./authors-subordinate-applications.html).
+[subordinate service](../authors-subordinate-applications.html).
 
   - `subordinate` should be set to true if the charm is a subordinate.
     If omitted, the charm will be presumed not to be subordinate.
@@ -158,7 +158,7 @@ from the charm hook using the following commands:
 - payload-status-set
 
 See the [Hook tools documentation][hook-payloads] for further details on these
-payload commands. 
+payload commands.
 
 ## Extra-bindings
 

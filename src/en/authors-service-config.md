@@ -1,10 +1,10 @@
-Title: Application configuration  
+Title: Application configuration
 
 # Application configuration
 
 ## Introduction
 
-A [Charm](./charms.html) often will require access to specific options or
+A [Charm](../charms.html) often will require access to specific options or
 configuration. Charms allow for the manipulation of the various configuration
 options which the charm author has chosen to expose. juju provides tools to
 help manage these options and respond to changes in these options over the

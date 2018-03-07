@@ -1,10 +1,10 @@
-Title: Notes on upgrading Juju software  
+Title: Notes on upgrading Juju software
 
 
 # Notes on upgrading Juju software
 
 This is an addendum to the main page describing Juju software upgrades:
-[Upgrading Juju software](./models-upgrade.html).
+[Upgrading Juju software](../models-upgrade.html).
 
 
 ## Agent software and related components
@@ -47,7 +47,7 @@ Rules:
 1. If the agent major version does not match the client major version, the
    version selected is that of the client version.
 
-To demonstrate, let the available online versions be: 1.25.1, 2.02, 2.03, 2.1, 
+To demonstrate, let the available online versions be: 1.25.1, 2.02, 2.03, 2.1,
 and 2.2. This gives:
 
 - client 2.03, agent 2.01 -> upgrade to 2.02
@@ -82,9 +82,9 @@ state server:
 juju sync-tools --version 2.03 --debug
 ```
 
-!!! Note: 
+!!! Note:
     The `sync-tools --version` command only accepts `major[.minor]`
     ("e.g. use '2.03' not '2.03.1').
 
-For complete syntax, see the [command reference page](./commands.html#sync-tools)
+For complete syntax, see the [command reference page](../commands.html#sync-tools)
 or by running `juju help sync-tools`.

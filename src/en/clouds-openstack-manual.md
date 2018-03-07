@@ -57,7 +57,7 @@ Once the cloud has been added, it will appear on the list of known clouds
 output by the `juju list-clouds` command. Note that the cloud name will be
 highlighted to indicate that it is a locally added cloud.
 
-!["juju list-cloud with locally added cloud"](./media/list-clouds-local.png)
+!["juju list-cloud with locally added cloud"](../media/list-clouds-local.png)
 
 It is necessary to add credentials for this cloud before Juju can bootstrap it.
 Please see the [Documentation on adding OpenStack credentials][openstack-credentials]

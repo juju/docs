@@ -1,4 +1,4 @@
-Title: Contributing to Juju docs  
+Title: Contributing to Juju docs
 
 # Contributing to Juju documentation
 
@@ -107,7 +107,7 @@ the docs:
 To implement this callout, use the following syntax:
 
 ```no-highlight
-!!! Note: 
+!!! Note:
     If you want to get more information on what is actually happening, or
     to help resolve problems, you can add the `--show-log` switch to the juju
     command to get verbose output.
@@ -157,7 +157,7 @@ first get the dependencies and make the docs:
     make sysdeps
     make
 
-!!! Note: 
+!!! Note:
     You only need to `make sysdeps` once, after that you'll have all the
     dependencies you'll need to build the docs going forward.
 
@@ -183,12 +183,12 @@ following:
 We are putting together a more comprehensive style guide, but for the moment the
 following are good guidelines:
 
- - Resist being overly formal. The documentation should be like having a 
+ - Resist being overly formal. The documentation should be like having a
    conversation with a knowledgeable friend
  - Remember the readers are *users* not necessarily Juju developers
  - Spell things properly! (see below)
  - We use British English (en-GB). See
-   [language details](./contributing-en-GB.html), including a comparison with
+   [language details](../contributing-en-GB.html), including a comparison with
    American English (en-US).
  - If including links or examples, double-check they actually work
  - We enforce 80 columns for every text file to keep it readable. Here are

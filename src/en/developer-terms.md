@@ -26,7 +26,7 @@ you are a member. Groups are mapped onto Launchpad teams, so you will need to
 
 ### Install latest charm-tools
 
-To use terms you will need at least v2.2 of [charm tools](./tools-charm-tools.html).
+To use terms you will need at least v2.2 of [charm tools](../tools-charm-tools.html).
 
 ### Pushing terms
 
@@ -114,7 +114,7 @@ require the latest version.
 There two distinctions when considering terms. There are the terms that are
 linked to a charm, and terms that have been accepted by the user.
 Developer-facing subcommands are run against the `charm` command, which is
-installed via [charm-tools](./tools-charm-tools.html), while users interact
+installed via [charm-tools](../tools-charm-tools.html), while users interact
 with `juju`.
 
 `charm terms` shows the terms that you have created, and which charms they

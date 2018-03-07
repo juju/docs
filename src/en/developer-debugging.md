@@ -10,10 +10,10 @@ process.
 
 Juju provides two commands, [`juju debug-log`](#the-'debug-log'-command) and
 [`juju debug-hooks`](#the-'debug-hooks'-command), to help developers resolve
-problems in their code. The [dhx debugging plugin](./developer-debug-dhx.html)
+problems in their code. The [dhx debugging plugin](../developer-debug-dhx.html)
 improves the debug-hooks experience by performing some common actions
 automatically. Or maybe you're having an issue with building from your charm
-layer, in which case the [debugging with layers](./developer-debug-layers.html)
+layer, in which case the [debugging with layers](../developer-debug-layers.html)
 is where to look.
 
 ## The 'debug-log' command
@@ -21,12 +21,12 @@ is where to look.
 Logs are indispensable when it comes time to troubleshoot. View the log with
 the `juju debug-log` command. The output is a consolidation of all the Juju log
 files streaming in real time. The logs show you detailed inner workings of Juju
-and any [`juju-log`](./reference-hook-tools.html#juju-log) messages that are
+and any [`juju-log`](../reference-hook-tools.html#juju-log) messages that are
 run from the charm code.
 
 See the [troubleshooting
-logs](./troubleshooting-logs.html#the-debug-log-command) section for more
-details and [filtering](./troubleshooting-logs.html#advanced-filtering) options
+logs](../troubleshooting-logs.html#the-debug-log-command) section for more
+details and [filtering](../troubleshooting-logs.html#advanced-filtering) options
 with the `juju debug-log` command.
 
 ### Log file location
@@ -37,8 +37,8 @@ you can ssh to the machine and view the log files. To access the individual
 machine use `juju ssh <machine-number>` to get access to the machine and the
 Juju log files can be found in the `/var/log/juju` directory.
 
-Fore more information about what you can do with the [log files](./troubleshooting-logs.html#log-files) please
-refer to [viewing logs](./troubleshooting-logs.html).
+Fore more information about what you can do with the [log files](../troubleshooting-logs.html#log-files) please
+refer to [viewing logs](../troubleshooting-logs.html).
 
 ### Log files on the controller
 
@@ -121,10 +121,10 @@ that has been trapped.
   - The prompt will change to indicate the hook related to the window (e.g.
 `mysql/0:db-relation-joined %`)
   - The shell will be running in the standard [hook
-context](./authors-hook-environment.html).
+context](../authors-hook-environment.html).
   - Additionally, the environment variable`$JUJU_HOOK_NAME` is set
 appropriately.
-  ![Image showing tmux debug hooks session](./media/developer-debugging-1.png)
+  ![Image showing tmux debug hooks session](../media/developer-debugging-1.png)
 
 To proceed, you should **manually execute the hook**, or perform whatever other
 actions you want. At any time during a debug-hooks window 1 session you can run
@@ -175,7 +175,7 @@ juju resolved mysql/0
 Starting with Juju version 2.0 hooks returning errors will be automatically
 retried periodically. However, the `juju resolved` command may still be
 used to retry the hook immediately. See the
-[General configuration options](./models-config.html#retrying-failed-hooks)
+[General configuration options](../models-config.html#retrying-failed-hooks)
 for more information on the automatic retry feature and how to disable this
 behaviour.
 
@@ -219,7 +219,7 @@ after the unit comes up, making it difficult to start a debug-hooks session in
 time to intercept them. If you're having difficulties, you can temporarily
 return an error code from your `install` hook (e.g. add an `exit 1` at the end
 of it), and start your session only when the unit reports an [error status
-](./authors-hook-errors.html). Use a debug-hooks session to interact with the
+](../authors-hook-errors.html). Use a debug-hooks session to interact with the
 environment and run the hook again.
 
 ## Special considerations
@@ -261,7 +261,7 @@ Some useful definitions in the context of tmux:
 
 A session may look something like this:
 
-![Image showing byobu and tmux ](./media/tmux-annotation.png)
+![Image showing byobu and tmux ](../media/tmux-annotation.png)
 
 Key:
 

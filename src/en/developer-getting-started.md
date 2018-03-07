@@ -1,4 +1,4 @@
-Title: Getting started developing charms  
+Title: Getting started developing charms
 
 # Getting Started with charm development
 
@@ -41,7 +41,7 @@ This visual representation of your charm deployment will help to solidify the
 configuration, deployment, and management of your application. Take the
 following example:
 
-![Charm Design Diagram](./media/vanilla-planning.png)
+![Charm Design Diagram](../media/vanilla-planning.png)
 
 Looking at this diagram we see the Vanilla charm with two units. The Vanilla
 application requires a relationship to a database using the “mysql” interface.
@@ -121,13 +121,13 @@ cd layer-vanilla
 ```
 
 If you'd like to write your own layer, or simply learn more about how
-layers are implemented, see 
-[How to Write a Layer](./developer-layer-example.html).
+layers are implemented, see
+[How to Write a Layer](../developer-layer-example.html).
 
 ### Assemble the layers
 
 Now that the layer is complete, let's build it and deploy the final charm. From
-within the layer directory, this is as simple as:  
+within the layer directory, this is as simple as:
 
 ```bash
 charm build
@@ -146,11 +146,11 @@ build: Processing layer: layer:apache-php
 build: Processing layer: .
 ```
 
-![Charm layer diagram](./media/vanilla-layers.png)
+![Charm layer diagram](../media/vanilla-layers.png)
 
 To inspect how the charm was assembled, there is a `charm layers` command that
 shows what file belongs to which layer. Change to the charm directory and view
-the layer map:  
+the layer map:
 
 ```bash
 cd $JUJU_REPOSITORY/trusty/vanilla
@@ -188,7 +188,7 @@ As for style, here are some pointers:
  - Do not over-complicate. This is a small beginners' guide.
  - Use available Markdown formatting features such as section headers, lists,
    and code blocks. See this [Markdown help][askubuntu-markdown].
-   
+
 Finally, here is an example of a `getstarted.md` file:
 
 [https://api.jujucharms.com/charmstore/v5/~rharding/grafana-4/archive/getstarted.md][getstartedmd-link]
@@ -239,7 +239,7 @@ promulgation.
 <!-- LINKS -->
 
 [charm-store]: https://jujucharms.com/
-[getting-started]:    ./getting-started.html 
+[getting-started]:    ./getting-started.html
 [charm-tools]:        ./tools-charm-tools.html
 [charm-helpers]:      ./tools-charm-helpers.html
 [charm-helper-docs]:  https://charm-helpers.readthedocs.io/

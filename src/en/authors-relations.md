@@ -27,7 +27,7 @@ only. They have to match.
 ### Provides and Requires
 
 The `provides` and `requires` keys defined in
-[metadata.yaml](./authors-charm-metadata.html) are used to define pairings of charms
+[metadata.yaml](../authors-charm-metadata.html) are used to define pairings of charms
 that are likely to be fruitful. Consider mongodb's metadata:
 
 ```no-highlight
@@ -111,7 +111,7 @@ controls the set of remote units that are reported to the unit as members of
 the relation: container-scoped relations are restricted to reporting details
 of a single principal unit to a single subordinate, and vice versa, while
 global relations consider all possible remote units.
-[Subordinate](./authors-subordinate-applications.html) charms are only valid if they
+[Subordinate](../authors-subordinate-applications.html) charms are only valid if they
 have at least one `requires` relation with `container` scope.
 
 - `limit` is ignored by Juju, but if present should be a positive integer N

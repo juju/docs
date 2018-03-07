@@ -46,7 +46,7 @@ Proceed as follows:
 1. Select your 'Identity Domain' in the top-right corner.
 1. Click on the 'Create instance' box and then 'Create' a Compute service.
 
-![Create Compute service](./media/oracle_empty-dashboard-2.png)
+![Create Compute service](../media/oracle_empty-dashboard-2.png)
 
 !!! Recall:
     We are doing this to associate images with your 'identity domain'. We will
@@ -55,7 +55,7 @@ Proceed as follows:
 Click on 'Marketplace' on the resulting page (left menu), enter 'ubuntu' into
 the search field, and hit Enter:
 
-![Search Ubuntu images](./media/oracle_create-instance-ubuntu-2.png) 
+![Search Ubuntu images](../media/oracle_create-instance-ubuntu-2.png)
 
 From the point of view of Juju, some images should not be used.
 Juju-compatible images are listed below:
@@ -83,7 +83,7 @@ logo), accept Oracle's terms and conditions, and click 'Install'. Repeat the
 process for each desired image. These installed images will end up under
 'Private Images' in the menu on the left:
 
-![List private images](./media/oracle_create-instance-private-2.png)
+![List private images](../media/oracle_create-instance-private-2.png)
 
 ## Trial accounts
 
@@ -92,7 +92,7 @@ trial account. This requires a 'REST Endpoint'. To get this, navigate to 'My
 Account URL', scroll down to 'Oracle Compute Cloud Service', and click on it.
 The resulting page will look similar to this:
 
-![REST endpoint](./media/oracle_myservices-endpoint-2.png)
+![REST endpoint](../media/oracle_myservices-endpoint-2.png)
 
 There may be multiple endpoints. In that case, trial and error may be needed
 below (hint: the endpoint domain should be resolvable using DNS).
@@ -192,16 +192,16 @@ To do this:
 1. Click on the 'Create IP Exchange' button and enter a name for the exchange,
    and optionally, a description and one or more tags.
 
-![Create an IP exchange](./media/oracle_create-ip-exchange-2.png)
+![Create an IP exchange](../media/oracle_create-ip-exchange-2.png)
 
 Now create a network to use this exchange by selecting 'IP Networks' from the
 menu and clicking on 'Create IP Network':
 
-![Create an IP network](./media/oracle_create-ip-network-2.png)
+![Create an IP network](../media/oracle_create-ip-network-2.png)
 
 Enter a name, a CIDR formatted address for the 'IP Address Prefix', and an
 optional description with one or more tags. Use the 'IP Exchange' drop-down
-menu to select the exchange created previously and click on 'Create'. 
+menu to select the exchange created previously and click on 'Create'.
 
 When you next create a Juju controller (see below), you'll be able to use these
 new subnets and spaces. For example, typing `juju subnets` will show output
@@ -226,7 +226,7 @@ oracle-cloud-ip-exchange  192.168.0.0/16
 ```
 
 See [How to configure more complex networks using spaces][spaces] for further
-details on networks and spaces. 
+details on networks and spaces.
 
 ## Create the Juju controller
 
@@ -246,13 +246,13 @@ navigating to 'My Services URL', opening the left menu (top-left icon), and
 selecting 'Compute'. The controller should be visible under the 'Instances'
 tab:
 
-![List controller instance](./media/oracle_bootstrap-instances-2.png)
+![List controller instance](../media/oracle_bootstrap-instances-2.png)
 
 Oracle Compute has the notion of *sites* (like availability zone or region).
 You may need to change your site to see your new controller. This is done in
 the top-right corner:
 
-![Oracle Compute sites](./media/oracle_bootstrap-instances-sites.png)
+![Oracle Compute sites](../media/oracle_bootstrap-instances-sites.png)
 
 ## Next steps
 

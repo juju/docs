@@ -1,4 +1,4 @@
-Title: Layers for charm authoring  
+Title: Layers for charm authoring
 
 # Why build from layers
 
@@ -41,7 +41,7 @@ useful.
 
 The basic layer provides the minimum needed to use the
 [charms.reactive](https://charmsreactive.readthedocs.io/) framework. The
-[layer-basic](http://github.com/juju-solutions/layer-basic) provides:  
+[layer-basic](http://github.com/juju-solutions/layer-basic) provides:
 * Wheelhouse support for management of python dependencies.
 * Hook decorators so the code can react to Juju Hooks.
 * Logic decorators for bash and python code (@when, @when_not, @when_any, etc).
@@ -163,10 +163,10 @@ excellent example of how to write a layer for a PHP application.
 ## Building a layer into a charm
 
 The
-[Getting started guide](./developer-getting-started.html#assemble-the-layers)
+[Getting started guide](../developer-getting-started.html#assemble-the-layers)
 contains steps on how to build a layer into a charm.
 
 !!! Note:
     You must have the
-    [Charm Tools](./developer-getting-started.html#charm-tools)
+    [Charm Tools](../developer-getting-started.html#charm-tools)
     software installed to use the `charm build` command.

@@ -1,0 +1,365 @@
+navigation:
+
+  - title: About Juju
+    location: about-juju.md
+
+  - title: Quick Guides
+
+    children:
+      - title: Get started
+        location: getting-started.md
+      - title: What's new in 2.3
+        location: whats-new.md
+      - title: Local Juju with LXD cloud
+        location: tut-lxd.md
+      - title: Controllers and Models
+        location: tut-google.md
+      - title: Sharing and Users
+        location: tut-users.md
+
+  - title: User Guide
+
+    children:
+      - title: Concepts and terms
+        location: juju-concepts.md
+      - title: Clouds
+        location: clouds.md
+
+        children:
+          - title: Cloud credentials
+            location: credentials.md
+          - title: Amazon AWS
+            location: help-aws.md
+          - title: Microsoft Azure
+            location: help-azure.md
+          - title: Google GCE
+            location: help-google.md
+          - title: Joyent
+            location: help-joyent.md
+          - title: LXD
+            location: clouds-LXD.md
+          - title: MAAS
+            location: clouds-maas.md
+          - title: Manual
+            location: clouds-manual.md
+          - title: OpenStack
+            location: help-openstack.md
+          - title: Oracle Compute
+            location: help-oracle.md
+          - title: Rackspace
+            location: help-rackspace.md
+          - title: VMware vSphere
+            location: help-vmware.md
+
+      - title: Controllers
+        location: controllers.md
+
+        children:
+          - title: Create/Bootstrap
+            location: controllers-creating.md
+          - title: Juju GUI
+            location: controllers-gui.md
+          - title: High Availability
+            location: controllers-ha.md
+          - title: Backups
+            location: controllers-backup.md
+
+      - title: Models
+        location: models.md
+      - title: Charms &amp; applications
+        location: charms.md
+
+        children:
+          - title: Deploying applications
+            location: charms-deploying.md
+          - title: Using constraints
+            location: charms-constraints.md
+          - title: Application configuration
+            location: charms-config.md
+          - title: Application Relations
+            location: charms-relations.md
+          - title: Exposing applications
+            location: charms-exposing.md
+          - title: Scaling applications
+            location: charms-scaling.md
+          - title: Upgrading applications
+            location: charms-upgrading.md
+          - title: Removing applications &amp; Units
+            location: charms-destroy.md
+          - title: Groups of applications
+            location: charms-service-groups.md
+          - title: Charm high availability
+            location: charms-ha.md
+          - title: Working with Units
+            location: charms-working-with-units.md
+          - title: Working with Actions
+            location: actions.md
+          - title: Working with Resources
+            location: charms-resources.md
+          - title: Using storage
+            location: charms-storage.md
+          - title: Viewing utilization with metrics
+            location: charms-metrics.md
+          - title: Fan container networking
+            location: charms-fan.md
+          - title: Working offline
+            location: charms-offline.md
+
+      - title: Charm bundles
+        location: charms-bundles.md
+      - title: Users
+        location: users.md
+
+        children:
+          - title: Authentication
+            location: users-auth.md
+          - title: Creating users
+            location: users-creating.md
+          - title: Users and models
+            location: users-models.md
+          - title: User management
+            location: users-manage.md
+          - title: Sample commands
+            location: users-sample-commands.md
+          - title: Workflow scenarios
+            location: users-workflows.md
+
+      - title: Managing Juju
+        location: juju-managing.md
+
+        children:
+          - title: Disable Juju commands
+            location: juju-block.md
+          - title: CentOS support
+            location: juju-centos.md
+          - title: Network spaces
+            location: network-spaces.md
+          - title: Juju plugins
+            location: juju-plugins.md
+
+      - title: How to...
+        location: howto.md
+
+        children:
+          - title: Configure metrics gathering with Prometheus
+            location: howto-prometheus.md
+          - title: Set up a Private Cloud
+            location: howto-privatecloud.md
+          - title: Update the series of a juju controller or workload
+            location: howto-updateseries.md
+
+      - title: Troubleshooting
+        location: troubleshooting.md
+
+  - title: Developer Guide
+
+    children:
+    - title: Getting Started
+      location: developer-getting-started.md
+
+      children:
+        - title: Prerequisites and Tools
+          location: developer-getting-started#install-libraries-and-tools.md
+        - title: Designing your Charm
+          location: developer-getting-started#designing-your-charm.md
+        - title: Writing your Charm
+          location: developer-getting-started#writing-your-charm.md
+        - title: Testing your Charm
+          location: developer-getting-started#testing-your-charm.md
+        - title: Publishing your charm
+          location: developer-getting-started#publishing-your-charm.md
+
+    - title: Event Cycle
+      location: developer-event-cycle.md
+
+      children:
+      - title: Handling Reactive States
+        location: developer-event-cycle#handling-reactive-states.md
+
+    - title: Charm Layers
+      location: developer-layers.md
+
+      children:
+        - title: What are Layers
+          location: developer-layers#what-are-layers?.md
+        - title: States
+          location: developer-layers#states.md
+        - title: How to Write a Layer
+          location: developer-layer-example.md
+
+    - title: Interface Layers
+      location: developer-layers-interfaces.md
+
+      children:
+        - title: Design Considerations
+          location: developer-layers-interfaces#design-considerations.md
+        - title: Communication Scopes
+          location: developer-layers-interfaces#communication-scopes.md
+        - title: Writing an Interface
+          location: developer-layers-interfaces#writing-an-interface-layer.md
+
+    - title: Upgrading
+      location: developer-upgrade-charm.md
+    - title: Juju Terms
+      location: developer-terms.md
+    - title: Juju Metrics
+      location: developer-metrics.md
+    - title: Juju Resources
+      location: developer-resources.md
+    - title: Network Primitives
+      location: developer-network-primitives.md
+    - title: Implementing Leadership
+      location: developer-leadership.md
+
+      children:
+        - title: Leadership Hooks
+          location: developer-leadership#leadership-hooks.md
+        - title: Leadership Tools
+          location: developer-leadership#leadership-tools.md
+        - title: Leadership Howtos
+          location: developer-leadership-howtos.md
+
+    - title: Implementing Actions
+      location: developer-actions.md
+
+      children:
+        - title: Defining Actions
+          location: developer-actions#implementing-actions.md
+        - title: Action Tools
+          location: developer-actions#action-tools.md
+
+    - title: Implementing Storage
+      location: developer-storage.md
+
+      children:
+        - title: Adding Storage
+          location: developer-storage#adding-storage.md
+        - title: Storage Hooks
+          location: developer-storage#storage-hooks.md
+
+    - title: Writing Tests
+      location: developer-testing.md
+
+      children:
+        - title: Charm Proof
+          location: developer-testing#charm-proof.md
+        - title: Amulet
+          location: developer-testing#amulet.md
+        - title: BundleTester
+          location: developer-testing#bundletester.md
+
+    - title: Debugging
+      location: developer-debugging.md
+
+      children:
+        - title: Debugging Layers
+          location: developer-debug-layers.md
+        - title: debug-hooks
+          location: developer-debugging#the-'debug-hooks'-command.md
+        - title: debug-log
+          location: developer-debugging#the-'debug-log'-command.md
+        - title: DHX
+          location: developer-debug-dhx.md
+
+    - title: How to...
+      location: developer-howto.md
+
+      children:
+        - title: Charm with Docker
+          location: howto-charm-with-docker.md
+
+    - title: Charm Authors
+      location: authors-intro.md
+
+      children:
+        - title: How hooks are run (Hook API)
+          location: authors-hook-environment.md
+        - title: Relations lifecycle
+          location: authors-relations-in-depth.md
+        - title: Implementing relations
+          location: authors-relations.md
+        - title: Charm leadership
+          location: authors-charm-leadership.md
+        - title: Hook Errors
+          location: authors-hook-errors.md
+        - title: Subordinate applications
+          location: authors-subordinate-applications.md
+        - title: Implicit Relations
+          location: authors-implicit-relations.md
+
+    - title: The Juju Charm Store
+      location: authors-charm-store.md
+
+      children:
+        - title: Submit a charm
+          location: authors-charm-store#submitting-a-new-charm.md
+        - title: Charm store policy
+          location: authors-charm-policy.md
+        - title: Best practices
+          location: authors-charm-best-practice.md
+        - title: Charm Icons
+          location: authors-charm-icon.md
+
+  - title: Tools
+
+    children:
+      - title: Charm Tools
+        location: tools-charm-tools.md
+      - title: Charm Helpers
+        location: tools-charm-helpers.md
+      - title: Amulet
+        location: tools-amulet.md
+      - title: Mojo
+        location: tools-mojo.md
+
+  - title: Reference
+
+    children:
+      - title: Install Juju
+        location: reference-install.md
+      - title: Introducing Juju 2.0!
+        location: introducing-2.md
+      - title: Juju commands
+        location: commands.md
+      - title: Juju constraints
+        location: reference-constraints.md
+      - title: Juju Charm Hooks
+        location: reference-charm-hooks.md
+      - title: Juju environment variables
+        location: reference-environment-variables.md
+      - title: Juju Hook Tools
+        location: reference-hook-tools.md
+      - title: metadata.yaml
+        location: authors-charm-metadata.md
+      - title: Layers and charms.reactive
+        location: https://charmsreactive.readthedocs.io.md
+
+        children:
+          - title: Decorators
+            location: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.decorators.md
+          - title: Flags
+            location: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.flags.md
+          - title: Triggers
+            location: https://charmsreactive.readthedocs.io/en/latest/triggers.md
+          - title: Relations
+            location: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations.md
+          - title: Layer.yaml
+            location: reference-layer-yaml.md
+
+      - title: API docs
+        location: http://godoc.org/github.com/juju/juju/api.md
+      - title: Release notes
+        location: reference-release-notes.md
+      - title: Status values
+        location: reference-status.md
+      - title: Machine/unit numbering
+        location: reference-numbering.md
+      - title: Charm Review Criteria
+        location: reference-reviewers.md
+
+  - title: Contact us
+    location: contact-us.md
+  - title: Help improve these docs
+    location: contributing.md
+  - title: Report a docs issue
+    location: https://github.com/juju/docs/issues/new.md

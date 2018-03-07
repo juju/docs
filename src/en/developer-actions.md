@@ -1,15 +1,15 @@
-Title: Implementing actions in Juju charms  
+Title: Implementing actions in Juju charms
 
 
 # Actions for the charm author
 
 Actions are executables associated with a charm that may be invoked by the user.
 For example, the charm author might include a `snapshot` action on a database
-charm. See [Juju Actions](./actions.html) on how to use actions.
+charm. See [Juju Actions](../actions.html) on how to use actions.
 
 The user may pass arguments when invoking the action. The charm uses an
 `actions.yaml` file to specify the parameter type for the arguments. In the
-[Juju GUI](./controllers-gui.html), the invocation of an action will be
+[Juju GUI](../controllers-gui.html), the invocation of an action will be
 automatically built based on `actions.yaml`.
 
 [Action tools](#action-tools) may be used by the author to define how actions
@@ -24,7 +24,7 @@ Every implemented action must include:
  - the executable's name as a top-level key in a YAML map in the `actions.yaml`
    file.
 
-!!! Note: 
+!!! Note:
     Action names must start and end with lowercase alphanumeric
     characters, and only contain lowercase alphanumeric characters, the hyphen "-"
     or full stop"." characters.

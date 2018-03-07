@@ -213,7 +213,7 @@ $Configuration['Database']['Password'] = '{{ db.password() }}';
 And that's all you need to get Vanilla up and running using layers!
 The final directory structure looks like this:
 
-![directory tree](./media/author-charm-composing-01.png)
+![directory tree](../media/author-charm-composing-01.png)
 
 Check out the [repo][] for the complete charm layer.
 

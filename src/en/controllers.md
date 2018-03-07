@@ -15,14 +15,14 @@ similar to other Juju machines.
 During controller creation two *models* are also created, the 'controller' model
 and the 'default' model. The primary purpose of the 'controller' model is to
 run and manage the Juju API server and the underlying database. Additional
-models may be created by the user - see [Models](./models.html).
+models may be created by the user - see [Models](../models.html).
 
 Since a controller can host multiple models, the destruction of a controller
 must be done with ample consideration since all its models will be destroyed
 along with it.
 
 In some circumstances you may wish to share a controller or one of its associated
-models. Juju provides [multi-user functionality](./users.html) for this purpose.
+models. Juju provides [multi-user functionality](../users.html) for this purpose.
 
 ## Minimum requirements
 
@@ -44,10 +44,10 @@ Common tasks are summarized below.
 
          juju bootstrap [options] [filter pattern ...]
 
-   For examples see [Creating a controller](./controllers-creating.html).
+   For examples see [Creating a controller](../controllers-creating.html).
 
    For complete explanation, syntax and examples see the
-   [command reference page](./commands.html#bootstrap) or the `juju help
+   [command reference page](../commands.html#bootstrap) or the `juju help
    bootstrap` command.
 
 
@@ -61,7 +61,7 @@ Common tasks are summarized below.
    The currently active controller is indicated in the list with an asterisk('*').
 
    For complete explanation, syntax and examples see the
-   [command reference page](./commands.html#controllers) or the `juju help
+   [command reference page](../commands.html#controllers) or the `juju help
    controllers` command.
 
 
@@ -75,7 +75,7 @@ Common tasks are summarized below.
          juju show-controller [options]
 
    For complete explanation, syntax and examples see the
-   [command reference page](./commands.html#show-controller) or the `juju help
+   [command reference page](../commands.html#show-controller) or the `juju help
    show-controller` command.
 
 
@@ -86,7 +86,7 @@ Common tasks are summarized below.
    as whether the controller will record auditing information. Configuration
    must happen as the controller is bootstrapped.
 
-   This topic is covered in more depth in the [configuring controllers section](./controllers-config.html).
+   This topic is covered in more depth in the [configuring controllers section](../controllers-config.html).
 
 
 
@@ -97,7 +97,7 @@ Common tasks are summarized below.
          juju destroy-controller [options]
 
    For complete explanation, syntax and examples see the
-   [command reference page](./commands.html#destroy-controller) or the `juju help
+   [command reference page](../commands.html#destroy-controller) or the `juju help
    destroy-controller` command.
 
    Use the `juju kill-controller` command as a last resort if the controller is
@@ -113,7 +113,7 @@ Common tasks are summarized below.
          juju kill-controller [options]
 
    For complete explanation, syntax and examples see the
-   [command reference page](./commands.html#kill-controller) or the `juju help
+   [command reference page](../commands.html#kill-controller) or the `juju help
    kill-controller` command.
 
 
@@ -133,7 +133,7 @@ Common tasks are summarized below.
    controller configuration/metadata. If the controller or its host machine
    fails, it is possible to recreate the controller from the backup.
 
-   This is a complex subject. See [Juju backups](./controllers-backup.html).
+   This is a complex subject. See [Juju backups](../controllers-backup.html).
 
    Note: coverage of client backups are included in the above resource.
 
@@ -157,7 +157,7 @@ Common tasks are summarized below.
    sorts of changes a user can make across the controller's models.
 
    This topic is treated in
-   [Restricting changes to the running Juju environment](./juju-block.html).
+   [Restricting changes to the running Juju environment](../juju-block.html).
 
 
 [gui]: ./controllers-gui.html

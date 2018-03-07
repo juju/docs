@@ -1,4 +1,4 @@
-Title: Creating config.yaml and configuring charms  
+Title: Creating config.yaml and configuring charms
 
 # Charm configuration
 
@@ -24,7 +24,7 @@ the option is not compliant with Charm Store policy.
 Some options may need to be set, but depending on the nature of the charm it
 may not be feasible to provide a default value. The author should list any such
 options in the `description` field. See
-[Application configuration](./charms-config.html) for information on
+[Application configuration](../charms-config.html) for information on
 configuring an application at deployment time.
 
 A null default value is accepted for any option type (providing a non-null

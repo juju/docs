@@ -22,7 +22,7 @@ This is a list of hooks that run during the normal charm lifecycle.
   - immediately after "install"
   - immediately after "upgrade-charm"
   - at least once when the unit agent is restarted (but, if the unit is in an
-    [error state](./authors-hook-errors.html), it won't be run until after the
+    [error state](../authors-hook-errors.html), it won't be run until after the
     error state is cleared).
   - after changing charm configuration using the GUI or command line interface
 
@@ -45,7 +45,7 @@ the leader. Authors can use this hook to take action if their protocols for
 leadership, consensus, raft, or quorum require one unit to assert leadership.
 If the election process is done internally to the application, other code
 should be used to signal the leader to Juju. For more information read the
-[charm leadership document](./authors-charm-leadership.html).
+[charm leadership document](../authors-charm-leadership.html).
 
 ### leader-settings-changed
 
@@ -53,7 +53,7 @@ should be used to signal the leader to Juju. For more information read the
 units to respond to. Much like (config-changed)[#config-changed) but for the
 leaders to send values to other units. Follower units can implement this hook
 and take action when the leader sets values. For more information read the
-[charm leadership document](./authors-charm-leadership.html).
+[charm leadership document](../authors-charm-leadership.html).
 
 ### start
 
@@ -78,8 +78,8 @@ implement the following logic:
 ### upgrade-charm
 
 `upgrade-charm` runs immediately after any
-[upgrade](./developer-upgrade-charm.html) operation that does _not_ itself
-interrupt an existing [error state](./authors-hook-errors.html). It should be
+[upgrade](../developer-upgrade-charm.html) operation that does _not_ itself
+interrupt an existing [error state](../authors-hook-errors.html). It should be
 used to reconcile local state written by some other version of the charm into
 whatever form it needs to take to be manipulated by the current version.
 
@@ -129,7 +129,7 @@ incomplete: you can guarantee that when the remote unit changes its settings,
 the hook will be run again.
 
 The settings that you can get, and that you should set, are determined by the
-relation's [interface](./authors-relations.html).
+relation's [interface](../authors-relations.html).
 
 ### [name]-relation-departed
 
@@ -172,7 +172,7 @@ runtime relations in play with the same name, and that they're independent: one
 Juju can provide a variety of storage to charms. The charms can define several
 different types of storage that are allocated from Juju. To read more
 information, see the [storage
-document](./developer-storage.html)
+document](../developer-storage.html)
 
 ### [name]-storage-attached
 
@@ -180,7 +180,7 @@ document](./developer-storage.html)
 added. The storage-attached hooks will be run before the install hook, so that
 the installation routine may use the storage. The name prefix of this hook will
 depend on the storage key [defined in the
-metadata.yaml](./developer-storage.html#adding-storage) file.
+metadata.yaml](../developer-storage.html#adding-storage) file.
 
 ### [name]-storage-detaching
 
@@ -189,14 +189,14 @@ removed. The storage-detaching hooks will be run before storage is detached,
 and always before the stop hook is run, to allow the charm to gracefully release
 resources before they are removed and before the unit terminates. The name
 prefix of the hook will depend on the storage key [defined in the
-`metadata.yaml`](./developer-storage.html#adding-storage) file.
+`metadata.yaml`](../developer-storage.html#adding-storage) file.
 
 ## Metric Hooks
 
 ### collect-metrics
 
 Juju executes the collect-metrics hook every five minutes for the lifetime of
-the unit. Use the [`add-metric`](./reference-hook-tools.html#add-metric) hook tool in `collect-metrics` to add measurements
+the unit. Use the [`add-metric`](../reference-hook-tools.html#add-metric) hook tool in `collect-metrics` to add measurements
 to Juju.
 
 Because it may run concurrently with lifecycle charm hooks, `collect-metrics`

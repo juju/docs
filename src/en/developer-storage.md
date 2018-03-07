@@ -1,4 +1,4 @@
-Title: Writing charms using storage  
+Title: Writing charms using storage
 
 # Writing charms that use storage
 
@@ -9,7 +9,7 @@ react to storage changes.
 
 If you are looking for information on the various storage provider types or how
 to deploy charms that use storage features see
-[Using Juju storage](./charms-storage.html).
+[Using Juju storage](../charms-storage.html).
 
 ## Adding storage
 
@@ -37,9 +37,9 @@ location specifies the path at which to mount filesystem-type storage. The
 'read-only' and 'shared' attributes are currently not handled. Support will be
 added in a future version of Juju.
 
-A [filesystem-type](./charms-storage.html#provider-support) store yields a
+A [filesystem-type](../charms-storage.html#provider-support) store yields a
 directory in which the charm may store files.
-[Block-type](./charms-storage.html#ec2/ebs-(ebs)) stores yield raw block
+[Block-type](../charms-storage.html#ec2/ebs-(ebs)) stores yield raw block
 devices -- typically disks or logical volumes. If the charm specifies a
 filesystem-type store, and the storage provider supports provisioning only
 disks, then a disk will be created, attached, partitioned, and a filesystem
@@ -73,9 +73,9 @@ metadata. It is then possible to add instances (up to the maximum) by using the
 For each storage entity defined in the `metadata.yaml` file, the following hooks
 may be implemented:
 
-- [[name]-storage-attached](./reference-charm-hooks.html#[name]-storage-attached)
+- [[name]-storage-attached](../reference-charm-hooks.html#[name]-storage-attached)
 
-- [[name]-storage-detaching](./reference-charm-hooks.html#[name]-storage-detaching)
+- [[name]-storage-detaching](../reference-charm-hooks.html#[name]-storage-detaching)
 
 Each hook is prefixed with the name of the store, similar to how relation hooks
 are prefixed with the name of the relation. So, for example, if we had specified
@@ -99,12 +99,12 @@ and before the unit terminates.
 There are several hook tools available for dealing with storage within a
 charm, described below
 
-- [`storage-list`](./reference-hook-tools.html#storage-list)
+- [`storage-list`](../reference-hook-tools.html#storage-list)
 
     `storage-list` may be used to list storage instances that are attached
     to the unit. The names returned may be passed through to `storage-get`.
 
-- [`storage-get`](./reference-hook-tools.html#storage-get)
+- [`storage-get`](../reference-hook-tools.html#storage-get)
 
     `storage-get` may be used to obtain information about storage being
     attached to, or detaching from, the unit. If the executing hook is a
@@ -117,7 +117,7 @@ charm, described below
     storage-attached and storage-detaching hooks. The exception to this
     is when the charm specifies a static location for singleton stores.
 
-- [`storage-add`](./reference-hook-tools.html#storage-add)
+- [`storage-add`](../reference-hook-tools.html#storage-add)
 
     `storage-add` may be used to add storage to the unit. The tool takes
     the name of the storage (as in the charm metadata), and optionally

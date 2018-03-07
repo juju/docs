@@ -7,7 +7,7 @@ To demonstrate multi-user interaction, we present several workflows. It is
 assumed that Juju is installed [link to juju install page]. This presentation
 will be based on the local cloud: LXD. Since LXD does not require credentials,
 there will be no mention of credentials below (see
-[Getting Started](./getting-started.html) for a full treatment of using LXD as
+[Getting Started](../getting-started.html) for a full treatment of using LXD as
 the cloud provider).
 
 
@@ -15,7 +15,7 @@ the cloud provider).
 
 ### Controller creation
 A system user creates a controller, thus becoming the controller's
-administrator. See [Controllers](./controllers.html) for information on
+administrator. See [Controllers](../controllers.html) for information on
 controllers.
 
 ```bash
