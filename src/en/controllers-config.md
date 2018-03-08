@@ -58,7 +58,8 @@ This table lists all the controller keys which may be assigned a value.
 api-port                     | integer | 17070    |                          | The port to use for connecting to the API
 auditing-enabled             | bool    | false    | false/true               | Sets whether audit logging is enabled. Can be toggled for an existing controller.
 audit-log-capture-args       | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods. Can be toggled for an existing controller.  
-audit-log-exclude-methods    | string  | ReadOnlyMethods | [Some.Method,...] | What information to exclude from the audit log. Can be set for an existing controller. See [additional info][anchor__excluding-information-from-the-audit-log].
+audit-log-exclude-methods    | string  | ReadOnlyMethods | [Some.Method,...] |
+What information to exclude from the audit log. Can be set for an existing controller. See [additional info][#excluding-information-audit-log].
 audit-log-max-backups        | integer | 10       |                          | The maximum number of backup audit log files to keep.
 audit-log-max-size           | integer | 300      |                          | The maximum size for an audit log file (units: MiB).
 autocert-dns-name            | string |          |                          | Sets the DNS name of the controller. If a client connects to this name, an official certificate will be automatically requested. Connecting to any other host name will use the usual self-generated certificate.
@@ -80,8 +81,7 @@ state-port                   | integer | 37017   |                          | Th
 
 ### Excluding information from the audit log
 
-See [Audit logging][troubleshooting-logs-audit] for background information on
-this topic.
+See [Audit logging][audit-logging] for background information on this topic.
 
 Excluding information from the audit log is done via the
 `audit-log-exclude-methods` key above, which refers to API calls/methods. The
@@ -170,5 +170,5 @@ key value of 'ReadOnlyMethods'.
 
 [controllers-creating]: ./controllers-creating.html "Creating a controller"
 [models-config]: ./models-config.html "Configuring models"
-[anchor__excluding-information-from-the-audit-log]: #excluding-information-from-the-audit-log
-[troubleshooting-logs-audit]: troubleshooting-logs-audit.html
+[#excluding-information-audit-log]: #excluding-information-from-the-audit-log
+[audit-logging]: ./troubleshooting-logs.html#audit-logging
