@@ -1,4 +1,5 @@
 Title: Concepts and terms
+TODO:  developer-layers-interfaces.md also includes definitions
 
 # Concepts and terms
 
@@ -107,13 +108,23 @@ the agents have been omitted:
 
 ![units][img__units]
 
+## Endpoint
+
+An *endpoint* (or application endpoint) is used to connect to another
+application's endpoint in order to form a relation. An endpoint is defined in
+a charm's `metadata.yaml` and specifies a name, a role (one of 'requires',
+'provides', or 'peers'), and an interface that the relations will use.
+
+## Interface
+
+An *interface* is the communication protocol used over a relation between
+applications.
+
 ## Relation
 
-The above section described the possibility of running several instances of the
-same application. In general, however, few applications are designed to be run
-in isolation and charms contain the knowledge of how to connect different
-applications together. These inter-application connections are called
-*relations* and they are formed by connecting *interfaces* of the same type.
+Charms contain the intelligence necessary for connecting different applications
+together. These inter-application connections are called *relations* and they
+are formed by connecting interfaces of the same type.
 
 For example, the 'wordpress' charm supports, among others, an 'http' interface
 (for serving the website) and a 'db' interface (for the database which stores
