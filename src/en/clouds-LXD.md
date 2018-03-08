@@ -16,8 +16,9 @@ A tutorial is available on this same topic: [Getting started with Juju and LXD][
 
 Both LXD and Juju will be needed on the host system.
 
-LXD is installed by default on all stable Ubuntu releases with the exception of
-Ubuntu 14.04 LTS. Also note that it is possible to install LXD as a snap. See
+LXD is installed by default (by Ubuntu package) on all supported Ubuntu
+releases with the exception of Ubuntu 14.04 LTS. However, the snap install
+method will soon become the preferred way to install LXD. See
 [Using the LXD snap][lxd-snap] for how to do this.
 
 Install Juju now, using [Installing Juju][install].
@@ -61,7 +62,7 @@ sudo apt install lxd
 
 ## User group
 
-In order to use LXD, the system user that will act as the Juju operator must be
+In order to use LXD, the system user who will act as the Juju operator must be
 a member of the 'lxd' user group. Ensure that this is the case (below we assume
 this user is 'john'):
 
