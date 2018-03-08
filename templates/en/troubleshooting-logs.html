@@ -1805,16 +1805,23 @@
         <div class="col-12 p-layout__main">
           <main id="main-content" class="p-layout__inner">
             <h1 id="juju-logs">Juju logs<a class="anchor" href="#juju-logs"></a></h1>
-<p>Logs in Juju are intended to be inspected with the <code>juju debug-log</code> command. This
-method provides logs on a per-model basis and is therefore more convenient than
-reading individual logs on multiple (Juju) machines directly on the file system.
-The latter can nonetheless be done in exceptional circumstances and some explanation
-is provided here.</p>
-<p>See <a href="../controllers-ha.html#ha-and-logging">Juju high availability</a> when viewing logs
-in an HA context.</p>
-<p>See <a href="./troubleshooting-logs-remote.html">Remote logging</a> for instructions on setting
-up a remote logging server for Juju.</p>
-<h2 id="juju-agents">Juju agents<a class="anchor" href="#juju-agents"></a></h2>
+<p>There are various logging resources available to the Juju operator. This page will
+explain these and show how to use them. It will cover:</p>
+<ul>
+<li><a href="#model-logs">Model logs</a></li>
+<li><a href="#remote-logging">Remote logging</a></li>
+<li><a href="#audit-logging">Audit logging</a></li>
+</ul>
+<h2 id="model-logs">Model logs<a class="anchor" href="#model-logs"></a></h2>
+<p>Model logs can be considered as Juju's "regular logs" and are intended to be
+inspected with the <code>juju debug-log</code> command. This method provides logs on a
+per-model basis and is therefore more convenient than reading individual logs
+on multiple (Juju) machines directly on the file system. The latter can
+nonetheless be done in exceptional circumstances and some explanation is
+provided here.</p>
+<p>See <a href="./controllers-ha.html#ha-and-logging">Juju high availability</a> when viewing
+logs in an HA context.</p>
+<h3 id="juju-agents">Juju agents<a class="anchor" href="#juju-agents"></a></h3>
 <p>One of the roles of the <em>Juju agent</em>, 'jujud', is to perform logging. There is
 one agent for every Juju machine and unit. For instance, for a machine with an
 id of '2', we see evidence of such agents:</p>
@@ -1828,8 +1835,8 @@ drwxr-xr-x 4 root root 4.0K Apr 28 00:42 unit-nfs2-0
 </pre></div>
 
 
-<p>So there are 2 agents running on this Juju machine. One for the machine itself
-and one for a service unit.</p>
+<p>So there are two agents running on this Juju machine. One for the machine
+itself and one for a service unit.</p>
 <p>The contents of one of these directories</p>
 <div class="codehilite"><pre><span></span>juju ssh <span class="m">2</span> ls -lh /var/lib/juju/agents/machine-2
 </pre></div>
@@ -1843,7 +1850,7 @@ and one for a service unit.</p>
 <p>Consider keeping backups of these files, especially prior to upgrading the
 agents. See
 <a href="../models-upgrade.html#upgrading-the-model-software">Upgrading Juju software</a>.</p>
-<h2 id="the-debug-log-command">The debug-log command<a class="anchor" href="#the-debug-log-command"></a></h2>
+<h3 id="the-debug-log-command">The debug-log command<a class="anchor" href="#the-debug-log-command"></a></h3>
 <p>The <code>juju debug-log</code> command shows the consolidated logs of all Juju agents
 (machines and units) running in a model. The <code>juju switch</code> command is used
 to change models. Alternatively, a model can be chosen with the '-m' option.
@@ -1863,7 +1870,7 @@ see below) and that limit is attained. In all other cases the command will need
 to be interrupted with 'Ctrl-C' in order to regain the shell prompt.</p>
 <p>For complete syntax, see the <a href="../commands.html">command reference page</a>. The
 <code>juju help debug-log</code> command also provides reminders and more examples.</p>
-<h3 id="examples:">Examples:<a class="anchor" href="#examples:"></a></h3>
+<h4 id="examples:">Examples:<a class="anchor" href="#examples:"></a></h4>
 <p>To begin with the last ten log messages:</p>
 <div class="codehilite"><pre><span></span>juju debug-log
 </pre></div>
@@ -1884,12 +1891,50 @@ to be interrupted with 'Ctrl-C' in order to regain the shell prompt.</p>
 </pre></div>
 
 
-<p>To begin with the last 500 lines. The 'grep' utility is used as a text filter:</p>
+<p>To begin with the last 500 lines. The <code>grep</code> utility is used as a text filter:</p>
 <div class="codehilite"><pre><span></span>juju debug-log -n <span class="m">500</span> <span class="p">|</span> grep amd64
 </pre></div>
 
 
-<h2 id="advanced-filtering">Advanced filtering<a class="anchor" href="#advanced-filtering"></a></h2>
+<h3 id="increase-the-logging-level">Increase the logging level<a class="anchor" href="#increase-the-logging-level"></a></h3>
+<p>At times, it may help to increase the logging level when attempting to diagnose
+an issue.</p>
+<p>You can verify the current logging level with the <code>model-config</code>
+command:</p>
+<div class="codehilite"><pre><span></span>juju model-config logging-config
+</pre></div>
+
+
+<p>Output will be similar to the following:</p>
+<div class="codehilite"><pre><span></span>&lt;root&gt;=WARNING; unit=INFO
+</pre></div>
+
+
+<p>Increasing the logging level will provide additional details. Logging levels,
+from most verbose to least verbose, are as follows:</p>
+<ul>
+<li>TRACE</li>
+<li>DEBUG</li>
+<li>INFO</li>
+<li>WARNING</li>
+<li>ERROR</li>
+</ul>
+<p>When diagnosing an issue or gathering information for filing a bug, it's often
+useful to increase the log verbosity by moving to DEBUG or TRACE levels.</p>
+<p>To increase the logging level from our previous example, you would enter the
+following command:</p>
+<div class="codehilite"><pre><span></span>juju model-config logging-config<span class="o">=</span><span class="s2">&quot;&lt;root&gt;=DEBUG;unit=TRACE&quot;</span>
+</pre></div>
+
+
+<p>Once the issue has been diagnosed, or the logging information is collected,
+make sure the logging levels are reset so that you don't collect massive
+amounts of unnecessary data:</p>
+<div class="codehilite"><pre><span></span>juju model-config logging-config<span class="o">=</span><span class="s2">&quot;&lt;root&gt;=WARNING;unit=INFO&quot;</span>
+</pre></div>
+
+
+<h3 id="advanced-filtering">Advanced filtering<a class="anchor" href="#advanced-filtering"></a></h3>
 <p>A Juju log line is written in this format:</p>
 <p><code>&lt;entity&gt; &lt;timestamp&gt; &lt;log-level&gt; &lt;module&gt;:&lt;line-no&gt; &lt;message&gt;</code></p>
 <p>The '--include' and '--exclude' options select and deselect, respectively, the
@@ -1904,7 +1949,7 @@ combination of module and machine/unit filtering uses a logical AND.</p>
 preceding higher level (less verbose). The '--level' option restricts messages
 to the specified log-level or greater. The levels from lowest to highest are
 TRACE, DEBUG, INFO, WARNING, and ERROR.</p>
-<h3 id="examples:">Examples:<a class="anchor" href="#examples:"></a></h3>
+<h4 id="examples:">Examples:<a class="anchor" href="#examples:"></a></h4>
 <p>To begin with the last 1000 lines and exclude messages from machine 3:</p>
 <div class="codehilite"><pre><span></span>juju debug-log -n <span class="m">1000</span> --exclude machine-3
 </pre></div>
@@ -1939,7 +1984,7 @@ juju.cmd and juju.worker modules:</p>
 </pre></div>
 
 
-<h2 id="log-files">Log files<a class="anchor" href="#log-files"></a></h2>
+<h3 id="log-files">Log files<a class="anchor" href="#log-files"></a></h3>
 <p>Log files are located on every machine Juju creates, including the controller.
 They reside under <code>/var/log/juju</code> and correspond to the machine and any units.</p>
 <p>Using the example from a <a href="#juju-agents">previous section</a>:</p>
@@ -1970,6 +2015,68 @@ command.</p>
 <div class="p-notification">
 <p class="p-notification__response">          <span class="p-notification__status">        Note:      </span>        <span class="p-notification__line">In a <a href="./controllers-ha.html">High availability</a> scenario, <code>logsink.log</code> is not guaranteed to contain all messages since agents have a choice of several controllers to send their logs to. The <code>debug-log</code> command should be used for accessing consolidated data across all controllers.</span>  </p>
 </div>
+<h2 id="remote-logging">Remote logging<a class="anchor" href="#remote-logging"></a></h2>
+<p>On a per-model basis log messages can optionally be forwarded to a remote
+syslog server over a secure TLS connection.</p>
+<p>See <a href="http://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html">Rsyslog documentation</a> for help with
+security-related files (certificates, keys) and the configuration of the
+remote syslog server.</p>
+<h3 id="configuring">Configuring<a class="anchor" href="#configuring"></a></h3>
+<p>Remote logging is configured during the controller-creation step by supplying
+a YAML format configuration file:</p>
+<div class="codehilite"><pre><span></span>juju bootstrap &lt;cloud&gt; --config logconfig.yaml
+</pre></div>
+
+
+<p>The contents of the YAML file is of the form:</p>
+<div class="codehilite"><pre><span></span>syslog-host: &lt;host&gt;:&lt;port&gt;
+syslog-ca-cert: |
+-----BEGIN CERTIFICATE-----
+ &lt;cert-contents&gt;
+-----END CERTIFICATE-----
+syslog-client-cert: |
+-----BEGIN CERTIFICATE-----
+ &lt;cert-contents&gt;
+-----END CERTIFICATE-----
+syslog-client-key: |
+-----BEGIN PRIVATE KEY-----
+ &lt;cert-contents&gt;
+-----END PRIVATE KEY-----
+</pre></div>
+
+
+<h3 id="enabling">Enabling<a class="anchor" href="#enabling"></a></h3>
+<p>To actually enable remote logging for a model a configuration key needs to be
+set for that model:</p>
+<p><code>juju model-config -m &lt;model&gt; logforward-enabled=True</code></p>
+<p>An initial 100 (maximum) existing log lines will be forwarded.</p>
+<p>See <a href="./models-config.html">Configuring models</a> for extra help on configuring a model.</p>
+<p>Note that it is possible to configure <em>and</em> enable forwarding on <em>all</em> the
+controller's models in one step:</p>
+<p><code>juju bootstrap &lt;cloud&gt; --config logforward-enabled=True --config logconfig.yaml</code></p>
+<h2 id="audit-logging">Audit logging<a class="anchor" href="#audit-logging"></a></h2>
+<p>Juju audit logging provides a chronological account of all events by capturing
+invoked user commands. These logs reside on the controller involved in the
+transmission of commands affecting the Juju client, Juju machines, and the
+controller itself.</p>
+<p>The audit log filename is <code>/var/log/juju/audit.log</code> and contains records which
+are either:</p>
+<ul>
+<li>a <em>Conversation</em>, a collection of API methods associated with a single
+   top-level CLI command</li>
+<li>a <em>Request</em> , a single API method</li>
+<li>a <em>ResponseErrors</em>, errors resulting from an API method</li>
+</ul>
+<p>Information can be filtered out of the audit log to prevent its file(s) from
+growing without bounds and making it difficult to read. See
+<a href="./controllers-config.html#excluding-information-from-the-audit-log">Excluding information from the audit log</a>.</p>
+<p>The log is typically viewed by connecting to the controller over SSH and
+looking at the file:</p>
+<div class="codehilite"><pre><span></span>juju ssh -m controller <span class="m">0</span>
+more /var/log/juju/audit.log
+</pre></div>
+
+
 <!-- LINKS -->
           </main>
         </div>
