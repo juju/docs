@@ -244,39 +244,37 @@ clean machine.
 
 ## Deploying to spaces
 
-More complex networks can be configured using spaces. Spaces group one or more
-routable subnets with common ingress and egress rules to give the operator much
-better and finer-grained control over all networking aspects of a model and its
-application deployments.
+Using spaces, the operator is able to create a more restricted network topology
+for applications at deployment time. See [Network spaces][spaces] for details
+on spaces. This is achieved with the use of the `--bind` option.
 
-See the [How to configure more complex networks using spaces][spaces] for
-details on creating and listing spaces.
-
-When deploying a charm or a bundle, you can specify a space using the `--bind`
-argument following the `juju deploy` command.
-
-When deploying an application to a target with multiple spaces, the operator
-must specify which space to use because ambiguous bindings will result in a
-provisioning failure. For example, the following will deploy the 'mysql'
-application to the 'db-space' space:
+The following will deploy the 'mysql' application to the 'db-space' space:
 
 ```bash
 juju deploy mysql --bind db-space
 ```
 
-For finer control, the `--bind` argument can also be used to specify how
-specific charm-defined endpoints are connected to specific spaces, including a
-default option for any interfaces not specified:
+For finer control, individual endpoints can be connected to specific spaces:
+
+```bash
+juju deploy --bind "db=db-space db-admin=admin-space" mysql
+```
+
+If a space is mentioned that is not associated with an interface then it will
+act as the default space (i.e. will be used for any unspecified interface):
 
 ```bash
 juju deploy --bind "default-space db=db-space db-admin=admin-space" mysql
 ```
 
+See [Concepts and terms][concepts-endpoint] for the definition of an endpoint,
+an interface, and other closely related terms.
+
 For information on building bundles with bindings, see
 [Using and Creating Bundles][creatingbundles].
 
 Both the `add-machine` and `deploy` commands allow the specification of a
-spaces constraint using the `--constraints` argument:
+spaces constraint using the `--constraints` option:
 
 ```bash
 juju add-machine --constraints spaces=db-space
@@ -298,11 +296,6 @@ storage or dmz spaces.
 See [Constraints][constraints] for more general information regarding
 constraints. To learn about `extra-bindings`, which provide a way to declare an
 extra bindable endpoint that is not a relation, see [Charm metadata][metadata].
-
-!!! Note:
-    Juju's knowledge of the available spaces on the underlying cloud may lag
-    behind recent changes. To force Juju to re-examine the spaces it can use,
-    you should run the command `juju reload-spaces`.  
 
 ## Juju retry-provisioning
 
@@ -344,3 +337,4 @@ horizontally scale out on dedicated machines when you need to.
 [constraints]: ./charms-constraints.html
 [charms-upgrading]: ./charms-upgrading.html
 [charms-offline-deploying]: ./charms-offline-deploying.html
+[concepts-endpoint]: ./juju-concepts.html#endpoint

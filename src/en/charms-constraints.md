@@ -32,8 +32,8 @@ The most useful constraints for Juju in general are:
   - **cores** :  How many cpu cores the host machine should have. This is a
   crude indicator of system performance.
     
-  - **spaces** : Target a particular network space, or avoid one (not supported
-  all clouds).
+  - **spaces** : Target a particular network space, or avoid one. See 
+  [Network spaces][network-spaces].
   
   - **arch** : Short for 'architecture', indicates the processor type an
   application must run on. One of amd64, arm, i386, arm64, or ppc64el.
@@ -176,3 +176,4 @@ the '--to' placement switch -
 <!-- LINKS -->
 
 [controllers-creating]: ./controllers-creating.html
+[network-spaces]: ./network-spaces.html
