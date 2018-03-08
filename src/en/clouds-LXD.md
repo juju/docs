@@ -1,30 +1,98 @@
-Title: Juju LXD local provider
-TODO: add details on remote access
-      possible reorganisation or splitting of the doc required
+Title: Using LXD as a cloud
+TODO:  Warning: Ubuntu release versions hardcoded
+       Warning: Troubleshoot Trusty; bootstrap only works with the lxd snap
+       (and only if it is installed w/o the lxd deb being installed first)
 
 # Using LXD as a cloud
 
-LXD provides a fast, powerful, self-contained and largely configuration-free
-way to experiment with Juju. Using lightweight LXC containers as instances,
-even a moderately powerful laptop can create useful models, or serve as
-a development platform for your own charms.
+Choosing LXD as the backing cloud for Juju is an efficient way to experiment
+with Juju. It is also very quick to set up. With lightweight containers acting
+as Juju machines, even a moderately powerful laptop can create useful models,
+or serve as a platform to develop your own charms.
 
+A tutorial is available on this same topic: [Getting started with Juju and LXD][tut-lxd].
 
-## Prerequisites
+## Software prerequisites
 
-Juju's support for LXD currently works only with Ubuntu 16.04 (Xenial).
+Both LXD and Juju will be needed on the host system.
 
-Install LXD:
+LXD is installed by default (by Ubuntu package) on all supported Ubuntu
+releases with the exception of Ubuntu 14.04 LTS. However, the snap install
+method will soon become the preferred way to install LXD. See
+[Using the LXD snap][lxd-snap] for how to do this.
+
+Install Juju now, using [Installing Juju][install].
+
+Then follow the instructions below for installing LXD based on your chosen
+Ubuntu release.
+
+### Ubuntu 14.04 LTS
+
+On Trusty, install LXD from the 'trusty-backports' pocket. This will ensure a
+recent (and supported) version is used:
+
+```bash
+sudo apt install -t trusty-backports lxd
+```
+
+!!! Note:
+    It's been reported that the snap install works significantly better on
+    Trusty than what's available in the Ubuntu archive.
+
+### Ubuntu 16.04 LTS
+
+On Xenial, install LXD from the 'xenial-backports' pocket. This will ensure a
+recent (and supported) version is used:
+
+```bash
+sudo apt install -t xenial-backports lxd 
+```
+
+!!! Note:
+    Installing LXD in this way will update LXD if it is already present on your
+    system.
+
+### Ubuntu 16.10 and greater
+
+On these releases, install LXD in the usual way:
 
 ```bash
 sudo apt install lxd
+```
+
+## User group
+
+In order to use LXD, the system user who will act as the Juju operator must be
+a member of the 'lxd' user group. Ensure that this is the case (below we assume
+this user is 'john'):
+
+```bash
+sudo adduser john lxd
+```
+
+The user will be in the 'lxd' group when they next log in. If the intended Juju
+operator is the current user all that's needed is a group membership refresh:
+
+```bash
 newgrp lxd
+```
+
+You can confirm the active group membership for the current user by running the
+command:
+
+```bash
+groups
 ```
 
 ## Alternate backing file-system
 
-LXD can optionally use an alternative file-system for containers. We recommend
-using ZFS for the best experience. To use ZFS with LXD enter these commands:
+LXD can use various file-systems for its containers. Below we show how to
+implement ZFS, as it provides the best experience.
+
+!!! Note:
+    ZFS is not supported on Ubuntu 14.04 LTS.
+    
+Proceed as follows:
 
 ```bash
 sudo apt install zfsutils-linux
@@ -34,165 +102,81 @@ sudo zpool create lxd /var/lib/zfs/lxd.img
 sudo lxd init --auto --storage-backend zfs --storage-pool lxd
 ```
 
-Above we allocated 32GB of space to a sparse file. Consider using a fast block
-device if available.
+Above we allocated 32GB of space to a sparse file.
 
+Notes:
 
-## Create a controller (bootstrap)
+ - If possible, put `/var/lib/zfs` on a fast storage device (e.g. SSD).
+ - The installed ZFS utilities can be used to query the pool (e.g.
+   `sudo zpool list -v lxd`).
 
-It is time to create the controller for LXD. Below, we call it 'lxd-xenial':
+## Create a controller
+
+The Juju controller for LXD (the 'localhost' cloud) can now be created. Below,
+we call it 'lxd':
 
 ```bash
-juju bootstrap lxd lxd-test
+juju bootstrap localhost lxd
 ```
 
-This will result in the controller being visible with the LXC client:
+View the new controller machine like this:
+
+```bash
+juju machines -m controller
+```
+
+This example yields the following output:
+
+```no-highlight
+Machine  State    DNS            Inst id        Series  AZ  Message
+0        started  10.103.91.114  juju-b14348-0  xenial      Running
+```
+
+The controller's underlying container can be listed with the LXD client:
 
 ```bash
 lxc list
 ```
 
+Output:
+
 ```no-highlight
-+---------------+---------+-----------------------+------+------------+-----------+
-|     NAME      |  STATE  |         IPV4          | IPV6 |    TYPE    | SNAPSHOTS |
-+---------------+---------+-----------------------+------+------------+-----------+
-| juju-669cb0-0 | RUNNING | 10.154.173.181 (eth0) |      | PERSISTENT | 0         |
-+---------------+---------+-----------------------+------+------------+-----------+
+---------------+---------+----------------------+------+------------+-----------+
+|     NAME      |  STATE  |         IPV4         | IPV6 |    TYPE    | SNAPSHOTS |
++---------------+---------+----------------------+------+------------+-----------+
+| juju-b14348-0 | RUNNING | 10.103.91.114 (eth0) |      | PERSISTENT | 0         |
++---------------+---------+----------------------+------+------------+-----------+
 ```
 
-See more examples of [Creating a controller][bootstrap].
+See more examples of [Creating a controller][controllers-creating] with the
+localhost cloud.
+
+## Additional LXD resources
+
+[Additional LXD resources][lxd-resources] provides more LXD-specific
+information.
 
 ## Next steps
 
-A controller is created with two models - the 'controller' model which
-should be reserved for Juju's operations, and a model named 'default'
-for deploying user workloads.
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
 
- - [More information on models][models]
- - [Using Charms to deploy applications][charms]
+See these pages for ideas on what to do next:
 
-## Additional information about LXD
-
-### LXD and images
-
-LXD is image based: all LXD containers come from images and any LXD daemon
-instance (also called a "remote") can serve images. When LXD is installed a
-locally-running remote is provided (Unix domain socket) and the client is
-configured to talk to it (named 'local'). The client is also configured to talk
-to several other, non-local, ones (named 'ubuntu', 'ubuntu-daily', and
-'images').
-
-An image is identified by its fingerprint (SHA-256 hash), and can be tagged
-with multiple aliases. Juju looks for images with aliases in the format
-ubuntu-&lt;codename&gt;, for instance 'ubuntu-trusty' or 'ubuntu-xenial'.
-
-For any image-related command, an image is specified by its alias or by its
-fingerprint. Both are shown in image lists. An image's filename is its *full
-fingerprint* while an image list displays its *partial fingerprint*. Either
-type of fingerprint can be used to refer to images.
-
-Juju pulls official cloud images from the 'ubuntu' remote
-(http://cloud-images.ubuntu.com) and creates the necessary alias. Any
-subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
-Cached images can be seen with `lxc image list`:
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
 
 
-![lxc image list after importing](./media/image_list-imported_image-reduced70.png)
+<!-- LINKS -->
 
-Image cache expiration and image synchronization mechanisms are built-in.
-
-### Remote user credentials
-
-When working with remote users on different machines (see [Creating
-users][users] for details on adding users, registering them and granting them
-permissions), LXD-hosted controllers need to generate a specific certificate
-credential which is shared with the remote machine. 
-
-To do this, first run `juju autoload-credentials` on the LXD host. This
-will generate output similar to the following:
-
-```bash
-Looking for cloud and credential information locally...
-
-1. LXD credential "localhost" (new)
-Select a credential to save by number, or type Q to quit:
-```
-
-Select the LXD credential (`1` in the above example) and you will be asked for
-the name of a cloud to link to this credential. Enter 'localhost' to specify
-the local LXD deployment. When the prompt re-appears, type 'q' to quit. The new
-certificate credential will have been created.
-
-To export this certificate credential to a file called
-`localhost-credentials.yaml`, type the following:
-
-```bash
-juju credentials localhost --format=yaml > localhost-credentials.yaml
-```
-
-The output file now needs to be moved to the machine and account that requires
-access to the local LXD deployment. With this file on the remote machine, the
-certificate credential can be imported with the following command:
-
-```bash
-juju add-credential localhost -f localhost-credentials.yaml
-```
-See [Cloud credentials][credentials] for more details on how credentials are used. 
-
-### Logs
-
-LXD itself logs to `/var/log/lxd/lxd.log` and Juju machines created via the
-LXD local provider log to `/var/log/lxd/juju-{uuid}-machine-{#}`. However,
-the standard way to view logs is with the `juju debug-log` command. See
-[Viewing logs][logs] for more details.
-
-<!---
-Including this table is confusing and not really appropriate for Juju docs.
-Still, it's such a nice table that I could not delete it. (pmatulis)
-
-## Useful client commands
-
-There are many client commands available. Some common ones, including those covered
-above, are given below.
-
-<style> table td{text-align:left;}</style>
-
-| client commands                               | meaning                            |
-|-----------------------------------------------|------------------------------------|
-`lxc launch`					| creates an LXD container
-`lxc list`	                             	| lists all LXD containers
-`lxc delete`					| deletes an LXD container
-`lxc remote list`				| lists remotes
-`lxc info`					| displays status of localhost
-`lxc info <container>`				| displays status of container
-`lxc config show <container>`			| displays config of container
-`lxc image info <alias or fingerprint>`		| displays status of image
-`lxc exec <container> <executable>`		| runs program on container
-`lxc exec <container> /bin/bash`		| spawns shell on container
-`lxc file pull <container></path/to/file> .`	| copies file from container
-`lxc file push </path/to/file> <container>/`  	| copies file to container
-`lxc stop <container>`				| stops container
-`lxc image alias delete <alias>`		| deletes image alias
-`lxc image alias create <alias> <fingerprint>`	| creates image alias
--->
-
-
-### Notes
-
-Although not Juju-related, see `lxc --help` for more on LXD client usage and
-`lxd --help` for assistance with the daemon. See upstream documentation for
-how to
-[configure the lxd daemon and containers][lxd-upstream]
-.
-
-For additional configuration of LXD controllers, please see the [Controllers
-documentation][controllers].
-
+[tut-lxd]: ./tut-lxd.html
+[install]: ./reference-install.html
 [models]: ./models.html
 [charms]: ./charms.html
-[bootstrap]: ./controllers-creating.html
-[lxd-upstream]: https://github.com/lxc/lxd/blob/master/doc/configuration.md
-[logs]: ./troubleshooting-logs.html
-[models-add]: ./models-adding.html
 [controllers]: ./controllers.html
+[controllers-creating]: ./controllers-creating.html
+[models-add]: ./models-adding.html
 [credentials]: ./credentials.html
+[lxd-resources]: ./clouds-lxd-resources.html
+[lxd-snap]: ./clouds-lxd-resources.html#using-the-lxd-snap
