@@ -2,13 +2,14 @@ Title: Juju logs
 TODO:  Remote logging: strongly consider adding a sub-page (rsyslog TLS tutorial)
        Remote logging: need to state whether server-side and/or client-side auth is a requirement
 
+
 # Juju logs
 
 There are various logging resources available to the Juju operator. This page will
-explain these and explain how to use them. It will cover:
+explain these and show how to use them. It will cover:
 
- - Model logs
- - Remote logging
+ - [Model logs][#model-logs]
+ - [Remote logging][#remote-logging]
 
 ## Model logs
 
@@ -39,8 +40,8 @@ drwxr-xr-x 2 root root 4.0K Apr 28 00:42 machine-2
 drwxr-xr-x 4 root root 4.0K Apr 28 00:42 unit-nfs2-0
 ```
 
-So there are 2 agents running on this Juju machine. One for the machine itself
-and one for a service unit.
+So there are two agents running on this Juju machine. One for the machine
+itself and one for a service unit.
 
 The contents of one of these directories
 
@@ -57,7 +58,6 @@ reveals the agent's configuration file:
 Consider keeping backups of these files, especially prior to upgrading the
 agents. See
 [Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software).
-
 
 ### The debug-log command
 
@@ -112,7 +112,7 @@ To begin with the last twenty log messages for the 'lxd-pilot' model:
 juju debug-log -m lxd-pilot -n 20
 ```
 
-To begin with the last 500 lines. The 'grep' utility is used as a text filter:
+To begin with the last 500 lines. The `grep` utility is used as a text filter:
 
 ```bash
 juju debug-log -n 500 | grep amd64
@@ -321,6 +321,8 @@ controller's models in one step:
 
 <!-- LINKS -->
 
+[#model-logs]: #model-logs
+[#remote-logging]: #remote-logging
 [controllers-ha]: ./controllers-ha.html 
 [upstream-rsyslog-tls-tutorial]: http://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html
 [models-config]: ./models-config.html
