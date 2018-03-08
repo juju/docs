@@ -5,16 +5,15 @@ TODO: Critical: Review needed
       Diagrams needed
       Verify second example
       Include example of using binding/endpoint method
+      Move examples to charms-deploy page
       Bug tracking: https://bugs.launchpad.net/juju/+bug/1747998
 
 # Network Spaces
 
-Juju models networks using "spaces". A space is made up of one or more routable
-subnets with common ingress and egress rules. The Juju operator can model this
-topology in such a way that applications gain the required network connectivity
-without generating complex network IP maps that are not portable. This gives
-the operator much better and finer-grained control over all networking aspects
-of a model and its application deployments. 
+Juju models networks using *spaces*, which can be mapped to one or more
+routable subnets. The Juju operator can model this topology in such a way that
+applications gain only the required network connectivity without generating
+complex network IP maps that are not portable.
 
 Spaces represent sets of subnets that are available for running cloud instances
 that may span one or more availability zones ("zones"). There are a few simple
@@ -106,11 +105,6 @@ subnets:
     - default
 ```
 
-For details on how to deploy applications to specific spaces, and how to bind
-specific charm-defined endpoints to specific spaces, see [Deploying to
-spaces][deployspaces]. To create bundles with specific bindings, see [Using and
-Creating Bundles][createbundles].
-
 ### MAAS and spaces
 
 MAAS has a native knowledge of spaces. Within MAAS, spaces can be created,
@@ -139,17 +133,22 @@ only connect to the required network interfaces.
 ## Using spaces
 
 Once all desired spaces have been added and/or configured they are called upon
-when adding a machine or deploying an application. There are two methods that
-can be used for doing this: via a binding or constraint.
-
-A binding operates at the software level and is a more fine-grained request. It
-associates an application endpoint with a subnet.
+when adding a machine or deploying an application. There are two available
+methods for doing this: a *constraint* or a *binding*.
 
 A space constraint, like any other constraint, operates at the machine level.
 It requests that certain network connections be made available to the Juju
 machine. When a constraint is used, all application endpoints get associated
 with the space. For more general information on constraints, see the
 [Constraints][charms-constraints] page.
+
+A binding is a space-specific, software level operation and is a more
+fine-grained request. It associates an application endpoint with a subnet.
+
+For details on using spaces when deploying applications, and how to bind
+endpoints to specific spaces, see [Deploying to spaces][deployspaces]. To
+create bundles with specific bindings, see
+[Using and Creating Bundles][createbundles].
 
 ## Spaces and subnets example
 
