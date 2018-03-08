@@ -124,8 +124,8 @@ Continue with Juju by visiting the [Models][models] and
 <!-- LINKS -->
 
 [maas-site]: https://maas.io
-[maas-cli]: https://docs.ubuntu.com/maas/2.2/en/manage-cli
-[maas-api]: https://docs.ubuntu.com/maas/2.2/en/manage-account#api-key
+[maas-cli]: https://docs.ubuntu.com/maas/en/manage-cli
+[maas-api]: https://docs.ubuntu.com/maas/en/manage-account#api-key
 [maas-manual]: ./clouds-maas-manual.html
 [create-a-controller-with-constraints]: ./controllers-creating.html#create-a-controller-with-constraints
 [models]: ./models.html
