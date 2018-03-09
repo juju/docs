@@ -14,7 +14,7 @@ app = flask.Flask(
     __name__,
     root_path=base_dir,
     static_folder=os.path.join(base_dir, 'static'),
-    template_folder=os.path.join(base_dir, 'templates'),
+    template_folder=os.path.join(base_dir, 'build'),
 )
 
 permanent_redirects_path = app.config.get(
