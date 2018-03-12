@@ -1,6 +1,5 @@
 Title: Constraints
 
-
 # Constraints
 
 Constraints allow you to choose the hardware (or virtual hardware)
@@ -14,7 +13,6 @@ constraints do not affect any units which have already been placed on machines.
 For more granularity, it is also possible to add a machine with specific 
 constraints (`juju add-machine`) and then specify that machine when deploying 
 applications ([see the documentation on `juju deploy`](./charms-deploying.html)).
-
 
 ## What constraints can be used?
 
@@ -150,11 +148,10 @@ juju get-constraints mariadb
 juju get-constraints database1
 ```
 
-
 ## Adding a machine with constraints
 
-The `juju add-machine` command also accepts the '--constraints' flag, which can
-be useful when trying to target a specific machine or type of machine.
+The `juju add-machine` command also accepts the `--constraints` option, which
+can be useful when trying to target a specific machine or type of machine.
 
 For example:
 
@@ -163,18 +160,28 @@ juju add-machine --constraints spaces=storage,db
 ```
 
 Will provision a machine that is connected to both the 'storage' and 'db' 
-network spaces. You can subsequently deploy applications to this machine using
-the '--to' placement switch - 
-[see the documentation on deploying charms](./charms-deploying.html)
+network spaces. See [Network spaces][network-spaces] for more information on
+spaces.
 
+You can subsequently deploy applications to the above machine using
+the `--to` switch with the `deploy` command. See
+[Deploying to specific machines][charms-deploying-to-option] for how to do
+this.
 
-!!! Note:
-    Juju's knowledge of the available spaces on the underlying cloud may lag
-    behind recent changes. To force Juju to re-examine the spaces it can use,
-    you should run the command `juju reload-spaces`.  
+Both positive and negative entries are accepted, the latter prefixed by '^', in
+a comma-delimited list. For example, given the following:
+
+```no-highlight
+--constraints spaces=db-space,^storage,^dmz,internal
+```
+
+Juju will provision instances connected to one of the subnets of both
+'db-space' and 'internal' spaces, and **not** connected to either the 'storage'
+or 'dmz' spaces.
 
 
 <!-- LINKS -->
 
 [controllers-creating]: ./controllers-creating.html
 [network-spaces]: ./network-spaces.html
+[charms-deploying-to-option]: ./charms-deploying.html#deploying-to-specific-machines
