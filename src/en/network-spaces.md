@@ -1,5 +1,4 @@
 Title: Network Spaces
-TODO:  Include example of using binding/endpoint method
 
 # Network Spaces
 
