@@ -6,6 +6,8 @@ TODO: Add 'centos' and 'windows' stuff to series talk
       Review required. Channnels especially
       This page is too long. It should contain just basic stuff and link to sub-pages.
       Hardcoded: Ubuntu codenames
+      Verify MAAS spaces example
+      Bug tracking: https://bugs.launchpad.net/juju/+bug/1747998
 
 # Deploying applications
 
@@ -33,8 +35,8 @@ default series) to deploy a MySQL application.
 
 !!! Note: 
     The default series can be configured at a model level, see
-    [Configuring models][models] for further details. In the absence of this
-    setting, the default is to use the series specified by the charm.
+    [Configuring models][models-config] for further details. In the absence of
+    this setting, the default is to use the series specified by the charm.
 
 Assuming that the Xenial series charm exists and was used above, an equivalent
 command is:
@@ -166,7 +168,7 @@ Store or from a local charm.
 
 See [Application configuration](./charms-config.html) for more on this.
 
-## Deploying to specific machines and containers
+## Deploying to specific machines
 
 It is possible to specify which machine or container an application is to be
 deployed to. One notable reason is to reduce costs when using a public cloud;
@@ -242,8 +244,8 @@ clean machine.
 ## Deploying to spaces
 
 Using spaces, the operator is able to create a more restricted network topology
-for applications at deployment time. See [Network spaces][spaces] for details
-on spaces. This is achieved with the use of the `--bind` option.
+for applications at deployment time (see [Network spaces][network-spaces] for
+details on spaces). This is achieved with the use of the `--bind` option.
 
 The following will deploy the 'mysql' application to the 'db-space' space:
 
@@ -267,32 +269,73 @@ juju deploy --bind "default-space db=db-space db-admin=admin-space" mysql
 See [Concepts and terms][concepts-endpoint] for the definition of an endpoint,
 an interface, and other closely related terms.
 
-For information on building bundles with bindings, see
-[Using and Creating Bundles][creatingbundles].
+For information on applying bindings to bundles, see
+[Binding endpoints within a bundle][charms-bundles-endpoints].
 
-Both the `add-machine` and `deploy` commands allow the specification of a
-spaces constraint using the `--constraints` option:
+The `deploy` command also allows for the specification of a constraint. Here is
+an example of doing this with spaces:
 
 ```bash
-juju add-machine --constraints spaces=db-space
+juju deploy mysql -n 2 --constraints spaces=database
 ```
 
-The spaces constraint allows you to select an instance for the new machine or
-unit, connected to one or more existing spaces. Both positive and negative
-entries are accepted, the latter prefixed by "^", in a comma-delimited list.
-For example, given the following:
+See [Adding a machine with constraints][charms-contraints-spaces] for an
+example of doing this with spaces.
 
+You can also declare an endpoint for spaces that is not used with relations,
+see [Extra-bindings][extra-bindings].
+
+### Spaces example
+
+This example will have MAAS as the backing cloud and use the following
+criteria:
+
+ - DMZ space (with 2 subnets, one in each zone), hosting 2
+   units of the haproxy application, which is exposed and provides
+   access to the CMS application behind it.
+ - CMS space (also with 2 subnets, one per zone), hosting 2
+   units of mediawiki, accessible only via haproxy (not exposed).
+ - Database (again, 2 subnets, one per zone), hosting 2 units of
+   mysql, providing the database backend for mediawiki.
+
+First, ensure MAAS has the necessary subnets and spaces. Each subnet has the
+"automatic public IP address" attribute enabled on each:
+
+ - 172.31.50.0/24, for space "database"
+ - 172.31.51.0/24, for space "database"
+ - 172.31.100.0/24, for space "cms"
+ - 172.31.110.0/24, for space "cms"
+ - 172.31.0.0/20, for the "dmz" space
+ - 172.31.16.0/20, for the "dmz" space
+
+Recall that MAAS has native knowledge of spaces. They are created within MAAS
+and Juju will become aware of them when the Juju controller is built
+(`juju bootstrap`).
+
+Second, add the MAAS cloud to Juju. See [Using a MAAS cloud][clouds-maas] for
+guidance.
+
+Third, create the Juju controller, assuming a cloud name of 'maas-cloud':
+
+```bash
+juju bootstrap maas-cloud
 ```
---constraints spaces=db-space,^storage,^dmz,internal
+
+Finally, deploy the applications into their respective spaces (here we use the
+constraints method), relate them, and expose haproxy:
+
+```bash
+juju deploy haproxy -n 2 --constraints spaces=dmz
+juju deploy mediawiki -n 2 --constraints spaces=cms
+juju deploy mysql -n 2 --constraints spaces=database
+juju add-relation haproxy mediawiki
+juju add-relation mediawiki mysql
+juju expose haproxy
 ```
 
-Juju will provision instances connected to (with IP addresses on) one of the
-subnets of both db-space and internal spaces, and NOT connected to either the
-storage or dmz spaces.
-
-See [Constraints][constraints] for more general information regarding
-constraints. To learn about `extra-bindings`, which provide a way to declare an
-extra bindable endpoint that is not a relation, see [Charm metadata][metadata].
+Once all the units are up, you will be able to get the public IP address of one
+of the haproxy units (from `juju status`), and open it in a browser, seeing the
+mediawiki page.
 
 ## Juju retry-provisioning
 
@@ -327,11 +370,13 @@ horizontally scale out on dedicated machines when you need to.
 
 <!-- LINKS -->
 
-[models]: ./models-config.html
-[spaces]: ./network-spaces.html
-[creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
-[metadata]: ./authors-charm-metadata.html
+[models-config]: ./models-config.html
+[network-spaces]: ./network-spaces.html
+[charms-bundles-endpoints]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
+[extra-bindings]: ./authors-charm-metadata.html#extra-bindings
 [constraints]: ./charms-constraints.html
 [charms-upgrading]: ./charms-upgrading.html
 [charms-offline-deploying]: ./charms-offline-deploying.html
 [concepts-endpoint]: ./juju-concepts.html#endpoint
+[clouds-maas]: ./clouds-maas.html
+[charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints

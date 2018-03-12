@@ -162,10 +162,10 @@ payload commands.
 
 ## Extra-bindings
 
-`extra-bindings` represents an extra bindable endpoint that is not a relation.
-These are useful when you want to have Juju provide distinct addresses for an
-application on one or more spaces. For example, adding this section to a YAML
-file for an application called "foo":
+`extra-bindings` represents an extra bindable endpoint that is not used with
+relations. These are useful when you want to have Juju provide distinct
+addresses for an application on one or more spaces. For example, adding this
+section to a YAML file for an application called "foo":
 
 ```yaml
 extra-bindings:

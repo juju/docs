@@ -391,10 +391,11 @@ machine 5 for bundle machine 4:
 juju deploy some-bundle --map-machines=existing,3=4,4=5
 ```
 
-## Binding endpoints of applications within a bundle
+## Binding endpoints within a bundle
 
 You can configure more complex networks using [spaces](./network-spaces.html)
-and deploy charms with binding, as described in [Deploying applications](./charms-deploying.html).
+and deploy charms with binding, as described in
+[Deploying to spaces](./charms-deploying.html#deploying-to-spaces).
 Bindings can also be specified for applications within a bundle. To do so,
 add a section to the bundle's YAML file called `bindings`. For example:
 
@@ -413,20 +414,9 @@ This is the equivalent of deploying with:
 juju deploy cs:trusty/mysql-57 --bind "shared-db=database cluster=internal"
 ```
 
-!!! Note:
-    Spaces must be configured in the underlying cloud before attempting to use
-    them.
-
-Prior to Juju 2.1, all deployed machines were regarded as potential hosts for
-containers, and as a result, all network interfaces connected to those machines
-were bridged by default. Consequently, bundles created before the release of
-Juju 2.1 might assume that a container has access to all of the same spaces as
-the host machine and may no longer deploy cleanly with more recent versions of
-Juju.
-
 These bundles will need to be updated to be more specific about the
 bindings required, allowing the operator to specify exactly which charm-defined
-endpoints should end up in specific places.
+endpoints should end up in specific spaces.
 
 The following `deploy` command connects charm endpoints to specific spaces and
 includes a default space, `default-space`, for any interfaces not specified:
