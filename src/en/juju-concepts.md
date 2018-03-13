@@ -115,10 +115,33 @@ application's endpoint in order to form a relation. An endpoint is defined in
 a charm's `metadata.yaml` and specifies a name, a role (one of 'requires',
 'provides', or 'peers'), and an interface that the relations will use.
 
+For example, the pertinent excerpt of the `metadata.yaml` file for the
+'wordpress' charm is as follows:
+
+```no-highlight
+requires:
+  db:
+    interface: mysql
+  nfs:
+    interface: mount
+  cache:
+    interface: memcache
+provides:
+  website:
+    interface: http
+peers:
+  loadbalancer:
+    interface: reversenginx
+```
+
+Here, there are three 'requires' endpoints ('db', 'nfs', and 'cache'), one
+'provides' endpoint ('website'), and one 'peers' endpoint ('loadbalancer').
+
 ## Interface
 
 An *interface* is the communication protocol used over a relation between
-applications.
+applications. In the example shown in the Endpoint section, the interfaces for
+the corresponding endpoints are clearly discerned.
 
 ## Relation
 
@@ -127,9 +150,9 @@ together. These inter-application connections are called *relations* and they
 are formed by connecting interfaces of the same type.
 
 For example, the 'wordpress' charm supports, among others, an 'http' interface
-(for serving the website) and a 'db' interface (for the database which stores
-the content of the site). Any other application which supports these interface
-types can connect to the 'wordpress' charm in a meaningful way.
+(providing the website) and a 'mysql' interface (requiring a database) Any
+other application which also has such interfaces can connect to this charm in a
+meaningful way.
 
 Below we see WordPress with relations set up between both MySQL and Apache (a
 potential relation is shown with HAProxy):
