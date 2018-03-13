@@ -111,9 +111,18 @@ the agents have been omitted:
 ## Endpoint
 
 An *endpoint* (or application endpoint) is used to connect to another
-application's endpoint in order to form a relation. An endpoint is defined in
-a charm's `metadata.yaml` and specifies a name, a role (one of 'requires',
-'provides', or 'peers'), and an interface that the relations will use.
+application's endpoint in order to form a relation. An endpoint is defined in a
+charm's `metadata.yaml` by the collection of three properties: a *role*, a
+*name*, and an *interface*.
+
+There are three types of roles:
+
+ - `requires`: the endpoint can optionally make use of services represented by
+   another charm's endpoint over the given interface.
+ - `provides`: the endpoint represents a service that another charm's endpoint
+   can make use of over the given interface.
+ - `peers`: the endpoint can coexist with another charm's endpoint in a
+   peer-to-peer manner (e.g. cluster or high availability contexts).
 
 For example, the pertinent excerpt of the `metadata.yaml` file for the
 'wordpress' charm is as follows:
@@ -135,7 +144,16 @@ peers:
 ```
 
 Here, there are three 'requires' endpoints ('db', 'nfs', and 'cache'), one
-'provides' endpoint ('website'), and one 'peers' endpoint ('loadbalancer').
+'provides' endpoint ('website'), and one 'peers' endpoint ('loadbalancer'). For
+instance, we can say that "the 'db' endpoint can make use of services offered
+by another charm over the 'mysql' interface".
+
+Despite the term 'requires', the three cited endpoints are not hard
+requirements for the 'wordpress' charm. You will need to read the charm's entry
+in the Charm Store (e.g. [wordpress][charm-store-wordpress]) to discover
+actual requirements as well as how the charm works. For instance, it is not
+obvious that the 'wordpress' charm comes bundled with an HTTP server (`nginx`),
+making a separate HTTP-based charm not strictly necessary.
 
 ## Interface
 
@@ -150,7 +168,7 @@ together. These inter-application connections are called *relations* and they
 are formed by connecting interfaces of the same type.
 
 For example, the 'wordpress' charm supports, among others, an 'http' interface
-(providing the website) and a 'mysql' interface (requiring a database) Any
+("provides" the website) and a 'mysql' interface ("requires" a database) Any
 other application which also has such interfaces can connect to this charm in a
 meaningful way.
 
@@ -162,9 +180,10 @@ potential relation is shown with HAProxy):
 Some of the above application units show unused interfaces. It is the overall
 purpose of the installation which will dictate what interfaces get used. Some
 relation types are required by the main charm ('wordpress' here) while some
-relation types are optional. A charm's `metadata.yaml` file will expose such
-details. See [Managing relations][charms-relations] for more details on
-relations.
+relation types are optional. A charm's entry in the Charm Store (e.g.
+[wordpress][charm-store-wordpress]) will expose such details. 
+
+See [Managing relations][charms-relations] for more details on relations.
 
 ## Client
 
@@ -215,6 +234,7 @@ agents running in that model.
 [clouds]: ./clouds.html
 [controllers]: ./controllers.html
 [models]: ./models.html
+[charm-store-wordpress]: https://jujucharms.com/wordpress/
 
 [img__relations]: ./media/juju-relations.png
 [img__units]: ./media/juju-machine-units.png
