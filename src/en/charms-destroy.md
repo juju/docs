@@ -1,18 +1,15 @@
-Title: Removing applications, units, and machines in Juju
-TODO:  Critical: review required (e.g. "state server")
-
+Title: Removing applications, units, and machines
+TODO:  Elaborate on "restore purposes"
 
 # Removing applications, units, and machines
 
-Juju can sanely and efficiently remove something when you no longer need it.
 This section looks at how to remove applications, units, and machines. To 
 remove a model see the [models documentation][models]. To remove a controller,
 see the [controllers documentation][controllers].
 
+## Removing applications
 
-## Removing an application
-
-Once an application is no longer required it can be removed with:
+An application can be removed with:
 
 ```bash
 juju remove-application <application-name>
@@ -25,34 +22,40 @@ juju remove-application <application-name>
     longer work as expected. To remove relations between deployed applications,
     see [Charm relations][charmrelations].
 
-This is the order of events for removing an application:
+<!-- DUBIOUS CONTENT. IS THERE A REASONABLE BENEFIT TO BE GAINED BY EXPOSING
+THESE INTERNAL PROCESSES? MAYBE MOVE IT TO THE TROUBLESHOOTING SECTION?
 
-1. The Juju client tells the state server that every unit (in this application)
-   is to be destroyed.
-1. The state server signals to the application (charm) that it is going to be
-   destroyed.
-1. The charm breaks any relations to its application by calling 
-   `relationship-broken` and `relationship-departed`.
-1. The charm calls its 'stop hook' which **should**:
-    - Stop the application
-    - Remove any files/configuration created during the application lifecycle
-    - Prepare any backup(s) of the application that are required for restore 
-      purposes.
-1. The application and all its units are then removed.
+Internally, this is how Juju processes the removal of an application:
 
-An application can take a while to "die", but if `juju status` reveals that the
-application is listed as dying, but also reports an error state, then the 
-removed application will not go away. See the 'Caveats' section below for how 
-to manage applications stuck in a dying state.
+ 1. The Juju client tells the controller to destroy all the application's
+    units.
+ 1. The controller signals to the application (charm) that it is going to be
+    destroyed.
+ 1. The charm breaks any relations to its application by calling 
+    `relationship-broken` and `relationship-departed`.
+ 1. The charm calls its 'stop hook' which **should**:
+     - Stop the application
+     - Remove any files/configuration created during the application lifecycle
+     - Prepare any backup(s) of the application that are required for restore 
+       purposes.
+ 1. The application and all its units are then removed.
+
+It can take a while for the application to be completely removed but if
+`juju status` reveals that the application is listed as "dying", but also
+reports an error state, then the removed application will not go away. See the
+'Caveats' section below for how to manage applications stuck in a dying state.
+
+-->
 
 If dynamic storage is in use, the storage will, by default, be detached and
 left alive in the model. However, the `--destroy-storage` option can be used to
 instruct Juju to destroy the storage once detached. See
 [Using Juju Storage][charms-storage] for details on dynamic storage.
 
-## Removing units
+## Removing individual units
 
-It is possible to remove individual units instead of the entire application:
+It is possible to remove individual units instead of the entire application
+(i.e. all the unites):
 
 ```bash
 juju remove-unit mediawiki/1
@@ -72,7 +75,6 @@ See section 'Caveats' below for how to manage units in a dying state.
 
 The `--destroy-storage` option is available for this command as it is for the
 `remove-application` command above.
-
 
 ## Removing machines
 
