@@ -1,7 +1,7 @@
 Title: Juju troubleshooting - environment upgrade  
 TODO:  Review required (some things: 'environment')
 
-# Troubleshooting environment upgrades
+# Troubleshooting model upgrades
 
 This section provides strategies and techniques to assist with broken
 environment upgrades. See
