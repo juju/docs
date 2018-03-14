@@ -117,12 +117,13 @@ charm's `metadata.yaml` by the collection of three properties: a *role*, a
 
 There are three types of roles:
 
- - `requires`: the endpoint can optionally make use of services represented by
+ - `requires`: The endpoint can optionally make use of services represented by
    another charm's endpoint over the given interface.
- - `provides`: the endpoint represents a service that another charm's endpoint
+ - `provides`: The endpoint represents a service that another charm's endpoint
    can make use of over the given interface.
- - `peers`: the endpoint can coexist with another charm's endpoint in a
-   peer-to-peer manner (e.g. cluster or high availability contexts).
+ - `peers`: The endpoint can coexist with another charm's endpoint in a
+   peer-to-peer manner (i.e. only between units of the same application). This
+   role is often used in a cluster or high availability context.
 
 For example, the pertinent excerpt of the `metadata.yaml` file for the
 'wordpress' charm is as follows:
@@ -164,11 +165,13 @@ the corresponding endpoints are clearly discerned.
 ## Relation
 
 Charms contain the intelligence necessary for connecting different applications
-together. These inter-application connections are called *relations* and they
-are formed by connecting interfaces of the same type.
+together. These inter-application connections are called *relations*, and they
+are formed by connecting the applications' endpoints. Endpoints can only be
+connected if they support the same interface and are of a compatible role
+(requires to provides, provides to requires, peers to peers).
 
 For example, the 'wordpress' charm supports, among others, an 'http' interface
-("provides" the website) and a 'mysql' interface ("requires" a database) Any
+("provides" the website) and a 'mysql' interface ("requires" a database). Any
 other application which also has such interfaces can connect to this charm in a
 meaningful way.
 
