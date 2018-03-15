@@ -92,22 +92,6 @@ The final section of the status output shows all current established relations.
 
 ## Removing relations
 
-<<<<<<< HEAD
-There are times when a relationship just isn't working and it is time to move
-on. Fortunately, it is a simple single-line command to break off these
-relationships:
-
-```bash
-juju remove-relation mediawiki mysql
-```
-
-In cases where there is more than one relation between the two applications, it
-is necessary to specify the interface at least once:
-  
-```bash
-juju remove-relation mediawiki mysql:db
-```
-=======
 There are times when a relation just isn't working and it is time to move on.
 See [Removing Juju objects][charms-destroy] for how to do this.
 
@@ -120,7 +104,4 @@ Relations can also work across models, even across multiple controllers. See
 <!-- LINKS -->
 
 [models-cmr]: ./models-cmr.html
-[charm-tools]: ./tools-charm-tools.html
-[charm-store]:  https://jujucharms.com
 [charms-destroy]: ./charms-destroy.html#removing-relations
->>>>>>> b6239a18... end refactor and review
