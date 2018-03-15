@@ -92,17 +92,16 @@ The final section of the status output shows all current established relations.
 
 ## Removing relations
 
-There are times when a relationship just isn't working and it is time to move
-on. Fortunately, it is a simple single-line command to break off these
-relationships:
+There are times when a relation just isn't working and it is time to move on.
+See [Removing Juju objects][charms-destroy] for how to do this.
 
-```bash
-juju remove-relation mediawiki mysql
-```
+## Cross model relations
 
-In cases where there is more than one relation between the two applications, it
-is necessary to specify the interface at least once:
-  
-```bash
-juju remove-relation mediawiki mysql:db
-```
+Relations can also work across models, even across multiple controllers. See
+[Cross model relations][models-cmr] for more information.
+
+
+<!-- LINKS -->
+
+[models-cmr]: ./models-cmr.html
+[charms-destroy]: ./charms-destroy.html#removing-relations
