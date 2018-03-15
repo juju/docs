@@ -1,0 +1,259 @@
+Title: Deploying applications - advanced
+
+# Deploying applications - advanced
+
+This page is dedicated to more advanced topics related to deploying
+applications with Juju. The main page is
+[Deploying applications][charms-deploying].
+
+Topics covered here are:
+
+ - Multi-series charms
+ - Deploying to specific machines
+ - Deploying to spaces
+
+## Multi-series charms
+
+Charms can be created that support more than one release of a given operating
+system distro, such as the multiple Ubuntu releases shown below. It is not
+possible to create a charm to support multiple distros, such as one charm for
+both Ubuntu and CentOS. Supported series are added to the charm metadata like
+this:
+
+```
+name: mycharm
+summary: "Great software"
+description: It works
+maintainer: Some One <some.one@example.com>
+categories:
+   - databases
+series:
+   - trusty
+   - xenial
+provides:
+   db:
+     interface: pgsql
+requires:
+   syslog:
+     interface: syslog
+```
+
+The default series for the charm is the first one listed. So, in this example,
+to deploy `mycharm` on `trusty`, all you need is:
+
+```bash
+juju deploy mycharm
+```
+
+You can specify a different series using the `--series` flag:
+
+```bash
+juju deploy mycharm --series xenial
+```
+
+You can force the charm to deploy using an unsupported series using the
+`--force` flag:
+
+```bash
+juju deploy mycharm --series yakkety --force
+```
+
+Here is a more complete example showing a new machine being added that uses
+a different series than is supported by our `mycharm` example and then forcing
+the charm to install:
+
+```bash
+juju add-machine --series yakkety
+Machine 1 added.
+juju deploy mycharm --to 1 --series yakkety --force
+```
+
+It may be required to use `--force-series` when upgrading charms. For example,
+in a case where an application is initially deployed using a charm that
+supports `precise` and `trusty`. If a new version of the charm is released that
+only supports `trusty` and `xenial` then it will be allowed to upgrade
+applications deployed on `precise`, but only using `--force-series`, like this:
+
+```bash
+juju upgrade-charm mycharm --force-series
+```
+
+## Deploying to specific machines
+
+It is possible to specify which machine or container an application is to be
+deployed to. One notable reason is to reduce costs when using a public cloud;
+applications can be consolidated instead of dedicating a machine per
+application unit.
+
+Below, the `--constraints` option is used to create an LXD controller with
+enough memory for other applications to run. The `--to` option is used to
+specify a machine:
+
+```bash
+juju bootstrap --constraints="mem=4G" lxd lxd-controller
+juju deploy mysql
+juju deploy --to 0 rabbitmq-server
+```
+
+Here, MySQL is deployed as the first unit (in the 'default' model) and so ends
+up on machine '0'. Then Rabbitmq gets deployed to machine '0' as well.
+
+Applications can also be deployed to containers:
+
+```bash
+juju deploy mysql --to 24/lxd/3
+juju deploy mysql --to lxd:25
+```
+
+Above, MySQL is deployed to existing container '3' on machine '24'. Afterwards,
+a MySQL application is deployed to a new container on machine '25'.
+
+The above examples show how to deploy to a machine where you know the machine's
+identifier. The output to `juju status` will provide this information.
+
+It is also possible to deploy units using placement directives as `--to`
+arguments. Placement directives are provider specific. For example:
+
+```bash
+juju deploy mysql --to zone=us-east-1a
+juju deploy mysql --to host.mass
+```
+
+The first example deploys to a specified zone for AWS. The second example
+deploys to a named machine in MAAS.
+
+The `add-unit` command also supports the `--to` option, so it's now possible to
+specifically target machines when expanding application capacity:
+
+```bash
+juju deploy --constraints="mem=4G" openstack-dashboard
+juju add-unit --to 1 rabbitmq-server
+```
+
+There should now be a second machine running both the openstack-dashboard
+application and a second unit of the rabbitmq-server application. The
+`juju status` command will show this.
+
+These two features make it much easier to deploy complex applications such as
+OpenStack which use a large number of charms on a limited number of physical
+servers.
+
+As with deploy, the --to option used with `add-unit` also supports placement
+directives. A comma separated list of directives can be provided to cater for
+the case where more than one unit is being added.
+
+```bash
+juju add-unit rabbitmq-server -n 4 --to zone=us-west-1a,zone=us-east-1b
+juju add-unit rabbitmq-server -n 4 --to host1,host2,host3,host4
+```
+
+Any extra placement directives are ignored. If not enough placement directives
+are supplied, then the remaining units will be assigned as normal to a new,
+clean machine.
+
+## Deploying to spaces
+
+Using spaces, the operator is able to create a more restricted network topology
+for applications at deployment time (see [Network spaces][network-spaces] for
+details on spaces). This is achieved with the use of the `--bind` option.
+
+The following will deploy the 'mysql' application to the 'db-space' space:
+
+```bash
+juju deploy mysql --bind db-space
+```
+
+For finer control, individual endpoints can be connected to specific spaces:
+
+```bash
+juju deploy --bind "db=db-space db-admin=admin-space" mysql
+```
+
+If a space is mentioned that is not associated with an interface then it will
+act as the default space (i.e. will be used for any unspecified interface):
+
+```bash
+juju deploy --bind "default-space db=db-space db-admin=admin-space" mysql
+```
+
+See [Concepts and terms][concepts-endpoint] for the definition of an endpoint,
+an interface, and other closely related terms.
+
+For information on applying bindings to bundles, see
+[Binding endpoints within a bundle][charms-bundles-endpoints].
+
+The `deploy` command also allows for the specification of a constraint. Here is
+an example of doing this with spaces:
+
+```bash
+juju deploy mysql -n 2 --constraints spaces=database
+```
+
+See [Adding a machine with constraints][charms-contraints-spaces] for an
+example of doing this with spaces.
+
+You can also declare an endpoint for spaces that is not used with relations,
+see [Extra-bindings][extra-bindings].
+
+### Spaces example
+
+This example will have MAAS as the backing cloud and use the following
+criteria:
+
+ - DMZ space (with 2 subnets, one in each zone), hosting 2
+   units of the haproxy application, which is exposed and provides
+   access to the CMS application behind it.
+ - CMS space (also with 2 subnets, one per zone), hosting 2
+   units of mediawiki, accessible only via haproxy (not exposed).
+ - Database (again, 2 subnets, one per zone), hosting 2 units of
+   mysql, providing the database backend for mediawiki.
+
+First, ensure MAAS has the necessary subnets and spaces. Each subnet has the
+"automatic public IP address" attribute enabled on each:
+
+ - 172.31.50.0/24, for space "database"
+ - 172.31.51.0/24, for space "database"
+ - 172.31.100.0/24, for space "cms"
+ - 172.31.110.0/24, for space "cms"
+ - 172.31.0.0/20, for the "dmz" space
+ - 172.31.16.0/20, for the "dmz" space
+
+Recall that MAAS has native knowledge of spaces. They are created within MAAS
+and Juju will become aware of them when the Juju controller is built
+(`juju bootstrap`).
+
+Second, add the MAAS cloud to Juju. See [Using a MAAS cloud][clouds-maas] for
+guidance.
+
+Third, create the Juju controller, assuming a cloud name of 'maas-cloud':
+
+```bash
+juju bootstrap maas-cloud
+```
+
+Finally, deploy the applications into their respective spaces (here we use the
+constraints method), relate them, and expose haproxy:
+
+```bash
+juju deploy haproxy -n 2 --constraints spaces=dmz
+juju deploy mediawiki -n 2 --constraints spaces=cms
+juju deploy mysql -n 2 --constraints spaces=database
+juju add-relation haproxy mediawiki
+juju add-relation mediawiki mysql
+juju expose haproxy
+```
+
+Once all the units are up, you will be able to get the public IP address of one
+of the haproxy units (from `juju status`), and open it in a browser, seeing the
+mediawiki page.
+
+
+<!-- LINKS -->
+
+[charms-deploying]: ./charms-deploying.html
+[network-spaces]: ./network-spaces.html
+[charms-bundles-endpoints]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
+[extra-bindings]: ./authors-charm-metadata.html#extra-bindings
+[clouds-maas]: ./clouds-maas.html
+[charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints
+[concepts-endpoint]: ./juju-concepts.html#endpoint
