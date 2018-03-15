@@ -255,7 +255,7 @@ troubleshooting documentation for help on finding a solution:
  - [Troubleshooting clouds][troubleshooting-clouds] covers issues with specific
    clouds 
  - [Troubleshooting removals][troubleshooting-removals] provides help when you
-   cannot remove/destroy something cleanly
+   cannot remove something cleanly
 
 Alternatively, if your issue is not addressed here, get in touch via our
 [Contacts page][contactus] or consider the 
