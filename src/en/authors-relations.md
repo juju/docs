@@ -1,4 +1,5 @@
 Title: Implementing Relations in Juju charms  
+TODO:  Error: the metadata file does not give relation names. It gives endpoint names.
 
 # What is a relation?
 
