@@ -39,7 +39,7 @@ instruct Juju to destroy the storage once detached. See
 ## Removing units
 
 It is possible to remove individual units instead of the entire application
-(i.e. all the unites):
+(i.e. all the units):
 
 ```bash
 juju remove-unit mediawiki/1
