@@ -111,25 +111,69 @@ the agents have been omitted:
 ## Endpoint
 
 An *endpoint* (or application endpoint) is used to connect to another
-application's endpoint in order to form a relation. An endpoint is defined in
-a charm's `metadata.yaml` and specifies a name, a role (one of 'requires',
-'provides', or 'peers'), and an interface that the relations will use.
+application's endpoint in order to form a relation. An endpoint is defined in a
+charm's `metadata.yaml` by the collection of three properties: a *role*, a
+*name*, and an *interface*.
+
+There are three types of roles:
+
+ - `requires`: The endpoint can optionally make use of services represented by
+   another charm's endpoint over the given interface.
+ - `provides`: The endpoint represents a service that another charm's endpoint
+   can make use of over the given interface.
+ - `peers`: The endpoint can coexist with another charm's endpoint in a
+   peer-to-peer manner (i.e. only between units of the same application). This
+   role is often used in a cluster or high availability context.
+
+For example, the pertinent excerpt of the `metadata.yaml` file for the
+'wordpress' charm is as follows:
+
+```no-highlight
+requires:
+  db:
+    interface: mysql
+  nfs:
+    interface: mount
+  cache:
+    interface: memcache
+provides:
+  website:
+    interface: http
+peers:
+  loadbalancer:
+    interface: reversenginx
+```
+
+Here, there are three 'requires' endpoints ('db', 'nfs', and 'cache'), one
+'provides' endpoint ('website'), and one 'peers' endpoint ('loadbalancer'). For
+instance, we can say that "the 'db' endpoint can make use of services offered
+by another charm over the 'mysql' interface".
+
+Despite the term 'requires', the three cited endpoints are not hard
+requirements for the 'wordpress' charm. You will need to read the charm's entry
+in the Charm Store (e.g. [wordpress][charm-store-wordpress]) to discover
+actual requirements as well as how the charm works. For instance, it is not
+obvious that the 'wordpress' charm comes bundled with an HTTP server (`nginx`),
+making a separate HTTP-based charm not strictly necessary.
 
 ## Interface
 
 An *interface* is the communication protocol used over a relation between
-applications.
+applications. In the example shown in the Endpoint section, the interfaces for
+the corresponding endpoints are clearly discerned.
 
 ## Relation
 
 Charms contain the intelligence necessary for connecting different applications
-together. These inter-application connections are called *relations* and they
-are formed by connecting interfaces of the same type.
+together. These inter-application connections are called *relations*, and they
+are formed by connecting the applications' endpoints. Endpoints can only be
+connected if they support the same interface and are of a compatible role
+(requires to provides, provides to requires, peers to peers).
 
 For example, the 'wordpress' charm supports, among others, an 'http' interface
-(for serving the website) and a 'db' interface (for the database which stores
-the content of the site). Any other application which supports these interface
-types can connect to the 'wordpress' charm in a meaningful way.
+("provides" the website) and a 'mysql' interface ("requires" a database). Any
+other application which also has such interfaces can connect to this charm in a
+meaningful way.
 
 Below we see WordPress with relations set up between both MySQL and Apache (a
 potential relation is shown with HAProxy):
@@ -139,9 +183,10 @@ potential relation is shown with HAProxy):
 Some of the above application units show unused interfaces. It is the overall
 purpose of the installation which will dictate what interfaces get used. Some
 relation types are required by the main charm ('wordpress' here) while some
-relation types are optional. A charm's `metadata.yaml` file will expose such
-details. See [Managing relations][charms-relations] for more details on
-relations.
+relation types are optional. A charm's entry in the Charm Store (e.g.
+[wordpress][charm-store-wordpress]) will expose such details. 
+
+See [Managing relations][charms-relations] for more details on relations.
 
 ## Client
 
@@ -192,6 +237,7 @@ agents running in that model.
 [clouds]: ./clouds.html
 [controllers]: ./controllers.html
 [models]: ./models.html
+[charm-store-wordpress]: https://jujucharms.com/wordpress/
 
 [img__relations]: ./media/juju-relations.png
 [img__units]: ./media/juju-machine-units.png
