@@ -5,26 +5,25 @@ TODO: Add 'centos' and 'windows' stuff to series talk
       Review whether Juju should go to the store when pointing to a local dir
         with non-existant charm. It did not for me but the old version of this
         doc said it should.
-      Needs explanation of resources (esp. in the local/offline charms sections).
-      Review required. Channnels especially
-      This page is too long. It should contain just basic stuff and link to sub-pages.
       Hardcoded: Ubuntu codenames
       Verify MAAS spaces example
       Bug tracking: https://bugs.launchpad.net/juju/+bug/1747998
 
 # Deploying applications
 
-The fundamental point of Juju is that you can use it to deploy applications
-through the use of charms (the magic bits of code that make things just work).
-These charms can exist in the [Charm Store](https://jujucharms.com/store) or on
-the file system (previously downloaded from the store or written locally).
+The fundamental purpose of Juju is to deploy and manage software applications
+in a way that is fast and easy. All this is done with the help of *charms*,
+which are bits of code that contain all the necessary intelligence to do these
+things. These charms can exist online (in the
+[Charm Store](https://jujucharms.com/store)) or on your local file system
+(previously downloaded from the store or written locally).
 
 Charms use the concept of *series* analogous as to how Juju does with Ubuntu
 series ('Trusty', 'Xenial', etc). For the most part, this is transparent as
 Juju will use the most relevant charm to ensure things "just work". This makes
 deploying applications with Juju fun and easy.
 
-## Deploying from the charm store
+## Deploying from the Charm Store
 
 Typically, applications are deployed using the online charms. This ensures that
 you get the latest version of the charm. To deploy in this way:
@@ -48,7 +47,7 @@ command is:
 juju deploy cs:xenial/mysql
 ```
 
-Where 'cs' denotes the charm store.
+Where 'cs' denotes the Charm Store.
 
 !!! Note:
     A used charm gets cached on the controller's database to minimize network
@@ -57,12 +56,9 @@ Where 'cs' denotes the charm store.
 ### Channels
 
 The charm store offers charms in different stages of development. Such stages
-are called *channels*.
-
-Channels offer a way for charm developers, and the users of charms, to manage
-and offer charms at various stages of development. Some users may want the very
-latest features, or be part of a beta test; others may want to only install the
-most reliable software. The channels are:
+are called *channels*. Some users may want the very latest features, or be part
+of a beta test; others may want to only install the most reliable software. The
+channels are:
 
  - **stable**: (default) This is the latest, tested, working stable version of the charm.
  - **candidate**: A release candidate. There is high confidence this will work
@@ -72,8 +68,7 @@ most reliable software. The channels are:
 
 As each new version of a charm is automatically versioned, these channels serve
 as pointers to a specific version number. It may be that after time a beta
-version becomes a candidate, or a candidate (hopefully) becomes the new stable
-version.
+version becomes a candidate, or a candidate becomes the new stable version.
 
 By default you will get the 'stable' channel, but you can specify a channel
 when using the `deploy` command:
@@ -168,9 +163,8 @@ It is possible to deploy applications using local charms. See
 Deployed applications usually start with a sane default configuration. However,
 for some applications it may be desirable (and quicker) to configure them at
 deployment time. This can be done whether a charm is deployed from the Charm
-Store or from a local charm.
-
-See [Application configuration](./charms-config.html) for more on this.
+Store or from a local charm. See [Application configuration][charms-config] for
+more on this.
 
 ## Deploying to specific machines
 
@@ -381,6 +375,7 @@ horizontally scale out on dedicated machines when you need to.
 [constraints]: ./charms-constraints.html
 [charms-upgrading]: ./charms-upgrading.html
 [charms-offline-deploying]: ./charms-offline-deploying.html
+[charms-config]: ./charms-config.html
 [concepts-endpoint]: ./juju-concepts.html#endpoint
 [clouds-maas]: ./clouds-maas.html
 [charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints
