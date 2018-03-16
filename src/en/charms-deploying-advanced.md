@@ -1,4 +1,5 @@
 Title: Deploying applications - advanced
+TODO:  Verify MAAS spaces example
 
 # Deploying applications - advanced
 
@@ -85,6 +86,11 @@ deployed to. One notable reason is to reduce costs when using a public cloud;
 applications can be consolidated instead of dedicating a machine per
 application unit.
 
+!!! Note:
+    When multiple charms are deployed to the same machine there exists the
+    possibility of conflicting configuration files (on the machine's
+    filesystem). This will be fixed in a future release.
+
 Below, the `--constraints` option is used to create an LXD controller with
 enough memory for other applications to run. The `--to` option is used to
 specify a machine:
@@ -151,7 +157,7 @@ Any extra placement directives are ignored. If not enough placement directives
 are supplied, then the remaining units will be assigned as normal to a new,
 clean machine.
 
-## Deploying to spaces
+## Deploying to network spaces
 
 Using spaces, the operator is able to create a more restricted network topology
 for applications at deployment time (see [Network spaces][network-spaces] for
