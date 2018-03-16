@@ -1,7 +1,7 @@
 Title: Juju users and models
 TODO: Stuff on user-added models (ssh key and credentials)
       Check the functionality of admin user access level. This currently
-      appears to do nothing (not destroy models, nor backups) 
+      appears to do nothing (not destroy models, nor backups)
 
 # Users and models
 
@@ -38,7 +38,7 @@ See [Adding a model][addmodel] for details on adding models.
 ## Models and user access
 
 An administrator can use the `grant` command to grant a user 'read', 'write',
-or 'admin' access to any model. 
+or 'admin' access to any model.
 
 - `read`: A user can view the state of a model with the `models`,
   `machines` and `status` commands.
@@ -57,23 +57,23 @@ To give 'jim' write access to the same model, the administrator would use the
 following:
 
 ```bash
-juju grant jim write mymodel 
+juju grant jim write mymodel
 ```
 See [Users][regularusers] for details on available commands.
 
-!!! Note: 
+!!! Note:
     Each user has control over naming the models they own. This means it is
     possible for two users, `jane` and `claire`, to each have a model with the same
     name, `foo`. This could cause difficulty when `claire` needs to access `jane`'s
     model. Because of this, it is possible to refer to models using
-    `<owner>/<model>` in place of just the model name. For example, `claire` can
+    `{owner}/{model}` in place of just the model name. For example, `claire` can
     get the status of the model using `juju status -m jane/foo`.
 
 ## Controller access
 
 A controller is a special kind of model that acts as the management node for
 each cloud environment. Properly managed access to any controller is critical
-to the security and stability of your cloud and all its models. 
+to the security and stability of your cloud and all its models.
 
 In addition to the two levels of user access for models, three further levels
 of access are used to manage access to Juju's controllers:
@@ -83,7 +83,7 @@ of access are used to manage access to Juju's controllers:
 - `add-model`: in addition to login access, a user is also be permitted
   to add and remove new models.
 - `superuser`: grants a user the same permissions as an administrator and complete
-  control over the deployed environment. 
+  control over the deployed environment.
 
 The `grant` syntax for controller access is the same as model
 access, only without the need to specify a model. With no controller specified,
@@ -139,7 +139,7 @@ On the controller, you grant Frances access to add models using:
 juju grant frances@external addmodel
 ```
 
-!!! Note: 
+!!! Note:
     The '@external' is required as it indicates where the credential
     comes from, as opposed to '@local'.
 
@@ -174,16 +174,16 @@ To learn more about credentials, see [credentials].
 The `juju login` command can also be used to access a public controller, using
 either the name or the host name of the controller as a parameter:
 
-```bash 
+```bash
 juju login jaas
 ```
 
 The above command will add the 'jaas' public controller to the list of
 controllers you can use, caching its details in the locally stored
-`controllers.yaml` file. 
+`controllers.yaml` file.
 
 Public controllers will normally use an external identity provider.
-[JAAS][jaas], as used above, uses [Ubuntu SSO][sso], which means you should 
+[JAAS][jaas], as used above, uses [Ubuntu SSO][sso], which means you should
 register with [https://jujucharms.com/login](https://jujucharms.com/login).
 
 ## Revoke access rights
