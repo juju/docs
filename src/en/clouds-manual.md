@@ -134,6 +134,6 @@ or [`bootstrap`](#bootstrapping-the-cloud) commands from Juju.
     to avoid prompts which may hinder automated SSH operations.
 
 [models-config]: ./models-config.html
-[placement]: ./charms-deploying.html#deploying-to-specific-machines-and-containers
+[placement]: ./charms-deploying-advanced.html#deploying-to-specific-machines
 [commands]: ./commands.html
 [clouds__specifying-additional-clouds]: ./clouds.html#specifying-additional-clouds

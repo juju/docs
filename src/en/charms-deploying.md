@@ -1,20 +1,15 @@
 Title: Deploying applications
 TODO: Add 'centos' and 'windows' stuff to series talk
-      Review whether Juju should go to the store when pointing to a local dir
-        with non-existant charm. It did not for me but the old version of this
-        doc said it should.
       Hardcoded: Ubuntu codenames
-      Verify MAAS spaces example
-      Bug tracking: https://bugs.launchpad.net/juju/+bug/1747998
+      Move commented section to a troubleshooting page
 
 # Deploying applications
 
 The fundamental purpose of Juju is to deploy and manage software applications
 in a way that is fast and easy. All this is done with the help of *charms*,
 which are bits of code that contain all the necessary intelligence to do these
-things. These charms can exist online (in the
-[Charm Store](https://jujucharms.com/store)) or on your local file system
-(previously downloaded from the store or written locally).
+things. Charms can exist online (in the [Charm Store][charm-store]) or on your
+local filesystem (previously downloaded from the store or written locally).
 
 Charms use the concept of *series* analogous as to how Juju does with Ubuntu
 series ('Trusty', 'Xenial', etc). For the most part, this is transparent as
@@ -69,11 +64,11 @@ As each new version of a charm is automatically versioned, these channels serve
 as pointers to a specific version number. It may be that after time a beta
 version becomes a candidate, or a candidate becomes the new stable version.
 
-By default you will get the 'stable' channel, but you can specify a channel
-when using the `deploy` command:
+The default channel is 'stable', but you can specify a different channel
+easily. Here, we choose the 'beta' channel:
 
 ```bash
-juju deploy mysql --channel <channel_name>
+juju deploy mysql --channel beta
 ```
 
 In the case of there being no version of the charm specified for that channel,
@@ -112,12 +107,14 @@ be deployed to. See
 [Deploying to specific machines][deploying-to-specific-machines] for full
 coverage of this topic.
 
-## Deploying to spaces
+## Deploying to network spaces
 
-Using spaces (see [Network spaces][network-spaces] for
-details), the operator is able to create a more restricted network topology
-for applications at deployment time. See
-[Deploying to spaces][deploying-to-spaces] for more information.
+Using network spaces the operator is able to create a more restricted network
+topology for applications at deployment time. See
+[Deploying to network spaces][deploying-to-network-spaces] for more
+information.
+
+<!-- MOVE THIS TO A TROUBLESHOOTING PAGE
 
 ## Juju retry-provisioning
 
@@ -133,30 +130,26 @@ exceeded' error. You can ask Juju to retry:
 juju retry-provisioning 3 27 57
 ```
 
-## Considerations
+-->
 
-Although we are working to have each application co-locatable without the
-danger of conflicting configuration files and network configurations this work
-is not yet complete.
+## Scaling out
 
-While the `add-unit` command supports the `--to` option, you can elect not use
-`--to` when doing an "add-unit" to scale out the application on its own node.
-
-```bash
-juju add-unit rabbitmq-server
-```
-
-This will allow you to save money when you need it by using `--to`, but also
-horizontally scale out on dedicated machines when you need to.
+A common enterprise requirement, once applications have been running for a
+while, is to have the ability to scale out (and scale back) one's
+infrastructure. Fortunately, this is one of Juju's strengths. The
+[Scaling applications][charms-scaling] page offers in-depth guidance on the
+matter.
 
 
 <!-- LINKS -->
 
+[charm-store]: https://jujucharms.com/store
 [models-config]: ./models-config.html
 [charms-upgrading]: ./charms-upgrading.html
 [charms-offline-deploying]: ./charms-offline-deploying.html
 [charms-config]: ./charms-config.html
+[charms-scaling]: ./charms-scaling.html
 [network-spaces]: ./network-spaces.html
 [deploying-multi-series-charms]: ./charms-deploying-advanced.html#multi--series-charms
 [deploying-to-specific-machines]: ./charms-deploying-advanced.html#deploying-to-specific-machines
-[deploying-to-spaces]: ./charms-deploying-advanced.html#deploying-to-spaces
+[deploying-to-network-spaces]: ./charms-deploying-advanced.html#deploying-to-network-spaces
