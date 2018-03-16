@@ -136,8 +136,8 @@ juju retry-provisioning 3 27 57
 ## Scaling out
 
 A common enterprise requirement, once applications have been running for a
-while, is to have the ability to scale out (and scale back) one's
-infrastructure. Fortunately, this is one of Juju's strengths. The
+while, is the ability to scale out (and scale back) one's infrastructure.
+Fortunately, this is one of Juju's strengths. The
 [Scaling applications][charms-scaling] page offers in-depth guidance on the
 matter.
 
