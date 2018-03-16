@@ -1,0 +1,360 @@
+navigation:
+
+  - location: "about-juju"
+    title: "About Juju"
+
+  - title: "Quick Guides"
+
+    children:
+    - location: "getting-started"
+      title: "Get started"
+    - location: "whats-new"
+      title: "What's new in 2.2"
+    - location: "tut-lxd"
+      title: "Local Juju with LXD cloud"
+    - location: "tut-google"
+      title: "Controllers and Models"
+    - location: "tut-users"
+      title: "Sharing and Users"
+
+  - title: "User Guide"
+
+    children:
+    - location: "juju-concepts"
+      title: "Concepts and terms"
+    - location: "clouds"
+      title: "Clouds"
+
+      children:
+      - location: "credentials"
+        title: "Cloud credentials"
+      - location: "help-aws"
+        title: "Amazon AWS"
+      - location: "help-azure"
+        title: "Microsoft Azure"
+      - location: "help-google"
+        title: "Google GCE"
+      - location: "help-joyent"
+        title: "Joyent"
+      - location: "clouds-LXD"
+        title: "LXD"
+      - location: "clouds-maas"
+        title: "MAAS"
+      - location: "clouds-manual"
+        title: "Manual"
+      - location: "help-openstack"
+        title: "OpenStack"
+      - location: "help-oracle"
+        title: "Oracle Compute"
+      - location: "help-rackspace"
+        title: "Rackspace"
+      - location: "help-vmware"
+        title: "VMware vSphere"
+
+    - location: "controllers"
+      title: "Controllers"
+
+      children:
+      - location: "controllers-creating"
+        title: "Create/Bootstrap"
+      - location: "controllers-gui"
+        title: "Juju GUI"
+      - location: "controllers-ha"
+        title: "High Availability"
+      - location: "controllers-backup"
+        title: "Backups"
+
+    - location: "models"
+      title: "Models"
+    - location: "charms"
+      title: "Charms & applications"
+
+      children:
+      - location: "charms-deploying"
+        title: "Deploying applications"
+      - location: "charms-constraints"
+        title: "Using constraints"
+      - location: "charms-config"
+        title: "Application configuration"
+      - location: "charms-relations"
+        title: "Application Relations"
+      - location: "charms-exposing"
+        title: "Exposing applications"
+      - location: "charms-scaling"
+        title: "Scaling applications"
+      - location: "charms-upgrading"
+        title: "Upgrading applications"
+      - location: "charms-destroy"
+        title: "Removing applications &amp; Units"
+      - location: "charms-service-groups"
+        title: "Groups of applications"
+      - location: "charms-ha"
+        title: "Charm high availability"
+      - location: "charms-working-with-units"
+        title: "Working with Units"
+      - location: "actions"
+        title: "Working with Actions"
+      - location: "charms-storage"
+        title: "Using storage"
+      - location: "charms-metrics"
+        title: "Viewing utilization with metrics"
+      - location: "charms-offline"
+        title: "Working offline"
+
+    - location: "charms-bundles"
+      title: "Charm bundles"
+    - location: "users"
+      title: "Users"
+
+      children:
+      - location: "users-auth"
+        title: "Authentication"
+      - location: "users-creating"
+        title: "Creating users"
+      - location: "users-models"
+        title: "Users and models"
+      - location: "users-manage"
+        title: "User management"
+      - location: "users-sample-commands"
+        title: "Sample commands"
+      - location: "users-workflows"
+        title: "Workflow scenarios"
+
+    - location: "juju-managing"
+      title: "Managing Juju"
+
+      children:
+      - location: "juju-block"
+        title: "Disable Juju commands"
+      - location: "juju-centos"
+        title: "CentOS support"
+      - location: "network-spaces"
+        title: "Network spaces"
+      - location: "juju-plugins"
+        title: "Juju plugins"
+
+    - location: "howto"
+      title: "How to..."
+
+      children:
+      - location: "howto-prometheus"
+        title: "Configure metrics gathering with Prometheus"
+      - location: "howto-privatecloud"
+        title: "Set up a Private Cloud"
+
+    - location: "troubleshooting"
+      title: "Troubleshooting"
+
+  - title: "Developer Guide"
+
+    children:
+    - location: "developer-getting-started"
+      title: "Getting Started"
+
+      children:
+      - location: "developer-getting-started#install-libraries-and-tools"
+        title: "Prerequisites and Tools"
+      - location: "developer-getting-started#designing-your-charm"
+        title: "Designing your Charm"
+      - location: "developer-getting-started#writing-your-charm"
+        title: "Writing your Charm"
+      - location: "developer-getting-started#testing-your-charm"
+        title: "Testing your Charm"
+      - location: "developer-getting-started#publishing-your-charm"
+        title: "Publishing your charm"
+
+    - location: "developer-event-cycle"
+      title: "Event Cycle"
+
+      children:
+      - location: "developer-event-cycle#handling-reactive-states"
+        title: "Handling Reactive States"
+
+    - location: "developer-layers"
+      title: "Charm Layers"
+
+      children:
+      - location: "developer-layers#what-are-layers?"
+        title: "What are Layers"
+      - location: "developer-layers#states"
+        title: "States"
+      - location: "developer-layer-example"
+        title: "How to Write a Layer"
+
+    - location: "developer-layers-interfaces"
+      title: "Interface Layers"
+
+      children:
+      - location: "developer-layers-interfaces#design-considerations"
+        title: "Design Considerations"
+      - location: "developer-layers-interfaces#communication-scopes"
+        title: "Communication Scopes"
+      - location: "developer-layers-interfaces#writing-an-interface-layer"
+        title: "Writing an Interface"
+
+    - location: "developer-upgrade-charm"
+      title: "Upgrading"
+    - location: "developer-terms"
+      title: "Juju Terms"
+    - location: "developer-metrics"
+      title: "Juju Metrics"
+    - location: "developer-resources"
+      title: "Juju Resources"
+    - location: "developer-leadership"
+      title: "Implementing Leadership"
+
+      children:
+      - location: "developer-leadership#leadership-hooks"
+        title: "Leadership Hooks"
+      - location: "developer-leadership#leadership-tools"
+        title: "Leadership Tools"
+      - location: "developer-leadership-howtos"
+        title: "Leadership Howtos"
+
+    - location: "developer-actions"
+      title: "Implementing Actions"
+
+      children:
+      - location: "developer-actions#implementing-actions"
+        title: "Defining Actions"
+      - location: "developer-actions#action-tools"
+        title: "Action Tools"
+
+    - location: "developer-storage"
+      title: "Implementing Storage"
+
+      children:
+      - location: "developer-storage#adding-storage"
+        title: "Adding Storage"
+      - location: "developer-storage#storage-hooks"
+        title: "Storage Hooks"
+
+    - location: "developer-testing"
+      title: "Writing Tests"
+
+      children:
+      - location: "developer-testing#charm-proof"
+        title: "Charm Proof"
+      - location: "developer-testing#amulet"
+        title: "Amulet"
+      - location: "developer-testing#bundletester"
+        title: "BundleTester"
+
+    - location: "developer-debugging"
+      title: "Debugging"
+
+      children:
+      - location: "developer-debug-layers"
+        title: "Debugging Layers"
+      - location: "developer-debugging#the-'debug-hooks'-command"
+        title: "debug-hooks"
+      - location: "developer-debugging#the-'debug-log'-command"
+        title: "debug-log"
+      - location: "developer-debug-dhx"
+        title: "DHX"
+
+    - location: "developer-howto"
+      title: "How to..."
+
+      children:
+      - location: "howto-charm-with-docker"
+        title: "Charm with Docker"
+
+    - location: "authors-intro"
+      title: "Charm Authors"
+
+      children:
+      - location: "authors-hook-environment"
+        title: "How hooks are run (Hook API)"
+      - location: "authors-relations-in-depth"
+        title: "Relations lifecycle"
+      - location: "authors-relations"
+        title: "Implementing relations"
+      - location: "authors-charm-leadership"
+        title: "Charm leadership"
+      - location: "authors-hook-errors"
+        title: "Hook Errors"
+
+        children:
+        - location: "authors-subordinate-applications"
+          title: "Subordinate applications"
+
+      - location: "authors-implicit-relations"
+        title: "Implicit Relations"
+
+    - location: "authors-charm-store"
+      title: "The Juju Charm Store"
+
+      children:
+      - location: "authors-charm-store#submitting-a-new-charm"
+        title: "Submit a charm"
+      - location: "authors-charm-policy"
+        title: "Charm store policy"
+      - location: "authors-charm-best-practice"
+        title: "Best practices"
+      - location: "authors-charm-icon"
+        title: "Charm Icons"
+
+  - title: "Tools"
+
+    children:
+    - location: "tools-charm-tools"
+      title: "Charm Tools"
+    - location: "tools-charm-helpers"
+      title: "Charm Helpers"
+    - location: "tools-amulet"
+      title: "Amulet"
+    - location: "tools-mojo"
+      title: "Mojo"
+
+  - title: "Reference"
+
+    children:
+    - location: "reference-install"
+      title: "Install Juju"
+    - location: "introducing-2"
+      title: "Introducing Juju 2.0!"
+    - location: "commands"
+      title: "Juju commands"
+    - location: "reference-constraints"
+      title: "Juju constraints"
+    - location: "reference-charm-hooks"
+      title: "Juju Charm Hooks"
+    - location: "reference-environment-variables"
+      title: "Juju environment variables"
+    - location: "reference-hook-tools"
+      title: "Juju Hook Tools"
+    - location: "authors-charm-metadata"
+      title: "metadata.yaml"
+    - location: "https://charmsreactive.readthedocs.io"
+      title: "Layers and charms.reactive"
+
+      children:
+      - location: "https://charmsreactive.readthedocs.io/en/latest/charms.reactive.decorators"
+        title: "Decorators"
+      - location: "https://charmsreactive.readthedocs.io/en/latest/charms.reactive.flags"
+        title: "Flags"
+      - location: "https://charmsreactive.readthedocs.io/en/latest/triggers"
+        title: "Triggers"
+      - location: "https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations"
+        title: "Relations"
+      - location: "reference-layer-yaml"
+        title: "Layer.yaml"
+
+    - location: "http://godoc.org/github.com/juju/juju/api"
+      title: "API docs"
+    - location: "reference-release-notes"
+      title: "Release notes"
+    - location: "reference-status"
+      title: "Status values"
+    - location: "reference-numbering"
+      title: "Machine/unit numbering"
+    - location: "reference-reviewers"
+      title: "Charm Review Criteria"
+
+  - location: "contact-us"
+    title: "Contact us"
+  - location: "contributing"
+    title: "Help improve these docs"
+  - location: "https://github.com/juju/docs/issues/new"
+    title: "Report a docs issue"
