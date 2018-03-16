@@ -5,12 +5,10 @@ Title: Charm tools
 The Charm Tools package is a collection of commands that assist with charm
 management. In particular, it allows charm authors to create charms.
 
-# Installation
+## Installation
 
 Charm Tools can be installed on various platforms with the use of
 [Snaps][snaps]. The name of the snap is called `charm`.
-
-## Ubuntu
 
 To install the Charm Tools on Ubuntu:
 
@@ -18,12 +16,8 @@ To install the Charm Tools on Ubuntu:
 sudo snap install charm
 ```
 
-## Other Linuxes
-
 To install on other Linux distributions see the upstream
 [Snaps documentation][snaps-install].
-
-## Non-Linux platforms
 
 There are no recent builds of Charm Tools for other operating systems. Check
 the [Charm Tools project][charm-tools] for further information.
@@ -60,7 +54,7 @@ the Windows Control Panel
 -->
 
 
-# Usage
+## Usage
 
 All the functionality provided by the Charm Tools is accessed via the `charm`
 command and a sub-command argument. Omitting the argument will give a listing
