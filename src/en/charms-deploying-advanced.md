@@ -81,55 +81,78 @@ juju upgrade-charm mycharm --force-series
 
 ## Deploying to specific machines
 
-It is possible to specify which machine or container an application is to be
-deployed to. One notable reason is to reduce costs when using a public cloud;
-applications can be consolidated instead of dedicating a machine per
-application unit.
+To deploy to specific, pre-existing machines the `--to` option is used. When
+this is done, unless the machine was created via `add-machine`, a charm has
+already been deployed to the machine.  
 
 !!! Note:
     When multiple charms are deployed to the same machine there exists the
     possibility of conflicting configuration files (on the machine's
-    filesystem). This will be fixed in a future release.
+    filesystem). Work is being done to rectify this.
 
-Below, the `--constraints` option is used to create an LXD controller with
-enough memory for other applications to run. The `--to` option is used to
-specify a machine:
+Machines are often referred to by their ID number. This is a simple integer
+that is shown in the output to `juju status` (or `juju machines`). For example,
+this partial output shows a machine with an ID of '2':
+
+```no-highlight
+Machine  State    DNS           Inst id        Series  AZ  Message
+2        started  10.132.70.65  juju-79b3aa-0  xenial      Running
+```
+
+### deploy --to
+
+To deploy the 'haproxy' application to machine '2' we would do this:
 
 ```bash
-juju bootstrap --constraints="mem=4G" lxd lxd-controller
+juju deploy --to 2 haproxy
+```
+
+Below, the `--constraints` option is used during controller creation to ensure
+that each workload machine will have enough memory to run multiple
+applications. MySQL is deployed as the first unit (in the
+'default' model) and so ends up on machine '0'. Then Rabbitmq gets deployed to
+the same machine:
+
+```bash
+juju bootstrap --constraints="mem=4G" localhost lxd
 juju deploy mysql
 juju deploy --to 0 rabbitmq-server
 ```
 
-Here, MySQL is deployed as the first unit (in the 'default' model) and so ends
-up on machine '0'. Then Rabbitmq gets deployed to machine '0' as well.
-
-Applications can also be deployed to containers:
+Juju treats a container like any other machine so it is possible to target
+specific containers as well. Here we deploy to containers in two different
+ways:
 
 ```bash
-juju deploy mysql --to 24/lxd/3
-juju deploy mysql --to lxd:25
+juju deploy nginx --to 24/lxd/3
+juju deploy mongodb --to lxd:25
 ```
 
-Above, MySQL is deployed to existing container '3' on machine '24'. Afterwards,
-a MySQL application is deployed to a new container on machine '25'.
+In the first case above, nginx is deployed to existing container '3' on machine
+'24'. In the second case, MongoDB is deployed to a **new** container on machine
+'25'. The latter is an exception to the rule that the `--to` option is always
+used in conjunction with a pre-existing machine.
 
-The above examples show how to deploy to a machine where you know the machine's
-identifier. The output to `juju status` will provide this information.
-
-It is also possible to deploy units using placement directives as `--to`
-arguments. Placement directives are provider specific. For example:
+It is also possible to deploy units using *placement directives* as arguments
+to the `--to` option. Placement directives are cloud-specific:
 
 ```bash
 juju deploy mysql --to zone=us-east-1a
-juju deploy mysql --to host.mass
+juju deploy mediawiki --to host.mass
 ```
 
-The first example deploys to a specified zone for AWS. The second example
+The first example deploys to a specific AWS zone while the second example
 deploys to a named machine in MAAS.
 
-The `add-unit` command also supports the `--to` option, so it's now possible to
-specifically target machines when expanding application capacity:
+### add-unit --to
+
+The `add-unit` command also supports the `--to` option, including placement
+directives.
+
+<!-- THE EXAMPLE DOES NOT WORK AND THE PURPOSE OF THE TEXT IS NOT CLEAR.
+
+The `add-unit` command also supports the `--to` option. To specifically target
+machines when expanding application capacity:
 
 ```bash
 juju deploy --constraints="mem=4G" openstack-dashboard
@@ -144,9 +167,10 @@ These two features make it much easier to deploy complex applications such as
 OpenStack which use a large number of charms on a limited number of physical
 servers.
 
-As with deploy, the --to option used with `add-unit` also supports placement
-directives. A comma separated list of directives can be provided to cater for
-the case where more than one unit is being added.
+-->
+
+A comma separated list of directives can be provided to cater for the case
+where more than one unit is being added:
 
 ```bash
 juju add-unit rabbitmq-server -n 4 --to zone=us-west-1a,zone=us-east-1b
