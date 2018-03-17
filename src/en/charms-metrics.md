@@ -106,7 +106,7 @@ metrics:
 ```
 
 For a more detailed explanation of `metrics.yaml`, refer to the
-[Metric types](./developer-metrics.html#metric-types) section in the developer
+[Metric types](../developer-metrics.html#metric-types) section in the developer
 documentation.
 
 # What else are metrics used for?

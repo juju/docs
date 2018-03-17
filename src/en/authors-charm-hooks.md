@@ -8,13 +8,13 @@ are executable files in a charm's `hooks` directory; hooks with particular names
 thereby cause changes to the world.
 
 Whenever a hook-worthy event takes place, the unit agent first checks whether
-that hook is being [debugged](./developer-debugging.html), and if so hands over
+that hook is being [debugged](../developer-debugging.html), and if so hands over
 control to the user. Otherwise, it tries to find a hook with precisely the right
 name. If the hook doesn't exist, the agent continues without complaint; if the
 hook does exist, it is invoked without arguments in a specific
-[hook context](./authors-hook-environment.html), and its output is written to
+[hook context](../authors-hook-environment.html), and its output is written to
 the unit agent's log. If it returns a non-zero exit code, the agent enters an
-[error state](./authors-hook-errors.html) and awaits user intervention.
+[error state](../authors-hook-errors.html) and awaits user intervention.
 
 The agent will also enter an error state if the unit agent process is aborted
 during hook execution.
@@ -45,7 +45,7 @@ These run during the normal charm lifecycle.
   - immediately after "install"
   - immediately after "upgrade-charm"
   - at least once when the unit agent is restarted (but, if the unit is in an
-    [error state](./authors-hook-errors.html), it won't be run until after the
+    [error state](../authors-hook-errors.html), it won't be run until after the
     error state is cleared).
   - after changing charm configuration using the GUI or command line interface
 
@@ -66,7 +66,7 @@ the leader. Authors can use this hook to take action if their protocols for
 leadership, consensus, raft, or quorum require one unit to assert leadership.
 If the election process is done internally to the application, other code
 should be used to signal the leader to Juju. For more information read the
-[charm leadership document](./authors-charm-leadership.html).
+[charm leadership document](../authors-charm-leadership.html).
 
 ### leader-settings-changed
 
@@ -74,7 +74,7 @@ should be used to signal the leader to Juju. For more information read the
 units to respond to. Much like (config-changed)[#config-changed) but for the
 leaders to send values to other units. Follower units can implement this hook
 and take action when the leader sets values. For more information read the
-[charm leadership document](./authors-charm-leadership.html).
+[charm leadership document](../authors-charm-leadership.html).
 
 ### start
 
@@ -99,8 +99,8 @@ should implement the following logic:
 ### upgrade-charm
 
 `upgrade-charm` runs immediately after any
-[upgrade](./developer-upgrade-charm.html) operation that does _not_ itself
-interrupt an existing [error state](./authors-hook-errors.html). It should be
+[upgrade](../developer-upgrade-charm.html) operation that does _not_ itself
+interrupt an existing [error state](../authors-hook-errors.html). It should be
 used to reconcile local state written by some other version of the charm into
 whatever form it needs to take to be manipulated by the current version.
 
@@ -131,7 +131,7 @@ connect to, and use, the same database; but if units of another client
 application were to use that same database, the consequences could be
 catastrophic for all concerned.
 
-If juju respected the `limit` field in relation [metadata](./authors-charm-metadata.html),
+If juju respected the `limit` field in relation [metadata](../authors-charm-metadata.html),
 it would be possible to work around this, but it's not a high-
 priority [bug](https://bugs.launchpad.net/bugs/1089297): most provider
 applications _should_ be able to handle multiple requirers anyway; and most
@@ -162,7 +162,7 @@ incomplete: you can guarantee that when the remote unit changes its settings,
 the hook will be run again.
 
 The settings that you can get, and that you should set, are determined by the
-relation's [interface](./authors-relations.html).
+relation's [interface](../authors-relations.html).
 
 ### [name]-relation-departed
 
@@ -204,7 +204,7 @@ runtime relations in play with the same name, and that they're independent: one
 
 Juju can provide a variety of storage to charms. The charms can define several
 different types of storage that are allocated from Juju. To read more
-information, see the [storage document](./developer-storage.html)
+information, see the [storage document](../developer-storage.html)
 
 ### [name]-storage-attached
 
@@ -212,7 +212,7 @@ information, see the [storage document](./developer-storage.html)
 added. The storage-attached hooks will be run before the install hook, so that
 the installation routine may use the storage. The name prefix of this hook will
 depend on the storage key [defined in the
-metadata.yaml](./developer-storage.html#adding-storage) file.
+metadata.yaml](../developer-storage.html#adding-storage) file.
 
 ### [name]-storage-detaching
 
@@ -221,14 +221,14 @@ removed. The storage-detaching hooks will be run before storage is detached,
 and always before the stop hook is run, to allow the charm to gracefully release
 resources before they are removed and before the unit terminates. The name
 prefix of the hook will depend on the storage key [defined in the
-`metadata.yaml`](./developer-storage.html#adding-storage) file.
+`metadata.yaml`](../developer-storage.html#adding-storage) file.
 
 ## Writing hooks
 
-If you follow the [tutorial](./authors-charm-writing.html), you'll get a good
+If you follow the [tutorial](../authors-charm-writing.html), you'll get a good
 sense of the basics. To fill out your knowledge, you'll want to study the hook
-[context and tools](./authors-hook-environment.html), and to experiment with
-[debug-hooks](./developer-debugging.html).
+[context and tools](../authors-hook-environment.html), and to experiment with
+[debug-hooks](../developer-debugging.html).
 
 Independent of the nuts and bolts, though, good hooks display a number of useful
 high-level properties:
@@ -249,15 +249,15 @@ from irrelevant details.
 
   - Where possible, they reuse [common code](https://launchpad.net/charm-tools)
 already written to ease or solve common use cases.
-  - They do not return [errors](./authors-hook-errors.html) unless there is a
+  - They do not return [errors](../authors-hook-errors.html) unless there is a
 good reason to believe that they cannot be resolved without user intervention.
 Doing so is an admission of defeat: a user who sees your charm returning an
 error state is unlikely to have the specific expertise necessary to resolve it.
 If you have to return an error, please be sure to at least write any context
 you can to the log before you do so.
   - They write only _very_ sparingly to the
-[charm directory](./authors-charm-components.html).
+[charm directory](../authors-charm-components.html).
 
 We recommend you also familiarise yourself with the [best practices]
 (./authors-charm-best-practice.html) and, if you plan to distribute your charm, the [charm
-store policy](./authors-charm-policy.html).
+store policy](../authors-charm-policy.html).

@@ -289,12 +289,12 @@ bootstrap node, for example:
 ```bash
 juju restore-backup -b --constraints="mem=4G" --file=backup.tar.gz
 ```
-Read the [constraints reference page](./reference-constraints.html) for more
+Read the [constraints reference page](../reference-constraints.html) for more
 information on the constraints which may be used.
 
 ## HA (High Availability)
 
-As stated in [Juju HA](./controllers-ha.html), high availability, in general
+As stated in [Juju HA](../controllers-ha.html), high availability, in general
 terms, indicates that a Juju environment has 3 or more (up to 7) redundant
 controllers. In the normal course of operation, this means that requiring a
 backup is less likely. As long as one of the original controller remains, the

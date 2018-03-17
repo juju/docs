@@ -20,7 +20,7 @@ on multiple (Juju) machines directly on the file system. The latter can
 nonetheless be done in exceptional circumstances and some explanation is
 provided here.
 
-See [Juju high availability](./controllers-ha.html#ha-and-logging) when viewing
+See [Juju high availability](../controllers-ha.html#ha-and-logging) when viewing
 logs in an HA context.
 
 ### Juju agents
@@ -57,7 +57,7 @@ reveals the agent's configuration file:
 
 Consider keeping backups of these files, especially prior to upgrading the
 agents. See
-[Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software).
+[Upgrading Juju software](../models-upgrade.html#upgrading-the-model-software).
 
 ### The debug-log command
 
@@ -83,7 +83,7 @@ The exception to the streaming is when limiting the output (option '--limit';
 see below) and that limit is attained. In all other cases the command will need
 to be interrupted with 'Ctrl-C' in order to regain the shell prompt.
 
-For complete syntax, see the [command reference page](./commands.html). The
+For complete syntax, see the [command reference page](../commands.html). The
 `juju help debug-log` command also provides reminders and more examples.
 
 #### Examples:

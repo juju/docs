@@ -12,7 +12,7 @@ constraints do not affect any units which have already been placed on machines.
 
 For more granularity, it is also possible to add a machine with specific
 constraints (`juju add-machine`) and then specify that machine when deploying
-applications ([see the documentation on `juju deploy`](./charms-deploying.html)).
+applications ([see the documentation on `juju deploy`](../charms-deploying.html)).
 
 ## What constraints can be used?
 

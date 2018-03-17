@@ -17,7 +17,7 @@ yourself.
 ### Adding bundles from the command line
 
 Bundles are deployed on the command line exactly like
-[Charms](./charms-deploying.html), and use the same `deploy` command and
+[Charms](../charms-deploying.html), and use the same `deploy` command and
 syntax:
 
 ```bash
@@ -44,7 +44,7 @@ juju deploy cs:bundle/wiki-simple-4
 
 Bundles are just as easy to use and deploy within the Juju GUI, and the process
 of adding them from the Charm Store is almost identical to the way you add
-charms. 
+charms.
 
 From the GUI, open the Store and select the bundle you're interested in. A new
 pane will display a preview of what the GUI's visual overview will look like
@@ -75,7 +75,7 @@ You can import a saved bundle by either dragging the exported YAML file onto
 your browser canvas, or using the 'Import' button. After clicking 'Import' your
 browser will prompt you to select a bundle file.
 
-After a file has been added, the GUI will briefly report 
+After a file has been added, the GUI will briefly report
 `ChangeSet process started` followed by `ChangeSet import complete`. As with
 adding bundles from the store, you may want to review the applications,
 connections and various configuration options before clicking on 'Commit
@@ -84,7 +84,7 @@ changes' and 'Deploy' to activate your bundle.
 ### Local deploy via command line
 
 After exporting a bundle from the GUI, you can also `deploy` the saved bundle
-from the command line: 
+from the command line:
 
 ```bash
 juju deploy bundle.yaml
@@ -106,7 +106,7 @@ Note that if no directory is given, the command defaults to the current
 directory.
 
 If no errors are detected, there will be no output from `charm proof` and you
-can safely deploy your bundle. 
+can safely deploy your bundle.
 
 ## Creating a bundle
 
@@ -118,7 +118,7 @@ for easy repeatability and for sharing of complex, multi-application
 deployments.
 
 As an example, here is a bundle file with a MySQL application and a WordPress
-application with a relation between the two: 
+application with a relation between the two:
 
 ```yaml
 series: xenial
@@ -338,7 +338,7 @@ machines:
     constraints: "arch=amd64 cpu-cores=4 cpu-power=500 mem=4096 root-disk=8192"
 ```
 which will install one unit of the MySQL application on machine 0 and the other on
-machine 1. 
+machine 1.
 
 The output from `juju status` will show this deployment as follows:
 
@@ -452,7 +452,7 @@ a Juju controller can not contact the charm store, for example.
 
 After you have tested and deployed your bundle you need to release it to share
 it with people, this is covered in the
-[charm store documentation][store-docs]. 
+[charm store documentation][store-docs].
 
 Someone will come along and review your bundle for inclusion. If you need to
 speak to a human, there are patch pilots in the Juju IRC channel (#juju on
@@ -461,7 +461,7 @@ Freenode) who can assist. You can also use the
 
 !!! Note:
     Make sure you've added a brief explanation of what your bundle does within
-    the `description` field of your bundle's YAML file. 
+    the `description` field of your bundle's YAML file.
 
 
 <!-- LINKS -->

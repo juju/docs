@@ -188,7 +188,7 @@ following are good guidelines:
  - Remember the readers are *users* not necessarily Juju developers
  - Spell things properly! (see below)
  - We use British English (en-GB). See
-   [language details](./contributing-en-GB.html), including a comparison with
+   [language details](../contributing-en-GB.html), including a comparison with
    American English (en-US).
  - If including links or examples, double-check they actually work
  - We enforce 80 columns for every text file to keep it readable. Here are

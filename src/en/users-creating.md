@@ -26,7 +26,7 @@ the following additional actions (in the context of the controller):
  - Show details for controller users (`juju show-user`)
 
 To do anything further the user must wait to be granted access to a model by
-the administrator. See [Users and models](./users-models.html).
+the administrator. See [Users and models](../users-models.html).
 
 !!! Note:
     User registration (and any other Juju operations that involves

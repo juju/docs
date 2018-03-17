@@ -26,7 +26,7 @@ Lists > Resources > Datacenters' from the hierarchical menu on the left. The
 values you need are listed in the 'Name' column, such as the 'dc0' and 'dc1'
 data centres shown here:
 
-![vSphere web client showing data centres](./media/config-vsphere-datacenters.png)
+![vSphere web client showing data centres](../media/config-vsphere-datacenters.png)
 
 With a **cloudname** of `myvscloud`, an **endpoint** of `178.18.42.10` and two
 data centres named 'dc0' and 'dc1' respectively, a basic configuration would
@@ -100,12 +100,12 @@ juju bootstrap myvscloud myvscontroller --config primary-network=PRIMARY_NET --c
 !!! Note:
     When you specify these options in the bootstrap command, they will only
     apply to the `controller` and `default` model. Use
-    [`model-defaults`](./models-config.html) if you
+    [`model-defaults`](../models-config.html) if you
     want all new models to use those options.
 
 To learn about configuration options available at bootstrap time, see
-[Configuring controllers](./controllers-config.html) and [Configuring models](./models-config.html).
-See the [Constraints reference](./reference-constraints.html#vsphere-provider:) for
+[Configuring controllers](../controllers-config.html) and [Configuring models](../models-config.html).
+See the [Constraints reference](../reference-constraints.html#vsphere-provider:) for
 more info on which constrains are supported on VMware.
 
 !!! Note:

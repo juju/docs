@@ -4,7 +4,7 @@ Title: Notes on upgrading Juju software
 # Notes on upgrading Juju software
 
 This is an addendum to the main page describing Juju software upgrades:
-[Upgrading Juju software](./models-upgrade.html).
+[Upgrading Juju software](../models-upgrade.html).
 
 
 ## Agent software and related components
@@ -86,5 +86,5 @@ juju sync-tools --version 2.03 --debug
     the `sync-tools --version` command only accepts `major[.minor]`
     ("e.g. use '2.03' not '2.03.1').
 
-For complete syntax, see the [command reference page](./commands.html#sync-tools)
+For complete syntax, see the [command reference page](../commands.html#sync-tools)
 or by running `juju help sync-tools`.

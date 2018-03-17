@@ -186,7 +186,7 @@ juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5
 ```
 !!! Note:
     the unit numbers may not necessarily be sequential, see the
-    [notes on machine/unit numbering](./reference-numbering.html)
+    [notes on machine/unit numbering](../reference-numbering.html)
 
 
 The `remove-unit` command can be run to remove running units safely. The
@@ -205,4 +205,4 @@ juju remove-machine 1
 ```
 
 For more information on removing applications, please see the section on
-[destroying applications](./charms-destroy.html).
+[destroying applications](../charms-destroy.html).

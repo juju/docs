@@ -91,7 +91,7 @@ add-metric metric1=value1 [metric2=value2 …]
 ```
 
 In Juju 2.0, `add-metric` may only be executed from the
-[`collect-metrics`](./reference-charm-hooks.html#collect-metrics) hook. Future
+[`collect-metrics`](../reference-charm-hooks.html#collect-metrics) hook. Future
 releases of Juju may allow it in other contexts.
 
 
@@ -492,7 +492,7 @@ output. Processing that depends on specific values (other than `private-address`
 should be restricted to
 [-relation-changed](authors-charm-hooks.html#[name]-relation-changed) hooks for
 the relevant unit, and the absence of a remote unit's value should never be
-treated as an [error](./authors-hook-errors.html) in the local unit.
+treated as an [error](../authors-hook-errors.html) in the local unit.
 
 In practice, it is common and encouraged for
 [-relation-changed](authors-charm-hooks.html#[name]-relation-changed) hooks to
@@ -701,7 +701,7 @@ be one of the following:
 
 For more extensive explanations of these statuses, and other possible status
 values which may be set by Juju itself,
-[please see the status reference page](./reference-status.html).
+[please see the status reference page](../reference-status.html).
 
 The second argument is a user-facing message, which will be displayed to any
 users viewing the status, and will also be visible in the status history. This

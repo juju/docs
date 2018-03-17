@@ -1,4 +1,4 @@
-Title: Juju High Availability  
+Title: Juju High Availability
 TODO: Remove citation of HA logging bug when fixed (section: 'HA and logging')
 
 # High availability
@@ -42,7 +42,7 @@ Whenever you run enable-ha, the command will report the changes it
 intends to make, which will shortly be implemented.
 
 For complete syntax, see the
-[command reference page](./commands.html#ensure-availability).
+[command reference page](../commands.html#ensure-availability).
 
 
 ## Recovering from controller failure
@@ -53,7 +53,7 @@ the original number of controllers remain available you can manually recover.
 The process is detailed below.
 
 1. Run `juju enable-ha`.
-1. Verify that the output of `juju status` shows a value of `has-vote` for 
+1. Verify that the output of `juju status` shows a value of `has-vote` for
    the `controller-member-status` attribute for each new server and a value of
    `no-vote` for each old server. Once confirmed, the new servers are fully
    operational as cluster members and the old servers have been demoted (no longer
@@ -73,4 +73,4 @@ All Juju machines send their logs to a controller in the HA cluster. Each
 controller, in turn, sends those logs to a MongoDB database which is
 synchronized across controllers. The user reads logging information with the
 `juju debug-log` command as normal. See
-[Viewing logs](./troubleshooting-logs.html).
+[Viewing logs](../troubleshooting-logs.html).

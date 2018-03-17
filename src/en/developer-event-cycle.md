@@ -79,30 +79,30 @@ appropriate event.
 
 There are several core lifecycle hooks that can be implemented by any charm:
 
-* [install](./reference-charm-hooks.html#install)
-* [config-changed](./reference-charm-hooks.html#config-changed)
-* [start](./reference-charm-hooks.html#start)
-* [upgrade-charm](./reference-charm-hooks.html#upgrade-charm)
-* [stop](./reference-charm-hooks.html#stop)
-* [update-status](./reference-charm-hooks.html#update-status)
-* [leader-elected](./reference-charm-hooks.html#leader-elected)
-* [leader-settings-changed](./reference-charm-hooks.html#leader-settings-changed)
+* [install](../reference-charm-hooks.html#install)
+* [config-changed](../reference-charm-hooks.html#config-changed)
+* [start](../reference-charm-hooks.html#start)
+* [upgrade-charm](../reference-charm-hooks.html#upgrade-charm)
+* [stop](../reference-charm-hooks.html#stop)
+* [update-status](../reference-charm-hooks.html#update-status)
+* [leader-elected](../reference-charm-hooks.html#leader-elected)
+* [leader-settings-changed](../reference-charm-hooks.html#leader-settings-changed)
 
 For every relation defined by a charm, an additional four "relation hooks" can
 be implemented, named after the charm relation:
 
-* [[name]-relation-joined](./reference-charm-hooks.html#[name]-relation-joined)
-* [[name]-relation-changed](./reference-charm-hooks.html#[name]-relation-changed)
-* [[name]-relation-departed](./reference-charm-hooks.html#[name]-relation-departed)
-* [[name]-relation-broken](./reference-charm-hooks.html#[name]-relation-broken)
+* [[name]-relation-joined](../reference-charm-hooks.html#[name]-relation-joined)
+* [[name]-relation-changed](../reference-charm-hooks.html#[name]-relation-changed)
+* [[name]-relation-departed](../reference-charm-hooks.html#[name]-relation-departed)
+* [[name]-relation-broken](../reference-charm-hooks.html#[name]-relation-broken)
 
 For every storage pool created a charm can implement two additional storage
 hooks:
 
-* [[name]-storage-attached](./reference-charm-hooks.html#[name]-storage-attached)
-* [[name]-storage-detaching](./reference-charm-hooks.html#[name]-storage-detaching)
+* [[name]-storage-attached](../reference-charm-hooks.html#[name]-storage-attached)
+* [[name]-storage-detaching](../reference-charm-hooks.html#[name]-storage-detaching)
 
-There is more information on [Charm Hooks](./reference-charm-hooks.html) in the
+There is more information on [Charm Hooks](../reference-charm-hooks.html) in the
 Reference section of the Juju documentation.
 
 ## Deployment Events by example
@@ -160,7 +160,7 @@ an event if the leader is ever destroyed or otherwise displaced.
 1. leader-settings-changed
 
 There is more detailed information about [Charm Leadership in the Juju
-documentation](./authors-charm-leadership.html).
+documentation](../authors-charm-leadership.html).
 
 ## Storage Events by example
 
@@ -172,10 +172,10 @@ so the charm can react storage is attached and when it is detached.
 1. [name]-storage-detached
 
 There is more information about the
-[storage feature in the Juju documentation](./charms-storage.html).
+[storage feature in the Juju documentation](../charms-storage.html).
 
 While these concepts are important to understand how Juju works,
-[creating a charm in the reactive framework](./developer-layers.html)
+[creating a charm in the reactive framework](../developer-layers.html)
 reduces the need to interact directly with the event model. We will preserve
 the install and config-changed hook(s) in most layers. The relation hooks
 are generated when using an interface layer, during the `charm build` process.

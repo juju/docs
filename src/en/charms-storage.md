@@ -8,7 +8,7 @@ the charm is deployed. Charms may declare several types of storage requirement
 (e.g. for persistent storage and an additional cache) so that resources can be
 allocated at a more granular level.
 
-Juju has the [`juju storage`](./commands.html#storage) command and
+Juju has the [`juju storage`](../commands.html#storage) command and
 subcommands to create and manage storage resources. All commands and
 subcommands accept the “--help” flag for usage and help information.
 
@@ -60,7 +60,7 @@ tempy:
 
 #### Placement
 
-If the storage provider supports dynamically adding storage to a machine, then 
+If the storage provider supports dynamically adding storage to a machine, then
 an application/unit deployed with storage may be placed on an existing machine.
 Not all providers support dynamic storage; for example, MAAS provides an
 interface to physical hardware.
@@ -113,12 +113,12 @@ attributes:
 
     true|false, indicating whether or not to encrypt volumes created by the pool.
 
-For information regarding EBS volume types, see 
+For information regarding EBS volume types, see
 [the EBS documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 
 #### OpenStack/Cinder (cinder)
 
-The OpenStack/Cinder provider does not currently have any specific 
+The OpenStack/Cinder provider does not currently have any specific
 configuration options.
 
 OpenStack defaults to using Cinder for additional specified storage,
@@ -281,11 +281,11 @@ the model.
 
 When updating a charm with the [upgrade-charm][upgrade-charm] command,
 default storage constraints will be preserved unless new constraints have been
-added to the updated charm. 
+added to the updated charm.
 
 For example, if an update to the PostgreSQL charm adds a requirement for
 pgdata and pgdata doesn't currently exist, the update will automatically
-create a rootfs pgdata storage instance for each unit. 
+create a rootfs pgdata storage instance for each unit.
 
 As with the `deploy` command, constraints can be specified when updating
 by adding the '--storage' argument:
@@ -348,7 +348,7 @@ config:
 
 If you are interested in more information on how to create a charm that uses
 the storage feature read
-[writing charms that use storage](./developer-storage.html).
+[writing charms that use storage](../developer-storage.html).
 
 [model-config]: ./models-config.html#list-of-model-keys
 [storagedetatching]: ./reference-charm-hooks#[name]-storage-detatching

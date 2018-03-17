@@ -1,4 +1,4 @@
-Title: Upgrading a charm  
+Title: Upgrading a charm
 TODO:  Completely devoid of CLI examples. Kindly add
 
 # Upgrade a Charm
@@ -47,7 +47,7 @@ taken place.
 This is quite a tight restriction, but nonetheless valuable, so long as you can
 guarantee it will run. However, it's important to understand that the upgrade-
 charm accepts a `--force-units` flag: a forced charm upgrade will upgrade even
-units that are currently in an [error](./authors-hook-errors.html) state, at
+units that are currently in an [error](../authors-hook-errors.html) state, at
 the cost of skipping the `upgrade-charm` hook for those units.
 
 This is useful for charm authors who want to push a new version of a failed

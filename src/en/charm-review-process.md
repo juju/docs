@@ -148,7 +148,7 @@ charm directory:
 juju test -v --set-e
 ```
 
-Go to the [testing page](./developer-testing.html) for more information about
+Go to the [testing page](../developer-testing.html) for more information about
 how to run the testing tools.
 
 If a charm does not have tests, note it in the review and deploy the charm

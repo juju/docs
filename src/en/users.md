@@ -56,7 +56,7 @@ conceivable that multiple controllers exist that use the same cloud resource
 decision on the part of those who use Juju as to whether this should be
 allowed.
 
-See [Controllers](./controllers.html) for information on controllers.
+See [Controllers](../controllers.html) for information on controllers.
 
 ### Administrators
 Only an administrator has the power to perform these actions (in
@@ -94,10 +94,10 @@ For write access, the user can begin with the following major commands:
 Further reading:
 
 - A walkthrough of typical commands is provided in
-  [Workflow scenarios](./users-workflows.html#basic_setup_and_single_user.html).
+  [Workflow scenarios](../users-workflows.html#basic_setup_and_single_user.html).
 - Other write commands are listed on the
-  [command reference page](./commands.html).
+  [command reference page](../commands.html).
 - An explanation of how users gain access to models is provided in
-  [Users and models](./users-models.html).
+  [Users and models](../users-models.html).
 - An analysis of the output to certain commands is given in
-  [Sample commands](./users-sample-commands.html).
+  [Sample commands](../users-sample-commands.html).

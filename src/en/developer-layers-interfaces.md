@@ -118,7 +118,7 @@ automatically cleared.
 
 ## Creating an interface layer
 
-First off, you require a [local charm repository](./charms-deploying.html) in
+First off, you require a [local charm repository](../charms-deploying.html) in
 which to work. This involves creating three directories -- `layers`,
 `interfaces`, and `charms` -- and setting some environment variables.
 

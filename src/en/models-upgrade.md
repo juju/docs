@@ -53,9 +53,9 @@ Overview:
   latter's cache cannot satisfy the request the controller will attempt a
   download from the internet.
 - Backups are recommended prior to upgrading the server software. See
-  [Backup and restore](./controllers-backup.html).
+  [Backup and restore](../controllers-backup.html).
 
-See [Notes on upgrading Juju software](./models-upgrade-notes.html)
+See [Notes on upgrading Juju software](../models-upgrade-notes.html)
 for upgrading details, including what to do when the controller lacks internet
 access.
 
@@ -93,7 +93,7 @@ watch -n3 "juju status --format=tabular"
 ```
 
 For complete syntax, see the
-[command reference page](./commands.html#upgrade-juju). The `juju help
+[command reference page](../commands.html#upgrade-juju). The `juju help
 upgrade-juju` command also provides reminders and more examples.
 
 !!! Warning:
@@ -116,4 +116,4 @@ its output then proceed to the next section.
 
 An upgrade of server software that does not lead to 100% success will require
 troubleshooting. See
-[Troubleshooting environment upgrades](./troubleshooting-upgrade.html).
+[Troubleshooting environment upgrades](../troubleshooting-upgrade.html).

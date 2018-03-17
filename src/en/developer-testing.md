@@ -70,7 +70,7 @@ Upon exit, the test's exit code will be evaluated to mean the following:
 The `charm-tools` package contains a static charm analysis tool called
 `charm proof`. This tool checks the charm structure and gives Informational,
 Warning, and Error messages on potential issues with the charm structure. To be
-in line with [Charm Store policy](./authors-charm-policy.html), all
+in line with [Charm Store policy](../authors-charm-policy.html), all
 charms should pass `charm proof` with Information messages only.
 Warning or Error messages indicate a problem in the charm and the automated
 tests will fail the on the `charm proof` step.
@@ -78,7 +78,7 @@ tests will fail the on the `charm proof` step.
 ## The Amulet Test Library
 
 While you can write tests in Bash or other languages, the
-[Amulet library](./tools-amulet.html) makes it easy to write tests in Python
+[Amulet library](../tools-amulet.html) makes it easy to write tests in Python
 and is recommended.
 
 ## Executing Tests via BundleTester
@@ -86,11 +86,11 @@ and is recommended.
 The charm test runner is a tool called
 [`bundletester`](https://github.com/juju-solutions/bundletester). The
 `bundletester` tool is used to find, fetch, and run tests on charms and
-[bundles](./charms-bundles.html).
+[bundles](../charms-bundles.html).
 
 You should execute bundletester against a built charm. In order to
 test the vanilla charm that you built in [Getting
-Started](./developer-getting-started.html), you would do the
+Started](../developer-getting-started.html), you would do the
 following:
 
 ```

@@ -1,4 +1,4 @@
-Title: What is Juju?  
+Title: What is Juju?
 
 # What is Juju?
 
@@ -60,7 +60,7 @@ organisation, it is common for different teams choose different tools; Juju
 allows teams to pick whatever works for them and their expertise in their
 application, but still reuse whatever they want from other teams.
 
-![charm diagram](./media/about-charms.png)
+![charm diagram](../media/about-charms.png)
 
 Different charms can use entirely different configuration management tools.
 
@@ -228,27 +228,27 @@ bundles from the charm store into the blank canvas.
 <table>
   <tr>
     <td width=400>
-     <img src="./media/hadoop-icon-160.png" alt="icon" class="tableicon">
+     <img src="../media/hadoop-icon-160.png" alt="icon" class="tableicon">
      <strong>Hadoop &reg;</strong><br>
      Try one of the simple HDFS bundles or deploy a more complex
 sentiment-analysis application to scan twitter streams for brands you are
 interested in.
     </td>
     <td width=400>
-     <img src="./media/cfoundry-icon-160.png" alt="icon" class="tableicon" >
+     <img src="../media/cfoundry-icon-160.png" alt="icon" class="tableicon" >
      <strong>Cloud Foundry &trade;</strong><br>
      Spin up a multi-service PAAS on whichever cloud you like!
     </td>
   </tr>
   <tr>
     <td>
-     <img src="./media/docker-icon-160.png" alt="icon" class="tableicon" >
+     <img src="../media/docker-icon-160.png" alt="icon" class="tableicon" >
      <strong>Docker</strong><br>
      Try Kubernetes, the Docker management system from Google, on any cloud
 supported by Juju.
     </td>
     <td>
-     <img src="./media/openstack-icon-160.png" alt="icon" class="tableicon" >
+     <img src="../media/openstack-icon-160.png" alt="icon" class="tableicon" >
      <strong>OpenStack &trade;</strong><br>
      Deploy your own private cloud on bare metal servers. If you want to
 evaluate OpenStack, you can use Juju to spin it up on VMware too.
