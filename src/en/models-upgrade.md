@@ -36,7 +36,7 @@ sudo snap refresh juju
 
 For more installation information and what versions are available, see
 [the install page](reference-install.html).
- 
+
 
 ## Upgrading the model software
 
@@ -67,7 +67,7 @@ order (`juju status`).
 
 Examples:
 
-Upgrade the controller model for the current controller (this must be done before 
+Upgrade the controller model for the current controller (this must be done before
 other models on the controller can be upgraded) with the newest version available:
 
 ```bash
@@ -96,7 +96,8 @@ For complete syntax, see the
 [command reference page](./commands.html#upgrade-juju). The `juju help
 upgrade-juju` command also provides reminders and more examples.
 
-!!! Warning: The `--upload-tools` option should be not be used by the end user.
+!!! Warning:
+    The `--upload-tools` option should be not be used by the end user.
 
 
 ## Verifying the upgrade

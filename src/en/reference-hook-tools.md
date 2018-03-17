@@ -12,14 +12,15 @@ available within ‘hook context’.
 Additionally, the `payload-status-set`, `payload-register` and
 `payload-unregister` commands, also listed below, can be used to manage your
 charm's payloads. Please see [payloads in Charm metadata][payloads] for further
-details on how to use payloads within your charms. 
+details on how to use payloads within your charms.
 
 Many of the tools produce text based output, and those that do accept
 a `--format` flag which can be set to json or yaml as desired.
 
-!!! Note: You can view a detailed listing of what each command listed below does
-on your client with `juju help-tool {command}`. Or for more detailed help on
-individual commands run the command with the -h flag.
+!!! Note:
+    You can view a detailed listing of what each command listed below does
+    on your client with `juju help-tool {command}`. Or for more detailed help on
+    individual commands run the command with the -h flag.
 
 ## action-fail
 
@@ -136,7 +137,7 @@ close-port 80
 close-port 9000-9999/udp
 ```
 
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 # Close a single port
@@ -171,7 +172,7 @@ INTERVAL=$(config-get interval)
 
 config-get --all
 ```
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 $interval = Get-JujuCharmConfig "interval"
@@ -198,7 +199,7 @@ if [ "${LEADER}" == "True" ]; then
   # Do something a leader would do
 fi
 ```
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 if (Is-Leader) {
@@ -222,7 +223,7 @@ bash:
 ```bash
 juju-log -l 'WARN' Something has transpired
 ```
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 # Basic logging
@@ -263,7 +264,7 @@ juju-reboot --now
 # Reboot after current hook exits
 juju-reboot
 ```
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 # immediately reboot
@@ -287,7 +288,7 @@ bash:
 ```bash
 ADDRESSS=$(leader-get cluster-leader-address)
 ```
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 $clusterLeaderAddress = Get-LeaderData "cluster-leader-address"
@@ -324,7 +325,7 @@ bash:
 ```bash
 leader-set cluster-leader-address=10.0.0.123
 ```
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 Set-LeaderData @{"cluster-leader-address"="10.0.0.123"}
@@ -378,9 +379,10 @@ charm**. It does not, at the moment, include ports which may be opened by other
 charms co-hosted on the same machine
 [lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770).
 
-!!! Note: opening ports is transactional (i.e. will take place on successfully
-exiting the current hook), and therefore `opened-ports` will not return any
-values for pending `open-port` operations run from within the same hook.
+!!! Note:
+    opening ports is transactional (i.e. will take place on successfully
+    exiting the current hook), and therefore `opened-ports` will not return any
+    values for pending `open-port` operations run from within the same hook.
 
 python:
 ```python
@@ -549,7 +551,7 @@ bash:
 ```bash
 relation-ids database
 ```
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 Get-JujuRelationIds -RelType "database"
@@ -576,7 +578,7 @@ bash:
 relation-list 9
 ```
 
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 Get-JujuRelatedUnits -RelId (Get-JujuRelationId)
@@ -833,7 +835,7 @@ storage-list
 argument, which must be `private-address` or `public-address`. It is not
 affected by context.
 
-Note that if a unit has been deployed with `--bind space` then the address 
+Note that if a unit has been deployed with `--bind space` then the address
 returned from `unit-get private-address` will get the address from this
 space, not the 'default' space.
 
@@ -847,7 +849,7 @@ bash:
 ```bash
 unit-get public-address
 ```
-powershell:  
+powershell:
 ```powershell
 Import-Module CharmHelpers
 Get-JujuUnit -Attr "public-address"

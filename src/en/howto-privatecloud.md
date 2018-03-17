@@ -69,7 +69,7 @@ openstack image list -f value
 ```
 
 The following example output shows two images listed, Ubuntu 16.04
-(Xenial) and Ubuntu 14.04 (Trusty). 
+(Xenial) and Ubuntu 14.04 (Trusty).
 
 
 ```no-highlight
@@ -79,11 +79,12 @@ e9df831d-9632-4e06-bd21-d047e4c5ef4e xenial active
 Take a note of the image IDs for the images you want added to Simplestreams.
 These will be used in the next step.
 
-!!! Note: If you have images for multiple different series of Ubuntu, make sure
-you keep track of which series name matches which image ID.  The value
-$IMAGE_ID, used below, will apply to the image ID of the image for the
-particular series you are specifying and $OS_SERIES will be the series name
-("trusty", "xenial", etc.).
+!!! Note:
+    If you have images for multiple different series of Ubuntu, make sure
+    you keep track of which series name matches which image ID.  The value
+    $IMAGE_ID, used below, will apply to the image ID of the image for the
+    particular series you are specifying and $OS_SERIES will be the series name
+    ("trusty", "xenial", etc.).
 
 We can now use Juju to generate the metadata:
 
@@ -247,13 +248,13 @@ openstack endpoint create --region $REGION --publicurl $SWIFT_URL/simplestreams/
 ### Bootstrap with Juju
 
 Now the Simplestream service is registered and running you can create a controller on
-this cloud with the `juju bootstrap` command. 
+this cloud with the `juju bootstrap` command.
 
 ```bash
 juju bootstrap <cloud> <controller name> --config image-metadata-url=$SWIFT_URL
 ```
 
-If there are multiple possible networks available to the cloud, it is also necessary to 
+If there are multiple possible networks available to the cloud, it is also necessary to
 specify the network label or UUID for Juju to use. Both the network label and
 UUID can be retrieved with the following command:
 
@@ -265,7 +266,7 @@ Finally, use either the network label or the UUID with the 'network' configurati
 option when bootstrapping a new controller:
 
 
-```bash 
+```bash
 juju bootstrap openstack --config image-metadata-url=$SWIFT_URL --config network=<network id>
 ```
 

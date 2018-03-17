@@ -55,7 +55,7 @@ Proceed as follows:
 Click on 'Marketplace' on the resulting page (left menu), enter 'ubuntu' into
 the search field, and hit Enter:
 
-![Search Ubuntu images](./media/oracle_create-instance-ubuntu-2.png) 
+![Search Ubuntu images](./media/oracle_create-instance-ubuntu-2.png)
 
 From the point of view of Juju, some images should not be used.
 Juju-compatible images are listed below:
@@ -201,7 +201,7 @@ menu and clicking on 'Create IP Network':
 
 Enter a name, a CIDR formatted address for the 'IP Address Prefix', and an
 optional description with one or more tags. Use the 'IP Exchange' drop-down
-menu to select the exchange created previously and click on 'Create'. 
+menu to select the exchange created previously and click on 'Create'.
 
 When you next create a Juju controller (see below), you'll be able to use these
 new subnets and spaces. For example, typing `juju subnets` will show output
@@ -226,7 +226,7 @@ oracle-cloud-ip-exchange  192.168.0.0/16
 ```
 
 See [How to configure more complex networks using spaces][spaces] for further
-details on networks and spaces. 
+details on networks and spaces.
 
 ## Create the Juju controller
 

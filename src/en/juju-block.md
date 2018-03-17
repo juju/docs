@@ -44,12 +44,12 @@ To enable the command run
 ## Re-enabling a command
 
 The reverse of `disable-command` is `enable-command.` This can be used with
-the corresponding group to restore a user's access to that group's commands: 
+the corresponding group to restore a user's access to that group's commands:
 
 ```bash
 juju enable-command destroy-model
 ```
-  
+
 By default, these actions are performed against the currently selected
 controller and model, but specific models can be targeted by using the
 additional '-m' or '--model' argument.
@@ -58,7 +58,7 @@ If you need to list which commands have been disabled, use `disabled-commands`:
 
 ```bash
 juju disabled-commands
-``` 
+```
 
 This will output will list any group that's currently disabled:
 
@@ -68,8 +68,9 @@ This will output will list any group that's currently disabled:
 Disabled commands  Message
 all
 ```
-!!! Warning: In some cases, the disable command will only take effect after the
-user has logged out of Juju and logged back in again.
+!!! Warning:
+    In some cases, the disable command will only take effect after the
+    user has logged out of Juju and logged back in again.
 
 ## Commands within each enable and disable group
 
@@ -92,20 +93,21 @@ user has logged out of Juju and logged back in again.
 |                    |                    | remove-machine       |
 |                    |                    | remove-relation      |
 |                    |                    | remove-ssh-key       |
-|                    |                    | remove-unit          | 
+|                    |                    | remove-unit          |
 |                    |                    | resolved             |
 |                    |                    | retry-provisioning   |
 |                    |                    | run                  |
 |                    |                    | config               |
-|                    |                    | set-constraints      | 
+|                    |                    | set-constraints      |
 |                    |                    | model-config         |
 |                    |                    | sync-tools           |
 |                    |                    | unexpose             |
 |                    |                    | upgrade-charm        |
 |                    |                    | upgrade-juju         |
 
-!!! Note: The '--force' option recognized by some Juju commands bypasses any
-restriction level that would otherwise apply. If your policy is to use
-restrictions then the immediate use of the '--force' option should not be part
-of your workflow. If you must use it, do so after having first run the Juju
-command without it to ensure you are aware of any possible restrictions.
+!!! Note:
+    The '--force' option recognized by some Juju commands bypasses any
+    restriction level that would otherwise apply. If your policy is to use
+    restrictions then the immediate use of the '--force' option should not be part
+    of your workflow. If you must use it, do so after having first run the Juju
+    command without it to ensure you are aware of any possible restrictions.

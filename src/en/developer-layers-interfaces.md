@@ -194,11 +194,13 @@ class HttpProvides(Endpoint):
             relation.to_publish['port'] = port
 ```
 
-!!! Note: Data is send after the hook successfully exits. If any handler
+!!! Note:
+    Data is send after the hook successfully exits. If any handler
     crashes, all the flags and the `to_send` dict will be reset to their
     original position at hook start.
 
-!!! Note: You can only publish data at the relation level. All units of the
+!!! Note:
+    You can only publish data at the relation level. All units of the
     application at the other end of the relation will see the same data. If you
     need to provide data specific to each remote unit, you can use a workaround
     such as publishing a dictionary with the remote unit names as keys and
@@ -305,13 +307,14 @@ class HttpRequires(Endpoint):
         return websites
 ```
 
-!!! Note: Although this is obviously a very simple example, it is important for
-your interface layer to provide an API like this and not give the charms direct
-access to the `Relation` and `RelatedUnit` objects in those collections. This
-ensures proper encapsulation of the underlying interface data protocol; it
-means that you can update your interface layer to handle changes in things like
-the encoding or key names in a backwards compatible way without requiring all
-charms that use the interface to know about or implement that logic.
+!!! Note:
+    Although this is obviously a very simple example, it is important for
+    your interface layer to provide an API like this and not give the charms direct
+    access to the `Relation` and `RelatedUnit` objects in those collections. This
+    ensures proper encapsulation of the underlying interface data protocol; it
+    means that you can update your interface layer to handle changes in things like
+    the encoding or key names in a backwards compatible way without requiring all
+    charms that use the interface to know about or implement that logic.
 
 Now we can use this `requires` endpoint interface in our charm. The first step
 is to define the relation using this interface in `metadata.yaml`.
