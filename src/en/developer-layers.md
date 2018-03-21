@@ -5,7 +5,7 @@ Title: Layers for charm authoring
 When creating a charm, you always have the option of doing it the traditional
 way by creating each hook, implementing each side of the interface you need for
 each relation your charm requires or provides, manage the dependencies, such as
-[charm-helpers](https://pythonhosted.org/charmhelpers/), that your charm uses,
+[charm-helpers](https://charm-helpers.readthedocs.io/), that your charm uses,
 et cetera. What you really want to do, however, is focus on *your* charm. So,
 why not leverage the reusable work of others and keep your charm code as minimal
 and tightly focused as possible?
@@ -45,7 +45,7 @@ The basic layer provides the minimum needed to use the
 * Wheelhouse support for management of python dependencies.
 * Hook decorators so the code can react to Juju Hooks.
 * Logic decorators for bash and python code (@when, @when_not, @when_any, etc).
-* A python library named [charmhelpers](https://pythonhosted.org/charmhelpers/)
+* A python library named [charmhelpers](https://charm-helpers.readthedocs.io/)
   to make writing charm code easier
 
 The most useful base layers are actually a type of runtime layer. For example,
