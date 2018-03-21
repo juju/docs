@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A [Charm](./charm.html) often will require access to specific options or
+A [Charm](../charm.html) often will require access to specific options or
 configuration. Charms allow for the manipulation of the various configuration
 options which the charm author has chosen to expose. juju provides tools to help manage these options and respond to changes in these options over the lifetime of the service deployment. These options apply to the entire service, as opposed to only a specific unit or relation. Configuration is modified by an
 administrator at deployment time or over the lifetime of the services.

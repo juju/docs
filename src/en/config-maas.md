@@ -12,7 +12,7 @@ For more information about MAAS, see [maas.ubuntu.com](http://maas.ubuntu.com).
 
 !!! Note:
     This version of Juju (1.25.x), is only compatible with versions of MAAS up
-    to and including 1.9. To support later versions of MAAS, please upgrade 
+    to and including 1.9. To support later versions of MAAS, please upgrade
     Juju to a more recent version.
 
 To enable Juju to work with MAAS, you should start by generating a generic
@@ -64,11 +64,11 @@ to modify the `my-maas-server` setting too; if you're running from the maas
 package it should be something like "http://hostname.xxxx.yyy/MAAS".
 
 It is also useful to add your SSH keys to the configuration, as MAAS will then
-be able to automatically add them to each unit. This may be done simply by 
+be able to automatically add them to each unit. This may be done simply by
 adding the following option to the config:
 
 ```yaml
-authorized-keys-path: ~/.ssh/id_rsa.pub 
+authorized-keys-path: ~/.ssh/id_rsa.pub
 ```
 
 ...or point to any other appropriate key file.
@@ -80,7 +80,7 @@ instance. This can optionally be specified in the configuration:
  admin-secret: asecurepassword
 ```
 
-The default series for MAAS will automatically be set to 'precise'. You can override 
+The default series for MAAS will automatically be set to 'precise'. You can override
 this setting by adding the optional configuration:
 
 ```yaml
@@ -92,8 +92,8 @@ this setting by adding the optional configuration:
 
 Juju automatically detects MAAS networks, and recognises physical and
 virtual networks on each machine. `juju status` will show the discovered
-networks. See [Juju Constraints](./reference-constraints.html) and [Deploying
-Services](./charms-deploying.html) to learn how to select machines with networks
+networks. See [Juju Constraints](../reference-constraints.html) and [Deploying
+Services](../charms-deploying.html) to learn how to select machines with networks
 and enable the networks for use.
 
 Juju recognises MAAS-controlled hostnames. You can use the hostname when

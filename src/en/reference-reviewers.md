@@ -14,7 +14,7 @@ and thus lighten the development workload on everyone.
 - Follow [these instructions](http://wiki.bazaar.canonical.com/PatchPilot) as well as you can.
 - If this is your first time patch piloting, you may feel more comfortable being a co-pilot your first few runs. Find a pilot in your timezone and reschedule your time to coincide with theirs.
 - Be super thorough, don’t be afraid to be firm with people. However, respect that charms are opinionated - just don’t be afraid to be opinionated yourself.
-- Please use the official [Charm Store Policy](./authors-charm-policy.html) document.
+- Please use the official [Charm Store Policy](../authors-charm-policy.html) document.
 - Use your best judgement.
 - Send a brief mail after your stint, to say what you did and how it worked out. If you have feedback on the review system or the process, speak up.
 - You're not obliged to deal with all the open patches. We appreciate what you do do.
@@ -57,7 +57,7 @@ bzr push lp:~charmers/charms/precise/<CHARM_NAME>/trunk
 Without this, LP will automatically stack on top of the user’s branch which will make it really really hard to delete from the store in the future. Now you can promulgate:
 
 ```bash
-juju charm promulgate 
+juju charm promulgate
 ```
 
 #### Updating existing charms in the store
@@ -67,7 +67,7 @@ Make sure you thank them profusely for fixing something or adding something, no 
 Grab the charm from the store either with charm-tools or just bzr branch it.
 
 ```bash
-juju charm get 
+juju charm get
 ```
 
 **Note:** Backwards compatibility is important! Any changes that would change the structure of the charm, data, configuration options, etc and doesn’t perform due diligence to make sure the charm does what it needs to, should be rejected.
@@ -91,7 +91,7 @@ Bundles are simpler to push to the store:
 
 ```bash
 bzr init lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
-bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle 
+bzr push lp:~charmers/charms/bundles/$BUNDLES_NAME/bundle
 ```
 
 There is no promulgation step for bundles.

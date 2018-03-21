@@ -118,7 +118,7 @@ vagrant up
 
 The box will start and configure Juju for you.
 
-![Step two](./media/config-vagrant-step02.png)
+![Step two](../media/config-vagrant-step02.png)
 
 
 ## Access the GUI
@@ -127,7 +127,7 @@ In order to access the Juju GUI, go to: [http://127.0.0.1:6080](http://127.0.0.1
 It may take some time for it to be deployed so you may need to refresh the page
 a few times. Once deployed, the GUI will display the password on the login page.
 
-![Step three](./media/config-vagrant-step03.png)
+![Step three](../media/config-vagrant-step03.png)
 
 The GUI is only accessible from your local host. From there you will be able to
 deploy charms, add relations, etc.

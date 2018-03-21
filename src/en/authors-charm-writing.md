@@ -20,7 +20,7 @@ Vanilla forum software](http://vanillaforums.org/)
 
 As we are writing a charm, it makes sense to create it in a local charm
 repository (see how to deploy from a local repository
-[here](./charms-deploying.html)) to make it easy to test in your Juju 
+[here](../charms-deploying.html)) to make it easy to test in your Juju
 environment.
 
 Go to your home directory (or wherever is appropriate and make the appropriate
@@ -50,7 +50,7 @@ tracking:    stable
 installed:   2.2 (17) 102MB -
 refreshed:   2017-07-31 18:40:23 +0000 UTC
 -->
-![directory tree](./media/author-charm-writing-02.png)
+![directory tree](../media/author-charm-writing-02.png)
 
 <!--
 ```no-highlight
@@ -86,8 +86,8 @@ Here is a quick example README file for our Vanilla charm:
 
 ```no-highlight
  # Overview
- Vanilla is a powerful open source web-based forum. This charm will deploy 
- the forum software and connect it to a running MySQL database. This charm 
+ Vanilla is a powerful open source web-based forum. This charm will deploy
+ the forum software and connect it to a running MySQL database. This charm
  will install the Vanilla files in /var/www/vanilla/
  # Installation
  To deploy this charm you will need at a minimum: a cloud environment,
@@ -212,7 +212,7 @@ interconnecting services in a cluster
 
 ## Writing hooks
 
-As you will know from your thorough reading of the [charm components](./authors-charm-components.html),
+As you will know from your thorough reading of the [charm components](../authors-charm-components.html),
 the hooks are the important scripts that actually do
 things. You can write hooks in whatever language you can reasonably expect to
 execute on your deployed environment (e.g. Ubuntu Server).
@@ -222,10 +222,10 @@ For our charm, the hooks we will need to create are:
   - start - for when the service needs to be started.
   - stop - for stopping it again.
   - install - for actually fetching and installing the Vanilla code.
-  - database-relation-changed - this will run when we connect (or re-connect, 
-    or disconnect) our service to the MySQL database. This hook will need to 
+  - database-relation-changed - this will run when we connect (or re-connect,
+    or disconnect) our service to the MySQL database. This hook will need to
     manage this connection.
-  - website-relation-joined - this will run when/if a service connects to our 
+  - website-relation-joined - this will run when/if a service connects to our
     charm.
 
 So first up we should create the hooks directory, and start creating our first
@@ -313,7 +313,7 @@ EOF
 a2dissite 000-default
 a2ensite vanilla
 service apache2 reload
-status-set blocked "Waiting for active database connection" 
+status-set blocked "Waiting for active database connection"
 ```
 
 We aren't going to go for a line-by-line explanation of that, but there are a
@@ -327,19 +327,19 @@ In our script, we are fetching the tarball of the Vanilla software. In these
 cases, it is obviously always better to point to a specific, permanent link to a
 version of the software.
 
-Also, you will notice that we have used the `juju-log` command and the 
+Also, you will notice that we have used the `juju-log` command and the
 `status-set` command. These are helper commands for Juju hooks (known as
 "Hook tools") and you will find them covered in more detail
 in the ["how hooks are run" page](authors-hook-environment.html).
 
 The `status-set` command is used to update the status and message displayed by
-Juju when users run the `juju status` command to see what is going on in the 
-environment. There are a number of pre-defined statuses explained in more 
+Juju when users run the `juju status` command to see what is going on in the
+environment. There are a number of pre-defined statuses explained in more
 detail [status reference page](reference-status.html). It is a good idea
 to think about updating the status when significant events occur which have an
 effect on the operation of the service.
 
-The `juju-log` command basically spits messages out into the Juju log, which is 
+The `juju-log` command basically spits messages out into the Juju log, which is
 very useful for testing and debugging. We will cover that in more detail later
 in this walk through.
 
@@ -378,18 +378,18 @@ open-port 80
 ```
 
 You will notice that this script uses the backticked command relation-get. This
-is another Juju Hook tool, which in this case fetches the named values from 
+is another Juju Hook tool, which in this case fetches the named values from
 the corresponding hook on the service we are connecting to. Usually there will
 be some indication of what these values are, but you can always inspect the
-corresponding hooks to find out. In this case we know that when connected, the 
+corresponding hooks to find out. In this case we know that when connected, the
 'mysql' charm will create a database and generate random values for things like a
 username and password.
 
 Interfaces in general are determined by the consensus of the charms which use
-them. There is a lot [more information on decoding interfaces here](./authors-relations.html).
+them. There is a lot [more information on decoding interfaces here](../authors-relations.html).
 Some of the major interfaces are being documented to
 make it easier to use them, and fortunately, mysql is one of them - [You can
-find a description of the mysql interface here](./interface-mysql.html).
+find a description of the mysql interface here](../interface-mysql.html).
 
 These values will all be set at one time, so the next little bit of script just
 checks one value to see if it exists - if not the corresponding charm hasn't set
@@ -460,8 +460,8 @@ juju debug-log
 
 This starts a process to tail the Juju log file and show us just exactly what is
 happening. It won't do much to begin with, but you should see messages appearing
-when we start to deploy our charm. See 
-[Viewing logs](./troubleshooting-logs.html#the-debug-log-command) for more details.
+when we start to deploy our charm. See
+[Viewing logs](../troubleshooting-logs.html#the-debug-log-command) for more details.
 
 Following our own recipe, in another terminal we should now do the following
 (assuming you already have a bootstrapped environment):
@@ -477,7 +477,7 @@ We used the local deploy options to deploy our charm - substitute the path for
 your own environment. Everything should now be working away, and your log window
 will look something like this:
 
-![Step five - debug](./media/author-charm-writing-debug.png)
+![Step five - debug](../media/author-charm-writing-debug.png)
 
 If you wait for all the Juju operations to finish and run a juju status command,
 you will be able to retrieve the public address for the Vanilla forum we just
@@ -485,7 +485,7 @@ deployed. Copy it into your browser and you should see the setup page
 (pre-populated with the database config) waiting for any changes.
 Congratulations!
 
-![Step five - vanilla](./media/author-charm-writing-vanilla.png)
+![Step five - vanilla](../media/author-charm-writing-vanilla.png)
 
 ## Tidying up
 
@@ -493,8 +493,8 @@ With the charm working properly, you may consider everything a job well done. If
 your charm is really great and you want to share it, particularly on the charm
 store, then there are a couple of things you ought to add.
 
-1. Create a file called 'copyright' and place whatever license information you 
+1. Create a file called 'copyright' and place whatever license information you
    require in there.
-1. Add a beautiful icon 
-   ([there is a guide to making one here](./authors-charm-icon.html)) so others
+1. Add a beautiful icon
+   ([there is a guide to making one here](../authors-charm-icon.html)) so others
    can recognise it in the charm store!

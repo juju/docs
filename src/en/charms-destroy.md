@@ -62,7 +62,7 @@ juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2
 
 **Note:** Like service removal, unit removal will not remove corresponding
 machines/instances. More details can be found in the
-[Scaling Services](./charms-scaling.html) section.
+[Scaling Services](../charms-scaling.html) section.
 
 See section 'Caveats' below for how to manage units in a dying state.
 

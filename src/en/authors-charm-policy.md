@@ -21,8 +21,8 @@ and bundles must:
     a way consistent with best practices as defined by either Ubuntu policies or
     upstream documentation. Basically this means there must be instructions on
     how to apply updates if you use software not from Ubuntu.
-  - Must pass "[charm proof](./tools-charm-tools.html#proof)" or 
-    "[bundle proof](./tools-charm-tools.html#proof)" with no Errors or Warnings
+  - Must pass "[charm proof](../tools-charm-tools.html#proof)" or
+    "[bundle proof](../tools-charm-tools.html#proof)" with no Errors or Warnings
     (lines prefixed with E: or W:).
   - Must have a maintainer email address in metadata.yaml attached to a team or
     individual who are responsive to contact.
@@ -38,7 +38,7 @@ and bundles must:
     right from VCS if it's useful to users.
   - Should not use anything infrastructure-provider specific (i.e. querying EC2
     metadata service) symlinks must be self contained within a charm.
-  - Should make use of 
+  - Should make use of
     [AppArmor](https://help.ubuntu.com/12.04/serverguide/apparmor.html) to
     increase security.
   - Bundles must only use charms which are already in the store, they cannot
@@ -52,9 +52,9 @@ and bundles hosted at
 
 If a charm is no longer being properly maintained and is failing to adhere to
 policy the charm will undergo the
-[unmaintained charm process](./charm-unmaintained-process.html). This process
+[unmaintained charm process](../charm-unmaintained-process.html). This process
 confirms the charm is no longer being maintained, fails to adhere to Charm Store
-policy, and thus is removed from the recommended status in the Juju Charm Store. 
+policy, and thus is removed from the recommended status in the Juju Charm Store.
 
 # Charm Metadata
 

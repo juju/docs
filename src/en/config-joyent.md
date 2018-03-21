@@ -1,6 +1,6 @@
-Title: Configuring Juju for Joyent Cloud 
+Title: Configuring Juju for Joyent Cloud
 
-# Configuring for Joyent Cloud 
+# Configuring for Joyent Cloud
 
 This process requires you to have a Joyent account. If you have not signed up
 for one yet, you can do so at
@@ -25,7 +25,7 @@ The generic configuration sections generated for Joyent will look something
 like this:
 
 ```yaml
-joyent: 
+joyent:
   type: joyent
 
   # SDC config Can be set via env variables, or specified here sdc-user:
@@ -72,8 +72,8 @@ You can retrieve these values easily from Joyent Dashboard at
 name in the top-right and then the "Account" link from the drop down menu.
 
 ![Joyent Dashboard to access username and
-fingerprint](./media/getting_started-joyent-account-dropdown.png)
+fingerprint](../media/getting_started-joyent-account-dropdown.png)
 
 !!! Note: During initial setup if you are having issues deploying charms contact
-Joyent support at [https://help.joyent.com/home](https://help.joyent.com/home) 
+Joyent support at [https://help.joyent.com/home](https://help.joyent.com/home)
 to verify your account is capable of provisioning virtual machines.

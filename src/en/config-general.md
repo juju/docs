@@ -26,7 +26,7 @@ juju get-env
 
 This will include all the currently set options - whether they were set
 by the individual configuration in the environments.yaml file, set specifically
-by you or inherited as a default value. 
+by you or inherited as a default value.
 
 You may also set individual values for the current environment using the
 corresponding ```juju set-env``` command, and providing a key=value pair:
@@ -129,7 +129,7 @@ explicitly set enable-os-upgrade to "true".
 If you are using the Local Provider to develop Charms or test, you will want to
 regularly purge the Juju LXC template and LXC host cache to be certain you are
 using fresh images. See
-[Installing and configuring Juju for LXC (Linux)](./config-LXC.html#ensuring-a-fresh-cache).
+[Installing and configuring Juju for LXC (Linux)](../config-LXC.html#ensuring-a-fresh-cache).
 
 
 ## NUMA
@@ -152,7 +152,7 @@ Juju keeps state on the running environment from which it builds a model.
 Based on that model, it can harvest machines which it deems are no longer
 required. This can help reduce running costs and keep the environment 'tidy'.
 Harvesting is guided by what "harvesting mode" has been set by the
-system administrator. 
+system administrator.
 
 Before explaining the different modes, it is useful to understand how Juju
 perceives machines. As far as it is concerned, machines are in one of four
@@ -176,14 +176,14 @@ using a separate process outside of Juju.
 instances that are dead, and that Juju knows about. Unknown instances will
 not be harvested.
 - **Unknown:** With this method, Juju will harvest only instances that Juju
-doesn't know about. Use this with caution in a mixed environment or one which 
+doesn't know about. Use this with caution in a mixed environment or one which
 may contain multiple instances of Juju.
 - **All:** This is the most aggressive setting. In this mode Juju will
-terminate all instances which it considers to be "destroyed" or "unknown". 
+terminate all instances which it considers to be "destroyed" or "unknown".
 This is a good option if you are only utilising Juju for your
 environment.
 
-The default mode can be overridden by setting the 
+The default mode can be overridden by setting the
 
 ```yaml
 provisioner-harvest-mode:
@@ -242,7 +242,7 @@ resource-tags | string | none | | Space-separated list of key=value pairs used t
 rsyslog-ca-cert | string |  |  | The certificate of the CA that signed the rsyslog certificate, in PEM format
 rsyslog-ca-key | string |  |  | The private key of the CA that signed the rsyslog certificate, in PEM format
 set-numa-control-policy | bool | false |  | Tune Juju state-server to work with NUMA if present
-ssl-hostname-verification | bool | true |  | Whether SSL hostname verification is enabled 
+ssl-hostname-verification | bool | true |  | Whether SSL hostname verification is enabled
 state-port | int | 37017 |  | Port for the API server to listen on
 storage-default-block-source | string |  |  | The default block storage source for the environment
 syslog-port | int | 6514 |  | Port for the syslog UDP/TCP listener to listen on

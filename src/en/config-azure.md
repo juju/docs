@@ -1,7 +1,7 @@
 Title: Configuring for Microsoft Azure
 
 
-# Configuring for Microsoft Azure 
+# Configuring for Microsoft Azure
 
 !!! Warning: Azure has two concurrent UI versions: the older "classic" console
 (https://manage.windowsazure.com) and the "new" console
@@ -16,7 +16,7 @@ available in the classic portal.
  - An SSL/TLS certificate, either an existing one or a new one, will be needed to
    communicate with Azure.
 
- - Juju 1.25 (or greater) is needed for [storage support](./storage.html).
+ - Juju 1.25 (or greater) is needed for [storage support](../storage.html).
 
  - The Juju client (the host running the below commands) will need the ability
    to contact the Azure infrastructure on TCP ports 22 and 17070.
@@ -62,7 +62,7 @@ cp juju-azure.pem /home/ubuntu/.juju
 
 Log in to the classic console at https://manage.windowsazure.com and in the
 left pane, scroll down and select 'Settings'. Select the 'Management
-Certificates' tab in the right pane. 
+Certificates' tab in the right pane.
 
 ![azure_settings_and_certificates](media/config-azure-stable_settings_and_certificates.png)
 
@@ -120,7 +120,7 @@ value to be used for `storage-account-name`.
 
 In the same dialog, select a 'Location/Affinity Group'.
 
-If you intend to use [storage support](./storage.html) then this value and the
+If you intend to use [storage support](../storage.html) then this value and the
 value you provide the `location` paramter must be the same. Failure to do so
 will result in storage being used local to the Juju machine where the charm is
 being run. Note that there is a limited set of regions available in the Azure
@@ -172,9 +172,9 @@ under 'Virtual Machines' in the left pane:
 ![bootstrap machine 0 in Azure portal](media/config-azure-stable_machine_0.png)
 
 !!! Note: By default new Azure accounts are limited to 10 cores. You may
- +need to file a support ticket with Azure to raise this limit for your 
+ +need to file a support ticket with Azure to raise this limit for your
  +account if you are deploying many or large applications.
- 
+
 ## Additional notes
 
 The default behaviour is for units of a service to be allocated to
