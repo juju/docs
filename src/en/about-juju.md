@@ -1,4 +1,4 @@
-Title: What is Juju?
+Title: What is Juju?  
 
 # What is Juju?
 

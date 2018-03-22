@@ -1,4 +1,4 @@
-Title: Juju logs
+Title: Juju logs  
 TODO:  Remote logging: strongly consider adding a sub-page (rsyslog TLS tutorial)
        Remote logging: need to state whether server-side and/or client-side auth is a requirement
 
@@ -20,7 +20,7 @@ on multiple (Juju) machines directly on the file system. The latter can
 nonetheless be done in exceptional circumstances and some explanation is
 provided here.
 
-See [Juju high availability](../controllers-ha.html#ha-and-logging) when viewing
+See [Juju high availability](./controllers-ha.html#ha-and-logging) when viewing
 logs in an HA context.
 
 ### Juju agents
@@ -57,7 +57,7 @@ reveals the agent's configuration file:
 
 Consider keeping backups of these files, especially prior to upgrading the
 agents. See
-[Upgrading Juju software](../models-upgrade.html#upgrading-the-model-software).
+[Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software).
 
 ### The debug-log command
 
@@ -83,7 +83,7 @@ The exception to the streaming is when limiting the output (option '--limit';
 see below) and that limit is attained. In all other cases the command will need
 to be interrupted with 'Ctrl-C' in order to regain the shell prompt.
 
-For complete syntax, see the [command reference page](../commands.html). The
+For complete syntax, see the [command reference page](./commands.html). The
 `juju help debug-log` command also provides reminders and more examples.
 
 #### Examples:
@@ -199,7 +199,7 @@ machine in the entire log:
 juju debug-log --replay --include unit-mysql-0 --include machine-1
 ```
 
-!!! Note:
+!!! Note: 
     The unit can also be written 'mysql/0' (as shown by `juju status`).
 
 To see all WARNING and ERROR messages in the entire log:
@@ -228,7 +228,7 @@ juju debug-log --lines 2000 \
 ### Log files
 
 Log files are located on every machine Juju creates, including the controller.
-They reside under `/var/log/juju` and correspond to the machine and any units.
+They reside under `/var/log/juju` and correspond to the machine and any units. 
 
 Using the example from a [previous section](#juju-agents):
 
@@ -260,7 +260,7 @@ File `logsink.log` contains logs for all models managed by the controller. Its
 contents get sent to the database where it is consumed by the `debug-log`
 command.
 
-!!! Note:
+!!! Note: 
     In a [High availability][controllers-ha] scenario, `logsink.log` is not
     guaranteed to contain all messages since agents have a choice of several
     controllers to send their logs to. The `debug-log` command should be used
@@ -316,13 +316,13 @@ See [Configuring models][models-config] for extra help on configuring a model.
 Note that it is possible to configure *and* enable forwarding on *all* the
 controller's models in one step:
 
-`juju bootstrap {cloud} --config logforward-enabled=True --config logconfig.yaml`
+`juju bootstrap <cloud> --config logforward-enabled=True --config logconfig.yaml`
 
 
 <!-- LINKS -->
 
 [#model-logs]: #model-logs
 [#remote-logging]: #remote-logging
-[controllers-ha]: ./controllers-ha.html
+[controllers-ha]: ./controllers-ha.html 
 [upstream-rsyslog-tls-tutorial]: http://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html
 [models-config]: ./models-config.html

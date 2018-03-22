@@ -8,7 +8,7 @@ TODO: Needs a rewrite
 
 Juju works with your cloud to ensure that, in the event of an IaaS
 outage, not all units of an application will go down at the same time,
-maximising your application's availability.
+maximising your application's availability. 
 
 Each deployed application is considered a 'distribution group'. Every time a
 unit is added to a distribution group, Juju will spread out units to best
@@ -27,7 +27,7 @@ available. e.g.
 juju deploy -n 10 <application>
 ```
 The way this works depends on whether Juju uses 'availability zones' or
-'availability sets'.
+'availability sets'. 
 
 ## Availability Zones
 
@@ -63,9 +63,8 @@ disabled only when bootstrapping the cloud by adding
 ```bash
 juju bootstrap --config availability-sets-enabled=false azure mycloud
 ```
-!!! Note:
-    By disabling availability sets, you will lose Azure's SLA
-    guarantees.
+!!! Note: By disabling availability sets, you will lose Azure's SLA
+guarantees. 
 
 Once an environment has been bootstrapped, you cannot change whether it uses
 availability sets. You would have to tear it down and create a new

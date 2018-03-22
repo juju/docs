@@ -5,7 +5,7 @@ TODO:  change screenshot username from degville to newuser
 # Sharing Clouds
 
 Juju is great at deploying applications to the cloud, but it is even better
-when others can join in too!
+when others can join in too! 
 
 In one of many potential examples, we are going to create a new controller, add
 models and invite other users to view and control them, just as you might
@@ -13,14 +13,14 @@ within a development and staging environment.
 
 For this example, we're going to use [Amazon AWS][helpaws], but you could just
 as easily use [Google GCE][helpgce], [Microsoft Azure][helpazure] or any one of
-Juju's supported [clouds][listclouds].
+Juju's supported [clouds][listclouds]. 
 
 ## Bootstrap the cloud
 
 We start out by creating a new controller called `shared`:
 
 ```bash
-juju bootstrap aws/eu-west-1 shared
+juju bootstrap aws/eu-west-1 shared 
 ```
 
 Juju will give you feedback as this process is carried out, informing you that
@@ -65,7 +65,7 @@ oxNzA3MAQgg1TmOS5QL8d0eU46dOd6_C5YYxduAmcPFTN6YAnnyhwTBnNoYXJlZAA=
 ```
 This 'register' key will allow the new user access to the Juju controller we
 created earlier. Send the `juju register` command, along with the key, to the
-user (through secure channels!) and have them run it.
+user (through secure channels!) and have them run it. 
 
 While you are waiting for them to receive and act on this message, we should
 prepare things for this user. At the moment, although the controller knows
@@ -95,11 +95,11 @@ Confirm password: ********
 Initial password successfully set for newuser.
 Enter a name for this controller [shared]: shared
 
-Welcome, newuser. You are now logged into "shared".
+Welcome, newuser. You are now logged into "shared". 
 
 There are no models available. You can add models with "juju add-model", or you
 can ask an administrator or owner of a model to grant access to that model with
-"juju grant".
+"juju grant". 
 ```
 
 If the user lists the models available to them, they should now see the
@@ -132,7 +132,7 @@ The GUI will show the Canonical Kubernetes application we deployed as the admin.
 ![Juju GUI model of Canonical Kubernetes](media/tut-users_gui.png)
 
 It is useful for the new user to see this model, but at the moment they can't
-do anything with it apart from look at it.
+do anything with it apart from look at it. 
 
 Our original admin user can create a new model and grant write access to it so
 they can deploy their own workloads:
@@ -148,7 +148,7 @@ From the user's Juju GUI, the new model will appear beneath the model menu:
 
 When the user switches to the ‘dev’ model, they’ll now be able to deploy
 applications and modify the model, just as they would be able to with models
-created on their own clouds.
+created on their own clouds. 
 
 To deploy Kubernetes into this new model from the GUI, for instance,
 enter 'Canonical Kubernetes' into the search field, select the bundle that’s
@@ -167,9 +167,8 @@ juju revoke newuser write dev
 juju disable-user newuser
 ```
 
-!!! Note:
-    a user can revoke write access for themselves and effectively lock
-    themselves out of being able to modify a model.
+!!! Note: a user can revoke write access for themselves and effectively lock
+themselves out of being able to modify a model.
 
 With access revoked, the admin can now safely remove the model:
 

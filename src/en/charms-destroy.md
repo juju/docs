@@ -9,7 +9,7 @@ you work with Juju. These are:
  - units
  - machines
  - relations
-
+ 
 To remove a model or a controller see the [Models][models] and
 [Controllers][controllers] pages respectively.
 
@@ -24,7 +24,7 @@ An application can be removed with:
 juju remove-application <application-name>
 ```
 
-!!! Note:
+!!! Note: 
     Removing an application which has active relations with another running
     application will terminate that relation. Charms are written to handle
     this, but be aware that the other application may no longer work as
@@ -46,8 +46,8 @@ To remove multiple units:
 juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2
 ```
 
-In the case that these are the only units running on a machine, unless that
-machine was created manually with `juju add machine`, the machine will also be
+In the case that these are the only units running on a machine, unless that 
+machine was created manually with `juju add machine`, the machine will also be 
 removed.
 
 ## Removing machines

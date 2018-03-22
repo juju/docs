@@ -24,12 +24,11 @@ check the `db-relation-joined` and `db-relation-broken` hooks:
 juju debug-hooks mysql/0 db-relation-joined db-relation-broken
 ```
 
-!!! Note:
-    It is possible and often desirable to run debug-hooks on more than
-    one unit at a time. You should open a new terminal window for each.
+!!! Note: It is possible and often desirable to run debug-hooks on more than
+one unit at a time. You should open a new terminal window for each.
 
 For developers who use the debug-hooks environment often there is the
-[dhx debugging plugin](../authors-hook-debug-dhx.html) which allows some
+[dhx debugging plugin](./authors-hook-debug-dhx.html) which allows some
 additional customisation and convenience while debugging hooks.
 
 To debug actions, you use the same command, like this:
@@ -63,7 +62,7 @@ be debugged:
   - a new window will be attached to the tmux session.
   - the bottom left of the status bar will change to indicate the current hook that has been trapped.
   - the prompt will change to indicate the hook related to the window (e.g. `mysql/0:db-relation-joined %`)
-  - the shell will be running in the standard [hook environment](../authors-hook-environment.html).
+  - the shell will be running in the standard [hook environment](./authors-hook-environment.html).
   - additionally, `$JUJU_HOOK_NAME` is set appropriately.
   ![Image showing tmux debug hooks session](../media/authors-hook-debug-1.png)
 
@@ -87,10 +86,9 @@ queue until you exit your current window. See the  special considerations below.
 The queue for pending hooks will restart once you exit the window with an `exit`
 command.
 
-!!! Note:
-    To allow Juju to continue processing events normally, you **must**
-    exit the hook execution with a zero return code (using the `exit` command),
-    otherwise all further events on that unit may be blocked indefinitely.
+!!! Note: To allow Juju to continue processing events normally, you **must**
+exit the hook execution with a zero return code (using the `exit` command),
+otherwise all further events on that unit may be blocked indefinitely.
 
 The queue can be halted by exiting with an `exit 1` command, which will flag the
 hook as failed. Juju will revert to its normal behaviour of suspending
@@ -123,7 +121,7 @@ after the unit comes up, making it difficult to start a debug-hooks session in
 time to intercept them. If you're having difficulties, you can temporarily
 return an error code from your `install` hook (e.g. add an `exit 1` at the end
 of it), and start your session only when the unit reports an [error status
-](../authors-hook-errors.html).
+](./authors-hook-errors.html).
 
 ## Special considerations
 
@@ -139,7 +137,7 @@ run yet, and retrying them later).
 
 Logs are indispensable when it comes time to troubleshoot. View the logs with
 the `debug-log` command. See
-[Viewing logs](../troubleshooting-logs.html#the-debug-log-command).
+[Viewing logs](./troubleshooting-logs.html#the-debug-log-command).
 
 
 # What on earth is tmux?

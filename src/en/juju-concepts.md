@@ -184,7 +184,7 @@ Some of the above application units show unused interfaces. It is the overall
 purpose of the installation which will dictate what interfaces get used. Some
 relation types are required by the main charm ('wordpress' here) while some
 relation types are optional. A charm's entry in the Charm Store (e.g.
-[wordpress][charm-store-wordpress]) will expose such details.
+[wordpress][charm-store-wordpress]) will expose such details. 
 
 See [Managing relations][charms-relations] for more details on relations.
 
@@ -233,17 +233,17 @@ agents running in that model.
 [charm-store]: https://jujucharms.com/store
 [charms]: ./charms.html
 [charms-bundles]: ./charms-bundles.html
-[charms-relations]: ./charms-relations.html
+[charms-relations]: ./charms-relations.html 
 [clouds]: ./clouds.html
 [controllers]: ./controllers.html
 [models]: ./models.html
 [charm-store-wordpress]: https://jujucharms.com/wordpress/
 
-[img__relations]: ../media/juju-relations.png
-[img__units]: ../media/juju-machine-units.png
-[img__machine-lxd]: ../media/juju-machine-lxd.png
-[img__machine]: ../media/juju-machine.png
-[img__charms]: ../media/juju-charms.png
-[img__models]: ../media/juju-models.png
-[img__client-2]: ../media/juju-client-2.png
-[img__client-3]: ../media/juju-client-3.png
+[img__relations]: ./media/juju-relations.png
+[img__units]: ./media/juju-machine-units.png
+[img__machine-lxd]: ./media/juju-machine-lxd.png
+[img__machine]: ./media/juju-machine.png
+[img__charms]: ./media/juju-charms.png
+[img__models]: ./media/juju-models.png
+[img__client-2]: ./media/juju-client-2.png
+[img__client-3]: ./media/juju-client-3.png

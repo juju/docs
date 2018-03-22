@@ -25,7 +25,7 @@ addition.
 
 Prior to deployment, you will need to associate Oracle's Ubuntu images within
 the dashboard of your Oracle Compute service because Juju uses these with its
-own deployments.
+own deployments. 
 
 This can be done easily by signing in to Oracle's domain dashboard, creating a
 new `Compute` instance, selecting `Marketplace` and searching for 'ubuntu':
@@ -35,11 +35,11 @@ new `Compute` instance, selecting `Marketplace` and searching for 'ubuntu':
 Select the images you want, Ubuntu 16.04 and Ubuntu 14.04 are good choices, and
 head back to Juju.
 
-You now need to simply add credentials and bootstrap.
+You now need to simply add credentials and bootstrap. 
 
 !!! Note:
     If you're using an Oracle cloud trial account, you will need to enter your
-    endpoint details manually using `juju add-cloud`. See our
+    endpoint details manually using `juju add-cloud`. See our 
     [Oracle documentation][helporacle] for help on the process.
 
 Using Juju's interactive authentication, importing Oracle credentials into Juju
@@ -86,19 +86,19 @@ previous versions of Juju.
 Additionally, to help with vSphere machine management, machines are now
 organised into folders on your cloud. See our [vSphere][helpvmware]
 documentation to get started.
-
-## Performance
+ 
+## Performance 
 
 Juju now handles transactions more efficiently and has better support for
 longer running controllers.
 
 Logs are compressed when rotated, separated by model, and can be pruned to a
 specific age and size. These options are configured through the controller -
-see our [Controller documentation][logs] for more details.
+see our [Controller documentation][logs] for more details. 
 
 ## Next Steps
 
-For further details, see the [Controller documentation][logs], the
+For further details, see the [Controller documentation][logs], the 
 [Oracle compute][helporacle] documentation and the Juju 2.2 [release
 notes][rnotes].
 

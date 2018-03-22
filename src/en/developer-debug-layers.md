@@ -1,4 +1,4 @@
-Title: Debugging building layers
+Title: Debugging building layers  
 
 # Debugging Building Layers
 
@@ -62,7 +62,7 @@ an ANSI-compliant terminal, you have a color coded map available to you
 listing all the available files in the charm, color coordinated with its origin
 layer.
 
-![ charm-layers-illustration.png](../media/charm-layers-illustration.png)
+![ charm-layers-illustration.png](../../media/charm-layers-illustration.png)
 
 ### Where do I file bugs?
 
