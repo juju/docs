@@ -18,10 +18,11 @@ There are currently 2 methods to submit a charm and have it listed in the charm
 store. Both methods have their perks - but it is suggested to start with your
 personal namespace before asking for a charmer featured charm.
 
-!!! Note: if you are a member of the Charm Partner Program, you will want to
-ensure that your Charm gets into the Recommended Charms section of the Charm
-Store, so please follow the instructions in the
-[Recommended Charms](#recommended-charms) section below.
+!!! Note:
+    if you are a member of the Charm Partner Program, you will want to
+    ensure that your Charm gets into the Recommended Charms section of the Charm
+    Store, so please follow the instructions in the
+    [Recommended Charms](#recommended-charms) section below.
 
 ## Charm Store Process
 
@@ -49,7 +50,7 @@ possible so that users get the most flexibility:
   1. If you haven't created your charm yet, you can use
      `charm create ubuntu-package-name` which will fill in some basic metadata
      info for you. You can check to see if it already exists at
-     [https://jujucharms.com/](https://jujucharms.com/). Also make sure to 
+     [https://jujucharms.com/](https://jujucharms.com/). Also make sure to
      [check the list of open bugs](http://goo.gl/mvtPh) to see if anybody is
      already working on a charm for the service you want to work on. Bugs which
      have had no activity by the assignee for more than 30 days are fair game
@@ -60,15 +61,15 @@ possible so that users get the most flexibility:
   1. `bzr add` to add all files.
   1. `bzr ci -m'Initial charm'`
   1. To submit your charm for 12.04:
-     
+
 ```bash
 bzr push lp:~<your-lp-username>/charms/precise/<your-charm>/trunk
-``` 
-or to submit your charm for 14.04: 
-     
+```
+or to submit your charm for 14.04:
+
 ```bash
 bzr push lp:~<your-lp-username>/charms/trusty/<your-charm>/trunk
-``` 
+```
 
 
 Your charm should then be looked at in a timely manner.
@@ -91,7 +92,7 @@ you must initialise the repository and push your development branch to Launchpad
 
 For the purpose of this documentation, we will call our charm `nagios`
 
-```bash 
+```bash
 bzr push lp:~your-launchpad-username/charms/series/nagios/trunk
 ```
 
@@ -137,20 +138,20 @@ bzr push lp:~<your-lp-username>/charms/series/nagios/feature_branch
 ```
 
 and a subsequent Merge Proposal should be issued against your branch following
-the Launchpad 
+the Launchpad
 [Developer Merge Proposal Documentation](https://dev.launchpad.net/UsingMergeProposals)
 
 
 ### Recommended Charms
 
 To have your charm listed as a charmer team recommended charm, you have to
-undergo a rigorous review process where the team evaluate the charm, evaluate 
+undergo a rigorous review process where the team evaluate the charm, evaluate
 tests for your charm, and deploy & run tests against the provided service with
 different configuration patterns.
 
 After following the Submission Process outlined above:
 
-  1. File a bug against charms at 
+  1. File a bug against charms at
      [https://launchpad.net/charms/+filebug](https://launchpad.net/charms/+filebug)
      This is used to track the progress of your charm.
   1. Now you just need to attach your branch to the bug report, go to
@@ -169,7 +170,7 @@ After following the Submission Process outlined above:
   1. Modify it to meet your needs.
   1. Commit your fixes `bzr commit -m 'Your changelog entry goes here'`
   1. `bzr push lp:~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
-  1. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals) 
+  1. Submit a [merge proposal](https://help.launchpad.net/BranchMergeProposals)
      by going to your branch's code page:
      `https://code.launchpad.net/~your-launchpad-username/charms/precise/nagios/fixed-charms-name`
      and clicking "Propose for merging"

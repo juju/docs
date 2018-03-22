@@ -15,10 +15,11 @@ Once a service is no longer required it can be removed with:
 juju remove-service <service-name>
 ```
 
-!!! Warning: Removing a service which has active relations with another
-running service will break that relation. This can cause errors in both
-services. Make sure you review this aspect and, if required, remove the
-relations first.
+!!! Warning:
+    Removing a service which has active relations with another
+    running service will break that relation. This can cause errors in both
+    services. Make sure you review this aspect and, if required, remove the
+    relations first.
 
 This is the order of events for removing a service:
 
@@ -39,8 +40,9 @@ service is listed as dying, but also reports an error state, then the removed
 service will not go away. See the 'Caveats' section below for how to manage services
 stuck in a dying state.
 
-!!! Note: It is the responsibility of the charm author to implement the above
-'stop hook' logic.
+!!! Note:
+    It is the responsibility of the charm author to implement the above
+    'stop hook' logic.
 
 Any associated instances are tagged "dirty" to ensure they will not be reused.
 These can then be removed manually. See the 'Removing Machines' section below.
@@ -92,8 +94,9 @@ associated instances and the bootstrap node itself:
 juju destroy-environment <environment>
 ```
 
-!!! Note: Older versions required the use of the environment switch ('-e') with
-this command. This switch is no longer required for this command.
+!!! Note:
+    Older versions required the use of the environment switch ('-e') with
+    this command. This switch is no longer required for this command.
 
 Due to the gravity of this action, you will be prompted for a confirmation.
 
