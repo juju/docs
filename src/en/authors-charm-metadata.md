@@ -88,9 +88,9 @@ storage:
 ```
 
 A metadata file defines the charm's
-[relations](../authors-relations.html),
+[relations](authors-relations.html),
 and whether it's designed for deployment as a
-[subordinate service](../authors-subordinate-services.html).
+[subordinate service](authors-subordinate-services.html).
 
   - `subordinate` should be set to true if the charm is a subordinate.
     If omitted, the charm will be presumed not to be subordinate.

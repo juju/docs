@@ -92,8 +92,8 @@ this setting by adding the optional configuration:
 
 Juju automatically detects MAAS networks, and recognises physical and
 virtual networks on each machine. `juju status` will show the discovered
-networks. See [Juju Constraints](../reference-constraints.html) and [Deploying
-Services](../charms-deploying.html) to learn how to select machines with networks
+networks. See [Juju Constraints](reference-constraints.html) and [Deploying
+Services](charms-deploying.html) to learn how to select machines with networks
 and enable the networks for use.
 
 Juju recognises MAAS-controlled hostnames. You can use the hostname when

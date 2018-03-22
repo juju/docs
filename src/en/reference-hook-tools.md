@@ -21,7 +21,7 @@ transforms the basic output as follows:
   - lists of strings are converted to a single newline-separated string
   - all other types (in general, dictionaries) are formatted as YAML
 
-Also see the [hook environment](../authors-hook-environment.html) page for further
+Also see the [hook environment](authors-hook-environment.html) page for further
 details of the hook environment.
 
 ## Available commands:
@@ -330,7 +330,7 @@ output. Processing that depends on specific values (other than `private-address`
 should be restricted to [-changed](authors-charm-hooks.html#[name]-relation-changed)
 hooks for the relevant unit, and the absence
 of a remote unit's value should never be treated as an
-[error](../authors-hook-errors.html) in the local unit.
+[error](authors-hook-errors.html) in the local unit.
 
 In practice, it is common and encouraged for -relation-changed hooks to exit
 early, without error, after inspecting `relation-get` output and determining it
@@ -513,7 +513,7 @@ be one of the following:
 
 For more extensive explanations of these statuses, and other possible status
 values which may be set by Juju itself,
-[please see the status reference page](../reference-status.html).
+[please see the status reference page](reference-status.html).
 
 The second argument is a user-facing message, which will be displayed to any
 users viewing the status, and will also be visible in the status history. This

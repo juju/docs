@@ -133,7 +133,7 @@ manually reclaimed through the cloud provider's tools.
 When creating a Juju system that is going to be used by more than one person,
 it is good practice to create users for each individual that will be accessing
 the environments. See
-[Managing multi-user environments](../juju-multiuser-environments.html) for
+[Managing multi-user environments](juju-multiuser-environments.html) for
 a detailed treatment on this topic.
 
 

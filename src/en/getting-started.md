@@ -252,5 +252,5 @@ configured it. A warning will be displayed and the user will be prompted whether
 or not to continue. This action will remove everything in the specified
 environment, including the bootstrap node.
 
-See the [charm documentation](../charms.html) to learn more about charms,
+See the [charm documentation](charms.html) to learn more about charms,
 including configuring options and managing running systems.

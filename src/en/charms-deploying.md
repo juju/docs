@@ -98,7 +98,7 @@ juju set-env "default-series=trusty"
 Deployed services usually start with a sane default configuration. However, for
 some services it may be desirable (and quicker) to configure them at deployment
 time. This can be done whether a charm is deployed from the Charm Store or from
-a local charm. See [Application configuration](../charms-config.html) for more
+a local charm. See [Application configuration](charms-config.html) for more
 on this.
 
 !!! Note:

@@ -73,7 +73,7 @@ in this case.
 
 All Juju units send logs to all state servers in the HA cluster and the user
 accesses those logs in the usual manner, via `juju debug-log`
-or by viewing the logs directly. See [Viewing logs](../troubleshooting-logs.html).
+or by viewing the logs directly. See [Viewing logs](troubleshooting-logs.html).
 
 Logging to a state server begins once it becomes fully operational. One caveat
 is that past cluster logs are not sent to the new "slave" state server. It

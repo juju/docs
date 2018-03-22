@@ -9,7 +9,7 @@ metadata, configuration data, and hooks with some extra support files.
 
 A charm requires only a single file in order to be considered valid by juju:
 
- - `metadata.yaml` [describes the charm](../authors-charm-metadata.html) and the
+ - `metadata.yaml` [describes the charm](authors-charm-metadata.html) and the
     relations it can participate in.
 
 Of course, a charm which consists solely of metadata may be valid, but it can't
@@ -22,15 +22,15 @@ The following files will be treated specially, if present:
  - `/hooks` must be a directory holding executables with specific names, that
    will be invoked by juju at the relevant times. A charm needs to implement at
    least one hook in order to do anything at all. How to implement hooks is
-   covered more thoroughly in the [Hooks section](../authors-charm-hooks.html)
+   covered more thoroughly in the [Hooks section](authors-charm-hooks.html)
  - `/actions` must be a directory holding executables with specific names, which
    the user may invoke through Juju as desired.
-   [Adding actions to a charm is described here.](../authors-charm-actions.html)
+   [Adding actions to a charm is described here.](authors-charm-actions.html)
  - `actions.yaml` specifies charm actions and their schemas, and must be defined
    if `/actions` is used.
-   [See here for more on creating charm actions.](../authors-charm-actions.html)
+   [See here for more on creating charm actions.](authors-charm-actions.html)
  - `config.yaml` defines service configuration options.
-   [The config.yaml file is descibed more fully here](../authors-charm-config.html).
+   [The config.yaml file is descibed more fully here](authors-charm-config.html).
  - `icon.svg` is used to identify your charm in the GUI and in the charm store.
    [See the walkthrough for creating an icon.](authors-charm-icon.html)
  - `README` is made available in the charm store. It should be comprehensible to
@@ -68,7 +68,7 @@ should do this by virtue of never having had the opportunity to observe the
 change.
 
 Finally, any file written at runtime constrains all future implementations of
-the charm. When [upgrading a charm](../authors-charm-upgrades.html), any change
+the charm. When [upgrading a charm](authors-charm-upgrades.html), any change
 that would cause runtime state to be overwritten will cause juju to abort the
 operation and hand over to the user for resolution. This is inconvenient for the
 users and undermines confidence in the charm.

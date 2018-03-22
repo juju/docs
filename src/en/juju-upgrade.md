@@ -60,7 +60,7 @@ Overview:
   state server. If the latter's cache cannot satisfy the request it will
   attempt a download from the internet.
 - Backups are recommended prior to upgrading the server software. See
-  [Backup and restore](../juju-backup-restore.html).
+  [Backup and restore](juju-backup-restore.html).
 
 ### Server software and related components
 
@@ -194,4 +194,4 @@ its output then proceed to the next section.
 ## Troubleshooting the upgrade
 
 An upgrade of server software that does not lead to 100% success will require
-troubleshooting. See [Troubleshooting environment upgrades](../troubleshooting-upgrade.html).
+troubleshooting. See [Troubleshooting environment upgrades](troubleshooting-upgrade.html).

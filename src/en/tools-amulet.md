@@ -8,7 +8,7 @@ authors. Amulet aims to be:
 - a method to exercise and test charm relations outside of a deployment.
 
 While these tools are designed to help make test writing easier, much like [Charm
-Helpers](../tools-charm-helpers.html) are designed to make hook writing easier, they are not required to write
+Helpers](tools-charm-helpers.html) are designed to make hook writing easier, they are not required to write
 tests for charms. These libraries are offered as a completely optional set of tools
 for you to use.
 

@@ -109,4 +109,4 @@ logging level should be reset to its default value:
 juju set-env 'logging-config=<root>=WARN'
 ```
 
-See [Viewing logs](../troubleshooting-logs.html).
+See [Viewing logs](troubleshooting-logs.html).

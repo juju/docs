@@ -49,7 +49,7 @@ Adding an instance (issuing `juju add-machine`) gives us:
 
 Where `machine-1.log` is the log file for the new machine.
 
-There are also log files for [service units](../glossary.html). For instance, if
+There are also log files for [service units](glossary.html). For instance, if
 MySQL is deployed (`juju deploy mysql`) a log file will appear for the machine
 that is spawned (`machine-2.log`) in addition to the file for the unit itself
 (`unit-mysql-0.log`):
@@ -112,7 +112,7 @@ The exception to the streaming is when limiting the output (option `--limit`;
 see below) and that limit is attained. In all other cases the command will need
 to be interrupted with `Ctrl-C` in order to regain the shell prompt.
 
-For complete syntax, see the [command reference page](../commands.html).
+For complete syntax, see the [command reference page](commands.html).
 
 You can also learn more by running `juju debug-log --help` and `juju help
 logging`.

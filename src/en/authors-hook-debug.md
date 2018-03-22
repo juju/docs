@@ -7,7 +7,7 @@ don't happen quite as you expected. That's why Juju includes two tools to help
 you debug charm hooks: The `juju debug-hooks` command and the `juju debug-log`
 command.
 
-The [dhx debugging plugin](../authors-hook-debug-dhx.html) is also available.
+The [dhx debugging plugin](authors-hook-debug-dhx.html) is also available.
 
 
 ##  The 'debug-hooks' command
@@ -47,7 +47,7 @@ be debugged:
   - a new window will be attached to the tmux session.
   - the bottom left of the status bar will change to indicate the current hook that has been trapped.
   - the prompt will change to indicate the hook related to the window (e.g. `mysql/0:db-relation-joined %`)
-  - the shell will be running in the standard [hook environment](../authors-hook-environment.html).
+  - the shell will be running in the standard [hook environment](authors-hook-environment.html).
   - additionally, `$JUJU_HOOK_NAME` is set appropriately.
   ![Image showing tmux debug hooks session](../media/authors-hook-debug-1.png)
 
@@ -92,7 +92,7 @@ after the unit comes up, making it difficult to start a debug-hooks session in
 time to intercept them. If you're having difficulties, you can temporarily
 return an error code from your `install` hook (e.g. add an `exit 1` at the end
 of it), and start your session only when the unit reports an [error status
-](../authors-hook-errors.html). You should then run `juju resolved --retry` for
+](authors-hook-errors.html). You should then run `juju resolved --retry` for
 the affected unit, and go back to the debug-hooks session to interact.
 
 

@@ -306,12 +306,12 @@ bootstrap node, for example:
 juju backups restore  -b --constraints="mem=4G" --file=juju-backup-23.tgz
 ```
 
-Read the [constraints reference page](../reference-constraints.html) for more
+Read the [constraints reference page](reference-constraints.html) for more
 information on the constraints which may be used.
 
 ## HA (High Availability)
 
-As stated in [the Juju HA documentation](../juju-ha.html), High Availability in
+As stated in [the Juju HA documentation](juju-ha.html), High Availability in
 general terms means that a Juju environment has 3 or more (up to 7) redundant
 state servers. In the normal course of operation, having multiple, redundant
 state servers means that requiring a backup is less likely. As long as one of

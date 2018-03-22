@@ -7,7 +7,7 @@ Title: Configuring for KVM
 On Linux, it is very easy to use the local provider with KVM-based virtual
 machines. However, as the local provider is typically used with LXC containers
 users wishing to use KVM instead are urged to first read the more general
-writeup on [Installing and configuring Juju for LXC (Linux)](../config-LXC.html).
+writeup on [Installing and configuring Juju for LXC (Linux)](config-LXC.html).
 
 Begin by adding the Juju stable release PPA:
 
@@ -104,7 +104,7 @@ containers to have access to the external network (that of the LXC host, or
 KVM guest).
 
 Although not required, as covered in
-[Installing and configuring Juju for LXC (Linux)](../config-LXC.html), it is
+[Installing and configuring Juju for LXC (Linux)](config-LXC.html), it is
 recommended to use LXC cloning to speed up the creation of LXC containers.
 Unfortunately, `lxc-clone` cannot be specified during run-time with `juju
 set-env`.

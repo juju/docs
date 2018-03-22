@@ -31,7 +31,7 @@ Availability Sets for that provider.
 Juju supports Availability Zones on Amazon's EC2 and OpenStack-based clouds.
 Openstack Havana and newer is supported, which includes HP Cloud. Older
 versions of OpenStack are not supported. See the per-provider [Install &
-Configure](../getting-started.html) section for more on these and any other
+Configure](getting-started.html) section for more on these and any other
 provider-specific settings.
 
 If you do not specify a zone explicitly, Juju will automatically and uniformly
