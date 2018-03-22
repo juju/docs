@@ -20,7 +20,7 @@ machine:
 
 ### Preparing to use Vagrant
 
-See [Configuring for Vagrant](config-vagrant.html) for instructions on
+See [Configuring for Vagrant](./config-vagrant.html) for instructions on
 downloading and preparing your new virtual machine.
 
 

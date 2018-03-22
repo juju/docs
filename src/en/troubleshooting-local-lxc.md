@@ -19,7 +19,7 @@ juju bootstrap --show-log --debug
 
 This will print very verbose output. If you're receiving `connection failed,
 will retry: dial tcp 127.0.0.1:37017: connection refused` error at the end of
-the run, proceed with the troubleshooting guide. If not the error presented will
+the run, proceed with the troubleshooting guide. If not the error presented will 
 inform you what went wrong.
 
 In certain cases you might get this something similar to this error: `Get
@@ -44,9 +44,9 @@ You should see two jobs listed. One that starts with `juju-db` the other `juju-
 agent`. If these are both in a start/running state then your machine took longer
 than juju expected to get these services started.
 
-If either of these have stopped, investigate the logs at
-`/var/log/upstart/juju-db*.log` or `/var/log/upstart/juju-agent*.log` If the
-juju-db service failed to start with messages of unsupported command-line
+If either of these have stopped, investigate the logs at 
+`/var/log/upstart/juju-db*.log` or `/var/log/upstart/juju-agent*.log` If the 
+juju-db service failed to start with messages of unsupported command-line 
 options, check the version of mongodb installed:
 
 ```bash
@@ -60,7 +60,7 @@ local package. Before retrying, make sure you run `juju destroy-environment`
 
 ## Can't list images
 
-If you are using the `lxc` commands to view local LXC containers, you must run
+If you are using the `lxc` commands to view local LXC containers, you must run 
 the commands as root, and use the lxc1 versions of commands. For example:
 
 ```bash
@@ -77,7 +77,7 @@ lxc list
 ## No machines start
 
 If you get a successful bootstrap, but services you deploy never come up,
-there's a chance that you have an older version of the Ubuntu Cloud Image
+there's a chance that you have an older version of the Ubuntu Cloud Image 
 cached on your machine. To verify this, check the timestamp of the contents in
 `/var/cache/lxc/cloud-precise/`
 
@@ -109,4 +109,4 @@ logging level should be reset to its default value:
 juju set-env 'logging-config=<root>=WARN'
 ```
 
-See [Viewing logs](troubleshooting-logs.html).
+See [Viewing logs](./troubleshooting-logs.html).

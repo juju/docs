@@ -29,7 +29,7 @@ As will be shown in the next section, it is also used to recover from failed
 state servers.
 
 When activating HA, by default, this command sets the number of state
-servers in the environment to 3. The optional `-n` switch can modify this
+servers in the environment to 3. The optional `-n` switch can modify this 
 number.
 
 When modifying HA, the `-n` switch can be used to increase the number of state
@@ -40,7 +40,7 @@ state server. You can then increase to the desired number.
 Whenever you run ensure-availability, the command will report the changes it
 intends to make, which will shortly be implemented.
 
-For complete syntax, see the [command reference page](../commands.html#ensure-availability
+For complete syntax, see the [command reference page](./commands.html#ensure-availability
 ).
 
 
@@ -72,8 +72,8 @@ in this case.
 ## HA and logging
 
 All Juju units send logs to all state servers in the HA cluster and the user
-accesses those logs in the usual manner, via `juju debug-log`
-or by viewing the logs directly. See [Viewing logs](troubleshooting-logs.html).
+accesses those logs in the usual manner, via `juju debug-log` 
+or by viewing the logs directly. See [Viewing logs](./troubleshooting-logs.html).
 
 Logging to a state server begins once it becomes fully operational. One caveat
 is that past cluster logs are not sent to the new "slave" state server. It

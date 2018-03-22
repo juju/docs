@@ -1,4 +1,4 @@
-Topic: Management tasks; Miscellaneous
+Topic: Management tasks; Miscellaneous 
 
 # Miscellaneous management tasks
 
@@ -11,7 +11,7 @@ an environment to ssh into Juju machines. This is achieved with the
 
 For syntax use `juju authorised-keys --help` or `juju authorised-keys
 <sub-command> --help` or see the
-[command reference page](../commands.html#user).
+[command reference page](./commands.html#user).
 
 Import a public SSH key from Launchpad (or Github):
 

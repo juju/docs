@@ -168,7 +168,7 @@ provider environment is running because you cannot clone a running lxc machine.
 Newly provisioned machines on the Local Provider have package upgrades disabled
 by default. This, again, is to accelerate provisioning. To allow automatic
 software upgrades to occur you will need to configure accordingly. See
-[General config options](../config-general.html#local-provider).
+[General config options](./config-general.html#local-provider).
 
 
 ## Juju caching for LXC images
@@ -267,4 +267,4 @@ sudo lxc-destroy -n juju-trusty-lxc-template
 ## LXC Containers within KVM guests
 
 You can also use Juju to create KVM guests within which are placed LXC
-containers. See [Configuring for KVM](../config-KVM.html#lxc-containers-within-a-kvm-guest).
+containers. See [Configuring for KVM](./config-KVM.html#lxc-containers-within-a-kvm-guest).

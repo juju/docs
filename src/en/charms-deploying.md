@@ -98,7 +98,7 @@ juju set-env "default-series=trusty"
 Deployed services usually start with a sane default configuration. However, for
 some services it may be desirable (and quicker) to configure them at deployment
 time. This can be done whether a charm is deployed from the Charm Store or from
-a local charm. See [Application configuration](charms-config.html) for more
+a local charm. See [Application configuration](./charms-config.html) for more
 on this.
 
 !!! Note:
@@ -116,7 +116,7 @@ consolidate services.
 
 !!! Note:
     The 'local provider' is a special case, where machine 0 is effectively
-    the host. You can still colocate services on other created machines, but not
+    the host. You can still colocate services on other created machines, but not 
     on machine 0, so the following example will not work with the local
     provider.
 
@@ -239,7 +239,7 @@ OpenStack which use a large number of charms on a limited number of physical
 servers.
 
 As with deploy, the --to option used with `add-unit` also supports placement
-directives. A comma separated list of directives can be provided to cater for
+directives. A comma separated list of directives can be provided to cater for 
 the case where more than one unit is being added.
 
 ```bash

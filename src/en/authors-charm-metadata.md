@@ -22,7 +22,7 @@ Here's a valid metadata file:
     description: |
       MongoDB is a high-performance, open source, schema-free document- oriented
       data store that's easy to deploy, manage and use. It's network accessible,
-      written in C++ and offers the following features:
+      written in C++ and offers the following features:  
       - Collection oriented storage
       - easy storage of object-style data
       - Full index support, including on inner objects
@@ -88,9 +88,9 @@ storage:
 ```
 
 A metadata file defines the charm's
-[relations](authors-relations.html),
+[relations](./authors-relations.html),
 and whether it's designed for deployment as a
-[subordinate service](authors-subordinate-services.html).
+[subordinate service](./authors-subordinate-services.html).
 
   - `subordinate` should be set to true if the charm is a subordinate.
     If omitted, the charm will be presumed not to be subordinate.
@@ -144,4 +144,4 @@ from the charm hook using the following commands:
 - payload-status-set
 
 See the [Hook tools documentation][hook-payloads] for further details on these
-payload commands.
+payload commands. 

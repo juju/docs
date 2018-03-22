@@ -15,7 +15,7 @@ or disable other users. Any user is now able to change their own password.
 
 The user commands are grouped under the `juju user` command. For syntax use
 `juju user --help` or `juju user <sub-command> --help` or see the
-[command reference page](../commands.html#user).
+[command reference page](./commands.html#user).
 
 To add a user:
 
@@ -108,7 +108,7 @@ juju user list --all
 ```
 
 Query an environment for the current user 'fred' (with the
-[api-info command](../juju-misc.html#inspect-api-connection-settings)):
+[api-info command](./juju-misc.html#inspect-api-connection-settings)):
 
 ```bash
 juju api-info user -e fred-local

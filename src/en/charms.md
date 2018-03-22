@@ -13,7 +13,7 @@ does not suit your needs then you are free to write your own.
 <iframe style="margin-left: 20%;" class="youtube-player" type="text/html" width="420" height="350" src="//www.youtube.com/embed/0AT6qKyam9I"></iframe>
 
 Charms make it easy to reliably and repeatedly deploy services.  The
-[Juju walkthrough](getting-started.html) is a quick-start guide that
+[Juju walkthrough](./getting-started.html) is a quick-start guide that
 provides a practical overview of using Juju.
 
 Generally, you follow a simple three-step procedure: deploy, configure, and

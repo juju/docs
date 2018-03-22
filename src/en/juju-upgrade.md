@@ -30,7 +30,7 @@ sudo apt-get install juju-core
 
 For more installation information and what versions are available, see
 [the releases page](reference-releases.html).
-
+ 
 ## Terminology - the software running in a Juju environment
 
 Several terms are in circulation that are used to denote the environment software:
@@ -60,7 +60,7 @@ Overview:
   state server. If the latter's cache cannot satisfy the request it will
   attempt a download from the internet.
 - Backups are recommended prior to upgrading the server software. See
-  [Backup and restore](juju-backup-restore.html).
+  [Backup and restore](./juju-backup-restore.html).
 
 ### Server software and related components
 
@@ -144,7 +144,7 @@ juju sync-tools --version 1.23 --debug
 !!! Note: the `sync-tools --version` command only accepts `major[.minor]`
 ("e.g. use '1.24' not '1.24.5').
 
-For complete syntax, see the [command reference page](../commands.html#sync-tools)
+For complete syntax, see the [command reference page](./commands.html#sync-tools)
 or by running `juju help sync-tools`.
 
 ### The upgrade-juju command
@@ -173,7 +173,7 @@ Track the progress with
 watch -n3 "juju status --format tabular"
 ```
 
-For complete syntax, see the [command reference page](../commands.html#upgrade-juju)
+For complete syntax, see the [command reference page](./commands.html#upgrade-juju)
 or by running `juju help upgrade-juju`.
 
 !!! Warning: The `--upload-tools` option should be not be used by the end user.
@@ -194,4 +194,4 @@ its output then proceed to the next section.
 ## Troubleshooting the upgrade
 
 An upgrade of server software that does not lead to 100% success will require
-troubleshooting. See [Troubleshooting environment upgrades](troubleshooting-upgrade.html).
+troubleshooting. See [Troubleshooting environment upgrades](./troubleshooting-upgrade.html).

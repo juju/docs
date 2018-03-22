@@ -6,7 +6,7 @@ deployments. Juju allows you to deploy, configure, manage, maintain, and scale c
 
 In modern environments, services are rarely deployed in isolation. Even simple applications may require several actual services in order to function - like a database and a web server for example. For deploying a more complex system, e.g. OpenStack, many more services need to be installed, configured and connected to each other. Juju's service modelling provides tools to express the intent of how to deploy such services and to subsequently scale and manage them.
 
-At the lowest level, traditional configuration management tools like Chef and Puppet, or even general scripting languages such as Python or bash, automate the configuration of machines to a particular specification.
+At the lowest level, traditional configuration management tools like Chef and Puppet, or even general scripting languages such as Python or bash, automate the configuration of machines to a particular specification. 
 With Juju, you create a model of the relationships between services that make up your solution and you have a mapping of the parts of that model to machines. Juju then applies the necessary configuration management scripts to each machine in the model.
 
 Application-specific knowledge such as dependencies, scale-out practices, operational events like backups and updates, and integration options with other pieces of software are encapsulated in Juju's 'charms'. This knowledge can then be shared between team members, reused everywhere from laptops to virtual machines and cloud, and shared with other organisations.
@@ -57,7 +57,7 @@ Juju Quickstart is a plugin that lets you bootstrap Juju, launch the GUI, and de
 
 ## What about Windows or other Linux operating systems?
 
-Yes, charms can be written to deploy Windows applications. And those can be deployed right alongside Linux applications (albeit in different machines!) in the same large-scale service topology. If you need to integrate
+Yes, charms can be written to deploy Windows applications. And those can be deployed right alongside Linux applications (albeit in different machines!) in the same large-scale service topology. If you need to integrate 
 Active Directory on Windows with Hadoop on Linux, this is the way to do it.
 
 The Juju client can run on Linux, Windows, or OSX. And of course, once you have the Juju GUI up, all you need is a web browser to manage your environment and deploy more software, or scale up your existing services.
@@ -94,7 +94,7 @@ If you want, you can also share your charm with the world and gain feedback and 
 What are the best workloads to try with Juju?
 
 Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure such as OpenStack, or container management systems. Pick your favourite cloud and launch a juju server, deploy the Juju GUI there and then drop one of the bundles from the charm store into the blank canvas.
-
+ 
 <style>.tableicon{width:100px;height:100px;float:right;margin: 5px 5px 40px 20px;}</style>
 <table>
   <tr>
@@ -107,7 +107,7 @@ Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure s
      <img src="../media/cfoundry-icon-160.png" alt="icon" class="tableicon" >
      <strong>Cloud Foundry &trade;</strong><br>
      Spin up a multi-service PAAS on whichever cloud you like!
-    </td>
+    </td> 
   </tr>
   <tr>
     <td>
@@ -118,8 +118,8 @@ Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure s
     <td>
      <img src="../media/openstack-icon-160.png" alt="icon" class="tableicon" >
      <strong>OpenStack &trade;</strong><br>
-     Deploy your own private cloud on bare metal servers. If you want to evaluate OpenStack, you can use Juju to spin it up on VMware too.
-    </td>
+     Deploy your own private cloud on bare metal servers. If you want to evaluate OpenStack, you can use Juju to spin it up on VMware too. 
+    </td> 
   </tr>
 </table>
 
@@ -151,6 +151,6 @@ The Juju community pages include information on charms, getting started, and lot
 
 [jujucharms.com/community](https://jujucharms.com/community)
 
-Ready to speak to us? Get in touch with Canonical now:
+Ready to speak to us? Get in touch with Canonical now: 
 
 [www.ubuntu.com/management/contact-us](http://www.ubuntu.com/management/contact-us)
