@@ -13,10 +13,8 @@ local filesystem (previously downloaded from the store or written locally).
 
 Charms use the concept of *series* analogous as to how Juju does with Ubuntu
 series ('Trusty', 'Xenial', etc). For the most part, this is transparent as
-Juju will use the most relevant charm to ensure things "just work". This makes
-deploying applications with Juju fun and easy.
-
-The default series can be configured at a model level, see
+Juju will use the most relevant charm to ensure things "just work". The
+default series can be configured at a model level, see
 [Configuring models][models-config] for further details. In the absence of this
 setting, the default is to use the series specified by the charm.
 
