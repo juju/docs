@@ -15,4 +15,4 @@ providing a rich collection of helpful utilities for:
 
 For instructions on installing and using Charm Helpers, along with
 examples and complete API documentation, please refer to the official
-[package documentation](https://pythonhosted.org/charmhelpers/).
+[package documentation](https://charm-helpers.readthedocs.io/).

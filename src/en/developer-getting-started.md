@@ -241,7 +241,7 @@ promulgation.
 [getting-started]:    ./getting-started.html 
 [charm-tools]:        ./tools-charm-tools.html
 [charm-helpers]:      ./tools-charm-helpers.html
-[charm-helper-docs]:  http://pythonhosted.org/charmhelpers/
+[charm-helper-docs]:  http://charm-helpers.readthedocs.io/
 [interface-layers]:   ./developer-layers-interfaces.html
 [vanilla]:            http://vanillaforums.org
 [charms-local]:       ./charms-deploying.html#deploying-from-a-local-charm
