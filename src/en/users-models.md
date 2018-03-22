@@ -66,7 +66,7 @@ See [Users][regularusers] for details on available commands.
     possible for two users, `jane` and `claire`, to each have a model with the same
     name, `foo`. This could cause difficulty when `claire` needs to access `jane`'s
     model. Because of this, it is possible to refer to models using
-    `<owner>/<model>` in place of just the model name. For example, `claire` can
+    `{owner}/{model}` in place of just the model name. For example, `claire` can
     get the status of the model using `juju status -m jane/foo`.
 
 ## Controller access

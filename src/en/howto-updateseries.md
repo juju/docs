@@ -37,7 +37,7 @@ juju model-config default-series=xenial
 
 !!! Note:
     Currently there is no recommended method of updating the series of a Juju
-controller in situ.
+    controller in situ.
 
 ## Updating a Juju workload or machine.
 
@@ -74,9 +74,9 @@ In some cloud environments, there may not be the resources to update via
 
 !!! Note:
     This method should be approached with caution. After the series is updated
-on an existing juju machine, the unit agent may not restart cleanly depending on
-software dependencies. E.g. pip installed software may need to be installed
-in a new location. Or the applications' version was updated without intent.
+    on an existing juju machine, the unit agent may not restart cleanly depending on
+    software dependencies. E.g. pip installed software may need to be installed
+    in a new location. Or the applications' version was updated without intent.
 
 #### First step
 
