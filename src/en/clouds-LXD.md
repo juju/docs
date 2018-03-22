@@ -45,7 +45,7 @@ On Xenial, install LXD from the 'xenial-backports' pocket. This will ensure a
 recent (and supported) version is used:
 
 ```bash
-sudo apt install -t xenial-backports lxd
+sudo apt install -t xenial-backports lxd 
 ```
 
 !!! Note:
@@ -91,7 +91,7 @@ implement ZFS, as it provides the best experience.
 
 !!! Note:
     ZFS is not supported on Ubuntu 14.04 LTS.
-
+    
 Proceed as follows:
 
 ```bash

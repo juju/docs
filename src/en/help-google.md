@@ -5,35 +5,35 @@ Title: Help with Google Compute Engine clouds
 Juju already has knowledge of the GCE cloud, so unlike previous versions there
 is no need to provide a specific configuration for it, it 'just works'. GCE
 will appear in the list of known clouds when you issue the command:
-
+  
 ```bash
 juju clouds
 ```
-And you can see more specific information (e.g. the supported regions) by
+And you can see more specific information (e.g. the supported regions) by 
 running:
-
+  
 ```bash
 juju show-cloud google
 ```
 
-If at any point you believe Juju's information is out of date (e.g. Google just
+If at any point you believe Juju's information is out of date (e.g. Google just 
 announced support for a new region), you can update Juju's public cloud data by
 running:
-
+  
 ```bash
 juju update-clouds
 ```
 
 ## Preparing your GCE cloud for use by Juju
 
-Although Juju knows how GCE works, there are some tasks you must perform
+Although Juju knows how GCE works, there are some tasks you must perform 
 manually in the GCE dashboard to prepare your account to work with Juju. We
 give an overview of the steps here. For greater detail, see the GCE site and
 the official [GCE documentation][gce-docs].
 
 ### Create a project
 
-Firstly, you should create a new project for Juju. If you have already used GCE
+Firstly, you should create a new project for Juju. If you have already used GCE 
 your existing projects will be listed in the pull-down menu with one being
 selected as your currently active project (here 'My First Project'). The dialog is
 found near the top-right corner:
@@ -76,11 +76,11 @@ billing method (if not already done).
 
 ### Download credentials
 
-Juju will need credential information to authenticate itself to the GCE cloud.
-This is provided in the form of a file which can be  generated and downloaded
+Juju will need credential information to authenticate itself to the GCE cloud. 
+This is provided in the form of a file which can be  generated and downloaded 
 from GCE.
 
-In the GCE web interface, navigate back to the 'API Manager' screen you used
+In the GCE web interface, navigate back to the 'API Manager' screen you used 
 above, and choose the 'Credentials' screen. By default you
 will be within the 'Credentials' tab. Click the 'Create credentials' button and
 choose 'Service account key' from the 3 options available:
@@ -97,8 +97,8 @@ This is the file we're after. Store it safely as this file cannot be
 regenerated (although a new one can easily be created).
 
 Place this file where the Juju client can find it. This may or may not be on
-the computer you downloaded the file to. We recommend storing this file in the
-default Juju directory, to ensure that it is with your other Juju files in
+the computer you downloaded the file to. We recommend storing this file in the 
+default Juju directory, to ensure that it is with your other Juju files in 
 whatever system backups you perform.
 
 For the current example, say the file is called `My-Juju-GCE-Project-f33a6cdbd8e3.json`

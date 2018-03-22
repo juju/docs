@@ -1,11 +1,11 @@
-Title: Juju troubleshooting - environment upgrade
+Title: Juju troubleshooting - environment upgrade  
 TODO:  Review required (some things: 'environment')
 
 # Troubleshooting model upgrades
 
 This section provides strategies and techniques to assist with broken
 environment upgrades. See
-[Upgrading Juju software](../models-upgrade.html#upgrading-the-model-software) for
+[Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software) for
 information and instructions pertaining to upgrading your environment.
 
 
@@ -63,7 +63,7 @@ In a different terminal retry the failed hook.
 juju resolved etcd/2
 ```
 
-See [Debugging Juju charm hooks](../developer-debugging.html) for more
+See [Debugging Juju charm hooks](./developer-debugging.html) for more
 information.
 
 
