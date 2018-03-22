@@ -79,11 +79,12 @@ e9df831d-9632-4e06-bd21-d047e4c5ef4e xenial active
 Take a note of the image IDs for the images you want added to Simplestreams.
 These will be used in the next step.
 
-!!! Note: If you have images for multiple different series of Ubuntu, make sure
-you keep track of which series name matches which image ID.  The value
-$IMAGE_ID, used below, will apply to the image ID of the image for the
-particular series you are specifying and $OS_SERIES will be the series name
-("trusty", "xenial", etc.).
+!!! Note: 
+    If you have images for multiple different series of Ubuntu, make sure
+    you keep track of which series name matches which image ID.  The value
+    $IMAGE_ID, used below, will apply to the image ID of the image for the
+    particular series you are specifying and $OS_SERIES will be the series name
+    ("trusty", "xenial", etc.).
 
 We can now use Juju to generate the metadata:
 

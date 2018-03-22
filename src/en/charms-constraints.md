@@ -57,7 +57,8 @@ To further ensure that it also has at least 2 CPU cores:
 juju deploy mariadb --constraints "mem=4G cores=2"
 ```
 
-!!! Note: When setting more than one constraint you will need to utilize quotes.
+!!! Note: 
+    When setting more than one constraint you will need to utilize quotes.
 
 To ignore any constraints which may have been previously set, you can assign a 
 'null' value. If the application or model constraints for the 'mariadb' charm

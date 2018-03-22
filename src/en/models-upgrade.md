@@ -96,7 +96,8 @@ For complete syntax, see the
 [command reference page](./commands.html#upgrade-juju). The `juju help
 upgrade-juju` command also provides reminders and more examples.
 
-!!! Warning: The `--upload-tools` option should be not be used by the end user.
+!!! Warning: 
+    The `--upload-tools` option should be not be used by the end user.
 
 
 ## Verifying the upgrade

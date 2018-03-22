@@ -169,8 +169,9 @@ juju deploy $JUJU_REPOSITORY/charm-name
 ```
 If the local deployment is successful, continue to the configuration section.
 
-!!! Note: If you have access to other cloud providers (like EC2), we
-appreciate testing the deployment on those models as well.
+!!! Note: 
+    If you have access to other cloud providers (like EC2), we
+    appreciate testing the deployment on those models as well.
 
 ### Configuration and Relations
 
@@ -206,9 +207,10 @@ Use `top` or `ps` to show if the charm's process is running. Some
 service's status would also be available with `sudo service name status`
 (example: `sudo service apache2 status`).
 
-!!! Note: If the charm itself is not a process, but relies on another
-process/application (eg. nginx or apache2), be sure to check those processes are
-running. A good example of this would be Wordpress needing apache2 or nginx).
+!!! Note: 
+    If the charm itself is not a process, but relies on another
+    process/application (eg. nginx or apache2), be sure to check those processes are
+    running. A good example of this would be Wordpress needing apache2 or nginx).
 
 If the charm's configuration options are written to the application's
 configuration files, check that file for the values you set earlier. Check the
