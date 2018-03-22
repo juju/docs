@@ -38,7 +38,7 @@ username, password and tenant name (which is actually a number):
     the cloud control panel in the top-right corner (under your username), as
     shown in the following image:
 
-![Rackspace control panel showing tenant id](./media/config-rackspace_tenant_id.png)
+![Rackspace control panel showing tenant id](../media/config-rackspace_tenant_id.png)
 
 
 Credentials can now be added by running the following command:
@@ -70,6 +70,6 @@ values we entered earlier.
 
 This controller will now be visible in the Rackspace cloud control panel:
 
-![bootstrap machine 0 in Rackspace portal](./media/config-rackspace_portal-machine_0.png)
+![bootstrap machine 0 in Rackspace portal](../media/config-rackspace_portal-machine_0.png)
 
 [rscontrolpanel]: https://mycloud.rackspace.com
