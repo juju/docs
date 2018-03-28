@@ -56,7 +56,7 @@ You can force the charm to deploy using an unsupported series using the
 `--force` flag:
 
 ```bash
-juju deploy mycharm --series yakkety --force
+juju deploy mycharm --series bionic --force
 ```
 
 Here is a more complete example showing a new machine being added that uses
@@ -64,20 +64,13 @@ a different series than is supported by our `mycharm` example and then forcing
 the charm to install:
 
 ```bash
-juju add-machine --series yakkety
-Machine 1 added.
-juju deploy mycharm --to 1 --series yakkety --force
+juju add-machine --series bionic
+juju deploy mycharm --to 1 --series  bionic --force
 ```
 
-It may be required to use `--force-series` when upgrading charms. For example,
-in a case where an application is initially deployed using a charm that
-supports `precise` and `trusty`. If a new version of the charm is released that
-only supports `trusty` and `xenial` then it will be allowed to upgrade
-applications deployed on `precise`, but only using `--force-series`, like this:
-
-```bash
-juju upgrade-charm mycharm --force-series
-```
+Multi-series charms may encounter upgrade difficulties if support for the
+installed series is dropped. See [Forced upgrades][charms-upgrading-forced] for
+details.
 
 ## Deploying to specific machines
 
@@ -147,27 +140,12 @@ deploys to a named machine in MAAS.
 ### add-unit --to
 
 The `add-unit` command also supports the `--to` option, including placement
-directives.
-
-<!-- THE EXAMPLE DOES NOT WORK AND THE PURPOSE OF THE TEXT IS NOT CLEAR.
-
-The `add-unit` command also supports the `--to` option. To specifically target
-machines when expanding application capacity:
+directives. This allows one to specifically target an existing machine when
+scaling out. For example, to add a unit of 'rabbitmq-server' to machine '1':
 
 ```bash
-juju deploy --constraints="mem=4G" openstack-dashboard
 juju add-unit --to 1 rabbitmq-server
 ```
-
-There should now be a second machine running both the openstack-dashboard
-application and a second unit of the rabbitmq-server application. The
-`juju status` command will show this.
-
-These two features make it much easier to deploy complex applications such as
-OpenStack which use a large number of charms on a limited number of physical
-servers.
-
--->
 
 A comma separated list of directives can be provided to cater for the case
 where more than one unit is being added:
@@ -287,3 +265,4 @@ mediawiki page.
 [clouds-maas]: ./clouds-maas.html
 [charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints
 [concepts-endpoint]: ./juju-concepts.html#endpoint
+[charms-upgrading-forced]: ./charms-upgrading.html#forced-upgrades
