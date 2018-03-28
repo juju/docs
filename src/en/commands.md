@@ -1,10 +1,14 @@
-Title: Juju commands and usage
+Title:Juju commands and usage
 
 # Juju Command reference
 
-You can get a list of Juju commands by entering `juju help commands` on the
-command line. These commands are also listed below, along with usage and
-examples. Click on the expander triangle to see the details of a command. 
+You can get a list of all Juju commands by invoking `juju help commands` in a
+terminal.
+
+To drill down into each command use `juju help <command name>`.
+
+This same information is also provided below. Click on the
+triangle alongside a command to view that command's entry.
 
 ^# actions
 
@@ -142,11 +146,10 @@ examples. Click on the expander triangle to see the details of a command.
 
              <credential name>:
 
-               auth-type: userpass
+               auth-type: service-principal-secret
                application-id: <uuid1>
                application-password: <password>
                subscription-id: <uuid2>
-               tenant-id: <uuid3>
    
    A "credential name" is arbitrary and is used solely to represent a set of
    credentials, of which there may be multiple per cloud.
@@ -1168,6 +1171,16 @@ examples. Click on the expander triangle to see the details of a command.
    bootstrap any 2.0.x or 2.1.x agents.
 
    The agent version can be specified a simple numeric version, e.g. 2.2.4.
+   For example, at the time when 2.3.0, 2.3.1 and 2.3.2 are released and your
+   agent stream is 'released' (default), then a 2.3.1 client can bootstrap:
+          * 2.3.0 controller by running '... bootstrap --agent-version=2.3.0 ...';
+          * 2.3.1 controller by running '... bootstrap ...';
+          * 2.3.2 controller by running 'bootstrap --auto-upgrade'.
+
+   
+   However, if this client has a copy of codebase, then a local copy of Juju 
+   will be built and bootstrapped - 2.3.1.1.
+
 
    **Examples:**
 
@@ -1195,7 +1208,7 @@ examples. Click on the expander triangle to see the details of a command.
 
 ^# budget
 
-   **Usage:** ` juju budget [options] <value>`
+   **Usage:** ` juju budget [options] [<wallet>:]<limit>`
 
    **Summary:**
 
@@ -1226,6 +1239,8 @@ examples. Click on the expander triangle to see the details of a command.
 
           # Sets the budget for the current model to 10.
           juju budget 10
+          # Moves the budget for the current model to wallet 'personal' and sets the limit to 10.
+          juju budget personal:10
 
 
 
@@ -1663,11 +1678,11 @@ examples. Click on the expander triangle to see the details of a command.
 
 ^# controller-config
 
-   **Usage:** ` juju controller-config [options] [<attribute key>]`
+   **Usage:** ` juju controller-config [options] [<attribute key>[=<value>] ...]`
 
    **Summary:**
 
-   Displays configuration settings for a controller.
+   Displays or sets configuration settings for a controller.
 
    **Options:**
 
@@ -1692,18 +1707,26 @@ examples. Click on the expander triangle to see the details of a command.
 
 
    By default, all configuration (keys and values) for the controller are
-   displayed if a key is not specified.
+   displayed if a key is not specified. Supplying one key name returns
+   only the value for that key.
 
-   The controller configuration is set during bootstrap, available keys
-   and values can be found here:
+   Supplying key=value will set the supplied key to the supplied value;
+   this can be repeated for multiple keys. You can also specify a yaml
+   file containing key values. Not all keys can be updated after
+   bootstrap time.
 
-           https://jujucharms.com/docs/stable/controllers-config
+   Available keys and values can be found here:
+
+   https://jujucharms.com/docs/stable/controllers-config
 
    **Examples:**
 
           juju controller-config
           juju controller-config api-port
           juju controller-config -c mycontroller
+          juju controller-config auditing-enabled=true audit-log-max-backups=5
+          juju controller-config auditing-enabled=true path/to/file.yaml
+          juju controller-config path/to/file.yaml
 
 
    **See also:**
@@ -1978,7 +2001,7 @@ examples. Click on the expander triangle to see the details of a command.
 
    Proxy through the API server
 
-   _--pty  (= true)_
+   _--pty  (= &lt;auto>)_
 
    Enable pseudo-tty allocation
 
@@ -3438,7 +3461,7 @@ examples. Click on the expander triangle to see the details of a command.
    **Details:**
 
 
-   Juju charms can access a series of built-in helpers called 'hook-tools'. 
+   Juju charms can access a series of built-in helpers called 'hook-tools'.
    These are useful for the charm to be able to inspect its running environment.
    Currently available charm hook tools are:
 
@@ -3495,7 +3518,7 @@ examples. Click on the expander triangle to see the details of a command.
    **Details:**
 
 
-   Juju charms can access a series of built-in helpers called 'hook-tools'. 
+   Juju charms can access a series of built-in helpers called 'hook-tools'.
    These are useful for the charm to be able to inspect its running environment.
    Currently available charm hook tools are:
 
@@ -3552,7 +3575,7 @@ examples. Click on the expander triangle to see the details of a command.
    **Details:**
 
 
-   Juju charms can access a series of built-in helpers called 'hook-tools'. 
+   Juju charms can access a series of built-in helpers called 'hook-tools'.
    These are useful for the charm to be able to inspect its running environment.
    Currently available charm hook tools are:
 
@@ -5328,7 +5351,7 @@ examples. Click on the expander triangle to see the details of a command.
 
 ^# model-config
 
-   **Usage:** ` juju model-config [options] [<model-key>[<=value>] ...]`
+   **Usage:** ` juju model-config [options] [<model-key>[=<value>] ...]`
 
    **Summary:**
 
@@ -5420,6 +5443,12 @@ examples. Click on the expander triangle to see the details of a command.
            type: string
            description: Cloud-init user-data (in yaml format) to be added to userdata for new
              machines created in this model
+   
+   container-inherit-properties:
+
+           type: string
+           description: List of properties to be copied from the host machine to new containers
+             created in this model (comma-separated)
    
    container-networking-method:
 
@@ -6574,16 +6603,34 @@ examples. Click on the expander triangle to see the details of a command.
 
    Controller to operate in
 
+   _--force  (= false)_
+
+   remove the offer as well as any relations to the offer
+
+   _-y, --yes  (= false)_
+
+   Do not prompt for confirmation
+
    
    **Details:**
 
 
    Remove one or more application offers.
 
+   If the --force flag is specified, any existing relations to the
+   offer will also be removed.
+
+   Offers to remove are normally specified by their URL.
+
+   It's also possible to specify just the offer name, in which case
+   the offer is considered to reside in the current model.
+
 
    **Examples:**
 
           juju remove-offer prod.model/hosted-mysql
+          juju remove-offer prod.model/hosted-mysql --force
+          juju remove-offer hosted-mysql
 
 
    **See also:**
@@ -7382,10 +7429,6 @@ examples. Click on the expander triangle to see the details of a command.
 
    Proxy through the API server
 
-   _--pty  (= true)_
-
-   Enable pseudo-tty allocation
-
    
    **Details:**
 
@@ -7414,21 +7457,31 @@ examples. Click on the expander triangle to see the details of a command.
 
    Copy file /var/log/syslog from machine 2 to the client's current working
    directory:
+
           juju scp 2:/var/log/syslog .
+
    Recursively copy the /var/log/mongodb directory from a mongodb unit to the
    client's local remote-logs directory:
+
           juju scp -- -r mongodb/0:/var/log/mongodb/ remote-logs
+
    Copy foo.txt from the client's current working directory to an apache2 unit of
    model "prod". Proxy the SSH connection through the controller and turn on scp
    compression:
+
           juju scp -m prod --proxy -- -C foo.txt apache2/1:
+
    Copy multiple files from the client's current working directory to machine 2:
           juju scp file1 file2 2:
+
    Copy multiple files from the bob user account on machine 3 to the client's
    current working directory:
+
           juju scp bob@3:'file1 file2' .
+
    Copy file.dat from machine 0 to the machine hosting unit foo/0 (-3
    causes the transfer to be made via the client):
+
           juju scp -- -3 0:file.dat foo/0:
 
 
@@ -8433,9 +8486,12 @@ examples. Click on the expander triangle to see the details of a command.
 
    **Examples:**
 
-          juju sla essential              # set the support level to essential
-          juju sla standard --budget 1000 # set the support level to essential with a maximum budget of $1000
-          juju sla                        # display the current support level for the model.
+          # set the support level to essential
+          juju sla essential
+          # set the support level to essential with a maximum budget of $1000 in wallet 'personal'
+          juju sla standard --budget personal:1000
+          # display the current support level for the model.
+          juju sla
 
 
 
@@ -8513,7 +8569,7 @@ examples. Click on the expander triangle to see the details of a command.
 
    Proxy through the API server
 
-   _--pty  (= true)_
+   _--pty  (= &lt;auto>)_
 
    Enable pseudo-tty allocation
 
@@ -8526,8 +8582,16 @@ examples. Click on the expander triangle to see the details of a command.
    'user' is specified then the connection is made to that user account;
    otherwise, the default 'ubuntu' account, created by Juju, is used.
 
-   The optional command is executed on the remote machine. Any output is sent back
-   to the user. Screen-based programs require the default of '--pty=true'.
+   The optional command is executed on the remote machine, and any output is sent
+   back to the user. If no command is specified, then an interactive shell session
+   will be initiated.
+
+   When "juju ssh" is executed without a terminal attached, e.g. when piping the
+   output of another command into it, then the default behavior is to not allocate
+   a pseudo-terminal (pty) for the ssh session; otherwise a pty is allocated. This
+   behavior can be overridden by explicitly specifying the behavior with
+   "--pty=true" or "--pty=false".
+
    The SSH host keys of the target are verified. The --no-host-key-checks option
    can be used to disable these checks. Use of this option is not recommended as
    it opens up the possibility of a man-in-the-middle attack.
@@ -8542,14 +8606,23 @@ examples. Click on the expander triangle to see the details of a command.
    **Examples:**
 
    Connect to machine 0:
+
           juju ssh 0
+
    Connect to machine 1 and run command 'uname -a':
+
           juju ssh 1 uname -a
+
    Connect to a mysql unit:
+
           juju ssh mysql/0
+
    Connect to a jenkins unit as user jenkins:
+
           juju ssh jenkins@jenkins/0
+
    Connect to a mysql unit with an identity not known to juju (ssh option -i):
+
           juju ssh mysql/0 -i ~/.ssh/my_private_key echo hello
 
 
