@@ -17,14 +17,14 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
 
   Juju 2.3.5 has arrived. This is primarily a bug fix release.
 
-  ## Critical bugs fixed
+  ## Critical bugs fixed.
 
   [LP 1737058](https://bugs.launchpad.net/juju/+bug/1737058) network-get fails
   to find configs on 2.3.0 that worked on 2.2.6  
   [LP 1751287](https://bugs.launchpad.net/juju/+bug/1751287) Controller
   bootstrap fails with Openstack Devstack
 
-  ## Important bugs fixed
+  ## Important bugs fixed.
 
   [LP 1729880](https://bugs.launchpad.net/bugs/1729880) juju 2.2.4 and 2.2.6
   actions dissappear when state is changed from running to complete  
@@ -42,20 +42,20 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
   is appreciated. Please contact the Juju team using the communication channels
   specified in the feedback section.
   
-  ## Get Juju
+  ## Get Juju.
   
-  The easiest way to get Juju is using the snap package.
+  The easiest way to get Juju is using the `snap` package.
   
   	  sudo snap install juju --classic
   
-  ## Feedback appreciated
+  ## Feedback appreciated.
   
   We encourage everyone to let us know how you're using Juju. You can send us a
   message on Twitter using `#jujucharms`, join us in the freenode IRC channel
   `#juju`, or subscribe to the
   [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
   
-  ## More information
+  ## More information.
   
   To learn more about Juju visit
   [https://jujucharms.com](https://jujucharms.com).
