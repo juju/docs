@@ -56,6 +56,15 @@ so long as the following conditions are met:
 
 The new charm may add new relations and configuration settings.
 
+## Forced upgrades
+
+A charm upgrade may require the use of the `--force-series` option.
+
+Consider the case where an application is initially deployed using a charm that
+supports Trusty and Precise. If a new version of the charm is released that
+only supports Trusty and Xenial then applications deployed on Precise will only
+be allowed by forcing the upgrade.
+
 ## Examples
 
 To upgrade WordPress based on the current channel:
@@ -90,6 +99,12 @@ To crossgrade MySQL with a local charm:
 
 ```bash
 juju upgrade-charm --switch ~/charms/new-mysql mysql
+```
+
+To force an upgrade of PostgreSQL that would otherwise fail:
+
+```bash
+juju upgrade-charm postgresql --force-series
 ```
 
 
