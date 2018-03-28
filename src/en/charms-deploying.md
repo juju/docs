@@ -81,10 +81,9 @@ See [Upgrading applications][charms-upgrading] for how charm upgrades work.
 
 ## Deploying a multi-series charm
 
-Charms can be written to support more than one release of a given operating
-system distro, such as the multiple Ubuntu releases shown below. See the
-documentation on [Multi-series charms][deploying-multi-series-charms] to learn
-more.
+Some charms support more than one series. It is also possible to force a charm
+to deploy to a different series. See the documentation on
+[Multi-series charms][deploying-multi-series-charms] to learn more.
 
 ## Deploying from a local charm
 
