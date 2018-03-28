@@ -5,6 +5,61 @@ Title: Juju Release Notes
 This page details all available release notes for the 2.x series of Juju. The
 release notes for the 1.x series are available [here][release-notes-1].
 
+<!--
+USE THE NEW & IMPROVED 'Feedback' and 'More information' SECTIONS THAT STARTED
+TO APPEAR WITH 2.3.5
+
+ALSO CONSIDER "LINKIFYING" STUFF. INCLUDE 2 EMPTY SPACES AT EOL TO GET A
+CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
+-->
+
+^# Juju 2.3.5
+
+  Juju 2.3.5 has arrived. This is primarily a bug fix release.
+
+  ## Critical bugs fixed.
+
+  [LP 1737058](https://bugs.launchpad.net/juju/+bug/1737058) network-get fails
+  to find configs on 2.3.0 that worked on 2.2.6  
+  [LP 1751287](https://bugs.launchpad.net/juju/+bug/1751287) Controller
+  bootstrap fails with Openstack Devstack
+
+  ## Important bugs fixed.
+
+  [LP 1729880](https://bugs.launchpad.net/bugs/1729880) juju 2.2.4 and 2.2.6
+  actions dissappear when state is changed from running to complete  
+  [LP 1754735](https://bugs.launchpad.net/bugs/1754735) Juju does not support
+  current AWS instance types 
+
+  There's also a few enhancements like:
+
+  [LP 1753593](https://bugs.launchpad.net/bugs/1753593) support st1 and sc1 ebs
+  volume-types  
+  [LP 1757926](https://bugs.launchpad.net/bugs/1757926) Cannot remove an offer
+  with relations
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the
+  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
 ^# Juju 2.3.4
 
   Juju 2.3.4 has arrived. This is primarily a bug fix release.
