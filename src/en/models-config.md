@@ -116,6 +116,7 @@ apt-http-proxy               | string |          |                            | 
 apt-https-proxy              | string |          |                            | The APT HTTPS proxy for the model.
 apt-mirror                   | string |          |                            | The APT mirror for the model. See [additional info below](#apt-mirror).
 automatically-retry-hooks    | bool   | true     |                            | Set the policy on retying failed hooks. See [additional info below](#retrying-failed-hooks).
+container-inherit-properties | string |          |                            | Set cloudinit parameters to be inherited from a Juju machine to its hosted containers. See [additional info below](#container-inheritance).
 container-networking-method  | string |          | local/provider/fan         | The FAN networking mode to use. Default values can be provider-specific.
 default-series               | string |          | valid series name, e.g. 'xenial' | The default series of Ubuntu to use for deploying charms.
 development                  | bool   | false    |                            | Set whether the model is in development mode.
@@ -307,6 +308,28 @@ patch version of 1 (instead of 2), the following would be run:
 
 ```bash
 juju bootstrap aws aws --agent-version='2.3.1'
+```
+
+### Container inheritance
+
+The `container-inherit-properties` key allows a limited set of cloudinit
+parameters enabled on a Juju machine to be inherited by any hosted containers.
+The machine and container must be running the same series.
+
+The parameters are:
+
+ - apt-primary
+ - apt-security
+ - apt-sources
+ - ca-certs
+
+!!! Note:
+    The 'apt-security' parameter is not available for the 'trusty' series.
+
+For instance:
+
+```
+juju model-config container-inherit-properties="ca-certs, apt-primary"
 ```
 
 
