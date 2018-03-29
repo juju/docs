@@ -2,15 +2,14 @@ Title: General configuration options
 TODO: Check accuracy of key table
       Confirm 'all' harvest mode state. Seems it should be "'Dead' or
 	'Unknown'" OR "a combination of modes 'destroyed' and 'unknown'".
-      Provide an example of using model-defaults to set a per-region attribute.
-
+      Provide an example yaml file in a model-config or model-defaults context
+      Re yaml files, which takes precedence? CLI-specified or file?
 
 # Configuring models
 
 A model influences all the machines that Juju creates within it and, in turn,
 the applications that get deployed onto those machines. It is therefore a very
 powerful feature to be able to configure at the model level.
-
 Model configuration consists of a collection of keys and their respective
 values. An explanation of how to both view and set these key:value pairs is
 provided below. Notable examples are provided at the end.
@@ -93,6 +92,13 @@ Note that these defaults can be overridden, on a per-model basis, during the
 invocation of the `add-model` command (option `--config`) as well as by
 resetting specific options to their original defaults through the use of the
 `model-config` command (option `--reset`).
+
+Both the `model-config` and `model-defaults` commands can read key value pairs
+from a YAML-formatted file. For example:
+
+```bash
+juju model-config no-proxy=jujucharms.com more-config-values.yaml
+```
 
 ## List of model keys
 
