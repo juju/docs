@@ -44,6 +44,8 @@ run on each machine Juju creates, including controllers.
 
 Overview:
 
+- A controller admin user can upgrade any model within their controller and a
+  model owner can only upgrade their own model.
 - Upgrades must be applied to the controller model first.
 - An upgrade is applied to agents running on all machines across a model.
 - During the upgrade, an algorithm will select a version to upgrade to if a
