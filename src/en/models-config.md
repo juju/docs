@@ -144,13 +144,13 @@ max-status-history-age       | string |          | 72h, etc.                | Th
 max-status-history-size      | string |          | 400M, 5G, etc.           | The maximum size for the status history collection, in human-readable memory format.
 no-proxy                     | string |          |                          | List of domain addresses not to be proxied (comma-separated).
 provisioner-harvest-mode     | string | destroyed| all/none/unknown/destroyed | Set what to do with unknown machines. See [additional info below](#juju-lifecycle-and-harvesting).
-proxy-ssh                    | bool   | false    |                          | Set whether SSH commands should be proxied through the API server.
-resource-tags                | string | none     |                          | A space-separated list of key=value pairs used to apply as tags on supported cloud models.
-ssl-hostname-verification    | bool   | true     |                          | Set whether SSL hostname verification is enabled.
-test-mode                    | bool   | false    |                          | Set whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store.
-transmit-vendor-metrics      | bool   | true     |                          | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics.
-vpc-id                       | string |          |                          | The virtual private cloud (VPC) ID for use when configuring a new model to be deployed to a specific VPC during `add-model`.
-
+proxy-ssh                    | bool   | false    |                            | Set whether SSH commands should be proxied through the API server.
+resource-tags                | string | none     |                            | A space-separated list of key=value pairs used to apply as tags on supported cloud models.
+ssl-hostname-verification    | bool   | true     |                            | Set whether SSL hostname verification is enabled.
+test-mode                    | bool   | false    |                            | Set whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store.
+transmit-vendor-metrics      | bool   | true     |                            | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics.
+update-status-hook-interval  | string | 5m       | 30s, 6m, 1hr, etc.         | The run frequency of the update-status hook. The value has a random +/- 20% offset applied to avoid hooks for all units firing art once. Value change only honoured during controller and model creation (`bootstrap --config` and `add-model --config`).
+vpc-id                       | string |          |                            | The virtual private cloud (VPC) ID for use when configuring a new model to be deployed to a specific VPC during `add-model`.
 
 ### APT mirror
 
