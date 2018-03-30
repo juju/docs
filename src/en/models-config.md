@@ -286,6 +286,9 @@ upgrades.
 
 ### Agent versions and streams
 
+A full definition of an agent is provided on the
+[Concepts and terms][concepts-and-terms-agent] page.
+
 The `agent-stream` option specifies the "stream" to use when a Juju agent is to
 be installed or upgraded. This setting reflects the general stability of the
 software and defaults to 'released', indicating that only the latest stable
@@ -314,7 +317,14 @@ agent's version for a newly-created controller would be the same. To specify a
 patch version of 1 (instead of 2), the following would be run:
 
 ```bash
-juju bootstrap aws aws --agent-version='2.3.1'
+juju bootstrap aws --agent-version='2.3.1'
+```
+
+If a patch version is available that is greater than that of the client then it
+can be targeted in this way:
+
+```bash
+juju bootstrap aws --auto-upgrade
 ```
 
 ### Container inheritance
@@ -344,3 +354,4 @@ juju model-config container-inherit-properties="ca-certs, apt-primary"
 
 [charms-offline]: ./charms-offline.html
 [controllers-creating]: ./controllers-creating.html
+[concepts-and-terms-agent]: ./juju-concepts.html#agent
