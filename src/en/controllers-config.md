@@ -2,6 +2,7 @@ Title: General configuration options
 TODO: Check accuracy of key table
       error: table's default value keys do not show up with controller-config (e.g. bootstrap-)
       "dynamically set by Juju" could use some explaination
+      Include ability to set configuration key:value pairs by file
 
 
 # Configuring controllers
@@ -50,7 +51,6 @@ This table lists all the controller keys which may be assigned a value.
 | Key                        | Type   | Default  | Valid values             | Purpose |
 |:---------------------------|--------|----------|--------------------------|:---------|
 api-port                     | integer | 17070   |                          | The port to use for connecting to the API
-auditing-enabled             | bool   | false    | false/true               | Sets whether the controller will record auditing information
 autocert-dns-name            | string |          |                          | Sets the DNS name of the controller. If a client connects to this name, an official certificate will be automatically requested. Connecting to any other host name will use the usual self-generated certificate.
 autocert-url                 | string |          |                          | Sets the URL used to obtain official TLS certificates when a client connects to the API. By default, certificates are obtained from LetsEncrypt. A good value for testing is "https://acme-staging.api.letsencrypt.org/directory".
 allow-model-access           | bool   |          | false/true               | Sets whether the controller will allow users to connect to models they have been authorized for even when they don't have any access rights to the controller itself.
@@ -72,4 +72,3 @@ state-port                   | integer | 37017   |                          | Th
 <!-- LINKS -->
 
 [controllers-creating]: ./controllers-creating.html "Creating a controller"
-[models-config]: ./models-config.html "Configuring models"
