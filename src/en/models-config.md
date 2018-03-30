@@ -149,7 +149,7 @@ resource-tags                | string | none     |                            | 
 ssl-hostname-verification    | bool   | true     |                            | Set whether SSL hostname verification is enabled.
 test-mode                    | bool   | false    |                            | Set whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store.
 transmit-vendor-metrics      | bool   | true     |                            | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics.
-update-status-hook-interval  | string | 5m       | 30s, 6m, 1hr, etc.         | The run frequency of the update-status hook. The value has a random +/- 20% offset applied to avoid hooks for all units firing art once. Value change only honoured during controller and model creation (`bootstrap --config` and `add-model --config`).
+update-status-hook-interval  | string | 5m       | 30s, 6m, 1hr, etc.         | The run frequency of the update-status hook. The value has a random +/- 20% offset applied to avoid hooks for all units firing at once. Value change only honoured during controller and model creation (`bootstrap --config` and `add-model --config`).
 vpc-id                       | string |          |                            | The virtual private cloud (VPC) ID for use when configuring a new model to be deployed to a specific VPC during `add-model`.
 
 ### APT mirror
