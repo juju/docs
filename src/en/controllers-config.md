@@ -3,6 +3,7 @@ TODO: Check accuracy of key table (https://github.com/juju/juju/blob/ec89c99e51f
       error: table's default value keys do not show up with controller-config (e.g. bootstrap-). See above note.
       "dynamically set by Juju" could use some explaination
       ReadOnlyMethods updated from https://github.com/juju/juju/blob/2.3/apiserver/observer/auditfilter.go#L130
+      Include ability to set configuration key:value pairs by file
 
 
 # Configuring controllers
