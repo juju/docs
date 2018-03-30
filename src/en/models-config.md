@@ -320,13 +320,6 @@ patch version of 1 (instead of 2), the following would be run:
 juju bootstrap aws --agent-version='2.3.1'
 ```
 
-If a patch version is available that is greater than that of the client then it
-can be targeted in this way:
-
-```bash
-juju bootstrap aws --auto-upgrade
-```
-
 
 <!-- LINKS -->
 
