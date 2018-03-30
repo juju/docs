@@ -101,8 +101,6 @@ Common model management tasks are summarized below.
    
    To change to a model:
    
-   <!-- WARNING: EXTRA SPACES AT EOL -->
-   
    `juju switch foo`  
    Selects the last used model in controller 'foo' (if the latter exists),
    otherwise model 'foo' in the current controller.
