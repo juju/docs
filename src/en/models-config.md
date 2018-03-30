@@ -42,6 +42,12 @@ juju model-config test-mode=true enable-os-upgrade=false
     Juju does not currently check that the provided key is a valid setting, so
     make sure you spell it correctly.
 
+To set a null value:
+  
+```bash
+juju model-config apt-mirror=""
+```
+
 To return a value to the default setting the `--reset` flag is used, along
 with the key name:
   
