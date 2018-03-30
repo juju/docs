@@ -167,6 +167,12 @@ juju bootstrap azure --config logforward-enabled=true --config logconfig.yaml
 See [Remote logging][troubleshooting-logs-remote] for a more thorough treatment
 of log forwarding.
 
+### Specifying an agent version
+
+When a controller is created, it is possible to influence what agent version
+will be used across the controller and its models. This is covered in
+[Agent versions and streams][agent-versions-and-streams].
+
 
 <!-- LINKS -->
 
@@ -176,3 +182,4 @@ of log forwarding.
 [controlconfig]: ./controllers-config.html "Configuring Juju controllers"
 [modelconfig]: ./models-config.html "Configuring Juju models"
 [troubleshooting-logs-remote]: ./troubleshooting-logs-remote.html
+[agent-versions-and-streams]: ./models-config.html#agent-versions-and-streams
