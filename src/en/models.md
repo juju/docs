@@ -92,13 +92,28 @@ Common model management tasks are summarized below.
    
    Use the `juju switch` command to go from one model to another:
    
-   `juju switch [<controller>|<model>|<controller>:<model>]`
+   `juju switch [<controller or model>|<:model>|<controller>:<model>|<controller:>]`
    
    Running the command with no arguments will return the currently active 
    controller and model:
      
          juju switch
    
+   To change to a model:
+   
+   `juju switch foo`  
+   Selects the last used model in controller 'foo' (if the latter exists),
+   otherwise model 'foo' in the current controller.
+
+   `juju switch :foo`  
+   Selects model 'foo' in the current controller.
+
+   `juju switch foo:bar`  
+   Selects model 'bar' in controller 'foo'.
+   
+   `juju switch foo:`  
+   Selects the last used model in controller 'foo'
+
    For complete explanation and syntax, see the
    [command reference page](./commands.html#switch) or the `juju help switch`
    command.
