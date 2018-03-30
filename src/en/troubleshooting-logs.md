@@ -226,6 +226,17 @@ juju debug-log --lines 2000 \
 	--include-module juju.worker
 ```
 
+### Agent logging override
+
+As we've seen, Juju logs on a per-model basis. However, if there are enough
+units in the model to make log inspection difficult, due to the high number of
+messages, a method for removing "excess noise" is the next logical step.
+Advanced filtering (see above section) mitigates this problem but another
+feature exists that should be considered as an alternative. This is the ability
+to log on a per-agent basis.
+
+
+
 ### Log files
 
 Log files are located on every machine Juju creates, including the controller.
