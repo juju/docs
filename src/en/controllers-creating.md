@@ -201,16 +201,15 @@ vpc-id-force:
 !!! Note:
     The VPC ID is obtained from the AWS web UI.
 
-Secondly, create the controller by placing it (and any of its subsequent
-models) within it:
+Secondly, create the controller by placing it (and its models) within it:
 
 ```bash
 juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
 ```
 
 !!! Note:
-    Cloud-specific features can also be passed when adding a model
-    (`add-model`).
+    Cloud-specific features can also be passed to individual models during
+    their creation (`add-model`).
 
 
 <!-- LINKS -->
