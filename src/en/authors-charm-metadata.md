@@ -72,7 +72,7 @@ following fields as well, for categorization and display in the GUI:
 In almost all cases, only one tag will be appropriate. The categories help
 keep the Charm Store organised.
 
-![Juju Charm Store metadata Listing](../media/authors-metadata-display.png)
+![Juju Charm Store metadata Listing](./media/authors-metadata-display.png)
 
 Storage can also be declared in a charm's metadata, as such:
 

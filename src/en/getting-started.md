@@ -233,7 +233,7 @@ exist.
 From this readout, we can see that WordPress is exposed and ready. If we
 point a web browser at the address we should be able to access it:
 
-![WordPress in a web browser](../media/getting_started-wordpress.png)
+![WordPress in a web browser](./media/getting_started-wordpress.png)
 
 Congratulations, you have just deployed a service with Juju!
 

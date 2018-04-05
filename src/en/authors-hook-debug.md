@@ -49,7 +49,7 @@ be debugged:
   - the prompt will change to indicate the hook related to the window (e.g. `mysql/0:db-relation-joined %`)
   - the shell will be running in the standard [hook environment](./authors-hook-environment.html).
   - additionally, `$JUJU_HOOK_NAME` is set appropriately.
-  ![Image showing tmux debug hooks session](../media/authors-hook-debug-1.png)
+  ![Image showing tmux debug hooks session](./media/authors-hook-debug-1.png)
 
 To proceed, you should **manually execute the hook**, or perform whatever other
 actions you want. At any time during a debug-hooks window 1 session you can run
@@ -140,7 +140,7 @@ Pane
 
 A session may look something like this:
 
-![Image showing byobu and tmux ](../media/tmux-annotation.png)
+![Image showing byobu and tmux ](./media/tmux-annotation.png)
 
 Key:
 

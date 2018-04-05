@@ -72,7 +72,7 @@ You can retrieve these values easily from Joyent Dashboard at
 name in the top-right and then the "Account" link from the drop down menu.
 
 ![Joyent Dashboard to access username and
-fingerprint](../media/getting_started-joyent-account-dropdown.png)
+fingerprint](./media/getting_started-joyent-account-dropdown.png)
 
 !!! Note: During initial setup if you are having issues deploying charms contact
 Joyent support at [https://help.joyent.com/home](https://help.joyent.com/home) 
