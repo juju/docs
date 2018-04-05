@@ -76,7 +76,7 @@ following fields as well, for categorization and display in the GUI:
 In almost all cases, only one tag will be appropriate. The categories help
 keep the Charm Store organised.
 
-![Juju Charm Store metadata Listing](../media/authors-metadata-display.png)
+![Juju Charm Store metadata Listing](./media/authors-metadata-display.png)
 
 - `min-juju-version` Charms can declare the minimum Juju version the code is
 compatible with. This is useful when the code uses features introduced in a
