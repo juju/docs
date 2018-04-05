@@ -30,7 +30,7 @@ own deployments.
 This can be done easily by signing in to Oracle's domain dashboard, creating a
 new `Compute` instance, selecting `Marketplace` and searching for 'ubuntu':
 
-![Ubuntu image search](./media/oracle_create-instance-ubuntu.png)
+![Ubuntu image search](../media/oracle_create-instance-ubuntu.png)
 
 Select the images you want, Ubuntu 16.04 and Ubuntu 14.04 are good choices, and
 head back to Juju.

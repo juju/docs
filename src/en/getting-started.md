@@ -57,13 +57,13 @@ table.logos th, table.logos td{
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-login-1.png" alt="Login to JAAS" />
+<img src="../media/jaas-login-1.png" alt="Login to JAAS" />
 <br />
 Press the green 'Start building' button to get started...
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-login-2.png" alt="Login to JAAS" />
+<img src="../media/jaas-login-2.png" alt="Login to JAAS" />
 <br />
 ... and reveal your (currently empty) model.
 </td>
@@ -90,13 +90,13 @@ Hint: to see how easy JAAS makes complex deployments, try the
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-kubernetes.png" alt="Canonical kubernetes bundle" />
+<img src="../media/jaas-kubernetes.png" alt="Canonical kubernetes bundle" />
 <br />
 Press the green 'Add to model' button to select the solution.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-deploy-changes.png" alt="deploying changes in JAAS" />
+<img src="../media/jaas-deploy-changes.png" alt="deploying changes in JAAS" />
 <br />
 Press the blue 'Deploy changes' button to proceed.
 </td>
@@ -136,13 +136,13 @@ related to each other and configuration is being applied.
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-deploy-1.png" alt="description here" />
+<img src="../media/jaas-deploy-1.png" alt="description here" />
 <br />
 Deploying a bundle can take a few minutes...
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-deploy-2.png" alt="description here" />
+<img src="../media/jaas-deploy-2.png" alt="description here" />
 <br />
 When complete, the application icons will turn grey.
 </td>

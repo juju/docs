@@ -20,9 +20,9 @@ of the Juju machine or volume
 corresponding to the IaaS resource.
 
 Names in Amazon AWS for example appear like this:
-![named instances in Amazon](./media/config-tagging-named.png)
+![named instances in Amazon](../media/config-tagging-named.png)
 ...and tags like this:
-![tagged instances in Amazon](./media/config-tagging-tagged.png)
+![tagged instances in Amazon](../media/config-tagging-tagged.png)
 
 ## User-defined tags
 
@@ -41,7 +41,7 @@ bootstrapped environment by using the `juju model-config` command
 juju model-config resource-tags="origin=v2 owner=Canonical"
 ```
 
-![user tagged instances in Amazon](./media/config-tagging-user.png)
+![user tagged instances in Amazon](../media/config-tagging-user.png)
 
 You can change the tags again by simply running the above command again with
 different values. Changes will not be made to existing machines, but the 

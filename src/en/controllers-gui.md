@@ -41,9 +41,10 @@ Your login credential is:
 If you don't want to copy and paste the URL manually, typing `juju gui
 --browser` will open the link in your default browser automatically.
 
-!!! Note: If you are deploying behind a firewall, make sure to check out the 
-charm's [README](https://jujucharms.com/juju-gui/) for more information on 
-getting the GUI up and running and talking to your environment.
+!!! Note: 
+    If you are deploying behind a firewall, make sure to check out the 
+    charm's [README](https://jujucharms.com/juju-gui/) for more information on 
+    getting the GUI up and running and talking to your environment.
 
 Your browser will give you an error message when you open the URL warning that
 the site certificate should not be trusted. This is because Juju is generating
@@ -66,7 +67,7 @@ uses for the GUI is that of monitoring. The GUI provides not only an overview
 of the health of your environment and the applications comprising it, but also 
 details of the units and machines comprising those applications.
 
-![](./media/gui2_management-status.png)
+![](../media/gui2_management-status.png)
 
 The rings represent applications running on the current model and by selecting
 the application, you can also see a more in-depth list of units and their
@@ -75,7 +76,7 @@ whether they are exposed and other details. Using the drop-down menu to the
 right of your username at the top, you can also use the GUI to create and switch
 between your various models.
 
-![](./media/gui2_management-add-model.png)
+![](../media/gui2_management-add-model.png)
 
 The GUI can be used to offer insight into not only the status of your cloud
 deployment, but also the overall structure of your applications and how they are
@@ -98,7 +99,7 @@ any recent updates. From here, you can add the charm to your environment by
 clicking 'Add to canvas' which will then give you the option to configure and
 deploy a new application.
 
-![](./media/gui2_management-charmstore.png)
+![](../media/gui2_management-charmstore.png)
 
 Once deployed, clicking on the application will allow you to not only view the 
 units and machines comprising it, but also to scale the application out or back, 
@@ -110,7 +111,7 @@ relationships, such as a master or slave database - by clicking the 'add
 relation' menu item on one application, and then clicking on the destination
 application.
 
-![](./media/gui2_management-relationship.png)
+![](../media/gui2_management-relationship.png)
 
 The GUI will attempt to position applications automatically so that they do not
 overlap. However, you may drag the applications around the canvas so that 
@@ -186,9 +187,10 @@ along with all of their metadata, in a read-only mode, meaning that you will not
 be able to make changes to the environment through the GUI. This is good for a
 monitoring type scenario.
 
-!!! Note: read-only mode in the GUI simply prevents actions taken within the 
-GUI from being sent to Juju, and is _not_ additional security 
-against the Juju API.
+!!! Note: 
+    read-only mode in the GUI simply prevents actions taken within the 
+    GUI from being sent to Juju, and is _not_ additional security 
+    against the Juju API.
 
 
 
