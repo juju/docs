@@ -230,7 +230,7 @@ bundles from the charm store into the blank canvas.
     <td width=400>
      <img src="./media/hadoop-icon-160.png" alt="icon" class="tableicon">
      <strong>Hadoop &reg;</strong><br>
-   p  Try one of the simple HDFS bundles or deploy a more complex
+     Try one of the simple HDFS bundles or deploy a more complex
 sentiment-analysis application to scan twitter streams for brands you are
 interested in.
     </td>
