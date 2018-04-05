@@ -26,7 +26,7 @@ Lists > Resources > Datacenters' from the hierarchical menu on the left. The
 values you need are listed in the 'Name' column, such as the 'dc0' and 'dc1'
 data centres shown here:
 
-![vSphere web client showing data centres](../media/config-vsphere-datacenters.png)
+![vSphere web client showing data centres](./media/config-vsphere-datacenters.png)
 
 With a **cloudname** of `myvscloud`, an **endpoint** of `178.18.42.10` and two
 data centres named 'dc0' and 'dc1' respectively, a basic configuration would

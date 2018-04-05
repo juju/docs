@@ -41,7 +41,7 @@ This visual representation of your charm deployment will help to solidify the
 configuration, deployment, and management of your application. Take the
 following example:
 
-![Charm Design Diagram](../media/vanilla-planning.png)
+![Charm Design Diagram](./media/vanilla-planning.png)
 
 Looking at this diagram we see the Vanilla charm with two units. The Vanilla
 application requires a relationship to a database using the “mysql” interface.
@@ -146,7 +146,7 @@ build: Processing layer: layer:apache-php
 build: Processing layer: .
 ```
 
-![Charm layer diagram](../media/vanilla-layers.png)
+![Charm layer diagram](./media/vanilla-layers.png)
 
 To inspect how the charm was assembled, there is a `charm layers` command that
 shows what file belongs to which layer. Change to the charm directory and view
