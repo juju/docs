@@ -62,11 +62,12 @@ def waiting_mysql(mysql):
     status_set('waiting', 'Waiting for MySQL')
 ```
 
-> It is important to note that the instructions for this particular interface
-are only applicable to this particular interface. Interfaces are unique to the
-author’s implementation, and any states set will vary from interface to
-interface. These states are documented in the interface layer repository
-README.md file.
+!!! Note:
+    It is important to note that the instructions for this particular interface
+    are only applicable to this particular interface. Interfaces are unique to the
+    author’s implementation, and any states set will vary from interface to
+    interface. These states are documented in the interface layer repository
+    README.md file.
 
 ## Hook event cycle
 
@@ -170,13 +171,13 @@ so the charm can react storage is attached and when it is detached.
 1. [name]-storage-attached
 1. [name]-storage-detached
 
-There is more information about [storage feature in the Juju
-documentation](./charms-storage.html).
+There is more information about the
+[storage feature in the Juju documentation](./charms-storage.html).
 
-While these concepts are important to understand how Juju works, [creating a
-charm in the reactive framework](./authors-charm-building.html) reduces the need
-to interact directly with the event model. We will preserve the install and
-config-changed hook(s) in most layers. The relation hooks are generated when
-using an interface layer, during the `charm build` process. The remainder of
-actions taken, will be directed with artificial states, set by the layers
-author.
+While these concepts are important to understand how Juju works,
+[creating a charm in the reactive framework](./developer-layers.html)
+reduces the need to interact directly with the event model. We will preserve
+the install and config-changed hook(s) in most layers. The relation hooks
+are generated when using an interface layer, during the `charm build` process.
+The remainder of actions taken will be directed with artificial states, set
+by the layer's author.

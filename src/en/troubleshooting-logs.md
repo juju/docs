@@ -1,19 +1,30 @@
 Title: Juju logs  
+TODO:  Remote logging: strongly consider adding a sub-page (rsyslog TLS tutorial)
+       Remote logging: need to state whether server-side and/or client-side auth is a requirement
 
 
 # Juju logs
 
-Logs in Juju are intended to be inspected with the `juju debug-log` command. This
-method provides logs on a per-model basis and is therefore more convenient than
-reading individual logs on multiple (Juju) machines directly on the file system.
-The latter can nonetheless be done in exceptional circumstances and some explanation
-is provided here.
+There are various logging resources available to the Juju operator. This page will
+explain these and show how to use them. It will cover:
 
-See [Juju high availability](./controllers-ha.html#ha-and-logging) when viewing logs
-in an HA context.
+ - [Model logs][#model-logs]
+ - [Remote logging][#remote-logging]
+ - [Audit logging][#audit-logging]
 
+## Model logs
 
-## Juju agents
+Model logs can be considered as Juju's "regular logs" and are intended to be
+inspected with the `juju debug-log` command. This method provides logs on a
+per-model basis and is therefore more convenient than reading individual logs
+on multiple (Juju) machines directly on the file system. The latter can
+nonetheless be done in exceptional circumstances and some explanation is
+provided here.
+
+See [Juju high availability](./controllers-ha.html#ha-and-logging) when viewing
+logs in an HA context.
+
+### Juju agents
 
 One of the roles of the *Juju agent*, 'jujud', is to perform logging. There is
 one agent for every Juju machine and unit. For instance, for a machine with an
@@ -30,8 +41,8 @@ drwxr-xr-x 2 root root 4.0K Apr 28 00:42 machine-2
 drwxr-xr-x 4 root root 4.0K Apr 28 00:42 unit-nfs2-0
 ```
 
-So there are 2 agents running on this Juju machine. One for the machine itself
-and one for a service unit.
+So there are two agents running on this Juju machine. One for the machine
+itself and one for a service unit.
 
 The contents of one of these directories
 
@@ -49,8 +60,7 @@ Consider keeping backups of these files, especially prior to upgrading the
 agents. See
 [Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software).
 
-
-## The debug-log command
+### The debug-log command
 
 The `juju debug-log` command shows the consolidated logs of all Juju agents
 (machines and units) running in a model. The `juju switch` command is used
@@ -77,7 +87,7 @@ to be interrupted with 'Ctrl-C' in order to regain the shell prompt.
 For complete syntax, see the [command reference page](./commands.html). The
 `juju help debug-log` command also provides reminders and more examples.
 
-### Examples:
+#### Examples:
 
 To begin with the last ten log messages:
 
@@ -103,14 +113,57 @@ To begin with the last twenty log messages for the 'lxd-pilot' model:
 juju debug-log -m lxd-pilot -n 20
 ```
 
-To begin with the last 500 lines. The 'grep' utility is used as a text filter:
+To begin with the last 500 lines. The `grep` utility is used as a text filter:
 
 ```bash
 juju debug-log -n 500 | grep amd64
 ```
 
+### Increase the logging level
 
-## Advanced filtering
+At times, it may help to increase the logging level when attempting to diagnose
+an issue.
+
+You can verify the current logging level with the `model-config`
+command:
+
+```bash
+juju model-config logging-config
+```
+
+Output will be similar to the following:
+
+```no-highlight
+<root>=WARNING; unit=INFO
+```
+
+Increasing the logging level will provide additional details. Logging levels,
+from most verbose to least verbose, are as follows:
+
+- TRACE
+- DEBUG
+- INFO
+- WARNING
+- ERROR
+
+When diagnosing an issue or gathering information for filing a bug, it's often
+useful to increase the log verbosity by moving to DEBUG or TRACE levels.
+
+To increase the logging level from our previous example, you would enter the
+following command:
+
+```bash
+juju model-config logging-config="<root>=DEBUG;unit=TRACE"
+```
+Once the issue has been diagnosed, or the logging information is collected,
+make sure the logging levels are reset so that you don't collect massive
+amounts of unnecessary data:
+
+```bash
+juju model-config logging-config="<root>=WARNING;unit=INFO"
+```
+
+### Advanced filtering
 
 A Juju log line is written in this format:
 
@@ -132,7 +185,7 @@ preceding higher level (less verbose). The '--level' option restricts messages
 to the specified log-level or greater. The levels from lowest to highest are
 TRACE, DEBUG, INFO, WARNING, and ERROR.
 
-### Examples:
+#### Examples:
 
 To begin with the last 1000 lines and exclude messages from machine 3:
 
@@ -147,7 +200,8 @@ machine in the entire log:
 juju debug-log --replay --include unit-mysql-0 --include machine-1
 ```
 
-!!! Note: The unit can also be written 'mysql/0' (as shown by `juju status`).
+!!! Note: 
+    The unit can also be written 'mysql/0' (as shown by `juju status`).
 
 To see all WARNING and ERROR messages in the entire log:
 
@@ -172,8 +226,7 @@ juju debug-log --lines 2000 \
 	--include-module juju.worker
 ```
 
-
-## Log files
+### Log files
 
 Log files are located on every machine Juju creates, including the controller.
 They reside under `/var/log/juju` and correspond to the machine and any units. 
@@ -191,9 +244,7 @@ Output:
 -rw------- 1 syslog syslog 345K Apr 28 16:58 unit-nfs2-0.log
 ```
 
-There is a special log file on each controller (`logsink.log`) that is used for
-the consolidated model messages used by `juju debug-log` (its contents get sent
-to the database):
+There is one extra log file on each controller: `logsink.log`:
 
 ```bash
 juju ssh -m controller 0 ls -lh /var/log/juju
@@ -206,10 +257,102 @@ Output:
 -rw------- 1 syslog syslog  85K Apr 28 17:03 machine-0.log
 ```
 
-Notice that the controller model was chosen with `juju ssh`. Also, a combination of
-commands `juju controllers` and `juju machines` yielded that the
-controller here has a machine id of '0' (typical).
+File `logsink.log` contains logs for all models managed by the controller. Its
+contents get sent to the database where it is consumed by the `debug-log`
+command.
 
-!!! Note: in a [High availability](./controllers-ha.html) scenario, file `logsink.log`
-is not guaranteed to contain all messages since agents have a choice of several
-controllers to send their logs to.
+!!! Note: 
+    In a [High availability][controllers-ha] scenario, `logsink.log` is not
+    guaranteed to contain all messages since agents have a choice of several
+    controllers to send their logs to. The `debug-log` command should be used
+    for accessing consolidated data across all controllers.
+
+## Remote logging
+
+On a per-model basis log messages can optionally be forwarded to a remote
+syslog server over a secure TLS connection.
+
+See [Rsyslog documentation][upstream-rsyslog-tls-tutorial] for help with
+security-related files (certificates, keys) and the configuration of the
+remote syslog server.
+
+### Configuring
+
+Remote logging is configured during the controller-creation step by supplying
+a YAML format configuration file:
+
+```bash
+juju bootstrap <cloud> --config logconfig.yaml
+```
+
+The contents of the YAML file is of the form:
+
+```no-highlight
+syslog-host: <host>:<port>
+syslog-ca-cert: |
+-----BEGIN CERTIFICATE-----
+ <cert-contents>
+-----END CERTIFICATE-----
+syslog-client-cert: |
+-----BEGIN CERTIFICATE-----
+ <cert-contents>
+-----END CERTIFICATE-----
+syslog-client-key: |
+-----BEGIN PRIVATE KEY-----
+ <cert-contents>
+-----END PRIVATE KEY-----
+```
+
+### Enabling
+
+To actually enable remote logging for a model a configuration key needs to be
+set for that model:
+
+`juju model-config -m <model> logforward-enabled=True`
+
+An initial 100 (maximum) existing log lines will be forwarded.
+
+See [Configuring models][models-config] for extra help on configuring a model.
+
+Note that it is possible to configure *and* enable forwarding on *all* the
+controller's models in one step:
+
+`juju bootstrap <cloud> --config logforward-enabled=True --config logconfig.yaml`
+
+## Audit logging
+
+Juju audit logging provides a chronological account of all events by capturing
+invoked user commands. These logs reside on the controller involved in the
+transmission of commands affecting the Juju client, Juju machines, and the
+controller itself.
+
+The audit log filename is `/var/log/juju/audit.log` and contains records which
+are either:
+
+ - a *Conversation*, a collection of API methods associated with a single
+   top-level CLI command
+ - a *Request* , a single API method
+ - a *ResponseErrors*, errors resulting from an API method
+
+Information can be filtered out of the audit log to prevent its file(s) from
+growing without bounds and making it difficult to read. See
+[Excluding information from the audit log][excluding-information-log-audit].
+
+The log is typically viewed by connecting to the controller over SSH and
+looking at the file:
+
+```bash
+juju ssh -m controller 0
+more /var/log/juju/audit.log
+```
+
+
+<!-- LINKS -->
+
+[#model-logs]: #model-logs
+[#remote-logging]: #remote-logging
+[#audit-logging]: #audit-logging
+[controllers-ha]: ./controllers-ha.html 
+[excluding-information-log-audit]: ./controllers-config.html#excluding-information-from-the-audit-log
+[upstream-rsyslog-tls-tutorial]: http://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html
+[models-config]: ./models-config.html

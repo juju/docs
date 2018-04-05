@@ -125,12 +125,20 @@ resources:
 
 ## Payloads
 
-You can use the `payloads` section of metadata.yaml to help the user of a charm
-better understand the purpose of payloads such as LXC, KVM and docker. This is
-especially useful in large and complex deployments.
+Payloads provide a means for the charm author to get information from a
+deployed charm. This is especially useful in large and complex deployments. For
+instance, the author may want to check the status of some element of the
+deployment such as a Docker container.
 
-Payloads are defined by creating a class for the payload, such as `monitoring`
-or `kvm- guest`, and then assigning a type:
+Payloads are defined in the `payloads` section of `metadata.yaml` by assigning
+a class and type. A class defines the name of the payload and the type
+describes the nature of the payload. Both are author-defined and are not
+validated by Juju.
+
+The most common types of payload are based on Docker, KVM, and LXD.
+
+As an example, below, the following class/type pairs are defined:
+'monitoring/docker', 'kvm- guest/kvm', and 'lxd-container/lxd':
 
 ```yaml
 payloads:
@@ -138,10 +146,12 @@ payloads:
         type: docker
     kvm-guest:
         type: kvm
+    lxd-container:
+        type: lxd
 ```
 
-Payloads can be viewed using [juju list-payloads][list-payloads] and managed from
-the charm hook using the following commands:
+Payloads can be viewed using [juju list-payloads][list-payloads] and managed
+from the charm hook using the following commands:
 
 - payload-register
 - payload-unregister
@@ -152,10 +162,10 @@ payload commands.
 
 ## Extra-bindings
 
-`extra-bindings` represents an extra bindable endpoint that is not a relation.
-These are useful when you want to have Juju provide distinct addresses for an
-application on one or more spaces. For example, adding this section to a YAML
-file for an application called "foo":
+`extra-bindings` represents an extra bindable endpoint that is not used with
+relations. These are useful when you want to have Juju provide distinct
+addresses for an application on one or more spaces. For example, adding this
+section to a YAML file for an application called "foo":
 
 ```yaml
 extra-bindings:
@@ -179,12 +189,18 @@ endpoint name must be left out (i.e. "foo": &lt;anything&gt; is invalid).
 
 Other available fields are:
 
-  - `series` is a list of versions of Ubuntu this charm is compatible with.
+  - `series` is a list of series that the charm supports.
+     - It can include code names of Ubuntu releases such as 'trusty' or
+       'xenial'.
+     - It can also include code names for non-Ubuntu series such as 'centos7'.
   - `terms` lists the terms the user must agree to before using the charm.
   - `min-juju-version` the minimum version of Juju this charm is compatible with.
 
 Other field names should be considered to be reserved; please don't use any not
 listed above to avoid issues with future versions of Juju.
+
+
+<!-- LINKS -->
 
 [hook-payloads]:./reference-hook-tools.html#payload-status-set
 [list-payloads]:./commands.html#list-payloads

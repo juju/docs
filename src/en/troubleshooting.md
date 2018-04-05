@@ -1,5 +1,6 @@
 Title: Troubleshooting
 TODO: Logs from the machines/applications
+      Review required
 
 # Troubleshooting
 
@@ -241,71 +242,33 @@ available through the `juju debug-log` command. This allows you to see
 everything going on and lets you delve into the details by using advanced
 filtering techniques, just as you might with any log file. 
 
-See [Juju log][logs] documentation for additional details on the logs Juju
-keeps and how best to access the information they contain.
-
-### Increase the logging level
-
-At times, it may help to increase the logging level when attempting to diagnose
-an issue.
-
-You can verify the current logging level with the `model-config`
-command:
-
-```bash
-juju model-config logging-config
-```
-
-Output will be similar to the following:
-
-```no-highlight
-<root>=WARNING; unit=INFO
-```
-
-Increasing the logging level will provide additional details. Logging levels,
-from most verbose to least verbose, are as follows:
-
-- TRACE
-- DEBUG
-- INFO
-- WARNING
-- ERROR
-
-When diagnosing an issue or gathering information for filing a bug, it's often
-useful to increase the log verbosity by moving to DEBUG or TRACE levels.
-
-To increase the logging level from our previous example, you would enter the
-following command:
-
-```bash
-juju model-config logging-config="<root>=DEBUG;unit=TRACE"
-```
-Once the issue has been diagnosed, or the logging information is collected,
-make sure the logging levels are reset so that you don't collect massive
-amounts of unnecessary data:
-
-```bash
-juju model-config logging-config="<root>=WARNING;unit=INFO"
-```
+See the [Juju logs][logs] page for full information on the different types of
+logs Juju keeps and how best to access them.
 
 ## Additional troubleshooting topics
 
 After identifying the source of a problem, take a look at our further
 troubleshooting documentation for help on finding a solution:
 
-- [Troubleshooting model upgrade][upgrade] includes help for upgrading Juju across a model
-- [Cloud specific troubleshooting][clouds] covers issues with specific clouds 
+ - [Troubleshooting model upgrades][troubleshooting-upgrades] includes
+   help for upgrading Juju across a model
+ - [Troubleshooting clouds][troubleshooting-clouds] covers issues with specific
+   clouds 
+ - [Troubleshooting removals][troubleshooting-removals] provides help when you
+   cannot remove something cleanly
 
 Alternatively, if your issue is not addressed here, get in touch via our
 [Contacts page][contactus] or consider the 
 [Juju section on askubuntu.com](http://askubuntu.com/search?q=juju).
+
 
 <!-- LINKS -->
 
 [modelsupgrade]: ./models-upgrade.html "Upgrading Juju software"
 [charmstore]: https://jujucharms.com/
 [logs]: ./troubleshooting-logs.html
-[upgrade]: ./troubleshooting-upgrade.html
 [tools]: ./troubleshooting-tools.html
-[clouds]: ./troubleshooting-clouds.html
+[troubleshooting-upgrades]: ./troubleshooting-upgrade.html
+[troubleshooting-clouds]: ./troubleshooting-clouds.html
+[troubleshooting-removals]: ./troubleshooting-removals.html
 [contactus]: ./contact-us.html

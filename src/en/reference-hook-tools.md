@@ -1,4 +1,5 @@
 Title: Hook tools
+TODO:  rationalize with authors-hook-environment.md and authors-charm-writing.md
 
 # Hook tools
 
@@ -17,9 +18,10 @@ details on how to use payloads within your charms.
 Many of the tools produce text based output, and those that do accept
 a `--format` flag which can be set to json or yaml as desired.
 
-!!! Note: You can view a detailed listing of what each command listed below does
-on your client with `juju help-tool {command}`. Or for more detailed help on
-individual commands run the command with the -h flag.
+!!! Note: 
+    You can view a detailed listing of what each command listed below does
+    on your client with `juju help-tool {command}`. Or for more detailed help on
+    individual commands run the command with the -h flag.
 
 ## action-fail
 
@@ -332,14 +334,18 @@ Set-LeaderData @{"cluster-leader-address"="10.0.0.123"}
 
 
 ## network-get
-`network-get` returns the network config for a given binding name. The only
-supported flag currently is --primary-address, which is required and returns
-the IP address the local unit should advertise to its peers as its endpoint.
 
-bash:
-```bash
-network-get options <binding-name> --primary-address
-```
+`network-get` discovers important network related information.
+
+By default it lists three pieces of address information:
+
+- binding address(es)
+- ingress address(es)
+- egress subnets
+
+Flags may be used to request only a specific address value.
+
+See [Network primitives][dev-network-primitives] for in-depth coverage.
 
 
 ## open-port
@@ -378,9 +384,10 @@ charm**. It does not, at the moment, include ports which may be opened by other
 charms co-hosted on the same machine
 [lp#1427770](https://bugs.launchpad.net/juju-core/+bug/1427770).
 
-!!! Note: opening ports is transactional (i.e. will take place on successfully
-exiting the current hook), and therefore `opened-ports` will not return any
-values for pending `open-port` operations run from within the same hook.
+!!! Note: 
+    Opening ports is transactional (i.e. will take place on successfully
+    exiting the current hook), and therefore `opened-ports` will not return any
+    values for pending `open-port` operations run from within the same hook.
 
 python:
 ```python
@@ -833,6 +840,15 @@ storage-list
 argument, which must be `private-address` or `public-address`. It is not
 affected by context.
 
+Note that if a unit has been deployed with `--bind space` then the address 
+returned from `unit-get private-address` will get the address from this
+space, not the 'default' space.
+
+!!! Warning:
+    The call of `unit-get` in a networking context is deprecated and should
+    no longer be used. It is replaced by the `network-get` hook tool. See
+    [Network primitives][dev-network-primitives] for details.
+
 python:
 ```python
 from charmhelpers.core.hookenv import unit_get
@@ -849,3 +865,4 @@ Import-Module CharmHelpers
 Get-JujuUnit -Attr "public-address"
 ```
 [payloads]:./authors-charm-metadata.html#payloads
+[dev-network-primitives]: ./developer-network-primitives.html

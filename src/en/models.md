@@ -1,7 +1,5 @@
 Title: Juju models
-TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the
-      access and secret keys need to be provided." I tested ec2 and did not
-      need to do this. OpenStack?
+TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the access and secret keys need to be provided." I tested ec2 and did not need to do this. OpenStack?
 
 
 # Juju models
@@ -13,10 +11,10 @@ provisioned along with it. These initial models are named 'controller' and
 intended for general workloads. The 'default' model, however, is ready for
 immediate use. Models can be added easily at any time.
 
-
 ## Model management
 
 Common model management tasks are summarized below.
+
 
 
 ^# View status
@@ -94,13 +92,28 @@ Common model management tasks are summarized below.
    
    Use the `juju switch` command to go from one model to another:
    
-   `juju switch [<controller>|<model>|<controller>:<model>]`
+   `juju switch [<controller or model>|<:model>|<controller>:<model>|<controller:>]`
    
    Running the command with no arguments will return the currently active 
    controller and model:
      
          juju switch
    
+   To change to a model:
+   
+   `juju switch foo`  
+   Selects the last used model in controller 'foo' (if the latter exists),
+   otherwise model 'foo' in the current controller.
+
+   `juju switch :foo`  
+   Selects model 'foo' in the current controller.
+
+   `juju switch foo:bar`  
+   Selects model 'bar' in controller 'foo'.
+   
+   `juju switch foo:`  
+   Selects the last used model in controller 'foo'
+
    For complete explanation and syntax, see the
    [command reference page](./commands.html#switch) or the `juju help switch`
    command.
@@ -122,14 +135,18 @@ Common model management tasks are summarized below.
 
 ^# Provide SSH access
    
-   Use the `juju add-ssh-key` command to provide SSH access to all machines,
-   present and future, in a model:
+   Use the `juju add-ssh-key` and `juju import-ssh-key` commands to provide SSH
+   access to all machines, present and future, in a model:
    
    `juju add-ssh-key <ssh-key>`
+
+   OR
+
+   `juju import-ssh-key <lp|gh>:<user identity>`
    
    For complete explanation and syntax, see the
-   [command reference page](./commands.html#add-ssh-key) or the `juju help
-   add-ssh-key` command.
+   [command reference page](./commands.html#add-ssh-key) or the
+   `juju help add-ssh-key` or the `juju help import-ssh-key` commands.
    
 
 
@@ -183,3 +200,14 @@ Common model management tasks are summarized below.
    to the Juju software package installed on a client system.
 
    This is a complex subject. See [Juju upgrades](./models-upgrade.html).
+
+
+
+^# Cross model relations
+   
+   Traditionally, when adding a relation between two applications (see
+   [Charm relations](./charms-relations.html)) the applications reside within
+   the same model and controller. It is possible, however, to break out of this
+   paradigm by employing *cross model relations*.
+
+   This is a complex subject. See [Cross model relations](./models-cmr.html).

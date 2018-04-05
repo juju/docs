@@ -4,7 +4,7 @@
     <li class="section"><h4 class="header toggle-target">Quick Guides</h4>
         <ul>
         <li class="section"><a class="header" href="getting-started.html">Get started</a></li>
-        <li><a href="whats-new.html">What's new in 2.2</a></li>
+        <li><a href="whats-new.html">What's new in 2.3</a></li>
         <li><a href="tut-lxd.html">Local Juju with LXD cloud</a></li>
         <li><a href="tut-google.html">Controllers and Models</a></li>
         <li><a href="tut-users.html">Sharing and Users</a></li>
@@ -12,6 +12,7 @@
     </li>
     <li class="section"><h4 class="header toggle-target">User Guide</h4>
         <ul>
+	<li><a href="juju-concepts.html">Concepts and terms</a></li>
         <li class="section"><a class="header" href="clouds.html">Clouds</a>
             <ul class="sub">
                 <li><a href="credentials.html">Cloud credentials</a></li>
@@ -45,13 +46,17 @@
                 <li><a href="charms-relations.html">Application Relations</a></li>
                 <li><a href="charms-exposing.html">Exposing applications</a></li>
                 <li><a href="charms-scaling.html">Scaling applications</a></li>
+                <li><a href="charms-upgrading.html">Upgrading applications</a></li>
                 <li><a href="charms-destroy.html">Removing applications &amp; Units</a></li>
                 <li><a href="charms-service-groups.html">Groups of applications</a></li>
                 <li><a href="charms-ha.html">Charm high availability</a></li>
                 <li><a href="charms-working-with-units.html">Working with Units</a></li>
                 <li><a href="actions.html">Working with Actions</a></li>
+                <li><a href="charms-resources.html">Working with Resources</a></li>
                 <li><a href="charms-storage.html">Using storage</a></li>
                 <li><a href="charms-metrics.html">Viewing utilization with metrics</a></li>
+                <li><a href="charms-fan.html">Fan container networking</a></li>
+                <li><a href="charms-offline.html">Working offline</a></li>
             </ul>
         </li>
         <li><a href="charms-bundles.html">Charm bundles</a></li>
@@ -77,6 +82,7 @@
             <ul class="sub">
                 <li><a href="howto-prometheus.html">Configure metrics gathering with Prometheus</a></li>
                 <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+                <li><a href="howto-updateseries.html">Update the series of a juju controller or workload</a></li>
             </ul>
         </li>
         <li><a href="troubleshooting.html">Troubleshooting</a></li>
@@ -91,6 +97,7 @@
                 <li><a href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
                 <li><a href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
                 <li><a href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
+                <li><a href="developer-getting-started.html#publishing-your-charm">Publishing your charm</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="developer-event-cycle.html">Event Cycle</a>
@@ -112,14 +119,16 @@
                 <li><a href="developer-layers-interfaces.html#writing-an-interface-layer">Writing an Interface</a></li>
             </ul>
         </li>
+        <li><a href="developer-upgrade-charm.html">Upgrading</a></li>
         <li><a href="developer-terms.html">Juju Terms</a></li>
         <li><a href="developer-metrics.html">Juju Metrics</a></li>
         <li><a href="developer-resources.html">Juju Resources</a></li>
+        <li><a href="developer-network-primitives.html">Network Primitives</a></li>
         <li class="section"><a class="header" href="developer-leadership.html">Implementing Leadership</a>
             <ul class="sub">
                 <li><a href="developer-leadership.html#leadership-hooks">Leadership Hooks</a></li>
                 <li><a href="developer-leadership.html#leadership-tools">Leadership Tools</a></li>
-                <li><a href="developer-leadership.html#leadership-howtos">Leadership Howtos</a></li>
+                <li><a href="developer-leadership-howtos.html">Leadership Howtos</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="developer-actions.html">Implementing Actions</a>
@@ -161,19 +170,15 @@
                 <li><a href="authors-relations.html">Implementing relations</a></li>
                 <li><a href="authors-charm-leadership.html">Charm leadership</a></li>
                 <li><a href="authors-hook-errors.html">Hook Errors</a></li>
-                <li><a href="authors-hook-debug.html">Hook Debugging</a></li>
-                <li><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
                 <li><a
                     href="authors-subordinate-applications.html">Subordinate applications</a></li>
                 <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
-                <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
             </ul>
         </li>
         <li class="section"><a class="header" href="authors-charm-store.html">The Juju Charm Store</a>
             <ul class="sub">
                 <li><a href="authors-charm-store.html#submitting-a-new-charm">Submit a charm</a></li>
                 <li><a href="authors-charm-policy.html">Charm store policy</a></li>
-                <li><a href="charm-review-process.html">Charm review process</a></li>
                 <li><a href="authors-charm-best-practice.html">Best practices</a></li>
                 <li><a href="authors-charm-icon.html">Charm Icons</a></li>
             </ul>
@@ -186,6 +191,7 @@
         <li><a href="tools-charm-tools.html">Charm Tools</a></li>
         <li><a href="tools-charm-helpers.html">Charm Helpers</a></li>
         <li><a href="tools-amulet.html">Amulet</a></li>
+        <li><a href="tools-mojo.html">Mojo</a></li>
     </ul>
     </li>
 <!-- SECTION -->
@@ -198,12 +204,20 @@
         <li><a href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
         <li><a href="reference-environment-variables.html">Juju environment variables</a></li>
         <li><a href="reference-hook-tools.html">Juju Hook Tools</a></li>
-        <li><a href="reference-layer-yaml.html">Layer.yaml</a></li>
+        <li><a href="authors-charm-metadata.html">metadata.yaml</a></li>
+        <li class="section"><a class="header" href="https://charmsreactive.readthedocs.io">Layers and charms.reactive</a>
+            <ul class="sub">
+                <li><a href="https://charmsreactive.readthedocs.io/en/latest/charms.reactive.decorators.html">Decorators</a></li>
+                <li><a href="https://charmsreactive.readthedocs.io/en/latest/charms.reactive.flags.html">Flags</a></li>
+                <li><a href="https://charmsreactive.readthedocs.io/en/latest/triggers.html">Triggers</a></li>
+                <li><a href="https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations.html">Relations</a></li>
+                <li><a href="reference-layer-yaml.html">Layer.yaml</a></li>
+            </ul>
+        </li>
         <li><a href="http://godoc.org/github.com/juju/juju/api">API docs</a></li>
         <li><a href="reference-release-notes.html">Release notes</a></li>
         <li><a href="reference-status.html">Status values</a></li>
         <li><a href="reference-numbering.html">Machine/unit numbering</a></li>
-        <li><a href="juju-concepts.html">Glossary/Concepts</a></li>
         <li><a href="reference-reviewers.html">Charm Review Criteria</a></li>
     </ul>
    </li>

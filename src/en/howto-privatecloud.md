@@ -89,11 +89,12 @@ e9df831d-9632-4e06-bd21-d047e4c5ef4e xenial active
 Take a note of the image IDs for the images you want added to Simplestreams.
 These will be used in the next step.
 
-!!! Note: If you have images for multiple different series of Ubuntu, make sure
-you keep track of which series name matches which image ID.  The value
-$IMAGE_ID, used below, will apply to the image ID of the image for the
-particular series you are specifying and $OS_SERIES will be the series name
-("trusty", "xenial", etc.).
+!!! Note: 
+    If you have images for multiple different series of Ubuntu, make sure
+    you keep track of which series name matches which image ID.  The value
+    $IMAGE_ID, used below, will apply to the image ID of the image for the
+    particular series you are specifying and $OS_SERIES will be the series name
+    ("trusty", "xenial", etc.).
 
 We can now use Juju to generate the metadata:
 
@@ -107,6 +108,12 @@ Replace these values with your own in the above command:
   - **$OS_SERIES** - The appropriate series this image relates to (e.g. Xenial).
   - **$REGION** - The region name of the cloud.
   - **$KEYSTONE_IP** - The address of the cloud's keystone server.
+
+!!! Note:
+    You can also specify, via the `--stream` option, an image stream (see
+    [Image streams][anchor__image-streams]) that is not 'released' (i.e.
+    'daily'). However, doing so will require you to specify this stream
+    explicitly when using this metadata to create any subsequent controllers.
 
 If you have images for multiple series of Ubuntu, run this command again for
 each series substituting **$OS_SERIES** with the series name and **$IMAGE_ID** with
@@ -259,8 +266,9 @@ There are two URLs for the Object Store is listed.  We will refer to the
 `publicurl` field above as **$SWIFT_PUBLIC_URL** in the following commands
 and the `internalurl` field as **$SWIFT_INTERNAL_URL**.
 
-!!! Note: you can verify the url before bootstrap with
-wget $SWIFT_PUBLIC_URL/simplestreams/images/streams/v1/index.json
+!!! Note: 
+    You can verify the url before bootstrap with
+    `wget $SWIFT_PUBLIC_URL/simplestreams/images/streams/v1/index.json`
 
 Enter the following command to register the endpoint with the Simplestreams
 service:
@@ -271,8 +279,9 @@ openstack endpoint create --region $REGION \
    --internalurl $SWIFT_INTERNAL_URL/simplestreams/images product-streams
 ```
 
-!!! Note: juju will automatically look for a product-streams service during
-bootstrap to use for image streams.
+!!! Note: 
+    Juju will automatically look for a product-streams service during
+    bootstrap to use for image streams.
 
 ## Using the Glance Simplestreams Sync charm to configure image streams.
 
@@ -283,8 +292,9 @@ provide customizeable syncing for automatic image updates.
 
  - OpenStack deployment by Juju
 
-!!! Note: You must have permissions to deploy charms in the juju model running
-OpenStack to utilize this method for image metatdata management.
+!!! Note: 
+    You must have permissions to deploy charms in the juju model running
+    OpenStack to utilize this method for image metatdata management.
 
 
 ### Deploying the Glance simplestreams charm to your OpenStack Cloud
@@ -295,12 +305,26 @@ It is recommended to set the charm's configuration variable use_swift to true
 as juju will automatically look for a product-streams service during bootstrap
 to use for image streams.
 
-!!! Caveat: As of 6 June 2017, keystone v3 is not supported with this charm.
-Check [bug 1611987][lp1611987] for resolution.
+!!! Note: 
+    As of 6 June 2017, keystone v3 is not supported with this charm.
+    Check [bug 1611987][lp1611987] for resolution.
 
+
+!!! Note:
+    An image stream will need to be explicitly stated, via the 'image-stream'
+    model config option, if a non-default image stream was chosen during the
+    metadata-creation step above.
+
+See [Creating a controller][controllers-creating] for details on creating a
+controller.
+
+
+<!-- LINKS -->
 [bootstrap]: ./help-openstack.html#bootstrap-with-juju
 [glance-simplestreams-sync]: https://jujucharms.com/glance-simplestreams-sync/
 [gsscharm]: #using-the-glance-simplestreams-sync-charm-to-configure-image-streams.
 [lp1611987]: https://bugs.launchpad.net/charm-glance-simplestreams-sync/+bug/1611987
 [general]: #create-image-metadata-with-juju
 [object-store]:#upload-the-simplestreams-metadata-to-an-object-store
+[image-streams]: #image-streams
+[controllers-creating]: ./controllers-creating.html

@@ -1,4 +1,5 @@
-Title: Managing relationships  
+Title: Managing relationships
+TODO:  Critical: review required
 
 # Managing relationships
 
@@ -48,8 +49,8 @@ In some cases, there may be ambiguity about how the applications should connect.
 For example, in the case of specifying a database for the Mediawiki charm.
 
 ```bash
-juju add-relation mediawiki mysql
-error: ambiguous relation: "mediawiki mysql" could refer to 
+juju add-relation mysql mediawiki 
+error: ambiguous relation: "mediawiki mysql" could refer to
   "mediawiki:db mysql:db"; "mediawiki:slave mysql:db"
 ```
 
@@ -59,50 +60,72 @@ backend database for mediawiki ('db' relation), so this is what we need to
 enter:
 
 ```bash
-juju add-relation mediawiki:db mysql
+juju add-relation mysql mediawiki:db
 ```
 
-We can check the output from `juju status` to make sure the correct relationship
-has been established:
+<!-- REMOVED FROM PR 2248, TO BE REVIEWED LATER
 
-<!-- JUJUVERSION: 2.0.0-xenial-amd64 -->
+The solution is to be explicit when referring to an *endpoint*, where the
+latter has a format of `<application>:<application endpoint>`. In this case, it
+is 'db' for both applications. However, it is not necessary to specify the
+mysql endpoint because only the mediawiki endpoint is ambiguous (according to
+the error message). Therefore, the command becomes:
+
+```bash
+juju add-relation mysql mediawiki:db
+```
+
+!!! Note:
+    An application endpoint can be discovered by looking at the metadata of the
+    corresponding charm. This can be done by examining the charm on the
+    [Charm Store][charm-store] or by querying the Store with the
+    [Charm Tools][charm-tools] (using a command like
+    `charm show <application> charm-metadata`).
+
+-->
+
+We can check the output from `juju status` to make sure the correct
+relationship has been established:
+
+<!-- JUJUVERSION: 2.3.1-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
 ```no-highlight
-Model    Controller  Cloud/Region         Version
-default  lxd-test    localhost/localhost  2.0.0
+Model    Controller  Cloud/Region         Version  SLA
+default  lxd         localhost/localhost  2.3.1    unsupported
 
-App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
-mediawiki           unknown      1  mediawiki  jujucharms    5  ubuntu
-mysql               unknown      1  mysql      jujucharms   55  ubuntu
+App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
+mediawiki  1.19.14  active      1  mediawiki  jujucharms   19  ubuntu  
+mysql      5.7.20   active      1  mysql      jujucharms   58  ubuntu  
 
-Unit          Workload  Agent      Machine  Public address  Ports     Message
-mediawiki/0*  unknown   executing  0        10.154.173.35   80/tcp
-mysql/0*      unknown   idle       1        10.154.173.232  3306/tcp
+Unit          Workload  Agent  Machine  Public address  Ports     Message
+mediawiki/0*  active    idle   2        10.55.126.152   80/tcp    Ready
+mysql/0*      active    idle   1        10.55.126.253   3306/tcp  Ready
 
-Machine  State    DNS             Inst id        Series  AZ
-0        started  10.154.173.35   juju-4a3f2a-0  trusty
-1        started  10.154.173.232  juju-4a3f2a-1  trusty
+Machine  State    DNS            Inst id        Series  AZ  Message
+1        started  10.55.126.253  juju-d4f415-1  xenial      Running
+2        started  10.55.126.152  juju-d4f415-2  trusty      Running
 
-Relation  Provides   Consumes  Type
-db        mediawiki  mysql     regular
-cluster   mysql      mysql     peer
-
+Relation provider  Requirer       Interface  Type     Message
+mysql:cluster      mysql:cluster  mysql-ha   peer     
+mysql:db           mediawiki:db   mysql      regular
 ```
+
 The final section of the status output shows all current established relations.
 
 ## Removing relations
 
-There are times when a relationship just isn't working and it is time to move
-on. Fortunately, it is a simple single-line command to break off these
-relationships:
+There are times when a relation just isn't working and it is time to move on.
+See [Removing Juju objects][charms-destroy] for how to do this.
 
-```bash
-juju remove-relation mediawiki mysql
-```
+## Cross model relations
 
-In cases where there is more than one relation between the two applications, it
-is necessary to specify the interface at least once:
-  
-```bash
-juju remove-relation mediawiki mysql:db
-```
+Relations can also work across models, even across multiple controllers. See
+[Cross model relations][models-cmr] for more information.
+
+
+<!-- LINKS -->
+
+[models-cmr]: ./models-cmr.html
+[charm-tools]: ./tools-charm-tools.html
+[charm-store]:  https://jujucharms.com
+[charms-destroy]: ./charms-destroy.html#removing-relations

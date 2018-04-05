@@ -7,7 +7,7 @@ Juju charms can describe *actions* that users can take on deployed applications.
 Actions are scripts that can be triggered on a unit via the command line.
 Parameters for an action are passed as a map, either defined in a YAML file
 or given through the UI, and are validated against the schema defined in
-actions.yaml. See [Actions for the charm author](authors-charm-actions.html) for more information.
+actions.yaml. See [Actions for the charm author][charmactions] for more information.
 
 The following commands are specified for dealing with actions:
 
@@ -51,8 +51,8 @@ remove-user       Remove a user.
 To show the full schema for all the actions on a service, append the `--schema`
 argument to the `actions` command. 
 
-For example, here's the beginning of the output from `juju actions git
---schema --format yaml`:
+For example, here's the beginning of the output from 
+`juju actions git --schema --format yaml`:
 
 ```bash
 add-repo:
@@ -69,16 +69,17 @@ add-repo:
 ...
 ```
 
-!!! Note: that the full schema is under the `properties` key of the root Action.
-Juju Actions rely on [JSON-Schema](http://json-schema.org) for validation.
-The top-level keys shown for the Action (`description` and `properties`) may
-include future additions to the feature.
+!!! Note: 
+    the full schema is under the `properties` key of the root Action.  Juju
+    Actions rely on [JSON-Schema][jsonschema] for validation.  The
+    top-level keys shown for the Action (`description` and `properties`) may
+    include future additions to the feature.
 
 ### `juju run-action`
 
-Trigger an action. This command takes the unit as an argument and returns an ID
-for the action. The ID can be used with `juju show-action-output <ID>` or 
-`juju show-action-status <ID>`.
+Trigger an action. This command takes a unit (or multiple units) as an argument
+and returns an ID for the action. The ID can be used with `juju
+show-action-output <ID>` or `juju show-action-status <ID>`.
 
 If an action requires parameters, these can be passed directly. For example, we
 could create a new 'git' repository by triggering the 'add-repo' action and
@@ -94,6 +95,13 @@ This will return the ID for the new action:
 Action queued with id: 3a7cc626-4c4c-4f00-820f-f881b79586d10
 ```
 
+As mentioned, this command can be applied to more than one unit (of the same
+application). So if there were two git units you can also do:
+
+```bash
+juju run-action git/0 git/1 add-repo repo=myproject
+```
+
 When running short-lived actions from the command line, it is more convenient to
 add the `--wait` option to this command. This causes the Juju client to wait for
 the action to run, and then return the results and other information in YAML
@@ -102,7 +110,7 @@ format.
 For example, running the command:
 
 ```bash
-juju run-action git/0 list-repo --wait
+juju run-action git/0 list-repos --wait
 ```
 
 Will return something like:
@@ -124,14 +132,14 @@ This avoids having to run a separate command to see the results of the action
 was returned). 
 
 For actions which may take longer to return, it is also possible to specify a 
-'timeout' value, expressed in hours(h), minutes(m), seconds(s), milliseceonds(ms)
+'timeout' value, expressed in hours(h), minutes(m), seconds(s), milliseconds(ms)
 or nanoseconds(ns). In this case, if the action has completed before the 
 specified period is up, it will return the results as before. If the action has
 not completed, the command will simply return the id and status, enabling the
 user to continue issuing commands. E.g.:
 
 ```bash
-juju run-action git/0 list-repo --wait=10ns
+juju run-action git/0 list-repos --wait=10ns
 ```
 Ten nanoseconds isn't much time to get anything done, so in this case the output
 will be similar to:
@@ -146,7 +154,7 @@ timing:
 You can also set parameters indirectly via a YAML file, although you can
 override the parameters within the file by providing them directly.
 
-*Example params.yml:*
+*Example params.yaml:*
 ```yaml
 repo: myproject
 sure: no
@@ -227,21 +235,33 @@ actions:
   unit: git/0
 ```
 
+There are 5 different values for the status of an action:
+
+- **pending**; the default status when an action is first queued.
+- **running**; the action is currently running.
+- **completed**; the action ran to completion as intended.
+- **failed**; the action did not complete successfully.
+- **cancelled**; the action was cancelled before being run.
+
 ### Debugging actions
 
 To debug actions, use the `debug-hooks` command, like this:
- +
- +```bash
- +juju debug-hooks <service/unit> [action-name action-name2 ...]
- +```
- +
- +For example, if you want to check the `add-repo` action of a the `git` charm,
- +use:
- +
- +```bash
- +juju debug-hooks git/0 add-repo
- +```
- +
- +Learn more about debugging Juju charms in [Debugging hooks][devdebug].
+ 
+```bash
+juju debug-hooks <service/unit> [action-name action-name2 ...]
+```
+ 
+For example, if you want to check the `add-repo` action of the `git` charm,
+use:
+ 
+```bash
+juju debug-hooks git/0 add-repo
+```
+ 
+Learn more about debugging Juju charms in [Debugging hooks][devdebug].
 
+<!-- LINKS -->
+
+[charmactions]: ./authors-charm-actions.html
+[jsonschema]: http://json-schema.org
 [devdebug]: ./developer-debugging.html

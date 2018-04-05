@@ -3,12 +3,13 @@ Title: Writing charms using storage
 # Writing charms that use storage
 
 The storage feature can be implemented in any charm running on Juju version
-1.25 or later. For applications that can take advantage of block storage or other
-types of storage there are two additional storage hooks for the code to react
-to storage changes.
+1.25 or later. For applications that can take advantage of block storage or
+other types of storage there are two additional storage hooks for the code to
+react to storage changes.
 
-If you are interested in information of how to deploy charms that use the
-storage feature read the [Using Charms](./charms-storage.html) document.
+If you are looking for information on the various storage provider types or how
+to deploy charms that use storage features see
+[Using Juju storage](./charms-storage.html).
 
 ## Adding storage
 
@@ -123,19 +124,16 @@ charm, described below
     the number of storage instances to add; by default it will add a
     single instance.
 
+### Persistent storage
+
+Some providers have the option to attach and detach storage from the
+application that is consuming it. This means that even after applications have
+been removed, the storage and its contents may still exist in your cloud. This
+can be useful for backup, recovery, or transport purposes. Storage is now
+destroyed only when the model is destroyed or when the storage is manually
+removed.
+
 ### Future work
-
-#### Persistent storage / detachment / reattachment
-
-Some providers have the option to detach storage from the lifespan of the
-instance(s) which created/used it. This means that even after applications have
-been removed, the storage and its contents still exist in your cloud, which may
-be useful for backup, recovery or transport purposes.
-
-For now, storage is always bound to a machine or unit, depending on how it is
-created. In the future, we will provide an interface for unbinding storage from
-the machine or unit, so that it is destroyed only when the model is
-destroyed. This will make it possible to detach/reattach storage as desired.
 
 #### Shared storage
 
@@ -143,9 +141,3 @@ Some providers, typically network filesystems, permit attaching storage to
 multiple machines. We intend to support multiple attachment within Juju. Shared
 storage will be assigned to a application, and each unit of the application will
 attach to the same shared storage instance.
-
-### More information
-
-If you are interested in more information on provider types or how to deploy a
-charm that uses the storage feature read
-[using Juju storage](./charms-storage.html).

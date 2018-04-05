@@ -15,6 +15,16 @@ Use header tags so we can link to these variables individually.
 These variables are available on the juju client in order to change its default
 behavior.
 
+#### GOCOOKIES
+
+The default location of the Go cookies file is `~/.go-cookies`. This
+variable can change that.
+
+Example:
+
+```no-highlight
+GOCOOKIES=/var/lib/landscape/juju-homes/1/.go-cookies
+```
 
 #### JUJU_DATA
 
@@ -35,19 +45,14 @@ where Juju kept configuration and other data.
 JUJU_HOME=~/.juju
 ```
 
-#### JUJU_REPOSITORY
+#### JUJU_REPOSITORY (Deprecated)
 
-This allows you to set the repository that Juju looks for charms in. This can
-also be done by passing `--repository=/path/to/charms` when running the command
-`juju deploy`.
+For versions prior to 2.0, this variable set a local charms directory that Juju
+would search when deploying an application. The equivalent
+`--repository=/path/to/charms` switch (with `juju deploy`) was also available.
 
-For example, if you are running juju in a Vagrant virtual machine, you could
-set `JUJU_REPOSITORY` to your shared folder:
-
-```
-export JUJU_REPOSITORY=/vagrant
-juju deploy local:series/charm
-```
+Both the environment variable and the switch are no longer functional in 2.x
+versions.
 
 #### JUJU_LOGGING_CONFIG
 
@@ -73,8 +78,12 @@ or pre-release features are enabled only when the feature flag is enabled prior
 to bootstrapping the environment.
 
 ```
-JUJU_DEV_FEATURE_FLAGS=storage,network-spaces juju bootstrap
+JUJU_DEV_FEATURE_FLAGS=<flag1,flag2> juju bootstrap
 ```
+
+!!! Warning:
+    Unforeseen and detrimental results can occur by enabling developmental
+    features. Do not do so on production systems.
 
 #### JUJU_STARTUP_LOGGING_CONFIG
 

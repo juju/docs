@@ -8,7 +8,7 @@ are executable files in a charm's `hooks` directory; hooks with particular names
 thereby cause changes to the world.
 
 Whenever a hook-worthy event takes place, the unit agent first checks whether
-that hook is being [debugged](./authors-hook-debug.html), and if so hands over
+that hook is being [debugged](./developer-debugging.html), and if so hands over
 control to the user. Otherwise, it tries to find a hook with precisely the right
 name. If the hook doesn't exist, the agent continues without complaint; if the
 hook does exist, it is invoked without arguments in a specific
@@ -22,10 +22,11 @@ during hook execution.
 There are multiple types of hooks, each described in more detail in the
 following sections.
 
-!!! Note: None of the hooks are required; if you don't implement a hook, it
-just doesn't get run. When a hook event occurs, Juju will look for the
-corresponding hook file to execute, but if it finds none, will continue
-running without generating an error.
+!!! Note:
+    None of the hooks are required; if you don't implement a hook, it
+    just doesn't get run. When a hook event occurs, Juju will look for the
+    corresponding hook file to execute, but if it finds none, will continue
+    running without generating an error.
 
 All the hooks must be written to be
 [idempotent](https://en.wikipedia.org/wiki/Idempotence), meaning that there
@@ -227,7 +228,7 @@ prefix of the hook will depend on the storage key [defined in the
 If you follow the [tutorial](./authors-charm-writing.html), you'll get a good
 sense of the basics. To fill out your knowledge, you'll want to study the hook
 [context and tools](./authors-hook-environment.html), and to experiment with
-[debug-hooks](./authors-hook-debug.html).
+[debug-hooks](./developer-debugging.html).
 
 Independent of the nuts and bolts, though, good hooks display a number of useful
 high-level properties:

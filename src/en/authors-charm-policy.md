@@ -45,7 +45,7 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
 
 Not following these guidelines will result in a WARNING (W:) in `charm test`:
 
-- Should be built using [charm layers](authors-charm-building.html).
+- Should be built using [charm layers](developer-layers.html).
 - Should be delivered using Juju Resources by default.
 
 ## Testing and quality guidelines
@@ -60,7 +60,8 @@ Not following these guidelines will result in an ERROR (E:) in `charm test`:
   - Relations
     - Validate all relations that the charm provides and requires
   - Configuration
-    - `set-config`, `unset-config`, and `re-set` must be tested as a minimum
+    - As a minimum, test setting and resetting parameters (`config` and
+        `config --reset`)
   - Deployment testing
     - Scale test: Production deployment test with multiple units and recommended
         config.
@@ -145,7 +146,7 @@ policy, and thus is removed from the recommended status in the Juju Charm Store.
 This file is an [important component](authors-charm-components.html) of a charm.
 
 Check out the [MySQL metadata.yaml]
-(https://bazaar.launchpad.net/~charmers/charms/precise/mysql/trunk/view/head:/metadata.yaml) 
+(https://bazaar.launchpad.net/~charmers/charms/precise/mysql/trunk/view/head:/metadata.yaml)
 as an example.
 
 ## config.yaml

@@ -40,8 +40,9 @@ This page is to test the rendering of various aspects of the markdown conversion
 
   #### levels
 
-!!! Note: admonitions should appear highlighted and may also contain elements
-such as _emphasis of words_ and ``` inline code```
+!!! Note: 
+    Admonitions should appear highlighted and may also contain elements
+    such as _emphasis of words_ and ``` inline code```
 
 Here are some highlighting tests:
 

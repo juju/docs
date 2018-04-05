@@ -1,24 +1,25 @@
 Title: Deploying applications
 TODO: Add 'centos' and 'windows' stuff to series talk
-      Downloading charms is shabby. See https://git.io/vwNLI . I therefore
-        ommitted the "feature" of specifying a download dir
       Review whether Juju should go to the store when pointing to a local dir
         with non-existant charm. It did not for me but the old version of this
         doc said it should.
-      Needs explanation of resources (esp. in the local/offline charms sections).
+      Review required. Channnels especially
+      This page is too long. It should contain just basic stuff and link to sub-pages.
+      Hardcoded: Ubuntu codenames
+      Verify MAAS spaces example
+      Bug tracking: https://bugs.launchpad.net/juju/+bug/1747998
 
 # Deploying applications
 
-The fundamental point of Juju is that you can use it to deploy applications through
-the use of charms (the magic bits of code that make things just work). These
-charms can exist in the [Charm Store](https://jujucharms.com/store) or on the
-file system (previously downloaded from the store or written locally).
+The fundamental point of Juju is that you can use it to deploy applications
+through the use of charms (the magic bits of code that make things just work).
+These charms can exist in the [Charm Store](https://jujucharms.com/store) or on
+the file system (previously downloaded from the store or written locally).
 
 Charms use the concept of *series* analogous as to how Juju does with Ubuntu
-series ('trusty', 'xenial', etc). For the most part, this is transparent as
+series ('Trusty', 'Xenial', etc). For the most part, this is transparent as
 Juju will use the most relevant charm to ensure things "just work". This makes
 deploying applications with Juju fun and easy.
-
 
 ## Deploying from the charm store
 
@@ -32,9 +33,10 @@ juju deploy mysql
 This will create a machine and use the latest online MySQL charm (for your
 default series) to deploy a MySQL application.
 
-!!! Note: The default series can be configured at a model level (see
-[Configuring models](./models-config.html)). In the absence of this setting,
-the default is to use the series specified by the charm.
+!!! Note: 
+    The default series can be configured at a model level, see
+    [Configuring models][models-config] for further details. In the absence of
+    this setting, the default is to use the series specified by the charm.
 
 Assuming that the Xenial series charm exists and was used above, an equivalent
 command is:
@@ -45,8 +47,9 @@ juju deploy cs:xenial/mysql
 
 Where 'cs' denotes the charm store.
 
-!!! Note: A used charm gets cached on the controller's database to minimize
-network traffic for subsequent uses.
+!!! Note:
+    A used charm gets cached on the controller's database to minimize network
+    traffic for subsequent uses.
 
 ### Channels
 
@@ -59,7 +62,8 @@ latest features, or be part of a beta test; others may want to only install the
 most reliable software. The channels are:
 
  - **stable**: (default) This is the latest, tested, working stable version of the charm.
- - **candidate**: A release candidate. There is high confidence this will work fine, but there may be minor bugs.
+ - **candidate**: A release candidate. There is high confidence this will work
+   fine, but there may be minor bugs.
  - **beta**: A beta testing milestone release.
  - **edge**: The very latest version - expect bugs!
 
@@ -71,34 +75,18 @@ version.
 By default you will get the 'stable' channel, but you can specify a channel
 when using the `deploy` command:
 
-
 ```bash
 juju deploy mysql --channel <channel_name>
 ```
 
-In the case of there being no version of the charm specified for that
-channel, Juju will fall back to the next 'most stable'; e.g. if you were to
-specify the 'beta' channel, but no charm version is set for that channel, Juju
-will try to deploy from the 'candidate' channel instead, and so on. This means
-that whenever you specify a channel, you will always end up with something that
-best approximates your choice if it is not available.
+In the case of there being no version of the charm specified for that channel,
+Juju will fall back to the next 'most stable'; e.g. if you were to specify the
+'beta' channel, but no charm version is set for that channel, Juju will try to
+deploy from the 'candidate' channel instead, and so on. This means that
+whenever you specify a channel, you will always end up with something that best
+approximates your choice if it is not available.
 
-
-#### Charm upgrades
-
-Because the pointer can fluctuate among revisions it is possible that during a
-charm upgrade the channel revision is different than the revision of a
-currently deployed charm. The following rules apply:
-
-- If a channel revision is older, downgrade the deployed charm to that revision
-- If a channel revision is newer, upgrade the deployed charm to that revision
-
-Channels can be specified with the `upgrade-charm` command. For example:
-
-```bash
-juju upgrade-charm mysql --channel edge
-```
-
+See [Upgrading applications][charms-upgrading] for how charm upgrades work.
 
 ## Deploying a multi-series charm
 
@@ -153,61 +141,34 @@ the charm to install:
 ```bash
 juju add-machine --series yakkety
 Machine 1 added.
-juju deploy mycharm --to 1 --force
+juju deploy mycharm --to 1 --series yakkety --force
 ```
 
-It may be required to use `--force` when upgrading charms. For example, in a
-case where an application is initially deployed using a charm that supports
-`precise` and `trusty`. If a new version of the charm is released that only
-supports `trusty` and `xenial` then it will be allowed to upgrade applications
-deployed on `precise`, but only using `--force-series`, like this:
+It may be required to use `--force-series` when upgrading charms. For example,
+in a case where an application is initially deployed using a charm that
+supports `precise` and `trusty`. If a new version of the charm is released that
+only supports `trusty` and `xenial` then it will be allowed to upgrade
+applications deployed on `precise`, but only using `--force-series`, like this:
 
 ```bash
 juju upgrade-charm mycharm --force-series
 ```
 
-
 ## Deploying from a local charm
 
-To deploy applications using local charms, you may specify the path to the charm
-directory.
-For example, to deploy vsftpd from a local filesystem:
+It is possible to deploy applications using local charms. See
+[Deploying charms offline][charms-offline-deploying] for further guidance.
 
-```bash
-juju deploy ~/charms/vsftpd --series trusty
-```
-
-Local charms may not have a specific declared series (charms fetched from the
-store always have an implied series). You do not have to specify the series
-if the charm contains a series declaration, or if you have specified a
-default series in the model configuration. For example:
-
-```bash
-juju model-config -m mymodel default-series=trusty
-```
-
-See [Configuring models](./models-config.html) for more details on model level
-configuration.
-
-See [Addendum: local charms](#addendum:-local-charms) below for further
-explanation of local charms and how they can be managed.
-
-
-## Deploying with a configuration file
+## Configuring at deployment time
 
 Deployed applications usually start with a sane default configuration. However,
-for some applications it is desirable (and quicker) to configure them at
-deployment time. This can be done by creating a YAML format file of
-configuration values and using the `--config=` switch:
+for some applications it may be desirable (and quicker) to configure them at
+deployment time. This can be done whether a charm is deployed from the Charm
+Store or from a local charm.
 
-```bash
-juju deploy mysql --config=myconfig.yaml
-```
+See [Application configuration](./charms-config.html) for more on this.
 
-See [application configuration](./charms-config.html) for more on this.
-
-
-## Deploying to specific machines and containers
+## Deploying to specific machines
 
 It is possible to specify which machine or container an application is to be
 deployed to. One notable reason is to reduce costs when using a public cloud;
@@ -280,71 +241,101 @@ Any extra placement directives are ignored. If not enough placement directives
 are supplied, then the remaining units will be assigned as normal to a new,
 clean machine.
 
-
 ## Deploying to spaces
 
-More complex networks can be configured using spaces. Spaces group one or more
-routable subnets with common ingress and egress rules to give the operator much
-better and finer-grained control over all networking aspects of a model and its
-application deployments.
+Using spaces, the operator is able to create a more restricted network topology
+for applications at deployment time (see [Network spaces][network-spaces] for
+details on spaces). This is achieved with the use of the `--bind` option.
 
-See the [How to configure more complex networks using spaces][spaces] for
-details on creating and listing spaces.
-
-When deploying a charm or a bundle, you can specify a space using the `--bind`
-argument following the `juju deploy` command.
-
-When deploying an application to a target with multiple spaces, the operator
-must specify which space to use because ambiguous bindings will result in a
-provisioning failure. For example, the following will deploy the 'mysql'
-application to the 'db-space' space:
+The following will deploy the 'mysql' application to the 'db-space' space:
 
 ```bash
 juju deploy mysql --bind db-space
 ```
 
-For finer control, the `--bind` argument can also be used to specify how
-specific charm-defined endpoints are connected to specific spaces, including a
-default option for any interfaces not specified:
+For finer control, individual endpoints can be connected to specific spaces:
 
 ```bash
-juju deploy --bind "db:db-space db-admin:admin-space default-space" mysql
+juju deploy --bind "db=db-space db-admin=admin-space" mysql
 ```
 
-For information on building bundles with bindings, see [Using and Creating
-Bundles][creatingbundles].
-
-Both the `add-machine` and `deploy` commands allow the specification of a
-spaces constraint using the `--constraints` argument:
+If a space is mentioned that is not associated with an interface then it will
+act as the default space (i.e. will be used for any unspecified interface):
 
 ```bash
-juju add-machine --constraints spaces=db-space
+juju deploy --bind "default-space db=db-space db-admin=admin-space" mysql
 ```
 
-The spaces constraint allows you to select an instance for the new machine or
-unit, connected to one or more existing spaces. Both positive and negative
-entries are accepted, the latter prefixed by "^", in a comma-delimited list.
-For example, given the following:
+See [Concepts and terms][concepts-endpoint] for the definition of an endpoint,
+an interface, and other closely related terms.
 
+For information on applying bindings to bundles, see
+[Binding endpoints within a bundle][charms-bundles-endpoints].
+
+The `deploy` command also allows for the specification of a constraint. Here is
+an example of doing this with spaces:
+
+```bash
+juju deploy mysql -n 2 --constraints spaces=database
 ```
---constraints spaces=db-space,^storage,^dmz,internal
+
+See [Adding a machine with constraints][charms-contraints-spaces] for an
+example of doing this with spaces.
+
+You can also declare an endpoint for spaces that is not used with relations,
+see [Extra-bindings][extra-bindings].
+
+### Spaces example
+
+This example will have MAAS as the backing cloud and use the following
+criteria:
+
+ - DMZ space (with 2 subnets, one in each zone), hosting 2
+   units of the haproxy application, which is exposed and provides
+   access to the CMS application behind it.
+ - CMS space (also with 2 subnets, one per zone), hosting 2
+   units of mediawiki, accessible only via haproxy (not exposed).
+ - Database (again, 2 subnets, one per zone), hosting 2 units of
+   mysql, providing the database backend for mediawiki.
+
+First, ensure MAAS has the necessary subnets and spaces. Each subnet has the
+"automatic public IP address" attribute enabled on each:
+
+ - 172.31.50.0/24, for space "database"
+ - 172.31.51.0/24, for space "database"
+ - 172.31.100.0/24, for space "cms"
+ - 172.31.110.0/24, for space "cms"
+ - 172.31.0.0/20, for the "dmz" space
+ - 172.31.16.0/20, for the "dmz" space
+
+Recall that MAAS has native knowledge of spaces. They are created within MAAS
+and Juju will become aware of them when the Juju controller is built
+(`juju bootstrap`).
+
+Second, add the MAAS cloud to Juju. See [Using a MAAS cloud][clouds-maas] for
+guidance.
+
+Third, create the Juju controller, assuming a cloud name of 'maas-cloud':
+
+```bash
+juju bootstrap maas-cloud
 ```
 
-Juju will provision instances connected to (with IP addresses on) one of the
-subnets of both db-space and internal spaces, and NOT connected to either the storage
-or dmz spaces.
+Finally, deploy the applications into their respective spaces (here we use the
+constraints method), relate them, and expose haproxy:
 
-See [Constraints][constraints] for more general information regarding
-constraints. To learn about `extra-bindings`, which provide a way to declare
-an extra bindable endpoint that is not a relation, see [Charm
-metadata][metadata].
+```bash
+juju deploy haproxy -n 2 --constraints spaces=dmz
+juju deploy mediawiki -n 2 --constraints spaces=cms
+juju deploy mysql -n 2 --constraints spaces=database
+juju add-relation haproxy mediawiki
+juju add-relation mediawiki mysql
+juju expose haproxy
+```
 
-!!! Note: When a new model is added, it can take several seconds for all the 
-available spaces to be available. If you try to immediately deploy to a 
-specific space, the operation may fail. This is a known issue which is 
-being [tracked in Launchpad here][bug#1662264].
-
-
+Once all the units are up, you will be able to get the public IP address of one
+of the haproxy units (from `juju status`), and open it in a browser, seeing the
+mediawiki page.
 
 ## Juju retry-provisioning
 
@@ -360,12 +351,11 @@ exceeded' error. You can ask Juju to retry:
 juju retry-provisioning 3 27 57
 ```
 
-
 ## Considerations
 
-Although we are working to have each application co-locatable without the danger
-of conflicting configuration files and network configurations this work is not
-yet complete.
+Although we are working to have each application co-locatable without the
+danger of conflicting configuration files and network configurations this work
+is not yet complete.
 
 While the `add-unit` command supports the `--to` option, you can elect not use
 `--to` when doing an "add-unit" to scale out the application on its own node.
@@ -378,85 +368,15 @@ This will allow you to save money when you need it by using `--to`, but also
 horizontally scale out on dedicated machines when you need to.
 
 
-## Selecting and enabling networks
+<!-- LINKS -->
 
-Use the `networks` option to specify application-specific network requirements.
-The `networks` option takes a comma-delimited list of Juju-specific network
-names.
-Juju will enable the networks on the machines that host application units. This
-is different from the network constraint which selects a machine that matches
-the networks, but does not configure the machine to use them. For example, this
-commands deploys an application to a machine on the "db" and "monitor" networks
-and enables them:
-
-```bash
-juju deploy --networks db,monitor mysql
-```
-
-
-## Addendum: local charms
-
-This is further explanation of offline/local charms.
-
-There are times when it may not be possible to use the charms located in the
-official Charm Store. Such cases include:
-
-- The backing cloud may be private and not have internet access.
-- The charms may not exist online. They are newly-written charms.
-- The charms may exist online but they have been customized locally.
-
-!!! Note: Although this method will ensure that the charms themselves are
-available on systems without outside internet access, there is no guarantee
-that a charm will work in a disconnected state. Some charms will attempt to pull
-code from sources on the internet such as GitHub.
-
-### Using Charm Tools
-
-Charm Tools is a set of tools that can be useful when using locally stored
-charms.
-
-See [Charm Tools](./tools-charm-tools.html) for more information.
-
-#### Installation
-
-Users of Ubuntu 14.04 (Trusty) will need to first add a PPA:
-
-```bash
-sudo add-apt-repository ppa:juju/stable
-sudo apt update
-```
-
-Install the software:
-
-```bash
-sudo apt install charm-tools
-```
-
-#### Usage
-
-Charm commands are called with `charm <subcommand>`.
-
-The command `charm-help` is used to view the available subcommands. Each
-subcommand has its own help page, which is accessible by adding either the `-h`
-or `--help` option:
-
-```bash
-charm add --help
-```
-
-When downloading charms, they end up in a directory with the same name as the
-charm. It is therefore a good idea to work from a central directory. For
-example, to download the MySQL and the WordPress charms:
-
-```bash
-mkdir ~/charms
-cd ~/charms
-charm pull nfs
-charm pull vsftpd
-```
-
-[spaces]: ./network-spaces.html
-[creatingbundles]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
-[metadata]: ./authors-charm-metadata.html
+[models-config]: ./models-config.html
+[network-spaces]: ./network-spaces.html
+[charms-bundles-endpoints]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
+[extra-bindings]: ./authors-charm-metadata.html#extra-bindings
 [constraints]: ./charms-constraints.html
-[bug#1662264]: https://bugs.launchpad.net/juju/+bug/1662264
+[charms-upgrading]: ./charms-upgrading.html
+[charms-offline-deploying]: ./charms-offline-deploying.html
+[concepts-endpoint]: ./juju-concepts.html#endpoint
+[clouds-maas]: ./clouds-maas.html
+[charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints

@@ -40,10 +40,11 @@ Joyent Dashboard
 
 ![Joyent Account](./media/getting_started-joyent-account-dropdown.png)
 
-!!! Note: The private key is currently uploaded to the cloud in order to
-remotely sign requests to the Joyent API. It is highly recommended that the
-private key used in this way _should not_ be a common SSH key you use for other
-purposes, but a specific one used for the Joyent cloud.
+!!! Note: 
+    The private key is currently uploaded to the cloud in order to
+    remotely sign requests to the Joyent API. It is highly recommended that the
+    private key used in this way _should not_ be a common SSH key you use for other
+    purposes, but a specific one used for the Joyent cloud.
 
 With the above information, you can now run the command:
 
@@ -54,6 +55,7 @@ juju add-credential joyent
 key must be the full system path, not using any bash shortcuts such as '~'.
 
 
-!!! Note: During initial setup if you are having issues deploying charms contact
-Joyent support at [https://help.joyent.com/home](https://help.joyent.com/home) 
-to verify your account is capable of provisioning virtual machines.
+!!! Note: 
+    During initial setup if you are having issues deploying charms contact
+    Joyent support at [https://help.joyent.com/home](https://help.joyent.com/home) 
+    to verify your account is capable of provisioning virtual machines.

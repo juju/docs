@@ -25,7 +25,6 @@ azure:
       application-id: 1234
       application-password: secretpassword
       subscription-id: 12345
-      tenant-id: 12345
 ```
 
 Once the root key is added, it will succeed:

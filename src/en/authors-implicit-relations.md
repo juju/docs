@@ -31,11 +31,12 @@ remote unit in a relation through its `juju-info` relation
 
 ## Relationship resolution
 
-`rsyslog` is a [_subordinate charm_](./authors-subordinate-applications.html) and
-requires a valid `scope: container` relationship in order to deploy. It can take
-advantage of optional support from the principal charm but in the event that the
-principal charm doesn't provide this support it will still require a
-`scope: container` relationship. In this event the logging charm author can take
+`rsyslog-forwarder` is a
+[_subordinate charm_](./authors-subordinate-applications.html) and requires a
+valid `scope: container` relationship in order to deploy. It can take advantage
+of optional support from the principal charm but in the event that the
+principal charm doesn't provide this support it will still require a `scope:
+container` relationship. In this event the logging charm author can take
 advantage of the implicit relationship offered by all charms, `juju-info`.
 
     requires:
@@ -48,7 +49,7 @@ advantage of the implicit relationship offered by all charms, `juju-info`.
 
 The admin then issues the following
 
-    juju add-relation wordpress rsyslog
+    juju add-relation wordpress rsyslog-forwarder
 
 If the wordpress charm author doesn't define the `logging-directory` interface,
 Juju will use the less-specific (in the sense that it likely provides less

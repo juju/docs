@@ -1,4 +1,4 @@
-Title: Using Docker in charms  
+Title: Using Docker in charms
 
 # Charming with Docker
 
@@ -24,7 +24,7 @@ the higher level [concepts of Juju][concepts].
 Another software paradigm is
 [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming). Do
 something when the state or conditions are correct. Juju offers the
-[charms.reactive](http://pythonhosted.org/charms.reactive/) package to allow
+[charms.reactive](https://charmsreactive.readthedocs.io/) package to allow
 charms to be written in the reactive paradigm. In charms.reactive code
 execution is controlled by boolean logic. You can define when the conditions
 are right, run this code, or when something is not set, run different code or
@@ -40,14 +40,14 @@ the root directory of the charm controls what layer(s) will be imported.
 #### Reactive Charms
 
 The docker charm makes use of the
-[charms.reactive](http://pythonhosted.org/charms.reactive/) python framework.
+[charms.reactive](https://charmsreactive.readthedocs.io/) python framework.
 The code for the docker layer can be found in the `reactive/` folder in the
 root charm directory.
 
 #### Building Charms
 
 The docker layer makes use of the
-[Charm Layers](authors-charm-building.html)
+[Charm Layers](developer-layers.html)
 concept building off the base charm and creating its own layer of added
 functionality.
 
@@ -64,7 +64,9 @@ is growing. This charm is designed to be a base for other docker based charms.
 This can be achieved by creating a new charm directory, and placing the following
 directives in your `layer.yaml`
 
-    includes: ['layer:docker']
+```yaml
+includes: ['layer:docker']
+```
 
 When you run `charm build` the resulting charm will contain all of the logic
 to install and upgrade docker. Freeing you to focus on delivering your application
@@ -78,13 +80,13 @@ a load balancer charm.
 
 # Charm authoring using reactive paradigm
 
-The [charms.reactive](http://pythonhosted.org/charms.reactive/) is a python
+The [charms.reactive](https://charmsreactive.readthedocs.io/) is a python
 module to bring the
 [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming)
 pattern to Juju charms. We call this "reactive" because code can be executed
 when certain conditions exist, as if the code is reacting to those conditions.
 For the most complete information on charms.reactive go to
-<http://pythonhosted.org/charms.reactive/>
+<https://charmsreactive.readthedocs.io/>
 
 
 ## The Big Picture Decomposed
@@ -103,9 +105,9 @@ An example of a charm using the reactive pattern is the
 It also uses the compose workflow and can serve as the base for other Docker
 charms. This document will focus on the reactive parts of the layer-docker
 charm. You can read more about layers in the
-+[building a charm with layers documentation](authors-charm-building.html).
++[building a charm with layers documentation](developer-layers.html).
 
-```
+```no-highlight
 ├── composer.yaml
 ├── metadata.yaml
 ├── reactive
@@ -167,7 +169,7 @@ can be found on github.
 Inside the reactive directory of the layer-docker-nginx charm is a file
 `nginx.py` that contains all the code for this charm.
 
-```
+```no-highlight
 ├── assets
 │   ├── index.html
 │   └── jujuanddocker.png
@@ -189,7 +191,7 @@ to determine if the port has changed and the container needs to be recycled.
 ## Reactive functions
 The `nginx.py` file contains several functions that make use of the reactive
 framework. The `@when` and `@when_not` are
-[charms.reactive decorators](http://pythonhosted.org/charms.reactive/charms.reactive.decorators.html).
+[charms.reactive decorators](https://charmsreactive.readthedocs.io/en/stable/charms.reactive.decorators.html).
 The decorated functions are only run if the conditions match the current state.
 The functions described here are specific to the nginx workload, but the
 concepts can be extended to the other Docker worklodas to write your own charm
@@ -201,6 +203,7 @@ configuring Docker. The `install_nginx` function is decorated with
 `@when('docker.available')` meaning that the code will run after Docker is
 installed and configured. The install_nginx function sets the state
 "nginx.available" when it is complete.
+
 ```python
 @when('docker.available')
 def install_nginx():
@@ -226,6 +229,7 @@ the run_container function is executed. The `@when_not` decorator indicates
 the state that must not be active for this function to run. Since the
 run_container function sets the "nginx.started" state this ensures the
 container is not started over and over again.
+
 ```python
 @when('nginx.available', 'docker.available')
 @when_not('nginx.started')
@@ -265,6 +269,7 @@ indication to stop the container in which case it will set the "nginx.stopped"
 state. The decorator `@when_not('nginx.stopped')` protects this function from
 being called repeatedly. Note the `reactive.remove_state('nginx.stop')` and
 `reactive.set_state('nginx.stopped')`calls to assert a stopped state.
+
 ```python
 @when('nginx.stop', 'docker.available')
 @when_not('nginx.stopped')
@@ -325,4 +330,3 @@ new charm with your Docker image very similar to the
 [layer-docker-nginx](#layer-docker-nginx) charm.
 
 [concepts]: ./juju-concepts.html
-

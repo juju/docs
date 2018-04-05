@@ -1,9 +1,9 @@
-Title: Charm review process  
+Title: Charm Review Process
 
 # Charm Review Process
 
-Reviewing a Juju Charm is a process that can easily be broken down into
-the following parts:
+Reviewing a Juju Charm is a process that can easily be broken down into the
+following parts:
 
 1. Identifying what to review
 1. Setting up a branch of the charm
@@ -164,23 +164,14 @@ While using the README as a reference, deploy the charm using the command
 below on your local model.
 
 ```bash
-juju deploy --repository=../../ local:precise/charm-name
-```
-
-Alternatively, you can set JUJU_REPOSITORY and deploy like the following:
-
-```bash
 export JUJU_REPOSITORY=/tmp
-juju deploy local:precise/charm-name
+juju deploy $JUJU_REPOSITORY/charm-name
 ```
-
-!!! Note: Remember to swap out `precise` for the series the charm is being
-tested for, like `trusty`.
-
 If the local deployment is successful, continue to the configuration section.
 
-!!! Note: If you have access to other cloud providers (like EC2), we
-appreciate testing the deployment on those models as well.
+!!! Note: 
+    If you have access to other cloud providers (like EC2), we
+    appreciate testing the deployment on those models as well.
 
 ### Configuration and Relations
 
@@ -216,9 +207,10 @@ Use `top` or `ps` to show if the charm's process is running. Some
 service's status would also be available with `sudo service name status`
 (example: `sudo service apache2 status`).
 
-!!! Note: If the charm itself is not a process, but relies on another
-process/application (eg. nginx or apache2), be sure to check those processes are
-running. A good example of this would be Wordpress needing apache2 or nginx).
+!!! Note: 
+    If the charm itself is not a process, but relies on another
+    process/application (eg. nginx or apache2), be sure to check those processes are
+    running. A good example of this would be Wordpress needing apache2 or nginx).
 
 If the charm's configuration options are written to the application's
 configuration files, check that file for the values you set earlier. Check the
