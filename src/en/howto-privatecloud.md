@@ -14,7 +14,7 @@ This necessary information is stored in a json metadata format
 called "Simplestreams". For supported public cloud services
 such as Amazon Web Services, HP Cloud, Azure, etc, no action is
 required by the end user. However, those setting up a private
-cloud, or who want to change how things work (eg use a different
+cloud, or who want to change how things work (e.g. use a different
 Ubuntu image), can create their own metadata.
 
 There are a few ways to accomplish this based on the OpenStack
@@ -25,7 +25,7 @@ OpenStack deployment.
 * If you have admin or operator permissions in the OpenStack deployment, start
 with [Create image metadata with Juju][general] and continue with
 [Upload the Simplestreams Metadata to an object store][object-store].
-* If the OpenStack deployment was done with juju and you have permissions to
+* If the OpenStack deployment was done with Juju and you have permissions to
 deploy charms alongside the OpenStack charms then use the [glance-simplestreams-sync charm][gsscharm].
 
 
@@ -111,7 +111,7 @@ Replace these values with your own in the above command:
 
 !!! Note:
     You can also specify, via the `--stream` option, an image stream (see
-    [Image streams][anchor__image-streams]) that is not 'released' (i.e.
+    [Image streams][image-streams]) that is not 'released' (i.e.
     'daily'). However, doing so will require you to specify this stream
     explicitly when using this metadata to create any subsequent controllers.
 
@@ -134,8 +134,8 @@ Stop here and return to the [bootstrap instructions][bootstrap].
 ## Upload the image metadata to an object store
 
 !!! Note: Only those with admin privileges or who are operators in the OpenStack 
-environment will be able to create a service and view endpoints used by the following 
-instructions.
+    environment will be able to create a service and view endpoints used by the following 
+    instructions.
 
 These instructions use Swift, however other object stores may be used as well.
 
@@ -293,7 +293,7 @@ provide customizeable syncing for automatic image updates.
  - OpenStack deployment by Juju
 
 !!! Note: 
-    You must have permissions to deploy charms in the juju model running
+    You must have permissions to deploy charms in the Juju model running
     OpenStack to utilize this method for image metatdata management.
 
 
@@ -302,7 +302,7 @@ provide customizeable syncing for automatic image updates.
 [Glance Simplestreams Sync][glance-simplestreams-sync]
 
 It is recommended to set the charm's configuration variable use_swift to true
-as juju will automatically look for a product-streams service during bootstrap
+as Juju will automatically look for a product-streams service during bootstrap
 to use for image streams.
 
 !!! Note: 
