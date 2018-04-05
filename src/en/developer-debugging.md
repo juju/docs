@@ -124,7 +124,7 @@ that has been trapped.
 context](./authors-hook-environment.html).
   - Additionally, the environment variable`$JUJU_HOOK_NAME` is set
 appropriately.
-  ![Image showing tmux debug hooks session](../media/developer-debugging-1.png)
+  ![Image showing tmux debug hooks session](./media/developer-debugging-1.png)
 
 To proceed, you should **manually execute the hook**, or perform whatever other
 actions you want. At any time during a debug-hooks window 1 session you can run
@@ -261,7 +261,7 @@ Some useful definitions in the context of tmux:
 
 A session may look something like this:
 
-![Image showing byobu and tmux ](../media/tmux-annotation.png)
+![Image showing byobu and tmux ](./media/tmux-annotation.png)
 
 Key:
 
