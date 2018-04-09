@@ -227,14 +227,14 @@ juju debug-log --lines 2000 \
 
 ### Agent logging override
 
-As we've seen, Juju logs on a per-model basis. However, if there are enough
-units in the model to make log inspection difficult, due to the high number of
-messages, a method for removing "excess noise" is the next logical step.
-Advanced filtering (see above section) mitigates this problem but another
-feature exists that should be considered as an alternative. This is the ability
-to log on a per-agent basis.
-
-
+As we've seen, Juju logs on a per-model basis, meaning that all machine agents
+and unit agents in a model contribute log messages. However, in some situations
+(e.g. targeted verbose debugging) it may be desirable to log on a per-agent
+basis. This differs from the aforementioned filtered unit logging in that the
+`--include <unit-name>` option filters on already-generated logs (i.e. the
+database is filling up) whereas logging on a per-agent basis generates logs
+only for a specific agent. An agent logging override is therefore a temporary
+measure.
 
 ### Log files
 
