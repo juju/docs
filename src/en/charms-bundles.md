@@ -353,7 +353,7 @@ wordpress/0  waiting   allocating  1                               waiting for m
 
 You can configure more complex networks using [spaces](./network-spaces.html)
 and deploy charms with binding, as described in
-[Deploying to spaces](./charms-deploying.html#deploying-to-spaces).
+[Deploying to spaces](./charms-deploying-advanced.html#deploying-to-network-spaces).
 Bindings can also be specified for applications within a bundle. To do so,
 add a section to the bundle's YAML file called `bindings`. For example:
 

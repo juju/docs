@@ -1,5 +1,6 @@
 Title: Scaling applications
-TODO: Check examples
+TODO:  The Scaling Back section should just reference charms-destroy.html (remove-unit)
+       Critical: review required
 
 # Scaling applications
 

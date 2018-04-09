@@ -184,4 +184,4 @@ or 'dmz' spaces.
 
 [controllers-creating]: ./controllers-creating.html
 [network-spaces]: ./network-spaces.html
-[charms-deploying-to-option]: ./charms-deploying.html#deploying-to-specific-machines
+[charms-deploying-to-option]: ./charms-deploying-advanced.html#deploying-to-specific-machines
