@@ -61,9 +61,9 @@ The new charm may add new relations and configuration settings.
 A charm upgrade may require the use of the `--force-series` option.
 
 Consider the case where an application is initially deployed using a charm that
-supports Trusty and Precise. If a new version of the charm is released that
-only supports Trusty and Xenial then applications deployed on Precise will only
-be allowed by forcing the upgrade.
+supports Precise and Trusty. If a new version of the charm is released that
+only supports Trusty and Xenial then applications already deployed on Precise
+can only be force-upgraded.
 
 ## Examples
 
