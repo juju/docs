@@ -1,4 +1,5 @@
 Title: Network Spaces
+TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1747998
 
 # Network Spaces
 
@@ -120,20 +121,22 @@ upon using either a *constraint* or a *binding*:
    associated with the space.
    
      See the [Constraints][charms-constraints] page to learn more about
-     constraints. Read [Deploying to spaces][deploying-to-spaces] for how to
-     use a space constraint with the `deploy` command.
+     constraints. Read
+     [Deploying to network spaces][deploying-to-network-spaces] for how to use
+     a space constraint with the `deploy` command.
 
  - A binding is a space-specific, software level operation and is a more
    fine-grained request. It associates an application endpoint with a subnet.
 
      See examples of using a binding when deploying applications on the
-     [Deploying to spaces][deploying-to-spaces] page. For using spaces with
-     bundles go to [Using and creating bundles][using-creating-bundles].
+     [Deploying to network spaces][deploying-to-network-spaces] page. For using
+     spaces with bundles go to [Using and creating
+     bundles][using-creating-bundles].
   
 
 <!-- LINKS -->
 
 [using-creating-bundles]: ./charms-bundles.html#binding-endpoints-within-a-bundle
-[deploying-to-spaces]: ./charms-deploying.html#deploying-to-spaces
+[deploying-to-network-spaces]: ./charms-deploying-advanced.html#deploying-to-network-spaces
 [charms-constraints]: ./charms-constraints.html
 [LP-1747998]: https://bugs.launchpad.net/juju/+bug/1747998
