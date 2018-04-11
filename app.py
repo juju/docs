@@ -16,6 +16,7 @@ app = flask.Flask(
     static_folder=os.path.join(base_dir, 'static'),
     template_folder=os.path.join(base_dir, 'build'),
 )
+app.config['EXTRA_MEDIA_DIR'] = os.path.join(base_dir, 'build', 'en', 'media')
 
 permanent_redirects_path = app.config.get(
     'PERMANENT_REDIRECTS_FILEPATH',
@@ -68,15 +69,23 @@ def strip_extensions():
         return flask.redirect(html_match.group(1), code=301)
 
 
-@app.before_request
-def find_file_or_redirect():
+@app.route('/en/media/<path:filename>')
+def download_en_media(filename):
+    return flask.send_from_directory(
+        app.config['EXTRA_MEDIA_DIR'],
+        filename,
+    )
+
+
+@app.route('/<path:path>')
+def find_file_or_redirect(path=None):
     """
     If a file doesn't exist at the requested path, see if it exists at one
     of the other paths, and redirect there if necessary
     """
 
     template_finder = routing.TemplateFinder(app.template_folder)
-    file_path = routing.get_file(flask.request.path)
+    file_path = routing.get_file(''.join(['/', path]))
     preferred_languages = routing.requested_languages(flask.request)
     if 'en' not in preferred_languages:
         preferred_languages.append('en')
