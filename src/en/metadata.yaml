@@ -137,7 +137,7 @@ navigation:
       - location: "howto-privatecloud"
         title: "Set up a Private Cloud"
       - location: "howto-updateseries"
-        title: "Update the series of a juju controller or workload"
+        title: "Update the series of a controller or machine"
 
     - location: "troubleshooting"
       title: "Troubleshooting"
