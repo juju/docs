@@ -88,6 +88,12 @@ If you want more detail about a particular cloud, use:
 juju show-cloud azure
 ```
 
+To learn of any special features a cloud may support the `--include-config`
+option can be used with `show-cloud`. These can then be passed to either of the
+`bootstrap` or the `add-model` commands. See
+[Passing a cloud-specific setting][controllers-creating-include-config] for
+an example.
+
 Juju may have baked-in knowledge, but sometimes the recipe changes. Juju can 
 also update its knowledge of public clouds, to take into account changes in 
 the way clouds work, new regions or other aspects of their operation.
@@ -382,3 +388,4 @@ mystack            1  dev1             openstack   Openstack Cloud
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [clouds-oracle]: ./help-oracle.html
 [oracleimages]: ./help-oracle.html#images
+[controllers-creating-include-config]: ./controllers-creating.html#passing-a-cloud-specific-setting

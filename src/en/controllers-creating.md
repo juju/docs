@@ -173,6 +173,44 @@ When a controller is created, it is possible to influence what agent version
 will be used across the controller and its models. This is covered in
 [Agent versions and streams][agent-versions-and-streams].
 
+### Passing a cloud-specific setting
+
+View if your chosen backing cloud has any special features and then pass the
+feature as an option.
+
+Firstly, reveal any features:
+
+```bash
+juju show-cloud --include-config aws
+```
+
+The bottom portion of the output looks like this:
+
+```no-highlight
+The available config options specific to ec2 clouds are:
+vpc-id:
+  type: string
+  description: Use a specific AWS VPC ID (optional). When not specified, Juju requires
+    a default VPC or EC2-Classic features to be available for the account/region.
+vpc-id-force:
+  type: bool
+  description: Force Juju to use the AWS VPC ID specified with vpc-id, when it fails
+    the minimum validation criteria. Not accepted without vpc-id
+```
+
+!!! Note:
+    The VPC ID is obtained from the AWS web UI.
+
+Secondly, create the controller by placing it (and its models) within it:
+
+```bash
+juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
+```
+
+!!! Note:
+    Cloud-specific features can also be passed to individual models during
+    their creation (`add-model`).
+
 
 <!-- LINKS -->
 
