@@ -233,7 +233,8 @@ Storage is destroyed (removed from the model) by first detaching it and then
 using `juju remove-storage`.
 
 If an attempt is made to either attach or remove storage that is currently in
-use (i.e. it is attached to a unit) Juju will return an error.
+use (i.e. it is attached to a unit) Juju will return an error. To remove
+currently attached storage from the model the `--force` option must be used.
 
 Finally, a model cannot be destroyed while storage volumes remain without
 passing a special option (`--release-storage` to detach all volumes and
