@@ -130,11 +130,11 @@ Here is sample output for a newly-added AWS model:
 
 ```no-highlight
 Name     Provider  Attrs
-ebs      ebs       
+ebs      ebs
 ebs-ssd  ebs       volume-type=ssd
-loop     loop      
-rootfs   rootfs    
-tmpfs    tmpfs     
+loop     loop
+rootfs   rootfs
+tmpfs    tmpfs
 ```
 
 !!! Note:
@@ -277,14 +277,14 @@ juju add-storage ceph-osd/0 osd-journals=ebs-ssd,8G,1
 juju detach-storage osd-journals/0
 juju remove-storage osd-journals/0
 ```
- 
+
 To destroy a controller (and its models) along with all existing storage
 volumes:
 
 ```bash
 juju destroy-controller lxd-controller --destroy-all-models --destroy-storage
 ```
- 
+
 To destroy a model while keeping intact all existing storage volumes:
 
 ```bash
@@ -372,12 +372,14 @@ following pool attributes:
     Specifies the EBS volume type to create. You can use either the EBS volume
     type names, or synonyms defined by Juju (in parentheses):
 
-    - standard (magnetic)
+    - standard (magnetic) **depreciated**
     - gp2 (ssd)
     - io1 (provisioned-iops)
+    - st1 (optimized-hdd)
+    - sc1 (cold-storage)
 
-    The default volume type is 'standard'. Since the default pool is 'ebs' the
-    default volume for AWS will be magnetic.
+    The default volume type is 'ssd'. Since the default pool is 'ebs' the
+    default volume for AWS will be gp2.
 
 - **iops**
 
@@ -400,8 +402,21 @@ juju create-storage-pool myssd-pool ebs volume-type=ssd
 juju deploy postgresql --storage pgdata=myssd-pool,32G
 ```
 
+```bash
+juju create-storage-pool cold-storage-pool ebs volume-type=cold-storage
+juju deploy postgresql --storage pgdata=cold-storage-pool,32G
+```
+
 For detailed information regarding EBS volume types, see the
 [AWS EBS documentation][aws-ebs-volume-types].
+
+##### _Magnetic Volume Depreciation Warning_
+
+Following AWS development, AWS magnetic volume support has been marked as
+depreciated. Please read [AWS volume documentation](aws-ebs-volume-update)
+update to identify the volume option that best suits your charm.
+
+Juju default option now is `ssd` volume.
 
 ### OpenStack/Cinder (cinder)
 
@@ -456,7 +471,7 @@ provider currently supports a single pool configuration attribute:
     low-latency, high IOPS requirements, and 'default' otherwise.
 
     For convenience, the Oracle provider registers two predefined pools:
-    
+
     - 'oracle' (volume type is 'default')
     - 'oracle-latency' (volume type is 'latency').
 
@@ -618,6 +633,7 @@ For guidance on how to create a charm that uses these storage features see
 [developer-storage]: ./developer-storage.html
 [aws-iops-ssd-volumes]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops
 [aws-ebs-volume-types]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+[aws-ebs-volume-update]: https://aws.amazon.com/blogs/aws/amazon-ebs-update-new-cold-storage-and-throughput-options/
 [wikipedia-iops]: https://en.wikipedia.org/wiki/IOPS
 [ppa-lxd]: https://launchpad.net/~ubuntu-lxc/+archive/ubuntu/lxd-stable
 [upstream-lxd-storage-configuration]: https://github.com/lxc/lxd/blob/master/doc/storage.md
