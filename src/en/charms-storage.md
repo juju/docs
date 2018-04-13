@@ -229,8 +229,9 @@ storage will be detached and left intact. This allows detached storage to be
 re-attached to an existing unit using `juju attach-storage`, or to a new unit
 using the `--attach-storage` flag of `juju deploy` or `juju add-unit`.
 
-Storage is destroyed (removed from the model) by first detaching it and then
-using `juju remove-storage`.
+The underlying cloud's storage resource is normally destroyed by first
+detaching it and then using `juju remove-storage`. To remove storage from the
+model without destroying it the `--no-destroy` option must be used.
 
 If an attempt is made to either attach or remove storage that is currently in
 use (i.e. it is attached to a unit) Juju will return an error. To remove
