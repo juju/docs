@@ -231,7 +231,9 @@ using the `--attach-storage` flag of `juju deploy` or `juju add-unit`.
 
 The underlying cloud's storage resource is normally destroyed by first
 detaching it and then using `juju remove-storage`. To remove storage from the
-model without destroying it the `--no-destroy` option must be used.
+model without destroying it the `--no-destroy` option must be used. Be wary of
+using the latter option as Juju will lose sight of the volume; it will only be
+visible from the cloud provider.
 
 If an attempt is made to either attach or remove storage that is currently in
 use (i.e. it is attached to a unit) Juju will return an error. To remove
@@ -265,10 +267,18 @@ To add a new Ceph OSD unit with (detached) existing storage 'osd-devices/2':
 juju add-unit ceph-osd --attach-storage osd-devices/2
 ```
 
-To destroy already detached storage 'osd-devices/3' (remove it from the model):
+To remove already detached storage 'osd-devices/3' from the model. It will also
+be automatically destroyed on the cloud provider:
 
 ```bash
 juju remove-storage osd-devices/3
+```
+
+To remove currently attached storage 'pgdata/1' from the model and prevent it
+from being destroyed on the cloud provider:
+
+```bash
+juju remove-storage --force --no-destroy pgdata/1
 ```
 
 To upgrade the OSD journal of Ceph unit 'ceph-osd/0' from magnetic to solid
