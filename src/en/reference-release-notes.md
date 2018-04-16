@@ -11,7 +11,52 @@ TO APPEAR WITH 2.3.5
 
 ALSO CONSIDER "LINKIFYING" STUFF. INCLUDE 2 EMPTY SPACES AT EOL TO GET A
 CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
+
+IMPORTANT: UPDATE THE INSTALL PAGE AT THE SAME TIME (reference-install.md).
 -->
+
+^# Juju 2.3.6
+
+  Juju 2.3.6 has arrived. This is primarily a bug fix release. For the full
+  list of bugs, see the
+  [2.3.6 milestone](https://launchpad.net/juju/+milestone/2.3.6).
+
+  ## Critical bugs fixed.
+
+  [LP 1762741](https://bugs.launchpad.net/juju/+bug/1762741) Juju bootstraps
+  latest LTS by default
+
+  ## Enhancements.
+
+  [LP 1606617](https://bugs.launchpad.net/juju/+bug/1606617) Add
+  container-image-metadata-url and container-image-stream as config for KVM and
+  LXD containers.  
+  [LP 1760390](https://bugs.launchpad.net/juju/+bug/1760390) Add support for
+  bionic and mongo3.6.  
+  [LP 1749201](https://bugs.launchpad.net/juju/+bug/1749201) Add
+  juju-updateseries to allow for charm series upgrades.
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the
+  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
 
 ^# Juju 2.3.5
 
