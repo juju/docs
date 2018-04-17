@@ -53,9 +53,8 @@ juju bootstrap --bootstrap-constraints="mem=4G cores=2" aws
 
 ### Create a controller of a specific series
 
-The controller will run the latest LTS Ubuntu release by default. At the time
-of writing, Xenial will be selected.
-
+The controller will be deployed upon Ubuntu 16.04 LTS (Xenial) by default.
+    
 For our example, we name the resulting LXD controller 'lxd-xenial' to reflect
 that:
 
@@ -63,13 +62,17 @@ that:
 juju bootstrap localhost lxd-xenial
 ```
 
+!!! Note:
+    The default release will change from Xenial to Ubuntu 18.04 LTS (Bionic)
+    once 18.04.1 is released (July 2018).
+
 To select a different series the `--bootstrap-series` option is used.
 
-Below, a google (GCE) controller based on Ubuntu 14.04 LTS (Trusty) is
-requested (and is given the name 'gce-trusty'):
+Below, a google (GCE) controller based on Ubuntu 18.04 LTS (Bionic) is
+requested explicitly (and is given the name 'gce-bionic'):
 
 ```bash
-juju bootstrap --bootstrap-series=trusty google gce-trusty
+juju bootstrap --bootstrap-series=bionic google gce-bionic
 ```
 
 ### Create a Rackspace controller using a daily image
