@@ -118,13 +118,9 @@ To begin with the last 500 lines. The `grep` utility is used as a text filter:
 juju debug-log -n 500 | grep amd64
 ```
 
-### Increase the logging level
+### Logging levels
 
-At times, it may help to increase the logging level when attempting to diagnose
-an issue.
-
-You can verify the current logging level with the `model-config`
-command:
+You can verify the current logging level like this:
 
 ```bash
 juju model-config logging-config
@@ -133,34 +129,32 @@ juju model-config logging-config
 Output will be similar to the following:
 
 ```no-highlight
-<root>=WARNING; unit=INFO
+<root>=WARNING;unit=DEBUG
 ```
 
-Increasing the logging level will provide additional details. Logging levels,
-from most verbose to least verbose, are as follows:
+The above is the default configuration. It sets the machine agent log level at
+'WARNING' and the unit agent log level at 'DEBUG'.
 
-- TRACE
-- DEBUG
-- INFO
-- WARNING
-- ERROR
+The logging levels, from most verbose to least verbose, are as follows:
 
-When diagnosing an issue or gathering information for filing a bug, it's often
-useful to increase the log verbosity by moving to DEBUG or TRACE levels.
+ - TRACE
+ - DEBUG
+ - INFO
+ - WARNING
+ - ERROR
 
-To increase the logging level from our previous example, you would enter the
-following command:
+### Increase the logging level
+
+When diagnosing an issue (and possibly filing a bug), the first step is to make
+logging more verbose. For instance, to increase the logging level of the unit
+agents to 'TRACE' you would enter the following command:
 
 ```bash
-juju model-config logging-config="<root>=DEBUG;unit=TRACE"
+juju model-config logging-config="<root>=WARNING;unit=TRACE"
 ```
-Once the issue has been diagnosed, or the logging information is collected,
-make sure the logging levels are reset so that you don't collect massive
-amounts of unnecessary data:
 
-```bash
-juju model-config logging-config="<root>=WARNING;unit=INFO"
-```
+To avoid filling up the database unnecessarily, when verbose logging is no
+longer needed, do not forget to return logging to normal levels.
 
 ### Advanced filtering
 
@@ -168,21 +162,19 @@ A Juju log line is written in this format:
 
 `<entity> <timestamp> <log-level> <module>:<line-no> <message>`
 
-The '--include' and '--exclude' options select and deselect, respectively, the
+The `--include` and `--exclude` options select and deselect, respectively, the
 entity that logged the message. An entity is a Juju machine or unit agent. The
 entity names are similar to the names shown by `juju status`.
 
-Similarly, the '--include-module' and '--exclude-module' options can be used to
+Similarly, the `--include-module` and `--exclude-module` options can be used to
 influence the type of message displayed based on a (dotted) module name. The
 module name can be truncated.
 
 A combination of machine and unit filtering uses a logical OR whereas a
 combination of module and machine/unit filtering uses a logical AND.
 
-Log levels are cumulative; each lower level (more verbose) contains the
-preceding higher level (less verbose). The '--level' option restricts messages
-to the specified log-level or greater. The levels from lowest to highest are
-TRACE, DEBUG, INFO, WARNING, and ERROR.
+The `--level` option places a limit on logging verbosity (e.g. `--level INFO`
+will allow messages of levels 'INFO', 'WARNING', and 'ERROR' to be shown).
 
 #### Examples:
 
@@ -223,6 +215,41 @@ juju.cmd and juju.worker modules:
 juju debug-log --lines 2000 \
 	--include-module juju.cmd \
 	--include-module juju.worker
+```
+
+### Agent logging override
+
+As we've seen, the logging level for machine agents and unit agents are
+specified as a single model configuration setting. However, in some situations
+(e.g. targeted verbose debugging) it may be desirable to increase the logging
+level on a per-agent basis. This can also be done after having reduced the
+model-wide log level (as explained [above][#increase-the-logging-level]).
+
+For example, let's enable 'TRACE' logging level to a unit of MySQL. We begin by
+logging in to the unit's machine ('0' in this example):
+
+```bash
+juju ssh mysql/0
+```
+
+File `/var/lib/juju/agents/unit-mysql-0/agent.conf` is then edited by adding
+the line `LOGGING_OVERRIDE=juju=trace` to the 'values' section.
+
+To be clear, the bottom of the file now looks like:
+
+```no-highlight
+loggingconfig: <root>=WARNING;unit=DEBUG
+values:
+  CONTAINER_TYPE: ""
+  NAMESPACE: ""
+  LOGGING_OVERRIDE=juju=trace
+mongoversion: "0.0"
+```
+
+The affected agent will need to be restarted to have this change take effect:
+
+```bash
+sudo systemctl restart jujud-unit-mysql-0.service
 ```
 
 ### Log files
@@ -323,6 +350,7 @@ controller's models in one step:
 
 [#model-logs]: #model-logs
 [#remote-logging]: #remote-logging
+[#increase-the-logging-level]: #increase-the-logging-level
 [controllers-ha]: ./controllers-ha.html 
 [upstream-rsyslog-tls-tutorial]: http://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html
 [models-config]: ./models-config.html
