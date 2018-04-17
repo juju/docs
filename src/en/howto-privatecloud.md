@@ -271,7 +271,14 @@ and the `internalurl` field as **$SWIFT_INTERNAL_URL**.
     `wget $SWIFT_PUBLIC_URL/simplestreams/images/streams/v1/index.json`
 
 Enter the following command to register the endpoint with the Simplestreams
-service:
+service, when using Identity v3:
+
+```bash
+openstack endpoint create --region $REGION product-streams public $SWIFT_URL/simplestreams/images
+openstack endpoint create --region $REGION product-streams internal $SWIFT_URL/simplestreams/images
+```
+
+Using Identity v2:
 
 ```bash
 openstack endpoint create --region $REGION \
