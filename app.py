@@ -4,6 +4,7 @@ import re
 
 # External packages
 import flask
+from werkzeug.contrib.fixers import ProxyFix
 
 # Local packages
 import routing
@@ -16,6 +17,7 @@ app = flask.Flask(
     static_folder=os.path.join(base_dir, 'static'),
     template_folder=os.path.join(base_dir, 'build'),
 )
+app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config['EXTRA_MEDIA_DIR'] = os.path.join(base_dir, 'build', 'en', 'media')
 
 permanent_redirects_path = app.config.get(
