@@ -238,7 +238,14 @@ The URL for the Object Store is listed against the `internalurl` field above
 and we refer to this as **$SWIFT_URL** in the following commands.
 
 Enter the following command to register the endpoint with the Simplestreams
-service:
+service, when using Identity v3:
+
+```bash
+openstack endpoint create --region $REGION product-streams public $SWIFT_URL/simplestreams/images
+openstack endpoint create --region $REGION product-streams internal $SWIFT_URL/simplestreams/images
+```
+
+Using Identity v2:
 
 ```bash
 openstack endpoint create --region $REGION --publicurl $SWIFT_URL/simplestreams/images \
