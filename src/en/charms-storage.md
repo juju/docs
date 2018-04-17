@@ -375,30 +375,21 @@ following pool attributes:
     - standard (magnetic)
     - gp2 (ssd)
     - io1 (provisioned-iops)
+    - st1 (optimized-hdd)
+    - sc1 (cold-storage)
 
-    The default volume type is 'standard'. Since the default pool is 'ebs' the
-    default volume for AWS will be magnetic.
+    Juju's default pool (also called 'ebs') uses gp2/ssd as its own default.
 
 - **iops**
 
     The number of IOPS for provisioned-iops volume types. There are
-    restrictions on minimum and maximum IOPS, as a ratio of the size of volumes.
-    See [Provisioned IOPS (SSD) Volumes][aws-iops-ssd-volumes] for more
-    information.
+    restrictions on minimum and maximum IOPS, as a ratio of the size of
+    volumes.  See [Provisioned IOPS (SSD) Volumes][aws-iops-ssd-volumes] for
+    more information.
 
 - **encrypted**
 
     Boolean (true|false); indicates whether created volumes are encrypted.
-
-Recall that pool 'ebs-ssd' is provided for all EC2 environments. This is the
-easiest way to get SSD-based volumes; the pool defaults the volume type to
-ssd/gp2. The alternate way would be to create a new pool with a
-'volume-type' of 'ssd'. For example:
-
-```bash
-juju create-storage-pool myssd-pool ebs volume-type=ssd
-juju deploy postgresql --storage pgdata=myssd-pool,32G
-```
 
 For detailed information regarding EBS volume types, see the
 [AWS EBS documentation][aws-ebs-volume-types].
