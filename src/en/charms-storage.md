@@ -375,6 +375,8 @@ following pool attributes:
     - standard (magnetic)
     - gp2 (ssd)
     - io1 (provisioned-iops)
+    - st1 (optimized-hdd)
+    - sc1 (cold-storage)
 
     Juju's default pool (also called 'ebs') uses gp2/ssd as its own default.
 
