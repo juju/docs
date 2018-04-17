@@ -122,8 +122,8 @@ apt-http-proxy               | string |          |                            | 
 apt-https-proxy              | string |          |                            | The APT HTTPS proxy for the model.
 apt-mirror                   | string |          |                            | The APT mirror for the model. See [additional info below](#apt-mirror).
 automatically-retry-hooks    | bool   | true     |                            | Set the policy on retying failed hooks. See [additional info below](#retrying-failed-hooks).
-container-image-metadata-url | string |          | url                        | Corresponds to 'image-metadata-url' (see below) for cloud-hosted LXD containers. Not needed for the localhost cloud.
-container-image-stream       | string |          | url                        | Corresponds to 'image-stream' (see below) for cloud-hosted LXD containers. Not needed for the localhost cloud.
+container-image-metadata-url | string |          | url                        | Corresponds to 'image-metadata-url' (see below) for cloud-hosted KVM guests or LXD containers. Not needed for the localhost cloud.
+container-image-stream       | string |          | url                        | Corresponds to 'image-stream' (see below) for cloud-hosted KVM guests or LXD containers. Not needed for the localhost cloud.
 container-inherit-properties | string |          |                            | Set cloudinit parameters to be inherited from a Juju machine to its hosted containers. See [additional info below](#container-inheritance).
 container-networking-method  | string |          | local/provider/fan         | The FAN networking mode to use. Default values can be provider-specific.
 default-series               | string |          | valid series name, e.g. 'xenial' | The default series of Ubuntu to use for deploying charms.
