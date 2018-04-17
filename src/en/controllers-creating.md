@@ -1,6 +1,7 @@
 Title: Creating a Juju Controller
 TODO:  Improve examples
        Hardcoded: Ubuntu code names
+       Update default controller release (to "latest LTS") and remove Note once 18.04.1 released
 
 
 # Creating a controller
