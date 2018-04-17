@@ -145,7 +145,7 @@ navigation:
             location: howto-prometheus.md
           - title: Set up a Private Cloud
             location: howto-privatecloud.md
-          - title: Update the series of a juju controller or workload
+          - title: Update the series of a controller or machine
             location: howto-updateseries.md
 
       - title: Troubleshooting
