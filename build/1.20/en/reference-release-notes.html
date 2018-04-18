@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://jujucharms.com/docs/stable/getting-started -->
+<html class=" yui3-js-enabled js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" lang="en" dir="ltr" itemscope="" itemtype="http://schema.org/Product" style=""><div id="yui3-css-stamp" style="position: absolute !important; visibility: hidden !important"></div><!--<![endif]-->
+
+<style>
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    font-family: Ubuntu, Arial, "libre sans";
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-family: Ubuntu;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+</style>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>
+Juju Release Notes
+</title>
+
+
+<meta name="description" content="Learn how to install, configure, bootstrap Juju and how to create a charm through the Juju documentation">
+<meta name="keywords" content="juju, charms, services, cloud, deployment, puppet, chef, fuel, cloud tools, service management, cloud management, configuration management, linux tool, openstack tool, ubuntu, cloud design, applications, model, modelling, cloud orchestration, service orchestration">
+
+
+<meta name="author" content="Canonical">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<![endif]-->
+
+<link rel="shortcut icon" href="https://jujucharms.com/static/img/favicon.ico" type="image/x-icon">
+
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://jujucharms.com/static/img/icons/apple-touch-icon-57x57-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://jujucharms.com/static/img/icons/apple-touch-icon-60x60-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jujucharms.com/static/img/icons/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://jujucharms.com/static/img/icons/apple-touch-icon-76x76-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jujucharms.com/static/img/icons/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://jujucharms.com/static/img/icons/apple-touch-icon-120x120-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jujucharms.com/static/img/icons/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://jujucharms.com/static/img/icons/apple-touch-icon-152x152-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://jujucharms.com/static/img/icons/apple-touch-icon-180x180-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="https://jujucharms.com/static/img/icons/apple-touch-icon-precomposed.png">
+
+
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic%7CUbuntu+Mono" rel="stylesheet" type="text/css">
+
+<!-- stylesheets -->
+<link rel="stylesheet" type="text/css" media="screen" href="https://jujucharms.com/static/css/build.css">
+
+<!-- load basic yui, our modules file, the loader and sub to set up modules with
+combo load -->
+<script type="text/javascript" async="" src="../_static/munchkin.js"></script><script src="../_static/8875.js" async="" type="text/javascript"></script><script type="text/javascript" async="" src="../_static/heap-3280028620.js"></script><script type="text/javascript" async="" src="../_static/analytics.js"></script><script async="" src="../_static/gtm.js"></script><script type="text/javascript" src="../_static/sfcombo">
+
+</script>
+
+<script type="text/javascript">
+      YUI.GlobalConfig = {
+          combine: true,
+          base: '/prod/sfcombo?yui/',
+          comboBase: '/prod/sfcombo?',
+          maxURLLength: 1300,
+          root: 'yui/',
+            groups: {
+              app: {
+                  combine: true,
+                  base: '/prod/sfcombo?app',
+                  comboBase: '/prod/sfcombo?',
+                  root: 'app/',
+
+                  filter: 'min',
+
+                  // From modules.js
+                  modules: YUI_MODULES,
+              }
+          },
+          static_root:'/static/'
+    };
+ </script>
+
+<!-- provide charmstore url -->
+<script type="text/javascript">
+    window.csUrl = "https://api.jujucharms.com/charmstore/v5";
+</script>
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ubuntucloud">
+<meta name="twitter:creator" content="@ubuntucloud">
+<meta name="twitter:domain" content="jujucharms.com">
+<meta name="twitter:title" content="Documentation - Juju">
+<meta name="twitter:description" content="Learn about the using Juju through the Juju GUI or CLI and see how it makes creating, configuring, deploying and operating software in the cloud simple.">
+<meta name="twitter:image" content="https://jujucharms.com/static/img/juju-twitter.png">
+
+
+<script charset="utf-8" id="yui_3_17_1_1_1490188284910_2" src="../_static/sfcombo(1)" async=""></script><script type="text/javascript" async="" src="../_static/munchkin(1).js"></script><script charset="utf-8" id="yui_3_17_1_3_1490188284910_2" src="../_static/sfcombo(2)" async=""></script></head>
+
+<body class="
+">
+
+
+<header class="banner global" role="banner">
+
+    <nav role="navigation" class="nav-primary nav-right nav-gui-active" id="nav">
+
+    <span class="accessibility-aid">
+        <a accesskey="s" href="https://jujucharms.com/docs/stable/getting-started#main-content">Jump to content</a>
+    </span>
+
+    <div class="logo">
+        <a href="https://jujucharms.com/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="78" height="32" viewBox="309.33 322.034 571.89 206.329"><circle fill="#E95420" cx="408.542" cy="421.246" r="99.212"></circle><g fill="#FFF"><circle cx="414.212" cy="415.576" r="6.142"></circle><path d="M419.88 404.237h-11.337v-45.354c0-10.94 8.902-19.842 19.842-19.842s19.842 8.903 19.842 19.843v11.34l-11.338-.002v-11.337c0-2.272-.886-4.408-2.49-6.014-1.607-1.605-3.742-2.492-6.015-2.492-4.688 0-8.504 3.816-8.504 8.505v45.354z"></path><path d="M456.73 424.08c-10.94 0-19.843-8.9-19.843-19.842v-28.345h11.34v28.345c0 4.69 3.813 8.505 8.503 8.505 4.688 0 8.503-3.814 8.503-8.505v-28.345h11.34v28.345c0 5.3-2.065 10.282-5.813 14.03-3.745 3.75-8.728 5.812-14.03 5.812z"></path><circle cx="357.52" cy="483.605" r="6.143"></circle><path d="M363.188 472.27H351.85v-62.362c0-10.94 8.9-19.842 19.844-19.842 10.94 0 19.842 8.9 19.842 19.842v11.34h-11.34v-11.34c0-2.272-.883-4.408-2.49-6.014-1.606-1.604-3.742-2.49-6.013-2.49-4.69 0-8.505 3.814-8.505 8.504v62.36z"></path><path d="M400.04 475.103c-10.942 0-19.844-8.9-19.844-19.844v-28.347h11.34v28.348c0 4.69 3.813 8.503 8.503 8.503s8.503-3.814 8.503-8.504v-28.347h11.338v28.348c0 5.298-2.062 10.28-5.81 14.03-3.75 3.75-8.732 5.813-14.03 5.813z"></path></g><g><path d="M620.714 446.453c0 6.744-.678 12.98-2.02 18.707-1.353 5.73-3.68 10.72-6.98 14.967-3.307 4.246-7.686 7.553-13.146 9.908-5.46 2.357-12.306 3.54-20.528 3.54-4.854 0-9.304-.438-13.35-1.313-4.042-.88-7.617-1.922-10.718-3.135-3.104-1.215-5.697-2.494-7.787-3.842-2.092-1.35-3.675-2.562-4.753-3.643l6.473-11.123c1.214 1.08 2.73 2.26 4.55 3.538 1.82 1.283 3.945 2.46 6.372 3.54 2.426 1.08 5.122 1.954 8.09 2.628 2.964.676 6.2 1.012 9.708 1.012 10.38 0 18.03-2.73 22.955-8.19 4.92-5.46 7.38-14.796 7.38-28.01v-94.653h13.755v96.068zM729.255 486.902c-3.91 1.08-9.17 2.293-15.773 3.64-6.607 1.347-14.697 2.02-24.27 2.02-7.822 0-14.36-1.144-19.62-3.437-5.257-2.29-9.503-5.525-12.74-9.707-3.235-4.178-5.56-9.234-6.978-15.17-1.416-5.93-2.123-12.47-2.123-19.615V385.98h13.146v54.402c0 7.418.54 13.69 1.62 18.81 1.077 5.128 2.83 9.272 5.257 12.44 2.43 3.17 5.562 5.46 9.404 6.874 3.844 1.418 8.527 2.125 14.057 2.125 6.2 0 11.594-.335 16.18-1.01 4.584-.673 7.482-1.28 8.697-1.82v-91.82h13.147v100.922h-.002zM739.185 528.363c-1.482 0-3.338-.203-5.562-.607-2.227-.404-3.873-.88-4.955-1.416l1.82-10.72c.945.27 2.225.538 3.842.81 1.62.27 3.17.404 4.652.404 7.953 0 13.246-2.225 15.875-6.674 2.63-4.45 3.945-11.125 3.945-20.023V385.98h13.146v103.55c0 13.214-2.498 22.985-7.484 29.325-4.99 6.336-13.418 9.508-25.28 9.508zM881.22 486.902c-3.912 1.08-9.17 2.293-15.773 3.64-6.607 1.347-14.697 2.02-24.27 2.02-7.822 0-14.36-1.144-19.62-3.437-5.257-2.29-9.505-5.525-12.74-9.707-3.235-4.178-5.56-9.234-6.978-15.17-1.417-5.93-2.124-12.47-2.124-19.615V385.98h13.146v54.402c0 7.418.533 13.69 1.615 18.81 1.078 5.128 2.832 9.272 5.26 12.44 2.428 3.17 5.56 5.46 9.402 6.874 3.845 1.418 8.526 2.125 14.058 2.125 6.197 0 11.594-.335 16.18-1.01 4.584-.673 7.482-1.28 8.697-1.82v-91.82h13.145v100.922z" class="logo__text"></path></g></svg>
+        </a>
+    </div>
+
+    <ul>
+        <li>
+        <a class="" href="https://jujucharms.com/store">
+            Store
+        </a>
+    </li>
+        <li>
+        <a class="" href="https://jujucharms.com/how-it-works">
+            How it works
+        </a>
+    </li>
+        <li>
+        <a class="" href="https://jujucharms.com/community">
+            Community
+        </a>
+    </li>
+        <li>
+        <a class="active" href="https://jujucharms.com/docs/">
+            Docs
+        </a>
+    </li>
+
+          <li><a class="try-beta" href="https://jujucharms.com/new" rel="nofollow">Try the beta</a></li>
+
+    </ul>
+
+    <div class="nav-toggle">
+        <a href="https://jujucharms.com/docs/stable/getting-started#nav" class="nav-toggle__link open">
+            <svg class="nav-toggle__image" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+              <path fill="#888" d="M5 10h20v2H6zM5 16h20v2H6zM5 22h20v2H6z"></path>
+            </svg>
+        </a>
+        <a href="https://jujucharms.com/docs/stable/getting-started#" class="nav-toggle__link close">
+            <svg class="nav-toggle__image" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                <g color="#000" fill="none">
+                    <path d="M2.538 2.63l16 16M16 2.63L2.538 16" stroke="#888" stroke-width="2" stroke-linejoin="round"></path>
+                </g>
+            </svg>
+        </a>
+    </div>
+
+    <ul class="user-nav">
+      <li>
+
+            <a href="https://jujucharms.com/login/" class="inactive menu-link js-menu-login">
+                Sign in
+            </a>
+
+        </li>
+    </ul>
+</nav>
+    <div class="search-container">
+    <form class="search-form" action="https://jujucharms.com/q" method="GET" id="yui_3_17_1_1_1490188284910_20">
+        <input type="search" name="text" class="form-text" placeholder="Search the store" value="">
+        <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="search-icon__image">
+                <g transform="matrix(.667 0 0 .667 -74.667 -285.575)">
+                    <path d="M129.93 444.03l-2.27 2.275 6.07 6.07L136 450.1z" fill="#878787"></path>
+                    <ellipse ry="9.479" rx="9.479" cy="438.862" cx="122.5" fill="none" stroke="#878787" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></ellipse>
+                </g>
+            </svg>
+        </button>
+        <a href="https://jujucharms.com/docs/stable/getting-started" class="search-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="search-close__image">
+                <g color="#000" fill="none">
+                    <path d="M2.538 2.63l11.006 11.006M13.544 2.63L2.538 13.637" overflow="visible" stroke="#878787" stroke-width="2"></path>
+                </g>
+            </svg>
+        </a>
+    </form>
+</div>
+
+<div class="search-panel">
+    <div class="row">
+        <div class="inner-wrapper">
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/canonical-kubernetes" class="search-panel__featured-link">
+                        <img src="../_static/icon.svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">kubernetes</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/elasticsearch" class="search-panel__featured-link">
+                        <img src="../_static/icon(1).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">elasticsearch</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/u/asanjar/hdp-tez" class="search-panel__featured-link">
+                        <img src="../_static/icon(2).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">hdp-tez</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/hdp-storm" class="search-panel__featured-link">
+                        <img src="../_static/icon(3).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">hdp-storm</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/ceph" class="search-panel__featured-link">
+                        <img src="../_static/icon(4).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">ceph</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/cassandra" class="search-panel__featured-link">
+                        <img src="../_static/icon(5).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">cassandra</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/percona-cluster" class="search-panel__featured-link">
+                        <img src="../_static/icon(6).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">percona-cluster</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/glance" class="search-panel__featured-link">
+                        <img src="../_static/icon(7).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">glance</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/mariadb" class="search-panel__featured-link">
+                        <img src="../_static/icon(8).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">mariadb</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/spark" class="search-panel__featured-link">
+                        <img src="../_static/icon(9).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">spark</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col last-col no-margin-bottom">
+                <h3 class="search-panel__heading">Popular searches</h3>
+                <ul class="search-panel__list no-bullets">
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/openstack">openstack</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/ceph">ceph</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/mysql">mysql</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/hdp">hdp</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/spark">spark</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/nginx">nginx</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/redis">redis</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/jenkins">jenkins</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/logstash">logstash</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row row-footer">
+        <div class="inner-wrapper">
+            <div class="twelve-col last-col no-margin-bottom">
+                <ul class="no-bullets inline-list">
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=openstack">openstack
+                            <span class="search-panel__item-count">(108)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=applications">applications
+                            <span class="search-panel__item-count">(248)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=databases">databases
+                            <span class="search-panel__item-count">(71)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=app-servers">app-servers
+                            <span class="search-panel__item-count">(75)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=file-servers">file-servers
+                            <span class="search-panel__item-count">(48)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=monitoring">monitoring
+                            <span class="search-panel__item-count">(28)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=misc">misc
+                            <span class="search-panel__item-count">(279)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=ops">ops
+                            <span class="search-panel__item-count">(22)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</header>
+
+<div class="wrapper">
+<div id="main-content">
+
+    <div class="login-notification">
+        If requested, in the address bar above, please allow popups.
+    </div>
+
+
+
+
+
+
+
+
+
+
+<div class="row jujudocs">
+    <nav class="jujudocs__nav">
+        <form action="https://jujucharms.com/docs/search/" method="GET" class="search-form">
+            <input type="text" name="text" placeholder="Search docs">
+            <input type="hidden" name="version" value="2.1">
+            <button type="submit">
+                Search
+            </button>
+        </form>
+        <div class="versions-nav">
+
+            <strong class="label">Versions:</strong>
+
+            <a class="stable" href="https://docs.jujucharms.com/stable">stable</a>
+
+        </div>
+        <div class="jujudocs-menu">
+
+                       <ul>
+    <li><a {% if (doc_name == "about-juju.html") %} class="is-selected"{% endif %} href="about-juju.html">About Juju</a></li>
+<!-- SECTION -->
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">Quick Guides</h4>
+        <ul>
+        <li class="section"><a  {% if (doc_name == "getting-started.html") %} class="is-selected"{% endif %} href="getting-started.html">Get started</a></li>
+        <li><a {% if (doc_name == "whats-new.html") %} class="is-selected"{% endif %} href="whats-new.html">What's new in 2.3</a></li>
+        <li><a {% if (doc_name == "tut-lxd.html") %} class="is-selected"{% endif %} href="tut-lxd.html">Local Juju with LXD cloud</a></li>
+        <li><a {% if (doc_name == "tut-google.html") %} class="is-selected"{% endif %} href="tut-google.html">Controllers and Models</a></li>
+        <li><a {% if (doc_name == "tut-users.html") %} class="is-selected"{% endif %} href="tut-users.html">Sharing and Users</a></li>
+        </ul>
+    </li>
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">User Guide</h4>
+        <ul>
+	<li><a {% if (doc_name == "juju-concepts.html") %} class="is-selected"{% endif %} href="juju-concepts.html">Concepts and terms</a></li>
+        <li class="section"><a  {% if (doc_name == "clouds.html") %} class="is-selected"{% endif %} href="clouds.html">Clouds</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "credentials.html") %} class="is-selected"{% endif %} href="credentials.html">Cloud credentials</a></li>
+                <li><a {% if (doc_name == "help-aws.html") %} class="is-selected"{% endif %} href="help-aws.html">Amazon AWS</a></li>
+                <li><a {% if (doc_name == "help-azure.html") %} class="is-selected"{% endif %} href="help-azure.html">Microsoft Azure</a></li>
+                <li><a {% if (doc_name == "help-google.html") %} class="is-selected"{% endif %} href="help-google.html">Google GCE</a></li>
+                <li><a {% if (doc_name == "help-joyent.html") %} class="is-selected"{% endif %} href="help-joyent.html">Joyent</a></li>
+                <li><a {% if (doc_name == "clouds-LXD.html") %} class="is-selected"{% endif %} href="clouds-LXD.html">LXD</a></li>
+                <li><a {% if (doc_name == "clouds-maas.html") %} class="is-selected"{% endif %} href="clouds-maas.html">MAAS</a></li>
+                <li><a {% if (doc_name == "clouds-manual.html") %} class="is-selected"{% endif %} href="clouds-manual.html">Manual</a></li>
+                <li><a {% if (doc_name == "help-openstack.html") %} class="is-selected"{% endif %} href="help-openstack.html">OpenStack</a></li>
+                <li><a {% if (doc_name == "help-oracle.html") %} class="is-selected"{% endif %} href="help-oracle.html">Oracle Compute</a></li>
+                <li><a {% if (doc_name == "help-rackspace.html") %} class="is-selected"{% endif %} href="help-rackspace.html">Rackspace</a></li>
+                <li><a {% if (doc_name == "help-vmware.html") %} class="is-selected"{% endif %} href="help-vmware.html">VMware vSphere</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "controllers.html") %} class="is-selected"{% endif %} href="controllers.html">Controllers</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "controllers-creating.html") %} class="is-selected"{% endif %} href="controllers-creating.html">Create/Bootstrap</a></li>
+                <li><a {% if (doc_name == "controllers-gui.html") %} class="is-selected"{% endif %} href="controllers-gui.html">Juju GUI</a></li>
+                <li><a {% if (doc_name == "controllers-ha.html") %} class="is-selected"{% endif %} href="controllers-ha.html">High Availability</a></li>
+                <li><a {% if (doc_name == "controllers-backup.html") %} class="is-selected"{% endif %} href="controllers-backup.html">Backups</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "models.html") %} class="is-selected"{% endif %} href="models.html">Models</a></li>
+        <li class="section"><a  {% if (doc_name == "charms.html") %} class="is-selected"{% endif %} href="charms.html">Charms & applications</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "charms-deploying.html") %} class="is-selected"{% endif %} href="charms-deploying.html">Deploying applications</a></li>
+                <li><a {% if (doc_name == "charms-constraints.html") %} class="is-selected"{% endif %} href="charms-constraints.html">Using constraints</a></li>
+                <li><a {% if (doc_name == "charms-config.html") %} class="is-selected"{% endif %} href="charms-config.html">Application configuration</a></li>
+                <li><a {% if (doc_name == "charms-relations.html") %} class="is-selected"{% endif %} href="charms-relations.html">Application Relations</a></li>
+                <li><a {% if (doc_name == "charms-exposing.html") %} class="is-selected"{% endif %} href="charms-exposing.html">Exposing applications</a></li>
+                <li><a {% if (doc_name == "charms-scaling.html") %} class="is-selected"{% endif %} href="charms-scaling.html">Scaling applications</a></li>
+                <li><a {% if (doc_name == "charms-upgrading.html") %} class="is-selected"{% endif %} href="charms-upgrading.html">Upgrading applications</a></li>
+                <li><a {% if (doc_name == "charms-destroy.html") %} class="is-selected"{% endif %} href="charms-destroy.html">Removing applications &amp; Units</a></li>
+                <li><a {% if (doc_name == "charms-service-groups.html") %} class="is-selected"{% endif %} href="charms-service-groups.html">Groups of applications</a></li>
+                <li><a {% if (doc_name == "charms-ha.html") %} class="is-selected"{% endif %} href="charms-ha.html">Charm high availability</a></li>
+                <li><a {% if (doc_name == "charms-working-with-units.html") %} class="is-selected"{% endif %} href="charms-working-with-units.html">Working with Units</a></li>
+                <li><a {% if (doc_name == "actions.html") %} class="is-selected"{% endif %} href="actions.html">Working with Actions</a></li>
+                <li><a {% if (doc_name == "charms-resources.html") %} class="is-selected"{% endif %} href="charms-resources.html">Working with Resources</a></li>
+                <li><a {% if (doc_name == "charms-storage.html") %} class="is-selected"{% endif %} href="charms-storage.html">Using storage</a></li>
+                <li><a {% if (doc_name == "charms-metrics.html") %} class="is-selected"{% endif %} href="charms-metrics.html">Viewing utilization with metrics</a></li>
+                <li><a {% if (doc_name == "charms-fan.html") %} class="is-selected"{% endif %} href="charms-fan.html">Fan container networking</a></li>
+                <li><a {% if (doc_name == "charms-offline.html") %} class="is-selected"{% endif %} href="charms-offline.html">Working offline</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "charms-bundles.html") %} class="is-selected"{% endif %} href="charms-bundles.html">Charm bundles</a></li>
+        <li class="section"><a  {% if (doc_name == "users.html") %} class="is-selected"{% endif %} href="users.html">Users</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "users-auth.html") %} class="is-selected"{% endif %} href="users-auth.html">Authentication</a></li>
+                <li><a {% if (doc_name == "users-creating.html") %} class="is-selected"{% endif %} href="users-creating.html">Creating users</a></li>
+                <li><a {% if (doc_name == "users-models.html") %} class="is-selected"{% endif %} href="users-models.html">Users and models</a></li>
+                <li><a {% if (doc_name == "users-manage.html") %} class="is-selected"{% endif %} href="users-manage.html">User management</a></li>
+                <li><a {% if (doc_name == "users-sample-commands.html") %} class="is-selected"{% endif %} href="users-sample-commands.html">Sample commands</a></li>
+                <li><a {% if (doc_name == "users-workflows.html") %} class="is-selected"{% endif %} href="users-workflows.html">Workflow scenarios</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "juju-managing.html") %} class="is-selected"{% endif %} href="juju-managing.html">Managing Juju</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "juju-block.html") %} class="is-selected"{% endif %} href="juju-block.html">Disable Juju commands</a></li>
+                <li><a {% if (doc_name == "juju-centos.html") %} class="is-selected"{% endif %} href="juju-centos.html">CentOS support</a></li>
+                <li><a {% if (doc_name == "network-spaces.html") %} class="is-selected"{% endif %} href="network-spaces.html">Network spaces</a></li>
+                <li><a {% if (doc_name == "juju-plugins.html") %} class="is-selected"{% endif %} href="juju-plugins.html">Juju plugins</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "howto.html") %} class="is-selected"{% endif %} href="howto.html">How to...</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "howto-prometheus.html") %} class="is-selected"{% endif %} href="howto-prometheus.html">Configure metrics gathering with Prometheus</a></li>
+                <li><a {% if (doc_name == "howto-privatecloud.html") %} class="is-selected"{% endif %} href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+                <li><a {% if (doc_name == "howto-updateseries.html") %} class="is-selected"{% endif %} href="howto-updateseries.html">Update the series of a controller or machine</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "troubleshooting.html") %} class="is-selected"{% endif %} href="troubleshooting.html">Troubleshooting</a></li>
+    </ul>
+   </li>
+<!-- SECTION -->
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">Developer Guide</h4>
+        <ul>
+        <li class="section"><a  {% if (doc_name == "developer-getting-started.html") %} class="is-selected"{% endif %} href="developer-getting-started.html">Getting Started</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-getting-started.html#install-libraries-and-tools") %} class="is-selected"{% endif %} href="developer-getting-started.html#install-libraries-and-tools">Prerequisites and Tools</a></li>
+                <li><a {% if (doc_name == "developer-getting-started.html#designing-your-charm") %} class="is-selected"{% endif %} href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
+                <li><a {% if (doc_name == "developer-getting-started.html#writing-your-charm") %} class="is-selected"{% endif %} href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
+                <li><a {% if (doc_name == "developer-getting-started.html#testing-your-charm") %} class="is-selected"{% endif %} href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
+                <li><a {% if (doc_name == "developer-getting-started.html#publishing-your-charm") %} class="is-selected"{% endif %} href="developer-getting-started.html#publishing-your-charm">Publishing your charm</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-event-cycle.html") %} class="is-selected"{% endif %} href="developer-event-cycle.html">Event Cycle</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-event-cycle.html#handling-reactive-states") %} class="is-selected"{% endif %} href="developer-event-cycle.html#handling-reactive-states">Handling Reactive States</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-layers.html") %} class="is-selected"{% endif %} href="developer-layers.html">Charm Layers</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-layers.html#what-are-layers?") %} class="is-selected"{% endif %} href="developer-layers.html#what-are-layers?">What are Layers</a></li>
+                <li><a {% if (doc_name == "developer-layers.html#states") %} class="is-selected"{% endif %} href="developer-layers.html#states">States</a></li>
+                <li><a {% if (doc_name == "developer-layer-example.html") %} class="is-selected"{% endif %} href="developer-layer-example.html">How to Write a Layer</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-layers-interfaces.html") %} class="is-selected"{% endif %} href="developer-layers-interfaces.html">Interface Layers</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-layers-interfaces.html#design-considerations") %} class="is-selected"{% endif %} href="developer-layers-interfaces.html#design-considerations">Design Considerations</a></li>
+                <li><a {% if (doc_name == "developer-layers-interfaces.html#communication-scopes") %} class="is-selected"{% endif %} href="developer-layers-interfaces.html#communication-scopes">Communication Scopes</a></li>
+                <li><a {% if (doc_name == "developer-layers-interfaces.html#writing-an-interface-layer") %} class="is-selected"{% endif %} href="developer-layers-interfaces.html#writing-an-interface-layer">Writing an Interface</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "developer-upgrade-charm.html") %} class="is-selected"{% endif %} href="developer-upgrade-charm.html">Upgrading</a></li>
+        <li><a {% if (doc_name == "developer-terms.html") %} class="is-selected"{% endif %} href="developer-terms.html">Juju Terms</a></li>
+        <li><a {% if (doc_name == "developer-metrics.html") %} class="is-selected"{% endif %} href="developer-metrics.html">Juju Metrics</a></li>
+        <li><a {% if (doc_name == "developer-resources.html") %} class="is-selected"{% endif %} href="developer-resources.html">Juju Resources</a></li>
+        <li><a {% if (doc_name == "developer-network-primitives.html") %} class="is-selected"{% endif %} href="developer-network-primitives.html">Network Primitives</a></li>
+        <li class="section"><a  {% if (doc_name == "developer-leadership.html") %} class="is-selected"{% endif %} href="developer-leadership.html">Implementing Leadership</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-leadership.html#leadership-hooks") %} class="is-selected"{% endif %} href="developer-leadership.html#leadership-hooks">Leadership Hooks</a></li>
+                <li><a {% if (doc_name == "developer-leadership.html#leadership-tools") %} class="is-selected"{% endif %} href="developer-leadership.html#leadership-tools">Leadership Tools</a></li>
+                <li><a {% if (doc_name == "developer-leadership-howtos.html") %} class="is-selected"{% endif %} href="developer-leadership-howtos.html">Leadership Howtos</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-actions.html") %} class="is-selected"{% endif %} href="developer-actions.html">Implementing Actions</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-actions.html#implementing-actions") %} class="is-selected"{% endif %} href="developer-actions.html#implementing-actions">Defining Actions</a></li>
+                <li><a {% if (doc_name == "developer-actions.html#action-tools") %} class="is-selected"{% endif %} href="developer-actions.html#action-tools">Action Tools</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-storage.html") %} class="is-selected"{% endif %} href="developer-storage.html">Implementing Storage</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-storage.html#adding-storage") %} class="is-selected"{% endif %} href="developer-storage.html#adding-storage">Adding Storage</a></li>
+                <li><a {% if (doc_name == "developer-storage.html#storage-hooks") %} class="is-selected"{% endif %} href="developer-storage.html#storage-hooks">Storage Hooks</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-testing.html") %} class="is-selected"{% endif %} href="developer-testing.html">Writing Tests</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-testing.html#charm-proof") %} class="is-selected"{% endif %} href="developer-testing.html#charm-proof">Charm Proof</a></li>
+                <li><a {% if (doc_name == "developer-testing.html#amulet") %} class="is-selected"{% endif %} href="developer-testing.html#amulet">Amulet</a></li>
+                <li><a {% if (doc_name == "developer-testing.html#bundletester") %} class="is-selected"{% endif %} href="developer-testing.html#bundletester">BundleTester</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-debugging.html") %} class="is-selected"{% endif %} href="developer-debugging.html">Debugging</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-debug-layers.html") %} class="is-selected"{% endif %} href="developer-debug-layers.html">Debugging Layers</a></li>
+                <li><a {% if (doc_name == "developer-debugging.html#the-'debug-hooks'-command") %} class="is-selected"{% endif %} href="developer-debugging.html#the-'debug-hooks'-command">debug-hooks</a></li>
+                <li><a {% if (doc_name == "developer-debugging.html#the-'debug-log'-command") %} class="is-selected"{% endif %} href="developer-debugging.html#the-'debug-log'-command">debug-log</a></li>
+                <li><a {% if (doc_name == "developer-debug-dhx.html") %} class="is-selected"{% endif %} href="developer-debug-dhx.html">DHX</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-howto.html") %} class="is-selected"{% endif %} href="developer-howto.html">How to...</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "howto-charm-with-docker.html") %} class="is-selected"{% endif %} href="howto-charm-with-docker.html">Charm with Docker</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "authors-intro.html") %} class="is-selected"{% endif %} href="authors-intro.html">Charm Authors</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "authors-hook-environment.html") %} class="is-selected"{% endif %} href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
+                <li><a {% if (doc_name == "authors-relations-in-depth.html") %} class="is-selected"{% endif %} href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+                <li><a {% if (doc_name == "authors-relations.html") %} class="is-selected"{% endif %} href="authors-relations.html">Implementing relations</a></li>
+                <li><a {% if (doc_name == "authors-charm-leadership.html") %} class="is-selected"{% endif %} href="authors-charm-leadership.html">Charm leadership</a></li>
+                <li><a {% if (doc_name == "authors-hook-errors.html") %} class="is-selected"{% endif %} href="authors-hook-errors.html">Hook Errors</a></li>
+                <li><a
+                    {% if (doc_name == "authors-subordinate-applications.html") %} class="is-selected"{% endif %} href="authors-subordinate-applications.html">Subordinate applications</a></li>
+                <li><a {% if (doc_name == "authors-implicit-relations.html") %} class="is-selected"{% endif %} href="authors-implicit-relations.html">Implicit Relations</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "authors-charm-store.html") %} class="is-selected"{% endif %} href="authors-charm-store.html">The Juju Charm Store</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "authors-charm-store.html#submitting-a-new-charm") %} class="is-selected"{% endif %} href="authors-charm-store.html#submitting-a-new-charm">Submit a charm</a></li>
+                <li><a {% if (doc_name == "authors-charm-policy.html") %} class="is-selected"{% endif %} href="authors-charm-policy.html">Charm store policy</a></li>
+                <li><a {% if (doc_name == "authors-charm-best-practice.html") %} class="is-selected"{% endif %} href="authors-charm-best-practice.html">Best practices</a></li>
+                <li><a {% if (doc_name == "authors-charm-icon.html") %} class="is-selected"{% endif %} href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
+        </li>
+    </ul>
+   </li>
+<!-- SECTION -->
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">Tools</h4>
+        <ul>
+        <li><a {% if (doc_name == "tools-charm-tools.html") %} class="is-selected"{% endif %} href="tools-charm-tools.html">Charm Tools</a></li>
+        <li><a {% if (doc_name == "tools-charm-helpers.html") %} class="is-selected"{% endif %} href="tools-charm-helpers.html">Charm Helpers</a></li>
+        <li><a {% if (doc_name == "tools-amulet.html") %} class="is-selected"{% endif %} href="tools-amulet.html">Amulet</a></li>
+        <li><a {% if (doc_name == "tools-mojo.html") %} class="is-selected"{% endif %} href="tools-mojo.html">Mojo</a></li>
+    </ul>
+    </li>
+<!-- SECTION -->
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">Reference</h4>
+        <ul>
+        <li><a {% if (doc_name == "reference-install.html") %} class="is-selected"{% endif %} href="reference-install.html">Install Juju</a></li>
+        <li><a {% if (doc_name == "introducing-2.html") %} class="is-selected"{% endif %} href="introducing-2.html">Introducing Juju 2.0!</a></li>
+        <li><a {% if (doc_name == "commands.html") %} class="is-selected"{% endif %} href="commands.html">Juju commands</a></li>
+        <li><a {% if (doc_name == "reference-constraints.html") %} class="is-selected"{% endif %} href="reference-constraints.html">Juju constraints</a></li>
+        <li><a {% if (doc_name == "reference-charm-hooks.html") %} class="is-selected"{% endif %} href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
+        <li><a {% if (doc_name == "reference-environment-variables.html") %} class="is-selected"{% endif %} href="reference-environment-variables.html">Juju environment variables</a></li>
+        <li><a {% if (doc_name == "reference-hook-tools.html") %} class="is-selected"{% endif %} href="reference-hook-tools.html">Juju Hook Tools</a></li>
+        <li><a {% if (doc_name == "authors-charm-metadata.html") %} class="is-selected"{% endif %} href="authors-charm-metadata.html">metadata.yaml</a></li>
+        <li class="section"><a  {% if (doc_name == "https://charmsreactive.readthedocs.io") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io">Layers and charms.reactive</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "https://charmsreactive.readthedocs.io/en/latest/charms.reactive.decorators.html") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io/en/latest/charms.reactive.decorators.html">Decorators</a></li>
+                <li><a {% if (doc_name == "https://charmsreactive.readthedocs.io/en/latest/charms.reactive.flags.html") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io/en/latest/charms.reactive.flags.html">Flags</a></li>
+                <li><a {% if (doc_name == "https://charmsreactive.readthedocs.io/en/latest/triggers.html") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io/en/latest/triggers.html">Triggers</a></li>
+                <li><a {% if (doc_name == "https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations.html") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations.html">Relations</a></li>
+                <li><a {% if (doc_name == "reference-layer-yaml.html") %} class="is-selected"{% endif %} href="reference-layer-yaml.html">Layer.yaml</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "http://godoc.org/github.com/juju/juju/api") %} class="is-selected"{% endif %} href="http://godoc.org/github.com/juju/juju/api">API docs</a></li>
+        <li><a {% if (doc_name == "reference-release-notes.html") %} class="is-selected"{% endif %} href="reference-release-notes.html">Release notes</a></li>
+        <li><a {% if (doc_name == "reference-status.html") %} class="is-selected"{% endif %} href="reference-status.html">Status values</a></li>
+        <li><a {% if (doc_name == "reference-numbering.html") %} class="is-selected"{% endif %} href="reference-numbering.html">Machine/unit numbering</a></li>
+        <li><a {% if (doc_name == "reference-reviewers.html") %} class="is-selected"{% endif %} href="reference-reviewers.html">Charm Review Criteria</a></li>
+    </ul>
+   </li>
+<li><a {% if (doc_name == "contact-us.html") %} class="is-selected"{% endif %} href="contact-us.html">Contact us</a></li>
+<li><a {% if (doc_name == "contributing.html") %} class="is-selected"{% endif %} href="contributing.html">Help improve these docs</a></li>
+<li><a {% if (doc_name == "https://github.com/juju/docs/issues/new") %} class="is-selected"{% endif %} href="https://github.com/juju/docs/issues/new">Report a docs issue</a></li>
+</ul>
+
+
+        </div>
+    </nav>
+    <main class="jujudocs__content">
+
+    <div class="alert" id="caution">
+     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Caution!</strong> These older versions of Juju documentation are no longer maintained and are provided for reference only. See <a href="https://docs.jujucharms.com/"> docs.jujucharms.com </a> for the current, supported documentation.
+      </div>
+
+
+                   <h1 id="release-notes-history">Release Notes History<a class="anchor" href="#release-notes-history"></a></h1>
+<p>This page details all available release notes for the 2.x series of Juju. The
+release notes for the 1.x series are available <a href="./reference-release-notes-1.html">here</a>.</p>
+<!--
+USE THE NEW & IMPROVED 'Feedback' and 'More information' SECTIONS THAT STARTED
+TO APPEAR WITH 2.3.5
+
+ALSO CONSIDER "LINKIFYING" STUFF. INCLUDE 2 EMPTY SPACES AT EOL TO GET A
+CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
+-->
+
+<details id="Juju-2.3.5"><summary><strong>Juju 2.3.5</strong></summary><p>Juju 2.3.5 has arrived. This is primarily a bug fix release.</p><h2 id="critical-bugs-fixed">Critical bugs fixed.</h2><p><a href="https://bugs.launchpad.net/juju/+bug/1737058">LP 1737058</a> network-get fails
+to find configs on 2.3.0 that worked on 2.2.6<br />
+<a href="https://bugs.launchpad.net/juju/+bug/1751287">LP 1751287</a> Controller
+bootstrap fails with Openstack Devstack</p><h2 id="important-bugs-fixed">Important bugs fixed.</h2><p><a href="https://bugs.launchpad.net/bugs/1729880">LP 1729880</a> juju 2.2.4 and 2.2.6
+actions dissappear when state is changed from running to complete<br />
+<a href="https://bugs.launchpad.net/bugs/1754735">LP 1754735</a> Juju does not support
+current AWS instance types </p><p>There's also a few enhancements like:</p><p><a href="https://bugs.launchpad.net/bugs/1753593">LP 1753593</a> support st1 and sc1 ebs
+volume-types<br />
+<a href="https://bugs.launchpad.net/bugs/1757926">LP 1757926</a> Cannot remove an offer
+with relations</p><p>If you were affected by any of the bugs fixed in this release, your feedback
+is appreciated. Please contact the Juju team using the communication channels
+specified in the feedback section.</p><h2 id="get-juju">Get Juju.</h2><p>The easiest way to get Juju is using the <code>snap</code> package.</p><pre><code>sudo snap install juju --classic
+</code></pre><h2 id="feedback-appreciated">Feedback appreciated.</h2><p>We encourage everyone to let us know how you're using Juju. You can send us a
+message on Twitter using <code>#jujucharms</code>, join us in the freenode IRC channel
+<code>#juju</code>, or subscribe to the
+<a href="https://lists.ubuntu.com/mailman/listinfo/juju">Juju mailing list</a>.</p><h2 id="more-information">More information.</h2><p>To learn more about Juju visit
+<a href="https://jujucharms.com">https://jujucharms.com</a>.</p></details><details id="Juju-2.3.4"><summary><strong>Juju 2.3.4</strong></summary><p>Juju 2.3.4 has arrived. This is primarily a bug fix release.</p><h2 id="critical-bugs-fixed_1">Critical bugs fixed</h2><p>Among the bugs fixed, one was considered critical. </p><p><a href="https://bugs.launchpad.net/juju/+bug/1748275">LP 1748275</a> Juju HA fails due to demotion of Machine 0</p><p>If you were affected by any of the bugs fixed in this release, your feedback
+is appreciated. Please contact the Juju team using the communication channels
+specified in the feedback section.</p><h2 id="get-juju_1">Get Juju</h2><p>The easiest way to get Juju is using the snap package.</p><pre><code>sudo snap install juju --classic
+</code></pre><h2 id="feedback-appreciated_1">Feedback Appreciated</h2><p>We encourage everyone to let us know how you're using Juju. Send us a
+message on Twitter using #jujucharms, join us at #juju on freenode IRC, and
+subscribe to the mailing list at juju@lists.ubuntu.com.</p><h2 id="more-information_1">More information</h2><p>To learn more about Juju please visit https://jujucharms.com.</p></details><details id="Juju-2.3.3"><summary><strong>Juju 2.3.3</strong></summary><p>Juju 2.3.3 has arrived. This is primarily a bug fix release.</p><h2 id="critical-bugs-fixed_2">Critical bugs fixed</h2><p>Among the bugs fixed three were considered critical. </p><p><a href="https://bugs.launchpad.net/juju/+bug/1746265">LP 1746265</a> juju-upgrade from 2.2.9 to 2.3.2 fails with state changing too quickly<br />
+<a href="https://bugs.launchpad.net/juju/+bug/1747048">LP 1747048</a> vsphere bootstrap: go panic comparing uncomparable type map[string]interface {}<br />
+<a href="https://bugs.launchpad.net/juju/+bug/1745231">LP 1745231</a> removed model can cause allmodelwatcher to die permanently</p><p>If you were affected by any of the bugs fixed in this release, your feedback is
+appreciated. Please contact the juju team using the communication channels
+specified in the feedback section.</p><h2 id="get-juju_2">Get juju</h2><p>The easiest way to get juju is using the snap package.</p><pre><code>snap install juju --classic
+</code></pre><h2 id="feedback-appreciated_2">Feedback Appreciated</h2><p>We encourage everyone to let us know how you're using Juju. Send us a
+message on Twitter using #jujucharms, join us at #juju on freenode,
+and
+subscribe to the mailing list at juju@lists.ubuntu.com.</p><h2 id="more-information_2">More information</h2><p>To learn more about juju please visit https://jujucharms.com.</p></details><details id="Juju-2.3.2"><summary><strong>Juju 2.3.2</strong></summary><p>Juju 2.3.2 has arrived. This is primarily a bug fix release.</p><h2 id="critical-bugs-fixed_3">Critical bugs fixed</h2><p>Among the bugs fixed two were considered critical. </p><p><a href="https://bugs.launchpad.net/juju/+bug/1737058">LP 1737058</a> <code>network-get</code> fails to find valid configs <br />
+<a href="https://bugs.launchpad.net/juju/+bug/1738728">LP 1738728</a> Can’t run <code>juju run</code> after upgrading</p><p>If you were affected by any of the bugs fixed in this release, your feedback
+is appreciated. Please contact the juju team using the communication channels
+specified in the feedback section.</p><h2 id="get-juju_3">Get juju</h2><p>The easiest way to get juju is using the snap package.</p><pre><code>snap install juju --classic
+</code></pre><h2 id="feedback-appreciated_3">Feedback Appreciated</h2><p>We encourage everyone to let us know how you're using Juju. Send us a
+message on Twitter using #jujucharms, join us at #juju on freenode, and
+subscribe to the mailing list at juju@lists.ubuntu.com.</p><h2 id="more-information_3">More information</h2><p>To learn more about juju please visit https://jujucharms.com.</p></details><details id="Juju-2.3.1"><summary><strong>Juju 2.3.1</strong></summary><p>A new release of Juju is here, 2.3.1. This is primarily a bug fix release
+which addresses this critical upgrade issue:</p><p><a href="https://bugs.launchpad.net/juju/+bug/1737107">LP 1737107</a></p><p>Note, you may see a spurious message similar to
+<code>CRITICAL ********** SetModelAgentVersion: 2.3.1 false</code> while upgrading. This
+can be safely ignored and isn't present in 2.3.</p></details><details id="Juju-2.3.0"><summary><strong>Juju 2.3.0</strong></summary><p>The Juju team are extremely pleased to announce the release of Juju 2.3. Juju
+is now more versatile, more efficient, and more configurable than ever.</p><p>Cross Model Relations deliver a new way of organising your software stack.
+Deploy a database in one model and connect it to an application running
+another, even one running on a different controller, or even a different
+cloud.</p><p>For containers at scale, Juju now integrates Canonical's Fan overlay network
+system. This allows containers to map network traffic to any other container
+on the fan network without distributed databases, consensus protocols, or any
+extra overhead.</p><p>Juju's support for bundles has made it possible to quickly deploy connected
+sets of applications for some time now, but no two use cases are the same.
+That's why we have introduced the concept of an 'overlay' bundle - now you
+can easily add your own configuration and tweaks to a bundle at deploy time.
+See below for links to more information on this and other key features.</p><h2 id="how-can-i-get-it">How can I get it?</h2><p>The best way to get your hands on this release of Juju is to install it via
+snap packages (see https://snapcraft.io/ for more info on snaps).</p><pre><code>   snap install juju --classic
+</code></pre><p>Other packages are available for a variety of platforms. Please see the
+online documentation at https://jujucharms.com/docs/2.3/reference-install.
+Those subscribed to a snap channel should be automatically upgraded. If
+you’re using the PPA or Homebrew, you should see an upgrade available.</p><p>For highlights of this release, please see the documentation at
+<a href="./whats-new">https://jujucharms.com/docs/2.3/whats-new</a>. Further details are
+below.</p><h2 id="new">New</h2><ul><li><p>Cross Model Relations:<br />
+  - see https://jujucharms.com/docs/2.3/models-cmr</p></li><li><p>Persistent Storage:<br />
+  - see https://jujucharms.com/docs/2.3/charms-storage</p></li><li><p>FAN:<br />
+  - see https://jujucharms.com/docs/2.3/charms-fan</p></li><li><p>Bundle deployments:<br />
+  - Changed flags for deploying bundles to existing machines<br />
+  - Bundle deploy flag --bundle-config replaced with --overlay<br />
+  - Deploying bundles now supports --dry-run<br />
+  - Deploying bundles can now target existing machines  </p></li><li><p>Update Application Series:<br />
+  - see https://jujucharms.com/docs/2.3/howto-updateseries </p></li><li><p>Parallelization of the Machine Provisioner:  </p><ul><li>Groups of machines will now be provisioned in parallel reducing deployment
+  time, especially on large bundles.</li></ul></li><li><p>open_port and close_port hook tools now support ICMP  </p><ul><li>The open_port and close_port hook tools now support opening firewall
+  access for ICMP. The syntax is: open_port icmp</li></ul></li><li><p>LXD Storage Provider:<br />
+  - see https://jujucharms.com/docs/2.3/charms-storage#lxd-(lxd)</p></li></ul><h2 id="fixes">Fixes</h2><ul><li>Listing of Juju models is more efficient and can now handle more models
+  gracefully</li><li>Leadership coordinations is no longer tied to local time which avoids
+  problems with clock skew and reduces overall load on the database </li><li>Models are now more reliably destroyed and several fixes to avoid negative
+  impacts while they are being removed</li></ul><p>You can check the milestones for a detailed breakdown of the Juju bugs we have fixed:</p><p>https://launchpad.net/juju/+milestone/2.3.0<br />
+https://launchpad.net/juju/+milestone/2.3-rc2<br />
+https://launchpad.net/juju/+milestone/2.3-rc1<br />
+https://launchpad.net/juju/+milestone/2.3-beta3<br />
+https://launchpad.net/juju/+milestone/2.3-beta2<br />
+https://launchpad.net/juju/+milestone/2.3-beta1  </p><h2 id="known-issues">Known issues</h2><p>These issues are targeted to be addressed in the upcoming 2.3.1 release.</p><ul><li><p>Firewall issues on VMware vSphere<br />
+  https://bugs.launchpad.net/juju/+bug/1732665</p></li><li><p>LXD broken on VMware<br />
+  https://bugs.launchpad.net/juju/+bug/1733882</p></li><li><p>Can't deploy bundle with map-machines=existing and subordinates<br />
+  https://bugs.launchpad.net/juju/+bug/1736592</p></li><li><p>load spike on controller following remove-application<br />
+  https://bugs.launchpad.net/juju/+bug/1733708</p></li></ul><h2 id="feedback-appreciated_4">Feedback Appreciated!</h2><p>We encourage everyone to let us know how you're using Juju.</p><p>Join us at regular Juju shows - subscribe to our
+<a href="https://youtube.com/jujucharms">YouTube channel</a>.</p><p>Send us a message on Twitter using #jujucharms, join us at #juju on Freenode,
+and subscribe to the mailing list at juju@lists.ubuntu.com .</p><p>https://jujucharms.com/docs/2.3/contact-us</p><h2 id="more-information_4">More information</h2><p>To learn more about Juju please visit https://jujucharms.com .</p></details><details id="Juju-2.2.6"><summary><strong>Juju 2.2.6</strong></summary><h2 id="new-and-improved">New and Improved</h2><ul><li>This release fixed a critical issue (LP #1727355) which resulted juju being
+  unable to bootstrap unless a supported series was explicitly specified.</li></ul><p>For a list of all bugs fixed in this release, see:
+https://launchpad.net/juju/+milestone/2.2.6</p><h2 id="how-can-i-get-it_1">How can I get it?</h2><p>The best way to get your hands on this release of Juju is to install it as
+a snap package (see https://snapcraft.io for more info on snaps).</p><pre><code>   snap install juju --classic
+</code></pre><p>Other packages are available for a variety of platforms. Please see the online
+documentation at https://jujucharms.com/docs/stable/reference-install Those
+subscribed to a snap channel should be automatically upgraded. If you’re using
+the ppa/homebrew, you should see an upgrade available.</p><p>For highlights of this release, please see the documentation at
+https://jujucharms.com/docs/2.2/whats-new</p></details><details id="Juju-2.2.5"><summary><strong>Juju 2.2.5</strong></summary><h2 id="new-and-improved_1">New and Improved</h2><ul><li>This release is a bug fix release which addresses some issues that missed
+  the cutoff for previous 2.2.4 release or were discovered in 2.2.4.</li></ul><p>For a list of all bugs fixed in this release, see:
+https://launchpad.net/juju/+milestone/2.2.5</p><h2 id="how-can-i-get-it_2">How can I get it?</h2><p>The best way to get your hands on this release of Juju is to install it as
+a snap package (see https://snapcraft.io for more info on snaps).</p><pre><code>   snap install juju --classic
+</code></pre><p>Other packages are available for a variety of platforms. Please see the online
+documentation at https://jujucharms.com/docs/stable/reference-install Those
+subscribed to a snap channel should be automatically upgraded. If you’re using
+the ppa/homebrew, you should see an upgrade available.</p><p>For highlights of this release, please see the documentation at
+https://jujucharms.com/docs/2.2/whats-new</p></details><details id="Juju-2.2.4"><summary><strong>Juju 2.2.4</strong></summary><h2 id="new-and-improved_2">New and Improved</h2><ul><li>This release is primarily a bug fix release which addresses some issues
+  that missed the cutoff for the previous 2.2.3 release or were discovered
+  in 2.2.3</li><li>A notable fix is for model migration:
+  model migration would previously fail if the model had subordinate
+  applications that were related to multiple principals. This is now fixed.</li></ul><p>For a list of all bugs fixed in this release, see:
+https://launchpad.net/juju/+milestone/2.2.4</p><h2 id="how-can-i-get-it_3">How can I get it?</h2><p>The best way to get your hands on this release of Juju is to install it as
+a snap package (see https://snapcraft.io for more info on snaps).</p><pre><code>   snap install juju --classic
+</code></pre><p>Other packages are available for a variety of platforms. Please see the online
+documentation at https://jujucharms.com/docs/stable/reference-install Those
+subscribed to a snap channel should be automatically upgraded. If you’re using
+the ppa/homebrew, you should see an upgrade available.</p><p>For highlights of this release, please see the documentation at
+https://jujucharms.com/docs/2.2/whats-new</p></details><details id="Juju-2.2.3"><summary><strong>Juju 2.2.3</strong></summary><h2 id="new-and-improved_3">New and Improved</h2><ul><li>The remove-machine command has a --keep-instance flag which allows the cloud
+  instance to be left running when the machine is removed from the Juju model</li><li>Bundles can now reference local resources by specifying a relative path (as
+  can already be done for local charms).</li><li>Values in local bundles for options and annotations can now specify a file to
+  be read for the specified value. This is to support charm options where the
+  value is some structured content, such as a configuration file. For binary
+  external files, such as binary certificates, there is an option to base64
+  encode the contents of the file so it can be used as a string value. The
+  referenced file can include the path to the file. The file location is relative
+  to the bundle file location.</li></ul><p>For example:</p><p><pre><code class="language-language-yaml">applications:
+      my-app:
+        charm: some-charm
+        options:
+          config: include-file://my-config.yaml
+          cert: include-base64://my-cert.crt
+</code></pre><br/></p><ul><li>There is a new option for deploying bundles: <code>--bundle-config</code>. This
+   configuration file needs to be a YAML file, and currently only supports
+   applications as a top level key. The format of the applications is the same
+   as applications section in the bundle. Any values specified for an
+   application in the bundle-config file override those values defined in the
+   bundle, with the exception of the map type values, where the maps are merged
+   with preference given to the bundle-config. The purpose of this to allow the
+   use of a common bundle definition, and have model specific configuration kept
+   in a separate file. Option and annotation values specified in the bundle-config
+   file can also use the include-file:// and include-base64:// directives
+   mentioned above for local bundles. Paths specified are relative to the
+   bundle-config file.</li></ul><p>For a list of all bugs fixed in this release, see https://launchpad.net/juju/+milestone/2.2.3</p><h2 id="how-can-i-get-it_4">How can I get it?</h2><p>The best way to get your hands on this release of Juju is to install it as
+a snap package (see https://snapcraft.io/ for more info on snaps).</p><pre><code>   snap install juju --classic
+</code></pre><p>Other packages are available for a variety of platforms. Please see the online
+documentation at https://jujucharms.com/docs/stable/reference-install. Those
+subscribed to a snap channel should be automatically upgraded. If you’re using
+the ppa/homebrew, you should see an upgrade available.</p><p>For highlights of this release, please see the documentation at
+https://jujucharms.com/docs/2.2/whats-new.</p></details><details id="Juju-2.2.2"><summary><strong>Juju 2.2.2</strong></summary><p>This release fixes some bugs that missed the cut for 2.2.1. Notable inclusions are:</p><ul><li><code>juju debug-log</code> will no longer stop prematurely</li><li>Missing credentials will no longer stop upgrades</li><li>Reduced log spam in multiplaces</li><li>Agents will no longer falsely report as lost</li><li>Relations between subordinate charms will now work</li></ul><p>For a list of all bugs fixed in this release, see https://launchpad.net/juju/+milestone/2.2.2</p><h2 id="new-and-improved_4">New and Improved</h2><h3 id="vsphere-datastore-selection">vSphere Datastore selection</h3><p>To select a specific datastore when bootstrapping a vSphere environment, use the "datastore"
+model config attribute, eg</p><pre><code>  juju bootstrap vsphere --config datastore=&lt;name-of-accessible-datastore&gt;
+</code></pre><h2 id="how-can-i-get-it_5">How can I get it?</h2><p>The best way to get your hands on this release of Juju is to install it as a snap
+package (see https://snapcraft.io/ for more info on snaps).</p><pre><code>   snap install juju --classic
+</code></pre><p>Other packages are available for a variety of platforms. Please see the online
+documentation at https://jujucharms.com/docs/stable/reference-install. Those
+subscribed to a snap channel should be automatically upgraded. If you’re using
+the ppa/homebrew, you should see an upgrade available.</p><p>For highlights of this release, please see the documentation at
+https://jujucharms.com/docs/2.2/whats-new.</p></details><details id="Juju-2.2.1"><summary><strong>Juju 2.2.1</strong></summary><p>This release further enhances the performance improvements delivered in 2.2.0,
+as well as fixing some bugs that missed the cut for 2.2.0. Notable inclusions are:</p><ul><li>Frequent database writes (for logging and agent pings) are batched to
+    significantly reduce database I/O</li><li>Cleanup of log noise to make observing true errors much easier</li><li>Status history is now pruned whereas before a bug prevented that from
+    happening leading to unbounded growth</li><li>update-status interval configurable (this value must be set when
+    bootstrapping or performing add-model via the --config option; any changes
+    after that are not noticed until a Juju restart)</li><li>debug-log include/exclude arguments now more user friendly (as for
+    commands like juju ssh, you now specify machine/unit names instead of
+    tags; "rabbitmq-server/0" instead of "unit-rabbitmq-server-0".</li></ul><p>conjure-up remains at version 2.2.0 but the snap has been updated to include
+this new Juju 2.2.1 version.</p><h2 id="how-can-i-get-it_6">How can I get it?</h2><p>The best way to get your hands on this release of Juju and conjure-up is to install them via
+snap packages (see https://snapcraft.io/ for more info on snaps).</p><pre><code>   snap install juju --classic
+   snap install conjure-up --classic
+</code></pre><p>Other packages are available for a variety of platforms. Please see the online
+documentation at https://jujucharms.com/docs/stable/reference-install. Those subscribed
+to a snap channel should be automatically upgraded. If you’re using the ppa/homebrew,
+you should see an upgrade available.</p><p>For highlights of this release, please see the documentation at
+https://jujucharms.com/docs/2.2/whats-new. Further details are below.</p><p>https://launchpad.net/juju/+milestone/2.2.1</p></details><details id="Juju-2.2.0"><summary><strong>Juju 2.2.0</strong></summary><p>This release greatly enhances memory and CPU utilization at scale, improves
+the modelling of networks, and adds support for KVM containers on arm64.
+Additionally, there is now outline support for Oracle Compute, and vSphere
+clouds are now easier to deploy.</p><p>conjure-up now supports Juju as a Service (JAAS), macOS clients, Oracle
+and vSphere clouds, and repeatable spell deployments.</p><h2 id="how-can-i-get-it_7">How can I get it?</h2><p>The best way to get your hands on this release of Juju and conjure-up is to
+install them via snap packages (see https://snapcraft.io/ for more info on snaps).</p><pre><code>    snap install juju --classic
+    snap install conjure-up --classic
+</code></pre><p>Other packages are available for a variety of platforms. Please see the
+online documentation at https://jujucharms.com/docs/stable/reference-install.
+Those subscribed to a snap channel should be automatically upgraded.
+If you’re using the ppa/homebrew, you should see an upgrade available.</p><p>For highlights of this release, please see the documentation at
+<a href="./whats-new">https://jujucharms.com/docs/2.2/whats-new</a>.
+Further details are below.</p><h2 id="upgrading">Upgrading</h2><p>Changes introduced in 2.2.0 mean that you should also upgrade any
+controllers and hosted models after installing the new client software.
+Please see the documentation at
+<a href="./models-upgrade#upgrading-the-model-software">https://jujucharms.com/docs/2.2/models-upgrade</a>
+for more information.</p><h2 id="new-and-improved_5">New and Improved</h2><ul><li>Users can now deploy workloads to Centos7 machines on Azure.</li><li>vSphere Juju users with vCenter 5.5 and vCenter 6.0 can now bootstrap
+successfully and deploy workloads as well as have machines organised into
+folders.</li><li>Juju now has initial support for Oracle Cloud, https://jujucharms.com/docs/2.2/help-oracle.</li><li>Users of Azure can now benefit from better credential management
+support, we’ve eliminated the need to manually discover subscription ID
+in order to add an Azure credential. All you need is to have Azure CLI
+installed and regular Juju credential management commands will “Just Work”.</li><li>Juju login command now accepts the name or hostname of a public controller
+as a parameter. Passing a user to log in as has been moved to an option
+rather than a positional parameter.</li><li>Behavior for a Juju bootstrap argument ‘-metadata-source’ has changed.
+In addition to specifying a parent directory that contains “tools” and
+“images” subdirectories with metadata, this argument can now also point
+directly to one of these subdirectories if only one type of custom metadata
+is required. (lp:1696555)</li><li>Actions that require ‘sudo’ can now be used in conjure-up steps.</li><li>conjure-up now uses libjuju as its api client.</li><li>conjure-up can now deploy from release channels, e.g. 'beta'.</li><li>There's a new bootstrap configuration option, max-txn-log-size, that can
+be used to configure the size of the capped transaction log used internally
+by Juju. Larger deployments needed to be able to tune this setting; we
+don't recommend setting this option without careful consideration.</li><li>General Juju log pruning policy can now be configured to specify maximum
+log entry age and log collection size, https://jujucharms.com/docs/2.2/controllers-config.</li><li>Juju status history pruning policy can also be configured to specify
+maximum status entry age and status collection size,
+https://jujucharms.com/docs/2.2/models-config.</li><li>The  'status --format=yaml' and 'show-machine' commands now show more
+detailed information about individual machines' network configuration.</li><li>Added support for AWS ‘ap-northeast-2’ region, and GCE ‘us-west1’,
+‘asia-northeast1’ regions.</li><li>Actions have received some polish and can now be canceled, and showing a
+previously run action will include the name of the action along with the
+results.</li><li>Rotated Juju log files are now also compressed.</li><li>Updates to MAAS spaces and subnets can be made available to a Juju model
+using the new ‘reload-spaces’ command.</li><li>‘unit-get private-address’ now uses the default binding for an application.</li><li>Juju models have always been internally identified by their owner and
+their short name. These full names have not been exposed well to the user
+but are now part of juju models and show-model command output.</li></ul><h2 id="fixes_1">Fixes</h2><ul><li>Juju more reliably determines whether to connect to the MAASv2 or MAASv1
+API based on MAAS endpoint URL as well as the response received from MAAS.</li><li>Juju is now built with Go version 1.8 to take advantage of performance
+improvements.</li><li>Juju users will no longer be missing their firewall rules when adding
+a new machine on Azure.</li><li>Juju models with storage can now be cleanly destroyed.</li><li>Juju is now resilient to a MITM attack as SSH Keys of the bootstrap host
+are now verified before bootstrap (lp:1579593).</li><li>Root escalation vulnerability in ‘juju-run’ has been fixed (lp:1682411).</li><li>Juju’s agent presence data is now aggressively pruned, reducing
+controller disk space usage and avoiding associated performance issues.</li><li>MAAS 2.x block storage now works with physical disks, when MAAS reports
+the WWN unique identifier. (lp:1677001).</li><li>Automatic bridge names are now properly limited to 15 characters in
+Juju (lp:1672327).</li><li>Juju subordinate units are now removed as expected when their principal
+is removed (lp:1686696 and lp:1655486)</li></ul><p>You can check the milestones for a detailed breakdown of the Juju and
+conjure-up bugs we have fixed:</p><p>https://launchpad.net/juju/+milestone/2.2.0
+https://github.com/conjure-up/conjure-up/milestone/19?closed=1</p><h2 id="known-issues_1">Known issues</h2><ul><li>Juju 2.1 agents can fail if configuration for the units is large enough
+to cause responses to be chunked. https://bugs.launchpad.net/juju/2.1/+bug/1697936</li><li>Restarting controller during an HA upgrade will cause it to not upgrade.
+https://bugs.launchpad.net/juju/+bug/1697956</li></ul><h2 id="feedback-appreciated_5">Feedback Appreciated!</h2><p>We encourage everyone to let us know how you're using Juju.</p><p>Join us at regular Juju shows - subscribe to our Youtube channel
+https://youtube.com/jujucharms</p><p>Send us a message on Twitter using #jujucharms, join us at #juju on freenode,
+and subscribe to the mailing list at juju@lists.ubuntu.com.</p><p>https://jujucharms.com/docs/stable/contact-us</p></details><details id="Juju-2.1.3"><summary><strong>Juju 2.1.3</strong></summary><p>This release fixes a privilege escalation vulnerability when executing
+<code>juju-run</code> on the cloud instances, not to be confused with the
+'juju run' CLI command.</p><p>See the following for further details on the vulnerability:
+https://bugs.launchpad.net/juju/+bug/1682411
+CVE-2017-9232 http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9232</p><p>This vulnerability affects all currently distributed versions of
+Juju (1.25.x, 2.0.x and 2.1.x).</p><h2 id="how-to-know-if-you-need-to-update">How to know if you need to update</h2><p>We’ve put together a helpful Python script that will loop through your
+controllers and then output the version of each model on the controller.
+It requires Python 2.7 or higher.</p><pre><code>  curl -L https://goo.gl/59gxnz | python
+</code></pre><h2 id="how-do-i-update-im-on">How do I update? I’m on…</h2><h3 id="jaas">JAAS</h3><p>JAAS has been updated to the new 2.1.3 release. Users with models in
+JAAS do not need to perform any upgrade steps to their models that
+are running in JAAS.</p><h3 id="juju-22-betax">Juju 2.2-betaX</h3><p>Users of the 2.2-beta releases need to temporarily update to using
+the edge channel. Users will need to use this until Juju 2.2-rc1
+is released in the coming days. You can easily switch your snap install
+client by using the following:</p><pre><code>  snap refresh juju --edge --classic
+</code></pre><p>Once you’ve completed this step you’ll need to run through the normal upgrade
+steps on your models, as explained
+<a href="./models-upgrade#the-upgrade-juju-command">in the documentation</a></p><p>Note for non-snap beta users: we suggest you do not run controllers with
+the 2.2 beta releases. We suggest you move to the edge channel of the
+snap releases or to wait and redeploy when 2.2 RC1 is released.</p><h3 id="juju-21x">Juju 2.1.x</h3><p>You can follow the current upgrade documentation to upgrade. Make sure that
+you update your controller model as well as each model on that controller.</p><p>https://jujucharms.com/docs/2.1/models-upgrade</p><h2 id="questionsconcerns">Questions/Concerns</h2><p>If you have any questions please don’t hesitate to reach out to the team via:</p><p>the #juju Freenode IRC channel
+the juju mailing list https://lists.ubuntu.com/mailman/listinfo/juju</p><p>We encourage everyone to let us know how you're using Juju.</p><p>Join us at regular Juju shows -
+subscribe to our Youtube channel https://youtube.com/jujucharms</p></details><details id="Juju-2.1.2"><summary><strong>Juju 2.1.2</strong></summary><h2 id="whats-new-in-212">What's new in 2.1.2</h2><ul><li>[conjure-up] headless installs now support cloud regions</li><li>[conjure-up] improved error handling</li><li>[juju] Handle 'Node with this Hostname already exists' errors when
+  provisioning containers. LP:#1670873</li><li>[juju] Fix 'interface bindings cannot have empty names' LP:#1671489</li><li>[juju] Fix 'upgrade-charm broken after using default binding'
+  LP:#1671428</li></ul><h2 id="resolved-issues">Resolved Issues</h2><p>Check the milestones for a detailed breakdown of Juju and conjure-up
+bugs corrected.</p><p>https://github.com/conjure-up/conjure-up/milestone/20?closed=1
+  https://launchpad.net/juju/+milestone/2.1.2</p><h2 id="how-do-i-get-it">How do I get it?</h2><p>If you are running Ubuntu, you can get Juju from the juju stable ppa:</p><p>sudo add-apt-repository ppa:juju/stable; sudo apt-get update
+  sudo apt-get install juju</p><p>Or install Juju from the snap store:</p><p>snap install juju --classic</p><p>Install conjure-up from the snap store:</p><p>snap install conjure-up --classic</p><p>If you are on Trusty, you'll need to run a few extra commands:</p><p>sudo apt-get install snapd
+  sudo groupadd lxd &amp;&amp; sudo usermod -a -G lxd $USER
+  sudo reboot</p><p>Now you can install snaps, including conjure-up, as normal:</p><p>snap install conjure-up --classic</p><p>Windows, CentOS, and MacOS users can get a corresponding Juju
+installer at:</p><p>https://launchpad.net/juju/+milestone/2.1.2</p></details><details id="Juju-2.1.1"><summary><strong>Juju 2.1.1</strong></summary><h2 id="whats-new-in-211">What's new in 2.1.1</h2><ul><li>Networking improvements</li><li>[conjure-up] Spells support side-loading bundles. This helps spells
+  authors who are writing spells for particular software but want to
+  offer variations. For example, there are OpenStack bundles that
+  support both KVM and LXD, or Telemetry additions. Side-loading will
+  help with spells that need to provide those various bundle
+  configurations.</li><li>[conjure-up] More LXD improvements in addition to support for the
+   recently released LXD 2.10.</li></ul><h3 id="networking-improvements">Networking improvements</h3><ul><li>containers now respect static routes from MAAS. The static routes
+  defined for the subnets that the containers are in should should be
+  set for the containers as well.</li><li>'lxdbr0' subnet selection has changed from a simple incremental search
+  to randomized selection across 10.0.X. It also now properly handles
+  when an active subnet spans more than just a /24.</li><li>better handling of http_proxy and no_proxy when interacting with LXD</li><li>errors while trying to set up networking for containers are properly
+  reported as provisioning errors, instead of falling back to 'lxdbr0'.
+  This mostly impacts MAAS deployments where they would end up with
+  containers that were not addressable, and the actual failure was
+  buried in log files.</li></ul><h2 id="resolved-issues_1">Resolved Issues</h2><p>Check the milestones for a detailed breakdown of Juju and conjure-up
+bugs corrected.</p><pre><code>https://github.com/conjure-up/conjure-up/milestone/18?closed=1
+https://launchpad.net/juju/+milestone/2.1.1
+</code></pre><h2 id="how-do-i-get-it_1">How do I get it?</h2><p>If you are running Ubuntu, you can get Juju from the juju stable ppa:</p><p>sudo add-apt-repository ppa:juju/stable; sudo apt-get update</p><p>sudo apt-get install juju</p><p>Or install Juju from the snap store:</p><p>snap install juju --classic</p><p>Install conjure-up from the snap store:</p><p>snap install conjure-up --classic</p><p>If you are on Trusty, you'll need to run a few extra commands:</p><p>sudo apt-get install snapd
+   sudo groupadd lxd &amp;&amp; sudo usermod -a -G lxd $USER
+   sudo reboot</p><p>Now you can install snaps, including conjure-up, as normal:</p><p>snap install conjure-up --classic</p><p>Windows, CentOS, and MacOS users can get a corresponding Juju
+installer at:</p><p>https://launchpad.net/juju/+milestone/2.1.1</p></details><details id="Juju-2.1.0"><summary><strong>Juju 2.1.0</strong></summary><h2 id="whats-new-in-210">What's new in 2.1.0</h2><ul><li>Model migration</li><li>Interactive <code>add-cloud</code></li><li>Networking changes</li><li>Conjure-up</li><li>LXD credential changes</li><li>Changes to the GUI</li><li>Instrumentation of Juju via Prometheus endpoints</li><li>Improved OpenStack keystone v3 authentication</li><li>New cloud-regions supported</li><li>Additional improvements</li></ul><h3 id="model-migration">Model migration</h3><p>Model migration allows you to easily move a live model from one
+controller to another. The same configuration of machines, units and
+their relationships will be replicated on a secondary controller, while
+your applications continue uninterrupted.</p><p>Migration is a useful alternative to upgrading a controller in place,
+and for moving models off a busy controller. When upgrading a
+controller, you can bootstrap a new controller running a newer version
+of Juju and then migrate each model across one at a time. This is safer
+than upgrading a controller while it is running many applications.</p><p>Currently there are some restrictions:</p><ul><li>The source and destination controllers need to be in the same cloud
+    environment.</li><li>The destination controller needs to be running on the same cloud
+    substrate as the source controller.</li><li>Destination controllers on different regions or VPCs need direct
+    connectivity to the source controller.</li><li>The version of Juju running on the destination controller needs to
+    be the same or newer than the version on the source controller.</li><li>The controller model cannot be migrated.</li></ul><p>To migrate a model on the current controller to a model on another
+controller, you simply name the model as the first argument followed by
+the target controller (a model with the same name cannot already exist
+on the target controller):</p><pre><code>juju migrate &lt;model-name&gt; &lt;target-controller-name&gt;
+</code></pre><p>This will initiate the migration with output similar to the following:</p><pre><code>Migration started with ID "d1924666-1b00-4805-89b5-5ed5a6744426:0"
+</code></pre><p>You can monitor the migration progress from the output of the juju
+status command run against the source model. The juju show-model command
+also shows migration progress.</p><p>If the migration fails at any point, the model will be reactivated on
+the original controller in the same state it was in before the migration
+process was started. The duration of a migration will depend on the
+complexity of the model, the resources it uses and the capabilities of
+the hosted environment. Most migrations will take minutes, and even
+large deployments are unlikely to take hours.</p><p>When complete, the model will no longer exist on the source controller,
+and the model, all its applications, machines and units will be running
+from the target controller.</p><p>Use <code>juju switch</code> to select the migrated model in the destination
+controller:</p><pre><code>juju switch &lt;target controller&gt;:&lt;model&gt;
+juju status
+</code></pre><p>There is more information on model migration in the Juju documentation
+online at
+<a href="./models-migrate.html">https://jujucharms.com/docs/2.1/models-migrate</a></p><h3 id="interactive-add-cloud">Interactive <code>add-cloud</code></h3><p>With previous versions of Juju, the <code>add-cloud</code> command would need to be
+fed a specifically formatted YAML file if your cloud of choice wasn't
+directly supported by Juju. You can still do this, but from version 2.1,
+you can also step through a simple interactive process that will create
+a working configuration for you.</p><p>Typing <code>juju add-cloud</code> starts the process and produces the following
+output:</p><pre><code>Cloud Types
+  maas
+  manual
+  openstack
+  vsphere
+
+Select cloud type:
+</code></pre><p>Simply answer the three or four questions for your new cloud and Juju
+will do the rest. The next step is to add credentials for this new
+cloud, which can be done with the similarly interactive command:</p><pre><code>juju add-credentials
+</code></pre><p>Again, follow the prompts to add the requested information.</p><p>A more detailed walkthrough of the process is published in the online
+Juju documentation here:
+<a href="./clouds.html#specifying-additional-clouds">https://jujucharms.com/docs/2.1/clouds#specifying-additional-clouds</a></p><h3 id="networking-changes">Networking changes</h3><p>A number of changes have been introduced to make the use of networks,
+particularly networking of containers, more efficient and consistent in
+Juju.</p><p>Juju models networks using the primitive of "spaces". A space is made up
+of one or more routable subnets with common ingress and egress rules.
+The operator can model this topology in such a way that applications
+have the required network connectivity without generating network IP
+maps of overwhelming complexity that are not portable.</p><p>The default behaviour in Juju 2.0 was that all machines might host
+containers and so all interfaces were bridged by default, even if a
+container was never placed on the machine. If a container was placed on
+the machine all of the network devices of that machine were made
+available to each container. This led to issues where the operator
+wanted a much cleaner model where the containers only had access to
+networks that the model required. Starting from Juju 2.1 this will no
+longer be true. Juju will only create the bridges which are necessary
+for a container to operate in the model.</p><p>The changes in 2.1 require operators to be more specific about what
+network space a charm should operate in (this is particularly relevant
+to charms deployed to containers on Juju machines) when more than one
+space is available on the machine. Defining what spaces the container is
+required to operate in is is already supported by the '--bind' option of
+the deploy command, which can be used to specify that of the charm
+should operate within the same space, e.g.:</p><pre><code>juju deploy mysql --bind db-space
+</code></pre><p>...or, you can specify which charm defined endpoints should end up in
+specific spaces:</p><pre><code>juju deploy mysql --bind "db:db-space db-admin:admin-space default-space"
+</code></pre><p>...which also includes a default option for any other interfaces not
+specified.</p><p>These changes potentially impact on currently published bundles. Bundles
+that might have assumed that a container has access to all of the same
+spaces as the host machine will no longer deploy cleanly. They need to
+be updated to be more specific about the bindings required. The above
+deploy commands can be mirrored in bundle format like so:</p><pre><code>mysql:
+   charm: "cs:mysql"
+   num_units: 1
+   bindings:
+     “”: default-space
+     db: db-space
+     db-admin: admin-space
+</code></pre><p>There is more information on binding to spaces in the online Juju
+documentation
+<a href="./charms-deploying.html#deploying-with-binding">https://jujucharms.com/docs/2.1/charms-deploying#deploying-with-binding</a></p><p>Defining spaces within Juju is covered in the documentation here:
+<a href="./network-spaces.html">https://jujucharms.com/docs/2.1/network-spaces</a></p><p>Information on adding bindings to charm bundles is also documented online:
+<a href="./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle">https://jujucharms.com/docs/2.1/charms-bundles#binding-endpoints-of-applications-within-a-bundle</a></p><p>These changes and the rationale behind them were originally posted to
+the juju-dev mailing list. If you require further background or have
+questions or concerns, please add to the discussion on the mailing list.
+The original post is here:
+<a href="https://lists.ubuntu.com/archives/juju-dev/2017-February/006313.html">https://lists.ubuntu.com/archives/juju-dev/2017-February/006313.html</a></p><h3 id="conjure-up">Conjure-up</h3><p>Conjure-up, the big-software deployment tool that leverages Juju, has
+seen some major improvements in-line with Juju development. A new
+<code>conjure-down</code> command can be used to easily teardown models, and
+there's support for Canonical Kubernetes 1.5.2 and Kubernetes 1.5.2,
+which can be deployed to the local LXD provider. Several ‘big-data’
+spells have been added - see them with ‘conjure-up bigdata’-  and
+there’s a new ‘Architect’ button which allows editing machine placement,
+including allocation to a MAAS machine.</p><p>For more details, take a look at the updated Conjure-up user guide:
+<a href="http://conjure-up.io/docs/en/users/">http://conjure-up.io/docs/en/users/</a></p><h3 id="juju-lxd-credentials">[juju] LXD credentials</h3><p>Juju now support credentials to access controllers on remote LXD hosts.
+If you are just bootstrapping and adding models on your laptop there is
+no change in workflow, but there is a change if you want to add models
+from another machine.</p><p>Users are now expected to have a "certificate" credential for creating
+LXD models. If you are on the LXD host, bootstrap and add-model will
+both auto-generate a credential as needed, assuming you have access to
+the LXD Unix socket.</p><p>When working with remote users on different machines, LXD-hosted
+controllers need to to manually import the certificate credential from
+the host machine.</p><p>To do this, first run juju autoload-credentials on the LXD host. This
+will generate output similar to the following:</p><pre><code>Looking for cloud and credential information locally...
+
+1. LXD credential "localhost" (new)
+Select a credential to save by number, or type Q to quit:
+</code></pre><p>Select the LXD credential (1 in the above example) and you will be asked
+for the name of a cloud to link to this credential. Enter "localhost" to
+specify the local LXD deployment. When the prompt re-appears, type "q"
+to quit. The new certificate credential will have been created.</p><p>To export this certificate credential to a file called
+localhost-credentials.yaml,
+type the following:</p><pre><code>juju credentials localhost --format=yaml &gt; localhost-credentials.yaml
+</code></pre><p>The output file now needs to be moved to the machine and account that
+requires access to the local LXD deployment. With this file on the
+remote machine, the certificate credential can be imported with the
+following command:</p><pre><code>juju add-credential localhost -f localhost-credentials.yaml
+</code></pre><h3 id="juju-instrumentation-of-juju-via-prometheus-endpoints">[juju] Instrumentation of Juju via Prometheus endpoints</h3><p>Starting with Juju 2.1 each Juju controller provides an HTTPS endpoint
+to expose Prometheus metrics. To feed these metrics into Prometheus, you
+must add a new scrape target to your already installed and running
+Prometheus instance. For this use case, the only constraint on where
+Prometheus is running is that Prometheus must be able to contact the
+Juju controller's API server address/port.</p><p>A more detailed walkthrough of the process is published in the online
+Juju documentation here:
+<a href="./howto-prometheus.html">https://jujucharms.com/docs/2.1/howto-prometheus</a></p><h3 id="juju-changes-to-the-gui">[juju] Changes to the GUI</h3><p>The <code>juju gui</code> command has changed to improve the user experience. By
+default this command now uses the old 'no-browser' behaviour (i.e. it
+doesn't automatically open the URL in your default web browser) and also
+displays the login credential. There is a new --hide-credential option
+not to show the credential.</p><p>The --no-browser option is supported but deprecated (it is effectively a
+no-op). To bring up a browser, use the --browser option. For example, to
+output the URL and credential, run:</p><pre><code>juju gui
+</code></pre><p>To print the Juju GUI URL only:</p><pre><code>juju gui --hide-credential
+</code></pre><p>To open the Juju GUI in the default browser and show admin credential
+used to log into it:</p><pre><code>juju gui --browser
+</code></pre><p>Juju now supports the new model path based URLs; these replace the URLs
+containing the model UUID. So if you know the owner and name of a model,
+you can easily point a browser to the following location to access the
+GUI for that model:</p><pre><code>https://&lt;controller-ip&gt;:17070/gui/u/&lt;owner&gt;/&lt;modelname&gt;/
+</code></pre><p>There is more information on using the built-in GUI in the online
+documentation at:
+<a href="./controllers-gui.html">https://jujucharms.com/docs/2.1/controllers-gui</a></p><h3 id="juju-improved-openstack-keystone-v3-authentication">[juju] Improved Openstack keystone v3 authentication</h3><p>Juju now supports authentication for project and domain scopes. The
+following environment variables or ~/.novarc attributes are supported:</p><ul><li>OS_DOMAIN_NAME
+  domain name of the requested domain level authorisation scope</li><li>OS_USER_DOMAIN_NAME
+  domain name of the user</li><li>OS_PROJECT_DOMAIN_NAME
+  domain name of the requested project level authorisation scope</li><li>OS_DEFAULT_DOMAIN_NAME
+  common domain name of the user and project</li></ul><p>The Juju autoload-credentials command may be used to import credential
+attributes from either environment variables or ~/.novarc into the Juju
+credential store.</p><p>See the online Openstack documentation here:
+<a href="https://developer.openstack.org/api-ref/identity/v3/">https://developer.openstack.org/api-ref/identity/v3/</a></p><h3 id="juju-new-cloud-regions-supported">[juju] New cloud-regions supported</h3><p>Juju supports two more Google region and six more Azure regions:
+- google/us-west1
+- google/asia-northeast1
+- azure/canadacentral
+- azure/canadaeast
+- azure/uksouth
+- azure/ukwest
+- azure/westcentralus
+- azure/westus2</p><h3 id="juju-additional-improvements">[juju] Additional improvements</h3><ul><li>Manual cloud provisioning now supports CentOS machines</li><li>Deployments to LXD containers on Xenial use the more performant
+  directory backend https://bugs.launchpad.net/juju/+bug/1648513</li><li>Constraints placed on KVM containers in bundles are honoured</li><li>Juju SSH improvements for the Windows platform</li><li>Memory usage improvements</li><li>Openstack Provider has been updated to support Neutron networking apis</li><li>New APIs for querying instance types and characteristics available on
+  clouds</li><li>vSphere provider improvements</li><li>Model config now supports an "extra-info" field for holding additional
+  metadata</li><li>Stricter rules for validating charm metadata field names to conform to
+  data storage requirements. Charm metadata fields can not contain dots</li><li>Openstack Provider has been updated to support Neutron networking apis</li><li>New APIs for querying instance types and characteristics available on
+  clouds</li></ul><h2 id="resolved-issues_2">Resolved Issues</h2><ul><li>[Juju] KVM containers race with LXD containers and hooks Lp 1664437</li><li>[Juju] juju2 eating CPU, units in error Lp 1635311</li><li>[Juju] kill-controller removes machines from migrated model Lp 1648063</li><li>[Juju] Memory/goroutine leaks Lp 1516669</li><li>[Juju] memory leak when adding many applications Lp 1653558</li><li>[Juju] lxd client raw response 'sync' is too noisy Lp 1656243</li><li>[Conjure-up] headless conjure-up kubernetes-core fails, while GUI does
+  work bug Gh 676</li><li>[Conjure-up] conjure-up isn't properly handling a failed bootstrap
+  bug Gh 641</li><li>[Conjure-up] Conjure-up uses double the deployed hardware when
+  deploying openstack-base and kubernetes-core bug maas 2.0
+  test-track Gh 553</li></ul><p>Check the milestones for a detailed breakdown of Juju and conjure-up
+bugs corrected.</p><pre><code>https://github.com/conjure-up/conjure-up/milestone/14?closed=1
+https://launchpad.net/juju/+milestone/2.1-rc2
+https://launchpad.net/juju/+milestone/2.1-rc1
+https://launchpad.net/juju/+milestone/2.1-beta5
+https://launchpad.net/juju/+milestone/2.1-beta4
+https://launchpad.net/juju/+milestone/2.1-beta3
+https://launchpad.net/juju/+milestone/2.1-beta2
+https://launchpad.net/juju/+milestone/2.1-beta1
+</code></pre></details><details id="Juju-2.0.4"><summary><strong>Juju 2.0.4</strong></summary><h2 id="resolved-issues_3">Resolved Issues</h2><p>Fixes vulnerability CVE-2017-9232:</p><p>Privilege escalation vulnerability when executing <code>juju-run</code> on the cloud
+instances, not to be confused with the <code>juju run</code> CLI command.</p><p>See the following for further details:</p><ul><li>https://bugs.launchpad.net/juju/+bug/1682411</li><li>http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9232</li></ul><p>This vulnerability affects all currently distributed versions of Juju (1.25.x,
+2.0.x and 2.1.x).</p><h2 id="how-to-know-if-you-need-to-update_1">How to know if you need to update</h2><p>We’ve put together a helpful Python script that will loop through your
+controllers and then output the version of each model on the controller. It
+requires Python 2.7 or higher.</p><p><code>curl -L https://goo.gl/59gxnz | python</code></p><h2 id="how-do-i-update-im-on_1">How do I update? I’m on...</h2><p><strong>JAAS</strong><br />
+JAAS has been updated to the new 2.1.3 release. Users with models in JAAS do
+not need to perform any upgrade steps to their models that are running in JAAS.</p><p><strong>Juju 2.2-betaX</strong><br />
+Users of the 2.2-beta releases need to temporarily update to using the edge
+channel. Users will need to use this until Juju 2.2-rc1 is released in the
+coming days. You can easily switch your snap install client by using the
+following:</p><p><code>snap refresh juju --edge --classic</code></p><p>Once you’ve completed this step you’ll need to run through the normal upgrade
+steps on your models, as explained in the documentation: </p><p>https://jujucharms.com/docs/models-upgrade#the-upgrade-juju-command</p></details><details id="Juju-2.0.3"><summary><strong>Juju 2.0.3</strong></summary><h2 id="whats-new">What's new?</h2><p>This releases addresses stability and performance issues.</p><h2 id="how-do-i-get-it_2">How do I get it?</h2><p>If you are running Ubuntu, you can get it from the juju stable ppa:</p><pre><code>sudo add-apt-repository ppa:juju/stable
+sudo apt-get update; sudo apt-get install juju
+</code></pre><p>Windows, Centos, and MacOS users can get a corresponding installer at:</p><pre><code>https://launchpad.net/juju/+milestone/2.0.3
+</code></pre><h2 id="resolved-issues_4">Resolved issues</h2><ul><li><p>Improvements to Juju's CPU and memory performance, and overall
+responsiveness.
+    Lp 1645729, Lp 1635311, Lp 1651291, Lp 1660087, Lp 1632362, Lp 1639577,
+    Lp 1645917</p></li><li><p>Required packages are upgraded with Juju agent upgrades.
+    Lp 1637079</p></li><li><p>Better cleanup of resources in OpenStack and manual providers.
+    Lp 1642295, Lp 1625624</p></li><li><p>Commands in interactive ssh from windows clients are properly passed.
+    Lp 1468752</p></li></ul><p>See https://launchpad.net/juju/+milestone/2.0.3 for more details.</p></details><details id="Juju-2.0.2"><summary><strong>Juju 2.0.2</strong></summary><h2 id="notable-changes">Notable changes</h2><ul><li>This releases addresses stability and performance issues.</li></ul><h2 id="resolved-issues_5">Resolved issues</h2><ul><li>Cinder fails with badrequest... "invalid input for field/attribute
+    device" Lp 1636648</li><li>Juju 2.0.1 is not able to bootstrap with nova Lp 1638304</li><li>[1.9] multiple negative spaces constraints given and rejected by
+    maas Lp 1636969</li><li>Maas machine selected with space in violation of constraint Lp 1636919</li><li>Openstack provider: if use-floating-ip=true, uses incorrect
+    compute api endpoint to determine available floating ips Lp 1638704</li><li>Restore fails on some openstacks like prodstack Lp 1557726</li></ul><p>For the full list of bugs addressed, see: <a href="https://launchpad.net/juju/+milestone/2.0.2">https://launchpad.net/juju/+milestone/2.0.2</a>.</p></details><details id="Juju-2.0.1"><summary><strong>Juju 2.0.1</strong></summary><h2 id="notable-changes_1">Notable changes</h2><ul><li>Support new AWS region us-east-2</li><li>Correct OSX Sierra support</li><li>Update list-models output to show cloud/region vs owner</li><li>Update model-migrations with support for endpoints, cloud credentials</li></ul><h2 id="resolved-issues_6">Resolved issues</h2><ul><li>Vsphere improvements Lp 1623136 and Lp 1629452</li><li><code>use-floating-ip</code> is not honored from clouds.yaml config Lp 1614239</li><li><code>bootstrap-timeout</code> ignored in --config Lp 1619808</li><li><code>juju show-machines</code> should show all addresses a machine has Lp 1602840</li><li>Juju 2.0 uses random IP for 'PUBLIC-ADDRESS' with MAAS 2.0 Lp 1616098</li></ul><p>For the full list of bugs addressed, see: <a href="https://launchpad.net/juju/+milestone/2.0.1">https://launchpad.net/juju/+milestone/2.0.1</a>.</p></details><details id="Juju-2.0.0"><summary><strong>Juju 2.0.0</strong></summary><h2 id="notable-changes_2">Notable Changes</h2><p>Juju 2.0 is a fundamental step forward from the previous 1.x series,
+introducing significant new features and capabilities, including:</p><ul><li>Integrated GUI</li><li>Better cloud management</li><li>Multi-user support</li><li>Baked-in knowledge of public clouds</li><li>Uses LXD for fast and efficient local experience</li><li>More efficient Controller/Model arrangement</li><li>More intuitive CLI experience</li></ul><p>An overview of these features is discussed below - for full
+documentation, please visit our docs online at:
+<a href="https://jujucharms.com/docs/">https://jujucharms.com/docs</a></p><h3 id="integrated-gui">Integrated GUI</h3><p>The GUI is now included with your Juju install. To open the GUI run:</p><pre><code>  juju gui --show-credentials
+</code></pre><p>It will open the GUI in your browser and output your credentials to
+the console for logging in. When a new version of the GUI is released to upgrade:</p><pre><code>  juju upgrade-gui
+</code></pre><h3 id="juju-20-is-co-installable-with-juju-125">Juju 2.0 is co-installable with Juju 1.25</h3><p>The directory where Juju stores its working data has changed to
+follow the XDG directory specification. By default, the Juju data
+directory is located at ~/.local/share/juju. You may override this
+by setting the JUJU_DATA environment variable.</p><p>Juju 2.0's data is not compatible with Juju 1.x.
+<strong>Do not</strong> set <code>JUJU_DATA</code> to the old <code>JUJU_HOME</code> (~/.juju).</p><h3 id="new-bootstrap-and-cloud-management-experience">New bootstrap and cloud management experience</h3><p>This release introduces a new way of bootstrapping and managing clouds
+and credentials that involves less editing of files and makes Juju work
+out of the box with major public clouds like AWS, Azure, Google,
+Rackspace, Joyent, and Cloudsigma.</p><p>Clouds and credentials are managed separately making it easier to
+use different credentials for a single cloud.</p><p>See: https://jujucharms.com/docs/2.0/controllers-creating</p><h4 id="lxd-cloud-support">LXD cloud support</h4><p>Using the LXD cloud is the fastest way to get started with Juju
+locally using secure local containers. Use our getting-started guide
+to setup LXD and start modeling your operations.</p><p><a href="./getting-started.html">https://jujucharms.com/docs/2.0/getting-started</a></p><h4 id="public-clouds">Public clouds</h4><p>To see what clouds are available, use:</p><pre><code>  juju clouds
+
+Cloud        Regions  Default        Type        Description
+aws               11  us-east-1      ec2         Amazon Web Services
+aws-china          1  cn-north-1     ec2         Amazon China
+aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
+azure             18  centralus      azure       Microsoft Azure
+azure-china        2  chinaeast      azure       Microsoft Azure China
+cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
+google             4  us-east1       gce         Google Cloud Platform
+joyent             6  eu-ams-1       joyent      Joyent Cloud
+rackspace          6  dfw            rackspace   Rackspace Cloud
+localhost          1  localhost      lxd         LXD Container Hypervisor
+</code></pre><h5 id="update-clouds-command">update-clouds command</h5><p>Canonical will publish new public cloud data to reflect new
+regions or changed endpoints in the list of public clouds supported
+by Juju. To update your Juju environment, use this:</p><pre><code>  juju update-clouds
+</code></pre><p>The newly downloaded cloud information will be used next time a
+Juju controller is bootstrapped.</p><p>See: <a href="./clouds.html">https://jujucharms.com/docs/2.0/clouds</a></p><h4 id="credential-management">Credential management</h4><p>To access your cloud, Juju must be able to authenticate to it.
+Credentials are defined per cloud. Juju can guide you through
+adding a new credential like so:</p><pre><code>  juju add-credential aws
+</code></pre><p>See: <a href="./credentials.html">https://jujucharms.com/docs/2.0/credentials</a></p><h4 id="manual-maas-and-openstack-clouds">Manual, MAAS, and OpenStack clouds</h4><p>For manual, MAAS, and OpenStack clouds, it is necessary to create a YAML
+file and then run 'juju add-cloud' to add these to Juju.</p><p>Assuming you have a file called "personal-clouds.yaml" detailing an
+OpenStack cloud called "homestack", use this to add the cloud
+to Juju:</p><pre><code>  juju add-cloud homestack personal-clouds.yaml
+</code></pre><p>To bootstrap that OpenStack cloud:</p><pre><code>  juju bootstrap homestack
+</code></pre><p>For more details see <a href="./clouds.html">https://jujucharms.com/docs/2.0/clouds</a></p><h4 id="bootstrap-constraints-and-series">Bootstrap constraints and series</h4><p>While bootstrapping, you can now specify constraints for the bootstrap
+machine independently of the constraints used for deployed applications:</p><pre><code>  juju bootstrap --constraints mem=2G --bootstrap-constraints "mem=32G cores=4" aws
+</code></pre><p>You may also specify the operating system series of the bootstrap machine:</p><pre><code>  juju bootstrap --bootstrap-series trusty aws
+</code></pre><h4 id="model-configuration-at-bootstrap">Model configuration at bootstrap</h4><p>When bootstrapping, it is sometimes necessary to pass in
+configuration values. You may specify config values as bootstrap
+arguments or via a file:</p><pre><code>  juju bootstrap aws --config image-stream=daily
+</code></pre><p>Values as name pairs take precedence over the content of any file
+specified. Example:</p><pre><code>  juju bootstrap aws --config image-stream=daily --config
+      /path/to/file
+</code></pre><p>To specify a different name for the initial hosted model created during bootstrap:</p><pre><code>  juju bootstrap aws --default-model mymodel
+</code></pre><h3 id="shared-model-config">Shared model config</h3><p>Configuration can now be shared between models. The three separate
+commands (get-model-config, set-model-config, and unset-model-config)
+have been collapsed into a single command.</p><p>New/changed commands relevant to this feature:
+  - juju model-config
+  - juju controller-config
+  - juju show-model
+  - juju model-defaults</p><p>The management of hosted model configuration has been improved in several ways:
+  - shared config can be defined which will be used for all new models
+    unless overridden by the user, either at model creation time using
+    --config arguments or using juju model-config later
+  - output of juju model-config includes the origin of each attribute
+    value ("default", "controller", "region", or "model")
+  - output of juju model config only shows configuration relevant to
+    controlling the behaviour of a model;
+  - other data, e.g. model name, UUID, cloud type etc are shown using
+    juju show-model
+  - controller specific details like api port, certificates etc are now
+    available using juju controller-config</p><p>There are 4 sources of model attribute values:
+  1. default - hard coded into Juju or the cloud provider
+  2. controller - shared by all models created on controller
+  3. region - shared by all models running in a given cloud region
+  4. model - set by the user</p><h5 id="model-config-command-examples">Model config command examples</h5><p>When bootstrapping, it is sometimes necessary to pass in configuration
+values. You may specify config values as bootstrap arguments or via a file:</p><pre><code>  juju bootstrap aws --config image-stream=daily
+</code></pre><p>Values as name pairs take precedence over the content of any file specified. Example:</p><pre><code>  juju bootstrap aws --config image-stream=daily --config
+      /path/to/file
+</code></pre><p>To specify a different name for the hosted model:</p><pre><code>  juju bootstrap aws --default-model mymodel
+</code></pre><p>An example juju model-config output:</p><p>Attribute                     From     Value
+agent-metadata-url            default  ""
+agent-stream                  model    devel
+agent-version                 model    2.0.0
+apt-ftp-proxy                 default  ""
+...</p><p>Points of note are that:
+  - all model attributes are shown, enabling the user to see what values
+    are available to be set
+  - when a new model is created, the values are forked at that time so
+    that any Juju upgrades which come with different hard coded defaults
+    do not affect existing models.
+  - the FROM value is calculated dynamically so that if a default value
+    changes to match the model, the output is adjusted accordingly</p><p>The behaviour of juju model-config --reset has changed. Previously,
+any reset attribute would revert to the empty value. Now, the
+value will revert to the closest inherited value.</p><h4 id="model-defaults">Model defaults</h4><p>Shared controller config attributes can be specified in the clouds.yaml file. For example:</p><pre><code>clouds:
+lxdtest:
+  type: lxd
+  config:
+    bootstrap-timeout: 900
+    set-numa-control-policy: true
+    ftp-proxy: http://local
+</code></pre><p>After deployment the <code>model-defaults</code> command allows a user to:
+  - set and unset shared controller attributes
+  - display the values of shared attributes used when creating models, and
+    where those attributes are defined (default, controller, or region)
+  - allow shared attributes to be specified for each cloud region (where  <br />
+    they exist) instead of just the controller.</p><h5 id="model-default-command-examples">Model default command examples</h5><p>Retrieve the full set of configuration defaults (some content elided for brevity).</p><pre><code>juju model-defaults
+
+Attribute                   Default           Controller
+agent-metadata-url          ""                -
+agent-stream                released          -
+apt-ftp-proxy               ""                -
+...
+logging-config              ""                &lt;root&gt;=TRACE
+no-proxy                    ""                https://local
+us-east-1                 foobar            -
+us-west-1                 https://foo-west  -
+provisioner-harvest-mode    destroyed         -
+proxy-ssh                   false             -
+resource-tags               ""                -
+...
+</code></pre><p>Set the default configuration value for all models in the controller for key to value and key2 to value2.</p><pre><code>juju model-defaults key=value key2=value2
+</code></pre><p>Retrieve just the value for a single key:</p><pre><code>juju model-defaults key
+
+ATTRIBUTE    DEFAULT           CONTROLLER
+key          ""                shrubbery
+us-east-1  value             -
+us-west-1  foobaz            -
+</code></pre><p>Retrieve just the value for a single region:</p><pre><code>juju model-defaults us-east-1
+
+ATTRIBUTE    DEFAULT           CONTROLLER
+key          ""                shrubbery
+us-east-1  value             -
+</code></pre><p>Reset the value of key and key2 to the next closest default value:</p><pre><code>juju model-defaults --reset key,key2
+</code></pre><p>As with model-config values can be reset and set in one command.</p><pre><code>juju model-defaults --reset key key2=value2
+</code></pre><h3 id="juju-controllers">Juju controllers</h3><p>A Juju controller provides the HTTP API to Juju and handles
+all of the state information for each model running.</p><p>A controller is created by the “juju bootstrap” command. A single
+Juju controller can now manage many Juju models, meaning less
+resources are needed for Juju's management infrastructure than
+with Juju 1.x, and new models can be created instantly.</p><p>Controllers have a name. By default, Juju will name the controller
+after the cloud and region on which it is running:</p><pre><code>juju bootstrap aws
+
+Creating Juju controller "aws-us-east-1" on aws/us-east-1
+…
+</code></pre><p>It is also possible to give the controller a name:</p><pre><code>juju bootstrap aws prod
+
+Creating Juju controller "prod" on aws/us-east-1
+…
+</code></pre><p>The relevant controller and model commands are:</p><pre><code>  juju bootstrap
+  juju controllers
+  juju models
+  juju switch
+  juju add-model
+  juju destroy-model
+  juju destroy-controller
+</code></pre><p>To learn about managing controllers and models, see:</p><p><a href="./controllers.html">https://jujucharms.com/docs/2.0/controllers</a>
+<a href="./models.html">https://jujucharms.com/docs/2.0/models</a></p><h4 id="juju-gui-in-the-controller">Juju GUI in the controller</h4><p>The Juju GUI is now included in every Juju controller after
+bootstrapping, eliminating the need to deploy a Juju GUI charm.</p><p>See: <a href="./controllers-gui.html">https://jujucharms.com/docs/controllers-gui</a></p><h4 id="creating-new-models">Creating new models</h4><p>Controller admin users can create new models without needing to specify
+any additional configuration:</p><pre><code>  juju add-model mynewmodel
+</code></pre><p>In such cases, the new model will inherit the credentials and SSH authorized
+keys of the controller.</p><p>Other users are required to specify a named credential (so that resources
+created by the new model are allocated to the cloud account of the model
+creator):</p><pre><code>  juju add-model mynewmodel --credential myAWScreds
+</code></pre><p>Additional configuration for the new model may also be specified:</p><pre><code>  juju add-model --config image-stream=daily
+</code></pre><h4 id="sharing-models">Sharing models</h4><p>It is now possible to give other people access to models. Users may be granted
+read, write, or admin access to a model.</p><p>To grant access to a new user they need to be added first
+using the <code>add-user</code> command:</p><pre><code>  juju add-user jo
+</code></pre><p>Grant tracy access to production-cms.</p><pre><code>  juju grant tracy write production-cms
+</code></pre><p>Grant jo admin admin access on staging-cms.</p><pre><code>  juju grant jo admin staging-cms
+</code></pre><p>Additional command support revoking permissions and disabling users. To learn more, see:
+<a href="./users.html">https://jujucharms.com/docs/2.0/users</a></p><h3 id="controller-and-model-permissions">Controller and model permissions</h3><p>A user can be given one of three permission levels on each model in a controller:</p><ul><li>read: The user can log in to the model and obtain status and information about it.</li><li>write: The user can deploy/delete services and add relations in a model.</li><li>admin: The user has full control over the model except for controller level
+  actions such as deletion. Model owners can delete their own models.</li></ul><p>Three permission levels have also been added for users on controllers:</p><ul><li>login: Allows the user to log in to the controller.</li><li>add-model: Allows the user to create new models.</li><li>superuser: Allows the user full control over the model
+  (this permission is granted automatically to the creator of a model).</li></ul><h3 id="improvements-in-charms-and-bundles">Improvements in charms and bundles</h3><h4 id="native-support-for-charm-bundles">Native support for charm bundles</h4><p>The Juju 'deploy' command is used to deploy a bundle. A bundle is a
+collection of charms, configuration, and other characteristics that can
+be deployed in a consistent manner.</p><p>See: <a href="./charms-bundles.html">https://jujucharms.com/docs/2.0/charms-bundles</a></p><h4 id="multi-series-charms">Multi-series charms</h4><p>Charms may now declare that they support more than one operating
+system series. Previously a separate version of a charm was required
+for each series. To specify the series to use when deploying a charm,
+use the ‘--series’ flag:</p><pre><code>  juju deploy mysql --series trusty
+</code></pre><p>If '--series' is not specified the default is used. The default series
+for a multi-series charm is the first one specified in the charm metadata.
+If the specified series is not supported by the charm the deploy will abort
+with an error, unless '--force' is used.</p><h4 id="improved-local-charm-deployment">Improved local charm deployment</h4><p>Local charms and bundles can be deployed directly from their source
+directory. This feature makes it convenient to hack on a charm and
+just deploy it. The feature is also necessary to develop local charms
+supporting multiple series.</p><p>For example, to deploy a development copy of magic-charm from a local
+repo, targeting the yakkety series:</p><pre><code>  juju deploy ./dev/juju/magic-charm --series yakkety
+</code></pre><p>See: <a href="./charms-deploying.html">https://jujucharms.com/docs/2.0/charms-deploying</a></p><p>Any directory structure can be used, including simply pulling the
+charm source from a version control system, hacking on the code, and
+deploying directly from the local repo.</p><h4 id="resources">Resources</h4><p>In charms, "resources" are binary blobs that the charm can utilize, and
+are declared in the metadata for the charm. All resources declared will
+have a version stored in the Charm Store, however updates to these can
+be uploaded from an admin's local machine to the controller.</p><h5 id="change-to-metadata">Change to metadata</h5><p>A new clause has been added to metadata.yaml for resources. Resources
+can be declared as follows:</p><pre><code>resources:
+  name:
+    type: file                         # the only type initially
+    filename: filename.tgz
+    description: "One line that is useful when operators need to push it."
+</code></pre><h5 id="new-commands-related-to-resources">New commands related to resources</h5><p>To show the resources required by or in use by an
+existing application or unit in your model:</p><pre><code>  juju resources
+</code></pre><p>To upload a file from your local disk to the Juju controller
+to be used as a resource for a application.</p><pre><code>  juju push-resource &lt;application&gt; name=&lt;filename&gt;
+</code></pre><h4 id="new-charmer-concepts">New charmer concepts</h4><h5 id="charms-can-declare-minimum-juju-version">Charms can declare minimum Juju version</h5><p>There is a new (optional) top level field in the metadata.yaml
+file called min-juju-version. If supplied, this value specifies
+the minimum version of a Juju server with which the charm is compatible.</p><p>Note that, at this time, Juju 1.25.x does <em>not</em> recognize this
+field, so charms using this field will not be accepted by 1.25
+environments.</p><h5 id="expansion-of-the-upgrade-charm-hook">Expansion of the upgrade-charm hook</h5><p>Whenever a charm or any of its required resources are updated,
+the 'upgrade-charm' hook will fire. A resource is updated whenever
+a new copy is uploaded to the charm store or controller.</p><h5 id="resource-get">resource-get</h5><p>Use 'resource-get' while a hook is running to get the local
+path to the file for the identified resource. This file is an
+fs-local copy, unique to the unit for which the hook is running.
+It is downloaded from the controller, if necessary.</p><h4 id="application-version-set">application-version-set</h4><p>Charm authors may trigger this command from any hook to output
+what version of the application is running. This could be a package
+version, for instance postgres version 9.5. It could also be a
+build number or version control revision identifier, for instance
+"git sha 6fb7ba68". The version details will then be displayed in juju status
+output with the application details.</p><p>Example (within a charm hook):</p><pre><code>  application-version-set 9.5.3
+</code></pre><p>Then application status will show:</p><pre><code>App         Version  Status  Scale  Charm       Store       Rev  OS      Notes
+postgresql  9.5.3    active      1  postgresql  jujucharms  105  ubuntu
+</code></pre><h4 id="juju-supports-charm-store-channels">Juju supports Charm Store channels</h4><p>Support for channels has been brought into Juju via command options on the
+relevant sub-commands:</p><pre><code>  juju deploy
+  juju upgrade-charm
+</code></pre><p>For more information on the new support for channels in the Charm Store
+and how they work, please see our
+<a href="./authors-charm-store.html#entities-explained">documentation</a>
+on the subject.</p><h4 id="extra-bindings-support-for-charms-metadata">extra-bindings Support for charms metadata</h4><p>Many charms use a simple model where a relationship with another charm
+also indicates there is a network connection between units of those
+applications. We have utilized this fact to add a network model that allows
+system operators to control where those TCP connections are made by
+binding the application relation endpoints onto a network space.</p><p>However, some charms specifically use relation endpoints only as a way
+to pass configuration around, and the relations don't map directly to
+applications that are running in that charm and/or networking configuration.
+These charms want to be able to express that they have more networking
+configuration that an operator wants to control without having yet-
+another interface that will never be related to another application.</p><p>Juju solves the aforementioned issues by introducing an optional new
+section in the charm metadata,yaml. The new section is called "extra-
+bindings". Similarly to the peers/provides/requires sections, extra-
+bindings contains a list of names, which can be used with 'juju deploy
+--bind' like relation names. Unlike relations, you don't have to define
+hooks or anything more complex to allow the users of the charm to bind
+those names to Juju spaces.</p><h4 id="new-hook-command-network-get">New hook command: network-get</h4><p>When deploying an application with endpoint bindings specified, charm
+authors can use the new "network-get" hook command to determine which
+address to advertise for a given endpoint. This approach will eventually
+replace "unit-get private-address" as well as various other ways to get
+the address to use for a given unit.</p><p>There is currently a mandatory '--primary-address' argument to 'network-
+get', which guarantees a single IP address to be returned.</p><p>Example (within a charm hook):</p><pre><code>relation-ids cluster
+url:2
+
+network-get url:2 --primary-address
+10.20.30.23
+</code></pre><p>(assuming the application was deployed with e.g. --bind url=internal, and
+(10.20.30.0/24 is one of the subnets in that "internal" space).</p><h3 id="new-spaces-support-on-maas-19-20-21">New spaces support on MAAS 1.9, 2.0, 2.1</h3><p>Juju 2.0 now natively supports the spaces API in MAAS 1.9+. Spaces
+are automatically discovered from MAAS (1.9+) on bootstrap and available
+for use with application endpoint bindings or machine provisioning
+constraints (see below). Space discovery works for the controller model
+as well as any model created later using 'juju add-model'.</p><h4 id="binding-application-endpoints-to-spaces">Binding application endpoints to spaces</h4><p>Binding means the "bound" endpoints will have IP addresses from
+subnets that are part of the space the endpoint is bound to.</p><p>Use the optional '--bind' argument when deploying an application to
+specify to which space individual charm endpoints should be bound. The
+syntax for the '--bind' argument is a whitespace-separated list of
+endpoint and space names, separated by "=".</p><p>When <code>--bind</code> is not specified, all endpoints will use the same
+address, which is the host machine's preferred private address, as
+returned by "unit-get private-address".
+This is backwards-compatible behaviour.</p><p>Additionally, an application-default space can be specified by omitting
+the <code>&lt;endpoint&gt;=</code> prefix before the space name. This space will
+be used for binding all endpoints that are not explicitly specified.</p><p>Examples:</p><pre><code>  juju deploy mysql --bind "db=database server=internal"
+</code></pre><p>Bind "db" endpoint to an address part of the "database" space (i.e. the
+address is coming from one of the "database" space's subnets in MAAS).</p><pre><code>  juju deploy wordpress --bind internal-apps
+</code></pre><p>Bind <em>all</em> endpoints of wordpress to the "internal-apps" space.</p><pre><code>  juju deploy haproxy --bind "url=public internal"
+</code></pre><p>Bind "url" to "public", and all other endpoints to "internal".</p><h3 id="provider-improvements">Provider improvements</h3><h4 id="lxc-local-provider-no-longer-available">LXC local provider no longer available</h4><p>With the introduction of the LXD provider (below), the LXC version of
+the local provider is no longer supported.</p><h4 id="lxd-provider">LXD provider</h4><p>The new LXD provider is the best way to use Juju locally.
+See: <a href="./clouds-LXD.html">https://jujucharms.com/docs/2.0/clouds-LXD</a></p><p>The controller is no longer your host machine; a LXD
+container is created instead. This keeps your host machine clean
+and allows you to utilize your local controler more like a Juju
+controller running in any other cloud. This also means you can test
+features like Juju’s  high-availability controllers without needing
+to use a cloud provider.</p><h5 id="setting-up-lxd-on-older-series">Setting up LXD on older series</h5><p>LXD has been made available in Trusty backports, but needs manual
+dependency resolution:</p><pre><code>  sudo apt-get --target-release trusty-backports install lxd
+</code></pre><p>Before using a locally running LXD after installing it, either through
+Juju or the LXD CLI ("lxc"), you must either log out and back in or run
+this command:</p><pre><code>  newgrp lxd
+</code></pre><p>See: <a href="https://linuxcontainers.org/lxd/getting-started-cli/">https://linuxcontainers.org/lxd/getting-started-cli/</a></p><h4 id="lxd-container-support">LXD Container Support</h4><p>Juju now uses LXD to provide containers when deploying applications. So
+instead of doing:</p><pre><code>  juju deploy mysql --to lxc:1
+</code></pre><p>the new syntax is:</p><pre><code>  juju deploy mysql --to lxd:1
+</code></pre><h4 id="microsoft-azure-resource-manager-provider">Microsoft Azure Resource Manager provider</h4><p>Juju now supports Microsoft Azure's new Resource Manager API. The new
+provider supports everything the old provider did, but now also
+supports several additional features, including unit placement,
+which allows you to specify existing machines to which units are
+deployed. As before, units of an application will be allocated to machines
+in a application-specific Availability Set if no machine is specified.</p><p>To add credentials for Azure, run the command <code>juju add-credential azure</code>.
+Select the default interactive mode and you will be prompted to enter your
+subscription ID. You can find your subscription ID in the Azure portal
+(<a href="https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade">https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade</a> ).
+You will then be prompted to open a URL to authenticate with Azure,
+and authorise Juju to create credentials on your behalf.</p><h4 id="new-support-for-the-rackspace-public-cloud">New support for the Rackspace Public Cloud</h4><p>A new provider has been added that supports hosting a Juju model in
+Rackspace Public Cloud. Add your credentials for Rackspace with:</p><pre><code>  juju add-credential rackspace
+</code></pre><p>Then bootstrap:</p><pre><code>  juju bootstrap rackspace
+</code></pre><h4 id="openstack-improvements">OpenStack improvements</h4><h5 id="new-openstack-machines-can-be-provisioned-based-on-virtualization-type-kvm-lxd">New OpenStack machines can be provisioned based on virtualization type (kvm, lxd)</h5><p>Openstack clouds with multi-hypervisor support have different images for
+LXD and KVM. Juju can now pick the right image for LXD or KVM instance
+based on the instance constraints:</p><pre><code>  juju deploy mysql --constraints="virt-type=lxd,mem=8G,cpu=4"
+</code></pre><h5 id="keystone-3-support-in-openstack">Keystone 3 support in OpenStack</h5><p>Juju now supports Openstack with Keystone Identity provider V3. Keystone
+3 brings a new attribute to our credentials, "domain-name"
+(OS_DOMAIN_NAME) which is optional. If "domain-name" is present (and
+user/password too) juju will use V3 authentication by default. In other
+cases where only user and password is present, it will query OpenStack
+as to what identity providers are supported, and their endpoints. V3
+will be tried and, if it works, set as the identity provider otherwise it
+will use V2, the previous standard.</p><h4 id="joyent-provider-no-longer-uses-manta-storage">Joyent provider no longer uses Manta storage</h4><p>The use of Joyent Manta Storage is no longer necessary and has been
+removed. The Manta credential attributes are not supported. <code>juju add-
+credential</code> will not prompt for them. Existing credential.yaml files used
+in previous betas will need to be edited to remove: manta-user, manta-
+key-id, manta-url</p><h3 id="misc-changes">Misc changes</h3><h4 id="juju-status-improvements">juju status improvements</h4><p>The default Juju status format is now tabular (not yaml). YAML can still
+be output by using the '--format yaml' arguments. The deprecated agent-
+state and associated yaml attributes are now deleted (these have been
+replaced since 1.24 by agent status and workload status attributes).</p><p>The tabular status output now also includes relation information. This
+was previously only shown in the 'yaml' and 'json' output formats.</p><h5 id="machine-provisioning-status">Machine provisioning status</h5><p>Juju status for machines has a new "machine-status" value in the yaml
+format. This reflects the state of the machine as it is being allocated
+within the cloud. For providers like MAAS, it is possible to see the
+state of the machine as it transitions from allocating to deploying to
+deployed. For containers it also provides extra information about the
+container being created.</p><pre><code>  juju status --format yaml
+
+    model: admin
+    machines:
+    "0":
+      juju-status:
+        current: allocating
+        since: 24 Mar 2016 09:06:59+10:00
+        version: 2.0-beta3.1
+      dns-name: 10.0.1.92
+      instance-id: juju-16db5c82-f7af-4b0a-8507-2023df01ce89-machine-0
+      machine-status:
+        current: allocating
+        message: a2ef-dec1-8bfc-092e: deploying
+        since: 24 Mar 2016 09:06:59+10:00
+      series: trusty
+      hardware: arch=amd64 cpu-cores=0 mem=0M
+</code></pre><h4 id="juju-client-support-for-any-linux">Juju client support for any Linux</h4><p>The Juju 2.0 client works on any Linux flavour. When bootstrapping
+with local tools, it is now possible to create a controller using
+any supported Linux series regardless of the Linux flavour the client
+is running on.</p><h4 id="automatic-retries-of-failed-hooks">Automatic retries of failed hooks</h4><p>Failing hooks are automatically retried with a backoff strategy.
+Backoff increases on each retry by a factor of 2 starting from 5
+seconds and is capped at 5 minutes. (5, 10, ..., 5*60 seconds)</p><p>A model configuration flag, <code>automatically-retry-hooks</code>, is now
+available that will toggle this behaviour. It affects all the units
+running in the same model. By default the flag is true and that
+is the recommended value for regular deployments.</p><h4 id="ssh-host-key-checking">SSH host key checking</h4><p>The SSH host keys of Juju managed machines are now tracked and
+are verified by the juju ssh, scp and debug-hooks commands. This
+ensures that SSH connections established by these commands are
+actually made to the intended hosts.</p><p>Host key checking can be disabled using the new --no-host-key-checks
+option for Juju’s SSH related commands. Routine use of this option
+is strongly discouraged.</p><h4 id="juju-logging-improvements">Juju logging improvements</h4><p>Logs from machine and unit agents are now streamed to controllers
+via API instead of using rsyslogd. This is a requirement of
+multi-model support, which is now enabled by default. Additionally,
+centralised logs are now stored in Juju's database instead of the a
+file. This improves log query flexibility and performance as well as
+opening up the possibility of structured log output in future
+Juju releases.</p><p>The <code>juju debug-log</code> command will continue to function as before and
+should be used as the default way of accessing Juju's logs.</p><h5 id="juju-log-forwarding">Juju log forwarding</h5><p>When enabled, log messages for all hosted models in a controller
+are forwarded to a syslog server over a secure TLS connection.
+The easiest way to configure the feature is to provide a
+config.yaml file at bootstrap:</p><pre><code>  juju bootstrap &lt;cloud&gt;
+      --config logforward-enabled=true --config logconfig.yaml
+</code></pre><p>The contents of the YAML file should currently be as follows:</p><pre><code>  syslog-host: &lt;host&gt;:&lt;port&gt;
+  syslog-ca-cert: |
+  -----BEGIN CERTIFICATE-----
+   &lt;cert-contents&gt;
+  -----END CERTIFICATE-----
+  syslog-client-cert: |
+  -----BEGIN CERTIFICATE-----
+   &lt;cert-contents&gt;
+  -----END CERTIFICATE-----
+  syslog-client-key: |
+  -----BEGIN PRIVATE KEY-----
+   &lt;cert-contents&gt;
+  -----END PRIVATE KEY-----
+</code></pre><p>The feature can be toggled by setting the logforward-enabled
+attribute. When enabled, a maximum of 100 previous log lines
+will be forwarded.</p><h5 id="example-syslog-message">Example syslog message</h5><pre><code>&lt;11&gt;1 2016-02-28T09:57:10.804642398-05:00 172.12.3.1 juju - - [origin enterpriseId="28978" software="jujud" "2.0.0"] [model@28978 controller-uuid="deadbeef" model-uuid="deadbeef"] [log@28978 source-file="provider/ec2/storage.go" source-line="60"] Could not initialise machine block storage
+</code></pre><h3 id="audit-logging">Audit logging</h3><p>In its initial implementation, audit logging is on by default.
+The audit log will be in /var/log/juju/audit.log for each controller
+machine. If running in an HA environment, the audit.log files on each
+controller machine must be collated to get a complete log. Future
+releases will provide a utility to merge the logs, akin to debug-log.</p><p>Since users may interact with Juju from multiple sources (CLI, GUI,
+deployer, etc.), audit log entries record the API calls made, rather
+than only reporting CLI commands run. Only those API calls originating
+from authenticated users calling the external API are logged.</p><h4 id="enhancements-to-juju-run">Enhancements to <code>juju run</code></h4><p><code>juju run</code> now works by queueing actions using the name "juju-run".<br />
+The command line API has not changed.</p><p>A few notes:</p><ul><li><code>juju run</code> is now supported on Windows. The commands are executed through PowerShell.</li><li>Any actions named <code>juju-run</code> defined in the charm will <strong>not</strong> work anymore. The charm build tool will forbid any actions starting with 'juju-' to be defined, similar to relations.</li><li>Because the commands are now actions, statistics related to queue times, execution times, etc. can be gathered.</li><li>The specified timeout is only taken into account when actually executing the action and does <strong>not</strong> account for delays that might come from the action waiting to be executed.</li><li><code>show-action-status</code> also lists actions queued by <code>juju-run</code>.</li><li>To avoid flooding a new flag has been created for <code>show-action-status</code>.  You can now use <code>--name &lt;action-name&gt;</code> to only get the actions corresponding to a particular name.</li><li><code>show-action-output</code> can be used to get more information on a
+particular command.</li></ul><h4 id="api-login-with-macaroons">API login with macaroons</h4><p>Juju 2.0 supports an alternate API login method based on macaroons.</p><h4 id="experimental-address-allocation-feature-flag-is-no-longer-supported">Experimental address-allocation feature flag is no longer supported</h4><p>In earlier releases, it was possible to have Juju use static IP
+addresses for containers from the same subnet as their host machine,
+using the following development feature flag:</p><pre><code>JUJU_DEV_FEATURE_FLAGS=address-allocation juju bootstrap ...
+</code></pre><p>This flag is no longer supported and will log a warning message if used.</p><h4 id="mongo-32-support">Mongo 3.2 support</h4><p>Juju now uses mongo 3.2 for its database with the new Wired Tiger
+storage engine enabled. This is initially only supported for 16.04 (Xenial).
+Trusty and Wily will be supported soon.</p><h3 id="terminology">Terminology</h3><p>"environments" are now be referred to as "models" and “services” are
+referred to as “applications”.  Commands which referenced "environments"
+or “services” now reference "models” or “applications” respectively.</p><p>The "state-server" from Juju 1.x is now a "controller" in 2.0.</p><h3 id="command-name-changes">Command name changes</h3><p>Juju commands have moved to a flat command structure instead of nested command structure:</p><table><thead><tr><th>1.25 command</th><th>2.0 command</th></tr></thead><tbody><tr><td>juju environment destroy</td><td>juju destroy-model *</td></tr><tr><td>juju environment get</td><td>juju model-config</td></tr><tr><td>juju environment get-constraints</td><td>juju get-model-constraints</td></tr><tr><td>juju environment retry-provisioning</td><td>juju retry-provisioning</td></tr><tr><td>juju environment set</td><td>juju model-config</td></tr><tr><td>juju environment set-constraints</td><td>juju set-model-constraints</td></tr><tr><td>juju environment share</td><td>juju grant</td></tr><tr><td>juju environment unset</td><td>juju model-config</td></tr><tr><td>juju environment unshare</td><td>juju revoke</td></tr><tr><td>juju environment users</td><td>juju users</td></tr><tr><td>juju user add</td><td>juju add-user</td></tr><tr><td>juju user change-password</td><td>juju change-user-password</td></tr><tr><td>juju user disable</td><td>juju disable-user</td></tr><tr><td>juju user enable</td><td>juju enable-user</td></tr><tr><td>juju user info</td><td>juju show-user</td></tr><tr><td>juju user list</td><td>juju users</td></tr><tr><td>juju machine add</td><td>juju add-machine</td></tr><tr><td>juju machine remove</td><td>juju remove-machine</td></tr><tr><td>juju authorised-keys add</td><td>juju add-ssh-key</td></tr><tr><td>juju authorised-keys list</td><td>juju ssh-keys</td></tr><tr><td>juju authorised-keys delete</td><td>juju remove-ssh-key</td></tr><tr><td>juju authorised-keys import</td><td>juju import-ssh-key</td></tr><tr><td>juju get</td><td>juju config</td></tr><tr><td>juju set</td><td>juju config</td></tr><tr><td>juju get-constraints</td><td>juju get-model-constraints</td></tr><tr><td>juju set-constraints</td><td>juju set-model-constraints</td></tr><tr><td>juju get-constraints <application></td><td>juju get-constraints</td></tr><tr><td>juju set-constraints <application></td><td>juju set-constraints</td></tr><tr><td>juju backups create</td><td>juju create-backup</td></tr><tr><td>juju backups restore</td><td>juju restore-backup</td></tr><tr><td>juju action do</td><td>juju run-action</td></tr><tr><td>juju action defined</td><td>juju actions</td></tr><tr><td>juju action fetch</td><td>juju show-action-output</td></tr><tr><td>juju action status</td><td>juju show-action-status</td></tr><tr><td>juju storage list</td><td>juju storage</td></tr><tr><td>juju storage show</td><td>juju show-storage</td></tr><tr><td>juju storage add</td><td>juju add-storage</td></tr><tr><td>juju space create</td><td>juju add-space</td></tr><tr><td>juju space list</td><td>juju spaces</td></tr><tr><td>juju subnet add</td><td>juju add-subnet</td></tr><tr><td>juju ensure-availability</td><td>juju enable-ha</td></tr></tbody></table><ul><li>the behaviour of destroy-environment/destroy-model has changed, see
+      <a href="./controllers.html">https://jujucharms.com/docs/2.0/controllers</a></li></ul><p>These extra commands were previously under the "jes" developer feature
+flag but are now available out of the box:</p><table><thead><tr><th>1.25 command</th><th>2.0 command</th></tr></thead><tbody><tr><td>juju system create-environment</td><td>juju add-model</td></tr><tr><td>juju system destroy</td><td>juju destroy-controller</td></tr><tr><td>juju system environments</td><td>juju models</td></tr><tr><td>juju system kill</td><td>juju kill-controller</td></tr><tr><td>juju system list</td><td>juju controllers</td></tr><tr><td>juju system login</td><td>juju login</td></tr><tr><td>juju system remove-blocks</td><td>juju enable-commands</td></tr><tr><td>juju system list-blocks</td><td>juju disabled-commands</td></tr></tbody></table><p>In general:</p><ul><li>commands which list multiple things should start with <code>list-</code> and there
+    will be an alias for the plural noun in the command, for
+    example ‘list-controllers’ is an alias for ‘controllers’.</li><li>commands which look at an individual thing will start with <code>show-</code>.</li><li>commands which start with 'remove-' are used for things that can be easily recreated.</li><li>commands which start with 'destroy-' are used only for controllers and models.</li></ul><h3 id="known-issues_2">Known issues</h3><ul><li>Juju 2.0 no longer supports KVM for the local provider
+    Lp 1547665</li><li>Cannot deploy a dense openstack bundle with native deploy
+    Lp 1555808</li><li>Credentials files containing Joyent credentials must be updated to
+    work with beta3 and later (See "Joyent Provider No Longer Uses Manta <br />
+    Storage")</li></ul></details><!-- LINKS -->
+
+    </main>
+    <aside class="jujudocs__toc">
+    </aside>
+</div>
+
+
+
+</div><!-- /.inner-wrapper -->
+
+</div><!-- /.wrapper -->
+
+
+<div class="footer-wrapper strip-white">
+<footer class="global clearfix">
+    <p class="top-link">
+        <a href="https://jujucharms.com/docs/stable/getting-started#">Back to the top</a>
+    </p>
+    <nav role="navigation" class="inner-wrapper">
+        <div class="row">
+            <div class="seven-col">
+                <ul class="no-bullets seven-col">
+                    <li><a href="https://jujucharms.com/docs">Docs</a></li>
+                    <li><a href="https://jujucharms.com/community">Community</a></li>
+                    <li><a href="https://jujucharms.com/community/blog">Blog</a></li>
+                    <li><a href="https://jujucharms.com/docs">Install Juju</a></li>
+                </ul>
+                <div class="legal">
+                    <p>© 2017 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+                    <ul class="inline-list clear bullets">
+                        <li class="inline-list__item"><a href="http://www.ubuntu.com/legal"><small>Legal information</small></a></li>
+                        <li class="inline-list__item"><a href="https://github.com/CanonicalLtd/jujucharms.com/issues"><small>Report a bug on this site</small></a></li>
+                    </ul>
+                    <span class="accessibility-aid">
+                        <a href="https://jujucharms.com/docs/stable/getting-started#">Got to the top of the page</a>
+                    </span>
+                </div>
+            </div>
+            <div class="five-col last-col">
+                <ul class="social-list right">
+                    <li class="social-list__item">
+                        <a href="http://youtube.com/jujucharms" class="social-list__item--youtube"><svg width="31" height="31" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M15.515.47c-3.99 0-7.817 1.585-10.638 4.407C2.055 7.697.47 11.525.47 15.515s1.585 7.817 4.407 10.64c2.82 2.82 6.648 4.405 10.638 4.405s7.817-1.585 10.64-4.406c2.82-2.822 4.405-6.65 4.405-10.64S28.975 7.7 26.154 4.878C23.332 2.055 19.504.47 15.514.47z" fill="#AEA79F" class="the-icon"></path><path d="M15.51 8.73s-4.05 0-6.75.195c-.376.045-1.198.05-1.932.817-.58.586-.767 1.916-.767 1.916s-.192 1.56-.192 3.122v1.464c0 1.56.193 3.123.193 3.123s.19 1.33.768 1.915c.733.768 1.698.744 2.127.824 1.544.148 6.56.194 6.56.194s4.055-.006 6.755-.2c.377-.046 1.2-.05 1.933-.818.578-.586.767-1.915.767-1.915s.192-1.562.192-3.123V14.78c0-1.56-.192-3.122-.192-3.122s-.19-1.33-.767-1.916c-.734-.768-1.556-.772-1.933-.817-2.7-.195-6.75-.195-6.75-.195h-.01zm-1.988 3.866l5.214 2.72-5.213 2.702v-5.422z" fill="#FFF"></path></g></svg> Juju on Youtube</a>
+                    </li>
+                    <li class="social-list__item">
+                        <a href="https://plus.google.com/106305712267007929608/posts" class="social-list__item--google-plus">Juju on Google+</a>
+                    </li>
+                    <li class="social-list__item">
+                        <a href="http://www.twitter.com/ubuntucloud" class="social-list__item--twitter">Ubuntu Cloud on Twitter</a>
+                    </li>
+                    <li class="social-list__item">
+                        <a href="http://www.facebook.com/ubuntucloud" class="social-list__item--facebook">Ubuntu Cloud on Facebook</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</footer>
+</div>
+
+<script>
+    var isOperaMini = (navigator.userAgent.indexOf('Opera Mini') > -1);
+    if(isOperaMini) {
+        var root = document.documentElement;
+        root.className += " opera-mini";
+    }
+</script>
+
+<script>
+YUI().use('storefront-cookie', 'storefront-utils',
+          function (Y) {
+    Y.on('domready', function() {
+        var inSession = false;
+        var cookie = new Y.storefront.CookiePolicy();
+        var utils = Y.storefront.utils;
+
+        var notification = Y.one('.login-notification');
+        var loginLink = Y.one('.js-menu-login');
+
+        if (loginLink && notification) {
+          loginLink.on('mouseenter', function () {
+            notification.addClass('is-shown');
+          });
+          loginLink.on('mouseleave', function () {
+            notification.removeClass('is-shown');
+          });
+        }
+
+        cookie.render();
+        utils.svgFallback(Y.one('#main-content'));
+        utils.setupSearch();
+    });
+});
+</script>
+
+
+<script type="text/template" id="cookie-warning-template">
+    <div class="cookie-policy">
+        <div class="inner-wrapper">
+            <a href="?cp=close" class="link-cta">Close</a>
+            <p>We use cookies to improve your experience. By your continued use of this site you accept such use. To change your settings please <a href="http://www.ubuntu.com/legal/terms-and-policies/privacy-policy#cookies">see our policy</a>.</p>
+        </div>
+    </div>
+</script>
+
+
+<script>
+YUI().use('storefront-docs-menu', 'storefront-utils', function(Y) {
+    // Y.storefront.docsMenu.setup('.jujudocs-menu', 'ul > .section', 'getting-started');
+    Y.storefront.utils.detailsFallback();
+});
+
+</script>
+
+
+<script type="application/javascript">
+  YUI().use('node', 'storefront-navigation', function (Y) {
+    Y.storefront.mobileMenu();
+  });
+</script>
+
+<!-- {version: ['1.0.4', '']} -->
+
+
+
+<script type="text/javascript" id="">(function(){function b(){!1===c&&(c=!0,Munchkin.init("066-EOV-335"))}var c=!1,a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="//munchkin.marketo.net/munchkin.js";a.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||b()};a.onload=b;document.getElementsByTagName("head")[0].appendChild(a)})();</script>
+
+<script type="text/javascript" id="">setTimeout(function(){var a=document.createElement("script"),b=document.getElementsByTagName("script")[0];a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0011/8875.js?"+Math.floor((new Date).getTime()/36E5);a.async=!0;a.type="text/javascript";b.parentNode.insertBefore(a,b)},1);</script>
+
+<script type="text/javascript" id="">window.heap=window.heap||[];
+heap.load=function(e,d){window.heap.appid=e;window.heap.config=d=d||{};var a=d.forceSSL||"https:"===document.location.protocol,b=document.createElement("script");b.type="text/javascript";b.async=!0;b.src=(a?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);for(var b=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},a=["clearEventProperties","identify","setEventProperties",
+"track","unsetEventProperty"],c=0;c<a.length;c++)heap[a[c]]=b(a[c])};heap.load("3280028620");</script>
+</body></html>
