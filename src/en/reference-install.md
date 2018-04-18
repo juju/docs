@@ -7,9 +7,9 @@ distributions, macOS, and Windows. Development releases are also available for
 testing. Read on for how to install a stable or development version of Juju on
 your chosen platform.
 
-## Version 2.3.5
+## Version 2.3.6
 
-The most recent stable version of Juju is 2.3.5. This is the version we
+The most recent stable version of Juju is 2.3.6. This is the version we
 recommend for production use. See the [Release Notes][release-notes-2].
 
 ### Ubuntu
@@ -79,7 +79,7 @@ sudo snap install juju --classic
 For CentOS, you can download Juju from the following archive and install it
 manually:
 
-[**juju-2.3.5-centos7.tar.gz**][juju-centos] ([md5][juju-centos-md5])
+[**juju-2.3.6-centos7.tar.gz**][juju-centos] ([md5][juju-centos-md5])
 
 ### macOS
 
@@ -100,7 +100,7 @@ brew upgrade juju
 
 A Windows installer is available for Juju and can be found here:
 
-[**juju-setup-2.3.5-signed.exe**][juju-win-signed] ([md5][juju-win-signed-md5])
+[**juju-setup-2.3.6-signed.exe**][juju-win-signed] ([md5][juju-win-signed-md5])
 
 ## Development releases
 
@@ -166,9 +166,9 @@ instructions on how to build Juju from source.
 [snapcraft]: https://snapcraft.io
 [snapd-install]: https://snapcraft.io/docs/core/install
 [juju-new-bug]: https://bugs.launchpad.net/juju/+filebug
-[juju-win-signed]: https://launchpad.net/juju/2.3/2.3.5/+download/juju-setup-2.3.5-signed.exe
-[juju-win-signed-md5]: https://launchpad.net/juju/2.3/2.3.5/+download/juju-setup-2.3.5-signed.exe/+md5
-[juju-centos]: https://launchpad.net/juju/2.3/2.3.5/+download/juju-2.3.5-centos7.tar.gz
-[juju-centos-md5]: https://launchpad.net/juju/2.3/2.3.5/+download/juju-2.3.5-centos7.tar.gz/+md5
+[juju-win-signed]: https://launchpad.net/juju/2.3/2.3.6/+download/juju-setup-2.3.6-signed.exe
+[juju-win-signed-md5]: https://launchpad.net/juju/2.3/2.3.6/+download/juju-setup-2.3.6-signed.exe/+md5
+[juju-centos]: https://launchpad.net/juju/2.3/2.3.6/+download/juju-2.3.6-centos7.tar.gz
+[juju-centos-md5]: https://launchpad.net/juju/2.3/2.3.6/+download/juju-2.3.6-centos7.tar.gz/+md5
 [juju-launchpad-binaries]: https://launchpad.net/juju/+series
 [centos-and-other-linuxes]: #centos-and-other-linuxes
