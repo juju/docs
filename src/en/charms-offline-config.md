@@ -156,6 +156,7 @@ disposal:
  - `apt-http-proxy`
  - `apt-https-proxy`
  - `apt-mirror`
+ - `container-image-metadata-url`
  - `ftp-proxy`
  - `http-proxy`
  - `https-proxy`
