@@ -160,7 +160,7 @@ IMPORTANT: UPDATE THE INSTALL PAGE AT THE SAME TIME (reference-install.md).
   
   	  sudo snap install juju --beta --classic
 
-  You can revert your Juju client to the latest stable version with:
+  You can switch to the latest stable version with:
 
   	  sudo snap refresh juju --stable
 
