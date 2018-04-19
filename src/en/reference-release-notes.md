@@ -88,7 +88,7 @@ IMPORTANT: UPDATE THE INSTALL PAGE AT THE SAME TIME (reference-install.md).
   ensure that you have the correct number of controller machines being
   started/intended to participate in HA. This will also fix issues around
   launching 2 new machines (going to 5) while machines 2 and 3 are still
-  starting.h
+  starting.
   
   **Controller configuration options for spaces**  
   Two new controller configuration settings have been introduced. These are:
@@ -155,14 +155,14 @@ IMPORTANT: UPDATE THE INSTALL PAGE AT THE SAME TIME (reference-install.md).
   
   ## Get Juju.
   
-  The only way to get the development version of Juju is by using the `--edge`
-  channel in the `snap` package:
+  To get the beta version of Juju use the `--beta` channel in the `snap`
+  package:
   
-  	  sudo snap install juju --edge --classic
+  	  sudo snap install juju --beta --classic
 
-  To move to the stable version:
+  You can revert your Juju client to the latest stable version with:
 
-  	  sudo snap refresh --stable juju
+  	  sudo snap refresh juju --stable
 
   ## Feedback appreciated.
   
