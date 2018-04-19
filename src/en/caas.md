@@ -1,13 +1,17 @@
-Title: CAAS
+Title: CAAS and Juju
 TODO:  Once 2.4 is officially released remove support Note and update status output
 
-# CAAS
+# CAAS and Juju
 
-CAAS is *Containers As A Service*.
+CAAS is *Containers as a Service*, a cloud service that allows users to upload,
+organize, run, scale, manage, and stop containers. Combining this with Juju
+opens up a new vista of possibilities for Juju users. Currently, Juju supports
+Kubernetes as its underlying CAAS solution.
 
 Kubernetes (often abbreviated as "k8s") provides a flexible architecture for
 managing containerised applications at scale (see the
-[Kubernetes documentation][upstream-kubernetes-docs] for more information).
+[Kubernetes documentation][upstream-kubernetes-docs] for more information). It
+most commonly employs Docker as its container technology.
 
 !!! Important:
     Juju provides base Kubernetes support starting with version 2.4-beta1.
@@ -16,9 +20,19 @@ managing containerised applications at scale (see the
 
 First off, a Kubernetes cluster will be required. Essentially, you will use it
 as you would any other cloud that Juju interacts with: the cluster becomes the
-backing cloud. In this document, we deploy the cluster using Juju itself.
+backing cloud.
 
-To deploy a minimal two-machine Kubernetes cluster we'll use the
+To summarise, the steps for using Kubernetes with Juju are:
+
+ 1. Obtain a cluster
+ 1. Add the cluster to Juju
+ 1. Deploy CAAS-specific charms
+
+### Obtain a Kubernetes cluster
+
+You may obtain a Kubernetes cluster in any way. However, in this document, we
+deploy the cluster using Juju itself. We will do so by deploying a minimal
+two-machine Kubernetes cluster by making use of the
 [kubernetes-core][kubernetes-core-charm] bundle available in the Charm Store:
 
 ```bash
@@ -29,7 +43,7 @@ juju deploy kubernetes-core
     An alternative to using the bundle is to use the `conjure-up` installer.
     See Ubuntu tutorial
     [Install Kubernetes with conjure-up][ubuntu-tutorial_install-kubernetes-with-conjure-up].
-    Although it specifically mentions the
+    for guidance. Although the tutorial specifically mentions the
     [Canonical Distribution of Kubernetes][cdk-charm] you can choose the
     identical minimal install deployed above from the tool's interface.
 
@@ -72,14 +86,38 @@ kubernetes-master:kube-control       kubernetes-worker:kube-control       kube-c
 kubernetes-worker:cni                flannel:cni 			  kubernetes-cni    subordinate
 ```
 
-Copy the main configuration file from the Kubernetes master node:
+### Add the cluster to Juju
+
+We will need some information about the cluster in order to add it to Juju.
+This is found within the main Kubernetes configuration file.
+
+!!! Note:
+    If `conjure-up` was used to install the cluster then the rest of this
+    section can be skipped; this install method adds the cluster for you.
+
+#### Adding quickly (bundle installs)
+
+If the `juju deploy` command was used to deploy the cluster the above file can
+be copied over from the Kubernetes master node (and saved as `~/.kube/config`)
+in this way:
 
 ```bash
 mkdir ~/.kube
 juju scp kubernetes-master/0:config ~/.kube/config
 ```
- 
-The contents of this file will be used in a subsequent command.
+
+We can now take advantage of the `add-k8s` command as it internally parses the
+copied configuration file from the specified path. This allows us to quickly
+add the cluster-cloud, which we arbitrarily have called 'k8cloud':
+
+```bash
+juju add-k8s k8cloud
+```
+
+#### Adding manually (third-party installs)
+
+`add-cloud`  
+`add-credential`
 
 ## Architecture
 
