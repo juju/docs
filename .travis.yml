@@ -12,5 +12,5 @@ install:
   - pip install ./documentation-builder
  
 script:
-  - python3 ./documentation-builder/documentation-builder --source-folder src
+  - ./run
 
