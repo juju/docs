@@ -170,13 +170,14 @@ There are several management tasks that can be done related to credentials.
 
 ### Listing credentials
 
-You can check what credentials are stored by Juju by running the command:
+You can display what credentials are **available** to the Juju client by
+running the command:
 
 ```bash
 juju credentials
 ```
 
-...which will return a list of the known credentials. For example:
+Sample output:
 
 <!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
 <!-- JUJUCOMMAND: juju credentials -->
@@ -197,6 +198,28 @@ juju credentials --format yaml --show-secrets
 ```
 
 The YAML output will be similar to our 'mycreds.yaml' sample above.
+
+To see what credentials are **in use** by a model (here the 'default' model):
+
+```bash
+juju show-model default
+```
+
+Partial output:
+
+```no-highlight
+default:
+  name: admin/default
+  ...
+  ...
+  credential:
+    name: bob
+    owner: admin
+    cloud: aws
+```
+
+The `models --format yaml` command also shows this information, albeit for all
+models.
 
 ### Setting default credentials
 
