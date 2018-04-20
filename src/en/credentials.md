@@ -170,13 +170,14 @@ There are several management tasks that can be done related to credentials.
 
 ### Listing credentials
 
-You can check what credentials are stored by Juju by running the command:
+You can display what credentials are **available** to the Juju client by
+running the command:
 
 ```bash
 juju credentials
 ```
 
-...which will return a list of the known credentials. For example:
+Sample output:
 
 <!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
 <!-- JUJUCOMMAND: juju credentials -->
