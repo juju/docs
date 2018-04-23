@@ -179,6 +179,11 @@ Import-Module CharmHelpers
 $interval = Get-JujuCharmConfig "interval"
 ```
 
+## goal-state
+
+`goal-state` returns a yaml-parsed string, with information about the charm
+units and their relations.
+
 ## is-leader
 
 `is-leader` will write `"True"` or `"False"` to stdout, and return 0, if
