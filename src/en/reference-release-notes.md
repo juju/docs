@@ -15,6 +15,212 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
 IMPORTANT: UPDATE THE INSTALL PAGE AT THE SAME TIME (reference-install.md).
 -->
 
+^# Juju 2.4-beta1
+  
+  A new development release of Juju is here, 2.4-beta1. Do not use on
+  production systems.
+  
+  ## New and improved.
+  
+  **Model owner changes**  
+  The concept of model owner is becoming obsolete. Model owner is just another
+  model user with administrative access. We are working to remove any special
+  access that the model owner has, and move to having the models in a namespace
+  rather than grouped by owner.
+  
+  **Charm goal state**  
+  Charm goal state allows charms to discover relevant information about their
+  deployment. The key pieces of information a charm needs to discover are:
+  
+   - what other peer units have been deployed and their status
+   - what remote units exist on the other end of each endpoint, and their status
+  
+  Charms use a new goal-state hook command to query the information about their
+  deployment. This hook command will print only yaml or json output (default
+  yaml):
+  
+  	  goal-state --format yaml
+  
+  The output will be a subset of that produced by the juju status command. There
+  will be output for sibling (peer) units and relation state per unit.
+  
+  The unit status values are the workload status of the (sibling) peer units. We
+  also use a unit status value of dying when the unit's life becomes dying. Thus
+  unit status is one of:
+  
+   - allocating
+   - active
+   - waiting
+   - blocked
+   - error
+   - dying
+  
+  The relation status values are determined per unit and depend on whether the
+  unit has entered or left scope. The possible values are:
+  
+   - joining (relation created but unit not yet entered scope)
+   - joined (unit has entered scope and relation is active)
+   - broken (unit has left, or is preparing to leave scope)
+   - suspended (parent cross model relation is suspended)
+   - error
+  
+  By reporting error state, the charm has a chance to determine that goal state
+  may not be reached due to some external cause. As with status, we will report
+  the time since the status changed to allow the charm to empirically guess that
+  a peer may have become stuck if it has not yet reached active state.
+  
+  **Controllers and remove-machine updates**  
+  It is now possible to `juju remove-machine` a controller machine. As long as
+  there is another controller, we will gracefully shut down the existing machine,
+  and remove it from the HA set (of mongo, raft, and juju API servers).
+  
+  It is also possible to `juju remove-machine --force` for those conditions where
+  the machine is not available to be gracefully removed. Currently this is not
+  guaranteed to remove the machine from the Mongo replicaset, so it should be
+  used only as a last resort.
+  
+  There is also a known issue that trying to `juju remove-machine` the machine
+  that is currently the Mongo primary will not cleanup properly. This should be
+  addressed in the next 2.4 release.
+  
+  In future 2.4 releases, we will also be updating `juju enable-ha` to remove its
+  logic around demoting machines. Instead, `juju enable-ha` will only be a way to
+  ensure that you have the correct number of controller machines being
+  started/intended to participate in HA. This will also fix issues around
+  launching 2 new machines (going to 5) while machines 2 and 3 are still
+  starting.
+  
+  **Controller configuration options for spaces**  
+  Two new controller configuration settings have been introduced. These are:
+  
+   - juju-mgmt-space
+   - juju-ha-space
+  
+  'juju-mgmt-space' is the name of the network space used by agents to
+  communicate with controllers. Setting a value for this item limits the IP
+  addresses of controller API endpoints in agent config, to those in the space.
+  If the value is misconfigured so as to expose no addresses to agents, then a
+  fallback to all available addresses results. Juju client communication with
+  controllers is unaffected by this value.
+  
+  'juju-ha-space' is the name of the network space used for MongoDB replica-set
+  communication in high availability (HA) setups. This replaces the previously
+  auto-detected space used for such communication. When enabling HA, this value
+  must be set where member machines in a HA set have more than one IP address
+  available for MongoDB use, otherwise an error will be reported. Existing HA
+  replica sets with multiple available addresses will report a warning instead of
+  an error provided the members and addresses remain unchanged.
+  
+  Using either of these options during `bootstrap` or `enable-ha` effectively
+  adds constraints to machine provisioning. The commands will fail with an error
+  if such constraints can not be satisfied.
+  
+  **Cloud credential changes**  
+  Cloud credentials are used by models to authenticate communications with the
+  underlying provider as well as to perform authorised operations on this
+  provider. 
+  
+  Juju has always dealt with both cloud credentials stored locally on a user’s
+  client machine as well as the cloud credentials stored remotely on a
+  bootstrapped Juju controller. The distinction has not been made clear
+  previously and this release addresses these ambiguities.
+  
+  	  juju show-model ...
+  
+  Basic cloud credential information such as its name and owner have been added
+  to the command output. 
+  
+  	  juju show-credential ...
+  
+  This is a new command that shows a logged on user their remotely stored cloud
+  credentials along with models that use them.
+  
+  See command help for more information.
+  
+  ## Fixes
+  
+  For a list of all bugs fixed in this release, see
+  the [2.4-beta1 milestone](https://launchpad.net/juju/+milestone/2.4-beta1).
+  
+  Some important fixes/improvements include:
+  
+  [LP 1755141](https://bugs.launchpad.net/bugs/1755141) add support for --all  
+  [LP 1762979](https://bugs.launchpad.net/bugs/1762979) --no-retry behaviour is inverted  
+  [LP 1753593](https://bugs.launchpad.net/bugs/1753593) support for st1 and sc1 volume types on AWS  
+  [LP 1754735](https://bugs.launchpad.net/bugs/1754735) support for new AWS instance types
+  
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  To get the beta version of Juju use the `--beta` channel in the `snap`
+  package:
+  
+  	  sudo snap install juju --beta --classic
+
+  You can switch to the latest stable version with:
+
+  	  sudo snap refresh juju --stable
+
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the
+  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
+^# Juju 2.3.7
+
+  Juju 2.3.7 has arrived. This is primarily a bug fix release. For the full
+  list of bugs, see the
+  [2.3.7 milestone](https://launchpad.net/juju/+milestone/2.3.7).
+
+  This is a critical fix for a bug in one of the upgrade steps in 2.3.6. We
+  have pulled 2.3.6 from availability to avoid people running into this
+  problem.
+  
+  ## Critical bugs fixed.
+
+  [LP 1765722](https://bugs.launchpad.net/juju/+bug/1765722) upgrade to 2.3.6
+  failed: the dotted field is not valid for storage
+
+  ## Enhancements.
+
+  [LP 1764267](https://bugs.launchpad.net/juju/+bug/1764267) Initial support
+  for bootstrapping a Juju controller on Bionic (support for new mongodb and
+  changing of available archive packages). You must specifically request a
+  Bionic controller with `--bootstrap-series=bionic`. The 2.3 series will
+  always default to using a Xenial image for 2.3 controllers.
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the
+  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
 ^# Juju 2.3.6
 
   Juju 2.3.6 has arrived. This is primarily a bug fix release. For the full
