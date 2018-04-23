@@ -1,5 +1,6 @@
 Title: Update the series of a controller or machine
 TODO:  Warning: Juju versions hardcoded
+       Should eventually remove the two "prior to 2.3" Notes
 
 # Update the series of a controller or machine
 
@@ -44,7 +45,7 @@ Destroy the old controller when done.
 Note that the series running on any existing Juju machines have not yet been
 affected (see next section).
 
-## Upgrading a machine
+## Upgrading a machine/unit
 
 For the purpose of this guide, a unit '0' of application 'ghost' which resides
 on machine '1' will be used. The series will be updated from 'trusty' to
@@ -75,41 +76,73 @@ If you are using a version prior to 2.3 follow the instructions for
 [updating an application's series][app-update] before adding and removing
 units.
 
-### When there are resource constraints
+You are now done.
 
-In some cloud environments, there may not be the resources to update via
-`juju add-unit` and `juju remove-unit`.
+### Alternative method
 
-!!! Note:
+In some cloud environments, there may not be the resources to update using the
+above recommended method. Below is presented an alternative method to upgrade a
+machine/unit. It involves manually upgrading the existing machine and updating
+the agent data.
+
+!!! Warning:
     This method should be approached with caution. After the series is updated
     on an existing machine, the unit agent may not restart cleanly depending on
     software dependencies (e.g. software installed with `pip` may need to be
     installed in a new location or an application's version was updated
     without intent).
 
-#### First step
+#### Update series for new units
 
-Let Juju know what series should be used for future units added. If you are
-using version 2.3 or later: `juju update-series ghost xenial`
+!!! Note:
+    If you are using a version of Juju prior to 2.3 follow the instructions for
+    [updating an application's series][app-update].
 
-If you are using a version prior to 2.3 follow the instructions for
-[updating an application's series][app-update].
+Let Juju know what series should be used for any new units of the application:
 
-#### Do the update on existing machines
+```bash
+juju update-series ghost xenial
+```
 
-Follow the [Ubuntu Server Guide][serverguide-upgrade] on upgrading a Ubuntu
-release. Be sure to read the [Release Notes][ubuntu-releases] of the target
-version.
+#### Upgrade the existing machine
 
-Log in to the machine with `juju ssh ghost/0`.
+!!! Note:
+    If you are using a version prior to 2.3 follow the instructions for
+    [updating an machine's series][mach-update].
+
+Start by logging in to the machine:
+
+```bash
+juju ssh ghost/0
+```
+
+Then follow the [Ubuntu Server Guide][serverguide-upgrade] on upgrading a
+Ubuntu release. Be sure to read the [Release Notes][ubuntu-releases] of the
+target version.
 
 If asked during the upgrade, it's recommended to keep currently-installed
 versions of configuration files.
 
-#### Check that Juju services are running
+#### Update agent data on the upgraded machine
 
-On each machine, there is a machine service agent and, for each running unit, a
-unit service agent. To check that they restarted properly after the upgrade:
+!!! Warning:
+    If the Python version has changed between the two series **and** the charm
+    uses `pip` to install packages then it will be necessary to force the unit
+    to install the new Python packages by running the following command on the
+    unit's machine prior to restarting the unit's service:
+    `sudo rm /var/lib/juju/agents/unit*/charm/wheelhouse/.bootstrapped` .
+
+Update the agent data on the newly updated machine/unit appropriate for the new
+series and restart the agents:
+
+```bash
+juju ssh ghost/0 -- sudo juju-updateseries --from-series trusty --to-series xenial --start-agents
+```
+
+#### Verify the agents are running
+
+On every machine, there is a machine service agent and, for each running unit,
+a unit service agent. To check that they restarted properly after the upgrade:
 
 ```bash
 sudo systemctl status jujud*
@@ -127,95 +160,14 @@ Sample output:
    Active: active (running) since Wed 2017-10-04 22:07:13 UTC; 2min 39s ago
 ```
 
-##### Restarting Juju services when moving from Ubuntu 14.04 LTS (Trusty) to Ubuntu 16.04 LTS (Xenial)
+#### Let Juju know of the upgraded machines and agents
 
-If upgrading from Trusty to Xenial, transitioning the jujud service files from
-[upstart to systemd][systemd] will also be necessary.
-
-On Trusty, the files will be in /etc/init: `/etc/init/jujud-machine-1.conf`.
-
-Make directories for new systemd config files:
-
-```bash
-sudo mkdir -p /var/lib/juju/init/jujud-machine-1
-```
-
-Create `exec-start.sh` and jujud service files for the machine agent.
-
-`/var/lib/juju/init/jujud-machine-1/exec-start.sh`:
-
-```no-highlight
-#!/usr/bin/env bash
-
-# Set up logging.
-touch '/var/log/juju/machine-1.log'
-chown syslog:syslog '/var/log/juju/machine-1.log'
-chmod 0600 '/var/log/juju/machine-1.log'
-exec >> '/var/log/juju/machine-1.log'
-exec 2>&1
-
-# Run the script.
-'/var/lib/juju/tools/machine-1/jujud' machine --data-dir '/var/lib/juju' --machine-id 1 --debug
-```
-
-`/var/lib/juju/init/jujud-machine-1/jujud-machine-1.service`:
-
-```no-highlight
-[Unit]
-Description=juju agent for machine-1
-After=syslog.target
-After=network.target
-After=systemd-user-sessions.service
-
-[Service]
-Environment=""
-LimitNOFILE=20000
-ExecStart=/var/lib/juju/init/jujud-machine-1/exec-start.sh
-Restart=on-failure
-TimeoutSec=300
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Change permissions on `exec-start.sh`: 
-
-```bash
-sudo chmod 755 /var/lib/juju/init/jujud-machine-1/exec-start.sh
-```
-
-Create a symbolic link from `jujud-machine-1.service` to `/etc/systemd/system`:
-
-```bash
-sudo ln -s /var/lib/juju/init/jujud-machine-1/jujud-machine-1.service /etc/systemd/system/
-```
-
-Configure the machine service to restart at boot time:
-
-```bash
-sudo ln -s /var/lib/juju/init/jujud-machine-1/jujud-machine-1.service /etc/systemd/system/multi-user.target.wants/jujud-machine-1.service
-```
-
-Restart the service: 
-
-```bash
-sudo systemctl start jujud-machine-1.service
-```
-
-Once started the machine agent will write the systemd files for the unit agents
-and start them.
-
-#### Last step
-
-Let Juju know what series the machines are currently using. If you are using
-version 2.3 or later: 
+Once all machines and agents have been updated inform Juju of this fact. Here
+we refer to our example machine with an ID of '1':
 
 ```bash
 juju update-series 1 xenial
 ```
-
-If you are using a version prior to 2.3 follow the instructions for
-[updating an machine's series][mach-update].
 
 
 <!-- LINKS -->
