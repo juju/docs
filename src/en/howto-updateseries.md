@@ -81,9 +81,8 @@ You are now done.
 ### Alternative method
 
 In some cloud environments, there may not be the resources to update using the
-above recommended method. Below is presented an alternative method to upgrade a
-machine/unit. It involves manually upgrading the existing machine and updating
-the agent data.
+above recommended method. Instead we need to upgrade the existing machine
+manually and update the agent data, as shown here:
 
 !!! Warning:
     This method should be approached with caution. After the series is updated
@@ -116,7 +115,7 @@ Start by logging in to the machine:
 juju ssh ghost/0
 ```
 
-Then follow the [Ubuntu Server Guide][serverguide-upgrade] on upgrading a
+Then follow the [Ubuntu Server Guide][serverguide-upgrade] on upgrading an
 Ubuntu release. Be sure to read the [Release Notes][ubuntu-releases] of the
 target version.
 
@@ -162,8 +161,8 @@ Sample output:
 
 #### Let Juju know of the upgraded machines and agents
 
-Once all machines and agents have been updated inform Juju of this fact. Here
-we refer to our example machine with an ID of '1':
+Once all machines and agents have been updated we need to inform Juju of this
+fact. Here we refer to our example machine with an ID of '1':
 
 ```bash
 juju update-series 1 xenial
