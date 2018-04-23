@@ -265,6 +265,8 @@ controller-credentials:
 Notice how the output says 'controller-credentials', meaning they are stored on
 the controller.
 
+The `show-credentials` command queries the controller to get its information.
+
 ### Setting default credentials
 
 You can set the default credential for a cloud:
