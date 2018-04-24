@@ -89,8 +89,8 @@ doing this are:
 A controller is removed from the cluster by removing its machine from the
 model (`juju remove-machine`).
 
-Using the example in the previous section, this is how we would remove the
-machine that has the ID of '1':
+Using the example in the previous section, this is how we would remove machine
+'1':
 
 ```bash
 juju remove-machine -m controller 1
@@ -203,8 +203,8 @@ monitored by applying the `status` command to the 'controller' model:
 juju status -m controller
 ```
 
-This output shows that controller running on machine '3' has lost connectivity
-with the rest of the cluster:
+This output shows that the controller running on machine '3' has lost
+connectivity with the rest of the cluster:
 
 ```no-highlight
 Machine  State    DNS             Inst id              Series  AZ          Message
@@ -215,8 +215,8 @@ Machine  State    DNS             Inst id              Series  AZ          Messa
 5        started  174.129.90.47   i-0613fb1fa8346de8a  xenial  us-east-1c  running
 ```
 
-However, the 'HA' column in the output to `juju controllers --refresh` should
-still say '5', as before:
+However, the 'HA' column in the output to `juju controllers --refresh` still
+says '5', as before:
 
 ```no-highlight
 Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
