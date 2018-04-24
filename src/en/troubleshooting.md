@@ -254,6 +254,8 @@ troubleshooting documentation for help on finding a solution:
    help for upgrading Juju across a model
  - [Troubleshooting clouds][troubleshooting-clouds] covers issues with specific
    clouds 
+ - [Troubleshooting additions][troubleshooting-additions] gives tips for when
+   you cannot add something cleanly
  - [Troubleshooting removals][troubleshooting-removals] provides help when you
    cannot remove something cleanly
 
@@ -271,4 +273,5 @@ Alternatively, if your issue is not addressed here, get in touch via our
 [troubleshooting-upgrades]: ./troubleshooting-upgrade.html
 [troubleshooting-clouds]: ./troubleshooting-clouds.html
 [troubleshooting-removals]: ./troubleshooting-removals.html
+[troubleshooting-additions]: ./troubleshooting-additions.html
 [contactus]: ./contact-us.html
