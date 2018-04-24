@@ -1,8 +1,7 @@
-Title: Ensuring High Availability (HA) for deployed applications
-TODO: Needs a rewrite
+Title: Application high availability
+TODO: Critical: review required
 
-# Applications High Availability (HA)
-
+# Application high availability
 
 ## Distribution groups
 
@@ -17,8 +16,8 @@ well written, you can rest assured that IaaS downtime will not affect your
 application.
 
 !!! Note:
-    See [High Availability][ha] for details on enabling high availability
-    for the controller.
+    See [High Availability][controller-ha] for details on enabling high
+    availability for the controller.
 
 Commands you already use for scaling now ensure your applications are always
 available. e.g.
@@ -80,6 +79,6 @@ not all units in the set will become unavailable at the same time.
 
 <!-- LINKS -->
 
-[ha]: ./controllers-ha.html
+[controller-ha]: ./controllers-ha.html
 [maaszones]: https://docs.ubuntu.com/maas/en/manage-zones
 [jujuclouds]: ./clouds.html
