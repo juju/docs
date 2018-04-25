@@ -1,11 +1,12 @@
 Title: CAAS and Juju
 TODO:  Once 2.4 is officially released remove support Note and update status output
+       Should eventually link to CAAS-charm developer documentation
 
 # CAAS and Juju
 
 CAAS is *Containers as a Service*, a cloud service that allows users to upload,
 organize, run, scale, manage, and stop containers. Combining this with Juju
-opens up a new vista of possibilities for Juju users. Currently, Juju supports
+opens up new practical benefits for Juju users. Currently, Juju supports
 Kubernetes as its underlying CAAS solution.
 
 Kubernetes (often abbreviated as "k8s") provides a flexible architecture for
@@ -13,8 +14,33 @@ managing containerised applications at scale (see the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information). It
 most commonly employs Docker as its container technology.
 
-!!! Important:
-    Juju provides base Kubernetes support starting with version 2.4-beta1.
+## CAAS-specific workflow
+
+Here we discuss how a Juju workflow and be different in a CAAS environment.
+
+### Commands
+
+The only CAAS-specific Juju command is `add-k8s`. All other commands can be
+used, such as `add-unit` for scaling purposes.
+
+### Credentials
+
+Credentials work the same way as for any other backing cloud (see
+[Credentials][credentials]). However, when `juju add-k8s` is run immediately
+after deploying a k8s bundle, the contents of file `~/.kube/config` are
+imported into Juju. This file contains the IP endpoint address of the master
+Kubernetes node, a CA certificate, and user credentials.
+
+User credentials can still be added by way of the `add-credential`
+or `autoload-credentials` commands. Also, at any time, the k8s CLI can be used
+to add a new user to the k8s cluster.
+
+The `add-k8s` command can be used repeatedly to set up different clusters as
+long as the contents of the configuration file has been changed accordingly.
+The KUBECONFIG environment variable is useful here as it will be honoured by
+Juju when finding the file to load.
+
+We'll demonstrate the use of the `add-k8s` command below.
 
 ## Using Kubernetes with Juju
 
@@ -27,7 +53,7 @@ To summarise, the steps for using Kubernetes with Juju are:
  1. Obtain a cluster
  1. Add the cluster to Juju
  1. Deploy CAAS-specific charms
-
+    
 ### Obtain a Kubernetes cluster
 
 You may obtain a Kubernetes cluster in any way. However, in this document, we
@@ -108,7 +134,7 @@ juju scp kubernetes-master/0:config ~/.kube/config
 
 We can now take advantage of the `add-k8s` command as it internally parses the
 copied configuration file from the specified path. This allows us to quickly
-add the cluster-cloud, which we arbitrarily have called 'k8cloud':
+add the cluster-cloud, which we have arbitrarily called 'k8cloud':
 
 ```bash
 juju add-k8s k8cloud
@@ -122,17 +148,44 @@ juju add-k8s k8cloud
 ## Architecture
 
 
-## Charms
-
-
 ## Configuration
 
+Juju CAAS applications support application specific configuration. This allows
+k8s configuration to be used to control how Juju deploys the application on
+Kubernetes. The following are supported (these names are the Juju configuration
+attribute names; the k8s meaning should be obvious):
 
-## Commands
+| Key                        			| Type    | Default 	     | Valid values | Comments                     |
+|:----------------------------------------------|---------|------------------|--------------|:-----------------------------|
+kubernetes-service-type				| string  | ClusterIP 	     |		    |
+kubernetes-service-external-ips			| string  | []		     |		    |
+kubernetes-service-target-port			| string  | <container port> |		    |
+kubernetes-service-loadbalancer-ip		| string  | ""		     |		    |
+kubernetes-service-loadbalancer-sourceranges	| string  | []		     |		    |
+kubernetes-service-externalname			| string  | ""		     |		    |
+kubernetes-ingress-class			| string  | nginx	     |		    |
+kubernetes-ingress-ssl-redirect			| boolean | false	     |		    |
+kubernetes-ingress-ssl-passthrough		| boolean | false	     |		    |
+kubernetes-ingress-allow-http			| boolean | false	     |		    |
 
+There are three other configuration attributes which are not k8s-specific:
 
-## Credentials
+| Key                        			| Type    | Default 	     | Valid values | Comments                     |
+|:----------------------------------------------|---------|------------------|--------------|:-----------------------------|
+juju-managed-units				| boolean | false	     |		    |
+juju-external-hostname				| string  | 		     |              | Mandatory; user specified
+juju-application-path				| string  | "/"		     |              |
 
+Attributes 'juju-external-hostname' and 'juju-application-path' control how the
+application is exposed externally using a Kubernetes Ingress Resource in
+conjunction with the configured ingress controller (default: nginx).
+
+Attribute 'juju-managed-units' is used to control whether Juju manages the
+lifecyle of the pods, or whether that is delegated to a deployment controller.
+In the latter case, Juju itself can be used to add or remove units as normal.
+But it's also possible to use the k8s scale command outside of Juju to add or
+remove pods directly in k8s and these changes will be reflected back into the
+Juju model as updates to units.
 
 ## Storage
 
@@ -143,3 +196,4 @@ juju add-k8s k8cloud
 [ubuntu-tutorial_install-kubernetes-with-conjure-up]: https://tutorials.ubuntu.com/tutorial/install-kubernetes-with-conjure-up#0
 [cdk-charm]: https://jujucharms.com/u/containers/canonical-kubernetes/
 [upstream-kubernetes-docs]: https://kubernetes.io/docs
+[credentials]: ./credentials.html
