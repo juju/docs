@@ -16,7 +16,8 @@ most commonly employs Docker as its container technology.
 
 ## CAAS-specific workflow
 
-Here we discuss how a Juju workflow and be different in a CAAS environment.
+Here we discuss how a standard Juju workflow may be different in a CAAS
+environment.
 
 ### Commands
 
@@ -183,7 +184,7 @@ conjunction with the configured ingress controller (default: nginx).
 Attribute 'juju-managed-units' is used to control whether Juju manages the
 lifecyle of the pods, or whether that is delegated to a deployment controller.
 In the latter case, Juju itself can be used to add or remove units as normal.
-But it's also possible to use the k8s scale command outside of Juju to add or
+It's also possible to use the k8s `scale` command (external to Juju) to add or
 remove pods directly in k8s and these changes will be reflected back into the
 Juju model as updates to units.
 
