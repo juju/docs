@@ -181,8 +181,42 @@ $interval = Get-JujuCharmConfig "interval"
 
 ## goal-state
 
-`goal-state` returns a yaml-parsed string, with information about the charm
-units and their relations.
+`goal-state` queries information about charm deployment. It will print only
+yaml or json output (default yaml).
+
+The information it can discover are:
+
+ - What other peer units have been deployed and their status
+ - What remote (related) units exist on the other end of each endpoint, and
+   their status
+
+The output will be a subset of that produced by the `juju status`. There will
+be output for sibling (peer) units and relation state per unit.
+
+The unit status values are the workload status of the (sibling) peer units. We
+also use a unit status value of dying when the unit's life becomes dying. Thus
+unit status is one of:
+
+`allocating`  
+`active`  
+`waiting`  
+`blocked`  
+`error`  
+`dying`
+
+The relation status values are determined per unit and depend on whether the
+unit has entered or left scope. The possible values are:
+
+`joining` : relation created but unit not yet entered scope  
+`joined` : unit has entered scope and relation is active  
+`broken` : unit has left, or is preparing to leave scope  
+`suspended` : parent cross model relation is suspended  
+`error`
+
+By reporting error state, the charm has a chance to determine that goal state
+may not be reached due to some external cause. As with status, we will report
+the time since the status changed to allow the charm to empirically guess that
+a peer may have become stuck if it has not yet reached active state.
 
 ## is-leader
 
