@@ -63,10 +63,6 @@ that:
 juju bootstrap localhost lxd-xenial
 ```
 
-!!! Note:
-    The default release will change from Xenial to Ubuntu 18.04 LTS (Bionic)
-    once 18.04.1 is released (July 2018).
-
 To select a different series the `--bootstrap-series` option is used.
 
 Below, a google (GCE) controller based on Ubuntu 18.04 LTS (Bionic) is
