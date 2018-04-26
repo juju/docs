@@ -4,7 +4,7 @@ TODO: Check accuracy of key table (https://github.com/juju/juju/blob/ec89c99e51f
       "dynamically set by Juju" could use some explaination
       ReadOnlyMethods updated from https://github.com/juju/juju/blob/2.3/apiserver/observer/auditfilter.go#L130
       Include ability to set configuration key:value pairs by file
-
+      Show how to use spaces 'juju-mgmt-space' and 'juju-ha-space' (wth 'juju bootstrap' and 'juju enable-ha')
 
 # Configuring controllers
 
@@ -71,6 +71,8 @@ bootstrap-retry-delay        | integer | 5       |                          | Ho
 bootstrap-address-delay      | integer | 10      |                          | How often in seconds to refresh controller addresses from the API server
 ca-cert                      | string |          |                          | The certificate of the CA that signed the controller's CA certificate, in PEM format
 controller-uuid              | string |          |                          | The key for the UUID of the controller
+juju-ha-space		     | string |          |			    | The name of a network space used used for MongoDB replica-set communication in a controller HA context.
+juju-mgmt-space		     | string |          |			    | The name of a network space used by Juju agents to communicate with controllers. Effectively acts as a machine constraint.
 identity-public-key          | string |          |                          | Sets the public key of the identity manager. Feature not yet implemented.
 identity-url                 | string |          |                          | Sets the URL of the identity manager. Feature not yet implemented.
 max-logs-age                 | string | 72h      | 72h, etc.                | Sets the maximum age for log entries before they are pruned, in human-readable time format
