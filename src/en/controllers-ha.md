@@ -1,4 +1,5 @@
 Title: Controller high availability
+TODO:  Consider adding to a troubleshooting page: recovering
 
 # Controller high availability
 
@@ -13,21 +14,29 @@ things.
 
 ## Overview
 
-The number of controllers must be an odd number to allow the master to be
-"voted in" amongst its peers. A cluster with an even number of members will
-cause a random member to become inactive. This latter system will become a "hot
-standby" and automatically become active should some other member fail.
-
-Furthermore, due to limitations of the underlying database in an HA context,
-that number cannot exceed seven. This means that a cluster can only have three,
-five, or seven members.
-
 Controller HA is managed with the `juju enable-ha` command. It does this by
 ensuring that the cluster has the requisite number of controllers present. By
 default, this number is three but the `-n` switch can be used to change that.
 Therefore, this command is used to both enable HA as well as compensate for any
 missing controllers, as would be the case if HA was previously enabled but one
 or more controllers was subsequently removed.
+
+When a controller is provisioned, API server code is installed along with a
+MongoDB database.
+
+The number of controllers must be an odd number in order for a master to be
+"voted in" amongst its peers. A cluster with an even number of members will
+cause a random member to become inactive. This latter system will become a "hot
+standby" and automatically become active should some other member fail.
+
+Furthermore, due to limitations of the underlying database in an HA context,
+that number cannot exceed seven. This means that a cluster can only have three,
+five, or seven **active** members.
+
+Juju clients and agents talk to any of the controllers in the cluster. This
+means that processing at the controller (API) level is distributed. However,
+there is only one primary database at any given time and all controllers write
+to it. The "master", therefore, actually refers to the underlying database.
 
 ## Enabling controller HA
 
