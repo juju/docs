@@ -15,6 +15,51 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
 IMPORTANT: UPDATE THE INSTALL PAGE AT THE SAME TIME (reference-install.md).
 -->
 
+^# Juju 2.3.7
+
+  Juju 2.3.7 has arrived. This is primarily a bug fix release. For the full
+  list of bugs, see the
+  [2.3.7 milestone](https://launchpad.net/juju/+milestone/2.3.7).
+
+  This is a critical fix for a bug in one of the upgrade steps in 2.3.6. We
+  have pulled 2.3.6 from availability to avoid people running into this
+  problem.
+  
+  ## Critical bugs fixed.
+
+  [LP 1765722](https://bugs.launchpad.net/juju/+bug/1765722) upgrade to 2.3.6
+  failed: the dotted field is not valid for storage
+
+  ## Enhancements.
+
+  [LP 1764267](https://bugs.launchpad.net/juju/+bug/1764267) Initial support
+  for bootstrapping a Juju controller on Bionic (support for new mongodb and
+  changing of available archive packages). You must specifically request a
+  Bionic controller with `--bootstrap-series=bionic`. The 2.3 series will
+  always default to using a Xenial image for 2.3 controllers.
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the
+  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
 ^# Juju 2.3.6
 
   Juju 2.3.6 has arrived. This is primarily a bug fix release. For the full
