@@ -59,8 +59,7 @@ This table lists all the controller keys which may be assigned a value.
 api-port                     | integer | 17070    |                          | The port to use for connecting to the API
 auditing-enabled             | bool    | false    | false/true               | Sets whether audit logging is enabled. Can be toggled for an existing controller.
 audit-log-capture-args       | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods. Can be toggled for an existing controller.  
-audit-log-exclude-methods    | string  | ReadOnlyMethods | [Some.Method,...] |
-What information to exclude from the audit log. Can be set for an existing controller. See [additional info][#excluding-information-audit-log].
+audit-log-exclude-methods    | string  | ReadOnlyMethods | [Some.Method,...] | What information to exclude from the audit log. Can be set for an existing controller. See [additional info][#excluding-information-audit-log].
 audit-log-max-backups        | integer | 10       |                          | The maximum number of backup audit log files to keep.
 audit-log-max-size           | integer | 300      |                          | The maximum size for an audit log file (units: MiB).
 autocert-dns-name            | string |          |                          | Sets the DNS name of the controller. If a client connects to this name, an official certificate will be automatically requested. Connecting to any other host name will use the usual self-generated certificate.
