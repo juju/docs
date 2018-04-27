@@ -16,21 +16,17 @@ most commonly employs Docker as its container technology.
 
 ## CAAS-specific workflow
 
-Here we discuss how a standard Juju workflow may be different in a CAAS
-environment.
+Here we discuss how a building and working with a CAAS environment may differ
+from a standard Juju workflow.
 
-### Commands
+The only CAAS-specific Juju command is `add-k8s`, which acts as the `add-cloud`
+command for Kubernetes clouds/clusters. All other concepts and commands are
+applied in the traditional Juju manner.
 
-The only CAAS-specific Juju command is `add-k8s`. All other commands can be
-used, such as `add-unit` for scaling purposes.
-
-### Credentials
-
-Credentials work the same way as for any other backing cloud (see
-[Credentials][credentials]). However, when `juju add-k8s` is run immediately
-after deploying a k8s bundle, the contents of file `~/.kube/config` are
-imported into Juju. This file contains the IP endpoint address of the master
-Kubernetes node, a CA certificate, and user credentials.
+If the Kubernetes cluster is built with Juju itself (via a bundle) and `juju
+add-k8s` is run immediately afterwards, the contents of file `~/.kube/config`
+(if it exists) are used to add the cluster and the credentials to Juju, making
+commands `add-cloud` and `add-credential` unnecessary.
 
 User credentials can still be added by way of the `add-credential`
 or `autoload-credentials` commands. Also, at any time, the k8s CLI can be used
@@ -42,7 +38,7 @@ The KUBECONFIG environment variable is useful here as it will be honoured by
 Juju when finding the file to load.
 
 We'll demonstrate the use of the `add-k8s` command below.
-
+    
 ## Using Kubernetes with Juju
 
 First off, a Kubernetes cluster will be required. Essentially, you will use it
@@ -53,16 +49,18 @@ To summarise, the steps for using Kubernetes with Juju are:
 
  1. Obtain a cluster
  1. Add the cluster to Juju
+ 1. Create a controller (and optionally a model)
  1. Deploy CAAS-specific charms
-    
+
 ### Obtain a Kubernetes cluster
 
 You may obtain a Kubernetes cluster in any way. However, in this document, we
-deploy the cluster using Juju itself. We will do so by deploying a minimal
-two-machine Kubernetes cluster by making use of the
+deploy the cluster using Juju itself (with the localhost cloud). We will do so
+by deploying a minimal two-machine Kubernetes cluster by making use of the
 [kubernetes-core][kubernetes-core-charm] bundle available in the Charm Store:
 
 ```bash
+juju bootstrap localhost lxd-caas
 juju deploy kubernetes-core
 ```
 
@@ -74,7 +72,7 @@ juju deploy kubernetes-core
     [Canonical Distribution of Kubernetes][cdk-charm] you can choose the
     identical minimal install deployed above from the tool's interface.
 
-Sample output (here on the localhost cloud) looks like this:
+Sample output looks like this:
 
 ```no-highlight
 Model    Controller  Cloud/Region         Version    SLA
