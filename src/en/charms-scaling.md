@@ -142,23 +142,25 @@ juju add-unit mysql --to lxc:25
 ```
 ...add unit of mysql to a new lxc container on host machine 25
 
-## Constraints
+## Adding a unit with new constraints
 
-The `add-unit` command deploys a machine matching the constraints of the
-initially deployed application. For example, if MySQL was deployed with the
-defaults (i.e. no `--constraints` option) you would have MySQL on an instance
-that matches the closest to 1 Gigabyte of memory and 1 CPU available. If you
-would like to add a unit with more resources to the MySQL application you will
-first need to issue a `add-machine` with the desired constraint followed by a
-`add-unit`. For example, the following command adds a 16 Gigabyte unit to the
-MySQL application (note in this example `juju status` returns machine 3 for the
-`add-machine` command):
+It is possible to scale out an application by adding a unit with different
+hardware requirements than those set with the initial deployment.
+
+For example, to add a unit with 16 GiB of memory to the MySQL application if
+the initial deployment was only 4 GiB:
 
 ```bash
-juju add-machine --constraints="mem=16G"
+juju add-machine --constraints mem=16G
+juju machines
 juju add-unit mysql --to 3
 ```
 
+Above, it is presumed that `juju machines` informed us that the new machine was
+assigned an ID of '3'.
+
+Read the [Using constraints][charms-constraints] page for details on
+constraints.
 
 ## Scaling Back
 

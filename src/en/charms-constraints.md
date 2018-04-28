@@ -1,122 +1,135 @@
-Title: Constraints
+Title: Using constraints
 
-# Constraints
+# Using constraints
 
-Constraints allow you to choose the hardware (or virtual hardware)
-to which your applications will be deployed, e.g. by specifying the amount of 
-RAM you want them to have. This is particularly useful for making sure that the
-application is deployed somewhere it can actually run efficiently, or that it is
-connected to the right network. Constraints may be set for models and
+A *constraint* declares a minimum value for a hardware specification of a
+machine that is spawned by Juju.
+
+The list of constraints is found in
+[Reference: Juju constraints][reference-constraints].
+
+!!! Note:
+    Some constraints are only supported by certain clouds.
+
+## How constraints work
+
+### Satisfying a constraint
+
+When Juju causes a machine to be created, the resulting machine will exceed the
+constraint-defined minimum if the backing cloud is unable to satisfy the
+constraint precisely. However, if the cloud cannot satisfy the constraint at
+all then an error will be emitted and a machine will not be provisioned.
+
+### Constraint scopes
+
+Constraints may be set during the creation of the controller and are used to
+set minimum specifications for Juju machines. Constraints that apply to all
+machines in the models managed by the controller, but excluding the controller
+itself, are known as **model constraints**. These are set via the
+`--constraints` option. Constraints that apply to solely the controller are
+known as **controller constraints** and are set by using the
+`--bootstrap-constraints` option. The same values can be used by either type.
+
+### Constraint defaults
+
+Constraint defaults can be set on a per-controller basis, on a per-model basis
+(`set-model-constraints`), or on a per-application basis (`set-constraints`).
+Constraints set on the environment or on an application can be viewed by using
+the get- constraints command. In addition, you can specify constraints when
+executing a command by using the `--constraints` flag (for commands that
+support it).
+
+### Constraint precedence 
+
+Constraints specified on the environment and an application will be combined to
+determine the full list of constraints on the machine(s) to be provisioned by
+the command. Application-specific constraints will override environment-specific
+constraints, which override the juju default constraints.
+
+Constraints may be set for models and
 applications, with application constraints taking precedence. Changes to
 constraints do not affect any units which have already been placed on machines.
 
-For more granularity, it is also possible to add a machine with specific 
-constraints (`juju add-machine`) and then specify that machine when deploying 
-applications ([see the documentation on `juju deploy`](./charms-deploying.html)).
+To ignore any constraints which may have been previously set, you can assign a 
+'null' value. 
 
-## What constraints can be used?
+### Adding a machine with constraints
 
-There is a full list of the constraints used 
-[in the reference section](reference-constraints.html). Be aware that some of 
-these are specific to the type of cloud you are using. For example, one may
-understand an "instance-type" constraint, but another may not. 
+There are two scenarios where you might want to specify a constraint when
+adding a machine (`juju add-machine`):
 
-The most useful constraints for Juju in general are:
-  
-  - **mem** : This indicates the minimum number of megabytes of RAM that must 
-  be available to an application unit. An optional suffix of M/G/T/P indicates
-  the value is mega-/giga-/tera-/peta- bytes.
+ 1. You intend to later deploy a charm or bundle (`juju deploy`) to the
+    machine. Note that you can also simply specify the constraint during the
+    deployment.
+ 1. You intend to scale out an application (`juju add-unit`) using a different
+    constraint that was used during the initial deployment. Note that
+    constraints are, by default, preserved on a per-application basis.
 
-  - **cores** :  How many cpu cores the host machine should have. This is a
-  crude indicator of system performance.
-    
-  - **spaces** : Target a particular network space, or avoid one. See 
-  [Network spaces][network-spaces].
-  
-  - **arch** : Short for 'architecture', indicates the processor type an
-  application must run on. One of amd64, arm, i386, arm64, or ppc64el.
-  
-With these you can make sure an application has the resources it needs to run 
-properly.
+## Examples
 
-Constraints can be used with commands that support the '--constraints' option. 
-These are covered in more detail below, but there are some aspects of specifying
-constraints that are worth mentioning first.
+### Setting constraints when deploying a charm
 
-In the following examples, we will be using the `juju deploy` command, as this
-is the simplest and most frequent case for using constraints. So, to deploy the
-'mariadb' application to a machine with 4 gigabytes of memory or more:
+To deploy the 'mariadb' charm to a machine that has at least 4 GiB of memory:
   
 ```bash
 juju deploy mariadb --constraints mem=4G
 ```
 
-To further ensure that it also has at least 2 CPU cores:
+To deploy MySQL on a machine that has at least 6 GiB of memory and 2 CPUs:
   
 ```bash
-juju deploy mariadb --constraints "mem=4G cores=2"
+juju deploy mysql --constraints "mem=6G cores=2"
 ```
 
-!!! Note: 
-    When setting more than one constraint you will need to utilize quotes.
-
-To ignore any constraints which may have been previously set, you can assign a 
-'null' value. If the application or model constraints for the 'mariadb' charm
-have already been set to 8 cpu-cores for example, you can ignore that constraint
-at deploy time with:
+To deploy Apache and ensure its machine will have 4 GiB of memory (or more) as
+well as ignore a possible `cores` constraint (previously set at either the
+model or application level):
   
 ```bash
-juju deploy mariadb --constraints "mem=4G cores=" 
+juju deploy apache2 --constraints "mem=4G cores=" 
 ```
-
-In the event that a constraint cannot be met, the unit will not be deployed.
-
-!!! Note: 
-    Constraints work on an "or better" basis: If you ask for 4 CPUs, you 
-    may get 8, but you won't get 2.
     
-## Setting constraints for a controller
+### Setting constraints for a controller
 
 Constraints can be applied to a controller during its creation
-(`juju bootstrap` command) by using the `--bootstrap-constraints` option. See
+(`juju bootstrap`) by using the `--bootstrap-constraints` option. See
 [Creating a controller][controllers-creating] for details and examples.
 
-## Setting default model constraints
+### Setting constraints for all models
 
-Default model constraints can be set during the controller-creation process by
-using the `--constraints` option (with the `juju bootstrap` command). See
-[Creating a controller][controllers-creating] for more information on how to do
-this.
+All models within a controller can have their constraints set during the
+controller-creation process by applying the `--constraints` option to the
+`bootstrap` command. See [Creating a controller][controllers-creating] for
+guidance on doing this.
 
 Default model constraints can be overridden for specific models, applications,
 or machines, as detailed below.
 
-## Setting constraints for a model
+Model-related constraints can also be overridden at the application and machine
+level.
 
-At the model level, constraints can be set like this:
+### Setting constraints for a single model
+
+To set a memory constraint at the model level so any machines created within it
+will also have the constraint assigned:
   
 ```bash
 juju set-model-constraints mem=4G
 ```
 
-In this example, any subsequent machines created in this model will have at
-least 4 gigabytes of memory. You can check the current constraints with:
-  
+Current model constraints can be shown with:
+
 ```bash
 juju get-model-constraints
 ```
 
-As with similar commands, you can 'unset' the constraint by setting its value
-to null:
-  
+Reset a model constraint by assigning the null value to it:
+ 
 ```bash
 juju set-model-constraints mem=
 ```
 
-Model-related constraints can also be overridden at the application and machine
-level.
-
-## Setting constraints for an application
+### Setting constraints for an application
 
 Usually, constraints for an application are set at deploy time, by passing the 
 required parameters using the deploy command:
@@ -132,8 +145,8 @@ application by running:
 juju set-constraints mariadb cores=2
 ```
 
-The constraints work on a named-application as well. So the following also works
-as expected:
+The constraints work on a named-application as well. So the following also
+works as expected:
   
 ```bash
 juju deploy mariadb database1
@@ -148,23 +161,17 @@ juju get-constraints mariadb
 juju get-constraints database1
 ```
 
-## Adding a machine with constraints
+### Setting constraints when adding a machine
 
-The `juju add-machine` command also accepts the `--constraints` option, which
-can be useful when trying to target a specific machine or type of machine.
-
-For example:
+Add a machine that is connected to both the 'storage' and 'db' network spaces
+(see [Network spaces][network-spaces]):
 
 ```bash 
 juju add-machine --constraints spaces=storage,db
 ```
 
-Will provision a machine that is connected to both the 'storage' and 'db' 
-network spaces. See [Network spaces][network-spaces] for more information on
-spaces.
-
-You can subsequently deploy applications to the above machine using
-the `--to` switch with the `deploy` command. See
+You can subsequently deploy applications to the above machine using the `--to`
+switch with the `deploy` command. See
 [Deploying to specific machines][charms-deploying-to-option] for how to do
 this.
 
@@ -185,3 +192,4 @@ or 'dmz' spaces.
 [controllers-creating]: ./controllers-creating.html
 [network-spaces]: ./network-spaces.html
 [charms-deploying-to-option]: ./charms-deploying.html#deploying-to-specific-machines
+[reference-constraints]: ./reference-constraints.html

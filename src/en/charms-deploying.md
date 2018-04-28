@@ -175,9 +175,9 @@ deployed to. One notable reason is to reduce costs when using a public cloud;
 applications can be consolidated instead of dedicating a machine per application
 unit.
 
-Below, the `--constraints` option is used to create an LXD controller with
-enough memory for other applications to run. The `--to` option is used to
-specify a machine:
+Below, the `--constraints` option (see [Using constraints][charms-constraints])
+is used to create an LXD controller with enough memory for other applications
+to run. The `--to` option is used to specify a machine:
 
 ```bash
 juju bootstrap --constraints="mem=4G" lxd lxd-controller
@@ -374,9 +374,9 @@ horizontally scale out on dedicated machines when you need to.
 [network-spaces]: ./network-spaces.html
 [charms-bundles-endpoints]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
 [extra-bindings]: ./authors-charm-metadata.html#extra-bindings
-[constraints]: ./charms-constraints.html
 [charms-upgrading]: ./charms-upgrading.html
 [charms-offline-deploying]: ./charms-offline-deploying.html
 [concepts-endpoint]: ./juju-concepts.html#endpoint
 [clouds-maas]: ./clouds-maas.html
 [charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints
+[charms-constraints]: ./charms-constraints.html

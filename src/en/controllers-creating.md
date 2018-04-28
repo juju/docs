@@ -16,20 +16,11 @@ See `juju help bootstrap` for details on this command or see the
 The `<controller name>` is optional. If one is not supplied, then a name is
 assigned based on the cloud and region.
 
-To learn about configuration options available at bootstrap time, see
-[Configuring controllers][controlconfig] and [Configuring models][modelconfig].
+To learn about configuration options available at bootstrap time, see:
 
-## Constraints
-
-Constraints may be set during the creation of the controller and are used to
-set minimum specifications for Juju machines. Constraints that apply to all
-machines in the models managed by the controller, but excluding the controller
-itself, are known as **model constraints**. These are set via the
-`--constraints` option. Constraints that apply to solely the controller are
-known as **controller constraints** and are set by using the
-`--bootstrap-constraints` option. The same values can be used by either type.
-
-For general information on constraints, see [Constraints][constraints].
+ - [Configuring controllers][controlconfig]
+ - [Configuring models][modelconfig]
+ - [Using constraints][charms-constraints]
 
 ## Examples
 
@@ -171,7 +162,7 @@ of log forwarding.
 <!-- LINKS -->
 
 [clouds]: ./clouds.html
-[constraints]: ./charms-constraints.html
+[charms-constraints]: ./charms-constraints.html
 [commands]: ./commands.html#juju-bootstrap
 [controlconfig]: ./controllers-config.html "Configuring Juju controllers"
 [modelconfig]: ./models-config.html "Configuring Juju models"

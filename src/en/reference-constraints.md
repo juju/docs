@@ -1,47 +1,26 @@
-Title: Constraints | Reference
+Title: Juju constraints | Reference
 TODO:  Add constraints info for Oracle and Rackspace
 
-# Constraints
+# Juju constraints
 
-Constraints set minimum requirements on the instances that are created on
-behalf of Juju. They are usually passed as options to commands that provision a
-new machine (such as `bootstrap`, `deploy`, and `add-machine`). The
-[Using constraints][charms-constraints] page describes how this is done.
+Constraints are minimum requirements for machines that are created on behalf of
+Juju. They are passed as options to commands that either provision a new
+machine directly or are set as defaults for new machines at the controller,
+model, or application level.
 
-## Satisfying constraints
+This reference page lists all the constraints that can be used with Juju.
 
-So each constraint defines a minimum value for a characteristic of a machine.
-One way of looking at this is that Juju will provision the least expensive
-machine that fulfils the criteria specified by the Juju operator.
-
-Note that the resulting machine may exceed these specifications if the backing
-cloud is unable to satisfy them precisely. If a constraint cannot be satisfied
-by the cloud then no machine will be provisioned, and an error will be emitted
-(and show up in the output to `juju status`).
-
-Constraint defaults can be set on a per-controller basis, on a per-model basis
-(`set-model-constraints`), or on a per-application basis (`set-constraints`).
-Constraints set on the environment or on an application can be viewed by using
-the get- constraints command. In addition, you can specify constraints when
-executing a command by using the `--constraints` flag (for commands that
-support it).
-
-Constraints specified on the environment and an application will be combined to
-determine the full list of constraints on the machine(s) to be provisioned by
-the command. Application-specific constraints will override environment-specific
-constraints, which override the juju default constraints.
-
-Constraints are specified as key value pairs separated by an equals sign, with
-multiple constraints delimited by a space.
+For in-depth coverage and examples see the
+[Using constraints][charms-constraints] page in the user guide.
 
 ## Generic constraints
 
  - `arch`  
- Architecture. Values include 'amd64', 'arm', 'i386', 'arm64', or 'ppc64'. A
- null value indicates any architecture.
+    Architecture. Values include 'amd64', 'arm', 'i386', 'arm64', or 'ppc64'. A
+    null value indicates any architecture.
 
  - `cores`  
- Effective CPU cores.
+    Effective CPU cores.
 
  - `cpu-power`  
     Abstract CPU power. 100 units is roughly equivalent to "a single 2007-era
@@ -95,7 +74,7 @@ multiple constraints delimited by a space.
 Constraints cannot be applied towards a backing cloud in an agnostic way. That
 is, a particular cloud type may support some constraints but not others. Also,
 even if two clouds support a constraint, sometimes the constraint value may
-work with one cloud but not with the other. All this is the natural consequence
+work with one cloud but not with another. All this is the natural consequence
 of Juju striving to support widely differing cloud types. The list below
 addresses the situation.
 

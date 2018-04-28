@@ -119,7 +119,7 @@ upon using either a *constraint* or a *binding*:
    Juju machine. When a constraint is used, all application endpoints get
    associated with the space.
    
-     See the [Constraints][charms-constraints] page to learn more about
+     See the [Using constraints][charms-constraints] page to learn more about
      constraints. Read [Deploying to spaces][deploying-to-spaces] for how to
      use a space constraint with the `deploy` command.
 
