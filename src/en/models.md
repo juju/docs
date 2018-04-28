@@ -1,5 +1,5 @@
 Title: Juju models
-TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the access and secret keys need to be provided." I tested ec2 and did not need to do this. OpenStack?
+TODO:  Convert to abstract links
 
 
 # Juju models
@@ -84,7 +84,7 @@ Common model management tasks are summarized below.
    machines have a minimum amount of disk space on their root drive.
 
    This is a complex subject. See
-   [Constraints](./charms-constraints.html#setting-constraints-for-a-model).
+   [Using constraints](./charms-constraints.html#setting-constraints-for-a-model).
    
 
 
