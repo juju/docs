@@ -2,14 +2,13 @@ Title: Using constraints
 
 # Using constraints
 
-A *constraint* declares a minimum value for a hardware specification of a
-machine that is spawned by Juju.
+A *constraint* is a user-defined minimum hardware specification for a machine
+that is spawned by Juju. There is a total of nine constraints and they are
+listed on the [Reference: Juju constraints][reference-constraints] page.
 
-The list of constraints is found in
-[Reference: Juju constraints][reference-constraints].
+Here is a summary of the characteristics of constraints:
 
-!!! Note:
-    Some constraints are only supported by certain clouds.
+ - Some constraints are only supported by certain clouds.
 
 ## How constraints work
 
@@ -65,9 +64,7 @@ adding a machine (`juju add-machine`):
     constraint that was used during the initial deployment. Note that
     constraints are, by default, preserved on a per-application basis.
 
-## Examples
-
-### Setting constraints when deploying a charm
+## Setting constraints when deploying a charm
 
 To deploy the 'mariadb' charm to a machine that has at least 4 GiB of memory:
   
@@ -89,13 +86,13 @@ model or application level):
 juju deploy apache2 --constraints "mem=4G cores=" 
 ```
     
-### Setting constraints for a controller
+## Setting constraints for a controller
 
 Constraints can be applied to a controller during its creation
 (`juju bootstrap`) by using the `--bootstrap-constraints` option. See
 [Creating a controller][controllers-creating] for details and examples.
 
-### Setting constraints for all models
+## Setting constraints for all models
 
 All models within a controller can have their constraints set during the
 controller-creation process by applying the `--constraints` option to the
@@ -108,7 +105,7 @@ or machines, as detailed below.
 Model-related constraints can also be overridden at the application and machine
 level.
 
-### Setting constraints for a single model
+## Setting constraints for a single model
 
 To set a memory constraint at the model level so any machines created within it
 will also have the constraint assigned:
@@ -129,66 +126,68 @@ Reset a model constraint by assigning the null value to it:
 juju set-model-constraints mem=
 ```
 
-### Setting constraints for an application
+## Setting, displaying, and updating constraints for an application
 
-Usually, constraints for an application are set at deploy time, by passing the 
-required parameters using the deploy command:
+An application's constraints are usually set at deploy time, with the `deploy`
+command:
   
 ```bash
 juju deploy mariadb cores=4
 ```
 
-Subsequently, you can set constraints for the any additional units added to the 
-application by running:
+An application's current constraints are displayed with the `get-constraints`
+command:
+ 
+```bash
+juju get-constraints mariadb
+```
+
+An application's constraints are updated, thereby affecting any additional
+units, with the `set-constraints` command:
   
 ```bash
 juju set-constraints mariadb cores=2
 ```
 
-The constraints work on a named-application as well. So the following also
-works as expected:
-  
-```bash
-juju deploy mariadb database1
-juju deploy mariadb database2
-juju set-constraints database1 mem=4096M
-```
+!!! Note:
+    Both the `get-constraints` and `set-constraints` commands work with
+    application custom names. See [Deploying applications][charms-deploying]
+    for how to set a custom name.
+    
+## Setting constraints when adding a machine
 
-You can fetch the current constraints like this:
-  
-```bash
-juju get-constraints mariadb
-juju get-constraints database1
-```
-
-### Setting constraints when adding a machine
-
-Add a machine that is connected to both the 'storage' and 'db' network spaces
-(see [Network spaces][network-spaces]):
+A machine can be added that satisfies a constraint:
 
 ```bash 
-juju add-machine --constraints spaces=storage,db
+juju add-machine --constraints arch=arm
 ```
 
-You can subsequently deploy applications to the above machine using the `--to`
-switch with the `deploy` command. See
+You can subsequently deploy applications to that specific machine. See
 [Deploying to specific machines][charms-deploying-to-option] for how to do
 this.
 
-Both positive and negative entries are accepted, the latter prefixed by '^', in
-a comma-delimited list. For example, given the following:
+To add a machine that is connected to a space, such as 'storage':
+
+```bash 
+juju add-machine --constraints spaces=storage
+```
+
+If a space constraint is prefixed by '^' then the machine will **not** be
+connected to that space. For example, given the following:
 
 ```no-highlight
 --constraints spaces=db-space,^storage,^dmz,internal
 ```
 
-Juju will provision instances connected to one of the subnets of both
-'db-space' and 'internal' spaces, and **not** connected to either the 'storage'
-or 'dmz' spaces.
+the resulting instance will be connected to both the 'db-space' and 'internal'
+spaces, and not connected to either the 'storage' or 'dmz' spaces.
+
+See the [Network spaces][network-spaces] page for details on spaces.
 
 
 <!-- LINKS -->
 
+[charms-deploying]: ./charms-deploying.html
 [controllers-creating]: ./controllers-creating.html
 [network-spaces]: ./network-spaces.html
 [charms-deploying-to-option]: ./charms-deploying.html#deploying-to-specific-machines

@@ -51,6 +51,13 @@ Where 'cs' denotes the charm store.
     A used charm gets cached on the controller's database to minimize network
     traffic for subsequent uses.
 
+A custom name, such as 'mysql1', can be assigned to the application by
+providing an extra argument:
+
+```bash
+juju deploy mysql mysql1
+```
+
 ### Channels
 
 The charm store offers charms in different stages of development. Such stages
@@ -279,8 +286,9 @@ an example of doing this with spaces:
 juju deploy mysql -n 2 --constraints spaces=database
 ```
 
-See [Adding a machine with constraints][charms-contraints-spaces] for an
-example of doing this with spaces.
+The `add-machine` command can accommodate constraints as well. See
+[Setting constraints when adding a machine][charms-constraints-add-machine] for
+a spaces example.
 
 You can also declare an endpoint for spaces that is not used with relations,
 see [Extra-bindings][extra-bindings].
@@ -378,5 +386,4 @@ horizontally scale out on dedicated machines when you need to.
 [charms-offline-deploying]: ./charms-offline-deploying.html
 [concepts-endpoint]: ./juju-concepts.html#endpoint
 [clouds-maas]: ./clouds-maas.html
-[charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints
-[charms-constraints]: ./charms-constraints.html
+[charms-constraints-add-machine]: ./charms-constraints.html#setting-constraints-when-adding-a-machine
