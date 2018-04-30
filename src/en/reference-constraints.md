@@ -20,7 +20,7 @@ For in-depth coverage and examples see the
     null value indicates any architecture.
 
  - `cores`  
-    Effective CPU cores.
+    Effective CPU cores. An integer.
 
  - `cpu-power`  
     Abstract CPU power. 100 units is roughly equivalent to "a single 2007-era
@@ -73,8 +73,8 @@ For in-depth coverage and examples see the
 
 Constraints cannot be applied towards a backing cloud in an agnostic way. That
 is, a particular cloud type may support some constraints but not others. Also,
-even if two clouds support a constraint, sometimes the constraint value may
-work with one cloud but not with another. All this is the natural consequence
+even if two clouds support a constraint, sometimes the constraint **value** may
+work with one cloud but not with the other. All this is the natural consequence
 of Juju striving to support widely differing cloud types. The list below
 addresses the situation.
 
