@@ -219,8 +219,8 @@ juju deploy mysql --to host.mass
 The first example deploys to a specified zone for AWS. The second example
 deploys to a named machine in MAAS.
 
-The `add-unit` command also supports the `--to` option, so it's now possible to
-specifically target machines when expanding application capacity:
+The `add-unit` command also supports the `--to` option, so it's possible to
+target sufficiently-resourced machines when scaling out:
 
 ```bash
 juju deploy --constraints="mem=4G" openstack-dashboard
