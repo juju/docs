@@ -131,8 +131,8 @@ upon using either a *constraint* or a *binding*:
  - A binding is a space-specific, software level operation and is a more
    fine-grained request. It associates an application endpoint with a subnet.
 
-     See examples of using a binding when deploying applications on the
-     [Deploying to network spaces][deploying-to-network-spaces] page. For using
+     See examples of using a binding when deploying applications on
+     [Deploying to network spaces][deploying-to-network-spaces]. For using
      spaces with bundles go to [Using and creating
      bundles][using-creating-bundles].
 
