@@ -2,15 +2,14 @@ Title: General configuration options
 TODO: Check accuracy of key table
       Confirm 'all' harvest mode state. Seems it should be "'Dead' or
 	'Unknown'" OR "a combination of modes 'destroyed' and 'unknown'".
-      Provide an example of using model-defaults to set a per-region attribute.
-
+      Provide an example yaml file in a model-config or model-defaults context
+      Re yaml files, which takes precedence? CLI-specified or file?
 
 # Configuring models
 
 A model influences all the machines that Juju creates within it and, in turn,
 the applications that get deployed onto those machines. It is therefore a very
 powerful feature to be able to configure at the model level.
-
 Model configuration consists of a collection of keys and their respective
 values. An explanation of how to both view and set these key:value pairs is
 provided below. Notable examples are provided at the end.
@@ -41,6 +40,12 @@ juju model-config test-mode=true enable-os-upgrade=false
 !!! Note: 
     Juju does not currently check that the provided key is a valid setting, so
     make sure you spell it correctly.
+
+To set a null value:
+  
+```bash
+juju model-config apt-mirror=""
+```
 
 To return a value to the default setting the `--reset` flag is used, along
 with the key name:
@@ -94,6 +99,13 @@ invocation of the `add-model` command (option `--config`) as well as by
 resetting specific options to their original defaults through the use of the
 `model-config` command (option `--reset`).
 
+Both the `model-config` and `model-defaults` commands can read key value pairs
+from a YAML-formatted file. For example:
+
+```bash
+juju model-config no-proxy=jujucharms.com more-config-values.yaml
+```
+
 ## List of model keys
 
 The table below lists all the model keys which may be assigned a value. Some
@@ -110,6 +122,9 @@ apt-http-proxy               | string |          |                            | 
 apt-https-proxy              | string |          |                            | The APT HTTPS proxy for the model.
 apt-mirror                   | string |          |                            | The APT mirror for the model. See [additional info below](#apt-mirror).
 automatically-retry-hooks    | bool   | true     |                            | Set the policy on retying failed hooks. See [additional info below](#retrying-failed-hooks).
+container-image-metadata-url | string |          | url                        | Corresponds to 'image-metadata-url' (see below) for cloud-hosted KVM guests or LXD containers. Not needed for the localhost cloud.
+container-image-stream       | string |          | url                        | Corresponds to 'image-stream' (see below) for cloud-hosted KVM guests or LXD containers. Not needed for the localhost cloud.
+container-inherit-properties | string |          |                            | Set cloudinit parameters to be inherited from a Juju machine to its hosted containers. See [additional info below](#container-inheritance).
 container-networking-method  | string |          | local/provider/fan         | The FAN networking mode to use. Default values can be provider-specific.
 default-series               | string |          | valid series name, e.g. 'xenial' | The default series of Ubuntu to use for deploying charms.
 development                  | bool   | false    |                            | Set whether the model is in development mode.
@@ -136,6 +151,7 @@ resource-tags                | string | none     |                            | 
 ssl-hostname-verification    | bool   | true     |                            | Set whether SSL hostname verification is enabled.
 test-mode                    | bool   | false    |                            | Set whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store.
 transmit-vendor-metrics      | bool   | true     |                            | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics.
+update-status-hook-interval  | string | 5m       | 30s, 6m, 1hr, etc.         | The run frequency of the update-status hook. The value has a random +/- 20% offset applied to avoid hooks for all units firing at once. Value change only honoured during controller and model creation (`bootstrap --config` and `add-model --config`).
 vpc-id                       | string |          |                            | The virtual private cloud (VPC) ID for use when configuring a new model to be deployed to a specific VPC during `add-model`.
 
 ### APT mirror
@@ -272,6 +288,9 @@ upgrades.
 
 ### Agent versions and streams
 
+A full definition of an agent is provided on the
+[Concepts and terms][concepts-and-terms-agent] page.
+
 The `agent-stream` option specifies the "stream" to use when a Juju agent is to
 be installed or upgraded. This setting reflects the general stability of the
 software and defaults to 'released', indicating that only the latest stable
@@ -300,7 +319,36 @@ agent's version for a newly-created controller would be the same. To specify a
 patch version of 1 (instead of 2), the following would be run:
 
 ```bash
-juju bootstrap aws aws --agent-version='2.3.1'
+juju bootstrap aws --agent-version='2.3.1'
+```
+
+If a patch version is available that is greater than that of the client then it
+can be targeted in this way:
+
+```bash
+juju bootstrap aws --auto-upgrade
+```
+
+### Container inheritance
+
+The `container-inherit-properties` key allows a limited set of cloudinit
+parameters enabled on a Juju machine to be inherited by any hosted containers.
+The machine and container must be running the same series.
+
+The parameters are:
+
+ - apt-primary
+ - apt-security
+ - apt-sources
+ - ca-certs
+
+!!! Note:
+    The 'apt-security' parameter is not available for the 'trusty' series.
+
+For instance:
+
+```
+juju model-config container-inherit-properties="ca-certs, apt-primary"
 ```
 
 
@@ -308,3 +356,4 @@ juju bootstrap aws aws --agent-version='2.3.1'
 
 [charms-offline]: ./charms-offline.html
 [controllers-creating]: ./controllers-creating.html
+[concepts-and-terms-agent]: ./juju-concepts.html#agent

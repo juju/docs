@@ -17,7 +17,7 @@ Common model management tasks are summarized below.
 
 
 
-^# View status
+^# View model status
    
    Use the `juju status` command to view the status of a model:
 
@@ -38,10 +38,10 @@ Common model management tasks are summarized below.
    For complete explanation and syntax, see the
    [command reference page](./commands.html#add-model) or the `juju help
    add-model` command.
-   
+  
 
 
-^# List models
+^# List all models
 
    Use the `juju models` command to list all models for a controller:
    
@@ -50,6 +50,18 @@ Common model management tasks are summarized below.
    For complete explanation and syntax, see the
    [command reference page](./commands.html#models) or the `juju help
    models` command.
+  
+
+
+^# Examine a model
+
+   Use the `juju show-model` command to examine a specific model:
+   
+   `juju show-model [options]`
+   
+   For complete explanation and syntax, see the
+   [command reference page](./commands.html#show-model) or the
+   `juju help show-model` command.
 
 
 
@@ -88,17 +100,32 @@ Common model management tasks are summarized below.
    
 
 
-^# Switch models
+^# Change models
    
    Use the `juju switch` command to go from one model to another:
    
-   `juju switch [<controller>|<model>|<controller>:<model>]`
+   `juju switch [<controller or model>|<:model>|<controller>:<model>|<controller:>]`
    
    Running the command with no arguments will return the currently active 
    controller and model:
      
          juju switch
    
+   To change to a model:
+   
+   `juju switch foo`  
+   Selects the last used model in controller 'foo' (if the latter exists),
+   otherwise model 'foo' in the current controller.
+
+   `juju switch :foo`  
+   Selects model 'foo' in the current controller.
+
+   `juju switch foo:bar`  
+   Selects model 'bar' in controller 'foo'.
+   
+   `juju switch foo:`  
+   Selects the last used model in controller 'foo'
+
    For complete explanation and syntax, see the
    [command reference page](./commands.html#switch) or the `juju help switch`
    command.

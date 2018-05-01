@@ -129,13 +129,9 @@ Features supported by Juju-owned instances running within AWS:
   information see [Constraints][constraints]. You can also view the list of
   [Amazon EC2 instance types][aws-instance-types].
 
-- A controller (and its models) can be placed in a specific *virtual private
-  cloud* (VPC) by specifying the VPC ID (obtained from the AWS web UI) during
-  the controller-creation process: `juju boootstrap --config vpc-id=<id> aws`
-
-- A new model can also be placed in a VPC even if the controller is not:
-  `juju add-model --config vpc-id=<id>`
-  
+- A controller can be placed in a specific *virtual private cloud* (VPC). See
+  [Passing a cloud-specific setting][controllers-creating-include-config] for
+  instructions.
 
 
 <!-- LINKS -->
@@ -146,3 +142,4 @@ Features supported by Juju-owned instances running within AWS:
 [jaas]: ./getting-started.html "Getting Started with Juju as a Service"
 [tagging]: ./config-tagging.html
 [aws-instance-types]: https://aws.amazon.com/ec2/instance-types/
+[controllers-creating-include-config]: ./controllers-creating.html#passing-a-cloud-specific-setting

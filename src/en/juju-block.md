@@ -103,7 +103,7 @@ all
 |                    |                    | sync-tools           |
 |                    |                    | unexpose             |
 |                    |                    | upgrade-charm        |
-|                    |                    | upgrade-juju         |
+|                    |                    | upgrade-model        |
 
 !!! Note: 
     The '--force' option recognized by some Juju commands bypasses any

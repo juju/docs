@@ -44,6 +44,8 @@ run on each machine Juju creates, including controllers.
 
 Overview:
 
+- A controller admin can upgrade any model within that controller.
+- A model owner can upgrade that model.
 - Upgrades must be applied to the controller model first.
 - An upgrade is applied to agents running on all machines across a model.
 - During the upgrade, an algorithm will select a version to upgrade to if a
@@ -58,9 +60,9 @@ See [Notes on upgrading Juju software](./models-upgrade-notes.html)
 for upgrading details, including what to do when the controller lacks internet
 access.
 
-## The upgrade-juju command
+## The upgrade-model command
 
-The `juju upgrade-juju` command initiates the upgrade. This will cause all Juju
+The `juju upgrade-model` command initiates the upgrade. This will cause all Juju
 agents to be restarted. Before proceeding, ensure the model is in good working
 order (`juju status`).
 
@@ -70,19 +72,19 @@ Upgrade the controller model for the current controller (this must be done befor
 other models on the controller can be upgraded) with the newest version available:
 
 ```bash
-juju upgrade-juju -m controller
+juju upgrade-model -m controller
 ```
 
 Upgrade the current model by allowing the version to be auto-selected:
 
 ```bash
-juju upgrade-juju
+juju upgrade-model
 ```
 
 Upgrade the model by specifying the version:
 
 ```bash
-juju upgrade-juju --agent-version 2.0.3
+juju upgrade-model --agent-version 2.0.3
 ```
 
 Track the progress with:
@@ -92,8 +94,8 @@ watch -n3 "juju status --format=tabular"
 ```
 
 For complete syntax, see the
-[command reference page](./commands.html#upgrade-juju). The `juju help
-upgrade-juju` command also provides reminders and more examples.
+[command reference page](./commands.html#upgrade-model). The `juju help
+upgrade-model` command also provides reminders and more examples.
 
 !!! Warning: 
     The `--upload-tools` option should be not be used by the end user.

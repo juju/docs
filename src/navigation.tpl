@@ -82,7 +82,7 @@
             <ul class="sub">
                 <li><a href="howto-prometheus.html">Configure metrics gathering with Prometheus</a></li>
                 <li><a href="howto-privatecloud.html">Set up a Private Cloud</a></li>
-                <li><a href="howto-updateseries.html">Update the series of a juju controller or workload</a></li>
+                <li><a href="howto-updateseries.html">Update the series of a controller or machine</a></li>
             </ul>
         </li>
         <li><a href="troubleshooting.html">Troubleshooting</a></li>

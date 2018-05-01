@@ -130,11 +130,11 @@ Here is sample output for a newly-added AWS model:
 
 ```no-highlight
 Name     Provider  Attrs
-ebs      ebs       
+ebs      ebs
 ebs-ssd  ebs       volume-type=ssd
-loop     loop      
-rootfs   rootfs    
-tmpfs    tmpfs     
+loop     loop
+rootfs   rootfs
+tmpfs    tmpfs
 ```
 
 !!! Note:
@@ -229,11 +229,15 @@ storage will be detached and left intact. This allows detached storage to be
 re-attached to an existing unit using `juju attach-storage`, or to a new unit
 using the `--attach-storage` flag of `juju deploy` or `juju add-unit`.
 
-Storage is destroyed (removed from the model) by first detaching it and then
-using `juju remove-storage`.
+The underlying cloud's storage resource is normally destroyed by first
+detaching it and then using `juju remove-storage`. To remove storage from the
+model without destroying it the `--no-destroy` option must be used. Be wary of
+using the latter option as Juju will lose sight of the volume; it will only be
+visible from the cloud provider.
 
 If an attempt is made to either attach or remove storage that is currently in
-use (i.e. it is attached to a unit) Juju will return an error.
+use (i.e. it is attached to a unit) Juju will return an error. To remove
+currently attached storage from the model the `--force` option must be used.
 
 Finally, a model cannot be destroyed while storage volumes remain without
 passing a special option (`--release-storage` to detach all volumes and
@@ -263,10 +267,18 @@ To add a new Ceph OSD unit with (detached) existing storage 'osd-devices/2':
 juju add-unit ceph-osd --attach-storage osd-devices/2
 ```
 
-To destroy already detached storage 'osd-devices/3' (remove it from the model):
+To remove already detached storage 'osd-devices/3' from the model. It will also
+be automatically destroyed on the cloud provider:
 
 ```bash
 juju remove-storage osd-devices/3
+```
+
+To remove currently attached storage 'pgdata/1' from the model and prevent it
+from being destroyed on the cloud provider:
+
+```bash
+juju remove-storage --force --no-destroy pgdata/1
 ```
 
 To upgrade the OSD journal of Ceph unit 'ceph-osd/0' from magnetic to solid
@@ -277,14 +289,14 @@ juju add-storage ceph-osd/0 osd-journals=ebs-ssd,8G,1
 juju detach-storage osd-journals/0
 juju remove-storage osd-journals/0
 ```
- 
+
 To destroy a controller (and its models) along with all existing storage
 volumes:
 
 ```bash
 juju destroy-controller lxd-controller --destroy-all-models --destroy-storage
 ```
- 
+
 To destroy a model while keeping intact all existing storage volumes:
 
 ```bash
@@ -375,30 +387,21 @@ following pool attributes:
     - standard (magnetic)
     - gp2 (ssd)
     - io1 (provisioned-iops)
+    - st1 (optimized-hdd)
+    - sc1 (cold-storage)
 
-    The default volume type is 'standard'. Since the default pool is 'ebs' the
-    default volume for AWS will be magnetic.
+    Juju's default pool (also called 'ebs') uses gp2/ssd as its own default.
 
 - **iops**
 
     The number of IOPS for provisioned-iops volume types. There are
-    restrictions on minimum and maximum IOPS, as a ratio of the size of volumes.
-    See [Provisioned IOPS (SSD) Volumes][aws-iops-ssd-volumes] for more
-    information.
+    restrictions on minimum and maximum IOPS, as a ratio of the size of
+    volumes.  See [Provisioned IOPS (SSD) Volumes][aws-iops-ssd-volumes] for
+    more information.
 
 - **encrypted**
 
     Boolean (true|false); indicates whether created volumes are encrypted.
-
-Recall that pool 'ebs-ssd' is provided for all EC2 environments. This is the
-easiest way to get SSD-based volumes; the pool defaults the volume type to
-ssd/gp2. The alternate way would be to create a new pool with a
-'volume-type' of 'ssd'. For example:
-
-```bash
-juju create-storage-pool myssd-pool ebs volume-type=ssd
-juju deploy postgresql --storage pgdata=myssd-pool,32G
-```
 
 For detailed information regarding EBS volume types, see the
 [AWS EBS documentation][aws-ebs-volume-types].
@@ -456,7 +459,7 @@ provider currently supports a single pool configuration attribute:
     low-latency, high IOPS requirements, and 'default' otherwise.
 
     For convenience, the Oracle provider registers two predefined pools:
-    
+
     - 'oracle' (volume type is 'default')
     - 'oracle-latency' (volume type is 'latency').
 

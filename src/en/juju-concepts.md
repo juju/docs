@@ -223,7 +223,15 @@ related tasks.
 In general, all agents track state changes, respond to those changes, and pass
 updated information back to the controller. A model's status (`juju status`
 command) is built up from the communication between a controller and all the
-agents running in that model.
+agents running in that model. Agents are also responsible for all logging that
+goes on in Juju (see [Model logs][troubleshooting-logs#juju-agents] for
+details).
+
+The agent's software version is generally consistent across a controller (and
+its models) and is thus determined at controller-creation time. By default the
+agent uses the same version as that of the local Juju client but this can be
+tweaked if desired. See
+[Agent versions and streams][agent-versions-and-streams] for how to do this.
 
 
 <!-- LINKS -->
@@ -238,6 +246,8 @@ agents running in that model.
 [controllers]: ./controllers.html
 [models]: ./models.html
 [charm-store-wordpress]: https://jujucharms.com/wordpress/
+[agent-versions-and-streams]: ./models-config.html#agent-versions-and-streams
+[troubleshooting-logs#juju-agents]: ./troubleshooting-logs.html#juju-agents
 
 [img__relations]: ./media/juju-relations.png
 [img__units]: ./media/juju-machine-units.png

@@ -1,6 +1,7 @@
 Title: Creating a Juju Controller
 TODO:  Improve examples
        Hardcoded: Ubuntu code names
+       Update default controller release (to "latest LTS") and remove Note once 18.04.1 released
 
 
 # Creating a controller
@@ -44,9 +45,8 @@ juju bootstrap --bootstrap-constraints "mem=4G cores=2" aws
 
 ### Create a controller of a specific series
 
-The controller will run the latest LTS Ubuntu release by default. At the time
-of writing, Xenial will be selected.
-
+The controller will be deployed upon Ubuntu 16.04 LTS (Xenial) by default.
+    
 For our example, we name the resulting LXD controller 'lxd-xenial' to reflect
 that:
 
@@ -54,13 +54,17 @@ that:
 juju bootstrap localhost lxd-xenial
 ```
 
+!!! Note:
+    The default release will change from Xenial to Ubuntu 18.04 LTS (Bionic)
+    once 18.04.1 is released (July 2018).
+
 To select a different series the `--bootstrap-series` option is used.
 
-Below, a google (GCE) controller based on Ubuntu 14.04 LTS (Trusty) is
-requested (and is given the name 'gce-trusty'):
+Below, a google (GCE) controller based on Ubuntu 18.04 LTS (Bionic) is
+requested explicitly (and is given the name 'gce-bionic'):
 
 ```bash
-juju bootstrap --bootstrap-series=trusty google gce-trusty
+juju bootstrap --bootstrap-series=bionic google gce-bionic
 ```
 
 ### Create a Rackspace controller using a daily image
@@ -158,6 +162,50 @@ juju bootstrap azure --config logforward-enabled=true --config logconfig.yaml
 See [Remote logging][troubleshooting-logs-remote] for a more thorough treatment
 of log forwarding.
 
+### Specifying an agent version
+
+When a controller is created, it is possible to influence what agent version
+will be used across the controller and its models. This is covered in
+[Agent versions and streams][agent-versions-and-streams].
+
+### Passing a cloud-specific setting
+
+View if your chosen backing cloud has any special features and then pass the
+feature as an option.
+
+Firstly, reveal any features:
+
+```bash
+juju show-cloud --include-config aws
+```
+
+The bottom portion of the output looks like this:
+
+```no-highlight
+The available config options specific to ec2 clouds are:
+vpc-id:
+  type: string
+  description: Use a specific AWS VPC ID (optional). When not specified, Juju requires
+    a default VPC or EC2-Classic features to be available for the account/region.
+vpc-id-force:
+  type: bool
+  description: Force Juju to use the AWS VPC ID specified with vpc-id, when it fails
+    the minimum validation criteria. Not accepted without vpc-id
+```
+
+!!! Note:
+    The VPC ID is obtained from the AWS web UI.
+
+Secondly, create the controller by placing it (and its models) within it:
+
+```bash
+juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
+```
+
+!!! Note:
+    Cloud-specific features can also be passed to individual models during
+    their creation (`add-model`).
+
 
 <!-- LINKS -->
 
@@ -167,3 +215,4 @@ of log forwarding.
 [controlconfig]: ./controllers-config.html "Configuring Juju controllers"
 [modelconfig]: ./models-config.html "Configuring Juju models"
 [troubleshooting-logs-remote]: ./troubleshooting-logs-remote.html
+[agent-versions-and-streams]: ./models-config.html#agent-versions-and-streams

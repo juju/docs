@@ -1,6 +1,6 @@
-Title: Setting up private clouds with Simplestreams
+Title: Setting up image metadata for private clouds with Simplestreams
 
-#  Set up a Private OpenStack Cloud using Simplestreams
+#  Set up image metadata for a Private OpenStack Cloud using Simplestreams
 
 
 ## Overview
@@ -14,17 +14,27 @@ This necessary information is stored in a json metadata format
 called "Simplestreams". For supported public cloud services
 such as Amazon Web Services, HP Cloud, Azure, etc, no action is
 required by the end user. However, those setting up a private
-cloud, or who want to change how things work (eg use a different
+cloud, or who want to change how things work (e.g. use a different
 Ubuntu image), can create their own metadata.
 
-This page explains how to use Juju and additional tools to generate
-this Simplestreams metadata and configure OpenStack to use them.
+There are a few ways to accomplish this based on the OpenStack
+configuration and your level of permissions with juju and/or the
+OpenStack deployment.
+
+* If you are a general user start with [Create image metadata with Juju][general].
+* If you have admin or operator permissions in the OpenStack deployment, start
+with [Create image metadata with Juju][general] and continue with
+[Upload the Simplestreams Metadata to an object store][object-store].
+* If the OpenStack deployment was done with Juju and you have permissions to
+deploy charms alongside the OpenStack charms then use the [glance-simplestreams-sync charm][gsscharm].
 
 
-## Requirements
+## Create image metadata with Juju
 
+### Requirements
+
+ - Ubuntu images previously uploaded to Glance.
  - python-openstackclient
- - python-swiftclient
 
 ### Generating the metadata
 
@@ -101,7 +111,7 @@ Replace these values with your own in the above command:
 
 !!! Note:
     You can also specify, via the `--stream` option, an image stream (see
-    [Image streams][anchor__image-streams]) that is not 'released' (i.e.
+    [Image streams][image-streams]) that is not 'released' (i.e.
     'daily'). However, doing so will require you to specify this stream
     explicitly when using this metadata to create any subsequent controllers.
 
@@ -117,7 +127,25 @@ ls ~/simplestreams/*/streams/*
 
 You should see .json files containing the details we just added on the images.
 
-### Upload the Simplestreams Metadata to Swift
+### Use of a local directory for image metadata
+
+Stop here and return to the [bootstrap instructions][bootstrap].
+
+## Upload the image metadata to an object store
+
+!!! Note: Only those with admin privileges or who are operators in the OpenStack 
+    environment will be able to create a service and view endpoints used by the following 
+    instructions.
+
+These instructions use Swift, however other object stores may be used as well.
+
+### Requirements
+
+ - [image metadata has been created with Juju][general].
+ - python-openstackclient
+ - python-swiftclient
+
+### Create a Swift container and upload image metatdata
 
 Enter the following command to create a new container for the Simplestreams
 metadata:
@@ -234,41 +262,60 @@ The output from the previous command will be similar to the following:
 +--------------+----------------------------------+
 ```
 
-The URL for the Object Store is listed against the `internalurl` field above
-and we refer to this as **$SWIFT_URL** in the following commands.
+There are two URLs for the Object Store is listed.  We will refer to the
+`publicurl` field above as **$SWIFT_PUBLIC_URL** in the following commands
+and the `internalurl` field as **$SWIFT_INTERNAL_URL**.
+
+!!! Note: 
+    You can verify the url before bootstrap with
+    `wget $SWIFT_PUBLIC_URL/simplestreams/images/streams/v1/index.json`
 
 Enter the following command to register the endpoint with the Simplestreams
-service:
+service, when using Identity v3:
 
 ```bash
-openstack endpoint create --region $REGION --publicurl $SWIFT_URL/simplestreams/images \
-   --internalurl $SWIFT_URL/simplestreams/images product-streams
+openstack endpoint create --region $REGION product-streams public $SWIFT_URL/simplestreams/images
+openstack endpoint create --region $REGION product-streams internal $SWIFT_URL/simplestreams/images
 ```
 
-### Bootstrap with Juju
-
-Now the Simplestream service is registered and running you can create a controller on
-this cloud with the `juju bootstrap` command. 
+Using Identity v2:
 
 ```bash
-juju bootstrap <cloud> <controller name> --config image-metadata-url=$SWIFT_URL
+openstack endpoint create --region $REGION \
+   --publicurl $SWIFT_PUBLIC_URL/simplestreams/images \
+   --internalurl $SWIFT_INTERNAL_URL/simplestreams/images product-streams
 ```
 
-If there are multiple possible networks available to the cloud, it is also necessary to 
-specify the network label or UUID for Juju to use. Both the network label and
-UUID can be retrieved with the following command:
+!!! Note: 
+    Juju will automatically look for a product-streams service during
+    bootstrap to use for image streams.
 
-```bash
-openstack network list
-```
+## Using the Glance Simplestreams Sync charm to configure image streams.
 
-Finally, use either the network label or the UUID with the 'network' configuration
-option when bootstrapping a new controller:
+The Glance Simplestreams Sync charm will do all of the above work for you and
+provide customizeable syncing for automatic image updates.
+
+### Requirements
+
+ - OpenStack deployment by Juju
+
+!!! Note: 
+    You must have permissions to deploy charms in the Juju model running
+    OpenStack to utilize this method for image metatdata management.
 
 
-```bash 
-juju bootstrap openstack --config image-metadata-url=$SWIFT_URL --config network=<network id>
-```
+### Deploying the Glance simplestreams charm to your OpenStack Cloud
+
+[Glance Simplestreams Sync][glance-simplestreams-sync]
+
+It is recommended to set the charm's configuration variable use_swift to true
+as Juju will automatically look for a product-streams service during bootstrap
+to use for image streams.
+
+!!! Note: 
+    As of 6 June 2017, keystone v3 is not supported with this charm.
+    Check [bug 1611987][lp1611987] for resolution.
+
 
 !!! Note:
     An image stream will need to be explicitly stated, via the 'image-stream'
@@ -280,6 +327,11 @@ controller.
 
 
 <!-- LINKS -->
-
-[anchor__image-streams]: ./models-config.html#image-streams
+[bootstrap]: ./help-openstack.html#bootstrap-with-juju
+[glance-simplestreams-sync]: https://jujucharms.com/glance-simplestreams-sync/
+[gsscharm]: #using-the-glance-simplestreams-sync-charm-to-configure-image-streams.
+[lp1611987]: https://bugs.launchpad.net/charm-glance-simplestreams-sync/+bug/1611987
+[general]: #create-image-metadata-with-juju
+[object-store]:#upload-the-simplestreams-metadata-to-an-object-store
+[image-streams]: #image-streams
 [controllers-creating]: ./controllers-creating.html

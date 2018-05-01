@@ -395,7 +395,7 @@ juju deploy some-bundle --map-machines=existing,3=4,4=5
 
 You can configure more complex networks using [spaces](./network-spaces.html)
 and deploy charms with binding, as described in
-[Deploying to spaces](./charms-deploying.html#deploying-to-spaces).
+[Deploying to spaces](./charms-deploying-advanced.html#deploying-to-network-spaces).
 Bindings can also be specified for applications within a bundle. To do so,
 add a section to the bundle's YAML file called `bindings`. For example:
 

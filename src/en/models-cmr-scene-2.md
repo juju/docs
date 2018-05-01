@@ -1,5 +1,6 @@
 Title: CMR scenario #2
 TODO:  Update 'juju status' output to show release versions
+       Review required
 
 # CMR scenario #2
 
@@ -164,7 +165,7 @@ To list all offers for a given user who can consume the offer:
 juju offers --format summary --allowed-consumer <user name>
 ```
 
-The above command is best run with '--format summary' as the intent is to see,
+The above command is best run with `--format summary` as the intent is to see,
 for a given user, what offers they might relate to, regardless of whether there
 are existing relations (which is what the tabular view shows).
 
@@ -194,8 +195,9 @@ lxd-cmr-1  admin/cmr-model-1.mysql  admin   MySQL is a fast, stable and true mul
 ```
 
 Notice how this command takes the offer URL as the argument. The controller
-portion (`lxd-cmr-1`) can be omitted if the current controller contains the
-offer.
+portion ('lxd-cmr-1') can be omitted if the current controller contains the
+offer. In the same vein, if the offer resides in the current model then just
+the short name can be used ('cmr-model-1.mysql').
 
 For more details, including which users can access the offer, use the 'yaml'
 format.

@@ -3,7 +3,8 @@ TODO: Check accuracy of key table (https://github.com/juju/juju/blob/ec89c99e51f
       error: table's default value keys do not show up with controller-config (e.g. bootstrap-). See above note.
       "dynamically set by Juju" could use some explaination
       ReadOnlyMethods updated from https://github.com/juju/juju/blob/2.3/apiserver/observer/auditfilter.go#L130
-
+      Include ability to set configuration key:value pairs by file
+      Show how to use spaces 'juju-mgmt-space' and 'juju-ha-space' (wth 'juju bootstrap' and 'juju enable-ha')
 
 # Configuring controllers
 
@@ -58,8 +59,7 @@ This table lists all the controller keys which may be assigned a value.
 api-port                     | integer | 17070    |                          | The port to use for connecting to the API
 auditing-enabled             | bool    | false    | false/true               | Sets whether audit logging is enabled. Can be toggled for an existing controller.
 audit-log-capture-args       | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods. Can be toggled for an existing controller.  
-audit-log-exclude-methods    | string  | ReadOnlyMethods | [Some.Method,...] |
-What information to exclude from the audit log. Can be set for an existing controller. See [additional info][#excluding-information-audit-log].
+audit-log-exclude-methods    | string  | ReadOnlyMethods | [Some.Method,...] | What information to exclude from the audit log. Can be set for an existing controller. See [additional info][#excluding-information-audit-log].
 audit-log-max-backups        | integer | 10       |                          | The maximum number of backup audit log files to keep.
 audit-log-max-size           | integer | 300      |                          | The maximum size for an audit log file (units: MiB).
 autocert-dns-name            | string |          |                          | Sets the DNS name of the controller. If a client connects to this name, an official certificate will be automatically requested. Connecting to any other host name will use the usual self-generated certificate.
@@ -70,6 +70,8 @@ bootstrap-retry-delay        | integer | 5       |                          | Ho
 bootstrap-address-delay      | integer | 10      |                          | How often in seconds to refresh controller addresses from the API server
 ca-cert                      | string |          |                          | The certificate of the CA that signed the controller's CA certificate, in PEM format
 controller-uuid              | string |          |                          | The key for the UUID of the controller
+juju-ha-space		     | string |          |			    | The name of a network space used used for MongoDB replica-set communication in a controller HA context. Effectively acts as a machine constraint.
+juju-mgmt-space		     | string |          |			    | The name of a network space used by Juju agents to communicate with controllers. Effectively acts as a machine constraint.
 identity-public-key          | string |          |                          | Sets the public key of the identity manager. Feature not yet implemented.
 identity-url                 | string |          |                          | Sets the URL of the identity manager. Feature not yet implemented.
 max-logs-age                 | string | 72h      | 72h, etc.                | Sets the maximum age for log entries before they are pruned, in human-readable time format
