@@ -1,111 +1,121 @@
 Title: Using constraints
-TODO:  Include default resources for provisioned machine (i.e. no constraint used)
+TODO:  Important: include default resources requested for non-constrained machine
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1768308
 
 # Using constraints
 
 A *constraint* is a user-defined minimum hardware specification for a machine
 that is spawned by Juju. There are a total of nine constraints, with the most
-common ones being 'mem', 'cores', 'root-disk', and 'arch'. Their meanings
-should be self-explanatory. The definitive list is found on the
+common ones being 'mem', 'cores', 'root-disk', and 'arch'. The definitive
+constraint resource is found on the
 [Reference: Juju constraints][reference-constraints] page.
 
-Here are some noteworthy characteristics of constraints:
+The idealized use case is that of stipulating a constraint when deploying an
+application and the backing cloud providing a machine with those exact
+resources. In the majority of cases, however, default constraints may have been
+set (at various levels) and the cloud is unable to supply those exact
+resources.
+
+Several noteworthy constraint characteristics:
 
  - Some constraints are only supported by certain clouds.
  - Changes to constraint defaults do not affect existing machines.
- - If an application is deployed with a constraint then any subsequently added
-   unit will use the same constraint, unless overridden.
+ - Multiple constraints are logically AND'd (i.e. the machine must satisfy all
+   constraints).
 
-## How constraints work
+## Clouds and constraints
 
-In the simplest of terms, when Juju adds a constraint to the machine-creation
-request the end result will be a system that has exactly those resources. In
-reality, however, due to the nature of the chosen backing cloud, things rarely
-work out so perfectly. In addition, Juju implements a sophisticated method for
-how a user can configure constraints. This page will clarify how constraints
-work.
-
-### Satisfying a constraint
-
-When the backing cloud is unable to satisfy the constraint precisely, the
+When the backing cloud is unable to precisely satisfy a constraint, the
 resulting system's resources will exceed the constraint-defined minimum.
-However, if the cloud cannot satisfy the constraint at all then an error will
-be emitted and a machine will not be provisioned.
+However, if the cloud cannot satisfy a constraint at all then an error will be
+emitted and a machine will not be provisioned.
 
-### Constraint scopes and precedence
+## Constraint scopes, defaults, and precedence
 
-On a controller basis, the following constraint scopes exist:
+Constraints can be applied to various levels or scopes. Defaults can be set on
+some of them, and in the case of overlapping configurations a precedence is
+adhered to.
+
+### Scopes
+
+On a per-controller basis, the following constraint scopes exist:
 
  - Controller machine
  - All models
  - Single model
  - Single application
+ - All units of an application
  - Single machine
 
-Constraints specified on the model and an application will be combined to
-determine the full list of constraints. Application constraints will override
-model constraints, which override any set default constraints.
+So a constraint can apply to any of the above. We will see how to target each
+later on.
 
-To ignore any constraints which may have been previously set, you can assign a 
-'null' value. 
+### Defaults
 
-#### Controller machine
+Among the scopes, default constraints can be set for each of these:
 
-Constraints that apply solely to the controller are set a controller-creation
-time by using the `--bootstrap-constraints` option.
+ - All models
+ - Single model
+ - Single application
+ - All units of an application
 
-#### All models
+The last item (all-units) has its default set dynamically. It is the possible
+constraint used in the initial deployment of the corresponding application.
 
-Constraints that apply to all machines in the models managed by the controller,
-but excluding the controller itself are set via the `--constraints` option.
+### Precedence
 
-#### Single model
+The following precedence is observed (in order of priority):
 
-Constraints that apply to all machines in the models managed by the controller,
-but excluding the controller itself are set via the `--constraints` option.
+ - Machine
+ - Application (and its units)
+ - Model
+ - All models
+ 
+For instance, if a default constraint ('mem') applies to a single model and
+the same constraint has been stipulated when adding a machine (`add-machine`)
+within that model then the machine's constraint value will be applied.
 
-#### Single application
+The dynamic default for units can be overridden by either setting the
+application's default or by adding a machine with a constraint and then
+applying the new unit to that machine.
 
-Constraints that apply to all machines in the models managed by the controller,
-but excluding the controller itself are set via the `--constraints` option.
-
-#### Single machine
-
-Constraints that apply to all machines in the models managed by the controller,
-but excluding the controller itself are set via the `--constraints` option.
-
-### Constraint defaults
-
-Constraint defaults can be set on a per-controller basis, on a per-model basis
-(`set-model-constraints`), or on a per-application basis (`set-constraints`).
-Constraints set on the environment or on an application can be viewed by using
-the get- constraints command. In addition, you can specify constraints when
-executing a command by using the `--constraints` flag (for commands that
-support it).
-    
 ## Setting constraints for a controller
 
-Constraints can be applied to a controller (machine) during its creation
-(`juju bootstrap`) by using the `--bootstrap-constraints` option. See
-[Creating a controller][controllers-creating] for details and examples.
+Constraints are applied to the controller during its creation using the
+`--bootstrap-constraints` option:
+
+```bash
+juju bootstrap --bootstrap-constraints cores=2 localhost
+```
+
+Here, we want to ensure that the controller has at least two CPUs.
+
+See [Creating a controller][controllers-creating] for details and further
+examples.
+
+!!! Note:
+    Constraints applied with '--bootstrap-constraints' will automatically apply
+    to any future controllers provisioned for high availability (HA). See
+    [Controller high availability][controllers-ha].
 
 ## Setting constraints for all models
 
-All models within a controller can have their constraints set during the
-controller-creation process by applying the `--constraints` option to the
-`bootstrap` command. See [Creating a controller][controllers-creating] for
-guidance on doing this.
+Constraints can be applied to all models by, again, stating them during the
+controller-creation process, but using the `--constraints` option instead:
 
-Default model constraints can be overridden for specific models, applications,
-or machines, as detailed below.
+```bash
+juju bootstrap --constraints mem=4G localhost
+```
 
-Model-related constraints can also be overridden at the application and machine
-level.
+Above, we want every machine in every model to have a minimum of four GiB of
+memory.
 
-## Setting and displaying constraints for a single model
+See [Creating a controller][controllers-creating] for more guidance.
 
-A model's constraints are set, thereby affecting any subsequent machines, with
-the `set-model-constraints` command:
+## Setting and displaying constraints for a model
+
+A model's constraints are set, thereby affecting any subsequent machines in
+that model, with the `set-model-constraints` command:
  
 ```bash
 juju set-model-constraints mem=4G
@@ -125,9 +135,9 @@ juju set-model-constraints mem=
 
 ## Setting, displaying, and updating constraints for an application
 
-An application's constraints are usually set at deploy time, with the `deploy`
-command. To deploy the 'mariadb' charm to a machine that has at least 4 GiB of
-memory:
+Constraints at the application level can be set at deploy time, via the
+`deploy` command. To deploy the 'mariadb' charm to a machine that has at least
+4 GiB of memory:
   
 ```bash
 juju deploy mariadb --constraints mem=4G
@@ -165,6 +175,8 @@ units, with the `set-constraints` command:
 juju set-constraints mariadb cores=2
 ```
 
+An application's default cannot be set until the application has been deployed.
+
 !!! Note:
     Both the `get-constraints` and `set-constraints` commands work with
     application custom names. See [Deploying applications][charms-deploying]
@@ -172,20 +184,16 @@ juju set-constraints mariadb cores=2
 
 ## Setting constraints when adding a machine
 
-There are two scenarios where you might want to specify a constraint when
-adding a machine:
+Constraints at the machine level can be set when adding a machine with the
+`add-machine` command. Doing so provides a way to override defaults at the
+all-units, application, model, and all-models levels.
 
- 1. You intend to later deploy a charm or bundle to the machine. Note that you
-    can instead just specify the constraint during the deployment.
- 1. You intend to scale out (`add-unit`) an existing application using a
-    constraint that differs from that which was used for the initial
-    deployment.
+Once such a machine has been provisioned it can be used for an initial
+deployment (`deploy`) or a scale out deployment (`add-unit`). See
+[Deploying to specific machines][charms-deploying-advanced-to-option] for how
+to accomplish these actions.
 
-Once the machine is added look over
-[Deploying to specific machines][charms-deploying-advanced-to-option] for
-either of the above scenarios.
-
-A machine can be added that satisfies a constraint:
+A machine can be added that satisfies a constraint in this way:
 
 ```bash 
 juju add-machine --constraints arch=arm
@@ -217,3 +225,4 @@ See the [Network spaces][network-spaces] page for details on spaces.
 [network-spaces]: ./network-spaces.html
 [charms-deploying-advanced-to-option]: ./charms-deploying-advanced.html#deploying-to-specific-machines
 [reference-constraints]: ./reference-constraints.html
+[controllers-ha]: ./controllers-ha.html

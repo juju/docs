@@ -30,7 +30,7 @@ Below, all machines in the LXD controller's models will have at least 4GiB of
 memory:
 
 ```bash
-juju bootstrap --constraints="mem=4G" localhost
+juju bootstrap --constraints mem=4G localhost
 ```
 
 ### Set controller constraints for a new controller
@@ -39,7 +39,7 @@ This example shows how to request at least 4GiB of memory and two CPUs for an
 AWS controller:
 
 ```bash
-juju bootstrap --bootstrap-constraints="mem=4G cores=2" aws
+juju bootstrap --bootstrap-constraints "mem=4G cores=2" aws
 ```
 
 ### Create a controller of a specific series
