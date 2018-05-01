@@ -190,9 +190,9 @@ all-units, application, model, and all-models levels.
 
 Once such a machine has been provisioned it can be used for an initial
 deployment (`deploy`) or a scale out deployment (`add-unit`). See
-[Deploying to specific machines][charms-deploying-advanced-to-option] for how
-to accomplish these actions.
-
+[Deploying to specific machines][charms-deploying-advanced-to-option] for
+the command syntax to use.
+ 
 A machine can be added that satisfies a constraint in this way:
 
 ```bash 
