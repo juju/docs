@@ -27,8 +27,8 @@ To learn about configuration options available at bootstrap time, see:
 
 ### Set default model constraints for a given controller
 
-Below, all machines in the LXD controller's models will have at least 4GiB of
-memory:
+Below, all machines (including the controller) in the LXD controller's models
+will have at least 4GiB of memory:
 
 ```bash
 juju bootstrap --constraints mem=4G localhost
@@ -42,6 +42,9 @@ AWS controller:
 ```bash
 juju bootstrap --bootstrap-constraints "mem=4G cores=2" aws
 ```
+
+If any of the constraints are also used with `--constraints` then the ones
+given via `--bootstrap-constraints` will be used.
 
 ### Create a controller of a specific series
 

@@ -112,6 +112,11 @@ memory.
 
 See [Creating a controller][controllers-creating] for more guidance.
 
+!!! Important:
+    The `--constraints` option also affects the controller. Individual
+    constrainst from `--bootstrap-constraints` override any identical
+    constraints from `--constraints`.
+
 ## Setting and displaying constraints for a model
 
 A model's constraints are set, thereby affecting any subsequent machines in
