@@ -30,6 +30,12 @@ resulting system's resources will exceed the constraint-defined minimum.
 However, if the cloud cannot satisfy a constraint at all then an error will be
 emitted and a machine will not be provisioned.
 
+When using the localhost cloud, constraints are ineffectual due the nature of
+this cloud's underlying technology (LXD), where each machine will, by default,
+have access to **all** of the LXD host's resources. Here, an exact hardware
+specification can be requested, but is done at the LXD level. An example will
+be provided.
+
 ## Constraint scopes, defaults, and precedence
 
 Constraints can be applied to various levels or scopes. Defaults can be set on
@@ -85,7 +91,7 @@ Constraints are applied to the controller during its creation using the
 `--bootstrap-constraints` option:
 
 ```bash
-juju bootstrap --bootstrap-constraints cores=2 localhost
+juju bootstrap --bootstrap-constraints cores=2 google
 ```
 
 Here, we want to ensure that the controller has at least two CPUs.
@@ -104,7 +110,7 @@ Constraints can be applied to all models by, again, stating them during the
 controller-creation process, but using the `--constraints` option instead:
 
 ```bash
-juju bootstrap --constraints mem=4G localhost
+juju bootstrap --constraints mem=4G aws
 ```
 
 Above, we want every machine in every model to have a minimum of four GiB of
@@ -114,8 +120,24 @@ See [Creating a controller][controllers-creating] for more guidance.
 
 !!! Important:
     The `--constraints` option also affects the controller. Individual
-    constrainst from `--bootstrap-constraints` override any identical
+    constraints from `--bootstrap-constraints` override any identical
     constraints from `--constraints`.
+
+For the localhost cloud, the following invocation will achieve a similar goal
+to the previous command (assuming that the LXD containers are using the
+'default' LXD profile):
+
+```bash
+lxc profile set default limits.memory 4GB
+```
+
+Such a command can be issued at any time with respect to `juju bootstrap`
+because it affects both future and existing (in realtime) machines. See the
+[LXD documentation][lxd-upstream] for more on this topic.
+
+!!! Warning:
+    LXD resource limit changes can potentially impact all containers on the
+    host - not just the Juju machines.
 
 ## Setting and displaying constraints for a model
 
@@ -222,6 +244,20 @@ spaces, and not connected to either the 'storage' or 'dmz' spaces.
 
 See the [Network spaces][network-spaces] page for details on spaces.
 
+To get exactly two CPUs for a machine in a localhost cloud:
+
+```bash
+juju add-machine
+lxc list
+lxc config set juju-ab31e2-0 limits.cpu 2
+```
+
+Above, it is presumed that `lxc list` informed us that the new machine is
+backed by a LXD container whose name is 'juju-ab31e2-0'.
+
+See the [earlier example on LXD][#setting-constraints-for-all-models] for more
+context.
+
 
 <!-- LINKS -->
 
@@ -231,3 +267,5 @@ See the [Network spaces][network-spaces] page for details on spaces.
 [charms-deploying-advanced-to-option]: ./charms-deploying-advanced.html#deploying-to-specific-machines
 [reference-constraints]: ./reference-constraints.html
 [controllers-ha]: ./controllers-ha.html
+[lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
+[#setting-constraints-for-all-models]: #setting-constraints-for-all-models
