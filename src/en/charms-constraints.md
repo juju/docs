@@ -1,20 +1,15 @@
 Title: Using constraints
 TODO:  Important: include default resources requested for non-constrained machine
        bug tracking: https://bugs.launchpad.net/juju/+bug/1768308
+       Consider a diagram for the Defaults section
 
 # Using constraints
 
 A *constraint* is a user-defined minimum hardware specification for a machine
-that is spawned by Juju. There are a total of nine constraints, with the most
-common ones being 'mem', 'cores', 'root-disk', and 'arch'. The definitive
-constraint resource is found on the
+that is spawned by Juju. There are a total of nine types of constraint, with
+the most common ones being 'mem', 'cores', 'root-disk', and 'arch'. The
+definitive constraint resource is found on the
 [Reference: Juju constraints][reference-constraints] page.
-
-The idealized use case is that of stipulating a constraint when deploying an
-application and the backing cloud providing a machine with those exact
-resources. In the majority of cases, however, default constraints may have been
-set (at various levels) and the cloud is unable to supply those exact
-resources.
 
 Several noteworthy constraint characteristics:
 
@@ -24,6 +19,12 @@ Several noteworthy constraint characteristics:
    constraints).
 
 ## Clouds and constraints
+
+The idealized use case is that of stipulating a constraint when deploying an
+application and the backing cloud providing a machine with those exact
+resources. In the majority of cases, however, default constraints may have been
+set (at various levels) and the cloud is unable to supply those exact
+resources.
 
 When the backing cloud is unable to precisely satisfy a constraint, the
 resulting system's resources will exceed the constraint-defined minimum.
@@ -131,13 +132,13 @@ to the previous command (assuming that the LXD containers are using the
 lxc profile set default limits.memory 4GB
 ```
 
-Such a command can be issued at any time with respect to `juju bootstrap`
-because it affects both future and existing (in realtime) machines. See the
+Such a command can be issued before or after `juju bootstrap` because it
+affects both future and existing (in real time) machines. See the
 [LXD documentation][lxd-upstream] for more on this topic.
 
 !!! Warning:
     LXD resource limit changes can potentially impact all containers on the
-    host - not just the Juju machines.
+    host - not only those acting as Juju machines.
 
 ## Setting and displaying constraints for a model
 
