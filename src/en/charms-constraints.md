@@ -43,9 +43,7 @@ Constraints can be applied to various levels or scopes. Defaults can be set on
 some of them, and in the case of overlapping configurations a precedence is
 adhered to.
 
-### Scopes
-
-On a per-controller basis, the following constraint scopes exist:
+On a per-controller basis, the following constraint **scopes** exist:
 
  - Controller machine
  - All models
@@ -57,21 +55,13 @@ On a per-controller basis, the following constraint scopes exist:
 So a constraint can apply to any of the above. We will see how to target each
 later on.
 
-### Defaults
+Among the scopes, **default** constraints can be set for each with the
+exception of the controller and single machines.
 
-Among the scopes, default constraints can be set for each of these:
-
- - All models
- - Single model
- - Single application
- - All units of an application
-
-The last item (all-units) has its default set dynamically. It is the possible
+The all-units scope has its default set dynamically. It is the possible
 constraint used in the initial deployment of the corresponding application.
 
-### Precedence
-
-The following precedence is observed (in order of priority):
+The following **precedence** is observed (in order of priority):
 
  - Machine
  - Application (and its units)
