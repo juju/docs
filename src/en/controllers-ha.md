@@ -1,5 +1,7 @@
 Title: Controller high availability
 TODO:  Consider adding to a troubleshooting page: recovering
+       The concept of quorum should be broached.
+       In particular, what the consequences of losing quorum are. I couldn't find any, which is odd.
 
 # Controller high availability
 
@@ -28,10 +30,9 @@ The number of controllers must be an odd number in order for a master to be
 "voted in" amongst its peers. A cluster with an even number of members will
 cause a random member to become inactive. This latter system will become a "hot
 standby" and automatically become active should some other member fail.
-
 Furthermore, due to limitations of the underlying database in an HA context,
-that number cannot exceed seven. This means that a cluster can only have three,
-five, or seven **active** members.
+that number cannot exceed seven. All this means that a cluster can only have
+three, five, or seven **active** members.
 
 Juju clients and agents talk to any of the controllers in the cluster. This
 means that processing at the controller (API) level is distributed. However,
