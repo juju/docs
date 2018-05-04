@@ -182,9 +182,9 @@ $interval = Get-JujuCharmConfig "interval"
 ## goal-state
 
 `goal-state` queries information about charm deployment. It will print only
-yaml or json output (default yaml).
+YAML or JSON output (default YAML).
 
-The information it can discover are:
+The information is:
 
  - What other peer units have been deployed and their status
  - What remote (related) units exist on the other end of each endpoint, and
