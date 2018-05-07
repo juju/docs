@@ -1,6 +1,9 @@
 Title: CAAS and Juju
 TODO:  Once 2.4 is officially released remove support Note and update status output
        Should eventually link to CAAS-charm developer documentation
+       Update when storage becomes a Juju drivable aspect.
+       Add architectural overview/diagram once CAAS becomes stable.
+       Consider manually adding a cluster (third-party installs) via `add-cloud` and `add-credential`
 
 # CAAS and Juju
 
@@ -139,14 +142,6 @@ add the cluster-cloud, which we have arbitrarily called 'k8cloud':
 juju add-k8s k8cloud
 ```
 
-#### Adding manually (third-party installs)
-
-`add-cloud`  
-`add-credential`
-
-## Architecture
-
-
 ## Configuration
 
 Juju CAAS applications support application specific configuration. This allows
@@ -171,7 +166,6 @@ There are three other configuration attributes which are not k8s-specific:
 
 | Key                        			| Type    | Default 	     | Valid values | Comments                     |
 |:----------------------------------------------|---------|------------------|--------------|:-----------------------------|
-juju-managed-units				| boolean | false	     |		    |
 juju-external-hostname				| string  | 		     |              | Mandatory; user specified
 juju-application-path				| string  | "/"		     |              |
 
@@ -179,14 +173,10 @@ Attributes 'juju-external-hostname' and 'juju-application-path' control how the
 application is exposed externally using a Kubernetes Ingress Resource in
 conjunction with the configured ingress controller (default: nginx).
 
-Attribute 'juju-managed-units' is used to control whether Juju manages the
-lifecyle of the pods, or whether that is delegated to a deployment controller.
-In the latter case, Juju itself can be used to add or remove units as normal.
-It's also possible to use the k8s `scale` command (external to Juju) to add or
-remove pods directly in k8s and these changes will be reflected back into the
-Juju model as updates to units.
-
-## Storage
+Juju uses a deployment controller for each application to manage pod lifecycle,
+which allows for the addition or removal of units as normal. It remains
+possible to perform these same actions directly in the cluster by way of the
+Kubernetes `scale` command.
 
 
 <!-- LINKS -->
