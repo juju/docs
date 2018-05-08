@@ -178,6 +178,10 @@ which allows for the addition or removal of units as normal. It remains
 possible to perform these same actions directly in the cluster by way of the
 Kubernetes `scale` command.
 
+## Charms
+
+
+
 
 <!-- LINKS -->
 
