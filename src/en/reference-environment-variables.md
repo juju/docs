@@ -251,6 +251,13 @@ The name of the local unit being executed.
 JUJU_UNIT_NAME=vanilla/0
 ```
 
+#### JUJU_VERSION
+
+The version of the Juju unit agent.
+```
+JUJU_VERSION=2.4.1
+```
+
 
 # Internal Use only
 
