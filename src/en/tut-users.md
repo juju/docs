@@ -177,7 +177,7 @@ With access revoked, the admin can now safely remove the model:
 juju destroy-model dev
 ```
 
-[helpaws]: ./help-aws.html "Conffiguring Juju for Amazon AWS"
+[helpaws]: ./help-aws.html "Using Amazon AWS with Juju"
 [helpgce]: ./help-google.html "Configuring Juju for GCE"
 [helpazure]: ./help-azure.html "Configuring Juju for Azure"
 [listclouds]: ./clouds.html "Configuring Juju Clouds"

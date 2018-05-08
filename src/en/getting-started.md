@@ -306,7 +306,7 @@ some of the following pages of documentation:
 <!-- LINKS -->
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
-[aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
+[aws]: ./help-aws.html "Using Amazon AWS with Juju"
 [bundles]: ./charms-bundles.html "Introduction to bundles"
 [k8]: https://jujucharms.com/canonical-kubernetes/
 [charms]: ./charms.html "Introduction to charms"
