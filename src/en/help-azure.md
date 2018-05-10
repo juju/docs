@@ -30,6 +30,13 @@ Several steps are required to add Azure credentials to Juju:
  - Log in to Azure
  - Import the credentials
 
+!!! Note:
+    Credentials on the Azure cloud have been reported to expire. If a
+    previously working setup suddenly behaves as if incorrect credentials are
+    being used then you may need to update the credentials on the controller.
+    See [Updating remote credentials][updating-remote-credentials] for
+    guidance.
+
 ### Install the CLI tool
 
 You will need to import your Azure credentials into Juju using the
@@ -75,6 +82,11 @@ To sign in, use a web browser to open the page https://microsoft.com/devicelogin
 After entering the code the web site should show 'Microsoft Azure
 Cross-platform Command Line Interface'. Press the 'Continue' button.
 
+The resulting page will ask you to "Pick an account". This is just the email
+address that you've associated with your Azure account. Click on it.
+
+You are now logged in to your Azure account.
+
 ### Import the credentials
 
 Back on the command line, the output from `az login` should now display your
@@ -116,15 +128,15 @@ we'll assume that 'interactive' has been chosen.
 
 !!! Note:
     For guidance on the manul method, see
-    [Manually adding Azure credentials][clouds-azure-advanced]. Use this method
+    [Manually adding Azure credentials][manually-adding-azure-credentials]. Use this method
     if the interactive option fails, or if you want to automate the
     configuration process.
 
-You then will be optionally asked for your subscription id. In the example
-above, it is 'f717c8c1-8e5e-4d38-be7f-ed1e1c879e18'. The recommended way is to
-simply press 'Enter' and let the tool automatically retrieve what's needed. If
-you do so, after a few seconds you will see the following (assuming 'ubuntu' is
-the credential name):
+You then will be asked for your subscription id. In the example above, it is
+'f717c8c1-8e5e-4d38-be7f-ed1e1c879e18'. The recommended way is to simply press
+'Enter' and let the tool automatically retrieve what's needed. If you do so,
+after a few seconds you will see the following (assuming 'ubuntu' is the
+credential name):
 
 ```no-highlight
 Credential "ubuntu" added locally for cloud "azure".
@@ -133,58 +145,44 @@ Credential "ubuntu" added locally for cloud "azure".
 You can also verify that the credentials were successfully added by running
 `juju credentials`.
 
-## Dealing with expired Azure credentials
-
-Credentials on the Azure cloud have been reported to expire. If a previously
-working setup suddenly behaves as if incorrect credentials are being used then
-you may need to update the credentials on the controller. See
-[Updating remote credentials][updating-remote-credentials] for guidance.
-
 ## Create the Juju controller
+
+You are now ready to create a Juju controller:
 
 ```bash
 juju bootstrap azure mycloud
 ```
 
-A successful bootstrap will result in the controller environment being visible
-in the [Azure portal][azureportal].
+This will result in the controller environment being visible in the
+[Azure portal][azureportal].
 
 ![Juju environment in Azure portal](media/azure_portal-environment.png)
+
+## Azure specific features
+
+Juju supports Azure availability sets. See the
+[Application high availability][azure-availability-sets] page for more
+details.
+
+## Next steps
+
+You can now start deploying Juju charms and/or bundles to your Azure cloud.
+Continue with Juju by visiting the [Models][models] and
+[Introduction to Juju Charms][charms] pages.
 
 !!! Note:
     Azure accounts are initially limited to 10 cores (trial accounts can be
     even lower). You will need to file a support ticket with Azure to raise
     your quota limit.
 
-## Compatibility with older versions of Juju
-
-Juju 2.x support for Azure is backwards compatible with older versions of Juju
-but supports several additional features, in particular, support for unit
-placement (i.e. units can be deployed to specific existing machines). In lieu
-of this, the old default behaviour is used: units of an application will be
-allocated to machines in an application-specific Availability Set. Read the
-[Azure SLA][azure-sla] to learn how availability sets affect uptime guarantees.
-
-## Next steps
-
-You can now start deploying Juju charms and/or bundles to your MAAS cloud.
-Continue with Juju by visiting the [Models][models] and
-[Introduction to Juju Charms][charms] pages.
-
 
 <!-- LINKS -->
 
-[anchor__credentials]: ./help-azure.html#credentials
 [updating-remote-credentials]: ./credentials.html#updating-remote-credentials
-[subscriptionblade]: https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
-[azuredeviceauth]: https://login.windows.net/common/oauth2/deviceauth
 [azureportal]: http://portal.azure.com
-[jaas]: ./getting-started.html "Getting Started with Juju as a Service"
 [azurecli]: https://docs.microsoft.com/en-us/cli/azure/overview 
-[snapcraft]: https://snapcraft.io/
-[npminfo]: https://docs.npmjs.com/getting-started/what-is-npm
-[azuretwo]: https://github.com/Azure/azure-cli
 [azuretwoinstall]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-[#manually-adding-credentials]: #manually-adding-credentials
-[azure-sla]: https://azure.microsoft.com/en-gb/support/legal/sla/
-[clouds-azure-advanced]: ./help-azure-advanced.html
+[manually-adding-azure-credentials]: ./help-azure-advanced.html#manually-adding-azure-credentials
+[azure-availability-sets]: ./charms-ha.html#azure-availability-sets
+[models]: ./models.html
+[charms]: ./charms.html
