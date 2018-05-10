@@ -58,33 +58,34 @@ The stable online agent software is found here:
 https://streams.canonical.com/juju/tools/releases/
 
 
-## The sync-tools command
+## The sync-agent-binaries command
 
 This pertains to the lack of internet connectivity for the controller.
 
 If the controller cannot contact the above URL then the client, which
 presumably does have access, will need to download and transfer the software
 to the controller prior to requesting an upgrade. This is accomplished with
-the `sync-tools` command.
+the `sync-agent-binaries` command.
 
 Examples:
 
 Transfer the server software (auto-selected) to the state server:
 
 ```bash
-juju sync-tools
+juju sync-agent-binaries
 ```
 
 Transfer the specified server software (all patch versions of 2.03) to the
 state server:
 
 ```bash
-juju sync-tools --version 2.03 --debug
+juju sync-agent-binaries --version 2.03 --debug
 ```
 
 !!! Note: 
-    The `sync-tools --version` command only accepts `major[.minor]`
+    The `sync-agent-binaries --version` command only accepts `major[.minor]`
     ("e.g. use '2.03' not '2.03.1').
 
-For complete syntax, see the [command reference page](./commands.html#sync-tools)
-or by running `juju help sync-tools`.
+For complete syntax, see the
+[command reference page](./commands.html#sync-agent-binaries) or by running
+`juju help sync-agent-binaries`.

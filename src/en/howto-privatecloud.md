@@ -8,7 +8,8 @@ Title: Setting up private clouds with Simplestreams
 When Juju bootstraps a cloud, it needs two critical pieces of information:
 
   1. The UUID of the image to use when starting new compute instances.
-  1. The URL from which to download the correct version of a tools tarball.
+  1. The URL from which to download the correct version of an agent binary
+     tarball.
 
 This necessary information is stored in a json metadata format
 called "Simplestreams". For supported public cloud services

@@ -40,7 +40,7 @@ server visible to your Juju environment.
 
 ```bash
 mkdir local
-juju sync-tools --local-dir local
+juju sync-agent-binaries --local-dir local
 cp -r local/tools <path/to/webserver>
 ```
 
