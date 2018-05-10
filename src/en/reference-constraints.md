@@ -1,5 +1,7 @@
 Title: Juju constraints | Reference
 TODO:  Add constraints info for Oracle and Rackspace
+       Confirm/explain: different clouds also dictate constraints that would conflict with other clouds and cannot be used in combination.
+       Rethink: Cloud difference section (include examples of things that work?)
 
 # Juju constraints
 
@@ -63,8 +65,8 @@ For in-depth coverage and examples see the
     connected to the storage and db spaces, but NOT to logging or public
     spaces).
 
-    **Note:** EC2 and MAAS are the only providers that support the spaces
-    constraint.
+    **Note:** EC2 and MAAS are the only providers that currently support the
+    spaces constraint.
 
  - `virt-type`  
     Virtualization type, such as 'kvm'.
@@ -77,11 +79,6 @@ even if two clouds support a constraint, sometimes the constraint **value** may
 work with one cloud but not with the other. All this is the natural consequence
 of Juju striving to support widely differing cloud types. The list below
 addresses the situation.
-
-<!-- EXPLANATION REQUIRED
-Sometimes, different clouds also dictate constraints that would conflict with
-other clouds and cannot be used in combination.
--->
 
 ### Azure:
 - Unsupported: [cpu-power, tags, virt-type]
@@ -121,11 +118,6 @@ other clouds and cannot be used in combination.
 - Unsupported: [tags, cpu-power]
 - Valid values: instance-type=[defined on the cloud]; virt-type=[kvm,lxd]
 - Conflicting constraints: [instance-type] vs [mem, root-disk, cpu-cores]
-
-<!-- MISSING
-### Oracle:
-### Rackspace:
--->
 
 ### vSphere:
 - Unsupported: [tags, virt-type]

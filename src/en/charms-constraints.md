@@ -34,8 +34,8 @@ emitted and a machine will not be provisioned.
 When using the localhost cloud, constraints are ineffectual due the nature of
 this cloud's underlying technology (LXD), where each machine will, by default,
 have access to **all** of the LXD host's resources. Here, an exact hardware
-specification can be requested, but is done at the LXD level. An example will
-be provided.
+specification can be requested, but is done at the LXD level (see example
+below).
 
 ## Constraint scopes, defaults, and precedence
 
