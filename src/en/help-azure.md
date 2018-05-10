@@ -27,7 +27,7 @@ juju update-clouds
 Several steps are required to add Azure credentials to Juju:
 
  - Install the CLI tool
- - Log in the Azure
+ - Log in to Azure
  - Import the credentials
 
 ### Install the CLI tool
@@ -46,27 +46,27 @@ curl -L https://aka.ms/InstallAzureCli | bash
     Apple macOS, see Microsoft's [Install Azure CLI 2.0][azuretwoinstall]
     documentation.
 
-If the installer encounters any difficulties it will output a message. Examples
+If the installer encounters any difficulties it will let you know. Examples
 include the inability to find your system's Python interpreter or missing
-software dependencies. Run any commands that the installer suggests to rectify
-these deficiencies. You may need to prepend `sudo` to some commands (only do
-this if needed). After each command, rerun the above `curl` command. Accept the
-suggested default answers to any questions it may ask (by just pressing
-'Enter'). At the end you will be asked to run `exec -l $SHELL` to restart your
-shell.
+software dependencies. Run any commands that the installer suggests in order to
+rectify these deficiencies. You may need to prepend `sudo` to some commands
+(only do this if needed). After each command, rerun the above `curl` command.
+Accept the suggested default answers to any questions it may ask (by just
+pressing 'Enter'). At the end you will be asked to run `exec -l $SHELL` to
+restart your shell.
 
 Verify that the tool is properly installed by running `az --version`.
 
-### Log in the Azure
+### Log in to Azure
 
-Log in to your Azure account in order to display the credentials that Juju
-needs:
+Log in to your Azure account in order to display the credentials that you will,
+in turn, provide to Juju:
 
 ```bash
 az login
 ```
 
-This will supply you with a URL and a code, for example:
+This will output a URL and a code, for example:
 
 ```no-highlight
 To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code D6FRLOY6U to authenticate.
@@ -77,8 +77,8 @@ Cross-platform Command Line Interface'. Press the 'Continue' button.
 
 ### Import the credentials
 
-Back on the command line, the output from `az login` should now display the
-credentials for your account: 
+Back on the command line, the output from `az login` should now display your
+Azure account information: 
 
 ```yaml
 [
@@ -97,22 +97,22 @@ credentials for your account:
 ]
 ```
 
-Your Azure credentials can now be added to Juju by running the command:
+Now initiate the process to import your Azure credentials into Juju:
 
 ```bash
 juju add-credential azure
 ```
 
-You will first be asked for an arbitrary credential name, which you choose
-for yourself. This will be how you remember and refer to this Azure credential
-in Juju. The second question will ask you to select an 'Auth Type' from the
-following two options:
+You will first be asked for an arbitrary credential name (e.g. 'ubuntu').
+Secondly, you will be asked to select an 'Auth Type' from among the following
+two methods:
 
 - interactive
 - service-principal-secret
 
-The default option is `interactive` and is the recommended method. It is far
-quicker and easier than the manual `service-principal-secret` option.
+The default choice is `interactive` and it is the recommended method. It is far
+quicker and easier than the manual `service-principal-secret` method. Here,
+we'll assume that 'interactive' has been chosen.
 
 !!! Note:
     For guidance on the manul method, see
@@ -122,17 +122,16 @@ quicker and easier than the manual `service-principal-secret` option.
 
 You then will be optionally asked for your subscription id. In the example
 above, it is 'f717c8c1-8e5e-4d38-be7f-ed1e1c879e18'. The recommended way is to
-simply press 'Enter' and let the tool automatically retrieve what's needed.
-Momentarily, you will see the following (assuming 'ubuntu' is the credential
-name):
+simply press 'Enter' and let the tool automatically retrieve what's needed. If
+you do so, after a few seconds you will see the following (assuming 'ubuntu' is
+the credential name):
 
 ```no-highlight
 Credential "ubuntu" added locally for cloud "azure".
 ```
 
 You can also verify that the credentials were successfully added by running
-`juju credentials`. This will display the credential name you specified at the
-beginning.
+`juju credentials`.
 
 ## Dealing with expired Azure credentials
 
