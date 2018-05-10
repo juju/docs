@@ -1,157 +1,128 @@
-Title: Constraints
-TODO:  Review required. In particular, the top section is too wordy.
+Title: Juju constraints | Reference
+TODO:  Add constraints info for Oracle and Rackspace
+       Confirm/explain: different clouds also dictate constraints that would conflict with other clouds and cannot be used in combination.
+       Rethink: Cloud difference section (include examples of things that work?)
 
-# Constraints
+# Juju constraints
 
-Constraints set limits on the possible instances that may be started by Juju
-commands. They are usually passed as a flag to commands that provision a
-new machine (such as bootstrap, deploy, and add-machine). See [using
-constraints](charms-constraints.html) for how to specify these in a
-deployment.
+Constraints are minimum requirements for machines that are created on behalf of
+Juju. They are passed as options to commands that either provision a new
+machine directly or are set as defaults for new machines at the controller,
+model, or application level.
 
-Each constraint defines a minimum acceptable value for a characteristic of a
-machine. Juju will provision the least expensive machine that fulfils all the
-constraints specified. Note that these values are the minimum, and the actual
-machine used may exceed these specifications if one that exactly matches does
-not exist.
+This reference page lists all the constraints that can be used with Juju.
 
-If a constraint is defined that cannot be fulfilled by any machine in the
-environment, no machine will be provisioned, and an error will be printed in the
-machine's entry in juju status.
-
-Constraint defaults can be set on an environment or on specific applications by
-using the set-constraints command (see `juju help set-constraints`). Constraints
-set on the environment or on an application can be viewed by using the get-
-constraints command. In addition, you can specify constraints when executing a
-command by using the `--constraints` flag (for commands that support it).
-
-Constraints specified on the environment and an application will be combined to
-determine the full list of constraints on the machine(s) to be provisioned by
-the command. Application-specific constraints will override environment-specific
-constraints, which override the juju default constraints.
-
-Constraints are specified as key value pairs separated by an equals sign, with
-multiple constraints delimited by a space.
-
+For in-depth coverage and examples see the
+[Using constraints][charms-constraints] page in the user guide.
 
 ## Generic constraints
 
+ - `arch`  
+    Architecture. Values include 'amd64', 'arm', 'i386', 'arm64', or 'ppc64'. A
+    null value indicates any architecture.
 
-- arch
+ - `cores`  
+    Effective CPU cores. An integer.
 
-    Short name of architecture that an application must run on. Can be left
-    blank to indicate any architecture is acceptable, or one of `amd64`,
-    `arm`, `i386`, `arm64`, or `ppc64`.
+ - `cpu-power`  
+    Abstract CPU power. 100 units is roughly equivalent to "a single 2007-era
+    Xeon" as reflected by 1 Amazon vCPU.
 
-- cores
+    **Note:** Not supported by all providers. Use `cores` for portability.
 
-    Minimum number of effective CPU cores that must be available to an
-    application unit.
+ - `instance-type`  
+    Cloud-specific instance-type name. Values vary by provider, and individual
+    deployment in some cases.
 
-- cpu-power
+    **Note:**  When compatibility between clouds is desired, use corresponding
+     values for `cores`, `mem`, and `root-disk` instead.
 
-    Minimum amount of abstract CPU power that must be available to an
-    application unit, where 100 units is roughly equivalent to "a single
-    2007-era Xeon" as reflected by 1 Amazon vCPU. 
-    
-    **Note:**  Not all providers support this constraint, use
-    `cores` for portability.
-
-- instance-type
-
-    Cloud-specific instance-type name that an application used must be
-    deployed on. Valid values vary by provider, and individual
-    deployment in some cases. 
-    
-    **Note:**  When compatibility between clouds is desired, use
-    corresponding values for `cores`, `mem`, and `root-disk`
-    instead.
-
-- mem
-
-    Minimum number of megabytes of RAM that must be available to an
-    application unit. An optional suffix of M/G/T/P indicates the value is
+ - `mem`  
+    Memory (MiB). An optional suffix of M/G/T/P indicates the value is
     mega-/giga-/tera-/peta- bytes.
 
-- root-disk
+ - `root-disk`  
+    Disk space on the root drive. The value is MiB unless an optional suffix of
+    M/G/T/P is used per the `mem` constraint. Additional storage that may be
+    attached separately does not count towards this value.
 
-    Minimum amount of of disk space on the root drive on each application
-    unit. The value is megabytes unless an optional suffix of M/G/T/P is used
-    per the `mem` constraint. Additional storage that may be attached
-    separately does not count towards this value.
-
-- tags
-
+ - `tags`  
     Comma-delimited tags assigned to the machine. Tags can be positive, 
     denoting an attribute of the machine, or negative (prefixed with "^"),
-    to denote something that the machine does not have. Currently only
-    supported by MAAS.
+    to denote something that the machine does not have.
+
+    **Note:** Currently only supported by the MAAS provider.
 
     Example: tags=virtual,^dualnic
 
-- spaces
+ - `spaces`  
+    A comma-delimited list of Juju network space names that a unit or machine
+    needs access to. Space names can be positive, listing an attribute of the
+    space, or negative (prefixed with "^"), listing something the space does
+    not have.
 
-    Permits specifying a comma-delimited list of Juju network space names
-    that a unit or machine needs access to. Space names can be positive,
-    listing an attribute of the space, or negative (prefixed with "^"),
-    listing something the space does not have, separated by commas.
+    Example: spaces=storage,db,^logging,^public (meaning, select machines
+    connected to the storage and db spaces, but NOT to logging or public
+    spaces).
 
-    Example: spaces=storage,db,^logging,^public (meaning, select machines connected
-    to the storage and db spaces, but NOT to logging or public spaces).
+    **Note:** EC2 and MAAS are the only providers that currently support the
+    spaces constraint.
 
-    EC2 and MAAS are the only providers that support the spaces constraint.
-    Support in other providers is planned for future releases.
-
-- virt-type
-
-    Specifies the type of virtualization to be used, such as `kvm`.
-
+ - `virt-type`  
+    Virtualization type, such as 'kvm'.
 
 ## Cloud differences
 
-Different clouds support different constraints and sometimes different
-values for these constraints. Sometimes, different clouds also dictate
-constraints that would conflict with other clouds and cannot be used
-in combination. Use this list to help you understand the differing needs.
+Constraints cannot be applied towards a backing cloud in an agnostic way. That
+is, a particular cloud type may support some constraints but not others. Also,
+even if two clouds support a constraint, sometimes the constraint **value** may
+work with one cloud but not with the other. All this is the natural consequence
+of Juju striving to support widely differing cloud types. The list below
+addresses the situation.
 
-###Azure Provider:
+### Azure:
 - Unsupported: [cpu-power, tags, virt-type]
 - Valid values: arch=[amd64]; instance-type=[defined on the cloud]
 - Conflicting constraints: [instance-type] vs [mem, cpu-cores, arch]
 
-###Cloudsigma (currently behind development flag):
+### CloudSigma:
 - Unsupported: [instance-type, tags, virt-type]
 
-###EC2 Provider:
+### EC2:
 - Unsupported: [tags, virt-type]
 - Valid values: instance-type=[defined on the cloud]
 - Conflicting constraints: [instance-type] vs [mem, cpu-cores, cpu-power]
 
-###GCE Provider:
+### GCE:
 - Unsupported: [tags, virt-type]
 - Valid values: instance-type=[defined on the cloud]
 - Conflicting constraints: [instance-type] vs [arch, cpu-cores, cpu-power, mem]
 
-###Joyent Provider:
+### Joyent:
 - Unsupported: [cpu-power, tags, virt-type]
 - Valid values: instance-type=[defined on the cloud]
 
-###LXD Provider:
+### LXD:
 - Unsupported: [cpu-cores, cpu-power, instance-type, tags, virt-type]
 - Valid values: arch=[host arch]
 
-###MAAS Provider:
+### MAAS:
 - Unsupported: [cpu-power, instance-type, virt-type]
 - Valid values: arch=[defined on the cloud]
 
-###Manual Provider:
+### Manual:
 - Unsupported: [cpu-power, instance-type, tags, virt-type]
 - Valid values: arch=[for controller - host arch; for other machine - arch from machine hardware]
 
-###Openstack Provider:
+### OpenStack:
 - Unsupported: [tags, cpu-power]
 - Valid values: instance-type=[defined on the cloud]; virt-type=[kvm,lxd]
 - Conflicting constraints: [instance-type] vs [mem, root-disk, cpu-cores]
 
-###VSphere Provider:
+### vSphere:
 - Unsupported: [tags, virt-type]
+
+
+<!-- LINKS -->
+
+[charms-constraints]: ./charms-constraints.html

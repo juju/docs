@@ -44,6 +44,13 @@ Where 'cs' denotes the Charm Store.
     A used charm gets cached on the controller's database to minimize network
     traffic for subsequent uses.
 
+A custom name, such as 'mysql1', can be assigned to the application by
+providing an extra argument:
+
+```bash
+juju deploy mysql mysql1
+```
+
 ### Channels
 
 The charm store offers charms in different stages of development. Such stages

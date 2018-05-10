@@ -260,6 +260,6 @@ assistance with the daemon. See upstream documentation for
 <!-- LINKS -->
 
 [clouds-lxd]: ./clouds-LXD.html
-[lxd-upstream]: https://github.com/lxc/lxd/blob/master/doc/configuration.md
+[lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
 [logs]: ./troubleshooting-logs.html
 [credentials]: ./credentials.html
