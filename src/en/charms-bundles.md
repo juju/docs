@@ -189,8 +189,8 @@ machines:
 To make your bundle as reusable as possible, it's common to set minimum
 constraints against a charmed application, much like you would when deploying
 charms from the command line. This is a simple key addition to the application
-definition, using the proper constraint key/value pair as outlined in the
-['constraints' documentation][constraints-docs].
+definition, using the proper constraint key/value pair as outlined on the
+[Using constraints][charms-constraints] page.
 
 For example, to add memory and CPU constraints to a charm in a bundle, the
 bundle file would have an additional `constraints` field with specific values:
@@ -508,6 +508,6 @@ Freenode) who can assist. You can also use the
 [store]: https://jujucharms.com/q/?type=bundle
 [store-docs]: ./authors-charm-store.html
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
-[constraints-docs]: ./charms-constraints.html
+[charms-constraints]: ./charms-constraints.html
 [discover-config-options-docs]: ./charms-config.html#discovering-application-configuration-options
 [charm-resources-docs]: ./developer-resources.html
