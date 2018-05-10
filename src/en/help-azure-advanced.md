@@ -159,9 +159,9 @@ You should now continue reading the main
 controller-creation step.
 
 !!! Note:
-    If you add more than one credential you will need to either specify it
+    If you add more than one credential you will need to either specify one
     while creating the controller (`juju bootstrap --credential`) or set a
-    default one (`juju set-default-credential`) before doing so.
+    default (`juju set-default-credential`) before doing so.
 
 
 <!-- LINKS -->
