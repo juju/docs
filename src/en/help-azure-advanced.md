@@ -1,4 +1,4 @@
-Title: 
+Title: Using Microsoft Azure with Juju - advanced
 
 # Using Microsoft Azure with Juju - advanced
 
@@ -8,27 +8,28 @@ with Juju. The main page is [here][clouds-azure].
 ## Manually adding Azure credentials
 
 The manual option is useful if Juju fails to automatically gather your
-credentials, or if you want to automate the process within a testing
-environment.
+credentials, or if you want to automate the process.
 
-Selecting the `service-principal-secret` authentication option when running
-`juju add-credential azure` will require you to configure and retrieve specific
-details from your Azure cloud: 
+### Gathering values
+
+We will need values for the following bits of information:
 
  - application-id
  - subscription-id
  - application-password
+ - application-name
+ - tenant-id
 
 In the sections below, we will assign each of these a variable name.  When you
 enter them into the command, replace the variable name we give with the actual
 ID that corresponds to the variable.
 
-!!! Note:
-    Make sure you have the Azure CLI installed and that you've used `az login`
-    to authorize the session. See **[Credentials][anchor__credentials]** above for more
-    details.
+!!! Important:
+    This process requires the Azure CLI tool to be installed and a successful
+    login with it. See [Install the CLI tool][clouds-azure-cli-install] and
+    [Log in to Azure][clouds-azure-cli-login] respectively.
 
-### `subscription-id`
+#### `subscription-id`
 
 List your account. Note the subscription ID, the **SUB_ID**.
 
@@ -61,46 +62,53 @@ In our sample, **SUB_ID** is the second line line, so:
 SUB_ID=f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
 ```
 
-### `application-password` and  `application-id`
+#### `application-password` and `application name`
 
-Create a password for the application to use. In our sample:
+Create a password for the application to use. You will also need to come up
+with an arbitrary application name (typically an internet domain). In our
+example:
 
 ```bash
 APP_PASSWORD=some_password
+APP_NAME=ubuntu.example.com
 ```
 
 Now create an Active Directory (Kerberos) server principal and grant the
 required resource permissions by assigning a role of ***Owner***:
 
 ```bash
-az ad sp create-for-rbac --name "ubuntu.example.com" --password $APP_PASSWORD --role Owner
+az ad sp create-for-rbac --name "$APP_NAME" --password $APP_PASSWORD --role Owner
 ```
 
-The `--name` option is arbitrary but you should use a unique value that makes
-sense for your environment. The command output will be similar to the
-following:
+The command output will be similar to the following:
 
 ```yaml
 {
   "appId": "01dfe0e9-f088-4d00-9fcf-2129de64d5d3",
   "displayName": "ubuntu.example.com",
   "name": "http://ubuntu.example.com",
-  "password": "$APP_PASSWORD",
+  "password": "some_password",
   "tenant": "0fb95fd9-f42f-4c78-94c9-e3d01c2bc5af"
 }
 ```
 
-We'll be using the value that follows **appId** as **APP_ID** and **tenant** as
-**TENANT_ID**. 
+#### `application-id` and `tenant-id`
 
-You can now test these values by logging in using the application principal as
-your identity:
+In the previous output we'll be using the value that follows **appId** as
+**APP_ID** and **tenant** as **TENANT_ID**. Hence:
 
 ```bash
-az login --service-principal \
-        -u "$APP_NAME" \
-        -p "$APP_PASSWORD" \
-        --tenant "$TENANT_ID"
+APP_ID=01dfe0e9-f088-4d00-9fcf-2129de64d5d3
+TENANT_ID=0fb95fd9-f42f-4c78-94c9-e3d01c2bc5af
+```
+
+### Verification of values
+
+You can now verify the values we've collected by logging in using the
+application principal as your identity:
+
+```bash
+az login --service-principal -u http://"$APP_NAME" -p "$APP_PASSWORD" --tenant "$TENANT_ID"
 ```
 
 Command output will look similar to the following:
@@ -109,55 +117,56 @@ Command output will look similar to the following:
 [
   {
     "cloudName": "AzureCloud",
-    "id": "49d8c50b-e693-4be8-b906-c7a859149486",
+    "id": "f717c8c1-8e5e-4d38-be7f-ed1e1c879e18",
     "isDefault": true,
     "name": "Pay-As-You-Go",
     "state": "Enabled",
     "tenantId": "0fb95fd9-f42f-4c78-94c9-e3d01c2bc5af",
     "user": {
-      "name": "http://ubuntu2.example.com",
+      "name": "http://ubuntu.example.com",
       "type": "servicePrincipal"
     }
   }
 ]
 ```
 
-You can now run the interactive `juju add-credential azure` command. Select
-`service-principal-secret` as the Auth Type, and supply the following details,
-discovered above, when asked:
+## Add credentials
 
-- **APP_ID**
-- **SUB_ID**
-- **APP_PASSWORD**
-
-A typical `add-credential` step-through will look similar to the following:
+One benefit of adding credentials manually is the ability to automate the
+process. We will therefore use a file (here called `creds.yaml`) to store our
+information:
 
 ```no-highlight
-Enter credential name: az-manual
-
-Auth Types
-  interactive
-  service-principal-secret
-
-Select auth type [interactive]: service-principal-secret
-
-Enter application-id: http://ubuntu.example.com
-Enter subscription-id: 49d8c50b-e693-4be8-b906-c7a859149486
-Enter application-password: $APP_PASSWORD
-
-Credentials added for cloud azure.
+credentials:
+  azure:
+    az-manual4:
+      auth-type: service-principal-secret
+      application-id: 01dfe0e9-f088-4d00-9fcf-2129de64d5d3
+      subscription-id: f717c8c1-8e5e-4d38-be7f-ed1e1c879e18
+      application-password: some_password
 ```
 
-You can now [create the controller](#create-controller).
+Now run the following command to add your Azure credentials to Juju:
 
-Alternately, you can also use this credential with [Juju as a Service][jaas] and
-create and deploy your model using its GUI.
+```bash
+juju add-credential -f creds.yaml azure
+```
+
+## Next steps
+
+You should now continue reading the main
+[Using Microsoft Azure with Juju][clouds-azure-controller] page at the
+controller-creation step.
 
 !!! Note:
-    If you add more than one credential, you will also need to set the
-    default one to use with `juju set-default-credential`
+    If you add more than one credential you will need to either specify it
+    while creating the controller (`juju bootstrap --credential`) or set a
+    default one (`juju set-default-credential`) before doing so.
 
 
 <!-- LINKS -->
 
 [clouds-azure]: ./help-azure.html
+[clouds-azure-controller]: ./help-azure.html#create-the-juju-controller
+[clouds-azure-cli-install]: ./help-azure.html#install-the-cli-tool
+[clouds-azure-cli-login]: ./help-azure.html#log-in-to-azure
