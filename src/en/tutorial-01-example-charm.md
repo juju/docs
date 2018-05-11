@@ -12,6 +12,7 @@ This guide will go through the first basic concepts of charm development:
 * Deploying the example charm with juju.
 
 ## Setup up a basic workbench
+
 This is how a typical workbench looks like:
 
   - **A Juju controller**: To deploy developed charms to. You can [start here][getting-started] to get one up and running.
@@ -36,7 +37,8 @@ This is how a typical workbench looks like:
     source ~/.bashrc
 ```
 
-## Creating the example charm with "charm tools".
+## Creating the example charm with "charm tools"
+
 To simplify creation of new charms, charmtools exist for us. Lets start a new charm that we name: "layer-example".
 
 ```bash
@@ -68,6 +70,7 @@ layer-example
 Note! Prefixing the charm directory name with 'layer-' is a naming convention. It tells us that this charm is a 'reactive' charm.
 
 ## Validating the charm
+
 If we were to build our charm now, it would fail because its created with defaults. We can see this, by running "charm proof" to validate our charm structure:
 ```bash
 cd ~/charms/layers
@@ -91,9 +94,9 @@ I: missing recommended hook install
 I: missing recommended hook start
 I: missing recommended hook stop
 I: missing recommended hook config-changed
-
 ```
-Lets get rid of these E: errors by making editing the following files to look like this:
+
+Let's get rid of these `E: errors` by making the following files look like this:
 
 **layer-example/layer.yaml**
 <pre>
@@ -112,8 +115,7 @@ tags:
   - tutorials
 </pre>
 
-**layer-example/reactive/layer_example.py
-**
+**layer-example/reactive/layer_example.py**
 ```python
 from charms.reactive import when, when_not, set_state
 
@@ -121,6 +123,7 @@ from charms.reactive import when, when_not, set_state
 def install_example():
     set_state('example.installed')
 ```
+
 ### Building the example charm
 
 We are ready to build our charm now with charm tools.
@@ -141,8 +144,8 @@ proof: W: README.ex includes boilerplate: You can then browse to http://ip-addre
 proof: W: README.ex includes boilerplate: - Upstream mailing list or contact information
 proof: W: README.ex includes boilerplate: - Feel free to add things if it's useful for users
 proof: I: all charms should provide at least one thing
-
 ```
+
 Great work! Your charm is assembled and placed in the '$JUJU_REPOSITORY/trusty/example' directory. Go ahead and look in to it before we move on.
 
 ### Adding functionality via a layer
@@ -193,38 +196,44 @@ def set_message_hello():
 ```
 
 Lets build again with our changes.
+
 ```bash
 cd ~/charms/layers/
 charm build layer-example
 ```
 
 The charm will now be built and the final charm assemble ends up in 
-~/charms/layers/trusty/example
+'~/charms/layers/trusty/example'
 
 Deploy it with juju:
+
 ```bash
 juju deploy example
 ```
-After some time, juju status will show the "Hello World" message.
+
+After some time, `juju status` will show the "Hello World" message.
 
 Congratulations, you have completed the first basic excersise in charm development!
 
 ## Next lesson: Interfaces
-Building on your new knowledge, your should try to the Vanilla example which introduce 'interfaces' to charms.
+
+Building on your new knowledge, you should try out the Vanilla example which introduces 'interfaces' to charms.
 
 ## More to learn from this tutorial:
 
 ### Layers vs Charms
+
 One way of thinking about layers in relation to charms, is in terms of libraries or modules. A compilation of layers results in a charm that can be deployed by the juju engine.
 
 *Tip!
 There are a lot of pre exising layers included in charm tools, you can find them here [interfaces.juju.solutions][interfaces])*
 
 ### Reactive programming
+
 Most programmers expects their applications to be executing from a clear "main()" start and move on step by step towards an exit. Reactive programming is 'somewhat' different in how you plan the execution.
 
 In reactive programming, a good way of thinking about your program, is that it has many "main()" entry points. Which one is execute, depends on how you chose to act on the different states/flags communicated to you by the juju engine. 
 
 The principle is that juju engine signals your application, and you write code/functions to act on this information. Your code then raises new flags/states to communicate with the rest of the system.
 
-This is what the '@when(some.flag.raised)' etc. decorators are all about.
+This is what the `@when(some.flag.raised)` decorators are all about.
