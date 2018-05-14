@@ -144,7 +144,8 @@ sudo add-apt-repository -yu ppa:juju/devel
 sudo apt install juju
 ```
 
-Leading edge builds are only available with snaps (via the 'edge' channel).
+!!! Note:
+    The alpha builds are only available with snaps (via the 'edge' channel).
 
 ### Other platforms
 
