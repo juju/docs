@@ -5,15 +5,55 @@ Title: Juju Release Notes
 This page details all available release notes for the 2.x series of Juju. The
 release notes for the 1.x series are available [here][release-notes-1].
 
-<!--
-USE THE NEW & IMPROVED 'Feedback' and 'More information' SECTIONS THAT STARTED
-TO APPEAR WITH 2.3.5
+^# Juju 2.4-beta2
+  
+  A new development release of Juju is here, 2.4-beta2. Do not use on
+  production systems.
+  
+  ## New and improved.
+  
+  - HA improvements and fixes
+  - New controller time added to status output
+  
+  ## Fixes
+  
+  For a list of all bugs fixed in this release, see
+  the [2.4-beta2 milestone](https://launchpad.net/juju/+milestone/2.4-beta2).
+  
+  Some important fixes/improvements include:
+  
+  [LP 1764317](https://bugs.launchpad.net/bugs/1764317) bionic LXD containers on bionic hosts get incorrect /etc/resolve.conf files  
+  [LP 1765571](https://bugs.launchpad.net/bugs/1765571) lxd container fails to launch on bionic host: No associated target operation
+  
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  To get the beta version of Juju use the `--beta` channel in the `snap`
+  package:
+  
+  	  sudo snap install juju --beta --classic
 
-ALSO CONSIDER "LINKIFYING" STUFF. INCLUDE 2 EMPTY SPACES AT EOL TO GET A
-CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
+  You can switch to the latest stable version with:
 
-IMPORTANT: UPDATE THE INSTALL PAGE AT THE SAME TIME (reference-install.md).
--->
+  	  sudo snap refresh juju --stable
+
+  See [Reference: Installing Juju][reference-install] for details on
+  installation methods.
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the
+  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
 
 ^# Juju 2.4-beta1
   
@@ -2568,3 +2608,4 @@ IMPORTANT: UPDATE THE INSTALL PAGE AT THE SAME TIME (reference-install.md).
 <!-- LINKS -->
 
 [release-notes-1]: ./reference-release-notes-1.html
+[reference-install]: ./reference-install.html
