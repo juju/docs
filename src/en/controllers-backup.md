@@ -1,369 +1,238 @@
-Title: Back up and restore Juju  
-TODO:  Critical: Review required
+Title: Controller backups
+TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1771433
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1771426
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1771399
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1771202
   
-  
-# Backing Up and Restoring Juju
+# Controller backups
 
-It is always a good idea to keep backups, and it is possible to back up both 
-the Juju client environment and any Juju controllers to be able to reconnect
-to running cloud environments. Both the backing up and restore procedures 
-for each are detailed below.
+Data backups can be made of the Juju client and the Juju controller. This page
+concerns itself with the controller aspect only. For information on client
+backups see the [Juju client][client-backups] page.
 
-## The Juju client
+A backup of a controller enables ones to fully re-establish the configuration
+and state of a controller (and all its associated models/applications). A
+controller backup should therefore be seen as more of an environment backup.
 
-It is easy to forget that your client environment needs to be backed up. Aside 
-from things like the 'credentials.yaml' file, which you may be able to 
-recreate, it contains unique files such as Juju's SSH keys, which are vital to 
-be able to connect to a running instance. In order to also save any additional
-configuration files (such as the files used by running models) it is usually 
-best to simply back up the entire Juju directory (`~/.local/share/juju`).
+<!-- It does not influence the instances on the backing cloud -->
 
-!!! Note: 
-    On Windows systems, the Juju directory is in a different place
-    (usually `C:\Users\{username}\AppData\Roaming\Juju`. Also, although `tar` is 
-    available for Windows, you may prefer to use a more Windows-centric backup 
-    application.
+This page will cover the following topics:
 
-### A simple backup of the Juju client directory
-
-As the Juju directory is simply just another directory on your filesystem, you 
-may wish to include it in any regular backup procedure you already have. For a 
-simple backup on an Ubuntu system, you can just use `tar` to create an archive 
-of the directory:
-
-```bash
-cd ~
-tar -cpzf juju-client-$(date "+%Y%m%d-%H%M%S").tar.gz .local/share/juju 
-```
-
-This command datestamps the created file for easy identification. You may, of
-course, call it what you wish. 
-
-!!! Note: 
-    As mentioned previously, the files in this backup include the keys 
-    Juju uses to connect to running environments. Anybody who has access to this 
-    backup will be able to connect to and use your controllers/models, so a 
-    further step of encrypting this backup file may be advisable.
- 
-### Restoring ~/.local/share/juju
-
-For Ubuntu, restoring your Juju client settings is a simple matter of
-extracting the archive you created above.
-
-```bash
-cd ~
-tar xzf juju-yymmdd-hhmmss.tar.gz 
-```
-
-!!! Note: 
-    This command will extract the contents of the archive and overwrite 
-    any existing files in the Juju directory. Please be sure that this is what you 
-    want!
-
+ - Creating a backup
+ - Managing backups
+ - Restoring from a backup
+ - High availability considerations
 
 ## The Juju controller
 
-Juju provides commands for recovering a controller in case of failure. The
-current state is held within the 'controller' model. Therefore, all backup 
-commands need to operate within that model, either by using the 
-'--model controller' argument with each command, or by ensuring you're within
-the 'controller' model prior to using a backup command
-(i.e.`juju switch controller`). In addition, if there are mulitple cloud
-environments, and thus multiple controllers, ensure you are operating on the
-proper controller. The backup commands allow you to create, restore and manage
-backup files containing the controller configuration, keys, and environment
-data. If the controller or its host machine later fails, you can recreate the
-controller from the backup file. For environments with high availability
-enabled, see [the relevant section below](#ha-(high-availability)). 
+Juju provides commands for recovering a controller in case of breakage or in
+the case where the controller ceases to exist, whether by accidental or
+deliberate means.
 
-### Creating a backup file
+The current state is held within the 'controller' model. Therefore, all backup
+commands need to operate within that model, either by using the `-m` (model)
+option, or by ensuring the current model is the 'controller' model.
 
-Use the `create-backup` command to create a new backup file:
+### Creating a backup
 
-```bash
-juju create-backup [--filename=FILENAME] [-m | --model] [--no-download]
+The `create-backup` command is used to create a backup. It does so by
+generating an archive on the controller (a *remote* backup), and unless the
+`--no-download` option is used, it will also be downloaded to the Juju client
+system as a 'tar.gz' file (a *local* backup). The name of the backup is
+composed of the creation time (in UTC) and a unique identifier.
+
+The below examples assume the existence of the following controllers (output to
+`juju controllers`):
+
+```no-highlight
+Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
+aws         default  admin  superuser  aws/us-east-1             2         1  none  2.3.7  
+lxd*        default  admin  superuser  localhost/localhost       2         1  none  2.3.7
 ```
 
-The `create-backup` command generates an archive file for the current
-environment, along with metadata about that file. Unless you issue the
-`--no-download` argument, the archive will be both stored on your controller
-and downloaded to your client as a 'tar.gz' file.
-
-The backup name combines the date and time of a backup with a unique model 
-identifier. The downloaded filename can be changed by using the `--filename` 
-argument, but this won't change the name of the backup on the server.
-
-Examples:
+To create a backup of the 'aws' controller:
 
 ```bash
-juju create-backup -m controller
-juju switch controller; juju create-backup
-juju create-backup --filename backup.tar.gz
+juju create-backup -m aws:controller
 ```
-Note that creating a backup may take a long time.
 
-### Managing Backups
+Sample output:
 
-As each backup is stored on the controller, you can manage backups from 
-whatever client you can connect from, and fetch previous backups if the 
-originally downloaded file has gone astray. You can use the following commands
-to manage and restore your backups:
+```no-highlight
+20180515-191942.7e45250b-637a-4dc9-8389-c6aa70100cd6
+downloading to juju-backup-20180515-191942.tar.gz
+```
 
-### juju backups    
+From the name of the archive we see that the backup was made on May 15, 2018 at
+19:19:42 UTC.
 
-usage: `juju backups [-m | --model]`
-
-The `backups` command will display the names of all the backups currently 
-available on the controller. 
+!!! Warning:
+    When storing backups from multiple controllers the default filenames do not
+    reflect their associated controller, making it hard to distinguish among
+    them. The `--filename` option allows one to specify a custom name for the
+    file. This does not affect the remote archive name.
+    
+To create a backup of the 'lxd' controller while both adding an optional note
+and using a custom filename:
 
 ```bash
-juju backups
+juju create-backup -m lxd:controller --filename juju-backup-lxd-20180515-193724.tar.gz "fresh lxd controller"
 ```
-The output will look something like the following:
+
+The optional note is exposed via the `show-backup` command detailed below.
+
+!!! Note:
+    A backup of a fresh (empty) environment, regardless of cloud type, is
+    approximately 56 MiB in size.
+
+### Managing backups
+
+The following commands are available for managing backups (apart from
+restoring):
+
+ - `juju backups`
+ - `juju show-backup`
+ - `juju download-backup`
+ - `juju upload-backup`
+ - `juju remove-backup`
+
+#### `juju backups`
+
+The `backups` command displays the names of all remote backups for a given
+controller. For instance, to see all remotely stored backups for the 'lxd'
+controller:
 
 ```bash
-20160428-172122.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
-20160429-083238.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
-20160429-091444.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
-20160429-091622.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
-20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+juju backups -m lxd:controller
 ```
 
-The appended alphanumeric string is not actually random gibberish, but is 
-a model identifier for the instance the backup was created on. This 
-information is not normally useful to the end user, but it does help give all 
-backup files a unique name.
+Sample output:
 
-### juju download-backup
+```no-highlight
+20180515-193724.9c6a3650-2957-489a-8f0c-6c3b5ce2e055
+20180515-195557.9c6a3650-2957-489a-8f0c-6c3b5ce2e055
+```
 
-usage: `juju download-backup  [--filename=FILENAME] [-m | --model] <ID>`
+### `juju show-backup`
 
-The `download-backup` command will fetch the backup specified from the 
-environment and download it for local storage. The `<ID>` is the identifier for 
-the backup, as shown in the output of the `create-backup` and `backups` 
-commands. If the `--filename` argument is used, the backup is downloaded to 
-the current directory using the name from the argument.
-
-Examples:
+The `show-backup` command provides a metadata record for a specific remote
+backup (identified via the `backups` command). For example, to query a backup
+stored on the 'lxd' controller:
 
 ```bash
-juju download-backup 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+juju show-backup -m lxd:controller 20180515-195557.9c6a3650-2957-489a-8f0c-6c3b5ce2e055
 ```
-will return the following file:
+
+Sample output:
+
+```no-highlight
+backup ID:       "20180515-193724.9c6a3650-2957-489a-8f0c-6c3b5ce2e055"
+checksum:        "pmxx7bCwtZVV+KM48YKz5w6Boc0="
+checksum format: "SHA-1, base64 encoded"
+size (B):        58605244
+stored:          2018-05-15 19:40:28 +0000 UTC
+started:         2018-05-15 19:37:24 +0000 UTC
+finished:        2018-05-15 19:37:41 +0000 UTC
+notes:           "fresh lxd controller"
+model ID:        "9c6a3650-2957-489a-8f0c-6c3b5ce2e055"
+machine ID:      "0"
+created on host: "juju-e2e055-0"
+juju version:    2.3.7
+```
+
+The `started` time is the most pertinent of the various timestamps. It refers
+to the time the backup was created.
+
+#### `juju download-backup`
+
+The `download-backup` command downloads a specific remote backup (again,
+identified via the `backups` command). Here, we download a backup that is
+stored on the 'aws' controller:
 
 ```bash
-juju-backup-20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4.tar.gz
+juju download-backup -m aws:controller 20180515-191942.7e45250b-637a-4dc9-8389-c6aa70100cd6
 ```
 
-Using `--filename` to change the name of the download:
+#### `juju upload-backup`
 
-```bash
-juju download-backup --filename backup.tar.gz 
-20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
-```
-
-will return:
-
-```bash
-backup.tar.gz
-```
-
-### juju show-backup 
-
-usage: `juju show-backup [-m | --model] <ID>`
-  
-This command outputs the complete metadata record for the specified backup.
-
+The `upload-backup` command uploads a specific local backup to a controller.
 For example:
 
 ```bash
-juju show-backup 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+juju upload-backup -m lxd:controller juju-backup-20180515-193724.tar.gz
 ```
 
-will result in output such as:
+!!! Important:
+    It is not possible to upload a file that corresponds to a backup stored
+    remotely. The process will be cancelled and an error message will be
+    printed.
 
-```no-highlight
-backup ID:       "20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4"
-checksum:        "7ChuK/4IWCzd4XysP9j0UMFRCL8="
-checksum format: "SHA-1, base64 encoded"
-size (B):        45565185
-stored:          2016-04-29 09:20:59 +0000 UTC
-started:         2016-04-29 09:20:34 +0000 UTC
-finished:        2016-04-29 09:20:50 +0000 UTC
-notes:           ""
-model ID:        "e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4"
-machine ID:      "0"
-created on host: "juju-e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4-machine-0"
-juju version:    2.0
-```
+#### `juju remove-backup`
 
-### juju remove-backup  
-usage: `juju remove-backup [-m | --model] <ID>`
-
-If you wish to remove a particular backup file from the controller (perhaps 
-to save space!), you can use the `remove-backup` command with the appropriate 
-ID:
-
-```bash 
-juju remove-backup 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
-```
-After a short time, you should see a confirmation:
+The `remove-backup` command removes a specific remote backup from a controller.
+For instance:
 
 ```bash
-successfully removed: 20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+juju remove-backup -m aws:controller 20180515-191942.7e45250b-637a-4dc9-8389-c6aa70100cd6
 ```
-
-
-### juju upload-backup  
-usage: `juju upload-backup [-m | --model] <filename>`
-
-As well as downloading backups from the controller, it is also possible
-to upload them. This can be useful either to break up the process of restoring 
-from a backup (upload the file, then restore using the ID), or in the case 
-where backups have been removed from the state server. On completion, the 
-command will return all the metadata for the uploaded backup file. 
-
-Examples:
-
-```bash
-juju upload-backup backup.tar.gz
-```
-will result in output such as:
-
-```no-highlight
-backup ID:       "20160429-092034.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4"
-checksum:        "7ChuK/4IWCzd4XysP9j0UMFRCL8="
-checksum format: "SHA-1, base64 encoded"
-size (B):        45565185
-stored:          2016-04-29 10:46:22 +0000 UTC
-started:         2016-04-29 09:20:34 +0000 UTC
-finished:        2016-04-29 10:32:35 +0000 UTC
-notes:           ""
-model ID:        "e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4"
-machine ID:      "0"
-created on host: "juju-e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4-machine-0"
-juju version:    2.0
-```
-
-The metadata of uploaded files will reflect the time it was stored, but should
-also determine the correct date and time for when the backup was 
-started/completed. It's this date and time that's used to name the backup on 
-the controller.
-
-!!! Note: 
-    The filename you use to store local backups does not matter, but the 
-    uploaded file is expected to be a gzipped tar file (e.g. a `.tgz` or `.tar.gz` 
-    file)
 
 ### Restoring from a backup
 
-usage: `juju restore-backup --id=<ID> | --file=<filname> [-b] [-m | --model] 
-[--upload-tools] [--constraints=<string>]`
-
-If the controller is still operational it can be restored from one of the
-stored backups by specifying the ID:
+To revert the state on an environment to a previous time the `restore-backup`
+command is used. This command requires the use of the `--id` option:
 
 ```bash 
-juju restore-backup --id=20160429-091622.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
+juju restore-backup --id=20180515-193724.9c6a3650-2957-489a-8f0c-6c3b5ce2e055
 ```
 
-It is also possible to restore from a local backup file by instead specifying
-the filename. This will then be uploaded to the controller and used to 
-restore it:
+To use a local backup instead:
 
 ```bash
-juju restore-backup --file=backup.tar.gz
+juju restore-backup --file=juju-backup-lxd-20180515-193724.tar.gz
 ```
-In the case that the original controller no longer exists, it is possible to 
-re-bootstrap the environment and restore the backup to the new controller. 
-To do this, use the '-b' switch:
+
+!!! Important:
+    It is not possible to restore using a local backup (`--file`) that
+    corresponds to a backup stored remotely. The process will be cancelled and
+    an error message will be printed. The remote backup should just be used
+    instead.
+
+If the controller no longer exists, a new one can be created during the restore
+process with the use of the `-b` option. Naturally, this use case requires the
+use of a local backup:
 
 ```bash
 juju restore-backup -b --file=backup.tar.gz
 ```
-When re-bootstrapping, you can upload a local version of the tools with the 
-`--upload-tools` argument, just as you might with the original bootstrap 
-procedure. It is also possible to specify constraints for the newly created 
-bootstrap node, for example:
+
+It is also possible to specify constraints for the new controller with the aid
+of the `--constraints` option:
 
 ```bash
-juju restore-backup -b --constraints="mem=4G" --file=backup.tar.gz
-```
-Read the [constraints reference page](./reference-constraints.html) for more
-information on the constraints which may be used.
-
-## HA (High Availability)
-
-As stated in [Juju HA](./controllers-ha.html), high availability, in general
-terms, indicates that a Juju environment has 3 or more (up to 7) redundant
-controllers. In the normal course of operation, this means that requiring a
-backup is less likely. As long as one of the original controller remains, the
-others can be replaced by simply running the `juju enable-ha` command again.
-
-The contemplated case for HA backup/restore is when you have lost all your
-controllers and need to recover a basic setup in order to be able to perform
-the `juju enable-ha` step again.
-
-### Backups on HA
-
-When you perform a backup on a Juju installation which has multiple redundant 
-controllers, the initial controller will be chosen to perform the backup.
-
-As an example, the following environment has 3 active controllers. Running 
-the command:
-
-```bash
-juju status
+juju restore-backup -b --constraints mem=4G --file=backup.tar.gz
 ```
 
-... will return something similar to:
+The [Reference: Juju constraints][reference-constraints] page contains more
+information on constraints.
 
-```no-highlight
-[Services] 
-NAME       STATUS EXPOSED CHARM 
+## High availability considerations
 
-[Units] 
-ID      WORKLOAD-STATUS JUJU-STATUS VERSION MACHINE PORTS PUBLIC-ADDRESS MESSAGE 
+Although [Controller high availability][controllers-ha] makes for a more robust
+(and load balanced) Juju infrastructure, it should not replace the need for
+data backups. It does, however, make the prospect of restoring from backup less
+likely, since as long as one controller cluster member remains, the others can
+be replaced via the `enable-ha` command. The use case for HA backup & restore
+is when *all* controllers have failed.
 
-[Machines] 
-ID         STATE   DNS          INS-ID                               SERIES AZ 
-  
-0          started 10.55.61.153 f9bcfde5-a071-4892-aa05-16212256a125 trusty nova 
-1          started 10.55.61.86  899bd5c0-7b00-4ae5-bf09-fab206bf9b43 trusty nova 
-2          started 10.55.61.89  7d997259-31e5-4390-a14d-2d054685e2cd trusty nova 
-```
-
-Performing a backup on this environment, will be based on the first 
-controller,
-_machine 0_:
-
-```bash
-juju create-backup
-```
-...should return:
-
-```no-highlight
-20160429-124813.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
-downloading to juju-backup-20160429-124813.tar.gz
-```
-
-As with backing up a non-HA environment, the backup file is stored on the 
-controller and automatically downloaded, or you can specify further options
-as [stated above](#creating-a-backup-file).
-
-### Restoring on HA
-
-Please note that a restore must take place when you have lost all your 
-redundant controllers. If that is not the case, simply issuing the
-`juju enable-ha` command will be enough to create a new controller replica on 
-your environment.
+When you perform a backup in an HA context, the initial controller will be
+chosen to perform the backup.
 
 For performing a `restore-backup`, the only check performed by the utility is 
 to make sure that the initial controller is not up. 
 
-!!! WARNING: 
-    If your Juju environment still contains an existing controller, 
-    restoring a backup will overwrite its data or remove them.
+!!! Warning: 
+    If your Juju environment still contains an existing controller, restoring a
+    backup will overwrite its data or remove them.
 
 To restore an initial bootstrap environment, the procedure is the same as for 
 non-HA environments:
@@ -372,14 +241,12 @@ non-HA environments:
 juju restore-backup  -b --file=backup.tar.gz
 ```
 
-Once this step is completed, you will have a single controller running. To
-recover the rest of the controller replicas, all that remains is to reissue
-the command: 
-
-```bash
-juju enable-ha -n 3
-```
-
-This will create additional controllers based on the restored one.
+Once this step is completed, you will have a single controller running. Read 
+[Controller high availability][controllers-ha] for how to re-enable HA.
 
 
+<!-- LINKS -->
+
+[controllers-ha]: ./controllers-ha.html
+[client-backups]: ./client.html#backups
+[reference-constraints]: ./reference-constraints.html

@@ -51,6 +51,13 @@ navigation:
           - title: VMware vSphere
             location: help-vmware.md
 
+      - title: Juju client
+        location: client.md
+
+        children:
+          - title: Create/Bootstrap
+            location: controllers-creating.md
+
       - title: Controllers
         location: controllers.md
 
@@ -61,7 +68,7 @@ navigation:
             location: controllers-gui.md
           - title: High Availability
             location: controllers-ha.md
-          - title: Backups
+          - title: Controller backups
             location: controllers-backup.md
 
       - title: Models
