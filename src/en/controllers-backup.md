@@ -1,8 +1,10 @@
 Title: Controller backups
 TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1771433
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771426
-       Bug tracking: https://bugs.launchpad.net/juju/+bug/1771399
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771202
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1771673
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1771657
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1771674
   
 # Controller backups
 
@@ -10,9 +12,9 @@ Data backups can be made of the Juju client and the Juju controller. This page
 concerns itself with the controller aspect only. For information on client
 backups see the [Juju client][client-backups] page.
 
-A backup of a controller enables ones to fully re-establish the configuration
-and state of a controller (and all its associated models/applications). A
-controller backup should therefore be seen as more of an environment backup.
+A backup of a controller enables one to re-establish the configuration and
+state of a controller (and all its associated models/applications). A
+controller backup can therefore be seen as an environment backup.
 
 <!-- It does not influence the instances on the backing cloud -->
 
@@ -26,12 +28,15 @@ This page will cover the following topics:
 ## The Juju controller
 
 Juju provides commands for recovering a controller in case of breakage or in
-the case where the controller ceases to exist, whether by accidental or
-deliberate means.
+the case where the controller no longer exists.
 
 The current state is held within the 'controller' model. Therefore, all backup
-commands need to operate within that model, either by using the `-m` (model)
-option, or by ensuring the current model is the 'controller' model.
+commands need to operate within that model explicitly (`-m` option) or by
+ensuring the current model is the 'controller' model.
+
+In the provided example commands, both the controller name and the 'controller'
+model are expressed explicitly. Due to the delicate nature of data backup
+operations, this method is highly recommended.
 
 ### Creating a backup
 
@@ -162,7 +167,7 @@ For example:
 juju upload-backup -m lxd:controller juju-backup-20180515-193724.tar.gz
 ```
 
-!!! Important:
+!!! Note:
     It is not possible to upload a file that corresponds to a backup stored
     remotely. The process will be cancelled and an error message will be
     printed.
@@ -178,42 +183,56 @@ juju remove-backup -m aws:controller 20180515-191942.7e45250b-637a-4dc9-8389-c6a
 
 ### Restoring from a backup
 
-To revert the state on an environment to a previous time the `restore-backup`
-command is used. This command requires the use of the `--id` option:
+To revert the state of an environment to a previous time the `restore-backup`
+command is used.
+
+!!! Warning:
+    The restore process does not validate that a backup archive corresponds to
+    its controller. It is therefore possible to overwrite a controller with the
+    wrong backup.
+
+This command requires the use of the `--id` option when referring to a remote
+backup:
 
 ```bash 
-juju restore-backup --id=20180515-193724.9c6a3650-2957-489a-8f0c-6c3b5ce2e055
+juju restore-backup -m lxd:controller --id=20180515-193724.9c6a3650-2957-489a-8f0c-6c3b5ce2e055
 ```
 
 To use a local backup instead:
 
 ```bash
-juju restore-backup --file=juju-backup-lxd-20180515-193724.tar.gz
+juju restore-backup -m lxd:controller --file=juju-backup-lxd-20180515-193724.tar.gz
 ```
 
-!!! Important:
+!!! Note:
     It is not possible to restore using a local backup (`--file`) that
     corresponds to a backup stored remotely. The process will be cancelled and
     an error message will be printed. The remote backup should just be used
     instead.
 
 If the controller no longer exists, a new one can be created during the restore
-process with the use of the `-b` option. Naturally, this use case requires the
-use of a local backup:
+process with the use of the `-b` option. Naturally, this scenario calls for
+the use of a local backup:
 
 ```bash
-juju restore-backup -b --file=backup.tar.gz
+juju restore-backup -m lxd:controller -b --file=backup.tar.gz
 ```
+
+!!! Important:
+    A controller cannot be re-created if the original one was removed via
+    the `destroy-controller` or `kill-controller` commands. This is due to
+    re-creation being dependent upon the client's awareness of the controller,
+    which is something that the aforementioned commands erase.
 
 It is also possible to specify constraints for the new controller with the aid
 of the `--constraints` option:
 
 ```bash
-juju restore-backup -b --constraints mem=4G --file=backup.tar.gz
+juju restore-backup -m lxd:controller -b --constraints mem=4G --file=backup.tar.gz
 ```
 
-The [Reference: Juju constraints][reference-constraints] page contains more
-information on constraints.
+See [Reference: Juju constraints][reference-constraints] for more information
+on constraints.
 
 ## High availability considerations
 
