@@ -5,7 +5,9 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1771433
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771673
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771657
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771674
-  
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1771821
+       Put back HA section when HA feature set has stabalized
+
 # Controller backups
 
 Data backups can be made of the Juju client and the Juju controller. This page
@@ -13,17 +15,20 @@ concerns itself with the controller aspect only. For information on client
 backups see the [Juju client][client-backups] page.
 
 A backup of a controller enables one to re-establish the configuration and
-state of a controller (and all its associated models/applications). A
-controller backup can therefore be seen as an environment backup.
-
-<!-- It does not influence the instances on the backing cloud -->
+state of a controller. It does **not** influence workload instances on the
+backing cloud. That is, if such an instance is terminated directly in the cloud
+then a controller restore cannot re-create it. However, as we'll see, a restore
+does have the ability to re-create a controller instance.
 
 This page will cover the following topics:
 
  - Creating a backup
  - Managing backups
  - Restoring from a backup
+
+<!-- REMOVING THIS TEMPORARILY
  - High availability considerations
+-->
 
 ## The Juju controller
 
@@ -31,12 +36,11 @@ Juju provides commands for recovering a controller in case of breakage or in
 the case where the controller no longer exists.
 
 The current state is held within the 'controller' model. Therefore, all backup
-commands need to operate within that model explicitly (`-m` option) or by
-ensuring the current model is the 'controller' model.
-
-In the provided example commands, both the controller name and the 'controller'
-model are expressed explicitly. Due to the delicate nature of data backup
-operations, this method is highly recommended.
+commands need to operate within that model explicitly or by ensuring the
+current model is the 'controller' model. In the examples provided below, both
+the controller name and the model name are expressed explicitly (e.g.
+`-m aws:controller`). Due to the delicate nature of data backups, this method
+is highly recommended.
 
 ### Creating a backup
 
@@ -72,13 +76,13 @@ From the name of the archive we see that the backup was made on May 15, 2018 at
 19:19:42 UTC.
 
 !!! Warning:
-    When storing backups from multiple controllers the default filenames do not
-    reflect their associated controller, making it hard to distinguish among
-    them. The `--filename` option allows one to specify a custom name for the
-    file. This does not affect the remote archive name.
-    
-To create a backup of the 'lxd' controller while both adding an optional note
-and using a custom filename:
+    Archive filenames do not include the associated controller name. Care
+    should therefore be taken when archiving from multiple controllers. To
+    specify a custom name use the `--filename` option. This option does not
+    affect the remote archive name.
+
+To create a backup of the 'lxd' controller while both using a custom filename
+and adding an optional note:
 
 ```bash
 juju create-backup -m lxd:controller --filename juju-backup-lxd-20180515-193724.tar.gz "fresh lxd controller"
@@ -188,51 +192,52 @@ command is used.
 
 !!! Warning:
     The restore process does not validate that a backup archive corresponds to
-    its controller. It is therefore possible to overwrite a controller with the
-    wrong backup.
+    the controller it was created from. Make sure you do not overwrite a
+    controller with the wrong backup.
 
 This command requires the use of the `--id` option when referring to a remote
 backup:
 
 ```bash 
-juju restore-backup -m lxd:controller --id=20180515-193724.9c6a3650-2957-489a-8f0c-6c3b5ce2e055
+juju restore-backup -m lxd:controller --id 20180515-193724.9c6a3650-2957-489a-8f0c-6c3b5ce2e055
 ```
 
-To use a local backup instead:
+To apply a local backup the `--file` option must be used:
 
 ```bash
-juju restore-backup -m lxd:controller --file=juju-backup-lxd-20180515-193724.tar.gz
+juju restore-backup -m lxd:controller --file juju-backup-lxd-20180515-193724.tar.gz
 ```
 
 !!! Note:
-    It is not possible to restore using a local backup (`--file`) that
-    corresponds to a backup stored remotely. The process will be cancelled and
-    an error message will be printed. The remote backup should just be used
-    instead.
+    It is not possible to restore using a local backup that is equivalent to a
+    remote backup. The process will be cancelled and an error message will be
+    printed. The remote backup should just be used instead.
 
 If the controller no longer exists, a new one can be created during the restore
 process with the use of the `-b` option. Naturally, this scenario calls for
 the use of a local backup:
 
 ```bash
-juju restore-backup -m lxd:controller -b --file=backup.tar.gz
+juju restore-backup -m lxd:controller -b --file backup.tar.gz
 ```
 
 !!! Important:
-    A controller cannot be re-created if the original one was removed via
-    the `destroy-controller` or `kill-controller` commands. This is due to
-    re-creation being dependent upon the client's awareness of the controller,
-    which is something that the aforementioned commands erase.
+    A controller cannot be re-created if the original one was removed via the
+    `destroy-controller`, `kill-controller`, or `unregister` commands. This is
+    due to re-creation being dependent upon the client's awareness of the
+    controller, which is something that the aforementioned commands erase.
 
 It is also possible to specify constraints for the new controller with the aid
 of the `--constraints` option:
 
 ```bash
-juju restore-backup -m lxd:controller -b --constraints mem=4G --file=backup.tar.gz
+juju restore-backup -m lxd:controller -b --constraints mem=4G --file backup.tar.gz
 ```
 
 See [Reference: Juju constraints][reference-constraints] for more information
 on constraints.
+
+<!-- REMOVING THIS TEMPORARILY
 
 ## High availability considerations
 
@@ -257,11 +262,13 @@ To restore an initial bootstrap environment, the procedure is the same as for
 non-HA environments:
 
 ```bash
-juju restore-backup  -b --file=backup.tar.gz
+juju restore-backup  -b --file backup.tar.gz
 ```
 
 Once this step is completed, you will have a single controller running. Read 
 [Controller high availability][controllers-ha] for how to re-enable HA.
+
+-->
 
 
 <!-- LINKS -->
