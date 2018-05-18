@@ -54,10 +54,6 @@ navigation:
       - title: Juju client
         location: client.md
 
-        children:
-          - title: Create/Bootstrap
-            location: controllers-creating.md
-
       - title: Controllers
         location: controllers.md
 

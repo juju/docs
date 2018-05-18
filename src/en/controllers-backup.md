@@ -6,13 +6,8 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1771433
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771657
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771674
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771821
-       Put back HA section when HA feature set has stabalized
 
 # Controller backups
-
-Data backups can be made of the Juju client and the Juju controller. This page
-concerns itself with the controller aspect only. For information on client
-backups see the [Juju client][client-backups] page.
 
 A backup of a controller enables one to re-establish the configuration and
 state of a controller. It does **not** influence workload instances on the
@@ -25,10 +20,11 @@ This page will cover the following topics:
  - Creating a backup
  - Managing backups
  - Restoring from a backup
-
-<!-- REMOVING THIS TEMPORARILY
  - High availability considerations
--->
+
+!!! Note:
+    Data backups can also be made of the Juju client. See the
+    [Juju client][client-backups] page for guidance.
 
 ## The Juju controller
 
@@ -172,7 +168,7 @@ juju upload-backup -m lxd:controller juju-backup-20180515-193724.tar.gz
 ```
 
 !!! Note:
-    It is not possible to upload a file that corresponds to a backup stored
+    It is not possible to upload a file that is equivalent to a backup stored
     remotely. The process will be cancelled and an error message will be
     printed.
 
@@ -237,38 +233,35 @@ juju restore-backup -m lxd:controller -b --constraints mem=4G --file backup.tar.
 See [Reference: Juju constraints][reference-constraints] for more information
 on constraints.
 
-<!-- REMOVING THIS TEMPORARILY
-
 ## High availability considerations
 
 Although [Controller high availability][controllers-ha] makes for a more robust
 (and load balanced) Juju infrastructure, it should not replace the need for
 data backups. It does, however, make the prospect of restoring from backup less
-likely, since as long as one controller cluster member remains, the others can
-be replaced via the `enable-ha` command. The use case for HA backup & restore
-is when *all* controllers have failed.
+likely, since as long as one controller cluster member remains operational, the
+others can be replaced via the `enable-ha` command. A restore in an HA scenario
+therefore only becomes necessary when *all* controllers have failed. However,
+if a restore *is* applied to a cluster with active members all reachable
+controllers will naturally have their data overwritten.
 
-When you perform a backup in an HA context, the initial controller will be
-chosen to perform the backup.
+Section [Recovering from controller failure][recovering-ha-failure] details how
+to deal with a partially degraded cluster. In the advent that all controllers
+are lost the following steps should be taken:
 
-For performing a `restore-backup`, the only check performed by the utility is 
-to make sure that the initial controller is not up. 
+ 1. Remove all controllers
+ 1. Add one controller and perform a data restore
+ 1. Add new controllers to the desired HA level
 
-!!! Warning: 
-    If your Juju environment still contains an existing controller, restoring a
-    backup will overwrite its data or remove them.
-
-To restore an initial bootstrap environment, the procedure is the same as for 
-non-HA environments:
+To demonstrate this for an initial controller named 'aws', consider a 3-member
+cluster (numbered 0 through 2):
 
 ```bash
-juju restore-backup  -b --file backup.tar.gz
+juju remove-machine -m aws:controller 0
+juju remove-machine -m aws:controller 1
+juju remove-machine -m aws:controller 2
+juju restore-backup -m aws:controller -b --file backup.tar.gz
+juju enable-ha -m aws:controller -n 3
 ```
-
-Once this step is completed, you will have a single controller running. Read 
-[Controller high availability][controllers-ha] for how to re-enable HA.
-
--->
 
 
 <!-- LINKS -->
@@ -276,3 +269,4 @@ Once this step is completed, you will have a single controller running. Read
 [controllers-ha]: ./controllers-ha.html
 [client-backups]: ./client.html#backups
 [reference-constraints]: ./reference-constraints.html
+[recovering-ha-failure]: ./controllers-ha.html#recovering-from-controller-failure
