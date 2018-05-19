@@ -246,7 +246,7 @@ controllers will naturally have their data overwritten.
 
 Section [Recovering from controller failure][recovering-ha-failure] details how
 to deal with a partially degraded cluster. In the advent that all controllers
-are lost the following steps should be taken:
+are unresponsive the following steps should be taken:
 
  1. Remove all controllers
  1. Add one controller and perform a data restore
