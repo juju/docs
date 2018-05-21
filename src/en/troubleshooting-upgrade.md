@@ -47,7 +47,7 @@ sudo service jujud-machine-2 restart
 
 ## Case #2 - An agent does not restart (hook)
 
-The restart of an agent, due to invoking `upgrade-juju` or by manual means (as
+The restart of an agent, due to invoking `upgrade-model` or by manual means (as
 above) may cause a hook for that particular unit/machine to be called. That can
 sometimes lead to hook failures. Connect to that unit using the
 `juju debug-hooks` command, see what is wrong, and retry the hook using the
@@ -88,7 +88,7 @@ To overcome this situation you may force the upgrade by ignoring the agent
 version check:
 
 ```bash
-juju upgrade-juju --ignore-agent-versions
+juju upgrade-model --ignore-agent-versions
 ```
 
 !!! Note:

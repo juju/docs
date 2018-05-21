@@ -100,10 +100,10 @@ all
 |                    |                    | config               |
 |                    |                    | set-constraints      | 
 |                    |                    | model-config         |
-|                    |                    | sync-tools           |
+|                    |                    | sync-agent-binaries  |
 |                    |                    | unexpose             |
 |                    |                    | upgrade-charm        |
-|                    |                    | upgrade-juju         |
+|                    |                    | upgrade-model        |
 
 !!! Note: 
     The '--force' option recognized by some Juju commands bypasses any

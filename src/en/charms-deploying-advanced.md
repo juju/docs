@@ -1,5 +1,6 @@
 Title: Deploying applications - advanced
 TODO:  Verify MAAS spaces example
+       Reconcile 'add-unit' with charms-scaling.md
 
 # Deploying applications - advanced
 
@@ -102,12 +103,11 @@ juju deploy --to 2 haproxy
 
 Below, the `--constraints` option is used during controller creation to ensure
 that each workload machine will have enough memory to run multiple
-applications. MySQL is deployed as the first unit (in the
-'default' model) and so ends up on machine '0'. Then Rabbitmq gets deployed to
-the same machine:
+applications. MySQL is deployed as the first unit (in the 'default' model) and
+so ends up on machine '0'. Then Rabbitmq gets deployed to the same machine:
 
 ```bash
-juju bootstrap --constraints="mem=4G" localhost lxd
+juju bootstrap --constraints mem=4G localhost lxd
 juju deploy mysql
 juju deploy --to 0 rabbitmq-server
 ```
@@ -140,8 +140,7 @@ deploys to a named machine in MAAS.
 ### add-unit --to
 
 The `add-unit` command also supports the `--to` option, including placement
-directives. This allows one to specifically target an existing machine when
-scaling out. For example, to add a unit of 'rabbitmq-server' to machine '1':
+directives. For example, to add a unit of 'rabbitmq-server' to machine '1':
 
 ```bash
 juju add-unit --to 1 rabbitmq-server
@@ -158,6 +157,9 @@ juju add-unit rabbitmq-server -n 4 --to host1,host2,host3,host4
 Any extra placement directives are ignored. If not enough placement directives
 are supplied, then the remaining units will be assigned as normal to a new,
 clean machine.
+
+The `add-unit` command is often associated with scaling out. See the
+[Scaling applications][charms-scaling] page for information on that topic.
 
 ## Deploying to network spaces
 
@@ -266,3 +268,4 @@ mediawiki page.
 [charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints
 [concepts-endpoint]: ./juju-concepts.html#endpoint
 [charms-upgrading-forced]: ./charms-upgrading.html#forced-upgrades
+[charms-scaling]: ./charms-scaling.html

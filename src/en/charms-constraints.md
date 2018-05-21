@@ -1,187 +1,262 @@
-Title: Constraints
+Title: Using constraints
+TODO:  Important: include default resources requested for non-constrained machine
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1768308
+       Consider a diagram for the Defaults section
 
-# Constraints
+# Using constraints
 
-Constraints allow you to choose the hardware (or virtual hardware)
-to which your applications will be deployed, e.g. by specifying the amount of 
-RAM you want them to have. This is particularly useful for making sure that the
-application is deployed somewhere it can actually run efficiently, or that it is
-connected to the right network. Constraints may be set for models and
-applications, with application constraints taking precedence. Changes to
-constraints do not affect any units which have already been placed on machines.
+A *constraint* is a user-defined minimum hardware specification for a machine
+that is spawned by Juju. There are a total of nine types of constraint, with
+the most common ones being 'mem', 'cores', 'root-disk', and 'arch'. The
+definitive constraint resource is found on the
+[Reference: Juju constraints][reference-constraints] page.
 
-For more granularity, it is also possible to add a machine with specific 
-constraints (`juju add-machine`) and then specify that machine when deploying 
-applications ([see the documentation on `juju deploy`](./charms-deploying.html)).
+Several noteworthy constraint characteristics:
 
-## What constraints can be used?
+ - Some constraints are only supported by certain clouds.
+ - Changes to constraint defaults do not affect existing machines.
+ - Multiple constraints are logically AND'd (i.e. the machine must satisfy all
+   constraints).
 
-There is a full list of the constraints used 
-[in the reference section](reference-constraints.html). Be aware that some of 
-these are specific to the type of cloud you are using. For example, one may
-understand an "instance-type" constraint, but another may not. 
+## Clouds and constraints
 
-The most useful constraints for Juju in general are:
-  
-  - **mem** : This indicates the minimum number of megabytes of RAM that must 
-  be available to an application unit. An optional suffix of M/G/T/P indicates
-  the value is mega-/giga-/tera-/peta- bytes.
+The idealized use case is that of stipulating a constraint when deploying an
+application and the backing cloud providing a machine with those exact
+resources. In the majority of cases, however, default constraints may have been
+set (at various levels) and the cloud is unable to supply those exact
+resources.
 
-  - **cores** :  How many cpu cores the host machine should have. This is a
-  crude indicator of system performance.
-    
-  - **spaces** : Target a particular network space, or avoid one. See 
-  [Network spaces][network-spaces].
-  
-  - **arch** : Short for 'architecture', indicates the processor type an
-  application must run on. One of amd64, arm, i386, arm64, or ppc64el.
-  
-With these you can make sure an application has the resources it needs to run 
-properly.
+When the backing cloud is unable to precisely satisfy a constraint, the
+resulting system's resources will exceed the constraint-defined minimum.
+However, if the cloud cannot satisfy a constraint at all then an error will be
+emitted and a machine will not be provisioned.
 
-Constraints can be used with commands that support the '--constraints' option. 
-These are covered in more detail below, but there are some aspects of specifying
-constraints that are worth mentioning first.
+When using the localhost cloud, constraints are ineffectual due the nature of
+this cloud's underlying technology (LXD), where each machine will, by default,
+have access to **all** of the LXD host's resources. Here, an exact hardware
+specification can be requested, but is done at the LXD level (see example
+below).
 
-In the following examples, we will be using the `juju deploy` command, as this
-is the simplest and most frequent case for using constraints. So, to deploy the
-'mariadb' application to a machine with 4 gigabytes of memory or more:
+## Constraint scopes, defaults, and precedence
+
+Constraints can be applied to various levels or scopes. Defaults can be set on
+some of them, and in the case of overlapping configurations a precedence is
+adhered to.
+
+On a per-controller basis, the following constraint **scopes** exist:
+
+ - Controller machine
+ - All models
+ - Single model
+ - Single application
+ - All units of an application
+ - Single machine
+
+So a constraint can apply to any of the above. We will see how to target each
+later on.
+
+Among the scopes, **default** constraints can be set for each with the
+exception of the controller and single machines.
+
+The all-units scope has its default set dynamically. It is the possible
+constraint used in the initial deployment of the corresponding application.
+
+The following **precedence** is observed (in order of priority):
+
+ - Machine
+ - Application (and its units)
+ - Model
+ - All models
+ 
+For instance, if a default constraint ('mem') applies to a single model and
+the same constraint has been stipulated when adding a machine (`add-machine`)
+within that model then the machine's constraint value will be applied.
+
+The dynamic default for units can be overridden by either setting the
+application's default or by adding a machine with a constraint and then
+applying the new unit to that machine.
+
+## Setting constraints for a controller
+
+Constraints are applied to the controller during its creation using the
+`--bootstrap-constraints` option:
+
+```bash
+juju bootstrap --bootstrap-constraints cores=2 google
+```
+
+Here, we want to ensure that the controller has at least two CPUs.
+
+See [Creating a controller][controllers-creating] for details and further
+examples.
+
+!!! Note:
+    Constraints applied with '--bootstrap-constraints' will automatically apply
+    to any future controllers provisioned for high availability (HA). See
+    [Controller high availability][controllers-ha].
+
+## Setting constraints for all models
+
+Constraints can be applied to all models by, again, stating them during the
+controller-creation process, but using the `--constraints` option instead:
+
+```bash
+juju bootstrap --constraints mem=4G aws
+```
+
+Above, we want every machine in every model to have a minimum of four GiB of
+memory.
+
+See [Creating a controller][controllers-creating] for more guidance.
+
+!!! Important:
+    The `--constraints` option also affects the controller. Individual
+    constraints from `--bootstrap-constraints` override any identical
+    constraints from `--constraints`.
+
+For the localhost cloud, the following invocation will achieve a similar goal
+to the previous command (assuming that the LXD containers are using the
+'default' LXD profile):
+
+```bash
+lxc profile set default limits.memory 4GB
+```
+
+Such a command can be issued before or after `juju bootstrap` because it
+affects both future and existing (in real time) machines. See the
+[LXD documentation][lxd-upstream] for more on this topic.
+
+!!! Warning:
+    LXD resource limit changes can potentially impact all containers on the
+    host - not only those acting as Juju machines.
+
+## Setting and displaying constraints for a model
+
+A model's constraints are set, thereby affecting any subsequent machines in
+that model, with the `set-model-constraints` command:
+ 
+```bash
+juju set-model-constraints mem=4G
+```
+
+A model's constraints are displayed with the `get-model-constraints` command:
+
+```bash
+juju get-model-constraints
+```
+
+A model's constraints can be reset by assigning the null value to it:
+ 
+```bash
+juju set-model-constraints mem=
+```
+
+## Setting, displaying, and updating constraints for an application
+
+Constraints at the application level can be set at deploy time, via the
+`deploy` command. To deploy the 'mariadb' charm to a machine that has at least
+4 GiB of memory:
   
 ```bash
 juju deploy mariadb --constraints mem=4G
 ```
 
-To further ensure that it also has at least 2 CPU cores:
+To deploy MySQL on a machine that has at least 6 GiB of memory and 2 CPUs:
   
 ```bash
-juju deploy mariadb --constraints "mem=4G cores=2"
+juju deploy mysql --constraints "mem=6G cores=2"
 ```
 
-!!! Note: 
-    When setting more than one constraint you will need to utilize quotes.
+!!! Note:
+    Multiple constraints are space-separated and placed within quotation
+    marks.
 
-To ignore any constraints which may have been previously set, you can assign a 
-'null' value. If the application or model constraints for the 'mariadb' charm
-have already been set to 8 cpu-cores for example, you can ignore that constraint
-at deploy time with:
+To deploy Apache and ensure its machine will have 4 GiB of memory (or more) as
+well as ignore a possible `cores` constraint (previously set at either the
+model or application level):
   
 ```bash
-juju deploy mariadb --constraints "mem=4G cores=" 
+juju deploy apache2 --constraints "mem=4G cores=" 
 ```
 
-In the event that a constraint cannot be met, the unit will not be deployed.
-
-!!! Note: 
-    Constraints work on an "or better" basis: If you ask for 4 CPUs, you 
-    may get 8, but you won't get 2.
-    
-## Setting constraints for a controller
-
-Constraints can be applied to a controller during its creation
-(`juju bootstrap` command) by using the `--bootstrap-constraints` option. See
-[Creating a controller][controllers-creating] for details and examples.
-
-## Setting default model constraints
-
-Default model constraints can be set during the controller-creation process by
-using the `--constraints` option (with the `juju bootstrap` command). See
-[Creating a controller][controllers-creating] for more information on how to do
-this.
-
-Default model constraints can be overridden for specific models, applications,
-or machines, as detailed below.
-
-## Setting constraints for a model
-
-At the model level, constraints can be set like this:
-  
+An application's current constraints are displayed with the `get-constraints`
+command:
+ 
 ```bash
-juju set-model-constraints mem=4G
+juju get-constraints mariadb
 ```
 
-In this example, any subsequent machines created in this model will have at
-least 4 gigabytes of memory. You can check the current constraints with:
-  
-```bash
-juju get-model-constraints
-```
-
-As with similar commands, you can 'unset' the constraint by setting its value
-to null:
-  
-```bash
-juju set-model-constraints mem=
-```
-
-Model-related constraints can also be overridden at the application and machine
-level.
-
-## Setting constraints for an application
-
-Usually, constraints for an application are set at deploy time, by passing the 
-required parameters using the deploy command:
-  
-```bash
-juju deploy mariadb cores=4
-```
-
-Subsequently, you can set constraints for the any additional units added to the 
-application by running:
+An application's constraints are updated, thereby affecting any additional
+units, with the `set-constraints` command:
   
 ```bash
 juju set-constraints mariadb cores=2
 ```
 
-The constraints work on a named-application as well. So the following also works
-as expected:
-  
-```bash
-juju deploy mariadb database1
-juju deploy mariadb database2
-juju set-constraints database1 mem=4096M
-```
+An application's default cannot be set until the application has been deployed.
 
-You can fetch the current constraints like this:
-  
-```bash
-juju get-constraints mariadb
-juju get-constraints database1
-```
+!!! Note:
+    Both the `get-constraints` and `set-constraints` commands work with
+    application custom names. See [Deploying applications][charms-deploying]
+    for how to set a custom name.
 
-## Adding a machine with constraints
+## Setting constraints when adding a machine
 
-The `juju add-machine` command also accepts the `--constraints` option, which
-can be useful when trying to target a specific machine or type of machine.
+Constraints at the machine level can be set when adding a machine with the
+`add-machine` command. Doing so provides a way to override defaults at the
+all-units, application, model, and all-models levels.
 
-For example:
+Once such a machine has been provisioned it can be used for an initial
+deployment (`deploy`) or a scale out deployment (`add-unit`). See
+[Deploying to specific machines][charms-deploying-advanced-to-option] for
+the command syntax to use.
+ 
+A machine can be added that satisfies a constraint in this way:
 
 ```bash 
-juju add-machine --constraints spaces=storage,db
+juju add-machine --constraints arch=arm
 ```
 
-Will provision a machine that is connected to both the 'storage' and 'db' 
-network spaces. See [Network spaces][network-spaces] for more information on
-spaces.
+To add a machine that is connected to a space, such as 'storage':
 
-You can subsequently deploy applications to the above machine using
-the `--to` switch with the `deploy` command. See
-[Deploying to specific machines][charms-deploying-to-option] for how to do
-this.
+```bash 
+juju add-machine --constraints spaces=storage
+```
 
-Both positive and negative entries are accepted, the latter prefixed by '^', in
-a comma-delimited list. For example, given the following:
+If a space constraint is prefixed by '^' then the machine will **not** be
+connected to that space. For example, given the following:
 
 ```no-highlight
 --constraints spaces=db-space,^storage,^dmz,internal
 ```
 
-Juju will provision instances connected to one of the subnets of both
-'db-space' and 'internal' spaces, and **not** connected to either the 'storage'
-or 'dmz' spaces.
+the resulting instance will be connected to both the 'db-space' and 'internal'
+spaces, and not connected to either the 'storage' or 'dmz' spaces.
+
+See the [Network spaces][network-spaces] page for details on spaces.
+
+To get exactly two CPUs for a machine in a localhost cloud:
+
+```bash
+juju add-machine
+lxc list
+lxc config set juju-ab31e2-0 limits.cpu 2
+```
+
+Above, it is presumed that `lxc list` informed us that the new machine is
+backed by a LXD container whose name is 'juju-ab31e2-0'.
+
+See the [earlier example on LXD][#setting-constraints-for-all-models] for more
+context.
 
 
 <!-- LINKS -->
 
+[charms-deploying]: ./charms-deploying.html
 [controllers-creating]: ./controllers-creating.html
 [network-spaces]: ./network-spaces.html
-[charms-deploying-to-option]: ./charms-deploying-advanced.html#deploying-to-specific-machines
+[charms-deploying-advanced-to-option]: ./charms-deploying-advanced.html#deploying-to-specific-machines
+[reference-constraints]: ./reference-constraints.html
+[controllers-ha]: ./controllers-ha.html
+[lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
+[#setting-constraints-for-all-models]: #setting-constraints-for-all-models

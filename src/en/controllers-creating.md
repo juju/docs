@@ -17,30 +17,21 @@ See `juju help bootstrap` for details on this command or see the
 The `<controller name>` is optional. If one is not supplied, then a name is
 assigned based on the cloud and region.
 
-To learn about configuration options available at bootstrap time, see
-[Configuring controllers][controlconfig] and [Configuring models][modelconfig].
+To learn about configuration options available at bootstrap time, see:
 
-## Constraints
-
-Constraints may be set during the creation of the controller and are used to
-set minimum specifications for Juju machines. Constraints that apply to all
-machines in the models managed by the controller, but excluding the controller
-itself, are known as **model constraints**. These are set via the
-`--constraints` option. Constraints that apply to solely the controller are
-known as **controller constraints** and are set by using the
-`--bootstrap-constraints` option. The same values can be used by either type.
-
-For general information on constraints, see [Constraints][constraints].
+ - [Configuring controllers][controlconfig]
+ - [Configuring models][modelconfig]
+ - [Using constraints][charms-constraints]
 
 ## Examples
 
 ### Set default model constraints for a given controller
 
-Below, all machines in the LXD controller's models will have at least 4GiB of
-memory:
+Below, all machines (including the controller) in the LXD controller's models
+will have at least 4GiB of memory:
 
 ```bash
-juju bootstrap --constraints="mem=4G" localhost
+juju bootstrap --constraints mem=4G localhost
 ```
 
 ### Set controller constraints for a new controller
@@ -49,8 +40,11 @@ This example shows how to request at least 4GiB of memory and two CPUs for an
 AWS controller:
 
 ```bash
-juju bootstrap --bootstrap-constraints="mem=4G cores=2" aws
+juju bootstrap --bootstrap-constraints "mem=4G cores=2" aws
 ```
+
+If any of the constraints are also used with `--constraints` then the ones
+given via `--bootstrap-constraints` will be used.
 
 ### Create a controller of a specific series
 
@@ -219,7 +213,7 @@ juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
 <!-- LINKS -->
 
 [clouds]: ./clouds.html
-[constraints]: ./charms-constraints.html
+[charms-constraints]: ./charms-constraints.html
 [commands]: ./commands.html#juju-bootstrap
 [controlconfig]: ./controllers-config.html "Configuring Juju controllers"
 [modelconfig]: ./models-config.html "Configuring Juju models"

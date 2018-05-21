@@ -44,6 +44,13 @@ Where 'cs' denotes the Charm Store.
     A used charm gets cached on the controller's database to minimize network
     traffic for subsequent uses.
 
+A custom name, such as 'mysql1', can be assigned to the application by
+providing an extra argument:
+
+```bash
+juju deploy mysql mysql1
+```
+
 ### Channels
 
 The charm store offers charms in different stages of development. Such stages
@@ -110,24 +117,6 @@ Using network spaces the operator is able to create a more restricted network
 topology for applications at deployment time. See
 [Deploying to network spaces][deploying-to-network-spaces] for more
 information.
-
-<!-- MOVE THIS TO A TROUBLESHOOTING PAGE
-
-## Juju retry-provisioning
-
-You can use the `retry-provisioning` command in cases where deploying
-applications, adding units, or adding machines fails. It allows you to specify
-machines which should be retried to resolve errors reported with `juju status`.
-
-For example, after having deployed 100 units and machines, status reports that
-machines '3', '27' and '57' could not be provisioned because of a 'rate limit
-exceeded' error. You can ask Juju to retry:
-
-```bash
-juju retry-provisioning 3 27 57
-```
-
--->
 
 ## Scaling out
 
