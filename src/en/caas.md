@@ -22,14 +22,13 @@ most commonly employs Docker as its container technology.
 Here we discuss how a building and working with a CAAS environment may differ
 from a standard Juju workflow.
 
-The only CAAS-specific Juju command is `add-k8s`, which acts as the `add-cloud`
-command for Kubernetes clouds/clusters. All other concepts and commands are
-applied in the traditional Juju manner.
+The only CAAS-specific Juju commands are `add-k8s` and `remove-k8s`. All other
+concepts and commands are applied in the traditional Juju manner.
 
 If the Kubernetes cluster is built with Juju itself (via a bundle) and `juju
 add-k8s` is run immediately afterwards, the contents of file `~/.kube/config`
 (if it exists) are used to add the cluster and the credentials to Juju, making
-commands `add-cloud` and `add-credential` unnecessary.
+the usual combination of `add-cloud` and `add-credential` unnecessary.
 
 User credentials can still be added by way of the `add-credential`
 or `autoload-credentials` commands. Also, at any time, the k8s CLI can be used
