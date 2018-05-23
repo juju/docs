@@ -25,10 +25,11 @@ from a standard Juju workflow.
 The only CAAS-specific Juju commands are `add-k8s` and `remove-k8s`. All other
 concepts and commands are applied in the traditional Juju manner.
 
-If the Kubernetes cluster is built with Juju itself (via a bundle) and `juju
-add-k8s` is run immediately afterwards, the contents of file `~/.kube/config`
-(if it exists) are used to add the cluster and the credentials to Juju, making
-the usual combination of `add-cloud` and `add-credential` unnecessary.
+If the Kubernetes cluster is built with Juju itself (via a bundle) and
+`juju add-k8s` is run immediately afterwards, the contents of file
+`~/.kube/config` (if it exists) is used to add the cluster and the credentials
+to Juju, making the usual combination of `add-cloud` and `add-credential`
+unnecessary.
 
 User credentials can still be added by way of the `add-credential`
 or `autoload-credentials` commands. Also, at any time, the k8s CLI can be used
@@ -78,39 +79,30 @@ Sample output looks like this:
 
 ```no-highlight
 Model    Controller  Cloud/Region         Version    SLA
-default  lxd-caas    localhost/localhost  2.4-beta1  unsupported
+default  lxd         localhost/localhost  2.4-beta3  unsupported
 
 App                Version  Status   Scale  Charm              Store       Rev  OS      Notes
-easyrsa            3.0.1    active       1  easyrsa            jujucharms   39  ubuntu  
-etcd               2.3.8    active       1  etcd               jujucharms   77  ubuntu  
-flannel            0.9.1    active       2  flannel            jujucharms   52  ubuntu  
-kubernetes-master  1.10.0   waiting      1  kubernetes-master  jujucharms  102  ubuntu  exposed
-kubernetes-worker  1.10.0   active       1  kubernetes-worker  jujucharms  114  ubuntu  exposed
+easyrsa            3.0.1    active       1  easyrsa            jujucharms   40  ubuntu  
+etcd               3.2.9    active       1  etcd               jujucharms   80  ubuntu  
+flannel            0.9.1    active       2  flannel            jujucharms   56  ubuntu  
+kubernetes-master  1.10.2   waiting      1  kubernetes-master  jujucharms  104  ubuntu  exposed
+kubernetes-worker  1.10.2   active       1  kubernetes-worker  jujucharms  118  ubuntu  exposed
 
-Unit                  Workload  Agent  Machine  Public address  Ports           Message
-easyrsa/0*            active    idle   0/lxd/0  10.0.45.195                     Certificate Authority connected.
-etcd/0*               active    idle   0        10.40.174.204   2379/tcp        Healthy with 1 known peer
-kubernetes-master/0*  waiting   idle   0        10.40.174.204   6443/tcp        Waiting for kube-system pods to start
-  flannel/0*          active    idle            10.40.174.204                   Flannel subnet 10.1.53.1/24
-kubernetes-worker/0*  active    idle   1        10.40.174.193   80/tcp,443/tcp  Kubernetes worker running.
-  flannel/1           active    idle            10.40.174.193                   Flannel subnet 10.1.25.1/24
+Unit                  Workload  Agent      Machine  Public address  Ports           Message
+easyrsa/0*            active    idle       0/lxd/0  10.0.219.187                    Certificate Authority connected.
+etcd/0*               active    idle       0        10.191.96.169   2379/tcp        Healthy with 1 known peer
+kubernetes-master/0*  waiting   executing  0        10.191.96.169   6443/tcp        (config-changed) Waiting for kube-system pods to start
+  flannel/0*          active    idle                10.191.96.169                   Flannel subnet 10.1.21.1/24
+kubernetes-worker/0*  active    executing  1        10.191.96.126   80/tcp,443/tcp  (config-changed) Kubernetes worker running.
+  flannel/1           active    idle                10.191.96.126                   Flannel subnet 10.1.69.1/24
 
 Machine  State    DNS            Inst id              Series  AZ  Message
-0        started  10.40.174.204  juju-562a96-0        xenial      Running
-0/lxd/0  started  10.0.45.195    juju-562a96-0-lxd-0  xenial      Container started
-1        started  10.40.174.193  juju-562a96-1        xenial      Running
+0        started  10.191.96.169  juju-c841ac-0        xenial      Running
+0/lxd/0  started  10.0.219.187   juju-c841ac-0-lxd-0  xenial      Container started
+1        started  10.191.96.126  juju-c841ac-1        xenial      Running
 
-Relation provider                    Requirer                             Interface         Type         Message
-easyrsa:client                       etcd:certificates                    tls-certificates  regular      
-easyrsa:client                       kubernetes-master:certificates       tls-certificates  regular      
-easyrsa:client                       kubernetes-worker:certificates       tls-certificates  regular      
-etcd:cluster                         etcd:cluster                         etcd              peer         
-etcd:db                              flannel:etcd                         etcd              regular      
-etcd:db                              kubernetes-master:etcd               etcd              regular      
-kubernetes-master:cni                flannel:cni                          kubernetes-cni    subordinate  
-kubernetes-master:kube-api-endpoint  kubernetes-worker:kube-api-endpoint  http              regular      
-kubernetes-master:kube-control       kubernetes-worker:kube-control       kube-control      regular      
-kubernetes-worker:cni                flannel:cni 			  kubernetes-cni    subordinate
+Controller Timestamp
+23 May 2018 14:00:52Z
 ```
 
 ### Add the cluster to Juju
