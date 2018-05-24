@@ -1,23 +1,24 @@
-Title: Upgrading Juju software
+Title: Upgrading models
 TODO:  Review required (some things: apt-get, no more --upload-tools)
 
-# Upgrading Juju software
+# Upgrading models
+# Model upgrades
 
-A Juju topology can be divided into two main parts:
+A model is upgraded by upgrading the version of Juju running within it, in the
+form of machine agents and unit agents. Agents are pieces of software that run
+on each machine spawned by Juju, including controllers. See the
+[Concepts][concepts-agent] page for more information on agents.
 
-- Juju client
-- Juju model (usually several)
+Model upgrades are performed with the `upgrade-model` command.
 
-The software in each of the above are installed and upgraded differently.
+!!! Note:
+    The client can also be upgraded. See the [Juju client][client] page for how
+    to do that.
+    
+## Upgrading the client software
 
 The software for the client, which is responsible for issuing commands to
-manage Juju models, is overseen by the OS package management system.  The
-software for the models, which house machines Juju creates, is managed by Juju
-itself. This section is primarily devoted to describing the procedure for
-upgrading this model software.
-
-
-## Upgrading the client software
+manage Juju models, is overseen by the OS package management system.
 
 The client software is managed by the OS package management system. With Ubuntu
 this is usually APT. To upgrade the client, therefore, it is a matter of:
@@ -39,8 +40,7 @@ For more installation information and what versions are available, see
 
 ## Upgrading the model software
 
-The model software consists of *Juju agents*. These are pieces of software that
-run on each machine Juju creates, including controllers.
+
 
 Overview:
 
@@ -118,3 +118,8 @@ its output then proceed to the next section.
 An upgrade of server software that does not lead to 100% success will require
 troubleshooting. See
 [Troubleshooting environment upgrades](./troubleshooting-upgrade.html).
+
+
+<!-- LINKS -->
+
+[concepts-agent]: juju-concepts.html#agent
