@@ -5444,6 +5444,19 @@ triangle alongside a command to view that command's entry.
            description: Cloud-init user-data (in yaml format) to be added to userdata for new
              machines created in this model
    
+   container-image-metadata-url:
+
+           type: string
+           description: The URL at which the metadata used to locate container OS image ids
+             is located
+   
+   container-image-stream:
+
+           type: string
+           description: The simplestreams stream used to identify which image ids to search
+             when starting a container.
+
+   
    container-inherit-properties:
 
            type: string
@@ -7457,31 +7470,21 @@ triangle alongside a command to view that command's entry.
 
    Copy file /var/log/syslog from machine 2 to the client's current working
    directory:
-
           juju scp 2:/var/log/syslog .
-
    Recursively copy the /var/log/mongodb directory from a mongodb unit to the
    client's local remote-logs directory:
-
           juju scp -- -r mongodb/0:/var/log/mongodb/ remote-logs
-
    Copy foo.txt from the client's current working directory to an apache2 unit of
    model "prod". Proxy the SSH connection through the controller and turn on scp
    compression:
-
           juju scp -m prod --proxy -- -C foo.txt apache2/1:
-
    Copy multiple files from the client's current working directory to machine 2:
           juju scp file1 file2 2:
-
    Copy multiple files from the bob user account on machine 3 to the client's
    current working directory:
-
           juju scp bob@3:'file1 file2' .
-
    Copy file.dat from machine 0 to the machine hosting unit foo/0 (-3
    causes the transfer to be made via the client):
-
           juju scp -- -3 0:file.dat foo/0:
 
 
@@ -8184,6 +8187,10 @@ triangle alongside a command to view that command's entry.
 
    Specify an output file
 
+   _--relations  (= false)_
+
+   Show 'Relations' section
+
    _--utc  (= false)_
 
    Display time as UTC in RFC3339 format
@@ -8201,6 +8208,9 @@ triangle alongside a command to view that command's entry.
    is matched, then its principal unit will be displayed. If a principal unit is
    matched, then all of its subordinates will be displayed.
 
+   Machine numbers may also be used as output filters. This will only display data 
+   in each section relevant to the specified machines. For example, application 
+   section will only contain the applications that have units on these machines, etc.
    The available output formats are:
 
    - tabular (default): Displays status in a tabular format with a separate table
@@ -8229,12 +8239,19 @@ triangle alongside a command to view that command's entry.
    - json: Displays information about the model, machines, applications, and units
                in structured JSON format.
 
+               
+   
+   In tabular format, the 'Relations' section is not displayed by default. 
+   Use the --relations option to see this section. This option is ignored in all other 
+   formats.
+
 
    **Examples:**
 
           juju show-status
           juju show-status mysql
           juju show-status nova-*
+          juju show-status --relations
 
 
    **See also:**
@@ -8274,7 +8291,7 @@ triangle alongside a command to view that command's entry.
 
    _--include-status-updates  (= false)_
 
-   Inlcude update status hook messages in the returned logs
+   Deprecated, has no effect for 2.3+ controllers: Include update status hook messages in the returned logs.
 
    _-m, --model (= "")_
 
@@ -8606,23 +8623,14 @@ triangle alongside a command to view that command's entry.
    **Examples:**
 
    Connect to machine 0:
-
           juju ssh 0
-
    Connect to machine 1 and run command 'uname -a':
-
           juju ssh 1 uname -a
-
    Connect to a mysql unit:
-
           juju ssh mysql/0
-
    Connect to a jenkins unit as user jenkins:
-
           juju ssh jenkins@jenkins/0
-
    Connect to a mysql unit with an identity not known to juju (ssh option -i):
-
           juju ssh mysql/0 -i ~/.ssh/my_private_key echo hello
 
 
@@ -8711,6 +8719,10 @@ triangle alongside a command to view that command's entry.
 
    Specify an output file
 
+   _--relations  (= false)_
+
+   Show 'Relations' section
+
    _--utc  (= false)_
 
    Display time as UTC in RFC3339 format
@@ -8728,6 +8740,9 @@ triangle alongside a command to view that command's entry.
    is matched, then its principal unit will be displayed. If a principal unit is
    matched, then all of its subordinates will be displayed.
 
+   Machine numbers may also be used as output filters. This will only display data 
+   in each section relevant to the specified machines. For example, application 
+   section will only contain the applications that have units on these machines, etc.
    The available output formats are:
 
    - tabular (default): Displays status in a tabular format with a separate table
@@ -8756,12 +8771,19 @@ triangle alongside a command to view that command's entry.
    - json: Displays information about the model, machines, applications, and units
                in structured JSON format.
 
+               
+   
+   In tabular format, the 'Relations' section is not displayed by default. 
+   Use the --relations option to see this section. This option is ignored in all other 
+   formats.
+
 
    **Examples:**
 
           juju show-status
           juju show-status mysql
           juju show-status nova-*
+          juju show-status --relations
 
 
    **See also:**
