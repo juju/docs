@@ -216,6 +216,52 @@ release notes for the 1.x series are available [here][release-notes-1].
   To learn more about Juju visit
   [https://jujucharms.com](https://jujucharms.com).
 
+^# Juju 2.3.8
+
+  Juju 2.3.8 is the exciting new release of Juju, the first to provide full
+  compatibility with Ubuntu 18.04 LTS (Bionic). 
+
+  This is primarily a bug fix release that contains improvements in bundle
+  deployments and status output. For the full list of bugs, see the
+  [2.3.8 milestone](https://launchpad.net/juju/+milestone/2.3.8).
+
+  ## Enhancements.
+
+  The 'Relations' section in the `juju status` output has been cleaned up:
+
+  - When filtering by application name, only direct relations are shown.
+  - In tabular format, the 'Relations' section is no longer visible by default.
+    Use the `--relations` option to see it (
+    [LP 1633972](https://bugs.launchpad.net/juju/+bug/1633972)).
+
+  Empty `juju status` output has been clarified - whether it is due to a model
+  being empty or because a provided filter did not match anything on the model
+  ([LP 1255786](https://bugs.launchpad.net/juju/+bug/1255786),
+  [LP 1696245](https://bugs.launchpad.net/juju/+bug/1696245),
+  and [LP 1594883](https://bugs.launchpad.net/juju/+bug/1594883)).
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the
+  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
 ^# Juju 2.3.7
 
   Juju 2.3.7 has arrived. This is primarily a bug fix release. For the full
