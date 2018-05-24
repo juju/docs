@@ -2,6 +2,7 @@ Title: Controller high availability
 TODO:  Consider adding to a troubleshooting page: recovering
        The concept of quorum should be broached.
        In particular, what the consequences of losing quorum are. I couldn't find any, which is odd.
+       Note: juju status output includes beta version
 
 # Controller high availability
 
@@ -20,8 +21,8 @@ Controller HA is managed with the `juju enable-ha` command. It does this by
 ensuring that the cluster has the requisite number of controllers present. By
 default, this number is three but the `-n` switch can be used to change that.
 Therefore, this command is used to both enable HA as well as compensate for any
-missing controllers, as would be the case if HA was previously enabled but one
-or more controllers was subsequently removed.
+missing controllers, as is the case if you enable HA and then remove one or
+more controllers.
 
 When a controller is provisioned, API server code is installed along with a
 MongoDB database.
@@ -47,7 +48,7 @@ To enable controller HA simply invoke the `enable-ha` command:
 juju enable-ha
 ```
 
-Since a specific number of cluster machines was not requested the default of
+Since a specific number of cluster machines were not requested, the default of
 three is used. We would therefore expect two new controllers to appear. Indeed,
 the output to the above command reflects this:
 
@@ -113,8 +114,7 @@ Controller  Model    User   Access     Cloud/Region         Models  Machines    
 aws-ha*     default  admin  superuser  aws/us-east-1             2         2   1/2  2.4-beta2
 ```
 
-<!-- State how a hot standby differ from multiple participating members.  -->
-There is now only a single active controller (and one standby) in his cluster
+There is now only a single active controller (and one standby) in this cluster
 (i.e. one out of two are active). Note that this situation should be rectified
 as soon as possible.
 
