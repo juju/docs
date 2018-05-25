@@ -5,6 +5,89 @@ Title: Juju Release Notes
 This page details all available release notes for the 2.x series of Juju. The
 release notes for the 1.x series are available [here][release-notes-1].
 
+^# Juju 2.4-beta3
+  
+  A new development release of Juju is here, 2.4-beta3. Do not use on
+  production systems.
+  
+  ## New and improved.
+
+  There are four new model configuration keys affecting proxy behaviour.
+  Existing model configuration for proxies remain unchanged, and any existing
+  model or controller should not notice any changes. The new keys are:
+
+  `juju-http-proxy`  
+  `juju-https-proxy`  
+  `juju-ftp-proxy`  
+  `juju-no-proxy`
+  
+  These are used by the model for downloading charms, but are not set as the
+  normal proxy environment variables for charm hook contexts, nor written as
+  default systemd configuration values.
+  
+  The `juju-no-proxy` key can and should contain CIDR-formatted values for
+  subnets. The controller machines are not added automatically to this key, so
+  the internal network that is used should appear within it if there are other
+  proxies set.
+  
+  The new proxy values are passed to the charm hook contexts as the following
+  environment variables, respectively:
+  
+  `JUJU_CHARM_HTTP_PROXY`  
+  `JUJU_CHARM_HTTPS_PROXY`  
+  `JUJU_CHARM_FTP_PROXY`  
+  `JUJU_CHARM_NO_PROXY`
+  
+  The charm helpers library will be gaining the ability to use proxies for
+  certain activities. This is new behaviour and is still under development.
+  
+  The rationale behind this change is to better support proxies in situations
+  where there are larger subnets, or multiple subnets, that should not be
+  proxied. The traditional 'no_proxy' values cannot have CIDR values as they
+  are not understood by many tools.
+
+  ## Fixes.
+  
+  For a list of all bugs fixed in this release, see
+  the [2.4-beta3 milestone](https://launchpad.net/juju/+milestone/2.4-beta3).
+  
+  Some important fixes include:
+
+  - Fixes for when /var, /etc, and /tmp are on different partitions (
+    [LP 1634390](https://bugs.launchpad.net/bugs/1634390) and 
+    [LP 1751291](https://bugs.launchpad.net/bugs/1751291)).
+
+  - Various network related fixes (
+    [LP 1733266](https://bugs.launchpad.net/bugs/1733266),
+    [LP 1764735](https://bugs.launchpad.net/bugs/1764735), and
+    [LP 1771120](https://bugs.launchpad.net/bugs/1771120)).
+  
+  ## Get Juju.
+  
+  To get the beta version of Juju use the `--beta` channel in the `snap`
+  package:
+  
+  	  sudo snap install juju --beta --classic
+
+  You can switch to the latest stable version with:
+
+  	  sudo snap refresh juju --stable
+
+  See [Reference: Installing Juju][reference-install] for details on
+  installation methods.
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the
+  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
 ^# Juju 2.4-beta2
   
   A new development release of Juju is here, 2.4-beta2. Do not use on
