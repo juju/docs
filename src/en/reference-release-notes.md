@@ -12,6 +12,19 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   ## New and improved.
 
+  The 'Relations' section in the `juju status` output has been cleaned up:
+
+  - When filtering by application name, only direct relations are shown.
+  - In tabular format, the 'Relations' section is no longer visible by default.
+    Use the `--relations` option to see it (
+    [LP 1633972](https://bugs.launchpad.net/juju/+bug/1633972)).
+
+  Empty `juju status` output has been clarified - whether it is due to a model
+  being empty or because a provided filter did not match anything on the model
+  ([LP 1255786](https://bugs.launchpad.net/juju/+bug/1255786),
+  [LP 1696245](https://bugs.launchpad.net/juju/+bug/1696245),
+  and [LP 1594883](https://bugs.launchpad.net/juju/+bug/1594883)).
+
   There are four new model configuration keys affecting proxy behaviour.
   Existing model configuration for proxies remain unchanged, and any existing
   model or controller should not notice any changes. The new keys are:
@@ -61,6 +74,10 @@ release notes for the 1.x series are available [here][release-notes-1].
     [LP 1733266](https://bugs.launchpad.net/bugs/1733266),
     [LP 1764735](https://bugs.launchpad.net/bugs/1764735), and
     [LP 1771120](https://bugs.launchpad.net/bugs/1771120)).
+  
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
   
   ## Get Juju.
   
