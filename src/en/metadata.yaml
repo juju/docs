@@ -62,7 +62,7 @@ navigation:
             location: controllers-creating.md
           - title: Juju GUI
             location: controllers-gui.md
-          - title: High Availability
+          - title: Controller high availability
             location: controllers-ha.md
           - title: Controller backups
             location: controllers-backup.md
