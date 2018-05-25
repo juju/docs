@@ -1,5 +1,6 @@
 Title: Hook tools
 TODO:  rationalize with authors-hook-environment.md and authors-charm-writing.md
+       Convert to abstract links
 
 # Hook tools
 
@@ -389,10 +390,10 @@ See [Network primitives][dev-network-primitives] for in-depth coverage.
 
 ## open-port
 
-`open-port` registers a port or range to open on the public-interface. On public
-clouds the port will only be open while the application is exposed. It accepts a
-single port or range of ports with an optional protocol, which may be `udp` or
-`tcp`, where `tcp` is the default.
+`open-port` registers a port or range to open on the public-interface. On
+public clouds the port will only be open while the application is exposed. It
+accepts a single port or range of ports with an optional protocol, which may be
+`icmp`, `udp`, or `tcp`, with `tcp` being the default.
 
 `open-port` will not have any effect if the application is not exposed, and may have
 a somewhat delayed effect even if it is. This operation is transactional, so
