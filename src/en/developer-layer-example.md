@@ -201,6 +201,8 @@ that we have finished configuring the application and it is ready to start.
 
 The `templates/vanilla_config.php` file is straightforward:
 
+{{ % raw % }}
+
 ```php
 <?php if (!defined('APPLICATION')) exit();
 $Configuration['Database']['Host'] = '{{ db.host() }}';
@@ -209,6 +211,7 @@ $Configuration['Database']['User'] = '{{ db.user() }}';
 $Configuration['Database']['Password'] = '{{ db.password() }}';
 ?>
 ```
+{{ % endraw % }}
 
 And that's all you need to get Vanilla up and running using layers!
 The final directory structure looks like this:
