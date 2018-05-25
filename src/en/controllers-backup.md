@@ -81,13 +81,14 @@ enabled, see [the relevant section below](#ha-(high-availability)).
 Use the `create-backup` command to create a new backup file:
 
 ```bash
-juju create-backup [--filename=FILENAME] [-m | --model] [--no-download]
+juju create-backup [--filename=FILENAME] [-m | --model] [--no-download] [--keep-copy]
 ```
 
 The `create-backup` command generates an archive file for the current
 environment, along with metadata about that file. Unless you issue the
-`--no-download` argument, the archive will be both stored on your controller
-and downloaded to your client as a 'tar.gz' file.
+`--no-download` argument, the archive will be downloaded to your client
+as a 'tar.gz' file.  Using the `--keep-copy` argument will save a copy on
+the controller.
 
 The backup name combines the date and time of a backup with a unique model 
 identifier. The downloaded filename can be changed by using the `--filename` 
@@ -257,8 +258,7 @@ the controller.
 
 ### Restoring from a backup
 
-usage: `juju restore-backup --id=<ID> | --file=<filname> [-b] [-m | --model] 
-[--upload-tools] [--constraints=<string>]`
+usage: `juju restore-backup --id=<ID> | --file=<filname> [-m | --model] `
 
 If the controller is still operational it can be restored from one of the
 stored backups by specifying the ID:
@@ -274,23 +274,6 @@ restore it:
 ```bash
 juju restore-backup --file=backup.tar.gz
 ```
-In the case that the original controller no longer exists, it is possible to 
-re-bootstrap the environment and restore the backup to the new controller. 
-To do this, use the '-b' switch:
-
-```bash
-juju restore-backup -b --file=backup.tar.gz
-```
-When re-bootstrapping, you can upload a local version of the tools with the 
-`--upload-tools` argument, just as you might with the original bootstrap 
-procedure. It is also possible to specify constraints for the newly created 
-bootstrap node, for example:
-
-```bash
-juju restore-backup -b --constraints="mem=4G" --file=backup.tar.gz
-```
-Read the [constraints reference page](./reference-constraints.html) for more
-information on the constraints which may be used.
 
 ## HA (High Availability)
 
@@ -313,24 +296,22 @@ As an example, the following environment has 3 active controllers. Running
 the command:
 
 ```bash
-juju status
+juju status -m controller
 ```
 
 ... will return something similar to:
 
 ```no-highlight
-[Services] 
-NAME       STATUS EXPOSED CHARM 
+Model       Controller  Cloud/Region         Version    SLA
+controller  doc         localhost/localhost  2.4-beta3  unsupported
 
-[Units] 
-ID      WORKLOAD-STATUS JUJU-STATUS VERSION MACHINE PORTS PUBLIC-ADDRESS MESSAGE 
+Machine  State    DNS           Inst id        Series  AZ  Message
+0        started  10.63.22.96   juju-23cce3-0  xenial      Running
+1        started  10.63.22.253  juju-23cce3-6  xenial      Running
+2        started  10.63.22.86   juju-23cce3-7  xenial      Running
 
-[Machines] 
-ID         STATE   DNS          INS-ID                               SERIES AZ 
-  
-0          started 10.55.61.153 f9bcfde5-a071-4892-aa05-16212256a125 trusty nova 
-1          started 10.55.61.86  899bd5c0-7b00-4ae5-bf09-fab206bf9b43 trusty nova 
-2          started 10.55.61.89  7d997259-31e5-4390-a14d-2d054685e2cd trusty nova 
+Controller Timestamp
+25 May 2018 12:56:13-04:00
 ```
 
 Performing a backup on this environment, will be based on the first 
@@ -343,34 +324,60 @@ juju create-backup
 ...should return:
 
 ```no-highlight
-20160429-124813.e94566bc-d02d-4a14-8ec2-e2dbed2f2ec4
 downloading to juju-backup-20160429-124813.tar.gz
 ```
 
-As with backing up a non-HA environment, the backup file is stored on the 
-controller and automatically downloaded, or you can specify further options
-as [stated above](#creating-a-backup-file).
+As with backing up a non-HA environment, the backup file is automatically
+downloaded, or you can specify further options as [stated above](#creating-a-backup-file).
 
 ### Restoring on HA
 
-Please note that a restore must take place when you have lost all your 
-redundant controllers. If that is not the case, simply issuing the
-`juju enable-ha` command will be enough to create a new controller replica on 
+If all redundant controllers have been lost, simply issuing the 
+`juju enable-ha` command will be enough to create a new controller replica on
 your environment.
 
 For performing a `restore-backup`, the only check performed by the utility is 
-to make sure that the initial controller is not up. 
+to make sure that HA availability is not in use.
 
 !!! WARNING: 
     If your Juju environment still contains an existing controller, 
     restoring a backup will overwrite its data or remove them.
 
-To restore an initial bootstrap environment, the procedure is the same as for 
-non-HA environments:
+To restore in an HA environment, first remove all but 1 of the reduntant
+controllers.
 
 ```bash
-juju restore-backup  -b --file=backup.tar.gz
+juju machines -m controller
 ```
+```no-highlight
+Machine  State    DNS           Inst id        Series  AZ  Message
+0        started  10.63.22.96   juju-23cce3-0  xenial      Running
+1        started  10.63.22.67   juju-23cce3-5  xenial      Running
+2        started  10.63.22.253  juju-23cce3-6  xenial      Running
+```
+```bash
+juju remove-machine -m controller 1 2
+```
+
+Once this step is completed, you will have a single controller running. Now
+restore from the backup:
+
+``` bash
+juju restore-backup -m controller --file juju-backup-20160429-124813.tar.gz
+```
+```no-highlight
+restore from "juju-backup-20160429-124813.tar.gz" completed
+```
+
+You'll see that the removed machines have returned in an error state by running
+`juju machines -m controller` again.
+```no-highlight
+Machine  State    DNS           Inst id        Series  AZ  Message
+0        started  10.63.22.96   juju-23cce3-0  xenial      Running
+1        down     10.63.22.67   juju-23cce3-5  xenial      Running
+2        down     10.63.22.253  juju-23cce3-6  xenial      Running
+```
+Remove them with `juju remove-machine -m controller 1 2 --force`.
 
 Once this step is completed, you will have a single controller running. To
 recover the rest of the controller replicas, all that remains is to reissue
