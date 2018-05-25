@@ -185,6 +185,8 @@ that we have finished configuring the application and it is ready to start.
 
 The `templates/vanilla_config.php` file is straightforward:
 
+{% raw %}
+
 ```php
 <?php if (!defined('APPLICATION')) exit();
 $Configuration['Database']['Host'] = '{{ db.host() }}';
@@ -193,6 +195,7 @@ $Configuration['Database']['User'] = '{{ db.user() }}';
 $Configuration['Database']['Password'] = '{{ db.password() }}';
 ?>
 ```
+{% endraw %}
 
 And that's all you need to get Vanilla up and running using layers!
 The final directory structure looks like this:
@@ -251,5 +254,9 @@ juju expose vanilla
 [charms.reactive]: http://pythonhosted.org/charms.reactive/
 [reactive-bash]: http://pythonhosted.org/charms.reactive/#non-python-reactive-handlers
 [repo]: https://github.com/johnsca/layered-vanilla
-[interfaces.juju.solutions]: http://interfaces.juju.solutions/
-[discovery and dispatch rules]: http://pythonhosted.org/charms.reactive/#discovery-and-dispatch-of-reactive-handlers
+[interfaces.juju.solutions]: https://interfaces.juju.solutions/
+[discovery and dispatch rules]: https://charmsreactive.readthedocs.io/#discovery-and-dispatch-of-reactive-handlers
+[charm-tools]: ./tools-charm-tools.html
+[JUJU_REPOSITORY]: ./reference-environment-variables.html#juju_repository
+[charms-deploying]: ./charms-deploying.html
+[interface-layers]: ./developer-layers-interfaces.html
