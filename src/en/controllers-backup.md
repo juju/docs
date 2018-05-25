@@ -248,19 +248,20 @@ Section [Recovering from controller failure][recovering-ha-failure] details how
 to deal with a partially degraded cluster. In the advent that all controllers
 are unresponsive the following steps should be taken:
 
- 1. Remove all controllers
- 1. Add one controller and perform a data restore
- 1. Add new controllers to the desired HA level
+ 1. Remove the cluster
+ 1. Create a pristine controller
+ 1. Perform a data restore
+ 1. Enable HA
 
-To demonstrate this for an initial controller named 'aws', consider a 3-member
-cluster (numbered 0 through 2):
+To demonstrate this, consider an AWS-based controller named 'aws-ha3-1' with
+three cluster members (numbered 0 through 2). Upon restore it assumes the name
+of 'aws-ha3-2':
 
 ```bash
-juju remove-machine -m aws:controller 0
-juju remove-machine -m aws:controller 1
-juju remove-machine -m aws:controller 2
-juju restore-backup -m aws:controller -b --file backup.tar.gz
-juju enable-ha -m aws:controller -n 3
+juju kill-controller aws-ha3-1
+juju bootstrap aws aws-ha3-2
+juju restore-backup -m aws-ha3-2:controller --file backup.tar.gz
+juju enable-ha -m aws-ha3-2:controller -n 3
 ```
 
 
