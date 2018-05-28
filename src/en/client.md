@@ -10,10 +10,7 @@ The following topics are covered:
 
  - Client directory
  - Client backups
-
-<!--
  - Client upgrades
--->
 
 See the [Concepts][concepts-client] page for a full definition of the client.
 
@@ -85,8 +82,33 @@ tar -xzf juju-yymmdd-hhmmss.tar.gz
     This command will extract the contents of the archive and overwrite any
     existing files in the Juju directory. Make sure that this is what you want.
 
+## Client upgrades
+
+The client software is managed by the operating system's package management
+system. On Ubuntu this is traditionally APT:
+
+```bash
+sudo apt update
+sudo apt install juju
+```
+
+If you have installed Juju via the snap package:
+
+```bash
+sudo snap refresh juju
+```
+
+For more installation information and what versions are available, see
+[Reference: Installing Juju][reference-install].
+
+!!! Note:
+    Models can also be upgraded. See the [Model upgrades][models-upgrade]
+    page for guidance.
+
 
 <!-- LINKS -->
 
 [concepts-client]: juju-concepts.html#client
 [controllers-backups]: controllers-backup.html
+[reference-install]: reference-install.html
+[models-upgrade]: models-upgrade.md
