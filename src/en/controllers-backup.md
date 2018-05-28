@@ -6,7 +6,7 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1771433
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771657
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771674
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771821
-       Bug tracking: https://bugs.launchpad.net/juju/+bug/1773468
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1773468 (CRITICAL)
 
 # Controller backups
 
