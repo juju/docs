@@ -211,7 +211,7 @@ Common model management tasks are summarized below.
    running on every machine Juju creates. This upgrade process does not pertain
    to the Juju software package installed on a client system.
 
-   This is a complex subject. See [Juju upgrades](./models-upgrade.html).
+   This is a complex subject. See [Model upgrades](./models-upgrade.html).
 
 
 
