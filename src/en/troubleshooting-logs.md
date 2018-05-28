@@ -57,8 +57,7 @@ reveals the agent's configuration file:
 ```
 
 Consider keeping backups of these files, especially prior to upgrading the
-agents. See
-[Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software).
+agents. See [Model upgrades][models-upgrade].
 
 ### The debug-log command
 
@@ -384,3 +383,4 @@ more /var/log/juju/audit.log
 [excluding-information-log-audit]: ./controllers-config.html#excluding-information-from-the-audit-log
 [upstream-rsyslog-tls-tutorial]: http://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html
 [models-config]: ./models-config.html
+[models-upgrade]: ./models-upgrade.html
