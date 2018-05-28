@@ -6,14 +6,14 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1771433
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771657
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771674
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1771821
+       Bug tracking: https://bugs.launchpad.net/juju/+bug/1773468
 
 # Controller backups
 
 A backup of a controller enables one to re-establish the configuration and
 state of a controller. It does **not** influence workload instances on the
 backing cloud. That is, if such an instance is terminated directly in the cloud
-then a controller restore cannot re-create it. However, as we'll see, a restore
-does have the ability to re-create a controller instance.
+then a controller restore cannot re-create it.
 
 This page will cover the following topics:
 
@@ -209,30 +209,6 @@ juju restore-backup -m lxd:controller --file juju-backup-lxd-20180515-193724.tar
     remote backup. The process will be cancelled and an error message will be
     printed. The remote backup should just be used instead.
 
-If the controller no longer exists, a new one can be created during the restore
-process with the use of the `-b` option. Naturally, this scenario calls for
-the use of a local backup:
-
-```bash
-juju restore-backup -m lxd:controller -b --file backup.tar.gz
-```
-
-!!! Important:
-    A controller cannot be re-created if the original one was removed via the
-    `destroy-controller`, `kill-controller`, or `unregister` commands. This is
-    due to re-creation being dependent upon the client's awareness of the
-    controller, which is something that the aforementioned commands erase.
-
-It is also possible to specify constraints for the new controller with the aid
-of the `--constraints` option:
-
-```bash
-juju restore-backup -m lxd:controller -b --constraints mem=4G --file backup.tar.gz
-```
-
-See [Reference: Juju constraints][reference-constraints] for more information
-on constraints.
-
 ## High availability considerations
 
 Although [Controller high availability][controllers-ha] makes for a more robust
@@ -253,9 +229,8 @@ are unresponsive the following steps should be taken:
  1. Perform a data restore
  1. Enable HA
 
-To demonstrate this, consider an AWS-based controller named 'aws-ha3-1' with
-three cluster members (numbered 0 through 2). Upon restore it assumes the name
-of 'aws-ha3-2':
+To demonstrate this, consider an initial AWS-based controller named 'aws-ha3-1'
+with three cluster members. The new controller will be called 'aws-ha3-2':
 
 ```bash
 juju kill-controller aws-ha3-1
