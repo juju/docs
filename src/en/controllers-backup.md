@@ -41,10 +41,14 @@ is highly recommended.
 ### Creating a backup
 
 The `create-backup` command is used to create a backup. It does so by
-generating an archive on the controller (a *remote* backup), and unless the
-`--no-download` option is used, it will also be downloaded to the Juju client
-system as a 'tar.gz' file (a *local* backup). The name of the backup is
-composed of the creation time (in UTC) and a unique identifier.
+generating an archive and downloading it to the Juju client system as a
+'tar.gz' file (a *local* backup). If the `--keep-copy` option is used then a
+copy of the archive will also remain on the controller (a *remote* backup).
+With the aid of the `--no-download` option a local backup can be prevented, but
+since the archive must be kept somewhere, this option implies `--keep-copy`.
+
+The name of the backup is composed of the creation time (in UTC) and a unique
+identifier.
 
 The below examples assume the existence of the following controllers (output to
 `juju controllers`):
