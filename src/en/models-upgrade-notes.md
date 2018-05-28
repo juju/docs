@@ -1,11 +1,10 @@
 Title: Notes on upgrading Juju software  
 
 
-# Notes on upgrading Juju software
+# Notes on upgrading models
 
 This is an addendum to the main page describing Juju software upgrades:
-[Upgrading Juju software](./models-upgrade.html).
-
+[Model upgrades][models-upgrades].
 
 ## Agent software and related components
 
@@ -89,3 +88,8 @@ juju sync-agent-binaries --version 2.03 --debug
 For complete syntax, see the
 [command reference page](./commands.html#sync-agent-binaries) or by running
 `juju help sync-agent-binaries`.
+
+
+<!-- LINKS -->
+
+[models-upgrades]: ./models-upgrade.html

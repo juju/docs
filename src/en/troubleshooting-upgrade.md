@@ -1,12 +1,11 @@
 Title: Juju troubleshooting - environment upgrade  
-TODO:  Review required (some things: 'environment')
+TODO:  Review required (some things: 'environment' and abstract links)
 
 # Troubleshooting model upgrades
 
 This section provides strategies and techniques to assist with broken
-environment upgrades. See
-[Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software) for
-information and instructions pertaining to upgrading your environment.
+environment upgrades. See [Model upgrades][models-upgrade] for information and
+instructions pertaining to upgrading your environment.
 
 
 ## Case #1 - An agent does not restart (config)
@@ -109,3 +108,8 @@ Juju to simply "forget" about the controller. This is done with the
 `juju unregister` command.
 
 Once the above is completed, a new controller can then be created.
+
+
+<!-- LINKS -->
+
+[models-upgrade]: ./models-upgrade.html
