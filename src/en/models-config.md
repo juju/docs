@@ -255,25 +255,18 @@ juju model-config provisioner-harvest-mode=none
 
 ### Retrying failed hooks
 
-Prior to version 2.0, hooks returning an error would block until the user
-ran a command to retry them manually:
-
-```bash
-juju resolved unit-name/#
-```  
-
-From version 2.0, Juju will automatically retry hooks periodically - there is
-an exponential backoff, so hooks will be retried after 5, 10, 20, 40 seconds up
-to a period of 5 minutes, and then every 5 minutes. The logic behind this is
-that some hook errors are caused by timing issues or the temporary
-unavailability of other applications - automatic retry enables the Juju model
-to heal itself without troubling the user.
+Juju retries failed hooks automatically using an exponential backoff algorithm.
+They will be retried after 5, 10, 20, 40 seconds up to a period of 5 minutes,
+and then every 5 minutes. The logic behind this is that some hook errors are
+caused by timing issues or the temporary unavailability of other applications -
+automatic retry enables the Juju model to heal itself without troubling the
+user.
 
 However, in some circumstances, such as debugging charms, this behaviour can be
-distracting and unwelcome. For this reason, it is possible to set the 
-`automatically-retry-hooks` option to 'false' to disable this behaviour. In this
-case, users will have to manually retry any hook which fails, using the command
-above, as with earlier versions of Juju.
+distracting and unwelcome. For this reason, it is possible to set the
+`automatically-retry-hooks` option to 'false' to disable this behaviour. In
+this case, users will have to manually retry any hook which fails, using the
+command above, as with earlier versions of Juju.
 
 !!! Note:
     Even with the automatic retry enabled, it is still possible to use the

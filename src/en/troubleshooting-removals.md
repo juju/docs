@@ -52,7 +52,8 @@ The above command may need to be repeated to resolve other errors on the unit.
 There may be errors on other units caused by the breaking of relations that
 occur when removing a unit or application. Therefore, also verify that the
 associated units are not in an error state and apply the above command to them
-if they are.
+if they are. Note that option `--all` can be used to attempt to resolve errors
+on all units.
 
 
 <!-- LINKS -->
