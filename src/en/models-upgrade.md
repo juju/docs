@@ -1,5 +1,6 @@
 Title: Upgrading Juju software
 TODO:  Review required (some things: apt-get, no more --upload-tools)
+       Move client stuff to client.md
 
 # Upgrading Juju software
 
