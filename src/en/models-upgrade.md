@@ -1,5 +1,6 @@
 Title: Upgrading models
 TODO:  Review required (some things: apt-get, no more --upload-tools)
+       Move client stuff to client.md
 
 # Upgrading models
 # Model upgrades
