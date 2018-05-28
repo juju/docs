@@ -34,8 +34,8 @@
             <ul class="sub">
                 <li><a href="controllers-creating.html">Create/Bootstrap</a></li>
                 <li><a href="controllers-gui.html">Juju GUI</a></li>
-                <li><a href="controllers-ha.html">High Availability</a></li>
                 <li><a href="controllers-backup.html">Controller backups</a></li>
+                <li><a href="controllers-ha.html">Controller high availability</a></li>
             </ul>
         </li>
         <li><a href="models.html">Models</a></li>
