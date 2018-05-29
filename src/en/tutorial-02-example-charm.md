@@ -154,7 +154,7 @@ DB_HOST = '10.170.55.25'
 DB_NAME = 'example'
 DB_USER = 'Dae7EGh9Zei0nee'
 DB_PASSWORD = 'aiRei1siePhewah'
-<pre>
+</pre>
 
 Congratulations, you have completed the tutorial!
 
