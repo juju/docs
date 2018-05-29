@@ -1,8 +1,16 @@
 Title: Hello World example charm development (Part 1/3).
 
-# What you will learn:
+# Hello World example charm development (Part 1/3).
 
-This guide will go through the first basic concepts of charm development:
+## What you will learn
+
+This guide will go through the first basic concepts of charm development. Its the first of three tutorials:
+
+[Part 1](tutorial-01-example-charm.html)
+[Part 2](tutorial-02-example-charm.html) 
+[Part 3](tutorial-03-example-charm.html)
+
+You will learn in this part:
 
 * Preparing & setup of a basic workbench.
 * Creating the example charm with "charm tools".
@@ -239,4 +247,4 @@ The principle is that juju engine signals your application, and you write code/f
 This is what the `@when(some.flag.raised)` decorators are all about.
 
 ## Author
-Erik Lönroth http://eriklonroth.wordpress.com
+[Erik Lönroth](http://eriklonroth.wordpress.com)

@@ -1,8 +1,8 @@
 Title: Hello World example charm development (Part 3/3).
 
-# What you will learn:
+# Hello World example charm development (Part 3/3)
 
-We will build on the previous tutorial: Hello World example charm development, [part 2/3](tutorial-02-example-charm.html) to:
+This tutorial builds on the previous [Hello World example charm development, Part 2/3](tutorial-02-example-charm.html):
 
 * Make your charm proper to be shared with the community
 * Target a specific version (series) of ubuntu for the charm.
@@ -152,4 +152,4 @@ watch juju -c juju status --color
 Congratulations! You have completed the beginner level tutorial series on juju charming!
 
 ## Author
-Erik Lönroth http://eriklonroth.wordpress.com
+[Erik Lönroth](http://eriklonroth.wordpress.com)
