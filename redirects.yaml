@@ -1,6 +1,9 @@
 (|en/?)?: /en/getting-started
+(|devel/en/?)?: /devel/en/getting-started
 
 # Redirect /stable to correct version
+(|stable/?)?: /2.3/en/getting-started
+(|stable/en/?)?: /2.3/en/getting-started
 stable/?(?P<path>.*): /2.3/{path}
 
 #en/(?P<page>.+): /2.3/en/{page}
