@@ -217,7 +217,7 @@ Congratulations, you have completed the first basic excersise in charm developme
 
 ## Next lesson: Interfaces
 
-Building on your new knowledge, you should try out the Vanilla example which introduces 'interfaces' to charms.
+Building on your new knowledge, you could now move to [Part 2/3](tutorial-02-example-charm.html)
 
 ## More to learn from this tutorial:
 
@@ -237,3 +237,6 @@ In reactive programming, a good way of thinking about your program, is that it h
 The principle is that juju engine signals your application, and you write code/functions to act on this information. Your code then raises new flags/states to communicate with the rest of the system.
 
 This is what the `@when(some.flag.raised)` decorators are all about.
+
+## Author
+Erik Lönroth http://eriklonroth.wordpress.com

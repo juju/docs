@@ -2,7 +2,7 @@ Title: Hello World example charm development (Part 2/3).
 
 # What you will learn:
 
-We will build on the previous tutorial: Hello World example charm development, part 1/2 to:
+We will build on the previous tutorial: Hello World example charm development, [part 1/2](tutorial-01-example-charm.html) to:
 
 * Learn how to add a 'mysql' database interface to charms.
 * Write a charm that writes a text-file using a template.
@@ -158,8 +158,7 @@ DB_PASSWORD = 'aiRei1siePhewah'
 Congratulations, you have completed the tutorial!
 
 ## Next lesson: 
-In the next tutorial, we will learn how to publish our charms to the charmstore so you can use it from anywhere around the world, in any cloud!
+In the next tutorial - [part 3/3](tutorial-03-example-charm.html), we will learn how to publish our charms to the charmstore so you can use it from anywhere around the world, in any cloud!
 
-## More to learn from this tutorial:
-
-### More
+## Author
+Erik Lönroth http://eriklonroth.wordpress.com
