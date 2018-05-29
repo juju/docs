@@ -12,6 +12,9 @@ charm, you will discover all the tools and information you need here.
 For an example of a community-driven charm development project see the
 [OpenStack Charm Guide][upstream-openstack-charms].
 
+A beginner tutorial series can be found here [beginner-tutorial-123] which
+takes your though the basics. Its a good starting point for developing charms.
+
 ## Requirements
 
   - **A Juju controller**: If you have not used Juju before, it's
@@ -258,3 +261,4 @@ promulgation.
 [upstream-openstack-charms]: https://docs.openstack.org/charm-guide/
 [askubuntu-markdown]: https://askubuntu.com/editing-help
 [getstartedmd-link]: https://api.jujucharms.com/charmstore/v5/~rharding/grafana-4/archive/getstarted.md
+[beginner-tutorial-123]: ./tutorial-01-example-charm.html
