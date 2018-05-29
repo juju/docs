@@ -6,14 +6,40 @@ Title: Hello World example charm development (Part 2/3).
 
 Building on the previous tutorial: [Hello World example charm development, Part 1/2](tutorial-01-example-charm.html). In this part, you will:
 
+* Learn about the "layer-index".
 * Learn how to add a 'mysql' database interface to charms.
 * Write a charm that writes a text-file using a template.
 * Deploy the example charm and relate to a mysql charm.
 * Use 'juju ssh' to login to the juju unit and display the contents of the text-file.
-* Learn about the "layer-index".
 
-## Add the interface
-To add the mysql interface, we have to modify 'layer.yaml', 'metadata.yaml' and create a template inside a templates directory. Lets do that.
+## The 'layer-index'
+
+Lets examine the inludes tag in ** layer.yaml **.
+<pre>
+includes: 
+  - 'layer:basic'
+  - 'layer:apt'
+</pre>
+
+You learned from the first part of the tutorial that the 'includes' tag in 'layer.yaml' is similar to an "include" statement in python. All charms must include the 'layer:base'.
+
+The build system will add in code from the 'include' tag with our own.
+
+Alot of already existing juju functionality can be found in the [layer-index].
+Take a look and see if you find some interesting features you like to explore later.
+
+As you see, we have also already added the [layer:apt].
+
+Since we can include both 'layers' and 'interfaces' lets see how that is done.
+
+## Add the interface:mysql
+To add the mysql interface, we have to:
+
+* Modify 'layer.yaml'
+* Modify 'metadata.yaml'
+* Create a template inside a templates directory.
+
+Lets do that.
 
 Modify the **~/charms/layers/layer-example/layer.yaml** to look like this:
 
@@ -120,15 +146,40 @@ def waiting_mysql(mysql):
 
 What happens here is that:
 
-* The mysql interface raises a flag 'database.available' when the relation is joined and mysql has created a database and username, password for us. 
-* The database mysql object is passed to us from juju.
+* We install the 'hello' package, just as we did in the first part of the tutorial.
+* The mysql interface raises a flag 'database.available' when the relation is joined, mysql has created a database, a username and password for us. 
+* The database mysql object with the information we need is passed to us from the juju interface.
 * We pass on the mysql object to Jinja2 render() that renders the template.
 * We finish our work by setting the 'active' status.
 
-Note: Look how we change the code in the function *set_message_hello()*. In the previous part of this tutorial, we set the 'active' status when the hello package was installed. This time, we set it to 'maintenance'. The logic is that we intend to do more work before we are done this time. Status 'active' is set in the function *write_text_file(mysql)* when the template is rendered.
+## What is the difference from tutorial part 1?
+Look at the code in the function *set_message_hello()*. In the previous part of this tutorial, we set the 'active' status when the hello package was installed which was all we wanted our charm to do at that point.
+
+However, in this part of the tutorial, we set status to 'maintenance' instead so we can do more work without signaling that we are 'active'.
+```python
+    # Set the maintenance status with a message
+    status_set('maintenance', message )
+```
+
+Status is set to 'active' in the function *write_text_file(mysql)* when the template is rendered which is the goal for this charm.
+
+```python
+@when('database.available')
+def write_text_file(mysql):
+    render(source='text-file.tmpl',
+           target='/root/text-file.txt',
+           owner='root',
+           perms=0o775,
+           context={
+               'my_database': mysql,
+           })
+        status_set('active', 'Ready: File rendered.')
+```
+
+We are ready to rebuild.
 
 ## Proof, Build, Deploy, Relate
-We are done and can run through the deployment and relate our charm to the mysql charm.
+We are done and can run through the build, deployment and try relate our charm to the mysql charm.
 
 ```bash
 cd ~/charms/layers
@@ -165,25 +216,10 @@ In the next tutorial you will learn how to publish your charm to the charmstore 
 
 Move on to the next part of the tutorial series in [part 3/3](tutorial-03-example-charm.html).
 
-## A note about 'layer-index'
-
-Lets examine the inludes tag in ** layer.yaml **.
-<pre>
-includes: 
-  - 'layer:basic'
-  - 'layer:apt'
-</pre>
-
-You can think of the 'includes' as similar to an "include" statement in python.
-
-It tells the charm build system to pull in code from the so called "Layer Index" to
-be included in our own charm.
-
-Alot of already existing juju functionality can be found in the [layer-index].
-Take a look and see if you find some interesting features you like to explore later.
-
 ## Author
 [Erik Lönroth](http://eriklonroth.wordpress.com)
 
 
 [layer-index]: https://github.com/juju/layer-index/
+[interface:mysql]: https://github.com/johnsca/juju-relation-mysql
+[layer:apt]: https://git.launchpad.net/layer-apt/tree/README.md

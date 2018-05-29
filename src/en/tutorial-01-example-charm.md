@@ -164,7 +164,7 @@ Our example charm isn't really doing anything fun yet. Let's make it install the
 
 For this very common scenario of installing packages as part of a charm, we can use the *layer:apt*. 
 
-The *layer:apt* has all the functionality we need for installing packages from apt repositories.
+The *[layer:apt]* has all the functionality we need for installing packages from apt repositories. (You will learn more about including layers in the next part of the tutorial)
 
 Modify the '~/charms/layers/layer-example/layer.yaml' to look like this:
 
@@ -225,28 +225,30 @@ After some time, `juju status` will show the "Hello World" message.
 
 Congratulations, you have completed the first basic excersise in charm development!
 
-## Next lesson: Interfaces
-
-Building on your new knowledge, you could now move to [Part 2/3](tutorial-02-example-charm.html)
-
 ## More to learn from this tutorial:
 
 ### Layers vs Charms
 
 One way of thinking about layers in relation to charms, is in terms of libraries or modules. A compilation of layers results in a charm that can be deployed by the juju engine.
 
-*Tip!
-There are a lot of pre exising layers included in charm tools, you can find them here [interfaces.juju.solutions][interfaces])*
+*There are a lot of layers included in charmtools, you can find them in the [layer-index] that we will cover in the next part of the tutorial*.
 
-### Reactive programming
+### How to think about 'Reactive programming'
 
 Most programmers expects their applications to be executing from a clear "main()" start and move on step by step towards an exit. Reactive programming is 'somewhat' different in how you plan the execution.
 
-In reactive programming, a good way of thinking about your program, is that it has many "main()" entry points. Which one is execute, depends on how you chose to act on the different states/flags communicated to you by the juju engine. 
+In reactive programming, a good way of thinking about your program, is that it has many "main()" entry points. Which one is executed - and when - depends on how you act on the different states/flags communicated to you by the juju engine. 
 
 The principle is that juju engine signals your application, and you write code/functions to act on this information. Your code then raises new flags/states to communicate with the rest of the system.
 
 This is what the `@when(some.flag.raised)` decorators are all about.
 
+## Next lesson
+
+Building on your new knowledge, you could now move to [Part 2/3](tutorial-02-example-charm.html)
+
 ## Author
 [Erik Lönroth](http://eriklonroth.wordpress.com)
+
+[layer-index]: https://github.com/juju/layer-index/
+[layer:apt]: https://git.launchpad.net/layer-apt/tree/README.md

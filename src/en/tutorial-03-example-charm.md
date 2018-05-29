@@ -76,7 +76,7 @@ This is what we will push up to charmstore soon.
 ## Your account on charmstore
 Before you can push, you need a private Ubunu One account.
 
-Go ahead and create your Ubuntu One account here: https://login.ubuntu.com/
+Go ahead and [create your Ubuntu One account here].
 
 Remember your account name, we are going to use it below. In my case its 'erik-lonroth'.
 
@@ -93,11 +93,11 @@ https://jujucharms.com/u/erik-lonroth
 Go ahead and browse your private namespace a bit. It will likely be feeling a bit empty,
 but we'll soon add the charm in there.
 
-Lets log in to charmstore from your build environment so we can push.
+Lets log in to [charmstore] from your build environment so we can push.
 
 ## Log in to charmstore
-Follow the instructions when you get prompted for username and password.
-```bash
+Run this to login:
+<pre>
 cd ~/charms/layers
 charm login
 
@@ -106,19 +106,19 @@ Press return to select a default value.
 E-Mail: erik.lonroth@gmail.com
 Password: 
 Two-factor auth (Enter for none):
-```
+</pre>
 
 After your have mangaged to login, you can now 'push'.
 
 ## Push to charmstore
-Lets push the example charm to charmstore:
+Lets push the example charm to [charmstore]:
 ```bash
 cd ~/charms/builds/example
 charm push .
 url: cs:~erik-lonroth/example-0
 channel: unpublished
 ```
-The charm is now pushed to a namespace in charmstore private to you. Nobody else can use it.
+The charm is now pushed to a namespace in [charmstore] private to you. Nobody else can use it.
 
 Lets try deploy it!
 
@@ -153,3 +153,6 @@ Congratulations! You have completed the beginner level tutorial series on juju c
 
 ## Author
 [Erik Lönroth](http://eriklonroth.wordpress.com)
+
+[create your Ubuntu One account here]: https://login.ubuntu.com/
+[charmstore]: https://jujucharms.com
