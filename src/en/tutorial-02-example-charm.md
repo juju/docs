@@ -10,6 +10,7 @@ Building on the previous tutorial: [Hello World example charm development, Part 
 * Write a charm that writes a text-file using a template.
 * Deploy the example charm and relate to a mysql charm.
 * Use 'juju ssh' to login to the juju unit and display the contents of the text-file.
+* Learn about the "layer-index".
 
 ## Add the interface
 To add the mysql interface, we have to modify 'layer.yaml', 'metadata.yaml' and create a template inside a templates directory. Lets do that.
@@ -139,7 +140,7 @@ juju relate example mysql
 
 ```
 
-Note: We deploy our local charm by referencing with a path (../trusty/example). mysql is on the other hand is deployed from the Charm Store (cs:mysql). "cs:mysql" tells juju to download the charm from over the network instead of uploadning it from our local directory repository.
+Note: We deploy our local charm by referencing with a path (../trusty/example). mysql is on the other hand is deployed from the Charm Store (cs:mysql). "cs:mysql" tells juju to download the charm from over the network instead of uploading it from our local directory repository.
 
 ## Look at the file with 'juju ssh'
 Lets look at the file we created inside the example/0 unit. We will do that using "juju ssh".
@@ -157,10 +158,32 @@ DB_USER = 'Dae7EGh9Zei0nee'
 DB_PASSWORD = 'aiRei1siePhewah'
 </pre>
 
-Congratulations, you have completed the tutorial!
+Congratulations, you have completed the second part of the tutorial!
 
 ## Next lesson: 
-In the next tutorial - [part 3/3](tutorial-03-example-charm.html), we will learn how to publish our charms to the charmstore so you can use it from anywhere around the world, in any cloud!
+In the next tutorial you will learn how to publish your charm to the charmstore so you can use it from anywhere around the world, in any cloud!
+
+Move on to the next part of the tutorial series in [part 3/3](tutorial-03-example-charm.html).
+
+## A note about 'layer-index'
+
+Lets examine the inludes tag in ** layer.yaml **.
+<pre>
+includes: 
+  - 'layer:basic'
+  - 'layer:apt'
+</pre>
+
+You can think of the 'includes' as similar to an "include" statement in python.
+
+It tells the charm build system to pull in code from the so called "Layer Index" to
+be included in our own charm.
+
+Alot of already existing juju functionality can be found in the [layer-index].
+Take a look and see if you find some interesting features you like to explore later.
 
 ## Author
 [Erik Lönroth](http://eriklonroth.wordpress.com)
+
+
+[layer-index]: https://github.com/juju/layer-index/

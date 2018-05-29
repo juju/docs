@@ -78,7 +78,7 @@ Before you can push, you need a private Ubunu One account.
 
 Go ahead and create your Ubuntu One account here: https://login.ubuntu.com/
 
-Remember your account name, we are going to use it below. Im ny case its 'erik-lonroth'.
+Remember your account name, we are going to use it below. In my case its 'erik-lonroth'.
 
 ## Test to login via a browser
 Your Ubuntu One account gives you a private namespace for your charms.

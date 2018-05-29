@@ -106,12 +106,14 @@ I: missing recommended hook config-changed
 
 Let's get rid of these `E: errors` by making the following files look like this:
 
-**layer-example/layer.yaml**
+** layer-example/layer.yaml ** (Always include 'layer:basic')
+
 <pre>
 includes:
   - 'layer:basic'
 </pre>
-**layer-example/metadata.yaml**
+
+** layer-example/metadata.yaml ** 
 <pre>
 name: example
 summary: A very basic example charm
@@ -123,13 +125,13 @@ tags:
   - tutorials
 </pre>
 
-**layer-example/reactive/layer_example.py**
+** layer-example/reactive/layer_example.py **
 ```python
 from charms.reactive import when, when_not, set_state
 
 @when_not('example.installed')
 def install_example():
-    set_state('example.installed')
+    set_flag('example.installed')
 ```
 
 ### Building the example charm
