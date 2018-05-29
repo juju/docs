@@ -1,4 +1,4 @@
-Title: Hello World example charm development, part 2/2.
+Title: Hello World example charm development (Part 2/3).
 
 # What you will learn:
 
