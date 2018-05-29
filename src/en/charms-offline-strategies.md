@@ -16,6 +16,7 @@ The services of concern here are:
  - HTTP/S proxy
  - APT proxy
  - FTP proxy
+ - Charm download proxy
  - APT mirror
  - Juju agent mirror
  - Cloud image mirror
@@ -82,6 +83,31 @@ HTTPS).
 ## FTP proxy
 
 A standard FTP proxy. Juju uses the `ftp-proxy` option for this type of proxy.
+
+## Charm download proxy
+
+The following suite of proxy settings is dedicated to the downloading of
+charms:
+
+`juju-ftp-proxy`  
+`juju-http-proxy`  
+`juju-https-proxy`  
+`juju-no-proxy`
+
+These are not set as normal proxy environment variables for charm hook
+contexts, nor are they written as default systemd configuration values.
+Instead, they are passed to charm hook contexts as the following environment
+variables, respective to the above list:
+
+JUJU_CHARM_FTP_PROXY  
+JUJU_CHARM_HTTP_PROXY  
+JUJU_CHARM_HTTPS_PROXY  
+JUJU_CHARM_NO_PROXY
+
+!!! Note:
+    The `juju-no-proxy` option can and should contain subnets in CIDR notation.
+    Also, since controller machines are not added automatically to this option,
+    if other proxies are set any internal networks should be added.
 
 ## APT mirror
 
