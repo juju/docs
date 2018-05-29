@@ -63,8 +63,7 @@ The file above is in a "Jinja2" template format. Jinja2 templates allows us to p
 
 ## Rewrite the layer_example.py
 
-**~/charms/layers/layer-example/reactive/layer_example.py
-**
+** ~/charms/layers/layer-example/reactive/layer_example.py **
 ```python
 from charms.reactive import set_flag, when, when_not
 from charmhelpers.core.hookenv import application_version_set, status_set
