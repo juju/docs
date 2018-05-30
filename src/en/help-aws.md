@@ -1,22 +1,18 @@
-Title: Help with Amazon Web Service clouds
+Title: Using Amazon AWS with Juju
 
-# Using the Amazon Web Service public cloud
+# Using Amazon AWS with Juju
 
-Juju already has knowledge of the AWS cloud, so unlike previous versions there
-is no need to provide a specific configuration for it, it 'just works'. AWS
-will appear in the list of known clouds when you issue the command:
-  
-```bash
-juju clouds
-```
-And you can see more specific information (e.g. the supported regions) by 
-running:
-  
+Juju already has knowledge of the AWS cloud, which means adding your AWS
+account to Juju is quick and easy.
+
+You can see more specific information on Juju's AWS support (e.g. the
+supported regions) by running:
+
 ```bash
 juju show-cloud aws
 ```
 
-If at any point you believe Juju's information is out of date (e.g. Amazon just 
+If at any point you believe Juju's information is out of date (e.g. AWS just 
 announced support for a new region), you can update Juju's public cloud data by
 running:
   
@@ -24,7 +20,7 @@ running:
 juju update-clouds
 ```
 
-## Credentials
+## Add credentials
 
 In order to access AWS, you will need to add some credentials for Juju to use.
 These can easily be set by either:
