@@ -25,20 +25,22 @@ remote applications.
 juju deploy mysql --constraints "cores=4 mem=16G root-disk=1T"
 ```
 
-The output to `juju status` will eventually look similar to:
+The output to `juju status --relations` will eventually look similar to:
 
+<!-- JUJUVERSION: 2.4-beta4-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju status --relations -->
 ```no-highlight
-Model      Controller  Cloud/Region   Version      SLA
-cmr-model  aws-cmr     aws/us-east-1  2.3-beta2.1  unsupported
+Model      Controller  Cloud/Region   Version    SLA          Timestamp
+cmr-model  aws-cmr     aws/us-east-1  2.4-beta4  unsupported  21:38:59Z
 
 App    Version  Status  Scale  Charm  Store       Rev  OS      Notes
-mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu
+mysql  5.7.22   active      1  mysql  jujucharms   58  ubuntu  
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
-mysql/0*  active    idle   0        54.81.205.47    3306/tcp  Ready
+mysql/0*  active    idle   0        107.22.17.48    3306/tcp  Ready
 
 Machine  State    DNS           Inst id              Series  AZ          Message
-0        started  54.81.205.47  i-0f9f15e276ec3b5c2  xenial  us-east-1a  running
+0        started  107.22.17.48  i-05dc6ef01fd41735b  xenial  us-east-1a  running
 
 Relation provider  Requirer       Interface  Type  Message
 mysql:cluster      mysql:cluster  mysql-ha   peer
