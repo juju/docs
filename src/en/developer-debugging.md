@@ -163,21 +163,12 @@ terminating.
 
 ## Retrying failed hooks
 
-Prior to version 2.0, hooks returning an error will block until the user
-takes an action to retry them manually, by issuing the command `juju resolved
-unit-name/#` for the affected unit. After issuing the resolved command, go
-back to the debug-hooks session to interact with the Juju environment.
-
-```bash
-juju resolved mysql/0
-```
-
-Starting with Juju version 2.0 hooks returning errors will be automatically
-retried periodically. However, the `juju resolved` command may still be
-used to retry the hook immediately. See the
-[General configuration options](./models-config.html#retrying-failed-hooks)
+Hooks returning errors are automatically retried periodically. However, the
+`juju resolved` command may still be used to retry the hook immediately. See
+the [General configuration options](./models-config.html#retrying-failed-hooks)
 for more information on the automatic retry feature and how to disable this
-behaviour.
+behaviour. Note that option `--no-retry` can be used to prevent re-execution of
+failed hooks on the unit.
 
 ## Debugging reactive Charms
 
