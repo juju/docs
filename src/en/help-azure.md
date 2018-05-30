@@ -127,9 +127,9 @@ quicker and easier than the manual `service-principal-secret` method. Here,
 we'll assume that 'interactive' has been chosen.
 
 !!! Note:
-    For guidance on the manul method, see
-    [Manually adding Azure credentials][manually-adding-azure-credentials]. Use this method
-    if the interactive option fails, or if you want to automate the
+    For guidance on the manual method, see
+    [Manually adding Azure credentials][manually-adding-azure-credentials]. Use
+    this method if the interactive option fails, or if you want to automate the
     configuration process.
 
 You then will be asked for your subscription id. In the example above, it is

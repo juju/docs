@@ -25,8 +25,9 @@ enter them into the command, replace the variable name we give with the actual
 ID that corresponds to the variable.
 
 !!! Important:
-    This process requires the Azure CLI tool to be installed and a successful
-    login with it. See [Install the CLI tool][clouds-azure-cli-install] and
+    This process requires the Azure CLI tool to be installed and used to
+    successfully log in to Azure prior to Juju configuration. See
+    [Install the CLI tool][clouds-azure-cli-install] and
     [Log in to Azure][clouds-azure-cli-login] respectively.
 
 #### `subscription-id`
@@ -73,8 +74,8 @@ APP_PASSWORD=some_password
 APP_NAME=ubuntu.example.com
 ```
 
-Now create an Active Directory (Kerberos) server principal and grant the
-required resource permissions by assigning a role of ***Owner***:
+Now create an Active Directory (Kerberos) service principal and assign it a
+role of **Owner**:
 
 ```bash
 az ad sp create-for-rbac --name "$APP_NAME" --password $APP_PASSWORD --role Owner
@@ -92,9 +93,14 @@ The command output will be similar to the following:
 }
 ```
 
+!!! Note:
+    For more in-depth information, see Microsoft's Azure CLI documentation on
+    [Role-Based Access Control (RBAC)][azurecli-rbac] and the
+    [above commmand's syntax][azurecli-az-ad-sp].
+    
 #### `application-id` and `tenant-id`
 
-In the previous output we'll be using the value that follows **appId** as
+From the previous output we'll be using the value that follows **appId** as
 **APP_ID** and **tenant** as **TENANT_ID**. Hence:
 
 ```bash
@@ -170,3 +176,5 @@ controller-creation step.
 [clouds-azure-controller]: ./help-azure.html#create-the-juju-controller
 [clouds-azure-cli-install]: ./help-azure.html#install-the-cli-tool
 [clouds-azure-cli-login]: ./help-azure.html#log-in-to-azure
+[azurecli-rbac]: https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
+[azurecli-az-ad-sp]: https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac
