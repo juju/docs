@@ -1,7 +1,6 @@
 Title: Using MAAS with Juju
 
-
-# Using a MAAS cloud
+# Using MAAS with Juju
 
 Juju works closely with [MAAS][maas-site] to deliver the same experience
 on bare metal that you would get by using any other cloud. Note that the 
