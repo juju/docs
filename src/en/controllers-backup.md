@@ -210,7 +210,7 @@ juju restore-backup -m lxd:controller --file juju-backup-lxd-20180515-193724.tar
 To create a new controller during a data restore the `-b` option is used:
 
 ```bash
-juju restore-backup -m lxd:controller -b --file backup.tar.gz
+juju restore-backup -b --file backup.tar.gz
 ```
 
 !!! Note:
@@ -242,8 +242,8 @@ with three cluster members. The new controller will be called 'aws-ha3-2':
 
 ```bash
 juju kill-controller aws-ha3-1
-juju restore-backup -m aws-ha3-2:controller -b --file backup.tar.gz
-juju enable-ha -m aws-ha3-2:controller -n 3
+juju restore-backup -b --file backup.tar.gz
+juju enable-ha -n 3
 ```
 
 
