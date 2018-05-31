@@ -238,7 +238,7 @@ are unresponsive the following steps should be taken:
  1. Enable HA
 
 To demonstrate this, consider an initial AWS-based controller named 'aws-ha3-1'
-with three cluster members. The new controller will be called 'aws-ha3-2':
+with three cluster members:
 
 ```bash
 juju kill-controller aws-ha3-1
