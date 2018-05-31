@@ -92,10 +92,17 @@ sudo apt update
 sudo apt install juju
 ```
 
-If you have installed Juju via the snap package:
+If Juju was installed via snaps then no action is required as a snap, by
+default, will update automatically. However, this is how to update manually:
 
 ```bash
 sudo snap refresh juju
+```
+
+The current Juju snap version can be queried like so:
+
+```bash
+snap info juju
 ```
 
 For more installation information and what versions are available, see
