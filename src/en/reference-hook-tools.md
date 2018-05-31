@@ -854,4 +854,9 @@ powershell:
 Import-Module CharmHelpers
 Get-JujuUnit -Attr "public-address"
 ```
-[payloads]:./authors-charm-metadata.html#payloads
+
+
+<!-- LINKS -->
+
+[payloads]:./authors-charm-metadata.html#payloads-field
+[dev-network-primitives]: ./developer-network-primitives.html
