@@ -35,23 +35,23 @@ The `juju status` command provides a summary of what offers have been made.
 Here we'll apply it to the model 'cmr-model-1' in the 'lxd-cmr-1' controller:
 
 ```bash
-juju status -m lxd-cmr-1:cmr-model-1
+juju status --relations -m lxd-cmr-1:cmr-model-1
 ```
 
 Output:
 
 ```no-highlight
-Model        Controller  Cloud/Region         Version      SLA
-cmr-model-1  lxd-cmr-1   localhost/localhost  2.3-beta2.1  unsupported
+Model        Controller  Cloud/Region         Version    SLA          Timestamp
+cmr-model-1  lxd-cmr-1   localhost/localhost  2.4-beta4  unsupported  18:32:57Z
 
 App    Version  Status  Scale  Charm  Store       Rev  OS      Notes
-mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu
+mysql  5.7.22   active      1  mysql  jujucharms   58  ubuntu  
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
-mysql/0*  active    idle   0        10.87.144.223   3306/tcp  Ready
+mysql/0*  active    idle   0        10.252.47.60    3306/tcp  Ready
 
-Machine  State    DNS            Inst id        Series  AZ  Message
-0        started  10.87.144.223  juju-22a641-0  xenial      Running
+Machine  State    DNS           Inst id        Series  AZ  Message
+0        started  10.252.47.60  juju-68c45a-0  xenial      Running
 
 Offer  Application  Charm  Rev  Connected  Endpoint  Interface  Role
 mysql  mysql        mysql  58   1/1        db        mysql      provider
