@@ -263,7 +263,7 @@ mediawiki page.
 [charms-deploying]: ./charms-deploying.html
 [network-spaces]: ./network-spaces.html
 [charms-bundles-endpoints]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
-[extra-bindings]: ./authors-charm-metadata.html#extra-bindings
+[extra-bindings]: ./authors-charm-metadata.html#extra-bindings-field
 [clouds-maas]: ./clouds-maas.html
 [charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints
 [concepts-endpoint]: ./juju-concepts.html#endpoint
