@@ -14,10 +14,11 @@ Every charm should have these fields declared:
 
   - `name`: The charm name, which is used to form the charm URL.
     - The following criteria are applied:
-          - Contains only characters `a-z`, `0-9`, and `-`
+          - Contains only characters `a-z`, `0-9`, and `-` (hyphen)
           - Must start with `a-z`
-          - Must not end with a `-`
-          - May only end with digits if the digits are _not_ directly preceded by a space.
+          - Must not end with a `-` (hyphen)
+	  - May only end with digits if the digits are _not_ directly preceded
+	    by a space.
     - Simple examples: 'foo' and 'foo-bar-baz'.
   - `summary`: A one-line description of the charm.
   - `description`: A longer description of the charm and its features. It will
@@ -115,7 +116,7 @@ See developer [Storage][developer-storage] documentation for more information.
 
 ## Resources field
 
-The `resources` field allows is used to add blobs that your charm can utilize.
+The `resources` field allows one to add blobs that a charm can make use of.
 
 ```yaml
 resources:
