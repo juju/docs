@@ -3,22 +3,28 @@ Title: Charm metadata
 # Charm metadata
 
 The only file that must be present in a charm is `metadata.yaml`, in the root
-directory. A metadata file must be a valid yaml dictionary, containing at least
-the following fields:
+directory. It must be a valid YAML dictionary.
 
-  - `name` is the charm name, which is used to form the charm URL.
-    - It can only contain `a-z`, `0-9`, and `-`; must start with `a-z`; must not
-      end with a `-`; and may only end with digits if the digits are _not_
-      directly preceded by a space. Stick with names like `foo` and `foo-bar-baz`
-      and you needn't pay further attention to the restrictions.
-  - `summary` is a one-line description of the charm.
-  - `description` is a long-form description of the charm and its features.
-  It will also appear in the juju GUI.
-  - `tags` is a descriptive tag that is used to sort the charm in the store.
+This page covers the various fields that can be included. Some are required and
+many are optional.
 
+## Required fields
 
+Every charm should have these fields declared:
 
-Here's a valid metadata file:
+  - `name`: The charm name, which is used to form the charm URL.
+    - The following criteria are applied:
+          - Contains only characters `a-z`, `0-9`, and `-` (hyphen)
+          - Must start with `a-z`
+          - Must not end with a `-` (hyphen)
+	  - May only end with digits if the digits are _not_ directly preceded
+	    by a space.
+    - Simple examples: 'foo' and 'foo-bar-baz'.
+  - `summary`: A one-line description of the charm.
+  - `description`: A longer description of the charm and its features. It will
+    appear in the Juju GUI.
+
+Here's a minimal, but valid, metadata file:
 
 ```yaml
     name: mongodb
@@ -38,18 +44,21 @@ Here's a valid metadata file:
       project.
 ```
 
-With only those fields, a metadata file is valid, but not very useful. Charms
-for use in the [Charm Store](https://jujucharms.com/) should always set the
-following fields as well, for categorization and display in the GUI:
+## Charm Store fields
 
-  - `maintainer` is the name and email address for the main point of contact
+Charms destined for the [Charm Store][charm-store] should set the below three
+fields:
+
+  - `maintainer`: The name and email address for the main point of contact
   for the development and maintenance of the charm. The maintainer field
-  should be in the format `Charm Author Name <author@email>`.
+  should be in the format `firstname lastname <author@email>`.
 
-  - `maintainers` is a list of people who maintain the charm. Use the yaml
-  sequence format when there are more than one person maintaining the project.
+  - `maintainers`: A list of people who maintain the charm. Use the YAML
+  sequence format if there are multiple people.
 
-  - `tags` is a list containing one or more of the following:
+  - `tags`: A list of descriptive tags used for organisation purposes in the
+    Charm Store. Choose from among the following:
+
      - analytics
      - big_data
      - ecommerce
@@ -73,20 +82,24 @@ following fields as well, for categorization and display in the GUI:
      - application_development
      - web_server
 
-In almost all cases, only one tag will be appropriate. The categories help
-keep the Charm Store organised.
+## Miscellaneous fields
 
-![Juju Charm Store metadata Listing](./media/authors-metadata-display.png)
+  - `series`: A list of series that the charm supports.
+     - It can include code names of Ubuntu releases such as 'trusty' or
+       'xenial'.
+     - It can also include code names for non-Ubuntu series such as 'centos7'.
+  - `terms`: A list of the terms the user must agree to before using the charm.
+  - `min-juju-version`: The minimum Juju version running on the controller
+    (machine agent) that this charm is compatible with.
+  - `provides`, `requires`, and `peers`: Define the charm's
+    [relations][authors-relations].
+  - `subordinate`: Indicates a
+    [subordinate][authors-subordinate] charm (set to 'true'). Such a charm must
+    contain at least one `requires` relation with container scope.
 
-- `min-juju-version` Charms can declare the minimum Juju version the code is
-compatible with. This is useful when the code uses features introduced in a
-specific version of Juju. When supplied this value is the lowest version of
-Juju controller that will run the charm.
+## Storage field
 
-## Storage
-
-[Storage](./developer-storage.html) can also be declared in a charm's metadata,
-as such:
+The `storage` field is used to declare information related to storage.
 
 ```yaml
 storage:
@@ -99,21 +112,11 @@ storage:
     location: /srv/data
 ```
 
-A metadata file defines the charm's
-[relations](./authors-relations.html),
-and whether it's designed for deployment as a
-[subordinate service](./authors-subordinate-applications.html).
+See developer [Storage][developer-storage] documentation for more information.
 
-  - `subordinate` should be set to true if the charm is a subordinate.
-    If omitted, the charm will be presumed not to be subordinate.
-  - `provides`, `requires`, and `peers` define the various relations the charm
-    will participate in.
-  - if the charm is subordinate, it must contain at least one `requires`
-    relation with container scope.
+## Resources field
 
-## Resources
-
-`resources` allows you to add blobs that your charm can utilize.
+The `resources` field allows one to add blobs that a charm can make use of.
 
 ```yaml
 resources:
@@ -123,17 +126,16 @@ resources:
     description: example resource
 ```
 
-## Payloads
+## Payloads field
 
 Payloads provide a means for the charm author to get information from a
 deployed charm. This is especially useful in large and complex deployments. For
 instance, the author may want to check the status of some element of the
 deployment such as a Docker container.
 
-Payloads are defined in the `payloads` section of `metadata.yaml` by assigning
-a class and type. A class defines the name of the payload and the type
-describes the nature of the payload. Both are author-defined and are not
-validated by Juju.
+Payloads are defined via the `payloads` field by assigning a class and type. A
+class defines the name of the payload and the type describes the nature of the
+payload. Both are author-defined and are not validated by Juju.
 
 The most common types of payload are based on Docker, KVM, and LXD.
 
@@ -160,20 +162,21 @@ from the charm hook using the following commands:
 See the [Hook tools documentation][hook-payloads] for further details on these
 payload commands. 
 
-## Extra-bindings
+## Extra-bindings field
 
-`extra-bindings` represents an extra bindable endpoint that is not used with
-relations. These are useful when you want to have Juju provide distinct
-addresses for an application on one or more spaces. For example, adding this
-section to a YAML file for an application called "foo":
+The `extra-bindings` field is associated with an extra bindable endpoint that
+is not used with relations. These are useful when you want to have Juju provide
+distinct addresses for an application on one or more spaces. For example,
+adding this field to a YAML file for an application called "foo":
 
 ```yaml
 extra-bindings:
   cluster:
   public:
 ```
+
 Will permit you to deploy the charm using `--bind` to deploy on units that have
-access to the "admin-api", "public-api", and "internal-api" spaces with a'
+access to the "admin-api", "public-api", and "internal-api" spaces with a
 different network interface and address for each binding, using this:
 
 ```bash
@@ -187,20 +190,12 @@ Endpoint names are strings and must not match existing relation names from
 the Provides, Requires, or Peers metadata sections. The values beside each
 endpoint name must be left out (i.e. "foo": &lt;anything&gt; is invalid).
 
-Other available fields are:
-
-  - `series` is a list of series that the charm supports.
-     - It can include code names of Ubuntu releases such as 'trusty' or
-       'xenial'.
-     - It can also include code names for non-Ubuntu series such as 'centos7'.
-  - `terms` lists the terms the user must agree to before using the charm.
-  - `min-juju-version` the minimum version of Juju this charm is compatible with.
-
-Other field names should be considered to be reserved; please don't use any not
-listed above to avoid issues with future versions of Juju.
-
 
 <!-- LINKS -->
 
-[hook-payloads]:./reference-hook-tools.html#payload-status-set
-[list-payloads]:./commands.html#list-payloads
+[authors-subordinate]: ./authors-subordinate-applications.md
+[authors-relations]: ./authors-relations.md
+[charm-store]: https://jujucharms.com/store
+[developer-storage]: ./developer-storage.md
+[hook-payloads]:./reference-hook-tools.md#payload-status-set
+[list-payloads]:./commands.md#list-payloads
