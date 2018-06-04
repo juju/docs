@@ -1,40 +1,22 @@
 Title: Scaling applications
-TODO:  The Scaling Back section should just reference charms-destroy.html (remove-unit)
+TODO:  The Scaling down section should reference charms-destroy.html (remove-unit)
        Critical: review required
 
 # Scaling applications
 
-One of the killer features of computing in the cloud is that it (should)
-seamlessly allow you to scale up or down your applications to meet your needs
-and whims. Juju not only makes it simple to deploy applications, but crucially
-makes it easy to manage them too. It won't anticipate you getting slashdotted
-or on the front page of hacker news (yet), but it does mean that when you do
-you can reliably scale your applications to meet the demand.
+ - Scaling up
+ - Scaling up behind a load balancer
+ - Scaling charms with built in horizontal scaling
+ - Co-location
+ - Adding a unit with new constraints
+ - Scaling down
+
+## Scaling up
+
+To scale up an application up is via the `add-unit` command:
 
 
-##  Adding Units
-
-The general usage to scale an application up is via the `add-unit` command:
-
-```bash
-juju add-unit [options] <application-name>
-```
-
-The command options are:
-
-```no-highlight
-Options:
--m, --model (= "")
-    Model to operate in. Accepts [<controller name>:]<model name>
--n, --num-units  (= 1)
-    Number of units to add
---to (= "")
-    The machine and/or container to deploy the unit in (bypasses constraints)
-
-```
-
-
-## Scaling behind a Load Balancer
+## Scaling up behind a load balancer
 
 In many cases you just can't add more units to an application and have it magically
 scale - you need to use a load balancer. In this case you can just deploy a
@@ -77,7 +59,7 @@ are installed and configured _before_ adding them to the load balancer,
 ensuring minimal user disruption of the application.
 
 
-## Scaling Charms with built in Horizontal scaling
+## Scaling charms with built in horizontal scaling
 
 Some charms have native scaling built in. For instance, the WordPress charm
 has built in load balancing. In this case, scaling up applications is really as
@@ -160,50 +142,39 @@ juju add-machine --constraints="mem=16G"
 juju add-unit mysql --to 3
 ```
 
+## Scaling down
 
-## Scaling Back
+Scaling down is the act of reducing an application's resource footprint. In the
+context of Juju, it is scaling down horizontally (as opposed to vertically).
+This mean reducing the number of individual application instances. It is
+accomplished with the `remove-unit` command.
 
-Sometimes you may want to scale back some of your applications, and this too is
-easy with Juju.
-
-The general usage to scale down an application is with the `remove-unit` command:
-
-```bash
-juju remove-unit [options] <unit> [...]
-```
-
-For example, the following scales down the MediaWiki application by removing a
-specific unit:
+To scale down the MediaWiki application by removing a specific unit:
 
 ```bash
 juju remove-unit mediawiki/1
 ```
 
-If you have scaled-up the MediaWiki application by more than one unit you can
-remove multiple units in the same command:
+Note that because this is the only unit running on the underlying machine, the
+machine will also be removed.
+
+A machine can be manually removed via the `remove-machine` command unless any
+of the following is true for that machine:
+
+ - it has no running units
+ - it is not being used as the only controller
+ - it is not hosting Juju-managed containers (KVM guests or LXD containers) 
+
+For example, to remove a machine with ID of '6':
 
 ```bash
-juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5
-```
-!!! Note: 
-    the unit numbers may not necessarily be sequential, see the
-    [notes on machine/unit numbering](./reference-numbering.html)
-
-
-The `remove-unit` command can be run to remove running units safely. The
-running applications should automatically adjust to the change. If the machine
-the removed unit was running on is not being used as a controller, or hosting
-other Juju managed containers, it will be destroyed automatically.
-
-!!! Note: 
-    If a machine has no running units, controllers or containers, and
-    hasn't been removed automatically, it can be removed with the `remove-machine`
-    command. For example, to remove machine 1 that the unit `mediawiki/1` was
-    housed on, use the command:
-
-```bash
-juju remove-machine 1
+juju remove-machine 6
 ```
 
-For more information on removing applications, please see the section on
-[destroying applications](./charms-destroy.html).
+For more information on removing applications and machines, see the
+[Removing Juju objects][charms-destroy] page.
+
+
+<!-- LINKS -->
+
+[charms-destroy]: ./charms-destroy.md
