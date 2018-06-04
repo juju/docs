@@ -42,18 +42,22 @@ It is possible to remove individual units instead of the entire application
 (i.e. all the units):
 
 ```bash
-juju remove-unit mediawiki/1
+juju remove-unit postgresql/2
 ```
+
+In the case that the removed unit is the only one running on the corresponding
+machine, unless any of the following is true for that machine, it will also be
+removed:
+
+ - it was created with `juju add-machine`
+ - it is not being used as the only controller
+ - it is not hosting Juju-managed containers (KVM guests or LXD containers) 
 
 To remove multiple units:
 
 ```bash
-juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mysql/2
+juju remove-unit mediawiki/1 mediawiki/3 mediawiki/5 mysql/2
 ```
-
-In the case that these are the only units running on a machine, unless that 
-machine was created manually with `juju add machine`, the machine will also be 
-removed.
 
 The `--destroy-storage` option is available for this command as it is for the
 `remove-application` command above.
