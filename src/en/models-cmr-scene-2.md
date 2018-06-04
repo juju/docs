@@ -31,8 +31,8 @@ juju add-relation mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql
 
 ## juju status
 
-The `juju status` command provides a summary of what offers have been made.
-Here we'll apply it to the model 'cmr-model-1' in the 'lxd-cmr-1' controller:
+The `status` command provides a summary of what offers have been made. Here
+we'll apply it to the model 'cmr-model-1' in the 'lxd-cmr-1' controller:
 
 ```bash
 juju status --relations -m lxd-cmr-1:cmr-model-1
@@ -66,15 +66,15 @@ connections to the offer and the total number of connections/relations
 
 ## juju offers
 
-The `juju offers` command (alias `juju list-offers`) shows similar information.
+The `offers` command (alias `juju list-offers`) shows similar information.
 However, it also allows for several formats, each of which displays different
 kinds of information.
 
 The 'summary' format provides information very similar to that gained via the
-`juju status` command (it adds the offer URL):
+`status` command (it adds the offer URL):
 
 ```bash
-juju offers --format summary
+juju offers --format summary -m lxd-cmr-1:cmr-model-1
 ```
 
 Output:
@@ -89,7 +89,7 @@ access the offer and what ingress subnets are required to allow traffic from
 the consuming model:
 
 ```bash
-juju offers -m lxd-cmr-1:cmr-model-1 --format yaml
+juju offers --format yaml -m lxd-cmr-1:cmr-model-1
 ```
 
 Output:
@@ -105,15 +105,15 @@ mysql:
       interface: mysql
       role: provider
   connections:
-  - source-model-uuid: e0aaf3d9-0547-4ec3-8106-75615e48a419
+  - source-model-uuid: 4f032e24-4912-4620-894e-0b8f5324465c
     username: admin
     relation-id: 1
     endpoint: db
     status:
       current: joined
-      since: 4 hours ago
+      since: 2018-06-01
     ingress-subnets:
-    - 10.87.144.189/32
+    - 10.252.47.222/32
   users:
     admin:
       display-name: admin
@@ -133,7 +133,7 @@ Output:
 
 ```no-highlight
 Offer  User   Relation id  Status  Endpoint  Interface  Role      Ingress subnets
-mysql  admin  1            joined  db        mysql      provider  10.87.144.189/32
+mysql  admin  1            joined  db        mysql      provider  10.252.47.222/32
 ```
 
 !!! Note:
@@ -169,7 +169,7 @@ The above command is best run with `--format summary` as the intent is to see,
 for a given user, what offers they might relate to, regardless of whether there
 are existing relations (which is what the tabular view shows).
 
-To list a specific offer:
+To list a specific offer (here named 'mysql'):
 
 ```bash
 juju offers mysql
