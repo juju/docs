@@ -1,6 +1,6 @@
-Title: Debugging Juju charm hooks
+Title: Debugging charm hooks
 
-# Debugging hooks
+# Debugging charm hooks
 
 Not everything works the first time, and sometimes even when it seems to work,
 things don't happen quite as you expected. Juju provides commands to help
