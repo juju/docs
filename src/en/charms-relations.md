@@ -84,26 +84,25 @@ juju add-relation mysql mediawiki:db
 
 -->
 
-We can check the output from `juju status` to make sure the correct
-relationship has been established:
+The output to `juju status --relations` will display the relations:
 
-<!-- JUJUVERSION: 2.3.1-xenial-amd64 -->
-<!-- JUJUCOMMAND: juju status -->
+<!-- JUJUVERSION: 2.4-beta4-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju status --relations -->
 ```no-highlight
-Model    Controller  Cloud/Region         Version  SLA
-default  lxd         localhost/localhost  2.3.1    unsupported
+Model    Controller  Cloud/Region         Version    SLA          Timestamp
+default  lxd         localhost/localhost  2.4-beta4  unsupported  20:22:45Z
 
 App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
 mediawiki  1.19.14  active      1  mediawiki  jujucharms   19  ubuntu  
-mysql      5.7.20   active      1  mysql      jujucharms   58  ubuntu  
+mysql      5.7.22   active      1  mysql      jujucharms   58  ubuntu  
 
 Unit          Workload  Agent  Machine  Public address  Ports     Message
-mediawiki/0*  active    idle   2        10.55.126.152   80/tcp    Ready
-mysql/0*      active    idle   1        10.55.126.253   3306/tcp  Ready
+mediawiki/0*  active    idle   2        10.115.37.227   80/tcp    Ready
+mysql/0*      active    idle   1        10.115.37.45    3306/tcp  Ready
 
 Machine  State    DNS            Inst id        Series  AZ  Message
-1        started  10.55.126.253  juju-d4f415-1  xenial      Running
-2        started  10.55.126.152  juju-d4f415-2  trusty      Running
+1        started  10.115.37.45   juju-db874f-1  xenial      Running
+2        started  10.115.37.227  juju-db874f-2  trusty      Running
 
 Relation provider  Requirer       Interface  Type     Message
 mysql:cluster      mysql:cluster  mysql-ha   peer     
