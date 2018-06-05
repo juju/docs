@@ -25,20 +25,22 @@ remote applications.
 juju deploy mysql --constraints "cores=4 mem=16G root-disk=1T"
 ```
 
-The output to `juju status` will eventually look similar to:
+The output to `juju status --relations` will eventually look similar to:
 
+<!-- JUJUVERSION: 2.4-beta4-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju status --relations -->
 ```no-highlight
-Model      Controller  Cloud/Region   Version      SLA
-cmr-model  aws-cmr     aws/us-east-1  2.3-beta2.1  unsupported
+Model      Controller  Cloud/Region   Version    SLA          Timestamp
+cmr-model  aws-cmr     aws/us-east-1  2.4-beta4  unsupported  21:38:59Z
 
 App    Version  Status  Scale  Charm  Store       Rev  OS      Notes
-mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu
+mysql  5.7.22   active      1  mysql  jujucharms   58  ubuntu  
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
-mysql/0*  active    idle   0        54.81.205.47    3306/tcp  Ready
+mysql/0*  active    idle   0        107.22.17.48    3306/tcp  Ready
 
 Machine  State    DNS           Inst id              Series  AZ          Message
-0        started  54.81.205.47  i-0f9f15e276ec3b5c2  xenial  us-east-1a  running
+0        started  107.22.17.48  i-05dc6ef01fd41735b  xenial  us-east-1a  running
 
 Relation provider  Requirer       Interface  Type  Message
 mysql:cluster      mysql:cluster  mysql-ha   peer
@@ -95,29 +97,31 @@ The last command has made use of a *cross model relation*.
 The output to `juju status` for this model will eventually settle down to look
 very much like:
 
+<!-- JUJUVERSION: 2.4-beta4-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju status --relations -->
 ```no-highlight
-Model            Controller  Cloud/Region   Version      SLA
-wordpress-model  aws-cmr     aws/us-east-1  2.3-beta2.1  unsupported
+Model            Controller  Cloud/Region   Version    SLA          Timestamp
+wordpress-model  aws-cmr     aws/us-east-1  2.4-beta4  unsupported  17:55:45Z
 
-SAAS   Status   Store    URL
-mysql  unknown  aws-cmr  admin/cmr-model.mysql
+SAAS   Status  Store    URL
+mysql  active  aws-cmr  admin/cmr-model.mysql
 
 App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
 wordpress           active      1  wordpress  jujucharms    5  ubuntu  exposed
 
 Unit          Workload  Agent  Machine  Public address  Ports   Message
-wordpress/0*  active    idle   0        54.198.91.120   80/tcp
+wordpress/0*  active    idle   0        54.166.154.178  80/tcp  
 
-Machine  State    DNS            Inst id              Series  AZ          Message
-0        started  54.198.91.120  i-00332775f5f83d886  trusty  us-east-1a  running
+Machine  State    DNS             Inst id              Series  AZ          Message
+0        started  54.166.154.178  i-0f73b697d5aaef377  trusty  us-east-1a  running
 
 Relation provider       Requirer                Interface     Type     Message
-mysql:db                wordpress:db            mysql         regular
+mysql:db                wordpress:db            mysql         regular  
 wordpress:loadbalancer  wordpress:loadbalancer  reversenginx  peer
 ```
 
-Notice how the remote MySQL application shows up as a SAAS object. The
-relation is also described:
+Notice how the remote MySQL application shows up as a SAAS object. Its
+corresponding relation is also described:
 
 ```no-highlight
 Relation provider       Requirer                Interface     Type     Message
@@ -153,23 +157,25 @@ juju expose mediawiki
 juju add-relation mediawiki:db admin/cmr-model.mysql
 ```
 
-The output to `juju status` for this model will eventually become:
+The output to `juju status --relations` for this model will eventually become:
 
+<!-- JUJUVERSION: 2.4-beta4-xenial-amd64 -->
+<!-- JUJUCOMMAND: juju status --relations -->
 ```no-highlight
-Model            Controller  Cloud/Region   Version      SLA
-mediawiki-model  aws-cmr     aws/us-east-1  2.3-beta2.1  unsupported
+Model            Controller  Cloud/Region   Version    SLA          Timestamp
+mediawiki-model  aws-cmr     aws/us-east-1  2.4-beta4  unsupported  18:07:38Z
 
-SAAS   Status   Store    URL
-mysql  unknown  aws-cmr  admin/cmr-model.mysql
+SAAS   Status  Store    URL
+mysql  active  aws-cmr  admin/cmr-model.mysql
 
 App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
 mediawiki  1.19.14  active      1  mediawiki  jujucharms   19  ubuntu  exposed
 
 Unit          Workload  Agent  Machine  Public address  Ports   Message
-mediawiki/0*  active    idle   0        54.80.49.62     80/tcp  Ready
+mediawiki/0*  active    idle   0        54.224.9.240    80/tcp  Ready
 
-Machine  State    DNS          Inst id              Series  AZ          Message
-0        started  54.80.49.62  i-0b7530071c6242c19  trusty  us-east-1a  running
+Machine  State    DNS           Inst id              Series  AZ          Message
+0        started  54.224.9.240  i-0905beabb62c21ee9  trusty  us-east-1a  running
 
 Relation provider  Requirer      Interface  Type     Message
 mysql:db           mediawiki:db  mysql      regular
@@ -186,14 +192,16 @@ Offer  Application  Charm  Rev  Connected  Endpoint  Interface  Role
 mysql  mysql        mysql  58   2/2        db        mysql      provider
 ```
 
+We can also inquire into currently shared endpoints within the 'cmr-model':
+
 ```bash
 juju offers -m cmr-model
 ```
 
 ```no-highlight
 Offer  User   Relation id  Status  Endpoint  Interface  Role      Ingress subnets
-mysql  admin  1            joined  db        mysql      provider  54.198.91.120/32
-       admin  2            joined  db        mysql      provider  54.80.49.62/32
+mysql  admin  1            joined  db        mysql      provider  54.166.154.178/32
+       admin  2            joined  db        mysql      provider  54.224.9.240/32
 ```
 
 ## Verification
@@ -225,7 +233,7 @@ The output should look similar to:
 ```
 
 From the output we can see evidence of two databases that got created, one for
-each consumer application.
+each consumer application. Cool.
 
 
 <!-- LINKS -->
