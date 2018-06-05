@@ -161,6 +161,10 @@ disposal:
  - `http-proxy`
  - `https-proxy`
  - `image-metadata-url`
+ - `juju-ftp-proxy`  
+ - `juju-http-proxy`  
+ - `juju-https-proxy`  
+ - `juju-no-proxy`
 
 The method for configuring models while using the `bootstrap` command is done
 with either the `--config` option or the `--model-default` option. The latter

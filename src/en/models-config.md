@@ -137,6 +137,10 @@ firewall-mode                | string | instance | instance/global/none       | 
 ftp-proxy                    | string |          | url                        | The FTP proxy value to configure on instances, in the FTP_PROXY environment variable.
 http-proxy                   | string |          | url                        | The HTTP proxy value to configure on instances, in the HTTP_PROXY environment variable.
 https-proxy                  | string |          | url                        | The HTTPS proxy value to configure on instances, in the HTTPS_PROXY environment variable.
+juju-ftp-proxy               | string |          |                            | The charm-centric FTP proxy value.
+juju-http-proxy              | string |          |                            | The charm-centric HTTP proxy value.
+juju-https-proxy             | string |          |                            | The charm-centric HTTPS proxy value.
+juju-no-proxy                | string |          |                            | The charm-centric no-proxy value. CIDR notation supported.
 ignore-machine-addresses     | bool   | false    |                            | When true, the machine worker will not look up or discover any machine addresses.
 image-metadata-url           | string |          | url                        | The URL at which the metadata used to locate OS image ids is located.
 image-stream                 | string |          |                            | The simplestreams stream used to identify which image ids to search when starting an instance. See [additional info below](#image-streams).
