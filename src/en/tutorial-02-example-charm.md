@@ -14,12 +14,12 @@ Building on the previous tutorial: [Hello World example charm development, Part 
 
 ## The 'layer-index'
 
-Lets examine the inludes tag in ** layer.yaml **.
-<pre>
+Lets examine the inludes tag in ** layer.yaml **
+```yaml
 includes: 
   - 'layer:basic'
   - 'layer:apt'
-</pre>
+```
 
 You learned from the first part of the tutorial that the 'includes' tag in 'layer.yaml' is similar to an "include" statement in python. All charms must include the 'layer:base'.
 
@@ -43,7 +43,7 @@ Lets do that.
 
 Modify the **~/charms/layers/layer-example/layer.yaml** to look like this:
 
-<pre>
+```yaml
 includes: 
   - 'layer:basic'
   - 'layer:apt'
@@ -52,11 +52,11 @@ options:
   apt:
     packages:
      - hello 
-</pre>
+```
 
 Modify the **~/charms/layers/layer-example/metadata.yaml** to look like this:
 
-<pre>
+```yaml
 name: example
 summary: A very basic example charm
 maintainer: Your Name <your.name@mail.com>
@@ -68,7 +68,7 @@ tags:
 requires:
   database:
     interface: mysql
-</pre>
+```
 
 ## Create the templates directory:
 The 'templates' directory is where templates go for charms. Lets create it.

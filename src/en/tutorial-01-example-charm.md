@@ -108,13 +108,13 @@ Let's get rid of these `E: errors` by making the following files look like this:
 
 ** layer-example/layer.yaml ** (Always include 'layer:basic')
 
-<pre>
+```yaml
 includes:
   - 'layer:basic'
-</pre>
+```
 
 ** layer-example/metadata.yaml ** 
-<pre>
+```yaml
 name: example
 summary: A very basic example charm
 maintainer: Your Name <your.name@mail.com>
@@ -123,7 +123,7 @@ description: |
 tags:
   - misc
   - tutorials
-</pre>
+```
 
 ** layer-example/reactive/layer_example.py **
 ```python
@@ -168,7 +168,7 @@ The *[layer:apt]* has all the functionality we need for installing packages from
 
 Modify the '~/charms/layers/layer-example/layer.yaml' to look like this:
 
-<pre>
+```yaml
 includes: 
   - 'layer:basic'
   - 'layer:apt'
@@ -176,7 +176,7 @@ options:
   apt:
     packages:
      - hello
-</pre>
+```
 
 Modify '~/charms/layers/layer-example/reactive/layer_example.py' to look like this:
 

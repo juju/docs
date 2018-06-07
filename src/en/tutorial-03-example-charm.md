@@ -14,7 +14,7 @@ Having a repo key helps others contribute to your charm.
 
 Go ahead and a link to your repo last in the ** layer.yaml ** file. It should look like this where you replace the link to your own code.
 
-<pre>
+```yaml
 includes: 
   - 'layer:basic'
   - 'layer:apt'
@@ -24,14 +24,14 @@ options:
     packages:
      - hello 
 repo: git@github.com:erik78se/layer-example.git
-</pre>
+```
 
 ## Define a "series" in metadata.yaml
 To help juju know which version of ubuntu your charm works best for, add a series tag to metadata.yaml.
 
 Lets add an entry for both Ubuntu 16.04 (xenial) and 18.04 (bionic):
 
-<pre>
+```yaml
 name: example
 summary: A very basic example charm
 maintainer: Your Name <your.name@mail.com>
@@ -46,7 +46,7 @@ requires:
 series:
   - xenial
   - bionic
-</pre>
+```
 
 Rebuild the charm.
 
@@ -123,7 +123,7 @@ The charm is now pushed to a namespace in [charmstore] private to you. Nobody el
 Lets try deploy it!
 
 ## Deploy from charmstore
-Once a charm is uploaded to charmstore, it can be deployed with the url given by the output for the push command (in my case: ** cs:~erik-lonroth/example-0 **).
+Once a charm is uploaded to charmstore, it can be deployed with the url given by the output for the push command (in my case: ** cs:~erik-lonroth/example-0 ** )
 
 Lets try deploy, but remember to remove any previous example charm you have in your model before you try deploying.
 
