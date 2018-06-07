@@ -197,7 +197,7 @@ Note: We deploy our local charm by referencing with a path (../trusty/example). 
 Lets look at the file we created inside the example/0 unit. We will do that using "juju ssh".
 
 ```bash
-juju ssh mysql/0 sudo cat /root/text-file.txt
+juju ssh example/0 sudo cat /root/text-file.txt
 
 ```
 juju ssh executes a command on the remote machine and if everything goes well, you should see the contents of the rendered file, something like below:
