@@ -130,7 +130,7 @@ def write_text_file(mysql):
            context={
                'my_database': mysql,
            })
-        status_set('active', 'Ready: File rendered.')
+    status_set('active', 'Ready: File rendered.')
 
 
 @when_not('database.connected')
