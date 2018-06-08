@@ -40,9 +40,9 @@ It is possible to remove individual units instead of the entire application
 juju remove-unit postgresql/2
 ```
 
-In the case that the removed unit is the only one running on the corresponding
-machine, unless any of the following is true for that machine, it will also be
-removed:
+In the case that the removed unit is the only one running the corresponding
+machine will also be removed unless any of the following is true for that
+machine:
 
  - it was created with `juju add-machine`
  - it is not being used as the only controller

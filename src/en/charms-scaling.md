@@ -7,13 +7,11 @@ The capability of a service to adjust its resource footprint to a level
 appropriate for fulfilling client demands placed upon it is known as
 *scalability*. Scaling *vertically* affects the resources of existing machines
 (memory, CPU, disk space) whereas scaling *horizontally* involves the number of
-units available.
+application units available.
 
-Scaling with Juju amounts to horizontal scaling where "scaling up" adds units
-and "scaling down" removes units. Units are not always synonymous with machines
-however. Multiple units can be placed onto a single machine (co-location) and
-still be considered horizontal scaling if sufficient resources are present on
-the machine.
+Units are not always synonymous with machines however. Multiple units can be
+placed onto a single machine (co-location) and still be considered horizontal
+scaling if sufficient resources are present on the machine.
 
 This page will describe how rudimentary scaling works with Juju as well as
 mention some less common situations.
@@ -147,15 +145,14 @@ To scale down the MediaWiki application by removing a specific unit:
 juju remove-unit mediawiki/1
 ```
 
-Note that because this is the only unit running on the underlying machine, the
+Note that if this is the only unit running on the underlying machine, the
 machine will also be removed.
 
-A machine can be manually removed unless any of the following is true for that
-machine:
+A machine cannot be manually removed if any of the following is true:
 
- - it has no running units
- - it is not being used as the only controller
- - it is not hosting Juju-managed containers (KVM guests or LXD containers) 
+ - it houses a unit
+ - it is being used as the only controller
+ - it is hosting Juju-managed containers (KVM guests or LXD containers) 
 
 For example, to remove a machine with ID of '6':
 
