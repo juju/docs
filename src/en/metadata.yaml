@@ -79,7 +79,7 @@ navigation:
             location: charms-constraints.md
           - title: Application configuration
             location: charms-config.md
-          - title: Application Relations
+          - title: Managing relations
             location: charms-relations.md
           - title: Exposing applications
             location: charms-exposing.md
