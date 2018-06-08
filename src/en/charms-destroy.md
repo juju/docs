@@ -54,9 +54,6 @@ To remove multiple units:
 juju remove-unit mediawiki/1 mediawiki/3 mediawiki/5 mysql/2
 ```
 
-The `--destroy-storage` option is available for this command as it is for the
-`remove-application` command above.
-
 ## Removing machines
 
 Juju machines can be removed like this:
