@@ -20,13 +20,14 @@ yourself.
 
 ### Adding bundles from the command line
 
-Bundles are deployed on the command line exactly like
-[Charms](./charms-deploying.html), and use the same `deploy` command and
-syntax:
+A bundle is deployed exactly like a charm:
 
 ```bash
 juju deploy wiki-simple
 ```
+
+See the [Deploying applications][charms-deploying] page for details on the
+`deploy` command.
 
 To get a summary of the deployment steps (without actually deploying) a *dry
 run* can be performed:
@@ -57,7 +58,7 @@ Changes to deploy bundle:
     The `dry-run` option only works with bundles.
 
 You can get the name of a bundle from the [Juju Charm Store][store], just as
-you would a charm.  Unlike charms, bundles embed more than a single
+you would a charm. Unlike charms, bundles embed more than a single
 application, and you can see icons representing each separate application
 alongside a bundle's name. This gives you a quick overview of a bundle's
 complexity and potential resource requirements.
@@ -72,73 +73,6 @@ bundle, which you can also run to deploy your chosen bundle:
 ```bash
 juju deploy cs:bundle/wiki-simple-4
 ```
-## Adding bundles with the GUI
-
-Bundles are just as easy to use and deploy within the Juju GUI, and the process
-of adding them from the Charm Store is almost identical to the way you add
-charms. 
-
-From the GUI, open the Store and select the bundle you're interested in. A new
-pane will display a preview of what the GUI's visual overview will look like
-with the bundle installed, showing applications and connections. Further
-details, such as how a bundle supports scaling, can be found below the preview.
-
-Click 'Add to model-name', where *model-name* is your currently selected
-model. This will simply add the bundle to your currently selected model.
-
-Before clicking on 'Commit changes' to activate your new bundle, review the
-configuration of each application by selecting them and making any necessary
-changes. Click on 'Commit changes' to review the deployment summary followed by
-'Deploy' to set those changes in motion. Alternatively, select each application
-and click 'Destroy' to remove them from bundle prior to activation.
-
-### Exporting and Importing bundles with the GUI
-
-From the GUI, you can easily export and re-import the current model as a local
-bundle, encapsulating your applications and connections into a single file. To
-do this, click on the 'Export' button alongside your username and model name,
-or use the keyboard shortcut “shift-d”.  This results in the creation of a file
-called `<model-name>-<year>-<month>-<date>.yaml` that your browser will
-typically prompt you to save or open.
-
-![Export button in the Juju GU](media/juju2_gui_bundles_export.png)
-
-You can import a saved bundle by either dragging the exported YAML file onto
-your browser canvas, or using the 'Import' button. After clicking 'Import' your
-browser will prompt you to select a bundle file.
-
-After a file has been added, the GUI will briefly report 
-`ChangeSet process started` followed by `ChangeSet import complete`. As with
-adding bundles from the store, you may want to review the applications,
-connections and various configuration options before clicking on 'Commit
-changes' and 'Deploy' to activate your bundle.
-
-### Local deploy via command line
-
-After exporting a bundle from the GUI, you can also `deploy` the saved bundle
-from the command line: 
-
-```bash
-juju deploy bundle.yaml
-```
-Unlike when you import and deploy a bundle with the Juju GUI, running `juju
-deploy` on the command line will not attempt to rename a new application if an
-application with the same name already exists.
-
-From the command line, you can also check for errors in a bundle before
-deploying it. Bundles downloaded from the Juju store need to be unzipped into
-their own directory, and your own YAML files will need to be accompanied by a
-`README.md` text file (although this file can be empty for testing purposes).
-You can then check for possible errors with the following command:
-
-```bash
-charm proof directory-of-bundle/
-```
-Note that if no directory is given, the command defaults to the current
-directory.
-
-If no errors are detected, there will be no output from `charm proof` and you
-can safely deploy your bundle. 
 
 ## Creating a bundle
 
@@ -505,9 +439,13 @@ Freenode) who can assist. You can also use the
     Make sure you've added a brief explanation of what your bundle does within
     the `description` field of your bundle's YAML file. 
 
+
+<!-- LINKS -->
+
+[charms-deploying]: ./charms-deploying.md
 [store]: https://jujucharms.com/q/?type=bundle
-[store-docs]: ./authors-charm-store.html
+[store-docs]: ./authors-charm-store.md
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
-[charms-constraints]: ./charms-constraints.html
-[discover-config-options-docs]: ./charms-config.html#discovering-application-configuration-options
-[charm-resources-docs]: ./developer-resources.html
+[charms-constraints]: ./charms-constraints.md
+[discover-config-options-docs]: ./charms-config.md#discovering-application-configuration-options
+[charm-resources-docs]: ./developer-resources.md
