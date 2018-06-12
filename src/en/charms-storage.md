@@ -466,9 +466,9 @@ provider currently supports a single pool configuration attribute:
 ### LXD (lxd)
 
 !!! Note:
-    To get an LXD version (at least 2.16) on either Ubuntu 14.04 LTS (Trusty)
-    or Ubuntu 16.04 LTS (Xenial) that has the 'lxd' storage provider feature
-    the [LXD:stable PPA][ppa-lxd] will be required.
+    Ubuntu 14.04 LTS (Trusty) and Ubuntu 16.04 LTS (Xenial) do not ship with a
+    version of LXD (at least 2.16) that has the 'lxd' storage provider feature.
+    See the [Using LXD with Juju][clouds-lxd] page for installation help.
 
 LXD-based models have access to the 'lxd' storage provider. The LXD provider
 has two configuration options:
@@ -538,7 +538,7 @@ pool:
 juju deploy postgresql --storage pgdata=lxd,8G
 ```
 
-See [Using LXD as a cloud][clouds-lxd] for how to use LXD in conjunction with
+See [Using LXD with Juju][clouds-lxd] for how to use LXD in conjunction with
 Juju, including the use of ZFS as an alternative filesystem.
 
 #### Loop devices and LXD
@@ -610,7 +610,7 @@ For guidance on how to create a charm that uses these storage features see
 [commands-remove-storage]: ./commands.html#remove-storage
 [commands-upgrade-charm]: ./commands.html#upgrade-charm
 
-[clouds-lxd]: ./clouds-LXD.html
+[clouds-lxd]: ./clouds-LXD.md
 [charms-storage-ceph]: ./charms-storage-ceph.html
 [generic-storage-loop]: https://en.wikipedia.org/wiki/Loop_device
 [generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
