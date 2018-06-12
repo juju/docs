@@ -116,7 +116,7 @@ There are three special types of clouds: MAAS, LXD and Manual.
   developing your own Juju charms - it is incredibly fast! 
   [LXD is a container hypervisor][LXD-site] that runs on any Linux host, providing 
   the ability to spin up containers on the host machine. For more details on
-  using LXD, please see the [LXD documentation][juju-lxd].
+  using LXD, please see the [Using LXD with Juju][clouds-lxd].
   
   - **MAAS:** An acronym of Metal As A Service, MAAS lets you treat physical
   servers like virtual machines in the cloud. Rather than having to manage each
@@ -381,7 +381,7 @@ mystack            1  dev1             openstack   Openstack Cloud
 
 [credentials]: ./credentials.html "Juju documentation > Credentials"
 [LXD-site]: http://www.ubuntu.com/cloud/lxd "LXD"
-[juju-lxd]: ./clouds-LXD.html "Juju documentation > LXD"
+[clouds-lxd]: ./clouds-LXD.md
 [maas-site]: http://maas.io "MAAS website"
 [juju-maas]: ./clouds-maas.html "Juju documentation > MAAS"
 [juju-manual]: ./clouds-manual.html "Juju documentation > Manual cloud"
