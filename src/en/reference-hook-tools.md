@@ -94,8 +94,9 @@ config-get [key-with-no-default]
 config-get [missing-key]
 ```
 
-!!! Note: The above two examples are not misprints - asking for a value which
-doesn't exist or has not been set returns nothing and raises no errors.
+!!! Note: 
+    The above two examples are not misprints - asking for a value which
+    doesn't exist or has not been set returns nothing and raises no errors.
 
 ### juju-log
 
@@ -264,9 +265,10 @@ For example, running `opened-ports` may return:
 81/tcp
 ```
 
-!!! Note: opening ports is transactional (i.e. will take place on successfully 
-exiting the current hook), and therefore `opened-ports` will not return any
-values for pending `open-port` operations run from within the same hook. 
+!!! Note: 
+    opening ports is transactional (i.e. will take place on successfully 
+    exiting the current hook), and therefore `opened-ports` will not return any
+    values for pending `open-port` operations run from within the same hook. 
 
 
 
@@ -341,12 +343,13 @@ sufficient to complete all configuration that depends on remote unit settings.
 Settings for remote units already known to have departed remain accessible for
 the lifetime of the relation.
 
-!!! Note: `relation-get` currently has a bug
-[LP #1223339](https://bugs.launchpad.net/juju-core/+bug/1223339)
-which allows units of the same service to see each other's
-settings outside of a peer relation. Depending on this behaviour is inadvisable: if
-you need to share settings between units of the same service, always use a peer
-relation to do so, or your charm may fail unexpectedly when the bug is fixed.
+!!! Note: 
+    `relation-get` currently has a bug
+    [LP #1223339](https://bugs.launchpad.net/juju-core/+bug/1223339)
+    which allows units of the same service to see each other's
+    settings outside of a peer relation. Depending on this behaviour is inadvisable: if
+    you need to share settings between units of the same service, always use a peer
+    relation to do so, or your charm may fail unexpectedly when the bug is fixed.
 
 ### relation-list
 

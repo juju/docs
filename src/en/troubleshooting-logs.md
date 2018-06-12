@@ -188,7 +188,8 @@ machine in the entire log:
 juju debug-log --replay --include unit-mysql-0 --include machine-1
 ```
 
-!!! Note: The unit can also be written `mysql/0` (as shown by 'juju status').
+!!! Note: 
+    The unit can also be written `mysql/0` (as shown by 'juju status').
 
 To see all WARNING and ERROR messages in the entire log:
 
@@ -196,9 +197,10 @@ To see all WARNING and ERROR messages in the entire log:
 juju debug-log --replay --level WARNING
 ```
 
-!!! Note: The `level` option restricts messages to the specified log-level or
-greater. The levels from lowest to highest are TRACE, DEBUG, INFO, WARNING, and
-ERROR.
+!!! Note: 
+    The `level` option restricts messages to the specified log-level or
+    greater. The levels from lowest to highest are TRACE, DEBUG, INFO, WARNING, and
+    ERROR.
 
 To progressively exclude more content from the entire log:
 

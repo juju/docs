@@ -3,10 +3,11 @@ Title: Configuring for Microsoft Azure
 
 # Configuring for Microsoft Azure 
 
-!!! Warning: Azure has two concurrent UI versions: the older "classic" console
-(https://manage.windowsazure.com) and the "new" console
-(https://portal.azure.com). The features necessary in this document are only
-available in the classic portal.
+!!! Warning: 
+    Azure has two concurrent UI versions: the older "classic" console
+    (https://manage.windowsazure.com) and the "new" console
+    (https://portal.azure.com). The features necessary in this document are only
+    available in the classic portal.
 
 
 ## Prerequisites
@@ -34,8 +35,9 @@ During the creation process, you will be prompted for some information
 (country, state, location, organisation, and common name). 'country' must be a
 valid 2-character value but the others are arbitrary.
 
-!!! Note: We recommend a meaningful name for 'common name' such as 'juju-azure'
-as this will become the "name" of the certificate.
+!!! Note: 
+    We recommend a meaningful name for 'common name' such as 'juju-azure'
+    as this will become the "name" of the certificate.
 
 Create the key and certificate now:
 
@@ -49,8 +51,9 @@ chmod 600 juju-azure.pem
 The certificate is in file `juju-azure.cer` and the private key is in
 `juju-azure.pem`.
 
-!!! Note: The PEM file (`juju-azure.pem`) actually contains both the private key
-and the certificate.
+!!! Note: 
+    The PEM file (`juju-azure.pem`) actually contains both the private key
+    and the certificate.
 
 Copy the PEM file to where Juju can find it:
 
@@ -132,11 +135,12 @@ For insight into the 'Replication' field see
 [Azure storage redundancy documentation](https://azure.microsoft.com/documentation/articles/storage-redundancy)
 .
 
-!!! Note: Once you bootstrap Juju, an Azure affinity group (e.g.
-`juju-azure-ag`) will appear in this list if you ever come back to it. See
-[stackoverflow.com: "Azure Availability Set vs Affinity
-Group"](http://stackoverflow.com/questions/25472549/azure-availability-set-vs-affinity-group)
-for context.
+!!! Note: 
+    Once you bootstrap Juju, an Azure affinity group (e.g.
+    `juju-azure-ag`) will appear in this list if you ever come back to it. See
+    [stackoverflow.com: "Azure Availability Set vs Affinity
+    Group"](http://stackoverflow.com/questions/25472549/azure-availability-set-vs-affinity-group)
+    for context.
 
 ### `management-certificate-path`
 
@@ -171,9 +175,10 @@ under 'Virtual Machines' in the left pane:
 
 ![bootstrap machine 0 in Azure portal](media/config-azure-stable_machine_0.png)
 
-!!! Note: By default new Azure accounts are limited to 10 cores. You may
- +need to file a support ticket with Azure to raise this limit for your 
- +account if you are deploying many or large applications.
+!!! Note: 
+    By default new Azure accounts are limited to 10 cores. You may
+     +need to file a support ticket with Azure to raise this limit for your 
+     +account if you are deploying many or large applications.
  
 ## Additional notes
 

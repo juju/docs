@@ -17,10 +17,11 @@ configuration files (such as '.jenv' files for running environments, or
 credentials) it is usually best to simply back up the entire Juju directory
 (`~/.juju`).
 
-!!! Note: On Windows systems, the Juju directory is in a different place
- (usually `C:\Users\<username>\AppData\Roaming\Juju`. Also, although `tar` is 
-available for Windows, you may prefer to use a more Windows-centric backup 
-application.
+!!! Note: 
+    On Windows systems, the Juju directory is in a different place
+     (usually `C:\Users\<username>\AppData\Roaming\Juju`. Also, although `tar` is 
+    available for Windows, you may prefer to use a more Windows-centric backup 
+    application.
 
 ### Backup ~/.juju
 
@@ -58,10 +59,11 @@ of your local environment(s):
 sudo tar -cvpzf juju-client-$(date "+%Y%m%d-%H%M%S").tar.gz --exclude=.juju/local --exclude=.juju/local2 .juju 
 ```
 
-!!! Note: As mentioned previously, the files in this backup include the keys 
-Juju uses to connect to running environments. Anybody who has access to this 
-backup will be able to connect to and control your environments, so a further 
-step of encrypting this backup file may be advisable.
+!!! Note: 
+    As mentioned previously, the files in this backup include the keys 
+    Juju uses to connect to running environments. Anybody who has access to this 
+    backup will be able to connect to and control your environments, so a further 
+    step of encrypting this backup file may be advisable.
  
 ### Restoring ~/.juju 
 
@@ -73,8 +75,9 @@ cd ~
 tar xzf juju-yymmdd-hhmmss.tar.gz 
 ```
 
-!!! Note: This command will extract the contents of the archive and overwrite any 
-existing files in the Juju directory. Please be sure that this is what you want!
+!!! Note: 
+    This command will extract the contents of the archive and overwrite any 
+    existing files in the Juju directory. Please be sure that this is what you want!
 
 
 In the case of any local environment, this will also be restored providing the 
@@ -261,9 +264,10 @@ juju backups upload juju-backup-20150817-122042.tar.gz --verbose
 The metadata of uploaded files will reflect the time it was stored, but should
 also determine the correct dates for when the backup was started/completed.
 
-!!! Note: The filename you use to store local backups does not matter, but the 
-uploaded file is expected to be a gzipped tar file (e.g. a `.tgz` or `.tar.gz` 
-file)
+!!! Note: 
+    The filename you use to store local backups does not matter, but the 
+    uploaded file is expected to be a gzipped tar file (e.g. a `.tgz` or `.tar.gz` 
+    file)
 
 ### juju backups help 
 
@@ -409,8 +413,9 @@ a new state-server replica on your environment.
 For performing a `restore`, the only check performed by the utility is to make
 sure that the initial state-server is not up. 
 
-!!! WARNING: If your Juju environment still contains existing state servers, 
-restoring a backup will overwrite their data or remove them.
+!!! Warning: 
+    If your Juju environment still contains existing state servers, 
+    restoring a backup will overwrite their data or remove them.
 
 To restore an initial bootstrap environment, the procedure is the same as for 
 non-HA environments:
