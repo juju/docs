@@ -229,9 +229,25 @@ therefore only becomes necessary when *all* controllers have failed. However,
 if a restore *is* applied to a cluster with active members all reachable
 controllers will naturally have their data overwritten.
 
-Section [Recovering from controller failure][recovering-ha-failure] details how
-to deal with a partially degraded cluster. In the advent that all controllers
-are unresponsive the following steps should be taken:
+### Restoring to a cluster
+
+It is not possible at this time to restore while HA is enabled.
+
+To restore to an HA cluster one needs to first remove HA (by removing all but
+one of the controller machines) and then perform a restore operation.
+Presumably HA will be re-enabled afterwards.
+
+Consider a three-member cluster with machines '0', '1', and '2' in the
+'controller' model and where a backup of the cluster was previously made
+(`aws-ha3.tar.gz`).
+
+ 1. 
+
+
+### Restoring due to complete cluster failure
+
+In the advent that all controllers are unresponsive the following steps should
+be taken:
 
  1. Remove the cluster
  1. Perform a data restore and create a new controller
@@ -246,6 +262,9 @@ juju restore-backup -b --file backup.tar.gz
 juju enable-ha -n 3
 ```
 
+!!! Note:
+    Section [Recovering from controller failure][recovering-ha-failure] details
+    how to deal with a partially degraded cluster.
 
 <!-- LINKS -->
 
