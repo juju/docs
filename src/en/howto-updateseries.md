@@ -61,7 +61,7 @@ on machine '1' will be used. The series will be updated from 'trusty' to
 First, for every application, specify the new series:
 
 ```bash
-juju update-series ghost xenial
+juju set-series ghost xenial
 ```
 
 Then add a new unit of the application to replace each existing unit and remove
@@ -84,7 +84,7 @@ In some cloud environments, there may not be the resources to update using the
 above recommended method. Instead we need to upgrade the existing machine
 manually and update the agent data, as shown here:
 
-!!! Warning:
+!!! Negative "Warning":
     This method should be approached with caution. After the series is updated
     on an existing machine, the unit agent may not restart cleanly depending on
     software dependencies (e.g. software installed with `pip` may need to be
@@ -100,7 +100,7 @@ manually and update the agent data, as shown here:
 Let Juju know what series should be used for any new units of the application:
 
 ```bash
-juju update-series ghost xenial
+juju set-series ghost xenial
 ```
 
 #### Upgrade the existing machine
@@ -124,7 +124,7 @@ versions of configuration files.
 
 #### Update agent data on the upgraded machine
 
-!!! Warning:
+!!! Negative "Warning":
     If the Python version has changed between the two series **and** the charm
     uses `pip` to install packages then it will be necessary to force the unit
     to install the new Python packages by running the following command on the
@@ -165,7 +165,7 @@ Once all machines and agents have been updated we need to inform Juju of this
 fact. Here we refer to our example machine with an ID of '1':
 
 ```bash
-juju update-series 1 xenial
+juju set-series 1 xenial
 ```
 
 
