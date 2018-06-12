@@ -1,9 +1,6 @@
-Title: Using LXD as a cloud
-TODO:  Warning: Ubuntu release versions hardcoded
-       Warning: Troubleshoot Trusty; bootstrap only works with the lxd snap
-       (and only if it is installed w/o the lxd deb being installed first)
+Title: Using LXD with Juju
 
-# Using LXD as a cloud
+# Using LXD with Juju
 
 Choosing LXD as the backing cloud for Juju is an efficient way to experiment
 with Juju. It is also very quick to set up. With lightweight containers acting

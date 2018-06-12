@@ -5,7 +5,7 @@ TODO:  Warning: Ubuntu release versions hardcoded
 # Additional LXD resources
 
 This page offers more in-depth information on LXD itself. To learn how to set
-up LXD with Juju see [Using LXD as a cloud][clouds-lxd].
+up LXD with Juju see [Using LXD with Juju][clouds-lxd].
 
 The topics presented here are:
 
