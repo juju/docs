@@ -1,4 +1,5 @@
 Title: Machine and unit numbering  
+TODO:  This page's contents should be merged with `add-machine` and `deploy` pages.
 
 # Machine and Unit numbering
 

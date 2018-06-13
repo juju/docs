@@ -16,6 +16,7 @@ The services of concern here are:
  - HTTP/S proxy
  - APT proxy
  - FTP proxy
+ - Juju-specific proxy
  - APT mirror
  - Juju agent mirror
  - Cloud image mirror
@@ -82,6 +83,37 @@ HTTPS).
 ## FTP proxy
 
 A standard FTP proxy. Juju uses the `ftp-proxy` option for this type of proxy.
+
+## Juju-specific proxy
+
+The following suite of proxy settings have a Juju-only scope (i.e. they are not
+system-wide):
+
+`juju-ftp-proxy`  
+`juju-http-proxy`  
+`juju-https-proxy`  
+`juju-no-proxy`
+
+They are passed to charm hook contexts as the following environment variables,
+respective to the above list:
+
+JUJU_CHARM_FTP_PROXY  
+JUJU_CHARM_HTTP_PROXY  
+JUJU_CHARM_HTTPS_PROXY  
+JUJU_CHARM_NO_PROXY
+
+!!! Important:
+    These Juju-specific proxy settings are incompatible with the four
+    corresponding legacy proxy settings described in earlier sections. Data
+    validation is enabled to prevent collisions from occurring.
+
+One big benefit of using these finely-scoped settings is that `juju-no-proxy`
+can contain subnets (in CIDR notation) whereas its legacy counterpart cannot.
+
+!!! Note:
+    Work is underway to introduce further granularity that will allow specific
+    libraries (e.g. `charm-helpers`) to enable a proxy setting on a per-call
+    basis.
 
 ## APT mirror
 
