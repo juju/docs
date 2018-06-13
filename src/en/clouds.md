@@ -122,7 +122,7 @@ There are three special types of clouds: MAAS, LXD and Manual.
   servers like virtual machines in the cloud. Rather than having to manage each
   server individually, MAAS turns your bare metal into an elastic cloud-like
   resource. There is more information on MAAS at the [MAAS website][maas-site], 
-  and detailed [instructions on using MAAS with Juju here][juju-maas].
+  and detailed instructions on [Using MAAS with Juju][juju-maas].
   
   - **Manual:** There may be occasions where you can bring up machines for Juju
   to use which aren't part of a recognised public cloud or do not support other
@@ -383,7 +383,7 @@ mystack            1  dev1             openstack   Openstack Cloud
 [LXD-site]: http://www.ubuntu.com/cloud/lxd "LXD"
 [clouds-lxd]: ./clouds-LXD.md
 [maas-site]: http://maas.io "MAAS website"
-[juju-maas]: ./clouds-maas.html "Juju documentation > MAAS"
+[juju-maas]: ./clouds-maas.html "Using MAAS with Juju"
 [juju-manual]: ./clouds-manual.html "Juju documentation > Manual cloud"
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [clouds-oracle]: ./help-oracle.html
