@@ -1,7 +1,7 @@
-Title:Manually adding an OpenStack cloud
+Title: Manually adding an OpenStack cloud
+TODO:  Critical: review needed
 
-
-# Manually adding an Openstack cloud
+# Manually adding an OpenStack cloud
 
 There are cases where the cloud you want to use is not on Juju's list of known
 clouds. In this case it is possible to create a [YAML][yaml] formatted file
