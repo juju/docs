@@ -232,12 +232,63 @@ To restore to an HA cluster one needs to first remove HA (by removing all but
 one of the controller machines) and then perform a restore operation.
 Presumably HA will be re-enabled afterwards.
 
-Consider a three-member cluster with machines '0', '1', and '2' in the
-'controller' model and where a backup of the cluster was previously made
+For example, consider a three-member cluster with machines '0', '1', and '2' in
+the 'controller' model and where a backup of the cluster was previously made
 (`aws-ha3.tar.gz`).
 
- 1. 
+Here, we begin by removing machines '1' and '2' but you can remove any two:
 
+```bash
+juju remove-machine -m aws:controller 1 2
+```
+
+Now wait until Juju reports that it is in a non-HA state. This is indicated by
+the text 'none' under the 'HA' column in the output to the `controllers`
+command:
+
+```bash
+juju controllers
+```
+
+Sample output:
+
+```no-highlight
+Controller  Model    User   Access     Cloud/Region   Models  Machines    HA  Version
+aws*        default  admin  superuser  aws/us-east-1       3         2  none 2.4-rc1
+```
+
+There should now be only a single machine listed in the output to
+`juju machines -m aws:controller`.
+
+We can now restore:
+
+```bash 
+juju restore-backup -m aws:controller --file aws-ha3.tar.gz
+```
+
+After a while the two removed machines will reappear but in a 'down' state:
+
+```no-highlight
+Machine  State    DNS            Inst id              Series  AZ          Message
+0        started  54.80.251.128  i-0095fa21cda2b3b9c  xenial  us-east-1a  running
+1        down     54.224.33.191  i-08105aeb4e04a26e2  xenial  us-east-1a  running
+2        down     54.92.240.15   i-0e6417bf06d36498b  xenial  us-east-1c  running
+```
+
+Remove them by force:
+
+```bash
+juju remove-machine -m aws:controller 1 2 --force
+```
+
+You can now re-enable HA if desired:
+
+```bash
+juju enable-ha -c aws
+```
+
+See [Controller high availability][controllers-ha] for guidance on using the
+`enable-ha` command.
 
 ### Restoring due to complete cluster failure
 
@@ -263,9 +314,11 @@ juju enable-ha -m aws-ha3-2:controller -n 3
     Section [Recovering from controller failure][recovering-ha-failure] details
     how to deal with a partially degraded cluster.
 
+
 <!-- LINKS -->
 
 [controllers-ha]: ./controllers-ha.html
 [client-backups]: ./client.html#backups
 [reference-constraints]: ./reference-constraints.html
 [recovering-ha-failure]: ./controllers-ha.html#recovering-from-controller-failure
+[controllers-ha]: ./controllers-ha.md
