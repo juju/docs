@@ -2,11 +2,10 @@ Title: Manually adding MAAS clouds
 
 # Manually adding MAAS clouds
 
-MAAS clouds may be registered with Juju using the interactive
-`add-cloud` command. It is also possible to define these clouds using
-a YAML file containing a straightforward description. All that varies
-is the endpoint and the name, since they use the same authentication
-method. Here is an example:
+A MAAS cloud may be registered with Juju using the interactive `add-cloud`
+command (see [Using MAAS with Juju][clouds-maas]) but it is also possible to do
+so using a YAML file. All that varies is the endpoint and the name, since they
+use the same authentication method. Here is an example:
 
 ```yaml
 clouds:
@@ -63,4 +62,8 @@ testmaas           0                 maas        Metal As A Service
 It is necessary to add credentials for these clouds before bootstrapping them.
 See the [Documentation on MAAS credentials here][maas-credentials].
 
-[maas-credentials]: ./clouds-maas.html#add-credentials
+
+<!-- LINKS -->
+
+[clouds-maas]: ./clouds-maas.md
+[maas-credentials]: ./clouds-maas.md#add-credentials

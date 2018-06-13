@@ -1,6 +1,6 @@
-Title: Using the Oracle cloud
+Title: Using Oracle GCE with Juju
 
-# Using the Oracle public cloud
+# Using Oracle Compute with Juju
 
 Juju has built-in support for [Oracle Compute][oracle-compute], Oracle's public
 cloud. This means that there is no need to add the Oracle cloud to Juju. An
@@ -19,7 +19,7 @@ This page will cover the following steps:
 1. Add credentials to Juju so it can make use of your Oracle Compute account.
 1. Create the Juju controller
 
-## Information gathering
+## Gathering information 
 
 The email you received upon signing up for Oracle Compute contains vital
 information you will need to complete the instructions presented here. Look
@@ -48,7 +48,7 @@ Proceed as follows:
 
 ![Create Compute service](./media/oracle_empty-dashboard-2.png)
 
-!!! Recall:
+!!! Note:
     We are doing this to associate images with your 'identity domain'. We will
     not be creating an instance here.
 
@@ -147,7 +147,7 @@ oracle-cloud           0                   oracle      Oracle Compute Cloud Serv
 Cloud 'oracle' is for the built-in (for pay) service and cloud 'oracle-cloud'
 is tied to your trial account.
 
-## Add credentials
+## Adding credentials
 
 Use the interactive `add-credential` command to add your credentials to your
 cloud. Below, we add credentials to the trial account cloud:
@@ -228,18 +228,16 @@ oracle-cloud-ip-exchange  192.168.0.0/16
 See [How to configure more complex networks using spaces][spaces] for further
 details on networks and spaces. 
 
-## Create the Juju controller
+## Creating a controller
 
-You are now ready to create a Juju controller:
-
-Below, we continue with the trial account cloud:
+You are now ready to create a Juju controller for cloud 'oracle-cloud':
 
 ```bash
 juju bootstrap oracle-cloud oracle-cloud-controller
 ```
 
-Above, the name given to the new controller was 'oracle-cloud-controller'.
-Oracle Compute will create an instance to run the controller on.
+Above, the name given to the new controller is 'oracle-cloud-controller'.
+Oracle Compute will provision an instance to run the controller on.
 
 Once created, you can view the controller as an Oracle Compute instance by
 navigating to 'My Services URL', opening the left menu (top-left icon), and
@@ -254,11 +252,19 @@ the top-right corner:
 
 ![Oracle Compute sites](./media/oracle_bootstrap-instances-sites.png)
 
+For detailed explanation and examples of the `bootstrap` command see the
+[Creating a controller][controllers-creating] page.
+
 ## Next steps
 
-You can now start deploying Juju charms and/or bundles to your Oracle cloud.
-Continue with Juju by visiting the [Models][models] and
-[Introduction to Juju Charms][charms] pages.
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
+
+See these pages for ideas on what to do next:
+
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
 
 
 <!-- LINKS -->
@@ -268,5 +274,6 @@ Continue with Juju by visiting the [Models][models] and
 [cloudoracle]: https://cloud.oracle.com/home
 [getstarted]: ./getting-started-jaas.html
 [spaces]: ./network-spaces.html
-[models]: ./models.html
-[charms]: ./charms.html
+[controllers-creating]: ./controllers-creating.md
+[models]: ./models.md
+[charms]: ./charms.md
