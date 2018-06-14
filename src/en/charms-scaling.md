@@ -21,6 +21,18 @@ mention some less common situations.
 In the context of Juju, scaling up means increasing the number of application
 units and always involves the `add-unit` command.
 
+Closely resembling scaling up is the addition of a machine devoid of a unit.
+This is accomplished via the `add-machine` command:
+  
+```bash
+juju add-machine
+```
+
+!!! Note:
+    A machine provisioned via the `add-machine` command that does not yet house
+    an application unit will, by default, be used for any subsequent
+    application deployment (via the `deploy` command).
+
 ### Scaling up behind a load balancer
 
 In many cases simply adding more units will not make an application scale
