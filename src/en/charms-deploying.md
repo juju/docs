@@ -29,7 +29,8 @@ juju deploy mysql
 ```
 
 This will create a machine in your chosen backing cloud within which the MySQL
-application will be deployed.
+application will be deployed. However, if there is a machine present that lacks
+an application then, by default, it will be used instead.
 
 Assuming that the Xenial series charm exists and was used above, an equivalent
 command is:
