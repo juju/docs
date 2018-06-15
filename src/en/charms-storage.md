@@ -466,9 +466,10 @@ provider currently supports a single pool configuration attribute:
 ### LXD (lxd)
 
 !!! Note:
-    Ubuntu 14.04 LTS (Trusty) and Ubuntu 16.04 LTS (Xenial) do not ship with a
-    version of LXD (at least 2.16) that has the 'lxd' storage provider feature.
-    See the [Using LXD with Juju][clouds-lxd] page for installation help.
+    The regular package archives for Ubuntu 14.04 LTS (Trusty) and Ubuntu 16.04
+    LTS (Xenial) do not include a version of LXD that has the 'lxd' storage
+    provider feature. You will need at least version 2.16. See the
+    [Using LXD with Juju][clouds-lxd] page for installation help.
 
 LXD-based models have access to the 'lxd' storage provider. The LXD provider
 has two configuration options:
