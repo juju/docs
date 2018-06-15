@@ -1,6 +1,6 @@
 Title: Introducing Juju 2.0
-TODO: Add extra changes as required
-
+TODO:  Add extra changes as required
+       Critical: review required
 
 # Introducing Juju 2.0
 
@@ -35,8 +35,7 @@ cloud you only need one controller, but can drive several models.
  - **Providers:** As well as updates to the Azure provider and 
 the new Rackspace provider, Juju now makes extensive use of LXD. This makes 'local' 
 models leaner and faster and also brings benefits to placing containers within 
-models. You can find out more about setting up 
-[LXD for Juju here][lxd].
+models. Find out more by reading the [Using LXD with Juju][clouds-lxd] page.
 
  - **Configless clouds:** Why fill out loads of configuration info about
 public clouds when you don't have to? Juju now ships with 'baked-in' 
@@ -56,7 +55,7 @@ to operate legacy systems and still use the powerful new features of 2.0.
 Please see the [additional information][coexist] on running multiple versions 
 of Juju.
 
-[lxd]: ./clouds-LXD.html
+[clouds-lxd]: ./clouds-LXD.md
 [users]: ./tut-users.html
 [aboutjuju]: ./about-juju.html
 [user-guide]: ./users.html
