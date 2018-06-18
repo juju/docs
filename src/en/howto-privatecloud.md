@@ -117,6 +117,10 @@ ls ~/simplestreams/*/streams/*
 
 You should see .json files containing the details we just added on the images.
 
+### Use of a local directory for image metadata
+
+Stop here and return to the [bootstrap instructions][help-openstack-bootstrap].
+
 ### Upload the Simplestreams Metadata to Swift
 
 Enter the following command to create a new container for the Simplestreams
@@ -283,3 +287,4 @@ controller.
 
 [anchor__image-streams]: ./models-config.html#image-streams
 [controllers-creating]: ./controllers-creating.html
+[help-openstack-bootstrap]: ./help-openstack.md#bootstrap-with-juju
