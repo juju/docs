@@ -82,8 +82,6 @@ Simply follow the prompts.
 For other methods of adding credentials, please see the specific
 [credentials documentation][credentials].
 
-
-
 ## Images and private clouds
 
 The above steps are all you need to use most OpenStack clouds which are
@@ -91,6 +89,39 @@ configured for general use. If this is your own cloud, you will also need to
 additionally provide stream information so that the cloud can fetch the
 relevant images for Juju to use. This is covered in the section on
 [private clouds][simplestreams].
+
+## Bootstrap with Juju
+
+Once the image metadata has been gathered, either locally or via a registered
+and running Simplestream service, check your OpenStack networks. If there are
+multiple possible networks available to the cloud, it is also necessary to
+specify the network name or UUID for Juju to use to boot instances. Both the
+network name and UUID can be retrieved with the following command:
+
+```bash
+openstack network list
+```
+
+Choose the network you want the instances to boot from. You can use either the
+network name or the UUID with the 'network' configuration option when
+bootstrapping a new controller.
+
+With the product-streams service running in your OpenStack Cloud, you can now 
+create a controller on this cloud with the `juju bootstrap` command:
+
+```bash
+juju bootstrap <cloud> <controller name> --config network=<network_id>
+```
+
+or if the simplestream data is local:
+
+```bash
+juju bootstrap <cloud> <controller name> --metadata-source ~/simplestreams/images --config network=<network_id>
+```
+
+
+<!-- LINKS -->
+
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [simplestreams]: ./howto-privatecloud.html
