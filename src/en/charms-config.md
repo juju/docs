@@ -16,9 +16,9 @@ are operational.
 Each charm will have its own set of options and possible values. You can
 discover these in several ways:
 
-  - By running the `juju config` command.
-  - By viewing the charm in the [charm store](https://jujucharms.com).
-  - By examining the **config.yaml** file in the charm itself.
+ - By running the `config` command.
+ - By viewing the charm in the [Charm Store][charm-store].
+ - By examining the `config.yaml` file in the charm itself.
 
 ## Configuring an application at deployment time
 
@@ -144,4 +144,7 @@ juju config mediawiki --reset admins,name
 ```
 
 
+<!-- LINKS -->
+
 [yaml]: http://yaml.org/spec/1.1/current.html "YAML spec page"
+[charm-store]: https://jujucharms.com/q/?type=bundle
