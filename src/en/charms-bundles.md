@@ -7,18 +7,54 @@ TODO:  Check more complex bundles after the release of 2.0
 
 # Using and Creating Bundles
 
-*Charms* are seldom deployed in isolation. Even MediaWiki needs to be connected
-to a database. Instead, charms are mostly used to model more complex
-deployments, potentially including many different applications and connections.
-A *Bundle* is an encapsulation of this model, or an atomic self-contained part
-of it. It may be as simple as MediaWiki and a database, or as complex as a full
-OpenStack cloud. But a bundle encapsulates all the charms and their
-relationships and enables you to install an entire working deployment just as
-easily as installing a single charm, whether that's from the
+Although charms can be deployed in isolation, they are typically used alongside
+other charms to implement complex solutions, whether it be as simple as
+MediaWiki and a database, or as complex as a full OpenStack cloud . A *bundle*
+is an encapsulation of such a compound deployment and includes all associated
+relations and configurations that the deployment requires.
+
+A bundle is installed as easily as a single charm, whether it's from the
 [Juju Charm Store][store] or by importing a previously exported deployment
 yourself.
 
-### Adding bundles from the command line
+## Inside a bundle
+
+Here is a bundle file with a MySQL application and a WordPress application with
+a relation between the two: 
+
+```yaml
+series: xenial
+description: "A simple WordPress deployment."
+applications:
+  wordpress:
+    charm: "cs:trusty/wordpress-5"
+    num_units: 1
+    annotations:
+      "gui-x": "339.5"
+      "gui-y": "-171"
+    to:
+      - "0"
+  mysql:
+    charm: "cs:trusty/mysql-57"
+    num_units: 1
+    annotations:
+      "gui-x": "79.5"
+      "gui-y": "-142"
+    to:
+      - "1"
+relations:
+  - - "wordpress:db"
+    - "mysql:db"
+machines:
+  "0":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+  "1":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+```
+
+## Deploying bundles
 
 A bundle is deployed exactly like a charm:
 
@@ -57,66 +93,22 @@ Changes to deploy bundle:
 !!! Note:
     The `dry-run` option only works with bundles.
 
-You can get the name of a bundle from the [Juju Charm Store][store], just as
-you would a charm. Unlike charms, bundles embed more than a single
-application, and you can see icons representing each separate application
-alongside a bundle's name. This gives you a quick overview of a bundle's
-complexity and potential resource requirements.
+You can get the name of a bundle from the [Juju Charm Store][charm-store], just
+as you would a charm. There, you can see icons representing each separate
+application alongside the bundle's name. This gives you a quick overview of a
+bundle's complexity and potential resource requirements.
 
 ![Bundle resources in the Charm Store](media/juju2_gui_bundles_store.png)
 
 To get a bundle's name, select a bundle on the store and find the 'command
-prompt' icon at the top of the pane. Alongside this will be a correctly
-formatted `bundle` command, including the correct Charm Store URL for the
-bundle, which you can also run to deploy your chosen bundle:
+prompt' icon at the top of the pane. A field will contain the Charm Store URL
+for the bundle, which you can also use to deploy:
 
 ```bash
 juju deploy cs:bundle/wiki-simple-4
 ```
 
-## Creating a bundle
-
-A bundle is a set of applications with a specific configuration and their
-corresponding relations that can be deployed together in a single step.
-Instead of deploying a single application, they can be used to deploy an entire
-workload, with working relations and configuration. The use of bundles allows
-for easy repeatability and for sharing of complex, multi-application
-deployments.
-
-As an example, here is a bundle file with a MySQL application and a WordPress
-application with a relation between the two: 
-
-```yaml
-series: xenial
-description: "A simple WordPress deployment."
-applications:
-  wordpress:
-    charm: "cs:trusty/wordpress-5"
-    num_units: 1
-    annotations:
-      "gui-x": "339.5"
-      "gui-y": "-171"
-    to:
-      - "0"
-  mysql:
-    charm: "cs:trusty/mysql-57"
-    num_units: 1
-    annotations:
-      "gui-x": "79.5"
-      "gui-y": "-142"
-    to:
-      - "1"
-relations:
-  - - "wordpress:db"
-    - "mysql:db"
-machines:
-  "0":
-    series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
-  "1":
-    series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
-```
+The `cs` signifies "charm store".
 
 ## Setting constraints in a bundle
 
@@ -150,8 +142,8 @@ configuration key/value pair.
 [See the documentation on application configuration][discover-config-options-docs]
 to discover which options are available for the different charms.
 
-For example, to set the flavor of the MySQL charm to Percona in a bundle, the
-bundle file would have an additional `options` field with specific value:
+For example, to set the 'flavor' of the MySQL charm to 'percona', the bundle
+file would have an additional `options` field containing key/value pairs:
 
 ```yaml
 mysql:
@@ -443,7 +435,7 @@ Freenode) who can assist. You can also use the
 <!-- LINKS -->
 
 [charms-deploying]: ./charms-deploying.md
-[store]: https://jujucharms.com/q/?type=bundle
+[charm-store]: https://jujucharms.com/q/?type=bundle
 [store-docs]: ./authors-charm-store.md
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
 [charms-constraints]: ./charms-constraints.md
