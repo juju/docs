@@ -133,13 +133,12 @@ upon using either a *constraint* or a *binding*:
 
      See examples of using a binding when deploying applications on
      [Deploying to network spaces][deploying-to-network-spaces]. For using
-     spaces with bundles go to
-     [Using and creating bundles][using-creating-bundles].
+     spaces with bundles go to [Charm bundles][charms-bundles].
 
 
 <!-- LINKS -->
 
-[using-creating-bundles]: ./charms-bundles.html#binding-endpoints-within-a-bundle
+[charms-bundles]: ./charms-bundles.md#binding-endpoints-within-a-bundle
 [deploying-to-network-spaces]: ./charms-deploying-advanced.html#deploying-to-network-spaces
 [charms-constraints]: ./charms-constraints.html
 [LP-1747998]: https://bugs.launchpad.net/juju/+bug/1747998
