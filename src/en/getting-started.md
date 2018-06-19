@@ -76,8 +76,8 @@ You build your [model][models] by adding and relating applications from the
 [Charm Store][charmstore]. Press the green '+' symbol in the middle of the web
 UI to search for applications in the Charm Store.
 
-You will see a list of available charms and bundles with a description of
-each. Select a [charm][charms] or [bundle][bundles] to learn more about it.
+You will see a list of available charms and bundles with a description of each.
+Select a [charm][charms] or [bundle][charms-bundles] to learn more about it.
 
 When you have selected a charm or bundle it can be added to your model by
 pressing the 'Add to model' button.
@@ -307,7 +307,7 @@ some of the following pages of documentation:
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
 [aws]: ./help-aws.html "Using Amazon AWS with Juju"
-[bundles]: ./charms-bundles.html "Introduction to bundles"
+[charms-bundles]: ./charms-bundles.html "Charm bundles"
 [k8]: https://jujucharms.com/canonical-kubernetes/
 [charms]: ./charms.html "Introduction to charms"
 [credentials]: ./credentials.html
