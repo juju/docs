@@ -230,7 +230,7 @@ It is not possible at this time to restore while HA is enabled.
 
 To restore to an HA cluster one needs to first remove HA (by removing all but
 one of the controller machines) and then perform a restore operation.
-Presumably HA will be re-enabled afterwards.
+HA may then be re-enabled afterwards.
 
 For example, consider a three-member cluster with machines '0', '1', and '2' in
 the 'controller' model and where a backup of the cluster was previously made
