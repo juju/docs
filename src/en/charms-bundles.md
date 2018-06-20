@@ -1,25 +1,24 @@
 Title: Charm bundles
 TODO:  Check more complex bundles after the release of 2.0
-       Refactor (e.g. advanced usage/information should go in a sub-page)
-       Refactor (e.g. using vs creating)
        Add example portraying bundle overlay
+table_of_contents: True
 
 # Charm bundles
 
 Although charms can be deployed in isolation, they are typically used alongside
-other charms to implement complex solutions, whether it be as simple as
-MediaWiki and a database, or as complex as a full OpenStack cloud . A *bundle*
-is an encapsulation of such a compound deployment and includes all associated
-relations and configurations that the deployment requires.
-
-A bundle is installed as easily as a single charm, whether it's from the
-[Charm Store][charm-store] or created from a previously exported deployment.
+other charms in order to implement more complex solutions, whether it be as
+simple as MediaWiki and a database, or as complex as a full OpenStack cloud. A
+charm bundle, or just *bundle*, is an encapsulation of such a compound
+deployment and includes all the associated relations and configurations that
+the deployment requires. A huge plus is that a bundle is installed exactly like
+a charm is: with the `deploy` command or via the GUI (see
+[Adding bundles with the GUI][charms-bundles-gui]).
 
 ## Inside a bundle
 
-A bundle is defined with a YAML-formatted file, often called the "bundle file".
-Here is a bundle file with charm definitions for MySQL and WordPress with a
-relation between the two: 
+A bundle is defined with a file in YAML format and is often called the "bundle
+file". Here is a bundle file with "charm definitions" for MySQL and WordPress
+with a relation between the two: 
 
 ```yaml
 series: xenial
@@ -55,7 +54,7 @@ machines:
 
 ## Deploying bundles
 
-A bundle is deployed exactly like a charm:
+A bundle is deployed just like a regular charm is:
 
 ```bash
 juju deploy wiki-simple
@@ -90,7 +89,8 @@ Changes to deploy bundle:
 ```
 
 !!! Note:
-    The `dry-run` option only works with bundles.
+    The `--dry-run` option works only with bundles, and not with regular
+    charms.
 
 You can get the name of a bundle from the [Juju Charm Store][charm-store], just
 as you would a charm. There, you can see icons representing each separate
@@ -109,7 +109,15 @@ juju deploy cs:bundle/wiki-simple-4
 
 The `cs` signifies "charm store".
 
-## Setting charm constraints in a bundle
+## Configuring bundles
+
+Below we present two ways in which existing bundles can be tweaked for your
+environment:
+
+ * Setting charm constraints in a bundle
+ * Setting charm configuration options in a bundle
+
+### Setting charm constraints in a bundle
 
 To make a bundle as reusable as possible, it's common to set minimum
 constraints for its associated charms, much like you would when deploying
@@ -133,7 +141,7 @@ mysql:
 Refer to the [Using constraints][charms-constraints] page for in-depth coverage
 of constraints.
 
-## Setting charm configuration options in a bundle
+### Setting charm configuration options in a bundle
 
 When deploying an application, the charm you use will often support or even
 require specific configuration options to be set. This is done by including an
@@ -170,7 +178,23 @@ See section
 [Discovering application configuration options][discover-config-options]
 to learn about a charm's options.
 
-## Overlay bundles
+## Creating bundles
+
+Bundles can continue to be modified to the point that you are effectively
+creating a new bundle. This section presents the following methods:
+
+ * Overlay bundles
+ * Bundle placement directives
+ * Machine specifications in a bundle
+ * Recycling machines
+ * Binding endpoints within a bundle
+ * Bundles and charm resources
+
+!!! Note:
+    Make sure you've added a brief explanation of what your bundle does within
+    the `description` field of your bundle's YAML file. 
+
+### Overlay bundles
 
 The `--overlay` option can be used when you want to use a standard bundle but
 keep **model-specific** configuration in a separate file. The overlay files
@@ -193,12 +217,11 @@ For example:
 juju deploy wiki-simple --overlay ~/model-a/wiki-simple.yaml
 ```
 
-## Bundle placement directives
+### Bundle placement directives
 
 You can co-locate applications using the placement key `to` in the charm's
-definition. When supported by the cloud provider, it is also possible to
+definition. When LXD is supported by the backing cloud it is also possible to
 isolate charms by including the container format in the placement directive.
-Some clouds support LXD.
 
 For example:
 
@@ -237,7 +260,7 @@ mysql:
     "gui-y": "168"
 ```
 
-## Machine specifications in a bundle
+### Machine specifications in a bundle
 
 Bundles may optionally include a machine specification, which allows you to set
 up specific machines and then to place application units on those machines
@@ -299,7 +322,7 @@ mysql/1      waiting   allocating  1                               waiting for m
 wordpress/0  waiting   allocating  1                               waiting for machine
 ```
 
-## Recycling machines
+### Recycling machines
 
 To have a bundle use a model's existing machines, as opposed to creating new
 machines, the `--map-machines=existing` option is used. In addition, to specify
@@ -317,7 +340,7 @@ machine 4:
 juju deploy some-bundle --map-machines=existing,3=4,4=5
 ```
 
-## Binding endpoints within a bundle
+### Binding endpoints within a bundle
 
 Generally, you can configure more complex networks using
 [Network spaces][network-spaces] and deploy charms with a binding, as described
@@ -363,7 +386,7 @@ mysql:
 It is not currently possible to declare a default space in the bundle for all
 application endpoints. The workaround is to list all endpoints explicitly.
 
-## Bundles and charm resources
+### Bundles and charm resources
 
 Bundles support charm resources (see [Using resources][developer-resources])
 through the use of the `resources` field. For example, consider the following
@@ -410,22 +433,24 @@ applications:
 Local paths to resources can be useful, for example, in network restricted
 environments where a Juju controller is unable to contact the Charm Store.
 
-## Publishing a bundle
+## Saving a bundle and next steps
 
-If you have created your own bundle, once you are satisfied with it you can
-share it with others by publishing it in the Charm Store. This process is
-covered in section [Publishing your charm][publishing-your-charm]. 
+If you have created your own bundle you will need to save it. In order to do
+this you will need to use the Juju GUI. See
+[Adding bundles with the GUI][charms-bundles-gui-exporting] for instructions.
 
 !!! Note:
-    Make sure you've added a brief explanation of what your bundle does within
-    the `description` field of your bundle's YAML file. 
+    A CLI tool for saving a bundle is currently under development.
+
+Once the bundle is saved you can consider these
+[Next steps][authors-charm-store-next-steps].
 
 
 <!-- LINKS -->
 
 [charms-deploying]: ./charms-deploying.md
 [charm-store]: https://jujucharms.com/q/?type=bundle
-[publishing-your-charm]: ./developer-getting-started.md#publishing-your-charm
+[authors-charm-store-next-steps]: ./developer-getting-started.md#next-steps
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
 [charms-constraints]: ./charms-constraints.md
 [discover-config-options]: ./charms-config.md#discovering-application-configuration-options
@@ -433,3 +458,4 @@ covered in section [Publishing your charm][publishing-your-charm].
 [network-spaces]: ./network-spaces.md
 [deploying-to-network-spaces]: ./charms-deploying-advanced.md#deploying-to-network-spaces
 [developer-resources]: ./developer-resources.md
+[charms-bundles-gui-exporting]: ./charms-bundles-gui.md#exporting-and-importing-bundles-with-the-GUI
