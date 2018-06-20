@@ -78,9 +78,11 @@ max-logs-age                 | string | 72h      | 72h, etc.                | Se
 max-logs-size                | string | 4G       | 400M, 5G, etc.           | Sets the maximum size for the log collection, in human-readable memory format
 max-txn-log-size             | string | 10M      | 100M, 1G, etc.           | Sets the maximum size for the capped txn log collection, in human-readable memory format
 mongo-memory-profile         | string | low      | low/default              | Sets whether MongoDB uses the least possible memory or the default MongoDB memory profile
+network                      | string |          |                          | An OpenStack network UUID.
 set-numa-control-policy      | bool   | false    | false/true               | Sets whether numactl is preferred for running processes with a specific NUMA (Non-Uniform Memory Architecture) scheduling or memory placement policy for multiprocessor systems where memory is divided into multiple memory nodes
 policy-target-group          | string |          |                          | An OpenStack PTG ID. Use with key 'use-openstack-gbp'.
 state-port                   | integer | 37017   |                          | The port to use for mongo connections
+use-floating-ip              | bool   | false    |                          | Use with OpenStack. Sets whether a floating IP address is required in order for nodes to be assigned a public IP address.
 use-openstack-gbp            | bool   | false    |                          | Sets whether OpenStack GBP (Group-Based Policy) is enabled. Use with key 'policy-target-group'.
 
 ### Excluding information from the audit log
