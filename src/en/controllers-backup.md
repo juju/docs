@@ -185,6 +185,14 @@ For instance:
 juju remove-backup -m aws:controller 20180515-191942.7e45250b-637a-4dc9-8389-c6aa70100cd6
 ```
 
+To clean up any possible remote backups the `--keep-latest` option can be used.
+This option instructs Juju to remove all remote backups with the exception of
+the most recently created one:
+
+```bash
+juju remove-backup -m aws:controller --keep-latest
+```
+
 ### Restoring from a backup
 
 To revert the state of an environment to a previous time the `restore-backup`
