@@ -1,28 +1,24 @@
-Title: CAAS and Juju
+Title: Using Kubernetes with Juju
 TODO:  Once 2.4 is officially released remove support Note and update status output
-       Should eventually link to CAAS-charm developer documentation
+       Should eventually link to k8s-charm developer documentation
        Update when storage becomes a Juju drivable aspect.
-       Add architectural overview/diagram once CAAS becomes stable.
+       Add architectural overview/diagram once Juju:k8s becomes stable.
        Consider manually adding a cluster (third-party installs) via `add-cloud` and `add-credential`
+       Add charms section when they become available in the charm store
 
-# CAAS and Juju
-
-CAAS is *Containers as a Service*, a cloud service that allows users to upload,
-organize, run, scale, manage, and stop containers. Combining this with Juju
-opens up new practical benefits for Juju users. Currently, Juju supports
-Kubernetes as its underlying CAAS solution.
+# Using Kubernetes with Juju
 
 Kubernetes (often abbreviated as "k8s") provides a flexible architecture for
 managing containerised applications at scale (see the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information). It
 most commonly employs Docker as its container technology.
 
-## CAAS-specific workflow
+## Juju k8s-specific workflow
 
-Here we discuss how a building and working with a CAAS environment may differ
-from a standard Juju workflow.
+Here we discuss how building and working with a k8s environment may differ from
+a standard Juju workflow.
 
-The only CAAS-specific Juju commands are `add-k8s` and `remove-k8s`. All other
+The only k8s-specific Juju commands are `add-k8s` and `remove-k8s`. All other
 concepts and commands are applied in the traditional Juju manner.
 
 If the Kubernetes cluster is built with Juju itself (via a bundle) and
@@ -31,9 +27,9 @@ If the Kubernetes cluster is built with Juju itself (via a bundle) and
 to Juju, making the usual combination of `add-cloud` and `add-credential`
 unnecessary.
 
-User credentials can still be added by way of the `add-credential`
-or `autoload-credentials` commands. Also, at any time, the k8s CLI can be used
-to add a new user to the k8s cluster.
+User credentials can still be added by way of the `add-credential` or
+`autoload-credentials` commands. Also, at any time, the k8s CLI can be used to
+add a new user to the k8s cluster.
 
 The `add-k8s` command can be used repeatedly to set up different clusters as
 long as the contents of the configuration file has been changed accordingly.
@@ -53,7 +49,7 @@ To summarise, the steps for using Kubernetes with Juju are:
  1. Obtain a cluster
  1. Add the cluster to Juju
  1. Create a controller (and optionally a model)
- 1. Deploy CAAS-specific charms
+ 1. Deploy k8s-specific charms
 
 ### Obtain a Kubernetes cluster
 
@@ -63,7 +59,7 @@ by deploying a minimal two-machine Kubernetes cluster by making use of the
 [kubernetes-core][kubernetes-core-charm] bundle available in the Charm Store:
 
 ```bash
-juju bootstrap localhost lxd-caas
+juju bootstrap localhost lxd-k8s
 juju deploy kubernetes-core
 ```
 
@@ -135,7 +131,7 @@ juju add-k8s k8cloud
 
 ## Configuration
 
-Juju CAAS applications support application specific configuration. This allows
+Juju k8s applications support application specific configuration. This allows
 k8s configuration to be used to control how Juju deploys the application on
 Kubernetes. The following are supported (these names are the Juju configuration
 attribute names; the k8s meaning should be obvious):
@@ -169,10 +165,6 @@ which allows for the addition or removal of units as normal. It remains
 possible to perform these same actions directly in the cluster by way of the
 Kubernetes `scale` command.
 
-## Charms
-
-
-
 
 <!-- LINKS -->
 
@@ -180,4 +172,4 @@ Kubernetes `scale` command.
 [ubuntu-tutorial_install-kubernetes-with-conjure-up]: https://tutorials.ubuntu.com/tutorial/install-kubernetes-with-conjure-up#0
 [cdk-charm]: https://jujucharms.com/u/containers/canonical-kubernetes/
 [upstream-kubernetes-docs]: https://kubernetes.io/docs
-[credentials]: ./credentials.html
+[credentials]: ./credentials.md
