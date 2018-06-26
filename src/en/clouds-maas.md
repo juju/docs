@@ -54,14 +54,8 @@ Cloud        Regions  Default          Type        Description
 maas-cloud         0                   maas        Metal As A Service
 ```
 
-You will need to add credentials for this cloud before bootstrapping it
-(creating a controller).
-
-### Manually adding a MAAS cloud
-
-Alternatively, it is possible to manually define a single or multiple MAAS
-clouds with a file and add a cloud by referring to such a file (still with
-`juju add-cloud`). See [Manually adding MAAS clouds][maas-manual] for details.
+For the manual for adding a MAAS cloud, see
+[Manually adding MAAS clouds][clouds-adding-maas].
 
 ## Adding credentials
 
@@ -132,6 +126,7 @@ See these pages for ideas on what to do next:
 [maas-cli]: https://docs.ubuntu.com/maas/en/manage-cli
 [maas-api]: https://docs.ubuntu.com/maas/en/manage-account#api-key
 [maas-manual]: ./clouds-maas-manual.md
-[controllers-creating]: ./controllers-creating.md
+[create-a-controller-with-constraints]: ./controllers-creating.md#create-a-controller-with-constraints
 [models]: ./models.md
 [charms]: ./charms.md
+[clouds-adding-maas]: ./clouds.md#manually-adding-maas-clouds
