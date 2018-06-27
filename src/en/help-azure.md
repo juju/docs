@@ -22,7 +22,7 @@ running:
 juju update-clouds
 ```
 
-## Add credentials
+## Adding credentials
 
 Several steps are required to add Azure credentials to Juju:
 
@@ -37,7 +37,7 @@ Several steps are required to add Azure credentials to Juju:
     See [Updating remote credentials][updating-remote-credentials] for
     guidance.
 
-### Install the CLI tool
+### Installing the CLI tool
 
 You will need to import your Azure credentials into Juju using the
 [Azure CLI 2.0][azurecli] tool from Microsoft.
@@ -64,7 +64,7 @@ restart your shell.
 
 Verify that the tool is properly installed by running `az --version`.
 
-### Log in to Azure
+### Logging in to Azure
 
 Log in to your Azure account in order to display the credentials that you will,
 in turn, provide to Juju:
@@ -87,7 +87,7 @@ address that you've associated with your Azure account. Click on it.
 
 You are now logged in to your Azure account.
 
-### Import the credentials
+### Importing the credentials
 
 Back on the command line, the output from `az login` should now display your
 Azure account information: 
@@ -145,18 +145,24 @@ Credential "ubuntu" added locally for cloud "azure".
 You can also verify that the credentials were successfully added by running
 `juju credentials`.
 
-## Create the Juju controller
+## Creating a controller
 
-You are now ready to create a Juju controller:
+You are now ready to create a Juju controller for cloud 'azure':
 
 ```bash
-juju bootstrap azure mycloud
+juju bootstrap azure azure-controller
 ```
+
+Above, the name given to the new controller is 'azure-controller'. Azure will
+provision an instance to run the controller on.
 
 This will result in the controller environment being visible in the
 [Azure portal][azureportal].
 
 ![Juju environment in Azure portal](media/azure_portal-environment.png)
+
+For a detailed explanation and examples of the `bootstrap` command see the
+[Creating a controller][controllers-creating] page.
 
 ## Azure specific features
 
@@ -164,16 +170,21 @@ Juju supports Azure availability sets. See the
 [Application high availability][azure-availability-sets] page for more
 details.
 
-## Next steps
-
-You can now start deploying Juju charms and/or bundles to your Azure cloud.
-Continue with Juju by visiting the [Models][models] and
-[Introduction to Juju Charms][charms] pages.
-
 !!! Note:
     Azure accounts are initially limited to 10 cores (trial accounts can be
     even lower). You will need to file a support ticket with Azure to raise
     your quota limit.
+
+## Next steps
+
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
+
+See these pages for ideas on what to do next:
+
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
 
 
 <!-- LINKS -->
@@ -184,5 +195,6 @@ Continue with Juju by visiting the [Models][models] and
 [azuretwoinstall]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
 [manually-adding-azure-credentials]: ./help-azure-advanced.html#manually-adding-azure-credentials
 [azure-availability-sets]: ./charms-ha.html#azure-availability-sets
-[models]: ./models.html
-[charms]: ./charms.html
+[controllers-creating]: ./controllers-creating.md
+[models]: ./models.md
+[charms]: ./charms.md

@@ -20,7 +20,7 @@ running:
 juju update-clouds
 ```
 
-## Add credentials
+## Adding credentials
 
 In order to access AWS, you will need to add some credentials for Juju to use.
 These can easily be set by either:
@@ -91,7 +91,7 @@ juju add-credential aws
 Alternately, you can also use this credential with [Juju as a Service][jaas] and
 create and deploy your model using its GUI.
 
-### 3. Create and use a YAML file
+### 3. Creating and using a YAML file
 
 Place the AWS information in a `~/.aws/credentials` file, or
 `%USERPROFILE%/.aws/credentials` on Windows. The file will contain YAML
@@ -100,16 +100,19 @@ formatted information.
 See [Cloud credentials](./credentials.html) for more about adding
 credentials from a YAML file.
 
-## Bootstrap
+## Creating a controller
 
-To create the controller for AWS, you then need to run:
+You are now ready to create a Juju controller for cloud 'aws':
 
 ```bash
-juju bootstrap aws mycloud
+juju bootstrap aws aws-controller
 ```
 
-That's it!
+Above, the name given to the new controller is 'aws-controller'. AWS will
+provision an instance to run the controller on.
 
+For a detailed explanation and examples of the `bootstrap` command see the
+[Creating a controller][controllers-creating] page.
 
 ## AWS specific features
 
@@ -129,6 +132,17 @@ Features supported by Juju-owned instances running within AWS:
   [Passing a cloud-specific setting][controllers-creating-include-config] for
   instructions.
 
+## Next steps
+
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
+
+See these pages for ideas on what to do next:
+
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
+
 
 <!-- LINKS -->
 
@@ -139,3 +153,6 @@ Features supported by Juju-owned instances running within AWS:
 [tagging]: ./config-tagging.html
 [aws-instance-types]: https://aws.amazon.com/ec2/instance-types/
 [controllers-creating-include-config]: ./controllers-creating.html#passing-a-cloud-specific-setting
+[controllers-creating]: ./controllers-creating.md
+[models]: ./models.md
+[charms]: ./charms.md
