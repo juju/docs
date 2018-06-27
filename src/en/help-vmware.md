@@ -85,7 +85,7 @@ Above, the name given to the new controller is 'myvscloud
 myvscloud-controller'. vSphere will provision an instance to run the
 controller on.
 
-For detailed explanation and examples of the `bootstrap` command see the
+For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
 
 There are three VMware-specific options available for specifying the network

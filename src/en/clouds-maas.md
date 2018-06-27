@@ -111,7 +111,7 @@ juju bootstrap maas-cloud maas-cloud-controller
 Above, the name given to the new controller is 'maas-cloud-controller'. MAAS
 will allocate a node from its pool to run the controller on.
 
-For detailed explanation and examples of the `bootstrap` command see the
+For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
 
 ## Next steps
