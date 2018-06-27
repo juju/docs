@@ -2,6 +2,8 @@ Title: Additional LXD resources
 TODO:  Warning: Ubuntu release versions hardcoded
        Review section: Remote LXD user credentials
 
+{% raw %}
+
 # Additional LXD resources
 
 This page offers more in-depth information on LXD itself. To learn how to set
@@ -263,3 +265,5 @@ assistance with the daemon. See upstream documentation for
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
 [logs]: ./troubleshooting-logs.html
 [credentials]: ./credentials.html
+
+{% endraw %}
