@@ -161,7 +161,7 @@ This will result in the controller environment being visible in the
 
 ![Juju environment in Azure portal](media/azure_portal-environment.png)
 
-For detailed explanation and examples of the `bootstrap` command see the
+For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
 
 ## Azure specific features

@@ -120,7 +120,7 @@ or if the simplestream data is local:
 juju bootstrap <cloud> <controller name> --metadata-source ~/simplestreams/images --config network=<network_id>
 ```
 
-For detailed explanation and examples of the `bootstrap` command see the
+For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
 
 ## Next steps
