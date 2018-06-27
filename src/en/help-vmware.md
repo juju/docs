@@ -1,7 +1,7 @@
-Title: Using a VMware vSphere cloud
-TODO: Test vSphere
+Title: Using VMware vSphere with Juju
+TODO:  Review required
 
-# Using a VMware vSphere cloud
+# Using VMware vSphere with Juju
 
 In order to use a vSphere cloud you will need to have an existing vSphere
 installation which supports VMware's Hardware Version 8 or better. The vSphere
@@ -59,6 +59,7 @@ aws               11  us-east-1      ec2         Amazon Web Services
 ...
 myvscloud          2  dc0            vsphere
 ```
+
 ## Adding credentials
 
 Credentials can be added by typing `juju add-credential`, followed by the name
@@ -72,41 +73,49 @@ The process now becomes interactive. You will first be asked for an arbitrary
 name for this credential, which you choose for yourself, followed by the
 username and password for your VMware installation.
 
-## Bootstrapping
+## Creating a controller
 
-With credentials added, you can now start using Juju with your vSphere cloud:
+You are now ready to create a Juju controller for cloud 'myvscloud':
 
 ```bash
-juju bootstrap myvscloud myvscontroller
+juju bootstrap myvscloud myvscloud-controller
 ```
 
-There are three VMware-specific options you can use to specify the network and
-datastore to use.
+Above, the name given to the new controller is 'myvscloud
+myvscloud-controller'. vSphere will provision an instance to run the
+controller on.
 
-- **`primary-network`**: The primary network that VMs will be connected to. If
-  this is not specified, the first accessible network will be used.
-- **`external-network`**: The name of an additional "external" network to which
-  the VM should be connected. The IP from this network will be used as the
-  `public-address` of the VM's.
-- **`datastore`**: Datastore is the name of the datastore in which to create
-  the VM. If this is not specified, the first accessible datastore will be used.
+For a detailed explanation and examples of the `bootstrap` command see the
+[Creating a controller][controllers-creating] page.
 
-You can specify these options during bootstrap:
+There are three VMware-specific options available for specifying the network
+and datastore to use:
+
+ - **`primary-network`**  
+   The primary network that VMs will be connected to. If this is not specified,
+   the first accessible network will be used.
+ - **`external-network`**  
+   The name of an additional "external" network to which the VM should be
+   connected. The IP from this network will be used as the `public-address` of
+   the VMs.
+ - **`datastore`**  
+   Datastore is the name of the datastore in which to create the VM. If this is
+   not specified, the first accessible datastore will be used.
+
+For example:
 
 ```bash
-juju bootstrap myvscloud myvscontroller --config primary-network=PRIMARY_NET --config external-network=EXTERNAL_NET --config datastore=NFSSTORE
+juju bootstrap myvscloud myvscloud-controller \
+	--config primary-network=PRIMARY_NET \
+	--config external-network=EXTERNAL_NET \
+	--config datastore=NFSSTORE
 ```
 
 !!! Note:
     When you specify these options in the bootstrap command, they will only
-    apply to the `controller` and `default` model. Use
-    [`model-defaults`](./models-config.html) if you
-    want all new models to use those options.
-
-To learn about configuration options available at bootstrap time, see
-[Configuring controllers](./controllers-config.html) and [Configuring models](./models-config.html).
-See the [Constraints reference](./reference-constraints.html#vsphere-provider:) for
-more info on which constrains are supported on VMware.
+    apply to the 'controller' and 'default' models. Use
+    [`model-defaults`](./models-config.html) if you want all new models to use
+    those options.
 
 !!! Note:
     When bootstrapping Juju with vSphere, Juju downloads a cloud image to
@@ -138,3 +147,22 @@ you would enter the following:
 ```bash
 juju bootstrap myvscloud/dc1 myvscontroller
 ```
+
+## Next steps
+
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
+
+See these pages for ideas on what to do next:
+
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
+
+
+<!-- LINKS -->
+
+[rscontrolpanel]: https://mycloud.rackspace.com
+[controllers-creating]: ./controllers-creating.md
+[models]: ./models.md
+[charms]: ./charms.md

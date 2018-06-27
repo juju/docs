@@ -112,7 +112,7 @@ Notes:
  - The installed ZFS utilities can be used to query the pool (e.g.
    `sudo zpool list -v lxd`).
 
-## Create a controller
+## Creating a controller
 
 The Juju controller for LXD (the 'localhost' cloud) can now be created. Below,
 we call it 'lxd':
@@ -174,10 +174,10 @@ See these pages for ideas on what to do next:
 
 [tut-lxd]: ./tut-lxd.html
 [install]: ./reference-install.html
-[models]: ./models.html
-[charms]: ./charms.html
 [controllers]: ./controllers.html
-[controllers-creating]: ./controllers-creating.html
+[controllers-creating]: ./controllers-creating.md
+[models]: ./models.md
+[charms]: ./charms.md
 [models-add]: ./models-adding.html
 [credentials]: ./credentials.html
 [lxd-resources]: ./clouds-lxd-resources.html
