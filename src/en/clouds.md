@@ -258,7 +258,7 @@ session.
    the Oracle dashboard.
 
    To add an Oracle Compute cloud, you need to supply a name you wish to call
-   it and the unique API endpoint (the REST endpoint of the Compute domain).
+   it and the unique API endpoint.
    
    A sample session is shown below:
 
@@ -279,6 +279,9 @@ session.
 
        Cloud "oracle-trial" successfully added
        You may bootstrap with 'juju bootstrap oracle-trial'
+
+   The 'API endpoint url' in this case is the REST endpoint of the Compute
+   domain.
 
    You must now add a credential for this cloud prior to creating a controller
    (`juju bootstrap`). See the [Credentials][credentials] page for details.
