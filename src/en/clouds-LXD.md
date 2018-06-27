@@ -2,6 +2,7 @@ Title: Using LXD with Juju
 TODO:  Warning: Ubuntu release versions hardcoded
        Warning: Troubleshoot Trusty; bootstrap only works with the lxd snap
        (and only if it is installed w/o the lxd deb being installed first)
+table_of_contents: True
 
 # Using LXD with Juju
 
