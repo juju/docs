@@ -1,4 +1,4 @@
-Title: Using Oracle GCE with Juju
+Title: Using Oracle Compute with Juju
 
 # Using Oracle Compute with Juju
 
@@ -252,7 +252,7 @@ the top-right corner:
 
 ![Oracle Compute sites](./media/oracle_bootstrap-instances-sites.png)
 
-For detailed explanation and examples of the `bootstrap` command see the
+For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
 
 ## Next steps

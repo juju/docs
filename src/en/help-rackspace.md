@@ -74,7 +74,7 @@ The controller will now be visible in the
 
 ![bootstrap machine 0 in Rackspace portal](./media/config-rackspace_portal-machine_0.png)
 
-For detailed explanation and examples of the `bootstrap` command see the
+For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
 
 ## Next steps
