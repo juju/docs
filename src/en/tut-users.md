@@ -178,7 +178,7 @@ juju destroy-model dev
 ```
 
 [helpaws]: ./help-aws.html "Using Amazon AWS with Juju"
-[helpgce]: ./help-google.html "Configuring Juju for GCE"
-[helpazure]: ./help-azure.html "Configuring Juju for Azure"
+[helpgce]: ./help-google.html "Using Google GCE with Juju"
+[helpazure]: ./help-azure.html "Using Microsoft Azure with Juju"
 [listclouds]: ./clouds.html "Configuring Juju Clouds"
 [cankub]: https://jujucharms.com/canonical-kubernetes/
