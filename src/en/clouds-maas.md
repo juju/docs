@@ -1,4 +1,5 @@
 Title: Using MAAS with Juju
+table_of_contents: True
 
 # Using MAAS with Juju
 

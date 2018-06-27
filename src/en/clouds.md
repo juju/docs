@@ -2,8 +2,9 @@ Title: Clouds
 TODO:  Needs to explain available auth types for clouds
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1749583
-       INFO: Auth types are found, for Azure: https://github.com/juju/juju/blob/develop/provider/azure/credentials.go
-  
+       INFO: Auth types found at ~/.local/share/juju/public-clouds.yaml
+table_of_contents: True
+
 # Clouds
 
 Juju has built-in support for all major public clouds such as AWS (Amazon),
@@ -338,11 +339,30 @@ configuration file. It has the following format:
 clouds:
   <cloud_name>:
     type: <type_of_cloud>
-    auth-types: <[access-key, oauth1, userpass]>
+    auth-types: [<authenticaton_types>]
     regions:
       <region-name>:
         endpoint: <https://xxx.yyy.zzz:35574/v3.0/>
 ```
+
+The table below shows the authentication types available for each cloud type.
+It does not include the `interactive` type as it does not apply in the context
+of adding a cloud manually.
+
+| cloud type      | authentication types                      |
+|----------------|------------------------------------------|
+`azure`		  | `service-principal-secret`
+`cloudsigma`	  | `userpass`
+`ec2`		  | `access-key`
+`gce`		  | `jsonfile,oauth2`
+`joyent`	  | `userpass`
+`lxd`		  | n/a
+`maas`		  | `oauth1`
+`manual`	  | n/a
+`openstack`	  | `access-key,userpass`
+`oracle`	  | `userpass`
+`rackspace`	  | `userpass`
+`vsphere`	  | `userpass`
 
 To add a cloud in this way we simply supply an extra argument to specify the
 relative path to the file:
@@ -396,7 +416,8 @@ MAAS-specific guidance on this.
 #### Manually adding an OpenStack cloud
 
 This examples shows how to manually add an OpenStack cloud to Juju. It also
-demonstrates how multiple authentication methods can be stipulated.
+demonstrates how multiple authentication types can be allowed
+(comma-separated).
 
 Here is the YAML file:
 
@@ -404,7 +425,7 @@ Here is the YAML file:
 clouds:
     mystack:
       type: openstack
-      auth-types: [access-key, userpass]
+      auth-types: [access-key,userpass]
       regions:
         dev1:
           endpoint: https://openstack.example.com:35574/v3.0/

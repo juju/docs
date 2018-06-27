@@ -5,6 +5,7 @@ TODO: Check accuracy of key table (https://github.com/juju/juju/blob/ec89c99e51f
       ReadOnlyMethods updated from https://github.com/juju/juju/blob/2.3/apiserver/observer/auditfilter.go#L130
       Include ability to set configuration key:value pairs by file
       Show how to use spaces 'juju-mgmt-space' and 'juju-ha-space' (wth 'juju bootstrap' and 'juju enable-ha')
+table_of_contents: True
 
 # Configuring controllers
 
