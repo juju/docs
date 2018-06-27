@@ -1,7 +1,7 @@
-Title: Adding a manual cloud
+Title: Using the Manual cloud with Juju
        Critical: Review required (reconcile with add-cloud on clouds.md)
 
-# Using a "Manual" cloud
+# Using the Manual cloud with Juju
 
 Juju caters for the
 case where you may not be able to access a more traditional cloud in a
