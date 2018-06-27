@@ -6,7 +6,7 @@ Juju works closely with [MAAS][maas-site] to deliver the same experience
 on bare metal that you would get by using any other cloud. Note that the 
 Juju 2.x series is compatible with both the 1.x and 2.x series of MAAS.
 
-## Add a MAAS cloud
+## Adding a MAAS cloud
 
 Use the interactive `add-cloud` command to add your MAAS to Juju's list of
 clouds:
@@ -57,13 +57,13 @@ maas-cloud         0                   maas        Metal As A Service
 You will need to add credentials for this cloud before bootstrapping it
 (creating a controller).
 
-### Manually defining MAAS clouds
+### Manually adding a MAAS cloud
 
 Alternatively, it is possible to manually define a single or multiple MAAS
 clouds with a file and add a cloud by referring to such a file (still with
-`juju add-cloud`).  See [Manually adding MAAS clouds][maas-manual] for details.
+`juju add-cloud`). See [Manually adding MAAS clouds][maas-manual] for details.
 
-## Add credentials
+## Adding credentials
 
 Use the interactive `add-credential` command to add your credentials to the new
 cloud:
@@ -100,24 +100,30 @@ sudo maas-region apikey --username=$PROFILE
 
 Where $PROFILE is to be replaced by the MAAS username.
 
-## Create the Juju controller
+## Creating a controller
 
-You are now ready to create a Juju controller:
+You are now ready to create a Juju controller for cloud 'maas-cloud':
 
 ```bash
 juju bootstrap maas-cloud maas-cloud-controller
 ```
 
-Above, the name given to the new controller was 'maas-cloud-controller'.
-MAAS will allocate a node from its pool to run the controller on. If you want
-to make sure a specific node is used for this, use constraints (see
-[Create a controller with constraints][create-a-controller-with-constraints]).
+Above, the name given to the new controller is 'maas-cloud-controller'. MAAS
+will allocate a node from its pool to run the controller on.
+
+For a detailed explanation and examples of the `bootstrap` command see the
+[Creating a controller][controllers-creating] page.
 
 ## Next steps
 
-You can now start deploying Juju charms and/or bundles to your MAAS cloud.
-Continue with Juju by visiting the [Models][models] and
-[Introduction to Juju Charms][charms] pages.
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
+
+See these pages for ideas on what to do next:
+
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
 
 
 <!-- LINKS -->
@@ -125,7 +131,7 @@ Continue with Juju by visiting the [Models][models] and
 [maas-site]: https://maas.io
 [maas-cli]: https://docs.ubuntu.com/maas/en/manage-cli
 [maas-api]: https://docs.ubuntu.com/maas/en/manage-account#api-key
-[maas-manual]: ./clouds-maas-manual.html
-[create-a-controller-with-constraints]: ./controllers-creating.html#create-a-controller-with-constraints
-[models]: ./models.html
-[charms]: ./charms.html
+[maas-manual]: ./clouds-maas-manual.md
+[controllers-creating]: ./controllers-creating.md
+[models]: ./models.md
+[charms]: ./charms.md
