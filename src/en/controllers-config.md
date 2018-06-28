@@ -87,23 +87,28 @@ use-openstack-gbp            | bool   | false    |                          | Se
 
 ### Controller-related spaces
 
-There are two network spaces that can be applied to controllers. See
-[Network spaces][network-spaces] for background information.
+There are two network spaces that can be applied to controllers and this is
+done by assigning a space name to options `juju-mgmt-space` and `juju-ha-space`.
+See [Network spaces][network-spaces] for background information on spaces.
 
-The `juju-mgmt-space` space is used by [Juju agents][concepts-agents] to
-communicate with controllers. Setting a value for this space limits the IP
-addresses of controller API endpoints in agent configuration, to those in the
-space. If the value is misconfigured so as to expose no addresses to agents,
-then a fallback to all available addresses results. Juju client communication
-with controllers is unaffected by this value.
+The space associated with `juju-mgmt-space` affects the communication between
+[Juju agents][concepts-agents] and their controllers by limiting the IP
+addresses of controller API endpoints to those in the space. If the chosen
+space results in a lack of agent:controller communication then a fallback
+default allows for any IP address to be contacted by the agent. Juju client
+communication with controllers is unaffected by this option.
 
-The `juju-ha-space` space is used for MongoDB replica-set communication when
-[Controller high availability][controllers-ha] is in use . This replaces the
-previously auto-detected space used for such communication. When enabling HA,
-this value must be set when cluster members have more than one IP address
-available for MongoDB use, otherwise an error will be reported. Existing HA
-replica sets with multiple available addresses will report a warning instead of
-an error provided the members and addresses remain unchanged.
+The space associated with `juju-ha-space` is used for MongoDB replica-set
+communication when [Controller high availability][controllers-ha] is in use.
+When enabling HA, this option must be set when cluster members have more than
+one IP address available for MongoDB use, otherwise an error will be reported.
+Existing HA replica sets with multiple available addresses will report a
+warning instead of an error provided the members and addresses remain
+unchanged.
+
+Using these options with the `bootstrap` or `enable-ha` commands effectively
+adds constraints to machine provisioning. These commands will emit an error if
+such constraints cannot be satisfied.
 
 ### Excluding information from the audit log
 
