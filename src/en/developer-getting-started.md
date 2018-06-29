@@ -212,8 +212,8 @@ For more information about writing tests please refer to the
 
 ## Next steps
 
-Once you have finished testing your charm or bundle visit page
-[The Juju Charm Store][authors-charm-store] and consider the following topics:
+Once you have finished testing your charm or bundle visit the
+[Charm Store][authors-charm-store] page and consider the following topics:
 
  * Pushing to the store
  * Releasing to channels
