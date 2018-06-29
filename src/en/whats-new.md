@@ -7,7 +7,7 @@ Juju, begin by going through our [Getting started][getting-started] guide
 first.
 
 For details on these features, and other improvements not listed here, see
-the [2.3 release notes][anchor__release-notes-2.3.0].
+the [2.3 release notes][release-notes-2.3.0].
 
 ## Persistent storage
 
@@ -39,7 +39,7 @@ also possible to map specific machines to machines configured in the bundle.
 A bundle declaration can be placed on top of a base bundle to override elements
 of the latter. These are bonafide bundle files, called "overlay bundles", that
 can do anything a normal bundle can do. They can also remove applications from
-the base bundle. See [Overlay bundles][anchor__overlay-bundles].
+the base bundle. See [Overlay bundles][overlay-bundles].
 
 
 <!-- LINKS -->
@@ -48,5 +48,5 @@ the base bundle. See [Overlay bundles][anchor__overlay-bundles].
 [charms-storage]: https://jujucharms.com/docs/stable/charms-storage
 [models-cmr]: https://jujucharms.com/docs/stable/models-cmr
 [charms-fan]: https://jujucharms.com/docs/stable/charms-fan
-[anchor__release-notes-2.3.0]: ./reference-release-notes.html#juju_2.3.0
-[anchor__overlay-bundles]: ./charms-bundles.html#overlay-bundles
+[release-notes-2.3.0]: ./reference-release-notes.html#juju_2.3.0
+[overlay-bundles]: ./charms-bundles.html#overlay-bundles

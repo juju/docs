@@ -210,30 +210,15 @@ tests in Python.
 For more information about writing tests please refer to the
 [charm testing guide documentation][charm testing].
 
-## Publishing your charm
+## Next steps
 
+Once you have finished testing your charm or bundle visit the
+[Charm Store][authors-charm-store] page and consider the following topics:
 
-When you are done writing your charm and you want to make it available to
-others you will need to make a *promulgation request*. This is informally done
-via the [Juju users mailing list][mailing-list-juju].
-
-The '#juju' IRC channel on Freenode and the above mailing list remain excellent
-resources for questions and comments regarding charm development and charm
-promulgation.
-
-### Promulgation notes
-
-- The [Charm promulgation][charm-promulgation] page contains information on what
-  happens once the request is made.
-
-- It is the responsibility of the charm author (and maintainer) to test
-  their charm to ensure it is of good quality and is secure.
-
-- Promulgation to the top level namespace of the Charm Store does not imply
-  an endorsement by Canonical.
-
-- Charm authors are encouraged to use their personal or group namespace.
-
+ * Pushing to the store
+ * Releasing to channels
+ * Publishing your charm
+ * Sharing charms and bundles
 
 
 <!-- LINKS -->
@@ -250,11 +235,10 @@ promulgation.
 [bundletester]:       https://github.com/juju-solutions/bundletester
 [charm testing]:      ./developer-testing.html
 [interfaces]:         http://interfaces.juju.solutions/
-[charm-promulgation]: ./charm-promulgation.html
 [reactive]: https://en.wikipedia.org/wiki/Reactive_programming
 [charmsreactive]: https://charmsreactive.readthedocs.io/
-[mailing-list-juju]: https://lists.ubuntu.com/mailman/listinfo/juju
 [mariadb]: https://jujucharms.com/mariadb
 [upstream-openstack-charms]: https://docs.openstack.org/charm-guide/
 [askubuntu-markdown]: https://askubuntu.com/editing-help
 [getstartedmd-link]: https://api.jujucharms.com/charmstore/v5/~rharding/grafana-4/archive/getstarted.md
+[authors-charm-store]: ./authors-charm-store.md#pushing-to-the-store

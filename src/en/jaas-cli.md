@@ -140,8 +140,8 @@ supported regions for your cloud.
 
 ## Deploy
 
-The [Charm store][charmstore] is the default repository for [charms][charms]
-and [bundles][bundles]. Whether you deploy [Kibana][kibana] or
+The [Charm store][charm-store] is the default repository for [charms][charms]
+and [bundles][charms-bundles]. Whether you deploy [Kibana][kibana] or
 [OpenStack][openstack], it's JAAS and Juju that handle the complexity.
 
 To deploy the [Canonical Kubernetes][kubernetes] bundle, for example, type the
@@ -203,9 +203,9 @@ exactly what it's capable of.
 
 
 [addmodel]: ./models-adding.html
-[bundles]: ./charms-bundles.html
+[charms-bundles]: ./charms-bundles.md
 [charms]: ./charms.html
-[charmstore]: https://jujucharms.com
+[charm-store]: https://jujucharms.com
 [credentials]: ./credentials.html
 [install]: ./reference-install.html
 [jujudocs]: ./clouds.html
