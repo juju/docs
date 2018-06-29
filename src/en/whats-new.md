@@ -6,6 +6,7 @@ The latest release of Juju has focused a little more on under-the-hood
 improvements, making Juju much more efficient at scale, but there are 
 some major changes you should know about, which we have summarised here.
 
+
 For full details on this release, see the [2.4 release notes][release-notes].
 
 If you are new to Juju, you will probably want to read the
@@ -25,7 +26,7 @@ juju bootstrap --bootstrap-series=bionic localhost localcloud
 ```
 
 Workloads will automatically be deployed on the newest available series 
-supported by the charm, so if a bionic version exists
+supported by the charm.
 
 
 ## Controller network spaces
@@ -80,3 +81,4 @@ will appear in the YAML output.
 [release-notes]: ./reference-release-notes.md#juju_2.4.0
 [controllers-config]: ./controllers-config.md
 [credential-command]: ./commands.md#show-credentials
+
