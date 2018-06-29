@@ -13,6 +13,9 @@ release notes for the 1.x series are available [here][release-notes-1].
   guiding Juju to the correct management network all aid in keeping your
   infrastructure running smoothly.  
   
+  For highlights of this release, please see the [What's new in 2.4][whats-new]
+  page in the documentation. Further details are below.
+  
   ## New and improved.
 
   **Bionic support**  
@@ -65,8 +68,8 @@ release notes for the 1.x series are available [here][release-notes-1].
   **Controller configuration options for spaces**  
   Two new controller configuration settings have been introduced. These are:
   
-   - juju-mgmt-space
-   - juju-ha-space
+  - juju-mgmt-space
+  - juju-ha-space
   
   'juju-mgmt-space' is the name of the network space used by agents to
   communicate with controllers. Setting a value for this item limits the IP
@@ -215,9 +218,53 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   ## Get Juju.
   
-  The easiest way to get Juju is using the `snap` package.
+  The easiest way to get Juju is by using the `snap` package.
   
   	  sudo snap install juju --classic
+  
+  ## Fixes.
+  
+  Some important fixes include:
+
+  - `network-get` can return incorrect CIDRs (
+  [LP 1770127](https://bugs.launchpad.net/bugs/1770127)).
+
+  - Change in behaviour in status output: 'Relations' section is not visible by
+  default in tabular format (
+  [LP 1633972](https://bugs.launchpad.net/bugs/1633972)).
+
+  - Fixes for when /var, /etc, /tmp are on different partitions (
+  [LP 1634390](https://bugs.launchpad.net/bugs/1634390) and
+  [LP 1751291](https://bugs.launchpad.net/bugs/1751291)).
+
+  - networking related fixes (
+  [LP 1733266](https://bugs.launchpad.net/bugs/1733266),
+  [LP 1764735](https://bugs.launchpad.net/bugs/1764735), and
+  [LP 1771120](https://bugs.launchpad.net/bugs/1771120)).
+
+  - juju resolve fix / improvement (
+  [LP 1755141](https://bugs.launchpad.net/bugs/1755141) and
+  [LP 1762979](https://bugs.launchpad.net/bugs/1762979)).
+
+  - support for st1 and sc1 volume types on AWS (
+  [LP 1753593](https://bugs.launchpad.net/bugs/1753593)).
+
+  - support for new AWS instance types (
+  [LP 1754735](https://bugs.launchpad.net/bugs/1754735)).
+
+  For a detailed breakdown of fixed bugs:
+  
+  [https://launchpad.net/juju/+milestone/2.4.0](https://launchpad.net/juju/+milestone/2.4.0)  
+  [https://launchpad.net/juju/+milestone/2.4-rc3](https://launchpad.net/juju/+milestone/2.4-rc3)  
+  [https://launchpad.net/juju/+milestone/2.4-rc2](https://launchpad.net/juju/+milestone/2.4-rc2)  
+  [https://launchpad.net/juju/+milestone/2.4-rc1](https://launchpad.net/juju/+milestone/2.4-rc1)  
+  [https://launchpad.net/juju/+milestone/2.4-beta3](https://launchpad.net/juju/+milestone/2.4-beta3)  
+  [https://launchpad.net/juju/+milestone/2.4-beta2](https://launchpad.net/juju/+milestone/2.4-beta2)  
+  [https://launchpad.net/juju/+milestone/2.4-beta1](https://launchpad.net/juju/+milestone/2.4-beta1)
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
   
   ## Feedback appreciated.
   
@@ -2666,6 +2713,7 @@ release notes for the 1.x series are available [here][release-notes-1].
 
 <!-- LINKS -->
 
+[whats-new]: ./whats-new.md
 [release-notes-1]: ./reference-release-notes-1.md
 [reference-install]: ./reference-install.md
 [juju-mailing-list]: https://lists.ubuntu.com/mailman/listinfo/juju
