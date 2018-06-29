@@ -211,6 +211,10 @@ session.
 
    To add an OpenStack cloud, you need to supply a name you wish to call it,
    the unique API endpoint, the authentication type(s), and region information.
+
+   Here we assume an OpenStack cloud that is equipped with the relevant Ubuntu
+   images. For help in configuring your own OpenStack cloud to work with Juju,
+   see [Using OpenStack with Juju][clouds-openstack].
    
    A sample session is shown below:
    
@@ -419,6 +423,10 @@ This examples shows how to manually add an OpenStack cloud to Juju. It also
 demonstrates how multiple authentication types can be allowed
 (comma-separated).
 
+Here we assume an OpenStack cloud that is equipped with the relevant Ubuntu
+images. For help in configuring your own OpenStack cloud to work with Juju, see
+[Using OpenStack with Juju][clouds-openstack].
+
 Here is the YAML file:
 
 ```yaml
@@ -453,3 +461,4 @@ You must now add a credential for this cloud prior to creating a controller
 [oracleimages]: ./help-oracle.md#images
 [controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
 [clouds-maas-add-credentials]: ./clouds-maas.md#add-credentials
+[clouds-openstack]: ./help-openstack.md
