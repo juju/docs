@@ -5,6 +5,104 @@ Title: Juju Release Notes
 This page details all available release notes for the 2.x series of Juju. The
 release notes for the 1.x series are available [here][release-notes-1].
 
+^# Juju 2.4.0
+
+  The Juju team is proud to release version 2.4. This release greatly improves
+  running and operating production infrastructure at scale. Improvements to
+  `juju status` output, easier maintenance of Controller high availability, and
+  guiding Juju to the correct management network all aid in keeping your
+  infrastructure running smoothly.  
+  
+  ## New and improved.
+
+  **Bionic support**  
+  Juju 2.4 fully supports running controllers and workloads on Ubuntu 18.04 LTS
+  (Bionic), including leveraging `netplan` for network management. 
+
+  **LXD enhancements**  
+
+  - LXD functionality has been updated to support the latest LXD 3.0.
+  
+  - Juju supports LXD installed as a Snap and defaults to Snap-installed
+    LXD by default if it is present. 
+
+  - A basic model of LXD clustering is now supported with the following
+    conditions:
+
+      - The juju bootstrap of the localhost cloud must be performed on a
+        cluster member.
+
+      - Bridge networking on clustered machines must be set up to allow
+        egress traffic to the controller container(s).
+
+  **Improvements to `juju status` output**  
+
+  - The 'Relations' section
+
+      - When filtering by application name, only direct relations are shown.
+
+      - In tabular format, the 'Relations' section is no longer visible by
+      default.  Use the `--relations` option to see it (
+      [LP 1633972](https://bugs.launchpad.net/juju/+bug/1633972)).
+
+      - Clarifying empty output - whether it is due to a model being empty
+        or because a provided filter did not match anything on the model
+    (
+    [LP 1255786](https://bugs.launchpad.net/juju/+bug/1255786),
+    [LP 1696245](https://bugs.launchpad.net/juju/+bug/1696245), and
+    [LP 1594883](https://bugs.launchpad.net/juju/+bug/1594883)).
+
+  - Addition of a (controller) timestamp (
+    [LP 1765404](https://bugs.launchpad.net/juju/+bug/1765404)).
+
+  - Reordering of the status model table to improve consistency between
+    model updates. 
+
+  - Inclusion of application endpoint binding information (in YAML and JSON
+    formats). For each endpoint, the space to which it is bound is
+    provided.
+
+  **Controller configuration options for spaces**  
+  Two new controller configuration settings have been introduced. These are:
+  
+   - juju-mgmt-space
+   - juju-ha-space
+  
+  'juju-mgmt-space' is the name of the network space used by agents to
+  communicate with controllers. Setting a value for this item limits the IP
+  addresses of controller API endpoints in agent config, to those in the space.
+  If the value is misconfigured so as to expose no addresses to agents, then a
+  fallback to all available addresses results. Juju client communication with
+  controllers is unaffected by this value.
+  
+  'juju-ha-space' is the name of the network space used for MongoDB replica-set
+  communication in high availability (HA) setups. This replaces the previously
+  auto-detected space used for such communication. When enabling HA, this value
+  must be set where member machines in a HA set have more than one IP address
+  available for MongoDB use, otherwise an error will be reported. Existing HA
+  replica sets with multiple available addresses will report a warning instead
+  of an error provided the members and addresses remain unchanged.
+  
+  Using either of these options during `bootstrap` or `enable-ha` effectively
+  adds constraints to machine provisioning. The commands will fail with an
+  error if such constraints can not be satisfied.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the [Juju mailing list][juju-mailing-list].
+  
+  ## More information.
+  
+  To learn more about Juju visit [https://jujucharms.com][upstream-juju].
+
 ^# Juju 2.4-beta3
   
   A new development release of Juju is here, 2.4-beta3. Do not use on
@@ -2753,5 +2851,7 @@ release notes for the 1.x series are available [here][release-notes-1].
 
 <!-- LINKS -->
 
-[release-notes-1]: ./reference-release-notes-1.html
-[reference-install]: ./reference-install.html
+[release-notes-1]: ./reference-release-notes-1.md
+[reference-install]: ./reference-install.md
+[juju-mailing-list]: https://lists.ubuntu.com/mailman/listinfo/juju
+[upstream-juju]: https://jujucharms.com
