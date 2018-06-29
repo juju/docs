@@ -1,6 +1,7 @@
-Title: OpenStack clouds
+Title: Using OpenStack with Juju
+TODO:  Review required
 
-# OpenStack clouds
+# Using OpenStack with Juju
 
 Although Juju doesn't have baked-in knowledge of *your* OpenStack cloud, it
 does know how such clouds work in general. We just need to provide some
@@ -82,8 +83,6 @@ Simply follow the prompts.
 For other methods of adding credentials, please see the specific
 [credentials documentation][credentials].
 
-
-
 ## Images and private clouds
 
 The above steps are all you need to use most OpenStack clouds which are
@@ -92,9 +91,7 @@ additionally provide stream information so that the cloud can fetch the
 relevant images for Juju to use. This is covered in the section on
 [private clouds][simplestreams]. 
 
-
-
-## Bootstrap with Juju
+## Creating a controller
 
 Once the image metadata has been gathered, either locally or via a registered
 and running Simplestream service, check your OpenStack networks.  If there are
@@ -110,8 +107,8 @@ Choose the network you want the instances to boot from.  You can use either the
 network name or the UUID with the 'network' configuration option when
 bootstrapping a new controller.
 
-With the product-streams service running in your OpenStack Cloud, you can now 
-create a controller on this cloud with the `juju bootstrap` command:
+With the product-streams service running in your OpenStack Cloud, you are now
+ready to create a Juju controller:
 
 ```bash
 juju bootstrap <cloud> <controller name> --config network=<network_id>
@@ -123,7 +120,27 @@ or if the simplestream data is local:
 juju bootstrap <cloud> <controller name> --metadata-source ~/simplestreams/images --config network=<network_id>
 ```
 
+For a detailed explanation and examples of the `bootstrap` command see the
+[Creating a controller][controllers-creating] page.
+
+## Next steps
+
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
+
+See these pages for ideas on what to do next:
+
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
+
+
+<!-- LINKS -->
+
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [simplestreams]: ./howto-privatecloud.html
 [credentials]: ./credentials.html
 [manual-openstack]: ./clouds-openstack-manual.html
+[controllers-creating]: ./controllers-creating.md
+[models]: ./models.md
+[charms]: ./charms.md
