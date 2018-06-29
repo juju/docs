@@ -77,7 +77,7 @@ will appear in the YAML output.
  
 <!-- LINKS -->
 
-[getting-started]: https://jujucharms.com/docs/devel/getting-started
+[getting-started]: ./getting-started.md
 [release-notes]: ./reference-release-notes.md#juju_2.4.0
 [controllers-config]: ./controllers-config.md
 [credential-command]: ./commands.md#show-credentials
