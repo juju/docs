@@ -169,8 +169,8 @@ navigation:
           location: developer-getting-started#writing-your-charm.md
         - title: Testing your Charm
           location: developer-getting-started#testing-your-charm.md
-        - title: Publishing your charm
-          location: developer-getting-started#publishing-your-charm.md
+        - title: Next steps
+          location: developer-getting-started#next-steps.md
 
     - title: Event Cycle
       location: developer-event-cycle.md

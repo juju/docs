@@ -66,8 +66,7 @@ and configured in order to automate a multi-charm solution. For example, a
 WordPress bundle may include the 'wordpress' charm, the 'mysql' charm, and the
 relation between them. The operations are transparent to Juju and so the
 deployment can continue to be managed by Juju as if everything was performed
-manually. See [Using and creating bundles][charms-bundles] for more
-information.
+manually. See [Charm bundles][charms-bundles] for more information.
 
 ## Machine
 
@@ -240,7 +239,7 @@ tweaked if desired. See
 [lxd]: https://linuxcontainers.org/lxd/
 [charm-store]: https://jujucharms.com/store
 [charms]: ./charms.html
-[charms-bundles]: ./charms-bundles.html
+[charms-bundles]: ./charms-bundles.md
 [charms-relations]: ./charms-relations.html 
 [clouds]: ./clouds.html
 [controllers]: ./controllers.html
