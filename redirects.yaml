@@ -2,9 +2,9 @@
 (|devel/en/?)?: /devel/en/getting-started
 
 # Redirect /stable to correct version
-(|stable/?)?: /2.3/en/getting-started
-(|stable/en/?)?: /2.3/en/getting-started
-stable/?(?P<path>.*): /2.3/{path}
+(|stable/?)?: /2.4/en/getting-started
+(|stable/en/?)?: /2.4/en/getting-started
+stable/?(?P<path>.*): /2.4/{path}
 
 # Redirect pages which don't specify \en\ to the \en\ version 
 (?P<version>[0-9-\._]+|devel)/(?P<page>(?!en/).+): /{version}/en/{page}
