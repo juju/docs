@@ -1,9 +1,5 @@
-sudo: required
 language: python
 dist: trusty
-
-services:
-  - docker
 
 python:
   - "3.5"
