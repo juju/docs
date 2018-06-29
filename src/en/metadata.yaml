@@ -8,7 +8,7 @@ navigation:
     children:
       - title: Get started
         location: getting-started.md
-      - title: What's new in 2.3
+      - title: What's new in 2.4
         location: whats-new.md
       - title: Local Juju with LXD cloud
         location: tut-lxd.md
