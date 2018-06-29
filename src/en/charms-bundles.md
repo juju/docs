@@ -1,156 +1,24 @@
-Title: Using and Creating Bundles
+Title: Charm bundles
 TODO:  Check more complex bundles after the release of 2.0
-       Review required
-       Refactor (e.g. advanced usage/information should go in a sub-page)
-       Refactor (e.g. using vs creating)
        Add example portraying bundle overlay
+table_of_contents: True
 
-# Using and Creating Bundles
+# Charm bundles
 
-*Charms* are seldom deployed in isolation. Even MediaWiki needs to be connected
-to a database. Instead, charms are mostly used to model more complex
-deployments, potentially including many different applications and connections.
-A *Bundle* is an encapsulation of this model, or an atomic self-contained part
-of it. It may be as simple as MediaWiki and a database, or as complex as a full
-OpenStack cloud. But a bundle encapsulates all the charms and their
-relationships and enables you to install an entire working deployment just as
-easily as installing a single charm, whether that's from the
-[Juju Charm Store][store] or by importing a previously exported deployment
-yourself.
+Although charms can be deployed in isolation, they are typically used alongside
+other charms in order to implement more complex solutions, whether it be as
+simple as MediaWiki and a database, or as complex as a full OpenStack cloud. A
+charm bundle, or just *bundle*, is an encapsulation of such a compound
+deployment and includes all the associated relations and configurations that
+the deployment requires. A huge plus is that a bundle is installed exactly like
+a charm is: with the `deploy` command or via the GUI (see
+[Adding bundles with the GUI][charms-bundles-gui]).
 
-### Adding bundles from the command line
+## Inside a bundle
 
-Bundles are deployed on the command line exactly like
-[Charms](./charms-deploying.html), and use the same `deploy` command and
-syntax:
-
-```bash
-juju deploy wiki-simple
-```
-
-To get a summary of the deployment steps (without actually deploying) a *dry
-run* can be performed:
-
-```bash
-juju deploy --dry-run wiki-simple
-```
-
-Sample output:
-
-```no-highlight
-Located bundle "cs:bundle/wiki-simple-4"
-Resolving charm: cs:trusty/mysql-55
-Resolving charm: cs:trusty/mediawiki-5
-Changes to deploy bundle:
-- upload charm cs:mysql-55 for series trusty
-- deploy application mysql on trusty using cs:mysql-55
-- set annotations for mysql
-- upload charm cs:trusty/mediawiki-5 for series trusty
-- deploy application wiki on trusty using cs:trusty/mediawiki-5
-- set annotations for wiki
-- add relation wiki:db - mysql:db
-- add unit mysql/0 to new machine 0
-- add unit wiki/0 to new machine 1
-```
-
-!!! Note:
-    The `dry-run` option only works with bundles.
-
-You can get the name of a bundle from the [Juju Charm Store][store], just as
-you would a charm.  Unlike charms, bundles embed more than a single
-application, and you can see icons representing each separate application
-alongside a bundle's name. This gives you a quick overview of a bundle's
-complexity and potential resource requirements.
-
-![Bundle resources in the Charm Store](media/juju2_gui_bundles_store.png)
-
-To get a bundle's name, select a bundle on the store and find the 'command
-prompt' icon at the top of the pane. Alongside this will be a correctly
-formatted `bundle` command, including the correct Charm Store URL for the
-bundle, which you can also run to deploy your chosen bundle:
-
-```bash
-juju deploy cs:bundle/wiki-simple-4
-```
-## Adding bundles with the GUI
-
-Bundles are just as easy to use and deploy within the Juju GUI, and the process
-of adding them from the Charm Store is almost identical to the way you add
-charms. 
-
-From the GUI, open the Store and select the bundle you're interested in. A new
-pane will display a preview of what the GUI's visual overview will look like
-with the bundle installed, showing applications and connections. Further
-details, such as how a bundle supports scaling, can be found below the preview.
-
-Click 'Add to model-name', where *model-name* is your currently selected
-model. This will simply add the bundle to your currently selected model.
-
-Before clicking on 'Commit changes' to activate your new bundle, review the
-configuration of each application by selecting them and making any necessary
-changes. Click on 'Commit changes' to review the deployment summary followed by
-'Deploy' to set those changes in motion. Alternatively, select each application
-and click 'Destroy' to remove them from bundle prior to activation.
-
-### Exporting and Importing bundles with the GUI
-
-From the GUI, you can easily export and re-import the current model as a local
-bundle, encapsulating your applications and connections into a single file. To
-do this, click on the 'Export' button alongside your username and model name,
-or use the keyboard shortcut “shift-d”.  This results in the creation of a file
-called `<model-name>-<year>-<month>-<date>.yaml` that your browser will
-typically prompt you to save or open.
-
-![Export button in the Juju GU](media/juju2_gui_bundles_export.png)
-
-You can import a saved bundle by either dragging the exported YAML file onto
-your browser canvas, or using the 'Import' button. After clicking 'Import' your
-browser will prompt you to select a bundle file.
-
-After a file has been added, the GUI will briefly report 
-`ChangeSet process started` followed by `ChangeSet import complete`. As with
-adding bundles from the store, you may want to review the applications,
-connections and various configuration options before clicking on 'Commit
-changes' and 'Deploy' to activate your bundle.
-
-### Local deploy via command line
-
-After exporting a bundle from the GUI, you can also `deploy` the saved bundle
-from the command line: 
-
-```bash
-juju deploy bundle.yaml
-```
-Unlike when you import and deploy a bundle with the Juju GUI, running `juju
-deploy` on the command line will not attempt to rename a new application if an
-application with the same name already exists.
-
-From the command line, you can also check for errors in a bundle before
-deploying it. Bundles downloaded from the Juju store need to be unzipped into
-their own directory, and your own YAML files will need to be accompanied by a
-`README.md` text file (although this file can be empty for testing purposes).
-You can then check for possible errors with the following command:
-
-```bash
-charm proof directory-of-bundle/
-```
-Note that if no directory is given, the command defaults to the current
-directory.
-
-If no errors are detected, there will be no output from `charm proof` and you
-can safely deploy your bundle. 
-
-## Creating a bundle
-
-A bundle is a set of applications with a specific configuration and their
-corresponding relations that can be deployed together in a single step.
-Instead of deploying a single application, they can be used to deploy an entire
-workload, with working relations and configuration. The use of bundles allows
-for easy repeatability and for sharing of complex, multi-application
-deployments.
-
-As an example, here is a bundle file with a MySQL application and a WordPress
-application with a relation between the two: 
+A bundle is defined with a file in YAML format and is often called the "bundle
+file". Here is a bundle file with "charm definitions" for MySQL and WordPress
+with a relation between the two: 
 
 ```yaml
 series: xenial
@@ -184,16 +52,79 @@ machines:
     constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
 ```
 
-## Setting constraints in a bundle
+## Deploying bundles
 
-To make your bundle as reusable as possible, it's common to set minimum
-constraints against a charmed application, much like you would when deploying
-charms from the command line. This is a simple key addition to the application
-definition, using the proper constraint key/value pair as outlined on the
-[Using constraints][charms-constraints] page.
+A bundle is deployed just like a regular charm is:
 
-For example, to add memory and CPU constraints to a charm in a bundle, the
-bundle file would have an additional `constraints` field with specific values:
+```bash
+juju deploy wiki-simple
+```
+
+See the [Deploying applications][charms-deploying] page for details on the
+`deploy` command.
+
+To get a summary of the deployment steps (without actually deploying) a *dry
+run* can be performed:
+
+```bash
+juju deploy --dry-run wiki-simple
+```
+
+Sample output:
+
+```no-highlight
+Located bundle "cs:bundle/wiki-simple-4"
+Resolving charm: cs:trusty/mysql-55
+Resolving charm: cs:trusty/mediawiki-5
+Changes to deploy bundle:
+- upload charm cs:mysql-55 for series trusty
+- deploy application mysql on trusty using cs:mysql-55
+- set annotations for mysql
+- upload charm cs:trusty/mediawiki-5 for series trusty
+- deploy application wiki on trusty using cs:trusty/mediawiki-5
+- set annotations for wiki
+- add relation wiki:db - mysql:db
+- add unit mysql/0 to new machine 0
+- add unit wiki/0 to new machine 1
+```
+
+!!! Note:
+    The `--dry-run` option works only with bundles, and not with regular
+    charms.
+
+You can get the name of a bundle from the [Juju Charm Store][charm-store], just
+as you would a charm. There, you can see icons representing each separate
+application alongside the bundle's name. This gives you a quick overview of a
+bundle's complexity and potential resource requirements.
+
+![Bundle resources in the Charm Store](media/juju2_gui_bundles_store.png)
+
+To get a bundle's name, select a bundle on the store and find the 'command
+prompt' icon at the top of the pane. A field will contain the Charm Store URL
+for the bundle, which you can also use to deploy:
+
+```bash
+juju deploy cs:bundle/wiki-simple-4
+```
+
+The `cs` signifies "charm store".
+
+## Configuring bundles
+
+Below we present two ways in which existing bundles can be tweaked for your
+environment:
+
+ * Setting charm constraints in a bundle
+ * Setting charm configuration options in a bundle
+
+### Setting charm constraints in a bundle
+
+To make a bundle as reusable as possible, it's common to set minimum
+constraints for its associated charms, much like you would when deploying
+charms from the command line. This is done by including a `constraints` field
+to a charm's definition.
+
+For example, to add memory and CPU constraints to the 'mysql' charm:
 
 ```yaml
 mysql:
@@ -207,17 +138,16 @@ mysql:
     "gui-y": "168"
 ```
 
-## Setting charm configurations options in a bundle
+Refer to the [Using constraints][charms-constraints] page for in-depth coverage
+of constraints.
+
+### Setting charm configuration options in a bundle
 
 When deploying an application, the charm you use will often support or even
-require specific configuration options to be set. These options can be set in
-a bundle as a simple key addition to the application definition, using the
-configuration key/value pair.
-[See the documentation on application configuration][discover-config-options-docs]
-to discover which options are available for the different charms.
+require specific configuration options to be set. This is done by including an
+`options` field to a charm's definition.
 
-For example, to set the flavor of the MySQL charm to Percona in a bundle, the
-bundle file would have an additional `options` field with specific value:
+For example, to set the 'flavor' of the MySQL charm to 'percona':
 
 ```yaml
 mysql:
@@ -237,17 +167,37 @@ bundle file) path. For example:
 
 ```yaml
 applications:
-    my-app:
-        charm: some-charm
-        options:
-            config: include-file://my-config.yaml
-            cert: include-base64://my-cert.crt
+  my-app:
+    charm: some-charm
+    options:
+      config: include-file://my-config.yaml
+      cert: include-base64://my-cert.crt
 ```
 
-## Overlay bundles
+See section
+[Discovering application configuration options][discover-config-options]
+to learn about a charm's options.
+
+## Creating bundles
+
+Bundles can continue to be modified to the point that you are effectively
+creating a new bundle. This section presents the following methods:
+
+ * Overlay bundles
+ * Bundle placement directives
+ * Machine specifications in a bundle
+ * Recycling machines
+ * Binding endpoints within a bundle
+ * Bundles and charm resources
+
+!!! Note:
+    Make sure you've added a brief explanation of what your bundle does within
+    the `description` field of your bundle's YAML file. 
+
+### Overlay bundles
 
 The `--overlay` option can be used when you want to use a standard bundle but
-keep model-specific configuration in a separate file. The overlay files
+keep **model-specific** configuration in a separate file. The overlay files
 constitute bundles in their own right. The "overlay bundle" can specify new
 applications, change values, and also specify the removal of an application in
 the base bundle.
@@ -267,13 +217,11 @@ For example:
 juju deploy wiki-simple --overlay ~/model-a/wiki-simple.yaml
 ```
 
-## Bundle placement directives
+### Bundle placement directives
 
-You can co-locate applications using the placement directive key in the bundle.
-Much like application constraints, it requires adding the placement key `to` in
-the application definition.  Where supported by the cloud provider, it is also
-possible to isolate charms by including the container format in the placement
-directive. Some clouds support LXD.
+You can co-locate applications using the placement key `to` in the charm's
+definition. When LXD is supported by the backing cloud it is also possible to
+isolate charms by including the container format in the placement directive.
 
 For example:
 
@@ -288,7 +236,7 @@ mysql:
     "gui-y": "168"
 ```
 
-which will install the MySQL application into an LXD container on the same
+This will install the MySQL application into a LXD container on the same
 machine as the wordpress/0 unit. You can check the output from `juju status` to
 see where each application has been deployed:
 
@@ -298,8 +246,8 @@ mysql/0      waiting   allocating  0/lxd/0                         waiting for m
 wordpress/0  waiting   allocating  0        10.1.110.193           waiting for machine
 ```
 
-Alternatively, to install the MySQL application into an LXD container on
-machine '1', use the following syntax:
+Alternatively, to install MySQL into a LXD container on machine '1', use the
+following syntax:
 
 ```yaml
 mysql:
@@ -312,26 +260,22 @@ mysql:
     "gui-y": "168"
 ```
 
-## Machine specifications in a bundle
+### Machine specifications in a bundle
 
 Bundles may optionally include a machine specification, which allows you to set
-up specific machines and then to place units of your applications on those
-machines however you wish.  A machine specification is a YAML object with named
-machines (integers are always used for names).  These machines are objects with
-three possible fields: `series`, `constraints`, and `annotations`.
-
-Note that the machine spec is optional. Leaving the machine spec out of your bundle
-tells Juju to place units on new machines if no placement directives are given.
-
-With machines specified, you can place and co-locate applications onto specific
-machines using the placement key to in the application definition. For example:
+up specific machines and then to place application units on those machines
+however you wish. This is done by including a `machines` field at the root of
+the bundle file and then defining machines based on an integer. These machines
+are objects with three possible fields: `series`, `constraints`, and
+`annotations`. Finally, these machines are referred to in a charm's definition
+by using the placement key `to`. For example:
 
 ```yaml
 mysql:
   charm: "cs:trusty/mysql-57"
   num_units: 1
   to:
-    - "0
+    - "0"
   annotations:
     "gui-x": "139"
     "gui-y": "168"
@@ -340,8 +284,12 @@ machines:
     series: trusty
     constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
 ```
-which will install the MySQL application on machine 0. You may also specify
-multiple machines for placing multiple units of an application. For example:
+
+This will install the MySQL application on machine '0', which has been assigned
+a specific series and a collection of constraints.
+
+You may also specify multiple machines for placing multiple units of an
+application. For example:
 
 ```yaml
 mysql:
@@ -361,8 +309,9 @@ machines:
     series: trusty
     constraints: "arch=amd64 cpu-cores=4 cpu-power=500 mem=4096 root-disk=8192"
 ```
-which will install one unit of the MySQL application on machine 0 and the other on
-machine 1. 
+
+This will install one unit of the MySQL application on machine '0' and the
+other on machine '1'. 
 
 The output from `juju status` will show this deployment as follows:
 
@@ -383,21 +332,21 @@ refer to top level machine IDs.
 
 For example, consider a bundle whose YAML file is configured with machines 1,
 2, 3, and 4, and a model containing machines 1, 2, 3, 4, and 5. The following
-deployment would use existing machines 1 and 2 for bundle machines 1
-and 2 but use existing machine 4 for bundle machine 3 and existing
-machine 5 for bundle machine 4:
+deployment would use existing machines 1 and 2 for bundle machines 1 and 2 but
+use existing machine 4 for bundle machine 3 and existing machine 5 for bundle
+machine 4:
 
 ```bash
 juju deploy some-bundle --map-machines=existing,3=4,4=5
 ```
 
-## Binding endpoints within a bundle
+### Binding endpoints within a bundle
 
-You can configure more complex networks using [spaces](./network-spaces.html)
-and deploy charms with binding, as described in
-[Deploying to spaces](./charms-deploying-advanced.html#deploying-to-network-spaces).
-Bindings can also be specified for applications within a bundle. To do so,
-add a section to the bundle's YAML file called `bindings`. For example:
+Generally, you can configure more complex networks using
+[Network spaces][network-spaces] and deploy charms with a binding, as described
+in [Deploying to spaces][deploying-to-network-spaces]. However, the same can
+also be achieved with a bundle and is done by including a `bindings` field to a
+charm's definition. For example:
 
 ```yaml
 mysql:
@@ -408,25 +357,21 @@ mysql:
     cluster: internal
 ```
 
-This is the equivalent of deploying with:
+This is equivalent to:
 
 ```bash
 juju deploy cs:trusty/mysql-57 --bind "shared-db=database cluster=internal"
 ```
 
-These bundles will need to be updated to be more specific about the
-bindings required, allowing the operator to specify exactly which charm-defined
-endpoints should end up in specific spaces.
-
-The following `deploy` command connects charm endpoints to specific spaces and
-includes a default space, `default-space`, for any interfaces not specified:
+The following connects charm endpoints to specific spaces and includes a
+default space, `default-space`, for any interfaces not specified:
 
 ```bash
 juju deploy --bind "default-space db=db-space db-admin=admin-space" mysql
 ```
 
-Using the `binding` section in the bundle's YAML file, the above deploy
-command can be mirrored in bundle format with the following:
+Using a bundle file, the above deploy command can be mirrored with the
+following:
 
 ```yaml
 mysql:
@@ -441,12 +386,11 @@ mysql:
 It is not currently possible to declare a default space in the bundle for all
 application endpoints. The workaround is to list all endpoints explicitly.
 
-## Bundles and Charm Resources
+### Bundles and charm resources
 
-Charms can define [resources][charm-resources-docs]; bundles can be used to
-constrain those resources to specific revisions or to specify local paths to
-those resources. For example, the following charm's metadata.yaml file specifies
-a resource:
+Bundles support charm resources (see [Using resources][developer-resources])
+through the use of the `resources` field. For example, consider the following
+charm's metadata.yaml file that specifies a resource:
 
 ```yaml
 name: example-charm
@@ -459,9 +403,9 @@ resources:
     description: "This charm needs example.zip to operate"
 ```
 
-If this charm were to be used as part of a bundle, it might be desirable to
-specify a revision that is specific to the bundle. Revisions are specified in
-the bundle's YAML file in the corresponding "applications" section.
+If this charm were to be used as part of a bundle, it might be desirable to use
+a specific revision for the bundle. Revisions are specified in the bundle file
+under the charm's field in the `applications` section:
 
 ```yaml
 applications:
@@ -472,11 +416,10 @@ applications:
      example: 1
 ```
 
-The `example-charm` charm specifies that it requires a resource called `example`
-to operate; the bundle's "applications" section shown above specifies that its
-bundle requires, from the charm store, revision 1 of that resource.
+So the charm specifies that it requires a resource called `example` and the
+bundle stipulates a revision of '1' of that resource (from the Charm Store).
 
-The resources section can also specify a local path to a resource:
+The `resources` field can also specify a local path to a resource instead:
 
 ```yaml
 applications:
@@ -487,27 +430,32 @@ applications:
      example: "./example.zip"
 ```
 
-Local paths to resources can be useful in network restricted environments where
-a Juju controller can not contact the charm store, for example.
+Local paths to resources can be useful, for example, in network restricted
+environments where a Juju controller is unable to contact the Charm Store.
 
-## Sharing your Bundle with the Community
+## Saving a bundle and next steps
 
-After you have tested and deployed your bundle you need to release it to share
-it with people, this is covered in the
-[charm store documentation][store-docs]. 
-
-Someone will come along and review your bundle for inclusion. If you need to
-speak to a human, there are patch pilots in the Juju IRC channel (#juju on
-Freenode) who can assist. You can also use the
-[Juju mailing list][juju-list].
+If you have created your own bundle you will need to save it. In order to do
+this you will need to use the Juju GUI. See
+[Adding bundles with the GUI][charms-bundles-gui-exporting] for instructions.
 
 !!! Note:
-    Make sure you've added a brief explanation of what your bundle does within
-    the `description` field of your bundle's YAML file. 
+    A CLI tool for saving a bundle is currently under development.
 
-[store]: https://jujucharms.com/q/?type=bundle
-[store-docs]: ./authors-charm-store.html
+Once the bundle is saved you can consider these
+[Next steps][authors-charm-store-next-steps].
+
+
+<!-- LINKS -->
+
+[charms-deploying]: ./charms-deploying.md
+[charm-store]: https://jujucharms.com/q/?type=bundle
+[authors-charm-store-next-steps]: ./developer-getting-started.md#next-steps
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
-[charms-constraints]: ./charms-constraints.html
-[discover-config-options-docs]: ./charms-config.html#discovering-application-configuration-options
-[charm-resources-docs]: ./developer-resources.html
+[charms-constraints]: ./charms-constraints.md
+[discover-config-options]: ./charms-config.md#discovering-application-configuration-options
+[charm-resources-docs]: ./developer-resources.md
+[network-spaces]: ./network-spaces.md
+[deploying-to-network-spaces]: ./charms-deploying-advanced.md#deploying-to-network-spaces
+[developer-resources]: ./developer-resources.md
+[charms-bundles-gui-exporting]: ./charms-bundles-gui.md#exporting-and-importing-bundles-with-the-GUI
