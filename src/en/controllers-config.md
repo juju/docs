@@ -70,8 +70,8 @@ bootstrap-retry-delay        | integer | 5       |                          | Ho
 bootstrap-address-delay      | integer | 10      |                          | How often in seconds to refresh controller addresses from the API server
 ca-cert                      | string |          |                          | The certificate of the CA that signed the controller's CA certificate, in PEM format
 controller-uuid              | string |          |                          | The key for the UUID of the controller
-juju-ha-space		     | string |          |			    | The name of a network space used used for MongoDB replica-set communication in a controller HA context. Effectively acts as a machine constraint.
-juju-mgmt-space		     | string |          |			    | The name of a network space used by Juju agents to communicate with controllers. Effectively acts as a machine constraint.
+juju-ha-space		     | string |          |			    | The name of a network space used used for MongoDB replica-set communication in a controller HA context. Effectively acts as a machine constraint. See [additional info below](#controller-related-spaces).
+juju-mgmt-space		     | string |          |			    | The name of a network space used by Juju agents to communicate with controllers. Effectively acts as a machine constraint. See [additional info below](#controller-related-spaces).
 identity-public-key          | string |          |                          | Sets the public key of the identity manager. Feature not yet implemented.
 identity-url                 | string |          |                          | Sets the URL of the identity manager. Feature not yet implemented.
 max-logs-age                 | string | 72h      | 72h, etc.                | Sets the maximum age for log entries before they are pruned, in human-readable time format
@@ -84,6 +84,31 @@ policy-target-group          | string |          |                          | An
 state-port                   | integer | 37017   |                          | The port to use for mongo connections
 use-floating-ip              | bool   | false    |                          | Use with OpenStack. Sets whether a floating IP address is required in order for nodes to be assigned a public IP address.
 use-openstack-gbp            | bool   | false    |                          | Sets whether OpenStack GBP (Group-Based Policy) is enabled. Use with key 'policy-target-group'.
+
+### Controller-related spaces
+
+There are two network spaces that can be applied to controllers and this is
+done by assigning a space name to options `juju-mgmt-space` and `juju-ha-space`.
+See [Network spaces][network-spaces] for background information on spaces.
+
+The space associated with `juju-mgmt-space` affects the communication between
+[Juju agents][concepts-agents] and their controllers by limiting the IP
+addresses of controller API endpoints to those in the space. If the chosen
+space results in a lack of agent:controller communication then a fallback
+default allows for any IP address to be contacted by the agent. Juju client
+communication with controllers is unaffected by this option.
+
+The space associated with `juju-ha-space` is used for MongoDB replica-set
+communication when [Controller high availability][controllers-ha] is in use.
+When enabling HA, this option must be set when cluster members have more than
+one IP address available for MongoDB use, otherwise an error will be reported.
+Existing HA replica sets with multiple available addresses will report a
+warning instead of an error provided the members and addresses remain
+unchanged.
+
+Using these options with the `bootstrap` or `enable-ha` commands effectively
+adds constraints to machine provisioning. These commands will emit an error if
+such constraints cannot be satisfied.
 
 ### Excluding information from the audit log
 
@@ -172,9 +197,13 @@ key value of 'ReadOnlyMethods'.
   Subnets.ListSubnets
   ```
 
+
 <!-- LINKS -->
 
-[controllers-creating]: ./controllers-creating.html "Creating a controller"
-[models-config]: ./models-config.html "Configuring models"
+[controllers-creating]: ./controllers-creating.md
+[models-config]: ./models-config.md
 [#excluding-information-audit-log]: #excluding-information-from-the-audit-log
-[audit-logging]: ./troubleshooting-logs.html#audit-logging
+[audit-logging]: ./troubleshooting-logs.md#audit-logging
+[network-spaces]: ./network-spaces.md
+[controllers-ha]: ./controllers-ha.md
+[concepts-agents]: ./juju-concepts.md#agent
