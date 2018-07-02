@@ -191,7 +191,7 @@ transactional: **all** changes are discarded when the hook fails.
 
 ### charms.reactive command
 
-There is a commandline charms.reactive tool that can help with debugging charms.
+There is a command line charms.reactive tool that can help with debugging charms.
 You can use it to view, set and clear flags **within a debug-hooks session**. 
 
 !!! Note: Charms built with older versions of the reactive framework might 
