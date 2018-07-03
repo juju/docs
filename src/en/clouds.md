@@ -176,10 +176,10 @@ session.
    
 ^# Manual
 
-   To add a Manual cloud, you need to supply a name you wish to call it, the
-   IP address (or hostname) used to connect to it, and what remote user account
-   to connect to (over SSH). This last is done by prepending 'user@' to the
-   address/hostname.
+   To add a Manual cloud, you need to supply a name you wish to call it, the IP
+   address (or hostname) for the machine you intend to use as a controller, and
+   what remote user account to connect to (over SSH). This last is done by
+   prepending 'user@' to the address/hostname.
    
    In terms of SSH, the user running the Juju client is expected to already be
    able to connect to the remote host (either by password or public key).
@@ -197,15 +197,18 @@ session.
       
       Select cloud type: manual
       
-      Enter a name for your manual cloud: mycloud
+      Enter a name for your manual cloud: mymanual
       
       Enter the controller's hostname or IP address: noah@10.143.211.93
       
-      Cloud "mycloud" successfully added
-      You may bootstrap with 'juju bootstrap mycloud'
+      Cloud "mymanual" successfully added
+      You may bootstrap with 'juju bootstrap mymanual'
 
    A Juju-added credential is not required. The ability for Juju to make an SSH
    connection is all that's needed.
+   
+   For help in configuring your own Manual cloud to work with Juju, see
+   [Using the Manual cloud with Juju][clouds-manual].
 
 ^# OpenStack
 
@@ -462,3 +465,4 @@ You must now add a credential for this cloud prior to creating a controller
 [controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
 [clouds-maas-add-credentials]: ./clouds-maas.md#add-credentials
 [clouds-openstack]: ./help-openstack.md
+[clouds-manual]: ./clouds-manual.md
