@@ -4,6 +4,7 @@ TODO: Check accuracy of key table (https://github.com/juju/juju/blob/ec89c99e51f
       "dynamically set by Juju" could use some explaination
       ReadOnlyMethods updated from https://github.com/juju/juju/blob/2.3/apiserver/observer/auditfilter.go#L130
       Include ability to set configuration key:value pairs by file
+table_of_contents: True
 
 
 # Configuring controllers

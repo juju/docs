@@ -2,15 +2,18 @@ Title: Using LXD with Juju
 TODO:  Warning: Ubuntu release versions hardcoded
        Warning: Troubleshoot Trusty; bootstrap only works with the lxd snap
        (and only if it is installed w/o the lxd deb being installed first)
+table_of_contents: True
 
 # Using LXD with Juju
 
-Choosing LXD as the backing cloud for Juju is an efficient way to experiment
-with Juju. It is also very quick to set up. With lightweight containers acting
-as Juju machines, even a moderately powerful laptop can create useful models,
-or serve as a platform to develop your own charms.
+Choosing [LXD][ubuntu-lxd] as the backing cloud for Juju is an efficient way to
+experiment with Juju. It is also very quick to set up. With lightweight
+containers acting as Juju machines, even a moderately powerful laptop can
+create useful models, or serve as a platform to develop your own charms. Make
+sure you have enough space locally for the containers.
 
-A tutorial is available on this same topic: [Getting started with Juju and LXD][tut-lxd].
+A tutorial is available on this same topic:
+[Getting started with Juju and LXD][tut-lxd].
 
 ## Software prerequisites
 
@@ -180,3 +183,4 @@ See these pages for ideas on what to do next:
 [credentials]: ./credentials.html
 [lxd-resources]: ./clouds-lxd-resources.html
 [lxd-snap]: ./clouds-lxd-resources.html#using-the-lxd-snap
+[ubuntu-lxd]: http://www.ubuntu.com/cloud/lxd
