@@ -1,8 +1,7 @@
 Title: Additional LXD resources
 TODO:  Warning: Ubuntu release versions hardcoded
        Review section: Remote LXD user credentials
-
-{% raw %}
+table_of_contents: True
 
 # Additional LXD resources
 
@@ -102,8 +101,6 @@ the standard way to view logs is with the `juju debug-log` command. See
 
 There are many client commands available. Some common ones, including those
 covered above, are given below.
-
-<style> table td{text-align:left;}</style>
 
 | client commands                               | meaning                            |
 |-----------------------------------------------|------------------------------------|
@@ -265,5 +262,3 @@ assistance with the daemon. See upstream documentation for
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
 [logs]: ./troubleshooting-logs.html
 [credentials]: ./credentials.html
-
-{% endraw %}

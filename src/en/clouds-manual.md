@@ -1,7 +1,7 @@
-Title: Adding a manual cloud
-       Critical: Review required (reconcile with add-cloud on clouds.md)
+Title: Using the Manual cloud with Juju
+TODO:  Critical: Review required (reconcile with add-cloud on clouds.md)
 
-# Using a "Manual" cloud
+# Using the Manual cloud with Juju
 
 Juju caters for the
 case where you may not be able to access a more traditional cloud in a
@@ -25,8 +25,7 @@ applications though, with a bit of extra effort.
 ## Add a Manual cloud
 
 Use the interactive `add-cloud` command to add your Manual cloud to Juju's list
-of clouds. See the 'Manual' entry under
-[Specifying additional clouds][clouds__specifying-additional-clouds] for
+of clouds. See the 'Manual' entry under [Adding clouds][adding-clouds] for
 guidance.
 
 ## Bootstrapping the cloud
@@ -133,7 +132,10 @@ or [`bootstrap`](#bootstrapping-the-cloud) commands from Juju.
     Also check that there is a root password set for the CentOS machine 
     to avoid prompts which may hinder automated SSH operations.
 
-[models-config]: ./models-config.html
-[placement]: ./charms-deploying-advanced.html#deploying-to-specific-machines
-[commands]: ./commands.html
-[clouds__specifying-additional-clouds]: ./clouds.html#specifying-additional-clouds
+
+<!-- LINKS -->
+
+[models-config]: ./models-config.md
+[placement]: ./charms-deploying-advanced.md#deploying-to-specific-machines
+[commands]: ./commands.md
+[adding-clouds]: ./clouds.md#adding-clouds
