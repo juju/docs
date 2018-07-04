@@ -135,7 +135,7 @@ To add the machine with an IP address (and user) of bob@10.55.60.93 to the
 'manual-controller'):
 
 ```bash
-juju add-machine -m manual-controller:default ssh:bob@10.55.60.93
+juju add-machine ssh:bob@10.55.60.93
 ```
 
 Unless you're using passphraseless public key authentication, you may be
@@ -144,7 +144,7 @@ prompted for a password a few times. The process takes a couple of minutes.
 Once the command has returned, you can check that the machine is available:
 
 ```bash
-juju machines -m manual-controller:default
+juju machines
 ```
 
 Sample output:
@@ -160,7 +160,7 @@ To deploy WordPress onto the machine we added previously its ID (of '0') is
 made use of:
 
 ```bash
-juju deploy -m manual-controller:default wordpress --to 0
+juju deploy wordpress --to 0
 ```
 
 See [Deploying to specific machines][deploying-to-specific-machines] for more
