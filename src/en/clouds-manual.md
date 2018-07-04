@@ -160,7 +160,7 @@ To deploy WordPress onto the machine we added previously its ID (of '0') is
 made use of:
 
 ```bash
-juju deploy wordpress --to 0
+juju deploy -m manual-controller:default wordpress --to 0
 ```
 
 See [Deploying to specific machines][deploying-to-specific-machines] for more
