@@ -1,20 +1,34 @@
 Title: Using the Manual cloud with Juju
 TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1779917
-       QUESTION: Does sudo on CentOS work? Does root on Ubuntu work?
+       QUESTION: Will Manual work if sudo is used on CentOS? Does root on Ubuntu work?
 
 # Using the Manual cloud with Juju
 
-Juju caters for the case where you may not be able to access a traditional
-cloud; maybe you can't create additional instances on an existing cloud; or
-perhaps your cloud is really a collection of disparate hardware.
+The purpose of the Manual cloud is to cater to the situation where you have
+machines (of any nature) at your disposal and you want to create a backing
+cloud out of them. If this collection of machines is composed solely of bare
+metal you might opt for a MAAS cloud but note that such machines would also
+require IPMI hardware and a MAAS infrastructure. The Manual cloud can therefore
+both make use of a collection of disparate hardware as well as of machines of
+varying natures (bare metal or virtual), all without any extra
+overhead/infrastructure.
 
-Whatever the case, as long as Juju can log into these machines they can be used
-as a backing cloud for Juju. It won't be _quite_ the same as using a standard cloud
-- without the ability to create new instances when they are desired, you will
-be missing out on some of the Juju magic. You can still deploy and manage
-applications though, with a bit of extra effort.
+## Limitations
+
+With any other cloud, the Juju client can trigger the creation of a backing
+machine (e.g. a cloud instance) as they become necessary. In addition, the
+client can also cause charms to be deployed automatically onto those
+newly-created machines. However, with a Manual cloud the machines must
+pre-exist and they must also be specifically targeted during charm deployment.
+
+!!! Note:
+    A MAAS cloud must also have pre-existing backing machines. However, Juju,
+    by default, can deploy charms onto those machines, or add a machine to its
+    pool of managed machines, without any extra effort.
 
 ## Prerequisites
+
+The following conditions must be met:
 
  - At least two machines are needed (one for the controller and one to deploy
    charms to).
@@ -22,7 +36,28 @@ applications though, with a bit of extra effort.
  - The machines must be contactable over SSH using a user account with root
    privileges. On Ubuntu, `sudo` rights will suffice if this provides root
    access.
- - The machines must be able to contact each other over the network.
+ - The machines must be able to `ping` each other.
+
+## Overview
+
+A Manual cloud is initiated through the use of the `add-cloud` command. In this
+step you specify an arbitrary cloud name, the intended controller (IP address
+or hostname), and what user account the Juju client will attempt to contact
+over SSH.
+
+As usual, a controller is created with the `bootstrap` command and refers to
+the cloud name.
+
+Your collection of machines (minus the controller machine) *must* be added to
+Juju by means of the `add-machine` command. A machine is specified by means of
+its IP address.
+
+!!! Important:
+    A Manual cloud requires at least one machine to be added.
+
+Finally, to deploy a charm the `deploy` command is used as normal. However, a
+machine *must* be targeted. This latter is accomplished with the `--to` option
+in conjunction with the machine ID.
 
 ## Adding a Manual cloud
 
@@ -79,7 +114,7 @@ Credentials should already have been set up via SSH. Nothing to do!
 
 ## Creating a controller
 
-You are now ready to create a Juju controller for cloud 'mymanul':
+You are now ready to create a Juju controller for cloud 'mymanual':
 
 ```bash
 juju bootstrap mymanual manual-controller
@@ -95,19 +130,12 @@ For a detailed explanation and examples of the `bootstrap` command see the
 
 ## Adding machines to a Manual cloud
 
-All the other cloud types provision machines automatically when the client
-requests a machine to be added but in the case of the Manual cloud these
-machines need to be pre-existing and added manually.
-
-!!! Important:
-    A Manual cloud requires at least one machine to be added.
-
-For example, to add the machine with an IP address of 10.55.60.93 to the
+To add the machine with an IP address (and user) of bob@10.55.60.93 to the
 'default' model in the Manual cloud (whose controller was named
 'manual-controller'):
 
 ```bash
-juju add-machine -m manual-controller:default ssh:noah@10.55.60.93
+juju add-machine -m manual-controller:default ssh:bob@10.55.60.93
 ```
 
 Unless you're using passphraseless public key authentication, you may be
@@ -128,12 +156,8 @@ Machine  State    DNS          Inst id             Series  AZ  Message
 
 ## Deploying a charm in a Manual cloud
 
-All the other cloud types, by default, automatically provision a machine during
-the charm deployment step but in the case of the Manual cloud the machine needs
-to be pre-existing (and added using the `add-machine` process).
-
-The pre-existing machine is targeted by means of the `--to` option. For
-example, here we deploy WordPress on the machine '0' we added previously:
+To deploy WordPress onto the machine we added previously its ID (of '0') is
+made use of:
 
 ```bash
 juju deploy wordpress --to 0
