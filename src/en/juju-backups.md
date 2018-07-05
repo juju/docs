@@ -49,7 +49,7 @@ sudo tar -cpzf juju-client-$(date "+%Y%m%d-%H%M%S").tar.gz .juju
 This is because the local provider makes use of superuser privileges, and
 consequently some of the files belong to 'root' and cannot be read by a normal
 user. You will also find that the backup archives are substantially bigger. 
-As the local provider stores everything in '~/.juju', you are effectively 
+As the local provider stores everything in `~/.juju`, you are effectively 
 backing up the entire local environment also. If you aren't concerned about the 
 local user, you can omit the local provider files by supplying the 
 ```--exclude-path=``` switch as many times as necessary and specifying the name 
