@@ -1,2 +1,45 @@
 site_title: Juju documentation
-site_logo_url: https://assets.ubuntu.com/v1/31c507a5-logo-juju-icon.svg
+site_logo_url: https://assets.ubuntu.com/v1/9afc1e35-juju_white-orange_hex.svg
+site_favicon: https://assets.ubuntu.com/v1/751b08fb-favicon.ico
+site_remove_navigation_title: true
+
+site_navigation:
+  - title: Store
+    location: https://jujucharms.com/store
+
+  - title: How it works
+    location: https://jujucharms.com/how-it-works
+
+  - title: JAAS
+    location: https://jujucharms.com/jaas
+
+  - title: Experts
+    location: https://jujucharms.com/experts
+
+  - title: Community
+    location: https://jujucharms.com/community
+
+  - title: Docs
+    location: /
+
+  - title: Try the beta
+    location: https://jujucharms.com/new/?dd=cs:bundle/canonical-kubernetes
+
+site_navigation_colors:
+  background: '#022935'
+  border: '#33535d'
+  hover: '#011e26'
+  text: '#fff'
+
+site_footer_links:
+  - title: Docs
+    location: https://docs.jujucharms.com/getting-started
+
+  - title: Community
+    location: https://jujucharms.com/community
+
+  - title: Blog
+    location: https://jujucharms.com/community/blog
+
+  - title: Install Juju
+    location: https://jujucharms.com/docs
