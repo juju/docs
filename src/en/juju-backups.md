@@ -19,9 +19,9 @@ credentials) it is usually best to simply back up the entire Juju directory
 
 !!! Note: 
     On Windows systems, the Juju directory is in a different place
-     (usually `C:\Users\<username>\AppData\Roaming\Juju`. Also, although `tar` is 
-    available for Windows, you may prefer to use a more Windows-centric backup 
-    application.
+    (usually `C:\Users\<username>\AppData\Roaming\Juju`. Also, although
+    `tar` is available for Windows, you may prefer to use a more
+    Windows-centric backup application.
 
 ### Backup ~/.juju
 
