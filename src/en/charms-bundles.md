@@ -458,4 +458,5 @@ Once the bundle is saved you can consider these
 [network-spaces]: ./network-spaces.md
 [deploying-to-network-spaces]: ./charms-deploying-advanced.md#deploying-to-network-spaces
 [developer-resources]: ./developer-resources.md
+[charms-bundles-gui]: ./charms-bundles-gui.md
 [charms-bundles-gui-exporting]: ./charms-bundles-gui.md#exporting-and-importing-bundles-with-the-GUI
