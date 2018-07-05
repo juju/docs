@@ -17,10 +17,9 @@ This will generate a file, `environments.yaml`, which, in Linux, will reside in
 your `~/.juju/` directory (and will create the directory if it doesn't already
 exist).
 
-!!! Note: 
-    If you have an existing configuration, you can use `juju
-    generate-config --show` to output the new config file, then copy and paste
-    relevant areas in a text editor etc.
+!!! Note: If you have an existing configuration, you can use `juju
+generate-config --show` to output the new config file, then copy and paste
+relevant areas in a text editor etc.
 
 The generic configuration sections generated for Joyent will look something
 like this:
@@ -58,16 +57,15 @@ do to get Juju deploying services on Joyent is to set:
 - `manta-key-id` (finger print from uploaded ssh key -same as `sdc-key-id`)
 - `private-key-path` (if your private is not at `~/.ssh/id_rsa`)
 
-!!! Note: 
-    The private key is currently uploaded to the cloud in order to
-    remotely sign requests to the Joyent API. It is highly recommended that the
-    private key used in this way _should not_ be a common SSH key you use for other
-    purposes, but a specific one used for the Joyent cloud.  Until there is a more
-    robust workaround, you are strongly urged to generate a new keypair for use
-    with the Joyent cloud, and either set that file in your `private-key-path` or
-    paste it directly into the configuration as a `private-key` value, instead of
-    the `private-key-path`.  Remember to indent properly and to append a `|` after
-    `private-key` to span multiple lines.
+!!! Note: The private key is currently uploaded to the cloud in order to
+remotely sign requests to the Joyent API. It is highly recommended that the
+private key used in this way _should not_ be a common SSH key you use for other
+purposes, but a specific one used for the Joyent cloud.  Until there is a more
+robust workaround, you are strongly urged to generate a new keypair for use
+with the Joyent cloud, and either set that file in your `private-key-path` or
+paste it directly into the configuration as a `private-key` value, instead of
+the `private-key-path`.  Remember to indent properly and to append a `|` after
+`private-key` to span multiple lines.
 
 You can retrieve these values easily from Joyent Dashboard at
 [https://my.joyent.com/main/#!/account](https://my.joyent.com). Click on your
@@ -76,7 +74,6 @@ name in the top-right and then the "Account" link from the drop down menu.
 ![Joyent Dashboard to access username and
 fingerprint](./media/getting_started-joyent-account-dropdown.png)
 
-!!! Note: 
-    During initial setup if you are having issues deploying charms contact
-    Joyent support at [https://help.joyent.com/home](https://help.joyent.com/home) 
-    to verify your account is capable of provisioning virtual machines.
+!!! Note: During initial setup if you are having issues deploying charms contact
+Joyent support at [https://help.joyent.com/home](https://help.joyent.com/home) 
+to verify your account is capable of provisioning virtual machines.

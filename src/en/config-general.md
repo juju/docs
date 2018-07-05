@@ -38,9 +38,8 @@ juju set-env noproxy=jujucharms.com
 Some values will need to be specified via the environments.yaml file, as not
 all values can be applied to a running environment.
 
-!!! Note: 
-    Juju does not currently check that the provided key is a valid
-    setting, so make sure you spell it correctly.
+!!! Note: Juju does not currently check that the provided key is a valid
+setting, so make sure you spell it correctly.
 
 
 ## Apt mirror
