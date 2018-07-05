@@ -2,12 +2,11 @@ Title: Configuring Juju for the Scaleway provider
 
 # Configuring for Scaleway
 
-!!! Note: 
-    This provider is in "beta" and makes use of
-    [manual provisioning](config-manual.html). Manual provisioning allows Juju
-    users to implement any cloud provider's API calls and acts similar to a
-    standard provider implemented via the Juju project. You can access the provider
-    source code on [github](https://github.com/scaleway/juju-scaleway)
+!!! **Note:** This provider is in "beta" and makes use of
+[manual provisioning](config-manual.html). Manual provisioning allows Juju
+users to implement any cloud provider's API calls and acts similar to a
+standard provider implemented via the Juju project. You can access the provider
+source code on [github](https://github.com/scaleway/juju-scaleway)
 
 This package provides a CLI plugin for Juju that allows automated provisioning
 of C1 BareMetal SSD servers on Scaleway.
@@ -23,8 +22,7 @@ plugins.
 
 ## Requirements
 
-!!! Note:
-    This process requires you to have an Scaleway account.
+!!! **Note:** This process requires you to have an Scaleway account.
 
 - You have an account and are logged into [cloud.scaleway.com](https://cloud.scaleway.com)
 - You have configured your [SSH Key](https://www.scaleway.com/docs/configure_new_ssh_key)
@@ -68,11 +66,10 @@ export SCALEWAY_ACCESS_KEY=<organization_key>
 export SCALEWAY_SECRET_KEY=<secret_token>
 ```
 
-!!! Note:
-    As environment variables are not shared between shells, you will
-    need to repeat this operation for every shell.  You can avoid this repetition
-    by adding this environment variables in your shell's rc files, for instance
-    append them to your `~/.bashrc` or `~/.zshrc`
+!!! **Note:** As environment variables are not shared between shells, you will
+need to repeat this operation for every shell.  You can avoid this repetition
+by adding this environment variables in your shell's rc files, for instance
+append them to your `~/.bashrc` or `~/.zshrc`
 
 ### Juju configuration
 

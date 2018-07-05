@@ -112,11 +112,10 @@ juju unblock remove-object
 
 Typically you would restore the block after having made the change.
 
-!!! Note: 
-    The '--force' option recognized by some Juju commands bypasses any
-    restriction level that would otherwise apply. If your policy is to use
-    restrictions then the immediate use of the '--force' option should not be part
-    of your workflow. If you must use it, do so after having first run the Juju
-    command without it to ensure you are aware of any possible restrictions.
+!!! Note: The '--force' option recognized by some Juju commands bypasses any
+restriction level that would otherwise apply. If your policy is to use
+restrictions then the immediate use of the '--force' option should not be part
+of your workflow. If you must use it, do so after having first run the Juju
+command without it to ensure you are aware of any possible restrictions.
 
 For more information run ```juju help block``` and ```juju help unblock```.

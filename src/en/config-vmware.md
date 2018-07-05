@@ -18,10 +18,9 @@ This will generate a file, `environments.yaml`, which will live in your
 `~/.juju/` directory (and will create the directory if it doesn't already
 exist).
 
-!!! Note: 
-    If you have an existing configuration, you can use
-    `juju generate-config --show` to output the new config file, then copy and
-    paste relevant areas in a text editor etc.
+!!! Note: If you have an existing configuration, you can use
+`juju generate-config --show` to output the new config file, then copy and
+paste relevant areas in a text editor etc.
 
 The basic configuration will look something like this:
 

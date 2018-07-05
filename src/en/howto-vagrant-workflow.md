@@ -165,13 +165,11 @@ You now have a Juju installation ready to be used for testing your charm on
 OSX, and an instance of Juju Gui to interface with your services. Validate that
 the GUI is accessible from [http://localhost:6080](http://localhost:6080)
 
-!!! Note: 
-    The password is output in your console feedback from the Juju
-    bootstrap.
+!!! Note: The password is output in your console feedback from the Juju
+bootstrap.
 
-!!! Note: 
-    All your charms in $HOME/charms are available in the /vagrant
-    directory of our JujuBox.
+!!! Note: All your charms in $HOME/charms are available in the /vagrant
+directory of our JujuBox.
 
 
 ### Deploying our charm in vagrant
@@ -194,10 +192,9 @@ the Vagrant image and interface with the Genghis server.
 
 ### Routing local traffic to Vagrant
 
-!!! Note: 
-    If your local network is using 10.0.3.x you will need to alter the
-    Juju networking in the Vagrant box, and substitute the network provided in the
-    command above.
+!!! Note: If your local network is using 10.0.3.x you will need to alter the
+Juju networking in the Vagrant box, and substitute the network provided in the
+command above.
 
 
 #### Native routing (OS X 10.10 and above)
@@ -249,13 +246,11 @@ brew install sshuttle
 sshuttle -r vagrant@localhost:2222 10.0.3.0/24
 ```
 
-!!! Note: 
-    You can skip the brew install line if you already have sshuttle
-    installed
+!!! Note: You can skip the brew install line if you already have sshuttle
+installed
 
-!!! Note: 
-    sshuttle does not work under OS X 10.10 (Yosemite) due to the
-    deprecation of ipfw in favor of pf.
+!!! Note: sshuttle does not work under OS X 10.10 (Yosemite) due to the
+deprecation of ipfw in favor of pf.
 
 When prompted for the password enter `vagrant`.
 

@@ -39,9 +39,8 @@ Several terms are in circulation that are used to denote the environment softwar
 - Juju agent
 - The daemon/binary, *jujud*
 
-!!! Note: 
-    This guide will call "the software running in an environment" the
-    **server software**.
+!!! Note: This guide will call "the software running in an environment" the
+**server software**.
 
 
 ## Upgrading the server software
@@ -91,9 +90,8 @@ A version is denoted by:
 
 For instance: `1.25.1`
 
-!!! Note: 
-    Odd minor numbers no longer denote development versions. Instead, tags
-    such as 'alpha', 'beta', etc are used.
+!!! Note: Odd minor numbers no longer denote development versions. Instead, tags
+such as 'alpha', 'beta', etc are used.
 
 When not specifying a version to upgrade to (`--version`) an algorithm will be
 used to auto-select a version.
@@ -143,9 +141,8 @@ state server:
 juju sync-tools --version 1.23 --debug
 ```
 
-!!! Note: 
-    the `sync-tools --version` command only accepts `major[.minor]`
-    ("e.g. use '1.24' not '1.24.5').
+!!! Note: the `sync-tools --version` command only accepts `major[.minor]`
+("e.g. use '1.24' not '1.24.5').
 
 For complete syntax, see the [command reference page](./commands.html#sync-tools)
 or by running `juju help sync-tools`.
@@ -179,8 +176,7 @@ watch -n3 "juju status --format tabular"
 For complete syntax, see the [command reference page](./commands.html#upgrade-juju)
 or by running `juju help upgrade-juju`.
 
-!!! Warning: 
-    The `--upload-tools` option should be not be used by the end user.
+!!! Warning: The `--upload-tools` option should be not be used by the end user.
 
 
 ## Verifying the upgrade
