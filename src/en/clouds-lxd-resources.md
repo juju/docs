@@ -1,7 +1,7 @@
 Title: Additional LXD resources
-TODO:  Warning: Ubuntu release versions hardcoded
-       Review section: Remote LXD user credentials
 table_of_contents: True
+
+{% raw %}
 
 # Additional LXD resources
 
@@ -262,3 +262,5 @@ assistance with the daemon. See upstream documentation for
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
 [logs]: ./troubleshooting-logs.html
 [credentials]: ./credentials.html
+
+{% endraw %}
