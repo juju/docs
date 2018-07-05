@@ -65,9 +65,10 @@ the docs:
 To implement this callout, use the following syntax:
 
 ```
-!!! Note: If you want to get more information on what is actually happening, or
-to help resolve problems, you can add the `--show-log` switch to the juju
-command to get verbose output.
+!!! Note: 
+    If you want to get more information on what is actually happening, or
+    to help resolve problems, you can add the `--show-log` switch to the juju
+    command to get verbose output.
 ```
 
 ## Foldouts

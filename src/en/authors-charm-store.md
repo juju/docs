@@ -18,10 +18,11 @@ There are currently 2 methods to submit a charm and have it listed in the charm
 store. Both methods have their perks - but it is suggested to start with your
 personal namespace before asking for a charmer featured charm.
 
-!!! Note: if you are a member of the Charm Partner Program, you will want to
-ensure that your Charm gets into the Recommended Charms section of the Charm
-Store, so please follow the instructions in the
-[Recommended Charms](#recommended-charms) section below.
+!!! Note: 
+    if you are a member of the Charm Partner Program, you will want to
+    ensure that your Charm gets into the Recommended Charms section of the Charm
+    Store, so please follow the instructions in the
+    [Recommended Charms](#recommended-charms) section below.
 
 ## Charm Store Process
 
