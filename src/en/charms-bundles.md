@@ -109,6 +109,9 @@ juju deploy cs:bundle/wiki-simple-4
 
 The `cs` signifies "charm store".
 
+Bundles can also be deployed by referring to a local bundle file (if it
+exists). We'll see this in the [Creating bundles][#creating-bundles] section.
+
 ## Configuring bundles
 
 Below we present two ways in which existing bundles can be tweaked for your
@@ -183,6 +186,7 @@ to learn about a charm's options.
 Bundles can continue to be modified to the point that you are effectively
 creating a new bundle. This section presents the following methods:
 
+ * Using local charms
  * Overlay bundles
  * Bundle placement directives
  * Machine specifications in a bundle
@@ -193,6 +197,31 @@ creating a new bundle. This section presents the following methods:
 !!! Note:
     Make sure you've added a brief explanation of what your bundle does within
     the `description` field of your bundle's YAML file. 
+
+### Using local charms
+
+To integrate a local charm into a bundle a local bundle file, say
+`bundle.yaml`, will be needed and where the `charm` field points to the
+directory of the charm in question. An absolute or a relative (to the bundle
+file) path can be used. Here is an example:
+
+```bash
+series: xenial
+applications:
+  mysql:
+    charm: "/home/ubuntu/charms/mysql"
+    num_units: 1
+    constraints:
+      mem=2G
+      cpu-cores=4
+```
+
+The bundle can then be deployed by using the file as the argument instead of a
+charm name:
+
+```bash
+juju deploy bundle.yaml
+```
 
 ### Overlay bundles
 
@@ -449,6 +478,7 @@ Once the bundle is saved you can consider these
 <!-- LINKS -->
 
 [charms-deploying]: ./charms-deploying.md
+[#creating-bundles]: #creating-bundles
 [charm-store]: https://jujucharms.com/q/?type=bundle
 [authors-charm-store-next-steps]: ./developer-getting-started.md#next-steps
 [juju-list]: https://lists.ubuntu.com/mailman/listinfo/juju
