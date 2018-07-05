@@ -217,7 +217,7 @@ applications:
 ```
 
 The bundle can then be deployed by using the file as the argument instead of a
-charm name:
+bundle name:
 
 ```bash
 juju deploy bundle.yaml
