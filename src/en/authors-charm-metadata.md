@@ -84,9 +84,9 @@ fields:
 ## Miscellaneous fields
 
   - `series`: A list of series that the charm supports.
-     - It can include code names of Ubuntu releases such as 'trusty' or
-       'xenial'.
-     - It can also include code names for non-Ubuntu series such as 'centos7'.
+     - Supports Ubuntu code names (e.g. 'trusty', 'xenial') or CentOS release
+       names (e.g. 'centos7').
+     - The top-most entry acts as the default series.
   - `terms`: A list of the terms the user must agree to before using the charm.
   - `min-juju-version`: The minimum Juju version running on the controller
     (machine agent) that this charm is compatible with.
