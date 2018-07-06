@@ -6,11 +6,12 @@ reasons.
 In these cases it's useful to maintain a copy of the internet-accessible
 Charm Store for your local deployments.
 
-!!! Note: Though this method will ensure that the charms themselves are
-available on systems without outside internet access, there is no
-guarantee that a charm will work in a disconnected state. Some charms
-pull code from the outside world, such as github. We recommend modifying
-these charms to pull code from an internal server when appropriate.
+!!! Note: 
+    Though this method will ensure that the charms themselves are
+    available on systems without outside internet access, there is no
+    guarantee that a charm will work in a disconnected state. Some charms
+    pull code from the outside world, such as github. We recommend modifying
+    these charms to pull code from an internal server when appropriate.
 
 ## Retrieving charms using the Charm Tools
 
@@ -116,7 +117,8 @@ the `set-env` command:
 juju set-env "default-series=trusty"
 ```
 
-!!! Note: Specifying a local repository makes Juju look there *first*, but if
-the relevant charm is not found in that repository, it will fall back to
-fetching it from the charm store. If you wish to check where a charm was
-installed from, it is listed in the `juju status` output.
+!!! Note: 
+    Specifying a local repository makes Juju look there *first*, but if
+    the relevant charm is not found in that repository, it will fall back to
+    fetching it from the charm store. If you wish to check where a charm was
+    installed from, it is listed in the `juju status` output.

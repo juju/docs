@@ -106,11 +106,12 @@ on our project name of 'Juju-GCE'. Let it be put here:
 
 `/home/ubuntu/.juju/My-Juju-GCE-f33a6cdbd8e3.json`
 
-!!! Warning: Due to
-[LP #1533790](https://bugs.launchpad.net/juju-core/+bug/1533790) make a copy of
-the original file and put it in another location. Edit the original file by
-removing the sections containing these keywords: 'project-id', 'auth-uri',
-'token_uri', 'auth_provider_x509_cert_url', and 'client-x509-cert-url'.
+!!! Warning: 
+    Due to
+    [LP #1533790](https://bugs.launchpad.net/juju-core/+bug/1533790) make a copy of
+    the original file and put it in another location. Edit the original file by
+    removing the sections containing these keywords: 'project-id', 'auth-uri',
+    'token_uri', 'auth_provider_x509_cert_url', and 'client-x509-cert-url'.
 
 
 # Configuring for GCE
