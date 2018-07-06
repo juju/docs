@@ -49,7 +49,7 @@ Cached images can be seen with `lxc image list`:
 
 Image cache expiration and image synchronization mechanisms are built-in.
 
-## Remote LXD user credentials
+## Remote Juju user credentials
 
 When working with remote users on different machines (see
 [Creating users][users-creating] for details on adding users, registering them

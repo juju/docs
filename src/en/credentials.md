@@ -43,8 +43,8 @@ difficulty you can get extra help by selecting your cloud from among this list:
 !!! Note:
     LXD deployments are a special case. Accessed from a Juju admin user, they
     do not require credentials. Accessed from a non-admin user, a *certificate
-    credential* is needed. See [Additional LXD resources][clouds-lxd-resources]
-    for details. 
+    credential* is needed. See
+    [Additional LXD resources][clouds-lxd-resources-remote-user] for details. 
 
 ### Adding credentials interactively
 
@@ -104,6 +104,12 @@ These are the providers that use tools that support these variables:
 Each page provides details on using this method with its respective provider,
 including the variable names.
 
+!!! Note:
+    The `autoload-credentials` command is also used to generate a certificate
+    credential for localhost clouds. This is needed for providing access to
+    non-admin Juju users. See
+    [Additional LXD resources][clouds-lxd-resources-remote-user].
+    
 ### Adding credentials from a file
 
 You can use a YAML-formatted file to store credentials for any cloud. Below we
@@ -392,7 +398,7 @@ juju remove-credential aws bob
 <!-- LINKS -->
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[clouds-lxd-resources]: ./clouds-lxd-resources.md#remote_user_credentials
+[clouds-lxd-resources-remote-user]: ./clouds-lxd-resources.md#remote-juju-user-credentials
 [clouds-aws]: ./help-aws.md
 [clouds-azure]: ./help-azure.md
 [clouds-google]: ./help-google.md
