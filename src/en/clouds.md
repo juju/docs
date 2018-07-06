@@ -1,6 +1,5 @@
 Title: Clouds
-TODO:  Needs to explain available auth types for clouds
-       Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
+TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1749583
        INFO: Auth types found at ~/.local/share/juju/public-clouds.yaml
 table_of_contents: True
@@ -79,7 +78,7 @@ sa-east-1
 ```
 
 To specify a different region, see
-[Creating a controller](./controllers-creating.html).
+[Creating a controller][controllers-creating].
 
 To change the default region for a cloud:
 
@@ -259,8 +258,8 @@ session.
    the regular (paid) Oracle cloud is built-in. See
    [Oracle Compute][clouds-oracle] for both types of accounts.
 
-   You will first need to [import one or more Ubuntu images][oracleimages] from
-   the Oracle dashboard.
+   You will first need to make one or more Ubuntu images available via the
+   Oracle web dashboard. See the [Ubuntu images][clouds-oracle-images] section.
 
    To add an Oracle Compute cloud, you need to supply a name you wish to call
    it and the unique API endpoint.
@@ -353,8 +352,8 @@ The table below shows the authentication types available for each cloud type.
 It does not include the `interactive` type as it does not apply in the context
 of adding a cloud manually.
 
-| cloud type      | authentication types                      |
-|----------------|------------------------------------------|
+| cloud type      | authentication types            |
+|-----------------|---------------------------------|
 `azure`		  | `service-principal-secret`
 `cloudsigma`	  | `userpass`
 `ec2`		  | `access-key`
@@ -454,11 +453,12 @@ You must now add a credential for this cloud prior to creating a controller
 
 [credentials]: ./credentials.md
 [clouds-lxd]: ./clouds-LXD.md
-[juju-maas]: ./clouds-maas.md
+[clouds-maas]: ./clouds-maas.md
 [clouds-manual]: ./clouds-manual.md
-[yaml]: http://www.yaml.org/spec/1.2/spec.html
-[clouds-oracle]: ./help-oracle.md
-[oracleimages]: ./help-oracle.md#images
-[controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
 [clouds-maas-add-credentials]: ./clouds-maas.md#add-credentials
 [clouds-openstack]: ./help-openstack.md
+[clouds-oracle]: ./help-oracle.md
+[yaml]: http://www.yaml.org/spec/1.2/spec.html
+[clouds-oracle-images]: ./help-oracle.md#ubuntu-images
+[controllers-creating]: ./controllers-creating.md
+[controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
