@@ -1,7 +1,6 @@
 Title: Additional LXD resources
+TODO:  Test certificate access
 table_of_contents: True
-
-{% raw %}
 
 # Additional LXD resources
 
@@ -53,35 +52,37 @@ Image cache expiration and image synchronization mechanisms are built-in.
 ## Remote LXD user credentials
 
 When working with remote users on different machines (see
-[Creating users][users] for details on adding users, registering them and
-granting them permissions), LXD-hosted controllers need to generate a specific
-certificate credential which is shared with the remote machine. 
+[Creating users][users-creating] for details on adding users, registering them
+and granting them permissions), LXD-hosted controllers need to generate a
+specific certificate credential which is shared with the remote machine. 
 
-To do this, first run `juju autoload-credentials` on the LXD host. This will
-generate output similar to the following:
+To do this, first run `juju autoload-credentials` on the LXD host. Use the
+below sample session as a guide.
 
-```bash
+```no-highlight
 Looking for cloud and credential information locally...
 
 1. LXD credential "localhost" (new)
-Select a credential to save by number, or type Q to quit:
+Select a credential to save by number, or type Q to quit: 1
+
+Select the cloud it belongs to, or type Q to quit []: localhost
+
+Saved LXD credential "localhost" to cloud localhost
+
+1. LXD credential "localhost" (existing, will overwrite)
+Select a credential to save by number, or type Q to quit: Q
 ```
 
-Select the LXD credential (`1` in the above example) and you will be asked for
-the name of a cloud to link to this credential. Enter 'localhost' to specify
-the local LXD deployment. When the prompt re-appears, type 'q' to quit. The new
-certificate credential will have been created.
-
-To export this certificate credential to a file called
+A certificate credential will have been created. To export it to a file, say
 `localhost-credentials.yaml`, type the following:
 
 ```bash
 juju credentials localhost --format=yaml > localhost-credentials.yaml
 ```
 
-The output file now needs to be moved to the machine and account that requires
-access to the local LXD deployment. With this file on the remote machine, the
-certificate credential can be imported with the following command:
+Now transfer the output file to the machine (and account) that requires access
+to the cloud. Once done, on the remote machine the certificate credential can
+be imported with the following command:
 
 ```bash
 juju add-credential localhost -f localhost-credentials.yaml
@@ -258,9 +259,8 @@ assistance with the daemon. See upstream documentation for
 
 <!-- LINKS -->
 
-[clouds-lxd]: ./clouds-LXD.html
+[clouds-lxd]: ./clouds-LXD.md
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
-[logs]: ./troubleshooting-logs.html
-[credentials]: ./credentials.html
-
-{% endraw %}
+[logs]: ./troubleshooting-logs.md
+[credentials]: ./credentials.md
+[users-creating]: ./users-creating.md
