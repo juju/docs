@@ -3,15 +3,13 @@ TODO:  Error: the metadata file does not give relation names. It gives endpoint 
 
 # What is a relation?
 
-Relationships in Juju are a loosely typed definition of how applications
-should interact with one another. The definition of a relationship is handled
-through an interface, and does not restrict the user to a traditional RFC
-approach.
+Relations define how applications should interact with one another. The
+definition of a relation is handled through an interface, and does not restrict
+the user to a traditional RFC approach.
 
-As previously stated, relationships are 'loosely typed' - which means there is
-no de-facto specification for:
+Relations are "loosely typed", meaning there is no de-facto specification for:
 
-- What information a relationship must send/receive
+- What information a relation must send/receive
 - What actions are to be taken with data sent/received over the wire
 
 With that being said, picking an interface is a strong statement; you need to
@@ -19,7 +17,7 @@ set the same settings as do all the other charms with the same role for the
 interface; and you should only expect to be able to read those settings set by
 the other charms with the counterpart role.
 
-Juju decides which applications can be related based on the interface names
+Juju decides which applications can be related to based on interface names
 only. They have to match.
 
 ## Relation Composition
@@ -61,6 +59,11 @@ interface, but that's irrelevant to the mongodb charm. (But an haproxy charm
 might well define, say, `reverseproxy`, that `requires` the `http` interface
 provided by my-node-app.)
 
+## Relation namespace
+
+The relation namespace is unrestricted with the exception that you may not
+_provide_ a relation named `juju` nor have its name begin with `juju-`. Charms
+attempting to provide relations in this namespace will trigger an error.
 
 ## Relation interfaces
 
@@ -70,13 +73,66 @@ between charms; and it carries with it nothing more than a mutual promise that
 the provider and requirer somehow know the communication protocol implied by
 the name.
 
-So, the relation namespace is essentially unrestricted (with one enforced
-exception: you may not _provide_ a relation named `juju`, or starting with
-`juju-`). This allows for rapid development in some situations; but, in the
+This allows for rapid development in some situations; but, in the
 example above, there is a potential problem: we've picked _two_ interface names
 that already have meanings in the charm ecosystem, and that means we have to be
 compatible. That's a concern for later, when we're actually writing the
 relation hooks.
+
+## Implicit relations
+
+Implicit relations are named in the reserved namespace. Juju currently provides
+one implicit relation to all deployed applications: `juju-info`. 
+
+If specified, it would look like:
+
+```yaml
+    provides:
+      juju-info:
+        interface: juju-info
+```
+
+The charm author should not declare the `juju-info` relation and is provided
+here as an example only. The `juju-info` relation is implicitly provided by all
+charms, and enables the requiring unit to obtain basic details about the
+related-to unit. The following settings will be implicitly provided by the
+remote unit:
+
+    private-address
+    public-address
+
+If you want to write a subordinate charm that can be related to by any other
+charm, the `juju-info` relation can be used. For example:
+
+Charm `rsyslog-forwarder` is a
+[subordinate charm](./authors-subordinate-applications.html) and requires a
+valid `scope: container` relationship in order to deploy. In the event that the
+principal charm doesn't provide this the logging charm author can leverage
+`juju-info`:
+
+```yaml
+    requires:
+      logging:
+          interface: logging-directory
+          scope: container
+      juju-info:
+          interface: juju-info
+          scope: container
+```
+
+The admin then issues the following:
+
+```bash
+juju add-relation wordpress rsyslog-forwarder
+```
+
+If the 'wordpress' charm author doesn't define the `logging-directory`
+interface, Juju will use the less-specific (in the sense that it likely
+provides less information) `juju-info` interface.
+
+!!! Note:
+    Juju first attempts to match user provided relation names outside the
+    reserved namespace.
 
 ### Peers
 
@@ -84,8 +140,8 @@ Charms can declare relations under `peers` which causes each unit of a
 single application to respond to the other units in the same application. A
 peer relation is defined in exactly the same way as any other relation.
 
-Looking at the MongoDB peering relationship, we see the charm defines
-`replica-set` as the relationship, with the interface `mongodb-replica-set`
+Looking at the MongoDB peering relation, we see the charm defines
+`replica-set` as the relation, with the interface `mongodb-replica-set`
 
 ```yaml
 peers:
@@ -93,7 +149,7 @@ peers:
     interface: mongodb-replica-set
 ```
 
-As outlined in the relationship - peering relationships are particularly useful
+As outlined in the relation - peering relations are particularly useful
 when your application supports clustering. Think about the implications of
 applications such as MongoDB, PostgreSQL, and ElasticSearch where clusters
 must exchange information amongst one another to perform proper clustering.
@@ -142,7 +198,7 @@ requires:
 it can't be expected to do anything useful without a MongoDB application available.
 
 
-## Relationship Execution in Charms
+## Relation Execution in Charms
 
 When applications are related, Juju decides which hooks to call within each
 charm based on this local relation name. When WordPress is related to MySQL,
@@ -161,7 +217,7 @@ between the applications. Relation hooks can call tools such as `relation-get`
 and `relation- set` to pass information back and forth between the application
 endpoints.
 
-### Pseudo Relationship Talk
+### Pseudo Relation Talk
 
 For example, `wordpress` and `mysql` might have a conversation like the following:
 
