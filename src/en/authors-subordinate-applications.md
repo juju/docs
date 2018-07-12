@@ -54,11 +54,11 @@ If a subordinate application needs to communicate with all units of the principa
 application, it can still establish a traditional (non-container) relationship to
 it.
 
-In order to deploy a subordinate application a scope: container relationship is
-required. Even when the principal applications' charm author doesn't provide an
-explicit relationship for the subordinate to join, using an 
-[_implicit relation_](authors-implicit-relations.html) with scope: container 
-will satisfy this constraint.
+In order to deploy a subordinate application a `scope: container` relationship
+is required. Even when the principal applications' charm author doesn't provide
+an explicit relationship for the subordinate to join, using an
+[implicit relation](./authors-relations.html#implicit-relations) with
+`scope: container` will satisfy this criteria.
 
 ## Addressability
 
