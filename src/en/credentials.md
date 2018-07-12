@@ -115,7 +115,8 @@ including the variable names.
 You can use a YAML-formatted file to store credentials for any cloud. Below we
 provide a sample file, which we will call `mycreds.yaml`. It includes many of
 the clouds supported by Juju and uses the most common options. Note the MAAS
-and OpenStack clouds, called 'homemaas' and 'homestack' respectively.
+cloud and the two OpenStack clouds, called 'homemaas', 'homestack-kv2' and
+'homestack-kv23' respectively.
 
 ```yaml
 credentials:
@@ -134,8 +135,16 @@ credentials:
     peter:
       auth-type: oauth1
       maas-oauth: 5weWAsjhe9lnaLKHERNSlke320ah9naldIHnrelks
-  homestack:
+  homestack-kv2:
     default-region: region-a
+    john:
+      auth-type: access-key
+      access-key: bae7651caeab41ed876cfdb342bae23e
+      secret-key: 7172bc91a21c3df1787423ac12093bcc
+      tenant-name: admin
+      username: admin   
+  homestack-kv23:
+    default-region: region-b
     peter:
       auth-type: userpass
       password: UberPassK3yz
@@ -165,6 +174,8 @@ credentials:
       user: administrator@xyz.com
 ```
 
+!!! Note:
+    Authentication type `access-key` is not available on 
 Credentials are added to Juju on a per-cloud basis. To add credentials for the
 defined 'azure' cloud, for instance, we would do this:
 

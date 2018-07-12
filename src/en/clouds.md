@@ -362,7 +362,7 @@ of adding a cloud manually.
 `lxd`		  | n/a
 `maas`		  | `oauth1`
 `manual`	  | n/a
-`openstack`	  | `access-key,userpass`
+`openstack` 	  | `access-key,userpass` (keystone v2)<br/>`userpass` (keystone v3)
 `oracle`	  | `userpass`
 `rackspace`	  | `userpass`
 `vsphere`	  | `userpass`
