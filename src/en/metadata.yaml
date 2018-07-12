@@ -287,8 +287,6 @@ navigation:
           location: authors-hook-errors.md
         - title: Subordinate applications
           location: authors-subordinate-applications.md
-        - title: Implicit Relations
-          location: authors-implicit-relations.md
 
     - title: The Juju Charm Store
       location: authors-charm-store.md
