@@ -101,7 +101,7 @@ provides:
 To be clear, the charm author does not declare the `juju-info` relation; the
 above is provided for demonstrative purposes only.
 
-Furthermore, this relation presently provides very select bits of data from the
+Furthermore, this relation presently captures very select bits of data from the
 remote unit:
 
 `private-address`  
