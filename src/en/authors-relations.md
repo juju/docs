@@ -1,5 +1,6 @@
 Title: Implementing Relations in Juju charms  
 TODO:  Error: the metadata file does not give relation names. It gives endpoint names.
+       Review required
 
 # What is a relation?
 
@@ -17,10 +18,11 @@ set the same settings as do all the other charms with the same role for the
 interface; and you should only expect to be able to read those settings set by
 the other charms with the counterpart role.
 
-Juju decides which applications can be related to based on interface names
-only. They have to match.
+!!! Important:
+    Applications form relations based on interface names only. They have to
+    match.
 
-## Relation Composition
+## Relation composition
 
 ### Provides and Requires
 
@@ -81,25 +83,29 @@ relation hooks.
 
 ## Implicit relations
 
-Implicit relations are named in the reserved namespace. Juju currently provides
-one implicit relation to all deployed applications: `juju-info`. 
+Implicit relations allow for an application to gather data about another
+application without requiring any modifications on the part of the author of
+the other application's charm.
 
-If specified, it would look like:
+Implicit relations are named in the reserved namespace and there is currently
+only one such relation provided to all deployed applications: `juju-info`.
+
+If specified, it would look like this:
 
 ```yaml
-    provides:
-      juju-info:
-        interface: juju-info
+provides:
+  juju-info:
+    interface: juju-info
 ```
 
-The charm author should not declare the `juju-info` relation and is provided
-here as an example only. The `juju-info` relation is implicitly provided by all
-charms, and enables the requiring unit to obtain basic details about the
-related-to unit. The following settings will be implicitly provided by the
+To be clear, the charm author does not declare the `juju-info` relation; the
+above is provided for demonstrative purposes only.
+
+Furthermore, this relation presently provides very select bits of data from the
 remote unit:
 
-    private-address
-    public-address
+`private-address`  
+`public-address`
 
 If you want to write a subordinate charm that can be related to by any other
 charm, the `juju-info` relation can be used. For example:
@@ -111,13 +117,13 @@ principal charm doesn't provide this the logging charm author can leverage
 `juju-info`:
 
 ```yaml
-    requires:
-      logging:
-          interface: logging-directory
-          scope: container
-      juju-info:
-          interface: juju-info
-          scope: container
+requires:
+  logging:
+      interface: logging-directory
+      scope: container
+  juju-info:
+      interface: juju-info
+      scope: container
 ```
 
 The admin then issues the following:
@@ -129,10 +135,6 @@ juju add-relation wordpress rsyslog-forwarder
 If the 'wordpress' charm author doesn't define the `logging-directory`
 interface, Juju will use the less-specific (in the sense that it likely
 provides less information) `juju-info` interface.
-
-!!! Note:
-    Juju first attempts to match user provided relation names outside the
-    reserved namespace.
 
 ### Peers
 
@@ -153,7 +155,6 @@ As outlined in the relation - peering relations are particularly useful
 when your application supports clustering. Think about the implications of
 applications such as MongoDB, PostgreSQL, and ElasticSearch where clusters
 must exchange information amongst one another to perform proper clustering.
-
 
 ## Configuring relations
 
@@ -197,8 +198,7 @@ requires:
 ...to indicate that it can integrate with memcached if it's available, but that
 it can't be expected to do anything useful without a MongoDB application available.
 
-
-## Relation Execution in Charms
+## Relation execution in charms
 
 When applications are related, Juju decides which hooks to call within each
 charm based on this local relation name. When WordPress is related to MySQL,
@@ -207,8 +207,7 @@ called on the WordPress end. Corresponding hooks will be called on the 'mysql'
 charm "db- relation-joined, db-relation-changed" (based on the 'mysql'
 relation names).
 
-
-# Authoring Charm Interfaces
+## Authoring charm interfaces
 
 Relations are basically a bidirectional channel of communication between
 applications. They're not actually talking directly, the agents communicate
@@ -217,7 +216,7 @@ between the applications. Relation hooks can call tools such as `relation-get`
 and `relation- set` to pass information back and forth between the application
 endpoints.
 
-### Pseudo Relation Talk
+### Pseudo relation talk
 
 For example, `wordpress` and `mysql` might have a conversation like the following:
 
@@ -357,8 +356,7 @@ requires:
       scope: container
 ```
 
-
-## Interface Documentation
+## Interface documentation
 
 Although we have described above that interfaces arrive by convention, there
 are several well-used interfaces which have enough implementations to define a
