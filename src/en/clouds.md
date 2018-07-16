@@ -178,8 +178,8 @@ session.
 
    To add a Manual cloud, you need to supply a name you wish to call it, the IP
    address (or hostname) for the machine you intend to use as a controller, and
-   what remote user account to connect to (over SSH). This last is done by
-   prepending 'user@' to the address/hostname.
+   what remote user account to connect to over SSH (prepend 'user@' to the
+   address/hostname).
    
    In terms of SSH, the user running the Juju client is expected to already be
    able to connect to the remote host (either by password or public key).

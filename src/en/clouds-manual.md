@@ -8,10 +8,10 @@ The purpose of the Manual cloud is to cater to the situation where you have
 machines (of any nature) at your disposal and you want to create a backing
 cloud out of them. If this collection of machines is composed solely of bare
 metal you might opt for a MAAS cloud but note that such machines would also
-require IPMI hardware and a MAAS infrastructure. The Manual cloud can therefore
-both make use of a collection of disparate hardware as well as of machines of
-varying natures (bare metal or virtual), all without any extra
-overhead/infrastructure.
+require [IPMI hardware][maas-power-types] and a MAAS infrastructure. The Manual
+cloud can therefore both make use of a collection of disparate hardware as well
+as of machines of varying natures (bare metal or virtual), all without any
+extra overhead/infrastructure.
 
 ## Limitations
 
@@ -56,8 +56,8 @@ its IP address.
     A Manual cloud requires at least one machine to be added.
 
 Finally, to deploy a charm the `deploy` command is used as normal. However, a
-machine *must* be targeted. This latter is accomplished with the `--to` option
-in conjunction with the machine ID.
+machine *must* be targeted. This is accomplished with the `--to` option in
+conjunction with the machine ID.
 
 ## Adding a Manual cloud
 
@@ -156,8 +156,8 @@ Machine  State    DNS          Inst id             Series  AZ  Message
 
 ## Deploying a charm in a Manual cloud
 
-To deploy WordPress onto the machine we added previously its ID (of '0') is
-made use of:
+To deploy WordPress onto the machine we need to declare the ID (of '0') of the
+machine:
 
 ```bash
 juju deploy wordpress --to 0
@@ -205,6 +205,7 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
+[maas-power-types]: https://docs.maas.io/en/nodes-power-types
 [models]: ./models.md
 [charms]: ./charms.md
 [charms-offline-strategies]: charms-offline-strategies.md
