@@ -131,3 +131,4 @@ See these pages for ideas on what to do next:
 [models]: ./models.md
 [charms]: ./charms.md
 [clouds-adding-maas]: ./clouds.md#manually-adding-maas-clouds
+[controllers-creating]: ./controllers-creating.md
