@@ -1,6 +1,6 @@
 Title: Troubleshooting
 TODO: Logs from the machines/applications
-      Review required
+      Review required (factoid: there are 12 instances of the word 'details')
 
 # Troubleshooting
 
@@ -19,21 +19,21 @@ When things don't seem to be working, the first step should always be to gather
 as much information as possible. Juju offers the following general options for
 data gathering, which we'll cover below:
 
-- [Advanced status output](#advanced-status-outout)
-- [*show* commands](#using-the-show-commands)
-- [Debug details](#using-the---debug-option)
-- [Log files](#collecting-the-logs)
+ - [Advanced status output](#advanced-status-outout)
+ - [Using the `show` commands](#using-the-show-commands)
+ - [Using the `--debug` option](#using-the---debug-option)
+ - [Collecting the logs](#collecting-the-logs)
 
 ### Advanced status output
 
-The `juju status` command is typically used to show the status of an entire
-model. But it can also be used to target the details for a specific application
-or unit. Typing `juju status mysql`, for example, will show only the status
-information relevant to `mysql`.
+The `status` command is typically used to show the status of an entire model.
+But it can also be used to target the details for a specific application or
+unit. Typing `juju status mysql`, for example, will show only the status
+information relevant to 'mysql'.
 
-The default output from `status` uses a tabular format to fit as much detail as
-possible into a terminal.  However, by specifying `yaml` as an output format,
-additional details are included in its serialised output. 
+The default output from `juju status` uses a tabular format to fit as much
+detail as possible into a terminal. However, by specifying `yaml` as an output
+format, additional details are included in its serialised output. 
 
 !!! Note:
     When filing bugs and requesting help it's almost always better to use the
