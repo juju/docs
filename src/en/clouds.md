@@ -2,6 +2,7 @@ Title: Clouds
 TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1749583
        INFO: Auth types found at ~/.local/share/juju/public-clouds.yaml
+       There is contention whether access-key can be used with keystone v3 (see https://github.com/juju/docs/issues/2868)
 table_of_contents: True
 
 # Clouds
@@ -362,7 +363,7 @@ of adding a cloud manually.
 `lxd`		  | n/a
 `maas`		  | `oauth1`
 `manual`	  | n/a
-`openstack` 	  | `access-key,userpass` (keystone v2)<br/>`userpass` (keystone v3)
+`openstack` 	  | `access-key,userpass`
 `oracle`	  | `userpass`
 `rackspace`	  | `userpass`
 `vsphere`	  | `userpass`

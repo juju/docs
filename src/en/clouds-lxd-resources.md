@@ -10,7 +10,7 @@ up LXD with Juju see [Using LXD with Juju][clouds-lxd].
 The topics presented here are:
 
  - LXD and images
- - Remote LXD user credentials
+ - Non-admin user credentials
  - LXD logs
  - Useful LXD client commands 
  - Using the LXD snap
@@ -49,15 +49,15 @@ Cached images can be seen with `lxc image list`:
 
 Image cache expiration and image synchronization mechanisms are built-in.
 
-## Remote Juju user credentials
+## Non-admin user credentials
 
-When working with remote users on different machines (see
-[Creating users][users-creating] for details on adding users, registering them
-and granting them permissions), LXD-hosted controllers need to generate a
-specific certificate credential which is shared with the remote machine. 
+To grant a regular user access to a LXD-based controller a certificate
+credential is required. This certificate is generated and shared with the user
+who will then use it as a credential. See [Creating users][users-creating] for
+details on adding users, registering them, and granting them permissions.
 
-To do this, first run `juju autoload-credentials` on the LXD host. Use the
-below sample session as a guide.
+On the LXD host generate the certificate with the `autoload-credentials`
+command. Use the below sample session as a guide:
 
 ```no-highlight
 Looking for cloud and credential information locally...
@@ -73,16 +73,15 @@ Saved LXD credential "localhost" to cloud localhost
 Select a credential to save by number, or type Q to quit: Q
 ```
 
-A certificate credential will have been created. To export it to a file, say
-`localhost-credentials.yaml`, type the following:
+A certificate credential will have been created. Export it to a file, say
+`localhost-credentials.yaml`, by typing the following:
 
 ```bash
 juju credentials localhost --format=yaml > localhost-credentials.yaml
 ```
 
-Now transfer the output file to the machine (and account) that requires access
-to the cloud. Once done, on the remote machine the certificate credential can
-be imported with the following command:
+Now transfer the file to the user that requires access to the cloud. Once done,
+on that user's system, the credential can be added:
 
 ```bash
 juju add-credential localhost -f localhost-credentials.yaml
