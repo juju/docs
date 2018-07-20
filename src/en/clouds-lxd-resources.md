@@ -10,6 +10,7 @@ up LXD with Juju see [Using LXD with Juju][clouds-lxd].
 The topics presented here are:
 
  - LXD and images
+ - LXD clustering
  - Non-admin user credentials
  - Useful LXD client commands 
  - Using the LXD snap
@@ -40,6 +41,8 @@ subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
 Cached images can be seen with `lxc image list`.
 
 Image cache expiration and image synchronization mechanisms are built-in.
+
+## LXD clustering
 
 ## Non-admin user credentials
 
@@ -81,7 +84,7 @@ juju add-credential localhost -f localhost-credentials.yaml
 
 See [Cloud credentials][credentials] for more details on how credentials are
 used. 
-    
+
 ## Useful LXD client commands
 
 There are many client commands available. Some common ones, including those
