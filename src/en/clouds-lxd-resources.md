@@ -13,6 +13,7 @@ The topics presented here are:
  - LXD and images
  - Remote LXD user credentials
  - LXD logs
+ - LXD clustering
  - Useful LXD client commands 
  - Using the LXD snap
  - Further LXD help and reading
@@ -96,6 +97,10 @@ LXD itself logs to `/var/log/lxd/lxd.log` and Juju machines created via the
 LXD local provider log to `/var/log/lxd/juju-{uuid}-machine-{#}`. However,
 the standard way to view logs is with the `juju debug-log` command. See
 [Juju logs][logs] for more details.
+
+## LXD clustering
+
+
 
 ## Useful LXD client commands
 

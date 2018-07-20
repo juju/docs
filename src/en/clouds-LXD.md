@@ -161,9 +161,9 @@ information.
 
 ## Next steps
 
-A controller is created with two models - the 'controller' model, which
-should be reserved for Juju's internal operations, and a model named
-'default', which can be used for deploying user workloads.
+A controller is created with two models - the 'controller' model, which should
+be reserved for Juju's internal operations, and a model named 'default', which
+can be used for deploying user workloads.
 
 See these pages for ideas on what to do next:
 
