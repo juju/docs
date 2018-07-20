@@ -149,12 +149,12 @@ If LXD is already installed via APT **and there are no existing containers**
 under the current installation then simply remove the software:
 
 ```bash
-sudo apt purge lxd lxd-client
+sudo apt purge liblxc1 lxcfs lxc-common lxd lxd-client
 ```
 
 If containers do exist under the old system the `lxd.migrate` utility should be
 used to migrate them to the new system. Once the migration is complete, you
-will be prompted to remove the old software automatically.
+will be prompted to have the old software removed.
 
 Start the migration tool by running:
 
