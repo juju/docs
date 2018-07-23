@@ -333,22 +333,22 @@ navigation:
       - title: metadata.yaml
         location: authors-charm-metadata.md
       - title: Layers and charms.reactive
-        location: https://charmsreactive.readthedocs.io.md
+        location: https://charmsreactive.readthedocs.io
 
         children:
           - title: Decorators
-            location: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.decorators.md
+            location: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.decorators.html
           - title: Flags
-            location: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.flags.md
+            location: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.flags.html
           - title: Triggers
-            location: https://charmsreactive.readthedocs.io/en/latest/triggers.md
+            location: https://charmsreactive.readthedocs.io/en/latest/triggers.html
           - title: Relations
-            location: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations.md
+            location: https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations.html
           - title: Layer.yaml
             location: reference-layer-yaml.md
 
       - title: API docs
-        location: http://godoc.org/github.com/juju/juju/api.md
+        location: http://godoc.org/github.com/juju/juju/api
       - title: Release notes
         location: reference-release-notes.md
       - title: Status values
@@ -363,4 +363,4 @@ navigation:
   - title: Help improve these docs
     location: contributing.md
   - title: Report a docs issue
-    location: https://github.com/juju/docs/issues/new.md
+    location: https://github.com/juju/docs/issues/new
