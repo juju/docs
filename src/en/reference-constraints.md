@@ -1,12 +1,14 @@
-Title: Constraints
-TODO:  Review required. In particular, the top section is too wordy.
+Title: Juju constraints
+TODO:  Add constraints info for Oracle and Rackspace
+       Confirm/explain: different clouds also dictate constraints that would conflict with other clouds and cannot be used in combination.
+       Rethink: Cloud difference section (include examples of things that work?)
 
 # Constraints
 
 Constraints set limits on the possible instances that may be started by Juju
 commands. They are usually passed as a flag to commands that provision a
-new machine (such as bootstrap, deploy, and add-machine). See [using
-constraints](charms-constraints.html) for how to specify these in a
+new machine (such as bootstrap, deploy, and add-machine). See
+[using constraints](charms-constraints.html) for how to specify these in a
 deployment.
 
 Each constraint defines a minimum acceptable value for a characteristic of a
@@ -36,12 +38,9 @@ multiple constraints delimited by a space.
 
 ## Generic constraints
 
+- arch  
 
-- arch
-
-    Short name of architecture that an application must run on. Can be left
-    blank to indicate any architecture is acceptable, or one of `amd64`,
-    `arm`, `i386`, `arm64`, or `ppc64`.
+    Architecture. Values include 'amd64', 'arm', 'i386', 'arm64', or 'ppc64'.
 
 - cores
 
