@@ -5,6 +5,9 @@ Title: Juju Release Notes
 This page details all available release notes for the 2.x series of Juju. The
 release notes for the 1.x series are available [here][release-notes-1].
 
+^# Juju 2.4.1
+
+
 ^# Juju 2.4.0
 
   The Juju team is proud to release version 2.4. This release greatly improves
