@@ -1,4 +1,4 @@
-Title: Juju constraints | Reference
+Title: Juju constraints
 TODO:  Add constraints info for Oracle and Rackspace
        Confirm/explain: different clouds also dictate constraints that would conflict with other clouds and cannot be used in combination.
        Rethink: Cloud difference section (include examples of things that work?)
@@ -18,8 +18,7 @@ For in-depth coverage and examples see the
 ## Generic constraints
 
  - `arch`  
-    Architecture. Values include 'amd64', 'arm', 'i386', 'arm64', or 'ppc64'. A
-    null value indicates any architecture.
+    Architecture. Values include 'amd64', 'arm', 'i386', 'arm64', or 'ppc64'.
 
  - `cores`  
     Effective CPU cores. An integer.
