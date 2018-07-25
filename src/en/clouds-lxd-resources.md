@@ -1,6 +1,5 @@
 Title: Additional LXD resources
-TODO:  Warning: Ubuntu release versions hardcoded
-       Review section: Remote LXD user credentials
+TODO:  Test certificate access
 table_of_contents: True
 
 # Additional LXD resources
@@ -11,7 +10,7 @@ up LXD with Juju see [Using LXD with Juju][clouds-lxd].
 The topics presented here are:
 
  - LXD and images
- - Remote LXD user credentials
+ - Non-admin user credentials
  - LXD logs
  - Useful LXD client commands 
  - Using the LXD snap
@@ -50,38 +49,39 @@ Cached images can be seen with `lxc image list`:
 
 Image cache expiration and image synchronization mechanisms are built-in.
 
-## Remote LXD user credentials
+## Non-admin user credentials
 
-When working with remote users on different machines (see
-[Creating users][users] for details on adding users, registering them and
-granting them permissions), LXD-hosted controllers need to generate a specific
-certificate credential which is shared with the remote machine. 
+To grant a regular user access to a LXD-based controller a certificate
+credential is required. This certificate is generated and shared with the user
+who will then use it as a credential. See [Creating users][users-creating] for
+details on adding users, registering them, and granting them permissions.
 
-To do this, first run `juju autoload-credentials` on the LXD host. This will
-generate output similar to the following:
+On the LXD host generate the certificate with the `autoload-credentials`
+command. Use the below sample session as a guide:
 
-```bash
+```no-highlight
 Looking for cloud and credential information locally...
 
 1. LXD credential "localhost" (new)
-Select a credential to save by number, or type Q to quit:
+Select a credential to save by number, or type Q to quit: 1
+
+Select the cloud it belongs to, or type Q to quit []: localhost
+
+Saved LXD credential "localhost" to cloud localhost
+
+1. LXD credential "localhost" (existing, will overwrite)
+Select a credential to save by number, or type Q to quit: Q
 ```
 
-Select the LXD credential (`1` in the above example) and you will be asked for
-the name of a cloud to link to this credential. Enter 'localhost' to specify
-the local LXD deployment. When the prompt re-appears, type 'q' to quit. The new
-certificate credential will have been created.
-
-To export this certificate credential to a file called
-`localhost-credentials.yaml`, type the following:
+A certificate credential will have been created. Export it to a file, say
+`localhost-credentials.yaml`, by typing the following:
 
 ```bash
 juju credentials localhost --format=yaml > localhost-credentials.yaml
 ```
 
-The output file now needs to be moved to the machine and account that requires
-access to the local LXD deployment. With this file on the remote machine, the
-certificate credential can be imported with the following command:
+Now transfer the file to the user that requires access to the cloud. Once done,
+on that user's system, the credential can be added:
 
 ```bash
 juju add-credential localhost -f localhost-credentials.yaml
@@ -149,12 +149,12 @@ If LXD is already installed via APT **and there are no existing containers**
 under the current installation then simply remove the software:
 
 ```bash
-sudo apt purge lxd lxd-client
+sudo apt purge liblxc1 lxcfs lxc-common lxd lxd-client
 ```
 
 If containers do exist under the old system the `lxd.migrate` utility should be
 used to migrate them to the new system. Once the migration is complete, you
-will be prompted to remove the old software automatically.
+will be prompted to have the old software removed.
 
 Start the migration tool by running:
 
@@ -258,7 +258,8 @@ assistance with the daemon. See upstream documentation for
 
 <!-- LINKS -->
 
-[clouds-lxd]: ./clouds-LXD.html
+[clouds-lxd]: ./clouds-LXD.md
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
-[logs]: ./troubleshooting-logs.html
-[credentials]: ./credentials.html
+[logs]: ./troubleshooting-logs.md
+[credentials]: ./credentials.md
+[users-creating]: ./users-creating.md
