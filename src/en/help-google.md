@@ -1,4 +1,5 @@
 Title: Using Google GCE with Juju
+TODO:  credentials page scheduled to cover the special env variables. Link when done
 
 # Using Google GCE with Juju
 
@@ -75,7 +76,7 @@ On the top of the page that opens, click 'Enable'. If the API is already
 enabled, this will display 'Disable'. Clicking it may prompt you to set up a
 billing method (if not already done).
 
-### Downloading credentials
+## Gathering credential information
 
 Juju will need credential information to authenticate itself to the GCE cloud. 
 This is provided in the form of a file which can be  generated and downloaded 
@@ -108,26 +109,73 @@ it here:
 
 `~/.local/share/juju/Juju-GCE-f33a6cdbd8e3.json`
 
-Or, you may place this information into a file at `~/.config/gcloud/application_default_credentials.json`,
-or `%APPDATA%/gcloud/application_default_credentials.json` on Windows. It
-is also valid to set an environment variable `GOOGLE_APPLICATION_CREDENTIALS`
-containing the credential information.
+The section [Using environment variables][#using-environment-variables] below
+explains where this data can be stored if you wish to use the
+`autoload-credentials` command to add credentials to Juju.
 
 ## Adding credentials
 
-Armed with the file downloaded above, you can add the credential with the
-command:
+In order to access Google GCE, you will need to add credentials to Juju. This
+can be done in one of three ways.
+
+### Using the interactive method
+
+Armed with the gathered information, you can add credentials with the command:
 
 ```bash
 juju add-credential google
 ```
 
-The command will interactively prompt you for information about the credentials
-being added. For the authentication type, choose 'json' and then give the full
-path to the file downloaded.
+The command will interactively prompt you for the information needed for the
+chosen cloud. For the authentication type, choose 'json' and then give the full
+path to the downloaded file.
 
-Alternately, you can also use this credential with [Juju as a Service][jaas] and
-create and deploy your model using its GUI.
+Alternately, you can use these credentials with [Juju as a Service][jaas] where
+you can deploy charms using a web GUI.
+
+### Using a file
+
+A YAML-formatted file, say `mycreds.yaml`, can be used to store credential
+information for any cloud. This information is then added to Juju by pointing
+the `add-credential` command to the file:
+
+```bash
+juju add-credential myopenstack -f mycreds.yaml
+```
+
+See section [Adding credentials from a file][credentials-adding-from-file] for
+guidance on what such a file looks like.
+
+### Using environment variables
+
+With GCE you have the option of adding credentials using the following
+environment variable that may already be present (and set) on your client
+system:
+
+`CLOUDSDK_COMPUTE_REGION`
+
+In addition, a special variable may contain the path to a JSON-formatted file
+which, in turn, contains credential information:
+
+`GOOGLE_APPLICATION_CREDENTIALS`  
+
+Add this credential information to Juju in this way:
+  
+```bash
+juju autoload-credentials
+```
+
+For any found credentials you will be asked which ones to use and what name to
+store them under.
+
+On Linux systems, the file
+`$HOME/.config/gcloud/application_default_credentials.json` may be used to
+contain credential data and is parsed by the above command as part of the
+scanning process. On Windows systems, the file is
+`%APPDATA%\gcloud\application_default_credentials.json`.
+
+For background information on this method read section
+[Adding credentials from environment variables][credentials-adding-from-variables].
 
 ## Creating a controller
 
@@ -157,8 +205,9 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
-[gce-docs]: https://console.cloud.google.com/start "GCE Getting Started"
-[jaas]: ./getting-started.html "Getting Started with Juju"
+[gce-docs]: https://console.cloud.google.com/start
+[jaas]: ./getting-started.md
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials-adding-from-variables]: ./credentials.md#adding-credentials-from-environment-variables
