@@ -156,14 +156,14 @@ localhost cloud.
 
 ## Additional LXD resources
 
-[Additional LXD resources][lxd-resources] provides more LXD-specific
+[Additional LXD resources][clouds-lxd-resources] provides more LXD-specific
 information.
 
 ## Next steps
 
-A controller is created with two models - the 'controller' model, which
-should be reserved for Juju's internal operations, and a model named
-'default', which can be used for deploying user workloads.
+A controller is created with two models - the 'controller' model, which should
+be reserved for Juju's internal operations, and a model named 'default', which
+can be used for deploying user workloads.
 
 See these pages for ideas on what to do next:
 
@@ -181,6 +181,6 @@ See these pages for ideas on what to do next:
 [charms]: ./charms.md
 [models-add]: ./models-adding.html
 [credentials]: ./credentials.html
-[lxd-resources]: ./clouds-lxd-resources.html
+[clouds-lxd-resources]: ./clouds-lxd-resources.html
 [lxd-snap]: ./clouds-lxd-resources.html#using-the-lxd-snap
 [ubuntu-lxd]: http://www.ubuntu.com/cloud/lxd
