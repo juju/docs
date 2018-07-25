@@ -1,5 +1,6 @@
 Title: Using OpenStack with Juju
-TODO:  Review required
+TODO:  Review required (use style from the other cloud pages)
+       Enhance interactive credentials section
 
 # Using OpenStack with Juju
 
@@ -64,24 +65,69 @@ It is also possible to define OpenStack clouds in a YAML formatted configuration
 file and register them with Juju. Please see the
 [documentation for manually adding Openstack clouds][manual-openstack] for details.
 
+## Gathering credential information
+
+The credential information is found on your private or public OpenStack
+account.
+
 ## Adding credentials
 
-If you source a novarc file for OpenStack, or use the default environmental
-variables for accessing this cloud, you can simply get Juju to scan for the
-credentials and add them.
+In order to access OpenStack, you will need to add credentials to Juju. This
+can be done in one of three ways.
 
-Run the command...
+### Using the interactive method
 
+Armed with the gathered information, you can add credentials with the command:
+
+```bash
+juju add-credential myopenstack
+```
+
+The command will interactively prompt you for the information needed for the
+chosen cloud. For the authentication type, either 'access-key', 'userpass', or
+'access-key,userpass' (i.e. both are allowed) can be selected.
+
+Alternately, you can use these credentials with [Juju as a Service][jaas] where
+you can deploy charms using a web GUI.
+
+### Using a file
+
+A YAML-formatted file, say `mycreds.yaml`, can be used to store credential
+information for any cloud. This information is then added to Juju by pointing
+the `add-credential` command to the file:
+
+```bash
+juju add-credential myopenstack -f mycreds.yaml
+```
+
+See section [Adding credentials from a file][credentials-adding-from-file] for
+guidance on what such a file looks like.
+
+### Using environment variables
+
+With OpenStack you have the option of adding credentials using the following
+environment variables that may already be present (and set) on your client
+system:
+
+`OS_USERNAME`  
+`OS_PASSWORD`  
+`OS_TENANT_NAME`  
+`OS_DOMAIN_NAME`
+
+Add this credential information to Juju in this way:
+  
 ```bash
 juju autoload-credentials
 ```
 
-Juju will search known locations, including environment variables, for
-credential information and present you with a set of choices for storing them.
-Simply follow the prompts.
+For any found credentials you will be asked which ones to use and what name to
+store them under.
 
-For other methods of adding credentials, please see the specific
-[credentials documentation][credentials].
+On Linux systems, the file `$HOME/.novarc` may be used to define these
+variables and is parsed by the above command as part of the scanning process.
+
+For background information on this method read section
+[Adding credentials from environment variables][credentials-adding-from-variables].
 
 ## Images and private clouds
 
@@ -144,3 +190,5 @@ See these pages for ideas on what to do next:
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials-adding-from-variables]: ./credentials.md#adding-credentials-from-environment-variables
+[credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file
