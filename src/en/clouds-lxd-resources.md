@@ -149,7 +149,7 @@ If LXD is already installed via APT **and there are no existing containers**
 under the current installation then simply remove the software:
 
 ```bash
-sudo apt purge liblxc1 lxcfs lxc-common lxd lxd-client
+sudo apt purge liblxc1 lxcfs lxd lxd-client
 ```
 
 If containers do exist under the old system the `lxd.migrate` utility should be
@@ -160,93 +160,6 @@ Start the migration tool by running:
 
 ```bash
 sudo lxd.migrate
-```
-
-As an example, LXD 2.21 was installed from the snap but the old system (Xenial
-running LXD 2.21 from the 'xenial-backports' pocket) has the following
-containers :
-
- - Juju controller
- - Random Xenial container
- - Random Artful container
-
-Here is the generated output:
-
-```no-highlight
-=> Connecting to source server
-=> Connecting to destination server
-=> Running sanity checks
-
-=== Source server
-LXD version: 2.21
-LXD PID: 4839
-Resources:
-  Containers: 3
-  Images: 2
-  Networks: 1
-  Storage pools: 2
-
-=== Destination server
-LXD version: 2.21
-LXD PID: 10153
-Resources:
-  Containers: 0
-  Images: 0
-  Networks: 0
-  Storage pools: 0
-
-The migration process will shut down all your containers then move your data to the destination LXD.
-Once the data is moved, the destination LXD will start and apply any needed updates.
-And finally your containers will be brought back to their previous state, completing the migration.
-
-Are you ready to proceed (yes/no) [default=no]? yes
-=> Shutting down the source LXD
-=> Stopping the source LXD units
-=> Stopping the destination LXD unit
-=> Unmounting source LXD paths
-=> Unmounting destination LXD paths
-=> Wiping destination LXD clean
-=> Moving the data
-=> Moving the database
-=> Backing up the database
-=> Opening the database
-=> Updating the storage backends
-=> Starting the destination LXD
-=> Waiting for LXD to come online
-
-=== Destination server
-LXD version: 2.21
-LXD PID: 12514
-Resources:
-  Containers: 3
-  Images: 2
-  Networks: 1
-  Storage pools: 2
-
-The migration is now complete and your containers should be back online.
-Do you want to uninstall the old LXD (yes/no) [default=no]? yes
-
-All done. You may need to close your current shell and open a new one to have the "lxc" command work.
-```
-
-The containers are running and the snap-installed client recognizes them:
-
-```bash
-/snap/bin/lxc list
-```
-
-Output:
-
-```no-highlight
-+---------------+---------+--------------------+------+------------+-----------+
-|     NAME      |  STATE  |        IPV4        | IPV6 |    TYPE    | SNAPSHOTS |
-+---------------+---------+--------------------+------+------------+-----------+
-| juju-1fbdc5-0 | RUNNING | 10.79.40.75 (eth0) |      | PERSISTENT | 0         |
-+---------------+---------+--------------------+------+------------+-----------+
-| Xenial        | RUNNING | 10.79.40.12 (eth0) |      | PERSISTENT | 0         |
-+---------------+---------+--------------------+------+------------+-----------+
-| Artful        | RUNNING | 10.79.40.8 (eth0)  |      | PERSISTENT | 0         |
-+---------------+---------+--------------------+------+------------+-----------+
 ```
 
 ## Further help and reading
