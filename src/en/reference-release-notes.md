@@ -7,7 +7,7 @@ release notes for the 1.x series are available [here][release-notes-1].
 
 ^# Juju 2.4.1
 
-  Juju 2.4.1 is the exciting new release of Juju.
+  The Juju team is pleased to announce the release of Juju 2.4.1.
 
   This is primarily a bug fix release. In particular, it contains a fix for a
   critical issue involving the removal of Juju binaries on units. However,
@@ -22,9 +22,13 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   ## Get Juju.
   
-  The easiest way to get Juju is using the `snap` package.
+  The easiest way to get Juju is using the `snap` package:
   
   	  sudo snap install juju --classic
+  
+  Those already using the stable snap should be upgraded automatically. Other
+  packages are available for a variety of platforms (see the
+  [install documentation][reference-install]).
   
   ## Feedback appreciated.
   
