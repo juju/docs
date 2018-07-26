@@ -5,6 +5,39 @@ Title: Juju Release Notes
 This page details all available release notes for the 2.x series of Juju. The
 release notes for the 1.x series are available [here][release-notes-1].
 
+^# Juju 2.4.1
+
+  Juju 2.4.1 is the exciting new release of Juju.
+
+  This is primarily a bug fix release. In particular, it contains a fix for a
+  critical issue involving the removal of Juju binaries on units. However,
+  there are also a few new features such as support for the upcoming Ubuntu
+  18.10 (Cosmic) release as well as constraints for the LXD provider. For the
+  full list of fixes and additions, see the
+  [2.4.1 milestone](https://launchpad.net/juju/+milestone/2.4.1).
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the
+  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
 ^# Juju 2.4.0
 
   The Juju team is proud to release version 2.4. This release greatly improves
