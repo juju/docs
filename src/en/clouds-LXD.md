@@ -1,5 +1,6 @@
 Title: Using LXD with Juju
 TODO:  Warning: Ubuntu release versions hardcoded
+       2.5 release will demand significant reword: LXD can be used remotely
        Warning: Troubleshoot Trusty; bootstrap only works with the lxd snap
        (and only if it is installed w/o the lxd deb being installed first)
 table_of_contents: True
@@ -10,10 +11,17 @@ Choosing [LXD][ubuntu-lxd] as the backing cloud for Juju is an efficient way to
 experiment with Juju. It is also very quick to set up. With lightweight
 containers acting as Juju machines, even a moderately powerful laptop can
 create useful models, or serve as a platform to develop your own charms. Make
-sure you have enough space locally for the containers.
+sure you have enough local space for the containers though.
+
+Note that LXD natively supports both clustering and MAAS integration. See
+[Additional LXD resources][clouds-lxd-resources] for details.
 
 A tutorial is available on this same topic:
 [Getting started with Juju and LXD][tut-lxd].
+
+!!! Note:
+    Work is currently underway that will allow Juju to connect to remote LXD
+    hosts.
 
 ## Software prerequisites
 
@@ -24,7 +32,7 @@ releases with the exception of Ubuntu 14.04 LTS. However, the snap install
 method will soon become the preferred way to install LXD. See
 [Using the LXD snap][lxd-snap] for how to do this.
 
-Install Juju now, using [Installing Juju][install].
+Install Juju now (see the [Installing Juju][install] page).
 
 Then follow the instructions below for installing LXD based on your chosen
 Ubuntu release.
@@ -173,14 +181,14 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
-[tut-lxd]: ./tut-lxd.html
-[install]: ./reference-install.html
-[controllers]: ./controllers.html
+[tut-lxd]: ./tut-lxd.md
+[install]: ./reference-install.md
+[controllers]: ./controllers.md
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
-[models-add]: ./models-adding.html
-[credentials]: ./credentials.html
-[clouds-lxd-resources]: ./clouds-lxd-resources.html
-[lxd-snap]: ./clouds-lxd-resources.html#using-the-lxd-snap
+[models-add]: ./models-adding.md
+[credentials]: ./credentials.md
+[clouds-lxd-resources]: ./clouds-lxd-resources.md
+[lxd-snap]: ./clouds-lxd-resources.md#using-the-lxd-snap
 [ubuntu-lxd]: http://www.ubuntu.com/cloud/lxd
