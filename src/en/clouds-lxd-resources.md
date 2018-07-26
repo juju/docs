@@ -11,9 +11,9 @@ The topics presented here are:
 
  - LXD and images
  - Non-admin user credentials
- - LXD logs
  - Useful LXD client commands 
  - Using the LXD snap
+ - LXD logs
  - Further LXD help and reading
 
 ## LXD and images
@@ -37,15 +37,7 @@ Juju pulls official cloud images from the 'ubuntu' remote
 (http://cloud-images.ubuntu.com) and creates the necessary alias. Any
 subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
 
-Cached images can be seen with `lxc image list`:
-
-```no-highlight
-+-------------------+--------------+--------+---------------------------------------------+--------+----------+------------------------------+
-|       ALIAS       | FINGERPRINT  | PUBLIC |                 DESCRIPTION                 |  ARCH  |   SIZE   |         UPLOAD DATE          |
-+-------------------+--------------+--------+---------------------------------------------+--------+----------+------------------------------+
-| juju/xenial/amd64 | b5f3a547289f | no     | ubuntu 16.04 LTS amd64 (release) (20180222) | x86_64 | 156.20MB | Feb 23, 2018 at 1:17am (UTC) |
-+-------------------+--------------+--------+---------------------------------------------+--------+----------+------------------------------+
-```
+Cached images can be seen with `lxc image list`.
 
 Image cache expiration and image synchronization mechanisms are built-in.
 
@@ -89,14 +81,7 @@ juju add-credential localhost -f localhost-credentials.yaml
 
 See [Cloud credentials][credentials] for more details on how credentials are
 used. 
-
-## LXD logs
-
-LXD itself logs to `/var/log/lxd/lxd.log` and Juju machines created via the
-LXD local provider log to `/var/log/lxd/juju-{uuid}-machine-{#}`. However,
-the standard way to view logs is with the `juju debug-log` command. See
-[Juju logs][logs] for more details.
-
+    
 ## Useful LXD client commands
 
 There are many client commands available. Some common ones, including those
@@ -110,7 +95,7 @@ covered above, are given below.
 `lxc remote list`				| lists remotes
 `lxc info`					| displays status of localhost
 `lxc info <container>`				| displays status of container
-`lxc config show <container>`			| displays config of container
+`lxc config show <container>`			| displays configuration of container
 `lxc image info <alias or fingerprint>`		| displays status of image
 `lxc exec <container> <executable>`		| runs program on container
 `lxc exec <container> /bin/bash`		| spawns shell on container
@@ -161,6 +146,17 @@ Start the migration tool by running:
 ```bash
 sudo lxd.migrate
 ```
+
+## LXD logs
+
+LXD itself logs to `/var/log/lxd/lxd.log` and Juju machines created via the LXD
+local provider log to `/var/log/lxd/juju-UUID-machine-ID`. However, the
+standard way to view logs is with the `debug-log` command (see the
+[Juju logs][logs] page for details).
+
+!!! Note:
+    For LXD snap users, the log directory is located at
+    `/var/snap/lxd/common/lxd/logs`.
 
 ## Further help and reading
 
