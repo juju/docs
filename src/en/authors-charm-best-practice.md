@@ -8,10 +8,9 @@ sense as policy, but do make sense to share with others to disseminate
 expertise.
 
 If you'd like to share some best practice and have it added to this page we
-recommend you [post to the mailing
-list](https://lists.ubuntu.com/mailman/listinfo/juju) with some ideas on what
-you'd like to see added. Ideally we'd like to document all sorts of great ideas
-on how people are using Juju.
+recommend you post to the [Juju Discourse forum][juju-discourse-forum] with
+some ideas on what you'd like to see added. Ideally we'd like to document all
+sorts of great ideas on how people are using Juju.
 
 ## Best Practice Tips for using Juju in general
 
@@ -141,3 +140,8 @@ respawn
     crontabs.
   - This allows for easier visibility of active cronjobs across the whole
     system, as well as making editing things much easier.
+
+
+<!-- LINKS -->
+
+[juju-discourse-forum]: https://discourse.jujucharms.com/
