@@ -57,7 +57,7 @@ The following caveats apply:
    is to allow the containers to communicate with the controller.
 
 Clustering is configured by running `sudo lxd init` on each LXD host (a minimum
-of tree is recommended). The first host that does so will *iniitalise* the
+of three is recommended). The first host that does so will *initialise* the
 cluster and any subsequent node will *join* the cluster. Once the cluster is
 set up a controller can be created, as normal, on any of the cluster nodes
 (e.g. `juju bootstrap localhost lxd-cluster`).
