@@ -13,7 +13,7 @@ containers acting as Juju machines, even a moderately powerful laptop can
 create useful models, or serve as a platform to develop your own charms. Make
 sure you have enough local space for the containers though.
 
-Note that LXD natively supports both clustering and MAAS integration. See
+Note that LXD natively supports clustering. See
 [Additional LXD resources][clouds-lxd-resources] for details.
 
 A tutorial is available on this same topic:
