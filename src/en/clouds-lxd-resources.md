@@ -11,7 +11,6 @@ The topics presented here are:
 
  - LXD and images
  - LXD clustering
- - MAAS integration
  - Non-admin user credentials
  - Useful LXD client commands 
  - Using the LXD snap
@@ -68,20 +67,6 @@ set up a controller can be created, as normal, on any of the cluster nodes
     created a controller.
 
 See the upstream documentation on [Clustering][lxd-upstream-clustering].
-
-## MAAS integration
-
-[MAAS][maas-upstream] can be integrated into LXD (v.3 and greater) at the
-network level. The following two benefits are derived:
-
- - Addresses assigned to containers reside in a subnet configured within MAAS.
- - Name resolution for containers is automatically set up on the LXD host.
-
-MAAS integration is configured by running `sudo lxd init` on the LXD host. If
-used in combination with LXD clustering (see above) only the cluster
-initialisation step will need to bother with integration setup.
-
-See the upstream documentation on [MAAS integration][lxd-upstream-maas].
 
 ## Non-admin user credentials
 
@@ -215,8 +200,6 @@ assistance with the daemon. See upstream documentation for
 [clouds-lxd]: ./clouds-LXD.md
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
 [lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
-[lxd-upstream-maas]: https://lxd.readthedocs.io/en/latest/containers/#maas-integration
 [logs]: ./troubleshooting-logs.md
 [credentials]: ./credentials.md
 [users-creating]: ./users-creating.md
-[maas-upstream]: https://maas.io/
