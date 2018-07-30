@@ -33,10 +33,10 @@ emitted and a machine will not be provisioned.
 
 ### Constraints and the LXD cloud
 
-For the 'lxd' cloud type things are different. With this cloud, constraints
-are interpreted as resource maximums as opposed to minimums. In the absence of
-constraints, a machine (container) will, by default, have access to **all** of
-the underlying system's (LXD host) resources.
+For the 'lxd' cloud type (`v.2.4.1`) things are different. With this cloud,
+constraints are interpreted as resource maximums as opposed to minimums. In the
+absence of constraints, a machine (container) will, by default, have access to
+**all** of the underlying system's (LXD host) resources.
 
 This cloud type also honours instance constraints where 
 [AWS instance type][aws-instance-types-kirkland] names are used (e.g.
