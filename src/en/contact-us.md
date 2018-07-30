@@ -15,11 +15,13 @@ in the following locations:
 
 - Join us on IRC. We can be found on the [`juju`][jujuchannel] channel on [freenode][freenode].
 
-- Subscribe to our mailing list at [juju@lists.ubuntu.com][mailinglist].
+- Subscribe to the [Juju Discourse forum][juju-discourse-forum].
+
 
 <!-- LINKS -->
+
 [youtube]: https://www.youtube.com/jujucharms
 [twitter]: https://twitter.com/hashtag/jujucharms
 [freenode]: https://freenode.net/
 [jujuchannel]: http://webchat.freenode.net/?channels=juju
-[mailinglist]: mailto:juju@lists.ubuntu.com
+[juju-discourse-forum]: https://discourse.jujucharms.com/

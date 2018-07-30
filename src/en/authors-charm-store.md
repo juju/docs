@@ -215,11 +215,12 @@ and the edge channel.
 
 When you have released your charm (or bundle) and you want to make it available
 to others you will need to make a *promulgation request*. This is informally
-done via the [Juju users mailing list][mailing-list-juju].
+done via the "Charms and Charming" category on the
+[Juju Discourse forum][juju-discourse-forum-charms].
 
-The '#juju' IRC channel on Freenode and the above mailing list remain excellent
-resources for questions and comments regarding charm development and charm
-promulgation.
+The '#juju' IRC channel on Freenode and the above Discourse forum remain
+excellent resources for questions and comments regarding charm development and
+charm promulgation.
 
 ### Promulgation notes
 
@@ -266,5 +267,5 @@ charm grant cs:~kirk/foo everyone
 
 <!-- LINKS -->
 
-[mailing-list-juju]: https://lists.ubuntu.com/mailman/listinfo/juju
+[juju-discourse-forum-charms]: https://discourse.jujucharms.com/c/charms
 [charm-promulgation]: ./charm-promulgation.md
