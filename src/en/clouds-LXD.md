@@ -160,11 +160,12 @@ Output:
 
 Here is a list of noteworthy LXD specific features and differences:
 
- - Constraints are applied differently than they are with other cloud types.
-   Essentially, they are interpreted as maximums instead of minimums. See
-   [Constraints and the LXD cloud][charms-constraints-lxd] for details.
+ - Constraints (`v.2.4.1`) are applied differently than they are with other
+   cloud types.  Essentially, they are interpreted as maximums instead of
+   minimums. See [Constraints and the LXD cloud][charms-constraints-lxd] for
+   details.
 
- - LXD clustering is supported. See
+ - LXD clustering is supported (`v.2.4.0`). See
    [Additional LXD resources][clouds-lxd-resources] for details.
 
 ## Additional LXD resources
