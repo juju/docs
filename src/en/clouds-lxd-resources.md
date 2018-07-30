@@ -10,6 +10,7 @@ up LXD with Juju see [Using LXD with Juju][clouds-lxd].
 The topics presented here are:
 
  - LXD and images
+ - LXD clustering
  - Non-admin user credentials
  - Useful LXD client commands 
  - Using the LXD snap
@@ -37,9 +38,35 @@ Juju pulls official cloud images from the 'ubuntu' remote
 (http://cloud-images.ubuntu.com) and creates the necessary alias. Any
 subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
 
-Cached images can be seen with `lxc image list`.
-
 Image cache expiration and image synchronization mechanisms are built-in.
+
+## LXD clustering
+
+LXD clustering (v.3 and greater) allows for distributed computing to the extent
+that Juju units end up on different cluster nodes (LXD hosts) by default. It
+also offers high availability so that the cluster remains functional as long as
+more than half of the nodes are up. A downed node will lead to its hosted
+containers becoming unavailable.
+
+The following caveats apply:
+
+ - The controller must reside on a cluster node. This will no longer be the
+   case starting with v.2.5 of Juju.
+ - Each cluster node must have a network bridge that is connected to LXD. This
+   is to allow the containers to communicate with the controller.
+
+Clustering is configured by running `sudo lxd init` on each LXD host (a minimum
+of three is recommended). The first host that does so will *initialise* the
+cluster and any subsequent node will *join* the cluster. Once the cluster is
+set up a controller can be created, as normal, on any of the cluster nodes
+(e.g. `juju bootstrap localhost lxd-cluster`).
+
+!!! Warning:
+    The cluster-creation process will remove any existing containers. In a Juju
+    context, this implies that you cannot initialise a cluster *after* having
+    created a controller.
+
+See the upstream documentation on [Clustering][lxd-upstream-clustering].
 
 ## Non-admin user credentials
 
@@ -81,7 +108,7 @@ juju add-credential localhost -f localhost-credentials.yaml
 
 See [Cloud credentials][credentials] for more details on how credentials are
 used. 
-    
+
 ## Useful LXD client commands
 
 There are many client commands available. Some common ones, including those
@@ -102,8 +129,11 @@ covered above, are given below.
 `lxc file pull <container></path/to/file> .`	| copies file from container
 `lxc file push </path/to/file> <container>/`  	| copies file to container
 `lxc stop <container>`				| stops container
+`lxc image list`		                | lists cached images
 `lxc image alias delete <alias>`		| deletes image alias
 `lxc image alias create <alias> <fingerprint>`	| creates image alias
+`lxc cluster list`                              | lists cluster nodes
+`lxc cluster show <container>`                  | displays configuration of a cluster node
 
 ## Using the LXD snap
 
@@ -169,6 +199,7 @@ assistance with the daemon. See upstream documentation for
 
 [clouds-lxd]: ./clouds-LXD.md
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
+[lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
 [logs]: ./troubleshooting-logs.md
 [credentials]: ./credentials.md
 [users-creating]: ./users-creating.md
