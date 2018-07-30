@@ -13,9 +13,6 @@ containers acting as Juju machines, even a moderately powerful laptop can
 create useful models, or serve as a platform to develop your own charms. Make
 sure you have enough local space for the containers though.
 
-Note that LXD natively supports clustering. See
-[Additional LXD resources][clouds-lxd-resources] for details.
-
 A tutorial is available on this same topic:
 [Getting started with Juju and LXD][tut-lxd].
 
@@ -159,8 +156,16 @@ Output:
 +---------------+---------+----------------------+------+------------+-----------+
 ```
 
-See more examples of [Creating a controller][controllers-creating] with the
-localhost cloud.
+## LXD specific features
+
+Here is a list of noteworthy LXD specific features and differences:
+
+ - Constraints are applied differently than they are with other cloud types.
+   Essentially, they are interpreted as maximums instead of minimums. See
+   [Constraints and the LXD cloud][charms-constraints-lxd] for details.
+
+ - LXD clustering is supported. See
+   [Additional LXD resources][clouds-lxd-resources] for details.
 
 ## Additional LXD resources
 
@@ -192,3 +197,4 @@ See these pages for ideas on what to do next:
 [clouds-lxd-resources]: ./clouds-lxd-resources.md
 [lxd-snap]: ./clouds-lxd-resources.md#using-the-lxd-snap
 [ubuntu-lxd]: http://www.ubuntu.com/cloud/lxd
+[charms-constraints-lxd]: ./charms-constraints.md#constraints-and-the-lxd-cloud
