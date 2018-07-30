@@ -4077,8 +4077,9 @@ The versions covered here are:
 
   ### Finally
 
-  We encourage everyone to subscribe to the mailing list at
-  juju-dev@lists.canonical.com, or join us on #juju-dev on freenode.
+  We encourage everyone to subscribe to the
+  [Juju Discourse forum][juju-discourse-forum] or join us on `#juju` on
+  freenode.
 
 ^# juju-core 1.18.3
 
@@ -4519,9 +4520,9 @@ The versions covered here are:
   juju commands and their flags. Completion will also look up the machines,
   services, and units in an environment and suggest them.
 
-  We encourage everyone to subscribe the mailing list at [juju-
-  dev@lists.canonical.com](mailto:juju-dev@lists.canonical.com), or join us on
-  #juju-dev on freenode.
+  We encourage everyone to subscribe to the
+  [Juju Discourse forum][juju-discourse-forum] or join us on `#juju` on
+  freenode.
 
 ^# juju-core 1.16.6
 
@@ -4877,3 +4878,8 @@ The versions covered here are:
   For HP Cloud the public bucket is available at:
 
       public-bucket-url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/60502529753910
+
+
+<!-- LINKS -->
+
+[juju-discourse-forum]: https://discourse.jujucharms.com/
