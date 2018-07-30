@@ -30,8 +30,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   We encourage everyone to let us know how you're using Juju. You can send us a
   message on Twitter using `#jujucharms`, join us in the freenode IRC channel
-  `#juju`, or subscribe to the
-  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   ## More information.
   
@@ -303,7 +302,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   We encourage everyone to let us know how you're using Juju. You can send us a
   message on Twitter using `#jujucharms`, join us in the freenode IRC channel
-  `#juju`, or subscribe to the [Juju mailing list][juju-mailing-list].
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   ## More information.
   
@@ -347,8 +346,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   We encourage everyone to let us know how you're using Juju. You can send us a
   message on Twitter using `#jujucharms`, join us in the freenode IRC channel
-  `#juju`, or subscribe to the
-  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   ## More information.
   
@@ -392,8 +390,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   We encourage everyone to let us know how you're using Juju. You can send us a
   message on Twitter using `#jujucharms`, join us in the freenode IRC channel
-  `#juju`, or subscribe to the
-  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   ## More information.
   
@@ -435,8 +432,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   We encourage everyone to let us know how you're using Juju. You can send us a
   message on Twitter using `#jujucharms`, join us in the freenode IRC channel
-  `#juju`, or subscribe to the
-  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   ## More information.
   
@@ -482,8 +478,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   We encourage everyone to let us know how you're using Juju. You can send us a
   message on Twitter using `#jujucharms`, join us in the freenode IRC channel
-  `#juju`, or subscribe to the
-  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   ## More information.
   
@@ -514,7 +509,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   We encourage everyone to let us know how you're using Juju. Send us a
   message on Twitter using #jujucharms, join us at #juju on freenode IRC, and
-  subscribe to the mailing list at juju@lists.ubuntu.com.
+  subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   ## More information
   
@@ -546,8 +541,7 @@ release notes for the 1.x series are available [here][release-notes-1].
 
   We encourage everyone to let us know how you're using Juju. Send us a
   message on Twitter using #jujucharms, join us at #juju on freenode,
-  and
-  subscribe to the mailing list at juju@lists.ubuntu.com.
+  and subscribe to the [Juju Discourse forum][juju-discourse-forum].
 
   ## More information
 
@@ -578,7 +572,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   We encourage everyone to let us know how you're using Juju. Send us a
   message on Twitter using #jujucharms, join us at #juju on freenode, and
-  subscribe to the mailing list at juju@lists.ubuntu.com.
+  subscribe to the [Juju Discourse forum][juju-discourse-forum].
 
   ## More information
 
@@ -705,7 +699,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   [YouTube channel](https://youtube.com/jujucharms).
    
   Send us a message on Twitter using #jujucharms, join us at #juju on Freenode,
-  and subscribe to the mailing list at juju@lists.ubuntu.com .
+  and subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   https://jujucharms.com/docs/2.3/contact-us
   
@@ -1053,7 +1047,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   https://youtube.com/jujucharms
 
   Send us a message on Twitter using #jujucharms, join us at #juju on freenode,
-  and subscribe to the mailing list at juju@lists.ubuntu.com.
+  and subscribe to the [Juju Discourse forum][juju-discourse-forum].
 
   https://jujucharms.com/docs/stable/contact-us
 
@@ -1116,8 +1110,8 @@ release notes for the 1.x series are available [here][release-notes-1].
 
   If you have any questions please don’t hesitate to reach out to the team via:
 
-  the #juju Freenode IRC channel
-  the juju mailing list https://lists.ubuntu.com/mailman/listinfo/juju
+  the #juju Freenode IRC channel  
+  the [Juju Discourse forum][juju-discourse-forum]
 
   We encourage everyone to let us know how you're using Juju.
 
@@ -1424,9 +1418,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   [https://jujucharms.com/docs/2.1/charms-bundles#binding-endpoints-of-applications-within-a-bundle](./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle)
 
   These changes and the rationale behind them were originally posted to
-  the juju-dev mailing list. If you require further background or have
-  questions or concerns, please add to the discussion on the mailing list.
-  The original post is here:
+  the juju-dev mailing list (now defunct):
   <https://lists.ubuntu.com/archives/juju-dev/2017-February/006313.html>
 
 
@@ -2749,5 +2741,5 @@ release notes for the 1.x series are available [here][release-notes-1].
 [whats-new]: ./whats-new.md
 [release-notes-1]: ./reference-release-notes-1.md
 [reference-install]: ./reference-install.md
-[juju-mailing-list]: https://lists.ubuntu.com/mailman/listinfo/juju
+[juju-discourse-forum]: https://discourse.jujucharms.com/
 [upstream-juju]: https://jujucharms.com
