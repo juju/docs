@@ -1,7 +1,7 @@
 Title: Deploying applications
 TODO: Add 'centos' and 'windows' stuff to series talk
       Hardcoded: Ubuntu codenames
-      Move commented section to a troubleshooting page
+table_of_contents: True
 
 # Deploying applications
 
@@ -105,17 +105,29 @@ deployment time. This can be done whether a charm is deployed from the Charm
 Store or from a local charm. See [Application configuration][charms-config] for
 more on this.
 
+## Deploying to LXD containers
+
+Applications can be deployed directly to new LXD containers in this way:
+
+```bash
+juju deploy etcd --to lxd
+```
+
+Here, etcd is deployed to a new container on a new machine.
+
+It is equally possible to deploy to a new container that, in turn, resides on a
+pre-existing machine (see next section).
+
 ## Deploying to specific machines
 
-The Juju operator can specify which machine (or container) an application is to
-be deployed to. See
-[Deploying to specific machines][deploying-to-specific-machines] for full
-coverage of this topic.
+You can specify which machine (or container) an application is to be deployed
+to. See [Deploying to specific machines][deploying-to-specific-machines] for
+full coverage of this topic.
 
 ## Deploying to network spaces
 
-Using network spaces the operator is able to create a more restricted network
-topology for applications at deployment time. See
+Using network spaces you can create a more restricted network topology for
+applications at deployment time. See
 [Deploying to network spaces][deploying-to-network-spaces] for more
 information.
 

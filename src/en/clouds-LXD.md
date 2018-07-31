@@ -13,12 +13,14 @@ containers acting as Juju machines, even a moderately powerful laptop can
 create useful models, or serve as a platform to develop your own charms. Make
 sure you have enough local space for the containers though.
 
-A tutorial is available on this same topic:
-[Getting started with Juju and LXD][tut-lxd].
-
 !!! Note:
     Work is currently underway that will allow Juju to connect to remote LXD
     hosts.
+
+Constraints can be used with LXD containers (`v.2.4.1`). However, these are not
+bound to the LXD cloud type (i.e. they can affect containers that are
+themselves backed by a Juju machine running on any cloud type). See
+[Constraints and LXD containers][charms-constraints-lxd] for details.
 
 ## Software prerequisites
 
@@ -160,11 +162,6 @@ Output:
 
 Here is a list of noteworthy LXD specific features and differences:
 
- - Constraints (`v.2.4.1`) are applied differently than they are with other
-   cloud types.  Essentially, they are interpreted as maximums instead of
-   minimums. See [Constraints and the LXD cloud][charms-constraints-lxd] for
-   details.
-
  - LXD clustering is supported (`v.2.4.0`). See
    [Additional LXD resources][clouds-lxd-resources] for details.
 
@@ -187,7 +184,6 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
-[tut-lxd]: ./tut-lxd.md
 [install]: ./reference-install.md
 [controllers]: ./controllers.md
 [controllers-creating]: ./controllers-creating.md
@@ -198,4 +194,4 @@ See these pages for ideas on what to do next:
 [clouds-lxd-resources]: ./clouds-lxd-resources.md
 [lxd-snap]: ./clouds-lxd-resources.md#using-the-lxd-snap
 [ubuntu-lxd]: http://www.ubuntu.com/cloud/lxd
-[charms-constraints-lxd]: ./charms-constraints.md#constraints-and-the-lxd-cloud
+[charms-constraints-lxd]: ./charms-constraints.md#constraints-and-lxd-containers
