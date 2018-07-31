@@ -196,6 +196,13 @@ GiB of memory:
 juju deploy postgresql --constraints "instance-type=c5.large mem=3.5G"
 ```
 
+To deploy Zookeeper to a new LXD container (on a new machine) limited by 5 GiB
+of memory and 2 CPUs:
+
+```bash
+juju deploy zookeeper --constraints "mem=5G cores=2" --to lxd
+```
+
 An application's current constraints are displayed with the `get-constraints`
 command:
  
