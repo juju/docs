@@ -38,11 +38,11 @@ constraints are interpreted as resource maximums as opposed to minimums. In the
 absence of constraints, a machine (container) will, by default, have access to
 **all** of the underlying system's (LXD host) resources.
 
-This cloud type also honours instance constraints where 
-[AWS instance type][aws-instance-types-kirkland] names are used (e.g.
-'t2.micro' maps to 1 CPU and 1 GiB of memory). When used in combination with
-specific CPU/MEM constraints the latter values will override corresponding
-instance type values.
+This cloud type also honours instance constraints where instance type names
+from either [AWS][aws-types-kirkland], [Azure][azure-types-kirkland], or
+[GCE][gce-types-kirkland] can be used (e.g. AWS type 't2.micro' maps to 1 CPU
+and 1 GiB of memory). When used in combination with specific CPU/MEM
+constraints the latter values will override corresponding instance type values.
 
 !!! Warning:
     Due to the different meaning of constraints in the context of a LXD
@@ -269,4 +269,6 @@ juju add-machine --constraints cores=2
 [charms-deploying-advanced-to-option]: ./charms-deploying-advanced.md#deploying-to-specific-machines
 [reference-constraints]: ./reference-constraints.md
 [controllers-ha]: ./controllers-ha.md
-[aws-instance-types-kirkland]: https://github.com/dustinkirkland/instance-type/blob/master/yaml/aws.yaml
+[aws-types-kirkland]: https://github.com/dustinkirkland/instance-type/blob/master/yaml/aws.yaml
+[azure-types-kirkland]: https://github.com/dustinkirkland/instance-type/blob/master/yaml/azure.yaml
+[gce-types-kirkland]: https://github.com/dustinkirkland/instance-type/blob/master/yaml/gce.yaml
