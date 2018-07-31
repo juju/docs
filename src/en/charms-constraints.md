@@ -13,6 +13,8 @@ definitive constraint resource is found on the
 
 Several noteworthy constraint characteristics:
 
+ - Whenever a new machine is spawned (with commands `bootstrap`, `deploy`,
+   `add-unit`, or `add-machine`) a constraint can be specified.
  - Some constraints are only supported by certain clouds.
  - Changes to constraint defaults do not affect existing machines.
  - Multiple constraints are logically AND'd (i.e. the machine must satisfy all
@@ -23,7 +25,7 @@ Several noteworthy constraint characteristics:
 The idealized use case is that of stipulating a constraint when deploying an
 application and the backing cloud providing a machine with those exact
 resources. In the majority of cases, however, default constraints may have been
-set (at various levels) and the cloud is unable to supply those exact
+set (at various levels) and the cloud may be unable to supply those exact
 resources.
 
 When the backing cloud is unable to precisely satisfy a constraint, the
@@ -31,24 +33,22 @@ resulting system's resources will exceed the constraint-defined minimum.
 However, if the cloud cannot satisfy a constraint at all then an error will be
 emitted and a machine will not be provisioned.
 
-### Constraints and the LXD cloud
+### Constraints and LXD containers
 
-For the 'lxd' cloud type (`v.2.4.1`) things are different. With this cloud,
-constraints are interpreted as resource maximums as opposed to minimums. In the
-absence of constraints, a machine (container) will, by default, have access to
-**all** of the underlying system's (LXD host) resources.
+Constraints can be applied to LXD containers (`v.2.4.1`) either when they're
+running directly upon a LXD cloud type or when hosted on a Juju machine
+(residing on any cloud type). **However, with containers, constraints are
+interpreted as resource maximums as opposed to minimums.**
 
-This cloud type also honours instance constraints where instance type names
-from either [AWS][aws-types-kirkland], [Azure][azure-types-kirkland], or
-[GCE][gce-types-kirkland] can be used (e.g. AWS type 't2.micro' maps to 1 CPU
-and 1 GiB of memory). When used in combination with specific CPU/MEM
-constraints the latter values will override corresponding instance type values.
+In the absence of constraints, a container will, by default, have access to
+**all** of the underlying system's resources.
 
-!!! Warning:
-    Due to the different meaning of constraints in the context of a LXD
-    cloud, care must be taken when using commands in which the cloud type is
-    not referenced.
-    
+LXD constraints also honour instance type names from either
+[AWS][aws-types-kirkland], [Azure][azure-types-kirkland], or
+[GCE][gce-types-kirkland] (e.g. AWS type 't2.micro' maps to 1 CPU and 1 GiB of
+memory). When used in combination with specific CPU/MEM constraints the latter
+values will override corresponding instance type values.
+
 ## Constraint scopes, defaults, and precedence
 
 Constraints can be applied to various levels or scopes. Defaults can be set on
