@@ -47,7 +47,7 @@ constraints the latter values will override corresponding instance type values.
 !!! Warning:
     Due to the different meaning of constraints in the context of a LXD
     cloud, care must be taken when using commands in which the cloud type is
-    not called out.
+    not referenced.
     
 ## Constraint scopes, defaults, and precedence
 
@@ -104,27 +104,25 @@ examples.
 
 !!! Note:
     Constraints applied with '--bootstrap-constraints' will automatically apply
-    to any future controllers provisioned for high availability (HA). See
+    to any future controllers provisioned for high availability. See
     [Controller high availability][controllers-ha].
 
-## Setting constraints for all models
+## Setting constraints for the controller and the default models
 
-Constraints can be applied to all models by, again, stating them during the
-controller-creation process, but using the `--constraints` option instead:
+Constraints can be applied to **every** machine (controller and non-controller)
+in the 'controller' and 'default' models. This is done, again, during the
+controller-creation process, but by using the `--constraints` option instead:
 
 ```bash
 juju bootstrap --constraints mem=4G aws
 ```
 
-Above, we want every machine in every model to have a minimum of four GiB of
-memory.
-
 See [Creating a controller][controllers-creating] for more guidance.
 
 !!! Important:
-    The `--constraints` option also affects the controller. Individual
-    constraints from `--bootstrap-constraints` override any identical
-    constraints from `--constraints`.
+    Individual constraints from `--bootstrap-constraints` override any
+    identical constraints from `--constraints` if these options are used in
+    combination.
 
 For the LXD cloud, the following invocation will place a **limit** of 2GiB of
 memory for each machine:
@@ -195,7 +193,7 @@ the specific memory constraint of 3.5 GiB yields a machine with 2 CPUs and 3.5
 GiB of memory:
 
 ```bash
-juju deploy postgresql --constraints "mem=3.5G instance-type=c5.large"
+juju deploy postgresql --constraints "instance-type=c5.large mem=3.5G"
 ```
 
 An application's current constraints are displayed with the `get-constraints`
@@ -254,7 +252,7 @@ spaces, and not connected to either the 'storage' or 'dmz' spaces.
 
 See the [Network spaces][network-spaces] page for details on spaces.
 
-To get a maximum of two CPUs for a machine in a LXD cloud:
+For a LXD cloud, to create a machine limited to two CPUs:
 
 ```bash
 juju add-machine --constraints cores=2
