@@ -46,10 +46,10 @@ relations:
 machines:
   "0":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
   "1":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
 ```
 
 ## Deploying bundles
@@ -135,7 +135,7 @@ mysql:
   num_units: 1
   constraints:
     mem=2G
-    cpu-cores=4
+    cores=4
   annotations:
     "gui-x": "139"
     "gui-y": "168"
@@ -213,7 +213,7 @@ applications:
     num_units: 1
     constraints:
       mem=2G
-      cpu-cores=4
+      cores=4
 ```
 
 The bundle can then be deployed by using the file as the argument instead of a
@@ -311,7 +311,7 @@ mysql:
 machines:
   "0":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
 ```
 
 This will install the MySQL application on machine '0', which has been assigned
@@ -333,10 +333,10 @@ mysql:
 machines:
   "0":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
   "1":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=4 cpu-power=500 mem=4096 root-disk=8192"
+    constraints: "arch=amd64 cores=4 cpu-power=500 mem=4096 root-disk=8192"
 ```
 
 This will install one unit of the MySQL application on machine '0' and the
