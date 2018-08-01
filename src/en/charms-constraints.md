@@ -13,6 +13,8 @@ definitive constraint resource is found on the
 
 Several noteworthy constraint characteristics:
 
+ - Whenever a new machine is spawned (with commands `bootstrap`, `deploy`,
+   `add-unit`, or `add-machine`) a constraint can be specified.
  - Some constraints are only supported by certain clouds.
  - Changes to constraint defaults do not affect existing machines.
  - Multiple constraints are logically AND'd (i.e. the machine must satisfy all
@@ -23,7 +25,7 @@ Several noteworthy constraint characteristics:
 The idealized use case is that of stipulating a constraint when deploying an
 application and the backing cloud providing a machine with those exact
 resources. In the majority of cases, however, default constraints may have been
-set (at various levels) and the cloud is unable to supply those exact
+set (at various levels) and the cloud may be unable to supply those exact
 resources.
 
 When the backing cloud is unable to precisely satisfy a constraint, the
@@ -31,11 +33,21 @@ resulting system's resources will exceed the constraint-defined minimum.
 However, if the cloud cannot satisfy a constraint at all then an error will be
 emitted and a machine will not be provisioned.
 
-When using the localhost cloud, constraints are ineffectual due the nature of
-this cloud's underlying technology (LXD), where each machine will, by default,
-have access to **all** of the LXD host's resources. Here, an exact hardware
-specification can be requested, but is done at the LXD level (see example
-below).
+### Constraints and LXD containers
+
+Constraints can be applied to LXD containers (`v.2.4.1`) either when they're
+running directly upon a LXD cloud type or when hosted on a Juju machine
+(residing on any cloud type). **However, with containers, constraints are
+interpreted as resource maximums as opposed to minimums.**
+
+In the absence of constraints, a container will, by default, have access to
+**all** of the underlying system's resources.
+
+LXD constraints also honour instance type names from either
+[AWS][aws-types-kirkland], [Azure][azure-types-kirkland], or
+[GCE][gce-types-kirkland] (e.g. AWS type 't2.micro' maps to 1 CPU and 1 GiB of
+memory). When used in combination with specific CPU/MEM constraints the latter
+values will override corresponding instance type values.
 
 ## Constraint scopes, defaults, and precedence
 
@@ -92,43 +104,32 @@ examples.
 
 !!! Note:
     Constraints applied with '--bootstrap-constraints' will automatically apply
-    to any future controllers provisioned for high availability (HA). See
+    to any future controllers provisioned for high availability. See
     [Controller high availability][controllers-ha].
 
-## Setting constraints for all models
+## Setting constraints for the controller and the default models
 
-Constraints can be applied to all models by, again, stating them during the
-controller-creation process, but using the `--constraints` option instead:
+Constraints can be applied to **every** machine (controller and non-controller)
+in the 'controller' and 'default' models. This is done, again, during the
+controller-creation process, but by using the `--constraints` option instead:
 
 ```bash
 juju bootstrap --constraints mem=4G aws
 ```
 
-Above, we want every machine in every model to have a minimum of four GiB of
-memory.
-
 See [Creating a controller][controllers-creating] for more guidance.
 
 !!! Important:
-    The `--constraints` option also affects the controller. Individual
-    constraints from `--bootstrap-constraints` override any identical
-    constraints from `--constraints`.
+    Individual constraints from `--bootstrap-constraints` override any
+    identical constraints from `--constraints` if these options are used in
+    combination.
 
-For the localhost cloud, the following invocation will achieve a similar goal
-to the previous command (assuming that the LXD containers are using the
-'default' LXD profile):
+For the LXD cloud, the following invocation will place a **limit** of 2GiB of
+memory for each machine:
 
 ```bash
-lxc profile set default limits.memory 4GB
+juju bootstrap --constraints mem=2G localhost
 ```
-
-Such a command can be issued before or after `juju bootstrap` because it
-affects both future and existing (in real time) machines. See the
-[LXD documentation][lxd-upstream] for more on this topic.
-
-!!! Warning:
-    LXD resource limit changes can potentially impact all containers on the
-    host - not only those acting as Juju machines.
 
 ## Setting and displaying constraints for a model
 
@@ -137,6 +138,13 @@ that model, with the `set-model-constraints` command:
  
 ```bash
 juju set-model-constraints mem=4G
+```
+
+For the LXD cloud, all new machines in the current model will be limited
+to an instance type of 'c5.large' (2 CPU and 4 GiB):
+
+```bash
+juju set-model-constraints instance-type=c5.xlarge
 ```
 
 A model's constraints are displayed with the `get-model-constraints` command:
@@ -177,6 +185,22 @@ model or application level):
   
 ```bash
 juju deploy apache2 --constraints "mem=4G cores=" 
+```
+
+For the LXD cloud, we deploy PostgreSQL using a combination of an instance type
+and a specific CPU constraint. Instance 'c5.large' maps to 2 CPU and 4 GiB but
+the specific memory constraint of 3.5 GiB yields a machine with 2 CPUs and 3.5
+GiB of memory:
+
+```bash
+juju deploy postgresql --constraints "instance-type=c5.large mem=3.5G"
+```
+
+To deploy Zookeeper to a new LXD container (on a new machine) limited by 5 GiB
+of memory and 2 CPUs:
+
+```bash
+juju deploy zookeeper --constraints "mem=5G cores=2" --to lxd
 ```
 
 An application's current constraints are displayed with the `get-constraints`
@@ -235,28 +259,21 @@ spaces, and not connected to either the 'storage' or 'dmz' spaces.
 
 See the [Network spaces][network-spaces] page for details on spaces.
 
-To get exactly two CPUs for a machine in a localhost cloud:
+For a LXD cloud, to create a machine limited to two CPUs:
 
 ```bash
-juju add-machine
-lxc list
-lxc config set juju-ab31e2-0 limits.cpu 2
+juju add-machine --constraints cores=2
 ```
-
-Above, it is presumed that `lxc list` informed us that the new machine is
-backed by a LXD container whose name is 'juju-ab31e2-0'.
-
-See the [earlier example on LXD][#setting-constraints-for-all-models] for more
-context.
 
 
 <!-- LINKS -->
 
-[charms-deploying]: ./charms-deploying.html
-[controllers-creating]: ./controllers-creating.html
-[network-spaces]: ./network-spaces.html
-[charms-deploying-advanced-to-option]: ./charms-deploying-advanced.html#deploying-to-specific-machines
-[reference-constraints]: ./reference-constraints.html
-[controllers-ha]: ./controllers-ha.html
-[lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
-[#setting-constraints-for-all-models]: #setting-constraints-for-all-models
+[charms-deploying]: ./charms-deploying.md
+[controllers-creating]: ./controllers-creating.md
+[network-spaces]: ./network-spaces.md
+[charms-deploying-advanced-to-option]: ./charms-deploying-advanced.md#deploying-to-specific-machines
+[reference-constraints]: ./reference-constraints.md
+[controllers-ha]: ./controllers-ha.md
+[aws-types-kirkland]: https://github.com/dustinkirkland/instance-type/blob/master/yaml/aws.yaml
+[azure-types-kirkland]: https://github.com/dustinkirkland/instance-type/blob/master/yaml/azure.yaml
+[gce-types-kirkland]: https://github.com/dustinkirkland/instance-type/blob/master/yaml/gce.yaml
