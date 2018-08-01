@@ -46,10 +46,10 @@ relations:
 machines:
   "0":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
   "1":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
 ```
 
 ## Deploying bundles
@@ -63,34 +63,15 @@ juju deploy wiki-simple
 See the [Deploying applications][charms-deploying] page for details on the
 `deploy` command.
 
-To get a summary of the deployment steps (without actually deploying) a *dry
-run* can be performed:
+To get a summary of the deployment steps (without actually deploying) a dry
+run can be performed:
 
 ```bash
 juju deploy --dry-run wiki-simple
 ```
 
-Sample output:
-
-```no-highlight
-Located bundle "cs:bundle/wiki-simple-4"
-Resolving charm: cs:trusty/mysql-55
-Resolving charm: cs:trusty/mediawiki-5
-Changes to deploy bundle:
-- upload charm cs:mysql-55 for series trusty
-- deploy application mysql on trusty using cs:mysql-55
-- set annotations for mysql
-- upload charm cs:trusty/mediawiki-5 for series trusty
-- deploy application wiki on trusty using cs:trusty/mediawiki-5
-- set annotations for wiki
-- add relation wiki:db - mysql:db
-- add unit mysql/0 to new machine 0
-- add unit wiki/0 to new machine 1
-```
-
 !!! Note:
-    The `--dry-run` option works only with bundles, and not with regular
-    charms.
+    The `--dry-run` option works only with bundles, not with regular charms.
 
 You can get the name of a bundle from the [Juju Charm Store][charm-store], just
 as you would a charm. There, you can see icons representing each separate
@@ -135,10 +116,46 @@ mysql:
   num_units: 1
   constraints:
     mem=2G
-    cpu-cores=4
+    cores=4
   annotations:
     "gui-x": "139"
     "gui-y": "168"
+```
+
+Here we show how to colocate applications along with constrained LXD containers
+on a single machine:
+
+```no-highlight
+applications:
+  wordpress:
+    charm: "cs:trusty/wordpress-5"
+    num_units: 1
+    constraints:
+      mem=1G
+      cores=1
+    annotations:
+      "gui-x": "339.5"
+      "gui-y": "-171"
+    to:
+    - lxd:0
+  mysql:
+    charm: "cs:trusty/mysql-57"
+    num_units: 1
+    constraints:
+      mem=2G
+      cores=2
+    annotations:
+      "gui-x": "79.5"
+      "gui-y": "-142"
+    to:
+    - lxd:0
+relations:
+  - - "wordpress:db"
+    - "mysql:db"
+machines:
+  "0":
+    series: xenial
+    constraints: "arch=amd64 mem=4G cores=4"
 ```
 
 Refer to the [Using constraints][charms-constraints] page for in-depth coverage
@@ -213,7 +230,7 @@ applications:
     num_units: 1
     constraints:
       mem=2G
-      cpu-cores=4
+      cores=4
 ```
 
 The bundle can then be deployed by using the file as the argument instead of a
@@ -311,7 +328,7 @@ mysql:
 machines:
   "0":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
 ```
 
 This will install the MySQL application on machine '0', which has been assigned
@@ -333,10 +350,10 @@ mysql:
 machines:
   "0":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
   "1":
     series: trusty
-    constraints: "arch=amd64 cpu-cores=4 cpu-power=500 mem=4096 root-disk=8192"
+    constraints: "arch=amd64 cores=4 cpu-power=500 mem=4096 root-disk=8192"
 ```
 
 This will install one unit of the MySQL application on machine '0' and the
