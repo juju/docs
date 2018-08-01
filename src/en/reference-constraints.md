@@ -102,7 +102,7 @@ addresses the situation.
 - Valid values: instance-type=[defined on the cloud]
 
 ### LXD:
-- Unsupported: [cpu-cores, cpu-power, instance-type, tags, virt-type]
+- Unsupported: [cpu-power, tags, virt-type]
 - Valid values: arch=[host arch]
 
 ### MAAS:
