@@ -156,9 +156,40 @@ M49U7JumoWH6aclbo0RXGKDI9vsBRnmOOaCUus9gbbrNUs6MTst+RCPXqXPi4tzbTtRAY5jd8LWv
 9/ZUS/A2VSNUaiKvfdzG6cnzr72R
 ```
 
-Note that the assertion contains the store ID (e.g. field 'store').
+Note that the assertion contains the store ID (e.g. field 'store'). See the
+[Snapcraft documentation][upstream-snapcraft-assertions] for details.
 
-See the [Snapcraft documentation][upstream-snapcraft-assertions] for details.
+Assign such data to key `snap-store-assertions` by first placing it into a
+YAML-formatted file, say `assertion.yaml`, and then proceeding as follows:
+
+```bash
+juju model-config assertion.yaml
+```
+
+The file contents look like this:
+
+```yaml
+snap-store-assertions: |-
+  type: store
+  authority-id: canonical
+  store: YDBQvAwC2CfJElRq2XGkqcjR4bA9yNr2
+  operator-id: eJ8VwwkInXdLo5nIgoSKH8j95qs6BQ7D
+  timestamp: 2017-11-24T12:10:19.881852Z
+  url: http://firestorm.local
+  sign-key-sha3-384: BWDEoaqyr25nF5SNCvEv2v7QnM9QsfCc0PBMYD_i2NGSQ32EF2d4D0hqUel3m8ul
+  
+  AcLBUgQAAQoABgUCWhgMKwAA3gYQAK68FSpGO3MQTOHuXar15Te7nf7RKa/5gJR2jIDf45XSVhYt
+  fsWdX5yEaRwoXWor84Tesm1XtYodyNRbBAKmz7a/1/tT105UxtnflO1Y42Yb4AliFtvW7Sc1eHO3
+  pg/ZAhx/2LmchBFJURon+vWi/scCr6GkUoQ+xNvCQpA0hWPfD4BnS5TJjhiA8PyGQWTLmyms5jbK
+  5AhIdogFKpPfmeaSCgSjz2OsMMJYQO639A2gmoT2zSHqJs4+/bTb2Oq4j08Am7Wv28vyVglWdedc
+  QKZuBJ/sepmZzHcWHNb65z3+KT+VC12LLQd/I+SxUkTsBNKC1mwpY39PrAsJDMCltxCepKmti0T6
+  hwYCYrrA6vBXjqoSRyW/YzDKRB0VpN3GwCE/1DmuxNFN2CUn4SM+q+SYmCuIaoDCmMyk6P9jrHyv
+  JO8V/ctnZ0FvdrwnXFQDH6HY5rojjyEyjlZo6M8H2SunLX0u/goVh38D8o0bEmX/cZEKtTZx7ml+
+  lxDMSobdfIYPBl4FjVGHY+Zkdso0xQjctG1nNhkeYJQswLqfHEEdwaeCyGBh42cQfFLqxd0qK36M
+  M49U7JumoWH6aclbo0RXGKDI9vsBRnmOOaCUus9gbbrNUs6MTst+RCPXqXPi4tzbTtRAY5jd8LWv
+  9/ZUS/A2VSNUaiKvfdzG6cnzr72R
+```
+
 
 ## APT mirror
 
