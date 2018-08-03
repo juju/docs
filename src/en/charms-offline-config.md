@@ -169,6 +169,10 @@ disposal:
  - `juju-http-proxy`  
  - `juju-https-proxy`  
  - `juju-no-proxy`
+ - `snap-http-proxy`
+ - `snap-https-proxy`
+ - `snap-store-assertions`
+ - `snap-store-proxy`
 
 The method for configuring models while using the `bootstrap` command is done
 with either the `--config` option or the `--model-default` option. The latter
@@ -207,20 +211,20 @@ juju bootstrap \
 
 <!-- LINKS -->
 
-[charms-offline-deploying]: ./charms-offline-deploying.html
-[charms-offline-strategies]: ./charms-offline-strategies.html
-[models-config]: ./models-config.html
+[charms-offline-deploying]: ./charms-offline-deploying.md
+[charms-offline-strategies]: ./charms-offline-strategies.md
+[models-config]: ./models-config.md
 [cloud-images]: http://cloud-images.ubuntu.com
 [streams]: https://streams.canonical.com
 [ubuntu-archive]: http://archive.ubuntu.com
 [security-archive]: http://security.ubuntu.com
 [charm-store]: https://jujucharms.com
 [charm-store-juju-gui]: https://jujucharms.com/u/juju-gui/juju-gui
-[controllers-gui]:  controllers-gui.html
+[controllers-gui]:  ./controllers-gui.md
 [github]: https://github.com
 [launchpad-ppa]: https://ppa.launchpad.net
 
-[anchor__http/s-proxy]: ./charms-offline-strategies.html#http/s-proxy
-[anchor__cloud-images-mirror]: ./charms-offline-strategies.html#cloud-images-mirror
+[anchor__http/s-proxy]: ./charms-offline-strategies.md#http/s-proxy
+[anchor__cloud-images-mirror]: ./charms-offline-strategies.md#cloud-images-mirror
 [anchor__offline-configuration-methods]: #offline-configuration-methods
-[anchor__no-proxy-and-the-localhost-cloud]: ./charms-offline-strategies.html#no-proxy-and-the-localhost-cloud
+[anchor__no-proxy-and-the-localhost-cloud]: ./charms-offline-strategies.md#no-proxy-and-the-localhost-cloud
