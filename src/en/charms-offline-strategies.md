@@ -1,5 +1,5 @@
 Title: Offline mode strategies
-TODO:  docs needed: explanation of an agent (and link from 'agent mirror'). see models-upgrade.md
+TODO:  Give an example of assigning multiple assertions to `snap-store-assertions`  
 
 # Offline mode strategies
 
@@ -17,6 +17,7 @@ The services of concern here are:
  - APT proxy
  - FTP proxy
  - Juju-specific proxy
+ - Snap-specific proxy
  - APT mirror
  - Juju agent mirror
  - Cloud image mirror
@@ -115,6 +116,81 @@ can contain subnets (in CIDR notation) whereas its legacy counterpart cannot.
     libraries (e.g. `charm-helpers`) to enable a proxy setting on a per-call
     basis.
 
+## Snap-specific proxy
+
+The following suite of proxy settings have a Snap-only scope:
+
+`snap-http-proxy`  
+`snap-https-proxy`  
+`snap-store-assertions`  
+`snap-store-proxy`
+
+The first two provide the standard HTTP and HTTPS proxy values for `snapd`
+running on a machine.
+
+The second two are for a local snap store. Key `snap-store-proxy` is a
+32-character alphanumeric key that identifies the store (i.e. its ID). Key
+`snap-store-assertions` is a collection of digitally signed documents that
+express a fact or policy about an object in the snap universe. 
+
+Here is a sample assertion:
+
+```no-highlight
+type: store
+authority-id: canonical
+store: YDBQvAwC2CfJElRq2XGkqcjR4bA9yNr2
+operator-id: eJ8VwwkInXdLo5nIgoSKH8j95qs6BQ7D
+timestamp: 2017-11-24T12:10:19.881852Z
+url: http://firestorm.local
+sign-key-sha3-384: BWDEoaqyr25nF5SNCvEv2v7QnM9QsfCc0PBMYD_i2NGSQ32EF2d4D0hqUel3m8ul
+
+AcLBUgQAAQoABgUCWhgMKwAA3gYQAK68FSpGO3MQTOHuXar15Te7nf7RKa/5gJR2jIDf45XSVhYt
+fsWdX5yEaRwoXWor84Tesm1XtYodyNRbBAKmz7a/1/tT105UxtnflO1Y42Yb4AliFtvW7Sc1eHO3
+pg/ZAhx/2LmchBFJURon+vWi/scCr6GkUoQ+xNvCQpA0hWPfD4BnS5TJjhiA8PyGQWTLmyms5jbK
+5AhIdogFKpPfmeaSCgSjz2OsMMJYQO639A2gmoT2zSHqJs4+/bTb2Oq4j08Am7Wv28vyVglWdedc
+QKZuBJ/sepmZzHcWHNb65z3+KT+VC12LLQd/I+SxUkTsBNKC1mwpY39PrAsJDMCltxCepKmti0T6
+hwYCYrrA6vBXjqoSRyW/YzDKRB0VpN3GwCE/1DmuxNFN2CUn4SM+q+SYmCuIaoDCmMyk6P9jrHyv
+JO8V/ctnZ0FvdrwnXFQDH6HY5rojjyEyjlZo6M8H2SunLX0u/goVh38D8o0bEmX/cZEKtTZx7ml+
+lxDMSobdfIYPBl4FjVGHY+Zkdso0xQjctG1nNhkeYJQswLqfHEEdwaeCyGBh42cQfFLqxd0qK36M
+M49U7JumoWH6aclbo0RXGKDI9vsBRnmOOaCUus9gbbrNUs6MTst+RCPXqXPi4tzbTtRAY5jd8LWv
+9/ZUS/A2VSNUaiKvfdzG6cnzr72R
+```
+
+Note that the assertion contains the store ID (e.g. field 'store'). See the
+[Snapcraft documentation][upstream-snapcraft-assertions] for details.
+
+Assign such data to key `snap-store-assertions` by first placing it into a
+YAML-formatted file, say `assertion.yaml`, and then proceeding as follows:
+
+```bash
+juju model-config assertion.yaml
+```
+
+The file contents look like this:
+
+```yaml
+snap-store-assertions: |-
+  type: store
+  authority-id: canonical
+  store: YDBQvAwC2CfJElRq2XGkqcjR4bA9yNr2
+  operator-id: eJ8VwwkInXdLo5nIgoSKH8j95qs6BQ7D
+  timestamp: 2017-11-24T12:10:19.881852Z
+  url: http://firestorm.local
+  sign-key-sha3-384: BWDEoaqyr25nF5SNCvEv2v7QnM9QsfCc0PBMYD_i2NGSQ32EF2d4D0hqUel3m8ul
+  
+  AcLBUgQAAQoABgUCWhgMKwAA3gYQAK68FSpGO3MQTOHuXar15Te7nf7RKa/5gJR2jIDf45XSVhYt
+  fsWdX5yEaRwoXWor84Tesm1XtYodyNRbBAKmz7a/1/tT105UxtnflO1Y42Yb4AliFtvW7Sc1eHO3
+  pg/ZAhx/2LmchBFJURon+vWi/scCr6GkUoQ+xNvCQpA0hWPfD4BnS5TJjhiA8PyGQWTLmyms5jbK
+  5AhIdogFKpPfmeaSCgSjz2OsMMJYQO639A2gmoT2zSHqJs4+/bTb2Oq4j08Am7Wv28vyVglWdedc
+  QKZuBJ/sepmZzHcWHNb65z3+KT+VC12LLQd/I+SxUkTsBNKC1mwpY39PrAsJDMCltxCepKmti0T6
+  hwYCYrrA6vBXjqoSRyW/YzDKRB0VpN3GwCE/1DmuxNFN2CUn4SM+q+SYmCuIaoDCmMyk6P9jrHyv
+  JO8V/ctnZ0FvdrwnXFQDH6HY5rojjyEyjlZo6M8H2SunLX0u/goVh38D8o0bEmX/cZEKtTZx7ml+
+  lxDMSobdfIYPBl4FjVGHY+Zkdso0xQjctG1nNhkeYJQswLqfHEEdwaeCyGBh42cQfFLqxd0qK36M
+  M49U7JumoWH6aclbo0RXGKDI9vsBRnmOOaCUus9gbbrNUs6MTst+RCPXqXPi4tzbTtRAY5jd8LWv
+  9/ZUS/A2VSNUaiKvfdzG6cnzr72R
+```
+
+
 ## APT mirror
 
 Instead of proxying client requests to an internet-based repository it is
@@ -185,7 +261,7 @@ such a mirror if LXD containers are put on its instances.
 
 <!-- LINKS -->
 
-[charms-offline]: ./charms-offline.html
+[charms-offline]: ./charms-offline.md
 [upstream-apt-cacher]: https://help.ubuntu.com/community/Apt-Cacher-Server
 [upstream-apt-cacher-ng]: https://www.unix-ag.uni-kl.de/~bloch/acng/
 [upstream-squid]: http://www.squid-cache.org/
@@ -198,3 +274,4 @@ such a mirror if LXD containers are put on its instances.
 [upstream-squid-deb-proxy]: https://launchpad.net/squid-deb-proxy
 [upstream-agents]: https://streams.canonical.com/juju/tools/agent/
 [upstream-cloud-images]: http://cloud-images.ubuntu.com/
+[upstream-snapcraft-assertions]: https://forum.snapcraft.io/t/assertions/6155
