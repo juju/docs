@@ -88,7 +88,7 @@ affects **all** models, including any future ones. Below we use the `--config`
 option:
 
 ```bash
-juju bootstrap --config image-stream=daily lxd lxd-daily
+juju bootstrap --config image-stream=daily localhost lxd-daily
 ```
 
 See [Creating a controller][controllers-creating] for in-depth coverage on how
@@ -152,6 +152,10 @@ no-proxy                     | string |          |                            | 
 provisioner-harvest-mode     | string | destroyed| all/none/unknown/destroyed | Set what to do with unknown machines. See [additional info below](#juju-lifecycle-and-harvesting).
 proxy-ssh                    | bool   | false    |                            | Set whether SSH commands should be proxied through the API server.
 resource-tags                | string | none     |                            | A space-separated list of key=value pairs used to apply as tags on supported cloud models.
+snap-http-proxy              | string |          |                            | The snap-centric HTTP proxy value.
+snap-https-proxy             | string |          |                            | The snap-centric HTTPS proxy value.
+snap-store-assertions        | string |          |                            | The collection of snap store assertions. Each entry should contain the snap store ID.
+snap-store-proxy             | string |          |                            | The snap store ID. See [Snap-specific proxy][charms-offline-strategies] for details.
 ssl-hostname-verification    | bool   | true     |                            | Set whether SSL hostname verification is enabled.
 test-mode                    | bool   | false    |                            | Set whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store.
 transmit-vendor-metrics      | bool   | true     |                            | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics.
@@ -198,7 +202,6 @@ enable-os-upgrade: false
 You may also want to just update the package list to ensure a charm has the
 latest software available to it by disabling upgrades but enabling updates.
 
-
 ### Disable network management
 
 This can only be used with MAAS models and should otherwise be set to
@@ -207,7 +210,6 @@ because you have unique and well-defined needs. Setting this to 'true' with
 MAAS gives you the same behaviour with containers as you already have with
 other providers: one machine-local address on a single network interface,
 bridged to the default bridge.
-
 
 ### Firewall mode
 
@@ -351,6 +353,7 @@ juju model-config container-inherit-properties="ca-certs, apt-primary"
 
 <!-- LINKS -->
 
-[charms-offline]: ./charms-offline.html
-[controllers-creating]: ./controllers-creating.html
-[concepts-and-terms-agent]: ./juju-concepts.html#agent
+[charms-offline]: ./charms-offline.md
+[controllers-creating]: ./controllers-creating.md
+[concepts-and-terms-agent]: ./juju-concepts.md#agent
+[charms-offline-strategies]: ./charms-offline-strategies.md#snap-specific-proxy
