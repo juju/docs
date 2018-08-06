@@ -1,5 +1,5 @@
 Title: Juju models
-TODO:  Convert to abstract links
+TODO:  Review required. Convert to abstract links
 
 
 # Juju models
