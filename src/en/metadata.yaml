@@ -69,7 +69,7 @@ navigation:
 
       - title: Models
         location: models.md
-      - title: Charms &amp; applications
+      - title: Charms
         location: charms.md
 
         children:
@@ -77,7 +77,7 @@ navigation:
             location: charms-deploying.md
           - title: Using constraints
             location: charms-constraints.md
-          - title: Application configuration
+          - title: Configuring applications
             location: charms-config.md
           - title: Managing relations
             location: charms-relations.md
@@ -85,13 +85,17 @@ navigation:
             location: charms-exposing.md
           - title: Scaling applications
             location: charms-scaling.md
-          - title: Upgrading applications
-            location: charms-upgrading.md
           - title: Removing applications &amp; Units
             location: charms-destroy.md
-          - title: Groups of applications
-            location: charms-service-groups.md
-          - title: Charm high availability
+          - title: Upgrading applications
+            location: charms-upgrading.md
+          - title: Working offline
+            location: charms-offline.md
+          - title: Using storage
+            location: charms-storage.md
+          - title: Using charm bundles
+            location: charms-bundles.md
+          - title: Application high availability
             location: charms-ha.md
           - title: Working with Units
             location: charms-working-with-units.md
@@ -99,17 +103,14 @@ navigation:
             location: actions.md
           - title: Working with Resources
             location: charms-resources.md
-          - title: Using storage
-            location: charms-storage.md
           - title: Viewing utilization with metrics
             location: charms-metrics.md
-          - title: Fan container networking
-            location: charms-fan.md
-          - title: Working offline
-            location: charms-offline.md
+          - title: Grouping applications
+            location: charms-service-groups.md
 
-      - title: Charm bundles
-        location: charms-bundles.md
+      - title: Fan container networking
+        location: charms-fan.md
+
       - title: Users
         location: users.md
 
