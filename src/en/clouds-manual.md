@@ -33,9 +33,9 @@ The following conditions must be met:
  - At least two machines are needed (one for the controller and one to deploy
    charms to).
  - The machines must have Ubuntu (or CentOS) installed.
- - The machines must be contactable over SSH using a user account with root
-   privileges. On Ubuntu, `sudo` rights will suffice if this provides root
-   access.
+ - The machines must be contactable over SSH (either by password or public key)
+   using a user account with root privileges. On Ubuntu, `sudo` rights will
+   suffice if this provides root access.
  - The machines must be able to `ping` each other.
 
 ## Overview
@@ -62,7 +62,10 @@ conjunction with the machine ID.
 ## Adding a Manual cloud
 
 Use the interactive `add-cloud` command to add your Manual cloud to Juju's list
-of clouds:
+of clouds. You will need to supply a name you wish to call your cloud, the IP
+address (or hostname) for the machine you intend to use as a controller, and
+what remote user account to connect to over SSH (prepend 'user@' to the
+address/hostname).
 
 ```bash
 juju add-cloud
@@ -71,21 +74,21 @@ juju add-cloud
 Example user session:
 
 ```no-highlight
-       Cloud Types
-        maas
-        manual
-        openstack
-        oracle
-        vsphere
-      
-      Select cloud type: manual
-      
-      Enter a name for your manual cloud: mymanual
-      
-      Enter the controller's hostname or IP address: noah@10.143.211.93
-      
-      Cloud "mymanual" successfully added
-      You may bootstrap with 'juju bootstrap mymanual'
+Cloud Types
+  maas
+  manual
+  openstack
+  oracle
+  vsphere
+
+Select cloud type: manual
+
+Enter a name for your manual cloud: mymanual
+
+Enter the controller's hostname or IP address: noah@10.143.211.93
+
+Cloud "mymanual" successfully added
+You may bootstrap with 'juju bootstrap mymanual'
 ```
 
 We've called the new cloud 'mymanual', used an IP address of 10.143.211.93 for
