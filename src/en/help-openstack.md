@@ -8,27 +8,34 @@ Although Juju doesn't have baked-in knowledge of *your* OpenStack cloud, it
 does know how such clouds work in general. We just need to provide some
 information to add it to the list of known clouds.
 
+## Image metadata
+
+OpenStack requires access to images for its instances to use. If you have
+chosen to use a private OpenStack cloud with Juju you will need to ensure that
+images are set up. This is covered in [Cloud image metadata][simplestreams]. 
+
 ## Adding an OpenStack Cloud
 
-Using the Juju `add-cloud` command, it is easy to add your OpenStack clouds to
-Juju's list of known clouds. The command is interactive, and will ask for
-a name,endpoint,authorisation method(s) and regions to use. (If you are unsure
-about endpoints and regions, they will be listed in the .novarc file, if you
-have one for your OpenStack.) A sample session is shown below.
+Use the interactive `add-cloud` command to add your OpenStack cloud to Juju's list
+of clouds. You will need to supply a name you wish to call your cloud and the
+unique API endpoint, the authentication type(s), and region information.
 
-Running...
+Here we assume your OpenStack cloud is equipped with the relevant Ubuntu
+images. If this is not the case then see
+[Using OpenStack with Juju][clouds-openstack].
 
 ```bash
 juju add-cloud
 ```
-...will enter the interactive mode. Enter the desired values to continue.
 
-```
+Example user session:
+
+```no-highlight
 Cloud Types
- maas
- manual
- openstack
- vsphere
+  maas
+  manual
+  openstack
+  vsphere
 
 Select cloud type: openstack
 
@@ -37,8 +44,8 @@ Enter a name for your openstack cloud: devstack
 Enter the API endpoint url for the cloud: https://openstack.example.com:35574/v3.0/
 
 Auth Types
- access-key
- userpass
+  access-key
+  userpass
 
 Select one or more auth types separated by commas: access-key,userpass
 
@@ -55,15 +62,24 @@ You may bootstrap with 'juju bootstrap homestack'
 Note that it is possible to choose more than one authorisation method - just
 separate the values with commas.
 
-Once the cloud has been added, it will appear on the list of known clouds
-output by the `juju clouds` command. Note that the cloud name will be
-highlighted to indicate that it is a locally added cloud.
+Now confirm the successful addition of the cloud:
 
-!["juju cloud with locally added cloud"](./media/list-clouds-local.png)
+```bash
+juju clouds
+```
 
-It is also possible to define OpenStack clouds in a YAML formatted configuration
-file and register them with Juju. Please see the
-[documentation for manually adding Openstack clouds][manual-openstack] for details.
+Here is a partial output:
+
+```no-highlight
+Cloud        Regions  Default          Type        Description
+.
+.
+.
+mystack         dev1     dev1          openstack
+```
+
+For the manual method of adding an OpenStack cloud, see below section
+[Manually adding OpenStack clouds][#clouds-openstack-manual].
 
 ## Gathering credential information
 
@@ -129,14 +145,6 @@ variables and is parsed by the above command as part of the scanning process.
 For background information on this method read section
 [Adding credentials from environment variables][credentials-adding-from-variables].
 
-## Images and private clouds
-
-The above steps are all you need to use most OpenStack clouds which are
-configured for general use. If this is your own cloud, you will also need to
-additionally provide stream information so that the cloud can fetch the
-relevant images for Juju to use. This is covered in the section on
-[private clouds][simplestreams]. 
-
 ## Creating a controller
 
 Once the image metadata has been gathered, either locally or via a registered
@@ -184,9 +192,9 @@ See these pages for ideas on what to do next:
 <!-- LINKS -->
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[simplestreams]: ./howto-privatecloud.html
-[credentials]: ./credentials.html
-[manual-openstack]: ./clouds-openstack-manual.html
+[simplestreams]: ./howto-privatecloud.md
+[credentials]: ./credentials.md
+[#clouds-openstack-manual]: #manually-adding-an-openstack-cloud
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
