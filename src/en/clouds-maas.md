@@ -56,8 +56,8 @@ Cloud        Regions  Default          Type        Description
 maas-cloud         0                   maas        Metal As A Service
 ```
 
-For the manual method for adding a MAAS cloud, see
-[Manually adding MAAS clouds][clouds-adding-maas].
+For the manual method of adding a MAAS cloud, see below section
+[Manually adding MAAS clouds][clouds-maas-manual].
 
 ## Adding credentials
 
@@ -131,5 +131,5 @@ See these pages for ideas on what to do next:
 [create-a-controller-with-constraints]: ./controllers-creating.md#create-a-controller-with-constraints
 [models]: ./models.md
 [charms]: ./charms.md
-[clouds-adding-maas]: ./clouds.md#manually-adding-maas-clouds
+[#clouds-maas-manual]: #manually-adding-maas-clouds
 [controllers-creating]: ./controllers-creating.md
