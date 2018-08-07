@@ -192,3 +192,4 @@ See these pages for ideas on what to do next:
 [charms]: ./charms.md
 [credentials-adding-from-variables]: ./credentials.md#adding-credentials-from-environment-variables
 [credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file
+[jaas]: https://jujucharms.com/jaas
