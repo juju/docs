@@ -13,13 +13,13 @@ table_of_contents: True
 Juju supports a wide variety of clouds. In addition, many of these are known to
 Juju out of the box. They are:
 
-**Amazon AWS**  
-**Microsoft Azure**  
-**Google GCE**  
-**Oracle Compute**  
-**Rackspace**  
-**Joyent**  
-**LXD**
+ - Amazon AWS
+ - Microsoft Azure
+ - Google GCE
+ - Oracle Compute
+ - Rackspace
+ - Joyent
+ - LXD
 
 To use the above clouds all one needs to do is supply one's cloud credentials
 to Juju. The exception is LXD; it does not require credentials.
@@ -27,10 +27,10 @@ to Juju. The exception is LXD; it does not require credentials.
 The below clouds do need to be added to Juju, and, as will be shown, it is
 simply done:
 
-**VMware vSphere**  
-**OpenStack**  
-**MAAS**  
-**Manual**
+ - VMware vSphere
+ - OpenStack
+ - MAAS
+ - Manual
 
 An Oracle *trial* account also needs to be added.
 
