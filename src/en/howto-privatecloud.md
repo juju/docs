@@ -1,6 +1,6 @@
 Title: Cloud image metadata
 TODO:  Critical: review required
-       Consider renaming this file (e.g. clouds-openstack-images)
+       Consider renaming this file (e.g. cloud-image-metadata)
 
 # Cloud image metadata
 
@@ -16,7 +16,7 @@ built-in for most clouds Juju is aware of but needs to be configured if you're
 setting up your own cloud.
 
 There are a few ways to do this based on the design of the OpenStack cloud and
-your level of permissions with Juju and/or the OpenStack deployment:
+your level of permissions with Juju and the OpenStack deployment:
 
 * If you are a general user start with [Create image metadata with Juju][general].
 * If you have admin or operator permissions in the OpenStack deployment, start
@@ -324,6 +324,7 @@ controller.
 
 
 <!-- LINKS -->
+
 [bootstrap]: ./help-openstack.html#bootstrap-with-juju
 [glance-simplestreams-sync]: https://jujucharms.com/glance-simplestreams-sync/
 [gsscharm]: #using-the-glance-simplestreams-sync-charm-to-configure-image-streams.

@@ -147,7 +147,7 @@ navigation:
         children:
           - title: Configure metrics gathering with Prometheus
             location: howto-prometheus.md
-          - title: Set up a Private Cloud
+          - title: Cloud image metadata
             location: howto-privatecloud.md
           - title: Update the series of a controller or machine
             location: howto-updateseries.md
