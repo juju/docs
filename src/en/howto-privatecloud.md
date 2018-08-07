@@ -1,26 +1,22 @@
-Title: Setting up image metadata for private clouds with Simplestreams
+Title: Cloud image metadata
+TODO:  Critical: review required
+       Consider renaming this file (e.g. clouds-openstack-images)
 
-#  Set up image metadata for a Private OpenStack Cloud using Simplestreams
-
+# Cloud image metadata
 
 ## Overview
 
-When Juju bootstraps a cloud, it needs two critical pieces of information:
+When Juju creates a controller it needs two critical pieces of information:
 
-  1. The UUID of the image to use when starting new compute instances.
-  1. The URL from which to download the correct version of an agent binary
-     tarball.
+ 1. The UUID of the image to use when spawning a new machine (instance).
+ 1. The URL from which to download the correct Juju agent.
 
-This necessary information is stored in a json metadata format
-called "Simplestreams". For supported public cloud services
-such as Amazon Web Services, HP Cloud, Azure, etc, no action is
-required by the end user. However, those setting up a private
-cloud, or who want to change how things work (e.g. use a different
-Ubuntu image), can create their own metadata.
+This "metadata" is stored in a JSON format called *Simplestreams*. It is
+built-in for most clouds Juju is aware of but needs to be configured if you're
+setting up your own cloud.
 
-There are a few ways to accomplish this based on the OpenStack
-configuration and your level of permissions with juju and/or the
-OpenStack deployment.
+There are a few ways to do this based on the design of the OpenStack cloud and
+your level of permissions with Juju and/or the OpenStack deployment:
 
 * If you are a general user start with [Create image metadata with Juju][general].
 * If you have admin or operator permissions in the OpenStack deployment, start

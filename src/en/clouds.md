@@ -12,14 +12,27 @@ Juju supports a wide variety of clouds. In addition, many of these are
 Juju-aware out of the box (i.e. there is no need to "add" them to Juju). The
 remaining supported clouds do need to be added explicitly.
 
-The clouds that are known to Juju by default are **Amazon AWS**, **Microsoft
-Azure**, **Google GCE**, **Oracle Compute**, **Rackspace**, **Joyent**, and
-**LXD**. To use with these clouds with Juju all one needs to do is supply one's
+The clouds that are known to Juju by default are:
+
+**Amazon AWS**  
+**Microsoft Azure**  
+**Google GCE**  
+**Oracle Compute**  
+**Rackspace**  
+**Joyent**  
+**LXD**
+
+To use with these clouds with Juju all one needs to do is supply one's
 cloud's credentials. The exception is LXD; it does not require credentials.
 
-Clouds that are supported but are not Juju-aware by default include **VMware
-vSphere**, **OpenStack**, **MAAS**, and **Manual**. An Oracle trial account
-needs to be added to Juju.
+Clouds that are supported but are not Juju-aware by default include:
+
+**VMware vSphere**  
+**OpenStack**  
+**MAAS**  
+**Manual**
+
+An Oracle trial account does need to be added to Juju.
 
 A separate class of clouds can also be made from **LXD**, **MAAS**, and
 **Manual**. These are sometimes called "special clouds" due to their
@@ -154,88 +167,6 @@ of questions based on the type of cloud you are trying to add.
 
 This mode currently supports the following clouds: MAAS, Manual, OpenStack,
 Oracle, and vSphere.
-
-^# Manual
-
-   To add a Manual cloud, you need to supply a name you wish to call it, the IP
-   address (or hostname) for the machine you intend to use as a controller, and
-   what remote user account to connect to over SSH (prepend 'user@' to the
-   address/hostname).
-   
-   In terms of SSH, the user running the Juju client is expected to already be
-   able to connect to the remote host (either by password or public key).
-   
-   A sample session looks like this:
-
-       juju add-cloud
-
-       Cloud Types
-        maas
-        manual
-        openstack
-        oracle
-        vsphere
-      
-      Select cloud type: manual
-      
-      Enter a name for your manual cloud: mymanual
-      
-      Enter the controller's hostname or IP address: noah@10.143.211.93
-      
-      Cloud "mymanual" successfully added
-      You may bootstrap with 'juju bootstrap mymanual'
-
-   A Juju-added credential is not required. The ability for Juju to make an SSH
-   connection is all that's needed.
-   
-   For help in configuring your own Manual cloud to work with Juju, see
-   [Using the Manual cloud with Juju][clouds-manual].
-
-^# OpenStack
-
-   To add an OpenStack cloud, you need to supply a name you wish to call it,
-   the unique API endpoint, the authentication type(s), and region information.
-
-   Here we assume an OpenStack cloud that is equipped with the relevant Ubuntu
-   images. For help in configuring your own OpenStack cloud to work with Juju,
-   see [Using OpenStack with Juju][clouds-openstack].
-   
-   A sample session is shown below:
-   
-       juju add-cloud
-       
-       Cloud Types
-        maas
-        manual
-        openstack
-        oracle
-        vsphere
-       
-       Select cloud type: openstack
-       
-       Enter a name for your openstack cloud: devstack
-       
-       Enter the API endpoint url for the cloud: https://openstack.example.com:35574/v3.0/
-       
-       Auth Types
-        access-key
-        userpass
-       
-       Select one or more auth types separated by commas: access-key,userpass
-       
-       Enter region name: dev1
-       
-       Enter the API endpoint url for the region: https://openstack-dev.example.com:35574/v3.0/
-       
-       Enter another region? (Y/n): n
-       
-       Cloud "devstack" successfully added
-       You may bootstrap with 'juju bootstrap homestack'
-       
-   Separate multiple authentication types with commas (as shown above).
-
-   You must now add a credential for this cloud prior to creating a controller
-   (`juju bootstrap`). See the [Credentials][credentials] page for details.
 
 ^# Oracle
 
