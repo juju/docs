@@ -9,8 +9,9 @@ Juju 2.x series is compatible with both the 1.x and 2.x series of MAAS.
 
 ## Adding a MAAS cloud
 
-Use the interactive `add-cloud` command to add your MAAS to Juju's list of
-clouds:
+Use the interactive `add-cloud` command to add your MAAS cloud to Juju's list
+of clouds. You will need to supply a name you wish to call your cloud and the
+unique MAAS API endpoint.
 
 ```bash
 juju add-cloud
