@@ -4,15 +4,14 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
        INFO: Auth types found at ~/.local/share/juju/public-clouds.yaml
        There is contention whether access-key can be used with keystone v3 (see https://github.com/juju/docs/issues/2868)
        Needs to be updated for the new Oracle cloud (OCI)
+       Update: Juju is growing an authentication type for OpenStack: certificates
+       Update: Juju is growing add-cloud for (remote) LXD
 table_of_contents: True
 
 # Clouds
 
-Juju supports a wide variety of clouds. In addition, many of these are
-Juju-aware out of the box (i.e. there is no need to "add" them to Juju). The
-remaining supported clouds do need to be added explicitly.
-
-The clouds that are known to Juju by default are:
+Juju supports a wide variety of clouds. In addition, many of these are known to
+Juju out of the box. They are:
 
 **Amazon AWS**  
 **Microsoft Azure**  
@@ -22,27 +21,23 @@ The clouds that are known to Juju by default are:
 **Joyent**  
 **LXD**
 
-To use with these clouds with Juju all one needs to do is supply one's
-cloud's credentials. The exception is LXD; it does not require credentials.
+To use the above clouds all one needs to do is supply one's cloud credentials
+to Juju. The exception is LXD; it does not require credentials.
 
-Clouds that are supported but are not Juju-aware by default include:
+The below clouds do need to be added to Juju, and, as will be shown, it is
+simply done:
 
 **VMware vSphere**  
 **OpenStack**  
 **MAAS**  
 **Manual**
 
-An Oracle trial account does need to be added to Juju.
+An Oracle *trial* account also needs to be added.
 
-A separate class of clouds can also be made from **LXD**, **MAAS**, and
-**Manual**. These are sometimes called "special clouds" due to their
-particularities.
+This rest of this page covers general cloud management tasks as well as how to
+add clouds.
 
-This rest of this page contains general information about cloud management. If
-your chosen cloud does not need to be added to Juju then you can go directly to
-the [Cloud credentials][credentials] page.
-
-## Listing and updating cloud information
+## General cloud management
 
 To see which clouds Juju is currently aware of use the `clouds` command:
 
@@ -102,14 +97,14 @@ ap-northeast-2
 sa-east-1
 ```
 
-To specify a different region, see
-[Creating a controller][controllers-creating].
-
 To change the default region for a cloud:
 
 ```bash
 juju set-default-region aws eu-central-1
 ```
+
+You can also specify a region to use when
+[Creating a controller][controllers-creating].
 
 To get more detail about a particular cloud:
 
@@ -131,125 +126,30 @@ cloud):
 juju update-clouds
 ```
 
-## Special clouds
-
-There are three special Juju cloud types. They are deemed special because they
-are based on a unique design or have particular requirements & limitations that
-the other clouds do not have. They are LXD, MAAS, and Manual:
-
- - **LXD**  
- This cloud is based on containers running locally. It is quick to set up and
- is ideal for testing Juju and developing your own charms. For details see the
- [Using LXD with Juju][clouds-lxd] page.
- 
- - **MAAS**  
- This cloud treats physical servers (or KVM guests) as a public cloud treats
- cloud instances. For details see the [Using MAAS with Juju][clouds-maas]
- page.
- 
- - **Manual**  
- This cloud can be built from salvaged machines of varying types (e.g. bare
- metal, cloud instances, KVM guests) that cannot otherwise be leveraged by
- Juju. Its resulting feature set is limited and there are some particular
- requirements to make this work. For details see the
- [Using the Manual cloud with Juju][clouds-manual] page.
-
 ## Adding clouds
 
-When the cloud you want to use is not on Juju's list of known clouds you will
-need to add it. This is done with the `add-cloud` command, which has both
-interactive and manual modes.
+If your chosen cloud type is already known to Juju then proceed to the
+[Cloud credentials][credentials] page.
+
+Adding a cloud is done with the `add-cloud` command, which has both interactive
+and manual modes.
 
 ### Adding clouds interactively
 
-Interactive mode is the recommended method to use. You will be asked a series
-of questions based on the type of cloud you are trying to add.
+Interactive mode is the recommended method for adding a cloud, especially for
+new users. This mode currently supports the following clouds: MAAS, Manual,
+OpenStack, Oracle, and vSphere. See their respective pages for instructions:
 
-This mode currently supports the following clouds: MAAS, Manual, OpenStack,
-Oracle, and vSphere.
-
-^# Oracle
-
-   You should only need to do this if you're using an Oracle trial account as
-   the regular (paid) Oracle cloud is built-in. See
-   [Oracle Compute][clouds-oracle] for both types of accounts.
-
-   You will first need to make one or more Ubuntu images available via the
-   Oracle web dashboard. See the [Ubuntu images][clouds-oracle-images] section.
-
-   To add an Oracle Compute cloud, you need to supply a name you wish to call
-   it and the unique API endpoint.
-   
-   A sample session is shown below:
-
-       juju add-cloud
-
-       Cloud Types
-        maas
-        manual
-        openstack
-        oracle
-        vsphere
-       
-       Select cloud type: oracle
-
-       Enter a name for your oracle cloud: oracle-trial
-       
-       Enter the API endpoint url for the cloud: https://api-z41.compute.em3.oraclecloud.com/
-
-       Cloud "oracle-trial" successfully added
-       You may bootstrap with 'juju bootstrap oracle-trial'
-
-   The 'API endpoint url' in this case is the REST endpoint of the Compute
-   domain.
-
-   You must now add a credential for this cloud prior to creating a controller
-   (`juju bootstrap`). See the [Credentials][credentials] page for details.
-
-^# vSphere
-
-   To add a vSphere cloud, you need to supply a name you wish to call it, the
-   unique API endpoint, and region information.
-   
-   A sample session is shown below:
-
-       juju add-cloud
-
-       Cloud Types
-         maas
-         manual
-         openstack
-         oracle
-         vsphere
-       
-       Select cloud type: vsphere
-
-       Enter a name for your vsphere cloud: vs1
-       
-       Enter the API endpoint url for the cloud: 178.18.42.10
-       
-       Enter region name: dc0
-       
-       Enter another region? (Y/n): y
-       
-       Enter region name: dc1
-       
-       Enter another region? (Y/n): n
-       
-       Cloud "vs1" successfully added
-       You may bootstrap with 'juju bootstrap vs1'
-
-   The 'API endpoint url' in this case is the IP address of the vSphere server.
-   We have also specified multiple regions ("data centres" in vSphere
-   terminology).
-
-   You must now add a credential for this cloud prior to creating a controller
-   (`juju bootstrap`). See the [Credentials][credentials] page for details.
+ - [Adding a MAAS cloud][clouds-maas-adding]
+ - [Adding a Manual cloud][clouds-manual-adding]
+ - [Adding an OpenStack Cloud][clouds-openstack-adding]
+ - [Using Oracle Compute with Juju][clouds-oracle]
+ - [Adding a vSphere cloud][clouds-vsphere-adding]
 
 ### Adding clouds manually
 
-As an alternative to the interactive method, clouds can be added manually. This
-can assist with automation.
+As an alternative to the interactive method, more experienced Juju operators
+can add their clouds manually. This can assist with automation.
 
 The manual method necessitates the use of a [YAML-formatted][yaml]
 configuration file. It has the following format:
@@ -291,78 +191,11 @@ relative path to the file:
 To confirm that the cloud has been successfully added you can re-run the
 `clouds` command.
 
-Below we provide two examples.
+Here are some examples of manually adding a cloud:
 
-#### Manually adding MAAS clouds
-
-This example covers manually adding a MAAS cloud to Juju. It also demonstrates
-how multiple clouds of the same type can be defined and added.
-
-Here is the YAML file:
-
-```yaml
-clouds:
-   devmaas:
-      type: maas
-      auth-types: [oauth1]
-      endpoint: http://devmaas/MAAS
-   testmaas:
-      type: maas
-      auth-types: [oauth1]
-      endpoint: http://172.18.42.10/MAAS
-   prodmaas:
-      type: maas
-      auth-types: [oauth1]
-      endpoint: http://prodmaas/MAAS
-```
-
-This defines three MAAS clouds and refers to them by their respective
-region controllers.
-
-To add clouds 'devmaas' and 'prodmaas', assuming the configuration file is
-`maas-clouds.yaml` in the current directory, we would run:
-
-```bash
-juju add-cloud devmaas maas-clouds.yaml
-juju add-cloud prodmaas maas-clouds.yaml
-```
-
-You must now add a credential for this cloud prior to creating a controller
-(`juju bootstrap`). See the [Credentials][credentials] page for details. The
-[Using MAAS with Juju][clouds-maas-add-credentials] page also includes
-MAAS-specific guidance on this.
-
-#### Manually adding an OpenStack cloud
-
-This examples shows how to manually add an OpenStack cloud to Juju. It also
-demonstrates how multiple authentication types can be allowed
-(comma-separated).
-
-Here we assume an OpenStack cloud that is equipped with the relevant Ubuntu
-images. For help in configuring your own OpenStack cloud to work with Juju, see
-[Using OpenStack with Juju][clouds-openstack].
-
-Here is the YAML file:
-
-```yaml
-clouds:
-    mystack:
-      type: openstack
-      auth-types: [access-key,userpass]
-      regions:
-        dev1:
-          endpoint: https://openstack.example.com:35574/v3.0/
-```
-
-To add cloud 'mystack', assuming the configuration file is `mystack.yaml` in
-the current directory, we would run:
-  
-```bash
-juju add-cloud mystack mystack.yaml
-```
-
-You must now add a credential for this cloud prior to creating a controller
-(`juju bootstrap`). See the [Credentials][credentials] page for details.
+ - [Manually adding MAAS clouds][clouds-maas-manual]
+ - [Manually adding an OpenStack cloud][clouds-openstack-manual]
+ - [Manually adding a vSphere cloud][clouds-vsphere-manual]
 
 
 <!-- LINKS -->
@@ -375,6 +208,12 @@ You must now add a credential for this cloud prior to creating a controller
 [clouds-openstack]: ./help-openstack.md
 [clouds-oracle]: ./help-oracle.md
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[clouds-oracle-images]: ./help-oracle.md#ubuntu-images
 [controllers-creating]: ./controllers-creating.md
 [controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
+[clouds-vsphere-adding]: ./help-vmware.md#adding-a-vsphere-cloud
+[clouds-openstack-adding]: ./help-openstack.md#adding-an-openstack-cloud
+[clouds-maas-adding]: ./clouds-maas.md#adding-a-maas-cloud
+[clouds-manual-adding]: ./clouds-manual.md#adding-a-manual-cloud
+[clouds-maas-manual]: ./clouds-maas.md#manually-adding-maas-clouds
+[clouds-openstack-manual]: ./help-openstack.md#manually-adding-an-openstack-cloud
+[clouds-vsphere-manual]: ./help-vmware.md#manually-adding-a-vsphere-cloud

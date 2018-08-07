@@ -12,17 +12,17 @@ information to add it to the list of known clouds.
 
 OpenStack requires access to images for its instances to use. If you have
 chosen to use a private OpenStack cloud with Juju you will need to ensure that
-images are set up. This is covered in [Cloud image metadata][simplestreams]. 
+images are set up. This is covered in
+[Cloud image metadata][cloud-image-metadata]. 
 
 ## Adding an OpenStack Cloud
 
-Use the interactive `add-cloud` command to add your OpenStack cloud to Juju's list
-of clouds. You will need to supply a name you wish to call your cloud and the
-unique API endpoint, the authentication type(s), and region information.
+Use the interactive `add-cloud` command to add your OpenStack cloud to Juju's
+list of clouds. You will need to supply a name you wish to call your cloud and
+the unique API endpoint, the authentication type(s), and region information.
 
-Here we assume your OpenStack cloud is equipped with the relevant Ubuntu
-images. If this is not the case then see
-[Using OpenStack with Juju][clouds-openstack].
+For the manual method of adding an OpenStack cloud, see below section
+[Manually adding an OpenStack cloud][#clouds-openstack-manual].
 
 ```bash
 juju add-cloud
@@ -75,11 +75,35 @@ Cloud        Regions  Default          Type        Description
 .
 .
 .
-mystack         dev1     dev1          openstack
+mystack            1  dev1             openstack
 ```
 
-For the manual method of adding an OpenStack cloud, see below section
-[Manually adding OpenStack clouds][#clouds-openstack-manual].
+### Manually adding an OpenStack cloud
+
+This section shows how to manually add an OpenStack cloud to Juju (see
+[Adding clouds manually][clouds-adding-manually] for background information).
+It also demonstrates how multiple authentication types can be allowed
+(comma-separated).
+
+The manual method necessitates the use of a [YAML-formatted][yaml]
+configuration file. Here is an example:
+
+```yaml
+clouds:
+    mystack:
+      type: openstack
+      auth-types: [access-key,userpass]
+      regions:
+        dev1:
+          endpoint: https://openstack.example.com:35574/v3.0/
+```
+
+To add cloud 'mystack', assuming the configuration file is `mystack.yaml` in
+the current directory, we would run:
+  
+```bash
+juju add-cloud mystack mystack.yaml
+```
 
 ## Gathering credential information
 
@@ -96,7 +120,7 @@ can be done in one of three ways.
 Armed with the gathered information, you can add credentials with the command:
 
 ```bash
-juju add-credential myopenstack
+juju add-credential mystack
 ```
 
 The command will interactively prompt you for the information needed for the
@@ -192,7 +216,7 @@ See these pages for ideas on what to do next:
 <!-- LINKS -->
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[simplestreams]: ./howto-privatecloud.md
+[cloud-image-metadata]: ./howto-privatecloud.md
 [credentials]: ./credentials.md
 [#clouds-openstack-manual]: #manually-adding-an-openstack-cloud
 [controllers-creating]: ./controllers-creating.md
@@ -201,3 +225,4 @@ See these pages for ideas on what to do next:
 [credentials-adding-from-variables]: ./credentials.md#adding-credentials-from-environment-variables
 [credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file
 [jaas]: https://jujucharms.com/jaas
+[clouds-adding-manually]: ./clouds.md#adding-clouds-manually

@@ -7,11 +7,11 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1779917
 The purpose of the Manual cloud is to cater to the situation where you have
 machines (of any nature) at your disposal and you want to create a backing
 cloud out of them. If this collection of machines is composed solely of bare
-metal you might opt for a MAAS cloud but note that such machines would also
-require [IPMI hardware][maas-power-types] and a MAAS infrastructure. The Manual
-cloud can therefore both make use of a collection of disparate hardware as well
-as of machines of varying natures (bare metal or virtual), all without any
-extra overhead/infrastructure.
+metal you might opt for a [MAAS cloud][clouds-maas] but note that such machines
+would also require [IPMI hardware][maas-power-types] and a MAAS infrastructure.
+The Manual cloud can therefore both make use of a collection of disparate
+hardware as well as of machines of varying natures (bare metal or virtual), all
+without any extra overhead/infrastructure.
 
 ## Limitations
 
@@ -208,9 +208,10 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
-[maas-power-types]: https://docs.maas.io/en/nodes-power-types
 [models]: ./models.md
 [charms]: ./charms.md
 [charms-offline-strategies]: charms-offline-strategies.md
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
 [controllers-creating]: ./controllers-creating.md
+[clouds-maas]: ./clouds-maas.md
+[maas-power-types]: https://docs.maas.io/en/nodes-power-types
