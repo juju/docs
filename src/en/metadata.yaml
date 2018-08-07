@@ -26,30 +26,31 @@ navigation:
         location: clouds.md
 
         children:
-          - title: Cloud credentials
-            location: credentials.md
           - title: Amazon AWS
             location: help-aws.md
           - title: Microsoft Azure
             location: help-azure.md
           - title: Google GCE
             location: help-google.md
-          - title: Joyent
-            location: help-joyent.md
-          - title: LXD
-            location: clouds-LXD.md
-          - title: MAAS
-            location: clouds-maas.md
-          - title: Manual
-            location: clouds-manual.md
-          - title: OpenStack
-            location: help-openstack.md
           - title: Oracle Compute
             location: help-oracle.md
           - title: Rackspace
             location: help-rackspace.md
+          - title: Joyent
+            location: help-joyent.md
+          - title: LXD
+            location: clouds-LXD.md
           - title: VMware vSphere
             location: help-vmware.md
+          - title: OpenStack
+            location: help-openstack.md
+          - title: MAAS
+            location: clouds-maas.md
+          - title: Manual
+            location: clouds-manual.md
+
+      - title: Cloud credentials
+        location: credentials.md
 
       - title: Juju client
         location: client.md
