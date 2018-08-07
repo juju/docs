@@ -175,8 +175,6 @@ credentials:
       user: administrator@xyz.com
 ```
 
-!!! Note:
-    Authentication type `access-key` is not available on 
 Credentials are added to Juju on a per-cloud basis. To add credentials for the
 defined 'azure' cloud, for instance, we would do this:
 
