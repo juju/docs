@@ -3,15 +3,20 @@ table_of_contents: True
 
 # Using MAAS with Juju
 
-Juju works closely with [MAAS][maas-site] to deliver the same experience
-on bare metal that you would get by using any other cloud. Note that the 
-Juju 2.x series is compatible with both the 1.x and 2.x series of MAAS.
+[MAAS][upstream-maas] treats physical servers (or KVM guests) as a public cloud
+treats cloud instances.
+
+!!! Note:
+    The Juju 2.x series is compatible with both the 1.x and 2.x series of MAAS.
 
 ## Adding a MAAS cloud
 
 Use the interactive `add-cloud` command to add your MAAS cloud to Juju's list
 of clouds. You will need to supply a name you wish to call your cloud and the
 unique MAAS API endpoint.
+
+For the manual method of adding a MAAS cloud, see below section
+[Manually adding MAAS clouds][#clouds-maas-manual].
 
 ```bash
 juju add-cloud
@@ -56,8 +61,42 @@ Cloud        Regions  Default          Type        Description
 maas-cloud         0                   maas        Metal As A Service
 ```
 
-For the manual method of adding a MAAS cloud, see below section
-[Manually adding MAAS clouds][clouds-maas-manual].
+### Manually adding MAAS clouds
+
+This example covers manually adding a MAAS cloud to Juju (see
+[Adding clouds manually][clouds-adding-manually] for background information).
+It also demonstrates how multiple clouds of the same type can be defined and
+added.
+
+The manual method necessitates the use of a [YAML-formatted][yaml]
+configuration file. Here is an example:
+
+```yaml
+clouds:
+   devmaas:
+      type: maas
+      auth-types: [oauth1]
+      endpoint: http://devmaas/MAAS
+   testmaas:
+      type: maas
+      auth-types: [oauth1]
+      endpoint: http://172.18.42.10/MAAS
+   prodmaas:
+      type: maas
+      auth-types: [oauth1]
+      endpoint: http://prodmaas/MAAS
+```
+
+This defines three MAAS clouds and refers to them by their respective region
+controllers.
+
+To add clouds 'devmaas' and 'prodmaas', assuming the configuration file is
+`maas-clouds.yaml` in the current directory, we would run:
+
+```bash
+juju add-cloud devmaas maas-clouds.yaml
+juju add-cloud prodmaas maas-clouds.yaml
+```
 
 ## Adding credentials
 
@@ -124,7 +163,8 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
-[maas-site]: https://maas.io
+[yaml]: http://www.yaml.org/spec/1.2/spec.html
+[upstream-maas]: https://maas.io
 [maas-cli]: https://docs.ubuntu.com/maas/en/manage-cli
 [maas-api]: https://docs.ubuntu.com/maas/en/manage-account#api-key
 [maas-manual]: ./clouds-maas-manual.md
@@ -133,3 +173,4 @@ See these pages for ideas on what to do next:
 [charms]: ./charms.md
 [#clouds-maas-manual]: #manually-adding-maas-clouds
 [controllers-creating]: ./controllers-creating.md
+[clouds-adding-manually]: ./clouds.md#adding-clouds-manually
