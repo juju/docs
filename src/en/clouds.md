@@ -11,31 +11,32 @@ table_of_contents: True
 # Clouds
 
 Juju supports a wide variety of clouds. In addition, many of these are known to
-Juju out of the box. They are:
+Juju out of the box. They are Amazon AWS, Microsoft Azure, Google GCE, Oracle
+Compute, Rackspace, Joyent, and LXD.
 
- - Amazon AWS
- - Microsoft Azure
- - Google GCE
- - Oracle Compute
- - Rackspace
- - Joyent
- - LXD
-
-To use the above clouds all one needs to do is supply one's cloud credentials
-to Juju. The exception is LXD; it does not require credentials.
-
-The below clouds do need to be added to Juju, and, as will be shown, it is
-simply done:
-
- - VMware vSphere
- - OpenStack
- - MAAS
- - Manual
-
+The remaining supported clouds do need to be added to Juju, and, as will be
+shown, it is simply done. They are VMware vSphere, OpenStack, MAAS, and Manual.
 An Oracle *trial* account also needs to be added.
 
-This rest of this page covers general cloud management tasks as well as how to
-add clouds.
+Once your cloud is known to Juju, whether by default or due to it being added,
+the next step is to add your cloud credentials to Juju. The exception is LXD;
+it does not require credentials. The [Cloud credentials][credentials] page
+offers a full treatment of credential management.
+
+This rest of this page covers general cloud management tasks and an overview of
+how clouds are added. To get started now with your chosen cloud select it here:
+
+ - [Amazon AWS][clouds-aws]
+ - [Microsoft Azure][clouds-azure]
+ - [Google GCE][clouds-google]
+ - [Oracle Compute][clouds-oracle]
+ - [Rackspace][clouds-rackspace]
+ - [Joyent][clouds-joyent]
+ - [LXD][clouds-lxd]
+ - [VMware vSphere][clouds-vmware]
+ - [OpenStack][clouds-openstack]
+ - [MAAS][clouds-maas]
+ - [Manual][clouds-manual]
 
 ## General cloud management
 
@@ -128,9 +129,6 @@ juju update-clouds
 
 ## Adding clouds
 
-If your chosen cloud type is already known to Juju then proceed to the
-[Cloud credentials][credentials] page.
-
 Adding a cloud is done with the `add-cloud` command, which has both interactive
 and manual modes.
 
@@ -138,13 +136,7 @@ and manual modes.
 
 Interactive mode is the recommended method for adding a cloud, especially for
 new users. This mode currently supports the following clouds: MAAS, Manual,
-OpenStack, Oracle, and vSphere. See their respective pages for instructions:
-
- - [Adding a MAAS cloud][clouds-maas-adding]
- - [Adding a Manual cloud][clouds-manual-adding]
- - [Adding an OpenStack Cloud][clouds-openstack-adding]
- - [Using Oracle Compute with Juju][clouds-oracle]
- - [Adding a vSphere cloud][clouds-vsphere-adding]
+OpenStack, Oracle, and vSphere.
 
 ### Adding clouds manually
 
@@ -188,9 +180,6 @@ relative path to the file:
  
 `juju add-cloud <cloud-name> <cloud-file>`
 
-To confirm that the cloud has been successfully added you can re-run the
-`clouds` command.
-
 Here are some examples of manually adding a cloud:
 
  - [Manually adding MAAS clouds][clouds-maas-manual]
@@ -200,20 +189,24 @@ Here are some examples of manually adding a cloud:
 
 <!-- LINKS -->
 
-[credentials]: ./credentials.md
+[clouds-aws]: ./help-aws.md
+[clouds-azure]: ./help-azure.md
+[clouds-google]: ./help-google.md
+[clouds-oracle]: ./help-oracle.md
+[clouds-rackspace]: ./help-rackspace.md
+[clouds-joyent]: ./help-joyent.md
 [clouds-lxd]: ./clouds-LXD.md
+[clouds-vmware]: ./help-vmware.md
+[clouds-openstack]: ./help-openstack.md
 [clouds-maas]: ./clouds-maas.md
 [clouds-manual]: ./clouds-manual.md
+
+[credentials]: ./credentials.md
 [clouds-maas-add-credentials]: ./clouds-maas.md#add-credentials
-[clouds-openstack]: ./help-openstack.md
-[clouds-oracle]: ./help-oracle.md
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [controllers-creating]: ./controllers-creating.md
 [controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
-[clouds-vsphere-adding]: ./help-vmware.md#adding-a-vsphere-cloud
-[clouds-openstack-adding]: ./help-openstack.md#adding-an-openstack-cloud
-[clouds-maas-adding]: ./clouds-maas.md#adding-a-maas-cloud
-[clouds-manual-adding]: ./clouds-manual.md#adding-a-manual-cloud
+
 [clouds-maas-manual]: ./clouds-maas.md#manually-adding-maas-clouds
 [clouds-openstack-manual]: ./help-openstack.md#manually-adding-an-openstack-cloud
 [clouds-vsphere-manual]: ./help-vmware.md#manually-adding-a-vsphere-cloud
