@@ -1,4 +1,4 @@
-Title: Juju credentials
+Title: Cloud credentials
 TODO:  Investigate: shouldn't `model-config` have a default-credential setting?
        Review required
        Add to mycreds.yaml: cloudsigma, rackspace, and oracle. also openstack using access-key
@@ -27,19 +27,6 @@ Juju supports three methods for adding credentials:
    files (only supported by certain providers)
  - Reading a user-provided [YAML-formatted][yaml] file
   
-Each of these methods are explained below, but if you are still having
-difficulty you can get extra help by selecting your cloud from among this list:
-
-[Amazon AWS][clouds-aws] |
-[Microsoft Azure][clouds-azure] |
-[Google GCE][clouds-google] |
-[Joyent][clouds-joyent] |
-[MAAS][clouds-maas] |
-[OpenStack][clouds-openstack] |
-[VMware vSphere][clouds-vmware] |
-[Oracle Compute][clouds-oracle] |
-[Rackspace][clouds-rackspace]
-
 !!! Note:
     LXD deployments are a special case. Accessed from a Juju admin user, they
     do not require credentials. Accessed from a non-admin user, a *certificate
@@ -96,14 +83,13 @@ call the credential set.
     You will need to rescan the variables if their values ever change. A scan
     only picks up *current* values.
 
-These are the providers that use tools that support these variables:
+There are three providers that use tools that support this variables method:
 
 [Amazon AWS][clouds-aws-using-env-variables] |
 [Google GCE][clouds-google-using-env-variables] |
 [OpenStack][clouds-openstack-using-env-variables]
 
-Each page provides details on using this method with its respective provider,
-including the variable names.
+Each page provides details on using this method with its respective provider.
 
 !!! Note:
     The `autoload-credentials` command is also used to generate a certificate
