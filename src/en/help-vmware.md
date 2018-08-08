@@ -210,6 +210,7 @@ See these pages for ideas on what to do next:
 <!-- LINKS -->
 
 [#manually-adding-a-vSphere-cloud]: #manually-adding-a-vsphere-cloud
+[clouds-adding-manually]: ./clouds.md#adding-clouds-manually
 [rscontrolpanel]: https://mycloud.rackspace.com
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
