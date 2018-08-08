@@ -20,11 +20,10 @@ An Oracle *trial* account also needs to be added.
 
 Once your cloud is known to Juju, whether by default or due to it being added,
 the next step is to add your cloud credentials to Juju. The exception is LXD;
-it does not require credentials. The [Cloud credentials][credentials] page
-offers a full treatment of credential management.
+it does not require credentials.
 
 This rest of this page covers general cloud management tasks and an overview of
-how clouds are added. To get started now with your chosen cloud select it here:
+how clouds are added. You can still get started by selecting your cloud here:
 
  - [Amazon AWS][clouds-aws]
  - [Microsoft Azure][clouds-azure]
@@ -201,8 +200,6 @@ Here are some examples of manually adding a cloud:
 [clouds-maas]: ./clouds-maas.md
 [clouds-manual]: ./clouds-manual.md
 
-[credentials]: ./credentials.md
-[clouds-maas-add-credentials]: ./clouds-maas.md#add-credentials
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [controllers-creating]: ./controllers-creating.md
 [controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
