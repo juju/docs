@@ -64,6 +64,9 @@ option to download these details as an CSV.
 
 ## Adding credentials
 
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
 In order to access AWS, you will need to add credentials to Juju. This can be
 done in one of three ways.
 
@@ -175,5 +178,6 @@ See these pages for ideas on what to do next:
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials]: ./credentials.md
 [credentials-adding-from-variables]: ./credentials.md#adding-credentials-from-environment-variables
 [credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file

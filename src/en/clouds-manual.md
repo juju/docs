@@ -7,11 +7,11 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1779917
 The purpose of the Manual cloud is to cater to the situation where you have
 machines (of any nature) at your disposal and you want to create a backing
 cloud out of them. If this collection of machines is composed solely of bare
-metal you might opt for a MAAS cloud but note that such machines would also
-require [IPMI hardware][maas-power-types] and a MAAS infrastructure. The Manual
-cloud can therefore both make use of a collection of disparate hardware as well
-as of machines of varying natures (bare metal or virtual), all without any
-extra overhead/infrastructure.
+metal you might opt for a [MAAS cloud][clouds-maas] but note that such machines
+would also require [IPMI hardware][maas-power-types] and a MAAS infrastructure.
+The Manual cloud can therefore both make use of a collection of disparate
+hardware as well as of machines of varying natures (bare metal or virtual), all
+without any extra overhead/infrastructure.
 
 ## Limitations
 
@@ -33,9 +33,9 @@ The following conditions must be met:
  - At least two machines are needed (one for the controller and one to deploy
    charms to).
  - The machines must have Ubuntu (or CentOS) installed.
- - The machines must be contactable over SSH using a user account with root
-   privileges. On Ubuntu, `sudo` rights will suffice if this provides root
-   access.
+ - The machines must be contactable over SSH (either by password or public key)
+   using a user account with root privileges. On Ubuntu, `sudo` rights will
+   suffice if this provides root access.
  - The machines must be able to `ping` each other.
 
 ## Overview
@@ -62,7 +62,10 @@ conjunction with the machine ID.
 ## Adding a Manual cloud
 
 Use the interactive `add-cloud` command to add your Manual cloud to Juju's list
-of clouds:
+of clouds. You will need to supply a name you wish to call your cloud, the IP
+address (or hostname) for the machine you intend to use as a controller, and
+what remote user account to connect to over SSH (prepend 'user@' to the
+address/hostname).
 
 ```bash
 juju add-cloud
@@ -71,21 +74,21 @@ juju add-cloud
 Example user session:
 
 ```no-highlight
-       Cloud Types
-        maas
-        manual
-        openstack
-        oracle
-        vsphere
-      
-      Select cloud type: manual
-      
-      Enter a name for your manual cloud: mymanual
-      
-      Enter the controller's hostname or IP address: noah@10.143.211.93
-      
-      Cloud "mymanual" successfully added
-      You may bootstrap with 'juju bootstrap mymanual'
+Cloud Types
+  maas
+  manual
+  openstack
+  oracle
+  vsphere
+
+Select cloud type: manual
+
+Enter a name for your manual cloud: mymanual
+
+Enter the controller's hostname or IP address: noah@10.143.211.93
+
+Cloud "mymanual" successfully added
+You may bootstrap with 'juju bootstrap mymanual'
 ```
 
 We've called the new cloud 'mymanual', used an IP address of 10.143.211.93 for
@@ -205,9 +208,10 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
-[maas-power-types]: https://docs.maas.io/en/nodes-power-types
 [models]: ./models.md
 [charms]: ./charms.md
 [charms-offline-strategies]: charms-offline-strategies.md
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
 [controllers-creating]: ./controllers-creating.md
+[clouds-maas]: ./clouds-maas.md
+[maas-power-types]: https://docs.maas.io/en/nodes-power-types

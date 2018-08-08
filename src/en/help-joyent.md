@@ -27,6 +27,9 @@ juju update-clouds
 
 ## Adding credentials
 
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
 In order to authenticate itself to the Joyent cloud, Juju will need the 
 following information:
 
@@ -92,3 +95,4 @@ See these pages for ideas on what to do next:
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials]: ./credentials.md
