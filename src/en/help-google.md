@@ -1,19 +1,13 @@
 Title: Using Google GCE with Juju
-TODO:  credentials page scheduled to cover the special env variables. Link when done
 
 # Using Google GCE with Juju
 
-Juju already has knowledge of the GCE cloud, so unlike previous versions there
-is no need to provide a specific configuration for it, it 'just works'. GCE
-will appear in the list of known clouds when you issue the command:
-  
-```bash
-juju clouds
-```
+Juju already has knowledge of the GCE cloud, which means adding your GCE
+account to Juju is quick and easy.
 
-And you can see more specific information (e.g. the supported regions) by 
-running:
-  
+You can see more specific information on Juju's GCE support (e.g. the
+supported regions) by running:
+
 ```bash
 juju show-cloud google
 ```
@@ -78,8 +72,8 @@ billing method (if not already done).
 
 ## Gathering credential information
 
-Juju will need credential information to authenticate itself to the GCE cloud. 
-This is provided in the form of a file which can be  generated and downloaded 
+Juju will need credential information to authenticate itself to the GCE cloud.
+This is provided in the form of a file which can be generated and downloaded
 from GCE.
 
 In the GCE web interface, navigate back to the 'API Manager' screen you used 
@@ -114,6 +108,9 @@ explains where this data can be stored if you wish to use the
 `autoload-credentials` command to add credentials to Juju.
 
 ## Adding credentials
+
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
 
 In order to access Google GCE, you will need to add credentials to Juju. This
 can be done in one of three ways.
@@ -210,4 +207,6 @@ See these pages for ideas on what to do next:
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials]: ./credentials.md
+[credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file
 [credentials-adding-from-variables]: ./credentials.md#adding-credentials-from-environment-variables
