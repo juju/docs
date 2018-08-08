@@ -108,6 +108,9 @@ juju add-cloud myvscloud vsphere-cloud.yaml
 
 ## Adding credentials
 
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
 Credentials can be added by typing `juju add-credential`, followed by the name
 of the cloud you wish to add credentials for. This would be `myvscloud` in the
 above example:
@@ -215,3 +218,4 @@ See these pages for ideas on what to do next:
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials]: ./credentials.md

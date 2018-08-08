@@ -146,6 +146,9 @@ is tied to your trial account.
 
 ## Adding credentials
 
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
 Use the interactive `add-credential` command to add your credentials to your
 cloud. Below, we add credentials to the trial account cloud:
 
@@ -267,10 +270,10 @@ See these pages for ideas on what to do next:
 <!-- LINKS -->
 
 [oracle-compute]: https://cloud.oracle.com/en_US/compute
-[jujubeta]: ./reference-install.html#getting-development-releases
 [cloudoracle]: https://cloud.oracle.com/home
-[getstarted]: ./getting-started-jaas.html
-[spaces]: ./network-spaces.html
+[getstarted]: ./getting-started-jaas.md
+[spaces]: ./network-spaces.md
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials]: ./credentials.md
