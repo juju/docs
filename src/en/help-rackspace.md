@@ -26,6 +26,9 @@ juju update-clouds
 
 ## Adding credentials
 
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
 Using Juju's interactive authentication, importing Rackspace credentials into
 Juju is a simple process. The only information you'll need is your Rackspace
 username, password and tenant name (which is actually a number):
@@ -95,3 +98,4 @@ See these pages for ideas on what to do next:
 [rscontrolpanel]: https://mycloud.rackspace.com
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials]: ./credentials.md
