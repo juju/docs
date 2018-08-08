@@ -100,6 +100,9 @@ juju add-cloud prodmaas maas-clouds.yaml
 
 ## Adding credentials
 
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
 Use the interactive `add-credential` command to add your credentials to the new
 cloud:
 
@@ -174,3 +177,4 @@ See these pages for ideas on what to do next:
 [#clouds-maas-manual]: #manually-adding-maas-clouds
 [controllers-creating]: ./controllers-creating.md
 [clouds-adding-manually]: ./clouds.md#adding-clouds-manually
+[credentials]: ./credentials.md

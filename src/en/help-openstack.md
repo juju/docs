@@ -112,6 +112,9 @@ account.
 
 ## Adding credentials
 
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
 In order to access OpenStack, you will need to add credentials to Juju. This
 can be done in one of three ways.
 

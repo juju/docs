@@ -102,8 +102,8 @@ Each page provides details on using this method with its respective provider.
 You can use a YAML-formatted file to store credentials for any cloud. Below we
 provide a sample file, which we will call `mycreds.yaml`. It includes many of
 the clouds supported by Juju and uses the most common options. Note the MAAS
-cloud and the two OpenStack clouds, called 'homemaas', 'homestack-kv2' and
-'homestack-kv23' respectively.
+cloud and the two OpenStack clouds, called 'homemaas', 'myopenstack' and
+'homestack' respectively.
 
 ```yaml
 credentials:
@@ -122,7 +122,7 @@ credentials:
     peter:
       auth-type: oauth1
       maas-oauth: 5weWAsjhe9lnaLKHERNSlke320ah9naldIHnrelks
-  homestack-kv2:
+  myopenstack:
     default-region: region-a
     john:
       auth-type: access-key
@@ -130,7 +130,7 @@ credentials:
       secret-key: 7172bc91a21c3df1787423ac12093bcc
       tenant-name: admin
       username: admin   
-  homestack-kv23:
+  homestack:
     default-region: region-b
     peter:
       auth-type: userpass
