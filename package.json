@@ -4,7 +4,7 @@
     "watch": "watch -p './**/*.md' -c 'yarn run build'",
     "build": "documentation-builder --template-path src/base.tpl --source-folder src --media-path src/en/media --output-media-path build/en/media --tag-manager-code 'GTM-K92JCQ' --search-domain 'docs.jujucharms.com' --search-url 'https://docs.ubuntu.com/search' --search-placeholder 'Search Juju docs' --no-link-extensions --build-version-branches --site-root https://jujucharms.com/",
     "test": "",
-    "serve": "cd dist && FLASK_DEBUG=true FLASK_APP=app.py flask run -h 0.0.0.0 -p $PORT"
+    "serve": "./entrypoint 0.0.0.0:$PORT"
   },
   "dependencies": {
     "watch-cli": "^0.2.2",
