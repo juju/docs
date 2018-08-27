@@ -102,7 +102,7 @@ sudo apt install zfsutils-linux
 sudo mkdir /var/lib/zfs
 sudo truncate -s 32G /var/lib/zfs/lxd.img
 sudo zpool create lxd /var/lib/zfs/lxd.img
-sudo lxd init --auto --storage-backend zfs --storage-pool lxd
+lxd init --auto --storage-backend zfs --storage-pool lxd
 ```
 
 Above we allocated 32GB of space to a sparse file.
@@ -112,6 +112,22 @@ Notes:
  - If possible, put `/var/lib/zfs` on a fast storage device (e.g. SSD).
  - The installed ZFS utilities can be used to query the pool (e.g.
    `sudo zpool list -v lxd`).
+
+If you've installed LXD via the snap package then you don't need to install the
+ZFS tools and configure it manually (as shown above). All that's required is:
+
+```bash
+lxd init --auto --storage-backend zfs
+```
+
+## Disabling IPv6
+
+Currently Juju does not support IPv6. You will therefore need to disable it at
+the LXD level. Assuming an LXD bridge of `lxdbr0`:
+
+```bash
+lxc network set lxdbr0 ipv6.address none
+```
 
 ## Creating a controller
 
