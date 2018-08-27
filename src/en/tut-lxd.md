@@ -2,6 +2,7 @@ Title: Getting started with Juju and LXD
 TODO:  Warning: Ubuntu release versions hardcoded
        Remove 10 uneeded image files in master (juju-lxd-config*.png)
        Remove 1 uneeded image file in master (tut-lxd-wiki-simple-status.png)
+       Review required (e.g. 'lxd init' session)
 
 # Getting started with Juju and LXD
 
