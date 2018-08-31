@@ -15,6 +15,7 @@
     <meta charset="UTF-8" />
     <title>Juju documentation | {{ site_title if site_title else 'Documentation' }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if base_canonical %}<link rel="canonical" href="https://docs.jujucharms.com/{{ base_canonical }}" />{% endif %}
     <link rel="icon" href="https://assets.ubuntu.com/v1/751b08fb-favicon.ico" type="image/x-icon" />
     <style>
       /* Vanilla 1.7.1 + docs styling*/
