@@ -19,15 +19,12 @@ A tutorial is available on this same topic:
 
 Both LXD and Juju will be needed on the host system.
 
-LXD is installed by default (by Ubuntu package) on all supported Ubuntu
-releases with the exception of Ubuntu 14.04 LTS. However, the snap install
-method will soon become the preferred way to install LXD. See
-[Using the LXD snap][lxd-snap] for how to do this.
-
-Install Juju now, using [Installing Juju][install].
+Install Juju now (see the [Installing Juju][install] page).
 
 Then follow the instructions below for installing LXD based on your chosen
-Ubuntu release.
+Ubuntu release. Note that the snap install method will soon become the
+preferred way to install LXD. See [Using the LXD snap][lxd-snap] for how to do
+this.
 
 ### Ubuntu 14.04 LTS
 
