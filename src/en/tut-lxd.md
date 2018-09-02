@@ -151,7 +151,7 @@ This will return a list of the controllers known to Juju. You can see our
 
 ```no-highlight
 Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
-lxd-test*   default  admin  superuser  localhost/localhost       2         1  none  2.4.3
+lxd-test*   default  admin  superuser  localhost/localhost       2         1  none  2.3.4
 ```
 
 A newly-created controller has two models: The 'controller' model, which should
