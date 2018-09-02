@@ -1,8 +1,7 @@
 Title: Getting started with Juju and LXD
 TODO:  Warning: Ubuntu release versions hardcoded
-       Remove 10 uneeded image files in master (juju-lxd-config*.png)
-       Remove 1 uneeded image file in master (tut-lxd-wiki-simple-status.png)
-       Review required (e.g. 'lxd init' session)
+       tutorials at the bottom may get renamed
+       sudo is not required for lxd > 3.0.1 (edit when appropriate)
 
 # Getting started with Juju and LXD
 
@@ -72,8 +71,8 @@ Begin by entering:
 sudo lxd init
 ```
 
-The answers below are what were used to write this guide. Note that pressing
-Enter (a null answer below) will accept the default answer (provided in square
+The session below is what was used to write this guide. Note that pressing
+Enter (a null answer) will accept the default answer (provided in square
 brackets).
 
 ```no-highlight
@@ -83,7 +82,7 @@ Name of the new storage pool [default=default]: lxd
 Name of the storage backend to use (btrfs, dir, lvm, zfs) [default=zfs]: 
 Create a new ZFS pool? (yes/no) [default=yes]: 
 Would you like to use an existing block device? (yes/no) [default=no]: 
-Size in GB of the new loop device (1GB minimum) [default=15GB]: 20
+Size in GB of the new loop device (1GB minimum) [default=15GB]:
 Would you like to connect to a MAAS server? (yes/no) [default=no]: 
 Would you like to create a new local network bridge? (yes/no) [default=yes]: 
 What should the new bridge be called? [default=lxdbr0]: 
@@ -105,10 +104,10 @@ lxc network get lxdbr0 ipv4.address
 Our example gives:
 
 ```no-highlight
-10.198.83.1/24
+10.216.208.1/24
 ```
 
-So the subnet address is **10.198.83.0/24**.
+So the subnet address is **10.216.208.0/24**.
 
 IPv6 was disabled because Juju does not support it at this time.
 
@@ -204,38 +203,35 @@ mysql           unknown      1  mysql      jujucharms   55  ubuntu
 wiki            unknown      1  mediawiki  jujucharms    5  ubuntu  
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
-mysql/0*  unknown   idle   0        10.198.83.243   3306/tcp  
-wiki/0*   unknown   idle   1        10.198.83.161   80/tcp    
+mysql/0*  unknown   idle   0        10.216.208.85   3306/tcp  
+wiki/0*   unknown   idle   1        10.216.208.9    80/tcp    
 
 Machine  State    DNS            Inst id        Series  AZ  Message
-0        started  10.198.83.243  juju-2bfd31-0  trusty      Running
-1        started  10.198.83.161  juju-2bfd31-1  trusty      Running
+0        started  10.216.208.85  juju-2bfd31-0  trusty      Running
+1        started  10.216.208.9   juju-2bfd31-1  trusty      Running
 ```
 
-There is a lot of information there! The important parts for now are the
-'App' section, which shows that MediaWiki and MySQL are installed, and the
-'Unit' section, which shows the IP addresses allocated to each. These addresses
+There is a lot of information there! The important parts for now are the 'App'
+section, which shows that MediaWiki and MySQL are installed, and the 'Unit'
+section, which shows the IP addresses allocated to each. These addresses
 correspond to the subnet that was created for LXD earlier on.
 
 From the above output, we can see that the IP address for the MediaWiki site is
-10.198.83.161. Point your browser to that address to see the site.
+10.216.208.9. Point your browser to that address to access the site:
 
-![wiki in browser](./media/tut-lxd-wiki-simple-browser-2.png)
+![wiki in browser](./media/tut-lxd-wiki-simple-browser-3.png)
 
-Congratulations, you have just deployed software with Juju!
+Congratulations, you have just deployed a database-driven MediaWiki site with
+Juju!
 
 !!! Positive "Pro tip":
-    The easiest way to remove all the applications in a model and start afresh
-    is to destroy the model (`juju destroy-model`) and then create a new one
-    (`juju add-model`).
+    Removing the model (`juju destroy-model`) is a quick way to remove all the
+    applications and machines in that model. Then begin again by creating a new
+    one (`juju add-model`).
 
 ## Next steps
 
-Now that you have set up Juju to work with a LXD cloud, you can develop, test,
-and experiment with applications with speed, ease, and without incurring public
-cloud costs.
-
-We suggest you continue your journey by discovering:
+To continue your journey with Juju we suggest the following topics:
 
  - [Add controllers for additional clouds][tut-cloud]
  - [Share your model with other users][share]
