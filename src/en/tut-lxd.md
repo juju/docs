@@ -195,8 +195,8 @@ juju status
 Once finished, the output will look something like this:
 
 ```no-highlight
-Model    Controller  Cloud/Region         Version  SLA          Timestamp
-default  lxd-test    localhost/localhost  2.4.3    unsupported  00:21:29Z
+Model    Controller  Cloud/Region         Version  SLA
+default  lxd-test    localhost/localhost  2.3.4    unsupported
 
 App    Version  Status   Scale  Charm      Store       Rev  OS      Notes
 mysql           unknown      1  mysql      jujucharms   55  ubuntu  
@@ -209,6 +209,10 @@ wiki/0*   unknown   idle   1        10.216.208.9    80/tcp
 Machine  State    DNS            Inst id        Series  AZ  Message
 0        started  10.216.208.85  juju-2bfd31-0  trusty      Running
 1        started  10.216.208.9   juju-2bfd31-1  trusty      Running
+
+Relation provider  Requirer       Interface  Type     Message
+mysql:cluster      mysql:cluster  mysql-ha   peer     
+Mysql:db           wiki:db        mysql      regular
 ```
 
 There is a lot of information there! The important parts for now are the 'App'
