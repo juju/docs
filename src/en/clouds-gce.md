@@ -20,6 +20,10 @@ running:
 juju update-clouds
 ```
 
+The instructions on this page make use of the Identity and Access Management
+(IAM) framework to control access to your GCP account. Read Google's
+[Cloud IAM][gce-iam] page for an overview.
+
 ## Preparing your GCE account
 
 Although Juju knows how GCE works, there are a few tasks you must perform in
@@ -112,8 +116,10 @@ projectNumber: '525743174537'
 
 The above outputs are what will be used in the remainder of this guide.
 
-See the [gcloud documentation][gcloud-docs] for in-depth coverage of Google's
-Cloud SDK tools.
+See these Google documents for further help:
+
+ - [Google Cloud SDK Documentation][google-cloud-sdk-docs]
+ - [gcloud command reference][gcloud-commands]
 
 ### Assigning permissions
 
@@ -141,18 +147,10 @@ gcloud projects get-iam-policy juju-gce-1225
 
 ### Managing service accounts
 
-Current service accounts are viewed in this way:
+Current service accounts are listed in this way:
 
 ```bash
 gcloud iam service-accounts list
-```
-
-Sample output:
-
-```no-highlight
-NAME                                    EMAIL
-App Engine default service account      blah-gce-1225@appspot.gserviceaccount.com
-Compute Engine default service account  525743174537-compute@developer.gserviceaccount.com
 ```
 
 You can create a new service account if you are having trouble identifying an
@@ -164,7 +162,7 @@ gcloud iam service-accounts create juju-gce \
 	--display-name "Compute Engine Juju service account"
 ```
 
-The list of service accounts now becomes:
+For our current example, the list of service accounts is now:
 
 ```no-highlight
 NAME                                    EMAIL
@@ -172,6 +170,20 @@ App Engine default service account      blah-gce-1225@appspot.gserviceaccount.co
 Compute Engine default service account  525743174537-compute@developer.gserviceaccount.com
 Compute Engine Juju service account     juju-gce@juju-gce-1225.iam.gserviceaccount.com
 ```
+
+We must now give our chosen GCE service account enough permissions to do what
+Juju asks of it. The roles of 'Compute Instance Admin (v1)' and 
+'Compute Security Admin' are sufficient. Proceed in this way:
+
+```bash
+gcloud projects add-iam-policy-binding juju-gce-1225 \
+	--member serviceAccount:juju-gce@juju-gce-1225.iam.gserviceaccount.com \
+	--role roles/compute.instanceAdmin.v1 \
+	--role roles/compute.securityAdmin
+```
+
+IAM roles can be configured in multiple ways. See upstream document
+[Compute Engine IAM Roles][gce-iam-roles] for full information.
 
 ### Gathering credential information
 
@@ -220,7 +232,7 @@ information for any cloud. This information is then added to Juju by pointing
 the `add-credential` command to the file:
 
 ```bash
-juju add-credential myopenstack -f mycreds.yaml
+juju add-credential google -f mycreds.yaml
 ```
 
 See section [Adding credentials from a file][credentials-adding-from-file] for
@@ -239,6 +251,12 @@ which, in turn, contains credential information:
 
 `GOOGLE_APPLICATION_CREDENTIALS`  
 
+Finally, on Linux systems, the file
+`$HOME/.config/gcloud/application_default_credentials.json` may be used to
+contain credential data and is parsed by the above command as part of the
+scanning process. On Windows systems, the file is
+`%APPDATA%\gcloud\application_default_credentials.json`.
+
 Add this credential information to Juju in this way:
   
 ```bash
@@ -247,12 +265,6 @@ juju autoload-credentials
 
 For any found credentials you will be asked which ones to use and what name to
 store them under.
-
-On Linux systems, the file
-`$HOME/.config/gcloud/application_default_credentials.json` may be used to
-contain credential data and is parsed by the above command as part of the
-scanning process. On Windows systems, the file is
-`%APPDATA%\gcloud\application_default_credentials.json`.
 
 For background information on this method read section
 [Adding credentials from environment variables][credentials-adding-from-variables].
@@ -293,4 +305,7 @@ See these pages for ideas on what to do next:
 [credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file
 [credentials-adding-from-variables]: ./credentials.md#adding-credentials-from-environment-variables
 [#using-environment-variables]: #using-environment-variables
-[gcloud-docs]: 
+[google-cloud-sdk-docs]: https://cloud.google.com/sdk/docs/
+[gcloud-commands]: https://cloud.google.com/sdk/gcloud/reference/
+[gce-iam]: https://cloud.google.com/iam/docs/overview
+[gce-iam-roles]: https://cloud.google.com/compute/docs/access/iam
