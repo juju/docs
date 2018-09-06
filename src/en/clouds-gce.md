@@ -20,10 +20,6 @@ running:
 juju update-clouds
 ```
 
-The instructions on this page make use of the Identity and Access Management
-(IAM) framework to control access to your GCP account. Read Google's
-[Cloud IAM][gce-iam] page for an overview.
-
 ## Preparing your GCE account
 
 Although Juju knows how GCE works, there are a few tasks you must perform in
@@ -31,13 +27,18 @@ order to integrate your account with Juju. We give an overview of the steps
 here:
 
  - Using the CLI tools
- - Assigning permissions
+ - Assigning user permissions
  - Managing service accounts
  - Gathering credential information
+ - Enabling the Compute Engine API
 
 !!! Note:
     The Google [Cloud Platform Console][google-cpc] (web UI) can also be used
     to complete the above steps.
+
+The instructions on this page make use of the Identity and Access Management
+(IAM) framework to control access to your GCP account. Read Google's
+[Cloud IAM][gce-iam] page for an overview.
 
 ### Using the CLI tools
 
@@ -75,7 +76,7 @@ exiting. If it does, re-invoke `gcloud init` and choose option [1] to
 re-initialise.
 
 When you're done, try out the following commands (we created a project called
-'juju-gce-123'):
+'juju-gce-123' during the init phase):
 
 ```bash
 gcloud components list
@@ -87,7 +88,7 @@ gcloud projects describe juju-gce-123
 See the [gcloud command reference][gcloud-commands] for more help with this
 tool.
 
-### Assigning permissions
+### Assigning user permissions
 
 Using the IAM framework, we'll be associating credentials with our project at
 the *Compute Engine service account* level and not at the level of your
@@ -95,7 +96,7 @@ personal user.
 
 To download such credentials, however, your personal user (now known to the CLI
 tool) must have the authorisation to do so. This is done by assigning the
-*role* of 'Service Account Key Admin' to your user (insert your project ID and
+role of 'Service Account Key Admin' to your user (insert your project ID and
 user's email address):
 
 ```bash
@@ -170,6 +171,44 @@ Store this file on the Juju client (e.g. `~/.local/share/juju/juju-gce-sa.json`)
 The section [Using environment variables][#using-environment-variables] below
 explains where this data can be stored if you wish to use the
 `autoload-credentials` command to add credentials to Juju.
+
+### Enabling the Compute Engine API
+
+The Compute Engine API needs to be enabled for your project but this requires 
+your billing account to be first linked to your project.
+
+Your billing (credit card) should have been set up when you registered with
+GCE. To see your billing account number:
+
+```bash
+gcloud alpha billing accounts list
+```
+
+Sample output:
+
+```no-highlight
+ACCOUNT_ID            NAME                OPEN  MASTER_ACCOUNT_ID
+01ACD0-B3D759-187641  My Billing Account  True
+```
+
+Use the account number/ID to link your project:
+
+```bash
+gcloud alpha billing projects link juju-gce-123 --billing-account 01ACD0-B3D759-187641
+```
+
+You can now enable the Compute Engine API for your project (this can take a few
+minutes to complete):
+
+```bash
+gcloud services enable compute.googleapis.com --project juju-gce-123
+```
+
+Verify by listing all currently enabled services/APIs:
+
+```bash
+gcloud services list --project juju-gce-123
+```
 
 ## Adding credentials
 
