@@ -43,11 +43,9 @@ The instructions on this page make use of the Identity and Access Management
 ### Using the CLI tools
 
 We show how to use the [Cloud SDK tools][google-cloud-sdk-docs] from Google to
-manage your GCP (Google Cloud Platform) account. In particular, they will allow
-you to collect your GCE credentials, which can then be added to Juju.
-
-The tools installation instructions presented here are for Ubuntu/Debian. See
-the link above for how to install on other platforms.
+manage your GCP (Google Cloud Platform) account. The tools installation
+instructions presented here are for Ubuntu/Debian. See the link above for how
+to install on other platforms.
 
 Install the tools in this way:
 
@@ -66,9 +64,9 @@ gcloud init
 ```
 
 Among other things, you will be asked to enter a verification code in order to
-log in to GCP. This code is gained by following a supplied hyperlink, which, in
-turn, will involve you pressing a button on the resulting page allowing Google
-Cloud SDK to access your user's Google account.
+log in to GCP. This code is acquired by following a supplied hyperlink, which,
+in turn, will have you agree on the resulting page to allow Google Cloud SDK to
+access your Google account.
 
 You will be given the choice of selecting an existing GCE project or of
 creating a new one. If creating, pick a unique name to prevent the command from
@@ -76,13 +74,13 @@ exiting. If it does, re-invoke `gcloud init` and choose option [1] to
 re-initialise.
 
 When you're done, try out the following commands (we created a project called
-'juju-gce-123' during the init phase):
+'juju-gce-1' during the init phase):
 
 ```bash
 gcloud components list
 gcloud config list
 gcloud projects list
-gcloud projects describe juju-gce-123
+gcloud projects describe juju-gce-1
 ```
 
 See the [gcloud command reference][gcloud-commands] for more help with this
@@ -92,15 +90,15 @@ tool.
 
 Using the IAM framework, we'll be associating credentials with our project at
 the *Compute Engine service account* level and not at the level of your
-personal user.
+Google user.
 
-To download such credentials, however, your personal user (now known to the CLI
-tool) must have the authorisation to do so. This is done by assigning the
-role of 'Service Account Key Admin' to your user (insert your project ID and
+To download such credentials, however, your user (now known to the CLI tool)
+must have the authorisation to do so. This is done by assigning the role of
+'Service Account Key Admin' to your user (insert your project ID and your
 user's email address):
 
 ```bash
-gcloud projects add-iam-policy-binding juju-gce-123 \
+gcloud projects add-iam-policy-binding juju-gce-1 \
 	--member user:javierlarin72@gmail.com \
 	--role roles/iam.serviceAccountKeyAdmin
 ```
@@ -110,7 +108,7 @@ gcloud projects add-iam-policy-binding juju-gce-123 \
 A project's service accounts are listed in this way:
 
 ```bash
-gcloud iam service-accounts list --project juju-gce-123
+gcloud iam service-accounts list --project juju-gce-1
 ```
 
 You can create a new service account if:
@@ -119,10 +117,10 @@ You can create a new service account if:
  - your project does not yet have any service accounts
  - you want one dedicated to Juju
  
-Here, we will create a new one called 'juju-gce-sa':
+Here, we will create a new one called 'juju-gce-1-sa':
 
 ```bash
-gcloud iam service-accounts create juju-gce-sa \
+gcloud iam service-accounts create juju-gce-1-sa \
 	--display-name "Compute Engine Juju service account"
 ```
 
@@ -130,7 +128,7 @@ For our example project, the list of service accounts is now:
 
 ```no-highlight
 NAME                                    EMAIL
-Compute Engine Juju service account     juju-gce-sa@juju-gce-123.iam.gserviceaccount.com
+Compute Engine Juju service account     juju-gce-1-sa@juju-gce-1.iam.gserviceaccount.com
 ```
 
 We must now give our chosen service account enough permissions so it can do
@@ -138,11 +136,11 @@ what Juju asks of it. The roles of 'Compute Instance Admin (v1)' and 'Compute
 Security Admin' are sufficient:
 
 ```bash
-gcloud projects add-iam-policy-binding juju-gce-123 \
-	--member serviceAccount:juju-gce-sa@juju-gce-123.iam.gserviceaccount.com \
+gcloud projects add-iam-policy-binding juju-gce-1 \
+	--member serviceAccount:juju-gce-1-sa@juju-gce-1.iam.gserviceaccount.com \
 	--role roles/compute.instanceAdmin.v1
-gcloud projects add-iam-policy-binding juju-gce-123 \
-	--member serviceAccount:juju-gce-sa@juju-gce-123.iam.gserviceaccount.com \
+gcloud projects add-iam-policy-binding juju-gce-1 \
+	--member serviceAccount:juju-gce-1-sa@juju-gce-1.iam.gserviceaccount.com \
 	--role roles/compute.securityAdmin
 ```
 
@@ -153,20 +151,20 @@ details.
 Verify the roles now assigned to both your user and your service account:
 
 ```bash
-gcloud projects get-iam-policy juju-gce-123
+gcloud projects get-iam-policy juju-gce-1
 ```
 
 ### Gathering credential information
 
 You are now ready to download credentials for your chosen service account.
-Here we've called the download file `juju-gce-sa.json`:
+Here we've called the download file `juju-gce-1-sa.json`:
 
 ```bash
-gcloud iam service-accounts keys create juju-gce-sa.json \
-	--iam-account=juju-gce-sa@juju-gce-123.iam.gserviceaccount.com
+gcloud iam service-accounts keys create juju-gce-1-sa.json \
+	--iam-account=juju-gce-1-sa@juju-gce-1.iam.gserviceaccount.com
 ```
 
-Store this file on the Juju client (e.g. `~/.local/share/juju/juju-gce-sa.json`).
+Store this file on the Juju client (e.g. `~/.local/share/juju/juju-gce-1-sa.json`).
 
 The section [Using environment variables][#using-environment-variables] below
 explains where this data can be stored if you wish to use the
@@ -194,20 +192,20 @@ ACCOUNT_ID            NAME                OPEN  MASTER_ACCOUNT_ID
 Use the account number/ID to link your project:
 
 ```bash
-gcloud alpha billing projects link juju-gce-123 --billing-account 01ACD0-B3D759-187641
+gcloud alpha billing projects link juju-gce-1 --billing-account 01ACD0-B3D759-187641
 ```
 
 You can now enable the Compute Engine API for your project (this can take a few
 minutes to complete):
 
 ```bash
-gcloud services enable compute.googleapis.com --project juju-gce-123
+gcloud services enable compute.googleapis.com --project juju-gce-1
 ```
 
 Verify by listing all currently enabled services/APIs:
 
 ```bash
-gcloud services list --project juju-gce-123
+gcloud services list --project juju-gce-1
 ```
 
 ## Adding credentials
@@ -217,6 +215,12 @@ management.
 
 In order to access Google GCE, you will need to add credentials to Juju. This
 can be done in one of three ways (as shown below).
+
+!!! Important:
+    The project that gets used by Juju is determined by the service account's
+    credentials used to create a controller. It is therefore recommended that
+    the user-defined credential name strongly reflects the project name. This
+    is chiefly relevent in a multi-project (multi-credential) scenario.
 
 Alternately, you can use your credentials with [Juju as a Service][jaas], where
 charms can be deployed using a web GUI.
@@ -233,7 +237,7 @@ The command will prompt you for information that the chosen cloud needs. An
 example session follows:
 
 ```no-highlight
-Enter credential name: juju-gce-sa
+Enter credential name: juju-gce-1-sa
 
 Auth Types
   jsonfile
@@ -241,9 +245,9 @@ Auth Types
 
 Select auth type [jsonfile]: 
 
-Enter file: ~/.local/share/juju/juju-gce-sa.json
+Enter file: ~/.local/share/juju/juju-gce-1-sa.json
 
-Credential "juju-gce-sa" added locally for cloud "google".`
+Credential "juju-gce-1-sa" added locally for cloud "google".`
 ```
 
 ### Using a file
