@@ -223,7 +223,8 @@ can be done in one of three ways (as shown below).
     is chiefly relevant in a multi-project (multi-credential) scenario.
 
 Alternately, you can use your credentials with [Juju as a Service][jaas], where
-charms can be deployed using a web GUI.
+charms can be deployed within a graphical environment that comes equipped with
+a ready-made controller.
 
 ### Using the interactive method
 
