@@ -220,7 +220,7 @@ can be done in one of three ways (as shown below).
     The project that gets used by Juju is determined by the service account's
     credentials used to create a controller. It is therefore recommended that
     the user-defined credential name strongly reflects the project name. This
-    is chiefly relevent in a multi-project (multi-credential) scenario.
+    is chiefly relevant in a multi-project (multi-credential) scenario.
 
 Alternately, you can use your credentials with [Juju as a Service][jaas], where
 charms can be deployed using a web GUI.
