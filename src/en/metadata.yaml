@@ -1,7 +1,11 @@
 navigation:
 
-  - title: About Juju
-    location: about-juju.md
+  - title: Introduction
+    children:
+      - title: Home
+        location: index.md
+      - title: What is Juju?
+        location: about-juju.md
 
   - title: Quick Guides
 
