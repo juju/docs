@@ -141,9 +141,9 @@ credentials:
     peter:
       auth-type: jsonfile
       file: ~/.config/gcloud/application_default_credentials.json
-    juju-gce-sa:
+    juju-gce-1-sa:
       auth-type: oauth2
-      project-id: juju-gce-123
+      project-id: juju-gce-1
       private-key: |
         -----BEGIN PRIVATE KEY-----
         MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCzTFMj0/GvhrcZ
