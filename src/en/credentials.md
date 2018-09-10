@@ -212,16 +212,11 @@ There are several management tasks that can be done related to credentials.
 
 ### Listing credentials
 
-When credentials are added to Juju they become available to use on a controller
-and its models. There are therefore two categories of credentials: those that
-are available and those that are currently in use.
-
-#### Available
-
-You can display what credentials are available by running the command:
+You can display what credentials are **available** to the Juju client by
+running the command:
 
 ```bash
-juju list-credentials
+juju credentials
 ```
 
 Sample output:
@@ -237,77 +232,14 @@ google  wayne
 The asterisk '*' denotes the default credential, which will be used for the
 named cloud unless another is specified.
 
-To reveal actual authentication material (e.g. passwords, keys):
+For YAML output that includes detailed credential information, including
+secrets like access keys and passwords:
 
 ```bash
-juju list-credentials --format yaml --show-secrets
+juju credentials --format yaml --show-secrets
 ```
 
-Sample output:
-
-```no-highlight
-local-credentials:
-  aws:
-    bob:
-      auth-type: access-key
-      access-key: AKIAXZUYGB6UED2GNC5A
-      secret-key: StB2bmL1+tX+VX7neVgy/3JosJAwOcBIO53nyCVp
-```
-
-Notice how the output says 'local-credentials', meaning they are stored on
-the local Juju client.
-
-#### In use
-
-To see what credentials are in use by a model (here the 'default' model):
-
-```bash
-juju show-model default
-```
-
-Partial output:
-
-```no-highlight
-default:
-  name: admin/default
-  ...
-  ...
-  credential:
-    name: bob
-    owner: admin
-    cloud: aws
-```
-
-The `models --format yaml` command also shows this information, albeit for all
-models.
-
-The above commands do not display authentication material. To view the active
-credentials, including the cloud name, credential names, and the names of
-models:
-
-```bash
-juju show-credentials --show-secrets
-```
-
-Sample output:
-
-```no-highlight
-controller-credentials:
-  aws:
-    bob:
-      content:
-        auth-type: access-key
-        access-key: AKIAXZUYGB6UED2GNC5A
-        secret-key: StB2bmL1+tX+VX7neVgy/3JosJAwOcBIO53nyCVp
-      models:
-        controller: admin
-        default: admin
-```
-
-Notice how the output says 'controller-credentials', meaning they are stored on
-the controller.
-
-The `show-credentials` command queries the controller to get its information.
+The YAML output will be similar to our 'mycreds.yaml' sample above.
 
 ### Setting default credentials
 
