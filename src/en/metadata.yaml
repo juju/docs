@@ -31,7 +31,7 @@ navigation:
           - title: Microsoft Azure
             location: help-azure.md
           - title: Google GCE
-            location: help-google.md
+            location: clouds-gce.md
           - title: Oracle Compute
             location: help-oracle.md
           - title: Rackspace
