@@ -1,0 +1,22 @@
+~^/(|en/?)?$ /2.4/en/getting-started;
+~^/devel/en/?$ /devel/en/getting-started;
+
+~^en/(?<path>.+)$ /2.4/en/${path};
+
+# Redirect /stable to correct version
+~^/stable/?$ /2.4/en/getting-started;
+~^/stable/en/?$ /2.4/en/getting-started;
+~^/stable/(?<path>.+)$ /2.4/${path};
+
+# Redirect pages which don't specify \en\ to the \en\ version
+"~^/(?<version>[0-9-\._]+|devel)/(?<path>(?!en/).+)$" /${version}/en/${path};
+
+# Redirect pages without version or en to /en
+"~^/(?!([0-9-\._]+|devel|stable|master|en)/)(?<path>.+)$" /2.4/en/${path};
+
+"~^/(?<version>[0-9-\._]+|devel)(/|/index)?$" /${version}/en/getting-started;
+"~^/(?<version>[0-9-\._]+|devel)/(?<language>[a-zA-Z]{2})(/|/index)?$" /${version}/${language}/getting-started;
+"~^/(?<version>[0-9-\._]+|devel)/en/media/(?<filename>.+)$" /en/media/${filename};
+
+# Redirect help-google to clouds-gce
+"~^/(?<version>[0-9-\._]+|devel)/en/help-google/?$" /${version}/en/clouds-gce;
