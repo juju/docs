@@ -107,50 +107,92 @@ we will call mycreds.yaml:
 
 ```yaml
 credentials:
-      aws:
-        default-credential: peter
-        default-region: us-west-2
-        peter:
-          auth-type: access-key
-          access-key: AKIAIH7SUFMBP455BSQ
-          secret-key: HEg5Y1DuGabiLt72LyCLkKnOw+NZkgszh3qIZbWv
-        paul:
-          auth-type: access-key
-          access-key: KAZHUKJHE33P455BSQB
-          secret-key: WXg6S5Y1DvwuGt72LwzLKnItt+GRwlkn668sXHqq
-      homemaas:
-        peter:
-          auth-type: oauth1
-          maas-oauth: 5weWAsjhe9lnaLKHERNSlke320ah9naldIHnrelks
-      homestack:
-        default-region: region-a
-        peter:
-          auth-type: userpass
-          password: UberPassK3yz
-          tenant-name: appserver
-          username: peter
-      google:
-        peter:
-          auth-type: jsonfile
-          file: ~/.config/gcloud/application_default_credentials.json
-      azure:
-        peter:
-          auth-type: service-principal-secret
-          application-id: niftyapp
-          subscription-id: 31fb132e-e774-49dd-adbb-d6a4e966c583
-          application-password: UberPassK3yz
-      joyent:
-        peter:
-          auth-type: userpass
-          sdc-user: admingal
-          sdc-key-id: 2048 00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff
-          private-key: key (or private-key-path, like `~/.ssh/id_rsa.pub`)
-          algorithm: "rsa-sha256"
-      vsphere:
-        ashley:
-          auth-type: userpass
-          password: passw0rd
-          user: administrator@xyz.com
+  aws:
+    default-credential: peter
+    default-region: us-west-2
+    peter:
+      auth-type: access-key
+      access-key: AKIAIH7SUFMBP455BSQ
+      secret-key: HEg5Y1DuGabiLt72LyCLkKnOw+NZkgszh3qIZbWv
+    paul:
+      auth-type: access-key
+      access-key: KAZHUKJHE33P455BSQB
+      secret-key: WXg6S5Y1DvwuGt72LwzLKnItt+GRwlkn668sXHqq
+  homemaas:
+    peter:
+      auth-type: oauth1
+      maas-oauth: 5weWAsjhe9lnaLKHERNSlke320ah9naldIHnrelks
+  myopenstack:
+    default-region: region-a
+    john:
+      auth-type: access-key
+      access-key: bae7651caeab41ed876cfdb342bae23e
+      secret-key: 7172bc91a21c3df1787423ac12093bcc
+      tenant-name: admin
+      username: admin   
+  homestack:
+    default-region: region-b
+    peter:
+      auth-type: userpass
+      password: UberPassK3yz
+      tenant-name: appserver
+      username: peter
+  google:
+    peter:
+      auth-type: jsonfile
+      file: ~/.config/gcloud/application_default_credentials.json
+    juju-gce-sa:
+      auth-type: oauth2
+      project-id: juju-gce-123
+      private-key: |
+        -----BEGIN PRIVATE KEY-----
+        MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCzTFMj0/GvhrcZ
+        3B2584ZdDdsnVuHb7OYo8eqXVLYzXEkby0TMu2gM81LdGp6AeeB3nu5zwAf71YyP
+        erF4s0falNPIyRjDGYV1wWR+mRTbVjYUd/Vuy+KyP0u8UwkktwkP4OFR270/HFOl
+        Kc0rzflag8zdKzRhi7U1dlgkchbkrio148vdaoZZo67nxFVF2IY52I2qGW8VFdid
+        z+B9pTu2ZQKVeEpTVe5XEs3y2Y4zt2DCNu3rJi95AY4VDgVJ5f1rnWf7BwZPeuvp
+        0mXLKzcvD31wEcdE6oAaGu0x0UzKvEB1mR1pPwP6qMHdiJXzkiM9DYylrMzuGL/h
+        VAYjhFQnAgMBAAECggEADTkKkJ10bEt1FjuJ5BYCyYelRLUMALO4RzpZrXUArHz/
+        CN7oYTWykL68VIE+dNJU+Yo6ot99anC8GWclAdyTs5nYnJNbRItafYd+3JwRhU0W
+        vYYZqMtXs2mNMYOC+YNkibIKxYZJ4joGksTboRvJne4TN7Et/1uirr+GtLPn+W/e
+        umXfkpbOTDDAED8ceKKApAn6kLIW98DwHyK0rUzorOgp4DFDX9CjuWC+RG3CFGsk
+        oVOcDuTevJlb9Rowj1S2qYhGjuQVpVD7bcRg5zaSJKS88YbK63DCHZFpXn9JR0Fg
+        Vou9dnc99FdMo5vtHg7Adxh91gdqEvoaF1lHx8Var0q32QDse+spvv7K6/+7G35k
+        3+1gDgF74/uMr/AVrjpoUjmGAuWweXY/vn1MVN2Uld4KPYafkOF8oTuDK5f1fu0d
+        cMEoKRSXQh1NCD3PZWfQt4ypYPzn9R+VBGwnBcPorytlhM9qdLxKKlaHjBlprS6Y
+        Be1z6FO+MqWhFlwPrKH/2uwd4QKBgQDCGESJur9OdEeroBQyYyJF7DnJ/+wHSiOr
+        qzvb9YW1Ddtg1iiKHHZO5FS59/D62kPaGsysCMKxI9FW53TzSxUiTaEG636C5v8J
+        eRdzxX04BNYNzqXbm1agBEjAa7tK8xJAjk0to4zqadUaYZog0uQs2X7Aexj2c9T/
+        HQVLILHjBwKBgD/yuoLNbST+cGbuZl1s2EnTP796xPkkUm3qcUzofzmn6uivz7Qp
+        FMThZhHZ/Der98tra91a4e8fHaUTL5d4eCMeCL1mWXoNMnm02D/ugpEC8yDefi3T
+        xlM/Ed0IEVogcd49tvTvQfrhfbW/6Que/rkLKCoUlAldfIOYkS4YyyTBAoGACCpH
+        L9gYVi+UGEc6skfzWCew4quOfVwEFiO09/LjNhOoJ/G6cNzzqSv32H7yt0rZUeKQ
+        u6f+sL8F/nbsN5PwBqpnXMgpYU5gakCa2Pb05pdlfd00owFs6nxjpxyhG20QVoDm
+        BEZ+FhpvqZVzi2/zw2M+7s/+49dJnZXV9Cwi758CgYAquNdD4RXU96Y2OjTlOSvM
+        THR/zY6IPeO+kCwmBLiQC3cv59gaeOp1a93Mnapet7a2/WZPL2Al7zwnvZYsHc4z
+        nu1acd6D7H/9bb1YPHMNWITfCSNXerJ2idI689ShYjR2sTcDgiOQCzx+dwL9agaC
+        WKjypRHpiAMFbFqPT6W2uA==
+        -----END PRIVATE KEY-----
+      client-id: "206517233375074786882"
+      client-email: juju-gce-sa@juju-gce-123.iam.gserviceaccount.com
+  azure:
+    peter:
+      auth-type: service-principal-secret
+      application-id: niftyapp
+      subscription-id: 31fb132e-e774-49dd-adbb-d6a4e966c583
+      application-password: UberPassK3yz
+  joyent:
+    peter:
+      auth-type: userpass
+      sdc-user: admingal
+      sdc-key-id: 2048 00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff
+      private-key: key (or private-key-path, like `~/.ssh/id_rsa.pub`)
+      algorithm: "rsa-sha256"
+  vsphere:
+    ashley:
+      auth-type: userpass
+      password: passw0rd
+      user: administrator@xyz.com
 ```
 
 A source file like the above can be added to Juju's list of credentials with 
