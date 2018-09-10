@@ -1,7 +1,11 @@
 navigation:
 
-  - title: About Juju
-    location: about-juju.md
+  - title: Introduction
+    children:
+      - title: Home
+        location: index.md
+      - title: What is Juju?
+        location: about-juju.md
 
   - title: Quick Guides
 
@@ -31,7 +35,7 @@ navigation:
           - title: Microsoft Azure
             location: help-azure.md
           - title: Google GCE
-            location: help-google.md
+            location: clouds-gce.md
           - title: Oracle Compute
             location: help-oracle.md
           - title: Rackspace
