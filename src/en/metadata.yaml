@@ -1,7 +1,11 @@
 navigation:
 
-  - location: "about-juju"
-    title: "About Juju"
+  - title: Introduction
+    children:
+      - title: Home
+        location: index.md
+      - title: What is Juju?
+        location: about-juju.md
 
   - title: "Quick Guides"
 
@@ -32,7 +36,7 @@ navigation:
         title: "Amazon AWS"
       - location: "help-azure"
         title: "Microsoft Azure"
-      - location: "help-google"
+      - location: "clouds-gce"
         title: "Google GCE"
       - location: "help-joyent"
         title: "Joyent"
