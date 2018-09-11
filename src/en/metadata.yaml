@@ -14,7 +14,7 @@ navigation:
         location: getting-started.md
       - title: What's new in 2.4
         location: whats-new.md
-      - title: Local Juju with LXD cloud
+      - title: Using Juju locally (LXD)
         location: tut-lxd.md
       - title: Controllers and Models
         location: tut-google.md
