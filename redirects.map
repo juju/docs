@@ -1,5 +1,5 @@
 ~^/(|en/?)?$ /2.4/en/;
-~^/devel/en/?$ /devel/en/;
+#~^/devel/en/?$ /devel/en/;
 
 ~^en/(?<path>.+)$ /2.4/en/${path};
 
