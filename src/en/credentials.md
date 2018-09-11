@@ -1,6 +1,5 @@
 Title: Credentials
 TODO:  Investigate: shouldn't `model-config` have a default-credential setting?
-       Review required
        Add to mycreds.yaml: cloudsigma, rackspace, and oracle. also openstack using access-key
 table_of_contents: True
 
@@ -366,11 +365,6 @@ juju login -u admin
 juju add-credential --replace joe
 juju update-credential google joe
 ```
-
-!!! Warning:
-    It is not possible to update the credentials if the initial credential name
-    is unknown. This restriction will be removed in an upcoming release of
-    Juju.
 
 ####  Updating remote credentials using a different Juju user
 
