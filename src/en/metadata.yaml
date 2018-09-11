@@ -16,8 +16,6 @@ navigation:
         location: whats-new.md
       - title: Using Juju locally (LXD)
         location: tut-lxd.md
-      - title: Controllers and Models
-        location: tut-google.md
       - title: Sharing and Users
         location: tut-users.md
 
