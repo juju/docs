@@ -9,7 +9,7 @@ between the Juju client and the workload machines.
 The instructions on this page will show you how to get started with Juju by
 using the online hosted Juju controller, the Juju as a Service (JAAS)
 controller. If you'd prefer to test it out locally, see the
-[Getting started with Juju and LXD][tut-lxd] guide.
+[Using Juju locally (LXD)][tut-lxd] guide.
 
 ## JAAS
 
