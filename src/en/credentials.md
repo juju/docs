@@ -1,10 +1,10 @@
-Title: Cloud credentials
+Title: Credentials
 TODO:  Investigate: shouldn't `model-config` have a default-credential setting?
        Review required
        Add to mycreds.yaml: cloudsigma, rackspace, and oracle. also openstack using access-key
 table_of_contents: True
 
-# Cloud credentials
+# Credentials
 
 In order to access your cloud, Juju needs to know how to authenticate itself.
 We use the term *credentials* to describe the material necessary to do this
