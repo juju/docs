@@ -296,11 +296,9 @@ hours of looking up configuration options or wrestling with install scripts!
 To discover more about what Juju can do for you, we suggest taking a look at
 some of the following pages of documentation:
 
- - [Creating your own cloud controller][tut-google]
- - [Creating models locally with LXD][tut-lxd]
- - [Share your model with other users][share]
- - [Learn more about charms and bundles][learn]
- - [Find out how to customise and manage models][customise]
+ - [Using Juju locally (LXD)][tut-lxd]
+ - [Multi-user cloud][tut-users]
+ - [Models][models]
 
 
 <!-- LINKS -->
@@ -320,11 +318,9 @@ some of the following pages of documentation:
 [gcedashboard]: https://console.cloud.google.com
 [gcecredentials]: https://console.developers.google.com/apis/credentials
 [install]: ./reference-install.html
-[tut-lxd]: ./tut-lxd.html
-[tut-google]: ./tut-google.html
-[share]: ./tut-users.html
-[learn]: ./charms.html
-[customise]: ./models.html
+[tut-lxd]: ./tut-lxd.md
+[tut-users]: ./tut-users.md
+[models]: ./models.md
 [snapcraft]: https://snapcraft.io
 [aws-creds]: ./help-aws.html#credentials
 [azure-creds]: ./help-azure.html#credentials
