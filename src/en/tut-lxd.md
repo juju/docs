@@ -237,8 +237,7 @@ Juju!
 
 To continue your journey with Juju we suggest the following topics:
 
- - [Add controllers for additional clouds][tut-cloud]
- - [Share your model with other users][share]
+ - [Multi-user cloud][tut-users]
 
 
 <!-- LINKS -->
@@ -251,5 +250,4 @@ To continue your journey with Juju we suggest the following topics:
 [clouds]: ./clouds.md
 [concepts]: ./juju-concepts.md
 [long-term-support]: https://wiki.ubuntu.com/LTS
-[share]: ./tut-users.md
-[tut-cloud]: ./tut-google.md
+[tut-users]: ./tut-users.md

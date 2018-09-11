@@ -17,7 +17,7 @@ navigation:
         location: getting-started.md
       - title: Using Juju locally (LXD)
         location: tut-lxd.md
-      - title: Sharing and users
+      - title: Multi-user cloud
         location: tut-users.md
 
   - title: User Guide
