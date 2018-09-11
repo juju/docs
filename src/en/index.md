@@ -15,7 +15,7 @@ homepage: true
             <div class="col-6">
                 <h2>Getting started</h2>
                 <p>Juju works with public cloud, private clouds, and locally with LXD.</p>
-                <p><a href="/en/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
+                <p><a href="/2.2/en/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
             </div>
             <div class="col-6 u-align--right">
                 <img style="border: 0" src="https://assets.ubuntu.com/v1/843c77b6-juju-at-a-glace.svg">
@@ -26,18 +26,18 @@ homepage: true
             <div class="col-6">
                 <h2>What's new</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/en/troubleshooting">Troubleshooting&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/reference-release-notes">Release notes&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/tut-lxd">Using Juju locally (LXD)&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.2/en/troubleshooting">Troubleshooting&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.2/en/reference-release-notes">Release notes&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.2/en/tut-lxd">Using Juju locally (LXD)&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
             <div class="col-6">
                 <h2>Explore Juju</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/en/reference-install">Install Juju&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/juju-concepts">Concepts and terms&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/tut-google">Working with controllers and models&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/tut-users">Working with users&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.2/en/reference-install">Install Juju&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.2/en/juju-concepts">Concepts and terms&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.2/en/tut-google">Working with controllers and models&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.2/en/tut-users">Working with users&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>
@@ -82,7 +82,7 @@ homepage: true
                 <h2>Contribute</h2>
                 <ul class="p-list">
                     <li class="p-list__item"><a class="p-link--external" href="https://github.com/juju/juju">Help improve Juju</a></li>
-                    <li class="p-list__item--deep"><a class="p-link--external" href="/en/contributing">Help improve the documentation</a></li>
+                    <li class="p-list__item--deep"><a class="p-link--external" href="/2.2/en/contributing">Help improve the documentation</a></li>
                 </ul>
             </div>
         </div>
