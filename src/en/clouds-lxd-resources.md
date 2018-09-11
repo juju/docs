@@ -10,7 +10,6 @@ up LXD with Juju see [Using LXD with Juju][clouds-lxd].
 The topics presented here are:
 
  - LXD and images
- - LXD clustering
  - Non-admin user credentials
  - Useful LXD client commands 
  - Using the LXD snap
@@ -39,34 +38,6 @@ Juju pulls official cloud images from the 'ubuntu' remote
 subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
 
 Image cache expiration and image synchronization mechanisms are built-in.
-
-## LXD clustering
-
-LXD clustering (v.3 and greater) allows for distributed computing to the extent
-that Juju units end up on different cluster nodes (LXD hosts) by default. It
-also offers high availability so that the cluster remains functional as long as
-more than half of the nodes are up. A downed node will lead to its hosted
-containers becoming unavailable.
-
-The following caveats apply:
-
- - The controller must reside on a cluster node. This will no longer be the
-   case starting with v.2.5 of Juju.
- - Each cluster node must have a network bridge that is connected to LXD. This
-   is to allow the containers to communicate with the controller.
-
-Clustering is configured by running `sudo lxd init` on each LXD host (a minimum
-of three is recommended). The first host that does so will *initialise* the
-cluster and any subsequent node will *join* the cluster. Once the cluster is
-set up a controller can be created, as normal, on any of the cluster nodes
-(e.g. `juju bootstrap localhost lxd-cluster`).
-
-!!! Warning:
-    The cluster-creation process will remove any existing containers. In a Juju
-    context, this implies that you cannot initialise a cluster *after* having
-    created a controller.
-
-See the upstream documentation on [Clustering][lxd-upstream-clustering].
 
 ## Non-admin user credentials
 
