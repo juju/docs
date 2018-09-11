@@ -1,22 +1,23 @@
 navigation:
 
   - title: Introduction
+
     children:
       - title: Home
         location: index.md
       - title: What is Juju?
         location: about-juju.md
-
-  - title: Quick Guides
-
-    children:
-      - title: Get started
-        location: getting-started.md
       - title: What's new in 2.3
         location: whats-new.md
+
+  - title: Tutorials
+
+    children:
+      - title: Getting started with Juju
+        location: getting-started.md
       - title: Using Juju locally (LXD)
         location: tut-lxd.md
-      - title: Sharing and Users
+      - title: Sharing and users
         location: tut-users.md
 
   - title: User Guide
@@ -51,7 +52,7 @@ navigation:
           - title: Manual
             location: clouds-manual.md
 
-      - title: Cloud credentials
+      - title: Credentials
         location: credentials.md
 
       - title: Juju client
@@ -72,6 +73,7 @@ navigation:
 
       - title: Models
         location: models.md
+
       - title: Charms
         location: charms.md
 
