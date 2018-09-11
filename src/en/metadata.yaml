@@ -16,8 +16,6 @@ navigation:
       title: "What's new in 2.2"
     - location: "tut-lxd"
       title: "Local Juju with LXD cloud"
-    - location: "tut-google"
-      title: "Controllers and Models"
     - location: "tut-users"
       title: "Sharing and Users"
 
