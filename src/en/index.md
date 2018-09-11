@@ -26,9 +26,9 @@ homepage: true
             <div class="col-6">
                 <h2>What's new</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/2.3/en/troubleshooting">Troubleshooting&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.3/en/reference-release-notes">Release notes&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.3/en/clouds-gce">Using Google GCE with Juju&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item"><a href="/2.3/en/tut-lxd">Using Juju locally (LXD)&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.3/en/reference-release-notes">Release notes&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
             <div class="col-6">
