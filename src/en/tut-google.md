@@ -17,8 +17,8 @@ the magic of Juju that makes it happen.
 
 !!! Note:
     If you already have a controller, such as the one created in the
-    [Getting started with Juju and LXD][tut-lxd] page, this new controller will
-    be seamlessly added alongside.
+    [Using Juju locally (LXD)][tut-lxd] page, this new controller will be
+    seamlessly added alongside.
 
 ## Installation
 
