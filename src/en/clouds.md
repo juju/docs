@@ -3,7 +3,7 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1749583
        INFO: Auth types found at ~/.local/share/juju/public-clouds.yaml
        There is contention whether access-key can be used with keystone v3 (see https://github.com/juju/docs/issues/2868)
-       Needs to be updated for the new Oracle cloud (OCI)
+       Needs to be updated for the possible removal of the old Oracle cloud (Oracle Classic)
        Update: Juju is growing an authentication type for OpenStack: certificates
        Update: Juju is growing add-cloud for (remote) LXD
 table_of_contents: True
@@ -29,6 +29,7 @@ how clouds are added. You can still get started by selecting your cloud here:
  - [Microsoft Azure][clouds-azure]
  - [Google GCE][clouds-google]
  - [Oracle Compute][clouds-oracle]
+ - [Oracle Cloud Infrastructure][clouds-oci]
  - [Rackspace][clouds-rackspace]
  - [Joyent][clouds-joyent]
  - [LXD][clouds-lxd]
@@ -169,6 +170,7 @@ of adding a cloud manually.
 `lxd`		  | n/a
 `maas`		  | `oauth1`
 `manual`	  | n/a
+`oci`	  	  | `httpsig`
 `openstack` 	  | `access-key,userpass`
 `oracle`	  | `userpass`
 `rackspace`	  | `userpass`
@@ -192,6 +194,7 @@ Here are some examples of manually adding a cloud:
 [clouds-azure]: ./help-azure.md
 [clouds-google]: ./help-google.md
 [clouds-oracle]: ./help-oracle.md
+[clouds-oci]: ./clouds-oci.md
 [clouds-rackspace]: ./help-rackspace.md
 [clouds-joyent]: ./help-joyent.md
 [clouds-lxd]: ./clouds-LXD.md
