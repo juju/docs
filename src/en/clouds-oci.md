@@ -42,19 +42,21 @@ The following bits of information need to be gathered:
 ### SSL keypair and fingerprint
 
 An SSL keypair (private and public keys) needs to be generated on your local
-system. The below list of Linux-based commands accomplish this. For a full
-explanation of them, in addition to what to do on a non-Linux system, see
-Oracle's [Required Keys and OCIDs][oracle-oci-ssl] page.
+system. It will be used to contact Oracle's API. A "fingerprint" of the private
+key will be needed to identify that key. The below list of Linux-based commands
+accomplish all this. For a full explanation of them, in addition to what to do
+on a non-Linux system, see Oracle's [Required Keys and OCIDs][oracle-oci-ssl]
+page.
 
 ```bash
 mkdir ~/.oci
 openssl genrsa -out ~/.oci/oci_ssl_key_private.pem -aes128 2048
 chmod go-rwx ~/.oci/oci_ssl_key_private.pem
-openssl rsa -pubout -in ~/.oci/oci_ssl_key_private.pem -out ~/.oci/oci_api_key_public.pem
+openssl rsa -pubout -in ~/.oci/oci_ssl_key_private.pem -out ~/.oci/oci_ssl_key_public.pem
 openssl rsa -pubout -outform DER -in ~/.oci/oci_ssl_key_private.pem | openssl md5 -c
 ```
 
-The last command prints the fingerprint of the private key to the screen.
+The last command will print the fingerprint of the private key to your screen.
 
 We'll later make reference to the private key, the public key, and the
 fingerprint using these variables:
