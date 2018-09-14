@@ -184,6 +184,7 @@ relative path to the file:
 Here are some examples of manually adding a cloud:
 
  - [Manually adding MAAS clouds][clouds-maas-manual]
+ - [Manually adding an OCI cloud][clouds-oci-manual]
  - [Manually adding an OpenStack cloud][clouds-openstack-manual]
  - [Manually adding a vSphere cloud][clouds-vsphere-manual]
 
@@ -208,5 +209,6 @@ Here are some examples of manually adding a cloud:
 [controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
 
 [clouds-maas-manual]: ./clouds-maas.md#manually-adding-maas-clouds
+[clouds-oci-manual]: ./clouds-oci.md#manually-adding-an-oci-cloud
 [clouds-openstack-manual]: ./help-openstack.md#manually-adding-an-openstack-cloud
 [clouds-vsphere-manual]: ./help-vmware.md#manually-adding-a-vsphere-cloud

@@ -180,7 +180,6 @@ credentials:
       application-id: niftyapp
       subscription-id: 31fb132e-e774-49dd-adbb-d6a4e966c583
       application-password: UberPassK3yz
-
   oci-test:
     default-region: us-ashburn-1
     jlarin:
