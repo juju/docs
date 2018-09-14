@@ -48,13 +48,13 @@ Oracle's [Required Keys and OCIDs][oracle-oci-ssl] page.
 
 ```bash
 mkdir ~/.oci
-openssl genrsa -out ~/.oci/oci_api_key.pem -aes128 2048
-chmod go-rwx ~/.oci/oci_api_key.pem
-openssl rsa -pubout -in ~/.oci/oci_api_key.pem -out ~/.oci/oci_api_key_public.pem
-openssl rsa -pubout -outform DER -in ~/.oci/oci_api_key.pem | openssl md5 -c
+openssl genrsa -out ~/.oci/oci_ssl_key_private.pem -aes128 2048
+chmod go-rwx ~/.oci/oci_ssl_key_private.pem
+openssl rsa -pubout -in ~/.oci/oci_ssl_key_private.pem -out ~/.oci/oci_api_key_public.pem
+openssl rsa -pubout -outform DER -in ~/.oci/oci_ssl_key_private.pem | openssl md5 -c
 ```
 
-The last command yields the fingerprint of the private key.
+The last command prints the fingerprint of the private key to the screen.
 
 We'll later make reference to the private key, the public key, and the
 fingerprint using these variables:
