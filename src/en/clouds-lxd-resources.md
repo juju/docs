@@ -50,8 +50,8 @@ containers becoming unavailable.
 
 The following caveats apply:
 
- - The controller must reside on a cluster node. This will no longer be the
-   case starting with v.2.5 of Juju.
+ - The controller must be created locally to a cluster node. This will no
+   longer be the case starting with v.2.5 of Juju.
  - Each cluster node must have a network bridge that is connected to LXD. This
    is to allow the containers to communicate with the controller.
 
