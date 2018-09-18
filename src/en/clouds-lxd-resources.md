@@ -1,5 +1,6 @@
 Title: Additional LXD resources
 TODO:  Test certificate access
+       Move clustering to clouds-lxd-advanced
 table_of_contents: True
 
 # Additional LXD resources
