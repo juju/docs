@@ -1,6 +1,7 @@
 Title: Additional LXD resources
 TODO:  Test certificate access
        bug tracking: https://bugs.launchpad.net/juju/+bug/1793291
+       Move clustering to clouds-lxd-advanced
 table_of_contents: True
 
 # Additional LXD resources
