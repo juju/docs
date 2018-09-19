@@ -377,6 +377,64 @@ release notes for the 1.x series are available [here][release-notes-1].
   
   To learn more about Juju visit [https://jujucharms.com][upstream-juju].
 
+^# Juju 2.3.9
+
+  The Juju team is proud to release Juju 2.3.9! 
+
+  This release is a bugfix release for Juju 2.3 which also adds support for new AWS instance types.
+  
+  ## Notable fixes
+  
+  - [LP #1770437](https://bugs.launchpad.net/juju/+bug/1770437) - juju-introspection.sh is full of bashisms, the introspection functions now use underscores to separate words, i.e. `juju-goroutines` -> `juju_goroutines`
+  - [LP #1733266](https://bugs.launchpad.net/juju/+bug/17733266) - Autodetection of subnets prevents bootstrap when there are duplicate subnet ranges
+  - [LP #1790647](https://bugs.launchpad.net/juju/+bug/1790647) - Refresh support for new aws instance types
+  - [LP #1789211](https://bugs.launchpad.net/juju/+bug/1789211) - Can't close/open ports without external network
+  
+  Additional bugs fixed can be found in the
+  [milestone page](https://launchpad.net/juju/2.3/2.3.9).
+  
+  ## How do I get it?
+  
+  The best way to get your hands on this release of Juju is to install it as a snap package:
+               
+      sudo snap install juju --classic --channel=2.3/stable
+  
+  Other packages are available for a variety of platforms:
+  
+  **Using a PPA**  
+  To install the most recent stable version using a PPA:
+  
+      sudo add-apt-repository -yu ppa:juju/2.3
+      sudo apt install juju
+  
+  **macOS**  
+  Install Juju on macOS with Homebrew. Simply enter the following into a terminal:
+  
+      brew install juju
+  
+  And upgrade Juju with the following:
+  
+      brew upgrade juju
+  
+  **Windows**  
+  A Windows installer is available for Juju and can be found here:
+  
+  [juju-setup-2.3.9-signed.exe](https://launchpad.net/juju/2.3/2.3.9/+download/juju-setup-2.3.9-signed.exe) ([md5](https://launchpad.net/juju/2.3/2.3.9/+download/juju-setup-2.3.9-signed.exe/+md))
+  
+  Those subscribed to a snap channel should be automatically upgraded. If you’re
+  using the PPA or homebrew, you should see an upgrade available.
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
+  
+  ## More information
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
 ^# Juju 2.3.8
 
   Juju 2.3.8 is the exciting new release of Juju, the first to provide full
