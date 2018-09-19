@@ -1,5 +1,6 @@
 Title: Additional LXD resources
 TODO:  Test certificate access
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1793291
 table_of_contents: True
 
 # Additional LXD resources
@@ -60,6 +61,11 @@ of three is recommended). The first host that does so will *initialise* the
 cluster and any subsequent node will *join* the cluster. Once the cluster is
 set up a controller can be created, as normal, on any of the cluster nodes
 (e.g. `juju bootstrap localhost lxd-cluster`).
+
+In `v.2.5` specific cluster nodes can be targeted with the commands
+`bootstrap`, `deploy`, and `add-unit`. See
+[Deploying to specific machines][deploying-to-specific-machines] for how to do
+this.
 
 !!! Warning:
     The cluster-creation process will remove any existing containers. In a Juju
@@ -203,3 +209,4 @@ assistance with the daemon. See upstream documentation for
 [logs]: ./troubleshooting-logs.md
 [credentials]: ./credentials.md
 [users-creating]: ./users-creating.md
+[deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
