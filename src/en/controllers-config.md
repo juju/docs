@@ -71,7 +71,7 @@ bootstrap-timeout            | integer | 600     |                          | Ho
 bootstrap-retry-delay        | integer | 5       |                          | How long in seconds to wait between connection attempts to a controller
 bootstrap-address-delay      | integer | 10      |                          | How often in seconds to refresh controller addresses from the API server
 ca-cert                      | string |          |                          | The certificate of the CA that signed the controller's CA certificate, in PEM format
-charmstore-url               | string |          | URL                      | Replaces the internal Charm Store URL of https://api.jujucharms.com/charmstore with a custom one.
+charmstore-url               | string | https://api.jujucharms.com/charmstore | | Sets the Charm Store URL.
 controller-uuid              | string |          |                          | The key for the UUID of the controller
 juju-ha-space		     | string |          |			    | The name of a network space used used for MongoDB replica-set communication in a controller HA context. Effectively acts as a machine constraint. See [additional info below](#controller-related-spaces).
 juju-mgmt-space		     | string |          |			    | The name of a network space used by Juju agents to communicate with controllers. Effectively acts as a machine constraint. See [additional info below](#controller-related-spaces).
