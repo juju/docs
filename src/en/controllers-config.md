@@ -5,6 +5,7 @@ TODO: Check accuracy of key table (https://github.com/juju/juju/blob/ec89c99e51f
       ReadOnlyMethods updated from https://github.com/juju/juju/blob/2.3/apiserver/observer/auditfilter.go#L130
       Include ability to set configuration key:value pairs by file
       Show how to use spaces 'juju-mgmt-space' and 'juju-ha-space' (wth 'juju bootstrap' and 'juju enable-ha')
+      Reformat table: monospace the key names, new column for RT
 table_of_contents: True
 
 # Configuring controllers
@@ -30,37 +31,37 @@ dynamically set by Juju.
 
 ## Setting values
 
-To set a key's value use the `--config` option during the controller creation
-process (see [Creating a controller][controllers-creating]). For example, to
-create and configure a cloud named 'lxd':
+A key can be assigned a value during controller-creation time or post-creation
+time. The vast majority of keys are set in the former way.
+
+To set a key at controller-creation time the `--config` option is used. For
+example:
 
 ```bash
-juju bootstrap --config bootstrap-timeout=700 lxd
+juju bootstrap --config bootstrap-timeout=700 localhost lxd
 ```
 
-In general, once a controller is created, all its settings become immutable.
-Exceptions to this rule are three of the keys related to audit logging:
+See [Creating a controller][controllers-creating] for examples on
+controller creation.
 
- - auditing-enabled
- - audit-log-capture-args
- - audit-log-exclude-methods
- 
-!!! Note:
-    The `--config` option may also be used to configure the 'default' model.
-    In addition, the `model-default` option can usually always be used in place
-    of the `--config` option. See [Configuring models][models-config] for more
-    information on how models get configured and how these two options differ.
+To set a key at post-creation time the `controller-config` command is used. For
+example:
+
+```bash
+juju controller-config -c aws max-prune-txn-batch-size=1.2e+06 max-prune-txn-passes=120
+```
 
 ## List of controller keys
 
-This table lists all the controller keys which may be assigned a value.
+This table lists all the controller keys. Those keys that can be assigned in
+real-time (post-bootstrap) is tagged with **[RT]**.
 
 | Key                        | Type    | Default  | Valid values             | Purpose |
 |:---------------------------|---------|----------|--------------------------|:---------|
 api-port                     | integer | 17070    |                          | The port to use for connecting to the API
-auditing-enabled             | bool    | false    | false/true               | Sets whether audit logging is enabled. Can be toggled for an existing controller.
-audit-log-capture-args       | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods. Can be toggled for an existing controller.  
-audit-log-exclude-methods    | string  | ReadOnlyMethods | [Some.Method,...] | What information to exclude from the audit log. Can be set for an existing controller. See [additional info][#excluding-information-audit-log].
+auditing-enabled **[RT]**    | bool    | true     | false/true               | Sets whether audit logging is enabled. Can be toggled for an existing controller.
+audit-log-capture-args **[RT]** | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods. Can be toggled for an existing controller.  
+audit-log-exclude-methods **[RT]** | string  | ReadOnlyMethods | [Some.Method,...] | What information to exclude from the audit log. Can be set for an existing controller. See [additional info][#excluding-information-audit-log].
 audit-log-max-backups        | integer | 10       |                          | The maximum number of backup audit log files to keep.
 audit-log-max-size           | integer | 300      |                          | The maximum size for an audit log file (units: MiB).
 autocert-dns-name            | string |          |                          | Sets the DNS name of the controller. If a client connects to this name, an official certificate will be automatically requested. Connecting to any other host name will use the usual self-generated certificate.
@@ -77,8 +78,8 @@ identity-public-key          | string |          |                          | Se
 identity-url                 | string |          |                          | Sets the URL of the identity manager. Feature not yet implemented.
 max-logs-age                 | string | 72h      | 72h, etc.                | Sets the maximum age for log entries before they are pruned, in human-readable time format
 max-logs-size                | string | 4G       | 400M, 5G, etc.           | Sets the maximum size for the log collection, in human-readable memory format
-max-prune-txn-batch-size     | integer | 1e+06   | 100000, 1e+05, etc.      | Sets the maximum number of database transaction records to be pruned during each cleanup pass.
-max-prune-txn-passes         | integer | 100     |                          | Sets the maximum number of passes to make during each automatic hourly database transaction record cleanup procedure.
+max-prune-txn-batch-size **[RT]** | integer | 1e+06   | 100000, 1e+05, etc.      | Sets the maximum number of database transaction records to be pruned during each cleanup pass.
+max-prune-txn-passes **[RT]** | integer | 100     |                          | Sets the maximum number of passes to make during each automatic hourly database transaction record cleanup procedure.
 max-txn-log-size             | string | 10M      | 100M, 1G, etc.           | Sets the maximum size for the capped txn log collection, in human-readable memory format
 mongo-memory-profile         | string | low      | low/default              | Sets whether MongoDB uses the least possible memory or the default MongoDB memory profile
 network                      | string |          |                          | An OpenStack network UUID.
@@ -204,7 +205,6 @@ key value of 'ReadOnlyMethods'.
 <!-- LINKS -->
 
 [controllers-creating]: ./controllers-creating.md
-[models-config]: ./models-config.md
 [#excluding-information-audit-log]: #excluding-information-from-the-audit-log
 [audit-logging]: ./troubleshooting-logs.md#audit-logging
 [network-spaces]: ./network-spaces.md
