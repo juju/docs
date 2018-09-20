@@ -75,6 +75,8 @@ identity-public-key          | string |          |                          | Se
 identity-url                 | string |          |                          | Sets the URL of the identity manager. Feature not yet implemented.
 max-logs-age                 | string | 72h      | 72h, etc.                | Sets the maximum age for log entries before they are pruned, in human-readable time format
 max-logs-size                | string | 4G       | 400M, 5G, etc.           | Sets the maximum size for the log collection, in human-readable memory format
+max-prune-txn-batch-size     | integer | 1e+06   | 100000, 1e+05, etc.      | Sets the maximum number of database transaction records to be pruned during each cleanup pass.
+max-prune-txn-passes         | integer | 100     |                          | Sets the maximum number of passes to make during each automatic hourly database transaction record cleanup procedure.
 max-txn-log-size             | string | 10M      | 100M, 1G, etc.           | Sets the maximum size for the capped txn log collection, in human-readable memory format
 mongo-memory-profile         | string | low      | low/default              | Sets whether MongoDB uses the least possible memory or the default MongoDB memory profile
 network                      | string |          |                          | An OpenStack network UUID.
