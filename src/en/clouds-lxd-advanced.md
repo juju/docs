@@ -127,7 +127,7 @@ management.
 Use the `add-credential` command to add your credentials to the new cloud:
 
 ```bash
-juju add-credential lxd-remote                                                                                                                                    
+juju add-credential lxd-remote
 ```
 
 ```no-highlight
@@ -156,6 +156,18 @@ on the remote LXD host.
 
 The 'certificate' authentication type requires you to manually gather the
 server certificate and the client certificate & key. 
+
+```no-highlight
+credentials:
+  lxd-remote:
+    admin:
+      auth-type: interactive
+      trust-password: ubuntu
+```
+
+```bash
+juju add-credential lxd-remote -f lxd-remote-creds.yaml
+```
 
 
 <!-- LINKS -->
