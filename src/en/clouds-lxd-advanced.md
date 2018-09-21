@@ -1,4 +1,6 @@
 Title: Using LXD with Juju - advanced
+TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1793661
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1793693
 
 # Using LXD with Juju - advanced
 
@@ -21,6 +23,8 @@ unique LXD API endpoint.
 
 For the manual method of adding a LXD cloud, see below section
 [Manually adding a LXD cloud][#clouds-lxd-manual].
+
+<!-- this output should change -->
 
 ```bash
 juju add-cloud
@@ -63,7 +67,10 @@ Then you can bootstrap with 'juju bootstrap lxd-remote'
 
 !!! Important:
     The remote LXD server needs to be available over the network. This is
-    specified with `lxd init` on the remote host.
+    specified with `lxd init` on the remote host. When the remote LXD cloud is
+    custered, the init step does this automatically.
+
+<!-- confirm the last bit above -->
 
 Now confirm the successful addition of the cloud:
 
@@ -94,13 +101,13 @@ clouds:
   lxd-remote-manual:
     type: lxd
     auth-types: [certificate]
-    endpoint: 10.55.60.244
+    endpoint: https://10.55.60.244:8443
 ```
 
-<--! test if 'interactive' is required in the above -->
+<!-- test if 'interactive' is required in the above -->
 
-We've call the cloud 'lxd-remote-manual' and the endpoint is the IP address of
-the remote LXD host.
+We've called the cloud 'lxd-remote-manual' and the endpoint is the IP address
+of the remote LXD host.
 
 To add cloud 'lxd-remote-manual', assuming the configuration file is
 `lxd-cloud.yaml` in the current directory, we would run:
@@ -111,44 +118,45 @@ juju add-cloud lxd-remote-manual lxd-cloud.yaml
 
 ## Adding credentials
 
-As opposed to a local LXD cloud, credentials need to be added prior to creating
-a controller for a remote one.
+As opposed to a local LXD cloud, in a remote context, credentials need to be
+added prior to creating a controller.
 
 The [Cloud credentials][credentials] page offers a full treatment of credential
 management.
 
-Use the interactive `add-credential` command to add your credentials to the new
-cloud. The 'certificate' auth type requires you to gather the LXD server
-certificate and both the LXD client certificate and key. The client in this
-context is Juju.
+Use the `add-credential` command to add your credentials to the new cloud:
 
 ```bash
-juju add-credential lxd-remote
+juju add-credential lxd-remote                                                                                                                                    
 ```
 
-Example user session:
-
 ```no-highlight
-Enter credential name: lxd-remote-creds-cert
+Enter credential name: lxd-remote-creds
 
 Auth Types
   certificate
   interactive
 
-Select auth type [interactive]: certificate
+Select auth type [interactive]: 
 
-Enter the path to the PEM-encoded LXD server certificate file: server.crt
+Enter trust-password: *******
 
-Enter the path to the PEM-encoded LXD client certificate file: .local/share/juju/lxd/client.crt                                                                                   
-Enter the path to the PEM-encoded LXD client key file: .local/share/juju/lxd/client.key                                                                                           
-Credential "lxd-remote-creds-cert" added locally for cloud "lxd-remote".
+Loaded client cert/key from "/home/ubuntu/.local/share/juju/lxd"
+Uploaded certificate to LXD server.
+
+Credential "lxd-remote-creds" added locally for cloud "lxd-remote".
 ```
 
 We've called the new credential 'lxd-remote-creds'. When prompted for
-'', you should paste your MAAS API key.
+'trust-password', you should enter the password that was set up with `lxd init`
+on the remote LXD host.
 
 !!! Note:
-    The API key will not be echoed back to the screen.
+    The trust password will not be echoed back to the screen.
+
+The 'certificate' authentication type requires you to manually gather the
+server certificate and the client certificate & key. 
+
 
 <!-- LINKS -->
 

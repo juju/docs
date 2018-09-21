@@ -44,24 +44,31 @@ Image cache expiration and image synchronization mechanisms are built-in.
 
 ## LXD clustering
 
-LXD clustering (v.3 and greater) allows for distributed computing to the extent
-that Juju units end up on different cluster nodes (LXD hosts) by default. It
-also offers high availability so that the cluster remains functional as long as
-more than half of the nodes are up. A downed node will lead to its hosted
-containers becoming unavailable.
+LXD clustering (lxd `v.3` and greater) allows for distributed computing to the
+extent that Juju units end up on different cluster nodes (LXD hosts) by
+default. It also offers high availability so that the cluster remains
+functional as long as more than half of the nodes are up. A downed node will
+lead to its hosted containers becoming unavailable.
 
-The following caveats apply:
+In terms of adding a LXD cloud, Juju is indifferent as to whether it is
+clustered or not. Juju connects to a single LXD host and, when prompted for
+connection information, you will need to decide which host that is. It should
+be noted that if this host becomes unavailable Juju will lose connection to the
+entire cluster.
 
- - The controller must be created locally to a cluster node. This will no
-   longer be the case starting with v.2.5 of Juju.
- - Each cluster node must have a network bridge that is connected to LXD. This
-   is to allow the containers to communicate with the controller.
+!!! Important:
+    Each cluster node must have a network bridge that is connected to LXD. This
+    is to allow the containers to communicate with the controller.
 
-Clustering is configured by running `sudo lxd init` on each LXD host (a minimum
-of three is recommended). The first host that does so will *initialise* the
-cluster and any subsequent node will *join* the cluster. Once the cluster is
-set up a controller can be created, as normal, on any of the cluster nodes
-(e.g. `juju bootstrap localhost lxd-cluster`).
+Clustering is configured by running `lxd init` on each LXD host (a minimum of
+three is recommended). The first host that does so will *initialise* the
+cluster and any subsequent node will *join* the cluster. When joining, `sudo`
+is required.
+
+Once the cluster is set up a controller can be created and will end up randomly
+on one of the nodes. See
+[Deploying to specific machines][deploying-to-specific-machines] for how to
+target specific nodes.
 
 In `v.2.5` specific cluster nodes can be targeted with the commands
 `bootstrap`, `deploy`, and `add-unit`. See
