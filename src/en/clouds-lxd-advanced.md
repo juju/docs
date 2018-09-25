@@ -15,14 +15,15 @@ The topics presented here are:
 
 The traditional way of using LXD with Juju is by having both the Juju client
 and the LXD daemon local to each other. However, since `v.2.5` Juju supports
-connecting to a remote LXD daemon.
+connecting to a remote LXD daemon. Doing so does not require LXD to be
+installed alongside the Juju client.
 
-Use the interactive `add-cloud` command to add your LXD cloud to Juju's list
-of clouds. You will need to supply a name you wish to call your cloud and the
-unique LXD API endpoint.
+Use the `add-cloud` command in interactive mode to add a LXD cloud to Juju's
+list of clouds. You will need to supply the name you wish to call your cloud
+and the unique LXD API endpoint.
 
 For the manual method of adding a LXD cloud, see below section
-[Manually adding a LXD cloud][#clouds-lxd-manual].
+[Manually adding a remote LXD cloud][#clouds-lxd-remote-add-manual].
 
 <!-- this output should change -->
 
@@ -68,7 +69,7 @@ Then you can bootstrap with 'juju bootstrap lxd-remote'
 !!! Important:
     The remote LXD server needs to be available over the network. This is
     specified with `lxd init` on the remote host. When the remote LXD cloud is
-    custered, the init step does this automatically.
+    clustered, the init step does this automatically.
 
 <!-- confirm the last bit above -->
 
@@ -88,9 +89,9 @@ Cloud        Regions  Default          Type        Description
 lxd-remote         1  default          lxd         LXD Container Hypervisor
 ```
 
-### Manually adding a LXD cloud
+#### Manually adding a remote LXD cloud
 
-This covers manually adding a LXD cloud to Juju (see
+Alternatively, the remote LXD cloud can be added manually to Juju (see
 [Adding clouds manually][clouds-adding-manually] for background information).
 
 The manual method necessitates the use of a [YAML-formatted][yaml]
@@ -106,8 +107,8 @@ clouds:
 
 <!-- test if 'interactive' is required in the above -->
 
-We've called the cloud 'lxd-remote-manual' and the endpoint is the IP address
-of the remote LXD host.
+We've called the cloud 'lxd-remote-manual'. The endpoint is based on the
+`HTTPS` protocoal, port 8443, and the IP address of the remote LXD host.
 
 To add cloud 'lxd-remote-manual', assuming the configuration file is
 `lxd-cloud.yaml` in the current directory, we would run:
@@ -116,15 +117,13 @@ To add cloud 'lxd-remote-manual', assuming the configuration file is
 juju add-cloud lxd-remote-manual lxd-cloud.yaml
 ```
 
-## Adding credentials
+### Adding credentials
 
 As opposed to a local LXD cloud, in a remote context, credentials need to be
-added prior to creating a controller.
+added prior to creating a controller (see [Cloud credentials][credentials] for
+background information).
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
-management.
-
-Use the `add-credential` command to add your credentials to the new cloud:
+Use the `add-credential` command to add credentials to the new cloud:
 
 ```bash
 juju add-credential lxd-remote
@@ -148,33 +147,53 @@ Credential "lxd-remote-creds" added locally for cloud "lxd-remote".
 ```
 
 We've called the new credential 'lxd-remote-creds'. When prompted for
-'trust-password', you should enter the password that was set up with `lxd init`
-on the remote LXD host.
+'trust-password', enter the password that was set up with `lxd init` on the
+remote LXD host.
 
 !!! Note:
-    The trust password will not be echoed back to the screen.
+    If the 'certificate' authentication type is chosen in place of
+    'interactive' the server and client certificates and the client key will
+    need to be gathered manually. You will be prompted for the paths to the
+    three files containing the data.
 
-The 'certificate' authentication type requires you to manually gather the
-server certificate and the client certificate & key. 
+#### Manually adding LXD credentials
 
-```no-highlight
+Like adding a cloud manually, a YAML file is needed to manually add
+credentials. Here is an example:
+
+```yaml
 credentials:
-  lxd-remote:
+  lxd-remote-creds:
     admin:
       auth-type: interactive
       trust-password: ubuntu
 ```
 
+<!-- need to add the above snippet to the credentials page -->
+
+Here, we've named the credential as we did when using the interactive method:
+'lxd-remote-creds'. The trust password is set as 'ubuntu'.
+
+To add credentials for cloud 'lxd-remote', assuming the configuration file is
+`lxd-cloud-creds.yaml` in the current directory, we would run:
+
 ```bash
-juju add-credential lxd-remote -f lxd-remote-creds.yaml
+juju add-credential lxd-remote -f lxd-cloud-creds.yaml
 ```
+
+### Next steps
+
+Now that the cloud and credentials have been added the next step is to create a
+controller. See [Creating a controller][clouds-lxd-creating-a-controller] on
+the main LXD page.
 
 
 <!-- LINKS -->
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [clouds-lxd]: ./clouds-LXD
-[#clouds-lxd-manual]: #manually-adding-a-lxd-cloud
+[#clouds-lxd-remote-add-manual]: #manually-adding-a-remote-lxd-cloud
 [controllers-creating]: ./controllers-creating.md
 [clouds-adding-manually]: ./clouds.md#adding-clouds-manually
 [credentials]: ./credentials.md
+[clouds-lxd-creating-a-controller]: ./clouds-LXD.md#creating-a-controller
