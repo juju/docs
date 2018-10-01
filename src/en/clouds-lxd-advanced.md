@@ -1,6 +1,4 @@
 Title: Using LXD with Juju - advanced
-TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1793661
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1793693
 
 # Using LXD with Juju - advanced
 
@@ -9,7 +7,48 @@ The main page is [Using LXD with Juju][clouds-lxd].
 
 The topics presented here are:
 
+ - LXD clustering
  - Adding a remote LXD cloud
+
+## LXD clustering
+
+LXD clustering (lxd `v.3` and greater) allows for distributed computing to the
+extent that Juju units end up on different cluster nodes (LXD hosts) by
+default. It also offers high availability so that the cluster remains
+functional as long as more than half of the nodes are up. A downed node will
+lead to its hosted containers becoming unavailable.
+
+In terms of adding a LXD cloud, Juju is indifferent as to whether it is
+clustered or not. Juju connects to a single LXD host and, when prompted for
+connection information, you will need to decide which host that is. It should
+be noted that if this host becomes unavailable Juju will lose connection to the
+entire cluster.
+
+!!! Important:
+    Each cluster node must have a network bridge that is connected to LXD. This
+    is to allow the client to communicate with the Juju machines (containers).
+
+Clustering is configured by running `lxd init` on each LXD host (a minimum of
+three is recommended). The first host that does so will *initialise* the
+cluster and any subsequent node will *join* the cluster. When joining, `sudo`
+is required.
+
+Once the cluster is set up a controller can be created and will end up randomly
+on one of the nodes. See
+[Deploying to specific machines][deploying-to-specific-machines] for how to
+target specific nodes.
+
+In `v.2.5.0` specific cluster nodes can be targeted with the commands
+`bootstrap`, `deploy`, and `add-unit`. See
+[Deploying to specific machines][deploying-to-specific-machines] for how to do
+this.
+
+!!! Warning:
+    The cluster-creation process will remove any existing containers. In a Juju
+    context, this implies that you cannot initialise a cluster *after* having
+    created a controller.
+
+See the upstream documentation on [Clustering][lxd-upstream-clustering].
 
 ## Adding a remote LXD cloud
 
