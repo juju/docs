@@ -166,7 +166,7 @@ of adding a cloud manually.
 `ec2`		  | `access-key`
 `gce`		  | `jsonfile,oauth2`
 `joyent`	  | `userpass`
-`lxd`		  | n/a
+`lxd`		  | n/a, `certificate` (`v.2.5`)
 `maas`		  | `oauth1`
 `manual`	  | n/a
 `openstack` 	  | `access-key,userpass`
