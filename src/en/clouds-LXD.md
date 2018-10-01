@@ -1,6 +1,5 @@
 Title: Using LXD with Juju
 TODO:  Warning: Ubuntu release versions hardcoded
-       2.5 release will demand significant reword: LXD can be used remotely
        Warning: Troubleshoot Trusty; bootstrap only works with the lxd snap
        (and only if it is installed w/o the lxd deb being installed first)
 table_of_contents: True
@@ -171,12 +170,12 @@ Output:
 +---------------+---------+----------------------+------+------------+-----------+
 ```
 
-## LXD specific features
+## Advanced LXD support
 
-Here is a list of noteworthy LXD specific features and differences:
+Here is a list of advanced LXD features supported by Juju.
 
- - LXD clustering is supported (`v.2.4.0`). See
-   [Additional LXD resources][clouds-lxd-resources] for details.
+ - [LXD clustering][clouds-lxd-advanced-cluster] (`v.2.4.0`)
+ - [Adding a remote LXD cloud][clouds-lxd-advanced-remote] (`v.2.5.0`)
 
 ## Additional LXD resources
 
@@ -205,6 +204,8 @@ See these pages for ideas on what to do next:
 [models-add]: ./models-adding.md
 [credentials]: ./credentials.md
 [clouds-lxd-resources]: ./clouds-lxd-resources.md
+[clouds-lxd-advanced-cluster]: ./clouds-lxd-advanced.md#lxd-clustering
+[clouds-lxd-advanced-remote]: ./clouds-lxd-advanced.md#adding-a-remote-lxd-cloud
 [lxd-snap]: ./clouds-lxd-resources.md#using-the-lxd-snap
 [ubuntu-lxd]: http://www.ubuntu.com/cloud/lxd
 [charms-constraints-lxd]: ./charms-constraints.md#constraints-and-lxd-containers

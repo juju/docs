@@ -1,7 +1,5 @@
 Title: Additional LXD resources
-TODO:  Test certificate access
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1793291
-       Move clustering to clouds-lxd-advanced
+TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1793291
 table_of_contents: True
 
 # Additional LXD resources
@@ -12,7 +10,6 @@ up LXD with Juju see [Using LXD with Juju][clouds-lxd].
 The topics presented here are:
 
  - LXD and images
- - LXD clustering
  - Non-admin user credentials
  - Useful LXD client commands 
  - Using the LXD snap
@@ -41,46 +38,6 @@ Juju pulls official cloud images from the 'ubuntu' remote
 subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
 
 Image cache expiration and image synchronization mechanisms are built-in.
-
-## LXD clustering
-
-LXD clustering (lxd `v.3` and greater) allows for distributed computing to the
-extent that Juju units end up on different cluster nodes (LXD hosts) by
-default. It also offers high availability so that the cluster remains
-functional as long as more than half of the nodes are up. A downed node will
-lead to its hosted containers becoming unavailable.
-
-In terms of adding a LXD cloud, Juju is indifferent as to whether it is
-clustered or not. Juju connects to a single LXD host and, when prompted for
-connection information, you will need to decide which host that is. It should
-be noted that if this host becomes unavailable Juju will lose connection to the
-entire cluster.
-
-!!! Important:
-    Each cluster node must have a network bridge that is connected to LXD. This
-    is to allow the containers to communicate with the controller.
-
-Clustering is configured by running `lxd init` on each LXD host (a minimum of
-three is recommended). The first host that does so will *initialise* the
-cluster and any subsequent node will *join* the cluster. When joining, `sudo`
-is required.
-
-Once the cluster is set up a controller can be created and will end up randomly
-on one of the nodes. See
-[Deploying to specific machines][deploying-to-specific-machines] for how to
-target specific nodes.
-
-In `v.2.5` specific cluster nodes can be targeted with the commands
-`bootstrap`, `deploy`, and `add-unit`. See
-[Deploying to specific machines][deploying-to-specific-machines] for how to do
-this.
-
-!!! Warning:
-    The cluster-creation process will remove any existing containers. In a Juju
-    context, this implies that you cannot initialise a cluster *after* having
-    created a controller.
-
-See the upstream documentation on [Clustering][lxd-upstream-clustering].
 
 ## Non-admin user credentials
 
