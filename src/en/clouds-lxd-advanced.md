@@ -25,8 +25,6 @@ and the unique LXD API endpoint.
 For the manual method of adding a LXD cloud, see below section
 [Manually adding a remote LXD cloud][#clouds-lxd-remote-add-manual].
 
-<!-- this output should change -->
-
 ```bash
 juju add-cloud
 ```
@@ -49,6 +47,7 @@ Select cloud type: lxd
 Enter a name for your lxd cloud: lxd-remote
 
 Enter the API endpoint url for the remote LXD server: https://10.55.60.244:8443                                                                                                   
+
 Auth Types
   certificate
 
@@ -67,11 +66,9 @@ Then you can bootstrap with 'juju bootstrap lxd-remote'
 ```
 
 !!! Important:
-    The remote LXD server needs to be available over the network. This is
-    specified with `lxd init` on the remote host. When the remote LXD cloud is
-    clustered, the init step does this automatically.
-
-<!-- confirm the last bit above -->
+    The remote LXD server needs to be available over the network and is
+    specified with `lxd init` on the remote host. Networking is enabled
+    automatically when clustering is chosen.
 
 Now confirm the successful addition of the cloud:
 
@@ -104,8 +101,6 @@ clouds:
     auth-types: [certificate]
     endpoint: https://10.55.60.244:8443
 ```
-
-<!-- test if 'interactive' is required in the above -->
 
 We've called the cloud 'lxd-remote-manual'. The endpoint is based on the
 `HTTPS` protocoal, port 8443, and the IP address of the remote LXD host.
@@ -163,13 +158,11 @@ credentials. Here is an example:
 
 ```yaml
 credentials:
-  lxd-remote-creds:
-    admin:
+  lxd-remote:
+    lxd-remote-creds:
       auth-type: interactive
       trust-password: ubuntu
 ```
-
-<!-- need to add the above snippet to the credentials page -->
 
 Here, we've named the credential as we did when using the interactive method:
 'lxd-remote-creds'. The trust password is set as 'ubuntu'.
