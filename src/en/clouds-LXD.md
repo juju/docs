@@ -1,6 +1,5 @@
 Title: Using LXD with Juju
 TODO:  Warning: Ubuntu release versions hardcoded
-       2.5 release will demand significant reword: LXD can be used remotely
        Warning: Troubleshoot Trusty; bootstrap only works with the lxd snap
        (and only if it is installed w/o the lxd deb being installed first)
 table_of_contents: True
@@ -8,14 +7,13 @@ table_of_contents: True
 # Using LXD with Juju
 
 Choosing [LXD][ubuntu-lxd] as the backing cloud for Juju is an efficient way to
-experiment with Juju. It is also very quick to set up. With lightweight
-containers acting as Juju machines, even a moderately powerful laptop can
-create useful models, or serve as a platform to develop your own charms. Make
-sure you have enough local space for the containers though.
+work with Juju. Other advantages are that it is quick to set up and does not
+require an account with a public cloud vendor.
 
-!!! Note:
-    Work is currently underway that will allow Juju to connect to remote LXD
-    hosts.
+Traditionally LXD would run local to the Juju client but since `v.2.5.0` Juju
+is capable of connecting to remote LXD hosts (see
+[Adding a remote LXD cloud][clouds-lxd-advanced-remote]). If you do run it
+locally ensure you have enough space for the containers.
 
 Constraints can be used with LXD containers (`v.2.4.1`). However, these are not
 bound to the LXD cloud type (i.e. they can affect containers that are
@@ -171,12 +169,12 @@ Output:
 +---------------+---------+----------------------+------+------------+-----------+
 ```
 
-## LXD specific features
+## Advanced LXD support
 
-Here is a list of noteworthy LXD specific features and differences:
+Here is a list of advanced LXD features supported by Juju:
 
- - LXD clustering is supported (`v.2.4.0`). See
-   [Additional LXD resources][clouds-lxd-resources] for details.
+ - [LXD clustering][clouds-lxd-advanced-cluster] (`v.2.4.0`)
+ - [Adding a remote LXD cloud][clouds-lxd-advanced-remote] (`v.2.5.0`)
 
 ## Additional LXD resources
 
@@ -205,6 +203,8 @@ See these pages for ideas on what to do next:
 [models-add]: ./models-adding.md
 [credentials]: ./credentials.md
 [clouds-lxd-resources]: ./clouds-lxd-resources.md
+[clouds-lxd-advanced-cluster]: ./clouds-lxd-advanced.md#lxd-clustering
+[clouds-lxd-advanced-remote]: ./clouds-lxd-advanced.md#adding-a-remote-lxd-cloud
 [lxd-snap]: ./clouds-lxd-resources.md#using-the-lxd-snap
 [ubuntu-lxd]: http://www.ubuntu.com/cloud/lxd
 [charms-constraints-lxd]: ./charms-constraints.md#constraints-and-lxd-containers
