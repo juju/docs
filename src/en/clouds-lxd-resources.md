@@ -1,6 +1,7 @@
 Title: Additional LXD resources
 TODO:  Test certificate access
        Move clustering to clouds-lxd-advanced
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1793291
 table_of_contents: True
 
 # Additional LXD resources
@@ -68,6 +69,11 @@ Once the cluster is set up a controller can be created and will end up randomly
 on one of the nodes. See
 [Deploying to specific machines][deploying-to-specific-machines] for how to
 target specific nodes.
+
+In `v.2.5` specific cluster nodes can be targeted with the commands
+`bootstrap`, `deploy`, and `add-unit`. See
+[Deploying to specific machines][deploying-to-specific-machines] for how to do
+this.
 
 !!! Warning:
     The cluster-creation process will remove any existing containers. In a Juju

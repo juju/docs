@@ -98,12 +98,21 @@ Machine  State    DNS           Inst id        Series  AZ  Message
 ```
 
 The above works well with `deploy` and `add-unit` as will be shown below. As
-for `bootstrap` the `--to` option is limited to pointing to a MAAS node.
-Assuming a MAAS cloud has been added and is called 'maas-prod' you can
-therefore do this:
+for `bootstrap` the `--to` option is limited to either pointing to a MAAS node
+or, starting in `v.2.5`, to a LXD cluster node.
+
+Assuming a MAAS cloud named 'maas-prod' exists and has a node called
+'node2.maas':
 
 ```bash
-juju bootstrap maas-prod --to <host>.maas
+juju bootstrap maas-prod --to node2.maas
+```
+
+Assuming a LXD cluster cloud named 'lxd-cluster' exists and has a node called
+'node3':
+
+```bash
+juju bootstrap lxd-cluster --to node3
 ```
 
 ### deploy --to
@@ -140,13 +149,14 @@ second case, MongoDB is deployed to a new container on existing machine '25'.
 In the third case, nginx is deployed to existing container '3' on existing
 machine '24'.
 
-Some clouds support special arguments to the `--to` option, where instead of
-a machine you can specify a zone or, in the case of MAAS, an underlying
-physical (or virtual) machine:
+Some clouds support special arguments to the `--to` option, where instead of a
+machine you can specify a zone. In the case of MAAS or a LXD cluster a node can
+be specified:
 
 ```bash
 juju deploy mysql --to zone=us-east-1a
-juju deploy mediawiki --to host.mass
+juju deploy mediawiki --to node1.maas
+juju deploy mariadb --to node1.lxd
 ```
 
 ### add-unit --to
@@ -161,13 +171,21 @@ A comma separated list of directives can be provided to cater for the case
 where more than one unit is being added:
 
 ```bash
-juju add-unit rabbitmq-server -n 4 --to zone=us-west-1a,zone=us-east-1b
 juju add-unit rabbitmq-server -n 3 --to host1.maas,host2.maas,host3.maas
 ```
 
 If the number of values is less than the number of requested units the
-remaining units, as per normal behaviour, will be deployed to new machines. Any
-surplus values are ignored.
+remaining units, as per normal behaviour, will be deployed to new machines:
+
+```bash
+juju add-unit rabbitmq-server -n 4 --to zone=us-west-1a,zone=us-east-1b
+```
+
+Any surplus values are ignored:
+
+```bash
+juju add-unit rabbitmq-server -n 2 --to node1.lxd,node2.lxd,node3.lxd
+```
 
 The `add-unit` command is often associated with scaling out. See the
 [Scaling applications][charms-scaling] page for information on that topic.
