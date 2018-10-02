@@ -229,3 +229,4 @@ the main LXD page.
 [clouds-adding-manually]: ./clouds.md#adding-clouds-manually
 [credentials]: ./credentials.md
 [clouds-lxd-creating-a-controller]: ./clouds-LXD.md#creating-a-controller
+[lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
