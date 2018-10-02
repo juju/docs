@@ -170,7 +170,6 @@ assistance with the daemon. See upstream documentation for
 
 [clouds-lxd]: ./clouds-LXD.md
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
-[lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
 [logs]: ./troubleshooting-logs.md
 [credentials]: ./credentials.md
 [users-creating]: ./users-creating.md
