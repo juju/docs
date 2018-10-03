@@ -1,5 +1,6 @@
 Title: Juju and users
 TODO: User abilities, especially owners and regular users
+      Critical: review required
 
 
 # Juju users
@@ -70,12 +71,12 @@ the context of their controller):
 - Revoke user access from models (`juju revoke`)
 - Remove models (`juju destroy-model`)
 - Remove the controller (`juju destroy-controller`)
-- Upgrade any model (`juju upgrade-juju`)
+- Upgrade any model (`juju upgrade-model`)
 - Maintenance operations (e.g.: backups)
 
 ### Model owners
 A model owner has the power to list users who have access to the model they own
-(`juju users mymodel`) as well as upgrade their model (`juju upgrade-juju`).
+(`juju users mymodel`) as well as upgrade their model (`juju upgrade-model`).
 
 ### Regular users
 The ability of a regular user depends on the model access rights (read-only or

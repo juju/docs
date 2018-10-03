@@ -29,12 +29,13 @@
                 <li><a href="help-vmware.html">VMware vSphere</a></li>
             </ul>
         </li>
+        <li><a href="client.html">Juju client</a></li>
         <li class="section"><a class="header" href="controllers.html">Controllers</a>
             <ul class="sub">
                 <li><a href="controllers-creating.html">Create/Bootstrap</a></li>
                 <li><a href="controllers-gui.html">Juju GUI</a></li>
-                <li><a href="controllers-ha.html">High Availability</a></li>
-                <li><a href="controllers-backup.html">Backups</a></li>
+                <li><a href="controllers-backup.html">Controller backups</a></li>
+                <li><a href="controllers-ha.html">Controller high availability</a></li>
             </ul>
         </li>
         <li><a href="models.html">Models</a></li>

@@ -2,6 +2,9 @@ Title: Cross Model Relations
 TODO:  Add scenario #3: different cloud types
        Add commands to a scenario: grant|revoke, suspend|resume, remove-offer, consume|remove-saas
        Bug tracking: https://pad.lv/1726945
+       'Managing offers' section could use a rework
+       (e.g. summarize management abilities first)
+       (e.g. moving some detail to a new scenario)
 
 # Cross Model Relations
 
@@ -109,7 +112,15 @@ If the 'controller' portion is omitted the current controller is assumed.
 
 ### Managing offers
 
-An offer can be removed providing a relation has not been made to it.
+An offer can be removed providing a relation has not been made to it. To
+override this behaviour the `--force` option is required, in which case the
+relation is also removed. This is how an offer is removed:
+
+`juju remove-offer [--force] <offer url>`
+
+Note that if the offer resides in the current model then the shorter offer name
+can be used instead of the longer URL.
+
 Similarly, if an application is being offered it cannot be deleted until all
 its offers are removed.
 

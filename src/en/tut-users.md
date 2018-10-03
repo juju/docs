@@ -1,8 +1,8 @@
-Title: Sharing Clouds
+Title: Multi-user cloud
 TODO:  change screenshot username from degville to newuser
        add link to a table showing permissions for each type of user
 
-# Sharing Clouds
+# Multi-user cloud
 
 Juju is great at deploying applications to the cloud, but it is even better
 when others can join in too! 
@@ -177,8 +177,8 @@ With access revoked, the admin can now safely remove the model:
 juju destroy-model dev
 ```
 
-[helpaws]: ./help-aws.html "Conffiguring Juju for Amazon AWS"
-[helpgce]: ./help-google.html "Configuring Juju for GCE"
-[helpazure]: ./help-azure.html "Configuring Juju for Azure"
+[helpaws]: ./help-aws.html "Using Amazon AWS with Juju"
+[helpgce]: ./help-google.html "Using Google GCE with Juju"
+[helpazure]: ./help-azure.html "Using Microsoft Azure with Juju"
 [listclouds]: ./clouds.html "Configuring Juju Clouds"
 [cankub]: https://jujucharms.com/canonical-kubernetes/

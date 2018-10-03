@@ -1,13 +1,17 @@
-Title: Juju credentials
+Title: Credentials
 TODO:  Investigate: shouldn't `model-config` have a default-credential setting?
-       Juju 2.4 review: credentials UX rework
+       Add to mycreds.yaml: cloudsigma, rackspace, and oracle. also openstack using access-key
+       Investigate: can private keys always be replaced by a file path?
+       Add remote LXD certs/key (server cert, client cert, client key)
+table_of_contents: True
 
-# Cloud credentials
+# Credentials
 
-In order to access your cloud, Juju will need to know how to authenticate
-itself. We use the term *credentials* to describe the tokens or keys or secrets
-used - a set of credentials is represented by a _credential name_ that is used
-to refer to those credentials in subsequent commands.
+In order to access your cloud, Juju needs to know how to authenticate itself.
+We use the term *credentials* to describe the material necessary to do this
+(e.g. username & password, or just a secret key). Such a set of credentials is
+represented by a *credential name* that is used to refer to those credentials
+in subsequent commands.
 
 Juju selects a credential according to how many credentials are defined. If you
 have only one credential, or if a credential is labelled 'default', then this
@@ -15,41 +19,32 @@ is the credential that will be used by Juju. When multiple credentials are
 defined, with no default, a credential name must be specified at the model
 level.
 
-Juju can import your cloud credentials in one of three ways:
+## Adding credentials
 
-- Accepting credentials provided interactively by the user on the command line
-- Scanning for existing credentials (e.g. environment variables, "rc" files)
-- Reading a user-provided [YAML-formatted][yaml] file
- 
-Each of these methods are explained below, but if you are still having
-difficulty you can get extra help by selecting your cloud from among this list:
+Juju supports three methods for adding credentials:
 
-[Amazon AWS][aws] |
-[Microsoft Azure][azure] |
-[Google GCE][gce] |
-[Joyent][joyent] |
-[MAAS][clouds-maas] |
-[OpenStack][clouds-openstack] |
-[VMware vSphere][clouds-vmware] |
-[Oracle Compute][clouds-oracle] |
-[Rackspace][rackspace]
-
+ - Accepting credentials provided interactively by the user on the command line
+ - Scanning for existing credentials via environment variables and/or "rc"
+   files (only supported by certain providers)
+ - Reading a user-provided [YAML-formatted][yaml] file
+  
 !!! Note:
-    LXD deployments are a special case. Accessed locally, they do not require
-    credentials. Accessed remotely, they need a *certificate credential*. See
-    [Using LXD as a cloud][lxd] for further details. 
+    LXD deployments are a special case. Accessed from a Juju admin user, they
+    do not require credentials. Accessed from a non-admin user, a *certificate
+    credential* is needed. See
+    [Additional LXD resources][clouds-lxd-resources-non-admin-creds] for
+    details. 
 
-### Adding credentials via the command line
+### Adding credentials interactively
 
-You can add credentials by running the command:
+You can add credentials interactively in this way:
 
 ```bash
 juju add-credential <cloud>
 ```
 
-Juju will then ask for the information it needs. This may vary 
-according to the cloud you are using, but will typically look something like
-this:
+You will be asked for credential information based on the chosen cloud. Here
+we're adding credentials for cloud 'aws':
 
 ```no-highlight
 Enter credential name: carol
@@ -59,129 +54,187 @@ Enter secret-key: *******
 Credentials added for cloud aws.
 ```
 
-Once you have supplied all the information, the credentials will be added.
-
-At present, you will need to manually set one to be the default, if you 
-have more than one for a cloud:
+If you eventually set multiple credential names for the same cloud you will
+need to set one as the default:
 
 ```bash
-juju set-default-credential <cloud> <credential>
+juju set-default-credential <cloud> <credential-name>
 ```
 
-Setting a default credential means this will be used by the bootstrap 
-command when creating a controller, without having to specify it with
-the `--credential` option in the `juju add-model` command.
+The default credential will be used when creating a controller with the
+`bootstrap` command. Otherwise, a credential can be specified with the
+`--credential` option with both the `bootstrap` and `add-model` commands.
 
+### Adding credentials from environment variables
 
-### Scanning existing credentials
-
-Some cloud providers (e.g. AWS, OpenStack) have command line tools which rely on 
-environment variables being used to store credentials. If these are in use on 
-your system already, or you choose to define them 
-([there is extra info here][env]), Juju can import them.
-
-For example, AWS uses the following environment variables (among others):
-
-**AWS_ACCESS_KEY_ID**
-
-**AWS_SECRET_ACCESS_KEY**
-
-If these are already set in your shell (you can echo $AWS_ACCESS_KEY_ID to test)
-they can be used by Juju.
-
-To scan your system for credentials Juju can use, run the command:
+Certain cloud providers offer command line tools that rely on environment
+variables to store credentials. Juju supports the scanning of such variables as
+a way to add them to itself. Scanning is done with the `autoload-credentials`
+command:
 
 ```bash
 juju autoload-credentials
 ```
 
-This will will ask you whether to store each set of credentials
-it finds. Note that this is a 'snapshot' of those stored values - Juju will not 
-notice if they change in future.
+Any variables detected will cause a prompt to appear. You will be asked to
+confirm the addition of their respective values as well as to provide a name to
+call the credential set.
 
-### Adding credentials from a YAML file
+!!! Note:
+    You will need to rescan the variables if their values ever change. A scan
+    only picks up *current* values.
 
-You can also specify a YAML format file for the credentials. This
-file would be similar to, but shorter than this extensive sample, which
-we will call mycreds.yaml:
+There are three providers that use tools that support this variables method:
+
+[Amazon AWS][clouds-aws-using-env-variables] |
+[Google GCE][clouds-google-using-env-variables] |
+[OpenStack][clouds-openstack-using-env-variables]
+
+Each page provides details on using this method with its respective provider.
+
+!!! Note:
+    The `autoload-credentials` command is also used to generate a certificate
+    credential for localhost clouds. This is needed for providing access to
+    non-admin Juju users. See
+    [Additional LXD resources][clouds-lxd-resources-non-admin-creds].
+    
+### Adding credentials from a file
+
+You can use a YAML-formatted file to store credentials for any cloud. Below we
+provide a sample file, which we will call `mycreds.yaml`. It includes many of
+the clouds supported by Juju and uses the most common options. Note the MAAS
+cloud and the two OpenStack clouds, called 'homemaas', 'myopenstack' and
+'homestack' respectively.
 
 ```yaml
 credentials:
-      aws:
-        default-credential: peter
-        default-region: us-west-2
-        peter:
-          auth-type: access-key
-          access-key: AKIAIH7SUFMBP455BSQ
-          secret-key: HEg5Y1DuGabiLt72LyCLkKnOw+NZkgszh3qIZbWv
-        paul:
-          auth-type: access-key
-          access-key: KAZHUKJHE33P455BSQB
-          secret-key: WXg6S5Y1DvwuGt72LwzLKnItt+GRwlkn668sXHqq
-      homemaas:
-        peter:
-          auth-type: oauth1
-          maas-oauth: 5weWAsjhe9lnaLKHERNSlke320ah9naldIHnrelks
-      homestack:
-        default-region: region-a
-        peter:
-          auth-type: userpass
-          password: UberPassK3yz
-          tenant-name: appserver
-          username: peter
-      google:
-        peter:
-          auth-type: jsonfile
-          file: ~/.config/gcloud/application_default_credentials.json
-      azure:
-        peter:
-          auth-type: service-principal-secret
-          application-id: niftyapp
-          subscription-id: 31fb132e-e774-49dd-adbb-d6a4e966c583
-          application-password: UberPassK3yz
-      joyent:
-        peter:
-          auth-type: userpass
-          sdc-user: admingal
-          sdc-key-id: 2048 00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff
-          private-key: key (or private-key-path, like `~/.ssh/id_rsa.pub`)
-          algorithm: "rsa-sha256"
-      vsphere:
-        ashley:
-          auth-type: userpass
-          password: passw0rd
-          user: administrator@xyz.com
+  aws:
+    default-credential: peter
+    default-region: us-west-2
+    peter:
+      auth-type: access-key
+      access-key: AKIAIH7SUFMBP455BSQ
+      secret-key: HEg5Y1DuGabiLt72LyCLkKnOw+NZkgszh3qIZbWv
+    paul:
+      auth-type: access-key
+      access-key: KAZHUKJHE33P455BSQB
+      secret-key: WXg6S5Y1DvwuGt72LwzLKnItt+GRwlkn668sXHqq
+  homemaas:
+    peter:
+      auth-type: oauth1
+      maas-oauth: 5weWAsjhe9lnaLKHERNSlke320ah9naldIHnrelks
+  myopenstack:
+    default-region: region-a
+    john:
+      auth-type: access-key
+      access-key: bae7651caeab41ed876cfdb342bae23e
+      secret-key: 7172bc91a21c3df1787423ac12093bcc
+      tenant-name: admin
+      username: admin   
+  homestack:
+    default-region: region-b
+    peter:
+      auth-type: userpass
+      password: UberPassK3yz
+      tenant-name: appserver
+      username: peter
+  google:
+    peter:
+      auth-type: jsonfile
+      file: ~/.config/gcloud/application_default_credentials.json
+    juju-gce-1-sa:
+      auth-type: oauth2
+      project-id: juju-gce-1
+      private-key: |
+        -----BEGIN PRIVATE KEY-----
+        MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCzTFMj0/GvhrcZ
+        3B2584ZdDdsnVuHb7OYo8eqXVLYzXEkby0TMu2gM81LdGp6AeeB3nu5zwAf71YyP
+        erF4s0falNPIyRjDGYV1wWR+mRTbVjYUd/Vuy+KyP0u8UwkktwkP4OFR270/HFOl
+        Kc0rzflag8zdKzRhi7U1dlgkchbkrio148vdaoZZo67nxFVF2IY52I2qGW8VFdid
+        z+B9pTu2ZQKVeEpTVe5XEs3y2Y4zt2DCNu3rJi95AY4VDgVJ5f1rnWf7BwZPeuvp
+        0mXLKzcvD31wEcdE6oAaGu0x0UzKvEB1mR1pPwP6qMHdiJXzkiM9DYylrMzuGL/h
+        VAYjhFQnAgMBAAECggEADTkKkJ10bEt1FjuJ5BYCyYelRLUMALO4RzpZrXUArHz/
+        CN7oYTWykL68VIE+dNJU+Yo6ot99anC8GWclAdyTs5nYnJNbRItafYd+3JwRhU0W
+        vYYZqMtXs2mNMYOC+YNkibIKxYZJ4joGksTboRvJne4TN7Et/1uirr+GtLPn+W/e
+        umXfkpbOTDDAED8ceKKApAn6kLIW98DwHyK0rUzorOgp4DFDX9CjuWC+RG3CFGsk
+        oVOcDuTevJlb9Rowj1S2qYhGjuQVpVD7bcRg5zaSJKS88YbK63DCHZFpXn9JR0Fg
+        Vou9dnc99FdMo5vtHg7Adxh91gdqEvoaF1lHx8Var0q32QDse+spvv7K6/+7G35k
+        3+1gDgF74/uMr/AVrjpoUjmGAuWweXY/vn1MVN2Uld4KPYafkOF8oTuDK5f1fu0d
+        cMEoKRSXQh1NCD3PZWfQt4ypYPzn9R+VBGwnBcPorytlhM9qdLxKKlaHjBlprS6Y
+        Be1z6FO+MqWhFlwPrKH/2uwd4QKBgQDCGESJur9OdEeroBQyYyJF7DnJ/+wHSiOr
+        qzvb9YW1Ddtg1iiKHHZO5FS59/D62kPaGsysCMKxI9FW53TzSxUiTaEG636C5v8J
+        eRdzxX04BNYNzqXbm1agBEjAa7tK8xJAjk0to4zqadUaYZog0uQs2X7Aexj2c9T/
+        HQVLILHjBwKBgD/yuoLNbST+cGbuZl1s2EnTP796xPkkUm3qcUzofzmn6uivz7Qp
+        FMThZhHZ/Der98tra91a4e8fHaUTL5d4eCMeCL1mWXoNMnm02D/ugpEC8yDefi3T
+        xlM/Ed0IEVogcd49tvTvQfrhfbW/6Que/rkLKCoUlAldfIOYkS4YyyTBAoGACCpH
+        L9gYVi+UGEc6skfzWCew4quOfVwEFiO09/LjNhOoJ/G6cNzzqSv32H7yt0rZUeKQ
+        u6f+sL8F/nbsN5PwBqpnXMgpYU5gakCa2Pb05pdlfd00owFs6nxjpxyhG20QVoDm
+        BEZ+FhpvqZVzi2/zw2M+7s/+49dJnZXV9Cwi758CgYAquNdD4RXU96Y2OjTlOSvM
+        THR/zY6IPeO+kCwmBLiQC3cv59gaeOp1a93Mnapet7a2/WZPL2Al7zwnvZYsHc4z
+        nu1acd6D7H/9bb1YPHMNWITfCSNXerJ2idI689ShYjR2sTcDgiOQCzx+dwL9agaC
+        WKjypRHpiAMFbFqPT6W2uA==
+        -----END PRIVATE KEY-----
+      client-id: "206517233375074786882"
+      client-email: juju-gce-sa@juju-gce-123.iam.gserviceaccount.com
+  azure:
+    peter:
+      auth-type: service-principal-secret
+      application-id: niftyapp
+      subscription-id: 31fb132e-e774-49dd-adbb-d6a4e966c583
+      application-password: UberPassK3yz
+  joyent:
+    peter:
+      auth-type: userpass
+      sdc-user: admingal
+      sdc-key-id: 2048 00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff
+      private-key: key (or private-key-path, like `~/.ssh/id_rsa.pub`)
+      algorithm: "rsa-sha256"
+  vsphere:
+    ashley:
+      auth-type: userpass
+      password: passw0rd
+      user: administrator@xyz.com
+  lxd-node2:
+    interactive:
+      auth-type: interactive
+      trust-password: ubuntu
 ```
 
-A source file like the above can be added to Juju's list of credentials with 
-the command:
+Credentials are added to Juju on a per-cloud basis. To add credentials for the
+defined 'azure' cloud, for instance, we would do this:
 
 ```bash
-juju add-credential aws -f mycreds.yaml
+juju add-credential azure -f mycreds.yaml
 ```
 
-This sample includes all of the default cloud options plus a couple of
-special cloud options, MAAS and an OpenStack cloud called `homestack` in
-the sample. See [Clouds](./clouds.html).
-
+!!! Note:
+    All available authentication types are outlined in section
+    [Adding clouds manually][clouds-adding-clouds-manually] on the Clouds page.
+    
 ## Managing credentials
 
 There are several management tasks that can be done related to credentials.
 
 ### Listing credentials
 
-You can check what credentials are stored by Juju by running the command:
+When credentials are added to Juju they become available to use on a controller
+and its models. There are therefore two categories of credentials: those that
+are available and those that are currently in use.
+
+#### Available
+
+You can display what credentials are available by running the command:
 
 ```bash
-juju credentials
+juju list-credentials
 ```
 
-...which will return a list of the known credentials. For example:
+Sample output:
 
 <!-- JUJUVERSION: 2.0.0-genericlinux-amd64 -->
 <!-- JUJUCOMMAND: juju credentials -->
 ```no-highlight
-Cloud      Credentials
+Cloud   Credentials
 aws     bob*, carol
 google  wayne
 ```
@@ -189,14 +242,77 @@ google  wayne
 The asterisk '*' denotes the default credential, which will be used for the
 named cloud unless another is specified.
 
-For YAML output that includes detailed credential information, including
-secrets like access keys and passwords:
+To reveal actual authentication material (e.g. passwords, keys):
 
 ```bash
-juju credentials --format yaml --show-secrets
+juju list-credentials --format yaml --show-secrets
 ```
 
-The YAML output will be similar to our 'mycreds.yaml' sample above.
+Sample output:
+
+```no-highlight
+local-credentials:
+  aws:
+    bob:
+      auth-type: access-key
+      access-key: AKIAXZUYGB6UED2GNC5A
+      secret-key: StB2bmL1+tX+VX7neVgy/3JosJAwOcBIO53nyCVp
+```
+
+Notice how the output says 'local-credentials', meaning they are stored on
+the local Juju client.
+
+#### In use
+
+To see what credentials are in use by a model (here the 'default' model):
+
+```bash
+juju show-model default
+```
+
+Partial output:
+
+```no-highlight
+default:
+  name: admin/default
+  ...
+  ...
+  credential:
+    name: bob
+    owner: admin
+    cloud: aws
+```
+
+The `models --format yaml` command also shows this information, albeit for all
+models.
+
+The above commands do not display authentication material. To view the active
+credentials, including the cloud name, credential names, and the names of
+models:
+
+```bash
+juju show-credentials --show-secrets
+```
+
+Sample output:
+
+```no-highlight
+controller-credentials:
+  aws:
+    bob:
+      content:
+        auth-type: access-key
+        access-key: AKIAXZUYGB6UED2GNC5A
+        secret-key: StB2bmL1+tX+VX7neVgy/3JosJAwOcBIO53nyCVp
+      models:
+        controller: admin
+        default: admin
+```
+
+Notice how the output says 'controller-credentials', meaning they are stored on
+the controller.
+
+The `show-credentials` command queries the controller to get its information.
 
 ### Setting default credentials
 
@@ -256,11 +372,6 @@ juju add-credential --replace joe
 juju update-credential google joe
 ```
 
-!!! Warning:
-    It is not possible to update the credentials if the initial credential name
-    is unknown. This restriction will be removed in an upcoming release of
-    Juju.
-
 ####  Updating remote credentials using a different Juju user
 
 If you are unable to ascertain the original Juju username then you will need
@@ -314,14 +425,20 @@ juju remove-credential aws bob
 ```
 
 
+<!-- LINKS -->
+
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[lxd]: ./clouds-LXD.html#remote_user_credentials
-[aws]: ./help-aws.html
-[azure]: ./help-azure.html
-[gce]: ./help-google.html
-[joyent]: ./help-joyent.html
-[rackspace]: ./help-rackspace.html
-[clouds-maas]: ./clouds-maas.html
-[clouds-oracle]: ./help-oracle.html
-[clouds-openstack]: ./help-openstack.html
-[clouds-vmware]: ./help-vmware.html
+[clouds-lxd-resources-non-admin-creds]: ./clouds-lxd-resources.md#non-admin-user-credentials
+[clouds-aws]: ./help-aws.md
+[clouds-azure]: ./help-azure.md
+[clouds-google]: ./help-google.md
+[clouds-joyent]: ./help-joyent.md
+[clouds-rackspace]: ./help-rackspace.md
+[clouds-maas]: ./clouds-maas.md
+[clouds-oracle]: ./help-oracle.md
+[clouds-openstack]: ./help-openstack.md
+[clouds-vmware]: ./help-vmware.md
+[clouds-aws-using-env-variables]: help-aws.md#using-environment-variables
+[clouds-google-using-env-variables]: help-google.md#using-environment-variables
+[clouds-openstack-using-env-variables]: help-openstack.md#using-environment-variables
+[clouds-adding-clouds-manually]: ./clouds.md#adding-clouds-manually

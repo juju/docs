@@ -2,7 +2,6 @@ Title: Juju logs
 TODO:  Remote logging: strongly consider adding a sub-page (rsyslog TLS tutorial)
        Remote logging: need to state whether server-side and/or client-side auth is a requirement
 
-
 # Juju logs
 
 There are various logging resources available to the Juju operator. This page will
@@ -21,8 +20,8 @@ on multiple (Juju) machines directly on the file system. The latter can
 nonetheless be done in exceptional circumstances and some explanation is
 provided here.
 
-See [Juju high availability](./controllers-ha.html#ha-and-logging) when viewing
-logs in an HA context.
+See [Controller HA and logging][controller-ha-and-logging] when viewing logs in
+an HA context.
 
 ### Juju agents
 
@@ -57,8 +56,7 @@ reveals the agent's configuration file:
 ```
 
 Consider keeping backups of these files, especially prior to upgrading the
-agents. See
-[Upgrading Juju software](./models-upgrade.html#upgrading-the-model-software).
+agents. See [Model upgrades][models-upgrade].
 
 ### The debug-log command
 
@@ -84,8 +82,8 @@ The exception to the streaming is when limiting the output (option '--limit';
 see below) and that limit is attained. In all other cases the command will need
 to be interrupted with 'Ctrl-C' in order to regain the shell prompt.
 
-For complete syntax, see the [command reference page](./commands.html). The
-`juju help debug-log` command also provides reminders and more examples.
+For complete syntax, see the [Command reference][commands] page. The `juju help
+debug-log` command also provides reminders and more examples.
 
 #### Examples:
 
@@ -144,7 +142,7 @@ The logging levels, from most verbose to least verbose, are as follows:
  - WARNING
  - ERROR
 
-### Increase the logging level
+### Change the logging level
 
 When diagnosing an issue (and possibly filing a bug), the first step is to make
 logging more verbose. For instance, to increase the logging level of the unit
@@ -156,6 +154,9 @@ juju model-config logging-config="<root>=WARNING;unit=TRACE"
 
 To avoid filling up the database unnecessarily, when verbose logging is no
 longer needed, do not forget to return logging to normal levels.
+
+The logging level can also be changed on a per-unit basis. See section
+[Agent logging override][#agent-logging-override] below.
 
 ### Advanced filtering
 
@@ -224,7 +225,8 @@ As we've seen, the logging level for machine agents and unit agents are
 specified as a single model configuration setting. However, in some situations
 (e.g. targeted verbose debugging) it may be desirable to increase the logging
 level on a per-agent basis. This can also be done after having reduced the
-model-wide log level (as explained [above][#increase-the-logging-level]).
+model-wide log level (as explained in section
+[Change the logging level][#change-the-logging-level] above).
 
 For example, let's enable 'TRACE' logging level to a unit of MySQL. We begin by
 logging in to the unit's machine ('0' in this example):
@@ -376,11 +378,15 @@ more /var/log/juju/audit.log
 
 <!-- LINKS -->
 
+[commands]: ./commands.md
 [#model-logs]: #model-logs
 [#remote-logging]: #remote-logging
 [#audit-logging]: #audit-logging
-[#increase-the-logging-level]: #increase-the-logging-level
-[controllers-ha]: ./controllers-ha.html 
-[excluding-information-log-audit]: ./controllers-config.html#excluding-information-from-the-audit-log
+[#change-the-logging-level]: #change-the-logging-level
+[#agent-logging-override]: #agent-logging-override
+[controllers-ha]: ./controllers-ha.md 
+[excluding-information-log-audit]: ./controllers-config.md#excluding-information-from-the-audit-log
 [upstream-rsyslog-tls-tutorial]: http://www.rsyslog.com/doc/v8-stable/tutorials/tls_cert_summary.html
-[models-config]: ./models-config.html
+[models-config]: ./models-config.md
+[models-upgrade]: ./models-upgrade.md
+[controller-ha-and-logging]: ./controllers-ha.md#controller-ha-and-logging

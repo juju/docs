@@ -1,8 +1,8 @@
-Title: Juju models
-TODO: Previous warning (add-model): "For 'ec2' and 'openstack' cloud types, the access and secret keys need to be provided." I tested ec2 and did not need to do this. OpenStack?
+Title: Models
+TODO:  Review required. Convert to abstract links
 
 
-# Juju models
+# Models
 
 A Juju *model* is an environment associated with a *controller* (see
 [Controllers](./controllers.html)). When a controller is created two models are
@@ -17,7 +17,7 @@ Common model management tasks are summarized below.
 
 
 
-^# View status
+^# View model status
    
    Use the `juju status` command to view the status of a model:
 
@@ -38,10 +38,10 @@ Common model management tasks are summarized below.
    For complete explanation and syntax, see the
    [command reference page](./commands.html#add-model) or the `juju help
    add-model` command.
-   
+  
 
 
-^# List models
+^# List all models
 
    Use the `juju models` command to list all models for a controller:
    
@@ -50,6 +50,18 @@ Common model management tasks are summarized below.
    For complete explanation and syntax, see the
    [command reference page](./commands.html#models) or the `juju help
    models` command.
+  
+
+
+^# Examine a model
+
+   Use the `juju show-model` command to examine a specific model:
+   
+   `juju show-model [options]`
+   
+   For complete explanation and syntax, see the
+   [command reference page](./commands.html#show-model) or the
+   `juju help show-model` command.
 
 
 
@@ -72,7 +84,7 @@ Common model management tasks are summarized below.
    machines have a minimum amount of disk space on their root drive.
 
    This is a complex subject. See
-   [Constraints](./charms-constraints.html#setting-constraints-for-a-model).
+   [Using constraints](./charms-constraints.html#setting-constraints-for-a-model).
    
 
 
@@ -88,7 +100,7 @@ Common model management tasks are summarized below.
    
 
 
-^# Switch models
+^# Change models
    
    Use the `juju switch` command to go from one model to another:
    
@@ -199,7 +211,7 @@ Common model management tasks are summarized below.
    running on every machine Juju creates. This upgrade process does not pertain
    to the Juju software package installed on a client system.
 
-   This is a complex subject. See [Juju upgrades](./models-upgrade.html).
+   This is a complex subject. See [Model upgrades](./models-upgrade.html).
 
 
 

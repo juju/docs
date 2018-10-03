@@ -5,13 +5,566 @@ Title: Juju Release Notes
 This page details all available release notes for the 2.x series of Juju. The
 release notes for the 1.x series are available [here][release-notes-1].
 
-<!--
-USE THE NEW & IMPROVED 'Feedback' and 'More information' SECTIONS THAT STARTED
-TO APPEAR WITH 2.3.5
+^# Juju 2.4.3
 
-ALSO CONSIDER "LINKIFYING" STUFF. INCLUDE 2 EMPTY SPACES AT EOL TO GET A
-CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
--->
+  The Juju team is pleased to announce the release of Juju 2.4.3.
+  
+  This is a bug fix release. In particular, it fixes a backwards incompatible
+  change to `juju config` output and an intermittent agent shutdown hang.
+  
+  For the full list of fixes and additions, see the
+  [2.4.3 milestone](https://launchpad.net/juju/+milestone/2.4.3).
+
+  ## Get Juju
+  
+  The easiest way to install Juju is by using the `snap` package:
+  
+  	  sudo snap install juju --classic
+  
+  Those already using the 'stable' snap channel (the default as per the above
+  command) should be upgraded automatically. Other packages are available for a
+  variety of platforms (see the [install documentation][reference-install]).
+  
+  ## Feedback appreciated
+  
+  Let us know how you're using Juju or of any questions you may have. You can
+  join us on [Discourse][juju-discourse-forum], send us a message on Twitter
+  (hashtag `#jujucharms`), or talk to us in the `#juju` IRC channel on
+  freenode.
+  
+  ## More information
+  
+  To learn more about Juju visit our home page at 
+  [https://jujucharms.com](https://jujucharms.com).
+
+^# Juju 2.4.2
+
+  The Juju team is pleased to announce the release of Juju 2.4.2.
+
+  This is primarily a bug fix release. In particular, it changes the default
+  series for controllers from Ubuntu 16.04 LTS (Xenial) to Ubuntu 18.04 LTS
+  (Bionic).
+  
+  For the full list of fixes and additions, see the
+  [2.4.2 milestone](https://launchpad.net/juju/+milestone/2.4.2).
+
+  ## Get Juju
+  
+  The easiest way to install Juju is by using the `snap` package:
+  
+  	  sudo snap install juju --classic
+  
+  Those already using the 'stable' snap channel (the default as per the above
+  command) should be upgraded automatically. Other packages are available for a
+  variety of platforms (see the [install documentation][reference-install]).
+  
+  ## Feedback appreciated
+  
+  Let us know how you're using Juju or of any questions you may have. You can
+  join us on [Discourse][juju-discourse-forum], send us a message on Twitter
+  (hashtag `#jujucharms`), or talk to us in the `#juju` IRC channel on
+  freenode.
+  
+  ## More information
+  
+  To learn more about Juju visit our home page at 
+  [https://jujucharms.com](https://jujucharms.com).
+
+^# Juju 2.4.1
+
+  The Juju team is pleased to announce the release of Juju 2.4.1.
+
+  This is primarily a bug fix release. In particular, it contains a fix for a
+  critical issue involving the removal of Juju binaries on units. However,
+  there are also a few new features such as support for the upcoming Ubuntu
+  18.10 (Cosmic) release as well as constraints for the LXD provider. For the
+  full list of fixes and additions, see the
+  [2.4.1 milestone](https://launchpad.net/juju/+milestone/2.4.1).
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package:
+  
+  	  sudo snap install juju --classic
+  
+  Those already using the stable snap should be upgraded automatically. Other
+  packages are available for a variety of platforms (see the
+  [install documentation][reference-install]).
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
+^# Juju 2.4.0
+
+  The Juju team is proud to release version 2.4. This release greatly improves
+  running and operating production infrastructure at scale. Improvements to
+  `juju status` output, easier maintenance of Controller high availability, and
+  guiding Juju to the correct management network all aid in keeping your
+  infrastructure running smoothly.  
+  
+  For highlights of this release, please see the [What's new in 2.4][whats-new]
+  page in the documentation. Further details are below.
+  
+  ## New and improved.
+
+  **Bionic support**  
+  Juju 2.4 fully supports running controllers and workloads on Ubuntu 18.04 LTS
+  (Bionic), including leveraging `netplan` for network management. 
+
+  **LXD enhancements**  
+
+  - LXD functionality has been updated to support the latest LXD 3.0.
+  
+  - Juju supports LXD installed as a Snap and defaults to Snap-installed
+    LXD by default if it is present. 
+
+  - A basic model of LXD clustering is now supported with the following
+    conditions:
+
+      - The juju bootstrap of the localhost cloud must be performed on a
+        cluster member.
+
+      - Bridge networking on clustered machines must be set up to allow
+        egress traffic to the controller container(s).
+
+  **Improvements to `juju status` output**  
+
+  - The 'Relations' section
+
+      - When filtering by application name, only direct relations are shown.
+
+      - In tabular format, the 'Relations' section is no longer visible by
+      default.  Use the `--relations` option to see it (
+      [LP 1633972](https://bugs.launchpad.net/juju/+bug/1633972)).
+
+      - Clarifying empty output - whether it is due to a model being empty
+        or because a provided filter did not match anything on the model
+    (
+    [LP 1255786](https://bugs.launchpad.net/juju/+bug/1255786),
+    [LP 1696245](https://bugs.launchpad.net/juju/+bug/1696245), and
+    [LP 1594883](https://bugs.launchpad.net/juju/+bug/1594883)).
+
+  - Addition of a (controller) timestamp (
+    [LP 1765404](https://bugs.launchpad.net/juju/+bug/1765404)).
+
+  - Reordering of the status model table to improve consistency between
+    model updates. 
+
+  - Inclusion of application endpoint binding information (in YAML and JSON
+    formats). For each endpoint, the space to which it is bound is
+    provided.
+
+  **Controller configuration options for spaces**  
+  Two new controller configuration settings have been introduced. These are:
+  
+  - juju-mgmt-space
+  - juju-ha-space
+  
+  'juju-mgmt-space' is the name of the network space used by agents to
+  communicate with controllers. Setting a value for this item limits the IP
+  addresses of controller API endpoints in agent config, to those in the space.
+  If the value is misconfigured so as to expose no addresses to agents, then a
+  fallback to all available addresses results. Juju client communication with
+  controllers is unaffected by this value.
+  
+  'juju-ha-space' is the name of the network space used for MongoDB replica-set
+  communication in high availability (HA) setups. This replaces the previously
+  auto-detected space used for such communication. When enabling HA, this value
+  must be set where member machines in a HA set have more than one IP address
+  available for MongoDB use, otherwise an error will be reported. Existing HA
+  replica sets with multiple available addresses will report a warning instead
+  of an error provided the members and addresses remain unchanged.
+  
+  Using either of these options during `bootstrap` or `enable-ha` effectively
+  adds constraints to machine provisioning. The commands will fail with an
+  error if such constraints can not be satisfied.
+
+  **Rework of `juju enable-ha`**  
+  In Juju 2.4 you can no longer use `juju enable-ha` to demote controllers.
+  Instead you can now use the usual `juju remove-machine` command, targeting
+  a controller machine. This will gracefully remove the machine as a controller
+  and from the database replica set. This method does allow you to end up with
+  an even number of controllers, which is not a recommended configuration.
+  After removing a controller it is therefore recommended to run
+  `juju enable-ha` to bring back proper redundancy. When the machine is gone
+  and not available to run its own teardown and cleanup processes
+  `juju remove-machine --force` should be used. See
+  [Controller high availability](./controllers-ha).
+  
+  **Model owner changes**  
+  The concept of model owner is becoming obsolete. Model owner is just another
+  model user with administrative access. We are working to remove any special
+  access that the model owner has, and move to having the models in a namespace
+  rather than grouped by owner.
+  
+  **Charm goal state**  
+  Charm goal state allows charms to discover relevant information about their
+  deployment. The key pieces of information a charm needs to discover are:
+  
+   - what other peer units have been deployed and their status
+   - what remote units exist on the other end of each endpoint, and their status
+  
+  Charms use a new goal-state hook command to query the information about their
+  deployment. This hook command will print only YAML or JSON output (default
+  yaml):
+  
+  	  goal-state --format yaml
+  
+  The output will be a subset of that produced by the juju status command. There
+  will be output for sibling (peer) units and relation state per unit.
+  
+  The unit status values are the workload status of the (sibling) peer units. We
+  also use a unit status value of dying when the unit's life becomes dying. Thus
+  unit status is one of:
+  
+   - allocating
+   - active
+   - waiting
+   - blocked
+   - error
+   - dying
+  
+  The relation status values are determined per unit and depend on whether the
+  unit has entered or left scope. The possible values are:
+  
+   - joining (relation created but unit not yet entered scope)
+   - joined (unit has entered scope and relation is active)
+   - broken (unit has left, or is preparing to leave scope)
+   - suspended (parent cross model relation is suspended)
+   - error
+  
+  By reporting error state, the charm has a chance to determine that goal state
+  may not be reached due to some external cause. As with status, we will report
+  the time since the status changed to allow the charm to empirically guess that
+  a peer may have become stuck if it has not yet reached active state.
+  
+  **Cloud credential changes**  
+  Cloud credentials are used by models to authenticate communications with the
+  underlying provider as well as to perform authorised operations on this
+  provider. 
+  
+  Juju has always dealt with both cloud credentials stored locally on a user’s
+  client machine as well as the cloud credentials stored remotely on a
+  controller. The distinction has not been made clear previously and this
+  release addresses these ambiguities:
+  
+   - Basic cloud credential information such as its name and owner have been
+     added to the `show-model` command output. 
+  
+   - The new `show-credential` command shows a logged on user their remotely
+     stored cloud credentials along with models that use them.
+
+  **New proxy configuration settings**  
+  There are four new model configuration keys affecting proxy behaviour that
+  have a Juju-only scope (i.e. not system-wide). Existing model configuration
+  for proxies remain unchanged, and any existing model or controller should not
+  notice any changes. The new keys are:
+
+  `juju-http-proxy`  
+  `juju-https-proxy`  
+  `juju-ftp-proxy`  
+  `juju-no-proxy`
+
+  These Juju-specific proxy settings are incompatible with the four
+  corresponding legacy proxy settings and data validation is enabled to prevent
+  collisions from occurring.
+  
+  The `juju-no-proxy` key can and should contain CIDR-formatted values for
+  subnets. The controller machines are not added automatically to this key, so
+  the internal network that is used should appear within it if there are other
+  proxies set.
+  
+  The new proxy values are passed to the charm hook contexts as the following
+  environment variables, respectively:
+  
+  `JUJU_CHARM_HTTP_PROXY`  
+  `JUJU_CHARM_HTTPS_PROXY`  
+  `JUJU_CHARM_FTP_PROXY`  
+  `JUJU_CHARM_NO_PROXY`
+  
+  The rationale behind this change is to better support proxies in situations
+  where there are larger subnets, or multiple subnets, that should not be
+  proxied. The traditional 'no_proxy' values cannot have CIDR values as they
+  are not understood by many tools.
+  
+  Work is also underway to introduce further granularity that will allow
+  specific libraries (e.g. `charm-helpers`) to enable a proxy setting on a
+  per-call basis. This is still under development.
+  
+  **Upgrading models across release streams**  
+  The `upgrade-model` command now supports upgrading to a different agent
+  stream ('devel', 'proposed', 'released') via the `--agent-stream` option.
+  Note that this is different from `--agent-version`.
+  
+  **Backup and restore behaviour changes**  
+  Backups are no longer stored on the controller by default. The `--keep-copy`
+  option has been added to provide that behaviour. The `--no-download` option
+  prevents a locally stored backup and implies `--keep-copy`.
+  
+  The `restore-backup` command loses the `-b` option (to create a new
+  controller). A new controller should now be created in the usual way
+  (`bootstrap`) and then restore to it.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is by using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Fixes.
+  
+  Some important fixes include:
+
+  - `network-get` can return incorrect CIDRs (
+  [LP 1770127](https://bugs.launchpad.net/bugs/1770127)).
+
+  - Change in behaviour in status output: 'Relations' section is not visible by
+  default in tabular format (
+  [LP 1633972](https://bugs.launchpad.net/bugs/1633972)).
+
+  - Fixes for when /var, /etc, /tmp are on different partitions (
+  [LP 1634390](https://bugs.launchpad.net/bugs/1634390) and
+  [LP 1751291](https://bugs.launchpad.net/bugs/1751291)).
+
+  - networking related fixes (
+  [LP 1733266](https://bugs.launchpad.net/bugs/1733266),
+  [LP 1764735](https://bugs.launchpad.net/bugs/1764735), and
+  [LP 1771120](https://bugs.launchpad.net/bugs/1771120)).
+
+  - juju resolve fix / improvement (
+  [LP 1755141](https://bugs.launchpad.net/bugs/1755141) and
+  [LP 1762979](https://bugs.launchpad.net/bugs/1762979)).
+
+  - support for st1 and sc1 volume types on AWS (
+  [LP 1753593](https://bugs.launchpad.net/bugs/1753593)).
+
+  - support for new AWS instance types (
+  [LP 1754735](https://bugs.launchpad.net/bugs/1754735)).
+
+  For a detailed breakdown of fixed bugs:
+  
+  [https://launchpad.net/juju/+milestone/2.4.0](https://launchpad.net/juju/+milestone/2.4.0)  
+  [https://launchpad.net/juju/+milestone/2.4-rc3](https://launchpad.net/juju/+milestone/2.4-rc3)  
+  [https://launchpad.net/juju/+milestone/2.4-rc2](https://launchpad.net/juju/+milestone/2.4-rc2)  
+  [https://launchpad.net/juju/+milestone/2.4-rc1](https://launchpad.net/juju/+milestone/2.4-rc1)  
+  [https://launchpad.net/juju/+milestone/2.4-beta3](https://launchpad.net/juju/+milestone/2.4-beta3)  
+  [https://launchpad.net/juju/+milestone/2.4-beta2](https://launchpad.net/juju/+milestone/2.4-beta2)  
+  [https://launchpad.net/juju/+milestone/2.4-beta1](https://launchpad.net/juju/+milestone/2.4-beta1)
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
+  
+  ## More information.
+  
+  To learn more about Juju visit [https://jujucharms.com][upstream-juju].
+
+^# Juju 2.3.9
+
+  The Juju team is proud to release Juju 2.3.9! 
+
+  This release is a bugfix release for Juju 2.3 which also adds support for new AWS instance types.
+  
+  ## Notable fixes
+  
+  - [LP #1770437](https://bugs.launchpad.net/juju/+bug/1770437) - juju-introspection.sh is full of bashisms, the introspection functions now use underscores to separate words, i.e. `juju-goroutines` -> `juju_goroutines`
+  - [LP #1733266](https://bugs.launchpad.net/juju/+bug/17733266) - Autodetection of subnets prevents bootstrap when there are duplicate subnet ranges
+  - [LP #1790647](https://bugs.launchpad.net/juju/+bug/1790647) - Refresh support for new aws instance types
+  - [LP #1789211](https://bugs.launchpad.net/juju/+bug/1789211) - Can't close/open ports without external network
+  
+  Additional bugs fixed can be found in the
+  [milestone page](https://launchpad.net/juju/2.3/2.3.9).
+  
+  ## How do I get it?
+  
+  The best way to get your hands on this release of Juju is to install it as a snap package:
+               
+      sudo snap install juju --classic --channel=2.3/stable
+  
+  Other packages are available for a variety of platforms:
+  
+  **Using a PPA**  
+  To install the most recent stable version using a PPA:
+  
+      sudo add-apt-repository -yu ppa:juju/2.3
+      sudo apt install juju
+  
+  **macOS**  
+  Install Juju on macOS with Homebrew. Simply enter the following into a terminal:
+  
+      brew install juju
+  
+  And upgrade Juju with the following:
+  
+      brew upgrade juju
+  
+  **Windows**  
+  A Windows installer is available for Juju and can be found here:
+  
+  [juju-setup-2.3.9-signed.exe](https://launchpad.net/juju/2.3/2.3.9/+download/juju-setup-2.3.9-signed.exe) ([md5](https://launchpad.net/juju/2.3/2.3.9/+download/juju-setup-2.3.9-signed.exe/+md))
+  
+  Those subscribed to a snap channel should be automatically upgraded. If you’re
+  using the PPA or homebrew, you should see an upgrade available.
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
+  
+  ## More information
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
+^# Juju 2.3.8
+
+  Juju 2.3.8 is the exciting new release of Juju, the first to provide full
+  compatibility with Ubuntu 18.04 LTS (Bionic). 
+
+  This is primarily a bug fix release that contains improvements in bundle
+  deployments and status output. For the full list of bugs, see the
+  [2.3.8 milestone](https://launchpad.net/juju/+milestone/2.3.8).
+
+  ## Enhancements.
+
+  The 'Relations' section in the `juju status` output has been cleaned up:
+
+  - When filtering by application name, only direct relations are shown.
+  - In tabular format, the 'Relations' section is no longer visible by default.
+    Use the `--relations` option to see it (
+    [LP 1633972](https://bugs.launchpad.net/juju/+bug/1633972)).
+
+  Empty `juju status` output has been clarified - whether it is due to a model
+  being empty or because a provided filter did not match anything on the model
+  ([LP 1255786](https://bugs.launchpad.net/juju/+bug/1255786),
+  [LP 1696245](https://bugs.launchpad.net/juju/+bug/1696245),
+  and [LP 1594883](https://bugs.launchpad.net/juju/+bug/1594883)).
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
+^# Juju 2.3.7
+
+  Juju 2.3.7 has arrived. This is primarily a bug fix release. For the full
+  list of bugs, see the
+  [2.3.7 milestone](https://launchpad.net/juju/+milestone/2.3.7).
+
+  This is a critical fix for a bug in one of the upgrade steps in 2.3.6. We
+  have pulled 2.3.6 from availability to avoid people running into this
+  problem.
+  
+  ## Critical bugs fixed.
+
+  [LP 1765722](https://bugs.launchpad.net/juju/+bug/1765722) upgrade to 2.3.6
+  failed: the dotted field is not valid for storage
+
+  ## Enhancements.
+
+  [LP 1764267](https://bugs.launchpad.net/juju/+bug/1764267) Initial support
+  for bootstrapping a Juju controller on Bionic (support for new mongodb and
+  changing of available archive packages). You must specifically request a
+  Bionic controller with `--bootstrap-series=bionic`. The 2.3 series will
+  always default to using a Xenial image for 2.3 controllers.
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
+
+^# Juju 2.3.6
+
+  Juju 2.3.6 has arrived. This is primarily a bug fix release. For the full
+  list of bugs, see the
+  [2.3.6 milestone](https://launchpad.net/juju/+milestone/2.3.6).
+
+  ## Critical bugs fixed.
+
+  [LP 1762741](https://bugs.launchpad.net/juju/+bug/1762741) Juju bootstraps
+  latest LTS by default
+
+  ## Enhancements.
+
+  [LP 1606617](https://bugs.launchpad.net/juju/+bug/1606617) Add
+  container-image-metadata-url and container-image-stream as config for KVM and
+  LXD containers.  
+  [LP 1760390](https://bugs.launchpad.net/juju/+bug/1760390) Add support for
+  bionic and mongo3.6.  
+  [LP 1749201](https://bugs.launchpad.net/juju/+bug/1749201) Add
+  juju-updateseries to allow for charm series upgrades.
+
+  If you were affected by any of the bugs fixed in this release, your feedback
+  is appreciated. Please contact the Juju team using the communication channels
+  specified in the feedback section.
+  
+  ## Get Juju.
+  
+  The easiest way to get Juju is using the `snap` package.
+  
+  	  sudo snap install juju --classic
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
+  
+  ## More information.
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
 
 ^# Juju 2.3.5
 
@@ -52,8 +605,7 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
   
   We encourage everyone to let us know how you're using Juju. You can send us a
   message on Twitter using `#jujucharms`, join us in the freenode IRC channel
-  `#juju`, or subscribe to the
-  [Juju mailing list](https://lists.ubuntu.com/mailman/listinfo/juju).
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   ## More information.
   
@@ -84,7 +636,7 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
   
   We encourage everyone to let us know how you're using Juju. Send us a
   message on Twitter using #jujucharms, join us at #juju on freenode IRC, and
-  subscribe to the mailing list at juju@lists.ubuntu.com.
+  subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   ## More information
   
@@ -116,8 +668,7 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
 
   We encourage everyone to let us know how you're using Juju. Send us a
   message on Twitter using #jujucharms, join us at #juju on freenode,
-  and
-  subscribe to the mailing list at juju@lists.ubuntu.com.
+  and subscribe to the [Juju Discourse forum][juju-discourse-forum].
 
   ## More information
 
@@ -148,7 +699,7 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
   
   We encourage everyone to let us know how you're using Juju. Send us a
   message on Twitter using #jujucharms, join us at #juju on freenode, and
-  subscribe to the mailing list at juju@lists.ubuntu.com.
+  subscribe to the [Juju Discourse forum][juju-discourse-forum].
 
   ## More information
 
@@ -275,7 +826,7 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
   [YouTube channel](https://youtube.com/jujucharms).
    
   Send us a message on Twitter using #jujucharms, join us at #juju on Freenode,
-  and subscribe to the mailing list at juju@lists.ubuntu.com .
+  and subscribe to the [Juju Discourse forum][juju-discourse-forum].
   
   https://jujucharms.com/docs/2.3/contact-us
   
@@ -623,7 +1174,7 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
   https://youtube.com/jujucharms
 
   Send us a message on Twitter using #jujucharms, join us at #juju on freenode,
-  and subscribe to the mailing list at juju@lists.ubuntu.com.
+  and subscribe to the [Juju Discourse forum][juju-discourse-forum].
 
   https://jujucharms.com/docs/stable/contact-us
 
@@ -686,8 +1237,8 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
 
   If you have any questions please don’t hesitate to reach out to the team via:
 
-  the #juju Freenode IRC channel
-  the juju mailing list https://lists.ubuntu.com/mailman/listinfo/juju
+  the #juju Freenode IRC channel  
+  the [Juju Discourse forum][juju-discourse-forum]
 
   We encourage everyone to let us know how you're using Juju.
 
@@ -994,9 +1545,7 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
   [https://jujucharms.com/docs/2.1/charms-bundles#binding-endpoints-of-applications-within-a-bundle](./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle)
 
   These changes and the rationale behind them were originally posted to
-  the juju-dev mailing list. If you require further background or have
-  questions or concerns, please add to the discussion on the mailing list.
-  The original post is here:
+  the juju-dev mailing list (now defunct):
   <https://lists.ubuntu.com/archives/juju-dev/2017-February/006313.html>
 
 
@@ -2316,4 +2865,8 @@ CARRIAGE RETURN; LISTS ARE TOO HEAVY-HANDED IMO
 
 <!-- LINKS -->
 
-[release-notes-1]: ./reference-release-notes-1.html
+[whats-new]: ./whats-new.md
+[release-notes-1]: ./reference-release-notes-1.md
+[reference-install]: ./reference-install.md
+[juju-discourse-forum]: https://discourse.jujucharms.com/
+[upstream-juju]: https://jujucharms.com

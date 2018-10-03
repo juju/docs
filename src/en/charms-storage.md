@@ -229,11 +229,15 @@ storage will be detached and left intact. This allows detached storage to be
 re-attached to an existing unit using `juju attach-storage`, or to a new unit
 using the `--attach-storage` flag of `juju deploy` or `juju add-unit`.
 
-Storage is destroyed (removed from the model) by first detaching it and then
-using `juju remove-storage`.
+The underlying cloud's storage resource is normally destroyed by first
+detaching it and then using `juju remove-storage`. To remove storage from the
+model without destroying it the `--no-destroy` option must be used. Be wary of
+using the latter option as Juju will lose sight of the volume; it will only be
+visible from the cloud provider.
 
 If an attempt is made to either attach or remove storage that is currently in
-use (i.e. it is attached to a unit) Juju will return an error.
+use (i.e. it is attached to a unit) Juju will return an error. To remove
+currently attached storage from the model the `--force` option must be used.
 
 Finally, a model cannot be destroyed while storage volumes remain without
 passing a special option (`--release-storage` to detach all volumes and
@@ -263,10 +267,18 @@ To add a new Ceph OSD unit with (detached) existing storage 'osd-devices/2':
 juju add-unit ceph-osd --attach-storage osd-devices/2
 ```
 
-To destroy already detached storage 'osd-devices/3' (remove it from the model):
+To remove already detached storage 'osd-devices/3' from the model. It will also
+be automatically destroyed on the cloud provider:
 
 ```bash
 juju remove-storage osd-devices/3
+```
+
+To remove currently attached storage 'pgdata/1' from the model and prevent it
+from being destroyed on the cloud provider:
+
+```bash
+juju remove-storage --force --no-destroy pgdata/1
 ```
 
 To upgrade the OSD journal of Ceph unit 'ceph-osd/0' from magnetic to solid
@@ -454,9 +466,10 @@ provider currently supports a single pool configuration attribute:
 ### LXD (lxd)
 
 !!! Note:
-    To get an LXD version (at least 2.16) on either Ubuntu 14.04 LTS (Trusty)
-    or Ubuntu 16.04 LTS (Xenial) that has the 'lxd' storage provider feature
-    the [LXD:stable PPA][ppa-lxd] will be required.
+    The regular package archives for Ubuntu 14.04 LTS (Trusty) and Ubuntu 16.04
+    LTS (Xenial) do not include a version of LXD that has the 'lxd' storage
+    provider feature. You will need at least version 2.16. See the
+    [Using LXD with Juju][clouds-lxd] page for installation help.
 
 LXD-based models have access to the 'lxd' storage provider. The LXD provider
 has two configuration options:
@@ -526,7 +539,7 @@ pool:
 juju deploy postgresql --storage pgdata=lxd,8G
 ```
 
-See [Using LXD as a cloud][clouds-lxd] for how to use LXD in conjunction with
+See [Using LXD with Juju][clouds-lxd] for how to use LXD in conjunction with
 Juju, including the use of ZFS as an alternative filesystem.
 
 #### Loop devices and LXD
@@ -598,7 +611,7 @@ For guidance on how to create a charm that uses these storage features see
 [commands-remove-storage]: ./commands.html#remove-storage
 [commands-upgrade-charm]: ./commands.html#upgrade-charm
 
-[clouds-lxd]: ./clouds-LXD.html
+[clouds-lxd]: ./clouds-LXD.md
 [charms-storage-ceph]: ./charms-storage-ceph.html
 [generic-storage-loop]: https://en.wikipedia.org/wiki/Loop_device
 [generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt

@@ -1,5 +1,6 @@
 Title: CMR scenario #2
 TODO:  Update 'juju status' output to show release versions
+       Review required
 
 # CMR scenario #2
 
@@ -30,27 +31,27 @@ juju add-relation mediawiki:db lxd-cmr-1:admin/cmr-model-1.mysql
 
 ## juju status
 
-The `juju status` command provides a summary of what offers have been made.
-Here we'll apply it to the model 'cmr-model-1' in the 'lxd-cmr-1' controller:
+The `status` command provides a summary of what offers have been made. Here
+we'll apply it to the model 'cmr-model-1' in the 'lxd-cmr-1' controller:
 
 ```bash
-juju status -m lxd-cmr-1:cmr-model-1
+juju status --relations -m lxd-cmr-1:cmr-model-1
 ```
 
 Output:
 
 ```no-highlight
-Model        Controller  Cloud/Region         Version      SLA
-cmr-model-1  lxd-cmr-1   localhost/localhost  2.3-beta2.1  unsupported
+Model        Controller  Cloud/Region         Version    SLA          Timestamp
+cmr-model-1  lxd-cmr-1   localhost/localhost  2.4-beta4  unsupported  18:32:57Z
 
 App    Version  Status  Scale  Charm  Store       Rev  OS      Notes
-mysql  5.7.19   active      1  mysql  jujucharms   58  ubuntu
+mysql  5.7.22   active      1  mysql  jujucharms   58  ubuntu  
 
 Unit      Workload  Agent  Machine  Public address  Ports     Message
-mysql/0*  active    idle   0        10.87.144.223   3306/tcp  Ready
+mysql/0*  active    idle   0        10.252.47.60    3306/tcp  Ready
 
-Machine  State    DNS            Inst id        Series  AZ  Message
-0        started  10.87.144.223  juju-22a641-0  xenial      Running
+Machine  State    DNS           Inst id        Series  AZ  Message
+0        started  10.252.47.60  juju-68c45a-0  xenial      Running
 
 Offer  Application  Charm  Rev  Connected  Endpoint  Interface  Role
 mysql  mysql        mysql  58   1/1        db        mysql      provider
@@ -65,15 +66,15 @@ connections to the offer and the total number of connections/relations
 
 ## juju offers
 
-The `juju offers` command (alias `juju list-offers`) shows similar information.
+The `offers` command (alias `juju list-offers`) shows similar information.
 However, it also allows for several formats, each of which displays different
 kinds of information.
 
 The 'summary' format provides information very similar to that gained via the
-`juju status` command (it adds the offer URL):
+`status` command (it adds the offer URL):
 
 ```bash
-juju offers --format summary
+juju offers --format summary -m lxd-cmr-1:cmr-model-1
 ```
 
 Output:
@@ -88,7 +89,7 @@ access the offer and what ingress subnets are required to allow traffic from
 the consuming model:
 
 ```bash
-juju offers -m lxd-cmr-1:cmr-model-1 --format yaml
+juju offers --format yaml -m lxd-cmr-1:cmr-model-1
 ```
 
 Output:
@@ -104,15 +105,15 @@ mysql:
       interface: mysql
       role: provider
   connections:
-  - source-model-uuid: e0aaf3d9-0547-4ec3-8106-75615e48a419
+  - source-model-uuid: 4f032e24-4912-4620-894e-0b8f5324465c
     username: admin
     relation-id: 1
     endpoint: db
     status:
       current: joined
-      since: 4 hours ago
+      since: 2018-06-01
     ingress-subnets:
-    - 10.87.144.189/32
+    - 10.252.47.222/32
   users:
     admin:
       display-name: admin
@@ -132,7 +133,7 @@ Output:
 
 ```no-highlight
 Offer  User   Relation id  Status  Endpoint  Interface  Role      Ingress subnets
-mysql  admin  1            joined  db        mysql      provider  10.87.144.189/32
+mysql  admin  1            joined  db        mysql      provider  10.252.47.222/32
 ```
 
 !!! Note:
@@ -164,11 +165,11 @@ To list all offers for a given user who can consume the offer:
 juju offers --format summary --allowed-consumer <user name>
 ```
 
-The above command is best run with '--format summary' as the intent is to see,
+The above command is best run with `--format summary` as the intent is to see,
 for a given user, what offers they might relate to, regardless of whether there
 are existing relations (which is what the tabular view shows).
 
-To list a specific offer:
+To list a specific offer (here named 'mysql'):
 
 ```bash
 juju offers mysql
@@ -194,8 +195,9 @@ lxd-cmr-1  admin/cmr-model-1.mysql  admin   MySQL is a fast, stable and true mul
 ```
 
 Notice how this command takes the offer URL as the argument. The controller
-portion (`lxd-cmr-1`) can be omitted if the current controller contains the
-offer.
+portion ('lxd-cmr-1') can be omitted if the current controller contains the
+offer. In the same vein, if the offer resides in the current model then just
+the short name can be used ('cmr-model-1.mysql').
 
 For more details, including which users can access the offer, use the 'yaml'
 format.

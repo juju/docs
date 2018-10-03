@@ -97,12 +97,12 @@ MAAS has a native knowledge of spaces. Within MAAS, spaces can be created,
 configured, and destroyed. This allows Juju to leverage MAAS spaces without the
 need to add/remove spaces and subnets. However, this also means that Juju needs
 to "pull" such information from MAAS. This is done by default upon
-controller-creation. The command `juju reload-spaces` is used to refresh Juju's
-knowledge of MAAS spaces and works on a per-model basis. 
+controller-creation. Run `juju reload-spaces` to refresh Juju's knowledge of
+MAAS spaces and works on a per-model basis. 
 
 !!! Note:
-    The `juju reload-spaces` command does not currently pull in all
-    information. This is being worked upon. See [LP #1747998][LP-1747998].
+    The `reload-spaces` command does not currently pull in all information.
+    This is being worked upon. See [LP #1747998][LP-1747998].
 
 ### Bridges
 
@@ -120,23 +120,26 @@ upon using either a *constraint* or a *binding*:
    Juju machine. When a constraint is used, all application endpoints get
    associated with the space.
    
-     See the [Constraints][charms-constraints] page to learn more about
-     constraints. Read
-     [Deploying to network spaces][deploying-to-network-spaces] for how to use
-     a space constraint with the `deploy` command.
+     - See the [Using constraints][charms-constraints] page to learn more about
+       constraints.
+     - For examples of using the 'spaces' constraint, read
+       [Deploying to spaces][deploying-to-spaces] for how to use it with the
+       `deploy` command and
+       [Setting constraints when adding a machine][charms-constraints-add-machine]
+       for how to use it with the `add-machine` command.
 
  - A binding is a space-specific, software level operation and is a more
    fine-grained request. It associates an application endpoint with a subnet.
 
-     See examples of using a binding when deploying applications on the
-     [Deploying to network spaces][deploying-to-network-spaces] page. For using
-     spaces with bundles go to [Using and creating
-     bundles][using-creating-bundles].
-  
+     See examples of using a binding when deploying applications on
+     [Deploying to network spaces][deploying-to-network-spaces]. For using
+     spaces with bundles go to [Charm bundles][charms-bundles].
+
 
 <!-- LINKS -->
 
-[using-creating-bundles]: ./charms-bundles.html#binding-endpoints-within-a-bundle
+[charms-bundles]: ./charms-bundles.md#binding-endpoints-within-a-bundle
 [deploying-to-network-spaces]: ./charms-deploying-advanced.html#deploying-to-network-spaces
 [charms-constraints]: ./charms-constraints.html
 [LP-1747998]: https://bugs.launchpad.net/juju/+bug/1747998
+[charms-constraints-add-machine]: ./charms-constraints.html#setting-constraints-when-adding-a-machine

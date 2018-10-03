@@ -1,22 +1,19 @@
-Title: Help with Amazon Web Service clouds
+Title: Using Amazon AWS with Juju
+TODO:  Review required (use style from the other cloud pages)
 
-# Using the Amazon Web Service public cloud
+# Using Amazon AWS with Juju
 
-Juju already has knowledge of the AWS cloud, so unlike previous versions there
-is no need to provide a specific configuration for it, it 'just works'. AWS
-will appear in the list of known clouds when you issue the command:
-  
-```bash
-juju clouds
-```
-And you can see more specific information (e.g. the supported regions) by 
-running:
-  
+Juju already has knowledge of the AWS cloud, which means adding your AWS
+account to Juju is quick and easy.
+
+You can see more specific information on Juju's AWS support (e.g. the
+supported regions) by running:
+
 ```bash
 juju show-cloud aws
 ```
 
-If at any point you believe Juju's information is out of date (e.g. Amazon just 
+If at any point you believe Juju's information is out of date (e.g. AWS just 
 announced support for a new region), you can update Juju's public cloud data by
 running:
   
@@ -24,27 +21,7 @@ running:
 juju update-clouds
 ```
 
-## Credentials
-
-In order to access AWS, you will need to add some credentials for Juju to use.
-These can easily be set by either:
-  
-### 1. Using environment variables
-
-If you already use your AWS account with other tools, you may find that the 
-environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are 
-already set. Note that the the additional fallback environment variables
-`AWS_ACCESS_KEY` and `AWS_SECRET_KEY` are also supported.
-
-These can easily be imported into Juju. Run the command:
-  
-```bash
-juju autoload-credentials
-```
-This will scan known locations and environment variables for cloud credentials
-and ask which ones to use/what name to store them under.
-
-### 2. Manually adding credentials
+## Gathering credential information
 
 Amazon recommends the use of [IAM][iam] (Identity and Access Management) to
 control access to AWS services and resources. IAM enables you to create users
@@ -85,35 +62,79 @@ option to download these details as an CSV.
 
 ![Amazon Access Credentials page showing key values](./media/getting_started-aws_credentials-csv.png)
 
-Armed with these values, you can then use the interactive command line tool to 
-add them to Juju:
-  
+## Adding credentials
+
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
+In order to access AWS, you will need to add credentials to Juju. This can be
+done in one of three ways.
+
+### Using the interactive method
+
+Armed with the gathered information, you can add credentials with the command:
+
 ```bash
 juju add-credential aws
 ```
 
-Alternately, you can also use this credential with [Juju as a Service][jaas] and
-create and deploy your model using its GUI.
+The command will interactively prompt you for the information needed for the
+chosen cloud.
 
-### 3. Create and use a YAML file
+Alternately, you can use these credentials with [Juju as a Service][jaas] where
+you can deploy charms using a web GUI.
 
-Place the AWS information in a `~/.aws/credentials` file, or
-`%USERPROFILE%/.aws/credentials` on Windows. The file will contain YAML
-formatted information.
+### Using a file
 
-See [Cloud credentials](./credentials.html) for more about adding
-credentials from a YAML file.
-
-## Bootstrap
-
-To create the controller for AWS, you then need to run:
+A YAML-formatted file, say `mycreds.yaml`, can be used to store credential
+information for any cloud. This information is then added to Juju by pointing
+the `add-credential` command to the file:
 
 ```bash
-juju bootstrap aws mycloud
+juju add-credential aws -f mycreds.yaml
 ```
 
-That's it!
+See section [Adding credentials from a file][credentials-adding-from-file] on
+the Credentials page for guidance on what such a file looks like.
 
+### Using environment variables
+
+With AWS you have the option of adding credentials using the following
+environment variables that may already be present (and set) on your client
+system:
+
+`AWS_ACCESS_KEY_ID`  
+`AWS_SECRET_ACCESS_KEY`
+
+Add this credential information to Juju in this way:
+  
+```bash
+juju autoload-credentials
+```
+
+For any found credentials you will be asked which ones to use and what name to
+store them under.
+
+On Linux systems, files `$HOME/.aws/credentials` and `$HOME/.aws/config` may be
+used to define these variables and are parsed by the above command as part of
+the scanning process.
+
+For background information on this method read section
+[Adding credentials from environment variables][credentials-adding-from-variables].
+
+## Creating a controller
+
+You are now ready to create a Juju controller for cloud 'aws':
+
+```bash
+juju bootstrap aws aws-controller
+```
+
+Above, the name given to the new controller is 'aws-controller'. AWS will
+provision an instance to run the controller on.
+
+For a detailed explanation and examples of the `bootstrap` command see the
+[Creating a controller][controllers-creating] page.
 
 ## AWS specific features
 
@@ -133,13 +154,30 @@ Features supported by Juju-owned instances running within AWS:
   [Passing a cloud-specific setting][controllers-creating-include-config] for
   instructions.
 
+## Next steps
+
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
+
+See these pages for ideas on what to do next:
+
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
+
 
 <!-- LINKS -->
 
 [aws]: http://console.aws.amazon.com
 [iam]: https://aws.amazon.com/iam/
-[constraints]:./reference-constraints.html
-[jaas]: ./getting-started.html "Getting Started with Juju as a Service"
-[tagging]: ./config-tagging.html
+[constraints]:./reference-constraints.md
+[jaas]: ./getting-started.md
+[tagging]: ./config-tagging.md
 [aws-instance-types]: https://aws.amazon.com/ec2/instance-types/
-[controllers-creating-include-config]: ./controllers-creating.html#passing-a-cloud-specific-setting
+[controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
+[controllers-creating]: ./controllers-creating.md
+[models]: ./models.md
+[charms]: ./charms.md
+[credentials]: ./credentials.md
+[credentials-adding-from-variables]: ./credentials.md#adding-credentials-from-environment-variables
+[credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file

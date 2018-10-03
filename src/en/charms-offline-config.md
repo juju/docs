@@ -1,5 +1,4 @@
 Title: Configuring Juju for offline usage
-TODO:  for localhost cloud and controller being on the same host as the client, it's possible to use LXD remotely. worth mentioning?
 
 # Configuring Juju for offline usage
 
@@ -50,7 +49,10 @@ and the appropriate Juju configuration changes (covered
    The **client** requires access to the backing cloud in order to create a
    controller. Most public clouds have a RESTful API that operates over TCP
    port 443. A special case is the localhost cloud, in which the client talks
-   to the local LXD daemon.
+   to the local LXD daemon.  
+
+    Depending on the provider chosen and the network design the **controller**
+   may require access to the provider.
 
  - [**http://cloud-images.ubuntu.com**][cloud-images]  
    Official Ubuntu cloud images.  
@@ -110,8 +112,8 @@ resides on the same host as the client, in the form of a LXD container.
 
 resource                                       | client | controller | machines
 ---------------------------------------------- | ------ | ---------- | --------
-cloud provider                                 | X      |            |
-[http://cloud-images.ubuntu.com][cloud-images] | X [1]  | X [3]      | X [4]
+cloud provider                                 | X      | X [3]      |
+[http://cloud-images.ubuntu.com][cloud-images] | X [1]  | X [4]      | X [5]
 [https://streams.canonical.com][streams]       | X      | X          |  
 [http://archive.ubuntu.com][ubuntu-archive]    |        | X          | X
 [http://security.ubuntu.com][security-archive] |        | X          | X
@@ -123,9 +125,11 @@ charm-specific resources                       |        |            | X
 [2]: Not needed if the `--no-gui` option is used with the `juju bootstrap`
 command. See [The Juju GUI][controllers-gui].
 
-[3]: Required for the localhost cloud only.
+[3]: May be needed, depending on provider and network design.
 
-[4]: Required if the machines will host LXD containers.
+[4]: Required for the localhost cloud only.
+
+[5]: Required if the machines will host LXD containers.
 
 !!! Note:
     The above table does not take into account the packaging needs (e.g.
@@ -156,10 +160,19 @@ disposal:
  - `apt-http-proxy`
  - `apt-https-proxy`
  - `apt-mirror`
+ - `container-image-metadata-url`
  - `ftp-proxy`
  - `http-proxy`
  - `https-proxy`
  - `image-metadata-url`
+ - `juju-ftp-proxy`  
+ - `juju-http-proxy`  
+ - `juju-https-proxy`  
+ - `juju-no-proxy`
+ - `snap-http-proxy`
+ - `snap-https-proxy`
+ - `snap-store-assertions`
+ - `snap-store-proxy`
 
 The method for configuring models while using the `bootstrap` command is done
 with either the `--config` option or the `--model-default` option. The latter
@@ -198,20 +211,20 @@ juju bootstrap \
 
 <!-- LINKS -->
 
-[charms-offline-deploying]: ./charms-offline-deploying.html
-[charms-offline-strategies]: ./charms-offline-strategies.html
-[models-config]: ./models-config.html
+[charms-offline-deploying]: ./charms-offline-deploying.md
+[charms-offline-strategies]: ./charms-offline-strategies.md
+[models-config]: ./models-config.md
 [cloud-images]: http://cloud-images.ubuntu.com
 [streams]: https://streams.canonical.com
 [ubuntu-archive]: http://archive.ubuntu.com
 [security-archive]: http://security.ubuntu.com
 [charm-store]: https://jujucharms.com
 [charm-store-juju-gui]: https://jujucharms.com/u/juju-gui/juju-gui
-[controllers-gui]:  controllers-gui.html
+[controllers-gui]:  ./controllers-gui.md
 [github]: https://github.com
 [launchpad-ppa]: https://ppa.launchpad.net
 
-[anchor__http/s-proxy]: ./charms-offline-strategies.html#http/s-proxy
-[anchor__cloud-images-mirror]: ./charms-offline-strategies.html#cloud-images-mirror
+[anchor__http/s-proxy]: ./charms-offline-strategies.md#http/s-proxy
+[anchor__cloud-images-mirror]: ./charms-offline-strategies.md#cloud-images-mirror
 [anchor__offline-configuration-methods]: #offline-configuration-methods
-[anchor__no-proxy-and-the-localhost-cloud]: ./charms-offline-strategies.html#no-proxy-and-the-localhost-cloud
+[anchor__no-proxy-and-the-localhost-cloud]: ./charms-offline-strategies.md#no-proxy-and-the-localhost-cloud

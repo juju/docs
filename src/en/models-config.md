@@ -88,7 +88,7 @@ affects **all** models, including any future ones. Below we use the `--config`
 option:
 
 ```bash
-juju bootstrap --config image-stream=daily lxd lxd-daily
+juju bootstrap --config image-stream=daily localhost lxd-daily
 ```
 
 See [Creating a controller][controllers-creating] for in-depth coverage on how
@@ -122,6 +122,8 @@ apt-http-proxy               | string |          |                            | 
 apt-https-proxy              | string |          |                            | The APT HTTPS proxy for the model.
 apt-mirror                   | string |          |                            | The APT mirror for the model. See [additional info below](#apt-mirror).
 automatically-retry-hooks    | bool   | true     |                            | Set the policy on retying failed hooks. See [additional info below](#retrying-failed-hooks).
+container-image-metadata-url | string |          | url                        | Corresponds to 'image-metadata-url' (see below) for cloud-hosted KVM guests or LXD containers. Not needed for the localhost cloud.
+container-image-stream       | string |          | url                        | Corresponds to 'image-stream' (see below) for cloud-hosted KVM guests or LXD containers. Not needed for the localhost cloud.
 container-inherit-properties | string |          |                            | Set cloudinit parameters to be inherited from a Juju machine to its hosted containers. See [additional info below](#container-inheritance).
 container-networking-method  | string |          | local/provider/fan         | The FAN networking mode to use. Default values can be provider-specific.
 default-series               | string |          | valid series name, e.g. 'xenial' | The default series of Ubuntu to use for deploying charms.
@@ -135,6 +137,10 @@ firewall-mode                | string | instance | instance/global/none       | 
 ftp-proxy                    | string |          | url                        | The FTP proxy value to configure on instances, in the FTP_PROXY environment variable.
 http-proxy                   | string |          | url                        | The HTTP proxy value to configure on instances, in the HTTP_PROXY environment variable.
 https-proxy                  | string |          | url                        | The HTTPS proxy value to configure on instances, in the HTTPS_PROXY environment variable.
+juju-ftp-proxy               | string |          |                            | The charm-centric FTP proxy value.
+juju-http-proxy              | string |          |                            | The charm-centric HTTP proxy value.
+juju-https-proxy             | string |          |                            | The charm-centric HTTPS proxy value.
+juju-no-proxy                | string |          |                            | The charm-centric no-proxy value. CIDR notation supported.
 ignore-machine-addresses     | bool   | false    |                            | When true, the machine worker will not look up or discover any machine addresses.
 image-metadata-url           | string |          | url                        | The URL at which the metadata used to locate OS image ids is located.
 image-stream                 | string |          |                            | The simplestreams stream used to identify which image ids to search when starting an instance. See [additional info below](#image-streams).
@@ -146,6 +152,10 @@ no-proxy                     | string |          |                            | 
 provisioner-harvest-mode     | string | destroyed| all/none/unknown/destroyed | Set what to do with unknown machines. See [additional info below](#juju-lifecycle-and-harvesting).
 proxy-ssh                    | bool   | false    |                            | Set whether SSH commands should be proxied through the API server.
 resource-tags                | string | none     |                            | A space-separated list of key=value pairs used to apply as tags on supported cloud models.
+snap-http-proxy              | string |          |                            | The snap-centric HTTP proxy value.
+snap-https-proxy             | string |          |                            | The snap-centric HTTPS proxy value.
+snap-store-assertions        | string |          |                            | The collection of snap store assertions. Each entry should contain the snap store ID.
+snap-store-proxy             | string |          |                            | The snap store ID. See [Snap-specific proxy][charms-offline-strategies] for details.
 ssl-hostname-verification    | bool   | true     |                            | Set whether SSL hostname verification is enabled.
 test-mode                    | bool   | false    |                            | Set whether the model is intended for testing. If true, accessing the charm store does not affect statistical data of the store.
 transmit-vendor-metrics      | bool   | true     |                            | Set whether the controller will send metrics collected from this model for use in anonymized aggregate analytics.
@@ -192,7 +202,6 @@ enable-os-upgrade: false
 You may also want to just update the package list to ensure a charm has the
 latest software available to it by disabling upgrades but enabling updates.
 
-
 ### Disable network management
 
 This can only be used with MAAS models and should otherwise be set to
@@ -201,7 +210,6 @@ because you have unique and well-defined needs. Setting this to 'true' with
 MAAS gives you the same behaviour with containers as you already have with
 other providers: one machine-local address on a single network interface,
 bridged to the default bridge.
-
 
 ### Firewall mode
 
@@ -253,25 +261,18 @@ juju model-config provisioner-harvest-mode=none
 
 ### Retrying failed hooks
 
-Prior to version 2.0, hooks returning an error would block until the user
-ran a command to retry them manually:
-
-```bash
-juju resolved unit-name/#
-```  
-
-From version 2.0, Juju will automatically retry hooks periodically - there is
-an exponential backoff, so hooks will be retried after 5, 10, 20, 40 seconds up
-to a period of 5 minutes, and then every 5 minutes. The logic behind this is
-that some hook errors are caused by timing issues or the temporary
-unavailability of other applications - automatic retry enables the Juju model
-to heal itself without troubling the user.
+Juju retries failed hooks automatically using an exponential backoff algorithm.
+They will be retried after 5, 10, 20, 40 seconds up to a period of 5 minutes,
+and then every 5 minutes. The logic behind this is that some hook errors are
+caused by timing issues or the temporary unavailability of other applications -
+automatic retry enables the Juju model to heal itself without troubling the
+user.
 
 However, in some circumstances, such as debugging charms, this behaviour can be
-distracting and unwelcome. For this reason, it is possible to set the 
-`automatically-retry-hooks` option to 'false' to disable this behaviour. In this
-case, users will have to manually retry any hook which fails, using the command
-above, as with earlier versions of Juju.
+distracting and unwelcome. For this reason, it is possible to set the
+`automatically-retry-hooks` option to 'false' to disable this behaviour. In
+this case, users will have to manually retry any hook which fails, using the
+command above, as with earlier versions of Juju.
 
 !!! Note:
     Even with the automatic retry enabled, it is still possible to use the
@@ -352,6 +353,7 @@ juju model-config container-inherit-properties="ca-certs, apt-primary"
 
 <!-- LINKS -->
 
-[charms-offline]: ./charms-offline.html
-[controllers-creating]: ./controllers-creating.html
-[concepts-and-terms-agent]: ./juju-concepts.html#agent
+[charms-offline]: ./charms-offline.md
+[controllers-creating]: ./controllers-creating.md
+[concepts-and-terms-agent]: ./juju-concepts.md#agent
+[charms-offline-strategies]: ./charms-offline-strategies.md#snap-specific-proxy

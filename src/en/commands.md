@@ -1,14 +1,14 @@
-Title:Juju commands and usage
+Title: Juju command reference
 
-# Juju Command reference
+# Juju command reference
 
 You can get a list of all Juju commands by invoking `juju help commands` in a
 terminal.
 
 To drill down into each command use `juju help <command name>`.
 
-This same information is also provided below. Click on the
-triangle alongside a command to view that command's entry.
+This same information is also provided below. Click on a command to view
+information on it.
 
 ^# actions
 
@@ -114,7 +114,7 @@ triangle alongside a command to view that command's entry.
 
    **Summary:**
 
-   Adds or replaces credentials for a cloud.
+   Adds or replaces credentials for a cloud, stored locally on this client.
 
    **Options:**
 
@@ -155,8 +155,7 @@ triangle alongside a command to view that command's entry.
    credentials, of which there may be multiple per cloud.
 
    The `--replace` option is required if credential information for the named
-   cloud already exists. All such information will be overwritten.
-
+   cloud already exists locally. All such information will be overwritten.
    This command does not set default regions nor default credentials. Note
    that if only one credential name exists, it will become the effective
    default credential.
@@ -181,6 +180,52 @@ triangle alongside a command to view that command's entry.
    [remove-credential](#remove-credential) , 
    [set-default-credential](#set-default-credential) , 
    [autoload-credentials](#autoload-credentials)  
+
+
+
+^# add-k8s
+
+   **Usage:** ` juju add-k8s [options] <k8s name>`
+
+   **Summary:**
+
+   Adds a k8s endpoint and credential to Juju.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   _--cluster-name (= "")_
+
+   Specify the k8s cluster to import
+
+   
+   **Details:**
+
+
+   Creates a user-defined cloud and populate the selected controller with the k8s
+   cloud details. Speficify non default kubeconfig file location using $KUBECONFIG
+   environment variable or pipe in file content from stdin. The config file
+   can contain definitions for different k8s clusters, use --cluster-name to pick
+   which one to use.
+
+
+   **Examples:**
+
+          juju add-k8s myk8scloud
+          KUBECONFIG=path-to-kubuconfig-file juju add-k8s myk8scloud --cluster-name=my_cluster_name
+          kubectl config view --raw | juju add-k8s myk8scloud --cluster-name=my_cluster_name
+
+
+   **See also:**
+
+   [remove-k8s](#remove-k8s)  
 
 
 
@@ -380,35 +425,47 @@ triangle alongside a command to view that command's entry.
    **Details:**
 
 
-   Add a relation between 2 local application endpoints or a local endpoint and a remote application endpoint.
-   Adding a relation between two remote application endpoints is not supported.
-   Application endpoints can be identified either by:
+   Add a relation between 2 local application endpoints or a local endpoint and
+   a remote application endpoint.  Adding a relation between two remote
+   application endpoints is not supported.  Application endpoints can be
+   identified either by:
 
-             <application name>[:<relation name>]
-                 where application name supplied without relation will be internally expanded to be well-formed
+   `<application name>[:<relation name>]`
+
+   where application name supplied without relation will be internally expanded
+   to be well-formed
    
    or
-             <model name>.<application name>[:<relation name>]
-                 where the application is hosted in another model owned by the current user, in the same controller
+
+   `<model name>.<application name>[:<relation name>]`
+
+   where the application is hosted in another model owned by the current user,
+   in the same controller
    
    or
-             <user name>/<model name>.<application name>[:<relation name>]
-                 where user/model is another model in the same controller
+
+   `<user name>/<model name>.<application name>[:<relation name>]`
+
+   where user/model is another model in the same controller
    
-   For a cross model relation, if the consuming side is behind a firewall and/or NAT is used for outbound traffic,
-   it is possible to use the --via option to inform the offering side the source of traffic so that any required
-   firewall ports may be opened.
+   For a cross model relation, if the consuming side is behind a firewall
+   and/or NAT is used for outbound traffic, it is possible to use the --via
+   option to inform the offering side the source of traffic so that any
+   required firewall ports may be opened.
 
 
    **Examples:**
 
-          $ juju add-relation wordpress mysql
-              where "wordpress" and "mysql" will be internally expanded to "wordpress:db" and "mysql:server" respectively
-          $ juju add-relation wordpress someone/prod.mysql
-              where "wordpress" will be internally expanded to "wordpress:db"
-          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16
-          
-          $ juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16,10.0.0.0/8
+          juju add-relation wordpress mysql
+
+   (where "wordpress" and "mysql" will be internally expanded to "wordpress:db" and "mysql:server" respectively)
+
+          juju add-relation wordpress someone/prod.mysql
+
+   (where "wordpress" will be internally expanded to "wordpress:db")
+
+          juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16
+          juju add-relation wordpress someone/prod.mysql --via 192.168.0.0/16,10.0.0.0/8
 
 
    **Aliases:**
@@ -543,11 +600,11 @@ triangle alongside a command to view that command's entry.
              powers of 1024.
 
    
-   Storage constraints can be optionally ommitted.
+   Storage constraints can be optionally omitted.
 
-   Model default values will be used for all ommitted constraint values.
+   Model default values will be used for all omitted constraint values.
 
-   There is no need to comma-separate ommitted constraints. 
+   There is no need to comma-separate omitted constraints. 
 
    **Examples:**
 
@@ -644,7 +701,7 @@ triangle alongside a command to view that command's entry.
 
    Many charms will seamlessly support horizontal scaling while others
    may need an additional application support (e.g. a separate load
-   balancer). See the documentation for specfic charms to check how
+   balancer). See the documentation for specific charms to check how
    scale-out is supported.
 
    By default, units are deployed to newly provisioned machines in
@@ -657,23 +714,40 @@ triangle alongside a command to view that command's entry.
    **Examples:**
 
    Add five units of wordpress on five new machines:
+
           juju add-unit wordpress -n 5
+
    Add a unit of mysql to machine 23 (which already exists):
+
           juju add-unit mysql --to 23
+
    Add two units of mysql to machines 3 and 4:
+
          juju add-unit mysql -n 2 --to 3,4
+
    Add three units of mysql to machine 7:
+
           juju add-unit mysql -n 3 --to 7,7,7
+
    Add three units of mysql, one to machine 3 and the others to new
    machines:
+
           juju add-unit mysql -n 3 --to 7
+
    Add a unit into a new LXD container on machine 7:
+
           juju add-unit mysql --to lxd:7
+
    Add two units into two new LXD containers on machine 7:
+
           juju add-unit mysql -n 2 --to lxd:7,lxd:7
+
    Add a unit of mariadb to LXD container number 3 on machine 24:
+
           juju add-unit mariadb --to 24/lxd/3
+
    Add a unit of mariadb to LXD container on a new machine:
+
           juju add-unit mariadb --to lxd
 
 
@@ -1173,9 +1247,9 @@ triangle alongside a command to view that command's entry.
    The agent version can be specified a simple numeric version, e.g. 2.2.4.
    For example, at the time when 2.3.0, 2.3.1 and 2.3.2 are released and your
    agent stream is 'released' (default), then a 2.3.1 client can bootstrap:
-          * 2.3.0 controller by running '... bootstrap --agent-version=2.3.0 ...';
-          * 2.3.1 controller by running '... bootstrap ...';
-          * 2.3.2 controller by running 'bootstrap --auto-upgrade'.
+             * 2.3.0 controller by running '... bootstrap --agent-version=2.3.0 ...';
+             * 2.3.1 controller by running '... bootstrap ...';
+             * 2.3.2 controller by running 'bootstrap --auto-upgrade'.
 
    
    However, if this client has a copy of codebase, then a local copy of Juju 
@@ -1374,13 +1448,15 @@ triangle alongside a command to view that command's entry.
    The user is, by default, the current user. The latter can be confirmed with
    the `juju show-user` command.
 
-   A controller administrator can change the password for another user 
-   on the specified controller. If no controller is specified, 
-   the current controller will be used.
+   If no controller is specified, the current controller will be used.
 
-   A controller administrator can also reset the password for another user.
-   This will invalidate any password or registration string 
-   that was previously issued, and issue a new registration string to be used with
+   A controller administrator can change the password for another user 
+   by providing desired username as an argument. 
+   A controller administrator can also reset the password with a --reset option. 
+   This will invalidate any passwords that were previously set 
+   and registration strings that were previously issued for a user.
+
+   This option will issue a new registration string to be used with
    `juju register`.  
 
    **Examples:**
@@ -1516,7 +1592,7 @@ triangle alongside a command to view that command's entry.
 
    The listing will consist of public clouds and any custom clouds made
    available through the `juju add-cloud` command. The former can be updated
-   via the `juju update-cloud` command.
+   via the `juju update-clouds` command.
 
    By default, the tabular format is used.
 
@@ -1805,13 +1881,17 @@ triangle alongside a command to view that command's entry.
 
    Download to this file
 
+   _--keep-copy  (= false)_
+
+   Keep a copy of the archive on the controller
+
    _-m, --model (= "")_
 
    Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
 
    _--no-download  (= false)_
 
-   Do not download the archive
+   Do not download the archive, implies keep-copy
 
    
    **Details:**
@@ -1915,7 +1995,7 @@ triangle alongside a command to view that command's entry.
 
    **Summary:**
 
-   Lists credentials for a cloud.
+   Lists locally stored credentials for a cloud.
 
    **Options:**
 
@@ -1935,23 +2015,33 @@ triangle alongside a command to view that command's entry.
    **Details:**
 
 
-   Credentials are used with `juju bootstrap`  and `juju add-model`.
+   Locally stored credentials are used with `juju bootstrap`  
+   and `juju add-model`.
 
    An arbitrary "credential name" is used to represent credentials, which are 
    added either via `juju add-credential` or `juju autoload-credentials`.
-   Note that there can be multiple sets of credentials and thus multiple 
+   Note that there can be multiple sets of credentials and, thus, multiple 
    names.
 
    Actual authentication material is exposed with the '--show-secrets' 
    option.
 
-   A controller and subsequently created models can be created with a 
+   A controller, and subsequently created models, can be created with a 
    different set of credentials but any action taken within the model (e.g.:
-   `juju deploy`; `juju add-unit`) applies the set used to create the model. 
+   `juju deploy`; `juju add-unit`) applies the credentail used 
+   to create that model. This model credential is stored on the controller. 
+   A credential for 'controller' model is determined at bootstrap time and
+   will be stored on the controller. It is considered to be controller default.
    Recall that when a controller is created a 'default' model is also 
-   created.
+   created. This model will use the controller default credential. To see all your
+   credentials on the controller use "juju show-credentials" command.
 
-   Credentials denoted with an asterisk '*' are currently set as the default
+   When adding a new model, Juju will reuse the controller default credential.
+   To add a model that uses a different credential, specify a locally
+   stored credential using --credential option. See `juju help add-model` 
+   for more information.
+
+   Credentials denoted with an asterisk '*' are currently set as the local default
    for the given cloud.
 
 
@@ -1967,7 +2057,8 @@ triangle alongside a command to view that command's entry.
    [add-credential](#add-credential) , 
    [remove-credential](#remove-credential) , 
    [set-default-credential](#set-default-credential) , 
-   [autoload-credentials](#autoload-credentials)  
+   [autoload-credentials](#autoload-credentials) , 
+   [show-credentials](#show-credentials)  
 
    **Aliases:**
 
@@ -2208,7 +2299,7 @@ triangle alongside a command to view that command's entry.
 
    _--increase-budget  (= 0)_
 
-   increase model budget allocation by this amount
+   Increase model budget allocation by this amount
 
    _-m, --model (= "")_
 
@@ -2228,7 +2319,7 @@ triangle alongside a command to view that command's entry.
 
    _--plan (= "")_
 
-   plan to deploy charm under
+   Plan to deploy charm under
 
    _--resource  (= )_
 
@@ -2246,24 +2337,36 @@ triangle alongside a command to view that command's entry.
 
    The machine and/or container to deploy the unit in (bypasses constraints)
 
+   _--trust  (= false)_
+
+   Allows charm to run hooks that require access credentials
+
    
    **Details:**
 
 
-   <charm or bundle> can be a charm/bundle URL, or an unambiguously condensed
+   `<charm or bundle>` can be a charm/bundle URL, or an unambiguously condensed
    form of it; assuming a current series of "trusty", the following forms will be
    accepted:
 
-   For cs:trusty/mysql
-           mysql
-           trusty/mysql
+           mediawiki:
+           	   name: my media wiki
+           	   admins: me:pwdOne
+           	   debug: true
+
+   For `cs:trusty/mysql`:
    
-   For cs:~user/trusty/mysql
-           ~user/mysql
+   'mysql' or  
+   'trusty/mysql'
    
-   For cs:bundle/mediawiki-single
-           mediawiki-single
-           bundle/mediawiki-single
+   For `cs:~user/trusty/mysql`:
+   
+   '~user/mysql'
+   
+   For `cs:bundle/mediawiki-single`:
+   
+   'mediawiki-single' or  
+   'bundle/mediawiki-single'
    
    The current series for charms is determined first by the 'default-series' model
    setting, followed by the preferred series for the charm in the charm store.
@@ -2290,53 +2393,70 @@ triangle alongside a command to view that command's entry.
    If an 'application name' is not provided, the application name used is the
    'charm or bundle' name.  A user-supplied 'application name' must consist only of
    lower-case letters (a-z), numbers (0-9), and single hyphens (-).  The name must
-   begin with a letter and not have a group of all numbers follow a hyphen.
-
-   **Examples:**
+   begin with a letter and not have a group of all numbers follow a hyphen. For
+   instance:
 
         Valid:   myappname, custom-app, app2-scat-23skidoo
         Invalid: myAppName, custom--app, app2-scat-23, areacode-555-info
+
    Constraints can be specified by specifying the '--constraints' option. If the
    application is later scaled out with `juju add-unit`, provisioned machines
    will use the same constraints (unless changed by `juju set-constraints`).
    Application configuration values can be specified using '--config' option. This
    option accepts either a path to a yaml-formatted file or a key=value pair. 
    Configuration file provided should be in format
-   <charm name>:
-   	<option name>: <option value>
-   	...
+
+           <charm name>:
+           	   <option name>: <option value>
+           	   ...
+
    For example, to deploying 'mediawiki' with the configuration file 'mycfg.yaml'
    that contains:
-   mediawiki:
-   	name: my media wiki
-   	admins: me:pwdOne
-   	debug: true
+
+           mediawiki:
+           	   name: my media wiki
+           	   admins: me:pwdOne
+           	   debug: true
+
    use
+
         juju deploy mediawiki --config mycfg.yaml
+
    To specify key=value pair to set an application option value, use:
        
         juju deploy mediawiki --config name='my media wiki'
          
    When specifying more than one option value, use:
+
         juju deploy mediawiki --config name='my media wiki' --config debug=true
+
    Care must be taken when specifying more than one configuration via 
    '--config' option - any later values will override those specified earlier.
+
    For example, when calling
+
         juju deploy mediawiki --config name='my media wiki' --config mycfg.yaml
         
    if mycfg.yaml contained a value for 'name', it will be used in preference 
    to the earlier 'my media wiki' value.
    The same applies to single value options. For example, when calling
+
         juju deploy mediawiki --config name='a media wiki' --config name='my wiki'
+
    the value 'my wiki' will be used for the option 'name'.
+
    Resources may be uploaded by specifying the '--resource' option followed by a
    name=filepath pair. This option may be repeated more than once to upload more
    than one resource.
+
         juju deploy foo --resource bar=/some/file.tgz --resource baz=./docs/cfg.xml
+
    Where 'bar' and 'baz' are resources named in the metadata for the 'foo' charm.
+
    When using a placement directive to deploy to an existing machine or container
    ('--to' option), the `juju status` command should be used for guidance. A few
    placement directives are provider-dependent (e.g.: 'zone').
+
    In more complex scenarios, Juju's network spaces are used to partition the
    cloud networking layer into sets of subnets. Instances hosting units inside the
    same space can communicate with each other without any firewalls. Traffic
@@ -2346,9 +2466,11 @@ triangle alongside a command to view that command's entry.
    to support high availability for applications. Spaces help isolate applications
    and their units, both for security purposes and to manage both traffic
    segregation and congestion.
+
    When deploying an application or adding machines, the 'spaces' constraint can
    be used to define a comma-delimited list of required and forbidden spaces (the
    latter prefixed with "^", similar to the 'tags' constraint).
+
    When deploying bundles, machines specified in the bundle are added to the
    model as new machines. In order to use the existing machines in the model
    rather than create new machines, the option --map-machines=existing can be
@@ -2359,28 +2481,58 @@ triangle alongside a command to view that command's entry.
    3 and 4, the following deployment of the bundle would use machines 1 and 2 in
    the model for machines 1 and 2 in the bundle and use machine 4 in the model
    for the bundle machine 3.
+
         juju deploy some-bundle --map-machines existing,3=4
+
    Only top level machines can be mapped in this way, just as only top level
    machines can be defined in the machines section of the bundle.
-   Examples:
-          juju deploy mysql               (deploy to a new machine)
-          juju deploy mysql --to 23       (deploy to preexisting machine 23)
-          juju deploy mysql --to lxd      (deploy to a new LXD container on a new machine)
-          juju deploy mysql --to lxd:25   (deploy to a new LXD container on machine 25)
-          juju deploy mysql --to 24/lxd/3 (deploy to LXD container 3 on machine 24)
+
+   **Examples:**
+
+   Deploy to a new machine:
+
+          juju deploy mysql
+
+   Deploy to preexisting machine 23:
+
+          juju deploy mysql --to 23
+
+   Deploy to a new LXD container on a new machine:
+
+          juju deploy mysql --to lxd
+
+   Deploy to a new LXD container on machine 25:
+
+          juju deploy mysql --to lxd:25
+
+   Deploy to LXD container 3 on machine 24:
+
+          juju deploy mysql --to 24/lxd/3
+
+   Deploy 2 units, one on machine 3 & one to a new LXD container on machine 5:
+
           juju deploy mysql -n 2 --to 3,lxd:5
-          (deploy 2 units, one on machine 3 & one to a new LXD container on machine 5)
+
+   Deploy 3 units, one on machine 3 & the remaining two on new machines:
+
           juju deploy mysql -n 3 --to 3
-          (deploy 3 units, one on machine 3 & the remaining two on new machines)
+
+   Deploy 5 units to machines with at least 8 GB of memory:
+
           juju deploy mysql -n 5 --constraints mem=8G
-          (deploy 5 units to machines with at least 8 GB of memory)
+
+   Provider-dependent; deploy to a specific AZ:
+
           juju deploy mysql --to zone=us-east-1a
-          (provider-dependent; deploy to a specific AZ)
+
+   Deploy to a specific MAAS node:
+
           juju deploy mysql --to host.maas
-          (deploy to a specific MAAS node)
+
+   Deploy 2 units to machines that are in the 'dmz' space but not of the 'cmd'
+   or the 'database' spaces:
+
           juju deploy haproxy -n 2 --constraints spaces=dmz,^cms,^database
-          (deploy 2 units to machines that are in the 'dmz' space but not of
-          the 'cmd' or the 'database' spaces)
 
 
    **See also:**
@@ -2463,7 +2615,7 @@ triangle alongside a command to view that command's entry.
 
    **Summary:**
 
-   Terminate all machines and resources for a non-controller model.
+   Terminate all machines/containers and resources for a non-controller model.
 
    **Options:**
 
@@ -2620,7 +2772,7 @@ triangle alongside a command to view that command's entry.
              sync-agents
              unexpose
              upgrade-charm
-             upgrade-juju
+             upgrade-model
    
    	
 
@@ -2763,7 +2915,7 @@ triangle alongside a command to view that command's entry.
              sync-agents
              unexpose
              upgrade-charm
-             upgrade-juju
+             upgrade-model
    
    	
 
@@ -2886,7 +3038,7 @@ triangle alongside a command to view that command's entry.
              sync-agents
              unexpose
              upgrade-charm
-             upgrade-juju
+             upgrade-model
    
    	
 
@@ -3472,6 +3624,8 @@ triangle alongside a command to view that command's entry.
              application-version-set  specify which version of the application is deployed
              close-port               ensure a port or range is always closed
              config-get               print application configuration
+             credential-get           access cloud credentials
+             goal-state               print the status of the charm's peers and related units
              is-leader                print application leadership status
              juju-log                 write a message to the juju log
              juju-reboot              Reboot the host machine
@@ -3480,6 +3634,7 @@ triangle alongside a command to view that command's entry.
              network-get              get network config
              open-port                register a port or range to open
              opened-ports             lists all ports or ranges opened by the unit
+             pod-spec-set             set pod spec information
              relation-get             get relation settings
              relation-ids             list all relation ids with the given relation name
              relation-list            list relation units
@@ -3529,6 +3684,8 @@ triangle alongside a command to view that command's entry.
              application-version-set  specify which version of the application is deployed
              close-port               ensure a port or range is always closed
              config-get               print application configuration
+             credential-get           access cloud credentials
+             goal-state               print the status of the charm's peers and related units
              is-leader                print application leadership status
              juju-log                 write a message to the juju log
              juju-reboot              Reboot the host machine
@@ -3537,6 +3694,7 @@ triangle alongside a command to view that command's entry.
              network-get              get network config
              open-port                register a port or range to open
              opened-ports             lists all ports or ranges opened by the unit
+             pod-spec-set             set pod spec information
              relation-get             get relation settings
              relation-ids             list all relation ids with the given relation name
              relation-list            list relation units
@@ -3586,6 +3744,8 @@ triangle alongside a command to view that command's entry.
              application-version-set  specify which version of the application is deployed
              close-port               ensure a port or range is always closed
              config-get               print application configuration
+             credential-get           access cloud credentials
+             goal-state               print the status of the charm's peers and related units
              is-leader                print application leadership status
              juju-log                 write a message to the juju log
              juju-reboot              Reboot the host machine
@@ -3594,6 +3754,7 @@ triangle alongside a command to view that command's entry.
              network-get              get network config
              open-port                register a port or range to open
              opened-ports             lists all ports or ranges opened by the unit
+             pod-spec-set             set pod spec information
              relation-get             get relation settings
              relation-ids             list all relation ids with the given relation name
              relation-list            list relation units
@@ -3621,7 +3782,7 @@ triangle alongside a command to view that command's entry.
 
 ^# import-filesystem
 
-   **Usage:** ` juju import-filesystem [options] <storage-provider> <provider-id> <storage-name>`
+   **Usage:** ` juju import-filesystem [options] <storage-provider> <provider-id> <storage-name> `
 
    **Summary:**
 
@@ -4040,7 +4201,7 @@ triangle alongside a command to view that command's entry.
 
    The listing will consist of public clouds and any custom clouds made
    available through the `juju add-cloud` command. The former can be updated
-   via the `juju update-cloud` command.
+   via the `juju update-clouds` command.
 
    By default, the tabular format is used.
 
@@ -4119,7 +4280,7 @@ triangle alongside a command to view that command's entry.
 
    **Summary:**
 
-   Lists credentials for a cloud.
+   Lists locally stored credentials for a cloud.
 
    **Options:**
 
@@ -4139,23 +4300,33 @@ triangle alongside a command to view that command's entry.
    **Details:**
 
 
-   Credentials are used with `juju bootstrap`  and `juju add-model`.
+   Locally stored credentials are used with `juju bootstrap`  
+   and `juju add-model`.
 
    An arbitrary "credential name" is used to represent credentials, which are 
    added either via `juju add-credential` or `juju autoload-credentials`.
-   Note that there can be multiple sets of credentials and thus multiple 
+   Note that there can be multiple sets of credentials and, thus, multiple 
    names.
 
    Actual authentication material is exposed with the '--show-secrets' 
    option.
 
-   A controller and subsequently created models can be created with a 
+   A controller, and subsequently created models, can be created with a 
    different set of credentials but any action taken within the model (e.g.:
-   `juju deploy`; `juju add-unit`) applies the set used to create the model. 
+   `juju deploy`; `juju add-unit`) applies the credentail used 
+   to create that model. This model credential is stored on the controller. 
+   A credential for 'controller' model is determined at bootstrap time and
+   will be stored on the controller. It is considered to be controller default.
    Recall that when a controller is created a 'default' model is also 
-   created.
+   created. This model will use the controller default credential. To see all your
+   credentials on the controller use "juju show-credentials" command.
 
-   Credentials denoted with an asterisk '*' are currently set as the default
+   When adding a new model, Juju will reuse the controller default credential.
+   To add a model that uses a different credential, specify a locally
+   stored credential using --credential option. See `juju help add-model` 
+   for more information.
+
+   Credentials denoted with an asterisk '*' are currently set as the local default
    for the given cloud.
 
 
@@ -4171,7 +4342,8 @@ triangle alongside a command to view that command's entry.
    [add-credential](#add-credential) , 
    [remove-credential](#remove-credential) , 
    [set-default-credential](#set-default-credential) , 
-   [autoload-credentials](#autoload-credentials)  
+   [autoload-credentials](#autoload-credentials) , 
+   [show-credentials](#show-credentials)  
 
    **Aliases:**
 
@@ -4260,7 +4432,7 @@ triangle alongside a command to view that command's entry.
              sync-agents
              unexpose
              upgrade-charm
-             upgrade-juju
+             upgrade-model
    
    	
 
@@ -5438,11 +5610,29 @@ triangle alongside a command to view that command's entry.
            type: bool
            description: Determines whether the uniter should automatically retry failed hooks
    
+   backup-dir:
+
+           type: string
+           description: Directory used to store the backup working directory
+   
    cloudinit-userdata:
 
            type: string
            description: Cloud-init user-data (in yaml format) to be added to userdata for new
              machines created in this model
+   
+   container-image-metadata-url:
+
+           type: string
+           description: The URL at which the metadata used to locate container OS image ids
+             is located
+   
+   container-image-stream:
+
+           type: string
+           description: The simplestreams stream used to identify which image ids to search
+             when starting a container.
+
    
    container-inherit-properties:
 
@@ -5550,6 +5740,30 @@ triangle alongside a command to view that command's entry.
            description: The simplestreams stream used to identify which image ids to search
              when starting an instance.
 
+   
+   juju-ftp-proxy:
+
+           type: string
+           description: The FTP proxy value to pass to charms in the JUJU_CHARM_FTP_PROXY environment
+             variable
+   
+   juju-http-proxy:
+
+           type: string
+           description: The HTTP proxy value to pass to charms in the JUJU_CHARM_HTTP_PROXY
+             environment variable
+   
+   juju-https-proxy:
+
+           type: string
+           description: The HTTPS proxy value to pass to charms in the JUJU_CHARM_HTTPS_PROXY
+             environment variable
+   
+   juju-no-proxy:
+
+           type: string
+           description: List of domain addresses not to be proxied (comma-separated), may contain
+             CIDRs. Passed to charms in the JUJU_CHARM_NO_PROXY environment variable
    
    logforward-enabled:
 
@@ -6352,7 +6566,7 @@ triangle alongside a command to view that command's entry.
 
 ^# remove-backup
 
-   **Usage:** ` juju remove-backup [options] <ID>`
+   **Usage:** ` juju remove-backup [options] [--keep-latest|<ID>]`
 
    **Summary:**
 
@@ -6363,6 +6577,10 @@ triangle alongside a command to view that command's entry.
    _-B, --no-browser-login  (= false)_
 
    Do not use web browser for authentication
+
+   _--keep-latest  (= false)_
+
+   Remove all backups on remote storage except for the latest.
 
    _-m, --model (= "")_
 
@@ -6500,7 +6718,7 @@ triangle alongside a command to view that command's entry.
 
    **Summary:**
 
-   Removes credentials for a cloud.
+   Removes locally stored credentials for a cloud.
 
 
    
@@ -6524,6 +6742,44 @@ triangle alongside a command to view that command's entry.
    [add-credential](#add-credential) , 
    [set-default-credential](#set-default-credential) , 
    [autoload-credentials](#autoload-credentials)  
+
+
+
+^# remove-k8s
+
+   **Usage:** ` juju remove-k8s [options] <k8s name>`
+
+   **Summary:**
+
+   Removes a k8s endpoint from Juju.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-c, --controller (= "")_
+
+   Controller to operate in
+
+   
+   **Details:**
+
+
+   Removes the specified k8s cloud from the controller (if it is not in use),
+   and user-defined cloud details from this client.
+
+
+   **Examples:**
+
+          juju remove-k8s myk8scloud
+          
+
+
+   **See also:**
+
+   [add-k8s](#add-k8s)  
 
 
 
@@ -6934,7 +7190,7 @@ triangle alongside a command to view that command's entry.
 
 ^# resolve
 
-   **Usage:** ` juju resolved [options] <unit>`
+   **Usage:** ` juju resolved [options] [<unit> ...]`
 
    **Summary:**
 
@@ -6945,6 +7201,10 @@ triangle alongside a command to view that command's entry.
    _-B, --no-browser-login  (= false)_
 
    Do not use web browser for authentication
+
+   _--all  (= false)_
+
+   Marks all units in error as resolved
 
    _-m, --model (= "")_
 
@@ -6962,7 +7222,7 @@ triangle alongside a command to view that command's entry.
 
 ^# resolved
 
-   **Usage:** ` juju resolved [options] <unit>`
+   **Usage:** ` juju resolved [options] [<unit> ...]`
 
    **Summary:**
 
@@ -6973,6 +7233,10 @@ triangle alongside a command to view that command's entry.
    _-B, --no-browser-login  (= false)_
 
    Do not use web browser for authentication
+
+   _--all  (= false)_
+
+   Marks all units in error as resolved
 
    _-m, --model (= "")_
 
@@ -7039,7 +7303,7 @@ triangle alongside a command to view that command's entry.
 
    **Summary:**
 
-   Restore from a backup archive to a new controller.
+   Restore from a backup archive to the existing controller.
 
    **Options:**
 
@@ -7047,21 +7311,9 @@ triangle alongside a command to view that command's entry.
 
    Do not use web browser for authentication
 
-   _-b  (= false)_
-
-   Bootstrap a new state machine
-
-   _--build-agent  (= false)_
-
-   Build binary agent if bootstraping a new machine
-
-   _--constraints (= "")_
-
-   set model constraints
-
    _--file (= "")_
 
-   Provide a file to be used as the backup.
+   Provide a file to be used as the backup
 
    _--id (= "")_
 
@@ -7075,19 +7327,16 @@ triangle alongside a command to view that command's entry.
    **Details:**
 
 
-   Restores a backup that was previously created with "juju create-backup".
-   This command creates a new controller and arranges for it to replace
-   the previous controller for a model.  It does *not* restore
-   an existing server to a previous state, but instead creates a new server
-   with equivalent state.  As part of restore, all known instances are
-   configured to treat the new controller as their master.
+   Restores the Juju state database backup that was previously created with
+   "juju create-backup", returning an existing controller to a previous state.
+   Note: Only the database will be restored.  Juju will not change the existing
+   environment to match the restored database, e.g. no units, relations, nor
+   machines will be added or removed during the restore process.
 
-   The given constraints will be used to choose the new instance.
-
+   Note: Extra care is needed to restore in an HA environment, please see
+   https://docs.jujucharms.com/devel/en/controllers-backup for more information.
    If the provided state cannot be restored, this command will fail with
-   an appropriate message.  For instance, if the existing bootstrap
-   instance is already running then the command will fail with a message
-   to that effect.
+   an explanation.
 
 
 
@@ -7217,13 +7466,13 @@ triangle alongside a command to view that command's entry.
 
    Do not use web browser for authentication
 
+   _-a, --app, --application  (= )_
+
+   One or more application names
+
    _--all  (= false)_
 
    Run the commands on all the machines
-
-   _--application  (= )_
-
-   One or more application names
 
    _--format  (= default)_
 
@@ -7245,7 +7494,7 @@ triangle alongside a command to view that command's entry.
 
    How long to wait before the remote command is considered to have failed
 
-   _--unit  (= )_
+   _-u, --unit  (= )_
 
    One or more unit ids
 
@@ -7265,6 +7514,9 @@ triangle alongside a command to view that command's entry.
    If the target is a machine, the command is run as the "root" user on
    the remote machine.
 
+   Some options are shortened for usabilty purpose in CLI
+   --application can also be specified as --app and -a
+   --unit can also be specified as -u
    If the target is an application, the command is run on all units for that
    application. For example, if there was an application "mysql" and that application
    had two units, "mysql/0" and "mysql/1", then
@@ -7286,7 +7538,7 @@ triangle alongside a command to view that command's entry.
    command and its arguments with "--", to tell "juju run" to stop processing
    those arguments. For example:
 
-             juju run --all -- hostname -f
+             juju run --all --hostname -f
 
 
 
@@ -7336,9 +7588,7 @@ triangle alongside a command to view that command's entry.
    The Action ID is returned for use with 'juju show-action-output <ID>' or
    'juju show-action-status <ID>'.
 
-          
-   
-   Params are validated according to the charm for the unit's application.  The 
+   Params are validated according to the charm for the unit's application.  The
    valid params can be seen using "juju actions <application> --schema".
 
    Params may be in a yaml file which is passed with the --params flag, or they
@@ -7361,7 +7611,7 @@ triangle alongside a command to view that command's entry.
           size: 873.2
           units: GB
           name: foo.sql
-   $ juju run-action mysql/3 backup 
+   $ juju run-action mysql/3 backup
    action: <ID>
    $ juju show-action-output <ID>
    result:
@@ -7457,31 +7707,21 @@ triangle alongside a command to view that command's entry.
 
    Copy file /var/log/syslog from machine 2 to the client's current working
    directory:
-
           juju scp 2:/var/log/syslog .
-
    Recursively copy the /var/log/mongodb directory from a mongodb unit to the
    client's local remote-logs directory:
-
           juju scp -- -r mongodb/0:/var/log/mongodb/ remote-logs
-
    Copy foo.txt from the client's current working directory to an apache2 unit of
    model "prod". Proxy the SSH connection through the controller and turn on scp
    compression:
-
           juju scp -m prod --proxy -- -C foo.txt apache2/1:
-
    Copy multiple files from the client's current working directory to machine 2:
           juju scp file1 file2 2:
-
    Copy multiple files from the bob user account on machine 3 to the client's
    current working directory:
-
           juju scp bob@3:'file1 file2' .
-
    Copy file.dat from machine 0 to the machine hosting unit foo/0 (-3
    causes the transfer to be made via the client):
-
           juju scp -- -3 0:file.dat foo/0:
 
 
@@ -7553,18 +7793,19 @@ triangle alongside a command to view that command's entry.
 
    **Summary:**
 
-   Sets the default credentials for a cloud.
+   Sets local default credentials for a cloud.
 
 
    
    **Details:**
 
 
-   The default credentials are specified with a "credential name". A 
-   credential name is created during the process of adding credentials either 
-   via `juju add-credential` or `juju autoload-credentials`. Credential names 
-   can be listed with `juju credentials`.
+   The default credentials are specified with a "credential name". 
+   A credential name is created during the process of adding credentials either 
+   via `juju add-credential` or `juju autoload-credentials`. 
+   Credential names can be listed with `juju credentials`.
 
+   This command sets a locally stored credential to be used as a default.
    Default credentials avoid the need to specify a particular set of 
    credentials when more than one are available for a given cloud.
 
@@ -8014,6 +8255,120 @@ triangle alongside a command to view that command's entry.
 
 
 
+^# show-credential
+
+   **Usage:** ` juju show-credential [options] [<cloud name> <credential name>]`
+
+   **Summary:**
+
+   Shows credential information on a controller.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _--format  (= yaml)_
+
+   Specify output format (yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   _--show-secrets  (= false)_
+
+   Display credential secret attributes
+
+   
+   **Details:**
+
+
+   This command displays information about credential(s) stored on the controller
+   for this user.
+
+   To see the contents of a specific credential, supply its cloud and name.
+   To see all credentials stored for you, supply no arguments.
+
+   To see secrets, content attributes marked as hidden, use --show-secrets option.
+   To see locally stored credentials, use "juju credentials' command.
+
+
+   **Examples:**
+
+          juju show-credential google my-admin-credential
+          juju show-credentials 
+          juju show-credentials --show-secrets
+
+
+   **See also:**
+
+   [credentials](#credentials)  
+
+   **Aliases:**
+
+   `show-credentials`
+
+
+
+^# show-credentials
+
+   **Usage:** ` juju show-credential [options] [<cloud name> <credential name>]`
+
+   **Summary:**
+
+   Shows credential information on a controller.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _--format  (= yaml)_
+
+   Specify output format (yaml)
+
+   _-o, --output (= "")_
+
+   Specify an output file
+
+   _--show-secrets  (= false)_
+
+   Display credential secret attributes
+
+   
+   **Details:**
+
+
+   This command displays information about credential(s) stored on the controller
+   for this user.
+
+   To see the contents of a specific credential, supply its cloud and name.
+   To see all credentials stored for you, supply no arguments.
+
+   To see secrets, content attributes marked as hidden, use --show-secrets option.
+   To see locally stored credentials, use "juju credentials' command.
+
+
+   **Examples:**
+
+          juju show-credential google my-admin-credential
+          juju show-credentials 
+          juju show-credentials --show-secrets
+
+
+   **See also:**
+
+   [credentials](#credentials)  
+
+   **Aliases:**
+
+   `show-credentials`
+
+
+
 ^# show-machine
 
    **Usage:** ` juju show-machine [options] <machineID> ...`
@@ -8093,7 +8448,8 @@ triangle alongside a command to view that command's entry.
    **Details:**
 
 
-   Show information about the current or specified model
+   Show information about the current or specified model.
+
 
 
 
@@ -8184,6 +8540,10 @@ triangle alongside a command to view that command's entry.
 
    Specify an output file
 
+   _--relations  (= false)_
+
+   Show 'relations' section
+
    _--utc  (= false)_
 
    Display time as UTC in RFC3339 format
@@ -8201,6 +8561,9 @@ triangle alongside a command to view that command's entry.
    is matched, then its principal unit will be displayed. If a principal unit is
    matched, then all of its subordinates will be displayed.
 
+   Machine numbers may also be used as output filters. This will only display data 
+   in each section relevant to the specified machines. For example, application 
+   section will only contain the applications that have units on these machines, etc.
    The available output formats are:
 
    - tabular (default): Displays status in a tabular format with a separate table
@@ -8229,12 +8592,19 @@ triangle alongside a command to view that command's entry.
    - json: Displays information about the model, machines, applications, and units
                in structured JSON format.
 
+               
+   
+   In tabular format, 'Relations' section is not displayed by default. 
+   Use --relations option to see this section. This option is ignored in all other 
+   formats.
+
 
    **Examples:**
 
           juju show-status
           juju show-status mysql
           juju show-status nova-*
+          juju show-status --relations
 
 
    **See also:**
@@ -8274,7 +8644,7 @@ triangle alongside a command to view that command's entry.
 
    _--include-status-updates  (= false)_
 
-   Inlcude update status hook messages in the returned logs
+   Deprecated, has no effect for 2.3+ controllers: Include update status hook messages in the returned logs
 
    _-m, --model (= "")_
 
@@ -8606,23 +8976,14 @@ triangle alongside a command to view that command's entry.
    **Examples:**
 
    Connect to machine 0:
-
           juju ssh 0
-
    Connect to machine 1 and run command 'uname -a':
-
           juju ssh 1 uname -a
-
    Connect to a mysql unit:
-
           juju ssh mysql/0
-
    Connect to a jenkins unit as user jenkins:
-
           juju ssh jenkins@jenkins/0
-
    Connect to a mysql unit with an identity not known to juju (ssh option -i):
-
           juju ssh mysql/0 -i ~/.ssh/my_private_key echo hello
 
 
@@ -8711,6 +9072,10 @@ triangle alongside a command to view that command's entry.
 
    Specify an output file
 
+   _--relations  (= false)_
+
+   Show 'relations' section
+
    _--utc  (= false)_
 
    Display time as UTC in RFC3339 format
@@ -8728,6 +9093,9 @@ triangle alongside a command to view that command's entry.
    is matched, then its principal unit will be displayed. If a principal unit is
    matched, then all of its subordinates will be displayed.
 
+   Machine numbers may also be used as output filters. This will only display data 
+   in each section relevant to the specified machines. For example, application 
+   section will only contain the applications that have units on these machines, etc.
    The available output formats are:
 
    - tabular (default): Displays status in a tabular format with a separate table
@@ -8756,12 +9124,19 @@ triangle alongside a command to view that command's entry.
    - json: Displays information about the model, machines, applications, and units
                in structured JSON format.
 
+               
+   
+   In tabular format, 'Relations' section is not displayed by default. 
+   Use --relations option to see this section. This option is ignored in all other 
+   formats.
+
 
    **Examples:**
 
           juju show-status
           juju show-status mysql
           juju show-status nova-*
+          juju show-status --relations
 
 
    **See also:**
@@ -9112,7 +9487,7 @@ triangle alongside a command to view that command's entry.
 
    **See also:**
 
-   [upgrade-juju](#upgrade-juju)  
+   [upgrade-model](#upgrade-model)  
 
    **Aliases:**
 
@@ -9203,11 +9578,51 @@ triangle alongside a command to view that command's entry.
 
    **See also:**
 
-   [upgrade-juju](#upgrade-juju)  
+   [upgrade-model](#upgrade-model)  
 
    **Aliases:**
 
    `sync-tools`
+
+
+
+^# trust
+
+   **Usage:** ` juju trust [options] <application name>`
+
+   **Summary:**
+
+   Sets the trust status of a deployed application to true.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
+
+   _--remove  (= false)_
+
+   Remove trusted access from a trusted application
+
+   
+   **Details:**
+
+
+   Sets the trust configuration value to true.
+
+
+   **Examples:**
+
+          juju trust media-wiki
+
+
+   **See also:**
+
+   [config](#config)  
 
 
 
@@ -9600,7 +10015,7 @@ triangle alongside a command to view that command's entry.
 
 ^# upgrade-juju
 
-   **Usage:** ` juju upgrade-juju [options]`
+   **Usage:** ` juju upgrade-model [options]`
 
    **Summary:**
 
@@ -9611,6 +10026,10 @@ triangle alongside a command to view that command's entry.
    _-B, --no-browser-login  (= false)_
 
    Do not use web browser for authentication
+
+   _--agent-stream (= "")_
+
+   Check this agent stream for upgrades
 
    _--agent-version (= "")_
 
@@ -9669,6 +10088,9 @@ triangle alongside a command to view that command's entry.
    a previous upgrade was not fully completed (e.g.: if one of the
    controllers in a high availability model failed to upgrade).
 
+   When looking for an agent to upgrade to Juju will check the currently
+   configured agent stream for that model. It's possible to overwrite this for
+   the lifetime of this upgrade using --agent-stream
    If a failed upgrade has been resolved, '--reset-previous-upgrade' can be
    used to allow the upgrade to proceed.
 
@@ -9677,14 +10099,121 @@ triangle alongside a command to view that command's entry.
 
    **Examples:**
 
-          juju upgrade-juju --dry-run
-          juju upgrade-juju --agent-version 2.0.1
+          juju upgrade-model --dry-run
+          juju upgrade-model --agent-version 2.0.1
+          juju upgrade-model --agent-stream proposed
           
 
 
    **See also:**
 
    [sync-agent-binaries](#sync-agent-binaries)  
+
+   **Aliases:**
+
+   `upgrade-juju`
+
+
+
+^# upgrade-model
+
+   **Usage:** ` juju upgrade-model [options]`
+
+   **Summary:**
+
+   Upgrades Juju on all machines in a model.
+
+   **Options:**
+
+   _-B, --no-browser-login  (= false)_
+
+   Do not use web browser for authentication
+
+   _--agent-stream (= "")_
+
+   Check this agent stream for upgrades
+
+   _--agent-version (= "")_
+
+   Upgrade to specific version
+
+   _--build-agent  (= false)_
+
+   Build a local version of the agent binary; for development use only
+
+   _--dry-run  (= false)_
+
+   Don't change anything, just report what would be changed
+
+   _--ignore-agent-versions  (= false)_
+
+   Don't check if all agents have already reached the current version
+
+   _-m, --model (= "")_
+
+   Model to operate in. Accepts [&lt;controller name>:]&lt;model name>
+
+   _--reset-previous-upgrade  (= false)_
+
+   Clear the previous (incomplete) upgrade status (use with care)
+
+   _-y, --yes  (= false)_
+
+   Answer 'yes' to confirmation prompts
+
+   
+   **Details:**
+
+
+   Juju provides agent software to every machine it creates. This command
+   upgrades that software across an entire model, which is, by default, the
+   current model.
+
+   A model's agent version can be shown with `juju model-config agent-
+   version`.
+
+   A version is denoted by: major.minor.patch
+   The upgrade candidate will be auto-selected if '--agent-version' is not
+   specified:
+
+          - If the server major version matches the client major version, the
+          version selected is minor+1. If such a minor version is not available then
+          the next patch version is chosen.
+
+          - If the server major version does not match the client major version,
+          the version selected is that of the client version.
+
+   
+   If the controller is without internet access, the client must first supply
+   the software to the controller's cache via the `juju sync-agent-binaries` command.
+   The command will abort if an upgrade is in progress. It will also abort if
+   a previous upgrade was not fully completed (e.g.: if one of the
+   controllers in a high availability model failed to upgrade).
+
+   When looking for an agent to upgrade to Juju will check the currently
+   configured agent stream for that model. It's possible to overwrite this for
+   the lifetime of this upgrade using --agent-stream
+   If a failed upgrade has been resolved, '--reset-previous-upgrade' can be
+   used to allow the upgrade to proceed.
+
+   Backups are recommended prior to upgrading.
+
+
+   **Examples:**
+
+          juju upgrade-model --dry-run
+          juju upgrade-model --agent-version 2.0.1
+          juju upgrade-model --agent-stream proposed
+          
+
+
+   **See also:**
+
+   [sync-agent-binaries](#sync-agent-binaries)  
+
+   **Aliases:**
+
+   `upgrade-juju`
 
 
 

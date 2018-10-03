@@ -1,6 +1,7 @@
-Title: Help with Rackspace clouds
+Title: Using Rackspace with Juju
+TODO:  Review required
 
-# Using the Rackspace public cloud
+# Using Rackspace with Juju
 
 Juju already has knowledge of the Rackspace cloud, so unlike previous versions there
 is no need to provide a specific configuration for it, it 'just works'. Rackspace
@@ -23,7 +24,10 @@ running:
 juju update-clouds
 ```
 
-## Credentials
+## Adding credentials
+
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
 
 Using Juju's interactive authentication, importing Rackspace credentials into
 Juju is a simple process. The only information you'll need is your Rackspace
@@ -57,19 +61,41 @@ password and tenant-name, as described above.
 
 You can now start using Juju with your Rackspace cloud.
 
-## Create controller
+## Creating a controller
 
-To create the controller, run the following command:
+You are now ready to create a Juju controller for cloud 'rackspace':
 
 ```bash
-juju bootstrap rackspace mycloud
+juju bootstrap rackspace rackspace-controller
 ```
 
-This will create a new controller called 'mycloud' with the configuration
-values we entered earlier.
+Above, the name given to the new controller is 'rackspace-controller'.
+Rackspace will provision an instance to run the controller on.
 
-This controller will now be visible in the Rackspace cloud control panel:
+The controller will now be visible in the
+[Rackspace cloud control panel][rscontrolpanel]:
 
 ![bootstrap machine 0 in Rackspace portal](./media/config-rackspace_portal-machine_0.png)
 
+For a detailed explanation and examples of the `bootstrap` command see the
+[Creating a controller][controllers-creating] page.
+
+## Next steps
+
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
+
+See these pages for ideas on what to do next:
+
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
+
+
+<!-- LINKS -->
+
+[controllers-creating]: ./controllers-creating.md
 [rscontrolpanel]: https://mycloud.rackspace.com
+[models]: ./models.md
+[charms]: ./charms.md
+[credentials]: ./credentials.md

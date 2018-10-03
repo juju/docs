@@ -1,16 +1,22 @@
 Title: Using MAAS with Juju
+table_of_contents: True
 
+# Using MAAS with Juju
 
-# Using a MAAS cloud
+[MAAS][upstream-maas] treats physical servers (or KVM guests) as a public cloud
+treats cloud instances.
 
-Juju works closely with [MAAS][maas-site] to deliver the same experience
-on bare metal that you would get by using any other cloud. Note that the 
-Juju 2.x series is compatible with both the 1.x and 2.x series of MAAS.
+!!! Note:
+    The Juju 2.x series is compatible with both the 1.x and 2.x series of MAAS.
 
-## Add a MAAS cloud
+## Adding a MAAS cloud
 
-Use the interactive `add-cloud` command to add your MAAS to Juju's list of
-clouds:
+Use the interactive `add-cloud` command to add your MAAS cloud to Juju's list
+of clouds. You will need to supply a name you wish to call your cloud and the
+unique MAAS API endpoint.
+
+For the manual method of adding a MAAS cloud, see below section
+[Manually adding MAAS clouds][#clouds-maas-manual].
 
 ```bash
 juju add-cloud
@@ -55,16 +61,47 @@ Cloud        Regions  Default          Type        Description
 maas-cloud         0                   maas        Metal As A Service
 ```
 
-You will need to add credentials for this cloud before bootstrapping it
-(creating a controller).
+### Manually adding MAAS clouds
 
-### Manually defining MAAS clouds
+This example covers manually adding a MAAS cloud to Juju (see
+[Adding clouds manually][clouds-adding-manually] for background information).
+It also demonstrates how multiple clouds of the same type can be defined and
+added.
 
-Alternatively, it is possible to manually define a single or multiple MAAS
-clouds with a file and add a cloud by referring to such a file (still with
-`juju add-cloud`).  See [Manually adding MAAS clouds][maas-manual] for details.
+The manual method necessitates the use of a [YAML-formatted][yaml]
+configuration file. Here is an example:
 
-## Add credentials
+```yaml
+clouds:
+   devmaas:
+      type: maas
+      auth-types: [oauth1]
+      endpoint: http://devmaas/MAAS
+   testmaas:
+      type: maas
+      auth-types: [oauth1]
+      endpoint: http://172.18.42.10/MAAS
+   prodmaas:
+      type: maas
+      auth-types: [oauth1]
+      endpoint: http://prodmaas/MAAS
+```
+
+This defines three MAAS clouds and refers to them by their respective region
+controllers.
+
+To add clouds 'devmaas' and 'prodmaas', assuming the configuration file is
+`maas-clouds.yaml` in the current directory, we would run:
+
+```bash
+juju add-cloud devmaas maas-clouds.yaml
+juju add-cloud prodmaas maas-clouds.yaml
+```
+
+## Adding credentials
+
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
 
 Use the interactive `add-credential` command to add your credentials to the new
 cloud:
@@ -101,32 +138,43 @@ sudo maas-region apikey --username=$PROFILE
 
 Where $PROFILE is to be replaced by the MAAS username.
 
-## Create the Juju controller
+## Creating a controller
 
-You are now ready to create a Juju controller:
+You are now ready to create a Juju controller for cloud 'maas-cloud':
 
 ```bash
 juju bootstrap maas-cloud maas-cloud-controller
 ```
 
-Above, the name given to the new controller was 'maas-cloud-controller'.
-MAAS will allocate a node from its pool to run the controller on. If you want
-to make sure a specific node is used for this, use constraints (see
-[Create a controller with constraints][create-a-controller-with-constraints]).
+Above, the name given to the new controller is 'maas-cloud-controller'. MAAS
+will allocate a node from its pool to run the controller on.
+
+For a detailed explanation and examples of the `bootstrap` command see the
+[Creating a controller][controllers-creating] page.
 
 ## Next steps
 
-You can now start deploying Juju charms and/or bundles to your MAAS cloud.
-Continue with Juju by visiting the [Models][models] and
-[Introduction to Juju Charms][charms] pages.
+A controller is created with two models - the 'controller' model, which
+should be reserved for Juju's internal operations, and a model named
+'default', which can be used for deploying user workloads.
+
+See these pages for ideas on what to do next:
+
+ - [Juju models][models]
+ - [Introduction to Juju Charms][charms]
 
 
 <!-- LINKS -->
 
-[maas-site]: https://maas.io
+[yaml]: http://www.yaml.org/spec/1.2/spec.html
+[upstream-maas]: https://maas.io
 [maas-cli]: https://docs.ubuntu.com/maas/en/manage-cli
 [maas-api]: https://docs.ubuntu.com/maas/en/manage-account#api-key
-[maas-manual]: ./clouds-maas-manual.html
-[create-a-controller-with-constraints]: ./controllers-creating.html#create-a-controller-with-constraints
-[models]: ./models.html
-[charms]: ./charms.html
+[maas-manual]: ./clouds-maas-manual.md
+[create-a-controller-with-constraints]: ./controllers-creating.md#create-a-controller-with-constraints
+[models]: ./models.md
+[charms]: ./charms.md
+[#clouds-maas-manual]: #manually-adding-maas-clouds
+[controllers-creating]: ./controllers-creating.md
+[clouds-adding-manually]: ./clouds.md#adding-clouds-manually
+[credentials]: ./credentials.md

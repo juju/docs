@@ -9,7 +9,7 @@ between the Juju client and the workload machines.
 The instructions on this page will show you how to get started with Juju by
 using the online hosted Juju controller, the Juju as a Service (JAAS)
 controller. If you'd prefer to test it out locally, see the
-[Getting started with Juju and LXD][tut-lxd] guide.
+[Using Juju locally (LXD)][tut-lxd] guide.
 
 ## JAAS
 
@@ -76,8 +76,8 @@ You build your [model][models] by adding and relating applications from the
 [Charm Store][charmstore]. Press the green '+' symbol in the middle of the web
 UI to search for applications in the Charm Store.
 
-You will see a list of available charms and bundles with a description of
-each. Select a [charm][charms] or [bundle][bundles] to learn more about it.
+You will see a list of available charms and bundles with a description of each.
+Select a [charm][charms] or [bundle][charms-bundles] to learn more about it.
 
 When you have selected a charm or bundle it can be added to your model by
 pressing the 'Add to model' button.
@@ -296,18 +296,16 @@ hours of looking up configuration options or wrestling with install scripts!
 To discover more about what Juju can do for you, we suggest taking a look at
 some of the following pages of documentation:
 
- - [Creating your own cloud controller][tut-google]
- - [Creating models locally with LXD][tut-lxd]
- - [Share your model with other users][share]
- - [Learn more about charms and bundles][learn]
- - [Find out how to customise and manage models][customise]
+ - [Using Juju locally (LXD)][tut-lxd]
+ - [Multi-user cloud][tut-users]
+ - [Models][models]
 
 
 <!-- LINKS -->
 
 [azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
-[aws]: ./help-aws.html "Using the Amazon Web Service public cloud"
-[bundles]: ./charms-bundles.html "Introduction to bundles"
+[aws]: ./help-aws.html "Using Amazon AWS with Juju"
+[charms-bundles]: ./charms-bundles.html "Charm bundles"
 [k8]: https://jujucharms.com/canonical-kubernetes/
 [charms]: ./charms.html "Introduction to charms"
 [credentials]: ./credentials.html
@@ -320,11 +318,9 @@ some of the following pages of documentation:
 [gcedashboard]: https://console.cloud.google.com
 [gcecredentials]: https://console.developers.google.com/apis/credentials
 [install]: ./reference-install.html
-[tut-lxd]: ./tut-lxd.html
-[tut-google]: ./tut-google.html
-[share]: ./tut-users.html
-[learn]: ./charms.html
-[customise]: ./models.html
+[tut-lxd]: ./tut-lxd.md
+[tut-users]: ./tut-users.md
+[models]: ./models.md
 [snapcraft]: https://snapcraft.io
 [aws-creds]: ./help-aws.html#credentials
 [azure-creds]: ./help-azure.html#credentials

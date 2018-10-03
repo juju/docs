@@ -1,5 +1,6 @@
 Title: Hook tools
 TODO:  rationalize with authors-hook-environment.md and authors-charm-writing.md
+       Convert to abstract links
 
 # Hook tools
 
@@ -179,6 +180,45 @@ Import-Module CharmHelpers
 $interval = Get-JujuCharmConfig "interval"
 ```
 
+## goal-state
+
+`goal-state` queries information about charm deployment. It will print only
+YAML or JSON output (default YAML).
+
+The information is:
+
+ - What other peer units have been deployed and their status
+ - What remote (related) units exist on the other end of each endpoint, and
+   their status
+
+The output will be a subset of that produced by the `juju status`. There will
+be output for sibling (peer) units and relation state per unit.
+
+The unit status values are the workload status of the (sibling) peer units. We
+also use a unit status value of dying when the unit's life becomes dying. Thus
+unit status is one of:
+
+`allocating`  
+`active`  
+`waiting`  
+`blocked`  
+`error`  
+`dying`
+
+The relation status values are determined per unit and depend on whether the
+unit has entered or left scope. The possible values are:
+
+`joining` : relation created but unit not yet entered scope  
+`joined` : unit has entered scope and relation is active  
+`broken` : unit has left, or is preparing to leave scope  
+`suspended` : parent cross model relation is suspended  
+`error`
+
+By reporting error state, the charm has a chance to determine that goal state
+may not be reached due to some external cause. As with status, we will report
+the time since the status changed to allow the charm to empirically guess that
+a peer may have become stuck if it has not yet reached active state.
+
 ## is-leader
 
 `is-leader` will write `"True"` or `"False"` to stdout, and return 0, if
@@ -350,10 +390,10 @@ See [Network primitives][dev-network-primitives] for in-depth coverage.
 
 ## open-port
 
-`open-port` registers a port or range to open on the public-interface. On public
-clouds the port will only be open while the application is exposed. It accepts a
-single port or range of ports with an optional protocol, which may be `udp` or
-`tcp`, where `tcp` is the default.
+`open-port` registers a port or range to open on the public-interface. On
+public clouds the port will only be open while the application is exposed. It
+accepts a single port or range of ports with an optional protocol, which may be
+`icmp`, `udp`, or `tcp`, with `tcp` being the default.
 
 `open-port` will not have any effect if the application is not exposed, and may have
 a somewhat delayed effect even if it is. This operation is transactional, so
@@ -864,5 +904,9 @@ powershell:
 Import-Module CharmHelpers
 Get-JujuUnit -Attr "public-address"
 ```
-[payloads]:./authors-charm-metadata.html#payloads
+
+
+<!-- LINKS -->
+
+[payloads]:./authors-charm-metadata.html#payloads-field
 [dev-network-primitives]: ./developer-network-primitives.html

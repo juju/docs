@@ -1,30 +1,35 @@
-Title: Using LXD as a cloud
+Title: Using LXD with Juju
 TODO:  Warning: Ubuntu release versions hardcoded
        Warning: Troubleshoot Trusty; bootstrap only works with the lxd snap
        (and only if it is installed w/o the lxd deb being installed first)
+table_of_contents: True
 
-# Using LXD as a cloud
+# Using LXD with Juju
 
-Choosing LXD as the backing cloud for Juju is an efficient way to experiment
-with Juju. It is also very quick to set up. With lightweight containers acting
-as Juju machines, even a moderately powerful laptop can create useful models,
-or serve as a platform to develop your own charms.
+Choosing [LXD][ubuntu-lxd] as the backing cloud for Juju is an efficient way to
+work with Juju. Other advantages are that it is quick to set up and does not
+require an account with a public cloud vendor.
 
-A tutorial is available on this same topic: [Getting started with Juju and LXD][tut-lxd].
+Traditionally LXD would run local to the Juju client but since `v.2.5.0` Juju
+is capable of connecting to remote LXD hosts (see
+[Adding a remote LXD cloud][clouds-lxd-advanced-remote]). If you do run it
+locally ensure you have enough space for the containers.
+
+Constraints can be used with LXD containers (`v.2.4.1`). However, these are not
+bound to the LXD cloud type (i.e. they can affect containers that are
+themselves backed by a Juju machine running on any cloud type). See
+[Constraints and LXD containers][charms-constraints-lxd] for details.
 
 ## Software prerequisites
 
 Both LXD and Juju will be needed on the host system.
 
-LXD is installed by default (by Ubuntu package) on all supported Ubuntu
-releases with the exception of Ubuntu 14.04 LTS. However, the snap install
-method will soon become the preferred way to install LXD. See
-[Using the LXD snap][lxd-snap] for how to do this.
-
-Install Juju now, using [Installing Juju][install].
+Install Juju now (see the [Installing Juju][install] page).
 
 Then follow the instructions below for installing LXD based on your chosen
-Ubuntu release.
+Ubuntu release. Note that the snap install method will soon become the
+preferred way to install LXD. See [Using the LXD snap][lxd-snap] for how to do
+this.
 
 ### Ubuntu 14.04 LTS
 
@@ -99,7 +104,7 @@ sudo apt install zfsutils-linux
 sudo mkdir /var/lib/zfs
 sudo truncate -s 32G /var/lib/zfs/lxd.img
 sudo zpool create lxd /var/lib/zfs/lxd.img
-sudo lxd init --auto --storage-backend zfs --storage-pool lxd
+lxd init --auto --storage-backend zfs --storage-pool lxd
 ```
 
 Above we allocated 32GB of space to a sparse file.
@@ -110,7 +115,23 @@ Notes:
  - The installed ZFS utilities can be used to query the pool (e.g.
    `sudo zpool list -v lxd`).
 
-## Create a controller
+If you've installed LXD via the snap package then you don't need to install the
+ZFS tools and configure it manually (as shown above). All that's required is:
+
+```bash
+lxd init --auto --storage-backend zfs
+```
+
+## Disabling IPv6
+
+Currently Juju does not support IPv6. You will therefore need to disable it at
+the LXD level. Assuming an LXD bridge of `lxdbr0`:
+
+```bash
+lxc network set lxdbr0 ipv6.address none
+```
+
+## Creating a controller
 
 The Juju controller for LXD (the 'localhost' cloud) can now be created. Below,
 we call it 'lxd':
@@ -148,19 +169,23 @@ Output:
 +---------------+---------+----------------------+------+------------+-----------+
 ```
 
-See more examples of [Creating a controller][controllers-creating] with the
-localhost cloud.
+## Advanced LXD support
+
+Here is a list of advanced LXD features supported by Juju:
+
+ - [LXD clustering][clouds-lxd-advanced-cluster] (`v.2.4.0`)
+ - [Adding a remote LXD cloud][clouds-lxd-advanced-remote] (`v.2.5.0`)
 
 ## Additional LXD resources
 
-[Additional LXD resources][lxd-resources] provides more LXD-specific
+[Additional LXD resources][clouds-lxd-resources] provides more LXD-specific
 information.
 
 ## Next steps
 
-A controller is created with two models - the 'controller' model, which
-should be reserved for Juju's internal operations, and a model named
-'default', which can be used for deploying user workloads.
+A controller is created with two models - the 'controller' model, which should
+be reserved for Juju's internal operations, and a model named 'default', which
+can be used for deploying user workloads.
 
 See these pages for ideas on what to do next:
 
@@ -170,13 +195,16 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
-[tut-lxd]: ./tut-lxd.html
-[install]: ./reference-install.html
-[models]: ./models.html
-[charms]: ./charms.html
-[controllers]: ./controllers.html
-[controllers-creating]: ./controllers-creating.html
-[models-add]: ./models-adding.html
-[credentials]: ./credentials.html
-[lxd-resources]: ./clouds-lxd-resources.html
-[lxd-snap]: ./clouds-lxd-resources.html#using-the-lxd-snap
+[install]: ./reference-install.md
+[controllers]: ./controllers.md
+[controllers-creating]: ./controllers-creating.md
+[models]: ./models.md
+[charms]: ./charms.md
+[models-add]: ./models-adding.md
+[credentials]: ./credentials.md
+[clouds-lxd-resources]: ./clouds-lxd-resources.md
+[clouds-lxd-advanced-cluster]: ./clouds-lxd-advanced.md#lxd-clustering
+[clouds-lxd-advanced-remote]: ./clouds-lxd-advanced.md#adding-a-remote-lxd-cloud
+[lxd-snap]: ./clouds-lxd-resources.md#using-the-lxd-snap
+[ubuntu-lxd]: http://www.ubuntu.com/cloud/lxd
+[charms-constraints-lxd]: ./charms-constraints.md#constraints-and-lxd-containers

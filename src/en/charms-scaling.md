@@ -1,88 +1,78 @@
 Title: Scaling applications
-TODO:  The Scaling Back section should just reference charms-destroy.html (remove-unit)
-       Critical: review required
+TODO:  More direction ito how users discover "built-in scaling" (e.g. the store is not clear on wordpress)
 
 # Scaling applications
 
-One of the killer features of computing in the cloud is that it (should)
-seamlessly allow you to scale up or down your applications to meet your needs
-and whims. Juju not only makes it simple to deploy applications, but crucially
-makes it easy to manage them too. It won't anticipate you getting slashdotted
-or on the front page of hacker news (yet), but it does mean that when you do
-you can reliably scale your applications to meet the demand.
+The capability of a service to adjust its resource footprint to a level
+appropriate for fulfilling client demands placed upon it is known as
+*scalability*. Scaling *vertically* affects the resources of existing machines
+(memory, CPU, disk space) whereas scaling *horizontally* involves the number of
+application units available.
 
+Units are not always synonymous with machines however. Multiple units can be
+placed onto a single machine (co-location) and still be considered horizontal
+scaling if sufficient resources are present on the machine.
 
-##  Adding Units
+This page will describe how rudimentary scaling works with Juju as well as
+mention some less common situations.
 
-The general usage to scale an application up is via the `add-unit` command:
+## Scaling up
 
+In the context of Juju, scaling up means increasing the number of application
+units and always involves the `add-unit` command.
+
+Closely resembling scaling up is the addition of a machine devoid of a unit.
+This is accomplished via the `add-machine` command:
+  
 ```bash
-juju add-unit [options] <application-name>
+juju add-machine
 ```
 
-The command options are:
+!!! Note:
+    A machine provisioned via the `add-machine` command that does not yet house
+    an application unit will, by default, be used for any subsequent
+    application deployment (via the `deploy` command).
 
-```no-highlight
-Options:
--m, --model (= "")
-    Model to operate in. Accepts [<controller name>:]<model name>
--n, --num-units  (= 1)
-    Number of units to add
---to (= "")
-    The machine and/or container to deploy the unit in (bypasses constraints)
+### Scaling up behind a load balancer
 
-```
+In many cases simply adding more units will not make an application scale
+properly. A load balancer or proxy is often required.
 
-
-## Scaling behind a Load Balancer
-
-In many cases you just can't add more units to an application and have it magically
-scale - you need to use a load balancer. In this case you can just deploy a
-proxy in front of your units; let's deploy a load balanced MediaWiki:
+Below is an example of deploying a load balanced
+[MediaWiki][store-mediawiki] application by placing the
+[HAProxy][store-haproxy] application in front of it:
 
 ```bash
-juju deploy haproxy
 juju deploy mediawiki
 juju deploy mysql
+juju deploy haproxy
 juju add-relation mediawiki:db mysql
 juju add-relation mediawiki haproxy
 juju expose haproxy
 ```
 
-The haproxy charm configures and installs an
-HAProxy ([http://haproxy.1wt.eu/](http://haproxy.1wt.eu/)) application, the
-widely used TCP/HTTP load balancer. When you add a relation between the
-MediaWiki instance and HAProxy, it will be configured to load balance requests
-to that application. Note that this means the web traffic should be directed to
-the HAProxy instance. Running:
+When a relation is made between MediaWiki and HAProxy, the latter will be
+configured to load balance requests to the MediaWiki application. This means
+that client requests should go to the HAProxy instance. To get the proxy's
+IP address run the following:
 
 ```bash
 juju status haproxy
 ```
 
-will return the public IP for the load balancer. This is the IP you want to
-point your DNS to.
-
-Now that you are behind a load balancer, you can grow the MediaWiki instances
-behind the proxy as you see fit, let's add 5 more:
+You can now scale up the MediaWiki application behind the proxy as you see fit.
+To add five more units (with each running in its own machine):
 
 ```bash
 juju add-unit -n 5 mediawiki
 ```
 
-You don't need to worry about manually adding your units to the load balancer.
-You've made the relationship at the _application level_, so the new units know
-exactly how to relate. Juju is also smart enough to ensure that the new units
-are installed and configured _before_ adding them to the load balancer,
-ensuring minimal user disruption of the application.
+### Scaling up using a charm with built-in scaling
 
+Some charms have scaling built-in where scaling up really *is* as simple as
+adding more units.
 
-## Scaling Charms with built in Horizontal scaling
-
-Some charms have native scaling built in. For instance, the WordPress charm
-has built in load balancing. In this case, scaling up applications is really as
-simple as requesting more instances. Note that this feature is charm specific,
-not all charms can scale this way. Consider the following setup for a WordPress:
+An example of this is the [WordPress][store-wordpress] charm:
 
 ```bash
 juju deploy mysql
@@ -91,119 +81,113 @@ juju add-relation mysql wordpress
 juju expose wordpress
 ```
 
-When you notice the WordPress instance is struggling under the load, you can
-simply scale up the application:
+To scale up by adding an extra unit one can simply do:
 
 ```bash
 juju add-unit wordpress
 ```
 
-This will cause a new instance to be run and configured to work alongside the
-currently running one. Behind the scenes, Juju is adding an instance to the
-model and provisioning the specified application
-onto that instance/machine.
+This will cause a new unit (and machine) to be spawned and configured to work
+alongside the existing one.
 
-Now suppose your MySQL application needs hyperscale, you can use the `-n` or
-`--num-units` options to `add-unit` to specify the desired number of units you
-want added to the application. For example, to scale up your application by 100
-units simply do:
+By default, `add-unit` will add a single unit. To request multiple units the
+`-n` option is needed. For example, to further scale up our current application
+by adding 100 units of MySQL one would run:
 
 ```bash
 juju add-unit -n 100 mysql
 ```
 
-or you can use `--num-unit` which has the same result, but is more readable:
+### Scaling up through co-location
 
-```bash
-juju add-unit --num-unit 100 mysql
-```
+Like the `deploy` command, it is possible to co-locate multiple applications on
+a single machine. This is done via the `--to` option.
 
-### Co-location
-
-As with the `juju deploy` command, it is possible to co-locate applications on
-machines.
-If you would like to add a unit to a specific machine just append the `--to`
-option, for example:
+For example, to add a unit of MySQL to the machine with an ID of '23':
 
 ```bash
 juju add-unit mysql --to 23
 ```
-...adds a unit to machine 23,
+
+To add a unit of the same application to existing LXC container '3' residing on
+host machine '24':
 
 ```bash
 juju add-unit mysql --to 24/lxc/3
 ```
-...adds a unit to lxc container 3 on host machine 24.
 
-It is worth noting that not all applications will happily co-exist and it is much
-safer to create a new container when co-locating:
+!!! Note:
+    Not all applications will happily co-exist (usually due to conflicting
+    configuration files). It is therefore generally safer to place units on
+    dedicated machines or containers.
+
+Here we add a unit of MySQL to a **new** LXC container on host machine 25:
 
 ```bash
 juju add-unit mysql --to lxc:25
 ```
-...add unit of mysql to a new lxc container on host machine 25
 
-## Constraints
+### Scaling up by specifying new constraints
 
-The `add-unit` command deploys a machine matching the constraints of the
-initially deployed application. For example, if MySQL was deployed with the
-defaults (i.e. no `--constraints` option) you would have MySQL on an instance
-that matches the closest to 1 Gigabyte of memory and 1 CPU available. If you
-would like to add a unit with more resources to the MySQL application you will
-first need to issue a `add-machine` with the desired constraint followed by a
-`add-unit`. For example, the following command adds a 16 Gigabyte unit to the
-MySQL application (note in this example `juju status` returns machine 3 for the
-`add-machine` command):
+It is possible to scale out an application by adding a unit with different
+hardware requirements (constraints) than those set with the initial deployment.
+The default behaviour is for new units to use the same, if any, constraints.
+
+This is done by indirectly creating a machine with a constraint and then adding
+the unit to it. For example, to add a unit with 16 GiB of memory to the MySQL
+application if the initial deployment was only, say, 4 GiB:
 
 ```bash
-juju add-machine --constraints="mem=16G"
+juju add-machine --constraints mem=16G
+juju machines
 juju add-unit mysql --to 3
 ```
 
+Above, it is presumed that `juju machines` informed us that the new machine was
+assigned an ID of '3'.
 
-## Scaling Back
+Read the [Using constraints][charms-constraints] page for details on
+constraints.
 
-Sometimes you may want to scale back some of your applications, and this too is
-easy with Juju.
+## Scaling down
 
-The general usage to scale down an application is with the `remove-unit` command:
+In the context of Juju, scaling down means decreasing the number of application
+units and always involves the `remove-unit` command.
 
-```bash
-juju remove-unit [options] <unit> [...]
-```
-
-For example, the following scales down the MediaWiki application by removing a
-specific unit:
+Closely resembling scaling down is the direct removal of a machine. This is
+therefore also covered here and is accomplished via the `remove-machine`
+command.
+  
+To scale down the MediaWiki application by removing a specific unit:
 
 ```bash
 juju remove-unit mediawiki/1
 ```
 
-If you have scaled-up the MediaWiki application by more than one unit you can
-remove multiple units in the same command:
+Note that if this is the only unit running on the underlying machine, the
+machine will also be removed.
+
+A machine cannot be manually removed if any of the following is true:
+
+ - it houses a unit
+ - it is being used as the only controller
+ - it is hosting Juju-managed containers (KVM guests or LXD containers) 
+
+For example, to remove a machine with ID of '6':
 
 ```bash
-juju remove-unit mediawiki/1 mediawiki/2 mediawiki/3 mediawiki/4 mediawiki/5
-```
-!!! Note: 
-    The unit numbers may not necessarily be sequential, see the
-    [notes on machine/unit numbering](./reference-numbering.html)
-
-
-The `remove-unit` command can be run to remove running units safely. The
-running applications should automatically adjust to the change. If the machine
-the removed unit was running on is not being used as a controller, or hosting
-other Juju managed containers, it will be destroyed automatically.
-
-!!! Note: 
-    If a machine has no running units, controllers or containers, and
-    hasn't been removed automatically, it can be removed with the `remove-machine`
-    command. For example, to remove machine 1 that the unit `mediawiki/1` was
-    housed on, use the command:
-
-```bash
-juju remove-machine 1
+juju remove-machine 6
 ```
 
-For more information on removing applications, please see the section on
-[destroying applications](./charms-destroy.html).
+For more information on removing applications and machines, see the
+[Removing Juju objects][charms-destroy] page.
+
+
+<!-- LINKS -->
+
+[charms-constraints]: ./charms-constraints.md
+[charms-destroy]: ./charms-destroy.md
+[upstream-haproxy]: http://haproxy.org
+[store-mediawiki]: https://jujucharms.com/mediawiki
+[store-wordpress]: https://jujucharms.com/wordpress
+[store-haproxy]: https://jujucharms.com/haproxy

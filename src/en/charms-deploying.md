@@ -1,7 +1,7 @@
 Title: Deploying applications
 TODO: Add 'centos' and 'windows' stuff to series talk
       Hardcoded: Ubuntu codenames
-      Move commented section to a troubleshooting page
+table_of_contents: True
 
 # Deploying applications
 
@@ -29,7 +29,8 @@ juju deploy mysql
 ```
 
 This will create a machine in your chosen backing cloud within which the MySQL
-application will be deployed.
+application will be deployed. However, if there is a machine present that lacks
+an application then, by default, it will be used instead.
 
 Assuming that the Xenial series charm exists and was used above, an equivalent
 command is:
@@ -43,6 +44,13 @@ Where 'cs' denotes the Charm Store.
 !!! Note:
     A used charm gets cached on the controller's database to minimize network
     traffic for subsequent uses.
+
+A custom name, such as 'mysql1', can be assigned to the application by
+providing an extra argument:
+
+```bash
+juju deploy mysql mysql1
+```
 
 ### Channels
 
@@ -97,37 +105,31 @@ deployment time. This can be done whether a charm is deployed from the Charm
 Store or from a local charm. See [Application configuration][charms-config] for
 more on this.
 
+## Deploying to LXD containers
+
+Applications can be deployed directly to new LXD containers in this way:
+
+```bash
+juju deploy etcd --to lxd
+```
+
+Here, etcd is deployed to a new container on a new machine.
+
+It is equally possible to deploy to a new container that, in turn, resides on a
+pre-existing machine (see next section).
+
 ## Deploying to specific machines
 
-The Juju operator can specify which machine (or container) an application is to
-be deployed to. See
-[Deploying to specific machines][deploying-to-specific-machines] for full
-coverage of this topic.
+You can specify which machine (or container) an application is to be deployed
+to. See [Deploying to specific machines][deploying-to-specific-machines] for
+full coverage of this topic.
 
 ## Deploying to network spaces
 
-Using network spaces the operator is able to create a more restricted network
-topology for applications at deployment time. See
+Using network spaces you can create a more restricted network topology for
+applications at deployment time. See
 [Deploying to network spaces][deploying-to-network-spaces] for more
 information.
-
-<!-- MOVE THIS TO A TROUBLESHOOTING PAGE
-
-## Juju retry-provisioning
-
-You can use the `retry-provisioning` command in cases where deploying
-applications, adding units, or adding machines fails. It allows you to specify
-machines which should be retried to resolve errors reported with `juju status`.
-
-For example, after having deployed 100 units and machines, status reports that
-machines '3', '27' and '57' could not be provisioned because of a 'rate limit
-exceeded' error. You can ask Juju to retry:
-
-```bash
-juju retry-provisioning 3 27 57
-```
-
--->
 
 ## Scaling out
 

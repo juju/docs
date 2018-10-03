@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://jujucharms.com/docs/stable/getting-started -->
+<html class=" yui3-js-enabled js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" lang="en" dir="ltr" itemscope="" itemtype="http://schema.org/Product" style=""><div id="yui3-css-stamp" style="position: absolute !important; visibility: hidden !important"></div><!--<![endif]-->
+
+<style>
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    font-family: Ubuntu, Arial, "libre sans";
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-family: Ubuntu;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+</style>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>
+Hook tools
+</title>
+
+
+<meta name="description" content="Learn how to install, configure, bootstrap Juju and how to create a charm through the Juju documentation">
+<meta name="keywords" content="juju, charms, services, cloud, deployment, puppet, chef, fuel, cloud tools, service management, cloud management, configuration management, linux tool, openstack tool, ubuntu, cloud design, applications, model, modelling, cloud orchestration, service orchestration">
+
+
+<meta name="author" content="Canonical">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<![endif]-->
+
+<link rel="shortcut icon" href="https://jujucharms.com/static/img/favicon.ico" type="image/x-icon">
+
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://jujucharms.com/static/img/icons/apple-touch-icon-57x57-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://jujucharms.com/static/img/icons/apple-touch-icon-60x60-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jujucharms.com/static/img/icons/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://jujucharms.com/static/img/icons/apple-touch-icon-76x76-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jujucharms.com/static/img/icons/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://jujucharms.com/static/img/icons/apple-touch-icon-120x120-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jujucharms.com/static/img/icons/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://jujucharms.com/static/img/icons/apple-touch-icon-152x152-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://jujucharms.com/static/img/icons/apple-touch-icon-180x180-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="https://jujucharms.com/static/img/icons/apple-touch-icon-precomposed.png">
+
+
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic%7CUbuntu+Mono" rel="stylesheet" type="text/css">
+
+<!-- stylesheets -->
+<link rel="stylesheet" type="text/css" media="screen" href="media/css/jujucharms.css">
+
+<!-- load basic yui, our modules file, the loader and sub to set up modules with
+combo load -->
+<script type="text/javascript" async="" src="./_static/munchkin.js"></script><script src="./_static/8875.js" async="" type="text/javascript"></script><script type="text/javascript" async="" src="./_static/heap-3280028620.js"></script><script type="text/javascript" async="" src="./_static/analytics.js"></script><script async="" src="./_static/gtm.js"></script><script type="text/javascript" src="./_static/sfcombo">
+
+</script>
+
+<script type="text/javascript">
+      YUI.GlobalConfig = {
+          combine: true,
+          base: '/prod/sfcombo?yui/',
+          comboBase: '/prod/sfcombo?',
+          maxURLLength: 1300,
+          root: 'yui/',
+            groups: {
+              app: {
+                  combine: true,
+                  base: '/prod/sfcombo?app',
+                  comboBase: '/prod/sfcombo?',
+                  root: 'app/',
+
+                  filter: 'min',
+
+                  // From modules.js
+                  modules: YUI_MODULES,
+              }
+          },
+          static_root:'/static/'
+    };
+ </script>
+
+<!-- provide charmstore url -->
+<script type="text/javascript">
+    window.csUrl = "https://api.jujucharms.com/charmstore/v5";
+</script>
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ubuntucloud">
+<meta name="twitter:creator" content="@ubuntucloud">
+<meta name="twitter:domain" content="jujucharms.com">
+<meta name="twitter:title" content="Documentation - Juju">
+<meta name="twitter:description" content="Learn about the using Juju through the Juju GUI or CLI and see how it makes creating, configuring, deploying and operating software in the cloud simple.">
+<meta name="twitter:image" content="https://jujucharms.com/static/img/juju-twitter.png">
+
+
+<script charset="utf-8" id="yui_3_17_1_1_1490188284910_2" src="./_static/sfcombo(1)" async=""></script><script type="text/javascript" async="" src="./_static/munchkin(1).js"></script><script charset="utf-8" id="yui_3_17_1_3_1490188284910_2" src="./_static/sfcombo(2)" async=""></script></head>
+
+<body class="
+">
+
+
+<header class="banner global" role="banner">
+
+    <nav role="navigation" class="nav-primary nav-right nav-gui-active" id="nav">
+
+    <span class="accessibility-aid">
+        <a accesskey="s" href="https://jujucharms.com/docs/stable/getting-started#main-content">Jump to content</a>
+    </span>
+
+    <div class="logo">
+        <a href="https://jujucharms.com/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="78" height="32" viewBox="309.33 322.034 571.89 206.329"><circle fill="#E95420" cx="408.542" cy="421.246" r="99.212"></circle><g fill="#FFF"><circle cx="414.212" cy="415.576" r="6.142"></circle><path d="M419.88 404.237h-11.337v-45.354c0-10.94 8.902-19.842 19.842-19.842s19.842 8.903 19.842 19.843v11.34l-11.338-.002v-11.337c0-2.272-.886-4.408-2.49-6.014-1.607-1.605-3.742-2.492-6.015-2.492-4.688 0-8.504 3.816-8.504 8.505v45.354z"></path><path d="M456.73 424.08c-10.94 0-19.843-8.9-19.843-19.842v-28.345h11.34v28.345c0 4.69 3.813 8.505 8.503 8.505 4.688 0 8.503-3.814 8.503-8.505v-28.345h11.34v28.345c0 5.3-2.065 10.282-5.813 14.03-3.745 3.75-8.728 5.812-14.03 5.812z"></path><circle cx="357.52" cy="483.605" r="6.143"></circle><path d="M363.188 472.27H351.85v-62.362c0-10.94 8.9-19.842 19.844-19.842 10.94 0 19.842 8.9 19.842 19.842v11.34h-11.34v-11.34c0-2.272-.883-4.408-2.49-6.014-1.606-1.604-3.742-2.49-6.013-2.49-4.69 0-8.505 3.814-8.505 8.504v62.36z"></path><path d="M400.04 475.103c-10.942 0-19.844-8.9-19.844-19.844v-28.347h11.34v28.348c0 4.69 3.813 8.503 8.503 8.503s8.503-3.814 8.503-8.504v-28.347h11.338v28.348c0 5.298-2.062 10.28-5.81 14.03-3.75 3.75-8.732 5.813-14.03 5.813z"></path></g><g><path d="M620.714 446.453c0 6.744-.678 12.98-2.02 18.707-1.353 5.73-3.68 10.72-6.98 14.967-3.307 4.246-7.686 7.553-13.146 9.908-5.46 2.357-12.306 3.54-20.528 3.54-4.854 0-9.304-.438-13.35-1.313-4.042-.88-7.617-1.922-10.718-3.135-3.104-1.215-5.697-2.494-7.787-3.842-2.092-1.35-3.675-2.562-4.753-3.643l6.473-11.123c1.214 1.08 2.73 2.26 4.55 3.538 1.82 1.283 3.945 2.46 6.372 3.54 2.426 1.08 5.122 1.954 8.09 2.628 2.964.676 6.2 1.012 9.708 1.012 10.38 0 18.03-2.73 22.955-8.19 4.92-5.46 7.38-14.796 7.38-28.01v-94.653h13.755v96.068zM729.255 486.902c-3.91 1.08-9.17 2.293-15.773 3.64-6.607 1.347-14.697 2.02-24.27 2.02-7.822 0-14.36-1.144-19.62-3.437-5.257-2.29-9.503-5.525-12.74-9.707-3.235-4.178-5.56-9.234-6.978-15.17-1.416-5.93-2.123-12.47-2.123-19.615V385.98h13.146v54.402c0 7.418.54 13.69 1.62 18.81 1.077 5.128 2.83 9.272 5.257 12.44 2.43 3.17 5.562 5.46 9.404 6.874 3.844 1.418 8.527 2.125 14.057 2.125 6.2 0 11.594-.335 16.18-1.01 4.584-.673 7.482-1.28 8.697-1.82v-91.82h13.147v100.922h-.002zM739.185 528.363c-1.482 0-3.338-.203-5.562-.607-2.227-.404-3.873-.88-4.955-1.416l1.82-10.72c.945.27 2.225.538 3.842.81 1.62.27 3.17.404 4.652.404 7.953 0 13.246-2.225 15.875-6.674 2.63-4.45 3.945-11.125 3.945-20.023V385.98h13.146v103.55c0 13.214-2.498 22.985-7.484 29.325-4.99 6.336-13.418 9.508-25.28 9.508zM881.22 486.902c-3.912 1.08-9.17 2.293-15.773 3.64-6.607 1.347-14.697 2.02-24.27 2.02-7.822 0-14.36-1.144-19.62-3.437-5.257-2.29-9.505-5.525-12.74-9.707-3.235-4.178-5.56-9.234-6.978-15.17-1.417-5.93-2.124-12.47-2.124-19.615V385.98h13.146v54.402c0 7.418.533 13.69 1.615 18.81 1.078 5.128 2.832 9.272 5.26 12.44 2.428 3.17 5.56 5.46 9.402 6.874 3.845 1.418 8.526 2.125 14.058 2.125 6.197 0 11.594-.335 16.18-1.01 4.584-.673 7.482-1.28 8.697-1.82v-91.82h13.145v100.922z" class="logo__text"></path></g></svg>
+        </a>
+    </div>
+
+    <ul>
+        <li>
+        <a class="" href="https://jujucharms.com/store">
+            Store
+        </a>
+    </li>
+        <li>
+        <a class="" href="https://jujucharms.com/how-it-works">
+            How it works
+        </a>
+    </li>
+        <li>
+        <a class="" href="https://jujucharms.com/community">
+            Community
+        </a>
+    </li>
+        <li>
+        <a class="active" href="https://jujucharms.com/docs/">
+            Docs
+        </a>
+    </li>
+
+          <li><a class="try-beta" href="https://jujucharms.com/new" rel="nofollow">Try the beta</a></li>
+
+    </ul>
+
+    <div class="nav-toggle">
+        <a href="https://jujucharms.com/docs/stable/getting-started#nav" class="nav-toggle__link open">
+            <svg class="nav-toggle__image" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+              <path fill="#888" d="M5 10h20v2H6zM5 16h20v2H6zM5 22h20v2H6z"></path>
+            </svg>
+        </a>
+        <a href="https://jujucharms.com/docs/stable/getting-started#" class="nav-toggle__link close">
+            <svg class="nav-toggle__image" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                <g color="#000" fill="none">
+                    <path d="M2.538 2.63l16 16M16 2.63L2.538 16" stroke="#888" stroke-width="2" stroke-linejoin="round"></path>
+                </g>
+            </svg>
+        </a>
+    </div>
+
+    <ul class="user-nav">
+      <li>
+
+            <a href="https://jujucharms.com/login/" class="inactive menu-link js-menu-login">
+                Sign in
+            </a>
+
+        </li>
+    </ul>
+</nav>
+    <div class="search-container">
+    <form class="search-form" action="https://jujucharms.com/q" method="GET" id="yui_3_17_1_1_1490188284910_20">
+        <input type="search" name="text" class="form-text" placeholder="Search the store" value="">
+        <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="search-icon__image">
+                <g transform="matrix(.667 0 0 .667 -74.667 -285.575)">
+                    <path d="M129.93 444.03l-2.27 2.275 6.07 6.07L136 450.1z" fill="#878787"></path>
+                    <ellipse ry="9.479" rx="9.479" cy="438.862" cx="122.5" fill="none" stroke="#878787" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></ellipse>
+                </g>
+            </svg>
+        </button>
+        <a href="https://jujucharms.com/docs/stable/getting-started" class="search-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="search-close__image">
+                <g color="#000" fill="none">
+                    <path d="M2.538 2.63l11.006 11.006M13.544 2.63L2.538 13.637" overflow="visible" stroke="#878787" stroke-width="2"></path>
+                </g>
+            </svg>
+        </a>
+    </form>
+</div>
+
+<div class="search-panel">
+    <div class="row">
+        <div class="inner-wrapper">
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/canonical-kubernetes" class="search-panel__featured-link">
+                        <img src="./_static/icon.svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">kubernetes</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/elasticsearch" class="search-panel__featured-link">
+                        <img src="./_static/icon(1).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">elasticsearch</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/u/asanjar/hdp-tez" class="search-panel__featured-link">
+                        <img src="./_static/icon(2).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">hdp-tez</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/hdp-storm" class="search-panel__featured-link">
+                        <img src="./_static/icon(3).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">hdp-storm</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/ceph" class="search-panel__featured-link">
+                        <img src="./_static/icon(4).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">ceph</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/cassandra" class="search-panel__featured-link">
+                        <img src="./_static/icon(5).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">cassandra</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/percona-cluster" class="search-panel__featured-link">
+                        <img src="./_static/icon(6).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">percona-cluster</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/glance" class="search-panel__featured-link">
+                        <img src="./_static/icon(7).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">glance</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col no-margin-bottom">
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/mariadb" class="search-panel__featured-link">
+                        <img src="./_static/icon(8).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">mariadb</p>
+                    </a>
+                </div>
+                <div class="two-col align-center search-panel__featured-charm">
+                    <a href="https://jujucharms.com/spark" class="search-panel__featured-link">
+                        <img src="./_static/icon(9).svg" alt="" class="search-panel__featured-image">
+                        <p class="search-panel__featured-name">spark</p>
+                    </a>
+                </div>
+            </div>
+            <div class="two-col last-col no-margin-bottom">
+                <h3 class="search-panel__heading">Popular searches</h3>
+                <ul class="search-panel__list no-bullets">
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/openstack">openstack</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/ceph">ceph</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/mysql">mysql</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/hdp">hdp</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/spark">spark</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/nginx">nginx</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/redis">redis</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/jenkins">jenkins</a></li>
+                    <li class="search-panel__list-item"><a href="https://jujucharms.com/q/logstash">logstash</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row row-footer">
+        <div class="inner-wrapper">
+            <div class="twelve-col last-col no-margin-bottom">
+                <ul class="no-bullets inline-list">
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=openstack">openstack
+                            <span class="search-panel__item-count">(108)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=applications">applications
+                            <span class="search-panel__item-count">(248)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=databases">databases
+                            <span class="search-panel__item-count">(71)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=app-servers">app-servers
+                            <span class="search-panel__item-count">(75)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=file-servers">file-servers
+                            <span class="search-panel__item-count">(48)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=monitoring">monitoring
+                            <span class="search-panel__item-count">(28)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=misc">misc
+                            <span class="search-panel__item-count">(279)</span>
+                        </a>
+                    </li>
+                    <li class="search-panel__list-item inline-list__item">
+                        <a href="https://jujucharms.com/q/?tags=ops">ops
+                            <span class="search-panel__item-count">(22)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</header>
+
+<div class="wrapper">
+<div id="main-content">
+
+    <div class="login-notification">
+        If requested, in the address bar above, please allow popups.
+    </div>
+
+
+
+
+
+
+
+
+
+
+<div class="row jujudocs">
+    <nav class="jujudocs__nav">
+        <form action="https://jujucharms.com/docs/search/" method="GET" class="search-form">
+            <input type="text" name="text" placeholder="Search docs">
+            <input type="hidden" name="version" value="2.1">
+            <button type="submit">
+                Search
+            </button>
+        </form>
+        <div class="versions-nav">
+
+            <strong class="label">Versions:</strong>
+
+            <a class="stable" href="https://docs.jujucharms.com/stable">stable</a>
+
+        </div>
+        <div class="jujudocs-menu">
+
+                       <ul>
+    <li><a {% if (doc_name == "about-juju.html") %} class="is-selected"{% endif %} href="about-juju.html">About Juju</a></li>
+<!-- SECTION -->
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">Quick Guides</h4>
+        <ul>
+        <li class="section"><a  {% if (doc_name == "getting-started.html") %} class="is-selected"{% endif %} href="getting-started.html">Get started</a></li>
+        <li><a {% if (doc_name == "whats-new.html") %} class="is-selected"{% endif %} href="whats-new.html">What's new in 2.3</a></li>
+        <li><a {% if (doc_name == "tut-lxd.html") %} class="is-selected"{% endif %} href="tut-lxd.html">Local Juju with LXD cloud</a></li>
+        <li><a {% if (doc_name == "tut-google.html") %} class="is-selected"{% endif %} href="tut-google.html">Controllers and Models</a></li>
+        <li><a {% if (doc_name == "tut-users.html") %} class="is-selected"{% endif %} href="tut-users.html">Sharing and Users</a></li>
+        </ul>
+    </li>
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">User Guide</h4>
+        <ul>
+	<li><a {% if (doc_name == "juju-concepts.html") %} class="is-selected"{% endif %} href="juju-concepts.html">Concepts and terms</a></li>
+        <li class="section"><a  {% if (doc_name == "clouds.html") %} class="is-selected"{% endif %} href="clouds.html">Clouds</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "credentials.html") %} class="is-selected"{% endif %} href="credentials.html">Cloud credentials</a></li>
+                <li><a {% if (doc_name == "help-aws.html") %} class="is-selected"{% endif %} href="help-aws.html">Amazon AWS</a></li>
+                <li><a {% if (doc_name == "help-azure.html") %} class="is-selected"{% endif %} href="help-azure.html">Microsoft Azure</a></li>
+                <li><a {% if (doc_name == "help-google.html") %} class="is-selected"{% endif %} href="help-google.html">Google GCE</a></li>
+                <li><a {% if (doc_name == "help-joyent.html") %} class="is-selected"{% endif %} href="help-joyent.html">Joyent</a></li>
+                <li><a {% if (doc_name == "clouds-LXD.html") %} class="is-selected"{% endif %} href="clouds-LXD.html">LXD</a></li>
+                <li><a {% if (doc_name == "clouds-maas.html") %} class="is-selected"{% endif %} href="clouds-maas.html">MAAS</a></li>
+                <li><a {% if (doc_name == "clouds-manual.html") %} class="is-selected"{% endif %} href="clouds-manual.html">Manual</a></li>
+                <li><a {% if (doc_name == "help-openstack.html") %} class="is-selected"{% endif %} href="help-openstack.html">OpenStack</a></li>
+                <li><a {% if (doc_name == "help-oracle.html") %} class="is-selected"{% endif %} href="help-oracle.html">Oracle Compute</a></li>
+                <li><a {% if (doc_name == "help-rackspace.html") %} class="is-selected"{% endif %} href="help-rackspace.html">Rackspace</a></li>
+                <li><a {% if (doc_name == "help-vmware.html") %} class="is-selected"{% endif %} href="help-vmware.html">VMware vSphere</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "controllers.html") %} class="is-selected"{% endif %} href="controllers.html">Controllers</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "controllers-creating.html") %} class="is-selected"{% endif %} href="controllers-creating.html">Create/Bootstrap</a></li>
+                <li><a {% if (doc_name == "controllers-gui.html") %} class="is-selected"{% endif %} href="controllers-gui.html">Juju GUI</a></li>
+                <li><a {% if (doc_name == "controllers-ha.html") %} class="is-selected"{% endif %} href="controllers-ha.html">High Availability</a></li>
+                <li><a {% if (doc_name == "controllers-backup.html") %} class="is-selected"{% endif %} href="controllers-backup.html">Backups</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "models.html") %} class="is-selected"{% endif %} href="models.html">Models</a></li>
+        <li class="section"><a  {% if (doc_name == "charms.html") %} class="is-selected"{% endif %} href="charms.html">Charms & applications</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "charms-deploying.html") %} class="is-selected"{% endif %} href="charms-deploying.html">Deploying applications</a></li>
+                <li><a {% if (doc_name == "charms-constraints.html") %} class="is-selected"{% endif %} href="charms-constraints.html">Using constraints</a></li>
+                <li><a {% if (doc_name == "charms-config.html") %} class="is-selected"{% endif %} href="charms-config.html">Application configuration</a></li>
+                <li><a {% if (doc_name == "charms-relations.html") %} class="is-selected"{% endif %} href="charms-relations.html">Application Relations</a></li>
+                <li><a {% if (doc_name == "charms-exposing.html") %} class="is-selected"{% endif %} href="charms-exposing.html">Exposing applications</a></li>
+                <li><a {% if (doc_name == "charms-scaling.html") %} class="is-selected"{% endif %} href="charms-scaling.html">Scaling applications</a></li>
+                <li><a {% if (doc_name == "charms-upgrading.html") %} class="is-selected"{% endif %} href="charms-upgrading.html">Upgrading applications</a></li>
+                <li><a {% if (doc_name == "charms-destroy.html") %} class="is-selected"{% endif %} href="charms-destroy.html">Removing applications &amp; Units</a></li>
+                <li><a {% if (doc_name == "charms-service-groups.html") %} class="is-selected"{% endif %} href="charms-service-groups.html">Groups of applications</a></li>
+                <li><a {% if (doc_name == "charms-ha.html") %} class="is-selected"{% endif %} href="charms-ha.html">Charm high availability</a></li>
+                <li><a {% if (doc_name == "charms-working-with-units.html") %} class="is-selected"{% endif %} href="charms-working-with-units.html">Working with Units</a></li>
+                <li><a {% if (doc_name == "actions.html") %} class="is-selected"{% endif %} href="actions.html">Working with Actions</a></li>
+                <li><a {% if (doc_name == "charms-resources.html") %} class="is-selected"{% endif %} href="charms-resources.html">Working with Resources</a></li>
+                <li><a {% if (doc_name == "charms-storage.html") %} class="is-selected"{% endif %} href="charms-storage.html">Using storage</a></li>
+                <li><a {% if (doc_name == "charms-metrics.html") %} class="is-selected"{% endif %} href="charms-metrics.html">Viewing utilization with metrics</a></li>
+                <li><a {% if (doc_name == "charms-fan.html") %} class="is-selected"{% endif %} href="charms-fan.html">Fan container networking</a></li>
+                <li><a {% if (doc_name == "charms-offline.html") %} class="is-selected"{% endif %} href="charms-offline.html">Working offline</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "charms-bundles.html") %} class="is-selected"{% endif %} href="charms-bundles.html">Charm bundles</a></li>
+        <li class="section"><a  {% if (doc_name == "users.html") %} class="is-selected"{% endif %} href="users.html">Users</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "users-auth.html") %} class="is-selected"{% endif %} href="users-auth.html">Authentication</a></li>
+                <li><a {% if (doc_name == "users-creating.html") %} class="is-selected"{% endif %} href="users-creating.html">Creating users</a></li>
+                <li><a {% if (doc_name == "users-models.html") %} class="is-selected"{% endif %} href="users-models.html">Users and models</a></li>
+                <li><a {% if (doc_name == "users-manage.html") %} class="is-selected"{% endif %} href="users-manage.html">User management</a></li>
+                <li><a {% if (doc_name == "users-sample-commands.html") %} class="is-selected"{% endif %} href="users-sample-commands.html">Sample commands</a></li>
+                <li><a {% if (doc_name == "users-workflows.html") %} class="is-selected"{% endif %} href="users-workflows.html">Workflow scenarios</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "juju-managing.html") %} class="is-selected"{% endif %} href="juju-managing.html">Managing Juju</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "juju-block.html") %} class="is-selected"{% endif %} href="juju-block.html">Disable Juju commands</a></li>
+                <li><a {% if (doc_name == "juju-centos.html") %} class="is-selected"{% endif %} href="juju-centos.html">CentOS support</a></li>
+                <li><a {% if (doc_name == "network-spaces.html") %} class="is-selected"{% endif %} href="network-spaces.html">Network spaces</a></li>
+                <li><a {% if (doc_name == "juju-plugins.html") %} class="is-selected"{% endif %} href="juju-plugins.html">Juju plugins</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "howto.html") %} class="is-selected"{% endif %} href="howto.html">How to...</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "howto-prometheus.html") %} class="is-selected"{% endif %} href="howto-prometheus.html">Configure metrics gathering with Prometheus</a></li>
+                <li><a {% if (doc_name == "howto-privatecloud.html") %} class="is-selected"{% endif %} href="howto-privatecloud.html">Set up a Private Cloud</a></li>
+                <li><a {% if (doc_name == "howto-updateseries.html") %} class="is-selected"{% endif %} href="howto-updateseries.html">Update the series of a controller or machine</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "troubleshooting.html") %} class="is-selected"{% endif %} href="troubleshooting.html">Troubleshooting</a></li>
+    </ul>
+   </li>
+<!-- SECTION -->
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">Developer Guide</h4>
+        <ul>
+        <li class="section"><a  {% if (doc_name == "developer-getting-started.html") %} class="is-selected"{% endif %} href="developer-getting-started.html">Getting Started</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-getting-started.html#install-libraries-and-tools") %} class="is-selected"{% endif %} href="developer-getting-started.html#install-libraries-and-tools">Prerequisites and Tools</a></li>
+                <li><a {% if (doc_name == "developer-getting-started.html#designing-your-charm") %} class="is-selected"{% endif %} href="developer-getting-started.html#designing-your-charm">Designing your Charm</a></li>
+                <li><a {% if (doc_name == "developer-getting-started.html#writing-your-charm") %} class="is-selected"{% endif %} href="developer-getting-started.html#writing-your-charm">Writing your Charm</a></li>
+                <li><a {% if (doc_name == "developer-getting-started.html#testing-your-charm") %} class="is-selected"{% endif %} href="developer-getting-started.html#testing-your-charm">Testing your Charm</a></li>
+                <li><a {% if (doc_name == "developer-getting-started.html#publishing-your-charm") %} class="is-selected"{% endif %} href="developer-getting-started.html#publishing-your-charm">Publishing your charm</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-event-cycle.html") %} class="is-selected"{% endif %} href="developer-event-cycle.html">Event Cycle</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-event-cycle.html#handling-reactive-states") %} class="is-selected"{% endif %} href="developer-event-cycle.html#handling-reactive-states">Handling Reactive States</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-layers.html") %} class="is-selected"{% endif %} href="developer-layers.html">Charm Layers</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-layers.html#what-are-layers?") %} class="is-selected"{% endif %} href="developer-layers.html#what-are-layers?">What are Layers</a></li>
+                <li><a {% if (doc_name == "developer-layers.html#states") %} class="is-selected"{% endif %} href="developer-layers.html#states">States</a></li>
+                <li><a {% if (doc_name == "developer-layer-example.html") %} class="is-selected"{% endif %} href="developer-layer-example.html">How to Write a Layer</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-layers-interfaces.html") %} class="is-selected"{% endif %} href="developer-layers-interfaces.html">Interface Layers</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-layers-interfaces.html#design-considerations") %} class="is-selected"{% endif %} href="developer-layers-interfaces.html#design-considerations">Design Considerations</a></li>
+                <li><a {% if (doc_name == "developer-layers-interfaces.html#communication-scopes") %} class="is-selected"{% endif %} href="developer-layers-interfaces.html#communication-scopes">Communication Scopes</a></li>
+                <li><a {% if (doc_name == "developer-layers-interfaces.html#writing-an-interface-layer") %} class="is-selected"{% endif %} href="developer-layers-interfaces.html#writing-an-interface-layer">Writing an Interface</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "developer-upgrade-charm.html") %} class="is-selected"{% endif %} href="developer-upgrade-charm.html">Upgrading</a></li>
+        <li><a {% if (doc_name == "developer-terms.html") %} class="is-selected"{% endif %} href="developer-terms.html">Juju Terms</a></li>
+        <li><a {% if (doc_name == "developer-metrics.html") %} class="is-selected"{% endif %} href="developer-metrics.html">Juju Metrics</a></li>
+        <li><a {% if (doc_name == "developer-resources.html") %} class="is-selected"{% endif %} href="developer-resources.html">Juju Resources</a></li>
+        <li><a {% if (doc_name == "developer-network-primitives.html") %} class="is-selected"{% endif %} href="developer-network-primitives.html">Network Primitives</a></li>
+        <li class="section"><a  {% if (doc_name == "developer-leadership.html") %} class="is-selected"{% endif %} href="developer-leadership.html">Implementing Leadership</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-leadership.html#leadership-hooks") %} class="is-selected"{% endif %} href="developer-leadership.html#leadership-hooks">Leadership Hooks</a></li>
+                <li><a {% if (doc_name == "developer-leadership.html#leadership-tools") %} class="is-selected"{% endif %} href="developer-leadership.html#leadership-tools">Leadership Tools</a></li>
+                <li><a {% if (doc_name == "developer-leadership-howtos.html") %} class="is-selected"{% endif %} href="developer-leadership-howtos.html">Leadership Howtos</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-actions.html") %} class="is-selected"{% endif %} href="developer-actions.html">Implementing Actions</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-actions.html#implementing-actions") %} class="is-selected"{% endif %} href="developer-actions.html#implementing-actions">Defining Actions</a></li>
+                <li><a {% if (doc_name == "developer-actions.html#action-tools") %} class="is-selected"{% endif %} href="developer-actions.html#action-tools">Action Tools</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-storage.html") %} class="is-selected"{% endif %} href="developer-storage.html">Implementing Storage</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-storage.html#adding-storage") %} class="is-selected"{% endif %} href="developer-storage.html#adding-storage">Adding Storage</a></li>
+                <li><a {% if (doc_name == "developer-storage.html#storage-hooks") %} class="is-selected"{% endif %} href="developer-storage.html#storage-hooks">Storage Hooks</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-testing.html") %} class="is-selected"{% endif %} href="developer-testing.html">Writing Tests</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-testing.html#charm-proof") %} class="is-selected"{% endif %} href="developer-testing.html#charm-proof">Charm Proof</a></li>
+                <li><a {% if (doc_name == "developer-testing.html#amulet") %} class="is-selected"{% endif %} href="developer-testing.html#amulet">Amulet</a></li>
+                <li><a {% if (doc_name == "developer-testing.html#bundletester") %} class="is-selected"{% endif %} href="developer-testing.html#bundletester">BundleTester</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-debugging.html") %} class="is-selected"{% endif %} href="developer-debugging.html">Debugging</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "developer-debug-layers.html") %} class="is-selected"{% endif %} href="developer-debug-layers.html">Debugging Layers</a></li>
+                <li><a {% if (doc_name == "developer-debugging.html#the-'debug-hooks'-command") %} class="is-selected"{% endif %} href="developer-debugging.html#the-'debug-hooks'-command">debug-hooks</a></li>
+                <li><a {% if (doc_name == "developer-debugging.html#the-'debug-log'-command") %} class="is-selected"{% endif %} href="developer-debugging.html#the-'debug-log'-command">debug-log</a></li>
+                <li><a {% if (doc_name == "developer-debug-dhx.html") %} class="is-selected"{% endif %} href="developer-debug-dhx.html">DHX</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "developer-howto.html") %} class="is-selected"{% endif %} href="developer-howto.html">How to...</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "howto-charm-with-docker.html") %} class="is-selected"{% endif %} href="howto-charm-with-docker.html">Charm with Docker</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "authors-intro.html") %} class="is-selected"{% endif %} href="authors-intro.html">Charm Authors</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "authors-hook-environment.html") %} class="is-selected"{% endif %} href="authors-hook-environment.html">How hooks are run (Hook API)</a></li>
+                <li><a {% if (doc_name == "authors-relations-in-depth.html") %} class="is-selected"{% endif %} href="authors-relations-in-depth.html">Relations lifecycle</a></li>
+                <li><a {% if (doc_name == "authors-relations.html") %} class="is-selected"{% endif %} href="authors-relations.html">Implementing relations</a></li>
+                <li><a {% if (doc_name == "authors-charm-leadership.html") %} class="is-selected"{% endif %} href="authors-charm-leadership.html">Charm leadership</a></li>
+                <li><a {% if (doc_name == "authors-hook-errors.html") %} class="is-selected"{% endif %} href="authors-hook-errors.html">Hook Errors</a></li>
+                <li><a
+                    {% if (doc_name == "authors-subordinate-applications.html") %} class="is-selected"{% endif %} href="authors-subordinate-applications.html">Subordinate applications</a></li>
+                <li><a {% if (doc_name == "authors-implicit-relations.html") %} class="is-selected"{% endif %} href="authors-implicit-relations.html">Implicit Relations</a></li>
+            </ul>
+        </li>
+        <li class="section"><a  {% if (doc_name == "authors-charm-store.html") %} class="is-selected"{% endif %} href="authors-charm-store.html">The Juju Charm Store</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "authors-charm-store.html#submitting-a-new-charm") %} class="is-selected"{% endif %} href="authors-charm-store.html#submitting-a-new-charm">Submit a charm</a></li>
+                <li><a {% if (doc_name == "authors-charm-policy.html") %} class="is-selected"{% endif %} href="authors-charm-policy.html">Charm store policy</a></li>
+                <li><a {% if (doc_name == "authors-charm-best-practice.html") %} class="is-selected"{% endif %} href="authors-charm-best-practice.html">Best practices</a></li>
+                <li><a {% if (doc_name == "authors-charm-icon.html") %} class="is-selected"{% endif %} href="authors-charm-icon.html">Charm Icons</a></li>
+            </ul>
+        </li>
+    </ul>
+   </li>
+<!-- SECTION -->
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">Tools</h4>
+        <ul>
+        <li><a {% if (doc_name == "tools-charm-tools.html") %} class="is-selected"{% endif %} href="tools-charm-tools.html">Charm Tools</a></li>
+        <li><a {% if (doc_name == "tools-charm-helpers.html") %} class="is-selected"{% endif %} href="tools-charm-helpers.html">Charm Helpers</a></li>
+        <li><a {% if (doc_name == "tools-amulet.html") %} class="is-selected"{% endif %} href="tools-amulet.html">Amulet</a></li>
+        <li><a {% if (doc_name == "tools-mojo.html") %} class="is-selected"{% endif %} href="tools-mojo.html">Mojo</a></li>
+    </ul>
+    </li>
+<!-- SECTION -->
+    <li class="section"><h4 class="header toggle-target is-expanded" onClick="this.classList.toggle('is-expanded')">Reference</h4>
+        <ul>
+        <li><a {% if (doc_name == "reference-install.html") %} class="is-selected"{% endif %} href="reference-install.html">Install Juju</a></li>
+        <li><a {% if (doc_name == "introducing-2.html") %} class="is-selected"{% endif %} href="introducing-2.html">Introducing Juju 2.0!</a></li>
+        <li><a {% if (doc_name == "commands.html") %} class="is-selected"{% endif %} href="commands.html">Juju commands</a></li>
+        <li><a {% if (doc_name == "reference-constraints.html") %} class="is-selected"{% endif %} href="reference-constraints.html">Juju constraints</a></li>
+        <li><a {% if (doc_name == "reference-charm-hooks.html") %} class="is-selected"{% endif %} href="reference-charm-hooks.html">Juju Charm Hooks</a></li>
+        <li><a {% if (doc_name == "reference-environment-variables.html") %} class="is-selected"{% endif %} href="reference-environment-variables.html">Juju environment variables</a></li>
+        <li><a {% if (doc_name == "reference-hook-tools.html") %} class="is-selected"{% endif %} href="reference-hook-tools.html">Juju Hook Tools</a></li>
+        <li><a {% if (doc_name == "authors-charm-metadata.html") %} class="is-selected"{% endif %} href="authors-charm-metadata.html">metadata.yaml</a></li>
+        <li class="section"><a  {% if (doc_name == "https://charmsreactive.readthedocs.io") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io">Layers and charms.reactive</a>
+            <i class="sub-toggle-target" onClick="this.classList.toggle('is-expanded')"></i><ul class="sub">
+                <li><a {% if (doc_name == "https://charmsreactive.readthedocs.io/en/latest/charms.reactive.decorators.html") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io/en/latest/charms.reactive.decorators.html">Decorators</a></li>
+                <li><a {% if (doc_name == "https://charmsreactive.readthedocs.io/en/latest/charms.reactive.flags.html") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io/en/latest/charms.reactive.flags.html">Flags</a></li>
+                <li><a {% if (doc_name == "https://charmsreactive.readthedocs.io/en/latest/triggers.html") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io/en/latest/triggers.html">Triggers</a></li>
+                <li><a {% if (doc_name == "https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations.html") %} class="is-selected"{% endif %} href="https://charmsreactive.readthedocs.io/en/latest/charms.reactive.relations.html">Relations</a></li>
+                <li><a {% if (doc_name == "reference-layer-yaml.html") %} class="is-selected"{% endif %} href="reference-layer-yaml.html">Layer.yaml</a></li>
+            </ul>
+        </li>
+        <li><a {% if (doc_name == "http://godoc.org/github.com/juju/juju/api") %} class="is-selected"{% endif %} href="http://godoc.org/github.com/juju/juju/api">API docs</a></li>
+        <li><a {% if (doc_name == "reference-release-notes.html") %} class="is-selected"{% endif %} href="reference-release-notes.html">Release notes</a></li>
+        <li><a {% if (doc_name == "reference-status.html") %} class="is-selected"{% endif %} href="reference-status.html">Status values</a></li>
+        <li><a {% if (doc_name == "reference-numbering.html") %} class="is-selected"{% endif %} href="reference-numbering.html">Machine/unit numbering</a></li>
+        <li><a {% if (doc_name == "reference-reviewers.html") %} class="is-selected"{% endif %} href="reference-reviewers.html">Charm Review Criteria</a></li>
+    </ul>
+   </li>
+<li><a {% if (doc_name == "contact-us.html") %} class="is-selected"{% endif %} href="contact-us.html">Contact us</a></li>
+<li><a {% if (doc_name == "contributing.html") %} class="is-selected"{% endif %} href="contributing.html">Help improve these docs</a></li>
+<li><a {% if (doc_name == "https://github.com/juju/docs/issues/new") %} class="is-selected"{% endif %} href="https://github.com/juju/docs/issues/new">Report a docs issue</a></li>
+</ul>
+
+
+        </div>
+    </nav>
+    <main class="jujudocs__content">
+
+    <div class="alert" id="caution">
+     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Caution!</strong> These older versions of Juju documentation are no longer maintained and are provided for reference only. See <a href="https://docs.jujucharms.com/"> docs.jujucharms.com </a> for the current, supported documentation.
+      </div>
+
+
+                   <h1 id="hook-tools">Hook tools<a class="anchor" href="#hook-tools"></a></h1>
+<p>Units deployed with Juju have a suite of tooling available to them, called ‘hook
+tools’. These commands provide the charm developer with a consistent interface
+to take action on the units behalf, such as opening ports, obtaining
+configuration, even determining which unit is the leader in a cluster. The
+listed hook-tools are available in any hook running on the unit, and are only
+available within ‘hook context’.</p>
+<p>Additionally, the <code>payload-status-set</code>, <code>payload-register</code> and
+<code>payload-unregister</code> commands, also listed below, can be used to manage your
+charm's payloads. Please see <a href="./authors-charm-metadata.html#payloads">payloads in Charm metadata</a> for further
+details on how to use payloads within your charms. </p>
+<p>Many of the tools produce text based output, and those that do accept
+a <code>--format</code> flag which can be set to json or yaml as desired.</p>
+<p class="note"><strong> Note</strong>:
+    You can view a detailed listing of what each command listed below does
+    on your client with <code>juju help-tool {command}</code>. Or for more detailed help on
+    individual commands run the command with the -h flag.</p>
+<h2 id="action-fail">action-fail<a class="anchor" href="#action-fail"></a></h2>
+<p><code>action-fail</code> sets the action's fail state with a given error message. Using
+<code>action-fail</code> without a failure message will set a default message indicating a
+problem with the action. For more information about where you might use this
+command, read more about <a href="actions.html">Juju Actions</a> or
+<a href="developer-actions.html">how to write Juju Actions</a>.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import action_fail
+
+action_fail(‘Unable to contact remote service’)
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">action-fail ‘unable to contact remote service’
+</code></pre>
+
+<h2 id="action-get">action-get<a class="anchor" href="#action-get"></a></h2>
+<p><code>action-get</code> will print the value of the parameter at the given key, serialized
+as YAML. If multiple keys are passed, <code>action-get</code> will recurse into the param
+map as needed. Read more about <a href="actions.html">Juju Actions</a> or
+<a href="developer-actions.html">how to write Juju Actions</a>.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import action_get
+
+timeout = action_get(‘timeout’)
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">TIMEOUT=$(action-get timeout)
+</code></pre>
+
+<h2 id="action-set">action-set<a class="anchor" href="#action-set"></a></h2>
+<p><code>action-set</code> adds the given values to the results map of the
+<a href="actions.html">Action</a>. This map is returned to the user after the
+completion of the Action. Keys must start and end with lowercase alphanumeric,
+and contain only lowercase alphanumeric, hyphens and periods.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import action_set
+
+action_set('com.juju.result', 'we are the champions')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">action-set com.juju.result 'we are the champions'
+</code></pre>
+
+<h2 id="add-metric">add-metric<a class="anchor" href="#add-metric"></a></h2>
+<p>Records a measurement which will be forwarded to the Juju controller. The same
+metric may not be collected twice in the same command.</p>
+<p>bash:</p>
+<pre><code class="language-bash">add-metric metric1=value1 [metric2=value2 …]
+</code></pre>
+
+<p>In Juju 2.0, <code>add-metric</code> may only be executed from the
+<a href="./reference-charm-hooks.html#collect-metrics"><code>collect-metrics</code></a> hook. Future
+releases of Juju may allow it in other contexts.</p>
+<h2 id="application-version-set">application-version-set<a class="anchor" href="#application-version-set"></a></h2>
+<p>Specify which version of the application is deployed.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import application_version_set
+
+@hook('update-status')
+def update_application_version():
+    application_version_set('1.1.10')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">@hook 'update-status'
+function update_status() {
+    application-version-set 1.1.10
+}
+</code></pre>
+
+<h2 id="close-port">close-port<a class="anchor" href="#close-port"></a></h2>
+<p><code>close-port</code> ensures a port or range is not accessible from the public
+interface.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import close_port
+
+# Close a single port
+close_port(80, protocol=&quot;UDP&quot;)
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash"># Close single port
+close-port 80
+# Close a range of ports
+close-port 9000-9999/udp
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+# Close a single port
+Close-JujuPort &quot;80/TCP&quot;
+# Close a range of ports
+Close-JujuPort &quot;1000-2000/UDP&quot;
+</code></pre>
+
+<h2 id="config-get">config-get<a class="anchor" href="#config-get"></a></h2>
+<p><code>config-get</code> returns information about the application configuration (as defined by
+<code>config.yaml</code>). If called without arguments, it returns a dictionary containing
+all config settings that are either explicitly set, or which have a non-nil
+default value. If the <code>--all</code> flag is passed, it returns a dictionary containing
+all defined config settings including nil values (for those without defaults).
+If called with a single argument, it returns the value of that config key.
+Missing config keys are reported as nulls, and do not return an error.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import config
+
+# Get all the configuration from charmhelpers as a dictionary.
+cfg =config()
+# Get the value for the &quot;interval&quot; key.
+interval = cfg.get(‘interval’)
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">INTERVAL=$(config-get interval)
+
+config-get --all
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+$interval = Get-JujuCharmConfig &quot;interval&quot;
+</code></pre>
+
+<h2 id="is-leader">is-leader<a class="anchor" href="#is-leader"></a></h2>
+<p><code>is-leader</code> will write <code>"True"</code> or <code>"False"</code> to stdout, and return 0, if
+the unit is currently leader and can be guaranteed to remain so for 30
+seconds. Output can be expressed as <code>--format json</code> or <code>--format yaml</code> if
+desired.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import is_leader
+
+if is_leader():
+    # Do something a leader would do
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">LEADER=$(is-leader)
+if [ &quot;${LEADER}&quot; == &quot;True&quot; ]; then
+  # Do something a leader would do
+fi
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+if (Is-Leader) {
+    # Do something a leader would do
+}
+</code></pre>
+
+<h2 id="juju-log">juju-log<a class="anchor" href="#juju-log"></a></h2>
+<p><code>juju-log</code> writes messages directly to the unit's log file. Valid
+levels are: INFO, WARN, ERROR, DEBUG</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import log
+
+log('Something has transpired', 'INFO')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">juju-log -l 'WARN' Something has transpired
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+# Basic logging
+Write-JujuLog &quot;Something has transpired&quot;
+# Logs the message and throws an error, stopping the script
+Write-JujuError &quot;Something has transpired. Throwing an error...&quot;
+</code></pre>
+
+<h2 id="juju-reboot">juju-reboot<a class="anchor" href="#juju-reboot"></a></h2>
+<p><code>juju-reboot</code> causes the host machine to reboot, after stopping all containers
+hosted on the machine.</p>
+<p>An invocation without arguments will allow the current hook to complete, and
+will only cause a reboot if the hook completes successfully.</p>
+<p>If the <code>--now</code> flag is passed, the current hook will terminate immediately, and
+be restarted from scratch after reboot. This allows charm authors to write
+hooks that need to reboot more than once in the course of installing software.</p>
+<p>The <code>--now</code> flag cannot terminate a debug-hooks session; hooks using <code>--now</code>
+should be sure to terminate on unexpected errors, so as to guarantee expected
+behavior in all situations.</p>
+<p><code>juju-reboot</code> is not supported when running actions.</p>
+<p>python:</p>
+<pre><code class="language-python">from subprocess import check_call
+
+check_call([&quot;juju-reboot&quot;, &quot;--now&quot;])
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash"># immediately reboot
+juju-reboot --now
+
+# Reboot after current hook exits
+juju-reboot
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+# immediately reboot
+ExitFrom-JujuHook -WithReboot
+</code></pre>
+
+<h2 id="leader-get">leader-get<a class="anchor" href="#leader-get"></a></h2>
+<p><code>leader-get</code> prints the value of a leadership setting specified by key.
+<code>leader-get</code> acts much like <a href="#relation-set"><code>relation-set</code></a>) but only reads
+from the leader settings. If no key is given, or if the key is "-", all keys
+and values will be printed.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import leader_get
+
+address = leader_get('cluster-leader-address')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">ADDRESSS=$(leader-get cluster-leader-address)
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+$clusterLeaderAddress = Get-LeaderData &quot;cluster-leader-address&quot;
+</code></pre>
+
+<h2 id="leader-set">leader-set<a class="anchor" href="#leader-set"></a></h2>
+<p><code>leader-set</code> immediately writes the key/value pairs to the Juju controller,
+which will then inform non-leader units of the change. It will fail if called
+without arguments, or if called by a unit that is not currently application leader.</p>
+<p><code>leader-set</code> lets you write string key=value pairs, but with the following
+differences:</p>
+<ul>
+<li>there's only one leader-settings bucket per application (not one per unit)</li>
+<li>only the leader can write to the bucket</li>
+<li>only minions are informed of changes to the bucket</li>
+<li>changes are propagated instantly</li>
+</ul>
+<p>The instant propagation may be surprising, but it exists to satisfy the use case
+where shared data can be chosen by the leader at the very beginning of the
+install hook.</p>
+<p>It is strongly recommended that leader settings are always written as a
+self-consistent group <code>leader-set one=one two=two three=three</code>.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import leader_set
+
+leader_set('cluster-leader-address', &quot;10.0.0.123&quot;)
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">leader-set cluster-leader-address=10.0.0.123
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+Set-LeaderData @{&quot;cluster-leader-address&quot;=&quot;10.0.0.123&quot;}
+</code></pre>
+
+<h2 id="network-get">network-get<a class="anchor" href="#network-get"></a></h2>
+<p><code>network-get</code> discovers important network related information.</p>
+<p>By default it lists three pieces of address information:</p>
+<ul>
+<li>binding address(es)</li>
+<li>ingress address(es)</li>
+<li>egress subnets</li>
+</ul>
+<p>Flags may be used to request only a specific address value.</p>
+<p>See <a href="./developer-network-primitives.html">Network primitives</a> for in-depth coverage.</p>
+<h2 id="open-port">open-port<a class="anchor" href="#open-port"></a></h2>
+<p><code>open-port</code> registers a port or range to open on the public-interface. On public
+clouds the port will only be open while the application is exposed. It accepts a
+single port or range of ports with an optional protocol, which may be <code>udp</code> or
+<code>tcp</code>, where <code>tcp</code> is the default.</p>
+<p><code>open-port</code> will not have any effect if the application is not exposed, and may have
+a somewhat delayed effect even if it is. This operation is transactional, so
+changes will not be made unless the hook exits successfully.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import open_port
+
+open_port(80, protocol='TCP')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">open-port 80/tcp
+
+open-port 1234/udp
+
+# Open a range of ports
+open-port 1000-2000/udp
+</code></pre>
+
+<h2 id="opened-ports">opened-ports<a class="anchor" href="#opened-ports"></a></h2>
+<p><code>opened-ports</code> lists all ports or ranges opened by the <strong>unit</strong>. The
+opened-ports hook tool lists all the ports currently opened <strong>by the running
+charm</strong>. It does not, at the moment, include ports which may be opened by other
+charms co-hosted on the same machine
+<a href="https://bugs.launchpad.net/juju-core/+bug/1427770">lp#1427770</a>.</p>
+<p class="note"><strong> Note</strong>:
+    Opening ports is transactional (i.e. will take place on successfully
+    exiting the current hook), and therefore <code>opened-ports</code> will not return any
+    values for pending <code>open-port</code> operations run from within the same hook.</p>
+<p>python:</p>
+<pre><code class="language-python">from subprocess import check_output
+
+range = check_output([&quot;opened-ports&quot;])
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">opened-ports
+</code></pre>
+
+<h2 id="payload-status-set">payload-status-set<a class="anchor" href="#payload-status-set"></a></h2>
+<p><code>payload-status-set</code> is used to update the current status of a registered payload.
+The <code>class</code> and <code>id</code> provided must match a payload that
+has been previously registered with juju using <a href="#payload-register">payload-register</a>. The status must be one of the following:</p>
+<ul>
+<li>starting</li>
+<li>started</li>
+<li>stopping</li>
+<li>stopped</li>
+</ul>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import payload_status_set
+
+payload_status_set('monitor', '0fcgaba', 'stopping')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-shell">payload-status-set monitor abcd13asa32c starting
+</code></pre>
+
+<h2 id="payload-register">payload-register<a class="anchor" href="#payload-register"></a></h2>
+<p><code>payload-register</code> used while a hook is running to let Juju know that a
+payload has been started. The information used to start the payload must be
+provided when "register" is run.</p>
+<p>The payload class must correspond to one of the payloads defined in
+the charm's metadata.yaml.</p>
+<p>metadata.yaml:</p>
+<pre><code class="language-yaml">payloads:
+    monitoring:
+        type: docker
+    kvm-guest:
+        type: kvm
+</code></pre>
+
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import payload_register
+
+payload_register('monitoring', 'docker', '0fcgaba')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">payload-register monitoring docker 0fcgaba
+</code></pre>
+
+<h2 id="payload-unregister">payload-unregister<a class="anchor" href="#payload-unregister"></a></h2>
+<p><code>payload-unregister</code> used while a hook is running to let Juju know
+that a payload has been manually stopped. The <code>class</code> and <code>id</code> provided
+must match a payload that has been previously registered with Juju using
+payload-register.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import payload_unregister
+
+payload_unregister('monitoring', '0fcgaba')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">payload-unregister monitoring 0fcgaba
+</code></pre>
+
+<h2 id="relation-get">relation-get<a class="anchor" href="#relation-get"></a></h2>
+<p><code>relation-get</code> reads the settings of the local unit, or of any remote unit,
+in a given relation (set with <code>-r</code>, defaulting to the current relation
+identifier, as in <code>relation-set</code>). The first argument specifies the settings
+key, and the second the remote unit, which may be omitted if a default is
+available (that is, when running a relation hook other than
+<a href="authors-charm-hooks.html#[name]-relation-broken">-relation-broken</a>).</p>
+<p>If the first argument is omitted, a dictionary of all current keys and values
+will be printed; all values are always plain strings without any
+interpretation. If you need to specify a remote unit but want to see all
+settings, use <code>-</code> for the first argument.</p>
+<p>The environment variable
+<a href="reference-environment-variables.html#juju_remote_unit"><code>JUJU_REMOTE_UNIT</code></a>
+stores the default remote unit.</p>
+<p>You should never depend upon the presence of any given key in <code>relation-get</code>
+output. Processing that depends on specific values (other than <code>private-address</code>)
+should be restricted to
+<a href="authors-charm-hooks.html#[name]-relation-changed">-relation-changed</a> hooks for
+the relevant unit, and the absence of a remote unit's value should never be
+treated as an <a href="./authors-hook-errors.html">error</a> in the local unit.</p>
+<p>In practice, it is common and encouraged for
+<a href="authors-charm-hooks.html#[name]-relation-changed">-relation-changed</a> hooks to
+exit early, without error, after inspecting <code>relation-get</code> output and
+determining the data is inadequate; and for
+<a href="authors-charm-hooks.html">all other hooks</a> to be resilient in the face of
+missing keys, such that -relation-changed hooks will be sufficient to complete
+all configuration that depends on remote unit settings.</p>
+<p>Key value pairs for remote units that have departed remain accessible for the
+lifetime of the relation.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import relation_get
+
+# Since we define the relation id on every call to relation_get, both bash
+# examples look like the line below
+relation_get(rel_id)
+
+# To get a specific setting from the remote unit in the specified relation
+relation_get(rel_id, 'username')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash"># Getting the settings of the default unit in the default relation is done with:
+ relation-get
+  username: jim
+  password: &quot;12345&quot;
+
+# To get a specific setting from the default remote unit in the default relation
+  relation-get username
+   jim
+
+# To get all settings from a particular remote unit in a particular relation you
+   relation-get -r database:7 - mongodb/5
+    username: bob
+    password: 2db673e81ffa264c
+</code></pre>
+
+<h2 id="relation-ids">relation-ids<a class="anchor" href="#relation-ids"></a></h2>
+<p><code>relation-ids</code> outputs a list of the related <strong>applications</strong> with a relation
+name. Accepts a single argument (relation-name) which, in a relation hook,
+defaults to the name of the current relation. The output is useful as input
+to the <code>relation-list</code>, <code>relation-get</code>, and <code>relation-set</code> commands to read
+or write other relation values.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import relation_ids
+
+relation_ids('database')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">relation-ids database
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+Get-JujuRelationIds -RelType &quot;database&quot;
+</code></pre>
+
+<h2 id="relation-list">relation-list<a class="anchor" href="#relation-list"></a></h2>
+<p><code>relation-list</code> outputs a list of all the related <strong>units</strong> for a relation
+identifier. If not running in a relation hook context, <code>-r</code> needs to be
+specified with a relation identifier similar to the<code>relation-get</code> and
+<code>relation-set</code> commands.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import relation_list
+from charmhelpers.core.hookenv import relation_id
+
+# List the units on a relation for the given relation id.
+related_units = relation_list(relation_id())
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">relation-list 9
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+Get-JujuRelatedUnits -RelId (Get-JujuRelationId)
+</code></pre>
+
+<h2 id="relation-set">relation-set<a class="anchor" href="#relation-set"></a></h2>
+<p><code>relation-set</code> writes the local unit's settings for some relation. If it's not
+running in a relation hook, <code>-r</code> needs to be specified. The <code>value</code> part of an
+argument is not inspected, and is stored directly as a string. Setting an empty
+string causes the setting to be removed.</p>
+<p><code>relation-set</code> is the tool for communicating information between
+units of related applications. By convention the charm that <code>provides</code> an
+interface is likely to set values, and a charm that <code>requires</code> that interface
+will read values; but there is nothing enforcing this. Whatever information you
+need to propagate for the remote charm to work must be propagated via
+relation-set, with the single exception of the <code>private-address</code> key, which is
+always set before the unit joins.</p>
+<p>For some charms you may wish to overwrite the <code>private-address</code> setting, for
+example if you're writing a charm that serves as a proxy for some external
+application. It is rarely a good idea to <em>remove</em> that key though, as most charms
+expect that value to exist unconditionally and may fail if it is not
+present.</p>
+<p>All values are set in a
+<a href="https://en.wikipedia.org/wiki/Transaction_processing">transaction</a> at the
+point when the hook terminates successfully (i.e. the hook exit code is 0). At
+that point all changed values will be communicated to the rest of the system,
+causing -changed hooks to run in all related units.</p>
+<p>There is no way to write settings for any unit other than the local unit.
+However, any hook on the local unit can write settings for any relation which
+the local unit is participating in.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import relation_set
+
+relation_set({'port': 80, 'tuning': 'default'})
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">relation-set port=80 tuning=default
+
+relation-set -r server:3 username=jim password=12345
+</code></pre>
+
+<h2 id="resource-get">resource-get<a class="anchor" href="#resource-get"></a></h2>
+<p><code>resource-get</code> fetches a resource from the Juju controller or the Juju Charm
+store. The command returns a local path to the file for a named resource.</p>
+<p>If <code>resource-get</code> has not been run for the named resource previously, then the
+resource is downloaded from the controller at the revision associated with the
+unit's application. That file is stored in the unit's local cache. If
+<code>resource-get</code> <em>has</em> been run before then each subsequent run synchronizes the
+resource with the controller. This ensures that the revision of the unit-local
+copy of the resource matches the revision of the resource associated with the
+unit's application.</p>
+<p>The path provided by <code>resource-get</code> references the up-to-date file for the
+resource. Note that the resource may get updated on the controller for the
+application at any time, meaning the cached copy <em>may</em> be out of date at any time
+after <code>resource-get</code> is called. Consequently, the command should be run at
+every point where it is critical for the resource be up to date.</p>
+<pre><code class="language-sh"># resource-get software
+/var/lib/juju/agents/unit-resources-example-0/resources/software/software.zip
+</code></pre>
+
+<h2 id="status-get">status-get<a class="anchor" href="#status-get"></a></h2>
+<p><code>status-get</code> allows charms to query what is recorded in Juju as
+the current workload status. Without arguments, it just prints the workload
+status value e.g. 'maintenance'. With <code>--include-data</code> specified, it prints
+YAML which contains the status value plus any data associated with the status.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import status_get
+
+charm_status = status_get()
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">status-get
+
+status-get --include-data
+</code></pre>
+
+<p>Use <code>--application</code> to get the overall status for the application, as set by the leader:</p>
+<pre><code class="language-bash">status-get --application
+</code></pre>
+
+<h2 id="status-set">status-set<a class="anchor" href="#status-set"></a></h2>
+<p><code>status-set</code> allows charms to describe their current status. This places the
+responsibility on the charm to know its status, and set it accordingly using
+the <code>status-set</code> hook tool.</p>
+<p>This hook tool takes 2 arguments. The first is the status to report, which can
+be one of the following:</p>
+<ul>
+<li><code>maintenance</code> (the unit is not currently providing a service, but expects to
+  be soon, e.g. when first installing)</li>
+<li><code>blocked</code> (the unit cannot continue without user input)</li>
+<li><code>waiting</code> (the unit itself is not in error and requires no intervention,
+  but it is not currently in service as it depends on some external factor,
+  e.g. an application to which it is related is not running)</li>
+<li><code>active</code> (This unit believes it is correctly offering all the services it is
+  primarily installed to provide)</li>
+</ul>
+<p>For more extensive explanations of these statuses, and other possible status
+values which may be set by Juju itself,
+<a href="./reference-status.html">please see the status reference page</a>.</p>
+<p>The second argument is a user-facing message, which will be displayed to any
+users viewing the status, and will also be visible in the status history. This
+can contain any useful information.</p>
+<p>This status message provides valuable feedback to the user about what is
+happening. Changes in the status message are not broadcast to peers and
+counterpart units - they are for the benefit of humans only, so tools
+representing Juju applications (e.g. the Juju GUI) should check occasionally
+and be told the current status message.</p>
+<p>Spamming the status with many changes per second is therefore rather redundant
+(and might be throttled by the controller). Nevertheless, a thoughtful charm
+will provide appropriate and timely feedback for human users, with estimated
+times of completion of long-running status changes.</p>
+<p>In the case of a <code>blocked</code> status though the <strong>status message should tell the
+user explicitly how to unblock the unit</strong> insofar as possible, as this is
+primary way of indicating any action to be taken (and may be surfaced by other
+tools using Juju, e.g. the Juju GUI).</p>
+<p>A unit in the <code>active</code> state with should not generally expect anyone to look at
+its status message, and often it is better not to set one at all. In the event
+of a degradation of service, this is a good place to surface an explanation for
+the degradation (load, hardware failure or other issue).</p>
+<p>A unit in <code>error</code> state will have a message that is set by Juju and not the
+charm because the error state represents a crash in a charm hook - an unmanaged
+and uninterpretable situation. Juju will set the message to be a reflection of
+the hook which crashed. For example “Crashed installing the software” for an
+install hook crash, or “Crash establishing database link” for a crash in a
+relationship hook.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import status_set
+
+status_set('blocked', 'Unable to continue until related to a database')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">status-set maintenance &quot;installing software&quot;
+status-set maintenance &quot;formatting storage space, time left: 120s&quot;
+status-set waiting &quot;waiting for database&quot;
+status-set active
+status-set active &quot;Storage 95% full&quot;
+status-set blocked &quot;Need a database relation&quot;
+status-set blocked &quot;Storage full&quot;
+</code></pre>
+
+<p>The unit which is the leader is responsible for setting the overall status of
+the application by using the <code>--application</code> option. It should aggregate the
+status of other units for the application.</p>
+<pre><code class="language-bash">status-set maintenance &quot;Upgrading software&quot;
+status-set --application maintenance &quot;Down until one unit has completed the upgrade.&quot;
+</code></pre>
+
+<p>Non-leader units which attempt to use <code>--application</code> will receive an error</p>
+<pre><code class="language-bash">status-set --application maintenance &quot;I'm not the leader.&quot;
+error: this unit is not the leader
+</code></pre>
+
+<h2 id="storage-add">storage-add<a class="anchor" href="#storage-add"></a></h2>
+<p><code>storage-add</code> may be used to add storage to the <strong>unit</strong>. The tool takes the
+name of the storage (as defined in the charm metadata), and optionally the
+number of storage instances to add; by default it will add a single storage
+instance of the name.</p>
+<p>python:</p>
+<pre><code class="language-python">from subprocess import check_call
+
+check_call([&quot;storage-add&quot;, &quot;database-storage=1&quot;])
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">storage-add database-storage=1
+</code></pre>
+
+<h2 id="storage-get">storage-get<a class="anchor" href="#storage-get"></a></h2>
+<p><code>storage-get</code> may be used to obtain information about storage being attached to,
+or detaching from, the unit. If the executing hook is a storage hook,
+information about the storage related to the hook will be reported; this may be
+overridden by specifying the name of the storage as reported by storage-list,
+and must be specified for non-storage hooks.</p>
+<p>storage-get should be used to identify the storage location during
+storage-attached and storage-detaching hooks. The exception to this is when the
+charm specifies a static location for singleton stores.</p>
+<p>python:</p>
+<pre><code class="language-python">from subprocess import check_call
+
+check_call([&quot;storage-get&quot;, &quot;21127934-8986-11e5-af63-feff819cdc9f&quot;])
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">storage-get 21127934-8986-11e5-af63-feff819cdc9f
+
+storage-get -s data/0
+</code></pre>
+
+<h2 id="storage-list">storage-list<a class="anchor" href="#storage-list"></a></h2>
+<p><code>storage-list</code> may be used to list storage instances that are attached to the
+unit. The storage instance identifiers returned from <code>storage-list</code> may be
+passed through to the <code>storage-get</code> command using the -s flag.</p>
+<p>python:</p>
+<pre><code class="language-python">from subprocess import check_output
+
+storage = check_output([&quot;storage-list&quot;])
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">storage-list
+</code></pre>
+
+<h2 id="unit-get">unit-get<a class="anchor" href="#unit-get"></a></h2>
+<p><code>unit-get</code> returns information about the local <strong>unit</strong>. It accepts a single
+argument, which must be <code>private-address</code> or <code>public-address</code>. It is not
+affected by context.</p>
+<p>Note that if a unit has been deployed with <code>--bind space</code> then the address
+returned from <code>unit-get private-address</code> will get the address from this
+space, not the 'default' space.</p>
+<p class="note"><strong> Warning</strong>:
+    The call of <code>unit-get</code> in a networking context is deprecated and should
+    no longer be used. It is replaced by the <code>network-get</code> hook tool. See
+    <a href="./developer-network-primitives.html">Network primitives</a> for details.</p>
+<p>python:</p>
+<pre><code class="language-python">from charmhelpers.core.hookenv import unit_get
+
+address = unit_get('public-address')
+</code></pre>
+
+<p>bash:</p>
+<pre><code class="language-bash">unit-get public-address
+</code></pre>
+
+<p>powershell:  </p>
+<pre><code class="language-powershell">Import-Module CharmHelpers
+Get-JujuUnit -Attr &quot;public-address&quot;
+</code></pre>
+
+    </main>
+    <aside class="jujudocs__toc">
+    </aside>
+</div>
+
+
+
+</div><!-- /.inner-wrapper -->
+
+</div><!-- /.wrapper -->
+
+
+<div class="footer-wrapper strip-white">
+<footer class="global clearfix">
+    <p class="top-link">
+        <a href="https://jujucharms.com/docs/stable/getting-started#">Back to the top</a>
+    </p>
+    <nav role="navigation" class="inner-wrapper">
+        <div class="row">
+            <div class="seven-col">
+                <ul class="no-bullets seven-col">
+                    <li><a href="https://jujucharms.com/docs">Docs</a></li>
+                    <li><a href="https://jujucharms.com/community">Community</a></li>
+                    <li><a href="https://jujucharms.com/community/blog">Blog</a></li>
+                    <li><a href="https://jujucharms.com/docs">Install Juju</a></li>
+                </ul>
+                <div class="legal">
+                    <p>© 2017 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.</p>
+                    <ul class="inline-list clear bullets">
+                        <li class="inline-list__item"><a href="http://www.ubuntu.com/legal"><small>Legal information</small></a></li>
+                        <li class="inline-list__item"><a href="https://github.com/CanonicalLtd/jujucharms.com/issues"><small>Report a bug on this site</small></a></li>
+                    </ul>
+                    <span class="accessibility-aid">
+                        <a href="https://jujucharms.com/docs/stable/getting-started#">Got to the top of the page</a>
+                    </span>
+                </div>
+            </div>
+            <div class="five-col last-col">
+                <ul class="social-list right">
+                    <li class="social-list__item">
+                        <a href="http://youtube.com/jujucharms" class="social-list__item--youtube"><svg width="31" height="31" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M15.515.47c-3.99 0-7.817 1.585-10.638 4.407C2.055 7.697.47 11.525.47 15.515s1.585 7.817 4.407 10.64c2.82 2.82 6.648 4.405 10.638 4.405s7.817-1.585 10.64-4.406c2.82-2.822 4.405-6.65 4.405-10.64S28.975 7.7 26.154 4.878C23.332 2.055 19.504.47 15.514.47z" fill="#AEA79F" class="the-icon"></path><path d="M15.51 8.73s-4.05 0-6.75.195c-.376.045-1.198.05-1.932.817-.58.586-.767 1.916-.767 1.916s-.192 1.56-.192 3.122v1.464c0 1.56.193 3.123.193 3.123s.19 1.33.768 1.915c.733.768 1.698.744 2.127.824 1.544.148 6.56.194 6.56.194s4.055-.006 6.755-.2c.377-.046 1.2-.05 1.933-.818.578-.586.767-1.915.767-1.915s.192-1.562.192-3.123V14.78c0-1.56-.192-3.122-.192-3.122s-.19-1.33-.767-1.916c-.734-.768-1.556-.772-1.933-.817-2.7-.195-6.75-.195-6.75-.195h-.01zm-1.988 3.866l5.214 2.72-5.213 2.702v-5.422z" fill="#FFF"></path></g></svg> Juju on Youtube</a>
+                    </li>
+                    <li class="social-list__item">
+                        <a href="https://plus.google.com/106305712267007929608/posts" class="social-list__item--google-plus">Juju on Google+</a>
+                    </li>
+                    <li class="social-list__item">
+                        <a href="http://www.twitter.com/ubuntucloud" class="social-list__item--twitter">Ubuntu Cloud on Twitter</a>
+                    </li>
+                    <li class="social-list__item">
+                        <a href="http://www.facebook.com/ubuntucloud" class="social-list__item--facebook">Ubuntu Cloud on Facebook</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</footer>
+</div>
+
+<script>
+    var isOperaMini = (navigator.userAgent.indexOf('Opera Mini') > -1);
+    if(isOperaMini) {
+        var root = document.documentElement;
+        root.className += " opera-mini";
+    }
+</script>
+
+<script>
+YUI().use('storefront-cookie', 'storefront-utils',
+          function (Y) {
+    Y.on('domready', function() {
+        var inSession = false;
+        var cookie = new Y.storefront.CookiePolicy();
+        var utils = Y.storefront.utils;
+
+        var notification = Y.one('.login-notification');
+        var loginLink = Y.one('.js-menu-login');
+
+        if (loginLink && notification) {
+          loginLink.on('mouseenter', function () {
+            notification.addClass('is-shown');
+          });
+          loginLink.on('mouseleave', function () {
+            notification.removeClass('is-shown');
+          });
+        }
+
+        cookie.render();
+        utils.svgFallback(Y.one('#main-content'));
+        utils.setupSearch();
+    });
+});
+</script>
+
+
+<script type="text/template" id="cookie-warning-template">
+    <div class="cookie-policy">
+        <div class="inner-wrapper">
+            <a href="?cp=close" class="link-cta">Close</a>
+            <p>We use cookies to improve your experience. By your continued use of this site you accept such use. To change your settings please <a href="http://www.ubuntu.com/legal/terms-and-policies/privacy-policy#cookies">see our policy</a>.</p>
+        </div>
+    </div>
+</script>
+
+
+<script>
+YUI().use('storefront-docs-menu', 'storefront-utils', function(Y) {
+    // Y.storefront.docsMenu.setup('.jujudocs-menu', 'ul > .section', 'getting-started');
+    Y.storefront.utils.detailsFallback();
+});
+
+</script>
+
+
+<script type="application/javascript">
+  YUI().use('node', 'storefront-navigation', function (Y) {
+    Y.storefront.mobileMenu();
+  });
+</script>
+
+<!-- {version: ['1.0.4', '']} -->
+
+
+
+<script type="text/javascript" id="">(function(){function b(){!1===c&&(c=!0,Munchkin.init("066-EOV-335"))}var c=!1,a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="//munchkin.marketo.net/munchkin.js";a.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||b()};a.onload=b;document.getElementsByTagName("head")[0].appendChild(a)})();</script>
+
+<script type="text/javascript" id="">setTimeout(function(){var a=document.createElement("script"),b=document.getElementsByTagName("script")[0];a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0011/8875.js?"+Math.floor((new Date).getTime()/36E5);a.async=!0;a.type="text/javascript";b.parentNode.insertBefore(a,b)},1);</script>
+
+<script type="text/javascript" id="">window.heap=window.heap||[];
+heap.load=function(e,d){window.heap.appid=e;window.heap.config=d=d||{};var a=d.forceSSL||"https:"===document.location.protocol,b=document.createElement("script");b.type="text/javascript";b.async=!0;b.src=(a?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);for(var b=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},a=["clearEventProperties","identify","setEventProperties",
+"track","unsetEventProperty"],c=0;c<a.length;c++)heap[a[c]]=b(a[c])};heap.load("3280028620");</script>
+</body></html>
