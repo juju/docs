@@ -1,6 +1,5 @@
 Title: Using Kubernetes with Juju
-TODO:  Once 2.4 is officially released remove support Note and update status output
-       Should eventually link to k8s-charm developer documentation
+TODO:  Should eventually link to k8s-charm developer documentation
        Update when storage becomes a Juju drivable aspect.
        Add architectural overview/diagram once Juju:k8s becomes stable.
        Consider manually adding a cluster (third-party installs) via `add-cloud` and `add-credential`
@@ -8,15 +7,15 @@ TODO:  Once 2.4 is officially released remove support Note and update status out
 
 # Using Kubernetes with Juju
 
-Kubernetes (often abbreviated as "k8s") provides a flexible architecture for
-managing containerised applications at scale (see the
+Kubernetes provides a flexible architecture for managing containerised
+applications at scale (see the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information). It
 most commonly employs Docker as its container technology.
 
-## Juju k8s-specific workflow
+!!! Note:
+    Kubernetes is often abbreviated as "k8s" (pronounced "kate's").
 
-Here we discuss how building and working with a k8s environment may differ from
-a standard Juju workflow.
+## Juju k8s-specific workflow
 
 The only k8s-specific Juju commands are `add-k8s` and `remove-k8s`. All other
 concepts and commands are applied in the traditional Juju manner.
@@ -46,7 +45,7 @@ backing cloud.
 
 To summarise, the steps for using Kubernetes with Juju are:
 
- 1. Obtain a cluster
+ 1. Obtain a Kubernetes cluster
  1. Add the cluster to Juju
  1. Create a controller (and optionally a model)
  1. Deploy k8s-specific charms
@@ -66,10 +65,10 @@ juju deploy kubernetes-core
 !!! Note:
     An alternative to using the bundle is to use the `conjure-up` installer.
     See Ubuntu tutorial
-    [Install Kubernetes with conjure-up][ubuntu-tutorial_install-kubernetes-with-conjure-up].
+    [Install Kubernetes with conjure-up][ubuntu-tutorial_install-kubernetes-with-conjure-up]
     for guidance. Although the tutorial specifically mentions the
     [Canonical Distribution of Kubernetes][cdk-charm] you can choose the
-    identical minimal install deployed above from the tool's interface.
+    identical minimal install deployed above from the installer's interface.
 
 Sample output looks like this:
 
@@ -123,11 +122,38 @@ juju scp kubernetes-master/0:config ~/.kube/config
 
 We can now take advantage of the `add-k8s` command as it internally parses the
 copied configuration file from the specified path. This allows us to quickly
-add the cluster-cloud, which we have arbitrarily called 'k8cloud':
+add the cluster-cloud, which we have arbitrarily called 'k8scloud':
 
 ```bash
-juju add-k8s k8cloud
+juju add-k8s k8scloud
 ```
+
+Now confirm the successful addition of the cloud:
+
+```bash
+juju clouds
+```
+
+Here is a partial output:
+
+```no-highlight
+Cloud        Regions  Default          Type        Description
+.
+.
+.
+k8scloud           0                   kubernetes
+```
+
+## Add a model
+
+Add a model in the usual way:
+
+```bash
+juju add-model k8smodel
+```
+
+This will cause a Kubernetes namespace in the cluster to be created that will
+host all of the pods and other resources for that model.
 
 ## Configuration
 
