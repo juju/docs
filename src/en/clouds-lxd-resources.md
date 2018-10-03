@@ -173,4 +173,3 @@ assistance with the daemon. See upstream documentation for
 [logs]: ./troubleshooting-logs.md
 [credentials]: ./credentials.md
 [users-creating]: ./users-creating.md
-[deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines

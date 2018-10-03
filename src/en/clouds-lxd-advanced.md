@@ -34,19 +34,14 @@ cluster and any subsequent node will *join* the cluster. When joining, `sudo`
 is required.
 
 Once the cluster is set up a controller can be created and will end up randomly
-on one of the nodes. See
-[Deploying to specific machines][deploying-to-specific-machines] for how to
-target specific nodes.
-
-In `v.2.5.0` specific cluster nodes can be targeted with the commands
-`bootstrap`, `deploy`, and `add-unit`. See
-[Deploying to specific machines][deploying-to-specific-machines] for how to do
-this.
+on one of the nodes. Since `v.2.5.0`, however, specific cluster nodes can be
+targeted. See [Deploying to specific machines][deploying-to-specific-machines]
+for how to do this.
 
 !!! Warning:
     The cluster-creation process will remove any existing containers. In a Juju
-    context, this implies that you cannot initialise a cluster *after* having
-    created a controller.
+    context, this implies that you must initialise the cluster *before*
+    creating a controller.
 
 See the upstream documentation on [Clustering][lxd-upstream-clustering].
 
@@ -223,10 +218,11 @@ the main LXD page.
 <!-- LINKS -->
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[clouds-lxd]: ./clouds-LXD
+[clouds-lxd]: ./clouds-LXD.md
 [#clouds-lxd-remote-add-manual]: #manually-adding-a-remote-lxd-cloud
 [controllers-creating]: ./controllers-creating.md
 [clouds-adding-manually]: ./clouds.md#adding-clouds-manually
 [credentials]: ./credentials.md
 [clouds-lxd-creating-a-controller]: ./clouds-LXD.md#creating-a-controller
 [lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
+[deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
