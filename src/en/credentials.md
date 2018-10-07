@@ -1,6 +1,8 @@
 Title: Credentials
 TODO:  Investigate: shouldn't `model-config` have a default-credential setting?
        Add to mycreds.yaml: cloudsigma, rackspace, and oracle. also openstack using access-key
+       Investigate: can private keys always be replaced by a file path?
+       Add remote LXD certs/key (server cert, client cert, client key)
 table_of_contents: True
 
 # Credentials
@@ -192,6 +194,10 @@ credentials:
       auth-type: userpass
       password: passw0rd
       user: administrator@xyz.com
+  lxd-node2:
+    interactive:
+      auth-type: interactive
+      trust-password: ubuntu
 ```
 
 Credentials are added to Juju on a per-cloud basis. To add credentials for the
