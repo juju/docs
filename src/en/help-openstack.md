@@ -30,7 +30,7 @@ corresponding prompts are given in parentheses:
  - `OS_REGION_NAME` (region)
 
 These are typically defined in a file called `novarc`. Have your shell source
-it (e.g `source novarc`) prior to invoking `add-cloud`.
+it (e.g. `source novarc`) prior to invoking `add-cloud`.
 
 For the manual method of adding an OpenStack cloud, see below section
 [Manually adding an OpenStack cloud][#clouds-openstack-manual].
