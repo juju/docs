@@ -21,8 +21,16 @@ Use the `add-cloud` command to interactively add your OpenStack cloud to Juju's
 list of clouds. You will need to supply a name you wish to call your cloud and
 the unique API endpoint, the authentication type(s), and region information.
 
-If you first source your `novarc` file (including the OS_CACERT variable) the
-`add-cloud` command will attempt to use some of the variables. 
+This command recognises the below variables. Any values found will show up as
+default values when the interactive mode is used. For clarity, the
+corresponding prompts are given in parentheses:
+
+ - `OS_AUTH_URL` (cloud API endpoint URL)
+ - `OS_CACERT` (path to the CA certificate file)
+ - `OS_REGION_NAME` (region)
+
+These are typically defined in a file called `novarc`. Have your shell source
+it (e.g `source novarc`) prior to invoking `add-cloud`.
 
 For the manual method of adding an OpenStack cloud, see below section
 [Manually adding an OpenStack cloud][#clouds-openstack-manual].
