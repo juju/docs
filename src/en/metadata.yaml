@@ -154,8 +154,8 @@ navigation:
             location: howto-prometheus.md
           - title: Cloud image metadata
             location: howto-privatecloud.md
-          - title: Update the series of a controller or machine
-            location: howto-updateseries.md
+          - title: Updating a machine series
+            location: upgrade-series.md
 
       - title: Troubleshooting
         location: troubleshooting.md
