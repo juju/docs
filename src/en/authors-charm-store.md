@@ -211,30 +211,10 @@ charm release cs:~kirk/foo-9 --channel edge
 After running both commands, revision 9 exists in both the stable channel
 and the edge channel.
 
-## Publishing your charm
-
-When you have released your charm (or bundle) and you want to make it available
-to others you will need to make a *promulgation request*. This is informally
-done via the "Charms and Charming" category on the
-[Juju Discourse forum][juju-discourse-forum-charms].
-
-The '#juju' IRC channel on Freenode and the above Discourse forum remain
-excellent resources for questions and comments regarding charm development and
-charm promulgation.
-
-### Promulgation notes
-
- - The [Charm promulgation][charm-promulgation] page contains information on what
-   happens once the request is made.
- - It is the responsibility of the charm author (and maintainer) to test
-   their charm to ensure it is of good quality and is secure.
- - Promulgation to the top level namespace of the Charm Store does not imply
-   an endorsement by Canonical.
- - Charm authors are encouraged to use their personal or group namespace.
-
 ## Sharing charms and bundles
 
-Sharing is independent of publishing (making public) to the Charm Store.
+Sharing is independent of promulgating (making public as the recommended charm)
+to the Charm Store.
 
 All channels have read and write ACLs. By default, only the owner of the
 entity exists in these ACLs.
@@ -264,6 +244,26 @@ general public.
 charm grant cs:~kirk/foo everyone
 ```
 
+## Promulgate your charm
+
+When you have released your charm (or bundle) and you want to make it available
+to others as the recommended charm you will need to make a *promulgation
+request*. This is informally done via the "Charms and Charming" category on the
+[Juju Discourse forum][juju-discourse-forum-charms].
+
+The '#juju' IRC channel on Freenode and the above Discourse forum remain
+excellent resources for questions and comments regarding charm development and
+charm promulgation.
+
+### Promulgation notes
+
+ - The [Charm promulgation][charm-promulgation] page contains information on what
+   happens once the request is made.
+ - It is the responsibility of the charm author (and maintainer) to test
+   their charm to ensure it is of good quality and is secure.
+ - Promulgation to the top level namespace of the Charm Store does not imply
+   an endorsement by Canonical.
+ - Charm authors are encouraged to use their personal or group namespace.
 
 <!-- LINKS -->
 
