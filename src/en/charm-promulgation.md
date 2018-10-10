@@ -2,7 +2,7 @@ Title: Charm promulgation
 
 # Charm promulgation
 
-Charm promulagation is the process of making your charm available on the charm store and visible in searches. This is a manual process and requires a review from a member of the [~charmers][launchpad-group-charmers] Launchpad group.
+Charm promulagation is the process of making your charm available on the charm store and visible in searches as the recommended charm. This is a manual process and requires a review from a member of the [~charmers][launchpad-group-charmers] Launchpad group.
 
 ## Before you request promulgation
 
