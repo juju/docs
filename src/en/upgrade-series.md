@@ -8,21 +8,26 @@ workload or controller machine, the `upgrade-series` command is used.
 Here is an overview of the process:
 
  1. The user initiates the upgrade.
-    1. Juju removes the machine from the pool of machines, marking it as
-       unavailable.
+    1. The machine is removed from the pool of available machines in the sense
+       that charms can not be deployed upon it.
     1. A minimum amount of the machine's software is upgraded and some changes 
        internal to Juju are made. 
     1. All units on the machine are taken into account.
     1. At the end of this step, from Juju's standpoint, the machine is now
        running the target operating system.
  1. The user manually performs the upgrade of the operating system and makes
-    any other necessary changes.
- 1. The user informs Juju that the machine has been successfully upgraded and
-    is ready to be reinserted into the machine pool.
+    any other necessary changes. This should be accompanied by a maintenance
+    window managed by the user.
+ 1. The user informs Juju that the machine has been successfully upgraded. The
+    machine is reinserted into the machine pool.
+
+!!! Important:
+    At no time does Juju take any action to prevent the machine from servicing
+    workload client requests.
 
 In the examples that follow, the machine in question has an ID of '1' and we'll
 be moving from Ubuntu 16.04 LTS (Xenial) to Ubuntu 18.04 LTS (Bionic).
-
+    
 ## Initiating the upgrade
 
 You initiate the upgrade with the `prepare` sub-command, the machine ID, and
