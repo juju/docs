@@ -58,7 +58,7 @@ to read the [Release Notes][ubuntu-releases] of the target version.
 
 Make any other required changes now, before moving on to the next step.
 
-## Informing Juju of a successful upgrade
+## Completing the upgrade
 
 You should now verify that the machine has been successfully upgraded. Once
 that's done, tell Juju that the machine is ready:
