@@ -44,8 +44,11 @@ the target series:
 juju upgrade-series prepare 1 bionic
 ```
 
-You will be asked to confirm the procedure. To avoid this prompt use the
-`--agree` option.
+You will be asked to confirm the procedure. Use the `--agree` option to avoid
+this prompt.
+
+All charms associated with the machine must support the target series in order
+for the command to complete successfully. An error will be emitted otherwise.
 
 The deployed charms will be inspected for a 'pre-series-upgrade' hook. If such
 a hook exists, it will be run. 
