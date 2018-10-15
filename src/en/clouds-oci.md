@@ -1,12 +1,12 @@
 Title: Using Oracle Cloud Infrastructure with Juju
-TODO:  Review required: 2.5 changes still to come
+TODO:  Review required: 2.5 changes still to come (baked-in, then test trial accounts)
 
 # Using Oracle Cloud Infrastructure with Juju
 
-Juju has built-in support (!!!!) for [Oracle Cloud Infrastructure][oracle-oci]
-(OCI), Oracle's public cloud. This means that there is no need to add the
-Oracle cloud to Juju. An exception to this is if you are using a trial account.
-Both types of accounts, paid and trial, are covered here.
+Juju has built-in support for [Oracle Cloud Infrastructure][oracle-oci] (OCI),
+Oracle's public cloud. This means that there is no need to add the OCI cloud
+to Juju. An exception to this is if you are using a trial account. Both types
+of accounts, paid and trial, are covered here.
 
 This page will cover the following steps:
 
@@ -121,7 +121,7 @@ below (hint: the endpoint domain should be resolvable using DNS).
 
 Use the interactive `add-cloud` command to add your OCI cloud to Juju's list
 of clouds. You will need to supply a name you wish to call your cloud and
-!!!!!!
+your region.
 
 For the manual method of adding an OCI cloud, see below section
 [Manually adding an OCI cloud][#clouds-oci-manual].
@@ -139,7 +139,7 @@ Cloud Types
   manual
   oci
   openstack
-  oracle !!!!!!!!!!!!
+  oracle
   vsphere
 
 Select cloud type: oci
@@ -150,7 +150,7 @@ Enter region name: us-ashburn-1
 
 Enter another region? (y/N): N
 
-Cloud "oci-cloud" successfully added
+Cloud "oci-test" successfully added
 
 You may need to `juju add-credential oci-test' if your cloud needs additional credentials
 then you can bootstrap with 'juju bootstrap oci-test'
