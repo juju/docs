@@ -1,10 +1,11 @@
-Title: Juju credentials
+Title: Credentials
 TODO:  Investigate: shouldn't `model-config` have a default-credential setting?
-       Review required
        Add to mycreds.yaml: cloudsigma, rackspace, and oracle. also openstack using access-key
+       Investigate: can private keys always be replaced by a file path?
+       Add remote LXD certs/key (server cert, client cert, client key)
 table_of_contents: True
 
-# Cloud credentials
+# Credentials
 
 In order to access your cloud, Juju needs to know how to authenticate itself.
 We use the term *credentials* to describe the material necessary to do this
@@ -27,19 +28,6 @@ Juju supports three methods for adding credentials:
    files (only supported by certain providers)
  - Reading a user-provided [YAML-formatted][yaml] file
   
-Each of these methods are explained below, but if you are still having
-difficulty you can get extra help by selecting your cloud from among this list:
-
-[Amazon AWS][clouds-aws] |
-[Microsoft Azure][clouds-azure] |
-[Google GCE][clouds-google] |
-[Joyent][clouds-joyent] |
-[MAAS][clouds-maas] |
-[OpenStack][clouds-openstack] |
-[VMware vSphere][clouds-vmware] |
-[Oracle Compute][clouds-oracle] |
-[Rackspace][clouds-rackspace]
-
 !!! Note:
     LXD deployments are a special case. Accessed from a Juju admin user, they
     do not require credentials. Accessed from a non-admin user, a *certificate
@@ -96,14 +84,13 @@ call the credential set.
     You will need to rescan the variables if their values ever change. A scan
     only picks up *current* values.
 
-These are the providers that use tools that support these variables:
+There are three providers that use tools that support this variables method:
 
 [Amazon AWS][clouds-aws-using-env-variables] |
 [Google GCE][clouds-google-using-env-variables] |
 [OpenStack][clouds-openstack-using-env-variables]
 
-Each page provides details on using this method with its respective provider,
-including the variable names.
+Each page provides details on using this method with its respective provider.
 
 !!! Note:
     The `autoload-credentials` command is also used to generate a certificate
@@ -116,8 +103,8 @@ including the variable names.
 You can use a YAML-formatted file to store credentials for any cloud. Below we
 provide a sample file, which we will call `mycreds.yaml`. It includes many of
 the clouds supported by Juju and uses the most common options. Note the MAAS
-cloud and the two OpenStack clouds, called 'homemaas', 'homestack-kv2' and
-'homestack-kv23' respectively.
+cloud and the two OpenStack clouds, called 'homemaas', 'myopenstack' and
+'homestack' respectively.
 
 ```yaml
 credentials:
@@ -136,7 +123,7 @@ credentials:
     peter:
       auth-type: oauth1
       maas-oauth: 5weWAsjhe9lnaLKHERNSlke320ah9naldIHnrelks
-  homestack-kv2:
+  myopenstack:
     default-region: region-a
     john:
       auth-type: access-key
@@ -144,7 +131,7 @@ credentials:
       secret-key: 7172bc91a21c3df1787423ac12093bcc
       tenant-name: admin
       username: admin   
-  homestack-kv23:
+  homestack:
     default-region: region-b
     peter:
       auth-type: userpass
@@ -155,6 +142,40 @@ credentials:
     peter:
       auth-type: jsonfile
       file: ~/.config/gcloud/application_default_credentials.json
+    juju-gce-1-sa:
+      auth-type: oauth2
+      project-id: juju-gce-1
+      private-key: |
+        -----BEGIN PRIVATE KEY-----
+        MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCzTFMj0/GvhrcZ
+        3B2584ZdDdsnVuHb7OYo8eqXVLYzXEkby0TMu2gM81LdGp6AeeB3nu5zwAf71YyP
+        erF4s0falNPIyRjDGYV1wWR+mRTbVjYUd/Vuy+KyP0u8UwkktwkP4OFR270/HFOl
+        Kc0rzflag8zdKzRhi7U1dlgkchbkrio148vdaoZZo67nxFVF2IY52I2qGW8VFdid
+        z+B9pTu2ZQKVeEpTVe5XEs3y2Y4zt2DCNu3rJi95AY4VDgVJ5f1rnWf7BwZPeuvp
+        0mXLKzcvD31wEcdE6oAaGu0x0UzKvEB1mR1pPwP6qMHdiJXzkiM9DYylrMzuGL/h
+        VAYjhFQnAgMBAAECggEADTkKkJ10bEt1FjuJ5BYCyYelRLUMALO4RzpZrXUArHz/
+        CN7oYTWykL68VIE+dNJU+Yo6ot99anC8GWclAdyTs5nYnJNbRItafYd+3JwRhU0W
+        vYYZqMtXs2mNMYOC+YNkibIKxYZJ4joGksTboRvJne4TN7Et/1uirr+GtLPn+W/e
+        umXfkpbOTDDAED8ceKKApAn6kLIW98DwHyK0rUzorOgp4DFDX9CjuWC+RG3CFGsk
+        oVOcDuTevJlb9Rowj1S2qYhGjuQVpVD7bcRg5zaSJKS88YbK63DCHZFpXn9JR0Fg
+        Vou9dnc99FdMo5vtHg7Adxh91gdqEvoaF1lHx8Var0q32QDse+spvv7K6/+7G35k
+        3+1gDgF74/uMr/AVrjpoUjmGAuWweXY/vn1MVN2Uld4KPYafkOF8oTuDK5f1fu0d
+        cMEoKRSXQh1NCD3PZWfQt4ypYPzn9R+VBGwnBcPorytlhM9qdLxKKlaHjBlprS6Y
+        Be1z6FO+MqWhFlwPrKH/2uwd4QKBgQDCGESJur9OdEeroBQyYyJF7DnJ/+wHSiOr
+        qzvb9YW1Ddtg1iiKHHZO5FS59/D62kPaGsysCMKxI9FW53TzSxUiTaEG636C5v8J
+        eRdzxX04BNYNzqXbm1agBEjAa7tK8xJAjk0to4zqadUaYZog0uQs2X7Aexj2c9T/
+        HQVLILHjBwKBgD/yuoLNbST+cGbuZl1s2EnTP796xPkkUm3qcUzofzmn6uivz7Qp
+        FMThZhHZ/Der98tra91a4e8fHaUTL5d4eCMeCL1mWXoNMnm02D/ugpEC8yDefi3T
+        xlM/Ed0IEVogcd49tvTvQfrhfbW/6Que/rkLKCoUlAldfIOYkS4YyyTBAoGACCpH
+        L9gYVi+UGEc6skfzWCew4quOfVwEFiO09/LjNhOoJ/G6cNzzqSv32H7yt0rZUeKQ
+        u6f+sL8F/nbsN5PwBqpnXMgpYU5gakCa2Pb05pdlfd00owFs6nxjpxyhG20QVoDm
+        BEZ+FhpvqZVzi2/zw2M+7s/+49dJnZXV9Cwi758CgYAquNdD4RXU96Y2OjTlOSvM
+        THR/zY6IPeO+kCwmBLiQC3cv59gaeOp1a93Mnapet7a2/WZPL2Al7zwnvZYsHc4z
+        nu1acd6D7H/9bb1YPHMNWITfCSNXerJ2idI689ShYjR2sTcDgiOQCzx+dwL9agaC
+        WKjypRHpiAMFbFqPT6W2uA==
+        -----END PRIVATE KEY-----
+      client-id: "206517233375074786882"
+      client-email: juju-gce-sa@juju-gce-123.iam.gserviceaccount.com
   azure:
     peter:
       auth-type: service-principal-secret
@@ -173,10 +194,12 @@ credentials:
       auth-type: userpass
       password: passw0rd
       user: administrator@xyz.com
+  lxd-node2:
+    interactive:
+      auth-type: interactive
+      trust-password: ubuntu
 ```
 
-!!! Note:
-    Authentication type `access-key` is not available on 
 Credentials are added to Juju on a per-cloud basis. To add credentials for the
 defined 'azure' cloud, for instance, we would do this:
 
@@ -348,11 +371,6 @@ juju login -u admin
 juju add-credential --replace joe
 juju update-credential google joe
 ```
-
-!!! Warning:
-    It is not possible to update the credentials if the initial credential name
-    is unknown. This restriction will be removed in an upcoming release of
-    Juju.
 
 ####  Updating remote credentials using a different Juju user
 

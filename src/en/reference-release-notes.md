@@ -5,6 +5,109 @@ Title: Juju Release Notes
 This page details all available release notes for the 2.x series of Juju. The
 release notes for the 1.x series are available [here][release-notes-1].
 
+^# Juju 2.4.4
+
+  The Juju team is pleased to announce the release of Juju 2.4.4.
+  
+  This is a minor update to the 2.4.3 release. In particular, it fixes a
+  regression of goal-state in the individual related unit status, along with
+  allowing opening/closing ports without an external network.
+
+  - [LP #1789211](https://bugs.launchpad.net/juju/2.4/+bug/1789211) - opening/closing ports without external network
+  - [LP #1790647](https://bugs.launchpad.net/juju/2.4/+bug/1790647) - refreshing AWS instance types
+  - [LP #1713239](https://bugs.launchpad.net/juju/2.4/+bug/1713239) - supporting partition tagging
+  - [LP #1794739](https://bugs.launchpad.net/juju/2.4/+bug/1794739) - output individual related goal-state in unit status
+
+  For the full list of fixes and additions, see the
+  [2.4.4 milestone](https://launchpad.net/juju/+milestone/2.4.4).
+
+  ## Get Juju
+  
+  The easiest way to install Juju is by using the `snap` package:
+  
+  	  sudo snap install juju --classic
+  
+  Those already using the 'stable' snap channel (the default as per the above
+  command) should be upgraded automatically. Other packages are available for a
+  variety of platforms (see the [install documentation][reference-install]).
+  
+  ## Feedback appreciated
+  
+  Let us know how you're using Juju or of any questions you may have. You can
+  join us on [Discourse][juju-discourse-forum], send us a message on Twitter
+  (hashtag `#jujucharms`), or talk to us in the `#juju` IRC channel on
+  freenode.
+  
+  ## More information
+  
+  To learn more about Juju visit our home page at 
+  [https://jujucharms.com](https://jujucharms.com).
+
+^# Juju 2.4.3
+
+  The Juju team is pleased to announce the release of Juju 2.4.3.
+  
+  This is a bug fix release. In particular, it fixes a backwards incompatible
+  change to `juju config` output and an intermittent agent shutdown hang.
+  
+  For the full list of fixes and additions, see the
+  [2.4.3 milestone](https://launchpad.net/juju/+milestone/2.4.3).
+
+  ## Get Juju
+  
+  The easiest way to install Juju is by using the `snap` package:
+  
+  	  sudo snap install juju --classic
+  
+  Those already using the 'stable' snap channel (the default as per the above
+  command) should be upgraded automatically. Other packages are available for a
+  variety of platforms (see the [install documentation][reference-install]).
+  
+  ## Feedback appreciated
+  
+  Let us know how you're using Juju or of any questions you may have. You can
+  join us on [Discourse][juju-discourse-forum], send us a message on Twitter
+  (hashtag `#jujucharms`), or talk to us in the `#juju` IRC channel on
+  freenode.
+  
+  ## More information
+  
+  To learn more about Juju visit our home page at 
+  [https://jujucharms.com](https://jujucharms.com).
+
+^# Juju 2.4.2
+
+  The Juju team is pleased to announce the release of Juju 2.4.2.
+
+  This is primarily a bug fix release. In particular, it changes the default
+  series for controllers from Ubuntu 16.04 LTS (Xenial) to Ubuntu 18.04 LTS
+  (Bionic).
+  
+  For the full list of fixes and additions, see the
+  [2.4.2 milestone](https://launchpad.net/juju/+milestone/2.4.2).
+
+  ## Get Juju
+  
+  The easiest way to install Juju is by using the `snap` package:
+  
+  	  sudo snap install juju --classic
+  
+  Those already using the 'stable' snap channel (the default as per the above
+  command) should be upgraded automatically. Other packages are available for a
+  variety of platforms (see the [install documentation][reference-install]).
+  
+  ## Feedback appreciated
+  
+  Let us know how you're using Juju or of any questions you may have. You can
+  join us on [Discourse][juju-discourse-forum], send us a message on Twitter
+  (hashtag `#jujucharms`), or talk to us in the `#juju` IRC channel on
+  freenode.
+  
+  ## More information
+  
+  To learn more about Juju visit our home page at 
+  [https://jujucharms.com](https://jujucharms.com).
+
 ^# Juju 2.4.1
 
   The Juju team is pleased to announce the release of Juju 2.4.1.
@@ -311,6 +414,64 @@ release notes for the 1.x series are available [here][release-notes-1].
   ## More information.
   
   To learn more about Juju visit [https://jujucharms.com][upstream-juju].
+
+^# Juju 2.3.9
+
+  The Juju team is proud to release Juju 2.3.9! 
+
+  This release is a bugfix release for Juju 2.3 which also adds support for new AWS instance types.
+  
+  ## Notable fixes
+  
+  - [LP #1770437](https://bugs.launchpad.net/juju/+bug/1770437) - juju-introspection.sh is full of bashisms, the introspection functions now use underscores to separate words, i.e. `juju-goroutines` -> `juju_goroutines`
+  - [LP #1733266](https://bugs.launchpad.net/juju/+bug/17733266) - Autodetection of subnets prevents bootstrap when there are duplicate subnet ranges
+  - [LP #1790647](https://bugs.launchpad.net/juju/+bug/1790647) - Refresh support for new aws instance types
+  - [LP #1789211](https://bugs.launchpad.net/juju/+bug/1789211) - Can't close/open ports without external network
+  
+  Additional bugs fixed can be found in the
+  [milestone page](https://launchpad.net/juju/2.3/2.3.9).
+  
+  ## How do I get it?
+  
+  The best way to get your hands on this release of Juju is to install it as a snap package:
+               
+      sudo snap install juju --classic --channel=2.3/stable
+  
+  Other packages are available for a variety of platforms:
+  
+  **Using a PPA**  
+  To install the most recent stable version using a PPA:
+  
+      sudo add-apt-repository -yu ppa:juju/2.3
+      sudo apt install juju
+  
+  **macOS**  
+  Install Juju on macOS with Homebrew. Simply enter the following into a terminal:
+  
+      brew install juju
+  
+  And upgrade Juju with the following:
+  
+      brew upgrade juju
+  
+  **Windows**  
+  A Windows installer is available for Juju and can be found here:
+  
+  [juju-setup-2.3.9-signed.exe](https://launchpad.net/juju/2.3/2.3.9/+download/juju-setup-2.3.9-signed.exe) ([md5](https://launchpad.net/juju/2.3/2.3.9/+download/juju-setup-2.3.9-signed.exe/+md))
+  
+  Those subscribed to a snap channel should be automatically upgraded. If you’re
+  using the PPA or homebrew, you should see an upgrade available.
+  
+  ## Feedback appreciated.
+  
+  We encourage everyone to let us know how you're using Juju. You can send us a
+  message on Twitter using `#jujucharms`, join us in the freenode IRC channel
+  `#juju`, or subscribe to the [Juju Discourse forum][juju-discourse-forum].
+  
+  ## More information
+  
+  To learn more about Juju visit
+  [https://jujucharms.com](https://jujucharms.com).
 
 ^# Juju 2.3.8
 

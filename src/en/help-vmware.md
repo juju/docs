@@ -13,24 +13,80 @@ it to the list of known clouds.
 
 ## Adding a vSphere cloud
 
-To make Juju aware of your vSphere installation, you will need to define it
-within a YAML file containing the following values:
+Use the interactive `add-cloud` command to add your vSphere cloud to Juju's
+list of clouds. You will need to supply a name you wish to call your cloud, the
+IP address of the vSphere server, and a region name.
 
-  - **cloudname**: an arbitrary name for your own reference
-  - **endpoint**: the IP address of the VMware server
-  - **region name**: a named region for each data centre
+For the manual method of adding a vSphere cloud, see below section
+[Manually adding a vSphere cloud][#manually-adding-a-vSphere-cloud].
 
-You will also need the name of one or more data centres. These can be listed
-within the vSphere web client by selecting 'vCenter Inventory
-Lists > Resources > Datacenters' from the hierarchical menu on the left. The
-values you need are listed in the 'Name' column, such as the 'dc0' and 'dc1'
-data centres shown here:
+```bash
+juju add-cloud
+```
+
+Example user session:
+
+```no-highlight
+Cloud Types
+  maas
+  manual
+  openstack
+  oracle
+  vsphere
+
+Select cloud type: vsphere
+
+Enter a name for your vsphere cloud: myvscloud
+
+Enter the API endpoint url for the cloud: 178.18.42.10
+
+Enter region name: dc0
+
+Enter another region? (Y/n): y
+
+Enter region name: dc1
+
+Enter another region? (Y/n): n
+
+Cloud "myvscloud" successfully added
+You may bootstrap with 'juju bootstrap myvscloud'
+```
+
+The 'API endpoint url' in this case is the IP address of the vSphere server.
+We have also specified multiple regions ("data centres" in vSphere
+terminology).
+
+Now confirm the successful addition of the cloud:
+
+```bash
+juju clouds
+```
+
+<!-- JUJUVERSION: 2.0.1-trusty-amd64 -->
+<!-- JUJUCOMMAND: juju clouds -->
+```no-highlight
+Cloud        Regions  Default        Type        Description
+.
+.
+.
+myvscloud          2  dc0            vsphere
+```
+
+### Manually adding a vSphere cloud
+
+This example covers manually adding a vSphere cloud to Juju (see
+[Adding clouds manually][clouds-adding-manually] for background information).
+
+You will need the name of one or more data centres. These can be listed within
+the vSphere web client by selecting 'vCenter Inventory Lists > Resources >
+Datacenters' from the hierarchical menu on the left. The values you need are
+listed in the 'Name' column, such as the 'dc0' and 'dc1' data centres shown
+here:
 
 ![vSphere web client showing data centres](./media/config-vsphere-datacenters.png)
 
-With a **cloudname** of `myvscloud`, an **endpoint** of `178.18.42.10` and two
-data centres named 'dc0' and 'dc1' respectively, a basic configuration would
-look similar to this:
+The manual method necessitates the use of a [YAML-formatted][yaml]
+configuration file. Here is an example:
 
 ```yaml
 clouds:
@@ -42,25 +98,18 @@ clouds:
    dc0: {}
    dc1: {}
 ```
-To add the above cloud definition to Juju, enter the following:
+
+To add cloud 'myvscloud', assuming the configuration file is
+`vsphere-cloud.yaml` in the current directory, we would run:
 
 ```bash
-juju add-cloud myvscloud <YAML file>
-```
-
-You can check whether your vSphere installation has been added correctly by
-looking for the following in the output from `juju clouds`:
-
-<!-- JUJUVERSION: 2.0.1-trusty-amd64 -->
-<!-- JUJUCOMMAND: juju clouds -->
-```no-highlight
-Cloud        Regions  Default        Type        Description
-aws               11  us-east-1      ec2         Amazon Web Services
-...
-myvscloud          2  dc0            vsphere
+juju add-cloud myvscloud vsphere-cloud.yaml
 ```
 
 ## Adding credentials
+
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
 
 Credentials can be added by typing `juju add-credential`, followed by the name
 of the cloud you wish to add credentials for. This would be `myvscloud` in the
@@ -69,6 +118,7 @@ above example:
 ```bash
 juju add-credential myvscloud
 ```
+
 The process now becomes interactive. You will first be asked for an arbitrary
 name for this credential, which you choose for yourself, followed by the
 username and password for your VMware installation.
@@ -162,7 +212,10 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
+[#manually-adding-a-vSphere-cloud]: #manually-adding-a-vsphere-cloud
+[clouds-adding-manually]: ./clouds.md#adding-clouds-manually
 [rscontrolpanel]: https://mycloud.rackspace.com
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials]: ./credentials.md

@@ -1,31 +1,52 @@
-Title: Creating a Juju Controller
-TODO:  Improve examples
-       Hardcoded: Ubuntu code names
-       Update default controller release (to "latest LTS") and remove Note once 18.04.1 released
-
+Title: Creating a controller
+TODO:  Hardcoded: Ubuntu code names
 
 # Creating a controller
 
-Use the `juju bootstrap` command to create a controller (and 'default' model)
-for a given cloud:
+The `bootstrap` command is used to create a controller for a given cloud:
 
-`juju bootstrap [options] <cloud name> [<controller name>]`
+`juju bootstrap <cloud name> [<controller name>]`
 
-See `juju help bootstrap` for details on this command or see the
-[Juju command reference][commands] page.
-
-The `<controller name>` is optional. If one is not supplied, then a name is
+The controller name is optional. If one is not supplied, then a name is
 assigned based on the cloud and region.
 
 To learn about configuration options available at bootstrap time, see:
 
- - [Configuring controllers][controlconfig]
- - [Configuring models][modelconfig]
+ - [Configuring controllers][controllers-config]
+ - [Configuring models][models-config]
  - [Using constraints][charms-constraints]
 
 ## Examples
 
-### Set default model constraints for a given controller
+This list of examples provides a good overview of the different things that can
+be done at controller-creation time:
+
+ - [Create a controller interactively][#create-a-controller-interactively]
+ - [Set default model constraints for a controller][#set-default-model-constraints-for-a-controller]
+ - [Set controller constraints for a new controller][#set-controller-constraints-for-a-new-controller]
+ - [Create a controller of a specific series][#create-a-controller-of-a-specific-series]
+ - [Create a controller using configuration values][#create-a-controller-using-configuration-values]
+ - [Create a controller using a non-default region][#create-a-controller-using-a-non-default-region]
+ - [Create a controller using a different MongoDB profile][#create-a-controller-using-a-different-mongodb-profile]
+ - [Change timeout and retry delays][#change-timeout-and-retry-delays]
+ - [Create a new controller without changing contexts][#create-a-new-controller-without-changing-contexts]
+ - [Configuring/enabling a remote syslog server][#configuring/enabling-a-remote-syslog-server]
+ - [Placing a controller on a specific MAAS node][#placing-a-controller-on-a-specific-maas-node]
+ - [Specifying an agent version][#specifying-an-agent-version]
+ - [Passing a cloud-specific setting][#passing-a-cloud-specific-setting]
+
+### Create a controller interactively
+
+You can create a controller interactively like this:
+
+```bash
+juju bootstrap
+```
+
+You will be prompted for what cloud and region to use as well as the controller
+name. Do not use this method if you want to specify anything else.
+
+### Set default model constraints for a controller
 
 Below, all machines (including the controller) in the LXD controller's models
 will have at least 4GiB of memory:
@@ -48,36 +69,29 @@ given via `--bootstrap-constraints` will be used.
 
 ### Create a controller of a specific series
 
-The controller will be deployed upon Ubuntu 16.04 LTS (Xenial) by default.
+The controller will be deployed upon Ubuntu 18.04 LTS (Bionic) by default.
     
-For our example, we name the resulting LXD controller 'lxd-xenial' to reflect
+For our example, we name the resulting LXD controller 'lxd-bionic' to reflect
 that:
 
 ```bash
-juju bootstrap localhost lxd-xenial
+juju bootstrap localhost lxd-bionic
 ```
-
-!!! Note:
-    The default release will change from Xenial to Ubuntu 18.04 LTS (Bionic)
-    once 18.04.1 is released (July 2018).
 
 To select a different series the `--bootstrap-series` option is used.
 
-Below, a google (GCE) controller based on Ubuntu 18.04 LTS (Bionic) is
-requested explicitly (and is given the name 'gce-bionic'):
+Below, a google (GCE) controller based on Ubuntu 16.04 LTS (Xenial) is
+requested explicitly (and is given the name 'gce-xenial'):
 
 ```bash
-juju bootstrap --bootstrap-series=bionic google gce-bionic
+juju bootstrap --bootstrap-series=xenial google gce-xenial
 ```
 
-### Create a Rackspace controller using a daily image
+### Create a controller using configuration values
 
-The example uses a previously defined configuration file called 
-config-rackspace.yaml. 
-
-Note that values passed using '--config' will take precedence
-over values included in a file. This is important if you use both a config
-file and state one or more config values while bootstrapping.
+This example uses a previously defined configuration file called
+config-rackspace.yaml as well as individual configuration values. The latter
+values take precedence over those included in the file:
 
 ```bash
 juju bootstrap \
@@ -88,17 +102,16 @@ juju bootstrap \
 
 ### Create a controller using a non-default region
 
-The [Clouds][clouds] page details listing available clouds and how the list
-denotes default regions for each. To specify a different region during
-controller creation, use:
+The `clouds` command lists available clouds and denotes a default region for
+each. To specify a different region during controller creation:
 
 ```bash
 juju bootstrap aws/us-west-2 mycontroller
 ```
 
-This is an instance where using the default controller name could be especially
-handy, as omitting the `mycontroller` name will cause your new controller to be
-named using the non-default region, specifically naming it `aws-us-west-2`:
+This is where omitting a custom controller name could be appropriate, as doing
+so will result in a name based on the non-default region. Here the controller
+would be named 'aws-us-west-2':
 
 ```bash
 juju bootstrap aws/us-west-2
@@ -133,16 +146,11 @@ from 10 minutes to 15, enter the value in seconds:
 juju bootstrap --config bootstrap-timeout=900 localhost lxd-faraway
 ```
 
-### Changing the current model/controller
+### Create a new controller without changing contexts
 
-By default, when Juju bootstraps a new controller, it will also 'switch' to
-that controller and the default model created with it. Any subsequent Juju
-commands which do not specify a controller/model will be assumed to apply to
-this model.
-
-In some cases (e.g. when scripting Juju) this may not be desirable. It is
-possible to add a `--no-switch` option to the bootstrap command to prevent the
-new controller from being automatically selected. For example:
+When a new controller is created, by default, the context will change to the
+'default' model of that controller. In some cases (e.g. when scripting) this
+may not be desirable. The `--no-switch` option disables this behaviour:
 
 ```bash
 juju bootstrap --no-switch localhost lxd-new
@@ -164,6 +172,14 @@ juju bootstrap azure --config logforward-enabled=true --config logconfig.yaml
 
 See [Remote logging][troubleshooting-logs-remote] for a more thorough treatment
 of log forwarding.
+
+### Placing a controller on a specific MAAS node
+
+To create a controller and have it run on a specific MAAS node:
+
+```bash
+juju bootstrap maas-prod --to <host>.maas
+```
 
 ### Specifying an agent version
 
@@ -212,10 +228,22 @@ juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
 
 <!-- LINKS -->
 
-[clouds]: ./clouds.html
-[charms-constraints]: ./charms-constraints.html
-[commands]: ./commands.html#juju-bootstrap
-[controlconfig]: ./controllers-config.html "Configuring Juju controllers"
-[modelconfig]: ./models-config.html "Configuring Juju models"
-[troubleshooting-logs-remote]: ./troubleshooting-logs-remote.html
-[agent-versions-and-streams]: ./models-config.html#agent-versions-and-streams
+[charms-constraints]: ./charms-constraints.md
+[controllers-config]: ./controllers-config.md
+[models-config]: ./models-config.md
+[troubleshooting-logs-remote]: ./troubleshooting-logs-remote.md
+[agent-versions-and-streams]: ./models-config.md#agent-versions-and-streams
+
+[#create-a-controller-interactively]: #create-a-controller-interactively
+[#set-default-model-constraints-for-a-controller]: #set-default-model-constraints-for-a-controller
+[#set-controller-constraints-for-a-new-controller]: #set-controller-constraints-for-a-new-controller
+[#create-a-controller-of-a-specific-series]: #create-a-controller-of-a-specific-series
+[#create-a-controller-using-configuration-values]: #create-a-controller-using-configuration-values
+[#create-a-controller-using-a-non-default-region]: #create-a-controller-using-a-non-default-region
+[#create-a-controller-using-a-different-mongodb-profile]: #create-a-controller-using-a-different-mongodb-profile
+[#change-timeout-and-retry-delays]: #change-timeout-and-retry-delays
+[#create-a-new-controller-without-changing-contexts]: #create-a-new-controller-without-changing-contexts
+[#configuring/enabling-a-remote-syslog-server]: #configuring/enabling-a-remote-syslog-server
+[#placing-a-controller-on-a-specific-maas-node]: #placing-a-controller-on-a-specific-maas-node
+[#specifying-an-agent-version]: #specifying-an-agent-version
+[#passing-a-cloud-specific-setting]: #passing-a-cloud-specific-setting

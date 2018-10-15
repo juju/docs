@@ -1,118 +1,99 @@
 navigation:
 
-  - title: About Juju
-    location: about-juju.md
-
-  - title: Try it out
-    location: getting-started.md
-
-  - title: Install Juju
-    location: reference-install.md
-
-  - title: What's new in 2.5
-    location: whats-new.md
-
-  - title: Concepts
-    location: juju-concepts.md
-
-  - title: Tutorials
+  - title: Introduction
 
     children:
-      - title: Local Juju with LXD cloud
-        location: tut-lxd.md
-      - title: Controllers and Models
-        location: tut-google.md
-      - title: Sharing and Users
-        location: tut-users.md
+      - title: Home
+        location: index.md
+      - title: Install Juju
+        location: reference-install.md
+      - title: Concepts
+        location: juju-concepts.md
 
-  - title: User Guide
+  - title: Using Juju
 
     children:
       - title: Clouds
         location: clouds.md
+      - title: Credentials
+        location: credentials.md
+      - title: Creating a controller
+        location: controllers-creating.md
+      - title: Deploying applications
+        location: charms-deploying.md
+      - title: Using constraints
+        location: charms-constraints.md
+      - title: Configuring applications
+        location: charms-config.md
+      - title: Managing relations
+        location: charms-relations.md
+      - title: Removing things
+        location: charms-destroy.md
 
-      - title: Using Juju
-        location: charms.md
+  - title: Administering Juju
 
-        children:
-          - title: Creating a controller
-            location: controllers-creating.md
-          - title: Deploying applications
-            location: charms-deploying.md
-          - title: Using constraints
-            location: charms-constraints.md
-          - title: Application configuration
-            location: charms-config.md
-          - title: Managing relations
-            location: charms-relations.md
-          - title: Removing things
-            location: charms-destroy.md
-
-      - title: Administering Juju
-        location: charms.md
-
-        children:
-          - title: Juju users
-            location: users.md
-          - title: Scaling up and down
-            location: charms-scaling.md
-          - title: Upgrading applications
-            location: charms-upgrading.md
-          - title: Updating a machine series
-            location: howto-updateseries.md
-          - title: Controller backups
-            location: controllers-backup.md
-          - title: Controller high availability
-            location: controllers-ha.md
-          - title: Application high availability
-            location: charms-ha.md
-
-      - title: Advanced topics
-
-        children:
-          - title: Charm bundles
-            location: charms-bundles.md
-          - title: Using storage
-            location: charms-storage.md
-          - title: Working with actions
-            location: actions.md
-          - title: Working with resources
-            location: charms-resources.md
-          - title: Private cloud metadata
-            location: howto-privatecloud.md
-          - title: Tools
-
-      - title: Networking
-
-        children:
-          - title: Working offline
-            location: charms-offline.md
-          - title: Fan container networking
-            location: charms-fan.md
-          - title: Network spaces
-            location: network-spaces.md
-
+    children:
+      - title: Juju users
+        location: users.md
+      - title: Scaling up and down
+        location: charms-scaling.md
+      - title: Upgrading applications
+        location: charms-upgrading.md
+      - title: Updating a machine series
+        location: upgrade-series.md
+      - title: Controller backups
+        location: controllers-backup.md
+      - title: Controller high availability
+        location: controllers-ha.md
+      - title: Application high availability
+        location: charms-ha.md
       - title: Troubleshooting
         location: troubleshooting.md
+
+  - title: Advanced topics
+
+    children:
+      - title: Charm bundles
+        location: charms-bundles.md
+      - title: Using storage
+        location: charms-storage.md
+      - title: Working with actions
+        location: actions.md
+      - title: Working with resources
+        location: charms-resources.md
+      - title: Cloud image metadata
+        location: howto-privatecloud.md
+      - title: Tools
+        location: tools.md
+
+  - title: Networking
+
+    children:
+      - title: Working offline
+        location: charms-offline.md
+      - title: Fan container networking
+        location: charms-fan.md
+      - title: Network spaces
+        location: network-spaces.md
 
   - title: Miscellaneous
 
     children:
       - title: Juju GUI
         location: controllers-gui.md
-      - title: Disable Juju commands
+      - title: Disabling commands
         location: juju-block.md
       - title: CentOS support
         location: juju-centos.md
       - title: Juju plugins
         location: juju-plugins.md
-      - title: Configure metrics gathering with Prometheus
+      - title: Collecting Juju metrics
         location: howto-prometheus.md
-      - title: Groups of applications
+      - title: Application groups  
         location: charms-service-groups.md
       - title: Working with units
         location: charms-working-with-units.md
-      - title: Viewing utilization with metrics
+      - title: Application metrics
         location: charms-metrics.md
       - title: Exposing applications
         location: charms-exposing.md
@@ -120,12 +101,10 @@ navigation:
         location: controllers.md
       - title: Models
         location: models.md
-      - title: Cloud credentials
-        location: credentials.md
       - title: Juju client
         location: client.md
-
-  - title: Developer Guide
+      - title: About Juju
+        location: about-juju.md
 
   - title: Reference
 
@@ -136,11 +115,11 @@ navigation:
         location: commands.md
       - title: Juju constraints
         location: reference-constraints.md
-      - title: Juju Charm Hooks
+      - title: Juju charm hooks
         location: reference-charm-hooks.md
       - title: Juju environment variables
         location: reference-environment-variables.md
-      - title: Juju Hook Tools
+      - title: Juju hook tools
         location: reference-hook-tools.md
       - title: metadata.yaml
         location: authors-charm-metadata.md
@@ -153,7 +132,9 @@ navigation:
 
   - title: Contact us
     location: contact-us.md
+
   - title: Help improve these docs
     location: contributing.md
+
   - title: Report a docs issue
     location: https://github.com/juju/docs/issues/new

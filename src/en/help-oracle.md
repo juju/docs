@@ -1,4 +1,5 @@
 Title: Using Oracle Compute with Juju
+TODO:  Review required
 
 # Using Oracle Compute with Juju
 
@@ -6,10 +7,6 @@ Juju has built-in support for [Oracle Compute][oracle-compute], Oracle's public
 cloud. This means that there is no need to add the Oracle cloud to Juju. An
 exception to this is if you have an Oracle Compute trial account. Both types of
 accounts, paid and trial, are covered here.
-
-!!! Warning:
-    Support for Oracle Compute is new (since Juju 2.2) and some sub-optimal
-    traits may still be observed.
 
 This page will cover the following steps:
 
@@ -149,6 +146,9 @@ is tied to your trial account.
 
 ## Adding credentials
 
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
 Use the interactive `add-credential` command to add your credentials to your
 cloud. Below, we add credentials to the trial account cloud:
 
@@ -270,10 +270,10 @@ See these pages for ideas on what to do next:
 <!-- LINKS -->
 
 [oracle-compute]: https://cloud.oracle.com/en_US/compute
-[jujubeta]: ./reference-install.html#getting-development-releases
 [cloudoracle]: https://cloud.oracle.com/home
-[getstarted]: ./getting-started-jaas.html
-[spaces]: ./network-spaces.html
+[getstarted]: ./getting-started-jaas.md
+[spaces]: ./network-spaces.md
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials]: ./credentials.md

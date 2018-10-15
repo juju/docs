@@ -75,22 +75,44 @@ details.
 
 ## Deploying to specific machines
 
-To deploy to specific, pre-existing machines the `--to` option is used. When
-this is done, unless the machine was created via `add-machine`, a charm has
-already been deployed to the machine.  
+To deploy to specific machines the `--to` option is used. When this is done,
+unless the machine was created via `add-machine`, a charm has already been
+deployed to the machine.  
 
-!!! Note:
+!!! Warning:
     When multiple charms are deployed to the same machine there exists the
     possibility of conflicting configuration files (on the machine's
-    filesystem). Work is being done to rectify this.
+    filesystem).
 
-Machines are often referred to by their ID number. This is a simple integer
-that is shown in the output to `juju status` (or `juju machines`). For example,
-this partial output shows a machine with an ID of '2':
+The `--to` option can be used with commands `bootstrap`, `deploy`, and
+`add-unit`.
+
+To apply this option towards an existing Juju machine, the machine ID is used.
+This is an integer that is shown in the output to `juju status` (or
+`juju machines`). For example, this partial output shows a machine with an ID
+of '2':
 
 ```no-highlight
 Machine  State    DNS           Inst id        Series  AZ  Message
 2        started  10.132.70.65  juju-79b3aa-0  xenial      Running
+```
+
+The above works well with `deploy` and `add-unit` as will be shown below. As
+for `bootstrap` the `--to` option is limited to either pointing to a MAAS node
+or, starting in `v.2.5`, to a LXD cluster node.
+
+Assuming a MAAS cloud named 'maas-prod' exists and has a node called
+'node2.maas':
+
+```bash
+juju bootstrap maas-prod --to node2.maas
+```
+
+Assuming a LXD cluster cloud named 'lxd-cluster' exists and has a node called
+'node3':
+
+```bash
+juju bootstrap lxd-cluster --to node3
 ```
 
 ### deploy --to
@@ -113,34 +135,33 @@ juju deploy --to 0 rabbitmq-server
 ```
 
 Juju treats a container like any other machine so it is possible to target
-specific containers as well. Here we deploy to containers in two different
+specific containers as well. Here we deploy to containers in three different
 ways:
 
 ```bash
-juju deploy nginx --to 24/lxd/3
+juju deploy mariadb --to lxd
 juju deploy mongodb --to lxd:25
+juju deploy nginx --to 24/lxd/3
 ```
 
-In the first case above, nginx is deployed to existing container '3' on machine
-'24'. In the second case, MongoDB is deployed to a **new** container on machine
-'25'. The latter is an exception to the rule that the `--to` option is always
-used in conjunction with a pre-existing machine.
+In the first case, mariadb is deployed to a container on a new machine. In the
+second case, MongoDB is deployed to a new container on existing machine '25'.
+In the third case, nginx is deployed to existing container '3' on existing
+machine '24'.
 
-It is also possible to deploy units using *placement directives* as arguments
-to the `--to` option. Placement directives are cloud-specific:
+Some clouds support special arguments to the `--to` option, where instead of a
+machine you can specify a zone. In the case of MAAS or a LXD cluster a node can
+be specified:
 
 ```bash
 juju deploy mysql --to zone=us-east-1a
-juju deploy mediawiki --to host.mass
+juju deploy mediawiki --to node1.maas
+juju deploy mariadb --to node1.lxd
 ```
-
-The first example deploys to a specific AWS zone while the second example
-deploys to a named machine in MAAS.
 
 ### add-unit --to
 
-The `add-unit` command also supports the `--to` option, including placement
-directives. For example, to add a unit of 'rabbitmq-server' to machine '1':
+To add a unit of 'rabbitmq-server' to machine '1':
 
 ```bash
 juju add-unit --to 1 rabbitmq-server
@@ -150,13 +171,21 @@ A comma separated list of directives can be provided to cater for the case
 where more than one unit is being added:
 
 ```bash
-juju add-unit rabbitmq-server -n 4 --to zone=us-west-1a,zone=us-east-1b
-juju add-unit rabbitmq-server -n 4 --to host1,host2,host3,host4
+juju add-unit rabbitmq-server -n 3 --to host1.maas,host2.maas,host3.maas
 ```
 
-Any extra placement directives are ignored. If not enough placement directives
-are supplied, then the remaining units will be assigned as normal to a new,
-clean machine.
+If the number of values is less than the number of requested units the
+remaining units, as per normal behaviour, will be deployed to new machines:
+
+```bash
+juju add-unit rabbitmq-server -n 4 --to zone=us-west-1a,zone=us-east-1b
+```
+
+Any surplus values are ignored:
+
+```bash
+juju add-unit rabbitmq-server -n 2 --to node1.lxd,node2.lxd,node3.lxd
+```
 
 The `add-unit` command is often associated with scaling out. See the
 [Scaling applications][charms-scaling] page for information on that topic.
@@ -260,12 +289,12 @@ mediawiki page.
 
 <!-- LINKS -->
 
-[charms-deploying]: ./charms-deploying.html
-[network-spaces]: ./network-spaces.html
-[charms-bundles-endpoints]: ./charms-bundles.html#binding-endpoints-of-applications-within-a-bundle
-[extra-bindings]: ./authors-charm-metadata.html#extra-bindings-field
-[clouds-maas]: ./clouds-maas.html
-[charms-contraints-spaces]: ./charms-constraints.html#adding-a-machine-with-constraints
-[concepts-endpoint]: ./juju-concepts.html#endpoint
-[charms-upgrading-forced]: ./charms-upgrading.html#forced-upgrades
-[charms-scaling]: ./charms-scaling.html
+[charms-deploying]: ./charms-deploying.md
+[network-spaces]: ./network-spaces.md
+[charms-bundles-endpoints]: ./charms-bundles.md#binding-endpoints-of-applications-within-a-bundle
+[extra-bindings]: ./authors-charm-metadata.md#extra-bindings-field
+[clouds-maas]: ./clouds-maas.md
+[charms-contraints-spaces]: ./charms-constraints.md#adding-a-machine-with-constraints
+[concepts-endpoint]: ./juju-concepts.md#endpoint
+[charms-upgrading-forced]: ./charms-upgrading.md#forced-upgrades
+[charms-scaling]: ./charms-scaling.md

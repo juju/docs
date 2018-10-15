@@ -24,6 +24,9 @@ juju update-clouds
 
 ## Adding credentials
 
+The [Cloud credentials][credentials] page offers a full treatment of credential
+management.
+
 Several steps are required to add Azure credentials to Juju:
 
  - Install the CLI tool
@@ -189,12 +192,13 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
-[updating-remote-credentials]: ./credentials.html#updating-remote-credentials
+[updating-remote-credentials]: ./credentials.md#updating-remote-credentials
 [azureportal]: http://portal.azure.com
 [azurecli]: https://docs.microsoft.com/en-us/cli/azure/overview 
 [azuretwoinstall]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-[manually-adding-azure-credentials]: ./help-azure-advanced.html#manually-adding-azure-credentials
-[azure-availability-sets]: ./charms-ha.html#azure-availability-sets
+[manually-adding-azure-credentials]: ./help-azure-advanced.md#manually-adding-azure-credentials
+[azure-availability-sets]: ./charms-ha.md#azure-availability-sets
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
+[credentials]: ./credentials.md

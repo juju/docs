@@ -1,8 +1,8 @@
-Title: Juju models
-TODO:  Convert to abstract links
+Title: Models
+TODO:  Review required. Convert to abstract links
 
 
-# Juju models
+# Models
 
 A Juju *model* is an environment associated with a *controller* (see
 [Controllers](./controllers.html)). When a controller is created two models are
