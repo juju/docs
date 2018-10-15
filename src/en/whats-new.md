@@ -13,19 +13,27 @@ If you are new to Juju, you will probably want to read the
 
 See [][].
 
-## Remote LXD support
+## Remote LXD support and LXD clustering
 
 A remote LXD cloud is now possible. Like other custom clouds, it is added via
 the enhanced `add-cloud` command. The Juju client can then request a controller
-be created on the remote LXD host. This naturally augments the already
+be created on the remote LXD host. This naturally bolsters the already
 supported LXD clustering feature; both features are expected to be used in
 tandem.
+
+Placement directives are supported for LXD clustering. You can specify upon
+which LXD host (cluster node) a Juju machine will be created. These nodes
+effectively become availability zones for a LXD clustered cloud.
 
 See [][].
 
 ## Oracle Cloud Infrastructure (OCI) support
  
-OCI is the new cloud framework from Oracle.
+<!-- check out of the box support and replacement of oracle classic -->
+OCI is the new cloud framework from Oracle and Juju now supports it out of the
+box. Juju's cloud name for this cloud is 'oci'. At this time both OCI and
+Oracle Classic are supported but it is expected that Classic will eventually
+be obsoleted.
 
 See [][].
 
@@ -45,14 +53,14 @@ See [][].
 ## CLI bundle export support
 
 A model's configuration can now be saved as a bundle at the command line using
-the new `export-bundle` command. Previously, the Juju GUI was needed to do
-this.
+the new `export-bundle` command. Previously, the Juju GUI was needed to save
+a bundle.
 
 See [][].
 
 ## New tool for comparing a bundle and model 
 
-<!-- check use cases -->
+<!-- check use cases; discourse post -->
 A model and a bundle can now be compared using the new `diff-bundle` command.
 This will help in complex enterprise setups where changes have been made to a
 model yet a new bundle deployment of the initial model is desired.
@@ -69,11 +77,19 @@ recognises certain environment variables used by OpenStack - typically via its
 
 See [][].
 
-## LXD availability zones
+## Charm Store controller configuration key added
+
+A custom Charm Store can be configured by specifying a URL during the creation
+of a controller (`bootstrap`).
 
 See [][].
 
-## Charm Store controller configuration key added
+## Charm support for LXD profiles
+
+<!-- check use cases; discourse post -->
+???????
+`status --format yaml`
+`show-machines`
 
 See [][].
 
