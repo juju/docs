@@ -102,7 +102,7 @@ It is possible to deploy applications using local charms. See
 Deployed applications usually start with a sane default configuration. However,
 for some applications it may be desirable (and quicker) to configure them at
 deployment time. This can be done whether a charm is deployed from the Charm
-Store or from a local charm. See [Application configuration][charms-config] for
+Store or from a local charm. See [Configuring applications][charms-config] for
 more on this.
 
 ## Deploying to LXD containers
