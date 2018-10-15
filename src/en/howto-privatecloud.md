@@ -1,4 +1,6 @@
 Title: Setting up image metadata for private clouds with Simplestreams
+TODO:  Critical: review required
+       Change title to: "Private cloud metadata"
 
 #  Set up image metadata for a Private OpenStack Cloud using Simplestreams
 

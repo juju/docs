@@ -3,48 +3,33 @@ navigation:
   - title: About Juju
     location: about-juju.md
 
-  - title: Take a tour
+  - title: Try it out
     location: getting-started.md
 
   - title: Install Juju
     location: reference-install.md
 
-  - title: Release notes
-    location: reference-release-notes.md
+  - title: What's new in 2.5
+    location: whats-new.md
+
+  - title: Concepts
+    location: juju-concepts.md
+
+  - title: Tutorials
+
+    children:
+      - title: Local Juju with LXD cloud
+        location: tut-lxd.md
+      - title: Controllers and Models
+        location: tut-google.md
+      - title: Sharing and Users
+        location: tut-users.md
 
   - title: User Guide
 
     children:
-      - title: Concepts
-        location: juju-concepts.md
       - title: Clouds
         location: clouds.md
-
-        children:
-          - title: Amazon AWS
-            location: help-aws.md
-          - title: Microsoft Azure
-            location: help-azure.md
-          - title: Google GCE
-            location: help-google.md
-          - title: Joyent
-            location: help-joyent.md
-          - title: LXD
-            location: clouds-LXD.md
-          - title: MAAS
-            location: clouds-maas.md
-          - title: Manual
-            location: clouds-manual.md
-          - title: OpenStack
-            location: help-openstack.md
-          - title: Private cloud metadata
-            location: howto-privatecloud.md
-          - title: Oracle Compute
-            location: help-oracle.md
-          - title: Rackspace
-            location: help-rackspace.md
-          - title: VMware vSphere
-            location: help-vmware.md
 
       - title: Using Juju
         location: charms.md
@@ -93,6 +78,8 @@ navigation:
             location: actions.md
           - title: Working with resources
             location: charms-resources.md
+          - title: Private cloud metadata
+            location: howto-privatecloud.md
           - title: Tools
 
       - title: Networking
@@ -107,16 +94,6 @@ navigation:
 
       - title: Troubleshooting
         location: troubleshooting.md
-
-  - title: Tutorials
-
-    children:
-      - title: Local Juju with LXD cloud
-        location: tut-lxd.md
-      - title: Controllers and Models
-        location: tut-google.md
-      - title: Sharing and Users
-        location: tut-users.md
 
   - title: Miscellaneous
 
@@ -147,16 +124,14 @@ navigation:
         location: credentials.md
       - title: Juju client
         location: client.md
-      - title: What's new in 2.4
-        location: whats-new.md
 
   - title: Developer Guide
 
   - title: Reference
 
     children:
-      - title: Introducing Juju 2
-        location: introducing-2.md
+      - title: Release notes
+        location: reference-release-notes.md
       - title: Juju commands
         location: commands.md
       - title: Juju constraints

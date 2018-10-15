@@ -135,7 +135,7 @@ The above steps are all you need to use most OpenStack clouds which are
 configured for general use. If this is your own cloud, you will also need to
 additionally provide stream information so that the cloud can fetch the
 relevant images for Juju to use. This is covered in the section on
-[private clouds][simplestreams]. 
+[Private cloud metadata][private-cloud-metadata]. 
 
 ## Creating a controller
 
@@ -184,7 +184,7 @@ See these pages for ideas on what to do next:
 <!-- LINKS -->
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[simplestreams]: ./howto-privatecloud.html
+[private-cloud-metadata]: ./howto-privatecloud.html
 [credentials]: ./credentials.html
 [manual-openstack]: ./clouds-openstack-manual.html
 [controllers-creating]: ./controllers-creating.md
