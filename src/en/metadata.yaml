@@ -47,8 +47,6 @@ navigation:
         location: controllers-ha.md
       - title: Application high availability
         location: charms-ha.md
-      - title: Troubleshooting
-        location: troubleshooting.md
 
   - title: Advanced topics
 
@@ -75,6 +73,14 @@ navigation:
         location: charms-fan.md
       - title: Network spaces
         location: network-spaces.md
+
+  - title: Troubleshooting
+
+    children:
+      - title: Troubleshooting guidelines
+        location: troubleshooting.md
+      - title: Juju logs
+        location: troubleshooting-logs.md
 
   - title: Miscellaneous
 
@@ -115,6 +121,8 @@ navigation:
         location: reference-hook-tools.md
       - title: metadata.yaml
         location: authors-charm-metadata.md
+      - title: Charm writing
+        location: https://docs.jujucharms.com/2.4/en/developer-getting-started
       - title: API docs
         location: http://godoc.org/github.com/juju/juju/api
       - title: Status values
