@@ -1,6 +1,6 @@
-Title: Juju client
+Title: Client
 
-# Juju client
+# Client
 
 This page covers various operations that can be applied to the Juju client, the
 software that is used to manage Juju, whether as an administrator or as a
