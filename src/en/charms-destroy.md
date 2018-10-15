@@ -1,8 +1,8 @@
-Title: Removing Juju objects
+Title: Removing things
 TODO:  remove-application|unit should mention in what circumstances the associated machine is removed (other units or containers will prevent this)
        remove-machine should mention in what circumstances the machine is not removed (other units or containers will prevent this)
 
-# Removing Juju objects
+# Removing things
 
 This section looks at how to remove the various objects you will encounter as
 you work with Juju. These are:

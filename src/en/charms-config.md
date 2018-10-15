@@ -1,6 +1,6 @@
-Title: Application configuration
+Title: Configuring applications
 
-# Application Configuration
+# Configuring applications
 
 When deploying an application, the charm you use will often support or even
 require specific configuration options to be set.

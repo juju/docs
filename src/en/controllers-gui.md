@@ -15,7 +15,7 @@ comprise them, and the machines available. Additionally, the GUI can talk with
 the charm store in order to search, browse, and deploy charms to your
 environment.
 
-# Using the GUI
+## Using the GUI
 
 Juju GUI is now automatically included in every Juju controller after 
 bootstrapping, thus eliminating the need to additionally deploy the Juju GUI 
@@ -191,6 +191,3 @@ monitoring type scenario.
     read-only mode in the GUI simply prevents actions taken within the 
     GUI from being sent to Juju, and is _not_ additional security 
     against the Juju API.
-
-
-
