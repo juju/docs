@@ -1,8 +1,8 @@
-Title: Troubleshooting
+Title: Troubleshooting guidelines
 TODO: Logs from the machines/applications
       Review required (factoid: there are 12 instances of the word 'details')
 
-# Troubleshooting
+# Troubleshooting guidelines
 
 Juju does a brilliant job at simplifying the deployment of big software at
 scale. But trying to accommodate every variation of model, cloud and connection
