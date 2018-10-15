@@ -1,5 +1,6 @@
 Title: Concepts and terms
 TODO:  developer-layers-interfaces.md also includes definitions
+       Update LXD image to reflect remote LXD clouds
 
 # Concepts and terms
 
@@ -39,7 +40,7 @@ and are used to run workloads.
 
 ![machine][img__models]
 
-See [Juju models][models] for more information.
+See [Models][models] for more information.
 
 ## Charm
 
@@ -56,7 +57,7 @@ installed within it:
 
 ![machine][img__charms]
 
-To learn more about charms see [Introduction to Juju Charms][charms].
+To see what you can do charms read the [Charms][charms] page!
 
 ## Bundle
 
@@ -204,6 +205,8 @@ system as the Juju client:
 Although LXD itself can operate over the network, Juju does not support this.
 The client *must* be local to the LXD containers.
 
+See the [Client][client] page for how to backup and upgrade the Juju client.
+
 ## Agent
 
 A Juju *agent* is software that runs on every Juju machine. There is a *machine
@@ -237,15 +240,16 @@ tweaked if desired. See
 [maas]: https://maas.io "Metal as a Service"
 [lxd]: https://linuxcontainers.org/lxd/
 [charm-store]: https://jujucharms.com/store
-[charms]: ./charms.html
+[charms]: ./charms.md
 [charms-bundles]: ./charms-bundles.md
-[charms-relations]: ./charms-relations.html 
-[clouds]: ./clouds.html
-[controllers]: ./controllers.html
-[models]: ./models.html
+[charms-relations]: ./charms-relations.md 
+[clouds]: ./clouds.md
+[controllers]: ./controllers.md
+[models]: ./models.md
+[client]: ./client.md
 [charm-store-wordpress]: https://jujucharms.com/wordpress/
-[agent-versions-and-streams]: ./models-config.html#agent-versions-and-streams
-[troubleshooting-logs#juju-agents]: ./troubleshooting-logs.html#juju-agents
+[agent-versions-and-streams]: ./models-config.md#agent-versions-and-streams
+[troubleshooting-logs#juju-agents]: ./troubleshooting-logs.md#juju-agents
 
 [img__relations]: ./media/juju-relations.png
 [img__units]: ./media/juju-machine-units.png
