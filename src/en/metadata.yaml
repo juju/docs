@@ -33,9 +33,7 @@ navigation:
   - title: Administering Juju
 
     children:
-      - title: Juju users
-        location: users.md
-      - title: Scaling up and down
+      - title: Scaling applications
         location: charms-scaling.md
       - title: Upgrading applications
         location: charms-upgrading.md
@@ -47,6 +45,8 @@ navigation:
         location: controllers-ha.md
       - title: Application high availability
         location: charms-ha.md
+      - title: Juju users
+        location: users.md
 
   - title: Advanced topics
 
@@ -85,7 +85,7 @@ navigation:
   - title: Miscellaneous
 
     children:
-      - title: Juju GUI
+      - title: The Juju GUI
         location: controllers-gui.md
       - title: Disabling commands
         location: juju-block.md
@@ -127,8 +127,6 @@ navigation:
         location: http://godoc.org/github.com/juju/juju/api
       - title: Status values
         location: reference-status.md
-      - title: Machine/unit numbering
-        location: reference-numbering.md
 
   - title: Contact us
     location: contact-us.md
