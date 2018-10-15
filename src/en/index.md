@@ -14,7 +14,6 @@ homepage: true
         <div class="u-equal-height">
             <div class="col-6">
                 <h2>Getting started</h2>
-                <p>Juju works with public cloud, private clouds, and locally with LXD.</p>
                 <p><a href="/en/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
             </div>
             <div class="col-6 u-align--right">
@@ -26,18 +25,16 @@ homepage: true
             <div class="col-6">
                 <h2>What's new</h2>
                 <ul class="p-list">
+                    <li class="p-list__item"><a href="/en/whats-new">New features in 2.5&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item"><a href="/en/troubleshooting">Troubleshooting&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item"><a href="/en/reference-release-notes">Release notes&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/tut-lxd">Using Juju locally (LXD)&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
             <div class="col-6">
                 <h2>Explore Juju</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/en/reference-install">Install Juju&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/juju-concepts">Concepts and terms&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/tut-google">Working with controllers and models&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/tut-users">Working with users&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/tut-lxd">Using Juju locally with LXD&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/tut-users">A multi-user cloud&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>
