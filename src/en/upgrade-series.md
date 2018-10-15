@@ -1,7 +1,13 @@
-Title: Updating a machine series
+Title: Upgrading a machine series
 TODO:  warning: ubuntu code names hardcoded
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1797399
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1797593
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1797595
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1797388
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1797396
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1797968
 
-# Updating a machine series
+# Upgrading a machine series
 
 Starting with Juju `v.2.5.0`, to upgrade the series of a machine, the
 `upgrade-series` command is used.
@@ -18,11 +24,8 @@ Here is an overview of the process:
  1. The user initiates the upgrade.
     1. The machine is removed from the pool of available machines in the sense
        that charms can not be deployed upon it.
-    1. A minimum amount of the machine's software is upgraded and some changes 
-       internal to Juju are made. 
+    1. Juju prepares the machine for the upcoming OS upgrade.
     1. All units on the machine are taken into account.
-    1. At the end of this step, from Juju's standpoint, the machine is now
-       running the target operating system.
  1. The user manually performs the upgrade of the operating system and makes
     any other necessary changes. This should be accompanied by a maintenance
     window managed by the user.
@@ -32,9 +35,10 @@ Here is an overview of the process:
 At no time does Juju take any action to prevent the machine from servicing
 workload client requests.
 
-In the examples that follow, the machine in question has an ID of '1' and we'll
-be moving from Ubuntu 16.04 LTS (Xenial) to Ubuntu 18.04 LTS (Bionic).
-    
+In the examples that follow, the machine in question has an ID of '1', will
+have one unit of 'apache2' deployed, and will be upgraded from Ubuntu 16.04 LTS
+(Xenial) to Ubuntu 18.04 LTS (Bionic).
+
 ### Initiating the upgrade
 
 You initiate the upgrade with the `prepare` sub-command, the machine ID, and
@@ -47,20 +51,39 @@ juju upgrade-series prepare 1 bionic
 You will be asked to confirm the procedure. Use the `--agree` option to avoid
 this prompt.
 
+Then output will be shown, such as:
+
+```no-highlight
+leadership pinned for application "apache2"
+machine-1 started upgrade series from series xenial to series bionic
+apache2/0 pre-series-upgrade hook running
+apache2/0 pre-series-upgrade not found, skipping
+machine-1 all necessary binaries and service files written
+
+Juju is now ready for the series to be updated.
+Perform any manual steps required along with "do-release-upgrade".
+When ready run the following to complete the upgrade series process:
+
+juju upgrade-series complete 1
+```
+
 All charms associated with the machine must support the target series in order
 for the command to complete successfully. An error will be emitted otherwise.
+There is a `--force` option available but it should be used with caution.
 
 The deployed charms will be inspected for a 'pre-series-upgrade' hook. If such
-a hook exists, it will be run. 
+a hook exists, it will be run. In our example, such a hook was not found in the
+charm.
 
 ### Upgrading the operating system
 
 One important step in upgrading the operating system is the upgrade of all
-software packages. Apply the standard `do-release-upgrade` command to the
-machine via SSH:
+software packages. To do this, log in to the machine via SSH and apply the
+standard `do-release-upgrade` command:
 
 ```bash
-juju ssh 1 do-release-upgrade
+juju ssh 1
+$ do-release-upgrade
 ```
 
 As a resource, use the [Ubuntu Server Guide][serverguide-upgrade]. Also be sure
@@ -77,8 +100,21 @@ that's done, tell Juju that the machine is ready:
 juju upgrade-series complete 1
 ```
 
+Sample output:
+
+```no-highlight
+machine-1 complete phase started
+machine-1 starting all unit agents after series upgrade
+apache2/0 post-series-upgrade hook running
+apache2/0 post-series-upgrade not found, skipping
+leadership unpinned for application "apache2"
+
+Upgrade series for machine "1" has successfully completed
+```
+
 Deployed charms will be inspected for a 'post-series-upgrade' hook. If such a
-hook exists, it will be run. 
+hook exists, it will be run. In our example, such a hook was not found in the
+charm.
 
 You're done. The machine is now fully upgraded and is an active Juju machine.
 
