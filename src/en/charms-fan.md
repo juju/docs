@@ -1,9 +1,9 @@
-Title: Juju and Fan networking
+Title: Fan container networking
 TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1733354 (remove constraints Note if no longer required)
        hardcoded: default AWS instance type of 'm3.medium'
        consider a third example: manually configure the Fan with Azure
 
-# Juju and Fan networking
+# Fan container networking
 
 Fan networking addresses a need raised by the proliferation of container usage
 in an IPv4 context: the ability to manage the address space such that network
