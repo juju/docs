@@ -190,6 +190,14 @@ variables and is parsed by the above command as part of the scanning process.
 For background information on this method read section
 [Adding credentials from environment variables][credentials-adding-from-variables].
 
+## Images and private clouds
+
+The above steps are all you need to use most OpenStack clouds which are
+configured for general use. If this is your own cloud, you will also need to
+additionally provide stream information so that the cloud can fetch the
+relevant images for Juju to use. This is covered in the section on
+[Cloud cloud metadata][cloud-image-metadata]. 
+
 ## Creating a controller
 
 Once the image metadata has been gathered, either locally or via a registered

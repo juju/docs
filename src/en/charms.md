@@ -16,7 +16,7 @@ Common charm-related tasks are listed below.
  - [Managing relations][charms-relations]
  - [Exposing applications][charms-exposing]
  - [Scaling applications][charms-scaling]
- - [Removing applications and units][charms-destroy]
+ - [Removing things][charms-destroy]
  - [Upgrading applications][charms-upgrading]
  - [Working offline][charms-offline]
  - [Using storage][charms-storage]
@@ -25,8 +25,8 @@ Common charm-related tasks are listed below.
  - [Working with units][charms-working-with-units]
  - [Working with actions][charms-actions]
  - [Working with resources][charms-resources]
- - [Viewing utilization with metrics][charms-metrics]
- - [Grouping applications][charms-service-groups]
+ - [Application metrics][charms-metrics]
+ - [Application groups][charms-service-groups]
 
 
 <!-- LINKS -->
