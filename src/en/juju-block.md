@@ -1,6 +1,6 @@
-Title: Restricting changes to the running Juju environment
+Title: Disabling commands
 
-# Restricting changes to running models
+# Disabling commands
 
 Deployed models can be protected from unintentional changes by disabling
 commands that can alter a model.

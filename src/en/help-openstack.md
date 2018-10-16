@@ -17,9 +17,20 @@ images are set up. This is covered in
 
 ## Adding an OpenStack Cloud
 
-Use the interactive `add-cloud` command to add your OpenStack cloud to Juju's
+Use the `add-cloud` command to interactively add your OpenStack cloud to Juju's
 list of clouds. You will need to supply a name you wish to call your cloud and
 the unique API endpoint, the authentication type(s), and region information.
+
+This command recognises the below variables. Any values found will show up as
+default values when the interactive mode is used. For clarity, the
+corresponding prompts are given in parentheses:
+
+ - `OS_AUTH_URL` (cloud API endpoint URL)
+ - `OS_CACERT` (path to the CA certificate file)
+ - `OS_REGION_NAME` (region)
+
+These are typically defined in a file called `novarc`. Have your shell source
+it (e.g. `source novarc`) prior to invoking `add-cloud`.
 
 For the manual method of adding an OpenStack cloud, see below section
 [Manually adding an OpenStack cloud][#clouds-openstack-manual].
@@ -32,31 +43,38 @@ Example user session:
 
 ```no-highlight
 Cloud Types
+  lxd
   maas
   manual
+  oci
   openstack
+  oracle
   vsphere
 
 Select cloud type: openstack
 
-Enter a name for your openstack cloud: mystack
+Enter a name for your openstack cloud: myopenstack
 
-Enter the API endpoint url for the cloud: https://openstack.example.com:35574/v3.0/
+Enter the API endpoint url for the cloud [https://x.x.x.x:5000/v3]:
+
+Enter the filename of the CA certificate to access OpenStack cloud (optional) [/home/ubuntu/cacert.pem]:
 
 Auth Types
   access-key
   userpass
 
-Select one or more auth types separated by commas: access-key,userpass
+Select one or more auth types separated by commas: userpass
 
 Enter region name: dev1
 
-Enter the API endpoint url for the region: https://openstack-dev.example.com:35574/v3.0/
+Enter the API endpoint url for the region [use cloud api url]:
 
 Enter another region? (Y/n): n
 
-Cloud "mystack" successfully added
-You may bootstrap with 'juju bootstrap mystack'
+Successfully read CA Certificate from /home/ubuntu/test_certs/cacert.pem
+Cloud "myopenstack" successfully added
+You may need to `juju add-credential myopenstack' if your cloud needs additional credentials
+Then you can bootstrap with ‘juju bootstrap myopenstack’
 ```
 
 Note that it is possible to choose more than one authorisation method - just
@@ -75,7 +93,7 @@ Cloud        Regions  Default          Type        Description
 .
 .
 .
-mystack            1  dev1             openstack
+myopenstack        1  dev1             openstack
 ```
 
 ### Manually adding an OpenStack cloud
@@ -171,6 +189,14 @@ variables and is parsed by the above command as part of the scanning process.
 
 For background information on this method read section
 [Adding credentials from environment variables][credentials-adding-from-variables].
+
+## Images and private clouds
+
+The above steps are all you need to use most OpenStack clouds which are
+configured for general use. If this is your own cloud, you will also need to
+additionally provide stream information so that the cloud can fetch the
+relevant images for Juju to use. This is covered in the section on
+[Cloud cloud metadata][cloud-image-metadata]. 
 
 ## Creating a controller
 

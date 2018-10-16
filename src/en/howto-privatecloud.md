@@ -130,9 +130,10 @@ Stop here and return to the [bootstrap instructions][bootstrap].
 
 ## Upload the image metadata to an object store
 
-!!! Note: Only those with admin privileges or who are operators in the OpenStack 
-    environment will be able to create a service and view endpoints used by the following 
-    instructions.
+!!! Note:
+    Only those with admin privileges or who are operators in the OpenStack
+    environment will be able to create a service and view endpoints used by the
+    following instructions.
 
 These instructions use Swift, however other object stores may be used as well.
 
