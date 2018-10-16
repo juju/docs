@@ -6,16 +6,17 @@ TODO:  warning: ubuntu code names hardcoded
        bug tracking: https://bugs.launchpad.net/juju/+bug/1797388
        bug tracking: https://bugs.launchpad.net/juju/+bug/1797396
        bug tracking: https://bugs.launchpad.net/juju/+bug/1797968
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1798094
+       bug tracking: https://bugs.launchpad.net/juju/+bug/1798097
 
 # Upgrading a machine series
 
 Starting with Juju `v.2.5.0`, to upgrade the series of a machine, the
 `upgrade-series` command is used.
 
-!!! Important:
-    The `upgrade-series` command does not support upgrading a controller. See
-    below section [Upgrading a controller machine][#upgrading-a-controller] for
-    how to do that using an alternate method.
+The `upgrade-series` command does not support upgrading a controller. See below
+section [Upgrading a controller machine][#upgrading-a-controller] for how to do
+that using an alternate method.
 
 ## Upgrading a workload machine
 
@@ -23,7 +24,7 @@ Here is an overview of the process:
 
  1. The user initiates the upgrade.
     1. The machine is removed from the pool of available machines in the sense
-       that charms can not be deployed upon it.
+       that charms can not be deployed to it.
     1. Juju prepares the machine for the upcoming OS upgrade.
     1. All units on the machine are taken into account.
  1. The user manually performs the upgrade of the operating system and makes
@@ -35,9 +36,9 @@ Here is an overview of the process:
 At no time does Juju take any action to prevent the machine from servicing
 workload client requests.
 
-In the examples that follow, the machine in question has an ID of '1', will
-have one unit of 'apache2' deployed, and will be upgraded from Ubuntu 16.04 LTS
-(Xenial) to Ubuntu 18.04 LTS (Bionic).
+In the examples that follow, the machine in question has an ID of '1', has one
+unit of 'apache2' deployed, and will be upgraded from Ubuntu 16.04 LTS (Xenial)
+to Ubuntu 18.04 LTS (Bionic).
 
 ### Initiating the upgrade
 
@@ -48,8 +49,8 @@ the target series:
 juju upgrade-series prepare 1 bionic
 ```
 
-You will be asked to confirm the procedure. Use the `--agree` option to avoid
-this prompt.
+You will be asked to confirm the procedure. Use the `-y` option to avoid this
+prompt.
 
 Then output will be shown, such as:
 
