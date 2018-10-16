@@ -26,8 +26,9 @@ homepage: true
                 <h2>What's new</h2>
                 <ul class="p-list">
                     <li class="p-list__item"><a href="/en/whats-new">New features in 2.5&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/troubleshooting">Troubleshooting&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/reference-release-notes">Release notes&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/clouds-lxd-advanced">Remote and clustered LXD clouds&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/clouds-oci">Oracle OCI cloud support&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/reference-release-notes">Release Notes&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
             <div class="col-6">
@@ -35,6 +36,11 @@ homepage: true
                 <ul class="p-list">
                     <li class="p-list__item"><a href="/en/tut-lxd">Using Juju locally with LXD&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item"><a href="/en/tut-users">A multi-user cloud&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item">Understanding&nbsp;
+		        <a href="/en/controllers">controllers</a>,&nbsp;
+		        <a href="/en/models">models</a>,&nbsp;and&nbsp;the&nbsp;Juju&nbsp;
+		        <a href="/en/client">client</a>&nbsp;&rsaquo;
+		    </li>
                 </ul>
             </div>
         </div>
