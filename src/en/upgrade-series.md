@@ -23,15 +23,14 @@ that using an alternate method.
 Here is an overview of the process:
 
  1. The user initiates the upgrade.
-    1. The machine is removed from the pool of available machines in the sense
-       that charms can not be deployed to it.
+    1. The machine is no longer available for charm deployments.
     1. Juju prepares the machine for the upcoming OS upgrade.
     1. All units on the machine are taken into account.
  1. The user manually performs the upgrade of the operating system and makes
     any other necessary changes. This should be accompanied by a maintenance
     window managed by the user.
  1. The user informs Juju that the machine has been successfully upgraded. The
-    machine is reinserted into the machine pool.
+    machine becomes available for charm deployments.
 
 At no time does Juju take any action to prevent the machine from servicing
 workload client requests.
