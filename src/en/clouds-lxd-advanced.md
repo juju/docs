@@ -221,15 +221,30 @@ Juju (`v.2.5.0`) has the following functionality for those charms that make use
 of LXD profiles:
 
  - A validity check is performed on the profile(s) during the deployment of the
-   charm. This is based on a hardcoded allow/deny list. The `--force` option
-   can be used to bypass this check but this is not recommended.
+   charm. This is based on a hardcoded list of allowed items, everything else
+   being denied. The `--force` option can be used to bypass this check but this
+   is not recommended. The list is:
+   
+```no-highlight
+config
+   -boot
+   -limits
+   -migration
+
+devices
+   unix-char
+   unix-block
+   gpu
+   usb
+```
+
  - A profile is upgraded during the upgrade of the charm
    (`juju upgrade-charm`).
  - A profile is exposed at the machine level by using either the `show-machine`
    command or the `status --format=yaml` command.
 
 Here is partial output from either of the above two commands that shows the
-type of profile information that can be extracted from Juju:
+type of profile information that is surfaced:
 
 ```no-highlight
    lxd-profiles:
