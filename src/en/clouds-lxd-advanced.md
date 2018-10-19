@@ -241,10 +241,8 @@ devices
  - A profile is upgraded during the upgrade of the charm
    (`juju upgrade-charm`).
  - A profile is exposed at the machine level by using either the `show-machine`
-   command or the `status --format=yaml` command.
-
-This is an example of the kind of LXD profile information that can be obtained
-from either of the above two commands:
+   command or the `status --format=yaml` command. Below is an example of the
+   kind of information that can be obtained from either of these two commands:
 
 ```no-highlight
    lxd-profiles:
