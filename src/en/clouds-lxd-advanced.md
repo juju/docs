@@ -243,8 +243,8 @@ devices
  - A profile is exposed at the machine level by using either the `show-machine`
    command or the `status --format=yaml` command.
 
-Here is partial output from either of the above two commands that shows the
-type of profile information that is surfaced:
+This is an example of the kind of LXD profile information that can be obtained
+from either of the above two commands:
 
 ```no-highlight
    lxd-profiles:
