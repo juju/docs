@@ -13,57 +13,51 @@ We use the term *credentials* to describe the material necessary to do this
 represented by a *credential name* that is used to refer to those credentials
 in subsequent commands.
 
-Juju selects a credential according to how many credentials are defined. If you
-have only one credential, or if a credential is labelled 'default', then this
-is the credential that will be used by Juju. When multiple credentials are
-defined, with no default, a credential name must be specified at the model
-level.
+When credentials are added for a given cloud they become available to use on
+that cloud's controller and models. There are therefore two categories of
+credentials: those that are available (local) and those that have been sent to
+a controller (remote) due to requiring a credential for the first time.
 
+An active credential (one that has been used to bring about a change in Juju)
+is always associated with a cloud, a Juju user, and a model.
+ 
 ## Adding credentials
 
 Juju supports three methods for adding credentials:
 
- - Accepting credentials provided interactively by the user on the command line
- - Scanning for existing credentials via environment variables and/or "rc"
+ - accepting credentials provided interactively by the user on the command line
+ - scanning for existing credentials via environment variables and/or "rc"
    files (only supported by certain providers)
- - Reading a user-provided [YAML-formatted][yaml] file
+ - reading a user-provided [YAML-formatted][yaml] file
   
 !!! Note:
-    LXD deployments are a special case. Accessed from a Juju admin user, they
-    do not require credentials. Accessed from a non-admin user, a *certificate
-    credential* is needed. See
+    Local LXD deployments are a special case. Accessed from a Juju admin user,
+    they do not require credentials. Accessed from a non-admin user, a
+    *certificate credential* is needed. See
     [Additional LXD resources][clouds-lxd-resources-non-admin-creds] for
     details. 
 
 ### Adding credentials interactively
 
-You can add credentials interactively in this way:
+You can add credentials interactively. To do so with the AWS cloud:
 
 ```bash
-juju add-credential <cloud>
+juju add-credential aws
 ```
 
-You will be asked for credential information based on the chosen cloud. Here
-we're adding credentials for cloud 'aws':
+You will be asked for credential information based on the chosen cloud. For our
+AWS cloud the resulting interactive session would look like:
 
 ```no-highlight
 Enter credential name: carol
 Using auth-type "access-key".
 Enter access-key: *******
 Enter secret-key: *******
-Credentials added for cloud aws.
 ```
 
-If you eventually set multiple credential names for the same cloud you will
-need to set one as the default:
-
-```bash
-juju set-default-credential <cloud> <credential-name>
-```
-
-The default credential will be used when creating a controller with the
-`bootstrap` command. Otherwise, a credential can be specified with the
-`--credential` option with both the `bootstrap` and `add-model` commands.
+If you end up adding multiple credentials for the same cloud you will need to
+set one as the default. See below section
+[Setting default credentials][#setting-default-credentials].
 
 ### Adding credentials from environment variables
 
@@ -213,20 +207,48 @@ juju add-credential azure -f mycreds.yaml
     
 ## Managing credentials
 
-There are several management tasks that can be done related to credentials.
+There are several management tasks that can be done related to credentials:
 
-### Listing credentials
+ - Setting default credentials
+ - Listing local credentials
+ - Listing remote credentials
+ - Updating local credentials
+ - Updating remote credentials
+ - Removing local credentials
+ - Setting a remote credential for a model
 
-When credentials are added to Juju they become available to use on a controller
-and its models. There are therefore two categories of credentials: those that
-are available and those that are currently in use.
+### Setting default credentials
 
-#### Available
-
-You can display what credentials are available by running the command:
+To set the default credential for a cloud:
 
 ```bash
-juju list-credentials
+juju set-default-credential aws carol
+```
+
+If only one credential exists for a cloud, it becomes the effective default
+credential for that cloud.
+
+Setting a default affects operations that require a credential such as creating
+a controller (`bootstrap`) and adding a model (`add-model`). It does not change
+what is currently in use (on a controller). With both these commands a
+credential can be specified with the `--credential` option.
+
+A default must be defined if multiple credentials exist for a given cloud.
+Failure to do so will cause an error to be emitted from those commands that
+require a credential:
+
+```no-highlight
+ERROR more than one credential is available
+specify a credential using the --credential argument
+```
+
+### Listing local credentials
+
+You can display what credentials are available by running the
+`credentials` command:
+
+```bash
+juju credentials
 ```
 
 Sample output:
@@ -239,13 +261,13 @@ aws     bob*, carol
 google  wayne
 ```
 
-The asterisk '*' denotes the default credential, which will be used for the
-named cloud unless another is specified.
+The asterisk denotes the default credential, which will be used for the named
+cloud unless another is specified.
 
 To reveal actual authentication material (e.g. passwords, keys):
 
 ```bash
-juju list-credentials --format yaml --show-secrets
+juju credentials --format yaml --show-secrets
 ```
 
 Sample output:
@@ -262,9 +284,10 @@ local-credentials:
 Notice how the output says 'local-credentials', meaning they are stored on
 the local Juju client.
 
-#### In use
+### Listing remote credentials
 
-To see what credentials are in use by a model (here the 'default' model):
+To see what credentials are in use by a model (here the 'default' model) the
+`show-model` command can be used:
 
 ```bash
 juju show-model default
@@ -286,9 +309,9 @@ default:
 The `models --format yaml` command also shows this information, albeit for all
 models.
 
-The above commands do not display authentication material. To view the active
-credentials, including the cloud name, credential names, and the names of
-models:
+The above commands do not display authentication material. Use the
+`show-credentials` command to view the active credentials, including the cloud
+name, credential names, and model names:
 
 ```bash
 juju show-credentials --show-secrets
@@ -314,22 +337,6 @@ the controller.
 
 The `show-credentials` command queries the controller to get its information.
 
-### Setting default credentials
-
-You can set the default credential for a cloud:
-
-```bash
-juju set-default-credential aws carol
-```
-
-Notes:
-
- - This affects operations that require a newly-input credential (e.g.
-   `juju add-model`). In particular, it does not change what is currently in
-   use (on a controller).
- - If only one credential name exists, it will become the effective default
-   credential.
-
 ### Updating local credentials
 
 To update an existing credential locally use the `add-credential` command with
@@ -341,8 +348,9 @@ Here we decided to use the file 'mycreds.yaml' from a previous example:
 juju add-credential aws -f mycreds.yaml --replace
 ```
 
-This will overwrite existing credential information, so make sure all current
-credentials are contained in the file, not just the new or changed one.
+This will overwrite **all** existing credentials for that cloud, so make sure
+all current credentials are contained in the file, not just the new or changed
+one.
 
 Updating credentials in this way does not update credentials currently in use
 (on an existing controller/cloud). See the next section for that. The
@@ -372,7 +380,7 @@ juju add-credential --replace joe
 juju update-credential google joe
 ```
 
-####  Updating remote credentials using a different Juju user
+#### Updating remote credentials using a different Juju user
 
 If you are unable to ascertain the original Juju username then you will need
 to use a different one. This implies adding a new credential name, copying over
@@ -417,18 +425,31 @@ Credentials:
 
 ### Removing local credentials
 
-If a local credential (i.e. not cached on a controller) is no longer required,
-it can be removed:
+The `remove-credential` command is used to remove a local credential (i.e. not
+cached on a controller):
 
 ```bash
 juju remove-credential aws bob
 ```
 
+### Setting a remote credential for a model
+
+To set what remote credential should be used for a model the `set-credential`
+command (`v.2.5.0`) is available. For instance, to have remote credential 'bob'
+be used for model 'trinity' (for cloud 'aws'):
+
+```bash
+juju set-credential -m trinity aws bob
+```
+
+!!! Note:
+    If the stated credential does not exist remotely but it does locally then
+    the local credential will be sent to the controller. The command will error
+    out if the credential is neither remote nor local.
+
 
 <!-- LINKS -->
 
-[yaml]: http://www.yaml.org/spec/1.2/spec.html
-[clouds-lxd-resources-non-admin-creds]: ./clouds-lxd-resources.md#non-admin-user-credentials
 [clouds-aws]: ./help-aws.md
 [clouds-azure]: ./help-azure.md
 [clouds-google]: ./help-google.md
@@ -438,7 +459,10 @@ juju remove-credential aws bob
 [clouds-oracle]: ./help-oracle.md
 [clouds-openstack]: ./help-openstack.md
 [clouds-vmware]: ./help-vmware.md
+[yaml]: http://www.yaml.org/spec/1.2/spec.html
+[clouds-lxd-resources-non-admin-creds]: ./clouds-lxd-resources.md#non-admin-user-credentials
 [clouds-aws-using-env-variables]: help-aws.md#using-environment-variables
 [clouds-google-using-env-variables]: help-google.md#using-environment-variables
 [clouds-openstack-using-env-variables]: help-openstack.md#using-environment-variables
 [clouds-adding-clouds-manually]: ./clouds.md#adding-clouds-manually
+[#setting-default-credentials]: #setting-default-credentials
