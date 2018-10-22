@@ -217,8 +217,9 @@ the main LXD page.
 
 ## Charms and LXD profiles
 
-Juju (`v.2.5.0`) has the following functionality for those charms that make use
-of LXD profiles:
+Juju (`v.2.5.0`) allows charms to include a LXD profile. The profile will be
+applied to a LXD container that the charm is deployed into. The following
+functionality is built in:
 
  - A validity check is performed on the profile(s) during the deployment of the
    charm. This is based on a hardcoded list of allowed items, everything else
@@ -238,11 +239,12 @@ devices
    usb
 ```
 
- - A profile is upgraded during the upgrade of the charm
+ - Profiles are upgraded during the upgrade of the charm
    (`juju upgrade-charm`).
- - A profile is exposed at the machine level by using either the `show-machine`
-   command or the `status --format=yaml` command. Below is an example of the
-   kind of information that can be obtained from either of these two commands:
+ - Profiles are displayed at the machine level by using either the
+   `show-machine` command or the `status --format=yaml` command. Below is an
+   example of the kind of information that can be obtained from either of these
+   two commands:
 
 ```no-highlight
    lxd-profiles:
