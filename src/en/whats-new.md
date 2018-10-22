@@ -50,7 +50,17 @@ procedure.
 
 See [][].
 
-## CLI bundle export support
+## Charm support for LXD profiles
+
+Juju now supports charms that include a LXD profile. A profile is applied
+to a LXD container that the charm is deployed into. Some hardcoded security
+checks are applied automatically when such a charm is deployed and profile
+information is exposed at the machine level with the `status` and
+`show-machine` commands.
+
+See [][].
+
+## New command for saving a bundle
 
 A model's configuration can now be saved as a bundle at the command line using
 the new `export-bundle` command. Previously, the Juju GUI was needed to save
@@ -58,7 +68,7 @@ a bundle.
 
 See [][].
 
-## New tool for comparing a bundle and model 
+## New command for comparing a bundle and model 
 
 <!-- check use cases; discourse post -->
 A model and a bundle can now be compared using the new `diff-bundle` command.
@@ -77,19 +87,17 @@ recognises certain environment variables used by OpenStack - typically via its
 
 See [][].
 
+## New command for assigning a remote credential to a model 
+
+Occasionally there is the need to change (or set) what remote credential is
+assigned to a model. This is now possible via the new `set-credential` command.
+
+See [][].
+
 ## Charm Store controller configuration key added
 
 A custom Charm Store can be configured by specifying a URL during the creation
 of a controller (`bootstrap`).
-
-See [][].
-
-## Charm support for LXD profiles
-
-<!-- check use cases; discourse post -->
-???????
-`status --format yaml`
-`show-machines`
 
 See [][].
 
