@@ -20,6 +20,13 @@ bound to the LXD cloud type (i.e. they can affect containers that are
 themselves backed by a Juju machine running on any cloud type). See
 [Constraints and LXD containers][charms-constraints-lxd] for details.
 
+Here is a list of advanced LXD features supported by Juju that are explained on
+a separate page:
+
+ - [LXD clustering][clouds-lxd-advanced-cluster] (`v.2.4.0`)
+ - [Adding a remote LXD cloud][clouds-lxd-advanced-remote] (`v.2.5.0`)
+ - [Charms and LXD profiles][clouds-lxd-advanced-profiles] (`v.2.5.0`)
+
 ## Software prerequisites
 
 Both LXD and Juju will be needed on the host system.
@@ -169,13 +176,6 @@ Output:
 +---------------+---------+----------------------+------+------------+-----------+
 ```
 
-## Advanced LXD support
-
-Here is a list of advanced LXD features supported by Juju:
-
- - [LXD clustering][clouds-lxd-advanced-cluster] (`v.2.4.0`)
- - [Adding a remote LXD cloud][clouds-lxd-advanced-remote] (`v.2.5.0`)
-
 ## Additional LXD resources
 
 [Additional LXD resources][clouds-lxd-resources] provides more LXD-specific
@@ -205,6 +205,7 @@ See these pages for ideas on what to do next:
 [clouds-lxd-resources]: ./clouds-lxd-resources.md
 [clouds-lxd-advanced-cluster]: ./clouds-lxd-advanced.md#lxd-clustering
 [clouds-lxd-advanced-remote]: ./clouds-lxd-advanced.md#adding-a-remote-lxd-cloud
+[clouds-lxd-advanced-profiles]: ./clouds-lxd-advanced.md#charms-and-lxd-profiles
 [lxd-snap]: ./clouds-lxd-resources.md#using-the-lxd-snap
 [ubuntu-lxd]: http://www.ubuntu.com/cloud/lxd
 [charms-constraints-lxd]: ./charms-constraints.md#constraints-and-lxd-containers

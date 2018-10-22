@@ -9,6 +9,7 @@ The topics presented here are:
 
  - LXD clustering
  - Adding a remote LXD cloud
+ - Charms and LXD profiles
 
 ## LXD clustering
 
@@ -48,7 +49,7 @@ See the upstream documentation on [Clustering][lxd-upstream-clustering].
 ## Adding a remote LXD cloud
 
 The traditional way of using LXD with Juju is by having both the Juju client
-and the LXD daemon local to each other. However, since `v.2.5` Juju supports
+and the LXD daemon local to each other. However, since `v.2.5.0` Juju supports
 connecting to a remote LXD daemon. Doing so does not require LXD to be
 installed alongside the Juju client.
 
@@ -214,6 +215,61 @@ Now that the cloud and credentials have been added the next step is to create a
 controller. See [Creating a controller][clouds-lxd-creating-a-controller] on
 the main LXD page.
 
+## Charms and LXD profiles
+
+Juju (`v.2.5.0`) allows charms to include a LXD profile. The profile will be
+applied to a LXD container that the charm is deployed into. The following
+functionality is built in:
+
+ - A validity check is performed on the profile(s) during the deployment of the
+   charm. This is based on a hardcoded list of allowed items, everything else
+   being denied. The `--force` option can be used to bypass this check but this
+   is not recommended. The list is:
+   
+```no-highlight
+config
+   -boot
+   -limits
+   -migration
+
+devices
+   unix-char
+   unix-block
+   gpu
+   usb
+```
+
+ - Profiles are upgraded during the upgrade of the charm
+   (`juju upgrade-charm`).
+ - Profiles are displayed at the machine level by using either the
+   `show-machine` command or the `status --format=yaml` command. Below is an
+   example of the kind of information that can be obtained from either of these
+   two commands:
+
+```no-highlight
+   lxd-profiles:
+      juju-default-lxd-profile-0:
+        config:
+          environment.http_proxy: ""
+          linux.kernel_modules: openvswitch,nbd,ip_tables,ip6_tables
+          security.nesting: "true"
+          security.privileged: "true"
+        description: lxd profile for testing, black list items grouped commented out
+        devices:
+          bdisk:
+            source: /dev/loop0
+            type: unix-block
+          sony:
+            productid: 51da
+            type: usb
+            vendorid: 0fce
+          tun:
+            path: /dev/net/tun
+            type: unix-char
+```
+
+See the upstream documentation on [LXD profiles][lxd-upstream-profiles].
+
 
 <!-- LINKS -->
 
@@ -225,4 +281,5 @@ the main LXD page.
 [credentials]: ./credentials.md
 [clouds-lxd-creating-a-controller]: ./clouds-LXD.md#creating-a-controller
 [lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
+[lxd-upstream-profiles]: https://lxd.readthedocs.io/en/latest/profiles/
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
