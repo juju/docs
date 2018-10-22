@@ -207,15 +207,15 @@ juju add-credential azure -f mycreds.yaml
     
 ## Managing credentials
 
-There are several management tasks that can be done related to credentials:
+Here we cover the management of credentials.
 
- - Setting default credentials
- - Listing local credentials
- - Listing remote credentials
- - Updating local credentials
- - Updating remote credentials
- - Removing local credentials
- - Setting a remote credential for a model
+ - [Setting default credentials][#setting-default-credentials]
+ - [Listing local credentials][#listing-local-credentials]
+ - [Listing remote credentials][#listing-remote-credentials]
+ - [Updating local credentials][#updating-local-credentials]
+ - [Updating remote credentials][#updating-remote-credentials]
+ - [Removing local credentials][#removing-local-credentials]
+ - [Setting a remote credential for a model][#setting-a-remote-credential-for-a-model]
 
 ### Setting default credentials
 
@@ -465,4 +465,11 @@ juju set-credential -m trinity aws bob
 [clouds-google-using-env-variables]: help-google.md#using-environment-variables
 [clouds-openstack-using-env-variables]: help-openstack.md#using-environment-variables
 [clouds-adding-clouds-manually]: ./clouds.md#adding-clouds-manually
+
 [#setting-default-credentials]: #setting-default-credentials
+[#listing-local-credentials]: #listing-local-credentials]
+[#listing-remote-credentials]: #listing-remote-credentials
+[#updating-local-credentials]: #updating-local-credentials
+[#updating-remote-credentials]: #updating-remote-credentials
+[#removing-local-credentials]: #removing-local-credentials
+[#setting-a-remote-credential-for-a-model]: #setting-a-remote-credential-for-a-model
