@@ -37,7 +37,7 @@ navigation:
         location: charms-scaling.md
       - title: Upgrading applications
         location: charms-upgrading.md
-      - title: Updating a machine series
+      - title: Upgrading a machine series
         location: upgrade-series.md
       - title: Controller backups
         location: controllers-backup.md
