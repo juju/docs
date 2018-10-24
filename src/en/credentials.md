@@ -34,11 +34,13 @@ Juju supports three methods for adding credentials:
  - reading a user-provided [YAML-formatted][yaml] file
   
 !!! Note:
-    Local LXD deployments are a special case. Accessed from a Juju admin user,
-    they do not require credentials. Accessed from a non-admin user, a
-    *certificate credential* is needed. See
-    [Additional LXD resources][clouds-lxd-resources-non-admin-creds] for
+    A local LXD cloud is a special case. When accessed from a Juju admin user,
+    a credential does not need to be added; a 10-yr certificate is set up
+    for you. However, when accessed from a non-admin user this is not the case.
+    See [Additional LXD resources][clouds-lxd-resources-non-admin-creds] for
     details. 
+
+Added credentials get saved to file `~/.local/share/juju/credentials.yaml`.
 
 ### Adding credentials interactively
 
@@ -49,14 +51,19 @@ with the AWS cloud:
 juju add-credential aws
 ```
 
-You will be asked for credential information based on the chosen cloud. For our
-AWS cloud the resulting interactive session would look like:
+You will be asked for information based on the chosen cloud. For the AWS cloud
+the resulting interactive session looks like:
 
 ```no-highlight
 Enter credential name: carol
+
 Using auth-type "access-key".
-Enter access-key: *******
-Enter secret-key: *******
+
+Enter access-key: AKBAICUYUPFXID2GHC5S
+
+Enter secret-key: *********************** (does not echo back)
+
+Credential "carol" added locally for cloud "aws".
 ```
 
 If you end up adding multiple credentials for the same cloud you will need to
