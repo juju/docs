@@ -15,11 +15,14 @@ in subsequent commands.
 
 When credentials are added for a given cloud they become available to use on
 that cloud's controller and models. There are therefore two categories of
-credentials: those that are available (local) and those that have been uploaded
-to a controller (remote) due to requiring a credential for the first time.
+credentials: those that are available to the Juju client (local) and those that
+are active and have been uploaded to a controller (remote). A credential
+becomes active when it is needed to bring about a change in Juju for the first
+time.
 
-An active credential (one that has been used to bring about a change in Juju)
-is always associated with a cloud, a Juju user, and a model.
+An active credential is always associated with one cloud, one Juju user, and
+one, or more, models. A model, however, is always linked to a single
+credential.
  
 ## Adding credentials
 
@@ -39,7 +42,8 @@ Juju supports three methods for adding credentials:
 
 ### Adding credentials interactively
 
-You can add credentials interactively. To do so with the AWS cloud:
+To add credentials interactively use the `add-credential` command. To do so
+with the AWS cloud:
 
 ```bash
 juju add-credential aws
@@ -78,19 +82,15 @@ call the credential set.
     You will need to rescan the variables if their values ever change. A scan
     only picks up *current* values.
 
-There are three providers that use tools that support this variables method:
+There are three providers that use tools that support this method:
+[Amazon AWS][clouds-aws-using-env-variables],
+[Google GCE][clouds-google-using-env-variables], and
+[OpenStack][clouds-openstack-using-env-variables].
 
-[Amazon AWS][clouds-aws-using-env-variables] |
-[Google GCE][clouds-google-using-env-variables] |
-[OpenStack][clouds-openstack-using-env-variables]
-
-Each page provides details on using this method with its respective provider.
-
-!!! Note:
-    The `autoload-credentials` command is also used to generate a certificate
-    credential for localhost clouds. This is needed for providing access to
-    non-admin Juju users. See
-    [Additional LXD resources][clouds-lxd-resources-non-admin-creds].
+The `autoload-credentials` command is also used to generate a certificate
+credential for localhost clouds. This is needed for providing access to
+non-admin Juju users. See
+[Additional LXD resources][clouds-lxd-resources-non-admin-creds].
     
 ### Adding credentials from a file
 
@@ -385,6 +385,9 @@ juju add-credential --replace joe
 juju update-credential google joe
 ```
 
+The `update-credential` command is the only command that can alter a credential
+cached on a controller.
+
 #### Updating remote credentials using a different Juju user
 
 If you are unable to ascertain the original Juju username then you will need
@@ -439,10 +442,10 @@ juju remove-credential aws bob
 
 ### Changing a remote credential for a model
 
-To change what remote credential should be used for a model the
-`set-credential` command (`v.2.5.0`) is available to the controller admin or
-the model owner. For instance, to have remote credential 'bob' be used for
-model 'trinity' (for cloud 'aws'):
+To change what remote credential is used for a model the `set-credential`
+command (`v.2.5.0`) is available to the controller admin or the model owner.
+For instance, to have remote credential 'bob' be used for model 'trinity' (for
+cloud 'aws'):
 
 ```bash
 juju set-credential -m trinity aws bob
