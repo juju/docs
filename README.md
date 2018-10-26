@@ -25,7 +25,7 @@ other useful tips.
 For editing actual documentation, you will find the source files in the
 `src/en` directory.
 
-`metada.yaml` - This is used to build the navigation for the website. You 
+`metadata.yaml` - This is used to build the navigation for the website. You 
 won't need to change this unless you are adding a new page (and even then, 
 please ask about where it should go).
 
