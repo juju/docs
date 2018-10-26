@@ -1,7 +1,7 @@
 # Documentation for Juju
 
-**
 THESE INSTRUCTIONS ARE OBSOLETE.
+
 WORKAROUND: APPLY THE MAAS PROJECT CONTRIBUTOR PAGES TO JUJU:
 
 https://github.com/CanonicalLtd/maas-docs
@@ -9,7 +9,8 @@ https://github.com/CanonicalLtd/maas-docs
 JUJU DOCUMENTATION WILL ALSO SOON BE MOVING TO DISCOURSE:
 
 https://discourse.jujucharms.com
-**
+
+-----
 
 The documentation is written in Markdown, and then generated into HTML.
 
