@@ -15,37 +15,36 @@ The latest version of these docs live at:
 - [github.com/juju/docs](https://github.com/juju/docs)
 - [docs.jujucharms.com](http://docs.jujucharms.com) - Rendered docs
 
-For advice on contributing to the docs see
-the [contributing.html](https://jujucharms.com/docs/contributing.html) page in 
-this project. This has important information on style, the use of Markdown and
-other useful tips.
+For advice on contributing to the docs see the
+[contributing.html](https://docs.jujucharms.com/stable/contributing.html) page
+in this project. This has important information on style, the use of Markdown
+and other useful tips.
 
-## Docs structure
+## Important files and directories
 
-For editing actual documentation, you will find the source files in the
-`src/en` directory.
+The following files and directories under `src/en` are of interest:
 
-`metadata.yaml` - This is used to build the navigation for the website. You 
-won't need to change this unless you are adding a new page (and even then, 
-please ask about where it should go).
+ - The `metadata.yaml` file is used to build the navigation for the website.
+   You won't need to change this unless you are adding a new page (and even
+   then, please ask about where it should go).
 
-The `build` directory is where local builds of the docs are made, and contains
-some support files (CSS, JavaScript) and all the graphics used by the docs. If
-you need to add graphics, add them here: `htmldocs/media`. 
+ - The `build` directory is where local builds of the docs are made, and
+   contains some support files (CSS, JavaScript) and all the graphics used by
+   the docs. If you need to add graphics, add them here: `htmldocs/media`. 
 
-Do not _replace_ graphics unless you know what you are doing. These image files
-are used by all versions of the docs, so usually you will want to add files
-rather than change existing ones, unless the changes apply to all versions of
-Juju (e.g. website images).
+   Do not _replace_ graphics unless you know what you are doing. These image
+   files are used by all versions of the docs, so usually you will want to add
+   files rather than change existing ones, unless the changes apply to all
+   versions of Juju (e.g. website images).
 
-The `versions` file contains a list of Github branches which represent the 
-current supported versions of documentation. Many tools rely on this list, it 
-should not be changed by anyone but the docs team!
+ - The `versions` file contains a list of Github branches which represent the
+   current supported versions of documentation. Many tools rely on this list,
+   it should not be changed by anyone but the docs team!
 
-The `archive` file contains a list of Github branches which contain
-unmaintained, older versions of documentation.
+ - The `archive` file contains a list of Github branches which contain
+   unmaintained, older versions of documentation.
 
-## Building the Docs
+## Building the documentation
 
 Every non-trivial contribution must first have its HTML built and verified
 before a pull request (PR) is made from it.
@@ -77,8 +76,6 @@ documentation-builder --source-folder src --media-path src/en/media
 
 You can point a web browser at individual HTML files but to make your
 verification more conclusive you will need a web server.
-
-#### Web server
 
 See the [Ubuntu Server Guide][ubuntu-serverguide-apache] for instructions on
 setting up Apache. The DocumentRoot should be the `src/build/en` directory. To
@@ -172,14 +169,18 @@ Some things to consider during verification:
    info about the changes in the comments (e.g. if it fixes an issue you can
    refer to it by number to automatically link your pull request to the issue)
 
-10. Wait. The documentation team will usually get to your pull request within a 
-    day or two. Be prepared for suggested changes and comments. If there are
-    changes to be made:
+10. A Documentation team member will review your PR, suggest improvements, and
+    eventually merge it with the appropriate branch (series). Publication to
+    the website is a separate step (performed internally), so it can be a few
+    days before the changes actually show up.
 
-   - make the changes in your local branch
-   - use `git commit -m 'some message' ` to commit the new changes
-   - push the branch to your fork again with `git push origin {branchname}`
-   - there is no need to update the pull request, it will be updated automatically
+    If there are changes to be made:
+
+    - make the changes in your local branch
+    - use `git commit -m 'some message' ` to commit the new changes
+    - push the branch to your fork again with `git push origin {branchname}`
+    - there is no need to update the pull request, it will be done
+      automatically
 
 Once the code has been landed you can remove your feature branch from both the
 remote and your local fork. Github provides a button for this at the bottom of
