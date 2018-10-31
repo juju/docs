@@ -6,19 +6,9 @@ table_of_contents: True
 This page contains detailed information on how to become a successful Juju
 documentation writer. Welcome to the club.
 
-## Contribution overview
-
 An individual doc contribution ends up as a *PR* (pull request) on GitHub. The
 process involved in producing one is described on the project
 [README][juju-docs-readme] page.
-
-Prior to submitting a PR the contributor must verify that the HTML is good.
-The README also covers this.
-
-A Documentation team member will review your PR, suggest improvements, and
-eventually merge it with the appropriate branch (series). Publication to the
-website is a separate step (performed internally), so it can be a few days
-before the changes actually show up. Please be patient!
 
 ## Style and language
 
@@ -34,13 +24,13 @@ Please follow these guidelines for style and language:
    [vim][vim-eighty-columns] editor.
  - An exception to the above is a hyperlink. Never break one with a carriage
    return. This includes the `[text][label]` and `[label]: destination`
-   combinations. See [hyperlinks][anchor__hyperlinks].
+   combinations. See [hyperlinks][#hyperlinks].
 
 ## GitHub Flavored Markdown
 
 This documentation is written in GitHub Flavored Markdown. GFM conventions
-have been added to support features such as [foldouts][anchor__foldouts] and
-[admonishments][anchor__admonishments].
+have been added to support features such as [foldouts][#foldouts] and
+[admonishments][#admonishments].
 
 GFM is very easy to write with. Get started by looking over the below
 resources:
@@ -322,9 +312,10 @@ your PR includes a comment highlighting this change and why it is needed.
 
 <!-- LINKS -->
 
-[anchor__hyperlinks]: #hyperlinks
-[anchor__foldouts]: #foldouts
-[anchor__admonishments]: #admonishments
+[juju-docs-readme]: https://github.com/juju/docs/blob/master/README.md
+[#hyperlinks]: #hyperlinks
+[#foldouts]: #foldouts
+[#admonishments]: #admonishments
 
 [juju-docs-readme]: 
 [gfm-cheatsheet-askubuntu]: http://askubuntu.com/editing-help
