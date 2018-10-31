@@ -1,197 +1,333 @@
-Title: Contributing to Juju docs  
+Title: Writing Guide
+table_of_contents: True
 
-# Contributing to Juju documentation
+# Writing Guide
 
-Juju documentation is hosted on [GitHub](http://github.com) and published on
-[jujucharms.com](http://jujucharms.com/docs). Its source documents are easy to
-understand and edit due to the format used: standard
-[GitHub Flavored Markdown](https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/).
-Conventions have been added to support doc features such as *foldouts* and
-*admonishments* (explained below).
+This page contains detailed information on how to become a successful Juju
+documentation writer. Welcome to the club.
 
-Here are a few [cheat](http://askubuntu.com/editing-help)
-[sheets](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for
-writing in GFM.
+## Contribution overview
 
+An individual doc contribution ends up as a *PR* (pull request) on GitHub. The
+process involved in producing one is described on the project
+[README][juju-docs-readme] page.
 
-## Documentation bugs
+Prior to submitting a PR the contributor must verify that the HTML is good.
+The README also covers this.
 
-Bugs for documentation issues are submitted here:
+A Documentation team member will review your PR, suggest improvements, and
+eventually merge it with the appropriate branch (series). Publication to the
+website is a separate step (performed internally), so it can be a few days
+before the changes actually show up. Please be patient!
 
-https://github.com/juju/docs/issues/new
+## Style and language
 
-and listed here:
+Please follow these guidelines for style and language:
 
-https://github.com/juju/docs/issues
+ - Use a spell checker.
+ - Resist being overly formal.
+ - Verify hyperlinks and examples.
+ - Target audience: intermediate system administrator, not a developer.
+ - Use British English (en-GB). See [language details][contributing-en-gb],
+   including a comparison with American English (en-US).
+ - Use a maximum of 79 columns for files. Here are instructions for the
+   [vim][vim-eighty-columns] editor.
+ - An exception to the above is a hyperlink. Never break one with a carriage
+   return. This includes the `[text][label]` and `[label]: destination`
+   combinations. See [hyperlinks][anchor__hyperlinks].
 
+## GitHub Flavored Markdown
 
-## How to contribute text
+This documentation is written in GitHub Flavored Markdown. GFM conventions
+have been added to support features such as [foldouts][anchor__foldouts] and
+[admonishments][anchor__admonishments].
 
-Here are the basic steps necessary to get a change published on the website:
+GFM is very easy to write with. Get started by looking over the below
+resources:
 
-- [Fork the repository](https://help.github.com/articles/fork-a-repo) from [github.com/juju/docs](http://github.com/juju/docs)
-- Make a local branch from your fork (and enter that branch)
-- Edit the source documents
-- Push your branch back to your fork on GitHub
-- [Submit a Pull Request](https://help.github.com/articles/creating-a-pull-request)
+ - [askubuntu.com][gfm-cheatsheet-askubuntu]
+ - [github.com][gfm-cheatsheet-github]
 
-The source documents are located in the `src` directory. From there each
-language is separated into its own directory by language code. For instance,
-English is under `src/en`.
+## Metadata
 
-Once submitted, a Docs team member will review your work, suggest improvements,
-and eventually merge it with the master branch. Don't forget to review your
-work before submission!
+Metadata can be included in any file. Currently, this is used for:
 
+ - title element
+ - TODO list (file improvements)
+ - table of contents
 
-### Metadata
+This information is written as key:value pairs at the very top of the page. For
+example:
 
-Each file has the potential to include metadata for various purposes. At the
-moment this is used to provide a title element, and also to implement a limited
-form of todo list items. Metadata is written as _key : value_ pairs AT THE VERY
-TOP of the document. E.g.
-
-```
-Title: Contributing to Juju docs
-TODO: add section on metadata
-      spellcheck everything
+```no-highlight
+Title: Install from ISO
+TODO: images need updating when Ubuntu 17.04 is released
+      check for changes to bug https://pad.lv/1625211 and modify text accordingly
+table_of_contents: True
 
 # Title of document
 
-Well written text goes here blah blah
+Text goes here blah blah blah
 ```
 
-As you can see, the TODO metadata can have more than one item, as long as
-additional items are indented by at least 4 spaces directly after the previous
-one. The Metadata section ends immediately there is a blank line, and the
-normal document text can begin.
+- The TODO items must be left-aligned as shown above.
+- The table of contents will contain only level 2 headers.
+- The metadata section is terminated by a blank line.
 
+## Headers
 
-### Sections
+Headers are simple to create:
 
-All the text is organised into sections. These are auto-generated, there is
-nothing extra you need to do:
+    # Top level header (typically the same as the Title element)
+    ## Second level header
+    ### Third level header
 
-    # <h1> equivalent
-    ## <h2> equivalent
-    ### <h3> equivalent
+## Code blocks
 
+A code block is enclosed by three backticks and includes the *type* of code:
 
-### Code blocks
+    ```bash
+    juju command do something
+    juju command do something else
+    ```
 
-Create a code block using the code-fencing markup of three backticks,
-preferably followed by the type of code:
+The most common types used are: `bash`, `yaml`, `json`, and `no-highlight`.
+The last is like a miscellaneous type. It is often used to display command
+output.
 
-     ```bash
-     juju do something
-     juju status
-     ```
+## Inline code
 
-The most common "types" used in this documentation are: `bash`, `yaml`, `json`,
-and `no-highlight`.
+Use a backtick to inline commands and other literals. For instance, to get
+this:
 
+A controller is created with the `bootstrap` command.
 
-### Inline code
+you would write this:
 
-Use a backtick to `inline commands and other literals`:
+```no-highlight
+A controller is created with the `bootstrap` command.
+```
 
+## Admonishments
 
-### Notes, warnings, callouts, and admonishments
+An admonishment distinguishes information from the rest of the text. The syntax
+begins with 3 exclamation points:
 
-Callouts are used to notify the user of additional information or warn them of
-potential pitfalls. This will create a notification resembling the following in
-the docs:
+```no-highlight
+!!! [admonishment-type] "[title]": 
+    [aligned text]
+```
 
-![callout](media/note.png)
+Where:
 
-To implement this callout, use the following syntax:
+- `admonishment-type` can be 'Note', 'Warning', 'Positive', or 'Negative'.
+- `title` is an optional title (visible in HTML)
+- `aligned text` is the text
+
+When a value for 'title' is omitted, the default will be the type itself. If
+the 'title' has a null value (i.e. "") then no title will be displayed.
+
+### Admonishment examples
+
+A standard 'Note' type admonishment:
 
 ```no-highlight
 !!! Note: 
-    If you want to get more information on what is actually happening, or
-    to help resolve problems, you can add the `--show-log` switch to the juju
-    command to get verbose output.
+    If KVM-backed nodes are used, ensure that the 'maas' user on the rack
+    controller can connect to the KVM host using a passphraseless private SSH
+    key.
 ```
 
+A standard 'Warning' type admonishment:
 
-### Foldouts
-
-When a page contains a high volume of information that would otherwise require
-a table of contents, or similar method of quick navigation, a *foldout* can be
-used. This will create a collapsed header which, when clicked, will expand to
-display all the content below it.
-
+```no-highlight
+!!! Warning: 
+    Data will be lost unless you do the right thing.
 ```
+
+A 'Positive' type admonishment with title:
+
+```no-highlight
+!!! Positive "High score":
+    A positive note that should include a title.
+```
+
+A 'Negative' type admonishment with title:
+
+```no-highlight
+!!! Negative "Game over": 
+    A negative note that should include a title.
+```
+
+A 'Positive' type admonishment with no title:
+
+```no-highlight
+!!! Positive "": 
+    I'm done, and I feel fine.
+```
+
+The above examples will appear as:
+
+!!! Note: 
+    If KVM-backed nodes are used, ensure that the 'maas' user on the rack
+    controller can connect to the KVM host using a passphraseless private SSH
+    key.
+
+!!! Warning: 
+    Data will be lost unless you do the right thing.
+
+!!! Positive "High score":
+    A positive note that should include a title.
+
+!!! Negative "Game over": 
+    A negative note that should include a title.
+
+!!! Positive "": 
+    I'm done, and I feel fine.
+
+## Comments
+
+Occasionally it may be appropriate to include a comment to explain or organize
+some text. This ends up as an HTML comment which can be read online so take it
+seriously:
+
+```no-highlight
+<!--
+The below text may be removed soon.
+-->
+```
+
+## Foldouts
+
+When a page contains a lot of extraneous information such as walkthroughs
+containing many images or reference tables, a *foldout* can be used. This will
+create a collapsed header which, when clicked, will expand to display all the
+content below it.
+
+```no-highlight
 ^# Header
   Content can be multi-paragraphed and will be sent through the Markdown parser
 
   as long as content is continually indented under the header.
 ```
 
+## Hyperlinks
 
-## Adding pages
+Links to internal files or external URLs use the following format:
 
-Adding a page (file) to the documentation requires the altering of
-`src/navigation.tpl`. Doing so will insert an entry into the left navigation
-pane which will allow a visitor to discover the new page.
+```no-highlight
+[visible text][label]
+```
 
-Add the page with the following format:
+The `visible text` is what will appear on the web page. The `label` is used to
+refer to the destination, which is placed at the bottom of the file:
 
-    <li class="sub"><a href="charms-scaling.html">Scaling Services</a></li>;
+```
+<!-- LINKS -->
 
-in the appropriate section. Please make sure you submit a Pull Request with a
-description of the new page and why it is needed!
+[label]: destination
+```
 
+For example:
 
-## Adding screenshots
+```no-highlight
+- For more on this topic see [DHCP][dhcp].
+- To understand haproxy, see the [upstream configuration manual][upstream-haproxy-manual].
 
-When adding screenshots place them in `htmldocs/media`. To reference them in
-your page use the syntax `![description](media/picture.png)`
+...
 
+[dhcp]: installconfig-networking-dhcp.md
+[upstream-haproxy-manual]: http://cbonte.github.io/haproxy-dconv/1.6/configuration.html
+```
 
-# Testing or deploying locally
+The visible text should use an active style as opposed to a passive style. For
+instance, try to avoid:
 
-First you need to generate the docs from the Markdown. In the root directory
-first get the dependencies and make the docs:
+```no-highlight
+A [proxy][maas-proxy] can optionally be configured.
+```
 
-    make sysdeps
-    make
+Notes:
 
-!!! Note: 
-    You only need to `make sysdeps` once, after that you'll have all the
-    dependencies you'll need to build the docs going forward.
+- An internal page is referred to by its source filename (i.e. `.md` not
+  `.html`).
+- Try to use the same `label:destination` pair throughout the documentation.
 
-The documentation makes use of Javascript for some functionality, so in order
-to test the docs properly you will need to have a web server set up. See
-[Ubuntu and Apache](https://help.ubuntu.com/lts/serverguide/httpd.html). The
-DocumentRoot should be the `htmldocs` directory:
+## Images
 
-    sudo cp -R htmldocs /var/www/htmldocs
+An image should not be overly cropped - allow for context. When ready, place
+the image file in the `media` directory.
 
-You can then point your web browser at your local machine (127.0.0.1/htmldocs)
-to view the files.
+In terms of linking, they are managed very similarly to hyperlinks. However,
+they are placed on their own line; are preceded by an exclamation point; and
+both the label and destination have a specific naming convention:
 
-Alternatively, you can use Python to start a simple HTTP server on the docs
-directory. Navigate to the `/htmldocs` directory of the docs and run the
-following:
+```no-highlight
+![alt attribute][img__webui_descriptor]
+```
 
-    python -m SimpleHTTPServer
+The bottom of the file will look like:
 
+```no-highlight
+[img__webui_descriptor]: ../media/filename__webui_descriptor.png
+```
 
-# Style and language
+Explanation:
 
-We are putting together a more comprehensive style guide, but for the moment the
-following are good guidelines:
+- `filename`: name of file containing the image (omit the extension '.md')
+- `webui`: version of the Juju GUI corresponding to the image of the web UI
+- `alt attribute`: text that is shown in place of the image if the latter
+  cannot be displayed for some reason
+- `descriptor`: a short description of the image (e.g. 'enable-dhcp')
 
- - Resist being overly formal. The documentation should be like having a 
-   conversation with a knowledgeable friend
- - Remember the readers are *users* not necessarily Juju developers
- - Spell things properly! (see below)
- - We use British English (en-GB). See
-   [language details](./contributing-en-GB.html), including a comparison with
-   American English (en-US).
- - If including links or examples, double-check they actually work
- - We enforce 80 columns for every text file to keep it readable. Here are
-   instructions for the
-   [vim](http://stackoverflow.com/questions/3033423/vim-command-to-restructure-force-text-to-80-columns)
-   and [emacs](http://www.emacswiki.org/emacs/EightyColumnRule) editors.
+For example:
+
+```no-highlight
+![enable dhcp][img__2.1_enable-dhcp]
+![enable fire alarm][img__enable-fire-alarm]
+
+...
+
+[img__2.1_enable-dhcp]: ../media/installconfig-networking-dhcp__2.1_enable-dhcp.png
+[img__enable-fire-alarm]: ../media/installconfig-networking-dhcp__enable-fire-alarm.png
+```
+
+If the image is not of the Juju web UI then simply omit the version part, like
+in the second image above.
+
+### Central images directory
+
+For publication (on the web site), all branch series use the `htmldocs/media`
+directory in the 'master' branch. This means:
+
+- You must be very careful when renaming or removing an image in master as it
+  will affect all non-master branches.
+- Any image introduced in a non-master branch must be *forward-ported* to the
+  master branch.
+
+## Capitalization
+
+Do not use a "Caps Everywhere" style. It is only used in level one headers and
+the title metadata. References (visible text) to these page titles (including
+the navigation) should just capitalize the first letter. Obviously, this does
+not pertain to words that should always be capitalized according to basic
+grammar rules (e.g. acronyms, proper nouns).
+
+## Navigation menu
+
+Adding a page (file) to the documentation may require the altering of
+`src/en/metadata.yaml`. Doing so will insert an entry into the left navigation
+pane (the menu) on the website. This is considered a major change so ensure
+your PR includes a comment highlighting this change and why it is needed.
+
+<!-- LINKS -->
+
+[anchor__hyperlinks]: #hyperlinks
+[anchor__foldouts]: #foldouts
+[anchor__admonishments]: #admonishments
+
+[juju-docs-readme]: 
+[gfm-cheatsheet-askubuntu]: http://askubuntu.com/editing-help
+[gfm-cheatsheet-github]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+[contributing-en-gb]: contributing-en-GB.md
+[vim-eighty-columns]: http://stackoverflow.com/questions/3033423/vim-command-to-restructure-force-text-to-80-columns
