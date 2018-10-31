@@ -1,7 +1,7 @@
-Title: Writing Guide
+Title: Writing guide
 table_of_contents: True
 
-# Writing Guide
+# Writing guide
 
 This page contains detailed information on how to become a successful Juju
 documentation writer. Welcome to the club.
@@ -310,14 +310,14 @@ Adding a page (file) to the documentation may require the altering of
 pane (the menu) on the website. This is considered a major change so ensure
 your PR includes a comment highlighting this change and why it is needed.
 
+
 <!-- LINKS -->
 
-[juju-docs-readme]: https://github.com/juju/docs/blob/master/README.md
 [#hyperlinks]: #hyperlinks
 [#foldouts]: #foldouts
 [#admonishments]: #admonishments
 
-[juju-docs-readme]: 
+[juju-docs-readme]: https://github.com/juju/docs/blob/master/README.md
 [gfm-cheatsheet-askubuntu]: http://askubuntu.com/editing-help
 [gfm-cheatsheet-github]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 [contributing-en-gb]: contributing-en-GB.md
