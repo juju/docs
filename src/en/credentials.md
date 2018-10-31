@@ -8,20 +8,21 @@ table_of_contents: True
 # Credentials
 
 In order to access your cloud, Juju needs to know how to authenticate itself.
-We use the term *credentials* to describe the material necessary to do this
-(e.g. username & password, or just a secret key). Such a set of credentials is
-represented by a *credential name* that is used to refer to those credentials
-in subsequent commands.
+We use the term *credential* to collectively describe the material necessary to
+do this (e.g. username & password, or just a secret key). During the addition
+of a credential the user assigns to it an arbitrary name.
 
-When credentials are added for a given cloud they become available to use on
+When credentials are added for a given cloud they become available for use on
 that cloud's controller and models. There are therefore two categories of
 credentials: those that are available to the Juju client (local) and those that
-are active and have been uploaded to a controller (remote). A credential
-becomes active when it is needed to bring about a change in Juju for the first
-time.
+are active and have been uploaded to a controller (remote).
+
+A credential becomes active when it is related to a model for the first time.
+The two commands that can do this are `bootstrap` and `add-model` as both
+commands involve the creation of at least one model.
 
 An active credential is always associated with one cloud, one Juju user, and
-one, or more, models. A model, however, is always linked to a single
+one, or more, models. A model, however, is always related to a single
 credential.
  
 ## Adding credentials
@@ -235,14 +236,14 @@ juju set-default-credential aws carol
 If only one credential exists for a cloud, it becomes the effective default
 credential for that cloud.
 
-Setting a default affects operations that require a credential such as creating
-a controller (`bootstrap`) and adding a model (`add-model`). It does not change
-what is currently in use (on a controller). With both these commands a
-credential can be specified with the `--credential` option.
+Setting a default affects operations that require a new credential to be used
+by Juju. These are the creation of a controller (`bootstrap`) and the addition
+of a model (`add-model`). It does not change what is currently in use (on a
+controller). 
 
-A default must be defined if multiple credentials exist for a given cloud.
-Failure to do so will cause an error to be emitted from those commands that
-require a credential:
+A default must be defined if multiple credentials exist for a given cloud. With
+both the above commands a credential can be specified with the `--credential`
+option. Failure to do so will cause an error to be emitted:
 
 ```no-highlight
 ERROR more than one credential is available
@@ -353,7 +354,7 @@ the `--replace` option.
 Here we decided to use the file 'mycreds.yaml' from a previous example:
 
 ```bash
-juju add-credential aws -f mycreds.yaml --replace
+juju add-credential --replace aws -f mycreds.yaml
 ```
 
 Any existing credential will be overwritten by an identically named credential
@@ -365,30 +366,35 @@ ERROR local credentials for cloud "aws" already exist; use --replace to overwrit
 ```
 
 Updating credentials in this way does not update credentials currently in use
-(on an existing controller/cloud). See the next section for that. The
-`add-credential` command is always "pre-bootstrap" in nature.
+(on an existing controller/cloud). See the next section for that.
 
 ### Updating remote credentials
 
-To update credentials currently in use (i.e. cached on the controller) the
-`update-credential` command is used. The requirements for using this command,
-as compared to the initial `juju bootstrap` (or `juju add-model`) command, are:
+To update credentials currently in use (i.e. stored on a controller) the
+`update-credential` command is used. It does this by uploading an identically
+named local credential.
+
+Before an update occurs, Juju ensures that the new credential contents can
+authenticate with the backing cloud and that any machines that may reside
+within a model currently related to the credential remain accessible. 
+
+The requirements for using this command, as compared to the initial `bootstrap`
+(or `juju add-model`) command, are:
 
  - same cloud name
  - same Juju username (logged in)
  - same credential name
 
-The update is a two-step process. First change the credentials locally with the
-`add-credential` command (in conjunction with the `--replace` option) and then
-upload those credentials to the controller.
+The update is a two-step process. First change the credentials locally as shown
+previously and then upload those credentials to the controller.
 
 Below, we explicitly log in with the correct Juju username ('admin'), change
-the contents of the credential called 'joe', and then update them on a Google
-cloud controller:
+the contents of the credential called 'joe' (included in file `mycreds.yaml`),
+and then update that credential for cloud 'google':
 
 ```bash
 juju login -u admin
-juju add-credential --replace joe
+juju add-credential --replace google -f mycreds.yaml
 juju update-credential google joe
 ```
 
@@ -457,6 +463,10 @@ cloud 'aws'):
 ```bash
 juju set-credential -m trinity aws bob
 ```
+
+This command does not affect how the credential may relate to another model. If
+the credential is already related to a single model this operation will result
+in that credential being related to two models.
 
 !!! Note:
     If the stated credential does not exist remotely but it does locally then
