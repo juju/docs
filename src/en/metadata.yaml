@@ -27,14 +27,14 @@ navigation:
         location: charms-config.md
       - title: Managing relations
         location: charms-relations.md
+      - title: Scaling applications
+        location: charms-scaling.md
       - title: Removing things
         location: charms-destroy.md
 
   - title: Administering Juju
 
     children:
-      - title: Scaling applications
-        location: charms-scaling.md
       - title: Upgrading applications
         location: charms-upgrading.md
       - title: Upgrading a machine series
@@ -45,7 +45,7 @@ navigation:
         location: controllers-ha.md
       - title: Application high availability
         location: charms-ha.md
-      - title: Juju users
+      - title: Understanding users
         location: users.md
 
   - title: Advanced topics
