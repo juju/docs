@@ -98,29 +98,11 @@ navigation:
       - title: Application metrics
         location: charms-metrics.md
 
-  - title: Reference
+  - title: Charm writing
+    location: https://docs.jujucharms.com/2.4/en/developer-getting-started
 
-    children:
-      - title: Release notes
-        location: reference-release-notes.md
-      - title: Juju commands
-        location: commands.md
-      - title: Juju constraints
-        location: reference-constraints.md
-      - title: Juju charm hooks
-        location: reference-charm-hooks.md
-      - title: Juju environment variables
-        location: reference-environment-variables.md
-      - title: Juju hook tools
-        location: reference-hook-tools.md
-      - title: metadata.yaml
-        location: authors-charm-metadata.md
-      - title: Charm writing
-        location: https://docs.jujucharms.com/2.4/en/developer-getting-started
-      - title: API docs
-        location: http://godoc.org/github.com/juju/juju/api
-      - title: Status values
-        location: reference-status.md
+  - title: Reference documents
+    location: reference-documents.md
 
   - title: Contact us
     location: contact-us.md
