@@ -101,8 +101,6 @@ navigation:
         location: charms-working-with-units.md
       - title: Application metrics
         location: charms-metrics.md
-      - title: Exposing applications
-        location: charms-exposing.md
 
   - title: Reference
 
