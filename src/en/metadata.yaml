@@ -47,6 +47,10 @@ navigation:
         location: charms-ha.md
       - title: Understanding users
         location: users.md
+      - title: Troubleshooting
+        location: troubleshooting.md
+      - title: Juju logs
+        location: troubleshooting-logs.md
 
   - title: Advanced topics
 
@@ -73,14 +77,6 @@ navigation:
         location: charms-fan.md
       - title: Network spaces
         location: network-spaces.md
-
-  - title: Troubleshooting
-
-    children:
-      - title: Troubleshooting guidelines
-        location: troubleshooting.md
-      - title: Juju logs
-        location: troubleshooting-logs.md
 
   - title: Miscellaneous
 
