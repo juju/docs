@@ -1,8 +1,9 @@
 Title: General configuration options
-TODO: Check accuracy of key table (https://github.com/juju/juju/blob/ec89c99e51fa83cd1a2cb5e5f24e73d5b096de20/controller/config.go#L29)
+TODO: Check accuracy of key table: https://github.com/juju/juju/blob/ec89c99e51fa83cd1a2cb5e5f24e73d5b096de20/controller/config.go#L29)
+      Check accuracy of key table: https://github.com/juju/juju/provider/*/config.go 
       error: table's default value keys do not show up with controller-config (e.g. bootstrap-). See above note.
       "dynamically set by Juju" could use some explaination
-      ReadOnlyMethods updated from https://github.com/juju/juju/blob/2.3/apiserver/observer/auditfilter.go#L130
+      ReadOnlyMethods: https://github.com/juju/juju/blob/2.3/apiserver/observer/auditfilter.go#L130
       Include ability to set configuration key:value pairs by file
       Show how to use spaces 'juju-mgmt-space' and 'juju-ha-space' (wth 'juju bootstrap' and 'juju enable-ha')
       Reformat table: monospace the key names, new column for RT
@@ -73,6 +74,7 @@ bootstrap-address-delay      | integer | 10      |                          | Ho
 ca-cert                      | string |          |                          | The certificate of the CA that signed the controller's CA certificate, in PEM format
 charmstore-url               | string | https://api.jujucharms.com/charmstore | | Sets the Charm Store URL.
 controller-uuid              | string |          |                          | The key for the UUID of the controller
+external-network             | string |          |                          | An OpenStack external network UUID.
 juju-ha-space		     | string |          |			    | The name of a network space used used for MongoDB replica-set communication in a controller HA context. Effectively acts as a machine constraint. See [additional info below](#controller-related-spaces).
 juju-mgmt-space		     | string |          |			    | The name of a network space used by Juju agents to communicate with controllers. Effectively acts as a machine constraint. See [additional info below](#controller-related-spaces).
 identity-public-key          | string |          |                          | Sets the public key of the identity manager. Feature not yet implemented.
