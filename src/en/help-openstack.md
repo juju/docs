@@ -214,9 +214,6 @@ Choose the network you want the instances to boot from.  You can use either the
 network name or the UUID with the 'network' configuration option when
 bootstrapping a new controller.
 
-If there is an external network configured for instances and they could only be accessible via Floating IP on
-the external network, 'external-network' and 'use-floating-ip' options should be used.
-
 With the product-streams service running in your OpenStack Cloud, you are now
 ready to create a Juju controller:
 
@@ -227,14 +224,16 @@ juju bootstrap <cloud> <controller name> --config network=<network_id>
 or if the simplestream data is local:
 
 ```bash
-juju bootstrap <cloud> <controller name> --metadata-source ~/simplestreams/images --config network=<network_id>
+juju bootstrap <cloud> <controller name> --config network=<network_id> \
+	--metadata-source ~/simplestreams/images
 ```
 
-or with external network:
+or if there is an external network configured for instances that are only
+accessible via floating IP:
 
 ```bash
-juju bootstrap <cloud> <controller name> --config network=<network_id> --config external-network=<external_network_id> --config use-floating-ip=true
-
+juju bootstrap <cloud> <controller name> --config network=<network_id> \
+	--config external-network=<external_network_id> --config use-floating-ip=true
 ```
 
 For a detailed explanation and examples of the `bootstrap` command see the
@@ -242,9 +241,9 @@ For a detailed explanation and examples of the `bootstrap` command see the
 
 ## Next steps
 
-A controller is created with two models - the 'controller' model, which
-should be reserved for Juju's internal operations, and a model named
-'default', which can be used for deploying user workloads.
+A controller is created with two models - the 'controller' model, which should
+be reserved for Juju's internal operations, and a model named 'default', which
+can be used for deploying user workloads.
 
 See these pages for ideas on what to do next:
 
