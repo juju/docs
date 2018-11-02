@@ -196,7 +196,6 @@ ready to create a Juju controller:
 
 ```bash
 juju bootstrap <cloud> <controller name> --config network=<network_id>
-
 ```
 
 or if the simplestream data is local:
