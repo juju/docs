@@ -41,11 +41,11 @@ to Ubuntu 18.04 LTS (Bionic).
 
 ### Initiating the upgrade
 
-You initiate the upgrade with the `prepare` sub-command, the machine ID, and
+You initiate the upgrade with the machine ID, the `prepare` sub-command, and
 the target series:
 
 ```bash
-juju upgrade-series prepare 1 bionic
+juju upgrade-series 1 prepare bionic
 ```
 
 You will be asked to confirm the procedure. Use the `-y` option to avoid this
@@ -97,7 +97,7 @@ You should now verify that the machine has been successfully upgraded. Once
 that's done, tell Juju that the machine is ready:
 
 ```bash
-juju upgrade-series complete 1
+juju upgrade-series 1 complete
 ```
 
 Sample output:
