@@ -52,12 +52,6 @@ navigation:
       - title: Juju logs
         location: troubleshooting-logs.md
 
-  - title: Juju Experts
-
-    children:
-      - title: Managed solutions under SLA
-        location: experts-sla.md
-
   - title: Advanced topics
 
     children:
