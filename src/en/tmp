@@ -1,0 +1,8 @@
+Model                   Spent   Budgeted         By    Usage
+lxd:admin/default       2.42         200        bob    1%   
+lxd:admin/alpha         0.00         150        bob    0%   
+                                                            
+Total                   2.42         350               1%   
+Wallet                              1000                    
+Unallocated                          650
+

@@ -43,7 +43,8 @@ Once you have contracted out a Juju Expert you are ready to set an SLA. This is
 done within Juju itself via the `sla` command, which will trigger a dialog to
 authenticate to your Ubuntu SSO account.
 
-An SLA is set on a per-model basis, and specifies two key parameters:
+An SLA is set on a per-model basis, and includes two key parameters in order
+for support to become active:
 
  1. Support level
  1. Budget limit
@@ -72,8 +73,16 @@ Model    Controller  Cloud/Region         Version    SLA        Timestamp
 default  lxd         localhost/localhost  2.5-beta1  essential  19:42:28Z
 .
 .
-.
 ```
+
+It is possible to simply set a support level with the `sla` command:
+
+```bash
+juju sla -m default essential
+```
+
+The model's budget will then need to be set separately. We'll show how this is
+done later on.
 
 ## Changing an SLA
 
@@ -87,8 +96,10 @@ effective in the next monthly billing cycle.
 
 ## Budgeting managed models
 
-SLA budgets are organized into wallets. The sum of all budgets in a wallet
-cannot exceed the wallet limit.
+SLA budgets are organized into *wallets*. A wallet called 'primary' is created
+when the `sla` command is run for the first time. It gets hardcoded as the
+default wallet. The sum of all budgets in a wallet cannot exceed the wallet
+limit.
 
 ### Managing wallets
 
@@ -111,8 +122,9 @@ Credit limit:     10000
 The default wallet is shown with an asterisk "\*". SLA budgets are allocated
 from this wallet if the wallet name is not specified.
 
-The credit limit is the maximum monthly limit approved to spend on SLAs. You
-can submit a request to have this limit increased using this link:
+The credit limit is the maximum monthly limit approved to spend on SLAs and is
+determined between you and the Expert. You can submit a request to have this
+limit increased using this link:
 
 [https://jujucharms.com/support/create][jaas-support]
 
@@ -133,56 +145,98 @@ Wallet                              1000
 Unallocated                          900
 ```
 
-You may increase the budget limit for a model:
+You may update the budget limit for a model with the `budget` command:
 
 ```bash
-juju budget -m demo-izae7oj5:admin/doctest-03 250
+juju budget -m lxd:admin/default 200
 ```
 
-```
-budget limit updated to 250
-```
-
-```bash
-juju show-wallet personal
-```
-
-```
-Model                           Spent   Budgeted                      By        Usage
-jaas:bob/marketing-campaign     0.00         250                     bob        0%   
-                                                                        
-Total                           0.00         250                                0%   
-Wallet                                      1000                        
-Unallocated                                  750                        
-```
-
-The budget limit may be lowered, but not below the current spend.
-
-## Advanced budgeting
-
-You may create additional wallets for accounting or organizational purposes.
+Finally, to view all the budgets associated with a wallet the `show-wallet`
+command is used:
 
 ```bash
-juju create-wallet demo-poc 200
-wallet created
+juju show-wallet primary
 ```
+
+Sample output:
+
+```
+Model                   Spent   Budgeted         By    Usage
+lxd:admin/default       2.42         200        bob    1%   
+lxd:admin/alpha         0.00         150        bob    0%   
+                                                            
+Total                   2.42         350               1%   
+Wallet                              1000                    
+Unallocated                          650
+```
+
+The budget limit may be lowered for a model, but not below its current spent
+value.
+
+### Advanced budgeting
+
+Additional wallets may be created for accounting or organizational purposes
+with the `create-wallet` command:
+
+```bash
+juju create-wallet demo 50
+```
+
+Verify the creation of the new wallet by listing the wallets again:
 
 ```bash
 juju wallets
-Wallet          Monthly Budgeted        Available       Spent
-demo-poc            200        0           200.00        0.00
-personal*          1000      100          1000.00        0.00
-Total              1200      100          1200.00        0.00
-                                                             
-Credit limit:     10000                                      
 ```
 
-To allocate a budget from a specific wallet, use _wallet_:_limit_ when setting
-the budget on an SLA.
+Sample output:
+
+```no-highlight
+Wallet          Monthly Budgeted        Available       Spent
+demo                 50        0            50.00        0.00
+primary*           1000      350           997.58        2.42
+Total              1050      350          1047.58        2.42
+                                                             
+Credit limit:     10000
+```
+
+To allocate a budget (using either the `sla` command or the `budget` command)
+from a specific wallet use the form: `<wallet>:<limit>`. Here are two
+examples:
 
 ```bash
-juju sla essential demo-poc:50
+juju sla essential demo:40
+juju budget primary:25
 ```
+
+## Metering
+
+Metering begins once the following have occurred:
+
+ - an SLA has been assigned to a model
+ - a budget has been allocated to a model
+ - the model takes on a workload
+ 
+When metering is underway the output to the `status` command will include an
+extra section:
+
+```no-highlight
+.
+.
+Entity  Meter status  Message
+model   green
+.
+.
+```
+
+Determining factors for actual metering costs (e.g. fixed per-hour rate,
+per-unit hour, etc.) are negotiated between you and your Expert.
+
+## Creating a support case
+
+When it comes time to request help from your Expert you can file a support case
+using the same URL for requesting a credit limit increase:
+
+[https://jujucharms.com/support/create][jaas-support]
 
 
 <!-- LINKS -->
