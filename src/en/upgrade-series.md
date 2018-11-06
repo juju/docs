@@ -14,9 +14,10 @@ TODO:  warning: ubuntu code names hardcoded
 Starting with Juju `v.2.5.0`, to upgrade the series of a machine, the
 `upgrade-series` command is used.
 
-The `upgrade-series` command does not support upgrading a controller. See below
-section [Upgrading a controller machine][#upgrading-a-controller] for how to do
-that using an alternate method.
+The `upgrade-series` command does not support upgrading a controller. An error
+will be emitted if you attempt to do so. See below section
+[Upgrading a controller machine][#upgrading-a-controller] for how to do that
+using an alternate method.
 
 ## Upgrading a workload machine
 
@@ -41,11 +42,11 @@ to Ubuntu 18.04 LTS (Bionic).
 
 ### Initiating the upgrade
 
-You initiate the upgrade with the `prepare` sub-command, the machine ID, and
+You initiate the upgrade with the machine ID, the `prepare` sub-command, and
 the target series:
 
 ```bash
-juju upgrade-series prepare 1 bionic
+juju upgrade-series 1 prepare bionic
 ```
 
 You will be asked to confirm the procedure. Use the `-y` option to avoid this
@@ -54,17 +55,16 @@ prompt.
 Then output will be shown, such as:
 
 ```no-highlight
-leadership pinned for application "apache2"
-machine-1 started upgrade series from series xenial to series bionic
-apache2/0 pre-series-upgrade hook running
-apache2/0 pre-series-upgrade not found, skipping
-machine-1 all necessary binaries and service files written
+machine-1 started upgrade series from "xenial" to "bionic"
+apache2/1 pre-series-upgrade hook running
+apache2/1 pre-series-upgrade hook not found, skipping
+machine-1 binaries and service files written
 
 Juju is now ready for the series to be updated.
 Perform any manual steps required along with "do-release-upgrade".
-When ready run the following to complete the upgrade series process:
+When ready, run the following to complete the upgrade series process:
 
-juju upgrade-series complete 1
+juju upgrade-series 1 complete
 ```
 
 All charms associated with the machine must support the target series in order
@@ -97,17 +97,17 @@ You should now verify that the machine has been successfully upgraded. Once
 that's done, tell Juju that the machine is ready:
 
 ```bash
-juju upgrade-series complete 1
+juju upgrade-series 1 complete
 ```
 
 Sample output:
 
 ```no-highlight
 machine-1 complete phase started
-machine-1 starting all unit agents after series upgrade
+machine-1 started unit agents after series upgrade
 apache2/0 post-series-upgrade hook running
-apache2/0 post-series-upgrade not found, skipping
-leadership unpinned for application "apache2"
+apache2/0 post-series-upgrade hook not found, skipping
+machine-1 series upgrade complete
 
 Upgrade series for machine "1" has successfully completed
 ```
