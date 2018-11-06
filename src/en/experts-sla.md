@@ -228,6 +228,14 @@ model   green
 .
 ```
 
+A 'Meter' value of **green** (displayed with a green colour in the terminal)
+indicates that the customer’s payment method is in good standing. A value of
+**amber** indicates a condition puts future payment for continued use at risk
+(e.g. spending is occurring at a rate likely to exceed the monthly limit). A
+value of **red** indicates that continued use of the workload will not be paid
+for (e.g. budget limit exceeded, problem with payment method). The 'Message'
+column will be updated with appropriate details.
+
 Determining factors for actual metering costs (e.g. fixed per-hour rate,
 per-unit hour, etc.) are negotiated between you and your Expert.
 
