@@ -2,17 +2,18 @@ Title: Managed solutions
 
 # Managed solutions
 
-A Juju Expert is a partner backed by professional support at Canonical Ltd.
-Such a partner deploys and supports an infrastructure based on Juju. We call
-this a *managed solution*.
+One professional support option available to you as a Juju operator is to
+enlist the help of a *Juju Expert*.
+
+A Juju Expert is a support partner, backed by Canonical Ltd, which deploys and
+supports infrastructure based on Juju. We call this type of arrangement a
+*managed solution*.
 
 Any support requests beyond the build, workload, and operation of a particular
-solution can be escalated to Canonical by means of their Ubuntu Advantage
-support framework. Prime examples of such requests are for issues relating to
-Juju itself, Ubuntu-specific software, or the operating system kernel. The
-escalated support case will be treated by Canonical at the same support level
-currently ascribed to the partner. Hence, support level names used by both a
-Juju Expert and by Canonical are the same:
+solution can be escalated, by the Expert, to Canonical by means of their Ubuntu
+Advantage support framework. The escalated support case will be treated by
+Canonical at the same support level currently ascribed to the partner. Hence,
+support level names used by both a Juju Expert and by Canonical are the same:
 
  - Essential
  - Standard
@@ -25,8 +26,8 @@ The Juju Expert will provide details such as support levels and costs on a
 per-solution basis but ultimately an SLA will be conferred upon a specific Juju
 model (see [Models][models]).
 
-Consult the external [Juju Experts][juju-experts] page to find a managed
-solution partner for your project.
+Consult the [Juju Experts][juju-experts] page to find a managed solution
+partner for your project.
 
 ## Requirements
 
@@ -242,7 +243,7 @@ per-unit hour, etc.) are negotiated between you and your Expert.
 ## Creating a support case
 
 When it comes time to request help from your Expert you can file a support case
-using the same URL for requesting a credit limit increase:
+here:
 
 [https://jujucharms.com/support/create][jaas-support]
 
