@@ -12,11 +12,17 @@ things. Charms can exist online (in the [Charm Store][charm-store]) or on your
 local filesystem (previously downloaded from the store or written locally).
 
 Charms use the concept of *series* analogous as to how Juju does with Ubuntu
-series ('Trusty', 'Xenial', etc). For the most part, this is transparent as
+series ('Xenial', 'Bionic', etc). For the most part, this is transparent as
 Juju will use the most relevant charm to ensure things "just work". The
 default series can be configured at a model level, see
 [Configuring models][models-config] for further details. In the absence of this
 setting, the default is to use the series specified by the charm.
+
+Deploying a charm does not make its related application instantly accessible.
+This is because most clouds enforce default network security policies that
+prohibit incoming traffic. Thankfully, Juju can request that the necessary
+changes be made. See section below entitled
+[Exposing deployed applications][#exposing-deployed-applications].
 
 ## Deploying from the Charm Store
 
@@ -54,7 +60,7 @@ juju deploy mysql mysql1
 
 ### Channels
 
-The charm store offers charms in different stages of development. Such stages
+The Charm Store offers charms in different stages of development. Such stages
 are called *channels*. Some users may want the very latest features, or be part
 of a beta test; others may want to only install the most reliable software. The
 channels are:
@@ -86,23 +92,56 @@ approximates your choice if it is not available.
 
 See [Upgrading applications][charms-upgrading] for how charm upgrades work.
 
+## Deploying from a local charm
+
+It is possible to deploy applications using local charms. See
+[Deploying charms offline][charms-offline-deploying] for further guidance.
+
+## Exposing deployed applications
+
+Once an application is deployed changes need to be made to the backing cloud's
+firewall to permit network traffic to contact the application. This is done
+with the `expose` command.
+
+Assuming the 'wordpress' application has been deployed (and a relation has been
+made to deployed database 'mariadb'), we would expose it in this way:
+
+```bash
+juju expose wordpress
+```
+
+The below partial output from the `status` command informs us that the
+'wordpress' application is currently exposed. In this case it is available via
+its public address of 54.224.246.234:
+
+```no-highlight
+App        Version  Status  Scale  Charm      Store       Rev  OS      Notes
+mariadb    10.1.36  active      1  mariadb    jujucharms    7  ubuntu  
+wordpress           active      1  wordpress  jujucharms    5  ubuntu  exposed
+
+Unit          Workload  Agent  Machine  Public address  Ports   Message
+mariadb/0*    active    idle   1        54.147.127.19           ready
+wordpress/0*  active    idle   0        54.224.246.234  80/tcp
+```
+
+Use the `unexpose` command to undo the changes:
+
+```bash
+juju unexpose wordpress
+```
+
 ## Deploying a multi-series charm
 
 Some charms support more than one series. It is also possible to force a charm
 to deploy to a different series. See the documentation on
 [Multi-series charms][deploying-multi-series-charms] to learn more.
 
-## Deploying from a local charm
-
-It is possible to deploy applications using local charms. See
-[Deploying charms offline][charms-offline-deploying] for further guidance.
-
 ## Configuring at deployment time
 
 Deployed applications usually start with a sane default configuration. However,
 for some applications it may be desirable (and quicker) to configure them at
 deployment time. This can be done whether a charm is deployed from the Charm
-Store or from a local charm. See [Application configuration][charms-config] for
+Store or from a local charm. See [Configuring applications][charms-config] for
 more on this.
 
 ## Deploying to LXD containers
@@ -131,7 +170,7 @@ applications at deployment time. See
 [Deploying to network spaces][deploying-to-network-spaces] for more
 information.
 
-## Scaling out
+## Scaling out deployed applications
 
 A common enterprise requirement, once applications have been running for a
 while, is the ability to scale out (and scale back) one's infrastructure.
@@ -143,12 +182,13 @@ matter.
 <!-- LINKS -->
 
 [charm-store]: https://jujucharms.com/store
-[models-config]: ./models-config.html
-[charms-upgrading]: ./charms-upgrading.html
-[charms-offline-deploying]: ./charms-offline-deploying.html
-[charms-config]: ./charms-config.html
-[charms-scaling]: ./charms-scaling.html
-[network-spaces]: ./network-spaces.html
-[deploying-multi-series-charms]: ./charms-deploying-advanced.html#multi--series-charms
-[deploying-to-specific-machines]: ./charms-deploying-advanced.html#deploying-to-specific-machines
-[deploying-to-network-spaces]: ./charms-deploying-advanced.html#deploying-to-network-spaces
+[models-config]: ./models-config.md
+[charms-upgrading]: ./charms-upgrading.md
+[charms-offline-deploying]: ./charms-offline-deploying.md
+[charms-config]: ./charms-config.md
+[charms-scaling]: ./charms-scaling.md
+[network-spaces]: ./network-spaces.md
+[deploying-multi-series-charms]: ./charms-deploying-advanced.md#multi--series-charms
+[deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
+[deploying-to-network-spaces]: ./charms-deploying-advanced.md#deploying-to-network-spaces
+[#exposing-deployed-applications]: #exposing-deployed-applications

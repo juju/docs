@@ -1,7 +1,7 @@
-Title: Network Spaces
+Title: Network spaces
 TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1747998
 
-# Network Spaces
+# Network spaces
 
 Juju models networks using *spaces*, which can be mapped to one or more subnets
 of the chosen backing cloud. When a space's subnets span multiple availability

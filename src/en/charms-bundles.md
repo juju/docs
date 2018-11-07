@@ -481,12 +481,18 @@ environments where a Juju controller is unable to contact the Charm Store.
 
 ## Saving a bundle and next steps
 
-If you have created your own bundle you will need to save it. In order to do
-this you will need to use the Juju GUI. See
-[Adding bundles with the GUI][charms-bundles-gui-exporting] for instructions.
+If you have created your own bundle you will probably want to save it. This is
+done with the `export-bundle` command, which exports a single model
+configuration.
 
-!!! Note:
-    A CLI tool for saving a bundle is currently under development.
+For example, to export the currently active model into file `mymodel.yaml`:
+
+```bash
+juju export-bundle --filename mymodel.yaml
+```
+
+You can also use the Juju GUI to save a bundle. See
+[Adding bundles with the GUI][charms-bundles-gui-exporting] for instructions.
 
 Once the bundle is saved you can consider these
 [Next steps][authors-charm-store-next-steps].

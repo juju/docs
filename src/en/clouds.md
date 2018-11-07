@@ -3,9 +3,6 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1749583
        INFO: Auth types found at ~/.local/share/juju/public-clouds.yaml
        There is contention whether access-key can be used with keystone v3 (see https://github.com/juju/docs/issues/2868)
-       Needs to be updated for the possible removal of the old Oracle cloud (Oracle Classic)
-       Update: Juju is growing an authentication type for OpenStack: certificates
-       Update: Juju is growing add-cloud for (remote) LXD
 table_of_contents: True
 
 # Clouds
@@ -19,11 +16,11 @@ shown, it is simply done. They are VMware vSphere, OpenStack, MAAS, and Manual.
 An Oracle *trial* account also needs to be added.
 
 Once your cloud is known to Juju, whether by default or due to it being added,
-the next step is to add your cloud credentials to Juju. The exception is LXD;
-it does not require credentials.
+the next step is to add your cloud credentials to Juju. The exception is for a
+local LXD cloud; credentials are added automatically.
 
-This rest of this page covers general cloud management tasks and an overview of
-how clouds are added. You can still get started by selecting your cloud here:
+This rest of this page covers general cloud management and an overview of how
+clouds are added. You can still get started by selecting your cloud here:
 
  - [Amazon AWS][clouds-aws]
  - [Microsoft Azure][clouds-azure]
@@ -40,7 +37,8 @@ how clouds are added. You can still get started by selecting your cloud here:
 
 ## General cloud management
 
-To see which clouds Juju is currently aware of use the `clouds` command:
+To get the list of clouds that Juju is currently aware of use the `clouds`
+command:
 
 ```bash
 juju clouds
@@ -167,7 +165,7 @@ of adding a cloud manually.
 `ec2`		  | `access-key`
 `gce`		  | `jsonfile,oauth2`
 `joyent`	  | `userpass`
-`lxd`		  | n/a
+`lxd`		  | n/a, `certificate` (`v.2.5`)
 `maas`		  | `oauth1`
 `manual`	  | n/a
 `oci`	  	  | `httpsig`
