@@ -1,19 +1,16 @@
-Title: Working with charms and applications
-TODO: Add images
-      To add (notes from PR #1093):
+Title: Working with charms, applications, and series
+TODO: To add (notes from PR #1093):
       1. charms may be different depending on target OS
       2. can choose which charm to use; can deploy on a series that it doesn't claim to
 	support
       3. however, to have things 'just work', don't bother specifying anything and the
 	charm will decide which OS/version to use
-      Should probably link to charms-exposing.md instead of repeating
-      The Scaling back section should just reference charms-scaling.html
-      The Removing applications section should just reference charms-destroy.html
 
-# Working with charms and applications
+# Working with charms, applications, and series
 
-This page will take you through some of the common operations you will want
-to perform with Juju. You should gain an understanding of:
+In this tutorial you will apply knowledge pertaining to key Juju concepts
+detailed elsewhere in this documentation. They are charms, applications, units,
+and series. Specifically, you will gain experience in the following activities:
  
  - Deploying an application
  - Relating applications
@@ -176,18 +173,18 @@ removing units, and you can add 5 units simply with the following command:
 juju add-unit -n 5 mediawiki 
 ```
 
-The output to `juju status mediawiki` should now show that five newly
-provisioned machines have been deployed to run MediaWiki. However, the load
-balancing is still being performed by HAProxy, which is distributing any
-incoming connections to your cluster of MediaWiki machines, and the complexity
-of these added connections is being handled automatically by Juju. 
+There are now five newly provisioned machines that have been deployed to run
+MediaWiki. However, the load balancing is still being performed by HAProxy,
+which is distributing any incoming connections to your cluster of MediaWiki
+machines, and the complexity of these added connections is being handled
+automatically by Juju. 
 
 ### Scaling down
 
-Reducing the scale of a deployment is almost as simple as increasing the scale,
-although you need to specify which specific units to remove. We currently have
-a total of six units assigned to MediaWiki, for example, as can be seen in the
-output to `juju status mediawiki`:
+Reducing the scale of a deployment is almost as simple as increasing the scale.
+When scaling down you need to specify which specific units to remove. We
+currently have a total of six units assigned to MediaWiki, as can be seen in
+the output to `juju status mediawiki`:
 
 ```no-highlight
 Unit          Workload  Agent  Machine  Public address   Ports   Message
@@ -199,8 +196,8 @@ mediawiki/4   active    idle   9        35.196.59.200    80/tcp  Ready
 mediawiki/5   active    idle   10       35.196.179.191   80/tcp  Ready
 ```
 
-To scale back our deployment, use the `remove-unit` command followed by the 
-unit ID of each unit you'd like to remove:
+To scale down a deployment, use the `remove-unit` command followed by the unit
+ID of each unit you'd like to remove:
 
 ```bash
 juju remove-unit mediawiki/3 mediawiki/4 mediawiki/5
@@ -208,12 +205,11 @@ juju remove-unit mediawiki/3 mediawiki/4 mediawiki/5
 
 A hidden part of the above process is that the machines the units were running
 on will be destroyed automatically if the machine is not a controller and not
-hosting other Juju managed containers.
+hosting any other application's units.
 
 ### Removing applications
 
-When an application is removed, all the units used to operate the application
-are removed:
+When an application is removed, all the associated units are removed as well:
 
 ```bash
 juju remove-application mediawiki
@@ -224,8 +220,8 @@ juju remove-application haproxy
 When the removals have completed, you should see no trace of any applications
 in the output of `juju status`. The machines that were used to run these
 applications should also be gone since that is the default behaviour: if there
-are no other applications running on a machine then the machine itself will be
-removed.
+are no other application units running on a machine then the machine itself
+will be removed.
 
 Alternatively, you can simply remove the model with:
 
