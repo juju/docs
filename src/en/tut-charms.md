@@ -8,16 +8,16 @@ TODO: To add (notes from PR #1093):
 
 # Working with charms, applications, and series
 
-In this tutorial you will apply knowledge pertaining to key Juju concepts
-detailed elsewhere in this documentation. They are charms, applications, units,
-and series. Specifically, you will gain experience in the following activities:
+In this tutorial you will apply knowledge of key Juju concepts detailed
+elsewhere in this documentation. These concepts are charms, applications,
+units, and series. Specifically, you will gain experience in the following:
  
  - Deploying an application
- - Relating applications
+ - Creating relations between applications
  - Exposing an application
- - Scaling up
- - Removing units
- - Removing applications
+ - Scaling up an application
+ - Scaling down an application
+ - Removing applications, units, and machines
 
 Although you can follow along by using any backing cloud, for simplicity this
 tutorial will use a local LXD cloud where the controller is named 'lxd' and the
@@ -90,7 +90,7 @@ haproxy:peer       haproxy:peer     haproxy-peer  peer
 mariadb:cluster    mariadb:cluster  mysql-ha      peer
 ```
 
-### Relating applications
+### Creating relations between applications
 
 The applications may now be running, but they aren't connected in any
 meaningful way. In order for MediaWiki to make use of the MariaDB database
@@ -114,7 +114,7 @@ HAProxy will provide traffic load balancing to MediaWiki, but it needs to know
 where the various MediaWiki applications are on the network. At this stage
 there is only one, but that will change shortly.
 
-### Exposing the application
+### Exposing an application
 
 Make HAProxy available to the world by making changes to the backing cloud's
 firewall:
@@ -164,7 +164,7 @@ Our MediaWiki site is now exposed via HAProxy. You can check this by pointing
 your browser to the IP address of HAProxy visible in the above output. In this
 example, it is 35.196.126.59.
 
-### Scaling up
+### Scaling up an application
 
 Scale is handled by adding and 
 removing units, and you can add 5 units simply with the following command:
@@ -179,7 +179,7 @@ which is distributing any incoming connections to your cluster of MediaWiki
 machines, and the complexity of these added connections is being handled
 automatically by Juju. 
 
-### Scaling down
+### Scaling down an application
 
 Reducing the scale of a deployment is almost as simple as increasing the scale.
 When scaling down you need to specify which specific units to remove. We
@@ -207,7 +207,7 @@ A hidden part of the above process is that the machines the units were running
 on will be destroyed automatically if the machine is not a controller and not
 hosting any other application's units.
 
-### Removing applications
+### Removing applications, units, and machines
 
 When an application is removed, all the associated units are removed as well:
 
@@ -243,6 +243,7 @@ definitive documentation:
 <!-- LINKS -->
 
 [clouds]: ./clouds.md
+[models]: ./models.md
 [credentials]: ./credentials.md
 [charms-deploy]: ./charms-deploying.md
 [charms-relations]: ./charms-relations.md
