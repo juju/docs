@@ -14,7 +14,6 @@ homepage: true
         <div class="u-equal-height">
             <div class="col-6">
                 <h2>Getting started</h2>
-                <p>Juju works with public cloud, private clouds, and locally with LXD.</p>
                 <p><a href="/2.4/en/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
             </div>
             <div class="col-6 u-align--right">
@@ -26,18 +25,16 @@ homepage: true
             <div class="col-6">
                 <h2>What's new</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/2.4/en/clouds-gce">Using Google GCE with Juju&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.4/en/tut-lxd">Using Juju locally (LXD)&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.4/en/whats-new">New features in 2.4&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.4/en/troubleshooting">Troubleshooting&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item"><a href="/2.4/en/reference-release-notes">Release notes&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
             <div class="col-6">
                 <h2>Explore Juju</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/2.4/en/reference-install">Install Juju&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.4/en/juju-concepts">Concepts and terms&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.4/en/tut-google">Working with controllers and models&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.4/en/tut-users">Working with users&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.4/en/tut-lxd">Using Juju locally with LXD&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.4/en/tut-users">A multi-user cloud&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>
@@ -54,7 +51,7 @@ homepage: true
                     <li class="p-list__item">
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/fa38eb81-picto-business-midaubergine.svg');
                         height:1.5rem;width: 1.5rem;top: 2px;margin-right:.5rem;"></i>
-                        <a class="p-link--external" href="https://jujucharms.com/experts">Professional support</a>
+			<a href="/2.4/en/experts-sla">Managed solutions</a>
                     </li>
                     <li class="p-list__item">
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/4ef84d88-picto-quote-warmgrey.svg');
@@ -82,7 +79,7 @@ homepage: true
                 <h2>Contribute</h2>
                 <ul class="p-list">
                     <li class="p-list__item"><a class="p-link--external" href="https://github.com/juju/juju">Help improve Juju</a></li>
-                    <li class="p-list__item--deep"><a class="p-link--external" href="/2.4/en/contributing">Help improve the documentation</a></li>
+                    <li class="p-list__item"><a href="/2.4/en/contributing">Help improve the documentation</a></li>
                 </ul>
             </div>
         </div>
