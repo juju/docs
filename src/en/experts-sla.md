@@ -5,22 +5,17 @@ Title: Managed solutions
 One professional support option available to you as a Juju operator is to
 enlist the help of a *Juju Expert*.
 
-A Juju Expert is a support partner, backed by Canonical Ltd, which deploys and
-supports infrastructure based on Juju. We call this type of arrangement a
-*managed solution*.
+A Juju Expert is a Canonical Ltd. support partner, which deploys and supports
+infrastructure based on Juju. We call this type of arrangement a *managed
+solution*.
 
 Any support requests beyond the build, workload, and operation of a particular
 solution can be escalated, by the Expert, to Canonical by means of their Ubuntu
 Advantage support framework. The escalated support case will be treated by
-Canonical at the same support level currently ascribed to the partner. Hence,
-support level names used by both a Juju Expert and by Canonical are the same:
-
- - Essential
- - Standard
- - Advanced
-
-See [Ubuntu Advantage for Servers][ubuntu-advantage-servers] for more
-information on Canonical support levels.
+Canonical at the same support level currently ascribed to the partner
+(Essential, Standard, or Advanced). See
+[Ubuntu Advantage for Servers][ubuntu-advantage-servers] for more information
+on Canonical support levels.
 
 The Juju Expert will provide details such as support levels and costs on a
 per-solution basis but ultimately an SLA will be conferred upon a specific Juju
@@ -28,6 +23,9 @@ model (see [Models][models]).
 
 Consult the [Juju Experts][juju-experts] page to find a managed solution
 partner for your project.
+
+**The remainder of this page describes how a Juju Expert would administer a
+managed solution for you.**
 
 ## Requirements
 
@@ -40,12 +38,10 @@ time:
 
 ## Setting an SLA
 
-Once you have contracted out a Juju Expert you are ready to set an SLA. This is
-done within Juju itself via the `sla` command, which will trigger a dialog to
-authenticate to your Ubuntu SSO account.
+An SLA is set within Juju itself, on a per-model basis, via the `sla` command,
+which will trigger a dialog to authenticate to your Ubuntu SSO account.
 
-An SLA is set on a per-model basis, and includes two key parameters in order
-for support to become active:
+Two key parameters are needed in order for support to become active:
 
  1. Support level
  1. Budget limit
@@ -123,9 +119,8 @@ Credit limit:     10000
 The default wallet is shown with an asterisk "\*". SLA budgets are allocated
 from this wallet if the wallet name is not specified.
 
-The credit limit is the maximum monthly limit approved to spend on SLAs and is
-determined between you and the Expert. You can submit a request to have this
-limit increased using this link:
+The credit limit is the maximum monthly limit approved to spend on SLAs. You
+can submit a request to have this limit increased using this link:
 
 [https://jujucharms.com/support/create][jaas-support]
 
@@ -238,7 +233,7 @@ for (e.g. budget limit exceeded, problem with payment method). The 'Message'
 column will be updated with appropriate details.
 
 Determining factors for actual metering costs (e.g. fixed per-hour rate,
-per-unit hour, etc.) are negotiated between you and your Expert.
+per-unit hour, etc.) are negotiated between the customer and the Expert.
 
 ## Creating a support case
 
