@@ -119,10 +119,10 @@ Credit limit:     10000
 The default wallet is shown with an asterisk "\*". SLA budgets are allocated
 from this wallet if the wallet name is not specified.
 
-The credit limit is the maximum monthly limit approved to spend on SLAs. You
-can submit a request to have this limit increased using this link:
-
-[https://jujucharms.com/support/create][jaas-support]
+The *credit limit* is the maximum monthly limit approved to spend on SLAs. You
+can submit a request to Canonical to have this limit increased. This is done
+via an escalated support case. See section
+[Escalating a support case][#escalating-a-support-case].
 
 View the budgets allocated from a wallet with the `show-wallet` command:
 
@@ -235,12 +235,15 @@ column will be updated with appropriate details.
 Determining factors for actual metering costs (e.g. fixed per-hour rate,
 per-unit hour, etc.) are negotiated between the customer and the Expert.
 
-## Creating a support case
+## Escalating a support case
 
-When it comes time to request help from your Expert you can file a support case
+When it comes time to request help from Canonical you can file a support case
 here:
 
 [https://jujucharms.com/support/create][jaas-support]
+
+You would also request an increase to the monthly credit limit via a support
+case.
 
 
 <!-- LINKS -->
@@ -251,3 +254,4 @@ here:
 [ubuntu-sso]: https://login.ubuntu.com/+login
 [launchpad]: https://launchpad.net/+login
 [jaas-support]: https://jujucharms.com/support/create
+[#escalating-a-support-case]: #escalating-a-support-case
