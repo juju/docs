@@ -1,16 +1,16 @@
-Title: Working with charms, applications, and series
-TODO: To add (notes from PR #1093):
+Title: Working with charms and applications
+TODO: To add (notes from PR #1093) in another tutorial:
       1. charms may be different depending on target OS
       2. can choose which charm to use; can deploy on a series that it doesn't claim to
 	support
       3. however, to have things 'just work', don't bother specifying anything and the
 	charm will decide which OS/version to use
 
-# Working with charms, applications, and series
+# Working with charms and applications
 
 In this tutorial you will apply knowledge of key Juju concepts detailed
 elsewhere in this documentation. These concepts are charms, applications,
-units, and series. Specifically, you will gain experience in the following:
+and units. Specifically, you will gain experience in the following:
  
  - Deploying an application
  - Creating relations between applications
@@ -18,6 +18,8 @@ units, and series. Specifically, you will gain experience in the following:
  - Scaling up an application
  - Scaling down an application
  - Removing applications, units, and machines
+
+To achieve our goals we will set up a MediaWiki site.
 
 Although you can follow along by using any backing cloud, for simplicity this
 tutorial will use a local LXD cloud where the controller is named 'lxd' and the
@@ -29,40 +31,36 @@ Refer to the following resources if this is not the case:
  - [Credentials][credentials]
  - [Models][models]
 
-We are going to set up a simple MediaWiki site, then prepare it for high
-traffic, before scaling it back and finally removing it altogether.
-
 ### Deploying an application
 
-For a MediaWiki site, we will need the 'mediawiki' charm from the charm store. 
-We can deploy that to our model like this:
+For MediaWiki, we will need the 'mediawiki' charm. We deploy it to the current
+model like this:
 
 ```bash
 juju deploy mediawiki
 ```
 
-Now, the Mediawiki application needs a database to store information in. There
-are several appropriate charms we could use, but for this walkthrough we will
-use MariaDB:
+Now, Mediawiki needs a database to store information in. There are several
+appropriate charms we could use, but here we'll use MariaDB:
 
 ```bash
 juju deploy mariadb
 ```
 
-We are now going to scale up this application in order to cope with a high
-level of traffic. We will do so by using the HAProxy load balancer:
+We are now going to scale up the mediawiki application in order to cope with a
+high level of traffic. We will do so by using the HAProxy load balancer:
 
 ```bash
 juju deploy haproxy
 ```
 
-After a while if you check what your model currently contains by running...
+After a while if you check what your model currently contains by running:
 
 ```bash
 juju status
 ```
 
-...you should see something like this:
+You should eventually see something like this:
 
 <!-- JUJUVERSION: 2.3.1-xenial-amd64 -->
 <!-- JUJUCOMMAND: juju status -->
@@ -92,9 +90,9 @@ mariadb:cluster    mariadb:cluster  mysql-ha      peer
 
 ### Creating relations between applications
 
-The applications may now be running, but they aren't connected in any
-meaningful way. In order for MediaWiki to make use of the MariaDB database
-a *relation* needs to be added between them.
+The three applications may now be running, but they aren't connected in any
+meaningful way. In order for MediaWiki to make use of the MariaDB database a
+*relation* needs to be added between them.
 
 ```bash
 juju add-relation mediawiki:db mariadb
