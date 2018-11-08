@@ -14,7 +14,7 @@ homepage: true
         <div class="u-equal-height">
             <div class="col-6">
                 <h2>Getting started</h2>
-                <p><a href="/en/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
+                <p><a href="/devel/en/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
             </div>
             <div class="col-6 u-align--right">
                 <img style="border: 0" src="https://assets.ubuntu.com/v1/843c77b6-juju-at-a-glace.svg">
