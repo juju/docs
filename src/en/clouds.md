@@ -9,11 +9,10 @@ table_of_contents: True
 
 Juju supports a wide variety of clouds. In addition, many of these are known to
 Juju out of the box. They are Amazon AWS, Microsoft Azure, Google GCE, Oracle
-Compute, Rackspace, Joyent, and LXD.
+OCI, Rackspace, Joyent, and LXD.
 
 The remaining supported clouds do need to be added to Juju, and, as will be
 shown, it is simply done. They are VMware vSphere, OpenStack, MAAS, and Manual.
-An Oracle *trial* account also needs to be added.
 
 Once your cloud is known to Juju, whether by default or due to it being added,
 the next step is to add your cloud credentials to Juju. The exception is for a
@@ -25,8 +24,7 @@ clouds are added. You can still get started by selecting your cloud here:
  - [Amazon AWS][clouds-aws]
  - [Microsoft Azure][clouds-azure]
  - [Google GCE][clouds-google]
- - [Oracle Compute][clouds-oracle]
- - [Oracle Cloud Infrastructure][clouds-oci]
+ - [Oracle OCI][clouds-oci]
  - [Rackspace][clouds-rackspace]
  - [Joyent][clouds-joyent]
  - [LXD][clouds-lxd]
@@ -47,24 +45,23 @@ juju clouds
 This will return a list very similar to:
 
 ```no-highlight
-Cloud        Regions  Default          Type        Description
-aws               14  us-east-1        ec2         Amazon Web Services
-aws-china          1  cn-north-1       ec2         Amazon China
-aws-gov            1  us-gov-west-1    ec2         Amazon (USA Government)
-azure             24  centralus        azure       Microsoft Azure
-azure-china        2  chinaeast        azure       Microsoft Azure China
-cloudsigma         5  hnl              cloudsigma  CloudSigma Cloud
-google             7  us-east1         gce         Google Cloud Platform
-joyent             6  eu-ams-1         joyent      Joyent Cloud
-oracle             5  uscom-central-1  oracle      Oracle Cloud
-rackspace          6  dfw              rackspace   Rackspace Cloud
-localhost          1  localhost        lxd         LXD Container Hypervisor
+Cloud        Regions  Default        Type        Description
+aws               15  us-east-1      ec2         Amazon Web Services
+aws-china          1  cn-north-1     ec2         Amazon China
+aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
+azure             26  centralus      azure       Microsoft Azure
+azure-china        2  chinaeast      azure       Microsoft Azure China
+cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
+google            13  us-east1       gce         Google Cloud Platform
+joyent             6  eu-ams-1       joyent      Joyent Cloud
+oracle             4  us-phoenix-1   oci         Oracle Cloud Infrastructure
+rackspace          6  dfw            rackspace   Rackspace Cloud
+localhost          1  localhost      lxd         LXD Container Hypervisor
 ```
 
-Each line represents a backing cloud that Juju can interact with. It gives the
-cloud name, the number of cloud regions Juju is aware of, the default region
-(for the current Juju client), the type/API used to control it, and a brief
-description.
+Each line represents a cloud that Juju can interact with. It gives the cloud
+name, the number of cloud regions Juju is aware of, the default region (for the
+current Juju client), the type/API used to control it, and a brief description.
 
 !!! Important:
     The cloud name (e.g. 'aws', 'localhost') is what you will use in any
@@ -192,7 +189,6 @@ Here are some examples of manually adding a cloud:
 [clouds-aws]: ./help-aws.md
 [clouds-azure]: ./help-azure.md
 [clouds-google]: ./help-google.md
-[clouds-oracle]: ./help-oracle.md
 [clouds-oci]: ./clouds-oci.md
 [clouds-rackspace]: ./help-rackspace.md
 [clouds-joyent]: ./help-joyent.md

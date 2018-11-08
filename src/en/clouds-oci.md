@@ -1,7 +1,7 @@
-Title: Using Oracle Cloud Infrastructure with Juju
-TODO:  Review required: 2.5 changes still to come (baked-in, then test trial accounts)
+Title: Using Oracle OCI with Juju
+TODO:  Review required: test trial accounts
 
-# Using Oracle Cloud Infrastructure with Juju
+# Using Oracle OCI with Juju
 
 Juju has built-in support for [Oracle Cloud Infrastructure][oracle-oci] (OCI),
 Oracle's public cloud. This means that there is no need to add the OCI cloud
@@ -75,33 +75,29 @@ OCIDs are required for the following objects:
 
 They are all gathered via Oracle's web [Console][oracle-oci-console].
 
-**Tenancy OCID**  
-The Tenancy OCID is found by clicking in the top-right corner user icon and
-choosing the 'Tenancy: your_username' menu entry. The resulting page will
-provide the information.
-
-Here, we'll assign this value to a variable so we can refer to it later:
-
-`OCID_TENANCY=ocid1.tenancy.oc1..aaaaaaaanoslu5x9e50gvq3mdilr5lzjz4imiwj3ale4s3qyivi5liw6hcia`
-
 **User OCID**  
 The User OCID is found by clicking in the top-left menu and choosing 'Identity'
 and then 'Users'. The resulting page will provide the information.
 
-Again, we'll assign this to a variable:
+Here, we'll assign this value to a variable so we can refer to it later:
 
 `OCID_USER=ocid1.user.oc1..aaaaaaaaizcm5ljvk624qa4ue1i8vx043brrs27656sztwqy5twrplckzghq`
 
+**Tenancy OCID**  
+The Tenancy OCID is found on the same page but in the sub-menu
+'Compartments'. The resulting page will provide the information.
+
+Again, we'll assign this to a variable:
+
+`OCID_TENANCY=ocid1.tenancy.oc1..aaaaaaaanoslu5x9e50gvq3mdilr5lzjz4imiwj3ale4s3qyivi5liw6hcia`
+
 **Compartment OCID**  
-The Compartment OCID is found on the same page but in the sub-menu
-'Compartments':
+The Compartment OCID is found on the same page:
 
 `OCID_COMPARTMENT=ocid1.tenancy.oc1..aaaaaaaanoslu5x9e50gvq3mdilr5lzjz4imiwj3ale4s3qyivi5liw6hcia`
 
-Notice that the Tenancy and Compartment values are identical. This is because,
-in this example, we decided to use the compartment provided to us by default
-(the *root Compartment*). If you created a new compartment at the "Preparing
-your OCI account" step then your values should be different.
+In this example, for the User OCID, we decided to use the compartment provided
+to us by default (the *root Compartment*).
 
 ### Upload the public key
 
