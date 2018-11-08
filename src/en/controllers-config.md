@@ -60,7 +60,7 @@ real-time (post-bootstrap) is tagged with **[RT]**.
 | Key                        | Type    | Default  | Valid values             | Purpose |
 |:---------------------------|---------|----------|--------------------------|:---------|
 api-port                     | integer | 17070    |                          | The port to use for connecting controller and non-controller agents to controller agents (the controller API). See 'controller-api-port'.
-api-port-open-delay          | string  |          | 10s, etc.                | The delay before the controller API port will accept non-controller agent connections. Enabled only if 'controller-api-port' is set.
+api-port-open-delay **[RT]** | string  |          | 10s, etc.                | The delay before the controller API port will accept non-controller agent connections. Enabled only if 'controller-api-port' is set.
 auditing-enabled **[RT]**    | bool    | true     | false/true               | Sets whether audit logging is enabled. Can be toggled for an existing controller.
 audit-log-capture-args **[RT]** | bool    | false    | false/true               | Sets whether the audit log will contain the arguments passed to API methods. Can be toggled for an existing controller.  
 audit-log-exclude-methods **[RT]** | string  | ReadOnlyMethods | [Some.Method,...] | What information to exclude from the audit log. Can be set for an existing controller. See [additional info][#excluding-information-audit-log].
@@ -74,7 +74,7 @@ bootstrap-retry-delay        | integer | 5       |                          | Ho
 bootstrap-address-delay      | integer | 10      |                          | How often in seconds to refresh controller addresses from the API server
 ca-cert                      | string |          |                          | The certificate of the CA that signed the controller's CA certificate, in PEM format
 charmstore-url               | string | https://api.jujucharms.com/charmstore | | Sets the Charm Store URL.
-controller-api-port          | integer |         |                          | The port to use for connecting controller agents to one another. See 'api-port-open-delay'.
+controller-api-port **[RT]** | integer |         |                          | The port to use for connecting controller agents to one another. See 'api-port-open-delay'.
 controller-uuid              | string |          |                          | The UUID of the controller
 external-network             | string |          |                          | An OpenStack external network UUID.
 juju-ha-space		     | string |          |			    | The name of a network space used used for MongoDB replica-set communication in a controller HA context. Effectively acts as a machine constraint. See [additional info below](#controller-related-spaces).
