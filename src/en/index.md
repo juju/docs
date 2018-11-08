@@ -33,7 +33,7 @@ homepage: true
             <div class="col-6">
                 <h2>Explore Juju</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/devel/en/tut-lxd">Using Juju locally with LXD&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tut-lxd">Using Juju locally (LXD)&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item"><a href="/devel/en/tut-users">A multi-user cloud&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
