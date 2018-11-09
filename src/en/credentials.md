@@ -184,6 +184,46 @@ credentials:
       application-id: niftyapp
       subscription-id: 31fb132e-e774-49dd-adbb-d6a4e966c583
       application-password: UberPassK3yz
+  oracle:
+    default-region: us-ashburn-1
+    jlarin:
+      auth-type: httpsig
+      fingerprint: a3:57:81:9c:d2:d5:af:31:3b:73:1e:2b:a4:ae:96:ee
+      key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        Proc-Type: 4,ENCRYPTED
+        DEK-Info: AES-128-CBC,AAAC919B21A2694027DBEB182593FBEC
+
+        MIIEogIBAAKCAQEAoc9jtcvo49FWe3sOhS6c1ExkllNZ61vChsLmMhBCI1vMc8wu
+        cMpNmYK1ZA+d2Mm5YWDwn4UrSTzyaFdAIesmRljfbYMGTLznI/nfQMa1hkmplF5Q
+        xNPCdzs0afqfnubIyrvCKYfAsRzjCcs7C30n6PzG5WrKxzr1QNvAuvYgjd2oQuSY
+        nAhDgdJDkA9UwJFgI1jE8EuoxjkvmyeL76ohe78IEjMzoBBvll/Vd3d8X/hCHt4b
+        wkmn3B5+QzXIvYXGhaUoZrmG6V+tsk2H5voJj6TswDB8rqIa1SHbY81wIkMUxbD4
+        ScAq8eq2/6ETXcoBULKCjmvyqekJHjT7NngbpwIDAQABAoIBAEEggheIDSK0/UQS
+        EZQVYNYqMUo4HjcW5cL/PRvlY1lr92ycQAzxwC4LaArwJi49czn4lKEALp35w++v
+        PoboaK1j0/n2BLEaT0YxqmQeFq4INBMdqxCt0tW+pKgLUffZF/RRgiLJGwuufstQ
+        W2GSbF/gbgWk6B0sY85JJNebfRrb+qjp5Jz+5t5gNVzOwWWkPYoAKXPd9JHYPFAk
+        JCUTloYdf16lBml+nZI7EGojXtHUpdF7KyYRVfXMfxBnaWpVHvoZBk5Vk5qL/boz
+        N8W+YahFq9BELavYQ30CZQeWYoD2MaSCWv+WzfkER8YK5Onr+5CSU0lW9dqN6wuv
+        LFozUgECgYEAy9vZb+hjn3otkEFvyCGg9wmGIs9Qro3UKJI/mGKQeL7K8sd5WsA6
+        mbOkIDbK71ZG+iIfxDXLzRO1ZzPjAX3cReFZ9NFRHngX9xM92UP+icIJkM6m4ImN
+        UcaGCZiF0LoKUTAkEw+5rpeudGcgNgaI41RKMUBLyQn5MFo3IAPaO4ECgYEAyzJN
+        CqB4e+qJgmc29zKsSfvuofasDTmIMnOZW2ci+tiD/qiH/eJoKHK2F5yGV6/tB2iY
+        kFSuzWEwu/Crl7seW6xPY+HYlGLD60ix1aRDEfR48bZqFqlIu7uowI9dp43aOmPU
+        1YSgMj8UA+rVqHqrS6IX4iqGbEOuzq0a377qiycCgYA99oUQzsH5J1nSDxG68v3K
+        GMr8qacMZ2+lJU7PMqZXDScCxD7Opr8pGME6SW1FciQAw36EVRWtL+BjjhBcw7TA
+        SM7e6wCNElO4ddLGxzQHC0N9EFMIzMZ3pK/5arMRznp0Uv2kDZOSzefo2a+gvDu/
+        XU9vyOtAIBft6n327TTYAQKBgEE3/OhbRzCmv8oeLNM87XW1qgtMLD72Z1OiLOfc
+        e6q90efr2fJQOBQ7dVywvaHpco+9L7Krq4vWlXjdL4ZCCJVuAfFSLPy7kpyzMXkc
+        Bvb9W9BiNz3cyd6PxdDTQFhNwbXdE2QQ9IYMHvV+62LvNInLFhVehtS7CKGHiCem
+        lItJAoGAdnj8nJRFQCAyIGcYk6bloohXI8ko0KLYbHfQpN9oiZa+5crEMzcFiJnR
+        X8rWVPCLZK5gJ56CnP8Iyoqah/hpxTUZoSaJnBb/xa7PCiMq1gBfSF8OYlCsRI0V
+        semYTOymUHkZyWGMIhmdn6t1S9sOy2tYjiH6HqumwirxnD5CLDk=
+        -----END RSA PRIVATE KEY-----
+      region: us-ashburn-1
+      pass-phrase: "ChimayBlue"
+      tenancy: ocid1.tenancy.oc1..aaaaaaaanoslu5x9e50gvq3mdilr5lzjz4imiwj3ale4s3qyivi5liw6hcia
+      user: ocid1.user.oc1..aaaaaaaaizcm5ljvk624qa4ue1i8vx043brrs27656sztwqy5twrplckzghq
   joyent:
     peter:
       auth-type: userpass
@@ -476,15 +516,6 @@ in that credential being related to two models.
 
 <!-- LINKS -->
 
-[clouds-aws]: ./help-aws.md
-[clouds-azure]: ./help-azure.md
-[clouds-google]: ./help-google.md
-[clouds-joyent]: ./help-joyent.md
-[clouds-rackspace]: ./help-rackspace.md
-[clouds-maas]: ./clouds-maas.md
-[clouds-oracle]: ./help-oracle.md
-[clouds-openstack]: ./help-openstack.md
-[clouds-vmware]: ./help-vmware.md
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [clouds-lxd-resources-non-admin-creds]: ./clouds-lxd-resources.md#non-admin-user-credentials
 [clouds-aws-using-env-variables]: ./help-aws.md#using-environment-variables
