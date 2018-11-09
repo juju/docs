@@ -191,17 +191,20 @@ credentials:
       fingerprint: a3:57:81:9c:d2:d5:af:31:3b:73:1e:2b:a4:ae:96:ee
       key: |
         -----BEGIN RSA PRIVATE KEY-----
+        Proc-Type: 4,ENCRYPTED
+        DEK-Info: AES-128-CBC,AAAC919B21A2694027DBEB182593FBEC
+
         MIIEogIBAAKCAQEAoc9jtcvo49FWe3sOhS6c1ExkllNZ61vChsLmMhBCI1vMc8wu
         cMpNmYK1ZA+d2Mm5YWDwn4UrSTzyaFdAIesmRljfbYMGTLznI/nfQMa1hkmplF5Q
         xNPCdzs0afqfnubIyrvCKYfAsRzjCcs7C30n6PzG5WrKxzr1QNvAuvYgjd2oQuSY
-        nAhDgdJDkA9UwJFgI1hE8EuoxjkvmyeL76ohe78IEjMzoBBvll/Vd3d8X/hCHt4b
-        wkmn3B5+QzXIvYXGhaUoZrmG6V+tek2H5voJj6TswDB8rqIa1SHbY81wIkMUxbD4
+        nAhDgdJDkA9UwJFgI1jE8EuoxjkvmyeL76ohe78IEjMzoBBvll/Vd3d8X/hCHt4b
+        wkmn3B5+QzXIvYXGhaUoZrmG6V+tsk2H5voJj6TswDB8rqIa1SHbY81wIkMUxbD4
         ScAq8eq2/6ETXcoBULKCjmvyqekJHjT7NngbpwIDAQABAoIBAEEggheIDSK0/UQS
         EZQVYNYqMUo4HjcW5cL/PRvlY1lr92ycQAzxwC4LaArwJi49czn4lKEALp35w++v
         PoboaK1j0/n2BLEaT0YxqmQeFq4INBMdqxCt0tW+pKgLUffZF/RRgiLJGwuufstQ
         W2GSbF/gbgWk6B0sY85JJNebfRrb+qjp5Jz+5t5gNVzOwWWkPYoAKXPd9JHYPFAk
         JCUTloYdf16lBml+nZI7EGojXtHUpdF7KyYRVfXMfxBnaWpVHvoZBk5Vk5qL/boz
-        N8W+YahFq9BELavYQ30CZQeWYoD2MUSCWv+WzfkER8YK5Onr+5CSU0lW9dqN6wuv
+        N8W+YahFq9BELavYQ30CZQeWYoD2MaSCWv+WzfkER8YK5Onr+5CSU0lW9dqN6wuv
         LFozUgECgYEAy9vZb+hjn3otkEFvyCGg9wmGIs9Qro3UKJI/mGKQeL7K8sd5WsA6
         mbOkIDbK71ZG+iIfxDXLzRO1ZzPjAX3cReFZ9NFRHngX9xM92UP+icIJkM6m4ImN
         UcaGCZiF0LoKUTAkEw+5rpeudGcgNgaI41RKMUBLyQn5MFo3IAPaO4ECgYEAyzJN
@@ -218,7 +221,7 @@ credentials:
         semYTOymUHkZyWGMIhmdn6t1S9sOy2tYjiH6HqumwirxnD5CLDk=
         -----END RSA PRIVATE KEY-----
       region: us-ashburn-1
-      pass-phrase: ""
+      pass-phrase: "ChimayBlue"
       tenancy: ocid1.tenancy.oc1..aaaaaaaanoslu5x9e50gvq3mdilr5lzjz4imiwj3ale4s3qyivi5liw6hcia
       user: ocid1.user.oc1..aaaaaaaaizcm5ljvk624qa4ue1i8vx043brrs27656sztwqy5twrplckzghq
   joyent:

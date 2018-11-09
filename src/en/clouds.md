@@ -122,6 +122,26 @@ cloud):
 juju update-clouds
 ```
 
+To change the definition of an existing cloud, 'oracle' for instance, create a
+[YAML-formatted][yaml] file, say `oracle.yaml`, with contents like:
+
+```no-highlight
+clouds:
+   oracle:
+      type: oci
+      config:
+         compartment-id: <some value>
+```
+
+And then:
+
+```bash
+juju add-cloud --replace oracle oracle.yaml
+```
+
+This will avoid you having to include `--config compartment-id=<some value>` at
+controller-creation time (`bootstrap`).
+
 ## Adding clouds
 
 Adding a cloud is done with the `add-cloud` command, which has both interactive
@@ -144,8 +164,8 @@ configuration file. It has the following format:
 ```yaml
 clouds:
   <cloud_name>:
-    type: <type_of_cloud>
-    auth-types: [<authenticaton_types>]
+    type: <cloud type>
+    auth-types: [<authenticaton types>]
     regions:
       <region-name>:
         endpoint: <https://xxx.yyy.zzz:35574/v3.0/>

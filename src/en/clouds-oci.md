@@ -192,8 +192,12 @@ variable with your own value):
 juju bootstrap --config compartment-id=$OCID_COMPARTMENT oracle oracle-controller
 ```
 
-Above, the name given to the new controller is 'oracle-controller'. OCI
-will provision an instance to run the controller on.
+Above, the name given to the new controller is 'oracle-controller'. OCI will
+provision an instance to run the controller on.
+
+You can optionally change the definition of cloud 'oracle' to avoid having to
+specify the compartment like this. See
+[General cloud management][clouds-general-cloud-management] for how to do this.
 
 For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
@@ -222,6 +226,7 @@ See these pages for ideas on what to do next:
 [credentials]: ./credentials.md
 [jaas]: ./getting-started.md
 [credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file
+[clouds-general-cloud-management]: ./clouds.md#general-cloud-management
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md
 [charms]: ./charms.md
