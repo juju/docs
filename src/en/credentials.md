@@ -184,7 +184,7 @@ credentials:
       application-id: niftyapp
       subscription-id: 31fb132e-e774-49dd-adbb-d6a4e966c583
       application-password: UberPassK3yz
-  oci-test:
+  oracle:
     default-region: us-ashburn-1
     jlarin:
       auth-type: httpsig
@@ -206,19 +206,19 @@ credentials:
         mbOkIDbK71ZG+iIfxDXLzRO1ZzPjAX3cReFZ9NFRHngX9xM92UP+icIJkM6m4ImN
         UcaGCZiF0LoKUTAkEw+5rpeudGcgNgaI41RKMUBLyQn5MFo3IAPaO4ECgYEAyzJN
         CqB4e+qJgmc29zKsSfvuofasDTmIMnOZW2ci+tiD/qiH/eJoKHK2F5yGV6/tB2iY
-        kFSuzWEwu/Crl8seW6xPY+HYlGLD60ix1aRDEfR48bZqFqlIu7uowI9dp43aOmPU
+        kFSuzWEwu/Crl7seW6xPY+HYlGLD60ix1aRDEfR48bZqFqlIu7uowI9dp43aOmPU
         1YSgMj8UA+rVqHqrS6IX4iqGbEOuzq0a377qiycCgYA99oUQzsH5J1nSDxG68v3K
         GMr8qacMZ2+lJU7PMqZXDScCxD7Opr8pGME6SW1FciQAw36EVRWtL+BjjhBcw7TA
-        SM7e6wCNElO2ddLGxzQHC0N9EFMIzMZ3pK/5arMRznp0Uv2kDZOSzefo2a+gvDu/
+        SM7e6wCNElO4ddLGxzQHC0N9EFMIzMZ3pK/5arMRznp0Uv2kDZOSzefo2a+gvDu/
         XU9vyOtAIBft6n327TTYAQKBgEE3/OhbRzCmv8oeLNM87XW1qgtMLD72Z1OiLOfc
         e6q90efr2fJQOBQ7dVywvaHpco+9L7Krq4vWlXjdL4ZCCJVuAfFSLPy7kpyzMXkc
-        Bvb9W9BhNz3cyd6PxdDTQFhNwbXdE2QQ9IYMHvV+62LvNInLFhVehtS7CKGHiCem
-        lItjAoGAdnj8nJRFQCAyIGcYk6bloohXI8ko0KLYbHfQpN9oiZa+5crEMzcFiJnR
+        Bvb9W9BiNz3cyd6PxdDTQFhNwbXdE2QQ9IYMHvV+62LvNInLFhVehtS7CKGHiCem
+        lItJAoGAdnj8nJRFQCAyIGcYk6bloohXI8ko0KLYbHfQpN9oiZa+5crEMzcFiJnR
         X8rWVPCLZK5gJ56CnP8Iyoqah/hpxTUZoSaJnBb/xa7PCiMq1gBfSF8OYlCsRI0V
         semYTOymUHkZyWGMIhmdn6t1S9sOy2tYjiH6HqumwirxnD5CLDk=
         -----END RSA PRIVATE KEY-----
-      pass-phrase: "carbonbasedlifeforms"
       region: us-ashburn-1
+      pass-phrase: ""
       tenancy: ocid1.tenancy.oc1..aaaaaaaanoslu5x9e50gvq3mdilr5lzjz4imiwj3ale4s3qyivi5liw6hcia
       user: ocid1.user.oc1..aaaaaaaaizcm5ljvk624qa4ue1i8vx043brrs27656sztwqy5twrplckzghq
   joyent:
@@ -513,15 +513,6 @@ in that credential being related to two models.
 
 <!-- LINKS -->
 
-[clouds-aws]: ./help-aws.md
-[clouds-azure]: ./help-azure.md
-[clouds-google]: ./help-google.md
-[clouds-joyent]: ./help-joyent.md
-[clouds-rackspace]: ./help-rackspace.md
-[clouds-maas]: ./clouds-maas.md
-[clouds-oracle]: ./help-oracle.md
-[clouds-openstack]: ./help-openstack.md
-[clouds-vmware]: ./help-vmware.md
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [clouds-lxd-resources-non-admin-creds]: ./clouds-lxd-resources.md#non-admin-user-credentials
 [clouds-aws-using-env-variables]: ./help-aws.md#using-environment-variables

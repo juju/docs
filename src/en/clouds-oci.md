@@ -1,22 +1,26 @@
 Title: Using Oracle OCI with Juju
-TODO:  Review required: test trial accounts
+TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1802577 (add '-aes128' to command that creates the key if fixed)
 
 # Using Oracle OCI with Juju
 
-Juju has built-in support for [Oracle Cloud Infrastructure][oracle-oci] (OCI),
-Oracle's public cloud. This means that there is no need to add the OCI cloud
-to Juju. An exception to this is if you are using a trial account. Both types
-of accounts, paid and trial, are covered here.
+Juju already has knowledge of the OCI cloud
+([Oracle Cloud Infrastructure][oracle-oci]), which means adding your Oracle
+account to Juju is quick and easy.
 
-This page will cover the following steps:
+You can see more specific information on Juju's OCI support (e.g. the
+supported regions) by running:
 
- 1. For trial accounts, add the OCI cloud to Juju.
- 1. Add credentials to Juju so it can make use of your OCI account.
- 1. Create the Juju controller.
+```bash
+juju show-cloud oracle
+```
 
-!!! Note:
-    Oracle's [SDK tools][oracle-oci-cli] can also be used to manage your OCI
-    account.
+If at any point you believe Juju's information is out of date (e.g. Oracle just 
+announced support for a new region), you can update Juju's public cloud data by
+running:
+  
+```bash
+juju update-clouds
+```
 
 ## Understanding and preparing your OCI account
 
@@ -31,6 +35,10 @@ most certainly need to do this for both organisational and security reasons.
 
 To organise your Tenancy and its associated compartments read Oracle's
 [Setting up your Tenancy][oracle-oci-tenancy] page.
+
+!!! Note:
+    Oracle's [SDK tools][oracle-oci-cli] can also be used to manage your OCI
+    account.
 
 ## Gathering information 
 
@@ -56,14 +64,21 @@ openssl rsa -pubout -in ~/.oci/oci_ssl_key_private.pem -out ~/.oci/oci_ssl_key_p
 openssl rsa -pubout -outform DER -in ~/.oci/oci_ssl_key_private.pem | openssl md5 -c
 ```
 
-The last command will print the fingerprint of the private key to your screen.
+The first `openssl` invocation will create an encrypted private key and will
+therefore prompt you for a passphrase. You will need this for later. Omit
+option `-aes128` to disable encryption.
 
-We'll later make reference to the private key, the public key, and the
-fingerprint using these variables:
+The last command will output the fingerprint of the private key.
+
+The private key is now in file `~/.oci/oci_ssl_key_private.pem` and the public
+key is in file `~/.oci/oci_ssl_key_public.pem`.
+
+We'll later make reference to the private key, the fingerprint, and the
+passphrase using these variables, respectively:
 
 `$SSL_PRIVATE_KEY`  
-`$SSL_PUBLIC_KEY`  
-`$SSL_PRIVATE_KEY_FINGERPRINT`
+`$SSL_PRIVATE_KEY_FINGERPRINT`  
+`$SSL_PRIVATE_KEY_PASSPHRASE`
 
 ### Oracle Cloud Identifiers (OCIDs)
 
@@ -75,19 +90,22 @@ OCIDs are required for the following objects:
 
 They are all gathered via Oracle's web [Console][oracle-oci-console].
 
+!!! Note:
+    The below instructions for navigating the Oracle web interface assume you
+    are the account administrator. If this is not the case, your experience may
+    differ. In particular, you may need to access information in the top-right
+    corner (look for "User Settings").
+
 **User OCID**  
 The User OCID is found by clicking in the top-left menu and choosing 'Identity'
-and then 'Users'. The resulting page will provide the information.
-
-Here, we'll assign this value to a variable so we can refer to it later:
+and then sub-menu 'Users'. Here, we'll assign this value to a variable so we
+can refer to it later:
 
 `OCID_USER=ocid1.user.oc1..aaaaaaaaizcm5ljvk624qa4ue1i8vx043brrs27656sztwqy5twrplckzghq`
 
 **Tenancy OCID**  
-The Tenancy OCID is found on the same page but in the sub-menu
-'Compartments'. The resulting page will provide the information.
-
-Again, we'll assign this to a variable:
+The Tenancy OCID is found similarly but in the sub-menu 'Compartments'. Again,
+we'll assign this to a variable:
 
 `OCID_TENANCY=ocid1.tenancy.oc1..aaaaaaaanoslu5x9e50gvq3mdilr5lzjz4imiwj3ale4s3qyivi5liw6hcia`
 
@@ -96,108 +114,22 @@ The Compartment OCID is found on the same page:
 
 `OCID_COMPARTMENT=ocid1.tenancy.oc1..aaaaaaaanoslu5x9e50gvq3mdilr5lzjz4imiwj3ale4s3qyivi5liw6hcia`
 
-In this example, for the User OCID, we decided to use the compartment provided
-to us by default (the *root Compartment*).
+In this example, for the Compartment OCID, we decided to use the compartment
+provided to us by default (the *root Compartment*). Notice how it's the same as
+the Tenancy OCID.
 
-### Upload the public key
+### Provide the public SSL key to Oracle
 
-Upload the public key (under 'API Keys')
+In order for the SSL keypair to be of any use the public key must be placed on
+the remote end.
 
-## Trial accounts
-
-As mentioned, you will need to add your Oracle cloud to Juju if you're using a
-trial account. This requires a 'REST Endpoint'. To get this, navigate to 'My
-Account URL', scroll down to 'Oracle Compute Cloud Service', and click on it.
-The resulting page will look similar to this:
-
-![REST endpoint](./media/oracle_myservices-endpoint-2.png)
-
-There may be multiple endpoints. In that case, trial and error may be needed
-below (hint: the endpoint domain should be resolvable using DNS).
-
-Use the interactive `add-cloud` command to add your OCI cloud to Juju's list
-of clouds. You will need to supply a name you wish to call your cloud and
-your region.
-
-For the manual method of adding an OCI cloud, see below section
-[Manually adding an OCI cloud][#clouds-oci-manual].
-
-```bash
-juju add-cloud
-```
-
-Example user session:
-
-```no-highlight
-Cloud Types
-  lxd
-  maas
-  manual
-  oci
-  openstack
-  oracle
-  vsphere
-
-Select cloud type: oci
-
-Enter a name for your oci cloud: oci-test
-
-Enter region name: us-ashburn-1
-
-Enter another region? (y/N): N
-
-Cloud "oci-test" successfully added
-
-You may need to `juju add-credential oci-test' if your cloud needs additional credentials
-then you can bootstrap with 'juju bootstrap oci-test'
-```
-
-Now confirm the successful addition of the cloud:
-
-```bash
-juju clouds
-```
-
-Here is a partial output:
-
-```no-highlight
-Cloud        Regions  Default          Type        Description
-.
-.
-.
-oci-test           1  us-ashburn-1     oci
-```
-
-### Manually adding an OCI cloud
-
-This example covers manually adding an OCI cloud to Juju (see
-[Adding clouds manually][clouds-adding-manually] for background information).
-
-The manual method necessitates the use of a [YAML-formatted][yaml]
-configuration file. Here is an example:
-
-```yaml
-clouds:
-  oci-test:
-    type: oci
-    auth-types: [httpsig]
-    regions:
-      us-ashburn-1: {}
-```
-
-Here we've used 'oci-test' and 'us-ashburn-1' for cloud name and cloud region
-respectively. Your region is listed in the Console.
-
-To add cloud 'oci-test', assuming the configuration file is `oci-cloud.yaml` in
-the current directory, we would run:
-
-```bash
-juju add-cloud oci-test oci-cloud.yaml
-```
+Within the 'Users' sub-menu, click on the user's email address, and then on
+'Add Public Key'. Paste in the key generated earlier and click the 'Add'
+button.
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
 In order to access Oracle OCI, you will need to add credentials to Juju. This
@@ -210,50 +142,58 @@ a ready-made controller.
 ### Using the interactive method
 
 Armed with the gathered information, credentials can be added interactively
-with the command `juju add-credential oci-test`. However, due to the private
-SSL key that needs to be provided this method is not recommended. Use the file
+with the command `juju add-credential oracle`. However, due to the private SSL
+key that needs to be provided this method is not recommended. Use the file
 method outlined next.
 
 ### Using a file
 
 A YAML-formatted file, say `mycreds.yaml`, can be used to store credential
-information for any cloud. The credential file in this example would be based
-on the following (replace the variables with your own values):
+information for any cloud. The file in this example would be based on the
+following (replace the variables with your own values):
 
 ```no-highlight
 credentials:
-  $CLOUD_NAME:
+  oracle:
     default-region: $CLOUD_REGION
     $CREDENTIAL_NAME:
       auth-type: httpsig
-      fingerprint: $SSL_PUBLIC_KEY_FINGERPRINT
+      fingerprint: $SSL_PRIVATE_KEY_FINGERPRINT
       key: |
         $SSL_PRIVATE_KEY
-      pass-phrase: $SSL_PRIVATE_KEY_PASSPHRASE
       region: $CLOUD_REGION
+      pass-phrase: $SSL_PRIVATE_KEY_PASSPHRASE
       tenancy: $OCID_TENANCY
       user: $OCID_USER
 ```
 
-See section [Adding credentials from a file][credentials-adding-from-file] for
-guidance on what such a file looks like.
+Notes:
 
-This information is then added to Juju by pointing the `add-credential`
-command to the file:
+ - The `$SSL_PRIVATE_KEY_PASSPHRASE` value is placed within double-quotes. If the key was not encrypted just
+use "".
+ - The `$CLOUD_REGION` is an Oracle region (`juju regions oracle`).
+ - The `$CREDENTIAL_NAME` is an arbitrary label.
+
+See section [Adding credentials from a file][credentials-adding-from-file] for
+guidance on what such a file can look like.
+
+This information is then added to Juju by referencing the file with the
+`add-credential` command:
 
 ```bash
-juju add-credential oci-test -f mycreds.yaml
+juju add-credential oracle -f mycreds.yaml
 ```
 
 ## Creating a controller
 
-You are now ready to create a Juju controller for cloud 'oci-test':
+You are now ready to create a Juju controller for cloud 'oracle' (replace the
+variable with your own value):
 
 ```bash
-juju bootstrap --config compartment-id=$OCID_COMPARTMENT oci-test oci-test-controller
+juju bootstrap --config compartment-id=$OCID_COMPARTMENT oracle oracle-controller
 ```
 
-Above, the name given to the new controller is 'oci-test-controller'. OCI
+Above, the name given to the new controller is 'oracle-controller'. OCI
 will provision an instance to run the controller on.
 
 For a detailed explanation and examples of the `bootstrap` command see the
@@ -280,8 +220,6 @@ See these pages for ideas on what to do next:
 [oracle-oci-tenancy]: https://docs.cloud.oracle.com/iaas/Content/GSG/Concepts/settinguptenancy.htm
 [oracle-oci-cli]: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdks.htm
 [oracle-oci-console]: https://console.us-phoenix-1.oraclecloud.com/
-[#clouds-oci-manual]: #manually-adding-an-oci-cloud
-[clouds-adding-manually]: ./clouds.md#adding-clouds-manually
 [credentials]: ./credentials.md
 [jaas]: ./getting-started.md
 [credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file
