@@ -1,5 +1,4 @@
 Title: Using Oracle OCI with Juju
-TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1802577 (add '-aes128' to command that creates the key if fixed)
 
 # Using Oracle OCI with Juju
 
