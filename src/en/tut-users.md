@@ -1,8 +1,8 @@
-Title: Multi-user cloud
+Title: A multi-user cloud
 TODO:  change screenshot username from degville to newuser
        add link to a table showing permissions for each type of user
 
-# Multi-user cloud
+# A multi-user cloud
 
 Juju is great at deploying applications to the cloud, but it is even better
 when others can join in too! 

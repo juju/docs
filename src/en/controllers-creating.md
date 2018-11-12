@@ -1,5 +1,6 @@
 Title: Creating a controller
 TODO:  Hardcoded: Ubuntu code names
+       Remove gerunds from example listings (fix links from other pages)
 
 # Creating a controller
 
@@ -34,6 +35,7 @@ be done at controller-creation time:
  - [Placing a controller on a specific MAAS node][#placing-a-controller-on-a-specific-maas-node]
  - [Specifying an agent version][#specifying-an-agent-version]
  - [Passing a cloud-specific setting][#passing-a-cloud-specific-setting]
+ - [Include configuration options at the cloud level][#include-configuration-options-at-the-cloud-level]
 
 ### Create a controller interactively
 
@@ -225,6 +227,12 @@ juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
     Cloud-specific features can also be passed to individual models during
     their creation (`add-model`).
 
+### Include configuration options at the cloud level
+
+Any settings passed via the `--config` option can be included in the definition
+of a cloud. See [General cloud management][clouds-general-cloud-management] for
+how to do this.
+
 
 <!-- LINKS -->
 
@@ -233,6 +241,7 @@ juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
 [models-config]: ./models-config.md
 [troubleshooting-logs-remote]: ./troubleshooting-logs-remote.md
 [agent-versions-and-streams]: ./models-config.md#agent-versions-and-streams
+[clouds-general-cloud-management]: ./clouds.md#general-cloud-management
 
 [#create-a-controller-interactively]: #create-a-controller-interactively
 [#set-default-model-constraints-for-a-controller]: #set-default-model-constraints-for-a-controller
@@ -247,3 +256,4 @@ juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
 [#placing-a-controller-on-a-specific-maas-node]: #placing-a-controller-on-a-specific-maas-node
 [#specifying-an-agent-version]: #specifying-an-agent-version
 [#passing-a-cloud-specific-setting]: #passing-a-cloud-specific-setting
+[#include-configuration-options-at-the-cloud-level]: #include-configuration-options-at-the-cloud-level

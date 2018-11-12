@@ -1,9 +1,9 @@
-Title: Juju and users
+Title: Understanding users
 TODO: User abilities, especially owners and regular users
       Critical: review required
 
 
-# Juju users
+# Understanding users
 
 There are 3 kinds of Juju users: controller administrators, model owners, and
 regular users. Each user, no matter the kind, is associated with a controller.

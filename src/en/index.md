@@ -33,7 +33,7 @@ homepage: true
             <div class="col-6">
                 <h2>Explore Juju</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/en/tut-lxd">Using Juju locally with LXD&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/tut-lxd">Using Juju locally (LXD)&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item"><a href="/en/tut-users">A multi-user cloud&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
@@ -50,8 +50,10 @@ homepage: true
                     </li>
                     <li class="p-list__item">
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/fa38eb81-picto-business-midaubergine.svg');
-                        height:1.5rem;width: 1.5rem;top: 2px;margin-right:.5rem;"></i>
-                        <a class="p-link--external" href="https://jujucharms.com/experts">Professional support</a>
+                        height:1.5rem;width: 1.5rem;top:
+			2px;margin-right:.5rem;"></i> <a
+			class="p-link--external"
+			href="https://docs.jujucharms.com/stable/experts-sla">Managed solutions</a>
                     </li>
                     <li class="p-list__item">
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/4ef84d88-picto-quote-warmgrey.svg');
