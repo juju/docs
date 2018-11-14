@@ -1,10 +1,11 @@
 Title: Using Kubernetes with Juju
 TODO:  Should eventually link to k8s-charm developer documentation
        Update when storage becomes a Juju drivable aspect.
-       Add architectural overview/diagram once Juju:k8s becomes stable.
+       Add architectural overview/diagram
        Consider manually adding a cluster (third-party installs) via `add-cloud` and `add-credential`
        Add charms section when they become available in the charm store (change from staging store to production store)
        Link to Discourse posts for microk8s, aws-integrator?
+       Write a tutorial or two on building a cluster using the methods listed
 
 # Using Kubernetes with Juju
 
@@ -12,9 +13,6 @@ Kubernetes provides a flexible architecture for managing containerised
 applications at scale (see the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information). It
 most commonly employs Docker as its container technology.
-
-!!! Note:
-    Kubernetes is often abbreviated as "k8s" (pronounced "kate's").
 
 ## Juju k8s-specific workflow
 
@@ -110,7 +108,7 @@ alternative methods to explore for setting one up:
     a running ingres controller.
  1. Use a bundle made for the major cloud vendors. There are special
     "integrator" charms that assist with such deployments.
-    [Search the Charm Store][charm-store-integrator] for 'integrator'.
+    [Search the Charm Store][charm-store-staging-integrator] for 'integrator'.
  1. Use a public cloud vendor such as [Amazon EKS][upstream-eks-kubernetes],
     [Azure AKS][upstream-aks-kubernetes],
     [Google GKE][upstream-gke-kubernetes], and
@@ -153,11 +151,11 @@ juju clouds
 Here is a partial output:
 
 ```no-highlight
-Cloud        Regions  Default          Type        Description
+Cloud          Regions  Default          Type        Description
 .
 .
 .
-k8scloud           0                   kubernetes
+lxd-k8s-cloud        0                   kubernetes
 ```
 
 ## Add a model
@@ -175,17 +173,20 @@ host all of the pods and other resources for that model.
 
 For each Juju-deployed Kubernetes application an *operator pod* is
 automatically set up whose task it is to run the charm hooks for each deployed
-unit’s charm.
+unit's charm.
 
 Each charm requires persistent storage so that things like state and resources
-can be preserved if the pod ever restarts. To accomplish this, a Juju storage
-pool called 'operator-storage' with the provider type 'kubernetes' must exist.
+can be preserved if the operator pod ever restarts. To accomplish this, a Juju
+storage pool called 'operator-storage' with provider type 'kubernetes' must
+exist.
+
+Charm storage...........................
 
 ### Operator storage
 
 Operator storage is set up by defining a Juju storage pool that maps to a
-Kubernetes storage class. Below are some examples using various Kubernetes
-storage provisioners:
+Kubernetes storage class. Here are examples of definitions that use various
+Kubernetes storage provisioners:
 
 For AWS using EBS volumes:
 
@@ -212,7 +213,52 @@ juju create-storage-pool operator-storage kubernetes \
 	storage-class=microk8s-hostpath
 ```
 
+Although the recommended approach is to use Juju-defined storage, Juju does
+support externally created storage. Juju will use this order of precedence in
+determining which storage it will use:
+
+ 1. storage class called 'juju-operator-storage'
+ 1. storage class with label 'juju-storage', one of:
+     '<app>-operator-storage'
+     '<model>'
+     'default'
+ 1. storage class called 'storageclass.kubernetes.io/is-default-class'
+
 ### Charm storage
+
+Kubernetes charms requiring persistent storage can make use of Kubernetes
+persistent volumes. Currently, only filesystem storage is supported.
+
+As with standard charms, storage requirements are stated in the Kubernetes charm's
+`metadata.yaml` file:
+
+```no-highlight
+storage:
+  database:
+    type: filesystem
+    location: /var/lib/mysql
+```
+
+An example is the [mariadb-k8s][staging-mariadb-k8s] charm.
+
+There are two ways to configure the Kubernetes cluster to provide persistent
+storage:
+
+ - A pool of manually provisioned, static persistent volumes
+ - Using a storage class for dynamic provisioning of volumes
+
+In both cases, a Juju storage pool is created and, if needed, can be configured
+with Kubernetes-specific settings.
+
+Like for operator storage, Juju supports externally created storage and will
+use very similar rules for determining which storage it will use:
+
+ 1. storage class called 'juju-unit-storage'
+ 1. storage class with label 'juju-storage', one of:
+     '<app>-unit-storage'
+     '<model>'
+     'default'
+ 1. storage class called 'storageclass.kubernetes.io/is-default-class'
 
 ## Configuration
 
@@ -260,7 +306,8 @@ Kubernetes `scale` command.
 [upstream-kubernetes-docs]: https://kubernetes.io/docs
 [upstream-microk8s]: https://microk8s.io
 [upstream-conjure-up]: https://conjure-up.io/
-[charm-store-integrator]: https://staging.jujucharms.com/q/integrator
+[charm-store-staging-integrator]: https://staging.jujucharms.com/q/integrator
+[charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7
 
 [upstream-eks-kubernetes]: https://aws.amazon.com/eks/
 [upstream-aks-kubernetes]: https://azure.microsoft.com/en-us/services/kubernetes-service/
