@@ -123,8 +123,8 @@ upon using either a *constraint* or a *binding*:
      - See the [Using constraints][charms-constraints] page to learn more about
        constraints.
      - For examples of using the 'spaces' constraint, read
-       [Deploying to spaces][deploying-to-spaces] for how to use it with the
-       `deploy` command and
+       [Deploying to spaces][deploying-to-network-spaces] for how to use it
+       with the `deploy` command and
        [Setting constraints when adding a machine][charms-constraints-add-machine]
        for how to use it with the `add-machine` command.
 
