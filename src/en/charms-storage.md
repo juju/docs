@@ -18,8 +18,8 @@ to the [PostgreSQL charm][charm-store-postgresql] and the
 The Ceph examples used here are based on the Ceph cluster described in the
 document [Installing Ceph][charms-storage-ceph].
 
-Using storage with Kubernetes is covered in
-[Persistent storage and Kubernetes][charms-storage-k8].
+Using storage with Kubernetes is covered on the
+[Persistent storage and Kubernetes][charms-storage-k8] page.
 
 ## Storage management commands
 
