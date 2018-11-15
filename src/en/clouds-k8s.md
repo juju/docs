@@ -1,9 +1,8 @@
 Title: Using Kubernetes with Juju
 TODO:  Should eventually link to k8s-charm developer documentation
-       Update when storage becomes a Juju drivable aspect.
        Add architectural overview/diagram
        Consider manually adding a cluster (third-party installs) via `add-cloud` and `add-credential`
-       Add charms section when they become available in the charm store (change from staging store to production store)
+       Change from staging store to production store when available
        Link to Discourse posts for microk8s, aws-integrator?
        Write a tutorial or two on building a cluster using the methods listed
 
@@ -48,8 +47,8 @@ To summarise, the steps for using Kubernetes with Juju are:
  1. Add the cluster to Juju
  1. Add a model
  1. Define storage classes (if necessary)
- 1. Create storage pools
- 1. Deploy k8s-specific charms
+ 1. Create storage pools (charm storage if necessary)
+ 1. Deploy a Kubernetes-specific charm
 
 ### Obtain a Kubernetes cluster
 
@@ -92,11 +91,12 @@ Machine  State    DNS             Inst id              Series  AZ  Message
 
 !!! Note:
     We've used the staging Charm Store in these instructions as the standard
-    site does not yet contain the Kubernetes charms and bundles.
+    site does not yet contain Kubernetes charms and bundles.
 
-**Alternative methods for obtaining a Kubernetes cluster**  
-Beyond your own custom/bespoke Kubernetes cluster, here is a list of
-alternative methods to explore for setting one up:
+#### Alternative methods for obtaining a Kubernetes cluster
+
+Here is a list of alternative methods to explore for setting up a Kubernetes
+cluster:
 
  1. Use the 'canonical-kubernetes' bundle, which is a more sophisticated
     version of what we used above.
@@ -106,8 +106,7 @@ alternative methods to explore for setting one up:
     [Canonical Distribution of Kubernetes][cdk-charm] you can choose the
     identical minimal install deployed above from the installer's interface.
  1. Use [`microk8s`][upstream-microk8s]. With microk8s, you get a local, fully
-    compliant Kubernetes deployment with dynamic persistent volume support, and
-    a running ingres controller.
+    compliant Kubernetes deployment with dynamic persistent volume support.
  1. Use a bundle made for the major cloud vendors. There are special
     "integrator" charms that assist with such deployments.
     [Search the Charm Store][charm-store-staging-integrator] for 'integrator'.
@@ -127,9 +126,9 @@ This is found within the main Kubernetes configuration file.
 
 #### Adding a juju-deployed cluster quickly
 
-If the `juju deploy` command was used to deploy the cluster the above file can
-be copied over from the Kubernetes master node (and saved as `~/.kube/config`)
-in this way:
+If Juju was used to deploy the cluster, as we've done in this example, the
+above file can be copied over from the Kubernetes master node (and saved as
+`~/.kube/config`) in this way:
 
 ```bash
 mkdir ~/.kube
@@ -171,16 +170,59 @@ juju add-model lxd-k8s-model lxd-k8s-cloud
 This will cause a Kubernetes namespace in the cluster to be created that will
 host all of the pods and other resources for that model.
 
-### Define storage classes (if necessary)
+### Define storage classes
+
+Define a storage class for operator storage if your chosen backing cloud's
+storage is not supported natively by Kubernetes. You will need to do the same
+for charm storage if your charm has storage requirements (we will do so since
+our intended charm will need storage).
+
+Here, since our example is using an unsupported storage solution (LXD)
+we'll create storage classes for both types:
+
+```bash
+kubectl create -f lxd-k8s-model-op1.yaml
+kubectl create -f lxd-k8s-model-vol1.yaml
+```
+
+See [Persistent storage and Kubernetes][charms-storage-k8s] for more
+information.
+
 ### Create storage pools
-### Deploy k8s-specific charms
+
+Create storage pools for operator storage and, if needed, charm storage. We
+will need to do both for our example:
+
+```bash
+juju create-storage-pool operator-storage kubernetes \
+	storage-class=lxd-k8s-model-operator-storage \
+	storage-provisioner=kubernetes.io/no-provisioner
+juju create-storage-pool lxd-k8s-pool kubernetes \
+	storage-class=lxd-k8s-model-charm-storage \
+	storage-provisioner=kubernetes.io/no-provisioner
+```
+
+Again, refer to [Persistent storage and Kubernetes][charms-storage-k8s] for
+more information.
+
+### Deploy a Kubernetes-specific charm
+
+Deploy a Kubernetes charm. This example uses a
+[MariaDB charm][charm-store-staging-mariadb-k8s] that will make use of the
+previously created charm storage called 'lxd-k8s-pool':
+
+```bash
+juju deploy cs:~wallyworld/mariadb-k8s --storage database=10M,lxd-k8s-pool
+```
+
+The [Using Juju storage][charms-storage-juju-deploy] page covers the above
+syntax.
 
 ## Configuration
 
-Juju k8s applications support application specific configuration. This allows
-k8s configuration to be used to control how Juju deploys the application on
-Kubernetes. The following are supported (these names are the Juju configuration
-attribute names; the k8s meaning should be obvious):
+Kubernetes charms support Kubernetes-specific settings that influence how Juju
+deploys the application. The following are supported (these names are the Juju
+configuration attribute names; the Kubernetes meaning should be self-evident):
 
 | Key                        			| Type    | Default 	     | Valid values | Comments                     |
 |:----------------------------------------------|---------|------------------|--------------|:-----------------------------|
@@ -220,6 +262,9 @@ Kubernetes `scale` command.
 [upstream-kubernetes-docs]: https://kubernetes.io/docs
 [upstream-conjure-up]: https://conjure-up.io/
 [charm-store-staging-integrator]: https://staging.jujucharms.com/q/integrator
+[charms-storage-k8s]: ./charms-storage-k8s.md
+[charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7
+[charms-storage-juju-deploy]: ./charms-storage.md#juju-deploy
 
 [upstream-eks-kubernetes]: https://aws.amazon.com/eks/
 [upstream-aks-kubernetes]: https://azure.microsoft.com/en-us/services/kubernetes-service/
