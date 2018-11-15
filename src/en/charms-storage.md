@@ -1,9 +1,9 @@
-Title: Using Juju Storage
+Title: Using Juju storage
 TODO:  bug tracking: https://pad.lv/1708212
        bug tracking: https://pad.lv/1709507
        bug tracking: https://pad.lv/1709508
 
-# Using Juju Storage
+# Using Juju storage
 
 Certain applications can benefit from advanced storage configurations and if a
 charm exists for such an application Juju can declare such requirements both
@@ -17,6 +17,9 @@ to the [PostgreSQL charm][charm-store-postgresql] and the
 
 The Ceph examples used here are based on the Ceph cluster described in the
 document [Installing Ceph][charms-storage-ceph].
+
+Using storage with Kubernetes is covered in
+[Persistent storage and Kubernetes][charms-storage-k8].
 
 ## Storage management commands
 
@@ -613,6 +616,7 @@ For guidance on how to create a charm that uses these storage features see
 
 [clouds-lxd]: ./clouds-LXD.md
 [charms-storage-ceph]: ./charms-storage-ceph.html
+[charms-storage-k8]: ./charms-storage-k8s.md
 [generic-storage-loop]: https://en.wikipedia.org/wiki/Loop_device
 [generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
 [generic-storage-tmpfs]: https://en.wikipedia.org/wiki/Tmpfs

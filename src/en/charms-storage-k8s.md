@@ -1,0 +1,199 @@
+Title: Persistent storage and Kubernetes
+TODO:  Add how to create external storage
+       Write a tutorial or two on using storage
+
+# Persistent storage and Kubernetes
+
+For each Juju-deployed Kubernetes application an *operator pod* is set up
+automatically whose task it is to run the charm hooks for each unit. Each charm
+also requires such persistent storage so that things like state and resources
+can be preserved if the operator pod ever restarts. To accomplish all this, a
+Juju storage pool called 'operator-storage' with provider type 'kubernetes' is
+required. We call this type of storage *operator storage*.
+
+In addition, a Kubernetes charm may itself require persistent storage (e.g.
+the [mariadb-k8s][charm-store-staging-mariadb-k8s] charm). Its Juju storage
+pool also has a provider type of 'kubernetes'. We call this type of
+storage *charm storage*. As with standard charms, storage requirements are
+stated in the charm's `metadata.yaml` file:
+
+```no-highlight
+storage:
+  database:
+    type: filesystem
+    location: /var/lib/mysql
+```
+
+<!--
+In addition, a Kubernetes charm itself may require persistent storage can make
+use of Kubernetes persistent volumes. Currently, only filesystem storage is
+supported.
+-->
+
+Both operator storage and charm storage can be either Juju-managed or managed
+externally to Juju (i.e. within Kubernetes itself). Furthermore, Juju-managed
+storage can be provisioned either dynamically or statically.
+
+!!! Note:
+    The topic of storage is covered in a non-Kubernetes context on the
+    [Using Juju Storage][charms-storage] page.
+
+### Juju-managed storage
+
+There are two types of persistent storage that Juju can manage:
+
+ - dynamically provisioned volumes
+ - statically provisioned volumes
+
+In both cases, a Juju storage pool needs to be created by the Juju operator.
+The second type is needed when the storage system for your chosen backing cloud
+is not supported by Kubernetes. This situation therefore demands that volumes
+be set up prior to the creation of the storage pool. See
+[Types of persistent volumes][upstream-kubernetes-volumes] for the list of
+Kubernetes supported backends. 
+
+To define static volumes the below procedure is provided that caters
+specifically to the ongoing example used on this page. The example
+YAML-formatted files `lxd-op1.yaml` and `lxd-vol1.yaml` define operator storage
+and charm storage respectively. Notice how these files allude to LXD, which is
+a backing cloud that is not natively supported by Kubernetes.
+
+```bash
+sudo snap install --classic kubectl
+sudo mkdir -p /mnt/data/{op1,vol1}
+kubectl create -f lxd-k8s-model-op1.yaml
+kubectl create -f lxd-k8s-model-vol1.yaml
+kubectl describe pv
+```
+
+!!! Important:
+    The storage classes that will subsequently be created must have names that
+    are prefixed with the name of the model in use. We've included the model
+    name of 'lxd-k8s-model' in various places to emphasise the importance of
+    the model.
+    
+The content of the storage definition files are given below. Typically multiple
+charm storage volumes would be required. Note that operator storage needs a
+minimum of 1024 MiB.
+
+^# lxd-k8s-model-op1.yaml
+
+      kind: PersistentVolume
+      apiVersion: v1
+      metadata:
+        name: op1
+      spec:
+        capacity:
+          storage: 1032Mi
+        accessModes:
+          - ReadWriteOnce
+        persistentVolumeReclaimPolicy: Retain
+        storageClassName: lxd-k8s-model-operator-storage
+        hostPath:
+          path: "/mnt/data/op1"
+
+^# lxd-k8s-model-vol1.yaml
+
+      kind: PersistentVolume
+      apiVersion: v1
+      metadata:
+        name: vol1
+      spec:
+        capacity:
+          storage: 100Mi
+        accessModes:
+          - ReadWriteOnce
+        persistentVolumeReclaimPolicy: Retain
+        storageClassName: lxd-k8s-model-charm-storage
+        hostPath:
+          path: "/mnt/data/vol1"
+
+We will show how to create Juju storage pools using our newly-defined storage
+classes in section [Creating storage pools][#creating-storage-pools].
+ 
+### External storage
+
+Although the recommended approach is to use Juju-managed storage, Juju does
+support externally created storage for both operator storage and charm storage.
+
+For operator storage, Juju will use this order of precedence for determining
+the storage it will use:
+
+ 1. a storage class called `juju-operator-storage`
+ 1. a storage class with label `juju-storage`, and one of these labels:
+     1. `<application name>-operator-storage`
+     1. `<model name>`
+     1. `default`
+ 1. a storage class with label `storageclass.kubernetes.io/is-default-class`
+
+For charm storage the rules are similar:
+
+ 1. a storage class called `juju-unit-storage`
+ 1. a storage class with label `juju-storage`, and one of these labels:
+     1. `<application name>-unit-storage`
+     1. `<model name>`
+     1. `default`
+ 1. a storage class with label `storageclass.kubernetes.io/is-default-class`
+
+This documentation will focus on Juju-managed storage only.
+
+### Creating storage pools
+
+Juju storage pools are created for both operator storage and charm storage
+using the `create-storage-pool` command. Both are done by mapping to either a
+Kubernetes storage class (dynamically provisioned volumes) or to a manually
+defined one (statically provisioned volumes). Examples are provided below.
+
+These examples create a Juju storage pool called 'operator-storage' with a
+provider type of 'kubernetes'.
+
+For AWS using EBS volumes:
+
+```bash
+juju create-storage-pool operator-storage kubernetes \
+	storage-class=juju-operator-storage \
+	storage-provisioner=kubernetes.io/aws-ebs \
+	parameters.type=gp2
+```
+
+For GKE using Persistent Disk:
+
+```bash
+juju create-storage-pool operator-storage kubernetes \
+	storage-class=juju-operator-storage \
+	storage-provisioner=kubernetes.io/gce-pd \
+	parameters.type=pd-standard
+```
+
+For `microk8s` using built-in hostPath storage:
+
+```bash
+juju create-storage-pool operator-storage kubernetes \
+	storage-class=microk8s-hostpath
+```
+
+For a manually defined storage class called 'lxd-k8s-model-operator-storage': 
+
+```bash
+juju create-storage-pool operator-storage kubernetes \
+	storage-class=lxd-k8s-model-operator-storage \
+	storage-provisioner=kubernetes.io/no-provisioner
+```
+
+Creating a charm storage pool is done very similarly. The below example creates
+a pool called 'lxd-k8s-pool' using a manually defined storage class called
+'lxd-k8s-model-charm-storage': 
+
+```bash
+juju create-storage-pool lxd-k8s-pool kubernetes \
+	storage-class=lxd-k8s-model-charm-storage \
+	storage-provisioner=kubernetes.io/no-provisioner
+```
+
+
+<!-- LINKS -->
+
+[charms-storage]: ./charms-storage.md
+[upstream-kubernetes-volumes]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes
+[#creating-storage-pools]: #creating-storage-pools
+[charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7
