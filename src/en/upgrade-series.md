@@ -24,7 +24,8 @@ using an alternate method.
 Here is an overview of the process:
 
  1. The user initiates the upgrade.
-    1. The machine is no longer available for charm deployments.
+    1. The machine is no longer available for charm deployments or for hosting
+       new containers.
     1. Juju prepares the machine for the upcoming OS upgrade.
     1. All units on the machine are taken into account.
  1. The user manually performs the upgrade of the operating system and makes
@@ -74,6 +75,14 @@ There is a `--force` option available but it should be used with caution.
 The deployed charms will be inspected for a 'pre-series-upgrade' hook. If such
 a hook exists, it will be run. In our example, such a hook was not found in the
 charm.
+
+A machine in "prepare mode" will be noted as such in the output to the `status`
+(or `machines`) command:
+
+```no-highlight
+Machine  State    DNS            Inst id        Series  AZ  Message
+1        started  10.116.98.194  juju-573842-0  xenial      Series upgrade: prepare completed
+```
 
 ### Upgrading the operating system
 
