@@ -24,15 +24,13 @@ storage:
     location: /var/lib/mysql
 ```
 
-<!--
-In addition, a Kubernetes charm itself may require persistent storage can make
-use of Kubernetes persistent volumes. Currently, only filesystem storage is
-supported.
--->
+Currently, only filesystem storage is supported.
 
-Both operator storage and charm storage can be either Juju-managed or managed
-externally to Juju (i.e. within Kubernetes itself). Furthermore, Juju-managed
-storage can be provisioned either dynamically or statically.
+Both operator storage and charm storage can be Juju-managed and this is the
+recommended method. However, both can also be managed externally to Juju (i.e.
+within Kubernetes itself).
+
+Juju-managed storage can be provisioned either dynamically or statically.
 
 !!! Note:
     The topic of storage is covered in a non-Kubernetes context on the
@@ -40,7 +38,7 @@ storage can be provisioned either dynamically or statically.
 
 ### Juju-managed storage
 
-There are two types of persistent storage that Juju can manage:
+As mentioned, there are two types of persistent storage that Juju can manage:
 
  - dynamically provisioned volumes
  - statically provisioned volumes
@@ -52,11 +50,11 @@ be set up prior to the creation of the storage pool. See
 [Types of persistent volumes][upstream-kubernetes-volumes] for the list of
 Kubernetes supported backends. 
 
-To define static volumes the below procedure is provided that caters
-specifically to the ongoing example used on this page. The example
-YAML-formatted files `lxd-op1.yaml` and `lxd-vol1.yaml` define operator storage
-and charm storage respectively. Notice how these files allude to LXD, which is
-a backing cloud that is not natively supported by Kubernetes.
+#### Statically provisioned volumes
+
+You set up static volumes via storage class definitions. The
+[Kubernetes storage classes][upstream-kubernetes-classes] page offers details.
+Here is a example procedure:
 
 ```bash
 sudo snap install --classic kubectl
@@ -66,15 +64,13 @@ kubectl create -f lxd-k8s-model-vol1.yaml
 kubectl describe pv
 ```
 
-!!! Important:
-    The storage classes that will subsequently be created must have names that
-    are prefixed with the name of the model in use. We've included the model
-    name of 'lxd-k8s-model' in various places to emphasise the importance of
-    the model.
-    
-The content of the storage definition files are given below. Typically multiple
-charm storage volumes would be required. Note that operator storage needs a
-minimum of 1024 MiB.
+The example YAML-formatted files `lxd-op1.yaml` and `lxd-vol1.yaml` define
+volumes for operator storage and charm storage respectively that get created by
+the `kubectl` command.
+
+The content of the storage class definition files are given below. Typically
+multiple charm storage volumes would be required. Note that operator storage
+needs a minimum of 1024 MiB.
 
 ^# lxd-k8s-model-op1.yaml
 
@@ -108,9 +104,18 @@ minimum of 1024 MiB.
         hostPath:
           path: "/mnt/data/vol1"
 
-We will show how to create Juju storage pools using our newly-defined storage
-classes in section [Creating storage pools][#creating-storage-pools].
+The storage classes names must be prefixed with the name of the model in use.
+We've included the model name of 'lxd-k8s-model' in various places to emphasise
+the importance of the model.
+
+We'll show how to create Juju storage pools using our newly-created volumes in
+section [Creating storage pools][#creating-storage-pools].
  
+!!! Important:
+    Once a static volume is used, it is never re-used, even if the unit/pod is
+    terminated and the volume is released. Just as static volumes are manually
+    created, they must also be manually removed.
+     
 ### External storage
 
 Although the recommended approach is to use Juju-managed storage, Juju does
@@ -142,10 +147,19 @@ This documentation will focus on Juju-managed storage only.
 Juju storage pools are created for both operator storage and charm storage
 using the `create-storage-pool` command. Both are done by mapping to either a
 Kubernetes storage class (dynamically provisioned volumes) or to a manually
-defined one (statically provisioned volumes). Examples are provided below.
+defined one (statically provisioned volumes). The command's syntax is:
 
-These examples create a Juju storage pool called 'operator-storage' with a
-provider type of 'kubernetes'.
+`juju create-storage-pool <pool name> kubernetes \
+	storage-class=<storage class name> \
+	storage-provisioner=<provisioner> \
+	parameters.type=<paramters>`
+
+The 'pool name' is used at charm deployment time. It is also the `deploy`
+command that triggers the actual creation of the Kubernetes storage class when
+that storage class is referred to for the first time.
+
+These next few examples show how to create operator storage pool using various
+Kubernetes supported storage provisioners.
 
 For AWS using EBS volumes:
 
@@ -180,9 +194,9 @@ juju create-storage-pool operator-storage kubernetes \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
 
-Creating a charm storage pool is done very similarly. The below example creates
-a pool called 'lxd-k8s-pool' using a manually defined storage class called
-'lxd-k8s-model-charm-storage': 
+Creating a charm storage pool is done similarly. The below example creates a
+pool arbitrarily called 'lxd-k8s-pool' using a manually defined storage class
+called 'lxd-k8s-model-charm-storage': 
 
 ```bash
 juju create-storage-pool lxd-k8s-pool kubernetes \
@@ -190,10 +204,14 @@ juju create-storage-pool lxd-k8s-pool kubernetes \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
 
+The standard `storage-pools` command is used to list all current Juju storage
+pools.
+
 
 <!-- LINKS -->
 
 [charms-storage]: ./charms-storage.md
 [upstream-kubernetes-volumes]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes
+[upstream-kubernetes-classes]: https://kubernetes.io/docs/concepts/storage/storage-classes/
 [#creating-storage-pools]: #creating-storage-pools
 [charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7

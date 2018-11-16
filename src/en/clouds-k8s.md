@@ -1,7 +1,7 @@
 Title: Using Kubernetes with Juju
 TODO:  Should eventually link to k8s-charm developer documentation
        Add architectural overview/diagram
-       Consider manually adding a cluster (third-party installs) via `add-cloud` and `add-credential`
+       Consider manually adding a cluster via `add-cloud` and `add-credential`
        Change from staging store to production store when available
        Link to Discourse posts for microk8s, aws-integrator?
        Write a tutorial or two on building a cluster using the methods listed
@@ -15,8 +15,9 @@ most commonly employs Docker as its container technology.
 
 ## Juju k8s-specific workflow
 
-The only k8s-specific Juju commands are `add-k8s` and `remove-k8s`. All other
-concepts and commands are applied in the traditional Juju manner.
+The only k8s-specific Juju commands are `add-k8s`, `remove-k8s`, and
+`scale-application`. All other concepts and commands are applied in the
+traditional Juju manner.
 
 If the Kubernetes cluster is built with Juju itself (via a bundle) and
 `juju add-k8s` is run immediately afterwards, the contents of file
@@ -218,40 +219,41 @@ juju deploy cs:~wallyworld/mariadb-k8s --storage database=10M,lxd-k8s-pool
 The [Using Juju storage][charms-storage-juju-deploy] page covers the above
 syntax.
 
-## Configuration
+#### Configuration
 
-Kubernetes charms support Kubernetes-specific settings that influence how Juju
-deploys the application. The following are supported (these names are the Juju
-configuration attribute names; the Kubernetes meaning should be self-evident):
-
-| Key                        			| Type    | Default 	     | Valid values | Comments                     |
-|:----------------------------------------------|---------|------------------|--------------|:-----------------------------|
-kubernetes-service-type				| string  | ClusterIP 	     |		    |
-kubernetes-service-external-ips			| string  | []		     |		    |
-kubernetes-service-target-port			| string  | <container port> |		    |
-kubernetes-service-loadbalancer-ip		| string  | ""		     |		    |
-kubernetes-service-loadbalancer-sourceranges	| string  | []		     |		    |
-kubernetes-service-externalname			| string  | ""		     |		    |
-kubernetes-ingress-class			| string  | nginx	     |		    |
-kubernetes-ingress-ssl-redirect			| boolean | false	     |		    |
-kubernetes-ingress-ssl-passthrough		| boolean | false	     |		    |
-kubernetes-ingress-allow-http			| boolean | false	     |		    |
-
-There are three other configuration attributes which are not k8s-specific:
+The below table lists configuration keys supported by Kubernetes charms that
+are set at deploy time. Although the key names are for Juju, the corresponding
+Kubernetes meaning should be self-evident.
 
 | Key                        			| Type    | Default 	     | Valid values | Comments                     |
 |:----------------------------------------------|---------|------------------|--------------|:-----------------------------|
-juju-external-hostname				| string  | 		     |              | Mandatory; user specified
-juju-application-path				| string  | "/"		     |              |
+`kubernetes-service-type`			| string  | ClusterIP 	     |		    |
+`kubernetes-service-external-ips`		| string  | []		     |		    |
+`kubernetes-service-target-port`		| string  | <container port> |		    |
+`kubernetes-service-loadbalancer-ip` 		| string  | ""		     |		    |
+`kubernetes-service-loadbalancer-sourceranges`	| string  | []		     |		    |
+`kubernetes-service-externalname`		| string  | ""		     |		    |
+`kubernetes-ingress-class`			| string  | nginx	     |		    |
+`kubernetes-ingress-ssl-redirect`		| boolean | false	     |		    |
+`kubernetes-ingress-ssl-passthrough`		| boolean | false	     |		    |
+`kubernetes-ingress-allow-http`			| boolean | false	     |		    |
 
-Attributes 'juju-external-hostname' and 'juju-application-path' control how the
+For example:
+
+```bash
+juju deploy mariadb-k8s --config kubernetes-service-loadbalancer-ip=10.1.1.1
+```
+
+There are two other keys that are not Kubernetes-specific:
+
+| Key                        			| Type    | Default 	     | Valid values | Comments                     |
+|:----------------------------------------------|---------|------------------|--------------|:-----------------------------|
+`juju-external-hostname`			| string  | ""   	     |              | Mandatory; user specified
+`juju-application-path` 			| string  | "/"		     |              |
+
+Keys 'juju-external-hostname' and 'juju-application-path' control how the
 application is exposed externally using a Kubernetes Ingress Resource in
 conjunction with the configured ingress controller (default: nginx).
-
-Juju uses a deployment controller for each application to manage pod lifecycle,
-which allows for the addition or removal of units as normal. It remains
-possible to perform these same actions directly in the cluster by way of the
-Kubernetes `scale` command.
 
 
 <!-- LINKS -->
