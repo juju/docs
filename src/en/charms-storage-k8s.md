@@ -104,9 +104,8 @@ needs a minimum of 1024 MiB.
         hostPath:
           path: "/mnt/data/vol1"
 
-The storage classes names must be prefixed with the name of the model in use.
-We've included the model name of 'lxd-k8s-model' in various places to emphasise
-the importance of the model.
+One naming convention that works is to have the storage classes names prefixed
+with the name of the model in use.
 
 We'll show how to create Juju storage pools using our newly-created volumes in
 section [Creating storage pools][#creating-storage-pools].
@@ -124,20 +123,22 @@ support externally created storage for both operator storage and charm storage.
 For operator storage, Juju will use this order of precedence for determining
 the storage it will use:
 
+ 1. a storage class called `<model name>-juju-operator-storage`
  1. a storage class called `juju-operator-storage`
- 1. a storage class with label `juju-storage`, and one of these labels:
-     1. `<application name>-operator-storage`
-     1. `<model name>`
-     1. `default`
+ 1. a storage class with label key `juju-storage`, with a value set to one of:
+     - `<application name>-operator-storage`
+     - `<model name>`
+     - `default`
  1. a storage class with label `storageclass.kubernetes.io/is-default-class`
 
 For charm storage the rules are similar:
 
+ 1. a storage class called `<model name>-juju-unit-storage`
  1. a storage class called `juju-unit-storage`
- 1. a storage class with label `juju-storage`, and one of these labels:
-     1. `<application name>-unit-storage`
-     1. `<model name>`
-     1. `default`
+ 1. a storage class with label key `juju-storage`, with a value set to one of:
+     - `<application name>-unit-storage`
+     - `<model name>`
+     - `default`
  1. a storage class with label `storageclass.kubernetes.io/is-default-class`
 
 This documentation will focus on Juju-managed storage only.
