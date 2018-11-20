@@ -1,14 +1,23 @@
 Title: Using Juju with microk8s
+TODO:  Add a link to the Ubuntu tutorial "Introducing microk8s" (when published)
 
 # Using Juju with microk8s
 
-*This is in connection with the [Using Kubernetes with Juju][clouds-k8s] page.
-See that resource for background information.*
+*This is in connection to the topic of
+[Using Kubernetes with Juju][clouds-k8s]. See that resource for background
+information.*
 
-This tutorial has the following pre-requisites:
+Juju is compatible with the [microk8s][upstream-microk8s] project, which aims
+to provide "a full Kubernetes system in under 60 seconds". It is quite
+remarkable actually. It is composed of pure upstream binaries, runs all
+services natively (i.e. no virtual machines or containers), and is fully
+[CNCF certified][upstream-cncf]. This option is perfect for testing Kubernetes
+on your laptop. Using it with Juju is icing on the cake!
 
+Since microk8s is running locally we'll be using a local LXD cloud to create a
+Juju controller.
 
-# Software installation
+## Installing the software
 
 These instructions assume you're using a fresh Ubuntu 18.04 LTS install, or at
 least one that is not already using either Juju or LXD. This tutorial installs
@@ -35,7 +44,36 @@ This will bring about changes to the cluster. See what's going on with the
 microk8s.kubectl get all --all-namespaces
 ```
 
-It's time to bring Juju in to the picture by creating a controller. At the time
+Sample output:
+
+```no-highlight
+NAMESPACE     NAME                                        READY   STATUS    RESTARTS   AGE
+kube-system   pod/hostpath-provisioner-7d7c578f6b-rc6zz   1/1     Running   0          5m47s
+kube-system   pod/kube-dns-67b548dcff-dlpgn               3/3     Running   0          5m53s
+
+NAMESPACE     NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
+default       service/kubernetes   ClusterIP   10.152.183.1    <none>        443/TCP         23m
+kube-system   service/kube-dns     ClusterIP   10.152.183.10   <none>        53/UDP,53/TCP   5m53s
+
+NAMESPACE     NAME                                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/hostpath-provisioner   1         1         1            1           5m47s
+kube-system   deployment.apps/kube-dns               1         1         1            1           5m53s
+
+NAMESPACE     NAME                                              DESIRED   CURRENT   READY   AGE
+kube-system   replicaset.apps/hostpath-provisioner-7d7c578f6b   1         1         1       5m47s
+Kube-system   replicaset.apps/kube-dns-67b548dcff               1         1         1       5m53s
+```
+
+Later we'll see how this output changes once we deploy a charm.
+
+## Creating a controller
+
+Juju always needs a controller as a central management machine. Once this
+machine is established all Juju-deployed applications will be contained within
+the Kubernetes cluster itself; Juju deployments will not cause LXD containers
+to be created.
+
+So let's bring Juju into the picture by creating a controller now. At the time
 of writing the production Charm Store was not yet updated with Kubernetes
 charms. For now, we'll use the staging site instead:
 
@@ -43,7 +81,10 @@ charms. For now, we'll use the staging site instead:
 juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore localhost lxd
 ```
 
-This will take about five minutes to finish.
+This will take about five minutes to finish. After which we'll have a
+controller called 'lxd' that is based on the 'localhost' cloud.
+
+## Adding the cluster to Juju
 
 The `add-k8s` command adds the new Kubernetes cluster to Juju's list of known
 clouds. Here, we arbitrarily call the new cloud 'microk8s-cloud':
@@ -53,6 +94,8 @@ microk8s.config | juju add-k8s microk8s-cloud
 ```
 
 Confirm this by running `juju clouds`.
+
+## Adding a model
 
 At this point we have something interesting going on. The controller we created
 earlier is now atypically associated with two clouds: the 'localhost' cloud and
@@ -75,6 +118,8 @@ default     localhost/localhost  available         0  admin   26 minutes ago
 k8s-model*  microk8s-cloud       available         0  admin   never connected
 ```
 
+## Adding storage
+
 One of the benefits of using `microk8s` is that we get dynamically provisioned
 storage out of the box. Below we have Juju create two storage pools, one for
 operator storage and one for charm storage:
@@ -87,6 +132,8 @@ juju create-storage-pool mariadb-pv kubernetes storage-class=microk8s-hostpath
 See the [Persistent storage and Kubernetes][charms-storage-k8s] page for
 in-depth information on how Kubernetes storage works with Juju.
 
+## Deploying a Kubernetes charm
+
 We can deploy a Kubernetes charm. For example, here we deploy a charm by
 requesting the use of the 'mariadb-pv' charm storage pool we just set up:
 
@@ -94,7 +141,7 @@ requesting the use of the 'mariadb-pv' charm storage pool we just set up:
 juju deploy cs:~wallyworld/mariadb-k8s --storage database=mariadb-pv,10M
 ```
 
-The output to `juju status` should soon look like:
+The output to `juju status` should soon look like the following:
 
 ```no-highlight
 Model      Controller  Cloud/Region    Version    SLA          Timestamp
@@ -107,9 +154,49 @@ Unit            Workload  Agent  Address   Ports     Message
 mariadb-k8s/0*  active    idle   10.1.1.5  3306/TCP
 ```
 
+In contrast to standard Juju behaviour, there are no machines listed here.
+Let's see what has happened within the cluster:
+
+```bash
+microk8s.kubectl get all --all-namespaces
+```
+
+New sample output:
+
+```no-highlight
+NAMESPACE     NAME                                        READY   STATUS    RESTARTS   AGE
+k8s-model     pod/juju-mariadb-k8s-0                      1/1     Running   0          140m
+k8s-model     pod/juju-operator-mariadb-k8s-0             1/1     Running   0          140m
+kube-system   pod/hostpath-provisioner-7d7c578f6b-rc6zz   1/1     Running   0          3h19m
+kube-system   pod/kube-dns-67b548dcff-dlpgn               3/3     Running   0          3h19m
+
+NAMESPACE     NAME                       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
+default       service/kubernetes         ClusterIP   10.152.183.1     <none>        443/TCP         3h36m
+k8s-model     service/juju-mariadb-k8s   ClusterIP   10.152.183.209   <none>        3306/TCP        140m
+kube-system   service/kube-dns           ClusterIP   10.152.183.10    <none>        53/UDP,53/TCP   3h19m
+
+NAMESPACE     NAME                                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/hostpath-provisioner   1         1         1            1           3h19m
+kube-system   deployment.apps/kube-dns               1         1         1            1           3h19m
+
+NAMESPACE     NAME                                              DESIRED   CURRENT   READY   AGE
+kube-system   replicaset.apps/hostpath-provisioner-7d7c578f6b   1         1         1       3h19m
+kube-system   replicaset.apps/kube-dns-67b548dcff               1         1         1       3h19m
+
+NAMESPACE   NAME                                         DESIRED   CURRENT   AGE
+k8s-model   statefulset.apps/juju-mariadb-k8s            1         1         140m
+K8s-model   statefulset.apps/juju-operator-mariadb-k8s   1         1         140m
+```
+
+You can easily scan the changes on the left hand side by recalling the model
+name we chose: 'k8s-model'.
+
+Felicitations all around!
+
 
 <!-- LINKS -->
 
 [clouds-k8s]: ./clouds-k8s.md
 [upstream-microk8s]: https://microk8s.io
+[upstream-cncf]: https://www.cncf.io/certification/software-conformance/
 [charms-storage-k8s]: ./charms-storage-k8s.md
