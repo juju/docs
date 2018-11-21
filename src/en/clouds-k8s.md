@@ -3,8 +3,8 @@ TODO:  Should eventually link to k8s-charm developer documentation
        Add architectural overview/diagram
        Consider manually adding a cluster via `add-cloud` and `add-credential`
        Change from staging store to production store when available
-       Link to Discourse posts for microk8s, aws-integrator?
-       Write a tutorial or two on building a cluster using the methods listed
+       Link to Discourse posts on aws-integrator?
+       Write another tutorial on building a cluster using the methods listed
 
 # Using Kubernetes with Juju
 
@@ -71,32 +71,32 @@ Sample output to `juju status` looks like this:
 
 ```no-highlight
 Model    Controller  Cloud/Region         Version    SLA          Timestamp
-default  lxd-k8s     localhost/localhost  2.5-beta1  unsupported  17:38:29Z
+default  lxd-k8s     localhost/localhost  2.5-beta2  unsupported  22:22:14Z
 
 App                Version  Status   Scale  Charm              Store       Rev  OS      Notes
 easyrsa            3.0.1    active       1  easyrsa            jujucharms  117  ubuntu  
 etcd               3.2.10   active       1  etcd               jujucharms  209  ubuntu  
 flannel            0.10.0   active       2  flannel            jujucharms  146  ubuntu  
 kubernetes-master  1.12.2   waiting      1  kubernetes-master  jujucharms  219  ubuntu  exposed
-kubernetes-worker  1.12.2   active       1  kubernetes-worker  jujucharms  239  ubuntu  exposed
+kubernetes-worker  1.12.2   waiting      1  kubernetes-worker  jujucharms  239  ubuntu  exposed
 
 Unit                  Workload  Agent  Machine  Public address  Ports           Message
-easyrsa/0*            active    idle   0/lxd/0  10.232.236.186                  Certificate Authority connected.
-etcd/0*               active    idle   0        10.80.187.237   2379/tcp        Healthy with 1 known peer
-kubernetes-master/0*  waiting   idle   0        10.80.187.237   6443/tcp        Waiting for kube-system pods to start
-  flannel/0*          active    idle            10.80.187.237                   Flannel subnet 10.1.24.1/24
-kubernetes-worker/0*  active    idle   1        10.80.187.177   80/tcp,443/tcp  Kubernetes worker running.
-  flannel/1           active    idle            10.80.187.177                   Flannel subnet 10.1.34.1/24
+easyrsa/0*            active    idle   0/lxd/0  10.10.19.148                    Certificate Authority connected.
+etcd/0*               active    idle   0        10.234.141.194  2379/tcp        Healthy with 1 known peer
+kubernetes-master/0*  waiting   idle   0        10.234.141.194  6443/tcp        Waiting for kube-system pods to start
+  flannel/0*          active    idle            10.234.141.194                  Flannel subnet 10.1.45.1/24
+kubernetes-worker/0*  waiting   idle   1        10.234.141.32   80/tcp,443/tcp  Waiting for kubelet to start.
+  flannel/1           active    idle            10.234.141.32                   Flannel subnet 10.1.37.1/24
 
 Machine  State    DNS             Inst id              Series  AZ  Message
-0        started  10.80.187.237   juju-2ad61f-0        bionic      Running
-0/lxd/0  started  10.232.236.186  juju-2ad61f-0-lxd-0  bionic      Container started
-1        started  10.80.187.177   juju-2ad61f-1        bionic      Running
+0        started  10.234.141.194  juju-7c937e-0        bionic      Running
+0/lxd/0  started  10.10.19.148    juju-7c937e-0-lxd-0  bionic      Container started
+1        started  10.234.141.32   juju-7c937e-1        bionic      Running
 ```
 
 !!! Note:
     We've used the staging Charm Store in these instructions as the standard
-    site does not yet contain Kubernetes charms and bundles.
+    site does not yet support Kubernetes charms and bundles.
 
 #### Alternative methods for obtaining a Kubernetes cluster
 
@@ -146,31 +146,17 @@ copied configuration file from the specified path. This allows us to quickly
 add the cluster-cloud, which we have arbitrarily called 'lxd-k8s-cloud':
 
 ```bash
-juju add-k8s lxd-k8s-cloud
+juju add-k8s k8s-cloud
 ```
 
-Now confirm the successful addition of the cloud:
-
-```bash
-juju clouds
-```
-
-Here is a partial output:
-
-```no-highlight
-Cloud          Regions  Default          Type        Description
-.
-.
-.
-lxd-k8s-cloud        0                   kubernetes
-```
+Now confirm the successful addition of the cloud with the `clouds` command.
 
 ### Add a model
 
 Add a model in the usual way:
 
 ```bash
-juju add-model lxd-k8s-model lxd-k8s-cloud
+juju add-model k8s-model k8s-cloud
 ```
 
 This will cause a Kubernetes namespace in the cluster to be created that will
@@ -183,12 +169,12 @@ cloud's storage is not supported natively by Kubernetes. You will need to do
 the same for charm storage if your charm has storage requirements (we will do
 so since our intended charm will need storage).
 
-Here, since our example is using an unsupported storage solution (LXD)
-we'll create storage classes for both types:
+Here, since our example is using an unsupported storage solution (LXD) we'll
+create static volumes for both types:
 
 ```bash
-kubectl create -f lxd-k8s-model-op1.yaml
-kubectl create -f lxd-k8s-model-vol1.yaml
+kubectl create -f charm-storage-vol1.yaml
+kubectl create -f operator-storage.yaml
 ```
 
 ### Create storage pools
@@ -198,10 +184,10 @@ will need to do both for our example:
 
 ```bash
 juju create-storage-pool operator-storage kubernetes \
-	storage-class=lxd-k8s-model-operator-storage \
+	storage-class=juju-operator-storage \
 	storage-provisioner=kubernetes.io/no-provisioner
-juju create-storage-pool lxd-k8s-pool kubernetes \
-	storage-class=lxd-k8s-model-charm-storage \
+juju create-storage-pool k8s-pool kubernetes \
+	storage-class=juju-unit-storage \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
 
