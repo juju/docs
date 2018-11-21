@@ -188,10 +188,21 @@ k8s-model   statefulset.apps/juju-mariadb-k8s            1         1         140
 K8s-model   statefulset.apps/juju-operator-mariadb-k8s   1         1         140m
 ```
 
-You can easily scan the changes on the left hand side by recalling the model
-name we chose: 'k8s-model'.
+You can easily identify the changes, as compared to the initial output, by
+scanning the left hand side for the model name we chose: 'k8s-model', which
+ends up being the Kubernetes "namespace".
 
-Felicitations all around!
+To get information on pod 'juju-mariadb-k8s-0' you need to refer to the
+namespace (since it's not the 'default' namespace) in this way:
+
+```bash
+microk8s.kubectl describe pods -n k8s-model juju-mariadb-k8s-0
+```
+
+The output is too voluminous to include here. See the upstream documentation on
+viewing cluster information [here][upstream-kubectl-viewing].
+
+That's the end of this tutorial. Felicitations for making it this far!
 
 
 <!-- LINKS -->
@@ -200,3 +211,4 @@ Felicitations all around!
 [upstream-microk8s]: https://microk8s.io
 [upstream-cncf]: https://www.cncf.io/certification/software-conformance/
 [charms-storage-k8s]: ./charms-storage-k8s.md
+[upstream-kubectl-viewing]: https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources
