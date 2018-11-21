@@ -1,5 +1,5 @@
 Title: Using Juju with microk8s
-TODO:  Add a link to the Ubuntu tutorial "Introducing microk8s" (when published)
+TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1804495
 
 # Using Juju with microk8s
 
@@ -14,15 +14,16 @@ services natively (i.e. no virtual machines or containers), and is fully
 [CNCF certified][upstream-cncf]. This option is perfect for testing Kubernetes
 on your laptop. Using it with Juju is icing on the cake!
 
-Since microk8s is running locally we'll be using a local LXD cloud to create a
-Juju controller.
+Since microk8s runs locally we'll be using a local LXD cloud to create a Juju
+controller.
 
 ## Installing the software
 
-These instructions assume you're using a fresh Ubuntu 18.04 LTS install, or at
-least one that is not already using either Juju or LXD. This tutorial installs
-Juju, LXD, and microk8s as snaps. It also removes a possibly existing LXD deb
-package. Do not invoke the purge command below if you're currently using LXD!
+These instructions assume that you're using a fresh Ubuntu 18.04 LTS install,
+or at least one that is not already using either Juju or LXD. This tutorial
+installs Juju, LXD, and microk8s as snaps. It also removes a possibly existing
+LXD deb package. Do not invoke the purge command below if you're currently
+using LXD!
 
 ```bash
 sudo snap install juju --classic
@@ -64,7 +65,7 @@ kube-system   replicaset.apps/hostpath-provisioner-7d7c578f6b   1         1     
 Kube-system   replicaset.apps/kube-dns-67b548dcff               1         1         1       5m53s
 ```
 
-Later we'll see how this output changes once we deploy a charm.
+Later we'll see how this output will change once a charm is deployed.
 
 ## Creating a controller
 
@@ -199,10 +200,37 @@ namespace (since it's not the 'default' namespace) in this way:
 microk8s.kubectl describe pods -n k8s-model juju-mariadb-k8s-0
 ```
 
-The output is too voluminous to include here. See the upstream documentation on
-viewing cluster information [here][upstream-kubectl-viewing].
+The output is too voluminous to include here. See the
+[upstream documentation][upstream-kubectl-viewing] on different ways of viewing
+cluster information.
 
-That's the end of this tutorial. Felicitations for making it this far!
+## Removing configuration and software
+
+To remove all traces of microk8s and its configuration follow these steps:
+
+```bash
+juju destroy-model -y --destroy-storage k8s-model
+juju remove-cloud microk8s-cloud
+microk8s.reset
+sudo snap remove microk8s
+```
+
+This leaves us with LXD and Juju installed as well as a LXD controller. To
+remove even those things proceed as follows:
+
+```bash
+juju destroy-controller -y lxd
+sudo snap remove lxd
+sudo snap remove juju
+```
+
+That's the end of this tutorial!
+
+## Next steps
+
+For more experience with a standalone (non-Juju) microk8s installation you can
+go through Ubuntu tutorial
+[Install a local Kubernetes with microk8s][ubuntu-tutorial_kubernetes-microk8s].
 
 
 <!-- LINKS -->
@@ -212,3 +240,4 @@ That's the end of this tutorial. Felicitations for making it this far!
 [upstream-cncf]: https://www.cncf.io/certification/software-conformance/
 [charms-storage-k8s]: ./charms-storage-k8s.md
 [upstream-kubectl-viewing]: https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources
+[ubuntu-tutorial_kubernetes-microk8s]: https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s
