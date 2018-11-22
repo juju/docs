@@ -53,7 +53,7 @@ Juju:
  1. Add a model
  1. Create persistent storage (if necessary)
  1. Create storage pools (charm storage if necessary)
- 1. Deploy a Kubernetes charm or bundle
+ 1. Deploy a Kubernetes charm
 
 ### Obtain a Kubernetes cluster
 
@@ -208,11 +208,11 @@ juju create-storage-pool k8s-pool kubernetes \
 Notice how the model name 'k8s-model' got prefixed to the storage class names
 we specified with the `create-storage-pool` commands.
 
-### Deploy a Kubernetes charm or bundle
+### Deploy a Kubernetes charm
 
 It's time to deploy a Kubernetes-specific charm. Our example uses a
 [MariaDB charm][charm-store-staging-mariadb-k8s] that will use the previously
-created charm storage called 'lxd-k8s-pool':
+created charm storage called 'k8s-pool':
 
 ```bash
 juju deploy cs:~wallyworld/mariadb-k8s --storage database=k8s-pool,10M
