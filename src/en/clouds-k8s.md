@@ -8,7 +8,7 @@ TODO:  Should eventually link to k8s-charm developer documentation
 
 # Using Kubernetes with Juju
 
-Kubernetes provides a flexible architecture for managing containerised
+Kubernetes ("k8s") provides a flexible architecture for managing containerised
 applications at scale (see the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information). It
 most commonly employs Docker as its container technology.
@@ -16,7 +16,7 @@ most commonly employs Docker as its container technology.
 This page assumes you have a good understanding of
 [Persistent storage and Kubernetes][charms-storage-k8s].
 
-## Juju k8s-specific workflow
+## Juju Kubernetes-specific workflow
 
 The only k8s-specific Juju commands are `add-k8s`, `remove-k8s`, and
 `scale-application`. All other concepts and commands are applied in the
@@ -53,7 +53,7 @@ Juju:
  1. Add a model
  1. Create persistent storage (if necessary)
  1. Create storage pools (charm storage if necessary)
- 1. Deploy a Kubernetes charm
+ 1. Deploy a Kubernetes charm or bundle
 
 ### Obtain a Kubernetes cluster
 
@@ -177,6 +177,20 @@ kubectl create -f charm-storage-vol1.yaml
 kubectl create -f operator-storage.yaml
 ```
 
+We can inspect these new persistent volumes (PV):
+
+```bash
+kubectl get sc,pv,pvc
+```
+
+Output:
+
+```no-highlight
+NAME                    CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS                      REASON   AGE
+persistentvolume/op1    1032Mi     RWO            Retain           Available           k8s-model-juju-operator-storage            25m
+persistentvolume/vol1   100Mi      RWO            Retain           Available           k8s-model-juju-unit-storage                24m
+```
+
 ### Create storage pools
 
 Create storage pools for operator storage and, if needed, charm storage. We
@@ -191,18 +205,31 @@ juju create-storage-pool k8s-pool kubernetes \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
 
-### Deploy a Kubernetes charm
+Notice how the model name 'k8s-model' got prefixed to the storage class names
+we specified with the `create-storage-pool` commands.
+
+### Deploy a Kubernetes charm or bundle
 
 It's time to deploy a Kubernetes-specific charm. Our example uses a
 [MariaDB charm][charm-store-staging-mariadb-k8s] that will use the previously
 created charm storage called 'lxd-k8s-pool':
 
 ```bash
-juju deploy cs:~wallyworld/mariadb-k8s --storage database=lxd-k8s-pool,10M
+juju deploy cs:~wallyworld/mariadb-k8s --storage database=k8s-pool,10M
 ```
 
 The [Using Juju storage][charms-storage-juju-deploy] page covers the above
 syntax.
+
+Check for changes to PVs, PV "claims" (the requester of a PV), and storage
+classes:
+
+```bash
+kubectl -n k8s-model get pvc,pv,sc
+```
+
+See section [Kubernetes bundles][charms-bundles-k8s] if you're interested in
+using bundles.
 
 #### Configuration
 
@@ -254,6 +281,7 @@ conjunction with the configured ingress controller (default: nginx).
 [upstream-conjure-up]: https://conjure-up.io/
 [charm-store-staging-integrator]: https://staging.jujucharms.com/q/integrator
 [charms-storage-k8s]: ./charms-storage-k8s.md
+[charms-bundles-k8s]: ./charms-bundles.md#kubernetes-bundles
 [charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7
 [charms-storage-juju-deploy]: ./charms-storage.md#juju-deploy
 [tutorial-microk8s]: ./tutorial-microk8s.md

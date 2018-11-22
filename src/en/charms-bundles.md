@@ -52,6 +52,39 @@ machines:
     constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
 ```
 
+### Kubernetes bundles
+
+A Kubernetes bundle differs from a standard bundle in the following ways:
+
+ - key 'bundle' is given the value of 'kubernetes'
+ - key 'num_units' is replaced by key 'scale'
+ - key 'to' is replaced by key 'placement'
+
+The value of 'placement' is a key=value pair and is used as a Kubernetes node
+selector.
+
+For example:
+
+```no-highlight
+bundle: kubernetes
+applications:
+  mariadb:
+    charm: cs:~wallyworld/mariadb-k8s
+    scale: 2
+    constraints: mem=1G
+    options:
+        dataset-size: 70%
+    storage:
+      database: 20M,mariadb-pv
+  gitlab:
+    charm: cs:~wallyworld/gitlab-k8s
+    placement: foo=bar
+    scale: 1
+relations:
+  - - gitlab:mysql
+    - mariadb:server
+```
+
 ## Deploying bundles
 
 A bundle is deployed just like a regular charm is:
