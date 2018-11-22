@@ -1,6 +1,7 @@
 Title: Deploying applications
 TODO: Add 'centos' and 'windows' stuff to series talk
       Hardcoded: Ubuntu codenames
+      Should link to bundles page
 table_of_contents: True
 
 # Deploying applications
@@ -136,6 +137,12 @@ Some charms support more than one series. It is also possible to force a charm
 to deploy to a different series. See the documentation on
 [Multi-series charms][deploying-multi-series-charms] to learn more.
 
+## Deploying a Kubernetes charm
+
+Kubernetes charms (`v.2.5.0`) can be deployed when the backing cloud is a
+Kubernetes cluster. See page [Using Kubernetes with Juju][clouds-k8s] for an
+overview.
+
 ## Configuring at deployment time
 
 Deployed applications usually start with a sane default configuration. However,
@@ -192,3 +199,4 @@ matter.
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
 [deploying-to-network-spaces]: ./charms-deploying-advanced.md#deploying-to-network-spaces
 [#exposing-deployed-applications]: #exposing-deployed-applications
+[clouds-k8s]: ./clouds-k8s.md

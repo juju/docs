@@ -51,43 +51,29 @@ be set up prior to the creation of the storage pool. See
 [Types of persistent volumes][upstream-kubernetes-volumes] for the list of
 Kubernetes supported backends. 
 
-#### Statically provisioned volumes
+Static volumes are mainly intended for testing/prototyping.
 
-You set up static volumes via storage class definitions. The
-[Kubernetes storage classes][upstream-kubernetes-classes] page offers details.  Here is a example procedure:
+#### Statically provisioned volumes
+ 
+You set up static volumes via YAML definition files. The
+[Kubernetes storage classes][upstream-kubernetes-classes] page offers details.
+Here is a example procedure:
 
 ```bash
 sudo snap install --classic kubectl
 kubectl create -f charm-storage-vol1.yaml
 kubectl create -f operator-storage.yaml
-kubectl describe pv
 ```
 
 The example YAML-formatted files `operator-storage.yaml` and
 `charm-storage-vol1.yaml` define volumes for operator storage and charm storage
 respectively that get created by the `kubectl` command.
 
-The content of the storage class definition files are given below. Typically
-multiple charm storage volumes would be required. Note that operator storage
-needs a minimum of 1024 MiB.
+The content of the volume definition files are given below. Typically multiple
+charm storage volumes would be required. Note that operator storage needs a
+minimum of 1024 MiB.
 
 ^# charm-storage-vol1.yaml
-
-      kind: PersistentVolume
-      apiVersion: v1
-      metadata:
-        name: op1
-      spec:
-        capacity:
-          storage: 1032Mi
-        accessModes:
-          - ReadWriteOnce
-        persistentVolumeReclaimPolicy: Retain
-        storageClassName: k8s-model-juju-operator-storage
-        hostPath:
-          path: "/mnt/data/vol1"
-
-^# operator-storage.yaml
 
       kind: PersistentVolume
       apiVersion: v1
@@ -100,6 +86,22 @@ needs a minimum of 1024 MiB.
           - ReadWriteOnce
         persistentVolumeReclaimPolicy: Retain
         storageClassName: k8s-model-juju-unit-storage
+        hostPath:
+          path: "/mnt/data/vol1"
+
+^# operator-storage.yaml
+
+      kind: PersistentVolume
+      apiVersion: v1
+      metadata:
+        name: op1
+      spec:
+        capacity:
+          storage: 1032Mi
+        accessModes:
+          - ReadWriteOnce
+        persistentVolumeReclaimPolicy: Retain
+        storageClassName: k8s-model-juju-operator-storage
         hostPath:
           path: "/mnt/data/op1"
 
@@ -132,6 +134,12 @@ For charm storage, the 'pool name' is referenced at charm deployment time by
 the `deploy` command. It is also this command that triggers the actual creation
 of the Kubernetes storage class when that storage class is referred to for the
 first time.
+
+<!--
+Juju adds the <model> prefix to any storage class it creates in the k8s
+cluster, Because storage classes are global to the cluster and we need to
+disambiguate.
+-->
 
 The pool name for operator storage *must* be called 'operator-storage' while a
 pool name for charm storage is arbitrary.
@@ -172,6 +180,9 @@ juju create-storage-pool operator-storage kubernetes \
 	storage-class=microk8s-hostpath
 ```
 
+For microk8s, a special storage class name of 'microk8s-hostpath' is always
+used.
+
 For LXD (statically provisioned):
 
 ```bash
@@ -203,6 +214,14 @@ As with the operator storage static volume scenario, the final storage class
 name associated with pool 'k8s-pool', assuming a model of 'k8s-model', becomes
 'k8s-model-juju-unit-storage'.
 
+For `microk8s`, the only difference from the creation of the corresponding
+operator storage pool is the pool name:
+
+```bash
+juju create-storage-pool k8s-pool kubernetes \
+	storage-class=microk8s-hostpath
+```
+
 ### External storage and storage precedence rules 
 
 Although the recommended approach is to use Juju-managed storage, Juju does
@@ -229,9 +248,9 @@ For charm storage the rules are similar:
      - `default`
  1. a storage class with label `storageclass.kubernetes.io/is-default-class`
 
-Notice that for both operator and charm storage, the first two rules account
-for Juju-managed statically provisioned volumes and dynamically provisioned
-volumes, respectively.
+Notice that for both operator and charm storage, the first two rules are
+compatible with Juju-managed statically provisioned volumes and dynamically
+provisioned volumes, respectively.
 
 
 <!-- LINKS -->
