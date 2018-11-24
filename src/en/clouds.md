@@ -3,20 +3,14 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1749583
        INFO: Auth types found at ~/.local/share/juju/public-clouds.yaml
        There is contention whether access-key can be used with keystone v3 (see https://github.com/juju/docs/issues/2868)
-       Needs to be updated for the new Oracle cloud (OCI)
-       Update: Juju is growing an authentication type for OpenStack: certificates
-       Update: Juju is growing add-cloud for (remote) LXD
 table_of_contents: True
 
 # Clouds
 
 Juju supports a wide variety of clouds. In addition, many of these are known to
-Juju out of the box. They are Amazon AWS, Microsoft Azure, Google GCE, Oracle
-Compute, Rackspace, Joyent, and LXD.
-
-The remaining supported clouds do need to be added to Juju, and, as will be
-shown, it is simply done. They are VMware vSphere, OpenStack, MAAS, and Manual.
-An Oracle *trial* account also needs to be added.
+Juju out of the box. The remaining supported clouds do need to be added to
+Juju, and, as will be shown, it is simply done. An Oracle *trial* account also
+needs to be added.
 
 Once your cloud is known to Juju, whether by default or due to it being added,
 the next step is to add your cloud credentials to Juju. The exception is LXD;
@@ -25,17 +19,19 @@ it does not require credentials.
 This rest of this page covers general cloud management tasks and an overview of
 how clouds are added. You can still get started by selecting your cloud here:
 
- - [Amazon AWS][clouds-aws]
- - [Microsoft Azure][clouds-azure]
- - [Google GCE][clouds-google]
- - [Oracle Compute][clouds-oracle]
- - [Rackspace][clouds-rackspace]
- - [Joyent][clouds-joyent]
- - [LXD][clouds-lxd]
+ - [Amazon AWS][clouds-aws] *****
+ - [Microsoft Azure][clouds-azure] *****
+ - [Google GCE][clouds-google] *****
+ - [Oracle Compute][clouds-oracle] *****
+ - [Rackspace][clouds-rackspace] *****
+ - [Joyent][clouds-joyent] *****
+ - [LXD][clouds-lxd] (local) *****
  - [VMware vSphere][clouds-vmware]
  - [OpenStack][clouds-openstack]
  - [MAAS][clouds-maas]
  - [Manual][clouds-manual]
+
+Those clouds known to Juju out of the box are denoted by an *****.
 
 ## General cloud management
 
