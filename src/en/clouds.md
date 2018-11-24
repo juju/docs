@@ -8,11 +8,8 @@ table_of_contents: True
 # Clouds
 
 Juju supports a wide variety of clouds. In addition, many of these are known to
-Juju out of the box. They are Amazon AWS, Microsoft Azure, Google GCE, Oracle
-OCI, Rackspace, Joyent, and LXD.
-
-The remaining supported clouds do need to be added to Juju, and, as will be
-shown, it is simply done. They are VMware vSphere, OpenStack, MAAS, and Manual.
+Juju out of the box. The remaining supported clouds do need to be added to
+Juju, and, as will be shown, it is simply done.
 
 Once your cloud is known to Juju, whether by default or due to it being added,
 the next step is to add your cloud credentials to Juju. The exception is for a
@@ -21,17 +18,20 @@ local LXD cloud; credentials are added automatically.
 This rest of this page covers general cloud management and an overview of how
 clouds are added. You can still get started by selecting your cloud here:
 
- - [Amazon AWS][clouds-aws]
- - [Microsoft Azure][clouds-azure]
- - [Google GCE][clouds-google]
- - [Oracle OCI][clouds-oci]
- - [Rackspace][clouds-rackspace]
- - [Joyent][clouds-joyent]
- - [LXD][clouds-lxd]
+ - [Amazon AWS][clouds-aws] *****
+ - [Microsoft Azure][clouds-azure] *****
+ - [Google GCE][clouds-google] *****
+ - [Oracle][clouds-oci] *****
+ - [Rackspace][clouds-rackspace] *****
+ - [Joyent][clouds-joyent] *****
+ - [LXD][clouds-lxd] (local) *****
+ - [LXD][clouds-lxd] (remote)
  - [VMware vSphere][clouds-vmware]
  - [OpenStack][clouds-openstack]
  - [MAAS][clouds-maas]
  - [Manual][clouds-manual]
+
+Those clouds known to Juju out of the box are denoted by an *****.
 
 ## General cloud management
 
