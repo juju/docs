@@ -26,10 +26,10 @@ Example user session:
 
 ```no-highlight
 Cloud Types
+  lxd
   maas
   manual
   openstack
-  oracle
   vsphere
 
 Select cloud type: maas
