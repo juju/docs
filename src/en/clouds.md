@@ -21,7 +21,7 @@ clouds are added. You can still get started by selecting your cloud here:
  - [Amazon AWS][clouds-aws] *****
  - [Microsoft Azure][clouds-azure] *****
  - [Google GCE][clouds-google] *****
- - [Oracle][clouds-oci] *****
+ - [Oracle OCI][clouds-oci] *****
  - [Rackspace][clouds-rackspace] *****
  - [Joyent][clouds-joyent] *****
  - [LXD][clouds-lxd] (local) *****
