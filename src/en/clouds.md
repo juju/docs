@@ -25,7 +25,7 @@ how clouds are added. You can still get started by selecting your cloud here:
  - [Amazon AWS][clouds-aws] *****
  - [Microsoft Azure][clouds-azure] *****
  - [Google GCE][clouds-google] *****
- - [Oracle][clouds-oracle] *****
+ - [Oracle Compute][clouds-oracle] *****
  - [Rackspace][clouds-rackspace] *****
  - [Joyent][clouds-joyent] *****
  - [LXD][clouds-lxd] (local) *****
