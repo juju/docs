@@ -4,7 +4,8 @@ TODO:  Should eventually link to k8s-charm developer documentation
        Consider manually adding a cluster via `add-cloud` and `add-credential`
        Change from staging store to production store when available
        Link to Discourse posts on aws-integrator?
-       Write another tutorial on building a cluster using the methods listed
+       Write tutorial on building a cluster using GKE
+       Write tutorial on building a cluster using AWS
 
 # Using Kubernetes with Juju
 
@@ -59,19 +60,24 @@ Juju:
 
 You may obtain a Kubernetes cluster in any way. However, in this document, we
 deploy the cluster using Juju itself (with the 'localhost' cloud). We will do
-so by deploying a minimal two-machine Kubernetes cluster by making use of the
+so by deploying a minimal two-machine Kubernetes cluster with the use of the
 [kubernetes-core][kubernetes-core-charm] bundle available in the Charm Store:
 
 ```bash
-juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore localhost lxd-k8s
+juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore localhost aws
 juju deploy kubernetes-core
 ```
 
-Sample output to `juju status` looks like this:
+!!! Note:
+    We've used the staging Charm Store in these instructions as the standard
+    site does not yet support Kubernetes charms and bundles.
+
+This can take around 10 minutes to settle. Sample final output to `juju status`
+looks like this:
 
 ```no-highlight
 Model    Controller  Cloud/Region         Version    SLA          Timestamp
-default  lxd-k8s     localhost/localhost  2.5-beta2  unsupported  22:22:14Z
+default  aws         localhost/localhost  2.5-beta2  unsupported  22:22:14Z
 
 App                Version  Status   Scale  Charm              Store       Rev  OS      Notes
 easyrsa            3.0.1    active       1  easyrsa            jujucharms  117  ubuntu  
@@ -94,9 +100,7 @@ Machine  State    DNS             Inst id              Series  AZ  Message
 1        started  10.234.141.32   juju-7c937e-1        bionic      Running
 ```
 
-!!! Note:
-    We've used the staging Charm Store in these instructions as the standard
-    site does not yet support Kubernetes charms and bundles.
+Please wait to get very similar output before proceeding.
 
 #### Alternative methods for obtaining a Kubernetes cluster
 
@@ -143,13 +147,20 @@ juju scp kubernetes-master/0:config ~/.kube/config
 
 We can now take advantage of the `add-k8s` command as it internally parses the
 copied configuration file from the specified path. This allows us to quickly
-add the cluster-cloud, which we have arbitrarily called 'lxd-k8s-cloud':
+add the cluster-cloud, which we have arbitrarily called 'k8s-cloud':
 
 ```bash
 juju add-k8s k8s-cloud
 ```
 
 Now confirm the successful addition of the cloud with the `clouds` command.
+
+Before continuing, ensure the output to the following command does not report
+anything suspicious:
+
+```bash
+kubectl describe pods
+```
 
 ### Add a model
 
@@ -169,8 +180,8 @@ cloud's storage is not supported natively by Kubernetes. You will need to do
 the same for charm storage if your charm has storage requirements (we will do
 so since our intended charm will need storage).
 
-Here, since our example is using an unsupported storage solution (LXD) we'll
-create static volumes for both types:
+Since our example scenario is using an unsupported storage solution (LXD) we'll
+need to create static volumes for both types:
 
 ```bash
 kubectl create -f charm-storage-vol1.yaml
@@ -205,8 +216,9 @@ juju create-storage-pool k8s-pool kubernetes \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
 
-Notice how the model name 'k8s-model' got prefixed to the storage class names
-we specified with the `create-storage-pool` commands.
+Notice how the model name 'k8s-model' is not part of the storage class names
+that show up for each static volume above. Juju will prepend the current model
+when a provisioner of 'kubernetes.io/no-provisioner' is requested.
 
 ### Deploy a Kubernetes charm
 
