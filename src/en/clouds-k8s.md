@@ -6,6 +6,7 @@ TODO:  Should eventually link to k8s-charm developer documentation
        Link to Discourse posts on aws-integrator?
        Write tutorial on building a cluster using GKE
        Write tutorial on building a cluster using AWS
+       Example done with AWS since a LXD bundle needs each of its charms to specify profile edits according to https://is.gd/dqXGN2
 
 # Using Kubernetes with Juju
 
@@ -59,12 +60,12 @@ Juju:
 ### Obtain a Kubernetes cluster
 
 You may obtain a Kubernetes cluster in any way. However, in this document, we
-deploy the cluster using Juju itself (with the 'localhost' cloud). We will do
+deploy the cluster using Juju itself (with the 'aws' cloud). We will do
 so by deploying a minimal two-machine Kubernetes cluster with the use of the
 [kubernetes-core][kubernetes-core-charm] bundle available in the Charm Store:
 
 ```bash
-juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore localhost aws
+juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore aws aws
 juju deploy kubernetes-core
 ```
 
@@ -76,28 +77,28 @@ This can take around 10 minutes to settle. Sample final output to `juju status`
 looks like this:
 
 ```no-highlight
-Model    Controller  Cloud/Region         Version    SLA          Timestamp
-default  aws         localhost/localhost  2.5-beta2  unsupported  22:22:14Z
+Model    Controller  Cloud/Region   Version    SLA          Timestamp
+default  aws         aws/us-east-1  2.5-beta2  unsupported  19:31:40Z
 
-App                Version  Status   Scale  Charm              Store       Rev  OS      Notes
-easyrsa            3.0.1    active       1  easyrsa            jujucharms  117  ubuntu  
-etcd               3.2.10   active       1  etcd               jujucharms  209  ubuntu  
-flannel            0.10.0   active       2  flannel            jujucharms  146  ubuntu  
-kubernetes-master  1.12.2   waiting      1  kubernetes-master  jujucharms  219  ubuntu  exposed
-kubernetes-worker  1.12.2   waiting      1  kubernetes-worker  jujucharms  239  ubuntu  exposed
+App                Version  Status  Scale  Charm              Store       Rev  OS      Notes
+easyrsa            3.0.1    active      1  easyrsa            jujucharms  117  ubuntu  
+etcd               3.2.10   active      1  etcd               jujucharms  209  ubuntu  
+flannel            0.10.0   active      2  flannel            jujucharms  146  ubuntu  
+kubernetes-master  1.12.2   active      1  kubernetes-master  jujucharms  219  ubuntu  exposed
+kubernetes-worker  1.12.2   active      1  kubernetes-worker  jujucharms  239  ubuntu  exposed
 
 Unit                  Workload  Agent  Machine  Public address  Ports           Message
-easyrsa/0*            active    idle   0/lxd/0  10.10.19.148                    Certificate Authority connected.
-etcd/0*               active    idle   0        10.234.141.194  2379/tcp        Healthy with 1 known peer
-kubernetes-master/0*  waiting   idle   0        10.234.141.194  6443/tcp        Waiting for kube-system pods to start
-  flannel/0*          active    idle            10.234.141.194                  Flannel subnet 10.1.45.1/24
-kubernetes-worker/0*  waiting   idle   1        10.234.141.32   80/tcp,443/tcp  Waiting for kubelet to start.
-  flannel/1           active    idle            10.234.141.32                   Flannel subnet 10.1.37.1/24
+easyrsa/0*            active    idle   0/lxd/0  10.213.7.167                    Certificate Authority connected.
+etcd/0*               active    idle   0        54.162.110.147  2379/tcp        Healthy with 1 known peer
+kubernetes-master/0*  active    idle   0        54.162.110.147  6443/tcp        Kubernetes master running.
+  flannel/0*          active    idle            54.162.110.147                  Flannel subnet 10.1.81.1/24
+kubernetes-worker/0*  active    idle   1        18.210.11.210   80/tcp,443/tcp  Kubernetes worker running.
+  flannel/1           active    idle            18.210.11.210                   Flannel subnet 10.1.34.1/24
 
-Machine  State    DNS             Inst id              Series  AZ  Message
-0        started  10.234.141.194  juju-7c937e-0        bionic      Running
-0/lxd/0  started  10.10.19.148    juju-7c937e-0-lxd-0  bionic      Container started
-1        started  10.234.141.32   juju-7c937e-1        bionic      Running
+Machine  State    DNS             Inst id              Series  AZ          Message
+0        started  54.162.110.147  i-0f94dff8233b92b3c  bionic  us-east-1a  running
+0/lxd/0  started  10.213.7.167    juju-2f253d-0-lxd-0  bionic  us-east-1a  Container started
+1        started  18.210.11.210   i-0a2b626f2b0c92219  bionic  us-east-1b  running
 ```
 
 Please wait to get very similar output before proceeding.
@@ -114,16 +115,15 @@ cluster:
     for guidance. Although the tutorial specifically mentions the
     [Canonical Distribution of Kubernetes][cdk-charm] you can choose the
     identical minimal install deployed above from the installer's interface.
- 1. Use [`microk8s`][upstream-microk8s]. With microk8s, you get a local, fully
-    compliant Kubernetes deployment with dynamic persistent volume support. See
-    tutorial [Using Juju with microk8s][tutorial-microk8s].
+ 1. Use [MicroK8s][upstream-microk8s] where you get a local, fully compliant
+    Kubernetes deployment with dynamic persistent volume support. See tutorial
+    [Using Juju with microk8s][tutorial-microk8s].
  1. Use a bundle made for the major cloud vendors. There are special
     "integrator" charms that assist with such deployments.
     [Search the Charm Store][charm-store-staging-integrator] for 'integrator'.
  1. Use a public cloud vendor such as [Amazon EKS][upstream-eks-kubernetes],
-    [Azure AKS][upstream-aks-kubernetes],
-    [Google GKE][upstream-gke-kubernetes], and
-    [DigitalOcean Kubernetes][upstream-dok-kubernetes].
+    [Azure AKS][upstream-aks-kubernetes], and
+    [Google GKE][upstream-gke-kubernetes].
 
 ### Add the cluster to Juju
 
@@ -184,14 +184,15 @@ Since our example scenario is using an unsupported storage solution (LXD) we'll
 need to create static volumes for both types:
 
 ```bash
-kubectl create -f charm-storage-vol1.yaml
 kubectl create -f operator-storage.yaml
+kubectl create -f charm-storage-vol1.yaml
 ```
 
-We can inspect these new persistent volumes (PV):
+We can inspect these new persistent volumes (PV) and any possible storage
+classes (SC):
 
 ```bash
-kubectl get sc,pv,pvc
+kubectl get sc,pv
 ```
 
 Output:
@@ -233,15 +234,42 @@ juju deploy cs:~wallyworld/mariadb-k8s --storage database=k8s-pool,10M
 The [Using Juju storage][charms-storage-juju-deploy] page covers the above
 syntax.
 
-Check for changes to PVs, PV "claims" (the requester of a PV), and storage
-classes:
+The output to the `status` command should resemble this:
 
-```bash
-kubectl -n k8s-model get pvc,pv,sc
+```no-highlight
+Model      Controller  Cloud/Region  Version    SLA          Timestamp
+k8s-model  aws         k8s-cloud     2.5-beta2  unsupported  20:52:11Z
+
+App          Version  Status  Scale  Charm        Store       Rev  OS          Address        Notes
+mariadb-k8s           active      1  mariadb-k8s  jujucharms   13  kubernetes  10.152.183.82  
+
+Unit            Workload  Agent  Address     Ports     Message
+mariadb-k8s/0*  active    idle   10.1.34.13  3306/TCP
 ```
 
-See section [Kubernetes bundles][charms-bundles-k8s] if you're interested in
-using bundles.
+Check for changes to the cluster storage objects:
+
+```bash
+kubectl -n k8s-model get sc,pv
+```
+
+Sample output:
+
+```no-highlight
+NAME                                                          PROVISIONER                    AGE
+storageclass.storage.k8s.io/k8s-model-juju-operator-storage   kubernetes.io/no-provisioner   2m16s
+storageclass.storage.k8s.io/k8s-model-juju-unit-storage       kubernetes.io/no-provisioner   115s
+
+NAME                    CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                                               STORAGECLASS                      REASON   AGE
+persistentvolume/op1    1032Mi     RWO            Retain           Bound    k8s-model/mariadb-k8s-operator-volume-juju-operator-mariadb-k8s-0   k8s-model-juju-operator-storage            25m
+persistentvolume/vol1   100Mi      RWO            Retain           Bound    k8s-model/juju-database-0-juju-mariadb-k8s-0 			k8s-model-juju-unit-storage                25m
+```
+
+We see the storage classes that we specified in the YAML files are now in use
+and the persistent volumes have a claim on them.
+
+Section [Kubernetes bundles][charms-bundles-k8s] has some extra information on
+bundles if that's what you're interested in.
 
 #### Configuration
 
@@ -301,5 +329,4 @@ conjunction with the configured ingress controller (default: nginx).
 [upstream-eks-kubernetes]: https://aws.amazon.com/eks/
 [upstream-aks-kubernetes]: https://azure.microsoft.com/en-us/services/kubernetes-service/
 [upstream-gke-kubernetes]: https://cloud.google.com/kubernetes-engine/
-[upstream-dok-kubernetes]: https://www.digitalocean.com/products/kubernetes/
 [upstream-microk8s]: https://microk8s.io

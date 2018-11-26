@@ -1,7 +1,7 @@
-Title: Using Juju with microk8s
+Title: Using Juju with MicroK8s
 TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1804495
 
-# Using Juju with microk8s
+# Using Juju with MicroK8s
 
 *This is in connection to the topic of
 [Using Kubernetes with Juju][clouds-k8s]. See that resource for background
@@ -14,14 +14,14 @@ services natively (i.e. no virtual machines or containers), and is fully
 [CNCF certified][upstream-cncf]. This option is perfect for testing Kubernetes
 on your laptop. Using it with Juju is icing on the cake!
 
-Since microk8s runs locally we'll be using a local LXD cloud to create a Juju
+Since MicroK8s runs locally we'll be using a local LXD cloud to create a Juju
 controller.
 
 ## Installing the software
 
 These instructions assume that you're using a fresh Ubuntu 18.04 LTS install,
 or at least one that is not already using either Juju or LXD. This tutorial
-installs Juju, LXD, and microk8s as snaps. It also removes a possibly existing
+installs Juju, LXD, and MicroK8s as snaps. It also removes a possibly existing
 LXD deb package. Do not invoke the purge command below if you're currently
 using LXD!
 
@@ -32,7 +32,7 @@ sudo snap install microk8s --classic
 sudo apt purge -y liblxc1 lxcfs lxd lxd-client
 ```
 
-Enable some microk8s addons that will provide DNS and storage class support:
+Enable some MicroK8s addons that will provide DNS and storage class support:
 
 ```bash
 microk8s.enable dns storage
@@ -121,7 +121,7 @@ k8s-model*  microk8s-cloud       available         0  admin   never connected
 
 ## Adding storage
 
-One of the benefits of using `microk8s` is that we get dynamically provisioned
+One of the benefits of using MicroK8s is that we get dynamically provisioned
 storage out of the box. Below we have Juju create two storage pools, one for
 operator storage and one for charm storage:
 
@@ -206,7 +206,7 @@ cluster information.
 
 ## Removing configuration and software
 
-To remove all traces of microk8s and its configuration follow these steps:
+To remove all traces of MicroK8s and its configuration follow these steps:
 
 ```bash
 juju destroy-model -y --destroy-storage k8s-model
@@ -228,9 +228,9 @@ That's the end of this tutorial!
 
 ## Next steps
 
-For more experience with a standalone (non-Juju) microk8s installation you can
+For more experience with a standalone (non-Juju) MicroK8s installation you can
 go through Ubuntu tutorial
-[Install a local Kubernetes with microk8s][ubuntu-tutorial_kubernetes-microk8s].
+[Install a local Kubernetes with MicroK8s][ubuntu-tutorial_kubernetes-microk8s].
 
 
 <!-- LINKS -->

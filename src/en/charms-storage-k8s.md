@@ -73,22 +73,6 @@ The content of the volume definition files are given below. Typically multiple
 charm storage volumes would be required. Note that operator storage needs a
 minimum of 1024 MiB.
 
-^# charm-storage-vol1.yaml
-
-      kind: PersistentVolume
-      apiVersion: v1
-      metadata:
-        name: vol1
-      spec:
-        capacity:
-          storage: 100Mi
-        accessModes:
-          - ReadWriteOnce
-        persistentVolumeReclaimPolicy: Retain
-        storageClassName: k8s-model-juju-unit-storage
-        hostPath:
-          path: "/mnt/data/vol1"
-
 ^# operator-storage.yaml
 
       kind: PersistentVolume
@@ -104,6 +88,22 @@ minimum of 1024 MiB.
         storageClassName: k8s-model-juju-operator-storage
         hostPath:
           path: "/mnt/data/op1"
+
+^# charm-storage-vol1.yaml
+
+      kind: PersistentVolume
+      apiVersion: v1
+      metadata:
+        name: vol1
+      spec:
+        capacity:
+          storage: 100Mi
+        accessModes:
+          - ReadWriteOnce
+        persistentVolumeReclaimPolicy: Retain
+        storageClassName: k8s-model-juju-unit-storage
+        hostPath:
+          path: "/mnt/data/vol1"
 
 !!! Important:
     The storage class name for a statically provisioned volume must be prefixed
