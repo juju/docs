@@ -118,7 +118,7 @@ Once a static volume is used, it is never re-used, even if the unit/pod is
 terminated and the volume is released. Just as static volumes are manually
 created, they must also be manually removed.
 
-### Creating storage pools
+### Storage pool creation
 
 Juju storage pools are created for both operator storage and charm storage
 using the `create-storage-pool` command. Both are done by mapping to either a
