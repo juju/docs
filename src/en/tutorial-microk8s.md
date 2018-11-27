@@ -4,15 +4,15 @@ TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1804495
 # Using Juju with MicroK8s
 
 *This is in connection to the topic of
-[Using Kubernetes with Juju][clouds-k8s]. See that resource for background
+[Using Kubernetes with Juju][clouds-k8s]. See that page for background
 information.*
 
-Juju is compatible with the [microk8s][upstream-microk8s] project, which aims
+Juju is compatible with the [MicroK8s][upstream-microk8s] project, which aims
 to provide "a full Kubernetes system in under 60 seconds". It is quite
 remarkable actually. It is composed of pure upstream binaries, runs all
 services natively (i.e. no virtual machines or containers), and is fully
 [CNCF certified][upstream-cncf]. This option is perfect for testing Kubernetes
-on your laptop. Using it with Juju is icing on the cake!
+on your personal workstation. Using it with Juju is icing on the cake!
 
 Since MicroK8s runs locally we'll be using a local LXD cloud to create a Juju
 controller.
@@ -210,7 +210,7 @@ To remove all traces of MicroK8s and its configuration follow these steps:
 
 ```bash
 juju destroy-model -y --destroy-storage k8s-model
-juju remove-cloud microk8s-cloud
+juju remove-k8s microk8s-cloud
 microk8s.reset
 sudo snap remove microk8s
 ```
@@ -228,7 +228,7 @@ That's the end of this tutorial!
 
 ## Next steps
 
-For more experience with a standalone (non-Juju) MicroK8s installation you can
+To gain experience with a standalone (non-Juju) MicroK8s installation you can
 go through Ubuntu tutorial
 [Install a local Kubernetes with MicroK8s][ubuntu-tutorial_kubernetes-microk8s].
 

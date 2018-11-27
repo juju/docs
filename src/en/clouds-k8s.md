@@ -39,6 +39,12 @@ long as the contents of the configuration file has been changed accordingly.
 The KUBECONFIG environment variable is useful here as it will be honoured by
 Juju when finding the file to load.
 
+The `remove-k8s` command is used to remove a Kubernetes cluster from Juju's
+list of known clouds.
+
+The `scale-application` command is used to scale a Kubernetes cluster. The
+`add-unit` and `remove-unit` commands cannot be applied to a Kubernetes model.
+
 ## Using Kubernetes with Juju
 
 First off, a Kubernetes cluster will be required. Essentially, you will use it
@@ -52,34 +58,33 @@ Juju:
  1. Add the cluster to Juju
  1. Add a model
  1. Create persistent storage (if necessary)
- 1. Create operator storage pool
- 1. Create charm storage pool (if necessary)
+ 1. Create storage pools
  1. Deploy a Kubernetes charm
 
 ### Obtain a Kubernetes cluster
 
-There are many ways you may obtain a Kubernetes cluster. Here is a list of
+There are many ways to obtain a Kubernetes cluster. Here is a list of
 suggestions:
 
- 1. Use the [kubernetes-core][kubernetes-core-charm] bundle, which gives a
-    minimal two-machine cluster available in the Charm Store.
- 1. Use the [canonical-kubernetes][kubernetes-cdk-charm] bundle. This is the
-    Canonical Distribution of Kubernetes (CDK), which is a more sophisticated
-    version of what we used above.
- 1. Use the [conjure-up][upstream-conjure-up] installer. See Ubuntu tutorial
-    [Install Kubernetes with conjure-up][ubuntu-tutorial_install-kubernetes-with-conjure-up]
-    for guidance. Although the tutorial specifically mentions the CDK bundle
-    you can choose the core bundle from the installer's interface.
- 1. Use [MicroK8s][upstream-microk8s] where you get a local, fully compliant
-    Kubernetes deployment with dynamic persistent volume support. See tutorial
-    [Using Juju with microk8s][tutorial-microk8s].
- 1. Use a bundle made for the major cloud vendors. There are special
-    "integrator" charms that assist with such deployments.
-    [Search the Charm Store][charm-store-staging-integrator] for 'integrator'.
- 1. Use a public Kubernetes vendor such as
-    [Amazon EKS][upstream-eks-kubernetes],
-    [Azure AKS][upstream-aks-kubernetes], and
-    [Google GKE][upstream-gke-kubernetes].
+ - Use the [kubernetes-core][kubernetes-core-charm] bundle, which gives a
+   minimal two-machine cluster available in the Charm Store.
+ - Use the [canonical-kubernetes][kubernetes-cdk-charm] bundle. This is the
+   Canonical Distribution of Kubernetes (CDK), which is a more sophisticated
+   version of what we used above.
+ - Use the [conjure-up][upstream-conjure-up] installer. See Ubuntu tutorial
+   [Install Kubernetes with conjure-up][ubuntu-tutorial_install-kubernetes-with-conjure-up]
+   for guidance. Although the tutorial specifically mentions the CDK bundle
+   you can choose the core bundle from the installer's interface.
+ - Use [MicroK8s][upstream-microk8s] where you get a local, fully compliant
+   Kubernetes deployment with dynamic persistent volume support. See tutorial
+   [Using Juju with microk8s][tutorial-microk8s].
+ - Use a bundle made for the major cloud vendors. There are special
+   "integrator" charms that assist with such deployments.
+   [Search the Charm Store][charm-store-staging-integrator] for 'integrator'.
+ - Use a public Kubernetes cloud vendor such as
+   [Amazon EKS][upstream-eks-kubernetes],
+   [Azure AKS][upstream-aks-kubernetes], and
+   [Google GKE][upstream-gke-kubernetes].
 
 !!! Note:
     Kubernetes bundles do not work well on a LXD cloud at this time. Refer to 
@@ -122,11 +127,13 @@ juju add-model k8s-model k8s-cloud
 ```
 
 This will cause a Kubernetes namespace in the cluster to be created that will
-host all of the pods and other resources for that model.
+host all of the pods and other resources for that model. The namespace is the
+name of the Juju model. A Kubernetes Juju model also starts off with a storage
+pool called 'kubernetes'. You can see this with the `storage-pools` command.
 
 !!! Note:
-    We've reused the model name of 'k8s-model' elsewhere on this page. Replace
-    it with your own model name.
+    We reuse the model name of 'k8s-model' elsewhere on this page to designate,
+    in general, a Kubernetes model.
 
 ### Create persistent storage
 
@@ -243,6 +250,7 @@ kubectl -n k8s-model describe pvc
 [upstream-kubernetes-docs-ingress]: https://kubernetes.io/docs/concepts/services-networking/ingress/
 [upstream-conjure-up]: https://conjure-up.io/
 [charm-store-staging-integrator]: https://staging.jujucharms.com/q/integrator
+[charms-storage-k8s]: ./charms-storage-k8s.md
 [charms-storage-k8s-static-pv]: ./charms-storage-k8s.md#statically-provisioned-volumes
 [charms-storage-k8s-pool-creation]: ./charms-storage-k8s.md#storage-pool-creation
 [charms-bundles-k8s]: ./charms-bundles.md#kubernetes-bundles
