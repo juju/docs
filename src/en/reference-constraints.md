@@ -50,9 +50,9 @@ For in-depth coverage and examples see the
     denoting an attribute of the machine, or negative (prefixed with "^"),
     to denote something that the machine does not have.
 
-    **Note:** Currently only supported by the MAAS provider.
-
     Example: tags=virtual,^dualnic
+
+    **Note:** Currently only supported by the MAAS provider.
 
  - `spaces`  
     A comma-delimited list of Juju network space names that a unit or machine
