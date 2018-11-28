@@ -13,12 +13,15 @@ definitive constraint resource is found on the
 
 Several noteworthy constraint characteristics:
 
- - Whenever a new machine is spawned (with commands `bootstrap`, `deploy`,
-   `add-unit`, or `add-machine`) a constraint can be specified.
+ - A constraint can be specified whenever a new machine is spawned with
+   commands `bootstrap`, `deploy`, or `add-machine`.
  - Some constraints are only supported by certain clouds.
- - Changes to constraint defaults do not affect existing machines.
+ - When used with `deploy` the constraint becomes the application's default
+   constraint.
  - Multiple constraints are logically AND'd (i.e. the machine must satisfy all
    constraints).
+ - When used in conjunction with a placement directive (`--to` option), the
+   placement directive takes precedence.
 
 ## Clouds and constraints
 
@@ -53,7 +56,7 @@ values will override corresponding instance type values.
 
 Constraints can be applied to various levels or scopes. Defaults can be set on
 some of them, and in the case of overlapping configurations a precedence is
-adhered to.
+adhered to. Changing a default does not affect existing machines.
 
 On a per-controller basis, the following constraint **scopes** exist:
 
@@ -71,7 +74,7 @@ Among the scopes, **default** constraints can be set for each with the
 exception of the controller and single machines.
 
 The all-units scope has its default set dynamically. It is the possible
-constraint used in the initial deployment of the corresponding application.
+constraint used in the initial deployment of an application.
 
 The following **precedence** is observed (in order of priority):
 
@@ -107,7 +110,7 @@ examples.
     to any future controllers provisioned for high availability. See
     [Controller high availability][controllers-ha].
 
-## Setting constraints for the controller and the default models
+## Setting constraints for the initial 'controller' and 'default' models
 
 Constraints can be applied to **every** machine (controller and non-controller)
 in the 'controller' and 'default' models. This is done, again, during the
