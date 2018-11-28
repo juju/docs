@@ -75,17 +75,15 @@ details.
 
 ## Deploying to specific machines
 
-To deploy to specific machines the `--to` option is used. When this is done,
-unless the machine was created via `add-machine`, a charm has already been
-deployed to the machine.  
+To deploy to specific machines the `--to` option is used. It is supported by
+￼ commands `bootstrap`, `deploy`, and `add-unit`.
 
-!!! Warning:
-    When multiple charms are deployed to the same machine there exists the
-    possibility of conflicting configuration files (on the machine's
-    filesystem).
+The argument to the `--to` option is called a *placement directive*.
 
-The `--to` option can be used with commands `bootstrap`, `deploy`, and
-`add-unit`.
+When this option is used, unless the machine was created via `add-machine`, a
+charm has already been deployed to the machine. When multiple charms are
+deployed to the same machine there exists the chance of conflicting
+configuration files (on the machine's filesystem).
 
 To apply this option towards an existing Juju machine, the machine ID is used.
 This is an integer that is shown in the output to `juju status` (or
