@@ -129,7 +129,7 @@ gui` and using their username with the password defined when registering.
 
 The GUI will show the Canonical Kubernetes application we deployed as the admin.
 
-![Juju GUI model of Canonical Kubernetes](media/tut-users_gui.png)
+![Juju GUI model of Canonical Kubernetes](https://assets.ubuntu.com/v1/0b305364-tut-users_gui.png)
 
 It is useful for the new user to see this model, but at the moment they can't
 do anything with it apart from look at it. 
@@ -143,7 +143,7 @@ juju grant newuser write dev
 ```
 From the user's Juju GUI, the new model will appear beneath the model menu:
 
-![Juju GUI switching model](media/tut-users_guiswitch.png)
+![Juju GUI switching model](https://assets.ubuntu.com/v1/d0b750f0-tut-users_guiswitch.png)
 
 
 When the user switches to the ‘dev’ model, they’ll now be able to deploy

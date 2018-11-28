@@ -219,7 +219,7 @@ correspond to the subnet that was created for LXD earlier on.
 From the above output, we can see that the IP address for the MediaWiki site is
 10.216.208.9. Point your browser to that address to access the site:
 
-![wiki in browser](./media/tut-lxd-wiki-simple-browser-3.png)
+![wiki in browser](https://assets.ubuntu.com/v1/a9092b3b-tut-lxd-wiki-simple-browser-3.png)
 
 Congratulations, you have just deployed a database-driven MediaWiki site with
 Juju!

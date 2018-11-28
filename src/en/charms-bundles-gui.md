@@ -29,7 +29,7 @@ or use the keyboard shortcut “shift-d”.  This results in the creation of a f
 called `<model-name>-<year>-<month>-<date>.yaml` that your browser will
 Typically prompt you to save or open.
 
-![Export button in the Juju GU](media/juju2_gui_bundles_export.png)
+![Export button in the Juju GU](https://assets.ubuntu.com/v1/9c633b2b-juju2_gui_bundles_export.png)
 
 You can import a saved bundle by either dragging the exported YAML file onto
 your browser canvas, or using the 'Import' button. After clicking 'Import' your
