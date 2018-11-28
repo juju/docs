@@ -75,17 +75,20 @@ details.
 
 ## Deploying to specific machines
 
-To deploy to specific machines the `--to` option is used. When this is done,
-unless the machine was created via `add-machine`, a charm has already been
-deployed to the machine.  
+To deploy to specific machines the `--to` option is used. It is supported by
+commands `bootstrap`, `deploy`, and `add-unit`.
 
-!!! Warning:
-    When multiple charms are deployed to the same machine there exists the
-    possibility of conflicting configuration files (on the machine's
-    filesystem).
+The argument to the `--to` option is called a *placement directive*.
 
-The `--to` option can be used with commands `bootstrap`, `deploy`, and
-`add-unit`.
+When this option is used, unless the machine was created via `add-machine`, a
+charm has already been deployed to the machine. When multiple charms are
+deployed to the same machine there exists the chance of conflicting
+configuration files (on the machine's filesystem).
+
+!!! Note:
+    There is one type of placement directive that can also be used as a
+    constraint: availability zones. If used together, the placement directive
+    takes precedence. See [Using constraints][charms-constraints] for details.
 
 To apply this option towards an existing Juju machine, the machine ID is used.
 This is an integer that is shown in the output to `juju status` (or
@@ -99,7 +102,7 @@ Machine  State    DNS           Inst id        Series  AZ  Message
 
 The above works well with `deploy` and `add-unit` as will be shown below. As
 for `bootstrap` the `--to` option is limited to either pointing to a MAAS node
-or, starting in `v.2.5`, to a LXD cluster node.
+or, starting in `v.2.5.0`, to a LXD cluster node.
 
 Assuming a MAAS cloud named 'maas-prod' exists and has a node called
 'node2.maas':
@@ -189,6 +192,39 @@ juju add-unit rabbitmq-server -n 2 --to node1.lxd,node2.lxd,node3.lxd
 
 The `add-unit` command is often associated with scaling out. See the
 [Scaling applications][charms-scaling] page for information on that topic.
+
+## Deploying to specific availability zones
+
+To deploy to specific availability zones the `--constraints` option is used. It
+is supported by commands `bootstrap`, `deploy`, and `add-machine`.
+
+The constraint type that is used to do this is 'zones'. This is not to be
+confused with the 'zone' placement directive, which happens to take precedence
+over the constraint.
+
+For instance, here we create two Trusty machines in a certain zone:
+
+```bash
+juju add-machine -n 2 --series trusty --constraints zones=us-east-1a
+```
+
+We then deploy an application on two new machines in a different zone:
+
+```bash
+juju deploy redis -n 2 --constraints zones=us-east-1c
+```
+
+Finally, in order to deploy units to the two empty machines in the initial zone
+we first change the application constraint default (set implicitly with the
+`deploy` command):
+
+```bash
+juju set-constraints redis zones=us-east-1a
+juju add-unit redis -n 2
+```
+
+When multiple (comma separated) values are used, the constraint is interpreted
+as being a range of zones where a machine must end up in.
 
 ## Deploying to network spaces
 
