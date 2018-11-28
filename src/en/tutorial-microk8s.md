@@ -135,7 +135,7 @@ in-depth information on how Kubernetes storage works with Juju.
 
 ## Deploying a Kubernetes charm
 
-We can deploy a Kubernetes charm. For example, here we deploy a charm by
+We can now deploy a Kubernetes charm. For example, here we deploy a charm by
 requesting the use of the 'mariadb-pv' charm storage pool we just set up:
 
 ```bash
@@ -229,8 +229,15 @@ That's the end of this tutorial!
 ## Next steps
 
 To gain experience with a standalone (non-Juju) MicroK8s installation you can
-go through Ubuntu tutorial
+go through this Ubuntu tutorial:
+
 [Install a local Kubernetes with MicroK8s][ubuntu-tutorial_kubernetes-microk8s].
+
+As alluded to, some backing clouds may require you to create persistent
+volumes, on top of creating the storage pools. The following tutorial will go
+over this in detail:
+
+[Setting up static Kubernetes storage][tutorial-k8s-static-pv]
 
 
 <!-- LINKS -->
@@ -241,3 +248,4 @@ go through Ubuntu tutorial
 [charms-storage-k8s]: ./charms-storage-k8s.md
 [upstream-kubectl-viewing]: https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources
 [ubuntu-tutorial_kubernetes-microk8s]: https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s
+[tutorial-k8s-static-pv]: ./tutorial-k8s-static-pv.md
