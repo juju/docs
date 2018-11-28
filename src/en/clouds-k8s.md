@@ -4,8 +4,8 @@ TODO:  Should eventually link to k8s-charm developer documentation
        Consider manually adding a cluster via `add-cloud` and `add-credential`
        Change from staging store to production store when available
        Link to Discourse posts on aws-integrator?
-       Write tutorial on building a cluster using GKE
-       Write tutorial on building a cluster using AWS
+       Write tutorial on building a cluster using GCE with gcp-integrator
+       Write tutorial on building a cluster using AWS with aws-integrator
        Example done with AWS since a LXD bundle needs each of its charms to specify profile edits according to https://is.gd/dqXGN2
 
 # Using Kubernetes with Juju
@@ -150,6 +150,9 @@ kubectl create -f charm-storage-vol1.yaml
 For assistance with the contents of these files see section
 [Statically provisioned volumes][charms-storage-k8s-static-pv].
 
+There is also a tutorial on setting up static persistent volumes here:
+[Setting up static Kubernetes storage][tutorial-k8s-static-pv]
+
 ### Create storage pools
 
 Create storage pools for operator storage and, if needed, charm storage. We
@@ -256,6 +259,7 @@ kubectl -n k8s-model describe pvc
 [charms-bundles-k8s]: ./charms-bundles.md#kubernetes-bundles
 [charms-storage-juju-deploy]: ./charms-storage.md#juju-deploy
 [tutorial-microk8s]: ./tutorial-microk8s.md
+[tutorial-k8s-static-pv]: ./tutorial-k8s-static-pv.md
 [kubernetes-deploying-on-lxd]: https://github.com/juju-solutions/bundle-canonical-kubernetes/wiki/Deploying-on-LXD
 
 [upstream-eks-kubernetes]: https://aws.amazon.com/eks/

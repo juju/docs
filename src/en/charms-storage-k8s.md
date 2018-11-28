@@ -48,8 +48,8 @@ In both cases, a Juju storage pool needs to be created by the Juju operator.
 The second type is needed when the storage system for your chosen backing cloud
 is not supported by Kubernetes. This situation therefore demands that volumes
 be set up prior to the creation of the storage pool. See
-[Types of persistent volumes][upstream-kubernetes-volumes] for the list of
-Kubernetes supported backends. 
+[Types of supported persistent volumes][upstream-kubernetes-supported-volume-types]
+for the list of Kubernetes supported backends. 
 
 Static volumes are mainly intended for testing/prototyping.
 
@@ -69,9 +69,9 @@ The example YAML-formatted files `operator-storage.yaml` and
 `charm-storage-vol1.yaml` define volumes for operator storage and charm storage
 respectively that get created by the `kubectl` command.
 
-The content of the volume definition files are given below. Typically multiple
-charm storage volumes would be required. Note that operator storage needs a
-minimum of 1024 MiB.
+Example content of the volume definition files are given below. Typically
+multiple charm storage volumes would be required. Note that operator storage
+needs a minimum of 1024 MiB.
 
 ^# operator-storage.yaml
 
@@ -256,7 +256,8 @@ provisioned volumes, respectively.
 <!-- LINKS -->
 
 [charms-storage]: ./charms-storage.md
-[upstream-kubernetes-volumes]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes
+[upstream-kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes
 [upstream-kubernetes-classes]: https://kubernetes.io/docs/concepts/storage/storage-classes/
 [#creating-storage-pools]: #creating-storage-pools
 [charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7
+[tutorial-microk8s]: ./tutorial-microk8s.md
