@@ -13,7 +13,10 @@ Kubernetes ("k8s") provides a flexible architecture for managing containerised
 applications at scale. See the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information.
 
-??????? JUJU blah blah blah ????????
+Juju has the ability to add a Kubernetes cluster to its known list of clouds
+and then treat it like it does any other cloud. There are some exceptions to
+this and these are covered in the next section. In addition,
+Kubernetes-specific charms are needed.
 
 This document refers to page
 [Persistent storage and Kubernetes][charms-storage-k8s] in a few places. You
@@ -21,7 +24,7 @@ may want to familiarise yourself with it now.
 
 ## Juju Kubernetes-specific workflow
 
-The only k8s-specific Juju commands are `add-k8s`, `remove-k8s`, and
+The k8s-specific Juju commands are `add-k8s`, `remove-k8s`, and
 `scale-application`. All other concepts and commands are applied in the
 traditional manner.
 
@@ -32,7 +35,7 @@ combination of `add-cloud` and `add-credential` unnecessary.
 
 User credentials can still be added by way of the `add-credential` or
 `autoload-credentials` commands. Also, at any time, the k8s CLI can be used to
-add a new user to the k8s cluster.
+add a new user to the cluster.
 
 The `add-k8s` command can be used repeatedly to set up different clusters as
 long as the contents of the configuration file has been changed accordingly.

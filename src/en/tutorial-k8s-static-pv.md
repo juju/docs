@@ -27,7 +27,7 @@ we'll be using here.
 
 ## Pre-requisites
 
-The following requirements are assumed:
+The following criteria are assumed:
 
  - that you're using Ubuntu 18.04 LTS
  - that Juju (stable snap channel) is installed. See the
@@ -37,7 +37,7 @@ The following requirements are assumed:
 
 ## Preliminaries
 
-Let's begin creating a controller:
+Let's begin by creating a controller:
 
 ```bash
 juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore aws aws-k8s
@@ -45,7 +45,7 @@ juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charms
 
 !!! Note:                                                                                                                                                                                                        
     We've used the staging Charm Store in these instructions as the standard                                                                                                                                     
-    site does not yet support Kubernetes charms and bundles. 
+    site does not yet support Kubernetes charms. 
 
 ## Installing Kubernetes
 
@@ -127,6 +127,15 @@ default     aws/us-east-1  available         3      8  admin   35 minutes ago
 k8s-model*  k8s-cloud      available         0      -  admin   14 seconds ago
 ```
 
+Adding a model for a Kubernetes cloud unlocks the 'kubernetes' storage
+provider, which we'll refer to later. The output to `juju storage-pools` should
+be:
+
+```no-highlight
+Name        Provider    Attrs
+Kubernetes  kubernetes
+```
+
 ## Static persistent volumes
 
 We will now create persistent volumes, or PVs in Kubernetes parlance. Another
@@ -145,7 +154,9 @@ configuration management tool. We'll look at these two steps now.
 
 ### Defining persistent volumes
 
-YAML-formatted
+In this tutorial we'll be creating one operator storage volume and two charm
+storage volumes. The three corresponding files are below. Click on their names
+to reveal their contents.
 
 ^# operator-storage.yaml
 
@@ -195,11 +206,12 @@ YAML-formatted
         hostPath:
           path: "/mnt/data/vol2"
 
+Note that operator storage needs a minimum of 1024 MiB.
 
 !!! Important:
     The storage class name for a statically provisioned volume must be prefixed
-    with the name of the intended model. In the examples above, the model name
-    is 'k8s-model'. The remainder of the name, for both operator and charm
+    with the name of the intended model. In the files above, the model name is
+    'k8s-model'. The remainder of the name, for both operator and charm
     storage, is fixed.
 
 ### Creating persistent volumes
@@ -216,6 +228,24 @@ kubectl create -f charm-storage-vol2.yaml
 
 This tool is communicating directly with the cluster. It can do so by virtue of
 the existence of the cluster configuration file (`~/.kube/config`).
+
+We can also use this tool to take a look at our new PVs:
+
+```bash
+kubectl -n k8s-model get sc,pv,pvc
+```
+
+Our example's output:
+
+```no-highlight
+NAME                    CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS                      REASON   AGE
+persistentvolume/op1    1032Mi     RWO            Retain           Available           k8s-model-juju-operator-storage            7m21s
+persistentvolume/vol1   100Mi      RWO            Retain           Available           k8s-model-juju-unit-storage                7m16s
+Persistentvolume/vol2   100Mi      RWO            Retain           Available           k8s-model-juju-unit-storage                7m12s
+```
+
+Notice how our model name of 'k8s-model' can be passed to `kubectl`. When the
+Juju model was added a Kubernetes "namespace" was set up with the same name.
 
 ## Creating Juju storage pools
 
@@ -268,6 +298,10 @@ juju storage-pools
 Our example's output:
 
 ```no-highlight
+Name              Provider    Attrs
+k8s-pool          kubernetes  storage-class=juju-unit-storage storage-provisioner=kubernetes.io/no-provisioner
+kubernetes        kubernetes  
+operator-storage  kubernetes  storage-class=juju-operator-storage storage-provisioner=kubernetes.io/no-provisioner
 ```
 
 Almost there!
@@ -275,51 +309,101 @@ Almost there!
 ## Deploying a Kubernetes charm
 
 We can now deploy a Kubernetes charm. For example, here we deploy a charm by
-requesting the use of the 'mariadb-pv' charm storage pool we just set up:
+requesting the use of the 'k8s-pool' charm storage pool we just set up:
 
 ```bash
-juju deploy cs:~wallyworld/mariadb-k8s --storage database=mariadb-pv,10M
+juju deploy cs:~wallyworld/mariadb-k8s --storage database=k8s-pool,10M
 ```
 
 The output to `juju status` should soon look like the following:
 
 ```no-highlight
+Model      Controller  Cloud/Region  Version    SLA          Timestamp
+k8s-model  aws-k8s     k8s-cloud     2.5-beta2  unsupported  20:42:28Z
+
+App          Version  Status  Scale  Charm        Store       Rev  OS          Address        Notes
+mariadb-k8s           active      1  mariadb-k8s  jujucharms   13  kubernetes  10.152.183.87  
+
+Unit            Workload  Agent  Address     Ports     Message
+mariadb-k8s/0*  active    idle   10.1.69.14  3306/TCP
 ```
 
 In contrast to standard Juju behaviour, there are no machines listed here.
-Let's see what has happened within the cluster:
 
 ```bash
-microk8s.kubectl get all --all-namespaces
+juju storage --filesystem
+```
+
+```no-highlight
+Unit           Storage id  Id  Provider id                         Mountpoint      Size   State     Message
+mariadb-k8s/0  database/0  0   juju-database-0-juju-mariadb-k8s-0  /var/lib/mysql  38MiB  attached  
+```
+
+```bash
+juju storage --volume
+```
+
+```no-highlight
+Unit           Storage id  Volume id  Provider Id  Size    State     Message
+mariadb-k8s/0  database/0  0          vol1         409MiB  attached 
+```
+
+## Post-deploy cluster inspection
+
+Let's see what has happened within the cluster by interrogating it again:
+
+```bash
+kubectl -n k8s-model get sc,pv,pvc
 ```
 
 New sample output:
 
 ```no-highlight
+NAME                                                          PROVISIONER                    AGE
+storageclass.storage.k8s.io/k8s-model-juju-operator-storage   kubernetes.io/no-provisioner   3m2s
+storageclass.storage.k8s.io/k8s-model-juju-unit-storage       kubernetes.io/no-provisioner   2m30s
+
+NAME                    CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                                                               STORAGECLASS                      REASON   AGE
+persistentvolume/op1    1032Mi     RWO            Retain           Bound       k8s-model/mariadb-k8s-operator-volume-juju-operator-mariadb-k8s-0   k8s-model-juju-operator-storage            7m5s
+persistentvolume/vol1   100Mi      RWO            Retain           Bound       k8s-model/juju-database-0-juju-mariadb-k8s-0                        k8s-model-juju-unit-storage                6m54s
+persistentvolume/vol2   100Mi      RWO            Retain           Available                                                                       k8s-model-juju-unit-storage                6m51s
+
+NAME                                                                            STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS                      AGE
+persistentvolumeclaim/juju-database-0-juju-mariadb-k8s-0                        Bound    vol1     100Mi      RWO            k8s-model-juju-unit-storage       2m30s
+persistentvolumeclaim/mariadb-k8s-operator-volume-juju-operator-mariadb-k8s-0   Bound    op1      1032Mi     RWO            k8s-model-juju-operator-storage   3m2s
 ```
 
-You can easily identify the changes, as compared to the initial output, by
-scanning the left hand side for the model name we chose: 'k8s-model', which
-ends up being the Kubernetes "namespace".
+Awesome.
+
+At the top we see that our two storage classes have been created and that
+they're both associated with the 'no-provisioner' provisioner.
+
+In the middle section it is clear that two of our volumes are being used
+('Bound') and that one is available. 
+
+In the lower part we're told what has "claimed" the two used volumes. Each of
+these claims have requested the use of the appropriate storage classes.
 
 ## Removing configuration and software
 
-To remove all traces of MicroK8s and its configuration follow these steps:
+To remove all traces of Kubernetes and its configuration follow these steps:
 
 ```bash
 juju destroy-model -y --destroy-storage k8s-model
-juju remove-k8s microk8s-cloud
-microk8s.reset
-sudo snap remove microk8s
+juju remove-k8s k8s-cloud
+rm -rf ~/.kube
+rm ~/operator-storage.yaml
+rm ~/charm-storage-vol1.yaml
+rm ~/charm-storage-vol2.yaml
 ```
 
-This leaves us with LXD and Juju installed as well as a LXD controller. To
-remove even those things proceed as follows:
+This leaves us with Juju and `kubetl` installed as well as an AWS controller.
+To remove even those things proceed as follows:
 
 ```bash
-juju destroy-controller -y lxd
-sudo snap remove lxd
+juju destroy-controller -y aws-k8s
 sudo snap remove juju
+sudo snap remove kubectl
 ```
 
 That's the end of this tutorial!
