@@ -48,16 +48,20 @@ In both cases, a Juju storage pool needs to be created by the Juju operator.
 The second type is needed when the storage system for your chosen backing cloud
 is not supported by Kubernetes. This situation therefore demands that volumes
 be set up prior to the creation of the storage pool. See
-[Types of supported persistent volumes][upstream-kubernetes-supported-volume-types]
-for the list of Kubernetes supported backends. 
+[Types of volumes][kubernetes-supported-volume-types] for the list of
+Kubernetes supported backends. 
 
-Static volumes are mainly intended for testing/prototyping.
+!!! Important:
+    Static volumes are mainly intended for testing/prototyping. They need the
+    Kubernetes [`hostPath`][kubernetes-hostpath] plugin, which only works with a cluster consisting of
+    a single worker node.
 
+Juju-managed storage is in contrast to external storageA
 #### Statically provisioned volumes
  
 You set up static volumes via YAML definition files. The
-[Kubernetes storage classes][upstream-kubernetes-classes] page offers details.
-Here is a example procedure:
+[Kubernetes storage classes][kubernetes-classes] page offers details.  Here is
+a example procedure:
 
 ```bash
 sudo snap install --classic kubectl
@@ -192,11 +196,11 @@ juju create-storage-pool operator-storage kubernetes \
 ```
 
 !!! Important:
-    When creating a pool with the 'no-provisioner' type, Juju will prefix the
-    current model's name to the stated storage class name. In the above
-    example, assuming a model name of 'k8s-model', the final storage class name
-    associated with the pool becomes 'k8s-model-juju-operator-storage'. It is
-    this name that you must use when defining a static volume (YAML file).
+    When creating a pool, Juju will prefix the current model's name to the
+    stated storage class name. In the above example, assuming a model name of
+    'k8s-model', the final storage class name associated with the pool becomes
+    'k8s-model-juju-operator-storage'. It is this name that you must use when
+    defining a static volume (YAML file).
     
 #### Creating charm storage pools
 
@@ -256,8 +260,10 @@ provisioned volumes, respectively.
 <!-- LINKS -->
 
 [charms-storage]: ./charms-storage.md
-[upstream-kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes
-[upstream-kubernetes-classes]: https://kubernetes.io/docs/concepts/storage/storage-classes/
+[kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/volumes/#types-of-volumes
+[kubernetes-hostpath]: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
+[kubernetes-classes]: https://kubernetes.io/docs/concepts/storage/storage-classes/
 [#creating-storage-pools]: #creating-storage-pools
 [charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7
 [tutorial-microk8s]: ./tutorial-microk8s.md
+[#external-storage-and-storage-precedence-rules]: #external-storage-and-storage-precedence-rules 

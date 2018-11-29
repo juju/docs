@@ -12,12 +12,18 @@ backing cloud you're using does not have a storage type that is supported
 natively by Kubernetes. There is no reason, however, why you cannot use
 statically provisioned volumes with any cloud. Here, we'll use AWS as our
 backing cloud. Kubernetes does support AWS/EBS volumes (as shown
-[here][upstream-kubernetes-supported-volume-types]) but it does require the use
-of the [`aws-integrator`][charm-store-staging-aws-integrator] charm, which
-we'll cover in a separate tutorial.
+[here][kubernetes-supported-volume-types]; see 'AWSElasticBlockStore') but it
+does require the use of the
+[`aws-integrator`][charm-store-staging-aws-integrator] charm, which we'll cover
+in a separate tutorial.
 
 The [Persistent storage and Kubernetes][charms-storage-k8s] page provides a
 theoretical background on how Kubernetes storage works with Juju.
+
+Note that static volumes are dependent upon the Kubernetes
+[`hostPath`][kubernetes-hostpath] volume type. This restricts us to a single
+worker node cluster. The 'kubernetes-core' bundle provides this and that's
+we'll be using here.
 
 ## Pre-requisites
 
@@ -43,9 +49,8 @@ juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charms
 
 ## Installing Kubernetes
 
-For the purposes of this guide a complex Kubernetes cluster is not needed.
-We've therefore chosen to use the 'kubernetes-core' bundle, which will give us
-a minimalist cluster. Let's install it now:
+Deploy Kubernetes using the 'kubernetes-core' bundle, which will give us
+a minimalist cluster:
 
 ```bash
 juju deploy kubernetes-core
@@ -58,7 +63,7 @@ output to the `status` command:
 juju status
 ```
 
-Our example's output shows:
+Our example's output:
 
 ```no-highlight
 Model    Controller  Cloud/Region   Version    SLA          Timestamp
@@ -124,7 +129,6 @@ k8s-model*  k8s-cloud      available         0      -  admin   14 seconds ago
 
 ## Static persistent volumes
 
-We've now reached the step where we can achieve the main goal of this tutorial.
 We will now create persistent volumes, or PVs in Kubernetes parlance. Another
 way of saying this is that we will set up statically provisioned storage.
 
@@ -191,12 +195,12 @@ YAML-formatted
         hostPath:
           path: "/mnt/data/vol2"
 
+
 !!! Important:
     The storage class name for a statically provisioned volume must be prefixed
     with the name of the intended model. In the examples above, the model name
     is 'k8s-model'. The remainder of the name, for both operator and charm
-    storage, are fixed. This is explained again further on.
-
+    storage, is fixed.
 
 ### Creating persistent volumes
 
@@ -210,20 +214,63 @@ kubectl create -f charm-storage-vol1.yaml
 kubectl create -f charm-storage-vol2.yaml
 ```
 
-This tool is communicating directly with the cluster and can do so based on the
-configuration file that was copied over earlier.
+This tool is communicating directly with the cluster. It can do so by virtue of
+the existence of the cluster configuration file (`~/.kube/config`).
 
 ## Creating Juju storage pools
 
 Whether or not storage volumes are provisioned statically or dynamically Juju
-storage pools must be created. And this must be done for both operator storage
-and charm storage.
+storage pools must be created. This must be done for both operator storage
+and charm storage on a per-model basis. The command to use is
+`create-storage-pool`.
 
-Below we have Juju create two storage pools, one for
-operator storage and one for charm storage:
+The number of storage pools is dependent on the storage classes referenced in
+the PV definition files. The simplest arrangement is to have a single storage
+pool for each storage type and this is the approach our definition files above
+have taken. The two storage classes are 'k8s-model-juju-operator-storage' and
+'k8s-model-juju-unit-storage' .
+
+Naturally, then, during the creation process of a storage pool the storage
+class is referenced. However, Juju will automatically prepend the name of the
+current model (or that of the model specified via `-m`) to the referenced
+storage class name. Omit, therefore, the model name portion of the storage
+class when creating the pool.
+
+The storage pool name for operator storage *must* be called 'operator-storage'
+while the pool name for charm storage is arbitrary. Here, we'll call it
+'k8s-pool'. It is the charm storage pool name that will be called during the
+deployment of a charm.
+
+For static volumes, the Kubernetes "storage provisioner" is called
+'kubernetes.io/no-provisioner'.
+
+Finally, the "storage provider" is called 'kubernetes'. This provider became
+available once the Kubernetes model was added.
+
+Putting this all together, then, our two storage pools are created in this way:
 
 ```bash
+juju create-storage-pool operator-storage kubernetes \
+	storage-class=juju-operator-storage \
+	storage-provisioner=kubernetes.io/no-provisioner
+juju create-storage-pool k8s-pool kubernetes \
+	storage-class=juju-unit-storage \
+	storage-provisioner=kubernetes.io/no-provisioner
 ```
+
+Perform a verification by listing all current storage pools with the
+`storage-pools` command:
+
+```bash
+juju storage-pools
+```
+
+Our example's output:
+
+```no-highlight
+```
+
+Almost there!
 
 ## Deploying a Kubernetes charm
 
@@ -287,7 +334,7 @@ tutorial:
 To gain experience with a standalone (non-Juju) MicroK8s installation you can
 go through this Ubuntu tutorial:
 
-[Install a local Kubernetes with MicroK8s][ubuntu-tutorial_kubernetes-microk8s].
+[Install a local Kubernetes with MicroK8s][ubuntu-tutorial-kubernetes-microk8s].
 
 
 <!-- LINKS -->
@@ -295,8 +342,10 @@ go through this Ubuntu tutorial:
 [clouds-k8s]: ./clouds-k8s.md
 [upstream-cncf]: https://www.cncf.io/certification/software-conformance/
 [charms-storage-k8s]: ./charms-storage-k8s.md
-[ubuntu-tutorial_kubernetes-microk8s]: https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s
+[ubuntu-tutorial-kubernetes-microk8s]: https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s
 [charm-store-staging-aws-integrator]: https://staging.jujucharms.com/u/johnsca/aws-integrator
-[upstream-kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes
+[kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/volumes/#types-of-volumes
 [credentials]: ./credentials.md
 [install]: ./reference-install.md
+[tutorial-microk8s]: ./tutorial-microk8s.md
+[kubernetes-hostpath]: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
