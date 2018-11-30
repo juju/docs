@@ -237,12 +237,7 @@ kubectl -n k8s-model get sc,pv,pvc
 
 Our example's output:
 
-```no-highlight
-NAME                    CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS                      REASON   AGE
-persistentvolume/op1    1032Mi     RWO            Retain           Available           k8s-model-juju-operator-storage            7m21s
-persistentvolume/vol1   100Mi      RWO            Retain           Available           k8s-model-juju-unit-storage                7m16s
-Persistentvolume/vol2   100Mi      RWO            Retain           Available           k8s-model-juju-unit-storage                7m12s
-```
+![kubectl -n k8s-model get sc-pv-pvc first][volumes]
 
 Notice how our model name of 'k8s-model' can be passed to `kubectl`. When the
 Juju model was added a Kubernetes "namespace" was set up with the same name.
@@ -263,46 +258,43 @@ have taken. The two storage classes are 'k8s-model-juju-operator-storage' and
 Naturally, then, during the creation process of a storage pool the storage
 class is referenced. However, Juju will automatically prepend the name of the
 current model (or that of the model specified via `-m`) to the referenced
-storage class name. Omit, therefore, the model name portion of the storage
-class when creating the pool.
+storage class name when it informs the cluster. Omit, therefore, the model name
+portion of the storage class when creating the pool.
 
 The storage pool name for operator storage *must* be called 'operator-storage'
 while the pool name for charm storage is arbitrary. Here, we'll call it
-'k8s-pool'. It is the charm storage pool name that will be called during the
-deployment of a charm.
+'k8s-pool'. It is the storage pool name that will be referenced at charm
+deployment time.
 
 For static volumes, the Kubernetes "storage provisioner" is called
 'kubernetes.io/no-provisioner'.
 
 Finally, the "storage provider" is called 'kubernetes'. This provider became
-available once the Kubernetes model was added.
+available upon the addition of the Kubernetes model.
 
-Putting this all together, then, our two storage pools are created in this way:
+Putting this all together, then, our two storage pools are created as shown
+below.
+
+Operator storage pool:
 
 ```bash
 juju create-storage-pool operator-storage kubernetes \
 	storage-class=juju-operator-storage \
 	storage-provisioner=kubernetes.io/no-provisioner
+```
+
+Charm storage pool:
+
+```bash
 juju create-storage-pool k8s-pool kubernetes \
 	storage-class=juju-unit-storage \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
 
 Perform a verification by listing all current storage pools with the
-`storage-pools` command:
+`storage-pools` command. Our example's output:
 
-```bash
-juju storage-pools
-```
-
-Our example's output:
-
-```no-highlight
-Name              Provider    Attrs
-k8s-pool          kubernetes  storage-class=juju-unit-storage storage-provisioner=kubernetes.io/no-provisioner
-kubernetes        kubernetes  
-operator-storage  kubernetes  storage-class=juju-operator-storage storage-provisioner=kubernetes.io/no-provisioner
-```
+![juju storage-pools][storage-pools]
 
 Almost there!
 
@@ -358,20 +350,7 @@ kubectl -n k8s-model get sc,pv,pvc
 
 New sample output:
 
-```no-highlight
-NAME                                                          PROVISIONER                    AGE
-storageclass.storage.k8s.io/k8s-model-juju-operator-storage   kubernetes.io/no-provisioner   3m2s
-storageclass.storage.k8s.io/k8s-model-juju-unit-storage       kubernetes.io/no-provisioner   2m30s
-
-NAME                    CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                                                               STORAGECLASS                      REASON   AGE
-persistentvolume/op1    1032Mi     RWO            Retain           Bound       k8s-model/mariadb-k8s-operator-volume-juju-operator-mariadb-k8s-0   k8s-model-juju-operator-storage            7m5s
-persistentvolume/vol1   100Mi      RWO            Retain           Bound       k8s-model/juju-database-0-juju-mariadb-k8s-0                        k8s-model-juju-unit-storage                6m54s
-persistentvolume/vol2   100Mi      RWO            Retain           Available                                                                       k8s-model-juju-unit-storage                6m51s
-
-NAME                                                                            STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS                      AGE
-persistentvolumeclaim/juju-database-0-juju-mariadb-k8s-0                        Bound    vol1     100Mi      RWO            k8s-model-juju-unit-storage       2m30s
-persistentvolumeclaim/mariadb-k8s-operator-volume-juju-operator-mariadb-k8s-0   Bound    op1      1032Mi     RWO            k8s-model-juju-operator-storage   3m2s
-```
+![kubectl -n k8s-model get sc-pv-pvc][sc-pv-pvc]
 
 Awesome.
 
@@ -433,3 +412,9 @@ go through this Ubuntu tutorial:
 [install]: ./reference-install.md
 [tutorial-microk8s]: ./tutorial-microk8s.md
 [kubernetes-hostpath]: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
+
+<!-- IMAGES -->
+
+[storage-pools]: https://assets.ubuntu.com/v1/26ff0c70-storage-pools-2.png
+[sc-pv-pvc]: https://assets.ubuntu.com/v1/a8cc75dd-sc-pv-pvc-2.png
+[volumes]: https://assets.ubuntu.com/v1/34f93a4b-volumes-2.png
