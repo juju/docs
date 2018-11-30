@@ -13,10 +13,10 @@ Kubernetes ("k8s") provides a flexible architecture for managing containerised
 applications at scale. See the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information.
 
-Juju has the ability to add a Kubernetes cluster to its known list of clouds
-and then treat it like it does any other cloud. There are some exceptions to
-this and these are covered in the next section. In addition,
-Kubernetes-specific charms are needed.
+Juju has the ability to add a Kubernetes cluster to its known list of clouds,
+thereby treating the cluster like it does any other cloud. There are some
+differences to working with such a cloud and they are covered in the next
+section.
 
 This document refers to page
 [Persistent storage and Kubernetes][charms-storage-k8s] in a few places. You
@@ -47,6 +47,8 @@ list of known clouds.
 
 The `scale-application` command is used to scale a Kubernetes cluster. The
 `add-unit` and `remove-unit` commands do not apply to a Kubernetes model.
+
+A Kubernetes cloud also requires Kubernetes-specific charms.
 
 ## Using Kubernetes with Juju
 
@@ -154,10 +156,7 @@ kubectl create -f operator-storage.yaml
 kubectl create -f charm-storage-vol1.yaml
 ```
 
-For assistance with the contents of these files see section
-[Statically provisioned volumes][charms-storage-k8s-static-pv].
-
-There is also a tutorial on setting up static persistent volumes here:
+For in-depth coverage on this topic see tutorial
 [Setting up static Kubernetes storage][tutorial-k8s-static-pv].
 
 ### Create storage pools
@@ -174,8 +173,7 @@ juju create-storage-pool k8s-pool kubernetes \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
 
-For details on creating storage pools see section
-[Storage pool creation][charms-storage-k8s-pool-creation].
+The above tutorial also covers storage pool creation!
 
 ### Deploy a Kubernetes charm
 
@@ -191,7 +189,7 @@ juju deploy cs:~wallyworld/mariadb-k8s --storage database=k8s-pool,10M
 The [Using Juju storage][charms-storage-juju-deploy] page covers the above
 syntax.
 
-If you want to deploy a Kubernetes bundles see section
+If you want to deploy a Kubernetes bundle see section
 [Kubernetes bundles][charms-bundles-k8s].
 
 #### Configuration
@@ -232,23 +230,6 @@ Keys 'juju-external-hostname' and 'juju-application-path' control how the
 application is exposed externally using a Kubernetes Ingress Resource in
 conjunction with the configured ingress controller (default: nginx).
 
-## Inspect cluster storage objects
-
-List cluster storage objects such as storage classes (SC), persistent
-volumes (PV), and persistent volume claims (PVC) in this way:
-
-```bash
-kubectl -n k8s-model get sc,pv,pvc
-```
-
-Drill down into Kubernetes objects such as pods and PVCs with the following
-commands:
-
-```bash
-kubectl -n k8s-model describe pods
-kubectl -n k8s-model describe pvc
-```
-
 
 <!-- LINKS -->
 
@@ -257,8 +238,6 @@ kubectl -n k8s-model describe pvc
 [kubernetes-cdk-charm]: https://jujucharms.com/u/containers/canonical-kubernetes/
 [charm-store-staging-integrator]: https://staging.jujucharms.com/q/integrator
 [charms-storage-k8s]: ./charms-storage-k8s.md
-[charms-storage-k8s-static-pv]: ./charms-storage-k8s.md#statically-provisioned-volumes
-[charms-storage-k8s-pool-creation]: ./charms-storage-k8s.md#storage-pool-creation
 [charms-bundles-k8s]: ./charms-bundles.md#kubernetes-bundles
 [charms-storage-juju-deploy]: ./charms-storage.md#juju-deploy
 [tutorial-microk8s]: ./tutorial-microk8s.md

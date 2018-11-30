@@ -31,13 +31,13 @@ The following criteria are assumed:
 
  - that you're using Ubuntu 18.04 LTS
  - that Juju (stable snap channel) is installed. See the
-   [Installing Juju][reference-install] page.
+   [Installing Juju][install] page.
  - that a credential for the 'aws' cloud has been added to Juju. See
    the [Credentials][credentials] page.
 
-## Preliminaries
+## Installing Kubernetes
 
-Let's begin by creating a controller:
+Let's begin by creating a controller. We're calling 'aws-k8s':
 
 ```bash
 juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore aws aws-k8s
@@ -47,10 +47,8 @@ juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charms
     We've used the staging Charm Store in these instructions as the standard                                                                                                                                     
     site does not yet support Kubernetes charms. 
 
-## Installing Kubernetes
-
-Deploy Kubernetes using the 'kubernetes-core' bundle, which will give us
-a minimalist cluster:
+Deploy Kubernetes using the 'kubernetes-core' bundle, which will give us a
+minimalist cluster:
 
 ```bash
 juju deploy kubernetes-core
@@ -129,7 +127,7 @@ k8s-model*  k8s-cloud      available         0      -  admin   14 seconds ago
 
 Adding a model for a Kubernetes cloud unlocks the 'kubernetes' storage
 provider, which we'll refer to later. The output to `juju storage-pools` should
-be:
+now be:
 
 ```no-highlight
 Name        Provider    Attrs
@@ -322,27 +320,26 @@ mariadb-k8s/0*  active    idle   10.1.69.14  3306/TCP
 
 In contrast to standard Juju behaviour, there are no machines listed here.
 
+Here is one of the created charm storage persistent volumes in use:
+
 ```bash
 juju storage --filesystem
 ```
+
+Output:
 
 ```no-highlight
 Unit           Storage id  Id  Provider id                         Mountpoint      Size   State     Message
 mariadb-k8s/0  database/0  0   juju-database-0-juju-mariadb-k8s-0  /var/lib/mysql  38MiB  attached  
 ```
 
-```bash
-juju storage --volume
-```
-
-```no-highlight
-Unit           Storage id  Volume id  Provider Id  Size    State     Message
-mariadb-k8s/0  database/0  0          vol1         409MiB  attached 
-```
+We'll see the Provider id of 'juju-database-0-juju-mariadb-k8s-0' again in the
+next section.
 
 ## Post-deploy cluster inspection
 
-Let's see what has happened within the cluster by interrogating it again:
+Let's see what has happened within the cluster due to the deployment of the
+charm:
 
 ```bash
 kubectl -n k8s-model get sc,pv,pvc
@@ -358,10 +355,12 @@ At the top we see that our two storage classes have been created and that
 they're both associated with the 'no-provisioner' provisioner.
 
 In the middle section it is clear that two of our volumes are being used
-('Bound') and that one is available. 
+('Bound') and that one is available. The one that is used ('vol1') is claimed
+by the same Provider id that we saw in the output of the `storage` command
+above ('juju-database-0-juju-mariadb-k8s-0').
 
 In the lower part we're told what has "claimed" the two used volumes. Each of
-these claims have requested the use of the appropriate storage classes.
+these claims have requested the use of the appropriate storage class.
 
 ## Removing configuration and software
 
@@ -389,14 +388,11 @@ That's the end of this tutorial!
 
 ## Next steps
 
-To explore using Juju with the MicroK8s project consider the following
-tutorial:
-
+To explore using Juju with the MicroK8s project consider tutorial
 [Using Juju with MicroK8s][tutorial-microk8s].
 
 To gain experience with a standalone (non-Juju) MicroK8s installation you can
-go through this Ubuntu tutorial:
-
+go through Ubuntu tutorial
 [Install a local Kubernetes with MicroK8s][ubuntu-tutorial-kubernetes-microk8s].
 
 
