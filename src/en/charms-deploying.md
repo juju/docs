@@ -170,6 +170,13 @@ You can specify which machine (or container) an application is to be deployed
 to. See [Deploying to specific machines][deploying-to-specific-machines] for
 full coverage of this topic.
 
+## Deploying to specific availability zones
+
+It is possible to dictate what availability zone (or zones) a machine must be
+installed in. See
+[Deploying to specific availability zones][deploying-to-specific-zones] for
+details.
+
 ## Deploying to network spaces
 
 Using network spaces you can create a more restricted network topology for
@@ -197,6 +204,7 @@ matter.
 [network-spaces]: ./network-spaces.md
 [deploying-multi-series-charms]: ./charms-deploying-advanced.md#multi--series-charms
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
+[deploying-to-specific-zones]: ./charms-deploying-advanced.md#deploying-to-specific-availability-zones
 [deploying-to-network-spaces]: ./charms-deploying-advanced.md#deploying-to-network-spaces
 [#exposing-deployed-applications]: #exposing-deployed-applications
 [clouds-k8s]: ./clouds-k8s.md

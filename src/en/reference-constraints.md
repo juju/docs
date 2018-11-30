@@ -51,9 +51,9 @@ For in-depth coverage and examples see the
     denoting an attribute of the machine, or negative (prefixed with "^"),
     to denote something that the machine does not have.
 
-    **Note:** Currently only supported by the MAAS provider.
-
     Example: tags=virtual,^dualnic
+
+    **Note:** Currently only supported by the MAAS provider.
 
  - `spaces`  
     A comma-delimited list of Juju network space names that a unit or machine
@@ -70,6 +70,14 @@ For in-depth coverage and examples see the
 
  - `virt-type`  
     Virtualization type, such as 'kvm'.
+
+ - `zones`  
+    A list of availability zones. Values vary by provider. Multiple values
+    present a range of zones that a machine must be created within.
+    
+    Example: zones=us-east-1a,us-east-1c
+
+    **Note:** A zone can also be used as a placement directive (`--to` option).
 
 ## Cloud differences
 
