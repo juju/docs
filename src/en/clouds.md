@@ -26,6 +26,7 @@ clouds are added. You can still get started by selecting your cloud here:
  - [Joyent][clouds-joyent] *****
  - [LXD][clouds-lxd] (local) *****
  - [LXD][clouds-lxd] (remote)
+ - [Kubernetes][clouds-k8s]
  - [VMware vSphere][clouds-vmware]
  - [OpenStack][clouds-openstack]
  - [MAAS][clouds-maas]
@@ -216,6 +217,7 @@ Here are some examples of manually adding a cloud:
 [clouds-openstack]: ./help-openstack.md
 [clouds-maas]: ./clouds-maas.md
 [clouds-manual]: ./clouds-manual.md
+[clouds-k8s]: ./clouds-k8s.md
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [controllers-creating]: ./controllers-creating.md

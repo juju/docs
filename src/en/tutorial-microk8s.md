@@ -215,13 +215,14 @@ microk8s.reset
 sudo snap remove microk8s
 ```
 
-This leaves us with LXD and Juju installed as well as a LXD controller. To
-remove even those things proceed as follows:
+This leaves us with LXD, Juju, and `kubectl` installed as well as a LXD
+controller. To remove even those things proceed as follows:
 
 ```bash
 juju destroy-controller -y lxd
 sudo snap remove lxd
 sudo snap remove juju
+sudo snap remove kubectl
 ```
 
 That's the end of this tutorial!
@@ -229,15 +230,13 @@ That's the end of this tutorial!
 ## Next steps
 
 To gain experience with a standalone (non-Juju) MicroK8s installation you can
-go through this Ubuntu tutorial:
-
+go through Ubuntu tutorial
 [Install a local Kubernetes with MicroK8s][ubuntu-tutorial_kubernetes-microk8s].
 
 As alluded to, some backing clouds may require you to create persistent
-volumes, on top of creating the storage pools. The following tutorial will go
-over this in detail:
-
-[Setting up static Kubernetes storage][tutorial-k8s-static-pv]
+volumes, on top of creating the storage pools. Tutorial
+[Setting up static Kubernetes storage][tutorial-k8s-static-pv] covers this in
+detail:
 
 
 <!-- LINKS -->
