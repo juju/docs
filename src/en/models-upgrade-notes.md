@@ -4,7 +4,7 @@ Title: Notes on upgrading Juju software
 # Notes on upgrading models
 
 This is an addendum to the main page describing Juju software upgrades:
-[Model upgrades][models-upgrades].
+[Upgrading models][models-upgrades].
 
 ## Agent software and related components
 

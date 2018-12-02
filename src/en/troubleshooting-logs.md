@@ -56,7 +56,7 @@ reveals the agent's configuration file:
 ```
 
 Consider keeping backups of these files, especially prior to upgrading the
-agents. See [Model upgrades][models-upgrade].
+agents. See [Upgrading models][models-upgrade].
 
 ### The debug-log command
 
