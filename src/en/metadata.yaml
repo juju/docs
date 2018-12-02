@@ -37,6 +37,8 @@ navigation:
     children:
       - title: Upgrading applications
         location: charms-upgrading.md
+      - title: Upgrading models
+        location: models-upgrade.md
       - title: Upgrading a machine series
         location: upgrade-series.md
       - title: Controller backups
