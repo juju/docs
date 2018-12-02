@@ -3,7 +3,7 @@ Title: Troubleshooting model upgrades
 # Troubleshooting model upgrades
 
 This section provides strategies and techniques to assist with broken model
-upgrades. See the main [Model upgrades][models-upgrade] page for background
+upgrades. See the main [Upgrading models][models-upgrade] page for background
 information.
 
 ## Case #1 - An agent does not restart (config)

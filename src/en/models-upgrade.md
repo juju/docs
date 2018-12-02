@@ -1,6 +1,6 @@
-Title: Model upgrades
+Title: Upgrading models
 
-# Model upgrades
+# Upgrading models
 
 A model is upgraded by upgrading the version of Juju running within it, in the
 form of machine agents and unit agents. Agents are pieces of software that run
