@@ -109,7 +109,7 @@ For more installation information and what versions are available, see
 [Reference: Installing Juju][reference-install].
 
 !!! Note:
-    Models can also be upgraded. See the [Model upgrades][models-upgrade]
+    Models can also be upgraded. See the [Upgrading models][models-upgrade]
     page for guidance.
 
 
