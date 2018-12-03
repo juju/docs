@@ -1,7 +1,7 @@
 Title: Upgrading a charm  
 TODO:  Completely devoid of CLI examples. Kindly add
 
-# Upgrade a Charm
+# Upgrading a charm
 
 A charm can be changed at runtime with the `upgrade-charm` command. By default,
 it changes to the latest available version of the same charm; if `--revision`
