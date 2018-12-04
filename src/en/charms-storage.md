@@ -18,9 +18,6 @@ to the [PostgreSQL charm][charm-store-postgresql] and the
 The Ceph examples used here are based on the Ceph cluster described in the
 document [Installing Ceph][charms-storage-ceph].
 
-Using storage with Kubernetes is covered on the
-[Persistent storage and Kubernetes][charms-storage-k8] page.
-
 ## Storage management commands
 
 Outside of application deployment, Juju also has a wide array of storage
@@ -544,6 +541,37 @@ juju deploy postgresql --storage pgdata=lxd,8G
 
 See [Using LXD with Juju][clouds-lxd] for how to use LXD in conjunction with
 Juju, including the use of ZFS as an alternative filesystem.
+
+### Kubernetes (kubernetes)
+
+Kubernetes-based models have access to the 'kubernetes' storage provider, which
+supports the following pool attributes:
+
+- **storage-class**
+
+    The storage class for the Kubernetes cluster to use:
+
+    - `juju-unit-storage`
+    - `juju-charm-storage`
+    - `microk8s-hostpath`
+
+- **storage-provisioner**
+
+    The Kubernetes storage provisioner. For example:
+
+    - `kubernetes.io/no-provisioner`
+    - `kubernetes.io/aws-ebs`
+    - `kubernetes.io/gce-pd`
+
+- **parameters.type**
+
+    Extra parameters. For example:
+
+    - `gp2`
+    - `pd-standard`
+
+Using storage with Kubernetes is covered on the
+[Persistent storage and Kubernetes][charms-storage-k8] page.
 
 #### Loop devices and LXD
 

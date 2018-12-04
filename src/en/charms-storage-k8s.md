@@ -31,9 +31,13 @@ within Kubernetes itself).
 
 Juju-managed storage can be provisioned either dynamically or statically.
 
+The topic of storage is covered in a non-Kubernetes context on the
+[Using Juju Storage][charms-storage] page.
+
 !!! Note:
-    The topic of storage is covered in a non-Kubernetes context on the
-    [Using Juju Storage][charms-storage] page.
+    Kubernetes charms are currently only available on the
+    [staging Charm Store][charm-store-staging] and are for developmental and
+    testing purposes only.
 
 ## Juju-managed storage
 
@@ -265,5 +269,6 @@ with Juju-managed statically provisioned volumes.
 [kubernetes-classes]: https://kubernetes.io/docs/concepts/storage/storage-classes/
 [#creating-storage-pools]: #creating-storage-pools
 [charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7
+[charm-store-staging]: https://staging.jujucharms.com
 [tutorial-microk8s]: ./tutorial-microk8s.md
 [#external-storage-and-storage-precedence-rules]: #external-storage-and-storage-precedence-rules 
