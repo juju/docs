@@ -131,7 +131,7 @@ created, they must also be manually removed.
     The storage class name for a statically provisioned volume must be prefixed
     with the name of the intended model. In the examples above, the model name
     is 'k8s-model'. The remainder of the name, for both operator and charm
-    storage, are fixed. This is explained again further on.
+    storage, are fixed.
 
 ## Storage pool creation
 
