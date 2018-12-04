@@ -34,11 +34,11 @@ your existing projects will be listed in the pull-down menu with one being
 selected as your currently active project (here 'My First Project'). The dialog is
 found near the top-right corner:
 
-![create_gce_project_dropdown](./media/config-gce-new_project_dropdown.png)
+![create_gce_project_dropdown](https://assets.ubuntu.com/v1/43c3a760-config-gce-new_project_dropdown.png)
 
 Enter a project name (here 'My Juju-GCE Project'):
 
-![create_gce_project_details](./media/config-gce-first_project_create.png)
+![create_gce_project_details](https://assets.ubuntu.com/v1/93614440-config-gce-first_project_create.png)
 
 The *project id* (used later) will be generated automatically. Click 'Edit'
 to change it.
@@ -54,17 +54,17 @@ At the top-left of the web UI there is an icon representing 'Products &
 services'. It is denoted by this icon, next to the 'Google Cloud Platform'
 title:
 
-![Product & services icon](./media/config-gce-product_services_icon.png)
+![Product & services icon](https://assets.ubuntu.com/v1/c370ed85-config-gce-product_services_icon.png)
 
 Click through and select 'API Manager'. By default you will be on the 'Overview'
 screen, it will show this across the top:
 
-![API Manager screen](./media/config-gce-api_manager.png)
+![API Manager screen](https://assets.ubuntu.com/v1/6050984b-config-gce-api_manager.png)
 
 Click '+Enable API' and then from the list of available APIs you are shown,
 select 'Compute Engine API':
 
-![Compute Engine API](./media/config-gce-api_manager_compute_enabled.png)
+![Compute Engine API](https://assets.ubuntu.com/v1/0054febd-config-gce-api_manager_compute_enabled.png)
 
 On the top of the page that opens, click 'Enable'. If the API is already
 enabled, this will display 'Disable'. Clicking it may prompt you to set up a
@@ -81,12 +81,12 @@ above, and choose the 'Credentials' screen. By default you
 will be within the 'Credentials' tab. Click the 'Create credentials' button and
 choose 'Service account key' from the 3 options available:
 
-![Create credentials dialog #1](./media/config-gce-api_manager_create_credentials-1.png)
+![Create credentials dialog #1](https://assets.ubuntu.com/v1/903869a3-config-gce-api_manager_create_credentials-1.png)
 
 In the ensuing dialog, select 'Compute Engine default service account' and 'JSON'
 key type:
 
-![Create credentials dialog #2](./media/config-gce-api_manager_create_credentials-2.png)
+![Create credentials dialog #2](https://assets.ubuntu.com/v1/bea196d6-config-gce-api_manager_create_credentials-2.png)
 
 Once the 'Create' button is pressed you will be prompted to download a file.
 This is the file we're after. Store it safely as this file cannot be

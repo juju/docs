@@ -28,9 +28,7 @@ The following files and directories under `src/en` are of interest:
    You won't need to change this unless you are adding a new page (and even
    then, please ask about where it should go).
 
- - The `build` directory is where local builds of the docs are made, and
-   contains some support files (CSS, JavaScript) and all the graphics used by
-   the docs. If you need to add graphics, add them here: `htmldocs/media`. 
+ - The `build` directory is where local builds of the docs are made.
 
    Do not _replace_ graphics unless you know what you are doing. These image
    files are used by all versions of the docs, so usually you will want to add
@@ -136,7 +134,6 @@ Some things to consider during verification:
    need to explicitly add the files to the repository. For example:
 
         git add src/en/about-juju.md
-        git add htmldocs/media/about-charms.jpg
   
   If you wish to move or rename files you need to use the `git mv` command, and 
   the `git rm` command to delete them 

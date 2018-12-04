@@ -159,7 +159,7 @@ juju gui --browser
 Then use the output username and password to connect to the GUI via your
 browser:
 
-![Juju GUI login](media/tut-gce-gui_login280.png)
+![Juju GUI login](https://assets.ubuntu.com/v1/72b6476b-tut-gce-gui_login280.png)
 
 After logging in, you'll see the Juju GUI overview for the current model. Not
 only does the web interface show you the current state of your applications and
@@ -175,7 +175,7 @@ current model.
 
 <!-- REMOVED DUE TO INCONSISTENT BEHAVIOUR WITH JUJU 2.2.2
 No app/model are visible in the GUI
-![Juju GUI model switching menu](media/tut-gce-gui_model21.png)
+![Juju GUI model switching menu](https://assets.ubuntu.com/v1/f83fac42-tut-gce-gui_model21.png)
  -->
 
 To create a new model from the GUI, click on 'Profile' from the drop-down model
@@ -207,7 +207,7 @@ application's colour changes from orange to grey, you're all set.
 Congratulations - you've just modelled and deployed your own scalable cloud
 application.
 
-![Juju GUI model of MediaWiki bundle](media/tut-gce-gui_mediawiki.png)
+![Juju GUI model of MediaWiki bundle](https://assets.ubuntu.com/v1/ace92999-tut-gce-gui_mediawiki.png)
 
 ## Next Steps
 

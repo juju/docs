@@ -251,11 +251,11 @@ tweaked if desired. See
 [agent-versions-and-streams]: ./models-config.md#agent-versions-and-streams
 [troubleshooting-logs#juju-agents]: ./troubleshooting-logs.md#juju-agents
 
-[img__relations]: ./media/juju-relations.png
-[img__units]: ./media/juju-machine-units.png
-[img__machine-lxd]: ./media/juju-machine-lxd.png
-[img__machine]: ./media/juju-machine.png
-[img__charms]: ./media/juju-charms.png
-[img__models]: ./media/juju-models.png
-[img__client-2]: ./media/juju-client-2.png
-[img__client-3]: ./media/juju-client-3.png
+[img__relations]: https://assets.ubuntu.com/v1/4f0eba09-juju-relations.png
+[img__units]: https://assets.ubuntu.com/v1/244e4890-juju-machine-units.png
+[img__machine-lxd]: https://assets.ubuntu.com/v1/9e28a6ea-juju-machine-lxd.png
+[img__machine]: https://assets.ubuntu.com/v1/948ad198-juju-machine.png
+[img__charms]: https://assets.ubuntu.com/v1/411232ff-juju-charms.png
+[img__models]: https://assets.ubuntu.com/v1/6d21bb7c-juju-models.png
+[img__client-2]: https://assets.ubuntu.com/v1/865acefc-juju-client-2.png
+[img__client-3]: https://assets.ubuntu.com/v1/1f5ba83e-juju-client-3.png
