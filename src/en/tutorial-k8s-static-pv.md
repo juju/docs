@@ -6,12 +6,12 @@ Title: Setting up static Kubernetes storage
 [Using Kubernetes with Juju][clouds-k8s]. See that page for background
 information.*
 
-This short tutorial will show the steps required to create Kubernetes
-persistent storage volumes for use with Juju. This is normally done when the
-backing cloud you're using does not have a storage type that is supported
-natively by Kubernetes. There is no reason, however, why you cannot use
-statically provisioned volumes with any cloud. Here, we'll use AWS as our
-backing cloud. Kubernetes does support AWS/EBS volumes (as shown
+This tutorial will show the steps required to create Kubernetes persistent
+storage volumes for use with Juju. This is normally done when the backing cloud
+you're using does not have a storage type that is supported natively by
+Kubernetes. There is no reason, however, why you cannot use statically
+provisioned volumes with any cloud. Here, we'll use AWS as our backing cloud.
+Kubernetes does support AWS/EBS volumes (as shown
 [here][kubernetes-supported-volume-types]; see 'AWSElasticBlockStore') but it
 does require the use of the
 [`aws-integrator`][charm-store-staging-aws-integrator] charm, which we'll cover

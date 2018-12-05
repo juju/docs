@@ -50,6 +50,11 @@ The `scale-application` command is used to scale a Kubernetes cluster. The
 
 A Kubernetes cloud also requires Kubernetes-specific charms.
 
+!!! Note:
+    Kubernetes charms are currently only available on the
+    [staging Charm Store][charm-store-staging] and are for developmental and
+    testing purposes only.
+
 ## Using Kubernetes with Juju
 
 First off, a Kubernetes cluster will be required. Essentially, you will use it
@@ -236,6 +241,7 @@ conjunction with the configured ingress controller (default: nginx).
 [kubernetes-core-charm]: https://jujucharms.com/kubernetes-core/
 [ubuntu-tutorial_install-kubernetes-with-conjure-up]: https://tutorials.ubuntu.com/tutorial/install-kubernetes-with-conjure-up#0
 [kubernetes-cdk-charm]: https://jujucharms.com/u/containers/canonical-kubernetes/
+[charm-store-staging]: https://staging.jujucharms.com
 [charm-store-staging-integrator]: https://staging.jujucharms.com/q/integrator
 [charms-storage-k8s]: ./charms-storage-k8s.md
 [charms-bundles-k8s]: ./charms-bundles.md#kubernetes-bundles
