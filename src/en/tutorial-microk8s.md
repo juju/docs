@@ -213,6 +213,7 @@ commands:
 
 ```bash
 juju kill-controller -y -t 0 lxd
+juju remove-cloud microk8s-cloud
 microk8s.reset
 sudo snap remove microk8s
 sudo snap remove lxd
