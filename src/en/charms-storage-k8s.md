@@ -34,11 +34,6 @@ Juju-managed storage can be provisioned either dynamically or statically.
 The topic of storage is covered in a non-Kubernetes context on the
 [Using Juju Storage][charms-storage] page.
 
-!!! Note:
-    Kubernetes charms are currently only available on the
-    [staging Charm Store][charm-store-staging] and are for developmental and
-    testing purposes only.
-
 ## Juju-managed storage
 
 As mentioned, there are two types of persistent storage that Juju can manage:
@@ -52,15 +47,7 @@ is not supported by Kubernetes. This situation therefore demands that volumes
 be set up prior to the creation of the storage pool.
 
 See [Types of volumes][kubernetes-supported-volume-types] for the list of
-Kubernetes supported storage backends. This will inform you whether your
-backing cloud can use dynamically provisioned volumes. As of time of writing,
-the list of Juju-supported clouds that also have dynamic volume support are:
-
- - Amazon AWS
- - Google GCE
- - Microsoft Azure
- - OpenStack
- - VMware vSphere
+Kubernetes supported storage backends.
 
 !!! Important:
     Static volumes are mainly intended for testing/prototyping. They need the
@@ -269,6 +256,5 @@ with Juju-managed statically provisioned volumes.
 [kubernetes-classes]: https://kubernetes.io/docs/concepts/storage/storage-classes/
 [#creating-storage-pools]: #creating-storage-pools
 [charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7
-[charm-store-staging]: https://staging.jujucharms.com
 [tutorial-microk8s]: ./tutorial-microk8s.md
 [#external-storage-and-storage-precedence-rules]: #external-storage-and-storage-precedence-rules 

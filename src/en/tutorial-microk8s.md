@@ -17,6 +17,8 @@ on your personal workstation. Using it with Juju is icing on the cake!
 Since MicroK8s runs locally we'll be using a local LXD cloud to create a Juju
 controller.
 
+This tutorial was written using MicroK8s `v1.13.0`.
+
 ## Installing the software
 
 These instructions assume that you're using a fresh Ubuntu 18.04 LTS install,
@@ -122,8 +124,8 @@ k8s-model*  microk8s-cloud       available         0  admin   never connected
 ## Adding storage
 
 One of the benefits of using MicroK8s is that we get dynamically provisioned
-storage out of the box. Below we have Juju create two storage pools, one for
-operator storage and one for charm storage:
+storage out of the box. Below we create two storage pools, one for operator
+storage and one for charm storage:
 
 ```bash
 juju create-storage-pool operator-storage kubernetes storage-class=microk8s-hostpath
@@ -146,7 +148,7 @@ The output to `juju status` should soon look like the following:
 
 ```no-highlight
 Model      Controller  Cloud/Region    Version    SLA          Timestamp
-k8s-model  lxd         microk8s-cloud  2.5-beta2  unsupported  18:55:56Z
+k8s-model  lxd         microk8s-cloud  2.5-rc1    unsupported  18:55:56Z
 
 App          Version  Status  Scale  Charm        Store       Rev  OS          Address         Notes
 mariadb-k8s           active      1  mariadb-k8s  jujucharms   13  kubernetes  10.152.183.209  
@@ -190,8 +192,8 @@ K8s-model   statefulset.apps/juju-operator-mariadb-k8s   1         1         140
 ```
 
 You can easily identify the changes, as compared to the initial output, by
-scanning the left hand side for the model name we chose: 'k8s-model', which
-ends up being the Kubernetes "namespace".
+scanning the left hand side for our model name 'k8s-model', which ends up being
+the Kubernetes "namespace".
 
 To get information on pod 'juju-mariadb-k8s-0' you need to refer to the
 namespace (since it's not the 'default' namespace) in this way:
@@ -206,23 +208,15 @@ cluster information.
 
 ## Removing configuration and software
 
-To remove all traces of MicroK8s and its configuration follow these steps:
+To remove all traces of what we've done in this tutorial use the following
+commands:
 
 ```bash
-juju destroy-model -y --destroy-storage k8s-model
-juju remove-k8s microk8s-cloud
+juju kill-controller -y -t 0 lxd
 microk8s.reset
 sudo snap remove microk8s
-```
-
-This leaves us with LXD, Juju, and `kubectl` installed as well as a LXD
-controller. To remove even those things proceed as follows:
-
-```bash
-juju destroy-controller -y lxd
 sudo snap remove lxd
 sudo snap remove juju
-sudo snap remove kubectl
 ```
 
 That's the end of this tutorial!
