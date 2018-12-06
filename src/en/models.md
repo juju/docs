@@ -62,7 +62,16 @@ Common model management tasks are summarized below.
    For complete explanation and syntax, see the
    [command reference page](./commands.html#show-model) or the
    `juju help show-model` command.
+  
 
+
+^# Compare a bundle to a model
+
+   Use the `diff-bundle` command to compare a model with a charm bundle:
+   
+   `juju diff-bundle [options] <bundle file or name>`
+   
+   This topic is treated on the [Charm bundles][charms-bundles-diff] page.
 
 
 ^# Configure a model
@@ -223,3 +232,8 @@ Common model management tasks are summarized below.
    paradigm by employing *cross model relations*.
 
    This is a complex subject. See [Cross model relations](./models-cmr.html).
+
+
+<!-- LINKS -->
+
+[charms-bundles-diff]: ./charms-bundles.md#comparing-a-bundle-to-a-model
