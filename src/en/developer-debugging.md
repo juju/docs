@@ -1,4 +1,5 @@
 Title: Debugging charm hooks
+TODO:  Critical: review and reformatting required
 
 # Debugging charm hooks
 
@@ -100,7 +101,7 @@ use:
 juju debug-hooks git/0 add-repo
 ```
 
-Learn more about actions in [Juju actions][actions].
+Learn more about actions in [Working with actions][actions].
 
 ## Running a debug session
 
@@ -307,4 +308,7 @@ hand. Here are some of the ones you may find useful:
 You can get more info on tmux and its commands at the [relevant Ubuntu manpage
 entry.](http://manpages.ubuntu.com/manpages/trusty/man1/tmux.1.html)
 
-[actions]: ./actions.html "Juju actions"
+
+<!-- LINKS -->
+
+[actions]: ./actions.md
