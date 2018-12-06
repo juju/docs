@@ -479,6 +479,200 @@ applications:
 Local paths to resources can be useful, for example, in network restricted
 environments where a Juju controller is unable to contact the Charm Store.
 
+## Comparing a bundle to a model
+
+To compare a model's configuration to that of a bundle the `diff-bundle`
+command is used.
+
+Consider, for example, a model that has the below output to the `status`
+command:
+
+```no-highlight
+Model  Controller  Cloud/Region         Version  SLA          Timestamp
+docs   lxd         localhost/localhost  2.5-rc1  unsupported  05:22:22Z
+
+App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
+haproxy             unknown      1  haproxy    jujucharms   46  ubuntu  
+mariadb    10.1.37  active       1  mariadb    jujucharms    7  ubuntu  
+mediawiki  1.19.14  active       1  mediawiki  jujucharms   19  ubuntu  
+
+Unit          Workload  Agent  Machine  Public address  Ports   Message
+haproxy/0*    unknown   idle   2        10.86.33.28     80/tcp  
+mariadb/0*    active    idle   1        10.86.33.192            ready
+mediawiki/0*  active    idle   0        10.86.33.19     80/tcp  Ready
+
+Machine  State    DNS           Inst id        Series  AZ  Message
+0        started  10.86.33.19   juju-dbf96b-0  trusty      Running
+1        started  10.86.33.192  juju-dbf96b-1  trusty      Running
+2        started  10.86.33.28   juju-dbf96b-2  bionic      Running
+
+Relation provider  Requirer              Interface     Type     Message
+haproxy:peer       haproxy:peer          haproxy-peer  peer     
+mariadb:cluster    mariadb:cluster       mysql-ha      peer     
+mariadb:db         mediawiki:db          mysql         regular  
+mediawiki:website  haproxy:reverseproxy  http          regular
+```
+
+Now say we have a bundle file `bundle.yaml` with these contents:
+
+```yaml
+applications:
+  mediawiki:
+    charm: "cs:trusty/mediawiki-5"
+    num_units: 1
+    options:
+      name: Central library
+  mysql:
+    charm: "cs:trusty/mysql-55"
+    num_units: 1
+    options:
+      "binlog-format": MIXED
+      "block-size": 5
+      "dataset-size": "512M"
+      flavor: distro
+      "ha-bindiface": eth0
+      "ha-mcastport": 5411
+      "max-connections": -1
+      "preferred-storage-engine": InnoDB
+      "query-cache-size": -1
+      "query-cache-type": "OFF"
+      "rbd-name": mysql1
+      "tuning-level": safest
+      vip_cidr: 24
+      vip_iface: eth0
+relations:
+  - - "mediawiki:db"
+    - "mysql:db"
+```
+
+Comparison of the currently active model with the bundle can be achieved in
+this way:
+
+```bash
+juju diff-bundle bundle.yaml
+```
+
+This produces an output of:
+
+```yaml
+applications:
+  haproxy:
+    missing: bundle
+  mariadb:
+    missing: bundle
+  mediawiki:
+    charm:
+      bundle: cs:trusty/mediawiki-5
+      model: cs:mediawiki-19
+    series:
+      bundle: ""
+      model: trusty
+    options:
+      name:
+        bundle: Central library
+        model: null
+  mysql:
+    missing: model
+machines:
+  "0":
+    missing: bundle
+  "1":
+    missing: bundle
+  "2":
+    missing: bundle
+relations:
+  bundle-additions:
+  - - mediawiki:db
+    - mysql:db
+  model-additions:
+  - - haproxy:reverseproxy
+    - mediawiki:website
+  - - mariadb:db
+    - mediawiki:db
+```
+
+This informs us of the differences in terms of applications, machines, and
+relations. For instance, compared to the model, the bundle is missing
+applications 'haproxy' and 'mariadb', whereas the model is missing 'mysql'.
+Both model and bundle utilise the 'mediawiki' application but they differ in
+terms of configuration. There are also differences being reported in the
+'machines' and 'relations' sections. We'll now focus on the 'machines' section
+in order to demonstrate other features of the `diff-bundle` command.
+
+We can extend the bundle by including a bundle overlay. Consider an overlay
+bundle file `changes.yaml` with these machine related contents:
+
+```yaml
+applications:
+  mediawiki:
+    to:
+      - "2"
+  mysql:
+    to:
+      - "3"
+machines:
+  "2":
+    series: trusty
+    constraints: "arch=amd64 cores=1"
+  "3":
+    series: trusty
+    constraints: "arch=amd64 cores=1"
+```
+
+Here, by means of the `--overlay` option, we can add this extra information to
+the comparison, effectively inflating the configuration of the bundle:
+
+```bash
+juju diff-bundle bundle.yaml --overlay changes.yaml
+```
+
+This changes the 'machines' section of the output to:
+
+```yaml
+machines:
+  "0":
+    missing: bundle
+  "1":
+    missing: bundle
+  "2":
+    series:
+      bundle: trusty
+      model: bionic
+  "3":
+    missing: model
+```
+
+The initial comparison displayed a lack of all three machines in the bundle. By
+adding machines '2' and '3' in the overlay the output now shows machines '0'
+and '1' as missing in the bundle, machine '2' differs in configuration, and
+machine '3' is missing in the model.
+
+As with the `deploy` command, there is the ability to map machines in the
+bundle to those in the model. Below, the addition of `--map-machines=2=0,3=1`
+makes, for the sake of the comparison, bundle machines 2 and 3 become model
+machines 0 and 1, respectively:
+
+```bash
+juju diff-bundle bundle.yaml --overlay changes.yaml --map-machines=2=0,3=1
+```
+
+The 'machines' section now becomes:
+
+```yaml
+machines:
+  "2":
+    missing: bundle
+```
+
+The bundle shows as only missing machine 2 now, which makes sense.
+
+The target bundle can also reside within in the online Charm Store. In that
+case you would simply reference the bundle name, such as 'wiki-simple':
+
+```bash
+juju diff-bundle wiki-simple
+```
+
 ## Saving a bundle and next steps
 
 If you have created your own bundle you will probably want to save it. This is
