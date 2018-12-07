@@ -13,7 +13,7 @@ Charm Tools can be installed on various platforms with the use of
 To install the Charm Tools on Ubuntu:
 
 ```bash
-sudo snap install charm
+sudo snap install charm --classic
 ```
 
 To install on other Linux distributions see the upstream
