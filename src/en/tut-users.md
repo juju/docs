@@ -1,6 +1,8 @@
 Title: A multi-user cloud
 TODO:  change screenshot username from degville to newuser
        add link to a table showing permissions for each type of user
+       General reivew and abstract linking
+       Consider renaming file to tutorial-multiuser-cloud.md
 
 # A multi-user cloud
 
