@@ -34,7 +34,7 @@ cloud-backed resource. They are not related to Juju users themselves in any
 way. Credentials added to Juju remain local to the system user (on Ubuntu:
 `~/.local/share/juju/credentials.yaml`).
 
-See [Cloud credentials][credentials] for more on this topic.
+See [Credentials][credentials] for more on this topic.
 
 ## SSH access
 

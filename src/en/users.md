@@ -1,51 +1,52 @@
-Title: Understanding users
-TODO: User abilities, especially owners and regular users
-      Critical: review required
+Title: User types
 
+# User types
 
-# Understanding users
+*This is in connection with the [Using Juju with multiple users][multiuser]
+page. See that resource for background information.*
 
-There are 3 kinds of Juju users: controller administrators, model owners, and
-regular users. Each user, no matter the kind, is associated with a controller.
-In particular, the namespace for users are controller-centric; names can be
-duplicated across controllers.
+There are three kinds of Juju users: controller administrators, model owners,
+and regular users. Each user, no matter the kind, is associated with a
+controller. In particular, the namespace for users are controller-centric;
+names can be duplicated across controllers.
 
 Juju users are not related in any way to the localhost system users; they are
 purely Juju constructs.
 
 A *controller administrator* is a user who has access to the controller model.
-This Juju user is called 'admin' and is set up as part of the
-controller creation step. Practically, this set of users is comprised of the
-controller creator and any user the creator/initial_admin has granted write
-access to the 'controller' model. There is no overarching
-"Juju administrator" since multiple controllers, and therefore multiple
-administrators, are possible.
+This Juju user is called 'admin' and is set up as part of the controller
+creation step. Practically, this set of users is comprised of the controller
+creator and any user the creator/initial_admin has granted write access to the
+'controller' model. There is no overarching "Juju administrator" since multiple
+controllers, and therefore multiple administrators, are possible.
 
 A *model owner* is the model creator or a user who has been designated as such
 during the model creation process.
 
 A *regular user* is one who is neither an administrator nor a model owner. Such
 a user requires access to a model in order to do anything at the Juju level.
-Note that although deemed "regular", such a user is far from ordinary since they
-can marshal the vast resources of the backing cloud and deploy complex
+Note that although deemed "regular", such a user is far from ordinary since
+they can marshal the vast resources of the backing cloud and deploy complex
 applications.
-
 
 ## User abilities
 
 The different Juju user types have different abilities based on permissions.
-They are outlined below. For completeness, the abilities of system (localhost)
-users are also included.
+They are outlined below. For completeness, the abilities of system users and
+newly-created users are also included.
 
-Actions available to a system user:
+### System users
 
-- Access general help (`juju help`)
-- List supported cloud types (`juju clouds`)
-- Show details on each cloud type (`juju show-cloud`)
-- Register with a controller (`juju register`)
-- Add credentials (`juju add-credential` and `juju autoload-credentials`)
-- List cloud credentials (`juju credentials`)
-- Create controllers (`juju bootstrap`)
+Actions available to a system user and the corresponding Juju commands:
+
+ - Access help (`help`)
+ - List supported cloud types (`clouds`)
+ - Show details on each cloud type (`show-cloud`)
+ - Connect to a controller (`register`)
+ - Add credentials (`add-credential` and `autoload-credentials`)
+ - List credentials (`credentials`)
+ - Create controllers (`bootstrap`)
+ - Log in to a controller (`login`)
 
 Once a system user has created a controller they are provided automatically, at
 the Juju level, with an administrator of that controller and inherit all the
@@ -54,52 +55,60 @@ privileges of that user type (see below).
 Since any system user can add credentials and create controllers, it is
 conceivable that multiple controllers exist that use the same cloud resource
 (public cloud account). Although this will work with Juju, it is a policy
-decision on the part of those who use Juju as to whether this should be
-allowed.
+decision as to whether this should be allowed.
 
-See [Controllers](./controllers.html) for information on controllers.
+### Newly-created users
 
-### Administrators
-Only an administrator has the power to perform these actions (in
-the context of their controller):
+A newly-created user is automatically granted login access to the controller.
+Once logged in, the user is allowed to perform the following additional
+actions:
 
-- Add users (`juju add-user`)
-- Disable users (`juju disable-user`)
-- Enable previously disabled users (`juju enable-user`)
-- Create models (`juju create-model`)
-- Grant user access to models (`juju grant`)
-- Revoke user access from models (`juju revoke`)
-- Remove models (`juju destroy-model`)
-- Remove the controller (`juju destroy-controller`)
-- Upgrade any model (`juju upgrade-model`)
-- Maintenance operations (e.g.: backups)
+ - List the user (`users`)
+ - Show details for the user (`show-user`)
+ - Log out of a controller (`logout`)
+
+To do anything further the user must be granted some level of access to a model
+or be given superuser access to the controller.
+
+### Controller administrators
+
+Only a controller administrator (the "admin") has the power to perform these
+actions (in the context of their controller):
+
+ - Add users (`add-user`)
+ - Disable users (`disable-user`)
+ - Enable previously disabled users (`enable-user`)
+ - Create models (`create-model`)
+ - Grant user access to models (`grant`)
+ - Revoke user access from models (`revoke`)
+ - Remove models (`destroy-model`)
+ - Remove the controller (`destroy-controller` or `kill-controller`)
+ - Upgrade any model (`upgrade-model`)
+ - Manage controller backups (e.g. `create-backup`)
 
 ### Model owners
+
 A model owner has the power to list users who have access to the model they own
-(`juju users mymodel`) as well as upgrade their model (`juju upgrade-model`).
+(`users`) as well as upgrade their model (`upgrade-model`).
 
 ### Regular users
+
 The ability of a regular user depends on the model access rights (read-only or
-write) they have been given.
+write) they have been granted.
 
 For read-only access, the user can do the following:
 
-- List models (`juju models`)
-- List machines (`juju machines`)
-- Show the status (`juju status`)
+ - List models (`models`)
+ - List machines (`machines`)
+ - Show the status (`status`)
 
-For write access, the user can begin with the following major commands:
+For write access, the user can use Juju as an operator, beginning with the
+following major actions:
 
-- Deploy applications (`juju deploy`)
-- Scale out applications (`juju add-unit`)
+ - Deploy applications (`deploy`)
+ - Scale out applications (`add-unit`)
 
-Further reading:
 
-- A walkthrough of typical commands is provided in
-  [Workflow scenarios](./users-workflows.html#basic_setup_and_single_user.html).
-- Other write commands are listed on the
-  [command reference page](./commands.html).
-- An explanation of how users gain access to models is provided in
-  [Users and models](./users-models.html).
-- An analysis of the output to certain commands is given in
-  [Sample commands](./users-sample-commands.html).
+<!-- LINKS -->
+
+[multiuser]: ./multiuser.md
