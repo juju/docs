@@ -99,11 +99,11 @@ The optional note is exposed via the `show-backup` command detailed below.
 The following commands are available for managing backups (apart from
 restoring):
 
- - `juju backups`
- - `juju show-backup`
- - `juju download-backup`
- - `juju upload-backup`
- - `juju remove-backup`
+ - `backups`
+ - `show-backup`
+ - `download-backup`
+ - `upload-backup`
+ - `remove-backup`
 
 #### `juju backups`
 
