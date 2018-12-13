@@ -7,11 +7,25 @@ This section covers topics related to managing users at the administrative
 level.
 
 
+## Viewing user model access
+
+```bash
+juju models --user mat
+```
+
+```no-highlight
+Controller: lxd-bionic-1
+
+Model            Cloud/Region         Status     Access  Last connection
+admin/euphoric*  localhost/localhost  available  read    never connected
+```
+
 ## Disabling and re-enabling users
 
-An administrator can sever user communication from a user to the controller
-they manage by disabling them. The effect is immediate. To get a list of
-potential users to disable the `juju users` command can first be used.
+To immediately sever a user's communication with their controller the
+`disable-user` command is employed. To re-establish communication the
+`enable-user` command is used. To get a list of potential users to disable the
+`users` command can first be used.
 
 Examples:
 
@@ -27,17 +41,14 @@ To re-enable the user 'mike':
 juju enable-user mike
 ```
 
-Disabled users do not show up in the output to `juju users` unless the
-'--all' option is used:
-
-<!-- JUJUVERSION: 2.0.1-genericlinux-amd64 -->
-<!-- JUJUCOMMAND: juju users --all -->
+Disabled users are suppressed in the output to the `users` command unless the
+`--all` option is used, whereby the output will show "disabled":
 
 ```no-highlight
 Controller: cstack
 
 Name    Display name  Access     Date created    Last connection
-admin*  admin         superuser  2016-10-12      just now
+admin*  admin         superuser  2018-12-12      just now
 mike                  login      17 minutes ago  never connected (disabled)
 ```
 
@@ -59,4 +70,3 @@ juju change-user-password mike
 ```
 
 Then simply follow the prompts to enter and confirm a new password.
-
