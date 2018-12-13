@@ -14,11 +14,10 @@ Juju users are not related in any way to the localhost system users; they are
 purely Juju constructs.
 
 A *controller administrator* is a user who has access to the controller model.
-This Juju user is called 'admin' and is set up as part of the controller
-creation step. Practically, this set of users is comprised of the controller
-creator and any user the creator/initial_admin has granted write access to the
-'controller' model. There is no overarching "Juju administrator" since multiple
-controllers, and therefore multiple administrators, are possible.
+This set of users is comprised of the controller creator and any user the
+creator/initial_admin has granted 'superuser' access to the 'controller' model.
+There is no overarching "Juju administrator" since multiple controllers, and
+therefore multiple administrators, are possible.
 
 A *model owner* is the model creator; a user who has been designated as such
 during model creation; or a user who has been granted the 'admin' permissions
