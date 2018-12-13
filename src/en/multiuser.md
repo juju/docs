@@ -96,6 +96,39 @@ of a model to grant access to that model with "juju grant".
 The name of the original controller, in this case 'lxd-bionic-1', is offered as
 a default controller name.
 
+## Logins and logouts
+
+A user who has just registered a controller is automatically logged in to that
+controller.
+
+A user can log out at any time:
+
+```bash
+juju logout
+```
+
+To log in to a controller, the operator needs to specify both the user and the
+controller:
+
+```bash
+juju login -u mat -c lxd-bionic-1
+```
+
+The following is a quick way to determine the current user (as well as the
+current controller and model):
+
+```bash
+juju whoami
+```
+
+Example output:
+
+```no-highlight
+Controller:  lxd-bionic-1
+Model:       <no-current-model>
+User:        mat
+```
+
 ## Disabling and re-enabling users
 
 To immediately sever a user's communication with their controller the
@@ -268,6 +301,9 @@ admin*  admin         superuser  2018-12-14    just now
 bob                   login      1 hour ago    50 minutes ago
 jim                   add-model  2018-12-14    58 minutes ago
 ```
+
+The `show-user` command can also be used to get controller access on a per-user
+basis, in addition to other information on the user.
 
 
 <!-- LINKS -->
