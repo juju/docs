@@ -55,6 +55,8 @@ navigation:
     children:
       - title: Charm bundles
         location: charms-bundles.md
+      - title: Machine authentication
+        location: machine-auth.md
       - title: Using storage
         location: charms-storage.md
       - title: Working with actions
