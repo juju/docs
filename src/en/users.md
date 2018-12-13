@@ -2,32 +2,33 @@ Title: User types
 
 # User types
 
-*This is in connection with the [Using Juju with multiple users][multiuser]
-page. See that resource for background information.*
+*This is in connection with the [Working with multiple users][multiuser] page.
+See that resource for background information.*
 
 There are three kinds of Juju users: controller administrators, model owners,
-and regular users. Each user, no matter the kind, is associated with a
-controller. In particular, the namespace for users are controller-centric;
-names can be duplicated across controllers.
+and regular users. Each user, no matter the kind, is associated with one, and
+only one, controller.
 
-Juju users are not related in any way to the localhost system users; they are
+Juju users are not related in any way to the client system users; they are
 purely Juju constructs.
 
-A *controller administrator* is a user who has access to the controller model.
-This set of users is comprised of the controller creator and any user the
-creator/initial_admin has granted 'superuser' access to the 'controller' model.
+A *controller administrator* is a user who has full access to the 'controller'
+model. This set of users is comprised of the controller creator and any user
+the latter user has granted 'superuser' access to the 'controller' model.
 There is no overarching "Juju administrator" since multiple controllers, and
-therefore multiple administrators, are possible.
+therefore multiple controller administrators, are possible. Nevertheless, this
+user is usually what people refer to as "the admin".
 
-A *model owner* is the model creator; a user who has been designated as such
-during model creation; or a user who has been granted the 'admin' permissions
+A *model owner* is a user who has full access to a model. This set of users is
+comprised of the model creator and any user who has been granted 'admin' access
 to the model.
 
-A *regular user* is one who is neither an administrator nor a model owner. Such
-a user requires access to a model in order to do anything at the Juju level.
-Note that although deemed "regular", such a user is far from ordinary since
-they can marshal the vast resources of the backing cloud and deploy complex
-applications.
+A *regular user* is one who is neither a controller administrator nor a model
+owner. Such a user requires access to a model in order to do anything at the
+Juju level.
+
+The *operator* is a term used to refer to the actual person who is driving the
+Juju client.
 
 ## User abilities
 
@@ -88,8 +89,8 @@ actions (in the context of their controller):
 
 ### Model owners
 
-A model owner has the power to list users who have access to the model they own
-(`users`) as well as upgrade their model (`upgrade-model`).
+A model owner can list users who have access to the model (`users`), destroy
+the model (`destroy-model`), and upgrade the model (`upgrade-model`).
 
 ### Regular users
 

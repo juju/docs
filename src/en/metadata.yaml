@@ -43,8 +43,8 @@ navigation:
         location: controllers-ha.md
       - title: Application high availability
         location: charms-ha.md
-      - title: Understanding users
-        location: users.md
+      - title: Working with multiple users
+        location: multiuser.md
       - title: Troubleshooting
         location: troubleshooting.md
       - title: Juju logs
