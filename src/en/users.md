@@ -20,8 +20,9 @@ creator and any user the creator/initial_admin has granted write access to the
 'controller' model. There is no overarching "Juju administrator" since multiple
 controllers, and therefore multiple administrators, are possible.
 
-A *model owner* is the model creator or a user who has been designated as such
-during the model creation process.
+A *model owner* is the model creator; a user who has been designated as such
+during model creation; or a user who has been granted the 'admin' permissions
+to the model.
 
 A *regular user* is one who is neither an administrator nor a model owner. Such
 a user requires access to a model in order to do anything at the Juju level.
@@ -83,7 +84,7 @@ actions (in the context of their controller):
  - Revoke user access from models (`revoke`)
  - Remove models (`destroy-model`)
  - Remove the controller (`destroy-controller` or `kill-controller`)
- - Upgrade any model (`upgrade-model`)
+ - Upgrade models (`upgrade-model`)
  - Manage controller backups (e.g. `create-backup`)
 
 ### Model owners
@@ -93,8 +94,8 @@ A model owner has the power to list users who have access to the model they own
 
 ### Regular users
 
-The ability of a regular user depends on the model access rights (read-only or
-write) they have been granted.
+The ability of a regular user depends on the model access rights ('read' or
+'write') they have been granted.
 
 For read-only access, the user can do the following:
 
