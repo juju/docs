@@ -1,16 +1,11 @@
-Title: Machine SSH authentication
+Title: Machine authentication
 TODO:  Stuff on user-created models (ssh key and credentials)
 
-# Machine SSH authentication
+# Machine authentication
 
-This page explains how SSH authentication works when contacting a Juju
-machine.
-
-## SSH access
-
-SSH access is managed on a per-model basis. That is, if a public key is added
-to a model then that key is placed on all machines (present and future) in that
-model.
+Juju machines are contacted via the SSH protocol and is managed on a per-model
+basis. That is, if a public key is added to a model then that key is placed on
+all machines (present and future) in that model.
 
 Each Juju machine provides a user account named 'ubuntu' and it is to this
 account that public keys are added when using the Juju SSH commands
@@ -32,12 +27,13 @@ to an individual machine using standard methods (manually copying a key to the
 `authorized_keys` file or by way of a command such as `ssh-import-id` in the
 case of Ubuntu).
 
-### Juju ssh
+## Juju ssh
  
 When using the Juju `ssh` command, Juju's own user rights system imposes an
-extra degree of security by permitting access solely from a Juju user, and only
-one with sufficient permissions. How this works depends on whether the user is
-an admin or a non-admin (see [User types][users]).
+extra degree of security by permitting access solely from a Juju user. This
+user must also have either 'superuser' controller access or 'admin' model
+access. See [Managing models in a multi-user context][multiuser-models] for
+more information.
 
 For example, to connect to a machine with an id of '0':
 
@@ -49,7 +45,7 @@ An interactive pseudo-terminal (pty) is enabled by default. For the OpenSSH
 client, this corresponds to the `-t` option ("force pseudo-terminal
 allocation").
 
-#### Admin user
+### Admin user
 
 When a controller is created a passphraseless SSH keypair will be generated and
 placed under `~/.local/share/juju/ssh`. The public key (`juju_id_rsa.pub`) will
@@ -61,7 +57,7 @@ machine.
 As long as the controller administrator has access to either of the above keys
 he/she can connect to any machine with `juju ssh`.
 
-#### Regular user
+### Regular user
 
 In order for a regular Juju user to connect with `juju ssh` the user must:
 
@@ -88,7 +84,7 @@ The second option above, applied to the previous example, will look like this:
 juju ssh 0 -i ~/.ssh/my-private-key
 ```
 
-### Direct SSH access
+## Direct SSH access
 
 When using a standard SSH client if one's public key has been installed into a
 model, then, as expected, a connection to the 'ubuntu' user account can be
@@ -107,3 +103,4 @@ ssh ubuntu@10.149.29.143
 
 [users]: ./users.md
 [multiuser-models-access]: ./multiuser.md#models-access
+[multiuser-models]: ./multiuser.md#managing-models-in-a-multi-user-context

@@ -1,14 +1,23 @@
 Title: Working with multiple users
 TODO: Stuff on user-added models (ssh key and credentials)
       Check the functionality of admin user access level. This currently appears to do nothing (not destroy models, nor backups) 
+      Add "External users" page when ready
 
 # Working with multiple users
 
 Juju has an internal user framework that allows for the sharing of controllers
-and models. To achieve this, a Juju user can be created that is of a certain
-type; be granted specific permissions; and be authenticated in a certain way.
+and models. To achieve this, a Juju user can be created, disabled, and have
+rights granted and revoked. Users remote to the system that created a
+controller can use their own Juju client to log in to the controller and manage
+the environment based on the rights conferred. Multiple users can be
+accommodated by the same Juju client.
 
-[Machine SSH authentication][users-auth]
+Various categories of users can be defined based on the permissions they have
+been granted. In turn, these permissions lead to certain abilities. See page
+[User types and abilities][users] for an overview.
+
+!!! Note:
+    Juju users are not related in any way to the client system users.
 
 ## Creating users
 
@@ -18,10 +27,11 @@ There are two ways users are introduced into Juju:
     administrator
  1. with the `add-user` command, which creates a generic user 
  
-The second sets up a password but the first is left without one. This is why if
-such an admin tries to log out (`logout`) before creating a password the
-command will fail and a warning will be displayed. An admin should, therefore,
-create a password once the controller is created:
+In the second case the user gets a password set up but in the first case the
+user is left without one. This is why if such an admin tries to log out
+(`logout`) before creating a password the command will fail and a warning will
+be emitted. An admin should, therefore, create a password once the controller
+is created:
 
 ```bash
 juju bootstrap aws
@@ -30,10 +40,7 @@ juju change-user-password
 
 In a Juju context, the term "credential" is related to the accessing of a
 chosen backing cloud, and not to Juju users. See [Credentials][credentials] for
-further clarification.
-
-[User types][users]
-[External users][users-external]
+guidance.
 
 ### Creating a generic user
 
@@ -219,8 +226,8 @@ A controller admin uses the `grant` command to give a user 'read', 'write', or
    (e.g. `model-config` and `model-defaults`).
  - `admin`: In addition to 'write' abilities, a user can perform model upgrades
    (`upgrade-model`) and connect to machines via `juju ssh`. Makes the user an
-   effective model owner. See [Model owners][users-owners] for commands
-   available to such a user.
+   effective model owner. See [Machine authentication][machine-auth] for how
+   to connect to machines.
 
 Here we give 'bob' write access to model 'genesis':
 
@@ -276,9 +283,7 @@ access, three further levels of access can be applied to a controller:
  - `login`: the standard access level, enabling a user to log in to a
    controller.
  - `add-model`: in addition to login access, a user can add and remove models.
- - `superuser`: makes a user an effective controller administrator. See
-   [Controller administrators][users-admins] for commands available to such a
-   user.
+ - `superuser`: makes a user an effective controller administrator.
 
 The command syntax for controller access is the same as for model access, only
 without the need to specify a model. As usual, with no controller specified via
@@ -339,7 +344,6 @@ currently active one.
 <!-- LINKS -->
 
 [users]: ./users.md
-[users-auth]: ./users-auth.md
-[users-owners]: ./users.md#model-owners
-[users-admins]: ./users.md#controller-administrators
+[machine-auth]: ./machine-auth.md
+[users-external]: ./users-external.md
 [credentials]: ./credentials.md
