@@ -162,6 +162,14 @@ juju deploy mediawiki --to node1.maas
 juju deploy mariadb --to node1.lxd
 ```
 
+For a Kubernetes-backed cloud, a Kubernetes node can be targeted based on
+matching labels. The label can be either built-in or one that is user-defined
+and added to the node. For example:
+
+```bash
+juju deploy mariadb-k8s --to kubernetes.io/hostname=somehost
+```
+
 ### add-unit --to
 
 To add a unit of 'rabbitmq-server' to machine '1':

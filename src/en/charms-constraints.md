@@ -52,6 +52,11 @@ LXD constraints also honour instance type names from either
 memory). When used in combination with specific CPU/MEM constraints the latter
 values will override corresponding instance type values.
 
+### Constraints and Kubernetes
+
+Like LXD containers, constraints used within a Kubernetes model are treated as
+maximums.
+
 ## Constraint scopes, defaults, and precedence
 
 Constraints can be applied to various levels or scopes. Defaults can be set on
