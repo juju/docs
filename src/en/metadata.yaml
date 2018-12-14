@@ -57,6 +57,8 @@ navigation:
         location: charms-bundles.md
       - title: Machine authentication
         location: machine-auth.md
+      - title: Migrating models
+        location: models-migrate.md
       - title: Using storage
         location: charms-storage.md
       - title: Working with actions

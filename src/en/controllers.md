@@ -1,6 +1,5 @@
 Title: Controllers
-TODO:  Figure out the 'block command' situation (including CLI help
-         text). See 'Restricting command usage' section. The old page lives on.
+TODO:  Figure out the 'block command' situation (including CLI help text). See 'Restricting command usage' section. The old page lives on.
        Need examples for each command.
        Review required
 
@@ -22,8 +21,9 @@ Since a controller can host multiple models, the destruction of a controller
 must be done with ample consideration since all its models will be destroyed
 along with it.
 
-In some circumstances you may wish to share a controller or one of its associated
-models. Juju provides [multi-user functionality](./users.html) for this purpose.
+In some circumstances you may wish to share a controller or one of its
+associated models. See page [Working with multiple users][multiuser] for
+guidance.
 
 ## Minimum requirements
 
@@ -164,3 +164,4 @@ Common tasks are summarized below.
 [gui]: ./controllers-gui.html
 [ha]: ./controllers-ha.html
 [charm-ha]: ./charms-ha.html
+[multiuser]: ./multiuser.md
