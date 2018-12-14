@@ -24,8 +24,9 @@ For in-depth coverage and examples see the
     Effective CPU cores. An integer.
 
  - `cpu-power`  
-    Abstract CPU power. 100 units is roughly equivalent to "a single 2007-era
-    Xeon" as reflected by 1 Amazon vCPU.
+    Abstract CPU power. An integer, where 100 units is roughly equivalent to "a
+    single 2007-era Xeon" as reflected by 1 Amazon vCPU. In a Kubernetes
+    context a unit of "milli" is implied.
 
     **Note:** Not supported by all providers. Use `cores` for portability.
 
