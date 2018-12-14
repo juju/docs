@@ -191,7 +191,7 @@ Common model management tasks are summarized below.
 ^# Grant and revoke user access
    
    This topic is treated in
-   [Users and models](./users-models.html#models-and-user-access).
+   [Working with multiple users](./multiuser.md).
 
 
 
