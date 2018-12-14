@@ -69,7 +69,7 @@ In order for a regular Juju user to connect with `juju ssh` the user must:
    `import-ssh-key`)
  - be in possession of the corresponding private SSH key
 
-See [Models access][multiuser-models-access] for information on managing user
+See [Model access][multiuser-models-access] for information on managing user
 permissions.
 
 In terms of the private key, the easiest way to ensure it is used is to have it
@@ -102,5 +102,5 @@ ssh ubuntu@10.149.29.143
 <!-- LINKS -->
 
 [users]: ./users.md
-[multiuser-models-access]: ./multiuser.md#models-access
+[multiuser-model-access]: ./multiuser.md#model-access
 [multiuser-models]: ./multiuser.md#managing-models-in-a-multi-user-context
