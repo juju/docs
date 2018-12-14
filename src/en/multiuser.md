@@ -201,16 +201,20 @@ new token.
 ## Managing models in a multi-user context
 
 In this section we go over the various ways models can be managed in a
-multi-user context.
+multi-user context. Subtopics include:
+
+ - Providing model ownership during model creation
+ - Model access
+ - Controller access
 
 ### Providing model ownership during model creation
 
 The model creator becomes, by default, the model owner. However, the creation
-process does allow for owner designation. To add model 'arena' and designate
-user 'tron' as the owner:
+process does allow for owner designation. To add model 'staging' and designate
+user 'neo' as the owner:
 
 ```bash
-juju add-model --owner=tron arena
+juju add-model --owner=neo staging
 ```
 
 See the [Adding a model][models-adding] page for the basics on adding models.
@@ -347,3 +351,4 @@ currently active one.
 [machine-auth]: ./machine-auth.md
 [users-external]: ./users-external.md
 [credentials]: ./credentials.md
+[models-adding]: ./models-adding.md

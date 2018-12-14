@@ -38,6 +38,9 @@ Common model management tasks are summarized below.
    For complete explanation and syntax, see the
    [command reference page](./commands.html#add-model) or the `juju help
    add-model` command.
+   
+   The [Adding a model][models-adding] page provides a full explanation and
+   includes examples.
   
 
 
@@ -237,3 +240,4 @@ Common model management tasks are summarized below.
 <!-- LINKS -->
 
 [charms-bundles-diff]: ./charms-bundles.md#comparing-a-bundle-to-a-model
+[models-adding]: ./models-adding.md
