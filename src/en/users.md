@@ -16,9 +16,9 @@ There is no overarching "Juju administrator" since multiple controllers, and
 therefore multiple controller administrators, are possible. Nevertheless, this
 user is usually what people refer to as "the admin".
 
-A *model owner* is a user who has full access to a model. This set of users is
-comprised of the model creator and any user who has been granted 'admin' access
-to the model.
+A *model owner* has some specific administrative powers over a model. By
+default, the owner is the model creator but an owner can also be explicitly
+assigned during creation-time.
 
 A *regular user* is one who is neither a controller administrator nor a model
 owner. Such a user requires access to a model in order to do anything at the
