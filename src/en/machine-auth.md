@@ -31,9 +31,9 @@ case of Ubuntu).
  
 When using the Juju `ssh` command, Juju's own user rights system imposes an
 extra degree of security by permitting access solely from a Juju user. This
-user must also have either 'superuser' controller access or 'admin' model
-access. See [Managing models in a multi-user context][multiuser-models] for
-more information.
+user must also have 'admin' model access.
+See [Managing models in a multi-user context][multiuser-models] for help on
+assigning user permissions.
 
 For example, to connect to a machine with an id of '0':
 
@@ -45,32 +45,39 @@ An interactive pseudo-terminal (pty) is enabled by default. For the OpenSSH
 client, this corresponds to the `-t` option ("force pseudo-terminal
 allocation").
 
-### Admin user
+### SSH keys and models
 
-When a controller is created a passphraseless SSH keypair will be generated and
+When a model is created a passphraseless SSH keypair will be generated and
 placed under `~/.local/share/juju/ssh`. The public key (`juju_id_rsa.pub`) will
-be installed in the 'ubuntu' account on every machine created within every
-model belonging to this controller. During creation, if there is an existing
-public key named `~/.ssh/id_rsa.pub` then it will also be placed on every
-machine.
+be installed in the 'ubuntu' account on every machine created within the model.
+Any key located at `~/.ssh/id_rsa.pub` will also be placed in the model.
 
-As long as the controller administrator has access to either of the above keys
-he/she can connect to any machine with `juju ssh`.
+This means that a model creator will always be able to connect to any machine
+within that model (with `juju ssh`) without having to add keys since the
+creator is also granted 'admin' model access by default (see
+[Adding a model][models-adding] for more information). Recall that the creation
+of a controller effectively produces two models: 'controller' and 'default'.
+This provides the initial controller administrator access to keys and models
+out of the box.
 
-### Regular user
+### Providing access to non-initial controller admin Juju users
 
-In order for a regular Juju user to connect with `juju ssh` the user must:
+In order for a non-initial controller admin user to connect with `juju ssh`
+that user must:
 
  - be created (`add-user`)
- - have registered a controller (`register`)
+ - have registered the controller (`register`)
  - be logged in (`login`)
- - have 'admin' rights to the model (`grant`)
- - have their public SSH key added to the model by an admin (`add-ssh-key` or
-   `import-ssh-key`)
+ - have 'admin' access to the model
+ - have their public SSH key reside within the model
  - be in possession of the corresponding private SSH key
 
-See [Model access][multiuser-models-access] for information on managing user
-permissions.
+As previously explained, 'admin' model access and installed model keys can be
+obtained by creating the model. Otherwise access needs to be granted (`grant`)
+by a controller admin and keys need to be added (`add-ssh-key` or
+`import-ssh-key`) by a controller admin or the model admin.
+
+See [Model access][multiuser-model-access] for how to grant rights to a model.
 
 In terms of the private key, the easiest way to ensure it is used is to have it
 stored as `~/.ssh/id_rsa`. Otherwise, you can do one of two things:
@@ -104,3 +111,4 @@ ssh ubuntu@10.149.29.143
 [users]: ./users.md
 [multiuser-model-access]: ./multiuser.md#model-access
 [multiuser-models]: ./multiuser.md#managing-models-in-a-multi-user-context
+[models-adding]: ./models-adding.md

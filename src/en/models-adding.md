@@ -15,6 +15,13 @@ associated with a model. When creating a model, therefore, a credential is
 either specified explicitly or a default is used. Read the
 [Credentials][credentials] page for background information.
 
+The model creator, by default, is granted 'admin' model access by default. This
+includes the two initial models created at controller-creation time. This
+assists in connecting to machines within the model with `juju ssh` (see
+[SSH keys and models][machine-auth-ssh-keys]). An exception to this is when the
+creator explicitly designates another user as 'owner'. In this case, the
+creator does not get 'admin' model access.
+
 See section [Managing models in a multi-user context][multiuser-models] for
 information on that subject.
 
@@ -71,3 +78,4 @@ case, you can add `--no-switch` option to keep the current model selected.
 [multiuser-models]: ./multiuser.md#managing-models-in-a-multi-user-context
 [controllers-creating]: ./controllers-creating.md
 [credentials]: ./credentials.md
+[machine-auth-ssh-keys]: ./machine-auth.md#ssh-keys-and-models
