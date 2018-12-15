@@ -104,6 +104,10 @@ of a model to grant access to that model with "juju grant".
 The name of the original controller, in this case 'lxd-bionic-1', is offered as
 a default controller name.
 
+!!! Note:
+    A user can be acted upon (e.g. granted permissions) prior to that user
+    registering the controller.
+    
 ## Logins and logouts
 
 A user who has just registered a controller is automatically logged in to that
@@ -254,6 +258,9 @@ Controller: lxd-bionic-1
 Model            Cloud/Region         Status     Access  Last connection
 admin/euphoric*  localhost/localhost  available  read    never connected
 ```
+
+Notice how the model name is prepended with the remote user's name. The name
+is the 'owner' of the model.
 
 Access can be viewed on a per-model basis by using the `show-model` command.
 Here we query model 'mara':
