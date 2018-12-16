@@ -48,9 +48,9 @@ allocation").
 ### SSH keys and models
 
 When a model is created a passphraseless SSH keypair will be generated and
-placed under `~/.local/share/juju/ssh`. The public key (`juju_id_rsa.pub`) will
-be installed in the 'ubuntu' account on every machine created within the model.
-Any key located at `~/.ssh/id_rsa.pub` will also be placed in the model.
+placed under `~/.local/share/juju/ssh` and public key `juju_id_rsa.pub` will be
+placed in the model. Any key located at `~/.ssh/id_rsa.pub` will also be
+used.
 
 This means that a model creator will always be able to connect to any machine
 within that model (with `juju ssh`) without having to add keys since the
