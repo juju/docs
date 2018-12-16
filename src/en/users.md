@@ -1,4 +1,6 @@
 Title: User types and abilities
+TODO:  bug tracking: https://bugs.launchpad.net/bugs/1808661
+       bug tracking: https://bugs.launchpad.net/bugs/1808662
 
 # User types and abilities
 
