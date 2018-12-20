@@ -23,6 +23,8 @@ navigation:
         location: charms-deploying.md
       - title: Using constraints
         location: charms-constraints.md
+      - title: Configuring models
+        location: models-config.md
       - title: Configuring applications
         location: charms-config.md
       - title: Managing relations
